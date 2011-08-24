@@ -10,6 +10,7 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
         <script type="text/javascript">
 
             var Chart = kendo.ui.Chart;
@@ -36,7 +37,7 @@
                     createChart($.extend({
                         series: [{
                             type: "line",
-                            data: [1]
+                            data: [1, 2]
                         }],
                         categoryAxis: {
                             categories: ["A"]
@@ -50,6 +51,31 @@
                     });
                     marker = plotArea.charts[0].points[0].children[0];
                     $("#" + marker.options.id).click();
+                }
+
+                function lineClick(seriesClickHandler, x, y) {
+                    var createLine = Chart.LineChart.fn.createLine,
+                        id;
+
+                    stubMethod(Chart.LineChart, "createLine",
+                        function(lineId) {
+                            id = lineId;
+                            return createLine.apply(this, arguments);
+                        },
+                        function() {
+                            createLineChart({
+                                seriesClick: seriesClickHandler
+                            });
+                        }
+                    );
+
+                    var line = $("#" + id),
+                        offset = line.offset(),
+                        e = new jQuery.Event("click");
+
+                    e.clientX = offset.left + x || 0;
+                    e.clientY = offset.top + y || 0;
+                    line.trigger(e);
                 }
 
                 function createBarChart(options) {
@@ -121,6 +147,23 @@
                     linePointClick(function(e) {
                         equals(e.element.attr("id"), marker.options.id);
                     });
+                });
+
+                // ------------------------------------------------------------
+                module("seriesClick / Line", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking line", 1, function() {
+                    lineClick(function() { ok(true); });
+                });
+
+                test("fires for closest point when clicking line (1)", 1, function() {
+                    lineClick(function(e) { equals(e.value, 1); }, 0, 0);
+                });
+
+                test("fires for closest point when clicking line (2)", 1, function() {
+                    lineClick(function(e) { equals(e.value, 2); }, 1000, 0);
                 });
 
                 // ------------------------------------------------------------
