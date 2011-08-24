@@ -23,7 +23,11 @@
         <script src="../themebuilder/themebuilder.js"></script>
 
         <script>
-            module("themebuilder");
+            module("themebuilder", {
+                teardown: function() {
+                    //$("#kendo-themebuilder-wrapper").remove();
+                }
+            });
 
             test("themebuilder object is available", function() {
                 ok(typeof kendo.ThemeBuilder == "function");
