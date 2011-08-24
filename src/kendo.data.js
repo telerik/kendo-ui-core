@@ -1090,8 +1090,8 @@
                 destroyed,
                 batch = that.options.batch,
                 mode,
-                transport = that.transport,
-                promises = that._promises = [];
+                promises,
+                transport = that.transport;
 
             updated = that._updatedModels();
 
@@ -1107,11 +1107,12 @@
             }
 
             if (mode) {
-                that._send(created, proxy(transport.create, transport), mode);
-                that._send(updated, proxy(transport.update, transport), mode);
-                that._send(destroyed, proxy(transport.destroy, transport), mode);
+                var createdPromises = that._send(created, proxy(transport.create, transport), mode);
+                var updatedPromises = that._send(updated, proxy(transport.update, transport), mode);
+                var destroyedPromises = that._send(destroyed, proxy(transport.destroy, transport), mode);
+                promises = createdPromises.concat(updatedPromises).concat(destroyedPromises);
             } else {
-                that._send({
+                promises = that._send({
                         created: created,
                         updated: updated,
                         destroyed: destroyed
@@ -1153,16 +1154,16 @@
             var that = this,
                 idx,
                 length,
-                promises = that._promises,
+                promises = [],
                 success = proxy(that._syncSuccess, that, data),
                 error = proxy(that._syncError, that, data);
 
-            if(data.length == 0) {
-                return;
+            if (data.length == 0) {
+                return promises;
             }
 
-            if(mode === MULTIPLE) {
-                for(idx = 0, length = data.length; idx < length; idx++) {
+            if (mode === MULTIPLE) {
+                for (idx = 0, length = data.length; idx < length; idx++) {
                     promises.push(
                         method({
                             data: data[idx],
