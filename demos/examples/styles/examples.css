@@ -12,7 +12,6 @@ body
     height:100%;
     color:#000;
     background:#fff;
-    font: 12px Arial, Helvetica, sans-serif;
 }
 
 html,
@@ -26,6 +25,11 @@ html
 {
     overflow-y:scroll;
     font:75% arial,helvetica,sans-serif;
+}
+
+body
+{
+    text-rendering: optimizeLegibility;
 }
 
 .skinSelector .t-arrow-down,
@@ -166,13 +170,25 @@ html
     position:relative;
 
     background:rgb(230,230,230); /* Old browsers */
-    background:-moz-linear-gradient(top, rgba(254,254,254,1) 0%, rgba(245,245,245,1) 50%, rgba(230,230,230,1) 100%); /* FF3.6+ */
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,254,254,1)), color-stop(50%,rgba(245,245,245,1)), color-stop(100%,rgba(230,230,230,1))); /* Chrome,Safari4+ */
-    background:-webkit-linear-gradient(top, rgba(254,254,254,1) 0%,rgba(245,245,245,1) 50%,rgba(230,230,230,1) 100%); /* Chrome10+,Safari5.1+ */
-    background:-o-linear-gradient(top, rgba(254,254,254,1) 0%,rgba(245,245,245,1) 50%,rgba(230,230,230,1) 100%); /* Opera11.10+ */
-    background:-ms-linear-gradient(top, rgba(254,254,254,1) 0%,rgba(245,245,245,1) 50%,rgba(230,230,230,1) 100%); /* IE10+ */
+    background:-moz-linear-gradient(top, #fefefe 0%, #f5f5f5 50%, #e6e6e6 100%); /* FF3.6+ */
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(50%,#f5f5f5), color-stop(100%,#e6e6e6)); /* Chrome,Safari4+ */
+    background:-webkit-linear-gradient(top, #fefefe 0%,#f5f5f5 50%,#e6e6e6 100%); /* Chrome10+,Safari5.1+ */
+    background:-o-linear-gradient(top, #fefefe 0%,#f5f5f5 50%,#e6e6e6 100%); /* Opera11.10+ */
+    background:-ms-linear-gradient(top, #fefefe 0%,#f5f5f5 50%,#e6e6e6 100%); /* IE10+ */
+    background:linear-gradient(top, #fefefe 0%, #f5f5f5 50%, #e6e6e6 100%); /* W3C */
     filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#e6e6e6',GradientType=0 ); /* IE6-9 */
-    background:linear-gradient(top, rgba(254,254,254,1) 0%,rgba(245,245,245,1) 50%,rgba(230,230,230,1) 100%); /* W3C */
+}
+
+.overview #header
+{
+    background:rgb(230,230,230); /* Old browsers */
+    background:-moz-linear-gradient(top, #ffffff 0%, #ffffff 42px, #ebebeb 100%); /* FF3.6+ */
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(42px,#ffffff), color-stop(100%,#ebebeb)); /* Chrome,Safari4+ */
+    background:-webkit-linear-gradient(top, #ffffff 0%,#ffffff 42px,#ebebeb 100%); /* Chrome10+,Safari5.1+ */
+    background:-o-linear-gradient(top, #ffffff 0%,#ffffff 42px,#ebebeb 100%); /* Opera11.10+ */
+    background:-ms-linear-gradient(top, #ffffff 0%,#ffffff 42px,#ebebeb 100%); /* IE10+ */
+    background:linear-gradient(top, #ffffff 0%, #ffffff 42px, #ebebeb 100%); /* W3C */
+    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ebebeb',GradientType=0 ); /* IE6-9 */
 }
 
 #header h1
@@ -202,8 +218,8 @@ html
 
 #header ul
 {
-    float:right;
     margin-top: 3px;
+    float: right;
 }
 
 #header li,
@@ -237,8 +253,9 @@ a.bigButton
     border-radius:5px;
     opacity: 1;
 
-    padding:0 20px;
-    
+    padding: 0 20px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+
     background:rgb(76,76,76); /* Old browsers */
     background:-moz-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(57,57,57,1) 50%, rgba(38,38,38,1) 100%); /* FF3.6+ */
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(76,76,76,1)), color-stop(50%,rgba(57,57,57,1)), color-stop(100%,rgba(38,38,38,1))); /* Chrome,Safari4+ */
@@ -247,8 +264,14 @@ a.bigButton
     background:-ms-linear-gradient(top, rgba(76,76,76,1) 0%,rgba(57,57,57,1) 50%,rgba(38,38,38,1) 100%); /* IE10+ */
     filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#262626',GradientType=0 ); /* IE6-9 */
     background:linear-gradient(top, rgba(76,76,76,1) 0%,rgba(57,57,57,1) 50%,rgba(38,38,38,1) 100%); /* W3C */
-    
+
     color:#fff;
+}
+
+#navi a#download
+{
+    border-top: 1px solid #999;
+    padding:8px 19px 9px 18px;
 }
 
 li a#download:hover,
@@ -284,6 +307,7 @@ a.bigButton:hover
 
 .overview .centerWrap
 {
+    position: relative;
     width: 940px;
 }
 
@@ -291,13 +315,19 @@ a.bigButton:hover
 {
     margin-top: 25px;
     font-size: 17px;
+    padding-right: 1px;
+}
+
+#navi ul
+{
+    float: right;
+    vertical-align: top;
 }
 
 #navi-top ul
 {
-    float: left;
-    margin-top: 6px;
-    margin-left: -30px;
+    padding-top: 3px;
+    float: none;
 }
 
 #navi a,
@@ -311,20 +341,37 @@ a.bigButton:hover
 }
 
 #navi li,
-#navi li a
-{
-    margin-left: 1.02em;
-}
-
+#navi li a,
 #navi-top li,
 #navi-top li a
 {
-    margin-left: 1.235em;
+    margin-left: 0;
+}
+
+#navi li
+{
+    vertical-align: top;
+    margin-left: 38px;
+}
+
+#navi-top
+{
+    overflow: hidden;
+}
+
+#navi-top li
+{
+    margin-right: 31px;
 }
 
 #navi-top a
 {
     opacity: 0.7;
+}
+
+#navi a#download
+{
+    border-top: 1px solid #999;
 }
 
 #navi a:hover,
@@ -337,6 +384,11 @@ a.bigButton:hover
 #navi li.active
 {
     position: relative;
+}
+
+#navi .active a
+{
+    color: #e34f26;
 }
 
 #navi li.active em
@@ -362,10 +414,9 @@ a.bigButton:hover
 
 .overview li a#download
 {
-    margin-top: 4px;
-    margin-left: 1.25em;
-    font-size: 16px;
-    line-height: 2.2em;
+    margin-top: 1px;
+    font-size: 17px;
+    line-height: 18px;
     top: 68px;
 }
 
@@ -390,33 +441,44 @@ a.bigButton:hover
 #flowerWrap .flowers
 {
     border-bottom:1px solid #dedede;
-    background:#ef652a 50% 0 url(flowers.png);
+    background:#ef652a no-repeat 50% 0 url(flowers.png);
     height: 10px;
 }
 
 #flowerWrap img
 {
-    margin: 30px 0 0 100px;
+    margin: 30px 0 0 55px;
 }
 
 .learnBlock
 {
-    margin: 40px 100px 0 0;
+    margin: 33px 56px 0 0;
     float: right;
-    line-height: 1.7em;
+    line-height: 1.692em;
+    font-size: 13px;
     color: #fff;
 }
 
 .learnBlock h1
 {
     text-shadow: 0 1px 0 #333;
-    line-height: 2em;
+    font-size: 2.154em;
+    line-height: 1.143em;
+    margin-bottom: 0.714em;
+}
+
+.learnBlock .bigButton
+{
+    margin-top: 21px;
 }
 
 a.bigButton
 {
     cursor: pointer;
     margin-left: 0;
+    padding: 5px 14px 6px 13px;
+    line-height: 22px;
+    font-size: 15px;
 }
 
 .overview #flowerWrap
