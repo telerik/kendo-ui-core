@@ -482,7 +482,7 @@ var categories = {
             expanded: true,
             items: [ {
                 text: "First look",
-                url: "overview/first-look.html"
+                url: "overview/index.html"
                }
             ]
         },
