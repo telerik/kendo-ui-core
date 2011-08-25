@@ -1814,7 +1814,7 @@
             }
         },
 
-        getViewElements: function(view) {
+        getViewElements: function(view, renderOptions) {
             var element = this,
                 options = element.options;
 
@@ -1824,7 +1824,7 @@
 
             var border = options.border || {},
                 elements = [
-                    view.createRect(element.paddingBox, {
+                    view.createRect(element.paddingBox, deepExtend({
                         id: options.id,
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
@@ -1832,7 +1832,7 @@
                         strokeOpacity: options.opacity,
                         fill: options.background,
                         fillOpacity: options.opacity
-                    })
+                    }, renderOptions))
                 ];
 
             return elements.concat(
@@ -3444,7 +3444,7 @@
                 options = marker.options,
                 type = options.type,
                 box = marker.box,
-                element = BoxElement.fn.getViewElements.call(marker, view)[0],
+                element = BoxElement.fn.getViewElements.call(marker, view, renderOptions)[0],
                 halfWidth = box.width() / 2;
 
             if (type === TRIANGLE) {
@@ -3452,12 +3452,12 @@
                     [box.x1 + halfWidth, box.y1],
                     [box.x1, box.y2],
                     [box.x2, box.y2]
-                ], deepExtend({}, element.options, renderOptions));
+                ], element.options);
             } else if (type === CIRCLE) {
                 element = view.createCircle([
                     round(box.x1 + halfWidth, COORD_PRECISION),
                     round(box.y1 + box.height() / 2, COORD_PRECISION)
-                ], halfWidth, deepExtend({}, element.options, renderOptions));
+                ], halfWidth, element.options);
             }
 
             return [ element ];
