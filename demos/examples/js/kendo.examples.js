@@ -199,7 +199,7 @@
             element = $(["<link rel=\"stylesheet\" media=\"print\" href=\"", file, "\">"].join(''));
             $("head").append(element);
 
-            setTimeout(function () { 
+            setTimeout(function () {
                 if (callback)
                     callback();
 
@@ -477,9 +477,17 @@ function initializeNavigation (normalizedUrl) {
 
 var categories = {
     controls: [
+        {
+            text: "Overview",
+            expanded: true,
+            items: [ {
+                text: "First look",
+                url: "overview/first-look.html"
+               }
+            ]
+        },
        {
             text: "AutoComplete",
-            expanded: true,
             spriteCssClass: "autocompleteIcon",
             items: [
                 {
@@ -832,10 +840,6 @@ var categories = {
                 {
                     text: "Local data operations",
                     url: "datasource/local-operations.html"
-                },
-                {
-                    text: "Shared DataSource",
-                    url: "datasource/shared.html"
                 }
             ]
         },
