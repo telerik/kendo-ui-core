@@ -152,6 +152,11 @@
                     }]);
                 }
 
+                for (var group in countriesDataSource.view()) {
+                    group = countriesDataSource.view()[group];
+                    for (var i = 1; i < group.items.length; i++) group.items[i].growth = (group.items[i].value - group.items[i-1].value) / 100.0
+                }
+
                 function createGrid() {
                     $("#grid").kendoGrid({
                         dataSource: sharedDataSource,
@@ -169,6 +174,12 @@
                                 field: "value",
                                 title: "Estimated Users",
                                 template: '<#= kendo.toString(value, "N0") #>'
+                            },
+                            {
+                                field: "growth",
+                                title: "Growth",
+                                template: '<#= kendo.toString(growth, "p") #>',
+                                width: "100px"
                             }
                         ]
                     });
