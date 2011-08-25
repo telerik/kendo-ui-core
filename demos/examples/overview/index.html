@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Shared DataSource</title>
+        <title>First look</title>
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
@@ -25,12 +25,15 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
+        <div class="description">
+            Kendo UI provides everything you need for building modern, interactive, JavaScript applications. In addition to having more than 10 UI widgets, including a Grid, Chart, and ComboBox, Kendo delivers a rich framework for client-side data binding, templating, animation, and drag-and-drop actions. Don't waste time trying to find and use tons of scattered jQuery plug-ins. Kendo UI incorporates a seamless, professionally tested and supported HTML5 toolbox for every project.
+        </div>
         <!-- description -->
         <div id="example" class="t-content">
             <div id="datasource-views" class="t-header t-menu-vertical">
                 <div class="selector">
                     <h3>Estimated Internet Users (Source: ITU)</h3>
-                    Select country:
+                    <label for="country">Select country:</label>
                     <input id="country" />
                 </div>
                 <div id="grid"></div>
@@ -149,6 +152,11 @@
                     }]);
                 }
 
+                for (var group in countriesDataSource.view()) {
+                    group = countriesDataSource.view()[group];
+                    for (var i = 1; i < group.items.length; i++) group.items[i].growth = (group.items[i].value - group.items[i-1].value) / 100.0
+                }
+
                 function createGrid() {
                     $("#grid").kendoGrid({
                         dataSource: sharedDataSource,
@@ -160,13 +168,18 @@
                             {
                                 field: "year",
                                 title: "Year",
-                                width: "50px"
+                                width: "100px"
                             },
                             {
                                 field: "value",
                                 title: "Estimated Users",
-                                template: '<#= kendo.toString(value, "N0") #>',
-                                width: "150px"
+                                template: '<#= kendo.toString(value, "N0") #>'
+                            },
+                            {
+                                field: "growth",
+                                title: "Growth",
+                                template: '<#= kendo.toString(growth, "p") #>',
+                                width: "100px"
                             }
                         ]
                     });
