@@ -1273,7 +1273,7 @@
         _getPoint: function(e) {
             var chart = this,
                 model = chart._model,
-                coords = chart._getCoordinates(e),
+                coords = chart._eventCoordinates(e),
                 targetId = e.target.id,
                 chartElement = model.idMap[targetId],
                 metadata = model.idMapMetadata[targetId],
@@ -1290,7 +1290,7 @@
             return point;
         },
 
-        _getCoordinates: function(e) {
+        _eventCoordinates: function(e) {
             var chart = this,
                 chartOffset = chart.element.offset(),
                 win = $(window);
@@ -1328,6 +1328,8 @@
 
             point = chart._getPoint(e);
             if (point) {
+                chart._activePoint = point;
+
                 if (chart.options.tooltip.visible) {
                     tooltip.show(point);
                 }
@@ -1342,25 +1344,28 @@
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
-                coords = chart._getCoordinates(e),
-                point,
+                coords = chart._eventCoordinates(e),
+                point = chart._activePoint,
                 owner,
                 seriesPoint;
 
             if (chart._plotArea.box.containsPoint(coords.x, coords.y)) {
-                if (tooltip.visible) {
-                    point = tooltip.point;
-                    if(point.series.type === LINE) {
-                        owner = point.owner;
-                        seriesPoint = owner.getSeriesPoint(coords.x, coords.y, point.seriesIx);
-                        if (seriesPoint && seriesPoint != point) {
+                if(point && point.series.type === LINE) {
+                    owner = point.owner;
+                    seriesPoint = owner.getSeriesPoint(coords.x, coords.y, point.seriesIx);
+                    if (seriesPoint && seriesPoint != point) {
+                        chart._activePoint = seriesPoint;
+
+                        if (tooltip.visible) {
                             tooltip.show(seriesPoint);
                         }
+                        highlight.show(seriesPoint);
                     }
                 }
             } else {
                 $(doc.body).unbind(MOUSEMOVE_TRACKING);
 
+                delete chart._activePoint;
                 tooltip.hide();
                 highlight.hide();
             }
@@ -5063,8 +5068,6 @@
                     top: round(tooltipBox.y1) + "px"
                 }, tooltip.visible ? 150 : 0);
 
-            tooltip.point = point;
-
             tooltip.visible = true;
         },
 
@@ -5074,7 +5077,6 @@
             if (tooltip.visible) {
                 tooltip.element.fadeOut();
 
-                tooltip.point = null;
                 tooltip.visible = false;
             }
         }
