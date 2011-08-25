@@ -448,6 +448,33 @@
                 equal(view[1].id, 2);
                 equal(view[1].foo, "bar");
             });
+
+            test("merge multiple results after update", function() {
+                var data = [{id: 1, foo: "moo"}, {id: 2, foo: "boo"}],
+                    modified = [
+                        [{id: 1, foo: "foo"}, {id: 2, foo: "baz"}],
+                        [{id: 1, foo: "foo"}, {id: 2, foo: "boo"}]
+                    ],
+                    dataSource = setup({
+                        update: function(data) {
+                            data.success(modified.pop());
+                        },
+                        destroy: $.noop,
+                        create: $.noop
+                    },
+                    data,
+                    {
+                        schema: { id: "id"},
+                        batch: false
+                    });
+                    dataSource.read();
+                    dataSource.update(1, {id: 1, foo: "foo"});
+                    dataSource.update(2, {id: 2, foo: "baz"});
+                    dataSource.sync();
+                    var view = dataSource.view();
+                    equal(view[0].foo, "foo");
+                    equal(view[1].foo, "baz");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
