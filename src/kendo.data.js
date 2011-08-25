@@ -1110,6 +1110,18 @@
                 var createdPromises = that._send(created, proxy(transport.create, transport), mode);
                 var updatedPromises = that._send(updated, proxy(transport.update, transport), mode);
                 var destroyedPromises = that._send(destroyed, proxy(transport.destroy, transport), mode);
+
+                $.when.apply(null, updatedPromises).then(function() {
+                    var data = arguments[0],
+                        idx,
+                        length;
+
+                    for (idx = 1, length = arguments.length; idx < length; idx++) {
+                        that._syncSuccess(data, arguments[idx]);
+                    }
+                    that._syncSuccess(updated, that.modelSet);
+                });
+
                 promises = createdPromises.concat(updatedPromises).concat(destroyedPromises);
             } else {
                 promises = that._send({
@@ -1123,6 +1135,7 @@
             }
 
             $.when.apply(null, promises).then(function() {
+                that.modelSet.clear();
                 that.trigger(CHANGE);
             });
         },
@@ -1136,13 +1149,12 @@
 
             data = reader.parse(data);
 
-            if (!reader.status(data)) {
-                return that.error({data: origData});
-            }
+            //if (!reader.status(data)) {
+            //    return that.error({data: origData});
+            //}
 
             data = reader.data(data);
 
-            that.modelSet.clear();
             that.modelSet.merge(origData, data);
         },
 
@@ -1155,6 +1167,7 @@
                 idx,
                 length,
                 promises = [],
+                promise,
                 success = proxy(that._syncSuccess, that, data),
                 error = proxy(that._syncError, that, data);
 
@@ -1164,22 +1177,22 @@
 
             if (mode === MULTIPLE) {
                 for (idx = 0, length = data.length; idx < length; idx++) {
-                    promises.push(
+                    promises.push($.Deferred(function(dfr) {
                         method({
                             data: data[idx],
-                            success: success,
-                            error: error
-                        })
-                    );
+                            success: dfr.resolve,
+                            error: dfr.reject
+                        });
+                    }).promise());
                 }
             } else {
-                promises.push(
+                promises.push($.Deferred(function(dfr) {
                     method({
                         data: data,
-                        success: success,
-                        error: error
-                    })
-                );
+                        success: dfr.resolve,
+                        error: dfr.reject
+                    });
+                }).promise());
             }
 
             return promises;
