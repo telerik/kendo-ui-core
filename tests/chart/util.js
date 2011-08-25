@@ -20,7 +20,7 @@ ViewStub.prototype = {
             style: style
         });
 
-        return new kendo.ui.Chart.ViewElement();
+        return new kendo.ui.Chart.ViewElement(style);
     },
 
     createText: function(content, style) {
@@ -29,29 +29,29 @@ ViewStub.prototype = {
             style: style
         });
 
-        return new kendo.ui.Chart.ViewElement();
+        return new kendo.ui.Chart.ViewElement(style);
     },
 
     createGroup: function(options) {
         this.log.group.push({options: options});
-        return new kendo.ui.Chart.ViewElement();
+        return new kendo.ui.Chart.ViewElement(options);
     },
 
     createLine: function(x1, y1, x2, y2, options) {
         this.log.line.push({ x1: x1, y1: y1, x2: x2, y2: y2, options: options });
-        return new kendo.ui.Chart.ViewElement();
+        return new kendo.ui.Chart.ViewElement(options);
     },
 
     createPath: function(points, style) {
         this.log.path.push({ points: points, style: style });
-        return new kendo.ui.Chart.ViewElement();
+        return new kendo.ui.Chart.ViewElement(style);
     },
 
     createCircle: function(center, radius, style) {
         this.log.circle.push({
             center: center, radius: radius, style: style });
 
-        return new kendo.ui.Chart.ViewElement();
+        return new kendo.ui.Chart.ViewElement(style);
     }
 };
 

@@ -813,6 +813,30 @@
                     ok(root.idMap[view.log.circle[0].style.id] === point);
                 });
 
+                test("getOutlineElement applies render options for square markers", function() {
+                    createPoint({ markers: { type: "square" }});
+                    view = new ViewStub();
+
+                    point.getOutlineElement(view, { flag: true });
+                    ok(view.log.rect[0].style.flag);
+                });
+
+                test("getOutlineElement applies render options for circle markers", function() {
+                    createPoint({ markers: { type: "circle" }});
+                    view = new ViewStub();
+
+                    point.getOutlineElement(view, { flag: true });
+                    ok(view.log.circle[0].style.flag);
+                });
+
+                test("getOutlineElement applies render options for triangle markers", function() {
+                    createPoint({ markers: { type: "triangle" }});
+                    view = new ViewStub();
+
+                    point.getOutlineElement(view, { flag: true });
+                    ok(view.log.path[0].style.flag);
+                });
+
                 // ------------------------------------------------------------
                 module("Line Point / Labels", {
                     setup: function() {
