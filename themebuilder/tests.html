@@ -48,6 +48,30 @@
 
                 ok(called);
             });
+
+            var colorPicker;
+
+            module("color picker", {
+                setup: function() {
+                    colorPicker = $("<input />").appendTo(document.body).kendoColorPicker();
+                },
+                teardown: function() {
+                    colorPicker.remove();
+                    colorPicker = null;
+                }
+            });
+
+            test("changing input value triggers change event", function() {
+                var triggered = false;
+
+                colorPicker.data("kendoColorPicker").bind("change", function() {
+                    triggered = true;
+                });
+
+                colorPicker.trigger("change");
+
+                ok(triggered);
+            });
        </script>
 
         <div id="qunit-fixture"> </div>
