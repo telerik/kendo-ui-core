@@ -165,6 +165,10 @@
             options = that.options;
             element = that.element;
 
+            if (options.animation === false) {
+                options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
+            }
+
             if (!element.parent().is("body")) {
                 if (element.is(":visible")) {
                     offset = element.offset();
