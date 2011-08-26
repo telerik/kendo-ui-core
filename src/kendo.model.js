@@ -191,7 +191,7 @@
 
         model: function(id) {
             var that = this,
-                model = id && that.models[id];
+                model = that.models[id];
 
             if(!model) {
                 model = new that.options.model(that.find(id));
@@ -286,26 +286,22 @@
             this.models = {};
         },
 
-        merge: function(origData, data) {
+        merge: function(data) {
             var that = this,
-                origValue,
-                origId,
+                id,
                 model = that.options.model;
 
             each(data, function(index, value) {
-                origValue = origData[index];
+                index = that.map[model.id(value)];
 
-                if (origValue) {
-                    origId = model.id(origValue);
-                    index = that.map[origId];
-
-                    if (index >= 0) {
-                        that.data[index] = value;
-                    }
+                if (index >= 0) {
+                    that.data[index] = value;
+                } else {
+                    that.data.push(value);
                 }
             });
 
-            that.refresh(data);
+            that.refresh(that.data);
         },
 
         create: function(index, values) {
