@@ -10,8 +10,7 @@
     <body>
         <script type="text/javascript">
 
-            var data = [],
-                sample = [
+            var data = [
                 {
                     name: "Alpha",
                     a: 15,
@@ -45,99 +44,25 @@
                 }
             ];
 
-            /*
-            for(var i = 0; i < 30; i++) {
-                data.push({
-                    name: "",
-                    a: i,
-                    b: i + 5,
-                    c: i + 10,
-                    d: i + 15
-                });
-            }
-            */
-
-            data = sample;
-
             $(document).ready(function() {
                 $("#container").kendoChart({
                     title: {
                         text: "Teh chart",
-                        position: "top",
-                        border: {
-                            width: 1,
-                            color: "Red",
-                            dashType: "dot"
-                        }
-                    },
-                    legend: {
-                        position: "right",
-                        visible: true,
-                        border: {
-                            width: 1,
-                            color: "Red",
-                            dashType: "dot"
-                        }
-                    },
-                    chartArea: {
-                        border: {
-                            width: 1,
-                            color: "Red",
-                            dashType: "dot"
-                        }
-                    },
-                    plotArea: {
-                        border: {
-                            width: 1,
-                            color: "blue",
-                            dashType: "dot"
-                        }
+                        position: "top"
                     },
                     dataSource: data,
                     seriesDefaults: {
-                        labels: {
-                            visible: true
-                        },
                         type: "column",
                         stack: false
                     },
                     series: [
                         {
                             name: "Value C",
-                            field: "c",
-                            labels: {
-                                template: "|${dataItem.c}|"
-                            },
-                            border: {
-                                width: 1,
-                                color: "Red",
-                                dashType: "dot"
-                            }
-                        },
-                        {
-                            name: "Value D",
-                            type: "line",
-                            field: "d",
-                            width: 3,
-                            markers: {
-                                type: "circle"
-                            },
-                            labels: {
-                                template: "|${dataItem.d}|"
-                            }
+                            field: "c"
                         }
                     ],
                     categoryAxis: {
-                        field: "name",
-                        labels: {
-                            rotation: 90,
-                            font: "12px Verdana, sans-serif"
-                        }
-                    },
-                    valueAxis: {
-                        labels: {
-                            rotation: 90
-                        }
+                        field: "name"
                     },
                     seriesClick: function(e) {
                     },
@@ -256,5 +181,4 @@
 
     </body>
 </html>
-
 
