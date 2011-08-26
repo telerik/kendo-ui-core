@@ -577,7 +577,17 @@
                 equal(view.length, 1);
                 equal(view[0].aggregates.age.count, 2);
             });
+            test("group with sorting order is applied", function() {
+                var dataSource = new DataSource({
+                    data: [{age: 1, name: "John" }, {age: 1, name: "Tom" }, {age: 1, name: "Jerry" }]
+                });
 
+                dataSource.query( { group: { field: "age" }, sort: { field: "name", dir: "asc" } });
+                var group = dataSource.view()[0].items;
+                equal(group[0].name, "Jerry");
+                equal(group[1].name, "John");
+                equal(group[2].name, "Tom");
+            });
             test("aggregate should be calculated if defined", function() {
                 var dataSource = new DataSource({
                     data: [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ]

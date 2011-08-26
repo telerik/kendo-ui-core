@@ -605,6 +605,10 @@
 
         if (sort) {
             query = query.sort(sort);
+
+            if (group) {
+                data = query.toArray();
+            }
         }
 
         if (skip !== undefined && take !== undefined) {
