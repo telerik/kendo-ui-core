@@ -479,6 +479,7 @@ var categories = {
     controls: [
         {
             text: "Overview",
+            spriteCssClass: "overviewIcon",
             expanded: true,
             items: [ {
                 text: "First look",
