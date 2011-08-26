@@ -1091,7 +1091,15 @@
                 batch = that.options.batch,
                 mode,
                 promises,
-                transport = that.transport;
+                transport = that.transport,
+                stampCreator = {
+                    stamp: function() {
+                        var stamp = 0;
+                        return function() {
+                            return stamp++;
+                        }
+                    },
+                }
 
             updated = that._updatedModels();
 
@@ -1107,9 +1115,10 @@
             }
 
             if (mode) {
-                var createdPromises = that._send(created, proxy(transport.create, transport), mode);
-                var updatedPromises = that._send(updated, proxy(transport.update, transport), mode);
-                var destroyedPromises = that._send(destroyed, proxy(transport.destroy, transport), mode);
+                var createdPromises = that._send(created, CREATE, mode, stampCreator.stamp);
+                var updatedPromises = that._send(updated, UPDATE, mode, stampCreator.stamp);
+                var destroyedPromises = that._send(destroyed, DESTROY, mode, stampCreator.stamp);
+
                 promises = createdPromises.concat(updatedPromises).concat(destroyedPromises);
             } else {
                 promises = that._send({
@@ -1123,40 +1132,34 @@
             }
 
             $.when.apply(null, promises).then(function() {
+                var data = [],
+                    reader = that.reader,
+                    results = data.slice.call(arguments),
+                    converted,
+                    idx,
+                    length;
+
+                results.sort(function(x,y) {
+                    return x.timeStamp - y.timeStamp;
+                });
+
+                for (idx = 0, length = results.length; idx < length; idx++) {
+                    converted = reader.parse(results[idx].data);
+                    converted = reader.data(converted);
+                    data = data.concat(converted);
+                }
+
+                that.modelSet.clear();
+                that.modelSet.merge(data);
                 that.trigger(CHANGE);
             });
         },
 
-        _syncSuccess: function(origData, data) {
-            var that = this,
-                origValue,
-                origId,
-                map = that._map,
-                reader= that.reader;
-
-            data = reader.parse(data);
-
-            if (!reader.status(data)) {
-                return that.error({data: origData});
-            }
-
-            data = reader.data(data);
-
-            that.modelSet.clear();
-            that.modelSet.merge(origData, data);
-        },
-
-        _syncError: function(origData, data) {
-            this.error({data: origData});
-        },
-
-        _send: function(data, method, mode) {
+        _send: function(data, method, mode, stamp) {
             var that = this,
                 idx,
                 length,
-                promises = [],
-                success = proxy(that._syncSuccess, that, data),
-                error = proxy(that._syncError, that, data);
+                promises = [];
 
             if (data.length == 0) {
                 return promises;
@@ -1164,22 +1167,10 @@
 
             if (mode === MULTIPLE) {
                 for (idx = 0, length = data.length; idx < length; idx++) {
-                    promises.push(
-                        method({
-                            data: data[idx],
-                            success: success,
-                            error: error
-                        })
-                    );
+                    promises.push(that._createDeferred(method, data[idx], stamp()));
                 }
             } else {
-                promises.push(
-                    method({
-                        data: data,
-                        success: success,
-                        error: error
-                    })
-                );
+                promises.push(that._createDeferred(method, data, stamp()));
             }
 
             return promises;
@@ -1188,7 +1179,22 @@
         create: function(index, values) {
             return this.modelSet.create(index, values);
         },
+        _createDeferred: function(method, data, stamp) {
+            var that = this,
+                transport = that.transport;
 
+            return $.Deferred(function(dfr) {
+                transport[method]({
+                    data: data,
+                    success: function(data) {
+                        dfr.resolve({ timeStamp: stamp, data: data });
+                    },
+                    error: dfr.reject
+                });
+            }).fail(function(options) {
+                that.error(options);
+            }).promise()
+        },
         /**
          * Read data from transport
          */

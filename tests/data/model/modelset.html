@@ -173,6 +173,20 @@
                 ok(modelSet.hasChanges() === true);
             });
 
+            test("merge multiple records with same ids", function() {
+                modelSet = setup( [{id: 1, foo:"foo"}]);
+                modelSet.merge([{id:1, foo:"bar"}, {id:1,foo:"baz"}]);
+                equal(modelSet.data.length, 1);
+                equal(modelSet.model(1).get("foo"), "baz");
+            });
+
+            test("merge adds new items", function() {
+                modelSet = setup( [{id: 1, foo:"foo"}]);
+                modelSet.merge([{id:2,foo:"baz"}]);
+
+                equal(modelSet.data.length, 2);
+                equal(modelSet.model(2).get("foo"), "baz");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
