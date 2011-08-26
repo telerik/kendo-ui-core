@@ -321,7 +321,12 @@
       <d2p1:Runtime_x0020_ID>a2779b84-44c8-4f8b-a3a3-b726886c4a6a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -714,9 +719,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\Grid\Selection\SelectMultipleCells.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\Grid\Selection\SelectMultipleCells.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\Grid\Selection\SelectMultipleCells.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\Grid\Selection\SelectMultipleCells.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -728,7 +734,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>e94e4d47-b502-4a0f-955f-42848b91e78f</UniqueId>
+  <UniqueId>80c9c1d7-f393-4d16-8fe7-82fcc33fae0f</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

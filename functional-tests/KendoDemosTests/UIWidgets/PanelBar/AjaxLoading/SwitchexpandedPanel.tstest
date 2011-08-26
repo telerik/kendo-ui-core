@@ -400,9 +400,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\PanelBar\AjaxLoading\SwitchexpandedPanel.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\PanelBar\AjaxLoading\SwitchexpandedPanel.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\PanelBar\AjaxLoading\SwitchexpandedPanel.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\PanelBar\AjaxLoading\SwitchexpandedPanel.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -414,7 +415,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>9f8e902b-3d38-42ad-8b90-daf3bb7c21b1</UniqueId>
+  <UniqueId>47ce1c5e-c389-4ba5-8429-17f2c3c9b935</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

@@ -504,21 +504,22 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\AutoComplete\API\FindStartingWith.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\AutoComplete\API\FindStartingWith.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\AutoComplete\API\FindStartingWith.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\AutoComplete\API\FindStartingWith.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly>KendoDemosTests.dll</TestAssembly>
-  <TestAssemblyPath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\bin</TestAssemblyPath>
-  <TestClass>KendoDemosTests.FindStartingWith</TestClass>
+  <TestAssembly>functional_tests.dll</TestAssembly>
+  <TestAssemblyPath>C:\work\GitHub\kendo\functional_tests\bin</TestAssemblyPath>
+  <TestClass>functional_tests.FindStartingWith</TestClass>
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>51d7033b-6b81-4ae1-8ed5-844cce29e17b</UniqueId>
+  <UniqueId>3089b474-ce3d-4592-a140-be4c83154723</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

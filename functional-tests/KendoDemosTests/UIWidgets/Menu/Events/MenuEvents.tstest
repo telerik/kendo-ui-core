@@ -1326,9 +1326,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\Menu\Events\MenuEvents.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\Menu\Events\MenuEvents.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\Menu\Events\MenuEvents.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\Menu\Events\MenuEvents.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -1340,7 +1341,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>ceb842cb-c25f-4f72-843e-79b1f945b8b6</UniqueId>
+  <UniqueId>ae40b38e-ceab-4483-9c78-9dd0b4ba89fc</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

@@ -410,9 +410,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\PanelBar\BasicUsage\ExpandCollapse.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\PanelBar\BasicUsage\ExpandCollapse.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\PanelBar\BasicUsage\ExpandCollapse.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\PanelBar\BasicUsage\ExpandCollapse.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -424,7 +425,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>c0bc19eb-5745-45fd-b05d-eec9b5876b6b</UniqueId>
+  <UniqueId>47add236-faa4-4bb7-8d88-3a625b2dac33</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

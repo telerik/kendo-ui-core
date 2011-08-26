@@ -16,7 +16,7 @@ using ArtOfTest.WebAii.ObjectModel;
 using ArtOfTest.WebAii.Silverlight;
 using ArtOfTest.WebAii.Silverlight.UI;
 
-namespace KendoDemosTests
+namespace functional_tests
 {
 
     //

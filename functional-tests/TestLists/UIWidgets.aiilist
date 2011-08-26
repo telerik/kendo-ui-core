@@ -1,0 +1,368 @@
+<TestList Type="ArtOfTest.WebAii.Design.Execution.TestList" Version="2011.1.817.0">
+  <ID Type="System.String">b773c2cf-8c6b-445c-a7d8-9b190ad00a3f</ID>
+  <TestListName Type="System.String">UIWidgets</TestListName>
+  <Date Type="System.DateTime">2011-08-26 12:16:35Z</Date>
+  <Settings Type="ArtOfTest.WebAii.Core.Settings" Version="2011.1.817.0">
+    <WebSettings Type="ArtOfTest.WebAii.Core.Settings+WebSettings" Version="2011.1.817.0">
+      <DefaultBrowser Type="ArtOfTest.WebAii.Core.BrowserType">InternetExplorer</DefaultBrowser>
+      <WebAppPhysicalPath Type="System.String">
+      </WebAppPhysicalPath>
+      <EnableScriptLogging Type="System.Boolean">False</EnableScriptLogging>
+      <EnableUILessRequestViewing Type="System.Boolean">False</EnableUILessRequestViewing>
+      <LocalWebServer Type="ArtOfTest.WebAii.Core.LocalWebServerType">None</LocalWebServer>
+      <BaseUrl Type="System.String">
+      </BaseUrl>
+      <AspNetDevServerPort Type="System.Int32">-1</AspNetDevServerPort>
+      <KillBrowserProcessOnClose Type="System.Boolean">False</KillBrowserProcessOnClose>
+      <RecycleBrowser Type="System.Boolean">False</RecycleBrowser>
+      <UseHttpProxy Type="System.Boolean">False</UseHttpProxy>
+      <EnableSilverlight Type="System.Boolean">False</EnableSilverlight>
+      <VerboseHttpProxy Type="System.Boolean">False</VerboseHttpProxy>
+      <SilverlightConnectTimeout Type="System.Int32">30000</SilverlightConnectTimeout>
+      <UseMultiBrowsers Type="System.Boolean">False</UseMultiBrowsers>
+    </WebSettings>
+    <ClientReadyTimeout Type="System.Int32">30000</ClientReadyTimeout>
+    <ExecuteCommandTimeout Type="System.Int32">20000</ExecuteCommandTimeout>
+    <LogLocation Type="System.String">C:\WebAiiLog\</LogLocation>
+    <QueryEventLogErrorsOnExit Type="System.Boolean">False</QueryEventLogErrorsOnExit>
+    <ExecutionDelay Type="System.Int32">0</ExecutionDelay>
+    <AnnotateExecution Type="System.Boolean">False</AnnotateExecution>
+    <SimulatedMouseMoveSpeed Type="System.Single">0.3</SimulatedMouseMoveSpeed>
+    <WaitCheckInterval Type="System.Int32">500</WaitCheckInterval>
+    <AnnotationMode Type="ArtOfTest.WebAii.Core.AnnotationMode">All</AnnotationMode>
+    <LogAnnotations Type="System.Boolean">False</LogAnnotations>
+    <IsStressRecordingMode Type="System.Boolean">False</IsStressRecordingMode>
+    <IsUserInteractiveMode Type="System.Boolean">False</IsUserInteractiveMode>
+    <CreateLogFile Type="System.Boolean">True</CreateLogFile>
+    <XMultiMgr Type="System.Boolean">True</XMultiMgr>
+    <UnexpectedDialogAction Type="ArtOfTest.WebAii.Core.UnexpectedDialogAction">HandleAndFailTest</UnexpectedDialogAction>
+    <ElementWaitTimeout Type="System.Int32">10000</ElementWaitTimeout>
+  </Settings>
+  <Tests>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">3089b474-ce3d-4592-a140-be4c83154723</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\AutoComplete\API\FindStartingWith.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">dabba713-5207-4010-94e3-998dd1762f8d</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\AutoComplete\API\SetValue.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">2354451f-2124-4f05-a7c6-d9ba3f5ce3f4</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">309c71b2-2ecd-4e21-8496-3b436405b0a2</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\AutoComplete\BasicUsage\SelectOptionKeyboard.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">e6cce333-0220-4f08-b755-61c063c11ea0</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">f223b292-ffc4-4544-be93-650bd2eeec97</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\AutoComplete\Events\AutoCompleteEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">3d55fcaa-25b3-4c20-a9b1-d010c1815b67</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Chart\BasicUsage.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">f35ebf73-749d-4d7d-b37c-cf9db46a6f27</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Chart\ChartEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">3939c9f9-36fa-4827-8118-d467dfcc8a20</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\API\EnableDisable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">d25f0503-9ca2-423c-bbf5-f1d662b06232</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\API\FilterContains.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">1e0d05ee-f96c-4382-89fe-734b3363db4b</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\API\FilterEquals.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">0d25485f-c17e-4719-951a-94e53b6be611</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\API\FilterEqualsNoResult.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">3c3d8957-a15f-4a6d-86e0-97bd4b02986c</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\API\FilterLoseFocusFilter.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">5e423e30-f426-4c00-80be-a4f8ddccebe9</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\API\FilterNone.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">49cce903-f21b-4bbb-bb61-bac7def707e1</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\API\FilterStartsWith.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">39426fcc-6acc-4782-8a87-562286ed1a93</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\API\OpenClose.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">9f7ade98-e847-4db1-9d58-cb34fa1f5911</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\API\SelectByIndex.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">4be4af72-1910-442d-9ccf-cd0091d34488</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\API\SelectByValue.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">147b13dd-25d4-49cc-8fbf-96f0afdd439b</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">e09cd35e-07ba-423a-b6c9-da95880034c5</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">00a17be2-6ced-4890-a877-4a634fed517e</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\BasicUsage\RevertToBlank.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">b9e8fa1c-2edf-4931-bb10-f23197f3a988</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\ComboBox\Events\ComboBoxEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">a3874593-bd34-4bb1-acaf-f9ef4828af82</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\DropDown\API\DisableEnable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">b7d00185-6c77-492f-aa53-6deb56394990</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\DropDown\API\OpenClose.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">61cd706d-1904-415c-a956-8b262663c992</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\DropDown\API\SelectByIndex.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">2de1ce2d-c4a9-426c-a27b-1b6091ae01ca</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\DropDown\API\SelectByValue.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">3ea7feb5-6824-4acb-b650-63f8d41d5537</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\DropDown\API\SelectItemStartingWith.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">212ef559-2731-4952-9bcf-84e6ee84bb99</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\DropDown\BindingToRemoteData.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">357718da-7b1f-429e-b014-32349a41fcd5</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\DropDown\ChangeValueKeyboard.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">1afa7ac7-62eb-4fcb-8792-443e629b5604</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\DropDown\CustomizingTemplates.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">e48ba72e-1462-46f5-8544-4bdf4f6f5954</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\DropDown\DropDownEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">9cb5d3ab-f751-4176-a5e7-5c12ffe34e0f</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Grid\API\ClearSelectedRow.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">e600d7c4-1f22-4b3f-b7e0-87ccb518cf25</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Grid\API\CollapseExpandGroup.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">34dcf0a0-deb4-4a70-b871-0662107acdad</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Grid\BasicUsage\GroupByAge.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">8a287048-0563-41ee-bb17-75f9e5be51ae</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Grid\BasicUsage\SortByFirstName.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">408aa092-c428-4374-ad41-76b0243fa217</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Grid\Events\GridEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">80c9c1d7-f393-4d16-8fe7-82fcc33fae0f</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Grid\Selection\SelectMultipleCells.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">7f12a24b-6c99-4d5f-977f-1e3058e763c6</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Grid\Selection\SelectMultipleRows.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">7c3436fc-f5b3-4d43-ad14-6ece174c8b5a</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Grid\Selection\SelectRowSingle.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">69b9d95b-97f1-44f4-afe2-ab90a9dc4653</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Menu\API\After.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">071dc329-c46f-4cc2-b443-47d48192af77</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Menu\API\Append.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">ed9bef03-09c4-4e66-9a48-17bf224eb2f8</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Menu\API\Before.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">e030defd-3463-4e18-80ff-8a8460999714</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Menu\API\DisableEnable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">8e745bff-cf97-4e91-bf74-1b898a169892</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Menu\API\Remove.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">bd48866d-9675-4d9b-b4c7-beb25c61629d</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Menu\BasicUsage\NotClosedOnClick.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">d6c744bc-3f9e-4c0f-b3cd-494c7b0b21af</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Menu\BasicUsage\OpenClose.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">ae40b38e-ceab-4483-9c78-9dd0b4ba89fc</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Menu\Events\MenuEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">47ce1c5e-c389-4ba5-8429-17f2c3c9b935</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\PanelBar\AjaxLoading\SwitchexpandedPanel.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">6857be1b-f51d-4927-9721-95749f780263</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\PanelBar\API\Append.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">dc695c36-516a-4083-bb89-38578e1d3227</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\PanelBar\API\EnableDisable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">0cc59556-c200-445d-885b-a1387a83f721</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\PanelBar\API\InsertAfter.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">930ea858-4e7e-4073-952b-735421312af2</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\PanelBar\API\InsertBefore.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">bd34f432-a941-4f5a-bfc8-b3d98bc48a55</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\PanelBar\API\Remove.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">4ea2aa1f-9d9f-4b12-adb2-167b4d0813b4</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\PanelBar\API\Select.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">47add236-faa4-4bb7-8d88-3a625b2dac33</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\PanelBar\BasicUsage\ExpandCollapse.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">72cc0338-d403-4894-8a0a-6d71e0a5b4f1</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\PanelBar\BasicUsage\ExpandTwoLevels.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">3895723d-a00e-486c-bb74-c934f900403d</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\PanelBar\Events\PanelBarEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">356e78f8-6f37-4cb1-a684-635844d6afb0</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Slider\API\DoubleSliderEnabledisable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">28cd5cc0-a27e-4fd8-80ff-78cbc2531821</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Slider\API\DoubleSliderSetValue.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">4bddc3ca-737f-40d5-9e42-3c710659c77a</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Slider\API\SingleSliderEnableDisable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">e5a15c8f-0892-4840-aea6-79ad18355fc9</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Slider\API\SingleSliderSetValue.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">25296494-74c6-4d4f-b062-fea6270a7ae1</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Slider\BasicUsage\ChangeValueDragAndDropSingleSlider.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">2acecfe1-08b1-4676-8142-45fb3fa8616d</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Slider\Events\ChangeValueButtonsSingleSlider.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">cd324aa3-31a8-4f88-a391-c8f59fccdb83</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Slider\Events\ChangeValueDoubleSlider.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">c390c080-3fbc-4fd6-83c5-4a8f86aa0ee3</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Splitter\ResizAllPanels.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">56070091-e462-403f-8d14-96762e6b4fce</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TabStrip\API\Append.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">57d767a2-1a79-42b9-b1d9-00213e9f1b79</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TabStrip\API\EnableDisable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">1e2700fc-7ce0-4ecb-8a5b-6aac80abe17e</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TabStrip\API\InsertBeforeInsertAfter.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">043cc9b8-f5b7-40ef-8b65-39ca2903349c</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TabStrip\API\RemoveTab.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">caed7c5a-4067-4e64-838a-c341b073a30a</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TabStrip\Events\SwitchTabs.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">ec2b57b9-ea83-49b1-acab-33df532163b1</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TreeView\API\AppendNode.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">2741317f-b6db-4843-9624-33806392caae</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TreeView\API\CollapseAllNodes.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">ff8ba622-317e-4a8e-9a5b-053278735a87</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TreeView\API\EnableDisable.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">f9a6f81b-8d7d-4839-bf40-aee658fe72b8</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TreeView\API\ExpandAllNodes.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">956e05e4-b2fd-493d-9156-f6c718dc0aa0</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TreeView\API\Remove.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">a955c3d9-4e0b-4492-9f45-320702d73823</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TreeView\Events\DragAndDropInvalid.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">7547b457-b338-4c1a-90f7-20dee4ffc6c1</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TreeView\Events\DragAndDropValid.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">b760029f-7849-4078-87fe-218b85376dca</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\TreeView\Events\ExpandCollapseSelect.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">63690734-cfff-4d05-a284-a7a34ec6fde9</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Window\API\CloseOpen.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">8ecae794-5dae-4aff-9756-80ac3943e71c</ID>
+      <Path Type="System.String">KendoDemosTests\UIWidgets\Window\Events\OpenActivateRefreshclose.tstest</Path>
+    </Item>
+  </Tests>
+  <Filter Type="ArtOfTest.WebAii.Design.Execution.Filter" Version="2011.1.817.0">
+    <Keys />
+    <Comparisons />
+    <Values />
+  </Filter>
+</TestList>

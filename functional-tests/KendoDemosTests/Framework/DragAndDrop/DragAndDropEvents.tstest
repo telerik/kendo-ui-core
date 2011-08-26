@@ -846,9 +846,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>Framework\DragAndDrop\DragAndDropEvents.tstest</Path>
+  <Path>KendoDemosTests\Framework\DragAndDrop\DragAndDropEvents.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>Framework\DragAndDrop\DragAndDropEvents.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\Framework\DragAndDrop\DragAndDropEvents.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -860,7 +861,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>6efa2a49-eee8-4f25-81e4-72fe196df82e</UniqueId>
+  <UniqueId>1960a5b3-b190-4a44-b6b0-758fdd3aaecd</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <WpfAppPath i:nil="true" />
 </WebAiiTest>

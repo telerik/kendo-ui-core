@@ -352,9 +352,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\TreeView\Events\DragAndDropInvalid.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\TreeView\Events\DragAndDropInvalid.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\TreeView\Events\DragAndDropInvalid.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\TreeView\Events\DragAndDropInvalid.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -366,7 +367,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>1739e24d-766d-4887-9ade-89c5897d6f51</UniqueId>
+  <UniqueId>a955c3d9-4e0b-4492-9f45-320702d73823</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

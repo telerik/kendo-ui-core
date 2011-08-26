@@ -13,4 +13,5 @@ deploy/
 docs/
 functional-tests/**/TestResults/
 functional-tests/**/Results/
+functional-tests/Results/
 functional-tests/**/Backup/

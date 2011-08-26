@@ -501,9 +501,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>uiwidgets\panelbar\api\Append.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\PanelBar\API\Append.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>uiwidgets\panelbar\api\Append.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\PanelBar\API\Append.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -515,7 +516,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>82b23410-67c4-46a3-9d39-ea88ea701ba0</UniqueId>
+  <UniqueId>6857be1b-f51d-4927-9721-95749f780263</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

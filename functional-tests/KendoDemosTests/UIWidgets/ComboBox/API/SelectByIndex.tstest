@@ -334,9 +334,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\ComboBox\API\SelectByIndex.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\ComboBox\API\SelectByIndex.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\ComboBox\API\SelectByIndex.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\ComboBox\API\SelectByIndex.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -348,7 +349,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>1a1d0f57-c41e-4727-a9a1-4d83163ebf0e</UniqueId>
+  <UniqueId>9f7ade98-e847-4db1-9d58-cb34fa1f5911</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <WpfAppPath i:nil="true" />
 </WebAiiTest>

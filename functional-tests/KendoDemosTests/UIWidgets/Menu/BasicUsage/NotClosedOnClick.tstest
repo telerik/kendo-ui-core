@@ -614,21 +614,22 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\Menu\BasicUsage\NotClosedOnClick.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\Menu\BasicUsage\NotClosedOnClick.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\Menu\BasicUsage\NotClosedOnClick.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\Menu\BasicUsage\NotClosedOnClick.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly>KendoDemosTests.dll</TestAssembly>
-  <TestAssemblyPath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\bin</TestAssemblyPath>
-  <TestClass>KendoDemosTests.NotClosedOnClick</TestClass>
+  <TestAssembly>functional_tests.dll</TestAssembly>
+  <TestAssemblyPath>C:\work\GitHub\kendo\functional_tests\bin</TestAssemblyPath>
+  <TestClass>functional_tests.NotClosedOnClick</TestClass>
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>14f36260-63c4-4038-8b02-22537d776770</UniqueId>
+  <UniqueId>bd48866d-9675-4d9b-b4c7-beb25c61629d</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

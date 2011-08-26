@@ -238,7 +238,8 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Set 'Text' text to ''</d2p1:Description>
+      <d2p1:Description>Set 'Text' text to '
+'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
@@ -316,13 +317,15 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:IsPassword>false</d2p1:IsPassword>
         <d2p1:KeyHoldTime>100</d2p1:KeyHoldTime>
-        <d2p1:RawText></d2p1:RawText>
+        <d2p1:RawText>
+</d2p1:RawText>
         <d2p1:SimulateRealTyping>false</d2p1:SimulateRealTyping>
         <d2p1:TypingInfo xmlns:d5p1="http://schemas.datacontract.org/2004/07/ArtOfTest.Common.Design">
           <d5p1:_caretPosition>0</d5p1:_caretPosition>
           <d5p1:_elementText />
           <d5p1:_isTextArea>false</d5p1:_isTextArea>
-          <d5p1:_typedText></d5p1:_typedText>
+          <d5p1:_typedText>
+</d5p1:_typedText>
         </d2p1:TypingInfo>
         <d2p1:TypingSpeed>50</d2p1:TypingSpeed>
       </d2p1:Step>
@@ -605,9 +608,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\ComboBox\BasicUsage\RevertToBlank.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\ComboBox\BasicUsage\RevertToBlank.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\ComboBox\BasicUsage\RevertToBlank.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\ComboBox\BasicUsage\RevertToBlank.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -619,7 +623,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>0742f142-11d4-4a22-932e-32713d79d27d</UniqueId>
+  <UniqueId>00a17be2-6ced-4890-a877-4a634fed517e</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <WpfAppPath i:nil="true" />
 </WebAiiTest>

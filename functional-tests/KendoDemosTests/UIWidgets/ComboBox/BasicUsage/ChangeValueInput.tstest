@@ -328,9 +328,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\ComboBox\BasicUsage\ChangeValueInput.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\ComboBox\BasicUsage\ChangeValueInput.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\ComboBox\BasicUsage\ChangeValueInput.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -342,7 +343,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>f1b99097-ab32-4274-a4a5-8d03fb4b4c6f</UniqueId>
+  <UniqueId>147b13dd-25d4-49cc-8fbf-96f0afdd439b</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

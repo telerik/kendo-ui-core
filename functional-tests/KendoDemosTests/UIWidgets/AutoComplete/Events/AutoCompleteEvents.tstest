@@ -512,9 +512,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\AutoComplete\Events\AutoCompleteEvents.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\AutoComplete\Events\AutoCompleteEvents.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\AutoComplete\Events\AutoCompleteEvents.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\AutoComplete\Events\AutoCompleteEvents.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -526,7 +527,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>4c36ce14-aaf5-4d44-871f-0a6b44e5a3a6</UniqueId>
+  <UniqueId>f223b292-ffc4-4544-be93-650bd2eeec97</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

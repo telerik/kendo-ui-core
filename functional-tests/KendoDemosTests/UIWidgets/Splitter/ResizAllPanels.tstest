@@ -521,9 +521,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\Splitter\ResizAllPanels.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\Splitter\ResizAllPanels.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\Splitter\ResizAllPanels.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\Splitter\ResizAllPanels.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -535,7 +536,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>c781b9ab-40cb-4112-92b4-bbe308f63127</UniqueId>
+  <UniqueId>c390c080-3fbc-4fd6-83c5-4a8f86aa0ee3</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

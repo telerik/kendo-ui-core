@@ -325,9 +325,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\TreeView\API\Remove.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\TreeView\API\Remove.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\TreeView\API\Remove.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\TreeView\API\Remove.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -339,7 +340,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>1bab8790-7383-48c4-abce-8302907f3b32</UniqueId>
+  <UniqueId>956e05e4-b2fd-493d-9156-f6c718dc0aa0</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

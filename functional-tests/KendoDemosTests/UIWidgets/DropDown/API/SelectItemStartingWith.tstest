@@ -333,9 +333,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\DropDown\API\SelectItemStartingWith.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\DropDown\API\SelectItemStartingWith.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\DropDown\API\SelectItemStartingWith.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\DropDown\API\SelectItemStartingWith.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -347,7 +348,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>200eea20-f754-4d01-b6d3-c02b6fbf3dcb</UniqueId>
+  <UniqueId>3ea7feb5-6824-4acb-b650-63f8d41d5537</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

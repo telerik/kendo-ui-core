@@ -416,9 +416,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\PanelBar\BasicUsage\ExpandTwoLevels.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\PanelBar\BasicUsage\ExpandTwoLevels.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\PanelBar\BasicUsage\ExpandTwoLevels.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\PanelBar\BasicUsage\ExpandTwoLevels.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -430,7 +431,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>63635fbb-194a-40f8-8a2e-0a8fb039b2e1</UniqueId>
+  <UniqueId>72cc0338-d403-4894-8a0a-6d71e0a5b4f1</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

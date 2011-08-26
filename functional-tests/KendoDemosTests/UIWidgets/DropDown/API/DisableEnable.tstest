@@ -582,21 +582,22 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\DropDown\API\DisableEnable.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\DropDown\API\DisableEnable.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>uiwidgets\dropdown\api\DisableEnable.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\DropDown\API\DisableEnable.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly>KendoDemosTests.dll</TestAssembly>
-  <TestAssemblyPath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\bin</TestAssemblyPath>
-  <TestClass>KendoDemosTests.DisableEnable</TestClass>
+  <TestAssembly>functional_tests.dll</TestAssembly>
+  <TestAssemblyPath>C:\work\GitHub\kendo\functional_tests\bin</TestAssemblyPath>
+  <TestClass>functional_tests.DisableEnable</TestClass>
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>da26f32a-9b0d-4e31-807b-8c343e29b840</UniqueId>
+  <UniqueId>a3874593-bd34-4bb1-acaf-f9ef4828af82</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

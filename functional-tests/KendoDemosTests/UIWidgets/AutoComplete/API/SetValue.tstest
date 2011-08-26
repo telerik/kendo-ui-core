@@ -332,9 +332,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\AutoComplete\API\SetValue.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\AutoComplete\API\SetValue.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\AutoComplete\API\SetValue.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\AutoComplete\API\SetValue.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -346,7 +347,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>8db3a24a-8934-4106-a439-5c9bbd3248b8</UniqueId>
+  <UniqueId>dabba713-5207-4010-94e3-998dd1762f8d</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

@@ -580,9 +580,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\Slider\Events\ChangeValueButtonsSingleSlider.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\Slider\Events\ChangeValueButtonsSingleSlider.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\Slider\Events\ChangeValueButtonsSingleSlider.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\Slider\Events\ChangeValueButtonsSingleSlider.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -594,7 +595,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>c7b56d04-57ed-43f0-ab3a-e1f6cebd0522</UniqueId>
+  <UniqueId>2acecfe1-08b1-4676-8142-45fb3fa8616d</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

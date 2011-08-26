@@ -233,7 +233,12 @@
       <d2p1:Runtime_x0020_ID>dff7e777-7830-4459-924a-7b19e2ab9f2d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -442,9 +447,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\Grid\Selection\SelectRowSingle.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\Grid\Selection\SelectRowSingle.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\Grid\Selection\SelectRowSingle.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\Grid\Selection\SelectRowSingle.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -456,7 +462,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>891ffcdc-fd2e-4e7e-8a8c-b0d9744bb0b9</UniqueId>
+  <UniqueId>7c3436fc-f5b3-4d43-ad14-6ece174c8b5a</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

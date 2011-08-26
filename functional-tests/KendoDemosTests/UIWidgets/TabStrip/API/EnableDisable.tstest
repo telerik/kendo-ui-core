@@ -922,9 +922,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\TabStrip\API\EnableDisable.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\TabStrip\API\EnableDisable.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\TabStrip\API\EnableDisable.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\TabStrip\API\EnableDisable.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -936,7 +937,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>66eeccd4-49c3-4ac5-9d56-8b647a8c78d8</UniqueId>
+  <UniqueId>57d767a2-1a79-42b9-b1d9-00213e9f1b79</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

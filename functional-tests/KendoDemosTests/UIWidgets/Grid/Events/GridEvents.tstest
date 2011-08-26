@@ -908,9 +908,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\Grid\Events\GridEvents.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\Grid\Events\GridEvents.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\Grid\Events\GridEvents.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\Grid\Events\GridEvents.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -922,7 +923,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>4ddbacf3-93f2-40ae-9f01-610c591d49b6</UniqueId>
+  <UniqueId>408aa092-c428-4374-ad41-76b0243fa217</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7c11a1b6-6d31-4ed3-8a4e-fae6bf5819af</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b1b992db-a5b5-4e36-90be-c0b274c8c2ae</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ExecuteTestActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
@@ -39,9 +39,9 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <d2p1:TestName>Select</d2p1:TestName>
-        <d2p1:TestPath>UIWidgets\PanelBar\API\Select.tstest</d2p1:TestPath>
+        <d2p1:TestPath>KendoDemosTests\UIWidgets\PanelBar\API\Select.tstest</d2p1:TestPath>
       </d2p1:Step>
-      <d2p1:StepImageKey>Removemn4otybl.aq3</d2p1:StepImageKey>
+      <d2p1:StepImageKey>Removewwim2sgs.m4f</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -52,7 +52,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c7ddb683-cae3-43d9-9804-6fcbfe78cf99</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>4c8db1c9-708f-49ab-8dcb-406e811272f9</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -137,7 +137,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ba1ada2f-86f4-4d32-ab22-6c166b805007</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>81906693-6563-45bf-8604-ebef5e3db113</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -220,7 +220,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e2707cb8-607d-443b-9947-54a5c00ceb4b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c2ca60c8-27e4-49da-aca0-77ec7289964f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ExistsVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -317,9 +317,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\PanelBar\API\Remove.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\PanelBar\API\Remove.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\PanelBar\API\Remove.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\PanelBar\API\Remove.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -331,7 +332,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>2d9f40dc-26be-4455-abf9-0b582a7493bb</UniqueId>
+  <UniqueId>bd34f432-a941-4f5a-bfc8-b3d98bc48a55</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

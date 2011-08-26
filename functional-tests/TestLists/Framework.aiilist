@@ -1,0 +1,68 @@
+<TestList Type="ArtOfTest.WebAii.Design.Execution.TestList" Version="2011.1.817.0">
+  <ID Type="System.String">1448ea12-9cc3-4e12-b891-9ee375655113</ID>
+  <TestListName Type="System.String">Framework</TestListName>
+  <Date Type="System.DateTime">2011-08-26 12:05:31Z</Date>
+  <Settings Type="ArtOfTest.WebAii.Core.Settings" Version="2011.1.817.0">
+    <WebSettings Type="ArtOfTest.WebAii.Core.Settings+WebSettings" Version="2011.1.817.0">
+      <DefaultBrowser Type="ArtOfTest.WebAii.Core.BrowserType">InternetExplorer</DefaultBrowser>
+      <WebAppPhysicalPath Type="System.String">
+      </WebAppPhysicalPath>
+      <EnableScriptLogging Type="System.Boolean">False</EnableScriptLogging>
+      <EnableUILessRequestViewing Type="System.Boolean">False</EnableUILessRequestViewing>
+      <LocalWebServer Type="ArtOfTest.WebAii.Core.LocalWebServerType">None</LocalWebServer>
+      <BaseUrl Type="System.String">
+      </BaseUrl>
+      <AspNetDevServerPort Type="System.Int32">-1</AspNetDevServerPort>
+      <KillBrowserProcessOnClose Type="System.Boolean">False</KillBrowserProcessOnClose>
+      <RecycleBrowser Type="System.Boolean">False</RecycleBrowser>
+      <UseHttpProxy Type="System.Boolean">False</UseHttpProxy>
+      <EnableSilverlight Type="System.Boolean">False</EnableSilverlight>
+      <VerboseHttpProxy Type="System.Boolean">False</VerboseHttpProxy>
+      <SilverlightConnectTimeout Type="System.Int32">30000</SilverlightConnectTimeout>
+      <UseMultiBrowsers Type="System.Boolean">False</UseMultiBrowsers>
+    </WebSettings>
+    <ClientReadyTimeout Type="System.Int32">30000</ClientReadyTimeout>
+    <ExecuteCommandTimeout Type="System.Int32">20000</ExecuteCommandTimeout>
+    <LogLocation Type="System.String">C:\WebAiiLog\</LogLocation>
+    <QueryEventLogErrorsOnExit Type="System.Boolean">False</QueryEventLogErrorsOnExit>
+    <ExecutionDelay Type="System.Int32">0</ExecutionDelay>
+    <AnnotateExecution Type="System.Boolean">False</AnnotateExecution>
+    <SimulatedMouseMoveSpeed Type="System.Single">0.3</SimulatedMouseMoveSpeed>
+    <WaitCheckInterval Type="System.Int32">500</WaitCheckInterval>
+    <AnnotationMode Type="ArtOfTest.WebAii.Core.AnnotationMode">All</AnnotationMode>
+    <LogAnnotations Type="System.Boolean">False</LogAnnotations>
+    <IsStressRecordingMode Type="System.Boolean">False</IsStressRecordingMode>
+    <IsUserInteractiveMode Type="System.Boolean">False</IsUserInteractiveMode>
+    <CreateLogFile Type="System.Boolean">True</CreateLogFile>
+    <XMultiMgr Type="System.Boolean">True</XMultiMgr>
+    <UnexpectedDialogAction Type="ArtOfTest.WebAii.Core.UnexpectedDialogAction">HandleAndFailTest</UnexpectedDialogAction>
+    <ElementWaitTimeout Type="System.Int32">10000</ElementWaitTimeout>
+  </Settings>
+  <Tests>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">b79fc1a9-a440-428f-800b-fab81887b1a4</ID>
+      <Path Type="System.String">KendoDemosTests\Framework\DataSource\LocalDataOperationsIdDescending.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">fc6e091f-1b8f-4bfb-9e6f-21f4025b91ac</ID>
+      <Path Type="System.String">KendoDemosTests\Framework\DataSource\SharedDataSourceYearDescending.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">372f300e-f16a-452f-94ce-c31a34b078da</ID>
+      <Path Type="System.String">KendoDemosTests\Framework\DataSource\XMLBinding.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">1960a5b3-b190-4a44-b6b0-758fdd3aaecd</ID>
+      <Path Type="System.String">KendoDemosTests\Framework\DragAndDrop\DragAndDropEvents.tstest</Path>
+    </Item>
+    <Item Type="ArtOfTest.WebAii.Design.Execution.TestInfo" Version="2011.1.817.0">
+      <ID Type="System.String">76ddb40a-324b-4577-bb23-abbf62abec54</ID>
+      <Path Type="System.String">KendoDemosTests\Framework\Templates\BasicUsage.tstest</Path>
+    </Item>
+  </Tests>
+  <Filter Type="ArtOfTest.WebAii.Design.Execution.Filter" Version="2011.1.817.0">
+    <Keys />
+    <Comparisons />
+    <Values />
+  </Filter>
+</TestList>

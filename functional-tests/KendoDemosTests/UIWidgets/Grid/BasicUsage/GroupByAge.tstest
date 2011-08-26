@@ -458,9 +458,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\Grid\BasicUsage\GroupByAge.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\Grid\BasicUsage\GroupByAge.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\Grid\BasicUsage\GroupByAge.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\Grid\BasicUsage\GroupByAge.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -472,7 +473,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>2a2681b2-602e-4af3-be55-b8516bc81e80</UniqueId>
+  <UniqueId>34dcf0a0-deb4-4a70-b871-0662107acdad</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

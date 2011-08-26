@@ -693,9 +693,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>Framework\Templates\BasicUsage.tstest</Path>
+  <Path>KendoDemosTests\Framework\Templates\BasicUsage.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>Framework\Templates\BasicUsage.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\Framework\Templates\BasicUsage.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -707,7 +708,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>b1e7b562-0b1e-4d53-8c49-bf558e4ff0ab</UniqueId>
+  <UniqueId>76ddb40a-324b-4577-bb23-abbf62abec54</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <WpfAppPath i:nil="true" />
 </WebAiiTest>

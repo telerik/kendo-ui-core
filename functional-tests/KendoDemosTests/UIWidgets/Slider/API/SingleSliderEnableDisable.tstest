@@ -414,9 +414,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\Slider\API\SingleSliderEnableDisable.tstest</Path>
+  <Path>KendoDemosTests\UIWidgets\Slider\API\SingleSliderEnableDisable.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>UIWidgets\Slider\API\SingleSliderEnableDisable.resx</ResourceFilePath>
+  <ResourceFilePath>KendoDemosTests\UIWidgets\Slider\API\SingleSliderEnableDisable.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -428,7 +429,7 @@
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>ffffb368-6c05-4676-a961-8277ed47ba09</UniqueId>
+  <UniqueId>4bddc3ca-737f-40d5-9e42-3c710659c77a</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
       <d2p1:Key>Timeout</d2p1:Key>

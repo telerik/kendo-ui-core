@@ -141,7 +141,12 @@
       <d2p1:Runtime_x0020_ID>9e2c7619-d8e6-4fae-ae29-38965feb90f1</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ExecuteTestActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -153,7 +158,7 @@
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <d2p1:TestName>LogIn</d2p1:TestName>
+        <d2p1:TestName>LogIn.aii</d2p1:TestName>
         <d2p1:TestPath>TestProject2\AeroViewr\LogIn.aii</d2p1:TestPath>
       </d2p1:Step>
       <d2p1:StepImageKey>OpenSetSearchBack1u3cwelh.tqr</d2p1:StepImageKey>
@@ -888,18 +893,19 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>TestProject2\AeroViewr\OpenSetSearchBack.aii</Path>
+  <Path>AeroViewr\TestProject2\AeroViewr\OpenSetSearchBack.aii</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>TestProject2\AeroViewr\OpenSetSearchBack.resx</ResourceFilePath>
+  <ResourceFilePath>AeroViewr\TestProject2\AeroViewr\OpenSetSearchBack.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly>AeroViewr.dll</TestAssembly>
-  <TestAssemblyPath>C:\work\GitHub\kendo\functional-tests\AeroViewr\bin</TestAssemblyPath>
-  <TestClass>AeroViewr.OpenSetSearchBack</TestClass>
+  <TestAssembly>functional_tests.dll</TestAssembly>
+  <TestAssemblyPath>C:\work\GitHub\kendo\functional_tests\bin</TestAssemblyPath>
+  <TestClass>functional_tests.OpenSetSearchBack</TestClass>
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
   <UniqueId>a71e5ebf-cad5-489d-9597-0e39d5d99e94</UniqueId>
