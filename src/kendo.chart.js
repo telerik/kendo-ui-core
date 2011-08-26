@@ -1334,7 +1334,7 @@
                     tooltip.show(point);
                 }
 
-                highlight.show(point);
+                //highlight.show(point);
 
                 $(doc.body).bind(MOUSEMOVE_TRACKING, proxy(chart._mouseMove, chart));
             }
@@ -1359,7 +1359,7 @@
                         if (tooltip.visible) {
                             tooltip.show(seriesPoint);
                         }
-                        highlight.show(seriesPoint);
+                        //highlight.show(seriesPoint);
                     }
                 }
             } else {
@@ -3081,8 +3081,10 @@
                     fill: options.color,
                     overlay: options.overlay,
                     normalAngle: isVertical ? 0 : 90,
+                    aboveAxis: options.aboveAxis,
                     fillOpacity: options.opacity,
-                    strokeOpacity: options.opacity
+                    strokeOpacity: options.opacity,
+                    animation: "bar"
                 }, border),
                 elements = [],
                 label = bar.children[0];
@@ -4089,6 +4091,7 @@
 
             view.definitions = {};
             view.decorators = [];
+            view.animations = [];
         },
 
         renderDefinitions: function() {
@@ -4113,7 +4116,7 @@
                 length = decorators.length;
 
             for (i = 0; i < length; i++) {
-                element = decorators[i].decorate(element);
+                element = decorators[i].decorate.apply(decorators[i], arguments);
             }
 
             return element;
@@ -4127,8 +4130,9 @@
             ViewBase.fn.init.call(view, options);
 
             view.decorators.push(
-                new SVGOverlayDecorator(view),
-                new SVGPaintDecorator(view)
+                //new SVGOverlayDecorator(view),
+                new SVGPaintDecorator(view),
+                new SVGBarAnimationDecorator(view)
             );
 
             view.template = SVGView.template;
@@ -4157,6 +4161,10 @@
             renderSVG(container, svgText);
             viewElement = container.firstChild;
             view.alignToScreen(viewElement);
+
+            while (view.animations.length > 0) {
+                view.animations.shift().play();
+            }
 
             return viewElement;
         },
@@ -4198,7 +4206,7 @@
                         [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]
                     ],
                     style
-                )
+                ), box, style
             );
         },
 
@@ -4513,6 +4521,77 @@
             }
         }
     };
+
+    jQuery.cssHooks["svgBarBottom"] = {
+        get: function(elem, computed, extra) {
+            var points = $(elem).attr("d")
+                         .replace(/[ML]/gi, "").split(" ");
+
+            return parseInt(points[5], 10);
+        },
+        set: function(elem, value) {
+            var points = $(elem).attr("d").split(" ");
+
+            points[5] = points[7] = parseInt(value, 10);
+            $(elem).attr("d", points.join(" "));
+        }
+    };
+
+    jQuery.cssHooks["svgBarTop"] = {
+        get: function(elem, computed, extra) {
+            var points = $(elem).attr("d")
+                         .replace(/[ML]/gi, "").split(" ");
+
+            return parseInt(points[1], 10);
+        },
+        set: function(elem, value) {
+            var points = $(elem).attr("d").split(" ");
+
+            points[1] = points[3] = points[9] = parseInt(value, 10);
+            $(elem).attr("d", points.join(" "));
+        }
+    };
+
+    jQuery.fx.step["svgBarBottom"] = function(fx) {
+        jQuery.cssHooks["svgBarBottom"].set(fx.elem, fx.now + fx.unit);
+    };
+
+    jQuery.fx.step["svgBarTop"] = function(fx) {
+        jQuery.cssHooks["svgBarTop"].set(fx.elem, fx.now + fx.unit);
+    };
+
+    function SVGBarAnimationDecorator(view) {
+        this.view = view;
+    }
+
+    SVGBarAnimationDecorator.prototype = {
+        decorate: function(element, box, style) {
+            var decorator = this,
+                view = decorator.view,
+                options = element.options;
+
+            if (options.animation === "bar") {
+                view.animations.push({
+                    play: function() {
+                        var target = $("#" + element.options.id);
+                        if (style.normalAngle === 0) {
+                            if (style.aboveAxis) {
+                                target
+                                    .css("svgBarTop", box.y2)
+                                    .animate({ "svgBarTop": box.y1 + 10 });
+                            } else {
+                                target
+                                    .css("svgBarBottom", box.y1)
+                                    .animate({ "svgBarBottom": box.y2 });
+                            }
+                        }
+                    }
+                });
+            }
+
+            return element;
+        }
+    }
 
     var VMLView = ViewBase.extend({
         init: function(options) {
