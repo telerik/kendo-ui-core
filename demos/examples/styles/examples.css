@@ -354,6 +354,11 @@ a.bigButton:hover
     margin-left: 38px;
 }
 
+#navi li a
+{
+    line-height: 43px;
+}
+
 #navi-top
 {
     overflow: hidden;
