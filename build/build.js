@@ -162,6 +162,9 @@ processScripts();
 console.log("processing styles...");
 processStyles();
 
+console.log("copying culture js files...");
+wrench.copyDirSyncRecursive("src/cultures", JS + "/cultures");
+
 console.log("copying license agreement...");
 var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");
 fs.writeFileSync(PATH + "/Kendo\ Beta\ EULA.pdf", data);
