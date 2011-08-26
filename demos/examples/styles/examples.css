@@ -666,90 +666,24 @@ a.bigButton
     margin-top: 10px;
 }
 
-.autocompleteIcon
-{
-    background-position: 0 -200px;
-}
-
-.comboBoxIcon
-{
-    background-position: 0 -230px;
-}
-
-.dropDownListIcon
-{
-    background-position: 0 -260px;
-}
-
-.chartIcon
-{
-    background-position: 0 -290px;
-}
-
-.gridIcon
-{
-    background-position: 0 -320px;
-}
-
-.menuIcon
-{
-    background-position: 0 -350px;
-}
-
-.panelBarIcon
-{
-    background-position: 0 -380px;
-}
-
-.sliderIcon
-{
-    background-position: 0 -410px;
-}
-
-.splitterIcon
-{
-    background-position: 0 -440px;
-}
-
-.tabStripIcon
-{
-    background-position: 0 -470px;
-}
-
-.treeViewIcon
-{
-    background-position: 0 -500px;
-}
-
-.uploadIcon
-{
-    background-position: 0 -530px;
-}
-
-.windowIcon
-{
-    background-position: -50px -290px;
-}
-
-.dataSourceIcon
-{
-    background-position: -50px -200px;
-}
-
-.templatesIcon
-{
-    background-position: -50px -230px;
-}
-
-.dragdropIcon
-{
-    background-position: -50px -260px;
-}
-
-.integrationIcon
-{
-    background-position: -50px -320px;
-}
+.overviewIcon { background-position: -50px -350px; }
+.autocompleteIcon { background-position: 0 -200px; }
+.comboBoxIcon { background-position: 0 -230px; }
+.dropDownListIcon { background-position: 0 -260px; }
+.chartIcon { background-position: 0 -290px; }
+.gridIcon { background-position: 0 -320px; }
+.menuIcon { background-position: 0 -350px; }
+.panelBarIcon { background-position: 0 -380px; }
+.sliderIcon { background-position: 0 -410px; }
+.splitterIcon { background-position: 0 -440px; }
+.tabStripIcon { background-position: 0 -470px; }
+.treeViewIcon { background-position: 0 -500px; }
+.uploadIcon { background-position: 0 -530px; }
+.windowIcon { background-position: -50px -290px; }
+.dataSourceIcon { background-position: -50px -200px; }
+.templatesIcon { background-position: -50px -230px; }
+.dragdropIcon { background-position: -50px -260px; }
+.integrationIcon { background-position: -50px -320px; }
 
 /*example content*/
 
