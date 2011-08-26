@@ -1108,16 +1108,17 @@ pre.prettyprint
 #codeStrip .description
 {
     padding: 10px 20px 20px;
-}
-
-#codeStrip .codeContainer
-{
-    padding: 20px;
+    line-height: 1.6;
 }
 
 #codeStrip p
 {
     line-height: 1.8;
+}
+
+#codeStrip .codeContainer
+{
+    padding: 20px;
 }
 
 /* skin selector */
