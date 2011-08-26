@@ -4308,11 +4308,12 @@
                 path.template = SVGPath.template = template(
                     "<path <#= d.renderAttr(\"id\", d.options.id) #>" +
                     "d='<#= d.renderPoints() #>' " +
-                    "<#= d.renderStroke() #><#= d.renderStrokeWidth() #>" +
+                    "<#= d.renderAttr(\"stroke\", d.options.stroke) #> " +
+                    "<#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #>" +
+                    "<#= d.renderDashType() #> " +
+                    "stroke-linecap='<#= d.renderLinecap() #>' " +
                     "fill-opacity='<#= d.options.fillOpacity #>' " +
                     "stroke-opacity='<#= d.options.strokeOpacity #>' " +
-                    "<#= d.renderDashType() #> " +
-                    "stroke-linecap='<#= d.options.strokeLineCap #>' " +
                     "fill='<#= d.options.fill || \"none\" #>'></path>"
                 );
             }
@@ -4323,8 +4324,7 @@
         options: {
             fill: "",
             fillOpacity: 1,
-            strokeOpacity: 1,
-            strokeLineCap: "square"
+            strokeOpacity: 1
         },
 
         clone: function() {
@@ -4350,37 +4350,17 @@
             return result;
         },
 
-        renderStrokeWidth: function () {
-            var path = this,
-                options = path.options;
-
-            return options.strokeWidth > 0 ? "stroke-width='" + options.strokeWidth + "' " : "";
-        },
-
-        renderStroke: function () {
-            var path = this,
-                options = path.options;
-
-            return options.stroke ? "stroke='" + options.stroke + "' " : "";
-        },
-
         renderDashType: function () {
             var path = this,
-                options = path.options,
-                result = [],
-                dashType = options.dashType ? options.dashType.toLowerCase() : null;
+                options = path.options;
 
-            if (dashType && dashType != "solid" && options.strokeWidth) {
-                var dashTypeArray = SVG_DASH_TYPE[dashType];
-                for (var i = 0; i < dashTypeArray.length; i++) {
-                    result.push(dashTypeArray[i] * options.strokeWidth);
-                }
+            return renderSVGDash(options.dashType, options.strokeWidth);
+        },
 
-                options.strokeLineCap = "butt";
+        renderLinecap: function() {
+            var dashType = this.options.dashType;
 
-                return "stroke-dasharray='" + result.join(" ") + "' ";
-            }
-            return "";
+            return (dashType && dashType != "solid") ? "butt" : "square";
         }
     });
 
@@ -5292,6 +5272,24 @@
         }
 
         return destination;
+    }
+
+    function renderSVGDash(dashType, strokeWidth) {
+        var result = [],
+            dashType = dashType ? dashType.toLowerCase() : null,
+            dashTypeArray,
+            i;
+
+        if (dashType && dashType != "solid" && strokeWidth) {
+            dashTypeArray = SVG_DASH_TYPE[dashType];
+            for (i = 0; i < dashTypeArray.length; i++) {
+                result.push(dashTypeArray[i] * strokeWidth);
+            }
+
+            return "stroke-dasharray='" + result.join(" ") + "' ";
+        }
+
+        return "";
     }
 
     // renderSVG ==============================================================

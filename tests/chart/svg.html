@@ -492,6 +492,11 @@
                     ok(path.render().indexOf("stroke-dasharray='8 3.5 1.5 3.5 1.5 3.5'") > -1);
                 });
 
+                test("sets stroke linecap to butt", function() {
+                    path.options.dashType = "dot";
+                    ok(path.render().indexOf("stroke-linecap='butt'") > -1);
+                });
+
             })();
 
             (function() {
