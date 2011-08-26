@@ -4113,9 +4113,14 @@
             var view = this,
                 decorators = view.decorators,
                 i,
-                length = decorators.length;
+                length = decorators.length,
+                j;
 
             for (i = 0; i < length; i++) {
+                for (j = 0; j < element.children.length; j++) {
+                    element.children[j] = decorators[i].decorate.apply(decorators[i],
+                    [element.children[j], arguments[1], arguments[2]]);
+                }
                 element = decorators[i].decorate.apply(decorators[i], arguments);
             }
 
@@ -4130,7 +4135,7 @@
             ViewBase.fn.init.call(view, options);
 
             view.decorators.push(
-                //new SVGOverlayDecorator(view),
+                new SVGOverlayDecorator(view),
                 new SVGPaintDecorator(view),
                 new SVGBarAnimationDecorator(view)
             );
@@ -4462,7 +4467,7 @@
                 return element;
             }
 
-            delete element.options.id;
+            element.options.id = uniqueId();
 
             var fill = overlay.fill,
                 fillRotation = element.options.normalAngle || 0,
@@ -4578,7 +4583,7 @@
                             if (style.aboveAxis) {
                                 target
                                     .css("svgBarTop", box.y2)
-                                    .animate({ "svgBarTop": box.y1 + 10 });
+                                    .animate({ "svgBarTop": box.y1 });
                             } else {
                                 target
                                     .css("svgBarBottom", box.y1)
