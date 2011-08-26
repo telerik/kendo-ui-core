@@ -37,7 +37,7 @@
             }
         },
         colorPickerTemplate = kendo.template(
-            "<# var id = primitive + \"-\" + property.property; #>" +
+            "<# var id = primitive + \":\" + property.property; #>" +
             "<label for='<#= id #>'><#= property.label #></label> <input id='<#= id #>' />"
         ),
         propertyGroupTemplate = kendo.template(
@@ -61,6 +61,25 @@
                 "<button type='button' class='t-style-apply t-button'>Download</button>" +
             "</div>"
         ),
+        proxy = $.proxy,
+        CHANGE = "change",
+        Component = kendo.ui.Component,
+        ColorPicker = Component.extend({
+            init: function(element, options) {
+                element = $(element);
+
+                var that = this;
+
+                Component.fn.init.call(that, element, options);
+
+                element.bind(CHANGE, proxy(that._change, that))
+
+                that.bind([ CHANGE ], that.options);
+            },
+            _change: function(e) {
+                this.trigger(CHANGE);
+            }
+        }),
         ThemeBuilder = kendo.Observable.extend({
             init: function() {
                 var that = this;
@@ -68,34 +87,40 @@
                 $(themeBuilderTemplate({})).appendTo(document.body);
 
                 that.content = $("#kendo-themebuilder")
-                                    .kendoWindow({
-                                        title: "Kendo ThemeBuilder",
-                                        draggable: true,
-                                        resizable: true,
-                                        width: 300,
-                                        minWidth: 300,
-                                        maxWidth: 300
-                                    });
+                    .kendoWindow({
+                        title: "Kendo ThemeBuilder",
+                        draggable: true,
+                        resizable: true,
+                        width: 300,
+                        minWidth: 300,
+                        maxWidth: 300
+                    });
 
                 that.element = that.content.closest(".t-window")
-                                    .attr("id", "kendo-themebuilder-wrapper")
-                                    .css({
-                                        top: 20,
-                                        left: $(window).width() - 330
-                                    })
-                                    .data("kendoThemeBuilder", that);
+                    .attr("id", "kendo-themebuilder-wrapper")
+                    .css({
+                        top: 20,
+                        left: $(window).width() - 330
+                    })
+                    .data("kendoThemeBuilder", that);
 
-                $("#stylable-elements").kendoPanelBar();
+                $("#stylable-elements")
+                    .kendoPanelBar()
+                    .find("input").kendoColorPicker({
+                        change: proxy(that._propertyChange, that)
+                    });
             },
             open: function() {
                 this.content.data("kendoWindow").open();
+            },
+            _propertyChange: function() {
             },
             // TODO: test this
             updateStyleSheet: function(cssText) {
                 var doc = document,
                     style = doc.createElement("style");
 
-                doc.getElementsByTagName("head")[0].appendChild(style);
+                $("head")[0].appendChild(style);
 
                 if (style.styleSheet) {
                     style.styleSheet.cssText = cssText;
@@ -104,6 +129,8 @@
                 }
             }
         });
+
+    kendo.ui.plugin("ColorPicker", ColorPicker, Component);
 
     $.extend(kendo, {
         ThemeBuilder: ThemeBuilder
