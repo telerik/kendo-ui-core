@@ -4532,12 +4532,13 @@
             var points = $(elem).attr("d")
                          .replace(/[ML]/gi, "").split(" ");
 
-            return parseInt(points[5], 10);
+            return parseFloat(points[5]);
         },
         set: function(elem, value) {
             var points = $(elem).attr("d").split(" ");
 
-            points[5] = points[7] = parseInt(value, 10);
+            // alignToPixel usage depends on stroke width
+            points[5] = points[7] = alignToPixel(parseFloat(value));
             $(elem).attr("d", points.join(" "));
         }
     };
@@ -4547,12 +4548,12 @@
             var points = $(elem).attr("d")
                          .replace(/[ML]/gi, "").split(" ");
 
-            return parseInt(points[1], 10);
+            return parseFloat(points[1]);
         },
         set: function(elem, value) {
             var points = $(elem).attr("d").split(" ");
 
-            points[1] = points[3] = points[9] = parseInt(value, 10);
+            points[1] = points[3] = points[9] = alignToPixel(parseFloat(value));
             $(elem).attr("d", points.join(" "));
         }
     };
