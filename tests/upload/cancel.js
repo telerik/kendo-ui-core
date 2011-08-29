@@ -8,7 +8,7 @@
         });
 
         simulateFileSelect();
-        $(".t-cancel", uploadInstance.wrapper).trigger("click");
+        $(".k-cancel", uploadInstance.wrapper).trigger("click");
 
         ok(cancelFired);
     });
@@ -22,7 +22,7 @@
         });
 
         simulateFileSelect();
-        $(".t-cancel", uploadInstance.wrapper).trigger("click");
+        $(".k-cancel", uploadInstance.wrapper).trigger("click");
 
         assertSelectedFile(files);
     });

@@ -34,7 +34,7 @@
                 },
                 teardown: function() {
                     $.mockjaxClear();
-                    $(".t-splitter").remove();
+                    $(".k-splitter").remove();
                 }
             });
 
@@ -51,7 +51,7 @@
                         })
                         .data("kendoSplitter");
 
-                splitter.ajaxRequest(".t-pane:first");
+                splitter.ajaxRequest(".k-pane:first");
             });
 
             test("ajaxRequest loads custom urls", function() {
@@ -69,7 +69,7 @@
                     url: customUrl,
                     responseText: "foobar"
                 });
-                splitter.ajaxRequest(".t-pane:first", customUrl);
+                splitter.ajaxRequest(".k-pane:first", customUrl);
 
                 equals(requestedUrl, customUrl);
             });
@@ -81,10 +81,10 @@
                         .bind("ajaxComplete", function(e, request, settings) {
                             if (settings.url === url) {
                                 start();
-                                equals(splitter.find(".t-pane:first")[0].innerHTML, "foobar");
+                                equals(splitter.find(".k-pane:first")[0].innerHTML, "foobar");
                             }
                         });
-                splitter.data("kendoSplitter").ajaxRequest(".t-pane:first", url);
+                splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
             });
 
             test("splitter loads content for LoadOnDemand panes when initializing", function() {
@@ -113,12 +113,12 @@
                         .bind("ajaxSend", function(e, request, settings) {
                             request.abort();
                         });
-                splitter.data("kendoSplitter").ajaxRequest(".t-pane:first", url);
+                splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
 
                 setTimeout(function() {
                     start();
-                    equals(splitter.find(".t-pane-loading.t-loading").length, 1);
-                    ok(splitter.find(".t-pane-loading.t-loading").parent().is(".t-pane:first"));
+                    equals(splitter.find(".k-pane-loading.k-loading").length, 1);
+                    ok(splitter.find(".k-pane-loading.k-loading").parent().is(".k-pane:first"));
                 }, 500);
             });
 
@@ -133,10 +133,10 @@
                             if (settings.url === url) {
                                 start();
                                 ok(triggered);
-                                equals(triggered.pane, splitter.find(".t-pane:first")[0]);
+                                equals(triggered.pane, splitter.find(".k-pane:first")[0]);
                             }
                         });
-                 splitter.data("kendoSplitter").ajaxRequest(".t-pane:first", url);
+                 splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
             });
 
         </script>

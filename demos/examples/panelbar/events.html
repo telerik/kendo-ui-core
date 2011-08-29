@@ -23,9 +23,9 @@
         <!-- description -->
         <div class="description">Events</div>
         <!-- description -->
-        <div id="example" class="t-content">
+        <div id="example" class="k-content">
             <ul id="panelbar">
-                <li class="t-state-active">
+                <li class="k-state-active">
                     First Item
                     <ul>
                         <li>Sub Item 1</li>
@@ -82,19 +82,19 @@
         </div>
         <script>
             function onSelect(e) {
-                kendoConsole.log("Selected: " + $(e.item).find("> .t-link").text());
+                kendoConsole.log("Selected: " + $(e.item).find("> .k-link").text());
             };
 
             function onExpand(e) {
-                kendoConsole.log("Expanded: " + $(e.item).find("> .t-link").text());
+                kendoConsole.log("Expanded: " + $(e.item).find("> .k-link").text());
             };
 
             function onCollapse(e) {
-                kendoConsole.log("Collapsed: " + $(e.item).find("> .t-link").text());
+                kendoConsole.log("Collapsed: " + $(e.item).find("> .k-link").text());
             };
 
             function onContentLoad(e) {
-                kendoConsole.log("Content loaded in <b>"+ $(e.item).find("> .t-link").text() +
+                kendoConsole.log("Content loaded in <b>"+ $(e.item).find("> .k-link").text() +
                                  "</b> and starts with <b>" + $(e.contentElement).text().substr(0, 20) + "...</b>");
             };
 

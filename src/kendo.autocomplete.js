@@ -99,7 +99,7 @@
         DataSource = kendo.data.DataSource,
         List = ui.List,
         CHANGE = "change",
-        SELECTED = "t-state-selected",
+        SELECTED = "k-state-selected",
         caretPosition = List.caret,
         selectText = List.selectText,
         proxy = $.proxy;
@@ -182,7 +182,7 @@
 
             that.element
                 .attr("autocomplete", "off")
-                .addClass("t-widget t-input t-autocomplete")
+                .addClass("k-widget k-input k-autocomplete")
                 .bind({
                     keydown: proxy(that._keydown, that),
                     paste: proxy(that._search, that),

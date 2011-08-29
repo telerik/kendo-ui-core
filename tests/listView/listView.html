@@ -74,31 +74,31 @@
             test("focusing grid element focus first item ", function() {
                 var listView = setup();
                 listView.focus();
-                ok(listView.find("li").first().is(".t-state-focused"));
+                ok(listView.find("li").first().is(".k-state-focused"));
             });
 
             test("down arrow moves focus on the next row same cell", function() {
                 var listView = setup();
                 listView.focus().press(kendo.keys.DOWN);
-                ok(listView.find("li:eq(1)").hasClass("t-state-focused"));
+                ok(listView.find("li:eq(1)").hasClass("k-state-focused"));
             });
 
             test("right arrow moves focus on the next cell on the same row", function() {
                 var listView = setup();
                 listView.focus().press(kendo.keys.RIGHT);
-                ok(listView.find("li:eq(0)").hasClass("t-state-focused"));
+                ok(listView.find("li:eq(0)").hasClass("k-state-focused"));
             });
 
             test("left arrow moves focus on the prev cell on the same row", function() {
                 var listView = setup();
                 listView.focus().press(kendo.keys.RIGHT).press(kendo.keys.LEFT);
-                ok(listView.find("li:eq(0)").hasClass("t-state-focused"));
+                ok(listView.find("li:eq(0)").hasClass("k-state-focused"));
             });
 
             test("up arrow moves focus on the prev row same cell", function() {
                 var listView = setup();
                 listView.focus().press(kendo.keys.DOWN).press(kendo.keys.UP);
-                ok(listView.find("li:eq(0)").hasClass("t-state-focused"));
+                ok(listView.find("li:eq(0)").hasClass("k-state-focused"));
             });
 
             test("space key select the focused item", function() {
@@ -106,7 +106,7 @@
 
                     listView.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
 
-                    ok(listView.find("li:eq(1)").hasClass("t-state-selected"));
+                    ok(listView.find("li:eq(1)").hasClass("k-state-selected"));
             });
             test("autoBind false does not populate listView", function() {
                 var ul = setup({autoBind: false});

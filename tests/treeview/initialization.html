@@ -24,7 +24,7 @@
             test("adds necessary classes to div", function() {
                 var element = $("<div />").kendoTreeView();
 
-                ok(element.is(".t-widget.t-treeview.t-reset"));
+                ok(element.is(".k-widget.k-treeview.k-reset"));
             });
 
             test("attaches treeview object to div", function() {
@@ -38,7 +38,7 @@
                     list = $("<ul><li>foo</li></ul>").appendTo(document.body);
                 },
                 teardown: function() {
-                    list.closest(".t-treeview").remove();
+                    list.closest(".k-treeview").remove();
                     list.remove();
                 }
             });
@@ -62,10 +62,10 @@
             test("initializing from array", function() {
                 var element = $("<div />").appendTo(document.body).kendoTreeView([{ text: "foo" }]);
 
-                ok(element.is(".t-treeview.t-widget.t-reset"));
-                equals(element.children("ul.t-treeview-lines.t-group").length, 1);
+                ok(element.is(".k-treeview.k-widget.k-reset"));
+                equals(element.children("ul.k-treeview-lines.k-group").length, 1);
                 equals(element.find("li").length, 1);
-                ok(element.find("li").is(".t-item"));
+                ok(element.find("li").is(".k-item"));
                 equals(element.find("li").text(), "foo");
             });
         </script>

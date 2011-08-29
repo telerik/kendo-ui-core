@@ -19,8 +19,8 @@
         OFFSET = "offset",
         FITTED = "fitted",
         EFFECTS = "effects",
-        ACTIVE = "t-state-active",
-        ACTIVECHILDREN = ".t-dropdown-wrap, .t-link",
+        ACTIVE = "k-state-active",
+        ACTIVECHILDREN = ".k-dropdown-wrap, .k-link",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         extend = $.extend,
         proxy = $.proxy,
@@ -45,7 +45,7 @@
             }
 
             that.element.hide()
-                .addClass("t-popup t-group t-reset")
+                .addClass("k-popup k-group k-reset")
                 .css({ position : ABSOLUTE })
                 .appendTo($(options.appendTo));
 
@@ -273,7 +273,7 @@
                     .data(OFFSET, extend({}, offset));
             }
 
-            var anchorParent = anchor.offsetParent().parent(".t-animation-container"); // If the parent is positioned, get the current positions
+            var anchorParent = anchor.offsetParent().parent(".k-animation-container"); // If the parent is positioned, get the current positions
             if (anchorParent.length && anchorParent.data(FITTED)) {
                 pos = getOffset(wrapper, POSITION);
                 offset = getOffset(wrapper);

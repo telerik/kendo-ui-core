@@ -100,7 +100,7 @@
                     template: "<#= data.toUpperCase() #>"
                 });
 
-                equal(autocomplete.template("foo"), "<li class='t-item' unselectable='on'>FOO</li>");
+                equal(autocomplete.template("foo"), "<li class='k-item' unselectable='on'>FOO</li>");
             });
 
             test("highlight first item", function() {
@@ -111,7 +111,7 @@
 
                 autocomplete.dataSource.query();
 
-                ok(autocomplete.ul.children().eq(0).hasClass("t-state-focused"));
+                ok(autocomplete.ul.children().eq(0).hasClass("k-state-focused"));
             });
 
       </script>

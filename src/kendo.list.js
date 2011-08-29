@@ -11,9 +11,9 @@
         LI = "li",
         CHANGE = "change",
         CHARACTER = "character",
-        FOCUSED = "t-state-focused",
-        HOVER = "t-state-hover",
-        LOADING = "t-loading",
+        FOCUSED = "k-state-focused",
+        HOVER = "k-state-hover",
+        LOADING = "k-loading",
         SELECT = "select",
         proxy = $.proxy;
 
@@ -34,7 +34,7 @@
 
             that._template();
 
-            that.ul = $('<ul class="t-list"/>')
+            that.ul = $('<ul class="k-list"/>')
                         .attr(ID, that.element.attr(ID) + "-list")
                         .css("overflow", "auto")
                         .mousedown(function() {
@@ -130,7 +130,7 @@
             if (length) {
                 var that = this,
                     ul = that.ul,
-                    parent = ul.parent(".t-animation-container"),
+                    parent = ul.parent(".k-animation-container"),
                     height = that.options.height;
 
                 if (that.popup.visible()) {
@@ -266,11 +266,11 @@
 
             if (!template) {
                 //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
-                that.template = kendo.template("<li class='t-item' unselectable='on'>${data" + (dataTextField ? "." : "") + dataTextField + "}</li>", { useWithBlock: false });
+                that.template = kendo.template("<li class='k-item' unselectable='on'>${data" + (dataTextField ? "." : "") + dataTextField + "}</li>", { useWithBlock: false });
             } else {
                 template = kendo.template(template);
                 that.template = function(data) {
-                    return "<li class='t-item' unselectable='on'>" + template(data) + "</li>";
+                    return "<li class='k-item' unselectable='on'>" + template(data) + "</li>";
                 };
             }
         }

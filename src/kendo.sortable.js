@@ -6,7 +6,7 @@
         SINGLE = "single",
         FIELD = "field",
         DESC = "desc",
-        TLINK = ".t-link",
+        TLINK = ".k-link",
         Component = kendo.ui.Component;
 
     var Sortable = Component.extend({
@@ -19,7 +19,7 @@
             link = that.element.find(TLINK);
 
             if (!link[0]) {
-                link = that.element.wrapInner('<a class="t-link" href="#"/>').find(TLINK);
+                link = that.element.wrapInner('<a class="k-link" href="#"/>').find(TLINK);
             }
 
             that.link = link;
@@ -53,12 +53,12 @@
 
             dir = element.data(DIR);
 
-            element.find(".t-arrow-up,.t-arrow-down").remove();
+            element.find(".k-arrow-up,.k-arrow-down").remove();
 
             if (dir === ASC) {
-                $('<span class="t-icon t-arrow-up" />').appendTo(that.link);
+                $('<span class="k-icon k-arrow-up" />').appendTo(that.link);
             } else if (dir === DESC) {
-                $('<span class="t-icon t-arrow-down" />').appendTo(that.link);
+                $('<span class="k-icon k-arrow-down" />').appendTo(that.link);
             }
         },
 

@@ -7,13 +7,13 @@
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.resizable.js"></script>
         <style>
-            .t-grid-resize-indicator {
+            .k-grid-resize-indicator {
                 border: 1px solid black;
                 height: 20px;
                 padding:0,
                 margin:0
             }
-            .t-resize-handle {
+            .k-resize-handle {
                 cursor: col-resize;
                 position: absolute;
                 height: 25px;
@@ -53,9 +53,9 @@
 
               $(document).ready(function() {
                     container = $("#container").kendoResizable({
-                        handle: '.t-resize-handle',
+                        handle: '.k-resize-handle',
                         hint: function(){
-                            return $('<div class="t-grid-resize-indicator" />').css("top", container.position().top);
+                            return $('<div class="k-grid-resize-indicator" />').css("top", container.position().top);
                         },
                         min: function(e) {
                             return e.currentTarget.data("th").position().left;
@@ -68,7 +68,7 @@
                         },
                         resizeend: function() {
                             var left = 0;
-                            $('.t-resize-handle', container).each(function () {
+                            $('.k-resize-handle', container).each(function () {
                                 left += $(this).data('th').outerWidth();
                                 $(this).css('left', left - indicatorWidth);
                             });
@@ -78,11 +78,11 @@
 
                 function init() {
                     var left = 0;
-                    container. find('.t-resize-handle').remove();
+                    container. find('.k-resize-handle').remove();
                     $("table th").each(function() {
                         left += $(this).width();
                         var th = $(this);
-                        $('<div class="t-resize-handle" />')
+                        $('<div class="k-resize-handle" />')
                         .css({
                             left: left + indicatorWidth,
                             top: container.position().top,

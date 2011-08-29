@@ -44,7 +44,7 @@
                 autocomplete.search();
 
                 input.press(kendo.keys.DOWN);
-                ok(autocomplete.ul.children().first().is(".t-state-focused"));
+                ok(autocomplete.ul.children().first().is(".k-state-focused"));
             });
 
             test("pressing up focuses the last item in the popup", function() {
@@ -56,7 +56,7 @@
                 autocomplete.search();
 
                 input.press(kendo.keys.UP);
-                ok(autocomplete.ul.children().last().is(".t-state-focused"));
+                ok(autocomplete.ul.children().last().is(".k-state-focused"));
             });
 
             test("pressing up clears the focused state from the previous item", function() {
@@ -69,7 +69,7 @@
 
                 autocomplete.current(autocomplete.ul.children().last());
                 input.press(kendo.keys.UP);
-                ok(!autocomplete.ul.children().last().is(".t-state-focused"));
+                ok(!autocomplete.ul.children().last().is(".k-state-focused"));
             });
 
             test("pressing down clears the focused state from the previous item", function() {
@@ -82,7 +82,7 @@
 
                 autocomplete.current(autocomplete.ul.children().first());
                 input.press(kendo.keys.DOWN);
-                ok(!autocomplete.ul.children().first().is(".t-state-focused"));
+                ok(!autocomplete.ul.children().first().is(".k-state-focused"));
             });
 
             test("clicking an item focuses the input", function() {
@@ -127,7 +127,7 @@
                 autocomplete.search();
                 autocomplete.ul.children().first().click();
 
-                ok(autocomplete.ul.children().first().is(".t-state-selected"));
+                ok(autocomplete.ul.children().first().is(".k-state-selected"));
             });
 
             test("changing the current popup item does not update the input value", function() {
@@ -189,7 +189,7 @@
                 input.val("b");
                 autocomplete.search();
                 autocomplete.select(autocomplete.ul.children().first());
-                ok(autocomplete.ul.children().first().is(".t-state-selected"));
+                ok(autocomplete.ul.children().first().is(".k-state-selected"));
             });
 
             test("select should accepts DOM element", function() {
@@ -200,7 +200,7 @@
                 input.val("b");
                 autocomplete.search();
                 autocomplete.select(autocomplete.ul.children().first()[0]);
-                ok(autocomplete.ul.children().first().is(".t-state-selected"));
+                ok(autocomplete.ul.children().first().is(".k-state-selected"));
             });
 
             test("moving up when there the current item is first", function() {

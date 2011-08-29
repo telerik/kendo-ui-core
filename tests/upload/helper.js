@@ -7,8 +7,8 @@ function copyUploadPrototype() {
 
 function createHTML() {
    var html = '<div id="testbed_container"><div id="prototype" style="display:none">' +
-        '<div class="t-widget t-upload">' +
-            '<div class="t-button t-upload-button">' +
+        '<div class="k-widget k-upload">' +
+            '<div class="k-button k-upload-button">' +
                 '<span>Select...</span>' +
                 '<input id="uploadPrototype" name="uploadPrototype" type="file" />' +
            '</div>' +
@@ -48,7 +48,7 @@ function getFileListMock() {
     ];
 }
 function simulateRemoveClick(fileIndex) {
-    $(".t-delete", uploadInstance.wrapper).eq(fileIndex || 0).trigger("click");
+    $(".k-delete", uploadInstance.wrapper).eq(fileIndex || 0).trigger("click");
 }
 
 function assertSelectedFile(files) {

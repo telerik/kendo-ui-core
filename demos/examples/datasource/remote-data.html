@@ -21,14 +21,14 @@
         <!-- description -->
         <div class="description">Binding to remote data</div>
         <!-- description -->
-        <div id="example" class="t-content">
+        <div id="example" class="k-content">
 
-            <div id="tweets-container" class="t-header t-menu-vertical">
+            <div id="tweets-container" class="k-header k-menu-vertical">
                 <h3>Twitter feed</h3>
 
                 <div id="search-box">
                     <label>Search for: <input type="text" value="html5" id="searchfor" /></label>
-                    <button class="t-button" id="search">search</button>
+                    <button class="k-button" id="search">search</button>
                 </div>
 
                 <div id="tweets">
@@ -37,11 +37,11 @@
             </div>
 
             <script id="template" type="text/x-kendo-template">
-                <div class="tweet t-header">
+                <div class="tweet k-header">
                     <img width="48" height="48" src="<#= profile_image_url #>" alt="<#= from_user #>" />
                     <#= text #>
                     <div class="metadata">
-                        <a class="t-link" href="http://twitter.com/<#= from_user #>" rel="nofollow"><#= from_user #></a>
+                        <a class="k-link" href="http://twitter.com/<#= from_user #>" rel="nofollow"><#= from_user #></a>
                         |
                         <#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #>
                     </div>
@@ -145,7 +145,7 @@
                     font-size: 10px;
                 }
 
-                .tweet .t-link:hover {
+                .tweet .k-link:hover {
                     text-decoration: underline;
                 }
             </style>

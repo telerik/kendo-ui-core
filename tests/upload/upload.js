@@ -26,7 +26,7 @@
 
         ok(!uploadFired);
 
-        $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+        $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
         ok(uploadFired);
     });
@@ -53,5 +53,5 @@
 
         simulateFileSelect();
 
-        equal($(".t-file", uploadInstance.wrapper).length, 0);
+        equal($(".k-file", uploadInstance.wrapper).length, 0);
     });

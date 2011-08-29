@@ -21,7 +21,7 @@
         <script>
             var ComboBox = kendo.ui.ComboBox,
             data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
-            SELECTED = "t-state-selected",
+            SELECTED = "k-state-selected",
             keys = kendo.keys,
             input;
 
@@ -30,7 +30,7 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
-                    input.append($("ul")).parent(".t-widget").remove();
+                    input.append($("ul")).parent(".k-widget").remove();
                 }
             });
 
@@ -202,7 +202,7 @@
 
                 combobox.enable(false);
 
-                ok(combobox.wrapper.hasClass('t-state-disabled'));
+                ok(combobox.wrapper.hasClass('k-state-disabled'));
                 ok(combobox.input.attr("disabled"));
                 ok(combobox.element.attr("disabled"));
             });
@@ -223,15 +223,15 @@
                 combobox.popup.toggle = oldOpen;
             });
 
-            test("enable(true) removes t-state-disabled class", function() {
+            test("enable(true) removes k-state-disabled class", function() {
                 var combobox = new ComboBox(input);
-                combobox.wrapper.addClass('t-state-disabled');
+                combobox.wrapper.addClass('k-state-disabled');
                 combobox.element.attr("disabled", true);
                 combobox.input.attr("disabled");
 
                 combobox.enable();
 
-                ok(!combobox.wrapper.hasClass('t-state-disabled'));
+                ok(!combobox.wrapper.hasClass('k-state-disabled'));
                 ok(!combobox.element.attr("disabled"));
                 ok(!combobox.input.attr("disabled"));
             });

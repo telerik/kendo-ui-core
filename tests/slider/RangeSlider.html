@@ -24,7 +24,7 @@
                     isDefaultPrevent = false;
                 },
                 teardown: function() {
-                    $(".t-slider").remove();
+                    $(".k-slider").remove();
                 }
             });
 
@@ -36,7 +36,7 @@
                 var downArrow = "40"; // down arrow
                     leftArrow = "37", // left arrow
                     rangeSlider = newRangeSlider({ selectionStart: 3, selectionEnd: 6 }),
-                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+                    dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 //left drag handle
                 dragHandles.eq(0).trigger({ type: "keydown",
@@ -94,7 +94,7 @@
                 var upArrow = "38", // up arrow
                     rightArrow = "39", // right arrow
                     rangeSlider = newRangeSlider({ selectionStart: 3, selectionEnd: 6 }),
-                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+                    dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 // left drag handle
                 dragHandles.eq(0).trigger({ type: "keydown",
@@ -151,7 +151,7 @@
             test('range slider should increase value with a large step when page up keyboard is clicked', function () {
                 var pageUp = "33", // page up
                     rangeSlider = newRangeSlider({ selectionStart: 3, selectionEnd: 6, largeStep: 3 }),
-                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+                    dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 // left drag handle
                 dragHandles.eq(0).trigger({ type: "keydown",
@@ -182,7 +182,7 @@
             test('range slider should decrease value with a large step when page down keyboard is clicked', function () {
                 var pageDown = "34", // page down
                     rangeSlider = newRangeSlider({ selectionStart: 3, selectionEnd: 6, largeStep: 3 }),
-                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+                    dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 //left drag handle
                 dragHandles.eq(0).trigger({ type: "keydown",
@@ -213,7 +213,7 @@
             test('range slider should increase value to maximum value when end keyboard is clicked', function () {
                 var end = "35", // end
                     rangeSlider = newRangeSlider({ selectionStart: 3, selectionEnd: 6 }),
-                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+                    dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 // left drag hangle
                 dragHandles.eq(0).trigger({ type: "keydown",
@@ -244,7 +244,7 @@
             test('range slider should decrease value to minimum value when home keyboard is clicked', function () {
                 var home = "36", // home
                     rangeSlider = newRangeSlider({ selectionStart: 3, selectionEnd: 6 }),
-                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+                    dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 //left drag handle
                 dragHandles.eq(0).trigger({ type: "keydown",

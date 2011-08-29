@@ -119,12 +119,12 @@ page width. Or, you can specify an exact pixel width. */
     text-align: right;
 }
 
-#menu .t-item
+#menu .k-item
 {
     border-width: 0 0 0 1px;
 }
 
-#menu .t-link
+#menu .k-link
 {
     padding: 5px 20px;
     font-weight: bold;

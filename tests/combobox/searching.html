@@ -37,7 +37,7 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
-                    input.add($("ul")).parent(".t-widget").remove();
+                    input.add($("ul")).parent(".k-widget").remove();
                 }
             });
 
@@ -51,7 +51,7 @@
                 combobox.text("b");
                 combobox.search("b");
 
-                ok(combobox.ul.children().eq(1).hasClass("t-state-focused"));
+                ok(combobox.ul.children().eq(1).hasClass("k-state-focused"));
             });
 
             test("search focus item if text number", function() {
@@ -62,7 +62,7 @@
                 combobox.text("1");
                 combobox.search("1");
 
-                ok(combobox.ul.children().eq(1).hasClass("t-state-focused"));
+                ok(combobox.ul.children().eq(1).hasClass("k-state-focused"));
             });
 
             test("search focus item if text is 0", function() {
@@ -73,7 +73,7 @@
                 combobox.text("0");
                 combobox.search("0");
 
-                ok(combobox.ul.children().eq(1).hasClass("t-state-focused"));
+                ok(combobox.ul.children().eq(1).hasClass("k-state-focused"));
             });
 
             test("focused item does not update text input value", function() {
@@ -203,7 +203,7 @@
                 combobox.open();
 
                 equal(combobox.ul.children().length, data.length);
-                ok(combobox._current.hasClass("t-state-selected"));
+                ok(combobox._current.hasClass("k-state-selected"));
             });
 
             test("rebound ul should has item selected", function() {
@@ -297,7 +297,7 @@
                     dataSource: data
                 });
 
-                combobox._current = $('<li class="t-state-selected">Test</li>');
+                combobox._current = $('<li class="k-state-selected">Test</li>');
 
                 combobox.input.val("ffff").blur();
 
@@ -334,7 +334,7 @@
                 combobox.search("f");
 
                 setTimeout(function() {
-                    ok(combobox.ul.children().eq(0).hasClass("t-state-focused"));
+                    ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
                     start();
                 }, 500);
 

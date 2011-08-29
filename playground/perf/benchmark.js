@@ -32,7 +32,7 @@
   },
 
   /**
-   * T-Distribution two-tailed critical values for 95% confidence
+   * k-Distribution two-tailed critical values for 95% confidence
    * http://www.itl.nist.gov/div898/handbook/eda/section3/eda3672.htm
    */
   T_DISTRIBUTION = {
@@ -1245,7 +1245,7 @@
    * @returns {Number} Returns `1` if smaller, `-1` if larger, and `0` if indeterminate.
    */
   function compare(other) {
-    // unpaired two-sample t-test assuming equal variance
+    // unpaired two-sample k-test assuming equal variance
     // http://en.wikipedia.org/wiki/Student's_t-test
     // http://www.chem.utoronto.ca/coursenotes/analsci/StatsTutorial/12tailed.html
     var a = this.stats,
@@ -1255,7 +1255,7 @@
         tstat = (a.mean - b.mean) / sqrt(pooled * (1 / a.size + 1 / b.size)),
         near = abs(1 - a.mean / b.mean) < 0.055 && a.RME < 3 && b.RME < 3;
 
-    // check if the means aren't close and the t-statistic is significant
+    // check if the means aren't close and the k-statistic is significant
     return !near && abs(tstat) > getCriticalValue(df) ? (tstat > 0 ? -1 : 1) : 0;
   }
 

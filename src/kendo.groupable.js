@@ -3,21 +3,21 @@
         Component = kendo.ui.Component,
         proxy = $.proxy,
         CONTAINER_EMPTY_TEXT = "Drag a column header and drop it here to group by that column",
-        indicatorTmpl = kendo.template('<div class="t-group-indicator" data-field="${data.field}" data-dir="${data.dir || "asc"}">' +
-                '<a href="#" class="t-link">' +
-                    '<span class="t-icon t-arrow-${(data.dir || "asc") == "asc" ? "up" : "down"}-small">(sorted ${(data.dir || "asc") == "asc" ? "ascending": "descending"})</span>' +
+        indicatorTmpl = kendo.template('<div class="k-group-indicator" data-field="${data.field}" data-dir="${data.dir || "asc"}">' +
+                '<a href="#" class="k-link">' +
+                    '<span class="k-icon k-arrow-${(data.dir || "asc") == "asc" ? "up" : "down"}-small">(sorted ${(data.dir || "asc") == "asc" ? "ascending": "descending"})</span>' +
                     '${data.field}' +
                 '</a>' +
-                '<a class="t-button t-button-icon t-button-bare">' +
-                    '<span class="t-icon t-group-delete"></span>' +
+                '<a class="k-button k-button-icon k-button-bare">' +
+                    '<span class="k-icon k-group-delete"></span>' +
                 '</a>' +
              '</div>',  { useWithBlock:false }),        
         hint = function(target) {
-            return $('<div class="t-header t-drag-clue" />')
+            return $('<div class="k-header k-drag-clue" />')
                 .html(target.data("field"))
-                .prepend('<span class="t-icon t-drag-status t-denied" />');
+                .prepend('<span class="k-icon k-drag-status k-denied" />');
         },
-        dropCue = $('<div class="t-grouping-dropclue"/>');    
+        dropCue = $('<div class="k-grouping-dropclue"/>');    
 
     var Groupable = Component.extend({
         init: function(element, options) {
@@ -33,17 +33,17 @@
                 .kendoDropTarget({
                     group: group,
                     dragenter: function(e) {
-                        e.draggable.hint.find(".t-drag-status").removeClass("t-denied").addClass("t-add");
+                        e.draggable.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
                         dropCue.css({top:3, left: 0}).appendTo(groupContainer);
                     },
 
                     dragleave: function(e) {
-                        e.draggable.hint.find(".t-drag-status").removeClass("t-add").addClass("t-denied");
+                        e.draggable.hint.find(".k-drag-status").removeClass("k-add").addClass("k-denied");
                         dropCue.remove();
                     }
                 })
                 .kendoDraggable({
-                    filter: "div.t-group-indicator",
+                    filter: "div.k-group-indicator",
                     hint: hint,
                     group: group,
                     dragend: function(e) {
@@ -56,15 +56,15 @@
 
                         intializePositions();
                         dropCue.css({top:3, left: left}).appendTo(groupContainer);
-                        this.hint.find(".t-drag-status").removeClass("t-denied").addClass("t-add");
+                        this.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
                     },
                     drag: proxy(that._drag, that)
                 })
-                .delegate(".t-button", "click", function(e) {
+                .delegate(".k-button", "click", function(e) {
                     e.preventDefault();
                     that._removeIndicator($(this).parent());
                 })
-                .delegate(".t-link", "click", function(e) {
+                .delegate(".k-link", "click", function(e) {
                     var current = $(this).parent(),
                         newIndicator = that.buildIndicator(current.data("field"), current.data("dir") == "asc" ? "desc" : "asc");
 
@@ -99,7 +99,7 @@
                     }
 
                     dropCue.css({top:3, left: left}).appendTo(groupContainer);
-                    this.hint.find(".t-drag-status").removeClass("t-denied").addClass("t-add");
+                    this.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
                 },
                 drag: proxy(that._drag, that)
             });
@@ -121,7 +121,7 @@
             filter: "th"
         },
         indicator: function(field) {
-            var indicators = $(".t-group-indicator", this.groupContainer);
+            var indicators = $(".k-group-indicator", this.groupContainer);
             return $.grep(indicators, function (item)
                 {
                     return $(item).data("field") === field;
@@ -131,7 +131,7 @@
             return indicatorTmpl({ field: field, dir: dir });
         },
         descriptors: function() {
-            var indicators = $(".t-group-indicator", this.groupContainer);
+            var indicators = $(".k-group-indicator", this.groupContainer);
             return $.map(indicators, function(item) {
                 item = $(item);
 
@@ -231,7 +231,7 @@
         },
         _intializePositions: function() {
             var that = this,
-                indicators = $(".t-group-indicator", that.groupContainer), 
+                indicators = $(".k-group-indicator", that.groupContainer), 
                 left;
             that._dropCuePositions = $.map(indicators, function(item) {
                 item = $(item);

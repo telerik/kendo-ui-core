@@ -23,7 +23,7 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
-                    input.closest(".t-slider").remove();
+                    input.closest(".k-slider").remove();
                 }
 
             });
@@ -34,16 +34,16 @@
 
             test("horizontal slider should apply max value", function () {
                 var slider = newSlider({ val: 10 }),
-                    trackDivWidth = slider.wrapper.find(".t-slider-track").width(),
-                    selectionDivWidth = slider.wrapper.find(".t-slider-selection").width();
+                    trackDivWidth = slider.wrapper.find(".k-slider-track").width(),
+                    selectionDivWidth = slider.wrapper.find(".k-slider-selection").width();
 
                 equal(trackDivWidth, selectionDivWidth);
             });
 
             test("height slider should apply max value", function () {
                 var slider = newSlider({ val: 10, orientation: "vertical" }),
-                    trackDivHeight = slider.wrapper.find(".t-slider-track").height(),
-                    selectionDivHeight = slider.wrapper.find(".t-slider-selection").height();
+                    trackDivHeight = slider.wrapper.find(".k-slider-track").height(),
+                    selectionDivHeight = slider.wrapper.find(".k-slider-selection").height();
 
                 equal(trackDivHeight, selectionDivHeight);
             });

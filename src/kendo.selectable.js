@@ -7,13 +7,13 @@
         MOUSEUP = touch? "touchend" : "mouseup",
         MOUSEDOWN = touch? "touchstart" : "mousedown",
         MOUSEMOVE = touch? "touchmove" : "mousemove",
-        SELECTED = "t-state-selected",
-        ACTIVE = "t-state-selecting",
-        SELECTABLE = "t-selectable",
+        SELECTED = "k-state-selected",
+        ACTIVE = "k-state-selecting",
+        SELECTABLE = "k-selectable",
         SELECTSTART = "selectstart",
         DOCUMENT = $(document),
         CHANGE = "change",
-        UNSELECTING = "t-state-unselecting";
+        UNSELECTING = "k-state-unselecting";
 
     var Selectable = Component.extend({
         init: function(element, options) {
@@ -21,7 +21,7 @@
 
             Component.fn.init.call(that, element, options);
 
-            that._marquee = $("<div class='t-marquee'></div>");
+            that._marquee = $("<div class='k-marquee'></div>");
             that._lastActive = null;
 
             that._moveDelegate = proxy(that._move, that);

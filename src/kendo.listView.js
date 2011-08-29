@@ -6,8 +6,8 @@
         keys = kendo.keys,
         FOCUSSELECTOR =  "> li",
         CHANGE = "change",
-        FOCUSED = "t-state-focused",
-        FOCUSABLE = "t-focusable",
+        FOCUSED = "k-state-focused",
+        FOCUSABLE = "k-focusable",
         DataSource = kendo.data.DataSource;
 
     var ListView = Component.extend( {

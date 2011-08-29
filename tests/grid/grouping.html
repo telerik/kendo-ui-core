@@ -30,7 +30,7 @@
                 setup: function() {
                 },
                 teardown: function() {
-                    $("div.t-grid").remove();
+                    $("div.k-grid").remove();
                 }
             });
 
@@ -39,11 +39,11 @@
                 ok(grid.groupable);
             });
 
-            test("groupable creates .t-grouping-header", function() {
+            test("groupable creates .k-grouping-header", function() {
                 var grid = new Grid(table(), { data:[], groupable: true }),
                     gridElement = grid.wrapper;
 
-                var groupingHeader = gridElement.find("div.t-grouping-header");
+                var groupingHeader = gridElement.find("div.k-grouping-header");
                 equal(groupingHeader.length, 1);
             });
 
@@ -53,7 +53,7 @@
                 });
                 grid.dataSource.group({field: "foo"});
 
-                var groupingRows = grid.tbody.find("tr.t-grouping-row");
+                var groupingRows = grid.tbody.find("tr.k-grouping-row");
                 equal(groupingRows.length, 2);
             });
 
@@ -63,7 +63,7 @@
                 });
                 grid.dataSource.group({field: "foo"});
 
-                var groupingRowCell = grid.tbody.find("tr.t-grouping-row>td:first");
+                var groupingRowCell = grid.tbody.find("tr.k-grouping-row>td:first");
                 equal(groupingRowCell.attr("colspan"), 2);
             });
 
@@ -73,11 +73,11 @@
                 });
                 grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
 
-                var groupingRows = grid.tbody.find("tr.t-grouping-row");
+                var groupingRows = grid.tbody.find("tr.k-grouping-row");
                 var groupingCells = groupingRows.find("td");
                 equal(groupingRows.length, 4);
                 equal(groupingCells.eq(0).attr("colspan"), 4);
-                ok(groupingCells.eq(1).is(".t-group-cell"));
+                ok(groupingCells.eq(1).is(".k-group-cell"));
                 equal(groupingCells.eq(2).attr("colspan"), 3);
             });
 
@@ -87,8 +87,8 @@
                 });
                 grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
 
-                var nestedGroupingRow = grid.tbody.find("tr.t-grouping-row").eq(1);
-                ok(nestedGroupingRow.find("td:first").is(".t-group-cell"));
+                var nestedGroupingRow = grid.tbody.find("tr.k-grouping-row").eq(1);
+                ok(nestedGroupingRow.find("td:first").is(".k-group-cell"));
             });
 
             test("group cells are created for every data row", function() {
@@ -97,8 +97,8 @@
                 });
                 grid.dataSource.group([{field: "foo"}]);
 
-                var dataRows = grid.tbody.find("tr:not(.t-grouping-row)").eq(0);
-                ok(dataRows.find("td:first").is(".t-group-cell"));
+                var dataRows = grid.tbody.find("tr:not(.k-grouping-row)").eq(0);
+                ok(dataRows.find("td:first").is(".k-group-cell"));
             });
 
             test("grouping scrollable grid creates header group cells", function() {
@@ -113,7 +113,7 @@
 
                 var headerCells = header.find("th");
                 equal(headerCells.length, 4);
-                ok(headerCells.is(".t-group-cell"));
+                ok(headerCells.is(".k-group-cell"));
             });
 
             test("grouping non-scrollable grid creates header group cells", function() {
@@ -128,7 +128,7 @@
 
                 var headerCells = header.find("th");
                 equal(headerCells.length, 4);
-                ok(headerCells.is(".t-group-cell"));
+                ok(headerCells.is(".k-group-cell"));
             });
 
             test("ungroup remove header group cells", function() {
@@ -162,15 +162,15 @@
                 });
 
                 grid.dataSource.group([{field: "foo"}]);
-                grid.collapseGroup(grid.tbody.find("tr.t-grouping-row:first"));
+                grid.collapseGroup(grid.tbody.find("tr.k-grouping-row:first"));
 
-                var dataRows = grid.tbody.children(":not(.t-grouping-row)");
+                var dataRows = grid.tbody.children(":not(.k-grouping-row)");
                 equal(dataRows.length, 2);
                 ok(dataRows.eq(0).is(":hidden"));
                 ok(dataRows.eq(1).is(":visible"));
             });
 
-            test("collapseGroup change button class to t-expand", function() {
+            test("collapseGroup change button class to k-expand", function() {
                 var grid = new Grid(table(), {
                     data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
                     groupable: true
@@ -178,13 +178,13 @@
                 groupingRow;
 
                 grid.dataSource.group([{field: "foo"}]);
-                groupingRow = grid.tbody.find("tr.t-grouping-row:first");
+                groupingRow = grid.tbody.find("tr.k-grouping-row:first");
                 grid.collapseGroup(groupingRow);
 
-                ok(groupingRow.find(".t-icon").hasClass("t-expand"));
+                ok(groupingRow.find(".k-icon").hasClass("k-expand"));
             });
 
-            test("expandGroup change button class to t-collapse", function() {
+            test("expandGroup change button class to k-collapse", function() {
                 var grid = new Grid(table(), {
                     data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
                     groupable: true
@@ -192,11 +192,11 @@
                 groupingRow;
 
                 grid.dataSource.group([{field: "foo"}]);
-                groupingRow = grid.tbody.find("tr.t-grouping-row:first");
+                groupingRow = grid.tbody.find("tr.k-grouping-row:first");
                 grid.collapseGroup(groupingRow);
                 grid.expandGroup(groupingRow);
 
-                ok(groupingRow.find(".t-icon").hasClass("t-collapse"));
+                ok(groupingRow.find(".k-icon").hasClass("k-collapse"));
             });
 
             test("expandGroup shows all grop data rows", function() {
@@ -207,11 +207,11 @@
                 groupingRow;
 
                 grid.dataSource.group([{field: "foo"}]);
-                groupingRow = grid.tbody.find("tr.t-grouping-row:first");
+                groupingRow = grid.tbody.find("tr.k-grouping-row:first");
                 grid.collapseGroup(groupingRow);
                 grid.expandGroup(groupingRow);
 
-                var dataRows = grid.tbody.children(":not(.t-grouping-row)");
+                var dataRows = grid.tbody.children(":not(.k-grouping-row)");
                 equal(dataRows.length, 2);
                 ok(dataRows.eq(0).is(":visible"));
                 ok(dataRows.eq(1).is(":visible"));
@@ -228,15 +228,15 @@
 
                 grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
                 tbody = grid.tbody;
-                masterGroup = tbody.find(".t-grouping-row:first");
-                subGroup = tbody.find(".t-grouping-row").eq(1);
+                masterGroup = tbody.find(".k-grouping-row:first");
+                subGroup = tbody.find(".k-grouping-row").eq(1);
 
                 grid.collapseGroup(subGroup);
                 grid.collapseGroup(masterGroup);
                 grid.expandGroup(masterGroup);
 
                 equal(tbody.find("tr:visible").length, 4);
-                ok(subGroup.find(".t-icon").hasClass("t-expand"));
+                ok(subGroup.find(".k-icon").hasClass("k-expand"));
             });
 
             test("grouping non-groupable grid updates html", function() {
@@ -248,7 +248,7 @@
                 grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
 
                 equal(grid.thead.find("th").length, 4);
-                equal(grid.wrapper.find(".t-group-cell").length, 8);
+                equal(grid.wrapper.find(".k-group-cell").length, 8);
             });
 
             test("ungrouping non-groupable grid updates html", function() {
@@ -261,7 +261,7 @@
                 grid.dataSource.group([]);
 
                 equal(grid.thead.find("th").length, 2);
-                equal(grid.wrapper.find(".t-group-cell").length, 0);
+                equal(grid.wrapper.find(".k-group-cell").length, 0);
             });
 
             test("columns are retrieved from grouped dataSource", function() {
@@ -285,8 +285,8 @@
                 grid = new Grid(table(), { dataSource: dataSource, scrollable: false });
 
                 var cols = grid.table.find("col");
-                ok(cols.eq(0).hasClass("t-group-col"));
-                ok(cols.eq(1).hasClass("t-group-col"));
+                ok(cols.eq(0).hasClass("k-group-col"));
+                ok(cols.eq(1).hasClass("k-group-col"));
             });
 
             test("colspan of group cell when grouping is disabled initial grouped grid with auto columns", function() {

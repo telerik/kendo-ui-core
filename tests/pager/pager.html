@@ -52,7 +52,7 @@
 
                 dataSource.read();
 
-                var links = ul.find("a").add(ul.find(".t-state-active"));
+                var links = ul.find("a").add(ul.find(".k-state-active"));
                 equal(links.length, 5);
                 equal(links[0].innerHTML, "1");
                 equal(links[1].innerHTML, "2");
@@ -67,7 +67,7 @@
                 dataSource.read();
 
                 var links = ul.find("a");
-                equal(ul.find(".t-state-active").data("page"), undefined);
+                equal(ul.find(".k-state-active").data("page"), undefined);
                 equal(links.eq(0).data("page"), "2");
                 equal(links.eq(1).data("page"), "3");
                 equal(links.eq(2).data("page"), "4");
@@ -80,7 +80,7 @@
                 dataSource.read();
                 dataSource.read();
 
-                var links = ul.find("a").add(ul.find(".t-state-active"));
+                var links = ul.find("a").add(ul.find(".k-state-active"));
                 equal(links.length, 5);
                 equal(links[0].innerHTML, "1");
                 equal(links[1].innerHTML, "2");
@@ -101,7 +101,7 @@
                 var ul = setup();
 
                 dataSource.read();
-                ok(ul.find("span").hasClass("t-state-active"));
+                ok(ul.find("span").hasClass("k-state-active"));
             });
 
             test("changing page raises change event passing the new index", function() {
@@ -142,7 +142,7 @@
                 var ul = setup({},{ buttonCount: 3});
 
                 dataSource.read();
-                equal(ul.find("a").add(ul.find(".t-state-active")).length, 4);
+                equal(ul.find("a").add(ul.find(".k-state-active")).length, 4);
                 equal(ul.find("a:last").data("page"), "4");
             });
 
@@ -150,7 +150,7 @@
                 var ul = setup({ page: 4 },{ buttonCount: 3});
 
                 dataSource.read();
-                equal(ul.find("a").add(ul.find(".t-state-active")).length, 3);
+                equal(ul.find("a").add(ul.find(".k-state-active")).length, 3);
                 equal(ul.find("a:first").data("page"), "3");
             });
 
@@ -200,7 +200,7 @@
                     ul = $("<ul/>").kendoPageable({ dataSource: data });
 
                 data.read();
-                equal(ul.find(".t-state-active").length, 1);
+                equal(ul.find(".k-state-active").length, 1);
             });
         </script>
     </body>

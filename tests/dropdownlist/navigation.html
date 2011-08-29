@@ -21,7 +21,7 @@
         <script>
             var DropDownList = kendo.ui.DropDownList,
                 data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
-                SELECTED = "t-state-selected",
+                SELECTED = "k-state-selected",
                 keys = kendo.keys,
                 input;
 
@@ -233,8 +233,8 @@
 
                 dropdownlist.popup.bind("close", function(){
                     equal(dropdownlist._current.index(), 1);
-                    ok(dropdownlist._current.hasClass("t-state-focused"));
-                    ok(dropdownlist._current.hasClass("t-state-selected"));
+                    ok(dropdownlist._current.hasClass("k-state-focused"));
+                    ok(dropdownlist._current.hasClass("k-state-selected"));
                     start();
                 });
 
@@ -257,8 +257,8 @@
                 dropdownlist.ul.show();
 
                 equal(dropdownlist._current.index(), 1);
-                ok(dropdownlist._current.hasClass("t-state-focused"));
-                ok(dropdownlist._current.hasClass("t-state-selected"));
+                ok(dropdownlist._current.hasClass("k-state-focused"));
+                ok(dropdownlist._current.hasClass("k-state-selected"));
             });
 
 

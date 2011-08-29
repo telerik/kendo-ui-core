@@ -23,7 +23,7 @@
         <!-- description -->
         <div class="description">Animation Effects</div>
         <!-- description -->
-        <div id="example" class="t-content">
+        <div id="example" class="k-content">
 
             <div class="configuration">
                 <span class="configHead">Configure</span>
@@ -99,13 +99,13 @@
                 $(document).ready(function() {
                     var original = $("#menu").clone(true);
 
-                    original.find(".t-state-active").removeClass("t-state-active");
+                    original.find(".k-state-active").removeClass("k-state-active");
 
                     $(".configuration input").change( function() {
                         var menu = $("#menu"),
                             clone = original.clone(true);
 
-                        menu.data("kendoMenu").close($("#menu .t-link"));
+                        menu.data("kendoMenu").close($("#menu .k-link"));
 
                         menu.replaceWith(clone);
 

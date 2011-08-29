@@ -223,7 +223,7 @@
             that.localization = that.options.localization;
 
             var activeInput = that.element;
-            that.wrapper = activeInput.closest(".t-upload");
+            that.wrapper = activeInput.closest(".k-upload");
             if (that.wrapper.length == 0) {
                 that.wrapper = that._wrapInput(activeInput);
             }
@@ -249,11 +249,11 @@
             }
 
             that.wrapper
-            .delegate(".t-upload-action", "click", $.proxy(that._onFileAction, that))
-            .delegate(".t-upload-selected", "click", $.proxy(that._onUploadSelected, that))
-            .delegate(".t-file", "t:progress", $.proxy(that._onFileProgress, that))
-            .delegate(".t-file", "t:upload-success", $.proxy(that._onUploadSuccess, that))
-            .delegate(".t-file", "t:upload-error", $.proxy(that._onUploadError, that));
+            .delegate(".k-upload-action", "click", $.proxy(that._onFileAction, that))
+            .delegate(".k-upload-selected", "click", $.proxy(that._onUploadSelected, that))
+            .delegate(".k-file", "t:progress", $.proxy(that._onFileProgress, that))
+            .delegate(".k-file", "t:upload-success", $.proxy(that._onUploadSuccess, that))
+            .delegate(".k-file", "t:upload-error", $.proxy(that._onUploadError, that));
 
             that.bind([
                 /**
@@ -452,7 +452,7 @@
          */
         toggle: function(enable) {
             enable = typeof enable === "undefined" ? enable : !enable;
-            this.wrapper.toggleClass("t-state-disabled", enable);
+            this.wrapper.toggleClass("k-state-disabled", enable);
         },
 
         _addInput: function(input) {
@@ -479,7 +479,7 @@
                 .attr("multiple", that._supportsMultiple() ? that.multiple : false)
                 .attr("autocomplete", "off")
                 .click(function(e) {
-                    if (wrapper.hasClass("t-state-disabled")) {
+                    if (wrapper.hasClass("k-state-disabled")) {
                         e.preventDefault();
                     }
                 })
@@ -505,7 +505,7 @@
             if (droppedFiles.length > 0) {
                 var prevented = that.trigger(SELECT, { files: droppedFiles });
                 if (!prevented) {
-                    $(".t-dropzone", that.wrapper).trigger("t:select", [ droppedFiles ]);
+                    $(".k-dropzone", that.wrapper).trigger("t:select", [ droppedFiles ]);
                 }
             }
         },
@@ -514,17 +514,17 @@
             var that = this,
                 existingFileEntries,
                 fileEntry,
-                fileList =  $(".t-upload-files", that.wrapper);
+                fileList =  $(".k-upload-files", that.wrapper);
 
             if (fileList.length == 0) {
-                fileList = $("<ul class='t-upload-files t-reset'></ul>").appendTo(that.wrapper);
+                fileList = $("<ul class='k-upload-files k-reset'></ul>").appendTo(that.wrapper);
                 if (!that.options.showFileList) {
                     fileList.hide();
                 }
             }
 
-            existingFileEntries = $(".t-file", fileList);
-            fileEntry = $("<li class='t-file'><span class='t-icon'></span><span class='t-filename'>" + name + "</span></li>")
+            existingFileEntries = $(".k-file", fileList);
+            fileEntry = $("<li class='k-file'><span class='k-icon'></span><span class='k-filename'>" + name + "</span></li>")
                 .appendTo(fileList)
                 .data(data);
 
@@ -536,8 +536,8 @@
         },
 
         _removeFileEntry: function(fileEntry) {
-            var fileList = fileEntry.closest(".t-upload-files");
-            if ($(".t-file", fileList).length == 1) {
+            var fileList = fileEntry.closest(".k-upload-files");
+            if ($(".k-file", fileList).length == 1) {
                 fileList.remove();
                 this._hideUploadButton();
             } else {
@@ -546,7 +546,7 @@
         },
 
         _fileAction: function(fileElement, actionKey) {
-            var classDictionary = { remove: "t-delete", cancel: "t-cancel", retry: "t-retry" };
+            var classDictionary = { remove: "k-delete", cancel: "k-cancel", retry: "k-retry" };
             if (!classDictionary.hasOwnProperty(actionKey)) {
                 return;
             }
@@ -555,7 +555,7 @@
 
             fileElement.append(
                 this._renderAction(classDictionary[actionKey], this.localization[actionKey])
-                .addClass("t-upload-action")
+                .addClass("k-upload-action")
             );
         },
 
@@ -563,38 +563,38 @@
             var localization = this.localization,
                 states = {
                     uploading: {
-                        cssClass: "t-loading",
+                        cssClass: "k-loading",
                         text : localization.statusUploading
                     },
                     uploaded: {
-                        cssClass: "t-success",
+                        cssClass: "k-success",
                         text : localization.statusUploaded
                     },
                     failed: {
-                        cssClass: "t-fail",
+                        cssClass: "k-fail",
                         text : localization.statusFailed
                     }
                 },
                 currentState = states[stateKey];
 
             if (currentState) {
-                var icon = fileEntry.children(".t-icon").text(currentState.text);
-                icon[0].className = "t-icon " + currentState.cssClass;
+                var icon = fileEntry.children(".k-icon").text(currentState.text);
+                icon[0].className = "k-icon " + currentState.cssClass;
             }
         },
 
         _renderAction: function (actionClass, actionText) {
             if (actionClass != "") {
                 return $(
-                "<button type='button' class='t-button t-button-icontext'>" +
-                    "<span class='t-icon " + actionClass + "'></span>" +
+                "<button type='button' class='k-button k-button-icontext'>" +
+                    "<span class='k-icon " + actionClass + "'></span>" +
                     actionText +
                 "</button>"
                 )
             }
             else {
                 return $(
-                "<button type='button' class='t-button'>" +
+                "<button type='button' class='k-button'>" +
                     actionText +
                 "</button>"
                 )
@@ -603,26 +603,26 @@
 
         _clearFileAction: function(fileElement) {
             fileElement
-                .find(".t-upload-action").remove();
+                .find(".k-upload-action").remove();
         },
 
         _onFileAction: function(e) {
             var that = this;
 
-            if (!that.wrapper.hasClass("t-state-disabled")) {
-                var button = $(e.target).closest(".t-upload-action"),
-                    icon = button.find(".t-icon"),
-                    fileEntry = button.closest(".t-file"),
+            if (!that.wrapper.hasClass("k-state-disabled")) {
+                var button = $(e.target).closest(".k-upload-action"),
+                    icon = button.find(".k-icon"),
+                    fileEntry = button.closest(".k-file"),
                     eventArgs = { files: fileEntry.data("fileNames") };
 
-                if (icon.hasClass("t-delete")) {
+                if (icon.hasClass("k-delete")) {
                     if (!that.trigger(REMOVE, eventArgs)) {
                         fileEntry.trigger("t:remove");
                     }
-                } else if (icon.hasClass("t-cancel")) {
+                } else if (icon.hasClass("k-cancel")) {
                     that.trigger(CANCEL, eventArgs);
                     fileEntry.trigger("t:cancel");
-                } else if (icon.hasClass("t-retry")) {
+                } else if (icon.hasClass("k-retry")) {
                     fileEntry.trigger("t:retry");
                 }
             }
@@ -636,12 +636,12 @@
         },
 
         _onFileProgress: function(e, percentComplete) {
-            var progressBar = $(".t-progress-status", e.target);
+            var progressBar = $(".k-progress-status", e.target);
             if (progressBar.length == 0) {
                 progressBar =
-                    $("<span class='t-progress'><span class='t-progress-status' style='width: 0;'></span></span>")
-                        .appendTo($(".t-filename", e.target))
-                        .find(".t-progress-status");
+                    $("<span class='k-progress'><span class='k-progress-status' style='width: 0;'></span></span>")
+                        .appendTo($(".k-filename", e.target))
+                        .find(".k-progress-status");
             }
 
             progressBar.width(percentComplete + "%");
@@ -690,18 +690,18 @@
         },
 
         _showUploadButton: function() {
-            var uploadButton = $(".t-upload-selected", this.wrapper);
+            var uploadButton = $(".k-upload-selected", this.wrapper);
             if (uploadButton.length == 0) {
                 uploadButton =
                     this._renderAction("", this.localization["uploadSelectedFiles"])
-                    .addClass("t-upload-selected");
+                    .addClass("k-upload-selected");
             }
 
             this.wrapper.append(uploadButton);
         },
 
         _hideUploadButton: function() {
-            $(".t-upload-selected", this.wrapper).remove();
+            $(".k-upload-selected", this.wrapper).remove();
         },
 
         _onParentFormSubmit: function() {
@@ -723,7 +723,7 @@
         },
 
         _onParentFormReset: function() {
-            $(".t-file", this.wrapper).trigger("t:remove");
+            $(".k-file", this.wrapper).trigger("t:remove");
         },
 
         _supportsFormData: function() {
@@ -748,10 +748,10 @@
         },
 
         _setupDropZone: function() {
-            $(".t-upload-button", this.wrapper)
-                .wrap("<div class='t-dropzone'></div>");
+            $(".k-upload-button", this.wrapper)
+                .wrap("<div class='k-dropzone'></div>");
 
-            var dropZone = $(".t-dropzone", this.wrapper)
+            var dropZone = $(".k-dropzone", this.wrapper)
                 .append($("<em>" + this.localization["dropFilesHere"] + "</em>"))
                 .bind({
                     "dragenter": stopEvent,
@@ -760,12 +760,12 @@
                 });
 
             bindDragEventWrappers(dropZone,
-                function() { dropZone.addClass("t-dropzone-hovered"); },
-                function() { dropZone.removeClass("t-dropzone-hovered"); });
+                function() { dropZone.addClass("k-dropzone-hovered"); },
+                function() { dropZone.removeClass("k-dropzone-hovered"); });
 
             bindDragEventWrappers($(document),
-                function() { dropZone.addClass("t-dropzone-active"); },
-                function() { dropZone.removeClass("t-dropzone-active"); });
+                function() { dropZone.addClass("k-dropzone-active"); },
+                function() { dropZone.removeClass("k-dropzone-active"); });
         },
 
         _supportsRemove: function() {
@@ -792,15 +792,15 @@
         },
 
         _wrapInput: function(input) {
-            input.wrap("<div class='t-widget t-upload'><div class='t-button t-upload-button'></div></div>");
-            input.closest(".t-button")
+            input.wrap("<div class='k-widget k-upload'><div class='k-button k-upload-button'></div></div>");
+            input.closest(".k-button")
                 .append("<span>" + this.localization.select + "</span>");
 
-            return input.closest(".t-upload");
+            return input.closest(".k-upload");
         },
 
         _checkAllComplete: function() {
-            if ($(".t-file .t-icon.t-loading", this.wrapper).length == 0) {
+            if ($(".k-file .k-icon.k-loading", this.wrapper).length == 0) {
                 this.trigger(COMPLETE);
             }
         }
@@ -930,7 +930,7 @@
         onSaveSelected: function(e) {
             var module = this;
 
-            $(".t-file", this.element).each(function() {
+            $(".k-file", this.element).each(function() {
                 var fileEntry = $(this),
                     started = isFileUploadStarted(fileEntry);
 
@@ -1156,7 +1156,7 @@
         onSaveSelected: function(e) {
             var module = this;
 
-            $(".t-file", this.element).each(function() {
+            $(".k-file", this.element).each(function() {
                 var fileEntry = $(this),
                     started = isFileUploadStarted(fileEntry);
 
@@ -1180,7 +1180,7 @@
         onRemove: function(e) {
             var fileEntry = getFileEntry(e);
 
-            if (fileEntry.children(".t-icon").is(".t-success")) {
+            if (fileEntry.children(".k-icon").is(".k-success")) {
                 removeUploadedFile(fileEntry, this.upload);
             } else {
                 this.removeFileEntry(fileEntry);
@@ -1244,7 +1244,7 @@
                 $.each(relatedInput.data("relatedFileEntries"), function() {
                     // Exclude removed file entries and self
                     if (this.parent().length > 0 && this[0] != fileEntry[0]) {
-                        uploadComplete = uploadComplete && this.children(".t-icon").is(".t-success");
+                        uploadComplete = uploadComplete && this.children(".k-icon").is(".k-success");
                     }
                 });
 
@@ -1391,7 +1391,7 @@
     }
 
     function isFileUploadStarted(fileEntry) {
-        return fileEntry.children(".t-icon").is(".t-loading, .t-success, .t-fail");
+        return fileEntry.children(".k-icon").is(".k-loading, .k-success, .k-fail");
     }
 
     function logToConsole(message) {
@@ -1401,7 +1401,7 @@
     }
 
     function getFileEntry(e) {
-        return $(e.target).closest(".t-file");
+        return $(e.target).closest(".k-file");
     }
 
     function getAntiForgeryTokens() {

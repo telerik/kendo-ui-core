@@ -72,27 +72,27 @@
                 }
             });
 
-            test("disable renders t-state-disabled class", function () {
+            test("disable renders k-state-disabled class", function () {
                 uploadInstance.disable();
-                ok(uploadInstance.wrapper.hasClass("t-state-disabled"));
+                ok(uploadInstance.wrapper.hasClass("k-state-disabled"));
             });
 
-            test("enable removes t-state-disabled class", function () {
+            test("enable removes k-state-disabled class", function () {
                 uploadInstance.disable();
                 uploadInstance.enable();
-                ok(!uploadInstance.wrapper.hasClass("t-state-disabled"));
+                ok(!uploadInstance.wrapper.hasClass("k-state-disabled"));
             });
 
             test("initially disabled state is applied", function () {
                 uploadInstance = createUpload({ enabled: false });
-                ok(uploadInstance.wrapper.hasClass("t-state-disabled"));
+                ok(uploadInstance.wrapper.hasClass("k-state-disabled"));
             });
 
             test("toggle alternates between states", function() {
                 uploadInstance.toggle();
-                ok(uploadInstance.wrapper.hasClass("t-state-disabled"));
+                ok(uploadInstance.wrapper.hasClass("k-state-disabled"));
                 uploadInstance.toggle();
-                ok(!uploadInstance.wrapper.hasClass("t-state-disabled"));
+                ok(!uploadInstance.wrapper.hasClass("k-state-disabled"));
             });
 
             // -----------------------------------------------------------------------------------
@@ -108,50 +108,50 @@
             });
 
             test("drop zone is rendered when supported by the browser", function() {
-                equal($("> .t-dropzone", uploadInstance.wrapper).length, 1);
+                equal($("> .k-dropzone", uploadInstance.wrapper).length, 1);
             });
 
             test("drop zone is not rendered when not supported by the browser", function() {
                 Upload.prototype._supportsDrop = function() { return false; };
                 uploadInstance = createUpload();
 
-                equal($("> .t-dropzone", uploadInstance.wrapper).length, 0);
+                equal($("> .k-dropzone", uploadInstance.wrapper).length, 0);
             });
 
             test("drop zone label is rendered", function() {
-                equal($("> .t-dropzone > em", uploadInstance.wrapper).length, 1);
+                equal($("> .k-dropzone > em", uploadInstance.wrapper).length, 1);
             });
 
             test("drop zone label text is rendered", function() {
-                equal($("> .t-dropzone > em", uploadInstance.wrapper).text(), "drop files here to upload");
+                equal($("> .k-dropzone > em", uploadInstance.wrapper).text(), "drop files here to upload");
             });
 
             test("drop zone is not active initially", function() {
-                equal($(".t-dropzone-active", uploadInstance.wrapper).length, 0);
+                equal($(".k-dropzone-active", uploadInstance.wrapper).length, 0);
             });
 
-            test("t-dropzone-active is rendered when dragging over the document", function() {
+            test("k-dropzone-active is rendered when dragging over the document", function() {
                 $(document).trigger("dragenter");
-                equal($(".t-dropzone-active", uploadInstance.wrapper).length, 1);
+                equal($(".k-dropzone-active", uploadInstance.wrapper).length, 1);
             });
 
-            asyncTest("t-dropzone-active is removed when dragging out of the document", function() {
+            asyncTest("k-dropzone-active is removed when dragging out of the document", function() {
                 $(document).trigger("dragenter");
                 setTimeout(function() {
-                    equal($(".t-dropzone-active", uploadInstance.wrapper).length, 0);
+                    equal($(".k-dropzone-active", uploadInstance.wrapper).length, 0);
                     start();
                 }, 250);
             });
 
-            test("t-dropzone-hovered is rendered when dragging over the zone", function() {
-                $(".t-dropzone").trigger("dragenter");
-                equal($(".t-dropzone-hovered", uploadInstance.wrapper).length, 1);
+            test("k-dropzone-hovered is rendered when dragging over the zone", function() {
+                $(".k-dropzone").trigger("dragenter");
+                equal($(".k-dropzone-hovered", uploadInstance.wrapper).length, 1);
             });
 
-            asyncTest("t-dropzone-hovered is removed when dragging out of the zone", function() {
-                $(".t-dropzone").trigger("dragenter");
+            asyncTest("k-dropzone-hovered is removed when dragging out of the zone", function() {
+                $(".k-dropzone").trigger("dragenter");
                 setTimeout(function() {
-                    equal($(".t-dropzone-hovered", uploadInstance.wrapper).length, 0);
+                    equal($(".k-dropzone-hovered", uploadInstance.wrapper).length, 0);
                     start();
                 }, 250);
             });
@@ -172,19 +172,19 @@
             });
 
             test("should render wrapper div", function() {
-                equals($("#cc > div.t-widget.t-upload").length, 1);
+                equals($("#cc > div.k-widget.k-upload").length, 1);
             });
 
             test("should render upload button", function() {
-                equals($("#cc > .t-upload > div.t-button.t-upload-button").length, 1);
+                equals($("#cc > .k-upload > div.k-button.k-upload-button").length, 1);
             });
 
             test("should render upload button text", function() {
-                equals($("#cc > .t-upload > .t-button span").text(), "Select...");
+                equals($("#cc > .k-upload > .k-button span").text(), "Select...");
             });
 
             test("should wrap input", function() {
-                equals($("#cc > .t-upload > .t-button > input").length, 1);
+                equals($("#cc > .k-upload > .k-button > input").length, 1);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
