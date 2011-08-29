@@ -233,7 +233,7 @@
                 increment = that._isHorizontal ? 1 : -1;
 
             for (; i - limit != 0 ; i += increment) {
-                $(items[i]).attr("title", kendo.format(options.tooltip.format, round(titleNumber, PRECISION)));
+                $(items[i]).attr("title", kendo.format(options.tooltip.format, round(titleNumber)));
                 titleNumber += options.smallStep;
             }
         },
@@ -244,18 +244,18 @@
                 i,
                 items = that.wrapper.find(TICK_SELECTOR),
                 item = {},
-                step = round(options.largeStep / options.smallStep, PRECISION);
+                step = round(options.largeStep / options.smallStep);
 
             if ((1000 * options.largeStep) % (1000 * options.smallStep) == 0) {
                 if (that._isHorizontal) {
-                    for (i = 0; i < items.length; i = round(i + step, PRECISION)) {
+                    for (i = 0; i < items.length; i = round(i + step)) {
                         item = $(items[i]);
 
                         item.addClass("t-tick-large")
                             .html("<span class='t-label'>" + item.attr("title") + "</span>");
                     }
                 } else {
-                    for (i = items.length - 1; i >= 0; i = round(i - step, PRECISION)) {
+                    for (i = items.length - 1; i >= 0; i = round(i - step)) {
                         item = $(items[i]);
 
                         item.addClass("t-tick-large")
@@ -372,7 +372,7 @@
 
             for (i = 0; i < that._pixelSteps.length; i++) {
                 if (math.abs(that._pixelSteps[i] - position) - 1 <= halfStep) {
-                    return round(that._values[i], PRECISION);
+                    return round(that._values[i]);
                 }
             }
         },
@@ -440,7 +440,7 @@
 
     function createSliderItems (options, distance) {
         var result = "<ul class='t-reset t-slider-items'>",
-            count = math.floor(round(distance / options.smallStep, PRECISION)) + 1;
+            count = math.floor(round(distance / options.smallStep)) + 1;
 
         for(i = 0; i < count; i++) {
             result += "<li class='t-tick'>&nbsp;</li>";
@@ -472,10 +472,18 @@
         }
     }
 
-    function round(value, precision) {
+    function formatValue(value) {
+        return (value + "").replace(".", kendo.cultures.current.numberFormat["."]);
+    }
+
+    function parseValue(value) {
+        return (value + "").replace(kendo.cultures.current.numberFormat["."], ".");
+    }
+
+    function round(value) {
         value = parseFloat(value, 10);
-        var power = Math.pow(10, precision || 0);
-        return Math.round(value * power) / power;
+        var power = math.pow(10, PRECISION || 0);
+        return math.round(value * power) / power;
     }
 
     var Slider = SliderBase.extend(/** @lends kendo.ui.Slider.prototype */{
@@ -531,16 +539,20 @@
          * @option {String} [decreaseButtonTitle] <Decrease> The title of the decrease button of the slider.
          */
         init: function(element, options) {
-            var that = this;
+            options = options || {};
+            var that = this,
+                value = options.val;
+            value = (isNaN(value)) ?
+                    parseValue($(element).val()) || 0 :
+                    value;
+            options.val = round(value);
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
-
-            that._setValueInRange(that.options.val);
-
+            that._setValueInRange(options.val);
             var dragHandle = that.wrapper.find(DRAG_HANDLE);
 
-            new Slider.Selection(dragHandle, that, that.options);
-            that._drag = new Slider.Drag(dragHandle, "", that, that.options);
+            new Slider.Selection(dragHandle, that, options);
+            that._drag = new Slider.Drag(dragHandle, "", that, options);
         },
 
         options: {
@@ -706,14 +718,14 @@
             var that = this,
                 options = that.options;
 
-            val = round(val, PRECISION);
+            val = round(val);
             if (isNaN(val)) {
                 return options.val;
             }
 
             if (val >= options.min && val <= options.max) {
                 if (options.val != val) {
-                    that.element.val(val);
+                    that.element.attr("value", formatValue(val));
                     options.val = val;
                     that.refresh();
                 }
@@ -742,7 +754,7 @@
             var that = this,
                 options = that.options;
 
-            val = round(val, PRECISION);
+            val = round(val);
             if (isNaN(val)) {
                 that._update(options.min);
                 return;
@@ -765,7 +777,7 @@
             dragHandle.css(that._position, selection - halfDragHanndle);
         }
 
-        moveSelection(that.value());
+        moveSelection(options.val);
 
         that.bind([CHANGE, SLIDE, MOVE_SELECTION], function (e) {
                                                        moveSelection(parseFloat(e.value, 10));
@@ -1025,10 +1037,17 @@
          * @option {Number} [largeStep] <5> The delta with which the value will change when the user presses the Page Up or Page Down key (the drag handle must be focused). Note that the allied largeStep will also set large ticks for every large step.
          */
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                inputs = $(element).find("input");
+            options = options || {};
+            options.selectionStart = isNaN(options.selectionStart) ?
+                            round(parseValue(inputs.eq(0).val())) || undefined :
+                            round(options.selectionStart);
+            options.selectionEnd = isNaN(options.selectionEnd) ?
+                            round(parseValue(inputs.eq(1).val())) || undefined :
+                            round(options.selectionEnd);
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
-
             that._setValueInRange(options.selectionStart, options.selectionEnd);
 
             var dragHandles = that.wrapper.find(DRAG_HANDLE);
@@ -1201,17 +1220,17 @@
                 selectionStart = arguments[0][0];
                 selectionEnd = arguments[0][1];
             } else {
-                selectionStart = round(arguments[0], PRECISION);
-                selectionEnd = round(arguments[1], PRECISION);
+                selectionStart = round(arguments[0]);
+                selectionEnd = round(arguments[1]);
             }
 
             if (selectionStart >= options.min && selectionStart <= options.max
             && selectionEnd >= options.min && selectionEnd <= options.max && selectionStart <= selectionEnd) {
                 if (options.selectionStart != selectionStart || options.selectionEnd != selectionEnd) {
                     that.element.find("input")
-                                .eq(0).val(selectionStart)
+                                .eq(0).attr("value", formatValue(selectionStart))
                                 .end()
-                                .eq(1).val(selectionEnd);
+                                .eq(1).attr("value", formatValue(selectionEnd));
 
                     options.selectionStart = selectionStart;
                     options.selectionEnd = selectionEnd;
