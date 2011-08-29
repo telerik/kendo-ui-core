@@ -83,15 +83,17 @@
             });
 
             test("changing input value triggers change event", function() {
-                var triggered = false;
+                var eventArgs,
+                    color = "#f11f11";
 
-                colorPicker.data("kendoColorPicker").bind("change", function() {
-                    triggered = true;
+                colorPicker.data("kendoColorPicker").bind("change", function(e) {
+                    eventArgs = e;
                 });
 
-                colorPicker.trigger("change");
+                colorPicker.val(color).trigger("change");
 
-                ok(triggered);
+                ok(eventArgs);
+                equals(color, eventArgs.color);
             });
        </script>
 

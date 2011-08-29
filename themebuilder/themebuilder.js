@@ -78,7 +78,9 @@
                 that.bind([ CHANGE ], that.options);
             },
             _change: function(e) {
-                this.trigger(CHANGE);
+                this.trigger(CHANGE, {
+                    color: $(e.target).val()
+                });
             }
         }),
         ThemeBuilder = kendo.Observable.extend({
