@@ -20,7 +20,7 @@
 
             module("RangeSlider/RangeSlider", {
                 setup: function () {
-                    div = $("<div><input /><input /></div>").appendTo(document.body);
+                    div = $("<div><input value='1' /><input value='5' /></div>").appendTo(document.body);
                     isDefaultPrevent = false;
                 },
                 teardown: function() {
@@ -269,6 +269,13 @@
 
                 ok(isDefaultPrevent);
                 deepEqual(rangeSlider.values(), [ 0, 0 ]);
+            });
+
+            test("rangeSlider should get values from the inputs", function () {
+                var rangeSlider = newRangeSlider();
+
+                equal(rangeSlider.options.selectionStart, 1);
+                equal(rangeSlider.options.selectionEnd, 5);
             });
 
         </script>

@@ -20,7 +20,7 @@
 
             module("Slider/Slider", {
                 setup: function () {
-                    input = $("<input />").appendTo(document.body);
+                    input = $("<input value='1' />").appendTo(document.body);
                     isDefaultPrevent = false;
                 },
                 teardown: function() {
@@ -245,6 +245,12 @@
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
 
                 equal(value, 0.5);
+            });
+
+            test("slider should get value from the input", function () {
+                var slider = newSlider();
+
+                equal(slider.value(), 1);
             });
 
         </script>
