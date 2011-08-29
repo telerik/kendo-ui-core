@@ -28,7 +28,7 @@ function makeVMLCanvas(id, pixelWidth, pixelHeight) {
 }
 
 /* Draw a pie chart in a VML canvas */
-function pieChart(canvas, data, cx, cy, r, colors, labels, lx, ly) {
+function pieChart(canvas, data, cx, cy, r, colors, labels) {
     // Get the canvas element if specified by id
     if (typeof canvas == "string") canvas = document.getElementById(canvas);
 
@@ -46,8 +46,8 @@ function pieChart(canvas, data, cx, cy, r, colors, labels, lx, ly) {
     startangle = 90;  // Start at 12 o'clock.
     for(var i = 0; i < data.length; i++) {
         // Tweak the angles so that our pie goes clockwise from 12 o'clock.
-        var sa = Math.round(startangle * 65535);
-        var a = -Math.round(angles[i] * 65535);
+        var sa = -Math.round((startangle + 180) * 65535);
+        var a = -Math.round(angles[i] * 65536);
 
         // Create a VML shape element
         var wedge = document.createElement("v:shape");
@@ -57,6 +57,7 @@ function pieChart(canvas, data, cx, cy, r, colors, labels, lx, ly) {
             r + " " + r + " " +              // Horiz and vertical radii
             sa + " " + a +                   // Start angle and total angle
             " X E";                          // Close path to center and end
+
         wedge.setAttribute("path", path);            // Set wedge shape
         wedge.setAttribute("fillcolor", colors[i]);  // Set wedge color
         // Position the wedge using CSS styles.  The coordinates of the
@@ -65,23 +66,20 @@ function pieChart(canvas, data, cx, cy, r, colors, labels, lx, ly) {
         wedge.style.position = "absolute";
         wedge.style.width = canvas.style.width;
         wedge.style.height = canvas.style.height;
-
         // Add the wedge to the canvas
         canvas.appendChild(wedge);
 
         // Next wedge begins where this one ends
-        startangle -= angles[i];
-        console.log(startangle);
+        startangle += angles[i];
     }
 }
 
 function init() {
     var canvas = makeVMLCanvas("canvas", 600, 400);
     document.body.appendChild(canvas);
-    pieChart(canvas, [12, 23, 34, 45], 200, 200, 150,
+    pieChart(canvas, [25, 25, 50], 200, 200, 150,
              ["red", "blue", "yellow", "green"],
-             ["North", "South", "East", "West"],
-             400, 100);
+             ["North", "South", "East", "West"]);
 }
 </script>
 </head>
