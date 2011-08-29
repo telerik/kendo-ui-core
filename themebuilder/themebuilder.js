@@ -37,6 +37,9 @@
                 properties: [ properties.bgColor, properties.brdColor, properties.color ]
             }
         },
+        themeTemplate = "* > .t-header, * > .t-grid-header, * > .t-toolbar, * > .t-dropdown-wrap, * > .t-grouping-header, * > .t-tooltip, * > .t-grid-pager {" +
+                        "    background-color: $t-widget-background-color;" +
+                        "}",
         colorPickerTemplate = kendo.template(
             "<# var id = primitive + \":\" + property.property; #>" +
             "<label for='<#= id #>'><#= property.label #></label> <input id='<#= id #>' class='t-input' />"
@@ -116,7 +119,9 @@
             open: function() {
                 this.content.data("kendoWindow").open();
             },
-            _propertyChange: function() {
+            /// TODO: test this; make themeTemplate mockable
+            _propertyChange: function(e) {
+                this.updateStyleSheet(themeTemplate.replace(/\$t-widget-background-color/g, e.color));
             },
             updateStyleSheet: function(cssText) {
                 var doc = document,
