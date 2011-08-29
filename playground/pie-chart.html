@@ -9,16 +9,6 @@
     </head>
     <body>
     <?xml version="1.0" standalone="no" ?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
-"http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
-<!---
-<svg width="400" height="400">
-
-<path d="M1.5 1.5 L399.5 1.5 L399.5 399.5 L1.5 399.5 L1.5 1.5" fill="#fff" stroke="red" stroke-width="1" />
-<path d="M20,200 A180,180 0 0,1 57.954708308649145,89.4417117158598 L200 200 z" style="fill: red; stroke: black; stroke-width: 1"/>
-</svg>
--->
-
     <script type="text/javascript">
         var data = [
             {
@@ -42,11 +32,23 @@
                 },
                 series: [{
                     name: "World",
-                    data: [15.7, 16.7, 20, 23.5, 26.6]
-                }]
+                    data: [25, 15, 30, 20, 5, 20]
+                }],
+                plotArea: {
+                    border: {
+                        width: 1,
+                        color: "black"
+                    }
+                },
+                chartArea: {
+                    border: {
+                        width: 1,
+                        color: "black"
+                    }
+                }
             });
         });
-
+/*
         $(document).ready(function() {
             var angles = [],
                 data = [12, 23, 34, 45];
@@ -64,16 +66,17 @@
 
 
             for (var i = 0; i < angles.length; i ++) {
-                var angle = angles[i],
+                var angle = 90,
                     radianAngle = angle * (Math.PI / 180),
-                    r = 200,
+                    r = 180,
                     ax = Math.cos(radianAngle),
                     ay = Math.sin(radianAngle),
                     x = r - (ax * 180),
                     y = r - (ay * 180);
-                //console.log(x, ",", y);
+                console.log("angle:", angle, "=", "x=", x, ",", "y=", y);
             }
         });
+*/
     </script>
 
     <div id="container" style="width: 600px; height: 400px; float: left; margin-left: 100px;">

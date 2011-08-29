@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+            var Chart = kendo.ui.Chart,
+                Box2D = Chart.Box2D,
+                chartBox = new Box2D(0, 0, 800, 600),
+                plotArea,
+                lineChart,
+                root,
+                view;
+
+            function setupLineChart(plotArea, options) {
+                view = new ViewStub();
+
+                lineChart = new Chart.LineChart(plotArea, options);
+
+                root = new Chart.RootElement();
+                root.append(lineChart);
+
+                lineChart.reflow();
+                lineChart.getViewElements(view);
+            }
+
+            (function() {
+                var positiveSeries = { data: [1, 2], labels: {} },
+                    negativeSeries = { data: [-1, -2], labels: {} },
+                    sparseSeries = { data: [1, 2, undefined, 2] },
+                    VALUE_AXIS_MAX = 2,
+                    CATEGORY_AXIS_Y = 2,
+                    TOLERANCE = 0.1;
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    axisX: {
+                        getSlot: function(categoryIndex) {
+                            return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
+                            categoryIndex + 1, CATEGORY_AXIS_Y);
+                        }
+                    },
+                    axisY: {
+                        getSlot: function(value) {
+                            var value = typeof value === "undefined" ? 0 : value,
+                                valueY = VALUE_AXIS_MAX - value,
+                                slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
+                                slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+
+                            return new Box2D(0, slotTop, 0, slotBottom);
+                        },
+                        options: {}
+                    },
+                    options: {
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
+                    }
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Positive Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, { series: [ positiveSeries ] });
+                    }
+                });
+
+                test("Creates points for lineChart data points", function() {
+                    equal(lineChart.points.length, positiveSeries.data.length);
+                });
+
+                test("Reports minimum series value", function() {
+                    same(lineChart.valueRange().min, positiveSeries.data[0]);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(lineChart.valueRange().max, positiveSeries.data[1]);
+                });
+
+                test("Reports number of categories", function() {
+                    setupLineChart(plotArea, {series: [ positiveSeries ]});
+                    equal(lineChart.categoriesCount(), positiveSeries.data.length);
+                });
+
+                test("points are distributed across category axis", function() {
+                    var pointsX = $.map(lineChart.points, function(point) {
+                        return point.box.x1;
+                    });
+
+                    same(pointsX, [0, 1]);
+                });
+
+                test("points are aligned to category axis", function() {
+                    var pointsY = $.map(lineChart.points, function(point) {
+                        return point.box.y2;
+                    });
+
+                    same(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                });
+
+                test("points have set width", function() {
+                    $.each(lineChart.points, function() {
+                        equal(this.box.width(), 1);
+                    });
+                });
+
+                test("points have set height according to value", function() {
+                    var pointHeights = $.map(lineChart.points, function(point) {
+                        return point.box.height();
+                    });
+
+                    same(pointHeights, [1, 2]);
+                });
+
+                test("getSeriesPoint returns nearest series point", function() {
+                    var point = lineChart.points[1],
+                        result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2, 0);
+
+                    ok(result === point);
+                });
+
+                test("sets point owner", function() {
+                    ok(lineChart.points[0].owner === lineChart);
+                });
+
+                test("sets point series", function() {
+                    ok(lineChart.points[0].series === positiveSeries);
+                });
+
+                test("sets point series index", function() {
+                    ok(lineChart.points[0].seriesIx === 0);
+                });
+
+                test("sets point category", function() {
+                    equal(lineChart.points[0].category, "A");
+                });
+
+                test("sets point dataItem", function() {
+                    equal(typeof lineChart.points[0].dataItem, "object");
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Negative Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, { series: [ negativeSeries ] });
+                    }
+                });
+
+                test("Reports minimum series value", function() {
+                    same(lineChart.valueRange().min, negativeSeries.data[1]);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(lineChart.valueRange().max, negativeSeries.data[0]);
+                });
+
+                test("point tops are aligned to category axis", function() {
+                    var pointsY = $.map(lineChart.points, function(point) {
+                        return point.box.y1;
+                    });
+
+                    same(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                });
+
+                test("points have set height according to value", function() {
+                    var pointHeights = $.map(lineChart.points, function(point) {
+                        return point.box.height();
+                    });
+
+                    same(pointHeights, [1, 2]);
+                });
+
+                test("getSeriesPoint returns nearest series point", function() {
+                    var point = lineChart.points[1],
+                        result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2, 0);
+
+                    ok(result === point);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Multiple Series", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, { series: [ negativeSeries, positiveSeries ] });
+                    }
+                });
+
+                test("Reports number of categories for two series", function() {
+                    setupLineChart(plotArea, {series: [ positiveSeries, negativeSeries ]});
+                    equal(lineChart.categoriesCount(), positiveSeries.data.length);
+                });
+
+                test("getSeriesPoint returns nearest series point", function() {
+                    var point = lineChart.points[1],
+                        result = lineChart.getSeriesPoint(point.box.x2, point.box.y2 + 100, 1);
+
+                    ok(result === point);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Mismatched series", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, {
+                        series: [ { data: [1, 2, 3] },
+                                  positiveSeries
+                            ]
+                        });
+                    }
+                });
+
+                test("Reports minimum series value", function() {
+                    same(lineChart.valueRange().min, 1);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(lineChart.valueRange().max, 3);
+                });
+
+                test("Reports number of categories", function() {
+                    equal(lineChart.categoriesCount(), 3);
+                });
+
+                test("getSeriesPoint returns nearest series point", function() {
+                    var point = lineChart.points[3],
+                        result = lineChart.getSeriesPoint(point.box.x2 + 100, point.box.y2, 1);
+
+                    ok(result === point);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Missing values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, {
+                            series: [ sparseSeries ]
+                        });
+                    }
+                });
+
+                test("Reports minimum series value", function() {
+                    same(lineChart.valueRange().min, 1);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(lineChart.valueRange().max, 2);
+                });
+
+                test("omits missing points by default", function() {
+                    equals(lineChart.points[2], null);
+                });
+
+                test("omits missing points when interpolating", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "interpolate" }, sparseSeries)
+                        ]
+                    });
+
+                    equals(lineChart.points[2], null);
+                });
+
+                test("missing points are assumed to be 0", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "zero" }, sparseSeries)
+                        ]
+                    });
+
+                    equals(lineChart.points[2].value, 0);
+                });
+
+                test("getSeriesPoint returns nearest series point (left)", function() {
+                    var point = lineChart.points[1],
+                        result = lineChart.getSeriesPoint(point.box.x2 + 0.1, point.box.y2, 0);
+
+                    ok(result === point);
+                });
+
+                test("getSeriesPoint returns nearest series point (right)", function() {
+                    var point = lineChart.points[3],
+                        result = lineChart.getSeriesPoint(point.box.x1 - 0.1, point.box.y1, 0);
+
+                    ok(result === point);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Stack / Positive Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, {
+                            series: [ positiveSeries, positiveSeries, positiveSeries ],
+                            isStacked: true }
+                        );
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(lineChart.valueRange().min, 1);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(lineChart.valueRange().max, 6);
+                });
+
+                test("point plot values are stacked", function() {
+                    same(
+                        $.map(lineChart.points, function(point) { return point.plotValue }),
+                        [1, 2, 3, 2, 4, 6]
+                    );
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Stack / Negative Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, {
+                            series: [ negativeSeries, negativeSeries, negativeSeries ],
+                            isStacked: true
+                        });
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(lineChart.valueRange().min, -6);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(lineChart.valueRange().max, -1);
+                });
+
+                test("point plot values are stacked", function() {
+                    same(
+                        $.map(lineChart.points, function(point) { return point.plotValue }),
+                        [-1, -2, -3, -2, -4, -6]
+                    );
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Stack / Mixed Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, {
+                            series: [{
+                                data: [2, 2],
+                                labels: {}
+                            }, {
+                                data: [-1, -1],
+                                labels: {}
+                            }],
+                            isStacked: true
+                        });
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(lineChart.valueRange().min, 1);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(lineChart.valueRange().max, 2);
+                });
+
+                test("points have set height according to stack value", function() {
+                    var pointHeights = $.map(lineChart.points, function(point) {
+                        return point.box.height();
+                    });
+
+                    same(pointHeights, [2, 1, 2, 1]);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Stack / Mixed Series", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, {
+                            series: [ positiveSeries, negativeSeries ],
+                            isStacked: true
+                        });
+                    }
+                });
+
+                test("reports stacked minumum value", function() {
+                    equal(lineChart.valueRange().min, 0);
+                });
+
+                test("reports stacked maximum value", function() {
+                    equal(lineChart.valueRange().max, 2);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Stack / Missing values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, {
+                            series: [ sparseSeries, sparseSeries ],
+                            isStacked: true
+                        });
+                    }
+                });
+
+                test("Reports minimum series value", function() {
+                    same(lineChart.valueRange().min, 1);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(lineChart.valueRange().max, 4);
+                });
+
+                test("missing points are assumed to be 0 by default", function() {
+                    equals(lineChart.points[4].value, 0);
+                });
+
+                test("ignores interpolate option", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "interpolate" }, sparseSeries)
+                        ],
+                        isStacked: true
+                    });
+
+                    equals(lineChart.points[2].value, 0);
+                });
+
+                test("ignores gap option", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "gap" }, sparseSeries)
+                        ],
+                        isStacked: true
+                    });
+
+                    equals(lineChart.points[2].value, 0);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Rendering", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupLineChart(plotArea, {
+                            series: [
+                                $.extend({
+                                        width: 4,
+                                        color: "#cf0",
+                                        opacity: 0.5
+                                    },
+                                    positiveSeries
+                                )
+                            ]
+                        });
+                    }
+                });
+
+                test("sets line width", function() {
+                    equals(view.log.path[0].style.strokeWidth, 4);
+                });
+
+                test("sets line color", function() {
+                    equals(view.log.path[0].style.stroke, "#cf0");
+                });
+
+                test("sets line opacity", function() {
+                    equals(view.log.path[0].style.strokeOpacity, 0.5);
+                });
+
+                test("registers line with root", function() {
+                    ok(root.idMap[view.log.path[0].style.id] === lineChart);
+                });
+
+                test("registers line metadata", function() {
+                    ok(root.idMapMetadata[view.log.path[0].style.id].seriesIx === 0);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Rendering / Missing Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                    }
+                });
+
+                test("line stops before missing value", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            sparseSeries
+                        ]
+                    });
+
+                    same(view.log.path[0].points, [
+                        [ 0.5, 2 ], [ 1.5, 2 ]
+                    ]);
+                });
+
+                test("no line is created for isolated points", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            sparseSeries
+                        ]
+                    });
+
+                    equals(view.log.path.length, 1);
+                });
+
+                test("line continues after missing value", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            { data: [ null, 1, 2] }
+                        ]
+                    });
+
+                    same(view.log.path[0].points, [
+                        [ 1.5, 2 ], [ 2.5, 2 ]
+                    ]);
+                });
+
+                test("line is drawn between existing points", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "interpolate" }, sparseSeries)
+                        ]
+                    });
+
+                    same(view.log.path[0].points, [
+                        [ 0.5, 2 ], [ 1.5, 2 ], [ 3.5, 2 ]
+                    ]);
+                });
+
+                test("line goes to zero for missing point", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "zero" }, sparseSeries)
+                        ]
+                    });
+
+                    same(view.log.path[0].points, [
+                        [ 0.5, 2 ], [ 1.5, 2 ], [ 2.5, 2 ], [ 3.5, 2 ]
+                    ]);
+                });
+
+            })();
+
+            (function() {
+                var lineChart,
+                    MARGIN = PADDING = BORDER = 5,
+                    linePoint;
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    axisX: {
+                        getSlot: function(value) {
+                            return new Box2D();
+                        }
+                    },
+                    axisY: {
+                        getSlot: function(categoryIndex) {
+                            return new Box2D();
+                        }
+                    },
+                    options: {
+                        categoryAxis: { }
+                    }
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Configuration", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        lineChart = new Chart.LineChart(plotArea, {
+                            series: [{
+                                data: [0, 1],
+                                color: "#f00",
+                                markers: {
+                                    visible: false,
+                                    size: 10,
+                                    type: "triangle",
+                                    border: {
+                                        color: "marker-border",
+                                        width: BORDER
+                                    }
+                                },
+                                labels: {
+                                    visible: false,
+                                    color: "labels-color",
+                                    background: "labels-background",
+                                    border: {
+                                        color: "labels-border",
+                                        width: BORDER
+                                    },
+                                    margin: MARGIN,
+                                    padding: PADDING
+                                },
+                                opacity: 0.5,
+                                dashType: "dot"
+                            }]
+                        });
+                        linePoint = lineChart.points[0];
+                    }
+                });
+
+                test("applies visible to point markers", function() {
+                    equal(linePoint.options.markers.visible, false);
+                });
+
+                test("applies series fill color to point markers", function() {
+                    equal(linePoint.options.markers.background, "#f00");
+                });
+
+                test("applies series opacity color to point markers", function() {
+                    equal(linePoint.options.markers.opacity, 0.5);
+                });
+
+                test("applies size to point markers", function() {
+                    equal(linePoint.options.markers.size, 10);
+                });
+
+                test("applies type to point markers", function() {
+                    equal(linePoint.options.markers.type, "triangle");
+                });
+
+                test("applies border color to point markers", function() {
+                    equal(linePoint.options.markers.border.color, "marker-border");
+                });
+
+                test("applies border width to point markers.", function() {
+                    equal(linePoint.options.markers.border.width, BORDER);
+                });
+
+                test("applies visible to point labels", function() {
+                    equal(linePoint.options.labels.visible, false);
+                });
+
+                test("applies color to point labels", function() {
+                    equal(linePoint.options.labels.color, "labels-color");
+                });
+
+                test("applies background to point labels", function() {
+                    equal(linePoint.options.labels.background, "labels-background");
+                });
+
+                test("applies border color to point labels", function() {
+                    equal(linePoint.options.labels.border.color, "labels-border");
+                });
+
+                test("applies border width to point labels", function() {
+                    equal(linePoint.options.labels.border.width, BORDER);
+                });
+
+                test("applies padding to point labels", function() {
+                    equal(linePoint.options.labels.padding, PADDING);
+                });
+
+                test("applies margin to point labels", function() {
+                    equal(linePoint.options.labels.margin, MARGIN);
+                });
+
+                test("applies margin to point labels", function() {
+                    equal(linePoint.options.dashType, "dot");
+                });
+
+            })();
+
+            (function() {
+                var LinePoint = Chart.LinePoint,
+                    point,
+                    box,
+                    marker,
+                    label,
+                    root,
+                    VALUE = 1,
+                    CATEGORY = "A",
+                    SERIES_NAME = "series";
+
+                function createPoint(options) {
+                    point = new LinePoint(VALUE, options);
+
+                    point.category = CATEGORY;
+                    point.dataItem = { value: VALUE };
+                    point.series = { name: SERIES_NAME };
+
+                    box = new Box2D(0, 0, 100, 100);
+                    point.reflow(box);
+
+                    root = new Chart.RootElement();
+                    root.append(point);
+
+                    marker = point.marker;
+                    label = point.label;
+                }
+
+                // ------------------------------------------------------------
+                module("Line Point", {
+                    setup: function() {
+                        createPoint();
+                    }
+                });
+
+                test("fills target box", function() {
+                    sameBox(point.box, box);
+                });
+
+                test("creates marker", function() {
+                    ok(marker instanceof Chart.BoxElement);
+                });
+
+                test("sets marker width", function() {
+                    createPoint({ markers: { size: 10 } });
+                    equals(marker.options.width, 10);
+                });
+
+                test("sets marker height", function() {
+                    createPoint({ markers: { size: 10 } });
+                    equals(marker.options.height, 10);
+                });
+
+                test("sets marker background color", function() {
+                    same(marker.options.background, point.options.markers.background);
+                });
+
+                test("sets default marker border color based on background", function() {
+                    createPoint({ markers: { background: "#cf0" } });
+                    equals(marker.options.border.color, "#8fb300");
+                });
+
+                test("does not change marker border color if set", function() {
+                    createPoint({ markers: { border: { color: "" } } });
+                    equals(marker.options.border.color, "");
+                });
+
+                test("sets marker border width", function() {
+                    createPoint({ markers: { border: { width: 4 } } });
+                    equals(marker.options.border.width, 4);
+                });
+
+                test("sets marker visibility", function() {
+                    createPoint({ markers: { visible: false }});
+                    equals(marker.options.visible, false);
+                });
+
+                test("sets marker shape type", function() {
+                    createPoint({ markers: { type: "triangle" }});
+                    equal(marker.options.type, "triangle");
+                });
+
+                test("marker is positioned at top", function() {
+                    createPoint({ isVertical: true, aboveAxis: true });
+                    sameBox(marker.box, new Box2D(46, -4, 54, 4));
+                });
+
+                test("marker is positioned at bottom", function() {
+                    createPoint({ isVertical: true, aboveAxis: false });
+                    sameBox(marker.box, new Box2D(46, 96, 54, 104));
+                });
+
+                test("marker is positioned at right", function() {
+                    createPoint({ isVertical: false, aboveAxis: true });
+                    sameBox(marker.box, new Box2D(96, 46, 104, 54));
+                });
+
+                test("marker is positioned at left", function() {
+                    createPoint({ isVertical: false, aboveAxis: false });
+                    sameBox(marker.box, new Box2D(-4, 46, 4, 54));
+                });
+
+                test("sets marker opacity", function() {
+                    createPoint({ markers: { opacity: 0.5 }});
+                    same(marker.options.opacity, point.options.markers.opacity);
+                });
+
+                test("sets marker id", function() {
+                    ok(marker.options.id.length > 0);
+                });
+
+                test("registers id with root", function() {
+                    createPoint();
+                    var view = new ViewStub();
+                    point.getViewElements(view);
+                    ok(root.idMap[marker.options.id] === point);
+                });
+
+                test("getOutlineElement returns marker outline", function() {
+                    createPoint({ markers: { type: "circle" }});
+                    view = new ViewStub();
+
+                    point.getOutlineElement(view);
+                    equals(view.log.circle.length, 1);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Point / Labels", {
+                    setup: function() {
+                        createPoint({ labels: { visible: true } });
+                    }
+                });
+
+                test("sets label text", function() {
+                    equals(label.children[0].content, VALUE);
+                });
+
+                test("applies label format", function() {
+                    createPoint({ labels: { visible: true, format: "{0}%" }});
+                    equals(label.children[0].content, VALUE + "%");
+                });
+
+                test("sets label color", function() {
+                    createPoint({ labels: { visible: true, color: "#cf0" }});
+                    same(label.options.color, "#cf0");
+                });
+
+                test("sets label background", function() {
+                    createPoint({ labels: { visible: true, background: "#cf0" }});
+                    same(label.options.background, "#cf0");
+                });
+
+                test("sets label border color", function() {
+                    createPoint({ labels: { visible: true, border: { color: "#cf0" } }});
+                    same(label.options.border.color, "#cf0");
+                });
+
+                test("sets label border width", function() {
+                    createPoint({ labels: { visible: true, border: { width: 4 } }});
+                    same(label.options.border.width, 4);
+                });
+
+                test("sets label font", function() {
+                    createPoint({ labels: { visible: true, font: "12px comic-sans" }});
+                    same(label.options.font, "12px comic-sans");
+                });
+
+                test("sets default left margin", function() {
+                    same(label.options.margin.left, 5);
+                });
+
+                test("sets default right margin", function() {
+                    same(label.options.margin.right, 5);
+                });
+
+                test("labels are not visible by default", function() {
+                    createPoint();
+                    equals(typeof label, "undefined");
+                });
+
+                test("sets label visibility", function() {
+                    equals(label.options.visible, true);
+                });
+
+                test("label is positioned above marker", function() {
+                    createPoint({ labels: { visible: true, position: "above" } });
+                    sameBox(label.box, new Box2D(41, -20, 59, -4));
+                });
+
+                test("label is positioned below marker", function() {
+                    createPoint({ labels: { visible: true, position: "below" } });
+                    sameBox(marker.box, new Box2D(46, -4, 54, 4));
+                });
+
+                test("label is positioned right of marker", function() {
+                    createPoint({ labels: { visible: true, position: "right" } });
+                    sameBox(marker.box, new Box2D(46, -4, 54, 4));
+                });
+
+                test("label is positioned left of marker", function() {
+                    createPoint({ labels: { visible: true, position: "left" } });
+                    sameBox(marker.box, new Box2D(46, -4, 54, 4));
+                });
+
+                // ------------------------------------------------------------
+                module("Line Point / Labels / Template");
+
+                test("renders template", function() {
+                    createPoint({ labels: { visible: true, template: "${value}%" } });
+                    equals(label.children[0].content, VALUE + "%");
+                });
+
+                test("renders template even when format is set", function() {
+                    createPoint({ labels: { visible: true, template: "${value}%", format:"{0:C}" } });
+                    equals(label.children[0].content, VALUE + "%");
+                });
+
+                test("template has category", function() {
+                    createPoint({ labels: { visible: true, template: "${category}" } });
+                    equals(point.children[1].children[0].content, CATEGORY);
+                });
+
+                test("template has dataItem", function() {
+                    createPoint({ labels: { visible: true, template: "${dataItem.value}" } });
+                    equals(point.children[1].children[0].content, VALUE);
+                });
+
+                test("template has series", function() {
+                    createPoint({ labels: { visible: true, template: "${series.name}" } });
+                    equals(point.children[1].children[0].content, SERIES_NAME);
+                });
+            })();
+
+            (function() {
+                var data = [{
+                        name: "Category A",
+                        text: "Alpha",
+                        value: 0
+                    }],
+                    chart;
+
+                // ------------------------------------------------------------
+                module("Line Chart / Integration", {
+                    setup: function() {
+                        $("#container").kendoChart({
+                            dataSource: {
+                                data: data
+                            },
+                            seriesDefaults: {
+                                labels: {
+                                    visible: true,
+                                    template: "${dataItem.text}"
+                                }
+                            },
+                            series: [{
+                                name: "Value",
+                                type: "line",
+                                field: "value"
+                            }],
+                            categoryAxis: {
+                                field: "name"
+                            }
+                        });
+
+                        chart = $("#container").data("kendoChart");
+                        label = chart._plotArea.charts[0].points[0].children[1];
+                    },
+                    teardown: function() {
+                        $("#container").empty();
+                    }
+                });
+
+                test("dataItem sent to label template", function() {
+                    equal(label.children[0].content, "Alpha");
+                });
+
+            })();
+
+            (function() {
+                var ShapeElement = Chart.ShapeElement,
+                    SIZE = 5,
+                    BORDER = 2,
+                    BORDER_COLOR = "#cf0",
+                    BACKGROUND = "#f00",
+                    shape,
+                    box,
+                    view;
+
+                function createShape(options) {
+                    shape = new ShapeElement(
+                        $.extend({
+                            width: SIZE,
+                            height: SIZE
+                        },
+                           options
+                        )
+                    );
+
+                    box = new Box2D(0, 0, SIZE, SIZE);
+                    shape.reflow(box);
+
+                    view = new ViewStub();
+                    shape.getViewElements(view);
+                }
+
+                // ------------------------------------------------------------
+                module("ShapeElement", {
+                    setup: function() {
+                        createShape();
+                    }
+                });
+
+                test("renders square", function() {
+                    var square = view.log.rect[0];
+                    same([square.x1, square.y1, square.x2, square.y2],
+                         [0, 0, SIZE, SIZE]);
+                });
+
+                test("renders triangle", function() {
+                    createShape({ type: "triangle" });
+                    same(view.log.path[0].points, [[SIZE / 2, 0], [0, SIZE], [SIZE, SIZE]]);
+                });
+
+                test("renders circle", function() {
+                    createShape({ type: "circle" });
+                    var circle = view.log.circle[0];
+                    same(circle.center, [SIZE / 2, SIZE / 2]);
+                    same(circle.radius, SIZE / 2);
+                });
+
+                test("renders id", function() {
+                    createShape({ id: "id" });
+                    equals(view.log.rect[0].style.id, "id");
+                });
+
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container">
+        </div>
+    </body>
+</html>

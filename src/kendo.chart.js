@@ -1261,7 +1261,9 @@
                 model.append(new Legend(legendOptions));
             }
 
-            plotArea = chart._plotArea = new PlotArea(chart.options);
+            //plotArea = chart._plotArea = new PlotArea(chart.options);
+            //Should remove this!
+            plotArea = chart._plotArea = new PiePlotArea(chart.options);
             model.append(plotArea);
             model.reflow();
 
@@ -3572,15 +3574,15 @@
             if (labels.visible) {
                 point.label = new TextBox(labelText,
                     deepExtend({
-                    id: uniqueId(),
-                    align: CENTER,
-                    vAlign: CENTER,
-                    margin: {
-                        left: 5,
-                        right: 5
-                    }
+                        id: uniqueId(),
+                        align: CENTER,
+                        vAlign: CENTER,
+                        margin: {
+                            left: 5,
+                            right: 5
+                        }
                     }, labels)
-            );
+                );
                 point.append(point.label);
             }
         },
@@ -3797,6 +3799,90 @@
         }
     });
 
+    var PiePiece = ChartElement.extend({
+        init: function(value, options) {
+            var piece = this;
+
+            piece.value = value;
+
+            ViewElement.fn.init.call(piece, options);
+        },
+
+        options: {
+            labels: {
+                visible: false
+            }
+        },
+
+        render: function() {
+            var piece = this,
+                options = piece.options,
+                labels = options.labels,
+                labelText = piece.value;
+
+            if (piece._rendered) {
+                return;
+            } else {
+                piece._rendered = true;
+            }
+
+            if (labels.template) {
+                var labelTemplate = baseTemplate(labels.template);
+                labelText = labelTemplate({
+                    dataItem: piece.dataItem,
+                    category: piece.category,
+                    value: piece.value,
+                    series: piece.series
+                });
+            }
+
+            if (labels.visible) {
+                piece.label = new TextBox(labelText,
+                    deepExtend({
+                        id: uniqueId(),
+                        align: CENTER,
+                        vAlign: CENTER,
+                        margin: {
+                            left: 5,
+                            right: 5
+                        }
+                    }, labels)
+                );
+
+                piece.append(piece.label);
+            }
+        },
+
+        reflow: function(targetBox) {
+            var piece = this,
+                options = piece.options,
+                childBox;
+
+            piece.render();
+
+            piece.box = targetBox;
+            childBox = targetBox.clone();
+
+            piece.reflowLabel(childBox);
+        },
+
+        reflowLabel: function(box) {
+            var piece = this,
+                options = piece.options,
+                label = piece.label;
+
+            if (label) {
+                label.reflow(box);
+            }
+        },
+
+        getViewElements: function(view) {
+            var element = this;
+
+            return ChartElement.fn.getViewElements.call(element, view);
+        }
+    });
+
     var PieChart = ChartElement.extend({
         init: function(plotArea, options) {
             var chart = this;
@@ -3804,8 +3890,12 @@
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
-
+            chart.pieces = [];
+            chart.seriesPoints = [];
             chart.render();
+        },
+
+        options: {
         },
 
         render: function() {
@@ -3822,81 +3912,237 @@
                 categoriesCount = chart.categoriesCount(),
                 categoryIx,
                 seriesIx,
-                startAngle,
-                totalAngle;
+                currentSeries,
+                startAngle = 90,
+                totalAngle,
+                angles,
+                data,
+                sum;
 
+            //should refactor this
             for (categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
                 for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                    debugger;
-                    currentCategory = categories[categoryIx];
                     currentSeries = series[seriesIx];
-                    value = currentSeries.data[categoryIx];
-
-                    callback(value, currentCategory, categoryIx, currentSeries, seriesIx);
+                    data = currentSeries.data;
+                    sum = chart.sum(data);
+                    angles = chart.angles(data, sum);
+                    currentCategory = categories[categoryIx];
+                    value = data[categoryIx];
+                    callback(value, startAngle, angles[categoryIx],
+                             currentCategory, categoryIx, currentSeries, seriesIx);
+                    startAngle += angles[categoryIx];
                 }
             }
+        },
+
+        sum: function(data) {
+            var length = data.length,
+                sum = 0,
+                i;
+
+            for(i = 0; i < length; i++) {
+                sum += data[i];
+            }
+
+            return sum;
+        },
+
+        angles: function(data, total) {
+            var length = data.length,
+                angles = [],
+                i;
+
+            for(i = 0; i < length; i++) {
+                angles[i] = data[i] * (360 / total);
+            }
+
+            return angles;
         },
 
         categoriesCount: function() {
             var chart = this,
                 series = chart.options.series,
-                categories = 0;
+                categories = 0,
+                length = series.length,
+                i;
 
-            for (var i = 0, length = series.length; i < length; i++) {
-                categories = Math.max(categories, series[i].data.length);
+            for (i = 0; i < length; i++) {
+                categories = math.max(categories, series[i].data.length);
             }
 
             return categories;
         },
 
-        addValue: function(value, category, categoryIx, series, seriesIx) {
+        addValue: function(value, startAngle, angle, category, categoryIx, series, seriesIx) {
             var chart = this,
-                point,
-                categoryPoints = chart.categoryPoints[categoryIx],
-                seriesPoints = chart.seriesPoints[seriesIx];
-debugger;
-            point = chart.createPoint(value, category, categoryIx, series, seriesIx);
-            chart.points.push(point);
+                piece;
+
+            piece = new PiePiece(value, series);
+
+            if (piece) {
+                piece.category = category;
+                piece.series = series;
+                piece.seriesIx = seriesIx;
+                piece.owner = chart;
+                piece.dataItem = series.dataItems ?
+                    series.dataItems[categoryIx] : { value: value };
+                piece.startAngle = startAngle;
+                piece.angle = angle;
+            }
+
+            chart.append(piece);
+            chart.pieces.push(piece);
         },
 
-        createPoint: function(value, category, categoryIx, series, seriesIx) {
+        reflow: function(targetBox) {
             var chart = this,
                 options = chart.options,
-                plotValue = 0;
+                box = targetBox.clone(),
+                width = box.width(),
+                height = box.height(),
+                minWidth = math.min(width, height),
+                newBox = new Box2D(box.x1, box.y1, box.x1 + minWidth, box.y1 + minWidth),
+                newBoxCenter = newBox.center(),
+                boxCenter = box.center(),
+                pieces = chart.pieces,
+                count = pieces.length,
+                piece,
+                i;
 
-            var point = new PiePoint(value, series);
+            newBox.translate(boxCenter.x - newBoxCenter.x, boxCenter.y - newBoxCenter.y);
 
-            chart.append(point);
+            for (i = 0; i < count; i++) {
+                piece = pieces[i];
+                piece.radius = minWidth / 2;
+                piece.reflow(newBox);
+            }
 
-            return point;
+            chart.box = newBox;
         },
 
         getViewElements: function(view) {
             var chart = this,
                 options = chart.options,
-                points = options.series[0],
-                pointIx,
-                pointCount = points.length,
-                pieces = [];
+                elements = CategoricalChart.fn.getViewElements.call(chart, view),
+                pieces = chart.pieces,
+                pieceCount = pieces.length,
+                piece,
+                i;
 
-            for (pointIx = 0; pointIx < pointCount; pointIx++) {
-
+            for (i = 0; i < pieceCount; i++) {
+                piece = pieces[i];
+                elements.push(chart.createPie(view, piece));
             }
 
-            return pieces.concat(elements);
+            return elements;
         },
 
         createPie: function (view, piece, series, seriesIx) {
             var pieId = uniqueId();
             this.registerId(pieId, { seriesIx: seriesIx });
-            return view.createCurve(points, {
+            return view.createPie(piece, {
                 id: pieId,
-                stroke: series.color,
-                strokeWidth: series.width,
-                strokeOpacity: series.opacity,
-                fill: "",
-                dashType: series.dashType
+                fill: "#660741",
+                strokeWidth: 3,
+                stroke: "#fff"
             });
+        }
+    });
+
+    var PiePlotArea = ChartElement.extend({
+        init: function(options) {
+            var plotArea = this;
+            ChartElement.fn.init.call(plotArea, options);
+
+            plotArea.render();
+        },
+
+        options: {
+            categoryAxis: { },
+            valueAxis: { },
+            series: [ ],
+            plotArea: {
+                margin: {}
+            },
+            background: "",
+            border: {
+                color: BLACK,
+                width: 0
+            }
+        },
+
+        render: function() {
+            var plotArea = this,
+                options = plotArea.options,
+                charts = plotArea.charts = [],
+                categories = options.categoryAxis.categories,
+                i,
+                series = options.series,
+                seriesLength = series.length,
+                currentSeries,
+                pieSeries = [],
+                pieChart,
+                categoriesToAdd;
+
+            for (i = 0; i < seriesLength; i++) {
+                currentSeries = series[i];
+
+                if (currentSeries.type === PIE) {
+                    pieSeries.push(currentSeries);
+                }
+            }
+
+            if (pieSeries.length > 0) {
+                pieChart = new PieChart(plotArea, {
+                    series: pieSeries
+                });
+
+                //categoriesToAdd = math.max(0, lineChart.categoriesCount() - categories.length);
+                //append(options.categoryAxis.categories, new Array(categoriesToAdd));
+
+                charts.push(pieChart);
+            }
+
+            plotArea.append.apply(plotArea, charts);
+        },
+
+        reflow: function(targetBox) {
+            var plotArea = this,
+                charts = plotArea.charts,
+                options = plotArea.options.plotArea,
+                margin = getSpacing(options.margin),
+                plotAreaBox = targetBox.clone(),
+                i;
+
+            plotAreaBox.unpad(margin);
+
+            for (i = 0; i < charts.length; i++) {
+                charts[i].reflow(plotAreaBox);
+            }
+
+            plotArea.box = plotAreaBox;
+        },
+
+        getViewElements: function(view) {
+            var plotArea = this,
+                options = plotArea.options.plotArea,
+                childElements = ChartElement.fn.getViewElements.call(plotArea, view),
+                border = options.border || {},
+                elements = [
+                    view.createRect(plotArea.box, {
+                        fill: options.background,
+                        zIndex: -1
+                    }),
+                    view.createRect(plotArea.box, {
+                        stroke: border.width ? border.color : "",
+                        strokeWidth: border.width,
+                        fill: "",
+                        zIndex: 0,
+                        dashType: border.dashType
+                    })
+                ];
+
+            return [].concat(childElements, elements);
         }
     });
 
@@ -3935,10 +4181,8 @@ debugger;
                 currentSeries,
                 barSeries = [],
                 lineSeries = [],
-                pieSeries = [],
                 barChart,
                 lineChart,
-                pieChart,
                 categoriesToAdd,
                 firstSeries;
 
@@ -3966,7 +4210,7 @@ debugger;
                     });
 
                 categoriesToAdd = math.max(0, barChart.categoriesCount() - categories.length);
-                append(options.categoryAxis.categories, [ categoriesToAdd ]);
+                append(options.categoryAxis.categories, new Array(categoriesToAdd));
 
                 range = barChart.valueRange() || range;
                 charts.push(barChart);
@@ -3982,7 +4226,7 @@ debugger;
                 });
 
                 categoriesToAdd = math.max(0, lineChart.categoriesCount() - categories.length);
-                append(options.categoryAxis.categories, [ categoriesToAdd ]);
+                append(options.categoryAxis.categories, new Array(categoriesToAdd));
 
                 var lineChartRange = lineChart.valueRange() || range;
                 range.min = math.min(range.min, lineChartRange.min);
@@ -3990,19 +4234,9 @@ debugger;
                 charts.push(lineChart);
             }
 
-            if (pieSeries.length > 0) {
-                pieChart = new PieChart(plotArea, {
-                    series: pieSeries
-                });
-
-                charts.push(pieChart);
-            }
-
             plotArea.append.apply(plotArea, charts);
 
-            if (pieSeries.length == 0) {
-                plotArea.createAxes(range.min, range.max, invertAxes);
-            }
+            plotArea.createAxes(range.min, range.max, invertAxes);
         },
 
         createAxes: function(seriesMin, seriesMax, invertAxes) {
@@ -4032,22 +4266,21 @@ debugger;
                 axisY = plotArea.axisY,
                 axisX = plotArea.axisX,
                 options = plotArea.options.plotArea,
-                margin = getSpacing(options.margin);
+                margin = getSpacing(options.margin),
+                plotAreaBox = targetBox.clone(),
+                i;
 
-            plotArea.box = targetBox.clone();
-            plotArea.box.unpad(margin);
-            axisY.reflow(plotArea.box);
-            axisX.reflow(plotArea.box);
+            plotAreaBox.unpad(margin);
+            axisY.reflow(plotAreaBox);
+            axisX.reflow(plotAreaBox);
 
             plotArea.alignAxes();
 
-            var axisBox = axisY.box.clone().wrap(axisX.box);
-
-            var overflowY = axisBox.height() - plotArea.box.height();
-            var overflowX = axisBox.width() - plotArea.box.width();
-
-            var offsetX = plotArea.box.x1 - axisBox.x1;
-            var offsetY = plotArea.box.y1 - axisBox.y1;
+            var axisBox = axisY.box.clone().wrap(axisX.box),
+                overflowY = axisBox.height() - plotAreaBox.height(),
+                overflowX = axisBox.width() - plotAreaBox.width(),
+                offsetX = plotAreaBox.x1 - axisBox.x1,
+                offsetY = plotAreaBox.y1 - axisBox.y1;
 
             axisY.reflow(
                 axisY.box.translate(offsetX, offsetY).shrink(0, overflowY)
@@ -4059,13 +4292,15 @@ debugger;
 
             plotArea.alignAxes();
 
-            for (var i = 0; i < charts.length; i++) {
-                charts[i].reflow(plotArea.box);
+            for (i = 0; i < charts.length; i++) {
+                charts[i].reflow(plotAreaBox);
             }
+
             var lineBoxX = axisX.getAxisLineBox(),
                 lineBoxY = axisY.getAxisLineBox();
 
-            plotArea.box = lineBoxX.clone().wrap(lineBoxY);
+            plotAreaBox = lineBoxX.clone().wrap(lineBoxY);
+            plotArea.box = plotAreaBox;
         },
 
         alignAxes: function() {
@@ -4096,14 +4331,17 @@ debugger;
                 lineEnd = boundaries.pop(),
                 linePos,
                 majorTicks = axis.getMajorTickPositions(),
-                gridLines = [];
+                gridLines = [],
+                gridLine = function (pos, options) {
+                    return {
+                        pos: pos,
+                        options: options
+                    };
+                };
 
                 if (options.majorGridLines.visible) {
                     gridLines = map(majorTicks, function(pos) {
-                                    return {
-                                        pos: pos,
-                                        options: options.majorGridLines
-                                    };
+                                    return gridLine(pos, options.majorGridLines);
                                 });
                 }
 
@@ -4112,16 +4350,10 @@ debugger;
                         map(axis.getMinorTickPositions(), function(pos) {
                             if (options.majorGridLines.visible) {
                                 if (!inArray(pos, majorTicks)) {
-                                    return {
-                                        pos: pos,
-                                        options: options.minorGridLines
-                                    };
+                                    return gridLine(pos, options.minorGridLines);
                                 }
                             } else {
-                                return {
-                                    pos: pos,
-                                    options: options.minorGridLines
-                                };
+                                return gridLine(pos, options.minorGridLines);
                             }
                         }
                     ));
@@ -4132,8 +4364,8 @@ debugger;
                             strokeWidth: line.options.width,
                             stroke: line.options.color,
                             dashType: line.options.dashType
-                        }
-                    linePos = round(line.pos);
+                        },
+                        linePos = round(line.pos);
 
                     if (secAxisPos === linePos) {
                         return null;
@@ -4396,6 +4628,10 @@ debugger;
             return new SVGCircle(center, radius, options);
         },
 
+        createPie: function(piece, options) {
+            return new SVGPie(piece, options);
+        },
+
         createGradient: function(options) {
             return new SVGLinearGradient(options);
         },
@@ -4546,7 +4782,6 @@ debugger;
         }
     });
 
-
     var SVGLine = SVGPath.extend({
         init: function(points, closed, options) {
             var line = this;
@@ -4594,6 +4829,106 @@ debugger;
                 align = shouldAlign ? alignToPixel : math.round;
 
             return align(point.x) + " " + align(point.y);
+        }
+    });
+
+    var SVGPie = ViewElement.extend({
+        init: function(piece, options) {
+            var pie = this;
+            ViewElement.fn.init.call(pie, options);
+
+            pie.template = SVGPie.template;
+            if (!pie.template) {
+                pie.template = SVGPie.template = template(
+                    "<path <#= d.renderAttr(\"id\", d.options.id) #>" +
+                    "d='<#= d.renderPath() #>' " +
+                    "<#= d.renderStroke() #><#= d.renderStrokeWidth() #>" +
+                    "fill-opacity='<#= d.options.fillOpacity #>' " +
+                    "stroke-opacity='<#= d.options.strokeOpacity #>' " +
+                    "stroke-linecap='<#= d.options.strokeLineCap #>' " +
+                    "fill='<#= d.options.fill || \"none\" #>'></path>"
+                );
+            }
+
+            pie.piece = piece || [];
+        },
+
+        options: {
+            fill: "",
+            fillOpacity: 1,
+            strokeOpacity: 1,
+            strokeLineCap: "square"
+        },
+
+        clone: function() {
+            var pie = this;
+            return new SVGPie(pie.piece, deepExtend({}, pie.options));
+        },
+
+        renderPath: function() {
+            var pie = this,
+                piece = pie.piece,
+                strokeWidth = pie.options.strokeWidth,
+                shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
+                startAngle = piece.startAngle,
+                angle = piece.angle,
+                endAngle = piece.angle + startAngle,
+                radius = piece.radius,
+                margin = radius * 0.1,
+                lineEndPoint = pie.calculatePoint(startAngle, radius, margin),
+                curveEndPoint = pie.calculatePoint(endAngle, radius, margin),
+                box = piece.box;
+
+            return "M" + (lineEndPoint.x + box.x1) + " " + (lineEndPoint.y + box.y1) +
+                   " A" + (radius - margin) + " " + (radius - margin) +
+                   " 0 0,1 " + (curveEndPoint.x + box.x1) + " " + (curveEndPoint.y + box.y1) +
+                   " L" + (radius + box.x1) + " " + (radius + box.y1) + " z";
+        },
+
+        calculatePoint: function(angle, r, margin) {
+            var radianAngle = angle * (math.PI / 180),
+                ax = math.cos(radianAngle),
+                ay = math.sin(radianAngle),
+                x = r - (ax * (r - margin)),
+                y = r - (ay * (r - margin));
+
+            return { x: x, y: y };
+        },
+
+        renderStrokeWidth: function () {
+            var path = this,
+                options = path.options;
+
+            return options.strokeWidth > 0 ? "stroke-width='" + options.strokeWidth + "' " : "";
+        },
+
+        renderStroke: function () {
+            var path = this,
+                options = path.options;
+
+            return options.stroke ? "stroke='" + options.stroke + "' " : "";
+        },
+
+        renderDashType: function () {
+            var path = this,
+                options = path.options,
+                result = [],
+                dashType = options.dashType ? options.dashType.toLowerCase() : null,
+                dashTypeArray,
+                i;
+
+            if (dashType && dashType != "solid" && options.strokeWidth) {
+                dashTypeArray = SVG_DASH_TYPE[dashType];
+                for (i = 0; i < dashTypeArray.length; i++) {
+                    result.push(dashTypeArray[i] * options.strokeWidth);
+                }
+
+                options.strokeLineCap = "butt";
+
+                return "stroke-dasharray='" + result.join(" ") + "' ";
+            }
+
+            return "";
         }
     });
 
@@ -4827,6 +5162,10 @@ debugger;
             return new VMLCircle(center, radius, options);
         },
 
+        createPie: function(piece, options) {
+            return new VMLPie(piece, options);
+        },
+
         createGroup: function(options) {
             return this.decorate(
                 new VMLGroup(options)
@@ -4992,6 +5331,50 @@ debugger;
 
         _print: function(point) {
             return math.round(point.x) + "," + math.round(point.y);
+        }
+    });
+
+    var VMLPie = ViewElement.extend({
+        init: function(piece, options) {
+            var pie = this;
+            ViewElement.fn.init.call(pie, options);
+
+            pie.template = VMLPie.template;
+            if (!pie.template) {
+                pie.template = VMLPie.template = template(
+                    "<kvml:shape <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "style='position:absolute; width:1px; height:1px;' " +
+                    "coordorigin='0 0' coordsize='1 1'>" +
+                        "<kvml:path v='<#= d.renderPath() #> X E' />" +
+                        "<#= d.fill.render() + d.stroke.render() #>" +
+                    "</kvml:shape>"
+                );
+            }
+
+            pie.piece = piece;
+            pie.stroke = new VMLStroke(pie.options);
+            pie.fill = new VMLFill(pie.options);
+        },
+
+        options: {
+            fill: ""
+        },
+
+        renderPath: function() {
+            var pie = this,
+                piece = pie.piece,
+                box = piece.box,
+                radius = piece.radius,
+                r = round(radius - (radius * 0.1)),
+                cx = round(radius + box.x1),
+                cy = round(radius + box.y1),
+                sa = -round((piece.startAngle + 180) * 65535),
+                a = -round(piece.angle * 65536);
+
+            return "M " + cx + " " + cy +
+                   " AE " + cx + " " + cy +
+                   " " + r + " " + r +
+                   " " + sa + " " + a;
         }
     });
 
