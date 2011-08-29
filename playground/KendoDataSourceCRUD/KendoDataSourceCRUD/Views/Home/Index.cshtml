@@ -1,0 +1,64 @@
+﻿<h2>{batch: false, autoSync: false}</h2>
+
+<table id="products">
+    <thead>
+        <tr>
+            <th data-field="ID">ID</th>
+            <th data-field="Name">Name</th>
+        </tr>
+    </thead>
+</table>
+
+<fieldset>
+    <legend>Select a row to edit it</legend>
+    <dl>
+        <dt>Name:</dt>
+        <dd><input name="Name" /></dd>
+    </dl>
+
+    <button id="sync">Sync</button>
+</fieldset>
+<script>
+$(document).ready(function() {
+    var Product = kendo.data.Model.define({
+        id: "ID"
+    });
+
+    dataSource = new kendo.data.DataSource({
+        transport: {
+            read: "@Url.Action("Read", "Home")",
+            update: {
+                url: "@Url.Action("Update", "Home")",
+                type: "POST"
+            }
+        },
+        schema: {
+            model: Product
+        }
+    });
+
+    $("#products").kendoGrid({
+        dataSource: dataSource,
+        height: 200,
+        scrollable: false,
+        selectable: true,
+        change: function() {
+            var tr = this.select();
+            var id = tr.data("id");
+            var model = this.dataSource.model(id);
+
+            $("fieldset")
+                .find("input[name=Name]")
+                .val(model.get("Name"))
+                .unbind("change")
+                .change(function() {
+                    model.set(this.name, this.value);
+            });
+        }
+    });
+
+    $("#sync").click(function() {
+        dataSource.sync();
+    });
+});
+</script>

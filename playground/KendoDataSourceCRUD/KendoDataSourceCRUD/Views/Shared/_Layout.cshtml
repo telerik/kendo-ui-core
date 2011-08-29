@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
+    @*
+    <script src="@Url.Content("~/Scripts/kendo.model.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.data.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.selectable.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.grid.js")"></script>
+    *@
+    <link href="http://cdn.kendostatic.com/2011.2.804/styles/kendo.common.min.css" rel="stylesheet"/>
+    <link href="http://cdn.kendostatic.com/2011.2.804/styles/kendo.kendo.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <ul id="menu">
+        <li>
+            @Html.ActionLink("{batch: false, autoSync: false}", "Index")
+        </li>
+        <li>
+            @Html.ActionLink("{batch: 'multiple'}", "BatchMultiple")
+        </li>
+        <li>
+            @Html.ActionLink("{batch: false, autoSync: true}", "BatchFalseAutoSyncTrue")
+        </li>
+    </ul>
+    <script>
+    $(document).ready(function() {
+        $("#menu").kendoMenu();
+    }); 
+    </script>
+    @RenderBody()
+</body>
+</html>
