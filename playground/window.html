@@ -2,13 +2,13 @@
 <html>
     <head>
         <title>window</title>
-        <script type="text/javascript" src="../src/jquery.js"></script>
-        <script type="text/javascript" src="../src/kendo.loader.js"></script>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.window.js"></script>
         <link type="text/css" href="../styles/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../styles/kendo.vista.css" rel="stylesheet"/>
-        <script type="text/javascript">
-            kendo.loader.window();
-        </script>
+        <link type="text/css" href="../styles/kendo.blueopal.css" rel="stylesheet"/>
     </head>
     <body>
         <input type="button" id="button" value="Click me!" onclick="createWindow()" />
@@ -16,15 +16,16 @@
         <div id="window">
             foo
         </div>
-        <div id="window1"></div>
 
-        <script type="text/javascript">
+        <script>
             function createWindow() {
                 $("#window").data("kendoWindow").open();
             }
 
             $(document).ready(function() {
-                $("#window").kendoWindow({ modal: true }).data("kendoWindow").center().close();
+                $("#window").kendoWindow({
+                    visible: false
+                });
             });
         </script>
     </body>
