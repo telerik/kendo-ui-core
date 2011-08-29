@@ -1,5 +1,6 @@
 obj/
 *.suo
+*.user
 .livereload
 *.swp
 tags
