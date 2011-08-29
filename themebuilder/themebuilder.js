@@ -8,41 +8,41 @@
         stylableProperties = {
             widget: {
                 title: "Widget",
-                primitive: "t-widget",
+                primitive: "k-widget",
                 properties: [ properties.bgColor, properties.brdColor, properties.color ]
             },
             header: {
                 title: "Headers",
-                primitive: "t-header",
+                primitive: "k-header",
                 properties: [ properties.bgColor, properties.color ]
             },
             link: {
                 title: "Links",
-                primitive: "t-link",
+                primitive: "k-link",
                 properties: [ properties.bgColor, properties.color ]
             },
             content: {
                 title: "Content & Template Containers",
-                primitive: "t-content",
+                primitive: "k-content",
                 properties: [ properties.bgColor ]
             },
             group: {
                 title: "Item groups",
-                primitive: "t-group",
+                primitive: "k-group",
                 properties: [ properties.bgColor, properties.brdColor, properties.brdColor ]
             },
             hover: {
                 title: "Hover state",
-                primitive: "t-state-hover",
+                primitive: "k-state-hover",
                 properties: [ properties.bgColor, properties.brdColor, properties.color ]
             }
         },
-        themeTemplate = "* > .t-header, * > .t-grid-header, * > .t-toolbar, * > .t-dropdown-wrap, * > .t-grouping-header, * > .t-tooltip, * > .t-grid-pager {" +
-                        "    background-color: $t-widget-background-color;" +
+        themeTemplate = "* > .k-header, * > .k-grid-header, * > .k-toolbar, * > .k-dropdown-wrap, * > .k-grouping-header, * > .k-tooltip, * > .k-grid-pager {" +
+                        "    background-color: $k-widget-background-color;" +
                         "}",
         colorPickerTemplate = kendo.template(
             "<# var id = primitive + \":\" + property.property; #>" +
-            "<label for='<#= id #>'><#= property.label #></label> <input id='<#= id #>' class='t-input' />"
+            "<label for='<#= id #>'><#= property.label #></label> <input id='<#= id #>' class='k-input' />"
         ),
         propertyGroupTemplate = kendo.template(
             "<li><#= title #>" +
@@ -62,7 +62,7 @@
                         }));
                     }).join("") +
                 "</ul>" +
-                "<button type='button' class='t-style-apply t-button'>Download</button>" +
+                "<button type='button' class='k-style-apply k-button'>Download</button>" +
             "</div>"
         ),
         proxy = $.proxy,
@@ -102,7 +102,7 @@
                         maxWidth: 300
                     });
 
-                that.element = that.content.closest(".t-window")
+                that.element = that.content.closest(".k-window")
                     .attr("id", "kendo-themebuilder-wrapper")
                     .css({
                         top: 20,
@@ -121,7 +121,7 @@
             },
             /// TODO: test this; make themeTemplate mockable
             _propertyChange: function(e) {
-                this.updateStyleSheet(themeTemplate.replace(/\$t-widget-background-color/g, e.color));
+                this.updateStyleSheet(themeTemplate.replace(/\$k-widget-background-color/g, e.color));
             },
             updateStyleSheet: function(cssText) {
                 var doc = document,

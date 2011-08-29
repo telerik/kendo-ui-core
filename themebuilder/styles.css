@@ -1,6 +1,6 @@
 /*reset start*/
 
-#kendo-themebuilder-wrapper .t-window-actions,
+#kendo-themebuilder-wrapper .k-window-actions,
 #kendo-themebuilder .styling-options
 {
     width: auto;
@@ -27,7 +27,7 @@
     width: 40%;
 }
 
-#kendo-themebuilder .t-style-apply
+#kendo-themebuilder .k-style-apply
 {
     margin: 1em 0 0;
 }
