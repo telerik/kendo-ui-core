@@ -3084,7 +3084,8 @@
                     aboveAxis: options.aboveAxis,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
-                    animation: "bar"
+                    animation: options.animation,
+                    box: box
                 }, border),
                 elements = [],
                 label = bar.children[0];
@@ -3343,7 +3344,12 @@
                 border: series.border,
                 isVertical: options.isVertical,
                 overlay: series.overlay,
-                labels: labelOptions
+                labels: labelOptions,
+                animation: {
+                    type: "bar",
+                    // TODO: Needs more uniqueness
+                    queue: isStacked ? "c" + categoryIx : uniqueId()
+                }
             });
 
             var cluster = children[categoryIx];
@@ -4091,7 +4097,7 @@
 
             view.definitions = {};
             view.decorators = [];
-            view.animations = [];
+            view.animations = {};
         },
 
         renderDefinitions: function() {
@@ -4125,6 +4131,36 @@
             }
 
             return element;
+        },
+
+        addAnimation: function(animation, queue) {
+            var view = this,
+                animations = view.animations,
+                queue = queue || "default";
+
+            if (!defined(animations[queue])) {
+                animations[queue] = [animation];
+            } else {
+                animations[queue].push(animation);
+            }
+        },
+
+        playAnimations: function() {
+            var view = this,
+                animations = view.animations,
+                queueName,
+                queue,
+                i,
+                length;
+
+            for (queueName in animations) {
+                queue = animations[queueName];
+                for (i = 0, length = queue.length; i < length; i++) {
+                    queue[i].setup();
+                }
+
+                queue.shift().play(queue);
+            }
         }
     });
 
@@ -4167,9 +4203,7 @@
             viewElement = container.firstChild;
             view.alignToScreen(viewElement);
 
-            while (view.animations.length > 0) {
-                view.animations.shift().play();
-            }
+            view.playAnimations();
 
             return viewElement;
         },
@@ -4229,6 +4263,9 @@
 
         createGradient: function(options) {
             return new SVGLinearGradient(options);
+        },
+
+        createBarAnimation: function(bar, options) {
         },
 
         alignToScreen: function(element) {
@@ -4478,9 +4515,9 @@
             group.children.push(element, overlayElement);
 
             overlayElement.options.id = id;
-
             overlayElement.options.fill =
                 deepExtend(fill, { id: fillId, rotation: fillRotation });
+            overlayElement.options.animation.queue += "overlay";
 
             return group;
         }
@@ -4571,33 +4608,76 @@
     }
 
     SVGBarAnimationDecorator.prototype = {
-        decorate: function(element, box, style) {
+        decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
-                options = element.options;
+                box = element.options.box,
+                animation = element.options.animation;
 
-            if (options.animation === "bar") {
-                view.animations.push({
-                    play: function() {
-                        var target = $("#" + element.options.id);
-                        if (style.normalAngle === 0) {
-                            if (style.aboveAxis) {
-                                target
-                                    .css("svgBarTop", box.y2)
-                                    .animate({ "svgBarTop": box.y1 });
-                            } else {
-                                target
-                                    .css("svgBarBottom", box.y1)
-                                    .animate({ "svgBarBottom": box.y2 });
-                            }
-                        }
-                    }
-                });
+            if (animation && animation.type === "bar") {
+                view.addAnimation(
+                    new SVGBarAnimation(element, box, element.options),
+                    animation.queue);
             }
 
             return element;
         }
     }
+
+    var SVGBarAnimation = Class.extend({
+        init: function(viewElement, box, options) {
+            var anim = this;
+
+            anim.viewElement = viewElement;
+            anim.box = box;
+            anim.options = options;
+        },
+
+        setup: function() {
+            var anim = this,
+                viewElement = anim.viewElement,
+                box = anim.box,
+                options = anim.options,
+                target = $("#" + viewElement.options.id);
+
+            if (options.normalAngle === 0) {
+                if (options.aboveAxis) {
+                    target
+                    .css("svgBarTop", box.y2)
+                    /*.css("stroke-width", 0)*/;
+                } else {
+                    target
+                    .css("svgBarBottom", box.y1)
+                    .css("stroke-width", 0);
+                }
+            }
+        },
+
+        play: function(queue) {
+            var anim = this,
+                viewElement = anim.viewElement,
+                box = anim.box,
+                options = anim.options,
+                target = $("#" + viewElement.options.id);
+
+            var complete = function() {
+                target.css("stroke-width", options.strokeWidth);
+                if (queue.length > 0) {
+                    queue.shift().play(queue);
+                }
+            }
+
+            if (options.normalAngle === 0) {
+                if (options.aboveAxis) {
+                    target
+                    .animate({ "svgBarTop": box.y1 }, "slow", "linear", complete);
+                } else {
+                    target
+                    .animate({ "svgBarBottom": box.y2 }, "slow", "linear", complete);
+                }
+            }
+        }
+    });
 
     var VMLView = ViewBase.extend({
         init: function(options) {
