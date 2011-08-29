@@ -597,7 +597,7 @@
             teardown: function (element) {
                 var height = element.data(HEIGHT);
                 if (height == AUTO || height === BLANK) {
-                    element.css(HEIGHT, AUTO).css(HEIGHT);
+                    setTimeout( function () { element.css(HEIGHT, AUTO).css(HEIGHT); }, 0 ); // jQuery animate complete callback in IE is called before the last animation step!
                 }
             }
         },

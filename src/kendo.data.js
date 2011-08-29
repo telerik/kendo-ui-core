@@ -1102,8 +1102,8 @@
                         return function() {
                             return stamp++;
                         }
-                    },
-                }
+                    }
+                };
 
             updated = that._updatedModels();
 
