@@ -24,7 +24,7 @@
             }
 
             function removeTreeViews() {
-                $(".t-treeview").remove();
+                $(".k-treeview").remove();
             }
 
             module("events", {
@@ -38,9 +38,9 @@
                         dataSource: [ { text: "foo" } ]
                     });
 
-                var node = $(".t-item:first", treeview);
+                var node = $(".k-item:first", treeview);
 
-                node.find(".t-in").trigger("click");
+                node.find(".k-in").trigger("click");
 
                 ok(selectedArgs);
                 equals(selectedArgs.node, node[0]);
@@ -57,11 +57,11 @@
                         ]
                     });
 
-                $(".t-plus", treeview)
+                $(".k-plus", treeview)
                     .trigger("click");
 
                 ok(expandArgs);
-                equals(expandArgs.node, $(".t-item")[0]);
+                equals(expandArgs.node, $(".k-item")[0]);
             });
 
             test("clicking collapse button triggers collapse event", function() {
@@ -75,11 +75,11 @@
                         ]
                     });
 
-                $(".t-minus", treeview)
+                $(".k-minus", treeview)
                     .trigger("click");
 
                 ok(collapseArgs);
-                equals(collapseArgs.node, $(".t-item")[0]);
+                equals(collapseArgs.node, $(".k-item")[0]);
             });
 
             module("drag & drop", {
@@ -87,8 +87,8 @@
             });
 
             function moveNode(treeview, sourceText, destinationText) {
-                var sourceNode = treeview.findByText(sourceText).find(".t-in:first"),
-                    destinationNode = treeview.findByText(destinationText).find(".t-in:first"),
+                var sourceNode = treeview.findByText(sourceText).find(".k-in:first"),
+                    destinationNode = treeview.findByText(destinationText).find(".k-in:first"),
                     startOffset = sourceNode.offset(),
                     endOffset = destinationNode.offset(),
                     extend = $.extend,
@@ -219,8 +219,8 @@
 
                 moveNode(treeviewObject, "bar", "baz");
 
-                equals(treeviewObject.findByText("foo").find(".t-group").length, 1);
-                equals(treeviewObject.findByText("baz").find(".t-group").length, 0);
+                equals(treeviewObject.findByText("foo").find(".k-group").length, 1);
+                equals(treeviewObject.findByText("baz").find(".k-group").length, 0);
            });
         </script>
 

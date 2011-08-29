@@ -22,37 +22,37 @@
         <!-- description -->
         <div class="description">API</div>
         <!-- description -->
-        <div id="example" class="t-content">
+        <div id="example" class="k-content">
             <div class="configuration">
                 <span class="configHead">Configuration</span>
                 <span class="configTitle">API Functions</span>
                 <ul class="options">
                     <li>
-                        <input type="text" value="0" id="selectIndex"/> <button class="selectItem t-button">Select</button>
+                        <input type="text" value="0" id="selectIndex"/> <button class="selectItem k-button">Select</button>
                     </li>
                     <li>
-                        <button class="toggleItem t-button">Enable/Disable</button>
+                        <button class="toggleItem k-button">Enable/Disable</button>
                     </li>
                     <li>
-                        <button class="triggerItem t-button">Expand/Collapse</button>
+                        <button class="triggerItem k-button">Expand/Collapse</button>
                     </li>
                     <li>
-                        <button class="removeItem t-button">Remove</button>
+                        <button class="removeItem k-button">Remove</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" id="appendText"/> <button class="appendItem t-button">Append</button>
+                        <input type="text" value="Item" id="appendText"/> <button class="appendItem k-button">Append</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" id="beforeText"/> <button class="beforeItem t-button">Insert Before</button>
+                        <input type="text" value="Item" id="beforeText"/> <button class="beforeItem k-button">Insert Before</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" id="afterText"/> <button class="afterItem t-button">Insert After</button>
+                        <input type="text" value="Item" id="afterText"/> <button class="afterItem k-button">Insert After</button>
                     </li>
                 </ul>
             </div>
 
             <ul id="panelbar">
-                <li class="t-state-active">
+                <li class="k-state-active">
                     First Item
                     <ul>
                         <li>Sub Item 1</li>
@@ -106,7 +106,7 @@
                             rootItem = panelBar.element.children("li").eq(itemIndexes[0]);
 
                         return itemIndexes.length > 1 ?
-                            rootItem.find(".t-group > .t-item").eq(itemIndexes[1]) :
+                            rootItem.find(".k-group > .k-item").eq(itemIndexes[1]) :
                             rootItem;
                     };
 
@@ -117,13 +117,13 @@
                     $(".toggleItem").click( function (e) {
                         var item = panelBar.select();
 
-                        panelBar.enable(item, item.hasClass("t-state-disabled"));
+                        panelBar.enable(item, item.hasClass("k-state-disabled"));
                     });
 
                     $(".triggerItem").click( function (e) {
                         var item = panelBar.select();
 
-                        if (item.hasClass("t-state-active")) {
+                        if (item.hasClass("k-state-active")) {
                             panelBar.collapse(item);
                         } else {
                             panelBar.expand(item);

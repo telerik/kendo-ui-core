@@ -20,7 +20,7 @@
 
             module("ClientSideAPI", {
                 teardown: function() {
-                    $(".t-window,.t-overlay").remove();
+                    $(".k-window,.k-overlay").remove();
                 }
             });
 
@@ -35,7 +35,7 @@
             test("title sets title", function() {
                 var window = createWindow({ title: "Title"}),
                     oldTitle = window.title(),
-                    titleElement = $(".t-window-title", window.wrapper);
+                    titleElement = $(".k-window-title", window.wrapper);
 
                 window.title("Title is the new title!");
 
@@ -49,13 +49,13 @@
             test("open of modal window adds overlay if it does not exist", function() {
                 createWindow({ modal: true }).open();
 
-                equal($("body > .t-overlay").length, 1);
+                equal($("body > .k-overlay").length, 1);
             });
 
             test("dblclick on resizable window title maximizes window", function() {
                 var window = createWindow();
 
-                window.wrapper.find(".t-window-titlebar").trigger("dblclick");
+                window.wrapper.find(".k-window-titlebar").trigger("dblclick");
 
                 ok(window.options.isMaximized);
             });
@@ -63,7 +63,7 @@
             test("dblclick on non resizable window title does not maximize window", function() {
                 var window = createWindow({ resizable: false });
 
-                window.element.find(".t-window-titlebar").trigger("dblclick");
+                window.element.find(".k-window-titlebar").trigger("dblclick");
 
                 ok(!window.options.isMaximized);
             });
@@ -77,7 +77,7 @@
                     });
 
                 overlappingDialog.destroy();
-                ok(dialog.wrapper.prev("div").is(".t-overlay"));
+                ok(dialog.wrapper.prev("div").is(".k-overlay"));
             });
 
             test('closing a modal window moves overlay before previous window', function() {
@@ -89,7 +89,7 @@
                     });
 
                 overlappingDialog.close();
-                ok(dialog.wrapper.prev("div").is(".t-overlay"));
+                ok(dialog.wrapper.prev("div").is(".k-overlay"));
             });
 
         </script>

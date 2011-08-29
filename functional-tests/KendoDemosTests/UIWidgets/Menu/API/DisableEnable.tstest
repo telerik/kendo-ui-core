@@ -230,7 +230,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 't-item t-first t-state-disabled' on 'ListItem'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 'k-item k-first k-state-disabled' on 'ListItem'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
@@ -309,7 +309,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-item t-first t-state-disabled</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-item k-first k-state-disabled</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>DisableEnable5jjpu4l0.rzv</d2p1:StepImageKey>
@@ -617,7 +617,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 't-item t-first t-state-default' on 'ListItem'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 'k-item k-first k-state-default' on 'ListItem'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
@@ -696,7 +696,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-item t-first t-state-default</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-item k-first k-state-default</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>DisableEnablec315mfhm.je0</d2p1:StepImageKey>

@@ -56,7 +56,7 @@
                 equal(options.test, 1);
            });
 
-           test("wraps element if no wrapper div.t-widget and hide element", function() {
+           test("wraps element if no wrapper div.k-widget and hide element", function() {
                input.wrap("<div class='test'/>");
 
                input.kendoComboBox();
@@ -65,7 +65,7 @@
 
                ok(wrapper.is("div"));
                ok(wrapper.parent().is("div.test"));
-               ok(wrapper.hasClass("t-widget t-combobox t-header"));
+               ok(wrapper.hasClass("k-widget k-combobox k-header"));
                ok(!input.is(":visible"));
 
                input.parent().remove();
@@ -77,7 +77,7 @@
                var text = input.data("kendoComboBox").input;
 
                ok(text.is("input"));
-               ok(text.hasClass("t-input"));
+               ok(text.hasClass("k-input"));
            });
 
            test("text input should wrapped with div", function(){
@@ -86,19 +86,19 @@
                var comboWrapper = input.data("kendoComboBox").input.parent();
 
                ok(comboWrapper.is("div"));
-               ok(comboWrapper.hasClass("t-dropdown-wrap t-state-default"));
+               ok(comboWrapper.hasClass("k-dropdown-wrap k-state-default"));
            });
 
-           test("include arrow after input.t-input", function(){
+           test("include arrow after input.k-input", function(){
                input.kendoComboBox();
 
                var spanArrow = input.data("kendoComboBox").input.next(),
                    arrow = spanArrow.children().eq(0);
 
                ok(spanArrow.is("span"));
-               ok(spanArrow.hasClass("t-select"));
+               ok(spanArrow.hasClass("k-select"));
                ok(arrow.is("span"));
-               ok(arrow.hasClass("t-icon t-arrow-down"));
+               ok(arrow.hasClass("k-icon k-arrow-down"));
                equal(arrow.html(), "select");
            });
 
@@ -247,7 +247,7 @@
            test("template should render item directly if datatextField is empty string", function(){
                 var combobox = new ComboBox(input, { dataTextField : ""});
 
-                equal(combobox.template("foo"), "<li class='t-item' unselectable='on'>foo</li>");
+                equal(combobox.template("foo"), "<li class='k-item' unselectable='on'>foo</li>");
            });
 
            test("template should use defined datatextField", function(){
@@ -255,7 +255,7 @@
                     dataTextField : "ProductName"
                 });
 
-                equal(combobox.template({ProductName: "foo"}), "<li class='t-item' unselectable='on'>foo</li>");
+                equal(combobox.template({ProductName: "foo"}), "<li class='k-item' unselectable='on'>foo</li>");
            });
 
            test("changing the template", function() {
@@ -264,7 +264,7 @@
                    template: "<#= data.toUpperCase() #>"
                });
 
-               equal(combobox.template("foo"), "<li class='t-item' unselectable='on'>FOO</li>");
+               equal(combobox.template("foo"), "<li class='k-item' unselectable='on'>FOO</li>");
                equal(combobox.options.template, "<#= data.toUpperCase() #>");
            });
 
@@ -278,12 +278,12 @@
                equal(combobox.value(), "1");
            });
 
-           test("disabled input rendered with wrapper.t-state-disabled", function() {
+           test("disabled input rendered with wrapper.k-state-disabled", function() {
                input.attr("disabled", "disabled").kendoComboBox();
 
                var combobox = input.data("kendoComboBox");
 
-               ok(combobox.wrapper.hasClass("t-state-disabled"));
+               ok(combobox.wrapper.hasClass("k-state-disabled"));
                ok(combobox.input.prop("disabled"));
            });
 
@@ -363,11 +363,11 @@
                     combobox = new ComboBox(input, {
                          dataSource: data
                     }),
-                    wrap = combobox.wrapper.children(".t-dropdown-wrap");
+                    wrap = combobox.wrapper.children(".k-dropdown-wrap");
 
                 wrap.mouseenter();
 
-                ok(wrap.hasClass("t-state-hover"));
+                ok(wrap.hasClass("k-state-hover"));
             });
 
             test("leaving widget should remove hover state", function() {
@@ -375,12 +375,12 @@
                     combobox = new ComboBox(input, {
                          dataSource: data
                     }),
-                    wrap = combobox.wrapper.children(".t-dropdown-wrap");
+                    wrap = combobox.wrapper.children(".k-dropdown-wrap");
 
                 wrap.mouseenter();
                 wrap.mouseleave();
 
-                ok(!wrap.hasClass("t-state-hover"));
+                ok(!wrap.hasClass("k-state-hover"));
             });
 
 

@@ -121,7 +121,7 @@
                 var sorter = setup();
                 button.click();
 
-                equal(button.find("span.t-icon.t-arrow-up").length, 1);
+                equal(button.find("span.k-icon.k-arrow-up").length, 1);
             });
 
             test("desc arrow is rendered", function() {
@@ -129,7 +129,7 @@
                 button.click();
                 button.click();
 
-                equal(button.find("span.t-icon.t-arrow-down").length, 1);
+                equal(button.find("span.k-icon.k-arrow-down").length, 1);
             });
 
             test("sort arrow is removed", function() {
@@ -138,8 +138,8 @@
                 button.click();
                 button.click();
 
-                equal(button.find("span.t-icon.t-arrow-down").length, 0);
-                equal(button.find("span.t-icon.t-arrow-up").length, 0);
+                equal(button.find("span.k-icon.k-arrow-down").length, 0);
+                equal(button.find("span.k-icon.k-arrow-up").length, 0);
             });
 
             test("multiple sorting on same field", function() {

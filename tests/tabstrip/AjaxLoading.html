@@ -37,29 +37,29 @@
 </head>
 <body>
 
-<div class="t-widget t-tabstrip t-header" id="TabStrip1" style="visibility: hidden; position: absolute;">
-    <ul class="t-reset t-tabstrip-items">
-        <li class="t-item t-state-default t-state-active"><a class="t-link" href="#TabStrip1-1"><img alt="image"
-                                                                                                    class="t-image"
+<div class="k-widget k-tabstrip k-header" id="TabStrip1" style="visibility: hidden; position: absolute;">
+    <ul class="k-reset k-tabstrip-items">
+        <li class="k-item k-state-default k-state-active"><a class="k-link" href="#TabStrip1-1"><img alt="image"
+                                                                                                    class="k-image"
                                                                                                     src="../../playground/Icons/Suites/mvc.png">ASP.NET
             MVC</a></li>
-        <li class="t-item t-state-disabled"><a class="t-link" href="#TabStrip1-2"><img alt="image" class="t-image"
+        <li class="k-item k-state-disabled"><a class="k-link" href="#TabStrip1-2"><img alt="image" class="k-image"
                                                                                      src="../../playground/Icons/Suites/sl.png">Silverlight</a>
         </li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-3"><img alt="image" class="t-image"
+        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-3"><img alt="image" class="k-image"
                                                                                      src="../../playground/Icons/Suites/ajax.png">ASP.NET
             AJAX</a></li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-4"><img alt="image" class="t-image"
+        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-4"><img alt="image" class="k-image"
                                                                                      src="../../playground/Icons/Suites/orm.png">OpenAccess
             ORM</a></li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-5"><img alt="image" class="t-image"
+        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-5"><img alt="image" class="k-image"
                                                                                      src="../../playground/Icons/Suites/rep.png">Reporting</a>
         </li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-6"><img alt="image" class="t-image"
+        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-6"><img alt="image" class="k-image"
                                                                                      src="../../playground/Icons/Suites/sitefinity.png">Sitefinity
             ASP.NET CMS</a></li>
     </ul>
-    <div class="t-content t-state-active" id="TabStrip1-1" style="display: block;">
+    <div class="k-content k-state-active" id="TabStrip1-1" style="display: block;">
         <ul>
             <li>Pure ASP.NET MVC components</li>
             <li>Completely Open Source</li>
@@ -70,17 +70,17 @@
             <li>Cross-browser support</li>
         </ul>
     </div>
-    <div class="t-content" id="TabStrip1-2"></div>
-    <div class="t-content" id="TabStrip1-3"></div>
-    <div class="t-content" id="TabStrip1-4"></div>
-    <div class="t-content" id="TabStrip1-5"></div>
-    <div class="t-content" id="TabStrip1-6"></div>
+    <div class="k-content" id="TabStrip1-2"></div>
+    <div class="k-content" id="TabStrip1-3"></div>
+    <div class="k-content" id="TabStrip1-4"></div>
+    <div class="k-content" id="TabStrip1-5"></div>
+    <div class="k-content" id="TabStrip1-6"></div>
 </div>
 
     <script type="text/javascript">
 
         function getRootItem(index) {
-            return $('#TabStrip1').find('.t-item').eq(index)
+            return $('#TabStrip1').find('.k-item').eq(index)
         }
 
         function getTabStrip() {
@@ -90,10 +90,10 @@
         asyncTest('clicking should make clicked item active', function() {
             var item = getRootItem(2);
 
-            item.find('> .t-link').trigger('click');
+            item.find('> .k-link').trigger('click');
 
             setTimeout(function() {
-                ok(item.hasClass('t-state-active'));
+                ok(item.hasClass('k-state-active'));
                 start();
             }, 100);
         });
@@ -101,10 +101,10 @@
         asyncTest('clicking should make all items except clicked unactive', function() {
             var item = getRootItem(0);
 
-            item.find('> .t-link').trigger('click');
+            item.find('> .k-link').trigger('click');
 
             setTimeout(function() {
-                equal(item.parent().find('.t-state-active').length, 1);
+                equal(item.parent().find('.k-state-active').length, 1);
                 start();
             }, 10);
         });
@@ -119,9 +119,9 @@
 //                    e.preventDefault();
 //                };
 //
-//            tabStrip.delegate('.t-link', 'click', testHandler);
-//            item.find('> .t-link').trigger('click');
-//            tabStrip.undelegate('.t-link', 'click', testHandler);
+//            tabStrip.delegate('.k-link', 'click', testHandler);
+//            item.find('> .k-link').trigger('click');
+//            tabStrip.undelegate('.k-link', 'click', testHandler);
 //
 //            setTimeout(function() {
 //                ok(isDefaultPrevented);
@@ -133,7 +133,7 @@
             var tabStrip = $(getTabStrip().element),
                 item = getRootItem(5);
 
-            equals(item.find('> .t-link').data('contentUrl'), 'AjaxView2.html');
+            equals(item.find('> .k-link').data('contentUrl'), 'AjaxView2.html');
         });
 
     </script>

@@ -22,7 +22,7 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
-                    $(".t-slider").remove();
+                    $(".k-slider").remove();
                 }
             });
 
@@ -68,7 +68,7 @@
             test("value should set slider position selectionDiv", function () {
                 var slider = newSlider();
 
-                var selectionDiv = slider.wrapper.find(".t-slider-selection");
+                var selectionDiv = slider.wrapper.find(".k-slider-selection");
 
                 slider.value(10);
 
@@ -78,7 +78,7 @@
             test("value should be in range", function() {
                 var slider = newSlider();
 
-                var selectionDiv = slider.wrapper.find(".t-slider-selection");
+                var selectionDiv = slider.wrapper.find(".k-slider-selection");
 
                 slider.value(11);
 
@@ -140,7 +140,7 @@
 
                 slider.disable();
 
-                ok(slider.wrapper.hasClass("t-state-disabled"));
+                ok(slider.wrapper.hasClass("k-state-disabled"));
             });
 
             test("enable method should remove state disabled from the slider", function () {
@@ -148,7 +148,7 @@
 
                 slider.enable();
 
-                ok(!slider.wrapper.hasClass("t-state-disabled"));
+                ok(!slider.wrapper.hasClass("k-state-disabled"));
             });
 
             test("refresh method should not select minimum when slider increase his value from -1 to 0", function () {
@@ -168,7 +168,7 @@
                 };
 
                 var slider = newSlider({ "change": change, val: 0 }),
-                    dragHandle = slider.wrapper.find(".t-draghandle");
+                    dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown", keyCode: downArrow });
                 dragHandle.trigger({ type: "keydown", keyCode: leftArrow });
@@ -182,7 +182,7 @@
                     div = $("<div><input /><input /></div>").appendTo(document.body);
                 },
                 teardown: function() {
-                    div.closest(".t-slider").remove();
+                    div.closest(".k-slider").remove();
                 }
             });
 
@@ -235,7 +235,7 @@
             test("values should set rangeSlider position selectionDiv", function () {
                 var rangeSlider = newRangeSlider();
 
-                var selectionDiv = rangeSlider.wrapper.find(".t-slider-selection");
+                var selectionDiv = rangeSlider.wrapper.find(".k-slider-selection");
 
                 rangeSlider.values(0, 10);
 
@@ -275,7 +275,7 @@
 
             test("values should set z-index to first handle", function() {
                 var rangeSlider = newRangeSlider(),
-                    dragHandles = rangeSlider.wrapper.find(".t-draghandle"),
+                    dragHandles = rangeSlider.wrapper.find(".k-draghandle"),
                     firstDragHandle = dragHandles.eq(0);
 
                 rangeSlider.values(10, 10);
@@ -306,7 +306,7 @@
 
                 rangeSlider.disable();
 
-                ok(rangeSlider.wrapper.hasClass("t-state-disabled"));
+                ok(rangeSlider.wrapper.hasClass("k-state-disabled"));
             });
 
             test("enable method should remove state disabled from the range slider", function () {
@@ -314,7 +314,7 @@
 
                 rangeSlider.enable();
 
-                ok(!rangeSlider.wrapper.hasClass("t-state-disabled"));
+                ok(!rangeSlider.wrapper.hasClass("k-state-disabled"));
             });
 
             test('range slider should not trigger change if we decrease selectionStart with 1 step and selectionStart is equal to min value', function () {
@@ -326,7 +326,7 @@
                 };
 
                 var rangeSlider = newRangeSlider({ change: change, selectionStart: 10, selectionEnd: 10 }),
-                    dragHandles = rangeSlider.wrapper.find(".t-draghandle");
+                    dragHandles = rangeSlider.wrapper.find(".k-draghandle");
 
                 dragHandles.eq(0).trigger({ type: "keydown", keyCode: downArrow });
                 dragHandles.eq(0).trigger({ type: "keydown", keyCode: leftArrow });

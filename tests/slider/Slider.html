@@ -24,7 +24,7 @@
                     isDefaultPrevent = false;
                 },
                 teardown: function() {
-                    $(".t-slider").remove();
+                    $(".k-slider").remove();
                 }
             });
 
@@ -36,7 +36,7 @@
                 var downArrow = "40", // down arrow
                     leftArrow = "37", // left arrow
                     slider = newSlider({ val: 5, smallStep: 2 }),
-                    dragHandle = slider.wrapper.find(".t-draghandle");
+                    dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown",
                     keyCode: downArrow,
@@ -67,7 +67,7 @@
                 var upArrow = "38"; // up arrow
                     rightArrow = "39", // right arrow
                     slider = newSlider({ val: 5, smallStep: 2 }),
-                    dragHandle = slider.wrapper.find(".t-draghandle");
+                    dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown",
                     keyCode: upArrow,
@@ -97,7 +97,7 @@
             test('slider should increase value with a large step when page up keyboard is clicked', function () {
                 var end = "33", // page up
                     slider = newSlider({ val: 5, largeStep: 3 }),
-                    dragHandle = slider.wrapper.find(".t-draghandle");
+                    dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown",
                     keyCode: end,
@@ -115,7 +115,7 @@
             test('slider should decrease value with a large step when page down keyboard is clicked', function () {
                 var home = "34", // page down
                     slider = newSlider({ val: 5, largeStep: 3 }),
-                    dragHandle = slider.wrapper.find(".t-draghandle");
+                    dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown",
                     keyCode: home,
@@ -133,7 +133,7 @@
             test('slider should increase value to maximum value when end keyboard is clicked', function () {
                 var end = "35", // end
                     slider = newSlider({ val: 5 }),
-                    dragHandle = slider.wrapper.find(".t-draghandle");
+                    dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown",
                     keyCode: end,
@@ -151,7 +151,7 @@
             test('slider should increase value to minimum value when home keyboard is clicked', function () {
                 var home = "36", // home
                     slider = newSlider({ val: 5 }),
-                    dragHandle = slider.wrapper.find(".t-draghandle");
+                    dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown",
                     keyCode: home,

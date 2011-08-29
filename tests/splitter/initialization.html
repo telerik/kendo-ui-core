@@ -22,29 +22,29 @@
             test("constructor adds classes to container", function() {
                 var splitter = $(getSplitterHtml(1)).kendoSplitter();
 
-                ok(splitter.hasClass("t-widget"));
-                ok(splitter.hasClass("t-splitter"));
+                ok(splitter.hasClass("k-widget"));
+                ok(splitter.hasClass("k-splitter"));
 
                 splitter = $(getSplitterHtml(1)).kendoSplitter({ orientation: "vertical" });
 
-                ok(splitter.hasClass("t-splitter"));
+                ok(splitter.hasClass("k-splitter"));
             });
 
             test("constructor interprets erronious orientation as horizontal", function() {
                 var splitter = $(getSplitterHtml(1)).kendoSplitter({ orientation: "diagonal" });
 
-                ok(splitter.hasClass("t-splitter"));
+                ok(splitter.hasClass("k-splitter"));
             });
 
             test("init adds classes to child elements", function() {
                 var splitter = $(getSplitterHtml(1)).kendoSplitter();
 
-                equals(splitter.find(".t-pane").length, 1);
+                equals(splitter.find(".k-pane").length, 1);
             });
 
             test("init adds splitbars between panes", function() {
                 var splitter = $(getSplitterHtml(3)).kendoSplitter(),
-                splitbars = splitter.find(".t-splitbar");
+                splitbars = splitter.find(".k-splitbar");
 
                 equals(splitbars.length, 2);
                 equals(splitbars.eq(0).index(), 1);
@@ -59,10 +59,10 @@
                     { collapsible: true }
                     ]
                 }),
-                splitbars = splitter.find(".t-splitbar");
+                splitbars = splitter.find(".k-splitbar");
 
-                equals(splitbars.eq(0).find(".t-icon.t-collapse-prev").length, 1);
-                equals(splitbars.eq(1).find(".t-icon.t-collapse-next").length, 1);
+                equals(splitbars.eq(0).find(".k-icon.k-collapse-prev").length, 1);
+                equals(splitbars.eq(1).find(".k-icon.k-collapse-next").length, 1);
             });
 
             test("splitbars have resize handle between resizable panes", function() {
@@ -74,10 +74,10 @@
                     {}
                     ]
                 }),
-                splitbars = splitter.find(".t-splitbar");
+                splitbars = splitter.find(".k-splitbar");
 
-                equals(splitbars.eq(0).find(".t-icon.t-resize-handle").length, 0);
-                equals(splitbars.eq(1).find(".t-icon.t-resize-handle").length, 1);
+                equals(splitbars.eq(0).find(".k-icon.k-resize-handle").length, 0);
+                equals(splitbars.eq(1).find(".k-icon.k-resize-handle").length, 1);
             });
 
             test("collapsed panes render expand arrow beside them", function() {
@@ -89,7 +89,7 @@
                     ]
                 });
 
-                equals(splitter.find(".t-expand-prev").length, 1);
+                equals(splitter.find(".k-expand-prev").length, 1);
             });
 
             test("splibars next to initially collapsed panes are not draggable", function() {
@@ -101,10 +101,10 @@
                     ]
                 });
 
-                ok(!splitter.find(".t-splitbar").hasClass("t-splitbar-draggable-horizontal"));
+                ok(!splitter.find(".k-splitbar").hasClass("k-splitbar-draggable-horizontal"));
             });
 
-            test("panes get t-scrollable class if they are scrollable", function() {
+            test("panes get k-scrollable class if they are scrollable", function() {
                 var splitter = $(getSplitterHtml())
                 .kendoSplitter({
                     panes: [
@@ -112,10 +112,10 @@
                     {}
                     ]
                 }),
-                panes = splitter.find(".t-pane");
+                panes = splitter.find(".k-pane");
 
-                ok(!panes.eq(0).hasClass("t-scrollable"));
-                ok(panes.eq(1).hasClass("t-scrollable"));
+                ok(!panes.eq(0).hasClass("k-scrollable"));
+                ok(panes.eq(1).hasClass("k-scrollable"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

@@ -2,21 +2,21 @@
     test("upload button is rendered on select", function() {
         simulateFileSelect();
 
-        equal($("> button.t-button.t-upload-selected", uploadInstance.wrapper).length, 1);
+        equal($("> button.k-button.k-upload-selected", uploadInstance.wrapper).length, 1);
     });
 
     test("upload button is removed when upload starts", function() {
         simulateFileSelect();
 
-        $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+        $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
-        equal($(".t-upload-selected", uploadInstance.wrapper).length, 0);
+        equal($(".k-upload-selected", uploadInstance.wrapper).length, 0);
     });
 
     test("remove icon is rendered if remove action is configured", function() {
         simulateFileSelect();
 
-        equal($(".t-delete", uploadInstance.wrapper).length, 1);
+        equal($(".k-delete", uploadInstance.wrapper).length, 1);
     });
 
     test("remove icon is not rendered if remove action is not configured", function() {
@@ -24,7 +24,7 @@
 
         simulateFileSelect();
 
-        equal($(".t-delete", uploadInstance.wrapper).length, 0);
+        equal($(".k-delete", uploadInstance.wrapper).length, 0);
     });
 
     test("clicking remove should remove file entry", function() {
@@ -32,7 +32,7 @@
 
         simulateRemove();
 
-        equal($(".t-file", uploadInstance.wrapper).length, 0);
+        equal($(".k-file", uploadInstance.wrapper).length, 0);
     });
 
     test("removing last queued file should remove upload button", function() {
@@ -40,7 +40,7 @@
 
         simulateRemove();
 
-        equal($(".t-upload-selected", uploadInstance.wrapper).length, 0);
+        equal($(".k-upload-selected", uploadInstance.wrapper).length, 0);
     });
 
     test("removing non-last file should not remove upload button", function() {
@@ -48,7 +48,7 @@
         simulateFileSelect();
         simulateFileSelect();
 
-        $(".t-delete:first", uploadInstance.wrapper).trigger("click");
+        $(".k-delete:first", uploadInstance.wrapper).trigger("click");
 
-        equal($(".t-upload-selected", uploadInstance.wrapper).length, 1);
+        equal($(".k-upload-selected", uploadInstance.wrapper).length, 1);
     });

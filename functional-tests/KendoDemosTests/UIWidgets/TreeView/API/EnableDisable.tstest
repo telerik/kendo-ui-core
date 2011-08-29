@@ -288,7 +288,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 't-in t-state-selected t-state-disabled' on 'Item11Span'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 'k-in k-state-selected k-state-disabled' on 'Item11Span'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
@@ -367,7 +367,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-in t-state-selected t-state-disabled</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-in k-state-selected k-state-disabled</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>EnableDisablebsrq2trn.xay</d2p1:StepImageKey>
@@ -460,7 +460,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Same' value of 't-in t-state-selected t-state-default' on 'Item11Span'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Same' value of 'k-in k-state-selected k-state-default' on 'Item11Span'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
@@ -539,7 +539,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-in t-state-selected t-state-default</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-in k-state-selected k-state-default</d2p1:AttributeValue>
         <d2p1:CompareType>Same</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>EnableDisable2ii5z341.lni</d2p1:StepImageKey>

@@ -20,7 +20,7 @@
 
             module("rendering", {
                 teardown: function() {
-                    $(".t-treeview").remove();
+                    $(".k-treeview").remove();
                 }
             });
 
@@ -32,17 +32,17 @@
                 var element = treeviewFromHtml("<ul><li>item</li></ul>");
 
                 ok(element.is("div"));
-                ok(element.is(".t-widget.t-treeview"));
-                ok(element.find("ul").is(".t-group"));
-                ok(element.find("li").is(".t-item"));
+                ok(element.is(".k-widget.k-treeview"));
+                ok(element.find("ul").is(".k-group"));
+                ok(element.find("li").is(".k-item"));
             });
 
             test("first level group sets lines", function() {
                 var element = treeviewFromHtml("<ul><li>item<ul><li>subitem</li></ul></li></ul>");
 
-                ok(element.find("ul:first").is(".t-treeview-lines"));
-                ok(element.find("ul:last").is(":not(.t-treeview-lines)"));
-                ok(element.find("ul:last").is(".t-group"));
+                ok(element.find("ul:first").is(".k-treeview-lines"));
+                ok(element.find("ul:last").is(":not(.k-treeview-lines)"));
+                ok(element.find("ul:last").is(".k-group"));
             });
 
             test("collapsed groups", function() {
@@ -57,36 +57,36 @@
                     wrapper = element.find("div:first");
 
                 equals(wrapper.length, 1);
-                ok(outerWrapper.hasClass("t-first"));
-                ok(outerWrapper.hasClass("t-last"));
-                ok(wrapper.hasClass("t-top"));
-                equals(wrapper.find("span.t-in").length, 1);
-                equals(wrapper.find("span.t-in").text(), "item");
+                ok(outerWrapper.hasClass("k-first"));
+                ok(outerWrapper.hasClass("k-last"));
+                ok(wrapper.hasClass("k-top"));
+                equals(wrapper.find("span.k-in").length, 1);
+                equals(wrapper.find("span.k-in").text(), "item");
             });
 
             test("moves arbitrary content in the text wrapper", function() {
                 var element = treeviewFromHtml("<ul><li>item<span class='status'></span></li></ul>"),
                     wrapper = element.find("div:first");
 
-                equals(wrapper.find("span.t-in").text(), "item");
+                equals(wrapper.find("span.k-in").text(), "item");
                 equals(wrapper.find("span.status").length, 1);
-                ok(wrapper.find("span.status").parent().hasClass("t-in"));
+                ok(wrapper.find("span.status").parent().hasClass("k-in"));
             });
 
             test("does not nest wrapper elements", function() {
-                var element = treeviewFromHtml("<ul><li><div class='t-bot'><span class='t-in'>text</span></div></li></ul>"),
+                var element = treeviewFromHtml("<ul><li><div class='k-bot'><span class='k-in'>text</span></div></li></ul>"),
                     wrapper = element.find("div:first");
 
-                equals(element.find("div.t-bot").length, 1);
-                equals(element.find("span.t-in").length, 1);
+                equals(element.find("div.k-bot").length, 1);
+                equals(element.find("span.k-in").length, 1);
             });
 
             test("creates toggle buttons", function() {
                 var element = treeviewFromHtml("<ul><li data-expanded='true'>foo<ul><li>bar</li></ul></li></ul>"),
                     wrapper = element.find("div:first");
 
-                equals(wrapper.find("span.t-icon.t-minus").length, 1);
-                equals(element.find(".t-group:not(.t-treeview-lines)").length, 1);
+                equals(wrapper.find("span.k-icon.k-minus").length, 1);
+                equals(element.find(".k-group:not(.k-treeview-lines)").length, 1);
             });
 
             module("group");
@@ -99,7 +99,7 @@
                     }
                 });
 
-                equal(html, "<ul class='t-group'></ul>");
+                equal(html, "<ul class='k-group'></ul>");
             });
 
             test("renders lines class for first level", function() {
@@ -111,7 +111,7 @@
                     }
                 });
 
-                equal(html, "<ul class='t-group t-treeview-lines'></ul>");
+                equal(html, "<ul class='k-group k-treeview-lines'></ul>");
             });
 
             test("renders hidden group if it is not expanded", function() {
@@ -122,7 +122,7 @@
                     }
                 });
 
-                equal(html, "<ul class='t-group' style='display:none'></ul>");
+                equal(html, "<ul class='k-group' style='display:none'></ul>");
             });
 
             test("renders items, if any", function() {
@@ -136,20 +136,20 @@
                     }
                 });
 
-                equal($(html).find(".t-item").length, 1);
+                equal($(html).find(".k-item").length, 1);
             });
 
             module("item");
 
-            test("renders list items with t-item class", function() {
+            test("renders list items with k-item class", function() {
                 var $item = $(TreeView.renderItem({
                     item: {}
                 }));
 
-                ok($item.is("li.t-item"));
+                ok($item.is("li.k-item"));
             });
 
-            test("renders list items with t-first class for first item in first-level groups", function() {
+            test("renders list items with k-first class for first item in first-level groups", function() {
                 var $item = $(TreeView.renderItem({
                     item: {
                         index: 0
@@ -159,10 +159,10 @@
                     }
                 }));
 
-                ok($item.is(".t-first"));
+                ok($item.is(".k-first"));
             });
 
-            test("renders list items with t-last class for last item", function() {
+            test("renders list items with k-last class for last item", function() {
                 var $item = $(TreeView.renderItem({
                     item: {
                         index: 0
@@ -173,10 +173,10 @@
                     }
                 }));
 
-                ok($item.is(".t-last"));
+                ok($item.is(".k-last"));
             });
 
-            test("renders div elements with t-top class for first item in group", function() {
+            test("renders div elements with k-top class for first item in group", function() {
                 var $item = $(TreeView.renderItem({
                     item: {
                         index: 0
@@ -186,10 +186,10 @@
                     }
                 }));
 
-                equals($item.find("div.t-top").length, 1);
+                equals($item.find("div.k-top").length, 1);
             });
 
-            test("renders div elements with t-bot class for last item in group", function() {
+            test("renders div elements with k-bot class for last item in group", function() {
                 var $item = $(TreeView.renderItem({
                     item: {
                         index: 1
@@ -199,10 +199,10 @@
                     }
                 }));
 
-                equals($item.find("div.t-mid").length, 1);
+                equals($item.find("div.k-mid").length, 1);
             });
 
-            test("renders div elements with t-mid class for items in middle of group", function() {
+            test("renders div elements with k-mid class for items in middle of group", function() {
                 var $item = $(TreeView.renderItem({
                     item: {
                         index: 1
@@ -212,10 +212,10 @@
                     }
                 }));
 
-                equals($item.find("div.t-bot").length, 1);
+                equals($item.find("div.k-bot").length, 1);
             });
 
-            test("does not render t-top class for last items in group", function() {
+            test("does not render k-top class for last items in group", function() {
                 var $item = $(TreeView.renderItem({
                     item: {
                         index: 0
@@ -225,10 +225,10 @@
                     }
                 }));
 
-                equals($item.find("div.t-top").length, 0);
+                equals($item.find("div.k-top").length, 0);
             });
 
-            test("does not render t-top class for single items in root group", function() {
+            test("does not render k-top class for single items in root group", function() {
                 var $item = $(TreeView.renderItem({
                     item: {
                         index: 0
@@ -239,7 +239,7 @@
                     }
                 }));
 
-                equals($item.find("div.t-top").length, 1);
+                equals($item.find("div.k-top").length, 1);
             });
 
             test("renders of links for items with NavigateUrl", function() {
@@ -261,7 +261,7 @@
                     }
                 }));
 
-                equal($item.find(".t-in.t-state-disabled").length, 1);
+                equal($item.find(".k-in.k-state-disabled").length, 1);
             });
 
             test("renders selected state on selected items", function() {
@@ -272,7 +272,7 @@
                     }
                 }));
 
-                equal($item.find(".t-in.t-state-selected").length, 1);
+                equal($item.find(".k-in.k-state-selected").length, 1);
             });
 
             test("renders collapsed subgroups by default", function() {
@@ -285,7 +285,7 @@
                     }
                 }));
                 
-                equal($item.find(".t-group").css("display"), "none");
+                equal($item.find(".k-group").css("display"), "none");
             });
 
 
@@ -297,8 +297,8 @@
                     }
                 }));
 
-                equal($item.find('.t-sprite').length, 1);
-                ok($item.find('.t-sprite').hasClass('cssClass1'));
+                equal($item.find('.k-sprite').length, 1);
+                ok($item.find('.k-sprite').hasClass('cssClass1'));
             });
 
             test("renders images", function() {
@@ -309,7 +309,7 @@
                     }
                 }));
 
-                var image = $item.find(".t-image");
+                var image = $item.find(".k-image");
 
                 equal(image.length, 1);
                 equal(image.attr("src").lastIndexOf("foo"), image.attr("src").length - 3);
@@ -356,7 +356,7 @@
                     }
                 }));
 
-                equal($item.find(".t-icon.t-plus").length, 1);
+                equal($item.find(".k-icon.k-plus").length, 1);
             });
 
             test("renders minus icon if item is expanded", function() {
@@ -370,7 +370,7 @@
                     }
                 }));
 
-                equal($item.find(".t-icon.t-minus").length, 1);
+                equal($item.find(".k-icon.k-minus").length, 1);
             });
 
             test("renders disabled plus icon if item is disabled", function() {
@@ -384,8 +384,8 @@
                     }
                 }));
 
-                equal($item.find(".t-icon.t-plus-disabled").length, 1);
-                equal($item.find(".t-icon.t-plus").length, 0);
+                equal($item.find(".k-icon.k-plus-disabled").length, 1);
+                equal($item.find(".k-icon.k-plus").length, 0);
             });
 
             test("renders disabled minus icon if item is disabled and expanded", function() {
@@ -400,8 +400,8 @@
                     }
                 }));
 
-                equal($item.find(".t-icon.t-minus-disabled").length, 1);
-                equal($item.find(".t-icon.t-minus").length, 0);
+                equal($item.find(".k-icon.k-minus-disabled").length, 1);
+                equal($item.find(".k-icon.k-minus").length, 0);
             });
 
             test("does not render group, if there are no sub-items", function() {
@@ -412,7 +412,7 @@
                     treeview: {}
                 }));
 
-                equal($item.find(".t-group").length, 0);
+                equal($item.find(".k-group").length, 0);
             });
         </script>
 

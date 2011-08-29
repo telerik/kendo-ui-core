@@ -22,7 +22,7 @@
 
             module("Splitter / ClientSideApi", {
                 teardown: function() {
-                    $('.t-splitter').remove();
+                    $('.k-splitter').remove();
                 }
             });
 
@@ -32,7 +32,7 @@
                     .kendoSplitter({
                         panes: [ { collapsible: true }, {} ]
                     }),
-                    pane = splitter.find(".t-pane:first");
+                    pane = splitter.find(".k-pane:first");
 
                 splitter.data("kendoSplitter").toggle(pane, false);
 
@@ -44,7 +44,7 @@
                     panes: [ {}, { collapsible: true } ]
                 });
 
-                pane = splitter.find(".t-pane:last")
+                pane = splitter.find(".k-pane:last")
 
                 splitter.data("kendoSplitter").toggle(pane, false);
 
@@ -62,7 +62,7 @@
                     }
                 });
 
-                splitter.data("kendoSplitter").toggle(".t-pane:last", false);
+                splitter.data("kendoSplitter").toggle(".k-pane:last", false);
 
                 ok(triggered);
             });
@@ -73,12 +73,12 @@
                 .kendoSplitter({
                     panes: [ { collapsible: true }, {} ]
                 }),
-                previousArrow = splitter.find(".t-collapse-prev");
+                previousArrow = splitter.find(".k-collapse-prev");
 
-                splitter.data("kendoSplitter").toggle(".t-pane:first", false);
+                splitter.data("kendoSplitter").toggle(".k-pane:first", false);
 
-                ok(previousArrow.is(".t-expand-prev"));
-                ok(previousArrow.is(":not(.t-collapse-prev)"));
+                ok(previousArrow.is(".k-expand-prev"));
+                ok(previousArrow.is(":not(.k-collapse-prev)"));
             });
 
             test("toggle(false) disables splitbar resize", function() {
@@ -88,9 +88,9 @@
                     panes: [ { collapsible: true }, {} ]
                 });
 
-                splitter.data("kendoSplitter").toggle(".t-pane:first", false);
+                splitter.data("kendoSplitter").toggle(".k-pane:first", false);
 
-                ok(!splitter.find(".t-splitbar").hasClass("t-splitbar-draggable-horizontal"));
+                ok(!splitter.find(".k-splitbar").hasClass("k-splitbar-draggable-horizontal"));
             });
 
             test("toggle(true) removes splibar hover style", function() {
@@ -100,11 +100,11 @@
                     panes: [ { collapsible: true, collapsed: true }, {} ]
                 });
 
-                splitter.find(".t-splitbar").addClass("t-splitbar-horizontal-hover");
+                splitter.find(".k-splitbar").addClass("k-splitbar-horizontal-hover");
 
-                splitter.data("kendoSplitter").toggle(".t-pane:first", false);
+                splitter.data("kendoSplitter").toggle(".k-pane:first", false);
 
-                ok(!splitter.find(".t-splitbar").hasClass("t-splitbar-horizontal-hover"));
+                ok(!splitter.find(".k-splitbar").hasClass("k-splitbar-horizontal-hover"));
             });
 
             test("toggle(true) toggles pane state", function() {
@@ -113,7 +113,7 @@
                 .kendoSplitter({
                     panes: [ { collapsible: true, collapsed: true }, {} ]
                 }),
-                pane = splitter.find(".t-pane:first");
+                pane = splitter.find(".k-pane:first");
 
                 splitter.data("kendoSplitter").toggle(pane, true);
 
@@ -125,7 +125,7 @@
                     panes: [ {}, { collapsible: true, collapsed: true } ]
                 });
 
-                pane = splitter.find(".t-pane:last")
+                pane = splitter.find(".k-pane:last")
 
                 splitter.data("kendoSplitter").toggle(pane, true);
 
@@ -143,7 +143,7 @@
                     }
                 });
 
-                splitter.data("kendoSplitter").toggle(".t-pane:first", true);
+                splitter.data("kendoSplitter").toggle(".k-pane:first", true);
 
                 ok(triggered);
             });
@@ -154,12 +154,12 @@
                 .kendoSplitter({
                     panes: [ { collapsible: true, collapsed: true }, {} ]
                 }),
-                previousArrow = splitter.find(".t-expand-prev");
+                previousArrow = splitter.find(".k-expand-prev");
 
-                splitter.data("kendoSplitter").toggle(".t-pane:first", true);
+                splitter.data("kendoSplitter").toggle(".k-pane:first", true);
 
-                ok(previousArrow.is(".t-collapse-prev"));
-                ok(previousArrow.is(":not(.t-expand-prev)"));
+                ok(previousArrow.is(".k-collapse-prev"));
+                ok(previousArrow.is(":not(.k-expand-prev)"));
             });
 
             test("toggle(true) enables splitbar resize", function() {
@@ -169,9 +169,9 @@
                     panes: [ { collapsible: true, collapsed: true }, {} ]
                 });
 
-                splitter.data("kendoSplitter").toggle(".t-pane:first", true);
+                splitter.data("kendoSplitter").toggle(".k-pane:first", true);
 
-                ok(splitter.find(".t-splitbar").hasClass("t-splitbar-draggable-horizontal"));
+                ok(splitter.find(".k-splitbar").hasClass("k-splitbar-draggable-horizontal"));
             });
 
             test("toggle(true) does not add splibar hover style", function() {
@@ -181,9 +181,9 @@
                     panes: [ { collapsible: true, collapsed: true }, {} ]
                 });
 
-                splitter.data("kendoSplitter").toggle(".t-pane:first", true);
+                splitter.data("kendoSplitter").toggle(".k-pane:first", true);
 
-                ok(!splitter.find(".t-splitbar").hasClass("t-splitbar-horizontal-hover"));
+                ok(!splitter.find(".k-splitbar").hasClass("k-splitbar-horizontal-hover"));
             });
 
             test("toggle() without arguments toggles pane collapsed state", function() {
@@ -193,11 +193,11 @@
                     panes: [ { collapsible: true, collapsed: true }, {} ]
                 });
 
-                splitter.data("kendoSplitter").toggle(".t-pane:first");
-                ok(!splitter.find(".t-pane:first").data("pane").collapsed);
+                splitter.data("kendoSplitter").toggle(".k-pane:first");
+                ok(!splitter.find(".k-pane:first").data("pane").collapsed);
 
-                splitter.data("kendoSplitter").toggle(".t-pane:first");
-                ok(splitter.find(".t-pane:first").data("pane").collapsed);
+                splitter.data("kendoSplitter").toggle(".k-pane:first");
+                ok(splitter.find(".k-pane:first").data("pane").collapsed);
 
                 splitter.remove();
                 splitter = $(getSplitterHtml())
@@ -206,11 +206,11 @@
                     panes: [ { collapsible: true }, {} ]
                 });
 
-                splitter.data("kendoSplitter").toggle(".t-pane:first");
-                ok(splitter.find(".t-pane:first").data("pane").collapsed);
+                splitter.data("kendoSplitter").toggle(".k-pane:first");
+                ok(splitter.find(".k-pane:first").data("pane").collapsed);
 
-                splitter.data("kendoSplitter").toggle(".t-pane:first");
-                ok(!splitter.find(".t-pane:first").data("pane").collapsed);
+                splitter.data("kendoSplitter").toggle(".k-pane:first");
+                ok(!splitter.find(".k-pane:first").data("pane").collapsed);
             });
 
             test("collapse() calls toggle(false)", function() {
@@ -225,11 +225,11 @@
                     args = arguments;
                 };
 
-                splitter.collapse(".t-pane:last");
+                splitter.collapse(".k-pane:last");
 
                 ok(args);
                 equal(args.length, 2);
-                equal(args[0], ".t-pane:last");
+                equal(args[0], ".k-pane:last");
                 equal(args[1], false);
             });
 
@@ -245,11 +245,11 @@
                     args = arguments;
                 };
 
-                splitter.expand(".t-pane:last");
+                splitter.expand(".k-pane:last");
 
                 ok(args);
                 equal(args.length, 2);
-                equal(args[0], ".t-pane:last");
+                equal(args[0], ".k-pane:last");
                 equal(args[1], true);
             });
 
@@ -259,7 +259,7 @@
                 .kendoSplitter({
                     panes: [ { size: "110px" }, {} ]
                 }).data("kendoSplitter"),
-                firstPane = $(".t-pane:first", splitter.element);
+                firstPane = $(".k-pane:first", splitter.element);
 
                 equals(splitter.size(firstPane), "110px");
 
@@ -274,7 +274,7 @@
                 .kendoSplitter({
                     panes: [ { min: "110px", size: "200px" }, {} ]
                 }).data("kendoSplitter"),
-                firstPane = $(".t-pane:first", splitter.element);
+                firstPane = $(".k-pane:first", splitter.element);
 
                 equals(splitter.min(firstPane), "110px");
 
@@ -289,7 +289,7 @@
                 .kendoSplitter({
                     panes: [ { max: "200px", size: "110px" }, {} ]
                 }).data("kendoSplitter"),
-                firstPane = $(".t-pane:first", splitter.element);
+                firstPane = $(".k-pane:first", splitter.element);
 
                 equals(splitter.max(firstPane), "200px");
 
@@ -310,7 +310,7 @@
                     triggered = true;
                 });
 
-                splitter.size(".t-pane:first", "120px");
+                splitter.size(".k-pane:first", "120px");
 
                 ok(triggered);
             });

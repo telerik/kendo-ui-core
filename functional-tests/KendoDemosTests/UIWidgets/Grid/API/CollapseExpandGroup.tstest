@@ -54,7 +54,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Same' value of 't-icon t-collapse' on 'Link'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Same' value of 'k-icon k-collapse' on 'Link'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
@@ -133,7 +133,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-icon t-collapse</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-icon k-collapse</d2p1:AttributeValue>
         <d2p1:CompareType>Same</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>CollapseExpandGroupd453csdd.che</d2p1:StepImageKey>
@@ -228,7 +228,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Same' value of 't-icon t-expand' on 'Link'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Same' value of 'k-icon k-expand' on 'Link'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
@@ -307,7 +307,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-icon t-expand</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-icon k-expand</d2p1:AttributeValue>
         <d2p1:CompareType>Same</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>CollapseExpandGroupxdokmsrv.nkk</d2p1:StepImageKey>

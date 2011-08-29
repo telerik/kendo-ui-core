@@ -14,14 +14,14 @@
         math = Math,
         REQUESTSTART = "requestStart",
         ERROR = "error",
-        ROW_SELECTOR = "tbody>tr:not(.t-grouping-row):visible",
-        CELL_SELECTOR =  ROW_SELECTOR + ">td:not(.t-group-cell)",
+        ROW_SELECTOR = "tbody>tr:not(.k-grouping-row):visible",
+        CELL_SELECTOR =  ROW_SELECTOR + ">td:not(.k-group-cell)",
         FIRST_CELL_SELECTOR = CELL_SELECTOR + ":first",
         CHANGE = "change",
         DATABOUND = "dataBound",
-        FOCUSED = "t-state-focused",
-        FOCUSABLE = "t-focusable",
-        SELECTED = "t-state-selected",
+        FOCUSED = "k-state-focused",
+        FOCUSABLE = "k-focusable",
+        SELECTED = "k-state-selected",
         CLICK = "click",
         HEIGHT = "height",
         TABINDEX = "tabIndex",
@@ -54,12 +54,12 @@
                 overflow: "hidden"
             });
             that.content = element.children().first();
-            that.wrapper = that.content.wrap('<div class="t-virtual-scrollable-wrap"/>')
+            that.wrapper = that.content.wrap('<div class="k-virtual-scrollable-wrap"/>')
                                 .parent()
                                 .bind("DOMMouseScroll", proxy(that._wheelScroll, that))
                                 .bind("mousewheel", proxy(that._wheelScroll, that));
 
-            that.verticalScrollbar = $('<div class="t-scrollbar t-scrollbar-vertical" />')
+            that.verticalScrollbar = $('<div class="k-scrollbar k-scrollbar-vertical" />')
                                         .css({
                                             width: scrollbar
                                         }).appendTo(element)
@@ -193,7 +193,7 @@
     });
 
     function groupCells(count) {
-        return new Array(count + 1).join('<td class="t-group-cell"></td>');
+        return new Array(count + 1).join('<td class="k-group-cell"></td>');
     }
 
     /**
@@ -339,7 +339,7 @@
          * @option {String} [columns.width] The width of the column.
          * @option {String} [columns.template] The template for column's cells.
          * _example
-         *  $(".t-grid").kendoGrid({
+         *  $(".k-grid").kendoGrid({
          *      dataSource: {
          *          data: createRandomData(50),
          *          pageSize: 10
@@ -521,22 +521,22 @@
                 groupable = that.options.groupable;
 
             if (groupable) {
-                if(!wrapper.has("div.t-grouping-header")[0]) {
-                    $("<div />").addClass("t-grouping-header").prependTo(wrapper);
+                if(!wrapper.has("div.k-grouping-header")[0]) {
+                    $("<div />").addClass("k-grouping-header").prependTo(wrapper);
                 }
 
                 that.groupable = new Groupable(wrapper, {
-                    filter: "th:not(.t-group-cell)",
-                    groupContainer: "div.t-grouping-header",
+                    filter: "th:not(.k-group-cell)",
+                    groupContainer: "div.k-grouping-header",
                     dataSource: that.dataSource
                 });
             }
 
-            that.table.delegate(".t-grouping-row .t-collapse, .t-grouping-row .t-expand", CLICK, function(e) {
+            that.table.delegate(".k-grouping-row .k-collapse, .k-grouping-row .k-expand", CLICK, function(e) {
                 var element = $(this),
                     group = element.closest("tr");
 
-                if(element.hasClass('t-collapse')) {
+                if(element.hasClass('k-collapse')) {
                     that.collapseGroup(group);
                 } else {
                     that.expandGroup(group);
@@ -702,7 +702,7 @@
                             currentProxy(current ? current.parent().nextAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
                             handled = true;
                         } else if (keys.LEFT === key) {
-                            currentProxy(current ? current.prev(":not(.t-group-cell)") : table.find(FIRST_CELL_SELECTOR));
+                            currentProxy(current ? current.prev(":not(.k-group-cell)") : table.find(FIRST_CELL_SELECTOR));
                             handled = true;
                         } else if (keys.RIGHT === key) {
                             currentProxy(current ? current.next() : table.find(FIRST_CELL_SELECTOR));
@@ -737,7 +737,7 @@
                wrapper = wrapper.wrap("<div />").parent();
             }
 
-            that.wrapper = wrapper.addClass("t-grid t-widget")
+            that.wrapper = wrapper.addClass("k-grid k-widget")
                                   .attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0));
 
             table.removeAttr(TABINDEX);
@@ -772,26 +772,26 @@
                 scrollbar = kendo.support.scrollbar();
 
             if (scrollable) {
-                header = that.wrapper.children().filter(".t-grid-header");
+                header = that.wrapper.children().filter(".k-grid-header");
 
                 if (!header[0]) {
-                    header = $('<div class="t-grid-header" />').insertBefore(that.table);
+                    header = $('<div class="k-grid-header" />').insertBefore(that.table);
                 }
 
                 // workaround for IE issue where scroll is not raised if container is same width as the scrollbar
                 header.css("padding-right", scrollable.virtual ? scrollbar + 1 : scrollbar);
                 table = $('<table cellspacing="0" />');
                 table.append(that.thead);
-                header.empty().append($('<div class="t-grid-header-wrap" />').append(table));
+                header.empty().append($('<div class="k-grid-header-wrap" />').append(table));
 
                 that.content = that.table.parent();
 
-                if (that.content.is(".t-virtual-scrollable-wrap")) {
+                if (that.content.is(".k-virtual-scrollable-wrap")) {
                     that.content = that.content.parent();
                 }
 
-                if (!that.content.is(".t-grid-content, .t-virtual-scrollable-wrap")) {
-                    that.content = that.table.wrap('<div class="t-grid-content" />').parent();
+                if (!that.content.is(".k-grid-content, .k-virtual-scrollable-wrap")) {
+                    that.content = that.table.wrap('<div class="k-grid-content" />').parent();
 
                     if (scrollable !== true && scrollable.virtual) {
                         new VirtualScrollable(that.content, {
@@ -808,7 +808,7 @@
                 }
 
                 if(options.groupable) {
-                    height -= $(".t-grouping-header").outerHeight();
+                    height -= $(".k-grouping-header").outerHeight();
                 }
 
                 that.content.height(height);
@@ -876,10 +876,10 @@
                 pageable = that.options.pageable;
 
             if (pageable) {
-                wrapper = that.wrapper.children("div.t-grid-pager");
+                wrapper = that.wrapper.children("div.k-grid-pager");
 
                 if (!wrapper.length) {
-                    wrapper = $('<div class="t-grid-pager"/>').appendTo(that.wrapper);
+                    wrapper = $('<div class="k-grid-pager"/>').appendTo(that.wrapper);
                 }
 
                 if (typeof pageable === "object" && pageable instanceof kendo.ui.Pageable) {
@@ -945,7 +945,7 @@
                 rowTemplate = "<tr";
 
                 if (alt) {
-                    rowTemplate += ' class="t-alt"';
+                    rowTemplate += ' class="k-alt"';
                 }
 
                 if (model) {
@@ -1057,10 +1057,10 @@
                 tr.html(html);
             }
 
-            tr.find("th").addClass("t-header");
+            tr.find("th").addClass("k-header");
 
             if(!that.options.scrollable) {
-                thead.addClass("t-grid-header");
+                thead.addClass("k-grid-header");
             }
 
             tr.appendTo(thead);
@@ -1093,7 +1093,7 @@
                 colgroup.remove();
             }
 
-            colgroup = $("<colgroup/>").append($(new Array(groups + 1).join('<col class="t-group-col">') + cols.join("")));
+            colgroup = $("<colgroup/>").append($(new Array(groups + 1).join('<col class="k-group-col">') + cols.join("")));
 
             table.prepend(colgroup);
         },
@@ -1139,10 +1139,10 @@
                 length,
                 groupItems = group.items;
 
-            html +=  '<tr class="t-grouping-row">' + groupCells(level) +
+            html +=  '<tr class="k-grouping-row">' + groupCells(level) +
                       '<td colspan="' + colspan + '">' +
-                        '<p class="t-reset">' +
-                         '<a class="t-icon t-collapse" href="#"></a>' +
+                        '<p class="k-reset">' +
+                         '<a class="k-icon k-collapse" href="#"></a>' +
                          group.field + ': ' + group.value +'</p></td></tr>';
 
             if(group.hasSubgroups) {
@@ -1161,14 +1161,14 @@
          * @param {Selector|DOMElement} group Target group item to collapse.
          * @example
          * // collapses first group item
-         * grid.collapseGroup(grid.tbody.find(">tr.t-grouping-row:first"));
+         * grid.collapseGroup(grid.tbody.find(">tr.k-grouping-row:first"));
          */
         collapseGroup: function(group) {
-            group = $(group).find(".t-icon").addClass("t-expand").removeClass("t-collapse").end();
-            var level = group.find(".t-group-cell").length;
+            group = $(group).find(".k-icon").addClass("k-expand").removeClass("k-collapse").end();
+            var level = group.find(".k-group-cell").length;
 
             group.nextUntil(function() {
-                return $(".t-group-cell", this).length <= level;
+                return $(".k-group-cell", this).length <= level;
             }).hide();
         },
 
@@ -1177,34 +1177,34 @@
          * @param {Selector|DOMElement} group Target group item to expand.
          * @example
          * // expands first group item
-         * grid.expandGroup(grid.tbody.find(">tr.t-grouping-row:first"));
+         * grid.expandGroup(grid.tbody.find(">tr.k-grouping-row:first"));
          */
         expandGroup: function(group) {
-            group = $(group).find(".t-icon").addClass("t-collapse").removeClass("t-expand").end();
+            group = $(group).find(".k-icon").addClass("k-collapse").removeClass("k-expand").end();
             var that = this,
-                level = group.find(".t-group-cell").length;
+                level = group.find(".k-group-cell").length;
 
             group.nextAll("tr").each(function () {
                 var tr = $(this);
-                var offset = tr.find(".t-group-cell").length;
+                var offset = tr.find(".k-group-cell").length;
                 if (offset <= level)
                     return false;
 
                 if (offset == level + 1) {
                     tr.show();
 
-                    if (tr.hasClass("t-grouping-row") && tr.find(".t-icon").hasClass("t-collapse"))
+                    if (tr.hasClass("k-grouping-row") && tr.find(".k-icon").hasClass("k-collapse"))
                         that.expandGroup(tr);
                 }
             });
         },
         _updateHeader: function(groups) {
             var that = this,
-                cells = that.thead.find("th.t-group-cell"),
+                cells = that.thead.find("th.k-group-cell"),
                 length = cells.length;
 
             if(groups > length) {
-                $(new Array(groups - length + 1).join('<th class="t-group-cell t-header">&nbsp;</th>')).prependTo(that.thead.find("tr"));
+                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(that.thead.find("tr"));
             } else if(groups < length) {
                 length = length - groups;
                 $($.grep(cells, function(item, index) { return length > index } )).remove();

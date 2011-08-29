@@ -79,25 +79,25 @@
         excludedNodesRegExp = /^(ul|a|div)$/i,
         IMG = "img",
         OPEN = "open",
-        MENU = "t-menu",
-        LINK = "t-link",
-        LAST = "t-last",
+        MENU = "k-menu",
+        LINK = "k-link",
+        LAST = "k-last",
         CLOSE = "close",
         CLICK = "click",
         TIMER = "timer",
-        FIRST = "t-first",
-        IMAGE = "t-image",
+        FIRST = "k-first",
+        IMAGE = "k-image",
         SELECT = "select",
         ZINDEX = "zIndex",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         KENDOPOPUP = "kendoPopup",
         SLIDEINRIGHT = "slideIn:right",
-        DEFAULTSTATE = "t-state-default",
-        DISABLEDSTATE = "t-state-disabled",
-        disabledSelector = ".t-item.t-state-disabled",
-        itemSelector = ".t-item:not(.t-state-disabled)",
-        linkSelector = ".t-item:not(.t-state-disabled) > .t-link",
+        DEFAULTSTATE = "k-state-default",
+        DISABLEDSTATE = "k-state-disabled",
+        disabledSelector = ".k-item.k-state-disabled",
+        itemSelector = ".k-item:not(.k-state-disabled)",
+        linkSelector = ".k-item:not(.k-state-disabled) > .k-link",
 
         templates = {
             group: template(
@@ -119,30 +119,30 @@
                     "<# } #>" +
                 "</li>"
             ),
-            image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
+            image: template("<img class='k-image' alt='' src='<#= imageUrl #>' />"),
             arrow: template("<span class='<#= arrowClass(item, group) #>'></span>"),
-            sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
+            sprite: template("<span class='k-sprite <#= spriteCssClass #>'></span>"),
             empty: template("")
         },
 
         rendering = {
             /** @ignore */
             wrapperCssClass: function (group, item) {
-                var result = "t-item",
+                var result = "k-item",
                     index = item.index;
 
                 if (item.enabled === false) {
-                    result += " t-state-disabled";
+                    result += " k-state-disabled";
                 } else {
-                    result += " t-state-default";
+                    result += " k-state-default";
                 }
 
                 if (group.firstLevel && index == 0) {
-                    result += " t-first"
+                    result += " k-first"
                 }
 
                 if (index == group.length-1) {
-                    result += " t-last";
+                    result += " k-last";
                 }
 
                 return result;
@@ -157,12 +157,12 @@
             },
             /** @ignore */
             arrowClass: function(item, group) {
-                var result = "t-icon";
+                var result = "k-icon";
 
                 if (group.horizontal) {
-                    result += " t-arrow-down";
+                    result += " k-arrow-down";
                 } else {
-                    result += " t-arrow-right";
+                    result += " k-arrow-right";
                 }
 
                 return result;
@@ -181,7 +181,7 @@
             },
             /** @ignore */
             groupCssClass: function(group) {
-                return "t-group";
+                return "k-group";
             }
         };
 
@@ -221,7 +221,7 @@
         item
             .children("a:focus")
             .parent()
-            .addClass("t-state-active");
+            .addClass("k-state-active");
 
         if (!item.children("." + LINK).length) {
             item
@@ -237,23 +237,23 @@
     function updateArrow (item) {
         item = $(item);
 
-        item.find(".t-icon").remove();
+        item.find(".k-icon").remove();
 
-        item.filter(":has(.t-group)")
-            .children(".t-link:not(:has([class*=t-arrow]))")
+        item.filter(":has(.k-group)")
+            .children(".k-link:not(:has([class*=k-arrow]))")
             .each(function () {
                 var item = $(this),
                     parent = item.parent().parent();
 
-                item.append("<span class='t-icon " + (parent.hasClass(MENU + "-horizontal") ? "t-arrow-down" : "t-arrow-next") + "'/>");
+                item.append("<span class='k-icon " + (parent.hasClass(MENU + "-horizontal") ? "k-arrow-down" : "k-arrow-next") + "'/>");
             });
     }
 
     function updateFirstLast (item) {
         item = $(item);
 
-        item.filter(".t-first:not(:first-child)").removeClass(FIRST);
-        item.filter(".t-last:not(:last-child)").removeClass(LAST);
+        item.filter(".k-first:not(:first-child)").removeClass(FIRST);
+        item.filter(".k-last:not(:last-child)").removeClass(LAST);
         item.filter(":first-child").addClass(FIRST);
         item.filter(":last-child").addClass(LAST);
     }
@@ -378,7 +378,7 @@
         append: function (item, referenceItem) {
             referenceItem = $(referenceItem);
 
-            var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .t-group, .t-animation-container > .t-group") : null);
+            var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-group, .k-animation-container > .k-group") : null);
 
             each(inserted.items, function () {
                 inserted.group.append(this);
@@ -386,7 +386,7 @@
             });
 
             updateArrow(referenceItem);
-            updateFirstLast(inserted.group.find(".t-first, .t-last"));
+            updateFirstLast(inserted.group.find(".k-first, .k-last"));
         },
 
         /**
@@ -491,13 +491,13 @@
             element = $(element);
 
             var that = this,
-                parent = element.parentsUntil(that.element, ".t-item"),
+                parent = element.parentsUntil(that.element, ".k-item"),
                 group = element.parent("ul");
 
             element.remove();
 
-            if (group && !group.children(".t-item").length) {
-                var container = group.parent(".t-animation-container");
+            if (group && !group.children(".k-item").length) {
+                var container = group.parent(".k-animation-container");
                 container.length ? container.remove() : group.remove();
             }
 
@@ -524,7 +524,7 @@
                 clearTimeout(li.data(TIMER));
 
                 li.data(TIMER, setTimeout(function () {
-                    var ul = li.find(".t-group:first:hidden"), popup;
+                    var ul = li.find(".k-group:first:hidden"), popup;
 
                     if (ul[0]) {
                         li.data(ZINDEX, li.css(ZINDEX));
@@ -569,7 +569,7 @@
                 clearTimeout(li.data(TIMER));
 
                 li.data(TIMER, setTimeout(function () {
-                    var ul = li.find(".t-group:first:visible"), popup;
+                    var ul = li.find(".k-group:first:visible"), popup;
                     if (ul[0]) {
                         li.css(ZINDEX, li.data(ZINDEX));
                         li.removeData(ZINDEX);
@@ -593,21 +593,21 @@
             var target = $(e.currentTarget);
 
             if (!target.parents("li." + DISABLEDSTATE).length) {
-                target.toggleClass("t-state-hover", e.type == MOUSEENTER);
+                target.toggleClass("k-state-hover", e.type == MOUSEENTER);
             }
         },
 
         _updateClasses: function() {
             var that = this;
 
-            that.element.addClass("t-widget t-reset t-header " + MENU).addClass(MENU + "-" + that.options.orientation);
+            that.element.addClass("k-widget k-reset k-header " + MENU).addClass(MENU + "-" + that.options.orientation);
 
             var items = that.element
                             .find("ul")
-                            .addClass("t-group")
+                            .addClass("k-group")
                             .end()
                             .find("li")
-                            .addClass("t-item");
+                            .addClass("k-item");
 
             items.each(function () {
                 updateItemClasses(this);
@@ -617,7 +617,7 @@
         _mouseenter: function (e) {
             var that = this,
                 element = $(e.currentTarget),
-                hasChildren = (element.children(".t-animation-container").length || element.children(".t-group").length);
+                hasChildren = (element.children(".k-animation-container").length || element.children(".k-group").length);
 
             if (!that.options.openOnClick || that.clicked) {
                 if (!contains(e.currentTarget, e.relatedTarget) && hasChildren) {
@@ -639,7 +639,7 @@
         _mouseleave: function (e) {
             var that = this,
                 element = $(e.currentTarget),
-                hasChildren = (element.children(".t-animation-container").length || element.children(".t-group").length);
+                hasChildren = (element.children(".k-animation-container").length || element.children(".k-group").length);
 
             if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                 if (that.trigger(CLOSE, { item: element[0] }) === false) {
@@ -681,7 +681,7 @@
 
             if (that.clicked) {
                 that.clicked = false;
-                that.close(that.element.find(".t-item>.t-animation-container:visible").parent());
+                that.close(that.element.find(".k-item>.k-animation-container:visible").parent());
             }
         }
     });

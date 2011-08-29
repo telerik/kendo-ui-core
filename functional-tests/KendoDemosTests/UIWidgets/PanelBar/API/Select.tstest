@@ -230,7 +230,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Same' value of 't-link t-header t-state-selected' on 'FourthItemSpan'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Same' value of 'k-link k-header k-state-selected' on 'FourthItemSpan'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
@@ -307,7 +307,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-link t-header t-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-link k-header k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Same</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>Select3aptdmsl.mvq</d2p1:StepImageKey>

@@ -18,7 +18,7 @@
 </head>
 <body>
 
-    <ul class="t-widget t-panelbar t-reset" id="PanelBar1" style="width: 300px; float: left; visibility: hidden; position: absolute;">
+    <ul class="k-widget k-panelbar k-reset" id="PanelBar1" style="width: 300px; float: left; visibility: hidden; position: absolute;">
         <li><a>Pure ASP.NET MVC components</a>
             <div></div>
         </li>
@@ -31,7 +31,7 @@
         <li><a>Based on jQuery</a>
             <div></div>
         </li>
-        <li class="t-state-active"><a>Wide Cross-browser support</a>
+        <li class="k-state-active"><a>Wide Cross-browser support</a>
             <div></div>
         </li>
     </ul>
@@ -49,7 +49,7 @@
             }).data("kendoPanelBar");
 
         function getRootItem(index) {
-            return panelbar.element.find(".t-header").parent().eq(index).children(".t-link");
+            return panelbar.element.find(".k-header").parent().eq(index).children(".k-link");
         }
 
         module("AjaxLoading");
@@ -58,7 +58,7 @@
             var item = getRootItem(0);
 
             panelbar.bind("contentLoad", function() {
-                equal(item.parent().find(".t-content").css("display"), "block");
+                equal(item.parent().find(".k-content").css("display"), "block");
                 panelbar.unbind("contentLoad");
                 start();
             });
@@ -71,14 +71,14 @@
 
             item.trigger("click");
 
-            equal(item.parent().find(".t-content").css("display"), "none");
+            equal(item.parent().find(".k-content").css("display"), "none");
         });
 
         asyncTest("clicking collapsed content items should toggle arrow", function() {
             var item = getRootItem(1);
 
             panelbar.bind("contentLoad", function() {
-                ok(item.find(".t-icon").hasClass("t-arrow-up"));
+                ok(item.find(".k-icon").hasClass("k-arrow-up"));
                 panelbar.unbind("contentLoad");
                 start();
             });
@@ -91,14 +91,14 @@
 
             item.trigger("click");
 
-            ok(item.find(".t-icon").hasClass("t-arrow-down"));
+            ok(item.find(".k-icon").hasClass("k-arrow-down"));
         });
 
         test("clicking should make item active", function() {
             var item = getRootItem(2);
 
             panelbar.bind("contentLoad", function() {
-                ok(item.parent().hasClass("t-state-active"));
+                ok(item.parent().hasClass("k-state-active"));
                 panelbar.unbind("contentLoad");
                 start();
             });
@@ -109,7 +109,7 @@
         test("initially expanded items fetch their AJAX content", function() {
             var item = getRootItem(4);
 
-            equal(item.parent().find(".t-content").css("display"), "block");
+            equal(item.parent().find(".k-content").css("display"), "block");
         });
     </script>
 

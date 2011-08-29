@@ -218,7 +218,7 @@
             var that = this,
                 panesConfig,
                 splitbarSelector,
-                expandCollapseSelector = ".t-splitbar .t-icon:not(.t-resize-handle)",
+                expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)",
                 triggerResize = function() {
                     that.trigger(RESIZE);
                 };
@@ -226,7 +226,7 @@
             Component.fn.init.call(that, element, options);
 
             that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
-            splitbarSelector = ".t-splitbar-draggable-" + that.orientation;
+            splitbarSelector = ".k-splitbar-draggable-" + that.orientation;
             that.ajaxOptions = that.options.ajaxOptions || that.ajaxOptions;
 
             that.bind([
@@ -269,14 +269,14 @@
             that._initPanes();
 
             that.element
-                .delegate(splitbarSelector, MOUSEENTER, function() { $(this).addClass("t-splitbar-" + that.orientation + "-hover"); })
-                .delegate(splitbarSelector, MOUSELEAVE, function() { $(this).removeClass("t-splitbar-" + that.orientation + "-hover"); })
-                .delegate(expandCollapseSelector, MOUSEENTER, function() { $(this).addClass("t-state-hover")})
-                .delegate(expandCollapseSelector, MOUSELEAVE, function() { $(this).removeClass('t-state-hover')})
-                .delegate(".t-splitbar .t-collapse-next, .t-splitbar .t-collapse-prev", CLICK, that._arrowClick(COLLAPSE))
-                .delegate(".t-splitbar .t-expand-next, .t-splitbar .t-expand-prev", CLICK, that._arrowClick(EXPAND))
-                .delegate(".t-splitbar", "dblclick", $.proxy(that._dbclick, that))
-                .parent().closest(".t-splitter").each(function() {
+                .delegate(splitbarSelector, MOUSEENTER, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
+                .delegate(splitbarSelector, MOUSELEAVE, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
+                .delegate(expandCollapseSelector, MOUSEENTER, function() { $(this).addClass("k-state-hover")})
+                .delegate(expandCollapseSelector, MOUSELEAVE, function() { $(this).removeClass('k-state-hover')})
+                .delegate(".k-splitbar .k-collapse-next, .k-splitbar .k-collapse-prev", CLICK, that._arrowClick(COLLAPSE))
+                .delegate(".k-splitbar .k-expand-next, .k-splitbar .k-expand-prev", CLICK, that._arrowClick(EXPAND))
+                .delegate(".k-splitbar", "dblclick", $.proxy(that._dbclick, that))
+                .parent().closest(".k-splitter").each(function() {
                     $(this).data("kendoSplitter").bind(RESIZE, triggerResize);
                 });
 
@@ -293,15 +293,15 @@
                 panesConfig = that.options.panes || [];
 
             that.element
-                .addClass("t-widget").addClass("t-splitter")
+                .addClass("k-widget").addClass("k-splitter")
                 .children()
-                    .addClass("t-pane")
+                    .addClass("k-pane")
                     .each(function (index, pane) {
                         var $pane = $(pane),
                             config = panesConfig && panesConfig[index];
 
                         $pane.data("pane", config ? config : {})
-                            .toggleClass("t-scrollable", config ? config.scrollable !== false : true);
+                            .toggleClass("k-scrollable", config ? config.scrollable !== false : true);
                         that.ajaxRequest($pane);
                     })
                 .end();
@@ -333,7 +333,7 @@
                 paneConfig = $pane.data("pane");
 
             if (url || paneConfig.contentUrl) {
-                $pane.append("<span class='t-icon t-loading t-pane-loading' />");
+                $pane.append("<span class='k-icon k-loading k-pane-loading' />");
 
                 $.ajax(this.ajaxOptions($pane, {
                     url: url || paneConfig.contentUrl
@@ -350,23 +350,23 @@
                 $target = $(e.target),
                 arrow;
 
-            if ($target.closest(".t-splitter")[0] != that.element[0]) {
+            if ($target.closest(".k-splitter")[0] != that.element[0]) {
                 return;
             }
 
-            arrow = $target.children(".t-icon:not(.t-resize-handle)");
+            arrow = $target.children(".k-icon:not(.k-resize-handle)");
 
             if (arrow.length !== 1) {
                 return;
             }
 
-            if (arrow.is(".t-collapse-prev")) {
+            if (arrow.is(".k-collapse-prev")) {
                 that._triggerAction(COLLAPSE, $target.prev());
-            } else if (arrow.is(".t-collapse-next")) {
+            } else if (arrow.is(".k-collapse-next")) {
                 that._triggerAction(COLLAPSE, $target.next());
-            } else if (arrow.is(".t-expand-prev")) {
+            } else if (arrow.is(".k-expand-prev")) {
                 that._triggerAction(EXPAND, $target.prev());
-            } else if (arrow.is(".t-expand-next")) {
+            } else if (arrow.is(".k-expand-next")) {
                 that._triggerAction(EXPAND, $target.next());
             }
         },
@@ -377,10 +377,10 @@
                 var $target = $(e.target),
                     pane;
 
-                if ($target.closest(".t-splitter")[0] != that.element[0])
+                if ($target.closest(".k-splitter")[0] != that.element[0])
                     return;
 
-                if ($target.is(".t-" + arrowType + "-prev")) {
+                if ($target.is(".k-" + arrowType + "-prev")) {
                     pane = $target.parent().prev();
                 } else {
                     pane = $target.parent().next();
@@ -396,7 +396,7 @@
                 idx,
                 isSplitBarDraggable,
                 catIconIf = function(iconType, condition) {
-                   return condition ? "<div class='t-icon " + iconType + "' />" : "";
+                   return condition ? "<div class='k-icon " + iconType + "' />" : "";
                 };
 
             for (idx = 0; idx < splitBarsCount; idx++) {
@@ -410,21 +410,21 @@
 
                 isSplitBarDraggable = (previousPane.resizable !== false) && (nextPane.resizable !== false);
 
-                pane.after("<div class='t-splitbar t-state-default t-splitbar-" + this.orientation +
-                        (isSplitBarDraggable && !previousPane.collapsed && !nextPane.collapsed ?  " t-splitbar-draggable-" + this.orientation : "") +
-                    "'>" + catIconIf("t-collapse-prev", previousPane.collapsible && !previousPane.collapsed) +
-                    catIconIf("t-expand-prev", previousPane.collapsible && previousPane.collapsed) +
-                    catIconIf("t-resize-handle", isSplitBarDraggable) +
-                    catIconIf("t-collapse-next", nextPane.collapsible && !nextPane.collapsed) +
-                    catIconIf("t-expand-next", nextPane.collapsible && nextPane.collapsed) + "</div>");
+                pane.after("<div class='k-splitbar k-state-default k-splitbar-" + this.orientation +
+                        (isSplitBarDraggable && !previousPane.collapsed && !nextPane.collapsed ?  " k-splitbar-draggable-" + this.orientation : "") +
+                    "'>" + catIconIf("k-collapse-prev", previousPane.collapsible && !previousPane.collapsed) +
+                    catIconIf("k-expand-prev", previousPane.collapsible && previousPane.collapsed) +
+                    catIconIf("k-resize-handle", isSplitBarDraggable) +
+                    catIconIf("k-collapse-next", nextPane.collapsible && !nextPane.collapsed) +
+                    catIconIf("k-expand-next", nextPane.collapsible && nextPane.collapsed) + "</div>");
             }
         },
         _resize: function() {
             var that = this,
                 element = that.element,
-                panes = element.children(":not(.t-splitbar)"),
+                panes = element.children(":not(.k-splitbar)"),
                 isHorizontal = that.orientation == HORIZONTAL,
-                splitBars = element.children(".t-splitbar");
+                splitBars = element.children(".k-splitbar");
                 splitBarsCount = splitBars.length,
                 sizingProperty = isHorizontal ? "width" : "height",
                 totalSize = element[sizingProperty]();
@@ -432,7 +432,7 @@
             if (splitBarsCount === 0) {
                 splitBarsCount = panes.length - 1;
                 that._appendSplitBars(panes);
-                splitBars = element.children(".t-splitbar");
+                splitBars = element.children(".k-splitbar");
             }
 
             // discard splitbar sizes from total size
@@ -491,15 +491,15 @@
         },
         toggle: function(pane, expand) {
             var pane = $(pane),
-                previousSplitBar = pane.prev(".t-splitbar"),
-                nextSplitBar = pane.next(".t-splitbar"),
+                previousSplitBar = pane.prev(".k-splitbar"),
+                nextSplitBar = pane.next(".k-splitbar"),
                 splitbars = previousSplitBar.add(nextSplitBar),
                 paneConfig = pane.data("pane"),
-                prevPaneConfig = pane.prevAll(".t-pane:first").data("pane"),
-                nextPaneConfig = pane.nextAll(".t-pane:first").data("pane"),
+                prevPaneConfig = pane.prevAll(".k-pane:first").data("pane"),
+                nextPaneConfig = pane.nextAll(".k-pane:first").data("pane"),
                 orentation = this.orientation,
-                hoverClass = "t-splitbar-" + orentation + "-hover",
-                draggableClass = "t-splitbar-draggable-" + orentation;
+                hoverClass = "k-splitbar-" + orentation + "-hover",
+                draggableClass = "k-splitbar-draggable-" + orentation;
 
             if (arguments.length == 1) {
                 expand = paneConfig.collapsed === undefined ? false : paneConfig.collapsed;
@@ -508,16 +508,16 @@
             previousSplitBar
                 .toggleClass(draggableClass, expand && paneConfig.resizable !== false && (!prevPaneConfig || prevPaneConfig.resizable !== false))
                 .removeClass(hoverClass)
-                .find(expand ? ".t-expand-next" : ".t-collapse-next")
-                    .toggleClass("t-expand-next", !expand)
-                    .toggleClass("t-collapse-next", expand);
+                .find(expand ? ".k-expand-next" : ".k-collapse-next")
+                    .toggleClass("k-expand-next", !expand)
+                    .toggleClass("k-collapse-next", expand);
 
             nextSplitBar
                 .toggleClass(draggableClass, expand && paneConfig.resizable !== false && (!nextPaneConfig || nextPaneConfig.resizable !== false))
                 .removeClass(hoverClass)
-                .find(expand ? ".t-expand-prev" : ".t-collapse-prev")
-                    .toggleClass("t-expand-prev", !expand)
-                    .toggleClass("t-collapse-prev", expand);
+                .find(expand ? ".k-expand-prev" : ".k-collapse-prev")
+                    .toggleClass("k-expand-prev", !expand)
+                    .toggleClass("k-collapse-prev", expand);
 
             paneConfig.collapsed = !expand;
 
@@ -602,12 +602,12 @@
 
         that._resizable = new kendo.ui.Resizable(splitter.element, {
             orientation: that.orientation,
-            handle: that.orientation == HORIZONTAL ? ".t-splitbar-draggable-horizontal" : ".t-splitbar-draggable-vertical",
+            handle: that.orientation == HORIZONTAL ? ".k-splitbar-draggable-horizontal" : ".k-splitbar-draggable-vertical",
             hint: $.proxy(that._createHint, that),
             start: $.proxy(that._start, that),
             max: $.proxy(that._max, that),
             min: $.proxy(that._min, that),
-            invalidClass:"t-restricted-size-" + that.orientation,
+            invalidClass:"k-restricted-size-" + that.orientation,
             resizeend: $.proxy(that._stop, that)
         });
     }
@@ -615,7 +615,7 @@
     PaneResizing.prototype = {
         _createHint: function(handle) {
             var that = this;
-            return $("<div class='t-ghost-splitbar t-ghost-splitbar-" + that.orientation + " t-state-default' />")
+            return $("<div class='k-ghost-splitbar k-ghost-splitbar-" + that.orientation + " k-state-default' />")
                         .css(that.alternateSizingProperty, handle[that.alternateSizingProperty]())
         },
         _start: function(e) {
@@ -660,7 +660,7 @@
                     nextPaneConfig = nextPane.data("pane"),
                     previousPaneNewSize = ghostPosition - parseInt(previousPane[0].style[that.positioningProperty]),
                     nextPaneNewSize = parseInt(nextPane[0].style[that.positioningProperty]) + nextPane[0][that.sizingDomProperty] - ghostPosition - splitBar[0][that.sizingDomProperty],
-                    fluidPanesCount = that._element.children(".t-pane").filter(function() { return isFluid($(this).data("pane").size); }).length;
+                    fluidPanesCount = that._element.children(".k-pane").filter(function() { return isFluid($(this).data("pane").size); }).length;
 
                 if (!isFluid(previousPaneConfig.size) || fluidPanesCount > 1) {
                     if (isFluid(previousPaneConfig.size)) {

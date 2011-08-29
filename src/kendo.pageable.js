@@ -15,13 +15,13 @@
             that.selectTemplate = kendo.template(that.options.selectTemplate);
 
             that.dataSource.bind("change", proxy(that.refresh, that));
-            that.list = $('<ul class="t-pager t-reset t-numeric" />').appendTo(that.element).html(that.selectTemplate({ text: 1 }));
+            that.list = $('<ul class="k-pager k-reset k-numeric" />').appendTo(that.element).html(that.selectTemplate({ text: 1 }));
             that.element.delegate("a", "click",  proxy(that._click, that));
         },
 
         options: {
-            selectTemplate: '<li><span class="t-state-active"><#= text #></span></li>',
-            linkTemplate: '<li><a href="#" class="t-link" data-page="<#= idx #>"><#= text #></a></li>',
+            selectTemplate: '<li><span class="k-state-active"><#= text #></span></li>',
+            linkTemplate: '<li><a href="#" class="k-link" data-page="<#= idx #>"><#= text #></a></li>',
             buttonCount: 10
         },
 

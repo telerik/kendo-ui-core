@@ -56,7 +56,7 @@
 
     Application = {
         load: function(href) {
-            $.each($(document).find(".t-window-content"), function(index, window) {
+            $.each($(document).find(".k-window-content"), function(index, window) {
                 window = $(window).data("kendoWindow");
                 if (window) {
                     window.close();
@@ -98,7 +98,7 @@
 
                 var exampleBody = $("#exampleWrap"),
                     exampleName = $("#exampleTitle"),
-                    tools = $("#codeStrip, .skinSelector.t-widget"),
+                    tools = $("#codeStrip, .skinSelector.k-widget"),
                     title = Application.fetchTitle(),
                     toolsVisible = tools.is(":visible");
 
@@ -112,7 +112,7 @@
                     exampleBody.empty().html(Application.body(html));
                 } else {
                     exampleName.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
-                        var sprite = $("#nav > .t-state-highlighted > .t-link > .t-sprite"), iconElement = "";
+                        var sprite = $("#nav > .k-state-highlighted > .k-link > .k-sprite"), iconElement = "";
                         if (sprite.length) {
                             var currentControl = sprite[0].className.match(/\s(\w+Icon)/i)[1];
                             iconElement = '<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>';
@@ -160,7 +160,7 @@
             var exampleName = $("#exampleTitle");
 
             if (title != "Overview") {
-                var sprite = $("#nav > .t-state-highlighted > .t-link > .t-sprite"), iconElement = "";
+                var sprite = $("#nav > .k-state-highlighted > .k-link > .k-sprite"), iconElement = "";
                 if (sprite.length) {
                     var currentControl = sprite[0].className.match(/\s(\w+Icon)/i)[1];
                     iconElement = '<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>'
@@ -168,7 +168,7 @@
 
                 exampleName.empty().html(iconElement + title);
 
-                $("#codeStrip, .skinSelector.t-widget").show();
+                $("#codeStrip, .skinSelector.k-widget").show();
 
                 $(".description").empty().html($.trim(Application.description(html)));
             } else {
@@ -447,10 +447,10 @@ function initializeNavigation (normalizedUrl) {
 
         selectCategory($("#topnav #" + page)[0]);
 
-        var link = $("#nav .t-link[href*='" + url + "']")
-            .addClass("t-state-selected").addClass("chosen");
+        var link = $("#nav .k-link[href*='" + url + "']")
+            .addClass("k-state-selected").addClass("chosen");
 
-        panelBar.expand(link.parent().parents(".t-item"), false);
+        panelBar.expand(link.parent().parents(".k-item"), false);
     }
 
     $(document).ready( function () {
@@ -471,7 +471,7 @@ function initializeNavigation (normalizedUrl) {
             skinSelector.data("kendoDropDownList").value(kendoSkin);
         }
 
-        $(".skinSelector.t-widget").show();
+        $(".skinSelector.k-widget").show();
     });
 }
 

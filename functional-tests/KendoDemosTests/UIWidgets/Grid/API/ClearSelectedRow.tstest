@@ -137,7 +137,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for attribute 'class' has 'Same' value of 't-state-selected' on 'TableRow'</d2p1:Description>
+      <d2p1:Description>Wait for attribute 'class' has 'Same' value of 'k-state-selected' on 'TableRow'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>

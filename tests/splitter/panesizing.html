@@ -24,18 +24,18 @@
 
             module("Horizontal sizing", {
                 teardown: function() {
-                    $('.t-splitter').remove();
+                    $('.k-splitter').remove();
                 }
             });
 
             test("fluid resizable panes get equal sizes and a splitbar between them", function() {
                 var splitter = $(getSplitterHtml()).width(307).appendTo(document.body).kendoSplitter(),
-                    panes = splitter.find(".t-pane");
+                    panes = splitter.find(".k-pane");
 
                 equals(panes.eq(0).width(), 150);
                 equals(panes.eq(1).width(), 150);
                 equals(panes.eq(1).offset().left - panes.offset().left, 157);
-                equals(splitter.find(".t-splitbar").offset().left - panes.offset().left, 150);
+                equals(splitter.find(".k-splitbar").offset().left - panes.offset().left, 150);
             });
 
             test("fluid panes get their size after allocating space for fixed panes", function() {
@@ -45,7 +45,7 @@
                             {}
                         ]
                     }),
-                    panes = splitter.find(".t-pane");
+                    panes = splitter.find(".k-pane");
 
                 equals(panes.eq(0).width(), 100);
                 equals(panes.eq(1).width(), 200);
@@ -59,7 +59,7 @@
                             { size: "30%" }
                         ]
                     }),
-                    panes = splitter.find(".t-pane");
+                    panes = splitter.find(".k-pane");
 
                 equals(panes.eq(0).width(), 30);
                 equals(panes.eq(1).width(), 180);
@@ -73,14 +73,14 @@
                             {}
                         ]
                     }),
-                    panes = splitter.find(".t-pane");
+                    panes = splitter.find(".k-pane");
 
                 equals(panes[0].style.width, "20px");
             });
 
             test("sizes of fluid panes get properly rounded", function() {
                 var splitter = $(getSplitterHtml()).width(208).appendTo(document.body).kendoSplitter(),
-                    panes = splitter.find(".t-pane");
+                    panes = splitter.find(".k-pane");
 
                 equals(panes.eq(0).width(), 100);
                 equals(panes.eq(1).width(), 101);
@@ -88,18 +88,18 @@
 
             module("Vertical sizing", {
                 teardown: function() {
-                    $('.t-splitter').remove();
+                    $('.k-splitter').remove();
                 }
             });
 
             test("fluid resizable panes get equal sizes and a splitbar between them", function() {
                 var splitter = $(getSplitterHtml()).height(307).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
-                    panes = splitter.find(".t-pane");
+                    panes = splitter.find(".k-pane");
 
                 equals(panes.eq(0).height(), 150);
                 equals(panes.eq(1).height(), 150);
                 equals(panes.eq(1).offset().top - panes.offset().top, 157);
-                equals(splitter.find(".t-splitbar").offset().top - panes.offset().top, 150);
+                equals(splitter.find(".k-splitbar").offset().top - panes.offset().top, 150);
             });
 
             test("fluid panes get their size after allocating space for fixed panes", function() {
@@ -110,7 +110,7 @@
                             {}
                         ]
                     }),
-                    panes = splitter.find(".t-pane");
+                    panes = splitter.find(".k-pane");
 
                 equals(panes.eq(0).height(), 100);
                 equals(panes.eq(1).height(), 200);
@@ -125,7 +125,7 @@
                             { size: "30%" }
                         ]
                     }),
-                    panes = splitter.find(".t-pane");
+                    panes = splitter.find(".k-pane");
 
                 equals(panes.eq(0).height(), 30);
                 equals(panes.eq(1).height(), 180);
@@ -140,14 +140,14 @@
                             {}
                         ]
                     }),
-                    panes = splitter.find(".t-pane");
+                    panes = splitter.find(".k-pane");
 
                 equals(panes[0].style.height, "20px");
             });
 
             test("sizes of fluid panes get properly rounded", function() {
                 var splitter = $(getSplitterHtml()).height(208).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
-                    panes = splitter.find(".t-pane");
+                    panes = splitter.find(".k-pane");
 
                 equals(panes.eq(0).height(), 100);
                 equals(panes.eq(1).height(), 101);
@@ -155,7 +155,7 @@
 
             module("Sizing with collapsing", {
                 teardown: function() {
-                    $('.t-splitter').remove();
+                    $('.k-splitter').remove();
                 }
             });
 
@@ -163,7 +163,7 @@
                 var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
                         panes: [{ collapsed: true }, {}]
                     }),
-                    panes = splitter.find(".t-pane");
+                    panes = splitter.find(".k-pane");
 
                 equals(panes.eq(0).width(), 0);
                 equals(panes.eq(1).width(), 200);

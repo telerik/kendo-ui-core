@@ -3,62 +3,62 @@
         uploadInstance = createUpload( { async: { saveUrl: "javascript:''", removeUrl: null } } );
 
         simulateUpload();
-        equal($(".t-delete", uploadInstance.wrapper).length, 0);
+        equal($(".k-delete", uploadInstance.wrapper).length, 0);
     });
 
     test("remove icon is rendered upon success", function() {
         simulateUpload();
 
-        equal($(".t-delete", uploadInstance.wrapper).length, 1);
+        equal($(".k-delete", uploadInstance.wrapper).length, 1);
     });
 
-    test("t-loading is rendered when upload starts", function() {
+    test("k-loading is rendered when upload starts", function() {
         simulateFileSelect();
-        equal($(".t-upload-files li.t-file. > span.t-icon.t-loading", uploadInstance.wrapper).length, 1);
+        equal($(".k-upload-files li.k-file. > span.k-icon.k-loading", uploadInstance.wrapper).length, 1);
     });
 
-    test("t-loading is cleared upon success", function() {
+    test("k-loading is cleared upon success", function() {
         simulateUpload();
 
-        equal($(".t-upload-files li.t-file. > span.t-icon.t-loading", uploadInstance.wrapper).length, 0);
+        equal($(".k-upload-files li.k-file. > span.k-icon.k-loading", uploadInstance.wrapper).length, 0);
     });
 
     test("uploading status text is rendered when upload starts", function() {
         simulateFileSelect();
-        equal($(".t-upload-files .t-file > .t-icon", uploadInstance.wrapper).text(), "uploading");
+        equal($(".k-upload-files .k-file > .k-icon", uploadInstance.wrapper).text(), "uploading");
     });
 
-    test("t-success is rendered upon success", function() {
+    test("k-success is rendered upon success", function() {
         simulateUpload();
 
-        equal($(".t-upload-files li.t-file > .t-icon.t-success", uploadInstance.wrapper).length, 1);
+        equal($(".k-upload-files li.k-file > .k-icon.k-success", uploadInstance.wrapper).length, 1);
     });
 
     test("uploaded status text is rendered upon success", function() {
         simulateUpload();
 
-        equal($(".t-upload-files .t-file > .t-icon", uploadInstance.wrapper).text(), "uploaded");
+        equal($(".k-upload-files .k-file > .k-icon", uploadInstance.wrapper).text(), "uploaded");
     });
 
-    test("t-fail is rendered upon upload error", function() {
+    test("k-fail is rendered upon upload error", function() {
         uploadInstance = createUpload();
         simulateUploadWithResponse(errorResponse);
 
-        equal($(".t-upload-files li.t-file > .t-icon.t-fail", uploadInstance.wrapper).length, 1);
+        equal($(".k-upload-files li.k-file > .k-icon.k-fail", uploadInstance.wrapper).length, 1);
     });
 
     test("error status text is rendered upon upload error", function() {
         uploadInstance = createUpload();
         simulateUploadWithResponse(errorResponse);
 
-        equal($(".t-upload-files .t-file > .t-icon", uploadInstance.wrapper).text(), "failed");
+        equal($(".k-upload-files .k-file > .k-icon", uploadInstance.wrapper).text(), "failed");
     });
 
     test("retry button is rendered upon upload error", function() {
         uploadInstance = createUpload();
         simulateUploadWithResponse(errorResponse);
 
-        equal($(".t-upload-files li.t-file > .t-upload-action .t-retry", uploadInstance.wrapper).length, 1);
+        equal($(".k-upload-files li.k-file > .k-upload-action .k-retry", uploadInstance.wrapper).length, 1);
     });
 
     test("clicking remove should call remove action", function() {
@@ -91,7 +91,7 @@
         simulateRemove();
 
         setTimeout(function() {
-            equal($(".t-file", uploadInstance.wrapper).length, 0);
+            equal($(".k-file", uploadInstance.wrapper).length, 0);
             start();
         }, 100);
     });
@@ -101,18 +101,18 @@
         uploadInstance.disable();
         simulateRemove();
         setTimeout(function() {
-            equal($(".t-file", uploadInstance.wrapper).length, 1);
+            equal($(".k-file", uploadInstance.wrapper).length, 1);
             start();
         }, 100);
     });
 
     test("cancel icon is rendered", function() {
         simulateFileSelect();
-        equal($(".t-upload-files li.t-file button.t-upload-action span.t-cancel", uploadInstance.wrapper).length, 1);
+        equal($(".k-upload-files li.k-file button.k-upload-action span.k-cancel", uploadInstance.wrapper).length, 1);
     });
 
     test("cancel icon is cleared upon success", function() {
         simulateUpload();
 
-        equal($(".t-cancel", uploadInstance.wrapper).length, 0);
+        equal($(".k-cancel", uploadInstance.wrapper).length, 0);
     });

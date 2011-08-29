@@ -21,7 +21,7 @@
         <script>
             var DropDownList = kendo.ui.DropDownList,
                 data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
-                SELECTED = "t-state-selected",
+                SELECTED = "k-state-selected",
                 keys = kendo.keys,
                 input;
 
@@ -30,7 +30,7 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
-                    input.append($("ul")).parent(".t-widget").remove();
+                    input.append($("ul")).parent(".k-widget").remove();
                 }
             });
 
@@ -173,7 +173,7 @@
 
                 dropdownlist.enable(false);
 
-                ok(dropdownlist.wrapper.hasClass('t-state-disabled'));
+                ok(dropdownlist.wrapper.hasClass('k-state-disabled'));
                 ok(dropdownlist.element.attr("disabled"));
             });
 
@@ -193,14 +193,14 @@
                 dropdownlist.popup.toggle = oldOpen;
             });
 
-            test("enable(true) removes t-state-disabled class", function() {
+            test("enable(true) removes k-state-disabled class", function() {
                 var dropdownlist = new DropDownList(input);
-                dropdownlist.wrapper.addClass('t-state-disabled');
+                dropdownlist.wrapper.addClass('k-state-disabled');
                 dropdownlist.element.attr("disabled", true);
 
                 dropdownlist.enable();
 
-                ok(!dropdownlist.wrapper.hasClass('t-state-disabled'));
+                ok(!dropdownlist.wrapper.hasClass('k-state-disabled'));
                 ok(!dropdownlist.element.attr("disabled"));
             });
 

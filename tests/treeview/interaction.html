@@ -24,7 +24,7 @@
             }
 
             function removeTreeViews() {
-                $(".t-treeview").remove();
+                $(".k-treeview").remove();
             }
 
             module("expand / collapse", {
@@ -36,13 +36,13 @@
                     { text: "foo", enabled: false, items: [ { text: "bar" } ] }
                 ]);
 
-                var item = $(".t-item:first", treeview);
+                var item = $(".k-item:first", treeview);
 
-                item.find(".t-plus")
-                    .toggleClass("t-plus-disabled", true)
+                item.find(".k-plus")
+                    .toggleClass("k-plus-disabled", true)
                     .trigger("click");
 
-                equal(item.find(".t-group").css("display"), "none");
+                equal(item.find(".k-group").css("display"), "none");
             });
 
             test("clicking plus icon should toggle minus icon and show subgroup", function() {
@@ -50,13 +50,13 @@
                     { text: "foo", items: [ { text: "bar" } ] }
                 ]);
 
-                var item = $(".t-item:first", treeview);
+                var item = $(".k-item:first", treeview);
 
-                item.find(".t-plus")
+                item.find(".k-plus")
                     .trigger("click");
 
-                ok(item.find(".t-icon").hasClass("t-minus"));
-                equal(item.find(".t-group").css("display"), "block");
+                ok(item.find(".k-icon").hasClass("k-minus"));
+                equal(item.find(".k-group").css("display"), "block");
             });
 
             test("clicking minus icon should toggle plus icon and collaspe subgroup", function() {
@@ -64,13 +64,13 @@
                     { text: "foo", expanded: true, items: [ { text: "bar" } ] }
                 ]);
 
-                var item = $(".t-item:first", treeview);
+                var item = $(".k-item:first", treeview);
 
-                item.find(".t-minus")
+                item.find(".k-minus")
                     .trigger("click");
 
-                ok(item.find(".t-icon").hasClass("t-plus"));
-                equal(item.find(".t-group").css("display"), "none");
+                ok(item.find(".k-icon").hasClass("k-plus"));
+                equal(item.find(".k-group").css("display"), "none");
             });
 
             test("double clicking disabled items does not expand them", function() {
@@ -78,12 +78,12 @@
                     { text: "foo", disabled: true, items: [ { text: "bar" } ] }
                 ]);
 
-                var item = $(".t-item:first", treeview);
+                var item = $(".k-item:first", treeview);
 
-                item.find(".t-in.t-state-disabled")
+                item.find(".k-in.k-state-disabled")
                     .trigger("dblclick");
 
-                equal(item.find(".t-group").css("display"), "none");
+                equal(item.find(".k-group").css("display"), "none");
             });
 
             module("selection", {
@@ -95,11 +95,11 @@
                     { text: "foo" }
                 ]);
 
-                var item = treeview.find(".t-item:first .t-in");
+                var item = treeview.find(".k-item:first .k-in");
 
                 item.trigger("click");
 
-                ok(item.hasClass("t-state-selected"));
+                ok(item.hasClass("k-state-selected"));
             });
 
             test("clicking disabled nodes does not select them", function() {
@@ -107,11 +107,11 @@
                     { text: "foo", enabled: false }
                 ]);
 
-                var item = $(".t-item:first", treeview).find(".t-in");
+                var item = $(".k-item:first", treeview).find(".k-in");
 
                 item.trigger("click");
 
-                ok(!item.hasClass("t-state-selected"));
+                ok(!item.hasClass("k-state-selected"));
             });
 
             module("drag & drop", {
@@ -119,8 +119,8 @@
             });
 
             function moveNode(treeview, sourceText, destinationText) {
-                var sourceNode = treeview.findByText(sourceText).find(".t-in:first"),
-                    destinationNode = treeview.findByText(destinationText).find(".t-in:first"),
+                var sourceNode = treeview.findByText(sourceText).find(".k-in:first"),
+                    destinationNode = treeview.findByText(destinationText).find(".k-in:first"),
                     startOffset = sourceNode.offset(),
                     endOffset = destinationNode.offset(),
                     extend = $.extend,
@@ -158,8 +158,8 @@
 
                 moveNode(treeviewObject, "bar", "baz");
 
-                equals(treeviewObject.findByText("foo").find(".t-item").length, 0);
-                equals(treeviewObject.findByText("baz").find(".t-item").length, 1);
+                equals(treeviewObject.findByText("foo").find(".k-item").length, 0);
+                equals(treeviewObject.findByText("baz").find(".k-item").length, 1);
             });
 
             test("moving parent to child item does not move it", function () {
@@ -172,7 +172,7 @@
 
                 moveNode(treeviewObject, "foo", "bar");
 
-                ok(treeviewObject.findByText("foo").parent().hasClass("t-treeview-lines"));
+                ok(treeviewObject.findByText("foo").parent().hasClass("k-treeview-lines"));
             });
         </script>
 

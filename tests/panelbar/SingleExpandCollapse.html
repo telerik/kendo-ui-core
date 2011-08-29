@@ -15,12 +15,12 @@
             {
                 font-size: 12px;
             }
-            .example .t-panelbar .t-image
+            .example .k-panelbar .k-image
             {
                 margin-top: 3px;
             }
 
-            .example .t-panelbar .t-group .t-image
+            .example .k-panelbar .k-group .k-image
             {
                 margin-left: 7px;
             }
@@ -30,7 +30,7 @@
    <script type="text/javascript">
 
         function getRootItem(index) {
-            return $('#PanelBar1').find('.t-header').parent().eq(index)
+            return $('#PanelBar1').find('.k-header').parent().eq(index)
         }
 
         function getPanelBar() {
@@ -46,103 +46,103 @@
 </head>
 <body>
 
-<ul class="t-widget t-panelbar t-reset" id="PanelBar1" style="width: 300px; float: left; margin-bottom: 30px; z-index: 100; position: absolute; visibility: hidden;">
-    <li class="t-item t-state-default"><span class="t-link t-header"><img alt="Mail Icon" class="t-image"
+<ul class="k-widget k-panelbar k-reset" id="PanelBar1" style="width: 300px; float: left; margin-bottom: 30px; z-index: 100; position: absolute; visibility: hidden;">
+    <li class="k-item k-state-default"><span class="k-link k-header"><img alt="Mail Icon" class="k-image"
                                                                           src="../../playground/Icons/mail.gif">Mail<span
-            class="t-icon t-arrow-down t-panelbar-expand"></span></span>
-        <ul style="display: none;" class="t-group">
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Personal Folders Icon" class="t-image"
+            class="k-icon k-arrow-down k-panelbar-expand"></span></span>
+        <ul style="display: none;" class="k-group">
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Personal Folders Icon" class="k-image"
                                                                          src="../../playground/Icons/mailPersonalFolders.gif">Personal Folders</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Deleted Items Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Deleted Items Icon" class="k-image"
                                                                          src="../../playground/Icons/mailDeletedItems.gif">Deleted Items</span>
             </li>
-            <li class="t-item t-state-disabled"><span class="t-link"><img alt="Inbox Icon" class="t-image"
+            <li class="k-item k-state-disabled"><span class="k-link"><img alt="Inbox Icon" class="k-image"
                                                                           src="../../playground/Icons/mailInbox.gif">Inbox</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="My Mail Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="My Mail Icon" class="k-image"
                                                                          src="../../playground/Icons/mailfolder.gif">My Mail</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Sent Items Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Sent Items Icon" class="k-image"
                                                                          src="../../playground/Icons/mailSent.gif">Sent Items</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Outbox Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Outbox Icon" class="k-image"
                                                                          src="../../playground/Icons/mailOutbox.gif">Outbox</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Search Folders Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Search Folders Icon" class="k-image"
                                                                          src="../../playground/Icons/mailSearch.gif">Search Folders</span>
             </li>
         </ul>
     </li>
-    <li class="t-item t-state-disabled"><span class="t-link t-header"><img alt="Contacts Icon" class="t-image"
+    <li class="k-item k-state-disabled"><span class="k-link k-header"><img alt="Contacts Icon" class="k-image"
                                                                            src="../../playground/Icons/contacts.gif">Contacts<span
-            class="t-icon t-arrow-down t-panelbar-expand"></span></span>
-        <ul class="t-group" style="display: none;">
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Contact Icon" class="t-image"
+            class="k-icon k-arrow-down k-panelbar-expand"></span></span>
+        <ul class="k-group" style="display: none;">
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Contact Icon" class="k-image"
                                                                          src="../../playground/Icons/contactsItems.gif">My Contacts</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Contact Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Contact Icon" class="k-image"
                                                                          src="../../playground/Icons/contactsItems.gif">Address Cards</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Contact Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Contact Icon" class="k-image"
                                                                          src="../../playground/Icons/contactsItems.gif">Phone List</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Contact Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Contact Icon" class="k-image"
                                                                          src="../../playground/Icons/contactsItems.gif">Shared Contacts</span>
             </li>
         </ul>
     </li>
-    <li class="t-item t-state-default"><span class="t-link t-header"><img alt="Tasks Icon" class="t-image"
+    <li class="k-item k-state-default"><span class="k-link k-header"><img alt="Tasks Icon" class="k-image"
                                                                           src="../../playground/Icons/tasks.gif">Tasks<span
-            class="t-icon t-arrow-down t-panelbar-expand"></span></span>
-        <ul class="t-group" style="display: none;">
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Task Icon" class="t-image"
+            class="k-icon k-arrow-down k-panelbar-expand"></span></span>
+        <ul class="k-group" style="display: none;">
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Task Icon" class="k-image"
                                                                          src="../../playground/Icons/tasksItems.gif">My Tasks</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Task Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Task Icon" class="k-image"
                                                                          src="../../playground/Icons/tasksItems.gif">Shared Tasks</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Task Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Task Icon" class="k-image"
                                                                          src="../../playground/Icons/tasksItems.gif">Active Tasks</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Task Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Task Icon" class="k-image"
                                                                          src="../../playground/Icons/tasksItems.gif">Completed Tasks</span>
             </li>
         </ul>
     </li>
-    <li class="t-item t-state-active"><span class="t-link t-header t-state-selected"><img alt="Notes Icon"
-                                                                                          class="t-image"
+    <li class="k-item k-state-active"><span class="k-link k-header k-state-selected"><img alt="Notes Icon"
+                                                                                          class="k-image"
                                                                                           src="../../playground/Icons/notes.gif">Notes<span
-            class="t-icon t-arrow-up t-panelbar-collapse"></span></span>
-        <ul class="t-group" style="display: block;">
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Note Icon" class="t-image"
+            class="k-icon k-arrow-up k-panelbar-collapse"></span></span>
+        <ul class="k-group" style="display: block;">
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Note Icon" class="k-image"
                                                                          src="../../playground/Icons/notesItems.gif">My Notes</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Note Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Note Icon" class="k-image"
                                                                          src="../../playground/Icons/notesItems.gif">Notes List</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Note Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Note Icon" class="k-image"
                                                                          src="../../playground/Icons/notesItems.gif">Shared Notes</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Note Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Note Icon" class="k-image"
                                                                          src="../../playground/Icons/notesItems.gif">Archive</span>
             </li>
         </ul>
     </li>
-    <li class="t-item t-state-default"><span class="t-link t-header"><img alt="Folders List Icon" class="t-image"
+    <li class="k-item k-state-default"><span class="k-link k-header"><img alt="Folders List Icon" class="k-image"
                                                                           src="../../playground/Icons/foldersList.gif">Folders List<span
-            class="t-icon t-arrow-down t-panelbar-expand"></span></span>
-        <ul class="t-group" style="display: none;">
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Folder List Icon" class="t-image"
+            class="k-icon k-arrow-down k-panelbar-expand"></span></span>
+        <ul class="k-group" style="display: none;">
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Folder List Icon" class="k-image"
                                                                          src="../../playground/Icons/mailfolder.gif">My Client.Net</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Folder List Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Folder List Icon" class="k-image"
                                                                          src="../../playground/Icons/mailfolder.gif">My Profile</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Folder List Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Folder List Icon" class="k-image"
                                                                          src="../../playground/Icons/mailfolder.gif">My Support Tickets</span>
             </li>
-            <li class="t-item t-state-default"><span class="t-link"><img alt="Folder List Icon" class="t-image"
+            <li class="k-item k-state-default"><span class="k-link"><img alt="Folder List Icon" class="k-image"
                                                                          src="../../playground/Icons/mailfolder.gif">My Licenses</span>
             </li>
         </ul>
@@ -156,29 +156,29 @@
             var item = getRootItem(3);
             var item2 = getRootItem(2);
 
-            item2.find('> .t-link').trigger('click');
+            item2.find('> .k-link').trigger('click');
 
-            equal(item.find('.t-group').css("display"), "none");
+            equal(item.find('.k-group').css("display"), "none");
         });
 
         test('clicking item twice should not collapse it', function() {
 
             var item = getRootItem(0);
 
-            item.find('> .t-link').trigger('click');
-            item.find('> .t-link').trigger('click');
+            item.find('> .k-link').trigger('click');
+            item.find('> .k-link').trigger('click');
 
-            equal(item.find('.t-group').css("display"), "block");
+            equal(item.find('.k-group').css("display"), "block");
         });
 
         test('clicking subItem should not collapse headerItem', function() {
 
             var item = getRootItem(0);
-            var subItem = item.find('> .t-group').children()[0];
+            var subItem = item.find('> .k-group').children()[0];
 
-            $(subItem).find('> .t-link').trigger('click');
+            $(subItem).find('> .k-link').trigger('click');
 
-            equal(item.find('.t-group').css("display"), "block");
+            equal(item.find('.k-group').css("display"), "block");
         });
 
         test('clicking not expandable item should not collapse expanded item', function() {
@@ -186,9 +186,9 @@
             var item = getRootItem(0);
             var item2 = getRootItem(1);
 
-            item2.find('> .t-link').trigger('click');
+            item2.find('> .k-link').trigger('click');
 
-            equal(item.find('.t-group').css("display"), "block");
+            equal(item.find('.k-group').css("display"), "block");
         });
 
 </script>

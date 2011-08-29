@@ -43,17 +43,17 @@
 </head>
 <body onload="Load()">
 
-<div class="t-widget t-tabstrip t-header" id="TabStrip1" style="visibility: hidden; position: absolute;">
-    <ul class="t-reset t-tabstrip-items">
-        <li class="t-item t-state-default t-state-active"><a class="t-link" href="#TabStrip1-1"><img alt="image" class="t-image" src="../../playground/Icons/Suites/mvc.png">ASP.NET MVC</a></li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-2"><img alt="image" class="t-image" src="../../playground/Icons/Suites/sl.png">Silverlight</a></li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-3"><img alt="image" class="t-image" src="../../playground/Icons/Suites/ajax.png">ASP.NET AJAX</a></li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-4"><img alt="image" class="t-image" src="../../playground/Icons/Suites/orm.png">OpenAccess ORM</a></li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-5"><img alt="image" class="t-image" src="../../playground/Icons/Suites/rep.png">Reporting</a></li>
-        <li class="t-item t-state-default"><a class="t-link" href="#TabStrip1-6"><img alt="image" class="t-image" src="../../playground/Icons/Suites/sitefinity.png">Sitefinity ASP.NET CMS</a></li>
-        <li class="t-item t-state-default"><a class="t-link" href="http://www.google.com"><img alt="image" class="t-image" src="../../playground/Icons/Suites/sitefinity.png">Sitefinity ASP.NET CMS</a></li>
+<div class="k-widget k-tabstrip k-header" id="TabStrip1" style="visibility: hidden; position: absolute;">
+    <ul class="k-reset k-tabstrip-items">
+        <li class="k-item k-state-default k-state-active"><a class="k-link" href="#TabStrip1-1"><img alt="image" class="k-image" src="../../playground/Icons/Suites/mvc.png">ASP.NET MVC</a></li>
+        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-2"><img alt="image" class="k-image" src="../../playground/Icons/Suites/sl.png">Silverlight</a></li>
+        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-3"><img alt="image" class="k-image" src="../../playground/Icons/Suites/ajax.png">ASP.NET AJAX</a></li>
+        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-4"><img alt="image" class="k-image" src="../../playground/Icons/Suites/orm.png">OpenAccess ORM</a></li>
+        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-5"><img alt="image" class="k-image" src="../../playground/Icons/Suites/rep.png">Reporting</a></li>
+        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-6"><img alt="image" class="k-image" src="../../playground/Icons/Suites/sitefinity.png">Sitefinity ASP.NET CMS</a></li>
+        <li class="k-item k-state-default"><a class="k-link" href="http://www.google.com"><img alt="image" class="k-image" src="../../playground/Icons/Suites/sitefinity.png">Sitefinity ASP.NET CMS</a></li>
     </ul>
-    <div class="t-content t-state-active" id="TabStrip1-1" style="display: block;">
+    <div class="k-content k-state-active" id="TabStrip1-1" style="display: block;">
         <ul>
             <li>Pure ASP.NET MVC components</li>
             <li>Completely Open Source</li>
@@ -64,7 +64,7 @@
             <li>Cross-browser support</li>
         </ul>
     </div>
-    <div class="t-content" id="TabStrip1-2">
+    <div class="k-content" id="TabStrip1-2">
         <ul>
             <li>Built on Silverlight 3</li>
 
@@ -76,7 +76,7 @@
         </ul>
 
     </div>
-    <div class="t-content" id="TabStrip1-3">
+    <div class="k-content" id="TabStrip1-3">
         <ul>
             <li>Built on top of Microsoft ASP.NET AJAX framework</li>
             <li>Rich client-side capabilities; nearly identical client-side and server-side APIs</li>
@@ -87,7 +87,7 @@
             <li>Wide cross-browser compatible and XHTML compliant</li>
         </ul>
     </div>
-    <div class="t-content" id="TabStrip1-4">
+    <div class="k-content" id="TabStrip1-4">
         <ul>
             <li>Model First and Schema First approaches</li>
             <li>Stored Procedures for Multiple Databases</li>
@@ -98,7 +98,7 @@
             <li>Support for LINQ, OQL, and SQL Languages</li>
         </ul>
     </div>
-    <div class="t-content" id="TabStrip1-5">
+    <div class="k-content" id="TabStrip1-5">
         <ul>
             <li>Excellent data presentation and analysis: Crosstabs, Charts, Tables, Lists</li>
 
@@ -110,7 +110,7 @@
         </ul>
 
     </div>
-    <div class="t-content" id="TabStrip1-6">
+    <div class="k-content" id="TabStrip1-6">
         <ul>
             <li>Multi-lingual Content Integration</li>
             <li>Workflow Engine</li>
@@ -126,7 +126,7 @@
     <script type="text/javascript">
 
         function getRootItem(index) {
-            return $('#TabStrip1').find('.t-item').eq(index)
+            return $('#TabStrip1').find('.k-item').eq(index)
         }
 
         function getTabStrip() {
@@ -140,7 +140,7 @@
 
             var e = new $.Event('click');
 
-            $item.find('> .t-link').trigger(e);
+            $item.find('> .k-link').trigger(e);
 
             ok(!e.isDefaultPrevented());
 
@@ -165,7 +165,7 @@
             var isCalled = false;
             var $item = $(getRootItem(4));
 
-            $item.find('> .t-link').data('contentUrl', 'fake');
+            $item.find('> .k-link').data('contentUrl', 'fake');
             tabstrip.ajaxRequest = function () { isCalled = true; };
 
             tabstrip.reload($item);
@@ -179,7 +179,7 @@
 
             isRaised = false;
 
-            item.find('> .t-link').trigger('click');
+            item.find('> .k-link').trigger('click');
 
             ok(isRaised);
         });
@@ -187,9 +187,9 @@
         test('clicking first item should select it', function() {
             var item = getRootItem(0);
 
-            item.find('.t-link').trigger('click');
+            item.find('.k-link').trigger('click');
 
-            ok(item.hasClass('t-state-active'));
+            ok(item.hasClass('k-state-active'));
         });
 
         test('select method should select second item', function() {
@@ -198,7 +198,7 @@
 
             tabstrip.select(item);
 
-            ok(item.hasClass('t-state-active'));
+            ok(item.hasClass('k-state-active'));
         });
 
         test('disable method should disable item', function() {
@@ -208,7 +208,7 @@
 
             tabstrip.disable(item);
 
-            ok(item.hasClass('t-state-disabled'));
+            ok(item.hasClass('k-state-disabled'));
         });
 
         test('enable method should enable disabled item', function() {
@@ -218,7 +218,7 @@
 
             tabstrip.enable(item);
 
-            ok(item.hasClass('t-state-default'));
+            ok(item.hasClass('k-state-default'));
         });
 
         test('select method should show content', function() {
@@ -228,13 +228,13 @@
             tabstrip.select(item);
 
             var content = $(tabstrip.contentElement(5));
-            ok(item.hasClass('t-state-active'));
+            ok(item.hasClass('k-state-active'));
         });
 
         test('contentElement should return content of seventh tab', function() {
             var tabstrip = getTabStrip();
 
-            var expectedContent = $(tabstrip.element).find('> .t-content').eq(6); //second content under Tab-7
+            var expectedContent = $(tabstrip.element).find('> .k-content').eq(6); //second content under Tab-7
 
             equal($(tabstrip.contentElement(6)).index(), expectedContent.index());
         });
@@ -262,7 +262,7 @@
 
         test('getSelectedTab should return negative if no selected tabs', function() {
             var tabstrip = getTabStrip();
-            tabstrip.element.find('.t-state-active').removeClass('t-state-active').addClass('t-state-default');
+            tabstrip.element.find('.k-state-active').removeClass('k-state-active').addClass('k-state-default');
 
             equal(tabstrip.select().length, 0);
         });
@@ -274,7 +274,7 @@
 
             isRaised = false;
 
-            item.find('> .t-link').trigger('click');
+            item.find('> .k-link').trigger('click');
 
             ok(isRaised);
         });
@@ -285,7 +285,7 @@
         });
 
         test('animated text-only content is opened on load', function() {
-            equals($('#TabStrip1 .t-content').css('opacity'), '1');
+            equals($('#TabStrip1 .k-content').css('opacity'), '1');
         });
 
     </script>

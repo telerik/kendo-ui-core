@@ -32,7 +32,7 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
-                    input.add($("ul")).parent(".t-widget").remove();
+                    input.add($("ul")).parent(".k-widget").remove();
                 }
             });
 
@@ -43,7 +43,7 @@
 
                 dropdownlist.search("b");
 
-                ok(dropdownlist.ul.children().eq(1).hasClass("t-state-selected"));
+                ok(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
             });
 
             test("search select item if text number", function() {
@@ -53,7 +53,7 @@
 
                 dropdownlist.search("1");
 
-                ok(dropdownlist.ul.children().eq(1).hasClass("t-state-selected"));
+                ok(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
             });
 
             test("search select item if text is 0", function() {
@@ -63,7 +63,7 @@
 
                 dropdownlist.search("0");
 
-                ok(dropdownlist.ul.children().eq(1).hasClass("t-state-selected"));
+                ok(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
             });
 
             test("search should raise error if word is null", function() {

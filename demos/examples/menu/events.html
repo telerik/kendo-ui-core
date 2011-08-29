@@ -24,7 +24,7 @@
         <!-- description -->
         <div class="description">Events</div>
         <!-- description -->
-        <div id="example" class="t-content">
+        <div id="example" class="k-content">
             <ul id="menu">
                 <li>
                     First Item
@@ -76,15 +76,15 @@
         <script>
             $(document).ready(function() {
                 function onOpen(e) {
-                    kendoConsole.log("Opened: " + $(e.item).find("> .t-link").text());
+                    kendoConsole.log("Opened: " + $(e.item).find("> .k-link").text());
                 };
 
                 function onClose(e) {
-                    kendoConsole.log("Closed: " + $(e.item).find("> .t-link").text());
+                    kendoConsole.log("Closed: " + $(e.item).find("> .k-link").text());
                 };
 
                 function onSelect(e) {
-                    kendoConsole.log("Selected: " + $(e.item).find("> .t-link").text());
+                    kendoConsole.log("Selected: " + $(e.item).find("> .k-link").text());
                 };
 
                 $("#menu").kendoMenu({

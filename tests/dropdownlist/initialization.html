@@ -63,8 +63,8 @@
                var wrapper = input.data("kendoDropDownList").wrapper;
 
                ok(wrapper.parent().is("div.test"));
-               ok(wrapper.is("div.t-widget"));
-               ok(wrapper.hasClass("t-widget t-dropdown t-header"));
+               ok(wrapper.is("div.k-widget"));
+               ok(wrapper.hasClass("k-widget k-dropdown k-header"));
                ok(!input.is(":visible"));
            });
 
@@ -82,7 +82,7 @@
                var span = input.data("kendoDropDownList").span;
 
                ok(span.is("span"));
-               ok(span.hasClass("t-input"));
+               ok(span.hasClass("k-input"));
            });
 
            test("text span should wrapped with div", function(){
@@ -91,19 +91,19 @@
                var dropDownWrapper = input.data("kendoDropDownList").span.parent();
 
                ok(dropDownWrapper.is("div"));
-               ok(dropDownWrapper.hasClass("t-dropdown-wrap t-state-default"));
+               ok(dropDownWrapper.hasClass("k-dropdown-wrap k-state-default"));
            });
 
-           test("include arrow after span.t-input", function(){
+           test("include arrow after span.k-input", function(){
                input.kendoDropDownList();
 
                var spanArrow = input.data("kendoDropDownList").span.next(),
                    arrow = spanArrow.children().eq(0);
 
                ok(spanArrow.is("span"));
-               ok(spanArrow.hasClass("t-select"));
+               ok(spanArrow.hasClass("k-select"));
                ok(arrow.is("span"));
-               ok(arrow.hasClass("t-icon t-arrow-down"));
+               ok(arrow.hasClass("k-icon k-arrow-down"));
                equal(arrow.html(), "select");
            });
 
@@ -254,7 +254,7 @@
            test("template should render item directly if datatextField is empty string", function(){
                 var dropdownlist = new DropDownList(input, { dataTextField : ""});
 
-                equal(dropdownlist.template("foo"), "<li class='t-item' unselectable='on'>foo</li>");
+                equal(dropdownlist.template("foo"), "<li class='k-item' unselectable='on'>foo</li>");
            });
 
            test("template should use defined datatextField", function(){
@@ -262,7 +262,7 @@
                     dataTextField : "ProductName"
                 });
 
-                equal(dropdownlist.template({ProductName: "foo"}), "<li class='t-item' unselectable='on'>foo</li>");
+                equal(dropdownlist.template({ProductName: "foo"}), "<li class='k-item' unselectable='on'>foo</li>");
            });
 
            test("changing the template", function() {
@@ -271,7 +271,7 @@
                    template: "<#= data.toUpperCase() #>"
                });
 
-               equal(dropdownlist.template("foo"), "<li class='t-item' unselectable='on'>FOO</li>");
+               equal(dropdownlist.template("foo"), "<li class='k-item' unselectable='on'>FOO</li>");
                equal(dropdownlist.options.template, "<#= data.toUpperCase() #>");
            });
 
@@ -281,12 +281,12 @@
                  equal(dropdownlist.value(), "1");
                  });
 
-           test("disabled input rendered with wrapper.t-state-disabled", function() {
+           test("disabled input rendered with wrapper.k-state-disabled", function() {
                input.attr("disabled", "disabled").kendoDropDownList();
 
                var wrapper = input.data("kendoDropDownList").wrapper;
 
-               ok(wrapper.hasClass("t-state-disabled"));
+               ok(wrapper.hasClass("k-state-disabled"));
            });
 
             test("pointer over widget should add hover state", function() {
@@ -295,10 +295,10 @@
                          dataSource: data
                     });
 
-                var wrap = dropdownlist.wrapper.children(".t-dropdown-wrap");
+                var wrap = dropdownlist.wrapper.children(".k-dropdown-wrap");
                 wrap.mouseenter();
 
-                ok(wrap.hasClass("t-state-hover"));
+                ok(wrap.hasClass("k-state-hover"));
             });
 
             test("leaving widget should remove hover state", function() {
@@ -307,11 +307,11 @@
                          dataSource: data
                     });
 
-                var wrap = dropdownlist.wrapper.children(".t-dropdown-wrap");
+                var wrap = dropdownlist.wrapper.children(".k-dropdown-wrap");
                 wrap.mouseenter();
                 wrap.mouseleave();
 
-                ok(!wrap.hasClass("t-state-hover"));
+                ok(!wrap.hasClass("k-state-hover"));
             });
 
            test("pointer over li should add hover state", function() {
@@ -323,7 +323,7 @@
                    var li = dropdownlist.ul.show().children().eq(0);
                    li.mouseenter();
 
-               ok(li.hasClass("t-state-hover"));
+               ok(li.hasClass("k-state-hover"));
            });
 
            test("leave li should remove hover state", function() {
@@ -336,16 +336,16 @@
                li.mouseenter();
                li.mouseleave();
 
-               ok(!li.hasClass("t-state-hover"));
+               ok(!li.hasClass("k-state-hover"));
            });
 
-           test("add t-list class to the UL", function() {
+           test("add k-list class to the UL", function() {
                var data = [{text: 1, value: 1}, {text:2, value:2}],
                dropdownlist = new DropDownList(input, {
                    dataSource: data
                });
 
-               ok(dropdownlist.ul.hasClass("t-list"));
+               ok(dropdownlist.ul.hasClass("k-list"));
            });
 
            test("resize UL depending on the element width", function() {

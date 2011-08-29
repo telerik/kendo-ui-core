@@ -122,12 +122,12 @@
         CLICK = "click",
         ATTRIBUTE = "disabled",
         CHANGE = "change",
-        DISABLED = "t-state-disabled",
+        DISABLED = "k-state-disabled",
         SELECT = "select",
-        STATE_SELECTED = "t-state-selected",
-        HOVER = "t-state-hover",
+        STATE_SELECTED = "k-state-selected",
+        HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
-        INPUTWRAPPER = ".t-dropdown-wrap",
+        INPUTWRAPPER = ".k-dropdown-wrap",
         proxy = $.proxy;
 
     var ComboBox = Select.extend(/** @lends kendo.ui.ComboBox.prototype */{
@@ -587,7 +587,7 @@
 
             li = that._get(li);
 
-            if (li[0] && !li.hasClass("t-state-focused")) {
+            if (li[0] && !li.hasClass("k-state-focused")) {
                 that.current(li);
             }
 
@@ -598,13 +598,13 @@
             var that = this,
                 element = that.element[0],
                 wrapper = that.wrapper,
-                SELECTOR = ".t-input",
+                SELECTOR = ".k-input",
                 input;
 
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<div class="t-dropdown-wrap t-state-default"><input class="t-input" type="text" autocomplete="off"/><span class="t-select"><span class="t-icon t-arrow-down">select</span></span></div>')
+                wrapper.append('<div class="k-dropdown-wrap k-state-default"><input class="k-input" type="text" autocomplete="off"/><span class="k-select"><span class="k-icon k-arrow-down">select</span></span></div>')
                        .append(that.element);
 
                 input = wrapper.find(SELECTOR);
@@ -615,7 +615,7 @@
 
             that._focused = that.input = input;
 
-            that.arrow = wrapper.find(".t-icon");
+            that.arrow = wrapper.find(".k-icon");
         },
 
         _keydown: function(e) {
@@ -667,11 +667,11 @@
 
             wrapper = element.parent();
 
-            if (!wrapper.is("div.t-widget")) {
+            if (!wrapper.is("div.k-widget")) {
                 wrapper = element.hide().wrap("<div />").parent();
             }
 
-            that.wrapper = wrapper.addClass("t-widget t-combobox t-header");
+            that.wrapper = wrapper.addClass("k-widget k-combobox k-header");
         }
     });
 

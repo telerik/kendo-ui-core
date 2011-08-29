@@ -32,5 +32,5 @@ test("cancelling select event prevents file selection", function() {
     uploadInstance = createUpload({ "select" : (function(e) { e.preventDefault(); }) });
 
     simulateFileSelect()
-    equal($(".t-upload-files li.t-file", uploadInstance.wrapper).length, 0);
+    equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 0);
 });

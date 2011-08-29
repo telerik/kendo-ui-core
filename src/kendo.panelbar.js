@@ -132,30 +132,30 @@
         excludedNodesRegExp = /^(ul|a|div)$/i,
         IMG = "img",
         HREF = "href",
-        LAST = "t-last",
-        LINK = "t-link",
+        LAST = "k-last",
+        LINK = "k-link",
         ERROR = "error",
         CLICK = "click",
-        ITEM = ".t-item",
-        IMAGE = "t-image",
-        FIRST = "t-first",
+        ITEM = ".k-item",
+        IMAGE = "k-image",
+        FIRST = "k-first",
         EXPAND = "expand",
         SELECT = "select",
-        CONTENT = "t-content",
+        CONTENT = "k-content",
         COLLAPSE = "collapse",
         CONTENTURL = "contentUrl",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         CONTENTLOAD = "contentLoad",
-        ACTIVECLASS = ".t-state-active",
-        GROUPS = "> .t-group",
-        CONTENTS = "> .t-content",
-        SELECTEDCLASS = ".t-state-selected",
-        DISABLEDCLASS = ".t-state-disabled",
-        HIGHLIGHTEDCLASS = ".t-state-highlighted",
-        clickableItems = ITEM + ":not(.t-state-disabled) .t-link",
-        disabledItems = ITEM + ".t-state-disabled .t-link",
-        defaultState = "t-state-default",
+        ACTIVECLASS = ".k-state-active",
+        GROUPS = "> .k-group",
+        CONTENTS = "> .k-content",
+        SELECTEDCLASS = ".k-state-selected",
+        DISABLEDCLASS = ".k-state-disabled",
+        HIGHLIGHTEDCLASS = ".k-state-highlighted",
+        clickableItems = ITEM + ":not(.k-state-disabled) .k-link",
+        disabledItems = ITEM + ".k-state-disabled .k-link",
+        defaultState = "k-state-default",
         VISIBLE = ":visible",
         EMPTY = ":empty",
         SINGLE = "single",
@@ -181,29 +181,29 @@
                     "<# } #>" +
                 "</li>"
             ),
-            image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
+            image: template("<img class='k-image' alt='' src='<#= imageUrl #>' />"),
             arrow: template("<span class='<#= arrowClass(item, group) #>'></span>"),
-            sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
+            sprite: template("<span class='k-sprite <#= spriteCssClass #>'></span>"),
             empty: template("")
         },
 
         rendering = {
             wrapperCssClass: function (group, item) {
-                var result = "t-item",
+                var result = "k-item",
                     index = item.index;
 
                 if (item.enabled === false) {
-                    result += " t-state-disabled";
+                    result += " k-state-disabled";
                 } else {
-                    result += " t-state-default";
+                    result += " k-state-default";
                 }
 
                 if (index == 0) {
-                    result += " t-first"
+                    result += " k-first"
                 }
 
                 if (index == group.length-1) {
-                    result += " t-last";
+                    result += " k-last";
                 }
 
                 return result;
@@ -212,7 +212,7 @@
                 var result = LINK;
 
                 if (group.firstLevel) {
-                    result += " t-header";
+                    result += " k-header";
                 }
 
                 return result;
@@ -221,12 +221,12 @@
                 return item.url ? " href='" + item.url + "'" : "";
             },
             arrowClass: function(item, group) {
-                var result = "t-icon";
+                var result = "k-icon";
 
                 if (group.horizontal) {
-                    result += " t-arrow-down";
+                    result += " k-arrow-down";
                 } else {
-                    result += " t-arrow-right";
+                    result += " k-arrow-right";
                 }
 
                 return result;
@@ -241,7 +241,7 @@
                 return group.expanded !== true ? " style='display:none'" : "";
             },
             groupCssClass: function(group) {
-                return "t-group";
+                return "k-group";
             }
         };
 
@@ -257,14 +257,14 @@
             .children(IMG)
             .addClass(IMAGE);
         item
-            .filter(":not([disabled]):not([class*=t-state])")
-            .addClass("t-state-default");
+            .filter(":not([disabled]):not([class*=k-state])")
+            .addClass("k-state-default");
         item
             .filter("li[disabled]")
-            .addClass("t-state-disabled")
+            .addClass("k-state-disabled")
             .removeAttr("disabled");
         item
-            .filter(":not([class*=t-state])")
+            .filter(":not([class*=k-state])")
             .children("a:focus")
             .parent()
             .addClass(ACTIVECLASS.substr(1));
@@ -286,30 +286,30 @@
 
         menuElement
             .find(" > li > ." + LINK)
-            .addClass("t-header");
+            .addClass("k-header");
     }
 
     function updateArrow (items) {
         items = $(items);
 
-        items.find(".t-icon").remove();
+        items.find(".k-icon").remove();
 
         items
-            .filter(":has(.t-group),:has(.t-content)")
-            .children(".t-link:not(:has([class*=t-arrow]))")
+            .filter(":has(.k-group),:has(.k-content)")
+            .children(".k-link:not(:has([class*=k-arrow]))")
             .each(function () {
                 var item = $(this),
                     parent = item.parent();
 
-                item.append("<span class='t-icon " + (parent.hasClass(ACTIVECLASS.substr(1)) ? "t-arrow-up t-panelbar-collapse" : "t-arrow-down t-panelbar-expand") + "'/>");
+                item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS.substr(1)) ? "k-arrow-up k-panelbar-collapse" : "k-arrow-down k-panelbar-expand") + "'/>");
             });
     }
 
     function updateFirstLast (items) {
         items = $(items);
 
-        items.filter(".t-first:not(:first-child)").removeClass(FIRST);
-        items.filter(".t-last:not(:last-child)").removeClass(LAST);
+        items.filter(".k-first:not(:first-child)").removeClass(FIRST);
+        items.filter(".k-last:not(:last-child)").removeClass(LAST);
         items.filter(":first-child").addClass(FIRST);
         items.filter(":last-child").addClass(LAST);
     }
@@ -405,7 +405,7 @@
             ], that.options);
 
             if (that.options.contentUrls) {
-                element.find("> .t-item")
+                element.find("> .k-item")
                     .each(function(index, item) {
                         $(item).find("." + LINK).data(CONTENTURL, that.options.contentUrls[index]);
                     });
@@ -522,7 +522,7 @@
             var that = this;
 
             if (arguments.length === 0) {
-                return that.element.find(".t-item > " + SELECTEDCLASS).parent();
+                return that.element.find(".k-item > " + SELECTEDCLASS).parent();
             }
 
             $(element).each(function (index, item) {
@@ -537,7 +537,7 @@
                 $(HIGHLIGHTEDCLASS, that.element).removeClass(HIGHLIGHTEDCLASS.substr(1));
 
                 link.addClass(SELECTEDCLASS.substr(1));
-                link.parentsUntil(that.element, ITEM).filter(":has(.t-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
+                link.parentsUntil(that.element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
             });
         },
 
@@ -576,7 +576,7 @@
         append: function (item, referenceItem) {
             referenceItem = $(referenceItem);
 
-            var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .t-group") : null);
+            var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-group") : null);
 
             each(inserted.items, function () {
                 inserted.group.append(this);
@@ -584,7 +584,7 @@
             });
 
             updateArrow(referenceItem);
-            updateFirstLast(inserted.group.find(".t-first, .t-last"));
+            updateFirstLast(inserted.group.find(".k-first, .k-last"));
             inserted.group.height("auto");
         },
 
@@ -683,8 +683,8 @@
             var plain = $.isPlainObject(item),
                 items,
                 groupData = {
-                    firstLevel: parent.hasClass("t-panelbar"),
-                    expanded: parent.parent().hasClass("t-state-active"),
+                    firstLevel: parent.hasClass("k-panelbar"),
+                    expanded: parent.parent().hasClass("k-state-active"),
                     length: parent.children().length
                 };
 
@@ -712,24 +712,24 @@
             var target = $(e.currentTarget);
 
             if (!target.parents("li" + DISABLEDCLASS).length) {
-                target.toggleClass("t-state-hover", e.type == MOUSEENTER);
+                target.toggleClass("k-state-hover", e.type == MOUSEENTER);
             }
         },
 
         _updateClasses: function() {
             var that = this;
 
-            that.element.addClass("t-widget t-reset t-header t-panelbar");
+            that.element.addClass("k-widget k-reset k-header k-panelbar");
 
             var items = that.element
                             .find("ul")
-                            .addClass("t-group")
+                            .addClass("k-group")
                             .end()
                             .find("li:not(" + ACTIVECLASS + ") > ul")
                             .css({ display: "none" })
                             .end()
                             .find("li")
-                            .addClass("t-item");
+                            .addClass("k-item");
 
             items.each(function () {
                 updateItemClasses(this, that.element);
@@ -748,7 +748,7 @@
                 return;
             }
 
-            if (target.closest(".t-widget")[0] != element[0]) {
+            if (target.closest(".k-widget")[0] != element[0]) {
                 return;
             }
 
@@ -759,7 +759,7 @@
             $(HIGHLIGHTEDCLASS, element).removeClass(HIGHLIGHTEDCLASS.substr(1));
 
             link.addClass(SELECTEDCLASS.substr(1));
-            link.parentsUntil(that.element, ITEM).filter(":has(.t-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
+            link.parentsUntil(that.element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
 
             var contents = item.find(GROUPS).add(item.find(CONTENTS)),
                 href = link.attr(HREF),
@@ -796,7 +796,7 @@
 
         _toggleItem: function (element, isVisible, e) {
             var that = this,
-                childGroup = element.find("> .t-group");
+                childGroup = element.find("> .k-group");
 
             if (childGroup.length) {
 
@@ -839,11 +839,11 @@
                 .parent()
                 .toggleClass(defaultState, visibility)
                 .toggleClass(ACTIVECLASS.substr(1), !visibility)
-                .find("> .t-link > .t-icon")
-                    .toggleClass("t-arrow-up", !visibility)
-                    .toggleClass("t-panelbar-collapse", !visibility)
-                    .toggleClass("t-arrow-down", visibility)
-                    .toggleClass("t-panelbar-expand", visibility);
+                .find("> .k-link > .k-icon")
+                    .toggleClass("k-arrow-up", !visibility)
+                    .toggleClass("k-panelbar-collapse", !visibility)
+                    .toggleClass("k-arrow-down", visibility)
+                    .toggleClass("k-panelbar-expand", visibility);
 
             element
                 .kendoStop(true, true)
@@ -859,7 +859,7 @@
         _collapseAllExpanded: function (item) {
             var that = this;
 
-            if (item.find("> ." + LINK).hasClass("t-header")) {
+            if (item.find("> ." + LINK).hasClass("k-header")) {
                 var groups = item.find(GROUPS).add(item.find(CONTENTS));
                 if (groups.is(VISIBLE) || groups.length == 0) {
                     return true;
@@ -877,10 +877,10 @@
         _ajaxRequest: function (element, contentElement, isVisible) {
 
             var that = this,
-                statusIcon = element.find(".t-panelbar-collapse, .t-panelbar-expand"),
+                statusIcon = element.find(".k-panelbar-collapse, .k-panelbar-expand"),
                 link = element.find("." + LINK),
                 loadingIconTimeout = setTimeout(function () {
-                    statusIcon.addClass("t-loading");
+                    statusIcon.addClass("k-loading");
                 }, 100),
                 data = {};
 
@@ -899,7 +899,7 @@
 
                 complete: function () {
                     clearTimeout(loadingIconTimeout);
-                    statusIcon.removeClass("t-loading");
+                    statusIcon.removeClass("k-loading");
                 },
 
                 success: function (data, textStatus) {

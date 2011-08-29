@@ -162,7 +162,7 @@
                     var id = $("#bigPhoto").attr("data-photoid");
                     var images = this.element.find("img[data-photoid*='" + id + "']");
                     if (images.length)
-                        images.parent().addClass("t-state-selected");
+                        images.parent().addClass("k-state-selected");
                 },
                 change: function() {
                     setBigPhoto(this.selected().find("img"));
@@ -347,7 +347,7 @@
                 }
 
                 if (started){
-                    setBigPhoto($(".thumbs:visible").find(".t-state-selected:last img"));
+                    setBigPhoto($(".thumbs:visible").find(".k-state-selected:last img"));
                 } else {
                     $("#exifButton").fadeOut();
                     setTimeout(function(){

@@ -21,51 +21,51 @@
 
     test("upload list is created", function() {
         simulateFileSelect();
-        equal($("> ul.t-upload-files", uploadInstance.wrapper).length, 1);
+        equal($("> ul.k-upload-files", uploadInstance.wrapper).length, 1);
     });
 
     test("upload list is visible by default", function() {
         simulateFileSelect();
-        equal($("> ul.t-upload-files:visible", uploadInstance.wrapper).length, 1);
+        equal($("> ul.k-upload-files:visible", uploadInstance.wrapper).length, 1);
     });
 
     test("upload list is hidden when showFileList is false", function() {
         uploadInstance = createUpload({showFileList: false});
         simulateFileSelect();
-        equal($("> ul.t-upload-files:not(:visible)", uploadInstance.wrapper).length, 1);
+        equal($("> ul.k-upload-files:not(:visible)", uploadInstance.wrapper).length, 1);
     });
 
     test("file name is rendered", function() {
         simulateFileSelect();
-        equal($(".t-upload-files .t-file .t-filename", uploadInstance.wrapper).text(), "first.txt");
+        equal($(".k-upload-files .k-file .k-filename", uploadInstance.wrapper).text(), "first.txt");
     });
 
     test("status icon is rendered", function() {
         simulateFileSelect();
-        equal($(".t-upload-files .t-file > span.t-icon", uploadInstance.wrapper).length, 1);
+        equal($(".k-upload-files .k-file > span.k-icon", uploadInstance.wrapper).length, 1);
     });
 
     test("progress bar is not rendered", function() {
         simulateFileSelect();
-        equal($(".t-upload-files li.t-file .t-progress", uploadInstance.wrapper).length, 0);
+        equal($(".k-upload-files li.k-file .k-progress", uploadInstance.wrapper).length, 0);
     })
 
     test("disable prevents selection", function () {
         uploadInstance.disable();
         simulateFileSelect();
-        equal($(".t-file", uploadInstance.wrapper).length, 0);
+        equal($(".k-file", uploadInstance.wrapper).length, 0);
     });
 
     test("enable allows selection", function () {
         uploadInstance.disable();
         uploadInstance.enable();
         simulateFileSelect();
-        equal($(".t-file", uploadInstance.wrapper).length, 1);
+        equal($(".k-file", uploadInstance.wrapper).length, 1);
     });
 
     test("file action button is rendered", function() {
         simulateFileSelect();
-        equal($(".t-upload-files li.t-file button.t-upload-action", uploadInstance.wrapper).length, 1);
+        equal($(".k-upload-files li.k-file button.k-upload-action", uploadInstance.wrapper).length, 1);
     });
 
     test("selecting a second file replaces the first when multiple is set to false", function () {
@@ -73,12 +73,12 @@
 
         simulateFileSelect();
         simulateFileSelect();
-        equal($(".t-file", uploadInstance.wrapper).length, 1);
+        equal($(".k-file", uploadInstance.wrapper).length, 1);
     });
 
     test("files are removed when the original form is reset", function() {
         simulateFileSelect();
         $("#parentForm").trigger("reset");
 
-        equal($(".t-file", uploadInstance.wrapper).length, 0);
+        equal($(".k-file", uploadInstance.wrapper).length, 0);
     });

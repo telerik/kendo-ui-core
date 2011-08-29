@@ -84,7 +84,7 @@
      *      A common desire with TabStrips is to select a tab and display its associated content on initial load. There are two ways to accomplish this with TabStrip:
      *  </p>
      *  <ol>                
-     *      <li>Manually add the "t-state-active" class to the Tab that should be selected</li>
+     *      <li>Manually add the "k-state-active" class to the Tab that should be selected</li>
      *      <li>Use the TabStrip API to target and select a Tab</li>                
      *  </ol>
      *  <p>
@@ -95,7 +95,7 @@
      * @example
      *  <div id="tabstrip">
      *      <ul>
-	 *          <li class="t-state-active">First Tab</li>
+	 *          <li class="k-state-active">First Tab</li>
 	 *          <li>Second Tab</li>
      *      </ul>
      *      <div> </div>
@@ -137,34 +137,34 @@
         excludedNodesRegExp = /^(a|div)$/i,
         IMG = "img",
         HREF = "href",
-        LINK = "t-link",
-        LAST = "t-last",
+        LINK = "k-link",
+        LAST = "k-last",
         CLICK = "click",
         ERROR = "error",
         EMPTY = ":empty",
-        IMAGE = "t-image",
-        FIRST = "t-first",
+        IMAGE = "k-image",
+        FIRST = "k-first",
         SELECT = "select",
-        CONTENT = "t-content",
+        CONTENT = "k-content",
         CONTENTURL = "contentUrl",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         CONTENTLOAD = "contentLoad",
-        CLICKABLEITEMS = ".t-tabstrip-items > .t-item:not(.t-state-disabled)",
-        HOVERABLEITEMS = ".t-tabstrip-items > .t-item:not(.t-state-disabled):not(.t-state-active)",
-        DISABLEDLINKS = ".t-tabstrip-items > .t-state-disabled .t-link",
-        DISABLEDSTATE = "t-state-disabled",
-        DEFAULTSTATE = "t-state-default",
-        ACTIVESTATE = "t-state-active",
-        HOVERSTATE = "t-state-hover",
-        TABONTOP = "t-tab-on-top",
+        CLICKABLEITEMS = ".k-tabstrip-items > .k-item:not(.k-state-disabled)",
+        HOVERABLEITEMS = ".k-tabstrip-items > .k-item:not(.k-state-disabled):not(.k-state-active)",
+        DISABLEDLINKS = ".k-tabstrip-items > .k-state-disabled .k-link",
+        DISABLEDSTATE = "k-state-disabled",
+        DEFAULTSTATE = "k-state-default",
+        ACTIVESTATE = "k-state-active",
+        HOVERSTATE = "k-state-hover",
+        TABONTOP = "k-tab-on-top",
 
         templates = {
             content: template(
-                "<div class='t-content'<#= contentAttributes(data) #>>&nbsp;</div>"
+                "<div class='k-content'<#= contentAttributes(data) #>>&nbsp;</div>"
             ),
             itemWrapper: template(
-                "<<#= tag(item) #> class='t-link'<#= textAttributes(item) #>>" +
+                "<<#= tag(item) #> class='k-link'<#= textAttributes(item) #>>" +
                     "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
                 "</<#= tag(item) #>>"
             ),
@@ -173,28 +173,28 @@
                     "<#= itemWrapper(data) #>" +
                 "</li>"
             ),
-            image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
-            sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
+            image: template("<img class='k-image' alt='' src='<#= imageUrl #>' />"),
+            sprite: template("<span class='k-sprite <#= spriteCssClass #>'></span>"),
             empty: template("")
         },
 
         rendering = {
             wrapperCssClass: function (group, item) {
-                var result = "t-item",
+                var result = "k-item",
                     index = item.index;
 
                 if (item.enabled === false) {
-                    result += " t-state-disabled";
+                    result += " k-state-disabled";
                 } else {
-                    result += " t-state-default";
+                    result += " k-state-default";
                 }
 
                 if (index == 0) {
-                    result += " t-first"
+                    result += " k-first"
                 }
 
                 if (index == group.length-1) {
-                    result += " t-last";
+                    result += " k-last";
                 }
 
                 return result;
@@ -222,14 +222,14 @@
             .children(IMG)
             .addClass(IMAGE);
 
-        tabs.filter(":not([disabled]):not([class*=t-state-disabled])")
+        tabs.filter(":not([disabled]):not([class*=k-state-disabled])")
             .addClass(DEFAULTSTATE);
 
         tabs.filter("li[disabled]")
             .addClass(DISABLEDSTATE)
             .removeAttr("disabled");
 
-        tabs.filter(":not([class*=t-state])")
+        tabs.filter(":not([class*=k-state])")
             .children("a:focus")
             .parent()
             .addClass(ACTIVESTATE);
@@ -248,10 +248,10 @@
     }
 
     function updateFirstLast (tabGroup) {
-        var tabs = tabGroup.children(".t-item");
+        var tabs = tabGroup.children(".k-item");
 
-        tabs.filter(".t-first:not(:first-child)").removeClass(FIRST);
-        tabs.filter(".t-last:not(:last-child)").removeClass(LAST);
+        tabs.filter(".k-first:not(:first-child)").removeClass(FIRST);
+        tabs.filter(".k-last:not(:last-child)").removeClass(LAST);
         tabs.filter(":first-child").addClass(FIRST);
         tabs.filter(":last-child").addClass(LAST);
     }
@@ -318,7 +318,7 @@
             that._updateClasses();
 
             if (that.options.contentUrls) {
-                element.find(".t-tabstrip-items > .t-item")
+                element.find(".k-tabstrip-items > .k-item")
                     .each(function(index, item) {
                         $(item).find(">." + LINK).data(CONTENTURL, that.options.contentUrls[index]);
                     });
@@ -542,11 +542,11 @@
             var that = this,
                 tabs, activeItem, activeTab;
 
-            that.element.addClass("t-widget t-header t-tabstrip");
+            that.element.addClass("k-widget k-header k-tabstrip");
 
-            that.tabGroup = that.element.children("ul").addClass("t-tabstrip-items t-reset");
+            that.tabGroup = that.element.children("ul").addClass("k-tabstrip-items k-reset");
 
-            tabs = that.tabGroup.find("li").addClass("t-item");
+            tabs = that.tabGroup.find("li").addClass("k-item");
             activeItem = tabs.filter("." + ACTIVESTATE).index();
             activeTab = activeItem >= 0 ? activeItem : undefined;
 
@@ -575,7 +575,7 @@
 
             that.contentElements = that.element.children("div");
 
-            that.tabGroup.find(".t-item").each(function(idx) {
+            that.tabGroup.find(".k-item").each(function(idx) {
                 var currentContent = that.contentElements.eq(idx),
                     id = tabStripID + "-" + (idx+1),
                     href = $(this).children("." + LINK).attr(HREF);
@@ -725,7 +725,7 @@
         },
 
         ajaxRequest: function (element, content, complete, url) {
-            if (element.find(".t-loading").length)
+            if (element.find(".k-loading").length)
                 return;
 
             var that = this,
@@ -733,7 +733,7 @@
                 data = {},
                 statusIcon = null,
                 loadingIconTimeout = setTimeout(function () {
-                    statusIcon = $("<span class='t-icon t-loading'/>").prependTo(link)
+                    statusIcon = $("<span class='k-icon k-loading'/>").prependTo(link)
                 }, 100);
 
             $.ajax({

@@ -147,7 +147,7 @@ if (!isInferiorBrowser) {
                         }, 400);
                     }
                 })
-                .closest(".t-window")
+                .closest(".k-window")
                     .attr("id", "exifWindowWrapper")
                     .bind("touchstart mousedown", function(e) {
                         e.stopPropagation();

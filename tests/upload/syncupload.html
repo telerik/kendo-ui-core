@@ -55,45 +55,45 @@
 
             test("list element is created for the selected file", function() {
                 simulateFileSelect();
-                equal($(".t-upload-files li.t-file", uploadInstance.wrapper).length, 1);
+                equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 1);
             });
 
             test("remove icon is rendered", function() {
                 simulateFileSelect();
-                equal($(".t-upload-files li.t-file button.t-upload-action span.t-delete", uploadInstance.wrapper).length, 1);
+                equal($(".k-upload-files li.k-file button.k-upload-action span.k-delete", uploadInstance.wrapper).length, 1);
             });
 
             test("clicking remove should remove file entry", function() {
                 simulateFileSelect();
                 simulateFileSelect();
-                $(".t-delete:first", uploadInstance.wrapper).trigger("click");
-                equal($(".t-upload-files li.t-file", uploadInstance.wrapper).length, 1);
+                $(".k-delete:first", uploadInstance.wrapper).trigger("click");
+                equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 1);
             });
 
             test("disable prevents clicking remove", function () {
                 simulateFileSelect();
                 uploadInstance.disable();
-                $(".t-delete:first", uploadInstance.wrapper).trigger("click");
-                equal($(".t-file", uploadInstance.wrapper).length, 1);
+                $(".k-delete:first", uploadInstance.wrapper).trigger("click");
+                equal($(".k-file", uploadInstance.wrapper).length, 1);
             });
 
             test("clicking remove should remove file input", function() {
                 simulateFileSelect();
-                $(".t-delete", uploadInstance.wrapper).trigger("click");
+                $(".k-delete", uploadInstance.wrapper).trigger("click");
                 equal($("input", uploadInstance.wrapper).length, 1);
             });
 
             test("removing last file should remove list", function() {
                 simulateFileSelect();
-                $(".t-delete", uploadInstance.wrapper).trigger("click");
-                equal($(".t-upload-files", uploadInstance.wrapper).length, 0);
+                $(".k-delete", uploadInstance.wrapper).trigger("click");
+                equal($(".k-upload-files", uploadInstance.wrapper).length, 0);
             });
 
             test("list element is re-created after removing all files", function() {
                 simulateFileSelect();
-                $(".t-delete", uploadInstance.wrapper).trigger("click");
+                $(".k-delete", uploadInstance.wrapper).trigger("click");
                 simulateFileSelect();
-                equal($(".t-upload-files li.t-file", uploadInstance.wrapper).length, 1);
+                equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 1);
             });
 
             test("the empty input is removed when the parent form is submitted", function() {
@@ -144,7 +144,7 @@
                 simulateFileSelect();
                 simulateRemoveClick();
 
-                equal($(".t-upload-files li.t-file", uploadInstance.wrapper).length, 1);
+                equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 1);
             });
         </script>
         <script src="select.js"></script>

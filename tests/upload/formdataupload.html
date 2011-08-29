@@ -49,14 +49,14 @@
             function simulateRequestSuccess(fileIndex, response) {
                 uploadInstance._module.onRequestSuccess(
                     { target: { responseText: response || "", statusText: "OK", status: "200" } },
-                    $(".t-file", uploadInstance.wrapper).eq(fileIndex)
+                    $(".k-file", uploadInstance.wrapper).eq(fileIndex)
                 );
             }
 
             function simulateRequestError(fileIndex, response) {
                 uploadInstance._module.onRequestError(
                     { target: { responseText: response || "", statusText: "error", status: "500" } },
-                    $(".t-file", uploadInstance.wrapper).eq(fileIndex)
+                    $(".k-file", uploadInstance.wrapper).eq(fileIndex)
                 );
             }
 
@@ -147,14 +147,14 @@
             test("list element is created for each selected file", function() {
                 uploadInstance._module.inputFiles = function () { return getFileListMock() };
                 simulateFileSelect();
-                equal($(".t-upload-files li.t-file", uploadInstance.wrapper).length, 2);
+                equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 2);
             });
 
             test("file names are rendered for multiple files", function() {
                 uploadInstance._module.inputFiles = function () { return getFileListMock() };
                 simulateFileSelect();
 
-                var fileNames = $(".t-filename", uploadInstance.wrapper).map(function() { return $(this).text(); });
+                var fileNames = $(".k-filename", uploadInstance.wrapper).map(function() { return $(this).text(); });
 
                 equal(fileNames[0], "first.txt");
                 equal(fileNames[1], "second.txt");
@@ -165,7 +165,7 @@
                 uploadInstance._module.stopUploadRequest = function() { requestStopped = true; };
 
                 simulateFileSelect();
-                $(".t-cancel", uploadInstance.wrapper).trigger("click");
+                $(".k-cancel", uploadInstance.wrapper).trigger("click");
 
                 ok(requestStopped);
             });
@@ -208,7 +208,7 @@
                 simulateFileSelect();
                 uploadInstance.element.removeClass("marker");
 
-                var fileEntry = $(".t-file:first", uploadInstance.wrapper);
+                var fileEntry = $(".k-file:first", uploadInstance.wrapper);
 
                 uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, fileEntry);
 
@@ -222,12 +222,12 @@
                 simulateFileSelect();
                 uploadInstance.element.removeClass("marker");
 
-                var fileEntry = $(".t-file:nth-child(1)", uploadInstance.wrapper);
+                var fileEntry = $(".k-file:nth-child(1)", uploadInstance.wrapper);
                 uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, fileEntry);
 
                 equal($(".marker", uploadInstance.wrapper).length, 1);
 
-                fileEntry = $(".t-file:nth-child(2)", uploadInstance.wrapper);
+                fileEntry = $(".k-file:nth-child(2)", uploadInstance.wrapper);
                 uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, fileEntry);
 
                 equal($(".marker", uploadInstance.wrapper).length, 0);
@@ -249,15 +249,15 @@
 
             test("progress bar is rendered on first update", function() {
                 simulateFileSelect();
-                uploadInstance._module.onRequestProgress({ loaded: 1, total: 1}, $(".t-file", uploadInstance.wrapper));
-                equal($(".t-upload-files .t-file .t-filename .t-progress", uploadInstance.wrapper).length, 1);
+                uploadInstance._module.onRequestProgress({ loaded: 1, total: 1}, $(".k-file", uploadInstance.wrapper));
+                equal($(".k-upload-files .k-file .k-filename .k-progress", uploadInstance.wrapper).length, 1);
             })
 
             test("progress indicator is updated", function() {
                 simulateFileSelect();
 
-                uploadInstance._module.onRequestProgress({ loaded: 10, total: 100}, $(".t-file", uploadInstance.wrapper));
-                equal($(".t-progress-status", uploadInstance.wrapper)[0].style.width, "10%");
+                uploadInstance._module.onRequestProgress({ loaded: 10, total: 100}, $(".k-file", uploadInstance.wrapper));
+                equal($(".k-progress-status", uploadInstance.wrapper)[0].style.width, "10%");
             });
 
             test("postFormData is issued when clicking retry", function() {
@@ -266,7 +266,7 @@
                 var postFormDataCalled = false;
                 uploadInstance._module.postFormData = function() { postFormDataCalled = true; };
 
-                $(".t-retry", uploadInstance.wrapper).trigger("click");
+                $(".k-retry", uploadInstance.wrapper).trigger("click");
 
                 ok(postFormDataCalled);
             });
@@ -274,13 +274,13 @@
             test("formData is not cleaned-up on failure (invalid response) to allow retry", function() {
                 simulateUploadWithResponse(errorResponse);
 
-                notEqual($(".t-file", uploadInstance.wrapper).data("formData"), null);
+                notEqual($(".k-file", uploadInstance.wrapper).data("formData"), null);
             });
 
             test("formData is not cleaned-up on failure (request error) to allow retry", function() {
                 simulateUploadError(errorResponse);
 
-                notEqual($(".t-file", uploadInstance.wrapper).data("formData"), null);
+                notEqual($(".k-file", uploadInstance.wrapper).data("formData"), null);
             });
         </script>
 
@@ -314,39 +314,39 @@
                 uploadInstance._module.postFormData = function() { postFormDataCalled = true; };
 
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
                 ok(postFormDataCalled);
             });
 
             test("upload button is rendered on subsequent select", function() {
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
-                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, $(".t-file", uploadInstance.wrapper));
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, $(".k-file", uploadInstance.wrapper));
                 simulateFileSelect();
 
-                equal($(".t-upload-selected", uploadInstance.wrapper).length, 1);
+                equal($(".k-upload-selected", uploadInstance.wrapper).length, 1);
             });
 
             test("upload button click does not start upload if it is already in progress", function() {
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
                 var counter = 0;
                 uploadInstance._module.performUpload = function(fileEntry) { counter++; }
 
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
                 equal(counter, 1);
             });
 
             test("upload button click does not start upload after completion", function() {
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
-                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, $(".t-file", uploadInstance.wrapper));
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, $(".k-file", uploadInstance.wrapper));
 
-                $(".t-file").addClass("complete");
+                $(".k-file").addClass("complete");
 
                 var counter = 0;
                 uploadInstance._module.performUpload = function(fileEntry) {
@@ -355,32 +355,32 @@
                 }
 
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
                 equal(counter, 1);
             });
 
             test("upload button click does not start upload after completion", function() {
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
                 var postFormDataCalled = false;
                 uploadInstance._module.postFormData = function() { postFormDataCalled = true; };
 
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
                 ok(!postFormDataCalled);
             });
 
             test("upload button click does not start upload if it is already in progress", function() {
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
-                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, $(".t-file", uploadInstance.wrapper));
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, $(".k-file", uploadInstance.wrapper));
 
                 var postFormDataCalled = false;
                 uploadInstance._module.postFormData = function() { postFormDataCalled = true; };
 
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
                 ok(!postFormDataCalled);
             });
@@ -392,10 +392,10 @@
                 };
 
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
-                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, $(".t-file", uploadInstance.wrapper));
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, $(".k-file", uploadInstance.wrapper));
 
-                $(".t-delete", uploadInstance.wrapper).trigger("click");
+                $(".k-delete", uploadInstance.wrapper).trigger("click");
                 ok(removeCalled);
             });
 

@@ -21,30 +21,30 @@
         <!-- nav -->
         <!-- description -->
         <!-- description -->
-        <div id="example" class="t-content">
+        <div id="example" class="k-content">
 
             <div class="configuration">
                 <span class="configHead">Configuration</span>
                 <span class="configTitle">API Functions</span>
                 <ul class="options">
                     <li>
-                        <button class="t-button" id="disableNode">Disable node</button>
+                        <button class="k-button" id="disableNode">Disable node</button>
                     </li>
                     <li>
-                        <button class="t-button" id="enableAllNodes">Enable all nodes</button>
+                        <button class="k-button" id="enableAllNodes">Enable all nodes</button>
                     </li>
                     <li>
-                        <button class="t-button" id="removeNode">Remove node</button>
+                        <button class="k-button" id="removeNode">Remove node</button>
                     </li>
                     <li>
-                        <button class="t-button" id="expandAllNodes">Expand all nodes</button>
+                        <button class="k-button" id="expandAllNodes">Expand all nodes</button>
                     </li>
                     <li>
-                        <button class="t-button" id="collapseAllNodes">Collapse all nodes</button>
+                        <button class="k-button" id="collapseAllNodes">Collapse all nodes</button>
                     </li>
                     <li>
                         <input name="text" id="text" value="Node"/>
-                        <button class="t-button" id="appendNodeToSelected">Append node</button>
+                        <button class="k-button" id="appendNodeToSelected">Append node</button>
                     </li>
                 </ul>
             </div>
@@ -78,7 +78,7 @@
                     $("#enableAllNodes").click(function() {
                         var selectedNode = treeview.select();
 
-                        treeview.enable(".t-item");
+                        treeview.enable(".k-item");
                     });
 
                     $("#removeNode").click(function() {
@@ -88,11 +88,11 @@
                     });
 
                     $("#expandAllNodes").click(function() {
-                        treeview.expand(".t-item");
+                        treeview.expand(".k-item");
                     });
 
                     $("#collapseAllNodes").click(function() {
-                        treeview.collapse(".t-item");
+                        treeview.collapse(".k-item");
                     });
 
                     $("#appendNodeToSelected").click(function() {

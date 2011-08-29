@@ -84,17 +84,17 @@
         DRAGEND = "dragend",
         CLICK = "click",
         VISIBILITY = "visibility",
-        TSTATEHOVER = "t-state-hover",
-        TTREEVIEW = "t-treeview",
-        TITEM = "t-item",
+        TSTATEHOVER = "k-state-hover",
+        TTREEVIEW = "k-treeview",
+        TITEM = "k-item",
         VISIBLE = ":visible",
-        NODE = ".t-item",
-        SUBGROUP = ">.t-group,>.t-animation-container>.t-group",
-        NODECONTENTS = SUBGROUP + ",>.t-content,>.t-animation-container>.t-content",
+        NODE = ".k-item",
+        SUBGROUP = ">.k-group,>.k-animation-container>.k-group",
+        NODECONTENTS = SUBGROUP + ",>.k-content,>.k-animation-container>.k-content",
         templates, rendering, TreeView;
 
     templates = {
-        dragClue: template("<div class='t-header t-drag-clue'><span class='t-icon t-drag-status'></span><#= text #></div>"),
+        dragClue: template("<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span><#= text #></div>"),
         group: template(
             "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
                 "<#= renderItems(data) #>" +
@@ -116,9 +116,9 @@
                 "<# } #>" +
             "</li>"
         ),
-        image: template("<img class='t-image' alt='' src='<#= imageUrl #>' />"),
+        image: template("<img class='k-image' alt='' src='<#= imageUrl #>' />"),
         toggleButton: template("<span class='<#= toggleButtonClass(item) #>'></span>"),
-        sprite: template("<span class='t-sprite <#= spriteCssClass #>'></span>"),
+        sprite: template("<span class='k-sprite <#= spriteCssClass #>'></span>"),
         empty: template("")
     };
 
@@ -137,7 +137,7 @@
         init: function (element, options) {
             var that = this,
                 element = $(element),
-                clickableItems = ".t-in:not(.t-state-selected,.t-state-disabled)",
+                clickableItems = ".k-in:not(.k-state-selected,.k-state-disabled)",
                 dataInit;
 
             options = $.isArray(options) ? (dataInit = true, { dataSource: options }) : options;
@@ -176,12 +176,12 @@
             }
 
             that.wrapper
-                .delegate(".t-in.t-state-selected", "mouseenter", function(e) { e.preventDefault(); })
+                .delegate(".k-in.k-state-selected", "mouseenter", function(e) { e.preventDefault(); })
                 .delegate(clickableItems, "mouseenter", function () { $(this).addClass(TSTATEHOVER); })
                 .delegate(clickableItems, "mouseleave", function () { $(this).removeClass(TSTATEHOVER); })
                 .delegate(clickableItems, CLICK, proxy(that._nodeClick, that))
-                .delegate("div:not(.t-state-disabled) .t-in", "dblclick", proxy(that._toggleButtonClick, that))
-                .delegate(".t-plus,.t-minus", CLICK, proxy(that._toggleButtonClick, that));
+                .delegate("div:not(.k-state-disabled) .k-in", "dblclick", proxy(that._toggleButtonClick, that))
+                .delegate(".k-plus,.k-minus", CLICK, proxy(that._toggleButtonClick, that));
 
             if (options.dragAndDrop) {
                 that.bind([
@@ -305,7 +305,7 @@
                 e.preventDefault();
             }
 
-            if (!node.hasClass(".t-state-selected") && !that._trigger("select", node)) {
+            if (!node.hasClass(".k-state-selected") && !that._trigger("select", node)) {
                 that.select(node);
             }
         },
@@ -314,7 +314,7 @@
             var that = this,
                 element = that.element,
                 wrapper, root,
-                wrapperClasses = "t-widget t-treeview t-reset";
+                wrapperClasses = "k-widget k-treeview k-reset";
 
             if (element.is("div")) {
                 wrapper = element.addClass(wrapperClasses);
@@ -368,26 +368,26 @@
         _updateNodeHtml: function(node) {
             var wrapper = node.find(">div"),
                 subGroup = node.find(">ul"),
-                toggleButton = wrapper.find(">.t-icon"),
-                innerWrapper = wrapper.find(">.t-in");
+                toggleButton = wrapper.find(">.k-icon"),
+                innerWrapper = wrapper.find(">.k-in");
 
             if (!wrapper.length) {
                 wrapper = $("<div />").prependTo(node);
             }
 
             if (!toggleButton.length && subGroup.length) {
-                toggleButton = $("<span class='t-icon' />").prependTo(wrapper);
+                toggleButton = $("<span class='k-icon' />").prependTo(wrapper);
             } else if (!subGroup.length || !subGroup.children().length) {
                 toggleButton.remove();
                 subGroup.remove();
             }
 
             if (!innerWrapper.length) {
-                innerWrapper = $("<span class='t-in' />").appendTo(wrapper)[0];
+                innerWrapper = $("<span class='k-in' />").appendTo(wrapper)[0];
 
-                // move all non-group content in the t-in container
+                // move all non-group content in the k-in container
                 currentNode = wrapper[0].nextSibling;
-                innerWrapper = wrapper.find(".t-in")[0];
+                innerWrapper = wrapper.find(".k-in")[0];
 
                 while (currentNode && currentNode.nodeName.toLowerCase() != "ul") {
                     tmp = currentNode;
@@ -405,7 +405,7 @@
                 nodeData = {
                     expanded: !(subGroup.css("display") == "none"),
                     index: node.index(),
-                    enabled: !wrapper.find(">.t-in").hasClass("t-state-disabled")
+                    enabled: !wrapper.find(">.k-in").hasClass("k-state-disabled")
                 };
             }
 
@@ -417,19 +417,19 @@
             }
 
             // li
-            node.removeClass("t-first t-last")
+            node.removeClass("k-first k-last")
                 .addClass(rendering.wrapperCssClass(groupData, nodeData));
 
             // div
-            wrapper.removeClass("t-top t-mid t-bot")
+            wrapper.removeClass("k-top k-mid k-bot")
                    .addClass(rendering.cssClass(groupData, nodeData));
 
             // toggle button
             if (subGroup.length) {
-                wrapper.find(">.t-icon").removeClass("t-plus t-minus t-plus-disabled t-minus-disabled")
+                wrapper.find(">.k-icon").removeClass("k-plus k-minus k-plus-disabled k-minus-disabled")
                     .addClass(rendering.toggleButtonClass(nodeData));
 
-                subGroup.addClass("t-group");
+                subGroup.addClass("k-group");
             }
         },
 
@@ -450,7 +450,7 @@
          * treeview.expand(document.getElementById("firstItem"));
          *
          * // expands all nodes
-         * treeview.expand(".t-item");
+         * treeview.expand(".k-item");
          */
         expand: function (nodes) {
             this._processNodes(nodes, function (index, item) {
@@ -472,7 +472,7 @@
          * treeview.collapse(document.getElementById("firstItem"));
          *
          * // collapse all nodes
-         * treeview.collapse(".t-item");
+         * treeview.collapse(".k-item");
          */
         collapse: function (nodes) {
             this._processNodes(nodes, function (index, item) {
@@ -495,7 +495,7 @@
          * treeview.enable(document.getElementById("firstItem"), false);
          *
          * // enable all nodes
-         * treeview.enable(".t-item");
+         * treeview.enable(".k-item");
          */
         enable: function (nodes, enable) {
             enable = arguments.length == 2 ? !!enable : true;
@@ -509,15 +509,15 @@
                 }
 
                 item.find(">div")
-                        .find(">.t-in")
-                            .toggleClass("t-state-default", enable)
-                            .toggleClass("t-state-disabled", !enable)
+                        .find(">.k-in")
+                            .toggleClass("k-state-default", enable)
+                            .toggleClass("k-state-disabled", !enable)
                         .end()
-                        .find(">.t-icon")
-                            .toggleClass("t-plus", isCollapsed && enable)
-                            .toggleClass("t-plus-disabled", isCollapsed && !enable)
-                            .toggleClass("t-minus", !isCollapsed && enable)
-                            .toggleClass("t-minus-disabled", !isCollapsed && !enable);
+                        .find(">.k-icon")
+                            .toggleClass("k-plus", isCollapsed && enable)
+                            .toggleClass("k-plus-disabled", isCollapsed && !enable)
+                            .toggleClass("k-minus", !isCollapsed && enable)
+                            .toggleClass("k-minus-disabled", !isCollapsed && !enable);
             });
         },
 
@@ -538,15 +538,15 @@
             var element = this.element;
 
             if (arguments.length == 0) {
-                return element.find(".t-state-selected").closest(NODE);
+                return element.find(".k-state-selected").closest(NODE);
             }
 
             node = $(node).closest(NODE);
 
             if (node.length) {
-                element.find(".t-in").removeClass("t-state-hover t-state-selected");
+                element.find(".k-in").removeClass("k-state-hover k-state-selected");
 
-                node.find(".t-in:first").addClass("t-state-selected");
+                node.find(".k-in:first").addClass("k-state-selected");
             }
         },
 
@@ -560,11 +560,11 @@
          * treeview.toggle(document.getElementById("firstItem"));
          */
         toggle: function (node) {
-            if (node.find(".t-minus,.t-plus").length == 0) {
+            if (node.find(".k-minus,.k-plus").length == 0) {
                 return;
             }
 
-            if (node.find("> div > .t-state-disabled").length) {
+            if (node.find("> div > .k-state-disabled").length) {
                 return;
             }
 
@@ -586,9 +586,9 @@
 
             if (contents.children().length > 0) {
                 if (!that._trigger(isExpanding ? "expand" : "collapse", node)) {
-                    node.find("> div > .t-icon")
-                        .toggleClass("t-minus", isExpanding)
-                        .toggleClass("t-plus", !isExpanding);
+                    node.find("> div > .k-icon")
+                        .toggleClass("k-minus", isExpanding)
+                        .toggleClass("k-plus", !isExpanding);
 
                     if (!isExpanding) {
                         contents.css("height", contents.height()).css("height");
@@ -616,7 +616,7 @@
          * var nodeText = treeview.text(document.getElementById("firstItem"));
          */
         text: function (node) {
-            return $(node).closest(NODE).find(">div>.t-in").text();
+            return $(node).closest(NODE).find(">div>.k-in").text();
         },
 
         _insertNode: function(nodeData, index, parentNode, group, insertCallback) {
@@ -637,7 +637,7 @@
             } else {
                 node = $(nodeData);
 
-                if (node.closest(".t-treeview")[0] == that.wrapper[0]) {
+                if (node.closest(".k-treeview")[0] == that.wrapper[0]) {
                     that.remove(node);
                 }
             }
@@ -650,7 +650,7 @@
 
             insertCallback(node, group);
 
-            if (parentNode.hasClass("t-item")) {
+            if (parentNode.hasClass("k-item")) {
                 that._updateNodeHtml(parentNode);
                 that._updateNodeClasses(parentNode);
             }
@@ -749,7 +749,7 @@
 
             node.remove();
 
-            if (parentNode.hasClass("t-item")) {
+            if (parentNode.hasClass("k-item")) {
                 that._updateNodeHtml(parentNode);
                 that._updateNodeClasses(parentNode);
             }
@@ -771,7 +771,7 @@
         findByText: function (text) {
             var result;
 
-            $(".t-in", this.element).each(function() {
+            $(".k-in", this.element).each(function() {
                 var that = $(this);
                 if (that.text() == text) {
                     result = that.closest(NODE);
@@ -789,7 +789,7 @@
         that.treeview = treeview;
 
         that._draggable = new ui.Draggable(treeview.element, {
-           filter: "div:not(.t-state-disabled) .t-in",
+           filter: "div:not(.k-state-disabled) .k-in",
            hint: function(node) {
                return templates.dragClue({ text: node.text() });
            },
@@ -801,12 +801,12 @@
 
     TreeViewDragAndDrop.prototype = /** @ignore */{
         _hintStatus: function(newStatus) {
-            var statusElement = this._draggable.hint.find(".t-drag-status")[0];
+            var statusElement = this._draggable.hint.find(".k-drag-status")[0];
 
             if (newStatus) {
-                statusElement.className = "t-icon t-drag-status " + newStatus;
+                statusElement.className = "k-icon k-drag-status " + newStatus;
             } else {
-                return $.trim(statusElement.className.replace(/t-(icon|drag-status)/g, ""));
+                return $.trim(statusElement.className.replace(/k-(icon|drag-status)/g, ""));
             }
         },
 
@@ -819,7 +819,7 @@
                 return false;
             }
 
-            that.dropHint = $("<div class='t-drop-hint' />")
+            that.dropHint = $("<div class='k-drop-hint' />")
                 .css(VISIBILITY, "hidden")
                 .appendTo(treeview.element);
         },
@@ -835,22 +835,22 @@
 
             if (!$.contains(treeview.wrapper[0], dropTarget[0])) {
                 // dragging node outside of treeview
-                statusClass = "t-denied";
+                statusClass = "k-denied";
             } else if ($.contains(sourceNode[0], dropTarget[0])) {
                 // dragging node within itself
-                statusClass = "t-denied";
+                statusClass = "k-denied";
             } else {
                 // moving or reordering node
-                statusClass = "t-insert-middle";
+                statusClass = "k-insert-middle";
 
                 that.dropHint.css(VISIBILITY, "visible");
 
-                hoveredItem = dropTarget.closest(".t-top,.t-mid,.t-bot");
+                hoveredItem = dropTarget.closest(".k-top,.k-mid,.k-bot");
 
                 if (hoveredItem.length > 0) {
                     itemHeight = hoveredItem.outerHeight();
                     itemTop = hoveredItem.offset().top;
-                    itemContent = dropTarget.closest(".t-in");
+                    itemContent = dropTarget.closest(".k-in");
                     delta = itemHeight / (itemContent.length > 0 ? 4 : 2);
 
                     insertOnTop = e.pageY < (itemTop + delta);
@@ -861,7 +861,7 @@
                     that.dropHint.css(VISIBILITY, addChild ? "hidden" : "visible");
 
                     if (addChild) {
-                        statusClass = "t-add";
+                        statusClass = "k-add";
                     } else {
                         hoveredItemPos = hoveredItem.position();
                         hoveredItemPos.top += insertOnTop ? 0 : itemHeight;
@@ -870,12 +870,12 @@
                             .css(hoveredItemPos)
                             [insertOnTop ? "prependTo" : "appendTo"](dropTarget.closest(NODE).find("> div:first"));
 
-                        if (insertOnTop && hoveredItem.hasClass("t-top")) {
-                            statusClass = "t-insert-top";
+                        if (insertOnTop && hoveredItem.hasClass("k-top")) {
+                            statusClass = "k-insert-top";
                         }
 
-                        if (insertOnBottom && hoveredItem.hasClass("t-bot")) {
-                            statusClass = "t-insert-bottom";
+                        if (insertOnBottom && hoveredItem.hasClass("k-bot")) {
+                            statusClass = "k-insert-bottom";
                         }
                     }
                 }
@@ -890,7 +890,7 @@
                 setStatusClass: function (value) { statusClass = value }
             });
 
-            if (statusClass.indexOf("t-insert") != 0) {
+            if (statusClass.indexOf("k-insert") != 0) {
                 that.dropHint.css(VISIBILITY, "hidden");
             }
 
@@ -910,13 +910,13 @@
                 //treeview.trigger("nodeDragCancelled", { item: sourceNode[0] });
             } else {
                 if (that.dropHint.css(VISIBILITY) == "visible") {
-                    dropPosition = that.dropHint.prevAll(".t-in").length > 0 ? "after" : "before";
+                    dropPosition = that.dropHint.prevAll(".k-in").length > 0 ? "after" : "before";
                     destinationNode = that.dropHint.closest(NODE);
                 } else if (that.dropTarget) {
                     destinationNode = that.dropTarget.closest(NODE);
                 }
 
-                valid = that._hintStatus() != "t-denied";
+                valid = that._hintStatus() != "k-denied";
 
                 dropPrevented = treeview.trigger(DROP, {
                     sourceNode: sourceNode[0],
@@ -998,15 +998,15 @@
 
     rendering = /** @ignore */{
         wrapperCssClass: function (group, item) {
-            var result = "t-item",
+            var result = "k-item",
                 index = item.index;
 
             if (group.firstLevel && index == 0) {
-                result += " t-first"
+                result += " k-first"
             }
 
             if (index == group.length-1) {
-                result += " t-last";
+                result += " k-last";
             }
 
             return result;
@@ -1017,28 +1017,28 @@
                 groupLength = group.length - 1;
 
             if (group.firstLevel && index == 0) {
-                result += "t-top ";
+                result += "k-top ";
             }
 
             if (index == 0 && index != groupLength) {
-                result += "t-top";
+                result += "k-top";
             } else if (index == groupLength) {
-                result += "t-bot";
+                result += "k-bot";
             } else {
-                result += "t-mid";
+                result += "k-mid";
             }
 
             return result;
         },
         textClass: function(item) {
-            var result = "t-in";
+            var result = "k-in";
 
             if (item.enabled === false) {
-                result += " t-state-disabled";
+                result += " k-state-disabled";
             }
 
             if (item.selected === true) {
-                result += " t-state-selected";
+                result += " k-state-selected";
             }
 
             return result;
@@ -1047,12 +1047,12 @@
             return item.url ? " href='" + item.url + "'" : "";
         },
         toggleButtonClass: function(item) {
-            var result = "t-icon";
+            var result = "k-icon";
 
             if (item.expanded !== true) {
-                result += " t-plus";
+                result += " k-plus";
             } else {
-                result += " t-minus";
+                result += " k-minus";
             }
 
             if (item.enabled === false) {
@@ -1071,10 +1071,10 @@
             return group.expanded !== true ? " style='display:none'" : "";
         },
         groupCssClass: function(group) {
-            var cssClass = "t-group";
+            var cssClass = "k-group";
 
             if (group.firstLevel) {
-                cssClass += " t-treeview-lines";
+                cssClass += " k-treeview-lines";
             }
 
             return cssClass;

@@ -616,13 +616,13 @@
             });
 
             test("open adds active state to parent state changers", function() {
-                anchor.append("<div class=\"t-dropdown-wrap\"></div><div class=\"t-link\"></div>");
+                anchor.append("<div class=\"k-dropdown-wrap\"></div><div class=\"k-link\"></div>");
                 var popup = new Popup(div, {
                     anchor: anchor
                 });
 
                 popup.open();
-                ok(anchor.children().hasClass("t-state-active"));
+                ok(anchor.children().hasClass("k-state-active"));
             });
         </script>
     </body>

@@ -875,7 +875,7 @@
     function wrap(element) {
         var browser = $.browser;
 
-        if (!element.parent().hasClass("t-animation-container")) {
+        if (!element.parent().hasClass("k-animation-container")) {
             var shadow = element.css(kendo.support.transitions.css + "box-shadow") || element.css("box-shadow"),
                 radius = shadow ? shadow.match(boxShadowRegExp) || [ 0, 0, 0, 0, 0 ] : [ 0, 0, 0, 0, 0 ],
                 blur = math.max((+radius[3]), +(radius[4] || 0)),
@@ -888,7 +888,7 @@
 
             element.wrap(
                          $("<div/>")
-                         .addClass("t-animation-container")
+                         .addClass("k-animation-container")
                          .css({
                              width: element.outerWidth(),
                              height: element.outerHeight(),
@@ -896,7 +896,7 @@
                              paddingBottom: bottom
                          }));
         } else {
-            var wrap = element.parent(".t-animation-container");
+            var wrap = element.parent(".k-animation-container");
 
             if (wrap.is(":hidden")) {
                 wrap.show();
@@ -1281,11 +1281,11 @@
              * @param {Boolean} toggle Whether the overlay should be shown or hidden
              */
             progress: function(container, toggle) {
-                var mask = container.find(".t-loading-mask");
+                var mask = container.find(".k-loading-mask");
 
                 if (toggle) {
                     if (!mask.length) {
-                        mask = $("<div class='t-loading-mask'><span class='t-loading-text'>Loading...</span><div class='t-loading-image'/><div class='t-loading-color'/></div>")
+                        mask = $("<div class='k-loading-mask'><span class='k-loading-text'>Loading...</span><div class='k-loading-image'/><div class='k-loading-color'/></div>")
                             .width("100%").height("100%")
                             .prependTo(container);
                     }

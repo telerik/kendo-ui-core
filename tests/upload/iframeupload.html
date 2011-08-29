@@ -45,7 +45,7 @@
                 triggerIframeLoad(0);
 
                 // Clean-up iframe as if the upload as if complete
-                $(".t-file:last", uploadInstance.wrapper).data("frame", null);
+                $(".k-file:last", uploadInstance.wrapper).data("frame", null);
             }
 
             function simulateUploadWithResponse(response) {
@@ -136,7 +136,7 @@
 
             test("list element is created for the selected file", function() {
                 simulateFileSelect();
-                equal($(".t-upload-files li.t-file", uploadInstance.wrapper).length, 1);
+                equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 1);
             });
 
             asyncTest("iframe is removed upon success", function() {
@@ -167,7 +167,7 @@
             asyncTest("clicking cancel should remove iframe", function() {
                 uploadInstance._module.onIframeLoad = function() { };
                 simulateFileSelect();
-                $(".t-cancel", uploadInstance.wrapper).trigger("click");
+                $(".k-cancel", uploadInstance.wrapper).trigger("click");
 
                 window.setTimeout(function() {
                     equal($("iframe.#uploadInstance_0").length, 0);
@@ -178,7 +178,7 @@
             asyncTest("clicking cancel should remove form", function() {
                 uploadInstance._module.onIframeLoad = function() { };
                 simulateFileSelect();
-                $(".t-cancel", uploadInstance.wrapper).trigger("click");
+                $(".k-cancel", uploadInstance.wrapper).trigger("click");
 
                 window.setTimeout(function() {
                     equal($("form[action='" + uploadInstance.options.async.saveUrl + "']").length, 0);
@@ -189,10 +189,10 @@
             asyncTest("clicking cancel should remove file entry", function() {
                 uploadInstance._module.onIframeLoad = function() { };
                 simulateFileSelect();
-                $(".t-cancel", uploadInstance.wrapper).trigger("click");
+                $(".k-cancel", uploadInstance.wrapper).trigger("click");
 
                 window.setTimeout(function() {
-                    equal($(".t-file", uploadInstance.wrapper).length, 0);
+                    equal($(".k-file", uploadInstance.wrapper).length, 0);
                     start();
                 }, 10);
             });
@@ -204,13 +204,13 @@
                     ok(true);
                 }
 
-                $(".t-retry", uploadInstance.wrapper).trigger("click");
+                $(".k-retry", uploadInstance.wrapper).trigger("click");
             });
 
             test("frame is not destroyed on failure to allow retry", function() {
                 simulateUploadWithResponse(errorResponse);
 
-                notEqual($(".t-file", uploadInstance.wrapper).data("frame"), null);
+                notEqual($(".k-file", uploadInstance.wrapper).data("frame"), null);
             });
 
             test("frame is not unregistered on failure to allow retry", function() {
@@ -245,29 +245,29 @@
 
             test("upload starts on upload button click", function() {
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
                 equal($("iframe.#uploadInstance_0").length, 1);
             });
 
             test("upload button is rendered on subsequent select", function() {
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
                 $("iframe.#uploadInstance_0").trigger("load");
                 simulateFileSelect();
 
-                equal($(".t-upload-selected", uploadInstance.wrapper).length, 1);
+                equal($(".k-upload-selected", uploadInstance.wrapper).length, 1);
             });
 
             asyncTest("upload button click does not start upload if it is already in progress", function() {
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
                 var counter = 0;
                 uploadInstance._module.performUpload = function(fileEntry) { counter++; }
 
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
                 window.setTimeout(function() {
                     equal(counter, 1);
@@ -277,10 +277,10 @@
 
             asyncTest("upload button click does not start upload after completion", function() {
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
                 $("iframe.#uploadInstance_0").trigger("load");
 
-                $(".t-file").addClass("complete");
+                $(".k-file").addClass("complete");
 
                 var counter = 0;
                 uploadInstance._module.performUpload = function(fileEntry) {
@@ -289,7 +289,7 @@
                 }
 
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
                 window.setTimeout(function() {
                     equal(counter, 1);
@@ -304,7 +304,7 @@
                 };
 
                 simulateFileSelect();
-                $(".t-upload-selected", uploadInstance.wrapper).trigger("click");
+                $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
                 $("iframe.#uploadInstance_0").trigger("load");
 
                 window.setTimeout(function() {
@@ -318,7 +318,7 @@
                 simulateFileSelect();
                 simulateRemoveClick();
 
-                equal($(".t-file", uploadInstance.wrapper).data("form"), null);
+                equal($(".k-file", uploadInstance.wrapper).data("form"), null);
             });
 
         </script>
@@ -389,7 +389,7 @@
                 });
 
                 simulateUploadWithResponse(errorResponse);
-                $(".t-retry", uploadInstance.wrapper).trigger("click");
+                $(".k-retry", uploadInstance.wrapper).trigger("click");
 
                 equal($("form[target='uploadInstance_0'] input[name='myId']").length, 1);
             });

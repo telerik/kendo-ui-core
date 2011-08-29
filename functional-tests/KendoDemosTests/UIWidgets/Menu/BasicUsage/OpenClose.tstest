@@ -951,7 +951,7 @@
                   <Clause>TagName=li</Clause>
                 </HtmlFindClause>
                 <HtmlFindClause>
-                  <Clause>class=t-item t-state-default t-first</Clause>
+                  <Clause>class=k-item k-state-default k-first</Clause>
                 </HtmlFindClause>
                 <HtmlFindClause>
                   <Clause>TagName=div</Clause>

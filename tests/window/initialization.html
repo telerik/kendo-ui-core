@@ -20,7 +20,7 @@
 
             module("ClientCreation", {
                 teardown: function() {
-                    $(".t-window,.t-overlay").remove();
+                    $(".k-window,.k-overlay").remove();
                 }
             });
 
@@ -32,8 +32,8 @@
             test("creates default html structure", function() {
                 var dialog = createWindow();
 
-                ok(dialog.wrapper.is(".t-widget, .t-window"));
-                ok(dialog.wrapper.children().eq(0).is(".t-window-titlebar, .t-header"));
+                ok(dialog.wrapper.is(".k-widget, .k-window"));
+                ok(dialog.wrapper.children().eq(0).is(".k-window-titlebar, .k-header"));
             });
 
             test("if contentUrl is local call ajaxRequest on refresh method", 1, function() {
@@ -95,7 +95,7 @@
                     modal: true
                 });
 
-                ok($(".t-overlay").is(":visible"));
+                ok($(".k-overlay").is(":visible"));
             });
 
             test("hiding second modal window does not hide first overlay", function() {
@@ -116,15 +116,15 @@
 
                 dialog2.close();
 
-                ok($(".t-overlay").is(":visible"));
+                ok($(".k-overlay").is(":visible"));
 
                 dialog1.close();
 
-                ok(!$(".t-overlay").is(":visible"));
+                ok(!$(".k-overlay").is(":visible"));
 
                 dialog1.open();
 
-                ok($(".t-overlay").is(":visible"));
+                ok($(".k-overlay").is(":visible"));
             });
 
             test("destroy() does not delete overlay if there are other opened modal windows", function() {
@@ -137,12 +137,12 @@
 
                 dialog2.destroy();
 
-                equals($(".t-overlay").length, 1);
-                ok($(".t-overlay").is(":visible"));
+                equals($(".k-overlay").length, 1);
+                ok($(".k-overlay").is(":visible"));
 
                 dialog1.destroy();
 
-                equals($(".t-overlay").length, 0);
+                equals($(".k-overlay").length, 0);
             });
 
             test("creating a modal window after closing another shows overlay", function() {
@@ -156,7 +156,7 @@
                     modal: true
                 });
 
-                ok($(".t-overlay").is(":visible"));
+                ok($(".k-overlay").is(":visible"));
             });
 
             test("creating a window with a remote contentUrl creates iframe", function() {
@@ -190,7 +190,7 @@
                     modal: true
                 });
 
-                ok(dialog.wrapper.prev("div").is(".t-overlay"));
+                ok(dialog.wrapper.prev("div").is(".k-overlay"));
             });
 
             test('creating a second modal moves overlay after the first one', function() {
@@ -201,10 +201,10 @@
                         modal: true
                     });
 
-                equals($('.t-overlay').length, 1);
+                equals($('.k-overlay').length, 1);
 
-                ok(!dialog.wrapper.prev("div").is(".t-overlay"));
-                ok(overlappingDialog.wrapper.prev("div").is(".t-overlay"));
+                ok(!dialog.wrapper.prev("div").is(".k-overlay"));
+                ok(overlappingDialog.wrapper.prev("div").is(".k-overlay"));
                 same(dialog.wrapper.next("div")[0], overlappingDialog.wrapper.prev("div")[0]);
             });
 

@@ -655,7 +655,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Same' value of 't-icon t-plus' on 'Span'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Same' value of 'k-icon k-plus' on 'Span'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
@@ -734,7 +734,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-icon t-plus</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-icon k-plus</d2p1:AttributeValue>
         <d2p1:CompareType>Same</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>CollapseAllNodesfn3xjunc.mba</d2p1:StepImageKey>
@@ -744,7 +744,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Same' value of 't-icon t-plus' on 'Span0'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Same' value of 'k-icon k-plus' on 'Span0'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>10</d2p1:Order>
@@ -823,7 +823,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-icon t-plus</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-icon k-plus</d2p1:AttributeValue>
         <d2p1:CompareType>Same</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>CollapseAllNodesbs5yvctz.iiz</d2p1:StepImageKey>

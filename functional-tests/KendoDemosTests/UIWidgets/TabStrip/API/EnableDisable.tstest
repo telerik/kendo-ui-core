@@ -137,7 +137,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 't-state-active t-item t-first t-state-disabled' on 'ListItem'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 'k-state-active k-item k-first k-state-disabled' on 'ListItem'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
@@ -216,7 +216,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-state-active t-item t-first t-state-disabled</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-state-active k-item k-first k-state-disabled</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>EnableDisablebhfiqoe0.fc3</d2p1:StepImageKey>
@@ -645,7 +645,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 't-item t-tab-on-top t-state-active t-state-disabled' on 'ListItem0'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 'k-item k-tab-on-top k-state-active k-state-disabled' on 'ListItem0'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
@@ -724,7 +724,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-item t-tab-on-top t-state-active t-state-disabled</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-item k-tab-on-top k-state-active k-state-disabled</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>EnableDisableftets0um.riz</d2p1:StepImageKey>
@@ -817,7 +817,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 't-item t-tab-on-top t-state-active t-state-default' on 'ListItem0'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 'k-item k-tab-on-top k-state-active k-state-default' on 'ListItem0'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>11</d2p1:Order>
@@ -896,7 +896,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-item t-tab-on-top t-state-active t-state-default</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-item k-tab-on-top k-state-active k-state-default</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>EnableDisablehhhjhoxm.i3z</d2p1:StepImageKey>

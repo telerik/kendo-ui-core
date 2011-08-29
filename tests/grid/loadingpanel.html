@@ -38,27 +38,27 @@
 
             test("progress true shows the mask", function() {
                 kendo.ui.progress(container, true);
-                equal(container.find(".t-loading-mask").length, 1);
+                equal(container.find(".k-loading-mask").length, 1);
             });
 
             test("progress multiple calls shows only one", function() {
                 kendo.ui.progress(container, true);
                 kendo.ui.progress(container, true);
 
-                equal(container.find("div.t-loading-mask").length, 1);
+                equal(container.find("div.k-loading-mask").length, 1);
             });
 
             test("progress false hides the mask", function() {
                 kendo.ui.progress(container, true);
                 kendo.ui.progress(container, false);
-                equal(container.find("div.t-loading-mask").length, 0);
+                equal(container.find("div.k-loading-mask").length, 0);
             });
 
             test("mask is shown when request starts", function() {
                 setup();
 
                 dataSource.bind("requestStart", function() {
-                    equal(container.parent().find("div.t-loading-mask").length, 1);
+                    equal(container.parent().find("div.k-loading-mask").length, 1);
                 });
                 dataSource.read();
             });
@@ -66,13 +66,13 @@
             test("mask is hidden when request finish", function() {
                 setup();
                 dataSource.read();
-                equal(container.parent().find("div.t-loading-mask").length, 0);
+                equal(container.parent().find("div.k-loading-mask").length, 0);
             });
 
             test("mask is shown without scrolling when request starts", function() {
                 setup( { scrolling: false });
                 dataSource.bind("requestStart", function() {
-                    equal(container.parent().find(" > div.t-loading-mask").length, 1);
+                    equal(container.parent().find(" > div.k-loading-mask").length, 1);
                 });
                 dataSource.read();
             });

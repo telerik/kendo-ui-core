@@ -11,13 +11,13 @@
         <link rel="stylesheet" href="../qunit.css" type="text/css" />
         <link rel="stylesheet" href="../../styles/kendo.common.css" type="text/css" />
         <style>
-            .t-scrollbar
+            .k-scrollbar
             {
                 overflow: scroll;
                 position: absolute;
             }
 
-            .t-scrollbar-vertical
+            .k-scrollbar-vertical
             {
                 overflow-x:hidden;
                 top: 0;
@@ -25,7 +25,7 @@
                 height: 100%;
                 width: 17px; /* scrollbar width */
             }
-            .t-virtual-scrollable-wrap
+            .k-virtual-scrollable-wrap
             {
                 overflow: hidden;
                 height: 100%;
@@ -103,7 +103,7 @@
 
                 var wrap = container.children().first();
                 equal(container.children().length, 2);
-                ok(wrap.hasClass("t-virtual-scrollable-wrap"));
+                ok(wrap.hasClass("k-virtual-scrollable-wrap"));
                 equal(wrap.children()[0].nodeName.toLowerCase(), "table");
             });
 
@@ -118,7 +118,7 @@
                 setup();
                 var scrollBar = container.children().last();
                 equal(container.children().length, 2);
-                ok(scrollBar.hasClass("t-scrollbar t-scrollbar-vertical"));
+                ok(scrollBar.hasClass("k-scrollbar k-scrollbar-vertical"));
                 ok(scrollBar.width(), kendo.support.scrollbar());
             });
 
@@ -127,7 +127,7 @@
                 container.find("table").html(new Array(30).join('<tr><td style="height:30px">foo</td></tr>'));
                 dataSource._total = 300;
                 scroller.refresh();
-                equal(container.find(".t-scrollbar-vertical").children().length, 1);
+                equal(container.find(".k-scrollbar-vertical").children().length, 1);
             });
 
             test("scroll is called when scrollbar is scrolled", function() {
@@ -141,7 +141,7 @@
                         dataSource: dataSource
                     });
 
-                container.find(".t-scrollbar-vertical").scroll();
+                container.find(".k-scrollbar-vertical").scroll();
 
                 ok(called);
             });
@@ -161,7 +161,7 @@
                 container.find("table").html(new Array(30).join('<tr><td style="height:30px">foo</td></tr>'));
                 dataSource._total = 300;
                 scroller.refresh();
-                container.find(".t-scrollbar-vertical").scroll();
+                container.find(".k-scrollbar-vertical").scroll();
 
                 ok(called)
             });
@@ -172,7 +172,7 @@
 
                 dataSource._total = 300;
                 scroller.refresh();
-                container.find(".t-scrollbar-vertical").scrollTop(70).scroll();
+                container.find(".k-scrollbar-vertical").scrollTop(70).scroll();
                 equal(content.parent().scrollTop(), 70);
             });
 
@@ -209,7 +209,7 @@
                 });
 
                 scroller._fetch(0, 15);
-                equal(container.find("div.t-overlay").length, 0);
+                equal(container.find("div.k-overlay").length, 0);
             });
 
             test("mask is hidden on refresh", function() {
@@ -217,7 +217,7 @@
 
                 kendo.ui.progress(container, true);
                 scroller.refresh();
-                equal(container.find("div.t-overlay").length, 0);
+                equal(container.find("div.k-overlay").length, 0);
             });
 
             test("fetch if lastRow is at the end of the available page fetches next page", function() {

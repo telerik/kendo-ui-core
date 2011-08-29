@@ -120,11 +120,11 @@
         Select = ui.Select,
         CHANGE = "change",
         SELECT = "select",
-        SELECTED = "t-state-selected",
-        DISABLED = "t-state-disabled",
-        HOVER = "t-state-hover",
+        SELECTED = "k-state-selected",
+        DISABLED = "k-state-disabled",
+        HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
-        INPUTWRAPPER = ".t-dropdown-wrap",
+        INPUTWRAPPER = ".k-dropdown-wrap",
         proxy = $.proxy;
 
     var DropDownList = Select.extend( /** @lends kendo.ui.DropDownList.prototype */ {
@@ -480,20 +480,20 @@
         _span: function() {
             var that = this,
                 wrapper = that.wrapper,
-                SELECTOR = ".t-input",
+                SELECTOR = ".k-input",
                 span;
 
             span = wrapper.find(SELECTOR);
 
             if (!span[0]) {
-                wrapper.append('<div class="t-dropdown-wrap t-state-default"><span class="t-input">&nbsp;</span><span class="t-select"><span class="t-icon t-arrow-down">select</span></span></div>')
+                wrapper.append('<div class="k-dropdown-wrap k-state-default"><span class="k-input">&nbsp;</span><span class="k-select"><span class="k-icon k-arrow-down">select</span></span></div>')
                        .append(that.element);
 
                 span = wrapper.find(SELECTOR);
             }
             that.span = span;
 
-            that.arrow = wrapper.find(".t-icon");
+            that.arrow = wrapper.find(".k-icon");
         },
 
         _wrapper: function() {
@@ -505,7 +505,7 @@
 
             wrapper = element.parent();
 
-            if (!wrapper.is("div.t-widget")) {
+            if (!wrapper.is("div.k-widget")) {
                 wrapper = element.wrap("<div />").parent();
             }
 
@@ -517,7 +517,7 @@
             element.hide();
 
             that._focused = that.wrapper = wrapper
-                              .addClass("t-widget t-dropdown t-header")
+                              .addClass("k-widget k-dropdown k-header")
                               .addClass(DOMelement.className);
         }
     });

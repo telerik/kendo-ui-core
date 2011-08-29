@@ -78,12 +78,12 @@
         MOVE_SELECTION = "moveSelection",
         KEY_DOWN = "keydown",
         MOUSE_OVER = "mouseover",
-        DRAG_HANDLE = ".t-draghandle",
-        TRACK_SELECTOR = ".t-slider-track",
-        TICK_SELECTOR = ".t-tick",
-        STATE_ACTIVE = "t-state-active",
-        STATE_DEFAULT = "t-state-default",
-        STATE_DISABLED = "t-state-disabled",
+        DRAG_HANDLE = ".k-draghandle",
+        TRACK_SELECTOR = ".k-slider-track",
+        TICK_SELECTOR = ".k-tick",
+        STATE_ACTIVE = "k-state-active",
+        STATE_DEFAULT = "k-state-default",
+        STATE_DISABLED = "k-state-disabled",
         PRECISION = 3,
         DISABLED = "disabled";
 
@@ -102,7 +102,7 @@
             options.tooltip.format = options.tooltip.enabled ? options.tooltip.format || "{0}" : "{0}";
 
             that._createHtml();
-            that.wrapper = that.element.closest(".t-slider");
+            that.wrapper = that.element.closest(".k-slider");
             that._trackDiv = that.wrapper.find(TRACK_SELECTOR);
 
             that._setTrackDivWidth();
@@ -204,11 +204,11 @@
             }
 
             if (that._isHorizontal) {
-                $(items[first]).addClass("t-first")[that._size](pixelWidths[last - 1]);
-                $(items[last]).addClass("t-last")[that._size](pixelWidths[last]);
+                $(items[first]).addClass("k-first")[that._size](pixelWidths[last - 1]);
+                $(items[last]).addClass("k-last")[that._size](pixelWidths[last]);
             } else {
-                $(items[last]).addClass("t-first")[that._size](pixelWidths[last]);
-                $(items[first]).addClass("t-last")[that._size](pixelWidths[last - 1]);
+                $(items[last]).addClass("k-first")[that._size](pixelWidths[last]);
+                $(items[first]).addClass("k-last")[that._size](pixelWidths[last - 1]);
             }
 
             if (that._distance % options.smallStep != 0 && !that._isHorizontal) {
@@ -219,7 +219,7 @@
                 paddingTop = that._maxSelection - selection;
                 paddingTop += parseFloat(that._trackDiv.css(that._position), 10) + bordersWidth;
 
-                that.wrapper.find(".t-slider-items").css("padding-top", paddingTop);
+                that.wrapper.find(".k-slider-items").css("padding-top", paddingTop);
             }
         },
 
@@ -251,15 +251,15 @@
                     for (i = 0; i < items.length; i = round(i + step)) {
                         item = $(items[i]);
 
-                        item.addClass("t-tick-large")
-                            .html("<span class='t-label'>" + item.attr("title") + "</span>");
+                        item.addClass("k-tick-large")
+                            .html("<span class='k-label'>" + item.attr("title") + "</span>");
                     }
                 } else {
                     for (i = items.length - 1; i >= 0; i = round(i - step)) {
                         item = $(items[i]);
 
-                        item.addClass("t-tick-large")
-                            .html("<span class='t-label'>" + item.attr("title") + "</span>");
+                        item.addClass("k-tick-large")
+                            .html("<span class='k-label'>" + item.attr("title") + "</span>");
 
                         if (i != 0 && i != items.length - 1) {
                             item.css("line-height", item[that._size]() + "px");
@@ -407,21 +407,21 @@
     });
 
     function createWrapper (options, element, isHorizontal) {
-        var orientationCssClass = isHorizontal ? " t-slider-horizontal" : " t-slider-vertical",
+        var orientationCssClass = isHorizontal ? " k-slider-horizontal" : " k-slider-vertical",
             style = options.style ? options.style : element.attr("style"),
             cssClasses = element.attr("class") ? (" " + element.attr("class")) : "",
             tickPlacementCssClass = "";
 
         if (options.tickPlacement == "bottomRight") {
-            tickPlacementCssClass = " t-slider-bottomright";
+            tickPlacementCssClass = " k-slider-bottomright";
         } else if (options.tickPlacement == "topLeft") {
-            tickPlacementCssClass = " t-slider-topleft";
+            tickPlacementCssClass = " k-slider-topleft";
         }
 
         style = style ? " style='" + style + "'" : "";
 
-        return "<div class='t-widget t-slider" + orientationCssClass + cssClasses + "'" + style + ">" +
-               "<div class='t-slider-wrap" + (options.showButtons ? " t-slider-buttons" : "") + tickPlacementCssClass +
+        return "<div class='k-widget k-slider" + orientationCssClass + cssClasses + "'" + style + ">" +
+               "<div class='k-slider-wrap" + (options.showButtons ? " k-slider-buttons" : "") + tickPlacementCssClass +
                "'></div></div>";
     }
 
@@ -429,21 +429,21 @@
         var buttonCssClass = "";
 
         if (type == "increase") {
-            buttonCssClass = isHorizontal ? "t-arrow-next" : "t-arrow-up";
+            buttonCssClass = isHorizontal ? "k-arrow-next" : "k-arrow-up";
         } else {
-            buttonCssClass = isHorizontal ? "t-arrow-prev" : "t-arrow-down";
+            buttonCssClass = isHorizontal ? "k-arrow-prev" : "k-arrow-down";
         }
 
-        return "<a class='t-button t-button-" + type + "'><span class='t-icon " + buttonCssClass +
+        return "<a class='k-button k-button-" + type + "'><span class='k-icon " + buttonCssClass +
                "' title='" + options[type + "ButtonTitle"] + "'>" + options[type + "ButtonTitle"] + "</span></a>";
     }
 
     function createSliderItems (options, distance) {
-        var result = "<ul class='t-reset t-slider-items'>",
+        var result = "<ul class='k-reset k-slider-items'>",
             count = math.floor(round(distance / options.smallStep)) + 1;
 
         for(i = 0; i < count; i++) {
-            result += "<li class='t-tick'>&nbsp;</li>";
+            result += "<li class='k-tick'>&nbsp;</li>";
         }
 
         result += "</ul>";
@@ -454,9 +454,9 @@
     function createTrack (element) {
         var dragHandleCount = element.is("input") ? 1 : 2;
 
-        return "<div class='t-slider-track'><div class='t-slider-selection'><!-- --></div>" +
-               "<a href='javascript:void(0)' class='t-draghandle' title='Drag'>Drag</a>" +
-               (dragHandleCount > 1 ? "<a href='javascript:void(0)' class='t-draghandle' title='Drag'>Drag</a>" : "") +
+        return "<div class='k-slider-track'><div class='k-slider-selection'><!-- --></div>" +
+               "<a href='javascript:void(0)' class='k-draghandle' title='Drag'>Drag</a>" +
+               (dragHandleCount > 1 ? "<a href='javascript:void(0)' class='k-draghandle' title='Drag'>Drag</a>" : "") +
                "</div>";
     }
 
@@ -580,7 +580,7 @@
                 .addClass(STATE_DEFAULT);
 
             var clickHandler = function (e) {
-                if ($(e.target).hasClass("t-draghandle")) {
+                if ($(e.target).hasClass("k-draghandle")) {
                     $(e.target).addClass(STATE_ACTIVE);
                     return;
                 }
@@ -625,15 +625,15 @@
                     }
                 }, that);
 
-                that.wrapper.find(".t-button")
+                that.wrapper.find(".k-button")
                     .bind(MOUSE_UP, proxy(function (e) {
                         this._clearTimer();
                     }, that))
                     .bind(MOUSE_OVER, function (e) {
-                        $(e.currentTarget).addClass("t-state-hover");
+                        $(e.currentTarget).addClass("k-state-hover");
                     })
                     .bind("mouseout", proxy(function (e) {
-                        $(e.currentTarget).removeClass("t-state-hover");
+                        $(e.currentTarget).removeClass("k-state-hover");
                         this._clearTimer();
                     }, that))
                     .eq(0)
@@ -670,7 +670,7 @@
                 .addClass(STATE_DISABLED);
 
             that.wrapper
-                .find(".t-button")
+                .find(".k-button")
                 .unbind(MOUSE_DOWN)
                 .bind(MOUSE_DOWN, false)
                 .unbind(MOUSE_UP)
@@ -770,7 +770,7 @@
             var selectionValue = val - options.min,
                 index = math.ceil(selectionValue / options.smallStep),
                 selection = that._pixelSteps[index],
-                selectionDiv = that._trackDiv.find(".t-slider-selection"),
+                selectionDiv = that._trackDiv.find(".k-slider-selection"),
                 halfDragHanndle = parseInt(dragHandle[that._size]() / 2, 10) + 1;
 
             selectionDiv[that._size](selection);
@@ -828,7 +828,7 @@
             }
 
             if (options.tooltip.enabled) {
-                that.tooltipDiv = $("<div class='t-widget t-tooltip'><!-- --></div>").appendTo(document.body);
+                that.tooltipDiv = $("<div class='k-widget k-tooltip'><!-- --></div>").appendTo(document.body);
                 var html = "";
 
                 if (that.type) {
@@ -837,7 +837,7 @@
 
                     html = formattedSelectionStart + " - " + formattedSelectionEnd;
                 } else {
-                    that.tooltipInnerDiv = "<div class='t-callout t-callout-" + (owner._isHorizontal ? "s" : "e") + "'><!-- --></div>";
+                    that.tooltipInnerDiv = "<div class='k-callout k-callout-" + (owner._isHorizontal ? "s" : "e") + "'><!-- --></div>";
                     html = kendo.format(options.tooltip.format, that.val) + that.tooltipInnerDiv;
                 }
 
@@ -932,7 +932,7 @@
                 positionLeft = 0,
                 dragHandleOffset = that.dragHandle.offset(),
                 margin = 4,
-                callout = that.tooltipDiv.find(".t-callout");
+                callout = that.tooltipDiv.find(".k-callout");
 
             if (that.type) {
                 var dragHandles = owner.wrapper.find(DRAG_HANDLE),
@@ -1080,7 +1080,7 @@
                 .addClass(STATE_DEFAULT);
 
             var clickHandler = function (e) {
-                if ($(e.target).hasClass("t-draghandle")) {
+                if ($(e.target).hasClass("k-draghandle")) {
                     $(e.target).addClass(STATE_ACTIVE);
                     return;
                 }
@@ -1291,7 +1291,7 @@
         function makeSelection(selectionStart, selectionEnd) {
             var selection = 0,
                 selectionPosition = 0,
-                selectionDiv = that._trackDiv.find(".t-slider-selection");
+                selectionDiv = that._trackDiv.find(".k-slider-selection");
 
             selection = math.abs(selectionStart - selectionEnd);
             selectionPosition = selectionStart < selectionEnd ? selectionStart : selectionEnd;

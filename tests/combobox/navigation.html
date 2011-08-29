@@ -22,7 +22,7 @@
         <script>
             var ComboBox = kendo.ui.ComboBox,
                 data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
-                SELECTED = "t-state-selected",
+                SELECTED = "k-state-selected",
                 keys = kendo.keys,
                 input;
 
@@ -286,8 +286,8 @@
 
                 setTimeout(function() {
                     ok(!combobox._current);
-                    ok(!combobox.ul.find(".t-state-selected")[0]);
-                    ok(!combobox.ul.find(".t-state-focused")[0]);
+                    ok(!combobox.ul.find(".k-state-selected")[0]);
+                    ok(!combobox.ul.find(".k-state-focused")[0]);
                     start();
                 });
 

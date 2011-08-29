@@ -137,7 +137,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 't-alt t-state-selected' on 'TableRow'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 'k-alt k-state-selected' on 'TableRow'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
@@ -216,7 +216,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-alt t-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-alt k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>SelectMultipleRows02tbz4py.1ym</d2p1:StepImageKey>
@@ -429,7 +429,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 't-state-selected' on 'TableRow0'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 'k-state-selected' on 'TableRow0'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
@@ -518,7 +518,7 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 't-alt t-state-selected' on 'TableRow'</d2p1:Description>
+      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 'k-alt k-state-selected' on 'TableRow'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
@@ -597,7 +597,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-alt t-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>t-alt k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>SelectMultipleRowsiewnluid.p0a</d2p1:StepImageKey>

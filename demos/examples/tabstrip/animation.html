@@ -22,7 +22,7 @@
         <!-- description -->
         <div class="description">Animation Effects</div>
         <!-- description -->
-        <div id="example" class="t-content">
+        <div id="example" class="k-content">
 
             <div class="configuration">
                 <span class="configHead">Configure</span>
@@ -42,7 +42,7 @@
 
             <div id="tabstrip">
                 <ul>
-                    <li class="t-state-active">
+                    <li class="k-state-active">
                         First Tab
                     </li>
                     <li>
@@ -77,7 +77,7 @@
             <script>
                 $(document).ready(function() {
                     var original = $("#tabstrip").clone(true);
-                    original.find(".t-state-active").removeClass("t-state-active");
+                    original.find(".k-state-active").removeClass("k-state-active");
 
                     var getEffects = function () {
                         return (($("#expand")[0].checked ? "expandVertical " : "") + ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
@@ -95,7 +95,7 @@
                         clone.children("ul")
                              .children("li")
                              .eq(selectedIndex)
-                             .addClass("t-state-active")
+                             .addClass("k-state-active")
                              .end();
 
                         tabStrip.replaceWith(clone);

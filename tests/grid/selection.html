@@ -37,7 +37,7 @@
                     table = $("<table><tbody/></table>").appendTo(document.body);
                 },
                 teardown: function() {
-                    table.closest(".t-grid").remove();
+                    table.closest(".k-grid").remove();
                 }
             });
 
@@ -70,7 +70,7 @@
             test("focusing grid element focus first cell", function() {
                 var grid = setup();
                 grid.element.focus();
-                ok(grid.element.find(">tbody>tr>td").first().is(".t-state-focused"));
+                ok(grid.element.find(">tbody>tr>td").first().is(".k-state-focused"));
             });
 
             test("focused state is removed on blur", function() {
@@ -78,46 +78,46 @@
 
                 table.focus().blur().trigger("focusout");
 
-                ok(!table.find(">tbody>tr>td").first().is(".t-state-focused"));
+                ok(!table.find(">tbody>tr>td").first().is(".k-state-focused"));
             });
 
             test("focused state is maintained after refocus", function() {
                 var grid = setup();
                 table.focus().blur().focus();
 
-                ok(table.find(">tbody>tr>td").first().is(".t-state-focused"));
+                ok(table.find(">tbody>tr>td").first().is(".k-state-focused"));
             });
 
             test("clicking a child focuses it", function() {
                 var grid = setup();
                 table.find(">tbody>tr>td").last().mousedown().click();
 
-                ok(table.find(">tbody>tr>td").last().is(".t-state-focused"));
+                ok(table.find(">tbody>tr>td").last().is(".k-state-focused"));
             });
 
             test("down arrow moves focus on the next row same cell", function() {
                 var grid = setup();
                 grid.element.focus().press(kendo.keys.DOWN);
-                ok(table.find("tbody tr:eq(1)").find("td").hasClass("t-state-focused"));
-                equal(table.find(".t-state-focused").length, 1);
+                ok(table.find("tbody tr:eq(1)").find("td").hasClass("k-state-focused"));
+                equal(table.find(".k-state-focused").length, 1);
             });
 
             test("right arrow moves focus on the next cell on the same row", function() {
                 var grid = setup();
                 grid.element.focus().press(kendo.keys.RIGHT);
-                ok(table.find("tbody tr:eq(0)").find("td:eq(1)").hasClass("t-state-focused"));
+                ok(table.find("tbody tr:eq(0)").find("td:eq(1)").hasClass("k-state-focused"));
             });
 
             test("left arrow moves focus on the prev cell on the same row", function() {
                 var grid = setup();
                 grid.element.focus().press(kendo.keys.RIGHT).press(kendo.keys.LEFT);
-                ok(table.find("tbody tr:eq(0)").find("td:eq(0)").hasClass("t-state-focused"));
+                ok(table.find("tbody tr:eq(0)").find("td:eq(0)").hasClass("k-state-focused"));
             });
 
             test("up arrow moves focus on the prev row same cell", function() {
                 var grid = setup();
                 grid.element.focus().press(kendo.keys.DOWN).press(kendo.keys.UP);
-                ok(table.find("tbody tr:eq(0)").find("td").hasClass("t-state-focused"));
+                ok(table.find("tbody tr:eq(0)").find("td").hasClass("k-state-focused"));
             });
 
             test("pageDown should page to the next page", function() {
@@ -136,7 +136,7 @@
                         pageSize: 1
                     }
                 });
-                $(".t-grid-pager").find("a:not(.currentPage)").click();
+                $(".k-grid-pager").find("a:not(.currentPage)").click();
                 table.focus().press(kendo.keys.PAGEUP);
                 equal(grid.dataSource.page(), 1);
             });
@@ -159,7 +159,7 @@
                 });
                 table.focus().press(kendo.keys.PAGEUP).press(kendo.keys.DOWN);
 
-                ok(table.find(">tbody>tr>td").first().is(".t-state-focused"));
+                ok(table.find(">tbody>tr>td").first().is(".k-state-focused"));
             });
 
             test("space key select the focused cell", function() {
@@ -167,7 +167,7 @@
 
                 grid.element.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
 
-                ok(table.find("tbody tr:eq(1)").find("td").first().hasClass("t-state-selected"));
+                ok(table.find("tbody tr:eq(1)").find("td").first().hasClass("k-state-selected"));
             });
 
             test("space key select the multiple focused cells if multiple selection is enabled", function() {
@@ -179,8 +179,8 @@
                             .press(kendo.keys.RIGHT)
                             .press(kendo.keys.SPACEBAR, true);
                 var row = table.find("tbody tr").eq(1);
-                ok(row.find("td").first().hasClass("t-state-selected"));
-                ok(row.find("td").last().hasClass("t-state-selected"));
+                ok(row.find("td").first().hasClass("k-state-selected"));
+                ok(row.find("td").last().hasClass("k-state-selected"));
             });
 
             test("space key select single cells if multiple selection is enabled but ctrl is not active", function() {
@@ -192,22 +192,22 @@
                             .press(kendo.keys.RIGHT)
                             .press(kendo.keys.SPACEBAR);
                 var row = table.find("tbody tr").eq(1);
-                ok(!row.find("td").first().hasClass("t-state-selected"));
-                ok(row.find("td").last().hasClass("t-state-selected"));
+                ok(!row.find("td").first().hasClass("k-state-selected"));
+                ok(row.find("td").last().hasClass("k-state-selected"));
             });
 
             test("clicking on cell selects it", function() {
                 var grid = setup({ selectable: "cell" }),
                     cell = table.find("tbody tr:eq(1)").find("td").first();
                 cell.mousedown().mouseup();
-                ok(cell.hasClass("t-state-selected"));
+                ok(cell.hasClass("k-state-selected"));
             });
 
             test("clicking on cell selects the row if row selection is enabled", function() {
                 var grid = setup({ selectable: true }),
                     cell = table.find("tbody tr:eq(1)").find("td").first();
                 cell.mousedown().mouseup();
-                ok(cell.parent().hasClass("t-state-selected"));
+                ok(cell.parent().hasClass("k-state-selected"));
             });
 
             test("selecting a cell triggers change event", function() {
@@ -230,7 +230,7 @@
                 grid.element.trigger("focusout").trigger("focus");
 
                 var row = table.find("tbody tr").eq(1);
-                ok(row.find("td").first().hasClass("t-state-focused"));
+                ok(row.find("td").first().hasClass("k-state-focused"));
             });
 
             test("focus on grouped grid focus first non-group cell", function() {
@@ -239,8 +239,8 @@
 
                 grid.element.focus();
 
-                var row = table.find("tbody tr:not(.t-grouping-row)").first();
-                ok(row.find("td:not(.t-group-cell)").first().hasClass("t-state-focused"));
+                var row = table.find("tbody tr:not(.k-grouping-row)").first();
+                ok(row.find("td:not(.k-group-cell)").first().hasClass("k-state-focused"));
             });
 
             test("left arrow on grouped grid skips group cell", function() {
@@ -249,9 +249,9 @@
 
                 grid.element.focus().press(kendo.keys.LEFT);
 
-                var row = table.find("tbody tr:not(.t-grouping-row)").first();
-                ok(!row.find("td").eq(0).hasClass("t-state-focused"));
-                ok(row.find("td").eq(1).hasClass("t-state-focused"));
+                var row = table.find("tbody tr:not(.k-grouping-row)").first();
+                ok(!row.find("td").eq(0).hasClass("k-state-focused"));
+                ok(row.find("td").eq(1).hasClass("k-state-focused"));
             });
 
             test("down arrow on grouped grid skips grouping row", function() {
@@ -260,9 +260,9 @@
 
                 grid.element.focus().press(kendo.keys.DOWN);
 
-                var row = table.find("tbody tr:not(.t-grouping-row)").eq(1);
-                ok(!row.find("td").eq(0).hasClass("t-state-focused"));
-                ok(row.find("td").eq(1).hasClass("t-state-focused"));
+                var row = table.find("tbody tr:not(.k-grouping-row)").eq(1);
+                ok(!row.find("td").eq(0).hasClass("k-state-focused"));
+                ok(row.find("td").eq(1).hasClass("k-state-focused"));
             });
 
             test("up arrow on grouped grid skips grouping row", function() {
@@ -274,9 +274,9 @@
                     .press(kendo.keys.DOWN)
                     .press(kendo.keys.UP);
 
-                var row = table.find("tbody tr:not(.t-grouping-row)").eq(1);
-                ok(!row.find("td").eq(0).hasClass("t-state-focused"));
-                ok(row.find("td").eq(1).hasClass("t-state-focused"));
+                var row = table.find("tbody tr:not(.k-grouping-row)").eq(1);
+                ok(!row.find("td").eq(0).hasClass("k-state-focused"));
+                ok(row.find("td").eq(1).hasClass("k-state-focused"));
             });
 
             test("focus after grid refresh selects first cell", function() {
@@ -287,7 +287,7 @@
                 grid.element.focus();
 
                 var row = table.find("tbody tr").eq(0);
-                ok(row.find("td:first").hasClass("t-state-focused"));
+                ok(row.find("td:first").hasClass("k-state-focused"));
             });
 
             test("clearSelection clears selected items", function() {
@@ -298,7 +298,7 @@
                 cell.mousedown().mouseup();
                 grid.clearSelection();
 
-                ok(!cell.parent().hasClass("t-state-selected"));
+                ok(!cell.parent().hasClass("k-state-selected"));
             });
 
             test("clearSelection triggers change event", function() {
@@ -309,7 +309,7 @@
                             triggered = true;
                         }
                     }),
-                    row = table.find("tbody tr:eq(1)").addClass("t-state-selected");
+                    row = table.find("tbody tr:eq(1)").addClass("k-state-selected");
                 grid.clearSelection();
 
                 ok(triggered);
@@ -319,7 +319,7 @@
                 var grid = setup({
                         selectable: true
                     }),
-                    firstRow = table.find("tbody tr:eq(0)").addClass("t-state-selected");
+                    firstRow = table.find("tbody tr:eq(0)").addClass("k-state-selected");
 
                 var selected = grid.select();
 
@@ -335,7 +335,7 @@
 
                 grid.select(firstRow);
 
-                ok(firstRow.hasClass("t-state-selected"));
+                ok(firstRow.hasClass("k-state-selected"));
             });
 
             test("select clears previously selected items if single select", function() {
@@ -343,11 +343,11 @@
                         selectable: true
                     }),
                     rows = table.find("tbody tr");
-                rows.eq(0).addClass("t-state-selected");
+                rows.eq(0).addClass("k-state-selected");
                 grid.select(rows.eq(1));
 
-                ok(!rows.eq(0).hasClass("t-state-selected"));
-                ok(rows.eq(1).hasClass("t-state-selected"));
+                ok(!rows.eq(0).hasClass("k-state-selected"));
+                ok(rows.eq(1).hasClass("k-state-selected"));
             });
 
             test("select persist previously selected items if multi select", function() {
@@ -355,11 +355,11 @@
                         selectable: "multiple"
                     }),
                     rows = table.find("tbody tr");
-                rows.eq(0).addClass("t-state-selected");
+                rows.eq(0).addClass("k-state-selected");
                 grid.select(rows.eq(1));
 
-                ok(rows.eq(0).hasClass("t-state-selected"));
-                ok(rows.eq(1).hasClass("t-state-selected"));
+                ok(rows.eq(0).hasClass("k-state-selected"));
+                ok(rows.eq(1).hasClass("k-state-selected"));
             });
 
             test("select with array of items as argument select first if single select", function() {
@@ -370,9 +370,9 @@
 
                 grid.select(rows);
 
-                ok(rows.eq(0).hasClass("t-state-selected"));
-                ok(!rows.eq(1).hasClass("t-state-selected"));
-                ok(!rows.eq(2).hasClass("t-state-selected"));
+                ok(rows.eq(0).hasClass("k-state-selected"));
+                ok(!rows.eq(1).hasClass("k-state-selected"));
+                ok(!rows.eq(2).hasClass("k-state-selected"));
             });
 
             test("ctrl space on selected item unselects it", function() {
@@ -384,7 +384,7 @@
                     .press(kendo.keys.SPACEBAR)
                     .press(kendo.keys.SPACEBAR, true);
 
-                ok(!table.find("tbody tr:first").hasClass("t-state-selected"));
+                ok(!table.find("tbody tr:first").hasClass("k-state-selected"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

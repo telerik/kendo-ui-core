@@ -111,9 +111,9 @@
         fx = kendo.fx,
         template = kendo.template,
         // classNames
-        TWINDOW = ".t-window",
-        TWINDOWTITLEBAR = ".t-window-titlebar",
-        TOVERLAY = ".t-overlay",
+        TWINDOW = ".k-window",
+        TWINDOWTITLEBAR = ".k-window-titlebar",
+        TOVERLAY = ".k-overlay",
         // events
         OPEN = "open",
         ACTIVATE = "activate",
@@ -129,8 +129,8 @@
     function fixIE6Sizing(wrapper) {
         if ($.browser.msie && $.browser.version < 7) {
             wrapper
-                .find(".t-resize-e,.t-resize-w").css("height", wrapper.height()).end()
-                .find(".t-resize-n,.t-resize-s").css("width", wrapper.width()).end()
+                .find(".k-resize-e,.k-resize-w").css("height", wrapper.height()).end()
+                .find(".k-resize-n,.k-resize-s").css("width", wrapper.width()).end()
                 .find(TOVERLAY).css({ width: wrapper.width(), height: wrapper.height() });
         }
     }
@@ -157,7 +157,7 @@
         init: function(element, options) {
             var that = this,
                 wrapper,
-                windowActions = ".t-window-titlebar .t-window-action",
+                windowActions = ".k-window-titlebar .k-window-action",
                 titleBar, offset,
                 isVisible = false;
 
@@ -186,8 +186,8 @@
 
             wrapper = that.wrapper = element.closest(TWINDOW);
 
-            if (!element.is(".t-content") || !wrapper[0]) {
-                element.addClass("t-window-content t-content");
+            if (!element.is(".k-content") || !wrapper[0]) {
+                element.addClass("k-window-content k-content");
                 createWindow(element, options);
                 wrapper = that.wrapper = element.closest(TWINDOW);
 
@@ -223,7 +223,7 @@
                 }
             }
 
-            wrapper.toggleClass("t-rtl", that.wrapper.closest(".t-rtl").length > 0)
+            wrapper.toggleClass("k-rtl", that.wrapper.closest(".k-rtl").length > 0)
                    .appendTo(document.body);
 
             if (options.modal) {
@@ -231,8 +231,8 @@
             }
 
             wrapper
-                .delegate(windowActions, "mouseenter", function () { $(this).addClass('t-state-hover'); })
-                .delegate(windowActions, "mouseleave", function () { $(this).removeClass('t-state-hover'); })
+                .delegate(windowActions, "mouseenter", function () { $(this).addClass('k-state-hover'); })
+                .delegate(windowActions, "mouseleave", function () { $(this).removeClass('k-state-hover'); })
                 .delegate(windowActions, "click", $.proxy(that._windowActionHandler, that));
 
             if (options.resizable) {
@@ -334,12 +334,12 @@
         },
 
         _overlay: function (visible) {
-            var overlay = $("body > .t-overlay"),
+            var overlay = $("body > .k-overlay"),
                 doc = $(document),
                 wrapper = this.wrapper[0];
 
             if (overlay.length == 0) {
-                overlay = $("<div class='t-overlay' />")
+                overlay = $("<div class='k-overlay' />")
                     .toggle(visible)
                     .insertBefore(wrapper);
             } else {
@@ -358,14 +358,14 @@
         },
 
         _windowActionHandler: function (e) {
-            var target = $(e.target).closest(".t-window-action").find(".t-icon"),
+            var target = $(e.target).closest(".k-window-action").find(".k-icon"),
                 that = this;
 
             $.each({
-                "t-close": that.close,
-                "t-maximize": that.maximize,
-                "t-restore": that.restore,
-                "t-refresh": that.refresh
+                "k-close": that.close,
+                "k-maximize": that.maximize,
+                "k-restore": that.restore,
+                "k-refresh": that.refresh
             }, function (commandName, handler) {
                 if (target.hasClass(commandName)) {
                     e.preventDefault();
@@ -407,7 +407,7 @@
          * wnd.title("New title");
          */
         title: function (text) {
-            var title = $(".t-window-titlebar > .t-window-title", this.wrapper);
+            var title = $(".k-window-titlebar > .k-window-title", this.wrapper);
 
             if (!text) {
                 return title.text();
@@ -430,7 +430,7 @@
          * wnd.content("<p>New content</p>");
          */
         content: function (html) {
-            var content = $("> .t-window-content", this.wrapper);
+            var content = $("> .k-window-content", this.wrapper);
 
             if (!html) {
                 return content.html();
@@ -501,7 +501,7 @@
             if (wrapper.is(":visible")) {
                 if (!that.trigger(CLOSE)) {
                     function windowObject(element) {
-                        return element.find(".t-window-content").data("kendoWindow");
+                        return element.find(".k-window-content").data("kendoWindow");
                     }
 
                     var openedModalWindows = $(TWINDOW).filter(function() {
@@ -548,7 +548,7 @@
          * Toggles the window between a maximized and restored state.
          */
         toggleMaximization: function (e) {
-            if (e && $(e.target).closest(".t-window-action").length > 0) {
+            if (e && $(e.target).closest(".k-window-action").length > 0) {
                 return;
             }
 
@@ -573,8 +573,8 @@
                     width: that.restorationSettings.width,
                     height: that.restorationSettings.height
                 })
-                .find(".t-resize-handle").show().end()
-                .find(".t-window-titlebar .t-restore").addClass("t-maximize").removeClass("t-restore");
+                .find(".k-resize-handle").show().end()
+                .find(".k-window-titlebar .k-restore").addClass("k-maximize").removeClass("k-restore");
 
             $("html, body").css("overflow", "");
 
@@ -606,8 +606,8 @@
 
             wrapper
                 .css({ left: 0, top: 0, position: "fixed" })
-                .find(".t-resize-handle").hide().end()
-                .find(".t-window-titlebar .t-maximize").addClass("t-restore").removeClass("t-maximize");
+                .find(".k-resize-handle").hide().end()
+                .find(".k-window-titlebar .k-maximize").addClass("k-restore").removeClass("k-maximize");
 
             $("html, body").css("overflow", "hidden");
 
@@ -655,7 +655,7 @@
         _ajaxRequest: function (url) {
             var that = this,
                 loadingIconTimeout = setTimeout(function () {
-                    $(".t-refresh", that.wrapper).addClass("t-loading");
+                    $(".k-refresh", that.wrapper).addClass("k-loading");
                 }, 100),
                 data = {};
 
@@ -670,10 +670,10 @@
                 }, that),
                 complete: function () {
                     clearTimeout(loadingIconTimeout);
-                    $(".t-refresh", that.wrapper).removeClass("t-loading");
+                    $(".k-refresh", that.wrapper).removeClass("k-loading");
                 },
                 success: $.proxy(function (data, textStatus) {
-                    $(".t-window-content", that.wrapper).html(data);
+                    $(".k-window-content", that.wrapper).html(data);
 
                     that.trigger(REFRESH);
                 }, that)
@@ -689,7 +689,7 @@
             that.wrapper.remove();
 
             function windowObject(element) {
-                return element.find(".t-window-content").data("kendoWindow");
+                return element.find(".k-window-content").data("kendoWindow");
             }
 
             var openedModalWindows = $(TWINDOW).filter(function() {
@@ -708,14 +708,14 @@
     });
 
     var templates = {
-        wrapper: template("<div class='t-widget t-window'></div>"),
+        wrapper: template("<div class='k-widget k-window'></div>"),
         titlebar: template(
-            "<div class='t-window-titlebar t-header'>&nbsp;" +
-                "<span class='t-window-title'><#= title #></span>" +
-                "<div class='t-window-actions t-header'>" +
+            "<div class='k-window-titlebar k-header'>&nbsp;" +
+                "<span class='k-window-title'><#= title #></span>" +
+                "<div class='k-window-actions k-header'>" +
                 "<# for (var i = 0; i < actions.length; i++) { #>" +
-                    "<a href='#' class='t-window-action t-link'>" +
-                        "<span class='t-icon t-<#= actions[i].toLowerCase() #>'><#= actions[i] #></span>" +
+                    "<a href='#' class='k-window-action k-link'>" +
+                        "<span class='k-icon k-<#= actions[i].toLowerCase() #>'><#= actions[i] #></span>" +
                     "</a>" +
                 "<# } #>" +
                 "</div>" +
@@ -727,7 +727,7 @@
                     "This page requires frames in order to show content" +
             "</iframe>"
         ),
-        resizeHandle: template("<div class='t-resize-handle t-resize-<#= data #>'></div>")
+        resizeHandle: template("<div class='k-resize-handle k-resize-<#= data #>'></div>")
     };
 
     function createWindow(element, options) {
@@ -752,7 +752,7 @@
 
         that.owner = wnd;
         that._draggable = new Draggable(wnd.wrapper, {
-            filter: ".t-resize-handle",
+            filter: ".k-resize-handle",
             group: wnd.wrapper.id + "-resizing",
             dragstart: $.proxy(that.dragstart, that),
             drag: $.proxy(that.drag, that),
@@ -768,16 +768,16 @@
             wnd.elementPadding = parseInt(wnd.wrapper.css("padding-top"));
             wnd.initialCursorPosition = wrapper.offset();
 
-            wnd.resizeDirection = e.currentTarget.prop("className").replace("t-resize-handle t-resize-", "").split("");
+            wnd.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "").split("");
 
             wnd.initialSize = {
                 width: wnd.wrapper.width(),
                 height: wnd.wrapper.height()
             };
 
-            $("<div class='t-overlay' />").appendTo(wnd.wrapper);
+            $("<div class='k-overlay' />").appendTo(wnd.wrapper);
 
-            wrapper.find(".t-resize-handle").not(e.currentTarget).hide();
+            wrapper.find(".k-resize-handle").not(e.currentTarget).hide();
 
             $(document.body).css("cursor", e.currentTarget.css("cursor"));
         },
@@ -844,7 +844,7 @@
 
             wrapper
                 .find(TOVERLAY).remove().end()
-                .find(".t-resize-handle").not(e.currentTarget).show();
+                .find(".k-resize-handle").not(e.currentTarget).show();
 
             $(document.body).css("cursor", "");
 
@@ -882,9 +882,9 @@
                 top: e.pageY - wnd.initialWindowPosition.top
             };
 
-            $(".t-resize-handle", wnd.wrapper).hide();
+            $(".k-resize-handle", wnd.wrapper).hide();
 
-            $("<div class='t-overlay' />").appendTo(wnd.wrapper);
+            $("<div class='k-overlay' />").appendTo(wnd.wrapper);
 
             $(document.body).css("cursor", e.currentTarget.css("cursor"));
         },
@@ -901,7 +901,7 @@
             var wnd = this.owner;
 
             wnd.wrapper
-                .find(".t-resize-handle").show().end()
+                .find(".k-resize-handle").show().end()
                 .find(TOVERLAY).remove();
 
             $(document.body).css("cursor", "");

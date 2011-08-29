@@ -2,8 +2,8 @@
     var nonAuthContent = '<h1 class="uploadTitle">You must <a href="#" id="uploadSignIn">sign in</a> to upload photos.</h1>',
         authContent = '<div id="uploadWrapInner"><h1 class="uploadTitle"><span class="p-icon i-drag"></span> Drag &amp; drop photos to upload</h1>' +
                     '<em>or</em>' +
-                    '<div class="t-widget t-upload"><div class="t-button t-button-icontext t-button-bare t-upload-button p-border-big">' +
-                    '<span class="p-icon i-set t-add"></span> browse<input type="file" name="photo" id="photosUpload" /></div></div>' +
+                    '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-button-bare k-upload-button p-border-big">' +
+                    '<span class="p-icon i-set k-add"></span> browse<input type="file" name="photo" id="photosUpload" /></div></div>' +
                     '</div>' +
                     '<div id="msgContainer" style="display:none"><h1 class="uploadTitle"></h1></div>',
         flickr = window.flickr,

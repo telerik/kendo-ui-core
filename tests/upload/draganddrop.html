@@ -103,7 +103,7 @@
 
                 simulateDrop([ { name: "first.txt", size: 1 } ]);
 
-                equal($(".t-file", uploadInstance.wrapper).length, 1);
+                equal($(".k-file", uploadInstance.wrapper).length, 1);
             });
 
             test("select event fires on drop", 1, function() {
@@ -115,13 +115,13 @@
                 uploadInstance = createUpload({ "select" : (function(e) { e.preventDefault(); }) });
                 simulateDrop([ { name: "first.txt", size: 1 } ]);
 
-                equal($(".t-file", uploadInstance.wrapper).length, 0);
+                equal($(".k-file", uploadInstance.wrapper).length, 0);
             });
 
             test("dropping anything that is not a file is ignored", function () {
                 simulateDrop([]);
 
-                equal($(".t-file", uploadInstance.wrapper).length, 0);
+                equal($(".k-file", uploadInstance.wrapper).length, 0);
             });
 
             module("Upload / Drag and drop / Synchronous upload", {

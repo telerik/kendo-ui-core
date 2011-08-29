@@ -22,7 +22,7 @@
         <!-- description -->
         <div class="description">Animation Effects</div>
         <!-- description -->
-        <div id="example" class="t-content">
+        <div id="example" class="k-content">
 
             <div class="configuration">
                 <span class="configHead">Configure</span>
@@ -41,7 +41,7 @@
             </div>
 
             <ul id="panelbar">
-                <li class="t-state-active">
+                <li class="k-state-active">
                     First Item
                     <ul>
                         <li>Sub Item 1</li>
@@ -90,13 +90,13 @@
             <script>
                 $(document).ready(function() {
                     var original = $("#panelbar").clone(true);
-                    original.find(".t-state-active").removeClass("t-state-active");
+                    original.find(".k-state-active").removeClass("k-state-active");
 
                     $(".configuration input").change( function() {
                         var panelBar = $("#panelbar"),
                             clone = original.clone(true);
 
-                        panelBar.data("kendoPanelBar").collapse($("#panelbar .t-link"));
+                        panelBar.data("kendoPanelBar").collapse($("#panelbar .k-link"));
 
                         panelBar.replaceWith(clone);
 

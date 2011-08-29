@@ -122,7 +122,7 @@
             test("indicator from drag out of container is destroyed", function() {
                 var groupContainer = $(".container"),
                     groupable = new Groupable(div, { groupContainer:  groupContainer }),
-                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
+                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".k-group-indicator:first");
 
                 moveOutDropTarget(indicator, groupContainer);
 
@@ -132,9 +132,9 @@
             test("clicking close button ungroup", function() {
                 var groupContainer = $(".container"),
                     groupable = new Groupable(div, { groupContainer:  groupContainer }),
-                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
+                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".k-group-indicator:first");
 
-                indicator.find(".t-button").click();
+                indicator.find(".k-button").click();
 
                 equal(groupContainer.children().length, 0);
             });
@@ -176,7 +176,7 @@
                         groupContainer:  groupContainer,
                         dataSource: extend({}, DataSource.create(), { group: function() {groupWasCalled = true;}})
                     }),
-                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
+                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".k-group-indicator:first");
 
                 moveOutDropTarget(indicator, groupContainer);
 
@@ -190,9 +190,9 @@
                         groupContainer:  groupContainer,
                         dataSource: extend({}, DataSource.create(), { group: function() {groupWasCalled = true;}})
                     }),
-                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
+                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".k-group-indicator:first");
 
-                indicator.find(".t-button").click();
+                indicator.find(".k-button").click();
 
                 ok(groupWasCalled);
             });
@@ -201,22 +201,22 @@
                 var groupContainer = $(".container"),
                     groupWasCalled = false,
                     groupable = new Groupable(div, { groupContainer:  groupContainer }),
-                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
+                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".k-group-indicator:first");
 
-                indicator.find(".t-link").click();
+                indicator.find(".k-link").click();
 
-                equal(groupContainer.find(".t-group-indicator:first").data("dir"), "desc");
+                equal(groupContainer.find(".k-group-indicator:first").data("dir"), "desc");
             });
 
             test("sort desc group indicator change to asc", function() {
                 var groupContainer = $(".container"),
                     groupWasCalled = false,
                     groupable = new Groupable(div, { groupContainer:  groupContainer }),
-                    indicator = groupContainer.append(groupable.buildIndicator("", "desc")).find(".t-group-indicator:first");
+                    indicator = groupContainer.append(groupable.buildIndicator("", "desc")).find(".k-group-indicator:first");
 
-                indicator.find(".t-link").click();
+                indicator.find(".k-link").click();
 
-                equal(groupContainer.find(".t-group-indicator:first").data("dir"), "asc");
+                equal(groupContainer.find(".k-group-indicator:first").data("dir"), "asc");
             });
 
             test("sorting calls dataSource group", function() {
@@ -226,9 +226,9 @@
                         groupContainer:  groupContainer,
                         dataSource: extend({}, DataSource.create(), { group: function() {groupWasCalled = true;}})
                     }),
-                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".t-group-indicator:first");
+                    indicator = groupContainer.append(groupable.buildIndicator("")).find(".k-group-indicator:first");
 
-                indicator.find(".t-link").click();
+                indicator.find(".k-link").click();
 
                 ok(groupWasCalled);
             });
@@ -244,7 +244,7 @@
 
                 dataSource.group({field: "field1", dir: "desc"});
 
-                indicator = groupContainer.find(".t-group-indicator");
+                indicator = groupContainer.find(".k-group-indicator");
                 equal(indicator.length, 1);
                 equal(indicator.data("field"), "field1");
                 equal(indicator.data("dir"), "desc");
