@@ -25,7 +25,7 @@
         <script>
             module("themebuilder", {
                 teardown: function() {
-                    //$("#kendo-themebuilder-wrapper").remove();
+                    $("#kendo-themebuilder-wrapper, head style").remove();
                 }
             });
 
@@ -47,6 +47,27 @@
                 themeBuilder.open();
 
                 ok(called);
+            });
+
+            test("updateStyleSheet() adds CSS to document", function() {
+                var themeBuilder = new kendo.ThemeBuilder();
+
+                themeBuilder.updateStyleSheet(".foo { font-size: 8px; }");
+
+                var element = $("<span class='foo' />").appendTo(document.body);
+
+                equals(element.css("font-size"), "8px");
+                equals($("style[title]").length, 1);
+            });
+
+            test("updateStyleSheet() updates existing stylesheet", function() {
+                var themeBuilder = new kendo.ThemeBuilder();
+
+                themeBuilder.updateStyleSheet(".foo { font-size: 8px; }");
+
+                themeBuilder.updateStyleSheet(".foo { font-size: 10px; }");
+
+                equals($("style[title]").length, 1);
             });
 
             var colorPicker;

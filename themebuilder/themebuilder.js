@@ -116,12 +116,16 @@
             },
             _propertyChange: function() {
             },
-            // TODO: test this
             updateStyleSheet: function(cssText) {
                 var doc = document,
-                    style = doc.createElement("style");
+                    style = $("style[title='themebuilder']")[0];
 
-                $("head")[0].appendChild(style);
+                if (!style) {
+                    style = doc.createElement("style");
+                    style.setAttribute("title", "themebuilder");
+
+                    $("head")[0].appendChild(style);
+                }
 
                 if (style.styleSheet) {
                     style.styleSheet.cssText = cssText;
