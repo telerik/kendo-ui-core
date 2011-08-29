@@ -2,13 +2,14 @@
 
     var properties = {
             bgColor: { property: "background-color", label: "Background" },
-            color: { property: "color", label: "Text color" }
+            color: { property: "color", label: "Text color" },
+            brdColor: { property: "border-color", label: "Border color" },
         },
         stylableProperties = {
             widget: {
                 title: "Widget",
                 primitive: "t-widget",
-                properties: [ properties.bgColor, properties.color ]
+                properties: [ properties.bgColor, properties.brdColor, properties.color ]
             },
             header: {
                 title: "Headers",
@@ -28,17 +29,17 @@
             group: {
                 title: "Item groups",
                 primitive: "t-group",
-                properties: [ properties.bgColor ]
+                properties: [ properties.bgColor, properties.brdColor, properties.brdColor ]
             },
             hover: {
                 title: "Hover state",
                 primitive: "t-state-hover",
-                properties: [ properties.bgColor, properties.color ]
+                properties: [ properties.bgColor, properties.brdColor, properties.color ]
             }
         },
         colorPickerTemplate = kendo.template(
             "<# var id = primitive + \":\" + property.property; #>" +
-            "<label for='<#= id #>'><#= property.label #></label> <input id='<#= id #>' />"
+            "<label for='<#= id #>'><#= property.label #></label> <input id='<#= id #>' class='t-input' />"
         ),
         propertyGroupTemplate = kendo.template(
             "<li><#= title #>" +
