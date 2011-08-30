@@ -7,11 +7,12 @@
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.black.css" rel="stylesheet"/>
         <!-- css -->
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
         <script src="../../../src/kendo.popup.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.list.js"></script>
@@ -25,8 +26,13 @@
         <!-- description -->
         <div class="description">API</div>
         <!-- description -->
-        <div id="example" class="k-content">
-           <input id="products" />
+        <div id="example">
+            <input id="products" />
+            <input id="test" />
+            <div style="font-size: 30px; display: inline-block;">
+                <input id="test2" style="width: 300px" />
+                <input id="test3" style="width: 300px" />
+            </div>
 
             <script>
                 $(document).ready(function() {
@@ -41,11 +47,25 @@
                         {text: "The Godfather", value:"8"},
                         {text: "The Godfather: Part II", value:"9"},
                         {text: "The Shawshank Redemption", value:"10"},
+                        {text: "The Shawshank Redemption 2", value:"11"}
+                    ];
+
+                    var data2 = [
+                        {text: "12 Angry Men", value:"1"},
+                        {text: "Inception", value:"3"},
+                        {text: "Pulp Fiction", value:"5"},
+                        {text: "Schindler's List", value:"6"},
+                        {text: "The Dark Knight", value:"7"},
+                        {text: "The Godfather", value:"8"}
                     ];
 
                     $("#products").kendoComboBox(data)
                                   .closest(".k-widget")
                                   .attr("id", "products_wrapper");
+
+                    $("#test").kendoDropDownList(data2);
+                    $("#test2").kendoComboBox(data2);
+                    $("#test3").kendoDropDownList(data2);
 
                     $("#filter").kendoDropDownList({
                         change: filterTypeOnChanged
