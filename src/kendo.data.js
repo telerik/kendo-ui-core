@@ -1134,7 +1134,6 @@
                     data = data.concat(converted);
                 }
 
-                that.modelSet.clear();
                 that.modelSet.merge(data);
                 that.fetch();
             });
@@ -1186,15 +1185,13 @@
          * Read data from transport
          */
         read: function(data) {
-            var that = this;
+            var that = this, params = that._params(data);
 
-            data = that._params(data);
-
-            that._queueRequest(data, function() {
+            that._queueRequest(params, function() {
                 that.trigger(REQUESTSTART);
                 that._ranges = [];
                 that.transport.read({
-                    data: data,
+                    data: params,
                     success: proxy(that.success, that),
                     error: proxy(that.error, that)
                 });

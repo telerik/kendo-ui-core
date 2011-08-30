@@ -289,18 +289,22 @@
             data = data || [];
 
             each(data, function(index, value) {
-                index = that.map[model.id(value)];
+                if (value != null) {
+                    index = that.map[model.id(value)];
 
-                if (index >= 0) {
-                    that.data[index] = value;
-                } else {
-                    that.data.push(value);
+                    if (index >= 0) {
+                        that.data[index] = value;
+                    } else {
+                        that.data.push(value);
+                    }
                 }
             });
 
             each(that.models, function(index, model) {
-                index = that.map[index];
-                that.data[index] = extend(true, that.data[index], model.changes());
+                if (model.state === UPDATED) {
+                    index = that.map[index];
+                    that.data[index] = extend(true, that.data[index], model.changes());
+                }
             });
 
             that.models = {};
