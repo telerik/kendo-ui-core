@@ -1030,7 +1030,6 @@
             serverFiltering: false,
             serverGrouping: false,
             serverAggregates: false,
-            autoSync: false,
             sendAllFields: true,
             batch: false
         },
