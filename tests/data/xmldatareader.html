@@ -67,6 +67,12 @@
                 ok($.isArray(result.foo.bar));
             });
 
+            test("parse CDATA as #text", function() {
+                var reader = new XmlDataReader({});
+                var result = reader.parse("<foo><![CDATA[bar]]></foo>");
+                equal(result.foo["#text"], "bar");
+            });
+
             test("parse attributes as @ fields", function() {
                 var reader = new XmlDataReader({});
 
