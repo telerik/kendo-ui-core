@@ -1038,18 +1038,6 @@
             return this.modelSet.model(id);
         },
 
-        _idMap: function(data) {
-            var that = this, id = that.id, idx, length, map = {};
-
-            if (id) {
-                for (idx = 0, length = data.length; idx < length; idx++) {
-                    map[id(data[idx])] = idx;
-                }
-            }
-
-            that._map = map;
-        },
-
         _createdModels: function() {
             return this.modelSet.select(Model.CREATED, function(model) {
                 return model.data;
