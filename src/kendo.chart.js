@@ -2964,7 +2964,10 @@
             var stack = this,
                 options = stack.options,
                 isVertical = options.isVertical,
+                isReversed = options.isReversed,
                 positionAxis = isVertical ? X : Y,
+                stackAxis = isVertical ? Y : X,
+                stackBase = targetBox[stackAxis + 2],
                 children = stack.children,
                 box = stack.box = new Box2D(),
                 stackDirection;
@@ -2980,11 +2983,12 @@
                     childBox = currentChild.box.clone();
 
                 childBox.snapTo(targetBox, positionAxis)
+                currentChild.options.animation.stackBase = stackBase;
 
-                if (i > 0) {
-                    childBox.alignTo(children[i - 1].box, stackDirection);
-                } else {
+                if (i == 0) {
                     box = stack.box = childBox.clone();
+                } else {
+                    childBox.alignTo(children[i - 1].box, stackDirection);
                 }
 
                 currentChild.reflow(childBox);
@@ -3346,9 +3350,7 @@
                 overlay: series.overlay,
                 labels: labelOptions,
                 animation: {
-                    type: "bar",
-                    // TODO: Needs more uniqueness
-                    queue: isStacked ? "c" + categoryIx : uniqueId()
+                    type: "bar"
                 }
             });
 
@@ -4097,7 +4099,7 @@
 
             view.definitions = {};
             view.decorators = [];
-            view.animations = {};
+            view.animations = [];
         },
 
         renderDefinitions: function() {
@@ -4133,34 +4135,17 @@
             return element;
         },
 
-        addAnimation: function(animation, queue) {
-            var view = this,
-                animations = view.animations,
-                queue = queue || "default";
-
-            if (!defined(animations[queue])) {
-                animations[queue] = [animation];
-            } else {
-                animations[queue].push(animation);
-            }
-        },
-
         playAnimations: function() {
             var view = this,
                 animations = view.animations,
-                queueName,
-                queue,
-                i,
-                length;
+                length = animations.length,
+                i;
 
-            for (queueName in animations) {
-                queue = animations[queueName];
-                for (i = 0, length = queue.length; i < length; i++) {
-                    queue[i].setup();
-                }
-
-                queue.shift().play(queue);
+            for (i = 0; i < length; i++) {
+                animations[i].play();
             }
+
+            animations = [];
         }
     });
 
@@ -4517,7 +4502,6 @@
             overlayElement.options.id = id;
             overlayElement.options.fill =
                 deepExtend(fill, { id: fillId, rotation: fillRotation });
-            overlayElement.options.animation.queue += "overlay";
 
             return group;
         }
@@ -4615,9 +4599,9 @@
                 animation = element.options.animation;
 
             if (animation && animation.type === "bar") {
-                view.addAnimation(
-                    new SVGBarAnimation(element, box, element.options),
-                    animation.queue);
+                view.animations.push(
+                    new SVGBarAnimation(element, box, element.options)
+                );
             }
 
             return element;
@@ -4633,48 +4617,23 @@
             anim.options = options;
         },
 
-        setup: function() {
+        play: function() {
             var anim = this,
                 viewElement = anim.viewElement,
                 box = anim.box,
                 options = anim.options,
+                stackBase = options.animation.stackBase,
+                aboveAxis = options.aboveAxis,
+                initialPosition,
                 target = $("#" + viewElement.options.id);
 
             if (options.normalAngle === 0) {
-                if (options.aboveAxis) {
-                    target
-                    .css("svgBarTop", box.y2)
-                    /*.css("stroke-width", 0)*/;
-                } else {
-                    target
-                    .css("svgBarBottom", box.y1)
-                    .css("stroke-width", 0);
-                }
-            }
-        },
-
-        play: function(queue) {
-            var anim = this,
-                viewElement = anim.viewElement,
-                box = anim.box,
-                options = anim.options,
-                target = $("#" + viewElement.options.id);
-
-            var complete = function() {
-                target.css("stroke-width", options.strokeWidth);
-                if (queue.length > 0) {
-                    queue.shift().play(queue);
-                }
-            }
-
-            if (options.normalAngle === 0) {
-                if (options.aboveAxis) {
-                    target
-                    .animate({ "svgBarTop": box.y1 }, "slow", "linear", complete);
-                } else {
-                    target
-                    .animate({ "svgBarBottom": box.y2 }, "slow", "linear", complete);
-                }
+                initialPosition = stackBase ? stackBase : aboveAxis ? box.y2 : box.y1;
+                target
+                    .css({ "svgBarTop" : initialPosition,
+                           "svgBarBottom": initialPosition })
+                    .animate({ "svgBarTop": box.y1,
+                               "svgBarBottom": box.y2 });
             }
         }
     });
