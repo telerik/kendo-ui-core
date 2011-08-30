@@ -18,13 +18,10 @@
 <body>
     <ul id="menu">
         <li>
-            @Html.ActionLink("{batch: false, autoSync: false}", "Index")
+            @Html.ActionLink("{batch: false}", "Index")
         </li>
         <li>
             @Html.ActionLink("{batch: 'multiple'}", "BatchMultiple")
-        </li>
-        <li>
-            @Html.ActionLink("{batch: false, autoSync: true}", "BatchFalseAutoSyncTrue")
         </li>
     </ul>
     <script>

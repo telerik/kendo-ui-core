@@ -15,11 +15,6 @@ namespace KendoDataSourceCRUD.Controllers
             return View();
         }
 
-        public ActionResult BatchFalseAutoSyncTrue()
-        {
-            return View();
-        }
-
         public ActionResult BatchMultiple()
         {
             return View();

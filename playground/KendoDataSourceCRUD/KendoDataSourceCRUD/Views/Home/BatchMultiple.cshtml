@@ -32,6 +32,7 @@ $(document).ready(function() {
                 type: "POST"
             },
             dialect: function(data) {
+                console.log(arguments);
                 var products = {};
                 for (var i in data) {
                     var product = data[i];
