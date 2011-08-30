@@ -38,11 +38,11 @@
                 return dataSource;
             }
 
-            test("sync calls the update method of the transport for the updated records", function() {
+            test("sync calls the update method of the transport for the updated records when batch is multiple", function() {
                 var updated;
                 var dataSource = setup({
                     update: function(options) {
-                        updated = options.data;
+                        updated = options.data.models;
                     }
                 });
 
@@ -66,11 +66,11 @@
                 ok(updated === undefined);
             });
 
-            test("sync calls the create method of the transport for the created records", function() {
+            test("sync calls the create method of the transport for the created records when batch is multiple", function() {
                 var created;
                 var dataSource = setup({
                     create: function(options) {
-                        created = options.data;
+                        created = options.data.models;
                     }
                 });
 
@@ -78,7 +78,6 @@
                 dataSource.create({ foo: "baz" });
                 dataSource.sync();
 
-                equal(created.length, 2);
                 equal(created[0].foo, "bar");
                 equal(created[1].foo, "baz");
             });
@@ -87,7 +86,7 @@
                 var created;
                 var dataSource = setup({
                     create: function(options) {
-                        created = options.data;
+                        created = options.data.models;
                     }
                 });
 
@@ -96,18 +95,17 @@
                 ok(created === undefined);
             });
 
-            test("sync calls the destroy method of the transport for the destroyed records", function() {
+            test("sync calls the destroy method of the transport for the destroyed records when batch is multiple", function() {
                 var destroyed;
                 var dataSource = setup({
                     destroy: function(options) {
-                        destroyed = options.data;
+                        destroyed = options.data.models;
                     }
                 });
 
                 dataSource.destroy(1);
                 dataSource.sync();
 
-                equal(destroyed.length, 1);
                 equal(destroyed[0].foo, "foo");
             });
 
@@ -115,7 +113,7 @@
                 var destroyed;
                 var dataSource = setup({
                     destroy: function(options) {
-                       destroyed = options.data;
+                       destroyed = options.data.models;
                     }
                 });
 
@@ -128,7 +126,7 @@
                 var updated,
                     dataSource = setup({
                         update: function(options) {
-                            updated = options.data;
+                            updated = options.data.models;
                         }
                     },
                     [{ id: 1, foo: "foo", bar: "bar" }],
@@ -145,7 +143,7 @@
                 var updated,
                     dataSource = setup({
                         update: function(options) {
-                            updated = options.data;
+                            updated = options.data.models;
                         }
                     },
                     [{ id: 1, foo: "foo", bar: "bar" }],
@@ -162,7 +160,7 @@
                 var destroyed,
                     dataSource = setup({
                         destroy: function(options) {
-                            destroyed = options.data;
+                            destroyed = options.data.models;
                         }
                     },
                     [{ id: 1, foo: "foo", bar: "bar" }],
@@ -179,7 +177,7 @@
                 var destroyed,
                     dataSource = setup({
                         destroy: function(options) {
-                            destroyed = options.data;
+                            destroyed = options.data.models;
                         }
                     },
                     [{ id: 1, foo: "foo", bar: "bar" }],
@@ -281,6 +279,49 @@
                     var createdModels = dataSource._createdModels();
                     equal(createdModels.length, 0);
                 });
+                dataSource.sync();
+            });
+
+            test("sync sends data operations to dialect", function() {
+                var data, dataSource = new DataSource({
+                    transport: {
+                        create: {
+                            url: "foo",
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "text/json"
+                        },
+                        dialect: function() {
+                            data = arguments[0];
+                        }
+                    },
+                    sort: { field: "id", dir: "asc" },
+                    filter: { field: "id", operator: "eq", value: 1 },
+                    pageSize: 10,
+                    page: 2,
+                    batch: false,
+                    schema: {
+                        model: Model.define()
+                    }
+                });
+
+                $.mockjax({
+                    contentType: "text/json",
+                    url: "foo",
+                    response: function() {
+                        ok(data.sort);
+                        ok(data.group);
+                        ok(data.filter);
+                        ok(data.take);
+                        ok(data.page);
+                        ok(data.skip);
+                        ok(data.pageSize);
+                        start();
+                    }
+                });
+                stop();
+
+                dataSource.create({ foo: "bar" });
                 dataSource.sync();
             });
 

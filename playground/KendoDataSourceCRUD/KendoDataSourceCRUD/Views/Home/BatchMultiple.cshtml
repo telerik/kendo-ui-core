@@ -31,17 +31,18 @@ $(document).ready(function() {
                 url: "@Url.Action("UpdateProducts", "Home")",
                 type: "POST"
             },
-            dialect: function(data) {
-                console.log(arguments);
-                var products = {};
-                for (var i in data) {
-                    var product = data[i];
-                    for (var key in product) {
-                        products["[" + i +"]" + "." + key] = product[key];
-                    }
-                }
+            dialect: function(data, type) {
+                if (type == "update") {
+                    var products = {};
 
-                return products;
+                    $.each(data.models, function(index, product) {
+                        for (var key in product) {
+                            products["[" + index +"]" + "." + key] = product[key];
+                        }
+                    });
+
+                    return products;
+                }
             }
         },
         sort: {

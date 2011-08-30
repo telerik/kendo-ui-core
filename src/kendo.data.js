@@ -1098,17 +1098,12 @@
 
             destroyed = that._destroyedModels();
 
-            if (batch === false) {
-                mode = MULTIPLE;
-            }
-            else if ((batch || MULTIPLE) === MULTIPLE) {
-                mode = SINGLE;
-            }
+            mode = batch === false ? MULTIPLE: batch;
 
-            if (mode) {
-                var createdPromises = that._send(created, CREATE, mode, stampCreator.stamp);
-                var updatedPromises = that._send(updated, UPDATE, mode, stampCreator.stamp);
-                var destroyedPromises = that._send(destroyed, DESTROY, mode, stampCreator.stamp);
+            if (mode === MULTIPLE) {
+                var createdPromises = that._send(created, CREATE, stampCreator.stamp);
+                var updatedPromises = that._send(updated, UPDATE, stampCreator.stamp);
+                var destroyedPromises = that._send(destroyed, DESTROY, stampCreator.stamp);
 
                 promises = createdPromises.concat(updatedPromises).concat(destroyedPromises);
             } else {
@@ -1117,8 +1112,7 @@
                         updated: updated,
                         destroyed: destroyed
                     },
-                    proxy(transport.update, transport),
-                    SINGLE
+                    UPDATE
                 );
             }
 
@@ -1146,8 +1140,9 @@
             });
         },
 
-        _send: function(data, method, mode, stamp) {
+        _send: function(data, method, stamp) {
             var that = this,
+                batch = that.options.batch,
                 idx,
                 length,
                 promises = [];
@@ -1156,12 +1151,12 @@
                 return promises;
             }
 
-            if (mode === MULTIPLE) {
+            if (batch) {
+                promises.push(that._createDeferred(method, { models: data }, stamp()));
+            } else {
                 for (idx = 0, length = data.length; idx < length; idx++) {
                     promises.push(that._createDeferred(method, data[idx], stamp()));
                 }
-            } else {
-                promises.push(that._createDeferred(method, data, stamp()));
             }
 
             return promises;
@@ -1170,13 +1165,14 @@
         create: function(index, values) {
             return this.modelSet.create(index, values);
         },
+
         _createDeferred: function(method, data, stamp) {
             var that = this,
                 transport = that.transport;
 
             return $.Deferred(function(dfr) {
                 transport[method]({
-                    data: data,
+                    data: that._params(data),
                     success: function(data) {
                         dfr.resolve({ timeStamp: stamp, data: data });
                     },
@@ -1189,28 +1185,35 @@
         /**
          * Read data from transport
          */
-        read: function(additionalData) {
-            var that = this,
-                options = extend({
-                    take: that.take(),
-                    skip: that.skip(),
-                    page: that.page(),
-                    pageSize: that.pageSize(),
-                    sort: that._sort,
-                    filter: that._filter,
-                    group: that._group,
-                    aggregate: that._aggregate
-                }, additionalData);
+        read: function(data) {
+            var that = this;
 
-            that._queueRequest(options, function() {
+            data = that._params(data);
+
+            that._queueRequest(data, function() {
                 that.trigger(REQUESTSTART);
                 that._ranges = [];
                 that.transport.read({
-                    data: options,
+                    data: data,
                     success: proxy(that.success, that),
                     error: proxy(that.error, that)
                 });
             });
+        },
+
+        _params: function(data) {
+            var that = this;
+
+            return extend({
+                take: that.take(),
+                skip: that.skip(),
+                page: that.page(),
+                pageSize: that.pageSize(),
+                sort: that._sort,
+                filter: that._filter,
+                group: that._group,
+                aggregate: that._aggregate
+            }, data);
         },
 
         _queueRequest: function(options, callback) {
@@ -1223,6 +1226,7 @@
                 that._pending = { callback: proxy(callback, that), options: options };
             }
         },
+
         _dequeueRequest: function() {
             var that = this;
             that._requestInProgress = false;
@@ -1230,6 +1234,7 @@
                 that._queueRequest(that._pending.options, that._pending.callback);
             }
         },
+
         update: function(id, values) {
             this.modelSet.update(id, values);
         },
@@ -1446,14 +1451,7 @@
         _query: function(options) {
             var that = this;
 
-            that.query(extend({}, {
-                page: that.page(),
-                pageSize: that.pageSize(),
-                sort: that.sort(),
-                filter: that.filter(),
-                group: that.group(),
-                aggregate: that.aggregate()
-            }, options));
+            that.query(that._params(options));
         },
 
         /**
