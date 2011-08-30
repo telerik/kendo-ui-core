@@ -1365,7 +1365,7 @@
                 seriesPoint;
 
             if (chart._plotArea.box.containsPoint(coords.x, coords.y)) {
-                if(point && point.series.type === LINE) {
+                if (point && point.series.type === LINE) {
                     owner = point.owner;
                     seriesPoint = owner.getSeriesPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
