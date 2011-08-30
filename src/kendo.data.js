@@ -1451,7 +1451,14 @@
         _query: function(options) {
             var that = this;
 
-            that.query(that._params(options));
+            that.query(extend({}, {
+                page: that.page(),
+                pageSize: that.pageSize(),
+                sort: that.sort(),
+                filter: that.filter(),
+                group: that.group(),
+                aggregate: that.aggregate()
+            }, options));
         },
 
         /**
