@@ -633,6 +633,79 @@
 
             })();
 
+            (function() {
+                var path = "M10 20 L110 20 L110 220 L10 220 L10 20",
+                    result;
+
+                // ------------------------------------------------------------
+                module("parseSVGPath", {
+                    setup: function() {
+                        result = Chart.parseSVGPath(path);
+                    }
+                });
+
+                test("parses points", function() {
+                    equals(result.length, 5);
+                });
+
+                test("parses x", function() {
+                    equals(result[1].x, 110);
+                });
+
+                test("parses y", function() {
+                    equals(result[1].y, 20);
+                });
+
+            })();
+
+            (function() {
+                var element;
+
+                // ------------------------------------------------------------
+                module("CSS hooks", {
+                    setup: function() {
+                        element = $("<div d='M10 20 L110 20 L110 220 L10 220 L10 20' />");
+                    }
+                });
+
+                test("svgBoxTop returns top", function() {
+                    equals(element.css("svgBoxTop"), 20);
+                });
+
+                test("svgBoxRight returns right", function() {
+                    equals(element.css("svgBoxRight"), 110);
+                });
+
+                test("svgBoxBottom returns bottom", function() {
+                    equals(element.css("svgBoxBottom"), 220);
+                });
+
+                test("svgBoxLeft returns left", function() {
+                    equals(element.css("svgBoxLeft"), 10);
+                });
+
+                test("svgBoxTop sets top", function() {
+                    element.css("svgBoxTop", 50);
+                    equals(element.attr("d"), "M10 50 L110 50 L110 220 L10 220 L10 50");
+                });
+
+                test("svgBoxRight sets right", function() {
+                    element.css("svgBoxRight", 50);
+                    equals(element.attr("d"), "M10 20 L50 20 L50 220 L10 220 L10 20");
+                });
+
+                test("svgBoxBottom sets bottom", function() {
+                    element.css("svgBoxBottom", 50);
+                    equals(element.attr("d"), "M10 20 L110 20 L110 50 L10 50 L10 20");
+                });
+
+                test("svgBoxLeft sets left", function() {
+                    element.css("svgBoxLeft", 50);
+                    equals(element.attr("d"), "M50 20 L110 20 L110 220 L50 220 L50 20");
+                });
+
+            })();
+
        </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
