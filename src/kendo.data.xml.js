@@ -76,8 +76,8 @@
             for (node = element.firstChild; node; node = node.nextSibling) {
                 nodeType = node.nodeType;
 
-                if (nodeType === 3) {
-                    // text nodes are stored as #text field
+                if (nodeType === 3 || nodeType === 4) {
+                    // text nodes or CDATA are stored as #text field
                     result["#text"] = node.nodeValue;
                 } else if (nodeType === 1) {
                     // elements are stored as fields
