@@ -3293,7 +3293,6 @@
                     currentCategory = categories[categoryIx];
                     currentSeries = series[seriesIx];
                     value = currentSeries.data[categoryIx];
-
                     callback(value, currentCategory, categoryIx, currentSeries, seriesIx);
                 }
             }
@@ -3809,8 +3808,12 @@
         },
 
         options: {
+            color: WHITE,
             labels: {
                 visible: false
+            },
+            border: {
+                width: 1
             }
         },
 
@@ -3908,40 +3911,52 @@
             var chart = this,
                 options = chart.options,
                 series = options.series,
-                categories = chart.plotArea.options.categoryAxis.categories || [],
-                categoriesCount = chart.categoriesCount(),
-                categoryIx,
                 seriesIx,
                 currentSeries,
+                currentCategory,
+                currentData,
                 startAngle = 90,
                 totalAngle,
                 angles,
                 data,
-                sum;
+                sum,
+                i;
 
-            //should refactor this
-            for (categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
-                for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                    currentSeries = series[seriesIx];
-                    data = currentSeries.data;
-                    sum = chart.sum(data);
-                    angles = chart.angles(data, sum);
-                    currentCategory = categories[categoryIx];
-                    value = data[categoryIx];
-                    callback(value, startAngle, angles[categoryIx],
-                             currentCategory, categoryIx, currentSeries, seriesIx);
-                    startAngle += angles[categoryIx];
+            for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                currentSeries = series[seriesIx];
+                data = currentSeries.data;
+                sum = chart.sum(data);
+                angles = chart.angles(data, sum);
+
+                for (i = 0; i < data.length; i++) {
+                    currentData = data[i];
+                    if ($.isPlainObject(currentData)) {
+                        value = currentData.value;
+                        currentCategory = currentData.name;
+                    } else {
+                        value = currentData;
+                    }
+
+                    callback(value, startAngle, angles[i],
+                       currentCategory, i, currentSeries, seriesIx);
+                    startAngle += angles[i];
                 }
             }
         },
 
         sum: function(data) {
             var length = data.length,
+                currentData,
                 sum = 0,
                 i;
 
             for(i = 0; i < length; i++) {
-                sum += data[i];
+                currentData = data[i];
+                if ($.isPlainObject(currentData)) {
+                    sum += currentData.value;
+                } else {
+                    sum += currentData;
+                }
             }
 
             return sum;
@@ -3949,11 +3964,17 @@
 
         angles: function(data, total) {
             var length = data.length,
+                currentData,
                 angles = [],
                 i;
 
             for(i = 0; i < length; i++) {
-                angles[i] = data[i] * (360 / total);
+                currentData = data[i];
+                if ($.isPlainObject(currentData)) {
+                    angles[i] = currentData.value * (360 / total);
+                } else {
+                    angles[i] = currentData * (360 / total);
+                }
             }
 
             return angles;
@@ -4038,13 +4059,15 @@
         },
 
         createPie: function (view, piece, series, seriesIx) {
-            var pieId = uniqueId();
+            var pieId = uniqueId(),
+                pieceOptions = piece.options;
             this.registerId(pieId, { seriesIx: seriesIx });
             return view.createPie(piece, {
                 id: pieId,
                 fill: "#660741",
-                strokeWidth: 3,
-                stroke: "#fff"
+                strokeWidth: pieceOptions.border.width,
+                stroke: pieceOptions.border.color,
+                dashType: pieceOptions.border.dashType
             });
         }
     });
@@ -4871,8 +4894,8 @@
                 strokeWidth = pie.options.strokeWidth,
                 shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
                 startAngle = piece.startAngle,
-                angle = piece.angle,
                 endAngle = piece.angle + startAngle,
+                isExternalCorner = (endAngle - startAngle) > 180,
                 radius = piece.radius,
                 margin = radius * 0.1,
                 lineEndPoint = pie.calculatePoint(startAngle, radius, margin),
@@ -4881,7 +4904,8 @@
 
             return "M" + (lineEndPoint.x + box.x1) + " " + (lineEndPoint.y + box.y1) +
                    " A" + (radius - margin) + " " + (radius - margin) +
-                   " 0 0,1 " + (curveEndPoint.x + box.x1) + " " + (curveEndPoint.y + box.y1) +
+                   " 0 " + (isExternalCorner ? "1" : "0") + ",1 " +
+                   (curveEndPoint.x + box.x1) + " " + (curveEndPoint.y + box.y1) +
                    " L" + (radius + box.x1) + " " + (radius + box.y1) + " z";
         },
 
@@ -6524,6 +6548,7 @@
         PlotArea: PlotArea,
         ViewElement: ViewElement,
         ViewBase: ViewBase,
+        // SVG elements
         SVGView: SVGView,
         SVGGroup: SVGGroup,
         SVGText: SVGText,
@@ -6534,6 +6559,10 @@
         SVGOverlayDecorator: SVGOverlayDecorator,
         SVGPaintDecorator: SVGPaintDecorator,
         SVGClipAnimationDecorator: SVGClipAnimationDecorator,
+        SVGPie: SVGPie,
+        SVGOverlayDecorator: SVGOverlayDecorator,
+        SVGPaintDecorator: SVGPaintDecorator,
+        // VML Elements
         VMLView: VMLView,
         VMLText: VMLText,
         VMLRotatedText: VMLRotatedText,
@@ -6556,7 +6585,9 @@
         measureText: measureText,
         ExpandAnimation: ExpandAnimation,
         BarAnimation: BarAnimation,
-        BarAnimationDecorator: BarAnimationDecorator
+        BarAnimationDecorator: BarAnimationDecorator,
+        PiePiece: PiePiece,
+        PieChart: PieChart
     });
 
     // Themes

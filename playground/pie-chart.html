@@ -28,11 +28,25 @@
                 },
                 dataSource: data,
                 seriesDefaults: {
-                    type: "pie"
+                    type: "pie",
+                    border: {
+                        width: 3,
+                        color: "#fff"
+                    }
                 },
                 series: [{
                     name: "World",
-                    data: [25, 15, 30, 20, 5, 20]
+                    data:[
+                      {
+                          value: 25,
+                          name: "a"
+                      }, {
+                          value: 5,
+                          name: "b"
+                      }, {
+                          value: 15,
+                          name: "c"
+                      }]
                 }],
                 plotArea: {
                     border: {
