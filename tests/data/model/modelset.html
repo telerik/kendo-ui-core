@@ -188,7 +188,7 @@
                 equal(modelSet.model(2).get("foo"), "baz");
             });
 
-            test("merge with no data accepts the current changes", function() {
+            test("merge with no data accepts the current updated models", function() {
                 modelSet = setup( [{id: 1, foo:"foo"}]);
                 modelSet.model(1).set("foo", "bar");
 
@@ -196,6 +196,7 @@
 
                 equal(modelSet.data[0].foo, "bar");
             });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

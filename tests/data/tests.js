@@ -36,6 +36,10 @@ tests.push(
         title: "datasource.sync"
     },
     {
+        page: "data/datasource/batch-multiple.html",
+        title: "batch multiple requests"
+    },
+    {
         page: "data/datasource/range.html",
         title: "datasource.range"
     },
