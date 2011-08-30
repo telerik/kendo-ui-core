@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Batch multiple requests</title>
+        <title>Batch disabled</title>
         <script src="../../../src/jquery.js"></script>
         <script type="text/javascript" src="../../qunit.js"></script>
         <script type="text/javascript" src="../../qunit-runner.js"></script>
@@ -24,7 +24,6 @@
 
             function setup(options) {
                 var dataSource = new DataSource($.extend(true, {
-                    batch: "multiple",
                     schema: {
                         model: Model
                     },
@@ -39,7 +38,8 @@
 
                 return dataSource;
             }
-            module("batch multiple", {
+
+            module("batch disabled", {
                 setup: function() {
                     dataSource = setup();                }
             });
@@ -60,12 +60,12 @@
                 equal(methods[2], "destroy");
             });
 
-            test("sync sends array of updated models", function() {
-                var models;
+            test("sync sends updated model", function() {
+                var model;
                 var dataSource = setup({
                     transport: {
                         update: function(options) {
-                            models = options.data.models;
+                            model = options.data;
                         }
                     }
                 });
@@ -73,17 +73,33 @@
                 dataSource.update(1, { foo: "bar" });
                 dataSource.sync();
 
-                ok(models.length, 1);
-                ok(models[0].id, 1);
-                ok(models[0].foo, "bar");
+                ok(model.id, 1);
+                ok(model.foo, "bar");
             });
 
-            test("sync sends array of destroyed models", function() {
-                var models;
+            test("sync sends updated models in separate requests", function() {
+                var models = [];
+                var dataSource = setup({
+                    transport: {
+                        update: function(options) {
+                            models.push(options.data);
+                        }
+                    }
+                });
+
+                dataSource.update(1, { foo: "bar" });
+                dataSource.update(1, { foo: "baz" });
+                dataSource.sync();
+
+                ok(models.length, 2);
+            });
+
+            test("sync sends destroyed model", function() {
+                var model;
                 var dataSource = setup({
                     transport: {
                         destroy: function(options) {
-                            models = options.data.models;
+                            model = options.data;
                         }
                     }
                 });
@@ -91,16 +107,37 @@
                 dataSource.destroy(1);
                 dataSource.sync();
 
-                ok(models.length, 1);
-                ok(models[0].id, 1);
+                ok(model.id, 1);
             });
 
-            test("sync sends array of created models", function() {
-                var models;
+            test("sync sends destroyed models in separate requests", function() {
+                var models = [];
+                var dataSource = setup({
+                    transport: {
+                        read: function(options) {
+                            options.success([{id:1}, {id:2}]);
+                        },
+                        destroy: function(options) {
+                            models.push(options.data);
+                        }
+                    }
+                });
+
+                dataSource.destroy(1);
+                dataSource.destroy(2);
+                dataSource.sync();
+
+                ok(models.length, 2);
+                ok(models[0].id, 1);
+                ok(models[1].id, 2);
+            });
+
+            test("sync sends created model", function() {
+                var model;
                 var dataSource = setup({
                     transport: {
                         create: function(options) {
-                            models = options.data.models;
+                            model = options.data;
                         }
                     }
                 });
@@ -108,8 +145,27 @@
                 dataSource.create({ foo: "bar"});
                 dataSource.sync();
 
-                ok(models.length, 1);
-                ok(models[0].foo, "bar");
+                ok(model.foo, "bar");
+            });
+
+            test("sync sends created models in separate requests", function() {
+                var models = [];
+                var dataSource = setup({
+                    transport: {
+                        read: function(options) {
+                            options.success([{id:1}, {id:2}]);
+                        },
+                        create: function(options) {
+                            models.push(options.data);
+                        }
+                    }
+                });
+
+                dataSource.create({ foo: "bar" });
+                dataSource.create({ foo: "baz" });
+                dataSource.sync();
+
+                ok(models.length, 2);
             });
 
             test("sync updates models after completion when remote service returns updated data", function() {
@@ -140,7 +196,7 @@
                 equal(dataSource.find(1).foo, "bar");
             });
 
-            test("sync updates models after multiple updates when service returns", function() {
+            test("sync updates models after multiple updates when service does not return changes", function() {
 
                 var dataSource = setup({
                     transport: {
@@ -213,6 +269,68 @@
                 dataSource.update(1, { foo: "bar" });
                 dataSource.sync();
                 stop(1000);
+            });
+
+            test("sync merges multiple results after update", function() {
+                var data = [{id: 1, foo: "moo"}, {id: 2, foo: "boo"}],
+                    modified = [
+                        [{id: 1, foo: "foo"}, {id: 2, foo: "boo"}],
+                        [{id: 1, foo: "foo"}, {id: 2, foo: "baz"}]
+                    ],
+                    dataSource = setup({
+                        transport: {
+                            read: function(options) {
+                                options.success(data);
+                            },
+                            update: function(options) {
+                                options.success(modified.shift());
+                            }
+                        }
+                    });
+
+                dataSource.read();
+                dataSource.update(1, {id: 1, foo: "foo"});
+                dataSource.update(2, {id: 2, foo: "baz"});
+                dataSource.sync();
+
+                var view = dataSource.view();
+                equal(view[0].foo, "foo");
+                equal(view[1].foo, "baz");
+            });
+
+            asyncTest("sync merge multiple results after update when response is out of order", function() {
+                var data = [{id: 1, foo: "moo"}, {id: 2, foo: "boo"}],
+                    called = false,
+                    modified = [
+                        [{id: 1, foo: "foo"}, {id: 2, foo: "boo"}],
+                        [{id: 1, foo: "foo"}, {id: 2, foo: "baz"}]
+                    ],
+                    dataSource = setup({
+                        transport: {
+                            read: function(options) {
+                                options.success(data);
+                            },
+                            update: function(data) {
+                                setTimeout(function() { data.success(modified.shift());}, called ? 100 : 0);
+                                called = true;
+                            }
+                        },
+                        change: function() {
+                            if (called) {
+                                start();
+                                var view = dataSource.view();
+                                equal(view[0].foo, "foo");
+                                equal(view[1].foo, "baz");
+                            }
+                        }
+                    });
+
+                dataSource.read();
+                dataSource.update(1, {id: 1, foo: "foo"});
+                dataSource.update(2, {id: 2, foo: "baz"});
+                dataSource.sync();
+
+                stop(500);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

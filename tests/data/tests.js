@@ -40,6 +40,10 @@ tests.push(
         title: "batch multiple requests"
     },
     {
+        page: "data/datasource/batch-false.html",
+        title: "batch false"
+    },
+    {
         page: "data/datasource/range.html",
         title: "datasource.range"
     },
