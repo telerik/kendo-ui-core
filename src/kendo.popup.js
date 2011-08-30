@@ -74,6 +74,13 @@
                         that.wrapper.css(location);
                     }
 
+                    if (options.anchor != BODY) {
+                        options.anchor
+                            .children(ACTIVECHILDREN)
+                            .removeClass(ACTIVE)
+                            .css({ borderRadius: "4px" });
+                    }
+
                     that._closing = false;
                 }
             });
@@ -151,7 +158,10 @@
                 that.element.kendoStop(true).kendoAnimate(animation);
 
                 if (options.anchor != BODY) {
-                    options.anchor.children(ACTIVECHILDREN).addClass(ACTIVE);
+                    options.anchor
+                        .children(ACTIVECHILDREN)
+                        .addClass(ACTIVE)
+                        .css({ borderRadius: "4px 4px 0 0" });
                 }
             }
         },
@@ -190,10 +200,6 @@
                 that._closing = true;
 
                 that.element.kendoStop(true).kendoAnimate(animation);
-
-                if (options.anchor != BODY) {
-                    options.anchor.children(ACTIVECHILDREN).removeClass(ACTIVE);
-                }
             }
         },
 

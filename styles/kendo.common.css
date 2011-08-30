@@ -46,9 +46,9 @@ html body .k-button
 .k-dropdown-wrap,
 .k-picker-wrap
 {
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
 }
 
 .k-button
@@ -1403,8 +1403,9 @@ div.k-dropdown
     zoom: 1;
 
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     white-space: nowrap;
+    vertical-align: top;
 
     width: 150px;
     border-width: 0;
@@ -1420,6 +1421,17 @@ div.k-dropdown
     cursor: default;
 }
 
+.k-animation-container
+{
+    margin-top: -1px;
+}
+
+.k-list.k-group
+{
+    border: 3px solid transparent;
+    border-radius: 0 0 4px 4px;
+}
+
 .k-picker-wrap
 {
     padding: 0 23px 0 0;
@@ -1428,15 +1440,31 @@ div.k-dropdown
 .k-dropdown-wrap,
 .k-picker-wrap
 {
-    padding-right: 16px; /*icon width*/
-    border-width: 1px;
-    border-style: solid;
+    border: 0;
+    padding: 3px 24px 3px 3px;
+}
+
+.k-dropdown-wrap.k-state-hover,
+.k-picker-wrap.k-state-hover
+{
+    background-position: 0 50%;
+}
+
+.k-dropdown-wrap.k-state-hover,
+.k-picker-wrap.k-state-hover,
+.k-dropdown-wrap .k-input,
+.k-picker-wrap .k-input
+{
+    -webkit-transition: -webkit-box-shadow .2s ease-out;
+    -moz-transition: -moz-box-shadow .2s ease-out;
+    -o-transition: box-shadow .2s ease-out;
+    -ms-transition: box-shadow .2s ease-out;
 }
 
 .k-combobox>.k-dropdown-wrap,
 .k-datepicker>.k-picker-wrap
 {
-    padding-right: 22px; /* icon width + input paddings, except IE6 */
+    padding-right: 26px; /* icon width + input paddings, except IE6 */
 }
 
 .k-picker-wrap .k-input,
@@ -1485,7 +1513,7 @@ div.k-dropdown
 .k-combobox .k-select,
 .k-picker-wrap .k-select
 {
-    border-width: 0 0 0 1px;
+    border-width: 0;
     border-style: solid;
     border-color: inherit; /* will be skin-related, inherit does not work in ie7- */
 }
@@ -1528,7 +1556,7 @@ div.k-datetimepicker .k-select+.k-select
     overflow: hidden;
     display: block;
     text-overflow: ellipsis;
-    padding: .25em 0 .15em 3px;
+    padding: 0.166em 0 0.166em 3px;
     min-height: 1.35em;
 }
 
@@ -1543,42 +1571,47 @@ div.k-datetimepicker .k-select+.k-select
 .k-picker-wrap .k-icon,
 .k-dropdown-wrap .k-icon
 {
-    vertical-align: top;
-    margin-top: 2px;
-}
-
-.k-picker-wrap .k-input,
-.k-combobox .k-input
-{
     height: 18px;
-    line-height: 18px;
-    padding: 1px 3px;
-    border: 0;
-    margin: 0;
-}
-
-.k-picker-wrap .k-select,
-.k-dropdown-wrap .k-select
-{
-    height: 20px;
-    line-height: 20px;
 }
 
 .k-dropdown-wrap .k-input,
 .k-picker-wrap .k-input
 {
-    -moz-border-radius: 5px 0 0 5px;
-    -webkit-border-radius: 5px 0 0 5px;
-    border-radius: 5px 0 0 5px;
+    text-indent: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 3px;
+}
+
+.k-combobox .k-input
+{
+    min-height: 1.35em;
+    line-height: 1.35em;
+    padding: 0.166em 0 0.166em;
+    text-indent: 4px;
+    border: 0;
+    margin: 0;
+    -webkit-box-shadow: inset 0 0 3px 3px #ddd;
+    -moz-box-shadow: inset 0 0 3px 3px #ddd;
+    box-shadow: inset 0 0 3px 3px #ddd;
+}
+
+.k-picker-wrap .k-select,
+.k-dropdown-wrap .k-select
+{
+    min-height: 1.6em;
+    line-height: 1.45em;
+    vertical-align: middle;
+    padding: 3px 5px;
 }
 
 .k-dropdown-wrap .k-select,
 .k-picker-wrap .k-select,
 .k-datetimepicker .k-select+.k-select
 {
-    -moz-border-radius: 0 5px 5px 0;
-    -webkit-border-radius: 0 5px 5px 0;
-    border-radius: 0 5px 5px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    -webkit-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
 }
 
 .k-datetimepicker .k-select
@@ -1601,7 +1634,20 @@ div.k-datetimepicker .k-select+.k-select
 
 .k-list .k-item
 {
-    padding: 1px 5px 1px 3px;
+    padding: 1px 5px 1px 5px;
+    line-height: 22px;
+}
+
+.k-list .k-state-hover,
+.k-list .k-state-focused,
+.k-list .k-state-selected
+{
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0 4px;
+    border-width: 1px;
+    border-style: solid;
 }
 
 /* Calendar */

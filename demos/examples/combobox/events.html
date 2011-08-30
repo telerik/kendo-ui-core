@@ -7,11 +7,12 @@
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.black.css" rel="stylesheet"/>
         <!-- css -->
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
         <script src="../../../src/kendo.popup.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.list.js"></script>
@@ -25,7 +26,7 @@
         <!-- description -->
         <div class="description">Events</div>
         <!-- description -->
-        <div id="example" class="k-content">
+        <div id="example">
             <input id="input"/>
             <script>
                 $(document).ready(function() {
@@ -33,19 +34,19 @@
                         if ("kendoConsole" in window) {
                             kendoConsole.log("event: open");
                         }
-                    };
+                    }
 
                     function onClose() {
                         if ("kendoConsole" in window) {
                             kendoConsole.log("event: close");
                         }
-                    };
+                    }
 
                     function onChange() {
                         if ("kendoConsole" in window) {
                             kendoConsole.log("event: change");
                         }
-                    };
+                    }
 
                     var data = [
                         {text: "Item1", value:"1"},
