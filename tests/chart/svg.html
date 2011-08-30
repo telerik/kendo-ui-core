@@ -165,6 +165,39 @@
                     equals(circle.options.strokeWidth, 2);
                 });
 
+                test("createPie returns SVGPie", function() {
+                    var pie = view.createPie();
+                    ok(pie instanceof Chart.SVGPie);
+                });
+
+                /*test("createPie sets center point", function() {
+                    var circle = view.createCircle([10, 10]);
+                    same(circle.center, [10, 10]);
+                });
+
+                test("createCircle sets radius", function() {
+                    var circle = view.createCircle([10, 10], 10);
+                    same(circle.radius, 10);
+                });*/
+
+                test("createPie sets fill color", function() {
+                    var pie = view.createPie({ }, { fill: "#cf0" });
+
+                    equals(pie.options.fill, "#cf0");
+                });
+
+                test("createPie sets stroke color", function() {
+                    var pie = view.createPie({ }, { stroke: "#cf0" });
+
+                    equals(pie.options.stroke, "#cf0");
+                });
+
+                test("createPie sets stroke width", function() {
+                    var pie = view.createPie({ }, { strokeWidth: 2});
+
+                    equals(pie.options.strokeWidth, 2);
+                });
+
                 test("renderElement returns element", function() {
                     element = view.renderElement({
                         render: function() {
@@ -590,6 +623,51 @@
                 test("renders id", function() {
                     clipPath.options.id = "id";
                     ok(clipPath.render().indexOf("id='id'") > -1);
+                });
+
+            })();
+
+            (function() {
+                var pie;
+
+                module("SVGPie", {
+                    setup: function() {
+                        pie = new Chart.SVGPie({ angle: 20, radius: 150, startAngle: 90, box: new Box2D(0, 0, 100, 100) });
+                    }
+                });
+
+                test("renders pie tag", function() {
+                    equal(pie.render().replace(/\<path.*?\>/, "<path>"),
+                        "<path></path>");
+                });
+
+                test("renders radius", function() {
+                    ok(pie.render().indexOf("A135 135") > -1);
+                });
+
+                test("renders fill color", function() {
+                    pie.options.fill = "#f00";
+                    ok(pie.render().indexOf("fill='#f00'") > -1);
+                });
+
+                test("renders empty fill when no fill is set", function() {
+                    pie.options.fill = "";
+                    ok(pie.render().indexOf("fill='none") > -1);
+                });
+
+                test("renders stroke color", function() {
+                    pie.options.stroke = "#f00";
+                    ok(pie.render().indexOf("stroke='#f00'") > -1);
+                });
+
+                test("renders stroke width", function() {
+                    pie.options.strokeWidth = "2";
+                    ok(pie.render().indexOf("stroke-width='2'") > -1);
+                });
+
+                test("renders id", function() {
+                    pie.options.id = "id";
+                    ok(pie.render().indexOf("id='id'") > -1);
                 });
 
             })();
