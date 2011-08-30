@@ -2983,7 +2983,9 @@
                     childBox = currentChild.box.clone();
 
                 childBox.snapTo(targetBox, positionAxis)
-                currentChild.options.animation.stackBase = stackBase;
+                if (currentChild.options && currentChild.options.animation) {
+                    currentChild.options.animation.stackBase = stackBase;
+                }
 
                 if (i == 0) {
                     box = stack.box = childBox.clone();
@@ -3018,6 +3020,9 @@
             aboveAxis: true,
             labels: {
                 visible: false
+            },
+            animation: {
+                type: "bar"
             }
         },
 
@@ -3348,10 +3353,7 @@
                 border: series.border,
                 isVertical: options.isVertical,
                 overlay: series.overlay,
-                labels: labelOptions,
-                animation: {
-                    type: "bar"
-                }
+                labels: labelOptions
             });
 
             var cluster = children[categoryIx];
@@ -4158,7 +4160,7 @@
             view.decorators.push(
                 new SVGOverlayDecorator(view),
                 new SVGPaintDecorator(view),
-                new SVGBarAnimationDecorator(view)
+                new AnimationDecorator(view)
             );
 
             view.template = SVGView.template;
@@ -4548,50 +4550,70 @@
         }
     };
 
-    jQuery.cssHooks["svgBarBottom"] = {
+    jQuery.cssHooks["svgBoxTop"] = {
         get: function(elem, computed, extra) {
-            var points = $(elem).attr("d")
-                         .replace(/[ML]/gi, "").split(" ");
+            var points = parseSVGPath($(elem).attr("d"));
 
-            return parseFloat(points[5]);
+            return parseFloat(points[1].y);
+        },
+        set: function(elem, value) {
+            var points = $(elem).attr("d").split(" ");
+
+            points[1] = points[3] = points[9] = parseFloat(value);
+            $(elem).attr("d", points.join(" "));
+        }
+    };
+
+    jQuery.cssHooks["svgBoxRight"] = {
+        get: function(elem, computed, extra) {
+            var points = parseSVGPath($(elem).attr("d"));
+
+            return parseFloat(points[1].x);
+        },
+        set: function(elem, value) {
+            var points = $(elem).attr("d").split(" ");
+
+            points[1] = points[3] = points[9] = parseFloat(value);
+            $(elem).attr("d", points.join(" "));
+        }
+    };
+
+   jQuery.cssHooks["svgBoxBottom"] = {
+        get: function(elem, computed, extra) {
+            var points = parseSVGPath($(elem).attr("d"));
+
+            return parseFloat(points[3].y);
         },
         set: function(elem, value) {
             var points = $(elem).attr("d").split(" ");
 
             // alignToPixel usage depends on stroke width
-            points[5] = points[7] = alignToPixel(parseFloat(value));
+            points[5] = points[7] = parseFloat(value);
             $(elem).attr("d", points.join(" "));
         }
     };
 
-    jQuery.cssHooks["svgBarTop"] = {
+    jQuery.cssHooks["svgBoxLeft"] = {
         get: function(elem, computed, extra) {
-            var points = $(elem).attr("d")
-                         .replace(/[ML]/gi, "").split(" ");
+            var points = parseSVGPath($(elem).attr("d"));
 
-            return parseFloat(points[1]);
-        },
-        set: function(elem, value) {
-            var points = $(elem).attr("d").split(" ");
-
-            points[1] = points[3] = points[9] = alignToPixel(parseFloat(value));
-            $(elem).attr("d", points.join(" "));
+            return parseFloat(points[0].x);
         }
     };
 
-    jQuery.fx.step["svgBarBottom"] = function(fx) {
-        jQuery.cssHooks["svgBarBottom"].set(fx.elem, fx.now + fx.unit);
+    jQuery.fx.step["svgBoxBottom"] = function(fx) {
+        jQuery.cssHooks["svgBoxBottom"].set(fx.elem, fx.now + fx.unit);
     };
 
-    jQuery.fx.step["svgBarTop"] = function(fx) {
-        jQuery.cssHooks["svgBarTop"].set(fx.elem, fx.now + fx.unit);
+    jQuery.fx.step["svgBoxTop"] = function(fx) {
+        jQuery.cssHooks["svgBoxTop"].set(fx.elem, fx.now + fx.unit);
     };
 
-    function SVGBarAnimationDecorator(view) {
+    function AnimationDecorator(view) {
         this.view = view;
     }
 
-    SVGBarAnimationDecorator.prototype = {
+    AnimationDecorator.prototype = {
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
@@ -4630,10 +4652,10 @@
             if (options.normalAngle === 0) {
                 initialPosition = stackBase ? stackBase : aboveAxis ? box.y2 : box.y1;
                 target
-                    .css({ "svgBarTop" : initialPosition,
-                           "svgBarBottom": initialPosition })
-                    .animate({ "svgBarTop": box.y1,
-                               "svgBarBottom": box.y2 });
+                    .css({ "svgBoxTop" : initialPosition,
+                           "svgBoxBottom": initialPosition })
+                    .animate({ "svgBoxTop": box.y1,
+                               "svgBoxBottom": box.y2 });
             }
         }
     });
@@ -5416,6 +5438,19 @@
         return "";
     }
 
+    function parseSVGPath(path) {
+        var points = path.replace(/[ML]/gi, "").split(" "),
+            i,
+            pointsLength = points.length,
+            result = [];
+
+        for (i = 0; i < pointsLength; i += 2) {
+            result.push({ x: points[i], y: points[i + 1]});
+        }
+
+        return result;
+    }
+
     // renderSVG ==============================================================
     function renderSVG(container, svg) {
         container.innerHTML = svg;
@@ -5740,6 +5775,7 @@
         Tooltip: Tooltip,
         Highlight: Highlight,
         deepExtend: deepExtend,
+        parseSVGPath: parseSVGPath,
         Color: Color,
         blendColors: blendColors,
         blendGradient: blendGradient,
