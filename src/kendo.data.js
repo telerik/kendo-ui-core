@@ -739,7 +739,7 @@
                 data = isFunction(operation.data) ? operation.data() : operation.data;
 
             options = extend(true, {}, operation, options);
-            options.data = that.dialect(extend(data, options.data));
+            options.data = that.dialect(extend(data, options.data), type);
 
             return options;
         }

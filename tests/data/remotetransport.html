@@ -184,7 +184,128 @@
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
-            test("dialect as plain object", function() {
+            test("update passes data options to dialect", function() {
+                var data, transport = new RemoteTransport({
+                        update: {
+                            url: "foo"
+                        },
+                        dialect: function() {
+                            data = arguments[0];
+                            return data;
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        equal(data.foo, "bar");
+                        start();
+                    }
+                });
+
+                transport.update( { data: { foo: "bar" } } );
+
+                stop(1000);
+
+            });
+
+            test("the type argument of the dialect is update during updating", function() {
+                var dialectType, transport = new RemoteTransport({
+                        update: {
+                            url: "foo"
+                        },
+                        dialect: function(data, type) {
+                            dialectType = type;
+                            return data;
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        equal(dialectType, "update");
+                        start();
+                    }
+                });
+
+                transport.update();
+
+                stop();
+            });
+
+            test("the type argument of the dialect is destroy during destroying", function() {
+                var dialectType, transport = new RemoteTransport({
+                        destroy: {
+                            url: "foo"
+                        },
+                        dialect: function(data, type) {
+                            dialectType = type;
+                            return data;
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        equal(dialectType, "destroy");
+                        start();
+                    }
+                });
+
+                transport.destroy();
+
+                stop();
+            });
+
+            test("the type argument of the dialect is create during creating", function() {
+                var dialectType, transport = new RemoteTransport({
+                        create: {
+                            url: "foo"
+                        },
+                        dialect: function(data, type) {
+                            dialectType = type;
+                            return data;
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        equal(dialectType, "create");
+                        start();
+                    }
+                });
+
+                transport.create();
+
+                stop();
+            });
+
+            test("the type argument of the dialect is read during reading", function() {
+                var dialectType, transport = new RemoteTransport({
+                        read: {
+                            url: "foo"
+                        },
+                        dialect: function(data, type) {
+                            dialectType = type;
+                            return data;
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        equal(dialectType, "read");
+                        start();
+                    }
+                });
+
+                transport.read();
+
+                stop();
+            });
+
+           test("dialect as plain object", function() {
                 var transport = new RemoteTransport({
                     dialect: { take: "$take", skip: "$skip" }
                 });
