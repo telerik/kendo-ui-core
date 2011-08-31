@@ -1083,14 +1083,10 @@
                 mode,
                 promises,
                 transport = that.transport,
-                stampCreator = {
-                    stamp: function() {
-                        var stamp = 0;
-                        return function() {
-                            return stamp++;
-                        }
-                    }
-                };
+                currentStamp = 0,
+                stamp = function() {
+                    return currentStamp ++;
+                }
 
             updated = that._updatedModels();
 
@@ -1101,11 +1097,9 @@
             mode = batch === false ? MULTIPLE: batch;
 
             if (mode === MULTIPLE) {
-                var createdPromises = that._send(created, CREATE, stampCreator.stamp);
-                var updatedPromises = that._send(updated, UPDATE, stampCreator.stamp);
-                var destroyedPromises = that._send(destroyed, DESTROY, stampCreator.stamp);
-
-                promises = createdPromises.concat(updatedPromises).concat(destroyedPromises);
+                promises = that._send(created, CREATE, stamp)
+                               .concat(that._send(updated, UPDATE, stamp))
+                               .concat(that._send(destroyed, DESTROY, stamp));
             } else {
                 promises = that._send({
                         created: created,
@@ -1113,7 +1107,7 @@
                         destroyed: destroyed
                     },
                     UPDATE,
-                    stampCreator.stamp
+                    stamp
                 );
             }
 
@@ -1126,7 +1120,7 @@
                     length;
 
                 results.sort(function(x,y) {
-                    return x.timeStamp - y.timeStamp;
+                    return x.stamp - y.stamp;
                 });
 
                 for (idx = 0, length = results.length; idx < length; idx++) {
@@ -1142,31 +1136,26 @@
 
         _send: function(data, method, stamp) {
             var that = this,
-                batch = that.options.batch,
-                idx,
-                length,
-                promises = [];
+                batch = that.options.batch;
 
             if (data.length === 0 || (batch === SINGLE && !data.updated[0] && !data.created[0] && !data.destroyed[0])) {
-                return promises;
+                return [];
             }
 
             if (batch) {
-                promises.push(that._createDeferred(method, { models: data }, stamp()));
-            } else {
-                for (idx = 0, length = data.length; idx < length; idx++) {
-                    promises.push(that._createDeferred(method, data[idx], stamp()));
-                }
+                data = [ { models: data } ];
             }
 
-            return promises;
+            if (!isArray(data)) {
+                data = [data];
+            }
+
+            return map(data, function(model) {
+                return that._promise(method, model, stamp());
+            });
         },
 
-        create: function(index, values) {
-            return this.modelSet.create(index, values);
-        },
-
-        _createDeferred: function(method, data, stamp) {
+        _promise: function(method, data, stamp) {
             var that = this,
                 transport = that.transport;
 
@@ -1174,7 +1163,7 @@
                 transport[method]({
                     data: that._params(data),
                     success: function(data) {
-                        dfr.resolve({ timeStamp: stamp, data: data });
+                        dfr.resolve({ stamp: stamp, data: data });
                     },
                     error: dfr.reject
                 });
@@ -1182,9 +1171,11 @@
                 that.error(options);
             }).promise()
         },
-        /**
-         * Read data from transport
-         */
+
+        create: function(index, values) {
+            return this.modelSet.create(index, values);
+        },
+
         read: function(data) {
             var that = this, params = that._params(data);
 
