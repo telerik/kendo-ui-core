@@ -16,17 +16,6 @@
 .k-grid-pager
 {
     border-color: #d7d7d7;
-    background:#e3e3e3;
-}
-
-*>.k-header,
-*>.k-grid-header,
-*>.k-toolbar,
-*>.k-dropdown-wrap,
-*>.k-grouping-header,
-*>.k-tooltip,
-*>.k-grid-pager
-{
     background: #e3e3e3 url('Kendo/gradient.png') repeat-x 0 center;
 }
 
@@ -40,11 +29,11 @@
     background-position:0 -248px;
 }
 
-*>.k-link.k-state-hover,
-*>.k-dropdown-wrap .k-input,
-*>.k-dropdown-wrap .k-select,
-*>.k-tabstrip-items .k-item,
-*>.k-tabstrip-items .k-state-hover .k-link
+.k-link.k-state-hover,
+.k-dropdown-wrap .k-input,
+.k-dropdown-wrap .k-select,
+.k-tabstrip-items .k-item,
+.k-tabstrip-items .k-state-hover .k-link
 {
     background-image: url('Kendo/gradient.png');
     background-repeat: repeat-x;
@@ -187,14 +176,6 @@ a.k-button.k-state-disabled:hover,
 .k-state-disabled .k-button:hover
 {
     border-color: #d7d7d7;
-    background: #e3e3e3;
-}
-
-*>.k-button,
-*>button.k-button.k-state-disabled:hover,
-*>a.k-button.k-state-disabled:hover,
-*>.k-state-disabled .k-button:hover
-{
     background: #e3e3e3 url('Kendo/gradient.png') repeat-x 0 center;
 }
 
@@ -443,13 +424,7 @@ td.k-group-cell
 .k-tile
 {
     border-color: #fff;
-    background-position:0 100px;
-    background-repeat:repeat-x;
-}
-
-*>.k-tile
-{
-    background-image:url('Kendo/gradient.png');
+    background:0 100px repeat-x url('Kendo/gradient.png');
 }
 
 .k-tiles li.k-state-hover
