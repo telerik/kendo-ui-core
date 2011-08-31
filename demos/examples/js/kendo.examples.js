@@ -278,7 +278,7 @@
         },
 
         body: function(html) {
-            var match = /<div id="example([Wrap]*)"[^>]*?>(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig.exec(html),
+            var match = /<div id="example([Wrap]*)"[^>]*?>\s*<script[^>]*?>[^>]*script>(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig.exec(html),
                 hasBody = match[0].substr(16, 4) != "Wrap";
 
             return (match[1] != "") ? match[2] : (hasBody ? "" : "<div id=\"exampleWrap\">") + match[0].replace("<!-- tools -->", "") + (hasBody ? "" : "</div>");
@@ -423,6 +423,10 @@ function locatePage(url) {
     iterate(categories);
 
     return category;
+}
+
+function preventFOUC () {
+    $("#exampleWrap").hide();
 }
 
 function getNormalizedUrl() {
