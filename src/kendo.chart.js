@@ -4590,38 +4590,52 @@
                 initialPosition,
                 target = $("#" + viewElement.options.id);
 
+            var current = viewElement.clone(),
+                start = +new Date(),
+                duration = 500,
+                finish = start + duration,
+                interval,
+                easing = jQuery.easing.swing;
+
             if (options.normalAngle === 0) {
                 initialPosition = stackBase ? stackBase : aboveAxis ? box.y2 : box.y1;
-
-                var current = viewElement.clone(),
-                    start = +new Date(),
-                    duration = 500,
-                    finish = start + duration,
-                    interval,
-                    easing = jQuery.easing.swing;
 
                 current.points[0][1] = current.points[1][1] = current.points[2][1] =
                 current.points[3][1] = current.points[4][1] = initialPosition;
                 target.attr("d", current.renderPoints());
+            } else {
+                initialPosition = stackBase ? stackBase : aboveAxis ? box.x1 : box.x2;
 
-                var interval = setInterval(function() {
-                    var time = +new Date(),
-                        pos = time > finish ? 1 : (time - start) / duration,
-                        easingPos = easing(pos, time - start, 0, 1);
+                current.points[0][0] = current.points[1][0] = current.points[2][0] =
+                current.points[3][0] = current.points[4][0] = initialPosition;
+                target.attr("d", current.renderPoints());
+            }
 
+            var interval = setInterval(function() {
+                var time = +new Date(),
+                    pos = time > finish ? 1 : (time - start) / duration,
+                    easingPos = easing(pos, time - start, 0, 1);
+
+                if (options.normalAngle === 0) {
                     current.points[0][1] = current.points[1][1] = current.points[4][1] =
                         interpolateValue(initialPosition, box.y1, easingPos);
 
                     current.points[2][1] = current.points[3][1] =
-                        interpolateValue(initialPosition, box.y2, easingPos);
+                    interpolateValue(initialPosition, box.y2, easingPos);
+                } else {
+                    current.points[0][0] = current.points[3][0] = current.points[4][0] =
+                        interpolateValue(initialPosition, box.x1, easingPos);
 
-                    target.attr("d", current.renderPoints());
+                    current.points[1][0] = current.points[2][0] =
+                    interpolateValue(initialPosition, box.x2, easingPos);
+                }
 
-                    if (time > finish) {
-                        clearInterval(interval);
-                    }
-                }, 10);
-            }
+                target.attr("d", current.renderPoints());
+
+                if (time > finish) {
+                    clearInterval(interval);
+                }
+            }, 10);
         }
     });
 
