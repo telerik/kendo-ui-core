@@ -4550,65 +4550,6 @@
         }
     };
 
-    jQuery.cssHooks["svgBoxTop"] = {
-        get: function(elem, computed, extra) {
-            var points = parseSVGPath($(elem).attr("d"));
-
-            return parseFloat(points[1].y);
-        },
-        set: function(elem, value) {
-            var points = $(elem).attr("d").split(" ");
-
-            points[1] = points[3] = points[9] = parseFloat(value);
-            $(elem).attr("d", points.join(" "));
-        }
-    };
-
-    jQuery.cssHooks["svgBoxRight"] = {
-        get: function(elem, computed, extra) {
-            var points = parseSVGPath($(elem).attr("d"));
-
-            return parseFloat(points[1].x);
-        },
-        set: function(elem, value) {
-            var points = $(elem).attr("d").split(" ");
-
-            points[1] = points[3] = points[9] = parseFloat(value);
-            $(elem).attr("d", points.join(" "));
-        }
-    };
-
-   jQuery.cssHooks["svgBoxBottom"] = {
-        get: function(elem, computed, extra) {
-            var points = parseSVGPath($(elem).attr("d"));
-
-            return parseFloat(points[3].y);
-        },
-        set: function(elem, value) {
-            var points = $(elem).attr("d").split(" ");
-
-            // alignToPixel usage depends on stroke width
-            points[5] = points[7] = parseFloat(value);
-            $(elem).attr("d", points.join(" "));
-        }
-    };
-
-    jQuery.cssHooks["svgBoxLeft"] = {
-        get: function(elem, computed, extra) {
-            var points = parseSVGPath($(elem).attr("d"));
-
-            return parseFloat(points[0].x);
-        }
-    };
-
-    jQuery.fx.step["svgBoxBottom"] = function(fx) {
-        jQuery.cssHooks["svgBoxBottom"].set(fx.elem, fx.now + fx.unit);
-    };
-
-    jQuery.fx.step["svgBoxTop"] = function(fx) {
-        jQuery.cssHooks["svgBoxTop"].set(fx.elem, fx.now + fx.unit);
-    };
-
     function AnimationDecorator(view) {
         this.view = view;
     }
@@ -4651,11 +4592,35 @@
 
             if (options.normalAngle === 0) {
                 initialPosition = stackBase ? stackBase : aboveAxis ? box.y2 : box.y1;
-                target
-                    .css({ "svgBoxTop" : initialPosition,
-                           "svgBoxBottom": initialPosition })
-                    .animate({ "svgBoxTop": box.y1,
-                               "svgBoxBottom": box.y2 });
+
+                var current = viewElement.clone(),
+                    start = +new Date(),
+                    duration = 500,
+                    finish = start + duration,
+                    interval,
+                    easing = jQuery.easing.swing;
+
+                current.points[0][1] = current.points[1][1] = current.points[2][1] =
+                current.points[3][1] = current.points[4][1] = initialPosition;
+                target.attr("d", current.renderPoints());
+
+                var interval = setInterval(function() {
+                    var time = +new Date(),
+                        pos = time > finish ? 1 : (time - start) / duration,
+                        easingPos = easing(pos, time - start, 0, 1);
+
+                    current.points[0][1] = current.points[1][1] = current.points[4][1] =
+                        interpolateValue(initialPosition, box.y1, easingPos);
+
+                    current.points[2][1] = current.points[3][1] =
+                        interpolateValue(initialPosition, box.y2, easingPos);
+
+                    target.attr("d", current.renderPoints());
+
+                    if (time > finish) {
+                        clearInterval(interval);
+                    }
+                }, 10);
             }
         }
     });
@@ -5438,19 +5403,6 @@
         return "";
     }
 
-    function parseSVGPath(path) {
-        var points = path.replace(/[ML]/gi, "").split(" "),
-            i,
-            pointsLength = points.length,
-            result = [];
-
-        for (i = 0; i < pointsLength; i += 2) {
-            result.push({ x: points[i], y: points[i + 1]});
-        }
-
-        return result;
-    }
-
     // renderSVG ==============================================================
     function renderSVG(container, svg) {
         container.innerHTML = svg;
@@ -5730,6 +5682,10 @@
         [].push.apply(first, second);
     }
 
+    function interpolateValue(start, end, progress) {
+        return round(start + (end - start) * progress, COORD_PRECISION);
+    }
+
     // Exports ================================================================
 
     kendo.ui.plugin("Chart", Chart);
@@ -5775,7 +5731,6 @@
         Tooltip: Tooltip,
         Highlight: Highlight,
         deepExtend: deepExtend,
-        parseSVGPath: parseSVGPath,
         Color: Color,
         blendColors: blendColors,
         blendGradient: blendGradient,
