@@ -38,6 +38,41 @@
                 return dataSource;
             }
 
+            test("sync updates current view", function(){
+                var dataSource = setup({
+                    update: function(args) {
+                        args.success(args.data);
+                    }
+                });
+                dataSource.update(1, { foo: "bar" });
+                dataSource.sync();
+                var view = dataSource.view();
+                equal(view.length, 1);
+                equal(view[0].id, 1);
+                equal(view[0].foo, "bar");
+            });
+
+            test("sync with sorting enabled updates current view", function(){
+                var dataSource = setup({
+                    update: function(args) {
+                        args.success(args.data);
+                    }
+                },
+                null,
+                {
+                    sort: {
+                        field: "id",
+                        dir: "desc"
+                    }
+                });
+                dataSource.update(1, { foo: "bar" });
+                dataSource.sync();
+                var view = dataSource.view();
+                equal(view.length, 1);
+                equal(view[0].id, 1);
+                equal(view[0].foo, "bar");
+            });
+
             test("sync calls the update method of the transport for the updated records when batch is multiple", function() {
                 var updated;
                 var dataSource = setup({
