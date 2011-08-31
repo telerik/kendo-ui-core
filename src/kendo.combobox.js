@@ -195,6 +195,9 @@
 
             that.input.bind({
                 keydown: proxy(that._keydown, that),
+                focus: function() {
+                    that.input.parent().addClass("k-state-focused");
+                },
                 blur: function() {
                     that._bluring = setTimeout(function() {
                         if (!that._current) {
@@ -203,6 +206,7 @@
 
                         clearTimeout(that._typing);
                         that._blur();
+                        that.input.parent().removeClass("k-state-focused");
                     }, 100);
                 }
             });

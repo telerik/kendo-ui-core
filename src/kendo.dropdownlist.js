@@ -238,6 +238,7 @@
                         keydown: proxy(that._keydown, that),
                         keypress: proxy(that._keypress, that),
                         focusin: function() {
+                            that.span.parent().addClass("k-state-focused");
                             clearTimeout(that._bluring);
                         },
                         click: function() {
@@ -250,6 +251,7 @@
                         focusout: function(e) {
                             that._bluring = setTimeout(function() {
                                 that._blur();
+                                that.span.parent().removeClass("k-state-focused");
                             }, 100);
                         }
                     })
