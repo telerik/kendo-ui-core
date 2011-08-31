@@ -71,11 +71,11 @@
                 });
 
                 test("appends Y-Axis to children collection", function() {
-                    ok($.inArray(axisY, plotArea.children));
+                    ok($.inArray(axisY, plotArea.children) >= 0);
                 });
 
                 test("appends X-Axis to children collection", function() {
-                    ok($.inArray(axisX, plotArea.children));
+                    ok($.inArray(axisX, plotArea.children) >= 0);
                 });
 
                 test("aligns axises at default crossing values", function() {

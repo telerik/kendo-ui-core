@@ -1261,9 +1261,9 @@
                 model.append(new Legend(legendOptions));
             }
 
-            //plotArea = chart._plotArea = new PlotArea(chart.options);
+            plotArea = chart._plotArea = new PlotArea(chart.options);
             //Should remove this!
-            plotArea = chart._plotArea = new PiePlotArea(chart.options);
+            //plotArea = chart._plotArea = new PiePlotArea(chart.options);
             model.append(plotArea);
             model.reflow();
 
@@ -4072,103 +4072,6 @@
         }
     });
 
-    var PiePlotArea = ChartElement.extend({
-        init: function(options) {
-            var plotArea = this;
-            ChartElement.fn.init.call(plotArea, options);
-
-            plotArea.render();
-        },
-
-        options: {
-            categoryAxis: { },
-            valueAxis: { },
-            series: [ ],
-            plotArea: {
-                margin: {}
-            },
-            background: "",
-            border: {
-                color: BLACK,
-                width: 0
-            }
-        },
-
-        render: function() {
-            var plotArea = this,
-                options = plotArea.options,
-                charts = plotArea.charts = [],
-                categories = options.categoryAxis.categories,
-                i,
-                series = options.series,
-                seriesLength = series.length,
-                currentSeries,
-                pieSeries = [],
-                pieChart,
-                categoriesToAdd;
-
-            for (i = 0; i < seriesLength; i++) {
-                currentSeries = series[i];
-
-                if (currentSeries.type === PIE) {
-                    pieSeries.push(currentSeries);
-                }
-            }
-
-            if (pieSeries.length > 0) {
-                pieChart = new PieChart(plotArea, {
-                    series: pieSeries
-                });
-
-                //categoriesToAdd = math.max(0, lineChart.categoriesCount() - categories.length);
-                //append(options.categoryAxis.categories, new Array(categoriesToAdd));
-
-                charts.push(pieChart);
-            }
-
-            plotArea.append.apply(plotArea, charts);
-        },
-
-        reflow: function(targetBox) {
-            var plotArea = this,
-                charts = plotArea.charts,
-                options = plotArea.options.plotArea,
-                margin = getSpacing(options.margin),
-                plotAreaBox = targetBox.clone(),
-                i;
-
-            plotAreaBox.unpad(margin);
-
-            for (i = 0; i < charts.length; i++) {
-                charts[i].reflow(plotAreaBox);
-            }
-
-            plotArea.box = plotAreaBox;
-        },
-
-        getViewElements: function(view) {
-            var plotArea = this,
-                options = plotArea.options.plotArea,
-                childElements = ChartElement.fn.getViewElements.call(plotArea, view),
-                border = options.border || {},
-                elements = [
-                    view.createRect(plotArea.box, {
-                        fill: options.background,
-                        zIndex: -1
-                    }),
-                    view.createRect(plotArea.box, {
-                        stroke: border.width ? border.color : "",
-                        strokeWidth: border.width,
-                        fill: "",
-                        zIndex: 0,
-                        dashType: border.dashType
-                    })
-                ];
-
-            return [].concat(childElements, elements);
-        }
-    });
-
     var PlotArea = ChartElement.extend({
         init: function(options) {
             var plotArea = this;
@@ -4188,27 +4091,26 @@
             border: {
                 color: BLACK,
                 width: 0
-            }
+            },
+            range: {},
+            invertAxis: false
         },
 
         render: function() {
             var plotArea = this,
                 options = plotArea.options,
-                charts = plotArea.charts = [],
-                range = { min: 0, max: 1 },
-                categories = options.categoryAxis.categories,
-                invertAxes = options.categoryAxis.orientation === VERTICAL,
-                i,
                 series = options.series,
                 seriesLength = series.length,
                 currentSeries,
+                pieSeries = [],
                 barSeries = [],
                 lineSeries = [],
-                barChart,
-                lineChart,
-                categoriesToAdd,
-                firstSeries;
+                renderAxis = true,
+                i;
 
+            options.invertAxes = options.categoryAxis.orientation === VERTICAL,
+            options.range = { min: 0, max: 1 }
+            plotArea.charts = [];
             for (i = 0; i < seriesLength; i++) {
                 currentSeries = series[i];
 
@@ -4222,44 +4124,74 @@
             }
 
             if (barSeries.length > 0) {
-                firstSeries = barSeries[0];
-                invertAxes = firstSeries.type === BAR;
-                barChart = new BarChart(plotArea, {
-                        series: barSeries,
-                        isVertical: !invertAxes,
-                        isStacked: firstSeries.stack,
-                        gap: firstSeries.gap,
-                        spacing: firstSeries.spacing
-                    });
-
-                categoriesToAdd = math.max(0, barChart.categoriesCount() - categories.length);
-                append(options.categoryAxis.categories, new Array(categoriesToAdd));
-
-                range = barChart.valueRange() || range;
-                charts.push(barChart);
+                plotArea.createBarChart(barSeries);
             }
 
             if (lineSeries.length > 0) {
-                firstSeries = lineSeries[0];
+                plotArea.createLineChart(lineSeries);
+            }
+
+            if (pieSeries.length > 0) {
+                plotArea.createPieChart(pieSeries);
+            }
+
+            if (seriesLength != pieSeries.length || seriesLength == 0) {
+                plotArea.createAxes(options.range.min, options.range.max, options.invertAxes);
+            }
+
+            plotArea.append.apply(plotArea, plotArea.charts);
+        },
+
+        createBarChart: function(series) {
+            var plotArea = this,
+                options = plotArea.options,
+                firstSeries = series[0],
+                invertAxes = options.invertAxes = firstSeries.type === BAR,
+                categories = options.categoryAxis.categories,
+                barChart = new BarChart(plotArea, {
+                    series: series,
+                    isVertical: !invertAxes,
+                    isStacked: firstSeries.stack,
+                    gap: firstSeries.gap,
+                    spacing: firstSeries.spacing
+                }),
+                categoriesToAdd = math.max(0, barChart.categoriesCount() - categories.length);
+
+            append(categories, new Array(categoriesToAdd));
+            options.range = barChart.valueRange() || options.range;
+            plotArea.charts.push(barChart);
+        },
+
+        createLineChart: function(series) {
+            var plotArea = this,
+                options = plotArea.options,
+                firstSeries = series[0],
+                categoryAxis = options.categoryAxis,
+                categories = categoryAxis.categories,
+                invertAxes = options.invertAxes = categoryAxis.orientation === VERTICAL,
                 lineChart = new LineChart(plotArea, {
                     // TODO: Rename isVertical to invertAxes, flip logic
                     isVertical: !invertAxes,
                     isStacked: firstSeries.stack,
-                    series: lineSeries
+                    series: series
+                }),
+                categoriesToAdd = math.max(0, lineChart.categoriesCount() - categories.length),
+                lineChartRange = lineChart.valueRange() || options.range;
+
+            append(categories, new Array(categoriesToAdd));
+            options.range.min = math.min(options.range.min, lineChartRange.min);
+            options.range.max = math.max(options.range.max, lineChartRange.max);
+            plotArea.charts.push(lineChart);
+        },
+
+        createPieChart: function(series) {
+            var plotArea = this,
+                options = plotArea.options,
+                pieChart = new PieChart(plotArea, {
+                    series: series
                 });
 
-                categoriesToAdd = math.max(0, lineChart.categoriesCount() - categories.length);
-                append(options.categoryAxis.categories, new Array(categoriesToAdd));
-
-                var lineChartRange = lineChart.valueRange() || range;
-                range.min = math.min(range.min, lineChartRange.min);
-                range.max = math.max(range.max, lineChartRange.max);
-                charts.push(lineChart);
-            }
-
-            plotArea.append.apply(plotArea, charts);
-
-            plotArea.createAxes(range.min, range.max, invertAxes);
+            plotArea.charts.push(pieChart);
         },
 
         createAxes: function(seriesMin, seriesMax, invertAxes) {
@@ -4283,49 +4215,6 @@
             plotArea.append(plotArea.axisX);
         },
 
-        reflow: function(targetBox) {
-            var plotArea = this,
-                charts = plotArea.charts,
-                axisY = plotArea.axisY,
-                axisX = plotArea.axisX,
-                options = plotArea.options.plotArea,
-                margin = getSpacing(options.margin),
-                plotAreaBox = targetBox.clone(),
-                i;
-
-            plotAreaBox.unpad(margin);
-            axisY.reflow(plotAreaBox);
-            axisX.reflow(plotAreaBox);
-
-            plotArea.alignAxes();
-
-            var axisBox = axisY.box.clone().wrap(axisX.box),
-                overflowY = axisBox.height() - plotAreaBox.height(),
-                overflowX = axisBox.width() - plotAreaBox.width(),
-                offsetX = plotAreaBox.x1 - axisBox.x1,
-                offsetY = plotAreaBox.y1 - axisBox.y1;
-
-            axisY.reflow(
-                axisY.box.translate(offsetX, offsetY).shrink(0, overflowY)
-            );
-
-            axisX.reflow(
-                axisX.box.translate(offsetX, offsetY).shrink(overflowX, 0)
-            );
-
-            plotArea.alignAxes();
-
-            for (i = 0; i < charts.length; i++) {
-                charts[i].reflow(plotAreaBox);
-            }
-
-            var lineBoxX = axisX.getAxisLineBox(),
-                lineBoxY = axisY.getAxisLineBox();
-
-            plotAreaBox = lineBoxX.clone().wrap(lineBoxY);
-            plotArea.box = plotAreaBox;
-        },
-
         alignAxes: function() {
             var plotArea = this,
                 axisY = plotArea.axisY,
@@ -4342,6 +4231,77 @@
             axisX.reflow(
                 axisX.box.translate(0, axisCrossingY.y1 - axisCrossingX.y1)
             );
+        },
+
+        reflow: function(targetBox) {
+            var plotArea = this,
+                options = plotArea.options.plotArea,
+                margin = getSpacing(options.margin)
+
+            plotArea.box = targetBox.clone();
+
+            plotArea.box.unpad(margin);
+            plotArea.axisReflow();
+            plotArea.chartsReflow();
+            plotArea.axisWrap();
+        },
+
+        axisReflow: function() {
+            var plotArea = this,
+                axisY = plotArea.axisY,
+                axisX = plotArea.axisX,
+                box = plotArea.box;
+
+            if (axisY || axisX) {
+                axisY.reflow(box);
+                axisX.reflow(box);
+
+                plotArea.alignAxes();
+
+                var axisBox = axisY.box.clone().wrap(axisX.box),
+                    overflowY = axisBox.height() - box.height(),
+                    overflowX = axisBox.width() - box.width(),
+                    offsetX = box.x1 - axisBox.x1,
+                    offsetY = box.y1 - axisBox.y1;
+
+                axisY.reflow(
+                    axisY.box.translate(offsetX, offsetY).shrink(0, overflowY)
+                );
+
+                axisX.reflow(
+                    axisX.box.translate(offsetX, offsetY).shrink(overflowX, 0)
+                );
+
+                plotArea.alignAxes();
+            }
+        },
+
+        chartsReflow: function() {
+            var plotArea = this,
+                charts = plotArea.charts,
+                count = charts.length,
+                box = plotArea.box,
+                i;
+
+            for (i = 0; i < count; i++) {
+                charts[i].reflow(box);
+            }
+
+            plotArea.box = box;
+        },
+
+        axisWrap: function() {
+            var plotArea = this,
+                axisY = plotArea.axisY,
+                axisX = plotArea.axisX,
+                boxX,
+                boxY;
+
+            if (axisY || axisX) {
+                boxX = axisX.getAxisLineBox();
+                boxY = axisY.getAxisLineBox();
+                plotArea.box = boxX.clone().wrap(boxY);
+            }
         },
 
         renderGridLines: function(view, axis, secondaryAxis) {
@@ -4411,8 +4371,8 @@
                 options = plotArea.options.plotArea,
                 axisY = plotArea.axisY,
                 axisX = plotArea.axisX,
-                gridLinesY = plotArea.renderGridLines(view, axisY, axisX),
-                gridLinesX = plotArea.renderGridLines(view, axisX, axisY),
+                gridLinesY = axisY ? plotArea.renderGridLines(view, axisY, axisX) : [],
+                gridLinesX = axisX ? plotArea.renderGridLines(view, axisX, axisY) : [],
                 childElements = ChartElement.fn.getViewElements.call(plotArea, view),
                 border = options.border || {},
                 elements = [
@@ -4431,6 +4391,7 @@
 
             return [].concat(gridLinesY, gridLinesX, childElements, elements);
         }
+
     });
 
     // **************************
@@ -4895,7 +4856,7 @@
                 shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
                 startAngle = piece.startAngle,
                 endAngle = piece.angle + startAngle,
-                isExternalCorner = (endAngle - startAngle) > 180,
+                isReflexAngle = (endAngle - startAngle) > 180,
                 radius = piece.radius,
                 margin = radius * 0.1,
                 lineEndPoint = pie.calculatePoint(startAngle, radius, margin),
@@ -4904,7 +4865,7 @@
 
             return "M" + (lineEndPoint.x + box.x1) + " " + (lineEndPoint.y + box.y1) +
                    " A" + (radius - margin) + " " + (radius - margin) +
-                   " 0 " + (isExternalCorner ? "1" : "0") + ",1 " +
+                   " 0 " + (isReflexAngle ? "1" : "0") + ",1 " +
                    (curveEndPoint.x + box.x1) + " " + (curveEndPoint.y + box.y1) +
                    " L" + (radius + box.x1) + " " + (radius + box.y1) + " z";
         },
