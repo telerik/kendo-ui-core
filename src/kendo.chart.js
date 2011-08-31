@@ -1440,6 +1440,14 @@
     // **************************
     // View Model
     // **************************
+    var Point2D = Class.extend({
+        init: function(x, y) {
+            var point = this;
+            point.x = x;
+            point.y = y;
+        }
+    });
+
     var Box2D = Class.extend({
         init: function(x1, y1, x2, y2) {
             var box = this;
@@ -3465,10 +3473,10 @@
                 halfWidth = box.width() / 2;
 
             if (type === TRIANGLE) {
-                element = view.createPath([
-                    [box.x1 + halfWidth, box.y1],
-                    [box.x1, box.y2],
-                    [box.x2, box.y2]
+                element = view.createPolyline([
+                    new Point2D(box.x1 + halfWidth, box.y1),
+                    new Point2D(box.x1, box.y2),
+                    new Point2D(box.x2, box.y2)
                 ], element.options);
             } else if (type === CIRCLE) {
                 element = view.createCircle([
@@ -3740,7 +3748,7 @@
                     point = currentSeriesPoints[pointIx];
                     if (point) {
                         pointCenter = point.markerBox().center();
-                        linePoints.push([pointCenter.x, pointCenter.y]);
+                        linePoints.push(new Point2D(pointCenter.x, pointCenter.y));
                     } else if (!interpolate) {
                         if (linePoints.length > 1) {
                             lines.push(
@@ -3763,7 +3771,7 @@
 
         createLine: function(lineId, view, points, series, seriesIx) {
             this.registerId(lineId, { seriesIx: seriesIx });
-            return view.createPath(points, {
+            return view.createPolyline(points, {
                 id: lineId,
                 stroke: series.color,
                 strokeWidth: series.width,
@@ -4227,21 +4235,21 @@
 
         createRect: function(box, style) {
             return this.decorate(
-                new SVGPath([
-                        [box.x1, box.y1], [box.x2, box.y1],
-                        [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]
-                    ],
-                    style
+                new SVGLine([new Point2D(box.x1, box.y1),
+                             new Point2D(box.x2, box.y1),
+                             new Point2D(box.x2, box.y2),
+                             new Point2D(box.x1, box.y2)
+                            ], true, style
                 ), box, style
             );
         },
 
         createLine: function(x1, y1, x2, y2, options) {
-            return new SVGPath([[x1, y1], [x2, y2]], options);
+            return new SVGLine([new Point2D(x1, y1), new Point2D(x2, y2)], false, options);
         },
 
-        createPath: function(points, options) {
-            return new SVGPath(points, options);
+        createPolyline: function(points, options) {
+            return new SVGLine(points, false, options);
         },
 
         createCircle: function(center, radius, options) {
@@ -4336,7 +4344,7 @@
     });
 
     var SVGPath = ViewElement.extend({
-        init: function(points, options) {
+        init: function(options) {
             var path = this;
             ViewElement.fn.init.call(path, options);
 
@@ -4354,8 +4362,6 @@
                     "fill='<#= d.options.fill || \"none\" #>'></path>"
                 );
             }
-
-            path.points = points || [];
         },
 
         options: {
@@ -4366,25 +4372,7 @@
 
         clone: function() {
             var path = this;
-            return new SVGPath(path.points, deepExtend({}, path.options));
-        },
-
-        renderPoints: function() {
-            var path = this,
-                points = this.points,
-                count = points.length,
-                strokeWidth = path.options.strokeWidth,
-                shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
-                alignFunc = shouldAlign ? alignToPixel : math.round,
-                first = points[0],
-                result = "M" + alignFunc(first[0]) + " " + alignFunc(first[1]);
-
-            for (var i = 1; i < count; i++) {
-                var p = points[i];
-                result += " L" + alignFunc(p[0]) + " " + alignFunc(p[1]);
-            }
-
-            return result;
+            return new SVGPath(deepExtend({}, path.options));
         },
 
         renderDashType: function () {
@@ -4398,6 +4386,53 @@
             var dashType = this.options.dashType;
 
             return (dashType && dashType != "solid") ? "butt" : "square";
+        }
+    });
+
+
+    var SVGLine = SVGPath.extend({
+        init: function(points, closed, options) {
+            var line = this;
+            SVGPath.fn.init.call(line, options);
+
+            line.points = points;
+            line.closed = closed;
+        },
+
+        renderPoints: function() {
+            var line = this,
+                points = line.points,
+                i,
+                count = points.length,
+                first = points[0],
+                result = "M" + line._print(first);
+
+            for (i = 1; i < count; i++) {
+                result += " " + line._print(points[i]);
+            }
+
+            if (line.closed) {
+                result += " z";
+            }
+
+            return result;
+        },
+
+        clone: function() {
+            var line = this;
+            return new SVGLine(
+                deepExtend([], line.points), line.closed,
+                deepExtend({}, line.options)
+            );
+        },
+
+        _print: function(point) {
+            var line = this,
+                strokeWidth = line.options.strokeWidth,
+                shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
+                align = shouldAlign ? alignToPixel : math.round;
+
+            return align(point.x) + " " + align(point.y);
         }
     });
 
@@ -4591,6 +4626,7 @@
                 target = $("#" + viewElement.options.id);
 
             var current = viewElement.clone(),
+                points = current.points,
                 start = +new Date(),
                 duration = 500,
                 finish = start + duration,
@@ -4598,18 +4634,13 @@
                 easing = jQuery.easing.swing;
 
             if (options.normalAngle === 0) {
-                initialPosition = stackBase ? stackBase : aboveAxis ? box.y2 : box.y1;
-
-                current.points[0][1] = current.points[1][1] = current.points[2][1] =
-                current.points[3][1] = current.points[4][1] = initialPosition;
-                target.attr("d", current.renderPoints());
+                initialPosition = defined(stackBase) ? stackBase : aboveAxis ? box.y2 : box.y1;
+                updateArray(points, Y, initialPosition);
             } else {
-                initialPosition = stackBase ? stackBase : aboveAxis ? box.x1 : box.x2;
-
-                current.points[0][0] = current.points[1][0] = current.points[2][0] =
-                current.points[3][0] = current.points[4][0] = initialPosition;
-                target.attr("d", current.renderPoints());
+                initialPosition = defined(stackBase) ? stackBase : aboveAxis ? box.x1 : box.x2;
+                updateArray(points, X, initialPosition);
             }
+            target.attr("d", current.renderPoints());
 
             var interval = setInterval(function() {
                 var time = +new Date(),
@@ -4617,17 +4648,17 @@
                     easingPos = easing(pos, time - start, 0, 1);
 
                 if (options.normalAngle === 0) {
-                    current.points[0][1] = current.points[1][1] = current.points[4][1] =
+                    points[0].y = points[1].y =
                         interpolateValue(initialPosition, box.y1, easingPos);
 
-                    current.points[2][1] = current.points[3][1] =
-                    interpolateValue(initialPosition, box.y2, easingPos);
+                    points[2].y = points[3].y =
+                        interpolateValue(initialPosition, box.y2, easingPos);
                 } else {
-                    current.points[0][0] = current.points[3][0] = current.points[4][0] =
+                    points[0].x = points[3].x =
                         interpolateValue(initialPosition, box.x1, easingPos);
 
-                    current.points[1][0] = current.points[2][0] =
-                    interpolateValue(initialPosition, box.x2, easingPos);
+                    points[1].x = points[2].x =
+                        interpolateValue(initialPosition, box.x2, easingPos);
                 }
 
                 target.attr("d", current.renderPoints());
@@ -4636,8 +4667,18 @@
                     clearInterval(interval);
                 }
             }, 10);
-        }
+        },
+
     });
+
+    function updateArray(arr, prop, value) {
+        var i,
+            length = arr.length;
+
+        for(i = 0; i < length; i++) {
+            arr[i][prop] = value;
+        }
+    }
 
     var VMLView = ViewBase.extend({
         init: function(options) {
@@ -4711,7 +4752,7 @@
             return new VMLPath([[x1, y1], [x2, y2]], options);
         },
 
-        createPath: function(points, options) {
+        createPolyline: function(points, options) {
             return new VMLPath(points, options);
         },
 
