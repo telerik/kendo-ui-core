@@ -1112,7 +1112,8 @@
                         updated: updated,
                         destroyed: destroyed
                     },
-                    UPDATE
+                    UPDATE,
+                    stampCreator.stamp
                 );
             }
 
@@ -1146,7 +1147,7 @@
                 length,
                 promises = [];
 
-            if (data.length == 0) {
+            if (data.length === 0 || (batch === SINGLE && !data.updated[0] && !data.created[0] && !data.destroyed[0])) {
                 return promises;
             }
 
