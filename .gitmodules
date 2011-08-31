@@ -1,0 +1,3 @@
+[submodule "build/less-js"]
+	path = build/less-js
+	url = https://github.com/cloudhead/less.js.git
