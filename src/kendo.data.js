@@ -1136,7 +1136,7 @@
 
                 that.modelSet.clear();
                 that.modelSet.merge(data);
-                that.trigger(CHANGE);
+                that.fetch();
             });
         },
 
