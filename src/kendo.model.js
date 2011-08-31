@@ -182,7 +182,7 @@
             Observable.call(that);
 
             that.options = options;
-            that.data = [];
+            that.data = options.data;
             that.map = {};
             that.models = {};
 
@@ -282,25 +282,32 @@
             });
         },
 
-        clear: function(data) {
-            this.models = {};
-        },
-
         merge: function(data) {
             var that = this,
-                id,
                 model = that.options.model;
 
-            each(data, function(index, value) {
-                index = that.map[model.id(value)];
+            data = data || [];
 
-                if (index >= 0) {
-                    that.data[index] = value;
-                } else {
-                    that.data.push(value);
+            each(data, function(index, value) {
+                if (value != null) {
+                    index = that.map[model.id(value)];
+
+                    if (index >= 0) {
+                        that.data[index] = value;
+                    } else {
+                        that.data.push(value);
+                    }
                 }
             });
 
+            each(that.models, function(index, model) {
+                if (model.state === UPDATED) {
+                    index = that.map[index];
+                    that.data[index] = extend(true, that.data[index], model.changes());
+                }
+            });
+
+            that.models = {};
             that.refresh(that.data);
         },
 
