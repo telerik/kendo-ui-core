@@ -23,7 +23,7 @@
                 dataSource;
 
             function setup(options) {
-                var dataSource = new DataSource($.extend(true, {
+                dataSource = new DataSource($.extend(true, {
                     batch: "multiple",
                     schema: {
                         model: Model
@@ -62,7 +62,7 @@
 
             test("sync sends array of updated models", function() {
                 var models;
-                var dataSource = setup({
+                dataSource = setup({
                     transport: {
                         update: function(options) {
                             models = options.data.models;
@@ -80,7 +80,7 @@
 
             test("sync sends array of destroyed models", function() {
                 var models;
-                var dataSource = setup({
+                dataSource = setup({
                     transport: {
                         destroy: function(options) {
                             models = options.data.models;
@@ -97,7 +97,7 @@
 
             test("sync sends array of created models", function() {
                 var models;
-                var dataSource = setup({
+                dataSource = setup({
                     transport: {
                         create: function(options) {
                             models = options.data.models;
@@ -113,7 +113,7 @@
             });
 
             test("sync updates models after completion when remote service returns updated data", function() {
-                var dataSource = setup({
+                dataSource = setup({
                     transport: {
                         update: function(options) {
                             options.success([{id: 1, foo: "bar"}]);
@@ -141,8 +141,7 @@
             });
 
             test("sync updates models after multiple updates when service returns", function() {
-
-                var dataSource = setup({
+                dataSource = setup({
                     transport: {
                         read: function(options) {
                             options.success([ { id: 1, foo: "foo"}, { id: 2, foo: "foo"} ]);
@@ -161,7 +160,7 @@
             });
 
             test("sync destroys models after completion when remote service returns nothing", function() {
-                var dataSource = setup({
+                dataSource = setup({
                     transport: {
                         destroy: function(options) {
                             options.success();
@@ -175,7 +174,7 @@
             });
 
             test("sync creates models after completion when remote service returns nothing", function() {
-                var dataSource = setup({
+                dataSource = setup({
                     transport: {
                         create: function(options) {
                             options.success();

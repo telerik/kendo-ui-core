@@ -41,7 +41,7 @@
             test("sync updates current view", function(){
                 var dataSource = setup({
                     update: function(args) {
-                        args.success(args.data);
+                        args.success(args.data.models);
                     }
                 });
                 dataSource.update(1, { foo: "bar" });
@@ -55,7 +55,7 @@
             test("sync with sorting enabled updates current view", function(){
                 var dataSource = setup({
                     update: function(args) {
-                        args.success(args.data);
+                        args.success(args.data.models);
                     }
                 },
                 null,
@@ -301,7 +301,6 @@
                     url: "foo",
                     responseText: '[{"id": 1, "foo": "bar"}]',
                     response: function() {
-                        ok(true);
                         start();
                     }
                 });

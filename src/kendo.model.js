@@ -182,7 +182,7 @@
             Observable.call(that);
 
             that.options = options;
-            that.data = [];
+            that.data = options.data;
             that.map = {};
             that.models = {};
 

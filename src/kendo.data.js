@@ -979,6 +979,7 @@
             if (Model && !isEmptyObject(model)) {
                 that.modelSet = new ModelSet({
                     model: model,
+                    data: that._data,
                     create: function(e) {
                         that.trigger(CREATE, e);
                     },
@@ -996,7 +997,6 @@
                     sync: noop
                 };
             }
-
 
             if (id) {
                 that.find = proxy(that.modelSet.find, that.modelSet);
@@ -1130,7 +1130,7 @@
                 }
 
                 that.modelSet.merge(data);
-                that.fetch();
+                that._process(that._data);
             });
         },
 
