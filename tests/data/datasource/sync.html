@@ -101,22 +101,6 @@
                 ok(updated === undefined);
             });
 
-            test("sync calls the create method of the transport for the created records when batch is multiple", function() {
-                var created;
-                var dataSource = setup({
-                    create: function(options) {
-                        created = options.data.models;
-                    }
-                });
-
-                dataSource.create({ foo: "bar" });
-                dataSource.create({ foo: "baz" });
-                dataSource.sync();
-
-                equal(created[0].foo, "bar");
-                equal(created[1].foo, "baz");
-            });
-
             test("sync does not call create method if there are no created records", function() {
                 var created;
                 var dataSource = setup({
@@ -128,20 +112,6 @@
                 dataSource.sync();
 
                 ok(created === undefined);
-            });
-
-            test("sync calls the destroy method of the transport for the destroyed records when batch is multiple", function() {
-                var destroyed;
-                var dataSource = setup({
-                    destroy: function(options) {
-                        destroyed = options.data.models;
-                    }
-                });
-
-                dataSource.destroy(1);
-                dataSource.sync();
-
-                equal(destroyed[0].foo, "foo");
             });
 
             test("sync does not call destroy method if there are no destroyed records", function() {
@@ -224,59 +194,6 @@
                 equal(destroyed[0].id, 1);
                 equal(destroyed[0].foo, undefined);
                 equal(destroyed[0].bar, undefined);
-            });
-
-            test("sync with batch=false calls transport update for every record", function() {
-                var updated = [],
-                    dataSource = setup({
-                        update: function(options) {
-                            updated.push(options.data);
-                        }
-                    },
-                    [{ id: 1, foo: "foo"}, { id: 2, foo: "bar"}],
-                    { batch: false });
-
-                dataSource.update(1, { foo: "bar" });
-                dataSource.update(2, { foo: "baz" });
-                dataSource.sync();
-
-                equal(updated.length, 2);
-                equal(updated[0].foo, "bar");
-                equal(updated[1].foo, "baz");
-            });
-
-            test("sync with batch=false calls transport create for every new record", function() {
-               var created = [],
-                    dataSource = setup({
-                        create: function(options) {
-                            created.push(options.data);
-                        }
-                    },
-                    undefined,
-                    { batch: false });
-
-                dataSource.create({ foo: "bar" });
-                dataSource.sync();
-
-                equal(created.length, 1);
-                equal(created[0].foo, "bar");
-            });
-
-            test("sync with batch=false calls transport destroy for destroyed record", function() {
-               var destroyed = [],
-                    dataSource = setup({
-                        destroy: function(options) {
-                            destroyed.push(options.data);
-                        }
-                    },
-                    [{ id: 1, foo: "foo", bar: "bar" }],
-                    { batch: false });
-
-                dataSource.destroy(1);
-                dataSource.sync();
-
-                equal(destroyed.length, 1);
-                equal(destroyed[0].foo, "foo");
             });
 
             test("sync change the state of created model when successful", function() {
@@ -445,7 +362,7 @@
                 dataSource.sync();
             });
 
-            test("sync remove destroyed models and remove its data", function() {
+            test("sync removes destroyed models and remove its data", function() {
                 var data = [{id: 1, foo: "foo"}];
                 var dataSource = setup({
                     destroy: function(options) {
@@ -470,7 +387,7 @@
                 dataSource.sync();
             });
 
-            test("sync merge the results if read before sync complete", function() {
+            test("sync merges the results if read occurs before sync is complete", function() {
                 var dataSource = new DataSource({
                     transport: {
                         read: function(options) {
