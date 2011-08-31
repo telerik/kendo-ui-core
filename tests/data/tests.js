@@ -36,6 +36,18 @@ tests.push(
         title: "datasource.sync"
     },
     {
+        page: "data/datasource/batch-multiple.html",
+        title: "batch multiple requests"
+    },
+    {
+        page: "data/datasource/batch-single.html",
+        title: "batch single request"
+    },
+    {
+        page: "data/datasource/batch-false.html",
+        title: "batch false"
+    },
+    {
         page: "data/datasource/range.html",
         title: "datasource.range"
     },

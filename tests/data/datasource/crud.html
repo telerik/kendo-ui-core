@@ -18,22 +18,18 @@
             var dataSource, data = [], DataSource = kendo.data.DataSource;
 
             function setup(source) {
-                data = source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }];
-
-                var dataSource = new DataSource( {
+                dataSource = new DataSource( {
+                    data : source || [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }],
                     schema: {
                         model: kendo.data.Model.define()
                     }
                 });
 
                 dataSource.read();
-                return dataSource;
             }
 
             module("DataSource crud", {
-                setup: function() {
-                    dataSource = setup();
-                }
+                setup: setup
             });
 
             test("create delegates to the modelset", function() {

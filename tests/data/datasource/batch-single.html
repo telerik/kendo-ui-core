@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Batch multiple requests</title>
+        <script src="../../../src/jquery.js"></script>
+        <script type="text/javascript" src="../../qunit.js"></script>
+        <script type="text/javascript" src="../../qunit-runner.js"></script>
+        <script type="text/javascript" src="../../jquery.mockjax.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.model.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <link rel="stylesheet" href="../../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var DataSource = kendo.data.DataSource,
+                Model = kendo.data.Model.define(),
+                dataSource;
+
+            function setup(options) {
+                var dataSource = new DataSource($.extend(true, {
+                    batch: "single",
+                    schema: {
+                        model: Model
+                    },
+                    transport: {
+                        read: function(options) {
+                            options.success([ {  id: 1, foo: "foo" } ]);
+                        }
+                    },
+                }, options));
+
+                dataSource.read();
+
+                return dataSource;
+            }
+            module("batch single", {
+                setup: function() {
+                    dataSource = setup();                }
+            });
+
+            test("sync sends created destroyed and updated models", function() {
+                var data, method;
+
+                dataSource._send = function() {
+                    models = arguments[0];
+                    method = arguments[1];
+                    return [];
+                }
+
+                dataSource.sync();
+
+                equal(method, "update");
+                ok(models.updated);
+                ok(models.created);
+                ok(models.destroyed);
+            });
+
+            test("sync sends array of updated models", function() {
+                var models;
+                var dataSource = setup({
+                    transport: {
+                        update: function(options) {
+                            models = options.data.models;
+                        }
+                    }
+                });
+
+                dataSource.update(1, { foo: "bar" });
+                dataSource.sync();
+
+                ok(models.updated.length, 1);
+                ok(models.updated[0].id, 1);
+                ok(models.updated[0].foo, "bar");
+            });
+
+            test("sync sends array of destroyed models via the update method of the transport", function() {
+                var models;
+                var dataSource = setup({
+                    transport: {
+                        update: function(options) {
+                            models = options.data.models;
+                        }
+                    }
+                });
+
+                dataSource.destroy(1);
+                dataSource.sync();
+
+                ok(models.destroyed.length, 1);
+                ok(models.destroyed[0].id, 1);
+            });
+
+            test("sync sends array of created models via the update method of the transport", function() {
+                var models;
+                var dataSource = setup({
+                    transport: {
+                        update: function(options) {
+                            models = options.data.models;
+                        }
+                    }
+                });
+
+                dataSource.create({ foo: "bar"});
+                dataSource.sync();
+
+                ok(models.created.length, 1);
+                ok(models.created[0].foo, "bar");
+            });
+
+            test("sync updates models after completion when remote service returns updated data", function() {
+                var dataSource = setup({
+                    transport: {
+                        update: function(options) {
+                            options.success([{id: 1, foo: "bar"}]);
+                        }
+                    }
+                });
+
+                dataSource.update(1, { foo: "bar" });
+                dataSource.sync();
+                equal(dataSource.find(1).foo, "bar");
+            });
+
+            test("sync updates models after completion when remote service returns nothing", function() {
+                var dataSource = setup({
+                    transport: {
+                        update: function(options) {
+                            options.success();
+                        }
+                    }
+                });
+
+                dataSource.update(1, { foo: "bar" });
+                dataSource.sync();
+                equal(dataSource.find(1).foo, "bar");
+            });
+
+            test("sync updates models after multiple updates when service returns", function() {
+                var dataSource = setup({
+                    transport: {
+                        read: function(options) {
+                            options.success([ { id: 1, foo: "foo"}, { id: 2, foo: "foo"} ]);
+                        },
+                        update: function(options) {
+                            options.success();
+                        }
+                    }
+                });
+
+                dataSource.update(1, { foo: "bar" });
+                dataSource.update(2, { foo: "bar" });
+                dataSource.sync();
+                equal(dataSource.find(1).foo, "bar");
+                equal(dataSource.find(2).foo, "bar");
+            });
+
+            test("sync does not send anything if there are no updated destroyed or created models", function() {
+                var called = false;
+
+                var dataSource = setup({
+                    transport: {
+                        update: function(options) {
+                            called = true;
+                        }
+                    }
+                });
+
+                dataSource.sync();
+                ok(called === false);
+            });
+
+            test("sync destroys models after completion when remote service returns nothing", function() {
+                var dataSource = setup({
+                    transport: {
+                        update: function(options) {
+                            options.success();
+                        }
+                    }
+                });
+
+                dataSource.destroy(1);
+                dataSource.sync();
+                equal(dataSource.find(1), undefined);
+            });
+
+            test("sync creates models after completion when remote service returns nothing", function() {
+                var dataSource = setup({
+                    transport: {
+                        update: function(options) {
+                            options.success();
+                        }
+                    }
+                });
+
+                dataSource.create({foo: "bar"});
+                dataSource.sync();
+            });
+
+            test("sync sends updated models to remote transport", function() {
+                var MyTransport = kendo.data.RemoteTransport.extend( {
+                        read: function(options) {
+                            options.success([{ id: 1, foo: "foo" }]);
+                        }
+                    });
+
+                dataSource = setup({
+                    transport: new MyTransport({
+                        update: {
+                            url: "foo"
+                        }
+                    })
+                });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                dataSource.update(1, { foo: "bar" });
+                dataSource.sync();
+                stop(1000);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
