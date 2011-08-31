@@ -3298,6 +3298,7 @@
             }
         },
 
+        // REVIEW: Refactor to stand-alone function
         categoriesCount: function() {
             var chart = this,
                 series = chart.options.series,
@@ -3798,6 +3799,7 @@
         }
     });
 
+    // REVIEW: Rename to PieSector
     var PiePiece = ChartElement.extend({
         init: function(value, options) {
             var piece = this;
@@ -3879,6 +3881,7 @@
             }
         },
 
+        // REVIEW: Move rendering here
         getViewElements: function(view) {
             var element = this;
 
@@ -3915,6 +3918,7 @@
                 currentSeries,
                 currentCategory,
                 currentData,
+                // REVIEW: Does startAngle need to be in options?
                 startAngle = 90,
                 totalAngle,
                 angles,
@@ -3930,6 +3934,7 @@
 
                 for (i = 0; i < data.length; i++) {
                     currentData = data[i];
+                    // REVIEW: Refactor into pointValue: function(data)
                     if ($.isPlainObject(currentData)) {
                         value = currentData.value;
                         currentCategory = currentData.name;
@@ -3952,6 +3957,7 @@
 
             for(i = 0; i < length; i++) {
                 currentData = data[i];
+                // REVIEW: Refactor into pointValue: function(data)
                 if ($.isPlainObject(currentData)) {
                     sum += currentData.value;
                 } else {
@@ -3962,6 +3968,7 @@
             return sum;
         },
 
+        // REVIEW: Rename to sectorAngles
         angles: function(data, total) {
             var length = data.length,
                 currentData,
@@ -3970,6 +3977,7 @@
 
             for(i = 0; i < length; i++) {
                 currentData = data[i];
+                // REVIEW: Refactor into pointValue: function(data)
                 if ($.isPlainObject(currentData)) {
                     angles[i] = currentData.value * (360 / total);
                 } else {
@@ -3980,6 +3988,7 @@
             return angles;
         },
 
+        // REVIEW: Refactor to stand-alone function
         categoriesCount: function() {
             var chart = this,
                 series = chart.options.series,
@@ -4058,6 +4067,7 @@
             return elements;
         },
 
+        // REVIEW: Move rendering to PieSector
         createPie: function (view, piece, series, seriesIx) {
             var pieId = uniqueId(),
                 pieceOptions = piece.options;
@@ -4105,6 +4115,7 @@
                 pieSeries = [],
                 barSeries = [],
                 lineSeries = [],
+                // REVIEW: Rename to renderAxes
                 renderAxis = true,
                 i;
 
@@ -4246,6 +4257,7 @@
             plotArea.axisWrap();
         },
 
+        // REVIEW: Rename to reflowAxes
         axisReflow: function() {
             var plotArea = this,
                 axisY = plotArea.axisY,
@@ -4276,6 +4288,7 @@
             }
         },
 
+        // REVIEW: Rename to reflowCharts
         chartsReflow: function() {
             var plotArea = this,
                 charts = plotArea.charts,
@@ -4612,7 +4625,10 @@
             return new SVGCircle(center, radius, options);
         },
 
+        // REVIEW: Rename to createSector
         createPie: function(piece, options) {
+            // REVIEW: We'll need Sector2D class to hold sector definition.
+            //         Once we have it will use it instead of "piece".
             return new SVGPie(piece, options);
         },
 
@@ -4816,6 +4832,7 @@
         }
     });
 
+    // REFACTOR: Rename to SVGSector
     var SVGPie = ViewElement.extend({
         init: function(piece, options) {
             var pie = this;
@@ -5147,6 +5164,7 @@
             return new VMLCircle(center, radius, options);
         },
 
+        // Rename to createSector
         createPie: function(piece, options) {
             return new VMLPie(piece, options);
         },
@@ -5319,6 +5337,7 @@
         }
     });
 
+    // REVIEW: Rename to VMLSector
     var VMLPie = ViewElement.extend({
         init: function(piece, options) {
             var pie = this;
