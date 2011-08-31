@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calendar rendering</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Calendar rendering</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var calendar = kendo.calendar,
+                templates = new kendo.ui.Calendar().templates,
+                div;
+
+            module("kendo.ui.Calendar initialization", {
+                setup: function() {
+                    div = $("<div />").appendTo(document.body);
+                },
+                teardown: function() {
+                    div.remove();
+                }
+            });
+
+            test("firstDayOfMonth returns correct date", function() {
+                var date = new Date(2011, 7, 31, 10, 10, 5555),
+                    correct = new Date(2011, 7, 1, 10, 10, 5555);
+
+                equal(+calendar.firstDayOfMonth(date), +correct);
+            });
+
+            test("firstVisibleDay returns correct date", function() {
+                var date = new Date(2011, 7, 31, 10, 10, 5555),
+                    correct = new Date(2011, 6, 31, 10, 10, 5555);
+
+                equal(+calendar.firstVisibleDay(date), +correct);
+            });
+
+
+            test("Month view return title", function() {
+                var date = new Date(),
+                    text = kendo.culture().calendar.months.names[date.getMonth()] + " " + date.getFullYear();
+
+                equal(calendar.month.title(date, templates["month"].title), text);
+            });
+
+            test("month view renders days", function() {
+                var today = new Date();
+
+                div.html(calendar.month.content(today, templates["month"].content));
+
+                equal(div.find("thead").find("th").length, 7);
+                equal(div.find("thead").find("th").eq(0).html(), kendo.culture().calendar.days.namesShort[0]);
+                equal(div.find("thead").find("th").eq(0).attr("title"), kendo.culture().calendar.days.names[0]);
+                equal(div.find("thead").find("th").eq(0).attr("abbr"), kendo.culture().calendar.days.namesAbbr[0]);
+
+                equal(div.find("tbody").find("tr").length, 6);
+                equal(div.find("tbody").find("td").length, 42);
+                equal(div.find("tbody").find("a").length, 42);
+            });
+
+            test("month view renderer honors firstDayOfWeek property", function() {
+                var today = new Date(2011, 9, 10);
+
+                kendo.culture().calendar.firstDayOfWeek = 1;
+
+                div.html(calendar.month.content(today, templates["month"].content));
+
+                equal(div.find("thead").find("th").eq(0).html(), kendo.culture().calendar.days.namesShort[1]);
+                equal(div.find("thead").find("th").eq(0).attr("title"), kendo.culture().calendar.days.names[1]);
+                equal(div.find("thead").find("th").eq(0).attr("abbr"), kendo.culture().calendar.days.namesAbbr[1]);
+
+                kendo.culture().calendar.firstDayOfWeek = 0;
+            });
+
+            test("month view honors firstVisibleDay", function() {
+                var today = new Date(2011, 9, 10);
+
+                div.html(calendar.month.content(today, templates["month"].content));
+
+                equal(div.find("tbody").find("a").html(), "25");
+            });
+
+            test("month view renders anchor in td with title", function() {
+                var today = new Date(2011, 9, 10),
+                    firstVisibleDay = calendar.firstVisibleDay(today);
+
+                div.html(calendar.month.content(today, templates["month"].content));
+
+                equal(div.find("tbody").find("a").attr("title"), kendo.toString(firstVisibleDay, "D"));
+                equal(div.find("tbody").find("a").attr("class"), "k-link");
+            });
+
+
+
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
