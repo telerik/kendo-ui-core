@@ -66,11 +66,8 @@ html body .k-button
 }
 
 *+html .k-button { display: inline; zoom: 1 }
-* html .k-button { display: inline; zoom: 1 }
 *+html .k-button { overflow: visible; margin-right: 4px}
-* html .k-button { overflow: visible; margin-right: 4px}
 *+html a.k-button { line-height: 1.6; padding-left: 7px; padding-right: 7px;/*+1*/ }
-* html a.k-button { line-height: 1.6; padding-left: 7px; padding-right: 7px;/*+1*/ }
 
 .k-button-icontext
 {
@@ -106,7 +103,6 @@ body .k-button-icon
     padding-right: 4px;
 }
 *+html a.k-button-icon{padding-left: 5px;padding-right: 5px;}
-* html a.k-button-icon{padding-left: 5px;padding-right: 5px;}
 
 .k-button-icontext
 {
@@ -120,7 +116,6 @@ body .k-button-icon
     vertical-align: top;
 }
 *+html .k-button-icontext .k-icon{margin-right: 4px}
-* html .k-button-icontext .k-icon{margin-right: 4px}
 
 html body .k-button-bare
 {
@@ -164,9 +159,6 @@ html body .k-button-bare
     vertical-align: middle;
 }
 
-* html .k-icon,* html .k-sprite,* html .k-editor-button .k-tool-icon{display: inline;zoom: 1}
-
-* html .k-icon, .k-sprite { text-indent: 0; }
 *+html .k-icon, .k-sprite { text-indent: 0; }
 
 .k-image
@@ -314,8 +306,6 @@ div.k-window
     border-top-right-radius: 5px;
 }
 
-* html .k-window-titlebar { margin-top: -2.1em; }
-
 .k-window-title
 {
     cursor: default;
@@ -400,8 +390,6 @@ div.k-window-content
     margin: 0;
     vertical-align: top;
 }
-
-* html .k-window-actions .k-link { font-size: 0; }
 
 .k-window .k-resize-handle
 {
@@ -570,13 +558,6 @@ div.k-window-content
 {
     vertical-align: middle;
     margin: -3px 3px 0 -6px;
-}
-
-* html .k-tabstrip-items .k-item .k-image,
-* html .k-tabstrip-items .k-item .k-sprite
-{
-    vertical-align: top;
-    margin-top: -1px;
 }
 
 *+html .k-tabstrip-items .k-item .k-image,
@@ -931,7 +912,6 @@ div.k-grid-header .k-header
     table-layout: fixed;
 }
 
-* html .k-grid-content table { width: auto; }
 *+html .k-grid-content table { width: auto; }
 
 .k-grid-toolbar
@@ -966,7 +946,6 @@ div.k-grid-header .k-header
     border-width: 0 0 1px;
 }
 
-* html .k-grid-pager input { vertical-align: middle; }
 *+html .k-grid-pager input { vertical-align: middle; }
 
 .k-grid .k-pager,
@@ -1274,12 +1253,6 @@ div.k-grid-header .k-header
     border-color: #f00 transparent transparent #f00;
 }
 
-* html .k-dirty
-{
-    border-color: #f00 pink pink #f00;
-    filter: chroma(color=pink);
-}
-
 .k-grouping-header,
 .k-grid-toolbar
 {
@@ -1325,8 +1298,6 @@ div.k-grid-header .k-header
     margin: -.1em -.3em -.45em;
 }
 
-* html .k-grid .text-box { width: 90%; }
-
 .k-edit-form-container
 {
     position: relative;
@@ -1353,7 +1324,6 @@ div.k-grid-header .k-header
     display: inline-block;
 }
 
-* html .k-grid-actions{display: inline;zoom: 1;vertical-align: bottom}
 *+html .k-grid-actions{display: inline;zoom: 1;vertical-align: bottom}
 
 .k-grid .k-button,
@@ -1441,7 +1411,6 @@ div.k-dropdown
 }
 
 *+html .k-combobox{overflow: visible} /*positions icon properly*/
-* html .k-combobox{overflow: visible}
 
 .k-dropdown-wrap,
 .k-picker-wrap
@@ -1464,19 +1433,11 @@ div.k-dropdown
     border-style: solid;
 }
 
-* html .k-dropdown-wrap
-{
-    zoom:1; /*otherwise DropDownList won't open unless clicked on the text*/
-}
-
 .k-combobox>.k-dropdown-wrap,
 .k-datepicker>.k-picker-wrap
 {
     padding-right: 22px; /* icon width + input paddings, except IE6 */
 }
-
-* html .k-combobox .k-dropdown-wrap,
-* html .k-datepicker .k-picker-wrap { height: 20px; }
 
 .k-picker-wrap .k-input,
 .k-combobox .k-input
@@ -1500,13 +1461,9 @@ div.k-dropdown
     background:transparent;
 }
 
-/*removes excessive spacing in IE6-7*/
+/*removes excessive spacing in IE7*/
 *+html .k-picker-wrap .k-input,
 *+html .k-combobox .k-input { margin:-1px 0; }
-* html .k-picker-wrap .k-input,
-* html .k-combobox .k-input { margin:-1px 0; }
-
-* html { position: absolute; top: 0; }
 
 .k-picker-wrap .k-select,
 .k-dropdown-wrap .k-select
@@ -1524,9 +1481,6 @@ div.k-dropdown
     top: 0;
     right: 0;
 }
-
-* html .k-picker-wrap .k-select,
-* html .k-dropdown-wrap .k-select { top: 1px; right: 1px; }
 
 .k-combobox .k-select,
 .k-picker-wrap .k-select
@@ -1576,12 +1530,6 @@ div.k-datetimepicker .k-select+.k-select
     text-overflow: ellipsis;
     padding: .25em 0 .15em 3px;
     min-height: 1.35em;
-}
-
-* html .k-dropdown .k-input,
-* html .k-selectbox .k-input
-{
-    height: 1.4em;
 }
 
 .k-picker-wrap .k-select,
@@ -1708,7 +1656,6 @@ div.k-datetimepicker .k-select+.k-select
 }
 
 *+html .k-calendar .k-content{display:block;}
-* html .k-calendar .k-content{display:block;}
 
 .k-calendar .k-animation-container .k-content
 {
@@ -1795,8 +1742,6 @@ div.k-datepicker
 {
     padding-right: 44px;
 }
-
-* html .k-datetimepicker .k-picker-wrap { padding-right: 40px; }
 
 .k-picker-wrap .k-icon
 {
@@ -2412,7 +2357,6 @@ div.k-slider
 }
 
 *+html .k-slider-horizontal { display: inline; zoom: 1; }
-* html .k-slider-horizontal { display: inline; zoom: 1; }
 
 .k-slider-wrap
 {
@@ -2481,7 +2425,6 @@ div.k-slider
 }
 
 *+html .k-slider .k-icon { margin-top: 2px; }
-* html .k-slider .k-icon { margin-top: 2px; }
 
 .k-slider-track,
 .k-slider-selection
@@ -2668,9 +2611,8 @@ div.k-slider
     height: 100%;
 }
 
-/* fixes ticks position and removes spacing between them in IE6-7 */
+/* fixes ticks position and removes spacing between them in IE7 */
 *+html .k-slider-vertical .k-tick { float: left; clear: left; width: 100%; }
-* html .k-slider-vertical .k-tick { float: left; clear: left; width: 100%; }
 
 /*ticks backgrounds*/
 
@@ -3006,7 +2948,6 @@ html .k-upload
 }
 
 *+html .k-dropzone em, *+html .k-upload-button { vertical-align: baseline; }
-* html .k-dropzone em, * html .k-upload-button { vertical-align: baseline; }
 
 .k-dropzone
 {
@@ -3079,7 +3020,6 @@ html .k-upload
 }
 
 *+html .k-upload-files .k-button{line-height: 1;} /*IE7*/
-* html .k-upload-files .k-button{line-height: 1;} /*IE6*/
 
 .k-upload .k-delete,
 .k-upload .k-cancel,
@@ -3266,13 +3206,10 @@ html input.k-breadcrumbs-input
 }
 
 *+html .k-imagebrowser .k-upload-button, *+html .k-imagebrowser .k-upload .k-icon { vertical-align: baseline; position: relative; top: 1px; }
-* html .k-imagebrowser .k-upload-button, * html .k-imagebrowser .k-upload .k-icon { vertical-align: baseline; position: relative; top: 1px; }
 
 *+html .k-imagebrowser .k-upload .k-icon { top: 2px; }
-* html .k-imagebrowser .k-upload .k-icon { top: 2px; }
 
 *+html .k-imagebrowser .k-toolbar .k-button-icon { vertical-align: middle; }
-* html .k-imagebrowser .k-toolbar .k-button-icon { vertical-align: middle; }
 
 .k-addfolder
 {
@@ -3298,11 +3235,6 @@ html input.k-breadcrumbs-input
 .k-tiles-arrange
 {
     float:right;
-}
-
-* html .k-tiles-arrange
-{
-    margin: 3px 0 0;
 }
 
 .k-tiles-arrange .k-arrow-down
@@ -3426,11 +3358,6 @@ html input.k-breadcrumbs-input
 {
 width:628px;
 }
-
-/*
-* html .k-imagebrowser .k-form-text-row input{width:610px;}
-*+html .k-imagebrowser .k-form-text-row input{width:610px;}
-*/
 
 .k-tile-empty
 {

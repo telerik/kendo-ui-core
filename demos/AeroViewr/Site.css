@@ -1604,7 +1604,6 @@ div.k-slider
 }
 
 *+html .k-slider .k-icon { margin-top: 2px; }
-* html .k-slider .k-icon { margin-top: 2px; }
 
 .k-slider-track,
 .k-slider-selection
@@ -1815,7 +1814,6 @@ html .k-upload
 }
 
 *+html .k-dropzone em, *+html .k-upload-button { vertical-align: baseline; }
-* html .k-dropzone em, * html .k-upload-button { vertical-align: baseline; }
 
 .k-dropzone
 {
@@ -1882,7 +1880,6 @@ html .k-upload
 }
 
 *+html .k-upload-files .k-button{line-height: 1;} /*IE7*/
-* html .k-upload-files .k-button{line-height: 1;} /*IE6*/
 
 .k-upload .k-delete,
 .k-upload .k-cancel,
@@ -2084,7 +2081,6 @@ section *, :before, :after
 }
 
 *+html .noHTML5{display:none !important;}
-* html .noHTML5{display:none !important;}
 
 .noHTML5 #main
 {

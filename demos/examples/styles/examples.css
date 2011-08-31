@@ -52,24 +52,6 @@ body
     background-color: transparent;
 }
 
-* html .skinSelector .k-arrow-down,
-* html #nav .k-sprite,
-* html #codeStrip .k-link,
-* html .configuration .configHead,
-* html .configuration .infoHead,
-* html .configuration .configTitle,
-* html .exampleIcon,
-* html .detailCollapsed,
-* html .detailExpanded,
-* html .console div,
-* html #telerik,
-* html #introText dt,
-* html #footer .icon,
-* html .itemsOutline li
-{
-    background-image: url("sprite_ie6.png");
-}
-
 .k-widget, #nav ul
 {
     outline: none;
@@ -94,13 +76,6 @@ body
     min-height:100%;
 }
 
-* html #exceptFooterWrap
-{
-    display:block;
-    width:auto;
-    height:auto;
-}
-
 #exceptFooter
 {
     padding-bottom:100px; /*72px + spacing above footer*/
@@ -119,12 +94,6 @@ body
     max-width:1230px;
     margin-left:auto;
     margin-right:auto;
-}
-
-* html #exceptFooter .centerWrap,
-* html #footer .centerWrap
-{
-    width:960px;
 }
 
 #navmainWrap
@@ -204,11 +173,6 @@ body
     background:no-repeat url(kendo-logo.png);
     text-indent:-4000px;
     overflow:hidden;
-}
-
-* html #logo
-{
-    background-image:url(kendo-logo_ie6.png);
 }
 
 #referenceUrl
@@ -291,7 +255,6 @@ a.bigButton:hover
     height: 72px;
 }
 *+html .overview #header h1 { margin-top: 12px; }
-* html .overview #header h1 { margin-top: 12px; }
 
 .overview #logo
 {
@@ -534,7 +497,6 @@ a.bigButton
     width:33.33%;
 }
 
-* html #topnav li{width:33.3%;}
 *+html #topnav li:first-child{width:33.2%;}
 
 #topnav a
@@ -830,11 +792,6 @@ pre.prettyprint
     overflow: hidden;
 }
 
-* html pre.prettyprint
-{
-    width:100%;
-}
-
 /*console*/
 
 .console
@@ -1033,7 +990,6 @@ pre.prettyprint
 }
 
 *+html #codeStrip .k-item { width: 19.7%; }
-* html #codeStrip .k-item { width: 19.7%; }
 
 #codeStrip .k-state-default
 {
@@ -1565,7 +1521,6 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     background-position: -160px -180px;
 }
 *+html .itemsOutline li { display: inline; zoom: 1; }
-* html .itemsOutline li { display: inline; zoom: 1; }
 
 .itemsOutline .widgets
 {
