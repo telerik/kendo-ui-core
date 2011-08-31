@@ -57,12 +57,17 @@
 .k-loading-image { background-image: url('Black/loading-image.gif'); }
 .k-loading-color { background-color: #666; }
 
+.k-input
+{
+    color: #000;
+}
+
 .k-widget,
 .k-link:link,
 .k-link:active,
 .k-link:visited,
 .k-popup,
-.k-input,
+.k-dropdown .k-input,
 .k-grid .k-header,
 .k-tabstrip .k-content
 {
