@@ -37,6 +37,7 @@
 
 .k-link.k-state-hover,
 .k-list>.k-state-hover,
+.k-autocomplete,
 .k-list>.k-state-focused,
 .k-list>.k-state-selected,
 .k-dropdown-wrap .k-input,
@@ -57,11 +58,6 @@
 .k-loading-image { background-image: url('Black/loading-image.gif'); }
 .k-loading-color { background-color: #666; }
 
-.k-input
-{
-    color: #000;
-}
-
 .k-widget,
 .k-link:link,
 .k-link:active,
@@ -72,6 +68,12 @@
 .k-tabstrip .k-content
 {
     color: #fff;
+}
+
+.k-input
+{
+    outline: 0;
+    color: #000;
 }
 
 .k-popup,
@@ -115,6 +117,9 @@
 }
 
 .k-dropdown-wrap,
+.k-autocomplete,
+.k-dropdown-wrap.k-state-focused,
+.k-autocomplete.k-state-focused,
 .k-toolbar,
 .k-grouping-header,
 .k-grid-pager,
@@ -297,6 +302,10 @@ td.k-group-cell
     background-color: #454545;
 }
 
+.k-autocomplete:hover,
+.k-autocomplete.k-state-focused,
+.k-dropdown-wrap.k-state-focused,
+.k-dropdown-wrap.k-state-focused:hover,
 .k-dropdown-wrap.k-state-hover,
 .k-dropdown-wrap.k-state-hover:hover,
 .k-dropdown-wrap.k-state-active,
@@ -307,11 +316,12 @@ td.k-group-cell
     -moz-box-shadow: 2px 2px 2px 0 #888;
 }
 
-.k-combobox .k-state-hover .k-input
+.k-autocomplete .k-input,
+.k-combobox .k-input
 {
-    -webkit-box-shadow: inset 0 0 2px 2px #ccc;
-    -moz-box-shadow: inset 0 0 2px 2px #ccc;
-    box-shadow: inset 0 0 2px 2px #ccc;
+    -webkit-box-shadow: inset 0 0 3px 3px #ddd;
+    -moz-box-shadow: inset 0 0 3px 3px #ddd;
+    box-shadow: inset 0 0 3px 3px #ddd;
 }
 
 .k-list.k-group

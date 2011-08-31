@@ -20,6 +20,7 @@
         FITTED = "fitted",
         EFFECTS = "effects",
         ACTIVE = "k-state-active",
+        ACTIVEBORDER = "k-state-active-border",
         ACTIVECHILDREN = ".k-dropdown-wrap, .k-link",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         extend = $.extend,
@@ -75,10 +76,16 @@
                     }
 
                     if (options.anchor != BODY) {
+                        var direction = options.anchor.hasClass(ACTIVEBORDER + "-down") ? "down" : "up";
+                        var dirClass = ACTIVEBORDER + "-" + direction;
+
                         options.anchor
+                            .removeClass(dirClass)
                             .children(ACTIVECHILDREN)
                             .removeClass(ACTIVE)
-                            .css({ borderRadius: "4px" });
+                            .removeClass(dirClass);
+
+                        that.element.removeClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
                     }
 
                     that._closing = false;
@@ -127,6 +134,7 @@
         open: function() {
             var that = this,
                 options = that.options,
+                direction = "down",
                 animation;
 
             if (!that.visible()) {
@@ -151,6 +159,10 @@
                 animation = extend({}, options.animation.open);
 
                 if (that._update()) {
+                    if (animation.effects.match(direction)) {
+                        direction = "up";
+                    }
+
                     animation.effects = kendo.parseEffects(animation.effects, true);
                 }
 
@@ -158,10 +170,15 @@
                 that.element.kendoStop(true).kendoAnimate(animation);
 
                 if (options.anchor != BODY) {
+                    var dirClass = ACTIVEBORDER + "-" + direction;
+
                     options.anchor
+                        .addClass(dirClass)
                         .children(ACTIVECHILDREN)
                         .addClass(ACTIVE)
-                        .css({ borderRadius: "4px 4px 0 0" });
+                        .addClass(dirClass);
+
+                    that.element.addClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
                 }
             }
         },
