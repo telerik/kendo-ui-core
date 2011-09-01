@@ -4245,7 +4245,8 @@
         },
 
         createLine: function(x1, y1, x2, y2, options) {
-            return new SVGLine([new Point2D(x1, y1), new Point2D(x2, y2)], false, options);
+            return new SVGLine([new Point2D(x1, y1),
+                                new Point2D(x2, y2)], false, options);
         },
 
         createPolyline: function(points, options) {
@@ -4748,20 +4749,22 @@
 
         createRect: function(box, style) {
             return this.decorate(
-                new VMLPath(
-                    [[box.x1, box.y1], [box.x2, box.y1],
-                    [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
-                    style
+                new VMLLine([new Point2D(box.x1, box.y1),
+                             new Point2D(box.x2, box.y1),
+                             new Point2D(box.x2, box.y2),
+                             new Point2D(box.x1, box.y2)
+                            ], true, style
                 )
             );
         },
 
         createLine: function(x1, y1, x2, y2, options) {
-            return new VMLPath([[x1, y1], [x2, y2]], options);
+            return new VMLLine([new Point2D(x1, y1),
+                                new Point2D(x2, y2)], false, options);
         },
 
         createPolyline: function(points, options) {
-            return new VMLPath(points, options);
+            return new VMLLine(points, options);
         },
 
         createCircle: function(center, radius, options) {
@@ -4853,7 +4856,7 @@
     });
 
     var VMLPath = ViewElement.extend({
-        init: function(points, options) {
+        init: function(options) {
             var path = this;
             ViewElement.fn.init.call(path, options);
 
@@ -4869,35 +4872,60 @@
                 );
             }
 
-            path.points = points || [];
             path.stroke = new VMLStroke(path.options);
             path.fill = new VMLFill(path.options);
         },
 
         options: {
             fill: ""
+        }
+    });
+
+    var VMLLine = VMLPath.extend({
+        init: function(points, closed, options) {
+            var line = this;
+            VMLPath.fn.init.call(line, options);
+
+            line.points = points;
+            line.closed = closed;
         },
 
         renderPoints: function() {
-            var points = this.points,
+            var line = this,
+                points = line.points,
+                i,
                 count = points.length,
-                first = points[0],
-                result = "m " + round(first[0]) + "," + round(first[1]);
+                result = "m " + line._print(points[0]);
 
             if (count > 1) {
-                result += " l";
+                result += " l ";
 
-                for (var i = 1; i < count; i++) {
-                    var p = points[i];
-                    result += " " + round(p[0]) + "," + round(p[1]);
+                for (i = 1; i < count; i++) {
+                    result += line._print(points[i]);
 
                     if (i < count - 1) {
-                        result += ",";
+                        result += ", ";
                     }
                 }
             }
 
+            if (line.closed) {
+                result += " x e";
+            }
+
             return result;
+        },
+
+        clone: function() {
+            var line = this;
+            return new VMLLine(
+                deepExtend([], line.points), line.closed,
+                deepExtend({}, line.options)
+            );
+        },
+
+        _print: function(point) {
+            return math.round(point.x) + "," + math.round(point.y);
         }
     });
 
