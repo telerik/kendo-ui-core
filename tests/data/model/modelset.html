@@ -14,13 +14,11 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var modelSet, Model = kendo.data.Model, ModelSet = kendo.data.ModelSet;
+            var modelSet, Model = kendo.data.Model, ModelSet = kendo.data.ModelSet, MyModel = Model.define( { id: "id" });
 
             function setup(options) {
                 modelSet = new ModelSet($.extend({
-                    model: Model.define({
-                            id: "id"
-                        })
+                    model: MyModel
                     }, options)
                 );
             }
@@ -54,6 +52,39 @@
                 equal(modelSet.get(1), modelSet.get(1));
             });
 
+            test("create adds the specified values to original data", function() {
+                var data = [ { id: 1} ];
+                setup( { data: data });
+
+                modelSet.create( { foo: "bar" } );
+
+                equal(data.length, 2);
+                equal(data[1].foo, "bar");
+            });
+
+            test("create returns a new model istance", function() {
+                var model = modelSet.create( { foo: "bar" } );
+
+                ok(model instanceof Model);
+            });
+
+            test("create returns a new model istance with specified fields", function() {
+                var model = modelSet.create( { foo: "bar" } );
+
+                equal(model.get("foo"), "bar");
+            });
+
+            test("create adds the specified model", function() {
+                var model = new MyModel({ foo: "bar" }) ;
+
+                equal(model, modelSet.create(model));
+            });
+
+            test("get after create returns the same model istance", function() {
+                var model = modelSet.create( { foo: "bar" } );
+
+                equal(model, modelSet.get(model.id()));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

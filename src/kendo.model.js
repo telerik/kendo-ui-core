@@ -207,6 +207,24 @@
             }
 
             return model;
+        },
+
+        create: function(data) {
+            var that = this, model;
+
+            if (data instanceof Model) {
+                model = data;
+                data = data.pristine;
+            } else {
+                model = new that._model(data);
+            }
+
+            that._data.push(data);
+
+            that._modelMap[model.id()] = model;
+            that._dataMap[model.id()] = data;
+
+            return model;
         }
     });
 
