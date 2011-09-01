@@ -1,7 +1,6 @@
 /* requries */
 var fs = require("fs"),
     sys = require("sys"),
-    wrench = require("./wrench"),
     docs = require("./docs"),
     kendoBuild = require("./kendo-build"),
     cssmin = require("./lib/cssmin").cssmin,
@@ -354,9 +353,9 @@ function build(origin, destination, kendoCDN) {
     });
 
     console.log("copying resources...");
-    wrench.copyDirSyncRecursive(examplesLocation, outputPath);
-    wrench.copyDirSyncRecursive(originJS, outputPath + "/js");
-    wrench.copyDirSyncRecursive(originStyles, outputPath + "/styles", true);
+    kendoBuild.copyDirSyncRecursive(examplesLocation, outputPath);
+    kendoBuild.copyDirSyncRecursive(originJS, outputPath + "/js");
+    kendoBuild.copyDirSyncRecursive(originStyles, outputPath + "/styles", true);
     fs.unlinkSync(outputPath + "/template.html");
     fs.unlinkSync(outputPath + "/buildTemplate.html");
 

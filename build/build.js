@@ -1,6 +1,5 @@
 var fs = require("fs");
 var sys = require("sys");
-var wrench = require("./wrench");
 var kendoBuild = require("./kendo-build");
 var cssmin = require("./lib/cssmin").cssmin;
 var examples = require("./examples");
@@ -129,8 +128,8 @@ function processScripts() {
 }
 
 function processStyles() {
-    wrench.copyDirSyncRecursive("styles", SOURCESTYLES);
-    wrench.copyDirSyncRecursive("styles", STYLES);
+    kendoBuild.copyDirSyncRecursive("styles", SOURCESTYLES);
+    kendoBuild.copyDirSyncRecursive("styles", STYLES);
 
     fs.readdirSync(STYLES).forEach(function(file) {
         if (cssRegExp.test(file)) {
@@ -156,7 +155,7 @@ console.log("processing styles...");
 processStyles();
 
 console.log("copying culture js files...");
-wrench.copyDirSyncRecursive("src/cultures", JS + "/cultures");
+kendoBuild.copyDirSyncRecursive("src/cultures", JS + "/cultures");
 
 console.log("copying license agreement...");
 var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");
