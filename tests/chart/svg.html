@@ -34,10 +34,6 @@
                     }]
                 };
 
-            function mapPoints(points) {
-                return $.map(points, function(p) { return [[p.x, p.y]] });
-            }
-
             (function() {
                 var view;
 
@@ -502,24 +498,24 @@
             })();
 
             (function() {
-                var path;
+                var line;
 
                 module("SVGLine");
 
                 test("draws line", function() {
-                    path = new Chart.SVGLine([
+                    line = new Chart.SVGLine([
                         new Point2D(10, 20),
                         new Point2D(20, 30)
                     ], false);
-                    equal(path.renderPoints(), "M10 20 20 30");
+                    equal(line.renderPoints(), "M10 20 20 30");
                 });
 
                 test("draws closed line", function() {
-                    path = new Chart.SVGLine([
+                    line = new Chart.SVGLine([
                         new Point2D(10, 20),
                         new Point2D(20, 30)
                     ], true);
-                    equal(path.renderPoints(), "M10 20 20 30 z");
+                    equal(line.renderPoints(), "M10 20 20 30 z");
                 });
 
             })();
