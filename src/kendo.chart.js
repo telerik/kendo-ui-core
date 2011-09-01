@@ -3031,7 +3031,7 @@
                 visible: false
             },
             animation: {
-                type: "bar"
+                type: BAR
             }
         },
 
@@ -4601,7 +4601,7 @@
                 box = element.options.box,
                 animation = element.options.animation;
 
-            if (animation && animation.type === "bar") {
+            if (animation && animation.type === BAR) {
                 view.animations.push(
                     new BarAnimation(element, element.options)
                 );
@@ -4683,15 +4683,6 @@
             }, 10);
         }
     });
-
-    function updateArray(arr, prop, value) {
-        var i,
-            length = arr.length;
-
-        for(i = 0; i < length; i++) {
-            arr[i][prop] = value;
-        }
-    }
 
     var VMLView = ViewBase.extend({
         init: function(options) {
@@ -5790,6 +5781,15 @@
 
     function interpolateValue(start, end, progress) {
         return round(start + (end - start) * progress, COORD_PRECISION);
+    }
+
+    function updateArray(arr, prop, value) {
+        var i,
+            length = arr.length;
+
+        for(i = 0; i < length; i++) {
+            arr[i][prop] = value;
+        }
     }
 
     // Exports ================================================================
