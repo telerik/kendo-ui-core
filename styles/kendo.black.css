@@ -89,7 +89,13 @@
 
 .k-group
 {
-    background-color:#4d4d4d;
+    border-color: #262626;
+}
+
+.k-list.k-group
+{
+    border-color: transparent;
+    background-color: #4d4d4d;
 }
 
 .k-content,
