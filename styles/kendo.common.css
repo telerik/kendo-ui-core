@@ -1432,6 +1432,7 @@ div.k-dropdown
 }
 
 .k-list.k-group.k-state-active-border-up,
+.k-autocomplete.k-state-active-border-up,
 .k-dropdown-wrap.k-state-active-border-up
 {
     -webkit-border-radius: 0 0 4px 4px;
@@ -1440,6 +1441,7 @@ div.k-dropdown
 }
 
 .k-list.k-state-active-border-down,
+.k-autocomplete.k-state-active-border-down,
 .k-dropdown-wrap.k-state-active-border-down
 {
     -webkit-border-radius: 4px 4px 0 0;
@@ -1474,16 +1476,17 @@ div.k-dropdown
 .k-autocomplete,
 .k-dropdown-wrap.k-state-focused,
 .k-dropdown-wrap.k-state-hover,
+.k-picker-wrap.k-state-focused,
 .k-picker-wrap.k-state-hover
 {
-    -webkit-transition: -webkit-box-shadow .2s ease-out;
-    -moz-transition: -moz-box-shadow .2s ease-out;
-    -o-transition: box-shadow .2s ease-out;
-    -ms-transition: box-shadow .2s ease-out;
+    -webkit-transition: -webkit-box-shadow .15s ease-out;
+    -moz-transition: -moz-box-shadow .15s ease-out;
+    -o-transition: box-shadow .15s ease-out;
+    -ms-transition: box-shadow .15s ease-out;
 }
 
-.k-combobox>.k-dropdown-wrap,
-.k-datepicker>.k-picker-wrap
+.k-combobox .k-dropdown-wrap,
+.k-datepicker .k-picker-wrap
 {
     padding-right: 26px; /* icon width + input paddings, except IE6 */
 }
