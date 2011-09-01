@@ -1335,7 +1335,7 @@
                     tooltip.show(point);
                 }
 
-                //highlight.show(point);
+                highlight.show(point);
 
                 $(doc.body).bind(MOUSEMOVE_TRACKING, proxy(chart._mouseMove, chart));
             }
@@ -1360,7 +1360,7 @@
                         if (tooltip.visible) {
                             tooltip.show(seriesPoint);
                         }
-                        //highlight.show(seriesPoint);
+                        highlight.show(seriesPoint);
                     }
                 }
             } else {
