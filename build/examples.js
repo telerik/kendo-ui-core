@@ -2,7 +2,7 @@
 var fs = require("fs"),
     sys = require("sys"),
     wrench = require("./wrench"),
-    jsdoctoolkit = require("./node-jsdoc-toolkit/app/nodemodule").jsdoctoolkit,
+    docs = require("./docs"),
     uglify = require("./uglify-js").uglify,
     parser = require("./uglify-js").parser,
     cssmin = require("./lib/cssmin").cssmin,
@@ -409,8 +409,7 @@ function build(origin, destination, kendoCDN) {
         fs.unlinkSync(outputPath + "/js/people.min.js", "utf8");
     }
 
-    console.log("building documentation...");
-    jsdoctoolkit.run(["-c=build/docs.conf"]);
+    docs.build();
 
     console.log("processing examples...");
     processExamplesDirectory(outputPath);
