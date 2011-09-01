@@ -1256,6 +1256,7 @@
             chart.element.css("position", "relative");
             chart._view = model.getView();
             chart._viewElement = chart._view.renderTo(chart.element[0]);
+            chart._view.playAnimations();
             chart._attachEvents();
         },
 
@@ -4198,8 +4199,6 @@
             viewElement = container.firstChild;
             view.alignToScreen(viewElement);
 
-            view.playAnimations();
-
             return viewElement;
         },
 
@@ -4371,6 +4370,10 @@
         clone: function() {
             var path = this;
             return new SVGPath(deepExtend({}, path.options));
+        },
+
+        renderPoints: function() {
+            // Overriden by inheritors
         },
 
         renderDashType: function () {
@@ -4725,8 +4728,6 @@
             }
 
             container.innerHTML = view.render();
-
-            view.playAnimations();
 
             return container.firstChild;
         },
@@ -5793,6 +5794,7 @@
 
     deepExtend(Chart, {
         Box2D: Box2D,
+        Point2D: Point2D,
         Text: Text,
         BarLabel: BarLabel,
         ChartElement: ChartElement,
@@ -5816,6 +5818,7 @@
         SVGGroup: SVGGroup,
         SVGText: SVGText,
         SVGPath: SVGPath,
+        SVGLine: SVGLine,
         SVGCircle: SVGCircle,
         SVGOverlayDecorator: SVGOverlayDecorator,
         SVGPaintDecorator: SVGPaintDecorator,
@@ -5823,6 +5826,7 @@
         VMLText: VMLText,
         VMLRotatedText: VMLRotatedText,
         VMLPath: VMLPath,
+        VMLLine: VMLLine,
         VMLCircle: VMLCircle,
         VMLGroup: VMLGroup,
         VMLOverlayDecorator: VMLOverlayDecorator,
