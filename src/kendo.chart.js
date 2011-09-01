@@ -4261,9 +4261,6 @@
             return new SVGLinearGradient(options);
         },
 
-        createBarAnimation: function(bar, options) {
-        },
-
         alignToScreen: function(element) {
             try {
                 var ctm = element.getScreenCTM ? element.getScreenCTM() : null;
@@ -4398,6 +4395,10 @@
 
             line.points = points;
             line.closed = closed;
+        },
+
+        refresh: function(domElement) {
+            $(domElement).attr("d", this.renderPoints());
         },
 
         renderPoints: function() {
@@ -4599,7 +4600,7 @@
 
             if (animation && animation.type === "bar") {
                 view.animations.push(
-                    new SVGBarAnimation(element, element.options)
+                    new BarAnimation(element, element.options)
                 );
             }
 
@@ -4607,7 +4608,7 @@
         }
     }
 
-    var SVGBarAnimation = Class.extend({
+    var BarAnimation = Class.extend({
         init: function(viewElement, options) {
             var anim = this;
 
@@ -4650,7 +4651,7 @@
                 initialPosition = defined(stackBase) ? stackBase : aboveAxis ? left : right;
                 updateArray(currentPoints, X, initialPosition);
             }
-            target.attr("d", current.renderPoints());
+            current.refresh(target);
 
             interval = setInterval(function() {
                 time = +new Date();
@@ -4671,7 +4672,7 @@
                         interpolateValue(initialPosition, right, easingPos);
                 }
 
-                target.attr("d", current.renderPoints());
+                current.refresh(target);
 
                 if (time > finish) {
                     clearInterval(interval);
@@ -4696,7 +4697,8 @@
 
             view.decorators.push(
                 new VMLOverlayDecorator(view),
-                new VMLGradientDecorator(view)
+                new VMLGradientDecorator(view),
+                new AnimationDecorator(view)
             );
 
             view.template = VMLView.template;
@@ -4716,11 +4718,15 @@
         },
 
         renderTo: function(container) {
+            var view = this;
+
             if (doc.namespaces) {
                 doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
             }
 
-            container.innerHTML = this.render();
+            container.innerHTML = view.render();
+
+            view.playAnimations();
 
             return container.firstChild;
         },
@@ -4890,6 +4896,10 @@
             line.closed = closed;
         },
 
+        refresh: function(domElement) {
+            $(domElement).find("path").attr("v", this.renderPoints());
+        },
+
         renderPoints: function() {
             var line = this,
                 points = line.points,
@@ -4910,7 +4920,7 @@
             }
 
             if (line.closed) {
-                result += " x e";
+                result += " x";
             }
 
             return result;
