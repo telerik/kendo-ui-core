@@ -225,6 +225,16 @@
             that._dataMap[model.id()] = data;
 
             return model;
+        },
+
+        update: function(id, data) {
+            var model = this.get(id);
+
+            if (model) {
+                model.set(data);
+            }
+
+            return model;
         }
     });
 

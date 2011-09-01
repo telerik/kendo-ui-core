@@ -85,6 +85,26 @@
 
                 equal(model, modelSet.get(model.id()));
             });
+
+            test("update sets the specified fields", function() {
+                setup( { data: [ { id: 1} ] });
+
+                modelSet.update(1, { foo: "bar" });
+
+                var model = modelSet.get(1);
+
+                equal(model.get("foo"), "bar");
+            });
+
+            test("update returns the updated model", function() {
+                setup( { data: [ { id: 1} ] });
+
+                ok(modelSet.update(1) instanceof Model);
+            });
+
+            test("update returns undefined if a model with the specified id does not exist", function() {
+                equal(modelSet.update(1), undefined);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
