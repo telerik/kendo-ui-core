@@ -19,7 +19,8 @@
                 plotArea,
                 lineChart,
                 root,
-                view;
+                view,
+                pointCoordinates;
 
             function setupLineChart(plotArea, options) {
                 view = new ViewStub();
@@ -31,6 +32,7 @@
 
                 lineChart.reflow();
                 lineChart.getViewElements(view);
+                pointCoordinates = mapPoints(view.log.path[0].points);
             }
 
             (function() {
@@ -497,7 +499,7 @@
                         ]
                     });
 
-                    same(view.log.path[0].points, [
+                    same(pointCoordinates, [
                         [ 0.5, 2 ], [ 1.5, 2 ]
                     ]);
                 });
@@ -519,7 +521,7 @@
                         ]
                     });
 
-                    same(view.log.path[0].points, [
+                    same(pointCoordinates, [
                         [ 1.5, 2 ], [ 2.5, 2 ]
                     ]);
                 });
@@ -531,7 +533,7 @@
                         ]
                     });
 
-                    same(view.log.path[0].points, [
+                    same(pointCoordinates, [
                         [ 0.5, 2 ], [ 1.5, 2 ], [ 3.5, 2 ]
                     ]);
                 });
@@ -543,7 +545,7 @@
                         ]
                     });
 
-                    same(view.log.path[0].points, [
+                    same(pointCoordinates, [
                         [ 0.5, 2 ], [ 1.5, 2 ], [ 2.5, 2 ], [ 3.5, 2 ]
                     ]);
                 });
@@ -1031,7 +1033,11 @@
 
                 test("renders triangle", function() {
                     createShape({ type: "triangle" });
-                    same(view.log.path[0].points, [[SIZE / 2, 0], [0, SIZE], [SIZE, SIZE]]);
+                    var path = view.log.path[0];
+                    same(mapPoints(path.points), [
+                        [SIZE / 2, 0], [0, SIZE], [SIZE, SIZE]
+                    ]);
+                    ok(path.closed);
                 });
 
                 test("renders circle", function() {

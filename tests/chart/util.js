@@ -42,8 +42,8 @@ ViewStub.prototype = {
         return new kendo.ui.Chart.ViewElement(options);
     },
 
-    createPath: function(points, style) {
-        this.log.path.push({ points: points, style: style });
+    createPolyline: function(points, closed, style) {
+        this.log.path.push({ points: points, closed: closed, style: style });
         return new kendo.ui.Chart.ViewElement(style);
     },
 
