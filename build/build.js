@@ -4,7 +4,7 @@ var wrench = require("./wrench");
 var uglify = require("./uglify-js").uglify;
 var parser = require("./uglify-js").parser;
 var cssmin = require("./lib/cssmin").cssmin;
-var examples = require("./build-examples");
+var examples = require("./examples");
 var spawn = require('child_process').spawn;
 
 var date = new Date();
