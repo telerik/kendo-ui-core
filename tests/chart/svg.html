@@ -107,26 +107,31 @@
                     ok(path instanceof Chart.SVGLine);
                 });
 
+                test("createPolyline sets closed option", function() {
+                    var path = view.createPolyline([], true);
+                    ok(path.closed);
+                });
+
                 test("createPolyline sets fill color", function() {
-                    var path = view.createPolyline([], { fill: "#cf0" });
+                    var path = view.createPolyline([], false, { fill: "#cf0" });
 
                     equals(path.options.fill, "#cf0");
                 });
 
                 test("createPolyline sets stroke color", function() {
-                    var path = view.createPolyline([], { stroke: "#cf0" });
+                    var path = view.createPolyline([], false, { stroke: "#cf0" });
 
                     equals(path.options.stroke, "#cf0");
                 });
 
                 test("createPolyline sets stroke width", function() {
-                    var path = view.createPolyline([], { strokeWidth: 2});
+                    var path = view.createPolyline([], false, { strokeWidth: 2});
 
                     equals(path.options.strokeWidth, 2);
                 });
 
                 test("createPolyline sets dashType", function() {
-                    var path = view.createPolyline([], { dashType: "dot"});
+                    var path = view.createPolyline([], false, { dashType: "dot"});
 
                     equals(path.options.dashType, "dot");
                 });

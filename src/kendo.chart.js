@@ -3478,7 +3478,7 @@
                     new Point2D(box.x1 + halfWidth, box.y1),
                     new Point2D(box.x1, box.y2),
                     new Point2D(box.x2, box.y2)
-                ], element.options);
+                ], true, element.options);
             } else if (type === CIRCLE) {
                 element = view.createCircle([
                     round(box.x1 + halfWidth, COORD_PRECISION),
@@ -3772,7 +3772,7 @@
 
         createLine: function(lineId, view, points, series, seriesIx) {
             this.registerId(lineId, { seriesIx: seriesIx });
-            return view.createPolyline(points, {
+            return view.createPolyline(points, false, {
                 id: lineId,
                 stroke: series.color,
                 strokeWidth: series.width,
@@ -4248,8 +4248,8 @@
                                 new Point2D(x2, y2)], false, options);
         },
 
-        createPolyline: function(points, options) {
-            return new SVGLine(points, false, options);
+        createPolyline: function(points, closed, options) {
+            return new SVGLine(points, closed, options);
         },
 
         createCircle: function(center, radius, options) {
