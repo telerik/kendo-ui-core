@@ -90,12 +90,12 @@
 .k-group
 {
     border-color: #262626;
+    background-color: #4d4d4d;
 }
 
 .k-list.k-group
 {
     border-color: transparent;
-    background-color: #4d4d4d;
 }
 
 .k-content,
