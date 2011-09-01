@@ -212,12 +212,7 @@
         create: function(data) {
             var that = this, model;
 
-            if (data instanceof Model) {
-                model = data;
-                data = data.pristine;
-            } else {
-                model = new that._model(data);
-            }
+            model = new that._model(data);
 
             that._data.push(data);
 
@@ -235,6 +230,29 @@
             }
 
             return model;
+        },
+
+        destroy: function(id) {
+            var that = this,
+                idx,
+                length,
+                model,
+                data = that._dataMap[id];
+
+            if (data) {
+                for (idx = 0, length = that._data.length; idx < length; idx++) {
+                    if (that._data[idx] === data) {
+                        model = that.get(id);
+
+                        delete that._modelMap[id];
+                        delete that._dataMap[id];
+
+                        that._data.splice(idx, 1);
+
+                        return model;
+                    }
+                }
+            }
         }
     });
 

@@ -74,12 +74,6 @@
                 equal(model.get("foo"), "bar");
             });
 
-            test("create adds the specified model", function() {
-                var model = new MyModel({ foo: "bar" }) ;
-
-                equal(model, modelSet.create(model));
-            });
-
             test("get after create returns the same model istance", function() {
                 var model = modelSet.create( { foo: "bar" } );
 
@@ -99,12 +93,41 @@
             test("update returns the updated model", function() {
                 setup( { data: [ { id: 1} ] });
 
-                ok(modelSet.update(1) instanceof Model);
+                equal(modelSet.update(1).id(), 1);
             });
 
             test("update returns undefined if a model with the specified id does not exist", function() {
                 equal(modelSet.update(1), undefined);
             });
+
+            test("destroy removes the specified model from the data", function() {
+                var data = [ { id: 1} ];
+                setup( { data: data });
+
+                modelSet.destroy(1);
+
+                equal(data.length, 0);
+            });
+
+            test("destroy returns the destroyed model", function() {
+                var data = [ { id: 1} ];
+                setup( { data: data });
+
+                equal(modelSet.destroy(1).id(), 1);
+            });
+
+            test("destroy returns undefined if a model with the specified id does not exist", function() {
+                equal(modelSet.destroy(1), undefined);
+            });
+
+            test("get after destroy returns undefined", function() {
+                var data = [ { id: 1} ];
+                setup( { data: data });
+
+                modelSet.destroy(1);
+                equal(modelSet.get(1), undefined);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
