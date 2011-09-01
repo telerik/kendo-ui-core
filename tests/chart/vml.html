@@ -14,6 +14,7 @@
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
+                Point2D = Chart.Point2D,
                 view = new ViewElementStub(),
                 contentElementStub = {
                     render: function() { return "Content"; }
@@ -78,16 +79,17 @@
                     equal(text.content, "Text");
                 });
 
-                test("createRect returns VMLPath", function() {
+                test("createRect returns VMLLine", function() {
                     var rect = view.createRect(10, 20, 100, 100);
-                    ok(rect instanceof Chart.VMLPath);
+                    ok(rect instanceof Chart.VMLLine);
                 });
 
                 test("createRect draws rectangle", function() {
                     var rect = view.createRect(new Box2D(10, 20, 110, 220));
-                    deepEqual(rect.points, [
-                        [10, 20], [110, 20], [110, 220], [10, 220], [10, 20]
-                    ]);
+                    deepEqual(
+                        mapPoints(rect.points),
+                        [[10, 20], [110, 20], [110, 220], [10, 220]]
+                    );
                 });
 
                 test("createRect sets fill color", function() {
@@ -96,46 +98,41 @@
                     equal(rect.options.fill, "#f00");
                 });
 
-                test("createLine returns VMLPath", function() {
+                test("createLine returns VMLLine", function() {
                     var line = view.createLine();
-                    ok(line instanceof Chart.VMLPath);
+                    ok(line instanceof Chart.VMLLine);
                 });
 
                 test("createLine draws a line", function() {
                     var line = view.createLine(10, 20, 100, 200);
-                    deepEqual(line.points, [ [10, 20], [100, 200] ]);
+                    deepEqual(mapPoints(line.points), [ [10, 20], [100, 200] ]);
                 });
 
-                test("createLine draws a line", function() {
-                    var line = view.createLine(10, 20, 100, 200);
-                    deepEqual(line.points, [ [10, 20], [100, 200] ]);
-                });
-
-                test("createPath returns VMLPath", function() {
-                    var path = view.createPath();
+                test("createPolyline returns VMLLine", function() {
+                    var path = view.createPolyline();
                     ok(path instanceof Chart.VMLPath);
                 });
 
-                test("createPath sets fill color", function() {
-                    var path = view.createPath([], { fill: "#cf0" });
+                test("createPolyline sets fill color", function() {
+                    var path = view.createPolyline([], false, { fill: "#cf0" });
 
                     equals(path.options.fill, "#cf0");
                 });
 
-                test("createPath sets stroke color", function() {
-                    var path = view.createPath([], { stroke: "#cf0" });
+                test("createPolyline sets stroke color", function() {
+                    var path = view.createPolyline([], false, { stroke: "#cf0" });
 
                     equals(path.options.stroke, "#cf0");
                 });
 
-                test("createPath sets stroke width", function() {
-                    var path = view.createPath([], { strokeWidth: 2});
+                test("createPolyline sets stroke width", function() {
+                    var path = view.createPolyline([], false, { strokeWidth: 2});
 
                     equals(path.options.strokeWidth, 2);
                 });
 
-                test("createPath sets stroke width", function() {
-                    var path = view.createPath([], { dashType: "dot" });
+                test("createPolyline sets stroke width", function() {
+                    var path = view.createPolyline([], false, { dashType: "dot" });
 
                     equals(path.options.dashType, "dot");
                 });
@@ -368,7 +365,8 @@
                 });
 
                 test("sets position on the shape of the text", function() {
-                    ok(text.render().indexOf("position: absolute; top: 0px; left: 0px; width: 1px; height: 1px;") > -1);
+                    ok(text.render().indexOf(
+                        "position: absolute; top: 0px; left: 0px; width: 1px; height: 1px;") > -1);
                 });
 
                 test("sets font", function() {
@@ -392,7 +390,7 @@
                 var path;
 
                 function createPath(options) {
-                    path = new Chart.VMLPath([[10, 20]], options);
+                    path = new Chart.VMLPath(options);
                 }
 
                 module("VMLPath", {
@@ -404,10 +402,11 @@
                 test("renders path tag", function() {
                     equal(path.render()
                             .replace(/\<kvml:shape.*?\>/, "<kvml:shape>")
+                            .replace(/\<kvml:path.*?\/\>/, "<kvml:path\/>")
                             .replace(/\<kvml:stroke.*?\/\>/, "")
                             .replace(/\<kvml:fill.*?\/\>/, ""),
                     "<kvml:shape>" +
-                        "<kvml:path v='m 10,20 e' />" +
+                        "<kvml:path/>" +
                     "</kvml:shape>");
                 });
 
@@ -421,15 +420,6 @@
 
                 test("sets coordsize", function() {
                     ok(path.render().indexOf("coordsize='1 1'") > -1);
-                });
-
-                test("moves to first point", function() {
-                    equal(path.renderPoints(), "m 10,20");
-                });
-
-                test("draws line", function() {
-                    path.points.push([20, 30], [40, 50]);
-                    equal(path.renderPoints(), "m 10,20 l 20,30, 40,50");
                 });
 
                 test("creates stroke", function() {
@@ -493,6 +483,29 @@
                 test("renders id", function() {
                     path.options.id = "id";
                     ok(path.render().indexOf("id='id'") > -1);
+                });
+
+            })();
+
+            (function() {
+                var line;
+
+                module("VMLLine");
+
+                test("draws line", function() {
+                    line = new Chart.VMLLine([
+                        new Point2D(10, 20),
+                        new Point2D(20, 30)
+                    ], false);
+                    equal(line.renderPoints(), "m 10,20 l 20,30");
+                });
+
+                test("draws closed line", function() {
+                    line = new Chart.VMLLine([
+                        new Point2D(10, 20),
+                        new Point2D(20, 30)
+                    ], true);
+                    equal(line.renderPoints(), "m 10,20 l 20,30 x");
                 });
 
             })();
@@ -762,7 +775,7 @@
                 module("VMLOverlayDecorator", {
                     setup: function() {
                         view = new Chart.VMLView();
-                        rect = new Chart.VMLPath([[10, 20]], {
+                        rect = new Chart.VMLPath({
                             fill: "#fff",
                             fillOpacity: 0.5,
                             overlay: "glass",

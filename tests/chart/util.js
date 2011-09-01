@@ -74,3 +74,7 @@ function stubMethod(fn, methodName, stub, callback) {
     }
 }
 
+function mapPoints(points) {
+    return $.map(points, function(p) { return [[p.x, p.y]] });
+}
+

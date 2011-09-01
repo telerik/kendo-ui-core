@@ -4770,8 +4770,8 @@
                                 new Point2D(x2, y2)], false, options);
         },
 
-        createPolyline: function(points, options) {
-            return new VMLLine(points, options);
+        createPolyline: function(points, closed, options) {
+            return new VMLLine(points, closed, options);
         },
 
         createCircle: function(center, radius, options) {
@@ -4885,6 +4885,10 @@
 
         options: {
             fill: ""
+        },
+
+        renderPoints: function() {
+            // Overriden by inheritors
         }
     });
 
