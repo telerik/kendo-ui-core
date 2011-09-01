@@ -19,7 +19,13 @@ function generateSkins(skinsFolder) {
             if (e) {
                 console.log("ERROR: `" + theme + "` theme generation failed: " + e.message);
             } else {
-                console.log("theme `" + themeName + "` generated successfully.");
+                fs.writeFile(skinsFolder + "kendo." + themeName + ".css", css, "utf8", function(err) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    console.log("theme `" + themeName + "` generated successfully.");
+                });
             }
         });
     });
