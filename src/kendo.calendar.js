@@ -1,7 +1,16 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        Component = ui.Component;
+        Component = ui.Component,
+        IFTEMPLATE = '<# if(data.getDate) { #> {0} <# } else { #> <# } #>',
+        ANCHORSTART = '<a class="k-link" href="#">',
+        ANCHOREND = '</a>',
+        METAVIEWOBJECT = {
+            length: 12,
+            columns: 4,
+            html: '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>'
+        };
+
 
     var Calendar = Component.extend({
         init: function(element, options) {
@@ -18,25 +27,24 @@
             templates: {
                 month: {
                     title: "<#=kendo.culture().calendar.months.names[data.getMonth()]#> <#= data.getFullYear()#>",
-                    content: '<a class="k-link" href="#" title="<#=kendo.toString(data,"D")#>"><#=data.getDate()#></a>'
+                    content: IFTEMPLATE.replace("{0}", '<a class="k-link" href="#" title="<#=kendo.toString(data,"D")#>"><#=data.getDate()#></a>')
                 },
                 year: {
                     title: "<#=data.getFullYear()#>",
-                    content: "<#=window.kendo.culture().calendar.month.names[data.getMonth()]#>"
+                    content: IFTEMPLATE.replace("{0}", ANCHORSTART + "<#= kendo.culture().calendar.months.namesAbbr[data.getMonth()]#>" + ANCHOREND)
                 },
                 decade: {
-                    title: "",
-                    content: ""
+                    title: "<# var start = data.getFullYear(); start = start - start % 10; #><#=start#>-<#=start + 9#>",
+                    content: IFTEMPLATE.replace("{0}", ANCHORSTART + "<#=data.getFullYear()#>" + ANCHOREND)
                 },
                 century: {
-                    title: "",
-                    content: ""
+                    title: "<# var start = data.getFullYear(); start = start - start % 100; #><#=start#>-<#=start + 99#>",
+                    content: IFTEMPLATE.replace("{0}", ANCHORSTART + "<# var start = data.getFullYear(); start = start - start % 10; #><#=start#>-<#=start + 9#>" + ANCHOREND)
                 }
             }
         },
 
         navigateDown: function() {
-            var focusedDate = this.focusedDate;
         },
 
         _header: function() {
@@ -68,6 +76,8 @@
             });
         }
     });
+
+    kendo.ui.Calendar = Calendar;
 
     var calendar = {
         msPerMinute: 60000,
@@ -115,41 +125,130 @@
             title: function(date, template) {
                 return template(date);
             },
-            content: function(date, template) {
-                var currentCalendar = kendo.culture().calendar,
-                    firstDayIdx = currentCalendar.firstDayOfWeek,
-                    days = currentCalendar.days,
-                    names = days.names,
-                    abbr = days.namesAbbr,
-                    short = days.namesShort,
-                    html = '<table class="k-content" summary="calendar widget"><thead><tr>',
-                    idx = 0;
-
-                date = calendar.firstVisibleDay(date);
-
-                names = shiftArray(names, firstDayIdx);
-                abbr = shiftArray(abbr, firstDayIdx);
-                short = shiftArray(short, firstDayIdx);
+            content: function(options) {
+                var idx = 0,
+                currentCalendar = kendo.culture().calendar,
+                firstDayIdx = currentCalendar.firstDayOfWeek,
+                days = currentCalendar.days,
+                names = shiftArray(days.names, firstDayIdx),
+                abbr = shiftArray(days.namesAbbr, firstDayIdx),
+                short = shiftArray(days.namesShort, firstDayIdx),
+                start = calendar.firstVisibleDay(options.date),
+                min = options.min,
+                max = options.max,
+                template = options.template,
+                html = '<table class="k-content" summary="calendar widget"><thead><tr>';
 
                 for (; idx < 7; idx++) {
                     html += '<th abbr="' + abbr[idx] + '" scope="col" title="' + names[idx] + '">' + short[idx] + '</th>';
                 }
 
-                html += "</tr></thead><tbody><tr>";
+                start.setDate(start.getDate() - 1);
 
-                for (idx = 0; idx < 42; idx++) {
-                    if (idx != 0 && idx % 7 == 0) {
-                        html += "</tr><tr>";
+                $.extend(options, {
+                    min: new Date(min.getFullYear(), min.getMonth(), min.getDate()),
+                    max: new Date(max.getFullYear(), max.getMonth(), max.getDate()),
+                    html: html += "</tr></thead><tbody><tr>",
+                    start: start,
+                    length: 42,
+                    columns: 7,
+                    setter: function(date) {
+                        date.setDate(date.getDate() + 1);
                     }
+                });
 
-                    html += "<td>"+ template(date) + "</td>";
+                return render(options);
+            }
+        },
 
-                    date.setDate(date.getDate() + 1);
-                }
+        year: {
+            title: function(date, template) {
+                return template(date);
+            },
+            content: function(options) {
+                var min = options.min,
+                    max = options.max;
 
-                return html + "</tr></tbody></table>";
+                $.extend(options,
+                METAVIEWOBJECT, {
+                    min: new Date(min.getFullYear(), min.getMonth(), 1),
+                    max: new Date(max.getFullYear(), max.getMonth(), 1),
+                    start: new Date(options.date.getFullYear(), 0, 1),
+                    setter: function(date, idx) {
+                        date.setMonth(idx);
+                    }
+                });
+
+                return render(options);
+            }
+        },
+        decade: {
+            title: function(date, template) {
+                return template(date);
+            },
+            content: function(options) {
+                var year = options.date.getFullYear();
+
+                year = year - year % 10 - 1;
+
+                $.extend(options,
+                METAVIEWOBJECT, {
+                    min: new Date(options.min.getFullYear(), 0, 1),
+                    max: new Date(options.max.getFullYear(), 0, 1),
+                    start: new Date(year, 0, 1),
+                    setter: function(date, idx) {
+                        date.setFullYear(year + idx);
+                    }
+                });
+
+                return render(options);
+            }
+        },
+        century: {
+            title: function(date, template) {
+                return template(date);
+            },
+            content: function(options) {
+                var year = options.date.getFullYear();
+
+                year = year - year % 100 - 10;
+
+                $.extend(options,
+                METAVIEWOBJECT, {
+                    min: new Date(options.min.getFullYear() - 10, 0, 1),
+                    max: new Date(options.max.getFullYear(), 0, 1),
+                    start: new Date(year, 0, 1),
+                    setter: function(date, idx) {
+                        date.setFullYear(year + idx * 10);
+                    }
+                });
+
+                return render(options);
             }
         }
+    }
+
+    function render(options) {
+        var idx = 0,
+            html = options.html,
+            template = options.template,
+            start = options.start;
+
+        for(; idx < options.length; idx++) {
+            if (idx > 0 && idx % options.columns == 0) {
+                html += "</tr><tr>";
+            }
+
+            options.setter(start, idx);
+
+            html += "<td>" + options.template(inRange(start, options.min, options.max) ? start : {}) + "</td>";
+        }
+
+        return html + "</tr></tbody></table>";
+    }
+
+    function inRange(date, min, max) {
+        return +date >= +min && +date <= +max;
     }
 
     function shiftArray(array, idx) {
@@ -158,5 +257,4 @@
 
     kendo.calendar = calendar;
 
-    kendo.ui.Calendar = Calendar;
 })(jQuery);
