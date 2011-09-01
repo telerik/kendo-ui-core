@@ -1431,16 +1431,16 @@ div.k-dropdown
     border-radius: 4px;
 }
 
-.k-group.k-state-active-border-up,
-.k-state-active-border-up
+.k-list.k-group.k-state-active-border-up,
+.k-dropdown-wrap.k-state-active-border-up
 {
     -webkit-border-radius: 0 0 4px 4px;
     -moz-border-radius: 0 0 4px 4px;
     border-radius: 0 0 4px 4px;
 }
 
-.k-group.k-state-active-border-down,
-.k-state-active-border-down
+.k-list.k-state-active-border-down,
+.k-dropdown-wrap.k-state-active-border-down
 {
     -webkit-border-radius: 4px 4px 0 0;
     -moz-border-radius: 4px 4px 0 0;
