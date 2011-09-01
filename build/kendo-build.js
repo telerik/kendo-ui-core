@@ -41,7 +41,7 @@ function copyDirSyncRecursive(sourceDir, newDirLocation, skipClean) {
 
         if (fileInfo.isDirectory()) {
             fs.mkdirSync(destinationPath, fileInfo.mode);
-            copyDirSyncRecursive(sourcePath, newDirLocation + "/" + files[i]);
+            copyDirSyncRecursive(sourcePath, destinationPath);
         } else if (fileInfo.isSymbolicLink()) {
             fs.symlinkSync(fs.readlinkSync(sourcePath), destinationPath);
         } else {

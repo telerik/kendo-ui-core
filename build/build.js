@@ -1,24 +1,25 @@
-var fs = require("fs");
-var sys = require("sys");
-var kendoBuild = require("./kendo-build");
-var cssmin = require("./lib/cssmin").cssmin;
-var examples = require("./examples");
-var spawn = require('child_process').spawn;
+var fs = require("fs"),
+    sys = require("sys"),
+    themes = require("./themes"),
+    kendoBuild = require("./kendo-build"),
+    cssmin = require("./lib/cssmin").cssmin,
+    examples = require("./examples"),
+    spawn = require('child_process').spawn,
 
-var date = new Date();
-var STAT = fs.statSync("./");
-var VERSION = process.argv[2] || generateVersion();
-var KENDOCDN = process.argv[3] || "http://cdn.kendostatic.com/" + VERSION;
-var RELEASE = "release/";
-var DEPLOY = "deploy/";
-var PATH = DEPLOY + "kendoUI";
-var JS = PATH + "/js";
-var STYLES = PATH + "/styles";
-var SOURCE = PATH + "/source";
-var SOURCEJS = SOURCE + "/js";
-var SOURCESTYLES = SOURCE + "/styles";
-var ONLINEEXAMPLES = DEPLOY + "onlineExamples";
-var count = 0;
+    date = new Date(),
+    STAT = fs.statSync("./"),
+    VERSION = process.argv[2] || generateVersion(),
+    KENDOCDN = process.argv[3] || "http://cdn.kendostatic.com/" + VERSION,
+    RELEASE = "release/",
+    DEPLOY = "deploy/",
+    PATH = DEPLOY + "kendoUI",
+    JS = PATH + "/js",
+    STYLES = PATH + "/styles",
+    SOURCE = PATH + "/source",
+    SOURCEJS = SOURCE + "/js",
+    SOURCESTYLES = SOURCE + "/styles",
+    ONLINEEXAMPLES = DEPLOY + "onlineExamples",
+    count = 0;
 
 var cssRegExp = /\.css$/;
 
@@ -150,6 +151,9 @@ createDirectories();
 //processing
 console.log("processing scripts...");
 processScripts();
+
+console.log("building themes...");
+themes.build();
 
 console.log("processing styles...");
 processStyles();
