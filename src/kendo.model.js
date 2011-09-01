@@ -177,183 +177,36 @@
 
     var ModelSet = Observable.extend({
         init: function(options) {
-            var that = this;
-
-            Observable.call(that);
-
-            that.options = options;
-            that.data = options.data;
-            that.map = {};
-            that.models = {};
-
-            that.bind([CREATE, UPDATE, DESTROY], options);
-        },
-
-        model: function(id) {
             var that = this,
-                model = that.models[id];
+                idx,
+                length,
+                data,
+                model;
 
-            if(!model) {
-                model = new that.options.model(that.find(id));
-                that.models[model.id()] = model;
-                model.bind(CHANGE, function() {
-                    that.trigger(UPDATE, { model: model });
-                });
-            }
-
-            return model;
-        },
-
-        changes: function(id) {
-            var that = this,
-                model = that.models[id];
-
-            if (model && model.state === UPDATED) {
-                return model.changes();
-            }
-        },
-
-        hasChanges: function(id) {
-            var that = this,
-                model,
-                models = that.models,
-                id;
-
-            if (id === undefined) {
-                for (id in models) {
-                    if (models[id].state !== PRISTINE) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            model = models[id];
-
-            return !!model && model.state === UPDATED;
-        },
-
-        find: function(id) {
-            return this.data[this.map[id]];
-        },
-
-        refresh: function(data) {
-            var that = this, id = that.options.model.id, idx, length, map = {};
+            that._data = data = options.data || [];
+            that._model = model = options.model;
+            that._dataMap = {};
+            that._modelMap = {};
 
             for (idx = 0, length = data.length; idx < length; idx++) {
-                map[id(data[idx])] = idx;
+                that._dataMap[model.id(data[idx])] = data[idx];
             }
-
-            that.map = map;
-            that.data = data;
         },
 
-        select: function(state, selector) {
-            var models = this.models,
-                result = [],
-                model,
-                selector = selector || function(o) { return o; },
-                id;
-
-            for (id in models) {
-                model = models[id];
-
-                if(model.state === state) {
-                    result.push(selector(model));
-                }
-            }
-
-            return result;
-        },
-
-        sync: function(data) {
-            var updated = this.select(UPDATED),
-                model = this.options.model,
-                models = this.models, id;
-
-            each(updated, function() {
-                var id = this.id();
-                each(data, function() {
-                    if (id === model.id(this)) {
-                        delete models[id];
-                    }
-                });
-            });
-        },
-
-        merge: function(data) {
+        get: function(id) {
             var that = this,
-                model = that.options.model;
+                data,
+                model = that._modelMap[id];
 
-            data = data || [];
+            if (!model) {
+                data = that._dataMap[id];
 
-            each(data, function(index, value) {
-                if (value != null) {
-                    index = that.map[model.id(value)];
-
-                    if (index >= 0) {
-                        that.data[index] = value;
-                    } else {
-                        that.data.push(value);
-                    }
+                if (data) {
+                    model = that._modelMap[id] = new that._model(data);
                 }
-            });
-
-            each(that.models, function(index, model) {
-                if (model.state === UPDATED) {
-                    index = that.map[index];
-                    that.data[index] = extend(true, that.data[index], model.changes());
-                }
-            });
-
-            that.models = {};
-            that.refresh(that.data);
-        },
-
-        create: function(index, values) {
-            var that = this,
-                data = that.data,
-                model = that.model();
-
-            if (typeof index !== "number") {
-                values = index;
-                index = undefined;
             }
-
-            model.set(values);
-
-            index = index !== undefined ? index : data.length;
-
-            data.splice(index, 0, model.data);
-
-            that.refresh(data);
-
-            that.trigger(CREATE, { model: model });
 
             return model;
-        },
-
-        update: function(id, values) {
-            var that = this, model = that.model(id);
-
-            if (model) {
-                model.set(values);
-            }
-        },
-
-        destroy: function(id) {
-            var that = this, model = that.model(id);
-
-            if (model) {
-                that.data.splice(that.map[id], 1);
-
-                model.destroy();
-
-                that.refresh(that.data);
-
-                that.trigger(DESTROY, { model: model });
-            }
         }
     });
 
