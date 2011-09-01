@@ -2,6 +2,7 @@
 var fs = require("fs"),
     sys = require("sys"),
     docs = require("./docs"),
+    themes = require("./themes"),
     kendoBuild = require("./kendo-build"),
     cssmin = require("./lib/cssmin").cssmin,
 
@@ -364,6 +365,8 @@ function build(origin, destination, kendoCDN) {
     } else {
         fs.writeFileSync(outputPath + "/web.config", fs.readFileSync("web.config", "utf8"), "utf8");
     }
+
+    themes.build();
 
     copyResources(
         examplesLocation + "/styles/",
