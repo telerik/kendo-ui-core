@@ -1,8 +1,7 @@
 var fs = require("fs");
 var sys = require("sys");
 var wrench = require("./wrench");
-var uglify = require("./uglify-js").uglify;
-var parser = require("./uglify-js").parser;
+var kendoBuild = require("./kendo-build");
 var cssmin = require("./lib/cssmin").cssmin;
 var examples = require("./examples");
 var spawn = require('child_process').spawn;
@@ -118,19 +117,13 @@ function processScripts() {
 
         all += data;
 
-        var ast = parser.parse(data);
-        ast = uglify.ast_mangle(ast);
-        ast = uglify.ast_squeeze(ast);
-        data = uglify.gen_code(ast);
+        data = kendoBuild.minifyJs(data);
 
         fs.writeFileSync(JS + "/" + file.replace(".js", ".min.js"), data);
 
     });
 
-    var ast = parser.parse(all);
-        ast = uglify.ast_mangle(ast);
-        ast = uglify.ast_squeeze(ast);
-        all = uglify.gen_code(ast);
+    all = kendoBuild.minifyJs(all);
 
     fs.writeFileSync(JS + "/kendo.all.min.js", all);
 }

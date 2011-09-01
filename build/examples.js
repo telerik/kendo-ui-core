@@ -3,8 +3,7 @@ var fs = require("fs"),
     sys = require("sys"),
     wrench = require("./wrench"),
     docs = require("./docs"),
-    uglify = require("./uglify-js").uglify,
-    parser = require("./uglify-js").parser,
+    kendoBuild = require("./kendo-build"),
     cssmin = require("./lib/cssmin").cssmin,
 
 /* options  */
@@ -388,10 +387,7 @@ function build(origin, destination, kendoCDN) {
             if (kendoCDN) {
                 console.log("compressing " + file + "...");
 
-                var ast = parser.parse(data);
-                ast = uglify.ast_mangle(ast);
-                ast = uglify.ast_squeeze(ast);
-                data = uglify.gen_code(ast);
+                data = kendoBuild.minifyJs(data);
             }
 
             return data;

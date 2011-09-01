@@ -1,5 +1,4 @@
-var uglify = require("./uglify-js").uglify;
-var parser = require("./uglify-js").parser;
+var kendoBuild = require("./kendo-build");
 var fs = require("fs");
 var path = require("path");
 var sys = require("sys");
@@ -28,12 +27,8 @@ function processFileGroup(group, path, matcher) {
         }
     }
 
-    var ast = parser.parse(script);
+    script = kendoBuild.minifyJs(script);
 
-    ast = uglify.ast_mangle(ast);
-    ast = uglify.ast_squeeze(ast);
-
-    script = uglify.gen_code(ast);
     fs.writeFileSync("live/js/" + group + ".all.min.js", script);
 }
 
