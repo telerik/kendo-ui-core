@@ -4598,7 +4598,7 @@
 
             if (animation && animation.type === "bar") {
                 view.animations.push(
-                    new SVGBarAnimation(element, box, element.options)
+                    new SVGBarAnimation(element, element.options)
                 );
             }
 
@@ -4607,58 +4607,67 @@
     }
 
     var SVGBarAnimation = Class.extend({
-        init: function(viewElement, box, options) {
+        init: function(viewElement, options) {
             var anim = this;
 
             anim.viewElement = viewElement;
-            anim.box = box;
-            anim.options = options;
+            anim.options = deepExtend({}, anim.options, options);
+        },
+
+        options: {
+            duration: 500,
+            easing: "swing"
         },
 
         play: function() {
             var anim = this,
                 viewElement = anim.viewElement,
-                box = anim.box,
                 options = anim.options,
                 stackBase = options.animation.stackBase,
                 aboveAxis = options.aboveAxis,
                 initialPosition,
-                target = $("#" + viewElement.options.id);
-
-            var current = viewElement.clone(),
-                points = current.points,
+                target = $("#" + viewElement.options.id),
+                top = viewElement.points[0].y,
+                bottom = viewElement.points[3].y,
+                left = viewElement.points[0].x,
+                right = viewElement.points[1].x,
+                current = viewElement.clone(),
+                currentPoints = current.points,
                 start = +new Date(),
-                duration = 500,
+                duration = options.duration,
                 finish = start + duration,
+                easing = jQuery.easing[options.easing],
                 interval,
-                easing = jQuery.easing.swing;
+                time,
+                pos,
+                easingPos;
 
             if (options.normalAngle === 0) {
-                initialPosition = defined(stackBase) ? stackBase : aboveAxis ? box.y2 : box.y1;
-                updateArray(points, Y, initialPosition);
+                initialPosition = defined(stackBase) ? stackBase : aboveAxis ? bottom : top;
+                updateArray(currentPoints, Y, initialPosition);
             } else {
-                initialPosition = defined(stackBase) ? stackBase : aboveAxis ? box.x1 : box.x2;
-                updateArray(points, X, initialPosition);
+                initialPosition = defined(stackBase) ? stackBase : aboveAxis ? left : right;
+                updateArray(currentPoints, X, initialPosition);
             }
             target.attr("d", current.renderPoints());
 
-            var interval = setInterval(function() {
-                var time = +new Date(),
-                    pos = time > finish ? 1 : (time - start) / duration,
-                    easingPos = easing(pos, time - start, 0, 1);
+            interval = setInterval(function() {
+                time = +new Date();
+                pos = time > finish ? 1 : (time - start) / duration;
+                easingPos = easing(pos, time - start, 0, 1);
 
                 if (options.normalAngle === 0) {
-                    points[0].y = points[1].y =
-                        interpolateValue(initialPosition, box.y1, easingPos);
+                    currentPoints[0].y = currentPoints[1].y =
+                        interpolateValue(initialPosition, top, easingPos);
 
-                    points[2].y = points[3].y =
-                        interpolateValue(initialPosition, box.y2, easingPos);
+                    currentPoints[2].y = currentPoints[3].y =
+                        interpolateValue(initialPosition, bottom, easingPos);
                 } else {
-                    points[0].x = points[3].x =
-                        interpolateValue(initialPosition, box.x1, easingPos);
+                    currentPoints[0].x = currentPoints[3].x =
+                        interpolateValue(initialPosition, left, easingPos);
 
-                    points[1].x = points[2].x =
-                        interpolateValue(initialPosition, box.x2, easingPos);
+                    currentPoints[1].x = currentPoints[2].x =
+                        interpolateValue(initialPosition, right, easingPos);
                 }
 
                 target.attr("d", current.renderPoints());
@@ -4667,8 +4676,7 @@
                     clearInterval(interval);
                 }
             }, 10);
-        },
-
+        }
     });
 
     function updateArray(arr, prop, value) {
