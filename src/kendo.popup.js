@@ -166,20 +166,20 @@
                     animation.effects = kendo.parseEffects(animation.effects, true);
                 }
 
-                that.element.data(EFFECTS, animation.effects);
-                that.element.kendoStop(true).kendoAnimate(animation);
-
                 if (options.anchor != BODY) {
                     var dirClass = ACTIVEBORDER + "-" + direction;
+
+                    that.element.addClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
 
                     options.anchor
                         .addClass(dirClass)
                         .children(ACTIVECHILDREN)
                         .addClass(ACTIVE)
                         .addClass(dirClass);
-
-                    that.element.addClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
                 }
+
+                that.element.data(EFFECTS, animation.effects);
+                that.element.kendoStop(true).kendoAnimate(animation);
             }
         },
 
