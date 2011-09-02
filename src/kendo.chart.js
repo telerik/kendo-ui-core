@@ -2086,7 +2086,7 @@
 
         options: {
             position: RIGHT,
-            series: [],
+            items: [],
             labels: {
                 font: SANS12
             },
@@ -2183,7 +2183,7 @@
             // Sets the correct width of the label box
             // when the position of the legend is top or bottom.
             if (inArray(options.position, ["top", "bottom"])) {
-                labelBox.x2 += markerSize * (series.length + 1);
+                labelBox.x2 += markerSize * (items.length + 1);
             }
 
             if (children.length > 0) {
@@ -2253,11 +2253,13 @@
                 markerWidth = legend.markerSize() * 3,
                 offsetX,
                 offsetY,
-                margin = getSpacing(options.margin);
+                margin = getSpacing(options.margin),
+                label,
+                i;
 
             // Position labels next to each other
-            for (var i = 1; i < childrenCount; i++) {
-                var label = legend.children[i];
+            for (i = 1; i < childrenCount; i++) {
+                label = legend.children[i];
                 label.box.alignTo(legend.children[i - 1].box, RIGHT);
                 labelBox.wrap(label.box);
                 label.box.x1 = label.box.x1 + i * markerWidth;
@@ -2437,7 +2439,8 @@
                     labelPos = tickPositions[tickIx] - (labelSize / 2),
                     firstTickPosition,
                     nextTickPosition,
-                    middle;
+                    middle,
+                    labelX;
 
                 if (isVertical) {
                     if (positions == ON_MINOR_TICKS) {
@@ -2447,7 +2450,7 @@
                         middle = firstTickPosition + (nextTickPosition - firstTickPosition) / 2;
                         labelPos = middle - (labelSize / 2);
                     }
-                    var labelX = axis.box.x2 - options.margin - tickSize;
+                    labelX = axis.box.x2 - options.margin - tickSize;
 
                     labelBox = new Box2D(labelX - label.box.width(), labelPos,
                                          labelX, labelPos)
@@ -2459,7 +2462,7 @@
                         firstTickPosition = labelPos;
                         nextTickPosition = labelPos + labelSize;
                     }
-                    var labelY = axis.box.y1 + tickSize + options.margin;
+                    labelY = axis.box.y1 + tickSize + options.margin;
 
                     labelBox = new Box2D(firstTickPosition, labelY,
                                          nextTickPosition, labelY);
@@ -2473,7 +2476,10 @@
     var NumericAxis = Axis.extend({
         init: function(seriesMin, seriesMax, options) {
             var axis = this,
-                defaultOptions = axis.initDefaults(seriesMin, seriesMax, options);
+                defaultOptions = axis.initDefaults(seriesMin, seriesMax, options),
+                labelTemplate,
+                text,
+                i;
 
             Axis.fn.init.call(axis, defaultOptions);
             options = axis.options;
@@ -2484,13 +2490,13 @@
                 labelOptions = deepExtend({ }, options.labels, { align: align }),
                 labelText;
 
-            for (var i = 0; i < majorDivisions; i++) {
+            for (i = 0; i < majorDivisions; i++) {
                 if (labelOptions.template) {
-                    var labelTemplate = baseTemplate(labelOptions.template);
+                    labelTemplate = baseTemplate(labelOptions.template);
                     labelText = labelTemplate({ value: currentValue });
                 }
 
-                var text = new TextBox(labelText || currentValue, labelOptions);
+                text = new TextBox(labelText || currentValue, labelOptions);
 
                 axis.append(text);
 
@@ -2519,13 +2525,14 @@
                     min: autoMin,
                     max: autoMax,
                     majorUnit: autoMajorUnit
-                };
+                },
+                userSetLimits;
 
             autoOptions.min = floor(autoMin * NUM_AXIS_PADDING, autoMajorUnit);
             autoOptions.max = ceil(autoMax * NUM_AXIS_PADDING, autoMajorUnit);
 
             if (options) {
-                var userSetLimits = defined(options.min) || defined(options.max);
+                userSetLimits = defined(options.min) || defined(options.max);
                 if (userSetLimits) {
                     if (options.min === options.max) {
                         if (options.min > 0) {
@@ -2557,10 +2564,13 @@
                 children = axis.children,
                 space = axis.getActualTickSize() + options.margin,
                 maxLabelWidth = 0,
-                maxLabelHeight = 0;
+                maxLabelHeight = 0,
+                count = children.length,
+                label,
+                i;
 
-            for (var i = 0; i < children.length; i++) {
-                var label = children[i];
+            for (i = 0; i < count; i++) {
+                label = children[i];
                 maxLabelWidth = math.max(maxLabelWidth, label.box.width());
                 maxLabelHeight = math.max(maxLabelHeight, label.box.height());
             }
@@ -2584,11 +2594,12 @@
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                childElements = ChartElement.fn.getViewElements.call(axis, view);
+                childElements = ChartElement.fn.getViewElements.call(axis, view),
+                tickPositions = axis.getMinorTickPositions(),
+                lineOptions;
 
-            var tickPositions = axis.getMinorTickPositions();
             if (options.line.width > 0) {
-                var lineOptions = {
+                lineOptions = {
                         strokeWidth: options.line.width,
                         stroke: options.line.color,
                         dashType: options.line.dashType,
