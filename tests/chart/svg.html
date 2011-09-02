@@ -622,7 +622,12 @@
 
                 module("SVGSector", {
                     setup: function() {
-                        sector = new Chart.SVGSector({ angle: 20, radius: 150, startAngle: 90, box: new Box2D(0, 0, 100, 100) });
+                        sector = new Chart.SVGSector({
+                            angle: 20,
+                            radius: 150,
+                            startAngle: 90,
+                            box: new Box2D(0, 0, 100, 100)
+                        });
                     }
                 });
 
