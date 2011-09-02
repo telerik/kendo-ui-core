@@ -106,6 +106,33 @@
         return element;
     };
 
+    kendo.parseEffects = function(input, mirror) {
+        var effects = {};
+
+        if (typeof input === "string") {
+            each(input.split(" "), function() {
+                var effect = this.split(":"),
+                    direction = effect[1],
+                    effectBody = {};
+
+                effect.length > 1 && (effectBody["direction"] = mirror ? kendo.directions[direction].reverse : direction);
+
+                effects[effect[0]] = effectBody;
+            });
+        } else {
+            each(input, function(idx) {
+                var direction = this.direction;
+
+                if (direction && mirror)
+                    direction = kendo.directions[direction].reverse;
+
+                effects[idx] = this;
+            });
+        }
+
+        return effects;
+    };
+
     function parseInteger ( value ) {
         return parseInt( value, 10 );
     }
@@ -278,38 +305,11 @@
             return element.css(property);
     }
 
-    function parseEffects(input, mirror) {
-        var effects = {};
-
-        if (typeof input === "string") {
-            each(input.split(" "), function() {
-                var effect = this.split(":"),
-                    direction = effect[1],
-                    effectBody = {};
-
-                effect.length > 1 && (effectBody["direction"] = mirror ? kendo.directions[direction].reverse : direction);
-
-                effects[effect[0]] = effectBody;
-            });
-        } else {
-            each(input, function(idx) {
-                var direction = this.direction;
-
-                if (direction && mirror)
-                    direction = kendo.directions[direction].reverse;
-
-                effects[idx] = this;
-            });
-        }
-
-        return effects;
-    }
-
     kendo.fx.promise = function (element, options) {
         var promises = [], effects = options.effects;
 
         if (typeof effects === "string") {
-            effects = parseEffects(options.effects);
+            effects = kendo.parseEffects(options.effects);
         }
 
         element.data("animating", true);
@@ -404,7 +404,7 @@
             if (options.completeCallback)
                 options.completeCallback(); // call the external complete callback
         });
-    }
+    };
 
     extend(kendo.fx, {
         animate: function (elements, properties, options) {

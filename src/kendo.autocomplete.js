@@ -152,7 +152,7 @@
 
             List.fn.init.call(that, element, options);
 
-            that.wrapper = that._focused = that.element;
+            that._wrapper();
 
             that._accessors();
 
@@ -182,16 +182,18 @@
 
             that.element
                 .attr("autocomplete", "off")
-                .addClass("k-widget k-input k-autocomplete")
+                .addClass("k-input")
                 .bind({
                     keydown: proxy(that._keydown, that),
                     paste: proxy(that._search, that),
                     focus: function () {
                         that.previous = that.value();
+                        that.wrapper.addClass("k-state-focused");
                     },
                     blur: function () {
                         that._bluring = setTimeout(function () {
                             that._blur();
+                            that.wrapper.removeClass("k-state-focused");
                         }, 100);
                     }
                 });
@@ -425,6 +427,28 @@
                     that.search();
                 }
             }, that.options.delay);
+        },
+
+        _wrapper: function() {
+            var that = this,
+                element = that.element,
+                DOMelement = element[0],
+                TABINDEX = "tabIndex",
+                wrapper;
+
+            wrapper = element.parent();
+
+            if (!wrapper.is("div.k-widget")) {
+                wrapper = element.wrap("<div />").parent();
+            }
+
+            wrapper[0].style.cssText = DOMelement.style.cssText;
+            element.css({ width: "100%" });
+
+            that._focused = that.element;
+            that.wrapper = wrapper
+                              .addClass("k-widget k-autocomplete k-header")
+                              .addClass(DOMelement.className);
         }
     });
 

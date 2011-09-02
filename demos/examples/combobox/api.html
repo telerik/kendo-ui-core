@@ -7,14 +7,16 @@
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.black.css" rel="stylesheet"/>
         <!-- css -->
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
         <script src="../../../src/kendo.popup.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.autocomplete.js"></script>
         <script src="../../../src/kendo.dropdownlist.js"></script>
         <script src="../../../src/kendo.combobox.js"></script>
         <!-- script -->
@@ -25,8 +27,16 @@
         <!-- description -->
         <div class="description">API</div>
         <!-- description -->
-        <div id="example" class="k-content">
-           <input id="products" />
+        <div id="example">
+            <br><br><br><br><br><br><br><br><br><br>
+            <input id="products" />
+            <input id="complete" />
+            <input id="test" />
+            <div style="font-size: 30px; display: inline-block;">
+                <input id="test2" style="width: 300px" />
+                <input id="complete2" style="width: 300px" />
+                <input id="test3" style="width: 300px" />
+            </div>
 
             <script>
                 $(document).ready(function() {
@@ -41,11 +51,46 @@
                         {text: "The Godfather", value:"8"},
                         {text: "The Godfather: Part II", value:"9"},
                         {text: "The Shawshank Redemption", value:"10"},
+                        {text: "The Shawshank Redemption 2", value:"11"}
+                    ];
+
+                    var data2 = [
+                        {text: "12 Angry Men", value:"1"},
+                        {text: "Inception", value:"3"},
+                        {text: "Pulp Fiction", value:"5"},
+                        {text: "Schindler's List", value:"6"},
+                        {text: "The Dark Knight", value:"7"},
+                        {text: "The Godfather", value:"8"}
+                    ];
+
+                    var data3 = [
+                        "12 Angry Men",
+                        "Il buono, il brutto, il cattivo.",
+                        "Inception",
+                        "One Flew Over the Cuckoo's Nest",
+                        "Pulp Fiction",
+                        "Schindler's List",
+                        "The Dark Knight",
+                        "The Godfather",
+                        "The Godfather: Part II",
+                        "The Shawshank Redemption"
                     ];
 
                     $("#products").kendoComboBox(data)
                                   .closest(".k-widget")
                                   .attr("id", "products_wrapper");
+
+                    $("#test").kendoDropDownList(data2);
+                    $("#test2").kendoComboBox(data2);
+                    $("#test3").kendoDropDownList(data2);
+                    $("#complete").kendoAutoComplete({
+                        dataSource: data3,
+                        separator: ", "
+                    });
+                    $("#complete2").kendoAutoComplete({
+                        dataSource: data3,
+                        separator: ", "
+                    });
 
                     $("#filter").kendoDropDownList({
                         change: filterTypeOnChanged
