@@ -18,10 +18,10 @@
         <script>
 
             var calendar = kendo.calendar,
-                templates = new kendo.ui.Calendar().templates,
+                template = new kendo.ui.Calendar().month,
                 div;
 
-            module("kendo.ui.Calendar initialization", {
+            module("kendo.ui.Calendar rendering", {
                 setup: function() {
                     div = $("<div />").appendTo(document.body);
                 },
@@ -49,23 +49,25 @@
                 var date = new Date(),
                     text = kendo.culture().calendar.months.names[date.getMonth()] + " " + date.getFullYear();
 
-                    equal(calendar.month.title(date, templates["month"].title), text);
+                    equal(calendar.month.title(date, template.title), text);
             });
 
             test("month view renders days", function() {
-                var today = new Date();
+                var today = new Date(),
+                    days = kendo.culture().calendar.days;
 
                 div.html(calendar.month.content({
                         date: today,
-                        template: templates["month"].content,
+                        empty: template.empty,
+                        template: template.content,
                         min: new Date(2000, 10, 10),
                         max: new Date(2020, 10, 10)
                     }));
 
                 equal(div.find("thead").find("th").length, 7);
-                equal(div.find("thead").find("th").eq(0).html(), kendo.culture().calendar.days.namesShort[0]);
-                equal(div.find("thead").find("th").eq(0).attr("title"), kendo.culture().calendar.days.names[0]);
-                equal(div.find("thead").find("th").eq(0).attr("abbr"), kendo.culture().calendar.days.namesAbbr[0]);
+                equal(div.find("thead").find("th").eq(0).html(), days.namesShort[0]);
+                equal(div.find("thead").find("th").eq(0).attr("title"), days.names[0]);
+                equal(div.find("thead").find("th").eq(0).attr("abbr"), days.namesAbbr[0]);
 
                 equal(div.find("tbody").find("tr").length, 6);
                 equal(div.find("tbody").find("td").length, 42);
@@ -80,7 +82,8 @@
 
                 div.html(calendar.month.content({
                     date: today,
-                    template: templates["month"].content,
+                    empty: template.empty,
+                    template: template.content,
                     min: today,
                     max: today
                 }));
@@ -97,7 +100,8 @@
 
                 div.html(calendar.month.content({
                     date: today,
-                    template: templates["month"].content,
+                    empty: template.empty,
+                    template: template.content,
                     min: new Date(2000, 10, 10),
                     max: new Date(2020, 10, 10)
                 }));
@@ -111,7 +115,8 @@
 
                 div.html(calendar.month.content({
                     date: today,
-                    template: templates["month"].content,
+                    empty: template.empty,
+                    template: template.content,
                     min: new Date(2000, 10, 10),
                     max: new Date(2020, 10, 10)
                 }));
@@ -126,9 +131,10 @@
 
                 div.html(calendar.month.content({
                     date: today,
+                    empty: template.empty,
                     min: new Date(today),
                     max: max,
-                    template: templates["month"].content
+                    template: template.content
                 }));
 
                 equal(div.find("tbody").find("td").html(), " ");
@@ -139,7 +145,8 @@
             test("year view renders title", function() {
                 var today = new Date(2011, 9, 10);
 
-                equal(calendar.year.title(today, templates["year"].title), today.getFullYear() + "");
+                //templates["year"].title
+                equal(calendar.year.title(today), today.getFullYear() + "");
             });
 
             test("year view renders meta view  4x3 cells", function() {
@@ -149,7 +156,6 @@
 
                 div.html(calendar.year.content({
                     date: today,
-                    template: templates["year"].content,
                     min: new Date(2000, 10, 10),
                     max: new Date(2020, 10, 10)
                 }));
@@ -166,7 +172,6 @@
 
                 div.html(calendar.year.content({
                     date: today,
-                    template: templates["year"].content,
                     min: today,
                     max: today
                 }));
@@ -179,7 +184,7 @@
 
             test("decade title renders decade range title", function() {
                 var today = new Date(2011, 9, 10);
-                equal(calendar.decade.title(today, templates["decade"].title), "2010-2019");
+                equal(calendar.decade.title(today), "2010-2019");
             });
 
             test("decade view renders meta view  4x3 cells", function() {
@@ -187,7 +192,6 @@
 
                 div.html(calendar.decade.content({
                     date: today,
-                    template: templates["decade"].content,
                     min: new Date(2000, 10, 10),
                     max: new Date(2020, 10, 10)
                 }));
@@ -203,7 +207,6 @@
 
                 div.html(calendar.decade.content({
                     date: today,
-                    template: templates["decade"].content,
                     min: today,
                     max: today
                 }));
@@ -216,7 +219,7 @@
             test("century title renders century title", function() {
                 var today = new Date(2011, 9, 10);
 
-                equal(calendar.century.title(today, templates["century"].title), "2000-2099");
+                equal(calendar.century.title(today), "2000-2099");
             });
 
             test("century view renders meta view  4x3 cells", function() {
@@ -224,7 +227,6 @@
 
                 div.html(calendar.century.content({
                     date: today,
-                    template: templates["century"].content,
                     min: new Date(1800, 10, 10),
                     max: new Date(2220, 10, 10)
                 }));
@@ -240,7 +242,6 @@
 
                 div.html(calendar.century.content({
                     date: today,
-                    template: templates["century"].content,
                     min: today,
                     max: today
                 }));

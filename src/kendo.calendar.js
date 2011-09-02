@@ -2,14 +2,22 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Component = ui.Component,
-        IFTEMPLATE = '<# if(data.getDate) { #> {0} <# } else { #> <# } #>',
-        ANCHORSTART = '<a class="k-link" href="#">',
-        ANCHOREND = '</a>',
-        METAVIEWOBJECT = {
-            length: 12,
-            columns: 4,
-            html: '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>'
-        };
+        extend = $.extend,
+        DATE = Date;
+
+    function defineViewedDate(value, min, max) {
+        var today = new DATE();
+        if (value) {
+            today = new DATE(value);
+        }
+
+        if (min > today) {
+            today = new DATE(min);
+        } else if (max < today) {
+            today = new DATE(max);
+        }
+        return today;
+    }
 
 
     var Calendar = Component.extend({
@@ -18,33 +26,42 @@
 
             Component.fn.init.call(that, element, options);
 
+            that.viewedDate = defineViewedDate(that.value, that.min, that.max);
+
             that._templates();
 
             that._header();
         },
 
         options: {
-            templates: {
-                month: {
-                    title: "<#=kendo.culture().calendar.months.names[data.getMonth()]#> <#= data.getFullYear()#>",
-                    content: IFTEMPLATE.replace("{0}", '<a class="k-link" href="#" title="<#=kendo.toString(data,"D")#>"><#=data.getDate()#></a>')
-                },
-                year: {
-                    title: "<#=data.getFullYear()#>",
-                    content: IFTEMPLATE.replace("{0}", ANCHORSTART + "<#= kendo.culture().calendar.months.namesAbbr[data.getMonth()]#>" + ANCHOREND)
-                },
-                decade: {
-                    title: "<# var start = data.getFullYear(); start = start - start % 10; #><#=start#>-<#=start + 9#>",
-                    content: IFTEMPLATE.replace("{0}", ANCHORSTART + "<#=data.getFullYear()#>" + ANCHOREND)
-                },
-                century: {
-                    title: "<# var start = data.getFullYear(); start = start - start % 100; #><#=start#>-<#=start + 99#>",
-                    content: IFTEMPLATE.replace("{0}", ANCHORSTART + "<# var start = data.getFullYear(); start = start - start % 10; #><#=start#>-<#=start + 9#>" + ANCHOREND)
-                }
+            value: null,
+            startView: "month",
+            depth: "month",
+            month: {
+                title: "<#=data.month#> <#=data.year#>",
+                content: "<#=data.day#>",
+                empty: " "
             }
         },
 
         navigateDown: function() {
+
+        },
+
+        navigateUp: function() {
+
+        },
+
+        navigateLeft: function() {
+
+        },
+
+        navigateRight: function() {
+
+        },
+
+        navigate: function(date, view) {
+            //define direction depending on
         },
 
         _header: function() {
@@ -64,16 +81,16 @@
 
         _templates: function() {
             var that = this,
+                month = that.options.month,
                 template = kendo.template,
-                templates = that.options.templates;
+                MONTH = "month";
 
-            that.templates = {};
-            $.each(["month", "year", "decade", "century"], function(i, view) {
-                that.templates[view] = {
-                    title: template(templates[view].title),
-                    content: template(templates[view].content)
-                };
-            });
+
+            that.month = {
+                title: template(month.title),
+                content: template('<td><a class="k-link" href="#" title="<#=data.title#>">' + month.content + '</a></td>'),
+                empty: template("<td>" + month.empty + "</td>")
+            };
         }
     });
 
@@ -83,7 +100,7 @@
         msPerMinute: 60000,
         msPerDay: 86400000,
         firstDayOfMonth: function (date) {
-            return new Date(
+            return new DATE(
                 date.getFullYear(),
                 date.getMonth(),
                 1,
@@ -96,7 +113,7 @@
 
         firstVisibleDay: function (date) {
             var firstDayOfWeek = kendo.culture().calendar.firstDayOfWeek,
-                firstVisibleDay = new Date(date.getFullYear(), date.getMonth(), 0, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
+                firstVisibleDay = new DATE(date.getFullYear(), date.getMonth(), 0, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
 
             while (firstVisibleDay.getDay() != firstDayOfWeek) {
                 calendar.setTime(firstVisibleDay, -1 * calendar.msPerDay)
@@ -107,10 +124,10 @@
 
         setTime: function (date, time) {
             var tzOffsetBefore = date.getTimezoneOffset(),
-                resultDate = new Date(date.getTime() + time),
-                tzOffsetDiff = resultDate.getTimezoneOffset() - tzOffsetBefore;
+                resultDATE = new DATE(date.getTime() + time),
+                tzOffsetDiff = resultDATE.getTimezoneOffset() - tzOffsetBefore;
 
-            date.setTime(resultDate.getTime() + tzOffsetDiff * calendar.msPerMinute);
+            date.setTime(resultDATE.getTime() + tzOffsetDiff * calendar.msPerMinute);
         },
 
         pad: function (value) {
@@ -123,125 +140,157 @@
 
         month: {
             title: function(date, template) {
-                return template(date);
+                return template({
+                    date: date,
+                    month: kendo.culture().calendar.months.names[date.getMonth()],
+                    year: date.getFullYear()
+                });
             },
             content: function(options) {
-                var idx = 0,
-                currentCalendar = kendo.culture().calendar,
-                firstDayIdx = currentCalendar.firstDayOfWeek,
-                days = currentCalendar.days,
-                names = shiftArray(days.names, firstDayIdx),
-                abbr = shiftArray(days.namesAbbr, firstDayIdx),
-                short = shiftArray(days.namesShort, firstDayIdx),
-                start = calendar.firstVisibleDay(options.date),
-                min = options.min,
-                max = options.max,
-                template = options.template,
-                html = '<table class="k-content" summary="calendar widget"><thead><tr>';
+                var idx = 0, data,
+                    currentCalendar = kendo.culture().calendar,
+                    firstDayIdx = currentCalendar.firstDayOfWeek,
+                    days = currentCalendar.days,
+                    names = shiftArray(days.names, firstDayIdx),
+                    abbr = shiftArray(days.namesAbbr, firstDayIdx),
+                    short = shiftArray(days.namesShort, firstDayIdx),
+                    start = calendar.firstVisibleDay(options.date),
+                    min = options.min,
+                    max = options.max,
+                    template = options.template,
+                    empty = options.empty,
+                    html = '<table class="k-content" summary="calendar widget"><thead><tr>';
 
                 for (; idx < 7; idx++) {
                     html += '<th abbr="' + abbr[idx] + '" scope="col" title="' + names[idx] + '">' + short[idx] + '</th>';
                 }
 
+                html += "</tr></thead><tbody><tr>";
+
                 start.setDate(start.getDate() - 1);
+                min = new DATE(min.getFullYear(), min.getMonth(), min.getDate());
+                max = new DATE(max.getFullYear(), max.getMonth(), max.getDate());
 
-                $.extend(options, {
-                    min: new Date(min.getFullYear(), min.getMonth(), min.getDate()),
-                    max: new Date(max.getFullYear(), max.getMonth(), max.getDate()),
-                    html: html += "</tr></thead><tbody><tr>",
-                    start: start,
-                    length: 42,
-                    columns: 7,
-                    setter: function(date) {
-                        date.setDate(date.getDate() + 1);
+                for (idx = 0; idx < 42; idx++) {
+                    if (idx > 0 && idx % 7 == 0) {
+                        html += "</tr><tr>";
                     }
-                });
 
-                return render(options);
+                    start.setDate(start.getDate() + 1);
+
+                    data = {
+                        date: start,
+                        title: kendo.toString(start, "D"),
+                        day: start.getDate()
+                    };
+
+                    html += inRange(start, min, max) ? template(data) : empty(data);
+                }
+
+                return html + "</tr></tbody></table>";
             }
         },
 
         year: {
-            title: function(date, template) {
-                return template(date);
+            title: function(date) {
+                return date.getFullYear();
             },
             content: function(options) {
-                var min = options.min,
+                var namesAbbr = kendo.culture().calendar.months.namesAbbr,
+                    min = options.min,
                     max = options.max;
 
-                $.extend(options,
-                METAVIEWOBJECT, {
-                    min: new Date(min.getFullYear(), min.getMonth(), 1),
-                    max: new Date(max.getFullYear(), max.getMonth(), 1),
-                    start: new Date(options.date.getFullYear(), 0, 1),
-                    setter: function(date, idx) {
-                        date.setMonth(idx);
+                extend(options, {
+                    min: new DATE(min.getFullYear(), min.getMonth(), 1),
+                    max: new DATE(max.getFullYear(), max.getMonth(), 1),
+                    start: new DATE(options.date.getFullYear(), 0, 1),
+                    setter: function(date) {
+                        date.setMonth(date.getMonth() + 1);
+                    },
+                    render: function(date) {
+                        return namesAbbr[date.getMonth()];
                     }
                 });
 
-                return render(options);
+                return view(options);
             }
         },
         decade: {
-            title: function(date, template) {
-                return template(date);
+            title: function(date) {
+                var start = date.getFullYear();
+
+                start = start - start % 10;
+
+                return start + "-" + (start + 9);
             },
             content: function(options) {
                 var year = options.date.getFullYear();
 
-                year = year - year % 10 - 1;
-
-                $.extend(options,
-                METAVIEWOBJECT, {
-                    min: new Date(options.min.getFullYear(), 0, 1),
-                    max: new Date(options.max.getFullYear(), 0, 1),
-                    start: new Date(year, 0, 1),
-                    setter: function(date, idx) {
-                        date.setFullYear(year + idx);
+                extend(options, {
+                    start: new DATE(year = year - year % 10 - 1, 0, 1),
+                    min: new DATE(options.min.getFullYear(), 0, 1),
+                    max: new DATE(options.max.getFullYear(), 0, 1),
+                    setter: function(date) {
+                        date.setFullYear(date.getFullYear() + 1);
+                    },
+                    render: function(date) {
+                        return date.getFullYear();
                     }
                 });
 
-                return render(options);
+                return view(options);
             }
         },
         century: {
-            title: function(date, template) {
-                return template(date);
+            title: function(date) {
+                var start = date.getFullYear();
+
+                start = start - start % 100;
+
+                return start + "-" + (start + 99);
             },
             content: function(options) {
                 var year = options.date.getFullYear();
 
-                year = year - year % 100 - 10;
-
-                $.extend(options,
-                METAVIEWOBJECT, {
-                    min: new Date(options.min.getFullYear() - 10, 0, 1),
-                    max: new Date(options.max.getFullYear(), 0, 1),
-                    start: new Date(year, 0, 1),
-                    setter: function(date, idx) {
-                        date.setFullYear(year + idx * 10);
+                extend(options, {
+                    start: new DATE(year - year % 100 - 10, 0, 1),
+                    min: new DATE(options.min.getFullYear() - 10, 0, 1),
+                    max: new DATE(options.max.getFullYear(), 0, 1),
+                    setter: function(date) {
+                        date.setFullYear(date.getFullYear() + 10);
+                    },
+                    render: function(date) {
+                        var year = date.getFullYear();
+                        return year + "-" + (year + 9);
                     }
                 });
 
-                return render(options);
+                return view(options);
             }
         }
     }
 
-    function render(options) {
+    function view(options) {
         var idx = 0,
-            html = options.html,
-            template = options.template,
-            start = options.start;
+            min = options.min,
+            max = options.max,
+            start = options.start,
+            setter = options.setter,
+            render = options.render,
+            html = '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>';
 
-        for(; idx < options.length; idx++) {
-            if (idx > 0 && idx % options.columns == 0) {
+        for(; idx < 12; idx++) {
+            if (idx > 0 && idx % 4 == 0) {
                 html += "</tr><tr>";
             }
 
-            options.setter(start, idx);
+            if (inRange(start, min, max)) {
+                html += '<td><a class="k-link">' + render(start) + "</a></td>";
+            } else {
+                html += "<td> </td>";
+            }
 
-            html += "<td>" + options.template(inRange(start, options.min, options.max) ? start : {}) + "</td>";
+            setter(start);
         }
 
         return html + "</tr></tbody></table>";
