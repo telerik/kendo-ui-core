@@ -1410,6 +1410,32 @@ div.skinSelector .k-state-active
     border: 0;
 }
 
+.k-black .code-title,
+.k-black .details-title
+{
+    color: #fff;
+    background: -moz-linear-gradient(top, #333 0%, #222 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#333), color-stop(100%,#222));
+    background: -webkit-linear-gradient(top, #333 0%,#222 100%);
+    background: -o-linear-gradient(top, #333 0%,#222 100%);
+    background: -ms-linear-gradient(top, #333 0%,#222 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333', endColorstr='#222',GradientType=0 );
+    background: linear-gradient(top, #333 0%,#222 100%);
+}
+
+.k-black .code-sample,
+.k-black .details-list
+{
+    border-color: #222;
+    background: transparent;
+}
+
+.k-black .code-sample .prettyprint,
+.k-black .details-list dl
+{
+    background: transparent;
+}
+
 .code-sample .prettyprint
 {
     font-size: 12px;
@@ -1432,6 +1458,23 @@ pre .dec { color: #cc0000; } /* decimal */
 ol.linenums { margin-top: 0; margin-bottom: 0; color: #333; }
 li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
 li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
+
+.k-black pre .nocode { color: #fff; }
+.k-black pre .str,                    /* string */
+.k-black pre .atv { color: #ff7020; } /* attribute value */
+.k-black pre .kwd { color: #6093ff; } /* keyword */
+.k-black pre .com { color: #aaa; } /* comment */
+.k-black pre .typ { color: #fff; } /* type */
+.k-black pre .lit { color: #60c6c6; } /* literal */
+.k-black pre .pun { color: #999; }    /* punctuation */
+.k-black pre .pln { color: #a2b4ba; }    /* plaintext */
+.k-black pre .tag { color: #60c6ff; } /* html/xml tag */
+.k-black pre .atn { color: #c6c6ff; } /* attribute name */
+.k-black pre .dec { color: #ff6060; } /* decimal */
+
+/* Specify class=linenums on a pre to get line numbering */
+.k-black ol.linenums { color: #ddd; }
+.k-black li.L1,.k-black li.L3,.k-black li.L5,.k-black li.L7,.k-black li.L9 { background: #333; }
 
 .details-list dl
 {
