@@ -3470,7 +3470,6 @@
                 options = marker.options,
                 type = options.type,
                 box = marker.box,
-                renderOptions = deepExtend({}, renderOptions, { animation: { type: "clip" } }),
                 element = BoxElement.fn.getViewElements.call(marker, view, renderOptions)[0],
                 halfWidth = box.width() / 2;
 
@@ -3740,7 +3739,7 @@
                 lines = [],
                 group = view.createGroup({
                     animation: {
-                        type: "clipVML"
+                        type: "clip"
                     }
                 });
 
@@ -3785,10 +3784,7 @@
                 strokeWidth: series.width,
                 strokeOpacity: series.opacity,
                 fill: "",
-                dashType: series.dashType,
-                animation: {
-                    type: "clip"
-                }
+                dashType: series.dashType
             });
         }
     });
@@ -4185,7 +4181,7 @@
                 new SVGOverlayDecorator(view),
                 new SVGPaintDecorator(view),
                 new AnimationDecorator(view),
-                new ClipAnimationDecorator(view)
+                new SVGClipAnimationDecorator(view)
             );
 
             view.template = SVGView.template;
@@ -4309,7 +4305,8 @@
             group.template = SVGGroup.template;
             if (!group.template) {
                 group.template = SVGGroup.template =
-                template("<g<#= d.renderAttr(\"id\", d.options.id) #>>" +
+                template("<g<#= d.renderAttr(\"id\", d.options.id) #>" +
+                           "<#= d.renderAttr(\"clip-path\", d.options.clipPath) #>>" +
                          "<#= d.renderContent() #></g>");
             }
         }
@@ -4391,7 +4388,6 @@
                     "<#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #>" +
                     "<#= d.renderDashType() #> " +
                     "stroke-linecap='<#= d.renderLinecap() #>' " +
-                    "<#= d.renderAttr(\"clip-path\", d.options.clipPath) #>" +
                     "fill-opacity='<#= d.options.fillOpacity #>' " +
                     "stroke-opacity='<#= d.options.strokeOpacity #>' " +
                     "fill='<#= d.options.fill || \"none\" #>'></path>"
@@ -4651,7 +4647,7 @@
         }
     }
 
-    var ClipAnimationDecorator = Class.extend({
+    var SVGClipAnimationDecorator = Class.extend({
         init: function(view) {
             this.view = view;
         },
@@ -4659,13 +4655,12 @@
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
-                animation = element.options.animation;
+                animation = element.options.animation,
+                definitions = view.definitions,
+                clipPath = definitions["clipAnim"],
+                clipRect;
 
             if (animation && animation.type === "clip") {
-                var definitions = view.definitions,
-                    clipPath = definitions["clipAnim"],
-                    clipRect;
-
                 if (!clipPath) {
                     clipPath = new SVGClipPath({ id: "clipAnim" });
                     clipRect = view.createRect(
@@ -4694,10 +4689,10 @@
                 animation = element.options.animation,
                 clipRect;
 
-            if (animation && animation.type === "clipVML") {
+            if (animation && animation.type === "clip") {
                 clipRect = new VMLClipRect(
                     new Box2D(0, 0, view.options.width, view.options.height),
-                    { id: "clipVML" }
+                    { id: "clipAnim" }
                 );
 
                 view.animations.push(
