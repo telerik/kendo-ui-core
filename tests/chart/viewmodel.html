@@ -840,7 +840,7 @@
 
                 function createLegend(options) {
                     legend = new Chart.Legend($.extend(true,{
-                        series: [ { name: "Series 1" } ]
+                        items: [ { name: "Series 1" } ]
                     }, options));
 
                     legend.reflow(chartBox);
@@ -880,7 +880,7 @@
 
                 test("second label is below the first", function() {
                     createLegend({
-                        series: [
+                        items: [
                             { name: "Series 1" },
                             { name: "Series 2" }
                         ]
@@ -914,7 +914,7 @@
 
                 test("positions legend to absolute vertical center (relative to y=0)", function() {
                     legend = new Chart.Legend({
-                        series: [ { name: "Series 1" } ]
+                        items: [ { name: "Series 1" } ]
                     });
 
                     var legendBox = chartBox.clone().translate(100, 100);
@@ -1042,7 +1042,7 @@
                         moduleSetup();
 
                         legend = new Chart.Legend({
-                            series: [ { name: "Series 1", color: "#f00" } ]
+                            items: [ { name: "Series 1", color: "#f00" } ]
                         });
 
                         legend.reflow(chartBox);
@@ -1094,7 +1094,7 @@
                         moduleSetup();
 
                         legend = new Chart.Legend({
-                            series: [ { name: "Series 1", color: "#f00" } ],
+                            items: [ { name: "Series 1", color: "#f00" } ],
                             border: {
                                 color: BORDER_COLOR,
                                 width: BORDER_WIDTH,

@@ -15,6 +15,7 @@
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
+                categoriesCount = Chart.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
                 plotArea,
                 series,
@@ -94,7 +95,7 @@
 
                 test("Reports number of categories", function() {
                     setupBarChart(plotArea, {series: [ positiveSeries ]});
-                    equal(series.categoriesCount(), positiveSeries.data.length);
+                    equal(categoriesCount(series.options.series), positiveSeries.data.length);
                 });
 
                 test("bars are distributed across category axis", function() {
@@ -203,7 +204,7 @@
 
                 test("Reports number of categories for two series", function() {
                     setupBarChart(plotArea, {series: [ positiveSeries, negativeSeries ]});
-                    equal(series.categoriesCount(), positiveSeries.data.length);
+                    equal(categoriesCount(series.options.series), positiveSeries.data.length);
                 });
 
                 test("getSeriesPoint returns nearest series point", function() {
@@ -234,7 +235,7 @@
                 });
 
                 test("Reports number of categories", function() {
-                    equal(series.categoriesCount(), 3);
+                    equal(categoriesCount(series.options.series), 3);
                 });
 
                 test("Missing values are represented as bars with zero height", function() {
