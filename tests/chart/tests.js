@@ -52,6 +52,10 @@ tests.push(
         title: "Line Chart"
     },
     {
+        page: "chart/piechart.html",
+        title: "Pie Chart"
+    },
+    {
         page: "chart/events.html",
         title: "Events"
     },

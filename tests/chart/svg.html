@@ -165,37 +165,27 @@
                     equals(circle.options.strokeWidth, 2);
                 });
 
-                test("createPie returns SVGPie", function() {
-                    var pie = view.createPie();
-                    ok(pie instanceof Chart.SVGPie);
+                test("createSector returns SVGSector", function() {
+                    var sector = view.createSector();
+                    ok(sector instanceof Chart.SVGSector);
                 });
 
-                /*test("createPie sets center point", function() {
-                    var circle = view.createCircle([10, 10]);
-                    same(circle.center, [10, 10]);
+                test("createSector sets fill color", function() {
+                    var sector = view.createSector({ }, { fill: "#cf0" });
+
+                    equals(sector.options.fill, "#cf0");
                 });
 
-                test("createCircle sets radius", function() {
-                    var circle = view.createCircle([10, 10], 10);
-                    same(circle.radius, 10);
-                });*/
+                test("createSector sets stroke color", function() {
+                    var sector = view.createSector({ }, { stroke: "#cf0" });
 
-                test("createPie sets fill color", function() {
-                    var pie = view.createPie({ }, { fill: "#cf0" });
-
-                    equals(pie.options.fill, "#cf0");
+                    equals(sector.options.stroke, "#cf0");
                 });
 
-                test("createPie sets stroke color", function() {
-                    var pie = view.createPie({ }, { stroke: "#cf0" });
+                test("createSector sets stroke width", function() {
+                    var sector = view.createSector({ }, { strokeWidth: 2});
 
-                    equals(pie.options.stroke, "#cf0");
-                });
-
-                test("createPie sets stroke width", function() {
-                    var pie = view.createPie({ }, { strokeWidth: 2});
-
-                    equals(pie.options.strokeWidth, 2);
+                    equals(sector.options.strokeWidth, 2);
                 });
 
                 test("renderElement returns element", function() {
@@ -628,55 +618,55 @@
             })();
 
             (function() {
-                var pie;
+                var sector;
 
-                module("SVGPie", {
+                module("SVGSector", {
                     setup: function() {
-                        pie = new Chart.SVGPie({ angle: 20, radius: 150, startAngle: 90, box: new Box2D(0, 0, 100, 100) });
+                        sector = new Chart.SVGSector({ angle: 20, radius: 150, startAngle: 90, box: new Box2D(0, 0, 100, 100) });
                     }
                 });
 
-                test("renders pie tag", function() {
-                    equal(pie.render().replace(/\<path.*?\>/, "<path>"),
+                test("renders sector tag", function() {
+                    equal(sector.render().replace(/\<path.*?\>/, "<path>"),
                         "<path></path>");
                 });
 
                 test("renders radius", function() {
-                    ok(pie.render().indexOf("A135 135") > -1);
+                    ok(sector.render().indexOf("A135 135") > -1);
                 });
 
                 test("renders fill color", function() {
-                    pie.options.fill = "#f00";
-                    ok(pie.render().indexOf("fill='#f00'") > -1);
+                    sector.options.fill = "#f00";
+                    ok(sector.render().indexOf("fill='#f00'") > -1);
                 });
 
                 test("renders empty fill when no fill is set", function() {
-                    pie.options.fill = "";
-                    ok(pie.render().indexOf("fill='none") > -1);
+                    sector.options.fill = "";
+                    ok(sector.render().indexOf("fill='none") > -1);
                 });
 
                 test("renders stroke color", function() {
-                    pie.options.stroke = "#f00";
-                    ok(pie.render().indexOf("stroke='#f00'") > -1);
+                    sector.options.stroke = "#f00";
+                    ok(sector.render().indexOf("stroke='#f00'") > -1);
                 });
 
                 test("renders stroke width", function() {
-                    pie.options.strokeWidth = "2";
-                    ok(pie.render().indexOf("stroke-width='2'") > -1);
+                    sector.options.strokeWidth = "2";
+                    ok(sector.render().indexOf("stroke-width='2'") > -1);
                 });
 
                 test("renders id", function() {
-                    pie.options.id = "id";
-                    ok(pie.render().indexOf("id='id'") > -1);
+                    sector.options.id = "id";
+                    ok(sector.render().indexOf("id='id'") > -1);
                 });
 
                 test("renders render curve with angle < 180 degrese", function() {
-                    ok(pie.render().indexOf("A135 135 0 0,1 196.17271934896527 23.141496193902356") > -1);
+                    ok(sector.render().indexOf("A135 135 0 0,1 196.17271934896527 23.141496193902356") > -1);
                 });
 
                 test("renders render curve with angle > 180 degrese", function() {
-                    pie = new Chart.SVGPie({ angle: 200, radius: 150, startAngle: 90, box: new Box2D(0, 0, 100, 100) });
-                    ok(pie.render().indexOf("A135 135 0 1,1 103.82728065103468 276.8585038060976") > -1);
+                    sector = new Chart.SVGSector({ angle: 200, radius: 150, startAngle: 90, box: new Box2D(0, 0, 100, 100) });
+                    ok(sector.render().indexOf("A135 135 0 1,1 103.82728065103468 276.8585038060976") > -1);
                 });
 
             })();

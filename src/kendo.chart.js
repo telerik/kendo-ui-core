@@ -1254,16 +1254,11 @@
                 model.append(new Title(options.title));
             }
 
+
+            plotArea = chart._plotArea = new PlotArea(options);
             if (options.legend.visible) {
-                var legendOptions = deepExtend({}, options.legend,
-                                    { series: options.series });
-
-                model.append(new Legend(legendOptions));
+                model.append(new Legend(plotArea.options.legend));
             }
-
-            plotArea = chart._plotArea = new PlotArea(chart.options);
-            //Should remove this!
-            //plotArea = chart._plotArea = new PiePlotArea(chart.options);
             model.append(plotArea);
             model.reflow();
 
@@ -2109,10 +2104,14 @@
 
         createLabels: function() {
             var legend = this,
-                series = legend.options.series;
+                items = legend.options.items,
+                count = items.length,
+                label,
+                name,
+                i;
 
-            for (var i = 0; i < series.length; i++) {
-                var name = series[i].name,
+            for (i = 0; i < count; i++) {
+                name = items[i].name;
                     label = new Text(name, legend.options.labels);
 
                 legend.append(label);
@@ -2145,18 +2144,24 @@
             var legend = this,
                 children = legend.children,
                 options = legend.options,
-                series = options.series,
+                items = options.items,
+                count = items.length,
                 markerSize = legend.markerSize(),
                 group = view.createGroup({ zIndex: options.zIndex }),
                 border = options.border || {},
-                labelBox;
+                markerBox,
+                labelBox,
+                color,
+                label,
+                box,
+                i;
 
             append(group.children, ChartElement.fn.getViewElements.call(legend, view));
 
-            for (var i = 0, length = series.length; i < length; i++) {
-                var color = series[i].color,
-                    label = children[i],
-                    markerBox = new Box2D(),
+            for (i = 0; i < count; i++) {
+                color = items[i].color;
+                label = children[i];
+                markerBox = new Box2D();
                     box = label.box;
 
                 labelBox = labelBox ? labelBox.wrap(box) : box.clone();
@@ -3281,14 +3286,14 @@
             options = chart.options,
             series = options.series,
             categories = chart.plotArea.options.categoryAxis.categories || [],
-            categoriesCount = chart.categoriesCount(),
+            count = categoriesCount(series),
             categoryIx,
             seriesIx,
             value,
             currentCategory,
             currentSeries;
 
-            for (categoryIx = 0; categoryIx < categoriesCount; categoryIx++) {
+            for (categoryIx = 0; categoryIx < count; categoryIx++) {
                 for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                     currentCategory = categories[categoryIx];
                     currentSeries = series[seriesIx];
@@ -3298,32 +3303,19 @@
             }
         },
 
-        // REVIEW: Refactor to stand-alone function
-        categoriesCount: function() {
-            var chart = this,
-                series = chart.options.series,
-                categories = 0;
-
-            for (var i = 0, length = series.length; i < length; i++) {
-                categories = math.max(categories, series[i].data.length);
-            }
-
-            return categories;
-        },
-
         getSeriesPoint: function(x, y, seriesIx) {
             var chart = this,
                 isVertical = chart.options.isVertical,
                 axis = isVertical ? X : Y,
                 pos = isVertical ? x : y,
                 points = chart.seriesPoints[seriesIx],
-                i,
+                nearestPointDistance = Number.MAX_VALUE,
                 pointsLength = points.length,
                 currentPoint,
                 pointBox,
                 pointDistance,
                 nearestPoint,
-                nearestPointDistance = Number.MAX_VALUE;
+                i;
 
             for (i = 0; i < pointsLength; i++) {
                 currentPoint = points[i];
@@ -3799,14 +3791,13 @@
         }
     });
 
-    // REVIEW: Rename to PieSector
-    var PiePiece = ChartElement.extend({
+    var PieSector = ChartElement.extend({
         init: function(value, options) {
-            var piece = this;
+            var sector = this;
 
-            piece.value = value;
+            sector.value = value;
 
-            ViewElement.fn.init.call(piece, options);
+            ViewElement.fn.init.call(sector, options);
         },
 
         options: {
@@ -3815,34 +3806,35 @@
                 visible: false
             },
             border: {
-                width: 1
+                width: 1,
+                color: WHITE
             }
         },
 
         render: function() {
-            var piece = this,
-                options = piece.options,
+            var sector = this,
+                options = sector.options,
                 labels = options.labels,
-                labelText = piece.value;
+                labelText = sector.value;
 
-            if (piece._rendered) {
+            if (sector._rendered) {
                 return;
             } else {
-                piece._rendered = true;
+                sector._rendered = true;
             }
 
             if (labels.template) {
                 var labelTemplate = baseTemplate(labels.template);
                 labelText = labelTemplate({
-                    dataItem: piece.dataItem,
-                    category: piece.category,
-                    value: piece.value,
-                    series: piece.series
+                    dataItem: sector.dataItem,
+                    category: sector.category,
+                    value: sector.value,
+                    series: sector.series
                 });
             }
 
             if (labels.visible) {
-                piece.label = new TextBox(labelText,
+                sector.label = new TextBox(labelText,
                     deepExtend({
                         id: uniqueId(),
                         align: CENTER,
@@ -3854,38 +3846,53 @@
                     }, labels)
                 );
 
-                piece.append(piece.label);
+                sector.append(sector.label);
             }
         },
 
         reflow: function(targetBox) {
-            var piece = this,
-                options = piece.options,
+            var sector = this,
+                options = sector.options,
                 childBox;
 
-            piece.render();
+            sector.render();
 
-            piece.box = targetBox;
+            sector.box = targetBox;
             childBox = targetBox.clone();
 
-            piece.reflowLabel(childBox);
+            sector.reflowLabel(childBox);
         },
 
         reflowLabel: function(box) {
-            var piece = this,
-                options = piece.options,
-                label = piece.label;
+            var sector = this,
+                options = sector.options,
+                label = sector.label;
 
             if (label) {
                 label.reflow(box);
             }
         },
 
-        // REVIEW: Move rendering here
         getViewElements: function(view) {
-            var element = this;
+            var sector = this,
+                sectorID = uniqueId(),
+                options = sector.options,
+                border = options.border.width > 0 ? {
+                    stroke: options.border.color,
+                    strokeWidth: options.border.width,
+                    dashType: options.border.dashType
+                } : {},
+                elements = [];
+            sector.registerId(sectorID, { seriesIx: sector.seriesIx });
+            elements.push(view.createSector(sector, deepExtend({}, {
+                id: sectorID,
+                fill: options.color
+            }, border)));
 
-            return ChartElement.fn.getViewElements.call(element, view);
+            append(elements,
+                ChartElement.fn.getViewElements.call(sector, view)
+            );
+            return elements;
         }
     });
 
@@ -3896,12 +3903,13 @@
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
-            chart.pieces = [];
+            chart.sectors = [];
             chart.seriesPoints = [];
             chart.render();
         },
 
         options: {
+            startAngle: 90
         },
 
         render: function() {
@@ -3913,14 +3921,15 @@
         traverseDataPoints: function(callback) {
             var chart = this,
                 options = chart.options,
+                colors = chart.plotArea.options.seriesColors || [],
+                colorsCount = colors.length,
                 series = options.series,
-                seriesIx,
-                currentSeries,
+                startAngle = options.startAngle,
                 currentCategory,
+                currentSeries,
                 currentData,
-                // REVIEW: Does startAngle need to be in options?
-                startAngle = 90,
                 totalAngle,
+                seriesIx,
                 angles,
                 data,
                 sum,
@@ -3930,17 +3939,15 @@
                 currentSeries = series[seriesIx];
                 data = currentSeries.data;
                 sum = chart.sum(data);
-                angles = chart.angles(data, sum);
+                angles = chart.sectorAngles(data, sum);
 
                 for (i = 0; i < data.length; i++) {
                     currentData = data[i];
-                    // REVIEW: Refactor into pointValue: function(data)
-                    if ($.isPlainObject(currentData)) {
-                        value = currentData.value;
-                        currentCategory = currentData.name;
-                    } else {
-                        value = currentData;
-                    }
+                    value = chart.pointValue(currentData);
+                    currentCategory = defined(currentData.name) ? currentData.name : "";
+                    currentSeries.color = defined(currentData.color) ?
+                                          currenData.color :
+                                          colors[i % colorsCount];
 
                     callback(value, startAngle, angles[i],
                        currentCategory, i, currentSeries, seriesIx);
@@ -3949,79 +3956,55 @@
             }
         },
 
+        pointValue: function(point) {
+            return defined(point.value) ? point.value : point;
+        },
+
         sum: function(data) {
-            var length = data.length,
-                currentData,
+            var chart = this,
+                length = data.length,
                 sum = 0,
                 i;
 
             for(i = 0; i < length; i++) {
-                currentData = data[i];
-                // REVIEW: Refactor into pointValue: function(data)
-                if ($.isPlainObject(currentData)) {
-                    sum += currentData.value;
-                } else {
-                    sum += currentData;
+                sum += chart.pointValue(data[i]);
                 }
-            }
 
             return sum;
         },
 
-        // REVIEW: Rename to sectorAngles
-        angles: function(data, total) {
-            var length = data.length,
-                currentData,
+        sectorAngles: function(data, total) {
+            var chart = this,
+                length = data.length,
                 angles = [],
                 i;
 
             for(i = 0; i < length; i++) {
-                currentData = data[i];
-                // REVIEW: Refactor into pointValue: function(data)
-                if ($.isPlainObject(currentData)) {
-                    angles[i] = currentData.value * (360 / total);
-                } else {
-                    angles[i] = currentData * (360 / total);
+                angles[i] = chart.pointValue(data[i]) * (360 / total);
                 }
-            }
 
             return angles;
         },
 
-        // REVIEW: Refactor to stand-alone function
-        categoriesCount: function() {
-            var chart = this,
-                series = chart.options.series,
-                categories = 0,
-                length = series.length,
-                i;
-
-            for (i = 0; i < length; i++) {
-                categories = math.max(categories, series[i].data.length);
-            }
-
-            return categories;
-        },
-
         addValue: function(value, startAngle, angle, category, categoryIx, series, seriesIx) {
             var chart = this,
-                piece;
+                sector;
 
-            piece = new PiePiece(value, series);
+            sector = new PieSector(value, series);
 
-            if (piece) {
-                piece.category = category;
-                piece.series = series;
-                piece.seriesIx = seriesIx;
-                piece.owner = chart;
-                piece.dataItem = series.dataItems ?
+            if (sector) {
+                sector.category = category;
+                sector.series = series;
+                sector.seriesIx = seriesIx;
+                sector.owner = chart;
+                sector.dataItem = series.dataItems ?
                     series.dataItems[categoryIx] : { value: value };
-                piece.startAngle = startAngle;
-                piece.angle = angle;
+                sector.startAngle = startAngle;
+                sector.angle = angle;
             }
 
-            chart.append(piece);
-            chart.pieces.push(piece);
+            chart.append(sector);
+            chart.sectors.push(sector);
         },
 
         reflow: function(targetBox) {
@@ -4031,20 +4014,24 @@
                 width = box.width(),
                 height = box.height(),
                 minWidth = math.min(width, height),
-                newBox = new Box2D(box.x1, box.y1, box.x1 + minWidth, box.y1 + minWidth),
+                newBox = new Box2D(
+                    box.x1,
+                    box.y1,
+                    box.x1 + minWidth,
+                    box.y1 + minWidth),
                 newBoxCenter = newBox.center(),
                 boxCenter = box.center(),
-                pieces = chart.pieces,
-                count = pieces.length,
-                piece,
+                sectors = chart.sectors,
+                count = sectors.length,
+                sector,
                 i;
 
             newBox.translate(boxCenter.x - newBoxCenter.x, boxCenter.y - newBoxCenter.y);
 
             for (i = 0; i < count; i++) {
-                piece = pieces[i];
-                piece.radius = minWidth / 2;
-                piece.reflow(newBox);
+                sector = sectors[i];
+                sector.radius = minWidth / 2;
+                sector.reflow(newBox);
             }
 
             chart.box = newBox;
@@ -4053,32 +4040,9 @@
         getViewElements: function(view) {
             var chart = this,
                 options = chart.options,
-                elements = CategoricalChart.fn.getViewElements.call(chart, view),
-                pieces = chart.pieces,
-                pieceCount = pieces.length,
-                piece,
-                i;
-
-            for (i = 0; i < pieceCount; i++) {
-                piece = pieces[i];
-                elements.push(chart.createPie(view, piece));
-            }
+                elements = ChartElement.fn.getViewElements.call(chart, view);
 
             return elements;
-        },
-
-        // REVIEW: Move rendering to PieSector
-        createPie: function (view, piece, series, seriesIx) {
-            var pieId = uniqueId(),
-                pieceOptions = piece.options;
-            this.registerId(pieId, { seriesIx: seriesIx });
-            return view.createPie(piece, {
-                id: pieId,
-                fill: "#660741",
-                strokeWidth: pieceOptions.border.width,
-                stroke: pieceOptions.border.color,
-                dashType: pieceOptions.border.dashType
-            });
         }
     });
 
@@ -4103,7 +4067,8 @@
                 width: 0
             },
             range: {},
-            invertAxis: false
+            invertAxis: false,
+            legend: {}
         },
 
         render: function() {
@@ -4115,10 +4080,9 @@
                 pieSeries = [],
                 barSeries = [],
                 lineSeries = [],
-                // REVIEW: Rename to renderAxes
-                renderAxis = true,
                 i;
 
+            options.legend.items = [];
             options.invertAxes = options.categoryAxis.orientation === VERTICAL,
             options.range = { min: 0, max: 1 }
             plotArea.charts = [];
@@ -4153,6 +4117,21 @@
             plotArea.append.apply(plotArea, plotArea.charts);
         },
 
+        legendData: function(series) {
+            var plotArea = this,
+                count = series.length,
+                data = [],
+                item,
+                i;
+
+            for (i = 0; i < count; i++) {
+                item = { name: series[i].name || "", color: series[i].color };
+                data.push(item);
+            }
+
+            append(plotArea.options.legend.items, data);
+        },
+
         createBarChart: function(series) {
             var plotArea = this,
                 options = plotArea.options,
@@ -4166,11 +4145,13 @@
                     gap: firstSeries.gap,
                     spacing: firstSeries.spacing
                 }),
-                categoriesToAdd = math.max(0, barChart.categoriesCount() - categories.length);
+                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
 
             append(categories, new Array(categoriesToAdd));
             options.range = barChart.valueRange() || options.range;
             plotArea.charts.push(barChart);
+
+            plotArea.legendData(series);
         },
 
         createLineChart: function(series) {
@@ -4179,6 +4160,7 @@
                 firstSeries = series[0],
                 categoryAxis = options.categoryAxis,
                 categories = categoryAxis.categories,
+                // Override the original invertAxes
                 invertAxes = options.invertAxes = categoryAxis.orientation === VERTICAL,
                 lineChart = new LineChart(plotArea, {
                     // TODO: Rename isVertical to invertAxes, flip logic
@@ -4186,13 +4168,16 @@
                     isStacked: firstSeries.stack,
                     series: series
                 }),
-                categoriesToAdd = math.max(0, lineChart.categoriesCount() - categories.length),
+                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length),
                 lineChartRange = lineChart.valueRange() || options.range;
 
             append(categories, new Array(categoriesToAdd));
+            // Override the original range
             options.range.min = math.min(options.range.min, lineChartRange.min);
             options.range.max = math.max(options.range.max, lineChartRange.max);
             plotArea.charts.push(lineChart);
+
+            plotArea.legendData(series);
         },
 
         createPieChart: function(series) {
@@ -4200,9 +4185,17 @@
                 options = plotArea.options,
                 pieChart = new PieChart(plotArea, {
                     series: series
-                });
+                }),
+                sectors = pieChart.sectors,
+                count = sectors.length,
+                i;
 
             plotArea.charts.push(pieChart);
+            for (i = 0; i < count; i++) {
+                options.legend.items.push({
+                    name: sectors[i].category,
+                    color: sectors[i].options.color });
+            }
         },
 
         createAxes: function(seriesMin, seriesMax, invertAxes) {
@@ -4252,13 +4245,12 @@
             plotArea.box = targetBox.clone();
 
             plotArea.box.unpad(margin);
-            plotArea.axisReflow();
+            plotArea.reflowAxes();
             plotArea.chartsReflow();
             plotArea.axisWrap();
         },
 
-        // REVIEW: Rename to reflowAxes
-        axisReflow: function() {
+        reflowAxes: function() {
             var plotArea = this,
                 axisY = plotArea.axisY,
                 axisX = plotArea.axisX,
@@ -4288,7 +4280,6 @@
             }
         },
 
-        // REVIEW: Rename to reflowCharts
         chartsReflow: function() {
             var plotArea = this,
                 charts = plotArea.charts,
@@ -4625,11 +4616,10 @@
             return new SVGCircle(center, radius, options);
         },
 
-        // REVIEW: Rename to createSector
-        createPie: function(piece, options) {
+        createSector: function(sector, options) {
             // REVIEW: We'll need Sector2D class to hold sector definition.
-            //         Once we have it will use it instead of "piece".
-            return new SVGPie(piece, options);
+            //         Once we have it will use it instead of "sector".
+            return new SVGSector(sector, options);
         },
 
         createGradient: function(options) {
@@ -4832,15 +4822,14 @@
         }
     });
 
-    // REFACTOR: Rename to SVGSector
-    var SVGPie = ViewElement.extend({
-        init: function(piece, options) {
+    var SVGSector = ViewElement.extend({
+        init: function(sector, options) {
             var pie = this;
             ViewElement.fn.init.call(pie, options);
 
-            pie.template = SVGPie.template;
+            pie.template = SVGSector.template;
             if (!pie.template) {
-                pie.template = SVGPie.template = template(
+                pie.template = SVGSector.template = template(
                     "<path <#= d.renderAttr(\"id\", d.options.id) #>" +
                     "d='<#= d.renderPath() #>' " +
                     "<#= d.renderStroke() #><#= d.renderStrokeWidth() #>" +
@@ -4851,7 +4840,7 @@
                 );
             }
 
-            pie.piece = piece || [];
+            pie.sector = sector || {};
         },
 
         options: {
@@ -4863,22 +4852,22 @@
 
         clone: function() {
             var pie = this;
-            return new SVGPie(pie.piece, deepExtend({}, pie.options));
+            return new SVGSector(pie.sector, deepExtend({}, pie.options));
         },
 
         renderPath: function() {
             var pie = this,
-                piece = pie.piece,
+                sector = pie.sector,
                 strokeWidth = pie.options.strokeWidth,
                 shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
-                startAngle = piece.startAngle,
-                endAngle = piece.angle + startAngle,
+                startAngle = sector.startAngle,
+                endAngle = sector.angle + startAngle,
                 isReflexAngle = (endAngle - startAngle) > 180,
-                radius = piece.radius,
+                radius = sector.radius,
                 margin = radius * 0.1,
-                lineEndPoint = pie.calculatePoint(startAngle, radius, margin),
-                curveEndPoint = pie.calculatePoint(endAngle, radius, margin),
-                box = piece.box;
+                lineEndPoint = pie.calculateSectorPoint(startAngle, radius, margin),
+                curveEndPoint = pie.calculateSectorPoint(endAngle, radius, margin),
+                box = sector.box;
 
             return "M" + (lineEndPoint.x + box.x1) + " " + (lineEndPoint.y + box.y1) +
                    " A" + (radius - margin) + " " + (radius - margin) +
@@ -4887,7 +4876,7 @@
                    " L" + (radius + box.x1) + " " + (radius + box.y1) + " z";
         },
 
-        calculatePoint: function(angle, r, margin) {
+        calculateSectorPoint: function(angle, r, margin) {
             var radianAngle = angle * (math.PI / 180),
                 ax = math.cos(radianAngle),
                 ay = math.sin(radianAngle),
@@ -4898,22 +4887,22 @@
         },
 
         renderStrokeWidth: function () {
-            var path = this,
-                options = path.options;
+            var pie = this,
+                options = pie.options;
 
             return options.strokeWidth > 0 ? "stroke-width='" + options.strokeWidth + "' " : "";
         },
 
         renderStroke: function () {
-            var path = this,
-                options = path.options;
+            var pie = this,
+                options = pie.options;
 
             return options.stroke ? "stroke='" + options.stroke + "' " : "";
         },
 
         renderDashType: function () {
-            var path = this,
-                options = path.options,
+            var pie = this,
+                options = pie.options,
                 result = [],
                 dashType = options.dashType ? options.dashType.toLowerCase() : null,
                 dashTypeArray,
@@ -5164,9 +5153,8 @@
             return new VMLCircle(center, radius, options);
         },
 
-        // Rename to createSector
-        createPie: function(piece, options) {
-            return new VMLPie(piece, options);
+        createSector: function(sector, options) {
+            return new VMLSector(sector, options);
         },
 
         createGroup: function(options) {
@@ -5337,15 +5325,14 @@
         }
     });
 
-    // REVIEW: Rename to VMLSector
-    var VMLPie = ViewElement.extend({
-        init: function(piece, options) {
+    var VMLSector = ViewElement.extend({
+        init: function(sector, options) {
             var pie = this;
             ViewElement.fn.init.call(pie, options);
 
-            pie.template = VMLPie.template;
+            pie.template = VMLSector.template;
             if (!pie.template) {
-                pie.template = VMLPie.template = template(
+                pie.template = VMLSector.template = template(
                     "<kvml:shape <#= d.renderAttr(\"id\", d.options.id) #> " +
                     "style='position:absolute; width:1px; height:1px;' " +
                     "coordorigin='0 0' coordsize='1 1'>" +
@@ -5355,7 +5342,7 @@
                 );
             }
 
-            pie.piece = piece;
+            pie.sector = sector;
             pie.stroke = new VMLStroke(pie.options);
             pie.fill = new VMLFill(pie.options);
         },
@@ -5366,14 +5353,14 @@
 
         renderPath: function() {
             var pie = this,
-                piece = pie.piece,
-                box = piece.box,
-                radius = piece.radius,
+                sector = pie.sector,
+                box = sector.box,
+                radius = sector.radius,
                 r = round(radius - (radius * 0.1)),
                 cx = round(radius + box.x1),
                 cy = round(radius + box.y1),
-                sa = -round((piece.startAngle + 180) * 65535),
-                a = -round(piece.angle * 65536);
+                sa = -round((sector.startAngle + 180) * 65535),
+                a = -round(sector.angle * 65536);
 
             return "M " + cx + " " + cy +
                    " AE " + cx + " " + cy +
@@ -6501,6 +6488,18 @@
         }
     }
 
+    function categoriesCount(series) {
+        var seriesCount = series.length,
+            categories = 0,
+            i;
+
+        for (i = 0; i < seriesCount; i++) {
+            categories = math.max(categories, series[i].data.length);
+        }
+
+        return categories;
+    }
+
     // Exports ================================================================
 
     kendo.ui.plugin("Chart", Chart);
@@ -6526,9 +6525,12 @@
         Title: Title,
         Legend: Legend,
         PlotArea: PlotArea,
+        Tooltip: Tooltip,
+        Highlight: Highlight,
+        PieSector: PieSector,
+        PieChart: PieChart,
         ViewElement: ViewElement,
         ViewBase: ViewBase,
-        // SVG elements
         SVGView: SVGView,
         SVGGroup: SVGGroup,
         SVGText: SVGText,
@@ -6539,10 +6541,7 @@
         SVGOverlayDecorator: SVGOverlayDecorator,
         SVGPaintDecorator: SVGPaintDecorator,
         SVGClipAnimationDecorator: SVGClipAnimationDecorator,
-        SVGPie: SVGPie,
-        SVGOverlayDecorator: SVGOverlayDecorator,
-        SVGPaintDecorator: SVGPaintDecorator,
-        // VML Elements
+        SVGSector: SVGSector,
         VMLView: VMLView,
         VMLText: VMLText,
         VMLRotatedText: VMLRotatedText,
@@ -6556,8 +6555,6 @@
         VMLClipAnimationDecorator: VMLClipAnimationDecorator,
         VMLStroke: VMLStroke,
         VMLFill: VMLFill,
-        Tooltip: Tooltip,
-        Highlight: Highlight,
         deepExtend: deepExtend,
         Color: Color,
         blendColors: blendColors,
@@ -6566,8 +6563,7 @@
         ExpandAnimation: ExpandAnimation,
         BarAnimation: BarAnimation,
         BarAnimationDecorator: BarAnimationDecorator,
-        PiePiece: PiePiece,
-        PieChart: PieChart
+        categoriesCount: categoriesCount
     });
 
     // Themes
@@ -6725,4 +6721,3 @@
     });
 
 })(jQuery);
-
