@@ -195,6 +195,9 @@
 
             that.input.bind({
                 keydown: proxy(that._keydown, that),
+                focus: function() {
+                    that.input.parent().addClass("k-state-focused");
+                },
                 blur: function() {
                     that._bluring = setTimeout(function() {
                         if (!that._current) {
@@ -203,6 +206,7 @@
 
                         clearTimeout(that._typing);
                         that._blur();
+                        that.input.parent().removeClass("k-state-focused");
                     }, 100);
                 }
             });
@@ -258,7 +262,7 @@
                 element = that.element,
                 wrapper = that.wrapper,
                 input = that.input,
-                arrow = that.arrow;
+                arrowWrapper = that.arrow.parent();
 
             if (enable === false) {
                 wrapper
@@ -268,7 +272,7 @@
 
                 input.attr(ATTRIBUTE, ATTRIBUTE);
                 element.attr(ATTRIBUTE, ATTRIBUTE);
-                arrow.unbind(CLICK);
+                arrowWrapper.unbind(CLICK);
             } else {
                 wrapper
                     .removeClass(DISABLED)
@@ -277,7 +281,7 @@
 
                 input.removeAttr(ATTRIBUTE);
                 element.removeAttr(ATTRIBUTE);
-                arrow.bind(CLICK, function() { that.toggle() });
+                arrowWrapper.bind(CLICK, function() { that.toggle() });
             }
         },
 
@@ -610,7 +614,6 @@
                 input = wrapper.find(SELECTOR);
             }
 
-            input[0].style.cssText = element.style.cssText;
             input.addClass(element.className).show();
 
             that._focused = that.input = input;
@@ -671,7 +674,8 @@
                 wrapper = element.hide().wrap("<div />").parent();
             }
 
-            that.wrapper = wrapper.addClass("k-widget k-combobox k-header");
+            wrapper[0].style.cssText = element[0].style.cssText;
+            that.wrapper = wrapper.addClass("k-widget k-combobox k-header").show();
         }
     });
 

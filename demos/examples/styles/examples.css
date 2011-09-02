@@ -27,11 +27,6 @@ html
     font:75% arial,helvetica,sans-serif;
 }
 
-body
-{
-    text-rendering: optimizeLegibility;
-}
-
 .skinSelector .k-arrow-down,
 #nav .k-sprite,
 #codeStrip .k-link,
@@ -134,6 +129,7 @@ body
 
 #header
 {
+    text-rendering: optimizeLegibility;
     padding:4px 0 5px;
     box-shadow: 0 0 4px #555;
     position:relative;

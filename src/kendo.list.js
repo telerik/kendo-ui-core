@@ -236,9 +236,10 @@
         },
 
         _toggle: function(open) {
-            open = open !== undefined? open : !this.popup.visible();
+            var that = this;
+            open = open !== undefined? open : !that.popup.visible();
 
-            this[open ? "open" : "close"]();
+            that[open ? "open" : "close"]();
         },
         _scroll: function (item) {
 
