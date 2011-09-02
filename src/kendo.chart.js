@@ -3470,6 +3470,7 @@
                 options = marker.options,
                 type = options.type,
                 box = marker.box,
+                renderOptions = deepExtend({}, renderOptions, { animation: { type: "clip" } }),
                 element = BoxElement.fn.getViewElements.call(marker, view, renderOptions)[0],
                 halfWidth = box.width() / 2;
 
@@ -3778,7 +3779,10 @@
                 strokeWidth: series.width,
                 strokeOpacity: series.opacity,
                 fill: "",
-                dashType: series.dashType
+                dashType: series.dashType,
+                animation: {
+                    type: "clip"
+                }
             });
         }
     });
@@ -4133,14 +4137,19 @@
                 decorators = view.decorators,
                 i,
                 length = decorators.length,
+                currentDecorator,
                 j;
 
+            // TODO: Make recursive?
+
             for (i = 0; i < length; i++) {
+                currentDecorator = decorators[i];
                 for (j = 0; j < element.children.length; j++) {
-                    element.children[j] = decorators[i].decorate.apply(decorators[i],
-                    [element.children[j], arguments[1], arguments[2]]);
+                    element.children[j] = currentDecorator.decorate.call(
+                        currentDecorator, element.children[j]
+                    );
                 }
-                element = decorators[i].decorate.apply(decorators[i], arguments);
+                element = currentDecorator.decorate.call(currentDecorator, element);
             }
 
             return element;
@@ -4169,7 +4178,8 @@
             view.decorators.push(
                 new SVGOverlayDecorator(view),
                 new SVGPaintDecorator(view),
-                new AnimationDecorator(view)
+                new AnimationDecorator(view),
+                new ClipAnimationDecorator(view)
             );
 
             view.template = SVGView.template;
@@ -4239,17 +4249,21 @@
                              new Point2D(box.x2, box.y2),
                              new Point2D(box.x1, box.y2)
                             ], true, style
-                ), box, style
+                )
             );
         },
 
         createLine: function(x1, y1, x2, y2, options) {
-            return new SVGLine([new Point2D(x1, y1),
-                                new Point2D(x2, y2)], false, options);
+            return this.decorate(
+                new SVGLine([new Point2D(x1, y1),
+                             new Point2D(x2, y2)], false, options)
+            );
         },
 
         createPolyline: function(points, closed, options) {
-            return new SVGLine(points, closed, options);
+            return this.decorate(
+                new SVGLine(points, closed, options)
+            );
         },
 
         createCircle: function(center, radius, options) {
@@ -4289,6 +4303,21 @@
                 group.template = SVGGroup.template =
                 template("<g<#= d.renderAttr(\"id\", d.options.id) #>>" +
                          "<#= d.renderContent() #></g>");
+            }
+        }
+    });
+
+
+    var SVGClipPath = ViewElement.extend({
+        init: function(options) {
+            var clip = this;
+            ViewElement.fn.init.call(clip, options);
+
+            clip.template = SVGClipPath.template;
+            if (!clip.template) {
+                clip.template = SVGClipPath.template =
+                template("<clipPath<#= d.renderAttr(\"id\", d.options.id) #>>" +
+                         "<#= d.renderContent() #></clipPath>");
             }
         }
     });
@@ -4354,6 +4383,7 @@
                     "<#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #>" +
                     "<#= d.renderDashType() #> " +
                     "stroke-linecap='<#= d.renderLinecap() #>' " +
+                    "<#= d.renderAttr(\"clip-path\", d.options.clipPath) #>" +
                     "fill-opacity='<#= d.options.fillOpacity #>' " +
                     "stroke-opacity='<#= d.options.strokeOpacity #>' " +
                     "fill='<#= d.options.fill || \"none\" #>'></path>"
@@ -4601,15 +4631,96 @@
                 box = element.options.box,
                 animation = element.options.animation;
 
-            if (animation && animation.type === BAR) {
-                view.animations.push(
-                    new BarAnimation(element, element.options)
-                );
+            if (animation) {
+                if (animation.type === BAR) {
+                    view.animations.push(
+                        new BarAnimation(element, element.options)
+                    );
+                }
             }
 
             return element;
         }
     }
+
+    var ClipAnimationDecorator = Class.extend({
+        init: function(view) {
+            this.view = view;
+        },
+
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                animation = element.options.animation;
+
+            if (animation && animation.type === "clip") {
+                var definitions = view.definitions,
+                    clipPath = definitions["clipAnim"],
+                    clipRect;
+
+                if (!clipPath) {
+                    clipPath = new SVGClipPath({ id: "clipAnim" });
+                    clipRect = view.createRect(
+                        new Box2D(0, 0, 0, view.options.height), { id: "clipAnim-rect" });
+                    clipPath.children.push(clipRect);
+                    definitions["clipAnim"] = clipPath;
+
+                    view.animations.push(new ClipAnimation(clipRect, { width: view.options.width }));
+                }
+
+                element.options.clipPath = "url(#clipAnim)";
+            }
+
+            return element;
+        }
+    });
+
+    var ClipAnimation = Class.extend({
+        init: function(clipRect, options) {
+            var anim = this;
+
+            anim.options = deepExtend({}, anim.options, options);
+            anim.clipRect = clipRect;
+        },
+
+        options: {
+            duration: 500,
+            easing: "linear",
+            width: 600
+        },
+
+        play: function() {
+            var anim = this,
+                clipRect = anim.clipRect,
+                target = $(doc.getElementById(clipRect.options.id)),
+                options = anim.options,
+                current = clipRect.clone(),
+                currentPoints = current.points,
+                start = +new Date(),
+                duration = options.duration,
+                finish = start + duration,
+                easing = jQuery.easing[options.easing],
+                interval,
+                time,
+                pos,
+                easingPos;
+
+            interval = setInterval(function() {
+                time = +new Date();
+                pos = time > finish ? 1 : (time - start) / duration;
+                easingPos = easing(pos, time - start, 0, 1);
+
+                currentPoints[1].x = currentPoints[2].x =
+                    interpolateValue(0, options.width, easingPos);
+
+                current.refresh(target);
+
+                if (time > finish) {
+                    clearInterval(interval);
+                }
+            }, 10);
+        }
+    });
 
     var BarAnimation = Class.extend({
         init: function(viewElement, options) {
@@ -4631,7 +4742,7 @@
                 stackBase = options.animation.stackBase,
                 aboveAxis = options.aboveAxis,
                 initialPosition,
-                target = $("#" + viewElement.options.id),
+                target = $(doc.getElementById(viewElement.options.id)),
                 top = viewElement.points[0].y,
                 bottom = viewElement.points[3].y,
                 left = viewElement.points[0].x,
