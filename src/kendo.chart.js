@@ -2716,9 +2716,10 @@
                 divisions = axis.getDivisions(stepValue),
                 pos = lineBox[isVertical ? "y2" : "x1"],
                 multuplier = isVertical ? -1 : 1,
-                positions = [];
+                positions = [],
+                i;
 
-            for (var i = 0; i < divisions; i++) {
+            for (i = 0; i < divisions; i++) {
                 positions.push(round(pos, COORD_PRECISION));
                 pos = pos + step * multuplier;
             }
@@ -2801,13 +2802,17 @@
 
             var options = axis.options,
                 align = options.orientation === VERTICAL ? RIGHT : CENTER,
-                labelOptions = deepExtend({ }, options.labels, { align: align });
+                labelOptions = deepExtend({ }, options.labels, { align: align }),
+                labelTemplate,
+                count = options.categories.length,
+                content,
+                i;
 
-            for (var i = 0; i < options.categories.length; i++) {
-                var content = options.categories[i];
+            for (i = 0; i < count; i++) {
+                content = options.categories[i];
 
                 if (labelOptions.template) {
-                    var labelTemplate = baseTemplate(labelOptions.template);
+                    labelTemplate = baseTemplate(labelOptions.template);
                     content = labelTemplate({ value: content });
             }
 
@@ -2833,10 +2838,12 @@
                 children = axis.children,
                 space = axis.getActualTickSize() + options.margin,
                 maxLabelHeight = 0,
-                maxLabelWidth = 0;
+                maxLabelWidth = 0,
+                label,
+                i;
 
-            for (var i = 0; i < children.length; i++) {
-                var label = children[i];
+            for (i = 0; i < children.length; i++) {
+                label = children[i];
                 maxLabelHeight = math.max(maxLabelHeight, label.box.height());
                 maxLabelWidth = math.max(maxLabelWidth, label.box.width());
             }
@@ -2861,10 +2868,11 @@
                 options = axis.options,
                 line = options.line,
                 isVertical = options.orientation === VERTICAL,
-                childElements = ChartElement.fn.getViewElements.call(axis, view);
+                childElements = ChartElement.fn.getViewElements.call(axis, view),
+                lineOptions;
 
             if (line.width > 0) {
-                var lineOptions = {
+                lineOptions = {
                         strokeWidth: line.width,
                         stroke: line.color,
                         dashType: line.dashType,
@@ -2894,9 +2902,10 @@
                 size = isVertical ? axis.box.height() : axis.box.width(),
                 step = size / itemsCount,
                 pos = isVertical ? axis.box.y1 : axis.box.x1,
-                positions = [];
+                positions = [],
+                i;
 
-            for (var i = 0; i < itemsCount; i++) {
+            for (i = 0; i < itemsCount; i++) {
                 positions.push(round(pos, COORD_PRECISION));
                 pos += step;
             }
@@ -2966,10 +2975,12 @@
                 count = children.length,
                 slots = count + gap + (spacing * (count - 1)),
                 slotSize = (isVertical ? box.height() : box.width()) / slots,
-                position = box[axis + 1] + slotSize * (gap / 2);
+                position = box[axis + 1] + slotSize * (gap / 2),
+                childBox,
+                i;
 
-            for (var i = 0; i < count; i++) {
-                var childBox = (children[i].box || box).clone();
+            for (i = 0; i < count; i++) {
+                childBox = (children[i].box || box).clone();
 
                 childBox[axis + 1] = position;
                 childBox[axis + 2] = position + slotSize;
@@ -3005,7 +3016,9 @@
                 stackBase = targetBox[stackAxis + 2],
                 children = stack.children,
                 box = stack.box = new Box2D(),
-                stackDirection;
+                childrenCount = children.length,
+                stackDirection,
+                i;
 
             if (options.isReversed) {
                 stackDirection = isVertical ? BOTTOM : LEFT;
@@ -3013,7 +3026,7 @@
                 stackDirection = isVertical ? TOP : RIGHT;
             }
 
-            for (var i = 0; i < children.length; i++) {
+            for (i = 0; i < childrenCount; i++) {
                 var currentChild = children[i],
                     childBox = currentChild.box.clone();
 
@@ -3066,7 +3079,8 @@
                 value = bar.value,
                 options = bar.options,
                 labels = options.labels,
-                labelText = value;
+                labelText = value,
+                labelTemplate;
 
             if (bar._rendered) {
                 return;
@@ -3076,7 +3090,7 @@
 
             if (labels.visible && value) {
                 if (labels.template) {
-                    var labelTemplate = baseTemplate(labels.template);
+                    labelTemplate = baseTemplate(labels.template);
                     labelText = labelTemplate({
                         dataItem: bar.dataItem,
                         category: bar.category,
