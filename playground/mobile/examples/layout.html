@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="http://192.168.2.1:8888/target/target-script-min.js"></script>
-    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta content="minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
     
@@ -10,12 +9,15 @@
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <script type="text/javascript" src="../src/zepto.js"></script>
-    <script type="text/javascript" src="../src/detect.js"></script>
-    <link rel="stylesheet" type="text/css" href="layout.css">
+    <script type="text/javascript" src="../../../src/jquery.js"></script>
+    <script type="text/javascript" src="../../../src/kendo.core.js"></script>
+    <link rel="stylesheet/less" type="text/css" href="layout.less">
+    <script src="less.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        $().ready(function () {
+        var os = kendo.support.mobileOS;
+        $(document).ready(function () {
+/*
             if ($.browser.IE) {
                 $('button, .buttonStrip, .tabStrip, .toolbar, .msg').each( function () {
                     var $this = $(this);
@@ -31,24 +33,27 @@
                     }
                 });
             }
+*/
 
-            if ($.os && !$.os.ios)
-                $('.ios').removeClass('ios').addClass($.os.name);
+            if (os) {
+                if (!os.ios) {
+                    $('.ios').removeClass('ios').addClass(os.name);
 
-            if ($.os && !$.os.ios && !$.os.blackberry)
-                $('.layout').css($.getCssPrefix() + 'box-direction', 'reverse');
+                    if (!os.blackberry)
+                        $('.layout').css(kendo.support.transitions.css + 'box-direction', 'reverse');
+                }
 
-//            alert(window.outerHeight + ' ' + window.innerHeight);
-            if ($.os)
                 document.body.style.paddingBottom = (window.outerHeight - window.innerHeight) + 'px';
+            }
         });
 
-        $().bind( 'load', function () {
-            if ($.os)
+        $(document).bind( 'load', function () {
+            if (os)
                 setTimeout(function() { window.scrollTo(0, 1) }, 100);
         });
 
     </script>
+
 </head>
 <body>
     <div class="layout">
