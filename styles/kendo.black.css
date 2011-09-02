@@ -81,9 +81,9 @@
 .k-time-popup,
 .k-datepicker-calendar
 {
-    -webkit-box-shadow: 2px 2px 2px 0 #bbb;
-    box-shadow: 2px 2px 2px 0 #bbb;
-    -moz-box-shadow: 2px 2px 2px 0 #888;
+    -webkit-box-shadow: 2px 2px 2px 0 #2b2b2b;
+    box-shadow: 2px 2px 2px 0 #2b2b2b;
+    -moz-box-shadow: 2px 2px 2px 0 #222;
 }
 
 .k-group
@@ -316,9 +316,9 @@ td.k-group-cell
 .k-dropdown-wrap.k-state-active,
 .k-dropdown-wrap.k-state-active:hover
 {
-    -webkit-box-shadow: 2px 2px 2px 0 #bbb;
-    box-shadow: 2px 2px 2px 0 #bbb;
-    -moz-box-shadow: 2px 2px 2px 0 #888;
+    -webkit-box-shadow: 2px 2px 2px 0 #2b2b2b;
+    box-shadow: 2px 2px 2px 0 #2b2b2b;
+    -moz-box-shadow: 2px 2px 2px 0 #222;
 }
 
 .k-autocomplete .k-input,

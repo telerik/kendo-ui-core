@@ -216,6 +216,7 @@
                 currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
                 url = currentFolder + commonLink.attr("href").replace(/kendo\.\w+(\.min)?\.css/i, "kendo." + skinName + "$1.css"),
                 exampleTitle = $("#exampleTitle"),
+                oldSkinName = $(document).data("kendoSkin"),
                 exampleElement = $("#example"), newLink;
 
             if (!$.browser.msie) {
@@ -236,6 +237,7 @@
                     exampleElement[0].style.cssText = exampleElement[0].style.cssText;
 
                 $(document).data("kendoSkin", skinName).trigger("kendo:skinChange");
+                $(document.documentElement).removeClass("k-" + oldSkinName).addClass("k-" + skinName);
             };
 
             var fadeSkin = function() {
