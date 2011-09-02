@@ -3737,7 +3737,12 @@
                 pointCenter,
                 linePoints,
                 interpolate,
-                lines = [];
+                lines = [],
+                group = view.createGroup({
+                    animation: {
+                        type: "clipVML"
+                    }
+                });
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeriesPoints = seriesPoints[seriesIx];
@@ -3768,7 +3773,8 @@
                 }
             }
 
-            return lines.concat(elements);
+            [].push.apply(group.children, lines.concat(elements));
+            return [group];
         },
 
         createLine: function(lineId, view, points, series, seriesIx) {
@@ -4235,7 +4241,9 @@
         },
 
         createGroup: function(options) {
-            return new SVGGroup(options);
+            return this.decorate(
+                new SVGGroup(options)
+            );
         },
 
         createText: function(content, options) {
@@ -4675,6 +4683,36 @@
         }
     });
 
+    var VMLClipAnimationDecorator = Class.extend({
+        init: function(view) {
+            this.view = view;
+        },
+
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                animation = element.options.animation,
+                clipRect;
+
+            if (animation && animation.type === "clipVML") {
+                clipRect = new VMLClipRect(
+                    new Box2D(0, 0, view.options.width, view.options.height),
+                    { id: "clipVML" }
+                );
+
+                view.animations.push(
+                    new ClipAnimation(clipRect, { width: view.options.width })
+                );
+
+                clipRect.children.push(element);
+
+                return clipRect;
+            } else {
+                return element;
+            }
+        }
+    });
+
     var ClipAnimation = Class.extend({
         init: function(clipRect, options) {
             var anim = this;
@@ -4803,7 +4841,8 @@
             view.decorators.push(
                 new VMLOverlayDecorator(view),
                 new VMLGradientDecorator(view),
-                new AnimationDecorator(view)
+                new AnimationDecorator(view),
+                new VMLClipAnimationDecorator(view)
             );
 
             view.template = VMLView.template;
@@ -4881,7 +4920,9 @@
         },
 
         createGroup: function(options) {
-            return new VMLGroup(options);
+            return this.decorate(
+                new VMLGroup(options)
+            );
         },
 
         createGradient: function(options) {
@@ -5124,6 +5165,57 @@
                     "<#= d.renderContent() #></div>"
                 );
             }
+        }
+    });
+
+    var VMLClipRect = ViewElement.extend({
+        init: function(box, options) {
+            var clipRect = this;
+            ViewElement.fn.init.call(clipRect, options);
+
+            clipRect.template = VMLClipRect.template;
+            clipRect.clipTemplate = VMLClipRect.clipTemplate;
+            if (!clipRect.template) {
+                clipRect.template = VMLClipRect.template = template(
+                    "<div <#= d.renderAttr(\"id\", d.options.id) #>" +
+                        "style='position:absolute; " +
+                        "width:<#= d.box.width() #>px; height:<#= d.box.height() #>px; " +
+                        "top:<#= d.box.y1 #>px; " +
+                        "left:<#= d.box.x1 #>px; " +
+                        "clip:<#= d.renderClip() #>;' >" +
+                    "<#= d.renderContent() #></div>"
+                );
+
+                clipRect.clipTemplate = VMLClipRect.clipTemplate = template(
+                    "rect(<#= d.points[0].y #>px <#= d.points[1].x #>px " +
+                         "<#= d.points[2].y #>px <#= d.points[0].x #>px)"
+                );
+            }
+
+            clipRect.box = box;
+
+            // Points defining the clipping rectangle
+            clipRect.points = [
+                new Point2D(box.x1, box.y1),
+                new Point2D(box.x2, box.y1),
+                new Point2D(box.x2, box.y2),
+                new Point2D(box.x1, box.y2)
+            ];
+        },
+
+        clone: function() {
+            var clipRect = this;
+            return new VMLClipRect(
+                clipRect.box, deepExtend({}, clipRect.options)
+            );
+        },
+
+        renderClip: function() {
+            return this.clipTemplate(this);
+        },
+
+        refresh: function(domElement) {
+            $(domElement).css("clip", this.renderClip());
         }
     });
 
