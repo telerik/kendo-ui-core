@@ -170,6 +170,29 @@
                     equals(circle.options.strokeWidth, 2);
                 });
 
+                test("createSector returns VMLSector", function() {
+                    var sector = view.createSector();
+                    ok(sector instanceof Chart.VMLSector);
+                });
+
+                test("createSector sets fill color", function() {
+                    var sector = view.createSector({}, { fill: "#cf0" });
+
+                    equals(sector.options.fill, "#cf0");
+                });
+
+                test("createSector sets stroke color", function() {
+                    var sector = view.createSector({}, { stroke: "#cf0" });
+
+                    equals(sector.options.stroke, "#cf0");
+                });
+
+                test("createSector sets stroke width", function() {
+                    var sector = view.createSector({}, { strokeWidth: 2});
+
+                    equals(sector.options.strokeWidth, 2);
+                });
+
                 test("renderTo returns DOM element", function() {
                     var container = $("<div />").appendTo(document.body);
                     equals(view.renderTo(container[0]), container[0].firstChild);
@@ -771,6 +794,87 @@
                     var domElement = $("<div />")[0];
                     clipRect.refresh(domElement);
                     equals($(domElement).css("clip"), "rect(20px 110px 220px 10px)");
+                });
+
+            })();
+
+            (function() {
+                var sector;
+
+                function createSector(options) {
+                    sector = new Chart.VMLSector({
+                        angle: 20,
+                        radius: 150,
+                        startAngle: 90,
+                        box: new Box2D(0, 0, 100, 100)
+                    }, options);
+                }
+
+                module("VMLSector", {
+                    setup: function() {
+                        createSector();
+                    }
+                });
+
+                test("renders shape tag", function() {
+                    ok(sector.render().match(
+                        /\<kvml:shape.*\>.*\<\/kvml:shape\>/
+                    ));
+                });
+
+                test("renders path", function() {
+                    ok(sector.render().indexOf("<kvml:path v='M 150 150 AE 150 150 135 135 -17694450 -1310720 X E' />"));
+                });
+
+                test("creates fill", function() {
+                    ok(sector.fill instanceof Chart.VMLFill);
+                });
+
+                test("sets fill color", function() {
+                    createSector({ fill: "#f00" });
+                    equals(sector.fill.options.fill, "#f00");
+                });
+
+                test("sets fill opacity", function() {
+                    createSector({ opacity: 0.5 });
+                    equals(sector.fill.options.opacity, 0.5);
+                });
+
+                test("renders fill", function() {
+                    ok(sector.render().indexOf("<kvml:fill") > -1);
+                });
+
+                test("creates stroke", function() {
+                    ok(sector.stroke instanceof Chart.VMLStroke);
+                });
+
+                test("sets stroke color", function() {
+                    createSector({ stroke: "#cf0" });
+                    same(sector.stroke.options.stroke, "#cf0");
+                });
+
+                test("sets stroke width", function() {
+                    createSector({ strokeWidth: 2 });
+                    same(sector.stroke.options.strokeWidth, 2);
+                });
+
+                test("sets stroke dash type", function() {
+                    createSector({ dashType: "dot" });
+                    same(sector.stroke.options.dashType, "dot");
+                });
+
+                test("sets stroke opacity", function() {
+                    createSector({ opacity: 0.5 });
+                    same(sector.stroke.options.opacity, 0.5);
+                });
+
+                test("renders stroke", function() {
+                    ok(sector.render().indexOf("<kvml:stroke") > -1);
+                });
+
+                test("renders id", function() {
+                    sector.options.id = "id";
+                    ok(sector.render().indexOf("id='id'") > -1);
                 });
 
             })();

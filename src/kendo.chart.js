@@ -3908,6 +3908,7 @@
                     dashType: options.border.dashType
                 } : {},
                 elements = [];
+
             sector.registerId(sectorID, { seriesIx: sector.seriesIx });
             elements.push(view.createSector(sector, deepExtend({}, {
                 id: sectorID,
@@ -3917,6 +3918,7 @@
             append(elements,
                 ChartElement.fn.getViewElements.call(sector, view)
             );
+
             return elements;
         }
     });
@@ -6574,6 +6576,7 @@
         VMLLine: VMLLine,
         VMLCircle: VMLCircle,
         VMLGroup: VMLGroup,
+        VMLSector: VMLSector,
         VMLClipRect: VMLClipRect,
         VMLOverlayDecorator: VMLOverlayDecorator,
         VMLLinearGradient: VMLLinearGradient,
