@@ -767,6 +767,10 @@ var categories = {
                     url: "treeview/index.html"
                 },
                 {
+                    text: "Drag & drop",
+                    url: "treeview/dragdrop.html"
+                },
+                {
                     text: "Events",
                     url: "treeview/events.html"
                 },

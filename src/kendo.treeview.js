@@ -833,7 +833,7 @@
                 hoveredItem, hoveredItemPos, itemHeight, itemTop, itemContent, delta,
                 insertOnTop, insertOnBottom, addChild;
 
-            if (!$.contains(treeview.wrapper[0], dropTarget[0])) {
+            if (!dropTarget.closest(".k-treeview").length) {
                 // dragging node outside of treeview
                 statusClass = "k-denied";
             } else if ($.contains(sourceNode[0], dropTarget[0])) {
