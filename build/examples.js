@@ -356,7 +356,7 @@ function build(origin, destination, kendoCDN) {
     console.log("copying resources...");
     kendoBuild.copyDirSyncRecursive(examplesLocation, outputPath);
     kendoBuild.copyDirSyncRecursive(originJS, outputPath + "/js");
-    kendoBuild.copyDirSyncRecursive(originStyles, outputPath + "/styles", true);
+    kendoBuild.copyDirSyncRecursive(originStyles, outputPath + "/styles", true, /\.(css|png|jpg|jpeg|gif)$/i);
     fs.unlinkSync(outputPath + "/template.html");
     fs.unlinkSync(outputPath + "/buildTemplate.html");
 

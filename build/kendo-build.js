@@ -19,7 +19,7 @@ function rmdirSyncRecursive(path) {
     return fs.rmdirSync(path);
 }
 
-function copyDirSyncRecursive(sourceDir, newDirLocation, skipClean) {
+function copyDirSyncRecursive(sourceDir, newDirLocation, skipClean, filter) {
     try {
         if (!skipClean && fs.statSync(newDirLocation).isDirectory()) {
             exports.rmdirSyncRecursive(newDirLocation);
@@ -42,9 +42,17 @@ function copyDirSyncRecursive(sourceDir, newDirLocation, skipClean) {
         if (fileInfo.isDirectory()) {
             fs.mkdirSync(destinationPath, fileInfo.mode);
             copyDirSyncRecursive(sourcePath, destinationPath);
+
+            if (!fs.readdirSync(destinationPath).length) {
+                fs.rmdirSync(destinationPath);
+            }
         } else if (fileInfo.isSymbolicLink()) {
             fs.symlinkSync(fs.readlinkSync(sourcePath), destinationPath);
         } else {
+            if (filter && !filter.test(files[i])) {
+                continue;
+            }
+
             fs.writeFileSync(destinationPath, fs.readFileSync(sourcePath));
         }
     }

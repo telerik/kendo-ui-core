@@ -129,8 +129,8 @@ function processScripts() {
 }
 
 function processStyles() {
-    kendoBuild.copyDirSyncRecursive("styles", SOURCESTYLES);
-    kendoBuild.copyDirSyncRecursive("styles", STYLES);
+    kendoBuild.copyDirSyncRecursive("styles", SOURCESTYLES, false, /\.(css|png|jpg|jpeg|gif)$/i);
+    kendoBuild.copyDirSyncRecursive("styles", STYLES, false, /\.(css|png|jpg|jpeg|gif)$/i);
 
     fs.readdirSync(STYLES).forEach(function(file) {
         if (cssRegExp.test(file)) {
