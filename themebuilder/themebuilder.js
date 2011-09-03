@@ -37,9 +37,6 @@
                 properties: [ properties.bgColor, properties.brdColor, properties.color ]
             }
         },
-        themeTemplate = "* > .k-header, * > .k-grid-header, * > .k-toolbar, * > .k-dropdown-wrap, * > .k-grouping-header, * > .k-tooltip, * > .k-grid-pager {" +
-                        "    background-color: $k-widget-background-color;" +
-                        "}",
         colorPickerTemplate = kendo.template(
             "<# var id = primitive + \":\" + property.property; #>" +
             "<label for='<#= id #>'><#= property.label #></label> <input id='<#= id #>' class='k-input' />"
@@ -87,10 +84,12 @@
             }
         }),
         ThemeBuilder = kendo.Observable.extend({
-            init: function() {
+            init: function(templateInfo) {
                 var that = this;
 
                 $(themeBuilderTemplate({})).appendTo(document.body);
+
+                that.templateInfo = templateInfo;
 
                 that.content = $("#kendo-themebuilder")
                     .kendoWindow({
@@ -119,9 +118,17 @@
             open: function() {
                 this.content.data("kendoWindow").open();
             },
-            /// TODO: test this; make themeTemplate mockable
+            /// TODO: test this
             _propertyChange: function(e) {
-                this.updateStyleSheet(themeTemplate.replace(/\$k-widget-background-color/g, e.color));
+                var parser = new less.Parser();
+
+                parser.parse(this.templateInfo.template, function (err, tree) {
+                    if (err) {
+                        return console.error(err);
+                    }
+
+                    this.updateStyleSheet(tree.toCSS());
+                });
             },
             updateStyleSheet: function(cssText) {
                 var doc = document,
