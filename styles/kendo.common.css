@@ -172,17 +172,6 @@ html body .k-button-bare
     font-style: italic;
 }
 
-.k-popup,
-.k-menu .k-group,
-.k-grid .k-filter-options,
-.k-time-popup,
-.k-datepicker-calendar
-{
-    -moz-box-shadow: 2px 2px 2px #aaa;
-    -webkit-box-shadow: 2px 2px 2px #aaa;
-    box-shadow: 2px 2px 2px #aaa;
-}
-
 /* Icons */
 
 .k-expand { background-position: 0 -160px; }
@@ -274,10 +263,6 @@ div.k-window
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-
-    -moz-box-shadow: 0 0 5px 2px #aaa;
-    -webkit-box-shadow: 0 0 5px 2px #aaa;
-    box-shadow: 0 0 5px 2px #aaa;
 }
 
 :root .k-window
@@ -3393,10 +3378,6 @@ html input.k-breadcrumbs-input
 .k-imagebrowser .k-image
 {
     margin:2px 0 0 2px;
-
-    -moz-box-shadow:1px 1px 3px #aaa;
-    -webkit-box-shadow:1px 1px 3px #aaa;
-    box-shadow:1px 1px 3px #aaa;
 }
 
 .k-imagebrowser .k-folder
