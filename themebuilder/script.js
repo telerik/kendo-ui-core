@@ -28,23 +28,28 @@
         });
     }
 
-    // page without kendo
+    // page without kendo -- maybe components are loaded asynchronously?
     if (typeof kendo == UNDEFINED) {
         queue.push(function(callback) {
-            $(head).append(
-                "<link rel='stylesheet' href='http://localhost/kendo/live/styles/kendo.common.css' />" +
-                "<link rel='stylesheet' href='http://localhost/kendo/live/styles/kendo.kendo.css' />"
-            );
+            $(head).append("<link rel='stylesheet' href='http://localhost/kendo/live/styles/kendo.common.css' />");
 
+            // TODO: use CDN when a recent version is uploaded
             getScript("http://localhost/kendo/deploy/kendoUI/js/kendo.all.min.js", callback);
         });
     }
 
+    window.lessLoaded = function(lessTemplate) {
+        new kendo.ThemeBuilder(lessTemplate);
+    };
+
     queue.push(function(){
         $("<link rel='stylesheet' href='" + applicationRoot + "styles.css' />").appendTo("head");
 
-        getScript(applicationRoot + "themebuilder.js", function() {
-            new kendo.ThemeBuilder();
+        // TODO: these can be parallelized
+        getScript(applicationRoot + "less.js", function() {
+            getScript(applicationRoot + "themebuilder.js", function() {
+                getScript(applicationRoot + "template.js");
+            });
         });
     });
 

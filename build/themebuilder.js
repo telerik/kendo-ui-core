@@ -1,32 +1,5 @@
-function merge(files) {
-    var result = "";
-
-    for (var i = 0; i < files.length; i++) {
-        if (files[i].indexOf("*") > -1) {
-            var dir = files[i].substring(0, files[i].indexOf("*")),
-                files = fs.readdirSync(dir);
-
-            files = files.map(function(file) {
-                return dir + file;
-            });
-
-            result += merge(files);
-        } else {
-            result += fs.readFileSync(files[i], "utf8");
-        }
-    }
-
-    return result.replace("\ufeff", "");
-}
-
-function uglify(source) {
-    var uglifyJs = require("./uglify-js").uglify,
-        ast = require("./uglify-js").parser.parse(source);
-
-    ast = uglifyJs.ast_mangle(ast);
-    ast = uglifyJs.ast_squeeze(ast);
-    return uglifyJs.gen_code(ast);
-}
+var kendoBuild = require("./kendo-build"),
+    fs = require("fs");
 
 // themebuilder-specific
 function wrap(source) {
@@ -34,8 +7,6 @@ function wrap(source) {
 }
 
 function buildModifiedLess() {
-    var fs = require("fs");
-
     var less_libonly_src = [
             "build/require.js",
             "build/ecma-5.js",
@@ -47,15 +18,30 @@ function buildModifiedLess() {
             return "build/less-js/" + relativePath;
         });
 
-    fs.writeFileSync("themebuilder/less.js", wrap(merge(less_libonly_src)));
+    fs.writeFileSync("themebuilder/less.js", wrap(kendoBuild.merge(less_libonly_src)));
+}
+
+function lessToJson(lessTemplate) {
+    var template = fs.readFileSync(lessTemplate, "utf8")
+            .replace(/\\/g, '\\\\')
+            .replace(/"/g, '\\"')
+            .replace(/'/g, "\\'")
+            .replace(/\r\n/g, "\\n");
+
+    return "lessLoaded({ version: '" + kendoBuild.generateVersion() + "', template: '" + template + "' })";
+}
+
+function copyLessTemplates() {
+    fs.writeFileSync("themebuilder/template.js", lessToJson("styles/template.less"), "utf8");
 }
 
 function build() {
     buildModifiedLess();
+    copyLessTemplates();
 }
 
 if (require.main === module) {
-    exports.build = build;
-} else {
     build();
+} else {
+    exports.build = build;
 }
