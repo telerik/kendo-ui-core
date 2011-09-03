@@ -1132,6 +1132,38 @@
                 });
             })();
 
+            (function() {
+                // ------------------------------------------------------------
+                var view;
+
+                module("ViewBase", {
+                    setup: function() {
+                        view = new Chart.ViewBase();
+                    }
+                });
+
+                test("playAnimations plays animation in order", function() {
+                    var order;
+                    view.animations = [
+                        { play: function() { order = "1"; } },
+                        { play: function() { order += "2"; } }
+                    ];
+
+                    view.playAnimations();
+                    equals(order, "12");
+                });
+
+                test("playAnimations clears animations", function() {
+                    var order;
+                    view.animations = [
+                        { play: function() { } },
+                    ];
+
+                    view.playAnimations();
+                    equals(view.animations.length, 0);
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

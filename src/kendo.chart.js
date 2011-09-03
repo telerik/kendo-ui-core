@@ -3102,8 +3102,7 @@
                     aboveAxis: options.aboveAxis,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
-                    animation: options.animation,
-                    box: box
+                    animation: options.animation
                 }, border),
                 elements = [],
                 label = bar.children[0];
@@ -3772,7 +3771,7 @@
                 }
             }
 
-            [].push.apply(group.children, lines.concat(elements));
+            group.children = lines.concat(elements);
             return [group];
         },
 
@@ -4159,15 +4158,11 @@
 
         playAnimations: function() {
             var view = this,
-                animations = view.animations,
-                length = animations.length,
-                i;
+                anim;
 
-            for (i = 0; i < length; i++) {
-                animations[i].play();
+            while(anim = view.animations.shift()) {
+                anim.play();
             }
-
-            animations = [];
         }
     });
 
@@ -6016,6 +6011,7 @@
         Legend: Legend,
         PlotArea: PlotArea,
         ViewElement: ViewElement,
+        ViewBase: ViewBase,
         SVGView: SVGView,
         SVGGroup: SVGGroup,
         SVGText: SVGText,
