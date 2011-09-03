@@ -485,6 +485,14 @@
                     ok(root.idMapMetadata[view.log.path[0].style.id].seriesIx === 0);
                 });
 
+                test("renders line chart group", function() {
+                    equals(view.log.group.length, 1);
+                });
+
+                test("sets group animation", function() {
+                    equals(view.log.group[0].options.animation.type, "clip");
+                });
+
                 // ------------------------------------------------------------
                 module("Line Chart / Rendering / Missing Values", {
                     setup: function() {
