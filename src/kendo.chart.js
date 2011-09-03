@@ -3840,7 +3840,8 @@
             var sector = this,
                 options = sector.options,
                 labels = options.labels,
-                labelText = sector.value;
+                labelText = sector.value,
+                labelTemplate;
 
             if (sector._rendered) {
                 return;
@@ -3849,7 +3850,7 @@
             }
 
             if (labels.template) {
-                var labelTemplate = baseTemplate(labels.template);
+                labelTemplate = baseTemplate(labels.template);
                 labelText = labelTemplate({
                     dataItem: sector.dataItem,
                     category: sector.category,
@@ -3863,11 +3864,7 @@
                     deepExtend({
                         id: uniqueId(),
                         align: CENTER,
-                        vAlign: CENTER,
-                        margin: {
-                            left: 5,
-                            right: 5
-                        }
+                        vAlign: CENTER
                     }, labels)
                 );
 
@@ -3949,9 +3946,9 @@
             var chart = this,
                 options = chart.options,
                 colors = chart.plotArea.options.seriesColors || [],
+                startAngle = options.startAngle,
                 colorsCount = colors.length,
                 series = options.series,
-                startAngle = options.startAngle,
                 currentCategory,
                 currentSeries,
                 currentData,
@@ -4855,7 +4852,16 @@
             ViewElement.fn.init.call(pie, options);
 
             pie.template = SVGSector.template;
+            pie.pathTemplate = SVGSector.pathTemplate;
             if (!pie.template) {
+                pie.pathTemplate = SVGSector.pathTemplate = template(
+                    "M <#= d.firstPoint.x #> <#= d.firstPoint.y #> " +
+                    "A<#= d.r #> <#= d.r #> " +
+                    "0 <#= d.isReflexAngle ? '1' : '0' #>,1 " +
+                    "<#= d.secondPoint.x #> <#= d.secondPoint.y #> " +
+                    "L <#= d.cx #> <#= d.cy #> z"
+                );
+
                 pie.template = SVGSector.template = template(
                     "<path <#= d.renderAttr(\"id\", d.options.id) #>" +
                     "d='<#= d.renderPath() #>' " +
@@ -4885,6 +4891,7 @@
         renderPath: function() {
             var pie = this,
                 sector = pie.sector,
+                box = sector.box,
                 strokeWidth = pie.options.strokeWidth,
                 shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
                 startAngle = sector.startAngle,
@@ -4892,23 +4899,28 @@
                 isReflexAngle = (endAngle - startAngle) > 180,
                 radius = sector.radius,
                 margin = radius * 0.1,
-                lineEndPoint = pie.calculateSectorPoint(startAngle, radius, margin),
-                curveEndPoint = pie.calculateSectorPoint(endAngle, radius, margin),
-                box = sector.box;
+                r = radius - margin,
+                cx = radius + box.x1,
+                cy = radius + box.y1,
+                firstPoint = pie.calculateSectorPoint(startAngle, cx, cy, r),
+                secondPoint = pie.calculateSectorPoint(endAngle, cx, cy, r);
 
-            return "M" + (lineEndPoint.x + box.x1) + " " + (lineEndPoint.y + box.y1) +
-                   " A" + (radius - margin) + " " + (radius - margin) +
-                   " 0 " + (isReflexAngle ? "1" : "0") + ",1 " +
-                   (curveEndPoint.x + box.x1) + " " + (curveEndPoint.y + box.y1) +
-                   " L" + (radius + box.x1) + " " + (radius + box.y1) + " z";
+            return pie.pathTemplate({
+                firstPoint: firstPoint,
+                secondPoint: secondPoint,
+                isReflexAngle: isReflexAngle,
+                r: r,
+                cx: cx,
+                cy: cy
+            });
         },
 
-        calculateSectorPoint: function(angle, r, margin) {
+        calculateSectorPoint: function(angle, cx, cy, r) {
             var radianAngle = angle * (math.PI / 180),
                 ax = math.cos(radianAngle),
                 ay = math.sin(radianAngle),
-                x = r - (ax * (r - margin)),
-                y = r - (ay * (r - margin));
+                x = cx - (ax * r),
+                y = cy - (ay * r);
 
             return { x: x, y: y };
         },
@@ -5358,12 +5370,20 @@
             ViewElement.fn.init.call(pie, options);
 
             pie.template = VMLSector.template;
+            pie.pathTemplate = VMLSector.pathTemplate;
             if (!pie.template) {
+                pie.pathTemplate = VMLSector.pathTemplate = template(
+                   "<kvml:path v='M <#= d.cx #> <#= d.cy #> " +
+                   "AE <#= d.cx #> <#= d.cy #> " +
+                   "<#= d.r #> <#= d.r #> " +
+                   "<#= d.sa #> <#= d.a #> X E' />"
+                );
+
                 pie.template = VMLSector.template = template(
                     "<kvml:shape <#= d.renderAttr(\"id\", d.options.id) #> " +
                     "style='position:absolute; width:1px; height:1px;' " +
                     "coordorigin='0 0' coordsize='1 1'>" +
-                        "<kvml:path v='<#= d.renderPath() #> X E' />" +
+                        "<#= d.renderPath() #>" +
                         "<#= d.fill.render() + d.stroke.render() #>" +
                     "</kvml:shape>"
                 );
@@ -5383,16 +5403,13 @@
                 sector = pie.sector,
                 box = sector.box,
                 radius = sector.radius,
-                r = round(radius - (radius * 0.1)),
+                r = round(radius - radius * 0.1),
                 cx = round(radius + box.x1),
                 cy = round(radius + box.y1),
                 sa = -round((sector.startAngle + 180) * 65535),
                 a = -round(sector.angle * 65536);
 
-            return "M " + cx + " " + cy +
-                   " AE " + cx + " " + cy +
-                   " " + r + " " + r +
-                   " " + sa + " " + a;
+            return pie.pathTemplate({ r: r, cx: cx, cy: cy, sa: sa, a: a });
         }
     });
 
