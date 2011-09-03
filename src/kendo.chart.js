@@ -4181,7 +4181,7 @@
             view.decorators.push(
                 new SVGOverlayDecorator(view),
                 new SVGPaintDecorator(view),
-                new AnimationDecorator(view),
+                new BarAnimationDecorator(view),
                 new SVGClipAnimationDecorator(view)
             );
 
@@ -4625,210 +4625,6 @@
         }
     };
 
-    function AnimationDecorator(view) {
-        this.view = view;
-    }
-
-    AnimationDecorator.prototype = {
-        decorate: function(element) {
-            var decorator = this,
-                view = decorator.view,
-                box = element.options.box,
-                animation = element.options.animation;
-
-            if (animation) {
-                if (animation.type === BAR) {
-                    view.animations.push(
-                        new BarAnimation(element, element.options)
-                    );
-                }
-            }
-
-            return element;
-        }
-    }
-
-    var SVGClipAnimationDecorator = Class.extend({
-        init: function(view) {
-            this.view = view;
-        },
-
-        decorate: function(element) {
-            var decorator = this,
-                view = decorator.view,
-                animation = element.options.animation,
-                definitions = view.definitions,
-                clipPath = definitions["clipAnim"],
-                clipRect;
-
-            if (animation && animation.type === "clip") {
-                if (!clipPath) {
-                    clipPath = new SVGClipPath({ id: "clipAnim" });
-                    clipRect = view.createRect(
-                        new Box2D(0, 0, 0, view.options.height), { id: "clipAnim-rect" });
-                    clipPath.children.push(clipRect);
-                    definitions["clipAnim"] = clipPath;
-
-                    view.animations.push(new ClipAnimation(clipRect, { width: view.options.width }));
-                }
-
-                element.options.clipPath = "url(#clipAnim)";
-            }
-
-            return element;
-        }
-    });
-
-    var VMLClipAnimationDecorator = Class.extend({
-        init: function(view) {
-            this.view = view;
-        },
-
-        decorate: function(element) {
-            var decorator = this,
-                view = decorator.view,
-                animation = element.options.animation,
-                clipRect;
-
-            if (animation && animation.type === "clip") {
-                clipRect = new VMLClipRect(
-                    new Box2D(0, 0, view.options.width, view.options.height),
-                    { id: "clipAnim" }
-                );
-
-                view.animations.push(
-                    new ClipAnimation(clipRect, { width: view.options.width })
-                );
-
-                clipRect.children.push(element);
-
-                return clipRect;
-            } else {
-                return element;
-            }
-        }
-    });
-
-    var ClipAnimation = Class.extend({
-        init: function(clipRect, options) {
-            var anim = this;
-
-            anim.options = deepExtend({}, anim.options, options);
-            anim.clipRect = clipRect;
-        },
-
-        options: {
-            duration: 500,
-            easing: "linear",
-            width: 600
-        },
-
-        play: function() {
-            var anim = this,
-                clipRect = anim.clipRect,
-                target = $(doc.getElementById(clipRect.options.id)),
-                options = anim.options,
-                current = clipRect.clone(),
-                currentPoints = current.points,
-                start = +new Date(),
-                duration = options.duration,
-                finish = start + duration,
-                easing = jQuery.easing[options.easing],
-                interval,
-                time,
-                pos,
-                easingPos;
-
-            interval = setInterval(function() {
-                time = +new Date();
-                pos = time > finish ? 1 : (time - start) / duration;
-                easingPos = easing(pos, time - start, 0, 1);
-
-                currentPoints[1].x = currentPoints[2].x =
-                    interpolateValue(0, options.width, easingPos);
-
-                current.refresh(target);
-
-                if (time > finish) {
-                    clearInterval(interval);
-                }
-            }, 10);
-        }
-    });
-
-    var BarAnimation = Class.extend({
-        init: function(viewElement, options) {
-            var anim = this;
-
-            anim.viewElement = viewElement;
-            anim.options = deepExtend({}, anim.options, options);
-        },
-
-        options: {
-            duration: 500,
-            easing: "swing"
-        },
-
-        play: function() {
-            var anim = this,
-                viewElement = anim.viewElement,
-                options = anim.options,
-                stackBase = options.animation.stackBase,
-                aboveAxis = options.aboveAxis,
-                initialPosition,
-                target = $(doc.getElementById(viewElement.options.id)),
-                top = viewElement.points[0].y,
-                bottom = viewElement.points[3].y,
-                left = viewElement.points[0].x,
-                right = viewElement.points[1].x,
-                current = viewElement.clone(),
-                currentPoints = current.points,
-                start = +new Date(),
-                duration = options.duration,
-                finish = start + duration,
-                easing = jQuery.easing[options.easing],
-                interval,
-                time,
-                pos,
-                easingPos;
-
-            if (options.normalAngle === 0) {
-                initialPosition = defined(stackBase) ? stackBase : aboveAxis ? bottom : top;
-                updateArray(currentPoints, Y, initialPosition);
-            } else {
-                initialPosition = defined(stackBase) ? stackBase : aboveAxis ? left : right;
-                updateArray(currentPoints, X, initialPosition);
-            }
-            current.refresh(target);
-
-            interval = setInterval(function() {
-                time = +new Date();
-                pos = time > finish ? 1 : (time - start) / duration;
-                easingPos = easing(pos, time - start, 0, 1);
-
-                if (options.normalAngle === 0) {
-                    currentPoints[0].y = currentPoints[1].y =
-                        interpolateValue(initialPosition, top, easingPos);
-
-                    currentPoints[2].y = currentPoints[3].y =
-                        interpolateValue(initialPosition, bottom, easingPos);
-                } else {
-                    currentPoints[0].x = currentPoints[3].x =
-                        interpolateValue(initialPosition, left, easingPos);
-
-                    currentPoints[1].x = currentPoints[2].x =
-                        interpolateValue(initialPosition, right, easingPos);
-                }
-
-                current.refresh(target);
-
-                if (time > finish) {
-                    clearInterval(interval);
-                }
-            }, 10);
-        }
-    });
-
     var VMLView = ViewBase.extend({
         init: function(options) {
             var view = this;
@@ -4837,7 +4633,7 @@
             view.decorators.push(
                 new VMLOverlayDecorator(view),
                 new VMLGradientDecorator(view),
-                new AnimationDecorator(view),
+                new BarAnimationDecorator(view),
                 new VMLClipAnimationDecorator(view)
             );
 
@@ -5308,6 +5104,211 @@
             return element;
         }
     };
+
+    // Animations
+    var BarAnimationDecorator = Class.extend({
+        init: function(view) {
+            this.view = view;
+        },
+
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                box = element.options.box,
+                animation = element.options.animation;
+
+            if (animation) {
+                if (animation.type === BAR) {
+                    view.animations.push(
+                        new BarAnimation(element, element.options)
+                    );
+                }
+            }
+
+            return element;
+        }
+    });
+
+    var SVGClipAnimationDecorator = Class.extend({
+        init: function(view) {
+            this.view = view;
+        },
+
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                animation = element.options.animation,
+                definitions = view.definitions,
+                clipPath = definitions["clipAnim"],
+                clipRect;
+
+            if (animation && animation.type === "clip") {
+                if (!clipPath) {
+                    clipPath = new SVGClipPath({ id: "clipAnim" });
+                    clipRect = view.createRect(
+                        new Box2D(0, 0, 0, view.options.height), { id: "clipAnim-rect" });
+                    clipPath.children.push(clipRect);
+                    definitions["clipAnim"] = clipPath;
+
+                    view.animations.push(new ClipAnimation(clipRect, { width: view.options.width }));
+                }
+
+                element.options.clipPath = "url(#clipAnim)";
+            }
+
+            return element;
+        }
+    });
+
+    var VMLClipAnimationDecorator = Class.extend({
+        init: function(view) {
+            this.view = view;
+        },
+
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                animation = element.options.animation,
+                clipRect;
+
+            if (animation && animation.type === "clip") {
+                clipRect = new VMLClipRect(
+                    new Box2D(0, 0, view.options.width, view.options.height),
+                    { id: "clipAnim" }
+                );
+
+                view.animations.push(
+                    new ClipAnimation(clipRect, { width: view.options.width })
+                );
+
+                clipRect.children.push(element);
+
+                return clipRect;
+            } else {
+                return element;
+            }
+        }
+    });
+
+    var ClipAnimation = Class.extend({
+        init: function(clipRect, options) {
+            var anim = this;
+
+            anim.options = deepExtend({}, anim.options, options);
+            anim.clipRect = clipRect;
+        },
+
+        options: {
+            duration: 500,
+            easing: "linear",
+            width: 600
+        },
+
+        play: function() {
+            var anim = this,
+                clipRect = anim.clipRect,
+                target = $(doc.getElementById(clipRect.options.id)),
+                options = anim.options,
+                current = clipRect.clone(),
+                currentPoints = current.points,
+                start = +new Date(),
+                duration = options.duration,
+                finish = start + duration,
+                easing = jQuery.easing[options.easing],
+                interval,
+                time,
+                pos,
+                easingPos;
+
+            interval = setInterval(function() {
+                time = +new Date();
+                pos = time > finish ? 1 : (time - start) / duration;
+                easingPos = easing(pos, time - start, 0, 1);
+
+                currentPoints[1].x = currentPoints[2].x =
+                    interpolateValue(0, options.width, easingPos);
+
+                current.refresh(target);
+
+                if (time > finish) {
+                    clearInterval(interval);
+                }
+            }, 10);
+        }
+    });
+
+    var BarAnimation = Class.extend({
+        init: function(viewElement, options) {
+            var anim = this;
+
+            anim.viewElement = viewElement;
+            anim.options = deepExtend({}, anim.options, options);
+        },
+
+        options: {
+            duration: 500,
+            easing: "swing"
+        },
+
+        play: function() {
+            var anim = this,
+                viewElement = anim.viewElement,
+                options = anim.options,
+                stackBase = options.animation.stackBase,
+                aboveAxis = options.aboveAxis,
+                initialPosition,
+                target = $(doc.getElementById(viewElement.options.id)),
+                top = viewElement.points[0].y,
+                bottom = viewElement.points[3].y,
+                left = viewElement.points[0].x,
+                right = viewElement.points[1].x,
+                current = viewElement.clone(),
+                currentPoints = current.points,
+                start = +new Date(),
+                duration = options.duration,
+                finish = start + duration,
+                easing = jQuery.easing[options.easing],
+                interval,
+                time,
+                pos,
+                easingPos;
+
+            if (options.normalAngle === 0) {
+                initialPosition = defined(stackBase) ? stackBase : aboveAxis ? bottom : top;
+                updateArray(currentPoints, Y, initialPosition);
+            } else {
+                initialPosition = defined(stackBase) ? stackBase : aboveAxis ? left : right;
+                updateArray(currentPoints, X, initialPosition);
+            }
+            current.refresh(target);
+
+            interval = setInterval(function() {
+                time = +new Date();
+                pos = time > finish ? 1 : (time - start) / duration;
+                easingPos = easing(pos, time - start, 0, 1);
+
+                if (options.normalAngle === 0) {
+                    currentPoints[0].y = currentPoints[1].y =
+                        interpolateValue(initialPosition, top, easingPos);
+
+                    currentPoints[2].y = currentPoints[3].y =
+                        interpolateValue(initialPosition, bottom, easingPos);
+                } else {
+                    currentPoints[0].x = currentPoints[3].x =
+                        interpolateValue(initialPosition, left, easingPos);
+
+                    currentPoints[1].x = currentPoints[2].x =
+                        interpolateValue(initialPosition, right, easingPos);
+                }
+
+                current.refresh(target);
+
+                if (time > finish) {
+                    clearInterval(interval);
+                }
+            }, 10);
+        }
+    });
 
     var Highlight = Class.extend({
         init: function(view, viewElement, options) {
