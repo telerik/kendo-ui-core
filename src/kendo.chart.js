@@ -4141,19 +4141,25 @@
                 currentDecorator,
                 j;
 
-            // TODO: Make recursive?
-
             for (i = 0; i < length; i++) {
                 currentDecorator = decorators[i];
-                for (j = 0; j < element.children.length; j++) {
-                    element.children[j] = currentDecorator.decorate.call(
-                        currentDecorator, element.children[j]
-                    );
-                }
+                view._decorateChildren(currentDecorator, element);
                 element = currentDecorator.decorate.call(currentDecorator, element);
             }
 
             return element;
+        },
+
+        _decorateChildren: function(decorator, element) {
+            var view = this,
+                children = element.children,
+                i,
+                length = children.length;
+
+            for (i = 0; i < length; i++) {
+                view._decorateChildren(decorator, children[i]);
+                children[i] = decorator.decorate.call(decorator, children[i]);
+            }
         },
 
         playAnimations: function() {

@@ -1163,6 +1163,37 @@
                     equals(view.animations.length, 0);
                 });
 
+                test("decorate applies decorators in order", function() {
+                    var order;
+                    view.decorators = [
+                        { decorate: function(element) { order = "1"; return element; } },
+                        { decorate: function(element) { order += "2"; return element; } }
+                    ];
+
+                    view.decorate({ children: [] });
+                    equals(order, "12");
+                });
+
+                test("decorate processes elements recursively", function() {
+                    var order = "";
+                    view.decorators = [
+                        { decorate: function(element) { order += element.id; return element; } }
+                    ];
+
+                    view.decorate({
+                        id: "1",
+                        children: [{
+                            id: "2",
+                            children: [{
+                                id: "3",
+                                children: []
+                            }]
+                        }]
+                    });
+
+                    equals(order, "321");
+                });
+
             })();
         </script>
 
