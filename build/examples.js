@@ -353,6 +353,8 @@ function build(origin, destination, kendoCDN) {
         };
     });
 
+    themes.build();
+
     console.log("copying resources...");
     kendoBuild.copyDirSyncRecursive(examplesLocation, outputPath);
     kendoBuild.copyDirSyncRecursive(originJS, outputPath + "/js");
@@ -365,8 +367,6 @@ function build(origin, destination, kendoCDN) {
     } else {
         fs.writeFileSync(outputPath + "/web.config", fs.readFileSync("web.config", "utf8"), "utf8");
     }
-
-    themes.build();
 
     copyResources(
         examplesLocation + "/styles/",
