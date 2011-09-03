@@ -6,6 +6,45 @@
 .k-floatwrap{display:inline-block;}
 .k-floatwrap{display:block;}
 
+.k-header,
+.k-grid-header,
+.k-toolbar,
+.k-dropdown-wrap,
+.k-grouping-header,
+.k-tooltip,
+.k-grid-pager
+{
+    background-repeat: repeat-x;
+    background-position: 0 center;
+}
+
+.k-tabstrip,
+.k-tabstrip-items .k-item,
+.k-menu-vertical,
+.k-editor,
+.k-tooltip,
+.k-state-hover
+{
+    background-position:0 -248px;
+}
+
+.k-link.k-state-hover,
+.k-dropdown-wrap .k-input,
+.k-dropdown-wrap .k-select,
+.k-tabstrip-items .k-item,
+.k-tabstrip-items .k-state-hover .k-link
+{
+    background-repeat: repeat-x;
+}
+
+.k-loading,
+.k-widget .k-loading
+{
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
 .k-widget,
 .k-widget .k-input,
 .k-widget .text-box,
@@ -56,7 +95,7 @@ html body .k-button
 {
     display: inline-block;
     margin: 0;
-    padding: 1px 6px 1px;
+    padding: 0 6px 1px;
     border-width: 1px;
     border-style: solid;
     font-family: inherit;
@@ -64,6 +103,7 @@ html body .k-button
     line-height: 1.5;
     text-align: center;
     cursor: pointer;
+    outline: 0;
 }
 
 *+html .k-button { display: inline; zoom: 1 }
@@ -1238,6 +1278,17 @@ div.k-grid-header .k-header
     *display: inline;
     zoom: 1;
     vertical-align: middle;
+}
+
+.k-grouping-dropclue
+{
+    background-repeat: no-repeat;
+    background-position: -48px -288px;
+}
+
+.k-treeview .k-drop-hint
+{
+    background-position: 0 -358px;
 }
 
 /* Grid :: editing */
@@ -2630,6 +2681,13 @@ div.k-slider
     background-position: -32px -432px;
 }
 
+.k-slider .k-slider-track .k-state-active
+{
+	background-position: 0 -432px;
+    background-color: transparent;
+    border: 0;
+}
+
 /* float clearing start */
 .k-slider-items
 {
@@ -2803,7 +2861,7 @@ div.k-slider
 .k-tooltip
 {
     position: absolute;
-    border-width: 1px;
+    border-width: 2px;
     border-style: solid;
     padding: 4px 5px;
     background-repeat: repeat-x;
@@ -2825,47 +2883,49 @@ div.k-slider
 .k-callout-n,
 .k-callout-s
 {
-    width: 9px;
-    height: 6px;
+	width: 10px;
+	height: 5px;
 }
 
 .k-callout-w,
 .k-callout-e
 {
-    width: 6px;
-    height: 9px;
+	width: 5px;
+	height: 10px;
 }
 
 .k-callout-n
 {
-    top: -6px;
-    left: 50%;
-    margin-left: -4px;
-    background-position: -64px -368px;
+	top: -7px;
+	left: 50%;
+	margin-left: -5px;
+	background-position: -64px -368px;
 }
 
 .k-callout-w
 {
-    left: -6px;
-    top: 50%;
-    margin-top: -4px;
-    background-position: -64px -384px;
+	left: -7px;
+	top: 50%;
+	margin-top: -5px;
+	background-position: -64px -384px;
 }
 
 .k-callout-s
 {
-    top: 100%;
-    left: 50%;
-    margin-left: -4px;
-    background-position: -64px -400px;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	margin-top: 2px;
+	background-position: -64px -400px;
 }
 
 .k-callout-e
 {
-    left: 100%;
-    top: 50%;
-    margin-top: -4px;
-    background-position: -64px -416px;
+	left: 100%;
+	top: 50%;
+	margin-top: -5px;
+	margin-left: 2px;
+	background-position: -64px -416px;
 }
 
 /* Splitter */
