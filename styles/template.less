@@ -5,6 +5,11 @@
     background-color: @widget-background-color;
 }
 
+.k-input
+{
+    background-color: @input-background-color;
+}
+
 .k-header,
 .k-grid-header,
 .k-toolbar,
@@ -47,8 +52,9 @@
 .k-loading-color { background-color: @loading-panel-color; }
 
 .k-widget,
+.k-input,
 .k-popup,
-.k-tabstrip .k-content
+.k-content
 {
     color: @widget-text-color;
 }
@@ -60,7 +66,7 @@
     color: @link-text-color;
 }
 
-.k-grid .k-header
+.k-header
 {
     color: @header-text-color;
 }
@@ -443,4 +449,31 @@ td.k-group-cell
 .k-tile-empty strong
 {
     color: @disabled-text-color;
+}
+
+/* Shadows */
+
+.k-popup,
+.k-menu .k-group,
+.k-grid .k-filter-options,
+.k-time-popup,
+.k-datepicker-calendar
+{
+    -moz-box-shadow: 2px 2px 2px @shadow-color;
+    -webkit-box-shadow: 2px 2px 2px @shadow-color;
+    box-shadow: 2px 2px 2px @shadow-color;
+}
+
+.k-window
+{
+    -moz-box-shadow: 0 0 5px 2px @shadow-color;
+    -webkit-box-shadow: 0 0 5px 2px @shadow-color;
+    box-shadow: 0 0 5px 2px @shadow-color;
+}
+
+.k-imagebrowser .k-image
+{
+    -moz-box-shadow:1px 1px 3px @shadow-color;
+    -webkit-box-shadow:1px 1px 3px @shadow-color;
+    box-shadow:1px 1px 3px @shadow-color;
 }
