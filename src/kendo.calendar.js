@@ -5,7 +5,7 @@
         extend = $.extend,
         DATE = Date;
 
-    function defineViewedDate(value, min, max) {
+    function defineCurrentDate(value, min, max) {
         var today = new DATE();
         if (value) {
             today = new DATE(value);
@@ -26,42 +26,121 @@
 
             Component.fn.init.call(that, element, options);
 
-            that.viewedDate = defineViewedDate(that.value, that.min, that.max);
+            that.current = defineCurrentDate(that.value, that.options.min, that.options.max);
 
             that._templates();
 
             that._header();
+
+            that.currentView = that.options.firstView;
+
+            that.view = $('<table class="k-content">');
+            that.element.append(that.view); //append table;
+
+            that.element.find(".k-nav-prev:not(.k-state-disabled)")
+                .bind("click", $.proxy(function(e) {
+                    e.preventDefault();
+                    that.navigateToPast();
+                }));
+
+            that.element.find(".k-nav-next:not(.k-state-disabled)")
+                .bind("click", $.proxy(function(e) {
+                    e.preventDefault();
+                    that.navigateToFuture();
+                }));
+
+            that.element.find(".k-nav-fast:not(.k-state-disabled)")
+                .bind("click", $.proxy(function(e) {
+                    e.preventDefault();
+                    that.navigateUp();
+                }));
+
+            that.navigate(that.options.value);
         },
 
         options: {
             value: null,
-            startView: "month",
+            min: new Date(1900, 0, 1),
+            max: new Date(2099, 11, 31),
             depth: "month",
+            firstView: "month",
             month: {
-                title: "<#=data.month#> <#=data.year#>",
                 content: "<#=data.day#>",
                 empty: " "
             }
         },
 
-        navigateDown: function() {
+        navigateToPast: function() {
+            var that = this,
+            current = that.current,
+            currentView = that.currentView;
 
+            if (currentView === "month") {
+                current.setMonth(current.getMonth() - 1);
+            } else if (currentView === "year") {
+                current.setFullYear(current.getFullYear() - 1);
+            } else if (currentView === "decade") {
+                current.setFullYear(current.getFullYear() - 10);
+            } else if (currentView == "century") {
+                current.setFullYear(current.getFullYear() - 100);
+            }
+
+            that.navigate(current, that.currentView);
+        },
+
+        navigateToFuture: function() {
+            var that = this,
+            current = that.current,
+            currentView = that.currentView;
+
+            if (currentView === "month") {
+                current.setMonth(current.getMonth() + 1);
+            } else if (currentView === "year") {
+                current.setFullYear(current.getFullYear() + 1);
+            } else if (currentView === "decade") {
+                current.setFullYear(current.getFullYear() + 10);
+            } else if (currentView == "century") {
+                current.setFullYear(current.getFullYear() + 100);
+            }
+
+            that.navigate(current, that.currentView);
         },
 
         navigateUp: function() {
+            var that = this,
+                currentView = that.currentView;
 
-        },
+            if (currentView === "month") {
+                that.currentView = "year";
+            } else if (currentView === "year") {
+                that.currentView = "decade";
+            } else if (currentView === "decade") {
+                that.currentView = "century";
+                that.element.find(".k-nav-fast").addClass("k-state-disabled");
+            }
 
-        navigateLeft: function() {
-
-        },
-
-        navigateRight: function() {
-
+            that.navigate(that.current, that.currentView);
         },
 
         navigate: function(date, view) {
-            //define direction depending on
+            var that = this,
+            options = that.options,
+            template;
+
+            date = date || that.current;
+            view = view || options.firstView;
+
+            that.title.html(calendar[view].title(date));
+
+            var newView = $(calendar[view].content(extend({
+                min: options.min,
+                max: options.max,
+                date: date
+            }, that[view])))
+
+            newView.insertAfter(that.view);
+            that.view.remove();
+            that.view = newView;
         },
 
         _header: function() {
@@ -72,11 +151,13 @@
                 element.html('<div class="k-header">'
                            + '<a href="#" class="k-link k-nav-prev"><span class="k-icon k-arrow-prev"></span></a>'
                            + '<a href="#" class="k-link k-nav-fast"></a>'
-                           + '<a href="#" class="k-link k-nav-prev"><span class="k-icon k-arrow-next"></span></a>'
+                           + '<a href="#" class="k-link k-nav-next"><span class="k-icon k-arrow-next"></span></a>'
                            + '</div>');
             }
 
+            that.prevArrow = element.find(".k-nav-prev");
             that.title = element.find(".k-nav-fast");
+            that.nextArrow = element.find(".k-nav-next");
         },
 
         _templates: function() {
@@ -87,7 +168,6 @@
 
 
             that.month = {
-                title: template(month.title),
                 content: template('<td><a class="k-link" href="#" title="<#=data.title#>">' + month.content + '</a></td>'),
                 empty: template("<td>" + month.empty + "</td>")
             };
@@ -139,12 +219,8 @@
         },
 
         month: {
-            title: function(date, template) {
-                return template({
-                    date: date,
-                    month: kendo.culture().calendar.months.names[date.getMonth()],
-                    year: date.getFullYear()
-                });
+            title: function(date) {
+                return kendo.culture().calendar.months.names[date.getMonth()] + " " + date.getFullYear();
             },
             content: function(options) {
                 var idx = 0, data,
@@ -157,9 +233,9 @@
                     start = calendar.firstVisibleDay(options.date),
                     min = options.min,
                     max = options.max,
-                    template = options.template,
+                    content = options.content,
                     empty = options.empty,
-                    html = '<table class="k-content" summary="calendar widget"><thead><tr>';
+                    html = '<table class="k-content"><thead><tr>';
 
                 for (; idx < 7; idx++) {
                     html += '<th abbr="' + abbr[idx] + '" scope="col" title="' + names[idx] + '">' + short[idx] + '</th>';
@@ -184,7 +260,7 @@
                         day: start.getDate()
                     };
 
-                    html += inRange(start, min, max) ? template(data) : empty(data);
+                    html += inRange(start, min, max) ? content(data) : empty(data);
                 }
 
                 return html + "</tr></tbody></table>";

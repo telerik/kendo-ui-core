@@ -49,7 +49,7 @@
                 var date = new Date(),
                     text = kendo.culture().calendar.months.names[date.getMonth()] + " " + date.getFullYear();
 
-                    equal(calendar.month.title(date, template.title), text);
+                    equal(calendar.month.title(date), text);
             });
 
             test("month view renders days", function() {
@@ -59,7 +59,7 @@
                 div.html(calendar.month.content({
                         date: today,
                         empty: template.empty,
-                        template: template.content,
+                        content: template.content,
                         min: new Date(2000, 10, 10),
                         max: new Date(2020, 10, 10)
                     }));
@@ -83,7 +83,7 @@
                 div.html(calendar.month.content({
                     date: today,
                     empty: template.empty,
-                    template: template.content,
+                    content: template.content,
                     min: today,
                     max: today
                 }));
@@ -101,7 +101,7 @@
                 div.html(calendar.month.content({
                     date: today,
                     empty: template.empty,
-                    template: template.content,
+                    content: template.content,
                     min: new Date(2000, 10, 10),
                     max: new Date(2020, 10, 10)
                 }));
@@ -116,7 +116,7 @@
                 div.html(calendar.month.content({
                     date: today,
                     empty: template.empty,
-                    template: template.content,
+                    content: template.content,
                     min: new Date(2000, 10, 10),
                     max: new Date(2020, 10, 10)
                 }));
@@ -134,7 +134,7 @@
                     empty: template.empty,
                     min: new Date(today),
                     max: max,
-                    template: template.content
+                    content: template.content
                 }));
 
                 equal(div.find("tbody").find("td").html(), " ");
