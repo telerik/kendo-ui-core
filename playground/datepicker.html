@@ -3,11 +3,13 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>DatePicker</title>
-        <link href="../styles/kendo.common.css" rel="stylesheet" />
-        <link href="../styles/kendo.kendo.css" rel="stylesheet" />
-
         <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+
+        <link href="../styles/kendo.common.css" rel="stylesheet" />
+        <link href="../styles/kendo.kendo.css" rel="stylesheet" />
     </head>
     <body>
         <div style="width: 200px;" class="t-widget t-datepicker t-header">
@@ -46,6 +48,8 @@
         <table id="calendar">
         </table>
         <button id="render">Render</button>
+        <hr/>
+        <div id="kendoCalendar"/>
 
         <script id="day" type="x-kendo-template">
             <# if(data.getDate() == 10) { #>
@@ -72,9 +76,11 @@
                     calendar.html(body);
                     console.log("elapsed: " + ((new Date() - date) / 1000) + ".s");
                 }
-                render();
+                //render();
 
-                $("#render").click(render);
+                //$("#render").click(render);
+
+                window.test = new kendo.ui.Calendar($("#kendoCalendar"));
             });
         </script>
     </body>

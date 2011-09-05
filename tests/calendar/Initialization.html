@@ -28,14 +28,64 @@
                 }
             });
 
-            test("define viewedDate", function() {
+            test("define current", function() {
                 var cal = new Calendar(div),
                     today = new Date(),
-                    viewedDate = cal.viewedDate;
+                    current = cal.current;
 
-                equal(viewedDate.getFullYear(), today.getFullYear());
-                equal(viewedDate.getMonth(), today.getMonth());
-                equal(viewedDate.getDate(), today.getDate());
+                equal(current.getFullYear(), today.getFullYear());
+                equal(current.getMonth(), today.getMonth());
+                equal(current.getDate(), today.getDate());
+            });
+
+            test("render header", function() {
+                var cal = new Calendar(div);
+                ok(cal.element.find(".k-header"));
+                ok(cal.prevArrow);
+                ok(cal.nextArrow);
+                ok(cal.title);
+            });
+
+            test("render table after header", function() {
+                var cal = new Calendar(div);
+                ok(cal.element.find(".k-content")[0]);
+            });
+
+            test("render month view when init", function() {
+                var date = new Date(2011, 10, 10), cal = new Calendar(div, {value: date});
+
+                equal(cal.title.html(), "November 2011");
+                equal(cal.element.find(".k-content").find("a").length, 42);
+            });
+
+            test("render year view when init", function() {
+                var date = new Date(2011, 10, 10), cal = new Calendar(div, { value: date, firstView: "year" }),
+                anchors = cal.element.find(".k-content").find("a"),
+                january = kendo.culture().calendar.months.namesAbbr[0];
+
+                equal(cal.title.html(), "2011");
+                equal(anchors.length, 12);
+                equal(anchors.eq(0).html(), january);
+            });
+
+            test("render decade view when init", function() {
+                var date = new Date(2011, 10, 10),
+                cal = new Calendar(div, { firstView: "decade", value: date }),
+                anchors = cal.element.find(".k-content").find("a");
+
+                equal(cal.title.html(), "2010-2019");
+                equal(anchors.length, 12);
+                equal(anchors.eq(0).html(), "2009");
+            });
+
+            test("render century view when init", function() {
+                var date = new Date(2011, 10, 10),
+                cal = new Calendar(div, { firstView: "century", value: date, max: new Date(2200, 10, 10) }),
+                anchors = cal.element.find(".k-content").find("a");
+
+                equal(cal.title.html(), "2000-2099");
+                equal(anchors.length, 12);
+                equal(anchors.eq(0).html(), "1990-1999");
             });
 
         </script>
