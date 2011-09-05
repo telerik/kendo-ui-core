@@ -184,7 +184,7 @@
                 model;
 
             that._data = data = options.data || [];
-            that._model = model = options.model;
+            that.options = options;
             that._models = {};
             that._map();
         },
@@ -192,7 +192,7 @@
         _map: function() {
             var that = this,
                 data = that._data,
-                model = that._model;
+                model = that.options.model;
 
             that._idMap = {};
 
@@ -210,7 +210,7 @@
                 data = that._data[that._idMap[id]];
 
                 if (data) {
-                    model = that._models[id] = new that._model(data);
+                    model = that._models[id] = new that.options.model(data);
                 }
             }
 
@@ -224,7 +224,7 @@
                 data = model.data;
             } else {
                 data = model;
-                model = new that._model(model);
+                model = new that.options.model(model);
             }
 
             that._data.push(data);
@@ -233,6 +233,9 @@
 
             that._models[model.id()] = model;
 
+            if (that.options.autoSync) {
+                that.sync();
+            }
             return model;
         },
 
@@ -249,6 +252,10 @@
                 that._data.splice(that._idMap[id], 1);
                 that._map();
                 delete that._models[id];
+
+                if (that.options.autoSync) {
+                    that.sync();
+                }
             }
 
             return model;
