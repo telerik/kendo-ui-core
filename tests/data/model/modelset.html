@@ -52,79 +52,77 @@
                 equal(modelSet.get(1), modelSet.get(1));
             });
 
-            test("create adds the specified values to original data", function() {
+            test("add adds the specified values to original data", function() {
                 var data = [ { id: 1} ];
                 setup( { data: data });
 
-                modelSet.create( { foo: "bar" } );
+                modelSet.add( { foo: "bar" } );
 
                 equal(data.length, 2);
                 equal(data[1].foo, "bar");
             });
 
-            test("create returns a new model istance", function() {
-                var model = modelSet.create( { foo: "bar" } );
+            test("add returns a new model istance", function() {
+                var model = modelSet.add( { foo: "bar" } );
 
                 ok(model instanceof Model);
             });
 
-            test("create returns a new model istance with specified fields", function() {
-                var model = modelSet.create( { foo: "bar" } );
+            test("add returns a new model istance with specified fields", function() {
+                var model = modelSet.add( { foo: "bar" } );
 
                 equal(model.get("foo"), "bar");
             });
 
-            test("get after create returns the same model istance", function() {
-                var model = modelSet.create( { foo: "bar" } );
+            test("add accepts a model instance", function() {
+                var model = new MyModel({ foo: "bar" });
+
+                equal(modelSet.add(model), model);
+            });
+
+            test("get after add returns the same model istance", function() {
+                var model = modelSet.add( { foo: "bar" } );
 
                 equal(model, modelSet.get(model.id()));
             });
 
-            test("update sets the specified fields", function() {
-                setup( { data: [ { id: 1} ] });
-
-                modelSet.update(1, { foo: "bar" });
+            test("remove removes the specified model from the data", function() {
+                var data = [ { id: 0 },{ id: 1}, { id: 2} ];
+                setup( { data: data });
 
                 var model = modelSet.get(1);
+                modelSet.remove(model);
 
-                equal(model.get("foo"), "bar");
+                equal(data.length, 2);
+                equal(data[0].id, 0);
+                equal(data[1].id, 2);
             });
 
-            test("update returns the updated model", function() {
-                setup( { data: [ { id: 1} ] });
-
-                equal(modelSet.update(1).id(), 1);
-            });
-
-            test("update returns undefined if a model with the specified id does not exist", function() {
-                equal(modelSet.update(1), undefined);
-            });
-
-            test("destroy removes the specified model from the data", function() {
+            test("remove accepts a model instance", function() {
                 var data = [ { id: 1} ];
                 setup( { data: data });
 
-                modelSet.destroy(1);
+                modelSet.remove(modelSet.get(1));
 
                 equal(data.length, 0);
             });
 
-            test("destroy returns the destroyed model", function() {
+            test("remove returns the destroyed model", function() {
                 var data = [ { id: 1} ];
                 setup( { data: data });
 
-                equal(modelSet.destroy(1).id(), 1);
+                equal(modelSet.remove(1).id(), 1);
             });
 
-            test("destroy returns undefined if a model with the specified id does not exist", function() {
-                equal(modelSet.destroy(1), undefined);
+            test("remove returns undefined if a model with the specified id does not exist", function() {
+                equal(modelSet.remove(1), undefined);
             });
 
-            test("get after destroy returns undefined", function() {
+            test("get after remove returns undefined", function() {
                 var data = [ { id: 1} ];
                 setup( { data: data });
 
-                modelSet.destroy(1);
+                modelSet.remove(1);
                 equal(modelSet.get(1), undefined);
             });
 

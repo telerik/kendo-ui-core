@@ -185,74 +185,73 @@
 
             that._data = data = options.data || [];
             that._model = model = options.model;
-            that._dataMap = {};
-            that._modelMap = {};
+            that._models = {};
+            that._map();
+        },
+
+        _map: function() {
+            var that = this,
+                data = that._data,
+                model = that._model;
+
+            that._idMap = {};
 
             for (idx = 0, length = data.length; idx < length; idx++) {
-                that._dataMap[model.id(data[idx])] = data[idx];
+                that._idMap[model.id(data[idx])] = idx;
             }
         },
 
         get: function(id) {
             var that = this,
                 data,
-                model = that._modelMap[id];
+                model = that._models[id];
 
             if (!model) {
-                data = that._dataMap[id];
+                data = that._data[that._idMap[id]];
 
                 if (data) {
-                    model = that._modelMap[id] = new that._model(data);
+                    model = that._models[id] = new that._model(data);
                 }
             }
 
             return model;
         },
 
-        create: function(data) {
-            var that = this, model;
+        add: function(model) {
+            var that = this, data;
 
-            model = new that._model(data);
+            if (model instanceof Model) {
+                data = model.data;
+            } else {
+                data = model;
+                model = new that._model(model);
+            }
 
             that._data.push(data);
 
-            that._modelMap[model.id()] = model;
-            that._dataMap[model.id()] = data;
+            that._map();
+
+            that._models[model.id()] = model;
 
             return model;
         },
 
-        update: function(id, data) {
-            var model = this.get(id);
+        remove: function(model) {
+            var that = this, id = model, idx, length;
+
+            if (model instanceof Model) {
+                id = model.id();
+            } else {
+                model = that.get(id);
+            }
 
             if (model) {
-                model.set(data);
+                that._data.splice(that._idMap[id], 1);
+                that._map();
+                delete that._models[id];
             }
 
             return model;
-        },
-
-        destroy: function(id) {
-            var that = this,
-                idx,
-                length,
-                model,
-                data = that._dataMap[id];
-
-            if (data) {
-                for (idx = 0, length = that._data.length; idx < length; idx++) {
-                    if (that._data[idx] === data) {
-                        model = that.get(id);
-
-                        delete that._modelMap[id];
-                        delete that._dataMap[id];
-
-                        that._data.splice(idx, 1);
-
-                        return model;
-                    }
-                }
-            }
         }
     });
 
