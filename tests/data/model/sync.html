@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <script src="../../../src/jquery.js"></script>
+    <script type="text/javascript" src="../../qunit.js"></script>
+    <script type="text/javascript" src="../../qunit-runner.js"></script>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.model.js"></script>
+    <link rel="stylesheet" href="../../qunit.css" type="text/css" />
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var modelSet, Model = kendo.data.Model, MyModelSet, MyModel = Model.define( { id: "id" });
+
+            MyModelSet = kendo.data.ModelSet.extend( {
+                stub: function(methods) {
+                    var calls = {}, that = this;
+
+                    methods = $.isArray(methods) ? methods : [methods];
+
+                    $.each(methods, function(index, method) {
+                        calls[method] = 0;
+                        that[method] = function() {
+                            calls[method] ++;
+                        }
+                    });
+
+                    this.calls = function(method) {
+                        return calls[method];
+                    }
+                }
+            });
+
+            function setup(options) {
+                modelSet = new MyModelSet($.extend({
+                    model: MyModel
+                    }, options)
+                );
+            }
+
+            module("ModelSet sync", {
+                setup: setup
+            });
+
+            test("add syncs when autoSync is true", function() {
+                setup( { autoSync: true });
+                modelSet.stub("sync");
+                modelSet.add({ foo: "bar" });
+
+                equal(modelSet.calls("sync"), 1);
+            });
+
+            test("remove syncs when autoSync is true", function() {
+                setup( { data: [ { id: 1} ],  autoSync: true });
+                modelSet.stub("sync");
+                modelSet.remove(1);
+
+                equal(modelSet.calls("sync"), 1);
+            });
+
+            test("add does not sync when autoSync is false", function() {
+                setup();
+                modelSet.stub("sync");
+                modelSet.add({ foo: "bar" });
+
+                equal(modelSet.calls("sync"), 0);
+            });
+
+            test("remove does not sync if model does not exist", function() {
+                setup( { autoSync: true });
+                modelSet.stub("sync");
+                modelSet.remove(1);
+
+                equal(modelSet.calls("sync"), 0);
+            });
+
+            test("remove does not sync if model does not exist", function() {
+                setup( { autoSync: true });
+                modelSet.stub("sync");
+                modelSet.remove(1);
+
+                equal(modelSet.calls("sync"), 0);
+            });
+
+            test("remove does not sync when autoSync is false", function() {
+                setup( { data: [ { id: 1} ] });
+                modelSet.stub("sync");
+                modelSet.remove(1);
+
+                equal(modelSet.calls("sync"), 0);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
