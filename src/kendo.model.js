@@ -184,6 +184,7 @@
                 model;
 
             that._data = data = options.data || [];
+            that._transport = options.transport;
             that.options = options;
             that._models = {};
             that._map();
@@ -259,6 +260,29 @@
             }
 
             return model;
+        },
+
+        sync: function() {
+            var that = this,
+                created = [],
+                idx,
+                length,
+                model,
+                models = that._models;
+
+            for (idx in models) {
+                model = models[idx];
+
+                if (model.isNew()) {
+                    created.push(model.data);
+                }
+            }
+
+            for (idx = 0, length = created.length; idx < length; idx++) {
+                that._transport.create({
+                    data: created[idx]
+                });
+            }
         }
     });
 
