@@ -276,7 +276,7 @@
                 ok(!called);
             });
 
-            test("allow custom value", function() {
+            asyncTest("allow custom value", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: data
                 });
@@ -288,8 +288,6 @@
                     equal(combobox.value(), "ffff");
                     start();
                 }, 150);
-
-                stop(200);
             });
 
             test("do not set custom value if _current", function() {
