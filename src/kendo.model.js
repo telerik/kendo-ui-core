@@ -184,6 +184,7 @@
 
             that.options = options;
             that._data = options.data || [];
+            that._destroyed = [];
             that._transport = options.transport;
             that._models = {};
             that._map();
@@ -253,6 +254,10 @@
                 that._map();
                 delete that._models[id];
 
+                if (!model.isNew()) {
+                    that._destroyed.push(model);
+                }
+
                 if (that.options.autoSync) {
                     that.sync();
                 }
@@ -265,6 +270,7 @@
             var that = this,
                 created = [],
                 updated = [],
+                destroyed = that._destroyed,
                 idx,
                 length,
                 model,
@@ -289,6 +295,12 @@
             for (idx = 0, length = updated.length; idx < length; idx++) {
                 that._transport.update({
                     data: updated[idx]
+                });
+            }
+
+            for (idx = 0, length = destroyed.length; idx < length; idx++) {
+                that._transport.destroy({
+                    data: destroyed[idx]
                 });
             }
         }

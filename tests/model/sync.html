@@ -138,6 +138,38 @@
                 equal(transport.calls("update"), 0);
             });
 
+            test("sync calls the destroy method of the transport if there are destroyed models", function() {
+                var transport = stub({}, "destroy");
+                setup({ data: [ { id:1 }], transport: transport } );
+
+                model = modelSet.get(1);
+                modelSet.remove(model);
+                modelSet.sync();
+
+                equal(transport.calls("destroy"), 1);
+            });
+
+            test("sync does not call the destroy method of the transport if there are no destroyed models", function() {
+                var transport = stub({}, "destroy");
+                setup({ data: [ { id:1 }], transport: transport } );
+
+                model = modelSet.get(1);
+                modelSet.sync();
+
+                equal(transport.calls("destroy"), 0);
+            });
+
+            test("sync does not call the destroy method of the transport if a new model is destroyed", function() {
+                var transport = stub({}, "destroy");
+                setup( { transport: transport } );
+
+                var model = new MyModel();
+                modelSet.add(model);
+                modelSet.remove(model);
+                modelSet.sync();
+
+                equal(transport.calls("destroy"), 0);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
