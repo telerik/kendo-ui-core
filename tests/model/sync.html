@@ -138,6 +138,24 @@
                 equal(transport.calls("update"), 0);
             });
 
+            test("sync sends all updated models to the create method of the transport", function() {
+                var transport = stub({}, "update");
+                setup({ data: [ { id:1 }, { id: 2}], transport: transport } );
+
+                model = modelSet.get(1);
+                model.set({ foo: "bar" });
+                model = modelSet.get(2);
+                model.set({ foo: "baz" });
+                modelSet.sync();
+
+                equal(transport.calls("update"), 2);
+                equal(transport.args("update", 0)[0].data.foo, "bar");
+                equal(transport.args("update", 0)[0].data.id, 1);
+                equal(transport.args("update", 1)[0].data.id, 2);
+                equal(transport.args("update", 1)[0].data.foo, "baz");
+            });
+
+
             test("sync calls the destroy method of the transport if there are destroyed models", function() {
                 var transport = stub({}, "destroy");
                 setup({ data: [ { id:1 }], transport: transport } );
@@ -170,6 +188,23 @@
 
                 equal(transport.calls("destroy"), 0);
             });
+
+            test("sync sends all destroyed models to the destroy method of the transport", function() {
+                var transport = stub({}, "destroy");
+                setup({ data: [ { id:1 }, { id: 2}], transport: transport } );
+
+                model = modelSet.get(1);
+                modelSet.remove(model);
+                model = modelSet.get(2);
+                modelSet.remove(model);
+                modelSet.sync();
+
+                equal(transport.calls("destroy"), 2);
+                equal(transport.args("destroy", 0)[0].data.id, 1);
+                equal(transport.args("destroy", 1)[0].data.id, 2);
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
