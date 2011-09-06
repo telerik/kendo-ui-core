@@ -2,10 +2,13 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Component = ui.Component,
+        CLICK = "click",
+        DISABLED = "k-state-disabled",
         extend = $.extend,
+        proxy = $.proxy,
         DATE = Date;
 
-    function defineCurrentDate(value, min, max) {
+    function defineViewedDate(value, min, max) {
         var today = new DATE();
         if (value) {
             today = new DATE(value);
@@ -19,43 +22,30 @@
         return today;
     }
 
-
     var Calendar = Component.extend({
         init: function(element, options) {
             var that = this;
 
             Component.fn.init.call(that, element, options);
 
-            that.current = defineCurrentDate(that.value, that.options.min, that.options.max);
+            options = that.options;
+
+            that.viewedDate = defineViewedDate(options.value, options.min, options.max);
 
             that._templates();
 
             that._header();
 
-            that.currentView = that.options.firstView;
+            that.currentView = options.firstView;
 
-            that.view = $('<table class="k-content">');
+            // should just call that.value(options.value);
+
+            that.view = $('<table class="k-content">'); //make this in navigate method!!
             that.element.append(that.view); //append table;
 
-            that.element.find(".k-nav-prev:not(.k-state-disabled)")
-                .bind("click", $.proxy(function(e) {
-                    e.preventDefault();
-                    that.navigateToPast();
-                }));
+            that.navigate(options.value);
 
-            that.element.find(".k-nav-next:not(.k-state-disabled)")
-                .bind("click", $.proxy(function(e) {
-                    e.preventDefault();
-                    that.navigateToFuture();
-                }));
-
-            that.element.find(".k-nav-fast:not(.k-state-disabled)")
-                .bind("click", $.proxy(function(e) {
-                    e.preventDefault();
-                    that.navigateUp();
-                }));
-
-            that.navigate(that.options.value);
+            //
         },
 
         options: {
@@ -70,40 +60,39 @@
             }
         },
 
-        navigateToPast: function() {
+        _setDate: function(sign) {
             var that = this,
-            current = that.current,
-            currentView = that.currentView;
+            viewedDate = that.viewedDate,
+            currentView = that.currentView,
+            value = sign * 1;
 
             if (currentView === "month") {
-                current.setMonth(current.getMonth() - 1);
-            } else if (currentView === "year") {
-                current.setFullYear(current.getFullYear() - 1);
-            } else if (currentView === "decade") {
-                current.setFullYear(current.getFullYear() - 10);
-            } else if (currentView == "century") {
-                current.setFullYear(current.getFullYear() - 100);
-            }
+                viewedDate.setMonth(viewedDate.getMonth() + value);
+            } else {
+                if (currentView === "decade") {
+                    value *= 10;
+                } else if (currentView ==="century") {
+                    value *= 100;
+                }
 
-            that.navigate(current, that.currentView);
+                viewedDate.setFullYear(viewedDate.getFullYear() + value);
+            }
+        },
+
+        navigateToPast: function() {
+            var that = this;
+
+            that._setDate(-1);
+
+            that.navigate(that.viewedDate, that.currentView);
         },
 
         navigateToFuture: function() {
-            var that = this,
-            current = that.current,
-            currentView = that.currentView;
+            var that = this;
 
-            if (currentView === "month") {
-                current.setMonth(current.getMonth() + 1);
-            } else if (currentView === "year") {
-                current.setFullYear(current.getFullYear() + 1);
-            } else if (currentView === "decade") {
-                current.setFullYear(current.getFullYear() + 10);
-            } else if (currentView == "century") {
-                current.setFullYear(current.getFullYear() + 100);
-            }
+            that._setDate(1);
 
-            that.navigate(current, that.currentView);
+            that.navigate(that.viewedDate, that.currentView);
         },
 
         navigateUp: function() {
@@ -116,27 +105,56 @@
                 that.currentView = "decade";
             } else if (currentView === "decade") {
                 that.currentView = "century";
-                that.element.find(".k-nav-fast").addClass("k-state-disabled");
             }
 
-            that.navigate(that.current, that.currentView);
+            that.navigate(that.viewedDate, that.currentView);
         },
 
-        navigate: function(date, view) {
+        navigateDown: function() {
             var that = this,
-            options = that.options,
-            template;
+            depth = that.options.depth,
+            currentView = that.currentView;
 
-            date = date || that.current;
-            view = view || options.firstView;
+            if (currentView === depth) {
+                //return value;
+                // call value() !?!?
+            }
 
-            that.title.html(calendar[view].title(date));
+            if (currentView === "century") {
+                that.currentView = "decade";
+            } else if (currentView === "decade") {
+                that.currentView = "year";
+            } else if (currentView === "year") {
+                that.currentView = "month";
+            }
 
-            var newView = $(calendar[view].content(extend({
-                min: options.min,
-                max: options.max,
+            that.navigate(that.viewedDate, that.currentView);
+        },
+
+        navigate: function(date, viewName) {
+            var that = this,
+                options = that.options,
+                min = options.min,
+                max = options.max,
+                view;
+
+            date = date || that.viewedDate;
+            viewName = viewName || options.firstView;
+
+            view = calendar[viewName];
+
+            that.title
+                .toggleClass(DISABLED, viewName === "century")
+                .html(view.title(date));
+
+            that.prevArrow.toggleClass(DISABLED, view.compare(date, min) < 1);
+            that.nextArrow.toggleClass(DISABLED, view.compare(date, max) > -1);
+
+            var newView = $(view.content(extend({
+                min: min,
+                max: max,
                 date: date
-            }, that[view])))
+            }, that[viewName]))); //extend with templates
 
             newView.insertAfter(that.view);
             that.view.remove();
@@ -145,7 +163,8 @@
 
         _header: function() {
             var that = this,
-                element = that.element;
+            element = that.element,
+            prevArrow, nextArrow, title;
 
             if (!element.find(".k-header")[0]) {
                 element.html('<div class="k-header">'
@@ -155,9 +174,30 @@
                            + '</div>');
             }
 
-            that.prevArrow = element.find(".k-nav-prev");
-            that.title = element.find(".k-nav-fast");
-            that.nextArrow = element.find(".k-nav-next");
+            that.prevArrow = element.find(".k-nav-prev")
+                                    .bind(CLICK, function(e) {
+                                        e.preventDefault();
+                                        if (!that.prevArrow.hasClass(DISABLED)) {
+                                            that.navigateToPast();
+                                        }
+                                    });
+
+            that.title = element.find(".k-nav-fast")
+                                .bind(CLICK, function(e) {
+                                    e.preventDefault();
+                                    if (!that.title.hasClass(DISABLED)) {
+                                        that.navigateUp();
+                                    }
+                                });
+
+            that.nextArrow = element.find(".k-nav-next")
+                                    .bind(CLICK, function(e) {
+                                        e.preventDefault();
+                                        if (!that.nextArrow.hasClass(DISABLED)) {
+                                            that.navigateToFuture();
+                                        }
+                                    });
+
         },
 
         _templates: function() {
@@ -264,6 +304,23 @@
                 }
 
                 return html + "</tr></tbody></table>";
+            },
+            compare: function(date1, date2) {
+                var result,
+                    date1Month = date1.getMonth(),
+                    date1Year = date1.getFullYear(),
+                    date2Month = date2.getMonth(),
+                    date2Year = date2.getFullYear();
+
+                if (date1Year > date2Year) {
+                    result = 1;
+                } else if (date1Year < date2Year) {
+                    result = -1;
+                } else {
+                    result = date1Month == date2Month ? 0 : date1Month > date2Month ? 1 : -1;
+                }
+
+                return result;
             }
         },
 
@@ -289,6 +346,9 @@
                 });
 
                 return view(options);
+            },
+            compare: function(date1, date2){
+                return compare(date1, date2);
             }
         },
         decade: {
@@ -315,6 +375,9 @@
                 });
 
                 return view(options);
+            },
+            compare: function(date1, date2) {
+                return compare(date1, date2, 10);
             }
         },
         century: {
@@ -342,6 +405,9 @@
                 });
 
                 return view(options);
+            },
+            compare: function(date1, date2) {
+                return compare(date1, date2, 100);
             }
         }
     }
@@ -370,6 +436,29 @@
         }
 
         return html + "</tr></tbody></table>";
+    }
+
+    function compare(date1, date2, modifier) {
+        var date1year = date1.getFullYear(),
+            date2year = date2.getFullYear(),
+            result = 0;
+
+        if (modifier) {
+            if (date2year > date1year) {
+                date1year += modifier;
+            } else if (date2year < date1year) {
+                date1year -= modifier;
+            }
+        }
+
+        if (date1year > date2year) {
+            result = 1;
+        } else if (date1year < date2year) {
+            result = -1;
+        }
+
+        return result;
+
     }
 
     function inRange(date, min, max) {
