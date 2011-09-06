@@ -614,6 +614,11 @@
                 input = wrapper.find(SELECTOR);
             }
 
+            input[0].style.cssText = element.style.cssText;
+            input.css({
+                width: "100%",
+                height: "auto"
+            });
             input.addClass(element.className).show();
 
             that._focused = that.input = input;
