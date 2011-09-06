@@ -68,26 +68,6 @@ tests.push(
         title: "in-memory cache"
     },
     {
-        page: "data/model/initialization.html",
-        title: "model initialization"
-    },
-    {
-        page: "data/model/get.html",
-        title: "model get"
-    },
-    {
-        page: "data/model/set.html",
-        title: "model set"
-    },
-    {
-        page: "data/model/modified.html",
-        title: "model modified"
-    },
-    {
-        page: "data/model/modelset.html",
-        title: "modelset"
-    },
-    {
         page: "data/binder/mapping.html",
         title: "binder mapping"
     },
