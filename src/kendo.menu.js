@@ -71,6 +71,7 @@
      */
     var kendo = window.kendo,
         ui = kendo.ui,
+        touch = kendo.support.touch,
         extend = $.extend,
         proxy = $.proxy,
         each = $.each,
@@ -298,6 +299,7 @@
             element.delegate(linkSelector, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover);
 
             $(document).click(proxy( that._documentClick, that ));
+            that.clicked = false;
 
             that.bind([
                 /**
@@ -649,7 +651,7 @@
         },
 
         _click: function (e) {
-            var that = this;
+            var that = this, openHandle;
             e.stopPropagation();
 
             var element = $(e.currentTarget);
@@ -661,15 +663,17 @@
 
             that.trigger(SELECT, { item: element[0] });
 
-            if (!element.parent().hasClass(MENU) || !that.options.openOnClick) {
+            if (!element.parent().hasClass(MENU) || (!that.options.openOnClick && !touch)) {
                 return;
             }
 
             e.preventDefault();
 
             that.clicked = true;
-            that.trigger(OPEN, { item: element[0] });
-            that.open(element);
+            openHandle = element.children(".k-animation-container, .k-group").is(":visible") ? CLOSE : OPEN;
+
+            that.trigger(openHandle, { item: element[0] });
+            that[openHandle](element);
         },
 
         _documentClick: function (e) {
