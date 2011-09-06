@@ -255,7 +255,7 @@
                 delete that._models[id];
 
                 if (!model.isNew()) {
-                    that._destroyed.push(model);
+                    that._destroyed.push(model.data);
                 }
 
                 if (that.options.autoSync) {
