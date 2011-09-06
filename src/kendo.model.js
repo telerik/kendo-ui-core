@@ -177,15 +177,11 @@
 
     var ModelSet = Observable.extend({
         init: function(options) {
-            var that = this,
-                idx,
-                length,
-                data,
-                model;
+            var that = this;
 
-            that._data = data = options.data || [];
-            that._transport = options.transport;
             that.options = options;
+            that._data = options.data || [];
+            that._transport = options.transport;
             that._models = {};
             that._map();
         },
