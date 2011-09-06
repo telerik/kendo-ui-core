@@ -121,14 +121,6 @@
                 ok(!m._modified);
             });
 
-            test("model is not _modified if the last set sets the same value", function() {
-                var m = new Model();
-
-                m.set("foo", "bar");
-                m.set("foo", "bar");
-                ok(!m._modified);
-            });
-
             test("change is raised if the model is modifed after set", function() {
                 var changeWasCalled = false, m = new Model().bind("change", function() {
                     changeWasCalled = true;

@@ -16,37 +16,10 @@
         <script>
             var modelSet, MyModel = kendo.data.Model.define( { id: "id" });
 
-            function stub(that, methods) {
-                var stubs = {};
-
-                methods = $.isArray(methods) ? methods : [methods];
-
-                $.each(methods, function(index, method) {
-                    stubs[method] = { calls: 0, args: [] };
-                    that[method] = function() {
-                        stubs[method].calls ++;
-                        stubs[method].args.push(arguments);
-                    }
-                });
-
-                that.calls = function(method) {
-                    return stubs[method].calls;
-                }
-
-                that.args = function(method, index) {
-                    method = stubs[method];
-
-                    index = index !== undefined ? index: method.args.length - 1;
-                    return method.args[index];
-                }
-
-                return that;
-            }
-
             function setup(options) {
                 modelSet = new kendo.data.ModelSet($.extend({
                     model: MyModel
-                    }, options)
+                }, options)
                 );
             }
 
@@ -142,6 +115,27 @@
                 equal(transport.calls("create"), 2);
                 equal(transport.args("create", 0)[0].data.foo, "bar");
                 equal(transport.args("create", 1)[0].data.foo, "baz");
+            });
+
+            test("sync calls the update method of the transport if there are updated models", function() {
+                var transport = stub({}, "update");
+                setup({ data: [ { id:1 }], transport: transport } );
+
+                model = modelSet.get(1);
+                model.set({ foo: "bar" });
+                modelSet.sync();
+
+                equal(transport.calls("update"), 1);
+            });
+
+            test("sync does not call the update method of the transport if there are no updated models", function() {
+                var transport = stub({}, "update");
+                setup({ data: [ { id:1 }], transport: transport } );
+
+                model = modelSet.get(1);
+                modelSet.sync();
+
+                equal(transport.calls("update"), 0);
             });
 
         </script>

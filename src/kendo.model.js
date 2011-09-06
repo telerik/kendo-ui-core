@@ -85,6 +85,7 @@
             var that = this,
                 field,
                 values = {},
+                modified = false,
                 accessor;
 
             if (typeof fields === "string") {
@@ -93,8 +94,6 @@
                 values = fields;
             }
 
-            that._modified = false;
-
             for (field in values) {
                 accessor = that.accessor(field);
 
@@ -102,14 +101,18 @@
 
                 if (!equal(value, accessor.get(that.data))) {
                     accessor.set(that.data, value);
-                    that._modified = true;
+                    that._modified = modified = true;
                 }
             }
 
-            if (that._modified) {
+            if (modified) {
                 that.state = that.isNew() ? CREATED : UPDATED;
                 that.trigger(CHANGE);
             }
+        },
+
+        hasChanges: function() {
+            return this._modified;
         },
 
         isNew: function() {
@@ -261,6 +264,7 @@
         sync: function() {
             var that = this,
                 created = [],
+                updated = [],
                 idx,
                 length,
                 model,
@@ -271,12 +275,20 @@
 
                 if (model.isNew()) {
                     created.push(model.data);
+                } else if (model.hasChanges()) {
+                    updated.push(model.data);
                 }
             }
 
             for (idx = 0, length = created.length; idx < length; idx++) {
                 that._transport.create({
                     data: created[idx]
+                });
+            }
+
+            for (idx = 0, length = updated.length; idx < length; idx++) {
+                that._transport.update({
+                    data: updated[idx]
                 });
             }
         }
