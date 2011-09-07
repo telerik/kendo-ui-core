@@ -111,9 +111,10 @@
         fx = kendo.fx,
         template = kendo.template,
         // classNames
-        TWINDOW = ".k-window",
-        TWINDOWTITLEBAR = ".k-window-titlebar",
-        TOVERLAY = ".k-overlay",
+        KWINDOW = ".k-window",
+        KWINDOWTITLEBAR = ".k-window-titlebar",
+        KOVERLAY = ".k-overlay",
+        LOADING = "k-loading",
         // events
         OPEN = "open",
         ACTIVATE = "activate",
@@ -124,15 +125,6 @@
 
     function isLocalUrl(url) {
         return url && !(/^([a-z]+:)?\/\//i).test(url);
-    }
-
-    function fixIE6Sizing(wrapper) {
-        if ($.browser.msie && $.browser.version < 7) {
-            wrapper
-                .find(".k-resize-e,.k-resize-w").css("height", wrapper.height()).end()
-                .find(".k-resize-n,.k-resize-s").css("width", wrapper.width()).end()
-                .find(TOVERLAY).css({ width: wrapper.width(), height: wrapper.height() });
-        }
     }
 
     var Window = Component.extend(/** @lends kendo.ui.Window.prototype */ {
@@ -184,14 +176,14 @@
                 }
             }
 
-            wrapper = that.wrapper = element.closest(TWINDOW);
+            wrapper = that.wrapper = element.closest(KWINDOW);
 
             if (!element.is(".k-content") || !wrapper[0]) {
                 element.addClass("k-window-content k-content");
                 createWindow(element, options);
-                wrapper = that.wrapper = element.closest(TWINDOW);
+                wrapper = that.wrapper = element.closest(KWINDOW);
 
-                titleBar = that.wrapper.find(TWINDOWTITLEBAR);
+                titleBar = that.wrapper.find(KWINDOWTITLEBAR);
                 titleBar.css("margin-top", -titleBar.outerHeight());
 
                 wrapper.css("padding-top", titleBar.outerHeight());
@@ -236,13 +228,11 @@
                 .delegate(windowActions, "click", $.proxy(that._windowActionHandler, that));
 
             if (options.resizable) {
-                wrapper.delegate(TWINDOWTITLEBAR, "dblclick", $.proxy(that.toggleMaximization, that));
+                wrapper.delegate(KWINDOWTITLEBAR, "dblclick", $.proxy(that.toggleMaximization, that));
 
                 $.each("n e s w se sw ne nw".split(" "), function(index, handler) {
                     wrapper.append(templates.resizeHandle(handler));
                 });
-
-                fixIE6Sizing(that.wrapper);
 
                 that.resizing = new WindowResizing(that);
             }
@@ -504,7 +494,7 @@
                         return element.find(".k-window-content").data("kendoWindow");
                     }
 
-                    var openedModalWindows = $(TWINDOW).filter(function() {
+                    var openedModalWindows = $(KWINDOW).filter(function() {
                         var wnd = $(this);
                         return wnd.is(":visible") && windowObject(wnd).options.modal;
                     });
@@ -631,46 +621,45 @@
                     height: $(window).height()
                 });
 
-            fixIE6Sizing(wrapper);
-
             this.trigger(RESIZE);
         },
 
         /**
          * Refreshes the window content from a remote url.
          * @param {String} url The URL that the window should be refreshed from. If omitted, the window content is refreshed from the contentUrl that was supplied upon the window creation.
+         * @param {Object} data Data to be sent to the server.
          */
-        refresh: function (url) {
+        refresh: function (url, data) {
             var that = this;
 
             url = url || that.options.contentUrl;
 
             if (isLocalUrl(url)) {
-                that._ajaxRequest(url);
+                that._ajaxRequest(url, data);
             }
 
             return that;
         },
 
-        _ajaxRequest: function (url) {
+        _ajaxRequest: function (url, data) {
             var that = this,
+                refreshIcon = that.wrapper.find(".k-window-titlebar .k-refresh"),
                 loadingIconTimeout = setTimeout(function () {
-                    $(".k-refresh", that.wrapper).addClass("k-loading");
-                }, 100),
-                data = {};
+                    refreshIcon.addClass(LOADING);
+                }, 100);
 
             $.ajax({
                 type: "GET",
                 url: url,
                 dataType: "html",
-                data: data,
+                data: {},
                 cache: false,
                 error: $.proxy(function (xhr, status) {
                     that.trigger(ERROR);
                 }, that),
                 complete: function () {
                     clearTimeout(loadingIconTimeout);
-                    $(".k-refresh", that.wrapper).removeClass("k-loading");
+                    refreshIcon.removeClass(LOADING);
                 },
                 success: $.proxy(function (data, textStatus) {
                     $(".k-window-content", that.wrapper).html(data);
@@ -692,7 +681,7 @@
                 return element.find(".k-window-content").data("kendoWindow");
             }
 
-            var openedModalWindows = $(TWINDOW).filter(function() {
+            var openedModalWindows = $(KWINDOW).filter(function() {
                 var wnd = $(this);
                 return wnd.is(":visible") && windowObject(wnd).options.modal;
             });
@@ -834,8 +823,6 @@
                 resizeHandlers[this]();
             });
 
-            fixIE6Sizing(wrapper);
-
             wnd.trigger(RESIZE);
         },
         dragend: function (e) {
@@ -843,13 +830,12 @@
                 wrapper = wnd.wrapper;
 
             wrapper
-                .find(TOVERLAY).remove().end()
+                .find(KOVERLAY).remove().end()
                 .find(".k-resize-handle").not(e.currentTarget).show();
 
             $(document.body).css("cursor", "");
 
             if (e.keyCode == 27) {
-                fixIE6Sizing(wrapper);
                 wrapper.css(wnd.initialCursorPosition)
                     .css(wnd.initialSize);
             }
@@ -863,7 +849,7 @@
 
         that.owner = wnd;
         that._draggable = new Draggable(wnd.wrapper, {
-            filter: TWINDOWTITLEBAR,
+            filter: KWINDOWTITLEBAR,
             group: wnd.wrapper.id + "-moving",
             dragstart: $.proxy(that.dragstart, that),
             drag: $.proxy(that.drag, that),
@@ -902,12 +888,12 @@
 
             wnd.wrapper
                 .find(".k-resize-handle").show().end()
-                .find(TOVERLAY).remove();
+                .find(KOVERLAY).remove();
 
             $(document.body).css("cursor", "");
 
             if (e.keyCode == 27) {
-                e.currentTarget.closest(TWINDOW).css(wnd.initialWindowPosition);
+                e.currentTarget.closest(KWINDOW).css(wnd.initialWindowPosition);
             }
 
             return false;

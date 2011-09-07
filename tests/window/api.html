@@ -14,8 +14,7 @@
         <link href="../../styles/kendo.common.css" rel="stylesheet"/>
     </head>
     <body>
-
-        <script type="text/javascript">
+        <script>
             var Window = kendo.ui.Window;
 
             module("ClientSideAPI", {
@@ -68,7 +67,7 @@
                 ok(!window.options.isMaximized);
             });
 
-            test('destroying a modal window moves overlay before previous window', function() {
+            test("destroying a modal window moves overlay before previous window", function() {
                 var dialog = createWindow({
                         modal: true
                     }),
@@ -80,7 +79,7 @@
                 ok(dialog.wrapper.prev("div").is(".k-overlay"));
             });
 
-            test('closing a modal window moves overlay before previous window', function() {
+            test("closing a modal window moves overlay before previous window", function() {
                 var dialog = createWindow({
                         modal: true
                     }),
@@ -91,7 +90,6 @@
                 overlappingDialog.close();
                 ok(dialog.wrapper.prev("div").is(".k-overlay"));
             });
-
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>

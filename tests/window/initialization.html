@@ -14,8 +14,7 @@
         <link href="../../styles/kendo.common.css" rel="stylesheet"/>
     </head>
     <body>
-
-        <script type="text/javascript">
+        <script>
             var Window = kendo.ui.Window;
 
             module("ClientCreation", {
@@ -36,37 +35,34 @@
                 ok(dialog.wrapper.children().eq(0).is(".k-window-titlebar, .k-header"));
             });
 
-            test("if contentUrl is local call ajaxRequest on refresh method", 1, function() {
-                var dialog = createWindow();
-
-                dialog.options.contentUrl = "~/something";
-
-                dialog._ajaxRequest = function () { ok(true); };
-
-                dialog.refresh();
-            });
-
             test("if contentUrl is remote should not call ajaxRequest on refresh method", function() {
-                var dialog = createWindow();
-                var hasRequestedData = false;
+                var dialog = createWindow(),
+                    hasRequestedData = false;
 
                 dialog.options.contentUrl = "http://";
 
-                dialog._ajaxRequest = function () { hasRequestedData = true };
+                $.mockjax(function () { hasRequestedData = true });
 
                 dialog.refresh();
 
                 ok(!hasRequestedData);
+
+                $.mockjaxClear();
             });
 
             test("if contentUrl is local and relative should call ajaxRequest on refresh method", 1, function() {
-                var dialog = createWindow();
+                var dialog = createWindow(),
+                    hasRequestedData = false;
 
                 dialog.options.contentUrl = "httpfoo";
 
-                dialog._ajaxRequest = function () { ok(true); };
+                $.mockjax(function () { hasRequestedData = true });
 
                 dialog.refresh();
+
+                ok(hasRequestedData);
+
+                $.mockjaxClear();
             });
 
             test("construction triggers open and activate events", 2, function() {
@@ -185,7 +181,7 @@
                 equals(dialog.element.find("iframe").length, 0);
             });
 
-            test('creating a modal adds overlay and places it before the window markup', function() {
+            test("creating a modal adds overlay and places it before the window markup", function() {
                 var dialog = createWindow({
                     modal: true
                 });
@@ -193,7 +189,7 @@
                 ok(dialog.wrapper.prev("div").is(".k-overlay"));
             });
 
-            test('creating a second modal moves overlay after the first one', function() {
+            test("creating a second modal moves overlay after the first one", function() {
                 var dialog = createWindow({
                         modal: true
                     }),
@@ -201,13 +197,12 @@
                         modal: true
                     });
 
-                equals($('.k-overlay').length, 1);
+                equals($(".k-overlay").length, 1);
 
                 ok(!dialog.wrapper.prev("div").is(".k-overlay"));
                 ok(overlappingDialog.wrapper.prev("div").is(".k-overlay"));
                 same(dialog.wrapper.next("div")[0], overlappingDialog.wrapper.prev("div")[0]);
             });
-
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
