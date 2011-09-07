@@ -80,7 +80,7 @@
                  * @name kendo.ui.DropTarget#dragenter
                  * @event
                  * @param {Event} e
-                 * @param {kendo.ui.Draggable} e.draggable Reference to the draggable that enters the drop target.
+                 * @param {jQueryObject} e.draggable Reference to the draggable that enters the drop target.
                  */
                 DRAGENTER,
                 /**
@@ -88,7 +88,7 @@
                  * @name kendo.ui.DropTarget#dragleave
                  * @event
                  * @param {Event} e
-                 * @param {kendo.ui.Draggable} e.draggable Reference to the draggable that leaves the drop target.
+                 * @param {jQueryObject} e.draggable Reference to the draggable that leaves the drop target.
                  */
                 DRAGLEAVE,
                 /**
@@ -96,7 +96,7 @@
                  * @name kendo.ui.DropTarget#drop
                  * @event
                  * @param {Event} e
-                 * @param {kendo.ui.Draggable} e.draggable Reference to the draggable that is dropped over the drop target.
+                 * @param {jQueryObject} e.draggable Reference to the draggable that is dropped over the drop target.
                  */
                 DROP
             ], that.options);
