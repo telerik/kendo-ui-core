@@ -6,17 +6,7 @@
         setter = kendo.setter,
         accessor = kendo.accessor,
         each = $.each,
-
         CHANGE = "change",
-        UPDATED = "UPDATED",
-        PRISTINE = "PRISTINE",
-        CREATED = "CREATED",
-        DESTROYED = "DESTROYED",
-
-        CREATE = "create",
-        DESTROY = "destroy",
-        UPDATE = "update",
-
         Observable = kendo.Observable;
 
     function equal(x, y) {
@@ -53,8 +43,6 @@
 
             Observable.fn.init.call(that);
 
-            that.state = PRISTINE;
-
             that._accessors = {};
 
             that._modified = false;
@@ -62,23 +50,20 @@
             that.data = extend(true, {}, data);
             that.pristine = extend(true, {}, data);
 
-            if(that.id() === undefined) {
-                that.state = CREATED;
+            if (that.id() === undefined) {
+                that._isNew = true;
                 that.data["__id"] = kendo.guid();
             }
         },
 
-        accessor: function(field) {
+        _accessor: function(field) {
             var accessors = this._accessors;
 
             return accessors[field] = accessors[field] || accessor(field);
         },
 
         get: function(field) {
-            var that = this,
-                accessor = that.accessor(field);
-
-            return accessor.get(that.data);
+            return this._accessor(field).get(this.data);
         },
 
         set: function(fields, value) {
@@ -95,7 +80,7 @@
             }
 
             for (field in values) {
-                accessor = that.accessor(field);
+                accessor = that._accessor(field);
 
                 value = values[field];
 
@@ -106,7 +91,6 @@
             }
 
             if (modified) {
-                that.state = that.isNew() ? CREATED : UPDATED;
                 that.trigger(CHANGE);
             }
         },
@@ -116,11 +100,7 @@
         },
 
         isNew: function() {
-            return this.state === CREATED;
-        },
-
-        destroy: function() {
-            this.state = DESTROYED;
+            return this._isNew === true;
         },
 
         changes: function() {
@@ -325,8 +305,4 @@
 
     kendo.data.Model = Model;
     kendo.data.ModelSet = ModelSet;
-    Model.UPDATED = UPDATED;
-    Model.PRISTINE = PRISTINE;
-    Model.CREATED = CREATED;
-    Model.DESTROYED = DESTROYED;
 })(jQuery);
