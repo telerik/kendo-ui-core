@@ -38,22 +38,6 @@
                 }
             });
 
-            asyncTest("ajaxRequest calls ajaxOptions", function() {
-                var called = false,
-                    splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            ajaxOptions: function() {
-                                start();
-                                ok(true);
-                            },
-                            panes: [ {}, { contentUrl: url } ]
-                        })
-                        .data("kendoSplitter");
-
-                splitter.ajaxRequest(".k-pane:first");
-            });
-
             test("ajaxRequest loads custom urls", function() {
                 var customUrl = 'customUrl',
                     requestedUrl,
