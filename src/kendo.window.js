@@ -109,23 +109,42 @@
         Component = kendo.ui.Component,
         Draggable = kendo.ui.Draggable,
         fx = kendo.fx,
+        proxy = $.proxy,
+        each = $.each,
         template = kendo.template,
+        templates,
         // classNames
         KWINDOW = ".k-window",
         KWINDOWTITLEBAR = ".k-window-titlebar",
+        KWINDOWCONTENT = ".k-window-content",
         KOVERLAY = ".k-overlay",
         LOADING = "k-loading",
+        KHOVERSTATE = "k-state-hover",
+        VISIBLE = ":visible",
         // events
         OPEN = "open",
         ACTIVATE = "activate",
         CLOSE = "close",
         REFRESH = "refresh",
         RESIZE = "resize",
-        ERROR = "error";
+        ERROR = "error",
+        localUrlRe = /^([a-z]+:)?\/\//i;
 
     function isLocalUrl(url) {
-        return url && !(/^([a-z]+:)?\/\//i).test(url);
+        return url && !localUrlRe.test(url);
     }
+
+    function windowObject(element) {
+        return element.children(KWINDOWCONTENT).data("kendoWindow");
+    }
+
+    function openedModalWindows() {
+        return $(KWINDOW).filter(function() {
+            var wnd = $(this);
+            return wnd.is(VISIBLE) && windowObject(wnd).options.modal;
+        });
+    }
+
 
     var Window = Component.extend(/** @lends kendo.ui.Window.prototype */ {
         /**
@@ -162,7 +181,7 @@
             }
 
             if (!element.parent().is("body")) {
-                if (element.is(":visible")) {
+                if (element.is(VISIBLE)) {
                     offset = element.offset();
                     isVisible = true;
                 } else {
@@ -215,22 +234,22 @@
                 }
             }
 
-            wrapper.toggleClass("k-rtl", that.wrapper.closest(".k-rtl").length > 0)
+            wrapper.toggleClass("k-rtl", that.wrapper.closest(".k-rtl").length)
                    .appendTo(document.body);
 
             if (options.modal) {
-                that._overlay(wrapper.is(":visible")).css({ opacity: 0.5 });
+                that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
             }
 
             wrapper
-                .delegate(windowActions, "mouseenter", function () { $(this).addClass('k-state-hover'); })
-                .delegate(windowActions, "mouseleave", function () { $(this).removeClass('k-state-hover'); })
-                .delegate(windowActions, "click", $.proxy(that._windowActionHandler, that));
+                .delegate(windowActions, "mouseenter", function () { $(this).addClass(KHOVERSTATE); })
+                .delegate(windowActions, "mouseleave", function () { $(this).removeClass(KHOVERSTATE); })
+                .delegate(windowActions, "click", proxy(that._windowActionHandler, that));
 
             if (options.resizable) {
-                wrapper.delegate(KWINDOWTITLEBAR, "dblclick", $.proxy(that.toggleMaximization, that));
+                wrapper.delegate(KWINDOWTITLEBAR, "dblclick", proxy(that.toggleMaximization, that));
 
-                $.each("n e s w se sw ne nw".split(" "), function(index, handler) {
+                each("n e s w se sw ne nw".split(" "), function(index, handler) {
                     wrapper.append(templates.resizeHandle(handler));
                 });
 
@@ -288,13 +307,13 @@
                 ERROR
             ], options);
 
-            $(window).resize($.proxy(that._onDocumentResize, that));
+            $(window).resize(proxy(that._onDocumentResize, that));
 
             if (isLocalUrl(options.contentUrl)) {
                 that._ajaxRequest(options.contentUrl);
             }
 
-            if (wrapper.is(":visible")) {
+            if (wrapper.is(VISIBLE)) {
                 that.trigger(OPEN);
                 that.trigger(ACTIVATE);
             }
@@ -336,14 +355,6 @@
                 overlay.insertBefore(wrapper).toggle(visible);
             }
 
-            if ($.browser.msie && $.browser.version < 7) {
-                overlay.css({
-                    width: doc.width() - 21,
-                    height: doc.height(),
-                    position: "absolute"
-                });
-            }
-
             return overlay;
         },
 
@@ -351,7 +362,7 @@
             var target = $(e.target).closest(".k-window-action").find(".k-icon"),
                 that = this;
 
-            $.each({
+            each({
                 "k-close": that.close,
                 "k-maximize": that.maximize,
                 "k-restore": that.restore,
@@ -420,7 +431,7 @@
          * wnd.content("<p>New content</p>");
          */
         content: function (html) {
-            var content = $("> .k-window-content", this.wrapper);
+            var content = this.wrapper.children(KWINDOWCONTENT);
 
             if (!html) {
                 return content.html();
@@ -457,7 +468,7 @@
                     }
                 }
 
-                if (!wrapper.is(":visible")) {
+                if (!wrapper.is(VISIBLE)) {
                     wrapper.show().kendoStop().kendoAnimate({
                         effects: showOptions.effects,
                         duration: showOptions.duration,
@@ -486,45 +497,38 @@
             var that = this,
                 wrapper = that.wrapper,
                 options = that.options,
-                hideOptions = options.animation.close;
+                hideOptions = options.animation.close,
+                modalWindows,
+                shouldHideOverlay, overlay;
 
-            if (wrapper.is(":visible")) {
-                if (!that.trigger(CLOSE)) {
-                    function windowObject(element) {
-                        return element.find(".k-window-content").data("kendoWindow");
+            if (wrapper.is(VISIBLE) && !that.trigger(CLOSE)) {
+                modalWindows = openedModalWindows();
+
+                shouldHideOverlay = options.modal && modalWindows.length == 1;
+
+                overlay = options.modal ? that._overlay(true) : $(undefined);
+
+                if (shouldHideOverlay) {
+                    if (hideOptions.duration) {
+                        overlay.kendoStop().kendoAnimate({
+                             effects: { fadeOut: { properties: { opacity: 0 } } },
+                             duration: hideOptions.duration,
+                             hide: true
+                         });
+                    } else {
+                        overlay.hide();
                     }
-
-                    var openedModalWindows = $(KWINDOW).filter(function() {
-                        var wnd = $(this);
-                        return wnd.is(":visible") && windowObject(wnd).options.modal;
-                    });
-
-                    var shouldHideOverlay = options.modal && openedModalWindows.length == 1;
-
-                    var overlay = options.modal ? that._overlay(true) : $(undefined);
-
-                    if (shouldHideOverlay) {
-                        if (hideOptions.duration) {
-                            overlay.kendoStop().kendoAnimate({
-                                 effects: { fadeOut: { properties: { opacity: 0 } } },
-                                 duration: hideOptions.duration,
-                                 hide: true
-                             });
-                        } else {
-                            overlay.hide();
-                        }
-                    } else if (openedModalWindows.length > 0) {
-                        windowObject(openedModalWindows.eq(openedModalWindows.length - 2))._overlay(true);
-                    }
-
-                    wrapper.kendoStop().kendoAnimate({
-                        effects: hideOptions.effects,
-                        duration: hideOptions.duration,
-                        complete: function() {
-                            wrapper.hide();
-                        }
-                    });
+                } else if (modalWindows.length) {
+                    windowObject(modalWindows.eq(modalWindows.length - 2))._overlay(true);
                 }
+
+                wrapper.kendoStop().kendoAnimate({
+                    effects: hideOptions.effects,
+                    duration: hideOptions.duration,
+                    complete: function() {
+                        wrapper.hide();
+                    }
+                });
             }
 
             if (that.options.isMaximized) {
@@ -654,15 +658,15 @@
                 dataType: "html",
                 data: data || {},
                 cache: false,
-                error: $.proxy(function (xhr, status) {
+                error: proxy(function (xhr, status) {
                     that.trigger(ERROR);
                 }, that),
                 complete: function () {
                     clearTimeout(loadingIconTimeout);
                     refreshIcon.removeClass(LOADING);
                 },
-                success: $.proxy(function (data, textStatus) {
-                    $(".k-window-content", that.wrapper).html(data);
+                success: proxy(function (data, textStatus) {
+                    that.wrapper.children(KWINDOWCONTENT).html(data);
 
                     that.trigger(REFRESH);
                 }, that)
@@ -673,30 +677,25 @@
          * Destroys the window and its modal overlay, if necessary. Useful for removing modal windows.
          */
         destroy: function () {
-            var that = this;
+            var that = this,
+                modalWindows,
+                shouldHideOverlay;
 
             that.wrapper.remove();
 
-            function windowObject(element) {
-                return element.find(".k-window-content").data("kendoWindow");
-            }
+            modalWindows = openedModalWindows();
 
-            var openedModalWindows = $(KWINDOW).filter(function() {
-                var wnd = $(this);
-                return wnd.is(":visible") && windowObject(wnd).options.modal;
-            });
-
-            var shouldHideOverlay = that.options.modal && openedModalWindows.length == 0;
+            shouldHideOverlay = that.options.modal && !modalWindows.length;
 
             if (shouldHideOverlay) {
                 that._overlay(false).remove();
-            } else if (openedModalWindows.length > 0) {
-                windowObject(openedModalWindows.eq(openedModalWindows.length - 2))._overlay(true);
+            } else if (modalWindows.length > 0) {
+                windowObject(modalWindows.eq(modalWindows.length - 2))._overlay(true);
             }
         }
     });
 
-    var templates = {
+    templates = {
         wrapper: template("<div class='k-widget k-window'></div>"),
         titlebar: template(
             "<div class='k-window-titlebar k-header'>&nbsp;" +
@@ -743,9 +742,9 @@
         that._draggable = new Draggable(wnd.wrapper, {
             filter: ".k-resize-handle",
             group: wnd.wrapper.id + "-resizing",
-            dragstart: $.proxy(that.dragstart, that),
-            drag: $.proxy(that.drag, that),
-            dragend: $.proxy(that.dragend, that)
+            dragstart: proxy(that.dragstart, that),
+            drag: proxy(that.drag, that),
+            dragend: proxy(that.dragend, that)
         });
     }
 
@@ -819,7 +818,7 @@
                     }
                 };
 
-            $.each(wnd.resizeDirection, function () {
+            each(wnd.resizeDirection, function () {
                 resizeHandlers[this]();
             });
 
@@ -851,9 +850,9 @@
         that._draggable = new Draggable(wnd.wrapper, {
             filter: KWINDOWTITLEBAR,
             group: wnd.wrapper.id + "-moving",
-            dragstart: $.proxy(that.dragstart, that),
-            drag: $.proxy(that.drag, that),
-            dragend: $.proxy(that.dragend, that)
+            dragstart: proxy(that.dragstart, that),
+            drag: proxy(that.drag, that),
+            dragend: proxy(that.dragend, that)
         });
     }
 
