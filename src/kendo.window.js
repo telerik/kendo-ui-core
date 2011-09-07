@@ -652,7 +652,7 @@
                 type: "GET",
                 url: url,
                 dataType: "html",
-                data: {},
+                data: data || {},
                 cache: false,
                 error: $.proxy(function (xhr, status) {
                     that.trigger(ERROR);

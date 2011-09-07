@@ -17,7 +17,7 @@
         <script>
             var Window = kendo.ui.Window;
 
-            module("ClientCreation", {
+            module("initialization", {
                 teardown: function() {
                     $(".k-window,.k-overlay").remove();
                 }
@@ -41,7 +41,10 @@
 
                 dialog.options.contentUrl = "http://";
 
-                $.mockjax(function () { hasRequestedData = true });
+                $.mockjax(function () {
+                    hasRequestedData = true;
+                    return {};
+                });
 
                 dialog.refresh();
 
@@ -56,7 +59,10 @@
 
                 dialog.options.contentUrl = "httpfoo";
 
-                $.mockjax(function () { hasRequestedData = true });
+                $.mockjax(function () {
+                    hasRequestedData = true;
+                    return {};
+                });
 
                 dialog.refresh();
 
@@ -168,6 +174,8 @@
             });
 
             test("creating a window with a contentUrl on the same server does not create iframe", function() {
+                $.mockjax(function () { return {}; });
+
                 var dialog = createWindow({
                     contentUrl: "foo"
                 });
