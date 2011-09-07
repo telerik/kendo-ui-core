@@ -254,6 +254,7 @@
                 destroyed = that._destroyed,
                 idx,
                 length,
+                sendAllFields = that.options.sendAllFields,
                 model,
                 models = that._models;
 
@@ -280,7 +281,7 @@
             for (idx = 0, length = updated.length; idx < length; idx++) {
                 model = updated[idx];
 
-                data = model.changes();
+                data = sendAllFields ? model.data : model.changes();
 
                 that.options.model.id(data, model.id());
 
@@ -292,7 +293,7 @@
             for (idx = 0, length = destroyed.length; idx < length; idx++) {
                 model = destroyed[idx];
 
-                data = {};
+                data = sendAllFields ? model.data : {};
 
                 that.options.model.id(data, model.id());
 
