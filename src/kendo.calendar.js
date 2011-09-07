@@ -4,6 +4,7 @@
         Component = ui.Component,
         CLICK = "click",
         DISABLED = "k-state-disabled",
+        SELECTED = "k-state-selected",
         extend = $.extend,
         proxy = $.proxy,
         DATE = Date;
@@ -35,6 +36,10 @@
             that._templates();
 
             that._header();
+
+            that.element.delegate("td:not(k-other-month)", "click", function(e) {
+                that.navigateDown(new Date($(e.currentTarget.children[0]).data("val")));
+            });
 
             that.currentView = options.firstView;
 
@@ -110,14 +115,15 @@
             that.navigate(that.viewedDate, that.currentView);
         },
 
-        navigateDown: function() {
+        navigateDown: function(value) {
             var that = this,
             depth = that.options.depth,
             currentView = that.currentView;
 
             if (currentView === depth) {
-                //return value;
-                // call value() !?!?
+                //raise change event ???
+                that.value(value);
+                return;
             }
 
             if (currentView === "century") {
@@ -126,6 +132,10 @@
                 that.currentView = "year";
             } else if (currentView === "year") {
                 that.currentView = "month";
+            }
+
+            if (value) {
+                that.viewedDate = value;
             }
 
             that.navigate(that.viewedDate, that.currentView);
@@ -154,11 +164,67 @@
                 min: min,
                 max: max,
                 date: date
-            }, that[viewName]))); //extend with templates
+            }, that[viewName])));
 
-            newView.insertAfter(that.view);
-            that.view.remove();
+            //select
+            if (viewName === options.depth && that._value) {
+                var dateString = view.toDateString(that._value);
+
+                newView.find("td:not(k-other-month)")
+                       .removeClass(SELECTED)
+                       .filter(function() {
+                           return $(this).children().eq(0).data("val") === dateString;
+                       })
+                       .addClass(SELECTED);
+            }
+
+            //animate
+            var oldView = that.view;
+
+            var wrapper = kendo.wrap(oldView);
+            newView.insertBefore(oldView);
+
+            oldView.css("float", "left");
+            newView.css("float", "left");
+
+            var offset = oldView.offset();
+            var width = oldView.outerWidth();
+
+            wrapper.css({
+                //set left
+                width: width * 2,
+                position: "relative",
+                overflow: "visible"
+            });
+
+            //that.view.remove();
             that.view = newView;
+        },
+
+        value: function(value) {
+            var that = this,
+                options = that.options;
+
+            if (value === undefined) {
+                return that._value;
+            }
+
+            if (value !== null) {
+                value = new Date(value);
+
+                if (isNaN(value.getDate())) {
+                    value = null;
+                } else if(value < options.min) {
+                    value = options.min;
+                } else if(value > options.max) {
+                    value = options.max;
+                }
+            }
+
+            that._value = value;
+            that.viewedDate = new Date(value);
+
+            that.navigate(value, that.options.depth);
         },
 
         _header: function() {
@@ -208,7 +274,7 @@
 
 
             that.month = {
-                content: template('<td><a class="k-link" href="#" title="<#=data.title#>">' + month.content + '</a></td>'),
+                content: template('<td><a class="k-link" href="#" data-val="<#=data.dateString#>" title="<#=data.title#>">' + month.content + '</a></td>'),
                 empty: template("<td>" + month.empty + "</td>")
             };
         }
@@ -297,7 +363,8 @@
                     data = {
                         date: start,
                         title: kendo.toString(start, "D"),
-                        day: start.getDate()
+                        day: start.getDate(),
+                        dateString: (start.getMonth() + 1) + "/" + start.getDate() + "/" + start.getFullYear()
                     };
 
                     html += inRange(start, min, max) ? content(data) : empty(data);
@@ -321,6 +388,9 @@
                 }
 
                 return result;
+            },
+            toDateString: function(date) {
+                return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
             }
         },
 
@@ -349,6 +419,9 @@
             },
             compare: function(date1, date2){
                 return compare(date1, date2);
+            },
+            toDateString: function(date) {
+                return (date.getMonth() + 1) + "/1/" + date.getFullYear();
             }
         },
         decade: {
@@ -378,6 +451,9 @@
             },
             compare: function(date1, date2) {
                 return compare(date1, date2, 10);
+            },
+            toDateString: function(date) {
+                return "1/1/" + date.getFullYear();
             }
         },
         century: {
@@ -408,12 +484,17 @@
             },
             compare: function(date1, date2) {
                 return compare(date1, date2, 100);
+            },
+            toDateString: function(date) {
+                var year = date.getFullYear();
+                return "1/1/" + year - year % 10;
             }
         }
     }
 
     function view(options) {
         var idx = 0,
+            dateString,
             min = options.min,
             max = options.max,
             start = options.start,
@@ -427,7 +508,8 @@
             }
 
             if (inRange(start, min, max)) {
-                html += '<td><a class="k-link">' + render(start) + "</a></td>";
+                dataString = (start.getMonth() + 1) + "/" + start.getDate() + "/" + start.getFullYear();
+                html += '<td><a class="k-link" data-val="' + dataString + '">' + render(start) + "</a></td>";
             } else {
                 html += "<td> </td>";
             }

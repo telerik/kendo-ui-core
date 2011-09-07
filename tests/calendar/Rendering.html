@@ -142,10 +142,25 @@
                 equal(div.find("tbody").find("a:last").html(), max.getDate() + "");
             });
 
+            test("month view should render data-val attribute", function() {
+                var max = new Date(2011, 9, 19),
+                    today = new Date(2011, 9, 10),
+                    value = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+
+                div.html(calendar.month.content({
+                    date: today,
+                    empty: template.empty,
+                    min: new Date(today),
+                    max: max,
+                    content: template.content
+                }));
+
+                equal(div.find("tbody").find("a:first").attr("data-val"), value);
+            });
+
             test("year view renders title", function() {
                 var today = new Date(2011, 9, 10);
 
-                //templates["year"].title
                 equal(calendar.year.title(today), today.getFullYear() + "");
             });
 
@@ -182,6 +197,20 @@
                 equal(div.find("tbody").find("a:first").html(), monthName);
             });
 
+            test("year view renders cells with data-val", function() {
+                var today = new Date(2011, 9, 10),
+                    value = (today.getMonth() + 1) + "/1/" + today.getFullYear(),
+                    monthName = kendo.culture().calendar.months.namesAbbr[9];
+
+                div.html(calendar.year.content({
+                    date: today,
+                    min: today,
+                    max: today
+                }));
+
+                equal(div.find("tbody").find("a").attr("data-val"), value);
+            });
+
             test("decade title renders decade range title", function() {
                 var today = new Date(2011, 9, 10);
                 equal(calendar.decade.title(today), "2010-2019");
@@ -216,6 +245,19 @@
                 equal(div.find("tbody").find("a").html(), "2011");
             });
 
+            test("decade view renders cells with data-val", function() {
+                var today = new Date(2011, 9, 10),
+                    value = "1/1/2011";
+
+                div.html(calendar.decade.content({
+                    date: today,
+                    min: today,
+                    max: today
+                }));
+
+                equal(div.find("tbody").find("td > a").attr("data-val"), value);
+            });
+
             test("century title renders century title", function() {
                 var today = new Date(2011, 9, 10);
 
@@ -248,6 +290,19 @@
 
                 equal(div.find("tbody").find("td > a").length, 1);
                 equal(div.find("tbody").find("a").html(), "2010-2019");
+            });
+
+            test("century view renders cells with data-val", function() {
+                var today = new Date(2011, 9, 10),
+                    value = "1/1/2010";
+
+                div.html(calendar.century.content({
+                    date: today,
+                    min: today,
+                    max: today
+                }));
+
+                equal(div.find("tbody").find("a").attr("data-val"), value);
             });
 
         </script>
