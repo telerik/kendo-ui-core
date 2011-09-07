@@ -261,7 +261,6 @@
                 idx,
                 length,
                 options = that.options,
-                batch = options.batch,
                 sendAllFields = options.sendAllFields,
                 model,
                 models = that._models;
@@ -289,48 +288,39 @@
                 destroyed.push(data);
             }
 
-            if (batch) {
-                if (created.length) {
-                    that._transport.create({
-                        data: {
-                            models: created
-                        }
-                    });
-                }
+            that._send({
+                create: created,
+                update: updated,
+                destroy: destroyed
+            });
+        },
+        _send: function(data) {
+            var that = this,
+                batch = that.options.batch,
+                transport = that._transport,
+                order = "create,update,destroy".split(",");
 
-                if (updated.length) {
-                    that._transport.update({
-                        data: {
-                            models: updated
-                        }
-                    });
-                }
-                if (destroyed.length) {
-                    that._transport.destroy({
-                        data: {
-                            models: destroyed
-                        }
-                    });
-                }
-            } else {
-                for (idx = 0, length = created.length; idx < length; idx++) {
-                    that._transport.create({
-                        data: created[idx]
-                    });
-                }
+            each(order, function(index, type) {
+                var payload = data[type],
+                    idx,
+                    length;
 
-                for (idx = 0, length = updated.length; idx < length; idx++) {
-                    that._transport.update({
-                        data: updated[idx]
-                    });
+                if (batch) {
+                    if (payload.length) {
+                        transport[type].call(transport, {
+                            data: {
+                                models: payload
+                            }
+                        });
+                    }
+                } else {
+                    for (idx = 0, length = payload.length; idx < length; idx++) {
+                        transport[type].call(transport, {
+                            data: payload[idx]
+                        });
+                    }
                 }
-
-                for (idx = 0, length = destroyed.length; idx < length; idx++) {
-                    that._transport.destroy({
-                        data: destroyed[idx]
-                    });
-                }
-            }
+            });
         }
     });
 
