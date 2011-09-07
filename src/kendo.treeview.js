@@ -93,6 +93,75 @@
         NODECONTENTS = SUBGROUP + ",>.k-content,>.k-animation-container>.k-content",
         templates, rendering, TreeView;
 
+    function updateNodeHtml(node) {
+        var wrapper = node.find(">div"),
+            subGroup = node.find(">ul"),
+            toggleButton = wrapper.find(">.k-icon"),
+            innerWrapper = wrapper.find(">.k-in");
+
+        if (!wrapper.length) {
+            wrapper = $("<div />").prependTo(node);
+        }
+
+        if (!toggleButton.length && subGroup.length) {
+            toggleButton = $("<span class='k-icon' />").prependTo(wrapper);
+        } else if (!subGroup.length || !subGroup.children().length) {
+            toggleButton.remove();
+            subGroup.remove();
+        }
+
+        if (!innerWrapper.length) {
+            innerWrapper = $("<span class='k-in' />").appendTo(wrapper)[0];
+
+            // move all non-group content in the k-in container
+            currentNode = wrapper[0].nextSibling;
+            innerWrapper = wrapper.find(".k-in")[0];
+
+            while (currentNode && currentNode.nodeName.toLowerCase() != "ul") {
+                tmp = currentNode;
+                currentNode = currentNode.nextSibling;
+                innerWrapper.appendChild(tmp);
+            }
+        }
+    }
+
+    function updateNodeClasses(node, groupData, nodeData) {
+        var wrapper = node.find(">div"),
+            subGroup = node.find(">ul")
+
+        if (!nodeData) {
+            nodeData = {
+                expanded: !(subGroup.css("display") == "none"),
+                index: node.index(),
+                enabled: !wrapper.find(">.k-in").hasClass("k-state-disabled")
+            };
+        }
+
+        if (!groupData) {
+            groupData = {
+                firstLevel: node.parent().parent().hasClass(TTREEVIEW),
+                length: node.parent().children().length
+            };
+        }
+
+        // li
+        node.removeClass("k-first k-last")
+            .addClass(rendering.wrapperCssClass(groupData, nodeData));
+
+        // div
+        wrapper.removeClass("k-top k-mid k-bot")
+               .addClass(rendering.cssClass(groupData, nodeData));
+
+        // toggle button
+        if (subGroup.length) {
+            wrapper.find(">.k-icon").removeClass("k-plus k-minus k-plus-disabled k-minus-disabled")
+                .addClass(rendering.toggleButtonClass(nodeData));
+
+            subGroup.addClass("k-group");
+        }
+    }
+
+
     templates = {
         dragClue: template("<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span><#= text #></div>"),
         group: template(
@@ -136,7 +205,6 @@
          */
         init: function (element, options) {
             var that = this,
-                element = $(element),
                 clickableItems = ".k-in:not(.k-state-selected,.k-state-disabled)",
                 dataInit;
 
@@ -144,6 +212,7 @@
 
             Component.prototype.init.call(that, element, options);
 
+            element = that.element;
             options = that.options;
 
             if (options.animation === false) {
@@ -298,7 +367,7 @@
             if (href) {
                 shouldNavigate = href == "#" || href.indexOf("#" + this.element.id + "-") >= 0;
             } else {
-                shouldNavigate = contents.length > 0 && contents.children().length == 0;
+                shouldNavigate = contents.length && !contents.children().length;
             }
 
             if (shouldNavigate) {
@@ -356,81 +425,13 @@
 
                 nodeData = { index: i, expanded: node.data("expanded") === true };
 
-                that._updateNodeHtml(node);
+                updateNodeHtml(node);
 
-                that._updateNodeClasses(node, groupData, nodeData);
+                updateNodeClasses(node, groupData, nodeData);
 
                 // iterate over child nodes
                 that._group(node);
             });
-        },
-
-        _updateNodeHtml: function(node) {
-            var wrapper = node.find(">div"),
-                subGroup = node.find(">ul"),
-                toggleButton = wrapper.find(">.k-icon"),
-                innerWrapper = wrapper.find(">.k-in");
-
-            if (!wrapper.length) {
-                wrapper = $("<div />").prependTo(node);
-            }
-
-            if (!toggleButton.length && subGroup.length) {
-                toggleButton = $("<span class='k-icon' />").prependTo(wrapper);
-            } else if (!subGroup.length || !subGroup.children().length) {
-                toggleButton.remove();
-                subGroup.remove();
-            }
-
-            if (!innerWrapper.length) {
-                innerWrapper = $("<span class='k-in' />").appendTo(wrapper)[0];
-
-                // move all non-group content in the k-in container
-                currentNode = wrapper[0].nextSibling;
-                innerWrapper = wrapper.find(".k-in")[0];
-
-                while (currentNode && currentNode.nodeName.toLowerCase() != "ul") {
-                    tmp = currentNode;
-                    currentNode = currentNode.nextSibling;
-                    innerWrapper.appendChild(tmp);
-                }
-            }
-        },
-
-        _updateNodeClasses: function(node, groupData, nodeData) {
-            var wrapper = node.find(">div"),
-                subGroup = node.find(">ul")
-
-            if (!nodeData) {
-                nodeData = {
-                    expanded: !(subGroup.css("display") == "none"),
-                    index: node.index(),
-                    enabled: !wrapper.find(">.k-in").hasClass("k-state-disabled")
-                };
-            }
-
-            if (!groupData) {
-                groupData = {
-                    firstLevel: node.parent().parent().hasClass(TTREEVIEW),
-                    length: node.parent().children().length
-                };
-            }
-
-            // li
-            node.removeClass("k-first k-last")
-                .addClass(rendering.wrapperCssClass(groupData, nodeData));
-
-            // div
-            wrapper.removeClass("k-top k-mid k-bot")
-                   .addClass(rendering.cssClass(groupData, nodeData));
-
-            // toggle button
-            if (subGroup.length) {
-                wrapper.find(">.k-icon").removeClass("k-plus k-minus k-plus-disabled k-minus-disabled")
-                    .addClass(rendering.toggleButtonClass(nodeData));
-
-                subGroup.addClass("k-group");
-            }
         },
 
         _processNodes: function(nodes, callback) {
@@ -560,6 +561,8 @@
          * treeview.toggle(document.getElementById("firstItem"));
          */
         toggle: function (node) {
+            node = $(node);
+
             if (node.find(".k-minus,.k-plus").length == 0) {
                 return;
             }
@@ -651,16 +654,16 @@
             insertCallback(node, group);
 
             if (parentNode.hasClass("k-item")) {
-                that._updateNodeHtml(parentNode);
-                that._updateNodeClasses(parentNode);
+                updateNodeHtml(parentNode);
+                updateNodeClasses(parentNode);
             }
 
             if (!fromNodeData) {
-                that._updateNodeClasses(node);
+                updateNodeClasses(node);
             }
 
-            that._updateNodeClasses(node.prev());
-            that._updateNodeClasses(node.next());
+            updateNodeClasses(node.prev());
+            updateNodeClasses(node.next());
 
             return node;
         },
@@ -750,12 +753,12 @@
             node.remove();
 
             if (parentNode.hasClass("k-item")) {
-                that._updateNodeHtml(parentNode);
-                that._updateNodeClasses(parentNode);
+                updateNodeHtml(parentNode);
+                updateNodeClasses(parentNode);
             }
 
-            that._updateNodeClasses(prevSibling);
-            that._updateNodeClasses(nextSibling);
+            updateNodeClasses(prevSibling);
+            updateNodeClasses(nextSibling);
         },
 
         /**
@@ -771,7 +774,7 @@
         findByText: function (text) {
             var result;
 
-            $(".k-in", this.element).each(function() {
+            this.element.find(".k-in").each(function() {
                 var that = $(this);
                 if (that.text() == text) {
                     result = that.closest(NODE);
