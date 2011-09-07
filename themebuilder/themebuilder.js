@@ -37,7 +37,7 @@
                 properties: [ properties.bgColor, properties.brdColor, properties.color ]
             }
         },
-        serializedTheme = '@widget-border-color: #d7d7d7; @widget-background-color: #fff;',
+        serializedTheme = '@widget-border-color: #d7d7d7;\n@widget-background-color: #fff;\n',
         colorPickerTemplate = kendo.template(
             "<# var id = primitive + \":\" + property.property; #>" +
             "<label for='<#= id #>'><#= property.label #></label> <input id='<#= id #>' class='k-input' />"
@@ -119,16 +119,16 @@
             open: function() {
                 this.content.data("kendoWindow").open();
             },
-            /// TODO: test this
             _propertyChange: function(e) {
-                var parser = new less.Parser();
+                var that = this,
+                    parser = new less.Parser();
 
-                parser.parse(serializedTheme + this.templateInfo.template, function (err, tree) {
+                parser.parse(serializedTheme + that.templateInfo.template, function (err, tree) {
                     if (err) {
                         return console.error(err);
                     }
 
-                    this.updateStyleSheet(tree.toCSS());
+                    that.updateStyleSheet(tree.toCSS());
                 });
             },
             updateStyleSheet: function(cssText) {
