@@ -20,6 +20,7 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
 
+        <script src="../themebuilder/less.js"></script>
         <script src="../themebuilder/themebuilder.js"></script>
 
         <script>
@@ -68,6 +69,20 @@
                 themeBuilder.updateStyleSheet(".foo { font-size: 10px; }");
 
                 equals($("style[title]").length, 1);
+            });
+
+            test("_propertyChange() sends updated LESS template to updateStyleSheet()", function() {
+                var themeBuilder = new kendo.ThemeBuilder({
+                        template: ".foo { border-color: @widget-border-color; }"
+                    });
+
+                expect(1);
+
+                themeBuilder.updateStyleSheet = function(cssText) {
+                    ok(cssText.indexOf("#d7d7d7") > -1);
+                };
+
+                themeBuilder._propertyChange({});
             });
 
             var colorPicker;
