@@ -327,6 +327,108 @@
                 equal(cal.currentView, "month");
             });
 
+            test("navigateDown with date navigate to cell's date", function() {
+                var cal = stub(new Calendar(div), "navigate"),
+                    value = new Date(2000, 10, 10);
+
+                cal.currentView = "year";
+
+                cal.navigateDown(value);
+
+                equal(cal.calls("navigate"), 1);
+                equal(+cal.args("navigate")[0], +value);
+            });
+
+            test("navigateDown should call value method if currentView === options.depth", function() {
+                var cal = stub(new Calendar(div), "value"),
+                    value = new Date(2000, 10, 10);
+
+                cal.navigateDown(value);
+
+                equal(cal.calls("value"), 1);
+                equal(+cal.args("value")[0], +value);
+            });
+
+
+            test("value should select set selectedValue property", function() {
+                var cal = new Calendar(div),
+                    value = new Date(2000, 10, 10);
+
+                cal.value(value);
+
+                equal(+cal._value, +value);
+            });
+
+            test("value should return selectedValue", function() {
+                var cal = new Calendar(div),
+                    value = new Date(2000, 10, 10);
+
+                cal._value = value;
+
+                equal(+cal.value(), +value);
+            });
+
+            test("value method should call navigate method with correct date and view", function() {
+                var value = new Date(2000,10,10),
+                    cal = new Calendar(div, {value: value});
+
+                stub(cal, "navigate");
+
+                cal.value(value);
+
+                equal(cal.calls("navigate"), 1);
+                equal(+cal.args("navigate")[0], +value);
+                equal(cal.args("navigate")[1], cal.options.depth);
+            });
+
+            test("value method should update selection of the view", function() {
+                var value = new Date(2000,10,10),
+                    cal = new Calendar(div, {value: value});
+
+                    value.setDate(17);
+
+                    cal.value(value);
+
+                ok(cal.element.find(".k-content td").eq(19).hasClass("k-state-selected"));
+            });
+
+            test("value should clear _value if null", function() {
+                var value = new Date(2000,10,10),
+                    cal = new Calendar(div, {min: value});
+
+                cal.value(null);
+
+                equal(cal.value(), null);
+                equal(cal.element.find(".k-content td:has(k-state-selected)").length, 0);
+            });
+
+            test("value should not accept value lower than min", function() {
+                var value = new Date(2000,10,10),
+                    cal = new Calendar(div, {min: value});
+
+                cal.value(new Date(1900, 10,10));
+
+                equal(+cal.value(), +value);
+            });
+
+            test("value should not accept value bigger than max", function() {
+                var value = new Date(2000,10,10),
+                    cal = new Calendar(div, {max: value});
+
+                cal.value(new Date(2900, 10,10));
+
+                equal(+cal.value(), +value);
+            });
+
+            test("value should not accept invalid date", function() {
+                var value = new Date(2000,10,10),
+                    cal = new Calendar(div, {max: value});
+
+                cal.value("dsadasDA");
+
+                equal(cal.value(), null);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
