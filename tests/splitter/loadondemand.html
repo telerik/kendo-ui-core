@@ -139,6 +139,22 @@
                  splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
             });
 
+            test("ajaxRequest sends data to server", function() {
+                expect(1);
+
+                var data = { id: 1 },
+                    splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter();
+
+
+                $.mockjaxClear();
+                $.mockjax(function(settings) {
+                    same(settings.data, data);
+                    return {};
+                });
+
+                splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url, data);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
