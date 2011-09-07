@@ -325,18 +325,22 @@
         * Loads the pane content from the specified URL.
         * @param {Selector|DomElement|jQueryObject} pane The pane whose content
         * @param {String} url The URL which returns the pane content.
+        * @param {Object|String} data Data to be sent to the server.
         * @example
-        * splitter.ajaxRequest("#Pane1", "/Home/Pane1Content.html");
+        * splitter.ajaxRequest("#Pane1", "/customer/profile", { id: 42 });
         */
-        ajaxRequest: function(pane, url) {
+        ajaxRequest: function(pane, url, data) {
             var $pane = $(pane),
                 paneConfig = $pane.data("pane");
 
-            if (url || paneConfig.contentUrl) {
+            url = url || paneConfig.contentUrl;
+
+            if (url) {
                 $pane.append("<span class='k-icon k-loading k-pane-loading' />");
 
                 $.ajax(this.ajaxOptions($pane, {
-                    url: url || paneConfig.contentUrl
+                    url: url,
+                    data: data || {}
                 }));
             }
         },
