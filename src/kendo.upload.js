@@ -617,7 +617,7 @@
 
                 if (icon.hasClass("k-delete")) {
                     if (!that.trigger(REMOVE, eventArgs)) {
-                        fileEntry.trigger("t:remove");
+                        fileEntry.trigger("t:remove", eventArgs.data);
                     }
                 } else if (icon.hasClass("k-cancel")) {
                     that.trigger(CANCEL, eventArgs);
@@ -773,8 +773,8 @@
             return this.options.async.removeUrl != undefined;
         },
 
-        _submitRemove: function(fileNames, onSuccess, onError) {
-            var params = $.extend({}, getAntiForgeryTokens());
+        _submitRemove: function(fileNames, data, onSuccess, onError) {
+            var params = $.extend(data, getAntiForgeryTokens());
             params["fileNames"] = fileNames;
 
             $.ajax({
@@ -988,7 +988,7 @@
             this.performUpload(fileEntry);
         },
 
-        onRemove: function(e) {
+        onRemove: function(e, data) {
             var fileEntry = getFileEntry(e);
 
             var iframe = fileEntry.data("frame");
@@ -998,7 +998,7 @@
                 this.upload._removeFileEntry(fileEntry);
                 this.cleanupFrame(iframe);
             } else {
-                removeUploadedFile(fileEntry, this.upload);
+                removeUploadedFile(fileEntry, this.upload, data);
             }
         },
 
@@ -1178,11 +1178,11 @@
             this.performUpload(fileEntry);
         },
 
-        onRemove: function(e) {
+        onRemove: function(e, data) {
             var fileEntry = getFileEntry(e);
 
             if (fileEntry.children(".k-icon").is(".k-success")) {
-                removeUploadedFile(fileEntry, this.upload);
+                removeUploadedFile(fileEntry, this.upload, data);
             } else {
                 this.removeFileEntry(fileEntry);
             }
@@ -1319,7 +1319,7 @@
         return (slashIndex != -1) ? name.substr(slashIndex + 1) : name;
     }
 
-    function removeUploadedFile(fileEntry, upload) {
+    function removeUploadedFile(fileEntry, upload, data) {
         if (!upload._supportsRemove()) {
             return;
         }
@@ -1327,7 +1327,7 @@
         var files = fileEntry.data("fileNames");
         var fileNames = $.map(files, function(file) { return file.name });
 
-        upload._submitRemove(fileNames,
+        upload._submitRemove(fileNames, data,
             function onSuccess(data, textStatus, xhr) {
                 upload._removeFileEntry(fileEntry);
 
