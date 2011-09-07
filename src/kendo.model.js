@@ -131,7 +131,7 @@
                 pristine = that.pristine;
 
             for (field in data) {
-                if (field !== "__id" && !equal(pristine[field], data[field])) {
+                if (field !== "__id" && (that.isNew() || !equal(pristine[field], data[field]))) {
                     modified = modified || {};
                     modified[field] = data[field];
                 }
@@ -255,7 +255,7 @@
                 delete that._models[id];
 
                 if (!model.isNew()) {
-                    that._destroyed.push(model.data);
+                    that._destroyed.push(model);
                 }
 
                 if (that.options.autoSync) {
@@ -270,6 +270,7 @@
             var that = this,
                 created = [],
                 updated = [],
+                data,
                 destroyed = that._destroyed,
                 idx,
                 length,
@@ -280,27 +281,43 @@
                 model = models[idx];
 
                 if (model.isNew()) {
-                    created.push(model.data);
+                    created.push(model);
                 } else if (model.hasChanges()) {
-                    updated.push(model.data);
+                    updated.push(model);
                 }
             }
 
             for (idx = 0, length = created.length; idx < length; idx++) {
+                model = created[idx];
+
+                data = model.changes();
+
                 that._transport.create({
-                    data: created[idx]
+                    data: data
                 });
             }
 
             for (idx = 0, length = updated.length; idx < length; idx++) {
+                model = updated[idx];
+
+                data = model.changes();
+
+                that.options.model.id(data, model.id());
+
                 that._transport.update({
-                    data: updated[idx]
+                    data: data
                 });
             }
 
             for (idx = 0, length = destroyed.length; idx < length; idx++) {
+                model = destroyed[idx];
+
+                data = {};
+
+                that.options.model.id(data, model.id());
+
                 that._transport.destroy({
-                    data: destroyed[idx]
+                    data: data
                 });
             }
         }
