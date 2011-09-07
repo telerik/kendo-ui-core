@@ -96,17 +96,17 @@
                 equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 1);
             });
 
-            test("the empty input is removed when the parent form is submitted", function() {
+            test("the empty input is disabled when the parent form is submitted", function() {
                 $("#parentForm").trigger("submit");
 
-                equal(uploadInstance.element.parent().length, 0);
+                equal(uploadInstance.element.attr("disabled"), "disabled");
             });
 
             asyncTest("the empty input is restored when the parent submit is completed", function() {
                 $("#parentForm").trigger("submit");
 
                 setTimeout(function() {
-                    equal(uploadInstance.element.parent().length, 1);
+                    equal(uploadInstance.element.attr("disabled"), undefined);
                     start();
                 }, 50);
             });

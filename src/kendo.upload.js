@@ -705,19 +705,20 @@
         },
 
         _onParentFormSubmit: function() {
-            this.element.trigger("t:abort");
+            var upload = this,
+                element = upload.element;
+            element.trigger("t:abort");
 
-            if (!this.element.value) {
-                var input = $(this.element),
-                    parent = input.parent();
+            if (!element.value) {
+                var input = $(element);
 
-                // Prevent submitting an empty input by removing it from the DOM
-                input.detach()
+                // Prevent submitting an empty input
+                input.attr("disabled", "disabled");
 
                 window.setTimeout(function() {
                     // Restore the input so the Upload remains functional
                     // in case the user cancels the form submit
-                    parent.append(input);
+                    input.removeAttr("disabled");
                 }, 0);
             }
         },

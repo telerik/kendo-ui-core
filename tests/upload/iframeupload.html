@@ -157,11 +157,14 @@
                 }, 10);
             });
 
-            test("input is moved back to the original form when it's submitted", function() {
+            asyncTest("input is moved back to the original form when it's submitted", function() {
                 simulateFileSelect();
                 $("#parentForm").trigger("submit");
 
-                equal($("input[name='uploadInstance']", uploadInstance.wrapper).length, 1);
+                window.setTimeout(function() {
+                    equal($("input[name='uploadInstance']", uploadInstance.wrapper).length, 2);
+                    start();
+                }, 10);
             });
 
             asyncTest("clicking cancel should remove iframe", function() {
