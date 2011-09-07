@@ -265,6 +265,94 @@
                 equal(transport.args("destroy", 0)[0].data.id, 1);
                 equal(transport.args("destroy", 0)[0].data.foo, "foo");
             });
+
+            test("sync calls the create method of the transport only once when batch is true", function() {
+                var transport = stub({}, "create");
+
+                setup({ batch: true, transport: transport } );
+
+                modelSet.add(new MyModel());
+                modelSet.add(new MyModel());
+                modelSet.sync();
+
+                equal(transport.calls("create"), 1);
+            });
+
+            test("sync passes array of created models to transport when batch is true", function() {
+                var transport = stub({}, "create");
+
+                setup({ batch: true, transport: transport } );
+
+                modelSet.add(new MyModel({foo: "foo"}));
+                modelSet.add(new MyModel({foo: "bar"}));
+                modelSet.sync();
+
+                var models = transport.args("create")[0].data.models;
+                ok($.isArray(models));
+                equal(models.length, 2);
+                equal(models[0].foo, "foo");
+                equal(models[1].foo, "bar");
+            });
+
+            test("sync calls the update method of the transport only once when batch is true", function() {
+                var transport = stub({}, "update");
+
+                setup({ batch: true, data: [ { id: 1 }, { id: 2 }], transport: transport } );
+
+                var model = modelSet.get(1);
+                model.set({ foo: "foo" });
+                model = modelSet.get(2);
+                model.set({ foo: "bar" });
+                modelSet.sync();
+
+                equal(transport.calls("update"), 1);
+            });
+
+            test("sync passes array of updated models to transport when batch is true", function() {
+                var transport = stub({}, "update");
+
+                setup({ batch: true, data: [ { id: 1 }, { id: 2 }], transport: transport } );
+
+                var model = modelSet.get(1);
+                model.set({ foo: "foo" });
+                model = modelSet.get(2);
+                model.set({ foo: "bar" });
+                modelSet.sync();
+
+                var models = transport.args("update")[0].data.models;
+                ok($.isArray(models));
+                equal(models.length, 2);
+                equal(models[0].foo, "foo");
+                equal(models[1].foo, "bar");
+            });
+
+            test("sync calls the destroy method of the transport only once when batch is true", function() {
+                var transport = stub({}, "destroy");
+
+                setup({ batch: true, data: [ { id: 1 }, { id: 2 }], transport: transport } );
+
+                modelSet.remove(1);
+                modelSet.remove(2);
+                modelSet.sync();
+
+                equal(transport.calls("destroy"), 1);
+            });
+            test("sync passes array of destroyed models to transport when batch is true", function() {
+                var transport = stub({}, "destroy");
+
+                setup({ batch: true, data: [ { id: 1 }, { id: 2 }], transport: transport } );
+
+                modelSet.remove(1);
+                modelSet.remove(2);
+                modelSet.sync();
+
+
+                var models = transport.args("destroy")[0].data.models;
+                ok($.isArray(models));
+                equal(models.length, 2);
+                equal(models[0].id, 1);
+                equal(models[1].id, 2);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
