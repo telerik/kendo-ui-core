@@ -172,7 +172,8 @@
 
         options: {
             batch: false,
-            sendAllFields: false
+            sendAllFields: false,
+            autoSync: false
         },
 
         _map: function() {
@@ -269,12 +270,18 @@
                 model = models[idx];
 
                 if (model.isNew()) {
-                    created.push(model.changes());
+                    created.push({
+                        model: model,
+                        data: model.changes()
+                    });
                 } else if (model.hasChanges()) {
                     data = sendAllFields ? model.data : model.changes();
 
                     options.model.id(data, model.id());
-                    updated.push(data);
+                    updated.push({
+                        model: model,
+                        data: data
+                    });
                 }
             }
 
@@ -285,7 +292,10 @@
 
                 options.model.id(data, model.id());
 
-                destroyed.push(data);
+                destroyed.push({
+                    model: model,
+                    data: data
+                });
             }
 
             that._send({
@@ -309,14 +319,16 @@
                     if (payload.length) {
                         transport[type].call(transport, {
                             data: {
-                                models: payload
+                                models: $.map(payload, function(value) {
+                                    return value.data;
+                                })
                             }
                         });
                     }
                 } else {
                     for (idx = 0, length = payload.length; idx < length; idx++) {
                         transport[type].call(transport, {
-                            data: payload[idx]
+                            data: payload[idx].data
                         });
                     }
                 }
