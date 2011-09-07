@@ -873,7 +873,10 @@
         prepareUpload: function(sourceInput) {
             var upload = this.upload;
             var activeInput = $(upload.element);
+            var name = sourceInput.attr("name");
             upload._addInput(sourceInput.clone().val(""));
+
+            sourceInput.attr("name", name);
 
             var iframe = this.createFrame(upload.name + "_" + this.iframes.length);
             this.registerFrame(iframe);
