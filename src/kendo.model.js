@@ -162,12 +162,17 @@
         init: function(options) {
             var that = this;
 
-            that.options = options;
+            that.options = options = extend({}, that.options, options);
             that._data = options.data || [];
             that._destroyed = [];
             that._transport = options.transport;
             that._models = {};
             that._map();
+        },
+
+        options: {
+            batch: false,
+            sendAllFields: false
         },
 
         _map: function() {
@@ -232,6 +237,7 @@
             if (model) {
                 that._data.splice(that._idMap[id], 1);
                 that._map();
+
                 delete that._models[id];
 
                 if (!model.isNew()) {
@@ -250,11 +256,13 @@
             var that = this,
                 created = [],
                 updated = [],
+                destroyed = [],
                 data,
-                destroyed = that._destroyed,
                 idx,
                 length,
-                sendAllFields = that.options.sendAllFields,
+                options = that.options,
+                batch = options.batch,
+                sendAllFields = options.sendAllFields,
                 model,
                 models = that._models;
 
@@ -262,44 +270,66 @@
                 model = models[idx];
 
                 if (model.isNew()) {
-                    created.push(model);
+                    created.push(model.changes());
                 } else if (model.hasChanges()) {
-                    updated.push(model);
+                    data = sendAllFields ? model.data : model.changes();
+
+                    options.model.id(data, model.id());
+                    updated.push(data);
                 }
             }
 
-            for (idx = 0, length = created.length; idx < length; idx++) {
-                model = created[idx];
-
-                data = model.changes();
-
-                that._transport.create({
-                    data: data
-                });
-            }
-
-            for (idx = 0, length = updated.length; idx < length; idx++) {
-                model = updated[idx];
-
-                data = sendAllFields ? model.data : model.changes();
-
-                that.options.model.id(data, model.id());
-
-                that._transport.update({
-                    data: data
-                });
-            }
-
-            for (idx = 0, length = destroyed.length; idx < length; idx++) {
-                model = destroyed[idx];
+            for (idx = 0, length = that._destroyed.length; idx < length; idx++ ) {
+                model = that._destroyed[idx];
 
                 data = sendAllFields ? model.data : {};
 
-                that.options.model.id(data, model.id());
+                options.model.id(data, model.id());
 
-                that._transport.destroy({
-                    data: data
-                });
+                destroyed.push(data);
+            }
+
+            if (batch) {
+                if (created.length) {
+                    that._transport.create({
+                        data: {
+                            models: created
+                        }
+                    });
+                }
+
+                if (updated.length) {
+                    that._transport.update({
+                        data: {
+                            models: updated
+                        }
+                    });
+                }
+                if (destroyed.length) {
+                    that._transport.destroy({
+                        data: {
+                            models: destroyed
+                        }
+                    });
+                }
+            } else {
+                for (idx = 0, length = created.length; idx < length; idx++) {
+                    that._transport.create({
+                        data: created[idx]
+                    });
+                }
+
+                for (idx = 0, length = updated.length; idx < length; idx++) {
+                    that._transport.update({
+                        data: updated[idx]
+                    });
+                }
+
+                for (idx = 0, length = destroyed.length; idx < length; idx++) {
+                    that._transport.destroy({
+                        data: destroyed[idx]
+                    });
+                }
             }
         }
     });
