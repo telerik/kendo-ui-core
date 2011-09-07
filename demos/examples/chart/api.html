@@ -57,7 +57,7 @@
             <script>
                 function createChart() {
                     $("#chart").kendoChart({
-                        theme: $(document).data("kendoSkin"),
+                        theme: $(document).data("kendoSkin") || "kendo",
                         title: {
                             text: "Internet Users"
                         },
