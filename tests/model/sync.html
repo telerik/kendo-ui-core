@@ -217,7 +217,7 @@
                 equal(transport.args("update", 0)[0].data.bar, undefined);
             });
 
-            test("sync sends only the id of the destroyed fields", function() {
+            test("sync sends only the id of the destroyed model", function() {
                 var transport = stub({}, "destroy");
                 setup({ data: [ { id:1, foo: "foo" }], transport: transport } );
 
@@ -239,6 +239,31 @@
                 modelSet.sync();
 
                 equal(transport.args("create", 0)[0].data.__id, undefined);
+            });
+
+            test("sync sends all fields during update when sendAllFields is true", function() {
+                var transport = stub({}, "update");
+                setup({ data: [ { id:1, foo: "foo", bar: "bar" }], sendAllFields: true, transport: transport } );
+
+                var model = modelSet.get(1);
+                model.set({ foo: "foo1" });
+                modelSet.sync();
+
+                equal(transport.args("update", 0)[0].data.id, 1);
+                equal(transport.args("update", 0)[0].data.foo, "foo1");
+                equal(transport.args("update", 0)[0].data.bar, "bar");
+            });
+
+            test("sync sends all fields of destroyed model when sendAllFields is true", function() {
+                var transport = stub({}, "destroy");
+                setup({ sendAllFields: true, data: [ { id:1, foo: "foo" }], transport: transport } );
+
+                var model = modelSet.get(1);
+                modelSet.remove(model);
+                modelSet.sync();
+
+                equal(transport.args("destroy", 0)[0].data.id, 1);
+                equal(transport.args("destroy", 0)[0].data.foo, "foo");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
