@@ -58,6 +58,39 @@ function copyDirSyncRecursive(sourceDir, newDirLocation, skipClean, filter) {
     }
 }
 
+function merge(files) {
+    var result = "";
+
+    for (var i = 0; i < files.length; i++) {
+        if (files[i].indexOf("*") > -1) {
+            var dir = files[i].substring(0, files[i].indexOf("*")),
+                dirContents = fs.readdirSync(dir).map(function(file) {
+                    return dir + file;
+                });
+
+            result += merge(dirContents);
+        } else {
+            result += fs.readFileSync(files[i], "utf8");
+        }
+    }
+
+    return result.replace("\ufeff", "");
+}
+
+function generateVersion() {
+    var date = new Date(),
+        day = date.getDate();
+
+    if (day < 10) {
+        day = "0" + day;
+    }
+
+    return date.getFullYear() + ".2." + (date.getMonth() + 1) + "" + day;
+}
+
+exports.merge = merge;
+exports.generateVersion = generateVersion;
+exports.copyFileSync = copyFileSync;
 exports.rmdirSyncRecursive = rmdirSyncRecursive;
 exports.copyDirSyncRecursive = copyDirSyncRecursive;
 exports.minifyJs = function(source) {
