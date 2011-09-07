@@ -22,5 +22,9 @@ tests.push(
     {
         page: "model/sync.html",
         title: "modelset sync"
+    },
+    {
+        page: "model/sync-response.html",
+        title: "modelset sync response"
     }
 );
