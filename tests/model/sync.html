@@ -204,7 +204,42 @@
                 equal(transport.args("destroy", 1)[0].data.id, 2);
             });
 
+            test("sync sends only the updated fields and the id", function() {
+                var transport = stub({}, "update");
+                setup({ data: [ { id:1, foo: "foo", bar: "bar" }], transport: transport } );
 
+                var model = modelSet.get(1);
+                model.set({ foo: "foo1" });
+                modelSet.sync();
+
+                equal(transport.args("update", 0)[0].data.id, 1);
+                equal(transport.args("update", 0)[0].data.foo, "foo1");
+                equal(transport.args("update", 0)[0].data.bar, undefined);
+            });
+
+            test("sync sends only the id of the destroyed fields", function() {
+                var transport = stub({}, "destroy");
+                setup({ data: [ { id:1, foo: "foo" }], transport: transport } );
+
+                var model = modelSet.get(1);
+                modelSet.remove(model);
+                modelSet.sync();
+
+                equal(transport.args("destroy", 0)[0].data.id, 1);
+                equal(transport.args("destroy", 0)[0].data.foo, undefined);
+            });
+
+            test("sync does not send the automatically generated id of created models", function() {
+                var transport = stub({}, "create");
+                setup({ transport: transport } );
+
+                var model = new MyModel();
+                model.set( { foo: "bar" });
+                modelSet.add(model);
+                modelSet.sync();
+
+                equal(transport.args("create", 0)[0].data.__id, undefined);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
