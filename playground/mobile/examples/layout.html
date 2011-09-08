@@ -40,12 +40,12 @@
 
             if (os) {
                 if (!os.ios && !os.blackberry)
-                    if (transitions)
+                    if (!$.browser.msie && !$.browser.opera)
                         $('.layout').css(transitions.css + 'box-direction', 'reverse');
                     else {
-                        var footer = $('.footer');
-                        $('.header').after(footer);
-                        footer.before('.content');
+                        var layout = $('.layout');
+                        $(".footer").prependTo(layout);
+                        $('.header').appendTo(layout);
                     }
             }
         });
@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="content">
-            <div>
+            <div class="contentInternal">
                 <div class="buttonStrip">
                     <button class="button active">
                         <span class="txt">Button 1</span>

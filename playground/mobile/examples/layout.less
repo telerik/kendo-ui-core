@@ -58,6 +58,10 @@ html, body
     -webkit-box-align: stretch;
     box-align: stretch;
     background: gray;
+}
+
+.contentInternal
+{
     padding: 1em 1em 0;
 }
 
@@ -131,16 +135,16 @@ html, body
 {
     color: #000;
     text-shadow: none;
-    border-color: #676767;
+    border-color: #ACACAC;
     background-color: #EEE;
 
-    background-image: linearGradient(top, rgba(255, 255, 255, 0.2), rgba(189, 189, 189, 0.6) 90%, rgba(201, 201, 201, 0.6));
+    background-image: linearGradient(top, rgb(244,244,244), rgb(193,193,193) 90%, rgb(209,209,209));
 }
 
 .android .button.active
 {
     background-color: #e99d02;
-    background-image: linearGradient(top, rgba(255, 227, 131, 0.8), rgba(255, 203, 46, 0.6) 10%, rgba(255, 203, 46, 0) 50%, rgba(255, 210, 33, 0.8));
+    background-image: linearGradient(top, rgb(255,222,117), rgb(251,195,35) 10%, rgb(232,156,0) 60%, rgb(244,181,16) 80%, rgb(252,209,32));
 }
 
 .blackberry,
@@ -175,7 +179,7 @@ html, body
     display: inline-block;
     color: #FFF;
     border: .2em solid #FFF;
-    font-size: .8em;
+    font-size: .7em;
     line-height: 1.6em;
     vertical-align: middle;
     overflow: hidden;
@@ -420,6 +424,13 @@ html, body
     font-size: .6em;
     padding: .1em .6em;
     min-width: 6em;
+    margin: 0 2%;
+}
+
+.tabStrip .msg
+{
+    font-size: .8em;
+    font-weight: normal;
 }
 
 .ios .tabStrip .msg
@@ -454,6 +465,7 @@ html, body
     -webkit-border-radius: 5pt;
     border-radius: 5pt;
     padding: .1em;
+    margin: 0 1%;
 }
 
 .ios .tabStrip .button.active
