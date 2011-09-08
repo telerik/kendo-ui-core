@@ -26,16 +26,14 @@
                     text: "Teh chart",
                     position: "top"
                 },
+                theme: "blueopal",
                 legend: {
                     position: "left"
                 },
                 dataSource: data,
                 seriesDefaults: {
                     type: "pie",
-                    border: {
-                        width: 2,
-                        color: "#fff"
-                    }
+                    padding: 100
                 },
                 series: [{
                     name: "World",
@@ -69,12 +67,6 @@
                           name: "Value I"
                       }]
                 }],
-                plotArea: {
-                    border: {
-                        width: 1,
-                        color: "black"
-                    }
-                },
                 chartArea: {
                     border: {
                         width: 1,
@@ -83,6 +75,7 @@
                 }
             });
         });
+
 /*
         $(document).ready(function() {
             var angles = [],
@@ -114,7 +107,7 @@
 */
     </script>
 
-    <div id="container" style="width: 600px; height: 400px; float: left; margin-left: 100px;">
+    <div id="container" style="width: 600px; height: 400px; float: left; margin-left: 100px;"></div>
     </body>
 </html>
 
