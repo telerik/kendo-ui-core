@@ -1,69 +1,6 @@
 (function($, kendo) {
 
-    var properties = {
-            bgColor: { property: "background-color", label: "Background" },
-            color: { property: "color", label: "Text color" },
-            brdColor: { property: "border-color", label: "Border color" },
-        },
-        stylableProperties = {
-            widget: {
-                title: "Widget",
-                primitive: "k-widget",
-                properties: [ properties.bgColor, properties.brdColor, properties.color ]
-            },
-            header: {
-                title: "Headers",
-                primitive: "k-header",
-                properties: [ properties.bgColor, properties.color ]
-            },
-            link: {
-                title: "Links",
-                primitive: "k-link",
-                properties: [ properties.bgColor, properties.color ]
-            },
-            content: {
-                title: "Content & Template Containers",
-                primitive: "k-content",
-                properties: [ properties.bgColor ]
-            },
-            group: {
-                title: "Item groups",
-                primitive: "k-group",
-                properties: [ properties.bgColor, properties.brdColor, properties.brdColor ]
-            },
-            hover: {
-                title: "Hover state",
-                primitive: "k-state-hover",
-                properties: [ properties.bgColor, properties.brdColor, properties.color ]
-            }
-        },
-        serializedTheme = '@widget-border-color: #d7d7d7;\n@widget-background-color: #fff;\n',
-        colorPickerTemplate = kendo.template(
-            "<# var id = primitive + \":\" + property.property; #>" +
-            "<label for='<#= id #>'><#= property.label #></label> <input id='<#= id #>' class='k-input' />"
-        ),
-        propertyGroupTemplate = kendo.template(
-            "<li><#= title #>" +
-                "<div class='styling-options'>" +
-                    "<# for (var i = 0, len = properties.length; i < len; i++) { #>" +
-                        "<#= propertyTemplate({ property: properties[i], primitive: primitive }) #>" +
-                    "<# } #>" +
-                "</div>" +
-            "</li>"
-        ),
-        themeBuilderTemplate = kendo.template(
-            "<div id='kendo-themebuilder'>" +
-                "<ul id='stylable-elements'>" +
-                    $.map(stylableProperties, function(x) {
-                        return propertyGroupTemplate($.extend(x, {
-                            propertyTemplate: colorPickerTemplate
-                        }));
-                    }).join("") +
-                "</ul>" +
-                "<button type='button' class='k-style-apply k-button'>Download</button>" +
-            "</div>"
-        ),
-        proxy = $.proxy,
+    var proxy = $.proxy,
         CHANGE = "change",
         Component = kendo.ui.Component,
         ColorPicker = Component.extend({
@@ -84,13 +21,31 @@
                 });
             }
         }),
+        LessConstants = kendo.Observable.extend({
+            init: function(constants) {
+                this.constants = constants;
+            },
+            serialize: function() {
+                var result = "";
+
+                var constant = this.constants[0];
+
+                result = constant.prefix + "-" + constant.properties[0].property + ": " + constant.properties[0].value + ";";
+
+                return result;
+            },
+            infer: function() {
+            }
+        }),
         ThemeBuilder = kendo.Observable.extend({
-            init: function(templateInfo) {
+            init: function(templateInfo, constants) {
                 var that = this;
 
-                $(themeBuilderTemplate({})).appendTo(document.body);
-
                 that.templateInfo = templateInfo;
+
+                that.constants = constants;
+
+                that.render();
 
                 that.content = $("#kendo-themebuilder")
                     .kendoWindow({
@@ -123,7 +78,7 @@
                 var that = this,
                     parser = new less.Parser();
 
-                parser.parse(serializedTheme + that.templateInfo.template, function (err, tree) {
+                parser.parse(that.constants.serialize() + that.templateInfo.template, function (err, tree) {
                     if (err) {
                         return console.error(err);
                     }
@@ -147,12 +102,43 @@
                 } else {
                     style.appendChild(doc.createTextNode(cssText));
                 }
+            },
+            render: function() {
+                var constants = this.constants,
+                    colorPickerTemplate = kendo.template(
+                        "<# var id = primitive + \":\" + property.property; #>" +
+                        "<label for='<#= id #>'><#= property.label #></label> <input id='<#= id #>' class='k-input' />"
+                    ),
+                    propertyGroupTemplate = kendo.template(
+                        "<li><#= title #>" +
+                            "<div class='styling-options'>" +
+                                "<# for (var i = 0, len = properties.length; i < len; i++) { #>" +
+                                    "<#= propertyTemplate({ property: properties[i], primitive: primitive }) #>" +
+                                "<# } #>" +
+                            "</div>" +
+                        "</li>"
+                    );
+
+                $(kendo.template(
+                    "<div id='kendo-themebuilder'>" +
+                        "<ul id='stylable-elements'>" +
+                            $.map(constants || [], function(x) {
+                                return propertyGroupTemplate($.extend(x, {
+                                    propertyTemplate: colorPickerTemplate
+                                }));
+                            }).join("") +
+                        "</ul>" +
+                        "<button type='button' class='k-style-apply k-button'>Download</button>" +
+                    "</div>"
+                )({}))
+                    .appendTo(document.body);
             }
         });
 
     kendo.ui.plugin("ColorPicker", ColorPicker, Component);
 
     $.extend(kendo, {
+        LessConstants: LessConstants,
         ThemeBuilder: ThemeBuilder
     });
 })(jQuery, kendo);

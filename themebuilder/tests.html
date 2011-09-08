@@ -24,6 +24,9 @@
         <script src="../themebuilder/themebuilder.js"></script>
 
         <script>
+            var ThemeBuilder = kendo.ThemeBuilder,
+                LessConstants = kendo.LessConstants;
+
             module("themebuilder", {
                 teardown: function() {
                     $("#kendo-themebuilder-wrapper, head style").remove();
@@ -31,11 +34,11 @@
             });
 
             test("themebuilder object is available", function() {
-                ok(typeof kendo.ThemeBuilder == "function");
+                ok(typeof ThemeBuilder == "function");
             });
 
             test("ThemeBuilder.open calls open method of window", function() {
-                var themeBuilder = new kendo.ThemeBuilder(),
+                var themeBuilder = new ThemeBuilder(),
                     called = false,
                     themeBuilderWindow = themeBuilder.content.data("kendoWindow"),
                     oldOpen = themeBuilderWindow.open;
@@ -51,7 +54,7 @@
             });
 
             test("updateStyleSheet() adds CSS to document", function() {
-                var themeBuilder = new kendo.ThemeBuilder();
+                var themeBuilder = new ThemeBuilder();
 
                 themeBuilder.updateStyleSheet(".foo { font-size: 8px; }");
 
@@ -62,7 +65,7 @@
             });
 
             test("updateStyleSheet() updates existing stylesheet", function() {
-                var themeBuilder = new kendo.ThemeBuilder();
+                var themeBuilder = new ThemeBuilder();
 
                 themeBuilder.updateStyleSheet(".foo { font-size: 8px; }");
 
@@ -71,23 +74,9 @@
                 equals($("style[title]").length, 1);
             });
 
-            test("_propertyChange() sends updated LESS template to updateStyleSheet()", function() {
-                var themeBuilder = new kendo.ThemeBuilder({
-                        template: ".foo { border-color: @widget-border-color; }"
-                    });
-
-                expect(1);
-
-                themeBuilder.updateStyleSheet = function(cssText) {
-                    ok(cssText.indexOf("#d7d7d7") > -1);
-                };
-
-                themeBuilder._propertyChange({});
-            });
-
             var colorPicker;
 
-            module("color picker", {
+            module("ColorPicker", {
                 setup: function() {
                     colorPicker = $("<input />").appendTo(document.body).kendoColorPicker();
                 },
@@ -110,7 +99,26 @@
                 ok(eventArgs);
                 equals(color, eventArgs.color);
             });
-       </script>
+
+            var properties = {
+                    bgColor: { property: "background-color", label: "Background" },
+                    color: { property: "color", label: "Text color" },
+                    brdColor: { property: "border-color", label: "Border color" },
+                };
+
+            module("LessConstants");
+
+            test("serialize() serializes contents in LESS format", function() {
+                var constants = new LessConstants([{
+                    prefix: "@widget",
+                    properties: [
+                        $.extend(properties.bgColor, { value: "#f11f11" })
+                    ]
+                }]);
+
+                equals(constants.serialize(), "@widget-background-color: #f11f11;");
+            });
+        </script>
 
         <div id="qunit-fixture"> </div>
         <ul id="log"></ul>
