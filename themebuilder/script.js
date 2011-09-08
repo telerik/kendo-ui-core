@@ -45,7 +45,7 @@
     queue.push(function(){
         $("<link rel='stylesheet' href='" + applicationRoot + "styles.css' />").appendTo("head");
 
-        // TODO: these can be parallelized
+        // TODO: these can be merged during build
         getScript(applicationRoot + "less.js", function() {
             getScript(applicationRoot + "themebuilder.js", function() {
                 getScript(applicationRoot + "template.js");
