@@ -85,8 +85,20 @@ html, body
     border: 1px solid #576B92;
     border-top-color: #40495B;
     background-color: #BBB;
-    background-image: linearGradient(top, rgba(58,58,58,0.5), rgba(142,158,181,0.5) 3%, rgba(121,141,169,0.5) 50%, rgba(102,123,154,0.5) 50%, rgba(103,124,154,0.8));
+    background-image: linearGradient(top, rgb(189,197,211), rgb(177,187,206) 6%, rgb(135,155,183) 50%, rgb(128,149,175) 50%, rgb(112,132,161));
     text-shadow: 0 -1pt #777;
+}
+
+.ios .button
+{
+    border-color: #5F6C81 #34517B #3E5B84;
+    background-image: linearGradient(top, rgb(63,79,102), rgb(138,154,181) 6%, rgb(90,120,165) 50%, rgb(71,104,151) 50%, rgb(73,106,154));
+}
+
+.ios .button.active
+{
+    border-color: #40506C #376ECC #3E75CA;
+    background-image: linearGradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
 }
 
 .button
@@ -98,10 +110,10 @@ html, body
 .ios,
 .ios .button
 {
-    font: normal .95em HelveticaNeue Helvetica, sans-serif;
+    font: normal .95em Helvetica, sans-serif;
 }
 
-.ios .button:hover
+.ios .button.active
 {
     background-color: #98a1ae;
 }
@@ -125,7 +137,7 @@ html, body
     background-image: linearGradient(top, rgba(255, 255, 255, 0.2), rgba(189, 189, 189, 0.6) 90%, rgba(201, 201, 201, 0.6));
 }
 
-.android .button:hover
+.android .button.active
 {
     background-color: #e99d02;
     background-image: linearGradient(top, rgba(255, 227, 131, 0.8), rgba(255, 203, 46, 0.6) 10%, rgba(255, 203, 46, 0) 50%, rgba(255, 210, 33, 0.8));
@@ -178,8 +190,8 @@ html, body
     border-radius: 2em;
     background-color: #BB0000;
     background-image: linearGradient(top, rgba(241, 150, 155, 1), rgba(230, 70, 78, .5) 50%, rgba(222, 11, 21, .5) 50%, rgba(183, 0, 0, 0));
-    -webkit-box-shadow: 0 2px 3px #333;
     box-shadow: 0 2px 3px #333;
+    -webkit-box-shadow: 0 2px 3px #333;
     z-index: 1;
     text-shadow: none;
 }
@@ -202,8 +214,8 @@ html, body
     -webkit-box-shadow: none;
 }
 
-.blackberry .button:hover,
-.meego .button:hover
+.blackberry .button.active,
+.meego .button.active
 {
     color: #FFF;
     border-color: #3f9fe5;
@@ -255,6 +267,33 @@ html, body
     -moz-border-radius: 0 5pt 5pt 0;
     -webkit-border-radius: 0 5pt 5pt 0;
     border-radius: 0 5pt 5pt 0;
+}
+
+.ios .buttonStrip .button
+{
+    font-weight: bold;
+    color: #929292;
+    text-shadow: 0 1px #fff;
+    border-color: #B4B8BA #C7CBCF #9FA3A4;
+    background-image: linearGradient(top, rgb(251,251,251), rgb(225,225,225) 50%, rgb(200,200,200));
+}
+
+.ios .buttonStrip .button:hover
+{
+    color: #fff;
+    text-shadow: none;
+    border-color: #40506C #376ECC #3E75CA;
+    background-image: linearGradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
+}
+
+.ios .buttonStrip .button.active
+{
+    color: #fff;
+    text-shadow: none;
+    border-color: #103984 #225199 #225199;
+    background-image: linearGradient(top, rgb(40,86,178), rgb(62,128,238) 50%, rgb(73,137,244) 50%, rgb(111, 161, 234));
+    box-shadow: inset -1px 0 2px #103984;
+    -webkit-box-shadow: inset -1px 0 2px #103984;
 }
 
 .blackberry .buttonStrip,
@@ -333,14 +372,14 @@ html, body
     background-color: #8891be;
 }
 
-.ios .toolbar .button:hover
+.ios .toolbar .button.active
 {
     background-color: #a8b1de;
 }
 
 .ios .tabStrip
 {
-    padding: .5em;
+    padding: .2em 0;
     background-color: #222;
     background-image: linearGradient(top, rgba(46, 46, 46, 0.8), rgba(21, 21, 21, 0.5) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8));
 }
@@ -363,13 +402,14 @@ html, body
 
 .tabStrip .button
 {
-    font: normal 1em HelveticaNeue Helvetica, sans-serif;
+    font: bold 1em Helvetica, sans-serif;
     color: #a8a8a8;
     padding: .4em .8em;
     border-width: 0;
     border-color: transparent;
     background: none;
     margin: 0;
+    text-align: center;
 }
 
 .ios .tabStrip .button
@@ -377,19 +417,26 @@ html, body
     -moz-border-radius: 5pt;
     -webkit-border-radius: 5pt;
     border-radius: 5pt;
-    font-size: 1em;
-    margin: 0 1em;
+    font-size: .6em;
+    padding: .1em .6em;
+    min-width: 6em;
+}
+
+.ios .tabStrip .msg
+{
+    font-size: 1.1em;
 }
 
 .android .tabStrip .button
 {
     font-size: .85em;
-    padding: .3em .6em;
+    padding: .2em .4em;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;
     border-right: 1pt solid #444;
     border-left: 1pt solid #000;
+    min-width: 5em;
 }
 
 .android .tabStrip .msg,
@@ -409,13 +456,12 @@ html, body
     padding: .1em;
 }
 
-.ios .tabStrip .button:hover
+.ios .tabStrip .button.active
 {
     color: #FFF;
     background: rgba(100, 100, 100, 0.5);
 }
-
-.android .tabStrip .button:hover
+.android .tabStrip .button.active
 {
     color: #FFF;
     background: rgba(100, 100, 100, 1);
@@ -440,8 +486,14 @@ html, body
 .tabStrip .button .img
 {
     display: block;
-    width: 4.5em;
-    height: 4.5em;
+    width: 48px;
+    height: 48px;
+}
+
+.ios .tabStrip .img
+{
+    width: 32px;
+    height: 32px;
 }
 
 .blackberry .tabStrip .img,
@@ -460,12 +512,14 @@ html, body
 {
     opacity: 0.5;
     background: transparent url('images/atabimg.png') no-repeat .1em 50%;
+    background-size: cover;
 }
 
 .ios .tabStrip .button .img
 {
-    opacity: 0.5;
-    background: transparent url('images/itabimg.png') no-repeat 3px 50%;
+    opacity: 1;
+    background: transparent url('images/itabimg1.png') no-repeat 3px 50%;
+    background-size: cover;
 }
 
 .blackberry .tabStrip .button .img,
@@ -475,49 +529,54 @@ html, body
     background: transparent url('images/atabimg.png') no-repeat .5em 50%;
 }
 
-.tabStrip .button:hover .img
+.tabStrip .button.active .img
 {
     opacity: 1;
 }
 
+.ios .tabStrip .active .img
+{
+    background-image: url('images/itabimg.png');
+}
+
 .android .tabStrip .button:nth-child(1) .img
 {
-    background-position: 4px 50%;
+    background-position: 1px 50%;
 }
 
 .android .tabStrip .button:nth-child(2) .img
 {
-    background-position: -116px 50%;
+    background-position: -107px 50%;
 }
 
 .android .tabStrip .button:nth-child(3) .img
 {
-    background-position: -235px 50%;
+    background-position: -216px 50%;
 }
 
 .android .tabStrip .button:nth-child(4) .img
 {
-    background-position: -355px 50%;
+    background-position: -325px 50%;
 }
 
 .ios .tabStrip .button:nth-child(1) .img
 {
-    background-position: 4px 50%;
+    background-position: 3px 50%;
 }
 
 .ios .tabStrip .button:nth-child(2) .img
 {
-    background-position: -156px 50%;
+    background-position: -71px 50%;
 }
 
 .ios .tabStrip .button:nth-child(3) .img
 {
-    background-position: -317px 0;
+    background-position: -146px 50%;
 }
 
 .ios .tabStrip .button:nth-child(4) .img
 {
-    background-position: -477px -3px;
+    background-position: -220px 50%;
 }
 
 .blackberry .tabStrip .button:nth-child(1) .img,
