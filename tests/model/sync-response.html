@@ -20,17 +20,153 @@
 
             function setup(options) {
                 modelSet = new kendo.data.ModelSet($.extend({
-                    model: MyModel
-                }, options)
+                        model: MyModel
+                    }, options)
                 );
+            }
+
+            function transport(method, response) {
+                var transport = {};
+                response = response !== undefined ? response : [ { id: 1, foo: "foo" } ];
+
+                transport[method] = function(options) {
+                    options.success(response);
+                }
+
+                return transport;
             }
 
             module("ModelSet sync response", {
                 setup: setup
             });
 
-            test("foo", function() {
+            test("sync updates created model data with array server response", function() {
+                setup({ transport: transport("create") });
+
+                var model = new MyModel();
+                modelSet.add(model);
+                modelSet.sync();
+
+                equal(model.id(), 1);
+                equal(model.get("foo"), "foo");
             });
+
+            test("sync updates created model data with server response", function() {
+                setup({ transport: transport("create", { id: 1, foo: "foo" }) });
+
+                var model = new MyModel();
+                modelSet.add(model);
+                modelSet.sync();
+
+                equal(model.id(), 1);
+                equal(model.get("foo"), "foo");
+            });
+
+            test("sync merges created model data with server response", function() {
+                setup({ transport: transport("create", { id: 1 }) });
+
+                var model = new MyModel({ foo: "foo" });
+                modelSet.add(model);
+                modelSet.sync();
+
+                equal(model.id(), 1);
+                equal(model.get("foo"), "foo");
+            });
+
+            test("sync updates created model when response is empty", function() {
+                setup({ transport: transport("create", null) });
+
+                var model = new MyModel({ foo: "foo" });
+                modelSet.add(model);
+                modelSet.sync();
+
+                equal(model.get("foo"), "foo");
+                equal(model.isNew(), false);
+                equal(model.hasChanges(), false);
+            });
+
+            test("sync updates all created models with server response", function() {
+                var response = [{id:1, foo: "foo"} , {id:2, foo: "bar"}];
+
+                setup({
+                    transport: {
+                        create: function(options) {
+                            options.success([response.shift()]);
+                        }
+                    }
+                });
+
+                var model1 = new MyModel();
+                modelSet.add(model1);
+
+                var model2 = new MyModel();
+                modelSet.add(model2);
+                modelSet.sync();
+
+                equal(model1.id(), 1);
+                equal(model1.get("foo"), "foo");
+                equal(model2.id(), 2);
+                equal(model2.get("foo"), "bar");
+            });
+
+            test("sync updates all created models with server response when batch is true and incomplete response", function() {
+                setup({
+                    batch: true,
+                    transport: transport("create")
+                });
+
+                var model1 = new MyModel();
+                modelSet.add(model1);
+
+                var model2 = new MyModel();
+                modelSet.add(model2);
+                modelSet.sync();
+
+                equal(model1.id(), 1);
+                equal(model1.get("foo"), "foo");
+                equal(model2.isNew(), false);
+                equal(model2.hasChanges(), false);
+            });
+
+            test("sync updates all created models with server response when batch is true", function() {
+                setup({
+                    batch: true,
+                    transport: transport("create", [{ id:1, foo: "foo" }, { id:2 , foo: "bar" }])
+                });
+
+                var model1 = new MyModel();
+                modelSet.add(model1);
+
+                var model2 = new MyModel();
+                modelSet.add(model2);
+                modelSet.sync();
+
+                equal(model1.id(), 1);
+                equal(model1.get("foo"), "foo");
+                equal(model2.id(), 2);
+                equal(model2.get("foo"), "bar");
+            });
+
+            test("created models are no longer new after sync", function() {
+                setup({ transport: transport("create") });
+
+                var model = new MyModel();
+                modelSet.add(model);
+                modelSet.sync();
+
+                equal(model.isNew(), false);
+            });
+
+            test("created model has no changes after sync", function() {
+                setup({ transport: transport("create") });
+
+                var model = new MyModel();
+                modelSet.add(model);
+                modelSet.sync();
+
+                equal(model.hasChanges(), false);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
