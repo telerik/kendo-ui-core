@@ -14,6 +14,7 @@
 
     // Constants ==============================================================
     var ABOVE = "above",
+        ANIMATION_STEP = 10,
         BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
         BAR_BORDER_BRIGHTNESS = 0.7,
@@ -5310,6 +5311,67 @@
         }
     });
 
+    var ExpandAnimation = Class.extend({
+        init: function(rect, options) {
+            var anim = this;
+
+            anim.options = deepExtend({}, anim.options, options);
+            anim.rect = rect;
+        },
+
+        options: {
+            duration: 500,
+            direction: "right",
+            size: 0,
+            easing: "swing"
+        },
+
+        play: function() {
+            var anim = this,
+                options = anim.options,
+                actor = anim.rect.clone(),
+                element = $(doc.getElementById(actor.options.id)),
+                start = +new Date(),
+                duration = options.duration,
+                finish = start + duration,
+                easing = jQuery.easing[options.easing],
+                interval,
+                time,
+                pos,
+                easingPos;
+
+            interval = setInterval(function() {
+                time = +new Date();
+                pos = time > finish ? 1 : (time - start) / duration;
+                easingPos = easing(pos, time - start, 0, 1);
+
+                anim._setSize(actor, interpolateValue(0, options.size, easingPos));
+
+                actor.refresh(element);
+
+                if (time > finish) {
+                    clearInterval(interval);
+                }
+            }, ANIMATION_STEP);
+        },
+
+        _setSize: function(rect, size) {
+            var anim = this,
+                dir = anim.options.direction,
+                points = rect.points;
+
+            if (dir === "up") {
+                points[0].y = points[1].y = points[2].y - size;
+            } else if (dir === "right") {
+                points[1].x = points[2].x = points[0].x + size;
+            } else if (dir === "down") {
+                points[2].y = points[3].y = points[0].y + size;
+            } else if (dir === "left") {
+                points[0].x = points[3].x = points[1].x - size;
+            }
+        }
+    });
+
     var Highlight = Class.extend({
         init: function(view, viewElement, options) {
             var highlight = this;
@@ -6046,7 +6108,8 @@
         Color: Color,
         blendColors: blendColors,
         blendGradient: blendGradient,
-        measureText: measureText
+        measureText: measureText,
+        ExpandAnimation: ExpandAnimation
     });
 
     // Themes
