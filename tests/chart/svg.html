@@ -676,6 +676,40 @@
 
             })();
 
+            (function() {
+                var view,
+                    rect,
+                    decorator;
+
+                module("SVGClipAnimationDecorator", {
+                    setup: function() {
+                        view = new Chart.SVGView();
+                        rect = new Chart.SVGPath({
+                            animation: {
+                                type: "clip"
+                            }
+                        });
+                        decorator = new Chart.SVGClipAnimationDecorator(view);
+                    }
+                });
+
+                test("sets clipPath", function() {
+                    decorator.decorate(rect);
+                    equals(rect.options.clipPath, "url(#globalClip)");
+                });
+
+                test("registers clip path definition", function() {
+                    decorator.decorate(rect);
+                    ok(view.definitions.globalClip);
+                });
+
+                test("registers clip animation", function() {
+                    decorator.decorate(rect);
+                    ok(view.animations[0] instanceof Chart.ExpandAnimation);
+                });
+
+            })();
+
        </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
