@@ -276,7 +276,7 @@
 
 
             that.month = {
-                content: template('<td><a class="k-link<#=data.otherMonth#>" href="#" data-value="<#=data.dateString#>" title="<#=data.title#>">' + month.content + '</a></td>'),
+                content: template('<td<#=data.otherMonth#>><a class="k-link" href="#" data-value="<#=data.dateString#>" title="<#=data.title#>">' + month.content + '</a></td>'),
                 empty: template("<td>" + month.empty + "</td>")
             };
         }
@@ -361,7 +361,7 @@
                         title: kendo.toString(start, "D"),
                         day: start.getDate(),
                         dateString: this.toDateString(start),
-                        otherMonth: start < firstDayOfMonth || start > lastDayOfMonth ? " k-other-month" : ""
+                        otherMonth: start < firstDayOfMonth || start > lastDayOfMonth ? ' class="k-other-month"' : ''
                     };
 
                     html += inRange(start, min, max) ? content(data) : empty(data);
