@@ -4974,7 +4974,7 @@
                         "width:<#= d.box.width() #>px; height:<#= d.box.height() #>px; " +
                         "top:<#= d.box.y1 #>px; " +
                         "left:<#= d.box.x1 #>px; " +
-                        "clip:<#= d.renderClip() #>;' >" +
+                        "clip:<#= d._renderClip() #>;' >" +
                     "<#= d.renderContent() #></div>"
                 );
 
@@ -5002,12 +5002,12 @@
             );
         },
 
-        renderClip: function() {
-            return this.clipTemplate(this);
+        refresh: function(domElement) {
+            $(domElement).css("clip", this._renderClip());
         },
 
-        refresh: function(domElement) {
-            $(domElement).css("clip", this.renderClip());
+        _renderClip: function() {
+            return this.clipTemplate(this);
         }
     });
 
@@ -6025,6 +6025,7 @@
         SVGPath: SVGPath,
         SVGLine: SVGLine,
         SVGCircle: SVGCircle,
+        SVGClipPath: SVGClipPath,
         SVGOverlayDecorator: SVGOverlayDecorator,
         SVGPaintDecorator: SVGPaintDecorator,
         VMLView: VMLView,
@@ -6034,6 +6035,7 @@
         VMLLine: VMLLine,
         VMLCircle: VMLCircle,
         VMLGroup: VMLGroup,
+        VMLClipRect: VMLClipRect,
         VMLOverlayDecorator: VMLOverlayDecorator,
         VMLLinearGradient: VMLLinearGradient,
         VMLStroke: VMLStroke,

@@ -708,6 +708,74 @@
             })();
 
             (function() {
+                var clipRect;
+
+                function createClipRect(options) {
+                    clipRect = new Chart.VMLClipRect(
+                        new Box2D(10, 20, 110, 220),
+                        options
+                    );
+                }
+
+                module("VMLClipRect", {
+                    setup: function() {
+                        createClipRect();
+                    }
+                });
+
+                test("renders div tag", function() {
+                    ok(clipRect.render().match(
+                        /\<div.*\>.*\<\/div\>/
+                    ));
+                });
+
+                test("renders top", function() {
+                    ok(clipRect.render().indexOf("top:20px;") > -1);
+                });
+
+                test("renders left", function() {
+                    ok(clipRect.render().indexOf("left:10px;") > -1);
+                });
+
+                test("renders width", function() {
+                    ok(clipRect.render().indexOf("width:100px") > -1);
+                });
+
+                test("renders height", function() {
+                    ok(clipRect.render().indexOf("height:200px") > -1);
+                });
+
+                test("renders clip", function() {
+                    ok(clipRect.render().indexOf("clip:rect(20px 110px 220px 10px)") > -1);
+                });
+
+                test("renders id", function() {
+                    clipRect.options.id = "id";
+                    ok(clipRect.render().indexOf("id='id'") > -1);
+                });
+
+                test("clone returns VMLClipRect", function() {
+                    ok(clipRect.clone() instanceof Chart.VMLClipRect);
+                });
+
+                test("clone copies box", function() {
+                    equals(clipRect.clone().box, clipRect.box);
+                });
+
+                test("clone copies options", function() {
+                    clipRect.options.id = "id";
+                    equals(clipRect.clone().options.id, clipRect.options.id);
+                });
+
+                test("refresh updates clip attribute", function() {
+                    var domElement = $("<div />")[0];
+                    clipRect.refresh(domElement);
+                    equals($(domElement).css("clip"), "rect(20px 110px 220px 10px)");
+                });
+
+            })();
+
+            (function() {
                 var view,
                     linearGradient;
 
