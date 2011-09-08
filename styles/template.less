@@ -19,6 +19,7 @@
 .k-footer-template td,
 .k-state-default,
 .k-state-default .k-select,
+.k-state-disabled,
 .k-panelbar .k-link,
 .k-grid-header-wrap,
 .k-grid-header,
@@ -94,7 +95,6 @@ td.k-group-cell,
 }
 
 .k-link:link,
-.k-link:active,
 .k-link:visited
 {
     color: @link-text-color;
@@ -114,16 +114,11 @@ td.k-group-cell,
 .k-grouping-header,
 .k-tooltip,
 .k-grid-pager,
-.k-button
+.k-button,
+.k-link.k-state-hover,
+.k-tabstrip-items .k-item
 {
     background-color: @header-background-color;
-    background-image: url('@{image-folder}/gradient.png');
-}
-
-.k-link.k-state-hover,
-.k-tabstrip-items .k-item,
-.k-tabstrip-items .k-state-hover .k-link
-{
     background-image: url('@{image-folder}/gradient.png');
 }
 
@@ -154,8 +149,7 @@ td.k-group-cell,
 
 .k-editor .k-tool-icon { background-image: url('@{image-folder}/editor.png'); }
 
-.k-loading,
-.k-widget .k-loading
+.k-loading
 {
     background-image: url('@{image-folder}/loading.gif');
 }
@@ -294,23 +288,19 @@ td.k-group-cell,
 .k-menu .k-group,
 .k-grid .k-filter-options,
 .k-time-popup,
-.k-datepicker-calendar
+.k-datepicker-calendar,
+.k-imagebrowser .k-image
 {
-    -moz-box-shadow: 2px 2px 2px @shadow-color;
-    -webkit-box-shadow: 2px 2px 2px @shadow-color;
-    box-shadow: 2px 2px 2px @shadow-color;
+    -moz-box-shadow: 1px 1px 4px @shadow-color;
+    -webkit-box-shadow: 1px 1px 4px @shadow-color;
+    box-shadow: 1px 1px 4px @shadow-color;
 }
 
 .k-window
 {
-    -moz-box-shadow: 0 0 5px 2px @shadow-color;
-    -webkit-box-shadow: 0 0 5px 2px @shadow-color;
-    box-shadow: 0 0 5px 2px @shadow-color;
-}
+    border-color: @shadow-color;
 
-.k-imagebrowser .k-image
-{
-    -moz-box-shadow:1px 1px 3px @shadow-color;
-    -webkit-box-shadow:1px 1px 3px @shadow-color;
-    box-shadow:1px 1px 3px @shadow-color;
+    -moz-box-shadow: 1px 1px 7px 1px @shadow-color;
+    -webkit-box-shadow: 1px 1px 7px 1px @shadow-color;
+    box-shadow: 1px 1px 7px 1px @shadow-color;
 }
