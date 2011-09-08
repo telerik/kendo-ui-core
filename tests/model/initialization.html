@@ -37,22 +37,6 @@
                 equal(model.data.foo, "bar");
             });
 
-            test("data is not shared", function() {
-                var MyModel = Model.define(),
-                    data = {},
-                    model = new MyModel(data);
-
-                ok(model.data !== data);
-            });
-
-            test("data is deep copied", function() {
-                var MyModel = Model.define(),
-                    data = { foo: [] },
-                    model = new MyModel(data);
-
-                ok(model.data.foo !== data.foo);
-            });
-
             test("define assigns the fields", function() {
                 var MyModel = Model.define({
                     fields: {
