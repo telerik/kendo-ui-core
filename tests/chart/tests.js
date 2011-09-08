@@ -62,5 +62,9 @@ tests.push(
     {
         page: "chart/highlight.html",
         title: "Highlight"
+    },
+    {
+        page: "chart/animations.html",
+        title: "Animations"
     }
 );
