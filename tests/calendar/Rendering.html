@@ -18,7 +18,7 @@
         <script>
 
             var calendar = kendo.calendar,
-                template = new kendo.ui.Calendar().month,
+                template = new kendo.ui.Calendar($("<div/>")).month,
                 div;
 
             module("kendo.ui.Calendar rendering", {
@@ -121,7 +121,7 @@
                 }));
 
                 equal(div.find("tbody").find("a").attr("title"), kendo.toString(firstVisibleDay, "D"));
-                equal(div.find("tbody").find("a").attr("class"), "k-link k-other-month");
+                equal(div.find("tbody").find("a").attr("class"), "k-link");
             });
 
             test("month view renders empty string if date is not in range", function() {
@@ -169,8 +169,8 @@
                     content: template.content
                 }));
 
-                equal(div.find("tbody tr:first").find(".k-other-month").length, 6);
-                equal(div.find("tbody tr:last").find(".k-other-month").length, 5);
+                equal(div.find("tbody tr:first").find("td.k-other-month").length, 6);
+                equal(div.find("tbody tr:last").find("td.k-other-month").length, 5);
             });
 
             test("year view renders title", function() {
