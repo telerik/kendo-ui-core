@@ -40,7 +40,7 @@
                 setup: setup
             });
 
-            test("sync updates created model data with array server response", function() {
+            test("sync updates the fields of created model from array server response", function() {
                 setup({ transport: transport("create") });
 
                 var model = new MyModel();
@@ -51,11 +51,43 @@
                 equal(model.get("foo"), "foo");
             });
 
-            test("sync updates created model data with server response", function() {
+            test("sync updates the fields of updated model from array server response", function() {
+                setup({ data: [{ id: 1}], transport: transport("update") });
+
+                var model = modelSet.get(1);
+                model.set({ foo: "bar" });
+                modelSet.sync();
+
+                equal(model.get("foo"), "foo");
+            });
+
+            test("sync updates internal modelset data from server response", function() {
+                var data = [{ id: 1}];
+                setup({ data: data , transport: transport("update") });
+
+                var model = modelSet.get(1);
+                model.set({ foo: "bar" });
+                modelSet.sync();
+
+                equal(data[0].foo, "foo");
+            });
+
+            test("sync updates the fields of created model from single object server response", function() {
                 setup({ transport: transport("create", { id: 1, foo: "foo" }) });
 
                 var model = new MyModel();
                 modelSet.add(model);
+                modelSet.sync();
+
+                equal(model.id(), 1);
+                equal(model.get("foo"), "foo");
+            });
+
+            test("sync updates the fields of updated model from single object server response", function() {
+                setup({ data: [ { id: 1 } ], transport: transport("update", { id: 1, foo: "foo" }) });
+
+                var model = modelSet.get(1);
+                model.set( { foo: "bar" } );
                 modelSet.sync();
 
                 equal(model.id(), 1);
@@ -73,6 +105,17 @@
                 equal(model.get("foo"), "foo");
             });
 
+            test("sync merges updated model data with server response", function() {
+                setup({ data: [ { id: 1 } ], transport: transport("update", { id: 1 }) });
+
+                var model = modelSet.get(1);
+                model.set( { foo: "bar" } );
+                modelSet.sync();
+
+                equal(model.id(), 1);
+                equal(model.get("foo"), "bar");
+            });
+
             test("sync updates created model when response is empty", function() {
                 setup({ transport: transport("create", null) });
 
@@ -81,7 +124,17 @@
                 modelSet.sync();
 
                 equal(model.get("foo"), "foo");
-                equal(model.isNew(), false);
+                equal(model.hasChanges(), false);
+            });
+
+            test("sync updates the state of updated model when response is empty", function() {
+                setup({ data: [ { id: 1 } ], transport: transport("update", null) });
+
+                var model = modelSet.get(1);
+                model.set( { foo: "bar" } );
+                modelSet.sync();
+
+                equal(model.get("foo"), "bar");
                 equal(model.hasChanges(), false);
             });
 
@@ -109,6 +162,32 @@
                 equal(model2.get("foo"), "bar");
             });
 
+            test("sync updates all updated models with server response", function() {
+                var response = [{id:1, foo: "foo"} , {id:2, foo: "bar"}];
+
+                setup({
+                    data: [ { id: 1 }, { id: 2 }],
+                    transport: {
+                        update: function(options) {
+                            options.success([response.shift()]);
+                        }
+                    }
+                });
+
+                var model1 = modelSet.get(1);
+
+                model1.set( { foo: "foo" } );
+
+                var model2 = modelSet.get(2);
+
+                model2.set( { foo: "bar" } );
+
+                modelSet.sync();
+
+                equal(model1.get("foo"), "foo");
+                equal(model2.get("foo"), "bar");
+            });
+
             test("sync updates all created models with server response when batch is true and incomplete response", function() {
                 setup({
                     batch: true,
@@ -125,6 +204,26 @@
                 equal(model1.id(), 1);
                 equal(model1.get("foo"), "foo");
                 equal(model2.isNew(), false);
+                equal(model2.hasChanges(), false);
+            });
+
+            test("sync updates all update models with server response when batch is true and incomplete response", function() {
+                setup({
+                    data: [ { id: 1 }, { id: 2 }],
+                    batch: true,
+                    transport: transport("update")
+                });
+
+                var model1 = modelSet.get(1);
+
+                model1.set( { foo: "foo" } );
+
+                var model2 = modelSet.get(2);
+
+                model2.set( { foo: "bar" } );
+                modelSet.sync();
+
+                equal(model1.get("foo"), "foo");
                 equal(model2.hasChanges(), false);
             });
 
@@ -147,6 +246,26 @@
                 equal(model2.get("foo"), "bar");
             });
 
+            test("sync updates all updated models with server response when batch is true", function() {
+                setup({
+                    data: [ { id: 1 }, { id: 2 }],
+                    batch: true,
+                    transport: transport("update", [{ id:1, foo: "foo" }, { id:2 , foo: "bar" }])
+                });
+
+                var model1 = modelSet.get(1);
+
+                model1.set( { foo: "foo" } );
+
+                var model2 = modelSet.get(2);
+
+                model2.set( { foo: "bar" } );
+                modelSet.sync();
+
+                equal(model1.get("foo"), "foo");
+                equal(model2.get("foo"), "bar");
+            });
+
             test("created models are no longer new after sync", function() {
                 setup({ transport: transport("create") });
 
@@ -165,6 +284,18 @@
                 modelSet.sync();
 
                 equal(model.hasChanges(), false);
+            });
+
+            test("updated model has no changes after sync", function() {
+                setup({ data: [ { id: 1} ], transport: transport("update") });
+
+                var model1 = modelSet.get(1);
+
+                model1.set( { foo: "foo" } );
+
+                modelSet.sync();
+
+                equal(model1.hasChanges(), false);
             });
 
         </script>

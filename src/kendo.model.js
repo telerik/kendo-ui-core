@@ -47,7 +47,7 @@
 
             that._modified = false;
 
-            that.data = extend(true, {}, data);
+            that.data = data || {};
             that.pristine = extend(true, {}, data);
 
             if (that.id() === undefined) {
