@@ -72,7 +72,6 @@
                 equal(div.find("tbody").find("tr").length, 6);
                 equal(div.find("tbody").find("td").length, 42);
                 equal(div.find("tbody").find("a").length, 42);
-                console.log(div);
             });
 
             test("month view renderer honors firstDayOfWeek property", function() {
@@ -122,7 +121,7 @@
                 }));
 
                 equal(div.find("tbody").find("a").attr("title"), kendo.toString(firstVisibleDay, "D"));
-                equal(div.find("tbody").find("a").attr("class"), "k-link");
+                equal(div.find("tbody").find("a").attr("class"), "k-link k-other-month");
             });
 
             test("month view renders empty string if date is not in range", function() {
@@ -155,7 +154,23 @@
                     content: template.content
                 }));
 
-                equal(div.find("tbody").find("a:first").attr("data-val"), value);
+                equal(div.find("tbody").find("a:first").attr("data-value"), value);
+            });
+
+            test("month view should render k-other-month style", function() {
+                var today = new Date(2011, 9, 10),
+                    firstDay = kendo.calendar.firstVisibleDay(today);
+
+                div.html(calendar.month.content({
+                    date: today,
+                    empty: template.empty,
+                    min: new Date(1900,0,1),
+                    max: new Date(2900,0,1),
+                    content: template.content
+                }));
+
+                equal(div.find("tbody tr:first").find(".k-other-month").length, 6);
+                equal(div.find("tbody tr:last").find(".k-other-month").length, 5);
             });
 
             test("year view renders title", function() {
@@ -208,7 +223,7 @@
                     max: today
                 }));
 
-                equal(div.find("tbody").find("a").attr("data-val"), value);
+                equal(div.find("tbody").find("a").attr("data-value"), value);
             });
 
             test("decade title renders decade range title", function() {
@@ -255,7 +270,7 @@
                     max: today
                 }));
 
-                equal(div.find("tbody").find("td > a").attr("data-val"), value);
+                equal(div.find("tbody").find("td > a").attr("data-value"), value);
             });
 
             test("century title renders century title", function() {
@@ -302,7 +317,7 @@
                     max: today
                 }));
 
-                equal(div.find("tbody").find("a").attr("data-val"), value);
+                equal(div.find("tbody").find("a").attr("data-value"), value);
             });
 
         </script>
