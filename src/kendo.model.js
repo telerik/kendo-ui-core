@@ -95,6 +95,17 @@
             }
         },
 
+        _accept: function(data) {
+            var that = this;
+
+            that._isNew = false;
+            that._modified = false;
+
+            extend(that.data, data);
+
+            that.pristine = extend(true, {}, that.data);
+        },
+
         hasChanges: function() {
             return this._modified;
         },
@@ -137,8 +148,10 @@
         }
 
         id = function(data, value) {
+            var result;
             if (value === undefined) {
-                return data["__id"] || get(data);
+                result = get(data);
+                return result !== undefined? result : data["__id"];
             } else {
                 set(data, value);
             }
@@ -298,16 +311,58 @@
                 });
             }
 
-            that._send({
-                create: created,
-                update: updated,
-                destroy: destroyed
-            });
+            $.when.apply(null, that._send({
+                        create: created,
+                        update: updated,
+                        destroy: destroyed
+                    })
+                )
+                .then(function() {
+                    var idx,
+                        length;
+
+                    for (idx = 0, length = arguments.length; idx < length; idx++){
+                        that._accept(arguments[idx]);
+                    }
+                });
         },
+
+        _accept: function(result) {
+            var models = result.models,
+                response = result.response || [],
+                idx = 0,
+                length;
+
+            if (!$.isArray(response)) {
+                response = [response];
+            }
+
+            for (idx = 0, length = models.length; idx < length; idx++) {
+                models[idx]._accept(response[idx]);
+            }
+        },
+
+        _promise: function(data, models, type) {
+            var that = this,
+                transport = that._transport;
+
+            return $.Deferred(function(deferred) {
+                transport[type].call(transport, extend({
+                        success: function(response) {
+                            deferred.resolve({
+                                response: response,
+                                models: models
+                            });
+                        },
+                        error: deferred.reject
+                    }, data)
+                );
+            }).promise();
+        },
+
         _send: function(data) {
             var that = this,
-                batch = that.options.batch,
-                transport = that._transport,
+                promises = [],
                 order = "create,update,destroy".split(",");
 
             each(order, function(index, type) {
@@ -315,24 +370,28 @@
                     idx,
                     length;
 
-                if (batch) {
+                if (that.options.batch) {
                     if (payload.length) {
-                        transport[type].call(transport, {
-                            data: {
-                                models: $.map(payload, function(value) {
-                                    return value.data;
-                                })
-                            }
-                        });
+                        promises.push(
+                            that._promise( {
+                                data: {
+                                    models: $.map(payload, function(value) {
+                                        return value.data;
+                                    })
+                                }
+                            }, $.map(payload, function(value) {
+                                    return value.model;
+                            }),  type)
+                        );
                     }
                 } else {
                     for (idx = 0, length = payload.length; idx < length; idx++) {
-                        transport[type].call(transport, {
-                            data: payload[idx].data
-                        });
+                        promises.push(that._promise( { data: payload[idx].data }, [ payload[idx].model ], type));
                     }
                 }
             });
+
+            return promises;
         }
     });
 
