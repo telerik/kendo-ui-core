@@ -1002,12 +1002,12 @@
         function detectOS(ua) {
             var os = false, match = [],
                 agentRxs = {
-                    android: /(Android)\s+(\d+)\.(\d+\.\d+)/,
+                    android: /(Android)\s+(\d+)\.(\d+(\.\d+)?)/,
                     iphone: /(iPhone|iPod).*OS\s+(\d+)[\._]([\d\._]+)/,
                     ipad: /(iPad).*OS\s+(\d+)[\._]([\d_]+)/,
                     meego: /(MeeGo).+NokiaBrowser\/(\d+)\.([\d\._]+)/,
-                    webos: /(webOS)\/(\d+)\.(\d+\.\d+)/,
-                    blackberry: /(BlackBerry|PlayBook).*?Version\/(\d+)\.(\d+\.\d+)/
+                    webos: /(webOS)\/(\d+)\.(\d+(\.\d+)?)/,
+                    blackberry: /(BlackBerry|PlayBook).*?Version\/(\d+)\.(\d+(\.\d+)?)/
                 };
             for (var agent in agentRxs) {
                 if (agentRxs.hasOwnProperty(agent)) {
