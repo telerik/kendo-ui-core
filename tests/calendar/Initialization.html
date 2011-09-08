@@ -31,7 +31,7 @@
             test("define current", function() {
                 var cal = new Calendar(div),
                     today = new Date(),
-                    current = cal.viewedDate;
+                    current = cal._viewedDate;
 
                 equal(current.getFullYear(), today.getFullYear());
                 equal(current.getMonth(), today.getMonth());

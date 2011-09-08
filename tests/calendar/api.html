@@ -131,23 +131,33 @@
                 ok(cal.nextArrow.hasClass("k-state-disabled"));
             });
 
+            test("navigate should select date equal to _value", function() {
+                var cal = new Calendar(div),
+                    value = new Date(2000, 10, 10);
+
+                cal.navigateDown(value);
+
+                cal.navigateToPast();
+
+                equal(cal.view.find(".k-state-selected").length, 0);
+            });
 
             test("navigateToPast should navigate to previous month when month view", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate),
+                    modified = new Date(cal._viewedDate),
                     names = kendo.culture().calendar.months.names;
 
                 modified.setMonth(modified.getMonth() - 1);
 
                 cal.navigateToPast();
 
-                equal(+cal.viewedDate, +modified);
+                equal(+cal._viewedDate, +modified);
                 ok(cal.title.html().indexOf(names[modified.getMonth()]) !== -1);
             });
 
             test("navigateToPast should navigate to previous year when year view", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "year";
                 modified.setFullYear(modified.getFullYear() - 1);
@@ -155,12 +165,12 @@
                 cal.navigateToPast();
 
                 ok(cal.title.html(), modified.getFullYear());
-                equal(+cal.viewedDate, +modified);
+                equal(+cal._viewedDate, +modified);
             });
 
             test("navigateToPast should navigate to previous decade when decade view", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "decade";
                 modified.setFullYear(modified.getFullYear() - 10);
@@ -171,12 +181,12 @@
                 cal.navigateToPast();
 
                 ok(cal.title.html(), start + "-" + (start + 9));
-                equal(+cal.viewedDate, +modified);
+                equal(+cal._viewedDate, +modified);
             });
 
             test("navigateToPast should navigate to previous century when century view", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "century";
                 modified.setFullYear(modified.getFullYear() - 100);
@@ -187,12 +197,12 @@
                 cal.navigateToPast();
 
                 ok(cal.title.html(), start + "-" + (start + 99));
-                equal(+cal.viewedDate, +modified);
+                equal(+cal._viewedDate, +modified);
             });
 
             test("navigateToFuture should navigate to next month when month view", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate),
+                    modified = new Date(cal._viewedDate),
                     names = kendo.culture().calendar.months.names;
 
                 cal.currentView = "month";
@@ -200,13 +210,13 @@
 
                 cal.navigateToFuture();
 
-                equal(+cal.viewedDate, +modified);
+                equal(+cal._viewedDate, +modified);
                 ok(cal.title.html().indexOf(names[modified.getMonth()]) !== -1);
             });
 
             test("navigateToFuture should navigate to next year when year view", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "year";
                 modified.setFullYear(modified.getFullYear() + 1);
@@ -214,12 +224,12 @@
                 cal.navigateToFuture();
 
                 ok(cal.title.html(), modified.getFullYear());
-                equal(+cal.viewedDate, +modified);
+                equal(+cal._viewedDate, +modified);
             });
 
             test("navigateToFuture should navigate to next decade when decade view", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "decade";
                 modified.setFullYear(modified.getFullYear() + 10);
@@ -230,12 +240,12 @@
                 cal.navigateToFuture();
 
                 ok(cal.title.html(), start + "-" + (start + 9));
-                equal(+cal.viewedDate, +modified);
+                equal(+cal._viewedDate, +modified);
             });
 
             test("navigateToFuture should navigate to next century when century view", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "century";
                 modified.setFullYear(modified.getFullYear() + 100);
@@ -246,12 +256,12 @@
                 cal.navigateToFuture();
 
                 ok(cal.title.html(), start + "-" + (start + 99));
-                equal(+cal.viewedDate, +modified);
+                equal(+cal._viewedDate, +modified);
             });
 
             test("navigateUp should navigate upper view (year)", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "month";
 
@@ -262,7 +272,7 @@
 
             test("navigateUp should navigate upper view (decade)", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "year";
 
@@ -273,7 +283,7 @@
 
             test("navigateUp should navigate upper view (century)", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "decade";
 
@@ -285,44 +295,44 @@
 
             test("navigateDown should navigate lower view (decade)", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "century";
 
-                cal.navigateDown();
+                cal.navigateDown(modified);
 
                 equal(cal.currentView, "decade");
             });
 
             test("navigateDown should navigate lower view (year)", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "decade";
 
-                cal.navigateDown();
+                cal.navigateDown(modified);
 
                 equal(cal.currentView, "year");
             });
 
             test("navigateDown should navigate lower view (month)", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "year";
 
-                cal.navigateDown();
+                cal.navigateDown(modified);
 
                 equal(cal.currentView, "month");
             });
 
             test("navigateDown should navigate lower view (month)", function() {
                 var cal = new Calendar(div),
-                    modified = new Date(cal.viewedDate);
+                    modified = new Date(cal._viewedDate);
 
                 cal.currentView = "year";
 
-                cal.navigateDown();
+                cal.navigateDown(modified);
 
                 equal(cal.currentView, "month");
             });

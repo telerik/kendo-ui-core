@@ -2,9 +2,14 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Component = ui.Component,
+        MONTH = "month",
+        YEAR = "year",
+        DECADE = "decade",
+        CENTURY = "century",
         CLICK = "click",
         DISABLED = "k-state-disabled",
         SELECTED = "k-state-selected",
+        DAYSELECTOR = "td:not(k-other-month)",
         extend = $.extend,
         proxy = $.proxy,
         DATE = Date;
@@ -25,58 +30,56 @@
 
     var Calendar = Component.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                viewedDate;
 
             Component.fn.init.call(that, element, options);
 
             options = that.options;
 
-            that.viewedDate = defineViewedDate(options.value, options.min, options.max);
+            that._viewedDate = viewedDate = defineViewedDate(options.value, options.min, options.max);
 
             that._templates();
 
             that._header();
 
-            that.element.delegate("td:not(k-other-month)", "click", function(e) {
-                that.navigateDown(new Date($(e.currentTarget.children[0]).data("val")));
+            that.element.delegate(DAYSELECTOR, CLICK, function(e) {
+                e.preventDefault();
+                that.navigateDown(new DATE($(e.currentTarget.children[0]).data("value")));
             });
 
             that.currentView = options.firstView;
 
-            // should just call that.value(options.value);
+            that.view = $('<table class="k-content">');
+            that.element.append(that.view);
 
-            that.view = $('<table class="k-content">'); //make this in navigate method!!
-            that.element.append(that.view); //append table;
-
-            that.navigate(options.value);
-
-            //
+            that.navigate(viewedDate, that.currentView);
         },
 
         options: {
             value: null,
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
-            depth: "month",
-            firstView: "month",
+            depth: MONTH,
+            firstView: MONTH,
             month: {
                 content: "<#=data.day#>",
                 empty: " "
             }
         },
 
-        _setDate: function(sign) {
+        _setDate: function(direction) {
             var that = this,
-            viewedDate = that.viewedDate,
+            viewedDate = that._viewedDate,
             currentView = that.currentView,
-            value = sign * 1;
+            value = direction * 1;
 
-            if (currentView === "month") {
+            if (currentView === MONTH) {
                 viewedDate.setMonth(viewedDate.getMonth() + value);
             } else {
-                if (currentView === "decade") {
+                if (currentView === DECADE) {
                     value *= 10;
-                } else if (currentView ==="century") {
+                } else if (currentView ===CENTURY) {
                     value *= 100;
                 }
 
@@ -89,7 +92,7 @@
 
             that._setDate(-1);
 
-            that.navigate(that.viewedDate, that.currentView);
+            that.navigate(that._viewedDate, that.currentView);
         },
 
         navigateToFuture: function() {
@@ -97,22 +100,22 @@
 
             that._setDate(1);
 
-            that.navigate(that.viewedDate, that.currentView);
+            that.navigate(that._viewedDate, that.currentView);
         },
 
         navigateUp: function() {
             var that = this,
                 currentView = that.currentView;
 
-            if (currentView === "month") {
-                that.currentView = "year";
-            } else if (currentView === "year") {
-                that.currentView = "decade";
-            } else if (currentView === "decade") {
-                that.currentView = "century";
+            if (currentView === MONTH) {
+                that.currentView = YEAR;
+            } else if (currentView === YEAR) {
+                that.currentView = DECADE;
+            } else if (currentView === DECADE) {
+                that.currentView = CENTURY;
             }
 
-            that.navigate(that.viewedDate, that.currentView);
+            that.navigate(that._viewedDate, that.currentView);
         },
 
         navigateDown: function(value) {
@@ -121,89 +124,88 @@
             currentView = that.currentView;
 
             if (currentView === depth) {
-                //raise change event ???
                 that.value(value);
                 return;
             }
 
-            if (currentView === "century") {
-                that.currentView = "decade";
-            } else if (currentView === "decade") {
-                that.currentView = "year";
-            } else if (currentView === "year") {
-                that.currentView = "month";
+            if (currentView === CENTURY) {
+                that.currentView = DECADE;
+            } else if (currentView === DECADE) {
+                that.currentView = YEAR;
+            } else if (currentView === YEAR) {
+                that.currentView = MONTH;
             }
 
-            if (value) {
-                that.viewedDate = value;
-            }
-
-            that.navigate(that.viewedDate, that.currentView);
+            that.navigate(value, that.currentView);
         },
 
         navigate: function(date, viewName) {
             var that = this,
+                dateString,
+                selectedValue = that._value,
                 options = that.options,
                 min = options.min,
                 max = options.max,
-                view;
+                view = calendar[viewName],
+                compare = view.compare,
+                oldView = that.view,
+                newView;
 
-            date = date || that.viewedDate;
-            viewName = viewName || options.firstView;
-
-            view = calendar[viewName];
+            date = date || that._viewedDate;
 
             that.title
-                .toggleClass(DISABLED, viewName === "century")
+                .toggleClass(DISABLED, viewName === CENTURY)
                 .html(view.title(date));
 
-            that.prevArrow.toggleClass(DISABLED, view.compare(date, min) < 1);
-            that.nextArrow.toggleClass(DISABLED, view.compare(date, max) > -1);
+            that.prevArrow.toggleClass(DISABLED, compare(date, min) < 1);
+            that.nextArrow.toggleClass(DISABLED, compare(date, max) > -1);
 
-            var newView = $(view.content(extend({
+            newView = $(view.content(extend({
                 min: min,
                 max: max,
                 date: date
             }, that[viewName])));
 
-            //select
-            if (viewName === options.depth && that._value) {
-                var dateString = view.toDateString(that._value);
+            if (viewName === options.depth && selectedValue) {
+                dateString = view.toDateString(selectedValue);
 
-                newView.find("td:not(k-other-month)")
+                newView.find(DAYSELECTOR)
                        .removeClass(SELECTED)
                        .filter(function() {
-                           return $(this).children().eq(0).data("val") === dateString;
+                           return $(this).children().eq(0).data("value") === dateString;
                        })
                        .addClass(SELECTED);
             }
 
             //animate
-            var oldView = that.view;
+            //var wrapper = kendo.wrap(oldView);
+            //newView.insertBefore(oldView);
 
-            var wrapper = kendo.wrap(oldView);
+            //oldView.css("float", "left");
+            //newView.css("float", "left");
+
+            //var offset = oldView.offset();
+            //var width = oldView.outerWidth();
+
+            //wrapper.css({
+            //    left: offset.left - width,
+            //    width: width * 2,
+            //    position: "relative",
+            //    overflow: "visible"
+            //});
+
+            //that.view = newView;
+
             newView.insertBefore(oldView);
-
-            oldView.css("float", "left");
-            newView.css("float", "left");
-
-            var offset = oldView.offset();
-            var width = oldView.outerWidth();
-
-            wrapper.css({
-                //set left
-                width: width * 2,
-                position: "relative",
-                overflow: "visible"
-            });
-
-            //that.view.remove();
             that.view = newView;
+            oldView.remove();
         },
 
         value: function(value) {
             var that = this,
-                options = that.options;
+            options = that.options,
+            min = options.min,
+            max = options.max;
 
             if (value === undefined) {
                 return that._value;
@@ -214,17 +216,17 @@
 
                 if (isNaN(value.getDate())) {
                     value = null;
-                } else if(value < options.min) {
-                    value = options.min;
-                } else if(value > options.max) {
-                    value = options.max;
+                } else if(value < min) {
+                    value = new DATE(min);
+                } else if(value > max) {
+                    value = new DATE(max);
                 }
             }
 
             that._value = value;
-            that.viewedDate = new Date(value);
+            that._viewedDate = new DATE(value);
 
-            that.navigate(value, that.options.depth);
+            that.navigate(value, options.depth);
         },
 
         _header: function() {
@@ -263,18 +265,16 @@
                                             that.navigateToFuture();
                                         }
                                     });
-
         },
 
         _templates: function() {
             var that = this,
                 month = that.options.month,
-                template = kendo.template,
-                MONTH = "month";
+                template = kendo.template;
 
 
             that.month = {
-                content: template('<td><a class="k-link" href="#" data-val="<#=data.dateString#>" title="<#=data.title#>">' + month.content + '</a></td>'),
+                content: template('<td><a class="k-link<#=data.otherMonth#>" href="#" data-value="<#=data.dateString#>" title="<#=data.title#>">' + month.content + '</a></td>'),
                 empty: template("<td>" + month.empty + "</td>")
             };
         }
@@ -316,14 +316,6 @@
             date.setTime(resultDATE.getTime() + tzOffsetDiff * calendar.msPerMinute);
         },
 
-        pad: function (value) {
-            if (value < 10) {
-                return '0' + value;
-            }
-
-            return value;
-        },
-
         month: {
             title: function(date) {
                 return kendo.culture().calendar.months.names[date.getMonth()] + " " + date.getFullYear();
@@ -337,6 +329,8 @@
                     abbr = shiftArray(days.namesAbbr, firstDayIdx),
                     short = shiftArray(days.namesShort, firstDayIdx),
                     start = calendar.firstVisibleDay(options.date),
+                    firstDayOfMonth = calendar.firstDayOfMonth(options.date),
+                    lastDayOfMonth = new DATE(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth() + 1, 0),
                     min = options.min,
                     max = options.max,
                     content = options.content,
@@ -364,7 +358,8 @@
                         date: start,
                         title: kendo.toString(start, "D"),
                         day: start.getDate(),
-                        dateString: (start.getMonth() + 1) + "/" + start.getDate() + "/" + start.getFullYear()
+                        dateString: this.toDateString(start),
+                        otherMonth: start < firstDayOfMonth || start > lastDayOfMonth ? " k-other-month" : ""
                     };
 
                     html += inRange(start, min, max) ? content(data) : empty(data);
@@ -410,9 +405,10 @@
                     setter: function(date) {
                         date.setMonth(date.getMonth() + 1);
                     },
-                    render: function(date) {
+                    toString: function(date) {
                         return namesAbbr[date.getMonth()];
-                    }
+                    },
+                    toDateString: this.toDateString
                 });
 
                 return view(options);
@@ -442,9 +438,10 @@
                     setter: function(date) {
                         date.setFullYear(date.getFullYear() + 1);
                     },
-                    render: function(date) {
+                    toString: function(date) {
                         return date.getFullYear();
-                    }
+                    },
+                    toDateString: this.toDateString
                 });
 
                 return view(options);
@@ -474,10 +471,11 @@
                     setter: function(date) {
                         date.setFullYear(date.getFullYear() + 10);
                     },
-                    render: function(date) {
+                    toString: function(date) {
                         var year = date.getFullYear();
                         return year + "-" + (year + 9);
-                    }
+                    },
+                    toDateString: this.toDateString
                 });
 
                 return view(options);
@@ -487,19 +485,19 @@
             },
             toDateString: function(date) {
                 var year = date.getFullYear();
-                return "1/1/" + year - year % 10;
+                return "1/1/" + (year - year % 10);
             }
         }
     }
 
     function view(options) {
         var idx = 0,
-            dateString,
             min = options.min,
             max = options.max,
             start = options.start,
             setter = options.setter,
-            render = options.render,
+            toString = options.toString,
+            toDateString = options.toDateString,
             html = '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>';
 
         for(; idx < 12; idx++) {
@@ -508,8 +506,7 @@
             }
 
             if (inRange(start, min, max)) {
-                dataString = (start.getMonth() + 1) + "/" + start.getDate() + "/" + start.getFullYear();
-                html += '<td><a class="k-link" data-val="' + dataString + '">' + render(start) + "</a></td>";
+                html += '<td><a class="k-link" data-value="' + toDateString(start) + '">' + toString(start) + "</a></td>";
             } else {
                 html += "<td> </td>";
             }
