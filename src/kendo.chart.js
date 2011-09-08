@@ -55,6 +55,7 @@
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
+        RADIAL_GLASS = "radialGlass",
         RIGHT = "right",
         SANS12 = "12px Verdana, sans-serif",
         SANS16 = "16px Verdana, sans-serif",
@@ -3064,7 +3065,9 @@
                 width: 1
             },
             isVertical: true,
-            overlay: GLASS,
+            overlay: {
+                type: GLASS
+            },
             aboveAxis: true,
             labels: {
                 visible: false
@@ -3192,6 +3195,7 @@
     var CategoricalChart = ChartElement.extend({
         init: function(plotArea, options) {
             var chart = this;
+
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
@@ -3827,12 +3831,15 @@
 
         options: {
             color: WHITE,
-            labels: {
-                visible: false
+            overlay: {
+                type: RADIAL_GLASS
             },
             border: {
-                width: 1,
-                color: WHITE
+                width: 0.5
+            },
+            labels: {
+                visible: false,
+                distance: 5
             }
         },
 
@@ -3841,7 +3848,9 @@
                 options = sector.options,
                 labels = options.labels,
                 labelText = sector.value,
-                labelTemplate;
+                labelTemplate,
+                labelPoint,
+                angle = sector.startAngle - sector.angle;
 
             if (sector._rendered) {
                 return;
@@ -3899,17 +3908,25 @@
             var sector = this,
                 sectorID = uniqueId(),
                 options = sector.options,
-                border = options.border.width > 0 ? {
-                    stroke: options.border.color,
-                    strokeWidth: options.border.width,
-                    dashType: options.border.dashType
+                borderOptions = options.border || {},
+                border = borderOptions.width > 0 ? {
+                    stroke: borderOptions.color,
+                    strokeWidth: borderOptions.width,
+                    dashType: borderOptions.dashType
                 } : {},
                 elements = [];
 
             sector.registerId(sectorID, { seriesIx: sector.seriesIx });
             elements.push(view.createSector(sector, deepExtend({}, {
                 id: sectorID,
-                fill: options.color
+                fill: options.color,
+                overlay: deepExtend({}, options.overlay, {
+                    r: sector.r,
+                    cx: sector.cx,
+                    cy: sector.cy
+                }),
+                fillOpacity: options.opacity,
+                strokeOpacity: options.opacity
             }, border)));
 
             append(elements,
@@ -3933,7 +3950,8 @@
         },
 
         options: {
-            startAngle: 90
+            startAngle: 90,
+            padding: 15
         },
 
         render: function() {
@@ -4054,7 +4072,9 @@
 
             for (i = 0; i < count; i++) {
                 sector = sectors[i];
-                sector.radius = minWidth / 2;
+                sector.r = (minWidth - options.padding) / 2;
+                sector.cx = sector.r + newBox.x1 + options.padding / 2;
+                sector.cy = sector.r + newBox.y1 + options.padding / 2;
                 sector.reflow(newBox);
             }
 
@@ -4208,7 +4228,8 @@
             var plotArea = this,
                 options = plotArea.options,
                 pieChart = new PieChart(plotArea, {
-                    series: series
+                    series: series,
+                    padding: series[0].padding
                 }),
                 sectors = pieChart.sectors,
                 count = sectors.length,
@@ -4643,11 +4664,17 @@
         createSector: function(sector, options) {
             // REVIEW: We'll need Sector2D class to hold sector definition.
             //         Once we have it will use it instead of "sector".
-            return new SVGSector(sector, options);
+            return this.decorate(new SVGSector(sector, options));
         },
 
         createGradient: function(options) {
-            return new SVGLinearGradient(options);
+            if (options.type = "radial") {
+                return new SVGRadialGradient(options);
+            } else if (options.type = "liner") {
+                return new SVGLinearGradient(options)
+            }
+
+            return "";
         },
 
         alignToScreen: function(element) {
@@ -4891,19 +4918,14 @@
         renderPath: function() {
             var pie = this,
                 sector = pie.sector,
-                box = sector.box,
-                strokeWidth = pie.options.strokeWidth,
-                shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
                 startAngle = sector.startAngle,
                 endAngle = sector.angle + startAngle,
                 isReflexAngle = (endAngle - startAngle) > 180,
-                radius = sector.radius,
-                margin = radius * 0.1,
-                r = radius - margin,
-                cx = radius + box.x1,
-                cy = radius + box.y1,
-                firstPoint = pie.calculateSectorPoint(startAngle, cx, cy, r),
-                secondPoint = pie.calculateSectorPoint(endAngle, cx, cy, r);
+                r = sector.r,
+                cx = sector.cx,
+                cy = sector.cy,
+                firstPoint = calculateSectorPoint(startAngle, cx, cy, r),
+                secondPoint = calculateSectorPoint(endAngle, cx, cy, r);
 
             return pie.pathTemplate({
                 firstPoint: firstPoint,
@@ -4913,16 +4935,6 @@
                 cx: cx,
                 cy: cy
             });
-        },
-
-        calculateSectorPoint: function(angle, cx, cy, r) {
-            var radianAngle = angle * (math.PI / 180),
-                ax = math.cos(radianAngle),
-                ay = math.sin(radianAngle),
-                x = cx - (ax * r),
-                y = cy - (ay * r);
-
-            return { x: x, y: y };
         },
 
         renderStrokeWidth: function () {
@@ -5036,6 +5048,53 @@
         }
     });
 
+    var SVGRadialGradient = ViewElement.extend({
+        init: function(options) {
+            var gradient = this;
+
+            ViewElement.fn.init.call(gradient, options);
+
+            gradient.template = SVGRadialGradient.template;
+            gradient.stopTemplate = SVGRadialGradient.stopTemplate;
+            if (!gradient.template) {
+                gradient.template = SVGRadialGradient.template = template(
+                    "<radialGradient id='<#= d.options.id #>' " +
+                    "cx='<#= d.options.cx #>' cy='<#= d.options.cy #>' " +
+                    "fx='<#= d.options.cx #>' fy='<#= d.options.cy #>' " +
+                    "r='<#= d.options.r #>' gradientUnits='userSpaceOnUse'>" +
+                    "<#= d.renderStops() #>" +
+                    "</radialGradient>"
+                );
+
+                gradient.stopTemplate = SVGRadialGradient.stopTemplate = template(
+                    "<stop offset='<#= Math.round(d.offset * 100) #>%' " +
+                    "style='stop-color:<#= d.color #>;stop-opacity:<#= d.opacity #>' />");
+            }
+        },
+
+        options: {
+            id: "",
+            rotation: 0
+        },
+
+        renderStops: function() {
+            var gradient = this,
+                stops = gradient.options.stops,
+                stopTemplate = gradient.stopTemplate,
+                length = stops.length,
+                currentStop,
+                output = '',
+                i;
+
+            for (i = 0; i < length; i++) {
+                currentStop = stops[i];
+                output += stopTemplate(currentStop);
+            }
+
+            return output;
+        }
+    });
+
     function SVGOverlayDecorator(view) {
         this.view = view;
     }
@@ -5045,7 +5104,8 @@
             var decorator = this,
                 view = decorator.view,
                 id = element.options.id,
-                overlayName = element.options ? element.options.overlay : "",
+                overlayOptions = element.options.overlay ? element.options.overlay : {},
+                overlayName = overlayOptions.type,
                 overlay = Chart.Overlays[overlayName];
 
             if (!overlay) {
@@ -5064,7 +5124,13 @@
 
             overlayElement.options.id = id;
             overlayElement.options.fill =
-                deepExtend(fill, { id: fillId, rotation: fillRotation });
+                deepExtend(fill, {
+                    id: fillId,
+                    rotation: fillRotation,
+                    r: overlayOptions.r,
+                    cx: overlayOptions.cx,
+                    cy: overlayOptions.cy
+                });
 
             return group;
         }
@@ -5401,11 +5467,9 @@
         renderPath: function() {
             var pie = this,
                 sector = pie.sector,
-                box = sector.box,
-                radius = sector.radius,
-                r = round(radius - radius * 0.1),
-                cx = round(radius + box.x1),
-                cy = round(radius + box.y1),
+                r = round(sector.r),
+                cx = round(sector.cx),
+                cy = round(sector.cy),
                 sa = -round((sector.startAngle + 180) * 65535),
                 a = -round(sector.angle * 65536);
 
@@ -6240,6 +6304,17 @@
         return "";
     }
 
+
+    function calculateSectorPoint(angle, cx, cy, r) {
+        var radianAngle = angle * (math.PI / 180),
+            ax = math.cos(radianAngle),
+            ay = math.sin(radianAngle),
+            x = round(cx - (ax * r), COORD_PRECISION),
+            y = round(cy - (ay * r), COORD_PRECISION);
+
+        return { x: x, y: y };
+    }
+
     // renderSVG ==============================================================
     function renderSVG(container, svg) {
         container.innerHTML = svg;
@@ -6454,6 +6529,24 @@
                     opacity: 0
                 }]
             }
+        },
+        radialGlass: {
+            fill: {
+                type: "radial",
+                stops: [{
+                    offset: 0.33,
+                    color: WHITE,
+                    opacity: 0.06
+                }, {
+                    offset: 0.83,
+                    color: WHITE,
+                    opacity: 0.2
+                }, {
+                    offset: 0.95,
+                    color: WHITE,
+                    opacity: 0
+                }]
+        }
         }
     };
 

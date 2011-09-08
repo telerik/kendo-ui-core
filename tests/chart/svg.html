@@ -624,9 +624,10 @@
                     setup: function() {
                         sector = new Chart.SVGSector({
                             angle: 20,
-                            radius: 150,
-                            startAngle: 90,
-                            box: new Box2D(0, 0, 100, 100)
+                            r: 135,
+                            cx: 135,
+                            cy: 135,
+                            startAngle: 90
                         });
                     }
                 });
@@ -666,12 +667,12 @@
                 });
 
                 test("renders render curve with angle < 180 degrese", function() {
-                    ok(sector.render().indexOf("A135 135 0 0,1 196.17271934896527 23.141496193902356") > -1);
+                    ok(sector.render().indexOf("A135 135 0 0,1 181.173 8.141") > -1);
                 });
 
                 test("renders render curve with angle > 180 degrese", function() {
-                    sector = new Chart.SVGSector({ angle: 200, radius: 150, startAngle: 90, box: new Box2D(0, 0, 100, 100) });
-                    ok(sector.render().indexOf("A135 135 0 1,1 103.82728065103468 276.8585038060976") > -1);
+                    sector = new Chart.SVGSector({ angle: 200, r: 135, cx: 135, cy: 135, startAngle: 90 });
+                    ok(sector.render().indexOf("A135 135 0 1,1 88.827 261.859") > -1);
                 });
 
             })();
@@ -689,7 +690,9 @@
                         view = new Chart.SVGView();
                         rect = new Chart.SVGPath({
                             id: ID,
-                            overlay: "glass",
+                            overlay: {
+                                type: "glass"
+                            },
                             normalAngle: 90
                         });
                         decorator = new Chart.SVGOverlayDecorator(view);

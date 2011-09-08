@@ -37,16 +37,16 @@
             (function() {
                 var values = { data: [1, 2] },
                     dataValues = {
-                                    data: [
-                                        {
-                                            value: 1,
-                                            name: "A"
-                                        }, {
-                                            value: 2,
-                                            name: "B"
-                                        }
-                                    ]
-                                 }
+                       data: [
+                           {
+                               value: 1,
+                               name: "A"
+                           }, {
+                               value: 2,
+                               name: "B"
+                           }
+                       ]
+                    },
                     TOLERANCE = 0.1;
 
                 function PlotAreaStub() { }
@@ -168,11 +168,6 @@
 
                 test("fills target box", function() {
                     sameBox(sector.box, box);
-                });
-
-                test("sets default sector border color", function() {
-                    createPoint();
-                    equals(sector.options.border.color, "#fff");
                 });
 
                 test("sets sector border color", function() {
