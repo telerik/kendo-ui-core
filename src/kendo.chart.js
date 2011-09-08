@@ -5140,21 +5140,26 @@
                 view = decorator.view,
                 animation = element.options.animation,
                 definitions = view.definitions,
-                clipPath = definitions["clipAnim"],
+                clipPath = definitions["globalClip"],
                 clipRect;
 
             if (animation && animation.type === "clip") {
                 if (!clipPath) {
-                    clipPath = new SVGClipPath({ id: "clipAnim" });
+                    clipPath = new SVGClipPath({ id: "globalClip" });
                     clipRect = view.createRect(
-                        new Box2D(0, 0, 0, view.options.height), { id: "clipAnim-rect" });
+                        new Box2D(0, 0, 0, view.options.height), { id: "globalClip-rect" });
                     clipPath.children.push(clipRect);
-                    definitions["clipAnim"] = clipPath;
+                    definitions["globalClip"] = clipPath;
 
-                    view.animations.push(new ClipAnimation(clipRect, { width: view.options.width }));
+                    view.animations.push(
+                        new ExpandAnimation(clipRect, {
+                            size: view.options.width,
+                            easing: "linear"
+                        })
+                    );
                 }
 
-                element.options.clipPath = "url(#clipAnim)";
+                element.options.clipPath = "url(#globalClip)";
             }
 
             return element;
@@ -5175,11 +5180,14 @@
             if (animation && animation.type === "clip") {
                 clipRect = new VMLClipRect(
                     new Box2D(0, 0, view.options.width, view.options.height),
-                    { id: "clipAnim" }
+                    { id: "globalClip" }
                 );
 
                 view.animations.push(
-                    new ClipAnimation(clipRect, { width: view.options.width })
+                    new ExpandAnimation(clipRect, {
+                            size: view.options.width,
+                            easing: "linear"
+                        })
                 );
 
                 clipRect.children.push(element);
@@ -5188,53 +5196,6 @@
             } else {
                 return element;
             }
-        }
-    });
-
-    var ClipAnimation = Class.extend({
-        init: function(clipRect, options) {
-            var anim = this;
-
-            anim.options = deepExtend({}, anim.options, options);
-            anim.clipRect = clipRect;
-        },
-
-        options: {
-            duration: 500,
-            easing: "linear",
-            width: 600
-        },
-
-        play: function() {
-            var anim = this,
-                clipRect = anim.clipRect,
-                target = $(doc.getElementById(clipRect.options.id)),
-                options = anim.options,
-                current = clipRect.clone(),
-                currentPoints = current.points,
-                start = +new Date(),
-                duration = options.duration,
-                finish = start + duration,
-                easing = jQuery.easing[options.easing],
-                interval,
-                time,
-                pos,
-                easingPos;
-
-            interval = setInterval(function() {
-                time = +new Date();
-                pos = time > finish ? 1 : (time - start) / duration;
-                easingPos = easing(pos, time - start, 0, 1);
-
-                currentPoints[1].x = currentPoints[2].x =
-                    interpolateValue(0, options.width, easingPos);
-
-                current.refresh(target);
-
-                if (time > finish) {
-                    clearInterval(interval);
-                }
-            }, 10);
         }
     });
 
@@ -6090,6 +6051,7 @@
         SVGClipPath: SVGClipPath,
         SVGOverlayDecorator: SVGOverlayDecorator,
         SVGPaintDecorator: SVGPaintDecorator,
+        SVGClipAnimationDecorator: SVGClipAnimationDecorator,
         VMLView: VMLView,
         VMLText: VMLText,
         VMLRotatedText: VMLRotatedText,
@@ -6100,6 +6062,7 @@
         VMLClipRect: VMLClipRect,
         VMLOverlayDecorator: VMLOverlayDecorator,
         VMLLinearGradient: VMLLinearGradient,
+        VMLClipAnimationDecorator: VMLClipAnimationDecorator,
         VMLStroke: VMLStroke,
         VMLFill: VMLFill,
         Tooltip: Tooltip,

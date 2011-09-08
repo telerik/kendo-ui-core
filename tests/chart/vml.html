@@ -868,6 +868,34 @@
                 });
             })();
 
+            (function() {
+                var view,
+                    rect,
+                    decorator;
+
+                module("VMLClipAnimationDecorator", {
+                    setup: function() {
+                        view = new Chart.VMLView();
+                        rect = new Chart.VMLPath({
+                            animation: {
+                                type: "clip"
+                            }
+                        });
+                        decorator = new Chart.VMLClipAnimationDecorator(view);
+                    }
+                });
+
+                test("wraps element in VMLClipRect", function() {
+                    ok(decorator.decorate(rect) instanceof Chart.VMLClipRect);
+                });
+
+                test("registers clip animation", function() {
+                    decorator.decorate(rect);
+                    ok(view.animations[0] instanceof Chart.ExpandAnimation);
+                });
+
+            })();
+
        </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
