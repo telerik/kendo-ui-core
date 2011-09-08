@@ -3850,7 +3850,7 @@
                 labelText = sector.value,
                 labelTemplate,
                 labelPoint,
-                angle = sector.startAngle - sector.angle;
+                angle = sector.startAngle + sector.angle / 2;
 
             if (sector._rendered) {
                 return;
@@ -3869,6 +3869,9 @@
             }
 
             if (labels.visible) {
+                labelPoint = calculateSectorPoint(angle, sector.cx,
+                                sector.cy, sector.r);
+
                 sector.label = new TextBox(labelText,
                     deepExtend({
                         id: uniqueId(),
