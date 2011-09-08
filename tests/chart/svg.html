@@ -574,6 +574,27 @@
             })();
 
             (function() {
+                var clipPath;
+
+                module("SVGClipPath", {
+                    setup: function() {
+                        clipPath = new Chart.SVGClipPath();
+                    }
+                });
+
+                test("renders clipPath tag", function() {
+                    equal(clipPath.render().replace(/\<clipPath.*?\>/, "<clipPath>"),
+                        "<clipPath></clipPath>");
+                });
+
+                test("renders id", function() {
+                    clipPath.options.id = "id";
+                    ok(clipPath.render().indexOf("id='id'") > -1);
+                });
+
+            })();
+
+            (function() {
                 var view,
                     rect,
                     group,
