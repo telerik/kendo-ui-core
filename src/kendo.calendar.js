@@ -35,13 +35,15 @@
 
             Component.fn.init.call(that, element, options);
 
-            options = that.options;
+            element.addClass("k-widget k-calendar");
 
-            that._viewedDate = viewedDate = defineViewedDate(options.value, options.min, options.max);
+            options = that.options;
 
             that._templates();
 
             that._header();
+
+            that._viewedDate = viewedDate = defineViewedDate(options.value, options.min, options.max);
 
             that.element.delegate(DAYSELECTOR, CLICK, function(e) {
                 e.preventDefault();
