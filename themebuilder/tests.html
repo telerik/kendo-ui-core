@@ -104,19 +104,42 @@
                     bgColor: { property: "background-color", label: "Background" },
                     color: { property: "color", label: "Text color" },
                     brdColor: { property: "border-color", label: "Border color" },
-                };
+                },
+                extend = $.extend;
 
             module("LessConstants");
 
             test("serialize() serializes contents in LESS format", function() {
                 var constants = new LessConstants([{
                     prefix: "@widget",
-                    properties: [
-                        $.extend(properties.bgColor, { value: "#f11f11" })
-                    ]
+                    properties: [ extend(properties.bgColor, { value: "#f11f11" }) ]
                 }]);
 
                 equals(constants.serialize(), "@widget-background-color: #f11f11;");
+            });
+
+            test("serialize() with multiple properties", function() {
+                var constants = new LessConstants([{
+                    prefix: "@widget",
+                    properties: [
+                        extend(properties.bgColor, { value: "#f11f11" }),
+                        extend(properties.color, { value: "#b4d455" })
+                    ]
+                }]);
+
+                equals(constants.serialize(), "@widget-background-color: #f11f11;\n@widget-color: #b4d455;");
+            });
+
+            test("serialize() with multiple categories", function() {
+                var constants = new LessConstants([{
+                    prefix: "@widget",
+                    properties: [ extend(properties.bgColor, { value: "#f11f11" }), ]
+                }, {
+                    prefix: "@header",
+                    properties: [ extend(properties.color, { value: "#b4d455" }) ]
+                }]);
+
+                equals(constants.serialize(), "@widget-background-color: #f11f11;\n@header-color: #b4d455;");
             });
         </script>
 
