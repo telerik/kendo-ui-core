@@ -1132,6 +1132,69 @@
                 });
             })();
 
+            (function() {
+                // ------------------------------------------------------------
+                var view;
+
+                module("ViewBase", {
+                    setup: function() {
+                        view = new Chart.ViewBase();
+                    }
+                });
+
+                test("playAnimations plays animation in order", function() {
+                    var order;
+                    view.animations = [
+                        { play: function() { order = "1"; } },
+                        { play: function() { order += "2"; } }
+                    ];
+
+                    view.playAnimations();
+                    equals(order, "12");
+                });
+
+                test("playAnimations clears animations", function() {
+                    var order;
+                    view.animations = [
+                        { play: function() { } },
+                    ];
+
+                    view.playAnimations();
+                    equals(view.animations.length, 0);
+                });
+
+                test("decorate applies decorators in order", function() {
+                    var order;
+                    view.decorators = [
+                        { decorate: function(element) { order = "1"; return element; } },
+                        { decorate: function(element) { order += "2"; return element; } }
+                    ];
+
+                    view.decorate({ children: [] });
+                    equals(order, "12");
+                });
+
+                test("decorate processes elements recursively", function() {
+                    var order = "";
+                    view.decorators = [
+                        { decorate: function(element) { order += element.id; return element; } }
+                    ];
+
+                    view.decorate({
+                        id: "1",
+                        children: [{
+                            id: "2",
+                            children: [{
+                                id: "3",
+                                children: []
+                            }]
+                        }]
+                    });
+
+                    equals(order, "321");
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

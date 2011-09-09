@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests - SVG</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+            var Chart = kendo.ui.Chart,
+                Box2D = Chart.Box2D,
+                Point2D = Chart.Point2D;
+
+            (function() {
+                var SIZE = 100,
+                    anim,
+                    rect;
+
+                function createAnim(options) {
+                    rect = {
+                        points: [
+                            new Point2D(0, 0),
+                            new Point2D(10, 0),
+                            new Point2D(10, 10),
+                            new Point2D(0, 10)
+                        ],
+                        options: {
+                            id: "id"
+                        },
+                        refresh: function() {
+                        },
+                        clone: function() {
+                            return this;
+                        }
+                    };
+                    anim = new Chart.ExpandAnimation(
+                        rect,
+                        $.extend({ size: SIZE, duration: 50 }, options)
+                    );
+                }
+
+                // ------------------------------------------------------------
+                module("ExpandAnimation", {
+                    setup: function() {
+                        createAnim();
+                    }
+                });
+
+                asyncTest("expands rectangle right", function() {
+                    anim.play();
+
+                    setTimeout(function() {
+                        equals(rect.points[1].x, SIZE);
+                        equals(rect.points[2].x, SIZE);
+                        start();
+                    }, 100);
+                });
+
+                asyncTest("refreshes DOM element", function() {
+                    var success = false;
+
+                    rect.refresh = function() { success = true; };
+                    anim.play();
+
+                    setTimeout(function() {
+                        ok(success);
+                        start();
+                    }, 100);
+                });
+
+            })();
+
+            (function() {
+                var view,
+                    rect,
+                    decorator;
+
+                // ------------------------------------------------------------
+                module("BarAnimationDecorator", {
+                    setup: function() {
+                        view = new Chart.SVGView();
+                        rect = new Chart.SVGPath({
+                            animation: {
+                                type: "bar"
+                            },
+                            normalAngle: 0,
+                            aboveAxis: true
+                        });
+                        decorator = new Chart.BarAnimationDecorator(view);
+                    }
+                });
+
+                test("registers bar animation", function() {
+                    decorator.decorate(rect);
+                    ok(view.animations[0] instanceof Chart.BarAnimation);
+                });
+
+            })();
+
+            (function() {
+                var SIZE = 100,
+                    anim,
+                    rect;
+
+                function createAnim(rectOptions) {
+                    rect = {
+                        points: [
+                            new Point2D(0, 0),
+                            new Point2D(10, 0),
+                            new Point2D(10, 10),
+                            new Point2D(0, 10)
+                        ],
+                        options: $.extend({
+                            id: "id",
+                            normalAngle: 0,
+                            aboveAxis: true,
+                            animation: {
+                            }
+                        }, rectOptions),
+                        refresh: function() {
+                        },
+                        clone: function() {
+                            return this;
+                        }
+                    };
+                    anim = new Chart.BarAnimation(rect, { duration: 50 });
+                }
+
+                // ------------------------------------------------------------
+                module("BarAnimation", {
+                    setup: function() {
+                        createAnim();
+                    }
+                });
+
+                test("collapses rect onto stackBase (vertical bars)", function() {
+                    createAnim({ stackBase: 10 });
+                    anim.play();
+
+                    equals(rect.points[0].y, 10);
+                    equals(rect.points[1].y, 10);
+                    equals(rect.points[2].y, 10);
+                    equals(rect.points[3].y, 10);
+                });
+
+                test("collapses rect onto stackBase (horizontal bars)", function() {
+                    createAnim({ stackBase: 10, normalAngle: 90 });
+                    anim.play();
+
+                    equals(rect.points[0].x, 10);
+                    equals(rect.points[1].x, 10);
+                    equals(rect.points[2].x, 10);
+                    equals(rect.points[3].x, 10);
+                });
+
+                test("shrinks rect onto base (horizontal bars above axis)", function() {
+                    createAnim({ normalAngle: 90 });
+                    anim.play();
+
+                    equals(rect.points[1].x, 0);
+                    equals(rect.points[2].x, 0);
+                });
+
+                test("shrinks rect onto base (horizontal bars below axis)", function() {
+                    createAnim({ normalAngle: 90, aboveAxis: false });
+                    anim.play();
+
+                    equals(rect.points[0].x, 10);
+                    equals(rect.points[3].x, 10);
+                });
+
+                test("shrinks rect onto base (vertical bars above axis)", function() {
+                    createAnim();
+                    anim.play();
+
+                    equals(rect.points[0].y, 10);
+                    equals(rect.points[1].y, 10);
+                });
+
+                test("shrinks rect onto base (vertical bars below axis)", function() {
+                    createAnim({ aboveAxis: false });
+                    anim.play();
+
+                    equals(rect.points[2].y, 0);
+                    equals(rect.points[3].y, 0);
+                });
+
+                asyncTest("animates top edge to final position", function() {
+                    createAnim();
+                    anim.play();
+
+                    setTimeout(function() {
+                        equals(rect.points[0].y, 0);
+                        equals(rect.points[1].y, 0);
+
+                        start();
+                    }, 100);
+                });
+
+                asyncTest("animates right edge to final position", function() {
+                    createAnim({ normalAngle: 90 });
+                    anim.play();
+
+                    setTimeout(function() {
+                        equals(rect.points[1].x, 10);
+                        equals(rect.points[2].x, 10);
+
+                        start();
+                    }, 100);
+                });
+
+                asyncTest("animates bottom edge to final position", function() {
+                    createAnim({ aboveAxis: false });
+                    anim.play();
+
+                    setTimeout(function() {
+                        equals(rect.points[2].y, 10);
+                        equals(rect.points[3].y, 10);
+
+                        start();
+                    }, 100);
+                });
+
+                asyncTest("animates left edge to final position", function() {
+                    createAnim({ normalAngle: 90, aboveAxis: false });
+                    anim.play();
+
+                    setTimeout(function() {
+                        equals(rect.points[0].x, 0);
+                        equals(rect.points[3].x, 0);
+
+                        start();
+                    }, 100);
+                });
+
+            })();
+       </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
