@@ -176,6 +176,7 @@
             var that = this;
 
             that.options = options = extend({}, that.options, options);
+            that._reader = options.reader;
             that._data = options.data || [];
             that._destroyed = [];
             that._transport = options.transport;
@@ -328,17 +329,24 @@
         },
 
         _accept: function(result) {
-            var models = result.models,
-                response = result.response || [],
+            var that = this,
+                models = result.models,
+                response = result.response || {},
                 idx = 0,
                 length;
+
+            response = that._reader.data(that._reader.parse(response));
 
             if (!$.isArray(response)) {
                 response = [response];
             }
 
-            for (idx = 0, length = models.length; idx < length; idx++) {
-                models[idx]._accept(response[idx]);
+            if (result.type === "destroy") {
+                that._destroyed = [];
+            } else {
+                for (idx = 0, length = models.length; idx < length; idx++) {
+                    models[idx]._accept(response[idx]);
+                }
             }
         },
 
@@ -351,7 +359,8 @@
                         success: function(response) {
                             deferred.resolve({
                                 response: response,
-                                models: models
+                                models: models,
+                                type: type
                             });
                         },
                         error: deferred.reject
