@@ -1598,6 +1598,17 @@
 
             return x >= box.x1 && x <= box.x2 &&
                    y >= box.y1 && y <= box.y2;
+        },
+
+        points: function() {
+            var box = this;
+
+            return [
+                new Point2D(box.x1, box.y1),
+                new Point2D(box.x2, box.y1),
+                new Point2D(box.x2, box.y2),
+                new Point2D(box.x1, box.y2)
+            ];
         }
     });
 
@@ -4253,12 +4264,7 @@
 
         createRect: function(box, style) {
             return this.decorate(
-                new SVGLine([new Point2D(box.x1, box.y1),
-                             new Point2D(box.x2, box.y1),
-                             new Point2D(box.x2, box.y2),
-                             new Point2D(box.x1, box.y2)
-                            ], true, style
-                )
+                new SVGLine(box.points(), true, style)
             );
         },
 
@@ -4693,12 +4699,7 @@
 
         createRect: function(box, style) {
             return this.decorate(
-                new VMLLine([new Point2D(box.x1, box.y1),
-                             new Point2D(box.x2, box.y1),
-                             new Point2D(box.x2, box.y2),
-                             new Point2D(box.x1, box.y2)
-                            ], true, style
-                )
+                new VMLLine(box.points(), true, style)
             );
         },
 
@@ -4991,12 +4992,7 @@
             clipRect.box = box;
 
             // Points defining the clipping rectangle
-            clipRect.points = [
-                new Point2D(box.x1, box.y1),
-                new Point2D(box.x2, box.y1),
-                new Point2D(box.x2, box.y2),
-                new Point2D(box.x1, box.y2)
-            ];
+            clipRect.points = box.points();
         },
 
         clone: function() {
