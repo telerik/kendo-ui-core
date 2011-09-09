@@ -27,6 +27,7 @@
         CHANGE = "change",
         CIRCLE = "circle",
         CLICK = "click",
+        CLIP = "clip",
         COLUMN = "column",
         COORD_PRECISION = 3,
         DATABOUND = "dataBound",
@@ -34,6 +35,7 @@
         DEFAULT_PRECISION = 6,
         DEFAULT_WIDTH = 600,
         GLASS = "glass",
+        GLOBAL_CLIP = "globalClip",
         HEIGHT = "height",
         HORIZONTAL = "horizontal",
         INSIDE_BASE = "insideBase",
@@ -3740,7 +3742,7 @@
                 lines = [],
                 group = view.createGroup({
                     animation: {
-                        type: "clip"
+                        type: CLIP
                     }
                 });
 
@@ -5005,7 +5007,7 @@
         },
 
         refresh: function(domElement) {
-            $(domElement).css("clip", this._renderClip());
+            $(domElement).css(CLIP, this._renderClip());
         },
 
         _renderClip: function() {
@@ -5141,23 +5143,23 @@
                 view = decorator.view,
                 animation = element.options.animation,
                 definitions = view.definitions,
-                clipPath = definitions["globalClip"],
+                clipPath = definitions[GLOBAL_CLIP],
                 clipRect;
 
-            if (animation && animation.type === "clip") {
+            if (animation && animation.type === CLIP) {
                 if (!clipPath) {
-                    clipPath = new SVGClipPath({ id: "globalClip" });
+                    clipPath = new SVGClipPath({ id: GLOBAL_CLIP });
                     clipRect = view.createRect(
-                        new Box2D(0, 0, 0, view.options.height), { id: "globalClip-rect" });
+                        new Box2D(0, 0, 0, view.options.height), { id: uniqueId() });
                     clipPath.children.push(clipRect);
-                    definitions["globalClip"] = clipPath;
+                    definitions[GLOBAL_CLIP] = clipPath;
 
                     view.animations.push(
                         new ExpandAnimation(clipRect, { size: view.options.width })
                     );
                 }
 
-                element.options.clipPath = "url(#globalClip)";
+                element.options.clipPath = "url(#" + GLOBAL_CLIP + ")";
             }
 
             return element;
@@ -5175,10 +5177,10 @@
                 animation = element.options.animation,
                 clipRect;
 
-            if (animation && animation.type === "clip") {
+            if (animation && animation.type === CLIP) {
                 clipRect = new VMLClipRect(
                     new Box2D(0, 0, view.options.width, view.options.height),
-                    { id: "globalClip" }
+                    { id: uniqueId() }
                 );
 
                 view.animations.push(
