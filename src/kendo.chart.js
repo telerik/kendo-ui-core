@@ -5121,7 +5121,7 @@
             if (animation) {
                 if (animation.type === BAR) {
                     view.animations.push(
-                        new BarAnimation(element, element.options)
+                        new BarAnimation(element)
                     );
                 }
             }
@@ -5199,33 +5199,24 @@
         }
     });
 
-    var BarAnimation = Class.extend({
-        init: function(viewElement, options) {
+    var ElementAnimation = Class.extend({
+        init: function(element, options) {
             var anim = this;
 
-            anim.viewElement = viewElement;
             anim.options = deepExtend({}, anim.options, options);
+            anim.element = element;
         },
 
         options: {
-            duration: 500,
+            duration: 800,
             easing: "swing"
         },
 
         play: function() {
             var anim = this,
-                viewElement = anim.viewElement,
                 options = anim.options,
-                stackBase = options.animation.stackBase,
-                aboveAxis = options.aboveAxis,
-                initialPosition,
-                target = $(doc.getElementById(viewElement.options.id)),
-                top = viewElement.points[0].y,
-                bottom = viewElement.points[3].y,
-                left = viewElement.points[0].x,
-                right = viewElement.points[1].x,
-                current = viewElement.clone(),
-                currentPoints = current.points,
+                actor = anim.element.clone(),
+                domElement = $(doc.getElementById(actor.options.id)),
                 start = +new Date(),
                 duration = options.duration,
                 finish = start + duration,
@@ -5235,80 +5226,17 @@
                 pos,
                 easingPos;
 
-            if (options.normalAngle === 0) {
-                initialPosition = defined(stackBase) ? stackBase : aboveAxis ? bottom : top;
-                updateArray(currentPoints, Y, initialPosition);
-            } else {
-                initialPosition = defined(stackBase) ? stackBase : aboveAxis ? left : right;
-                updateArray(currentPoints, X, initialPosition);
-            }
-            current.refresh(target);
+            anim.setup();
+            actor.refresh(domElement);
 
             interval = setInterval(function() {
                 time = +new Date();
                 pos = time > finish ? 1 : (time - start) / duration;
                 easingPos = easing(pos, time - start, 0, 1);
 
-                if (options.normalAngle === 0) {
-                    currentPoints[0].y = currentPoints[1].y =
-                        interpolateValue(initialPosition, top, easingPos);
+                anim.step(actor, easingPos);
 
-                    currentPoints[2].y = currentPoints[3].y =
-                        interpolateValue(initialPosition, bottom, easingPos);
-                } else {
-                    currentPoints[0].x = currentPoints[3].x =
-                        interpolateValue(initialPosition, left, easingPos);
-
-                    currentPoints[1].x = currentPoints[2].x =
-                        interpolateValue(initialPosition, right, easingPos);
-                }
-
-                current.refresh(target);
-
-                if (time > finish) {
-                    clearInterval(interval);
-                }
-            }, 10);
-        }
-    });
-
-    var ExpandAnimation = Class.extend({
-        init: function(rect, options) {
-            var anim = this;
-
-            anim.options = deepExtend({}, anim.options, options);
-            anim.rect = rect;
-        },
-
-        options: {
-            duration: 500,
-            direction: "right",
-            size: 0,
-            easing: "swing"
-        },
-
-        play: function() {
-            var anim = this,
-                options = anim.options,
-                actor = anim.rect.clone(),
-                element = $(doc.getElementById(actor.options.id)),
-                start = +new Date(),
-                duration = options.duration,
-                finish = start + duration,
-                easing = jQuery.easing[options.easing],
-                interval,
-                time,
-                pos,
-                easingPos;
-
-            interval = setInterval(function() {
-                time = +new Date();
-                pos = time > finish ? 1 : (time - start) / duration;
-                easingPos = easing(pos, time - start, 0, 1);
-
-                anim._setSize(actor, interpolateValue(0, options.size, easingPos));
-
-                actor.refresh(element);
+                actor.refresh(domElement);
 
                 if (time > finish) {
                     clearInterval(interval);
@@ -5316,10 +5244,25 @@
             }, ANIMATION_STEP);
         },
 
-        _setSize: function(rect, size) {
+        setup: function() {
+        },
+
+        step: function(actor, pos) {
+        }
+    });
+
+    var ExpandAnimation = ElementAnimation.extend({
+        options: {
+            direction: "right",
+            size: 0
+        },
+
+        step: function(actor, pos) {
             var anim = this,
+                options = anim.options,
+                size = interpolateValue(0, options.size, pos),
                 dir = anim.options.direction,
-                points = rect.points;
+                points = actor.points;
 
             if (dir === "up") {
                 points[0].y = points[1].y = points[2].y - size;
@@ -5329,6 +5272,64 @@
                 points[2].y = points[3].y = points[0].y + size;
             } else if (dir === "left") {
                 points[0].x = points[3].x = points[1].x - size;
+            }
+        }
+    });
+
+    var BarAnimation = ElementAnimation.extend({
+        options: {
+            easing: "swing"
+        },
+
+        setup: function() {
+            var anim = this,
+                element = anim.element,
+                points = element.points,
+                options = element.options,
+                axis = options.normalAngle === 0 ? Y : X,
+                stackBase = options.animation.stackBase,
+                aboveAxis = options.aboveAxis,
+                startPosition,
+                endState = anim.endState = {
+                    top: points[0].y,
+                    right: points[1].x,
+                    bottom: points[3].y,
+                    left: points[0].x
+                };
+
+            if (axis === Y) {
+                startPosition = defined(stackBase) ? stackBase :
+                    aboveAxis ? endState.bottom : endState.top;
+            } else {
+                startPosition = defined(stackBase) ? stackBase :
+                    aboveAxis ? endState.left : endState.right;
+            }
+
+            anim.startPosition = startPosition;
+
+            updateArray(points, axis, startPosition);
+        },
+
+        step: function(actor, pos) {
+            var anim = this,
+                options = anim.options,
+                dir = options.direction,
+                startPosition = anim.startPosition,
+                endState = anim.endState,
+                points = actor.points;
+
+            if (actor.options.normalAngle === 0) {
+                points[0].y = points[1].y =
+                    interpolateValue(startPosition, endState.top, pos);
+
+                points[2].y = points[3].y =
+                    interpolateValue(startPosition, endState.bottom, pos);
+            } else {
+                points[0].x = points[3].x =
+                    interpolateValue(startPosition, endState.left, pos);
+
+                points[1].x = points[2].x =
+                    interpolateValue(startPosition, endState.right, pos);
             }
         }
     });
@@ -6072,7 +6073,9 @@
         blendColors: blendColors,
         blendGradient: blendGradient,
         measureText: measureText,
-        ExpandAnimation: ExpandAnimation
+        ExpandAnimation: ExpandAnimation,
+        BarAnimation: BarAnimation,
+        BarAnimationDecorator: BarAnimationDecorator
     });
 
     // Themes
