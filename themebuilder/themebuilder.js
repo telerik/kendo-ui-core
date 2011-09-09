@@ -26,13 +26,19 @@
                 this.constants = constants;
             },
             serialize: function() {
-                var result = "";
+                var result = [],
+                    constants = this.constants,
+                    constant, props, i, j, len;
 
-                var constant = this.constants[0];
+                for (j = 0; j < constants.length; j++) {
+                    constant = constants[j];
 
-                result = constant.prefix + "-" + constant.properties[0].property + ": " + constant.properties[0].value + ";";
+                    for (i = 0, props = constant.properties, len = props.length; i < len; i++) {
+                        result.push(constant.prefix + "-" + props[i].property + ": " + props[i].value + ";");
+                    }
+                }
 
-                return result;
+                return result.join("\n");
             },
             infer: function() {
             }
