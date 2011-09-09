@@ -3007,8 +3007,8 @@
                     childBox = currentChild.box.clone();
 
                 childBox.snapTo(targetBox, positionAxis)
-                if (currentChild.options && currentChild.options.animation) {
-                    currentChild.options.animation.stackBase = stackBase;
+                if (currentChild.options) {
+                    currentChild.options.stackBase = stackBase;
                 }
 
                 if (i == 0) {
@@ -5272,7 +5272,7 @@
                 points = element.points,
                 options = element.options,
                 axis = options.normalAngle === 0 ? Y : X,
-                stackBase = options.animation.stackBase,
+                stackBase = options.stackBase,
                 aboveAxis = options.aboveAxis,
                 startPosition,
                 endState = anim.endState = {
