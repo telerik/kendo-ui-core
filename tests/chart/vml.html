@@ -80,7 +80,7 @@
                 });
 
                 test("createRect returns VMLLine", function() {
-                    var rect = view.createRect(10, 20, 100, 100);
+                    var rect = view.createRect(new Box2D(10, 20, 110, 220));
                     ok(rect instanceof Chart.VMLLine);
                 });
 
