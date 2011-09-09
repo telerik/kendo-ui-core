@@ -112,7 +112,7 @@
             test("serialize() serializes contents in LESS format", function() {
                 var constants = new LessConstants([{
                     prefix: "@widget",
-                    properties: [ extend(properties.bgColor, { value: "#f11f11" }) ]
+                    properties: [ extend({}, properties.bgColor, { value: "#f11f11" }) ]
                 }]);
 
                 equals(constants.serialize(), "@widget-background-color: #f11f11;");
@@ -122,7 +122,7 @@
                 var constants = new LessConstants([{
                     prefix: "@widget",
                     properties: [
-                        extend(properties.bgColor, { value: "#f11f11" }),
+                        extend({}, properties.bgColor, { value: "#f11f11" }),
                         extend(properties.color, { value: "#b4d455" })
                     ]
                 }]);
@@ -133,13 +133,41 @@
             test("serialize() with multiple categories", function() {
                 var constants = new LessConstants([{
                     prefix: "@widget",
-                    properties: [ extend(properties.bgColor, { value: "#f11f11" }), ]
+                    properties: [ extend({}, properties.bgColor, { value: "#f11f11" }), ]
                 }, {
                     prefix: "@header",
-                    properties: [ extend(properties.color, { value: "#b4d455" }) ]
+                    properties: [ extend({}, properties.color, { value: "#b4d455" }) ]
                 }]);
 
                 equals(constants.serialize(), "@widget-background-color: #f11f11;\n@header-color: #b4d455;");
+            });
+
+            test("infer() infers basic property value", function() {
+                var themeBuilder = new ThemeBuilder();
+                themeBuilder.updateStyleSheet(".k-widget { font-size: 9px; }");
+
+                var constants = new LessConstants([{
+                    prefix: "@widget",
+                    properties: [ { property: "font-size" } ]
+                }]);
+
+                constants.infer();
+
+                equals(constants.constants[0].properties[0].value, "9px");
+            });
+
+            test("infer() infers colors correctly", function() {
+                var themeBuilder = new ThemeBuilder();
+                themeBuilder.updateStyleSheet(".k-widget { background-color: #f11f11; }");
+
+                var constants = new LessConstants([{
+                    prefix: "@widget",
+                    properties: [ properties.bgColor ]
+                }]);
+
+                constants.infer();
+
+                equals(constants.constants[0].properties[0].value, "#f11f11");
             });
         </script>
 

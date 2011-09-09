@@ -21,6 +21,7 @@
                 });
             }
         }),
+        rgbValuesRe = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/gi,
         LessConstants = kendo.Observable.extend({
             init: function(constants) {
                 this.constants = constants;
@@ -41,6 +42,19 @@
                 return result.join("\n");
             },
             infer: function() {
+                var constant = this.constants[0],
+                    prototype = $("<div class='" + constant.prefix.replace("@", "k-") + "' />")
+                        .appendTo(document.body),
+                    value = prototype.css(constant.properties[0].property);
+
+                // convert rgb() values to hex
+                value = value.replace(rgbValuesRe, function(match, r, g, b) {
+                    return "#" + (+r).toString(16) + (+g).toString(16) + (+b).toString(16);
+                });
+
+                constant.properties[0].value = value;
+
+                prototype.remove();
             }
         }),
         ThemeBuilder = kendo.Observable.extend({
