@@ -51,45 +51,12 @@
                     }
                 });
 
-                asyncTest("expands rectangle up", function() {
-                    createAnim({ direction: "up" });
-                    anim.play();
-
-                    setTimeout(function() {
-                        equals(rect.points[0].y, rect.points[2].y - SIZE);
-                        equals(rect.points[1].y, rect.points[2].y - SIZE);
-                        start();
-                    }, 100);
-                });
-
                 asyncTest("expands rectangle right", function() {
                     anim.play();
 
                     setTimeout(function() {
                         equals(rect.points[1].x, SIZE);
                         equals(rect.points[2].x, SIZE);
-                        start();
-                    }, 100);
-                });
-
-                asyncTest("expands rectangle down", function() {
-                    createAnim({ direction: "down" });
-                    anim.play();
-
-                    setTimeout(function() {
-                        equals(rect.points[2].y, SIZE);
-                        equals(rect.points[3].y, SIZE);
-                        start();
-                    }, 100);
-                });
-
-                asyncTest("expands rectangle left", function() {
-                    createAnim({ direction: "left" });
-                    anim.play();
-
-                    setTimeout(function() {
-                        equals(rect.points[3].x, rect.points[1].x - SIZE);
-                        equals(rect.points[0].x, rect.points[1].x - SIZE);
                         start();
                     }, 100);
                 });

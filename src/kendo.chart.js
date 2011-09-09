@@ -66,6 +66,7 @@
             longdashdotdot: [8, 3.5, 1.5, 3.5, 1.5, 3.5]
         },
         SVG_NS = "http://www.w3.org/2000/svg",
+        SWING = "swing",
         TOP = "top",
         TRIANGLE = "triangle",
         UNDEFINED = "undefined",
@@ -5152,10 +5153,7 @@
                     definitions["globalClip"] = clipPath;
 
                     view.animations.push(
-                        new ExpandAnimation(clipRect, {
-                            size: view.options.width,
-                            easing: "linear"
-                        })
+                        new ExpandAnimation(clipRect, { size: view.options.width })
                     );
                 }
 
@@ -5184,10 +5182,7 @@
                 );
 
                 view.animations.push(
-                    new ExpandAnimation(clipRect, {
-                            size: view.options.width,
-                            easing: "linear"
-                        })
+                    new ExpandAnimation(clipRect, { size: view.options.width })
                 );
 
                 clipRect.children.push(element);
@@ -5209,7 +5204,7 @@
 
         options: {
             duration: 800,
-            easing: "swing"
+            easing: SWING
         },
 
         play: function() {
@@ -5253,32 +5248,24 @@
 
     var ExpandAnimation = ElementAnimation.extend({
         options: {
-            direction: "right",
-            size: 0
+            size: 0,
+            easing: "linear"
         },
 
         step: function(actor, pos) {
             var anim = this,
                 options = anim.options,
                 size = interpolateValue(0, options.size, pos),
-                dir = anim.options.direction,
                 points = actor.points;
 
-            if (dir === "up") {
-                points[0].y = points[1].y = points[2].y - size;
-            } else if (dir === "right") {
-                points[1].x = points[2].x = points[0].x + size;
-            } else if (dir === "down") {
-                points[2].y = points[3].y = points[0].y + size;
-            } else if (dir === "left") {
-                points[0].x = points[3].x = points[1].x - size;
-            }
+            // Expands rectangle to the right
+            points[1].x = points[2].x = points[0].x + size;
         }
     });
 
     var BarAnimation = ElementAnimation.extend({
         options: {
-            easing: "swing"
+            easing: SWING
         },
 
         setup: function() {
@@ -5312,8 +5299,6 @@
 
         step: function(actor, pos) {
             var anim = this,
-                options = anim.options,
-                dir = options.direction,
                 startPosition = anim.startPosition,
                 endState = anim.endState,
                 points = actor.points;
