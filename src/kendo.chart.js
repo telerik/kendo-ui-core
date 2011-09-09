@@ -387,9 +387,11 @@
          * @option {Number} [legend.border.width] <0> The width of the border.
          * @option {String} [legend.border.color] <"black"> The color of the border.
          * @option {Object} [valueAxis] The value axis configuration options.
-         * @option {Array} [valueAxis.categories] Categories are used instead of numbers for that axis.
          * @option {Number} [valueAxis.axisCrossingValue] <0>
          * Value at which the first perpendicular axis crosses this axis.
+         * @option {Number} [valueAxis.min] <0> The minimum value of the axis.
+         * @option {Number} [valueAxis.max] <1> The maximum value of the axis.
+         * @option {Number} [valueAxis.majorUnits] The interval between major divisions.
          * @option {Number} [valueAxis.minorTickSize] <3> The axis minor tick size.
          * @option {String} [valueAxis.minorTickType] <none> The minor tick type.
          *    <dl>
@@ -490,12 +492,10 @@
          * //sets format of the labels
          * format: "{0:C}"
          * @option {Object} [categoryAxis] The value axis configuration options.
+         * @option {Array} [categoryAxis.categories] Array of category names.
          * @option {String} [categoryAxis.field] The data field containing the category name.
-         * @option {Number} [categoryAxis.min] <0> The minimum value of the axis.
-         * @option {Number} [categoryAxis.max] <1> The maximum value of the axis.
-         * @option {Number} [categoryAxis.majorUnits] The interval between major divisions.
          * @option {Number} [categoryAxis.axisCrossingValue] <0>
-         * Value at which the first perpendicular axis crosses this axis.
+         * Category index at which the first perpendicular axis crosses this axis.
          * @option {Number} [categoryAxis.minorTickSize] <3> The axis minor tick size.
          * @option {String} [categoryAxis.minorTickType] <"none"> The axis minor tick size.
          *    <dl>
