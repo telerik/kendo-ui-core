@@ -3117,6 +3117,7 @@
                     aboveAxis: options.aboveAxis,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
+                    stackBase: options.stackBase,
                     animation: options.animation
                 }, border),
                 elements = [],
