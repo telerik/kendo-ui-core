@@ -977,36 +977,21 @@
             id = model.id;
 
             if (Model && !isEmptyObject(model)) {
-                that.modelSet = new ModelSet({
+                that._set = new ModelSet({
                     model: model,
                     data: that._data,
-                    create: function(e) {
-                        that.trigger(CREATE, e);
-                    },
-                    update: function(e) {
-                        that.trigger(UPDATE, e);
-                    },
-                    destroy: function(e) {
-                        that.trigger(DESTROY, e);
-                    }
+                    reader: that.reader,
+                    batch: options.batch,
+                    sendAllFields: options.sendAllFields,
+                    transport: that.transport
                 });
-            } else {
-                that.modelSet = {
-                    refresh: noop,
-                    select: noop,
-                    sync: noop
-                };
             }
 
             if (id) {
-                that.find = proxy(that.modelSet.find, that.modelSet);
                 that.id = function(record) {
                     return id(record);
                 };
-            } else {
-                that.find = that.at;
             }
-
             that.bind([ /**
                          * Fires when an error occurs during data retrieval.
                          * @name kendo.data.DataSource#error
@@ -1034,146 +1019,16 @@
             batch: false
         },
 
-        model: function(id) {
-            return this.modelSet.model(id);
-        },
-
-        _createdModels: function() {
-            return this.modelSet.select(Model.CREATED, function(model) {
-                return model.data;
-            });
-        },
-
-        _updatedModels: function() {
-            var that = this,
-                sendAllFields = that.options.sendAllFields;
-
-            return that.modelSet.select(Model.UPDATED, function(model) {
-                if(sendAllFields) {
-                    return model.data;
-                }
-
-                return model.changes();
-            });
-        },
-
-        _destroyedModels: function() {
-            var that = this,
-                options = that.options;
-
-            return that.modelSet.select(Model.DESTROYED, function(model) {
-                var data = {};
-
-                if (options.sendAllFields) {
-                    return model.data;
-                }
-
-                that.reader.model.id(data, model.id());
-
-                return data;
-            });
+        get: function(id) {
+            return this._set.get(id);
         },
 
         sync: function() {
-            var that = this,
-                updated,
-                created,
-                destroyed,
-                batch = that.options.batch,
-                mode,
-                promises,
-                transport = that.transport,
-                currentStamp = 0,
-                stamp = function() {
-                    return currentStamp ++;
-                }
-
-            updated = that._updatedModels();
-
-            created = that._createdModels();
-
-            destroyed = that._destroyedModels();
-
-            mode = batch === false ? MULTIPLE: batch;
-
-            if (mode === MULTIPLE) {
-                promises = that._send(created, CREATE, stamp)
-                               .concat(that._send(updated, UPDATE, stamp))
-                               .concat(that._send(destroyed, DESTROY, stamp));
-            } else {
-                promises = that._send({
-                        created: created,
-                        updated: updated,
-                        destroyed: destroyed
-                    },
-                    UPDATE,
-                    stamp
-                );
-            }
-
-            $.when.apply(null, promises).then(function() {
-                var data = [],
-                    reader = that.reader,
-                    results = data.slice.call(arguments),
-                    converted,
-                    idx,
-                    length;
-
-                results.sort(function(x,y) {
-                    return x.stamp - y.stamp;
-                });
-
-                for (idx = 0, length = results.length; idx < length; idx++) {
-                    converted = reader.parse(results[idx].data);
-                    converted = reader.data(converted);
-                    data = data.concat(converted);
-                }
-
-                that.modelSet.merge(data);
-                that._process(that._data);
-            });
+            this._set.sync();
         },
 
-        _send: function(data, method, stamp) {
-            var that = this,
-                batch = that.options.batch;
-
-            if (data.length === 0 || (batch === SINGLE && !data.updated[0] && !data.created[0] && !data.destroyed[0])) {
-                return [];
-            }
-
-            if (batch) {
-                data = [ { models: data } ];
-            }
-
-            if (!isArray(data)) {
-                data = [data];
-            }
-
-            return map(data, function(model) {
-                return that._promise(method, model, stamp());
-            });
-        },
-
-        _promise: function(method, data, stamp) {
-            var that = this,
-                transport = that.transport;
-
-            return $.Deferred(function(dfr) {
-                transport[method]({
-                    data: that._params(data),
-                    success: function(data) {
-                        dfr.resolve({ stamp: stamp, data: data });
-                    },
-                    error: dfr.reject
-                });
-            }).fail(function(options) {
-                that.error(options);
-            }).promise()
-        },
-
-        create: function(index, values) {
-            return this.modelSet.create(index, values);
+        add: function(model) {
+            return this._set.add(model);
         },
 
         read: function(data) {
@@ -1224,12 +1079,8 @@
             }
         },
 
-        update: function(id, values) {
-            this.modelSet.update(id, values);
-        },
-
-        destroy: function(id) {
-            this.modelSet.destroy(id);
+        remove: function(model) {
+            this._set.remove(model);
         },
 
         error: function() {
@@ -1238,10 +1089,9 @@
 
         success: function(data) {
             var that = this,
-            options = {},
-            result,
-            updated = Model ? that._updatedModels() : [],
-            hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0;
+                options = {},
+                result,
+                hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0;
 
             data = that.reader.parse(data);
 
@@ -1275,8 +1125,8 @@
 
             that._data = data;
 
-            if (that.modelSet) {
-                that.modelSet.sync(data);
+            if (that._set) {
+                that._set.data(data);
             }
 
             if (that.options.serverPaging !== true) {
@@ -1313,16 +1163,7 @@
                 that._total = result.total;
             }
 
-            that.modelSet.refresh(data);
             that.trigger(CHANGE);
-        },
-
-        changes: function(id) {
-            return this.modelSet.changes(id);
-        },
-
-        hasChanges: function(id) {
-            return this.modelSet.hasChanges(id);
         },
 
         at: function(index) {

@@ -16,36 +16,12 @@ tests.push(
         title: "datasource initialization"
     },
     {
-        page: "data/datasource/crud.html",
-        title: "datasource crud"
-    },
-    {
-        page: "data/datasource/find.html",
-        title: "datasource.find / datasource.at"
-    },
-    {
         page: "data/datasource/query.html",
         title: "datasource.query"
     },
     {
-        page: "data/datasource/model.html",
-        title: "datasource.model"
-    },
-    {
         page: "data/datasource/sync.html",
         title: "datasource.sync"
-    },
-    {
-        page: "data/datasource/batch-multiple.html",
-        title: "batch multiple requests"
-    },
-    {
-        page: "data/datasource/batch-single.html",
-        title: "batch single request"
-    },
-    {
-        page: "data/datasource/batch-false.html",
-        title: "batch false"
     },
     {
         page: "data/datasource/range.html",

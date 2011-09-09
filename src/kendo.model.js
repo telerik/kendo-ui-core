@@ -202,6 +202,17 @@
             }
         },
 
+        data: function(data) {
+            var that = this;
+
+            if (data) {
+                that._data = data;
+                that._models = {};
+                that._destroyed = [];
+                that._map();
+            }
+        },
+
         get: function(id) {
             var that = this,
                 data,

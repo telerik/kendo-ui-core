@@ -132,7 +132,7 @@
                 ok(dataSource.reader instanceof kendo.data.XmlDataReader);
             });
 
-            test("model returns a model instance", function() {
+            test("get returns a model instance", function() {
                 var dataSource = new DataSource({
                     schema: {
                         model: Model.define()
@@ -140,7 +140,7 @@
                     data: [ { id: 1, foo: "bar"}, { id: 2, foo: "baz"}]
                 });
                 dataSource.read();
-                var model = dataSource.model(1);
+                var model = dataSource.get(1);
                 equal(model.get("id"), 1);
                 equal(model.get("foo"), "bar");
             });
@@ -153,7 +153,7 @@
                     data: [ { foo: "1", bar: "bar1"}, { foo: "2", bar: "bar2"}]
                 });
                 dataSource.read();
-                var model = dataSource.model("2");
+                var model = dataSource.get("2");
                 equal(model.get("foo"), "2");
                 equal(model.get("bar"), "bar2");
             });
@@ -167,7 +167,7 @@
                 });
                 dataSource.read();
 
-                var model = dataSource.model("2");
+                var model = dataSource.get("2");
                 equal(model.get("foo"), "2");
                 equal(model.get("bar"), "bar2");
             });
