@@ -110,12 +110,14 @@
                 var doc = document,
                     style = $("style[title='themebuilder']")[0];
 
-                if (!style) {
-                    style = doc.createElement("style");
-                    style.setAttribute("title", "themebuilder");
-
-                    $("head")[0].appendChild(style);
+                if (style) {
+                    style.parentNode.removeChild(style);
                 }
+
+                style = doc.createElement("style");
+                style.setAttribute("title", "themebuilder");
+
+                $("head")[0].appendChild(style);
 
                 if (style.styleSheet) {
                     style.styleSheet.cssText = cssText;
