@@ -126,6 +126,19 @@
                 equal(modelSet.get(1), undefined);
             });
 
+            test("data replaces the existing values", function() {
+                var data = [ { id: 1, foo: "foo" } ];
+                setup( { data: data });
+
+                var model = modelSet.get(1);
+
+                modelSet.data([ { id: 1, foo: "bar" }]);
+
+                model = modelSet.get(1);
+
+                equal(model.get("foo"), "bar");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
