@@ -20,7 +20,15 @@
 
             function setup(options) {
                 modelSet = new kendo.data.ModelSet($.extend({
-                        model: MyModel
+                        model: MyModel,
+                        reader: {
+                            parse: function(result) {
+                                return result;
+                            },
+                            data: function(result) {
+                                return result;
+                            }
+                        }
                     }, options)
                 );
             }
@@ -298,6 +306,77 @@
                 equal(model1.hasChanges(), false);
             });
 
+            test("sync clears destroyed models", function() {
+                var transport = stub({}, { destroy: function(options) {
+                        options.success();
+                    }
+                });
+
+                setup({ data: [ { id: 1} ], transport: transport });
+
+                var model = modelSet.get(1);
+
+                modelSet.remove(model);
+                modelSet.sync();
+
+                modelSet.sync();
+
+                equal(transport.calls("destroy"), 1);
+            });
+
+            test("sync uses the parse method of the reader", function() {
+                var reader = stub({}, {
+                    parse: function() {
+                        return [{id:1}];
+                    },
+                    data: function(result) {
+                        return result;
+                    }
+                });
+
+                setup( {
+                    reader: reader,
+                    transport: stub({}, {
+                        create: function(options) {
+                            options.success();
+                        }
+                    })
+                });
+
+                var model = new MyModel();
+                modelSet.add(model);
+                modelSet.sync();
+
+                equal(reader.calls("parse"), 1);
+                equal(model.id(), 1);
+            });
+
+            test("sync uses the data method of the reader", function() {
+                var reader = stub({}, {
+                    parse: function(result) {
+                        return result;
+                    },
+                    data: function(result) {
+                        return [{id:1}];
+                    }
+                });
+
+                setup( {
+                    reader: reader,
+                    transport: stub({}, {
+                        create: function(options) {
+                            options.success();
+                        }
+                    })
+                });
+
+                var model = new MyModel();
+                modelSet.add(model);
+                modelSet.sync();
+
+                equal(reader.calls("parse"), 1);
+                equal(model.id(), 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
