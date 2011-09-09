@@ -139,7 +139,7 @@
                 });
 
                 test("collapses rect onto stackBase (vertical bars)", function() {
-                    createAnim({ animation: { stackBase: 10 } });
+                    createAnim({ stackBase: 10 });
                     anim.play();
 
                     equals(rect.points[0].y, 10);
@@ -149,7 +149,7 @@
                 });
 
                 test("collapses rect onto stackBase (horizontal bars)", function() {
-                    createAnim({ animation: { stackBase: 10 }, normalAngle: 90 });
+                    createAnim({ stackBase: 10, normalAngle: 90 });
                     anim.play();
 
                     equals(rect.points[0].x, 10);
