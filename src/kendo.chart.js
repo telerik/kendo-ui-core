@@ -14,6 +14,7 @@
 
     // Constants ==============================================================
     var ABOVE = "above",
+        ANIMATION_STEP = 10,
         BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
         BAR_BORDER_BRIGHTNESS = 0.7,
@@ -26,6 +27,7 @@
         CHANGE = "change",
         CIRCLE = "circle",
         CLICK = "click",
+        CLIP = "clip",
         COLUMN = "column",
         COORD_PRECISION = 3,
         DATABOUND = "dataBound",
@@ -33,6 +35,7 @@
         DEFAULT_PRECISION = 6,
         DEFAULT_WIDTH = 600,
         GLASS = "glass",
+        GLOBAL_CLIP = "globalClip",
         HEIGHT = "height",
         HORIZONTAL = "horizontal",
         INSIDE_BASE = "insideBase",
@@ -65,6 +68,7 @@
             longdashdotdot: [8, 3.5, 1.5, 3.5, 1.5, 3.5]
         },
         SVG_NS = "http://www.w3.org/2000/svg",
+        SWING = "swing",
         TOP = "top",
         TRIANGLE = "triangle",
         UNDEFINED = "undefined",
@@ -1256,6 +1260,7 @@
             chart.element.css("position", "relative");
             chart._view = model.getView();
             chart._viewElement = chart._view.renderTo(chart.element[0]);
+            chart._view.playAnimations();
             chart._attachEvents();
         },
 
@@ -1440,6 +1445,14 @@
     // **************************
     // View Model
     // **************************
+    var Point2D = Class.extend({
+        init: function(x, y) {
+            var point = this;
+            point.x = x;
+            point.y = y;
+        }
+    });
+
     var Box2D = Class.extend({
         init: function(x1, y1, x2, y2) {
             var box = this;
@@ -1585,6 +1598,17 @@
 
             return x >= box.x1 && x <= box.x2 &&
                    y >= box.y1 && y <= box.y2;
+        },
+
+        points: function() {
+            var box = this;
+
+            return [
+                new Point2D(box.x1, box.y1),
+                new Point2D(box.x2, box.y1),
+                new Point2D(box.x2, box.y2),
+                new Point2D(box.x1, box.y2)
+            ];
         }
     });
 
@@ -2964,7 +2988,10 @@
             var stack = this,
                 options = stack.options,
                 isVertical = options.isVertical,
+                isReversed = options.isReversed,
                 positionAxis = isVertical ? X : Y,
+                stackAxis = isVertical ? Y : X,
+                stackBase = targetBox[stackAxis + 2],
                 children = stack.children,
                 box = stack.box = new Box2D(),
                 stackDirection;
@@ -2980,11 +3007,14 @@
                     childBox = currentChild.box.clone();
 
                 childBox.snapTo(targetBox, positionAxis)
+                if (currentChild.options) {
+                    currentChild.options.stackBase = stackBase;
+                }
 
-                if (i > 0) {
-                    childBox.alignTo(children[i - 1].box, stackDirection);
-                } else {
+                if (i == 0) {
                     box = stack.box = childBox.clone();
+                } else {
+                    childBox.alignTo(children[i - 1].box, stackDirection);
                 }
 
                 currentChild.reflow(childBox);
@@ -3014,6 +3044,9 @@
             aboveAxis: true,
             labels: {
                 visible: false
+            },
+            animation: {
+                type: BAR
             }
         },
 
@@ -3081,8 +3114,10 @@
                     fill: options.color,
                     overlay: options.overlay,
                     normalAngle: isVertical ? 0 : 90,
+                    aboveAxis: options.aboveAxis,
                     fillOpacity: options.opacity,
-                    strokeOpacity: options.opacity
+                    strokeOpacity: options.opacity,
+                    animation: options.animation
                 }, border),
                 elements = [],
                 label = bar.children[0];
@@ -3453,11 +3488,11 @@
                 halfWidth = box.width() / 2;
 
             if (type === TRIANGLE) {
-                element = view.createPath([
-                    [box.x1 + halfWidth, box.y1],
-                    [box.x1, box.y2],
-                    [box.x2, box.y2]
-                ], element.options);
+                element = view.createPolyline([
+                    new Point2D(box.x1 + halfWidth, box.y1),
+                    new Point2D(box.x1, box.y2),
+                    new Point2D(box.x2, box.y2)
+                ], true, element.options);
             } else if (type === CIRCLE) {
                 element = view.createCircle([
                     round(box.x1 + halfWidth, COORD_PRECISION),
@@ -3715,7 +3750,12 @@
                 pointCenter,
                 linePoints,
                 interpolate,
-                lines = [];
+                lines = [],
+                group = view.createGroup({
+                    animation: {
+                        type: CLIP
+                    }
+                });
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeriesPoints = seriesPoints[seriesIx];
@@ -3728,7 +3768,7 @@
                     point = currentSeriesPoints[pointIx];
                     if (point) {
                         pointCenter = point.markerBox().center();
-                        linePoints.push([pointCenter.x, pointCenter.y]);
+                        linePoints.push(new Point2D(pointCenter.x, pointCenter.y));
                     } else if (!interpolate) {
                         if (linePoints.length > 1) {
                             lines.push(
@@ -3746,12 +3786,13 @@
                 }
             }
 
-            return lines.concat(elements);
+            group.children = lines.concat(elements);
+            return [group];
         },
 
         createLine: function(lineId, view, points, series, seriesIx) {
             this.registerId(lineId, { seriesIx: seriesIx });
-            return view.createPath(points, {
+            return view.createPolyline(points, false, {
                 id: lineId,
                 stroke: series.color,
                 strokeWidth: series.width,
@@ -4089,6 +4130,7 @@
 
             view.definitions = {};
             view.decorators = [];
+            view.animations = [];
         },
 
         renderDefinitions: function() {
@@ -4110,13 +4152,38 @@
             var view = this,
                 decorators = view.decorators,
                 i,
-                length = decorators.length;
+                length = decorators.length,
+                currentDecorator,
+                j;
 
             for (i = 0; i < length; i++) {
-                element = decorators[i].decorate(element);
+                currentDecorator = decorators[i];
+                view._decorateChildren(currentDecorator, element);
+                element = currentDecorator.decorate.call(currentDecorator, element);
             }
 
             return element;
+        },
+
+        _decorateChildren: function(decorator, element) {
+            var view = this,
+                children = element.children,
+                i,
+                length = children.length;
+
+            for (i = 0; i < length; i++) {
+                view._decorateChildren(decorator, children[i]);
+                children[i] = decorator.decorate.call(decorator, children[i]);
+            }
+        },
+
+        playAnimations: function() {
+            var view = this,
+                anim;
+
+            while(anim = view.animations.shift()) {
+                anim.play();
+            }
         }
     });
 
@@ -4128,7 +4195,9 @@
 
             view.decorators.push(
                 new SVGOverlayDecorator(view),
-                new SVGPaintDecorator(view)
+                new SVGPaintDecorator(view),
+                new BarAnimationDecorator(view),
+                new SVGClipAnimationDecorator(view)
             );
 
             view.template = SVGView.template;
@@ -4184,7 +4253,9 @@
         },
 
         createGroup: function(options) {
-            return new SVGGroup(options);
+            return this.decorate(
+                new SVGGroup(options)
+            );
         },
 
         createText: function(content, options) {
@@ -4193,21 +4264,21 @@
 
         createRect: function(box, style) {
             return this.decorate(
-                new SVGPath([
-                        [box.x1, box.y1], [box.x2, box.y1],
-                        [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]
-                    ],
-                    style
-                )
+                new SVGLine(box.points(), true, style)
             );
         },
 
         createLine: function(x1, y1, x2, y2, options) {
-            return new SVGPath([[x1, y1], [x2, y2]], options);
+            return this.decorate(
+                new SVGLine([new Point2D(x1, y1),
+                             new Point2D(x2, y2)], false, options)
+            );
         },
 
-        createPath: function(points, options) {
-            return new SVGPath(points, options);
+        createPolyline: function(points, closed, options) {
+            return this.decorate(
+                new SVGLine(points, closed, options)
+            );
         },
 
         createCircle: function(center, radius, options) {
@@ -4245,8 +4316,24 @@
             group.template = SVGGroup.template;
             if (!group.template) {
                 group.template = SVGGroup.template =
-                template("<g<#= d.renderAttr(\"id\", d.options.id) #>>" +
+                template("<g<#= d.renderAttr(\"id\", d.options.id) #>" +
+                           "<#= d.renderAttr(\"clip-path\", d.options.clipPath) #>>" +
                          "<#= d.renderContent() #></g>");
+            }
+        }
+    });
+
+
+    var SVGClipPath = ViewElement.extend({
+        init: function(options) {
+            var clip = this;
+            ViewElement.fn.init.call(clip, options);
+
+            clip.template = SVGClipPath.template;
+            if (!clip.template) {
+                clip.template = SVGClipPath.template =
+                template("<clipPath<#= d.renderAttr(\"id\", d.options.id) #>>" +
+                         "<#= d.renderContent() #></clipPath>");
             }
         }
     });
@@ -4299,7 +4386,7 @@
     });
 
     var SVGPath = ViewElement.extend({
-        init: function(points, options) {
+        init: function(options) {
             var path = this;
             ViewElement.fn.init.call(path, options);
 
@@ -4317,8 +4404,6 @@
                     "fill='<#= d.options.fill || \"none\" #>'></path>"
                 );
             }
-
-            path.points = points || [];
         },
 
         options: {
@@ -4329,25 +4414,11 @@
 
         clone: function() {
             var path = this;
-            return new SVGPath(path.points, deepExtend({}, path.options));
+            return new SVGPath(deepExtend({}, path.options));
         },
 
         renderPoints: function() {
-            var path = this,
-                points = this.points,
-                count = points.length,
-                strokeWidth = path.options.strokeWidth,
-                shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
-                alignFunc = shouldAlign ? alignToPixel : math.round,
-                first = points[0],
-                result = "M" + alignFunc(first[0]) + " " + alignFunc(first[1]);
-
-            for (var i = 1; i < count; i++) {
-                var p = points[i];
-                result += " L" + alignFunc(p[0]) + " " + alignFunc(p[1]);
-            }
-
-            return result;
+            // Overriden by inheritors
         },
 
         renderDashType: function () {
@@ -4361,6 +4432,57 @@
             var dashType = this.options.dashType;
 
             return (dashType && dashType != "solid") ? "butt" : "square";
+        }
+    });
+
+
+    var SVGLine = SVGPath.extend({
+        init: function(points, closed, options) {
+            var line = this;
+            SVGPath.fn.init.call(line, options);
+
+            line.points = points;
+            line.closed = closed;
+        },
+
+        refresh: function(domElement) {
+            $(domElement).attr("d", this.renderPoints());
+        },
+
+        renderPoints: function() {
+            var line = this,
+                points = line.points,
+                i,
+                count = points.length,
+                first = points[0],
+                result = "M" + line._print(first);
+
+            for (i = 1; i < count; i++) {
+                result += " " + line._print(points[i]);
+            }
+
+            if (line.closed) {
+                result += " z";
+            }
+
+            return result;
+        },
+
+        clone: function() {
+            var line = this;
+            return new SVGLine(
+                deepExtend([], line.points), line.closed,
+                deepExtend({}, line.options)
+            );
+        },
+
+        _print: function(point) {
+            var line = this,
+                strokeWidth = line.options.strokeWidth,
+                shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
+                align = shouldAlign ? alignToPixel : math.round;
+
+            return align(point.x) + " " + align(point.y);
         }
     });
 
@@ -4454,7 +4576,7 @@
                 return element;
             }
 
-            delete element.options.id;
+            element.options.id = uniqueId();
 
             var fill = overlay.fill,
                 fillRotation = element.options.normalAngle || 0,
@@ -4465,7 +4587,6 @@
             group.children.push(element, overlayElement);
 
             overlayElement.options.id = id;
-
             overlayElement.options.fill =
                 deepExtend(fill, { id: fillId, rotation: fillRotation });
 
@@ -4521,7 +4642,9 @@
 
             view.decorators.push(
                 new VMLOverlayDecorator(view),
-                new VMLGradientDecorator(view)
+                new VMLGradientDecorator(view),
+                new BarAnimationDecorator(view),
+                new VMLClipAnimationDecorator(view)
             );
 
             view.template = VMLView.template;
@@ -4541,11 +4664,13 @@
         },
 
         renderTo: function(container) {
+            var view = this;
+
             if (doc.namespaces) {
                 doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
             }
 
-            container.innerHTML = this.render();
+            container.innerHTML = view.render();
 
             return container.firstChild;
         },
@@ -4574,20 +4699,17 @@
 
         createRect: function(box, style) {
             return this.decorate(
-                new VMLPath(
-                    [[box.x1, box.y1], [box.x2, box.y1],
-                    [box.x2, box.y2], [box.x1, box.y2], [box.x1, box.y1]],
-                    style
-                )
+                new VMLLine(box.points(), true, style)
             );
         },
 
         createLine: function(x1, y1, x2, y2, options) {
-            return new VMLPath([[x1, y1], [x2, y2]], options);
+            return new VMLLine([new Point2D(x1, y1),
+                                new Point2D(x2, y2)], false, options);
         },
 
-        createPath: function(points, options) {
-            return new VMLPath(points, options);
+        createPolyline: function(points, closed, options) {
+            return new VMLLine(points, closed, options);
         },
 
         createCircle: function(center, radius, options) {
@@ -4595,7 +4717,9 @@
         },
 
         createGroup: function(options) {
-            return new VMLGroup(options);
+            return this.decorate(
+                new VMLGroup(options)
+            );
         },
 
         createGradient: function(options) {
@@ -4679,7 +4803,7 @@
     });
 
     var VMLPath = ViewElement.extend({
-        init: function(points, options) {
+        init: function(options) {
             var path = this;
             ViewElement.fn.init.call(path, options);
 
@@ -4695,7 +4819,6 @@
                 );
             }
 
-            path.points = points || [];
             path.stroke = new VMLStroke(path.options);
             path.fill = new VMLFill(path.options);
         },
@@ -4705,25 +4828,59 @@
         },
 
         renderPoints: function() {
-            var points = this.points,
+            // Overriden by inheritors
+        }
+    });
+
+    var VMLLine = VMLPath.extend({
+        init: function(points, closed, options) {
+            var line = this;
+            VMLPath.fn.init.call(line, options);
+
+            line.points = points;
+            line.closed = closed;
+        },
+
+        refresh: function(domElement) {
+            $(domElement).find("path").attr("v", this.renderPoints());
+        },
+
+        renderPoints: function() {
+            var line = this,
+                points = line.points,
+                i,
                 count = points.length,
-                first = points[0],
-                result = "m " + round(first[0]) + "," + round(first[1]);
+                result = "m " + line._print(points[0]);
 
             if (count > 1) {
-                result += " l";
+                result += " l ";
 
-                for (var i = 1; i < count; i++) {
-                    var p = points[i];
-                    result += " " + round(p[0]) + "," + round(p[1]);
+                for (i = 1; i < count; i++) {
+                    result += line._print(points[i]);
 
                     if (i < count - 1) {
-                        result += ",";
+                        result += ", ";
                     }
                 }
             }
 
+            if (line.closed) {
+                result += " x";
+            }
+
             return result;
+        },
+
+        clone: function() {
+            var line = this;
+            return new VMLLine(
+                deepExtend([], line.points), line.closed,
+                deepExtend({}, line.options)
+            );
+        },
+
+        _print: function(point) {
+            return math.round(point.x) + "," + math.round(point.y);
         }
     });
 
@@ -4805,6 +4962,52 @@
                     "<#= d.renderContent() #></div>"
                 );
             }
+        }
+    });
+
+    var VMLClipRect = ViewElement.extend({
+        init: function(box, options) {
+            var clipRect = this;
+            ViewElement.fn.init.call(clipRect, options);
+
+            clipRect.template = VMLClipRect.template;
+            clipRect.clipTemplate = VMLClipRect.clipTemplate;
+            if (!clipRect.template) {
+                clipRect.template = VMLClipRect.template = template(
+                    "<div <#= d.renderAttr(\"id\", d.options.id) #>" +
+                        "style='position:absolute; " +
+                        "width:<#= d.box.width() #>px; height:<#= d.box.height() #>px; " +
+                        "top:<#= d.box.y1 #>px; " +
+                        "left:<#= d.box.x1 #>px; " +
+                        "clip:<#= d._renderClip() #>;' >" +
+                    "<#= d.renderContent() #></div>"
+                );
+
+                clipRect.clipTemplate = VMLClipRect.clipTemplate = template(
+                    "rect(<#= d.points[0].y #>px <#= d.points[1].x #>px " +
+                         "<#= d.points[2].y #>px <#= d.points[0].x #>px)"
+                );
+            }
+
+            clipRect.box = box;
+
+            // Points defining the clipping rectangle
+            clipRect.points = box.points();
+        },
+
+        clone: function() {
+            var clipRect = this;
+            return new VMLClipRect(
+                clipRect.box, deepExtend({}, clipRect.options)
+            );
+        },
+
+        refresh: function(domElement) {
+            $(domElement).css(CLIP, this._renderClip());
+        },
+
+        _renderClip: function() {
+            return this.clipTemplate(this);
         }
     });
 
@@ -4901,6 +5104,218 @@
             return element;
         }
     };
+
+    // Animations
+    var BarAnimationDecorator = Class.extend({
+        init: function(view) {
+            this.view = view;
+        },
+
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                box = element.options.box,
+                animation = element.options.animation;
+
+            if (animation) {
+                if (animation.type === BAR) {
+                    view.animations.push(
+                        new BarAnimation(element)
+                    );
+                }
+            }
+
+            return element;
+        }
+    });
+
+    var SVGClipAnimationDecorator = Class.extend({
+        init: function(view) {
+            this.view = view;
+        },
+
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                animation = element.options.animation,
+                definitions = view.definitions,
+                clipPath = definitions[GLOBAL_CLIP],
+                clipRect;
+
+            if (animation && animation.type === CLIP) {
+                if (!clipPath) {
+                    clipPath = new SVGClipPath({ id: GLOBAL_CLIP });
+                    clipRect = view.createRect(
+                        new Box2D(0, 0, 0, view.options.height), { id: uniqueId() });
+                    clipPath.children.push(clipRect);
+                    definitions[GLOBAL_CLIP] = clipPath;
+
+                    view.animations.push(
+                        new ExpandAnimation(clipRect, { size: view.options.width })
+                    );
+                }
+
+                element.options.clipPath = "url(#" + GLOBAL_CLIP + ")";
+            }
+
+            return element;
+        }
+    });
+
+    var VMLClipAnimationDecorator = Class.extend({
+        init: function(view) {
+            this.view = view;
+        },
+
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                animation = element.options.animation,
+                clipRect;
+
+            if (animation && animation.type === CLIP) {
+                clipRect = new VMLClipRect(
+                    new Box2D(0, 0, view.options.width, view.options.height),
+                    { id: uniqueId() }
+                );
+
+                view.animations.push(
+                    new ExpandAnimation(clipRect, { size: view.options.width })
+                );
+
+                clipRect.children.push(element);
+
+                return clipRect;
+            } else {
+                return element;
+            }
+        }
+    });
+
+    var ElementAnimation = Class.extend({
+        init: function(element, options) {
+            var anim = this;
+
+            anim.options = deepExtend({}, anim.options, options);
+            anim.element = element;
+        },
+
+        options: {
+            duration: 800,
+            easing: SWING
+        },
+
+        play: function() {
+            var anim = this,
+                options = anim.options,
+                actor = anim.element.clone(),
+                domElement = $(doc.getElementById(actor.options.id)),
+                start = +new Date(),
+                duration = options.duration,
+                finish = start + duration,
+                easing = jQuery.easing[options.easing],
+                interval,
+                time,
+                pos,
+                easingPos;
+
+            anim.setup();
+            actor.refresh(domElement);
+
+            interval = setInterval(function() {
+                time = +new Date();
+                pos = time > finish ? 1 : (time - start) / duration;
+                easingPos = easing(pos, time - start, 0, 1);
+
+                anim.step(actor, easingPos);
+
+                actor.refresh(domElement);
+
+                if (time > finish) {
+                    clearInterval(interval);
+                }
+            }, ANIMATION_STEP);
+        },
+
+        setup: function() {
+        },
+
+        step: function(actor, pos) {
+        }
+    });
+
+    var ExpandAnimation = ElementAnimation.extend({
+        options: {
+            size: 0,
+            easing: "linear"
+        },
+
+        step: function(actor, pos) {
+            var anim = this,
+                options = anim.options,
+                size = interpolateValue(0, options.size, pos),
+                points = actor.points;
+
+            // Expands rectangle to the right
+            points[1].x = points[2].x = points[0].x + size;
+        }
+    });
+
+    var BarAnimation = ElementAnimation.extend({
+        options: {
+            easing: SWING
+        },
+
+        setup: function() {
+            var anim = this,
+                element = anim.element,
+                points = element.points,
+                options = element.options,
+                axis = options.normalAngle === 0 ? Y : X,
+                stackBase = options.stackBase,
+                aboveAxis = options.aboveAxis,
+                startPosition,
+                endState = anim.endState = {
+                    top: points[0].y,
+                    right: points[1].x,
+                    bottom: points[3].y,
+                    left: points[0].x
+                };
+
+            if (axis === Y) {
+                startPosition = defined(stackBase) ? stackBase :
+                    aboveAxis ? endState.bottom : endState.top;
+            } else {
+                startPosition = defined(stackBase) ? stackBase :
+                    aboveAxis ? endState.left : endState.right;
+            }
+
+            anim.startPosition = startPosition;
+
+            updateArray(points, axis, startPosition);
+        },
+
+        step: function(actor, pos) {
+            var anim = this,
+                startPosition = anim.startPosition,
+                endState = anim.endState,
+                points = actor.points;
+
+            if (actor.options.normalAngle === 0) {
+                points[0].y = points[1].y =
+                    interpolateValue(startPosition, endState.top, pos);
+
+                points[2].y = points[3].y =
+                    interpolateValue(startPosition, endState.bottom, pos);
+            } else {
+                points[0].x = points[3].x =
+                    interpolateValue(startPosition, endState.left, pos);
+
+                points[1].x = points[2].x =
+                    interpolateValue(startPosition, endState.right, pos);
+            }
+        }
+    });
 
     var Highlight = Class.extend({
         init: function(view, viewElement, options) {
@@ -5571,12 +5986,26 @@
         [].push.apply(first, second);
     }
 
+    function interpolateValue(start, end, progress) {
+        return round(start + (end - start) * progress, COORD_PRECISION);
+    }
+
+    function updateArray(arr, prop, value) {
+        var i,
+            length = arr.length;
+
+        for(i = 0; i < length; i++) {
+            arr[i][prop] = value;
+        }
+    }
+
     // Exports ================================================================
 
     kendo.ui.plugin("Chart", Chart);
 
     deepExtend(Chart, {
         Box2D: Box2D,
+        Point2D: Point2D,
         Text: Text,
         BarLabel: BarLabel,
         ChartElement: ChartElement,
@@ -5596,21 +6025,28 @@
         Legend: Legend,
         PlotArea: PlotArea,
         ViewElement: ViewElement,
+        ViewBase: ViewBase,
         SVGView: SVGView,
         SVGGroup: SVGGroup,
         SVGText: SVGText,
         SVGPath: SVGPath,
+        SVGLine: SVGLine,
         SVGCircle: SVGCircle,
+        SVGClipPath: SVGClipPath,
         SVGOverlayDecorator: SVGOverlayDecorator,
         SVGPaintDecorator: SVGPaintDecorator,
+        SVGClipAnimationDecorator: SVGClipAnimationDecorator,
         VMLView: VMLView,
         VMLText: VMLText,
         VMLRotatedText: VMLRotatedText,
         VMLPath: VMLPath,
+        VMLLine: VMLLine,
         VMLCircle: VMLCircle,
         VMLGroup: VMLGroup,
+        VMLClipRect: VMLClipRect,
         VMLOverlayDecorator: VMLOverlayDecorator,
         VMLLinearGradient: VMLLinearGradient,
+        VMLClipAnimationDecorator: VMLClipAnimationDecorator,
         VMLStroke: VMLStroke,
         VMLFill: VMLFill,
         Tooltip: Tooltip,
@@ -5619,7 +6055,10 @@
         Color: Color,
         blendColors: blendColors,
         blendGradient: blendGradient,
-        measureText: measureText
+        measureText: measureText,
+        ExpandAnimation: ExpandAnimation,
+        BarAnimation: BarAnimation,
+        BarAnimationDecorator: BarAnimationDecorator
     });
 
     // Themes

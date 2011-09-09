@@ -53,10 +53,28 @@
                     dataSource: data,
                     seriesDefaults: {
                         type: "column",
-                        stack: false
+                        stack: false,
+                        labels: {
+                            visible: true
+                        }
                     },
                     series: [
                         {
+                            name: "Value A",
+                            field: "a",
+                            labels: {
+                                visible: false
+                            }
+                        },
+                        {
+                            type: "line",
+                            width: 2,
+                            name: "Value B",
+                            field: "b"
+                        },
+                        {
+                            type: "line",
+                            width: 2,
                             name: "Value C",
                             field: "c"
                         }

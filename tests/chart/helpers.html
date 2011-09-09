@@ -13,6 +13,7 @@
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
+                Point2D = Chart.Point2D,
                 box,
                 targetBox;
 
@@ -250,6 +251,31 @@
 
             test("center returns y center", function() {
                 equals(box.center().y, 10);
+            });
+
+            test("points returns box points", function() {
+                same($.map(box.points(), function(point) {
+                    return [[point.x, point.y]];
+                }), [
+                    [0, 0], [20, 0], [20, 20], [0, 20]
+                ]);
+            });
+
+            // ------------------------------------------------------------
+            var point;
+
+            module("Point2D", {
+                setup: function() {
+                    point = new Point2D(10, 20);
+                }
+            });
+
+            test("constructor sets x", function() {
+                equals(point.x, 10);
+            });
+
+            test("constructor sets y", function() {
+                equals(point.y, 20);
             });
 
             // ------------------------------------------------------------

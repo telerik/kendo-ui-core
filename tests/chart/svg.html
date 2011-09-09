@@ -14,6 +14,7 @@
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
+                Point2D = Chart.Point2D,
                 view = new ViewElementStub(),
                 contentElementStub = {
                     render: function() { return "Content"; }
@@ -68,16 +69,17 @@
                     equal(text.content, "Text");
                 });
 
-                test("createRect returns SVGPath", function() {
+                test("createRect returns SVGLine", function() {
                     var rect = view.createRect(new Box2D(10, 20, 110, 120));
-                    ok(rect instanceof Chart.SVGPath);
+                    ok(rect instanceof Chart.SVGLine);
                 });
 
                 test("createRect draws rectangle", function() {
                     var rect = view.createRect(new Box2D(10, 20, 110, 220));
-                    deepEqual(rect.points, [
-                        [10, 20], [110, 20], [110, 220], [10, 220], [10, 20]
-                    ]);
+                    deepEqual(
+                        mapPoints(rect.points),
+                        [[10, 20], [110, 20], [110, 220], [10, 220]]
+                    );
                 });
 
                 test("createRect sets fill color", function() {
@@ -86,41 +88,46 @@
                     equal(rect.options.fill, "#f00");
                 });
 
-                test("createLine returns SVGPath", function() {
+                test("createLine returns SVGLine", function() {
                     var line = view.createLine();
-                    ok(line instanceof Chart.SVGPath);
+                    ok(line instanceof Chart.SVGLine);
                 });
 
                 test("createLine draws a line", function() {
                     var line = view.createLine(10, 20, 100, 200);
-                    deepEqual(line.points, [ [10, 20], [100, 200] ]);
+                    deepEqual(mapPoints(line.points), [ [10, 20], [100, 200] ]);
                 });
 
-                test("createPath returns SVGPath", function() {
-                    var path = view.createPath();
-                    ok(path instanceof Chart.SVGPath);
+                test("createPolyline returns SVGLine", function() {
+                    var path = view.createPolyline();
+                    ok(path instanceof Chart.SVGLine);
                 });
 
-                test("createPath sets fill color", function() {
-                    var path = view.createPath([], { fill: "#cf0" });
+                test("createPolyline sets closed option", function() {
+                    var path = view.createPolyline([], true);
+                    ok(path.closed);
+                });
+
+                test("createPolyline sets fill color", function() {
+                    var path = view.createPolyline([], false, { fill: "#cf0" });
 
                     equals(path.options.fill, "#cf0");
                 });
 
-                test("createPath sets stroke color", function() {
-                    var path = view.createPath([], { stroke: "#cf0" });
+                test("createPolyline sets stroke color", function() {
+                    var path = view.createPolyline([], false, { stroke: "#cf0" });
 
                     equals(path.options.stroke, "#cf0");
                 });
 
-                test("createPath sets stroke width", function() {
-                    var path = view.createPath([], { strokeWidth: 2});
+                test("createPolyline sets stroke width", function() {
+                    var path = view.createPolyline([], false, { strokeWidth: 2});
 
                     equals(path.options.strokeWidth, 2);
                 });
 
-                test("createPath sets dashType", function() {
-                    var path = view.createPath([], { dashType: "dot"});
+                test("createPolyline sets dashType", function() {
+                    var path = view.createPolyline([], false, { dashType: "dot"});
 
                     equals(path.options.dashType, "dot");
                 });
@@ -196,6 +203,12 @@
                         "<defs>Content</defs></svg>");
                 });
 
+                test("renderTo returns DOM element", function() {
+                    var container = $("<div />").appendTo(document.body);
+                    equals(view.renderTo(container[0]), container[0].firstChild);
+                    container.remove();
+                });
+
                 // ------------------------------------------------------------
                 module("SVGView / Gradient fill", {
                     setup: function() {
@@ -224,12 +237,6 @@
                     path = view.createRect(new Box2D(), { fill: gradient });
 
                     equals(path.options.fill, "url(#existingGradient)");
-                });
-
-                test("renderTo returns DOM element", function() {
-                    var container = $("<div />").appendTo(document.body);
-                    equals(view.renderTo(container[0]), container[0].firstChild);
-                    container.remove();
                 });
 
                 // ------------------------------------------------------------
@@ -399,22 +406,13 @@
 
                 module("SVGPath", {
                     setup: function() {
-                        path = new Chart.SVGPath([[10, 20]]);
+                        path = new Chart.SVGPath();
                     }
                 });
 
                 test("renders path tag", function() {
                     equal(path.render().replace(/\<path.*?\>/, "<path>"),
                         "<path></path>");
-                });
-
-                test("moves to first point", function() {
-                    equal(path.renderPoints(), "M10 20");
-                });
-
-                test("draws line", function() {
-                    path.points.push([20, 30], [40, 50]);
-                    equal(path.renderPoints(), "M10 20 L20 30 L40 50");
                 });
 
                 test("renders fill color", function() {
@@ -458,7 +456,7 @@
 
                 module("SVGPath / Dash", {
                     setup: function() {
-                        path = new Chart.SVGPath([[10, 20]], { strokeWidth: 1 });
+                        path = new Chart.SVGPath({ strokeWidth: 1 });
                     }
                 });
 
@@ -495,6 +493,29 @@
                 test("sets stroke linecap to butt", function() {
                     path.options.dashType = "dot";
                     ok(path.render().indexOf("stroke-linecap='butt'") > -1);
+                });
+
+            })();
+
+            (function() {
+                var line;
+
+                module("SVGLine");
+
+                test("draws line", function() {
+                    line = new Chart.SVGLine([
+                        new Point2D(10, 20),
+                        new Point2D(20, 30)
+                    ], false);
+                    equal(line.renderPoints(), "M10 20 20 30");
+                });
+
+                test("draws closed line", function() {
+                    line = new Chart.SVGLine([
+                        new Point2D(10, 20),
+                        new Point2D(20, 30)
+                    ], true);
+                    equal(line.renderPoints(), "M10 20 20 30 z");
                 });
 
             })();
@@ -553,17 +574,39 @@
             })();
 
             (function() {
+                var clipPath;
+
+                module("SVGClipPath", {
+                    setup: function() {
+                        clipPath = new Chart.SVGClipPath();
+                    }
+                });
+
+                test("renders clipPath tag", function() {
+                    equal(clipPath.render().replace(/\<clipPath.*?\>/, "<clipPath>"),
+                        "<clipPath></clipPath>");
+                });
+
+                test("renders id", function() {
+                    clipPath.options.id = "id";
+                    ok(clipPath.render().indexOf("id='id'") > -1);
+                });
+
+            })();
+
+            (function() {
                 var view,
                     rect,
                     group,
                     overlay,
-                    decorator;
+                    decorator,
+                    ID = "1";
 
                 module("SVGOverlayDecorator", {
                     setup: function() {
                         view = new Chart.SVGView();
-                        rect = new Chart.SVGPath([[10, 20]], {
-                            id: "1",
+                        rect = new Chart.SVGPath({
+                            id: ID,
                             overlay: "glass",
                             normalAngle: 90
                         });
@@ -578,11 +621,11 @@
                 });
 
                 test("moves id to overlay", function() {
-                    ok(overlay.options.id.length > 0);
+                    equals(overlay.options.id, ID);
                 });
 
-                test("moves id from decorated element", function() {
-                    ok(rect.options.id == null);
+                test("generates id for decorated element", function() {
+                    ok(rect.options.id.length > 0);
                 });
 
                 test("generates unique id for gradient", function() {
@@ -608,7 +651,7 @@
                 module("SVGPaintDecorator", {
                     setup: function() {
                         view = new Chart.SVGView();
-                        rect = new Chart.SVGPath([[10, 20]], {
+                        rect = new Chart.SVGPath({
                             fill: gradient
                         });
                         decorator = new Chart.SVGPaintDecorator(view);
@@ -629,6 +672,40 @@
                 test("registers gradient definition", function() {
                     decorator.decorate(rect);
                     ok(view.definitions.gradient);
+                });
+
+            })();
+
+            (function() {
+                var view,
+                    rect,
+                    decorator;
+
+                module("SVGClipAnimationDecorator", {
+                    setup: function() {
+                        view = new Chart.SVGView();
+                        rect = new Chart.SVGPath({
+                            animation: {
+                                type: "clip"
+                            }
+                        });
+                        decorator = new Chart.SVGClipAnimationDecorator(view);
+                    }
+                });
+
+                test("sets clipPath", function() {
+                    decorator.decorate(rect);
+                    equals(rect.options.clipPath, "url(#globalClip)");
+                });
+
+                test("registers clip path definition", function() {
+                    decorator.decorate(rect);
+                    ok(view.definitions.globalClip);
+                });
+
+                test("registers clip animation", function() {
+                    decorator.decorate(rect);
+                    ok(view.animations[0] instanceof Chart.ExpandAnimation);
                 });
 
             })();
