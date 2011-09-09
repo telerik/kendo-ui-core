@@ -69,9 +69,12 @@
 
                 themeBuilder.updateStyleSheet(".foo { font-size: 8px; }");
 
-                themeBuilder.updateStyleSheet(".foo { font-size: 10px; }");
+                themeBuilder.updateStyleSheet("body { font-size: 10px; } .foo { color: #f00; }");
+
+                var element = $("<span class='foo' />").appendTo(document.body);
 
                 equals($("style[title]").length, 1);
+                equals($(".foo").css("font-size"), "10px");
             });
 
             var colorPicker;
