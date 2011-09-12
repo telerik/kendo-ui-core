@@ -380,33 +380,70 @@
                 module("Size", {
                     setup: function() {
                         $("#container").width("100px").height("100px").show();
+                        createChart();
                     }
                 });
 
                 test("picks width from container", function() {
-                    createChart();
-
-                    equal(chart.options.chartArea.width, 100);
+                    equal(chart._model.options.width, 100);
                 });
 
                 test("picks height from container", function() {
-                    createChart();
+                    equal(chart._model.options.height, 100);
+                });
 
-                    equal(chart.options.chartArea.height, 100);
+                test("picks width from container on refresh", function() {
+                    $("#container").width("200px");
+                    chart.refresh();
+
+                    equal(chart._model.options.width, 200);
+                });
+
+                test("picks height from container on refresh", function() {
+                    $("#container").height("200px");
+                    chart.refresh();
+
+                    equal(chart._model.options.height, 200);
+                });
+
+                test("applies set width", function() {
+                    createChart({ chartArea: { width: 200, height: 200 }});
+
+                    equal(chart._model.options.width, 200);
+                });
+
+                test("applies set height", function() {
+                    createChart({ chartArea: { width: 200, height: 200 }});
+
+                    equal(chart._model.options.height, 200);
+                });
+
+                test("maintains set width after refresh", function() {
+                    createChart({ chartArea: { width: 200, height: 200 }});
+                    chart.refresh();
+
+                    equal(chart._model.options.width, 200);
+                });
+
+                test("maintains set height after refresh", function() {
+                    createChart({ chartArea: { width: 200, height: 200 }});
+                    chart.refresh();
+
+                    equal(chart._model.options.height, 200);
                 });
 
                 test("uses default width when none is available", function() {
                     $("#container").replaceWith(EMPTY_DIV);
                     createChart();
 
-                    equal(chart.options.chartArea.width, 600);
+                    equal(chart._model.options.width, 600);
                 });
 
                 test("uses default height when none is available", function() {
                     $("#container").replaceWith(EMPTY_DIV);
                     createChart();
 
-                    equal(chart.options.chartArea.height, 400);
+                    equal(chart._model.options.height, 400);
                 });
 
                 test("sets width on rootElement", function() {
