@@ -1226,7 +1226,6 @@
 
         _refresh: function() {
             var chart = this;
-            chart._ensureSize();
             if (chart.options.dataSource) {
                 chart.dataSource.read();
             } else {
@@ -1237,7 +1236,11 @@
         _redraw: function() {
             var chart = this,
                 options = chart.options,
-                model = new RootElement(options.chartArea),
+                element = chart.element,
+                model = new RootElement(deepExtend({
+                    width: element.width() || DEFAULT_WIDTH,
+                    height: element.height() || DEFAULT_HEIGHT
+                    }, options.chartArea)),
                 plotArea;
 
             chart._model = model;
@@ -1373,21 +1376,6 @@
                 delete chart._activePoint;
                 tooltip.hide();
                 highlight.hide();
-            }
-        },
-
-        _ensureSize: function() {
-            var chart = this,
-                element = chart.element,
-                options = chart.options,
-                chartArea = options.chartArea;
-
-            if (!chartArea.width) {
-                chartArea.width = element.width() || DEFAULT_WIDTH;
-            }
-
-            if (!chartArea.height) {
-                chartArea.height = element.height() || DEFAULT_HEIGHT;
             }
         },
 
