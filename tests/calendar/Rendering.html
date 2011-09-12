@@ -173,6 +173,24 @@
                 equal(div.find("tbody tr:last").find("td.k-other-month").length, 5);
             });
 
+            test("month view should not render k-other-month to last day of month", function() {
+                var today = new Date(2011, 8, 12, 10, 10, 10);
+
+                div.html(calendar.month.content({
+                    date: today,
+                    empty: template.empty,
+                    min: new Date(1900,0,1),
+                    max: new Date(2900,0,1),
+                    content: template.content
+                }));
+
+                var row = div.find("tbody tr:last").prev(),
+                    td = row.find("td.k-other-month:first");
+
+                equal(td.text(), "1");
+                ok(!td.prev().hasClass("k-other-month"));
+            });
+
             test("year view renders title", function() {
                 var today = new Date(2011, 9, 10);
 
@@ -273,6 +291,24 @@
                 equal(div.find("tbody").find("td > a").attr("data-value"), value);
             });
 
+            test("decade renders k-other-month to the first and last cell of the view", function() {
+                var today = new Date(2011, 9, 10),
+                    cells;
+
+                div.html(calendar.decade.content({
+                    date: today,
+                    min: new Date(1900, 1, 1),
+                    max: new Date(2100, 1, 1)
+                }));
+
+                cells = div.find("tbody").find("td");
+
+                ok(cells.eq(0).hasClass("k-other-month"));
+                ok(cells.eq(11).hasClass("k-other-month"));
+
+                ok(!cells.eq(1).hasClass("k-other-month"));
+            });
+
             test("century title renders century title", function() {
                 var today = new Date(2011, 9, 10);
 
@@ -319,6 +355,25 @@
 
                 equal(div.find("tbody").find("a").attr("data-value"), value);
             });
+
+            test("century renders k-other-month to the first and last cell of the view", function() {
+                var today = new Date(2011, 9, 10),
+                    cells;
+
+                div.html(calendar.century.content({
+                    date: today,
+                    min: new Date(1800, 10, 10),
+                    max: new Date(2220, 10, 10)
+                }));
+
+                cells = div.find("tbody").find("td");
+
+                ok(cells.eq(0).hasClass("k-other-month"));
+                ok(cells.eq(11).hasClass("k-other-month"));
+
+                ok(!cells.eq(1).hasClass("k-other-month"));
+            });
+
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
