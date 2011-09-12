@@ -9,7 +9,6 @@
         CLICK = "click",
         DISABLED = "k-state-disabled",
         SELECTED = "k-state-selected",
-        DAYSELECTOR = "td:not(k-other-month)",
         extend = $.extend,
         proxy = $.proxy,
         DATE = Date;
@@ -45,7 +44,7 @@
 
             that._viewedDate = viewedDate = defineViewedDate(options.value, options.min, options.max);
 
-            that.element.delegate(DAYSELECTOR, CLICK, function(e) {
+            that.element.delegate("td:has(.k-link)", CLICK, function(e) {
                 e.preventDefault();
                 that.navigateDown(new DATE($(e.currentTarget.children[0]).data("value")));
             });
@@ -171,7 +170,7 @@
             if (viewName === options.depth && selectedValue) {
                 dateString = view.toDateString(selectedValue);
 
-                newView.find(DAYSELECTOR)
+                newView.find("td:not(.k-other-month)")
                        .removeClass(SELECTED)
                        .filter(function() {
                            return $(this).children().eq(0).data("value") === dateString;
@@ -324,14 +323,15 @@
             },
             content: function(options) {
                 var idx = 0, data,
+                    date = options.date,
                     currentCalendar = kendo.culture().calendar,
                     firstDayIdx = currentCalendar.firstDayOfWeek,
                     days = currentCalendar.days,
                     names = shiftArray(days.names, firstDayIdx),
                     abbr = shiftArray(days.namesAbbr, firstDayIdx),
                     short = shiftArray(days.namesShort, firstDayIdx),
-                    start = calendar.firstVisibleDay(options.date),
-                    firstDayOfMonth = calendar.firstDayOfMonth(options.date),
+                    start = calendar.firstVisibleDay(date),
+                    firstDayOfMonth = calendar.firstDayOfMonth(date),
                     lastDayOfMonth = new DATE(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth() + 1, 0),
                     min = options.min,
                     max = options.max,
@@ -345,7 +345,7 @@
 
                 html += "</tr></thead><tbody><tr>";
 
-                start.setDate(start.getDate() - 1);
+                start = new DATE(start.getFullYear(), start.getMonth(), start.getDate());
                 min = new DATE(min.getFullYear(), min.getMonth(), min.getDate());
                 max = new DATE(max.getFullYear(), max.getMonth(), max.getDate());
 
@@ -353,8 +353,6 @@
                     if (idx > 0 && idx % 7 == 0) {
                         html += "</tr><tr>";
                     }
-
-                    start.setDate(start.getDate() + 1);
 
                     data = {
                         date: start,
@@ -365,6 +363,8 @@
                     };
 
                     html += inRange(start, min, max) ? content(data) : empty(data);
+
+                    start.setDate(start.getDate() + 1);
                 }
 
                 return html + "</tr></tbody></table>";
@@ -434,6 +434,7 @@
                 var year = options.date.getFullYear();
 
                 extend(options, {
+                    view: DECADE,
                     start: new DATE(year = year - year % 10 - 1, 0, 1),
                     min: new DATE(options.min.getFullYear(), 0, 1),
                     max: new DATE(options.max.getFullYear(), 0, 1),
@@ -467,6 +468,7 @@
                 var year = options.date.getFullYear();
 
                 extend(options, {
+                    view: CENTURY,
                     start: new DATE(year - year % 100 - 10, 0, 1),
                     min: new DATE(options.min.getFullYear() - 10, 0, 1),
                     max: new DATE(options.max.getFullYear(), 0, 1),
@@ -493,7 +495,8 @@
     }
 
     function view(options) {
-        var idx = 0,
+        var idx = 0, otherMonth,
+            view = options.view,
             min = options.min,
             max = options.max,
             start = options.start,
@@ -508,7 +511,13 @@
             }
 
             if (inRange(start, min, max)) {
-                html += '<td><a class="k-link" data-value="' + toDateString(start) + '">' + toString(start) + "</a></td>";
+                html += '<td';
+
+                if (view != undefined && (idx == 0 || idx == 11)) {
+                    html += ' class="k-other-month"';
+                }
+
+                html += '><a class="k-link" data-value="' + toDateString(start) + '">' + toString(start) + "</a></td>";
             } else {
                 html += "<td> </td>";
             }
