@@ -43,16 +43,29 @@
             },
             infer: function() {
                 var constant = this.constants[0],
-                    prototype = $("<div class='" + constant.prefix.replace("@", "k-") + "' />")
-                        .appendTo(document.body),
-                    value = prototype.css(constant.properties[0].property);
+                    prototype = $("<div style='border-style:solid;' class='" + constant.prefix.replace("@", "k-") + "' />").appendTo(document.body),
+                    property, value;
 
-                // convert rgb() values to hex
-                value = value.replace(rgbValuesRe, function(match, r, g, b) {
-                    return "#" + (+r).toString(16) + (+g).toString(16) + (+b).toString(16);
-                });
+                for (i = 0; i < constant.properties.length; i++) {
+                    property = constant.properties[i].property;
+                    value = prototype.css(property);
 
-                constant.properties[0].value = value;
+                    console.log(property, value);
+
+                    if (!value && property == "border-color") {
+                        value = prototype.css("border-top-color");
+                    }
+
+                    if (value) {
+                        // convert rgb() values to hex
+                        value = value.replace(rgbValuesRe, function(match, r, g, b) {
+                            function pad(x) { return x.length == 1 ? "0" + x : x }
+                            return "#" + pad((+r).toString(16)) + pad((+g).toString(16)) + pad((+b).toString(16));
+                        });
+                    }
+
+                    constant.properties[i].value = value;
+                }
 
                 prototype.remove();
             }
