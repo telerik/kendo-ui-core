@@ -79,12 +79,11 @@
         init: function (element, options) {
             var that = this;
 
-            if (options !== false && options.useOnDesktop === false) return false; // Stop the initialization if on desktop and disabled.
+            if (options && options !== false && options.useOnDesktop === false) return false; // Stop the initialization if on desktop and disabled.
 
             Component.fn.init.call(that, element, options);
 
             options = that.options;
-            element = that.element;
 
             that.bind(events, options);
 
@@ -142,8 +141,8 @@
         _create: function () {
             var that = this,
                 element = that.element,
-                scrollElement = '<div class="scroll-container"/>',
-                children = element.children();
+                scrollElement = $('<div class="scroll-container"/>'),
+                children = element.children(":not(script)");
 
             element
                 .css("overflow", "hidden");
@@ -153,7 +152,7 @@
             else
                 element.append(scrollElement);
 
-            that.scrollElement = element.children();
+            that.scrollElement = element.children(":not(script)");
             that._scrollbars.appendTo(element);
             that._horizontalArrows.appendTo(element);
 
