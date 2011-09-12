@@ -1,0 +1,615 @@
+html, body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.k-view
+{
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    width: 100%;
+    height: 100%;
+    display: table\9;
+    overflow: hidden;
+}
+
+.k-view, .k-header, .k-footer, .k-content
+{
+    display: -moz-box;
+    display: -webkit-box;
+    display: box;
+}
+
+.k-header
+{
+    display: block;
+    display: ~"table-row\9";
+    padding: 0;
+    height: ~"1px\9";
+}
+
+.k-footer
+{
+    display: block;
+    display: ~"table-row\9";
+    background: #1a1a1a;
+    height: ~"1px\9";
+}
+
+@media all and (-webkit-min-device-pixel-ratio:10000),
+       not all and (-webkit-min-device-pixel-ratio:0)
+{
+  .k-view { display: table; }
+  .k-header, .k-footer, .k-content { display: table-row; }
+  .k-header, .k-footer { height: 1px; }
+}
+
+.k-content
+{
+    display: ~"table-row\9";
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    -moz-box-align: stretch;
+    -webkit-box-align: stretch;
+    box-align: stretch;
+}
+
+.contentInternal
+{
+    padding: 1em 1em 0;
+}
+
+.k-content *
+{
+    display: block;
+}
+
+.k-toolbar,
+.k-button,
+.k-buttonStrip,
+.k-tabStrip
+{
+    background-origin: border-box;
+    position: relative;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    display: inline-block;
+    padding: .4em .7em;
+    margin: .1em;
+    color: #FFF;
+    overflow: visible;
+    -moz-border-radius: 5pt;
+    -webkit-border-radius: 5pt;
+    border-radius: 5pt;
+    border: 1px solid #576B92;
+    border-top-color: #40495B;
+    background-color: #BBB;
+    background-image: linearGradient(top, rgb(189,197,211), rgb(177,187,206) 6%, rgb(135,155,183) 50%, rgb(128,149,175) 50%, rgb(112,132,161));
+    text-shadow: 0 -1pt #777;
+}
+
+.k-ios .k-button
+{
+    border-color: #5F6C81 #34517B #3E5B84;
+    background-image: linearGradient(top, rgb(63,79,102), rgb(138,154,181) 6%, rgb(90,120,165) 50%, rgb(71,104,151) 50%, rgb(73,106,154));
+}
+
+.k-ios .k-button.k-active
+{
+    border-color: #40506C #376ECC #3E75CA;
+    background-image: linearGradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
+}
+
+.k-button
+{
+    cursor: pointer;
+    outline: 0;
+}
+
+.k-ios,
+.k-ios .k-button
+{
+    font: normal .95em Helvetica, sans-serif;
+}
+
+.k-ios .k-button.k-active
+{
+    background-color: #98a1ae;
+}
+
+.k-android,
+.k-android .k-button
+{
+    font: normal 1em DroidSans, Helvetica, sans-serif;
+}
+
+.k-android .k-toolbar,
+.k-android .k-button,
+.k-android .k-buttonStrip,
+.k-android .k-tabStrip
+{
+    color: #000;
+    text-shadow: none;
+    border-color: #ACACAC;
+    background-color: #EEE;
+
+    background-image: linearGradient(top, rgb(244,244,244), rgb(193,193,193) 90%, rgb(209,209,209));
+}
+
+.k-android .k-button.k-active
+{
+    background-color: #e99d02;
+    background-image: linearGradient(top, rgb(255,222,117), rgb(251,195,35) 10%, rgb(232,156,0) 60%, rgb(244,181,16) 80%, rgb(252,209,32));
+}
+
+.k-blackberry,
+.k-blackberry .k-button,
+.k-meego,
+.k-meego .k-button
+{
+    font: normal 1em Arial, Helvetica, sans-serif;
+}
+
+.k-blackberry .k-toolbar,
+.k-blackberry .k-button,
+.k-blackberry .k-buttonStrip,
+.k-blackberry .k-tabStrip,
+.k-meego .k-toolbar,
+.k-meego .k-button,
+.k-meego .k-buttonStrip,
+.k-meego .k-tabStrip
+{
+    font: normal 1em Arial, Helvetica, sans-serif;
+    color: #333;
+    text-shadow: none;
+    border-color: #fff;
+    background-color: #d3d7d7;
+    -webkit-box-shadow: none;
+
+    background-image: linearGradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
+}
+
+.k-message
+{
+    display: inline-block;
+    color: #FFF;
+    border: .2em solid #FFF;
+    font-size: .7em;
+    line-height: 1.6em;
+    vertical-align: middle;
+    overflow: hidden;
+    text-align: center;
+    right: -9px;
+    top: -10px;
+    height: 1.6em;
+    position: absolute;
+    width: 1.6em;
+    -moz-border-radius: 2em;
+    -webkit-border-radius: 2em;
+    border-radius: 2em;
+    background-color: #BB0000;
+    background-image: linearGradient(top, rgba(241, 150, 155, 1), rgba(230, 70, 78, .5) 50%, rgba(222, 11, 21, .5) 50%, rgba(183, 0, 0, 0));
+    box-shadow: 0 2px 3px #333;
+    -webkit-box-shadow: 0 2px 3px #333;
+    z-index: 1;
+    text-shadow: none;
+}
+
+.k-button::-moz-focus-inner
+{
+    padding: 0;
+    border: 0;
+}
+
+.k-message:-moz-first-node,
+:-moz-first-node~.k-message
+{
+    right: 2px;
+    top: -15px;
+}
+
+.k-blackberry .k-message
+{
+    -webkit-box-shadow: none;
+}
+
+.k-blackberry .k-button.k-active,
+.k-meego .k-button.k-active
+{
+    color: #FFF;
+    border-color: #3f9fe5;
+    background-color: #1b6ec0;
+    background-image: linearGradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
+}
+
+.k-buttonStrip,
+.k-android .k-buttonStrip,
+.k-meego .k-buttonStrip,
+.k-blackberry .k-buttonStrip
+{
+    padding: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-color: transparent;
+    background: none;
+    white-space: nowrap;
+    display: table;
+}
+
+.k-buttonStrip > .k-button
+{
+    display: table-cell;
+}
+
+.k-buttonStrip .k-button
+{
+    margin: 0;
+    border-width: 1px 0 1px 1px;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.k-buttonStrip .k-button:first-child
+{
+    -moz-border-radius: 5pt 0 0 5pt;
+    -webkit-border-radius: 5pt 0 0 5pt;
+    border-radius: 5pt 0 0 5pt;
+}
+
+.k-buttonStrip .k-button:last-child
+{
+    border-right-width: 1px;
+    -moz-border-radius: 0 5pt 5pt 0;
+    -webkit-border-radius: 0 5pt 5pt 0;
+    border-radius: 0 5pt 5pt 0;
+}
+
+.k-ios .k-buttonStrip .k-button
+{
+    font-weight: bold;
+    color: #929292;
+    text-shadow: 0 1px #fff;
+    border-color: #B4B8BA #C7CBCF #9FA3A4;
+    background-image: linearGradient(top, rgb(251,251,251), rgb(225,225,225) 50%, rgb(200,200,200));
+}
+
+.k-ios .k-buttonStrip .k-button:hover
+{
+    color: #fff;
+    text-shadow: none;
+    border-color: #40506C #376ECC #3E75CA;
+    background-image: linearGradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
+}
+
+.k-ios .k-buttonStrip .k-button.k-active
+{
+    color: #fff;
+    text-shadow: none;
+    border-color: #103984 #225199 #225199;
+    background-image: linearGradient(top, rgb(40,86,178), rgb(62,128,238) 50%, rgb(73,137,244) 50%, rgb(111, 161, 234));
+    box-shadow: inset -1px 0 2px #103984;
+    -webkit-box-shadow: inset -1px 0 2px #103984;
+}
+
+.k-blackberry .k-buttonStrip,
+.k-meego .k-buttonStrip
+{
+    font-size: 1em;
+}
+
+.k-tabStrip,
+.k-toolbar
+{
+    display: block;
+    padding: .8em;
+    margin: 0;
+    width: 100%;
+    border-width: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 3px #333;
+    box-shadow: 0 0 3px #333;
+}
+
+.k-tabStrip
+{
+    text-align: center;
+    word-spacing: -1em;
+}
+
+.k-tabStrip:-moz-first-node,
+:-moz-first-node~.k-tabStrip
+{
+    display: table;
+    word-spacing: normal;
+}
+
+.k-tabStrip:-moz-first-node > .k-button,
+:-moz-first-node~.k-tabStrip > .k-button
+{
+    display: table-cell;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .k-tabStrip { display: table; word-spacing: normal; }
+    .k-buttonStrip > .k-button { display: inline-block; }
+
+}
+
+.k-tabStrip > .k-button
+{
+    text-shadow: none;
+    word-spacing: normal;
+}
+
+.k-toolbar
+{
+    padding: .5em;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    position: relative;
+}
+
+.k-blackberry .k-toolbar,
+.k-meego .k-toolbar
+{
+    background-color: #181E17;
+    background-image: linearGradient(top, rgba(43, 49, 45, 1), rgba(24, 30, 23, 0) 100%);
+}
+
+.k-ios .k-toolbar .k-button
+{
+    background-color: #8891be;
+}
+
+.k-ios .k-toolbar .k-button.k-active
+{
+    background-color: #a8b1de;
+}
+
+.k-ios .k-tabStrip
+{
+    padding: .2em 0;
+    background-color: #222;
+    background-image: linearGradient(top, rgba(46, 46, 46, 0.8), rgba(21, 21, 21, 0.5) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8));
+}
+
+.k-android .k-tabStrip
+{
+    padding: 0;
+    background-color: #222;
+    border-bottom: 2pt solid #7a7a7a;
+    background-image: linearGradient(top, rgba(39, 39, 39, 0.8), rgba(15, 15, 15, 0.8));
+}
+
+.k-blackberry .k-tabStrip,
+.k-meego .k-tabStrip
+{
+    padding: .2em;
+    background-color: #333;
+    background-image: linearGradient(top, rgba(188, 188, 188, 0.8), rgba(51, 51, 51, 0) 50%);
+}
+
+.k-tabStrip .k-button
+{
+    font: bold 1em Helvetica, sans-serif;
+    color: #a8a8a8;
+    padding: .4em .8em;
+    border-width: 0;
+    border-color: transparent;
+    background: none;
+    margin: 0;
+    text-align: center;
+}
+
+.k-ios .k-tabStrip .k-button
+{
+    -moz-border-radius: 5pt;
+    -webkit-border-radius: 5pt;
+    border-radius: 5pt;
+    font-size: .6em;
+    padding: .1em .6em;
+    min-width: 6em;
+    margin: 0 2%;
+}
+
+.k-tabStrip .k-message
+{
+    font-size: .8em;
+    font-weight: normal;
+}
+
+.k-ios .k-tabStrip .k-message
+{
+    font-size: 1.1em;
+}
+
+.k-android .k-tabStrip .k-button
+{
+    font-size: .85em;
+    padding: .2em .4em;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    border-right: 1pt solid #444;
+    border-left: 1pt solid #000;
+    min-width: 5em;
+}
+
+.k-android .k-tabStrip .k-message,
+.k-blackberry .k-tabStrip .k-message,
+.k-meego .k-tabStrip .k-message
+{
+    top: auto;
+    bottom: -10px;
+}
+
+.k-blackberry .k-tabStrip .k-button,
+.k-meego .k-tabStrip .k-button
+{
+    -moz-border-radius: 5pt;
+    -webkit-border-radius: 5pt;
+    border-radius: 5pt;
+    padding: .1em;
+    margin: 0 1%;
+}
+
+.k-ios .k-tabStrip .k-button.k-active
+{
+    color: #FFF;
+    background: rgba(100, 100, 100, 0.5);
+}
+.k-android .k-tabStrip .k-button.k-active
+{
+    color: #FFF;
+    background: rgba(100, 100, 100, 1);
+}
+
+.k-blackberry .k-tabStrip .k-text,
+.k-meego .k-tabStrip .k-text
+{
+    display: none;
+}
+
+.k-tabStrip .k-button:first-child
+{
+    border-left: 0;
+}
+
+.k-tabStrip .k-button:last-child
+{
+    border-right: 0;
+}
+
+.k-tabStrip .k-button .k-icon
+{
+    display: block;
+    width: 48px;
+    height: 48px;
+}
+
+.k-ios .k-tabStrip .k-icon
+{
+    width: 32px;
+    height: 32px;
+}
+
+.k-blackberry .k-tabStrip .k-icon,
+.k-meego .k-tabStrip .k-icon
+{
+    width: 64px;
+    height: 64px;
+}
+
+.k-tabStrip .k-button .k-icon
+{
+    margin: 0 auto;
+}
+
+.k-android .k-tabStrip .k-button .k-icon
+{
+    opacity: 0.5;
+    background: transparent url('../examples/images/atabimg.png') no-repeat .1em 50%;
+    background-size: cover;
+}
+
+.k-ios .k-tabStrip .k-button .k-icon
+{
+    opacity: 1;
+    background: transparent url('../examples/images/itabimg1.png') no-repeat 3px 50%;
+    background-size: cover;
+}
+
+.k-blackberry .k-tabStrip .k-button .k-icon,
+.k-meego .k-tabStrip .k-button .k-icon
+{
+    opacity: 0.5;
+    background: transparent url('../examples/images/atabimg.png') no-repeat .5em 50%;
+}
+
+.k-tabStrip .k-button.k-active .k-icon
+{
+    opacity: 1;
+}
+
+.k-ios .k-tabStrip .k-active .k-icon
+{
+    background-image: url('../examples/images/itabimg.png');
+}
+
+.k-android .k-tabStrip .k-button:nth-child(1) .k-icon
+{
+    background-position: 1px 50%;
+}
+
+.k-android .k-tabStrip .k-button:nth-child(2) .k-icon
+{
+    background-position: -107px 50%;
+}
+
+.k-android .k-tabStrip .k-button:nth-child(3) .k-icon
+{
+    background-position: -216px 50%;
+}
+
+.k-android .k-tabStrip .k-button:nth-child(4) .k-icon
+{
+    background-position: -325px 50%;
+}
+
+.k-ios .k-tabStrip .k-button:nth-child(1) .k-icon
+{
+    background-position: 3px 50%;
+}
+
+.k-ios .k-tabStrip .k-button:nth-child(2) .k-icon
+{
+    background-position: -71px 50%;
+}
+
+.k-ios .k-tabStrip .k-button:nth-child(3) .k-icon
+{
+    background-position: -146px 50%;
+}
+
+.k-ios .k-tabStrip .k-button:nth-child(4) .k-icon
+{
+    background-position: -220px 50%;
+}
+
+.k-blackberry .k-tabStrip .k-button:nth-child(1) .k-icon,
+.k-meego .k-tabStrip .k-button:nth-child(1) .k-icon
+{
+    background-position: 6px 50%;
+}
+
+.k-blackberry .k-tabStrip .k-button:nth-child(2) .k-icon,
+.k-meego .k-tabStrip .k-button:nth-child(2) .k-icon
+{
+    background-position: -114px 50%;
+}
+
+.k-blackberry .k-tabStrip .k-button:nth-child(3) .k-icon,
+.k-meego .k-tabStrip .k-button:nth-child(3) .k-icon
+{
+    background-position: -234px 50%;
+}
+
+.k-blackberry .k-tabStrip .k-button:nth-child(4) .k-icon,
+.k-meego .k-tabStrip .k-button:nth-child(4) .k-icon
+{
+    background-position: -354px 50%;
+}
+

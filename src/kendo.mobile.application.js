@@ -1,9 +1,44 @@
 (function($, undefined){
-    var mobile = kendo.mobile = kendo.mobile || {};
+    var mobile = kendo.mobile = kendo.mobile || {},
+        os = kendo.support.mobileOS,
+        touch = kendo.support.touch,
+        transitions = kendo.support.transitions;
+
+    if (os && !os.ios) {
+        $(document.documentElement).removeClass('ios').addClass(os.name);
+    }
+
+    $(document).ready(function () {
+        $(".k-button").live(touch ? "touchend" : "mouseup", function (e) {
+            e.preventDefault();
+            var target = kendo.eventTarget(e);
+
+            $(target)
+                .parents(".k-buttonStrip, .k-tabStrip, .k-toolbar")
+                .find(".k-active")
+                .removeClass("k-active");
+
+            $(target)
+                .closest(".k-button")
+                .addClass("k-active");
+        });
+
+        if (os) {
+            if (!os.ios && !os.blackberry)
+                if (!$.browser.msie && !$.browser.opera)
+                    $('.k-view').css(transitions.css + 'box-direction', 'reverse');
+                else {
+                    var layout = $('.k-view');
+                    $(".k-footer").prependTo(layout);
+                    $('.k-header').appendTo(layout);
+                }
+        }
+    });
 
     $.extend(mobile, {
         init: function(options) {
-            var html = [ "<meta name='viewport' content='width=device-width' />" ];
+            var html = [ "<meta name='apple-mobile-web-app-capable' content='yes' /><meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />" +
+                         "<meta name='viewport' content='minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no' />" ];
 
             if (options.icon) {
                 html.push("<link rel='apple-touch-icon' href='");
@@ -30,7 +65,7 @@
 
         goToView: function(view, callback) {
             /// TODO: add proper animation
-            view.siblings(".kendo-view").hide("slow").end().show("fast");
+            view.siblings(".k-view").hide("slow").end().show("fast");
 
             if (callback) {
                 callback();
@@ -38,7 +73,7 @@
         },
 
         switchView: function(view, initCallback) {
-            var loadedView = $(".kendo-view").filter(function() {
+            var loadedView = $(".k-view").filter(function() {
                 return $(this).data("url") == view;
             });
 
@@ -58,11 +93,11 @@
                     if (mobile.isFullPage(content)) {
                         content = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/ig.exec(content)[1];
 
-                        var viewPageIndex = $(".kendo-view:last").index();
+                        var viewPageIndex = $(".k-view:last").index();
 
                         document.body.innerHTML += content;
 
-                        viewPage = $(".kendo-view").eq(viewPageIndex + 1);
+                        viewPage = $(".k-view").eq(viewPageIndex + 1);
                     } else { // partial content was served
                         viewPage = $("<div class='kendo-view' />").appendTo("body");
 
@@ -86,7 +121,9 @@
         run: function(callback) {
             this.root = document.body;
 
-            callback(this);
+            if (callback)
+                callback(this);
+
             this.show(0);
 
             window.scrollTo(0, 1);
