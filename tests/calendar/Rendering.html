@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calendar rendering</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Calendar rendering</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var calendar = kendo.calendar,
+                template = new kendo.ui.Calendar($("<div/>")).month,
+                div;
+
+            module("kendo.ui.Calendar rendering", {
+                setup: function() {
+                    div = $("<div />").appendTo(document.body);
+                },
+                teardown: function() {
+                    div.remove();
+                }
+            });
+
+            test("firstDayOfMonth returns correct date", function() {
+                var date = new Date(2011, 7, 31, 10, 10, 5555),
+                    correct = new Date(2011, 7, 1, 10, 10, 5555);
+
+                equal(+calendar.firstDayOfMonth(date), +correct);
+            });
+
+            test("firstVisibleDay returns correct date", function() {
+                var date = new Date(2011, 7, 31, 10, 10, 5555),
+                    correct = new Date(2011, 6, 31, 10, 10, 5555);
+
+                equal(+calendar.firstVisibleDay(date), +correct);
+            });
+
+
+            test("Month view return title", function() {
+                var date = new Date(),
+                    text = kendo.culture().calendar.months.names[date.getMonth()] + " " + date.getFullYear();
+
+                    equal(calendar.month.title(date), text);
+            });
+
+            test("month view renders days", function() {
+                var today = new Date(),
+                    days = kendo.culture().calendar.days;
+
+                div.html(calendar.month.content({
+                        date: today,
+                        empty: template.empty,
+                        content: template.content,
+                        min: new Date(2000, 10, 10),
+                        max: new Date(2020, 10, 10)
+                    }));
+
+                equal(div.find("thead").find("th").length, 7);
+                equal(div.find("thead").find("th").eq(0).html(), days.namesShort[0]);
+                equal(div.find("thead").find("th").eq(0).attr("title"), days.names[0]);
+                equal(div.find("thead").find("th").eq(0).attr("abbr"), days.namesAbbr[0]);
+
+                equal(div.find("tbody").find("tr").length, 6);
+                equal(div.find("tbody").find("td").length, 42);
+                equal(div.find("tbody").find("a").length, 42);
+            });
+
+            test("month view renderer honors firstDayOfWeek property", function() {
+                var today = new Date(2011, 9, 10);
+
+                kendo.culture().calendar.firstDayOfWeek = 1;
+
+                div.html(calendar.month.content({
+                    date: today,
+                    empty: template.empty,
+                    content: template.content,
+                    min: today,
+                    max: today
+                }));
+
+                equal(div.find("thead").find("th").eq(0).html(), kendo.culture().calendar.days.namesShort[1]);
+                equal(div.find("thead").find("th").eq(0).attr("title"), kendo.culture().calendar.days.names[1]);
+                equal(div.find("thead").find("th").eq(0).attr("abbr"), kendo.culture().calendar.days.namesAbbr[1]);
+
+                kendo.culture().calendar.firstDayOfWeek = 0;
+            });
+
+            test("month view honors firstVisibleDay", function() {
+                var today = new Date(2011, 9, 10);
+
+                div.html(calendar.month.content({
+                    date: today,
+                    empty: template.empty,
+                    content: template.content,
+                    min: new Date(2000, 10, 10),
+                    max: new Date(2020, 10, 10)
+                }));
+
+                equal(div.find("tbody").find("a").html(), "25");
+            });
+
+            test("month view renders anchor in td with title", function() {
+                var today = new Date(2011, 9, 10),
+                    firstVisibleDay = calendar.firstVisibleDay(today);
+
+                div.html(calendar.month.content({
+                    date: today,
+                    empty: template.empty,
+                    content: template.content,
+                    min: new Date(2000, 10, 10),
+                    max: new Date(2020, 10, 10)
+                }));
+
+                equal(div.find("tbody").find("a").attr("title"), kendo.toString(firstVisibleDay, "D"));
+                equal(div.find("tbody").find("a").attr("class"), "k-link");
+            });
+
+            test("month view renders empty string if date is not in range", function() {
+                var today = new Date(2011, 9, 10),
+                max = new Date(2011, 9, 19);
+
+                div.html(calendar.month.content({
+                    date: today,
+                    empty: template.empty,
+                    min: new Date(today),
+                    max: max,
+                    content: template.content
+                }));
+
+                equal(div.find("tbody").find("td").html(), " ");
+                equal(div.find("tbody").find("a:first").html(), today.getDate() + "");
+                equal(div.find("tbody").find("a:last").html(), max.getDate() + "");
+            });
+
+            test("month view should render data-val attribute", function() {
+                var max = new Date(2011, 9, 19),
+                    today = new Date(2011, 9, 10),
+                    value = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+
+                div.html(calendar.month.content({
+                    date: today,
+                    empty: template.empty,
+                    min: new Date(today),
+                    max: max,
+                    content: template.content
+                }));
+
+                equal(div.find("tbody").find("a:first").attr("data-value"), value);
+            });
+
+            test("month view should render k-other-month style", function() {
+                var today = new Date(2011, 9, 10),
+                    firstDay = kendo.calendar.firstVisibleDay(today);
+
+                div.html(calendar.month.content({
+                    date: today,
+                    empty: template.empty,
+                    min: new Date(1900,0,1),
+                    max: new Date(2900,0,1),
+                    content: template.content
+                }));
+
+                equal(div.find("tbody tr:first").find("td.k-other-month").length, 6);
+                equal(div.find("tbody tr:last").find("td.k-other-month").length, 5);
+            });
+
+            test("month view should not render k-other-month to last day of month", function() {
+                var today = new Date(2011, 8, 12, 10, 10, 10);
+
+                div.html(calendar.month.content({
+                    date: today,
+                    empty: template.empty,
+                    min: new Date(1900,0,1),
+                    max: new Date(2900,0,1),
+                    content: template.content
+                }));
+
+                var row = div.find("tbody tr:last").prev(),
+                    td = row.find("td.k-other-month:first");
+
+                equal(td.text(), "1");
+                ok(!td.prev().hasClass("k-other-month"));
+            });
+
+            test("year view renders title", function() {
+                var today = new Date(2011, 9, 10);
+
+                equal(calendar.year.title(today), today.getFullYear() + "");
+            });
+
+            test("year view renders meta view  4x3 cells", function() {
+                var today = new Date(2011, 9, 10),
+                    firstMonth = kendo.culture().calendar.months.namesAbbr[0],
+                    lastMonth = kendo.culture().calendar.months.namesAbbr[11];
+
+                div.html(calendar.year.content({
+                    date: today,
+                    min: new Date(2000, 10, 10),
+                    max: new Date(2020, 10, 10)
+                }));
+
+                equal(div.find("tbody").find("tr:first").find("td").length, 4);
+                equal(div.find("tbody").find("td > a").length, 12);
+                equal(div.find("tbody").find("a:first").eq(0).html(), firstMonth);
+                equal(div.find("tbody").find("a:last").eq(0).html(), lastMonth);
+            });
+
+            test("year view renders does not render months not in range", function() {
+                var today = new Date(2011, 9, 10),
+                    monthName = kendo.culture().calendar.months.namesAbbr[9];
+
+                div.html(calendar.year.content({
+                    date: today,
+                    min: today,
+                    max: today
+                }));
+
+                equal(div.find("tbody").find("td").length, 12);
+                equal(div.find("tbody").find("a").length, 1);
+                equal(div.find("tbody").find("a").html(), monthName);
+                equal(div.find("tbody").find("a:first").html(), monthName);
+            });
+
+            test("year view renders cells with data-val", function() {
+                var today = new Date(2011, 9, 10),
+                    value = (today.getMonth() + 1) + "/1/" + today.getFullYear(),
+                    monthName = kendo.culture().calendar.months.namesAbbr[9];
+
+                div.html(calendar.year.content({
+                    date: today,
+                    min: today,
+                    max: today
+                }));
+
+                equal(div.find("tbody").find("a").attr("data-value"), value);
+            });
+
+            test("decade title renders decade range title", function() {
+                var today = new Date(2011, 9, 10);
+                equal(calendar.decade.title(today), "2010-2019");
+            });
+
+            test("decade view renders meta view  4x3 cells", function() {
+                var today = new Date(2011, 9, 10);
+
+                div.html(calendar.decade.content({
+                    date: today,
+                    min: new Date(2000, 10, 10),
+                    max: new Date(2020, 10, 10)
+                }));
+
+                equal(div.find("tbody").find("tr:first").find("td").length, 4);
+                equal(div.find("tbody").find("td > a").length, 12);
+                equal(div.find("tbody").find("a:first").html(), 2009);
+                equal(div.find("tbody").find("a:last").html(), 2020);
+            });
+
+            test("decade view renders only years in range", function() {
+                var today = new Date(2011, 9, 10);
+
+                div.html(calendar.decade.content({
+                    date: today,
+                    min: today,
+                    max: today
+                }));
+
+                equal(div.find("tbody").find("tr:first").find("td").length, 4);
+                equal(div.find("tbody").find("td > a").length, 1);
+                equal(div.find("tbody").find("a").html(), "2011");
+            });
+
+            test("decade view renders cells with data-val", function() {
+                var today = new Date(2011, 9, 10),
+                    value = "1/1/2011";
+
+                div.html(calendar.decade.content({
+                    date: today,
+                    min: today,
+                    max: today
+                }));
+
+                equal(div.find("tbody").find("td > a").attr("data-value"), value);
+            });
+
+            test("decade renders k-other-month to the first and last cell of the view", function() {
+                var today = new Date(2011, 9, 10),
+                    cells;
+
+                div.html(calendar.decade.content({
+                    date: today,
+                    min: new Date(1900, 1, 1),
+                    max: new Date(2100, 1, 1)
+                }));
+
+                cells = div.find("tbody").find("td");
+
+                ok(cells.eq(0).hasClass("k-other-month"));
+                ok(cells.eq(11).hasClass("k-other-month"));
+
+                ok(!cells.eq(1).hasClass("k-other-month"));
+            });
+
+            test("century title renders century title", function() {
+                var today = new Date(2011, 9, 10);
+
+                equal(calendar.century.title(today), "2000-2099");
+            });
+
+            test("century view renders meta view  4x3 cells", function() {
+                var today = new Date(2011, 9, 10);
+
+                div.html(calendar.century.content({
+                    date: today,
+                    min: new Date(1800, 10, 10),
+                    max: new Date(2220, 10, 10)
+                }));
+
+                equal(div.find("tbody").find("tr:first").find("td").length, 4);
+                equal(div.find("tbody").find("td > a").length, 12);
+                equal(div.find("tbody").find("a:first").html(), "1990-1999");
+                equal(div.find("tbody").find("a:last").html(), "2100-2109");
+            });
+
+            test("century view renders only years in range", function() {
+                var today = new Date(2011, 9, 10);
+
+                div.html(calendar.century.content({
+                    date: today,
+                    min: today,
+                    max: today
+                }));
+
+                equal(div.find("tbody").find("td > a").length, 1);
+                equal(div.find("tbody").find("a").html(), "2010-2019");
+            });
+
+            test("century view renders cells with data-val", function() {
+                var today = new Date(2011, 9, 10),
+                    value = "1/1/2010";
+
+                div.html(calendar.century.content({
+                    date: today,
+                    min: today,
+                    max: today
+                }));
+
+                equal(div.find("tbody").find("a").attr("data-value"), value);
+            });
+
+            test("century renders k-other-month to the first and last cell of the view", function() {
+                var today = new Date(2011, 9, 10),
+                    cells;
+
+                div.html(calendar.century.content({
+                    date: today,
+                    min: new Date(1800, 10, 10),
+                    max: new Date(2220, 10, 10)
+                }));
+
+                cells = div.find("tbody").find("td");
+
+                ok(cells.eq(0).hasClass("k-other-month"));
+                ok(cells.eq(11).hasClass("k-other-month"));
+
+                ok(!cells.eq(1).hasClass("k-other-month"));
+            });
+
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
