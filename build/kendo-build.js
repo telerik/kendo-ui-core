@@ -90,7 +90,6 @@ function generateVersion() {
 
 exports.merge = merge;
 exports.generateVersion = generateVersion;
-exports.copyFileSync = copyFileSync;
 exports.rmdirSyncRecursive = rmdirSyncRecursive;
 exports.copyDirSyncRecursive = copyDirSyncRecursive;
 exports.minifyJs = function(source) {
