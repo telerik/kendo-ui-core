@@ -42,32 +42,39 @@
                 return result.join("\n");
             },
             infer: function() {
-                var constant = this.constants[0],
-                    prototype = $("<div style='border-style:solid;' class='" + constant.prefix.replace("@", "k-") + "' />").appendTo(document.body),
+                var constants = this.constants, constant,
+                    c, i,
+                    prototype,
                     property, value;
 
-                for (i = 0; i < constant.properties.length; i++) {
-                    property = constant.properties[i].property;
-                    value = prototype.css(property);
+                for (c = 0; c < constants.length; c++) {
+                    constant = constants[c];
 
-                    console.log(property, value);
+                    prototype = $("<div style='border-style:solid;' class='" +
+                                        constant.prefix.replace("@", "k-") +
+                                "' />").appendTo(document.body);
 
-                    if (!value && property == "border-color") {
-                        value = prototype.css("border-top-color");
+                    for (i = 0; i < constant.properties.length; i++) {
+                        property = constant.properties[i].property;
+                        value = prototype.css(property);
+
+                        if (!value && property == "border-color") {
+                            value = prototype.css("border-top-color");
+                        }
+
+                        if (value) {
+                            // convert rgb() values to hex
+                            value = value.replace(rgbValuesRe, function(match, r, g, b) {
+                                function pad(x) { return x.length == 1 ? "0" + x : x }
+                                return "#" + pad((+r).toString(16)) + pad((+g).toString(16)) + pad((+b).toString(16));
+                            });
+                        }
+
+                        constant.properties[i].value = value;
                     }
 
-                    if (value) {
-                        // convert rgb() values to hex
-                        value = value.replace(rgbValuesRe, function(match, r, g, b) {
-                            function pad(x) { return x.length == 1 ? "0" + x : x }
-                            return "#" + pad((+r).toString(16)) + pad((+g).toString(16)) + pad((+b).toString(16));
-                        });
-                    }
-
-                    constant.properties[i].value = value;
+                    prototype.remove();
                 }
-
-                prototype.remove();
             }
         }),
         ThemeBuilder = kendo.Observable.extend({

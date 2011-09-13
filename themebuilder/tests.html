@@ -190,6 +190,29 @@
                 equals(constants.constants[0].properties[0].value, "#f11f11");
                 equals(constants.constants[0].properties[1].value, "#f00f00");
             });
+
+            test("infer() with multiple constants", function() {
+                var themeBuilder = new ThemeBuilder();
+                themeBuilder.updateStyleSheet(".k-widget {\
+                    background-color: #f11f11;\
+                }\
+                .k-header {\
+                    border-color: #f00f00;\
+                }");
+
+                var constants = new LessConstants([{
+                    prefix: "@widget",
+                    properties: [ properties.bgColor ]
+                }, {
+                    prefix: "@header",
+                    properties: [ properties.brdColor ]
+                }]);
+
+                constants.infer();
+
+                equals(constants.constants[0].properties[0].value, "#f11f11");
+                equals(constants.constants[1].properties[0].value, "#f00f00");
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
