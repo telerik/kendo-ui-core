@@ -3849,9 +3849,7 @@
                 options = sector.options,
                 labels = options.labels,
                 labelText = sector.value,
-                labelTemplate,
-                labelPoint,
-                angle = sector.startAngle + sector.angle / 2;
+                labelTemplate;
 
             if (sector._rendered) {
                 return;
@@ -3870,9 +3868,6 @@
             }
 
             if (labels.visible) {
-                labelPoint = calculateSectorPoint(angle, sector.cx,
-                                sector.cy, sector.r);
-
                 sector.label = new TextBox(labelText,
                     deepExtend({
                         id: uniqueId(),
@@ -3901,10 +3896,23 @@
         reflowLabel: function(box) {
             var sector = this,
                 options = sector.options,
-                label = sector.label;
+                label = sector.label,
+                labelPoint,
+                angle = sector.startAngle + sector.angle / 2;
 
             if (label) {
-                label.reflow(box);
+                labelPoint = calculateSectorPoint(angle, sector.cx,
+                    sector.cy, sector.r + label.box.height() + options.labels.distance);
+
+                if (angle < 90 || angle > 270) {
+                    label.reflow(new Box2D(labelPoint.x - label.box.width(), labelPoint.y,
+                        labelPoint.x, labelPoint.y));
+                    label.orientation = "right";
+                } else {
+                    label.reflow(new Box2D(labelPoint.x + label.box.width(), labelPoint.y,
+                        labelPoint.x, labelPoint.y));
+                    label.orientation = "left";
+            }
             }
         },
 
@@ -4072,7 +4080,37 @@
                 sector.reflow(newBox);
             }
 
+            chart.labelsReflow();
             chart.box = newBox;
+        },
+
+        labelsReflow: function() {
+            var chart = this,
+                sectors = chart.sectors,
+                distances = [],
+                labelHeights = []
+                sector,
+                label,
+                labelBox,
+                count = points.lenght,
+                i;
+
+            distances.push(sectors[0].label.box.y1 - chart.box.y1);
+
+            for(i = 1; i < count - 1; i++) {
+                sector = sectors[i];
+                label = sector.label;
+        }
+
+            distances.push(chart.box.y2 - sectors[count - 1].label.box.y1);
+        },
+
+        getViewElements: function(view) {
+            var chart = this,
+                options = chart.options,
+                elements = ChartElement.fn.getViewElements.call(chart, view);
+
+            return elements;
         }
     });
 
