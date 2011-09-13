@@ -7,6 +7,7 @@
         DECADE = "decade",
         CENTURY = "century",
         CLICK = "click",
+        VALUE = "value",
         DISABLED = "k-state-disabled",
         SELECTED = "k-state-selected",
         extend = $.extend,
@@ -29,8 +30,7 @@
 
     var Calendar = Component.extend({
         init: function(element, options) {
-            var that = this,
-                viewedDate;
+            var that = this;
 
             Component.fn.init.call(that, element, options);
 
@@ -46,15 +46,12 @@
 
             that.element.delegate("td:has(.k-link)", CLICK, function(e) {
                 e.preventDefault();
-                that.navigateDown(new DATE($(e.currentTarget.children[0]).data("value")));
+                that.navigateDown(new DATE($(e.currentTarget.children[0]).data(VALUE)));
             });
 
-            that.currentView = options.firstView;
+            that._currentView = options.firstView;
 
-            that.view = $('<table class="k-content">');
-            that.element.append(that.view);
-
-            that.navigate(viewedDate, that.currentView);
+            that.navigate();
         },
 
         options: {
@@ -69,18 +66,17 @@
             }
         },
 
-        _setDate: function(direction) {
+        _setViewedDate: function(value) {
             var that = this,
             viewedDate = that._viewedDate,
-            currentView = that.currentView,
-            value = direction * 1;
+            currentView = that._currentView;
 
             if (currentView === MONTH) {
                 viewedDate.setMonth(viewedDate.getMonth() + value);
             } else {
                 if (currentView === DECADE) {
                     value *= 10;
-                } else if (currentView ===CENTURY) {
+                } else if (currentView === CENTURY) {
                     value *= 100;
                 }
 
@@ -91,115 +87,139 @@
         navigateToPast: function() {
             var that = this;
 
-            that._setDate(-1);
+            that._setViewedDate(-1);
 
-            that.navigate(that._viewedDate, that.currentView);
+            that.navigate();
         },
 
         navigateToFuture: function() {
             var that = this;
 
-            that._setDate(1);
+            that._setViewedDate(1);
 
-            that.navigate(that._viewedDate, that.currentView);
+            that.navigate();
         },
 
         navigateUp: function() {
             var that = this,
-                currentView = that.currentView;
+                currentView = that._currentView;
 
             if (currentView === MONTH) {
-                that.currentView = YEAR;
+                currentView = YEAR;
             } else if (currentView === YEAR) {
-                that.currentView = DECADE;
+                currentView = DECADE;
             } else if (currentView === DECADE) {
-                that.currentView = CENTURY;
+                currentView = CENTURY;
             }
 
-            that.navigate(that._viewedDate, that.currentView);
+            that._currentView = currentView;
+
+            that.navigate();
         },
 
         navigateDown: function(value) {
             var that = this,
             depth = that.options.depth,
-            currentView = that.currentView;
+            currentView = that._currentView;
 
             if (currentView === depth) {
+                if (calendar[currentView].compare(value, that._viewedDate) === 0) {
+                    that._changeView = false;
+                }
+
                 that.value(value);
                 return;
             }
 
             if (currentView === CENTURY) {
-                that.currentView = DECADE;
+                currentView = DECADE;
             } else if (currentView === DECADE) {
-                that.currentView = YEAR;
+                currentView = YEAR;
             } else if (currentView === YEAR) {
-                that.currentView = MONTH;
+                currentView = MONTH;
             }
 
-            that.navigate(value, that.currentView);
+            that._currentView = currentView;
+
+            that.navigate(value);
         },
 
-        navigate: function(date, viewName) {
+        navigate: function(value, viewName) {
             var that = this,
-                dateString,
+                dateString, calendarView, compare,
                 selectedValue = that._value,
                 options = that.options,
                 min = options.min,
                 max = options.max,
-                view = calendar[viewName],
-                compare = view.compare,
                 oldView = that.view,
                 newView;
 
-            date = date || that._viewedDate;
+            if (!value) {
+                value = that._viewedDate;
+            }
+
+            if (!viewName) {
+                viewName = that._currentView;
+            }
+
+            calendarView = calendar[viewName];
+            compare = calendarView.compare;
 
             that.title
                 .toggleClass(DISABLED, viewName === CENTURY)
-                .html(view.title(date));
+                .html(calendarView.title(value));
 
-            that.prevArrow.toggleClass(DISABLED, compare(date, min) < 1);
-            that.nextArrow.toggleClass(DISABLED, compare(date, max) > -1);
+            that.prevArrow.toggleClass(DISABLED, compare(value, min) < 1);
+            that.nextArrow.toggleClass(DISABLED, compare(value, max) > -1);
 
-            newView = $(view.content(extend({
-                min: min,
-                max: max,
-                date: date
-            }, that[viewName])));
+            if (!oldView || that._changeView) {
+                newView = $(calendarView.content(extend({
+                    min: min,
+                    max: max,
+                    date: value
+                }, that[viewName])));
 
-            if (viewName === options.depth && selectedValue) {
-                dateString = view.toDateString(selectedValue);
+                //animate
+                //var wrapper = kendo.wrap(oldView);
+                //newView.insertBefore(oldView);
 
-                newView.find("td:not(.k-other-month)")
-                       .removeClass(SELECTED)
-                       .filter(function() {
-                           return $(this).children().eq(0).data("value") === dateString;
-                       })
-                       .addClass(SELECTED);
+                //oldView.css("float", "left");
+                //newView.css("float", "left");
+
+                //var offset = oldView.offset();
+                //var width = oldView.outerWidth();
+
+                //wrapper.css({
+                //    left: offset.left - width,
+                //    width: width * 2,
+                //    position: "relative",
+                //    overflow: "visible"
+                //});
+
+                //that.view = newView;
+
+                if (!oldView) {
+                    that.element.append(newView);
+                } else {
+                    newView.insertBefore(oldView);
+                    oldView.remove();
+                }
+
+                that.view = newView;
             }
 
-            //animate
-            //var wrapper = kendo.wrap(oldView);
-            //newView.insertBefore(oldView);
+            if (viewName === options.depth && selectedValue) {
+                dateString = calendarView.toDateString(selectedValue);
 
-            //oldView.css("float", "left");
-            //newView.css("float", "left");
+                that.view.find("td:not(.k-other-month)")
+                    .removeClass(SELECTED)
+                    .filter(function() {
+                       return $(this).children().eq(0).data(VALUE) === dateString;
+                    })
+                    .addClass(SELECTED);
+            }
 
-            //var offset = oldView.offset();
-            //var width = oldView.outerWidth();
-
-            //wrapper.css({
-            //    left: offset.left - width,
-            //    width: width * 2,
-            //    position: "relative",
-            //    overflow: "visible"
-            //});
-
-            //that.view = newView;
-
-            newView.insertBefore(oldView);
-            that.view = newView;
-            oldView.remove();
+            that._changeView = true;
         },
 
         value: function(value) {
