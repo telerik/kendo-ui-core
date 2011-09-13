@@ -23,6 +23,14 @@ html, body
     display: box;
 }
 
+.k-header,
+.k-footer
+{
+    position: relative;
+    z-index: 1;
+    -webkit-transform: translate3d(0,0,0);
+}
+
 .k-header
 {
     display: block;
@@ -56,16 +64,19 @@ html, body
     -moz-box-align: stretch;
     -webkit-box-align: stretch;
     box-align: stretch;
-}
-
-.contentInternal
-{
-    padding: 1em 1em 0;
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    position: relative;
 }
 
 .k-content *
 {
     display: block;
+}
+
+.k-contentIn
+{
 }
 
 .k-toolbar,

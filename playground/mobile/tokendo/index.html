@@ -46,7 +46,9 @@
             </ul>
         </script>
 
-        <div id="content" class="k-content"></div>
+        <div class="k-content">
+            <div class="k-contentIn"></div>
+        </div>
 
         <div class="k-footer">
             <div class="k-tabStrip">
@@ -98,7 +100,7 @@
                 var data = dataSource.view();
                 var template = kendo.template(document.getElementById("item_tmpl").innerHTML);
 
-                $("#content").html(template({ data: data }))
+                $(".k-contentIn").html(template({ data: data }))
                     .delegate('.more-details', 'click', function() {
                         var todoItemId = $(this).index();
                         kendo.mobile.switchView("edit.html");
