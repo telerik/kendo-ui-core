@@ -44,7 +44,7 @@
         LEFT = "left",
         LINE = "line",
         LINE_MARKER_SIZE = 6,
-        LINE_MARKER_SQUARE = "square",
+        LINEAR = "linear",
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER = "mouseover",
         NONE = "none",
@@ -55,8 +55,9 @@
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
-        RADIAL_GLASS = "radialGlass",
+        RADIAL = "radial",
         RIGHT = "right",
+        ROUNDED_BEVEL = "roundedBevel",
         SANS12 = "12px Verdana, sans-serif",
         SANS16 = "16px Verdana, sans-serif",
         SERIES_CLICK = "seriesClick",
@@ -3537,7 +3538,7 @@
                 visible: true,
                 background: BLACK,
                 size: LINE_MARKER_SIZE,
-                type: LINE_MARKER_SQUARE,
+                type: SQUARE,
                 border: {
                     width: 1
                 },
@@ -3826,13 +3827,13 @@
 
             sector.value = value;
 
-            ViewElement.fn.init.call(sector, options);
+            ChartElement.fn.init.call(sector, options);
         },
 
         options: {
             color: WHITE,
             overlay: {
-                type: RADIAL_GLASS
+                type: ROUNDED_BEVEL
             },
             border: {
                 width: 0.5
@@ -3975,28 +3976,30 @@
                 currentData,
                 totalAngle,
                 seriesIx,
-                angles,
+                sectorAngle,
                 data,
-                sum,
+                total,
+                anglePerValue,
                 i;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
                 data = currentSeries.data;
-                sum = chart.sum(data);
-                angles = chart.sectorAngles(data, sum);
+                total = chart.pointsTotal(data);
+                anglePerValue = 360 / total;
 
                 for (i = 0; i < data.length; i++) {
                     currentData = data[i];
                     value = chart.pointValue(currentData);
+                    sectorAngle = value * anglePerValue;
                     currentCategory = defined(currentData.name) ? currentData.name : "";
                     currentSeries.color = defined(currentData.color) ?
                                           currenData.color :
                                           colors[i % colorsCount];
 
-                    callback(value, startAngle, angles[i],
+                    callback(value, startAngle, sectorAngle,
                        currentCategory, i, currentSeries, seriesIx);
-                    startAngle += angles[i];
+                    startAngle += sectorAngle;
                 }
             }
         },
@@ -4005,7 +4008,7 @@
             return defined(point.value) ? point.value : point;
         },
 
-        sum: function(data) {
+        pointsTotal: function(data) {
             var chart = this,
                 length = data.length,
                 sum = 0,
@@ -4016,19 +4019,6 @@
                 }
 
             return sum;
-        },
-
-        sectorAngles: function(data, total) {
-            var chart = this,
-                length = data.length,
-                angles = [],
-                i;
-
-            for(i = 0; i < length; i++) {
-                angles[i] = chart.pointValue(data[i]) * (360 / total);
-                }
-
-            return angles;
         },
 
         addValue: function(value, startAngle, angle, category, categoryIx, series, seriesIx) {
@@ -4055,6 +4045,7 @@
         reflow: function(targetBox) {
             var chart = this,
                 options = chart.options,
+                padding = options.padding,
                 box = targetBox.clone(),
                 width = box.width(),
                 height = box.height(),
@@ -4075,21 +4066,13 @@
 
             for (i = 0; i < count; i++) {
                 sector = sectors[i];
-                sector.r = (minWidth - options.padding) / 2;
-                sector.cx = sector.r + newBox.x1 + options.padding / 2;
-                sector.cy = sector.r + newBox.y1 + options.padding / 2;
+                sector.r = (minWidth - padding) / 2;
+                sector.cx = sector.r + newBox.x1 + padding / 2;
+                sector.cy = sector.r + newBox.y1 + padding / 2;
                 sector.reflow(newBox);
             }
 
             chart.box = newBox;
-        },
-
-        getViewElements: function(view) {
-            var chart = this,
-                options = chart.options,
-                elements = ChartElement.fn.getViewElements.call(chart, view);
-
-            return elements;
         }
     });
 
@@ -4164,7 +4147,7 @@
             plotArea.append.apply(plotArea, plotArea.charts);
         },
 
-        legendData: function(series) {
+        addToLegend: function(series) {
             var plotArea = this,
                 count = series.length,
                 data = [],
@@ -4198,7 +4181,7 @@
             options.range = barChart.valueRange() || options.range;
             plotArea.charts.push(barChart);
 
-            plotArea.legendData(series);
+            plotArea.addToLegend(series);
         },
 
         createLineChart: function(series) {
@@ -4224,7 +4207,7 @@
             options.range.max = math.max(options.range.max, lineChartRange.max);
             plotArea.charts.push(lineChart);
 
-            plotArea.legendData(series);
+            plotArea.addToLegend(series);
         },
 
         createPieChart: function(series) {
@@ -4294,8 +4277,8 @@
 
             plotArea.box.unpad(margin);
             plotArea.reflowAxes();
-            plotArea.chartsReflow();
-            plotArea.axisWrap();
+            plotArea.reflowCharts();
+            plotArea.wrapAxes();
         },
 
         reflowAxes: function() {
@@ -4328,7 +4311,7 @@
             }
         },
 
-        chartsReflow: function() {
+        reflowCharts: function() {
             var plotArea = this,
                 charts = plotArea.charts,
                 count = charts.length,
@@ -4342,7 +4325,7 @@
             plotArea.box = box;
         },
 
-        axisWrap: function() {
+        wrapAxes: function() {
             var plotArea = this,
                 axisY = plotArea.axisY,
                 axisX = plotArea.axisX,
@@ -4671,9 +4654,9 @@
         },
 
         createGradient: function(options) {
-            if (options.type = "radial") {
+            if (options.type === RADIAL) {
                 return new SVGRadialGradient(options);
-            } else if (options.type = "liner") {
+            } else if (options.type === LINEAR) {
                 return new SVGLinearGradient(options)
             }
 
@@ -4876,61 +4859,50 @@
         }
     });
 
-    var SVGSector = ViewElement.extend({
-        init: function(sector, options) {
-            var pie = this;
-            ViewElement.fn.init.call(pie, options);
+    var SVGSector = SVGPath.extend({
+        init: function(circleSector, options) {
+            var sector = this;
+            SVGPath.fn.init.call(sector, options);
 
-            pie.template = SVGSector.template;
-            pie.pathTemplate = SVGSector.pathTemplate;
-            if (!pie.template) {
-                pie.pathTemplate = SVGSector.pathTemplate = template(
+            sector.pathTemplate = SVGSector.pathTemplate;
+            if (!sector.pathTemplate) {
+                sector.pathTemplate = SVGSector.pathTemplate = template(
                     "M <#= d.firstPoint.x #> <#= d.firstPoint.y #> " +
                     "A<#= d.r #> <#= d.r #> " +
                     "0 <#= d.isReflexAngle ? '1' : '0' #>,1 " +
                     "<#= d.secondPoint.x #> <#= d.secondPoint.y #> " +
                     "L <#= d.cx #> <#= d.cy #> z"
                 );
-
-                pie.template = SVGSector.template = template(
-                    "<path <#= d.renderAttr(\"id\", d.options.id) #>" +
-                    "d='<#= d.renderPath() #>' " +
-                    "<#= d.renderStroke() #><#= d.renderStrokeWidth() #>" +
-                    "fill-opacity='<#= d.options.fillOpacity #>' " +
-                    "stroke-opacity='<#= d.options.strokeOpacity #>' " +
-                    "stroke-linecap='<#= d.options.strokeLineCap #>' " +
-                    "fill='<#= d.options.fill || \"none\" #>'></path>"
-                );
             }
 
-            pie.sector = sector || {};
+            sector.circleSector = circleSector || {};
         },
 
         options: {
             fill: "",
             fillOpacity: 1,
             strokeOpacity: 1,
-            strokeLineCap: "square"
+            strokeLineCap: SQUARE
         },
 
         clone: function() {
-            var pie = this;
-            return new SVGSector(pie.sector, deepExtend({}, pie.options));
+            var sector = this;
+            return new SVGSector(sector.circleSector, deepExtend({}, sector.options));
         },
 
-        renderPath: function() {
-            var pie = this,
-                sector = pie.sector,
-                startAngle = sector.startAngle,
-                endAngle = sector.angle + startAngle,
+        renderPoints: function() {
+            var sector = this,
+                circleSector = sector.circleSector,
+                startAngle = circleSector.startAngle,
+                endAngle = circleSector.angle + startAngle,
                 isReflexAngle = (endAngle - startAngle) > 180,
-                r = sector.r,
-                cx = sector.cx,
-                cy = sector.cy,
+                r = circleSector.r,
+                cx = circleSector.cx,
+                cy = circleSector.cy,
                 firstPoint = calculateSectorPoint(startAngle, cx, cy, r),
                 secondPoint = calculateSectorPoint(endAngle, cx, cy, r);
 
-            return pie.pathTemplate({
+            return sector.pathTemplate({
                 firstPoint: firstPoint,
                 secondPoint: secondPoint,
                 isReflexAngle: isReflexAngle,
@@ -4938,43 +4910,7 @@
                 cx: cx,
                 cy: cy
             });
-        },
-
-        renderStrokeWidth: function () {
-            var pie = this,
-                options = pie.options;
-
-            return options.strokeWidth > 0 ? "stroke-width='" + options.strokeWidth + "' " : "";
-        },
-
-        renderStroke: function () {
-            var pie = this,
-                options = pie.options;
-
-            return options.stroke ? "stroke='" + options.stroke + "' " : "";
-        },
-
-        renderDashType: function () {
-            var pie = this,
-                options = pie.options,
-                result = [],
-                dashType = options.dashType ? options.dashType.toLowerCase() : null,
-                dashTypeArray,
-                i;
-
-            if (dashType && dashType != "solid" && options.strokeWidth) {
-                dashTypeArray = SVG_DASH_TYPE[dashType];
-                for (i = 0; i < dashTypeArray.length; i++) {
-                    result.push(dashTypeArray[i] * options.strokeWidth);
                 }
-
-                options.strokeLineCap = "butt";
-
-                return "stroke-dasharray='" + result.join(" ") + "' ";
-            }
-
-            return "";
-        }
     });
 
     var SVGCircle = ViewElement.extend({
@@ -5847,7 +5783,7 @@
     var ExpandAnimation = ElementAnimation.extend({
         options: {
             size: 0,
-            easing: "linear"
+            easing: LINEAR
         },
 
         step: function(actor, pos) {
@@ -6508,7 +6444,7 @@
     Chart.Overlays = {
         glass: {
             fill: {
-                type: "linear",
+                type: LINEAR,
                 rotation: 0,
                 stops: [{
                     offset: 0,
@@ -6533,9 +6469,9 @@
                 }]
             }
         },
-        radialGlass: {
+        roundedBevel: {
             fill: {
-                type: "radial",
+                type: RADIAL,
                 stops: [{
                     offset: 0.33,
                     color: WHITE,
@@ -6679,6 +6615,8 @@
         SVGCircle: SVGCircle,
         SVGClipPath: SVGClipPath,
         SVGOverlayDecorator: SVGOverlayDecorator,
+        SVGLinearGradient: SVGLinearGradient,
+        SVGRadialGradient: SVGRadialGradient,
         SVGPaintDecorator: SVGPaintDecorator,
         SVGClipAnimationDecorator: SVGClipAnimationDecorator,
         SVGSector: SVGSector,
