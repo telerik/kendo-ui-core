@@ -159,7 +159,7 @@
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "year";
+                cal._currentView = "year";
                 modified.setFullYear(modified.getFullYear() - 1);
 
                 cal.navigateToPast();
@@ -172,7 +172,7 @@
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "decade";
+                cal._currentView = "decade";
                 modified.setFullYear(modified.getFullYear() - 10);
 
 
@@ -188,7 +188,7 @@
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "century";
+                cal._currentView = "century";
                 modified.setFullYear(modified.getFullYear() - 100);
 
 
@@ -205,7 +205,7 @@
                     modified = new Date(cal._viewedDate),
                     names = kendo.culture().calendar.months.names;
 
-                cal.currentView = "month";
+                cal._currentView = "month";
                 modified.setMonth(modified.getMonth() + 1);
 
                 cal.navigateToFuture();
@@ -218,7 +218,7 @@
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "year";
+                cal._currentView = "year";
                 modified.setFullYear(modified.getFullYear() + 1);
 
                 cal.navigateToFuture();
@@ -231,7 +231,7 @@
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "decade";
+                cal._currentView = "decade";
                 modified.setFullYear(modified.getFullYear() + 10);
 
 
@@ -247,7 +247,7 @@
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "century";
+                cal._currentView = "century";
                 modified.setFullYear(modified.getFullYear() + 100);
 
 
@@ -263,33 +263,33 @@
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "month";
+                cal._currentView = "month";
 
                 cal.navigateUp();
 
-                equal(cal.currentView, "year");
+                equal(cal._currentView, "year");
             });
 
             test("navigateUp should navigate upper view (decade)", function() {
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "year";
+                cal._currentView = "year";
 
                 cal.navigateUp();
 
-                equal(cal.currentView, "decade");
+                equal(cal._currentView, "decade");
             });
 
             test("navigateUp should navigate upper view (century)", function() {
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "decade";
+                cal._currentView = "decade";
 
                 cal.navigateUp();
 
-                equal(cal.currentView, "century");
+                equal(cal._currentView, "century");
                 ok(cal.title.hasClass("k-state-disabled"));
             });
 
@@ -297,51 +297,51 @@
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "century";
+                cal._currentView = "century";
 
                 cal.navigateDown(modified);
 
-                equal(cal.currentView, "decade");
+                equal(cal._currentView, "decade");
             });
 
             test("navigateDown should navigate lower view (year)", function() {
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "decade";
+                cal._currentView = "decade";
 
                 cal.navigateDown(modified);
 
-                equal(cal.currentView, "year");
+                equal(cal._currentView, "year");
             });
 
             test("navigateDown should navigate lower view (month)", function() {
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "year";
+                cal._currentView = "year";
 
                 cal.navigateDown(modified);
 
-                equal(cal.currentView, "month");
+                equal(cal._currentView, "month");
             });
 
             test("navigateDown should navigate lower view (month)", function() {
                 var cal = new Calendar(div),
                     modified = new Date(cal._viewedDate);
 
-                cal.currentView = "year";
+                cal._currentView = "year";
 
                 cal.navigateDown(modified);
 
-                equal(cal.currentView, "month");
+                equal(cal._currentView, "month");
             });
 
             test("navigateDown with date navigate to cell's date", function() {
                 var cal = stub(new Calendar(div), "navigate"),
                     value = new Date(2000, 10, 10);
 
-                cal.currentView = "year";
+                cal._currentView = "year";
 
                 cal.navigateDown(value);
 
@@ -349,7 +349,7 @@
                 equal(+cal.args("navigate")[0], +value);
             });
 
-            test("navigateDown should call value method if currentView === options.depth", function() {
+            test("navigateDown should call value method if _currentView === options.depth", function() {
                 var cal = stub(new Calendar(div), "value"),
                     value = new Date(2000, 10, 10);
 
@@ -439,6 +439,17 @@
                 equal(cal.value(), null);
             });
 
+            //should be last test in the page
+            test("navigate should not re-render view if it was not changed", function() {
+                var value = new Date(2000, 10, 10),
+                    cal = new Calendar(div, {value: value});
+
+                stub(kendo.calendar.month, "content");
+
+                cal.navigateDown(value);
+
+                equal(kendo.calendar.month.calls("content"), 0);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
