@@ -49,8 +49,8 @@
         if (!referenceUrl)
             referenceUrl = $("#referenceUrl")[0].href;
         $("#nav li a").each(function() {
-            var match = $(this).attr("href").match(/[^\/]+\/[^\/]+$/);
-            $(this).attr("href", referenceUrl + (match ? match[0] : ""));
+            var match = $(this).attr("href").match(/([^\/]+\/[^\/\?]+)(\?.*)?$/);
+            $(this).attr("href", referenceUrl + (match ? match[1] : ""));
         });
     };
 
@@ -443,10 +443,10 @@ function getNormalizedUrl() {
 }
 
 function initializeNavigation (normalizedUrl) {
-    var matchedUrl = normalizedUrl.match(/[^\/]+\/[^\/]+$/);
+    var matchedUrl = normalizedUrl.match(/([^\/]+\/[^\/\?]+)(\?.*)?$/);
 
     if (matchedUrl) {
-        var url = matchedUrl[0].toLowerCase(),
+        var url = matchedUrl[1].toLowerCase(),
             page = locatePage(url);
 
         $("#navmainWrap").toggleClass("singleColumn", page == "overview");
