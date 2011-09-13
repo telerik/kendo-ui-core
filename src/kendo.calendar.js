@@ -10,6 +10,7 @@
         VALUE = "value",
         DISABLED = "k-state-disabled",
         SELECTED = "k-state-selected",
+        OTHERMONTH = ' class="k-other-month"',
         extend = $.extend,
         proxy = $.proxy,
         DATE = Date;
@@ -233,8 +234,7 @@
 
         _header: function() {
             var that = this,
-            element = that.element,
-            prevArrow, nextArrow, title;
+            element = that.element;
 
             if (!element.find(".k-header")[0]) {
                 element.html('<div class="k-header">'
@@ -359,7 +359,7 @@
                         title: kendo.toString(start, "D"),
                         day: start.getDate(),
                         dateString: this.toDateString(start),
-                        otherMonth: start < firstDayOfMonth || start > lastDayOfMonth ? ' class="k-other-month"' : ''
+                        otherMonth: start < firstDayOfMonth || start > lastDayOfMonth ? OTHERMONTH : ''
                     };
 
                     html += inRange(start, min, max) ? content(data) : empty(data);
@@ -514,7 +514,7 @@
                 html += '<td';
 
                 if (view != undefined && (idx == 0 || idx == 11)) {
-                    html += ' class="k-other-month"';
+                    html += OTHERMONTH;
                 }
 
                 html += '><a class="k-link" data-value="' + toDateString(start) + '">' + toString(start) + "</a></td>";
