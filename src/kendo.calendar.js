@@ -179,25 +179,6 @@
                     date: value
                 }, that[viewName])));
 
-                //animate
-                //var wrapper = kendo.wrap(oldView);
-                //newView.insertBefore(oldView);
-
-                //oldView.css("float", "left");
-                //newView.css("float", "left");
-
-                //var offset = oldView.offset();
-                //var width = oldView.outerWidth();
-
-                //wrapper.css({
-                //    left: offset.left - width,
-                //    width: width * 2,
-                //    position: "relative",
-                //    overflow: "visible"
-                //});
-
-                //that.view = newView;
-
                 if (!oldView) {
                     that.element.append(newView);
                 } else {
@@ -292,7 +273,6 @@
             var that = this,
                 month = that.options.month,
                 template = kendo.template;
-
 
             that.month = {
                 content: template('<td<#=data.otherMonth#>><a class="k-link" href="#" data-value="<#=data.dateString#>" title="<#=data.title#>">' + month.content + '</a></td>'),
@@ -391,17 +371,17 @@
             },
             compare: function(date1, date2) {
                 var result,
-                    date1Month = date1.getMonth(),
-                    date1Year = date1.getFullYear(),
-                    date2Month = date2.getMonth(),
-                    date2Year = date2.getFullYear();
+                    month1 = date1.getMonth(),
+                    year1 = date1.getFullYear(),
+                    month2 = date2.getMonth(),
+                    year2 = date2.getFullYear();
 
-                if (date1Year > date2Year) {
+                if (year1 > year2) {
                     result = 1;
-                } else if (date1Year < date2Year) {
+                } else if (year1 < year2) {
                     result = -1;
                 } else {
-                    result = date1Month == date2Month ? 0 : date1Month > date2Month ? 1 : -1;
+                    result = month1 == month2 ? 0 : month1 > month2 ? 1 : -1;
                 }
 
                 return result;
@@ -549,21 +529,21 @@
     }
 
     function compare(date1, date2, modifier) {
-        var date1year = date1.getFullYear(),
-            date2year = date2.getFullYear(),
+        var year1 = date1.getFullYear(),
+            year2 = date2.getFullYear(),
             result = 0;
 
         if (modifier) {
-            if (date2year > date1year) {
-                date1year += modifier;
-            } else if (date2year < date1year) {
-                date1year -= modifier;
+            if (year2 > year1) {
+                year1 += modifier;
+            } else if (year2 < year1) {
+                year1 -= modifier;
             }
         }
 
-        if (date1year > date2year) {
+        if (year1 > year2) {
             result = 1;
-        } else if (date1year < date2year) {
+        } else if (year1 < year2) {
             result = -1;
         }
 
