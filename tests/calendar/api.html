@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calendar API</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Calendar API</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var Calendar = kendo.ui.Calendar;
+
+            module("kendo.ui.Calendar API", {
+                setup: function() {
+                    div = $("<div />").appendTo(document.body);
+                },
+                teardown: function() {
+                    div.remove();
+                }
+            });
+
+            test("navigate method render view using default values", function() {
+                var cal = new Calendar(div),
+                    date = new Date(),
+                    firstVisibleDate = kendo.calendar.firstVisibleDay(date);
+
+                equal(cal.element.find(".k-content").find("a:first").html(), firstVisibleDate.getDate());
+            });
+
+            test("navigate method render view depending on given date and view", function() {
+                var cal = new Calendar(div),
+                    date = new Date(2000, 10, 10);
+
+                cal.navigate(date, "decade");
+
+                equal(cal.element.find(".k-content").find("a:first").html(), "1999");
+            });
+
+            test("navigate method should disable prevArrow if cannot navigate to past", function() {
+                var date = new Date(2000, 10, 10),
+                cal = new Calendar(div, {
+                    value: date,
+                    min: date
+                });
+
+                ok(cal.prevArrow.hasClass("k-state-disabled"));
+            });
+
+            test("navigate method should disable nextArrow if cannot navigate to future", function() {
+                var date = new Date(2000, 10, 10),
+                cal = new Calendar(div, {
+                    value: date,
+                    max: date
+                });
+
+                ok(cal.nextArrow.hasClass("k-state-disabled"));
+            });
+
+            test("navigate method should disable prevArrow if cannot navigate to past (year)", function() {
+                var date = new Date(2000, 10, 10),
+                    cal = new Calendar(div, {
+                        value: date,
+                        min: date,
+                        firstView: "year"
+                    });
+
+                ok(cal.prevArrow.hasClass("k-state-disabled"));
+            });
+
+            test("navigate method should disable nextArrow if cannot navigate to future (year)", function() {
+                var date = new Date(2000, 10, 10),
+                    cal = new Calendar(div, {
+                        value: date,
+                        max: date,
+                        firstView: "year"
+                    });
+
+                ok(cal.nextArrow.hasClass("k-state-disabled"));
+            });
+
+            test("navigate method should disable prevArrow if cannot navigate to past (decade)", function() {
+                var date = new Date(2000, 10, 10),
+                    cal = new Calendar(div, {
+                        value: date,
+                        min: date,
+                        firstView: "decade"
+                    });
+
+                ok(cal.prevArrow.hasClass("k-state-disabled"));
+            });
+
+            test("navigate method should disable nextArrow if cannot navigate to future (decade)", function() {
+                var date = new Date(2000, 10, 10),
+                    cal = new Calendar(div, {
+                        value: date,
+                        max: date,
+                        firstView: "decade"
+                    });
+
+                ok(cal.nextArrow.hasClass("k-state-disabled"));
+            });
+
+            test("navigate method should disable prevArrow if cannot navigate to past (century)", function() {
+                var date = new Date(2000, 10, 10),
+                    cal = new Calendar(div, {
+                        value: date,
+                        min: date,
+                        firstView: "century"
+                    });
+
+                ok(cal.prevArrow.hasClass("k-state-disabled"));
+            });
+
+            test("navigate method should disable nextArrow if cannot navigate to future (century)", function() {
+                var date = new Date(2000, 10, 10),
+                    cal = new Calendar(div, {
+                        value: date,
+                        max: date,
+                        firstView: "century"
+                    });
+
+                ok(cal.nextArrow.hasClass("k-state-disabled"));
+            });
+
+            test("navigate should select date equal to _value", function() {
+                var cal = new Calendar(div),
+                    value = new Date(2000, 10, 10);
+
+                cal.navigateDown(value);
+
+                cal.navigateToPast();
+
+                equal(cal.view.find(".k-state-selected").length, 0);
+            });
+
+            test("navigateToPast should navigate to previous month when month view", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate),
+                    names = kendo.culture().calendar.months.names;
+
+                modified.setMonth(modified.getMonth() - 1);
+
+                cal.navigateToPast();
+
+                equal(+cal._viewedDate, +modified);
+                ok(cal.title.html().indexOf(names[modified.getMonth()]) !== -1);
+            });
+
+            test("navigateToPast should navigate to previous year when year view", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "year";
+                modified.setFullYear(modified.getFullYear() - 1);
+
+                cal.navigateToPast();
+
+                ok(cal.title.html(), modified.getFullYear());
+                equal(+cal._viewedDate, +modified);
+            });
+
+            test("navigateToPast should navigate to previous decade when decade view", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "decade";
+                modified.setFullYear(modified.getFullYear() - 10);
+
+
+                var start = modified.getFullYear() - modified.getFullYear() % 10;
+
+                cal.navigateToPast();
+
+                ok(cal.title.html(), start + "-" + (start + 9));
+                equal(+cal._viewedDate, +modified);
+            });
+
+            test("navigateToPast should navigate to previous century when century view", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "century";
+                modified.setFullYear(modified.getFullYear() - 100);
+
+
+                var start = modified.getFullYear() - modified.getFullYear() % 100;
+
+                cal.navigateToPast();
+
+                ok(cal.title.html(), start + "-" + (start + 99));
+                equal(+cal._viewedDate, +modified);
+            });
+
+            test("navigateToFuture should navigate to next month when month view", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate),
+                    names = kendo.culture().calendar.months.names;
+
+                cal._currentView = "month";
+                modified.setMonth(modified.getMonth() + 1);
+
+                cal.navigateToFuture();
+
+                equal(+cal._viewedDate, +modified);
+                ok(cal.title.html().indexOf(names[modified.getMonth()]) !== -1);
+            });
+
+            test("navigateToFuture should navigate to next year when year view", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "year";
+                modified.setFullYear(modified.getFullYear() + 1);
+
+                cal.navigateToFuture();
+
+                ok(cal.title.html(), modified.getFullYear());
+                equal(+cal._viewedDate, +modified);
+            });
+
+            test("navigateToFuture should navigate to next decade when decade view", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "decade";
+                modified.setFullYear(modified.getFullYear() + 10);
+
+
+                var start = modified.getFullYear() - modified.getFullYear() % 10;
+
+                cal.navigateToFuture();
+
+                ok(cal.title.html(), start + "-" + (start + 9));
+                equal(+cal._viewedDate, +modified);
+            });
+
+            test("navigateToFuture should navigate to next century when century view", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "century";
+                modified.setFullYear(modified.getFullYear() + 100);
+
+
+                var start = modified.getFullYear() - modified.getFullYear() % 100;
+
+                cal.navigateToFuture();
+
+                ok(cal.title.html(), start + "-" + (start + 99));
+                equal(+cal._viewedDate, +modified);
+            });
+
+            test("navigateUp should navigate upper view (year)", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "month";
+
+                cal.navigateUp();
+
+                equal(cal._currentView, "year");
+            });
+
+            test("navigateUp should navigate upper view (decade)", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "year";
+
+                cal.navigateUp();
+
+                equal(cal._currentView, "decade");
+            });
+
+            test("navigateUp should navigate upper view (century)", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "decade";
+
+                cal.navigateUp();
+
+                equal(cal._currentView, "century");
+                ok(cal.title.hasClass("k-state-disabled"));
+            });
+
+            test("navigateDown should navigate lower view (decade)", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "century";
+
+                cal.navigateDown(modified);
+
+                equal(cal._currentView, "decade");
+            });
+
+            test("navigateDown should navigate lower view (year)", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "decade";
+
+                cal.navigateDown(modified);
+
+                equal(cal._currentView, "year");
+            });
+
+            test("navigateDown should navigate lower view (month)", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "year";
+
+                cal.navigateDown(modified);
+
+                equal(cal._currentView, "month");
+            });
+
+            test("navigateDown should navigate lower view (month)", function() {
+                var cal = new Calendar(div),
+                    modified = new Date(cal._viewedDate);
+
+                cal._currentView = "year";
+
+                cal.navigateDown(modified);
+
+                equal(cal._currentView, "month");
+            });
+
+            test("navigateDown with date navigate to cell's date", function() {
+                var cal = stub(new Calendar(div), "navigate"),
+                    value = new Date(2000, 10, 10);
+
+                cal._currentView = "year";
+
+                cal.navigateDown(value);
+
+                equal(cal.calls("navigate"), 1);
+                equal(+cal.args("navigate")[0], +value);
+            });
+
+            test("navigateDown should call value method if _currentView === options.depth", function() {
+                var cal = stub(new Calendar(div), "value"),
+                    value = new Date(2000, 10, 10);
+
+                cal.navigateDown(value);
+
+                equal(cal.calls("value"), 1);
+                equal(+cal.args("value")[0], +value);
+            });
+
+
+            test("value should select set selectedValue property", function() {
+                var cal = new Calendar(div),
+                    value = new Date(2000, 10, 10);
+
+                cal.value(value);
+
+                equal(+cal._value, +value);
+            });
+
+            test("value should return selectedValue", function() {
+                var cal = new Calendar(div),
+                    value = new Date(2000, 10, 10);
+
+                cal._value = value;
+
+                equal(+cal.value(), +value);
+            });
+
+            test("value method should call navigate method with correct date and view", function() {
+                var value = new Date(2000,10,10),
+                    cal = new Calendar(div, {value: value});
+
+                stub(cal, "navigate");
+
+                cal.value(value);
+
+                equal(cal.calls("navigate"), 1);
+                equal(+cal.args("navigate")[0], +value);
+                equal(cal.args("navigate")[1], cal.options.depth);
+            });
+
+            test("value method should update selection of the view", function() {
+                var value = new Date(2000,10,10),
+                    cal = new Calendar(div, {value: value});
+
+                    value.setDate(17);
+
+                    cal.value(value);
+
+                ok(cal.element.find(".k-content td").eq(19).hasClass("k-state-selected"));
+            });
+
+            test("value should clear _value if null", function() {
+                var value = new Date(2000,10,10),
+                    cal = new Calendar(div, {min: value});
+
+                cal.value(null);
+
+                equal(cal.value(), null);
+                equal(cal.element.find(".k-content td:has(k-state-selected)").length, 0);
+            });
+
+            test("value should not accept value lower than min", function() {
+                var value = new Date(2000,10,10),
+                    cal = new Calendar(div, {min: value});
+
+                cal.value(new Date(1900, 10,10));
+
+                equal(+cal.value(), +value);
+            });
+
+            test("value should not accept value bigger than max", function() {
+                var value = new Date(2000,10,10),
+                    cal = new Calendar(div, {max: value});
+
+                cal.value(new Date(2900, 10,10));
+
+                equal(+cal.value(), +value);
+            });
+
+            test("value should not accept invalid date", function() {
+                var value = new Date(2000,10,10),
+                    cal = new Calendar(div, {max: value});
+
+                cal.value("dsadasDA");
+
+                equal(cal.value(), null);
+            });
+
+            //should be last test in the page
+            test("navigate should not re-render view if it was not changed", function() {
+                var value = new Date(2000, 10, 10),
+                    cal = new Calendar(div, {value: value});
+
+                stub(kendo.calendar.month, "content");
+
+                cal.navigateDown(value);
+
+                equal(kendo.calendar.month.calls("content"), 0);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
