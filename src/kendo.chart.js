@@ -5369,50 +5369,34 @@
         }
     });
 
-    var VMLSector = ViewElement.extend({
-        init: function(sector, options) {
-            var pie = this;
-            ViewElement.fn.init.call(pie, options);
+    var VMLSector = VMLPath.extend({
+        init: function(circleSector, options) {
+            var sector = this;
+            VMLPath.fn.init.call(sector, options);
 
-            pie.template = VMLSector.template;
-            pie.pathTemplate = VMLSector.pathTemplate;
-            if (!pie.template) {
-                pie.pathTemplate = VMLSector.pathTemplate = template(
-                   "<kvml:path v='M <#= d.cx #> <#= d.cy #> " +
+            sector.pathTemplate = VMLSector.pathTemplate;
+            if (!sector.pathTemplate) {
+                sector.pathTemplate = VMLSector.pathTemplate = template(
+                   "M <#= d.cx #> <#= d.cy #> " +
                    "AE <#= d.cx #> <#= d.cy #> " +
                    "<#= d.r #> <#= d.r #> " +
-                   "<#= d.sa #> <#= d.a #> X E' />"
-                );
-
-                pie.template = VMLSector.template = template(
-                    "<kvml:shape <#= d.renderAttr(\"id\", d.options.id) #> " +
-                    "style='position:absolute; width:1px; height:1px;' " +
-                    "coordorigin='0 0' coordsize='1 1'>" +
-                        "<#= d.renderPath() #>" +
-                        "<#= d.fill.render() + d.stroke.render() #>" +
-                    "</kvml:shape>"
+                   "<#= d.sa #> <#= d.a #> X E"
                 );
             }
 
-            pie.sector = sector;
-            pie.stroke = new VMLStroke(pie.options);
-            pie.fill = new VMLFill(pie.options);
+            sector.circleSector = circleSector;
         },
 
-        options: {
-            fill: ""
-        },
+        renderPoints: function() {
+            var sector = this,
+                circleSector = sector.circleSector,
+                r = round(circleSector.r),
+                cx = round(circleSector.cx),
+                cy = round(circleSector.cy),
+                sa = -round((circleSector.startAngle + 180) * 65535),
+                a = -round(circleSector.angle * 65536);
 
-        renderPath: function() {
-            var pie = this,
-                sector = pie.sector,
-                r = round(sector.r),
-                cx = round(sector.cx),
-                cy = round(sector.cy),
-                sa = -round((sector.startAngle + 180) * 65535),
-                a = -round(sector.angle * 65536);
-
-            return pie.pathTemplate({ r: r, cx: cx, cy: cy, sa: sa, a: a });
+            return sector.pathTemplate({ r: r, cx: cx, cy: cy, sa: sa, a: a });
         }
     });
 
