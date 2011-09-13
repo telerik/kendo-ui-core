@@ -1,6 +1,6 @@
 ﻿/* Kendo base CSS */
 
-.k-reset { margin: 0; padding: 0; border: 0; outline: 0; text-decoration: none; font-size: 100%; list-style: none; }
+.k-reset { margin:0;padding:0;border:0;outline:0;text-decoration:none;font-size:100%;list-style:none;}
 
 .k-floatwrap:after,.k-slider-items:after{content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
 .k-floatwrap,.k-slider-items{display:inline-block;}
@@ -14,85 +14,55 @@
 .k-dropdown-wrap,
 .k-grouping-header,
 .k-tooltip,
-.k-grid-pager
+.k-grid-pager,
+.k-tabstrip-items .k-item,
+.k-link.k-state-hover
 {
     background-repeat: repeat-x;
     background-position: 0 center;
 }
 
 .k-tabstrip,
-.k-tabstrip-items .k-item,
 .k-menu-vertical,
 .k-editor,
-.k-tooltip,
-.k-state-hover
+.k-tooltip
 {
-    background-position:0 -248px;
-}
-
-.k-link.k-state-hover,
-.k-dropdown-wrap .k-input,
-.k-dropdown-wrap .k-select,
-.k-tabstrip-items .k-item,
-.k-tabstrip-items .k-state-hover .k-link
-{
-    background-repeat: repeat-x;
+    background-position: 0 -248px;
 }
 
 /* widget */
 
 .k-widget,
-.k-widget .k-input,
-.k-widget .text-box,
+.k-input[type="text"],
 .k-button
 {
     font-size: 100%;
-}
-
-.k-widget,
-.k-input[type="text"]
-{
-    border-width: 1px;
     border-style: solid;
+    border-width: 1px;
 }
 
 /* button */
-
-.k-button,
-.k-autocomplete,
-.k-dropdown-wrap,
-.k-picker-wrap
-{
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-}
 
 .k-button
 {
     display: inline-block;
     margin: 0;
     padding: 0 6px 1px;
-    border-width: 1px;
-    border-style: solid;
-    background-repeat:repeat-x;
+    background-repeat: repeat-x;
     background-position: 0 center;
     font-family: inherit;
-    font-size: 100%;
     line-height: 1.5;
     text-align: center;
     cursor: pointer;
     outline: 0;
+
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
-*+html .k-button { display: inline; zoom: 1 }
-*+html .k-button { overflow: visible; margin-right: 4px}
+*+html .k-button { overflow: visible; margin-right: 4px; }
 *+html a.k-button { line-height: 1.6; padding-left: 7px; padding-right: 7px;/*+1*/ }
-
-html body .k-button
-{
-    text-decoration: none; /*MVC Site.css*/
-}
 
 .k-button-icontext
 {
@@ -127,7 +97,7 @@ body .k-button-icon
     padding-left: 4px;
     padding-right: 4px;
 }
-*+html a.k-button-icon{padding-left: 5px;padding-right: 5px;}
+*+html a.k-button-icon { padding-left: 5px; padding-right: 5px;/*+1*/ }
 
 .k-button-icontext
 {
@@ -140,7 +110,7 @@ body .k-button-icon
     margin: 0 3px 0 -3px;
     vertical-align: top;
 }
-*+html .k-button-icontext .k-icon{margin-right: 4px}
+*+html .k-button-icontext .k-icon { margin-right: 4px; }
 
 html body .k-button-bare
 {
@@ -154,16 +124,12 @@ html body .k-button-bare
 {
     cursor: pointer;
     outline: none;
+    text-decoration: none;
 }
 
 .k-grid-header span.k-link
 {
     cursor: default;
-}
-
-.k-header .k-link
-{
-    text-decoration: none;
 }
 
 /* states */
@@ -192,7 +158,9 @@ html body .k-button-bare
 
 /* icons */
 
-.k-icon, .k-sprite, .k-editor-button .k-tool-icon
+.k-icon,
+.k-sprite,
+.k-editor-button .k-tool-icon
 {
     display: inline-block;
     width: 16px;
@@ -206,7 +174,7 @@ html body .k-button-bare
     text-align: center;
     vertical-align: middle;
 }
-*+html .k-icon, .k-sprite { text-indent: 0; }
+*+html .k-icon, *+html .k-sprite { text-indent: 0; }
 
 .k-expand { background-position: 0 -160px; }
 .k-collapse { background-position: 0 -176px; }
@@ -278,8 +246,6 @@ html body .k-button-bare
 
 /* loading */
 
-.k-loading,
-.k-widget .k-loading,
 .k-loading-image
 {
     background-color: transparent;
@@ -288,30 +254,30 @@ html body .k-button-bare
 }
 
 .k-loading-mask,
-.k-loading-image
+.k-loading-image,
+.k-loading-text
 {
-    position:absolute;
+    position: absolute;
 }
 
 .k-loading-text
 {
-    position:absolute;
-    top:-4000px;
-    left:-4000px;
+    top: -4000px;
+    left: -4000px;
 }
 
 .k-loading-image,
 .k-loading-color
 {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
 }
     
 .k-loading-image
 {
-    top:0;
-    left:0;
-    z-index:2;
+    top: 0;
+    left: 0;
+    z-index: 2;
 }
 
 .k-loading-color
@@ -324,14 +290,12 @@ html body .k-button-bare
 
 .k-drag-clue
 {
-    border-width: 1px;
-    border-style: solid;
-
-    font-size: .9em;
-    padding: .05em .15em;
-
     position: absolute;
     z-index: 10003;
+    border-style: solid;
+    border-width: 1px;
+    font-size: .9em;
+    padding: .05em .15em;
     white-space: nowrap;
     cursor: default;
 
@@ -342,9 +306,9 @@ html body .k-button-bare
 
 .k-drag-status
 {
+    margin-top: -1px;
     margin-right: 4px;
     vertical-align: top;
-    margin-top: -1px;
 }
 
 .k-reorder-cue
@@ -356,10 +320,10 @@ html body .k-button-bare
 
 .k-reorder-cue .k-icon
 {
-    width: 8px;
-    height: 4px;
     position: absolute;
     left: -4px;
+    width: 8px;
+    height: 4px;
 }
 
 .k-reorder-cue .k-arrow-down { top: -4px; background-position: -20px -182px; }
@@ -369,28 +333,29 @@ html body .k-button-bare
 
 .k-scrollbar
 {
-    overflow: scroll;
     position: absolute;
+    overflow: scroll;
 }
 
 .k-scrollbar-vertical
 {
-    overflow-x:hidden;
     top: 0;
     right: 0;
-    height: 100%;
     width: 17px; /* scrollbar width */
+    height: 100%;
+    overflow-x: hidden;
 }
 
 .k-touch-scrollbar
 {
-    position:absolute;
-    display:none;
-    z-index:200000;
+    display: none;
+    position: absolute;
+    z-index: 200000;
     height: 8px;
     width: 8px;
     border: 1px solid #8a8a8a;
     background-color: #858585;
+    
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
@@ -409,40 +374,29 @@ html body .k-button-bare
 
 div.k-window
 {
-    padding-top: 2em;
     display: inline-block;
-    *display: inline;
-    zoom: 1;
-    z-index: 10001;
-
     position: absolute;
-
-    border-width: 0;
-    border-width: 5px\9;
+    z-index: 10001;
+    border-style: solid;
+    border-width: 1px;
+    padding-top: 2em;
 
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
 
-:root .k-window
-{
-    border-width: 0;
-}
-
-*+html .k-window { padding: .5em; }
-
 .k-window-titlebar
 {
-    padding: .4em 0;
-    margin-top: -2em;
+    position: absolute;
     width: 100%;
     height: 1.1em;
-    font-size: 1.2em;
-    position: absolute;
-    white-space: nowrap;
-    border-bottom-width: 1px;
     border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin-top: -2em;
+    padding: .4em 0;
+    font-size: 1.2em;
+    white-space: nowrap;
 
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
@@ -454,12 +408,12 @@ div.k-window
 
 .k-window-title
 {
-    cursor: default;
     position: absolute;
-    text-overflow: ellipsis;
-    overflow: hidden;
     left: .5em;
     right: .5em;
+    overflow: hidden;
+    cursor: default;
+    text-overflow: ellipsis;
 }
 
 .k-window-title .k-image
@@ -470,14 +424,15 @@ div.k-window
 
 div.k-window-content
 {
+    position: relative;
+    z-index: -1;
+    height: 100%;
+    padding: .5em;
+    overflow: auto;
+
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    z-index: -1;
-    padding: .5em;
-    height: 100%;
-    overflow: auto;
-    position: relative;
 
     -moz-border-radius-bottomleft: 4px;
     -moz-border-radius-bottomright: 4px;
@@ -487,45 +442,39 @@ div.k-window-content
     border-bottom-right-radius: 4px;
 }
 
-*+html .k-window-content { margin: -.5em; padding-bottom: .2em; }
-
 .k-window-titlebar .k-window-actions
 {
     position: absolute;
-    right: .5em;
     top: 0;
+    right: .5em;
     padding-top: .3em;
     white-space: nowrap;
 }
 
 .k-window-titlebar .k-window-action
 {
+    display: inline-block;
     width: 16px;
     height: 16px;
     padding: 2px;
     text-decoration: none;
     vertical-align: middle;
-
-    display: inline-block;
-    *display: inline;
-    zoom: 1;
-
-    opacity: .7;
     filter: alpha(opacity=70);
+    opacity: .7;
 }
 
 .k-window-titlebar .k-state-hover
 {
-    border-width: 1px;
     border-style: solid;
+    border-width: 1px;
     padding: 1px;
 
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 
-    opacity: 1;
     filter: alpha(opacity=100);
+    opacity: 1;
 }
 
 .k-window-action .k-icon
@@ -539,11 +488,11 @@ div.k-window-content
     position: absolute;
     z-index: 1;
     background-color: #fff;
-    opacity: 0;
-    filter: alpha(opacity=0);
-    zoom: 1;
-    line-height: 6px;
     font-size: 0;
+    line-height: 6px;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    zoom: 1;
 }
 
 .k-resize-n { top: -3px; left: 0; width: 100%; height: 6px; cursor: n-resize; }
@@ -557,25 +506,25 @@ div.k-window-content
 
 .k-overlay
 {
-    width: 100%;
-    height: 100%;
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 10001;
+    width: 100%;
+    height: 100%;
     background-color: #000;
     filter: alpha(opacity=50);
     opacity: .5;
-    z-index: 10001;
 }
 
 .k-window .k-overlay
 {
-    background-color: #fff;
-    opacity: 0;
-    filter: alpha(opacity=0);
     position: absolute;
     width: 100%;
     height: 100%;
+    background-color: #fff;
+    filter: alpha(opacity=0);
+    opacity: 0;
 }
 
 .k-window .k-widget
@@ -601,15 +550,13 @@ div.k-window-content
 .k-panelbar .k-tabstrip-items .k-item
 {
     list-style-type: none;
-    vertical-align: top;
     display: inline-block;
-    *display: inline;
-    zoom: 1;
-    border-width: 1px 1px 0;
+    position: relative;
     border-style: solid;
+    border-width: 1px 1px 0;
     margin: .1em .3em 0 0;
     padding: 0;
-    position: relative;
+    vertical-align: top;
 
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
@@ -623,8 +570,8 @@ div.k-window-content
 .k-tabstrip-items .k-state-active,
 .k-panelbar .k-tabstrip-items .k-state-active
 {
-    padding-bottom: 1px;
     margin-bottom: -1px;
+    padding-bottom: 1px;
 }
 
 .k-tabstrip-items .k-tab-on-top
@@ -635,17 +582,10 @@ div.k-window-content
 .k-tabstrip-items .k-link,
 .k-panelbar .k-tabstrip-items .k-link
 {
-    padding: .3em .9em;
     display: inline-block;
     border-bottom-width: 0;
+    padding: .3em .9em;
     outline: 0;
-}
-
-*+html .k-tabstrip-items .k-link,
-*+html .k-panelbar .k-tabstrip-items .k-link
-{
-    display: inline;
-    zoom: 1;
 }
 
 .k-tabstrip-items .k-state-hover .k-link
@@ -667,26 +607,26 @@ div.k-window-content
 .k-panelbar .k-tabstrip-items .k-item .k-image,
 .k-panelbar .k-tabstrip-items .k-item .k-sprite
 {
-    vertical-align: middle;
     margin: -3px 3px 0 -6px;
+    vertical-align: middle;
 }
 
 *+html .k-tabstrip-items .k-item .k-image,
 *+html .k-tabstrip-items .k-item .k-sprite
 {
-    vertical-align: top;
     margin-top: -1px;
+    vertical-align: top;
 }
 
 .k-tabstrip .k-content,
 .k-panelbar .k-tabstrip .k-content
 {
-    border-width: 1px;
-    border-style: solid;
-    margin: 0 .3em .3em;
-    padding: .3em 1em;
     display: none;
     position: static;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0 .3em .3em;
+    padding: .3em 1em;
     zoom: 1;
 }
 
@@ -701,10 +641,9 @@ div.k-window-content
 {
     list-style-type: none;
     display: block;
-    zoom: 1;
-    margin: 0;
-    top: 0;
     border-width: 0;
+    margin: 0;
+    zoom: 1;
 
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
@@ -714,10 +653,10 @@ div.k-window-content
 .k-panelbar .k-image,
 .k-panelbar .k-sprite
 {
-    vertical-align: middle;
-    margin-right: 5px;
-    margin-top: 4px;
     float: left;
+    margin-top: 4px;
+    margin-right: 5px;
+    vertical-align: middle;
 }
 
 .k-panelbar .k-group .k-image,
@@ -728,11 +667,12 @@ div.k-window-content
 
 .k-panelbar .k-link
 {
-    line-height: 2.05em;
-    padding: 0 1em;
-    border-bottom: 1px solid;
     display: block;
     position: relative;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding: 0 1em;
+    line-height: 2.05em;
     text-decoration: none;
     zoom: 1;
 }
@@ -749,18 +689,18 @@ div.k-window-content
 .k-panelbar .k-content
 {
     position: relative;
-    zoom: 1;
-    padding: 0;
-    margin: 0;
-    border-bottom-width: 1px;
     border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin: 0;
+    padding: 0;
+    zoom: 1;
 }
 
 .k-panelbar .k-group .k-link
 {
-    line-height: 1.7em;
     border-bottom: 0;
     font-size: .95em;
+    line-height: 1.7em;
 }
 
 .k-panelbar .k-group .k-arrow-up,
@@ -800,8 +740,8 @@ div.k-window-content
 .k-menu .k-group
 {
     list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
     zoom: 1;
 }
 
@@ -812,29 +752,29 @@ div.k-window-content
 
 .k-menu .k-item
 {
-    line-height: 16px;
     position: relative;
     float: left;
-    zoom: 1;
-    border-width: 0 1px 0 0;
     border-style: solid;
+    border-width: 0 1px 0 0;
+    line-height: 16px;
     vertical-align: top;
+    zoom: 1;
 }
 
 .k-menu:after /* add a clear fix to expand content */
 {
     content: '\A0';
     display: block;
-    overflow: hidden;
     width: 100%;
     height: 0;
+    overflow: hidden;
 }
 
 .k-menu .k-item .k-item,
 .k-menu-vertical .k-item
 {
-    float: none;
     display: block;
+    float: none;
     border-width: 0;
 }
 
@@ -847,18 +787,17 @@ div.k-window-content
 
 .k-menu .k-link
 {
-    text-decoration: none;
-    padding: .25em .97em;
     display: block;
+    padding: .25em .97em;
 }
 
 .k-menu .k-group
 {
     display: none;
-    white-space: nowrap;
     border-style: solid;
     border-width: 1px;
     overflow: visible;
+    white-space: nowrap;
 }
 
 .k-menu .k-group .k-item
@@ -882,15 +821,15 @@ div.k-window-content
 .k-menu .k-arrow-next
 {
     position: absolute;
-    right: 0;
     top: 3px;
+    right: 0;
 }
 
 .k-menu .k-animation-container,
 .k-menu .k-group
 {
-    left: -1px;
     position: absolute;
+    left: -1px;
 }
 
 .k-menu .k-animation-container .k-animation-container,
@@ -898,14 +837,14 @@ div.k-window-content
 .k-menu-vertical .k-animation-container,
 .k-menu-vertical .k-group
 {
-    left: 100%;
     top: -1px;
+    left: 100%;
 }
 
 .k-menu .k-animation-container .k-group
 {
-    left: auto;
     top: auto;
+    left: auto;
 }
 
 .k-menu .k-separator
@@ -938,7 +877,7 @@ div.k-window-content
     width: 100%;
     border-collapse: separate;
     empty-cells: show;
-    border: 0;
+    border-width: 0;
 }
 
 .k-grid-header .k-header
@@ -948,23 +887,22 @@ div.k-window-content
 
 .k-grid-header .k-header
 {
-    padding: .3em .6em;
-    border-width: 0 0 1px 1px;
+    overflow: hidden;
     border-style: solid;
+    border-width: 0 0 1px 1px;
+    padding: .3em .6em;
     font-weight: normal;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .k-grid-header .k-header .k-link
 {
-    line-height: 18px; /* due to sorting icons*/
-    height: 18px;
     display: block;
+    height: 18px;
+    line-height: 18px; /* due to sorting icons*/
     margin: -.3em -.6em;
     padding: .3em 2.4em .3em .6em;
-    border: 0;
 }
 
 .k-grid-header .k-header .k-icon
@@ -979,13 +917,12 @@ div.k-window-content
 
 .k-grid td
 {
-    padding: .25em .6em;
     border-style: solid;
-    border-width: 0;
-    border-left-width: 1px;
-    vertical-align: middle;
-    line-height: 1.6em;
+    border-width: 0 0 0 1px;
+    padding: .25em .6em;
     overflow: hidden;
+    line-height: 1.6em;
+    vertical-align: middle;
     text-overflow: ellipsis;
 }
 
@@ -993,20 +930,20 @@ div.k-window-content
 .k-grid-footer-wrap
 {
     position: relative;
-    overflow: hidden;
     width: 100%;
-    zoom: 1;
+    overflow: hidden;
     border-style: solid;
     border-width: 0 1px 0 0;
+    zoom: 1;
 }
 
 div.k-grid-header,
 div.k-grid-footer
 {
-    padding-right: 17px; /* width of scrollbar. may vary across operating systems. can be calculated. */
-    zoom: 1;
-    border-bottom-width: 1px;
+    padding-right: 17px; /* scrollbar width; may vary; can be calculated */
     border-bottom-style: solid;
+    border-bottom-width: 1px;
+    zoom: 1;
 }
 
 div.k-grid-header .k-header
@@ -1017,17 +954,17 @@ div.k-grid-header .k-header
 .k-grid-content
 {
     position: relative;
+    width: 100%;
     overflow: auto;
     overflow-x: auto;
     overflow-y: scroll;
-    width: 100%;
     zoom: 1;
 }
 
 .k-virtual-scrollable-wrap
 {
-    overflow: hidden;
     height: 100%;
+    overflow: hidden;
 }
 
 .k-grid-header table,
@@ -1041,8 +978,8 @@ div.k-grid-header .k-header
 
 .k-grid-toolbar
 {
-    border-width: 1px 0 0;
     border-style: solid;
+    border-width: 1px 0 0;
 }
 
 .k-grid-header .k-header:first-child,
@@ -1052,15 +989,15 @@ div.k-grid-header .k-header
     border-left-width: 0;
 }
 
-/* Grid : : paging */
+/* Grid :: paging */
 
 .k-grid-pager
 {
+    overflow: auto;
+    border-style: solid;
+    border-width: 1px 0 0;
     padding: .2em .6em;
     line-height: 1.8em;
-    overflow: auto;
-    border-width: 1px 0 0;
-    border-style: solid;
 }
 
 .k-grid-pager:first-child,
@@ -1084,14 +1021,12 @@ div.k-grid-header .k-header
 .k-grouping-row p
 {
     display: inline-block;
-    *display: inline;
-    zoom: 1;
     vertical-align: middle;
 }
 
 .k-pager .k-page-size
 {
-    line-height:1.2em;
+    line-height: 1.2em;
 }
 
 .k-pager li
@@ -1101,14 +1036,14 @@ div.k-grid-header .k-header
 
 .k-footer-template td
 {
-    border-width: 1px 0 0 1px;
     border-style: solid;
+    border-width: 1px 0 0 1px;
 }
 
 .k-group-footer td
 {
-    border-width: 1px 0;
     border-style: solid;
+    border-width: 1px 0;
 }
 
 .k-grid-footer
@@ -1136,19 +1071,19 @@ div.k-grid-header .k-header
 
 .k-pager .k-link
 {
-    text-decoration: none;
-    padding: 1px;
+    border-width: 0;
     margin-top: .2em;
-    border: 0;
+    padding: 1px;
     line-height: 16px;
+    text-decoration: none;
 }
 
 .k-pager .k-state-active,
 .k-pager .k-state-hover
 {
-    padding: 0;
-    border-width: 1px;
     border-style: solid;
+    border-width: 1px;
+    padding: 0;
 
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -1187,23 +1122,20 @@ div.k-grid-header .k-header
 .k-page-i-of-n input
 {
     width: 2em;
-    vertical-align: baseline;
     font-size: 1em;
+    vertical-align: baseline;
 }
 
 /* Grid :: filtering */
 
 .k-grid-filter
 {
-    float: right;
-    height: 18px;
-    padding: .3em .2em;
     position: relative;
     display: inline-block;
-    *display: inline;
-    zoom: 1;
-
+    float: right;
+    height: 18px;
     margin: -1.8em -.6em -.3em 3px;
+    padding: .3em .2em;
 }
 
 .k-grid-filter .k-icon
@@ -1219,10 +1151,10 @@ div.k-grid-header .k-header
 .k-grid .k-filter-options
 {
     position: absolute;
-    border-width: 1px;
-    border-style: solid;
-    padding: 3px;
     width: 148px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 3px;
 
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -1257,8 +1189,8 @@ div.k-grid-header .k-header
 
 .k-grouping-row p
 {
-    padding: 0 .6em;
     margin-left: -.6em;
+    padding: 0 .6em;
 }
 
 .k-grid .k-group-cell+td,
@@ -1275,8 +1207,8 @@ div.k-grid-header .k-header
 
 .k-grouping-header
 {
-    border-bottom-width: 1px;
     border-bottom-style: solid;
+    border-bottom-width: 1px;
 }
 
 .k-grouping-header,
@@ -1295,13 +1227,12 @@ div.k-grid-header .k-header
 .k-grouping-header .k-group-indicator
 {
     display: inline-block;
-    *display: inline;
-    zoom: 1;
-    border-width: 1px;
     border-style: solid;
-    line-height: 1.5em;
-    padding: .15em .15em .15em .4em;
+    border-width: 1px;
     margin: 0 3px;
+    padding: .15em .15em .15em .4em;
+    line-height: 1.5em;
+
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
@@ -1309,19 +1240,17 @@ div.k-grid-header .k-header
 
 .k-grouping-header .k-link
 {
-    text-decoration: none;
     display: inline-block;
-    *display: inline;
-    zoom: 1;
-    line-height: normal;
+    border-width: 0;
     padding: 0;
-    border-style: none;
+    line-height: normal;
+    text-decoration: none;
 }
 
 .k-grouping-header .k-button
 {
-    padding: 0;
     border: 0;
+    padding: 0;
     background: transparent;
     line-height: 1;
 }
@@ -1340,8 +1269,6 @@ div.k-grid-header .k-header
 .k-grouping-header .k-button
 {
     display: inline-block;
-    *display: inline;
-    zoom: 1;
     vertical-align: middle;
 }
 
@@ -1360,24 +1287,24 @@ div.k-grid-header .k-header
 
 .k-dirty
 {
+    position: absolute;
     width: 0;
     height: 0;
-    vertical-align: top;
-    position: absolute;
-    padding: 0;
-    margin: -0.45em 0 0 -0.6em;
-    overflow: hidden;
-    border-width: 3px;
     border-style: solid;
+    border-width: 3px;
     border-color: #f00 transparent transparent #f00;
+    margin: -0.45em 0 0 -0.6em;
+    padding: 0;
+    overflow: hidden;
+    vertical-align: top;
 }
 
 .k-grouping-header,
 .k-grid-toolbar
 {
-    cursor: default;
     margin: 0;
     padding: .25em;
+    cursor: default;
 }
 
 .k-grid .k-edit-container
@@ -1387,8 +1314,8 @@ div.k-grid-header .k-header
 
 .k-edit-form
 {
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
 
 .k-grid-edit-row .k-edit-form td
@@ -1400,11 +1327,11 @@ div.k-grid-header .k-header
 .k-grid-edit-row .k-numerictextbox,
 .k-grid-edit-row .k-datepicker
 {
-    vertical-align: middle;
     width: 5em;
     max-width: 90%;
     min-width: 90%; /* IE8 calculates width: 90% wrong, so we have to trick it */
     margin: -.4em -.3em -.15em;
+    vertical-align: middle;
 }
 
 .k-grid-edit-row .k-dropdown,
@@ -1413,8 +1340,8 @@ div.k-grid-header .k-header
     width: 5em;
     max-width: 90%;
     min-width: 90%; /* IE8 calculates width: 90% wrong, so we have to trick it */
-    line-height: normal;
     margin: -.1em -.3em -.45em;
+    line-height: normal;
 }
 
 .k-edit-form-container
@@ -1438,12 +1365,13 @@ div.k-grid-header .k-header
 {
     vertical-align: middle;
 }
+
 .k-grid-actions
 {
     display: inline-block;
 }
 
-*+html .k-grid-actions{display: inline;zoom: 1;vertical-align: bottom}
+*+html .k-grid-actions{ vertical-align: bottom; }
 
 .k-grid .k-button,
 .k-edit-form .k-button
@@ -1468,8 +1396,8 @@ div.k-grid-header .k-header
 
 html body .k-grid tbody .k-button-icon
 {
-    min-width: 0;
     width: auto;
+    min-width: 0;
 }
 
 .k-detail-row
@@ -1493,16 +1421,16 @@ html body .k-grid tbody .k-button-icon
 
 .k-grid .k-resize-handle
 {
-    cursor: col-resize;
     position: absolute;
     height: 25px;
+    cursor: col-resize;
 }
 
 .k-marquee
 {
     position: absolute;
-    opacity: .3;
     filter: alpha(opacity=30);
+    opacity: .3;
 }
 
 /* ComboBox & DropDownList */
@@ -1513,25 +1441,24 @@ div.k-dropdown
     background: none;
 }
 
-.k-autocomplete,
 .k-combobox,
 .k-dropdown,
 .k-selectbox
 {
-    display: inline-block;
-    *display: inline;
-    zoom: 1;
-
     position: relative;
-    overflow: visible;
-    white-space: nowrap;
-    vertical-align: top;
-
+    display: inline-block;
     width: 150px;
+    overflow: hidden;
     border-width: 0;
+    white-space: nowrap;
 }
 
-*+html .k-combobox{overflow: visible} /*positions icon properly*/
+*+html .k-combobox,
+*+html .k-dropdown,
+*+html .k-selectbox
+{
+    overflow: visible; /*positions icon properly*/
+}
 
 .k-dropdown-wrap,
 .k-picker-wrap
@@ -1539,81 +1466,25 @@ div.k-dropdown
     position: relative;
     display: block;
     cursor: default;
+    
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
-.k-list.k-group
-{
-    border: 3px solid transparent;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-}
-
-.k-list.k-group.k-state-active-border-up,
-.k-autocomplete.k-state-active-border-up,
-.k-dropdown-wrap.k-state-active-border-up
-{
-    -webkit-border-radius: 0 0 4px 4px;
-    -moz-border-radius: 0 0 4px 4px;
-    border-radius: 0 0 4px 4px;
-}
-
-.k-list.k-state-active-border-down,
-.k-autocomplete.k-state-active-border-down,
-.k-dropdown-wrap.k-state-active-border-down
-{
-    -webkit-border-radius: 4px 4px 0 0;
-    -moz-border-radius: 4px 4px 0 0;
-    border-radius: 4px 4px 0 0;
-}
-
-.k-picker-wrap
-{
-    padding: 0 23px 0 0;
-}
-
-.k-autocomplete,
 .k-dropdown-wrap,
 .k-picker-wrap
 {
-    border: 0;
-    padding: 3px 24px 3px 3px;
-}
-
-.k-autocomplete
-{
-    padding: 3px;
-}
-
-.k-dropdown-wrap.k-state-hover,
-.k-picker-wrap.k-state-hover
-{
-    background-position: 0 50%;
-}
-
-.k-autocomplete,
-.k-dropdown-wrap.k-state-focused,
-.k-dropdown-wrap.k-state-hover,
-.k-picker-wrap.k-state-focused,
-.k-picker-wrap.k-state-hover
-{
-    -webkit-transition: -webkit-box-shadow .15s ease-out;
-    -moz-transition: -moz-box-shadow .15s ease-out;
-    -o-transition: box-shadow .15s ease-out;
-    -ms-transition: box-shadow .15s ease-out;
-}
-
-.k-combobox .k-dropdown-wrap,
-.k-datepicker .k-picker-wrap
-{
-    padding-right: 26px; /* icon width + input paddings, except IE6 */
+    border-style: solid;
+    border-width: 1px;
+    padding-right: 22px; /* icon width + input paddings, except IE6 */
 }
 
 .k-picker-wrap .k-input,
 .k-combobox .k-input
 {
-    vertical-align: top;
     width: 100%;
+    vertical-align: top;
 }
 
 .k-picker-wrap .k-input,
@@ -1621,71 +1492,51 @@ div.k-dropdown
 .k-combobox .k-input,
 .k-selectbox .k-input
 {
-    outline: 0;
     border-width: 0;
+    outline: 0;
 }
 
 .k-dropdown .k-input,
 .k-selectbox .k-input
 {
-    background:transparent;
+    background: transparent;
 }
 
-/*removes excessive spacing in IE7*/
-*+html .k-picker-wrap .k-input,
-*+html .k-combobox .k-input { margin:-1px 0; }
+*+html .k-picker-wrap .k-input, *+html .k-combobox .k-input { margin: -1px 0; } /* removes excessive spacing */
 
 .k-picker-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
-    text-decoration: none;
-
-    vertical-align: top;
-    display: inline-block;
-    *display: inline;
-    zoom: 1;
-
-    cursor: default;
-
     position: absolute; /* icon positioning */
     top: 0;
     right: 0;
+    display: inline-block;
+    vertical-align: top;
+    text-decoration: none;
+    cursor: default;
 }
 
 .k-combobox .k-select,
 .k-picker-wrap .k-select
 {
-    border-width: 0;
     border-style: solid;
-    border-color: inherit; /* will be skin-related, inherit does not work in ie7- */
+    border-width: 0 0 0 1px;
+    border-color: inherit; /* skin-related, inherit does not work in ie7- */
 }
 
 .k-picker-wrap .k-select
 {
-    padding:0 2px;
+    padding: 0 2px;
 }
 
 div.k-datetimepicker .k-select
 {
-    right:21px;
+    right: 21px;
 }
 
 div.k-datetimepicker .k-select+.k-select
 {
-    right:0;
-}
-
-.k-autocomplete
-{
-    vertical-align: top;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.k-autocomplete .k-input
-{
-    display: block;
+    right: 0;
 }
 
 .k-combobox .k-icon
@@ -1696,76 +1547,71 @@ div.k-datetimepicker .k-select+.k-select
 .k-dropdown .k-select,
 .k-selectbox .k-select
 {
+    overflow: hidden;
     border: 0;
     text-decoration: none;
     font: inherit;
     color: inherit;
-    overflow: hidden;
-
     cursor: default;
 }
 
 .k-dropdown .k-input,
 .k-selectbox .k-input
 {
-    overflow: hidden;
     display: block;
-    text-overflow: ellipsis;
-    padding: 0.166em 0 0.166em 3px;
     min-height: 1.35em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: .25em 0 .15em 3px;
 }
 
 .k-picker-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
     position: absolute;
-    right: 0;
     top: 0;
+    right: 0;
 }
 
 .k-picker-wrap .k-icon,
 .k-dropdown-wrap .k-icon
 {
-    height: 18px;
+    margin-top: 2px;
+    vertical-align: top;
 }
 
-.k-autocomplete .k-input,
-.k-dropdown-wrap .k-input,
-.k-picker-wrap .k-input
-{
-    text-indent: 2px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-}
-
-.k-autocomplete .k-input,
+.k-picker-wrap .k-input,
 .k-combobox .k-input
 {
-    min-height: 1.35em;
-    line-height: 1.35em;
-    padding: 0.166em 0;
-    text-indent: 4px;
+    height: 18px;
+    line-height: 18px;
     border: 0;
     margin: 0;
+    padding: 1px 3px;
 }
 
 .k-picker-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
-    min-height: 1.6em;
-    line-height: 1.45em;
-    vertical-align: middle;
-    padding: 3px 5px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.k-dropdown-wrap .k-input,
+.k-picker-wrap .k-input
+{
+    -moz-border-radius: 5px 0 0 5px;
+    -webkit-border-radius: 5px 0 0 5px;
+    border-radius: 5px 0 0 5px;
 }
 
 .k-dropdown-wrap .k-select,
 .k-picker-wrap .k-select,
 .k-datetimepicker .k-select+.k-select
 {
-    -moz-border-radius: 0 4px 4px 0;
-    -webkit-border-radius: 0 4px 4px 0;
-    border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
 }
 
 .k-datetimepicker .k-select
@@ -1777,8 +1623,8 @@ div.k-datetimepicker .k-select+.k-select
 
 .k-popup
 {
-    border-width: 1px;
     border-style: solid;
+    border-width: 1px;
 }
 
 .k-popup .k-item
@@ -1788,31 +1634,16 @@ div.k-datetimepicker .k-select+.k-select
 
 .k-list .k-item
 {
-    padding: 1px 5px 1px 5px;
-    line-height: 22px;
-}
-
-.k-list .k-state-hover,
-.k-list .k-state-focused,
-.k-list .k-state-selected
-{
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    padding: 0 4px;
-    border-width: 1px;
-    border-style: solid;
+    padding: 1px 5px 1px 3px;
 }
 
 /* Calendar */
 
 .k-calendar
 {
-    display: inline-block;
-    *display: inline;
-    zoom: 1;
-    width: 203px;
     position: relative;
+    display: inline-block;
+    width: 203px;
     overflow: hidden;
 }
 
@@ -1828,9 +1659,9 @@ div.k-datetimepicker .k-select+.k-select
 
 .k-calendar .k-header
 {
+    position: relative;
     padding: .4em 0;
     text-align: center;
-    position: relative;
     zoom: 1;
 }
 
@@ -1845,17 +1676,16 @@ div.k-datetimepicker .k-select+.k-select
 
 .k-calendar .k-content
 {
-    text-align: right;
     display: table;
     width: 100%;
     height: 169px;
-    table-layout: fixed;
-    border-style: none;
+    border-width: 0;
     margin: 0;
-    padding: 0;
+    table-layout: fixed;
+    text-align: right;
 }
 
-*+html .k-calendar .k-content{display:block;}
+*+html .k-calendar .k-content{display: block;}
 
 .k-calendar .k-animation-container .k-content
 {
@@ -1865,8 +1695,6 @@ div.k-datetimepicker .k-select+.k-select
 .k-calendar .k-nav-fast
 {
     display: inline-block;
-    *display: inline;
-    zoom: 1;
     width: 75%;
 }
 
@@ -1885,22 +1713,22 @@ div.k-datetimepicker .k-select+.k-select
 
 .k-calendar td
 {
-    cursor: pointer;
     padding: 1px;
+    cursor: pointer;
 }
 
 .k-calendar .k-state-focus
 {
-    border-width: 1px;
     border-style: dotted;
+    border-width: 1px;
     padding: 0;
 }
 
 .k-calendar .k-content .k-link
 {
+    position: relative;
     display: block;
     overflow: hidden;
-    position: relative;
 }
 
 .k-calendar th,
@@ -1921,9 +1749,9 @@ div.k-datetimepicker .k-select+.k-select
 .k-datetimepicker,
 .k-datepicker
 {
+    width: 8.5em;
     border: 0;
     white-space: nowrap;
-    width: 8.5em;
 }
 
 .k-datetimepicker
@@ -1935,7 +1763,7 @@ div.k-timepicker,
 div.k-datetimepicker,
 div.k-datepicker
 {
-    background-color: transparent; /* don't allow k-widget to add background-color */
+    background-color: transparent; /* due to k-widget */
 }
 
 .k-datetimepicker .k-picker-wrap
@@ -1953,24 +1781,12 @@ div.k-datepicker
 .k-datetimepicker
 {
     display: inline-block;
-    *display: inline;
-    zoom: 1;
     vertical-align: top;
 }
 
 .k-picker-wrap .k-input
 {
     margin: 0;
-}
-
-.k-iframe-overlay
-{
-    position: absolute;
-    width: 100%;
-    border: 0;
-    top: 0;
-    left: 0;
-    filter: alpha(opacity=0);
 }
 
 .k-time-popup .k-item
@@ -1982,29 +1798,30 @@ div.k-datepicker
 
 div.k-treeview
 {
-    /* don't allow k-widget to add border or background */
+    /* due to k-widget */
     border-width: 0;
     background: none;
-    white-space: nowrap;
     overflow: auto;
+    white-space: nowrap;
 }
 
 .k-treeview .k-item
 {
-    padding: 0 0 0 16px;
-    margin: 0;
-    border-width: 0;
-    position: static;
-    top: auto;
+    /*position: static;
+    top: auto;*/ /*?*/
     display: block;
+    border-width: 0;
+    margin: 0;
+    padding: 0 0 0 16px;
 }
 
 .k-treeview .k-group,
 .k-treeview .k-content
 {
-    list-style-type: none;
+    margin: 0;
+    padding: 0;
     background: none;
-    margin: 0; padding: 0;
+    list-style-type: none;
 }
 
 .k-treeview .k-animation-container
@@ -2018,8 +1835,6 @@ div.k-treeview
 .k-treeview .k-in
 {
     display: inline-block;
-    *display: inline;
-    zoom: 1;
     vertical-align: top;
 }
 
@@ -2028,10 +1843,9 @@ div.k-treeview
 .k-treeview .k-plus-disabled,
 .k-treeview .k-minus-disabled
 {
-    margin-left: -16px;
+    float: left;  /* Opera */
     margin-top: 2px;
-    float: left;  /* required for Opera */
-    *float: none; /* IE6 does not like it as node text wraps */
+    margin-left: -16px;
     cursor: pointer;
 }
 
@@ -2049,11 +1863,10 @@ div.k-treeview
 
 .k-treeview .k-in
 {
-    margin: 1px 0;
+    margin: 1px 0 1px 2px;
     padding: 2px 4px 2px 3px;
-    text-decoration: none;
     line-height: 16px;
-    margin-left: 2px;
+    text-decoration: none;
 }
 
 .k-treeview span.k-in
@@ -2064,9 +1877,9 @@ div.k-treeview
 .k-treeview .k-state-hover,
 .k-treeview .k-state-selected
 {
-    padding: 1px 3px 1px 2px;
-    border-width: 1px;
     border-style: solid;
+    border-width: 1px;
+    padding: 1px 3px 1px 2px;
 
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -2075,12 +1888,12 @@ div.k-treeview
 
 .k-treeview .k-drop-hint
 {
-    width: 80px;
-    visibility: hidden;
-    height: 5px;
     position: absolute;
-    margin-top: -3px;
     z-index: 10000;
+    visibility: hidden;
+    width: 80px;
+    height: 5px;
+    margin-top: -3px;
     background-color: transparent;
     background-repeat: no-repeat;
 }
@@ -2091,9 +1904,14 @@ div.k-treeview
 .k-treeview-lines .k-mid,
 .k-treeview-lines .k-bot
 {
-    background-repeat: no-repeat;
     margin-left: -16px;
     padding-left: 16px;
+    background-repeat: no-repeat;
+}
+
+.k-treeview-lines .k-item
+{
+    background-repeat: no-repeat;
 }
 
 .k-treeview-lines .k-top { background-position: -91px 0; }
@@ -2101,24 +1919,13 @@ div.k-treeview
 .k-treeview-lines .k-mid { background-position: -47px -44px; }
 .k-treeview-lines .k-last .k-top { background-position: -25px -66px; }
 .k-treeview-lines .k-group .k-last .k-bot { background-position: -69px -22px; }
-
-.k-treeview-lines .k-item
-{
-    background-repeat: no-repeat;
-}
-
-.k-treeview-lines .k-first
-{
-    background-repeat: no-repeat;
-    background-position: 0 16px;
-}
+.k-treeview-lines .k-first { background-position: 0 16px; }
 
 /* inputs */
 
 .k-input
 {
-    padding: 0.25em 0;
-    text-indent: 4px;
+    padding: 2px 1px 3px;
 }
 
 /* NumericTextBox */
@@ -2126,12 +1933,10 @@ div.k-treeview
 div.k-numerictextbox
 {
     display: inline-block;
-    *display: inline;
-    zoom: 1;
     vertical-align: middle;
-    white-space: nowrap;
     border: 0;
     background: transparent;
+    white-space: nowrap;
 }
 
 .k-numerictextbox .k-input /*alignment of arrows in WebKit*/
@@ -2152,23 +1957,22 @@ div.k-numerictextbox
 
 .k-numerictextbox .k-link
 {
-    border-style: none;
     display: inline-block;
+    border-width: 0;
 }
-*+html .k-numerictextbox .k-link { display: inline; zoom: 1; }
 
 .k-numerictextbox .k-arrow-up
 {
-    vertical-align: top;
-    margin-top: 1px;
     height: 10px;
+    margin-top: 1px;
+    vertical-align: top;
 }
 
 .k-numerictextbox .k-arrow-down
 {
-    vertical-align: bottom;
-    margin-bottom: 1px;
     height: 11px;
+    margin-bottom: 1px;
+    vertical-align: bottom;
 }
 
 /* ColorPicker */
@@ -2201,49 +2005,47 @@ div.k-numerictextbox
 
 .k-colorpicker .k-icon
 {
-    vertical-align: middle;
     margin-top: 2px;
+    vertical-align: middle;
 }
 
 .k-colorpicker-popup
 {
-    line-height: 0;
     width: 136px;
+    line-height: 0;
 }
 
 .k-colorpicker-popup .k-reset
 {
-    padding: .25em;
-    margin: 0;
     display: inline-block;
+    margin: 0;
+    padding: .25em;
 }
 
 .k-colorpicker-popup .k-item
 {
-    float: left;
     display: block;
-    overflow: hidden;
+    float: left;
     width: 12px;
     height: 12px;
+    overflow: hidden;
     font-size: 0;
-    padding: 0;
     margin: 0 1px 1px 0;
+    padding: 0;
 }
-
-*+html .k-colorpicker, *+html .k-colorpicker .k-tool-icon, *+html .k-colorpicker-popup .k-reset { display: inline; zoom: 1; }
 
 /* Editor */
 
 .k-editor
 {
-    border-width: 1px;
-    border-style: solid;
-    border-collapse: separate;
-    height: 250px;
-    font-size: 100%;
-    table-layout: fixed;
-    vertical-align: top;
     width: 100%;
+    height: 250px;
+    table-layout: fixed;
+    border-style: solid;
+    border-width: 1px;
+    border-collapse: separate;
+    font-size: 100%;
+    vertical-align: top;
 }
 
 .k-editor .k-editor-toolbar-wrap
@@ -2257,8 +2059,8 @@ div.k-numerictextbox
     margin: 0;
     padding: .1em 0;
     list-style-type: none;
-    cursor: default;
     line-height: 1.3em;
+    cursor: default;
 }
 
 .k-editor-toolbar li
@@ -2277,21 +2079,21 @@ div.k-numerictextbox
 
 .k-editor-toolbar .k-separator
 {
-    border-width: 0 1px 0 0;
-    border-style: solid;
-    padding: 0 0 0 1px;
-    font-size: 1.3em;
-    margin: 0 .15em;
     position: relative;
     top: 1px;
+    border-style: solid;
+    border-width: 0 1px 0 0;
+    margin: 0 .15em;
+    padding: 0 0 0 1px;
+    font-size: 1.3em;
 }
 
 .k-editor-toolbar .k-break
 {
     display: block;
     height: 1px;
-    line-height: 0;
     font-size: 0;
+    line-height: 0;
 }
 
 .k-editor-toolbar .k-dropdown,
@@ -2304,10 +2106,10 @@ div.k-numerictextbox
 
 .k-editor-button .k-tool-icon
 {
-    vertical-align: middle;
     width: 22px;
     height: 22px;
     margin: 1px;
+    vertical-align: middle;
 }
 
 .k-editor-colorpicker .k-tool-icon
@@ -2318,8 +2120,8 @@ div.k-numerictextbox
 .k-editor-colorpicker .k-icon
 {
     border-style: solid;
-    border-color: #ccc;
     border-width: 0 0 0 1px;
+    border-color: #ccc;
 }
 
 .k-editor-colorpicker .k-selected-color
@@ -2365,10 +2167,10 @@ div.k-numerictextbox
 .k-editor-button .k-state-hover,
 .k-editor-button .k-state-active
 {
-    vertical-align: middle;
-    border-width: 1px;
     border-style: solid;
+    border-width: 1px;
     margin: 0;
+    vertical-align: middle;
 
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -2377,33 +2179,33 @@ div.k-numerictextbox
 
 .k-editor-button .k-state-disabled
 {
-    opacity: .3;
     filter: alpha(opacity=30);
+    opacity: .3;
 }
 
 .k-editor .k-editable-area
 {
-    outline: none;
-    height: 100%;
     width: 100%;
-    border-width: 1px;
+    height: 100%;
     border-style: solid;
+    border-width: 1px;
+    outline: none;
 }
 
 .k-editor .k-content
 {
-    height: 100%;
-    width: 100%;
     display: block;
-    padding: 0;
-    margin: 0;
+    width: 100%;
+    height: 100%;
     border: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .k-editor iframe.k-content
 {
     display: inline;
-    vertical-align:top;/*fixes missing top border caused by the inline display*/
+    vertical-align: top; /*fixes missing top border caused by the inline display*/
 }
 
 .k-editor .k-raw-content
@@ -2412,7 +2214,7 @@ div.k-numerictextbox
     margin: 0;
     padding: 0;
     font-size: inherit;
-    font-family: Consolas, "Courier New", monospace;
+    font-family: consolas, "courier new", monospace;
 }
 
 .k-editor-dialog
@@ -2436,18 +2238,16 @@ div.k-numerictextbox
 .k-form-text-row label
 {
     display: inline-block;
-    *display: inline;
-    zoom: 1;
     width: 7em;
-    text-align: right;
     padding-right: .5em;
+    text-align: right;
 }
 
 .k-form-checkbox-row input
 {
     margin-left: 7em;
-    font-size: inherit;
     padding: 0;
+    font-size: inherit;
 }
 
 .k-form-checkbox-row label
@@ -2479,8 +2279,6 @@ div.k-numerictextbox
 .k-editor-dialog .k-button
 {
     display: inline-block;
-    *display: inline;
-    zoom: 1;
 }
 
 /* Slider */
@@ -2506,11 +2304,9 @@ div.k-slider
 .k-slider-horizontal
 {
     display: inline-block;
-    height: 22px;
     width: 200px; /* default width */
+    height: 22px;
 }
-
-*+html .k-slider-horizontal { display: inline; zoom: 1; }
 
 .k-slider-wrap
 {
@@ -2523,8 +2319,8 @@ div.k-slider
 {
     position: absolute;
     top: 0;
-    min-width: 0;
     width: 20px;
+    min-width: 0;
     height: 20px;
     margin: 0;
     padding: 0;
@@ -2533,19 +2329,19 @@ div.k-slider
 
 .k-slider .k-button .k-icon
 {
-    vertical-align:top;
-    margin-top:2px;
+    margin-top: 2px;
+    vertical-align: top;
 }
 
 .k-state-disabled .k-slider-wrap
 {
-    opacity: .6;
     filter: alpha(opacity=60);
+    opacity: .6;
 }
 
 .k-state-disabled .k-slider-wrap .k-slider-items
 {
-    color:#333;
+    color: #333;
 }
 
 .k-slider .k-button-decrease
@@ -2583,17 +2379,17 @@ div.k-slider
 .k-slider-horizontal .k-slider-track,
 .k-slider-horizontal .k-slider-selection
 {
-    height: 6px;
     top: 50%;
     left: 0;
+    height: 6px;
     margin-top: -3px;
     background-repeat: repeat-x;
 }
 
 .k-slider-horizontal .k-slider-track
 {
-    border-width: 0 1px;
     border-style: solid;
+    border-width: 0 1px;
     background-position: 0 -464px;
 }
 
@@ -2610,17 +2406,17 @@ div.k-slider
 .k-slider-vertical .k-slider-track,
 .k-slider-vertical .k-slider-selection
 {
-    width: 6px;
     left: 50%;
     bottom: 0;
+    width: 6px;
     margin-left: -3px;
     background-repeat: repeat-y;
 }
 
 .k-slider-vertical .k-slider-track
 {
-    border-width: 1px 0;
     border-style: solid;
+    border-width: 1px 0;
     background-position: 0 0;
 }
 
@@ -2640,9 +2436,9 @@ div.k-slider
     background-repeat: no-repeat;
     background-color: transparent;
     text-indent: -3333px;
+    overflow: hidden;
     text-decoration: none;
     text-align: center;
-    overflow: hidden;
     cursor: pointer;
 }
 
@@ -2694,9 +2490,9 @@ div.k-slider
 
 .k-slider .k-slider-track .k-state-active
 {
+    border: 0;
 	background-position: 0 -432px;
     background-color: transparent;
-    border: 0;
 }
 
 .k-slider-buttons .k-slider-items
@@ -2739,28 +2535,28 @@ div.k-slider
 .k-slider-horizontal .k-tick
 {
     float: left;
-    text-align: center;
     height: 100%;
+    text-align: center;
 }
 
 /* fixes ticks position and removes spacing between them in IE7 */
 *+html .k-slider-vertical .k-tick { float: left; clear: left; width: 100%; }
 
-.k-slider-horizontal .k-tick { background-position:center -94px; }
-.k-slider-horizontal .k-slider-topleft .k-tick { background-position:center -124px; }
-.k-slider-horizontal .k-slider-bottomright .k-tick { background-position:center -154px; }
+.k-slider-horizontal .k-tick { background-position: center -94px; }
+.k-slider-horizontal .k-slider-topleft .k-tick { background-position: center -124px; }
+.k-slider-horizontal .k-slider-bottomright .k-tick { background-position: center -154px; }
 
-.k-slider-horizontal .k-tick-large { background-position:center -4px; }
-.k-slider-horizontal .k-slider-topleft .k-tick-large { background-position:center -34px; }
-.k-slider-horizontal .k-slider-bottomright .k-tick-large { background-position:center -64px; }
+.k-slider-horizontal .k-tick-large { background-position: center -4px; }
+.k-slider-horizontal .k-slider-topleft .k-tick-large { background-position: center -34px; }
+.k-slider-horizontal .k-slider-bottomright .k-tick-large { background-position: center -64px; }
 
-.k-slider-vertical .k-tick { background-position:-94px center; }
-.k-slider-vertical .k-slider-topleft .k-tick { background-position:-124px center; }
-.k-slider-vertical .k-slider-bottomright .k-tick { background-position:-154px center; }
+.k-slider-vertical .k-tick { background-position: -94px center; }
+.k-slider-vertical .k-slider-topleft .k-tick { background-position: -124px center; }
+.k-slider-vertical .k-slider-bottomright .k-tick { background-position: -154px center; }
 
-.k-slider-vertical .k-tick-large { background-position:-4px center; }
-.k-slider-vertical .k-slider-topleft .k-tick-large { background-position:-34px center; }
-.k-slider-vertical .k-slider-bottomright .k-tick-large { background-position:-64px center; }
+.k-slider-vertical .k-tick-large { background-position: -4px center; }
+.k-slider-vertical .k-slider-topleft .k-tick-large { background-position: -34px center; }
+.k-slider-vertical .k-slider-bottomright .k-tick-large { background-position: -64px center; }
 
 .k-slider-horizontal .k-first { background-position: 0 -4px; }
 .k-slider-horizontal .k-slider-topleft .k-first { background-position: 0 -34px; }
@@ -2849,18 +2645,18 @@ div.k-slider
 .k-tooltip
 {
     position: absolute;
-    border-width: 2px;
+    z-index: 10002;
     border-style: solid;
+    border-width: 2px;
     padding: 4px 5px;
     background-repeat: repeat-x;
-    z-index: 10002;
 
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 
-    min-width:10px; /*slider tooltip only*/
-    text-align:center; /*slider tooltip only*/
+    min-width: 10px; /*slider tooltip only*/
+    text-align: center; /*slider tooltip only*/
 }
 
 .k-callout
@@ -2892,8 +2688,8 @@ div.k-slider
 
 .k-callout-w
 {
-	left: -7px;
 	top: 50%;
+	left: -7px;
 	margin-top: -5px;
 	background-position: -64px -384px;
 }
@@ -2902,15 +2698,15 @@ div.k-slider
 {
 	top: 100%;
 	left: 50%;
-	margin-left: -5px;
 	margin-top: 2px;
+	margin-left: -5px;
 	background-position: -64px -400px;
 }
 
 .k-callout-e
 {
-	left: 100%;
 	top: 50%;
+	left: 100%;
 	margin-top: -5px;
 	margin-left: 2px;
 	background-position: -64px -416px;
@@ -2937,8 +2733,8 @@ div.k-slider
 .k-splitter .k-pane-loading
 {
     position: absolute;
-    left: 50%;
     top: 50%;
+    left: 50%;
     margin: -8px 0 0 -8px;
 }
 
@@ -2991,10 +2787,10 @@ div.k-slider
 
 .k-splitbar-horizontal .k-icon
 {
-    width: 5px;
-    height: 21px;
     position: absolute;
     top: 50%;
+    width: 5px;
+    height: 21px;
     margin-top: -10px;
 }
 
@@ -3006,10 +2802,10 @@ div.k-slider
 
 .k-splitbar-vertical .k-icon
 {
-    height: 5px;
-    width: 21px;
     position: absolute;
     left: 50%;
+    width: 21px;
+    height: 5px;
     margin-left: -10px;
 }
 
@@ -3020,8 +2816,6 @@ div.k-slider
 .k-splitbar-draggable-horizontal .k-resize-handle
 {
     display: inline-block;
-    *display: inline;
-    zoom: 1;
 }
 
 .k-splitbar-horizontal { background-position: 5px 0; }
@@ -3061,7 +2855,7 @@ div.k-slider
 html .k-upload
 {
     position: relative;
-    border-width:0;
+    border-width: 0;
     background: none;
 }
 
@@ -3091,13 +2885,13 @@ html .k-upload
 
 .k-dropzone em
 {
-    margin-left: .6em;
     visibility: hidden;
+    margin-left: .6em;
 }
 
 .k-dropzone-active
 {
-    border-width:1px;
+    border-width: 1px;
     padding: 3px;
 }
 
@@ -3108,23 +2902,24 @@ html .k-upload
 
 .k-upload-button
 {
-    width: 86px;
     position: relative;
-    direction: ltr;
+    width: 86px;
     overflow: hidden !important; /* important required by IE7 */
+    direction: ltr;
 }
 
 .k-upload-button input
 {
-    font: 500px monospace !important; /* The input font size and family are critical for the operation of the Upload */
-    opacity: 0;
-    filter: alpha(opacity=0);
     position: absolute;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    right: 0; top: 0;
+    top: 0;
+    right: 0;
     z-index: 1;
+    font: 500px monospace !important; /* critical for correct operation */
+    filter: alpha(opacity=0);
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
 }
 
 .k-upload-files
@@ -3138,7 +2933,7 @@ html .k-upload
 
 .k-upload-files .k-button
 {
-    position:relative;
+    position: relative;
     top: 1px;
     margin-left: 8px;
     padding-top: 0;
@@ -3163,9 +2958,9 @@ html .k-upload
     background-position: -68px -260px;
 }
 
-.k-retry{ background-position: -66px -228px; width: 11px; }
-.k-success{ background-position: -64px -240px; }
-.k-fail{ background-position: -64px -256px; }
+.k-retry { background-position: -66px -228px; width: 11px; }
+.k-success { background-position: -64px -240px; }
+.k-fail { background-position: -64px -256px; }
 
 .k-filename
 {
@@ -3208,10 +3003,11 @@ html .k-upload
 .k-upload-selected
 {
     min-width: 86px;
-    box-sizing: content-box;
+    margin: 3px 0 0;
+    
     -moz-box-sizing: content-box;
     -ms-box-sizing: content-box;
-    margin: 3px 0 0;
+    box-sizing: content-box;
 }
 *+html .k-upload-selected { min-width: 100px; }
 
@@ -3232,10 +3028,10 @@ html .k-upload
 
 .k-search-wrap
 {
-       float: right;
-       width: auto;
-       position: relative;
-       padding: 0;
+    position: relative;
+    float: right;
+    width: auto;
+    padding: 0;
 }
 
 .k-search-wrap label
@@ -3261,64 +3057,64 @@ html .k-upload
 
 .k-search-wrap .k-search
 {
-    position:absolute;
-    top:1px;
-    right:2px;
+    position: absolute;
+    top: 1px;
+    right: 2px;
 }
 
 .k-breadcrumbs
 {
-    float: left;
     position: relative;
+    float: left;
     width: 560px;
 }
 
 .k-breadcrumbs-wrap
 {
-    position:absolute;
-    z-index:1;
-    top:0;
-    left:0;
-    padding-left:5px;
-    line-height:18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding-left: 5px;
+    line-height: 18px;
 }
 
 html input.k-breadcrumbs-input
 {
-    width:100%;
-    padding-left:2px;
-    font-family:inherit;
+    width: 100%;
+    padding-left: 2px;
+    font-family: inherit;
 }
 
 .k-breadcrumbs .k-link,
 .k-breadcrumbs-wrap .k-icon
 {
+    margin-top: 0;
     text-decoration: none;
     vertical-align: middle;
-    margin-top: 0;
 }
 
 .k-breadcrumbs .k-link:hover
 {
-    text-decoration:underline;
+    text-decoration: underline;
 }
 
 .k-imagebrowser .k-breadcrumbs .k-first
 {
-    text-decoration:none;
-    cursor:default;
+    text-decoration: none;
+    cursor: default;
 }
 
 .k-imagebrowser .k-toolbar
 {
-    clear:both;
-    border-style:solid;
-    border-width:1px;
+    clear: both;
+    border-style: solid;
+    border-width: 1px;
     margin: 8px 0 0;
     padding: 2px 0 3px;
-    background-repeat:repeat-x;
-    line-height:23px;
-    white-space:nowrap; /*required by WebKit*/
+    background-repeat: repeat-x;
+    line-height: 23px;
+    white-space: nowrap; /*required by WebKit*/
 }
 
 .k-imagebrowser .k-upload
@@ -3345,66 +3141,66 @@ html input.k-breadcrumbs-input
 
 .k-addfolder
 {
-    background-position:-64px -192px;
+    background-position: -64px -192px;
 }
 
 .k-goup
 {
-    background-position:-64px -208px;
+    background-position: -64px -208px;
 }
 
 .k-toolbar .k-state-disabled
 {
-    opacity:.5;
-    filter:alpha(opacity=50);
+    filter: alpha(opacity=50);
+    opacity: .5;
 }
 
 .k-toolbar-wrap
 {
-    float:left;
+    float: left;
 }
 
 .k-tiles-arrange
 {
-    float:right;
+    float: right;
 }
 
 .k-tiles-arrange .k-arrow-down
 {
-    margin:0 2px 0 3px;
+    margin: 0 2px 0 3px;
 }
 
 .k-tiles-arrange a
 {
-    text-decoration:none;
+    text-decoration: none;
 }
 
 .k-tiles
 {
-    clear:both;
-    height:390px;
-    border-style:solid;
-    border-width:1px;
-    border-top-width:0;
-    margin:0 0 1.4em;
-    padding:9px;
-    overflow:auto;
-    line-height:1.2;
+    clear: both;
+    height: 390px;
+    border-style: solid;
+    border-width: 1px;
+    border-top-width: 0;
+    margin: 0 0 1.4em;
+    padding: 9px;
+    overflow: auto;
+    line-height: 1.2;
 }
 
 .k-tile
 {
-    width:223px;
-    height:88px;
-    overflow:hidden;
-    float:left;
-    border-width:1px;
-    border-style:solid;
-    margin:1px;
-    padding:0 0 4px;
+    float: left;
+    width: 223px;
+    height: 88px;
+    overflow: hidden;
+    border-style: solid;
+    border-width: 1px;
+    margin: 1px;
+    padding: 0 0 4px;
     background-position: 0 100px;
     background-repeat: repeat-x;
-    cursor:pointer;
+    cursor: pointer;
 
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -3433,32 +3229,32 @@ html input.k-breadcrumbs-input
 
 .k-imagebrowser .k-image
 {
-    margin:2px 0 0 2px;
+    margin: 2px 0 0 2px;
 }
 
 .k-imagebrowser .k-folder
 {
-    width:80px;
-    height:80px;
-    background-position:0 -200px;
-    background-repeat:no-repeat;
+    width: 80px;
+    height: 80px;
+    background-position: 0 -200px;
+    background-repeat: no-repeat;
 }
 
 .k-goback
 {
-    background-position:-64px -224px;
+    background-position: -64px -224px;
 }
 
 .k-imagebrowser .k-loading
 {
-    margin:35px 0 0 33px;
+    margin: 35px 0 0 33px;
 }
 
 .k-tile strong,
 .k-tile input
 {
-    margin:10px 0 4px;
-    font-weight:normal;
+    margin: 10px 0 4px;
+    font-weight: normal;
 }
 
 .k-tile strong
@@ -3487,37 +3283,37 @@ html input.k-breadcrumbs-input
 .k-tile em,
 .k-tile .k-filesize
 {
-    display:block;
+    display: block;
 }
 
 .k-imagebrowser .k-form-text-row input
 {
-width:628px;
+    width: 628px;
 }
 
 .k-tile-empty
 {
-    margin:160px 0 0;
+    margin: 160px 0 0;
 }
 
 .k-tile-empty .k-dialog-upload
 {
-    font-weight:bold;
-    font-size:120%;
+    font-weight: bold;
+    font-size: 120%;
 }
 
 .k-tile-empty strong
 {
-    display:block;
-    margin:0 0 0.2em;
-    font-size:3em;
-    font-weight:normal;
+    display: block;
+    margin: 0 0 0.2em;
+    font-size: 3em;
+    font-weight: normal;
 }
 
 .k-tile-empty,
 .k-tile-empty .k-button-wrapper
 {
-    text-align:center;
+    text-align: center;
 }
 
 /* Chart */
@@ -3527,3 +3323,64 @@ div.k-chart
     border: none;
     background-color: transparent;
 }
+
+/* IE7 inline-block behavior */
+
+*+html .k-button,
+
+*+html .k-grid-filter,
+*+html .k-grid .k-pager,
+*+html .k-grid .k-status-text,
+*+html .k-pager .k-numeric,
+*+html .k-pager .k-page-i-of-n,
+*+html .k-pager .k-link,
+*+html .k-pager span,
+*+html .k-pager input,
+*+html .k-pager .k-page-size,
+*+html .k-grouping-row p,
+*+html .k-grouping-header a,
+*+html .k-grouping-header .k-group-indicator,
+*+html .k-grouping-header .k-link,
+*+html .k-grouping-header .k-button,
+*+html .k-grid-actions,
+
+*+html .k-combobox,
+*+html .k-dropdown,
+*+html .k-selectbox,
+*+html .k-picker-wrap .k-select,
+*+html .k-dropdown-wrap .k-select,
+
+*+html div.k-numerictextbox,
+*+html .k-numerictextbox .k-link,
+
+*+html .k-timepicker,
+*+html .k-datepicker,
+*+html .k-datetimepicker,
+*+html .k-calendar,
+*+html .k-calendar .k-nav-fast,
+
+*+html .k-treeview .k-icon,
+*+html .k-treeview .k-image,
+*+html .k-treeview .k-sprite,
+*+html .k-treeview .k-in,
+
+*+html .k-colorpicker,
+*+html .k-colorpicker .k-tool-icon,
+*+html .k-colorpicker-popup .k-reset,
+
+*+html .k-editor-dialog .k-button,
+
+.k-form-text-row label,
+
+*+html .k-tabstrip-items .k-item,
+*+html .k-tabstrip-items .k-link,
+
+*+html .k-slider-horizontal,
+
+*+html .k-splitbar-draggable-vertical .k-resize-handle,
+*+html .k-splitbar-draggable-horizontal .k-resize-handle,
+
+*+html div.k-window,
+*+html .k-window-titlebar .k-window-action
+
+{ display: inline; zoom: 1; }
