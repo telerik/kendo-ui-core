@@ -1973,7 +1973,7 @@ html .k-upload
 #footer,
 .floatWrap,
 .k-window,
-.scroll-container
+.k-scroll-container
 {
     -webkit-backface-visibility: hidden;
 }
@@ -2019,7 +2019,7 @@ section *, :before, :after
     bottom: 1px;
 }
 
-.scroll-container
+.k-scroll-container
 {
     display: inline-block;
     -moz-user-select: none;

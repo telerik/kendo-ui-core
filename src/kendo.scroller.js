@@ -141,7 +141,7 @@
         _create: function () {
             var that = this,
                 element = that.element,
-                scrollElement = $('<div class="scroll-container"/>'),
+                scrollElement = $('<div class="k-scroll-container"/>'),
                 children = element.children(":not(script)");
 
             element
