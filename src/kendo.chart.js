@@ -4656,11 +4656,9 @@
         createGradient: function(options) {
             if (options.type === RADIAL) {
                 return new SVGRadialGradient(options);
-            } else if (options.type === LINEAR) {
+            } else {
                 return new SVGLinearGradient(options)
             }
-
-            return "";
         },
 
         alignToScreen: function(element) {
@@ -5575,7 +5573,8 @@
     VMLOverlayDecorator.prototype = /** @ignore */ {
         decorate: function(element) {
             var options = element.options,
-                overlayName = options ? options.overlay : "",
+                overlayOptions = options.overlay ? options.overlay : {},
+                overlayName = overlayOptions.type,
                 overlay = Chart.Overlays[overlayName];
 
             if (!overlay) {
