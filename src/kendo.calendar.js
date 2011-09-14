@@ -62,7 +62,7 @@
             depth: MONTH,
             firstView: MONTH,
             month: {
-                content: "<#=data.day#>",
+                content: "<#=data.value#>",
                 empty: " "
             }
         },
@@ -333,41 +333,35 @@
                     start = calendar.firstVisibleDay(date),
                     firstDayOfMonth = calendar.firstDayOfMonth(date),
                     lastDayOfMonth = new DATE(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth() + 1, 0),
+                    toDateString = this.toDateString,
                     min = options.min,
                     max = options.max,
-                    content = options.content,
-                    empty = options.empty,
                     html = '<table class="k-content"><thead><tr>';
 
                 for (; idx < 7; idx++) {
                     html += '<th abbr="' + abbr[idx] + '" scope="col" title="' + names[idx] + '">' + short[idx] + '</th>';
                 }
 
-                html += "</tr></thead><tbody><tr>";
-
-                start = new DATE(start.getFullYear(), start.getMonth(), start.getDate());
-                min = new DATE(min.getFullYear(), min.getMonth(), min.getDate());
-                max = new DATE(max.getFullYear(), max.getMonth(), max.getDate());
-
-                for (idx = 0; idx < 42; idx++) {
-                    if (idx > 0 && idx % 7 == 0) {
-                        html += "</tr><tr>";
+                return view({
+                    length: 42,
+                    cellsPerRow: 7,
+                    html: html += "</tr></thead><tbody><tr>",
+                    start: new DATE(start.getFullYear(), start.getMonth(), start.getDate()),
+                    min: new DATE(min.getFullYear(), min.getMonth(), min.getDate()),
+                    max: new DATE(max.getFullYear(), max.getMonth(), max.getDate()),
+                    content: options.content,
+                    empty: options.empty,
+                    setter: function(date) { date.setDate(date.getDate() + 1); },
+                    build: function(date) {
+                        return {
+                            date: date,
+                            title: kendo.toString(date, "D"),
+                            value: date.getDate(),
+                            dateString: toDateString(date),
+                            otherMonth: date < firstDayOfMonth || date > lastDayOfMonth ? OTHERMONTH : ''
+                        };
                     }
-
-                    data = {
-                        date: start,
-                        title: kendo.toString(start, "D"),
-                        day: start.getDate(),
-                        dateString: this.toDateString(start),
-                        otherMonth: start < firstDayOfMonth || start > lastDayOfMonth ? OTHERMONTH : ''
-                    };
-
-                    html += inRange(start, min, max) ? content(data) : empty(data);
-
-                    start.setDate(start.getDate() + 1);
-                }
-
-                return html + "</tr></tbody></table>";
+                });
             },
             compare: function(date1, date2) {
                 var result,
@@ -397,23 +391,28 @@
             },
             content: function(options) {
                 var namesAbbr = kendo.culture().calendar.months.namesAbbr,
+                    toDateString = this.toDateString,
                     min = options.min,
                     max = options.max;
 
-                extend(options, {
+                return view({
+                    length: 12,
+                    cellsPerRow: 4,
+                    html: '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>',
                     min: new DATE(min.getFullYear(), min.getMonth(), 1),
                     max: new DATE(max.getFullYear(), max.getMonth(), 1),
                     start: new DATE(options.date.getFullYear(), 0, 1),
                     setter: function(date) {
                         date.setMonth(date.getMonth() + 1);
                     },
-                    toString: function(date) {
-                        return namesAbbr[date.getMonth()];
-                    },
-                    toDateString: this.toDateString
+                    build: function(date) {
+                        return {
+                            value: namesAbbr[date.getMonth()],
+                            dateString: toDateString(date),
+                            otherMonth: ""
+                        }
+                    }
                 });
-
-                return view(options);
             },
             compare: function(date1, date2){
                 return compare(date1, date2);
@@ -431,23 +430,27 @@
                 return start + "-" + (start + 9);
             },
             content: function(options) {
-                var year = options.date.getFullYear();
+                var year = options.date.getFullYear(),
+                    toDateString = this.toDateString;
 
-                extend(options, {
-                    view: DECADE,
+                return view({
+                    length: 12,
+                    cellsPerRow: 4,
+                    html: '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>',
                     start: new DATE(year = year - year % 10 - 1, 0, 1),
                     min: new DATE(options.min.getFullYear(), 0, 1),
                     max: new DATE(options.max.getFullYear(), 0, 1),
                     setter: function(date) {
                         date.setFullYear(date.getFullYear() + 1);
                     },
-                    toString: function(date) {
-                        return date.getFullYear();
-                    },
-                    toDateString: this.toDateString
+                    build: function(date, idx) {
+                        return {
+                            value: date.getFullYear(),
+                            dateString: toDateString(date),
+                            otherMonth: idx == 0 || idx == 11 ? OTHERMONTH : ""
+                        }
+                    }
                 });
-
-                return view(options);
             },
             compare: function(date1, date2) {
                 return compare(date1, date2, 10);
@@ -465,24 +468,28 @@
                 return start + "-" + (start + 99);
             },
             content: function(options) {
-                var year = options.date.getFullYear();
+                var year = options.date.getFullYear(),
+                    toDateString = this.toDateString;
 
-                extend(options, {
-                    view: CENTURY,
+                return view({
+                    length: 12,
+                    cellsPerRow: 4,
+                    html: '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>',
                     start: new DATE(year - year % 100 - 10, 0, 1),
                     min: new DATE(options.min.getFullYear() - 10, 0, 1),
                     max: new DATE(options.max.getFullYear(), 0, 1),
                     setter: function(date) {
                         date.setFullYear(date.getFullYear() + 10);
                     },
-                    toString: function(date) {
+                    build: function(date, idx) {
                         var year = date.getFullYear();
-                        return year + "-" + (year + 9);
-                    },
-                    toDateString: this.toDateString
+                        return {
+                            value: year + "-" + (year + 9),
+                            dateString: toDateString(date),
+                            otherMonth: idx == 0 || idx == 11 ? OTHERMONTH : ""
+                        }
+                    }
                 });
-
-                return view(options);
             },
             compare: function(date1, date2) {
                 return compare(date1, date2, 100);
@@ -494,33 +501,33 @@
         }
     }
 
+    var cellTemplate = kendo.template('<td<#=data.otherMonth#>><a class="k-link" href="#" data-value="<#=data.dateString#>"><#=data.value#></a></td>');
+    var cellEmptyTemplate = kendo.template("<td> </td>");
+
     function view(options) {
-        var idx = 0, otherMonth,
+        var idx = 0,
+            data,
             view = options.view,
             min = options.min,
             max = options.max,
             start = options.start,
             setter = options.setter,
-            toString = options.toString,
+            build = options.build,
+            length = options.length,
+            cellsPerRow = options.cellsPerRow,
             toDateString = options.toDateString,
-            html = '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>';
+            content = options.content || cellTemplate,
+            empty = options.empty || cellEmptyTemplate,
+            html = options.html;
 
-        for(; idx < 12; idx++) {
-            if (idx > 0 && idx % 4 == 0) {
+        for(; idx < length; idx++) {
+            if (idx > 0 && idx % cellsPerRow == 0) {
                 html += "</tr><tr>";
             }
 
-            if (inRange(start, min, max)) {
-                html += '<td';
+            data = build(start, idx);
 
-                if (view != undefined && (idx == 0 || idx == 11)) {
-                    html += OTHERMONTH;
-                }
-
-                html += '><a class="k-link" data-value="' + toDateString(start) + '">' + toString(start) + "</a></td>";
-            } else {
-                html += "<td> </td>";
-            }
+            html += inRange(start, min, max) ? content(data) : empty(data);
 
             setter(start);
         }
