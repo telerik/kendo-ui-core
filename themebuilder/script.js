@@ -51,87 +51,62 @@
     window.lessLoaded = function(lessTemplate) {
             var properties = {
                     bgColor: { property: "background-color", label: "Background" },
-                    color: { property: "color", label: "Text color" },
-                    brdColor: { property: "border-color", label: "Border color" },
+                    color: { property: "color", lessSuffix: "text-color", label: "Text color" },
+                    brdColor: { property: "border-color", label: "Border color" }
                 },
                 extend = $.extend;
 
-        // TODO: optimize by generating the properties array more efficiently
+        var returnProperties = function(propertyNames) {
+            var result = [];
+            for (var j = 0; j < propertyNames.length; j++) {
+                result.push(extend({}, properties[propertyNames[j]]));
+            }
+            return result;
+        }
+
         new kendo.ThemeBuilder(lessTemplate, new kendo.LessConstants([{
                     prefix: "@widget",
                     title: "Widgets",
-                    properties: [
-                        extend({}, properties.bgColor),
-                        extend({}, properties.color),
-                        extend({}, properties.brdColor)
-                    ]
+                    properties: returnProperties(["bgColor", "color", "brdColor"])
                 }, {
                     prefix: "@header",
                     title: "Headers",
-                    properties: [
-                        extend({}, properties.bgColor),
-                        extend({}, properties.color)
-                    ]
+                    properties: returnProperties(["bgColor", "color"])
                 }, {
                     prefix: "@link",
                     title: "Links",
-                    properties: [
-                        extend({}, properties.color)
-                    ]
+                    properties: returnProperties(["color"])
                 }, {
                     prefix: "@button",
                     title: "Buttons",
-                    properties: [
-                        extend({}, properties.bgColor),
-                        extend({}, properties.color)
-                    ]
+                    properties: returnProperties(["bgColor", "color"])
                 }, {
                     prefix: "@tooltip",
                     title: "Tooltips",
-                    properties: [
-                        extend({}, properties.bgColor),
-                        extend({}, properties.color)
-                    ]
+                    properties: returnProperties(["bgColor", "color"])
                 }, {
                     prefix: "@hover",
                     title: "Hover state",
-                    properties: [
-                        extend({}, properties.bgColor),
-                        extend({}, properties.color),
-                        extend({}, properties.brdColor)
-                    ]
+                    properties: returnProperties(["bgColor", "color", "brdColor"])
                 }, {
                     prefix: "@selected",
                     title: "Selected state",
-                    properties: [
-                        extend({}, properties.bgColor),
-                        extend({}, properties.color),
-                        extend({}, properties.brdColor)
-                    ]
+                    properties: returnProperties(["bgColor", "color", "brdColor"])
                 }, {
                     prefix: "@active",
                     title: "Active state",
-                    properties: [
-                        extend({}, properties.bgColor),
-                        extend({}, properties.color),
-                        extend({}, properties.brdColor)
-                    ]
+                    properties: returnProperties(["bgColor", "color", "brdColor"])
                 }, {
                     prefix: "@disabled",
                     title: "Disabled state",
-                    properties: [
-                        extend({}, properties.color)
-                    ]
+                    properties: returnProperties(["color"])
                 }, {
                     prefix: "@error",
                     title: "Error state",
-                    properties: [
-                        extend({}, properties.bgColor),
-                        extend({}, properties.color),
-                        extend({}, properties.brdColor)
-                    ]
+                    properties: returnProperties(["bgColor", "color", "brdColor"])
                 }]));
                 /* missing constants:
+                 * @gradientUrl: "..."; // on Telerik CDN
                  * @image-folder: "BlueOpal"; // we should think of something that allows us to change the gradients
                  * @loading-panel-color: #fff;
                  * @shadow-color: #aaa;

@@ -35,7 +35,7 @@
                     constant = constants[j];
 
                     for (i = 0, props = constant.properties, len = props.length; i < len; i++) {
-                        result.push(constant.prefix + "-" + props[i].property + ": " + props[i].value + ";");
+                        result.push(constant.prefix + "-" + (props[i].lessSuffix || props[i].property) + ": " + props[i].value + ";");
                     }
                 }
 
@@ -85,7 +85,9 @@
 
                 that.constants = constants;
 
-                constants.infer();
+                if (constants) {
+                    constants.infer();
+                }
 
                 that.render();
 
@@ -150,7 +152,7 @@
                 }
             },
             render: function() {
-                var constants = this.constants.constants,
+                var constants = this.constants && this.constants.constants,
                     colorPickerTemplate = kendo.template(
                         "<# var id = prefix + \":\" + property.property; #>" +
                         "<label for='<#= id #>'><#= property.label #></label>" +
