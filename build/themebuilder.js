@@ -18,7 +18,7 @@ function buildModifiedLess() {
             return "build/less-js/" + relativePath;
         });
 
-    fs.writeFileSync("themebuilder/less.js", wrap(kendoBuild.merge(less_libonly_src)));
+    fs.writeFileSync("themebuilder/less.js", kendoBuild.minifyJs(wrap(kendoBuild.merge(less_libonly_src))));
 }
 
 function lessToJson(lessTemplate) {
