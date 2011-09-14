@@ -1410,8 +1410,8 @@ div.skinSelector .k-state-active
     border: 0;
 }
 
-.k-black .code-title,
-.k-black .details-title
+.k-black #example .code-title,
+.k-black #example .details-title
 {
     color: #fff;
     background: -moz-linear-gradient(top, #333 0%, #222 100%);
@@ -1423,15 +1423,15 @@ div.skinSelector .k-state-active
     background: linear-gradient(top, #333 0%,#222 100%);
 }
 
-.k-black .code-sample,
-.k-black .details-list
+.k-black #example .code-sample,
+.k-black #example .details-list
 {
     border-color: #222;
     background: transparent;
 }
 
-.k-black .code-sample .prettyprint,
-.k-black .details-list dl
+.k-black #example .code-sample .prettyprint,
+.k-black #example .details-list dl
 {
     background: transparent;
 }
@@ -1459,22 +1459,22 @@ ol.linenums { margin-top: 0; margin-bottom: 0; color: #333; }
 li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
 li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 
-.k-black pre .nocode { color: #fff; }
-.k-black pre .str,                    /* string */
-.k-black pre .atv { color: #ff7020; } /* attribute value */
-.k-black pre .kwd { color: #6093ff; } /* keyword */
-.k-black pre .com { color: #aaa; } /* comment */
-.k-black pre .typ { color: #fff; } /* type */
-.k-black pre .lit { color: #60c6c6; } /* literal */
-.k-black pre .pun { color: #999; }    /* punctuation */
-.k-black pre .pln { color: #a2b4ba; }    /* plaintext */
-.k-black pre .tag { color: #60c6ff; } /* html/xml tag */
-.k-black pre .atn { color: #c6c6ff; } /* attribute name */
-.k-black pre .dec { color: #ff6060; } /* decimal */
+.k-black #example pre .nocode { color: #fff; }
+.k-black #example pre .str,                    /* string */
+.k-black #example pre .atv { color: #ff7020; } /* attribute value */
+.k-black #example pre .kwd { color: #6093ff; } /* keyword */
+.k-black #example pre .com { color: #aaa; } /* comment */
+.k-black #example pre .typ { color: #fff; } /* type */
+.k-black #example pre .lit { color: #60c6c6; } /* literal */
+.k-black #example pre .pun { color: #999; }    /* punctuation */
+.k-black #example pre .pln { color: #a2b4ba; }    /* plaintext */
+.k-black #example pre .tag { color: #60c6ff; } /* html/xml tag */
+.k-black #example pre .atn { color: #c6c6ff; } /* attribute name */
+.k-black #example pre .dec { color: #ff6060; } /* decimal */
 
 /* Specify class=linenums on a pre to get line numbering */
-.k-black ol.linenums { color: #ddd; }
-.k-black li.L1,.k-black li.L3,.k-black li.L5,.k-black li.L7,.k-black li.L9 { background: #333; }
+.k-black #example ol.linenums { color: #ddd; }
+.k-black #example li.L1,.k-black #example li.L3,.k-black #example li.L5,.k-black #example li.L7,.k-black #example li.L9 { background: #333; }
 
 .details-list dl
 {

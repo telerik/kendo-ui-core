@@ -10,6 +10,7 @@
 .k-editable-area,
 .k-separator,
 .k-colorpicker .k-arrow-down,
+.k-autocomplete,
 .k-dropdown-wrap,
 .k-toolbar,
 .k-grouping-header,
@@ -28,6 +29,8 @@
 .k-grid-pager,
 .k-grouping-header,
 .k-grouping-header .k-group-indicator,
+.k-dropdown-wrap.k-state-focused,
+.k-autocomplete.k-state-focused,
 .k-panelbar .k-link,
 .k-panelbar .k-group,
 .k-panelbar .k-content,
@@ -45,8 +48,12 @@
     border-color: @widget-border-color;
 }
 
+.k-list.k-group
+{
+    border-color: @group-border-color;
+}
+
 .k-group,
-.k-dropdown-wrap,
 .k-toolbar,
 .k-grouping-header,
 .k-grid-pager,
@@ -76,7 +83,14 @@ td.k-group-cell,
     background-color: @alt-background-color;
 }
 
-.k-widget
+.k-widget,
+.k-dropdown-wrap.k-state-hover,
+.k-dropdown-wrap.k-state-hover:hover,
+.k-dropdown-wrap.k-state-active,
+.k-dropdown-wrap.k-state-active:hover,
+.k-dropdown-wrap.k-state-focused,
+.k-dropdown-wrap.k-state-focused:hover,
+.k-autocomplete.k-state-focused
 {
     background-color: @widget-background-color;
 }
@@ -92,6 +106,12 @@ td.k-group-cell,
 .k-content
 {
     color: @widget-text-color;
+}
+
+.k-combobox .k-input,
+.k-autocomplete .k-input
+{
+    color: @input-text-color;
 }
 
 .k-link:link,
@@ -115,13 +135,26 @@ td.k-group-cell,
 .k-tooltip,
 .k-grid-pager,
 .k-button,
-.k-link.k-state-hover,
+.k-autocomplete,
+.k-state-hover,
+.k-state-selected,
+.k-state-focused,
 .k-tabstrip-items .k-item
 {
-    background-color: @header-background-color;
     background-image: url('@{image-folder}/gradient.png');
 }
 
+.k-header,
+.k-grid-header,
+.k-toolbar,
+.k-grouping-header,
+.k-tooltip,
+.k-grid-pager,
+.k-button,
+.k-tabstrip-items .k-item
+{
+    background-color: @header-background-color;
+}
 /* icons */
 
 .k-icon,
@@ -189,6 +222,9 @@ td.k-group-cell,
 
 .k-state-hover,
 .k-state-hover:hover,
+.k-list>.k-state-hover,
+.k-list>.k-state-focused,
+.k-list>.k-state-selected,
 .k-state-focused,
 .k-marquee
 {
@@ -198,6 +234,7 @@ td.k-group-cell,
 }
 
 .k-state-selected,
+.k-list>.k-state-selected,
 .k-panelbar .k-state-selected,
 .k-button:active
 {
@@ -289,11 +326,16 @@ td.k-group-cell,
 .k-grid .k-filter-options,
 .k-time-popup,
 .k-datepicker-calendar,
+.k-autocomplete:hover,
+.k-autocomplete.k-state-focused,
+.k-dropdown-wrap.k-state-focused,
+.k-dropdown-wrap.k-state-hover,
+.k-dropdown-wrap.k-state-active,
 .k-imagebrowser .k-image
 {
-    -moz-box-shadow: 1px 1px 4px @shadow-color;
-    -webkit-box-shadow: 1px 1px 4px @shadow-color;
-    box-shadow: 1px 1px 4px @shadow-color;
+    -webkit-box-shadow: 2px 2px 2px 0 @shadow-light-color;
+    box-shadow: 2px 2px 2px 0 @shadow-light-color;
+    -moz-box-shadow: 2px 2px 2px 0 @shadow-color;
 }
 
 .k-window
@@ -304,3 +346,12 @@ td.k-group-cell,
     -webkit-box-shadow: 1px 1px 7px 1px @shadow-color;
     box-shadow: 1px 1px 7px 1px @shadow-color;
 }
+
+.k-autocomplete .k-input,
+.k-combobox .k-input
+{
+    -webkit-box-shadow: inset 0 0 1px 1px @shadow-inset-color;
+    box-shadow: inset 0 0 1px 1px @shadow-inset-color;
+    -moz-box-shadow: inset 0 0 1px 1px @shadow-inset-color;
+}
+
