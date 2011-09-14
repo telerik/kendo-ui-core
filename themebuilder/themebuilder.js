@@ -108,7 +108,9 @@
                     .data("kendoThemeBuilder", that);
 
                 $("#stylable-elements")
-                    .kendoPanelBar()
+                    .kendoPanelBar({
+                        animation: false
+                    })
                     .find("input").kendoColorPicker({
                         change: proxy(that._propertyChange, that)
                     });
