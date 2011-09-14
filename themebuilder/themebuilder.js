@@ -124,7 +124,10 @@
                 var that = this,
                     parser = new less.Parser();
 
-                parser.parse(that.constants.serialize() + that.templateInfo.template, function (err, tree) {
+                parser.parse(that.constants.serialize() +
+                    '\n@image-folder: "BlueOpal";\n@loading-panel-color: #fff;\n@shadow-color: #aaa;\n@content-background-color: @widget-background-color;\n@group-background-color: #f1f4f5;\n@input-background-color: @widget-background-color;\n@splitbar-background-color: @header-background-color;\n@alt-background-color: @group-background-color;\n' +
+
+                    that.templateInfo.template, function (err, tree) {
                     if (err) {
                         return console.error(err);
                     }
