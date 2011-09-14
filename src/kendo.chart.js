@@ -4171,6 +4171,7 @@
                 anim;
 
             while(anim = view.animations.shift()) {
+                anim.setup();
                 anim.play();
             }
         }
@@ -5208,7 +5209,6 @@
                 pos,
                 easingPos;
 
-            anim.setup();
             actor.refresh(domElement);
 
             interval = setInterval(function() {
