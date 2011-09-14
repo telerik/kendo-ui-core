@@ -125,6 +125,15 @@
                 equals(constants.serialize(), "@widget-background-color: #f11f11;");
             });
 
+            test("serialize() uses lessSuffix property to determine", function() {
+                var constants = new LessConstants([{
+                    prefix: "@widget",
+                    properties: [ extend({}, properties.color, { lessSuffix: "text-color", value: "#f11f11" }) ]
+                }]);
+
+                equals(constants.serialize(), "@widget-text-color: #f11f11;");
+            });
+
             test("serialize() with multiple properties", function() {
                 var constants = new LessConstants([{
                     prefix: "@widget",
