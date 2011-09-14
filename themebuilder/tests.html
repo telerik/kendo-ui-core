@@ -110,7 +110,11 @@
                 },
                 extend = $.extend;
 
-            module("LessConstants");
+            module("LessConstants", {
+                teardown: function() {
+                    $("#kendo-themebuilder-wrapper").remove();
+                }
+            });
 
             test("serialize() serializes contents in LESS format", function() {
                 var constants = new LessConstants([{
