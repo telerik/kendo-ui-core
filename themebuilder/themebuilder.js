@@ -85,6 +85,8 @@
 
                 that.constants = constants;
 
+                constants.infer();
+
                 that.render();
 
                 that.content = $("#kendo-themebuilder")
@@ -146,16 +148,20 @@
                 }
             },
             render: function() {
-                var constants = this.constants,
+                var constants = this.constants.constants,
                     colorPickerTemplate = kendo.template(
-                        "<# var id = primitive + \":\" + property.property; #>" +
-                        "<label for='<#= id #>'><#= property.label #></label> <input id='<#= id #>' class='k-input' />"
+                        "<# var id = prefix + \":\" + property.property; #>" +
+                        "<label for='<#= id #>'><#= property.label #></label>" +
+                        "<input id='<#= id #>' value='<#= property.value #>' class='k-input' />"
                     ),
                     propertyGroupTemplate = kendo.template(
                         "<li><#= title #>" +
                             "<div class='styling-options'>" +
                                 "<# for (var i = 0, len = properties.length; i < len; i++) { #>" +
-                                    "<#= propertyTemplate({ property: properties[i], primitive: primitive }) #>" +
+                                    "<#= propertyTemplate({" +
+                                        "property: properties[i]," +
+                                        "prefix: prefix" +
+                                    "}) #>" +
                                 "<# } #>" +
                             "</div>" +
                         "</li>"
