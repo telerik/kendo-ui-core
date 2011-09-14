@@ -11,7 +11,16 @@
         doc = document,
         UNDEFINED = "undefined"
         head = doc.getElementsByTagName("head")[0],
-        applicationRoot = "http://localhost/kendo/themebuilder/";
+        applicationRoot = "http://localhost/kendo/themebuilder/",
+        jQueryJs = "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js",
+        stylesRoot = "http://localhost/kendo/live/styles/",
+        kendoCommonCss = stylesRoot + "kendo.common.css",
+        kendoSkinCss = stylesRoot + "kendo.kendo.css",
+        kendoAllJs = "http://localhost/kendo/deploy/kendoUI/js/kendo.all.min.js",
+        lessJs = "less.js",
+        themebuilderJs = "themebuilder.js",
+        templateJs = "template.js",
+        stylesCss = "styles.css"
 
     function getScript(url, callback) {
         var script = doc.createElement("script");
@@ -24,17 +33,18 @@
     // page without jQuery
     if (typeof jQuery == UNDEFINED) {
         queue.push(function(callback) {
-            getScript("https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js", callback);
+            getScript(jQueryJs, callback);
         });
     }
 
     // page without kendo -- maybe components are loaded asynchronously?
     if (typeof kendo == UNDEFINED) {
         queue.push(function(callback) {
-            $(head).append("<link rel='stylesheet' href='http://localhost/kendo/live/styles/kendo.common.css' />");
+            $(head).append("<link rel='stylesheet' href='" + kendoCommonCss + "' />");
+            $(head).append("<link rel='stylesheet' href='" + kendoSkinCss + "' />");
 
             // TODO: use CDN when a recent version is uploaded
-            getScript("http://localhost/kendo/deploy/kendoUI/js/kendo.all.min.js", callback);
+            getScript(kendoAllJs, callback);
         });
     }
 
@@ -134,12 +144,12 @@
     };
 
     queue.push(function(){
-        $("<link rel='stylesheet' href='" + applicationRoot + "styles.css' />").appendTo("head");
+        $("<link rel='stylesheet' href='" + applicationRoot + stylesCss + "' />").appendTo("head");
 
         // TODO: these can be merged during build
-        getScript(applicationRoot + "less.js", function() {
-            getScript(applicationRoot + "themebuilder.js", function() {
-                getScript(applicationRoot + "template.js");
+        getScript(applicationRoot + lessJs, function() {
+            getScript(applicationRoot + themebuilderJs, function() {
+                getScript(applicationRoot + templateJs);
             });
         });
     });
