@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7159d7de-8061-4b68-ad9a-a5930558eab2</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7fcf1013-d64c-410d-9818-190d41fa9926</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>dff277b5-c3eb-4b40-bca9-422c5516e45c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>679444ee-b689-4b0c-80ce-b4f60d84a898</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -141,7 +141,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>947b8563-3641-40b3-b835-68e1f5b8d0fc</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>04f74079-8cd1-4b0d-82f0-73d83b85b1f6</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -216,7 +216,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-alt k-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-alt k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>SelectRowMultipleRowsExample1uq3dmj0.5cg</d2p1:StepImageKey>
@@ -230,7 +230,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>dff7e777-7830-4459-924a-7b19e2ab9f2d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>cc1b2503-2a82-4623-8b85-9c20051980fb</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -263,7 +263,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6eed60db-ea2d-44c1-8825-4b21bc83d542</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>73b96c90-4f2c-42fd-9972-2323a464fd72</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -346,7 +346,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>5de1c488-e2b4-4468-9055-257f70920a8a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>8c2f75e9-e502-4ffe-9f3a-475e45f0b35d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -421,7 +421,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>SelectRowMultipleRowsExamplevnmbzrzc.xnp</d2p1:StepImageKey>
@@ -447,9 +447,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\Grid\Selection\SelectRowSingle.tstest</Path>
+  <Path>UIWidgets\Grid\Selection\SelectRowSingle.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\Grid\Selection\SelectRowSingle.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\Grid\Selection\SelectRowSingle.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

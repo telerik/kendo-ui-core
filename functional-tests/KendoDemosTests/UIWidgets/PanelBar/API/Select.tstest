@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>82c4c3a4-6183-4654-9ee9-c38dc5684803</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>03afd6ac-1b3a-4263-afb7-6323869fa1b6</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>313f6a1d-ef30-41f4-952b-7026846166b7</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>eecff83c-1e3f-462a-8fa6-40ade0041277</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -151,7 +151,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>76549867-7758-4365-a6a3-fed9bedf7fab</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2c7e5595-aeb4-4e91-a1ff-86a45725c627</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -234,7 +234,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d15304cf-f32d-4fe3-9bfb-84c84bd26a9e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0502599c-8548-4c3e-a83b-7b1293ce9a39</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -307,7 +307,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-link k-header k-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-link k-header k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Same</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>Select3aptdmsl.mvq</d2p1:StepImageKey>
@@ -333,9 +333,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\PanelBar\API\Select.tstest</Path>
+  <Path>UIWidgets\PanelBar\API\Select.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\PanelBar\API\Select.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\PanelBar\API\Select.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

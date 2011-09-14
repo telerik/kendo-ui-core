@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f6f33d88-e2d4-48e5-b80b-27414cb6c4b2</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>70724433-ffef-4cff-aa2d-965c5e957a03</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e500fb95-0bac-4536-83a8-5e89f548729b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3f35edb4-ead7-4681-9f6c-e63873a35d80</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -145,7 +145,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d4167fe0-1ca9-4849-819c-7cb11ebb9d5d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>da9842c3-fa15-40bc-bfc7-99fe04e23c62</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -232,7 +232,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>0eba2028-cffd-463c-958e-bd9a87b7bd76</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>9e1d24c6-cdd0-4ab1-a3f6-07cfda329907</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -315,11 +315,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'CloseSpan0'</d2p1:Description>
+      <d2p1:Description>Click 'CloseSpan1'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>51d0e6a1-66b3-4057-8230-6e1517d2835c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>970b7fb4-ac20-46f0-933d-70f543a26940</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -345,94 +345,14 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TagIndex=span:391</Clause>
+                          <Clause>TagIndex=span:392</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>CloseSpan0</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>target</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>Events4</d2p1:FriendlyName>
-                <d2p1:Path>/kendo/live//window/events.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>Events</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
-      </d2p1:Step>
-      <d2p1:StepImageKey>OpenActivateRefreshcloset2dkilpc.d20</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'CloseSpan'</d2p1:Description>
-      <d2p1:Enabled>false</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>1b0b6f5d-9231-4de9-be36-e3beaa1b4f6b</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>target</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[3]/div[1]/div[1]/a[2]/span[1]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops />
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>TagIndex=span:388</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>CloseSpan</Name>
+                <Name>CloseSpan1</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
@@ -468,7 +388,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>OpenActivateRefreshcloseuc0sarma.bnj</d2p1:StepImageKey>
+      <d2p1:StepImageKey>OpenActivateRefreshclosetkzesn3j.ir3</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -478,8 +398,8 @@
       <d2p1:Description>Verify 'TextContent' 'Contains' 'event :: close' on 'EventCloseDiv'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>69c8a62a-6335-4fc4-a821-c9dc04797d93</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>6</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>b4c57208-11bf-4be6-924d-828aa4ae8abd</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -565,8 +485,8 @@
       <d2p1:Description>Wait for '500' msec.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>10fe7cfc-0396-4a3d-b966-2758fc512682</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>7</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>589027ff-0d18-4739-9970-046d05d5a909</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -598,8 +518,8 @@
       <d2p1:Description>Click 'UndoSpan'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>5471a4bc-1067-487d-ad72-6048e5fc5b24</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>8</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>a085e646-abda-415d-a837-ae56b1642c7b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -681,8 +601,8 @@
       <d2p1:Description>Wait for element 'KendoWindowSpan' 'is' visible.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>10</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6d210e19-36a6-497f-bb76-7aaccd8973d6</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>9</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>740ed520-59ce-416c-9106-4d1aaa1e62f8</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -766,8 +686,8 @@
       <d2p1:Description>Wait for 'TextContent' 'Contains' 'open' on 'EventOpenDiv0'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>11</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>8f0bfa85-b127-4955-98b8-5a98a7b470fd</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>10</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>827086fa-be5a-4d3c-a1c3-1806a75cefa9</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -855,8 +775,8 @@
       <d2p1:Description>Verify 'TextContent' 'Contains' 'event :: activate' on 'EventDiv'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>12</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ba77a02e-b64b-4e2a-b0b2-2c148a89584d</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>11</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>041803fc-e6ad-46dd-a590-10ab1ae72777</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -942,8 +862,8 @@
       <d2p1:Description>Wait for '500' msec.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>13</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>139d243c-6a4d-46da-bf44-b9ecfc045414</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>12</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>cbf01b7c-59cf-48db-b32b-af2c0e70df9c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -975,8 +895,8 @@
       <d2p1:Description>Click 'RefreshSpan'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>14</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c495f8bc-167a-49e4-b5a6-e6026128a94e</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>13</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>2f59f04c-86c2-40b7-86ae-72d90d095b74</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -1058,8 +978,8 @@
       <d2p1:Description>Verify 'TextContent' 'Contains' 'event :: refresh' on 'EventDiv1'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>15</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f53bae3d-60a5-4eac-bb7d-c1d96b320bae</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>14</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>14cda7ac-6de9-4ecc-b37a-a8c1427bc446</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -1149,11 +1069,9 @@
     <d2p1:string>System.Core</d2p1:string>
     <d2p1:string>ArtOfTest.WebAii, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
     <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Design.Translators.Html, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Design.Translators.Xaml, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
   </CurrentReferences>
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
@@ -1162,9 +1080,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\Window\Events\OpenActivateRefreshclose.tstest</Path>
+  <Path>UIWidgets\Window\Events\OpenActivateRefreshclose.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\Window\Events\OpenActivateRefreshclose.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\Window\Events\OpenActivateRefreshclose.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

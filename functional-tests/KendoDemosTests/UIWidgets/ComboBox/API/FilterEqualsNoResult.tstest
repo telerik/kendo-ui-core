@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>685adf37-00ee-4bab-a703-8814d0854bf6</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>51ed3ed6-4f64-4530-ac5d-78838fbd3600</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>8237531b-f8db-40d2-a15c-c5d8a080a79d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>8c4dc909-de8f-44df-a12c-9ab0eb9b810b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -128,7 +128,7 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
       </d2p1:Step>
       <d2p1:StepImageKey>FilterEqualsNoResultwho0viiz.ibq</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -141,7 +141,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7dd4b904-a612-4d69-80d8-164b9219e2bb</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>8103bca6-205b-44a7-8d7b-32044f6e1f97</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -211,7 +211,7 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
       </d2p1:Step>
       <d2p1:StepImageKey>FilterEqualsNoResultbp3jsm4f.lim</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -224,7 +224,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>0a2297e4-ddf7-4a3e-ac0a-c3116bb2f347</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>69c70a02-8dd0-439f-b2a3-2a0bdf852a3f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -317,7 +317,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f77ecc09-4b75-4d08-a8ce-bb05c5d641fd</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1b2c0fdb-e8db-42a7-905c-fc5d019d72a7</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -387,7 +387,7 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
       </d2p1:Step>
       <d2p1:StepImageKey>FilterEqualsNoResultgaqqq0nj.pvr</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -400,7 +400,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>99f65a4a-8d89-4531-a784-92f0a6befd3f</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>5e9169e4-250b-42a3-ab54-cb67dbc19615</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ExistsVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -484,8 +484,8 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
@@ -497,9 +497,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\ComboBox\API\FilterEqualsNoResult.tstest</Path>
+  <Path>UIWidgets\ComboBox\API\FilterEqualsNoResult.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\ComboBox\API\FilterEqualsNoResult.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\ComboBox\API\FilterEqualsNoResult.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

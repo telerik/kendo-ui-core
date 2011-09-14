@@ -325,9 +325,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\DropDown\API\OpenClose.tstest</Path>
+  <Path>UIWidgets\DropDown\API\OpenClose.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\DropDown\API\OpenClose.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\DropDown\API\OpenClose.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
@@ -335,9 +335,9 @@
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly>functional_tests.dll</TestAssembly>
-  <TestAssemblyPath>C:\work\GitHub\kendo\functional_tests\bin</TestAssemblyPath>
-  <TestClass>functional_tests.OpenClose</TestClass>
+  <TestAssembly>KendoDemosTests.dll</TestAssembly>
+  <TestAssemblyPath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\bin</TestAssemblyPath>
+  <TestClass>KendoDemosTests.OpenClose</TestClass>
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
   <UniqueId>b7d00185-6c77-492f-aa53-6deb56394990</UniqueId>

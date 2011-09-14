@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>80899fd6-26d0-4ebd-a5fb-86b13e4b161a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>78ee26d1-53ea-45ec-bd61-0d262fdace05</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e723adc8-4746-4caf-b10a-73e7317dfd83</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0f86905f-b2b9-47ca-abf4-7eff06209115</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -145,7 +145,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>55cfdd22-f5be-481c-8261-c936a62ff8c5</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>09126da6-ae0a-47ac-b429-34e9461ece62</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -232,7 +232,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6d9b294f-9217-464d-96a6-c61443857a50</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>dd3f0407-15af-4624-8e03-92af4302b9b4</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -317,7 +317,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>19688a60-3ed7-407c-a2f8-840b14a055a8</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>57a3b15a-af24-4baa-b616-4535997830d5</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -400,7 +400,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6020225d-f588-47e0-9ad8-891ecf76fbad</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>ad7ffe80-8fde-475b-84f1-9197d30d03e8</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -487,7 +487,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>51b6a6d9-9456-4205-9fcb-7e581f505950</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>927f3418-44a1-4276-a81c-2212cdb264cf</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -574,7 +574,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>69ffff18-80d2-4544-b892-88ca3a48ea6b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2f1056f8-31c7-4b9d-91e9-d9ebd9247446</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -659,7 +659,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>34bddf49-b884-4abf-8c46-42e85a7033a8</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>38937856-fe28-4b22-8557-63331ca1f927</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -734,7 +734,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-icon k-plus</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-icon k-plus</d2p1:AttributeValue>
         <d2p1:CompareType>Same</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>CollapseAllNodesfn3xjunc.mba</d2p1:StepImageKey>
@@ -748,7 +748,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>10</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>26fc3de2-c274-4df5-9d3c-70ec2f40eaee</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a371170b-ea77-4677-8d9e-a8333f6d831a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -823,7 +823,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-icon k-plus</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-icon k-plus</d2p1:AttributeValue>
         <d2p1:CompareType>Same</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>CollapseAllNodesbs5yvctz.iiz</d2p1:StepImageKey>
@@ -836,8 +836,8 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
@@ -849,9 +849,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\TreeView\API\CollapseAllNodes.tstest</Path>
+  <Path>UIWidgets\TreeView\API\CollapseAllNodes.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\TreeView\API\CollapseAllNodes.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\TreeView\API\CollapseAllNodes.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

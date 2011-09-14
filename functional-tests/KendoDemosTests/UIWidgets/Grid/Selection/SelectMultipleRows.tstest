@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>435a4b61-6f54-489c-acdb-b4b62d7b576a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2be9a251-9c34-4404-a96b-be02bb8e0e31</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>99be7b14-3187-4a9d-9896-0ea0b4b494a0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>06efb58d-8af5-46d1-8e3b-23eeb8ab6269</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -141,7 +141,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>1dc462dc-8483-45b7-8cc0-cae213378e4a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c9379080-a618-40b4-8206-fa146436a4e1</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -216,7 +216,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-alt k-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-alt k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>SelectMultipleRows02tbz4py.1ym</d2p1:StepImageKey>
@@ -230,7 +230,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>2ebaabd7-9250-40a1-87e6-246fd9064370</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>5def5fbc-bdfe-4d0f-a221-0ee94937f453</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -263,7 +263,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>61ad2f3f-2607-4b5e-a6ca-dc497b7344f0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>94cdf5e6-24ee-4405-a3dc-a285c1a6defe</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -349,7 +349,7 @@
       <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>fa0f6db8-359e-4dfd-9b3b-5e33b327ef7f</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3747de83-bcea-4372-b805-2806f7dba404</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -433,7 +433,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e375326c-df13-4128-bd90-ffa2132bd584</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a04e069d-b783-463c-a144-46fd61f1d975</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -508,7 +508,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>SelectMultipleRowsu0u0m4k2.cks</d2p1:StepImageKey>
@@ -522,7 +522,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>8908654d-475e-4597-8b35-7dbb76b79f11</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>343353b9-0e04-4185-ab35-abb2b2ef2ae1</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -597,7 +597,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-alt k-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-alt k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>SelectMultipleRowsiewnluid.p0a</d2p1:StepImageKey>
@@ -610,8 +610,8 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
@@ -623,9 +623,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\Grid\Selection\SelectMultipleRows.tstest</Path>
+  <Path>UIWidgets\Grid\Selection\SelectMultipleRows.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\Grid\Selection\SelectMultipleRows.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\Grid\Selection\SelectMultipleRows.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

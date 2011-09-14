@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>314c7222-8752-4ba0-950c-18e51ad1df7c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c09bc947-2a6e-4719-b54f-a31e237af299</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f4951ca7-8ce9-443a-aa5d-0d640a355e1d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b8dde2bd-a43c-44fd-9a4d-a5bbe9b1ca99</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -139,11 +139,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Contains' value of 'k-state-selected' on 'NigeTableCell'</d2p1:Description>
+      <d2p1:Description>Wait for attribute 'class' has 'Contains' value of 'k-state-selected' on 'NigeTableCell'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>286b08a2-ea1b-43a7-afba-38a285bfe47d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3fe5314f-5d7f-4e98-b303-7548c8cb05f1</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -210,7 +210,7 @@
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
         <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Verification</d2p1:StepType>
+        <d2p1:StepType>Wait</d2p1:StepType>
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
@@ -218,7 +218,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>SelectCelliowj0ea1.ryf</d2p1:StepImageKey>
@@ -232,7 +232,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6c9c62e8-f521-4248-92f9-dfb82e219ee7</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>58a274e9-6d3b-4ae3-9653-a4617d1bf527</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -318,7 +318,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a2779b84-44c8-4f8b-a3a3-b726886c4a6a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b911e7db-2e84-44bb-853a-3de32134a640</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -351,7 +351,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>dd6cf2cb-5f62-458f-a6ae-a0c90d3d22ad</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>fd279513-2909-4a0d-8873-db192cea2933</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -426,7 +426,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>SelectCelloewj104x.tdg</d2p1:StepImageKey>
@@ -440,7 +440,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c3fe2001-59b2-4344-a45c-7ae683c89f0b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2451e746-e0a6-4e40-84a7-251f72538ffe</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -515,7 +515,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>SelectCelltzgdonjw.mkr</d2p1:StepImageKey>
@@ -529,7 +529,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>48fceee6-96f0-4522-a84f-2d41637150b3</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>073e3b95-96f6-4eb4-822c-c5a75cae8474</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -604,7 +604,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>SelectCellja3eycv2.p53</d2p1:StepImageKey>
@@ -618,7 +618,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>990941c4-c29f-4ff4-87b2-ea2ec15369f8</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>e767c15f-9154-4a35-b0a7-e7b118ad3557</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -693,7 +693,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>SelectCellipvgf2zu.0fx</d2p1:StepImageKey>
@@ -706,8 +706,8 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
@@ -719,9 +719,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\Grid\Selection\SelectMultipleCells.tstest</Path>
+  <Path>UIWidgets\Grid\Selection\SelectMultipleCells.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\Grid\Selection\SelectMultipleCells.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\Grid\Selection\SelectMultipleCells.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

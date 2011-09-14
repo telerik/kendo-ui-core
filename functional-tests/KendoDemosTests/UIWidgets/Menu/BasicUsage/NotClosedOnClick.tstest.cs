@@ -15,7 +15,7 @@ using ArtOfTest.WebAii.Silverlight.UI;
 using Telerik.WebAii.Controls.Html;
 using Telerik.WebAii.Controls.Xaml;
 
-namespace functional_tests
+namespace KendoDemosTests
 {
 
     //
@@ -74,7 +74,7 @@ namespace functional_tests
         {
 
             // Wait for Exists 'ViewCodeLink'
-            Pages.BasicUsage2.SubItem4Span.Wait.ForExists(10000);
+            Pages.BasicUsage2.SubItem4Span0.Wait.ForExists(10000);
 
         }
 
@@ -84,7 +84,7 @@ namespace functional_tests
 
 
             // Wait for Exists 'ViewCodeLink'
-            Pages.BasicUsage2.SubItem4Span.Wait.ForExists(10000);
+            Pages.BasicUsage2.SubItem4Span0.Wait.ForExists(10000);
 
 
 

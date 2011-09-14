@@ -23,10 +23,15 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>17a0ba4e-498c-4e4b-b0e3-950b1e9439d1</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>02f47d8e-213f-4e2a-9056-e32eabf733fa</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ExecuteTestActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -38,7 +43,7 @@
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <d2p1:TestName>Select</d2p1:TestName>
+        <d2p1:TestName>Select.tstest</d2p1:TestName>
         <d2p1:TestPath>KendoDemosTests\UIWidgets\PanelBar\API\Select.tstest</d2p1:TestPath>
       </d2p1:Step>
       <d2p1:StepImageKey>EnableDisable2rvg2wpp.b1n</d2p1:StepImageKey>
@@ -52,7 +57,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>77bd80f3-120e-4919-8d80-bec05fa3639d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b8e0764d-1ce0-4759-9b13-fd10e094bcbd</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -135,7 +140,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>81dee198-8870-4cf9-ba33-c2f2089eb821</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>16d9587c-92e6-48b1-9f21-49253c229413</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -210,7 +215,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-state-disabled</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-state-disabled</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>EnableDisable05gwrcux.nho</d2p1:StepImageKey>
@@ -224,7 +229,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c2388f90-68f5-45c6-b273-c24d9e5f46e2</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>65d329e3-c1fd-4e2d-b70b-d3a4be226097</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -307,7 +312,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d81ca5d4-3960-48bf-8f93-ecea10e0ea10</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3dbbf533-1e71-42ab-a6d7-f24cc15d811b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -382,7 +387,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-state-default</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-state-default</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>EnableDisablefsyanjoa.jyw</d2p1:StepImageKey>
@@ -410,9 +415,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\PanelBar\API\EnableDisable.tstest</Path>
+  <Path>UIWidgets\PanelBar\API\EnableDisable.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\PanelBar\API\EnableDisable.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\PanelBar\API\EnableDisable.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

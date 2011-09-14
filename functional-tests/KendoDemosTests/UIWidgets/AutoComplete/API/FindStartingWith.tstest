@@ -504,9 +504,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\AutoComplete\API\FindStartingWith.tstest</Path>
+  <Path>UIWidgets\AutoComplete\API\FindStartingWith.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\AutoComplete\API\FindStartingWith.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\AutoComplete\API\FindStartingWith.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
@@ -514,9 +514,9 @@
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly>functional_tests.dll</TestAssembly>
-  <TestAssemblyPath>C:\work\GitHub\kendo\functional_tests\bin</TestAssemblyPath>
-  <TestClass>functional_tests.FindStartingWith</TestClass>
+  <TestAssembly>KendoDemosTests.dll</TestAssembly>
+  <TestAssemblyPath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\bin</TestAssemblyPath>
+  <TestClass>KendoDemosTests.FindStartingWith</TestClass>
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
   <UniqueId>3089b474-ce3d-4592-a140-be4c83154723</UniqueId>

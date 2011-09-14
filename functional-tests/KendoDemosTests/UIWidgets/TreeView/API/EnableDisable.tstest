@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>77b8d72c-ec5c-4053-a687-90a2446e976f</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b54a6711-4ab7-40e8-b175-e3258493e660</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d13208e6-47a6-458f-a7c7-2be20bc853a3</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>ec875d6f-34b8-40d0-9f61-569265846355</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -143,7 +143,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7281a3c3-0549-4d60-98b7-4498d1a47afe</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>bd036178-1dbd-4a37-9c2a-f7604d435299</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -176,7 +176,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e646ef26-e275-491b-9349-994fb5c99b63</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>409c2cc1-095a-426c-8e76-04524d7bd47d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -259,7 +259,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b3a94e1a-bedf-4040-8285-c172a8363ea4</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>09ff5676-7b6a-430b-b8e7-9be7356ffad1</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -292,7 +292,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>5d6b7e58-35cd-4235-abe2-7170256f9864</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>095dde44-b18c-47bb-b0f2-2026cad9abbc</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -367,7 +367,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-in k-state-selected k-state-disabled</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-in k-state-selected k-state-disabled</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>EnableDisablebsrq2trn.xay</d2p1:StepImageKey>
@@ -381,7 +381,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>40506035-176a-4b05-aa5f-0ddea810a3ef</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>adc5aef2-f11f-4d5d-8cbf-a2fbe3c231c2</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -464,7 +464,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>88505305-0695-4fd7-b642-9ce957c9e39c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>9460a786-93c7-47aa-a40c-c3067cc110bd</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -539,7 +539,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-in k-state-selected k-state-default</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-in k-state-selected k-state-default</d2p1:AttributeValue>
         <d2p1:CompareType>Same</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>EnableDisable2ii5z341.lni</d2p1:StepImageKey>
@@ -565,9 +565,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\TreeView\API\EnableDisable.tstest</Path>
+  <Path>UIWidgets\TreeView\API\EnableDisable.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\TreeView\API\EnableDisable.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\TreeView\API\EnableDisable.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

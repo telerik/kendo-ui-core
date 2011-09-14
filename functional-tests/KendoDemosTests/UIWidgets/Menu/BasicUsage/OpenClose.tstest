@@ -1502,9 +1502,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\Menu\BasicUsage\OpenClose.tstest</Path>
+  <Path>UIWidgets\Menu\BasicUsage\OpenClose.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\Menu\BasicUsage\OpenClose.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\Menu\BasicUsage\OpenClose.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

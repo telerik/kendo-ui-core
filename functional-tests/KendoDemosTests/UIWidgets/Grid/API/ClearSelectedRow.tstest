@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>feb65bb1-9868-448e-8999-d055f200a14b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3be8b6c8-b3bd-4e52-8007-7eb98ca04b1b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>623699e4-700c-4e1f-81ec-e8234027f82f</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>27733d07-71c9-443b-9da2-082845a5a33a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -141,7 +141,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6849c9ff-9660-493b-b441-fde9ad35f06b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>4102d6d6-ef91-498c-a970-0ab6968bd185</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -216,7 +216,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-state-selected</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-state-selected</d2p1:AttributeValue>
         <d2p1:CompareType>Same</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>ClearSelectedRowof2etf5u.lul</d2p1:StepImageKey>
@@ -230,7 +230,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ddd14b32-4e45-4818-b538-c293ae96ccab</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0dcf8cd5-a47d-4745-983f-6246f8375cfe</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -313,7 +313,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>9891fb93-e98c-4a10-a3e6-22a0aac899c0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>9292bd54-72be-4081-8490-3261bd337c3a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -414,9 +414,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\Grid\API\ClearSelectedRow.tstest</Path>
+  <Path>UIWidgets\Grid\API\ClearSelectedRow.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\Grid\API\ClearSelectedRow.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\Grid\API\ClearSelectedRow.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>72800a66-fecb-4a1c-9fa5-37c3cd7aa3da</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a84e6995-060e-49ea-8869-9b661c462d77</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>94d55c46-c3fc-4545-a131-1129fa73e64e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b2466526-13c0-4bf2-8d81-2a0ecd1a5391</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -133,7 +133,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-widget k-slider k-slider-horizontal k-state-default</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-widget k-slider k-slider-horizontal k-state-default</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>DoubleSliderEnabledisableqr0mqpbw.3nf</d2p1:StepImageKey>
@@ -147,7 +147,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>324d6ad5-65c8-429f-acce-1d3037e81b1b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d0abefe5-59d1-42b8-9249-9c3b966f23e7</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -230,7 +230,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>df7b6967-01f7-4d44-a08f-cd69a495e85f</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>ad89bb56-eeba-4f57-8761-44c965d9a7fa</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -305,7 +305,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-widget k-slider k-slider-horizontal k-state-disabled</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-widget k-slider k-slider-horizontal k-state-disabled</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>DoubleSliderEnabledisabledascbivk.1cr</d2p1:StepImageKey>
@@ -319,7 +319,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>342794f0-a91e-4522-a19a-7d8def158b01</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>8a1c6fad-88d1-4253-aa4e-1195a49e6bd2</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -408,7 +408,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>24a960a2-65c5-48c7-8c17-9f13d96550a4</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>9c057141-d305-48e7-905b-39f4ea57188d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -441,7 +441,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>5ca9294f-4831-45cf-ad01-e0a5d1969740</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0f93ef56-c6e8-4e68-9096-1598a0ca957b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -524,7 +524,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>3d0e4879-3854-4e3e-b81d-625e98330acc</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>5f75390f-1d4d-40fe-8afe-eca44f7d3d97</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -557,7 +557,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>0e01b3d8-0b00-4154-b732-c2855f720c1c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2d1046c9-c48f-43c0-aacd-204e3fde98a4</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -632,7 +632,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-widget k-slider k-slider-horizontal k-state-default</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-widget k-slider k-slider-horizontal k-state-default</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>DoubleSliderEnabledisableg4ywnmco.t30</d2p1:StepImageKey>
@@ -645,8 +645,8 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
@@ -658,9 +658,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\Slider\API\DoubleSliderEnabledisable.tstest</Path>
+  <Path>UIWidgets\Slider\API\DoubleSliderEnabledisable.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\Slider\API\DoubleSliderEnabledisable.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\Slider\API\DoubleSliderEnabledisable.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

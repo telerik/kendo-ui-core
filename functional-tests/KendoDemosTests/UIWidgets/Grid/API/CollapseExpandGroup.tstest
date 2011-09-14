@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b3bd0d06-ce96-40c6-add1-68ddb427efe5</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>5f512c0e-8703-4cc6-9623-7a28e91a0974</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -54,11 +54,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Same' value of 'k-icon k-collapse' on 'Link'</d2p1:Description>
+      <d2p1:Description>Wait for attribute 'class' has 'Contains' value of 'k-icon k-collapse' on 'Link'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ac43f3ed-3f1c-4b88-a3ac-b2e911401e03</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>fdf10ef9-4c75-487c-ab23-08d43cdab733</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -125,7 +125,7 @@
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
         <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Verification</d2p1:StepType>
+        <d2p1:StepType>Wait</d2p1:StepType>
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
@@ -133,8 +133,8 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-icon k-collapse</d2p1:AttributeValue>
-        <d2p1:CompareType>Same</d2p1:CompareType>
+        <d2p1:AttributeValue>k-icon k-collapse</d2p1:AttributeValue>
+        <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>CollapseExpandGroupd453csdd.che</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -147,7 +147,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>5ad6f1a6-7096-455f-afc5-f89555235511</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c0c8eec4-6879-40de-95a8-903667b7ba84</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -219,7 +219,7 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
       </d2p1:Step>
       <d2p1:StepImageKey>CollapseExpandGroupnrah3hqt.mrl</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -228,11 +228,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'class' has 'Same' value of 'k-icon k-expand' on 'Link'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Description>Wait for attribute 'class' has 'Same' value of 'k-icon k-expand' on 'Link'</d2p1:Description>
+      <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>55fae680-033e-493a-91a4-3a94601c9b35</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6b74220d-5822-451f-ad9d-5823c07cc977</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -299,7 +299,7 @@
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
         <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Verification</d2p1:StepType>
+        <d2p1:StepType>Wait</d2p1:StepType>
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
@@ -307,7 +307,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:AttributeName>class</d2p1:AttributeName>
-        <d2p1:AttributeValue>t-icon k-expand</d2p1:AttributeValue>
+        <d2p1:AttributeValue>k-icon k-expand</d2p1:AttributeValue>
         <d2p1:CompareType>Same</d2p1:CompareType>
       </d2p1:Step>
       <d2p1:StepImageKey>CollapseExpandGroupxdokmsrv.nkk</d2p1:StepImageKey>
@@ -318,10 +318,10 @@
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
       <d2p1:Description>Wait for ExistsNot 'NigeTableCell'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>9dffcd88-6e81-4cec-b648-3e9466cdaba2</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>5d8299b2-2c76-447f-9faa-eecf283501cc</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ExistsVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -399,14 +399,188 @@
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for element 'MichaelTableCell' 'is not' visible.</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>6</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>75ecaa99-de28-456b-931d-99013b014064</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>verifyTarget</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[2]/table[1]/tbody[1]/tr[2]/td[2]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </ChainStops>
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>id=grid</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>tagIndex=td:2</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>MichaelTableCell</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlTableCell</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>verifyTarget</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>API9</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/grid/api.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>API</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Wait</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:CheckInterval>500</d2p1:CheckInterval>
+        <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:Timeout>10000</d2p1:Timeout>
+        <d2p1:IsVisible>false</d2p1:IsVisible>
+      </d2p1:Step>
+      <d2p1:StepImageKey>CollapseExpandGroupgkd1xcky.ouf</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for ExistsNot 'MichaelTableCell'</d2p1:Description>
+      <d2p1:Enabled>false</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>7</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>7e6a4b34-4068-4a29-942a-ea97e1b1025e</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ExistsVerificationDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[2]/table[1]/tbody[1]/tr[2]/td[2]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </ChainStops>
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>id=grid</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>tagIndex=td:2</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>MichaelTableCell</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlTableCell</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>target</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>API9</d2p1:FriendlyName>
+                <d2p1:Path>/kendo/live/grid/api.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>API</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Wait</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:CheckInterval>500</d2p1:CheckInterval>
+        <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:Timeout>10000</d2p1:Timeout>
+        <d2p1:ExistsNot>true</d2p1:ExistsNot>
+      </d2p1:Step>
+      <d2p1:StepImageKey>CollapseExpandGroupbto0vxbz.of5</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
   </Steps>
   <Version>200</Version>
   <BrowserType>NotSet</BrowserType>
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
@@ -418,9 +592,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\Grid\API\CollapseExpandGroup.tstest</Path>
+  <Path>UIWidgets\Grid\API\CollapseExpandGroup.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\Grid\API\CollapseExpandGroup.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\Grid\API\CollapseExpandGroup.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
