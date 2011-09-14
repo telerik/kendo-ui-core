@@ -48,74 +48,84 @@
         });
     }
 
-    window.lessLoaded = function(lessTemplate) {
-            var properties = {
-                    bgColor: { property: "background-color", label: "Background" },
-                    color: { property: "color", lessSuffix: "text-color", label: "Text color" },
-                    brdColor: { property: "border-color", label: "Border color" }
-                },
-                extend = $.extend;
+    function buildConstants() {
+        var properties = {
+                bgColor: { property: "background-color", label: "Background" },
+                color: { property: "color", lessSuffix: "text-color", label: "Text color" },
+                borderColor: { property: "border-color", label: "Border color" }
+            },
+            extend = $.extend,
+            BGCOLOR = "bgColor",
+            COLOR = "color",
+            BORDERCOLOR = "borderColor";
 
-        var returnProperties = function(propertyNames) {
-            var result = [];
-            for (var j = 0; j < propertyNames.length; j++) {
+        function returnProperties(propertyNames) {
+            var result = [], j;
+
+            for (j = 0; j < propertyNames.length; j++) {
                 result.push(extend({}, properties[propertyNames[j]]));
             }
+
             return result;
         }
 
-        new kendo.ThemeBuilder(lessTemplate, new kendo.LessConstants([{
-                    prefix: "@widget",
-                    title: "Widgets",
-                    properties: returnProperties(["bgColor", "color", "brdColor"])
-                }, {
-                    prefix: "@header",
-                    title: "Headers",
-                    properties: returnProperties(["bgColor", "color"])
-                }, {
-                    prefix: "@link",
-                    title: "Links",
-                    properties: returnProperties(["color"])
-                }, {
-                    prefix: "@button",
-                    title: "Buttons",
-                    properties: returnProperties(["bgColor", "color"])
-                }, {
-                    prefix: "@tooltip",
-                    title: "Tooltips",
-                    properties: returnProperties(["bgColor", "color"])
-                }, {
-                    prefix: "@hover",
-                    title: "Hover state",
-                    properties: returnProperties(["bgColor", "color", "brdColor"])
-                }, {
-                    prefix: "@selected",
-                    title: "Selected state",
-                    properties: returnProperties(["bgColor", "color", "brdColor"])
-                }, {
-                    prefix: "@active",
-                    title: "Active state",
-                    properties: returnProperties(["bgColor", "color", "brdColor"])
-                }, {
-                    prefix: "@disabled",
-                    title: "Disabled state",
-                    properties: returnProperties(["color"])
-                }, {
-                    prefix: "@error",
-                    title: "Error state",
-                    properties: returnProperties(["bgColor", "color", "brdColor"])
-                }]));
-                /* missing constants:
-                 * @gradientUrl: "..."; // on Telerik CDN
-                 * @image-folder: "BlueOpal"; // we should think of something that allows us to change the gradients
-                 * @loading-panel-color: #fff;
-                 * @shadow-color: #aaa;
-                 * @content-background-color: @widget-background-color;
-                 * @group-background-color: #f1f4f5;
-                 * @input-background-color: @widget-background-color;
-                 * @splitbar-background-color: @header-background-color;
-                 * @alt-background-color: @group-background-color;
-                 */
+        /* missing constants:
+         * @gradientUrl: "..."; // on Telerik CDN
+         * @image-folder: "BlueOpal"; // we should think of something that allows us to change the gradients
+         * @loading-panel-color: #fff;
+         * @shadow-color: #aaa;
+         * @content-background-color: @widget-background-color;
+         * @group-background-color: #f1f4f5;
+         * @input-background-color: @widget-background-color;
+         * @splitbar-background-color: @header-background-color;
+         * @alt-background-color: @group-background-color;
+         */
+
+        return [{
+            prefix: "@widget",
+            title: "Widgets",
+            properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
+        }, {
+            prefix: "@header",
+            title: "Headers",
+            properties: returnProperties([BGCOLOR, COLOR])
+        }, {
+            prefix: "@link",
+            title: "Links",
+            properties: returnProperties([COLOR])
+        }, {
+            prefix: "@button",
+            title: "Buttons",
+            properties: returnProperties([BGCOLOR, COLOR])
+        }, {
+            prefix: "@tooltip",
+            title: "Tooltips",
+            properties: returnProperties([BGCOLOR, COLOR])
+        }, {
+            prefix: "@hover",
+            title: "Hover state",
+            properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
+        }, {
+            prefix: "@selected",
+            title: "Selected state",
+            properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
+        }, {
+            prefix: "@active",
+            title: "Active state",
+            properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
+        }, {
+            prefix: "@disabled",
+            title: "Disabled state",
+            properties: returnProperties([COLOR])
+        }, {
+            prefix: "@error",
+            title: "Error state",
+            properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
+        }];
+    }
+
+    window.lessLoaded = function(lessTemplate) {
+        new kendo.ThemeBuilder(lessTemplate, new kendo.LessConstants(buildConstants()));
     };
 
     queue.push(function(){
