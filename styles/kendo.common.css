@@ -1457,19 +1457,11 @@ div.k-dropdown
     vertical-align: top;
 }
 
-*+html .k-combobox,
-*+html .k-dropdown,
-*+html .k-selectbox
-{
-    overflow: visible; /*positions icon properly*/
-}
-
 .k-autocomplete,
 .k-dropdown-wrap,
 .k-picker-wrap
 {
     position: relative;
-    display: block;
     cursor: default;
     
     -moz-border-radius: 4px;
@@ -1650,7 +1642,6 @@ div.k-datetimepicker .k-select+.k-select
 .k-dropdown-wrap .k-input,
 .k-picker-wrap .k-input
 {
-    text-indent: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
@@ -2008,11 +1999,9 @@ div.k-treeview
 
 /* inputs */
 
-.k-autocomplete,
 .k-input
 {
     padding: 0.25em 0;
-    text-indent: 4px;
 }
 
 /* NumericTextBox */
