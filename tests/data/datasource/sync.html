@@ -75,6 +75,27 @@
                 equal(set.calls("data"), 1);
             });
 
+            test("change is raised after sync", function() {
+                var transport = stub({}, { update: function(options) {
+                            options.success();
+                        }
+                    }),
+                    called = false;
+
+                setup(transport, [ { id: 1 }, { id: 2 }] );
+
+                dataSource.bind("change", function() {
+                    called = true;
+                });
+
+                var model1 = dataSource.get(1);
+
+                model1.set( { foo: "foo" } );
+
+                dataSource.sync();
+
+                ok(called);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
