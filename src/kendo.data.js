@@ -983,7 +983,10 @@
                     reader: that.reader,
                     batch: options.batch,
                     sendAllFields: options.sendAllFields,
-                    transport: that.transport
+                    transport: that.transport,
+                    change: function() {
+                        that.trigger(CHANGE);
+                    }
                 });
             }
 

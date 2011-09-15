@@ -377,6 +377,67 @@
                 equal(reader.calls("parse"), 1);
                 equal(model.id(), 1);
             });
+
+            test("sync raises change event after delete", function() {
+                var transport = stub({}, { destroy: function(options) {
+                            options.success();
+                        }
+                    }),
+                    called = false;
+
+                setup({ data: [ { id: 1 }, { id: 2 }], transport: transport } );
+
+                modelSet.bind("change", function() {
+                    called = true;
+                });
+
+                modelSet.remove(1);
+                modelSet.sync();
+
+                ok(called);
+            });
+
+            test("sync raises change event after update", function() {
+                var transport = stub({}, { create: function(options) {
+                            options.success();
+                        }
+                    }),
+                    called = false;
+
+                setup({ data: [ { id: 1 }, { id: 2 }], transport: transport } );
+
+                modelSet.bind("change", function() {
+                    called = true;
+                });
+
+                 var model = new MyModel();
+                modelSet.add(model);
+                modelSet.sync();
+
+                ok(called);
+            });
+
+            test("sync raises change event after update", function() {
+                var transport = stub({}, { update: function(options) {
+                            options.success();
+                        }
+                    }),
+                    called = false;
+
+                setup({ data: [ { id: 1 }, { id: 2 }], transport: transport } );
+
+                modelSet.bind("change", function() {
+                    called = true;
+                });
+
+                var model1 = modelSet.get(1);
+
+                model1.set( { foo: "foo" } );
+
+                modelSet.sync();
+
+                ok(called);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

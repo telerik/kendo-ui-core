@@ -182,6 +182,10 @@
             that._transport = options.transport;
             that._models = {};
             that._map();
+
+            Observable.fn.init.call(that);
+
+            that.bind([CHANGE], options);
         },
 
         options: {
@@ -336,6 +340,8 @@
                     for (idx = 0, length = arguments.length; idx < length; idx++){
                         that._accept(arguments[idx]);
                     }
+
+                    that.trigger(CHANGE);
                 });
         },
 
