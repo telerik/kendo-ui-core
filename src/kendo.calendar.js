@@ -2,32 +2,25 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Component = ui.Component,
+        template = kendo.template,
         MONTH = "month",
         YEAR = "year",
         DECADE = "decade",
         CENTURY = "century",
         CLICK = "click",
         VALUE = "value",
+        HOVER = "k-state-hover",
         DISABLED = "k-state-disabled",
         SELECTED = "k-state-selected",
         OTHERMONTH = ' class="k-other-month"',
+        CELLSELECTOR = "td:has(.k-link)",
+        MOUSEENTER = "mouseenter",
+        MOUSELEAVE = "mouseleave",
+        cellTemplate = template('<td<#=data.otherMonth#>><a class="k-link" href="#" data-value="<#=data.dateString#>"><#=data.value#></a></td>');
+        cellEmptyTemplate = template("<td> </td>");
         extend = $.extend,
         proxy = $.proxy,
         DATE = Date;
-
-    function defineViewedDate(value, min, max) {
-        var today = new DATE();
-        if (value) {
-            today = new DATE(value);
-        }
-
-        if (min > today) {
-            today = new DATE(min);
-        } else if (max < today) {
-            today = new DATE(max);
-        }
-        return today;
-    }
 
     var Calendar = Component.extend({
         init: function(element, options) {
@@ -45,9 +38,14 @@
 
             that._viewedDate = viewedDate = defineViewedDate(options.value, options.min, options.max);
 
-            that.element.delegate("td:has(.k-link)", CLICK, function(e) {
+            that.element
+            //.delegate(".k-link", MOUSEENTER, mouseenter)
+            //.delegate(".k-link", MOUSELEAVE, mouseleave)
+            .delegate(CELLSELECTOR, MOUSEENTER, mouseenter)
+            .delegate(CELLSELECTOR, MOUSELEAVE, mouseleave)
+            .delegate(CELLSELECTOR, CLICK, function(e) {
                 e.preventDefault();
-                that.navigateDown(new DATE($(e.currentTarget.children[0]).data(VALUE)));
+                that.navigateDown(new DATE($(e.currentTarget.firstChild).data(VALUE)));
             });
 
             that._currentView = options.firstView;
@@ -174,7 +172,7 @@
             that.nextArrow.toggleClass(DISABLED, compare(value, max) > -1);
 
             if (!oldView || that._changeView) {
-                newView = $(calendarView.content(extend({
+                newView = $(calendarView.content($.extend({
                     min: min,
                     max: max,
                     date: value
@@ -196,7 +194,7 @@
                 that.view.find("td:not(.k-other-month)")
                     .removeClass(SELECTED)
                     .filter(function() {
-                       return $(this).children().eq(0).data(VALUE) === dateString;
+                       return $(this.firstChild).data(VALUE) === dateString;
                     })
                     .addClass(SELECTED);
             }
@@ -234,7 +232,8 @@
 
         _header: function() {
             var that = this,
-            element = that.element;
+            element = that.element,
+            links;
 
             if (!element.find(".k-header")[0]) {
                 element.html('<div class="k-header">'
@@ -244,35 +243,36 @@
                            + '</div>');
             }
 
-            that.prevArrow = element.find(".k-nav-prev")
-                                    .bind(CLICK, function(e) {
-                                        e.preventDefault();
-                                        if (!that.prevArrow.hasClass(DISABLED)) {
-                                            that.navigateToPast();
-                                        }
-                                    });
+            links = element.find(".k-link").hover(mouseenter, mouseleave);
 
-            that.title = element.find(".k-nav-fast")
-                                .bind(CLICK, function(e) {
-                                    e.preventDefault();
-                                    if (!that.title.hasClass(DISABLED)) {
-                                        that.navigateUp();
-                                    }
-                                });
+            that.prevArrow = links.eq(0)
+                                  .bind(CLICK, function(e) {
+                                      e.preventDefault();
+                                      if (!that.prevArrow.hasClass(DISABLED)) {
+                                          that.navigateToPast();
+                                      }
+                                  });
 
-            that.nextArrow = element.find(".k-nav-next")
-                                    .bind(CLICK, function(e) {
-                                        e.preventDefault();
-                                        if (!that.nextArrow.hasClass(DISABLED)) {
-                                            that.navigateToFuture();
-                                        }
-                                    });
+            that.title = links.eq(1)
+                              .bind(CLICK, function(e) {
+                                  e.preventDefault();
+                                  if (!that.title.hasClass(DISABLED)) {
+                                      that.navigateUp();
+                                  }
+                              });
+
+            that.nextArrow = links.eq(2)
+                                  .bind(CLICK, function(e) {
+                                      e.preventDefault();
+                                      if (!that.nextArrow.hasClass(DISABLED)) {
+                                          that.navigateToFuture();
+                                      }
+                                  });
         },
 
         _templates: function() {
             var that = this,
-                month = that.options.month,
-                template = kendo.template;
+                month = that.options.month;
 
             that.month = {
                 content: template('<td<#=data.otherMonth#>><a class="k-link" href="#" data-value="<#=data.dateString#>" title="<#=data.title#>">' + month.content + '</a></td>'),
@@ -322,7 +322,9 @@
                 return kendo.culture().calendar.months.names[date.getMonth()] + " " + date.getFullYear();
             },
             content: function(options) {
-                var idx = 0, data,
+                var idx = 0,
+                    min = options.min,
+                    max = options.max,
                     date = options.date,
                     currentCalendar = kendo.culture().calendar,
                     firstDayIdx = currentCalendar.firstDayOfWeek,
@@ -332,10 +334,8 @@
                     short = shiftArray(days.namesShort, firstDayIdx),
                     start = calendar.firstVisibleDay(date),
                     firstDayOfMonth = calendar.firstDayOfMonth(date),
-                    lastDayOfMonth = new DATE(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth() + 1, 0),
+                    lastDayOfMonth = new DATE(date.getFullYear(), date.getMonth() + 1, 0),
                     toDateString = this.toDateString,
-                    min = options.min,
-                    max = options.max,
                     html = '<table class="k-content"><thead><tr>';
 
                 for (; idx < 7; idx++) {
@@ -343,8 +343,8 @@
                 }
 
                 return view({
-                    length: 42,
-                    cellsPerRow: 7,
+                    cells: 42,
+                    perRow: 7,
                     html: html += "</tr></thead><tbody><tr>",
                     start: new DATE(start.getFullYear(), start.getMonth(), start.getDate()),
                     min: new DATE(min.getFullYear(), min.getMonth(), min.getDate()),
@@ -396,21 +396,16 @@
                     max = options.max;
 
                 return view({
-                    length: 12,
-                    cellsPerRow: 4,
-                    html: '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>',
                     min: new DATE(min.getFullYear(), min.getMonth(), 1),
                     max: new DATE(max.getFullYear(), max.getMonth(), 1),
                     start: new DATE(options.date.getFullYear(), 0, 1),
-                    setter: function(date) {
-                        date.setMonth(date.getMonth() + 1);
-                    },
+                    setter: function(date) { date.setMonth(date.getMonth() + 1); },
                     build: function(date) {
                         return {
                             value: namesAbbr[date.getMonth()],
                             dateString: toDateString(date),
                             otherMonth: ""
-                        }
+                        };
                     }
                 });
             },
@@ -434,21 +429,16 @@
                     toDateString = this.toDateString;
 
                 return view({
-                    length: 12,
-                    cellsPerRow: 4,
-                    html: '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>',
                     start: new DATE(year = year - year % 10 - 1, 0, 1),
                     min: new DATE(options.min.getFullYear(), 0, 1),
                     max: new DATE(options.max.getFullYear(), 0, 1),
-                    setter: function(date) {
-                        date.setFullYear(date.getFullYear() + 1);
-                    },
+                    setter: function(date) {date.setFullYear(date.getFullYear() + 1); },
                     build: function(date, idx) {
                         return {
                             value: date.getFullYear(),
                             dateString: toDateString(date),
                             otherMonth: idx == 0 || idx == 11 ? OTHERMONTH : ""
-                        }
+                        };
                     }
                 });
             },
@@ -472,22 +462,17 @@
                     toDateString = this.toDateString;
 
                 return view({
-                    length: 12,
-                    cellsPerRow: 4,
-                    html: '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>',
                     start: new DATE(year - year % 100 - 10, 0, 1),
                     min: new DATE(options.min.getFullYear() - 10, 0, 1),
                     max: new DATE(options.max.getFullYear(), 0, 1),
-                    setter: function(date) {
-                        date.setFullYear(date.getFullYear() + 10);
-                    },
+                    setter: function(date) { date.setFullYear(date.getFullYear() + 10); },
                     build: function(date, idx) {
                         var year = date.getFullYear();
                         return {
                             value: year + "-" + (year + 9),
                             dateString: toDateString(date),
                             otherMonth: idx == 0 || idx == 11 ? OTHERMONTH : ""
-                        }
+                        };
                     }
                 });
             },
@@ -501,8 +486,19 @@
         }
     }
 
-    var cellTemplate = kendo.template('<td<#=data.otherMonth#>><a class="k-link" href="#" data-value="<#=data.dateString#>"><#=data.value#></a></td>');
-    var cellEmptyTemplate = kendo.template("<td> </td>");
+    function defineViewedDate(value, min, max) {
+        var today = new DATE();
+        if (value) {
+            today = new DATE(value);
+        }
+
+        if (min > today) {
+            today = new DATE(min);
+        } else if (max < today) {
+            today = new DATE(max);
+        }
+        return today;
+    }
 
     function view(options) {
         var idx = 0,
@@ -513,12 +509,12 @@
             start = options.start,
             setter = options.setter,
             build = options.build,
-            length = options.length,
-            cellsPerRow = options.cellsPerRow,
+            length = options.cells || 12,
+            cellsPerRow = options.perRow || 4,
             toDateString = options.toDateString,
             content = options.content || cellTemplate,
             empty = options.empty || cellEmptyTemplate,
-            html = options.html;
+            html = options.html || '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>';
 
         for(; idx < length; idx++) {
             if (idx > 0 && idx % cellsPerRow == 0) {
@@ -564,6 +560,14 @@
 
     function shiftArray(array, idx) {
         return array.slice(idx).concat(array.slice(0, idx));
+    }
+
+    function mouseenter() {
+        $(this).addClass(HOVER);
+    }
+
+    function mouseleave() {
+        $(this).removeClass(HOVER);
     }
 
     kendo.calendar = calendar;
