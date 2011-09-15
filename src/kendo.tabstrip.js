@@ -215,7 +215,7 @@
                 return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
             },
             contentUrl: function(item) {
-                return " data-content-url=\"" + item.contentUrl + "\"";
+                return item.contentUrl ? " data-content-url=\"" + item.contentUrl + "\"" : "";
             }
         };
 
@@ -530,7 +530,7 @@
                 tabs = $(tab);
                 contents = $("<div class='" + CONTENT + "'/>");
 
-                updateTabClasses(tab);
+                updateTabClasses(tabs);
             }
 
             return { tabs: tabs, contents: contents };

@@ -162,13 +162,16 @@
         animating = false,
 
         templates = {
+            content: template(
+                "<div class='k-content'<#= contentAttributes(data) #>><#= content(item) #></div>"
+            ),
             group: template(
                 "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
                     "<#= renderItems(data) #>" +
                 "</ul>"
             ),
             itemWrapper: template(
-                "<<#= tag(item) #> class='<#= textClass(item, group) #>'<#= textAttributes(item) #>>" +
+                "<<#= tag(item) #> class='<#= textClass(item, group) #>'<#= contentUrl(item) #><#= textAttributes(item) #>>" +
                     "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
                     "<#= arrow(data) #>" +
                 "</<#= tag(item) #>>"
@@ -242,11 +245,20 @@
             },
             groupCssClass: function(group) {
                 return "k-group";
+            },
+            contentAttributes: function(content) {
+                return content.active !== true ? " style='display:none'" : "";
+            },
+            content: function(item) {
+                return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
+            },
+            contentUrl: function(item) {
+                return item.contentUrl ? " data-content-url=\"" + item.contentUrl + "\"" : "";
             }
         };
 
     function updateItemClasses (item, menuElement) {
-        item = $(item);
+        item = $(item).addClass("k-item");
 
         item
             .children(IMG)
@@ -578,8 +590,13 @@
 
             var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-group") : null);
 
-            each(inserted.items, function () {
+            each(inserted.items, function (idx) {
                 inserted.group.append(this);
+
+                var contents = inserted.contents[idx];
+                if (contents)
+                    $(this).append(contents);
+
                 updateFirstLast(this);
             });
 
@@ -608,8 +625,13 @@
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            each(inserted.items, function () {
+            each(inserted.items, function (idx) {
                 referenceItem.before(this);
+
+                var contents = inserted.contents[idx];
+                if (contents)
+                    $(this).append(contents);
+
                 updateFirstLast(this);
             });
 
@@ -637,8 +659,13 @@
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            each(inserted.items, function () {
+            each(inserted.items, function (idx) {
                 referenceItem.after(this);
+
+                var contents = inserted.contents[idx];
+                if (contents)
+                    $(this).append(contents);
+
                 updateFirstLast(this);
             });
 
@@ -674,7 +701,7 @@
         },
 
         _insert: function (item, referenceItem, parent) {
-            var that = this;
+            var that = this, contents = [];
 
             if (!referenceItem || !referenceItem.length) {
                 parent = that.element;
@@ -694,18 +721,31 @@
 
             if (plain || $.isArray(item)) { // is JSON
                 items = $.map(plain ? [ item ] : item, function (value, idx) {
-                            return $(PanelBar.renderItem({
-                                group: groupData,
-                                item: extend(value, { index: idx })
-                            }));
+                            if (typeof value === "string") {
+                                return $(value);
+                            } else {
+                                return $(PanelBar.renderItem({
+                                    group: groupData,
+                                    item: extend(value, { index: idx })
+                                }));
+                            }
+                        });
+                contents = $.map(plain ? [ item ] : item, function (value, idx) {
+                            if (value.content || value.contentUrl) {
+                                return $(PanelBar.renderContent({
+                                    item: extend(value, { index: idx })
+                                }));
+                            } else {
+                                return false;
+                            }
                         });
             } else {
                 items = $(item);
 
-                updateItemClasses(item, that.element);
+                updateItemClasses(items, that.element);
             }
 
-            return { items: items, group: parent };
+            return { items: items, group: parent, contents: contents };
         },
 
         _toggleHover: function(e) {
@@ -728,8 +768,7 @@
                             .find("li:not(" + ACTIVECLASS + ") > ul")
                             .css({ display: "none" })
                             .end()
-                            .find("li")
-                            .addClass("k-item");
+                            .find("li");
 
             items.each(function () {
                 updateItemClasses(this, that.element);
@@ -955,6 +994,10 @@
                     return html;
                 }
             }, options, rendering));
+        },
+
+        renderContent: function (options) {
+            return templates.content(extend(options, rendering));
         }
     });
 

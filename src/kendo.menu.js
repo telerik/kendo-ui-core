@@ -477,7 +477,7 @@
             } else {
                 items = $(item);
 
-                updateItemClasses(item);
+                updateItemClasses(items);
             }
 
             return { items: items, group: parent };
