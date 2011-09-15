@@ -893,9 +893,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>AeroViewr\TestProject2\AeroViewr\OpenSetSearchBack.aii</Path>
+  <Path>TestProject2\AeroViewr\OpenSetSearchBack.aii</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>AeroViewr\TestProject2\AeroViewr\OpenSetSearchBack.resx</ResourceFilePath>
+  <ResourceFilePath>TestProject2\AeroViewr\OpenSetSearchBack.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
@@ -903,9 +903,9 @@
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly>functional_tests.dll</TestAssembly>
-  <TestAssemblyPath>C:\work\GitHub\kendo\functional_tests\bin</TestAssemblyPath>
-  <TestClass>functional_tests.OpenSetSearchBack</TestClass>
+  <TestAssembly>AeroViewr.dll</TestAssembly>
+  <TestAssemblyPath>C:\work\GitHub\kendo\functional-tests\AeroViewr\bin</TestAssemblyPath>
+  <TestClass>AeroViewr.OpenSetSearchBack</TestClass>
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
   <UniqueId>a71e5ebf-cad5-489d-9597-0e39d5d99e94</UniqueId>

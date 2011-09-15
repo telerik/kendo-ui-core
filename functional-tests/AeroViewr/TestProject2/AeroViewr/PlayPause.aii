@@ -625,9 +625,9 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>AeroViewr\TestProject2\AeroViewr\PlayPause.aii</Path>
+  <Path>TestProject2\AeroViewr\PlayPause.aii</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>AeroViewr\TestProject2\AeroViewr\PlayPause.resx</ResourceFilePath>
+  <ResourceFilePath>TestProject2\AeroViewr\PlayPause.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
@@ -635,9 +635,9 @@
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly>functional_tests.dll</TestAssembly>
-  <TestAssemblyPath>C:\work\GitHub\kendo\functional_tests\bin</TestAssemblyPath>
-  <TestClass>functional_tests.PlayPause</TestClass>
+  <TestAssembly>AeroViewr.dll</TestAssembly>
+  <TestAssemblyPath>C:\work\GitHub\kendo\functional-tests\AeroViewr\bin</TestAssemblyPath>
+  <TestClass>AeroViewr.PlayPause</TestClass>
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
   <UniqueId>1d421b65-b68b-4f11-8775-0ce895da03e8</UniqueId>

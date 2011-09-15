@@ -15,7 +15,7 @@ using Telerik.WebAii.Controls.Html;
 using Telerik.WebAii.Controls.Xaml;
 using TestProject2;
 
-namespace functional_tests
+namespace AeroViewr
 {
 
     //

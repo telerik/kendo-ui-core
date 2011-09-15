@@ -23,6 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>4fb7c98d-67ce-4469-b2e0-a1efdff48793</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
@@ -32,7 +33,9 @@
         <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
         <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -50,6 +53,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>41ac6212-d716-42cc-b447-4a76afdc3f73</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:IfThenElseLogicalDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
@@ -108,7 +112,9 @@
         </d2p1:Elements>
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
         <d2p1:StepType>Logical</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
         <d2p1:Branches xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -127,6 +133,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>1</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>674131e3-e8f7-4e20-b9c3-2343b0aee0da</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -136,7 +143,9 @@
                     <d2p1:Elements />
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Action</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -166,6 +175,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>1</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>b8e15c22-9944-412a-9516-e574797d01aa</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -175,7 +185,9 @@
                     <d2p1:Elements />
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Action</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -193,6 +205,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>2</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>6b227d58-ac2d-454f-af16-650c1fd98502</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:ClickActionDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -251,7 +264,9 @@
                     </d2p1:Elements>
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Action</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -268,6 +283,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>3</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>c419f69a-966d-4ec4-8782-928332a85567</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:IfThenElseLogicalDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -291,7 +307,7 @@
                                       <Clause>tagname=a</Clause>
                                     </HtmlFindClause>
                                     <HtmlFindClause>
-                                      <Clause>TextContent=^Sign in as a di</Clause>
+                                      <Clause>TextContent=~Sign in as a di</Clause>
                                     </HtmlFindClause>
                                   </Clauses>
                                   <Constraints />
@@ -326,7 +342,9 @@
                     </d2p1:Elements>
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Logical</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <d2p1:Branches>
@@ -345,6 +363,7 @@
                               <d2p1:Enabled>true</d2p1:Enabled>
                               <d2p1:Id />
                               <d2p1:Order>1</d2p1:Order>
+                              <d2p1:Runtime_x0020_ID>77f92815-bdd5-4b0c-861d-b7bdc9fa5744</d2p1:Runtime_x0020_ID>
                               <d2p1:Step i:type="d2p1:ClickActionDescriptor">
                                 <d2p1:Constraints>
                                   <ConstraintValues />
@@ -368,7 +387,7 @@
                                                   <Clause>tagname=a</Clause>
                                                 </HtmlFindClause>
                                                 <HtmlFindClause>
-                                                  <Clause>TextContent=^Sign in as a di</Clause>
+                                                  <Clause>TextContent=~Sign in as a di</Clause>
                                                 </HtmlFindClause>
                                               </Clauses>
                                               <Constraints />
@@ -403,7 +422,9 @@
                                 </d2p1:Elements>
                                 <d2p1:LogMessageOnFailure />
                                 <d2p1:Pause>None</d2p1:Pause>
+                                <d2p1:RunsAgainstVersion />
                                 <d2p1:StepType>Action</d2p1:StepType>
+                                <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                                 <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                                 <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                                 <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -420,6 +441,7 @@
                               <d2p1:Enabled>true</d2p1:Enabled>
                               <d2p1:Id />
                               <d2p1:Order>2</d2p1:Order>
+                              <d2p1:Runtime_x0020_ID>71d8a760-ce9b-4683-bdf2-8281f21e3ad1</d2p1:Runtime_x0020_ID>
                               <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
                                 <d2p1:Constraints>
                                   <ConstraintValues />
@@ -478,7 +500,9 @@
                                 </d2p1:Elements>
                                 <d2p1:LogMessageOnFailure />
                                 <d2p1:Pause>None</d2p1:Pause>
+                                <d2p1:RunsAgainstVersion />
                                 <d2p1:StepType>Action</d2p1:StepType>
+                                <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                                 <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                                 <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                                 <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -505,6 +529,7 @@
                               <d2p1:Enabled>true</d2p1:Enabled>
                               <d2p1:Id />
                               <d2p1:Order>3</d2p1:Order>
+                              <d2p1:Runtime_x0020_ID>a8a92c69-7f57-48b9-b521-4bf233e9e3b2</d2p1:Runtime_x0020_ID>
                               <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
                                 <d2p1:Constraints>
                                   <ConstraintValues />
@@ -563,7 +588,9 @@
                                 </d2p1:Elements>
                                 <d2p1:LogMessageOnFailure />
                                 <d2p1:Pause>None</d2p1:Pause>
+                                <d2p1:RunsAgainstVersion />
                                 <d2p1:StepType>Action</d2p1:StepType>
+                                <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                                 <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                                 <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                                 <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -590,6 +617,7 @@
                               <d2p1:Enabled>true</d2p1:Enabled>
                               <d2p1:Id />
                               <d2p1:Order>4</d2p1:Order>
+                              <d2p1:Runtime_x0020_ID>91b96af1-7dbf-4d86-bf3d-6f70752b4d15</d2p1:Runtime_x0020_ID>
                               <d2p1:Step i:type="d2p1:ClickActionDescriptor">
                                 <d2p1:Constraints>
                                   <ConstraintValues />
@@ -648,7 +676,9 @@
                                 </d2p1:Elements>
                                 <d2p1:LogMessageOnFailure />
                                 <d2p1:Pause>None</d2p1:Pause>
+                                <d2p1:RunsAgainstVersion />
                                 <d2p1:StepType>Action</d2p1:StepType>
+                                <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                                 <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                                 <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                                 <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -677,6 +707,7 @@
                               <d2p1:Enabled>true</d2p1:Enabled>
                               <d2p1:Id />
                               <d2p1:Order>1</d2p1:Order>
+                              <d2p1:Runtime_x0020_ID>bab7b9c8-5ca3-4fb9-9a2d-c7fe97c5236d</d2p1:Runtime_x0020_ID>
                               <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
                                 <d2p1:Constraints>
                                   <ConstraintValues />
@@ -735,7 +766,9 @@
                                 </d2p1:Elements>
                                 <d2p1:LogMessageOnFailure />
                                 <d2p1:Pause>None</d2p1:Pause>
+                                <d2p1:RunsAgainstVersion />
                                 <d2p1:StepType>Action</d2p1:StepType>
+                                <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                                 <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                                 <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                                 <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -762,6 +795,7 @@
                               <d2p1:Enabled>true</d2p1:Enabled>
                               <d2p1:Id />
                               <d2p1:Order>2</d2p1:Order>
+                              <d2p1:Runtime_x0020_ID>b77eca9f-7b94-45ee-9009-8c880e34425a</d2p1:Runtime_x0020_ID>
                               <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
                                 <d2p1:Constraints>
                                   <ConstraintValues />
@@ -820,7 +854,9 @@
                                 </d2p1:Elements>
                                 <d2p1:LogMessageOnFailure />
                                 <d2p1:Pause>None</d2p1:Pause>
+                                <d2p1:RunsAgainstVersion />
                                 <d2p1:StepType>Action</d2p1:StepType>
+                                <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                                 <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                                 <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                                 <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -847,6 +883,7 @@
                               <d2p1:Enabled>true</d2p1:Enabled>
                               <d2p1:Id />
                               <d2p1:Order>3</d2p1:Order>
+                              <d2p1:Runtime_x0020_ID>dfd8a1fa-81ee-4890-ab46-304442c06fce</d2p1:Runtime_x0020_ID>
                               <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
                                 <d2p1:Constraints>
                                   <ConstraintValues />
@@ -905,7 +942,9 @@
                                 </d2p1:Elements>
                                 <d2p1:LogMessageOnFailure />
                                 <d2p1:Pause>None</d2p1:Pause>
+                                <d2p1:RunsAgainstVersion />
                                 <d2p1:StepType>Action</d2p1:StepType>
+                                <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                                 <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                                 <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                                 <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -932,6 +971,7 @@
                               <d2p1:Enabled>true</d2p1:Enabled>
                               <d2p1:Id />
                               <d2p1:Order>4</d2p1:Order>
+                              <d2p1:Runtime_x0020_ID>92f527f8-4aa9-4363-b7e0-eada15771e16</d2p1:Runtime_x0020_ID>
                               <d2p1:Step i:type="d2p1:ClickActionDescriptor">
                                 <d2p1:Constraints>
                                   <ConstraintValues />
@@ -990,7 +1030,9 @@
                                 </d2p1:Elements>
                                 <d2p1:LogMessageOnFailure />
                                 <d2p1:Pause>None</d2p1:Pause>
+                                <d2p1:RunsAgainstVersion />
                                 <d2p1:StepType>Action</d2p1:StepType>
+                                <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                                 <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                                 <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                                 <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -1028,7 +1070,7 @@
                                         <Clause>tagname=a</Clause>
                                       </HtmlFindClause>
                                       <HtmlFindClause>
-                                        <Clause>TextContent=^Sign in as a di</Clause>
+                                        <Clause>TextContent=~Sign in as a di</Clause>
                                       </HtmlFindClause>
                                     </Clauses>
                                     <Constraints />
@@ -1063,7 +1105,9 @@
                       </d2p1:Elements>
                       <d2p1:LogMessageOnFailure />
                       <d2p1:Pause>None</d2p1:Pause>
+                      <d2p1:RunsAgainstVersion />
                       <d2p1:StepType>Verification</d2p1:StepType>
+                      <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                       <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                       <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                       <d2p1:CheckInterval>500</d2p1:CheckInterval>
@@ -1139,7 +1183,9 @@
           </d2p1:Elements>
           <d2p1:LogMessageOnFailure />
           <d2p1:Pause>None</d2p1:Pause>
+          <d2p1:RunsAgainstVersion />
           <d2p1:StepType>Verification</d2p1:StepType>
+          <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
           <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
           <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
           <d2p1:CheckInterval>500</d2p1:CheckInterval>
@@ -1159,6 +1205,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>42919c89-6e3f-45d3-95af-eb8f53464011</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
@@ -1168,7 +1215,9 @@
         <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
         <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -1186,6 +1235,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>544331ac-dd4f-4812-8035-b3ba5a530b33</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
@@ -1195,7 +1245,9 @@
         <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
         <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -1212,6 +1264,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>871f6059-35ad-4ca7-91e7-516545837f10</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:IfThenElseLogicalDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
@@ -1270,7 +1323,9 @@
         </d2p1:Elements>
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
         <d2p1:StepType>Logical</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
         <d2p1:Branches xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -1289,6 +1344,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>1</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>2863579a-d410-46ce-8563-d2874286d390</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:ClickActionDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -1347,7 +1403,9 @@
                     </d2p1:Elements>
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Action</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -1364,6 +1422,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>2</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>913cb2fb-a5bb-479b-b637-18fa6606c1e5</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -1422,7 +1481,9 @@
                     </d2p1:Elements>
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Verification</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <d2p1:CheckInterval>500</d2p1:CheckInterval>
@@ -1443,6 +1504,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>3</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>6dfb35ae-6d29-4d9c-a054-c68cbb6c74a0</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:ClickActionDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -1501,7 +1563,9 @@
                     </d2p1:Elements>
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Action</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -1518,6 +1582,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>4</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>1942bc9b-4d78-4c57-8295-cd527484302e</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -1576,7 +1641,9 @@
                     </d2p1:Elements>
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Wait</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <d2p1:CheckInterval>500</d2p1:CheckInterval>
@@ -1609,6 +1676,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>1</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>48660627-9191-4930-91a8-1c41d0e182ef</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:ClickActionDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -1667,7 +1735,9 @@
                     </d2p1:Elements>
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Action</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -1684,6 +1754,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>2</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>b78bd00c-fe1d-420c-b7e3-3edbabc5ede0</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:ClickActionDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -1742,7 +1813,9 @@
                     </d2p1:Elements>
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Action</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -1759,6 +1832,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>3</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>e8cca8a7-30fc-4147-9eaf-7c8d3596df57</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -1817,7 +1891,9 @@
                     </d2p1:Elements>
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Verification</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <d2p1:CheckInterval>500</d2p1:CheckInterval>
@@ -1838,6 +1914,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>4</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>6a7f2787-dc6b-4ef5-8665-279940de251e</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:ClickActionDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -1896,7 +1973,9 @@
                     </d2p1:Elements>
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Action</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
@@ -1913,6 +1992,7 @@
                   <d2p1:Enabled>true</d2p1:Enabled>
                   <d2p1:Id />
                   <d2p1:Order>5</d2p1:Order>
+                  <d2p1:Runtime_x0020_ID>25219949-ffa1-4958-a266-955843ef89c9</d2p1:Runtime_x0020_ID>
                   <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
                     <d2p1:Constraints>
                       <ConstraintValues />
@@ -1971,7 +2051,9 @@
                     </d2p1:Elements>
                     <d2p1:LogMessageOnFailure />
                     <d2p1:Pause>None</d2p1:Pause>
+                    <d2p1:RunsAgainstVersion />
                     <d2p1:StepType>Wait</d2p1:StepType>
+                    <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
                     <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
                     <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
                     <d2p1:CheckInterval>500</d2p1:CheckInterval>
@@ -2048,7 +2130,9 @@
           </d2p1:Elements>
           <d2p1:LogMessageOnFailure />
           <d2p1:Pause>None</d2p1:Pause>
+          <d2p1:RunsAgainstVersion />
           <d2p1:StepType>Verification</d2p1:StepType>
+          <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
           <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
           <d2p1:WaitOnElementsTimeout>5000</d2p1:WaitOnElementsTimeout>
           <d2p1:CheckInterval>500</d2p1:CheckInterval>
@@ -2066,6 +2150,7 @@
   </Steps>
   <Version>200</Version>
   <BrowserType>NotSet</BrowserType>
+  <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <HasCodeBehind>false</HasCodeBehind>
@@ -2073,9 +2158,10 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>AeroViewr\LogInlLogOut.aii</Path>
+  <Path>TestProject2\AeroViewr\LogInlLogOut.aii</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>AeroViewr\LogInlLogOut.resx</ResourceFilePath>
+  <ResourceFilePath>TestProject2\AeroViewr\LogInlLogOut.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
   <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
@@ -2085,6 +2171,8 @@
   <TestAssembly>TestProject2.dll</TestAssembly>
   <TestAssemblyPath>bin\Debug\</TestAssemblyPath>
   <TestClass i:nil="true" />
+  <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
+  <TestType>Web</TestType>
   <UniqueId>7ab8648a-7941-4ef6-9c1f-592616353a51</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringstring>
@@ -2096,4 +2184,5 @@
       <d2p1:Value>00000000-0000-0000-0000-000000000000</d2p1:Value>
     </d2p1:KeyValueOfstringstring>
   </VSProperties>
+  <WpfAppPath i:nil="true" />
 </WebAiiTest>
