@@ -88,6 +88,86 @@
                 equal(anchors.eq(0).html(), "1990-1999");
             });
 
+            test("calendar should wire TD click event", function() {
+                var cal = new Calendar(div);
+
+                stub(cal, "navigateDown");
+
+                cal.element.find("td:has(.k-link)").eq(0).click();
+
+                equal(cal.calls("navigateDown"), 1);
+            });
+
+            test("calendar should wire header buttons", function() {
+                var cal = new Calendar(div);
+
+                stub(cal, ["navigateToPast", "navigateToFuture", "navigateUp"]);
+
+                var links = cal.element.find(".k-header").find(".k-link");
+
+                links.eq(0).click();
+                links.eq(1).click();
+                links.eq(2).click();
+
+                equal(cal.calls("navigateToPast"), 1);
+                equal(cal.calls("navigateUp"), 1);
+                equal(cal.calls("navigateToFuture"), 1);
+            });
+
+            test("calendar should show hover state when hover TD", function() {
+                var cal = new Calendar(div);
+
+                var td = cal.element.find("td:has(.k-link)").eq(0);
+
+                td.mouseenter();
+
+                ok(td.hasClass("k-state-hover"));
+            });
+
+            test("calendar should remove hover state from TD", function() {
+                var cal = new Calendar(div);
+
+                var td = cal.element.find("td:has(.k-link)").eq(0);
+
+                td.mouseenter();
+                td.mouseleave();
+
+                ok(!td.hasClass("k-state-hover"));
+            });
+
+            test("calendar should show hover state to the header elements", function() {
+                var cal = new Calendar(div);
+
+                var links = cal.element.find(".k-header").find(".k-link");
+
+                links.eq(0).mouseenter();
+                links.eq(1).mouseenter();
+                links.eq(2).mouseenter();
+
+                ok(links.eq(0).hasClass("k-state-hover"));
+                ok(links.eq(1).hasClass("k-state-hover"));
+                ok(links.eq(2).hasClass("k-state-hover"));
+            });
+
+            test("calendar should remove hover state to the header elements", function() {
+                var cal = new Calendar(div);
+
+                var links = cal.element.find(".k-header").find(".k-link");
+
+                links.eq(0).mouseenter();
+                links.eq(1).mouseenter();
+                links.eq(2).mouseenter();
+
+                links.eq(0).mouseleave();
+                links.eq(1).mouseleave();
+                links.eq(2).mouseleave();
+
+                ok(!links.eq(0).hasClass("k-state-hover"));
+                ok(!links.eq(1).hasClass("k-state-hover"));
+                ok(!links.eq(2).hasClass("k-state-hover"));
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
