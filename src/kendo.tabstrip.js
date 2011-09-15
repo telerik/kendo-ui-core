@@ -161,10 +161,10 @@
 
         templates = {
             content: template(
-                "<div class='k-content'<#= contentAttributes(data) #>>&nbsp;</div>"
+                "<div class='k-content'<#= contentAttributes(data) #>><#= content(item) #></div>"
             ),
             itemWrapper: template(
-                "<<#= tag(item) #> class='k-link'<#= textAttributes(item) #>>" +
+                "<<#= tag(item) #> class='k-link'<#= contentUrl(item) #><#= textAttributes(item) #>>" +
                     "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
                 "</<#= tag(item) #>>"
             ),
@@ -210,6 +210,12 @@
             },
             contentAttributes: function(content) {
                 return content.active !== true ? " style='display:none'" : "";
+            },
+            content: function(item) {
+                return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
+            },
+            contentUrl: function(item) {
+                return " data-content-url=\"" + item.contentUrl + "\"";
             }
         };
 
@@ -546,14 +552,20 @@
 
             that.tabGroup = that.element.children("ul").addClass("k-tabstrip-items k-reset");
 
-            tabs = that.tabGroup.find("li").addClass("k-item");
-            activeItem = tabs.filter("." + ACTIVESTATE).index();
-            activeTab = activeItem >= 0 ? activeItem : undefined;
+            if (!that.tabGroup.length)
+                that.tabGroup = $("<ul class='k-tabstrip-items k-reset'/>").appendTo(that.element);
 
-            that.tabGroup // Remove empty text nodes
-                .contents()
-                .filter(function () { return (this.nodeType == 3 && !trim(this.nodeValue)); })
-                .remove();
+            tabs = that.tabGroup.find("li").addClass("k-item");
+
+            if (tabs.length) {
+                activeItem = tabs.filter("." + ACTIVESTATE).index();
+                activeTab = activeItem >= 0 ? activeItem : undefined;
+
+                that.tabGroup // Remove empty text nodes
+                    .contents()
+                    .filter(function () { return (this.nodeType == 3 && !trim(this.nodeValue)); })
+                    .remove();
+            }
 
             that.contentElements = that.element.children("div");
 
@@ -563,10 +575,12 @@
                 .addClass(ACTIVESTATE)
                 .css({ display: "block" });
 
-            updateTabClasses(tabs);
+            if (tabs.length) {
+                updateTabClasses(tabs);
 
-            updateFirstLast(that.tabGroup);
-            that._updateContentElements();
+                updateFirstLast(that.tabGroup);
+                that._updateContentElements();
+            }
         },
 
         _updateContentElements: function() {
