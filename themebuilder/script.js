@@ -72,13 +72,7 @@
         /* missing constants:
          * @gradientUrl: "..."; // on Telerik CDN
          * @image-folder: "BlueOpal"; // we should think of something that allows us to change the gradients
-         * @loading-panel-color: #fff;
          * @shadow-color: #aaa;
-         * @content-background-color: @widget-background-color;
-         * @group-background-color: #f1f4f5;
-         * @input-background-color: @widget-background-color;
-         * @splitbar-background-color: @header-background-color;
-         * @alt-background-color: @group-background-color;
          */
 
         return [{
@@ -121,6 +115,30 @@
             prefix: "@error",
             title: "Error state",
             properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
+        }, {
+            prefix: "@content",
+            title: "Content wrappers",
+            properties: returnProperties(["bgColor"])
+        }, {
+            prefix: "@group",
+            title: "Item groups",
+            properties: returnProperties(["bgColor"])
+        }, {
+            prefix: "@input",
+            title: "Textboxes",
+            properties: returnProperties(["bgColor"])
+        }, {
+            prefix: "@splitbar",
+            title: "Splitbars",
+            properties: returnProperties(["bgColor"])
+        }, {
+            prefix: "@alt",
+            title: "Grid alt rows",
+            properties: returnProperties(["bgColor"])
+        }, {
+            prefix: "@loading",
+            title: "Loading panels",
+            properties: returnProperties(["bgColor"])
         }];
     }
 
