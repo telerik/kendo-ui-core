@@ -1204,6 +1204,10 @@
             series: [],
             tooltip: {
                 visible: false
+            },
+            transitions: {
+                initial: true,
+                repaint: true
             }
         },
 
@@ -1263,8 +1267,36 @@
             chart.element.css("position", "relative");
             chart._view = model.getView();
             chart._viewElement = chart._view.renderTo(chart.element[0]);
-            chart._view.playAnimations();
+            chart._playAnimations();
             chart._attachEvents();
+        },
+
+        _playAnimations: function() {
+            var chart = this,
+                transitions = chart.options.transitions,
+                stage,
+                play = true;
+
+            if (typeof(transitions) === "boolean") {
+                play = transitions;
+            } else {
+                stage = transitions[chart._rendered ? "repaint" : "initial"];
+                if(defined(stage)) {
+                    if (typeof(stage) === "boolean") {
+                        play = stage;
+                    } else {
+                        play = stage.enabled;
+                    }
+                }
+            }
+
+            chart._rendered = true;
+
+            if (play) {
+                chart._view.playAnimations();
+            } else {
+                chart._view._animations = [];
+            }
         },
 
         _attachEvents: function() {

@@ -10,6 +10,7 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
         <script type="text/javascript">
 
             var Chart = kendo.ui.Chart,
@@ -25,6 +26,15 @@
                     chart = $("#container").data("kendoChart");
 
                     plotArea = chart._model.children[1];
+                }
+
+                function createBarChart(options) {
+                    createChart($.extend({
+                        series: [{
+                            type: "bar",
+                            data: [1, 2]
+                        }]
+                    }, options));
                 }
 
                 function destroyChart() {
@@ -522,8 +532,7 @@
                 });
 
                 test("sets font", function() {
-                    createChart({
-                        tooltip: {
+                    createChart({ tooltip: {
                             visible: true,
                             font: "100px Verdana"
                         }
@@ -541,6 +550,113 @@
                     });
 
                     equals(chart._tooltip.options.background, "red");
+                });
+
+                // ------------------------------------------------------------
+                var animations;
+                function logAnimations(callback) {
+                    animations = [];
+                    stubMethod(Chart.ViewBase, "playAnimations",
+                        function() {
+                            var view = this;
+                            animations = view.animations;
+                            view.animations = [];
+                        }, callback
+                    );
+                }
+
+                module("Transitions", {
+                    teardown: destroyChart
+                });
+
+                test("initial transitions are enabled by default", function() {
+                    logAnimations(
+                        function() {
+                            createBarChart();
+                            ok(animations.length > 0);
+                        }
+                    );
+                });
+
+                test("transitions can be disabled (transitions: false)", function() {
+                    logAnimations(
+                        function() {
+                            createBarChart({
+                                transitions: false
+                            });
+
+                            equals(animations.length, 0);
+                        }
+                    );
+                });
+
+
+                test("initial transitions can be disabled (initial: false)", function() {
+                    logAnimations(
+                        function() {
+                            createBarChart({
+                                transitions: { initial: false }
+                            });
+
+                            equals(animations.length, 0);
+                        }
+                    );
+                });
+
+                test("initial transitions can be disabled (enabled: false)", function() {
+                    logAnimations(
+                        function() {
+                            createBarChart({
+                                transitions: { initial: { enabled: false } }
+                            });
+
+                            equals(animations.length, 0);
+                        }
+                    );
+                });
+
+                test("repaint transitions are enabled by default", function() {
+                    logAnimations(
+                        function() {
+                            createBarChart();
+                            animations = [];
+
+                            chart.refresh();
+                            ok(animations.length > 0);
+                        }
+                    );
+                });
+
+                test("repaint transitions can be disabled (repaint: false)", function() {
+                    logAnimations(
+                        function() {
+                            createBarChart({
+                                transitions: { repaint: false }
+                            });
+                            animations = [];
+
+                            chart.refresh();
+                            equals(animations.length, 0);
+                        }
+                    );
+                });
+
+                test("repaint transitions can be disabled (enabled: false)", function() {
+                    logAnimations(
+                        function() {
+                            createBarChart({
+                                transitions: {
+                                    repaint: {
+                                        enabled: false
+                                    }
+                                }
+                            });
+                            animations = [];
+
+                            chart.refresh();
+                            equals(animations.length, 0);
+                        }
+                    );
                 });
 
             })();
