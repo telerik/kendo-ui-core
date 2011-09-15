@@ -16,8 +16,11 @@
                 that.bind([ CHANGE ], that.options);
             },
             _change: function(e) {
+                var target = $(e.target);
+
                 this.trigger(CHANGE, {
-                    color: $(e.target).val()
+                    name: target.attr("id"),
+                    value: target.val()
                 });
             }
         }),
@@ -25,6 +28,26 @@
         LessConstants = kendo.Observable.extend({
             init: function(constants) {
                 this.constants = constants;
+            },
+            update: function(name, value) {
+                var prefix = name.split("-")[0],
+                    property = name.split("-").slice(1).join("-"),
+                    constants = this.constants,
+                    properties,
+                    i;
+
+                    for (i = 0; i < constants.length; i++) {
+                        if (constants[i].prefix == prefix) {
+                            properties = constants[i].properties;
+                            for (j = 0; j < properties.length; j++) {
+                                if (properties[j].property == property) {
+                                    properties[j].value = value;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
             },
             serialize: function() {
                 var result = [],
@@ -124,6 +147,8 @@
                 var that = this,
                     parser = new less.Parser();
 
+                that.constants.update(e.name, e.value);
+
                 parser.parse(that.constants.serialize() +
                     '\n@image-folder: "BlueOpal";\n@loading-panel-color: #fff;\n@shadow-color: #aaa;\n@content-background-color: @widget-background-color;\n@group-background-color: #f1f4f5;\n@input-background-color: @widget-background-color;\n@splitbar-background-color: @header-background-color;\n@alt-background-color: @group-background-color;\n' +
 
@@ -157,7 +182,7 @@
             render: function() {
                 var constants = this.constants && this.constants.constants,
                     colorPickerTemplate = kendo.template(
-                        "<# var id = prefix + \":\" + property.property; #>" +
+                        "<# var id = prefix + \"-\" + property.property; #>" +
                         "<label for='<#= id #>'><#= property.label #></label>" +
                         "<input id='<#= id #>' value='<#= property.value #>' class='k-input' />"
                     ),

@@ -27,10 +27,12 @@
             var ThemeBuilder = kendo.ThemeBuilder,
                 LessConstants = kendo.LessConstants;
 
+            function cleanup() {
+                $("#kendo-themebuilder-wrapper, head style").remove();
+            }
+
             module("themebuilder", {
-                teardown: function() {
-                    $("#kendo-themebuilder-wrapper, head style").remove();
-                }
+                teardown: cleanup
             });
 
             test("themebuilder object is available", function() {
@@ -100,7 +102,7 @@
                 colorPicker.val(color).trigger("change");
 
                 ok(eventArgs);
-                equals(color, eventArgs.color);
+                equals(eventArgs.value, color);
             });
 
             var properties = {
@@ -111,9 +113,7 @@
                 extend = $.extend;
 
             module("LessConstants", {
-                teardown: function() {
-                    $("#kendo-themebuilder-wrapper").remove();
-                }
+                teardown: cleanup
             });
 
             test("serialize() serializes contents in LESS format", function() {
@@ -226,6 +226,52 @@
                 equals(constants.constants[0].properties[0].value, "#f11f11");
                 equals(constants.constants[1].properties[0].value, "#f00f00");
             });
+
+            test("update() updates value", function() {
+                var constants = new LessConstants([{
+                    prefix: "@widget",
+                    properties: [ properties.bgColor ]
+                }]);
+
+                constants.update("@widget-background-color", "#f00");
+
+                equals(constants.constants[0].properties[0].value, "#f00");
+            });
+
+            module("integration", {
+                teardown: cleanup
+            });
+
+            test("LessConstants are inferred on init", function() {
+                var constants = new LessConstants(),
+                    inferred = false;
+
+                constants.infer = function() {
+                    inferred = true;
+                };
+
+                var themebuilder = new ThemeBuilder({}, constants);
+
+                ok(inferred);
+            });
+
+            test("_propertyChanged updates constant", function() {
+                var color = "#b4d455",
+                    constants = new LessConstants([{
+                        prefix: "@widget",
+                        title: "Widget",
+                        properties: [ properties.bgColor ]
+                    }]),
+                    themebuilder = new ThemeBuilder({}, constants);
+
+                themebuilder._propertyChange({
+                    value: color,
+                    name: "@widget-background-color"
+                });
+
+                equals(constants.constants[0].properties[0].value, color)
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
