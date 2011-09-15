@@ -611,6 +611,7 @@
             filter.type = "checkbox";
             filter.id = "qunit-filter-pass";
             filter.disabled = true;
+            filter.checked = "checked";
             addEvent( filter, "click", function() {
                 var li = document.getElementsByTagName("li");
                 for ( var i = 0; i < li.length; i++ ) {
