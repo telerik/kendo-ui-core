@@ -1120,6 +1120,8 @@
          * @option {Object} [tooltip.border] The border configuration options.
          * @option {Number} [tooltip.border.width] <0> The width of the border.
          * @option {String} [tooltip.border.color] <"black"> The color of the border.
+         * @option {Boolean} [transitions] <true>
+         * A value indicating if transition animations should be played.
          */
         init: function(element, options) {
             var chart = this,
@@ -1205,10 +1207,7 @@
             tooltip: {
                 visible: false
             },
-            transitions: {
-                initial: true,
-                repaint: true
-            }
+            transitions: true
         },
 
         /**
@@ -1243,7 +1242,8 @@
                 element = chart.element,
                 model = new RootElement(deepExtend({
                     width: element.width() || DEFAULT_WIDTH,
-                    height: element.height() || DEFAULT_HEIGHT
+                    height: element.height() || DEFAULT_HEIGHT,
+                    transitions: options.transitions
                     }, options.chartArea)),
                 plotArea;
 
@@ -1267,36 +1267,8 @@
             chart.element.css("position", "relative");
             chart._view = model.getView();
             chart._viewElement = chart._view.renderTo(chart.element[0]);
-            chart._playAnimations();
+            chart._view.playAnimations();
             chart._attachEvents();
-        },
-
-        _playAnimations: function() {
-            var chart = this,
-                transitions = chart.options.transitions,
-                stage,
-                play = true;
-
-            if (typeof(transitions) === "boolean") {
-                play = transitions;
-            } else {
-                stage = transitions[chart._rendered ? "repaint" : "initial"];
-                if(defined(stage)) {
-                    if (typeof(stage) === "boolean") {
-                        play = stage;
-                    } else {
-                        play = stage.enabled;
-                    }
-                }
-            }
-
-            chart._rendered = true;
-
-            if (play) {
-                chart._view.playAnimations();
-            } else {
-                chart._view._animations = [];
-            }
         },
 
         _attachEvents: function() {
@@ -5138,7 +5110,7 @@
                 box = element.options.box,
                 animation = element.options.animation;
 
-            if (animation) {
+            if (animation && view.options.transitions) {
                 if (animation.type === BAR) {
                     view.animations.push(
                         new BarAnimation(element)
@@ -5158,21 +5130,22 @@
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
+                options = view.options,
                 animation = element.options.animation,
                 definitions = view.definitions,
                 clipPath = definitions[GLOBAL_CLIP],
                 clipRect;
 
-            if (animation && animation.type === CLIP) {
+            if (animation && animation.type === CLIP && options.transitions) {
                 if (!clipPath) {
                     clipPath = new SVGClipPath({ id: GLOBAL_CLIP });
                     clipRect = view.createRect(
-                        new Box2D(0, 0, 0, view.options.height), { id: uniqueId() });
+                        new Box2D(0, 0, 0, options.height), { id: uniqueId() });
                     clipPath.children.push(clipRect);
                     definitions[GLOBAL_CLIP] = clipPath;
 
                     view.animations.push(
-                        new ExpandAnimation(clipRect, { size: view.options.width })
+                        new ExpandAnimation(clipRect, { size: options.width })
                     );
                 }
 
@@ -5191,17 +5164,18 @@
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
+                options = view.options,
                 animation = element.options.animation,
                 clipRect;
 
-            if (animation && animation.type === CLIP) {
+            if (animation && animation.type === CLIP && options.transitions) {
                 clipRect = new VMLClipRect(
-                    new Box2D(0, 0, view.options.width, view.options.height),
+                    new Box2D(0, 0, options.width, options.height),
                     { id: uniqueId() }
                 );
 
                 view.animations.push(
-                    new ExpandAnimation(clipRect, { size: view.options.width })
+                    new ExpandAnimation(clipRect, { size: options.width })
                 );
 
                 clipRect.children.push(element);
