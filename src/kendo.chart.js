@@ -3841,6 +3841,9 @@
             labels: {
                 visible: false,
                 distance: 5
+            },
+            animation: {
+                type: PIE
             }
         },
 
@@ -3929,7 +3932,13 @@
                 elements = [];
 
             sector.registerId(sectorID, { seriesIx: sector.seriesIx });
-            elements.push(view.createSector(sector, deepExtend({}, {
+            elements.push(view.createSector({
+                    startAngle: sector.startAngle,
+                    angle: sector.angle,
+                    r: sector.r,
+                    cx: sector.cx,
+                    cy: sector.cy
+                }, deepExtend({}, {
                 id: sectorID,
                 fill: options.color,
                 overlay: deepExtend({}, options.overlay, {
@@ -3938,7 +3947,8 @@
                     cy: sector.cy
                 }),
                 fillOpacity: options.opacity,
-                strokeOpacity: options.opacity
+                strokeOpacity: options.opacity,
+                animation: options.animation
             }, border)));
 
             append(elements,
@@ -4677,6 +4687,7 @@
                 new SVGOverlayDecorator(view),
                 new SVGPaintDecorator(view),
                 new BarAnimationDecorator(view),
+                new PieAnimationDecorator(view),
                 new SVGClipAnimationDecorator(view)
             );
 
@@ -4902,6 +4913,10 @@
             strokeOpacity: 1
         },
 
+        refresh: function(domElement) {
+            $(domElement).attr("d", this.renderPoints());
+        },
+
         clone: function() {
             var path = this;
             return new SVGPath(deepExtend({}, path.options));
@@ -4932,10 +4947,6 @@
 
             line.points = points;
             line.closed = closed;
-        },
-
-        refresh: function(domElement) {
-            $(domElement).attr("d", this.renderPoints());
         },
 
         renderPoints: function() {
@@ -5003,7 +5014,10 @@
 
         clone: function() {
             var sector = this;
-            return new SVGSector(sector.circleSector, deepExtend({}, sector.options));
+            return new SVGSector(
+                deepExtend({}, sector.circleSector),
+                deepExtend({}, sector.options)
+            );
         },
 
         renderPoints: function() {
@@ -5241,6 +5255,7 @@
                 new VMLOverlayDecorator(view),
                 new VMLGradientDecorator(view),
                 new BarAnimationDecorator(view),
+                new PieAnimationDecorator(view),
                 new VMLClipAnimationDecorator(view)
             );
 
@@ -5762,6 +5777,28 @@
         }
     });
 
+    var PieAnimationDecorator = Class.extend({
+        init: function(view) {
+            this.view = view;
+        },
+
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                animation = element.options.animation;
+
+            if (animation) {
+                if (animation.type === PIE) {
+                    view.animations.push(
+                        new PieAnimation(element)
+                    );
+                }
+            }
+
+            return element;
+        }
+    });
+
     var SVGClipAnimationDecorator = Class.extend({
         init: function(view) {
             this.view = view;
@@ -5951,6 +5988,29 @@
                 points[1].x = points[2].x =
                     interpolateValue(startPosition, endState.right, pos);
             }
+        }
+    });
+
+    var PieAnimation = ElementAnimation.extend({
+        options: {
+            easing: "easeOutElastic"
+        },
+
+        setup: function() {
+            var anim = this,
+                element = anim.element,
+                sector = element.circleSector;
+
+            anim.endRadius = sector.r;
+            sector.r = 0;
+        },
+
+        step: function(actor, pos) {
+            var anim = this,
+                endRadius = anim.endRadius,
+                sector = actor.circleSector;
+
+            sector.r = interpolateValue(0, endRadius, pos);
         }
     });
 
@@ -6685,6 +6745,38 @@
 
         return categories;
     }
+
+    jQuery.extend(jQuery.easing,
+    {
+        easeOutElastic: function (n, d, first, diff) {
+            var s = 1.70158,
+                p = 0,
+                a = diff;
+
+            if ( n === 0 ) {
+                return first;
+            }
+
+            if ( n === 1) {
+                return first + diff;
+            }
+
+            if (!p) {
+                p = 0.3;
+            }
+
+            if (a < Math.abs(diff)) {
+                a=diff;
+                s = p / 4;
+            } else {
+                s = p / (2 * Math.PI) * Math.asin(diff / a);
+            }
+
+            return a * Math.pow(2,-10 * n) *
+                   Math.sin((n * 1 - s) * (2 * Math.PI) / p) +
+                   diff + first;
+        }
+    });
 
     // Exports ================================================================
 
