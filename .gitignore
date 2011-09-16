@@ -6,6 +6,7 @@ obj/
 tags
 *.dll
 *.pdb
+*.gpState
 .DS_Store
 *.min.js
 live/
