@@ -55,6 +55,7 @@
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
+        PIE_SECTOR_ANIM_DELAY = 70,
         RADIAL = "radial",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
@@ -3948,7 +3949,9 @@
                 }),
                 fillOpacity: options.opacity,
                 strokeOpacity: options.opacity,
-                animation: options.animation
+                animation: deepExtend(options.animation, {
+                    delay: sector.categoryIx * PIE_SECTOR_ANIM_DELAY
+                })
             }, border)));
 
             append(elements,
@@ -4054,7 +4057,7 @@
                     series.dataItems[categoryIx] : { value: value };
                 sector.startAngle = startAngle;
                 sector.angle = angle;
-                sector.options.animation.delay = categoryIx * 100;
+                sector.categoryIx = categoryIx;
             }
 
             chart.append(sector);
@@ -5791,7 +5794,7 @@
             if (animation) {
                 if (animation.type === PIE) {
                     view.animations.push(
-                        new PieAnimation(element)
+                        new PieAnimation(element, animation)
                     );
                 }
             }
@@ -5885,8 +5888,8 @@
             var anim = this,
                 options = anim.options,
                 actor = anim.element.clone(),
-                delay = actor.options.animation.delay || 0,
-                start = delay +(+new Date()),
+                delay = options.delay || 0,
+                start = +new Date() + delay,
                 duration = options.duration,
                 finish = start + duration,
                 domElement = $(doc.getElementById(actor.options.id)),
