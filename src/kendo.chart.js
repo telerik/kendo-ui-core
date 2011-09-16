@@ -3902,16 +3902,16 @@
 
             if (label) {
                 labelPoint = calculateSectorPoint(angle, sector.cx,
-                    sector.cy, sector.r + label.box.height() + options.labels.distance);
+                    sector.cy, sector.r + options.labels.distance * 2);
 
                 if (angle < 90 || angle > 270) {
                     label.reflow(new Box2D(labelPoint.x - label.box.width(), labelPoint.y,
                         labelPoint.x, labelPoint.y));
-                    label.orientation = "right";
+                    label.orientation = "left";
                 } else {
                     label.reflow(new Box2D(labelPoint.x + label.box.width(), labelPoint.y,
                         labelPoint.x, labelPoint.y));
-                    label.orientation = "left";
+                    label.orientation = "right";
             }
             }
         },
@@ -4067,6 +4067,9 @@
                 boxCenter = box.center(),
                 sectors = chart.sectors,
                 count = sectors.length,
+                leftSideLabels = [],
+                rightSideLabels = [],
+                label,
                 sector,
                 i;
 
@@ -4078,39 +4081,164 @@
                 sector.cx = sector.r + newBox.x1 + padding / 2;
                 sector.cy = sector.r + newBox.y1 + padding / 2;
                 sector.reflow(newBox);
+                label = sector.label;
+                if (label.orientation == "right") {
+                    rightSideLabels.push(label);
+                } else {
+                    leftSideLabels.push(label);
+            }
             }
 
-            chart.labelsReflow();
+            chart.leftLabelsReflow(leftSideLabels);
+            chart.rightLabelsReflow(rightSideLabels);
             chart.box = newBox;
         },
 
-        labelsReflow: function() {
-            var chart = this,
-                sectors = chart.sectors,
-                distances = [],
-                labelHeights = []
-                sector,
-                label,
-                labelBox,
-                count = points.lenght,
-                i;
+        leftLabelsReflow: function(labels) {
+            var sector = this.sectors[0],
+                boxX = sector.cx - sector.r - 20,
+                labelBox;
 
-            distances.push(sectors[0].label.box.y1 - chart.box.y1);
-
-            for(i = 1; i < count - 1; i++) {
-                sector = sectors[i];
-                label = sector.label;
-        }
-
-            distances.push(chart.box.y2 - sectors[count - 1].label.box.y1);
+            for (i = 0; i < labels.length; i++) {
+                label = labels[i];
+                labelBox = label.box;
+                label.reflow(new Box2D(boxX, labelBox.y1, boxX - labelBox.width(), labelBox.y2));
+            }
         },
 
-        getViewElements: function(view) {
+        rightLabelsReflow: function(labels) {
             var chart = this,
-                options = chart.options,
-                elements = ChartElement.fn.getViewElements.call(chart, view);
+                plotAreaBox = chart.plotArea.box,
+                sector = chart.sectors[0],
+                labelBox = labels[0].box,
+                count = labels.length,
+                distances = [],
+                distance,
+                labelBox,
+                sector,
+                lr = sector.r + sector.options.labels.distance,
+                i;
 
-            return elements;
+            distance = round(labelBox.y1 - (sector.cy - lr - labels[0].box.height()));
+            distances.push(distance);
+            for (i = 0; i < count - 1; i++) {
+                labelBox = labels[i].box;
+                distance = round(labels[i + 1].box.y1 - labelBox.y2);
+                distances.push(distance);
+            }
+
+            distance = round(sector.cy + lr + labels[count - 1].box.height() - labels[count - 1].box.y2);
+            distances.push(distance);
+
+            chart.fixLabelsPosition(distances, labels);
+        },
+
+        fixLabelsPosition: function(distances, labels) {
+            var chart = this,
+                labelsCount = labels.length,
+                distancesCount = distances.length,
+                distance,
+                sectors = chart.sectors,
+                sector = sectors[0],
+                labelDistance = sector.options.labels.distance,
+                unfixedIndexDistances = [],
+                label,
+                i,
+                j,
+                k;
+
+            for (i = 0; i < labelsCount; i++) {
+                if (distances[i] < 0) {
+                    j = k = i;
+
+                    while (true) {
+                        j--;
+                        k++;
+                        distance = math.abs(distances[i]);
+                        if (j >= 0 && distances[j] > 0 && distances[j] - distance >= 0) {
+                            distances[j] -= distance;
+                            distances[i] = 0;
+                            break;
+                        }
+
+                        if (k < distancesCount && distances[k] > 0 && distances[k] - distance >= 0) {
+                            distances[k] -= distance;
+                            distances[i] = 0;
+                            break;
+                        }
+
+                        if (j < 0 && k > distancesCount - 1) {
+                            unfixedIndexDistances.push(i);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            var result = 0,
+                count = unfixedIndexDistances.length,
+                index;
+
+            for (i = 0; i < count; i++) {
+                index = unfixedIndexDistances[i];
+                j = k = index;
+
+                while (true) {
+                    j--;
+                    k++;
+
+                    if (j >= 0 && distances[j] > 0) {
+                        result += distances[j];
+                        distances[j] = 0;
+                    }
+
+                    if (k < distancesCount && distances[k] > 0) {
+                        result += distances[k];
+                        distances[k] = 0;
+                    }
+
+                    distance = math.abs(distances[index]);
+                    if (result - distance > 0) {
+                        distances[index] += result - distance;
+                        break;
+                    }
+
+                    if (j < 0 && k > distancesCount - 1) {
+                        break;
+                    }
+                }
+            }
+
+            chart.labelsReflow(distances, labels);
+        },
+
+        labelsReflow: function(distances, labels) {
+            var chart = this,
+                sectors = chart.sectors,
+                sector = sectors[0],
+                labelsCount = labels.length,
+                labelDistance = sector.options.labels.distance,
+                boxY = sector.cy - (sector.r + labelDistance) - labels[0].box.height(),
+                label,
+                boxX,
+                box;
+
+            for (i = 0; i < labelsCount; i++) {
+                label = labels[i];
+                boxY += distances[i];
+                box = label.box;
+                sector = sectors[i];
+                boxX = calculateX(
+                    box.x1,
+                    sector.cx,
+                    sector.cy,
+                    sector.r + 20,
+                    boxY,
+                    boxY + box.height());
+
+                label.reflow(new Box2D(boxX, boxY, boxX + box.width(), boxY + box.height()));
+                boxY += box.height();
+        }
         }
     });
 
@@ -6273,6 +6401,15 @@
             y = round(cy - (ay * r), COORD_PRECISION);
 
         return { x: x, y: y };
+    }
+
+    function calculateX(x, cx, cy, r, y1, y2) {
+        var t = math.min(math.abs(cy - y1), math.abs(cy - y2));
+        if (t > r) {
+            return x;
+        } else {
+            return math.sqrt((r * r) - (t * t)) + cx;
+        }
     }
 
     // renderSVG ==============================================================
