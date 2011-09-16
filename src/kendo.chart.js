@@ -5333,7 +5333,7 @@
         },
 
         createSector: function(sector, options) {
-            return new VMLSector(sector, options);
+            return this.decorate(new VMLSector(sector, options));
         },
 
         createGroup: function(options) {
@@ -5449,6 +5449,10 @@
 
         renderPoints: function() {
             // Overriden by inheritors
+        },
+
+        refresh: function(domElement) {
+            $(domElement).find("path").attr("v", this.renderPoints());
         }
     });
 
@@ -5459,10 +5463,6 @@
 
             line.points = points;
             line.closed = closed;
-        },
-
-        refresh: function(domElement) {
-            $(domElement).find("path").attr("v", this.renderPoints());
         },
 
         renderPoints: function() {
@@ -5532,6 +5532,14 @@
                 a = -round(circleSector.angle * 65536);
 
             return sector.pathTemplate({ r: r, cx: cx, cy: cy, sa: sa, a: a });
+        },
+
+        clone: function() {
+            var sector = this;
+            return new VMLSector(
+                deepExtend({}, sector.circleSector),
+                deepExtend({}, sector.options)
+            );
         }
     });
 
@@ -5714,7 +5722,7 @@
                 overlayName = overlayOptions.type,
                 overlay = Chart.Overlays[overlayName];
 
-            if (!overlay) {
+            if (!overlay || overlay.fill.type === RADIAL) {
                 return element;
             }
 
