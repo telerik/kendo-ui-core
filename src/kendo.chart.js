@@ -14,6 +14,7 @@
 
     // Constants ==============================================================
     var ABOVE = "above",
+        ARIAL12 = "12px Arial, sans-serif",
         ANIMATION_STEP = 10,
         BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
@@ -3853,7 +3854,8 @@
             },
             labels: {
                 visible: false,
-                distance: 5
+                distance: 25,
+                font: ARIAL12
             },
             animation: {
                 type: PIE
@@ -3906,28 +3908,29 @@
             sector.box = targetBox;
             childBox = targetBox.clone();
 
-            sector.reflowLabel(childBox);
+            sector.reflowLabel();
         },
 
-        reflowLabel: function(box) {
+        reflowLabel: function() {
             var sector = this,
                 options = sector.options,
                 label = sector.label,
-                labelPoint,
+                labelDistance = options.labels.distance,
+                lp,
                 angle = sector.startAngle + sector.angle / 2;
 
             if (label) {
-                labelPoint = calculateSectorPoint(angle, sector.cx,
-                    sector.cy, sector.r + options.labels.distance * 2);
+                lp = calculateSectorPoint(angle, sector.cx,
+                    sector.cy, sector.r + labelDistance * 2);
 
                 if (angle < 90 || angle > 270) {
-                    label.reflow(new Box2D(labelPoint.x - label.box.width(), labelPoint.y,
-                        labelPoint.x, labelPoint.y));
-                    label.orientation = "left";
+                    label.reflow(new Box2D(lp.x - label.box.width(), lp.y,
+                        lp.x, lp.y));
+                    label.orientation = LEFT;
                 } else {
-                    label.reflow(new Box2D(labelPoint.x + label.box.width(), labelPoint.y,
-                        labelPoint.x, labelPoint.y));
-                    label.orientation = "right";
+                    label.reflow(new Box2D(lp.x + label.box.width(), lp.y,
+                        lp.x, lp.y));
+                    label.orientation = RIGHT;
             }
             }
         },
@@ -4081,14 +4084,9 @@
                 options = chart.options,
                 padding = options.padding,
                 box = targetBox.clone(),
-                width = box.width(),
-                height = box.height(),
-                minWidth = math.min(width, height),
-                newBox = new Box2D(
-                    box.x1,
-                    box.y1,
-                    box.x1 + minWidth,
-                    box.y1 + minWidth),
+                minWidth = math.min(box.width(), box.height()),
+                newBox = new Box2D(box.x1, box.y1,
+                    box.x1 + minWidth, box.y1 + minWidth),
                 newBoxCenter = newBox.center(),
                 boxCenter = box.center(),
                 sectors = chart.sectors,
@@ -4108,64 +4106,71 @@
                 sector.cy = sector.r + newBox.y1 + padding / 2;
                 sector.reflow(newBox);
                 label = sector.label;
-                if (label.orientation == "right") {
+                if (label) {
+                    if (label.orientation == RIGHT) {
                     rightSideLabels.push(label);
                 } else {
                     leftSideLabels.push(label);
+                    }
             }
             }
 
-            chart.leftLabelsReflow(leftSideLabels);
+            if (leftSideLabels.length > 0) {
+                chart.leftLabelsReflow(leftSideLabels.reverse());
+            }
+
+            if (rightSideLabels.length > 0) {
             chart.rightLabelsReflow(rightSideLabels);
+            }
             chart.box = newBox;
         },
 
         leftLabelsReflow: function(labels) {
-            var sector = this.sectors[0],
-                boxX = sector.cx - sector.r - 20,
-                labelBox;
+            var chart = this,
+                distances = chart.distanceBetweenLabels(labels);
 
-            for (i = 0; i < labels.length; i++) {
-                label = labels[i];
-                labelBox = label.box;
-                label.reflow(new Box2D(boxX, labelBox.y1, boxX - labelBox.width(), labelBox.y2));
-            }
+            chart.distributeLabels(distances, labels);
         },
 
         rightLabelsReflow: function(labels) {
             var chart = this,
-                plotAreaBox = chart.plotArea.box,
+                distances = chart.distanceBetweenLabels(labels);
+
+            chart.distributeLabels(distances, labels);
+        },
+
+        distanceBetweenLabels: function(labels) {
+            var chart = this,
                 sector = chart.sectors[0],
                 labelBox = labels[0].box,
-                count = labels.length,
+                count = labels.length - 1,
                 distances = [],
                 distance,
-                labelBox,
-                sector,
                 lr = sector.r + sector.options.labels.distance,
                 i;
 
-            distance = round(labelBox.y1 - (sector.cy - lr - labels[0].box.height()));
+            distance = round(labelBox.y1 - (sector.cy - lr - labelBox.height()));
             distances.push(distance);
-            for (i = 0; i < count - 1; i++) {
+            for (i = 0; i < count; i++) {
                 labelBox = labels[i].box;
                 distance = round(labels[i + 1].box.y1 - labelBox.y2);
                 distances.push(distance);
             }
 
-            distance = round(sector.cy + lr + labels[count - 1].box.height() - labels[count - 1].box.y2);
+            labelBox = labels[count].box;
+            distance = round(sector.cy + lr + labelBox.height() - labelBox.y2);
             distances.push(distance);
 
-            chart.distributeLabels(distances, labels);
+            return distances;
         },
 
         distributeLabels: function(distances, labels) {
             var chart = this,
-                i,
                 count = distances.length,
                 remaining,
                 left,
-                right;
+                right,
+                i;
 
             for (i = 0; i < count; i++) {
                 left = right = i;
@@ -4201,20 +4206,23 @@
                 boxX,
                 box;
 
+            distances[0] += 1;
+            distances[labelsCount - 1] -= 2;
             for (i = 0; i < labelsCount; i++) {
                 label = labels[i];
                 boxY += distances[i];
                 box = label.box;
-                sector = sectors[i];
                 boxX = calculateX(
-                    box.x1,
+                    box.x2,
                     sector.cx,
                     sector.cy,
-                    sector.r + 20,
+                    sector.r + labelDistance,
                     boxY,
-                    boxY + box.height());
+                    boxY + box.height(),
+                    label.orientation);
 
-                label.reflow(new Box2D(boxX, boxY, boxX + box.width(), boxY + box.height()));
+                label.reflow(new Box2D(boxX, boxY,
+                    boxX + box.width() * (label.orientation == RIGHT ? 1 : -1), boxY + box.height()));
                 boxY += box.height();
         }
         }
@@ -6421,7 +6429,6 @@
         return "";
     }
 
-
     function calculateSectorPoint(angle, cx, cy, r) {
         var radianAngle = angle * (math.PI / 180),
             ax = math.cos(radianAngle),
@@ -6432,12 +6439,12 @@
         return { x: x, y: y };
     }
 
-    function calculateX(x, cx, cy, r, y1, y2) {
+    function calculateX(x, cx, cy, r, y1, y2, orientation) {
         var t = math.min(math.abs(cy - y1), math.abs(cy - y2));
         if (t > r) {
             return x;
         } else {
-            return math.sqrt((r * r) - (t * t)) + cx;
+            return cx + math.sqrt((r * r) - (t * t)) * (orientation == RIGHT ? 1 : -1);
         }
     }
 
