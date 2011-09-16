@@ -4054,6 +4054,7 @@
                     series.dataItems[categoryIx] : { value: value };
                 sector.startAngle = startAngle;
                 sector.angle = angle;
+                sector.options.animation.delay = categoryIx * 100;
             }
 
             chart.append(sector);
@@ -5884,18 +5885,21 @@
             var anim = this,
                 options = anim.options,
                 actor = anim.element.clone(),
-                domElement = $(doc.getElementById(actor.options.id)),
-                start = +new Date(),
+                delay = actor.options.animation.delay || 0,
+                start = delay +(+new Date()),
                 duration = options.duration,
                 finish = start + duration,
+                domElement = $(doc.getElementById(actor.options.id)),
                 easing = jQuery.easing[options.easing],
                 interval,
                 time,
                 pos,
                 easingPos;
 
+            anim.setup(actor);
             actor.refresh(domElement);
 
+            setTimeout(function() {
             interval = setInterval(function() {
                 time = +new Date();
                 pos = time > finish ? 1 : (time - start) / duration;
@@ -5909,6 +5913,7 @@
                     clearInterval(interval);
                 }
             }, ANIMATION_STEP);
+            }, delay);
         },
 
         setup: function() {
@@ -5993,13 +5998,13 @@
 
     var PieAnimation = ElementAnimation.extend({
         options: {
-            easing: "easeOutElastic"
+            easing: "easeOutElastic",
+            duration: 500
         },
 
-        setup: function() {
+        setup: function(actor) {
             var anim = this,
-                element = anim.element,
-                sector = element.circleSector;
+                sector = actor.circleSector;
 
             anim.endRadius = sector.r;
             sector.r = 0;
@@ -6762,7 +6767,7 @@
             }
 
             if (!p) {
-                p = 0.3;
+                p = 0.5;
             }
 
             if (a < Math.abs(diff)) {
@@ -6773,7 +6778,7 @@
             }
 
             return a * Math.pow(2,-10 * n) *
-                   Math.sin((n * 1 - s) * (2 * Math.PI) / p) +
+                   Math.sin((n * 1 - s) * (1.1 * Math.PI) / p) +
                    diff + first;
         }
     });

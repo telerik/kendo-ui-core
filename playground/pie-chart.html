@@ -23,12 +23,13 @@
         $(document).ready(function() {
             $("#container").kendoChart({
                 title: {
-                    text: "Teh chart",
+                    text: "Lollipop",
                     position: "top"
                 },
                 theme: "blueopal",
                 legend: {
-                    position: "left"
+                    position: "left",
+                    visible: false
                 },
                 dataSource: data,
                 seriesDefaults: {
@@ -45,12 +46,6 @@
                     data:[
                       {
                           value: 1,
-                          name: "Value A"
-                      }, {
-                          value: 1,
-                          name: "Value B"
-                      }, {
-                          value: 1,
                           name: "Value B"
                       }, {
                           value: 1,
@@ -65,7 +60,19 @@
                           value: 1,
                           name: "Value F"
                       }, {
-                          value: 80,
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 1,
+                          name: "Value F"
+                      }, {
+                          value: 1,
+                          name: "Value F"
+                      }, {
+                          value: 1,
                           name: "Value H"
                       }]
                 }],
@@ -109,7 +116,8 @@
 */
     </script>
 
-    <div id="container" style="width: 600px; height: 400px; float: left; margin-left: 100px;"></div>
+    <div id="container" style="width: 600px; height: 400px; float: left; margin-left: 100px;
+                               -webkit-transform: translateZ(0);"></div>
     </body>
 </html>
 
