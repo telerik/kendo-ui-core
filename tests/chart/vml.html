@@ -875,7 +875,7 @@
 
                 module("VMLClipAnimationDecorator", {
                     setup: function() {
-                        view = new Chart.VMLView();
+                        view = new Chart.VMLView({ transitions: true });
                         rect = new Chart.VMLPath({
                             animation: {
                                 type: "clip"
@@ -883,6 +883,12 @@
                         });
                         decorator = new Chart.VMLClipAnimationDecorator(view);
                     }
+                });
+
+                test("does not decorate when view.options.transitions is false", function() {
+                    view.options.transitions = false;
+                    decorator.decorate(rect);
+                    equals(decorator.decorate(rect), rect);
                 });
 
                 test("wraps element in VMLClipRect", function() {
