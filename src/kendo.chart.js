@@ -4130,89 +4130,41 @@
             distance = round(sector.cy + lr + labels[count - 1].box.height() - labels[count - 1].box.y2);
             distances.push(distance);
 
-            chart.fixLabelsPosition(distances, labels);
+            chart.distributeLabels(distances, labels);
         },
 
-        fixLabelsPosition: function(distances, labels) {
+        distributeLabels: function(distances, labels) {
             var chart = this,
-                labelsCount = labels.length,
-                distancesCount = distances.length,
-                distance,
-                sectors = chart.sectors,
-                sector = sectors[0],
-                labelDistance = sector.options.labels.distance,
-                unfixedIndexDistances = [],
-                label,
                 i,
-                j,
-                k;
-
-            for (i = 0; i < labelsCount; i++) {
-                if (distances[i] < 0) {
-                    j = k = i;
-
-                    while (true) {
-                        j--;
-                        k++;
-                        distance = math.abs(distances[i]);
-                        if (j >= 0 && distances[j] > 0 && distances[j] - distance >= 0) {
-                            distances[j] -= distance;
-                            distances[i] = 0;
-                            break;
-                        }
-
-                        if (k < distancesCount && distances[k] > 0 && distances[k] - distance >= 0) {
-                            distances[k] -= distance;
-                            distances[i] = 0;
-                            break;
-                        }
-
-                        if (j < 0 && k > distancesCount - 1) {
-                            unfixedIndexDistances.push(i);
-                            break;
-                        }
-                    }
-                }
-            }
-
-            var result = 0,
-                count = unfixedIndexDistances.length,
-                index;
+                count = distances.length,
+                remaining,
+                left,
+                right;
 
             for (i = 0; i < count; i++) {
-                index = unfixedIndexDistances[i];
-                j = k = index;
-
-                while (true) {
-                    j--;
-                    k++;
-
-                    if (j >= 0 && distances[j] > 0) {
-                        result += distances[j];
-                        distances[j] = 0;
+                left = right = i;
+                remaining = -distances[i];
+                while(remaining > 0 && (left >= 0 || right < count)) {
+                    remaining = chart._takeDistance(distances, i, --left, remaining);
+                    remaining = chart._takeDistance(distances, i, ++right, remaining);
+                    }
                     }
 
-                    if (k < distancesCount && distances[k] > 0) {
-                        result += distances[k];
-                        distances[k] = 0;
-                    }
-
-                    distance = math.abs(distances[index]);
-                    if (result - distance > 0) {
-                        distances[index] += result - distance;
-                        break;
-                    }
-
-                    if (j < 0 && k > distancesCount - 1) {
-                        break;
-                    }
-                }
-            }
-
-            chart.labelsReflow(distances, labels);
+            chart.reflowLabels(distances, labels);
         },
 
-        labelsReflow: function(distances, labels) {
+        _takeDistance: function(distances, anchor, position, amount) {
+            if (distances[position] > 0) {
+                var available = math.min(distances[position], amount);
+                amount -= available;
+                distances[position] -= available;
+                distances[anchor] += available;
+                    }
+
+            return amount;
+        },
+
+        reflowLabels: function(distances, labels) {
             var chart = this,
                 sectors = chart.sectors,
                 sector = sectors[0],
