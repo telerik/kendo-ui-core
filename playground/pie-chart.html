@@ -85,6 +85,9 @@
             });
         });
 
+        function refresh() {
+            $("#container").data("kendoChart").refresh();
+        }
 /*
         $(document).ready(function() {
             var angles = [],
@@ -116,8 +119,11 @@
 */
     </script>
 
-    <div id="container" style="width: 600px; height: 400px; float: left; margin-left: 100px;
+    <div id="container" style="width: 600px; height: 400px; margin-left: 100px;
                                -webkit-transform: translateZ(0);"></div>
+    <div style="margin-left: 100px;">
+        <input type="button" value="Refresh" onclick="refresh();" />
+    </div>
     </body>
 </html>
 
