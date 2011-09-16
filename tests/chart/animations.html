@@ -83,7 +83,7 @@
                 // ------------------------------------------------------------
                 module("BarAnimationDecorator", {
                     setup: function() {
-                        view = new Chart.SVGView();
+                        view = new Chart.SVGView({ transitions: true });
                         rect = new Chart.SVGPath({
                             animation: {
                                 type: "bar"
@@ -93,6 +93,12 @@
                         });
                         decorator = new Chart.BarAnimationDecorator(view);
                     }
+                });
+
+                test("does not decorate when view.options.transitions is false", function() {
+                    view.options.transitions = false;
+                    decorator.decorate(rect);
+                    equals(view.animations.length, 0);
                 });
 
                 test("registers bar animation", function() {
