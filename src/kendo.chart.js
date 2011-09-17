@@ -1605,6 +1605,17 @@
         }
     });
 
+    var Sector = Class.extend({
+        init: function(c, r, startAngle, angle) {
+            var sector = this;
+
+            sector.c = c;
+            sector.r = r;
+            sector.startAngle = startAngle;
+            sector.angle = angle;
+        }
+    });
+
     var ChartElement = Class.extend({
         init: function(options) {
             var element = this;
@@ -6801,6 +6812,7 @@
     deepExtend(Chart, {
         Box2D: Box2D,
         Point2D: Point2D,
+        Sector: Sector,
         Text: Text,
         BarLabel: BarLabel,
         ChartElement: ChartElement,
