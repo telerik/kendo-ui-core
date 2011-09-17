@@ -13,6 +13,7 @@
         VALUE = "value",
         HOVER = "k-state-hover",
         DISABLED = "k-state-disabled",
+        FOCUSED = "k-state-focused",
         SELECTED = "k-state-selected",
         OTHERMONTH = ' class="k-other-month"',
         CELLSELECTOR = "td:has(.k-link)",
@@ -20,6 +21,8 @@
         MOUSELEAVE = "mouseleave",
         cellTemplate = template('<td<#=data.otherMonth#>><a class="k-link" href="#" data-value="<#=data.dateString#>"><#=data.value#></a></td>');
         cellEmptyTemplate = template("<td> </td>");
+        msPerMinute = 60000,
+        msPerDay = 86400000,
         extend = $.extend,
         proxy = $.proxy,
         DATE = Date;
@@ -48,7 +51,7 @@
 
             that._value = options.value;
             that._currentView = options.firstView;
-            that._viewedDate = viewedDate = defineViewedDate(options.value, options.min, options.max);
+            that._viewedValue = calendar.defineViewedValue(options.value, options.min, options.max);
 
             that.bind([CHANGE, NAVIGATE], options);
 
@@ -69,11 +72,11 @@
 
         _setViewedDate: function(value) {
             var that = this,
-            viewedDate = that._viewedDate,
+            viewedValue = that._viewedValue,
             currentView = that._currentView;
 
             if (currentView === MONTH) {
-                viewedDate.setMonth(viewedDate.getMonth() + value);
+                viewedValue.setMonth(viewedValue.getMonth() + value);
             } else {
                 if (currentView === DECADE) {
                     value *= 10;
@@ -81,8 +84,26 @@
                     value *= 100;
                 }
 
-                viewedDate.setFullYear(viewedDate.getFullYear() + value);
+                viewedValue.setFullYear(viewedValue.getFullYear() + value);
             }
+        },
+
+        _focusValue: function(value) {
+            //should refactor
+            var that = this,
+                view = calendar[that._currentView],
+                dateString = view.toDateString(value);
+
+            if (view.compare(value, that._viewedValue) !== 0) {
+                that.navigate(value);
+            }
+
+            that.view.find("td:not(.k-other-month)")
+                .removeClass(FOCUSED)
+                .filter(function() {
+                    return $(this.firstChild).data(VALUE) === dateString;
+                })
+                .addClass(FOCUSED);
         },
 
         navigateToPast: function() {
@@ -124,7 +145,7 @@
             currentView = that._currentView;
 
             if (currentView === depth) {
-                if (calendar[currentView].compare(value, that._viewedDate) === 0) {
+                if (calendar[currentView].compare(value, that._viewedValue) === 0) {
                     that._changeView = false;
                 }
 
@@ -160,11 +181,15 @@
                 newView;
 
             if (!value) {
-                value = that._viewedDate;
+                value = that._viewedValue;
+            } else {
+                that._viewedValue = new DATE(value);
             }
 
             if (!viewName) {
                 viewName = that._currentView;
+            } else {
+                that._currentView = viewName;
             }
 
             calendarView = calendar[viewName];
@@ -233,7 +258,7 @@
             }
 
             that._value = value;
-            that._viewedDate = new DATE(value);
+            that._viewedValue = new DATE(value);
 
             that.navigate(value, options.depth);
         },
@@ -292,8 +317,6 @@
     kendo.ui.Calendar = Calendar;
 
     var calendar = {
-        msPerMinute: 60000,
-        msPerDay: 86400000,
         firstDayOfMonth: function (date) {
             return new DATE(
                 date.getFullYear(),
@@ -311,7 +334,7 @@
                 firstVisibleDay = new DATE(date.getFullYear(), date.getMonth(), 0, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
 
             while (firstVisibleDay.getDay() != firstDayOfWeek) {
-                calendar.setTime(firstVisibleDay, -1 * calendar.msPerDay)
+                calendar.setTime(firstVisibleDay, -1 * msPerDay)
             }
 
             return firstVisibleDay;
@@ -322,7 +345,21 @@
                 resultDATE = new DATE(date.getTime() + time),
                 tzOffsetDiff = resultDATE.getTimezoneOffset() - tzOffsetBefore;
 
-            date.setTime(resultDATE.getTime() + tzOffsetDiff * calendar.msPerMinute);
+            date.setTime(resultDATE.getTime() + tzOffsetDiff * msPerMinute);
+        },
+
+        defineViewedValue: function (value, min, max) {
+            var today = new DATE();
+            if (value) {
+                today = new DATE(value);
+            }
+
+            if (min > today) {
+                today = new DATE(min);
+            } else if (max < today) {
+                today = new DATE(max);
+            }
+            return today;
         },
 
         month: {
@@ -359,7 +396,7 @@
                     max: new DATE(max.getFullYear(), max.getMonth(), max.getDate()),
                     content: options.content,
                     empty: options.empty,
-                    setter: function(date) { date.setDate(date.getDate() + 1); },
+                    setter: this.setDate,
                     build: function(date) {
                         return {
                             date: date,
@@ -388,6 +425,9 @@
 
                 return result;
             },
+            setDate: function(date, value) {
+                calendar.setTime(date, value * msPerDay);
+            },
             toDateString: function(date) {
                 return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
             }
@@ -407,7 +447,7 @@
                     min: new DATE(min.getFullYear(), min.getMonth(), 1),
                     max: new DATE(max.getFullYear(), max.getMonth(), 1),
                     start: new DATE(options.date.getFullYear(), 0, 1),
-                    setter: function(date) { date.setMonth(date.getMonth() + 1); },
+                    setter: this.setDate,
                     build: function(date) {
                         return {
                             value: namesAbbr[date.getMonth()],
@@ -419,6 +459,9 @@
             },
             compare: function(date1, date2){
                 return compare(date1, date2);
+            },
+            setDate: function(date, value) {
+                date.setMonth(date.getMonth() + value);
             },
             toDateString: function(date) {
                 return (date.getMonth() + 1) + "/1/" + date.getFullYear();
@@ -440,7 +483,7 @@
                     start: new DATE(year = year - year % 10 - 1, 0, 1),
                     min: new DATE(options.min.getFullYear(), 0, 1),
                     max: new DATE(options.max.getFullYear(), 0, 1),
-                    setter: function(date) {date.setFullYear(date.getFullYear() + 1); },
+                    setter: this.setDate,
                     build: function(date, idx) {
                         return {
                             value: date.getFullYear(),
@@ -452,6 +495,9 @@
             },
             compare: function(date1, date2) {
                 return compare(date1, date2, 10);
+            },
+            setDate: function(date, value) {
+                date.setFullYear(date.getFullYear() + value);
             },
             toDateString: function(date) {
                 return "1/1/" + date.getFullYear();
@@ -473,7 +519,7 @@
                     start: new DATE(year - year % 100 - 10, 0, 1),
                     min: new DATE(options.min.getFullYear() - 10, 0, 1),
                     max: new DATE(options.max.getFullYear(), 0, 1),
-                    setter: function(date) { date.setFullYear(date.getFullYear() + 10); },
+                    setter: this.setDate,
                     build: function(date, idx) {
                         var year = date.getFullYear();
                         return {
@@ -487,25 +533,14 @@
             compare: function(date1, date2) {
                 return compare(date1, date2, 100);
             },
+            setDate: function(date, value) {
+                date.setFullYear(date.getFullYear() + 10 * value);
+            },
             toDateString: function(date) {
                 var year = date.getFullYear();
                 return "1/1/" + (year - year % 10);
             }
         }
-    }
-
-    function defineViewedDate(value, min, max) {
-        var today = new DATE();
-        if (value) {
-            today = new DATE(value);
-        }
-
-        if (min > today) {
-            today = new DATE(min);
-        } else if (max < today) {
-            today = new DATE(max);
-        }
-        return today;
     }
 
     function view(options) {
@@ -533,7 +568,7 @@
 
             html += inRange(start, min, max) ? content(data) : empty(data);
 
-            setter(start);
+            setter(start, 1);
         }
 
         return html + "</tr></tbody></table>";
