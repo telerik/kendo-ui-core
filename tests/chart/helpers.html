@@ -279,6 +279,31 @@
             });
 
             // ------------------------------------------------------------
+            var sector;
+
+            module("Sector", {
+                setup: function() {
+                    sector = new Chart.Sector(new Point2D(10, 20), 30, 90, 180);
+                }
+            });
+
+            test("constructor sets center", function() {
+                same([sector.c.x, sector.c.y], [10, 20]);
+            });
+
+            test("constructor sets r", function() {
+                equals(sector.r, 30);
+            });
+
+            test("constructor sets start angle", function() {
+                equals(sector.startAngle, 90);
+            });
+
+            test("constructor sets angle", function() {
+                equals(sector.angle, 180);
+            });
+
+            // ------------------------------------------------------------
             var deepExtend = Chart.deepExtend,
                 extendSrc,
                 extendDst;
