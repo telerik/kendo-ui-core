@@ -3078,9 +3078,7 @@
                 width: 1
             },
             isVertical: true,
-            overlay: {
-                type: GLASS
-            },
+            overlay: GLASS,
             aboveAxis: true,
             labels: {
                 visible: false
@@ -3845,7 +3843,7 @@
         options: {
             color: WHITE,
             overlay: {
-                type: ROUNDED_BEVEL
+                name: ROUNDED_BEVEL
             },
             border: {
                 width: 0.5
@@ -5188,9 +5186,7 @@
             var decorator = this,
                 view = decorator.view,
                 id = element.options.id,
-                overlayOptions = element.options.overlay ? element.options.overlay : {},
-                overlayName = overlayOptions.type,
-                overlay = Chart.Overlays[overlayName];
+                overlay = Chart.Overlays.build(element.options.overlay);
 
             if (!overlay) {
                 return element;
@@ -5198,22 +5194,17 @@
 
             element.options.id = uniqueId();
 
-            var fill = overlay.fill,
-                fillRotation = element.options.normalAngle || 0,
-                fillId = overlayName + fillRotation,
+            var fillRotation = element.options.normalAngle || 0,
+                fillId = overlay.name + fillRotation,
                 group = view.createGroup(),
                 overlayElement = element.clone();
 
             group.children.push(element, overlayElement);
 
             overlayElement.options.id = id;
-            overlayElement.options.fill =
-                deepExtend(fill, {
+            overlayElement.options.fill = deepExtend(overlay, {
                     id: fillId,
-                    rotation: fillRotation,
-                    r: overlayOptions.r,
-                    cx: overlayOptions.cx,
-                    cy: overlayOptions.cy
+                rotation: fillRotation
                 });
 
             return group;
@@ -5729,16 +5720,13 @@
     VMLOverlayDecorator.prototype = /** @ignore */ {
         decorate: function(element) {
             var options = element.options,
-                overlayOptions = options.overlay ? options.overlay : {},
-                overlayName = overlayOptions.type,
-                overlay = Chart.Overlays[overlayName];
+                overlay = Chart.Overlays.build(element.options.overlay);
 
-            if (!overlay || overlay.fill.type === RADIAL) {
+            if (!overlay || overlay.type === RADIAL) {
                 return element;
             }
 
-            var fill = overlay.fill,
-                fillRotation = 270 - options.normalAngle || 0,
+            var fillRotation = 270 - options.normalAngle || 0,
                 fillOpacity = options.fillOpacity;
 
             if (!defined(fillOpacity)) {
@@ -5747,8 +5735,7 @@
 
             options.overlay = "";
             options.fill = deepExtend(
-                { },
-                blendGradient(options.fill, fill),
+                blendGradient(options.fill, overlay),
                 { rotation: fillRotation,
                   opacity: fillOpacity }
             );
@@ -6639,8 +6626,15 @@
     }
 
     Chart.Overlays = {
+        build: function(options) {
+            var overlay;
+            if (options && (overlay = Chart.Overlays[options.name || options])) {
+                overlay = deepExtend({}, overlay, options);
+            }
+
+            return overlay;
+        },
         glass: {
-            fill: {
                 type: LINEAR,
                 rotation: 0,
                 stops: [{
@@ -6664,10 +6658,8 @@
                     color: WHITE,
                     opacity: 0
                 }]
-            }
         },
         roundedBevel: {
-            fill: {
                 type: RADIAL,
                 stops: [{
                     offset: 0.33,
@@ -6682,7 +6674,6 @@
                     color: WHITE,
                     opacity: 0
                 }]
-        }
         }
     };
 
