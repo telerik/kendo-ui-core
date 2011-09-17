@@ -427,16 +427,12 @@
             // ------------------------------------------------------------
             module("Chart Overlays");
 
-            test("build returns overlay by name", function() {
-                equals(Chart.Overlays.build("glass").type, "linear");
+            test("build returns overlay from name", function() {
+                equals(Chart.Overlays.build({ name: "glass" }).type, "linear");
             });
 
             test("build returns undefined when no overlay exists", function() {
                 equals(typeof Chart.Overlays.build("x"), "undefined");
-            });
-
-            test("build returns overlay from options with name", function() {
-                equals(Chart.Overlays.build({ name: "glass" }).type, "linear");
             });
 
             test("build applies options", function() {

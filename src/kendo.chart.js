@@ -668,7 +668,8 @@
          * @option {Object} [seriesDefaults.border] The border of the series.
          * @option {Number} [seriesDefaults.border.width] <0> The width of the border.
          * @option {String} [seriesDefaults.border.color] <"black"> The color of the border.
-         * @option {String} [seriesDefaults.overlay] <"glass"> The effects overlay.
+         * @option {Object} [seriesDefaults.overlay] The effects overlay.
+         * @option {String} [seriesDefaults.overlay.name] <"glass"> Overlay name.
          *    <dl>
          *         <dt>
          *              "glass"
@@ -3078,7 +3079,9 @@
                 width: 1
             },
             isVertical: true,
-            overlay: GLASS,
+            overlay: {
+                name: GLASS
+            },
             aboveAxis: true,
             labels: {
                 visible: false
@@ -3842,7 +3845,9 @@
 
         options: {
             color: WHITE,
-            overlay: ROUNDED_BEVEL,
+            overlay: {
+                name: ROUNDED_BEVEL
+            },
             border: {
                 width: 0.5
             },
@@ -3937,8 +3942,6 @@
                     strokeWidth: borderOptions.width,
                     dashType: borderOptions.dashType
                 } : {},
-                overlay = options.overlay.name ?
-                    options.overlay : { name: options.overlay },
                 elements = [];
 
             sector.registerId(sectorID, { seriesIx: sector.seriesIx });
@@ -3951,7 +3954,7 @@
                 }, deepExtend({}, {
                 id: sectorID,
                 fill: options.color,
-                overlay: deepExtend({}, overlay, {
+                overlay: deepExtend({}, options.overlay, {
                     r: sector.r,
                     cx: sector.cx,
                     cy: sector.cy
@@ -6628,7 +6631,7 @@
     Chart.Overlays = {
         build: function(options) {
             var overlay;
-            if (options && (overlay = Chart.Overlays[options.name || options])) {
+            if (options && (overlay = Chart.Overlays[options.name])) {
                 overlay = deepExtend({}, overlay, options);
             }
 
