@@ -44,6 +44,49 @@
                 equal(+calendar.firstVisibleDay(date), +correct);
             });
 
+            test("month.setDate modify day", function() {
+                var date = new Date(2011, 7, 31, 10, 10, 5555),
+                    modified = new Date(date);
+
+                date.setDate(21);
+
+                calendar.month.setDate(modified, -10);
+
+                equal(+modified, +date);
+            });
+
+            test("year.setDate modify month", function() {
+                var date = new Date(2011, 7, 31, 10, 10, 5555),
+                    modified = new Date(date);
+
+                date.setMonth(11);
+
+                calendar.year.setDate(modified, 4);
+
+                equal(+modified, +date);
+            });
+
+            test("decade.setDate modify year", function() {
+                var date = new Date(2011, 7, 31, 10, 10, 5555),
+                    modified = new Date(date);
+
+                date.setFullYear(2005);
+
+                calendar.decade.setDate(modified, -6);
+
+                equal(+modified, +date);
+            });
+
+            test("century.setDate modify decade", function() {
+                var date = new Date(2011, 7, 31, 10, 10, 5555),
+                    modified = new Date(date);
+
+                date.setFullYear(2001);
+
+                calendar.century.setDate(modified, -1);
+
+                equal(+modified, +date);
+            });
 
             test("Month view return title", function() {
                 var date = new Date(),
