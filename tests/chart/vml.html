@@ -793,7 +793,8 @@
                 test("refresh updates clip attribute", function() {
                     var domElement = $("<div />")[0];
                     clipRect.refresh(domElement);
-                    equals($(domElement).css("clip"), "rect(20px 110px 220px 10px)");
+                    equals(domElement.style.clip.replace(/,/g, ''),
+                           "rect(20px 110px 220px 10px)");
                 });
 
             })();
