@@ -950,7 +950,9 @@
                         rect = new Chart.VMLPath({
                             fill: "#fff",
                             fillOpacity: 0.5,
-                            overlay: "glass",
+                            overlay: {
+                                type: "glass"
+                            },
                             normalAngle: 90
                         });
                         decorator = new Chart.VMLOverlayDecorator(view);
