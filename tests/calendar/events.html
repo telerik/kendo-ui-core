@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calendar Events</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Calendar Events</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Calendar = kendo.ui.Calendar,
+                div;
+
+            module("kendo.ui.Calendar events", {
+                setup: function() {
+                    div = $("<div />").appendTo(document.body);
+                },
+                teardown: function() {
+                    div.remove();
+                }
+            });
+
+            test("click on cell raise change event", function() {
+                var called = false;
+                new Calendar(div, { change: function() {
+                        called = true;
+                    }
+                });
+
+                div.find("tbody").find("td:not(.k-other-month)").eq(0).click();
+
+                ok(called);
+            });
+
+            test("click on selected cell does not raise change event", function() {
+                var called = false,
+                    date = new Date(2000, 10, 1);
+
+                new Calendar(div, {
+                    value: date,
+                    change: function() {
+                        called = true;
+                    }
+                });
+
+                div.find("tbody").find("td:not(.k-other-month)").eq(0).click();
+
+                ok(!called);
+            });
+
+            test("click on empty cell does not raise change event", function() {
+                var called = false,
+                    date = new Date(2000, 10, 1);
+
+                new Calendar(div, {
+                    value: date,
+                    max: date,
+                    change: function() {
+                        called = true;
+                    }
+                });
+
+                div.find("tbody").find("td:has(.k-link):last").next().click();
+
+                ok(!called);
+            });
+
+            test("navigate event should raise when change view", function() {
+                var called = false, view, cal = new Calendar(div, {
+                    navigate: function(e) {
+                        called = true;
+                    }
+                });
+
+                cal.prevArrow.click();
+
+                ok(called);
+            });
+        </script>
+
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

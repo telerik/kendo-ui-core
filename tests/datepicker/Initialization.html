@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DatePicker Initialization</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DatePicker Initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var DateView = kendo.ui.DateView;
+
+            module("kendo.ui.DatePicker initialization", {
+                setup: function() {
+                    div = $("<div />").appendTo(document.body);
+                },
+                teardown: function() {
+                    div.remove();
+                }
+            });
+
+            test("DateView should create shared calendar", function() {
+                var dateView = new DateView();
+
+                ok(dateView.calendar);
+            });
+
+            test("DateView should create popup instance", function() {
+                var dateView = new DateView();
+
+                ok(dateView.popup);
+            });
+
+           //test("DateView should select selected value", function() {
+            //    var date = new Date(), dateView = new DateView({value: date});
+//
+ //               equal(+dateView.calendar.value(), +date);
+  //          });
+
+
+
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

@@ -8,6 +8,8 @@
         DECADE = "decade",
         CENTURY = "century",
         CLICK = "click",
+        CHANGE = "change",
+        NAVIGATE = "navigate",
         VALUE = "value",
         HOVER = "k-state-hover",
         DISABLED = "k-state-disabled",
@@ -36,19 +38,19 @@
 
             that._header();
 
+            that.element
+                .delegate(CELLSELECTOR, MOUSEENTER, mouseenter)
+                .delegate(CELLSELECTOR, MOUSELEAVE, mouseleave)
+                .delegate(CELLSELECTOR, CLICK, function(e) {
+                    e.preventDefault();
+                    that.navigateDown(new DATE($(e.currentTarget.firstChild).data(VALUE)));
+                });
+
+            that._value = options.value;
+            that._currentView = options.firstView;
             that._viewedDate = viewedDate = defineViewedDate(options.value, options.min, options.max);
 
-            that.element
-            //.delegate(".k-link", MOUSEENTER, mouseenter)
-            //.delegate(".k-link", MOUSELEAVE, mouseleave)
-            .delegate(CELLSELECTOR, MOUSEENTER, mouseenter)
-            .delegate(CELLSELECTOR, MOUSELEAVE, mouseleave)
-            .delegate(CELLSELECTOR, CLICK, function(e) {
-                e.preventDefault();
-                that.navigateDown(new DATE($(e.currentTarget.firstChild).data(VALUE)));
-            });
-
-            that._currentView = options.firstView;
+            that.bind([CHANGE, NAVIGATE], options);
 
             that.navigate();
         },
@@ -126,7 +128,11 @@
                     that._changeView = false;
                 }
 
-                that.value(value);
+                if (+that._value != +value) {
+                    that.value(value);
+                    that.trigger(CHANGE);
+                }
+
                 return;
             }
 
@@ -186,6 +192,8 @@
                 }
 
                 that.view = newView;
+
+                that.trigger(NAVIGATE);
             }
 
             if (viewName === options.depth && selectedValue) {
