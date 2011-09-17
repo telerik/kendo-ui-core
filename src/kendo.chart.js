@@ -3842,9 +3842,7 @@
 
         options: {
             color: WHITE,
-            overlay: {
-                name: ROUNDED_BEVEL
-            },
+            overlay: ROUNDED_BEVEL,
             border: {
                 width: 0.5
             },
@@ -3939,6 +3937,8 @@
                     strokeWidth: borderOptions.width,
                     dashType: borderOptions.dashType
                 } : {},
+                overlay = options.overlay.name ?
+                    options.overlay : { name: options.overlay },
                 elements = [];
 
             sector.registerId(sectorID, { seriesIx: sector.seriesIx });
@@ -3951,7 +3951,7 @@
                 }, deepExtend({}, {
                 id: sectorID,
                 fill: options.color,
-                overlay: deepExtend({}, options.overlay, {
+                overlay: deepExtend({}, overlay, {
                     r: sector.r,
                     cx: sector.cx,
                     cy: sector.cy
