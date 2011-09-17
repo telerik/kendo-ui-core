@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DatePicker API</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DatePicker API</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var DateView = kendo.ui.DateView;
+
+            module("kendo.ui.DatePicker API", {
+                setup: function() {
+                    div = $("<div />").appendTo(document.body);
+                },
+                teardown: function() {
+                    div.remove();
+                }
+            });
+
+            test("DateView should re assign shared calendar", function() {
+                var options = {
+                    anchor: $("<input/>"),
+                    value: new Date (2000, 10, 10),
+                    min: new Date (1900, 10, 10),
+                    max: new Date (2100, 10, 10),
+                    change: function() {}
+                },
+                dv1 = new DateView({
+                    value: new Date(),
+                    min: new Date(),
+                    max: new Date()
+                }),
+                dv2 = new DateView(options);
+
+                dv2._initCalendar();
+
+                var calendar = dv1.calendar,
+                    popup = dv1.popup;
+
+                equal(+calendar._value, +options.value);
+                equal(+calendar.min, +options.min);
+                equal(+calendar.max, +options.max);
+                equal(calendar._events["change"][0], options.change);
+                equal(calendar.element.data("dateView"), dv2);
+
+                equal(popup.anchor, dv2.options.anchor);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
