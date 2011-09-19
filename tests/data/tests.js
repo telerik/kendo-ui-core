@@ -16,36 +16,12 @@ tests.push(
         title: "datasource initialization"
     },
     {
-        page: "data/datasource/crud.html",
-        title: "datasource crud"
-    },
-    {
-        page: "data/datasource/find.html",
-        title: "datasource.find / datasource.at"
-    },
-    {
         page: "data/datasource/query.html",
         title: "datasource.query"
     },
     {
-        page: "data/datasource/model.html",
-        title: "datasource.model"
-    },
-    {
         page: "data/datasource/sync.html",
         title: "datasource.sync"
-    },
-    {
-        page: "data/datasource/batch-multiple.html",
-        title: "batch multiple requests"
-    },
-    {
-        page: "data/datasource/batch-single.html",
-        title: "batch single request"
-    },
-    {
-        page: "data/datasource/batch-false.html",
-        title: "batch false"
     },
     {
         page: "data/datasource/range.html",
@@ -66,26 +42,6 @@ tests.push(
     {
         page: "data/inmemorycache.html",
         title: "in-memory cache"
-    },
-    {
-        page: "data/model/initialization.html",
-        title: "model initialization"
-    },
-    {
-        page: "data/model/get.html",
-        title: "model get"
-    },
-    {
-        page: "data/model/set.html",
-        title: "model set"
-    },
-    {
-        page: "data/model/modified.html",
-        title: "model modified"
-    },
-    {
-        page: "data/model/modelset.html",
-        title: "modelset"
     },
     {
         page: "data/binder/mapping.html",

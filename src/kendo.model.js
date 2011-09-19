@@ -6,17 +6,7 @@
         setter = kendo.setter,
         accessor = kendo.accessor,
         each = $.each,
-
         CHANGE = "change",
-        UPDATED = "UPDATED",
-        PRISTINE = "PRISTINE",
-        CREATED = "CREATED",
-        DESTROYED = "DESTROYED",
-
-        CREATE = "create",
-        DESTROY = "destroy",
-        UPDATE = "update",
-
         Observable = kendo.Observable;
 
     function equal(x, y) {
@@ -53,38 +43,34 @@
 
             Observable.fn.init.call(that);
 
-            that.state = PRISTINE;
-
             that._accessors = {};
 
             that._modified = false;
 
-            that.data = extend(true, {}, data);
+            that.data = data || {};
             that.pristine = extend(true, {}, data);
 
-            if(that.id() === undefined) {
-                that.state = CREATED;
+            if (that.id() === undefined) {
+                that._isNew = true;
                 that.data["__id"] = kendo.guid();
             }
         },
 
-        accessor: function(field) {
+        _accessor: function(field) {
             var accessors = this._accessors;
 
             return accessors[field] = accessors[field] || accessor(field);
         },
 
         get: function(field) {
-            var that = this,
-                accessor = that.accessor(field);
-
-            return accessor.get(that.data);
+            return this._accessor(field).get(this.data);
         },
 
         set: function(fields, value) {
             var that = this,
                 field,
                 values = {},
+                modified = false,
                 accessor;
 
             if (typeof fields === "string") {
@@ -93,31 +79,39 @@
                 values = fields;
             }
 
-            that._modified = false;
-
             for (field in values) {
-                accessor = that.accessor(field);
+                accessor = that._accessor(field);
 
                 value = values[field];
 
                 if (!equal(value, accessor.get(that.data))) {
                     accessor.set(that.data, value);
-                    that._modified = true;
+                    that._modified = modified = true;
                 }
             }
 
-            if (that._modified) {
-                that.state = that.isNew() ? CREATED : UPDATED;
+            if (modified) {
                 that.trigger(CHANGE);
             }
         },
 
-        isNew: function() {
-            return this.state === CREATED;
+        _accept: function(data) {
+            var that = this;
+
+            that._isNew = false;
+            that._modified = false;
+
+            extend(that.data, data);
+
+            that.pristine = extend(true, {}, that.data);
         },
 
-        destroy: function() {
-            this.state = DESTROYED;
+        hasChanges: function() {
+            return this._modified;
+        },
+
+        isNew: function() {
+            return this._isNew === true;
         },
 
         changes: function() {
@@ -128,7 +122,7 @@
                 pristine = that.pristine;
 
             for (field in data) {
-                if (field !== "__id" && !equal(pristine[field], data[field])) {
+                if (field !== "__id" && (that.isNew() || !equal(pristine[field], data[field]))) {
                     modified = modified || {};
                     modified[field] = data[field];
                 }
@@ -154,8 +148,10 @@
         }
 
         id = function(data, value) {
+            var result;
             if (value === undefined) {
-                return data["__id"] || get(data);
+                result = get(data);
+                return result !== undefined? result : data["__id"];
             } else {
                 set(data, value);
             }
@@ -179,188 +175,252 @@
         init: function(options) {
             var that = this;
 
-            Observable.call(that);
+            that.options = options = extend({}, that.options, options);
+            that._reader = options.reader;
+            that._data = options.data || [];
+            that._destroyed = [];
+            that._transport = options.transport;
+            that._models = {};
+            that._map();
 
-            that.options = options;
-            that.data = options.data;
-            that.map = {};
-            that.models = {};
+            Observable.fn.init.call(that);
 
-            that.bind([CREATE, UPDATE, DESTROY], options);
+            that.bind([CHANGE], options);
         },
 
-        model: function(id) {
+        options: {
+            batch: false,
+            sendAllFields: false,
+            autoSync: false
+        },
+
+        _map: function() {
             var that = this,
-                model = that.models[id];
-
-            if(!model) {
-                model = new that.options.model(that.find(id));
-                that.models[model.id()] = model;
-                model.bind(CHANGE, function() {
-                    that.trigger(UPDATE, { model: model });
-                });
-            }
-
-            return model;
-        },
-
-        changes: function(id) {
-            var that = this,
-                model = that.models[id];
-
-            if (model && model.state === UPDATED) {
-                return model.changes();
-            }
-        },
-
-        hasChanges: function(id) {
-            var that = this,
-                model,
-                models = that.models,
-                id;
-
-            if (id === undefined) {
-                for (id in models) {
-                    if (models[id].state !== PRISTINE) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            model = models[id];
-
-            return !!model && model.state === UPDATED;
-        },
-
-        find: function(id) {
-            return this.data[this.map[id]];
-        },
-
-        refresh: function(data) {
-            var that = this, id = that.options.model.id, idx, length, map = {};
-
-            for (idx = 0, length = data.length; idx < length; idx++) {
-                map[id(data[idx])] = idx;
-            }
-
-            that.map = map;
-            that.data = data;
-        },
-
-        select: function(state, selector) {
-            var models = this.models,
-                result = [],
-                model,
-                selector = selector || function(o) { return o; },
-                id;
-
-            for (id in models) {
-                model = models[id];
-
-                if(model.state === state) {
-                    result.push(selector(model));
-                }
-            }
-
-            return result;
-        },
-
-        sync: function(data) {
-            var updated = this.select(UPDATED),
-                model = this.options.model,
-                models = this.models, id;
-
-            each(updated, function() {
-                var id = this.id();
-                each(data, function() {
-                    if (id === model.id(this)) {
-                        delete models[id];
-                    }
-                });
-            });
-        },
-
-        merge: function(data) {
-            var that = this,
+                data = that._data,
                 model = that.options.model;
 
-            data = data || [];
+            that._idMap = {};
 
-            each(data, function(index, value) {
-                if (value != null) {
-                    index = that.map[model.id(value)];
-
-                    if (index >= 0) {
-                        that.data[index] = value;
-                    } else {
-                        that.data.push(value);
-                    }
-                }
-            });
-
-            each(that.models, function(index, model) {
-                if (model.state === UPDATED) {
-                    index = that.map[index];
-                    that.data[index] = extend(true, that.data[index], model.changes());
-                }
-            });
-
-            that.models = {};
-            that.refresh(that.data);
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                that._idMap[model.id(data[idx])] = idx;
+            }
         },
 
-        create: function(index, values) {
-            var that = this,
-                data = that.data,
-                model = that.model();
+        data: function(data) {
+            var that = this;
 
-            if (typeof index !== "number") {
-                values = index;
-                index = undefined;
+            if (data) {
+                that._data = data;
+                that._models = {};
+                that._destroyed = [];
+                that._map();
             }
+        },
 
-            model.set(values);
+        get: function(id) {
+            var that = this,
+                data,
+                model = that._models[id];
 
-            index = index !== undefined ? index : data.length;
+            if (!model) {
+                data = that._data[that._idMap[id]];
 
-            data.splice(index, 0, model.data);
-
-            that.refresh(data);
-
-            that.trigger(CREATE, { model: model });
+                if (data) {
+                    model = that._models[id] = new that.options.model(data);
+                }
+            }
 
             return model;
         },
 
-        update: function(id, values) {
-            var that = this, model = that.model(id);
+        add: function(model) {
+            var that = this, data;
+
+            if (model instanceof Model) {
+                data = model.data;
+            } else {
+                data = model;
+                model = new that.options.model(model);
+            }
+
+            that._data.push(data);
+
+            that._map();
+
+            that._models[model.id()] = model;
+
+            if (that.options.autoSync) {
+                that.sync();
+            }
+            return model;
+        },
+
+        remove: function(model) {
+            var that = this, id = model, idx, length;
+
+            if (model instanceof Model) {
+                id = model.id();
+            } else {
+                model = that.get(id);
+            }
 
             if (model) {
-                model.set(values);
+                that._data.splice(that._idMap[id], 1);
+                that._map();
+
+                delete that._models[id];
+
+                if (!model.isNew()) {
+                    that._destroyed.push(model);
+                }
+
+                if (that.options.autoSync) {
+                    that.sync();
+                }
+            }
+
+            return model;
+        },
+
+        sync: function() {
+            var that = this,
+                created = [],
+                updated = [],
+                destroyed = [],
+                data,
+                idx,
+                length,
+                options = that.options,
+                sendAllFields = options.sendAllFields,
+                model,
+                models = that._models;
+
+            for (idx in models) {
+                model = models[idx];
+
+                if (model.isNew()) {
+                    created.push({
+                        model: model,
+                        data: model.changes()
+                    });
+                } else if (model.hasChanges()) {
+                    data = sendAllFields ? model.data : model.changes();
+
+                    options.model.id(data, model.id());
+                    updated.push({
+                        model: model,
+                        data: data
+                    });
+                }
+            }
+
+            for (idx = 0, length = that._destroyed.length; idx < length; idx++ ) {
+                model = that._destroyed[idx];
+
+                data = sendAllFields ? model.data : {};
+
+                options.model.id(data, model.id());
+
+                destroyed.push({
+                    model: model,
+                    data: data
+                });
+            }
+
+            $.when.apply(null, that._send({
+                        create: created,
+                        update: updated,
+                        destroy: destroyed
+                    })
+                )
+                .then(function() {
+                    var idx,
+                        length;
+
+                    for (idx = 0, length = arguments.length; idx < length; idx++){
+                        that._accept(arguments[idx]);
+                    }
+
+                    that.trigger(CHANGE);
+                });
+        },
+
+        _accept: function(result) {
+            var that = this,
+                models = result.models,
+                response = result.response || {},
+                idx = 0,
+                length;
+
+            response = that._reader.data(that._reader.parse(response));
+
+            if (!$.isArray(response)) {
+                response = [response];
+            }
+
+            if (result.type === "destroy") {
+                that._destroyed = [];
+            } else {
+                for (idx = 0, length = models.length; idx < length; idx++) {
+                    models[idx]._accept(response[idx]);
+                }
             }
         },
 
-        destroy: function(id) {
-            var that = this, model = that.model(id);
+        _promise: function(data, models, type) {
+            var that = this,
+                transport = that._transport;
 
-            if (model) {
-                that.data.splice(that.map[id], 1);
+            return $.Deferred(function(deferred) {
+                transport[type].call(transport, extend({
+                        success: function(response) {
+                            deferred.resolve({
+                                response: response,
+                                models: models,
+                                type: type
+                            });
+                        },
+                        error: deferred.reject
+                    }, data)
+                );
+            }).promise();
+        },
 
-                model.destroy();
+        _send: function(data) {
+            var that = this,
+                promises = [],
+                order = "create,update,destroy".split(",");
 
-                that.refresh(that.data);
+            each(order, function(index, type) {
+                var payload = data[type],
+                    idx,
+                    length;
 
-                that.trigger(DESTROY, { model: model });
-            }
+                if (that.options.batch) {
+                    if (payload.length) {
+                        promises.push(
+                            that._promise( {
+                                data: {
+                                    models: $.map(payload, function(value) {
+                                        return value.data;
+                                    })
+                                }
+                            }, $.map(payload, function(value) {
+                                    return value.model;
+                            }),  type)
+                        );
+                    }
+                } else {
+                    for (idx = 0, length = payload.length; idx < length; idx++) {
+                        promises.push(that._promise( { data: payload[idx].data }, [ payload[idx].model ], type));
+                    }
+                }
+            });
+
+            return promises;
         }
     });
 
     kendo.data.Model = Model;
     kendo.data.ModelSet = ModelSet;
-    Model.UPDATED = UPDATED;
-    Model.PRISTINE = PRISTINE;
-    Model.CREATED = CREATED;
-    Model.DESTROYED = DESTROYED;
 })(jQuery);
