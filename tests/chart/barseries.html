@@ -1488,6 +1488,10 @@
                     same(rect.style.normalAngle, 0);
                 });
 
+                test("sets default rotation for overlay", function() {
+                    same(rect.style.overlay.rotation, 0);
+                });
+
                 test("sets default border color based on color", function() {
                     createBar({ color: "#cf0" });
                     equals(rect.style.stroke, "#8fb300");
@@ -1501,6 +1505,11 @@
                 test("sets normalAngle for horizontal bars", function() {
                     createBar({ isVertical: false });
                     same(rect.style.normalAngle, 90);
+                });
+
+                test("sets overlay rotation for horizontal bars", function() {
+                    createBar({ isVertical: false });
+                    same(rect.style.overlay.rotation, 90);
                 });
 
                 test("sets stroke color", function() {
