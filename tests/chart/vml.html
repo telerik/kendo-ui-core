@@ -902,7 +902,7 @@
                 });
 
                 test("renders angle", function() {
-                    ok(linearGradient.render().indexOf("angle='0'") > -1);
+                    ok(linearGradient.render().indexOf("angle='270'") > -1);
                 });
 
                 test("renders colors", function() {
@@ -952,20 +952,20 @@
                             fill: "#fff",
                             fillOpacity: 0.5,
                             overlay: {
-                                name: "glass"
-                            },
-                            normalAngle: 90
+                                name: "glass",
+                                rotation: 90
+                            }
                         });
                         decorator = new Chart.VMLOverlayDecorator(view);
                         glassyRect = decorator.decorate(rect);
                     }
                 });
 
-                test("applies rotation transform to fill gradient", function() {
-                    equals(glassyRect.options.fill.rotation, 270 - 90);
+                test("sets rotation to fill gradient", function() {
+                    equals(glassyRect.options.fill.rotation, 90);
                 });
 
-                test("applies fill opacity gradient", function() {
+                test("sets opacity to fill gradient", function() {
                     equals(glassyRect.options.fill.opacity, 0.5);
                 });
 
