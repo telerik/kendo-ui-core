@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+    <script src="../../src/jquery.js"></script>
+    <script src="../qunit.js"></script>
+    <script src="../qunit-runner.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.model.js"></script>
+    <link rel="stylesheet" href="../qunit.css" type="text/css" />
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var modelSet, MyModel = kendo.data.Model.define( { id: "id" });
+
+            function setup(options) {
+                modelSet = new kendo.data.ModelSet($.extend({
+                    model: MyModel
+                }, options)
+                );
+            }
+
+            module("ModelSet sync", {
+                setup: setup
+            });
+
+            test("add syncs when autoSync is true", function() {
+                setup( { autoSync: true });
+                stub(modelSet, "sync");
+                modelSet.add({ foo: "bar" });
+
+                equal(modelSet.calls("sync"), 1);
+            });
+
+            test("remove syncs when autoSync is true", function() {
+                setup( { data: [ { id: 1} ],  autoSync: true });
+                stub(modelSet, "sync");
+                modelSet.remove(1);
+
+                equal(modelSet.calls("sync"), 1);
+            });
+
+            test("add does not sync when autoSync is false", function() {
+                setup();
+                stub(modelSet, "sync");
+                modelSet.add({ foo: "bar" });
+
+                equal(modelSet.calls("sync"), 0);
+            });
+
+            test("remove does not sync if model does not exist", function() {
+                setup( { autoSync: true });
+                stub(modelSet,"sync");
+                modelSet.remove(1);
+
+                equal(modelSet.calls("sync"), 0);
+            });
+
+            test("remove does not sync if model does not exist", function() {
+                setup( { autoSync: true });
+                stub(modelSet, "sync");
+                modelSet.remove(1);
+
+                equal(modelSet.calls("sync"), 0);
+            });
+
+            test("remove does not sync when autoSync is false", function() {
+                setup( { data: [ { id: 1} ] });
+                stub(modelSet, "sync");
+                modelSet.remove(1);
+
+                equal(modelSet.calls("sync"), 0);
+            });
+
+            test("sync calls the create method of the transport", function() {
+                var transport = stub({}, "create");
+                setup({ transport: transport } );
+
+                modelSet.add(new MyModel( { foo: "bar" }));
+                modelSet.sync();
+
+                equal(transport.calls("create"), 1);
+            });
+
+            test("sync does not call the create method of the transport if there are no new models", function() {
+                var transport = stub({}, "create");
+                setup({ transport: transport } );
+
+                modelSet.sync();
+
+                equal(transport.calls("create"), 0);
+            });
+
+            test("sync sends the data of the created model to the create method of the transport", function() {
+                var transport = stub({}, "create");
+                setup({ transport: transport } );
+
+                modelSet.add(new MyModel( { foo: "bar" }));
+                modelSet.sync();
+
+                equal(transport.args("create")[0].data.foo, "bar");
+            });
+
+            test("sync sends the data of all created models to the create method of the transport", function() {
+                var transport = stub({}, "create");
+                setup({ transport: transport } );
+
+                modelSet.add(new MyModel( { foo: "bar" }));
+                modelSet.add(new MyModel( { foo: "baz" }));
+                modelSet.sync();
+
+                equal(transport.calls("create"), 2);
+                equal(transport.args("create", 0)[0].data.foo, "bar");
+                equal(transport.args("create", 1)[0].data.foo, "baz");
+            });
+
+            test("sync calls the update method of the transport if there are updated models", function() {
+                var transport = stub({}, "update");
+                setup({ data: [ { id:1 }], transport: transport } );
+
+                model = modelSet.get(1);
+                model.set({ foo: "bar" });
+                modelSet.sync();
+
+                equal(transport.calls("update"), 1);
+            });
+
+            test("sync does not call the update method of the transport if there are no updated models", function() {
+                var transport = stub({}, "update");
+                setup({ data: [ { id:1 }], transport: transport } );
+
+                model = modelSet.get(1);
+                modelSet.sync();
+
+                equal(transport.calls("update"), 0);
+            });
+
+            test("sync sends all updated models to the create method of the transport", function() {
+                var transport = stub({}, "update");
+                setup({ data: [ { id:1 }, { id: 2}], transport: transport } );
+
+                model = modelSet.get(1);
+                model.set({ foo: "bar" });
+                model = modelSet.get(2);
+                model.set({ foo: "baz" });
+                modelSet.sync();
+
+                equal(transport.calls("update"), 2);
+                equal(transport.args("update", 0)[0].data.foo, "bar");
+                equal(transport.args("update", 0)[0].data.id, 1);
+                equal(transport.args("update", 1)[0].data.id, 2);
+                equal(transport.args("update", 1)[0].data.foo, "baz");
+            });
+
+
+            test("sync calls the destroy method of the transport if there are destroyed models", function() {
+                var transport = stub({}, "destroy");
+                setup({ data: [ { id:1 }], transport: transport } );
+
+                model = modelSet.get(1);
+                modelSet.remove(model);
+                modelSet.sync();
+
+                equal(transport.calls("destroy"), 1);
+            });
+
+            test("sync does not call the destroy method of the transport if there are no destroyed models", function() {
+                var transport = stub({}, "destroy");
+                setup({ data: [ { id:1 }], transport: transport } );
+
+                model = modelSet.get(1);
+                modelSet.sync();
+
+                equal(transport.calls("destroy"), 0);
+            });
+
+            test("sync does not call the destroy method of the transport if a new model is destroyed", function() {
+                var transport = stub({}, "destroy");
+                setup( { transport: transport } );
+
+                var model = new MyModel();
+                modelSet.add(model);
+                modelSet.remove(model);
+                modelSet.sync();
+
+                equal(transport.calls("destroy"), 0);
+            });
+
+            test("sync sends all destroyed models to the destroy method of the transport", function() {
+                var transport = stub({}, "destroy");
+                setup({ data: [ { id:1 }, { id: 2}], transport: transport } );
+
+                model = modelSet.get(1);
+                modelSet.remove(model);
+                model = modelSet.get(2);
+                modelSet.remove(model);
+                modelSet.sync();
+
+                equal(transport.calls("destroy"), 2);
+                equal(transport.args("destroy", 0)[0].data.id, 1);
+                equal(transport.args("destroy", 1)[0].data.id, 2);
+            });
+
+            test("sync sends only the updated fields and the id", function() {
+                var transport = stub({}, "update");
+                setup({ data: [ { id:1, foo: "foo", bar: "bar" }], transport: transport } );
+
+                var model = modelSet.get(1);
+                model.set({ foo: "foo1" });
+                modelSet.sync();
+
+                equal(transport.args("update", 0)[0].data.id, 1);
+                equal(transport.args("update", 0)[0].data.foo, "foo1");
+                equal(transport.args("update", 0)[0].data.bar, undefined);
+            });
+
+            test("sync sends only the id of the destroyed model", function() {
+                var transport = stub({}, "destroy");
+                setup({ data: [ { id:1, foo: "foo" }], transport: transport } );
+
+                var model = modelSet.get(1);
+                modelSet.remove(model);
+                modelSet.sync();
+
+                equal(transport.args("destroy", 0)[0].data.id, 1);
+                equal(transport.args("destroy", 0)[0].data.foo, undefined);
+            });
+
+            test("sync does not send the automatically generated id of created models", function() {
+                var transport = stub({}, "create");
+                setup({ transport: transport } );
+
+                var model = new MyModel();
+                model.set( { foo: "bar" });
+                modelSet.add(model);
+                modelSet.sync();
+
+                equal(transport.args("create", 0)[0].data.__id, undefined);
+            });
+
+            test("sync sends all fields during update when sendAllFields is true", function() {
+                var transport = stub({}, "update");
+                setup({ data: [ { id:1, foo: "foo", bar: "bar" }], sendAllFields: true, transport: transport } );
+
+                var model = modelSet.get(1);
+                model.set({ foo: "foo1" });
+                modelSet.sync();
+
+                equal(transport.args("update", 0)[0].data.id, 1);
+                equal(transport.args("update", 0)[0].data.foo, "foo1");
+                equal(transport.args("update", 0)[0].data.bar, "bar");
+            });
+
+            test("sync sends all fields of destroyed model when sendAllFields is true", function() {
+                var transport = stub({}, "destroy");
+                setup({ sendAllFields: true, data: [ { id:1, foo: "foo" }], transport: transport } );
+
+                var model = modelSet.get(1);
+                modelSet.remove(model);
+                modelSet.sync();
+
+                equal(transport.args("destroy", 0)[0].data.id, 1);
+                equal(transport.args("destroy", 0)[0].data.foo, "foo");
+            });
+
+            test("sync calls the create method of the transport only once when batch is true", function() {
+                var transport = stub({}, "create");
+
+                setup({ batch: true, transport: transport } );
+
+                modelSet.add(new MyModel());
+                modelSet.add(new MyModel());
+                modelSet.sync();
+
+                equal(transport.calls("create"), 1);
+            });
+
+            test("sync passes array of created models to transport when batch is true", function() {
+                var transport = stub({}, "create");
+
+                setup({ batch: true, transport: transport } );
+
+                modelSet.add(new MyModel({foo: "foo"}));
+                modelSet.add(new MyModel({foo: "bar"}));
+                modelSet.sync();
+
+                var models = transport.args("create")[0].data.models;
+                ok($.isArray(models));
+                equal(models.length, 2);
+                equal(models[0].foo, "foo");
+                equal(models[1].foo, "bar");
+            });
+
+            test("sync calls the update method of the transport only once when batch is true", function() {
+                var transport = stub({}, "update");
+
+                setup({ batch: true, data: [ { id: 1 }, { id: 2 }], transport: transport } );
+
+                var model = modelSet.get(1);
+                model.set({ foo: "foo" });
+                model = modelSet.get(2);
+                model.set({ foo: "bar" });
+                modelSet.sync();
+
+                equal(transport.calls("update"), 1);
+            });
+
+            test("sync passes array of updated models to transport when batch is true", function() {
+                var transport = stub({}, "update");
+
+                setup({ batch: true, data: [ { id: 1 }, { id: 2 }], transport: transport } );
+
+                var model = modelSet.get(1);
+                model.set({ foo: "foo" });
+                model = modelSet.get(2);
+                model.set({ foo: "bar" });
+                modelSet.sync();
+
+                var models = transport.args("update")[0].data.models;
+                ok($.isArray(models));
+                equal(models.length, 2);
+                equal(models[0].foo, "foo");
+                equal(models[1].foo, "bar");
+            });
+
+            test("sync calls the destroy method of the transport only once when batch is true", function() {
+                var transport = stub({}, "destroy");
+
+                setup({ batch: true, data: [ { id: 1 }, { id: 2 }], transport: transport } );
+
+                modelSet.remove(1);
+                modelSet.remove(2);
+                modelSet.sync();
+
+                equal(transport.calls("destroy"), 1);
+            });
+            test("sync passes array of destroyed models to transport when batch is true", function() {
+                var transport = stub({}, "destroy");
+
+                setup({ batch: true, data: [ { id: 1 }, { id: 2 }], transport: transport } );
+
+                modelSet.remove(1);
+                modelSet.remove(2);
+                modelSet.sync();
+
+
+                var models = transport.args("destroy")[0].data.models;
+                ok($.isArray(models));
+                equal(models.length, 2);
+                equal(models[0].id, 1);
+                equal(models[1].id, 2);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

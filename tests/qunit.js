@@ -15,13 +15,19 @@
         stub: function (that, methods) {
             var stubs = {};
 
-            methods = $.isArray(methods) ? methods : [methods];
+            if (typeof methods === "string") {
+                var obj = {};
+                obj[methods] = $.noop;
+                methods = obj;
+            }
 
-            $.each(methods, function(index, method) {
+            $.each(methods, function(method, impl) {
                 stubs[method] = { calls: 0, args: [] };
+
                 that[method] = function() {
                     stubs[method].calls ++;
                     stubs[method].args.push(arguments);
+                    return impl.apply(that, arguments);
                 }
             });
 

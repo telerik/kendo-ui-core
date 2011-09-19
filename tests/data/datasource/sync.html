@@ -17,11 +17,12 @@
         <ol id="qunit-tests"></ol>
         <script>
             var DataSource = kendo.data.DataSource,
-                Model = kendo.data.Model;
+                dataSource,
+                MyModel = kendo.data.Model.define( { id: "id" } );
 
             function setup(transport, data, options) {
                 options = $.extend(true, {
-                    batch: "multiple",
+                    batch: true,
                     schema: {
                         model: kendo.data.Model.define()
                     },
@@ -31,398 +32,70 @@
                         }
                     }, transport)
                 }, options);
-                var dataSource = new DataSource(options);
+
+                dataSource = new DataSource(options);
 
                 dataSource.read();
-
-                return dataSource;
             }
 
-            test("sync updates current view", function(){
-                var dataSource = setup({
-                    update: function(args) {
-                        args.success(args.data.models);
-                    }
-                });
-                dataSource.update(1, { foo: "bar" });
-                dataSource.sync();
-                var view = dataSource.view();
-                equal(view.length, 1);
-                equal(view[0].id, 1);
-                equal(view[0].foo, "bar");
+
+            module("datasource sync", {
+                setup: setup
             });
 
-            test("sync with sorting enabled updates current view", function(){
-                var dataSource = setup({
-                    update: function(args) {
-                        args.success(args.data.models);
-                    }
-                },
-                null,
-                {
-                    sort: {
-                        field: "id",
-                        dir: "desc"
-                    }
-                });
-                dataSource.update(1, { foo: "bar" });
-                dataSource.sync();
-                var view = dataSource.view();
-                equal(view.length, 1);
-                equal(view[0].id, 1);
-                equal(view[0].foo, "bar");
+            test("datasource propagates sendAllFields to modelset", function() {
+                setup({}, null, { sendAllFields: true });
+
+                ok(dataSource._set.options.sendAllFields, true);
             });
 
-            test("sync calls the update method of the transport for the updated records when batch is multiple", function() {
-                var updated;
-                var dataSource = setup({
-                    update: function(options) {
-                        updated = options.data.models;
-                    }
-                });
+            test("datasource propagates batch to modelset", function() {
+                setup({}, null, { batch: true });
 
-                dataSource.update(1, { foo: "bar" });
-                dataSource.sync();
-
-                equal(updated.length, 1);
-                equal(updated[0].foo, "bar");
+                ok(dataSource._set.options.batch, true);
             });
 
-            test("sync does not call update method if there are no updated records", function() {
-                var updated;
-                var dataSource = setup({
-                    update: function(options) {
-                        updated = options.data;
-                    }
-                });
+            test("datasource propagates reader to modelset", function() {
+                setup({}, null, { batch: true });
 
-                dataSource.sync();
-
-                ok(updated === undefined);
+                ok(dataSource._set.options.reader, dataSource.reader);
             });
 
-            test("sync does not call create method if there are no created records", function() {
-                var created;
-                var dataSource = setup({
-                    create: function(options) {
-                        created = options.data.models;
-                    }
-                });
+            test("datasource propagates transport to modelset", function() {
+                setup({}, null, { batch: true });
 
-                dataSource.sync();
-
-                ok(created === undefined);
+                ok(dataSource._set.options.transport, dataSource.transport);
             });
 
-            test("sync does not call destroy method if there are no destroyed records", function() {
-                var destroyed;
-                var dataSource = setup({
-                    destroy: function(options) {
-                       destroyed = options.data.models;
-                    }
-                });
+            test("datasource updates the modelset data after read", function() {
+                var set = stub(dataSource._set, "data");
 
-                dataSource.sync();
-
-                ok(destroyed === undefined);
-            });
-
-            test("sync with sendAllFields=true passes entire record to update", function() {
-                var updated,
-                    dataSource = setup({
-                        update: function(options) {
-                            updated = options.data.models;
-                        }
-                    },
-                    [{ id: 1, foo: "foo", bar: "bar" }],
-                    { sendAllFields: true });
-
-                dataSource.update(1, { foo: "bar" });
-                dataSource.sync();
-
-                equal(updated[0].foo, "bar");
-                equal(updated[0].bar, "bar");
-            });
-
-            test("sync with sendAllFields=false passes only changes to update", function() {
-                var updated,
-                    dataSource = setup({
-                        update: function(options) {
-                            updated = options.data.models;
-                        }
-                    },
-                    [{ id: 1, foo: "foo", bar: "bar" }],
-                    { sendAllFields: false });
-
-                dataSource.update(1, { foo: "bar" });
-                dataSource.sync();
-
-                equal(updated[0].foo, "bar");
-                equal(updated[0].bar, undefined);
-            });
-
-             test("sync with sendAllFields=true passes entire record to destroy", function() {
-                var destroyed,
-                    dataSource = setup({
-                        destroy: function(options) {
-                            destroyed = options.data.models;
-                        }
-                    },
-                    [{ id: 1, foo: "foo", bar: "bar" }],
-                    { sendAllFields: true });
-
-                dataSource.destroy(1);
-                dataSource.sync();
-
-                equal(destroyed[0].foo, "foo");
-                equal(destroyed[0].bar, "bar");
-            });
-
-            test("sync with sendAllFields=false passes only the id of the record to destroy", function() {
-                var destroyed,
-                    dataSource = setup({
-                        destroy: function(options) {
-                            destroyed = options.data.models;
-                        }
-                    },
-                    [{ id: 1, foo: "foo", bar: "bar" }],
-                    { sendAllFields: false });
-
-                dataSource.destroy(1);
-                dataSource.sync();
-
-                equal(destroyed[0].id, 1);
-                equal(destroyed[0].foo, undefined);
-                equal(destroyed[0].bar, undefined);
-            });
-
-            test("sync change the state of created model when successful", function() {
-                var dataSource = new DataSource({
-                    transport: {
-                        create: {
-                            url: "foo",
-                            dataType: "json",
-                            type: "POST",
-                            contentType: "text/json"
-                        }
-                    },
-                    batch: false,
-                    schema: {
-                        model: Model.define(),
-                        status: function() {
-                            return true;
-                        }
-                    }
-                });
-
-                $.mockjax({
-                    contentType: "text/json",
-                    url: "foo",
-                    responseText: '[{"id": 1, "foo": "bar"}]',
-                    response: function() {
-                        ok(true);
-                        start();
-                    }
-                });
-                stop(1000);
-
-                dataSource.create({ foo: "bar" });
-                dataSource.bind("change", function() {
-                    var createdModels = dataSource._createdModels();
-                    equal(createdModels.length, 0);
-                });
-                dataSource.sync();
-            });
-
-            test("sync sends data operations to dialect", function() {
-                var data, dataSource = new DataSource({
-                    transport: {
-                        create: {
-                            url: "foo",
-                            dataType: "json",
-                            type: "POST",
-                            contentType: "text/json"
-                        },
-                        dialect: function() {
-                            data = arguments[0];
-                        }
-                    },
-                    sort: { field: "id", dir: "asc" },
-                    filter: { field: "id", operator: "eq", value: 1 },
-                    pageSize: 10,
-                    page: 2,
-                    batch: false,
-                    schema: {
-                        model: Model.define()
-                    }
-                });
-
-                $.mockjax({
-                    contentType: "text/json",
-                    url: "foo",
-                    response: function() {
-                        ok(data.sort);
-                        ok(data.group);
-                        ok(data.filter);
-                        ok(data.take);
-                        ok(data.page);
-                        ok(data.skip);
-                        ok(data.pageSize);
-                        start();
-                    }
-                });
-                stop();
-
-                dataSource.create({ foo: "bar" });
-                dataSource.sync();
-            });
-
-            test("sync change the state for the successful created record to Model.PRISTINE", function() {
-                var dataSource = new DataSource({
-                    transport: {
-                        create: {
-                            url: "foo",
-                            dataType: "json",
-                            type: "POST",
-                            contentType: "text/json"
-                        }
-                    },
-                    batch: false,
-                    schema: {
-                        model: Model.define(),
-                        status: function() {
-                            return true;
-                        }
-                    }
-                });
-
-                $.mockjax({
-                    contentType: "text/json",
-                    url: "foo",
-                    responseText: '[{"id": 1, "foo": "bar"}]',
-                    response: function() {
-                        start();
-                    }
-                });
-                stop(1000);
-
-                dataSource.create({ foo: "bar" });
-                dataSource.bind("change", function() {
-                    var model = this.model(1);
-                    equal(model.id(), 1);
-                    equal(model.get("foo"), "bar");
-                    equal(model.state, Model.PRISTINE);
-                });
-                dataSource.sync();
-            });
-
-            test("sync triggers error if error callback", function() {
-                var data = [{id: 1, foo: "foo"}],
-                    errorWasCalled = false;
-                var dataSource = setup({
-                    update: function(options) {
-                        options.error();
-                    }},
-                    data
-                );
-                dataSource.update(1, { foo: "bar" });
-                dataSource.bind("error", function() {
-                   errorWasCalled = true;
-                });
-                dataSource.sync();
-
-                ok(errorWasCalled);
-            });
-
-            test("sync change the state for the successful updated record to Model.PRISTINE", function() {
-                var data = {data: [{id: 1, foo: "foo"}]};
-                var dataSource = setup({
-                    update: function(options) {
-                        options.success({data: [{id: 1, foo: "bar"}]});
-                    }},
-                    data,
-                    {
-                        schema:{
-                            data: function(data) {
-                                return data.data;
-                            }
-                        }
-                    }
-                );
-
-                dataSource.update(1, { foo: "bar" });
-                dataSource.bind("change", function() {
-                    var model = this.model(1);
-                    equal(model.id(), 1);
-                    equal(model.get("foo"), "bar");
-                    equal(model.state, Model.PRISTINE);
-                    equal(dataSource._updatedModels().length, 0);
-                });
-                dataSource.sync();
-            });
-
-            test("sync removes destroyed models and remove its data", function() {
-                var data = [{id: 1, foo: "foo"}];
-                var dataSource = setup({
-                    destroy: function(options) {
-                        options.success([]);
-                    }},
-                    $.map(data, function(i) { return i; }),
-                    {
-                        schema:{
-                            status: function() {
-                                return true;
-                            }
-                        }
-                    }
-                );
-
-                dataSource.destroy(1);
-                dataSource.bind("change", function() {
-                    equal(this._data.length, 0);
-                    equal(this.modelSet.models[1], undefined);
-                    equal(this._map[1], undefined);
-                });
-                dataSource.sync();
-            });
-
-            test("sync merges the results if read occurs before sync is complete", function() {
-                var dataSource = new DataSource({
-                    transport: {
-                        read: function(options) {
-                            options.success([{id: 1, foo: "foo"}, {id: 2, foo: "bar"}]);
-                        }
-                    },
-                    schema: {
-                        model: Model.define()
-                    }
-                });
                 dataSource.read();
 
-                dataSource.create({foo: "baz"});
-                dataSource.update(1, {foo: "bar"});
-                dataSource.destroy(2);
-                dataSource.read();
-
-                var created = dataSource._createdModels();
-                var updated = dataSource._updatedModels();
-                var destroyed = dataSource._destroyedModels();
-                var view = dataSource.view();
-
-                equal(created.length, 1);
-                equal(created[0].foo, "baz");
-                equal(destroyed.length, 1);
-                equal(destroyed[0].foo, "bar");
-                equal(destroyed[0].id, 2);
-                equal(updated.length, 0);
-
-                equal(view.length, 2);
-                equal(view[0].id, 1);
-                equal(view[0].foo, "foo");
-                equal(view[1].id, 2);
-                equal(view[1].foo, "bar");
+                equal(set.calls("data"), 1);
             });
 
+            test("change is raised after sync", function() {
+                var transport = stub({}, { update: function(options) {
+                            options.success();
+                        }
+                    }),
+                    called = false;
+
+                setup(transport, [ { id: 1 }, { id: 2 }] );
+
+                dataSource.bind("change", function() {
+                    called = true;
+                });
+
+                var model1 = dataSource.get(1);
+
+                model1.set( { foo: "foo" } );
+
+                dataSource.sync();
+
+                ok(called);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

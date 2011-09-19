@@ -63,7 +63,7 @@ $(document).ready(function() {
         change: function() {
             var tr = this.select();
             var id = tr.data("id");
-            var model = this.dataSource.model(id);
+            var model = this.dataSource.get(id);
 
             $("fieldset")
                 .find("input[name=Name]")

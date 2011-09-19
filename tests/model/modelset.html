@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <script src="../../src/jquery.js"></script>
+    <script src="../qunit.js"></script>
+    <script src="../qunit-runner.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.model.js"></script>
+    <link rel="stylesheet" href="../qunit.css" type="text/css" />
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var modelSet, Model = kendo.data.Model, ModelSet = kendo.data.ModelSet, MyModel = Model.define( { id: "id" });
+
+            function setup(options) {
+                modelSet = new ModelSet($.extend({
+                    model: MyModel
+                    }, options)
+                );
+            }
+
+            module("ModelSet", {
+                setup: setup
+            });
+
+            test("get returns undefined if there is no model with the specified id", function() {
+                equal(modelSet.get(1), undefined);
+            });
+
+            test("get returns the model instance with the specified id", function() {
+                setup( { data: [ { id: 1} ] });
+
+                var model = modelSet.get(1);
+                ok(model);
+                ok(model instanceof Model);
+            });
+
+            test("get returns the model instance with the specified id as string", function() {
+                setup( { data: [ { id: 1} ] });
+
+                var model = modelSet.get("1");
+                equal(model.id(), 1);
+            });
+
+            test("get returns the same model instance", function() {
+                setup( { data: [ { id: 1} ] });
+
+                equal(modelSet.get(1), modelSet.get(1));
+            });
+
+            test("add adds the specified values to original data", function() {
+                var data = [ { id: 1} ];
+                setup( { data: data });
+
+                modelSet.add( { foo: "bar" } );
+
+                equal(data.length, 2);
+                equal(data[1].foo, "bar");
+            });
+
+            test("add returns a new model istance", function() {
+                var model = modelSet.add( { foo: "bar" } );
+
+                ok(model instanceof Model);
+            });
+
+            test("add returns a new model istance with specified fields", function() {
+                var model = modelSet.add( { foo: "bar" } );
+
+                equal(model.get("foo"), "bar");
+            });
+
+            test("add accepts a model instance", function() {
+                var model = new MyModel({ foo: "bar" });
+
+                equal(modelSet.add(model), model);
+            });
+
+            test("get after add returns the same model istance", function() {
+                var model = modelSet.add( { foo: "bar" } );
+
+                equal(model, modelSet.get(model.id()));
+            });
+
+            test("remove removes the specified model from the data", function() {
+                var data = [ { id: 0 },{ id: 1}, { id: 2} ];
+                setup( { data: data });
+
+                var model = modelSet.get(1);
+                modelSet.remove(model);
+
+                equal(data.length, 2);
+                equal(data[0].id, 0);
+                equal(data[1].id, 2);
+            });
+
+            test("remove accepts a model instance", function() {
+                var data = [ { id: 1} ];
+                setup( { data: data });
+
+                modelSet.remove(modelSet.get(1));
+
+                equal(data.length, 0);
+            });
+
+            test("remove returns the destroyed model", function() {
+                var data = [ { id: 1} ];
+                setup( { data: data });
+
+                equal(modelSet.remove(1).id(), 1);
+            });
+
+            test("remove returns undefined if a model with the specified id does not exist", function() {
+                equal(modelSet.remove(1), undefined);
+            });
+
+            test("get after remove returns undefined", function() {
+                var data = [ { id: 1} ];
+                setup( { data: data });
+
+                modelSet.remove(1);
+                equal(modelSet.get(1), undefined);
+            });
+
+            test("data replaces the existing values", function() {
+                var data = [ { id: 1, foo: "foo" } ];
+                setup( { data: data });
+
+                var model = modelSet.get(1);
+
+                modelSet.data([ { id: 1, foo: "bar" }]);
+
+                model = modelSet.get(1);
+
+                equal(model.get("foo"), "bar");
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
