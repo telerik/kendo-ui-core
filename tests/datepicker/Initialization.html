@@ -19,17 +19,22 @@
         <ol id="qunit-tests"></ol>
         <script>
 
-            var DateView = kendo.ui.DateView;
+            var DateView = kendo.DateView,
+                DatePicker = kendo.ui.DatePicker,
+                div, input;
 
             module("kendo.ui.DatePicker initialization", {
                 setup: function() {
                     div = $("<div />").appendTo(document.body);
+                    input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
                     div.remove();
+                    input.parents(".k-widget").andSelf().remove();
                 }
             });
 
+            //DateView
             test("DateView should create shared calendar", function() {
                 var dateView = new DateView();
 
@@ -42,14 +47,105 @@
                 ok(dateView.popup);
             });
 
-           //test("DateView should select selected value", function() {
-            //    var date = new Date(), dateView = new DateView({value: date});
-//
- //               equal(+dateView.calendar.value(), +date);
-  //          });
+            test("_initCalendar does not apply settings twice", function() {
+                var dv1 = new DateView({
+                    value: new Date(),
+                    min: new Date(),
+                    max: new Date()
+                });
 
+                stub(dv1.calendar, "value");
 
+                dv1._initCalendar();
+                dv1._initCalendar();
 
+                equal(dv1.calendar.calls("value"), 1);
+            });
+
+            //DatePicker
+            test("_wrapper() wraps input element", function() {
+                input.css("width", "200");
+
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                ok(input.parent().hasClass("k-picker-wrap k-state-default"));
+                equal(datepicker.wrapper.attr("class"), "k-widget k-datepicker k-header");
+                equal(datepicker.wrapper.width(), 200);
+            });
+
+            test("_input should add k-input to the element", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                ok(datepicker.element.hasClass("k-input"));
+            });
+
+            test("_input create calendar button", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
+                    icon = datepicker.icon;
+
+                ok(icon);
+                ok(icon.is("span"));
+                ok(icon.hasClass("k-select k-header"));
+                ok(icon.children().is("span"));
+                ok(icon.children().hasClass("k-icon k-icon-calendar"));
+                ok(icon.children().html());
+            });
+
+            test("create dateview", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                ok(datepicker.dateView);
+            });
+
+            test("dateView should have correct options", function() {
+                var datepicker = input.kendoDatePicker({open: function() {}, close: $.noop}).data("kendoDatePicker"),
+                    dateView = datepicker.dateView,
+                    options = dateView.options,
+                    dpOptions = datepicker.options;
+
+                ok(dateView.options);
+                equal(options.anchor, datepicker.element);
+                equal(options.value, dpOptions.value);
+                equal(+options.min, +dpOptions.min);
+                equal(+options.max, +dpOptions.max);
+                equal(options.open, dpOptions.open);
+                equal(options.close, dpOptions.close);
+                notEqual(options.change, dpOptions.change);
+            });
+
+            test("dateView onChange should call value()", function() {
+                var called = false,
+                    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                stub(datepicker, ["value", "close"]);
+
+                datepicker.dateView.options.change();
+
+                equal(datepicker.calls("value"), 1);
+                equal(datepicker.calls("close"), 1);
+            });
+
+            test("dateView onChange should trigger change", function() {
+                var called = false,
+                    datepicker = input.kendoDatePicker({
+                        change: function() {
+                            called=true;
+                        }
+                    }).data("kendoDatePicker");
+
+                datepicker.dateView.options.change();
+
+                ok(called);
+            });
+
+            test("DatePicker wire icon click", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+                stub(datepicker, "open");
+
+                //datepicker.icon.click();
+
+                equal(datepicker.calls("open"), 1);
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
