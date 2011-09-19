@@ -3131,13 +3131,14 @@
             this.render();
 
             var bar = this,
+                options = bar.options,
                 children = bar.children,
                 label = children[0];
 
             bar.box = targetBox;
 
             if (label) {
-                label.options.aboveAxis = bar.options.aboveAxis;
+                label.options.aboveAxis = options.aboveAxis;
                 label.reflow(targetBox);
             }
         },
@@ -3146,6 +3147,7 @@
             var bar = this,
                 options = bar.options,
                 isVertical = options.isVertical,
+                normalAngle = isVertical ? 0 : 90,
                 border = options.border.width > 0 ? {
                     stroke: bar.getBorderColor(),
                     strokeWidth: options.border.width,
@@ -3155,8 +3157,8 @@
                 rectStyle = deepExtend({
                     id: options.id,
                     fill: options.color,
-                    overlay: options.overlay,
-                    normalAngle: isVertical ? 0 : 90,
+                    overlay: deepExtend({rotation: normalAngle }, options.overlay),
+                    normalAngle: normalAngle,
                     aboveAxis: options.aboveAxis,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
@@ -4709,7 +4711,7 @@
 
             view.decorators.push(
                 new SVGOverlayDecorator(view),
-                new SVGPaintDecorator(view),
+                new SVGGradientDecorator(view),
                 new BarAnimationDecorator(view),
                 new PieAnimationDecorator(view),
                 new SVGClipAnimationDecorator(view)
@@ -5196,47 +5198,39 @@
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
-                id = element.options.id,
-                overlay = Chart.Overlays.build(element.options.overlay);
+                options = element.options,
+                id = options.id,
+                group,
+                overlay;
 
-            if (!overlay) {
-                return element;
-            }
-
+            if (options.overlay) {
             element.options.id = uniqueId();
 
-            var fillRotation = element.options.normalAngle || 0,
-                fillId = overlay.name + fillRotation,
-                group = view.createGroup(),
-                overlayElement = element.clone();
+                group = view.createGroup();
+                overlay = element.clone();
 
-            group.children.push(element, overlayElement);
+                group.children.push(element, overlay);
 
-            overlayElement.options.id = id;
-            overlayElement.options.fill = deepExtend(overlay, {
-                    id: fillId,
-                rotation: fillRotation
-                });
+                overlay.options.id = id;
+                overlay.options.fill = options.overlay;
 
             return group;
+            } else {
+                return element;
         }
     }
+    }
 
-    function SVGPaintDecorator(view) {
+    function SVGGradientDecorator(view) {
         this.view = view;
     }
 
-    SVGPaintDecorator.prototype = /** @ignore */ {
+    SVGGradientDecorator.prototype = /** @ignore */ {
         decorate: function(element) {
             var decorator = this,
                 options = element.options;
 
             options.fill = decorator.getPaint(options.fill);
-
-            // Recursively decorate all child elements, e.g. overlays
-            for(var i = 0; i < element.children.length; i++) {
-                decorator.decorate(element.children[i]);
-            }
 
             return element;
         },
@@ -5245,15 +5239,17 @@
             var decorator = this,
                 view = decorator.view,
                 definitions = view.definitions,
-                gradient,
-                gradientId;
+                overlay,
+                overlayId,
+                gradient;
 
-            if (typeof paint === OBJECT) {
-                gradientId = paint.id;
-                gradient = definitions[gradientId];
+            if (paint && paint.name) {
+                overlay = Chart.Overlays.build(paint);
+                overlayId = overlay.id;
+                gradient = definitions[overlayId];
                 if (!gradient) {
-                    gradient = view.createGradient(paint);
-                    definitions[gradientId] = gradient;
+                    gradient = view.createGradient(overlay);
+                    definitions[overlayId] = gradient;
                 }
 
                 return "url(#" + gradient.options.id + ")";
@@ -6636,10 +6632,20 @@
     }
 
     Chart.Overlays = {
+        cache: {},
         build: function(options) {
-            var overlay;
-            if (options && (overlay = Chart.Overlays[options.name])) {
-                overlay = deepExtend({}, overlay, options);
+            var hashCode,
+                overlay,
+                definition;
+
+            if (options) {
+                hashCode = getHash(options);
+                overlay = Chart.Overlays.cache[hashCode];
+                definition = Chart.Overlays[options.name];
+                if (!overlay && definition) {
+                    overlay = deepExtend({ id: uniqueId() }, definition, options);
+                    Chart.Overlays.cache[hashCode] = overlay;
+            }
             }
 
             return overlay;
@@ -6848,7 +6854,7 @@
         SVGOverlayDecorator: SVGOverlayDecorator,
         SVGLinearGradient: SVGLinearGradient,
         SVGRadialGradient: SVGRadialGradient,
-        SVGPaintDecorator: SVGPaintDecorator,
+        SVGGradientDecorator: SVGGradientDecorator,
         SVGClipAnimationDecorator: SVGClipAnimationDecorator,
         SVGSector: SVGSector,
         VMLView: VMLView,
