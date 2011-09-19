@@ -3089,7 +3089,8 @@
             },
             animation: {
                 type: BAR
-            }
+        },
+            opacity: 1
         },
 
         render: function() {
@@ -5687,7 +5688,7 @@
             gradient.template = VMLLinearGradient.template;
             if (!gradient.template) {
                 gradient.template = VMLLinearGradient.template = template(
-                    "<kvml:fill type='gradient' angle='<#= d.options.rotation #>' " +
+                    "<kvml:fill type='gradient' angle='<#= 270 - d.options.rotation #>' " +
                     "colors='<#= d.renderColors() #>' opacity='<#= d.options.opacity #>' />"
                 );
             }
@@ -5733,18 +5734,10 @@
                 return element;
             }
 
-            var fillRotation = 270 - options.normalAngle || 0,
-                fillOpacity = options.fillOpacity;
-
-            if (!defined(fillOpacity)) {
-                fillOpacity = 1;
-            }
-
-            options.overlay = "";
+            delete options.overlay;
             options.fill = deepExtend(
                 blendGradient(options.fill, overlay),
-                { rotation: fillRotation,
-                  opacity: fillOpacity }
+                { opacity: options.fillOpacity }
             );
 
             return element;
