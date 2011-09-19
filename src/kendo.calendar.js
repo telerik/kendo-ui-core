@@ -88,7 +88,7 @@
             }
         },
 
-        _focusValue: function(value) {
+        _focusCell: function(value) {
             //should refactor
             var that = this,
                 view = calendar[that._currentView],
@@ -314,7 +314,7 @@
         }
     });
 
-    kendo.ui.Calendar = Calendar;
+    ui.plugin("Calendar", Calendar);
 
     var calendar = {
         firstDayOfMonth: function (date) {

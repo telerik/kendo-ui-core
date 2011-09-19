@@ -51,17 +51,21 @@
         </table>
         <button id="render">Render</button>
         <hr/>
+        <input id="datepicker" style="width: 150px"/>
+        <hr/>
         <div id="kendoCalendar"/>
 
         <script>
             $(document).ready(function() {
                 window.test = new kendo.ui.Calendar($("#kendoCalendar"));
 
-                window.dv = new kendo.ui.DateView({
+                window.dv = new kendo.DateView({
                     min: new Date(1900, 0, 1),
                     max: new Date(2100, 0, 1),
                     anchor: $("input").eq(0)
                 });
+
+                $("#datepicker").kendoDatePicker();
             });
         </script>
     </body>

@@ -6,5 +6,9 @@ tests.push(
     {
         page: "datepicker/api.html",
         title: "datepicker api"
+    },
+    {
+        page: "datepicker/navigation.html",
+        title: "datepicker navigation"
     }
 );
