@@ -924,12 +924,21 @@
                 module("VMLGradientDecorator", {
                     setup: function() {
                         view = new Chart.VMLView();
+                        Chart.Overlays.test = gradient;
+                    },
+                    teardown: function() {
+                        Chart.Overlays.test = null;
                     }
                 });
 
-                test("applies gradient fill", function() {
+                test("applies gradient fill from definition", function() {
                     var path = view.createRect(new Box2D(), { fill: gradient });
                     ok(path.fill instanceof Chart.VMLLinearGradient);
+                });
+
+                test("applies gradient fill from name", function() {
+                    var path = view.createRect(new Box2D(), { fill: { name: "test" } });
+                    equals(path.fill.options.stops.length, 2);
                 });
 
                 test("preserves solid fill", function() {
