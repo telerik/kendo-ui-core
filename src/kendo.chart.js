@@ -5759,8 +5759,14 @@
                 options = element.options,
                 fill = options.fill;
 
+            if (fill) {
+                if (fill.name) {
+                    fill = Chart.Overlays.build(fill);
+                }
+
             if (typeof fill === OBJECT) {
                 element.fill = view.createGradient(fill);
+            }
             }
 
             return element;
