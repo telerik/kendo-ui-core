@@ -5,7 +5,7 @@
         transitions = kendo.support.transitions;
 
     if (os && !os.ios) {
-        $(document.documentElement).removeClass('ios').addClass(os.name);
+        $(document.documentElement).removeClass('k-ios').addClass("k-" + os.name);
     }
 
     $(document).ready(function () {
