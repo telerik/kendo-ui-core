@@ -248,6 +248,11 @@
                     equals(path.options.fill, "url(#testGradient)");
                 });
 
+                test("ignores non-existent gradient fill", function() {
+                    var path = view.createRect(new Box2D(), { fill: { name: "NA" } });
+                    equals(path.options.fill, "");
+                });
+
                 test("preserves solid fill", function() {
                     var path = view.createRect(new Box2D(), { fill: "#f00" });
                     equals(path.options.fill, "#f00");

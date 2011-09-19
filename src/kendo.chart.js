@@ -5246,6 +5246,7 @@
 
             if (paint && paint.name) {
                 overlay = Chart.Overlays.build(paint);
+                if (overlay) {
                 overlayId = overlay.id;
                 gradient = definitions[overlayId];
                 if (!gradient) {
@@ -5254,6 +5255,9 @@
                 }
 
                 return "url(#" + gradient.options.id + ")";
+            } else {
+                    return "";
+                }
             } else {
                 return paint;
             }
