@@ -31,7 +31,7 @@
                 },
                 teardown: function() {
                     $.mockjaxClear();
-                    $("meta,.kendo-view").remove();
+                    $("meta,.k-view").remove();
                 }
             });
 
@@ -52,12 +52,12 @@
                 var viewportTag = $("meta[name=viewport]");
 
                 equals(viewportTag.length, 1);
-                equals(viewportTag.attr("content"), "width=device-width");
+                equals(viewportTag.attr("content"), "minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no");
             });
 
             test("switchView() adds view to page", function() {
                 kendo.mobile.switchView("foo", function() {
-                    equals($('.kendo-view').length, 1);
+                    equals($('.k-view').length, 1);
                 });
             });
 
@@ -65,7 +65,8 @@
                 kendo.mobile.switchView("foo", function() {
                     start();
 
-                    equals($('.kendo-view')[0].innerHTML, "mockjax response");
+                    console.log($('.k-view'));
+                    equals($('.k-view')[0].innerHTML, "mockjax response");
                 });
             });
 
@@ -74,7 +75,7 @@
                     kendo.mobile.switchView("foo", function() {
                         start();
 
-                        equals($('.kendo-view').length, 1);
+                        equals($('.k-view').length, 1);
                     });
                 });
             });
@@ -118,13 +119,13 @@
                 $.mockjax({
                     url: "foo",
                     responseText: "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n"
-                                + "<div class='kendo-view'></div>\n\u000a</body>\n</html>"
+                                + "<div class='k-view'></div>\n\u000a</body>\n</html>"
                 });
 
                 kendo.mobile.switchView("foo", function() {
                     start();
 
-                    equals($(".kendo-view").length, 1);
+                    equals($(".k-view").length, 1);
                 });
             });
 
@@ -135,14 +136,14 @@
                     url: "foo",
                     responseText: "<!doctype html>"
                                 + "<html><body>"
-                                + "<div class='kendo-view'>1</div><div class='kendo-view'>2</div>"
+                                + "<div class='k-view'>1</div><div class='k-view'>2</div>"
                                 + "</body></html>"
                 });
 
                 kendo.mobile.switchView("foo", function() {
                     start();
 
-                    equals($(".kendo-view").length, 2);
+                    equals($(".k-view").length, 2);
                 });
             });
         </script>
