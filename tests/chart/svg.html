@@ -236,10 +236,10 @@
                 module("SVGView / Gradient fill", {
                     setup: function() {
                         view = new Chart.SVGView();
-                        Chart.Overlays.test = gradient;
+                        Chart.Gradients.test = gradient;
                     },
                     teardown: function() {
-                        Chart.Overlays.test = null;
+                        Chart.Gradients.test = null;
                     }
                 });
 

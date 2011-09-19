@@ -5245,7 +5245,7 @@
                 gradient;
 
             if (paint && paint.name) {
-                overlay = Chart.Overlays.build(paint);
+                overlay = Chart.Gradients.build(paint);
                 if (overlay) {
                 overlayId = overlay.id;
                 gradient = definitions[overlayId];
@@ -5732,7 +5732,7 @@
     VMLOverlayDecorator.prototype = /** @ignore */ {
         decorate: function(element) {
             var options = element.options,
-                overlay = Chart.Overlays.build(element.options.overlay);
+                overlay = Chart.Gradients.build(element.options.overlay);
 
             if (!overlay || overlay.type === RADIAL) {
                 return element;
@@ -5761,7 +5761,7 @@
 
             if (fill) {
                 if (fill.name) {
-                    fill = Chart.Overlays.build(fill);
+                    fill = Chart.Gradients.build(fill);
                 }
 
             if (typeof fill === OBJECT) {
@@ -6634,7 +6634,7 @@
         return result;
     }
 
-    Chart.Overlays = {
+    Chart.Gradients = {
         cache: {},
         build: function(options) {
             var hashCode,
@@ -6643,11 +6643,11 @@
 
             if (options) {
                 hashCode = getHash(options);
-                overlay = Chart.Overlays.cache[hashCode];
-                definition = Chart.Overlays[options.name];
+                overlay = Chart.Gradients.cache[hashCode];
+                definition = Chart.Gradients[options.name];
                 if (!overlay && definition) {
                     overlay = deepExtend({ id: uniqueId() }, definition, options);
-                    Chart.Overlays.cache[hashCode] = overlay;
+                    Chart.Gradients.cache[hashCode] = overlay;
             }
             }
 
