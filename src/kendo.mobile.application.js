@@ -99,7 +99,7 @@
 
                         viewPage = $(".k-view").eq(viewPageIndex + 1);
                     } else { // partial content was served
-                        viewPage = $("<div class='kendo-view' />").appendTo("body");
+                        viewPage = $("<div class='k-view' />").appendTo("body");
 
                         viewPage[0].innerHTML = content;
                     }
