@@ -8,6 +8,8 @@
     OPEN = "open",
     CLOSE = "close",
     CHANGE = "change",
+    NAVIGATE = "navigate",
+    DIV = "<div />",
     keys = kendo.keys;
 
     var DateView = function(options) {
@@ -15,7 +17,7 @@
             div;
 
         if (!calendar) {
-            div = $('<div/>');
+            div = $(DIV);
             div.appendTo(document.body);
             calendar = new ui.Calendar(div);
             popup = new ui.Popup(div);
@@ -53,32 +55,26 @@
                 calendar._focusCell(that._viewedValue);
 
 
-                calendar.unbind(CHANGE).bind(CHANGE, options);
+                calendar.unbind(CHANGE)
+                        .unbind(NAVIGATE)
+                        .bind(NAVIGATE,function() {
+                            that._viewedValue = new Date(calendar._viewedValue);
+                            calendar._focusCell(calendar._viewedValue);
+                        })
+                        .bind(CHANGE, options);
 
                 calendar.element.data(DATEVIEW, this);
             }
-        },
-
-        open: function() {
-            var that = this;
-
-            that._initCalendar();
-            that.popup.open();
-        },
-
-        close: function() {
-            this.popup.close();
         },
 
         navigate: function(e) {
             var that = this,
                 key = e.keyCode,
                 calendar = that.calendar,
-                dateString,
                 viewName = calendar._currentView,
                 view = kendo.calendar[viewName],
                 viewedValue = that._viewedValue,
-                value;
+                dateString, value;
 
             if (e.ctrlKey) {
                 if (keys.RIGHT == key) {
@@ -90,23 +86,25 @@
                 } else if (keys.DOWN == key) {
                     navigateDown(calendar);
                 }
-            }
+                //calendar._focusCell(viewedValue);
+            } else {
+                if (keys.RIGHT == key) {
+                    value = 1;
+                } else if (keys.LEFT == key) {
+                    value = -1;
+                } else if (keys.UP == key) {
+                    value = viewName === "month" ? -7 : -4;
+                } else if (keys.DOWN == key) {
+                    value = viewName === "month" ? 7 : 4;
+                } else if (keys.ENTER == key) {
+                    navigateDown(calendar);
+                    //calendar._focusCell(viewedValue);
+                }
 
-            if (keys.RIGHT == key) {
-                value = 1;
-            } else if (keys.LEFT == key) {
-                value = -1;
-            } else if (keys.UP == key) {
-                value = viewName === "month" ? -7 : -4;
-            } else if (keys.DOWN == key) {
-                value = viewName === "month" ? 7 : 4;
-            } else if (keys.ENTER == key) {
-                navigateDown(calendar);
-            }
-
-            if (value) {
-                view.setDate(viewedValue, value);
-                calendar._focusCell(viewedValue);
+                if (value) {
+                    view.setDate(viewedValue, value);
+                    calendar._focusCell(viewedValue);
+                }
             }
         },
 
@@ -127,24 +125,28 @@
 
     var DatePicker = Component.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                dateView;
 
             Component.fn.init.call(that, element, options);
             options = that.options;
 
-            that._wrapper();
-            that._icon();
-
-            that.bind("change", options);
-
-            that.dateView = new DateView($.extend({}, options, {
+            that.dateView = dateView = new DateView($.extend({}, options, {
                 anchor: that.element,
                 change: function() {
-                    that.value(that.dateView.value());
-                    that.trigger("change");
+                    that.value(dateView.value());
+                    that.trigger(CHANGE);
                     that.close();
                 }
             }));
+
+            that._wrapper();
+            that._icon();
+
+            that.element.addClass("k-input")
+                .bind("keydown", $.proxy(dateView.navigate, dateView));
+
+            that.bind(CHANGE, options);
         },
 
         options: {
@@ -154,11 +156,14 @@
         },
 
         open: function() {
-            this.dateView.open();
+            var dateView = this.dateView;
+
+            dateView._initCalendar();
+            dateView.popup.open();
         },
 
         close: function() {
-            this.dateView.close();
+            this.dateView.popup.close();
         },
 
         value: function() {
@@ -168,6 +173,7 @@
         _icon: function() {
             var that = this,
                 element = that.element,
+                dateView = that.dateView,
                 icon;
 
             icon = element.next("span.k-select");
@@ -177,10 +183,9 @@
             }
 
             icon.bind("click", function() {
-                that.dateView.popup.toggle();
+                dateView._initCalendar();
+                dateView.popup.toggle();
             });
-            //that.icon = icon;
-            that.element.addClass("k-input");
         },
 
         _wrapper: function() {
@@ -191,8 +196,8 @@
             wrapper = element.parents(".k-datepicker");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap("<div />").parent().addClass("k-picker-wrap k-state-default");
-                wrapper = wrapper.wrap("<div />").parent();
+                wrapper = element.wrap(DIV).parent().addClass("k-picker-wrap k-state-default");
+                wrapper = wrapper.wrap(DIV).parent();
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;

@@ -19,7 +19,7 @@
         <ol id="qunit-tests"></ol>
         <script>
 
-            var DateView = kendo.ui.DateView,
+            var DateView = kendo.DateView,
                 keys = kendo.keys;
 
             module("kendo.ui.DatePicker API", {
@@ -346,6 +346,18 @@
                 equal(dv.calendar.calls("navigateToFuture"), 1);
             });
 
+            test("Enter should focus viewedDate", function() {
+                var event = { keyCode: keys.ENTER, preventDefault: $.noop },
+                    dv = new DateView({value: new Date(2000, 10, 10)});
+
+                dv._initCalendar();
+
+                dv.calendar.navigate(new Date(2000, 10, 10), "year");
+                dv.navigate(event);
+
+                equal(dv.calendar.view.find(".k-state-focused").length, 1);
+            });
+
             test("Enter should navigate down", function() {
                 var event = { keyCode: keys.ENTER, preventDefault: $.noop },
                     dv = new DateView({value: new Date(2000, 10, 10)});
@@ -369,10 +381,22 @@
                 dv.calendar._focusCell(focused);
                 dv.navigate(event);
 
-                console.log(dv.calendar.args("navigateDown")[0]);
-                console.log(focused);
-
                 equal(+dv.calendar.args("navigateDown")[0], +focused);
+            });
+
+            test("keydown triggered from datepicker should call navigate method", function() {
+                var input = $("<input />").appendTo(document.body),
+                    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                try {
+                    stub(datepicker.dateView.calendar, "_focusCell");
+                    input.trigger({ type:"keydown", keyCode: 40});
+
+                    equal(datepicker.dateView.calendar.calls("_focusCell"), 1);
+
+                } finally {
+                    input.parents(".k-widget").andSelf().remove();
+                }
             });
 
         </script>
