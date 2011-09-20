@@ -20,7 +20,7 @@
                     render: function() { return "Content"; }
                 },
                 gradient = {
-                    id: "gradient",
+                    id: "testGradient",
                     type: "linear",
                     rotation: 0,
                     stops: [{
@@ -165,6 +165,29 @@
                     equals(circle.options.strokeWidth, 2);
                 });
 
+                test("createSector returns SVGSector", function() {
+                    var sector = view.createSector();
+                    ok(sector instanceof Chart.SVGSector);
+                });
+
+                test("createSector sets fill color", function() {
+                    var sector = view.createSector({ }, { fill: "#cf0" });
+
+                    equals(sector.options.fill, "#cf0");
+                });
+
+                test("createSector sets stroke color", function() {
+                    var sector = view.createSector({ }, { stroke: "#cf0" });
+
+                    equals(sector.options.stroke, "#cf0");
+                });
+
+                test("createSector sets stroke width", function() {
+                    var sector = view.createSector({ }, { strokeWidth: 2});
+
+                    equals(sector.options.strokeWidth, 2);
+                });
+
                 test("renderElement returns element", function() {
                     element = view.renderElement({
                         render: function() {
@@ -213,12 +236,21 @@
                 module("SVGView / Gradient fill", {
                     setup: function() {
                         view = new Chart.SVGView();
+                        Chart.Gradients.test = gradient;
+                    },
+                    teardown: function() {
+                        Chart.Gradients.test = null;
                     }
                 });
 
                 test("applies gradient fill", function() {
-                    var path = view.createRect(new Box2D(), { fill: gradient });
-                    equals(path.options.fill, "url(#gradient)");
+                    var path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
+                    equals(path.options.fill, "url(#testGradient)");
+                });
+
+                test("ignores non-existent gradient fill", function() {
+                    var path = view.createRect(new Box2D(), { fill: { gradient: "NA" } });
+                    equals(path.options.fill, "");
                 });
 
                 test("preserves solid fill", function() {
@@ -227,14 +259,14 @@
                 });
 
                 test("defines gradient", function() {
-                    var path = view.createRect(new Box2D(), { fill: gradient });
+                    var path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
                     ok(view.definitions[gradient.id]);
                 });
 
                 test("reuses existing gradient definition", function() {
-                    var path = view.createRect(new Box2D(), { fill: gradient });
+                    var path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
                     view.definitions[gradient.id] = { options: { id: "existingGradient" } };
-                    path = view.createRect(new Box2D(), { fill: gradient });
+                    path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
 
                     equals(path.options.fill, "url(#existingGradient)");
                 });
@@ -595,6 +627,66 @@
             })();
 
             (function() {
+                var sector;
+
+                module("SVGSector", {
+                    setup: function() {
+                        sector = new Chart.SVGSector({
+                            angle: 20,
+                            r: 135,
+                            cx: 135,
+                            cy: 135,
+                            startAngle: 90
+                        });
+                    }
+                });
+
+                test("renders sector tag", function() {
+                    equal(sector.render().replace(/\<path.*?\>/, "<path>"),
+                        "<path></path>");
+                });
+
+                test("renders radius", function() {
+                    ok(sector.render().indexOf("A135 135") > -1);
+                });
+
+                test("renders fill color", function() {
+                    sector.options.fill = "#f00";
+                    ok(sector.render().indexOf("fill='#f00'") > -1);
+                });
+
+                test("renders empty fill when no fill is set", function() {
+                    sector.options.fill = "";
+                    ok(sector.render().indexOf("fill='none") > -1);
+                });
+
+                test("renders stroke color", function() {
+                    sector.options.stroke = "#f00";
+                    ok(sector.render().indexOf("stroke='#f00'") > -1);
+                });
+
+                test("renders stroke width", function() {
+                    sector.options.strokeWidth = "2";
+                    ok(sector.render().indexOf("stroke-width='2'") > -1);
+                });
+
+                test("renders id", function() {
+                    sector.options.id = "id";
+                    ok(sector.render().indexOf("id='id'") > -1);
+                });
+
+                test("renders render curve with angle < 180 degrese", function() {
+                    ok(sector.render().indexOf("A135 135 0 0,1 181.173 8.141") > -1);
+                });
+
+                test("renders render curve with angle > 180 degrese", function() {
+                    sector = new Chart.SVGSector({ angle: 200, r: 135, cx: 135, cy: 135, startAngle: 90 });
+                    ok(sector.render().indexOf("A135 135 0 1,1 88.827 261.859") > -1);
+                });
+
+            })();
+
+            (function() {
                 var view,
                     rect,
                     group,
@@ -607,8 +699,9 @@
                         view = new Chart.SVGView();
                         rect = new Chart.SVGPath({
                             id: ID,
-                            overlay: "glass",
-                            normalAngle: 90
+                            overlay: {
+                                gradient: "glass"
+                            }
                         });
                         decorator = new Chart.SVGOverlayDecorator(view);
                         group = decorator.decorate(rect);
@@ -628,14 +721,6 @@
                     ok(rect.options.id.length > 0);
                 });
 
-                test("generates unique id for gradient", function() {
-                    equals(overlay.options.fill.id, "glass90");
-                });
-
-                test("applies rotation transform to fill gradient", function() {
-                    equals(overlay.options.fill.rotation, 90);
-                });
-
                 test("does not decorate element if no overlay specified", function() {
                     var rect = view.createRect(new Box2D());
                     ok(rect instanceof Chart.SVGPath);
@@ -648,30 +733,27 @@
                     rect,
                     decorator;
 
-                module("SVGPaintDecorator", {
+                module("SVGGradientDecorator", {
                     setup: function() {
                         view = new Chart.SVGView();
                         rect = new Chart.SVGPath({
-                            fill: gradient
+                            fill: {
+                                gradient: "glass",
+                                id: "fillId"
+                            }
                         });
-                        decorator = new Chart.SVGPaintDecorator(view);
+                        decorator = new Chart.SVGGradientDecorator(view);
                     }
                 });
 
-                test("resolves overlay fill paint", function() {
+                test("sets fill id", function() {
                     decorator.decorate(rect);
-                    equals(rect.options.fill, "url(#gradient)");
-                });
-
-                test("resolves overlay fill paint recursively", function() {
-                    rect.children.push(rect.clone());
-                    decorator.decorate(rect);
-                    equals(rect.children[0].options.fill, "url(#gradient)");
+                    equals(rect.options.fill, "url(#fillId)");
                 });
 
                 test("registers gradient definition", function() {
                     decorator.decorate(rect);
-                    ok(view.definitions.gradient);
+                    ok(view.definitions.fillId);
                 });
 
             })();

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+            var Chart = kendo.ui.Chart,
+                Box2D = Chart.Box2D,
+                categoriesCount = Chart.categoriesCount,
+                chartBox = new Box2D(0, 0, 800, 600),
+                plotArea,
+                pieChart,
+                root,
+                view;
+
+            function setupPieChart(plotArea, options) {
+                view = new ViewStub();
+
+                pieChart = new Chart.PieChart(plotArea, options);
+
+                root = new Chart.RootElement();
+                root.append(pieChart);
+
+                pieChart.reflow(chartBox);
+                pieChart.getViewElements(view);
+            }
+
+            (function() {
+                var values = { data: [1, 2] },
+                    dataValues = {
+                       data: [
+                           {
+                               value: 1,
+                               name: "A"
+                           }, {
+                               value: 2,
+                               name: "B"
+                           }
+                       ]
+                    },
+                    TOLERANCE = 0.1;
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    options: {
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    }
+                });
+
+                // ------------------------------------------------------------
+                module("Pie Chart / Array with values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupPieChart(plotArea, { series: [ values ] });
+                    }
+                });
+
+                test("Creates sectors for pieChart data points", function() {
+                    equal(pieChart.sectors.length, values.data.length);
+                });
+
+                test("Reports number of categories", function() {
+                    equal(categoriesCount(pieChart.options.series), values.data.length);
+                });
+
+                test("sectors have set angle", function() {
+                    $.each(pieChart.sectors, function() {
+                        ok(this.angle);
+                    });
+                });
+
+                test("sectors have set startAngle", function() {
+                    $.each(pieChart.sectors, function() {
+                        ok(this.angle);
+                    });
+                });
+
+                test("sectors have set owner", function() {
+                    ok(pieChart.sectors[0].owner === pieChart);
+                });
+
+                test("sets sector category", function() {
+                    equal(pieChart.sectors[0].category, "");
+                });
+
+                test("sets sector series", function() {
+                    ok(pieChart.sectors[0].series === values);
+                });
+
+                test("sets sector series index", function() {
+                    ok(pieChart.sectors[0].seriesIx === 0);
+                });
+
+                test("sets sector dataItem", function() {
+                    equal(typeof pieChart.sectors[0].dataItem, "object");
+                });
+
+                // ------------------------------------------------------------
+                module("Pie Chart / Array with items", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupPieChart(plotArea, { series: [ dataValues ] });
+                    }
+                });
+
+                test("sets sector category", function() {
+                    equal(pieChart.sectors[0].category, "A");
+                });
+
+                test("sectors have set owner", function() {
+                    ok(pieChart.sectors[0].owner === pieChart);
+                });
+
+                test("sets sector series", function() {
+                    ok(pieChart.sectors[0].series === dataValues);
+                });
+
+                test("sets sector series index", function() {
+                    ok(pieChart.sectors[0].seriesIx === 0);
+                });
+
+                test("sets sector dataItem", function() {
+                    equal(typeof pieChart.sectors[0].dataItem, "object");
+                });
+            })();
+
+
+            (function() {
+                var PieSector = Chart.PieSector,
+                    point,
+                    box,
+                    label,
+                    root,
+                    VALUE = 1,
+                    CATEGORY = "A",
+                    SERIES_NAME = "series";
+
+                function createPoint(options) {
+                    sector = new PieSector(VALUE, options);
+
+                    sector.dataItem = { value: VALUE };
+
+                    box = new Box2D(0, 0, 100, 100);
+                    sector.reflow(box);
+
+                    root = new Chart.RootElement();
+                    root.append(sector);
+                }
+
+                // ------------------------------------------------------------
+                module("Pie Sector", {
+                    setup: function() {
+                        createPoint();
+                    }
+                });
+
+                test("fills target box", function() {
+                    sameBox(sector.box, box);
+                });
+
+                test("sets sector border color", function() {
+                    createPoint({ border: { color: "red" } });
+                    equals(sector.options.border.color, "red");
+                });
+
+                test("sets pie border width", function() {
+                    createPoint({ border: { width: 4 } });
+                    equals(sector.options.border.width, 4);
+                });
+
+            })();
+
+            (function() {
+                var chart,
+                    model,
+                    title,
+                    legend,
+                    plotArea
+                    MARGIN = 10;
+
+                module("Pie Chart Model", {
+                    setup: function() {
+                        $("#container").kendoChart({
+                            title: {
+                                text: "Chart Title"
+                            },
+                            series: [{
+                                name: "Value",
+                                type: "pie",
+                                data: [
+                                    {
+                                        value: 100,
+                                        name: "Value A"
+                                    }, {
+                                        value: 200,
+                                        name: "Value B"
+                                    }, {
+                                        value: 300,
+                                        name: "Value C"
+                                    }
+                                ]
+                            }],
+                            categoryAxis: {
+                                categories: ["Alpha", "Beta", "Charlie"]
+                            },
+                            chartArea: {
+                                margin: 0
+                            }
+                        });
+
+                        chart = $("#container").data("kendoChart");
+                        model = chart._model;
+                        title = model.children[0];
+                        legend = model.children[1];
+                        plotArea = model.children[2];
+                    },
+                    teardown: function() {
+                        $("#container").empty();
+                    }
+                });
+
+                test("model is a RootElement", function() {
+                    ok(model instanceof Chart.RootElement);
+                });
+
+                test("title is created", function() {
+                    ok(title instanceof Chart.Title);
+                });
+
+                test("title text is set", function() {
+                    equal(title.options.text, "Chart Title");
+                });
+
+                test("title box is positioned at top", function() {
+                    equal(title.box.y1, 0);
+                });
+
+                test("legend is created", function() {
+                    ok(legend instanceof Chart.Legend);
+                });
+
+                test("legend series are populated", function() {
+                    equal(legend.options.items[0].name, "Value A");
+                });
+
+                test("legend is positioned at right", function() {
+                    equal(legend.box.x1,
+                        model.box.width() - legend.box.width() -MARGIN);
+                });
+
+                test("legend is positioned at vertical center", function() {
+                    var titleHeight = title.box.height(),
+                        vCenter = titleHeight +
+                                  ((model.box.height() - titleHeight - legend.box.height()) / 2);
+                    equal(legend.box.y1, vCenter);
+                });
+
+                test("plotArea is created", function() {
+                    ok(plotArea instanceof Chart.PlotArea);
+                });
+
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container">
+        </div>
+    </body>
+</html>
