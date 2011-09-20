@@ -3497,7 +3497,7 @@
             for (i = 0; i < childrenLength; i++) {
                 children[i].reflow(categorySlots[i]);
             }
-       }
+        }
     });
 
     var ShapeElement = BoxElement.extend({
@@ -3929,7 +3929,7 @@
                     label.orientation = LEFT;
                 } else {
                     label.orientation = RIGHT;
-            }
+                }
 
                 label.reflow(new Box2D(0, lp.y - label.box.height() / 2, 0, lp.y));
             }
@@ -4057,7 +4057,7 @@
 
             for(i = 0; i < length; i++) {
                 sum += chart.pointValue(data[i]);
-                }
+            }
 
             return sum;
         },
@@ -4117,7 +4117,7 @@
                 } else {
                     leftSideLabels.push(label);
                     }
-            }
+                }
             }
 
             if (leftSideLabels.length > 0) {
@@ -4125,7 +4125,7 @@
             }
 
             if (rightSideLabels.length > 0) {
-            chart.rightLabelsReflow(rightSideLabels);
+                chart.rightLabelsReflow(rightSideLabels);
             }
 
             chart.box = newBox;
@@ -4184,8 +4184,8 @@
                 while(remaining > 0 && (left >= 0 || right < count)) {
                     remaining = chart._takeDistance(distances, i, --left, remaining);
                     remaining = chart._takeDistance(distances, i, ++right, remaining);
-                    }
-                    }
+                }
+            }
 
             chart.reflowLabels(distances, labels);
         },
@@ -4196,7 +4196,7 @@
                 amount -= available;
                 distances[position] -= available;
                 distances[anchor] += available;
-                    }
+            }
 
             return amount;
         },
@@ -4240,7 +4240,7 @@
                 }
 
                 boxY += box.height();
-        }
+            }
         },
 
         getViewElements: function(view) {
@@ -4281,7 +4281,7 @@
                         crossing = intersection(centerPoint, start, middle, end) || new Point2D(end.x + 4, end.y);
                         crossing.x = math.max(crossing.x, end.x + 4);
                         end.x2 += 2;
-        }
+                    }
 
                     start = calculateSectorPoint(angle, sector.cx, sector.cy, sector.r + connector.padding);
                     points.push(start);
