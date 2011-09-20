@@ -6007,9 +6007,6 @@
         },
 
         play: function() {
-            // Execute setup immediately to avoid flicker
-            this.setup();
-
             var anim = this,
                 options = anim.options,
                 actor = anim.element.clone(),
