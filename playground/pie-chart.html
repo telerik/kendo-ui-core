@@ -36,8 +36,7 @@
                     type: "pie",
                     padding: 100,
                     labels: {
-                        visible: false,
-                        format: "{0:C}",
+                        visible: true,
                         font: "12px Arial, sans-serif"
                     }
                 },
@@ -45,23 +44,35 @@
                     name: "World",
                     data:[
                       {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
                           value: 1,
                           name: "Value B"
                       }, {
                           value: 1,
                           name: "Value H"
                       }, {
-                          value: 10,
-                          name: "Value F"
+                          value: 40,
+                          name: "Value B"
                       }, {
-                          value: 10,
+                          value: 40,
                           name: "Value H"
                       }, {
-                          value: 10,
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 1,
                           name: "Value H"
                       }, {
-                          value: 10,
-                          name: "Value H"
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value B"
                       }]
                 }],
                 chartArea: {
@@ -74,7 +85,9 @@
         });
 
         function refresh() {
-            $("#container").data("kendoChart").refresh();
+            var chart = $("#container").data("kendoChart");
+
+            chart.refresh();
         }
 /*
         $(document).ready(function() {
