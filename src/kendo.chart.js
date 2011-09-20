@@ -3856,7 +3856,7 @@
             },
             labels: {
                 visible: false,
-                distance: 25,
+                distance: 30,
                 font: ARIAL12
             },
             animation: {
@@ -3891,8 +3891,8 @@
                 sector.label = new TextBox(labelText,
                     deepExtend({
                         id: uniqueId(),
-                        align: CENTER,
-                        vAlign: CENTER
+                        align: "center",
+                        vAlign: ""
                     }, labels)
                 );
 
@@ -3923,17 +3923,15 @@
 
             if (label) {
                 lp = calculateSectorPoint(angle, sector.cx,
-                    sector.cy, sector.r + labelDistance * 2);
+                    sector.cy, sector.r + labelDistance);
 
                 if (angle < 90 || angle > 270) {
-                    label.reflow(new Box2D(lp.x - label.box.width(), lp.y,
-                        lp.x, lp.y));
                     label.orientation = LEFT;
                 } else {
-                    label.reflow(new Box2D(lp.x + label.box.width(), lp.y,
-                        lp.x, lp.y));
                     label.orientation = RIGHT;
             }
+
+                label.reflow(new Box2D(0, lp.y - label.box.height() / 2, 0, lp.y));
             }
         },
 
@@ -3993,7 +3991,12 @@
 
         options: {
             startAngle: 90,
-            padding: 15
+            padding: 15,
+            connector: {
+                width: 1,
+                color: "#939393",
+                padding: 4
+            }
         },
 
         render: function() {
@@ -4124,6 +4127,7 @@
             if (rightSideLabels.length > 0) {
             chart.rightLabelsReflow(rightSideLabels);
             }
+
             chart.box = newBox;
         },
 
@@ -4199,6 +4203,7 @@
 
         reflowLabels: function(distances, labels) {
             var chart = this,
+                connector = chart.options,
                 sectors = chart.sectors,
                 sector = sectors[0],
                 labelsCount = labels.length,
@@ -4208,7 +4213,7 @@
                 boxX,
                 box;
 
-            distances[0] += 1;
+            distances[0] += 2;
             distances[labelsCount - 1] -= 2;
             for (i = 0; i < labelsCount; i++) {
                 label = labels[i];
@@ -4223,12 +4228,102 @@
                     boxY + box.height(),
                     label.orientation);
 
-                label.reflow(new Box2D(boxX, boxY,
-                    boxX + box.width() * (label.orientation == RIGHT ? 1 : -1), boxY + box.height()));
+
+                if (label.orientation == RIGHT) {
+                    boxX = sector.r + sector.cx + label.options.distance;
+                    label.reflow(new Box2D(boxX + box.width(), boxY,
+                        boxX, boxY));
+                } else {
+                    boxX = sector.cx - sector.r - label.options.distance;
+                    label.reflow(new Box2D(boxX - box.width(), boxY,
+                        boxX, boxY));
+                }
+
                 boxY += box.height();
         }
+        },
+
+        getViewElements: function(view) {
+            var chart = this,
+                options = chart.options,
+                connector = options.connector,
+                sectors = chart.sectors,
+                count = sectors.length,
+                angle,
+                lines = [],
+                points,
+                sector,
+                label,
+                i;
+
+            for (i = 0; i < count; i++) {
+                sector = sectors[i];
+                angle = sector.startAngle + sector.angle / 2;
+                label = sector.label;
+
+                if (label) {
+                    points = [];
+
+                    var box = label.box,
+                        centerPoint = new Point2D(sector.cx, sector.cy),
+                        start = calculateSectorPoint(angle, sector.cx, sector.cy, sector.r),
+                        middle = new Point2D(box.x1, box.center().y),
+                        end,
+                        crossing;
+
+                    if (label.orientation == RIGHT) {
+                        end = new Point2D(box.x1 - connector.padding, box.center().y),
+                        crossing = intersection(centerPoint, start, middle, end) || new Point2D(end.x - 4, end.y);
+                        crossing.x = math.min(crossing.x, end.x - 4);
+                        end.x2 -= 2;
+                    } else {
+                        end = new Point2D(box.x2 + connector.padding, box.center().y),
+                        crossing = intersection(centerPoint, start, middle, end) || new Point2D(end.x + 4, end.y);
+                        crossing.x = math.max(crossing.x, end.x + 4);
+                        end.x2 += 2;
+        }
+
+                    start = calculateSectorPoint(angle, sector.cx, sector.cy, sector.r + connector.padding);
+                    points.push(start);
+                    points.push(crossing);
+                    points.push(end);
+
+                    lines.push(view.createPolyline(points, false, {
+                        id: "",
+                        stroke: connector.color,
+                        strokeWidth: connector.width
+                    }));
+                }
+            }
+
+            append(lines,
+                ChartElement.fn.getViewElements.call(chart, view));
+
+            return lines;
         }
     });
+
+
+    function intersection(a1, a2, b1, b2) {
+        var result,
+            ua_t = (b2.x - b1.x) * (a1.y - b1.y) - (b2.y - b1.y) * (a1.x - b1.x),
+            ub_t = (a2.x - a1.x) * (a1.y - b1.y) - (a2.y - a1.y) * (a1.x - b1.x),
+            u_b = (b2.y - b1.y) * (a2.x - a1.x) - (b2.x - b1.x) * (a2.y - a1.y),
+            ua,
+            ub;
+
+        if (u_b != 0) {
+            ua = (ua_t / u_b);
+            ub = (ub_t / u_b);
+
+            result = new Point2D(
+                a1.x + ua * (a2.x - a1.x),
+                a1.y + ua * (a2.y - a1.y)
+            );
+        }
+
+        return result;
+    }
 
     var PlotArea = ChartElement.extend({
         init: function(options) {
@@ -5065,7 +5160,7 @@
                 startAngle = circleSector.startAngle,
                 endAngle = circleSector.angle + startAngle,
                 isReflexAngle = (endAngle - startAngle) > 180,
-                r = circleSector.r,
+                r = math.max(circleSector.r, 0),
                 cx = circleSector.cx,
                 cy = circleSector.cy,
                 firstPoint = calculateSectorPoint(startAngle, cx, cy, r),
@@ -5553,7 +5648,7 @@
         renderPoints: function() {
             var sector = this,
                 circleSector = sector.circleSector,
-                r = round(circleSector.r),
+                r = math.max(round(circleSector.r), 0),
                 cx = round(circleSector.cx),
                 cy = round(circleSector.cy),
                 sa = -round((circleSector.startAngle + 180) * 65535),
@@ -6446,7 +6541,7 @@
             x = round(cx - (ax * r), COORD_PRECISION),
             y = round(cy - (ay * r), COORD_PRECISION);
 
-        return { x: x, y: y };
+        return new Point2D(x, y);
     }
 
     function calculateX(x, cx, cy, r, y1, y2, orientation) {
@@ -6795,8 +6890,7 @@
         return categories;
     }
 
-    jQuery.extend(jQuery.easing,
-    {
+    jQuery.extend(jQuery.easing, {
         easeOutElastic: function (n, d, first, diff) {
             var s = 1.70158,
                 p = 0,
