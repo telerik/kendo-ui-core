@@ -84,6 +84,21 @@
 
                 ok(called);
             });
+
+            test("click on cell should persist _viewedValue", function() {
+                var date = new Date(2000, 10, 22, 22, 22, 22),
+                    calendar = new Calendar(div, {
+                        value: date
+                    });
+
+                calendar.navigateUp(); //year view
+                calendar.navigateUp(); //decade view
+
+                div.find("tbody").find("td:not(.k-other-month):first").click(); //click "2000" cell
+                div.find("tbody").find("td:last").prev().click(); //click "Nov" cell
+
+                equal(+calendar._viewedValue, +date);
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

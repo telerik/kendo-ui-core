@@ -71,12 +71,28 @@
                 var date = new Date(2000, 10, 10),
                     dv1 = new DateView({value: date});
 
+                dv1._initCalendar();
                 date.setDate(20);
 
                 dv1.value(date);
 
                 equal(+dv1._value, +date);
                 equal(+dv1.calendar.value(), +date);
+            });
+
+            test("value method call calendar.value() only if it is assigned to the dateView", function() {
+                var date = new Date(2000, 10, 10),
+                    dv1 = new DateView({value: date});
+
+                dv1.calendar.element.data("dateView", {});
+                dv1.calendar.value(null);
+
+                date.setDate(20);
+                dv1.value(date);
+
+                equal(+dv1._value, +date);
+                notEqual(+dv1.calendar.value(), +date);
+
             });
 
             //DatePicker
@@ -101,6 +117,40 @@
                 equal(datepicker.dateView.popup.calls("close"), 1);
             });
 
+            test("value method should return value of the datepicker", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                ok(datepicker.value() === null);
+            });
+
+            test("value method should updated the input value", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
+                    date = new Date(),
+                    dateString = kendo.toString(date, datepicker.options.format);
+
+                datepicker.value(date);
+
+                equal(+datepicker._value, +date);
+                equal(input.val(), dateString);
+            });
+
+            test("empty input if set value ot null", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.value(null);
+
+                equal(input.val(), "");
+                equal(datepicker._value, null);
+            });
+
+            test("value method should call dateview.value()", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+                stub(datepicker.dateView, "value");
+
+                datepicker.value(new Date());
+
+                equal(datepicker.dateView.calls("value"), 1);
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

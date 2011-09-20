@@ -31,6 +31,24 @@
                 }
             });
 
+            test("navigate down should persist current viewedValue", function() {
+                var value = new Date(2000, 10, 10, 22, 22, 22),
+                    upEvent = { keyCode: keys.UP, ctrlKey: true, preventDefault: $.noop },
+                    downEvent = { keyCode: keys.DOWN, ctrlKey: true, preventDefault: $.noop },
+                    dv = new DateView({value: value});
+
+                dv._initCalendar();
+                dv.navigate(upEvent);
+                dv.navigate(upEvent);
+
+                dv.navigate(downEvent);
+                dv.navigate(downEvent);
+
+                console.log(value);
+                equal(+dv._viewedValue, +value);
+            });
+
+
             //MONTH View
             test("navigate should focus next day in month view", function() {
                 var event = { keyCode: keys.RIGHT, preventDefault: $.noop },
@@ -382,6 +400,44 @@
                 dv.navigate(event);
 
                 equal(+dv.calendar.args("navigateDown")[0], +focused);
+            });
+
+            test("Alt + Down should open the calendar", function() {
+                var event = { keyCode: keys.DOWN, altKey: true, preventDefault: $.noop },
+                    dv = new DateView();
+
+                stub(dv, "open");
+
+                dv.navigate(event);
+
+                equal(dv.calls("open"), 1);
+            });
+
+            test("Alt + UP should close the calendar", function() {
+                var event = { keyCode: keys.UP, altKey: true, preventDefault: $.noop },
+                    dv = new DateView();
+
+                stub(dv.popup, "close");
+
+                dv.navigate(event);
+
+                equal(dv.popup.calls("close"), 1);
+            });
+
+
+            test("keydown triggered from datepicker should call navigate method", function() {
+                var input = $("<input />").appendTo(document.body),
+                    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                try {
+                    stub(datepicker.dateView.calendar, "_focusCell");
+                    input.trigger({ type:"keydown", keyCode: 40});
+
+                    equal(datepicker.dateView.calendar.calls("_focusCell"), 1);
+
+                } finally {
+                    input.parents(".k-widget").andSelf().remove();
+                }
             });
 
             test("keydown triggered from datepicker should call navigate method", function() {

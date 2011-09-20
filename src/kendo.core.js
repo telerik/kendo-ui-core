@@ -574,7 +574,7 @@
 
         formatAndPrecision = standardFormatRegExp.exec(format);
 
-        //standard formatting
+        /* standard formatting */
         if (formatAndPrecision) {
             format = formatAndPrecision[1].toLowerCase();
 
