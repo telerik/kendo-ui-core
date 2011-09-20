@@ -67,34 +67,6 @@
                 equal(popup._events["close"][0], dv2.options.close);
             });
 
-            test("open calls popup.open method", function() {
-                var dv1 = new DateView();
-
-                stub(dv1.popup, "open");
-
-                dv1.open();
-
-                equals(dv1.popup.calls("open"), 1);
-            });
-
-            test("open calls _initCalendar", function() {
-                var dv1 = stub(new DateView({anchor: $("<input/>")}), "_initCalendar");
-
-                dv1.open();
-
-                equals(dv1.calls("_initCalendar"), 1);
-            });
-
-            test("close calls popup.close method", function() {
-                var dv1 = new DateView();
-
-                stub(dv1.popup, "close");
-
-                dv1.close();
-
-                equals(dv1.popup.calls("close"), 1);
-            });
-
             test("value method should call calendar value and set dateView._value", function() {
                 var date = new Date(2000, 10, 10),
                     dv1 = new DateView({value: date});
@@ -111,21 +83,22 @@
             test("open method opens the dateView", function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-                stub(datepicker.dateView, "open");
+                stub(datepicker.dateView, "_initCalendar");
+                stub(datepicker.dateView.popup, "open");
 
                 datepicker.open();
 
-                equal(datepicker.dateView.calls("open"), 1);
+                equal(datepicker.dateView.popup.calls("open"), 1);
             });
 
             test("close method should closes the dateView", function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-                stub(datepicker.dateView, "close");
+                stub(datepicker.dateView.popup, "close");
 
                 datepicker.close();
 
-                equal(datepicker.dateView.calls("close"), 1);
+                equal(datepicker.dateView.popup.calls("close"), 1);
             });
 
 

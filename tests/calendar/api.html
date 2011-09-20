@@ -443,7 +443,7 @@
                 var value = new Date(2000,10,10),
                     cal = new Calendar(div);
 
-                cal._focusValue(value);
+                cal._focusCell(value);
 
                 equal(cal.view.find(".k-state-focused").length, 1);
                 equal(cal.view.find(".k-state-focused").text(), "10");
@@ -456,7 +456,7 @@
 
                 cal.navigate(null, "year");
 
-                cal._focusValue(value);
+                cal._focusCell(value);
 
                 equal(cal.view.find(".k-state-focused").length, 1);
                 equal(cal.view.find(".k-state-focused").text(), "Nov");

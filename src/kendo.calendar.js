@@ -70,7 +70,7 @@
             }
         },
 
-        _setViewedDate: function(value) {
+        _setViewedValue: function(value) {
             var that = this,
             viewedValue = that._viewedValue,
             currentView = that._currentView;
@@ -109,7 +109,7 @@
         navigateToPast: function() {
             var that = this;
 
-            that._setViewedDate(-1);
+            that._setViewedValue(-1);
 
             that.navigate();
         },
@@ -117,7 +117,7 @@
         navigateToFuture: function() {
             var that = this;
 
-            that._setViewedDate(1);
+            that._setViewedValue(1);
 
             that.navigate();
         },
