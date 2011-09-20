@@ -5245,7 +5245,7 @@
                 gradient;
 
             if (paint && paint.name) {
-                overlay = Chart.Gradients.build(paint);
+                overlay = buildGradient(paint);
                 if (overlay) {
                 overlayId = overlay.id;
                 gradient = definitions[overlayId];
@@ -5732,7 +5732,7 @@
     VMLOverlayDecorator.prototype = /** @ignore */ {
         decorate: function(element) {
             var options = element.options,
-                overlay = Chart.Gradients.build(element.options.overlay);
+                overlay = buildGradient(element.options.overlay);
 
             if (!overlay || overlay.type === RADIAL) {
                 return element;
@@ -5761,7 +5761,7 @@
 
             if (fill) {
                 if (fill.name) {
-                    fill = Chart.Gradients.build(fill);
+                    fill = buildGradient(fill);
                 }
 
             if (typeof fill === OBJECT) {
@@ -6635,24 +6635,6 @@
     }
 
     Chart.Gradients = {
-        cache: {},
-        build: function(options) {
-            var hashCode,
-                overlay,
-                definition;
-
-            if (options) {
-                hashCode = getHash(options);
-                overlay = Chart.Gradients.cache[hashCode];
-                definition = Chart.Gradients[options.name];
-                if (!overlay && definition) {
-                    overlay = deepExtend({ id: uniqueId() }, definition, options);
-                    Chart.Gradients.cache[hashCode] = overlay;
-            }
-            }
-
-            return overlay;
-        },
         glass: {
                 type: LINEAR,
                 rotation: 0,
@@ -6695,6 +6677,25 @@
                 }]
         }
     };
+
+    function buildGradient(options) {
+            var hashCode,
+                overlay,
+                definition;
+
+            if (options) {
+                hashCode = getHash(options);
+                overlay = buildGradient.cache[hashCode];
+                definition = Chart.Gradients[options.name];
+                if (!overlay && definition) {
+                    overlay = deepExtend({ id: uniqueId() }, definition, options);
+                    buildGradient.cache[hashCode] = overlay;
+                }
+            }
+
+            return overlay;
+    }
+    buildGradient.cache = {};
 
     function template(definition) {
         return baseTemplate(definition, { useWithBlock: false, paramName: "d" });
@@ -6882,7 +6883,8 @@
         ExpandAnimation: ExpandAnimation,
         BarAnimation: BarAnimation,
         BarAnimationDecorator: BarAnimationDecorator,
-        categoriesCount: categoriesCount
+        categoriesCount: categoriesCount,
+        buildGradient: buildGradient
     });
 
     // Themes

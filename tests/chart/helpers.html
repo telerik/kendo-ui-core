@@ -425,23 +425,23 @@
             });
 
             // ------------------------------------------------------------
-            module("Chart Gradients");
+            module("buildGradient");
 
-            test("build returns overlay from name", function() {
-                equals(Chart.Gradients.build({ name: "glass" }).type, "linear");
+            test("builds gradient from name", function() {
+                equals(Chart.buildGradient({ name: "glass" }).type, "linear");
             });
 
-            test("build returns undefined when no overlay exists", function() {
-                equals(typeof Chart.Gradients.build("x"), "undefined");
+            test("returns undefined when no gradient exists", function() {
+                equals(typeof Chart.buildGradient("x"), "undefined");
             });
 
-            test("build applies options", function() {
-                equals(Chart.Gradients.build({ name: "glass", rotation: 90 }).rotation, 90);
+            test("applies options", function() {
+                equals(Chart.buildGradient({ name: "glass", rotation: 90 }).rotation, 90);
             });
 
-            test("build returns same gradient for same options", function() {
-                equals(Chart.Gradients.build({ name: "glass", rotation: 90 }).id,
-                       Chart.Gradients.build({ name: "glass", rotation: 90 }).id);
+            test("returns same gradient for same options", function() {
+                equals(Chart.buildGradient({ name: "glass", rotation: 90 }).id,
+                       Chart.buildGradient({ name: "glass", rotation: 90 }).id);
             });
 
         </script>
