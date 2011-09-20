@@ -154,11 +154,11 @@
 
             test("DatePicker wire icon click", function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker");
-                stub(datepicker.dateView.popup, "toggle");
 
                 datepicker.wrapper.find(".k-select").click();
 
-                equal(datepicker.dateView.popup.calls("toggle"), 1);
+                ok(datepicker.dateView.popup.visible());
+
             });
 
         </script>

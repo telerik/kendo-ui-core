@@ -52,6 +52,7 @@
         <button id="render">Render</button>
         <hr/>
         <input id="datepicker" style="width: 150px"/>
+        <input id="datepicker2" style="width: 150px"/>
         <hr/>
         <div id="kendoCalendar"/>
 
@@ -65,7 +66,8 @@
                     anchor: $("input").eq(0)
                 });
 
-                $("#datepicker").kendoDatePicker();
+                $("#datepicker").kendoDatePicker({ firstView: "decade", depth:"year"});
+                $("#datepicker2").kendoDatePicker({value: new Date()});
             });
         </script>
     </body>

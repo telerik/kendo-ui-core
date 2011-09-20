@@ -28,8 +28,7 @@
         that.calendar = calendar;
         that.popup = popup;
 
-        that._value = options.value; //???
-        that._viewedValue = kendo.calendar.defineViewedValue(options.value, options.min, options.max);
+        that.value(options.value);
     }
 
     DateView.prototype = {
@@ -41,19 +40,20 @@
 
             if (calendar.element.data(DATEVIEW) !== this) {
                 popup.options.anchor = options.anchor;
+                if (popup.wrapper) {
+                    popup.wrapper.data("position", "");
+                }
 
                 popup.unbind(OPEN)
                      .unbind(CLOSE)
                      .bind([OPEN, CLOSE], options);
 
+                calendar.element.data(DATEVIEW, this);
                 calendar.min = options.min;
                 calendar.max = options.max;
-
-                //calendar.navigate(that._viewedValue, calendar.options.firstView);
-
-                calendar.value(options.value); //this navigate to options.depth
-                calendar._focusCell(that._viewedValue);
-
+                //calendar.options.depth = options.depth;
+                //calendar.options.firstView = options.firstView;
+                //calendar._currentView = options.firstView;
 
                 calendar.unbind(CHANGE)
                         .unbind(NAVIGATE)
@@ -63,8 +63,25 @@
                         })
                         .bind(CHANGE, options);
 
-                calendar.element.data(DATEVIEW, this);
+                that.value(that._value);
             }
+        },
+
+        open: function() {
+            var that = this;
+
+            that._initCalendar();
+            that.popup.open();
+        },
+
+        close: function() {
+            this.popup.close();
+        },
+
+        toggle: function() {
+            var that = this;
+            that._initCalendar();
+            that.popup.toggle();
         },
 
         navigate: function(e) {
@@ -86,7 +103,12 @@
                 } else if (keys.DOWN == key) {
                     navigateDown(calendar);
                 }
-                //calendar._focusCell(viewedValue);
+            } else if (e.altKey) {
+                if (keys.DOWN == key) {
+                    that.open();
+                } else if (keys.UP == key) {
+                    that.close();
+                }
             } else {
                 if (keys.RIGHT == key) {
                     value = 1;
@@ -98,7 +120,6 @@
                     value = viewName === "month" ? 7 : 4;
                 } else if (keys.ENTER == key) {
                     navigateDown(calendar);
-                    //calendar._focusCell(viewedValue);
                 }
 
                 if (value) {
@@ -109,16 +130,26 @@
         },
 
         value: function(value) {
-            var that = this;
+            var that = this,
+                calendar = that.calendar,
+                options = that.options;
 
             that._value = value;
-            that.calendar.value(value);
+            that._viewedValue = kendo.calendar.defineViewedValue(value, options.min, options.max);
+
+            if (calendar.element.data(DATEVIEW) === this) {
+                calendar._focusCell(that._viewedValue);
+                calendar.value(value);
+            }
         }
     }
 
     function navigateDown(calendar) {
-        var dateString = calendar.view.find(".k-state-focused").children().data("value");
-        calendar.navigateDown(new Date(dateString));
+        var date = new Date(calendar.view.find(".k-state-focused").children().data("value")),
+            viewedValue = calendar._viewedValue;
+
+        kendo.calendar[calendar._currentView].setDate(viewedValue, date);
+        calendar.navigateDown(viewedValue);
     }
 
     kendo.DateView = DateView;
@@ -131,10 +162,12 @@
             Component.fn.init.call(that, element, options);
             options = that.options;
 
+            options.format = options.format || kendo.culture().calendar.patterns["d"];
+
             that.dateView = dateView = new DateView($.extend({}, options, {
                 anchor: that.element,
                 change: function() {
-                    that.value(dateView.value());
+                    that.value(dateView.calendar.value());
                     that.trigger(CHANGE);
                     that.close();
                 }
@@ -143,31 +176,43 @@
             that._wrapper();
             that._icon();
 
-            that.element.addClass("k-input")
+            that.element
+                .addClass("k-input")
                 .bind("keydown", $.proxy(dateView.navigate, dateView));
 
             that.bind(CHANGE, options);
+
+            that.value(options.value);
         },
 
         options: {
             value: null,
             min: new Date(1900, 0, 1),
-            max: new Date(2099, 11, 31)
+            max: new Date(2099, 11, 31),
+            firstView: "month",
+            depth: "month"
         },
 
         open: function() {
-            var dateView = this.dateView;
-
-            dateView._initCalendar();
-            dateView.popup.open();
+            this.dateView.open();
         },
 
         close: function() {
-            this.dateView.popup.close();
+            this.dateView.close();
         },
 
-        value: function() {
+        value: function(value) {
+            var that = this;
 
+            if (value === undefined) {
+                return that._value;
+            }
+
+            //parse value
+
+            that._value = value;
+            that.dateView.value(value);
+            that.element.val(kendo.toString(value, that.options.format));
         },
 
         _icon: function() {
@@ -182,10 +227,7 @@
                 icon = $('<span class="k-select k-header"><span class="k-icon k-icon-calendar">select</span></span>').insertAfter(element);
             }
 
-            icon.bind("click", function() {
-                dateView._initCalendar();
-                dateView.popup.toggle();
-            });
+            icon.bind("click", $.proxy(dateView.toggle, dateView));
         },
 
         _wrapper: function() {

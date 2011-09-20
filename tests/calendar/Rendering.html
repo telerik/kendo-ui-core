@@ -31,8 +31,8 @@
             });
 
             test("firstDayOfMonth returns correct date", function() {
-                var date = new Date(2011, 7, 31, 10, 10, 5555),
-                    correct = new Date(2011, 7, 1, 10, 10, 5555);
+                var date = new Date(2011, 7, 31),
+                    correct = new Date(2011, 7, 1);
 
                 equal(+calendar.firstDayOfMonth(date), +correct);
             });
@@ -45,7 +45,7 @@
             });
 
             test("month.setDate modify day", function() {
-                var date = new Date(2011, 7, 31, 10, 10, 5555),
+                var date = new Date(2011, 7, 31, 10, 10, 555),
                     modified = new Date(date);
 
                 date.setDate(21);
@@ -53,6 +53,22 @@
                 calendar.month.setDate(modified, -10);
 
                 equal(+modified, +date);
+            });
+
+            test("month.setDate updates even the second param is date", function() {
+                var value = new Date(2011, 7, 31, 10, 10, 33, 111),
+                    origin = new Date(2010, 7, 22, 20, 11, 44, 666);
+
+                calendar.month.setDate(origin, value);
+
+                equal(origin.getFullYear(), value.getFullYear());
+                equal(origin.getMonth(), value.getMonth());
+                equal(origin.getDate(), value.getDate());
+                equal(origin.getHours(), 20);
+                equal(origin.getMinutes(), 11);
+                equal(origin.getSeconds(), 44);
+                equal(origin.getMilliseconds(), 666);
+
             });
 
             test("year.setDate modify month", function() {
@@ -66,6 +82,21 @@
                 equal(+modified, +date);
             });
 
+            test("year.setDate updates even the second param is date", function() {
+                var value = new Date(2011, 7, 31, 10, 10, 33, 111),
+                    origin = new Date(2010, 7, 22, 20, 11, 44, 666);
+
+                calendar.year.setDate(origin, value);
+
+                equal(origin.getFullYear(), value.getFullYear());
+                equal(origin.getMonth(), value.getMonth());
+                equal(origin.getDate(), 22);
+                equal(origin.getHours(), 20);
+                equal(origin.getMinutes(), 11);
+                equal(origin.getSeconds(), 44);
+                equal(origin.getMilliseconds(), 666);
+            });
+
             test("decade.setDate modify year", function() {
                 var date = new Date(2011, 7, 31, 10, 10, 5555),
                     modified = new Date(date);
@@ -77,6 +108,21 @@
                 equal(+modified, +date);
             });
 
+            test("decade.setDate updates even the second param is date", function() {
+                var value = new Date(2011, 7, 31, 10, 10, 33, 111),
+                    origin = new Date(2010, 7, 22, 20, 11, 44, 666);
+
+                calendar.decade.setDate(origin, value);
+
+                equal(origin.getFullYear(), value.getFullYear());
+                equal(origin.getMonth(), 7);
+                equal(origin.getDate(), 22);
+                equal(origin.getHours(), 20);
+                equal(origin.getMinutes(), 11);
+                equal(origin.getSeconds(), 44);
+                equal(origin.getMilliseconds(), 666);
+            });
+
             test("century.setDate modify decade", function() {
                 var date = new Date(2011, 7, 31, 10, 10, 5555),
                     modified = new Date(date);
@@ -86,6 +132,21 @@
                 calendar.century.setDate(modified, -1);
 
                 equal(+modified, +date);
+            });
+
+            test("decade.setDate updates even the second param is date", function() {
+                var value = new Date(2000, 7, 31, 10, 10, 33, 111),
+                    origin = new Date(2010, 7, 22, 20, 11, 44, 666);
+
+                calendar.century.setDate(origin, value);
+
+                equal(origin.getFullYear(), value.getFullYear());
+                equal(origin.getMonth(), 7);
+                equal(origin.getDate(), 22);
+                equal(origin.getHours(), 20);
+                equal(origin.getMinutes(), 11);
+                equal(origin.getSeconds(), 44);
+                equal(origin.getMilliseconds(), 666);
             });
 
             test("Month view return title", function() {
@@ -232,6 +293,22 @@
 
                 equal(td.text(), "1");
                 ok(!td.prev().hasClass("k-other-month"));
+            });
+
+            test("month view do not apply k-other-month to the first day of the month", function() {
+                var today = new Date(2011, 8, 20, 14, 40, 0);
+
+                div.html(calendar.month.content({
+                    date: today,
+                    min: new Date(1900,0,1),
+                    max: new Date(2900,0,1),
+                    empty: template.empty,
+                    content: template.content
+                }));
+
+                var cell = div.find("tbody").find("tr:first").find(".k-other-month:last").next();
+
+                equal(cell.children().data("value"), "9/1/2011");
             });
 
             test("year view renders title", function() {

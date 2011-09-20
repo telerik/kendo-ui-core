@@ -46,11 +46,17 @@
                 .delegate(CELLSELECTOR, MOUSELEAVE, mouseleave)
                 .delegate(CELLSELECTOR, CLICK, function(e) {
                     e.preventDefault();
-                    that.navigateDown(new DATE($(e.currentTarget.firstChild).data(VALUE)));
+                    var date = new DATE($(e.currentTarget.firstChild).data(VALUE)),
+                        viewedValue = that._viewedValue;
+
+                    calendar[that._currentView].setDate(viewedValue, date);
+                    that.navigateDown(viewedValue);
                 });
 
             that._value = options.value;
             that._currentView = options.firstView;
+
+            //call value instead of this
             that._viewedValue = calendar.defineViewedValue(options.value, options.min, options.max);
 
             that.bind([CHANGE, NAVIGATE], options);
@@ -258,7 +264,7 @@
             }
 
             that._value = value;
-            that._viewedValue = new DATE(value);
+            that._viewedValue = calendar.defineViewedValue(value, min, max);
 
             that.navigate(value, options.depth);
         },
@@ -321,11 +327,7 @@
             return new DATE(
                 date.getFullYear(),
                 date.getMonth(),
-                1,
-                date.getHours(),
-                date.getMinutes(),
-                date.getSeconds(),
-                date.getMilliseconds()
+                1
             );
         },
 
@@ -426,7 +428,11 @@
                 return result;
             },
             setDate: function(date, value) {
-                calendar.setTime(date, value * msPerDay);
+                if (value instanceof DATE) {
+                    date.setFullYear(value.getFullYear(), value.getMonth(), value.getDate());
+                } else {
+                    calendar.setTime(date, value * msPerDay);
+                }
             },
             toDateString: function(date) {
                 return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
@@ -461,7 +467,13 @@
                 return compare(date1, date2);
             },
             setDate: function(date, value) {
-                date.setMonth(date.getMonth() + value);
+                if (value instanceof DATE) {
+                    date.setFullYear(value.getFullYear(),
+                                     value.getMonth(),
+                                     date.getDate());
+                } else {
+                    date.setMonth(date.getMonth() + value);
+                }
             },
             toDateString: function(date) {
                 return (date.getMonth() + 1) + "/1/" + date.getFullYear();
@@ -497,7 +509,7 @@
                 return compare(date1, date2, 10);
             },
             setDate: function(date, value) {
-                date.setFullYear(date.getFullYear() + value);
+                setDate(date, value, 1);
             },
             toDateString: function(date) {
                 return "1/1/" + date.getFullYear();
@@ -534,7 +546,7 @@
                 return compare(date1, date2, 100);
             },
             setDate: function(date, value) {
-                date.setFullYear(date.getFullYear() + 10 * value);
+                setDate(date, value, 10);
             },
             toDateString: function(date) {
                 var year = date.getFullYear();
@@ -603,6 +615,11 @@
 
     function shiftArray(array, idx) {
         return array.slice(idx).concat(array.slice(0, idx));
+    }
+
+    function setDate(date, value, multiplier) {
+        value = value instanceof DATE ? value.getFullYear() : date.getFullYear() + multiplier * value;
+        date.setFullYear(value);
     }
 
     function mouseenter() {
