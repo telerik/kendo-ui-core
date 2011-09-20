@@ -1270,7 +1270,6 @@
             chart.element.css("position", "relative");
             chart._view = model.getView();
             chart._viewElement = chart._view.renderTo(chart.element[0]);
-            chart._view.playAnimations();
             chart._attachEvents();
         },
 
@@ -4694,6 +4693,16 @@
             }
         },
 
+        setupAnimations: function() {
+            var animations = this.animations,
+                i,
+                count = animations.length;
+
+            for (i = 0; i < count; i++) {
+                animations[i].setup();
+            }
+        },
+
         playAnimations: function() {
             var view = this,
                 anim;
@@ -4738,12 +4747,15 @@
 
         renderTo: function(container) {
             var view = this,
-                svgText = view.render(),
                 viewElement;
 
-            renderSVG(container, svgText);
+            view.setupAnimations();
+
+            renderSVG(container, view.render());
             viewElement = container.firstChild;
             view.alignToScreen(viewElement);
+
+            view.playAnimations();
 
             return viewElement;
         },
@@ -5300,7 +5312,9 @@
                 doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
             }
 
+            view.setupAnimations();
             container.innerHTML = view.render();
+            view.playAnimations();
 
             return container.firstChild;
         },
@@ -5915,9 +5929,6 @@
                 pos,
                 easingPos;
 
-            anim.setup(actor);
-            actor.refresh(domElement);
-
             setTimeout(function() {
             interval = setInterval(function() {
                 time = +new Date();
@@ -6021,9 +6032,9 @@
             duration: 500
         },
 
-        setup: function(actor) {
+        setup: function() {
             var anim = this,
-                sector = actor.circleSector;
+                sector = anim.element.circleSector;
 
             anim.endRadius = sector.r;
             sector.r = 0;
@@ -6883,6 +6894,8 @@
         ExpandAnimation: ExpandAnimation,
         BarAnimation: BarAnimation,
         BarAnimationDecorator: BarAnimationDecorator,
+        PieAnimation: PieAnimation,
+        PieAnimationDecorator: PieAnimationDecorator,
         categoriesCount: categoriesCount,
         buildGradient: buildGradient
     });

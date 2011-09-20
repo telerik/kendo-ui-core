@@ -124,9 +124,7 @@
                         options: $.extend({
                             id: "id",
                             normalAngle: 0,
-                            aboveAxis: true,
-                            animation: {
-                            }
+                            aboveAxis: true
                         }, rectOptions),
                         refresh: function() {
                         },
@@ -144,9 +142,9 @@
                     }
                 });
 
-                test("collapses rect onto stackBase (vertical bars)", function() {
+                test("setup collapses rect onto stackBase (vertical bars)", function() {
                     createAnim({ stackBase: 10 });
-                    anim.play();
+                    anim.setup();
 
                     equals(rect.points[0].y, 10);
                     equals(rect.points[1].y, 10);
@@ -154,9 +152,9 @@
                     equals(rect.points[3].y, 10);
                 });
 
-                test("collapses rect onto stackBase (horizontal bars)", function() {
+                test("setup collapses rect onto stackBase (horizontal bars)", function() {
                     createAnim({ stackBase: 10, normalAngle: 90 });
-                    anim.play();
+                    anim.setup();
 
                     equals(rect.points[0].x, 10);
                     equals(rect.points[1].x, 10);
@@ -164,33 +162,33 @@
                     equals(rect.points[3].x, 10);
                 });
 
-                test("shrinks rect onto base (horizontal bars above axis)", function() {
+                test("setup shrinks rect onto base (horizontal bars above axis)", function() {
                     createAnim({ normalAngle: 90 });
-                    anim.play();
+                    anim.setup();
 
                     equals(rect.points[1].x, 0);
                     equals(rect.points[2].x, 0);
                 });
 
-                test("shrinks rect onto base (horizontal bars below axis)", function() {
+                test("setup shrinks rect onto base (horizontal bars below axis)", function() {
                     createAnim({ normalAngle: 90, aboveAxis: false });
-                    anim.play();
+                    anim.setup();
 
                     equals(rect.points[0].x, 10);
                     equals(rect.points[3].x, 10);
                 });
 
-                test("shrinks rect onto base (vertical bars above axis)", function() {
+                test("setup shrinks rect onto base (vertical bars above axis)", function() {
                     createAnim();
-                    anim.play();
+                    anim.setup();
 
                     equals(rect.points[0].y, 10);
                     equals(rect.points[1].y, 10);
                 });
 
-                test("shrinks rect onto base (vertical bars below axis)", function() {
+                test("setup shrinks rect onto base (vertical bars below axis)", function() {
                     createAnim({ aboveAxis: false });
-                    anim.play();
+                    anim.setup();
 
                     equals(rect.points[2].y, 0);
                     equals(rect.points[3].y, 0);
@@ -239,6 +237,90 @@
                     setTimeout(function() {
                         equals(rect.points[0].x, 0);
                         equals(rect.points[3].x, 0);
+
+                        start();
+                    }, 100);
+                });
+
+            })();
+
+            (function() {
+                var view,
+                    sector,
+                    decorator;
+
+                // ------------------------------------------------------------
+                module("PieAnimationDecorator", {
+                    setup: function() {
+                        view = new Chart.SVGView();
+                        sector = {
+                            options: $.extend({
+                                id: "id",
+                                normalAngle: 0,
+                                aboveAxis: true,
+                                animation: {
+                                    type: "pie"
+                                }
+                            }),
+                            refresh: function() {
+                            },
+                            clone: function() {
+                                return this;
+                            }
+                        };
+                        decorator = new Chart.PieAnimationDecorator(view);
+                    }
+                });
+
+                test("registers pie animation", function() {
+                    decorator.decorate(sector);
+                    ok(view.animations[0] instanceof Chart.PieAnimation);
+                });
+
+            })();
+
+            (function() {
+                var SIZE = 100,
+                    anim,
+                    sector;
+
+                function createAnim() {
+                    sector = {
+                        circleSector: {
+                            r: SIZE
+                        },
+                        options: {
+                            id: "id",
+                            normalAngle: 0,
+                            aboveAxis: true
+                        },
+                        refresh: function() {
+                        },
+                        clone: function() {
+                            return this;
+                        }
+                    };
+                    anim = new Chart.PieAnimation(sector, { duration: 50 });
+                }
+
+                // ------------------------------------------------------------
+                module("PieAnimation", {
+                    setup: function() {
+                        createAnim();
+                    }
+                });
+
+                test("setup sets radius 0", function() {
+                    anim.setup();
+                    equals(sector.circleSector.r, 0);
+                });
+
+                asyncTest("animates radius to final size", function() {
+                    anim.setup();
+                    anim.play();
+
+                    setTimeout(function() {
+                        equals(sector.circleSector.r, SIZE);
 
                         start();
                     }, 100);
