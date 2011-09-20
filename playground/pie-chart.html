@@ -1,37 +1,130 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Pie Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.chart.js"></script>
     </head>
     <body>
-        <?xml version="1.0" standalone="no"?>
-        <svg width="900px" height="900px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <?xml version="1.0" standalone="no" ?>
+    <script type="text/javascript">
+        var data = [
+            {
+                name: "Alpha",
+                a: 15,
+                b: 20,
+                c: 15,
+                d: 20
+            }
+        ];
 
-        <path d="M200,200 L200,20 A180,180 0 0,1 377,231 z"
-        style="fill:#ff0000;
-        fill-opacity: 1;
-        stroke:black;
-        stroke-width: 1"/>
-        <path d="M200,200 L377,231 A180,180 0 0,1 138,369 z"
-        style="fill:#00ff00;
-        fill-opacity: 1;
-        stroke:black;
-        stroke-width: 1"/>
-        <path d="M200,200 L138,369 A180,180 0 0,1 20,194 z"
-        style="fill:#0000ff;
-        fill-opacity: 1;
-        stroke:black;
-        stroke-width: 1"/>
-        <path d="M200,200 L20,194 A180,180 0 0,1 75,71 z"
-        style="fill:#ff00ff;
-        fill-opacity: 1;
-        stroke:black;
-        stroke-width: 1"/>
-        <path d="M200,200 L75,71 A180,180 0 0,1 200,20 z"
-        style="fill:#ffff00;
-        fill-opacity: 1;
-        stroke:black;
-        stroke-width: 1"/>
-        </svg>
+        $(document).ready(function() {
+            $("#container").kendoChart({
+                title: {
+                    text: "Lollipop",
+                    position: "top"
+                },
+                theme: "blueopal",
+                legend: {
+                    position: "left",
+                    visible: false
+                },
+                dataSource: data,
+                seriesDefaults: {
+                    type: "pie",
+                    padding: 100,
+                    labels: {
+                        visible: true,
+                        font: "12px Arial, sans-serif"
+                    }
+                },
+                series: [{
+                    name: "World",
+                    data:[
+                      {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value B"
+                      }]
+                }],
+                chartArea: {
+                    border: {
+                        width: 1,
+                        color: "black"
+                    }
+                }
+            });
+        });
+
+        function refresh() {
+            var chart = $("#container").data("kendoChart");
+
+            chart.refresh();
+        }
+/*
+        $(document).ready(function() {
+            var angles = [],
+                data = [12, 23, 34, 45];
+
+            var total = 0;
+            for(var i = 0; i < data.length; i++) total += data[i];
+
+            // Figure out the size (in degrees) of each wedge
+            var angles = [];
+            var startAngle = 90;
+
+            for(var i = 0; i < data.length; i++) angles[i] = data[i] * (360 / total);
+
+            for(var i = 1; i < data.length; i++) angles[i] = angles[i] + angles[i - 1];
+
+
+            for (var i = 0; i < angles.length; i ++) {
+                var angle = 90,
+                    radianAngle = angle * (Math.PI / 180),
+                    r = 180,
+                    ax = Math.cos(radianAngle),
+                    ay = Math.sin(radianAngle),
+                    x = r - (ax * 180),
+                    y = r - (ay * 180);
+                console.log("angle:", angle, "=", "x=", x, ",", "y=", y);
+            }
+        });
+*/
+    </script>
+
+    <div id="container" style="width: 600px; height: 400px; margin-left: 100px;
+                               -webkit-transform: translateZ(0);"></div>
+    <div style="margin-left: 100px;">
+        <input type="button" value="Refresh" onclick="refresh();" />
+    </div>
     </body>
 </html>
 

@@ -15,6 +15,7 @@
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
+                categoriesCount = Chart.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
                 plotArea,
                 lineChart,
@@ -92,7 +93,7 @@
 
                 test("Reports number of categories", function() {
                     setupLineChart(plotArea, {series: [ positiveSeries ]});
-                    equal(lineChart.categoriesCount(), positiveSeries.data.length);
+                    equal(categoriesCount(lineChart.options.series), positiveSeries.data.length);
                 });
 
                 test("points are distributed across category axis", function() {
@@ -201,7 +202,7 @@
 
                 test("Reports number of categories for two series", function() {
                     setupLineChart(plotArea, {series: [ positiveSeries, negativeSeries ]});
-                    equal(lineChart.categoriesCount(), positiveSeries.data.length);
+                    equal(categoriesCount(lineChart.options.series), positiveSeries.data.length);
                 });
 
                 test("getSeriesPoint returns nearest series point", function() {
@@ -232,7 +233,7 @@
                 });
 
                 test("Reports number of categories", function() {
-                    equal(lineChart.categoriesCount(), 3);
+                    equal(categoriesCount(lineChart.options.series), 3);
                 });
 
                 test("getSeriesPoint returns nearest series point", function() {
