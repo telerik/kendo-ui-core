@@ -670,7 +670,7 @@
          * @option {Number} [seriesDefaults.border.width] <0> The width of the border.
          * @option {String} [seriesDefaults.border.color] <"black"> The color of the border.
          * @option {Object} [seriesDefaults.overlay] The effects overlay.
-         * @option {String} [seriesDefaults.overlay.name] <"glass"> Overlay name.
+         * @option {String} [seriesDefaults.overlay.gradient] <"glass"> Gradient name.
          *    <dl>
          *         <dt>
          *              "glass"
@@ -3081,7 +3081,7 @@
             },
             isVertical: true,
             overlay: {
-                name: GLASS
+                gradient: GLASS
             },
             aboveAxis: true,
             labels: {
@@ -3850,7 +3850,7 @@
         options: {
             color: WHITE,
             overlay: {
-                name: ROUNDED_BEVEL
+                gradient: ROUNDED_BEVEL
             },
             border: {
                 width: 0.5
@@ -5244,7 +5244,7 @@
                 overlayId,
                 gradient;
 
-            if (paint && paint.name) {
+            if (paint && paint.gradient) {
                 overlay = buildGradient(paint);
                 if (overlay) {
                 overlayId = overlay.id;
@@ -5760,7 +5760,7 @@
                 fill = options.fill;
 
             if (fill) {
-                if (fill.name) {
+                if (fill.gradient) {
                     fill = buildGradient(fill);
                 }
 
@@ -6686,7 +6686,7 @@
             if (options) {
                 hashCode = getHash(options);
                 overlay = buildGradient.cache[hashCode];
-                definition = Chart.Gradients[options.name];
+                definition = Chart.Gradients[options.gradient];
                 if (!overlay && definition) {
                     overlay = deepExtend({ id: uniqueId() }, definition, options);
                     buildGradient.cache[hashCode] = overlay;

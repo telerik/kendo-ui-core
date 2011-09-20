@@ -936,8 +936,8 @@
                     ok(path.fill instanceof Chart.VMLLinearGradient);
                 });
 
-                test("applies gradient fill from name", function() {
-                    var path = view.createRect(new Box2D(), { fill: { name: "test" } });
+                test("applies gradient fill", function() {
+                    var path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
                     equals(path.fill.options.stops.length, 2);
                 });
 
@@ -961,7 +961,7 @@
                             fill: "#fff",
                             fillOpacity: 0.5,
                             overlay: {
-                                name: "glass",
+                                gradient: "glass",
                                 rotation: 90
                             }
                         });
