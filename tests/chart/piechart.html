@@ -138,7 +138,7 @@
 
 
             (function() {
-                var PieSector = Chart.PieSector,
+                var PieSegment = Chart.PieSegment,
                     point,
                     box,
                     label,
@@ -148,7 +148,7 @@
                     SERIES_NAME = "series";
 
                 function createPoint(options) {
-                    sector = new PieSector(VALUE, options);
+                    sector = new PieSegment(VALUE, options);
 
                     sector.dataItem = { value: VALUE };
 

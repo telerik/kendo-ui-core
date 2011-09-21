@@ -3837,7 +3837,7 @@
         }
     });
 
-    var PieSector = ChartElement.extend({
+    var PieSegment = ChartElement.extend({
         init: function(value, options) {
             var sector = this;
 
@@ -4066,7 +4066,7 @@
             var chart = this,
                 sector;
 
-            sector = new PieSector(value, series);
+            sector = new PieSegment(value, series);
 
             if (sector) {
                 sector.category = category;
@@ -6946,7 +6946,7 @@
         PlotArea: PlotArea,
         Tooltip: Tooltip,
         Highlight: Highlight,
-        PieSector: PieSector,
+        PieSegment: PieSegment,
         PieChart: PieChart,
         ViewElement: ViewElement,
         ViewBase: ViewBase,
