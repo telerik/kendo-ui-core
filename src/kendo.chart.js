@@ -3948,7 +3948,7 @@
                         vAlign: "",
                         animation: {
                             type: FADEIN,
-                            delay: INITIAL_ANIMATION_DURATION
+                            delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
                         }
                     }, labels)
                 );
@@ -4351,7 +4351,7 @@
                         strokeWidth: connector.width,
                         animation: {
                             type: FADEIN,
-                            delay: INITIAL_ANIMATION_DURATION
+                            delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
                         }
                     }));
                 }
@@ -6154,7 +6154,8 @@
 
     var FadeAnimation = ElementAnimation.extend({
         options: {
-            duration: 200
+            duration: 200,
+            easing: LINEAR
         },
 
         setup: function() {
