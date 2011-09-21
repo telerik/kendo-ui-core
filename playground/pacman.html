@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pie Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.chart.js"></script>
+    </head>
+    <body>
+    <?xml version="1.0" standalone="no" ?>
+    <script type="text/javascript">
+        var data = [
+            {
+                name: "Alpha",
+                a: 15,
+                b: 20,
+                c: 15,
+                d: 20
+            }
+        ];
+
+        $(document).ready(function() {
+            $("#container").kendoChart({
+                title: {
+                    text: "First Look",
+                    position: "top"
+                },
+                theme: "blueopal",
+                legend: {
+                    position: "right",
+                    visible: true
+                },
+                dataSource: data,
+                seriesColors: [ "#dd0", "" ],
+                seriesDefaults: {
+                    type: "pie",
+                    padding: 100,
+                    labels: {
+                        visible: false,
+                        font: "12px Arial, sans-serif"
+                    },
+                    startAngle: 45,
+                    border: {
+                        width: .5,
+                        color: "#000"
+                    }
+                },
+                series: [{
+                    name: "World",
+                    data:[
+                      {
+                          value: 280,
+                          name: "Pacman"
+                      }, {
+                          value: 80,
+                          name: "Not Pacman"
+                      }]
+                }],
+                chartArea: {
+                    border: {
+                        width: 1,
+                        color: "black"
+                    }
+                }
+            });
+        });
+
+        function refresh() {
+            var chart = $("#container").data("kendoChart");
+
+            chart.refresh();
+        }
+/*
+        $(document).ready(function() {
+            var angles = [],
+                data = [12, 23, 34, 45];
+
+            var total = 0;
+            for(var i = 0; i < data.length; i++) total += data[i];
+
+            // Figure out the size (in degrees) of each wedge
+            var angles = [];
+            var startAngle = 90;
+
+            for(var i = 0; i < data.length; i++) angles[i] = data[i] * (360 / total);
+
+            for(var i = 1; i < data.length; i++) angles[i] = angles[i] + angles[i - 1];
+
+
+            for (var i = 0; i < angles.length; i ++) {
+                var angle = 90,
+                    radianAngle = angle * (Math.PI / 180),
+                    r = 180,
+                    ax = Math.cos(radianAngle),
+                    ay = Math.sin(radianAngle),
+                    x = r - (ax * 180),
+                    y = r - (ay * 180);
+                console.log("angle:", angle, "=", "x=", x, ",", "y=", y);
+            }
+        });
+*/
+    </script>
+
+    <div id="container" style="width: 600px; height: 400px; margin-left: 100px;
+                               -webkit-transform: translateZ(0);"></div>
+    <div style="margin-left: 100px;">
+        <input type="button" value="Refresh" onclick="refresh();" />
+    </div>
+    </body>
+</html>
+
+
