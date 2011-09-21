@@ -67,44 +67,44 @@
                     }
                 });
 
-                test("Creates sectors for pieChart data points", function() {
-                    equal(pieChart.sectors.length, values.data.length);
+                test("Creates segments for pieChart data points", function() {
+                    equal(pieChart.segments.length, values.data.length);
                 });
 
                 test("Reports number of categories", function() {
                     equal(categoriesCount(pieChart.options.series), values.data.length);
                 });
 
-                test("sectors have set angle", function() {
-                    $.each(pieChart.sectors, function() {
-                        ok(this.angle);
+                test("segments have set angle", function() {
+                    $.each(pieChart.segments, function() {
+                        ok(this.sector.angle);
                     });
                 });
 
-                test("sectors have set startAngle", function() {
-                    $.each(pieChart.sectors, function() {
-                        ok(this.angle);
+                test("segments have set startAngle", function() {
+                    $.each(pieChart.segments, function() {
+                        ok(this.sector.angle);
                     });
                 });
 
-                test("sectors have set owner", function() {
-                    ok(pieChart.sectors[0].owner === pieChart);
+                test("segments have set owner", function() {
+                    ok(pieChart.segments[0].owner === pieChart);
                 });
 
-                test("sets sector category", function() {
-                    equal(pieChart.sectors[0].category, "");
+                test("sets segment category", function() {
+                    equal(pieChart.segments[0].category, "");
                 });
 
-                test("sets sector series", function() {
-                    ok(pieChart.sectors[0].series === values);
+                test("sets segment series", function() {
+                    ok(pieChart.segments[0].series === values);
                 });
 
-                test("sets sector series index", function() {
-                    ok(pieChart.sectors[0].seriesIx === 0);
+                test("sets segment series index", function() {
+                    ok(pieChart.segments[0].seriesIx === 0);
                 });
 
-                test("sets sector dataItem", function() {
-                    equal(typeof pieChart.sectors[0].dataItem, "object");
+                test("sets segment dataItem", function() {
+                    equal(typeof pieChart.segments[0].dataItem, "object");
                 });
 
                 // ------------------------------------------------------------
@@ -115,30 +115,30 @@
                     }
                 });
 
-                test("sets sector category", function() {
-                    equal(pieChart.sectors[0].category, "A");
+                test("sets segment category", function() {
+                    equal(pieChart.segments[0].category, "A");
                 });
 
-                test("sectors have set owner", function() {
-                    ok(pieChart.sectors[0].owner === pieChart);
+                test("segments have set owner", function() {
+                    ok(pieChart.segments[0].owner === pieChart);
                 });
 
-                test("sets sector series", function() {
-                    ok(pieChart.sectors[0].series === dataValues);
+                test("sets segment series", function() {
+                    ok(pieChart.segments[0].series === dataValues);
                 });
 
-                test("sets sector series index", function() {
-                    ok(pieChart.sectors[0].seriesIx === 0);
+                test("sets segment series index", function() {
+                    ok(pieChart.segments[0].seriesIx === 0);
                 });
 
-                test("sets sector dataItem", function() {
-                    equal(typeof pieChart.sectors[0].dataItem, "object");
+                test("sets segment dataItem", function() {
+                    equal(typeof pieChart.segments[0].dataItem, "object");
                 });
             })();
 
 
             (function() {
-                var PieSector = Chart.PieSector,
+                var PieSegment = Chart.PieSegment,
                     point,
                     box,
                     label,
@@ -148,36 +148,36 @@
                     SERIES_NAME = "series";
 
                 function createPoint(options) {
-                    sector = new PieSector(VALUE, options);
+                    segment = new PieSegment(VALUE, new Chart.Sector(), options);
 
-                    sector.dataItem = { value: VALUE };
+                    segment.dataItem = { value: VALUE };
 
                     box = new Box2D(0, 0, 100, 100);
-                    sector.reflow(box);
+                    segment.reflow(box);
 
                     root = new Chart.RootElement();
-                    root.append(sector);
+                    root.append(segment);
                 }
 
                 // ------------------------------------------------------------
-                module("Pie Sector", {
+                module("Pie Segment", {
                     setup: function() {
                         createPoint();
                     }
                 });
 
                 test("fills target box", function() {
-                    sameBox(sector.box, box);
+                    sameBox(segment.box, box);
                 });
 
-                test("sets sector border color", function() {
+                test("sets segment border color", function() {
                     createPoint({ border: { color: "red" } });
-                    equals(sector.options.border.color, "red");
+                    equals(segment.options.border.color, "red");
                 });
 
                 test("sets pie border width", function() {
                     createPoint({ border: { width: 4 } });
-                    equals(sector.options.border.width, 4);
+                    equals(segment.options.border.width, 4);
                 });
 
             })();

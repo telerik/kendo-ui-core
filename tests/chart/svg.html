@@ -631,13 +631,11 @@
 
                 module("SVGSector", {
                     setup: function() {
-                        sector = new Chart.SVGSector({
-                            angle: 20,
-                            r: 135,
-                            cx: 135,
-                            cy: 135,
-                            startAngle: 90
-                        });
+                        sector = new Chart.SVGSector(
+                            new Chart.Sector(
+                                new Point2D(135, 135), 135, 90, 20
+                            )
+                        );
                     }
                 });
 
@@ -680,7 +678,12 @@
                 });
 
                 test("renders render curve with angle > 180 degrese", function() {
-                    sector = new Chart.SVGSector({ angle: 200, r: 135, cx: 135, cy: 135, startAngle: 90 });
+                    sector = new Chart.SVGSector(
+                        new Chart.Sector(
+                            new Point2D(135, 135), 135, 90, 200
+                        )
+                    );
+
                     ok(sector.render().indexOf("A135 135 0 1,1 88.827 261.859") > -1);
                 });
 
