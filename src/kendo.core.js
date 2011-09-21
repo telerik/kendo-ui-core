@@ -1014,8 +1014,27 @@
     }
 
     kendo.parseDate = function(value, format, culture) {
+        format = $.isArray(format) ? format : [format],
+
         culture = culture || kendo.culture();
-        return parseExact(value, format, culture);
+
+        if (typeof culture === STRING) {
+            kendo.culture(culture);
+            culture = kendo.culture();
+        }
+
+        var idx = 0,
+            length = format.length,
+            date = null;
+
+        for (; idx < length; idx++) {
+            date = parseExact(value, format[idx], culture);
+            if (date) {
+                return date;
+            }
+        }
+
+        return date;
     }
 })();
 

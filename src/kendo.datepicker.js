@@ -178,7 +178,11 @@
 
             that.element
                 .addClass("k-input")
-                .bind("keydown", $.proxy(dateView.navigate, dateView));
+                .bind("keydown", $.proxy(dateView.navigate, dateView))
+                .bind("blur", function() {
+                    that._change(this.value);
+                    that.close();
+                });
 
             that.bind(CHANGE, options);
 
@@ -190,7 +194,8 @@
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
             firstView: "month",
-            depth: "month"
+            depth: "month",
+            format: "MM/dd/yyyy"
         },
 
         open: function() {
