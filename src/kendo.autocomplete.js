@@ -44,7 +44,7 @@
    * $("#autocomplete").kendoAutoComplete({
    *    minLength: 3,
    *    dataTextField: "Name", //JSON property name to use
-   *    dataSoruce: new kendo.data.DataSource({
+   *    dataSource: new kendo.data.DataSource({
    *        type: "odata", //Specifies data protocol
    *        pageSize: 10, //Limits result set
    *        transport: {
