@@ -494,9 +494,18 @@
 
                         boxElement = new Chart.BoxElement({
                             width: WIDTH,
-                            height: HEIGHT
+                            height: HEIGHT,
+                            border: { width: 1 },
+                            background: "#f00"
                         });
                     }
+                });
+
+                test("does not render rectangle when no border and background are set", function() {
+                    boxElement = new Chart.BoxElement();
+                    boxElement.reflow(targetBox);
+                    boxElement.getViewElements(view);
+                    equals(view.log.rect.length, 0);
                 });
 
                 test("renders border width", function() {
@@ -534,6 +543,7 @@
                 });
 
                 test("does not render border color when no width is set", function() {
+                    boxElement.options.border.width = 0;
                     boxElement.options.border.color = "#f00";
                     boxElement.reflow(targetBox);
                     boxElement.getViewElements(view);
@@ -829,6 +839,40 @@
                     text.getViewElements(view);
 
                     equals(view.log.text[0].style.id, "id");
+                });
+
+            })();
+
+            (function() {
+                var textBox,
+                    TEXT = "text";
+
+                function createTextBox(options) {
+                    textBox = new Chart.TextBox(TEXT, options);
+                    textBox.reflow(new Box2D());
+                    textBox.getViewElements(view);
+                }
+
+                // ------------------------------------------------------------
+                module("TextBox", {
+                    setup: function() {
+                        moduleSetup();
+                        createTextBox();
+                    }
+                });
+
+                test("sets unique id on text", function() {
+                    notEqual(textBox.children[0].options.id, "");
+                });
+
+                test("retains id", function() {
+                    createTextBox({ id: "1" });
+                    equal(textBox.options.id, "1");
+                });
+
+                test("moves id to text when background or border is set", function() {
+                    createTextBox({ id: "1" });
+                    equal(textBox.children[0].options.id, "1");
                 });
 
             })();

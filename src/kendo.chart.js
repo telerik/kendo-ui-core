@@ -36,10 +36,12 @@
         DEFAULT_PRECISION = 6,
         DEFAULT_WIDTH = 600,
         DEGREE = math.PI / 180,
+        FADEIN = "fadeIn",
         GLASS = "glass",
         GLOBAL_CLIP = "globalClip",
         HEIGHT = "height",
         HORIZONTAL = "horizontal",
+        INITIAL_ANIMATION_DURATION = 800,
         INSIDE_BASE = "insideBase",
         INSIDE_END = "insideEnd",
         INTERPOLATE = "interpolate",
@@ -1875,29 +1877,39 @@
             }
         },
 
+        hasBox: function() {
+            var options = this.options;
+            return options.border.width || options.background;
+        },
+
         getViewElements: function(view, renderOptions) {
-            var element = this,
-                options = element.options;
+            var boxElement = this,
+                options = boxElement.options;
 
             if (!options.visible) {
                 return [];
             }
 
             var border = options.border || {},
-                elements = [
-                    view.createRect(element.paddingBox, deepExtend({
+                elements = [];
+
+            if (boxElement.hasBox()) {
+                elements.push(
+                    view.createRect(boxElement.paddingBox, deepExtend({
                         id: options.id,
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         dashType: border.dashType,
                         strokeOpacity: options.opacity,
                         fill: options.background,
-                        fillOpacity: options.opacity
+                        fillOpacity: options.opacity,
+                        animation: options.animation
                     }, renderOptions))
-                ];
+                );
+            }
 
             return elements.concat(
-                ChartElement.fn.getViewElements.call(element, view)
+                ChartElement.fn.getViewElements.call(boxElement, view)
             );
         }
     });
@@ -1975,7 +1987,8 @@
                     font: options.font,
                     color: options.color,
                     rotation: options.rotation,
-                    size: options.size
+                    size: options.size,
+                    animation: options.animation
                 })
             ];
         }
@@ -1983,18 +1996,22 @@
 
     var TextBox = BoxElement.extend({
         init: function(content, options) {
-            var textBox = this;
+            var textBox = this,
+                text;
 
             BoxElement.fn.init.call(textBox, options);
+            options = textBox.options;
 
             if (!options.template) {
                 content = options.format ? format(options.format, content) : content
             }
 
-            textBox.append(
-                new Text(content,
-                    deepExtend({ }, textBox.options, { align: LEFT, vAlign: TOP }))
-            );
+            text = new Text(content, deepExtend({ }, options, { align: LEFT, vAlign: TOP }));
+            textBox.append(text);
+
+            if (textBox.hasBox()) {
+                text.options.id = uniqueId();
+            }
 
             // Calculate size
             textBox.reflow(new Box2D());
@@ -2021,7 +2038,11 @@
                 color: BLACK
             },
             aboveAxis: true,
-            isVertical: false
+            isVertical: false,
+            animation: {
+                type: FADEIN,
+                delay: INITIAL_ANIMATION_DURATION
+            }
         },
 
         reflow: function(targetBox) {
@@ -3589,7 +3610,11 @@
             },
             labels: {
                 visible: false,
-                position: ABOVE
+                position: ABOVE,
+                animation: {
+                    type: FADEIN,
+                    delay: INITIAL_ANIMATION_DURATION
+                }
             }
         },
 
@@ -3919,8 +3944,12 @@
                 segment.label = new TextBox(labelText,
                     deepExtend({
                         id: uniqueId(),
-                        align: "center",
-                        vAlign: ""
+                        align: CENTER,
+                        vAlign: "",
+                        animation: {
+                            type: FADEIN,
+                            delay: INITIAL_ANIMATION_DURATION
+                        }
                     }, labels)
                 );
 
@@ -4317,9 +4346,13 @@
                     points.push(end);
 
                     lines.push(view.createPolyline(points, false, {
-                        id: "",
+                        id: uniqueId(),
                         stroke: connector.color,
-                        strokeWidth: connector.width
+                        strokeWidth: connector.width,
+                        animation: {
+                            type: FADEIN,
+                            delay: INITIAL_ANIMATION_DURATION
+                        }
                     }));
                 }
             }
@@ -4847,7 +4880,8 @@
                 new SVGGradientDecorator(view),
                 new BarAnimationDecorator(view),
                 new PieAnimationDecorator(view),
-                new SVGClipAnimationDecorator(view)
+                new SVGClipAnimationDecorator(view),
+                new FadeAnimationDecorator(view)
             );
 
             view.template = SVGView.template;
@@ -4912,7 +4946,9 @@
         },
 
         createText: function(content, options) {
-            return new SVGText(content, options);
+            return this.decorate(
+                new SVGText(content, options)
+            );
         },
 
         createRect: function(box, style) {
@@ -4935,11 +4971,15 @@
         },
 
         createCircle: function(center, radius, options) {
-            return new SVGCircle(center, radius, options);
+            return this.decorate(
+                new SVGCircle(center, radius, options)
+            );
         },
 
         createSector: function(sector, options) {
-            return this.decorate(new SVGSector(sector, options));
+            return this.decorate(
+                new SVGSector(sector, options)
+            );
         },
 
         createGradient: function(options) {
@@ -5012,6 +5052,7 @@
                     "<text <#= d.renderAttr(\"id\", d.options.id) #> " +
                     "x='<#= Math.round(d.options.x) #>' " +
                     "y='<#= Math.round(d.options.y + d.options.baseline) #>' " +
+                    "fill-opacity='<#= d.options.fillOpacity #>' " +
                     "<#= d.options.rotation ? d.renderRotation() : '' #> " +
                     "style='font: <#= d.options.font #>' fill='<#= d.options.color #>'>" +
                     "<#= d.content #></text>"
@@ -5027,7 +5068,22 @@
             size: {
                 width: 0,
                 height: 0
-            }
+            },
+            fillOpacity: 1
+        },
+
+        refresh: function(domElement) {
+            var options = this.options,
+                element = domElement[0];
+
+            $(domElement).attr({
+                "fill-opacity": options.fillOpacity
+            });
+        },
+
+        clone: function() {
+            var text = this;
+            return new SVGText(text.content, deepExtend({}, text.options));
         },
 
         renderRotation: function() {
@@ -5074,7 +5130,13 @@
         },
 
         refresh: function(domElement) {
-            $(domElement).attr("d", this.renderPoints());
+            var options = this.options;
+
+            $(domElement).attr({
+                "d": this.renderPoints(),
+                "fill-opacity": options.fillOpacity,
+                "stroke-opacity": options.strokeOpacity
+            });
         },
 
         clone: function() {
@@ -5942,12 +6004,10 @@
                 view = decorator.view,
                 animation = element.options.animation;
 
-            if (animation) {
-                if (animation.type === PIE) {
-                    view.animations.push(
-                        new PieAnimation(element, animation)
-                    );
-                }
+            if (animation && animation.type === PIE && view.options.transitions) {
+                view.animations.push(
+                    new PieAnimation(element, animation)
+                );
             }
 
             return element;
@@ -6019,6 +6079,27 @@
         }
     });
 
+    var FadeAnimationDecorator = Class.extend({
+        init: function(view) {
+            this.view = view;
+        },
+
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                options = view.options,
+                animation = element.options.animation;
+
+            if (animation && animation.type === FADEIN && options.transitions) {
+                view.animations.push(
+                    new FadeAnimation(element, animation)
+                );
+            }
+
+            return element;
+        }
+    });
+
     var ElementAnimation = Class.extend({
         init: function(element, options) {
             var anim = this;
@@ -6028,7 +6109,7 @@
         },
 
         options: {
-            duration: 800,
+            duration: INITIAL_ANIMATION_DURATION,
             easing: SWING
         },
 
@@ -6048,19 +6129,19 @@
                 easingPos;
 
             setTimeout(function() {
-            interval = setInterval(function() {
-                time = +new Date();
-                pos = time > finish ? 1 : (time - start) / duration;
-                easingPos = easing(pos, time - start, 0, 1);
+                interval = setInterval(function() {
+                    time = +new Date();
+                    pos = time > finish ? 1 : (time - start) / duration;
+                    easingPos = easing(pos, time - start, 0, 1);
 
-                anim.step(actor, easingPos);
+                    anim.step(actor, easingPos);
 
-                actor.refresh(domElement);
+                    actor.refresh(domElement);
 
-                if (time > finish) {
-                    clearInterval(interval);
-                }
-            }, ANIMATION_STEP);
+                    if (time > finish) {
+                        clearInterval(interval);
+                    }
+                }, ANIMATION_STEP);
             }, delay);
         },
 
@@ -6068,6 +6149,22 @@
         },
 
         step: function(actor, pos) {
+        }
+    });
+
+    var FadeAnimation = ElementAnimation.extend({
+        options: {
+            duration: 200
+        },
+
+        setup: function() {
+            var options = this.element.options;
+            options.fillOpacity = options.strokeOpacity = 0;
+        },
+
+        step: function(actor, pos) {
+            var options = actor.options;
+            options.fillOpacity = options.strokeOpacity = pos;
         }
     });
 
@@ -7007,6 +7104,8 @@
         BarAnimationDecorator: BarAnimationDecorator,
         PieAnimation: PieAnimation,
         PieAnimationDecorator: PieAnimationDecorator,
+        FadeAnimation: FadeAnimation,
+        FadeAnimationDecorator: FadeAnimationDecorator,
         categoriesCount: categoriesCount,
         buildGradient: buildGradient
     });

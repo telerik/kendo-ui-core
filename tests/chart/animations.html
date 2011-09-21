@@ -95,15 +95,15 @@
                     }
                 });
 
+                test("registers bar animation", function() {
+                    decorator.decorate(rect);
+                    ok(view.animations[0] instanceof Chart.BarAnimation);
+                });
+
                 test("does not decorate when view.options.transitions is false", function() {
                     view.options.transitions = false;
                     decorator.decorate(rect);
                     equals(view.animations.length, 0);
-                });
-
-                test("registers bar animation", function() {
-                    decorator.decorate(rect);
-                    ok(view.animations[0] instanceof Chart.BarAnimation);
                 });
 
             })();
@@ -252,7 +252,7 @@
                 // ------------------------------------------------------------
                 module("PieAnimationDecorator", {
                     setup: function() {
-                        view = new Chart.SVGView();
+                        view = new Chart.SVGView({ transitions: true });
                         sector = {
                             options: $.extend({
                                 id: "id",
@@ -275,6 +275,12 @@
                 test("registers pie animation", function() {
                     decorator.decorate(sector);
                     ok(view.animations[0] instanceof Chart.PieAnimation);
+                });
+
+                test("deos not registers pie animation when transitions are disabled", function() {
+                    view.options.transitions = false;
+                    decorator.decorate(sector);
+                    equals(view.animations.length, 0);
                 });
 
             })();
@@ -327,6 +333,109 @@
                 });
 
             })();
+
+            (function() {
+                var view,
+                    rect,
+                    decorator;
+
+                // ------------------------------------------------------------
+                module("FadeAnimationDecorator", {
+                    setup: function() {
+                        view = new Chart.SVGView({ transitions: true });
+                        rect = {
+                            options: {
+                                id: "id",
+                                animation: {
+                                    type: "fadeIn"
+                                }
+                            },
+                            refresh: function() {
+                            },
+                            clone: function() {
+                                return this;
+                            }
+                        };
+                        decorator = new Chart.FadeAnimationDecorator(view);
+                    }
+                });
+
+                test("registers fade animation", function() {
+                    decorator.decorate(rect);
+                    ok(view.animations[0] instanceof Chart.FadeAnimation);
+                });
+
+                test("deos not registers fade animation when transitions are disabled", function() {
+                    view.options.transitions = false;
+                    decorator.decorate(rect);
+                    equals(view.animations.length, 0);
+                });
+
+            })();
+
+            (function() {
+                var SIZE = 100,
+                    anim,
+                    rect;
+
+                function createAnim() {
+                    rect = {
+                        options: {
+                            id: "id",
+                            animation: {
+                                type: "fadeIn"
+                            }
+                        },
+                        refresh: function() {
+                        },
+                        clone: function() {
+                            return this;
+                        }
+                    };
+                    anim = new Chart.FadeAnimation(rect, { duration: 50 });
+                }
+
+                // ------------------------------------------------------------
+                module("FadeAnimation", {
+                    setup: function() {
+                        createAnim();
+                    }
+                });
+
+                test("setup sets fillOpacity to 0", function() {
+                    anim.setup();
+                    equals(rect.options.fillOpacity, 0);
+                });
+
+                test("setup sets strokeOpacity to 0", function() {
+                    anim.setup();
+                    equals(rect.options.strokeOpacity, 0);
+                });
+
+                asyncTest("animates fillOpacity to 1", function() {
+                    anim.setup();
+                    anim.play();
+
+                    setTimeout(function() {
+                        equals(rect.options.fillOpacity, 1);
+
+                        start();
+                    }, 100);
+                });
+
+                asyncTest("animates strokeOpacity to 1", function() {
+                    anim.setup();
+                    anim.play();
+
+                    setTimeout(function() {
+                        equals(rect.options.strokeOpacity, 1);
+
+                        start();
+                    }, 100);
+                });
+
+            })();
+
        </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
