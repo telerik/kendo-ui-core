@@ -35,6 +35,7 @@
         DEFAULT_HEIGHT = 400,
         DEFAULT_PRECISION = 6,
         DEFAULT_WIDTH = 600,
+        DEGREE = math.PI / 180,
         GLASS = "glass",
         GLOBAL_CLIP = "globalClip",
         HEIGHT = "height",
@@ -1614,6 +1615,32 @@
             sector.r = r;
             sector.startAngle = startAngle;
             sector.angle = angle;
+        },
+
+        clone: function() {
+            var s = this;
+            return new Sector(s.c, s.r, s.startAngle, s.angle);
+        },
+
+        expand: function(value) {
+            this.r += value;
+            return this;
+        },
+
+        middle: function() {
+            return this.startAngle + this.angle / 2;
+        },
+
+        point: function(angle) {
+            var sector = this,
+                radianAngle = angle * DEGREE,
+                ax = math.cos(radianAngle),
+                ay = math.sin(radianAngle),
+                r = sector.r,
+                x = round(sector.c.x - (ax * r), COORD_PRECISION),
+                y = round(sector.c.y - (ay * r), COORD_PRECISION);
+
+            return new Point2D(x, y);
         }
     });
 
@@ -3837,13 +3864,14 @@
         }
     });
 
-    var PieSector = ChartElement.extend({
-        init: function(value, options) {
-            var sector = this;
+    var PieSegment = ChartElement.extend({
+        init: function(value, sector, options) {
+            var segment = this;
 
-            sector.value = value;
+            segment.value = value;
+            segment.sector = sector;
 
-            ChartElement.fn.init.call(sector, options);
+            ChartElement.fn.init.call(segment, options);
         },
 
         options: {
@@ -3865,30 +3893,30 @@
         },
 
         render: function() {
-            var sector = this,
-                options = sector.options,
+            var segment = this,
+                options = segment.options,
                 labels = options.labels,
-                labelText = sector.value,
+                labelText = segment.value,
                 labelTemplate;
 
-            if (sector._rendered) {
+            if (segment._rendered) {
                 return;
             } else {
-                sector._rendered = true;
+                segment._rendered = true;
             }
 
             if (labels.template) {
                 labelTemplate = baseTemplate(labels.template);
                 labelText = labelTemplate({
-                    dataItem: sector.dataItem,
-                    category: sector.category,
-                    value: sector.value,
-                    series: sector.series
+                    dataItem: segment.dataItem,
+                    category: segment.category,
+                    value: segment.value,
+                    series: segment.series
                 });
             }
 
             if (labels.visible) {
-                sector.label = new TextBox(labelText,
+                segment.label = new TextBox(labelText,
                     deepExtend({
                         id: uniqueId(),
                         align: "center",
@@ -3896,34 +3924,34 @@
                     }, labels)
                 );
 
-                sector.append(sector.label);
+                segment.append(segment.label);
             }
         },
 
         reflow: function(targetBox) {
-            var sector = this,
-                options = sector.options,
+            var segment = this,
+                options = segment.options,
                 childBox;
 
-            sector.render();
+            segment.render();
 
-            sector.box = targetBox;
+            segment.box = targetBox;
             childBox = targetBox.clone();
 
-            sector.reflowLabel();
+            segment.reflowLabel();
         },
 
         reflowLabel: function() {
-            var sector = this,
-                options = sector.options,
-                label = sector.label,
+            var segment = this,
+                sector = segment.sector,
+                options = segment.options,
+                label = segment.label,
                 labelDistance = options.labels.distance,
                 lp,
-                angle = sector.startAngle + sector.angle / 2;
+                angle = sector.middle();
 
             if (label) {
-                lp = calculateSectorPoint(angle, sector.cx,
-                    sector.cy, sector.r + labelDistance);
+                lp = sector.clone().expand(labelDistance).point(angle);
 
                 if (angle < 90 || angle > 270) {
                     label.orientation = LEFT;
@@ -3936,9 +3964,10 @@
         },
 
         getViewElements: function(view) {
-            var sector = this,
-                sectorID = uniqueId(),
-                options = sector.options,
+            var segment = this,
+                sector = segment.sector,
+                segmentID = uniqueId(),
+                options = segment.options,
                 borderOptions = options.border || {},
                 border = borderOptions.width > 0 ? {
                     stroke: borderOptions.color,
@@ -3947,30 +3976,24 @@
                 } : {},
                 elements = [];
 
-            sector.registerId(sectorID, { seriesIx: sector.seriesIx });
-            elements.push(view.createSector({
-                    startAngle: sector.startAngle,
-                    angle: sector.angle,
-                    r: sector.r,
-                    cx: sector.cx,
-                    cy: sector.cy
-                }, deepExtend({}, {
-                id: sectorID,
+            segment.registerId(segmentID, { seriesIx: segment.seriesIx });
+            elements.push(view.createSector(sector, deepExtend({
+                id: segmentID,
                 fill: options.color,
                 overlay: deepExtend({}, options.overlay, {
                     r: sector.r,
-                    cx: sector.cx,
-                    cy: sector.cy
+                    cx: sector.c.x,
+                    cy: sector.c.y
                 }),
                 fillOpacity: options.opacity,
                 strokeOpacity: options.opacity,
                 animation: deepExtend(options.animation, {
-                    delay: sector.categoryIx * PIE_SECTOR_ANIM_DELAY
+                    delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
                 })
             }, border)));
 
             append(elements,
-                ChartElement.fn.getViewElements.call(sector, view)
+                ChartElement.fn.getViewElements.call(segment, view)
             );
 
             return elements;
@@ -3984,7 +4007,7 @@
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
-            chart.sectors = [];
+            chart.segments = [];
             chart.seriesPoints = [];
             chart.render();
         },
@@ -4064,24 +4087,20 @@
 
         addValue: function(value, startAngle, angle, category, categoryIx, series, seriesIx) {
             var chart = this,
-                sector;
+                segment,
+                sector = new Sector(null, 0, startAngle, angle);
 
-            sector = new PieSector(value, series);
+            segment = new PieSegment(value, sector, series);
+            segment.category = category;
+            segment.series = series;
+            segment.seriesIx = seriesIx;
+            segment.owner = chart;
+            segment.dataItem = series.dataItems ?
+                series.dataItems[categoryIx] : { value: value };
+            segment.categoryIx = categoryIx;
 
-            if (sector) {
-                sector.category = category;
-                sector.series = series;
-                sector.seriesIx = seriesIx;
-                sector.owner = chart;
-                sector.dataItem = series.dataItems ?
-                    series.dataItems[categoryIx] : { value: value };
-                sector.startAngle = startAngle;
-                sector.angle = angle;
-                sector.categoryIx = categoryIx;
-            }
-
-            chart.append(sector);
-            chart.sectors.push(sector);
+            chart.append(segment);
+            chart.segments.push(segment);
         },
 
         reflow: function(targetBox) {
@@ -4094,28 +4113,35 @@
                     box.x1 + minWidth, box.y1 + minWidth),
                 newBoxCenter = newBox.center(),
                 boxCenter = box.center(),
-                sectors = chart.sectors,
-                count = sectors.length,
+                segments = chart.segments,
+                count = segments.length,
                 leftSideLabels = [],
                 rightSideLabels = [],
                 label,
+                segment,
                 sector,
                 i;
 
             newBox.translate(boxCenter.x - newBoxCenter.x, boxCenter.y - newBoxCenter.y);
 
             for (i = 0; i < count; i++) {
-                sector = sectors[i];
+                segment = segments[i];
+
+                sector = segment.sector;
                 sector.r = (minWidth - padding) / 2;
-                sector.cx = sector.r + newBox.x1 + padding / 2;
-                sector.cy = sector.r + newBox.y1 + padding / 2;
-                sector.reflow(newBox);
-                label = sector.label;
+                sector.c = new Point2D(
+                    sector.r + newBox.x1 + padding / 2,
+                    sector.r + newBox.y1 + padding / 2
+                );
+
+                segment.reflow(newBox);
+
+                label = segment.label;
                 if (label) {
-                    if (label.orientation == RIGHT) {
-                    rightSideLabels.push(label);
-                } else {
-                    leftSideLabels.push(label);
+                    if (label.orientation === RIGHT) {
+                        rightSideLabels.push(label);
+                    } else {
+                        leftSideLabels.push(label);
                     }
                 }
             }
@@ -4147,15 +4173,16 @@
 
         distanceBetweenLabels: function(labels) {
             var chart = this,
-                sector = chart.sectors[0],
+                segment = chart.segments[0],
+                sector = segment.sector,
                 labelBox = labels[0].box,
                 count = labels.length - 1,
                 distances = [],
                 distance,
-                lr = sector.r + sector.options.labels.distance,
+                lr = sector.r + segment.options.labels.distance,
                 i;
 
-            distance = round(labelBox.y1 - (sector.cy - lr - labelBox.height()));
+            distance = round(labelBox.y1 - (sector.c.y - lr - labelBox.height()));
             distances.push(distance);
             for (i = 0; i < count; i++) {
                 labelBox = labels[i].box;
@@ -4164,7 +4191,7 @@
             }
 
             labelBox = labels[count].box;
-            distance = round(sector.cy + lr + labelBox.height() - labelBox.y2);
+            distance = round(sector.c.y + lr + labelBox.height() - labelBox.y2);
             distances.push(distance);
 
             return distances;
@@ -4204,11 +4231,12 @@
         reflowLabels: function(distances, labels) {
             var chart = this,
                 connector = chart.options,
-                sectors = chart.sectors,
-                sector = sectors[0],
+                segments = chart.segments,
+                segment = segments[0],
+                sector = segment.sector,
                 labelsCount = labels.length,
-                labelDistance = sector.options.labels.distance,
-                boxY = sector.cy - (sector.r + labelDistance) - labels[0].box.height(),
+                labelDistance = segment.options.labels.distance,
+                boxY = sector.c.y - (sector.r + labelDistance) - labels[0].box.height(),
                 label,
                 boxX,
                 box;
@@ -4221,20 +4249,18 @@
                 box = label.box;
                 boxX = calculateX(
                     box.x2,
-                    sector.cx,
-                    sector.cy,
-                    sector.r + labelDistance,
+                    sector.clone().expand(labelDistance),
                     boxY,
                     boxY + box.height(),
                     label.orientation);
 
 
                 if (label.orientation == RIGHT) {
-                    boxX = sector.r + sector.cx + label.options.distance;
+                    boxX = sector.r + sector.c.x + label.options.distance;
                     label.reflow(new Box2D(boxX + box.width(), boxY,
                         boxX, boxY));
                 } else {
-                    boxX = sector.cx - sector.r - label.options.distance;
+                    boxX = sector.c.x - sector.r - label.options.distance;
                     label.reflow(new Box2D(boxX - box.width(), boxY,
                         boxX, boxY));
                 }
@@ -4247,26 +4273,28 @@
             var chart = this,
                 options = chart.options,
                 connector = options.connector,
-                sectors = chart.sectors,
-                count = sectors.length,
+                segments = chart.segments,
+                sector,
+                count = segments.length,
                 angle,
                 lines = [],
                 points,
-                sector,
+                segment,
                 label,
                 i;
 
             for (i = 0; i < count; i++) {
-                sector = sectors[i];
-                angle = sector.startAngle + sector.angle / 2;
-                label = sector.label;
+                segment = segments[i];
+                sector = segment.sector;
+                angle = sector.middle();
+                label = segment.label;
 
                 if (label) {
                     points = [];
 
                     var box = label.box,
-                        centerPoint = new Point2D(sector.cx, sector.cy),
-                        start = calculateSectorPoint(angle, sector.cx, sector.cy, sector.r),
+                        centerPoint = sector.c,
+                        start = sector.point(angle),
                         middle = new Point2D(box.x1, box.center().y),
                         end,
                         crossing;
@@ -4283,7 +4311,7 @@
                         end.x2 += 2;
                     }
 
-                    start = calculateSectorPoint(angle, sector.cx, sector.cy, sector.r + connector.padding);
+                    start = sector.clone().expand(connector.padding).point(angle);
                     points.push(start);
                     points.push(crossing);
                     points.push(end);
@@ -4466,15 +4494,15 @@
                     series: series,
                     padding: series[0].padding
                 }),
-                sectors = pieChart.sectors,
-                count = sectors.length,
+                segments = pieChart.segments,
+                count = segments.length,
                 i;
 
             plotArea.charts.push(pieChart);
             for (i = 0; i < count; i++) {
                 options.legend.items.push({
-                    name: sectors[i].category,
-                    color: sectors[i].options.color });
+                    name: segments[i].category,
+                    color: segments[i].options.color });
             }
         },
 
@@ -4911,8 +4939,6 @@
         },
 
         createSector: function(sector, options) {
-            // REVIEW: We'll need Sector2D class to hold sector definition.
-            //         Once we have it will use it instead of "sector".
             return this.decorate(new SVGSector(sector, options));
         },
 
@@ -5161,10 +5187,10 @@
                 endAngle = circleSector.angle + startAngle,
                 isReflexAngle = (endAngle - startAngle) > 180,
                 r = math.max(circleSector.r, 0),
-                cx = circleSector.cx,
-                cy = circleSector.cy,
-                firstPoint = calculateSectorPoint(startAngle, cx, cy, r),
-                secondPoint = calculateSectorPoint(endAngle, cx, cy, r);
+                cx = circleSector.c.x,
+                cy = circleSector.c.y,
+                firstPoint = circleSector.point(startAngle),
+                secondPoint = circleSector.point(endAngle);
 
             return sector.pathTemplate({
                 firstPoint: firstPoint,
@@ -5649,8 +5675,8 @@
             var sector = this,
                 circleSector = sector.circleSector,
                 r = math.max(round(circleSector.r), 0),
-                cx = round(circleSector.cx),
-                cy = round(circleSector.cy),
+                cx = round(circleSector.c.x),
+                cy = round(circleSector.c.y),
                 sa = -round((circleSector.startAngle + 180) * 65535),
                 a = -round(circleSector.angle * 65536);
 
@@ -6383,7 +6409,7 @@
     }
 
     function rotatePoint(x, y, cx, cy, angle) {
-        var theta = angle * (math.PI / 180);
+        var theta = angle * DEGREE;
         return {
             x: cx + (x - cx) * math.cos(theta) + (y - cy) * math.sin(theta),
             y: cy - (x - cx) * math.sin(theta) + (y - cy) * math.cos(theta)
@@ -6531,18 +6557,12 @@
         return "";
     }
 
-    function calculateSectorPoint(angle, cx, cy, r) {
-        var radianAngle = angle * (math.PI / 180),
-            ax = math.cos(radianAngle),
-            ay = math.sin(radianAngle),
-            x = round(cx - (ax * r), COORD_PRECISION),
-            y = round(cy - (ay * r), COORD_PRECISION);
+    function calculateX(x, sector, y1, y2, orientation) {
+        var cx = sector.c.x,
+            cy = sector.c.y,
+            r = sector.r,
+            t = math.min(math.abs(cy - y1), math.abs(cy - y2));
 
-        return new Point2D(x, y);
-    }
-
-    function calculateX(x, cx, cy, r, y1, y2, orientation) {
-        var t = math.min(math.abs(cy - y1), math.abs(cy - y2));
         if (t > r) {
             return x;
         } else {
@@ -6946,7 +6966,7 @@
         PlotArea: PlotArea,
         Tooltip: Tooltip,
         Highlight: Highlight,
-        PieSector: PieSector,
+        PieSegment: PieSegment,
         PieChart: PieChart,
         ViewElement: ViewElement,
         ViewBase: ViewBase,

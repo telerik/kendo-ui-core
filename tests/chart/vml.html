@@ -803,12 +803,11 @@
                 var sector;
 
                 function createSector(options) {
-                    sector = new Chart.VMLSector({
-                        angle: 20,
-                        radius: 150,
-                        startAngle: 90,
-                        box: new Box2D(0, 0, 100, 100)
-                    }, options);
+                    sector = new Chart.VMLSector(
+                        new Chart.Sector(
+                            new Point2D(0, 0), 150, 90, 20
+                        )
+                    , options);
                 }
 
                 module("VMLSector", {

@@ -303,6 +303,27 @@
                 equals(sector.angle, 180);
             });
 
+            test("clone returns new sector instance", function() {
+                notEqual(sector.clone(), sector);
+            });
+
+            test("expand returns same instance", function() {
+                equals(sector.expand(100), sector);
+            });
+
+            test("expand increases radius", function() {
+                equals(sector.expand(100).r, 130);
+            });
+
+            test("middle returns middle angle", function() {
+                equals(sector.middle(), 180);
+            });
+
+            test("point returns intersection point for angle", function() {
+                var point = sector.point(180);
+                same([point.x, point.y], [40, 20])
+            });
+
             // ------------------------------------------------------------
             var deepExtend = Chart.deepExtend,
                 extendSrc,
