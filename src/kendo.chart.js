@@ -35,6 +35,7 @@
         DEFAULT_HEIGHT = 400,
         DEFAULT_PRECISION = 6,
         DEFAULT_WIDTH = 600,
+        DEGREE = math.PI / 180,
         GLASS = "glass",
         GLOBAL_CLIP = "globalClip",
         HEIGHT = "height",
@@ -1614,6 +1615,32 @@
             sector.r = r;
             sector.startAngle = startAngle;
             sector.angle = angle;
+        },
+
+        clone: function() {
+            var s = this;
+            return new Sector(s.c, s.r, s.startAngle, s.angle);
+        },
+
+        expand: function(value) {
+            this.r += value;
+            return this;
+        },
+
+        middle: function() {
+            return this.startAngle + this.angle / 2;
+        },
+
+        point: function(angle) {
+            var sector = this,
+                radianAngle = angle * DEGREE,
+                ax = math.cos(radianAngle),
+                ay = math.sin(radianAngle),
+                r = sector.r,
+                x = round(sector.c.x - (ax * r), COORD_PRECISION),
+                y = round(sector.c.y - (ay * r), COORD_PRECISION);
+
+            return new Point2D(x, y);
         }
     });
 
@@ -3838,10 +3865,11 @@
     });
 
     var PieSegment = ChartElement.extend({
-        init: function(value, options) {
+        init: function(value, sector, options) {
             var segment = this;
 
             segment.value = value;
+            segment.sector = sector;
 
             ChartElement.fn.init.call(segment, options);
         },
@@ -3915,15 +3943,15 @@
 
         reflowLabel: function() {
             var segment = this,
+                sector = segment.sector,
                 options = segment.options,
                 label = segment.label,
                 labelDistance = options.labels.distance,
                 lp,
-                angle = segment.startAngle + segment.angle / 2;
+                angle = sector.middle();
 
             if (label) {
-                lp = calculateSectorPoint(angle, segment.cx,
-                    segment.cy, segment.r + labelDistance);
+                lp = sector.clone().expand(labelDistance).point(angle);
 
                 if (angle < 90 || angle > 270) {
                     label.orientation = LEFT;
@@ -3937,6 +3965,7 @@
 
         getViewElements: function(view) {
             var segment = this,
+                sector = segment.sector,
                 segmentID = uniqueId(),
                 options = segment.options,
                 borderOptions = options.border || {},
@@ -3948,19 +3977,13 @@
                 elements = [];
 
             segment.registerId(segmentID, { seriesIx: segment.seriesIx });
-            elements.push(view.createSector({
-                    startAngle: segment.startAngle,
-                    angle: segment.angle,
-                    r: segment.r,
-                    cx: segment.cx,
-                    cy: segment.cy
-                }, deepExtend({}, {
+            elements.push(view.createSector(sector, deepExtend({
                 id: segmentID,
                 fill: options.color,
                 overlay: deepExtend({}, options.overlay, {
-                    r: segment.r,
-                    cx: segment.cx,
-                    cy: segment.cy
+                    r: sector.r,
+                    cx: sector.c.x,
+                    cy: sector.c.y
                 }),
                 fillOpacity: options.opacity,
                 strokeOpacity: options.opacity,
@@ -4064,21 +4087,17 @@
 
         addValue: function(value, startAngle, angle, category, categoryIx, series, seriesIx) {
             var chart = this,
-                segment;
+                segment,
+                sector = new Sector(null, 0, startAngle, angle);
 
-            segment = new PieSegment(value, series);
-
-            if (segment) {
-                segment.category = category;
-                segment.series = series;
-                segment.seriesIx = seriesIx;
-                segment.owner = chart;
-                segment.dataItem = series.dataItems ?
-                    series.dataItems[categoryIx] : { value: value };
-                segment.startAngle = startAngle;
-                segment.angle = angle;
-                segment.categoryIx = categoryIx;
-            }
+            segment = new PieSegment(value, sector, series);
+            segment.category = category;
+            segment.series = series;
+            segment.seriesIx = seriesIx;
+            segment.owner = chart;
+            segment.dataItem = series.dataItems ?
+                series.dataItems[categoryIx] : { value: value };
+            segment.categoryIx = categoryIx;
 
             chart.append(segment);
             chart.segments.push(segment);
@@ -4100,22 +4119,29 @@
                 rightSideLabels = [],
                 label,
                 segment,
+                sector,
                 i;
 
             newBox.translate(boxCenter.x - newBoxCenter.x, boxCenter.y - newBoxCenter.y);
 
             for (i = 0; i < count; i++) {
                 segment = segments[i];
-                segment.r = (minWidth - padding) / 2;
-                segment.cx = segment.r + newBox.x1 + padding / 2;
-                segment.cy = segment.r + newBox.y1 + padding / 2;
+
+                sector = segment.sector;
+                sector.r = (minWidth - padding) / 2;
+                sector.c = new Point2D(
+                    sector.r + newBox.x1 + padding / 2,
+                    sector.r + newBox.y1 + padding / 2
+                );
+
                 segment.reflow(newBox);
+
                 label = segment.label;
                 if (label) {
-                    if (label.orientation == RIGHT) {
-                    rightSideLabels.push(label);
-                } else {
-                    leftSideLabels.push(label);
+                    if (label.orientation === RIGHT) {
+                        rightSideLabels.push(label);
+                    } else {
+                        leftSideLabels.push(label);
                     }
                 }
             }
@@ -4148,14 +4174,15 @@
         distanceBetweenLabels: function(labels) {
             var chart = this,
                 segment = chart.segments[0],
+                sector = segment.sector,
                 labelBox = labels[0].box,
                 count = labels.length - 1,
                 distances = [],
                 distance,
-                lr = segment.r + segment.options.labels.distance,
+                lr = sector.r + segment.options.labels.distance,
                 i;
 
-            distance = round(labelBox.y1 - (segment.cy - lr - labelBox.height()));
+            distance = round(labelBox.y1 - (sector.c.y - lr - labelBox.height()));
             distances.push(distance);
             for (i = 0; i < count; i++) {
                 labelBox = labels[i].box;
@@ -4164,7 +4191,7 @@
             }
 
             labelBox = labels[count].box;
-            distance = round(segment.cy + lr + labelBox.height() - labelBox.y2);
+            distance = round(sector.c.y + lr + labelBox.height() - labelBox.y2);
             distances.push(distance);
 
             return distances;
@@ -4206,9 +4233,10 @@
                 connector = chart.options,
                 segments = chart.segments,
                 segment = segments[0],
+                sector = segment.sector,
                 labelsCount = labels.length,
                 labelDistance = segment.options.labels.distance,
-                boxY = segment.cy - (segment.r + labelDistance) - labels[0].box.height(),
+                boxY = sector.c.y - (sector.r + labelDistance) - labels[0].box.height(),
                 label,
                 boxX,
                 box;
@@ -4221,20 +4249,18 @@
                 box = label.box;
                 boxX = calculateX(
                     box.x2,
-                    segment.cx,
-                    segment.cy,
-                    segment.r + labelDistance,
+                    sector.clone().expand(labelDistance),
                     boxY,
                     boxY + box.height(),
                     label.orientation);
 
 
                 if (label.orientation == RIGHT) {
-                    boxX = segment.r + segment.cx + label.options.distance;
+                    boxX = sector.r + sector.c.x + label.options.distance;
                     label.reflow(new Box2D(boxX + box.width(), boxY,
                         boxX, boxY));
                 } else {
-                    boxX = segment.cx - segment.r - label.options.distance;
+                    boxX = sector.c.x - sector.r - label.options.distance;
                     label.reflow(new Box2D(boxX - box.width(), boxY,
                         boxX, boxY));
                 }
@@ -4248,6 +4274,7 @@
                 options = chart.options,
                 connector = options.connector,
                 segments = chart.segments,
+                sector,
                 count = segments.length,
                 angle,
                 lines = [],
@@ -4258,15 +4285,16 @@
 
             for (i = 0; i < count; i++) {
                 segment = segments[i];
-                angle = segment.startAngle + segment.angle / 2;
+                sector = segment.sector;
+                angle = sector.middle();
                 label = segment.label;
 
                 if (label) {
                     points = [];
 
                     var box = label.box,
-                        centerPoint = new Point2D(segment.cx, segment.cy),
-                        start = calculateSectorPoint(angle, segment.cx, segment.cy, segment.r),
+                        centerPoint = sector.c,
+                        start = sector.point(angle),
                         middle = new Point2D(box.x1, box.center().y),
                         end,
                         crossing;
@@ -4283,7 +4311,7 @@
                         end.x2 += 2;
                     }
 
-                    start = calculateSectorPoint(angle, segment.cx, segment.cy, segment.r + connector.padding);
+                    start = sector.clone().expand(connector.padding).point(angle);
                     points.push(start);
                     points.push(crossing);
                     points.push(end);
@@ -4911,8 +4939,6 @@
         },
 
         createSector: function(sector, options) {
-            // REVIEW: We'll need Sector2D class to hold sector definition.
-            //         Once we have it will use it instead of "sector".
             return this.decorate(new SVGSector(sector, options));
         },
 
@@ -5161,10 +5187,10 @@
                 endAngle = circleSector.angle + startAngle,
                 isReflexAngle = (endAngle - startAngle) > 180,
                 r = math.max(circleSector.r, 0),
-                cx = circleSector.cx,
-                cy = circleSector.cy,
-                firstPoint = calculateSectorPoint(startAngle, cx, cy, r),
-                secondPoint = calculateSectorPoint(endAngle, cx, cy, r);
+                cx = circleSector.c.x,
+                cy = circleSector.c.y,
+                firstPoint = circleSector.point(startAngle),
+                secondPoint = circleSector.point(endAngle);
 
             return sector.pathTemplate({
                 firstPoint: firstPoint,
@@ -5649,8 +5675,8 @@
             var sector = this,
                 circleSector = sector.circleSector,
                 r = math.max(round(circleSector.r), 0),
-                cx = round(circleSector.cx),
-                cy = round(circleSector.cy),
+                cx = round(circleSector.c.x),
+                cy = round(circleSector.c.y),
                 sa = -round((circleSector.startAngle + 180) * 65535),
                 a = -round(circleSector.angle * 65536);
 
@@ -6383,7 +6409,7 @@
     }
 
     function rotatePoint(x, y, cx, cy, angle) {
-        var theta = angle * (math.PI / 180);
+        var theta = angle * DEGREE;
         return {
             x: cx + (x - cx) * math.cos(theta) + (y - cy) * math.sin(theta),
             y: cy - (x - cx) * math.sin(theta) + (y - cy) * math.cos(theta)
@@ -6531,18 +6557,12 @@
         return "";
     }
 
-    function calculateSectorPoint(angle, cx, cy, r) {
-        var radianAngle = angle * (math.PI / 180),
-            ax = math.cos(radianAngle),
-            ay = math.sin(radianAngle),
-            x = round(cx - (ax * r), COORD_PRECISION),
-            y = round(cy - (ay * r), COORD_PRECISION);
+    function calculateX(x, sector, y1, y2, orientation) {
+        var cx = sector.c.x,
+            cy = sector.c.y,
+            r = sector.r,
+            t = math.min(math.abs(cy - y1), math.abs(cy - y2));
 
-        return new Point2D(x, y);
-    }
-
-    function calculateX(x, cx, cy, r, y1, y2, orientation) {
-        var t = math.min(math.abs(cy - y1), math.abs(cy - y2));
         if (t > r) {
             return x;
         } else {
