@@ -152,6 +152,13 @@
                 equal(datepicker.dateView.calls("value"), 1);
             });
 
+            test("_change should set value if it was changed", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+                datepicker._change("10/22/2000");
+
+                //eq(+datepicker.value(), new
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

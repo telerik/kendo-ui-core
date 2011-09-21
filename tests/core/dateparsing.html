@@ -567,6 +567,13 @@
                 equal(result, null);
             });
 
+            test("parse should be able to parse using multiple formats", function() {
+                var formats = ["G", "M/dd/yyyy"];
+                var result = parse("2/2/2000", formats);
+
+                notEqual(result, null);
+            });
+
         </script>
     </body>
 </html>
