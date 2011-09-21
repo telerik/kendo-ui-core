@@ -77,13 +77,13 @@
 
                 test("segments have set angle", function() {
                     $.each(pieChart.segments, function() {
-                        ok(this.angle);
+                        ok(this.sector.angle);
                     });
                 });
 
                 test("segments have set startAngle", function() {
                     $.each(pieChart.segments, function() {
-                        ok(this.angle);
+                        ok(this.sector.angle);
                     });
                 });
 
@@ -148,7 +148,7 @@
                     SERIES_NAME = "series";
 
                 function createPoint(options) {
-                    segment = new PieSegment(VALUE, options);
+                    segment = new PieSegment(VALUE, new Chart.Sector(), options);
 
                     segment.dataItem = { value: VALUE };
 
