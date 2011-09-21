@@ -275,18 +275,42 @@
                 module("SVG View / Decorators", {
                     setup: function() {
                         view = new Chart.SVGView();
+
+                        view.decorators.push({
+                            decorate: function(element) {
+                                ok(true);
+                                return element;
+                            }
+                        });
                     }
                 });
 
-                test("Applies registered decorators", 1, function() {
-                    view.decorators.push({
-                        decorate: function(element) {
-                            ok(true);
-                            return element;
-                        }
-                    });
+                test("createGroup applies registered decorators", 1, function() {
+                    view.createGroup();
+                });
 
+                test("createText applies registered decorators", 1, function() {
+                    view.createText();
+                });
+
+                test("createRect applies registered decorators", 1, function() {
                     view.createRect(new Box2D());
+                });
+
+                test("createLine applies registered decorators", 1, function() {
+                    view.createLine();
+                });
+
+                test("createPolyline applies registered decorators", 1, function() {
+                    view.createPolyline();
+                });
+
+                test("createCircle applies registered decorators", 1, function() {
+                    view.createCircle();
+                });
+
+                test("createSector applies registered decorators", 1, function() {
+                    view.createSector();
                 });
 
             })();
@@ -431,6 +455,40 @@
                     ok(text.render().indexOf("id='id'") > -1);
                 });
 
+                test("renders id", function() {
+                    text.options.id = "id";
+                    ok(text.render().indexOf("id='id'") > -1);
+                });
+
+                test("renders fill-opacity", function() {
+                    text.options.fillOpacity = .4;
+                    ok(text.render().indexOf("fill-opacity='0.4'") > -1);
+                });
+
+                test("clone returns different instance", function() {
+                    notEqual(text.clone(), text);
+                });
+
+                test("clone returns SVGText", function() {
+                    ok(text.clone() instanceof Chart.SVGText);
+                });
+
+                test("clone copies text", function() {
+                    equals(text.clone().content, text.content);
+                });
+
+                test("clone copies options", function() {
+                    createText({ id: "1" });
+                    equals(text.clone().options.id, "1");
+                });
+
+                test("refresh updates fill-opacity attribute", function() {
+                    var domElement = $("<div />");
+                    text.options.fillOpacity = 0.4;
+                    text.refresh(domElement);
+                    equals(domElement.attr("fill-opacity"), "0.4");
+                });
+
             })();
 
             (function() {
@@ -527,6 +585,33 @@
                     ok(path.render().indexOf("stroke-linecap='butt'") > -1);
                 });
 
+                test("clone returns different instance", function() {
+                    notEqual(path.clone(), path);
+                });
+
+                test("clone returns SVGPath", function() {
+                    ok(path.clone() instanceof Chart.SVGPath);
+                });
+
+                test("clone copies options", function() {
+                    path.options.id = "1";
+                    equals(path.clone().options.id, "1");
+                });
+
+                test("refresh updates fill-opacity attribute", function() {
+                    var domElement = $("<div />");
+                    path.options.fillOpacity = 0.4;
+                    path.refresh(domElement);
+                    equals(domElement.attr("fill-opacity"), "0.4");
+                });
+
+                test("refresh updates stroke-opacity attribute", function() {
+                    var domElement = $("<div />");
+                    path.options.strokeOpacity = 0.4;
+                    path.refresh(domElement);
+                    equals(domElement.attr("stroke-opacity"), "0.4");
+                });
+
             })();
 
             (function() {
@@ -548,6 +633,24 @@
                         new Point2D(20, 30)
                     ], true);
                     equal(line.renderPoints(), "M10 20 20 30 z");
+                });
+
+                test("clone returns different instance", function() {
+                    notEqual(line.clone(), line);
+                });
+
+                test("clone returns SVGLine", function() {
+                    ok(line.clone() instanceof Chart.SVGLine);
+                });
+
+                test("clone copies points", function() {
+                    line.points = [ 1, 2 ];
+                    same(line.clone().points, line.points);
+                });
+
+                test("clone copies options", function() {
+                    line.options.id = "1";
+                    equals(line.clone().options.id, "1");
                 });
 
             })();
@@ -685,6 +788,23 @@
                     );
 
                     ok(sector.render().indexOf("A135 135 0 1,1 88.827 261.859") > -1);
+                });
+
+                test("clone returns different instance", function() {
+                    notEqual(sector.clone(), sector);
+                });
+
+                test("clone returns SVGSector", function() {
+                    ok(sector.clone() instanceof Chart.SVGSector);
+                });
+
+                test("clone copies circleSector", function() {
+                    same(sector.clone().cricleSector, sector.cricleSector);
+                });
+
+                test("clone copies options", function() {
+                    sector.options.id = "1";
+                    equals(sector.clone().options.id, "1");
                 });
 
             })();
