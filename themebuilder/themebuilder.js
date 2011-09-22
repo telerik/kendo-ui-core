@@ -74,7 +74,7 @@
                     constant = constants[c];
 
                     prototype = $("<div style='border-style:solid;' class='" +
-                                        constant.prefix.replace("@", "k-") +
+                                        (constant.cssClass ? constant.cssClass : constant.prefix.replace("@", "k-")) +
                                 "' />").appendTo(document.body);
 
                     for (i = 0; i < constant.properties.length; i++) {
@@ -121,14 +121,18 @@
                         resizable: true,
                         width: 300,
                         minWidth: 300,
-                        maxWidth: 300
+                        maxWidth: 300,
+                        minHeight: 160,
+                        maxHeight: $(window).height() - 100
                     });
+
+                $(window).resize($.proxy(this.updateMaxHeight, this));
 
                 that.element = that.content.closest(".k-window")
                     .attr("id", "kendo-themebuilder-wrapper")
                     .css({
                         top: 20,
-                        left: $(window).width() - 330
+                        left: $(window).width() - 320
                     })
                     .data("kendoThemeBuilder", that);
 
@@ -139,9 +143,17 @@
                     .find("input").kendoColorPicker({
                         change: proxy(that._propertyChange, that)
                     });
+                
+                $(".k-items-collapse", that.element).click(function() {
+                    var panelbar = $("#stylable-elements");
+                    panelbar.data("kendoPanelBar").collapse($(".k-item", panelbar));
+                });
             },
             open: function() {
                 this.content.data("kendoWindow").open();
+            },
+            updateMaxHeight: function() {
+                this.content.data("kendoWindow").options.maxHeight = $(window).height() - 100;
             },
             _propertyChange: function(e) {
                 var that = this,
@@ -184,7 +196,7 @@
                     colorPickerTemplate = kendo.template(
                         "<# var id = prefix + \"-\" + property.property; #>" +
                         "<label for='<#= id #>'><#= property.label #></label>" +
-                        "<input id='<#= id #>' value='<#= property.value #>' class='k-input' />"
+                        "<input id='<#= id #>' value='<#= property.value #>' class='k-input' style='background:<#= property.value #>' />"
                     ),
                     propertyGroupTemplate = kendo.template(
                         "<li><#= title #>" +
@@ -201,6 +213,7 @@
 
                 $(kendo.template(
                     "<div id='kendo-themebuilder'>" +
+                        "<button type='button' class='k-items-collapse k-button'>Collapse panels</button>" +
                         "<ul id='stylable-elements'>" +
                             $.map(constants || [], function(x) {
                                 return propertyGroupTemplate($.extend(x, {
