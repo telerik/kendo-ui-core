@@ -27,7 +27,8 @@
     width: 40%;
 }
 
+#kendo-themebuilder #stylable-elements,
 #kendo-themebuilder .k-style-apply
 {
-    margin: 1em 0 0;
+    margin: .6em 0 0;
 }

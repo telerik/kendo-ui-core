@@ -97,22 +97,27 @@
             properties: returnProperties([BGCOLOR, COLOR])
         }, {
             prefix: "@hover",
+            cssClass: "k-state-hover",
             title: "Hover state",
             properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
         }, {
             prefix: "@selected",
+            cssClass: "k-state-selected",
             title: "Selected state",
             properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
         }, {
             prefix: "@active",
+            cssClass: "k-state-active",
             title: "Active state",
             properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
         }, {
             prefix: "@disabled",
+            cssClass: "k-state-disabled",
             title: "Disabled state",
             properties: returnProperties([COLOR])
         }, {
             prefix: "@error",
+            cssClass: "k-state-error",
             title: "Error state",
             properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
         }, {
