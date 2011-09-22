@@ -1268,6 +1268,36 @@
         });
     }
 
+    var wrapExpression = function(members, first) {
+        if (!members.length) {
+            return "d";
+        }
+
+        var expression,
+            member = members.pop(),
+            wrap = false,
+            inner = wrapExpression(members),
+            index;
+
+        if (member !== "") {
+            index = member.indexOf("[");
+
+            if (index != 0) {
+                if (index == -1) {
+                    member = "." + member;
+                } else {
+                    member = "." + member.substring(0, index) + " || {})" + member.substring(index);
+                    wrap = true;
+                }
+            }
+            if (first) {
+                 return (wrap ? "(" : "") + inner + member;
+            }
+            return "(" +  (wrap ? "(" : "")+ inner + member + " || {})";
+        }
+        return inner;
+    }
+
     extend(kendo, /** @lends kendo */ {
         /**
          * @name kendo.ui
@@ -1341,11 +1371,15 @@
         eventTarget: eventTarget,
         htmlEncode: htmlEncode,
         /** @ignore */
-        getter: function(expression) {
+        getter: function(expression, safe) {
             expression = expression || "";
 
             if (expression && expression.charAt(0) !== "[") {
                 expression = "." + expression;
+            }
+
+            if (safe) {
+                return new Function("d", "return " + wrapExpression(expression.split("."), true));
             }
 
             return new Function("d", "return d" + expression);
