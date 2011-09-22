@@ -3925,7 +3925,7 @@
             },
             labels: {
                 visible: false,
-                distance: 30,
+                distance: 35,
                 font: ARIAL12,
                 margin: getSpacing(3),
                 padding: getSpacing(4)
@@ -4328,6 +4328,7 @@
                 points,
                 segment,
                 label,
+                number = 0,
                 i;
 
             for (i = 0; i < count; i++) {
@@ -4346,21 +4347,34 @@
                         end,
                         crossing;
 
+                    start = sector.clone().expand(connector.padding).point(angle);
+                    points.push(start);
                     if (label.orientation == RIGHT) {
                         end = new Point2D(box.x1 - connector.padding, box.center().y),
                         crossing = intersection(centerPoint, start, middle, end) || new Point2D(end.x - 4, end.y);
                         crossing.x = math.min(crossing.x, end.x - 4);
-                        end.x2 -= 2;
+                        end.x -= 2;
+                        if (sqr(sector.c.x - crossing.x) + sqr(sector.c.y - crossing.y) < sqr(sector.r) || crossing.x < sector.c.x) {
+                            points.push(new Point2D(sector.c.x + sector.r - number, start.y + number));
+                            if (number < 10) {
+                                number += 1;
+                            }
+                        } else {
+                            number = 0;
+                            points.push(crossing);
+                        }
                     } else {
                         end = new Point2D(box.x2 + connector.padding, box.center().y),
                         crossing = intersection(centerPoint, start, middle, end) || new Point2D(end.x + 4, end.y);
                         crossing.x = math.max(crossing.x, end.x + 4);
-                        end.x2 += 2;
+                        end.x += 2;
+                        if (sqr(crossing.x - sector.c.x) + sqr(crossing.y - sector.c.y) < sqr(sector.r)) {
+                            points.push(new Point2D(end.x + 4, end.y));
+                        } else {
+                            points.push(crossing);
+                        }
                     }
 
-                    start = sector.clone().expand(connector.padding).point(angle);
-                    points.push(start);
-                    points.push(crossing);
                     points.push(end);
 
                     lines.push(view.createPolyline(points, false, {
@@ -7085,6 +7099,10 @@
         }
 
         return categories;
+    }
+
+    function sqr(value) {
+        return value * value;
     }
 
     jQuery.extend(jQuery.easing, {
