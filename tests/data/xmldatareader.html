@@ -314,6 +314,24 @@
 
                 equal(data[0].foo, "bar");
             });
+
+            test("parse xml with nullable property", function() {
+                var reader = new XmlDataReader({
+                    model: {
+                        fields: {
+                            bar: "bar/text()"
+                        }
+                    },
+                    data: "/root/foo"
+                });
+
+                var result = reader.parse('<root><foo><bar>bar1</bar></foo><foo></foo></root>');
+                var data = reader.data(result);
+
+                equal(data.length, 2);
+                equal(data[0].bar, "bar1");
+                equal(data[1].bar, undefined);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
