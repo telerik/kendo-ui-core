@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.Accessor tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <link rel="stylesheet" href="../qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.Accessor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var getter = kendo.getter;
+
+            test("getter access property", function() {
+                var dataItem = { foo: "bar" };
+                equal(getter("foo")(dataItem), "bar");
+            });
+
+            test("getter access property of complex object", function() {
+                var dataItem = { foo: { bar: "baz" } };
+                equal(getter("foo.bar")(dataItem), "baz");
+            });
+
+            test("getter access object by indexer", function() {
+                var dataItem = [{foo: "bar"}];
+                equal(getter("[0].foo")(dataItem), "bar");
+            });
+
+            test("getter access property of array type by indexer", function() {
+                var dataItem = {foo: [1,2,3,4]};
+                equal(getter("foo[2]")(dataItem), 3);
+            });
+
+            test("getter access array", function() {
+                var dataItem = [1,2,3,4];
+                equal(getter("[2]")(dataItem), 3);
+            });
+
+            test("getter returns undefined for nonexisting property when in safe mode", function() {
+                var dataItem = {foo: {} },
+                    safeMode = true;
+                equal(getter("foo.bar.value", safeMode)(dataItem), undefined);
+            });
+
+            test("getter access property with safe option", function() {
+                var dataItem = { foo: "bar" };
+                equal(getter("foo", true)(dataItem), "bar");
+            });
+
+            test("getter access property of complex object with safe option", function() {
+                var dataItem = { foo: { bar: "baz" } };
+                equal(getter("foo.bar", true)(dataItem), "baz");
+            });
+
+            test("getter access object by indexer with safe option", function() {
+                var dataItem = [{foo: "bar"}];
+                equal(getter("[0].foo", true)(dataItem), "bar");
+            });
+
+            test("getter access nullable object by indexer with safe option", function() {
+                var dataItem = [{}];
+                equal(getter("[0].foo", true)(dataItem), undefined);
+            });
+
+            test("getter access nullable object property deeper nesting with safe option", function() {
+                var dataItem = {};
+                equal(getter("foo.bar['baz']", true)(dataItem), undefined);
+            });
+
+            test("getter access nullable object property with safe option", function() {
+                var dataItem = {};
+                equal(getter("foo['bar']", true)(dataItem), undefined);
+            });
+
+            test("getter access property of array type by indexer with safe option", function() {
+                var dataItem = {foo: [1,2,3,4]};
+                equal(getter("foo[2]", true)(dataItem), 3);
+            });
+
+            test("getter access property of index in complex object with safe option", function() {
+                var dataItem = {foo: []};
+                equal(getter("foo[2].bar", true)(dataItem), undefined);
+            });
+
+            test("getter access property of index in complex object with safe option and space", function() {
+                var dataItem = {"f oo": []};
+                equal(getter("['f oo'][2].bar", true)(dataItem), undefined);
+            });
+            test("getter access array with safe option", function() {
+                var dataItem = [1,2,3,4];
+                equal(getter("[2]", true)(dataItem), 3);
+            });
+
+            test("getter access property with safe options type is correct", function() {
+                var dataItem = { foo: { bar: 0 } };
+                equal(getter("foo.bar", true)(dataItem), 0);
+            });
+        </script>
+    </body>
+</html>
