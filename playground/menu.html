@@ -11,33 +11,34 @@
     <style type="text/css">
         html
         {
-            font-size: 12px;
+            font: 11px Arial, Helvetica, sans-serif;
         }
         #Menu-4
         {
             overflow:  hidden;
         }
-        #buy, #express {
+        .buy, .express {
             height: 100%;
             outline: 0 none;
             position: absolute;
             text-indent: -9999px;
             width: 50%;
         }
-        #buy {
+        .buy {
             left: 0;
         }
-        #express {
+        .express {
             right: 0;
         }
     </style>
     <link type="text/css" href="../styles/kendo.common.css" rel="stylesheet"/>
-    <link type="text/css" href="../styles/kendo.vista.css" rel="stylesheet"/>
+    <link type="text/css" href="../styles/kendo.kendo.css" rel="stylesheet"/>
     <script type="text/javascript">
         $(document).ready(function() {
             $("#Menu").kendoMenu();
             $("#Menu1").kendoMenu({ animation: { open: { effects: { zoomIn: {}, fadeIn: {} } } } });
             $("#Menu2").kendoMenu({ orientation: 'vertical' }).css({ width: '200px' });
+            $("#Menu3").kendoMenu();
         });
     </script>
 </head>
@@ -116,10 +117,10 @@
             <li class="k-item">
                 <div id="Menu-4" class="k-content">
                     <img alt="Telerik OpenAccess" src="Icons/orm-comparison.png">
-                    <a href="http://www.telerik.com/purchase/individual/orm.aspx" id="buy">
+                    <a href="http://www.telerik.com/purchase/individual/orm.aspx" class="buy">
                         Telerik OpenAccess ORM
                     </a>
-                    <a href="http://www.telerik.com/community/license-agreement.aspx?pId=639" id="express">
+                    <a href="http://www.telerik.com/community/license-agreement.aspx?pId=639" class="express">
                         Telerik OpenAccess ORM Express
                     </a>
                 </div>
@@ -205,8 +206,8 @@
             <li>
                 <div id="Menu1-4">
                     <img alt="Telerik OpenAccess" src="Icons/orm-comparison.png">
-                    <a href="http://www.telerik.com/purchase/individual/orm.aspx" id="buy">Telerik OpenAccess ORM</a>
-                    <a href="http://www.telerik.com/community/license-agreement.aspx?pId=639" id="express">Telerik OpenAccess ORM Express</a>
+                    <a href="http://www.telerik.com/purchase/individual/orm.aspx" class="buy">Telerik OpenAccess ORM</a>
+                    <a href="http://www.telerik.com/community/license-agreement.aspx?pId=639" class="express">Telerik OpenAccess ORM Express</a>
                 </div>
             </li>
         </ul>
@@ -309,8 +310,8 @@
             <li>
                 <div id="Menu2-4">
                     <img alt="Telerik OpenAccess" src="Icons/orm-comparison.png">
-                    <a href="http://www.telerik.com/purchase/individual/orm.aspx" id="buy">Telerik OpenAccess ORM</a>
-                    <a href="http://www.telerik.com/community/license-agreement.aspx?pId=639" id="express">Telerik OpenAccess ORM Express</a>
+                    <a href="http://www.telerik.com/purchase/individual/orm.aspx" class="buy">Telerik OpenAccess ORM</a>
+                    <a href="http://www.telerik.com/community/license-agreement.aspx?pId=639" class="express">Telerik OpenAccess ORM Express</a>
                 </div>
             </li>
         </ul>
@@ -332,6 +333,59 @@
             </li>
             <li>
                 <img src="Icons/Suites/wpf.png" alt="image">WPF UI Controls
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<ul id="Menu3">
+    <li>
+        <span class="k-sprite"></span>ASP.NET MVC
+        <ul>
+            <li>
+                <span class="k-sprite"></span>Grid
+            </li>
+            <li class="k-separator"></li>
+            <li>
+                <span class="k-sprite"></span>Menu
+                <ul>
+                    <li>
+                        <span class="k-sprite"></span>Grid
+                    </li>
+                    <li>
+                        <span class="k-sprite"></span>Menu
+                    </li>
+                    <li>
+                        <span class="k-sprite"></span>PanelBar
+                    </li>
+                    <li>
+                        <span class="k-sprite"></span>TabStrip
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <span class="k-sprite"></span>PanelBar
+            </li>
+            <li>
+                <span class="k-sprite"></span>TabStrip
+            </li>
+        </ul>
+    </li>
+    <li class="k-separator"></li>
+    <li>
+        <span class="k-sprite"></span>Silverlight
+        <ul>
+            <li>
+                <span class="k-sprite"></span>GridView
+            </li>
+            <li>
+                <span class="k-sprite"></span>Scheduler
+            </li>
+            <li>
+                <span class="k-sprite"></span>Docking
+            </li>
+            <li>
+                <span class="k-sprite"></span>Chart
             </li>
         </ul>
     </li>

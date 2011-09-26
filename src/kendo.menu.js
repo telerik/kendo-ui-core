@@ -216,6 +216,9 @@
             .filter(":not([disabled])")
             .addClass(DEFAULTSTATE);
         item
+            .filter(".k-separator:empty")
+            .append("&nbsp;");
+        item
             .filter("li[disabled]")
             .addClass(DISABLEDSTATE)
             .removeAttr("disabled");
