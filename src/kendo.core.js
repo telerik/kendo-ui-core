@@ -1014,8 +1014,11 @@
     }
 
     kendo.parseDate = function(value, format, culture) {
-        format = $.isArray(format) ? format : [format],
+        if (value instanceof Date) {
+            return value;
+        }
 
+        format = $.isArray(format) ? format : [format];
         culture = culture || kendo.culture();
 
         if (typeof culture === STRING) {

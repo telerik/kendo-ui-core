@@ -152,12 +152,34 @@
                 equal(datepicker.dateView.calls("value"), 1);
             });
 
+            test("value method should parse value", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
+                    value = new Date("10/10/2000");
+
+                datepicker.value("10/10/2000");
+
+                equal(+datepicker.value(), +value);
+            });
+
             test("_change should set value if it was changed", function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker");
                 datepicker._change("10/22/2000");
 
-                //eq(+datepicker.value(), new
+                equal(+datepicker.value(), +(new Date("10/22/2000")));
             });
+
+            test("_change should not call value() if value was not changed", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
+                    value = new Date("10/22/2000");
+
+                datepicker.value(value);
+                stub(datepicker, "value");
+
+                datepicker._change("10/22/2000");
+
+                equal(datepicker.calls("value"), 0);
+            });
+
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

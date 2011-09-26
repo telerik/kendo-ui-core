@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DatePicker Events</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DatePicker Events</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var DateView = kendo.DateView,
+                DatePicker = kendo.ui.DatePicker,
+                div, input;
+
+            module("kendo.ui.DatePicker Events", {
+                setup: function() {
+                    div = $("<div />").appendTo(document.body);
+                        input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    div.remove();
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            test("blur should call _change event", function() {
+                var datepicker = stub(input.kendoDatePicker().data("kendoDatePicker"), ["_change", "close"]);
+
+                input[0].focus();
+                input[0].blur();
+
+                setTimeout(function() {
+                    equal(datepicker.calls("_change"), 1);
+                    equal(datepicker.calls("close"), 1);
+                    ok(!!datepicker._bluring);
+                    start();
+                }, 250);
+
+                stop(300);
+            });
+
+            test("raise change event", function() {
+                var datepicker = input.kendoDatePicker({
+                                            change: function() {
+                                                ok(true);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoDatePicker");
+
+                datepicker._change("10/10/2000");
+
+                stop(300);
+            });
+
+            test("raise DOM change event", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                input.bind("change", function() {
+                    ok(true);
+                    start();
+                });
+
+                datepicker._change("10/10/2000");
+
+                stop(300);
+            });
+
+            test("raise open event", function() {
+                var datepicker = input.kendoDatePicker({
+                                            open: function() {
+                                                ok(true);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoDatePicker");
+
+                input.next().click();
+
+                stop(300);
+            });
+
+            test("raise close event", function() {
+                var datepicker = input.kendoDatePicker({
+                                            close: function() {
+                                                ok(true);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoDatePicker");
+
+                datepicker.open();
+                input.next().click();
+
+                stop(300);
+            });
+
+            test("raise close event document click", function() {
+                var datepicker = input.kendoDatePicker({
+                                            close: function() {
+                                                ok(true);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoDatePicker");
+
+                datepicker.open();
+
+                $(document.documentElement).mousedown();
+
+                stop(300);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

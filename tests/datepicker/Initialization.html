@@ -76,6 +76,20 @@
                 equal(+dv1._viewedValue, +dv1.calendar._viewedValue);
             });
 
+            test("dateView should call clearTimeout when click on calendar", function() {
+                var called = false,
+                datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.dateView.options.clearBlurTimeout = function() {
+                    called = true;
+                };
+
+                datepicker.open();
+                datepicker.dateView.calendar.element.mousedown();
+
+                ok(called);
+            });
+
             //DatePicker
             test("_wrapper() wraps input element", function() {
                 input.css("width", "200");
@@ -155,6 +169,7 @@
             test("DatePicker wire icon click", function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
+                datepicker.close();
                 datepicker.wrapper.find(".k-select").click();
 
                 ok(datepicker.dateView.popup.visible());

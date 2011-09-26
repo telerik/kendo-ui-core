@@ -2,15 +2,18 @@
     var kendo = window.kendo,
     ui = kendo.ui,
     Component = ui.Component,
+    parse = kendo.parseDate,
+    keys = kendo.keys,
     popup,
     calendar,
     DATEVIEW = "dateView",
     OPEN = "open",
     CLOSE = "close",
+    MOUSEDOWN = "mousedown",
     CHANGE = "change",
     NAVIGATE = "navigate",
     DIV = "<div />",
-    keys = kendo.keys;
+    proxy = $.proxy;
 
     var DateView = function(options) {
         var that = this,
@@ -34,11 +37,12 @@
     DateView.prototype = {
         _initCalendar: function() {
             var that = this,
-                calendar = that.calendar,
+                popup = that.popup,
                 options = that.options,
-                popup = that.popup;
+                calendar = that.calendar,
+                calendarElement = calendar.element;
 
-            if (calendar.element.data(DATEVIEW) !== this) {
+            if (calendarElement.data(DATEVIEW) !== this) {
                 popup.options.anchor = options.anchor;
                 if (popup.wrapper) {
                     popup.wrapper.data("position", "");
@@ -48,7 +52,7 @@
                      .unbind(CLOSE)
                      .bind([OPEN, CLOSE], options);
 
-                calendar.element.data(DATEVIEW, this);
+                calendarElement.data(DATEVIEW, this);
                 calendar.min = options.min;
                 calendar.max = options.max;
                 //calendar.options.depth = options.depth;
@@ -62,6 +66,9 @@
                             calendar._focusCell(calendar._viewedValue);
                         })
                         .bind(CHANGE, options);
+
+                calendarElement.unbind(MOUSEDOWN)
+                               .bind(MOUSEDOWN, options.clearBlurTimeout);
 
                 that.value(that._value);
             }
@@ -170,7 +177,8 @@
                     that.value(dateView.calendar.value());
                     that.trigger(CHANGE);
                     that.close();
-                }
+                },
+                clearBlurTimeout: proxy(that._clearBlurTimeout, that)
             }));
 
             that._wrapper();
@@ -178,10 +186,13 @@
 
             that.element
                 .addClass("k-input")
-                .bind("keydown", $.proxy(dateView.navigate, dateView))
+                .bind("keydown", proxy(dateView.navigate, dateView))
                 .bind("blur", function() {
-                    that._change(this.value);
-                    that.close();
+                    var value = this.value;
+                    that._bluring = setTimeout(function() {
+                        that._change(value);
+                        that.close();
+                    });
                 });
 
             that.bind(CHANGE, options);
@@ -213,17 +224,37 @@
                 return that._value;
             }
 
-            //parse value
+            value = parse(value, that.options.format);
 
             that._value = value;
             that.dateView.value(value);
             that.element.val(kendo.toString(value, that.options.format));
         },
 
+        _clearBlurTimeout: function() {
+            var that = this;
+            clearTimeout(that._bluring);
+            //setTimeout(function() { that.element.focus(); }, 500);
+        },
+
+        _change: function(value) {
+            var that = this;
+
+            value = parse(value, that.options.format);
+
+            if (+value != +that._value) {
+                that.value(value);
+
+                that.trigger(CHANGE);
+
+                // trigger the DOM change event so any subscriber gets notified
+                that.element.trigger(CHANGE);
+            }
+        },
+
         _icon: function() {
             var that = this,
                 element = that.element,
-                dateView = that.dateView,
                 icon;
 
             icon = element.next("span.k-select");
@@ -232,7 +263,10 @@
                 icon = $('<span class="k-select k-header"><span class="k-icon k-icon-calendar">select</span></span>').insertAfter(element);
             }
 
-            icon.bind("click", $.proxy(dateView.toggle, dateView));
+            icon.bind("click", proxy(function() {
+                that.dateView.toggle();
+                that._clearBlurTimeout();
+            }, that));
         },
 
         _wrapper: function() {
