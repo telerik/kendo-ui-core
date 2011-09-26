@@ -1,26 +1,25 @@
-var fs = require("fs");
-var sys = require("sys");
-var wrench = require("./wrench");
-var uglify = require("./uglify-js").uglify;
-var parser = require("./uglify-js").parser;
-var cssmin = require("./lib/cssmin").cssmin;
-var examples = require("./build-examples");
-var spawn = require('child_process').spawn;
+var fs = require("fs"),
+    sys = require("sys"),
+    themes = require("./themes"),
+    kendoBuild = require("./kendo-build"),
+    cssmin = require("./lib/cssmin").cssmin,
+    examples = require("./examples"),
+    spawn = require('child_process').spawn,
 
-var date = new Date();
-var STAT = fs.statSync("./");
-var VERSION = process.argv[2] || generateVersion();
-var KENDOCDN = process.argv[3] || "http://cdn.kendostatic.com/" + VERSION;
-var RELEASE = "release/";
-var DEPLOY = "deploy/";
-var PATH = DEPLOY + "kendoUI";
-var JS = PATH + "/js";
-var STYLES = PATH + "/styles";
-var SOURCE = PATH + "/source";
-var SOURCEJS = SOURCE + "/js";
-var SOURCESTYLES = SOURCE + "/styles";
-var ONLINEEXAMPLES = DEPLOY + "onlineExamples";
-var count = 0;
+    date = new Date(),
+    STAT = fs.statSync("./"),
+    VERSION = process.argv[2] || generateVersion(),
+    KENDOCDN = process.argv[3] || "http://cdn.kendostatic.com/" + VERSION,
+    RELEASE = "release/",
+    DEPLOY = "deploy/",
+    PATH = DEPLOY + "kendoUI",
+    JS = PATH + "/js",
+    STYLES = PATH + "/styles",
+    SOURCE = PATH + "/source",
+    SOURCEJS = SOURCE + "/js",
+    SOURCESTYLES = SOURCE + "/styles",
+    ONLINEEXAMPLES = DEPLOY + "onlineExamples",
+    count = 0;
 
 var cssRegExp = /\.css$/;
 
@@ -118,26 +117,20 @@ function processScripts() {
 
         all += data;
 
-        var ast = parser.parse(data);
-        ast = uglify.ast_mangle(ast);
-        ast = uglify.ast_squeeze(ast);
-        data = uglify.gen_code(ast);
+        data = kendoBuild.minifyJs(data);
 
         fs.writeFileSync(JS + "/" + file.replace(".js", ".min.js"), data);
 
     });
 
-    var ast = parser.parse(all);
-        ast = uglify.ast_mangle(ast);
-        ast = uglify.ast_squeeze(ast);
-        all = uglify.gen_code(ast);
+    all = kendoBuild.minifyJs(all);
 
     fs.writeFileSync(JS + "/kendo.all.min.js", all);
 }
 
 function processStyles() {
-    wrench.copyDirSyncRecursive("styles", SOURCESTYLES);
-    wrench.copyDirSyncRecursive("styles", STYLES);
+    kendoBuild.copyDirSyncRecursive("styles", SOURCESTYLES, false, /\.(css|png|jpg|jpeg|gif)$/i);
+    kendoBuild.copyDirSyncRecursive("styles", STYLES, false, /\.(css|png|jpg|jpeg|gif)$/i);
 
     fs.readdirSync(STYLES).forEach(function(file) {
         if (cssRegExp.test(file)) {
@@ -159,11 +152,14 @@ createDirectories();
 console.log("processing scripts...");
 processScripts();
 
+console.log("building themes...");
+themes.build();
+
 console.log("processing styles...");
 processStyles();
 
 console.log("copying culture js files...");
-wrench.copyDirSyncRecursive("src/cultures", JS + "/cultures");
+kendoBuild.copyDirSyncRecursive("src/cultures", JS + "/cultures");
 
 console.log("copying license agreement...");
 var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");

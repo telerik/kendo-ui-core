@@ -443,7 +443,10 @@
             }
 
             wrapper[0].style.cssText = DOMelement.style.cssText;
-            element.css({ width: "100%" });
+            element.css({
+                width: "100%",
+                height: "auto"
+            });
 
             that._focused = that.element;
             that.wrapper = wrapper
