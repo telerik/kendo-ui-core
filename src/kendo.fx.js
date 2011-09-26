@@ -547,10 +547,11 @@
         slide: {
             setup: function(element, options) {
                 var direction = kendo.directions[options.direction],
-                    extender = {}, offset, reverse = options.reverse;
+                    extender = {}, offset, reverse = options.reverse,
+                    divisor = options.divisor || 1;
 
                 if (!reverse) {
-                    offset = direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth());
+                    offset = direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth() / divisor);
                     !element.data(ORIGIN) && element.data(ORIGIN, animationProperty(element, direction.transition));
                 }
 

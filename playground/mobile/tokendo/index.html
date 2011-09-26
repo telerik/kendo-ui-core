@@ -23,96 +23,99 @@
 
 </head>
 <body>
-    <div class="k-view">
-        <div class="k-header">
-            <div class="k-toolbar">
-                <button class="k-button"><span class="k-text">Button 1</span></button>
-                <button class="k-button"><span class="k-text">Button 2</span></button>
-                <button class="k-button"><span class="k-text">Button 3</span><span class="k-message">12</span></button>
+    <script type="text/html" id="item_tmpl">
+        <ul class="list">
+        <# for (var i = 0; i < data.length; i++) {
+            var item = data[i]; #>
+            <li class="item">
+                <label for="isdone_<#= i #>" <#= (item.done ? " class='input-checked'" : "") #>>
+                    <input type="checkbox" id="isdone_<#= i #>" <#= (item.done ? " checked='checked'" : "") #> />
+                    <#= item.title #>
+                    <a href="#" class="more-details">More...</a>
+                </label>
+            </li>
+        <# } #>
+        </ul>
+    </script>
+    <div class="k-slot">
+        <div class="k-showcase">
+            <div class="k-view">
+                <div class="k-header">
+                    <div class="k-toolbar">
+                        <button><span>Button 1</span></button>
+                        <button><span>Button 2</span></button>
+                        <button><span>Button 3</span><span class="k-message">12</span></button>
+                    </div>
+                </div>
+
+                <div class="k-content">
+                    <div class="k-contentIn"></div>
+                </div>
             </div>
         </div>
-        <script type="text/html" id="item_tmpl">
-            <ul class="list">
-            <# for (var i = 0; i < data.length; i++) {
-                var item = data[i]; #>
-                <li class="item">
-                    <label for="isdone_<#= i #>" <#= (item.done ? " class='input-checked'" : "") #>>
-                        <input type="checkbox" id="isdone_<#= i #>" <#= (item.done ? " checked='checked'" : "") #> />
-                        <#= item.title #>
-                        <a href="#" class="more-details">More...</a>
-                    </label>
-                </li>
-            <# } #>
-            </ul>
-        </script>
-
-        <div class="k-content">
-            <div class="k-contentIn"></div>
-        </div>
-
-        <div class="k-footer">
-            <div class="k-tabStrip">
-                <button class="k-button k-active">
-                    <span class="k-icon"></span><span class="k-text">Featured</span>
-                </button>
-                <button class="k-button">
-                    <span class="k-icon"></span><span class="k-text">Genius</span><span class="k-message">3</span>
-                </button>
-                <button class="k-button">
-                    <span class="k-icon"></span><span class="k-text">Top Charts</span>
-                </button>
-                <button class="k-button">
-                    <span class="k-icon"></span><span class="k-text">Categories</span>
-                </button>
-            </div>
-        </div>
-
-        <script>
-            kendo.mobile.init({});
-
-            $('label').live('click', function(e) {
-                var element = $(this);
-                element.toggleClass('input-checked', document.getElementById(element.attr('for')).checked);
-            });
-
-            var dataSource = new kendo.data.DataSource({
-                page: 1,
-                pageSize: 20,
-                transport: {
-                    read: {
-                        url: "tokendo.data.js",
-                        cache: true,
-                        dataType: "jsonp",
-                        jsonpCallback: "loadTodoItems"
-                    }
-                },
-                reader: {
-                    data: function(result) {
-                        return result;
-                    },
-                    total: function(result) {
-                        return result;
-                    }
-                }
-            });
-
-            dataSource.bind("change", function() {
-                var data = dataSource.view();
-                var template = kendo.template(document.getElementById("item_tmpl").innerHTML);
-
-                $(".k-contentIn").html(template({ data: data }))
-                    .delegate('.more-details', 'click', function() {
-                        var todoItemId = $(this).index();
-                        kendo.mobile.switchView("edit.html");
-                    });
-            });
-
-            dataSource.read();
-
-            var application = new Application();
-            application.addView($(".k-view").kendoView().data("kendoView"));
-        </script>
     </div>
+    <div class="k-tabStrip">
+        <button class="k-state-active">
+            <span class="k-icon"></span><span>Featured</span>
+        </button>
+        <button>
+            <span class="k-icon"></span><span>Genius</span><span class="k-message">3</span>
+        </button>
+        <button>
+            <span class="k-icon"></span><span>Top Charts</span>
+        </button>
+        <button>
+            <span class="k-icon"></span><span>Categories</span>
+        </button>
+    </div>
+    <script>
+        $(document)
+            .bind("appinit", function (e, args) {
+                console.log("appinit", args);
+            })
+            .bind("viewinit", function (e, args) {
+                console.log("viewinit", args);
+            });
+
+        $('label').live('click', function(e) {
+            var element = $(this);
+            element.toggleClass('input-checked', document.getElementById(element.attr('for')).checked);
+        });
+
+        var dataSource = new kendo.data.DataSource({
+            page: 1,
+            pageSize: 20,
+            transport: {
+                read: {
+                    url: "tokendo.data.js",
+                    cache: true,
+                    dataType: "jsonp",
+                    jsonpCallback: "loadTodoItems"
+                }
+            },
+            reader: {
+                data: function(result) {
+                    return result;
+                },
+                total: function(result) {
+                    return result;
+                }
+            }
+        });
+
+        dataSource.bind("change", function() {
+            var data = dataSource.view();
+            var template = kendo.template(document.getElementById("item_tmpl").innerHTML);
+
+            $(".k-contentIn").html(template({ data: data }))
+                .delegate('.more-details', 'click', function() {
+                    var todoItemId = $(this).index();
+                    kendo.mobile.switchView("edit.html");
+                });
+        });
+
+        dataSource.read();
+    </script>
 </body>
 </html>
 
