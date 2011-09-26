@@ -584,39 +584,42 @@
                     }
                 });
 
+                function createLineChart(options) {
+                    plotArea = new PlotAreaStub();
+                    lineChart = new Chart.LineChart(plotArea, {
+                        series: [$.extend({
+                            data: [0, 1],
+                            color: "#f00",
+                            markers: {
+                                visible: false,
+                                size: 10,
+                                type: "triangle",
+                                border: {
+                                    width: BORDER
+                                }
+                            },
+                            labels: {
+                                visible: false,
+                                color: "labels-color",
+                                background: "labels-background",
+                                border: {
+                                    color: "labels-border",
+                                    width: BORDER
+                                },
+                                margin: MARGIN,
+                                padding: PADDING
+                            },
+                            opacity: 0.5,
+                            dashType: "dot"
+                        }, options)]
+                    });
+                    linePoint = lineChart.points[0];
+                }
+
                 // ------------------------------------------------------------
                 module("Line Chart / Configuration", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
-                        lineChart = new Chart.LineChart(plotArea, {
-                            series: [{
-                                data: [0, 1],
-                                color: "#f00",
-                                markers: {
-                                    visible: false,
-                                    size: 10,
-                                    type: "triangle",
-                                    border: {
-                                        color: "marker-border",
-                                        width: BORDER
-                                    }
-                                },
-                                labels: {
-                                    visible: false,
-                                    color: "labels-color",
-                                    background: "labels-background",
-                                    border: {
-                                        color: "labels-border",
-                                        width: BORDER
-                                    },
-                                    margin: MARGIN,
-                                    padding: PADDING
-                                },
-                                opacity: 0.5,
-                                dashType: "dot"
-                            }]
-                        });
-                        linePoint = lineChart.points[0];
+                        createLineChart();
                     }
                 });
 
@@ -624,8 +627,8 @@
                     equal(linePoint.options.markers.visible, false);
                 });
 
-                test("applies series fill color to point markers", function() {
-                    equal(linePoint.options.markers.background, "#f00");
+                test("applies series color to point markers border", function() {
+                    equal(linePoint.options.markers.border.color, "#f00");
                 });
 
                 test("applies series opacity color to point markers", function() {
@@ -641,6 +644,7 @@
                 });
 
                 test("applies border color to point markers", function() {
+                    createLineChart({ markers: { border: { color: "marker-border" } } });
                     equal(linePoint.options.markers.border.color, "marker-border");
                 });
 
@@ -741,7 +745,7 @@
 
                 test("sets default marker border color based on background", function() {
                     createPoint({ markers: { background: "#cf0" } });
-                    equals(marker.options.border.color, "#8fb300");
+                    equals(marker.options.border.color, "#a3cc00");
                 });
 
                 test("does not change marker border color if set", function() {
@@ -766,22 +770,22 @@
 
                 test("marker is positioned at top", function() {
                     createPoint({ isVertical: true, aboveAxis: true });
-                    sameBox(marker.box, new Box2D(46, -4, 54, 4));
+                    sameBox(marker.box, new Box2D(44, -6, 56, 6));
                 });
 
                 test("marker is positioned at bottom", function() {
                     createPoint({ isVertical: true, aboveAxis: false });
-                    sameBox(marker.box, new Box2D(46, 96, 54, 104));
+                    sameBox(marker.box, new Box2D(44, 94, 56, 106));
                 });
 
                 test("marker is positioned at right", function() {
                     createPoint({ isVertical: false, aboveAxis: true });
-                    sameBox(marker.box, new Box2D(96, 46, 104, 54));
+                    sameBox(marker.box, new Box2D(94, 44, 106, 56));
                 });
 
                 test("marker is positioned at left", function() {
                     createPoint({ isVertical: false, aboveAxis: false });
-                    sameBox(marker.box, new Box2D(-4, 46, 4, 54));
+                    sameBox(marker.box, new Box2D(-6, 44, 6, 56));
                 });
 
                 test("sets marker opacity", function() {
@@ -908,22 +912,22 @@
 
                 test("label is positioned above marker", function() {
                     createPoint({ labels: { visible: true, position: "above" } });
-                    sameBox(label.box, new Box2D(41, -20, 59, -4));
+                    sameBox(label.box, new Box2D(41, -22, 59, -6));
                 });
 
                 test("label is positioned below marker", function() {
                     createPoint({ labels: { visible: true, position: "below" } });
-                    sameBox(marker.box, new Box2D(46, -4, 54, 4));
+                    sameBox(marker.box, new Box2D(44, -6, 56, 6));
                 });
 
                 test("label is positioned right of marker", function() {
                     createPoint({ labels: { visible: true, position: "right" } });
-                    sameBox(marker.box, new Box2D(46, -4, 54, 4));
+                    sameBox(marker.box, new Box2D(44, -6, 56, 6));
                 });
 
                 test("label is positioned left of marker", function() {
                     createPoint({ labels: { visible: true, position: "left" } });
-                    sameBox(marker.box, new Box2D(46, -4, 54, 4));
+                    sameBox(marker.box, new Box2D(44, -6, 56, 6));
                 });
 
                 // ------------------------------------------------------------
@@ -1015,6 +1019,7 @@
                         $.extend({
                             width: SIZE,
                             height: SIZE,
+                            border: { width: BORDER },
                             background: "#f00"
                         }, options)
                     );

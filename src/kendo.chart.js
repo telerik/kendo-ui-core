@@ -47,7 +47,7 @@
         INTERPOLATE = "interpolate",
         LEFT = "left",
         LINE = "line",
-        LINE_MARKER_SIZE = 6,
+        LINE_MARKER_SIZE = 8,
         LINEAR = "linear",
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER = "mouseover",
@@ -1209,6 +1209,9 @@
                 column: {
                     gap: BAR_GAP,
                     spacing: BAR_SPACING
+                },
+                line: {
+                    width: 4
                 },
                 labels: {}
             },
@@ -3565,7 +3568,7 @@
             var marker = this,
                 options = marker.options,
                 type = options.type,
-                box = marker.box,
+                box = marker.paddingBox,
                 element = BoxElement.fn.getViewElements.call(marker, view, renderOptions)[0],
                 halfWidth = box.width() / 2;
 
@@ -3600,11 +3603,11 @@
             isVertical: true,
             markers: {
                 visible: true,
-                background: BLACK,
+                background: WHITE,
                 size: LINE_MARKER_SIZE,
-                type: SQUARE,
+                type: CIRCLE,
                 border: {
-                    width: 1
+                    width: 2
                 },
                 opacity: 1
             },
@@ -3783,7 +3786,9 @@
                 deepExtend({
                     isVertical: options.isVertical,
                     markers: {
-                        background: series.color,
+                        border: {
+                            color: series.color
+                        },
                         opacity: series.opacity
                     }
                 }, series)
