@@ -1106,14 +1106,14 @@
         return effects;
     }
 
-    fx = {
+    var fx = {
         promise: function (element, options) {
             if (options.show) {
-                element.show();
+                element.css({ display: element.data("olddisplay") }).css("display");
             }
 
             if (options.hide) {
-                element.hide();
+                element.data("olddisplay", element.css("display")).hide();
             }
 
             if (options.completeCallback) {
@@ -1163,7 +1163,7 @@
             teardown: noop,
             hide: false,
             show: false
-        }, options, { completeCallback: options.complete }); // Move external complete callback, so deferred.resolve can be always executed.
+        }, { completeCallback: options.complete }, options); // Move external complete callback, so deferred.resolve can be always executed.
 
         return element.queue(function () {
             fx.promise(element, options);

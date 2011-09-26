@@ -91,21 +91,23 @@
             that.yScrollbar = that.xScrollbar.clone().removeClass("horizontal-scrollbar").addClass("vertical-scrollbar");
             that._scrollbars = $().add(that.xScrollbar).add(that.yScrollbar);
 
-            that._scrollArrows = {};
-            var leftArrow = that._scrollArrows.left = $('<a class="scroll-arrow left-scroll-arrow" href="#" />');
+            if (options.showArrows) {
+                that._scrollArrows = {};
+                var leftArrow = that._scrollArrows.left = $('<a class="scroll-arrow left-scroll-arrow" href="#" />');
 
-            extend( that._scrollArrows, {
-                right: leftArrow.clone().removeClass(LEFTARROW).addClass(RIGHTARROW),
-                top: leftArrow.clone().removeClass(LEFTARROW).addClass("top-scroll-arrow"),
-                bottom: leftArrow.clone().removeClass(LEFTARROW).addClass("bottom-scroll-arrow")
-            });
-            
-            var scrollArrows = that._scrollArrows;
-            that._horizontalArrows = $().add(scrollArrows.left).add(scrollArrows.right);
-            that._verticalArrows = $().add(scrollArrows.top).add(scrollArrows.bottom);
-            that._allArrows = $().add(that._horizontalArrows).add(that._verticalArrows);
+                extend( that._scrollArrows, {
+                    right: leftArrow.clone().removeClass(LEFTARROW).addClass(RIGHTARROW),
+                    top: leftArrow.clone().removeClass(LEFTARROW).addClass("top-scroll-arrow"),
+                    bottom: leftArrow.clone().removeClass(LEFTARROW).addClass("bottom-scroll-arrow")
+                });
 
-            that._allArrows.click( proxy( that._scrollClick, that ) );
+                var scrollArrows = that._scrollArrows;
+                that._horizontalArrows = $().add(scrollArrows.left).add(scrollArrows.right);
+                that._verticalArrows = $().add(scrollArrows.top).add(scrollArrows.bottom);
+                that._allArrows = $().add(that._horizontalArrows).add(that._verticalArrows);
+
+                that._allArrows.click( proxy( that._scrollClick, that ) );
+            }
 
             extend(that, {
                 _waitProxy: proxy(that._wait, that),
@@ -134,6 +136,7 @@
                 zoomFactor: 1,
 
                 useOnDesktop: true,
+                showArrows: true,
                 scrollbarOpacity: .7,
                 scrollArrowsOpacity: .84
             },
@@ -154,10 +157,11 @@
 
             that.scrollElement = element.children(":not(script)");
             that._scrollbars.appendTo(element);
-            that._horizontalArrows.appendTo(element);
+            if (that.options.showArrows)
+                that._horizontalArrows.appendTo(element);
 
-            that._moveEvent = MOVEEVENT,
-            that._startEvent = STARTEVENT,
+            that._moveEvent = MOVEEVENT;
+            that._startEvent = STARTEVENT;
             that._endEvent = ENDEVENT;
 
             if (touch) {
@@ -168,13 +172,15 @@
 
                 browser.mozilla && element.bind("mousedown", false );
             } else {
-                element.bind( "mouseenter", function () {
-                    that._showScrollArrows();
-                });
+                if (that.options.showArrows) {
+                    element.bind( "mouseenter", function () {
+                        that._showScrollArrows();
+                    });
 
-                element.bind( "mouseleave", function () {
-                    that._hideScrollArrows();
-                });
+                    element.bind( "mouseleave", function () {
+                        that._hideScrollArrows();
+                    });
+                }
             }
 
             that._storeLastLocation = function(location) { // TODO: better direction change detection?
