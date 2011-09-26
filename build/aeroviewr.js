@@ -1,9 +1,7 @@
-var uglify = require("./uglify-js").uglify;
-var parser = require("./uglify-js").parser;
+var kendoBuild = require("./kendo-build");
 var fs = require("fs");
 var path = require("path");
 var sys = require("sys");
-var wrench = require("./wrench");
 
 var html = fs.readFileSync("demos/aeroviewr/index.html", "utf8");
 
@@ -28,12 +26,8 @@ function processFileGroup(group, path, matcher) {
         }
     }
 
-    var ast = parser.parse(script);
+    script = kendoBuild.minifyJs(script);
 
-    ast = uglify.ast_mangle(ast);
-    ast = uglify.ast_squeeze(ast);
-
-    script = uglify.gen_code(ast);
     fs.writeFileSync("live/js/" + group + ".all.min.js", script);
 }
 
@@ -42,7 +36,7 @@ function replaceBlock(block, replace) {
     return sections[0] + replace + sections[2];
 }
 
-wrench.copyDirSyncRecursive("demos/aeroviewr", "live");
+kendoBuild.copyDirSyncRecursive("demos/aeroviewr", "live");
 fs.unlinkSync("live/js/aeroviewr.js");
 fs.unlinkSync("live/js/visitor.js");
 fs.unlinkSync("live/js/upload.js");

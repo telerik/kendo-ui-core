@@ -9,7 +9,7 @@
 // load the node.js libraries to be abstracted
 var fs = require('fs');
 var path = require('path');
-var wrench = require("../../wrench.js");
+var kendoBuild = require("../../kendo-build");
 var Script = process.binding('evals').Script;
 
 // define a few globals to be compatible with jsrun.jar
@@ -171,7 +171,7 @@ IO = {
 	},
 
     copyDir: function (inFolder, outFolder) {
-        wrench.copyDirSyncRecursive(inFolder, outFolder);
+        kendoBuild.copyDirSyncRecursive(inFolder, outFolder);
     },
 
 	/**

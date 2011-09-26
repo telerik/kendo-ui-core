@@ -13,6 +13,8 @@ live/
 release/
 deploy/
 docs/
+styles/*.css
+!styles/kendo.common.css
 functional-tests/**/TestResults/
 functional-tests/**/Results/
 functional-tests/Results/
