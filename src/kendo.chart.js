@@ -6164,13 +6164,20 @@
         },
 
         setup: function() {
-            var options = this.element.options;
+            var anim = this,
+                options = anim.element.options;
+
+            anim.targetFillOpacity = options.fillOpacity;
+            anim.targetStrokeOpacity = options.strokeOpacity;
             options.fillOpacity = options.strokeOpacity = 0;
         },
 
         step: function(actor, pos) {
-            var options = actor.options;
-            options.fillOpacity = options.strokeOpacity = pos;
+            var anim = this,
+                options = actor.options;
+
+            options.fillOpacity = pos * anim.targetFillOpacity;
+            options.strokeOpacity = pos * anim.targetStrokeOpacity;
         }
     });
 
@@ -6348,8 +6355,8 @@
         options: {
             font: SANS12,
             padding: {
-                top: 4,
-                bottom: 4,
+                top: 5,
+                bottom: 5,
                 left: 6,
                 right: 6
             },
@@ -6357,7 +6364,7 @@
                 color: BLACK,
                 width: 0
             },
-            offsetY: 6,
+            offsetY: 2,
             offsetX: 5
         },
 
@@ -7201,7 +7208,10 @@
         },
         seriesDefaults: {
             labels: {
-                color: "#8e8e8e"
+                color: "#ffffff",
+                background: "#564942",
+                opacity: 0.8,
+                padding: 5
             }
         },
         seriesColors: ["#ff5400", "#ff8b24", "#ffc066", "#9da600", "#688900", "#3e6100"],
