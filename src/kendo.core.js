@@ -1268,34 +1268,33 @@
         });
     }
 
-    var wrapExpression = function(members, first) {
-        if (!members.length) {
-            return "d";
-        }
+    var wrapExpression = function(members) {
+        var result = "d",
+            index,
+            idx,
+            length,
+            member,
+            count = 1;
 
-        var expression,
-            member = members.pop(),
-            wrap = false,
-            inner = wrapExpression(members),
-            index;
+        for (idx = 0, length = members.length; idx < length; idx++) {
+            member = members[idx];
+            if (member !== "") {
+                index = member.indexOf("[");
 
-        if (member !== "") {
-            index = member.indexOf("[");
-
-            if (index != 0) {
-                if (index == -1) {
-                    member = "." + member;
-                } else {
-                    member = "." + member.substring(0, index) + " || {})" + member.substring(index);
-                    wrap = true;
+                if (index != 0) {
+                    if (index == -1) {
+                        member = "." + member;
+                    } else {
+                        count++;
+                        member = "." + member.substring(0, index) + " || {})" + member.substring(index);
+                    }
                 }
+
+                count++;
+                result += member + ((idx < length - 1) ? " || {})" : ")");
             }
-            if (first) {
-                 return (wrap ? "(" : "") + inner + member;
-            }
-            return "(" +  (wrap ? "(" : "")+ inner + member + " || {})";
         }
-        return inner;
+        return new Array(count).join("(") + result;
     }
 
     extend(kendo, /** @lends kendo */ {
@@ -1379,7 +1378,7 @@
             }
 
             if (safe) {
-                return new Function("d", "return " + wrapExpression(expression.split("."), true));
+                return new Function("d", "return " + wrapExpression(expression.split(".")));
             }
 
             return new Function("d", "return d" + expression);
