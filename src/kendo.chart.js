@@ -18,7 +18,7 @@
         ANIMATION_STEP = 10,
         BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
-        BAR_BORDER_BRIGHTNESS = 0.7,
+        BAR_BORDER_BRIGHTNESS = 0.8,
         BAR_GAP = 1.5,
         BAR_SPACING = 0.4,
         BELOW = "below",
@@ -41,7 +41,7 @@
         GLOBAL_CLIP = "globalClip",
         HEIGHT = "height",
         HORIZONTAL = "horizontal",
-        INITIAL_ANIMATION_DURATION = 800,
+        INITIAL_ANIMATION_DURATION = 600,
         INSIDE_BASE = "insideBase",
         INSIDE_END = "insideEnd",
         INTERPOLATE = "interpolate",
@@ -6870,7 +6870,7 @@
                 }, {
                     offset: 0.25,
                     color: WHITE,
-                    opacity: 0.4
+                    opacity: 0.3
                 }, {
                     offset: 0.92,
                     color: WHITE,
@@ -7187,40 +7187,40 @@
 
     Chart.themes.kendo = deepExtend({}, baseTheme, {
         title: {
-            color: "#6d6e70"
+            color: "#8e8e8e"
         },
         legend: {
             labels: {
-                color: "#6d6e70"
+                color: "#232323"
             }
         },
         seriesDefaults: {
             labels: {
-                color: "#6d6e70"
+                color: "#8e8e8e"
             }
         },
-        seriesColors: ["#ffb800", "#ff8517", "#e34a00", "#545454", "#161616"],
+        seriesColors: ["#ff5400", "#ff8b24", "#ffc066", "#9da600", "#688900", "#3e6100"],
         categoryAxis: {
             line: {
-                color: "#696e70"
+                color: "#8e8e8e"
             },
             labels: {
-                color: "#696e70"
+                color: "#232323"
             },
             majorGridLines: {
-                color: "#d0d2d3",
+                color: "#dfdfdf",
                 visible: true
             }
         },
         valueAxis: {
             line: {
-                color: "#696e70"
+                color: "#8e8e8e"
             },
             labels: {
-                color: "#696e70"
+                color: "#232323"
             },
             majorGridLines: {
-                color: "#d0d2d3"
+                color: "#dfdfdf"
             }
         }
     });
