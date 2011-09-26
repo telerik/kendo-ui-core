@@ -351,7 +351,7 @@
                         });
 
                         if (options.show) {
-                            css = extend( css, { display: "block" } ); // Add show to the set
+                            css = extend( css, { display: element.data("olddisplay") } ); // Add show to the set
                         }
 
                         if (css.transform) {
@@ -374,7 +374,7 @@
                 }
 
                 if (options.show) {
-                    element.show();
+                    element.css({ display: element.data("olddisplay") }).css("display");
                 }
 
                 deferred.resolve();
@@ -390,7 +390,7 @@
                 .dequeue(); // call next animation from the queue
 
             if (options.hide) {
-                element.hide();
+                element.data("olddisplay", element.css("display")).hide();
             }
 
             if (size(effects)) {
@@ -401,8 +401,9 @@
                 each( methods.teardown, function () { this(element, options.reverse); } ); // call the internal completion callbacks
             }
 
-            if (options.completeCallback)
+            if (options.completeCallback) {
                 options.completeCallback(); // call the external complete callback
+            }
         });
     };
 
@@ -550,7 +551,7 @@
 
                 if (!reverse) {
                     offset = direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth());
-                    !element.data(ORIGIN) && element.data(ORIGIN, animationProperty(element, kendo.directions[options.direction].transition));
+                    !element.data(ORIGIN) && element.data(ORIGIN, animationProperty(element, direction.transition));
                 }
 
                 extender[direction.transition] = reverse ? (element.data(ORIGIN) || 0) + PX : offset + PX;

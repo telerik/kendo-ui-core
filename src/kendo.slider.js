@@ -585,7 +585,8 @@
                     return;
                 }
 
-                var mousePosition = that._isHorizontal ? e.pageX : e.pageY,
+                var location = kendo.touchLocation(e),
+                    mousePosition = that._isHorizontal ? location.x : location.y,
                     dragableArea = that._getDragableArea();
 
                 that._update(that._getValueFromPosition(mousePosition, dragableArea));
@@ -1085,7 +1086,8 @@
                     return;
                 }
 
-                var mousePosition = that._isHorizontal ? e.pageX : e.pageY,
+                var location = kendo.touchLocation(e),
+                    mousePosition = that._isHorizontal ? location.x : location.y,
                     dragableArea = that._getDragableArea(),
                     val = that._getValueFromPosition(mousePosition, dragableArea);
 
