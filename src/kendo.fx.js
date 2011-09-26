@@ -351,7 +351,7 @@
                         });
 
                         if (options.show) {
-                            css = extend( css, { display: element.data("olddisplay") } ); // Add show to the set
+                            css = extend( css, { display: element.data("olddisplay") || "block" } ); // Add show to the set
                         }
 
                         if (css.transform) {
@@ -374,7 +374,7 @@
                 }
 
                 if (options.show) {
-                    element.css({ display: element.data("olddisplay") }).css("display");
+                    element.css({ display: element.data("olddisplay") || "block" }).css("display");
                 }
 
                 deferred.resolve();
