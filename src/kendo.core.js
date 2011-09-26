@@ -1109,7 +1109,7 @@
     var fx = {
         promise: function (element, options) {
             if (options.show) {
-                element.css({ display: element.data("olddisplay") }).css("display");
+                element.css({ display: element.data("olddisplay") || "block" }).css("display");
             }
 
             if (options.hide) {
