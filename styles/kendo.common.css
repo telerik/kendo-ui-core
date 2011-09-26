@@ -802,6 +802,23 @@ div.k-window-content
     top: auto;
 }
 
+.k-menu .k-separator
+{
+    padding: 0.25em 0;
+    height: 100%;
+    width: 1px;
+    border-width: 0 1px 0 0;
+}
+
+.k-menu-vertical .k-separator,
+.k-menu .k-group .k-separator
+{
+    padding: 0;
+    height: 1px;
+    width: 100%;
+    border-width: 1px 0 0;
+}
+
 /* Grid */
 .k-grid
 {
