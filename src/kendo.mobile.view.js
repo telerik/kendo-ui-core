@@ -2,6 +2,8 @@
 
     var kendo = window.kendo,
         ui = kendo.ui,
+        mobile = kendo.mobile,
+        os = kendo.support.mobileOS,
         touch = kendo.support.touch,
         Component = ui.Component;
 
@@ -18,26 +20,26 @@
             that.content = element.children(".k-content");
             that.footer = element.children(".k-footer");
 
-            if (options.hasHeader && !that.header.length)
-                that.header = $("<div class='k-header'/>").prependTo(element);
-
             if (!that.content.length)
                 that.content = $("<div class='k-content'/>").appendTo(element);
 
-            if (options.hasFooter && !that.footer.length)
-                that.footer = $("<div class='k-footer'/>").appendTo(element);
-
-            that.scroller = that.content.kendoScroller().data("kendoScroller");
+            that.scroller = that.content.kendoScroller({ showArrows: false }).data("kendoScroller");
             that.container = that.scroller.scrollElement || that.content;
 
-            if (this.onCreate) {
-                this.onCreate();
+            if (options.formInit) {
+                mobile.initForm(that.element, options.previousView);
             }
+
+            $(document).trigger("viewinit", { view: that, mobileOS: os });
         },
 
         options: {
-            hasHeader: true,
-            hasFooter: true
+            formInit: true,
+            animation: {
+                effects: "slide:left",
+                duration: 250,
+                divisor: 2
+            }
         },
 
         bind: function(data) {
@@ -45,15 +47,16 @@
         },
 
         show: function(container) {
-            if (this.onShow) {
-                this.onShow();
-            }
+            $(document).trigger("viewshow", { view: this, mobileOS: os });
 
-            this.element.appendTo(container);
+            if (this.element[0].parentNode !== container)
+                this.element.appendTo(container);
         },
 
         hide: function() {
-            this.element.remove();
+            $(document).trigger("viewhide", { view: this, mobileOS: os });
+
+            this.element.hide();
         }
     });
 
