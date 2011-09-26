@@ -167,7 +167,7 @@
             return member;
         },
         getter: function(member) {
-            return getter(this.xpathToMember(member));
+            return getter(this.xpathToMember(member), true);
         }
     });
 
