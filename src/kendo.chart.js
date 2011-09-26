@@ -2026,7 +2026,11 @@
             var barLabel = this;
             ChartElement.fn.init.call(barLabel, options);
 
-            barLabel.append(new TextBox(content, barLabel.options));
+            barLabel.append(
+                new TextBox(content, barLabel.options),
+                new BoxElement(deepExtend({}, barLabel.options, {
+                }))
+            );
         },
 
         options: {
@@ -2054,6 +2058,7 @@
                 isVertical = options.isVertical,
                 aboveAxis = options.aboveAxis,
                 text = barLabel.children[0],
+                backBox = barLabel.children[1],
                 box = text.box;
 
             text.options.align = isVertical ? CENTER : LEFT;
@@ -2066,8 +2071,13 @@
                     if (!aboveAxis && box.height() < targetBox.height()) {
                         text.options.vAlign = BOTTOM;
                     }
+
+                    backBox.options.width = targetBox.width();
+                    backBox.options.height = text.paddingBox.height();
                 } else {
                     text.options.align = aboveAxis ? RIGHT : LEFT;
+                    backBox.options.width = text.paddingBox.width();
+                    backBox.options.height = targetBox.height();
                 }
             } else if (options.position == CENTER) {
                 text.options.vAlign = CENTER;
@@ -2107,6 +2117,11 @@
                 }
             }
 
+
+            backBox.options.padding = 0;
+            backBox.options.align = text.options.align;
+            backBox.options.vAlign = text.options.vAlign;
+            backBox.reflow(targetBox);
             text.reflow(targetBox);
         }
     });
@@ -7210,8 +7225,7 @@
             labels: {
                 color: "#ffffff",
                 background: "#564942",
-                opacity: 0.8,
-                padding: 5
+                opacity: 0.8
             }
         },
         seriesColors: ["#ff5400", "#ff8b24", "#ffc066", "#9da600", "#688900", "#3e6100"],
