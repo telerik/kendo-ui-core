@@ -6245,7 +6245,7 @@
     var PieAnimation = ElementAnimation.extend({
         options: {
             easing: "easeOutElastic",
-            duration: 500
+            duration: INITIAL_ANIMATION_DURATION
         },
 
         setup: function() {
