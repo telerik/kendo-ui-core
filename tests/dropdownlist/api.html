@@ -92,16 +92,14 @@
                 equal(dropdownlist.text(), "foo");
             });
 
-            test("open should open popup", function () {
+            asyncTest("open should open popup", function () {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
                 dropdownlist._scroll = function() { ok(true); start(); };
                 dropdownlist.open();
-
-                stop(1);
             });
 
-            test("open should call _scroll method", function () {
+            asyncTest("open should call _scroll method", function () {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
                 dropdownlist.popup.bind("open", function(){
@@ -110,12 +108,9 @@
                 });
 
                 dropdownlist.open();
-
-                stop(1);
-
             });
 
-            test("open should bind and open after this if no items", function () {
+            asyncTest("open should bind and open after this if no items", function () {
                 var dropdownlist = input.kendoDropDownList({autoBind: false, dataSource: data}).data("kendoDropDownList");
 
                 dropdownlist.popup.bind("open", function(){
@@ -124,12 +119,9 @@
                 });
 
                 dropdownlist.open();
-
-                stop(1);
-
             });
 
-            test("close should close popup", function () {
+            asyncTest("close should close popup", function () {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
                 dropdownlist.popup.bind("close", function(){
@@ -139,9 +131,6 @@
 
                 dropdownlist.open();
                 dropdownlist.close();
-
-                stop(1);
-
             });
 
             test("text should set span html", function() {
