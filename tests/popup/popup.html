@@ -32,7 +32,7 @@
                 }
             });
 
-            test("mousedown outside the element should close it", function(){
+            asyncTest("mousedown outside the element should close it", function(){
                 div.kendoPopup( {
                     anchor: anchor,
                     close: function() {
@@ -42,7 +42,6 @@
                 }).show();
 
                 $(document.documentElement).mousedown();
-                stop(1);
             });
 
             test("mousedown inside toggleTarget should not close the popup", function() {
@@ -72,7 +71,7 @@
                 ok(!div.is(":visible"));
             });
 
-            test("open raises the open event", function() {
+            asyncTest("open raises the open event", function() {
                 div.kendoPopup( {
                     open: function() {
                         ok(true);
@@ -81,7 +80,6 @@
                 });
 
                 div.data("kendoPopup").open();
-                stop(1);
             });
 
             test("open shows the element", function() {
@@ -92,7 +90,7 @@
                 ok(div.is(":visible"));
             });
 
-            test("close triggers the close event", function() {
+            asyncTest("close triggers the close event", function() {
                 div.kendoPopup( {
                     close: function() {
                         ok(true);
@@ -101,10 +99,9 @@
                 });
 
                 div.show().data("kendoPopup").close();
-                stop(1);
             });
 
-            test("close closes the element", function() {
+            asyncTest("close closes the element", function() {
                 div.kendoPopup();
 
                 div.show().data("kendoPopup").close();
@@ -113,8 +110,6 @@
                     ok(!div.is(":visible"));
                     start();
                 }, 400);
-
-                stop(1);
             });
 
             test("popup is made absolute", function() {
@@ -397,7 +392,7 @@
                 ok(div.is(":visible"));
             });
 
-            test("toggle closes opened popup", function() {
+            asyncTest("toggle closes opened popup", function() {
                 var popup = new Popup(div, {
                     close: function() {
                         ok(true);
@@ -407,10 +402,9 @@
 
                 div.show();
                 popup.toggle();
-                stop(1);
             });
 
-            test("triggering the toggleEvent on the toggleTarget toggles the popup", function() {
+            asyncTest("triggering the toggleEvent on the toggleTarget toggles the popup", function() {
                 var popup = new Popup(div, {
                     open: function() {
                         ok(true);
@@ -420,8 +414,6 @@
                 });
 
                 $(document.body).click();
-
-                stop(1);
             });
 
             test("update position of the popup on window.onresize", function() {
