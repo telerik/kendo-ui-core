@@ -47,7 +47,7 @@
                 });
 
                 input.val("f").press("f".charCodeAt(0));
-                stop(1000);
+                stop(1);
             });
 
             test("popup is opened if there are results returned from the filter", function() {
@@ -62,7 +62,7 @@
                 });
 
                 input.val("f").press("f".charCodeAt(0));
-                stop(1000);
+                stop(1);
             });
 
             test("popup should close if input is empty", function() {
@@ -75,7 +75,7 @@
                     start();
                 });
                 input.val("").press(8/*backspace*/);
-                stop(1000);
+                stop(1);
             });
 
         </script>

@@ -108,17 +108,15 @@
                 equal(combobox.text(), "2");
             });
 
-            test("open should call _scroll method", function () {
+            asyncTest("open should call _scroll method", function () {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
                 combobox.select(0);
                 combobox._scroll = function() { ok(true); start(); };
                 combobox.open();
-
-                stop(400);
             });
 
-            test("open should open popup", function () {
+            asyncTest("open should open popup", function () {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
                 combobox.popup.bind("open", function(){
@@ -127,12 +125,9 @@
                 });
 
                 combobox.open();
-
-                stop(400);
-
             });
 
-            test("open should bind and open after this if no items", function () {
+            asyncTest("open should bind and open after this if no items", function () {
                 var combobox = input.kendoComboBox({autoBind: false, dataSource: data}).data("kendoComboBox");
 
                 combobox.popup.bind("open", function(){
@@ -141,12 +136,9 @@
                 });
 
                 combobox.open();
-
-                stop(400);
-
             });
 
-            test("close should close popup", function () {
+            asyncTest("close should close popup", function () {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
                 combobox.popup.bind("close", function(){
@@ -156,9 +148,6 @@
 
                 combobox.open();
                 combobox.close();
-
-                stop(400);
-
             });
 
             test("value should select custom option if element is select", function() {

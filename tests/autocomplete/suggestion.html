@@ -221,14 +221,14 @@
                     filter: "contains"
                 });
 
+                stop(1);
+
                 autocomplete.dataSource.bind("change", function() {
                     equal(autocomplete.dataSource.view().length, 2);
                     start();
                 });
 
                 autocomplete.search("foo");
-
-                stop(200);
             });
 
             test("filtering honers dataTextField", function() {
@@ -237,6 +237,8 @@
                     dataTextField: "text"
                 });
 
+                stop(1);
+
                 autocomplete.dataSource.bind("change", function() {
                     equal(autocomplete.dataSource.view().length, 1);
                     equal(autocomplete.dataSource.view()[0].text, "foo");
@@ -244,8 +246,6 @@
                 });
 
                 autocomplete.search("f");
-
-                stop(300);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

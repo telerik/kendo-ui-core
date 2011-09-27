@@ -32,7 +32,7 @@ tests.push(
         title: "culture"
     },
     {
-        page: "core/globalizeIntegration.html",
+        page: "core/GlobalizeIntegration.html",
         title: "globalize integration"
     },
     {
