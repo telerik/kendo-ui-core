@@ -101,14 +101,17 @@
     // then set up the metric callbacks
     if (top.__qunit_runner) {
         var runner = top.__qunit_runner;
-        QUnit.done = function (failures, total) {
-            runner.pageProgress(window.frameElement, failures, total, "done", true);
-        };
-        QUnit.testStart = function (name) {
-            runner.pageProgress(window.frameElement, 0, 0, name + " started");
-        }
-        QUnit.testDone = function (name, failures, total) {
-            runner.pageProgress(window.frameElement, failures, total, name);
-        }
+
+        QUnit.config.done.push(function (state) {
+            runner.pageProgress(window.frameElement, state.failed, state.total, "done", true);
+        });
+
+        QUnit.config.testStart.push(function (state) {
+            runner.pageProgress(window.frameElement, 0, 0, state.name + " started");
+        });
+
+        QUnit.config.testDone.push(function (state) {
+            runner.pageProgress(window.frameElement, state.failed, state.total, state.name);
+        });
     }
 })(this);
