@@ -1844,21 +1844,9 @@
                 box = element.box = new Box2D(0, 0, options.width, options.height);
             } else {
                 box = element.box;
-
-                if (options.width) {
-                    var widthToAdd = (options.width - box.width());
-                    box.x1 -= widthToAdd / 2;
-                    box.x2 += widthToAdd / 2;
-                }
-
-                if (options.height) {
-                    var heightToAdd = (options.height - box.height());
-                    box.y1 -= heightToAdd / 2;
-                    box.y2 += heightToAdd / 2;
-                }
             }
 
-            contentBox = box.clone();
+            contentBox = element.contentBox = box.clone();
 
             box.pad(padding).pad(borderWidth).pad(margin);
 
@@ -1869,7 +1857,7 @@
 
             element.translateChildren(
                 box.x1 - contentBox.x1 + margin.left + borderWidth + padding.left,
-                box.y1 - contentBox.y1 + margin.top + borderWidth + padding.left);
+                box.y1 - contentBox.y1 + margin.top + borderWidth + padding.top);
         },
 
         align: function(targetBox, axis, alignment) {
@@ -2038,21 +2026,19 @@
             var barLabel = this;
             ChartElement.fn.init.call(barLabel, options);
 
-            barLabel.append(
-                new TextBox(content, barLabel.options)
-            );
+            barLabel.append(new TextBox(content, barLabel.options));
         },
 
         options: {
             font: SANS12,
             position: OUTSIDE_END,
-            margin: getSpacing(2),
-            padding: getSpacing(2),
+            margin: getSpacing(3),
+            padding: getSpacing(5),
             color: BLACK,
             background: "",
             border: {
-                width: 0,
-                color: BLACK
+                width: 1,
+                color: ""
             },
             aboveAxis: true,
             isVertical: false,
@@ -2068,7 +2054,8 @@
                 isVertical = options.isVertical,
                 aboveAxis = options.aboveAxis,
                 text = barLabel.children[0],
-                box = text.box;
+                box = text.box,
+                padding = text.options.padding;
 
             text.options.align = isVertical ? CENTER : LEFT;
             text.options.vAlign = isVertical ? TOP : CENTER;
@@ -2080,11 +2067,8 @@
                     if (!aboveAxis && box.height() < targetBox.height()) {
                         text.options.vAlign = BOTTOM;
                     }
-
-                    text.options.width = targetBox.width();
                 } else {
                     text.options.align = aboveAxis ? RIGHT : LEFT;
-                    text.options.height = targetBox.height();
                 }
             } else if (options.position == CENTER) {
                 text.options.vAlign = CENTER;
@@ -2124,9 +2108,14 @@
                 }
             }
 
-            text.options.padding = 0;
-            text.options.border.width = 1;
-            text.options.border.color = "";
+            if (isVertical) {
+                padding.left = padding.right =
+                    (targetBox.width() - text.contentBox.width()) / 2;
+            } else {
+                padding.top = padding.bottom =
+                    (targetBox.height() - text.contentBox.height()) / 2;
+            }
+
             text.reflow(targetBox);
         }
     });
@@ -7230,7 +7219,7 @@
             labels: {
                 color: "#ffffff",
                 background: "#564942",
-                opacity: 0.8
+                opacity: 0.7
             }
         },
         seriesColors: ["#ff5400", "#ff8b24", "#ffc066", "#9da600", "#688900", "#3e6100"],
