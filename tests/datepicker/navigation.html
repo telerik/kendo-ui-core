@@ -3,13 +3,13 @@
     <head>
         <title>DatePicker API</title>
         <script src="../../src/jquery.js"></script>
-        <script type="text/javascript" src="../qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.datepicker.js"></script>
-        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
         <h1 id="qunit-header">DatePicker API</h1>
@@ -21,6 +21,8 @@
 
             var DateView = kendo.DateView,
                 keys = kendo.keys;
+
+            QUnit.config.testTimeout = 500;
 
             module("kendo.ui.DatePicker API", {
                 setup: function() {
@@ -46,7 +48,6 @@
 
                 equal(+dv._viewedValue, +value);
             });
-
 
             //MONTH View
             test("navigate should focus next day in month view", function() {
@@ -363,6 +364,22 @@
                 equal(dv.calendar.calls("navigateToFuture"), 1);
             });
 
+            asyncTest("Enter should close date if select date", function() {
+                var event = { keyCode: keys.ENTER, preventDefault: $.noop },
+                dv = new DateView({
+                    anchor: $("<input />"),
+                    value: new Date(2000, 10, 10),
+                    close: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                dv.open();
+
+                dv.navigate(event);
+            });
+
             test("Enter should focus viewedDate", function() {
                 var event = { keyCode: keys.ENTER, preventDefault: $.noop },
                     dv = new DateView({value: new Date(2000, 10, 10)});
@@ -372,6 +389,7 @@
                 dv.calendar.navigate(new Date(2000, 10, 10), "year");
                 dv.navigate(event);
 
+                ok(dv.popup.visible());
                 equal(dv.calendar.view.find(".k-state-focused").length, 1);
             });
 
@@ -425,44 +443,55 @@
 
 
             test("keydown triggered from datepicker should call navigate method", function() {
-                var input = $("<input />").appendTo(document.body),
+                var input = $("<input />"),
                     datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-                try {
-                    stub(datepicker.dateView.calendar, "_focusCell");
-                    input.trigger({ type:"keydown", keyCode: 40});
+                stub(datepicker.dateView.calendar, "_focusCell");
+                input.trigger({ type:"keydown", keyCode: 40});
 
-                    equal(datepicker.dateView.calendar.calls("_focusCell"), 1);
-
-                } finally {
-                    input.parents(".k-widget").andSelf().remove();
-                }
+                equal(datepicker.dateView.calendar.calls("_focusCell"), 1);
             });
 
             test("keydown triggered from datepicker should call navigate method", function() {
-                var input = $("<input />").appendTo(document.body),
+                var input = $("<input />"),
                     datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-                try {
-                    stub(datepicker.dateView.calendar, "_focusCell");
-                    input.trigger({ type:"keydown", keyCode: 40});
+                stub(datepicker.dateView.calendar, "_focusCell");
+                input.trigger({ type:"keydown", keyCode: 40});
 
-                    equal(datepicker.dateView.calendar.calls("_focusCell"), 1);
-
-                } finally {
-                    input.parents(".k-widget").andSelf().remove();
-                }
+                equal(datepicker.dateView.calendar.calls("_focusCell"), 1);
             });
 
-            test("type invalide date does not clear input", function() {
-                var input = $("<input />").appendTo(document.body),
+            asyncTest("type invalide date does not clear input", function() {
+                var input = $("<input />"),
                     datepicker = input.kendoDatePicker({value: new Date()}).data("kendoDatePicker"),
                     value = "invalid date";
 
                 input.focus().val(value).blur();
 
-                equal(input.val(), value);
-                equal(datepicker.value(), null);
+                setTimeout(function() {
+                    equal(input.val(), value);
+                    equal(datepicker.value(), null);
+                    start();
+                }, 300);
+            });
+
+            test("click on selected date should close the dateView", function() {
+                var dv = new DateView({
+                    anchor: $("<input />"),
+                    clearBlurTimeout: $.noop,
+                    close: function() {
+                        ok(true);
+                    }
+                });
+
+                dv.open();
+                dv.value(new Date());
+
+                dv.calendar
+                  .element
+                  .find(".k-state-selected")
+                  .click();
             });
 
         </script>

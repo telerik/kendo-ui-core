@@ -24,10 +24,15 @@
             div.appendTo(document.body);
             calendar = new ui.Calendar(div);
             popup = new ui.Popup(div);
+
+            calendar.element.bind("click", function(e) {
+                if (e.currentTarget.className.indexOf("k-state-selected") !== -1) {
+                    that.close();
+                }
+            });
         }
 
         that.options = options = options || {};
-
         that.calendar = calendar;
         that.popup = popup;
 
@@ -116,8 +121,12 @@
                     calendar.navigateUp();
                     e.preventDefault();
                 } else if (keys.DOWN == key) {
-                    navigateDown(calendar);
                     e.preventDefault();
+                    navigateDown(calendar);
+
+                    //if (calendar._currentView === calendar.options.depth) {
+                    //that.close();
+                    //}
                 }
             } else if (e.altKey) {
                 if (keys.DOWN == key) {
@@ -141,8 +150,11 @@
                     value = viewName === "month" ? 7 : 4;
                     e.preventDefault();
                 } else if (keys.ENTER == key) {
-                    navigateDown(calendar);
                     e.preventDefault();
+                    navigateDown(calendar);
+                    /if (calendar._currentView === calendar.options.depth) {
+                    //that.close();
+                    //}
                 }
 
                 if (value) {
@@ -217,6 +229,7 @@
 
             that.bind(CHANGE, options);
 
+            that._valid = true;
             that.value(options.value);
         },
 
@@ -248,7 +261,12 @@
 
             that._value = value;
             that.dateView.value(value);
-            that.element.val(kendo.toString(value, that.options.format));
+
+            if (that._valid) {
+                that.element.val(kendo.toString(value, that.options.format));
+            }
+
+            that._valid = true;
         },
 
         _clearBlurTimeout: function() {
@@ -263,6 +281,8 @@
             var that = this;
 
             value = parse(value, that.options.format);
+
+            that._valid = value !== null;
 
             if (+value != +that._value) {
                 that.value(value);
