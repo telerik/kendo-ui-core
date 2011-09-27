@@ -52,6 +52,7 @@
 
 html, body
 {
+    -ms-content-zooming: none;
     height: 100%;
     margin: 0;
     overflow: hidden;
@@ -80,7 +81,6 @@ body,
 
 .k-showcase
 {
-    position: absolute;
     width: 100%;
     height: 100%;
 }
@@ -92,12 +92,6 @@ body,
     height: 100%;
     display: table\9;
     overflow: hidden;
-}
-
-.k-view:-moz-first-node,
-:-moz-first-node~.k-view
-{
-    float: none;
 }
 
 .k-header
@@ -427,6 +421,7 @@ body > .k-tabStrip,
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
+    .k-showcase { position: absolute; }
     .k-tabStrip { display: table; word-spacing: normal; }
     .k-buttonStrip > .k-button { display: inline-block; }
 }

@@ -5,7 +5,7 @@
     <title>ToKenDo</title>
 
     <!-- Weinre Proxy, configure to your machine if you have it. -->  
-    <!--<script src="http://bundev.telerik.com:8888/target/target-script-min.js"></script>-->
+    <script src="http://bundev.telerik.com:8080/target/target-script-min.js"></script>
      
     <link rel="stylesheet/less" type="text/css" href="layout.less" />
     <link rel="stylesheet" href="scroll-container.css" />
@@ -108,7 +108,8 @@
             var template = kendo.template(document.getElementById("item_tmpl").innerHTML);
 
             $(".k-contentIn").html(template({ data: data }))
-                .delegate('.more-details', 'click', function() {
+                .delegate('.more-details', 'click', function(e) {
+                    e.preventDefault();
                     var todoItemId = $(this).index();
                     kendo.mobile.switchView("edit.html");
                 });

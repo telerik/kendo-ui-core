@@ -1,5 +1,6 @@
 (function($, undefined){
     var extend = $.extend,
+        each = $.each,
         mobile = kendo.mobile = kendo.mobile || {},
         os = kendo.support.mobileOS,
         touch = kendo.support.touch,
@@ -10,6 +11,23 @@
         $(document.documentElement).removeClass('k-ios').addClass("k-" + os.name);
     }
 
+//    each(["touchstart", "touchend", "touchmove", "touchcancel", "gesturestart", "gestureend"], function(m, value) {
+//        $.fn[value] = function(callback) {
+//            return this.bind(value, callback)
+//        }
+//    });
+//
+//    $(document.body).bind('mousedown', function(e) {
+//        $(e.target).data('touched', true);
+//        $(e.target).trigger('touchstart', e);
+//    }).bind('mousemove', function(e) {
+//        if ($(e.target).data('touched'))
+//            $(e.target).trigger('touchmove', e);
+//    }).bind('mouseup', function(e) {
+//        $(e.target).data('touched', false);
+//        $(e.target).trigger('touchend', e);
+//    });
+//
     $(document).ready(function () {
         if (os) {
             if (!os.ios && !os.blackberry)
