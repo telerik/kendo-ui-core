@@ -4,6 +4,7 @@
         mobile = kendo.mobile = kendo.mobile || {},
         os = kendo.support.mobileOS,
         touch = kendo.support.touch,
+        pointers = kendo.support.pointers,
         transitions = kendo.support.transitions,
         buttonSelector = "[data-kendo-ui=button],button,input[type=submit],input[type=reset],input[type=button],input[type=image]";
 
@@ -11,23 +12,44 @@
         $(document.documentElement).removeClass('k-ios').addClass("k-" + os.name);
     }
 
-//    each(["touchstart", "touchend", "touchmove", "touchcancel", "gesturestart", "gestureend"], function(m, value) {
-//        $.fn[value] = function(callback) {
-//            return this.bind(value, callback)
-//        }
-//    });
-//
-//    $(document.body).bind('mousedown', function(e) {
-//        $(e.target).data('touched', true);
-//        $(e.target).trigger('touchstart', e);
-//    }).bind('mousemove', function(e) {
-//        if ($(e.target).data('touched'))
-//            $(e.target).trigger('touchmove', e);
-//    }).bind('mouseup', function(e) {
-//        $(e.target).data('touched', false);
-//        $(e.target).trigger('touchend', e);
-//    });
-//
+    if (pointers) {
+        each(["touchstart", "touchend", "touchmove", "touchcancel", "gesturestart", "gestureend"], function(m, value) {
+            $.fn[value] = function(callback) {
+                return this.bind(value, callback)
+            }
+        });
+
+        function createTouchEvent(e) {
+            e.changedTouches = e.getPointerList();
+
+            each(e.changedTouches, function(idx, value) {
+                value.identifier = value.pointerId;
+                value.pageX = value.clientX;
+                value.pageY = value.clientY;
+            });
+
+            e.touches = e.changedTouches;
+
+            return e;
+        }
+
+        document.documentElement.addEventListener('MSPointerDown', function(e) {
+            if (e.pointerType == 2) {
+                $(e.target).trigger('touchstart', createTouchEvent(e));
+            }
+        }, false);
+        document.documentElement.addEventListener('MSPointerMove', function(e) {
+            if (e.pointerType == 2) {
+                $(e.target).trigger('touchmove', createTouchEvent(e));
+            }
+        }, false);
+        document.documentElement.addEventListener('MSPointerUp', function(e) {
+            if (e.pointerType == 2) {
+                $(e.target).trigger('touchend', createTouchEvent(e));
+            }
+        }, false);
+    }
+
     $(document).ready(function () {
         if (os) {
             if (!os.ios && !os.blackberry)
@@ -91,23 +113,23 @@
                 $(".k-tabStrip").contents().wrapAll("<div class='k-tabContainer'>");
 
             element.delegate(buttonSelector, touch ? "touchend" : "mouseup", function (e) {
-                    e.preventDefault();
-                    var target = $(kendo.eventTarget(e));
+                e.preventDefault();
+                var target = $(kendo.eventTarget(e));
 
-                    if (target.data("kendo-ui") == "back" && previousView) {
-                        kendo.mobile.goToView(previousView, true);
-                        return;
-                    }
+                if (target.data("kendo-ui") == "back" && previousView) {
+                    kendo.mobile.goToView(previousView, true);
+                    return;
+                }
 
-                    target
-                        .parents(".k-buttonStrip, .k-tabStrip, .k-toolbar")
-                        .find(".k-state-active")
-                        .removeClass("k-state-active");
+                target
+                    .parents(".k-buttonStrip, .k-tabStrip, .k-toolbar")
+                    .find(".k-state-active")
+                    .removeClass("k-state-active");
 
-                    target
-                        .closest(".k-button")
-                        .addClass("k-state-active");
-                });
+                target
+                    .closest(".k-button")
+                    .addClass("k-state-active");
+            });
         },
 
         goToView: function(view, callback) {
