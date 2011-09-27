@@ -67,8 +67,7 @@
                         })
                         .bind(CHANGE, options);
 
-                calendarElement.unbind(MOUSEDOWN)
-                               .bind(MOUSEDOWN, options.clearBlurTimeout);
+                calendarElement.unbind(MOUSEDOWN).bind(MOUSEDOWN, options.clearBlurTimeout);
 
                 that.value(that._value);
             }
@@ -87,8 +86,14 @@
 
         toggle: function() {
             var that = this;
+
             that._initCalendar();
-            that.popup.toggle();
+
+            if (that.popup.visible()) {
+                that.close();
+            } else {
+                that.open();
+            }
         },
 
         navigate: function(e) {
@@ -103,30 +108,41 @@
             if (e.ctrlKey) {
                 if (keys.RIGHT == key) {
                     calendar.navigateToFuture();
+                    e.preventDefault();
                 } else if (keys.LEFT == key) {
                     calendar.navigateToPast();
+                    e.preventDefault();
                 } else if (keys.UP == key) {
                     calendar.navigateUp();
+                    e.preventDefault();
                 } else if (keys.DOWN == key) {
                     navigateDown(calendar);
+                    e.preventDefault();
                 }
             } else if (e.altKey) {
                 if (keys.DOWN == key) {
                     that.open();
+                    e.preventDefault();
                 } else if (keys.UP == key) {
                     that.close();
+                    e.preventDefault();
                 }
             } else {
                 if (keys.RIGHT == key) {
                     value = 1;
+                    e.preventDefault();
                 } else if (keys.LEFT == key) {
                     value = -1;
+                    e.preventDefault();
                 } else if (keys.UP == key) {
                     value = viewName === "month" ? -7 : -4;
+                    e.preventDefault();
                 } else if (keys.DOWN == key) {
                     value = viewName === "month" ? 7 : 4;
+                    e.preventDefault();
                 } else if (keys.ENTER == key) {
                     navigateDown(calendar);
+                    e.preventDefault();
                 }
 
                 if (value) {
@@ -186,13 +202,17 @@
 
             that.element
                 .addClass("k-input")
-                .bind("keydown", proxy(dateView.navigate, dateView))
-                .bind("blur", function() {
-                    var value = this.value;
-                    that._bluring = setTimeout(function() {
-                        that._change(value);
-                        that.close();
-                    });
+                .bind({
+                    keydown: function(e) {
+                        that.dateView.navigate(e);
+                    },
+                    blur: function() {
+                        var value = this.value;
+                        that._bluring = setTimeout(function() {
+                            that._change(value);
+                            that.close();
+                        }, 100);
+                    }
                 });
 
             that.bind(CHANGE, options);
@@ -233,8 +253,10 @@
 
         _clearBlurTimeout: function() {
             var that = this;
-            clearTimeout(that._bluring);
-            //setTimeout(function() { that.element.focus(); }, 500);
+            setTimeout(function() {
+                clearTimeout(that._bluring);
+                that.element.focus();
+            });
         },
 
         _change: function(value) {
@@ -263,10 +285,14 @@
                 icon = $('<span class="k-select k-header"><span class="k-icon k-icon-calendar">select</span></span>').insertAfter(element);
             }
 
-            icon.bind("click", proxy(function() {
-                that.dateView.toggle();
-                that._clearBlurTimeout();
-            }, that));
+            icon.bind({
+                click: function() {
+                    that.dateView.toggle();
+                },
+                mousedown: function() {
+                    that._clearBlurTimeout();
+                }
+            });
         },
 
         _wrapper: function() {

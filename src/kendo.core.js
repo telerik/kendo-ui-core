@@ -949,7 +949,7 @@
                     month = count < 3 ? getNumber(2) : getIndexByName(calendar.months[count == 3 ? 'namesAbbr' : 'names']);
 
                     if (month === null || outOfRange(month, 1, 12)) {
-                        return;
+                        return null;
                     }
                     month -= 1; //because month is zero based
                 } else if (ch === "y") {
