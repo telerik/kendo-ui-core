@@ -44,7 +44,6 @@
                 dv.navigate(downEvent);
                 dv.navigate(downEvent);
 
-                console.log(value);
                 equal(+dv._viewedValue, +value);
             });
 
@@ -453,6 +452,17 @@
                 } finally {
                     input.parents(".k-widget").andSelf().remove();
                 }
+            });
+
+            test("type invalide date does not clear input", function() {
+                var input = $("<input />").appendTo(document.body),
+                    datepicker = input.kendoDatePicker({value: new Date()}).data("kendoDatePicker"),
+                    value = "invalid date";
+
+                input.focus().val(value).blur();
+
+                equal(input.val(), value);
+                equal(datepicker.value(), null);
             });
 
         </script>

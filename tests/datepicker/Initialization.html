@@ -145,7 +145,10 @@
                 var called = false,
                     datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-                stub(datepicker, ["value", "close"]);
+                stub(datepicker, {
+                    value: datepicker.value,
+                    close: datepicker.close
+                });
 
                 datepicker.dateView.options.change();
 
@@ -175,7 +178,6 @@
                 ok(datepicker.dateView.popup.visible());
 
             });
-
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
