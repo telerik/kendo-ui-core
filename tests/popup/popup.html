@@ -3,12 +3,12 @@
     <head>
         <title>kendo.ui.Popup Tests</title>
         <script src="../../src/jquery.js"></script>
-        <script src="../qunit.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.popup.js"></script>
-        <link rel="stylesheet" href="../qunit.css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
         <h1 id="qunit-header">kendo.ui.Popup Tests</h1>
@@ -42,7 +42,7 @@
                 }).show();
 
                 $(document.documentElement).mousedown();
-                stop(1000);
+                stop(1);
             });
 
             test("mousedown inside toggleTarget should not close the popup", function() {
@@ -81,7 +81,7 @@
                 });
 
                 div.data("kendoPopup").open();
-                stop(1000);
+                stop(1);
             });
 
             test("open shows the element", function() {
@@ -101,7 +101,7 @@
                 });
 
                 div.show().data("kendoPopup").close();
-                stop(1000);
+                stop(1);
             });
 
             test("close closes the element", function() {
@@ -114,7 +114,7 @@
                     start();
                 }, 400);
 
-                stop(500);
+                stop(1);
             });
 
             test("popup is made absolute", function() {
@@ -407,7 +407,7 @@
 
                 div.show();
                 popup.toggle();
-                stop(1000);
+                stop(1);
             });
 
             test("triggering the toggleEvent on the toggleTarget toggles the popup", function() {
@@ -421,7 +421,7 @@
 
                 $(document.body).click();
 
-                stop(1000);
+                stop(1);
             });
 
             test("update position of the popup on window.onresize", function() {

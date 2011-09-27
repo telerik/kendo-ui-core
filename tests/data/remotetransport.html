@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
     <script src="../../src/jquery.js"></script>
-    <script type="text/javascript" src="../qunit.js"></script>
+    <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
     <script type="text/javascript" src="../qunit-runner.js"></script>
     <script type="text/javascript" src="../jquery.mockjax.js"></script>
     <script src="../../src/kendo.core.js"></script>
     <script src="../../src/kendo.model.js"></script>
     <script src="../../src/kendo.data.js"></script>
-    <link rel="stylesheet" href="../qunit.css" type="text/css" />
+    <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
 
     <body>
         <h1 id="qunit-header">QUnit example</h1>
@@ -42,7 +42,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.read();
             });
 
@@ -59,7 +59,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.read({ url: "foo" });
             });
 
@@ -81,7 +81,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.read({ url: "foo" });
             });
 
@@ -108,7 +108,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
@@ -137,7 +137,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
@@ -168,7 +168,7 @@
                         }
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.read({ url: "foo", data: { baz: "moo" } });
                 $.mockjaxClear();
                 $.mockjax({
@@ -180,7 +180,7 @@
                     }
                 });
 
-                stop(1000);
+                stop(1);
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
@@ -205,7 +205,7 @@
 
                 transport.update( { data: { foo: "bar" } } );
 
-                stop(1000);
+                stop(1);
 
             });
 
@@ -353,7 +353,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.read();
             });
 
@@ -365,7 +365,7 @@
                 $.mockjax({
                     url: "foo"
                 });
-                stop(1000);
+                stop(1);
                 transport.read({
                     success: function() {
                         ok(true);
@@ -383,7 +383,7 @@
                     url: "foo",
                     status: 500
                 });
-                stop(1000);
+                stop(1);
                 transport.read({
                     success: function() {
                         ok(false); // we should not be here
@@ -412,7 +412,7 @@
                     url: "foo"
                 });
 
-                stop(1000);
+                stop(1);
                 transport.read({
                     data: { foo: "bar" },
                     success: function() {
@@ -439,7 +439,7 @@
                     }
                 });
 
-                stop(1000);
+                stop(1);
                 transport.read({
                     success: function() {
                         start();
@@ -468,7 +468,7 @@
                     responseText: '[{"age": 1}]'
                 });
 
-                stop(1000);
+                stop(1);
                 transport.read({
                     data: { foo: "bar" },
                     success: $.noop
@@ -533,7 +533,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.update();
             });
 
@@ -551,7 +551,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.destroy();
             });
 
@@ -569,7 +569,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.create();
             });
             test("update passes its options to $.ajax", function() {
@@ -585,7 +585,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.update({ url: "foo" });
             });
 
@@ -602,7 +602,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.destroy({ url: "foo" });
             });
 
@@ -614,7 +614,7 @@
                 $.mockjax({
                     url: "foo"
                 });
-                stop(1000);
+                stop(1);
                 transport.update({
                     success: function() {
                         ok(true);
@@ -632,7 +632,7 @@
                     url: "foo",
                     status: 500
                 });
-                stop(1000);
+                stop(1);
                 transport.update({
                     success: function() {
                         ok(false); // we should not be here
@@ -662,7 +662,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.update({ url: "foo" });
             });
 
@@ -689,7 +689,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.update({ url: "foo", data: { baz: "moo" } });
             });
 
@@ -718,7 +718,7 @@
                         start();
                     }
                 });
-                stop(1000);
+                stop(1);
                 transport.update({ url: "foo", data: { baz: "moo" } });
             });
         </script>

@@ -2,11 +2,11 @@
 <html>
     <script src="../../../src/jquery.js"></script>
     <script type="text/javascript" src="../../jquery.mockjax.js"></script>
-    <script type="text/javascript" src="../../qunit.js"></script>
+    <script type="text/javascript" src="../../qunit/qunit/qunit.js"></script>
     <script type="text/javascript" src="../../qunit-runner.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.data.js"></script>
-    <link rel="stylesheet" href="../../qunit.css" type="text/css" />
+    <link rel="stylesheet" href="../../qunit/qunit/qunit.css" type="text/css" />
     <body>
         <h1 id="qunit-header">QUnit example</h1>
         <h2 id="qunit-banner"></h2>
@@ -194,7 +194,7 @@
                 });
 
                 dataSource.query( { sort: { field: "age", dir: "desc" } } );
-                stop(1000);
+                stop(1);
             });
 
             test("data is not paged if serverPaging = true", function() {
@@ -219,7 +219,7 @@
                 });
 
                 dataSource.query( { page: 2, pageSize: 1 } );
-                stop(1000);
+                stop(1);
             });
 
             test("page should page and persist settings applied through the constructor", function(){
@@ -382,7 +382,7 @@
                 });
 
                 dataSource.query( { filter: { field: "age", operator: "==", value: 2 } } );
-                stop(1000);
+                stop(1);
             });
 
             test("filter does not modify the original data", function() {
@@ -497,7 +497,7 @@
                 });
 
                 dataSource.query( { group: [{ field: "age" }] });
-                stop(1000);
+                stop(1);
             });
 
             test("group does not modify the original data", function() {
@@ -643,7 +643,7 @@
                 });
 
                 dataSource.query( {aggregate:[{ field: "foo", aggregate: "sum" }]} );
-                stop(1000);
+                stop(1);
             });
 
             test("query does pass additional options to the transport", function() {
