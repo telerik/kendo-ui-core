@@ -1,3 +1,6 @@
 [submodule "build/less-js"]
 	path = build/less-js
 	url = https://github.com/cloudhead/less.js.git
+[submodule "tests/qunit"]
+	path = tests/qunit
+	url = git://github.com/telerik/qunit.git
