@@ -2027,9 +2027,10 @@
             ChartElement.fn.init.call(barLabel, options);
 
             barLabel.append(
-                new TextBox(content, barLabel.options),
-                new BoxElement(deepExtend({}, barLabel.options, {
-                }))
+                new BoxElement(deepExtend({}, barLabel.options)),
+                new TextBox(content,
+                    deepExtend({}, barLabel.options, { background: "", border: { width: 0 } })
+                )
             );
         },
 
@@ -2057,8 +2058,8 @@
                 options = barLabel.options,
                 isVertical = options.isVertical,
                 aboveAxis = options.aboveAxis,
-                text = barLabel.children[0],
-                backBox = barLabel.children[1],
+                text = barLabel.children[1],
+                backBox = barLabel.children[0],
                 box = text.box;
 
             text.options.align = isVertical ? CENTER : LEFT;
@@ -2117,8 +2118,10 @@
                 }
             }
 
-
             backBox.options.padding = 0;
+            backBox.options.margin = 0;
+            backBox.options.border.width = 1;
+            backBox.options.border.color = "";
             backBox.options.align = text.options.align;
             backBox.options.vAlign = text.options.vAlign;
             backBox.reflow(targetBox);
