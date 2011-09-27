@@ -20,6 +20,7 @@
         lessJs = "less.js",
         themebuilderJs = "themebuilder.js",
         templateJs = "template.js",
+        colorEngineJs = "colorengine.js",
         stylesCss = "styles.css"
 
     function getScript(url, callback) {
@@ -30,23 +31,39 @@
         head.appendChild(script);
     }
 
-    // page without jQuery
-    if (typeof jQuery == UNDEFINED) {
-        queue.push(function(callback) {
-            getScript(jQueryJs, callback);
-        });
+    if (typeof jQuery == UNDEFINED || typeof kendo == UNDEFINED) {
+        var messageId = 'kendoThemeBuilderMessage';
+        if (document.getElementById(messageId)) {
+            return;
+        }
+        var messageText = '<p style="margin:0;padding:0;">It seems there are no Kendo widgets on this page, so the Kendo themebuilder will be of no use. Please try running it elsewhere.</p>';
+        var closeButton = '<p style="margin:1em 0 0;padding:0;"><button type="button" style="border:1px solid #aaa;background:#e3e3e3;color:#2e2e2e;cursor:pointer;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;" onclick="var msg = document.getElementById(\'' + messageId + '\');msg.parentNode.removeChild(msg);return false;">Close</button></p>';
+        var styles = 'position:absolute;top:50%;margin-top:-1.6em;left:50%;margin-left:-16em;z-index:9999999;font:12px sans-serif;text-align:center;width:32em;padding:1em;border:1px solid #2å2å2å;background:#f2f2f2;color:#ef652a;-moz-box-shadow: 1px 1px 7px 1px #666;-webkit-box-shadow: 1px 1px 7px 1px #666;box-shadow: 1px 1px 7px 1px #666;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;';
+        var messageWrap = document.createElement("div");
+        messageWrap.id = messageId;
+        messageWrap.style.cssText = styles;
+        messageWrap.innerHTML = messageText + closeButton;
+        document.body.appendChild(messageWrap);
+        return;
     }
 
-    // page without kendo -- maybe components are loaded asynchronously?
-    if (typeof kendo == UNDEFINED) {
-        queue.push(function(callback) {
-            $(head).append("<link rel='stylesheet' href='" + kendoCommonCss + "' />");
-            $(head).append("<link rel='stylesheet' href='" + kendoSkinCss + "' />");
+//    // page without jQuery
+//    if (typeof jQuery == UNDEFINED) {
+//        queue.push(function(callback) {
+//            getScript(jQueryJs, callback);
+//        });
+//    }
 
-            // TODO: use CDN when a recent version is uploaded
-            getScript(kendoAllJs, callback);
-        });
-    }
+//    // page without kendo -- maybe components are loaded asynchronously?
+//    if (typeof kendo == UNDEFINED) {
+//        queue.push(function(callback) {
+//            $(head).append("<link rel='stylesheet' href='" + kendoCommonCss + "' />");
+//            $(head).append("<link rel='stylesheet' href='" + kendoSkinCss + "' />");
+
+//            // TODO: use CDN when a recent version is uploaded
+//            getScript(kendoAllJs, callback);
+//        });
+//    }
 
     function buildConstants() {
         var properties = {
@@ -157,7 +174,9 @@
         // TODO: these can be merged during build
         getScript(applicationRoot + lessJs, function() {
             getScript(applicationRoot + themebuilderJs, function() {
-                getScript(applicationRoot + templateJs);
+                getScript(applicationRoot + templateJs, , function() {
+                    getScript(applicationRoot + colorEngineJs);
+                });
             });
         });
     });
