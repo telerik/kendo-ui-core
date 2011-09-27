@@ -52,6 +52,7 @@
                 });
 
                 asyncTest("expands rectangle right", function() {
+                    anim.setup();
                     anim.play();
 
                     setTimeout(function() {
@@ -65,6 +66,7 @@
                     var success = false;
 
                     rect.refresh = function() { success = true; };
+                    anim.setup();
                     anim.play();
 
                     setTimeout(function() {
@@ -87,6 +89,9 @@
                         rect = new Chart.SVGPath({
                             animation: {
                                 type: "bar"
+                            },
+                            options: {
+                                id: "id"
                             },
                             normalAngle: 0,
                             aboveAxis: true
@@ -196,6 +201,7 @@
 
                 asyncTest("animates top edge to final position", function() {
                     createAnim();
+                    anim.setup();
                     anim.play();
 
                     setTimeout(function() {
@@ -208,6 +214,7 @@
 
                 asyncTest("animates right edge to final position", function() {
                     createAnim({ normalAngle: 90 });
+                    anim.setup();
                     anim.play();
 
                     setTimeout(function() {
@@ -220,6 +227,7 @@
 
                 asyncTest("animates bottom edge to final position", function() {
                     createAnim({ aboveAxis: false });
+                    anim.setup();
                     anim.play();
 
                     setTimeout(function() {
@@ -232,6 +240,7 @@
 
                 asyncTest("animates left edge to final position", function() {
                     createAnim({ normalAngle: 90, aboveAxis: false });
+                    anim.setup();
                     anim.play();
 
                     setTimeout(function() {
@@ -436,7 +445,7 @@
 
             })();
 
-       </script>
+        </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
         <h2 id="qunit-banner"></h2>
