@@ -19,6 +19,7 @@
                 chartBox = new Box2D(0, 0, 800, 600),
                 plotArea,
                 pieChart,
+                TOLERANCE = 0.1,
                 root,
                 view;
 
@@ -46,8 +47,7 @@
                                name: "B"
                            }
                        ]
-                    },
-                    TOLERANCE = 0.1;
+                    };
 
                 function PlotAreaStub() { }
 
@@ -270,6 +270,91 @@
                 test("plotArea is created", function() {
                     ok(plotArea instanceof Chart.PlotArea);
                 });
+
+            })();
+
+
+            (function() {
+                var PADDING = 5,
+                    MARGIN = 5,
+                    pieSegment;
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    options: {
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    }
+                });
+
+                // ------------------------------------------------------------
+                module("Pie Chart / Labels / Configuration", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupPieChart(plotArea, {
+                            series: [ { data: [1, 2],
+                                labels: {
+                                    visible: false,
+                                    color: "labels-color",
+                                    background: "labels-background",
+                                    border: {
+                                        color: "labels-border-color",
+                                        width: 2,
+                                        dashType: "dot"
+                                    },
+                                    padding: PADDING,
+                                    margin: MARGIN,
+                                    distance: 20,
+                                    font: "labels-font"
+                                }
+                            } ]
+                        });
+                        pieSegment = pieChart.segments[0];
+                    }
+                });
+
+                test("applies visible to data labels", function() {
+                    equal(pieSegment.options.labels.visible, false);
+                });
+
+                test("applies color to data labels", function() {
+                    equal(pieSegment.options.labels.color, "labels-color");
+                });
+
+                test("applies background to data labels", function() {
+                    equal(pieSegment.options.labels.background, "labels-background");
+                });
+
+                test("applies border color to data labels", function() {
+                    equal(pieSegment.options.labels.border.color, "labels-border-color");
+                });
+
+                test("applies border width to data labels", function() {
+                    equal(pieSegment.options.labels.border.width, 2);
+                });
+
+                test("applies padding to data labels", function() {
+                    equal(pieSegment.options.labels.padding, PADDING);
+                });
+
+                test("applies margin to data labels", function() {
+                    equal(pieSegment.options.labels.margin, MARGIN);
+                });
+
+                test("applies margin to data labels", function() {
+                    equal(pieSegment.options.labels.border.dashType, "dot");
+                });
+
+                test("applies distance to data labels", function() {
+                    equal(pieSegment.options.labels.distance, 20);
+                });
+
+                test("applies font to data labels", function() {
+                    equal(pieSegment.options.labels.font, "labels-font");
+                });
+
 
             })();
 

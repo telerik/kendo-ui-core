@@ -36,14 +36,69 @@
                     type: "pie",
                     padding: 100,
                     labels: {
-                        font: "12px Arial, sans-serif",
+                        font: "15px Arial, sans-serif",
                         visible: true
                     }
                 },
+                transitions: true,
+                series: [{
+                    name: "World",
+                    data:[ 1, 2, 3, 4, 4, 3, 2, 1 ]
+                }],
+                chartArea: {
+                    border: {
+                        width: 1,
+                        color: "black"
+                    }
+                }
+            });
+
+            $("#container1").kendoChart({
+                title: {
+                    text: "Lollipop",
+                    position: "top"
+                },
+                theme: "kendo",
+                legend: {
+                    position: "left",
+                    visible: false
+                },
+                dataSource: data,
+                seriesDefaults: {
+                    type: "pie",
+                    padding: 100,
+                    labels: {
+                        visible: true,
+                        distance: 35,
+                        font: "15px Arial, sans-serif"
+                    }
+                },
+                transitions: true,
                 series: [{
                     name: "World",
                     data:[
                       {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
                           value: 1,
                           name: "Value H"
                       }, {
@@ -63,6 +118,591 @@
                           name: "Value H"
                       }, {
                           value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value B"
+                      }]
+                }],
+                chartArea: {
+                    border: {
+                        width: 1,
+                        color: "black"
+                    }
+                }
+            });
+
+            $("#container2").kendoChart({
+                title: {
+                    text: "Lollipop",
+                    position: "top"
+                },
+                theme: "kendo",
+                legend: {
+                    position: "left",
+                    visible: false
+                },
+                dataSource: data,
+                seriesDefaults: {
+                    type: "pie",
+                    padding: 100,
+                    labels: {
+                        visible: true,
+                        distance: 35,
+                        font: "15px Arial, sans-serif"
+                    }
+                },
+                transitions: false,
+                series: [{
+                    name: "World",
+                    data:[
+                      {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value B"
+                      }]
+                }],
+                chartArea: {
+                    border: {
+                        width: 1,
+                        color: "black"
+                    }
+                }
+            });
+
+            $("#container3").kendoChart({
+                title: {
+                    text: "Lollipop",
+                    position: "top"
+                },
+                theme: "kendo",
+                legend: {
+                    position: "left",
+                    visible: false
+                },
+                dataSource: data,
+                seriesDefaults: {
+                    type: "pie",
+                    padding: 100,
+                    labels: {
+                        visible: true,
+                        distance: 35,
+                        font: "15px Arial, sans-serif"
+                    }
+                },
+                transitions: false,
+                series: [{
+                    name: "World",
+                    data:[
+                      {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value B"
+                      }]
+                }],
+                chartArea: {
+                    border: {
+                        width: 1,
+                        color: "black"
+                    }
+                }
+            });
+
+            $("#container4").kendoChart({
+                title: {
+                    text: "Lollipop",
+                    position: "top"
+                },
+                theme: "kendo",
+                legend: {
+                    position: "left",
+                    visible: false
+                },
+                dataSource: data,
+                seriesDefaults: {
+                    type: "pie",
+                    padding: 100,
+                    labels: {
+                        visible: true,
+                        distance: 35,
+                        font: "15px Arial, sans-serif"
+                    }
+                },
+                transitions: false,
+                series: [{
+                    name: "World",
+                    data:[
+                      {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value B"
+                      }]
+                }],
+                chartArea: {
+                    border: {
+                        width: 1,
+                        color: "black"
+                    }
+                }
+            });
+
+            $("#container5").kendoChart({
+                title: {
+                    text: "Lollipop",
+                    position: "top"
+                },
+                theme: "kendo",
+                legend: {
+                    position: "left",
+                    visible: false
+                },
+                dataSource: data,
+                seriesDefaults: {
+                    type: "pie",
+                    padding: 100,
+                    labels: {
+                        visible: true,
+                        distance: 35,
+                        font: "15px Arial, sans-serif"
+                    }
+                },
+                transitions: false,
+                series: [{
+                    name: "World",
+                    data:[
+                      {
+                          value: 40,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value B"
+                      }, {
+                          value: 40,
+                          name: "Value B"
+                      }]
+                }],
+                chartArea: {
+                    border: {
+                        width: 1,
+                        color: "black"
+                    }
+                }
+            });
+
+            $("#container6").kendoChart({
+                title: {
+                    text: "Lollipop",
+                    position: "top"
+                },
+                theme: "kendo",
+                legend: {
+                    position: "left",
+                    visible: false
+                },
+                dataSource: data,
+                seriesDefaults: {
+                    type: "pie",
+                    padding: 100,
+                    labels: {
+                        visible: true,
+                        distance: 35,
+                        font: "15px Arial, sans-serif"
+                    }
+                },
+                transitions: false,
+                series: [{
+                    name: "World",
+                    data:[
+                      {
+                          value: 10,
+                          name: "Value H"
+                      }, {
+                          value: 25,
+                          name: "Value H"
+                      }, {
+                          value: 3,
+                          name: "Value H"
+                      }, {
+                          value: 40,
+                          name: "Value H"
+                      }, {
+                          value: 50,
+                          name: "Value H"
+                      }, {
+                          value: 6,
+                          name: "Value H"
+                      }, {
+                          value: 20,
+                          name: "Value H"
+                      }, {
+                          value: 35,
+                          name: "Value H"
+                      }, {
+                          value: 10,
+                          name: "Value H"
+                      }, {
+                          value: 20,
+                          name: "Value H"
+                      }, {
+                          value: 5,
+                          name: "Value H"
+                      }]
+                }],
+                chartArea: {
+                    border: {
+                        width: 1,
+                        color: "black"
+                    }
+                }
+            });
+
+            $("#container7").kendoChart({
+                title: {
+                    text: "Lollipop",
+                    position: "top"
+                },
+                theme: "kendo",
+                legend: {
+                    position: "left",
+                    visible: false
+                },
+                dataSource: data,
+                seriesDefaults: {
+                    type: "pie",
+                    padding: 100,
+                    labels: {
+                        visible: true,
+                        distance: 35,
+                        font: "15px Arial, sans-serif"
+                    }
+                },
+                transitions: false,
+                series: [{
+                    name: "World",
+                    data:[
+                      {
+                          value: 40,
                           name: "Value H"
                       }, {
                           value: 1,
@@ -190,10 +830,23 @@
     </script>
 
     <div id="container" style="width: 600px; height: 400px; margin-left: 100px;
-                               -webkit-transform: translateZ(0);"></div>
-    <div style="margin-left: 100px;">
-        <input type="button" value="Refresh" onclick="refresh();" />
-    </div>
+        -webkit-transform: translateZ(0); float: left;"></div>
+    <div id="container1" style="width: 600px; height: 400px; margin-right: 100px;
+        -webkit-transform: translateZ(0); float: right;"></div>
+
+    <div id="container2" style="width: 600px; height: 400px; margin-left: 100px;
+                               -webkit-transform: translateZ(0); float: left;"></div>
+    <div id="container3" style="width: 600px; height: 400px; margin-right: 100px;
+        -webkit-transform: translateZ(0); float: right;"></div>
+
+    <div id="container4" style="width: 600px; height: 400px; margin-left: 100px;
+        -webkit-transform: translateZ(0); float: left;"></div>
+    <div id="container5" style="width: 600px; height: 400px; margin-right: 100px;
+        -webkit-transform: translateZ(0); float: right;"></div>
+    <div id="container6" style="width: 600px; height: 400px; margin-left: 100px;
+                               -webkit-transform: translateZ(0); float: left;"></div>
+    <div id="container7" style="width: 600px; height: 400px; margin-right: 100px;
+                               -webkit-transform: translateZ(0); float: right;"></div>
     </body>
 </html>
 

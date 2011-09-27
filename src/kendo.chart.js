@@ -4355,23 +4355,31 @@
                         crossing.x = math.min(crossing.x, end.x - 4);
                         end.x -= 2;
                         if (sqr(sector.c.x - crossing.x) + sqr(sector.c.y - crossing.y) < sqr(sector.r) || crossing.x < sector.c.x) {
-                            points.push(new Point2D(sector.c.x + sector.r - number, start.y + number));
-                            if (number < 10) {
+                            points.push(new Point2D(sector.c.x + sector.r + connector.padding - number, start.y + number));
+                            points.push(new Point2D(end.x - 4, end.y));
+                            if (number < label.options.distance / 4 && start.y < end.y) {
                                 number += 1;
                             }
                         } else {
-                            number = 0;
+                            crossing.y = end.y;
                             points.push(crossing);
+                            number = 0;
                         }
                     } else {
                         end = new Point2D(box.x2 + connector.padding, box.center().y),
                         crossing = intersection(centerPoint, start, middle, end) || new Point2D(end.x + 4, end.y);
                         crossing.x = math.max(crossing.x, end.x + 4);
                         end.x += 2;
-                        if (sqr(crossing.x - sector.c.x) + sqr(crossing.y - sector.c.y) < sqr(sector.r)) {
+                        if (sqr(crossing.x - sector.c.x) + sqr(crossing.y - sector.c.y) < sqr(sector.r) || crossing.x > sector.c.x) {
+                            points.push(new Point2D(sector.c.x - sector.r - connector.padding + number, start.y + number));
                             points.push(new Point2D(end.x + 4, end.y));
+                            if (number < label.options.distance / 4 && start.y < end.y) {
+                                number += 1;
+                            }
                         } else {
+                            crossing.y = end.y;
                             points.push(crossing);
+                            number = 0;
                         }
                     }
 
