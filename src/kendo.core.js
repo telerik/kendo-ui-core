@@ -965,6 +965,7 @@
          * @property {Boolean}
          */
         support.touch = "ontouchstart" in window;
+        support.pointers = navigator.msPointerEnabled;
 
         /**
          * Indicates whether the browser supports CSS transitions.

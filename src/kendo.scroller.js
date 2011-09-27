@@ -7,7 +7,7 @@
         proxy = $.proxy,
         Component = ui.Component,
         events = [ "showArrow" ],
-        touch = support.touch,
+        touch = support.touch || support.pointers,
         hasHW3D = support.hasHW3D,
         cssPrefix = support.transitions.css,
         stylePrefix = support.transitions.prefix,
@@ -314,12 +314,15 @@
         },
 
         _wait: function (e) {
+            if (arguments[1] && "changedTouches" in arguments[1])
+                e = arguments[1];
+
             e.preventDefault(); // Might stir some problems...
             var that = this;
 
             that._dragged = false;
             clearTimeout(that.timeoutId);
-            that._originalEvent = e.originalEvent;
+            that._originalEvent = e.originalEvent || e;
             var startLocation = touchLocation(e),
                 scrollOffsets = getScrollOffsets(that.scrollElement);
 
@@ -337,7 +340,7 @@
                 .unbind(that._moveEvent, that._startProxy)
                 .bind(that._moveEvent, that._startProxy);
 
-            if (browser.mozilla) {
+            if (browser.mozilla || support.pointers) {
                 that.element
                     .unbind(that._endEvent, that._stopProxy) // Make sure previous event is removed
                     .bind(that._endEvent, that._stopProxy);
@@ -373,6 +376,7 @@
                 boxWidth = that.boxWidth,
                 boxHeight = that.boxHeight;
 
+            //debugger;
             extend(that, {
                         hasHorizontalScroll: scrollWidth > boxWidth,
                         hasVerticalScroll: scrollHeight > boxHeight,
@@ -392,6 +396,9 @@
         },
 
         _start: function (e) {
+            if (arguments[1] && "changedTouches" in arguments[1])
+                e = arguments[1];
+
             var that = this,
                 options = that.options;
 
@@ -442,6 +449,9 @@
         },
 
         _drag: function (e) {
+            if (arguments[1] && "changedTouches" in arguments[1])
+                e = arguments[1];
+
             var that = this;
             if (that._dragCanceled) return;
 
@@ -458,6 +468,9 @@
         },
 
         _click: function (e) {
+            if (arguments[1] && "changedTouches" in arguments[1])
+                e = arguments[1];
+
             var that = this;
             e.stopPropagation();
             e.preventDefault();
@@ -465,6 +478,9 @@
         },
 
         _stop: function (e) {
+            if (arguments[1] && "changedTouches" in arguments[1])
+                e = arguments[1];
+
             var that = this;
             if (that._dragCanceled) return;
             e.preventDefault();
@@ -513,6 +529,9 @@
         },
 
         _initKinetikAnimation: function (e) {
+            if (arguments[1] && "changedTouches" in arguments[1])
+                e = arguments[1];
+
             var that = this,
                 lastLocation = that.lastLocation,
                 bounceLocation = that.bounceLocation = touchLocation(e);
