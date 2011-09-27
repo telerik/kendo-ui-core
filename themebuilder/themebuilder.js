@@ -123,10 +123,11 @@
                         minWidth: 300,
                         maxWidth: 300,
                         minHeight: 160,
-                        maxHeight: $(window).height() - 100
+                        maxHeight: $(window).height() - 100,
+                        close: this.removeUpdateHeightHandler
                     });
 
-                $(window).resize($.proxy(this.updateMaxHeight, this));
+                $(window).bind("resize.kendoThemeBuilder", $.proxy(this.updateMaxHeight, this));
 
                 that.element = that.content.closest(".k-window")
                     .attr("id", "kendo-themebuilder-wrapper")
@@ -154,6 +155,9 @@
             },
             updateMaxHeight: function() {
                 this.content.data("kendoWindow").options.maxHeight = $(window).height() - 100;
+            },
+            removeUpdateHeightHandler: function() {
+                $(window).unbind("resize.kendoThemeBuilder");
             },
             _propertyChange: function(e) {
                 var that = this,
