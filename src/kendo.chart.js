@@ -1844,6 +1844,18 @@
                 box = element.box = new Box2D(0, 0, options.width, options.height);
             } else {
                 box = element.box;
+
+                if (options.width) {
+                    var widthToAdd = (options.width - box.width());
+                    box.x1 -= widthToAdd / 2;
+                    box.x2 += widthToAdd / 2;
+                }
+
+                if (options.height) {
+                    var heightToAdd = (options.height - box.height());
+                    box.y1 -= heightToAdd / 2;
+                    box.y2 += heightToAdd / 2;
+                }
             }
 
             contentBox = box.clone();
@@ -2027,10 +2039,7 @@
             ChartElement.fn.init.call(barLabel, options);
 
             barLabel.append(
-                new BoxElement(deepExtend({}, barLabel.options)),
-                new TextBox(content,
-                    deepExtend({}, barLabel.options, { background: "", border: { width: 0 } })
-                )
+                new TextBox(content, barLabel.options)
             );
         },
 
@@ -2058,8 +2067,7 @@
                 options = barLabel.options,
                 isVertical = options.isVertical,
                 aboveAxis = options.aboveAxis,
-                text = barLabel.children[1],
-                backBox = barLabel.children[0],
+                text = barLabel.children[0],
                 box = text.box;
 
             text.options.align = isVertical ? CENTER : LEFT;
@@ -2073,12 +2081,10 @@
                         text.options.vAlign = BOTTOM;
                     }
 
-                    backBox.options.width = targetBox.width();
-                    backBox.options.height = text.paddingBox.height();
+                    text.options.width = targetBox.width();
                 } else {
                     text.options.align = aboveAxis ? RIGHT : LEFT;
-                    backBox.options.width = text.paddingBox.width();
-                    backBox.options.height = targetBox.height();
+                    text.options.height = targetBox.height();
                 }
             } else if (options.position == CENTER) {
                 text.options.vAlign = CENTER;
@@ -2118,13 +2124,9 @@
                 }
             }
 
-            backBox.options.padding = 0;
-            backBox.options.margin = 0;
-            backBox.options.border.width = 1;
-            backBox.options.border.color = "";
-            backBox.options.align = text.options.align;
-            backBox.options.vAlign = text.options.vAlign;
-            backBox.reflow(targetBox);
+            text.options.padding = 0;
+            text.options.border.width = 1;
+            text.options.border.color = "";
             text.reflow(targetBox);
         }
     });
