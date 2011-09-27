@@ -194,7 +194,7 @@
                 });
 
                 dataSource.query( { sort: { field: "age", dir: "desc" } } );
-                stop(1000);
+                stop(1);
             });
 
             test("data is not paged if serverPaging = true", function() {
@@ -219,7 +219,7 @@
                 });
 
                 dataSource.query( { page: 2, pageSize: 1 } );
-                stop(1000);
+                stop(1);
             });
 
             test("page should page and persist settings applied through the constructor", function(){
@@ -382,7 +382,7 @@
                 });
 
                 dataSource.query( { filter: { field: "age", operator: "==", value: 2 } } );
-                stop(1000);
+                stop(1);
             });
 
             test("filter does not modify the original data", function() {
@@ -497,7 +497,7 @@
                 });
 
                 dataSource.query( { group: [{ field: "age" }] });
-                stop(1000);
+                stop(1);
             });
 
             test("group does not modify the original data", function() {
@@ -643,7 +643,7 @@
                 });
 
                 dataSource.query( {aggregate:[{ field: "foo", aggregate: "sum" }]} );
-                stop(1000);
+                stop(1);
             });
 
             test("query does pass additional options to the transport", function() {

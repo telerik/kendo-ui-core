@@ -146,7 +146,7 @@
     });
 
     test("success event arguments contain list of removed files", function() {
-        stop(1000);
+        stop(1);
 
         uploadInstance = createUpload({ success:
             function(e) {

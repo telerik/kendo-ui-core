@@ -109,7 +109,7 @@
                 ok(true);
             });
 
-            test("search with no filter should open popup if any match", function() {
+            asyncTest("search with no filter should open popup if any match", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: data,
                     autoBind: false
@@ -122,11 +122,9 @@
 
                 combobox.text("f");
                 combobox.search("f");
-
-                stop(1000);
             });
 
-            test("search with no filter should not open if no match", function() {
+            asyncTest("search with no filter should not open if no match", function() {
                 var opened = false, combobox = new ComboBox(input, {
                     dataSource: data,
                     autoBind: false
@@ -138,8 +136,6 @@
 
                 combobox.text("fooooo");
                 combobox.search("fooooo");
-
-                stop(1000);
 
                 setTimeout(function() {
                     ok(!opened);
@@ -159,7 +155,7 @@
                 equal(combobox.ul.children().length, 1);
             });
 
-            test("search with filter opens drop down if any items", function() {
+            asyncTest("search with filter opens drop down if any items", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: data
                 });
@@ -172,8 +168,6 @@
                 combobox.options.filter = "startswith";
                 combobox.text("f");
                 combobox.search("f");
-
-                stop(1000);
             });
 
             test("rebound list should use correct dataItem to update text and value", function() {
@@ -221,7 +215,7 @@
                 equal(combobox.ul.children().length, data.length);
             });
 
-            test("typing should trigger search", function() {
+            asyncTest("typing should trigger search", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: data
                 });
@@ -231,7 +225,6 @@
                     start();
                 }
                 combobox.input.val("f").trigger({type: "keydown", keyCode: "f".charCodeAt(0)});
-                stop(300);
             });
 
             test("dataSource.read triggered by typing does not update input value with dataItem.text", function() {
@@ -302,7 +295,7 @@
                 notEqual(combobox.value(), "ffff");
             });
 
-            test("do not search if text does not changed", function() {
+            asyncTest("do not search if text does not changed", function() {
                 var called = false, combobox = new ComboBox(input, {
                     dataSource: data
                 });
@@ -317,11 +310,9 @@
                     ok(!called);
                     start();
                 }, 500);
-
-                stop(600);
             });
 
-            test("highlight first item on refresh", function() {
+            asyncTest("highlight first item on refresh", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: data,
                     suggest: false,
@@ -335,8 +326,6 @@
                     ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
                     start();
                 }, 500);
-
-                stop(600);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

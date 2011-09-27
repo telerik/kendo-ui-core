@@ -109,7 +109,7 @@
     // -----------------------------------------------------------------------------------
     // -----------------------------------------------------------------------------------
     test("error is raised when remove action returns error code", function() {
-        stop(1000);
+        stop(1);
 
         uploadInstance = createUpload({ error:
             function(e) {
@@ -123,7 +123,7 @@
     });
 
     test("error is raised when remove action returns response that is not JSON", function() {
-        stop(1000);
+        stop(1);
 
         uploadInstance = createUpload({ error:
             function(e) {
@@ -169,7 +169,7 @@
     });
 
     test("error event arguments contain list of removed files", function() {
-        stop(1000);
+        stop(1);
 
         uploadInstance = createUpload({ error:
             function(e) {
@@ -183,7 +183,7 @@
     });
 
     test("error event arguments contain remove operation name", function() {
-        stop(1000);
+        stop(1);
 
         uploadInstance = createUpload({ error:
             function(e) {
@@ -197,7 +197,7 @@
     });
 
     test("unhandled remove error is alerted to the user", function() {
-        stop(1000);
+        stop(1);
 
         uploadInstance = createUpload();
         uploadInstance._alert = function() {
@@ -233,7 +233,7 @@
     });
 
     test("error event arguments contains original XHR for remove action", function() {
-        stop(1000);
+        stop(1);
 
         uploadInstance = createUpload({ error:
             function(e) {
@@ -247,7 +247,7 @@
     });
 
     test("error event arguments contains XHR with responseText for remove action", function() {
-        stop(1000);
+        stop(1);
 
         uploadInstance = createUpload({ error:
             function(e) {
@@ -261,7 +261,7 @@
     });
 
     test("error event arguments contains XHR with status for remove action", function() {
-        stop(1000);
+        stop(1);
 
         uploadInstance = createUpload({ error:
             function(e) {
