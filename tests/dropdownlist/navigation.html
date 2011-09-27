@@ -3,14 +3,14 @@
     <head>
         <title>DropDownList Navigation</title>
         <script src="../../src/jquery.js"></script>
-        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.dropdownlist.js"></script>
-        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
         <h1 id="qunit-header">DropDownList Navigation</h1>
@@ -86,7 +86,7 @@
                 equal(dropdownlist.value(), data[1].value);
             });
 
-            test("click li should close popup", function() {
+            asyncTest("click li should close popup", function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
                 dropdownlist.popup.bind("close", function(){
@@ -96,8 +96,6 @@
 
                 dropdownlist.popup.open();
                 dropdownlist.ul.children().eq(1).click();
-
-                stop(400);
             });
 
             test("select should select li by index", function() {
@@ -212,7 +210,7 @@
 
             });
 
-            test("press enter should close popup when no change in selection", function() {
+            asyncTest("press enter should close popup when no change in selection", function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
                 dropdownlist.popup.bind("close", function(){
@@ -224,11 +222,9 @@
 
                 dropdownlist.select(0);
                 dropdownlist.wrapper.focus().press(keys.ENTER);
-
-                stop(300);
             });
 
-            test("press enter should select current item", function() {
+            asyncTest("press enter should select current item", function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
                 dropdownlist.popup.bind("close", function(){
@@ -242,8 +238,6 @@
 
                 dropdownlist.select(0);
                 dropdownlist.wrapper.focus().press(keys.DOWN).press(keys.ENTER);
-
-                stop(300);
             });
 
             test("selected item with enter should persist selected state", function() {
@@ -262,7 +256,7 @@
             });
 
 
-            test("press esc should close popup when no change in selection", function() {
+            asyncTest("press esc should close popup when no change in selection", function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
                 dropdownlist.popup.bind("close", function(){
@@ -274,8 +268,6 @@
 
                 dropdownlist.select(0);
                 dropdownlist.wrapper.focus().press(keys.ESC);
-
-                stop(300);
             });
 
             test("pressing enter calls _blur", function() {
@@ -292,7 +284,7 @@
                 ok(blurWasCalled);
             });
 
-            test("pressing alt + down should open popup", function() {
+            asyncTest("pressing alt + down should open popup", function() {
                 var blurWasCalled, dropdownlist = new DropDownList(input, {
                     dataSource: data
                 });
@@ -302,11 +294,9 @@
                 });
 
                 dropdownlist.wrapper.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.DOWN});
-
-                stop(400);
             });
 
-            test("pressing alt + up should close popup", function() {
+            asyncTest("pressing alt + up should close popup", function() {
                 var blurWasCalled, dropdownlist = new DropDownList(input, {
                     dataSource: data
                 });
@@ -317,8 +307,6 @@
                 dropdownlist.open();
 
                 dropdownlist.wrapper.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.UP});
-
-                stop(400);
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

@@ -3,14 +3,14 @@
     <head>
         <title>AutoComplete Filtering</title>
         <script src="../../src/jquery.js"></script>
-        <script type="text/javascript" src="../qunit.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.autocomplete.js"></script>
-        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
         <h1 id="qunit-header">AutoComplete Filtering</h1>
@@ -47,7 +47,7 @@
                 });
 
                 input.val("f").press("f".charCodeAt(0));
-                stop(1000);
+                stop(1);
             });
 
             test("popup is opened if there are results returned from the filter", function() {
@@ -62,7 +62,7 @@
                 });
 
                 input.val("f").press("f".charCodeAt(0));
-                stop(1000);
+                stop(1);
             });
 
             test("popup should close if input is empty", function() {
@@ -75,7 +75,7 @@
                     start();
                 });
                 input.val("").press(8/*backspace*/);
-                stop(1000);
+                stop(1);
             });
 
         </script>
