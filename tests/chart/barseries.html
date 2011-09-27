@@ -422,7 +422,7 @@
                     axisX: {
                         getSlot: function(categoryIndex) {
                             return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
-                            categoryIndex + 1, CATEGORY_AXIS_Y);
+                            categoryIndex + 100, CATEGORY_AXIS_Y);
                         },
                         options: {
                             axisCrossingValue: 0
@@ -447,7 +447,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Bar Chart / Labels / Positive Values", {
+                module("Column Chart / Labels / Positive Values", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, { series: [{
@@ -457,7 +457,7 @@
                     }
                 });
 
-                test("bars labels have insideEnd position", function() {
+                test("insideEnd position", function() {
                     $.each(series.points, function() {
                         var text = this.children[0].children[0];
                         equal(this.box.y1, text.box.y1);
@@ -465,7 +465,7 @@
                     });
                 });
 
-                test("bars labels have insideBase position", function() {
+                test("insideBase position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
@@ -480,7 +480,7 @@
                     });
                 });
 
-                test("bars labels have outsideEnd position", function() {
+                test("outsideEnd position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
@@ -495,7 +495,7 @@
                     });
                 });
 
-                test("bars labels have center position", function() {
+                test("center position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
@@ -511,7 +511,7 @@
                     });
                 });
 
-                test("bars labels with format", 1, function() {
+                test("format", 1, function() {
                     setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
@@ -520,12 +520,20 @@
                         }
                     }] });
 
-                    same($.map(series.points, function(bar) { return bar.children[0].children[0].children[0].content }),
-                         ["$100.00", "$150.00"]);
+                    same($.map(series.points, function(bar) {
+                        return bar.children[0].children[0].children[0].content }
+                    ), ["$100.00", "$150.00"]);
+                });
+
+                test("width equals bar width", function() {
+                    $.each(series.points, function() {
+                        var label = this.children[0].children[0];
+                        equal(label.paddingBox.width(), this.box.width(), 0.1);
+                    });
                 });
 
                 // ------------------------------------------------------------
-                module("Bar Chart / Labels / Negative Values", {
+                module("Column Chart / Labels / Negative Values", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, { series: [{
@@ -535,7 +543,7 @@
                         }
                 });
 
-                test("bars labels have insideEnd position", function() {
+                test("insideEnd position", function() {
                     $.each(series.points, function() {
                         var text = this.children[0].children[0];
                         equal(this.box.y2, text.box.y2);
@@ -543,7 +551,7 @@
                     });
                 });
 
-                test("bars labels have insideBase position", function() {
+                test("insideBase position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: negativeData,
                             labels: {
@@ -558,7 +566,7 @@
                     });
                 });
 
-                test("bars labels have outsideEnd position", function() {
+                test("outsideEnd position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: negativeData,
                         labels: {
@@ -573,7 +581,7 @@
                     });
                 });
 
-                test("bars labels have center position", function() {
+                test("center position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: negativeData,
                         labels: {
@@ -589,7 +597,7 @@
                     });
                 });
 
-                test("bars labels with format", 1, function() {
+                test("format", 1, function() {
                     setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
@@ -598,18 +606,19 @@
                         }
                     }] });
 
-                    same($.map(series.points, function(bar) { return bar.children[0].children[0].children[0].content }),
-                         ["$100.00", "$150.00"]);
+                    same($.map(series.points, function(bar) {
+                        return bar.children[0].children[0].children[0].content }
+                    ), ["$100.00", "$150.00"]);
                 });
 
                 // ------------------------------------------------------------
-                module("Bar Chart / Labels / options", {
+                module("Column Chart / Labels / Rendering", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                     }
                 });
 
-                test("bars labels should have red color", function() {
+                test("color", function() {
                     setupBarChart(plotArea, { series: [{
                         data: [ 100 ],
                         labels: {
@@ -621,7 +630,7 @@
                     equal(view.log.text[0].style.color, COLOR);
                 });
 
-                test("bars labels should have background color", function() {
+                test("background color", function() {
                     setupBarChart(plotArea, { series: [{
                         data: [ 100 ],
                         labels: {
@@ -633,7 +642,7 @@
                     equal(view.log.rect[1].style.fill, BACKGROUND);
                 });
 
-                test("bars labels should have border", function() {
+                test("border", function() {
                     setupBarChart(plotArea, { series: [{
                         data: [ 100 ],
                         labels: {
@@ -647,11 +656,12 @@
                     equal(view.log.rect[1].style.dashType, BORDER.dashType);
                 });
 
-                test("bars labels should have padding and margin", function() {
+                test("padding and margin", function() {
                     setupBarChart(plotArea, { series: [{
                         data: [ 100 ],
                         labels: {
                             margin: MARGIN,
+                            border: { width: 0 },
                             visible: true
                         }
                     }] });
@@ -705,8 +715,9 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Bar Chart / Labels / Positive Values with bar series", {
+                module("Bar Chart / Labels / Positive Values", {
                     setup: function() {
+                        plotArea = new PlotAreaStub();
                         view = new ViewStub();
                         setupBarChart(plotArea, { series: [{
                             data: positiveData,
@@ -717,7 +728,7 @@
                     }
                 });
 
-                test("bars labels have insideEnd position", function() {
+                test("insideEnd position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
@@ -725,6 +736,7 @@
                             position: "insideEnd"
                         }
                     }], isVertical: false });
+
                     $.each(series.points, function() {
                         var text = this.children[0].children[0];
                         equal(text.box.x1, this.box.x2 - text.box.width());
@@ -732,7 +744,7 @@
                     });
                 });
 
-                test("bars labels have insideBase position", function() {
+                test("insideBase position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
@@ -747,7 +759,7 @@
                     });
                 });
 
-                test("bars labels have outsideEnd position", function() {
+                test("outsideEnd position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
@@ -762,7 +774,7 @@
                     });
                 });
 
-                test("bars labels have center position", function() {
+                test("center position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
@@ -778,8 +790,15 @@
                     });
                 });
 
+                test("height equals bar height", function() {
+                    $.each(series.points, function() {
+                        var label = this.children[0].children[0];
+                        equal(label.paddingBox.height(), this.box.height(), 0.1);
+                    });
+                });
+
                 // ------------------------------------------------------------
-                module("Bar Chart / Labels / Negative Values with bar series", {
+                module("Bar Chart / Labels / Negative Values", {
                     setup: function() {
                         view = new ViewStub();
                         setupBarChart(plotArea, { series: [{
@@ -792,7 +811,7 @@
                     }
                 });
 
-                test("bars labels have insideEnd position", function() {
+                test("insideEnd position", function() {
                     $.each(series.points, function() {
                         var text = this.children[0].children[0];
                         equal(this.box.x1, text.box.x1);
@@ -800,7 +819,7 @@
                     });
                 });
 
-                test("bars labels have insideBase position", function() {
+                test("insideBase position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: negativeData,
                         labels: {
@@ -815,7 +834,7 @@
                     });
                 });
 
-                test("bars labels have outsideEnd position", function() {
+                test("outsideEnd position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: negativeData,
                         labels: {
@@ -830,7 +849,7 @@
                     });
                 });
 
-                test("bars labels have center position", function() {
+                test("center position", function() {
                     setupBarChart(plotArea, { series: [{
                         data: negativeData,
                         labels: {

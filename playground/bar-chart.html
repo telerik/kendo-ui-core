@@ -53,32 +53,20 @@
                     },
                     dataSource: data,
                     seriesDefaults: {
-                        type: "column",
-                        stack: false,
                         labels: {
                             visible: true
-                        },
-                        column: {
-                            labels: {
-                                position: "insideEnd"
-                            }
-                        },
-                        bar: {
-                            labels: {
-                                position: "insideEnd"
-                            }
                         }
                     },
                     series: [
                         {
                             name: "Value A",
                             field: "a"
-                        }/*,
+                        },
                         {
                             type: "line",
                             name: "Value B",
                             field: "b"
-                        }*/
+                        }
                     ],
                     categoryAxis: {
                         field: "name"
@@ -140,8 +128,8 @@
             $(".configurator input").change(function() {
                 var chart = $("#container").data("kendoChart"),
                     series = chart.options.series,
-                    type = $("#typeColumn").attr("checked") === "checked" ? "column" : "bar",
-                    stack = $("#stack").attr("checked") === "checked",
+                    type = $("#typeColumn").prop("checked") ? "column" : "bar",
+                    stack = $("#stack").prop("checked"),
                     labelPosition = $("input[name=labelType]:checked").val();
 
                 for (var i = 0, length = chart.options.series.length; i < length; i++) {
