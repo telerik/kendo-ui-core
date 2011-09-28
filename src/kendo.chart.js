@@ -6496,10 +6496,8 @@
                     "<div style='display:none; position: absolute; font: <#= d.font #>;" +
                     "border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px;" +
                     "border: <#= d.border.width #>px solid <#= d.border.color #>;" +
-                    "padding:0 0 0 1.4em; " +
-                    "opacity: <#= d.opacity #>;" +
-                    "filter: alpha(opacity=<#= d.opacity * 100 #>);" +
-                    "'>" +
+                    "opacity: <#= d.opacity #>; filter: alpha(opacity=<#= d.opacity * 100 #>);" +
+                    "padding:0 0 0 1.4em; '>" +
                     "<div style='white-space: nowrap; padding: .3em .4em; " +
                     "border-top-right-radius: 2px; -moz-border-top-right-radius: 2px; " +
                     "-webkit-border-top-right-radius: 2px; border-bottom-right-radius: 2px; " +
@@ -6528,6 +6526,7 @@
         show: function(point) {
             var tooltip = this,
                 element = tooltip.element,
+                textElement = element.children(0),
                 options = tooltip.options,
                 aboveAxis = point.options.aboveAxis,
                 isVertical = point.options.isVertical,
@@ -6547,7 +6546,7 @@
                 content = format(options.format, point.value);
             }
 
-            tooltip.element.find("div").html(content);
+            textElement.html(content);
 
             tooltipBox = new Box2D(0, 0, element.outerWidth(), element.outerHeight())
 
@@ -6567,15 +6566,13 @@
                     );
             }
 
+            textElement.css({ backgroundColor: options.background });
             tooltip.element
                 .css({
                    backgroundColor: point.series.color,
                    color: options.color,
                    opacity: options.opacity
                 })
-                .find("div")
-                    .css("backgroundColor", options.background)
-                    .end()
                 .stop(true)
                 .show()
                 .animate({
