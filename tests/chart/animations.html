@@ -384,6 +384,7 @@
 
             (function() {
                 var SIZE = 100,
+                    OPACITY = 0.5,
                     anim,
                     rect;
 
@@ -393,7 +394,9 @@
                             id: "id",
                             animation: {
                                 type: "fadeIn"
-                            }
+                            },
+                            fillOpacity: OPACITY,
+                            strokeOpacity: OPACITY
                         },
                         refresh: function() {
                         },
@@ -421,23 +424,23 @@
                     equals(rect.options.strokeOpacity, 0);
                 });
 
-                asyncTest("animates fillOpacity to 1", function() {
+                asyncTest("animates fillOpacity", function() {
                     anim.setup();
                     anim.play();
 
                     setTimeout(function() {
-                        equals(rect.options.fillOpacity, 1);
+                        equals(rect.options.fillOpacity, OPACITY);
 
                         start();
                     }, 100);
                 });
 
-                asyncTest("animates strokeOpacity to 1", function() {
+                asyncTest("animates strokeOpacity", function() {
                     anim.setup();
                     anim.play();
 
                     setTimeout(function() {
-                        equals(rect.options.strokeOpacity, 1);
+                        equals(rect.options.strokeOpacity, OPACITY);
 
                         start();
                     }, 100);
