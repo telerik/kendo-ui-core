@@ -213,18 +213,42 @@
                 module("VML View / Decorators", {
                     setup: function() {
                         view = new Chart.VMLView();
+
+                        view.decorators.push({
+                            decorate: function(element) {
+                                ok(true);
+                                return element;
+                            }
+                        });
                     }
                 });
 
-                test("Applies registered decorators", 1, function() {
-                    view.decorators.push({
-                        decorate: function(element) {
-                            ok(true);
-                            return element;
-                        }
-                    });
+                test("createGroup applies registered decorators", 1, function() {
+                    view.createGroup();
+                });
 
+                test("createText applies registered decorators", 1, function() {
+                    view.createText();
+                });
+
+                test("createRect applies registered decorators", 1, function() {
                     view.createRect(new Box2D());
+                });
+
+                test("createLine applies registered decorators", 1, function() {
+                    view.createLine();
+                });
+
+                test("createPolyline applies registered decorators", 1, function() {
+                    view.createPolyline();
+                });
+
+                test("createCircle applies registered decorators", 1, function() {
+                    view.createCircle();
+                });
+
+                test("createSector applies registered decorators", 1, function() {
+                    view.createSector();
                 });
 
             })();
@@ -278,9 +302,42 @@
                     ok(text.render().indexOf("color: " + text.options.color) > -1);
                 });
 
+                test("renders white-space: nowrap", function() {
+                    ok(text.render().indexOf("white-space: nowrap;") > -1);
+                });
+
                 test("renders id", function() {
                     text.options.id = "id";
                     ok(text.render().indexOf("id='id'") > -1);
+                });
+
+                test("hides text when fillOpacity is 0", function() {
+                    text.options.fillOpacity = 0;
+                    ok(text.render().indexOf("visibility: hidden") > -1);
+                });
+
+                test("shows text when fillOpacity is greater than 0", function() {
+                    text.options.fillOpacity = 0.1;
+                    ok(text.render().indexOf("visibility: visible") > -1);
+                });
+
+                test("clone returns VMLText", function() {
+                    ok(text.clone() instanceof Chart.VMLText);
+                });
+
+                test("clone copies content", function() {
+                    equals(text.clone().content, text.content);
+                });
+
+                test("clone copies options", function() {
+                    text.options.id = "id";
+                    equals(text.clone().options.id, text.options.id);
+                });
+
+                test("refresh updates visibility attribute", function() {
+                    var domElement = $("<div />")[0];
+                    text.refresh(domElement);
+                    equals(domElement.style.visibility, "visible");
                 });
 
             })();
@@ -508,6 +565,30 @@
                     ok(path.render().indexOf("id='id'") > -1);
                 });
 
+                test("refresh updates path fill opacity", function() {
+                    var domElement = $("<div><path /><fill /><stroke /></div>");
+                    path.options.fillOpacity = 0.5;
+                    path.refresh(domElement);
+                    equals(domElement.find("fill").attr("opacity"), "0.5");
+                });
+
+                test("refresh updates path stroke opacity", function() {
+                    var domElement = $("<div><path /><fill /><stroke /></div>");
+                    path.options.strokeOpacity = 0.5;
+                    path.refresh(domElement);
+                    equals(domElement.find("stroke").attr("opacity"), "0.5");
+                });
+
+                test("fill opacity is updated before rendering", function() {
+                    path.options.fillOpacity = 0.5;
+                    ok(path.render().indexOf("opacity='0.5'") > -1);
+                });
+
+                test("stroke opacity is updated before rendering", function() {
+                    path.options.strokeOpacity = 0.5;
+                    ok(path.render().indexOf("opacity='0.5'") > -1);
+                });
+
             })();
 
             (function() {
@@ -529,6 +610,15 @@
                         new Point2D(20, 30)
                     ], true);
                     equal(line.renderPoints(), "m 10,20 l 20,30 x");
+                });
+
+                test("refresh updates path v attribute", function() {
+                    line = new Chart.VMLLine([
+                        new Point2D(10, 20)
+                    ], true);
+                    var domElement = $("<div><path /><fill /><stroke /></div>");
+                    line.refresh(domElement);
+                    ok(domElement.find("path").attr("v").length > 0);
                 });
 
             })();
@@ -611,6 +701,11 @@
                 test("renders opacity", function() {
                     fill.options.fillOpacity = "0.5";
                     ok(fill.render().indexOf("opacity='0.5'") > -1);
+                });
+
+                test("renders opacity(0)", function() {
+                    fill.options.fillOpacity = 0;
+                    ok(fill.render().indexOf("opacity='0'") > -1);
                 });
 
             })();
