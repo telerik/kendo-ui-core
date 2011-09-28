@@ -2033,7 +2033,7 @@
             font: SANS12,
             position: OUTSIDE_END,
             margin: getSpacing(3),
-            padding: getSpacing(5),
+            padding: getSpacing(4),
             color: BLACK,
             background: "",
             border: {
@@ -3623,6 +3623,8 @@
             labels: {
                 visible: false,
                 position: ABOVE,
+                margin: getSpacing(3),
+                padding: getSpacing(4),
                 animation: {
                     type: FADEIN,
                     delay: INITIAL_ANIMATION_DURATION
@@ -3924,7 +3926,9 @@
             labels: {
                 visible: false,
                 distance: 30,
-                font: ARIAL12
+                font: ARIAL12,
+                margin: getSpacing(3),
+                padding: getSpacing(4)
             },
             animation: {
                 type: PIE

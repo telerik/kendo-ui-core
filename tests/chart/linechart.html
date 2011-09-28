@@ -894,11 +894,11 @@
                 });
 
                 test("sets default left margin", function() {
-                    same(label.options.margin.left, 5);
+                    same(label.options.margin.left, 3);
                 });
 
                 test("sets default right margin", function() {
-                    same(label.options.margin.right, 5);
+                    same(label.options.margin.right, 3);
                 });
 
                 test("labels are not visible by default", function() {
@@ -912,7 +912,7 @@
 
                 test("label is positioned above marker", function() {
                     createPoint({ labels: { visible: true, position: "above" } });
-                    sameBox(label.box, new Box2D(41, -22, 59, -6));
+                    sameBox(label.box, new Box2D(39, -36, 61, -6));
                 });
 
                 test("label is positioned below marker", function() {
