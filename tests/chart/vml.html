@@ -467,7 +467,8 @@
             })();
 
             (function() {
-                var path;
+                var path,
+                    domElement;
 
                 function createPath(options) {
                     path = new Chart.VMLPath(options);
@@ -476,6 +477,8 @@
                 module("VMLPath", {
                     setup: function() {
                         createPath();
+                        domElement = $("<div><path /><fill /><stroke /></div>")
+                                     .appendTo($("<div />"));
                     }
                 });
 
@@ -566,14 +569,12 @@
                 });
 
                 test("refresh updates path fill opacity", function() {
-                    var domElement = $("<div><path /><fill /><stroke /></div>");
                     path.options.fillOpacity = 0.5;
                     path.refresh(domElement);
                     equals(domElement.find("fill").attr("opacity"), "0.5");
                 });
 
                 test("refresh updates path stroke opacity", function() {
-                    var domElement = $("<div><path /><fill /><stroke /></div>");
                     path.options.strokeOpacity = 0.5;
                     path.refresh(domElement);
                     equals(domElement.find("stroke").attr("opacity"), "0.5");
@@ -592,31 +593,32 @@
             })();
 
             (function() {
-                var line;
+                var line,
+                    domElement;
 
-                module("VMLLine");
+                module("VMLLine", {
+                    setup: function() {
+                        line = new Chart.VMLLine([
+                            new Point2D(10, 20),
+                            new Point2D(20, 30)
+                        ], false);
+
+                        domElement = $("<div><path /><fill /><stroke /></div>")
+                                     .appendTo($("<div />"));
+                    }
+                });
 
                 test("draws line", function() {
-                    line = new Chart.VMLLine([
-                        new Point2D(10, 20),
-                        new Point2D(20, 30)
-                    ], false);
+                    line.closed = false;
                     equal(line.renderPoints(), "m 10,20 l 20,30");
                 });
 
                 test("draws closed line", function() {
-                    line = new Chart.VMLLine([
-                        new Point2D(10, 20),
-                        new Point2D(20, 30)
-                    ], true);
+                    line.closed = true;
                     equal(line.renderPoints(), "m 10,20 l 20,30 x");
                 });
 
                 test("refresh updates path v attribute", function() {
-                    line = new Chart.VMLLine([
-                        new Point2D(10, 20)
-                    ], true);
-                    var domElement = $("<div><path /><fill /><stroke /></div>");
                     line.refresh(domElement);
                     ok(domElement.find("path").attr("v").length > 0);
                 });
