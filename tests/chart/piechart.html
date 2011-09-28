@@ -67,11 +67,11 @@
                     }
                 });
 
-                test("Creates segments for pieChart data points", function() {
+                test("creates segments for pie chart data points", function() {
                     equal(pieChart.segments.length, values.data.length);
                 });
 
-                test("Reports number of categories", function() {
+                test("reports number of categories", function() {
                     equal(categoriesCount(pieChart.options.series), values.data.length);
                 });
 
@@ -134,12 +134,12 @@
                 test("sets segment dataItem", function() {
                     equal(typeof pieChart.segments[0].dataItem, "object");
                 });
+
             })();
 
 
             (function() {
-                var PieSegment = Chart.PieSegment,
-                    point,
+                var point,
                     box,
                     label,
                     root,
@@ -148,7 +148,7 @@
                     SERIES_NAME = "series";
 
                 function createPoint(options) {
-                    segment = new PieSegment(VALUE, new Chart.Sector(), options);
+                    segment = new Chart.PieSegment(VALUE, new Chart.Sector(), options);
 
                     segment.dataItem = { value: VALUE };
 
@@ -190,7 +190,7 @@
                     plotArea
                     MARGIN = 10;
 
-                module("Pie Chart Model", {
+                module("Pie Chart / Model", {
                     setup: function() {
                         $("#container").kendoChart({
                             title: {
@@ -257,7 +257,7 @@
 
                 test("legend is positioned at right", function() {
                     equal(legend.box.x1,
-                        model.box.width() - legend.box.width() -MARGIN);
+                        model.box.width() - legend.box.width() - MARGIN);
                 });
 
                 test("legend is positioned at vertical center", function() {
@@ -355,6 +355,296 @@
                     equal(pieSegment.options.labels.font, "labels-font");
                 });
 
+                // ------------------------------------------------------------
+                module("Pie Chart / Labels / Connectors / Normal test case 1", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupPieChart(plotArea, {
+                            series: [ {
+                                data: [ 1, 2, 3, 4, 4, 3, 2, 1 ],
+                                labels: {
+                                    visible: true,
+                                    distance: 20
+                                }
+                            } ],
+                            padding: 30
+                        });
+                    }
+                });
+
+                test("start point", function() {
+                    var points = [];
+                    $.each(view.log.path, function() {
+                        points.push([ this.points[0].x, this.points[0].y ]);
+                    });
+
+                    same(points,[ [ 445.21, 14.558 ], [ 569.87, 66.194 ],
+                                  [ 685.442, 254.79 ], [ 569.87, 533.806 ],
+                                  [ 230.13, 533.806 ], [ 114.558, 254.79 ],
+                                  [ 230.13, 66.194 ], [ 354.79, 14.558 ] ]);
+                });
+
+                test("middle point", function() {
+                    var points = [];
+                    $.each(view.log.path, function() {
+                        points.push([ this.points[1].x, this.points[1].y ]);
+                    });
+
+                    same(points,[ [ 447.437, 0.5 ], [ 578.366, 54.5 ],
+                                  [ 693.587, 253.5 ], [ 578.366, 545.5 ],
+                                  [ 221.634, 545.5 ], [ 106.413, 253.5 ],
+                                  [ 221.634, 54.5 ], [ 352.563, 0.5 ] ]);
+                });
+
+                test("end point", function() {
+                    var points = [];
+                    $.each(view.log.path, function() {
+                        points.push([ this.points[2].x, this.points[2].y ]);
+                    });
+
+                    same(points,[ [ 699, 0.5 ], [ 699, 54.5 ],
+                                  [ 699, 253.5 ], [ 699, 545.5 ],
+                                  [ 101, 545.5 ], [ 101, 253.5 ],
+                                  [ 101, 54.5 ], [ 101, 0.5 ] ]);
+                });
+
+                test("middle point Y and end point Y should be equal", function() {
+                    $.each(view.log.path, function() {
+                        equal(this.points[1].y, this.points[2].y);
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("Pie Chart / Labels / Connectors / Normal test case 2", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupPieChart(plotArea, {
+                            series: [ {
+                                data: [ 1, 2, 3, 4, 5, 6, 6, 5, 4, 3, 2, 1 ],
+                                labels: {
+                                    visible: true,
+                                    distance: 20
+                                }
+                            } ],
+                            padding: 100
+                        });
+                    }
+                });
+
+                test("start point", function() {
+                    var points = [];
+                    $.each(view.log.path, function() {
+                        points.push([ this.points[0].x, this.points[0].y ]);
+                    });
+
+                    same(points,[ [ 418.981, 46.71 ], [ 474.868, 57.285 ],
+                                  [ 558.366, 101.415 ], [ 636.442, 207.203 ],
+                                  [ 642.715, 374.868 ], [ 510.206, 528.846 ],
+                                  [ 289.794, 528.846 ], [ 157.285, 374.868 ],
+                                  [ 163.558, 207.203 ], [ 241.634, 101.415 ],
+                                  [ 325.132, 57.285 ], [ 381.019, 46.71 ] ]);
+                });
+
+                test("middle point", function() {
+                    var points = [];
+                    $.each(view.log.path, function() {
+                        points.push([ this.points[1].x, this.points[1].y ]);
+                    });
+
+                    same(points,[ [ 420.346, 28.5 ], [ 479.12, 43.5 ],
+                                  [ 567.07, 90.5 ], [ 648.425, 202.5 ],
+                                  [ 660.973, 380.5 ], [ 516.781, 542.5 ],
+                                  [ 283.219, 542.5 ], [ 139.027, 380.5 ],
+                                  [ 151.575, 202.5 ], [ 232.93, 90.5 ],
+                                  [ 320.88, 43.5 ], [ 379.654, 28.5 ]  ]);
+                });
+
+                test("end point", function() {
+                    var points = [];
+                    $.each(view.log.path, function() {
+                        points.push([ this.points[2].x, this.points[2].y ]);
+                    });
+
+                    same(points,[ [ 664, 28.5 ], [ 664, 43.5 ],
+                                  [ 664, 90.5 ], [ 664, 202.5 ],
+                                  [ 664, 380.5 ], [ 664, 542.5 ],
+                                  [ 136, 542.5 ], [ 136, 380.5 ],
+                                  [ 136, 202.5 ], [ 136, 90.5 ],
+                                  [ 136, 43.5 ], [ 136, 28.5 ]  ]);
+                });
+
+                test("middle point Y and end point Y should be equal", function() {
+                    $.each(view.log.path, function() {
+                        equal(this.points[1].y, this.points[2].y);
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("Pie Chart / Labels / Connectors / Stress test case 1", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupPieChart(plotArea, {
+                            series: [ {
+                                data: [ 40, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 140 ],
+                                labels: {
+                                    visible: true,
+                                    distance: 20
+                                }
+                            } ],
+                            padding: 30
+                        });
+                    }
+                });
+
+                test("start point", function() {
+                    var points = [];
+                    $.each(view.log.path, function() {
+                        points.push([ this.points[0].x, this.points[0].y ]);
+                    });
+
+                    same(points,[ [ 571.35, 67.277 ], [ 677.293, 218.579 ],
+                                  [ 679.737, 227.418 ], [ 681.899, 236.33 ],
+                                  [ 683.777, 245.306 ], [ 685.37, 254.338 ],
+                                  [ 686.675, 263.415 ], [ 687.691, 272.529 ],
+                                  [ 688.418, 281.67 ], [ 688.855, 290.831 ],
+                                  [ 689, 300 ], [ 688.855, 309.169 ],
+                                  [ 688.418, 318.33 ], [ 687.691, 327.471 ],
+                                  [ 686.675, 336.585 ], [ 685.37, 345.662 ],
+                                  [ 683.777, 354.694 ], [ 681.899, 363.67 ],
+                                  [ 679.737, 372.582 ], [ 170.025, 475.021 ] ]);
+                });
+
+                test("middle point", function() {
+                    var points = [];
+                    $.each(view.log.path, function() {
+                        points.push([ this.points[1].x, this.points[1].y ]);
+                    });
+
+                    same(points,[ [ 579.285, 56.5 ], [ 697, 168.5 ],
+                                  [ 697, 183.5 ], [ 697, 198.5 ],
+                                  [ 697, 213.5 ], [ 697, 228.5 ],
+                                  [ 697, 243.5 ], [ 697, 258.5 ],
+                                  [ 697, 273.5 ], [ 697, 288.5 ],
+                                  [ 697, 303.5 ], [ 697, 318.5 ],
+                                  [ 697, 333.5 ], [ 697, 348.5 ],
+                                  [ 697, 363.5 ], [ 697, 378.5 ],
+                                  [ 697, 393.5 ], [ 697, 408.5 ],
+                                  [ 697, 421.5 ], [ 157.57, 484.5 ] ]);
+                });
+
+                test("end point", function() {
+                    var points = [];
+                    $.each(view.log.path, function() {
+                        points.push([ this.points[2].x, this.points[2].y ]);
+                    });
+
+                    same(points,[ [ 699, 56.5 ], [ 699, 168.5 ],
+                                  [ 699, 183.5 ], [ 699, 198.5 ],
+                                  [ 699, 213.5 ], [ 699, 228.5 ],
+                                  [ 699, 243.5 ], [ 699, 258.5 ],
+                                  [ 699, 273.5 ], [ 699, 288.5 ],
+                                  [ 699, 303.5 ], [ 699, 318.5 ],
+                                  [ 699, 333.5 ], [ 699, 348.5 ],
+                                  [ 699, 363.5 ], [ 699, 378.5 ],
+                                  [ 699, 393.5 ], [ 699, 408.5 ],
+                                  [ 699, 421.5 ], [ 101, 484.5 ] ]);
+                });
+
+                test("middle point Y and end point Y should be equal", function() {
+                    $.each(view.log.path, function() {
+                        equal(this.points[1].y, this.points[2].y);
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("Pie Chart / Labels / Connectors / Stress test case 2", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupPieChart(plotArea, {
+                            series: [ {
+                                data: [ 70, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 40, 40, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 20 ],
+                                labels: {
+                                    visible: true,
+                                    distance: 20
+                                }
+                            } ],
+                            padding: 100
+                        });
+                    }
+                });
+
+                test("start point", function() {
+                    var points = [];
+                    $.each(view.log.path, function() {
+                        points.push([ this.points[0].x, this.points[0].y ]);
+                    });
+
+                    same(points,[ [ 631.359, 195.172 ], [ 588.202, 470.576 ],
+                                  [ 582.52, 476.642 ], [ 576.642, 482.52 ],
+                                  [ 570.576, 488.202 ], [ 564.327, 493.682 ],
+                                  [ 557.902, 498.955 ], [ 551.308, 504.015 ],
+                                  [ 544.551, 508.856 ], [ 537.64, 513.474 ],
+                                  [ 530.582, 517.863 ], [ 366.846, 551.827 ],
+                                  [ 148.173, 333.154 ], [ 182.137, 169.418 ],
+                                  [ 186.526, 162.36 ], [ 191.144, 155.449 ],
+                                  [ 195.985, 148.692 ], [ 201.045, 142.098 ],
+                                  [ 206.318, 135.673 ], [ 211.798, 129.424 ],
+                                  [ 217.48, 123.358 ], [ 223.358, 117.48 ],
+                                  [ 229.424, 111.798 ], [ 235.673, 106.318 ],
+                                  [ 242.098, 101.045 ], [ 318.354, 59.48 ] ]);
+                });
+
+                test("middle point", function() {
+                    var points = [];
+                    $.each(view.log.path, function() {
+                        points.push([ this.points[1].x, this.points[1].y ]);
+                    });
+
+                    same(points, [ [ 641.67, 190.5 ], [ 654, 470.576 ],
+                                   [ 654, 476.642 ], [ 654, 482.52 ],
+                                   [ 654, 488.202 ], [ 568.415, 498.5 ],
+                                   [ 569.446, 513.5 ], [ 569.467, 528.5 ],
+                                   [ 568.528, 543.5 ], [ 566.671, 558.5 ],
+                                   [ 562.731, 571.5 ], [ 364.783, 567.5 ],
+                                   [ 138, 337.5 ], [ 146, 169.418 ],
+                                   [ 146, 162.36 ], [ 146, 155.449 ],
+                                   [ 146, 148.692 ], [ 146, 142.098 ],
+                                   [ 206.114, 135.5 ], [ 201.952, 120.5 ],
+                                   [ 199.028, 105.5 ], [ 197.247, 90.5 ],
+                                   [ 196.525, 75.5 ], [ 196.799, 60.5 ],
+                                   [ 198.014, 45.5 ], [ 308.517, 30.5 ] ]);
+                });
+
+                test("end point", function() {
+                    var points = [];
+                    $.each(view.log.path, function() {
+                        points.push([ this.points[2].x, this.points[2].y ]);
+                    });
+
+                    same(points, [ [ 664, 190.5 ], [ 660, 438.5 ],
+                                   [ 660, 453.5 ], [ 660, 468.5 ],
+                                   [ 660, 483.5 ], [ 664, 498.5 ],
+                                   [ 664, 513.5 ], [ 664, 528.5 ],
+                                   [ 664, 543.5 ], [ 664, 558.5 ],
+                                   [ 664, 571.5 ], [ 136, 567.5 ],
+                                   [ 136, 337.5 ], [ 140, 210.5 ],
+                                   [ 140, 195.5 ], [ 140, 180.5 ],
+                                   [ 140, 165.5 ], [ 140, 150.5 ],
+                                   [ 136, 135.5 ], [ 136, 120.5 ],
+                                   [ 136, 105.5 ], [ 136, 90.5 ],
+                                   [ 136, 75.5 ], [ 136, 60.5 ],
+                                   [ 136, 45.5 ], [ 136, 30.5 ] ]);
+                });
+
+                test("middle point Y and end point Y should be equal", function() {
+                    $.each(view.log.path, function() {
+                        if (this.points.length > 3) {
+                            equal(this.points[2].y, this.points[3].y);
+                        } else {
+                            equal(this.points[1].y, this.points[2].y);
+                        }
+                    });
+                });
 
             })();
 

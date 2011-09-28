@@ -38,12 +38,13 @@
                     labels: {
                         font: "15px Arial, sans-serif",
                         visible: true
-                    }
+                    },
+                    startAngle: 90
                 },
-                transitions: true,
+                transitions: false,
                 series: [{
                     name: "World",
-                    data:[ 1, 2, 3, 4, 4, 3, 2, 1 ]
+                    data:[ 1, 2, 3, 4, 4, 3, 2, 1, 1, 2, 3, 4, 4, 3, 2, 1, 1, 2, 3, 4, 4, 3, 2, 1 ]
                 }],
                 chartArea: {
                     border: {
@@ -52,7 +53,7 @@
                     }
                 }
             });
-
+/*
             $("#container1").kendoChart({
                 title: {
                     text: "Lollipop",
@@ -790,7 +791,7 @@
                         color: "black"
                     }
                 }
-            });
+            }); */
         });
 
         function refresh() {
@@ -826,9 +827,16 @@
                 console.log("angle:", angle, "=", "x=", x, ",", "y=", y);
             }
         });
-*/
-    </script>
+        */
+        function clickMe() {
+            var chart = $("#container").data("kendoChart");
 
+            setInterval(function() {
+                chart.options.series[0].startAngle = (chart.options.series[0].startAngle + 1) % 360; chart.refresh();
+            }, 50);
+        }
+    </script>
+    <input type="button" onclick="clickMe()" value="GAS!" />
     <div id="container" style="width: 600px; height: 400px; margin-left: 100px;
         -webkit-transform: translateZ(0); float: left;"></div>
     <div id="container1" style="width: 600px; height: 400px; margin-right: 100px;
