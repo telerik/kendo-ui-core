@@ -4296,20 +4296,19 @@
                 label = labels[i];
                 boxY += distances[i];
                 box = label.box;
-                boxX = calculateX(
+                boxX = chart.hAlignLabel(
                     box.x2,
                     sector.clone().expand(labelDistance),
                     boxY,
                     boxY + box.height(),
-                    label.orientation);
-
+                    label.orientation == RIGHT);
 
                 if (label.orientation == RIGHT) {
-                    boxX = sector.r + sector.c.x + label.options.distance;
+                    boxX = sector.r + sector.c.x + labelDistance;
                     label.reflow(new Box2D(boxX + box.width(), boxY,
                         boxX, boxY));
                 } else {
-                    boxX = sector.c.x - sector.r - label.options.distance;
+                    boxX = sector.c.x - sector.r - labelDistance;
                     label.reflow(new Box2D(boxX - box.width(), boxY,
                         boxX, boxY));
                 }
@@ -4325,12 +4324,12 @@
                 segments = chart.segments,
                 sector,
                 count = segments.length,
+                space = 4,
                 angle,
                 lines = [],
                 points,
                 segment,
                 label,
-                number = 0,
                 i;
 
             for (i = 0; i < count; i++) {
@@ -4352,40 +4351,33 @@
                     start = sector.clone().expand(connector.padding).point(angle);
                     points.push(start);
                     if (label.orientation == RIGHT) {
-                        number = 0;
                         end = new Point2D(box.x1 - connector.padding, box.center().y),
-                        crossing = intersection(centerPoint, start, middle, end) || new Point2D(end.x - 4, end.y);
-                        crossing.x = math.min(crossing.x, end.x - 4);
-                        end.x -= 2;
-                        if (sqr(sector.c.x - crossing.x) + sqr(sector.c.y - crossing.y) < sqr(sector.r + connector.padding) || crossing.x < sector.c.x) {
-                            points.push(new Point2D(sector.c.x + sector.r + connector.padding - number, start.y + number));
-                            points.push(new Point2D(end.x - 4, end.y));
-                            if (number < label.options.distance / 4 && start.y < end.y) {
-                                number += 1;
-                            }
+                        crossing = intersection(centerPoint, start, middle, end) ||
+                                   new Point2D(end.x - space, end.y);
+                        crossing.x = math.min(crossing.x, end.x - space);
+
+                        if (sqr(sector.c.x - crossing.x) + sqr(sector.c.y - crossing.y) < sqr(sector.r + space) ||
+                            crossing.x < sector.c.x) {
+                            points.push(new Point2D(sector.c.x + sector.r + space, start.y));
+                            points.push(new Point2D(end.x - space, end.y));
                         } else {
                             crossing.y = end.y;
                             points.push(crossing);
-                            number = 0;
                         }
                     } else {
-                        number = 0;
                         end = new Point2D(box.x2 + connector.padding, box.center().y),
-                        crossing = intersection(centerPoint, start, middle, end) || new Point2D(end.x + 4, end.y);
-                        crossing.x = math.max(crossing.x, end.x + 4);
-                        end.x += 2;
-                        if (sqr(crossing.x - sector.c.x) + sqr(crossing.y - sector.c.y) < sqr(sector.r + connector.padding) || crossing.x > sector.c.x) {
-                            points.push(new Point2D(sector.c.x - sector.r - connector.padding + number, start.y + number));
-                            points.push(new Point2D(end.x + 4, end.y));
-                            if (number < label.options.distance / 4 && start.y < end.y) {
-                                number -= 1;
-                            }
+                        crossing = intersection(centerPoint, start, middle, end) ||
+                                   new Point2D(end.x + space, end.y);
+                        crossing.x = math.max(crossing.x, end.x + space);
+
+                        if (sqr(crossing.x - sector.c.x) + sqr(crossing.y - sector.c.y) < sqr(sector.r + space) ||
+                                crossing.x > sector.c.x) {
+                            points.push(new Point2D(sector.c.x - sector.r - space, start.y));
+                            points.push(new Point2D(end.x + space, end.y));
                         } else {
                             crossing.y = end.y;
                             points.push(crossing);
-                            number = 0;
                         }
-
                     }
 
                     points.push(end);
@@ -4413,9 +4405,22 @@
 
             return function(a, b) {
                 var startAngle = a.parent.sector.startAngle;
-                a = (a.parent.sector.middle() - 90 + 360) % 360;
-                b = (b.parent.sector.middle() - 90 + 360) % 360;
+                a = (a.parent.sector.middle() + 270) % 360;
+                b = (b.parent.sector.middle() + 270) % 360;
                 return (a - b) * reverse;
+            }
+        },
+
+        hAlignLabel: function calculateX(originalX, sector, y1, y2, direction) {
+            var cx = sector.c.x,
+                cy = sector.c.y,
+                r = sector.r,
+                t = math.min(math.abs(cy - y1), math.abs(cy - y2));
+
+            if (t > r) {
+                return originalX;
+            } else {
+                return cx + math.sqrt((r * r) - (t * t)) * (direction ? 1 : -1);
             }
         }
     });
@@ -6753,19 +6758,6 @@
         }
 
         return "";
-    }
-
-    function calculateX(x, sector, y1, y2, orientation) {
-        var cx = sector.c.x,
-            cy = sector.c.y,
-            r = sector.r,
-            t = math.min(math.abs(cy - y1), math.abs(cy - y2));
-
-        if (t > r) {
-            return x;
-        } else {
-            return cx + math.sqrt((r * r) - (t * t)) * (orientation == RIGHT ? 1 : -1);
-        }
     }
 
     function intersection(a1, a2, b1, b2) {

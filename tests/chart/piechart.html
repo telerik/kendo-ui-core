@@ -402,15 +402,19 @@
                         points.push([ this.points[2].x, this.points[2].y ]);
                     });
 
-                    same(points,[ [ 699, 0.5 ], [ 699, 54.5 ],
-                                  [ 699, 253.5 ], [ 699, 545.5 ],
-                                  [ 101, 545.5 ], [ 101, 253.5 ],
-                                  [ 101, 54.5 ], [ 101, 0.5 ] ]);
+                    same(points,[ [ 701, 0.5 ], [ 701, 54.5 ],
+                                  [ 701, 253.5 ], [ 701, 545.5 ],
+                                  [ 99, 545.5 ], [ 99, 253.5 ],
+                                  [ 99, 54.5 ], [ 99, 0.5 ] ]);
                 });
 
                 test("middle point Y and end point Y should be equal", function() {
                     $.each(view.log.path, function() {
-                        equal(this.points[1].y, this.points[2].y);
+                        if (this.points.length > 3) {
+                            equal(this.points[2].y, this.points[3].y);
+                        } else {
+                            equal(this.points[1].y, this.points[2].y);
+                        }
                     });
                 });
 
@@ -445,7 +449,7 @@
                                   [ 325.132, 57.285 ], [ 381.019, 46.71 ] ]);
                 });
 
-                test("middle point", function() {
+                test("second point", function() {
                     var points = [];
                     $.each(view.log.path, function() {
                         points.push([ this.points[1].x, this.points[1].y ]);
@@ -465,17 +469,21 @@
                         points.push([ this.points[2].x, this.points[2].y ]);
                     });
 
-                    same(points,[ [ 664, 28.5 ], [ 664, 43.5 ],
-                                  [ 664, 90.5 ], [ 664, 202.5 ],
-                                  [ 664, 380.5 ], [ 664, 542.5 ],
-                                  [ 136, 542.5 ], [ 136, 380.5 ],
-                                  [ 136, 202.5 ], [ 136, 90.5 ],
-                                  [ 136, 43.5 ], [ 136, 28.5 ]  ]);
+                    same(points,[ [ 666, 28.5 ], [ 666, 43.5 ],
+                                  [ 666, 90.5 ], [ 666, 202.5 ],
+                                  [ 666, 380.5 ], [ 666, 542.5 ],
+                                  [ 134, 542.5 ], [ 134, 380.5 ],
+                                  [ 134, 202.5 ], [ 134, 90.5 ],
+                                  [ 134, 43.5 ], [ 134, 28.5 ]  ]);
                 });
 
                 test("middle point Y and end point Y should be equal", function() {
                     $.each(view.log.path, function() {
-                        equal(this.points[1].y, this.points[2].y);
+                        if (this.points.length > 3) {
+                            equal(this.points[2].y, this.points[3].y);
+                        } else {
+                            equal(this.points[1].y, this.points[2].y);
+                        }
                     });
                 });
 
@@ -514,7 +522,7 @@
                                   [ 679.737, 372.582 ], [ 170.025, 475.021 ] ]);
                 });
 
-                test("middle point", function() {
+                test("second point", function() {
                     var points = [];
                     $.each(view.log.path, function() {
                         points.push([ this.points[1].x, this.points[1].y ]);
@@ -538,21 +546,25 @@
                         points.push([ this.points[2].x, this.points[2].y ]);
                     });
 
-                    same(points,[ [ 699, 56.5 ], [ 699, 168.5 ],
-                                  [ 699, 183.5 ], [ 699, 198.5 ],
-                                  [ 699, 213.5 ], [ 699, 228.5 ],
-                                  [ 699, 243.5 ], [ 699, 258.5 ],
-                                  [ 699, 273.5 ], [ 699, 288.5 ],
-                                  [ 699, 303.5 ], [ 699, 318.5 ],
-                                  [ 699, 333.5 ], [ 699, 348.5 ],
-                                  [ 699, 363.5 ], [ 699, 378.5 ],
-                                  [ 699, 393.5 ], [ 699, 408.5 ],
-                                  [ 699, 421.5 ], [ 101, 484.5 ] ]);
+                    same(points,[ [ 701, 56.5 ], [ 701, 168.5 ],
+                                  [ 701, 183.5 ], [ 701, 198.5 ],
+                                  [ 701, 213.5 ], [ 701, 228.5 ],
+                                  [ 701, 243.5 ], [ 701, 258.5 ],
+                                  [ 701, 273.5 ], [ 701, 288.5 ],
+                                  [ 701, 303.5 ], [ 701, 318.5 ],
+                                  [ 701, 333.5 ], [ 701, 348.5 ],
+                                  [ 701, 363.5 ], [ 701, 378.5 ],
+                                  [ 701, 393.5 ], [ 701, 408.5 ],
+                                  [ 701, 421.5 ], [ 99, 484.5 ] ]);
                 });
 
                 test("middle point Y and end point Y should be equal", function() {
                     $.each(view.log.path, function() {
-                        equal(this.points[1].y, this.points[2].y);
+                        if (this.points.length > 3) {
+                            equal(this.points[2].y, this.points[3].y);
+                        } else {
+                            equal(this.points[1].y, this.points[2].y);
+                        }
                     });
                 });
 
@@ -594,7 +606,7 @@
                                   [ 242.098, 101.045 ], [ 318.354, 59.48 ] ]);
                 });
 
-                test("middle point", function() {
+                test("second point", function() {
                     var points = [];
                     $.each(view.log.path, function() {
                         points.push([ this.points[1].x, this.points[1].y ]);
@@ -621,19 +633,19 @@
                         points.push([ this.points[2].x, this.points[2].y ]);
                     });
 
-                    same(points, [ [ 664, 190.5 ], [ 660, 438.5 ],
-                                   [ 660, 453.5 ], [ 660, 468.5 ],
-                                   [ 660, 483.5 ], [ 664, 498.5 ],
-                                   [ 664, 513.5 ], [ 664, 528.5 ],
-                                   [ 664, 543.5 ], [ 664, 558.5 ],
-                                   [ 664, 571.5 ], [ 136, 567.5 ],
-                                   [ 136, 337.5 ], [ 140, 210.5 ],
-                                   [ 140, 195.5 ], [ 140, 180.5 ],
-                                   [ 140, 165.5 ], [ 140, 150.5 ],
-                                   [ 136, 135.5 ], [ 136, 120.5 ],
-                                   [ 136, 105.5 ], [ 136, 90.5 ],
-                                   [ 136, 75.5 ], [ 136, 60.5 ],
-                                   [ 136, 45.5 ], [ 136, 30.5 ] ]);
+                    same(points, [ [ 666, 190.5 ], [ 662, 438.5 ],
+                                   [ 662, 453.5 ], [ 662, 468.5 ],
+                                   [ 662, 483.5 ], [ 666, 498.5 ],
+                                   [ 666, 513.5 ], [ 666, 528.5 ],
+                                   [ 666, 543.5 ], [ 666, 558.5 ],
+                                   [ 666, 571.5 ], [ 134, 567.5 ],
+                                   [ 134, 337.5 ], [ 138, 210.5 ],
+                                   [ 138, 195.5 ], [ 138, 180.5 ],
+                                   [ 138, 165.5 ], [ 138, 150.5 ],
+                                   [ 134, 135.5 ], [ 134, 120.5 ],
+                                   [ 134, 105.5 ], [ 134, 90.5 ],
+                                   [ 134, 75.5 ], [ 134, 60.5 ],
+                                   [ 134, 45.5 ], [ 134, 30.5 ] ]);
                 });
 
                 test("middle point Y and end point Y should be equal", function() {
