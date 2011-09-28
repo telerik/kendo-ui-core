@@ -3762,6 +3762,10 @@
             options = deepExtend({}, options, { id: outlineId });
 
             return marker.getViewElements(view, options)[0];
+        },
+
+        getOutlineBox: function() {
+            return this.marker.box;
         }
     });
 
@@ -6550,20 +6554,26 @@
 
             tooltipBox = new Box2D(0, 0, element.outerWidth(), element.outerHeight())
 
+            var outlineBox = point.getOutlineBox ? point.getOutlineBox() : point.box;
             if (isVertical === false) {
                 tooltipBox
-                    .alignTo(point.box, aboveAxis ? RIGHT : LEFT)
+                    .alignTo(outlineBox, aboveAxis ? RIGHT : LEFT)
                     .translate(
                         (aboveAxis ? 1 : -1) * options.offsetX,
-                        point.box.center().y - tooltipBox.center().y
+                        point.box.y1 - tooltipBox.y1
                     );
             } else {
                 tooltipBox
-                    .alignTo(point.box, aboveAxis ? TOP : BOTTOM)
+                    .alignTo(outlineBox, aboveAxis ? TOP : BOTTOM)
                     .translate(
-                        point.box.center().x - tooltipBox.center().x,
+                        outlineBox.x1 - tooltipBox.x1,
                         (aboveAxis ? -1 : 1) * options.offsetY
                     );
+
+                if (point.options.stackBase) {
+                    tooltipBox.alignTo(outlineBox, RIGHT)
+                        .translate(options.offsetX, (aboveAxis ? 1 : -1) * tooltipBox.height());
+                }
             }
 
             textElement.css({ backgroundColor: options.background });
