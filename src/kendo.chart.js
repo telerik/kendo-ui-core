@@ -4808,7 +4808,7 @@
         },
 
         renderAttr: function (name, value) {
-            return value ? " " + name + "='" + value + "' " : "";
+            return defined(value) ? " " + name + "='" + value + "' " : "";
         }
     });
 
@@ -5280,7 +5280,7 @@
                 cx: cx,
                 cy: cy
             });
-                }
+        }
     });
 
     var SVGCircle = ViewElement.extend({
@@ -5487,7 +5487,8 @@
                 new VMLGradientDecorator(view),
                 new BarAnimationDecorator(view),
                 new PieAnimationDecorator(view),
-                new VMLClipAnimationDecorator(view)
+                new VMLClipAnimationDecorator(view),
+                new FadeAnimationDecorator(view)
             );
 
             view.template = VMLView.template;
@@ -5535,11 +5536,11 @@
         },
 
         createText: function(content, options) {
-            if (options && options.rotation) {
-                return new VMLRotatedText(content, options);
-            } else {
-                return new VMLText(content, options);
-            }
+            return this.decorate(
+                (options && options.rotation) ?
+                    new VMLRotatedText(content, options) :
+                    new VMLText(content, options)
+            );
         },
 
         createRect: function(box, style) {
@@ -5549,20 +5550,28 @@
         },
 
         createLine: function(x1, y1, x2, y2, options) {
-            return new VMLLine([new Point2D(x1, y1),
-                                new Point2D(x2, y2)], false, options);
+            return this.decorate(
+                new VMLLine([new Point2D(x1, y1),
+                    new Point2D(x2, y2)], false, options)
+            );
         },
 
         createPolyline: function(points, closed, options) {
-            return new VMLLine(points, closed, options);
+            return this.decorate(
+                new VMLLine(points, closed, options)
+            );
         },
 
         createCircle: function(center, radius, options) {
-            return new VMLCircle(center, radius, options);
+            return this.decorate(
+                new VMLCircle(center, radius, options)
+            );
         },
 
         createSector: function(sector, options) {
-            return this.decorate(new VMLSector(sector, options));
+            return this.decorate(
+                new VMLSector(sector, options)
+            );
         },
 
         createGroup: function(options) {
@@ -5588,7 +5597,8 @@
                     "<kvml:textbox <#= d.renderAttr(\"id\", d.options.id) #> " +
                     "style='position: absolute; " +
                     "left: <#= d.options.x #>px; top: <#= d.options.y #>px; " +
-                    "font: <#= d.options.font #>; color: <#= d.options.color #>'>" +
+                    "font: <#= d.options.font #>; color: <#= d.options.color #>; " +
+                    "visibility: <#= d.renderVisibility() #>; white-space: nowrap;'>" +
                     "<#= d.content #></kvml:textbox>"
                 );
             }
@@ -5598,7 +5608,21 @@
             x: 0,
             y: 0,
             font: SANS16,
-            color: BLACK
+            color: BLACK,
+            fillOpacity: 1
+        },
+
+        refresh: function(domElement) {
+            $(domElement).css("visibility", this.renderVisibility());
+        },
+
+        clone: function() {
+            var text = this;
+            return new VMLText(text.content, deepExtend({}, text.options));
+        },
+
+        renderVisibility: function() {
+            return this.options.fillOpacity > 0 ? "visible" : "hidden";
         }
     });
 
@@ -5673,7 +5697,17 @@
         },
 
         options: {
-            fill: ""
+            fill: "",
+            fillOpacity: 1,
+            strokeOpacity: 1
+        },
+
+        render: function() {
+            var path = this;
+            path.fill.options.fillOpacity = path.options.fillOpacity;
+            path.stroke.options.strokeOpacity = path.options.strokeOpacity;
+
+            return ViewElement.fn.render.call(path);
         },
 
         renderPoints: function() {
@@ -5681,7 +5715,12 @@
         },
 
         refresh: function(domElement) {
-            $(domElement).find("path").attr("v", this.renderPoints());
+            var path = this,
+                options = path.options;
+
+            $(domElement).find("path")[0].setAttribute("v", this.renderPoints());
+            $(domElement).find("fill")[0].setAttribute("opacity", options.fillOpacity);
+            $(domElement).find("stroke")[0].setAttribute("opacity", options.strokeOpacity);
         }
     });
 
@@ -6080,7 +6119,7 @@
 
             if (animation && animation.type === CLIP && options.transitions) {
                 clipRect = new VMLClipRect(
-                    new Box2D(0, 0, options.width, options.height),
+                    new Box2D(0, 0, 0, options.height),
                     { id: uniqueId() }
                 );
 
