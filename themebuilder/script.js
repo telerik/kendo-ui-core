@@ -1,15 +1,8 @@
 // bootstrapper file for Kendo ThemeBuilder
 (function() {
-    // do not initialize twice
-    if (typeof kendo != "undefined" && kendo.ThemeBuilder) {
-        // reopen themebuilder
-        $("#kendo-themebuilder-wrapper").data("kendoThemeBuilder").open();
-        return;
-    }
-
     var queue = [],
         doc = document,
-        UNDEFINED = "undefined"
+        UNDEFINED = "undefined",
         head = doc.getElementsByTagName("head")[0],
         applicationRoot = "http://localhost/kendo/themebuilder/",
         jQueryJs = "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js",
@@ -21,7 +14,14 @@
         themebuilderJs = "themebuilder.js",
         templateJs = "template.js",
         colorEngineJs = "colorengine.js",
-        stylesCss = "styles.css"
+        stylesCss = "styles.css";
+
+    // do not initialize twice
+    if (typeof kendo != UNDEFINED && kendo.ThemeBuilder) {
+        // reopen themebuilder
+        $("#kendo-themebuilder-wrapper").data("kendoThemeBuilder").open();
+        return;
+    }
 
     function getScript(url, callback) {
         var script = doc.createElement("script");
@@ -33,37 +33,19 @@
 
     if (typeof jQuery == UNDEFINED || typeof kendo == UNDEFINED) {
         var messageId = 'kendoThemeBuilderMessage';
-        if (document.getElementById(messageId)) {
+        if (doc.getElementById(messageId)) {
             return;
         }
         var messageText = '<p style="margin:0;padding:0;">It seems there are no Kendo widgets on this page, so the Kendo themebuilder will be of no use. Please try running it elsewhere.</p>';
         var closeButton = '<p style="margin:1em 0 0;padding:0;"><button type="button" style="border:1px solid #aaa;background:#e3e3e3;color:#2e2e2e;cursor:pointer;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;" onclick="var msg = document.getElementById(\'' + messageId + '\');msg.parentNode.removeChild(msg);return false;">Close</button></p>';
         var styles = 'position:absolute;top:50%;margin-top:-1.6em;left:50%;margin-left:-16em;z-index:9999999;font:12px sans-serif;text-align:center;width:32em;padding:1em;border:1px solid #2å2å2å;background:#f2f2f2;color:#ef652a;-moz-box-shadow: 1px 1px 7px 1px #666;-webkit-box-shadow: 1px 1px 7px 1px #666;box-shadow: 1px 1px 7px 1px #666;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;';
-        var messageWrap = document.createElement("div");
+        var messageWrap = doc.createElement("div");
         messageWrap.id = messageId;
         messageWrap.style.cssText = styles;
         messageWrap.innerHTML = messageText + closeButton;
-        document.body.appendChild(messageWrap);
+        doc.body.appendChild(messageWrap);
         return;
     }
-
-//    // page without jQuery
-//    if (typeof jQuery == UNDEFINED) {
-//        queue.push(function(callback) {
-//            getScript(jQueryJs, callback);
-//        });
-//    }
-
-//    // page without kendo -- maybe components are loaded asynchronously?
-//    if (typeof kendo == UNDEFINED) {
-//        queue.push(function(callback) {
-//            $(head).append("<link rel='stylesheet' href='" + kendoCommonCss + "' />");
-//            $(head).append("<link rel='stylesheet' href='" + kendoSkinCss + "' />");
-
-//            // TODO: use CDN when a recent version is uploaded
-//            getScript(kendoAllJs, callback);
-//        });
-//    }
 
     function buildConstants() {
         var properties = {
