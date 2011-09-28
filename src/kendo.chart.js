@@ -6487,7 +6487,6 @@
 
             tooltip.options = deepExtend({}, tooltip.options, options);
             options = tooltip.options;
-            options.padding = getSpacing(options.padding);
 
             tooltip.chartElement = chartElement;
 
@@ -6497,8 +6496,16 @@
                     "<div style='display:none; position: absolute; font: <#= d.font #>;" +
                     "border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px;" +
                     "border: <#= d.border.width #>px solid <#= d.border.color #>;" +
-                    "padding: <#= d.padding.top #>px <#= d.padding.right #>px " +
-                    "<#= d.padding.bottom #>px <#= d.padding.left #>px;'></div>"
+                    "padding:0 0 0 1.4em; " +
+                    "opacity: <#= d.opacity #>;" +
+                    "filter: alpha(opacity=<#= d.opacity * 100 #>);" +
+                    "'>" +
+                    "<div style='white-space: nowrap; padding: .3em .4em; " +
+                    "border-top-right-radius: 2px; -moz-border-top-right-radius: 2px; " +
+                    "-webkit-border-top-right-radius: 2px; border-bottom-right-radius: 2px; " +
+                    "-moz-border-bottom-right-radius: 2px; -webkit-border-bottom-right-radius: 2px; " +
+                    " ' />" +
+                    "</div>"
                 );
             }
 
@@ -6506,19 +6513,16 @@
         },
 
         options: {
+            background: BLACK,
+            color: WHITE,
             font: SANS12,
-            padding: {
-                top: 5,
-                bottom: 5,
-                left: 6,
-                right: 6
-            },
             border: {
                 color: BLACK,
                 width: 0
             },
             offsetY: 2,
-            offsetX: 5
+            offsetX: 5,
+            opacity: 1
         },
 
         show: function(point) {
@@ -6543,7 +6547,7 @@
                 content = format(options.format, point.value);
             }
 
-            tooltip.element.html(content);
+            tooltip.element.find("div").html(content);
 
             tooltipBox = new Box2D(0, 0, element.outerWidth(), element.outerHeight())
 
@@ -6565,10 +6569,13 @@
 
             tooltip.element
                 .css({
-                   backgroundColor: options.background || point.series.color,
-                   color: options.color || point.series.labels.color,
-                   opacity: 1
+                   backgroundColor: point.series.color,
+                   color: options.color,
+                   opacity: options.opacity
                 })
+                .find("div")
+                    .css("backgroundColor", options.background)
+                    .end()
                 .stop(true)
                 .show()
                 .animate({
@@ -7444,6 +7451,10 @@
             majorGridLines: {
                 color: "#dfdfdf"
             }
+        },
+        tooltip: {
+            background: "#564942",
+            opacity: 0.9
         }
     });
 
