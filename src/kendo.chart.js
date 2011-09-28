@@ -5716,11 +5716,18 @@
 
         refresh: function(domElement) {
             var path = this,
-                options = path.options;
+                options = path.options,
+                element = $(domElement),
+                parentNode = element[0].parentNode;
 
-            $(domElement).find("path")[0].setAttribute("v", this.renderPoints());
-            $(domElement).find("fill")[0].setAttribute("opacity", options.fillOpacity);
-            $(domElement).find("stroke")[0].setAttribute("opacity", options.strokeOpacity);
+            if (parentNode) {
+                element.find("path")[0].setAttribute("v", this.renderPoints());
+                element.find("fill")[0].setAttribute("opacity", options.fillOpacity);
+                element.find("stroke")[0].setAttribute("opacity", options.strokeOpacity);
+
+                // Force redraw in order to remove artifacts in IE < 7
+                parentNode.style.cssText = parentNode.style.cssText;
+            }
         }
     });
 
