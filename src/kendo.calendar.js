@@ -208,6 +208,8 @@
             that.prevArrow.toggleClass(DISABLED, compare(value, min) < 1);
             that.nextArrow.toggleClass(DISABLED, compare(value, max) > -1);
 
+            //stop navigation if not allowed ... just return...
+
             if (!oldView || that._changeView) {
                 newView = $(calendarView.content($.extend({
                     min: min,
@@ -369,7 +371,8 @@
                 return kendo.culture().calendar.months.names[date.getMonth()] + " " + date.getFullYear();
             },
             content: function(options) {
-                var idx = 0,
+                var that = this,
+                    idx = 0,
                     min = options.min,
                     max = options.max,
                     date = options.date,
@@ -380,9 +383,9 @@
                     abbr = shiftArray(days.namesAbbr, firstDayIdx),
                     short = shiftArray(days.namesShort, firstDayIdx),
                     start = calendar.firstVisibleDay(date),
-                    firstDayOfMonth = calendar.firstDayOfMonth(date),
-                    lastDayOfMonth = new DATE(date.getFullYear(), date.getMonth() + 1, 0),
-                    toDateString = this.toDateString,
+                    firstDayOfMonth = that.first(date),
+                    lastDayOfMonth = that.last(date),
+                    toDateString = that.toDateString,
                     html = '<table class="k-content"><thead><tr>';
 
                 for (; idx < 7; idx++) {
@@ -398,7 +401,7 @@
                     max: new DATE(max.getFullYear(), max.getMonth(), max.getDate()),
                     content: options.content,
                     empty: options.empty,
-                    setter: this.setDate,
+                    setter: that.setDate,
                     build: function(date) {
                         return {
                             date: date,
@@ -409,6 +412,12 @@
                         };
                     }
                 });
+            },
+            first: function(date) {
+                return calendar.firstDayOfMonth(date);
+            },
+            last: function(date) {
+                return new DATE(date.getFullYear(), date.getMonth() + 1, 0);
             },
             compare: function(date1, date2) {
                 var result,
@@ -463,6 +472,12 @@
                     }
                 });
             },
+            first: function(date) {
+                return new DATE(date.getFullYear(), 0, date.getDate());
+            },
+            last: function(date) {
+                return new DATE(date.getFullYear(), 11, date.getDate());
+            },
             compare: function(date1, date2){
                 return compare(date1, date2);
             },
@@ -492,7 +507,7 @@
                     toDateString = this.toDateString;
 
                 return view({
-                    start: new DATE(year = year - year % 10 - 1, 0, 1),
+                    start: new DATE(year - year % 10 - 1, 0, 1),
                     min: new DATE(options.min.getFullYear(), 0, 1),
                     max: new DATE(options.max.getFullYear(), 0, 1),
                     setter: this.setDate,
@@ -504,6 +519,14 @@
                         };
                     }
                 });
+            },
+            first: function(date) {
+                var year = date.getFullYear();
+                return new DATE(year - year % 10, date.getMonth(), date.getDate());
+            },
+            last: function(date) {
+                var year = date.getFullYear();
+                return new DATE(year - year % 10 + 9, date.getMonth(), date.getDate());
             },
             compare: function(date1, date2) {
                 return compare(date1, date2, 10);
@@ -541,6 +564,14 @@
                         };
                     }
                 });
+            },
+            first: function(date) {
+                var year = date.getFullYear();
+                return new DATE(year - year % 100, date.getMonth(), date.getDate());
+            },
+            last: function(date) {
+                var year = date.getFullYear();
+                return new DATE(year - year % 100 + 99, date.getMonth(), date.getDate());
             },
             compare: function(date1, date2) {
                 return compare(date1, date2, 100);

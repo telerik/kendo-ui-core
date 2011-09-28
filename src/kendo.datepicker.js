@@ -110,6 +110,11 @@
                 viewedValue = that._viewedValue,
                 dateString, value;
 
+            if (keys.ESC == key) {
+                that.close();
+                return;
+            }
+
             if (e.ctrlKey) {
                 if (keys.RIGHT == key) {
                     calendar.navigateToFuture();
@@ -122,19 +127,7 @@
                     e.preventDefault();
                 } else if (keys.DOWN == key) {
                     e.preventDefault();
-                    navigateDown(calendar);
-
-                    //if (calendar._currentView === calendar.options.depth) {
-                    //that.close();
-                    //}
-                }
-            } else if (e.altKey) {
-                if (keys.DOWN == key) {
-                    that.open();
-                    e.preventDefault();
-                } else if (keys.UP == key) {
-                    that.close();
-                    e.preventDefault();
+                    that._navigateDown();
                 }
             } else {
                 if (keys.RIGHT == key) {
@@ -151,10 +144,19 @@
                     e.preventDefault();
                 } else if (keys.ENTER == key) {
                     e.preventDefault();
-                    navigateDown(calendar);
-                    /if (calendar._currentView === calendar.options.depth) {
-                    //that.close();
-                    //}
+                    that._navigateDown();
+                } else if (keys.HOME == key) {
+                    e.preventDefault();
+                    that._viewedValue = viewedValue = kendo.calendar[calendar._currentView].first(viewedValue);
+                    calendar._focusCell(viewedValue);
+                } else if (keys.END == key) {
+                    e.preventDefault();
+                    that._viewedValue = viewedValue = kendo.calendar[calendar._currentView].last(viewedValue);
+                    calendar._focusCell(viewedValue);
+                } else if (keys.PAGEUP == key) {
+                    calendar.navigateToPast();
+                } else if (keys.PAGEDOWN == key) {
+                    calendar.navigateToFuture();
                 }
 
                 if (value) {
@@ -176,6 +178,21 @@
                 calendar._focusCell(that._viewedValue);
                 calendar.value(value);
             }
+        },
+
+        _navigateDown: function() {
+            var that = this,
+                calendar = that.calendar,
+                cell = calendar.view.find(".k-state-focused"),
+                date = new Date(cell.children(":first").data("value")),
+                viewedValue = calendar._viewedValue;
+
+            if (cell.hasClass("k-state-selected")) {
+                that.close();
+            }
+
+            kendo.calendar[calendar._currentView].setDate(viewedValue, date);
+            calendar.navigateDown(viewedValue);
         }
     }
 
@@ -215,9 +232,7 @@
             that.element
                 .addClass("k-input")
                 .bind({
-                    keydown: function(e) {
-                        that.dateView.navigate(e);
-                    },
+                    keydown: proxy(that._keydown, that),
                     blur: function() {
                         var value = this.value;
                         that._bluring = setTimeout(function() {
@@ -291,6 +306,28 @@
 
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
+            }
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                dateView = that.dateView;
+
+            if (e.altKey) {
+                if (keys.DOWN == key) {
+                    that.open();
+                    e.preventDefault();
+                } else if (keys.UP == key) {
+                    that.close();
+                    e.preventDefault();
+                }
+            }
+
+            if (dateView.popup.visible()) {
+                dateView.navigate(e);
+            } else if (keys.ENTER == key) {
+                that._change(e.currentTarget.value);
             }
         },
 
