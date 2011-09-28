@@ -101,7 +101,11 @@
             test("calendar should wire header buttons", function() {
                 var cal = new Calendar(div);
 
-                stub(cal, ["navigateToPast", "navigateToFuture", "navigateUp"]);
+                stub(cal, {
+                    navigateToPast: cal.navigateToPast,
+                    navigateToFuture: cal.navigateToFuture,
+                    navigateUp: cal.navigateUp
+                });
 
                 var links = cal.element.find(".k-header").find(".k-link");
 
