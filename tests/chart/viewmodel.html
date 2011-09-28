@@ -319,6 +319,14 @@
                     equal(boxElement.box.height(), HEIGHT + 2 * PADDING);
                 });
 
+                test("padding is added to paddingBox", function() {
+                    boxElement.options.padding = PADDING;
+                    boxElement.reflow(targetBox);
+
+                    equal(boxElement.paddingBox.width(), WIDTH + 2 * PADDING);
+                    equal(boxElement.paddingBox.height(), HEIGHT + 2 * PADDING);
+                });
+
                 test("border is added to outer box", function() {
                     boxElement.options.border.width = BORDER;
                     boxElement.reflow(targetBox);
@@ -327,12 +335,38 @@
                     equal(boxElement.box.height(), HEIGHT + 2 * BORDER);
                 });
 
+                test("border is not added to padding box", function() {
+                    boxElement.options.border.width = BORDER;
+                    boxElement.reflow(targetBox);
+
+                    equal(boxElement.paddingBox.width(), WIDTH);
+                    equal(boxElement.paddingBox.height(), HEIGHT);
+                });
+
                 test("margin is added to outer box", function() {
                     boxElement.options.margin = MARGIN;
                     boxElement.reflow(targetBox);
 
                     equal(boxElement.box.width(), WIDTH + 2 * MARGIN);
                     equal(boxElement.box.height(), HEIGHT + 2 * MARGIN);
+                });
+
+                test("margin is not added to padding box", function() {
+                    boxElement.options.margin = MARGIN;
+                    boxElement.reflow(targetBox);
+
+                    equal(boxElement.paddingBox.width(), WIDTH);
+                    equal(boxElement.paddingBox.height(), HEIGHT);
+                });
+
+                test("content box has no padding, border or margin", function() {
+                    boxElement.options.padding = PADDING;
+                    boxElement.options.border.width = BORDER;
+                    boxElement.options.margin = MARGIN;
+                    boxElement.reflow(targetBox);
+
+                    equal(boxElement.contentBox.width(), WIDTH);
+                    equal(boxElement.contentBox.height(), HEIGHT);
                 });
 
                 // ------------------------------------------------------------
@@ -425,17 +459,29 @@
                     equal(boxElement.box.height(), childrenBox.height());
                 });
 
-                test("applies margins", function() {
-                    boxElement.options.margin = MARGIN;
+                test("moves children from margins", function() {
+                    boxElement.options.margin = {
+                        left: 1,
+                        top: 2
+                    };
                     boxElement.reflow(targetBox);
 
                     $.each(childElements, function() {
-                        same([this.box.x1, this.box.y1,
-                              this.box.x2, this.box.y2],
-                             [targetBox.x1 + MARGIN,
-                              targetBox.y1 + MARGIN,
-                              targetBox.x1 + this.box.width() + MARGIN,
-                              targetBox.y1 + this.box.height() + MARGIN]);
+                        same([this.box.x1, this.box.y1],
+                             [targetBox.x1 + 1, targetBox.y1 + 2]);
+                    });
+                });
+
+                test("moves children from padding", function() {
+                    boxElement.options.padding = {
+                        left: 1,
+                        top: 2
+                    };
+                    boxElement.reflow(targetBox);
+
+                    $.each(childElements, function() {
+                        same([this.box.x1, this.box.y1],
+                             [targetBox.x1 + 1, targetBox.y1 + 2]);
                     });
                 });
 

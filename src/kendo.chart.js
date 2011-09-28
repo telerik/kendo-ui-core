@@ -18,7 +18,7 @@
         ANIMATION_STEP = 10,
         BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
-        BAR_BORDER_BRIGHTNESS = 0.7,
+        BAR_BORDER_BRIGHTNESS = 0.8,
         BAR_GAP = 1.5,
         BAR_SPACING = 0.4,
         BELOW = "below",
@@ -41,13 +41,13 @@
         GLOBAL_CLIP = "globalClip",
         HEIGHT = "height",
         HORIZONTAL = "horizontal",
-        INITIAL_ANIMATION_DURATION = 800,
+        INITIAL_ANIMATION_DURATION = 600,
         INSIDE_BASE = "insideBase",
         INSIDE_END = "insideEnd",
         INTERPOLATE = "interpolate",
         LEFT = "left",
         LINE = "line",
-        LINE_MARKER_SIZE = 6,
+        LINE_MARKER_SIZE = 8,
         LINEAR = "linear",
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER = "mouseover",
@@ -1210,6 +1210,9 @@
                     gap: BAR_GAP,
                     spacing: BAR_SPACING
                 },
+                line: {
+                    width: 4
+                },
                 labels: {}
             },
             series: [],
@@ -1843,7 +1846,7 @@
                 box = element.box;
             }
 
-            contentBox = box.clone();
+            contentBox = element.contentBox = box.clone();
 
             box.pad(padding).pad(borderWidth).pad(margin);
 
@@ -1854,7 +1857,7 @@
 
             element.translateChildren(
                 box.x1 - contentBox.x1 + margin.left + borderWidth + padding.left,
-                box.y1 - contentBox.y1 + margin.top + borderWidth + padding.left);
+                box.y1 - contentBox.y1 + margin.top + borderWidth + padding.top);
         },
 
         align: function(targetBox, axis, alignment) {
@@ -2029,13 +2032,13 @@
         options: {
             font: SANS12,
             position: OUTSIDE_END,
-            margin: getSpacing(2),
-            padding: getSpacing(2),
+            margin: getSpacing(3),
+            padding: getSpacing(4),
             color: BLACK,
             background: "",
             border: {
-                width: 0,
-                color: BLACK
+                width: 1,
+                color: ""
             },
             aboveAxis: true,
             isVertical: false,
@@ -2051,7 +2054,8 @@
                 isVertical = options.isVertical,
                 aboveAxis = options.aboveAxis,
                 text = barLabel.children[0],
-                box = text.box;
+                box = text.box,
+                padding = text.options.padding;
 
             text.options.align = isVertical ? CENTER : LEFT;
             text.options.vAlign = isVertical ? TOP : CENTER;
@@ -2102,6 +2106,14 @@
                         );
                     }
                 }
+            }
+
+            if (isVertical) {
+                padding.left = padding.right =
+                    (targetBox.width() - text.contentBox.width()) / 2;
+            } else {
+                padding.top = padding.bottom =
+                    (targetBox.height() - text.contentBox.height()) / 2;
             }
 
             text.reflow(targetBox);
@@ -3565,7 +3577,7 @@
             var marker = this,
                 options = marker.options,
                 type = options.type,
-                box = marker.box,
+                box = marker.paddingBox,
                 element = BoxElement.fn.getViewElements.call(marker, view, renderOptions)[0],
                 halfWidth = box.width() / 2;
 
@@ -3600,17 +3612,19 @@
             isVertical: true,
             markers: {
                 visible: true,
-                background: BLACK,
+                background: WHITE,
                 size: LINE_MARKER_SIZE,
-                type: SQUARE,
+                type: CIRCLE,
                 border: {
-                    width: 1
+                    width: 2
                 },
                 opacity: 1
             },
             labels: {
                 visible: false,
                 position: ABOVE,
+                margin: getSpacing(3),
+                padding: getSpacing(4),
                 animation: {
                     type: FADEIN,
                     delay: INITIAL_ANIMATION_DURATION
@@ -3783,7 +3797,9 @@
                 deepExtend({
                     isVertical: options.isVertical,
                     markers: {
-                        background: series.color,
+                        border: {
+                            color: series.color
+                        },
                         opacity: series.opacity
                     }
                 }, series)
@@ -3910,7 +3926,9 @@
             labels: {
                 visible: false,
                 distance: 30,
-                font: ARIAL12
+                font: ARIAL12,
+                margin: getSpacing(3),
+                padding: getSpacing(4)
             },
             animation: {
                 type: PIE
@@ -6159,13 +6177,20 @@
         },
 
         setup: function() {
-            var options = this.element.options;
+            var anim = this,
+                options = anim.element.options;
+
+            anim.targetFillOpacity = options.fillOpacity;
+            anim.targetStrokeOpacity = options.strokeOpacity;
             options.fillOpacity = options.strokeOpacity = 0;
         },
 
         step: function(actor, pos) {
-            var options = actor.options;
-            options.fillOpacity = options.strokeOpacity = pos;
+            var anim = this,
+                options = actor.options;
+
+            options.fillOpacity = pos * anim.targetFillOpacity;
+            options.strokeOpacity = pos * anim.targetStrokeOpacity;
         }
     });
 
@@ -6245,7 +6270,7 @@
     var PieAnimation = ElementAnimation.extend({
         options: {
             easing: "easeOutElastic",
-            duration: 500
+            duration: INITIAL_ANIMATION_DURATION
         },
 
         setup: function() {
@@ -6343,8 +6368,8 @@
         options: {
             font: SANS12,
             padding: {
-                top: 4,
-                bottom: 4,
+                top: 5,
+                bottom: 5,
                 left: 6,
                 right: 6
             },
@@ -6352,7 +6377,7 @@
                 color: BLACK,
                 width: 0
             },
-            offsetY: 6,
+            offsetY: 2,
             offsetX: 5
         },
 
@@ -6870,7 +6895,7 @@
                 }, {
                     offset: 0.25,
                     color: WHITE,
-                    opacity: 0.4
+                    opacity: 0.3
                 }, {
                     offset: 0.92,
                     color: WHITE,
@@ -7187,40 +7212,42 @@
 
     Chart.themes.kendo = deepExtend({}, baseTheme, {
         title: {
-            color: "#6d6e70"
+            color: "#8e8e8e"
         },
         legend: {
             labels: {
-                color: "#6d6e70"
+                color: "#232323"
             }
         },
         seriesDefaults: {
             labels: {
-                color: "#6d6e70"
+                color: "#ffffff",
+                background: "#564942",
+                opacity: 0.7
             }
         },
-        seriesColors: ["#ffb800", "#ff8517", "#e34a00", "#545454", "#161616"],
+        seriesColors: ["#ff5400", "#ff8b24", "#ffc066", "#9da600", "#688900", "#3e6100"],
         categoryAxis: {
             line: {
-                color: "#696e70"
+                color: "#8e8e8e"
             },
             labels: {
-                color: "#696e70"
+                color: "#232323"
             },
             majorGridLines: {
-                color: "#d0d2d3",
+                color: "#dfdfdf",
                 visible: true
             }
         },
         valueAxis: {
             line: {
-                color: "#696e70"
+                color: "#8e8e8e"
             },
             labels: {
-                color: "#696e70"
+                color: "#232323"
             },
             majorGridLines: {
-                color: "#d0d2d3"
+                color: "#dfdfdf"
             }
         }
     });
