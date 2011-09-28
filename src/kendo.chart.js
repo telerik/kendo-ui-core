@@ -1448,8 +1448,8 @@
     var Point2D = Class.extend({
         init: function(x, y) {
             var point = this;
-            point.x = x;
-            point.y = y;
+            point.x = round(x, COORD_PRECISION);
+            point.y = round(y, COORD_PRECISION);
         }
     });
 
@@ -1641,9 +1641,8 @@
                 radianAngle = angle * DEGREE,
                 ax = math.cos(radianAngle),
                 ay = math.sin(radianAngle),
-                r = sector.r,
-                x = round(sector.c.x - (ax * r), COORD_PRECISION),
-                y = round(sector.c.y - (ay * r), COORD_PRECISION);
+                x = sector.c.x - (ax * sector.r)
+                y = sector.c.y - (ay * sector.r);
 
             return new Point2D(x, y);
         }
@@ -3994,19 +3993,20 @@
                 options = segment.options,
                 label = segment.label,
                 labelDistance = options.labels.distance,
+                startAngle = segment.sector.startAngle % 90,
                 lp,
                 angle = sector.middle();
 
             if (label) {
                 lp = sector.clone().expand(labelDistance).point(angle);
 
-                if (angle < 90 || angle > 270) {
-                    label.orientation = LEFT;
-                } else {
-                    label.orientation = RIGHT;
-                }
-
                 label.reflow(new Box2D(0, lp.y - label.box.height() / 2, 0, lp.y));
+
+                if (lp.x >= sector.c.x) {
+                    label.orientation = RIGHT;
+                } else {
+                    label.orientation = LEFT;
+                }
             }
         },
 
@@ -4194,10 +4194,12 @@
             }
 
             if (leftSideLabels.length > 0) {
-                chart.leftLabelsReflow(leftSideLabels.reverse());
+                leftSideLabels.sort(chart.labelComparator(true));
+                chart.leftLabelsReflow(leftSideLabels);
             }
 
             if (rightSideLabels.length > 0) {
+                rightSideLabels.sort(chart.labelComparator(false));
                 chart.rightLabelsReflow(rightSideLabels);
             }
 
@@ -4350,11 +4352,12 @@
                     start = sector.clone().expand(connector.padding).point(angle);
                     points.push(start);
                     if (label.orientation == RIGHT) {
+                        number = 0;
                         end = new Point2D(box.x1 - connector.padding, box.center().y),
                         crossing = intersection(centerPoint, start, middle, end) || new Point2D(end.x - 4, end.y);
                         crossing.x = math.min(crossing.x, end.x - 4);
                         end.x -= 2;
-                        if (sqr(sector.c.x - crossing.x) + sqr(sector.c.y - crossing.y) < sqr(sector.r) || crossing.x < sector.c.x) {
+                        if (sqr(sector.c.x - crossing.x) + sqr(sector.c.y - crossing.y) < sqr(sector.r + connector.padding) || crossing.x < sector.c.x) {
                             points.push(new Point2D(sector.c.x + sector.r + connector.padding - number, start.y + number));
                             points.push(new Point2D(end.x - 4, end.y));
                             if (number < label.options.distance / 4 && start.y < end.y) {
@@ -4366,21 +4369,23 @@
                             number = 0;
                         }
                     } else {
+                        number = 0;
                         end = new Point2D(box.x2 + connector.padding, box.center().y),
                         crossing = intersection(centerPoint, start, middle, end) || new Point2D(end.x + 4, end.y);
                         crossing.x = math.max(crossing.x, end.x + 4);
                         end.x += 2;
-                        if (sqr(crossing.x - sector.c.x) + sqr(crossing.y - sector.c.y) < sqr(sector.r) || crossing.x > sector.c.x) {
+                        if (sqr(crossing.x - sector.c.x) + sqr(crossing.y - sector.c.y) < sqr(sector.r + connector.padding) || crossing.x > sector.c.x) {
                             points.push(new Point2D(sector.c.x - sector.r - connector.padding + number, start.y + number));
                             points.push(new Point2D(end.x + 4, end.y));
                             if (number < label.options.distance / 4 && start.y < end.y) {
-                                number += 1;
+                                number -= 1;
                             }
                         } else {
                             crossing.y = end.y;
                             points.push(crossing);
                             number = 0;
                         }
+
                     }
 
                     points.push(end);
@@ -4401,30 +4406,19 @@
                 ChartElement.fn.getViewElements.call(chart, view));
 
             return lines;
+        },
+
+        labelComparator: function (reverse) {
+            reverse = (reverse) ? -1 : 1;
+
+            return function(a, b) {
+                var startAngle = a.parent.sector.startAngle;
+                a = (a.parent.sector.middle() - 90 + 360) % 360;
+                b = (b.parent.sector.middle() - 90 + 360) % 360;
+                return (a - b) * reverse;
+            }
         }
     });
-
-
-    function intersection(a1, a2, b1, b2) {
-        var result,
-            ua_t = (b2.x - b1.x) * (a1.y - b1.y) - (b2.y - b1.y) * (a1.x - b1.x),
-            ub_t = (a2.x - a1.x) * (a1.y - b1.y) - (a2.y - a1.y) * (a1.x - b1.x),
-            u_b = (b2.y - b1.y) * (a2.x - a1.x) - (b2.x - b1.x) * (a2.y - a1.y),
-            ua,
-            ub;
-
-        if (u_b != 0) {
-            ua = (ua_t / u_b);
-            ub = (ub_t / u_b);
-
-            result = new Point2D(
-                a1.x + ua * (a2.x - a1.x),
-                a1.y + ua * (a2.y - a1.y)
-            );
-        }
-
-        return result;
-    }
 
     var PlotArea = ChartElement.extend({
         init: function(options) {
@@ -4563,9 +4557,11 @@
         createPieChart: function(series) {
             var plotArea = this,
                 options = plotArea.options,
+                firstSeries = series[0],
                 pieChart = new PieChart(plotArea, {
                     series: series,
-                    padding: series[0].padding
+                    padding: firstSeries.padding,
+                    startAngle: firstSeries.startAngle
                 }),
                 segments = pieChart.segments,
                 count = segments.length,
@@ -6772,6 +6768,89 @@
         }
     }
 
+    function intersection(a1, a2, b1, b2) {
+        var result,
+            ua_t = (b2.x - b1.x) * (a1.y - b1.y) - (b2.y - b1.y) * (a1.x - b1.x),
+            ub_t = (a2.x - a1.x) * (a1.y - b1.y) - (a2.y - a1.y) * (a1.x - b1.x),
+            u_b = (b2.y - b1.y) * (a2.x - a1.x) - (b2.x - b1.x) * (a2.y - a1.y),
+            ua,
+            ub;
+
+        if (u_b != 0) {
+            ua = (ua_t / u_b);
+            ub = (ub_t / u_b);
+
+            result = new Point2D(
+                a1.x + ua * (a2.x - a1.x),
+                a1.y + ua * (a2.y - a1.y)
+            );
+        }
+
+        return result;
+    }
+
+    function append(first, second) {
+        [].push.apply(first, second);
+    }
+
+    function interpolateValue(start, end, progress) {
+        return round(start + (end - start) * progress, COORD_PRECISION);
+    }
+
+    function applySeriesDefaults(options) {
+        var series = options.series,
+            i,
+            seriesLength = series.length,
+            seriesType,
+            colors = options.seriesColors || [],
+            seriesDefaults = options.seriesDefaults,
+            baseSeriesDefaults = deepExtend({}, options.seriesDefaults);
+
+        delete baseSeriesDefaults.bar;
+        delete baseSeriesDefaults.column;
+        delete baseSeriesDefaults.line;
+
+        for (i = 0; i < seriesLength; i++) {
+            seriesType = series[i].type || options.seriesDefaults.type;
+
+            series[i] = deepExtend(
+                { color: colors[i % colors.length] },
+                baseSeriesDefaults,
+                seriesDefaults[seriesType],
+                series[i]);
+        }
+    }
+
+    function applyAxisDefaults(options) {
+        options.categoryAxis = deepExtend({},
+            options.axisDefaults,
+            options.categoryAxis
+        );
+
+        options.valueAxis = deepExtend({},
+            options.axisDefaults,
+            options.valueAxis
+        );
+    }
+
+    function incrementSlot(slots, index, value) {
+        slots[index] = (slots[index] || 0) + value;
+    }
+
+    function uniqueId() {
+        var id = "k", i;
+
+        for (i = 0; i < 16; i++) {
+            id += (math.random() * 16 | 0).toString(16);
+        }
+
+        return id;
+    }
+
+    function defined(value) {
+        return typeof value !== UNDEFINED;
+    }
+
     // renderSVG ==============================================================
     function renderSVG(container, svg) {
         container.innerHTML = svg;
@@ -7024,68 +7103,6 @@
 
     function template(definition) {
         return baseTemplate(definition, { useWithBlock: false, paramName: "d" });
-    }
-
-    function applySeriesDefaults(options) {
-        var series = options.series,
-            i,
-            seriesLength = series.length,
-            seriesType,
-            colors = options.seriesColors || [],
-            seriesDefaults = options.seriesDefaults,
-            baseSeriesDefaults = deepExtend({}, options.seriesDefaults);
-
-        delete baseSeriesDefaults.bar;
-        delete baseSeriesDefaults.column;
-        delete baseSeriesDefaults.line;
-
-        for (i = 0; i < seriesLength; i++) {
-            seriesType = series[i].type || options.seriesDefaults.type;
-
-            series[i] = deepExtend(
-                { color: colors[i % colors.length] },
-                baseSeriesDefaults,
-                seriesDefaults[seriesType],
-                series[i]);
-        }
-    }
-
-    function applyAxisDefaults(options) {
-        options.categoryAxis = deepExtend({},
-            options.axisDefaults,
-            options.categoryAxis
-        );
-
-        options.valueAxis = deepExtend({},
-            options.axisDefaults,
-            options.valueAxis
-        );
-    }
-
-    function incrementSlot(slots, index, value) {
-        slots[index] = (slots[index] || 0) + value;
-    }
-
-    function uniqueId() {
-        var id = "k", i;
-
-        for (i = 0; i < 16; i++) {
-            id += (math.random() * 16 | 0).toString(16);
-        }
-
-        return id;
-    }
-
-    function defined(value) {
-        return typeof value !== UNDEFINED;
-    }
-
-    function append(first, second) {
-        [].push.apply(first, second);
-    }
-
-    function interpolateValue(start, end, progress) {
-        return round(start + (end - start) * progress, COORD_PRECISION);
     }
 
     function updateArray(arr, prop, value) {
