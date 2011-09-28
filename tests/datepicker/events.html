@@ -3,13 +3,13 @@
     <head>
         <title>DatePicker Events</title>
         <script src="../../src/jquery.js"></script>
-        <script type="text/javascript" src="../qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.datepicker.js"></script>
-        <link rel="stylesheet" href="../qunit.css" type="text/css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
         <h1 id="qunit-header">DatePicker Events</h1>
@@ -34,8 +34,11 @@
                 }
             });
 
-            test("blur should call _change event", function() {
-                var datepicker = stub(input.kendoDatePicker().data("kendoDatePicker"), ["_change", "close"]);
+            asyncTest("blur should call _change event", function() {
+                var datepicker = stub(input.kendoDatePicker().data("kendoDatePicker"), {
+                    _change: function() {},
+                    close: function() {}
+                });
 
                 input[0].focus();
                 input[0].blur();
@@ -46,11 +49,9 @@
                     ok(!!datepicker._bluring);
                     start();
                 }, 250);
-
-                stop(300);
             });
 
-            test("raise change event", function() {
+            asyncTest("raise change event", function() {
                 var datepicker = input.kendoDatePicker({
                                             change: function() {
                                                 ok(true);
@@ -60,11 +61,9 @@
                                       .data("kendoDatePicker");
 
                 datepicker._change("10/10/2000");
-
-                stop(300);
             });
 
-            test("raise DOM change event", function() {
+            asyncTest("raise DOM change event", function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
                 input.bind("change", function() {
@@ -73,11 +72,9 @@
                 });
 
                 datepicker._change("10/10/2000");
-
-                stop(300);
             });
 
-            test("raise open event", function() {
+            asyncTest("raise open event", function() {
                 var datepicker = input.kendoDatePicker({
                                             open: function() {
                                                 ok(true);
@@ -87,11 +84,9 @@
                                       .data("kendoDatePicker");
 
                 input.next().click();
-
-                stop(300);
             });
 
-            test("raise close event", function() {
+            asyncTest("raise close event", function() {
                 var datepicker = input.kendoDatePicker({
                                             close: function() {
                                                 ok(true);
@@ -102,11 +97,9 @@
 
                 datepicker.open();
                 input.next().click();
-
-                stop(300);
             });
 
-            test("raise close event document click", function() {
+            asyncTest("raise close event document click", function() {
                 var datepicker = input.kendoDatePicker({
                                             close: function() {
                                                 ok(true);
@@ -118,8 +111,6 @@
                 datepicker.open();
 
                 $(document.documentElement).mousedown();
-
-                stop(300);
             });
 
         </script>

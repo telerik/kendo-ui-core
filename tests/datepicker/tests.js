@@ -10,5 +10,9 @@ tests.push(
     {
         page: "datepicker/navigation.html",
         title: "datepicker navigation"
+    },
+    {
+        page: "datepicker/events.html",
+        title: "datepicker events"
     }
 );

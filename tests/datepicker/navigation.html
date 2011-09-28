@@ -22,7 +22,7 @@
             var DateView = kendo.DateView,
                 keys = kendo.keys;
 
-            QUnit.config.testTimeout = 500;
+            QUnit.config.testTimeout = 700;
 
             module("kendo.ui.DatePicker API", {
                 setup: function() {
@@ -31,6 +31,24 @@
                 teardown: function() {
                     div.remove();
                 }
+            });
+
+            test("click enter should raise change event if dateview is closed", function() {
+                var input = $("<input />"),
+                datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.close();
+
+                stub(datepicker, { _change: datepicker._change });
+
+                input.focus().val("10/10/2000");
+                datepicker._keydown({
+                    currentTarget: document.createElement("input"),
+                    keyCode: kendo.keys.ENTER,
+                    preventDefault: $.noop
+                });
+
+                equal(datepicker.calls("_change"), 1);
             });
 
             test("navigate down should persist current viewedValue", function() {
@@ -364,27 +382,78 @@
                 equal(dv.calendar.calls("navigateToFuture"), 1);
             });
 
-            asyncTest("Enter should close date if select date", function() {
+            test("Home should focus first day of current month", function() {
+                var event = { keyCode: keys.HOME, preventDefault: $.noop },
+                    dv = new DateView({value: new Date(2000, 10, 10)});
+
+                dv._initCalendar();
+                dv.navigate(event);
+
+                var value = dv.calendar.element.find(".k-state-focused").children(":first").data("value");
+
+                equal(value, "11/1/2000");
+            });
+
+            test("End should focus last day of current month", function() {
+                var event = { keyCode: keys.END, preventDefault: $.noop },
+                    dv = new DateView({value: new Date(2000, 10, 10)});
+
+                dv._initCalendar();
+                dv.navigate(event);
+
+                var value = dv.calendar.element.find(".k-state-focused").children(":first").data("value");
+
+                equal(value, "11/30/2000");
+            });
+
+            test("PageUp should focus same day in previous month", function() {
+                var event = { keyCode: keys.PAGEUP, preventDefault: $.noop },
+                    dv = new DateView({value: new Date(2000, 10, 10)});
+
+                dv._initCalendar();
+                stub(dv.calendar, {navigateToPast: dv.calendar.navigateToPast});
+
+                dv.navigate(event);
+
+                equal(dv.calendar.calls("navigateToPast"), 1);
+            });
+
+            test("PageDown should focus same day in next month", function() {
+                var event = { keyCode: keys.PAGEDOWN, preventDefault: $.noop },
+                    dv = new DateView({value: new Date(2000, 10, 10)});
+
+                dv._initCalendar();
+
+                stub(dv.calendar, {navigateToFuture: dv.calendar.navigateToFuture});
+
+                dv.navigate(event);
+
+                equal(dv.calendar.calls("navigateToFuture"), 1);
+            });
+
+            test("Enter should close date if select date", function() {
                 var event = { keyCode: keys.ENTER, preventDefault: $.noop },
                 dv = new DateView({
                     anchor: $("<input />"),
-                    value: new Date(2000, 10, 10),
-                    close: function() {
-                        ok(true);
-                        start();
-                    }
+                    value: new Date(2000, 10, 10)
                 });
 
                 dv.open();
 
                 dv.navigate(event);
+
+                ok(!dv.popup.visible());
             });
 
             test("Enter should focus viewedDate", function() {
                 var event = { keyCode: keys.ENTER, preventDefault: $.noop },
-                    dv = new DateView({value: new Date(2000, 10, 10)});
+                dv = new DateView({
+                    anchor: $("<input />"),
+                    value: new Date(2000, 10, 10)
+                });
 
                 dv._initCalendar();
+                dv.open();
 
                 dv.calendar.navigate(new Date(2000, 10, 10), "year");
                 dv.navigate(event);
@@ -395,12 +464,16 @@
 
             test("Enter should navigate down", function() {
                 var event = { keyCode: keys.ENTER, preventDefault: $.noop },
-                    dv = new DateView({value: new Date(2000, 10, 10)});
+                dv = new DateView({
+                    anchor: $("<input />"),
+                    value: new Date(2000, 10, 10)
+                });
 
                 stub(dv.calendar, "navigateDown");
+
+                dv.open();
                 dv.calendar.navigateUp();
 
-                dv._initCalendar();
                 dv.navigate(event);
 
                 equal(dv.calendar.calls("navigateDown"), 1);
@@ -419,20 +492,14 @@
                 equal(+dv.calendar.args("navigateDown")[0], +focused);
             });
 
-            test("Alt + Down should open the calendar", function() {
-                var event = { keyCode: keys.DOWN, altKey: true, preventDefault: $.noop },
-                    dv = new DateView();
+            test("Esc should close dateView", function() {
+                var event = { keyCode: keys.ESC, preventDefault: $.noop },
+                dv = new DateView({
+                    anchor: $("<input />"),
+                    value: new Date(2000, 10, 10)
+                });
 
-                stub(dv, "open");
-
-                dv.navigate(event);
-
-                equal(dv.calls("open"), 1);
-            });
-
-            test("Alt + UP should close the calendar", function() {
-                var event = { keyCode: keys.UP, altKey: true, preventDefault: $.noop },
-                    dv = new DateView();
+                dv.open();
 
                 stub(dv.popup, "close");
 
@@ -440,7 +507,6 @@
 
                 equal(dv.popup.calls("close"), 1);
             });
-
 
             test("keydown triggered from datepicker should call navigate method", function() {
                 var input = $("<input />"),
@@ -492,6 +558,30 @@
                   .element
                   .find(".k-state-selected")
                   .click();
+            });
+
+            test("Alt + Down should open the calendar", function() {
+                var input = $("<input />"),
+                    event = { type: "keydown", keyCode: keys.DOWN, altKey: true, preventDefault: $.noop },
+                    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                stub(datepicker.dateView, "open");
+
+                input.trigger(event);
+
+                equal(datepicker.dateView.calls("open"), 1);
+            });
+
+            test("Alt + UP should close the calendar", function() {
+                var input = $("<input />"),
+                    event = { type: "keydown", keyCode: keys.UP, altKey: true, preventDefault: $.noop },
+                    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                stub(datepicker.dateView, "close");
+
+                input.trigger(event);
+
+                equal(datepicker.dateView.calls("close"), 1);
             });
 
         </script>
