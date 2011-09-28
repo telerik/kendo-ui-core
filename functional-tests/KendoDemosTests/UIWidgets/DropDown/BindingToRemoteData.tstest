@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>1d6e625c-327f-4d08-a8da-1696400cf3e2</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>bbff21ed-f09c-4a60-9536-776ddff729e7</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>382f412e-520e-48ee-be53-c3dc38470f9a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>dfd83a95-0f3e-4653-b51d-2bfcf31a2579</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -141,11 +141,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify 'TextContent' 'Contains' 'Star Wars: Episode IV: A New Hope' on 'StarWarsSpan'</d2p1:Description>
+      <d2p1:Description>Wait for 'TextContent' 'Contains' 'The Stars of Star Wars' on 'StarWarsSpan'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>4d2fde54-3f53-4c28-8563-3fcfd5df94c7</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b0e1c052-262f-40f6-97da-14b9b4df2d45</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -171,10 +171,10 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TextContent=^Star Wars: Epis</Clause>
+                          <Clause>tagname=span</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagname=span</Clause>
+                          <Clause>TextContent=^The Stars of Star Wars</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
@@ -210,7 +210,7 @@
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
         <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Verification</d2p1:StepType>
+        <d2p1:StepType>Wait</d2p1:StepType>
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
@@ -218,7 +218,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:CompareType>Contains</d2p1:CompareType>
-        <d2p1:ExpectedString>Star Wars: Episode IV: A New Hope</d2p1:ExpectedString>
+        <d2p1:ExpectedString>The Stars of Star Wars</d2p1:ExpectedString>
         <d2p1:SegmentType>TextContent</d2p1:SegmentType>
       </d2p1:Step>
       <d2p1:StepImageKey>BindingToRemoteDatabstpdvtl.d3v</d2p1:StepImageKey>
@@ -232,7 +232,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>9b2a2119-66f1-46f7-84ce-ba0f35ea1729</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>ca823186-f674-4784-a404-272a9866b97b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -317,7 +317,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e57f8e50-2d3e-4038-b1a2-14efd65d8c9c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7b989c13-acb5-48a6-83f2-b180f0abdbaa</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -402,7 +402,7 @@
       <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a7b6432e-c281-4bdb-9053-7e99ab85c518</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>8bb2c140-2e76-4ded-9796-6e6f489c46a5</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -420,7 +420,7 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/div[1]/span[1]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
@@ -428,10 +428,10 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TextContent=^Star Wars: Epis</Clause>
+                          <Clause>tagname=span</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagname=span</Clause>
+                          <Clause>TextContent=^The Stars of Star Wars</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
@@ -485,11 +485,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify 'TextContent' 'Contains' 'Star Wars: Ewok Adventures: Caravan of Courage / The Battle for Endor' on 'StarWarsSpan0'</d2p1:Description>
+      <d2p1:Description>Verify 'TextContent' 'Contains' 'Star Wars: Episode II: Attack of the Clones' on 'StarWarsSpan0'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>4a5c277e-97bb-42b7-8dad-70e2f3eef937</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>acfd5694-149e-4401-8ec7-6f69549bb666</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -515,10 +515,10 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TextContent=^Star Wars: Ewok</Clause>
+                          <Clause>tagname=span</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagname=span</Clause>
+                          <Clause>TextContent=^Star Wars: Episode II: Attack</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
@@ -562,7 +562,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:CompareType>Contains</d2p1:CompareType>
-        <d2p1:ExpectedString>Star Wars: Ewok Adventures: Caravan of Courage / The Battle for Endor</d2p1:ExpectedString>
+        <d2p1:ExpectedString>Star Wars: Episode II: Attack of the Clones</d2p1:ExpectedString>
         <d2p1:SegmentType>TextContent</d2p1:SegmentType>
       </d2p1:Step>
       <d2p1:StepImageKey>BindingToRemoteDataz4rcj304.1so</d2p1:StepImageKey>
