@@ -6187,13 +6187,12 @@
                 finish = start + duration,
                 domElement = $(doc.getElementById(actor.options.id)),
                 easing = jQuery.easing[options.easing],
-                interval,
                 time,
                 pos,
                 easingPos;
 
             setTimeout(function() {
-                interval = setInterval(function() {
+                var loop = function() {
                     time = +new Date();
                     pos = time > finish ? 1 : (time - start) / duration;
                     easingPos = easing(pos, time - start, 0, 1);
@@ -6202,10 +6201,12 @@
 
                     actor.refresh(domElement);
 
-                    if (time > finish) {
-                        clearInterval(interval);
+                    if (time < finish) {
+                        requestAnimFrame(loop);
                     }
-                }, ANIMATION_STEP);
+                };
+
+                loop();
             }, delay);
         },
 
@@ -6256,6 +6257,16 @@
             points[1].x = points[2].x = points[0].x + size;
         }
     });
+
+    var requestAnimFrame =
+        window.requestAnimationFrame       ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame    ||
+        window.oRequestAnimationFrame      ||
+        window.msRequestAnimationFrame     ||
+        function(callback, element) {
+            setTimeout(callback, ANIMATION_STEP);
+        };
 
     var BarAnimation = ElementAnimation.extend({
         options: {
