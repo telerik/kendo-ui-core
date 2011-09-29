@@ -366,7 +366,7 @@
         endswith: function(selector, value) {
             return function(record){
                 var item = selector(record);
-                return item.lastIndexOf(value) == item.length - 1;
+                return item.lastIndexOf(value) == item.length - (value || "").length;
             };
         },
         contains: function(selector, value) {
