@@ -3970,6 +3970,7 @@
                 );
 
                 segment.append(segment.label);
+                segment.registerId(segment.label.options.id);
             }
         },
 
@@ -4022,9 +4023,8 @@
                 } : {},
                 elements = [];
 
-            segment.registerId(segmentID, { seriesIx: segment.seriesIx });
             elements.push(view.createSector(sector, deepExtend({
-                id: segmentID,
+                id: options.id,
                 fill: options.color,
                 overlay: deepExtend({}, options.overlay, {
                     r: sector.r,
@@ -4043,6 +4043,37 @@
             );
 
             return elements;
+        },
+
+        registerId: function(id, metadata) {
+            var element = this,
+                root;
+
+            root = element.getRoot();
+            if (root) {
+                root.idMap[id] = element;
+                if (metadata) {
+                    root.idMapMetadata[id] = metadata;
+                }
+            }
+        },
+
+        getOutlineElement: function(view, options) {
+            var segment = this,
+                highlight = segment.options.highlight,
+                border = highlight.border,
+                outlineId = segment.options.id + OUTLINE_SUFFIX;
+
+            segment.registerId(outlineId);
+            options = deepExtend({}, options, { id: outlineId });
+
+            return view.createSector(segment.sector, deepExtend({}, options, {
+                fill: highlight.color,
+                fillOpacity: highlight.opacity,
+                strokeOpacity: border.opacity,
+                strokeWidth: border.width,
+                stroke: border.color
+            }));
         }
     });
 
@@ -4137,6 +4168,7 @@
                 sector = new Sector(null, 0, startAngle, angle);
 
             segment = new PieSegment(value, sector, series);
+            segment.options.id = uniqueId();
             segment.category = category;
             segment.series = series;
             segment.seriesIx = seriesIx;
@@ -4328,6 +4360,7 @@
                 lines = [],
                 points,
                 segment,
+                seriesIx,
                 label,
                 i;
 
@@ -4336,6 +4369,7 @@
                 sector = segment.sector;
                 angle = sector.middle();
                 label = segment.label;
+                seriesIx = { seriesId: segment.seriesIx };
 
                 if (label) {
                     points = [];
@@ -4380,8 +4414,7 @@
                     }
 
                     points.push(end);
-
-                    lines.push(view.createPolyline(points, false, {
+                    var connectorLine = view.createPolyline(points, false, {
                         id: uniqueId(),
                         stroke: connector.color,
                         strokeWidth: connector.width,
@@ -4389,8 +4422,13 @@
                             type: FADEIN,
                             delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
                         }
-                    }));
+                    });
+                    lines.push(connectorLine);
+                    segment.registerId(label.options.id, seriesIx);
+                    segment.registerId(connectorLine.options.id, seriesIx);
                 }
+
+                segment.registerId(segment.options.id, seriesIx);
             }
 
             append(lines,
@@ -7035,45 +7073,65 @@
 
     Chart.Gradients = {
         glass: {
-                type: LINEAR,
-                rotation: 0,
-                stops: [{
-                    offset: 0,
-                    color: WHITE,
-                    opacity: 0
-                }, {
-                    offset: 0.1,
-                    color: WHITE,
-                    opacity: 0
-                }, {
-                    offset: 0.25,
-                    color: WHITE,
-                    opacity: 0.3
-                }, {
-                    offset: 0.92,
-                    color: WHITE,
-                    opacity: 0
-                }, {
-                    offset: 1,
-                    color: WHITE,
-                    opacity: 0
-                }]
+            type: LINEAR,
+            rotation: 0,
+            stops: [{
+                offset: 0,
+                color: WHITE,
+                opacity: 0
+            }, {
+                offset: 0.1,
+                color: WHITE,
+                opacity: 0
+            }, {
+                offset: 0.25,
+                color: WHITE,
+                opacity: 0.3
+            }, {
+                offset: 0.92,
+                color: WHITE,
+                opacity: 0
+            }, {
+                offset: 1,
+                color: WHITE,
+                opacity: 0
+            }]
+        },
+        sharpBevel: {
+            type: RADIAL,
+            stops: [{
+                offset: 0,
+                color: WHITE,
+                opacity: 0.55
+            }, {
+                offset: 0.65,
+                color: WHITE,
+                opacity: 0
+            }, {
+                offset: 0.95,
+                color: WHITE,
+                opacity: 0
+            }, {
+                offset: 0.95,
+                color: WHITE,
+                opacity: 0.25
+            }]
         },
         roundedBevel: {
-                type: RADIAL,
-                stops: [{
-                    offset: 0.33,
-                    color: WHITE,
-                    opacity: 0.06
-                }, {
-                    offset: 0.83,
-                    color: WHITE,
-                    opacity: 0.2
-                }, {
-                    offset: 0.95,
-                    color: WHITE,
-                    opacity: 0
-                }]
+            type: RADIAL,
+            stops: [{
+                offset: 0.33,
+                color: WHITE,
+                opacity: 0.06
+            }, {
+                offset: 0.83,
+                color: WHITE,
+                opacity: 0.2
+            }, {
+                offset: 0.95,
+                color: WHITE,
+                opacity: 0
+            }]
         }
     };
 
@@ -7274,12 +7332,26 @@
         seriesDefaults: {
             labels: {
                 color: WHITE
+            },
+            pie: {
+                highlight: {
+                    opacity: 0.6,
+                    color: "#393939",
+                    border: {
+                        width: 0.5,
+                        opacity: 0.9,
+                        color: "#000"
+                    }
+                },
+                overlay: {
+                    gradient: "sharpBevel"
+                }
             }
         },
         chartArea: {
             background: "#393939"
         },
-        seriesColors: ["#e34a00", "#ff8517", "#ffb800", "#94c400", "#0098ee", "#0069a5"],
+        seriesColors: ["#0081da", "#3aafff", "#99c900", "#ffeb3d", "#b20753", "#ff4195"],
         categoryAxis: {
             line: {
                 color: "#808184"
