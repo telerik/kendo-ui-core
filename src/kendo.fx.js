@@ -551,11 +551,11 @@
                     divisor = options.divisor || 1;
 
                 if (!reverse) {
-                    offset = direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth() / divisor);
+                    offset = (direction.modifier * 100 / divisor);
                     !element.data(ORIGIN) && element.data(ORIGIN, animationProperty(element, direction.transition));
                 }
 
-                extender[direction.transition] = reverse ? (element.data(ORIGIN) || 0) + PX : offset + PX;
+                extender[direction.transition] = reverse ? (element.data(ORIGIN) || 0) + PX : offset + "%";
 
                 return extend(extender, options.properties);
             }

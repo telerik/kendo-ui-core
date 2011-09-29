@@ -50,12 +50,14 @@
         }, false);
     }
 
+    $(document).bind("resize, orientationchange", function() {
+       window.scrollTo(0, 0);
+    });
+
     $(document).ready(function () {
         if (os) {
             if (!os.ios && !os.blackberry)
-                if (!$.browser.msie && !$.browser.opera)
-                    $('.k-view, body').css(transitions.css + 'box-direction', 'reverse');
-                else {
+                if ($.browser.msie || $.browser.opera) {
                     var layout = $('.k-view');
                     $(".k-footer").prependTo(layout);
                     $('.k-header').appendTo(layout);
@@ -144,24 +146,23 @@
             }
 
             var width = application.root[0].style.width,
-                viewWidth = window.innerWidth;
+                halfWidth = (100 / application.depth) + "%";
 
             $(document.body)
-                .width(viewWidth * application.depth);
+                .width((100 * application.depth) + "%");
 
             $(".k-tabContainer")
-                .width(viewWidth)
+                .width(halfWidth)
                 .css(transitions.css + "box-flex", "0");
 
             view.element
                 .add(view.element.siblings(".k-view"))
-                .css({ width: viewWidth });
+                .css({ width: halfWidth });
 
             back && application.depth--;
 
             $(application.root)
                 .kendoAnimate(extend({ reverse: back, complete: function () {
-
                                                                 } },
                                                                 view.options.animation));
 

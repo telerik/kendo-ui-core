@@ -23,15 +23,15 @@
                     {suffix: "_s", size: 75},
                     {suffix: "_t", size: 100},
                     {suffix: "_m", size: 240}
-                ],
-                this.imageSize = this.IMAGESIZES[0],
-                this.PAGESIZE = 300,
-                this.template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<#= id #>" alt="<#= kendo.htmlEncode(title) #>" src="http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=id#>_<#=secret#>' + option.suffix + '.jpg"></li>'; },
-                this.setTemplate = '<li data-setid="<#=id#>" alt="<#= kendo.htmlEncode(title._content) #>"><img width="75" height="75" src="http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=primary#>_<#=secret#>_s.jpg"><em><#= kendo.htmlEncode(title._content) #></em></li>',
-                this.EXTRAS = "owner_name,tags",
-                this.flashArrows = 0,
-                this.zoomFactor = 1,
-                this.animType = false,
+                ];
+                this.imageSize = this.IMAGESIZES[0];
+                this.PAGESIZE = 300;
+                this.template = function(option) { return '<li style="width:' + option.size + 'px;height:' + option.size + 'px"><img data-photoid="<#= id #>" alt="<#= kendo.htmlEncode(title) #>" src="http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=id#>_<#=secret#>' + option.suffix + '.jpg"></li>'; };
+                this.setTemplate = '<li data-setid="<#=id#>" alt="<#= kendo.htmlEncode(title._content) #>"><img width="75" height="75" src="http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=primary#>_<#=secret#>_s.jpg"><em><#= kendo.htmlEncode(title._content) #></em></li>';
+                this.EXTRAS = "owner_name,tags";
+                this.flashArrows = 0;
+                this.zoomFactor = 1;
+                this.animType = false;
                 this.scrollerOptions = {
                     zoomFactor: this.zoomFactor,
                     showArrow: function(arrow) {
@@ -48,7 +48,7 @@
                                     .animate(back, 100);
                         }
                     }
-                },
+                };
                 this.computePageSize = function(size, onlyHeight) {
                     var pagerHeight = 56,
                         staticHeight = $("header").height() + $("#footer").height() + pagerHeight,
@@ -58,13 +58,13 @@
                         imagesOnHeight = parseInt(height/size) || 1;
 
                     return onlyHeight ? imagesOnHeight : imagesOnHeight * parseInt(width/size);
-                },
+                };
                 this.hideExif = function() {
                     var exifWindow = $("#exifWindow");
                     if (exifWindow.length) {
                         exifWindow.data("kendoWindow").close();
                     }
-                },
+                };
                 this.searchDeserializer = {
                     data: function(result) {
                         return result.photos.photo;
@@ -72,15 +72,15 @@
                     total: function(result) {
                         return Math.min(result.photos.total, PAGESIZE);
                     }
-                },
+                };
                 this.displayImages = function(element) {
                     element.find("img")
                         .hide()
                         .bind("load", function() {
                             $(this).stop(true, true).fadeIn();
                         });
-                },
-                this.loadingTimeout = 0,
+                };
+                this.loadingTimeout = 0;
                 this.setBigPhoto = function(img) {
                     var bigPhoto = $("#bigPhoto"),
                         wrap = $('#photoWrap'),
