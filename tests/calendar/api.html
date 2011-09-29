@@ -244,7 +244,9 @@
             });
 
             test("navigateToFuture should navigate to next century when century view", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {
+                        max: new Date(2400, 10, 10)
+                    }),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "century";

@@ -43,13 +43,15 @@
                     change: function() {},
                     open: function() {},
                     close: function() {},
-                    startView: "month"
+                    startView: "month",
+                    depth: "month"
                 },
                 dv1 = new DateView({
                     value: new Date(),
                     min: new Date(),
                     max: new Date(),
-                    startView: "month"
+                    startView: "month",
+                    depth: "month"
                 }),
                 dv2 = new DateView(options);
 
@@ -59,8 +61,8 @@
                     popup = dv1.popup;
 
                 equal(+calendar._value, +options.value);
-                equal(+calendar.min, +options.min);
-                equal(+calendar.max, +options.max);
+                equal(+calendar.options.min, +options.min);
+                equal(+calendar.options.max, +options.max);
                 equal(calendar._events["change"][0], options.change);
                 equal(calendar.element.data("dateView"), dv2);
 
@@ -73,7 +75,11 @@
                 var date = new Date(2000, 10, 10),
                 dv1 = new DateView({
                     value: date,
-                    startView: "month"
+                    startView: "month",
+                    anchor: $("<input/>"),
+                    min: new Date (1900, 10, 10),
+                    max: new Date (2100, 10, 10),
+                    depth: "month"
                 });
 
                 dv1._initCalendar();
@@ -89,6 +95,7 @@
                 var date = new Date(2000, 10, 10),
                 dv1 = new DateView({
                     value: date,
+
                     startView: "month"
                 });
 
