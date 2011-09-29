@@ -48,6 +48,24 @@
         simulateRemoveClick();
     });
 
+    test("remove HTTP verb can be changed", 1, function() {
+        uploadInstance = createUpload();
+        uploadInstance.options.async.removeVerb = "DELETE";
+
+        simulateUpload();
+
+        $.mockjax(function(s) {
+            equals(s.type, "DELETE");
+            return {
+                url: "/removeAction",
+                responseTime: 0,
+                responseText: ""
+            };
+        });
+
+        simulateRemoveClick();
+    });
+
     test("cancelling remove aborts remove operation", function() {
         uploadInstance = createUpload({ remove:
             function(e) {

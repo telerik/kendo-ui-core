@@ -179,6 +179,13 @@
          *         "fileNames" fields specifying the files to be deleted.
          *     </dd>
          *     <dt>
+         *         removeVerb: (String)
+         *     </dt>
+         *     <dd>
+         *         The HTTP verb to be used by the remove action.
+         *         The default value is "DELETE".
+         *     </dd>
+         *     <dt>
          *         autoUpload: (Boolean)
          *     </dt>
          *     <dd>
@@ -403,7 +410,9 @@
             enabled: true,
             multiple: true,
             showFileList: true,
-            async: { }, // The async section defaults are always serialized.
+            async: {
+                removeVerb: "POST"
+            },
             localization: {
                 "select": "Select...",
                 "cancel": "Cancel",
@@ -778,7 +787,7 @@
             params["fileNames"] = fileNames;
 
             $.ajax({
-                  type: "POST",
+                  type: this.options.async.removeVerb,
                   dataType: "json",
                   url: this.options.async.removeUrl,
                   traditional: true,
