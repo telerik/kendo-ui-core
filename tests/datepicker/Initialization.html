@@ -72,7 +72,7 @@
                 dv1._initCalendar();
                 dv1.calendar.navigate(new Date(2000, 10, 10), "month");
 
-                equal(dv1.calendar.view.find(".k-state-focused").children().data("value"), "11/10/2000");
+                equal(dv1.calendar._table.find(".k-state-focused").children().data("value"), "11/10/2000");
                 equal(+dv1._viewedValue, +dv1.calendar._viewedValue);
             });
 
@@ -132,7 +132,7 @@
                     dpOptions = datepicker.options;
 
                 ok(dateView.options);
-                equal(options.anchor, datepicker.element);
+                equal(options.anchor, datepicker.wrapper);
                 equal(options.value, dpOptions.value);
                 equal(+options.min, +dpOptions.min);
                 equal(+options.max, +dpOptions.max);

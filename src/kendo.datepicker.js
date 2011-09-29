@@ -60,9 +60,9 @@
                 calendarElement.data(DATEVIEW, this);
                 calendar.min = options.min;
                 calendar.max = options.max;
-                //calendar.options.depth = options.depth;
-                //calendar.options.firstView = options.firstView;
-                //calendar._currentView = options.firstView;
+                calendar.options.depth = options.depth;
+                calendar.options.startView = options.startView;
+                calendar._currentView = options.startView;
 
                 calendar.unbind(CHANGE)
                         .unbind(NAVIGATE)
@@ -106,7 +106,7 @@
                 key = e.keyCode,
                 calendar = that.calendar,
                 viewName = calendar._currentView,
-                view = kendo.calendar[viewName],
+                view = calendar._view,
                 viewedValue = that._viewedValue,
                 dateString, value;
 
@@ -147,11 +147,11 @@
                     that._navigateDown();
                 } else if (keys.HOME == key) {
                     e.preventDefault();
-                    that._viewedValue = viewedValue = kendo.calendar[calendar._currentView].first(viewedValue);
+                    that._viewedValue = viewedValue = view.first(viewedValue);
                     calendar._focusCell(viewedValue);
                 } else if (keys.END == key) {
                     e.preventDefault();
-                    that._viewedValue = viewedValue = kendo.calendar[calendar._currentView].last(viewedValue);
+                    that._viewedValue = viewedValue = view.last(viewedValue);
                     calendar._focusCell(viewedValue);
                 } else if (keys.PAGEUP == key) {
                     calendar.navigateToPast();
@@ -183,25 +183,18 @@
         _navigateDown: function() {
             var that = this,
                 calendar = that.calendar,
-                cell = calendar.view.find(".k-state-focused"),
-                date = new Date(cell.children(":first").data("value")),
-                viewedValue = calendar._viewedValue;
+                viewedValue = calendar._viewedValue,
+                cell = calendar._table.find(".k-state-focused"),
+                value = new Date(cell.children(":first").data("value"));
 
             if (cell.hasClass("k-state-selected")) {
                 that.close();
+                return;
             }
 
-            kendo.calendar[calendar._currentView].setDate(viewedValue, date);
+            calendar._view.setDate(viewedValue, value);
             calendar.navigateDown(viewedValue);
         }
-    }
-
-    function navigateDown(calendar) {
-        var date = new Date(calendar.view.find(".k-state-focused").children().data("value")),
-            viewedValue = calendar._viewedValue;
-
-        kendo.calendar[calendar._currentView].setDate(viewedValue, date);
-        calendar.navigateDown(viewedValue);
     }
 
     kendo.DateView = DateView;
@@ -216,8 +209,11 @@
 
             options.format = options.format || kendo.culture().calendar.patterns["d"];
 
+            that._wrapper();
+            that._icon();
+
             that.dateView = dateView = new DateView($.extend({}, options, {
-                anchor: that.element,
+                anchor: that.wrapper,
                 change: function() {
                     that.value(dateView.calendar.value());
                     that.trigger(CHANGE);
@@ -225,9 +221,6 @@
                 },
                 clearBlurTimeout: proxy(that._clearBlurTimeout, that)
             }));
-
-            that._wrapper();
-            that._icon();
 
             that.element
                 .addClass("k-input")
@@ -252,9 +245,9 @@
             value: null,
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
-            firstView: "month",
-            depth: "month",
-            format: "MM/dd/yyyy"
+            format: "MM/dd/yyyy",
+            startView: "month",
+            depth: "month"
         },
 
         open: function() {
@@ -322,12 +315,12 @@
                     that.close();
                     e.preventDefault();
                 }
-            }
-
-            if (dateView.popup.visible()) {
-                dateView.navigate(e);
-            } else if (keys.ENTER == key) {
-                that._change(e.currentTarget.value);
+            } else {
+                if (dateView.popup.visible()) {
+                    dateView.navigate(e);
+                } else if (keys.ENTER == key) {
+                    that._change(e.currentTarget.value);
+                }
             }
         },
 
