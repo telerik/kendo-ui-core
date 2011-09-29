@@ -3926,8 +3926,7 @@
                 visible: false,
                 distance: 35,
                 font: ARIAL12,
-                margin: getSpacing(3),
-                padding: getSpacing(4)
+                margin: getSpacing(0.5)
             },
             animation: {
                 type: PIE
@@ -4000,7 +3999,7 @@
             if (label) {
                 lp = sector.clone().expand(labelDistance).point(angle);
 
-                label.reflow(new Box2D(0, lp.y - label.box.height() / 2, 0, lp.y));
+                label.reflow(new Box2D(lp.x, lp.y, lp.x, lp.y));
 
                 if (lp.x >= sector.c.x) {
                     label.orientation = RIGHT;
@@ -4061,7 +4060,7 @@
 
         options: {
             startAngle: 90,
-            padding: 15,
+            padding: 120,
             connector: {
                 width: 1,
                 color: "#939393",
@@ -4224,23 +4223,25 @@
             var chart = this,
                 segment = chart.segments[0],
                 sector = segment.sector,
-                labelBox = labels[0].box,
+                firstBox = labels[0].box,
+                secondBox,
                 count = labels.length - 1,
                 distances = [],
                 distance,
                 lr = sector.r + segment.options.labels.distance,
                 i;
 
-            distance = round(labelBox.y1 - (sector.c.y - lr - labelBox.height()));
+            distance = round(firstBox.y1 - (sector.c.y - lr - firstBox.height()));
             distances.push(distance);
             for (i = 0; i < count; i++) {
-                labelBox = labels[i].box;
-                distance = round(labels[i + 1].box.y1 - labelBox.y2);
+                firstBox = labels[i].box;
+                secondBox = labels[i + 1].box;
+                distance = round(secondBox.y1 - firstBox.y2);
                 distances.push(distance);
             }
 
             labelBox = labels[count].box;
-            distance = round(sector.c.y + lr + labelBox.height() - labelBox.y2);
+            distance = round(sector.c.y + lr + firstBox.height() - firstBox.y2);
             distances.push(distance);
 
             return distances;
@@ -4290,8 +4291,6 @@
                 boxX,
                 box;
 
-            distances[0] += 2;
-            distances[labelsCount - 1] -= 2;
             for (i = 0; i < labelsCount; i++) {
                 label = labels[i];
                 boxY += distances[i];
@@ -4356,7 +4355,7 @@
                                    new Point2D(end.x - space, end.y);
                         crossing.x = math.min(crossing.x, end.x - space);
 
-                        if (sqr(sector.c.x - crossing.x) + sqr(sector.c.y - crossing.y) < sqr(sector.r + space) ||
+                        if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
                             crossing.x < sector.c.x) {
                             points.push(new Point2D(sector.c.x + sector.r + space, start.y));
                             points.push(new Point2D(end.x - space, end.y));
@@ -4370,7 +4369,7 @@
                                    new Point2D(end.x + space, end.y);
                         crossing.x = math.max(crossing.x, end.x + space);
 
-                        if (sqr(crossing.x - sector.c.x) + sqr(crossing.y - sector.c.y) < sqr(sector.r + space) ||
+                        if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
                                 crossing.x > sector.c.x) {
                             points.push(new Point2D(sector.c.x - sector.r - space, start.y));
                             points.push(new Point2D(end.x + space, end.y));
@@ -4411,7 +4410,7 @@
             }
         },
 
-        hAlignLabel: function calculateX(originalX, sector, y1, y2, direction) {
+        hAlignLabel: function(originalX, sector, y1, y2, direction) {
             var cx = sector.c.x,
                 cy = sector.c.y,
                 r = sector.r,
@@ -4422,6 +4421,10 @@
             } else {
                 return cx + math.sqrt((r * r) - (t * t)) * (direction ? 1 : -1);
             }
+        },
+
+        pointInCircle: function(point, c, r) {
+            return sqr(c.x - point.x) + sqr(c.y - point.y) < sqr(r);
         }
     });
 
@@ -7312,10 +7315,19 @@
             }
         },
         seriesDefaults: {
-            labels: {
-                color: "#ffffff",
-                background: "#564942",
-                opacity: 0.7
+            column: {
+                labels: {
+                    color: "#ffffff",
+                    background: "#564942",
+                    opacity: 0.7
+                }
+            },
+            bar: {
+                labels: {
+                    color: "#ffffff",
+                    background: "#564942",
+                    opacity: 0.7
+                }
             }
         },
         seriesColors: ["#ff5400", "#ff8b24", "#ffc066", "#9da600", "#688900", "#3e6100"],
@@ -7354,8 +7366,15 @@
             }
         },
         seriesDefaults: {
-            labels: {
-                color: "#293135"
+            column: {
+                labels: {
+                    color: "#293135"
+                }
+            },
+            bar: {
+                labels: {
+                    color: "#293135"
+                }
             }
         },
         seriesColors: ["#0069a5", "#0098ee", "#7bd2f6", "#ffb800", "#ff8517", "#e34a00"],
