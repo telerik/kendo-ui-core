@@ -1281,13 +1281,13 @@
 
         _attachEvents: function() {
             var chart = this,
-                viewElement = $(chart._viewElement);
+                element = chart.element;
 
-            viewElement.bind(CLICK, proxy(chart._click, chart));
+            element.bind(CLICK, proxy(chart._click, chart));
 
             chart._tooltip = new Tooltip(chart.element, chart.options.tooltip);
             chart._highlight = new Highlight(chart._view, chart._viewElement);
-            viewElement.bind(MOUSEOVER, proxy(chart._mouseOver, chart));
+            element.bind(MOUSEOVER, proxy(chart._mouseOver, chart));
         },
 
         _getPoint: function(e) {
