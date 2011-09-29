@@ -72,18 +72,13 @@
 
         navigateToPast: function() {
             var that = this;
-
-            that._setViewedValue(-1);
-
-            that.navigate();
+            that.navigate(that._setViewedValue(-1));
         },
 
         navigateToFuture: function() {
             var that = this;
 
-            that._setViewedValue(1);
-
-            that.navigate();
+            that.navigate(that._setViewedValue(1));
         },
 
         navigateUp: function() {
@@ -144,6 +139,10 @@
                 title = that._title,
                 oldTable = that._table,
                 newTable;
+
+            if (value && !inRange(+value, min, max)) {
+                return;
+            }
 
             if (!value) {
                 value = that._viewedValue;
@@ -226,6 +225,8 @@
 
             if (view.compare(value, that._viewedValue) !== 0) {
                 that.navigate(value);
+            } else {
+                that._viewedValue = value;
             }
 
             that._setClass("k-state-focused", view.toDateString(value));
@@ -283,7 +284,7 @@
 
         _setViewedValue: function(value) {
             var that = this,
-            viewedValue = that._viewedValue,
+            viewedValue = new DATE(that._viewedValue),
             currentView = that._currentView;
 
             if (currentView === MONTH) {
@@ -297,6 +298,7 @@
 
                 viewedValue.setFullYear(viewedValue.getFullYear() + value);
             }
+            return viewedValue;
         },
 
         _templates: function() {

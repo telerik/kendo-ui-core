@@ -51,7 +51,8 @@
                 var dv1 = new DateView({
                     value: new Date(),
                     min: new Date(),
-                    max: new Date()
+                    max: new Date(),
+                    startView: "month"
                 });
 
                 stub(dv1.calendar, "value");
@@ -63,14 +64,16 @@
 
             test("DateView persist focused value when calendar navigate", function() {
                 var called = false,
+                    date = new Date(2000, 10, 10),
                     dv1 = new DateView({
-                        value: new Date(),
-                        min: new Date(),
-                        max: new Date()
+                        value: date,
+                        min: date,
+                        max: date,
+                        startView: "month"
                     });
 
                 dv1._initCalendar();
-                dv1.calendar.navigate(new Date(2000, 10, 10), "month");
+                dv1.calendar.navigate(date, "month");
 
                 equal(dv1.calendar._table.find(".k-state-focused").children().data("value"), "11/10/2000");
                 equal(+dv1._viewedValue, +dv1.calendar._viewedValue);

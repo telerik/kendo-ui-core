@@ -58,8 +58,8 @@
                      .bind([OPEN, CLOSE], options);
 
                 calendarElement.data(DATEVIEW, this);
-                calendar.min = options.min;
-                calendar.max = options.max;
+                calendar.options.min = options.min;
+                calendar.options.max = options.max;
                 calendar.options.depth = options.depth;
                 calendar.options.startView = options.startView;
                 calendar._currentView = options.startView;
@@ -103,11 +103,12 @@
 
         navigate: function(e) {
             var that = this,
-                key = e.keyCode,
+                options = that.options,
+                viewedValue = new Date(that._viewedValue),
                 calendar = that.calendar,
                 viewName = calendar._currentView,
                 view = calendar._view,
-                viewedValue = that._viewedValue,
+                key = e.keyCode,
                 dateString, value;
 
             if (keys.ESC == key) {
@@ -147,11 +148,29 @@
                     that._navigateDown();
                 } else if (keys.HOME == key) {
                     e.preventDefault();
-                    that._viewedValue = viewedValue = view.first(viewedValue);
+
+                    viewedValue = view.first(viewedValue);
+
+                    if (+viewedValue > +options.max) {
+                        viewedValue = new Date(options.max);
+                    } else if (+viewedValue < +options.min) {
+                        viewedValue = new Date(options.min);
+                    }
+
+                    that._viewedValue = viewedValue;
                     calendar._focusCell(viewedValue);
                 } else if (keys.END == key) {
                     e.preventDefault();
-                    that._viewedValue = viewedValue = view.last(viewedValue);
+
+                    viewedValue = view.last(viewedValue);
+
+                    if (+viewedValue > +options.max) {
+                        viewedValue = new Date(options.max);
+                    } else if (+viewedValue < +options.min) {
+                        viewedValue = new Date(options.min);
+                    }
+
+                    that._viewedValue = viewedValue;
                     calendar._focusCell(viewedValue);
                 } else if (keys.PAGEUP == key) {
                     calendar.navigateToPast();
@@ -161,6 +180,14 @@
 
                 if (value) {
                     view.setDate(viewedValue, value);
+
+                    if (+viewedValue > +options.max) {
+                        viewedValue = new Date(options.max);
+                    } else if (+viewedValue < +options.min) {
+                        viewedValue = new Date(options.min);
+                    }
+
+                    that._viewedValue = viewedValue;
                     calendar._focusCell(viewedValue);
                 }
             }
