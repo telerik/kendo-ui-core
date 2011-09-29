@@ -42,12 +42,14 @@
                     max: new Date (2100, 10, 10),
                     change: function() {},
                     open: function() {},
-                    close: function() {}
+                    close: function() {},
+                    startView: "month"
                 },
                 dv1 = new DateView({
                     value: new Date(),
                     min: new Date(),
-                    max: new Date()
+                    max: new Date(),
+                    startView: "month"
                 }),
                 dv2 = new DateView(options);
 
@@ -69,7 +71,10 @@
 
             test("value method should call calendar value and set dateView._value", function() {
                 var date = new Date(2000, 10, 10),
-                    dv1 = new DateView({value: date});
+                dv1 = new DateView({
+                    value: date,
+                    startView: "month"
+                });
 
                 dv1._initCalendar();
                 date.setDate(20);
@@ -82,7 +87,10 @@
 
             test("value method call calendar.value() only if it is assigned to the dateView", function() {
                 var date = new Date(2000, 10, 10),
-                    dv1 = new DateView({value: date});
+                dv1 = new DateView({
+                    value: date,
+                    startView: "month"
+                });
 
                 dv1.calendar.element.data("dateView", {});
                 dv1.calendar.value(null);

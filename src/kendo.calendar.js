@@ -13,8 +13,6 @@
         VALUE = "value",
         HOVER = "k-state-hover",
         DISABLED = "k-state-disabled",
-        FOCUSED = "k-state-focused",
-        SELECTED = "k-state-selected",
         OTHERMONTH = ' class="k-other-month"',
         CELLSELECTOR = "td:has(.k-link)",
         MOUSEENTER = "mouseenter",
@@ -37,6 +35,8 @@
 
             options = that.options;
 
+            that.bind([CHANGE, NAVIGATE], options);
+
             that._templates();
 
             that._header();
@@ -49,19 +49,13 @@
                     var date = new DATE($(e.currentTarget.firstChild).data(VALUE)),
                         viewedValue = that._viewedValue;
 
-                    calendar[that._currentView].setDate(viewedValue, date);
+                    that._view.setDate(viewedValue, date);
                     that.navigateDown(viewedValue);
                 });
 
-            that._value = options.value;
-            that._currentView = options.firstView;
+            that._currentView = options.startView;
 
-            //call value instead of this
-            that._viewedValue = calendar.defineViewedValue(options.value, options.min, options.max);
-
-            that.bind([CHANGE, NAVIGATE], options);
-
-            that.navigate();
+            that.value(options.value);
         },
 
         options: {
@@ -69,47 +63,11 @@
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
             depth: MONTH,
-            firstView: MONTH,
+            startView: MONTH,
             month: {
                 content: "<#=data.value#>",
                 empty: " "
             }
-        },
-
-        _setViewedValue: function(value) {
-            var that = this,
-            viewedValue = that._viewedValue,
-            currentView = that._currentView;
-
-            if (currentView === MONTH) {
-                viewedValue.setMonth(viewedValue.getMonth() + value);
-            } else {
-                if (currentView === DECADE) {
-                    value *= 10;
-                } else if (currentView === CENTURY) {
-                    value *= 100;
-                }
-
-                viewedValue.setFullYear(viewedValue.getFullYear() + value);
-            }
-        },
-
-        _focusCell: function(value) {
-            //should refactor
-            var that = this,
-                view = calendar[that._currentView],
-                dateString = view.toDateString(value);
-
-            if (view.compare(value, that._viewedValue) !== 0) {
-                that.navigate(value);
-            }
-
-            that.view.find("td:not(.k-other-month)")
-                .removeClass(FOCUSED)
-                .filter(function() {
-                    return $(this.firstChild).data(VALUE) === dateString;
-                })
-                .addClass(FOCUSED);
         },
 
         navigateToPast: function() {
@@ -151,7 +109,7 @@
             currentView = that._currentView;
 
             if (currentView === depth) {
-                if (calendar[currentView].compare(value, that._viewedValue) === 0) {
+                if (that._view.compare(value, that._viewedValue) === 0) {
                     that._changeView = false;
                 }
 
@@ -178,13 +136,14 @@
 
         navigate: function(value, viewName) {
             var that = this,
-                dateString, calendarView, compare,
+                view, compare,
                 selectedValue = that._value,
                 options = that.options,
                 min = options.min,
                 max = options.max,
-                oldView = that.view,
-                newView;
+                title = that._title,
+                oldTable = that._table,
+                newTable;
 
             if (!value) {
                 value = that._viewedValue;
@@ -198,46 +157,36 @@
                 that._currentView = viewName;
             }
 
-            calendarView = calendar[viewName];
-            compare = calendarView.compare;
+            that._view = view = calendar[viewName];
+            compare = view.compare;
 
-            that.title
-                .toggleClass(DISABLED, viewName === CENTURY)
-                .html(calendarView.title(value));
+            title.toggleClass(DISABLED, viewName === CENTURY)
+            that._prevArrow.toggleClass(DISABLED, compare(value, min) < 1);
+            that._nextArrow.toggleClass(DISABLED, compare(value, max) > -1);
 
-            that.prevArrow.toggleClass(DISABLED, compare(value, min) < 1);
-            that.nextArrow.toggleClass(DISABLED, compare(value, max) > -1);
+            if (!oldTable || that._changeView) {
+                title.html(view.title(value));
 
-            //stop navigation if not allowed ... just return...
-
-            if (!oldView || that._changeView) {
-                newView = $(calendarView.content($.extend({
+                newTable = $(view.content($.extend({
                     min: min,
                     max: max,
                     date: value
                 }, that[viewName])));
 
-                if (!oldView) {
-                    that.element.append(newView);
+                if (!oldTable) {
+                    that.element.append(newTable);
                 } else {
-                    newView.insertBefore(oldView);
-                    oldView.remove();
+                    newTable.insertBefore(oldTable);
+                    oldTable.remove();
                 }
 
-                that.view = newView;
+                that._table = newTable;
 
                 that.trigger(NAVIGATE);
             }
 
             if (viewName === options.depth && selectedValue) {
-                dateString = calendarView.toDateString(selectedValue);
-
-                that.view.find("td:not(.k-other-month)")
-                    .removeClass(SELECTED)
-                    .filter(function() {
-                       return $(this.firstChild).data(VALUE) === dateString;
-                    })
-                    .addClass(SELECTED);
+                that._setClass("k-state-selected", view.toDateString(selectedValue));
             }
 
             that._changeView = true;
@@ -268,7 +217,18 @@
             that._value = value;
             that._viewedValue = calendar.defineViewedValue(value, min, max);
 
-            that.navigate(value, options.depth);
+            that.navigate(value);
+        },
+
+        _focusCell: function(value) {
+            var that = this,
+                view = that._view;
+
+            if (view.compare(value, that._viewedValue) !== 0) {
+                that.navigate(value);
+            }
+
+            that._setClass("k-state-focused", view.toDateString(value));
         },
 
         _header: function() {
@@ -286,29 +246,57 @@
 
             links = element.find(".k-link").hover(mouseenter, mouseleave);
 
-            that.prevArrow = links.eq(0)
+            that._prevArrow = links.eq(0)
                                   .bind(CLICK, function(e) {
                                       e.preventDefault();
-                                      if (!that.prevArrow.hasClass(DISABLED)) {
+                                      if (!that._prevArrow.hasClass(DISABLED)) {
                                           that.navigateToPast();
                                       }
                                   });
 
-            that.title = links.eq(1)
+            that._title = links.eq(1)
                               .bind(CLICK, function(e) {
                                   e.preventDefault();
-                                  if (!that.title.hasClass(DISABLED)) {
+                                  if (!that._title.hasClass(DISABLED)) {
                                       that.navigateUp();
                                   }
                               });
 
-            that.nextArrow = links.eq(2)
+            that._nextArrow = links.eq(2)
                                   .bind(CLICK, function(e) {
                                       e.preventDefault();
-                                      if (!that.nextArrow.hasClass(DISABLED)) {
+                                      if (!that._nextArrow.hasClass(DISABLED)) {
                                           that.navigateToFuture();
                                       }
                                   });
+        },
+
+        _setClass: function(className, value) {
+            this._table
+                .find("td:not(.k-other-month)")
+                .removeClass(className)
+                .filter(function() {
+                   return $(this.firstChild).data(VALUE) === value;
+                })
+                .addClass(className);
+        },
+
+        _setViewedValue: function(value) {
+            var that = this,
+            viewedValue = that._viewedValue,
+            currentView = that._currentView;
+
+            if (currentView === MONTH) {
+                viewedValue.setMonth(viewedValue.getMonth() + value);
+            } else {
+                if (currentView === DECADE) {
+                    value *= 10;
+                } else if (currentView === CENTURY) {
+                    value *= 100;
+                }
+
+                viewedValue.setFullYear(viewedValue.getFullYear() + value);
+            }
         },
 
         _templates: function() {
