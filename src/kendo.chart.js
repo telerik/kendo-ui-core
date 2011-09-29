@@ -6244,12 +6244,12 @@
         play: function() {
             var anim = this,
                 options = anim.options,
-                actor = anim.element.clone(),
+                element = anim.element,
                 delay = options.delay || 0,
                 start = +new Date() + delay,
                 duration = options.duration,
                 finish = start + duration,
-                domElement = $(doc.getElementById(actor.options.id)),
+                domElement = $(doc.getElementById(element.options.id)),
                 easing = jQuery.easing[options.easing],
                 time,
                 pos,
@@ -6261,9 +6261,9 @@
                     pos = time > finish ? 1 : (time - start) / duration;
                     easingPos = easing(pos, time - start, 0, 1);
 
-                    anim.step(actor, easingPos);
+                    anim.step(easingPos);
 
-                    actor.refresh(domElement);
+                    element.refresh(domElement);
 
                     if (time < finish) {
                         requestAnimFrame(loop);
@@ -6277,7 +6277,7 @@
         setup: function() {
         },
 
-        step: function(actor, pos) {
+        step: function(pos) {
         }
     });
 
@@ -6296,9 +6296,9 @@
             options.fillOpacity = options.strokeOpacity = 0;
         },
 
-        step: function(actor, pos) {
+        step: function(pos) {
             var anim = this,
-                options = actor.options;
+                options = anim.element.options;
 
             options.fillOpacity = pos * anim.targetFillOpacity;
             options.strokeOpacity = pos * anim.targetStrokeOpacity;
@@ -6311,11 +6311,11 @@
             easing: LINEAR
         },
 
-        step: function(actor, pos) {
+        step: function(pos) {
             var anim = this,
                 options = anim.options,
                 size = interpolateValue(0, options.size, pos),
-                points = actor.points;
+                points = anim.element.points;
 
             // Expands rectangle to the right
             points[1].x = points[2].x = points[0].x + size;
@@ -6366,13 +6366,14 @@
             updateArray(points, axis, startPosition);
         },
 
-        step: function(actor, pos) {
+        step: function(pos) {
             var anim = this,
                 startPosition = anim.startPosition,
                 endState = anim.endState,
-                points = actor.points;
+                element = anim.element,
+                points = element.points;
 
-            if (actor.options.normalAngle === 0) {
+            if (element.options.normalAngle === 0) {
                 points[0].y = points[1].y =
                     interpolateValue(startPosition, endState.top, pos);
 
@@ -6402,10 +6403,10 @@
             sector.r = 0;
         },
 
-        step: function(actor, pos) {
+        step: function(pos) {
             var anim = this,
                 endRadius = anim.endRadius,
-                sector = actor.circleSector;
+                sector = anim.element.circleSector;
 
             sector.r = interpolateValue(0, endRadius, pos);
         }
