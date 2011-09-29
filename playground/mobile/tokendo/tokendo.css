@@ -24,13 +24,13 @@ body
     width: 100%;
 }
 
-.list
+.k-list
 {
     padding: 0;
     margin: 0;
 }
 
-.item
+.k-item
 {
     list-style-type: none;
     margin: 0;
@@ -41,7 +41,7 @@ body
     position: relative;
 }
 
-.item label
+.k-item label
 {
     display: block;
     line-height: 2.6em;

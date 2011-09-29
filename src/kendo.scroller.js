@@ -17,6 +17,7 @@
         abs = Math.abs,
         round = Math.round,
         translationRegExp = /(translate[3d]*\(|matrix\(([\s\w\d]*,){4,4})\s*(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)[\w\s]*.*?\)/i,
+        singleTranslationRegExp = /(translate([XY])\(\s*(-?[\d\.]+)?[\w\s]*\))/i,
         PX = "px",
         SHOW = "show",
         HIDE = "hide",
@@ -63,7 +64,15 @@
         scrollElement = $(scrollElement);
 
         var transformStyle = scrollElement[0].style[TRANSFORMSTYLE],
-            transforms = (transformStyle ? transformStyle.match(translationRegExp) || [0, 0, 0, 0, 0] : [0, 0, 0, 0, 0]);
+            transforms = (transformStyle ? transformStyle.match(translationRegExp) || transformStyle.match(singleTranslationRegExp) || [0, 0, 0, 0, 0] : [0, 0, 0, 0, 0]);
+
+        if (transforms) {
+            if (transforms[2] == "Y") {
+                transforms[4] = transforms[3];
+                transforms[3] = 0;
+            } else
+                transforms[2] == "X" && (transforms[4] = 0);
+        }
 
         return support.transitions ? {
                                          x: +transforms[3],
@@ -263,7 +272,7 @@
                 scrollTo = max( -scrollElement.innerWidth() + element.innerWidth(), scrollOffsets.x - element.innerWidth() );
             }
 
-            scrollElement.kendoStop().kendoAnimate({effects: { slide: { properties: { translateX: scrollTo + PX }, direction: "left" } }, duration: 500 });
+            scrollElement.kendoStop().kendoAnimate({effects: { simple: { properties: { translateX: scrollTo + PX } } }, duration: 500 });
         },
 
         _animateArrows: function (arrows, action) {

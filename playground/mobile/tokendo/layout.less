@@ -12,6 +12,13 @@
     display: @type;
 }
 
+.box-direction(@direction) {
+    -moz-box-direction: @direction;
+    -webkit-box-direction: @direction;
+    -ms-box-direction: @direction;
+    box-direction: @direction;
+}
+
 .box-flex(@amount) {
     -moz-box-flex: @amount;
     -webkit-box-flex: @amount;
@@ -167,6 +174,20 @@ body > .k-tabStrip,
     .box-align(stretch);
     .box-flex(1);
     position: relative;
+}
+
+.k-android body,
+.k-android .k-view,
+.k-meego body,
+.k-meego .k-view
+{
+    .box-direction(reverse);
+}
+
+.k-android .k-showcase,
+.k-meego .k-showcase
+{
+    .box-direction(normal);
 }
 
 .k-toolbar,

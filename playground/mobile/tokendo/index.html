@@ -24,10 +24,10 @@
 </head>
 <body>
     <script type="text/html" id="item_tmpl">
-        <ul class="list">
+        <ul class="k-list">
         <# for (var i = 0; i < data.length; i++) {
             var item = data[i]; #>
-            <li class="item">
+            <li class="k-item">
                 <label for="isdone_<#= i #>" <#= (item.done ? " class='input-checked'" : "") #>>
                     <input type="checkbox" id="isdone_<#= i #>" <#= (item.done ? " checked='checked'" : "") #> />
                     <#= item.title #>
@@ -71,10 +71,10 @@
     <script>
         $(document)
             .bind("appinit", function (e, args) {
-                console.log("appinit", args);
+//                console.log("appinit", args);
             })
             .bind("viewinit", function (e, args) {
-                console.log("viewinit", args);
+//                console.log("viewinit", args);
             });
 
         $('label').live('click', function(e) {
