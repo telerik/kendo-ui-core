@@ -500,6 +500,18 @@
                 equal(result[0].field, "cde");
             });
 
+            test("filter filters with endswith on undefined", function() {
+                var data = [ {field: "abc"} , {field: "bcd"} , {field: "cde"} ];
+
+                var result = new Query(data).filter( {
+                    field: "field",
+                    operator: "endswith",
+                    value: undefined
+                }).toArray();
+
+                equal(result.length, 0);
+            });
+
             test("filter filters with endswith on string", function() {
                 var data = [ {field: "abc"} , {field: "bcd"} , {field: "cde"} ];
 
@@ -511,6 +523,19 @@
 
                 equal(result.length, 1);
                 equal(result[0].field, "abc");
+            });
+
+            test("filter filters with endswith on multiple letters string", function() {
+                var data = [ {field: "abc"} , {field: "bcd"} , {field: "cde"} ];
+
+                var result = new Query(data).filter( {
+                    field: "field",
+                    operator: "endswith",
+                    value: "de"
+                }).toArray();
+
+                equal(result.length, 1);
+                equal(result[0].field, "cde");
             });
 
             test("filter filters with contains on string", function() {
