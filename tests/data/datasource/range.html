@@ -160,6 +160,14 @@
                 equal(dataSource._ranges[0].end, 10000);
             });
 
+            test("prefetch does not create new range if existing sub range is requested", function() {
+                var dataSource =  remoteDataSource();
+
+                dataSource.prefetch(20, 200);
+                dataSource.prefetch(30, 50);
+                equal(dataSource._ranges.length, 1);
+            });
+
             test("range if range exists transport is not called", function() {
                 var called = 0,
                     dataSource = remoteDataSource(function () {

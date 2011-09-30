@@ -1621,7 +1621,7 @@
                 length;
 
             for (idx = 0, length = ranges.length; idx < length; idx++) {
-                if (ranges[idx].start == start && ranges[idx].end == end) {
+                if (ranges[idx].start <= start && ranges[idx].end >= end) {
                     return true;
                 }
             }
