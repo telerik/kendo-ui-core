@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Pie Chart</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.chart.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Pie Chart</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+            <div id="chart" style="width:650px; height:450px;margin: 0 auto;"></div>
+            <script>
+                function createChart() {
+                    $("#chart").kendoChart({
+                        theme: $(document).data("kendoSkin") || "kendo",
+                        title: {
+                            text: "Break-up of Spain Electricity Production for 2008"
+                        },
+                        legend: {
+                            position: "bottom"
+                        },
+                        seriesDefaults: {
+                        },
+                        series: [{
+                            type: "pie",
+                            data: [{
+                                name: "Hydro", value: 22
+                            }, {
+                                name: "Solar", value: 2
+                            }, {
+                                name: "Hydro", value: 49
+                            }, {
+                                name: "Wind", value: 27
+                            }],
+                            labels: {
+                                visible: true,
+                                format: "{0}%",
+                                distance: 25
+                            },
+                            startAngle: 60
+                        }],
+                        tooltip: {
+                            visible: true,
+                            format: "{0}%"
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    createChart();
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        createChart();
+                    });
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
