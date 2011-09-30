@@ -77,20 +77,27 @@
             test("navigate should not move selection if value is bigger than max", function() {
                 var event = { keyCode: keys.RIGHT, preventDefault: $.noop },
                     date = new Date(2000, 11, 1),
-                    dv = new DateView({startView: "month", value: date, max: date});
+                    dv = new DateView({
+                        depth: "month",
+                        startView: "month",
+                        min: new Date(1900, 10, 10),
+                        value: date,
+                        max: date
+                    });
 
+                dv._initCalendar();
                 dv.navigate(event);
 
                 equal(+dv._viewedValue, +date);
                 equal(dv.calendar._table.find(".k-state-focused").text(), date.getDate() + "");
-
             });
 
             test("navigate should not move selection if value is less than min", function() {
                 var event = { keyCode: keys.LEFT, preventDefault: $.noop },
                     date = new Date(2000, 11, 1),
-                    dv = new DateView({startView: "month", depth: "month", value: date, min: date});
+                    dv = new DateView({startView: "month", depth: "month", value: date, min: date, max: new Date(2100, 10, 10)});
 
+                dv._initCalendar();
                 dv.navigate(event);
 
                 equal(+dv._viewedValue, +date);
@@ -100,11 +107,17 @@
 
             test("navigate should focus next day in month view", function() {
                 var event = { keyCode: keys.RIGHT, preventDefault: $.noop },
-                    dv = new DateView({startView: "month", depth: "month", min: new Date(1999, 10, 10), max: new Date(2111, 10, 10)}),
+                    dv = new DateView({
+                        startView: "month",
+                        depth: "month",
+                        min: new Date(1999, 10, 10),
+                        max: new Date(2111, 10, 10)
+                    }),
                     focusedDate = new Date(dv._viewedValue);
 
-                focusedDate.setDate(focusedDate.getDate() + 1);
+                kendo.calendar.month.setDate(focusedDate, 1);
 
+                dv._initCalendar();
                 dv.navigate(event);
 
                 equal(+dv._viewedValue, +focusedDate);
@@ -119,6 +132,7 @@
 
                 focusedDate.setDate(focusedDate.getDate() - 1);
 
+                dv._initCalendar();
                 dv.navigate(event);
 
                 equal(+dv._viewedValue, +focusedDate);
@@ -132,6 +146,7 @@
 
                 focusedDate.setDate(focusedDate.getDate() - 7);
 
+                dv._initCalendar();
                 dv.navigate(event);
 
                 equal(+dv._viewedValue, +focusedDate);
@@ -145,6 +160,7 @@
 
                 focusedDate.setDate(focusedDate.getDate() + 7);
 
+                dv._initCalendar();
                 dv.navigate(event);
 
                 equal(+dv._viewedValue, +focusedDate);
@@ -356,6 +372,24 @@
             });
 
             //Navigate through views
+            test("navigate down", function() {
+                var event = { keyCode: keys.DOWN, ctrlKey: true, preventDefault: $.noop },
+                    dv = new DateView({
+                        value: new Date(2000, 10, 10),
+                        startView: "month",
+                        depth: "month",
+                        min: new Date(1900, 10, 10),
+                        max: new Date(2111, 10, 10)
+                    });
+
+                stub(dv.calendar, { navigateDown: dv.calendar.navigateDown });
+                dv._initCalendar();
+                dv.calendar.navigateUp();
+                dv.navigate(event);
+
+                equal(dv.calendar.calls("navigateDown"), 1);
+            });
+
             test("navigate up", function() {
                 var event = { keyCode: keys.UP, ctrlKey: true, preventDefault: $.noop },
                     dv = new DateView({value: new Date(2000, 10, 10), startView: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
@@ -379,24 +413,6 @@
                 dv.navigate(event);
 
                 equal(+dv.calendar.value(), +selectedDate);
-            });
-
-            test("navigate down", function() {
-                var event = { keyCode: keys.DOWN, ctrlKey: true, preventDefault: $.noop },
-                    dv = new DateView({
-                        value: new Date(2000, 10, 10),
-                        startView: "month",
-                        depth: "month",
-                        min: new Date(1900, 10, 10),
-                        max: new Date(2111, 10, 10)
-                    });
-
-                stub(dv.calendar, "navigateDown");
-                dv._initCalendar();
-                dv.calendar.navigateUp();
-                dv.navigate(event);
-
-                equal(dv.calendar.calls("navigateDown"), 1);
             });
 
             test("navigate left", function() {
@@ -477,6 +493,8 @@
                 dv = new DateView({
                     anchor: $("<input />"),
                     value: new Date(2000, 10, 10),
+                    min: new Date(1900, 10, 10),
+                    max: new Date(2100, 10, 10),
                     startView: "month",
                     depth: "month"
                 });
