@@ -246,6 +246,19 @@ body > .k-tabStrip,
     font: normal 1em DroidSans, Helvetica, sans-serif;
 }
 
+.k-android .k-button
+{
+    .border-radius(2pt);
+    .box-shadow(0 1px 2px #373737);
+    height: 3em;
+}
+
+.k-android .k-tabStrip .k-button
+{
+    height: auto;
+    .box-shadow(none);
+}
+
 .k-android .k-toolbar,
 .k-android .k-button,
 .k-android .k-buttonStrip,
@@ -253,16 +266,17 @@ body > .k-tabStrip,
 {
     color: #000;
     text-shadow: none;
-    border-color: #ACACAC;
-    background-color: #EEE;
+    border-color: #e7e7e7;
+    background-color: #dedede;
 
-    background-image: linearGradient(top, rgb(244,244,244), rgb(193,193,193) 90%, rgb(209,209,209));
+    background-image: linearGradient(top, rgb(230, 230, 230), rgb(205, 205, 205));
 }
 
 .k-android .k-button.k-state-active
 {
-    background-color: #e99d02;
-    background-image: linearGradient(top, rgb(255,222,117), rgb(251,195,35) 10%, rgb(232,156,0) 60%, rgb(244,181,16) 80%, rgb(252,209,32));
+    border: #feb84b #fb9d09 #f29c0a;
+    background-color: #fe9d08;
+    background-image: linearGradient(top, rgb(254, 157, 8), rgb(254, 161, 10) 50%, rgb(254, 164, 11));
 }
 
 .k-blackberry,
@@ -424,7 +438,7 @@ body > .k-tabStrip,
     .box-shadow(0 0 3px #333);
 }
 
-.k-tabStrip
+.k-tabContainer
 {
     text-align: center;
     word-spacing: -1em;
@@ -435,8 +449,7 @@ body > .k-tabStrip,
     .box-flex(1);
 }
 
-.k-tabStrip:-moz-first-node,
-:-moz-first-node~.k-tabStrip
+.k-tabStrip .k-button
 {
     word-spacing: normal;
 }
@@ -472,6 +485,12 @@ body > .k-tabStrip,
     background-color: #a8b1de;
 }
 
+.k-android .k-toolbar
+{
+    background-color: #9b9b9b;
+    background-image: linearGradient(top, rgb(155, 155, 155), rgb(131, 131, 131));
+}
+
 .k-ios .k-tabStrip
 {
     padding: .2em 0;
@@ -484,7 +503,7 @@ body > .k-tabStrip,
     padding: 0;
     background-color: #222;
     border-bottom: 2pt solid #7a7a7a;
-    background-image: linearGradient(top, rgba(39, 39, 39, 0.8), rgba(15, 15, 15, 0.8));
+    background-image: linearGradient(top, rgb(39, 39, 39), rgb(14, 12, 15));
 }
 
 .k-blackberry .k-tabStrip,
@@ -562,7 +581,8 @@ body > .k-tabStrip,
 .k-android .k-tabStrip .k-button.k-state-active
 {
     color: #FFF;
-    background: rgba(100, 100, 100, 1);
+    background: rgb(154, 154, 154);
+    background-image: linearGradient(top, rgb(154, 154, 154), rgb(126, 126, 126));
 }
 
 .k-blackberry .k-tabStrip .k-text,
@@ -579,6 +599,115 @@ body > .k-tabStrip,
 .k-tabStrip .k-button:last-child
 {
     border-right: 0;
+}
+
+.k-list
+{
+    color: #000;
+    padding: 0;
+    margin: 0;
+}
+
+.k-item
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    line-height: 2.6em;
+    display: block;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+.k-android .k-item
+{
+    border-bottom: 1px solid #444;
+}
+
+.k-item label
+{
+    display: block;
+    line-height: 2.6em;
+    padding-left: 2.7em;
+}
+
+.k-list,
+.k-view
+{
+    background: #fff;
+}
+
+.k-android .k-list
+{
+    color: #fff;
+}
+
+.k-android .k-list .k-item
+{
+    height: 50px;
+}
+
+.k-android .k-list,
+.k-android .k-view
+{
+    background: #000;
+}
+
+input[type=checkbox]
+{
+    display: none;
+    width: 2em;
+    height: 2em;
+    margin-left: .4em;
+}
+
+label:before
+{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    content: " ";
+    display: block;
+    top: 50%;
+    margin-top: -1em;
+    left: .3em;
+    width: 2em;
+    height: 2em;
+    -moz-border-radius: .5em;
+    -webkit-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 0 .1em #aaa;
+    box-shadow: 0 0 .1em #aaa;
+    background-color: #d1d1d1;
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
+    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(255, 255, 255, 1)), color-stop(1, rgba(210, 210, 210, 0)));
+}
+
+label.input-checked:before
+{
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 2px solid #353535;
+    background-color: #898989;
+    background-image: -moz-linear-gradient(top, rgba(56, 56, 56, 1), rgba(137, 137, 137, 0));
+    background-image: -o-linear-gradient(top, rgba(56, 56, 56, 1), rgba(137, 137, 137, 0));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(56, 56, 56, 1)), color-stop(1, rgba(137, 137, 137, 0)));
+}
+
+label.input-checked:after
+{
+    position: absolute;
+    content: "\2714";
+    font-size: 30px;
+    color: #FFF;
+    text-shadow: 0 0 3px #000;
+    display: block;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 1.3em;
 }
 
 .k-tabStrip .k-button .k-icon
