@@ -385,7 +385,6 @@
                 boxWidth = that.boxWidth,
                 boxHeight = that.boxHeight;
 
-            //debugger;
             extend(that, {
                         hasHorizontalScroll: scrollWidth > boxWidth,
                         hasVerticalScroll: scrollHeight > boxHeight,
