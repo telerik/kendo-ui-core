@@ -19,11 +19,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : 'http://aggeorgiev/kendo/live/dragdrop/events.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/live/dragdrop/events.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6c53ea30-4184-4e44-bd21-8dcca75af1a7</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>12fc95f4-3ad4-437b-b12f-35fcff660d39</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -44,10 +44,10 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:BaseUrl />
-        <d2p1:NavigateURL>http://aggeorgiev/kendo/live/dragdrop/events.html</d2p1:NavigateURL>
+        <d2p1:BaseUrl>http://aggeorgiev/kendo</d2p1:BaseUrl>
+        <d2p1:NavigateURL>/live/dragdrop/events.html</d2p1:NavigateURL>
       </d2p1:Step>
-      <d2p1:StepImageKey>Eventsbjnih0ym.zip</d2p1:StepImageKey>
+      <d2p1:StepImageKey>DragAndDropEvents0aaad2vi.fw2</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f65d1b95-4cb9-4962-93ab-219475f453e3</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6ad65175-1b95-49fb-972a-c4eecd007ccf</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DragDropActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -168,7 +168,7 @@
       <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>871c857c-11d7-4d37-bdd1-ade7f50ad63b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>fd367a95-7841-4727-b2f9-2f2690464ae3</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DragDropActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -281,7 +281,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f27d9733-b984-44a8-aa59-11c3aa4966b8</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1cd31314-5adb-4b10-8c5c-f0dc4c22d08d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -368,7 +368,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f07ad0e7-fb6f-4608-9daf-13fa7b2ba6e0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>bfd81b2b-e74a-4a24-8512-6ce2b4f20d80</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -460,7 +460,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7bca1915-18a2-4c03-acd8-b6a5aec1440e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>68a6bcf7-684b-492e-84b5-284391edb963</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -552,7 +552,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>41da5270-3ab8-441c-952e-89722c224a89</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3a6a40a9-6044-4b33-8d97-0ff67d9aae8d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -644,7 +644,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ad2def80-7e6e-4a10-8e31-85567857e06e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7a6cdacd-41fa-4525-9c4f-e2bbb1b1eb12</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -739,7 +739,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>04ed0341-694e-4b06-8c20-0872a67ca7dc</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>899b4578-8491-471b-abc1-73819b7d9e24</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -842,13 +842,25 @@
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <HasCodeBehind>false</HasCodeBehind>
+  <HtmlDescription i:nil="true" />
   <InheritParentDataSource>false</InheritParentDataSource>
+  <IsManual>false</IsManual>
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\Framework\DragAndDrop\DragAndDropEvents.tstest</Path>
+  <Path>Framework\DragAndDrop\DragAndDropEvents.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\Framework\DragAndDrop\DragAndDropEvents.resx</ResourceFilePath>
+  <ProfilerBenchmarkResultsFilePath i:nil="true" />
+  <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
+  <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+    <d2p1:KeyValueOfstringbase64Binary>
+      <d2p1:Key>ArtOfTest.WebAii.Design.Execution.Profiler.ProfilerResultsMetadata</d2p1:Key>
+      <d2p1:Value>AAEAAAD/////AQAAAAAAAAAMAgAAAF9BcnRPZlRlc3QuV2ViQWlpLkRlc2lnbiwgVmVyc2lvbj0yMDExLjIuOTI4LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49NGZjNjJiYmMzODI3YWIxZAwDAAAAWEFydE9mVGVzdC5XZWJBaWksIFZlcnNpb249MjAxMS4yLjkyOC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTRmZDVmNjViZTEyMzc3NmMMBAAAAGhUZWxlcmlrLlRlc3RpbmdGcmFtZXdvcmsuSW50ZXJvcCwgVmVyc2lvbj0yMDExLjIuOTI4LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49OGNhMDBkM2UwZWJkNGI4YgUBAAAAQkFydE9mVGVzdC5XZWJBaWkuRGVzaWduLkV4ZWN1dGlvbi5Qcm9maWxlci5Qcm9maWxlclJlc3VsdHNNZXRhZGF0YQ4AAAAKX3Jlc3VsdHNJZAxfb3duZXJUZXN0SWQKX3N0YXJ0VGltZQpfdG90YWxUaW1lG19iQ29sbGVjdFByb2ZpbGVyU2FtcGxlRGF0YQpfc3RyU2VydmVyDF9pU2VydmVyUG9ydA9fc3RyRGVzY3JpcHRpb24KX3N0ckZvbGRlcgxfc3RyRmlsZVBhdGgMX2Jyb3dzZXJUeXBlD19icm93c2VyVmVyc2lvbhxfYkNsZWFyQnJvd3NlckNhY2hlQmVmb3JlUnVuF19iV2FybVVwU2VydmVyQmVmb3JlUnVuAwMAAAABAAEBAQQEAAALU3lzdGVtLkd1aWQLU3lzdGVtLkd1aWQNDAEIKkFydE9mVGVzdC5XZWJBaWkuQ29yZS5Ccm93c2VyRXhlY3V0aW9uVHlwZQMAAAApVGVsZXJpay5UZXN0aW5nRnJhbWV3b3JrLlVuaXZlcnNhbFZlcnNpb24EAAAAAQECAAAABPv///8LU3lzdGVtLkd1aWQLAAAAAl9hAl9iAl9jAl9kAl9lAl9mAl9nAl9oAl9pAl9qAl9rAAAAAAAAAAAAAAAIBwcCAgICAgICAgAAAAAAAAAAAAAAAAAAAAAB+v////v///+zpWAZkLFESrawdY/dOq7NAAAAAAAAAAAAAAAAAAAAAAAGBwAAAApBR0dFT1JHSUVWSh8AAAoGCAAAACdDOlxVc2Vyc1xhZ2dlb3JnaWV2XEFwcERhdGFcTG9jYWxcVGVtcFwKBff///8qQXJ0T2ZUZXN0LldlYkFpaS5Db3JlLkJyb3dzZXJFeGVjdXRpb25UeXBlAQAAAAd2YWx1ZV9fAAgDAAAAAQAAAAoAAAs=</d2p1:Value>
+    </d2p1:KeyValueOfstringbase64Binary>
+  </ProfilerConfigurations>
+  <ProfilerResultsDirectory>C:\Users\aggeorgiev\AppData\Local\Temp\</ProfilerResultsDirectory>
+  <ProfilerServerName i:nil="true" />
+  <ResourceFilePath>Framework\DragAndDrop\DragAndDropEvents.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
