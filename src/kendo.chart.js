@@ -1796,14 +1796,12 @@
             );
         },
 
-        supportsSVG: function() {
-            return doc.implementation.hasFeature(
-                "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
-        },
-
         getRoot: function() {
             return this;
-        }
+        },
+
+        // Needs to be overridable in tests
+        supportsSVG: supportsSVG
     });
 
     var BoxElement = ChartElement.extend({
@@ -5551,9 +5549,16 @@
                 new VMLGradientDecorator(view),
                 new BarAnimationDecorator(view),
                 new PieAnimationDecorator(view),
-                new VMLClipAnimationDecorator(view),
-                new FadeAnimationDecorator(view)
+                new VMLClipAnimationDecorator(view)
             );
+
+            if (!isIE9CompatibilityView()) {
+                // Setting opacity on VML elements is broken in
+                // IE9 Compatibility View
+                view.decorators.push(
+                    new FadeAnimationDecorator(view)
+                );
+            }
 
             view.template = VMLView.template;
             if (!view.template) {
@@ -5648,6 +5653,15 @@
             return new VMLLinearGradient(options);
         }
     });
+
+    function supportsSVG() {
+        return doc.implementation.hasFeature(
+            "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+    }
+
+    function isIE9CompatibilityView() {
+        return $.browser.msie && !supportsSVG() && typeof window.performance !== UNDEFINED;
+    }
 
     var VMLText = ViewElement.extend({
         init: function(content, options) {
@@ -5786,8 +5800,12 @@
 
             if (parentNode) {
                 element.find("path")[0].setAttribute("v", this.renderPoints());
-                element.find("fill")[0].setAttribute("opacity", options.fillOpacity);
-                element.find("stroke")[0].setAttribute("opacity", options.strokeOpacity);
+                try {
+                    element.find("fill")[0].setAttribute("opacity", options.fillOpacity);
+                    element.find("stroke")[0].setAttribute("opacity", options.strokeOpacity);
+                } catch(e) {
+                    // Random exceptions in IE 8 Compatibility View
+                }
 
                 // Force redraw in order to remove artifacts in IE < 7
                 parentNode.style.cssText = parentNode.style.cssText;
