@@ -9,8 +9,11 @@
         buttonSelector = "[data-kendo-ui=button],button,input[type=submit],input[type=reset],input[type=button],input[type=image]";
 
     if (os && !os.ios) {
-        $(document.documentElement).removeClass('k-ios').addClass("k-" + os.name);
+        $(document.documentElement).removeClass("k-ios").addClass("k-" + os.name);
     }
+
+    if (touch)
+        $(document.documentElement).bind("touchstart", function () { return false; });
 
     if (pointers) {
         each(["touchstart", "touchend", "touchmove", "touchcancel", "gesturestart", "gestureend"], function(m, value) {
@@ -33,19 +36,19 @@
             return e;
         }
 
-        document.documentElement.addEventListener('MSPointerDown', function(e) {
+        document.documentElement.addEventListener("MSPointerDown", function(e) {
             if (e.pointerType == 2) {
-                $(e.target).trigger('touchstart', createTouchEvent(e));
+                $(e.target).trigger("touchstart", createTouchEvent(e));
             }
         }, false);
-        document.documentElement.addEventListener('MSPointerMove', function(e) {
+        document.documentElement.addEventListener("MSPointerMove", function(e) {
             if (e.pointerType == 2) {
-                $(e.target).trigger('touchmove', createTouchEvent(e));
+                $(e.target).trigger("touchmove", createTouchEvent(e));
             }
         }, false);
-        document.documentElement.addEventListener('MSPointerUp', function(e) {
+        document.documentElement.addEventListener("MSPointerUp", function(e) {
             if (e.pointerType == 2) {
-                $(e.target).trigger('touchend', createTouchEvent(e));
+                $(e.target).trigger("touchend", createTouchEvent(e));
             }
         }, false);
     }
@@ -58,16 +61,21 @@
         if (os) {
             if (!os.ios && !os.blackberry)
                 if ($.browser.msie || $.browser.opera) {
-                    var layout = $('.k-view');
+                    var layout = $(".k-view");
                     $(".k-footer").prependTo(layout);
-                    $('.k-header').appendTo(layout);
+                    $(".k-header").appendTo(layout);
                 }
         }
 
         mobile.initForm($(".k-tabStrip"));
+        application.run();
+
+        var view = $(".k-view:first");
+        if (!view.length)
+            view = $("<div class='k-view'/>").appendTo(application.root);
+
         application
-            .run()
-            .addView($(".k-view:first").kendoView().data("kendoView"))
+            .addView(view.kendoView().data("kendoView"))
             .show();
 
         $(document).trigger("appinit", { app: application, mobileOS: os });
@@ -76,7 +84,7 @@
     extend(mobile, {
         init: function(options) {
             var html = [ "<meta name='apple-mobile-web-app-capable' content='yes' /><meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />" +
-                         "<meta name='viewport' content='minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no' />" ];
+                         "<meta content=\"initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width\" name=\"viewport\" />" ];
 
             options = extend({}, options);
 
@@ -86,7 +94,7 @@
                 html.push("' />");
             }
 
-            $(html.join("")).appendTo("head");
+            $(html.join("")).prependTo("head");
         },
 
         isFullPage: function(content) {
@@ -237,6 +245,27 @@
             this.views.push(view);
 
             return this;
+        },
+
+        removeView: function(view) {
+            var that = this;
+
+            if ("element" in view)
+                view = view.element;
+            else
+                view = $(view);
+
+            each(that.views, function(idx, value) {
+                if (value.element == view) {
+                    kendo.mobile.goToView(value.options.previousView, true);
+                    
+                    value.element.remove();
+                    delete that.views[idx];
+                    return false;
+                }
+            });
+
+            return that;
         },
 
         show: function(viewIndex, options) {

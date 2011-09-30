@@ -159,7 +159,7 @@
                 animation = extend({}, options.animation.open);
 
                 if (that._update()) {
-                    if (animation.effects.match(direction)) {
+                    if (typeof animation.effects == "string" && animation.effects.match(direction)) {
                         direction = "up";
                     }
 
