@@ -140,13 +140,10 @@
                 oldTable = that._table,
                 newTable;
 
-            if (value && !inRange(+value, min, max)) {
-                return;
-            }
-
             if (!value) {
                 value = that._viewedValue;
             } else {
+                value = calendar.defineViewedValue(value, min, max);
                 that._viewedValue = new DATE(value);
             }
 
@@ -538,12 +535,21 @@
             },
             content: function(options) {
                 var year = options.date.getFullYear(),
+                    minYear = options.min.getFullYear(),
+                    maxYear = options.max.getFullYear(),
                     toDateString = this.toDateString;
+
+                minYear = minYear - minYear % 10;
+                maxYear = maxYear - maxYear % 10;
+
+                if (maxYear - minYear < 10) {
+                    maxYear = minYear + 9;
+                }
 
                 return view({
                     start: new DATE(year - year % 100 - 10, 0, 1),
-                    min: new DATE(options.min.getFullYear() - 10, 0, 1),
-                    max: new DATE(options.max.getFullYear(), 0, 1),
+                    min: new DATE(minYear, 0, 1),
+                    max: new DATE(maxYear, 0, 1),
                     setter: this.setDate,
                     build: function(date, idx) {
                         var year = date.getFullYear();

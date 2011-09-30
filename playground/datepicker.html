@@ -53,6 +53,8 @@
         <hr/>
         <input id="datepicker" style="width: 150px"/>
         <input id="datepicker2" style="width: 150px"/>
+        <input id="datepicker3" style="width: 150px"/>
+        <input id="datepicker4" style="width: 150px"/>
         <hr/>
         <div id="kendoCalendar"/>
 
@@ -66,8 +68,12 @@
                     anchor: $("input").eq(0)
                 });
 
+                var today = new Date(2011, 9, 10);
+
                 $("#datepicker").kendoDatePicker({ startView: "decade", depth:"year"});
                 $("#datepicker2").kendoDatePicker({value: new Date(), max: new Date()});
+                $("#datepicker3").kendoDatePicker({value: new Date(2004, 10, 10), max: new Date(2015, 10, 10), min: new Date(2003, 10, 10)});
+                $("#datepicker4").kendoDatePicker({value: today, min: today, max: today});
             });
         </script>
     </body>

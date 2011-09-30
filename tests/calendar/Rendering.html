@@ -459,8 +459,22 @@
                     max: today
                 }));
 
+                console.log(div.html());
+
                 equal(div.find("tbody").find("td > a").length, 1);
                 equal(div.find("tbody").find("a").html(), "2010-2019");
+            });
+
+            test("century view does not render decades less then min", function() {
+                var today = new Date(1910, 9, 10);
+
+                div.html(calendar.century.content({
+                    date: today,
+                    min: new Date(1900, 0, 1),
+                    max: new Date(1950, 0, 1)
+                }));
+
+                equal(div.find("tbody").find("td:first").children().length, 0);
             });
 
             test("century view renders cells with data-val", function() {

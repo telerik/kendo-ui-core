@@ -517,7 +517,6 @@
                     depth: "month"
                 });
 
-                dv._initCalendar();
                 dv.open();
 
                 dv.calendar.navigate(new Date(2000, 10, 10), "year");
@@ -527,32 +526,21 @@
                 equal(dv.calendar._table.find(".k-state-focused").length, 1);
             });
 
-            test("Enter should navigate down", function() {
-                var event = { keyCode: keys.ENTER, preventDefault: $.noop },
+            test("Enter should select date", function() {
+                var called, event = { keyCode: keys.ENTER, preventDefault: $.noop },
                 dv = new DateView({
                     anchor: $("<input />"),
                     value: new Date(2000, 10, 10),
                     min: new Date(1900, 10, 10),
                     max: new Date(2100, 10, 10),
                     startView: "month",
-                });
-
-                stub(dv.calendar, "navigateDown");
-
-                dv.open();
-                dv.calendar.navigateUp();
-
-                dv.navigate(event);
-
-                equal(dv.calendar.calls("navigateDown"), 1);
-            });
-
-            test("Enter should select date", function() {
-                var called, event = { keyCode: keys.ENTER, preventDefault: $.noop },
-                dv = new DateView({value: new Date(2000, 10, 10), startView: "month"}),
+                    depth: "month"
+                }),
                 focused = new Date(2000, 10, 11);
 
-                dv._initCalendar();
+                dv.open();
+
+                stub(dv.calendar, {navigateDown: dv.calendar.navigateDown});
 
                 dv.calendar._focusCell(focused);
                 dv.navigate(event);
@@ -560,12 +548,37 @@
                 equal(+dv.calendar.args("navigateDown")[0], +focused);
             });
 
+            test("Enter should navigate down", function() {
+                var event = { keyCode: keys.ENTER, preventDefault: $.noop },
+                    dv = new DateView({
+                        anchor: $("<input />"),
+                        value: new Date(2010, 10, 10),
+                        min: new Date(1900, 10, 10),
+                        max: new Date(2100, 10, 10),
+                        startView: "month",
+                        depth: "month"
+                    });
+
+                dv.open();
+
+                stub(dv.calendar, {navigateDown: dv.calendar.navigateDown});
+
+                dv.calendar.navigateUp();
+
+                dv.navigate(event);
+
+                equal(dv.calendar.calls("navigateDown"), 1);
+            });
+
             test("Esc should close dateView", function() {
                 var event = { keyCode: keys.ESC, preventDefault: $.noop },
                 dv = new DateView({
                     anchor: $("<input />"),
                     value: new Date(2000, 10, 10),
-                    startView: "month"
+                    min: new Date(1900, 10, 10),
+                    max: new Date(2100, 10, 10),
+                    startView: "month",
+                    depth: "month"
                 });
 
                 dv.open();
@@ -613,7 +626,10 @@
 
             test("click on selected date should close the dateView", function() {
                 var dv = new DateView({
+                    min: new Date(1800, 1, 1),
+                    max: new Date(2800, 1, 1),
                     startView: "month",
+                    depth: "month",
                     anchor: $("<input />"),
                     clearBlurTimeout: $.noop,
                     close: function() {

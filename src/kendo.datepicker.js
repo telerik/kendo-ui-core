@@ -4,6 +4,7 @@
     Component = ui.Component,
     parse = kendo.parseDate,
     keys = kendo.keys,
+    defineViewedValue = kendo.calendar.defineViewedValue,
     popup,
     calendar,
     DATEVIEW = "dateView",
@@ -104,6 +105,8 @@
         navigate: function(e) {
             var that = this,
                 options = that.options,
+                min = options.min,
+                max = options.max,
                 viewedValue = new Date(that._viewedValue),
                 calendar = that.calendar,
                 viewName = calendar._currentView,
@@ -148,29 +151,11 @@
                     that._navigateDown();
                 } else if (keys.HOME == key) {
                     e.preventDefault();
-
-                    viewedValue = view.first(viewedValue);
-
-                    if (+viewedValue > +options.max) {
-                        viewedValue = new Date(options.max);
-                    } else if (+viewedValue < +options.min) {
-                        viewedValue = new Date(options.min);
-                    }
-
-                    that._viewedValue = viewedValue;
+                    that._viewedValue = viewedValue = defineViewedValue(view.first(viewedValue), options.min, options.max);
                     calendar._focusCell(viewedValue);
                 } else if (keys.END == key) {
                     e.preventDefault();
-
-                    viewedValue = view.last(viewedValue);
-
-                    if (+viewedValue > +options.max) {
-                        viewedValue = new Date(options.max);
-                    } else if (+viewedValue < +options.min) {
-                        viewedValue = new Date(options.min);
-                    }
-
-                    that._viewedValue = viewedValue;
+                    that._viewedValue = viewedValue = defineViewedValue(view.last(viewedValue), options.min, options.max);
                     calendar._focusCell(viewedValue);
                 } else if (keys.PAGEUP == key) {
                     calendar.navigateToPast();
@@ -181,13 +166,8 @@
                 if (value) {
                     view.setDate(viewedValue, value);
 
-                    if (+viewedValue > +options.max) {
-                        viewedValue = new Date(options.max);
-                    } else if (+viewedValue < +options.min) {
-                        viewedValue = new Date(options.min);
-                    }
+                    that._viewedValue = viewedValue = defineViewedValue(viewedValue, options.min, options.max);
 
-                    that._viewedValue = viewedValue;
                     calendar._focusCell(viewedValue);
                 }
             }
@@ -199,7 +179,7 @@
                 options = that.options;
 
             that._value = value;
-            that._viewedValue = kendo.calendar.defineViewedValue(value, options.min, options.max);
+            that._viewedValue = defineViewedValue(value, options.min, options.max);
 
             if (calendar.element.data(DATEVIEW) === this) {
                 calendar._focusCell(that._viewedValue);

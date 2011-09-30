@@ -361,6 +361,14 @@
                 equal(+cal.args("value")[0], +value);
             });
 
+            test("navigate should put in range passed date", function() {
+                var cal = new Calendar(div),
+                    value = new Date(1800, 10, 10);
+
+                cal.navigate(value);
+
+                equal(+cal._viewedValue, +cal.options.min);
+            });
 
             test("value should select set selectedValue property", function() {
                 var cal = new Calendar(div),
@@ -463,18 +471,6 @@
                 equal(cal._table.find(".k-state-focused").text(), "Nov");
             });
 
-            test("navigate should not render view if value is out of range", function() {
-                var value = new Date(2000,10,10),
-                cal = new Calendar(div, {
-                    value: value,
-                    max: new Date(value)
-                }),
-                table = cal._table;
-
-                cal.navigateToFuture();
-
-                equal(cal._table, table);
-            });
             test("navigate should not re-render view if it was not changed", function() {
                 var value = new Date(2000, 10, 10),
                     cal = new Calendar(div, {value: value});
