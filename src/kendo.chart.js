@@ -4110,6 +4110,16 @@
                 strokeWidth: border.width,
                 stroke: border.color
             }));
+        },
+
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+            var w = tooltipWidth / 2,
+                h = tooltipHeight / 2,
+                r = math.sqrt((w * w) + (h * h)),
+                sector = this.sector.clone().expand(r + TOOLTIP_OFFSET),
+                tooltipCenter = sector.point(sector.middle());
+
+            return new Point2D(tooltipCenter.x - w, tooltipCenter.y - h);
         }
     });
 
