@@ -23,8 +23,12 @@
             if (!that.content.length)
                 that.content = $("<div class='k-content'/>").appendTo(element);
 
-            that.scroller = that.content.kendoScroller({ showArrows: false }).data("kendoScroller");
-            that.container = that.scroller.scrollElement || that.content;
+            that.container = that.content;
+
+            if (options.scroller) {
+                that.scroller = that.content.kendoScroller({ showArrows: false }).data("kendoScroller");
+                that.container = that.scroller.scrollElement || that.content;
+            }
 
             if (options.formInit) {
                 mobile.initForm(that.element, options.previousView);
@@ -35,6 +39,7 @@
 
         options: {
             formInit: true,
+            scroller: true,
             animation: {
                 effects: "slide:left",
                 duration: 250,

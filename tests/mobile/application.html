@@ -6,7 +6,9 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.scroller.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
         <script src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -52,29 +54,28 @@
                 var viewportTag = $("meta[name=viewport]");
 
                 equals(viewportTag.length, 1);
-                equals(viewportTag.attr("content"), "minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no");
+                equals(viewportTag.attr("content"), "initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width");
             });
 
-            test("switchView() adds view to page", function() {
+            asyncTest("switchView() adds view to page", function() {
                 kendo.mobile.switchView("foo", function() {
                     equals($('.k-view').length, 1);
+                    start();
                 });
             });
 
             asyncTest("switchView() loads remote partial content", function() {
                 kendo.mobile.switchView("foo", function() {
+                    equals($('.k-view').text(), "mockjax response");
                     start();
-
-                    equals($('.k-view')[0].innerHTML, "mockjax response");
                 });
             });
 
             asyncTest("switchView() does not add the same view twice", function() {
                 kendo.mobile.switchView("foo", function() {
                     kendo.mobile.switchView("foo", function() {
-                        start();
-
                         equals($('.k-view').length, 1);
+                        start();
                     });
                 });
             });
@@ -122,9 +123,8 @@
                 });
 
                 kendo.mobile.switchView("foo", function() {
-                    start();
-
                     equals($(".k-view").length, 1);
+                    start();
                 });
             });
 
@@ -140,9 +140,8 @@
                 });
 
                 kendo.mobile.switchView("foo", function() {
-                    start();
-
                     equals($(".k-view").length, 2);
+                    start();
                 });
             });
         </script>
