@@ -5204,8 +5204,7 @@
         },
 
         refresh: function(domElement) {
-            var options = this.options,
-                element = domElement[0];
+            var options = this.options;
 
             $(domElement).attr({
                 "fill-opacity": options.fillOpacity
@@ -6318,7 +6317,7 @@
                 start = +new Date() + delay,
                 duration = options.duration,
                 finish = start + duration,
-                domElement = $(doc.getElementById(element.options.id)),
+                domElement = doc.getElementById(element.options.id),
                 easing = jQuery.easing[options.easing],
                 time,
                 pos,
@@ -6335,7 +6334,7 @@
                     element.refresh(domElement);
 
                     if (time < finish) {
-                        requestAnimFrame(loop);
+                        requestAnimFrame(loop, domElement);
                     }
                 };
 
