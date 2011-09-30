@@ -78,6 +78,7 @@
         SVG_NS = "http://www.w3.org/2000/svg",
         SWING = "swing",
         TOP = "top",
+        TOOLTIP_OFFSET = 5,
         TRIANGLE = "triangle",
         UNDEFINED = "undefined",
         VERTICAL = "vertical",
@@ -3263,6 +3264,31 @@
             }
 
             return borderColor;
+        },
+
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+            var bar = this,
+                options = bar.options,
+                box = bar.box,
+                isVertical = options.isVertical,
+                aboveAxis = options.aboveAxis,
+                x,
+                y;
+
+            if (isVertical) {
+                x = box.x2 + TOOLTIP_OFFSET;
+                y = aboveAxis ? box.y1 : box.y2 - tooltipHeight;
+            } else {
+                if (options.isStacked) {
+                    x = box.x2 - tooltipWidth;
+                    y = box.y1 - tooltipHeight - TOOLTIP_OFFSET;
+                } else {
+                    x = box.x2 + TOOLTIP_OFFSET;
+                    y = box.y1;
+                }
+            }
+
+            return new Point2D(x, y);
         }
     });
 
@@ -3467,7 +3493,8 @@
                 border: series.border,
                 isVertical: options.isVertical,
                 overlay: series.overlay,
-                labels: labelOptions
+                labels: labelOptions,
+                isStacked: isStacked
             });
 
             var cluster = children[categoryIx];
@@ -3764,8 +3791,15 @@
             return marker.getViewElements(view, options)[0];
         },
 
-        getOutlineBox: function() {
-            return this.marker.box;
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+            var point = this,
+                markerBox = point.marker.box,
+                aboveAxis = point.options.aboveAxis;
+
+            return new Point2D(
+                markerBox.x2,
+                aboveAxis ? markerBox.y1 - tooltipHeight : markerBox.y2
+            );
         }
     });
 
@@ -6522,8 +6556,6 @@
                 color: BLACK,
                 width: 0
             },
-            offsetY: 2,
-            offsetX: 5,
             opacity: 1
         },
 
@@ -6534,7 +6566,7 @@
                 options = tooltip.options,
                 aboveAxis = point.options.aboveAxis,
                 isVertical = point.options.isVertical,
-                tooltipBox,
+                anchor,
                 template,
                 content = point.value.toString();
 
@@ -6550,33 +6582,12 @@
                 content = format(options.format, point.value);
             }
 
-            textElement.html(content);
+            textElement
+                .html(content)
+                .css({ backgroundColor: options.background });
 
-            tooltipBox = new Box2D(0, 0, element.outerWidth(), element.outerHeight())
+            anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
 
-            var outlineBox = point.getOutlineBox ? point.getOutlineBox() : point.box;
-            if (isVertical === false) {
-                tooltipBox
-                    .alignTo(outlineBox, aboveAxis ? RIGHT : LEFT)
-                    .translate(
-                        (aboveAxis ? 1 : -1) * options.offsetX,
-                        point.box.y1 - tooltipBox.y1
-                    );
-            } else {
-                tooltipBox
-                    .alignTo(outlineBox, aboveAxis ? TOP : BOTTOM)
-                    .translate(
-                        outlineBox.x1 - tooltipBox.x1,
-                        (aboveAxis ? -1 : 1) * options.offsetY
-                    );
-
-                if (point.options.stackBase) {
-                    tooltipBox.alignTo(outlineBox, RIGHT)
-                        .translate(options.offsetX, (aboveAxis ? 1 : -1) * tooltipBox.height());
-                }
-            }
-
-            textElement.css({ backgroundColor: options.background });
             tooltip.element
                 .css({
                    backgroundColor: point.series.color,
@@ -6586,8 +6597,8 @@
                 .stop(true)
                 .show()
                 .animate({
-                    left: round(tooltipBox.x1) + "px",
-                    top: round(tooltipBox.y1) + "px"
+                    left: round(anchor.x) + "px",
+                    top: round(anchor.y) + "px"
                 }, tooltip.visible ? 150 : 0);
 
             tooltip.visible = true;
