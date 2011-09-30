@@ -14,15 +14,18 @@
             var Chart = kendo.ui.Chart,
                 tooltip,
                 element,
+                textElement,
                 dataPointMock,
                 RED = "rgb(255,0,0)",
                 GREEN = "rgb(0,255,0)",
-                BLUE = "rgb(0,0,255)";
+                BLUE = "rgb(0,0,255)",
+                TOLERANCE = 1;
 
             function createTooltip(options) {
                 tooltip = new Chart.Tooltip($("#chart"), options);
                 element = tooltip.element;
                 element.css({ width: "45px", height: "35px" });
+                textElement = element.children(0);
             }
 
             // ------------------------------------------------------------
@@ -45,6 +48,9 @@
                         category: "category",
                         dataItem: {
                             field: "value"
+                        },
+                        tooltipAnchor: function() {
+                            return new Chart.Point2D();
                         }
                     };
                 },
@@ -67,14 +73,6 @@
                 equals(element.css("fontFamily"), "Tahoma");
             });
 
-            test("sets padding", function() {
-                createTooltip({ padding: 5 });
-                equals(element.css("paddingTop"), "5px");
-                equals(element.css("paddingRight"), "5px");
-                equals(element.css("paddingBottom"), "5px");
-                equals(element.css("paddingLeft"), "5px");
-            });
-
             test("sets border width", function() {
                 createTooltip({ border: { width: 1 } });
                 equals(element.css("border-top-width"), "1px");
@@ -85,124 +83,85 @@
                 equals(element.css("border-top-color").replace(/\s/g, ''), RED);
             });
 
+            test("sets opacity", function() {
+                createTooltip({ opacity: 0.5 });
+                equals(element.css("opacity"), 0.5);
+            });
+
+            test("sets white-space: nowrap on text div", function() {
+                createTooltip();
+                equals(textElement.css("white-space"), "nowrap");
+            });
+
             test("sets background to current series color", function() {
                 tooltip.show(dataPointMock);
                 equals(element.css("backgroundColor").replace(/\s/g, ''), RED);
             });
 
-            test("setting background overrides current series color", function() {
+            test("sets text div background", function() {
                 tooltip.options.background = BLUE;
                 tooltip.show(dataPointMock);
-                equals(element.css("backgroundColor").replace(/\s/g, ''), BLUE);
+                equals(textElement.css("backgroundColor").replace(/\s/g, ''), BLUE);
             });
 
-            test("sets color to current series label color", function() {
+            test("sets text div color", function() {
+                createTooltip({ color: GREEN });
                 tooltip.show(dataPointMock);
-                equals(element.css("color").replace(/\s/g, ''), GREEN);
-            });
-
-            test("setting color overrides current series label color", function() {
-                tooltip.options.color = BLUE;
-                tooltip.show(dataPointMock);
-                equals(element.css("color").replace(/\s/g, ''), BLUE);
+                equals(textElement.css("color").replace(/\s/g, ''), GREEN);
             });
 
             test("applies format", function() {
                 createTooltip({ format: "{0}%" });
                 tooltip.show(dataPointMock);
-                equals(element.text(), "1%");
+                equals(textElement.text(), "1%");
             });
 
             test("renders template", function() {
                 createTooltip({ template: "${value}%" });
                 tooltip.show(dataPointMock);
-                equals(element.text(), "1%");
+                equals(textElement.text(), "1%");
             });
 
             test("renders compiled template", function() {
                 createTooltip({ template: kendo.template("${value}%") });
                 tooltip.show(dataPointMock);
-                equals(element.text(), "1%");
+                equals(textElement.text(), "1%");
             });
 
             test("renders template when format is set", function() {
                 createTooltip({ format: "{0} percent", template: "${value}%" });
                 tooltip.show(dataPointMock);
-                equals(element.text(), "1%");
+                equals(textElement.text(), "1%");
             });
 
             test("template context has category", function() {
                 createTooltip({ template: "${category}" });
                 tooltip.show(dataPointMock);
-                equals(element.text(), "category");
+                equals(textElement.text(), "category");
             });
 
             test("template context has series", function() {
                 createTooltip({ template: "${series.name}" });
                 tooltip.show(dataPointMock);
-                equals(element.text(), "series");
+                equals(textElement.text(), "series");
             });
 
             test("template context has dataItem", function() {
                 createTooltip({ template: "${dataItem.field}" });
                 tooltip.show(dataPointMock);
-                equals(element.text(), "value");
+                equals(textElement.text(), "value");
             });
 
-            test("positions tooltip on top of vertical points located above axis", function() {
-                createTooltip({ padding: 0, offsetY: 10 });
-
-                dataPointMock.options.isVertical = true;
-                dataPointMock.options.aboveAxis = true;
+            test("positions tooltip on anchor", function() {
+                dataPointMock.tooltipAnchor = function() { return new Chart.Point2D(10, 10) };
+                tooltip.options.offsetX = 0;
+                tooltip.options.offsetY = 0;
                 tooltip.show(dataPointMock);
 
-                equals(tooltip.element.css("top"), "-45px");
-            });
-
-            test("positions tooltip below vertical points located below axis", function() {
-                createTooltip({ padding: 0, offsetY: 10 });
-
-                dataPointMock.options.isVertical = true;
-                dataPointMock.options.aboveAxis = false;
-                tooltip.show(dataPointMock);
-
-                equals(tooltip.element.css("top"), "20px");
-            });
-
-            test("positions tooltip in center of vertical points", function() {
-                dataPointMock.options.isVertical = true;
-
-                tooltip.show(dataPointMock);
-
-                equals(tooltip.element.css("left"), "-23px");
-            });
-
-            test("positions tooltip right of horizontal points located right of axis", function() {
-                createTooltip({ padding: 0, offsetX: 10 });
-
-                dataPointMock.options.isVertical = false;
-                dataPointMock.options.aboveAxis = true;
-                tooltip.show(dataPointMock);
-
-                equals(tooltip.element.css("left"), "20px");
-            });
-
-            test("positions tooltip left of horizontal points located left of axis", function() {
-                createTooltip({ padding: 0, offsetX: 10 });
-
-                dataPointMock.options.isVertical = false;
-                dataPointMock.options.aboveAxis = false;
-                tooltip.show(dataPointMock);
-
-                equals(tooltip.element.css("left"), "-55px");
-            });
-
-            test("positions tooltip in center of horizontal points", function() {
-                dataPointMock.options.isVertical = false;
-
-                tooltip.show(dataPointMock);
-
-                equals(tooltip.element.css("top"), "-17px");
+                same([parseInt(tooltip.element.css("top"), 10),
+                      parseInt(tooltip.element.css("left"), 10)],
+                      [10, 10]
+                );
             });
 
         </script>
