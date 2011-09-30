@@ -6607,7 +6607,7 @@
                    color: options.color,
                    opacity: options.opacity
                 })
-                .stop(true)
+                .stop(true, true)
                 .show()
                 .animate({
                     left: round(anchor.x) + "px",
