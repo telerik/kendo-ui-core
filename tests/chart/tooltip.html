@@ -36,11 +36,11 @@
                         value: 1,
                         box: new Chart.Box2D(0, 0, 10, 10),
                         options: {
-                            aboveAxis: true
+                            aboveAxis: true,
+                            color: RED
                         },
                         series: {
                             name: "series",
-                            color: RED,
                             labels: {
                                 color: GREEN
                             }
@@ -93,7 +93,7 @@
                 equals(textElement.css("white-space"), "nowrap");
             });
 
-            test("sets background to current series color", function() {
+            test("sets background to current point color", function() {
                 tooltip.show(dataPointMock);
                 equals(element.css("backgroundColor").replace(/\s/g, ''), RED);
             });

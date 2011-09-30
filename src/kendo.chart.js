@@ -4161,6 +4161,7 @@
                 currentCategory,
                 currentSeries,
                 currentData,
+                currentColor,
                 totalAngle,
                 seriesIx,
                 sectorAngle,
@@ -4180,11 +4181,11 @@
                     value = chart.pointValue(currentData);
                     sectorAngle = value * anglePerValue;
                     currentCategory = defined(currentData.name) ? currentData.name : "";
-                    currentSeries.color = defined(currentData.color) ?
+                    currentColor = defined(currentData.color) ?
                                           currenData.color :
                                           colors[i % colorsCount];
 
-                    callback(value, startAngle, sectorAngle,
+                    callback(value, startAngle, sectorAngle, currentColor,
                        currentCategory, i, currentSeries, seriesIx);
                     startAngle += sectorAngle;
                 }
@@ -4208,13 +4209,15 @@
             return sum;
         },
 
-        addValue: function(value, startAngle, angle, category, categoryIx, series, seriesIx) {
+        addValue: function(value, startAngle, angle, color,
+                           category, categoryIx, series, seriesIx) {
             var chart = this,
                 segment,
                 sector = new Sector(null, 0, startAngle, angle);
 
             segment = new PieSegment(value, sector, series);
             segment.options.id = uniqueId();
+            segment.options.color = color;
             segment.category = category;
             segment.series = series;
             segment.seriesIx = seriesIx;
@@ -6600,7 +6603,7 @@
 
             tooltip.element
                 .css({
-                   backgroundColor: point.series.color,
+                   backgroundColor: point.options.color,
                    color: options.color,
                    opacity: options.opacity
                 })
