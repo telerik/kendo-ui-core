@@ -48,6 +48,9 @@
                         category: "category",
                         dataItem: {
                             field: "value"
+                        },
+                        tooltipAnchor: function() {
+                            return new Chart.Point2D();
                         }
                     };
                 },
@@ -149,60 +152,16 @@
                 equals(textElement.text(), "value");
             });
 
-            test("positions tooltip on top of vertical points located above axis", function() {
-                createTooltip({ padding: 0, offsetY: 10 });
-
-                dataPointMock.options.isVertical = true;
-                dataPointMock.options.aboveAxis = true;
+            test("positions tooltip on anchor", function() {
+                dataPointMock.tooltipAnchor = function() { return new Chart.Point2D(10, 10) };
+                tooltip.options.offsetX = 0;
+                tooltip.options.offsetY = 0;
                 tooltip.show(dataPointMock);
 
-                equals(parseInt(tooltip.element.css("top"), 10), -45, TOLERANCE);
-            });
-
-            test("positions tooltip below vertical points located below axis", function() {
-                createTooltip({ padding: 0, offsetY: 10 });
-
-                dataPointMock.options.isVertical = true;
-                dataPointMock.options.aboveAxis = false;
-                tooltip.show(dataPointMock);
-
-                equals(parseInt(tooltip.element.css("top"), 10), 20, TOLERANCE);
-            });
-
-            test("positions tooltip in center of vertical points", function() {
-                dataPointMock.options.isVertical = true;
-
-                tooltip.show(dataPointMock);
-
-                equals(parseInt(tooltip.element.css("left"), 10), -25, TOLERANCE);
-            });
-
-            test("positions tooltip right of horizontal points located right of axis", function() {
-                createTooltip({ padding: 0, offsetX: 10 });
-
-                dataPointMock.options.isVertical = false;
-                dataPointMock.options.aboveAxis = true;
-                tooltip.show(dataPointMock);
-
-                equals(parseInt(tooltip.element.css("left"), 10), 20, TOLERANCE);
-            });
-
-            test("positions tooltip left of horizontal points located left of axis", function() {
-                createTooltip({ padding: 0, offsetX: 10 });
-
-                dataPointMock.options.isVertical = false;
-                dataPointMock.options.aboveAxis = false;
-                tooltip.show(dataPointMock);
-
-                equals(parseInt(tooltip.element.css("left"), 10), -71, TOLERANCE);
-            });
-
-            test("positions tooltip in center of horizontal points", function() {
-                dataPointMock.options.isVertical = false;
-
-                tooltip.show(dataPointMock);
-
-                equals(parseInt(tooltip.element.css("top"), 10), -12, TOLERANCE);
+                same([parseInt(tooltip.element.css("top"), 10),
+                      parseInt(tooltip.element.css("left"), 10)],
+                      [10, 10]
+                );
             });
 
         </script>
