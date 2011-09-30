@@ -78,6 +78,7 @@
         SVG_NS = "http://www.w3.org/2000/svg",
         SWING = "swing",
         TOP = "top",
+        TOOLTIP_OFFSET = 5,
         TRIANGLE = "triangle",
         UNDEFINED = "undefined",
         VERTICAL = "vertical",
@@ -3263,6 +3264,31 @@
             }
 
             return borderColor;
+        },
+
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+            var bar = this,
+                options = bar.options,
+                box = bar.box,
+                isVertical = options.isVertical,
+                aboveAxis = options.aboveAxis,
+                x,
+                y;
+
+            if (isVertical) {
+                x = box.x2 + TOOLTIP_OFFSET;
+                y = aboveAxis ? box.y1 : box.y2 - tooltipHeight;
+            } else {
+                if (options.isStacked) {
+                    x = box.x2 - tooltipWidth;
+                    y = box.y1 - tooltipHeight - TOOLTIP_OFFSET;
+                } else {
+                    x = box.x2 + TOOLTIP_OFFSET;
+                    y = box.y1;
+                }
+            }
+
+            return new Point2D(x, y);
         }
     });
 
@@ -3467,7 +3493,8 @@
                 border: series.border,
                 isVertical: options.isVertical,
                 overlay: series.overlay,
-                labels: labelOptions
+                labels: labelOptions,
+                isStacked: isStacked
             });
 
             var cluster = children[categoryIx];
@@ -3762,6 +3789,17 @@
             options = deepExtend({}, options, { id: outlineId });
 
             return marker.getViewElements(view, options)[0];
+        },
+
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+            var point = this,
+                markerBox = point.marker.box,
+                aboveAxis = point.options.aboveAxis;
+
+            return new Point2D(
+                markerBox.x2 + TOOLTIP_OFFSET,
+                aboveAxis ? markerBox.y1 - tooltipHeight : markerBox.y2
+            );
         }
     });
 
@@ -4072,6 +4110,16 @@
                 strokeWidth: border.width,
                 stroke: border.color
             }));
+        },
+
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+            var w = tooltipWidth / 2,
+                h = tooltipHeight / 2,
+                r = math.sqrt((w * w) + (h * h)),
+                sector = this.sector.clone().expand(r + TOOLTIP_OFFSET),
+                tooltipCenter = sector.point(sector.middle());
+
+            return new Point2D(tooltipCenter.x - w, tooltipCenter.y - h);
         }
     });
 
@@ -6487,7 +6535,6 @@
 
             tooltip.options = deepExtend({}, tooltip.options, options);
             options = tooltip.options;
-            options.padding = getSpacing(options.padding);
 
             tooltip.chartElement = chartElement;
 
@@ -6497,8 +6544,14 @@
                     "<div style='display:none; position: absolute; font: <#= d.font #>;" +
                     "border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px;" +
                     "border: <#= d.border.width #>px solid <#= d.border.color #>;" +
-                    "padding: <#= d.padding.top #>px <#= d.padding.right #>px " +
-                    "<#= d.padding.bottom #>px <#= d.padding.left #>px;'></div>"
+                    "opacity: <#= d.opacity #>; filter: alpha(opacity=<#= d.opacity * 100 #>);" +
+                    "padding:0 0 0 1.4em; '>" +
+                    "<div style='white-space: nowrap; padding: .3em .4em; " +
+                    "border-top-right-radius: 2px; -moz-border-top-right-radius: 2px; " +
+                    "-webkit-border-top-right-radius: 2px; border-bottom-right-radius: 2px; " +
+                    "-moz-border-bottom-right-radius: 2px; -webkit-border-bottom-right-radius: 2px; " +
+                    " ' />" +
+                    "</div>"
                 );
             }
 
@@ -6506,28 +6559,24 @@
         },
 
         options: {
+            background: BLACK,
+            color: WHITE,
             font: SANS12,
-            padding: {
-                top: 5,
-                bottom: 5,
-                left: 6,
-                right: 6
-            },
             border: {
                 color: BLACK,
                 width: 0
             },
-            offsetY: 2,
-            offsetX: 5
+            opacity: 1
         },
 
         show: function(point) {
             var tooltip = this,
                 element = tooltip.element,
+                textElement = element.children(0),
                 options = tooltip.options,
                 aboveAxis = point.options.aboveAxis,
                 isVertical = point.options.isVertical,
-                tooltipBox,
+                anchor,
                 template,
                 content = point.value.toString();
 
@@ -6543,37 +6592,23 @@
                 content = format(options.format, point.value);
             }
 
-            tooltip.element.html(content);
+            textElement
+                .html(content)
+                .css({ backgroundColor: options.background });
 
-            tooltipBox = new Box2D(0, 0, element.outerWidth(), element.outerHeight())
-
-            if (isVertical === false) {
-                tooltipBox
-                    .alignTo(point.box, aboveAxis ? RIGHT : LEFT)
-                    .translate(
-                        (aboveAxis ? 1 : -1) * options.offsetX,
-                        point.box.center().y - tooltipBox.center().y
-                    );
-            } else {
-                tooltipBox
-                    .alignTo(point.box, aboveAxis ? TOP : BOTTOM)
-                    .translate(
-                        point.box.center().x - tooltipBox.center().x,
-                        (aboveAxis ? -1 : 1) * options.offsetY
-                    );
-            }
+            anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
 
             tooltip.element
                 .css({
-                   backgroundColor: options.background || point.series.color,
-                   color: options.color || point.series.labels.color,
-                   opacity: 1
+                   backgroundColor: point.series.color,
+                   color: options.color,
+                   opacity: options.opacity
                 })
                 .stop(true)
                 .show()
                 .animate({
-                    left: round(tooltipBox.x1) + "px",
-                    top: round(tooltipBox.y1) + "px"
+                    left: round(anchor.x) + "px",
+                    top: round(anchor.y) + "px"
                 }, tooltip.visible ? 150 : 0);
 
             tooltip.visible = true;
@@ -7444,6 +7479,10 @@
             majorGridLines: {
                 color: "#dfdfdf"
             }
+        },
+        tooltip: {
+            background: "#564942",
+            opacity: 0.9
         }
     });
 

@@ -147,8 +147,12 @@
                     CATEGORY = "A",
                     SERIES_NAME = "series";
 
-                function createPoint(options) {
-                    segment = new Chart.PieSegment(VALUE, new Chart.Sector(), options);
+                function createSegment(options) {
+                    segment = new Chart.PieSegment(
+                        VALUE,
+                        new Chart.Sector(new Chart.Point2D(0,0), 100, 90, 100),
+                        options
+                    );
 
                     segment.dataItem = { value: VALUE };
 
@@ -162,7 +166,7 @@
                 // ------------------------------------------------------------
                 module("Pie Segment", {
                     setup: function() {
-                        createPoint();
+                        createSegment();
                     }
                 });
 
@@ -171,13 +175,18 @@
                 });
 
                 test("sets segment border color", function() {
-                    createPoint({ border: { color: "red" } });
+                    createSegment({ border: { color: "red" } });
                     equals(segment.options.border.color, "red");
                 });
 
                 test("sets pie border width", function() {
-                    createPoint({ border: { width: 4 } });
+                    createSegment({ border: { width: 4 } });
                     equals(segment.options.border.width, 4);
+                });
+
+                test("tooltipAnchor is set distance from segment", function() {
+                    var anchor = segment.tooltipAnchor(10, 10);
+                    same([Math.round(anchor.x), Math.round(anchor.y)], [81, -77], TOLERANCE);
                 });
 
             })();
