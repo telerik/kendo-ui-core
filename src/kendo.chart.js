@@ -5850,10 +5850,10 @@
                 parentNode = element[0].parentNode;
 
             if (parentNode) {
-                element.find("path")[0].setAttribute("v", this.renderPoints());
+                element.find("path")[0].v = this.renderPoints();
                 try {
-                    element.find("fill")[0].setAttribute("opacity", options.fillOpacity);
-                    element.find("stroke")[0].setAttribute("opacity", options.strokeOpacity);
+                    element.find("fill")[0].opacity = options.fillOpacity;
+                    element.find("stroke")[0].opacity = options.strokeOpacity;
                 } catch(e) {
                     // Random exceptions in IE 8 Compatibility View
                 }
