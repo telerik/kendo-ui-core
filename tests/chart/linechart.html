@@ -694,6 +694,7 @@
                     label,
                     root,
                     VALUE = 1,
+                    TOOLTIP_OFFSET = 5,
                     CATEGORY = "A",
                     SERIES_NAME = "series";
 
@@ -850,6 +851,20 @@
 
                     point.getOutlineElement(view, { flag: true });
                     ok(view.log.path[0].style.flag);
+                });
+
+                test("tooltipAnchor is at top right of marker / above axis", function() {
+                    createPoint({ aboveAxis: true });
+                    var anchor = point.tooltipAnchor(10, 10);
+                    same([anchor.x, anchor.y],
+                         [point.marker.box.x2 + TOOLTIP_OFFSET, point.marker.box.y1 - 10])
+                });
+
+                test("tooltipAnchor is at bottom right of marker / below axis", function() {
+                    createPoint({ aboveAxis: false });
+                    var anchor = point.tooltipAnchor(10, 10);
+                    same([anchor.x, anchor.y],
+                         [point.marker.box.x2 + TOOLTIP_OFFSET, point.marker.box.y2])
                 });
 
                 // ------------------------------------------------------------

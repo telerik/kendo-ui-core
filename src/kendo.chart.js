@@ -3797,7 +3797,7 @@
                 aboveAxis = point.options.aboveAxis;
 
             return new Point2D(
-                markerBox.x2,
+                markerBox.x2 + TOOLTIP_OFFSET,
                 aboveAxis ? markerBox.y1 - tooltipHeight : markerBox.y2
             );
         }
