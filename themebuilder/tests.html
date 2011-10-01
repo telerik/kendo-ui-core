@@ -4,14 +4,14 @@
         <title>ThemeBuilder tests</title>
 
         <script src="../src/jquery.js"></script>
-        <script src="../tests/qunit.js"></script>
+        <script src="../tests/qunit/qunit/qunit.js"></script>
 
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.window.js"></script>
         <script src="../src/kendo.panelbar.js"></script>
 
-        <link rel="stylesheet" href="../tests/qunit.css" />
+        <link rel="stylesheet" href="../tests/qunit/qunit/qunit.css" />
     </head>
     <body>
         <h1 id="qunit-header">ThemeBuilder tests</h1>
@@ -273,103 +273,103 @@
                 equals(constants.constants[0].properties[0].value, color)
             });
 
-            /* Color Engine Test */
+            module("ColorEngine");
 
-		    /* hex2rgb */
+            /* hex2rgb */
 
-		    test("Convert #000000 to RGB", function() {
-			    var rgb = ColorEngine.hex2rgb("#000000");
+            test("Convert #000000 to RGB", function() {
+                var rgb = ColorEngine.hex2rgb("#000000");
 
-			    equals(rgb.red, 0);
-			    equals(rgb.green, 0);
-			    equals(rgb.blue, 0);
-		    });
+                equals(rgb.red, 0);
+                equals(rgb.green, 0);
+                equals(rgb.blue, 0);
+            });
 
-		    test("Convert #ffffff to RGB", function() {
-			    var rgb = ColorEngine.hex2rgb("#ffffff");
+            test("Convert #ffffff to RGB", function() {
+                var rgb = ColorEngine.hex2rgb("#ffffff");
 
-			    equals(rgb.red, 255);
-			    equals(rgb.green, 255);
-			    equals(rgb.blue, 255);
-		    });
+                equals(rgb.red, 255);
+                equals(rgb.green, 255);
+                equals(rgb.blue, 255);
+            });
 
-		    test("Convert #ff0000 to RGB", function() {
-			    var rgb = ColorEngine.hex2rgb("#ff0000");
+            test("Convert #ff0000 to RGB", function() {
+                var rgb = ColorEngine.hex2rgb("#ff0000");
 
-			    equals(rgb.red, 255);
-			    equals(rgb.green, 0);
-			    equals(rgb.blue, 0);
-		    });
+                equals(rgb.red, 255);
+                equals(rgb.green, 0);
+                equals(rgb.blue, 0);
+            });
 
             /* rgb2hex */
 
-		    test("Convert RGB Black to HEX", function() {
-			    var hex = ColorEngine.rgb2hex({ red: 0, green: 0, blue: 0 });
+            test("Convert RGB Black to HEX", function() {
+                var hex = ColorEngine.rgb2hex({ red: 0, green: 0, blue: 0 });
 
-			    equals(hex, "#000000");
-		    });
+                equals(hex, "#000000");
+            });
 
-		    test("Convert RGB White to HEX", function() {
-			    var hex = ColorEngine.rgb2hex({ red: 255, green: 255, blue: 255 });
+            test("Convert RGB White to HEX", function() {
+                var hex = ColorEngine.rgb2hex({ red: 255, green: 255, blue: 255 });
 
-			    equals(hex, "#ffffff");
-		    });
+                equals(hex, "#ffffff");
+            });
 
             /* css2hex */
 
-		    test("Convert CSS RGB Black to HEX", function() {
-			    var hex = ColorEngine.css2hex("RGB(0, 0, 0)");
+            test("Convert CSS RGB Black to HEX", function() {
+                var hex = ColorEngine.css2hex("RGB(0, 0, 0)");
 
-			    equals(hex, "#000000");
-		    });
+                equals(hex, "#000000");
+            });
 
-		    test("Convert CSS RGB White to HEX", function() {
-			    var hex = ColorEngine.css2hex("RGB(255, 255, 255)");
+            test("Convert CSS RGB White to HEX", function() {
+                var hex = ColorEngine.css2hex("RGB(255, 255, 255)");
 
-			    equals(hex, "#ffffff");
-		    });
+                equals(hex, "#ffffff");
+            });
 
             /* shorthex2hex */
 
-		    test("Convert short HEX Black to HEX", function() {
-			    var hex = ColorEngine.css2hex("#000");
+            test("Convert short HEX Black to HEX", function() {
+                var hex = ColorEngine.css2hex("#000");
 
-			    equals(hex, "#000000");
-		    });
+                equals(hex, "#000000");
+            });
 
-		    test("Convert short HEX White to HEX", function() {
-			    var hex = ColorEngine.css2hex("#fff");
+            test("Convert short HEX White to HEX", function() {
+                var hex = ColorEngine.css2hex("#fff");
 
-			    equals(hex, "#ffffff");
-		    });
+                equals(hex, "#ffffff");
+            });
 
             /* difference */
 
-		    test("Calculate difference between HEX colors", function() {
-			    var diff = ColorEngine.difference("#000000", "#888888");
+            test("Calculate difference between HEX colors", function() {
+                var diff = ColorEngine.difference("#000000", "#888888");
 
-			    equals(diff, 408);
-		    });
+                equals(diff, 408);
+            });
 
-		    test("Calculate difference between RGB colors", function() {
-			    var diff = ColorEngine.difference("rgb(0, 0, 0)", "rgb(136, 136, 136)");
+            test("Calculate difference between RGB colors", function() {
+                var diff = ColorEngine.difference("rgb(0, 0, 0)", "rgb(136, 136, 136)");
 
-			    equals(diff, 408);
-		    });
+                equals(diff, 408);
+            });
 
             /* complementary*/
 
-		    test("Complementary color of HEX Black is #ffffff", function() {
-			    var hex = ColorEngine.complementary("#000000");
+            test("Complementary color of HEX Black is #ffffff", function() {
+                var hex = ColorEngine.complementary("#000000");
 
-			    equals(hex, "#ffffff");
-		    });
+                equals(hex, "#ffffff");
+            });
 
-		    test("Complementary color of HEX White is #000000", function() {
-			    var hex = ColorEngine.complementary("#ffffff");
+            test("Complementary color of HEX White is #000000", function() {
+                var hex = ColorEngine.complementary("#ffffff");
 
-			    equals(hex, "#000000");
-		    });
+                equals(hex, "#000000");
+            });
 
         </script>
 
