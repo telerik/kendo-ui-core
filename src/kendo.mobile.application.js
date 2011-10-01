@@ -8,9 +8,7 @@
         transitions = kendo.support.transitions,
         buttonSelector = "[data-kendo-ui=button],button,input[type=submit],input[type=reset],input[type=button],input[type=image]";
 
-    if (os && !os.ios) {
-        $(document.documentElement).removeClass("k-ios").addClass("k-" + os.name);
-    }
+    $(document.documentElement).addClass("k-" + (!os || (os && os.ios) ? "ios" : os.name));
 
     if (touch)
         $(document.documentElement).bind("touchstart", function () { return false; });
@@ -75,7 +73,7 @@
             view = $("<div class='k-view'/>").appendTo(application.root);
 
         application
-            .addView(view.kendoView().data("kendoView"))
+            .addView(view.kendoView({ title: document.title }).data("kendoView"))
             .show();
 
         $(document).trigger("appinit", { app: application, mobileOS: os });
@@ -161,7 +159,7 @@
 
             $(".k-tabContainer")
                 .width(halfWidth)
-                .css(transitions.css + "box-flex", "0");
+//                .css(transitions.css + "box-flex", "0");
 
             view.element
                 .add(view.element.siblings(".k-view"))
@@ -194,7 +192,8 @@
                 cache: false,
                 dataType: "html",
                 success: function(content) {
-                    var viewPage;
+                    var viewPage,
+                        title = /<title[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/title>/ig.exec(content)[1];
 
                     if (mobile.isFullPage(content)) {
                         content = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/ig.exec(content)[1];
@@ -206,7 +205,7 @@
 
                     viewPage.data("url", view);
 
-                    var currentView = viewPage.kendoView({ previousView: application.currentView }).data("kendoView");
+                    var currentView = viewPage.kendoView({ previousView: application.currentView, title: title }).data("kendoView");
                     application.addView(currentView);
                     kendo.mobile.goToView(currentView, initCallback);
                 }
