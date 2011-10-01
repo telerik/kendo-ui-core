@@ -161,8 +161,8 @@
         // TODO: these can be merged during build
         getScript(applicationRoot + lessJs, function() {
             getScript(applicationRoot + themebuilderJs, function() {
-                getScript(applicationRoot + templateJs, function() {
-                    getScript(applicationRoot + colorEngineJs);
+                getScript(applicationRoot + colorEngineJs, function() {
+                    getScript(applicationRoot + templateJs);
                 });
             });
         });

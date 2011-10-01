@@ -13,14 +13,32 @@
 
                 element.bind(CHANGE, proxy(that._change, that))
 
+                this._updateUiColors();
+
                 that.bind([ CHANGE ], that.options);
             },
             _change: function(e) {
-                var target = $(e.target);
+                var target = $(e.target),
+                    value = target.val();
+
+                this._updateUiColors();
 
                 this.trigger(CHANGE, {
                     name: target.attr("id"),
-                    value: target.val()
+                    value: value
+                });
+            },
+            _updateUiColors: function() {
+                var target = $(this.element),
+                    value = target.val();
+
+                if (!value || value == "transparent") {
+                    value = "#000000";
+                }
+
+                target.css({
+                    color: ColorEngine.complementary(value),
+                    backgroundColor: value
                 });
             }
         }),
