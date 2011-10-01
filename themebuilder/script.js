@@ -32,18 +32,23 @@
     }
 
     if (typeof jQuery == UNDEFINED || typeof kendo == UNDEFINED) {
-        var messageId = 'kendoThemeBuilderMessage';
-        if (doc.getElementById(messageId)) {
-            return;
+        // show error message -- not a relevant page
+        var messageId = 'kendoThemeBuilderMessage',
+            styles = 'position:absolute;top:50%;margin-top:-1.6em;left:50%;margin-left:-16em;z-index:9999999;font:12px sans-serif;text-align:center;width:32em;padding:1em;border:1px solid #2å2å2å;background:#f2f2f2;color:#ef652a;-moz-box-shadow: 1px 1px 7px 1px #666;-webkit-box-shadow: 1px 1px 7px 1px #666;box-shadow: 1px 1px 7px 1px #666;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;';
+
+        if (!doc.getElementById(messageId)) {
+            var messageWrap = doc.createElement("div");
+            messageWrap.id = messageId;
+            messageWrap.style.cssText = styles;
+            messageWrap.innerHTML =
+                '<p style="margin:0;padding:0;">' +
+                'It seems there are no Kendo widgets on this page, so the Kendo themebuilder will be of no use. Please try running it elsewhere.' +
+                '</p>' +
+                '<p style="margin:1em 0 0;padding:0;">' +
+                '<button type="button" style="border:1px solid #aaa;background:#e3e3e3;color:#2e2e2e;cursor:pointer;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;" onclick="var msg = document.getElementById(\'' + messageId + '\');msg.parentNode.removeChild(msg);return false;">Close</button></p>';
+            doc.body.appendChild(messageWrap);
         }
-        var messageText = '<p style="margin:0;padding:0;">It seems there are no Kendo widgets on this page, so the Kendo themebuilder will be of no use. Please try running it elsewhere.</p>';
-        var closeButton = '<p style="margin:1em 0 0;padding:0;"><button type="button" style="border:1px solid #aaa;background:#e3e3e3;color:#2e2e2e;cursor:pointer;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;" onclick="var msg = document.getElementById(\'' + messageId + '\');msg.parentNode.removeChild(msg);return false;">Close</button></p>';
-        var styles = 'position:absolute;top:50%;margin-top:-1.6em;left:50%;margin-left:-16em;z-index:9999999;font:12px sans-serif;text-align:center;width:32em;padding:1em;border:1px solid #2å2å2å;background:#f2f2f2;color:#ef652a;-moz-box-shadow: 1px 1px 7px 1px #666;-webkit-box-shadow: 1px 1px 7px 1px #666;box-shadow: 1px 1px 7px 1px #666;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;';
-        var messageWrap = doc.createElement("div");
-        messageWrap.id = messageId;
-        messageWrap.style.cssText = styles;
-        messageWrap.innerHTML = messageText + closeButton;
-        doc.body.appendChild(messageWrap);
+
         return;
     }
 
@@ -122,27 +127,27 @@
         }, {
             prefix: "@content",
             title: "Content wrappers",
-            properties: returnProperties(["bgColor"])
+            properties: returnProperties([BGCOLOR])
         }, {
             prefix: "@group",
             title: "Item groups",
-            properties: returnProperties(["bgColor"])
+            properties: returnProperties([BGCOLOR])
         }, {
             prefix: "@input",
             title: "Textboxes",
-            properties: returnProperties(["bgColor"])
+            properties: returnProperties([BGCOLOR])
         }, {
             prefix: "@splitbar",
             title: "Splitbars",
-            properties: returnProperties(["bgColor"])
+            properties: returnProperties([BGCOLOR])
         }, {
             prefix: "@alt",
             title: "Grid alt rows",
-            properties: returnProperties(["bgColor"])
+            properties: returnProperties([BGCOLOR])
         }, {
             prefix: "@loading",
             title: "Loading panels",
-            properties: returnProperties(["bgColor"])
+            properties: returnProperties([BGCOLOR])
         }];
     }
 
