@@ -106,6 +106,23 @@
                 equals(eventArgs.value, color);
             });
 
+            test("changing input value changes input color and bgcolor", function() {
+                var eventArgs,
+                    color = "#000000";
+
+                colorPicker.val(color).trigger("change");
+
+                equals(ColorEngine.css2hex(colorPicker.css("color")), "#ffffff");
+                equals(ColorEngine.css2hex(colorPicker.css("backgroundColor")), "#000000");
+            });
+
+            test("colors are changed upon init", function() {
+                colorPicker = $("<input value='#ff0000' />").appendTo(document.body).kendoColorPicker();
+
+                equals(ColorEngine.css2hex(colorPicker.css("color")), "#00ffff");
+                equals(ColorEngine.css2hex(colorPicker.css("backgroundColor")), "#ff0000");
+            });
+
             var properties = {
                     bgColor: { property: "background-color", label: "Background" },
                     color: { property: "color", label: "Text color" },
