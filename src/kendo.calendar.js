@@ -169,14 +169,13 @@
                     date: value
                 }, that[viewName])));
 
+                that._table = newTable;
+
                 if (!oldTable) {
                     that.element.append(newTable);
                 } else {
-                    newTable.insertBefore(oldTable);
-                    oldTable.remove();
+                    that._animate(oldTable, newTable);
                 }
-
-                that._table = newTable;
 
                 that.trigger(NAVIGATE);
             }
@@ -214,6 +213,34 @@
             that._viewedValue = calendar.defineViewedValue(value, min, max);
 
             that.navigate(value);
+        },
+
+        _animate: function(oldView, newView) {
+            var viewWidth = oldView.outerWidth();
+
+            //oldView.add(newView).css({width: viewWidth, 'float': 'left' });
+
+            //oldView.wrap("<div/>");
+
+            //oldView.parent()
+            //    .css({
+            //        position: 'relative',
+            //        width: viewWidth * 2,
+            //        'float': 'left',
+            //        left: -200
+            //    });
+
+            newView.insertBefore(oldView);
+
+            oldView.parent().kendoStop(true).kendoAnimate({
+                effects: "slide:right",
+                duration: 500,
+                divisor: 2,
+                complete: function() {
+                    oldView.remove();
+                    //newView.unwrap();
+                }
+            });
         },
 
         _focusCell: function(value) {
