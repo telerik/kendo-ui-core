@@ -38,6 +38,7 @@
         },
 
         options: {
+            title: "",
             formInit: true,
             scroller: true,
             animation: {
@@ -52,10 +53,16 @@
         },
 
         show: function(container) {
-            $(document).trigger("viewshow", { view: this, mobileOS: os });
+            var that = this,
+                toolbar = $(that.element).find(".k-header>.k-toolbar");
 
-            if (this.element[0].parentNode !== container)
-                this.element.appendTo(container);
+            $(document).trigger("viewshow", { view: that, mobileOS: os });
+
+            if (that.options.title && !toolbar.children(".k-view-title").length)
+                toolbar.prepend("<div class='k-view-title'>"+ that.options.title +"</div>");
+
+            if (that.element[0].parentNode !== container)
+                that.element.appendTo(container);
         },
 
         hide: function() {

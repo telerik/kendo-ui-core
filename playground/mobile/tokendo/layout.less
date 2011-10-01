@@ -57,6 +57,20 @@
     box-sizing: @type;
 }
 
+.background-clip(@type) {
+    -moz-background-clip: @type;
+    -webkit-background-clip: @type;
+    background-clip: @type;
+}
+
+.transform() {
+    -webkit-transform: @arguments;
+    -moz-transform: @arguments;
+    -ms-transform: @arguments;
+    -o-transform: @arguments;
+    transform: @arguments;
+}
+
 html, body
 {
     -ms-content-zooming: none;
@@ -82,7 +96,6 @@ body,
 
 .k-slot
 {
-    background: #fff;
     overflow: hidden;
 }
 
@@ -99,6 +112,7 @@ body,
     height: 100%;
     display: table\9;
     overflow: hidden;
+    -webkit-transform: translate3d(0,0,0);
 }
 
 .k-header
@@ -152,7 +166,8 @@ body > .k-tabStrip,
 }
 
 .k-header,
-.k-footer
+.k-footer,
+.k-tabContainer
 {
     position: relative;
     z-index: 1;
@@ -182,6 +197,26 @@ body > .k-tabStrip,
 .k-meego .k-view
 {
     .box-direction(reverse);
+}
+
+.k-view-title
+{
+    display: none;
+}
+
+.k-ios .k-view-title
+{
+    position: absolute;
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: #fff;
+    font-size: 1.5em;
+    line-height: 2.1em;
+    text-shadow: 0 -1pt #777;
 }
 
 .k-android .k-showcase,
@@ -240,6 +275,45 @@ body > .k-tabStrip,
     background-color: #98a1ae;
 }
 
+.k-ios .k-button[data-kendo-ui=back]
+{
+    margin-left: 9px;
+}
+
+.k-ios .k-button[data-kendo-ui=back] *
+{
+    position: relative;
+    z-index: 1;
+}
+
+.k-ios .k-button[data-kendo-ui=back]:before {
+    content: " ";
+    background-image: linearGradient(left top, rgb(63,79,102), rgb(138,154,181) 6%, rgb(90,120,165) 50%, rgb(71,104,151) 50%, rgb(73,106,154));
+    border-left: solid 1px #5F6C81;
+    border-bottom: solid 1px #34517B;
+    width: 21px;
+    height: 21px;
+    display: block;
+    -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000000), color-stop(0.5,#000000), color-stop(0.5, transparent), to(transparent));
+    position: absolute;
+    left: -9px;
+    top: 3px;
+    .border-radius(4px 15px 4px 4px);
+    .transform(rotate(45deg));
+    .box-sizing(border-box);
+}
+
+.k-ios :-moz-first-node~[data-kendo-ui=back]:before
+{
+    left: -20px;
+    top: -1.3px;
+}
+
+.k-ios .k-button[data-kendo-ui=back].k-state-active:before {
+    border-color: #376ECC #40506C;
+    background-image: linearGradient(left top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
+}
+
 .k-android,
 .k-android .k-button
 {
@@ -249,8 +323,8 @@ body > .k-tabStrip,
 .k-android .k-button
 {
     .border-radius(2pt);
+    line-height: 2em;
     .box-shadow(0 1px 2px #373737);
-    height: 3em;
 }
 
 .k-android .k-tabStrip .k-button
@@ -274,7 +348,7 @@ body > .k-tabStrip,
 
 .k-android .k-button.k-state-active
 {
-    border: #feb84b #fb9d09 #f29c0a;
+    border-color: #feb84b #fb9d09 #f29c0a;
     background-color: #fe9d08;
     background-image: linearGradient(top, rgb(254, 157, 8), rgb(254, 161, 10) 50%, rgb(254, 164, 11));
 }
@@ -438,7 +512,7 @@ body > .k-tabStrip,
     .box-shadow(0 0 3px #333);
 }
 
-.k-tabContainer
+.k-tabStrip
 {
     text-align: center;
     word-spacing: -1em;
@@ -456,7 +530,7 @@ body > .k-tabStrip,
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .k-showcase { position: absolute; }
-    .k-tabStrip { display: table; word-spacing: normal; }
+    .k-tabContainer { display: table; word-spacing: normal; width: 100%; }
     .k-buttonStrip > .k-button { display: inline-block; }
 }
 
@@ -578,6 +652,7 @@ body > .k-tabStrip,
     color: #FFF;
     background: rgba(100, 100, 100, 0.5);
 }
+
 .k-android .k-tabStrip .k-button.k-state-active
 {
     color: #FFF;
@@ -613,26 +688,47 @@ body > .k-tabStrip,
     list-style-type: none;
     margin: 0;
     padding: 0;
-    line-height: 2.6em;
     display: block;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #E9E9E9;
     position: relative;
+}
+
+.k-ios .k-item
+{
+    line-height: 1.3em;
 }
 
 .k-android .k-item
 {
+    line-height: 2.6em;
     border-bottom: 1px solid #444;
 }
 
 .k-item label
 {
     display: block;
-    line-height: 2.6em;
-    padding-left: 2.7em;
+}
+
+.k-ios .k-item label
+{
+    line-height: 36px;
+    padding-left: 36px;
+}
+
+.k-android .k-item label
+{
+    line-height: 56px;
+    padding-left: 56px;
+}
+
+.k-default-content
+{
+    padding: 1em;
 }
 
 .k-list,
-.k-view
+.k-contentIn,
+.k-slot
 {
     background: #fff;
 }
@@ -642,72 +738,64 @@ body > .k-tabStrip,
     color: #fff;
 }
 
+.k-ios .k-list .k-item
+{
+    height: 36px;
+}
+
 .k-android .k-list .k-item
 {
-    height: 50px;
+    height: 56px;
 }
 
 .k-android .k-list,
-.k-android .k-view
+.k-android .k-slot,
+.k-android .k-contentIn,
+.k-android body
 {
+    color: #fff;
     background: #000;
 }
 
 input[type=checkbox]
 {
     display: none;
-    width: 2em;
-    height: 2em;
+    width: 36px;
+    height: 36px;
     margin-left: .4em;
 }
 
-label:before
+.k-item label:before,
+.k-item label.k-item-checked:after
 {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     position: absolute;
     content: " ";
     display: block;
     top: 50%;
-    margin-top: -1em;
-    left: .3em;
-    width: 2em;
-    height: 2em;
-    -moz-border-radius: .5em;
-    -webkit-border-radius: .5em;
-    border-radius: .5em;
-    -webkit-box-shadow: 0 0 .1em #aaa;
-    box-shadow: 0 0 .1em #aaa;
-    background-color: #d1d1d1;
-    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
-    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(255, 255, 255, 1)), color-stop(1, rgba(210, 210, 210, 0)));
+    left: .6em;
+    width: 36px;
+    height: 36px;
+    margin-top: -18px;
 }
 
-label.input-checked:before
+.k-android .k-item label:before
 {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border: 2px solid #353535;
-    background-color: #898989;
-    background-image: -moz-linear-gradient(top, rgba(56, 56, 56, 1), rgba(137, 137, 137, 0));
-    background-image: -o-linear-gradient(top, rgba(56, 56, 56, 1), rgba(137, 137, 137, 0));
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(56, 56, 56, 1)), color-stop(1, rgba(137, 137, 137, 0)));
+    border: 1px solid #000;
+    background-color: rgb(54, 54, 54);
+    background-image: linearGradient(top, rgb(54, 54, 54), rgb(43, 43, 43));
+    .border-radius(2px);
+    .box-sizing(border-box);
+    .box-shadow(0 0 1px 2px #808080);
 }
 
-label.input-checked:after
+.k-ios label.k-item-checked:after
 {
-    position: absolute;
-    content: "\2714";
-    font-size: 30px;
-    color: #FFF;
-    text-shadow: 0 0 3px #000;
-    display: block;
-    text-align: center;
-    top: 0;
-    left: 0;
-    width: 1.3em;
+    background: transparent url("images/ios-sprite.png") 0 -10px no-repeat;
+}
+
+.k-android label.k-item-checked:after
+{
+    background: transparent url("images/android-sprite.png") 0 -36px no-repeat;
 }
 
 .k-tabStrip .k-button .k-icon
