@@ -26,7 +26,8 @@ function lessToJson(lessTemplate) {
             .replace(/\\/g, '\\\\')
             .replace(/"/g, '\\"')
             .replace(/'/g, "\\'")
-            .replace(/\r\n/g, "\\n");
+            .replace(/\r\n/g, "\\n")
+            .replace(/(\n|\r)/g, "\\n");
 
     return "lessLoaded({ version: '" + kendoBuild.generateVersion() + "', template: '" + template + "' })";
 }
