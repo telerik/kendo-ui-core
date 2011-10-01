@@ -144,7 +144,7 @@
                     .find("input").kendoColorPicker({
                         change: proxy(that._propertyChange, that)
                     });
-                
+
                 $(".k-items-collapse", that.element).click(function() {
                     var panelbar = $("#stylable-elements");
                     panelbar.data("kendoPanelBar").collapse($(".k-item", panelbar));
@@ -166,8 +166,7 @@
                 that.constants.update(e.name, e.value);
 
                 parser.parse(that.constants.serialize() +
-                    '\n@image-folder: "BlueOpal";\n@loading-panel-color: #fff;\n@shadow-color: #aaa;\n@content-background-color: @widget-background-color;\n@group-background-color: #f1f4f5;\n@input-background-color: @widget-background-color;\n@splitbar-background-color: @header-background-color;\n@alt-background-color: @group-background-color;\n' +
-
+                    '\n@image-folder: "BlueOpal";\n@loading-panel-color: #fff;\n@shadow-color: #aaa;\n' +
                     that.templateInfo.template, function (err, tree) {
                     if (err) {
                         return console.error(err);
