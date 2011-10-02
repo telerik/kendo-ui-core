@@ -138,6 +138,8 @@
                 max = options.max,
                 title = that._title,
                 oldTable = that._table,
+                isFuture = value && +value > +that._viewedValue,
+                differentView = !value || +value === +that._viewedValue,
                 newTable;
 
             if (!value) {
@@ -174,7 +176,7 @@
                 if (!oldTable) {
                     that.element.append(newTable);
                 } else {
-                    that._animate(oldTable, newTable);
+                    that._animate(oldTable, newTable, isFuture, differentView);
                 }
 
                 that.trigger(NAVIGATE);
@@ -215,30 +217,75 @@
             that.navigate(value);
         },
 
-        _animate: function(oldView, newView) {
+        //put overlay over the calendar
+        _animate: function(oldView, newView, isFuture, differentView) {
+            var that = this;
+
+            if (newView.parent().data("animating") === true) {
+                console.log("views are still animating");
+            }
+
+            if (differentView) {
+                that._zoomIn(oldView, newView);
+            } else {
+                that._animateHorizontal(oldView, newView, isFuture);
+            }
+        },
+
+        _animateHorizontal: function(oldView, newView, isFuture) {
             var viewWidth = oldView.outerWidth();
 
-            //oldView.add(newView).css({width: viewWidth, 'float': 'left' });
+            oldView.add(newView).css({width: viewWidth, 'float': 'left' });
 
-            //oldView.wrap("<div/>");
+            oldView.wrap("<div/>");
 
-            //oldView.parent()
-            //    .css({
-            //        position: 'relative',
-            //        width: viewWidth * 2,
-            //        'float': 'left',
-            //        left: -200
-            //    });
+            oldView.parent()
+                .css({
+                    position: 'relative',
+                    width: viewWidth * 2,
+                    'float': 'left',
+                    left: isFuture ? 0 : -200
+                });
 
-            newView.insertBefore(oldView);
+                newView[isFuture ? "insertAfter" : "insertBefore"](oldView);
 
             oldView.parent().kendoStop(true).kendoAnimate({
-                effects: "slide:right",
+                effects: "slide:" + (isFuture ? "left" : "right"),
                 duration: 500,
                 divisor: 2,
                 complete: function() {
                     oldView.remove();
-                    //newView.unwrap();
+                    newView.unwrap();
+                }
+            });
+        },
+
+        _zoomIn: function(oldView, newView) {
+            var viewWidth = oldView.outerWidth();
+
+            newView.css({
+                position: "absolute",
+                top: oldView.prev().outerHeight(),
+                left: 0
+            }).insertAfter(oldView);
+
+            oldView.kendoStop(true).kendoAnimate({
+                effects: "fadeOut",
+                duration: 500,
+                complete: function() {
+                   oldView.remove();
+                }
+            });
+
+            newView.kendoStop(true).kendoAnimate({
+                effects: "zoomIn",
+                duration: 500,
+                complete: function() {
+                    newView.css({
+                        position: "static",
+                        top: 0,
+                        left: 0
+                    });
                 }
             });
         },
