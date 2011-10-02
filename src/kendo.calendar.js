@@ -199,6 +199,8 @@
                 return that._value;
             }
 
+            //parse date
+
             if (value !== null) {
                 value = new Date(value);
 
@@ -217,13 +219,10 @@
             that.navigate(value);
         },
 
-        //put overlay over the calendar
         _animate: function(oldView, newView, isFuture, differentView) {
             var that = this;
 
-            if (newView.parent().data("animating") === true) {
-                console.log("views are still animating");
-            }
+            //put overlay over the calendar
 
             if (differentView) {
                 that._zoomIn(oldView, newView);
@@ -249,6 +248,7 @@
 
                 newView[isFuture ? "insertAfter" : "insertBefore"](oldView);
 
+            //put in options
             oldView.parent().kendoStop(true).kendoAnimate({
                 effects: "slide:" + (isFuture ? "left" : "right"),
                 duration: 500,
@@ -277,6 +277,7 @@
                 }
             });
 
+            //put in animation
             newView.kendoStop(true).kendoAnimate({
                 effects: "zoomIn",
                 duration: 500,

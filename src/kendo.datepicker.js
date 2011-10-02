@@ -31,6 +31,11 @@
                     that.close();
                 }
             });
+
+            //wire document.mousedown and prevent applause of the clapping
+            //1. unbind mousedown and use custom event handler
+            //2. check whether the clicked items is calendar button and its it not from the current datepicker.... to not close popup
+            //3. wire close event and stop closing when click calendar button of different datepicker.
         }
 
         that.options = options = options || {};
@@ -119,6 +124,7 @@
                 return;
             }
 
+            //cache e.preventDefault()
             if (e.ctrlKey) {
                 if (keys.RIGHT == key) {
                     calendar.navigateToFuture();
@@ -151,6 +157,7 @@
                     that._navigateDown();
                 } else if (keys.HOME == key) {
                     e.preventDefault();
+                    //find a way to combine this code with the one in the if(value) condition block
                     that._viewedValue = viewedValue = defineViewedValue(view.first(viewedValue), options.min, options.max);
                     calendar._focusCell(viewedValue);
                 } else if (keys.END == key) {
@@ -277,7 +284,7 @@
             that._value = value;
             that.dateView.value(value);
 
-            if (that._valid) {
+            if (that._valid) { //try to find better way
                 that.element.val(kendo.toString(value, that.options.format));
             }
 
