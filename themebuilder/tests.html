@@ -10,6 +10,10 @@
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.window.js"></script>
         <script src="../src/kendo.panelbar.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.combobox.js"></script>
 
         <link rel="stylesheet" href="../tests/qunit/qunit/qunit.css" />
     </head>
@@ -87,40 +91,26 @@
                     colorPicker = $("<input />").appendTo(document.body).kendoColorPicker();
                 },
                 teardown: function() {
-                    colorPicker.remove();
+                    colorPicker.closest(".k-widget").remove();
                     colorPicker = null;
                 }
             });
 
-            test("changing input value triggers change event", function() {
-                var eventArgs,
-                    color = "#f11f11";
+            test("changing input value changes preview bgcolor", function() {
+                var color = "#000000",
+                    colorIndicator = colorPicker.closest(".k-widget").find(".k-arrow-down"),
+                    colorPickerControl = colorPicker.data("kendoColorPicker");
 
-                colorPicker.data("kendoColorPicker").bind("change", function(e) {
-                    eventArgs = e;
-                });
+                colorPickerControl.value(color);
+                colorPickerControl.trigger("change");
 
-                colorPicker.val(color).trigger("change");
-
-                ok(eventArgs);
-                equals(eventArgs.value, color);
+                equals(ColorEngine.css2hex(colorIndicator.css("backgroundColor")), color);
             });
 
-            test("changing input value changes input color and bgcolor", function() {
-                var eventArgs,
-                    color = "#000000";
-
-                colorPicker.val(color).trigger("change");
-
-                equals(ColorEngine.css2hex(colorPicker.css("color")), "#ffffff");
-                equals(ColorEngine.css2hex(colorPicker.css("backgroundColor")), "#000000");
-            });
-
-            test("colors are changed upon init", function() {
+            test("preview bgcolor is changed upon init", function() {
                 colorPicker = $("<input value='#ff0000' />").appendTo(document.body).kendoColorPicker();
 
-                equals(ColorEngine.css2hex(colorPicker.css("color")), "#00ffff");
-                equals(ColorEngine.css2hex(colorPicker.css("backgroundColor")), "#ff0000");
+                equals(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-arrow-down").css("backgroundColor")), "#ff0000");
             });
 
             var properties = {

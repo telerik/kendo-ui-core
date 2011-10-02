@@ -3,43 +3,38 @@
     var proxy = $.proxy,
         CHANGE = "change",
         Component = kendo.ui.Component,
-        ColorPicker = Component.extend({
+        ColorPicker = kendo.ui.ComboBox.extend({
             init: function(element, options) {
-                element = $(element);
-
                 var that = this;
 
-                Component.fn.init.call(that, element, options);
-
-                element.bind(CHANGE, proxy(that._change, that))
-
-                this._updateUiColors();
-
-                that.bind([ CHANGE ], that.options);
-            },
-            _change: function(e) {
-                var target = $(e.target),
-                    value = target.val();
-
-                this._updateUiColors();
-
-                this.trigger(CHANGE, {
-                    name: target.attr("id"),
-                    value: value
-                });
-            },
-            _updateUiColors: function() {
-                var target = $(this.element),
-                    value = target.val();
-
-                if (!value || value == "transparent") {
-                    value = "#000000";
+                if (!options) {
+                    options = {};
                 }
 
-                target.css({
-                    color: ColorEngine.complementary(value),
-                    backgroundColor: value
-                });
+                if (!options.dataSource) {
+                    options.dataSource = new kendo.data.DataSource({
+                        data: [
+                            { text: "white", value: "#ffffff" },
+                            { text: "black", value: "#000000" }
+                        ]
+                    });
+                }
+
+                kendo.ui.ComboBox.fn.init.call(that, element, options);
+
+                that._updateColorPreview();
+
+                that.bind(CHANGE, proxy(that._change, that));
+                that.bind([ CHANGE ], that.options);
+
+                that.wrapper.addClass("k-colorpicker");
+            },
+            _change: function(e) {
+                this._updateColorPreview();
+            },
+            _updateColorPreview: function() {
+                $(this.wrapper).find(".k-arrow-down")
+                    .css("backgroundColor", this.value());
             }
         }),
         rgbValuesRe = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/gi,
@@ -217,7 +212,7 @@
                     colorPickerTemplate = kendo.template(
                         "<# var id = prefix + \"-\" + property.property; #>" +
                         "<label for='<#= id #>'><#= property.label #></label>" +
-                        "<input id='<#= id #>' value='<#= property.value #>' class='k-input' style='background:<#= property.value #>' />"
+                        "<input id='<#= id #>' value='<#= property.value #>' />"
                     ),
                     propertyGroupTemplate = kendo.template(
                         "<li><#= title #>" +
