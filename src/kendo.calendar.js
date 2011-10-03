@@ -3,6 +3,8 @@
         ui = kendo.ui,
         Component = ui.Component,
         template = kendo.template,
+        transitions = kendo.support.transitions,
+        transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
         MONTH = "month",
         YEAR = "year",
         DECADE = "decade",
@@ -41,6 +43,8 @@
 
             that._header();
 
+            //that._footer();
+
             that.element
                 .delegate(CELLSELECTOR, MOUSEENTER, mouseenter)
                 .delegate(CELLSELECTOR, MOUSELEAVE, mouseleave)
@@ -72,18 +76,25 @@
 
         navigateToPast: function() {
             var that = this;
-            that.navigate(that._setViewedValue(-1));
+            if (!that._prevArrow.hasClass(DISABLED)) {
+                that.navigate(that._setViewedValue(-1));
+            }
         },
 
         navigateToFuture: function() {
             var that = this;
-
-            that.navigate(that._setViewedValue(1));
+            if (!that._nextArrow.hasClass(DISABLED)) {
+                that.navigate(that._setViewedValue(1));
+            }
         },
 
         navigateUp: function() {
             var that = this,
                 currentView = that._currentView;
+
+            if (currentView == CENTURY) {
+                return;
+            }
 
             if (currentView === MONTH) {
                 currentView = YEAR;
@@ -133,14 +144,19 @@
             var that = this,
                 view, compare,
                 selectedValue = that._value,
+                viewedValue = that._viewedValue,
                 options = that.options,
                 min = options.min,
                 max = options.max,
                 title = that._title,
                 oldTable = that._table,
-                isFuture = value && +value > +that._viewedValue,
-                differentView = !value || +value === +that._viewedValue,
+                isFuture = value && +value > +viewedValue,
+                differentView = !value || +value === +viewedValue,
                 newTable;
+
+            if (oldTable && oldTable.parent().data("animating")) {
+                return;
+            }
 
             if (!value) {
                 value = that._viewedValue;
@@ -200,31 +216,30 @@
             }
 
             //parse date
+            //value = kendo.parseDate(value, kendo.culture().calendar.patterns.d);
 
             if (value !== null) {
                 value = new Date(value);
 
-                if (isNaN(value.getDate())) {
+                if (!inRange(value, min, max)) {
                     value = null;
-                } else if(value < min) {
-                    value = new DATE(min);
-                } else if(value > max) {
-                    value = new DATE(max);
                 }
             }
 
             that._value = value;
             that._viewedValue = calendar.defineViewedValue(value, min, max);
 
-            that.navigate(value);
+            that.navigate(value || that._viewedValue);
         },
 
         _animate: function(oldView, newView, isFuture, differentView) {
             var that = this;
 
             //put overlay over the calendar
-
-            if (differentView) {
+            if (!oldView.is(":visible")) {
+                newView.insertAfter(oldView);
+                oldView.remove();
+            } else if (differentView) {
                 that._zoomIn(oldView, newView);
             } else {
                 that._animateHorizontal(oldView, newView, isFuture);
@@ -249,7 +264,7 @@
                 newView[isFuture ? "insertAfter" : "insertBefore"](oldView);
 
             //put in options
-            oldView.parent().kendoStop(true).kendoAnimate({
+            oldView.parent().kendoStop(true, true).kendoAnimate({
                 effects: "slide:" + (isFuture ? "left" : "right"),
                 duration: 500,
                 divisor: 2,
@@ -261,33 +276,40 @@
         },
 
         _zoomIn: function(oldView, newView) {
-            var viewWidth = oldView.outerWidth();
+            var that = this,
+                viewWidth = oldView.outerWidth(),
+                cell, position;
 
             newView.css({
                 position: "absolute",
-                top: oldView.prev().outerHeight(),
+                top: 32, //oldView.prev().outerHeight(),
                 left: 0
-            }).insertAfter(oldView);
+            }).insertBefore(oldView);
 
-            oldView.kendoStop(true).kendoAnimate({
+            if (transitionOrigin) {
+                cell = that._getCell(that._view.toDateString(that._viewedValue));
+                position = cell.position();
+                position = (position.left + parseInt(cell.width() / 2)) + "px" + " " + (position.top + parseInt(cell.height() / 2) + "px");
+                newView.css(transitionOrigin, position);
+            }
+
+            oldView.kendoStop(true, true).kendoAnimate({
                 effects: "fadeOut",
-                duration: 500,
+                duration: 600,
                 complete: function() {
                    oldView.remove();
-                }
-            });
-
-            //put in animation
-            newView.kendoStop(true).kendoAnimate({
-                effects: "zoomIn",
-                duration: 500,
-                complete: function() {
-                    newView.css({
+                   newView.css({
                         position: "static",
                         top: 0,
                         left: 0
                     });
                 }
+            });
+
+            //put in animation
+            newView.kendoStop(true, true).kendoAnimate({
+                effects: "zoomIn",
+                duration: 400
             });
         },
 
@@ -342,6 +364,14 @@
                                           that.navigateToFuture();
                                       }
                                   });
+        },
+
+        _getCell: function(value) {
+            return this._table
+                       .find("td:not(.k-other-month)")
+                       .filter(function() {
+                           return $(this.firstChild).data(VALUE) === value;
+                       });
         },
 
         _setClass: function(className, value) {
@@ -708,20 +738,18 @@
 
     function compare(date1, date2, modifier) {
         var year1 = date1.getFullYear(),
-            year2 = date2.getFullYear(),
+            start  = date2.getFullYear(),
+            end = start,
             result = 0;
 
         if (modifier) {
-            if (year2 > year1) {
-                year1 += modifier;
-            } else if (year2 < year1) {
-                year1 -= modifier;
-            }
+            start = start - start % modifier;
+            end = start - start % modifier + modifier - (1 * modifier / 10);
         }
 
-        if (year1 > year2) {
+        if (year1 > end) {
             result = 1;
-        } else if (year1 < year2) {
+        } else if (year1 < start) {
             result = -1;
         }
 

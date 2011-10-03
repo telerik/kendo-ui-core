@@ -10,7 +10,7 @@
     DATEVIEW = "dateView",
     OPEN = "open",
     CLOSE = "close",
-    MOUSEDOWN = "mousedown",
+    MOUSEDOWN = (kendo.support.touch ? "touchstart" : "mousedown"),
     CHANGE = "change",
     NAVIGATE = "navigate",
     DIV = "<div />",
@@ -31,11 +31,6 @@
                     that.close();
                 }
             });
-
-            //wire document.mousedown and prevent applause of the clapping
-            //1. unbind mousedown and use custom event handler
-            //2. check whether the clicked items is calendar button and its it not from the current datepicker.... to not close popup
-            //3. wire close event and stop closing when click calendar button of different datepicker.
         }
 
         that.options = options = options || {};
@@ -55,12 +50,14 @@
 
             if (calendarElement.data(DATEVIEW) !== this) {
                 popup.options.anchor = options.anchor;
+
                 if (popup.wrapper) {
                     popup.wrapper.data("position", "");
                 }
 
                 popup.unbind(OPEN)
                      .unbind(CLOSE)
+                     .bind(OPEN, options)
                      .bind([OPEN, CLOSE], options);
 
                 calendarElement.data(DATEVIEW, this);
@@ -229,6 +226,7 @@
             that.dateView = dateView = new DateView($.extend({}, options, {
                 anchor: that.wrapper,
                 change: function() {
+                    that._valid = true;
                     that.value(dateView.calendar.value());
                     that.trigger(CHANGE);
                     that.close();
@@ -273,7 +271,8 @@
         },
 
         value: function(value) {
-            var that = this;
+            var that = this,
+                options = that.options;
 
             if (value === undefined) {
                 return that._value;
@@ -281,10 +280,14 @@
 
             value = parse(value, that.options.format);
 
+            if (!inRange(value, options.min, options.max)) {
+                value = null;
+            }
+
             that._value = value;
             that.dateView.value(value);
 
-            if (that._valid) { //try to find better way
+            if (that._valid) {
                 that.element.val(kendo.toString(value, that.options.format));
             }
 
@@ -300,9 +303,14 @@
         },
 
         _change: function(value) {
-            var that = this;
+            var that = this,
+                options = that.options;
 
-            value = parse(value, that.options.format);
+            value = parse(value, options.format);
+
+            if (value && !inRange(value, options.min, options.max)) {
+                value = null;
+            }
 
             that._valid = value !== null;
 
@@ -375,6 +383,11 @@
             that.wrapper = wrapper.addClass("k-widget k-datepicker k-header");
         }
     });
+
+    //same in the calendar.js
+    function inRange(date, min, max) {
+        return +date >= +min && +date <= +max;
+    }
 
     ui.plugin("DatePicker", DatePicker);
 

@@ -149,6 +149,29 @@
                 equal(input.val(), dateString);
             });
 
+            test("value should not accept value bigger than max", function() {
+                var date = new Date(2000, 10, 10),
+                    datepicker = input.kendoDatePicker({
+                        max: date
+                    }).data("kendoDatePicker");
+
+                datepicker.value(new Date(2000, 10, 11));
+
+                equal(datepicker._value, null);
+            });
+
+            test("value should update input when select date from calendar", function() {
+                var date = new Date(2000, 10, 10),
+                    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.dateView.calendar.value(date);
+                datepicker._valid = false;
+                datepicker.dateView.options.change();
+
+                equal(+datepicker._value, +date);
+                equal(input.val(), "11/10/2000");
+            });
+
             test("empty input if set value ot null", function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
