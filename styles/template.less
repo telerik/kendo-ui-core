@@ -29,8 +29,8 @@
 .k-grid-pager,
 .k-grouping-header,
 .k-grouping-header .k-group-indicator,
-.k-dropdown-wrap.k-state-focused,
-.k-autocomplete.k-state-focused,
+.k-dropdown-wrap,
+.k-autocomplete,
 .k-panelbar .k-link,
 .k-panelbar .k-group,
 .k-panelbar .k-content,
@@ -46,11 +46,6 @@
 .k-progress
 {
     border-color: @widget-border-color;
-}
-
-.k-list.k-group
-{
-    border-color: @group-border-color;
 }
 
 .k-group,
@@ -70,6 +65,12 @@ td.k-group-cell,
     background-color: @group-background-color;
 }
 
+.k-listContainer
+{
+    border-color: @group-border-color;
+    background-color: @select-group-background-color;
+}
+
 .k-content,
 .k-editable-area,
 .k-tiles
@@ -84,16 +85,22 @@ td.k-group-cell,
 }
 
 .k-widget,
+.k-widget .k-dropdown-wrap,
 .k-autocomplete.k-header,
 .k-autocomplete.k-state-focused,
-.k-dropdown-wrap.k-state-hover,
-.k-dropdown-wrap.k-state-hover:hover,
-.k-dropdown-wrap.k-state-active,
-.k-dropdown-wrap.k-state-active:hover,
 .k-dropdown-wrap.k-state-focused,
 .k-dropdown-wrap.k-state-focused:hover
 {
-    background-color: @widget-background-color;
+    border-color: @widget-border-color;
+    background-color: @select-background-color;
+}
+
+.k-autocomplete .k-input,
+.k-dropdown-wrap .k-input,
+.k-autocomplete.k-state-focused .k-input,
+.k-dropdown-wrap.k-state-focused .k-input
+{
+    border-color: @widget-border-color;
 }
 
 .k-input
@@ -214,7 +221,6 @@ td.k-group-cell,
 
 .k-state-active,
 .k-state-active:hover,
-.k-header .k-state-active,
 .k-active-filter
 {
     background-color: @active-background-color;
@@ -225,13 +231,23 @@ td.k-group-cell,
 .k-state-hover:hover,
 .k-list>.k-state-hover,
 .k-list>.k-state-focused,
-.k-list>.k-state-selected,
 .k-state-focused,
 .k-marquee
 {
     color: @hover-text-color;
     background-color: @hover-background-color;
     border-color: @hover-border-color;
+}
+
+.k-dropdown .k-state-hover .k-input
+{
+    color: @hover-text-color;
+}
+
+
+.k-dropdown .k-state-focused .k-input
+{
+    color: @widget-text-color;
 }
 
 .k-state-selected,

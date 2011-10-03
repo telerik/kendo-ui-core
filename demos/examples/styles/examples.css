@@ -1141,8 +1141,8 @@ div.skinSelector .k-state-active
 {
     cursor: pointer;
     display: inline-block;
-    width: 52px;
-    margin: 5px 0 5px 2px;
+    width: 51px;
+    margin: 5px 0 5px 0;
     text-decoration: none;
     font-size: 11px;
     color: #555;
