@@ -159,7 +159,7 @@
 
             $(".k-tabContainer")
                 .width(halfWidth)
-//                .css(transitions.css + "box-flex", "0");
+                .css(transitions.css + "box-flex", "0");
 
             view.element
                 .add(view.element.siblings(".k-view"))

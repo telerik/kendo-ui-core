@@ -1,28 +1,36 @@
 html, body {
-  width: 100%;
+  -ms-content-zooming: none;
   height: 100%;
   margin: 0;
+  overflow: hidden;
+  max-height: 100%;
 }
-.k-view {
+body {
+  display: table\9;
+}
+body,
+.k-view,
+.k-slot,
+.k-content {
+  width: 100%;
   -moz-box-orient: vertical;
   -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
   box-orient: vertical;
+}
+.k-slot {
+  overflow: hidden;
+}
+.k-showcase {
+  width: 100%;
+  height: 100%;
+}
+.k-view {
+  position: relative;
   width: 100%;
   height: 100%;
   display: table\9;
   overflow: hidden;
-}
-.k-view,
-.k-header,
-.k-footer,
-.k-content {
-  display: -moz-box;
-  display: -webkit-box;
-  display: box;
-}
-.k-header, .k-footer {
-  position: relative;
-  z-index: 1;
   -webkit-transform: translate3d(0, 0, 0);
 }
 .k-header {
@@ -37,33 +45,102 @@ html, body {
   background: #1a1a1a;
   height: 1px\9;
 }
+.k-slot, .k-content {
+  overflow: hidden;
+  display: table-row\9;
+}
+.k-tabStrip {
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
+  -moz-box-orient: horizontal;
+  -webkit-box-orient: horizontal;
+  -ms-box-orient: horizontal;
+  box-orient: horizontal;
+  -moz-box-pack: start;
+  display: table-row\9;
+  padding: 0;
+  min-height: 50px;
+}
+body,
+body > .k-tabStrip,
+.k-slot,
+.k-view,
+.k-header,
+.k-footer,
+.k-content,
+.k-showcase {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+}
+.k-view {
+  vertical-align: top;
+}
+.k-header, .k-footer, .k-tabContainer {
+  position: relative;
+  z-index: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+}
 @media all and (-webkit-min-device-pixel-ratio:10000),
        not all and (-webkit-min-device-pixel-ratio:0) {
-  .k-view {
+  body, .k-view {
     display: table;
   }
-  .k-header, .k-footer, .k-content {
+  body > .k-tabStrip,
+  .k-slot,
+  .k-header,
+  .k-footer,
+  .k-content {
     display: table-row;
   }
-  .k-header, .k-footer {
+  body > .k-tabStrip, .k-header, .k-footer {
     height: 1px;
   }
 }
-.k-content {
-  display: table-row\9;
-  -moz-box-flex: 1;
-  -webkit-box-flex: 1;
-  box-flex: 1;
+.k-slot, .k-view, .k-content {
   -moz-box-align: stretch;
   -webkit-box-align: stretch;
+  -ms-box-align: stretch;
   box-align: stretch;
-  -moz-box-orient: vertical;
-  -webkit-box-orient: vertical;
-  box-orient: vertical;
+  -moz-box-flex: 1;
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
   position: relative;
 }
-.k-content * {
+.k-android body,
+.k-android .k-view,
+.k-meego body,
+.k-meego .k-view {
+  -moz-box-direction: reverse;
+  -webkit-box-direction: reverse;
+  -ms-box-direction: reverse;
+  box-direction: reverse;
+}
+.k-view-title {
+  display: none;
+}
+.k-ios .k-view-title {
+  position: absolute;
   display: block;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  color: #fff;
+  font-size: 1.5em;
+  line-height: 2.1em;
+  text-shadow: 0 -1pt #777777;
+}
+.k-android .k-showcase, .k-meego .k-showcase {
+  -moz-box-direction: normal;
+  -webkit-box-direction: normal;
+  -ms-box-direction: normal;
+  box-direction: normal;
 }
 .k-toolbar,
 .k-button,
@@ -98,7 +175,7 @@ html, body {
   background-image: -o-linear-gradient(top, rgba(63,79,102,1), rgba(138,154,181,1) 6%, rgba(90,120,165,1) 50%, rgba(71,104,151,1) 50%, rgba(73,106,154,1));
   background-image: linear-gradient(top, rgba(63,79,102,1), rgba(138,154,181,1) 6%, rgba(90,120,165,1) 50%, rgba(71,104,151,1) 50%, rgba(73,106,154,1));
 }
-.k-ios .k-button.k-active {
+.k-ios .k-button.k-state-active {
   border-color: #40506C #376ECC #3E75CA;
   background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(64,80,108,1)), color-stop(0.06, rgba(141,174,237,1)), color-stop(0.5, rgba(66,132,229,1)), color-stop(0.5, rgba(45,120,228,1)), color-stop(1, rgba(45,119,224,1)));
   background-image: -moz-linear-gradient(top, rgba(64,80,108,1), rgba(141,174,237,1) 6%, rgba(66,132,229,1) 50%, rgba(45,120,228,1) 50%, rgba(45,119,224,1));
@@ -113,11 +190,71 @@ html, body {
 .k-ios, .k-ios .k-button {
   font: normal 0.95em Helvetica, sans-serif;
 }
-.k-ios .k-button.k-active {
+.k-ios .k-button.k-state-active {
   background-color: #98a1ae;
+}
+.k-ios .k-button[data-kendo-ui=back] {
+  margin-left: 9px;
+}
+.k-ios .k-button[data-kendo-ui=back] * {
+  position: relative;
+  z-index: 1;
+}
+.k-ios .k-button[data-kendo-ui=back]:before {
+  content: " ";
+  background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0, rgba(63,79,102,1)), color-stop(0.06, rgba(138,154,181,1)), color-stop(0.5, rgba(90,120,165,1)), color-stop(0.5, rgba(71,104,151,1)), color-stop(1, rgba(73,106,154,1)));
+  background-image: -moz-linear-gradient(left top, rgba(63,79,102,1), rgba(138,154,181,1) 6%, rgba(90,120,165,1) 50%, rgba(71,104,151,1) 50%, rgba(73,106,154,1));
+  background-image: -ms-linear-gradient(left top, rgba(63,79,102,1), rgba(138,154,181,1) 6%, rgba(90,120,165,1) 50%, rgba(71,104,151,1) 50%, rgba(73,106,154,1));
+  background-image: -o-linear-gradient(left top, rgba(63,79,102,1), rgba(138,154,181,1) 6%, rgba(90,120,165,1) 50%, rgba(71,104,151,1) 50%, rgba(73,106,154,1));
+  background-image: linear-gradient(left top, rgba(63,79,102,1), rgba(138,154,181,1) 6%, rgba(90,120,165,1) 50%, rgba(71,104,151,1) 50%, rgba(73,106,154,1));
+  border-left: solid 1px #5F6C81;
+  border-bottom: solid 1px #34517B;
+  width: 21px;
+  height: 21px;
+  display: block;
+  -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000000), color-stop(0.5, #000000), color-stop(0.5, transparent), to(transparent));
+  position: absolute;
+  left: -9px;
+  top: 3px;
+  -moz-border-radius: 4px 15px 4px 4px;
+  -webkit-border-radius: 4px 15px 4px 4px;
+  border-radius: 4px 15px 4px 4px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.k-ios :-moz-first-node ~ [data-kendo-ui=back]:before {
+  left: -20px;
+  top: -1.3px;
+}
+.k-ios .k-button[data-kendo-ui=back].k-state-active:before {
+  border-color: #376ECC #40506C;
+  background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0, rgba(64,80,108,1)), color-stop(0.06, rgba(141,174,237,1)), color-stop(0.5, rgba(66,132,229,1)), color-stop(0.5, rgba(45,120,228,1)), color-stop(1, rgba(45,119,224,1)));
+  background-image: -moz-linear-gradient(left top, rgba(64,80,108,1), rgba(141,174,237,1) 6%, rgba(66,132,229,1) 50%, rgba(45,120,228,1) 50%, rgba(45,119,224,1));
+  background-image: -ms-linear-gradient(left top, rgba(64,80,108,1), rgba(141,174,237,1) 6%, rgba(66,132,229,1) 50%, rgba(45,120,228,1) 50%, rgba(45,119,224,1));
+  background-image: -o-linear-gradient(left top, rgba(64,80,108,1), rgba(141,174,237,1) 6%, rgba(66,132,229,1) 50%, rgba(45,120,228,1) 50%, rgba(45,119,224,1));
+  background-image: linear-gradient(left top, rgba(64,80,108,1), rgba(141,174,237,1) 6%, rgba(66,132,229,1) 50%, rgba(45,120,228,1) 50%, rgba(45,119,224,1));
 }
 .k-android, .k-android .k-button {
   font: normal 1em DroidSans, Helvetica, sans-serif;
+}
+.k-android .k-button {
+  -moz-border-radius: 2pt;
+  -webkit-border-radius: 2pt;
+  border-radius: 2pt;
+  line-height: 2em;
+  box-shadow: 0 1px 2px #373737;
+  -webkit-box-shadow: 0 1px 2px #373737;
+}
+.k-android .k-tabStrip .k-button {
+  height: auto;
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }
 .k-android .k-toolbar,
 .k-android .k-button,
@@ -125,21 +262,22 @@ html, body {
 .k-android .k-tabStrip {
   color: #000;
   text-shadow: none;
-  border-color: #ACACAC;
-  background-color: #EEE;
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(244,244,244,1)), color-stop(0.9, rgba(193,193,193,1)), color-stop(1, rgba(209,209,209,1)));
-  background-image: -moz-linear-gradient(top, rgba(244,244,244,1), rgba(193,193,193,1) 90%, rgba(209,209,209,1));
-  background-image: -ms-linear-gradient(top, rgba(244,244,244,1), rgba(193,193,193,1) 90%, rgba(209,209,209,1));
-  background-image: -o-linear-gradient(top, rgba(244,244,244,1), rgba(193,193,193,1) 90%, rgba(209,209,209,1));
-  background-image: linear-gradient(top, rgba(244,244,244,1), rgba(193,193,193,1) 90%, rgba(209,209,209,1));
+  border-color: #e7e7e7;
+  background-color: #dedede;
+  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(230,230,230,1)), color-stop(1, rgba(205,205,205,1)));
+  background-image: -moz-linear-gradient(top, rgba(230,230,230,1), rgba(205,205,205,1));
+  background-image: -ms-linear-gradient(top, rgba(230,230,230,1), rgba(205,205,205,1));
+  background-image: -o-linear-gradient(top, rgba(230,230,230,1), rgba(205,205,205,1));
+  background-image: linear-gradient(top, rgba(230,230,230,1), rgba(205,205,205,1));
 }
-.k-android .k-button.k-active {
-  background-color: #e99d02;
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255,222,117,1)), color-stop(0.1, rgba(251,195,35,1)), color-stop(0.6, rgba(232,156,0,1)), color-stop(0.8, rgba(244,181,16,1)), color-stop(1, rgba(252,209,32,1)));
-  background-image: -moz-linear-gradient(top, rgba(255,222,117,1), rgba(251,195,35,1) 10%, rgba(232,156,0,1) 60%, rgba(244,181,16,1) 80%, rgba(252,209,32,1));
-  background-image: -ms-linear-gradient(top, rgba(255,222,117,1), rgba(251,195,35,1) 10%, rgba(232,156,0,1) 60%, rgba(244,181,16,1) 80%, rgba(252,209,32,1));
-  background-image: -o-linear-gradient(top, rgba(255,222,117,1), rgba(251,195,35,1) 10%, rgba(232,156,0,1) 60%, rgba(244,181,16,1) 80%, rgba(252,209,32,1));
-  background-image: linear-gradient(top, rgba(255,222,117,1), rgba(251,195,35,1) 10%, rgba(232,156,0,1) 60%, rgba(244,181,16,1) 80%, rgba(252,209,32,1));
+.k-android .k-button.k-state-active {
+  border-color: #feb84b #fb9d09 #f29c0a;
+  background-color: #fe9d08;
+  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(254,157,8,1)), color-stop(0.5, rgba(254,161,10,1)), color-stop(1, rgba(254,164,11,1)));
+  background-image: -moz-linear-gradient(top, rgba(254,157,8,1), rgba(254,161,10,1) 50%, rgba(254,164,11,1));
+  background-image: -ms-linear-gradient(top, rgba(254,157,8,1), rgba(254,161,10,1) 50%, rgba(254,164,11,1));
+  background-image: -o-linear-gradient(top, rgba(254,157,8,1), rgba(254,161,10,1) 50%, rgba(254,164,11,1));
+  background-image: linear-gradient(top, rgba(254,157,8,1), rgba(254,161,10,1) 50%, rgba(254,164,11,1));
 }
 .k-blackberry,
 .k-blackberry .k-button,
@@ -190,8 +328,8 @@ html, body {
   background-image: -ms-linear-gradient(top, rgba(241,150,155,1), rgba(230,70,78,0.5) 50%, rgba(222,11,21,0.5) 50%, rgba(183,0,0,0));
   background-image: -o-linear-gradient(top, rgba(241,150,155,1), rgba(230,70,78,0.5) 50%, rgba(222,11,21,0.5) 50%, rgba(183,0,0,0));
   background-image: linear-gradient(top, rgba(241,150,155,1), rgba(230,70,78,0.5) 50%, rgba(222,11,21,0.5) 50%, rgba(183,0,0,0));
-  box-shadow: 0 2px 3px #333;
-  -webkit-box-shadow: 0 2px 3px #333;
+  box-shadow: 0 2px 3px #333333;
+  -webkit-box-shadow: 0 2px 3px #333333;
   z-index: 1;
   text-shadow: none;
 }
@@ -206,7 +344,7 @@ html, body {
 .k-blackberry .k-message {
   -webkit-box-shadow: none;
 }
-.k-blackberry .k-button.k-active, .k-meego .k-button.k-active {
+.k-blackberry .k-button.k-state-active, .k-meego .k-button.k-state-active {
   color: #FFF;
   border-color: #3f9fe5;
   background-color: #1b6ec0;
@@ -224,8 +362,8 @@ html, body {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
-  -webkit-box-shadow: none;
   box-shadow: none;
+  -webkit-box-shadow: none;
   border-color: transparent;
   background: none;
   white-space: nowrap;
@@ -273,7 +411,7 @@ html, body {
   background-image: -o-linear-gradient(top, rgba(64,80,108,1), rgba(141,174,237,1) 6%, rgba(66,132,229,1) 50%, rgba(45,120,228,1) 50%, rgba(45,119,224,1));
   background-image: linear-gradient(top, rgba(64,80,108,1), rgba(141,174,237,1) 6%, rgba(66,132,229,1) 50%, rgba(45,120,228,1) 50%, rgba(45,119,224,1));
 }
-.k-ios .k-buttonStrip .k-button.k-active {
+.k-ios .k-buttonStrip .k-button.k-state-active {
   color: #fff;
   text-shadow: none;
   border-color: #103984 #225199 #225199;
@@ -300,35 +438,41 @@ html, body {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
-  -webkit-box-shadow: 0 0 3px #333;
-  box-shadow: 0 0 3px #333;
+  box-shadow: 0 0 3px #333333;
+  -webkit-box-shadow: 0 0 3px #333333;
 }
 .k-tabStrip {
   text-align: center;
   word-spacing: -1em;
 }
-.k-tabStrip:-moz-first-node, :-moz-first-node ~ .k-tabStrip {
-  display: table;
+.k-tabContainer {
+  -moz-box-flex: 1;
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+}
+.k-tabStrip .k-button {
   word-spacing: normal;
 }
-.k-tabStrip:-moz-first-node > .k-button, :-moz-first-node ~ .k-tabStrip > .k-button {
-  display: table-cell;
-}
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-  .k-tabStrip {
+  .k-showcase {
+    position: absolute;
+  }
+  .k-tabContainer {
     display: table;
     word-spacing: normal;
+    width: 100%;
   }
   .k-buttonStrip > .k-button {
     display: inline-block;
   }
 }
-.k-tabStrip > .k-button {
-  text-shadow: none;
-  word-spacing: normal;
-}
 .k-toolbar {
   padding: .5em;
+  -moz-box-flex: 1;
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
@@ -345,8 +489,16 @@ html, body {
 .k-ios .k-toolbar .k-button {
   background-color: #8891be;
 }
-.k-ios .k-toolbar .k-button.k-active {
+.k-ios .k-toolbar .k-button.k-state-active {
   background-color: #a8b1de;
+}
+.k-android .k-toolbar {
+  background-color: #9b9b9b;
+  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(155,155,155,1)), color-stop(1, rgba(131,131,131,1)));
+  background-image: -moz-linear-gradient(top, rgba(155,155,155,1), rgba(131,131,131,1));
+  background-image: -ms-linear-gradient(top, rgba(155,155,155,1), rgba(131,131,131,1));
+  background-image: -o-linear-gradient(top, rgba(155,155,155,1), rgba(131,131,131,1));
+  background-image: linear-gradient(top, rgba(155,155,155,1), rgba(131,131,131,1));
 }
 .k-ios .k-tabStrip {
   padding: .2em 0;
@@ -361,11 +513,11 @@ html, body {
   padding: 0;
   background-color: #222;
   border-bottom: 2pt solid #7a7a7a;
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(39,39,39,0.8)), color-stop(1, rgba(15,15,15,0.8)));
-  background-image: -moz-linear-gradient(top, rgba(39,39,39,0.8), rgba(15,15,15,0.8));
-  background-image: -ms-linear-gradient(top, rgba(39,39,39,0.8), rgba(15,15,15,0.8));
-  background-image: -o-linear-gradient(top, rgba(39,39,39,0.8), rgba(15,15,15,0.8));
-  background-image: linear-gradient(top, rgba(39,39,39,0.8), rgba(15,15,15,0.8));
+  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(39,39,39,1)), color-stop(1, rgba(14,12,15,1)));
+  background-image: -moz-linear-gradient(top, rgba(39,39,39,1), rgba(14,12,15,1));
+  background-image: -ms-linear-gradient(top, rgba(39,39,39,1), rgba(14,12,15,1));
+  background-image: -o-linear-gradient(top, rgba(39,39,39,1), rgba(14,12,15,1));
+  background-image: linear-gradient(top, rgba(39,39,39,1), rgba(14,12,15,1));
 }
 .k-blackberry .k-tabStrip, .k-meego .k-tabStrip {
   padding: .2em;
@@ -394,6 +546,7 @@ html, body {
   padding: .1em .6em;
   min-width: 6em;
   margin: 0 2%;
+  text-shadow: none;
 }
 .k-tabStrip .k-message {
   font-size: .8em;
@@ -423,13 +576,18 @@ html, body {
   padding: .1em;
   margin: 0 1%;
 }
-.k-ios .k-tabStrip .k-button.k-active {
+.k-ios .k-tabStrip .k-button.k-state-active {
   color: #FFF;
   background: rgba(100, 100, 100, 0.5);
 }
-.k-android .k-tabStrip .k-button.k-active {
+.k-android .k-tabStrip .k-button.k-state-active {
   color: #FFF;
-  background: #646464;
+  background: #9a9a9a;
+  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(154,154,154,1)), color-stop(1, rgba(126,126,126,1)));
+  background-image: -moz-linear-gradient(top, rgba(154,154,154,1), rgba(126,126,126,1));
+  background-image: -ms-linear-gradient(top, rgba(154,154,154,1), rgba(126,126,126,1));
+  background-image: -o-linear-gradient(top, rgba(154,154,154,1), rgba(126,126,126,1));
+  background-image: linear-gradient(top, rgba(154,154,154,1), rgba(126,126,126,1));
 }
 .k-blackberry .k-tabStrip .k-text, .k-meego .k-tabStrip .k-text {
   display: none;
@@ -439,6 +597,98 @@ html, body {
 }
 .k-tabStrip .k-button:last-child {
   border-right: 0;
+}
+.k-list {
+  color: #000;
+  padding: 0;
+  margin: 0;
+}
+.k-item {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  border-bottom: 1px solid #E9E9E9;
+  position: relative;
+}
+.k-ios .k-item {
+  line-height: 1.3em;
+}
+.k-android .k-item {
+  line-height: 2.6em;
+  border-bottom: 1px solid #444;
+}
+.k-item label {
+  display: block;
+}
+.k-ios .k-item label {
+  line-height: 36px;
+  padding-left: 36px;
+}
+.k-android .k-item label {
+  line-height: 56px;
+  padding-left: 56px;
+}
+.k-default-content {
+  padding: 1em;
+}
+.k-list, .k-contentIn, .k-slot {
+  background: #fff;
+}
+.k-android .k-list {
+  color: #fff;
+}
+.k-ios .k-list .k-item {
+  height: 36px;
+}
+.k-android .k-list .k-item {
+  height: 56px;
+}
+.k-android .k-list,
+.k-android .k-slot,
+.k-android .k-contentIn,
+.k-android body {
+  color: #fff;
+  background: #000;
+}
+input[type=checkbox] {
+  display: none;
+  width: 36px;
+  height: 36px;
+  margin-left: .4em;
+}
+.k-item label:before, .k-item label.k-item-checked:after {
+  position: absolute;
+  content: " ";
+  display: block;
+  top: 50%;
+  left: .6em;
+  width: 36px;
+  height: 36px;
+  margin-top: -18px;
+}
+.k-android .k-item label:before {
+  border: 1px solid #000;
+  background-color: #363636;
+  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(54,54,54,1)), color-stop(1, rgba(43,43,43,1)));
+  background-image: -moz-linear-gradient(top, rgba(54,54,54,1), rgba(43,43,43,1));
+  background-image: -ms-linear-gradient(top, rgba(54,54,54,1), rgba(43,43,43,1));
+  background-image: -o-linear-gradient(top, rgba(54,54,54,1), rgba(43,43,43,1));
+  background-image: linear-gradient(top, rgba(54,54,54,1), rgba(43,43,43,1));
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  box-shadow: 0 0 1px 2px #808080;
+  -webkit-box-shadow: 0 0 1px 2px #808080;
+}
+.k-ios label.k-item-checked:after {
+  background: transparent url("images/ios-sprite.png") 0 -10px no-repeat;
+}
+.k-android label.k-item-checked:after {
+  background: transparent url("images/android-sprite.png") 0 -36px no-repeat;
 }
 .k-tabStrip .k-button .k-icon {
   display: block;
@@ -470,10 +720,10 @@ html, body {
   opacity: 0.5;
   background: transparent url('../examples/images/atabimg.png') no-repeat 0.5em 50%;
 }
-.k-tabStrip .k-button.k-active .k-icon {
+.k-tabStrip .k-button.k-state-active .k-icon {
   opacity: 1;
 }
-.k-ios .k-tabStrip .k-active .k-icon {
+.k-ios .k-tabStrip .k-state-active .k-icon {
   background-image: url('../examples/images/itabimg.png');
 }
 .k-android .k-tabStrip .k-button:nth-child(1) .k-icon {
