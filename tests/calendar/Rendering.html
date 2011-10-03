@@ -541,6 +541,15 @@
                 ok(!cells.eq(1).hasClass("k-other-month"));
             });
 
+            test("_footer should render footer link", function() {
+                var div = new kendo.ui.Calendar($("<div/>")).element;
+
+                ok(div.find(".k-footer")[0]);
+                ok(div.find(".k-footer").children().length, 1);
+                ok(div.find(".k-footer").children()[0].nodeName, "a");
+                ok(div.find(".k-footer").children().html(),kendo.toString(new Date(), "D"));
+                ok(div.find(".k-footer").children().attr("title"),kendo.toString(new Date(), "D"));
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
