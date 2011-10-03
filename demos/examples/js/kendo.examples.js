@@ -481,6 +481,7 @@ function initializeNavigation (normalizedUrl) {
     });
 }
 
+// BEGIN NAVIGATION
 var categories = {
     controls: [
         {
@@ -906,3 +907,4 @@ var categories = {
         }
     }
 };
+// END NAVIGATION
