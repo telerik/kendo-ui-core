@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="contenk-type" content="text/html; charset=utf-8">
         <title>DatePicker</title>
         <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
@@ -14,42 +14,52 @@
         <link href="../styles/kendo.kendo.css" rel="stylesheet" />
     </head>
     <body>
-        <div style="width: 200px;" class="t-widget t-datepicker t-header">
-            <div class="t-picker-wrap t-state-default">
-                <input type="text" value="date" class="t-input" />
-                <span class="t-select t-header">
-                    <span class="t-icon t-icon-calendar">select</span>
+        <style type="text/css">
+            .k-weekend {
+                background-color: gray;
+            }
+
+            .k-today {
+                background-color: yellow;
+            }
+        </style>
+
+        just html!
+        <br />
+        <div style="width: 200px;" class="k-widget k-datepicker k-header">
+            <div class="k-picker-wrap k-state-default">
+                <input type="text" value="date" class="k-input" />
+                <span class="k-select k-header">
+                    <span class="k-icon k-icon-calendar">select</span>
                 </span>
             </div>
         </div>
 
         <br />
 
-        <div style="width: 200px;" class="t-widget t-datepicker t-header">
-            <div class="t-picker-wrap t-state-default">
-                <input type="text" value="date" class="t-input" />
-                <span class="t-select t-header">
-                    <span class="t-icon t-icon-clock">select</span>
+        <div style="width: 200px;" class="k-widget k-datepicker k-header">
+            <div class="k-picker-wrap k-state-default">
+                <input type="text" value="date" class="k-input" />
+                <span class="k-select k-header">
+                    <span class="k-icon k-icon-clock">select</span>
                 </span>
             </div>
         </div>
 
         <br />
 
-        <div style="width: 200px;" class="t-widget t-datetimepicker t-header">
-            <div class="t-picker-wrap t-state-default">
-                <input type="text" value="date" class="t-input" />
-                <span class="t-select t-header">
-                    <span class="t-icon t-icon-calendar">select</span>
+        <div style="width: 200px;" class="k-widget k-datetimepicker k-header">
+            <div class="k-picker-wrap k-state-default">
+                <input type="text" value="date" class="k-input" />
+                <span class="k-select k-header">
+                    <span class="k-icon k-icon-calendar">select</span>
                 </span>
-                <span class="t-select t-header">
-                    <span class="t-icon t-icon-clock">select</span>
+                <span class="k-select k-header">
+                    <span class="k-icon k-icon-clock">select</span>
                 </span>
             </div>
         </div>
-        <table id="calendar">
-        </table>
-        <button id="render">Render</button>
+
         <hr/>
         <input id="datepicker" style="width: 150px"/>
         <input id="datepicker2" style="width: 150px"/>
