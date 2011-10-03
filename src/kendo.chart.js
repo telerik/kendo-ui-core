@@ -4181,12 +4181,13 @@
                     value = chart.pointValue(currentData);
                     sectorAngle = value * anglePerValue;
                     currentCategory = defined(currentData.name) ? currentData.name : "";
+                    explode = defined(currentData.explode) ? currentData.explode : false;
                     currentColor = defined(currentData.color) ?
                                           currenData.color :
                                           colors[i % colorsCount];
 
                     callback(value, startAngle, sectorAngle, currentColor,
-                       currentCategory, i, currentSeries, seriesIx);
+                       currentCategory, i, currentSeries, seriesIx, explode);
                     startAngle += sectorAngle;
                 }
             }
@@ -4222,6 +4223,7 @@
             segment.series = series;
             segment.seriesIx = seriesIx;
             segment.owner = chart;
+            segment.explode = explode;
             segment.dataItem = series.dataItems ?
                 series.dataItems[categoryIx] : { value: value };
             segment.categoryIx = categoryIx;
@@ -4260,6 +4262,12 @@
                     sector.r + newBox.x1 + padding / 2,
                     sector.r + newBox.y1 + padding / 2
                 );
+
+                if (segment.explode) {
+                    var newSector = sector.clone();
+                    newSector.r = newSector.r * 0.15;
+                    sector.c = newSector.point(newSector.middle());
+                }
 
                 segment.reflow(newBox);
 
