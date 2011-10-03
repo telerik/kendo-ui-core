@@ -347,6 +347,11 @@
 
             link.bind("click", function(e) {
                 e.preventDefault();
+
+                if (that._view.compare(that._viewedValue, today) === 0) {
+                    that._changeView = false;
+                }
+
                 that.value(today);
                 that.trigger(CHANGE);
             });
