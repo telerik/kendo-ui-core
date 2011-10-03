@@ -427,7 +427,7 @@
 
                 cal.value(new Date(1900, 10,10));
 
-                equal(+cal.value(), +value);
+                equal(cal.value(), null);
             });
 
             test("value should not accept value bigger than max", function() {
@@ -436,7 +436,7 @@
 
                 cal.value(new Date(2900, 10,10));
 
-                equal(+cal.value(), +value);
+                equal(cal.value(), null);
             });
 
             test("value should not accept invalid date", function() {
@@ -471,6 +471,21 @@
                 equal(cal._table.find(".k-state-focused").text(), "Nov");
             });
 
+            test("focus should not call navigate if need to focus next cell in current decade view", function() {
+                var value = new Date(2005,10,10),
+                    viewedValue = new Date(2004, 10, 15),
+                    cal = new Calendar(div);
+
+                cal._viewedValue = viewedValue;
+                cal._view = kendo.calendar["decade"];
+
+                stub(cal, {navigate: cal.navigate});
+
+                cal._focusCell(value);
+
+                equal(cal.calls("navigate"), 0);
+            });
+
             test("navigate should not re-render view if it was not changed", function() {
                 var value = new Date(2000, 10, 10),
                     cal = new Calendar(div, {value: value});
@@ -478,6 +493,17 @@
                 stub(kendo.calendar.month, "content");
 
                 cal.navigateDown(value);
+
+                equal(kendo.calendar.month.calls("content"), 0);
+            });
+
+            test("navigate should not re-render view if it was not changed", function() {
+                var value = new Date(2000, 10, 10),
+                    cal = new Calendar(div, {value: value, min: value});
+
+                stub(kendo.calendar.month, "content");
+
+                cal.navigateToPast(value);
 
                 equal(kendo.calendar.month.calls("content"), 0);
             });
