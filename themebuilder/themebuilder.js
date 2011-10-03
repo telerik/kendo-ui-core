@@ -12,12 +12,7 @@
                 }
 
                 if (!options.dataSource) {
-                    options.dataSource = new kendo.data.DataSource({
-                        data: [
-                            { text: "white", value: "#ffffff" },
-                            { text: "black", value: "#000000" }
-                        ]
-                    });
+                    options.dataSource = new kendo.data.DataSource({});
                 }
 
                 kendo.ui.ComboBox.fn.init.call(that, element, options);
@@ -29,9 +24,11 @@
 
                 that.wrapper.addClass("k-colorpicker");
             },
+
             _change: function(e) {
                 this._updateColorPreview();
             },
+
             _updateColorPreview: function() {
                 $(this.wrapper).find(".k-arrow-down")
                     .css("backgroundColor", this.value());
@@ -40,8 +37,9 @@
         rgbValuesRe = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/gi,
         LessConstants = kendo.Observable.extend({
             init: function(constants) {
-                this.constants = constants;
+                this.constants = constants || [];
             },
+
             update: function(name, value) {
                 var prefix = name.split("-")[0],
                     property = name.split("-").slice(1).join("-"),
@@ -62,6 +60,7 @@
                         }
                     }
             },
+
             serialize: function() {
                 var result = [],
                     constants = this.constants,
@@ -77,6 +76,26 @@
 
                 return result.join("\n");
             },
+
+            colors: function() {
+                var constants = this.constants,
+                    properties,
+                    i, j,
+                    result = [];
+
+                for (i = 0; i < constants.length; i++) {
+                    properties = constants[i].properties;
+
+                    for (j = 0; j < properties.length; j++) {
+                        if ($.inArray(properties[j].value, result) < 0) {
+                            result.push(properties[j].value);
+                        }
+                    }
+                }
+
+                return result;
+            },
+
             infer: function() {
                 var constants = this.constants, constant,
                     c, i,
@@ -113,6 +132,7 @@
                 }
             }
         }),
+
         ThemeBuilder = kendo.Observable.extend({
             init: function(templateInfo, constants) {
                 var that = this;
@@ -150,11 +170,16 @@
                     })
                     .data("kendoThemeBuilder", that);
 
+                var themeColorsDataSource = new kendo.data.DataSource({
+                    data: constants ? constants.colors() : []
+                });
+
                 $("#stylable-elements")
                     .kendoPanelBar({
                         animation: false
                     })
                     .find("input").kendoColorPicker({
+                        dataSource: themeColorsDataSource,
                         change: proxy(that._propertyChange, that)
                     });
 

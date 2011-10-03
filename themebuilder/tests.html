@@ -91,7 +91,7 @@
                     colorPicker = $("<input />").appendTo(document.body).kendoColorPicker();
                 },
                 teardown: function() {
-                    colorPicker.closest(".k-widget").remove();
+                    $(".k-colorpicker").remove();
                     colorPicker = null;
                 }
             });
@@ -245,6 +245,57 @@
 
                 equals(constants.constants[0].properties[0].value, "#f00");
             });
+
+            test("colors() returns colors from property values", function() {
+                var constants = new LessConstants([{
+                    prefix: "@widget",
+                    properties: [ properties.bgColor ]
+                }]);
+
+                constants.constants[0].properties[0].value = "#f00";
+
+                same(constants.colors(), [ "#f00" ]);
+            });
+
+            test("colors() returns colors from property values", function() {
+                var constants = new LessConstants([{
+                    prefix: "@widget",
+                    properties: [ properties.bgColor, properties.brdColor ]
+                }]);
+
+                constants.constants[0].properties[0].value = "#f00";
+                constants.constants[0].properties[1].value = "#00f";
+
+                same(constants.colors(), [ "#f00", "#00f" ]);
+            });
+
+            test("colors() returns colors for multiple constants", function() {
+                var constants = new LessConstants([{
+                    prefix: "@widget",
+                    properties: [ properties.bgColor ]
+                }, {
+                    prefix: "@header",
+                    properties: [ properties.brdColor ]
+                }]);
+
+                constants.constants[0].properties[0].value = "#f00";
+                constants.constants[1].properties[0].value = "#00f";
+
+                same(constants.colors(), [ "#f00", "#00f" ]);
+            });
+
+            test("colors() returns unique colors", function() {
+                var constants = new LessConstants([{
+                    prefix: "@widget",
+                    properties: [ properties.bgColor, properties.brdColor ]
+                }]);
+
+                constants.constants[0].properties[0].value = "#f00";
+                constants.constants[0].properties[1].value = "#f00";
+
+                same(constants.colors(), [ "#f00" ]);
+            });
+
 
             module("integration", {
                 teardown: cleanup
