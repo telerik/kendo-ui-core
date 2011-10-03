@@ -124,14 +124,18 @@ function updateBaseLocation(html, base) {
 }
 
 function componentFromFilename(file) {
-    var candidate = file.split("/");
-    candidate = candidate[candidate.length - 2];
+    var parts = file.split("/"),
+        candidate = parts[1];
 
-    if (candidate == "overview" || candidate === undefined) {
-        return;
+    var exceptions = [
+        "animation",
+        "integration",
+        "overview"
+    ];
+
+    if (parts.length > 2 && exceptions.indexOf(candidate) == -1) {
+        return candidate;
     }
-
-    return candidate;
 }
 
 function importComponentHelp(exampleHTML, component) {
@@ -139,10 +143,17 @@ function importComponentHelp(exampleHTML, component) {
         return exampleHTML;
 
     var helpFiles = {
-        "templates": "kendo.Template",
+        "animation": "kendo.Animation",
+        "autocomplete": "kendo.ui.AutoComplete",
+        "combobox": "kendo.ui.ComboBox",
+        "dropdownlist": "kendo.ui.DropDownList",
+        "droptarget": "kendo.ui.DropTarget",
         "datasource": "kendo.data.DataSource",
-        //"dragdrop": "kendo.ui.Draggable",
-        "animation": "kendo.Animation"
+        "panelbar": "kendo.ui.PanelBar",
+        "rangeslider": "kendo.ui.RangeSlider",
+        "tabstrip": "kendo.ui.TabStrip",
+        "templates": "kendo.Template",
+        "treeview": "kendo.ui.TreeView"
     };
 
     // merge documentation for multiple components
@@ -152,15 +163,18 @@ function importComponentHelp(exampleHTML, component) {
     }[component];
 
     function helpFileFor(component) {
-        var result = "";
+        var result = "",
+            helpSymbol,
+            helpFile,
+            canonicalName = component[0].toUpperCase() + component.slice(1).toLowerCase();
 
         try {
-            var helpSymbol = (helpFiles[component] || "kendo.ui." + component),
-                helpFile = "docs/symbols/" + helpSymbol + ".html";
+            helpSymbol = (helpFiles[component] || "kendo.ui." + canonicalName);
+            helpFile = "docs/symbols/" + helpSymbol + ".html";
 
             result = fs.readFileSync(helpFile, "utf8");
         } catch (e) {
-            // file does not exist.
+            console.log("Unable to find help file for " + component + ". Tried " + helpFile);
         }
 
         return result;
