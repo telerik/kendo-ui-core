@@ -159,9 +159,22 @@ function buildExamples() {
     var navigation = fs.readFileSync("demos/examples/js/kendo.examples.js", "utf8");
     navigation = navigation.match(/\/\/ BEGIN NAVIGATION([\s\S]*)\/\/ END NAVIGATION/g)[0];
     eval(navigation);
+
+    var categoryTemplate = template(
+        "<h2><#= name #></h2>" +
+        "<ul><# for(var i = 0; i < children.length; i++) { #>" +
+        "<li><#= children[i].text #>" +
+        "<ul>" +
+        "<# for (var k = 0; k < children[i].items.length; k++) { #>" +
+        "<li><a href='<#= children[i].items[k].url #>'><#= children[i].items[k].text #></a></li>" +
+        "<# } #></ul></li>" +
+        "<# } #></ul>");
+
+    var simpleIndex = "";
     for (var c in categories) {
-        
+        simpleIndex += categoryTemplate({ name: c, children: categories[c] });
     }
+    fs.writeFileSync(PATH + "/examples/index.html", simpleIndex);
 }
 
 function processFilesRecursive(dir, filterRegex, callback) {
@@ -179,6 +192,45 @@ function processFilesRecursive(dir, filterRegex, callback) {
             callback(fileName);
         }
     }
+}
+
+function template(template) {
+    var paramName = "data",
+        begin =  "<#",
+        end = "#>",
+        useWithBlock = true,
+        functionBody = "var o;",
+        evalRegExp = /<#=(.+?)#>/g,
+        quoteRegExp = /'(?=[^<"]*#>)/g,
+        newLineTabRegExp = /[\r\t\n]/g;
+
+    if (typeof template === "function") {
+        if (template.length === 2) {
+            //looks like jQuery.template
+            return function(d) {
+                return template($, { data: d }).join("");
+            }
+        }
+        return template;
+    }
+
+    functionBody += useWithBlock ? "with(" + paramName + "){" : "";
+
+    functionBody += "o='";
+
+    functionBody += template.replace(newLineTabRegExp, " ")
+        .replace(quoteRegExp,"\t")
+        .split("'").join("\\'")
+        .split("\t").join("'")
+        .replace(evalRegExp, "'+($1)+'")
+        .split(begin).join("';")
+        .split(end).join("o+='");
+
+    functionBody += useWithBlock ? "';}" : "';";
+
+    functionBody += "return o;";
+
+    return new Function(paramName, functionBody);
 }
 
 function copyTextFile(src, dest) {
