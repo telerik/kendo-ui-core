@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <title>Kendo UI Examples</title>
+</head>
+<body>
+    <h2>
+        <#= name[0].toUpperCase() + name.substring(1) #>
+    </h2>
+    <ul>
+        <# for(var i = 0; i < children.length; i++) { #>
+            <li>
+                <#= children[i].text #>
+                <ul>
+                <# for (var k = 0; k < children[i].items.length; k++) { #>
+                <li>
+                    <a href='<#= children[i].items[k].url #>'>
+                        <#= children[i].items[k].text #>
+                    </a>
+                </li>
+                <# } #>
+            </ul>
+        </li>
+        <# } #>
+    </ul>
+</body>
+</html>

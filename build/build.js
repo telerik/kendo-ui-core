@@ -147,8 +147,8 @@ function processStyles() {
 
 function buildExamples() {
     kendoBuild.copyDirSyncRecursive("demos/examples", PATH + "/examples");
-    copyTextFile("src/jquery.js", PATH + "/examples/js/jquery.js");
-    processFilesRecursive(PATH + "/examples", /\.html$/, function(name) {
+    kendoBuild.copyTextFile("src/jquery.js", PATH + "/examples/js/jquery.js");
+    kendoBuild.processFilesRecursive(PATH + "/examples", /\.html$/, function(name) {
         var data = fs.readFileSync(name, "utf8");
         data = data.replace(/..\/..\/..\/styles/g, "../../source/styles");
         data = data.replace(/..\/..\/..\/src\/jquery.js/g, "../js/jquery.js");
@@ -160,81 +160,17 @@ function buildExamples() {
     navigation = navigation.match(/\/\/ BEGIN NAVIGATION([\s\S]*)\/\/ END NAVIGATION/g)[0];
     eval(navigation);
 
-    var categoryTemplate = template(
-        "<h2><#= name #></h2>" +
-        "<ul><# for(var i = 0; i < children.length; i++) { #>" +
-        "<li><#= children[i].text #>" +
-        "<ul>" +
-        "<# for (var k = 0; k < children[i].items.length; k++) { #>" +
-        "<li><a href='<#= children[i].items[k].url #>'><#= children[i].items[k].text #></a></li>" +
-        "<# } #></ul></li>" +
-        "<# } #></ul>");
+    var indexTemplate = kendoBuild.template(
+        fs.readFileSync("demos/examples/simple-index.html", "utf-8")
+    );
 
-    var simpleIndex = "";
+    var index = "";
     for (var c in categories) {
-        simpleIndex += categoryTemplate({ name: c, children: categories[c] });
-    }
-    fs.writeFileSync(PATH + "/examples/index.html", simpleIndex);
-}
-
-function processFilesRecursive(dir, filterRegex, callback) {
-    var files = fs.readdirSync(dir),
-        fileName,
-        stat;
-
-    for (var i = 0; i < files.length; i++) {
-        var fileName = dir + "/" + files[i];
-        var stat = fs.statSync(fileName);
-
-        if (!stat.isFile()) {
-            processFilesRecursive(fileName, filterRegex, callback);
-        } else if (filterRegex.test(fileName)) {
-            callback(fileName);
+        if (c !== "overview") {
+            index += indexTemplate({ name: c, children: categories[c] });
         }
     }
-}
-
-function template(template) {
-    var paramName = "data",
-        begin =  "<#",
-        end = "#>",
-        useWithBlock = true,
-        functionBody = "var o;",
-        evalRegExp = /<#=(.+?)#>/g,
-        quoteRegExp = /'(?=[^<"]*#>)/g,
-        newLineTabRegExp = /[\r\t\n]/g;
-
-    if (typeof template === "function") {
-        if (template.length === 2) {
-            //looks like jQuery.template
-            return function(d) {
-                return template($, { data: d }).join("");
-            }
-        }
-        return template;
-    }
-
-    functionBody += useWithBlock ? "with(" + paramName + "){" : "";
-
-    functionBody += "o='";
-
-    functionBody += template.replace(newLineTabRegExp, " ")
-        .replace(quoteRegExp,"\t")
-        .split("'").join("\\'")
-        .split("\t").join("'")
-        .replace(evalRegExp, "'+($1)+'")
-        .split(begin).join("';")
-        .split(end).join("o+='");
-
-    functionBody += useWithBlock ? "';}" : "';";
-
-    functionBody += "return o;";
-
-    return new Function(paramName, functionBody);
-}
-
-function copyTextFile(src, dest) {
-    fs.writeFileSync(dest, fs.readFileSync(src, "utf8"), "utf8");
+    fs.writeFileSync(PATH + "/examples/index.html", index);
 }
 
 console.log("build initiated.");
