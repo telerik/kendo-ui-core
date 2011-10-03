@@ -34,9 +34,8 @@
 
             that._template();
 
-            that.ul = $('<ul class="k-list"/>')
-                        .attr(ID, that.element.attr(ID) + "-list")
-                        .css("overflow", "auto")
+            that.ul = $('<ul class="k-list k-reset"/>')
+                        .css({ overflow: "auto" })
                         .mousedown(function() {
                             setTimeout(function() {
                                 clearTimeout(that._bluring);
@@ -45,6 +44,10 @@
                         .delegate(LI, "click", proxy(that._click, that))
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
+
+            that.list = $("<div class='k-listContainer'/>")
+                            .attr(ID, that.element.attr(ID) + "-list")
+                            .append(that.ul);
 
             $(document.documentElement).bind("mousedown", proxy(that._mousedown, that));
         },
@@ -130,16 +133,17 @@
             if (length) {
                 var that = this,
                     ul = that.ul,
-                    parent = ul.parent(".k-animation-container"),
+                    list = that.list,
+                    parent = list.parent(".k-animation-container"),
                     height = that.options.height;
 
                 if (that.popup.visible()) {
-                    ul.height(ul[0].scrollHeight > height ? height : "auto");
+                    list.height(ul[0].scrollHeight > height ? height : "auto");
                     parent.height(height);
                 } else {
-                    ul.show()
-                      .height(ul[0].scrollHeight > height ? height : "auto")
-                      .hide();
+                    list.show()
+                        .height(ul[0].scrollHeight > height ? height : "auto")
+                        .hide();
 
                     parent.show().height(height).hide();
                 }
@@ -148,9 +152,10 @@
 
         _popup: function() {
             var that = this,
-                ul = that.ul,
+                list = that.list,
+
                 zIndex = "auto",
-                borders,
+                width,
                 options = that.options,
                 wrapper = that.wrapper;
 
@@ -163,16 +168,16 @@
                 }
             });
 
-            that.popup = new ui.Popup(ul, {
+            that.popup = new ui.Popup(list, {
                 anchor: wrapper,
                 open: options.open,
                 close: options.close
             });
 
-            borders = (parseInt(ul.css('border-left-width'), 10) || 0) + (parseInt(ul.css('border-right-width'), 10) || 0);
+            width = wrapper.width() - (list.outerWidth() - list.width());
 
-            ul.css({
-                width: wrapper.outerWidth() - borders,
+            list.css({
+                width: width,
                 zIndex: zIndex
             });
         },
@@ -245,18 +250,18 @@
 
             if (!item) return;
 
-            var ul = this.ul[0],
+            var list = this.list[0],
                 itemOffsetTop = item.offsetTop,
                 itemOffsetHeight = item.offsetHeight,
-                ulScrollTop = ul.scrollTop,
-                ulOffsetHeight = ul.clientHeight,
+                listScrollTop = list.scrollTop,
+                listOffsetHeight = list.clientHeight,
                 bottomDistance = itemOffsetTop + itemOffsetHeight;
 
-            ul.scrollTop = ulScrollTop > itemOffsetTop
+            list.scrollTop = listScrollTop > itemOffsetTop
                         ? itemOffsetTop
-                        : bottomDistance > (ulScrollTop + ulOffsetHeight)
-                        ? bottomDistance - ulOffsetHeight
-                        : ulScrollTop;
+                        : bottomDistance > (listScrollTop + listOffsetHeight)
+                        ? bottomDistance - listOffsetHeight
+                        : listScrollTop;
         },
 
         _template: function() {
@@ -293,7 +298,7 @@
 
         selectText: function (element, selectionStart, selectionEnd) {
             if (element.createTextRange) {
-                textRange = element.createTextRange();
+                var textRange = element.createTextRange();
                 textRange.collapse(true);
                 textRange.moveStart(CHARACTER, selectionStart);
                 textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);

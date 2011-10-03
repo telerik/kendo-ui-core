@@ -20,7 +20,7 @@
         FITTED = "fitted",
         EFFECTS = "effects",
         ACTIVE = "k-state-active",
-        ACTIVEBORDER = "k-state-active-border",
+        ACTIVEBORDER = "k-state-border",
         ACTIVECHILDREN = ".k-dropdown-wrap, .k-link",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         extend = $.extend,
