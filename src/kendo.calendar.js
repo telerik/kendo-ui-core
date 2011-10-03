@@ -17,7 +17,7 @@
         CELLSELECTOR = "td:has(.k-link)",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
-        cellTemplate = template('<td<#=data.otherMonth#>><a class="k-link" href="#" data-value="<#=data.dateString#>"><#=data.value#></a></td>');
+        cellTemplate = template('<td<#=data.cssClass#>><a class="k-link" href="#" data-value="<#=data.dateString#>"><#=data.value#></a></td>');
         cellEmptyTemplate = template("<td> </td>");
         msPerMinute = 60000,
         msPerDay = 86400000,
@@ -378,7 +378,7 @@
                 month = that.options.month;
 
             that.month = {
-                content: template('<td<#=data.otherMonth#>><a class="k-link" href="#" data-value="<#=data.dateString#>" title="<#=data.title#>">' + month.content + '</a></td>'),
+                content: template('<td<#=data.cssClass#>><a class="k-link" href="#" data-value="<#=data.dateString#>" title="<#=data.title#>">' + month.content + '</a></td>'),
                 empty: template("<td>" + month.empty + "</td>")
             };
         }
@@ -448,11 +448,14 @@
                     firstDayOfMonth = that.first(date),
                     lastDayOfMonth = that.last(date),
                     toDateString = that.toDateString,
+                    today = new DATE(),
                     html = '<table class="k-content"><thead><tr>';
 
                 for (; idx < 7; idx++) {
                     html += '<th abbr="' + abbr[idx] + '" scope="col" title="' + names[idx] + '">' + short[idx] + '</th>';
                 }
+
+                today = +new DATE(today.getFullYear(), today.getMonth(), today.getDate());
 
                 return view({
                     cells: 42,
@@ -464,13 +467,28 @@
                     content: options.content,
                     empty: options.empty,
                     setter: that.setDate,
-                    build: function(date) {
+                    build: function(date, idx) {
+                        var cssClass = [],
+                            day = date.getDay();
+
+                        if (date < firstDayOfMonth || date > lastDayOfMonth) {
+                            cssClass.push("k-other-month");
+                        }
+
+                        if (+date === today) {
+                            cssClass.push("k-today");
+                        }
+
+                        if (day === 0 || day === 6) {
+                            cssClass.push("k-weekend");
+                        }
+
                         return {
                             date: date,
                             title: kendo.toString(date, "D"),
                             value: date.getDate(),
                             dateString: toDateString(date),
-                            otherMonth: date < firstDayOfMonth || date > lastDayOfMonth ? OTHERMONTH : ''
+                            cssClass: cssClass[0] ? ' class="' + cssClass.join(" ") + '"' : ""
                         };
                     }
                 });
@@ -529,7 +547,7 @@
                         return {
                             value: namesAbbr[date.getMonth()],
                             dateString: toDateString(date),
-                            otherMonth: ""
+                            cssClass: ""
                         };
                     }
                 });
@@ -577,7 +595,7 @@
                         return {
                             value: date.getFullYear(),
                             dateString: toDateString(date),
-                            otherMonth: idx == 0 || idx == 11 ? OTHERMONTH : ""
+                            cssClass: idx == 0 || idx == 11 ? OTHERMONTH : ""
                         };
                     }
                 });
@@ -631,7 +649,7 @@
                         return {
                             value: year + "-" + (year + 9),
                             dateString: toDateString(date),
-                            otherMonth: idx == 0 || idx == 11 ? OTHERMONTH : ""
+                            cssClass: idx == 0 || idx == 11 ? OTHERMONTH : ""
                         };
                     }
                 });

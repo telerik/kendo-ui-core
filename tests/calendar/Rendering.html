@@ -311,6 +311,39 @@
                 equal(cell.children().data("value"), "9/1/2011");
             });
 
+            test("month view renders k-today if today is in the current view", function() {
+                var today = new Date();
+
+                div.html(calendar.month.content({
+                    date: today,
+                    empty: template.empty,
+                    min: new Date(1900,0,1),
+                    max: new Date(2900,0,1),
+                    content: template.content
+                }));
+
+                var cell = div.find("tbody").find("td.k-today");
+
+                equal(cell.length, 1);
+                equal(cell.children().text(), today.getDate());
+            });
+
+            test("month view renders k-weekend", function() {
+                var today = new Date(2011, 9, 10);
+
+                div.html(calendar.month.content({
+                    date: today,
+                    empty: template.empty,
+                    min: new Date(1900,0,1),
+                    max: new Date(2900,0,1),
+                    content: template.content
+                }));
+
+                var cell = div.find("tbody").find("td.k-weekend");
+
+                equal(cell.length, 12);
+            });
+
             test("year view renders title", function() {
                 var today = new Date(2011, 9, 10);
 
