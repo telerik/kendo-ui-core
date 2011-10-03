@@ -155,6 +155,13 @@ function buildExamples() {
         data = data.replace(/..\/..\/..\/src/g, "../../source/js");
         fs.writeFileSync(name, data);
     });
+
+    var navigation = fs.readFileSync("demos/examples/js/kendo.examples.js", "utf8");
+    navigation = navigation.match(/\/\/ BEGIN NAVIGATION([\s\S]*)\/\/ END NAVIGATION/g)[0];
+    eval(navigation);
+    for (var c in categories) {
+        
+    }
 }
 
 function processFilesRecursive(dir, filterRegex, callback) {
