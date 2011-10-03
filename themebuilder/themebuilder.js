@@ -135,7 +135,8 @@
 
         ThemeBuilder = kendo.Observable.extend({
             init: function(templateInfo, constants) {
-                var that = this;
+                var that = this,
+                    themeColorsDataSource;
 
                 that.templateInfo = templateInfo;
 
@@ -170,8 +171,10 @@
                     })
                     .data("kendoThemeBuilder", that);
 
-                var themeColorsDataSource = new kendo.data.DataSource({
-                    data: constants ? constants.colors() : []
+                themeColorsDataSource = new kendo.data.DataSource({
+                    data: constants ? constants.colors().map(function(x) {
+                        return { text: x, value: x };
+                    }) : []
                 });
 
                 $("#stylable-elements")
