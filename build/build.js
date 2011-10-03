@@ -161,7 +161,7 @@ function buildExamples() {
     eval(navigation);
 
     var indexTemplate = kendoBuild.template(
-        fs.readFileSync("demos/examples/simple-index.html", "utf-8")
+        fs.readFileSync("build/simple-index.html", "utf-8")
     );
 
     var index = "";
