@@ -115,20 +115,23 @@ body,
     -webkit-transform: translate3d(0,0,0);
 }
 
-.k-header
-{
-    display: block;
-    display: ~"table-row\9";
-    padding: 0;
-    height: ~"1px\9";
-}
-
+.k-header,
 .k-footer
 {
     display: block;
     display: ~"table-row\9";
-    background: #1a1a1a;
+    min-height: ~"50px\9";
     height: ~"1px\9";
+}
+
+.k-header
+{
+    padding: 0;
+}
+
+.k-footer
+{
+    background: #1a1a1a;
 }
 
 .k-slot,
