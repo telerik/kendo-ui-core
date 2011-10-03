@@ -76,7 +76,11 @@
         /* missing constants:
          * @gradientUrl: "..."; // on Telerik CDN
          * @image-folder: "BlueOpal"; // we should think of something that allows us to change the gradients
-         * @shadow-color: #aaa;
+        * @loading-panel-color: #fff;
+        * @shadow-color: #aaa;
+        * @shadow-inset-color: #555;
+        * @shadow-light-color: #aaa;
+        * @input-text-color: #000;
          */
 
         return [{
@@ -131,7 +135,7 @@
         }, {
             prefix: "@group",
             title: "Item groups",
-            properties: returnProperties([BGCOLOR])
+            properties: returnProperties([BGCOLOR, BORDERCOLOR])
         }, {
             prefix: "@input",
             title: "Textboxes",

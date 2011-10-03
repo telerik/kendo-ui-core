@@ -31,12 +31,28 @@
     margin: .6em 0 0;
 }
 
+.k-color-preview,
 .k-colorpicker .k-arrow-down
 {
     border: 1px solid #aaa;
     background-image: none;
-    margin-top: 1px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+}
+
+.k-color-preview
+{
+    margin-right: .2em;
+}
+
+.k-colorpicker .k-arrow-down
+{
+    margin-top: 1px;
+}
+
+.k-colorpicker .k-input,
+.k-color-name
+{
+    font: 12px Consolas, Courier, monospace;
 }
