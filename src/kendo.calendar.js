@@ -43,7 +43,9 @@
 
             that._header();
 
-            //that._footer();
+            if (options.footer) {
+                that._footer();
+            }
 
             that.element
                 .delegate(CELLSELECTOR, MOUSEENTER, mouseenter)
@@ -66,6 +68,7 @@
             value: null,
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
+            footer : true,
             depth: MONTH,
             startView: MONTH,
             month: {
@@ -190,7 +193,7 @@
                 that._table = newTable;
 
                 if (!oldTable) {
-                    that.element.append(newTable);
+                    newTable.insertAfter(title.closest(".k-header"));
                 } else {
                     that._animate(oldTable, newTable, isFuture, differentView);
                 }
@@ -324,6 +327,29 @@
             }
 
             that._setClass("k-state-focused", view.toDateString(value));
+        },
+
+        _footer: function() {
+            var that = this,
+            element = that.element,
+            today = new DATE(),
+            dateString = kendo.toString(today, "D"),
+            link;
+
+            if (!element.find(".k-footer")[0]) {
+                element.append('<div class="k-footer"><a href="#" class="k-link k-nav-today"></a></div>');
+            }
+
+            link = element.find(".k-nav-today");
+
+            link.html(dateString);
+            link.attr("title", dateString);
+
+            link.bind("click", function(e) {
+                e.preventDefault();
+                that.value(today);
+                that.trigger(CHANGE);
+            });
         },
 
         _header: function() {
