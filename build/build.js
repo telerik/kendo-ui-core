@@ -145,6 +145,39 @@ function processStyles() {
     });
 }
 
+function buildExamples() {
+    kendoBuild.copyDirSyncRecursive("demos/examples", PATH + "/examples");
+    copyTextFile("src/jquery.js", PATH + "/examples/js/jquery.js");
+    processFilesRecursive(PATH + "/examples", /\.html$/, function(name) {
+        var data = fs.readFileSync(name, "utf8");
+        data = data.replace(/..\/..\/..\/styles/g, "../../source/styles");
+        data = data.replace(/..\/..\/..\/src\/jquery.js/g, "../js/jquery.js");
+        data = data.replace(/..\/..\/..\/src/g, "../../source/js");
+        fs.writeFileSync(name, data);
+    });
+}
+
+function processFilesRecursive(dir, filterRegex, callback) {
+    var files = fs.readdirSync(dir),
+        fileName,
+        stat;
+
+    for (var i = 0; i < files.length; i++) {
+        var fileName = dir + "/" + files[i];
+        var stat = fs.statSync(fileName);
+
+        if (!stat.isFile()) {
+            processFilesRecursive(fileName, filterRegex, callback);
+        } else if (filterRegex.test(fileName)) {
+            callback(fileName);
+        }
+    }
+}
+
+function copyTextFile(src, dest) {
+    fs.writeFileSync(dest, fs.readFileSync(src, "utf8"), "utf8");
+}
+
 console.log("build initiated.");
 createDirectories();
 
@@ -165,9 +198,8 @@ console.log("copying license agreement...");
 var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");
 fs.writeFileSync(PATH + "/Kendo\ Beta\ EULA.pdf", data);
 
-//examples
 console.log("building examples...");
-examples.build(SOURCE, PATH + "/examples");
+buildExamples();
 
 console.log("building online examples...");
 examples.build(PATH, ONLINEEXAMPLES, KENDOCDN);
