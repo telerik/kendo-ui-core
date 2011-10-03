@@ -159,7 +159,7 @@
          * @option {Integer} [minWidth] <50> The minimum width that may be achieved by resizing the window.
          * @option {Integer} [minHeight] <50> The minimum height that may be achieved by resizing the window.
          * @option {String} [contentUrl] Specifies a URL that the window should load its content from. For remote URLs, a container iframe element is automatically created.
-         * @option {Array<String>} [actions] <"Close"> The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize", "Maximize".
+         * @option {Array<String>} [actions] <"Close"> The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Maximize".
          * @option {String} [title] The text in the window title bar.
          * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
          * @option {Animation} [animation.open] The animation that will be used when the window opens.
