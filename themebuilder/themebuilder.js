@@ -12,7 +12,7 @@
                 }
 
                 if (!options.dataSource) {
-                    options.dataSource = new kendo.data.DataSource({});
+                    options.dataSource = [];
                 }
 
                 kendo.ui.ComboBox.fn.init.call(that, element, options);
@@ -20,13 +20,22 @@
                 that._updateColorPreview();
 
                 that.bind(CHANGE, proxy(that._change, that));
-                that.bind([ CHANGE ], that.options);
 
                 that.wrapper.addClass("k-colorpicker");
             },
 
             _change: function(e) {
-                this._updateColorPreview();
+                var that = this;
+
+                that._updateColorPreview();
+
+                // trigger change event?
+                if (that.options.change) {
+                    that.options.change.call(that, {
+                        name: that.element.attr("id"),
+                        value: that.element.val()
+                    });
+                }
             },
 
             _updateColorPreview: function() {
@@ -183,6 +192,8 @@
                     })
                     .find("input").kendoColorPicker({
                         dataSource: themeColorsDataSource,
+                        template: "<span style='background-color: ${ data.value }' class='k-icon k-color-preview'></span> " +
+                                  "<span class='k-color-name'>${ data.text }</span>",
                         change: proxy(that._propertyChange, that)
                     });
 
@@ -207,7 +218,7 @@
                 that.constants.update(e.name, e.value);
 
                 parser.parse(that.constants.serialize() +
-                    '\n@image-folder: "BlueOpal";\n@loading-panel-color: #fff;\n@shadow-color: #aaa;\n' +
+                    '\n@image-folder: "BlueOpal";\n@loading-panel-color: #fff;\n@shadow-color: #aaa;\n@shadow-inset-color: #555;\n@shadow-light-color: #aaa;\n@input-text-color: #000;\n' +
                     that.templateInfo.template, function (err, tree) {
                     if (err) {
                         return console.error(err);
