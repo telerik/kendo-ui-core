@@ -45,6 +45,10 @@ var categories = {
                     url: "chart/index.html"
                 },
                 {
+                    text: "Pie Chart",
+                    url: "chart/pie-chart.html"
+                },
+                {
                     text: "Binding to local data",
                     url: "chart/local-data.html"
                 },
