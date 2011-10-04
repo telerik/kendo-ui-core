@@ -68,9 +68,12 @@ function splitScriptRegion(exampleHTML, base) {
 
     allScripts = currentPageScripts + baseScripts;
 
+    allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/people\.js"><\/script>/g, "");
+    allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/kendo\.console\.js"><\/script>/g, "");
+
     if (KENDOCDN) {
         allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/people\.min\.js"><\/script>/g, "");
-        allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/kendo.console\.min\.js"><\/script>/g, "");
+        allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/kendo\.console\.min\.js"><\/script>/g, "");
 
         allScripts = allScripts.replace(/<script src="([..\/]*)js\/jquery\.min\.js"><\/script>/g, "");
         allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/kendo.(?!examples)(\w)+(\.\w+)*(\.min)*.js"><\/script>/g, "");
@@ -319,11 +322,13 @@ function copyResources(source, destination, processCallback, filterRegExp) {
 
                 data = processCallback(data, file);
 
-                if (KENDOCDN) {
-                    file = file.replace(/\.(css|js)$/, ".min.$1");
-                }
+                if (data) {
+                    if (KENDOCDN) {
+                        file = file.replace(/\.(css|js)$/, ".min.$1");
+                    }
 
-                fs.writeFileSync(destination + file, data, "utf8");
+                    fs.writeFileSync(destination + file, data, "utf8");
+                }
             }
         });
 }
@@ -396,30 +401,27 @@ function build(origin, destination, kendoCDN) {
             return data;
         }, /\.css$/);
 
+    var exampleScripts = ["kendo.examples.nav.js", "kendo.console.js", "people.js"];
     copyResources(
         examplesLocation + "/js/",
         outputPath + "/js/",
         function(data, file) {
-            if (kendoCDN) {
-                console.log("compressing " + file + "...");
-
-                data = kendoBuild.minifyJs(data);
+            if (file === "kendo.examples.js") {
+                exampleScripts.forEach(function(script) {
+                    data += ";" + kendoBuild.readText(examplesLocation + "/js/" + script);
+                });
             }
 
-            return data;
+            if (exampleScripts.indexOf(file) == -1)
+            {
+                if (kendoCDN) {
+                    console.log("compressing " + file + "...");
+                    data = kendoBuild.minifyJs(data);
+                }
+
+                return data;
+            }
         }, /\.js$/);
-
-    if (kendoCDN) {
-        var exampleJS = fs.readFileSync(outputPath + "/js/kendo.examples.min.js", "utf8"),
-            consoleJS = fs.readFileSync(outputPath + "/js/kendo.console.min.js", "utf8"),
-            peopleJS = fs.readFileSync(outputPath + "/js/people.min.js", "utf8");
-
-        exampleJS += ";" + consoleJS + ";" + peopleJS;
-
-        fs.writeFileSync(outputPath + "/js/kendo.examples.min.js", exampleJS, "utf8");
-        fs.unlinkSync(outputPath + "/js/kendo.console.min.js");
-        fs.unlinkSync(outputPath + "/js/people.min.js", "utf8");
-    }
 
     docs.build();
 
