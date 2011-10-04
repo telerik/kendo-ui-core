@@ -145,6 +145,33 @@ function processStyles() {
     });
 }
 
+function buildExamples() {
+    kendoBuild.copyDirSyncRecursive("demos/examples", PATH + "/examples");
+    kendoBuild.copyTextFile("src/jquery.js", PATH + "/examples/js/jquery.js");
+    kendoBuild.processFilesRecursive(PATH + "/examples", /\.html$/, function(name) {
+        var data = fs.readFileSync(name, "utf8");
+        data = data.replace(/..\/..\/..\/styles/g, "../../source/styles");
+        data = data.replace(/..\/..\/..\/src\/jquery.js/g, "../js/jquery.js");
+        data = data.replace(/..\/..\/..\/src/g, "../../source/js");
+        fs.writeFileSync(name, data);
+    });
+
+    var navigation = fs.readFileSync("demos/examples/js/kendo.examples.nav.js", "utf8");
+    eval(navigation);
+
+    var indexTemplate = kendoBuild.template(
+        fs.readFileSync("demos/examples/simple-index.html", "utf-8")
+    );
+
+    var index = "";
+    for (var c in categories) {
+        if (c !== "overview") {
+            index += indexTemplate({ name: c, children: categories[c] });
+        }
+    }
+    fs.writeFileSync(PATH + "/examples/index.html", index);
+}
+
 console.log("build initiated.");
 createDirectories();
 
@@ -165,9 +192,8 @@ console.log("copying license agreement...");
 var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");
 fs.writeFileSync(PATH + "/Kendo\ Beta\ EULA.pdf", data);
 
-//examples
 console.log("building examples...");
-examples.build(SOURCE, PATH + "/examples");
+buildExamples();
 
 console.log("building online examples...");
 examples.build(PATH, ONLINEEXAMPLES, KENDOCDN);
