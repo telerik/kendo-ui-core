@@ -11,6 +11,7 @@
         map = $.map,
         math = Math,
         proxy = $.proxy,
+        getter = kendo.getter,
         extend = $.extend;
 
     // Constants ==============================================================
@@ -1404,7 +1405,7 @@
                 var row = data[dataIdx];
 
                 if (categoryAxis.field) {
-                    var category = row[categoryAxis.field];
+                    var category = getter(categoryAxis.field)(row);
                     if (dataIdx === 0) {
                         categoryAxis.categories = [category];
                     } else {
@@ -1414,7 +1415,7 @@
 
                 for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
                     var currentSeries = series[seriesIdx],
-                        value = row[currentSeries.field];
+                        value =  getter(currentSeries.field)(row);
 
                     if (currentSeries.field) {
                         if (dataIdx === 0) {
