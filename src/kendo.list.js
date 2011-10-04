@@ -177,6 +177,7 @@
             width = wrapper.width() - (list.outerWidth() - list.width());
 
             list.css({
+                fontFamily: wrapper.css("font-family"),
                 width: width,
                 zIndex: zIndex
             });
