@@ -1270,6 +1270,15 @@
          * @property {Float}
          */
         support.devicePixelRatio = window.devicePixelRatio === undefined ? 1 : window.devicePixelRatio;
+
+        function validation() {
+            if (document.createElement("INPUT").checkValidity) {
+                return true;
+            }
+            return false;
+        }
+
+        support.validation = validation();
     })();
 
     /**
