@@ -52,10 +52,16 @@
                 .delegate(CELLSELECTOR, MOUSELEAVE, mouseleave)
                 .delegate(CELLSELECTOR, CLICK, function(e) {
                     e.preventDefault();
-                    var date = new DATE($(e.currentTarget.firstChild).data(VALUE)),
+                    var link = $(e.currentTarget.firstChild),
+                        date = new DATE(link.data(VALUE)),
                         viewedValue = that._viewedValue;
 
-                    that._view.setDate(viewedValue, date);
+                    if (link.parent().hasClass("k-other-month")) {
+                        viewedValue = date;
+                    } else {
+                        that._view.setDate(viewedValue, date);
+                    }
+
                     that.navigateDown(viewedValue);
                 });
 
