@@ -10,7 +10,8 @@
         format = kendo.format,
         map = $.map,
         math = Math,
-        proxy = $.proxy;
+        proxy = $.proxy,
+        extend = $.extend;
 
     // Constants ==============================================================
     var ABOVE = "above",
@@ -1635,6 +1636,11 @@
 
         middle: function() {
             return this.startAngle + this.angle / 2;
+        },
+
+        radius: function(newRadius) {
+            this.r = newRadius;
+            return this;
         },
 
         point: function(angle) {
@@ -4164,7 +4170,7 @@
                 currentColor,
                 totalAngle,
                 seriesIx,
-                sectorAngle,
+                angle,
                 data,
                 total,
                 anglePerValue,
@@ -4173,24 +4179,54 @@
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
                 data = currentSeries.data;
-                total = chart.pointsTotal(data);
-                anglePerValue = 360 / total;
+                anglePerValue = 360 / chart.pointsTotal(data);
 
                 for (i = 0; i < data.length; i++) {
                     currentData = data[i];
                     value = chart.pointValue(currentData);
-                    sectorAngle = value * anglePerValue;
+                    angle = value * anglePerValue;
                     currentCategory = defined(currentData.name) ? currentData.name : "";
                     explode = defined(currentData.explode) ? currentData.explode : false;
-                    currentColor = defined(currentData.color) ?
-                                          currenData.color :
-                                          colors[i % colorsCount];
+                    currentSeries.color = defined(currentData.color) ?
+                                               currenData.color :
+                                               colors[i % colorsCount];
 
-                    callback(value, startAngle, sectorAngle, currentColor,
-                       currentCategory, i, currentSeries, seriesIx, explode);
-                    startAngle += sectorAngle;
+                    callback(value, new Sector(null, 0, startAngle, angle), {
+                        owner: chart,
+                        category: currentCategory,
+                        categoryIx: i,
+                        series: currentSeries,
+                        seriesIx: seriesIx,
+                        dataItem: series.dataItems ?
+                            series.dataItems[categoryIx] : { value: value },
+                        explode: explode
+                    });
+
+                    startAngle += angle;
                 }
             }
+        },
+
+        addValue: function(value, sector, fields) {
+            var chart = this,
+                segment;
+
+            segment = new PieSegment(value, sector, fields.series);
+            segment.options.id = uniqueId();
+            extend(segment, fields);
+            chart.append(segment);
+            chart.segments.push(segment);
+        },
+
+        addValue: function(value, sector, fields) {
+            var chart = this,
+                segment;
+
+            segment = new PieSegment(value, sector, fields.series);
+            segment.options.id = uniqueId();
+            $.extend(segment.fields);
+            chart.append(segment);
+            chart.segments.push(segment);
         },
 
         pointValue: function(point) {
@@ -4208,28 +4244,6 @@
             }
 
             return sum;
-        },
-
-        addValue: function(value, startAngle, angle, color,
-                           category, categoryIx, series, seriesIx) {
-            var chart = this,
-                segment,
-                sector = new Sector(null, 0, startAngle, angle);
-
-            segment = new PieSegment(value, sector, series);
-            segment.options.id = uniqueId();
-            segment.options.color = color;
-            segment.category = category;
-            segment.series = series;
-            segment.seriesIx = seriesIx;
-            segment.owner = chart;
-            segment.explode = explode;
-            segment.dataItem = series.dataItems ?
-                series.dataItems[categoryIx] : { value: value };
-            segment.categoryIx = categoryIx;
-
-            chart.append(segment);
-            chart.segments.push(segment);
         },
 
         reflow: function(targetBox) {
@@ -4264,9 +4278,7 @@
                 );
 
                 if (segment.explode) {
-                    var newSector = sector.clone();
-                    newSector.r = newSector.r * 0.15;
-                    sector.c = newSector.point(newSector.middle());
+                    sector.c = sector.clone().radius(sector.r * 0.15).point(sector.middle());
                 }
 
                 segment.reflow(newBox);
@@ -4532,9 +4544,9 @@
         },
 
         options: {
-            categoryAxis: { },
-            valueAxis: { },
-            series: [ ],
+            categoryAxis: {},
+            valueAxis: {},
+            series: [],
             plotArea: {
                 margin: {}
             },
