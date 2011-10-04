@@ -380,6 +380,7 @@ function build(origin, destination, kendoCDN) {
     kendoBuild.copyDirSyncRecursive(originStyles, outputPath + "/styles", true, /\.(css|png|jpg|jpeg|gif)$/i);
     fs.unlinkSync(outputPath + "/template.html");
     fs.unlinkSync(outputPath + "/buildTemplate.html");
+    fs.unlinkSync(outputPath + "/simple-index.html");
 
     if (!kendoCDN) {
         fs.writeFileSync(outputPath + "/js/jquery.js", fs.readFileSync("src/jquery.js", "utf8"), "utf8");
