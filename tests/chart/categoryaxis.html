@@ -115,6 +115,16 @@
                     equals(view.log.rect[0].style.fill, "#f0f");
                 });
 
+                test("labels have set zIndex", 1, function() {
+                    createCategoryAxis({
+                        zIndex: 2
+                    });
+
+                    categoryAxis.getViewElements(view);
+
+                    equals(view.log.text[0].style.zIndex, 2);
+                });
+
                 test("labels are positioned below axis line with margin and padding", 2, function() {
                     createCategoryAxis({
                         labels: {
