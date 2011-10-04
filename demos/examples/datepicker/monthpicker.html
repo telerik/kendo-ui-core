@@ -13,29 +13,25 @@
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
         <script src="../../../src/kendo.calendar.js"></script>
+        <script src="../../../src/kendo.datepicker.js"></script>
         <!-- script -->
     </head>
     <body>
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Events</div>
+        <div class="description">Month picker</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <div id="calendar"></div>
-            <input id="value"/>
+            <input id="datepicker"/>
             <script>
                 $(document).ready(function() {
-                    function onChange() {
-                        $("#value").val(kendo.toString(calendar.value(), "d"));
-                    }
-
-                    var calendar = $("#calendar").kendoCalendar({
-                        change: onChange,
+                    $("#datepicker").kendoDatePicker({
                         startView: "decade", //defines the start view
                         depth: "year" //defines when the calendar should return date
-                    }).data("kendoCalendar");
+                    });
                 });
             </script>
         </div>
