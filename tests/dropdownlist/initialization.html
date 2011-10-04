@@ -196,13 +196,13 @@
                equal(data[0].value, "Foo");
            });
 
-           test("dropdownlist initializes a UL for its items", function() {
+           test("dropdownlist initializes an UL for its items", function() {
                  input.attr("id", "dropdownlist");
                  var dropdownlist = new DropDownList(input, []);
 
                  ok(dropdownlist.ul);
                  ok(dropdownlist.ul.is("ul"));
-                 ok(dropdownlist.ul.attr("id"), input.attr("id") + "-list");
+                 ok(dropdownlist.list.attr("id"), input.attr("id") + "-list");
                  equal(dropdownlist.ul.css("overflow"), "auto");
            });
 
@@ -212,7 +212,7 @@
                  ok(dropdownlist.popup);
                  ok(dropdownlist.popup instanceof kendo.ui.Popup);
                  equal(dropdownlist.popup.options.anchor[0], dropdownlist.wrapper[0]);
-                 equal(dropdownlist.popup.element[0], dropdownlist.ul[0]);
+                 equal(dropdownlist.popup.element[0], dropdownlist.list[0]);
            });
 
            test("dropdownlist shrink ul if the height of the items is more then options.height", function() {
@@ -231,7 +231,7 @@
 
                   dropdownlist.dataSource.read();
 
-                  equal(dropdownlist.ul.css("height"), "100px");
+                  equal(dropdownlist.list.css("height"), "100px");
            });
 
            test("dropdownlist populates its list when the datasource changes", function() {
@@ -355,7 +355,7 @@
                    dataSource: data
                });
 
-               equal(dropdownlist.ul.width(), 200);
+               equal(dropdownlist.list.width(), 200);
            });
 
            test("set height if items height is bigger than options.height", function() {
@@ -371,7 +371,7 @@
 
                dropdownlist.refresh();
 
-               equal(dropdownlist.ul.height(), 50);
+               equal(dropdownlist.list.height(), 50);
            });
 
       </script>

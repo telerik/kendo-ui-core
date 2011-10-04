@@ -52,7 +52,7 @@
                 input.kendoComboBox({test: 1});
 
                 var options = input.data("kendoComboBox").options;
-                notEqual(options.test, undefined)
+                notEqual(options.test, undefined);
                 equal(options.test, 1);
            });
 
@@ -191,7 +191,7 @@
                equal(data[0].value, "Foo");
            });
 
-           test("combobox initializes a UL for its items", function() {
+           test("combobox initializes an UL for its items", function() {
                  var combobox = new ComboBox(input, []);
 
                  ok(combobox.ul);
@@ -224,7 +224,7 @@
 
                   combobox.dataSource.read();
 
-                  equal(combobox.ul.css("height"), "100px");
+                  equal(combobox.list.css("height"), "100px");
            });
 
            test("combobox populates its list when the datasource changes", function() {
@@ -355,7 +355,7 @@
 
                combobox.refresh();
 
-               equal(combobox.ul.height(), 50);
+               equal(combobox.list.height(), 50);
            });
 
             test("pointer over widget should add hover state", function() {
