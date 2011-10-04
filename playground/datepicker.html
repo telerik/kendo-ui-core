@@ -1,86 +1,98 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="contenk-type" content="text/html; charset=utf-8">
         <title>DatePicker</title>
         <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
 
         <link href="../styles/kendo.common.css" rel="stylesheet" />
         <link href="../styles/kendo.kendo.css" rel="stylesheet" />
     </head>
     <body>
-        <div style="width: 200px;" class="t-widget t-datepicker t-header">
-            <div class="t-picker-wrap t-state-default">
-                <input type="text" value="date" class="t-input" />
-                <span class="t-select t-header">
-                    <span class="t-icon t-icon-calendar">select</span>
+        <style type="text/css">
+            .k-weekend {
+                background-color: gray;
+            }
+
+            .k-today {
+                background-color: yellow;
+            }
+            .k-calendar .k-content {
+                height: 227px
+            }
+
+            .k-footer {
+                background-color: #E3E3E3;
+                padding: .4em 0;
+                text-align: center;
+            }
+        </style>
+
+        just html!
+        <br />
+        <div style="width: 200px;" class="k-widget k-datepicker k-header">
+            <div class="k-picker-wrap k-state-default">
+                <input type="text" value="date" class="k-input" />
+                <span class="k-select k-header">
+                    <span class="k-icon k-icon-calendar">select</span>
                 </span>
             </div>
         </div>
 
         <br />
 
-        <div style="width: 200px;" class="t-widget t-datepicker t-header">
-            <div class="t-picker-wrap t-state-default">
-                <input type="text" value="date" class="t-input" />
-                <span class="t-select t-header">
-                    <span class="t-icon t-icon-clock">select</span>
+        <div style="width: 200px;" class="k-widget k-datepicker k-header">
+            <div class="k-picker-wrap k-state-default">
+                <input type="text" value="date" class="k-input" />
+                <span class="k-select k-header">
+                    <span class="k-icon k-icon-clock">select</span>
                 </span>
             </div>
         </div>
 
         <br />
 
-        <div style="width: 200px;" class="t-widget t-datetimepicker t-header">
-            <div class="t-picker-wrap t-state-default">
-                <input type="text" value="date" class="t-input" />
-                <span class="t-select t-header">
-                    <span class="t-icon t-icon-calendar">select</span>
+        <div style="width: 200px;" class="k-widget k-datetimepicker k-header">
+            <div class="k-picker-wrap k-state-default">
+                <input type="text" value="date" class="k-input" />
+                <span class="k-select k-header">
+                    <span class="k-icon k-icon-calendar">select</span>
                 </span>
-                <span class="t-select t-header">
-                    <span class="t-icon t-icon-clock">select</span>
+                <span class="k-select k-header">
+                    <span class="k-icon k-icon-clock">select</span>
                 </span>
             </div>
         </div>
-        <table id="calendar">
-        </table>
-        <button id="render">Render</button>
+
+        <hr/>
+        <input id="datepicker" style="width: 150px"/>
+        <input id="datepicker2" style="width: 150px"/>
+        <input id="datepicker3" style="width: 150px"/>
+        <input id="datepicker4" style="width: 150px"/>
         <hr/>
         <div id="kendoCalendar"/>
 
-        <script id="day" type="x-kendo-template">
-            <# if(data.getDate() == 10) { #>
-                <span class="t-icon t-icon-clock">select</span>
-            <# } #>
-            <#= data.getDate() #>
-        </script>
         <script>
             $(document).ready(function() {
-                function render() {
-                    var date = new Date();
-                    var start = new Date(2011, 8, 31);
-                    var template = kendo.template($("#day").html());
-                    var calendar = $("#calendar");
-                    var body = "<tr>";
-                        for(var i = 0; i < 42; i++) {
-                            if(i != 0 && i % 7 == 0) {
-                                body += "</tr><tr>";
-                            }
-                            body += "<td>" + template(start) + "</td>";
-                            start.setDate(start.getDate() + 1);
-                        }
-                        body += "</tr>";
-                    calendar.html(body);
-                    console.log("elapsed: " + ((new Date() - date) / 1000) + ".s");
-                }
-                //render();
-
-                //$("#render").click(render);
-
                 window.test = new kendo.ui.Calendar($("#kendoCalendar"));
+
+                window.dv = new kendo.DateView({
+                    min: new Date(1900, 0, 1),
+                    max: new Date(2100, 0, 1),
+                    anchor: $("input").eq(0)
+                });
+
+                var today = new Date(2011, 9, 10);
+
+                $("#datepicker").kendoDatePicker({ startView: "decade", depth:"year"});
+                $("#datepicker2").kendoDatePicker({value: new Date(), max: new Date()});
+                $("#datepicker3").kendoDatePicker({value: new Date(2004, 10, 10), max: new Date(2015, 10, 10), min: new Date(2003, 10, 10)});
+                $("#datepicker4").kendoDatePicker({value: today, min: today, max: today});
             });
         </script>
     </body>

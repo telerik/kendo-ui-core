@@ -10,5 +10,9 @@ tests.push(
     {
         page: "calendar/api.html",
         title: "calendar api"
+    },
+    {
+        page: "calendar/events.html",
+        title: "calendar events"
     }
 );
