@@ -37,6 +37,28 @@ var categories = {
             ]
         },
         {
+            text: "Calendar",
+            spriteCssClass: "chartIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "calendar/index.html"
+                },
+                {
+                    text: "Customizing templates",
+                    url: "calendar/template.html"
+                },
+                {
+                    text: "Events",
+                    url: "calendar/events.html"
+                },
+                {
+                    text: "API",
+                    url: "calendar/api.html"
+                }
+            ]
+        },
+        {
             text: "Chart",
             spriteCssClass: "chartIcon",
             items: [
@@ -89,6 +111,32 @@ var categories = {
                 {
                     text: "API",
                     url: "combobox/api.html"
+                }
+            ]
+        },
+        {
+            text: "DatePicker",
+            spriteCssClass: "chartIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "datepicker/index.html"
+                },
+                {
+                    text: "Month picker",
+                    url: "datepicker/monthpicker.html"
+                },
+                {
+                    text: "Related datepickers",
+                    url: "datepicker/relateddatepickers.html"
+                },
+                {
+                    text: "Events",
+                    url: "datepicker/events.html"
+                },
+                {
+                    text: "API",
+                    url: "datepicker/api.html"
                 }
             ]
         },
