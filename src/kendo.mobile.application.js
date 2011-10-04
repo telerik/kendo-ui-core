@@ -6,6 +6,8 @@
         touch = kendo.support.touch,
         pointers = kendo.support.pointers,
         transitions = kendo.support.transitions,
+        titleRegExp = /<title[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/title>/ig,
+        bodyRegExp = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/ig,
         buttonSelector = "[data-kendo-ui=button],button,input[type=submit],input[type=reset],input[type=button],input[type=image]";
 
     $(document.documentElement).addClass("k-" + (!os || (os && os.ios) ? "ios" : os.name));
@@ -81,7 +83,7 @@
 
     extend(mobile, {
         init: function(options) {
-            var html = [ "<meta name='apple-mobile-web-app-capable' content='yes' /><meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />" +
+            var html = [ "<meta name='apple-mobile-web-app-capable' content='yes' /><meta name='apple-mobile-web-app-status-bar-style' content='black' />" +
                          "<meta content=\"initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width\" name=\"viewport\" />" ];
 
             options = extend({}, options);
@@ -193,11 +195,11 @@
                 dataType: "html",
                 success: function(content) {
                     var viewPage,
-                        title = /<title[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/title>/ig.exec(content)[1];
+                        matches = titleRegExp.exec(content);
 
                     if (mobile.isFullPage(content)) {
-                        content = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/ig.exec(content)[1];
-                        viewPage = $(content).appendTo(application.root);
+                        var contentMatches = bodyRegExp.exec(content);
+                        viewPage = $(contentMatches ? contentMatches[1] : content).appendTo(application.root);
                     } else { // partial content was served
                         viewPage = $("<div class='k-view' />").appendTo(application.root);
                         viewPage[0].innerHTML = content;
@@ -205,7 +207,7 @@
 
                     viewPage.data("url", view);
 
-                    var currentView = viewPage.kendoView({ previousView: application.currentView, title: title }).data("kendoView");
+                    var currentView = viewPage.kendoView({ previousView: application.currentView, title: matches ? matches[1] : "" }).data("kendoView");
                     application.addView(currentView);
                     kendo.mobile.goToView(currentView, initCallback);
                 }
