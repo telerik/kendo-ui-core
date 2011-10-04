@@ -31,7 +31,18 @@
         },
         initialFolder = 0,
         codeStrip = false,
-        referenceUrl = "";
+        referenceUrl = "",
+        regexes = {
+            description: /<div[^>]*description[^>]*>(([\r\n]|.)*?)<\/\w+>\s*?<!-- description -->/im,
+            body: /<div id="example([Wrap]*)"[^>]*?>(([\r\n]|.)*?)<!-- tools -->/im,
+            helpData: /<!--\s*help-data\s*-->(([\r\n]|.)*?)<!--\s*help-data\s*-->/im,
+            helpTabs: /<!--\s*help-tabs\s*-->(([\r\n]|.)*?)<!--\s*help-tabs\s*-->/im,
+            tools: /\s*<!-- tools -->(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig,
+            exceptTools: /\s*<!-- \w+ -->(([\u000a\u000d\u2028\u2029]|.)*?)<!-- \w+ -->/ig,
+            nav: /([^\/]+\/[^\/\?]+)(\?.*)?$/,
+            title: /<title>(.*?)<\/title>/i,
+            skin: /kendo\.\w+(\.min)?\.css/i
+        };
 
     window.selectCategory = function(element) {
         $("#topnav .selected").removeClass("selected");
@@ -49,7 +60,7 @@
         if (!referenceUrl)
             referenceUrl = $("#referenceUrl")[0].href;
         $("#nav li a").each(function() {
-            var match = $(this).attr("href").match(/([^\/]+\/[^\/\?]+)(\?.*)?$/);
+            var match = $(this).attr("href").match(regexes.nav);
             $(this).attr("href", referenceUrl + (match ? match[1] : ""));
         });
     };
@@ -83,7 +94,7 @@
         },
 
         fetchTitle: function () {
-            var result = /<title>(.*?)<\/title>/i.exec(currentHtml),
+            var result = regexes.title.exec(currentHtml),
                 title = result ? $.trim(result[1]) : "";
 
             if (title)
@@ -144,8 +155,8 @@
         },
 
         fetchCode: function(html, callback) {
-            html = html.replace(new RegExp("\\s*<!-- tools -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- tools -->", "ig"), ""); // Remove tools first to strip description
-            html = html.replace(new RegExp("\\s*<!-- \\w+ -->(([\\u000a\\u000d\\u2028\\u2029]|.)*?)<!-- \\w+ -->", "ig"), "");
+            html = html.replace(regexes.tools, ""); // Remove tools first to strip description
+            html = html.replace(regexes.exceptTools, "");
 
             $("#code").empty().text(html);
 
@@ -214,7 +225,7 @@
                 commonLink = kendoLinks.filter("[href*='kendo.common']"),
                 skinLink = kendoLinks.filter(":not([href*='kendo.common'])"),
                 currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
-                url = currentFolder + commonLink.attr("href").replace(/kendo\.\w+(\.min)?\.css/i, "kendo." + skinName + "$1.css"),
+                url = currentFolder + commonLink.attr("href").replace(regexes.skin, "kendo." + skinName + "$1.css"),
                 exampleTitle = $("#exampleTitle"),
                 oldSkinName = $(document).data("kendoSkin"),
                 exampleElement = $("#example"), newLink;
@@ -262,25 +273,25 @@
         },
 
         helpTabs: function (html) {
-            var result = /<!--\s*help-tabs\s*-->(([\r\n]|.)*?)<!--\s*help-tabs\s*-->/im.exec(html);
+            var result = regexes.helpTabs.exec(html);
 
             return result ? result[1] : "";
         },
 
         helpData: function (html) {
-            var result = /<!--\s*help-data\s*-->(([\r\n]|.)*?)<!--\s*help-data\s*-->/im.exec(html);
+            var result = regexes.helpData.exec(html);
 
             return result ? result[1] : "";
         },
 
         description: function(html) {
-            var result = /<div[^>]*description[^>]*>(([\u000a\u000d\u2028\u2029]|.)*?)<\/\w+>\s*?<!-- description -->/ig.exec(html);
+            var result = regexes.description.exec(html);
 
             return result ? result[1] : "";
         },
 
         body: function(html) {
-            var match = /<div id="example([Wrap]*)"[^>]*?>\s*<script[^>]*?>[^>]*script>(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig.exec(html),
+            var match = regexes.body.exec(html),
                 hasBody = match[0].substr(16, 4) != "Wrap";
 
             return (match[1] != "") ? match[2] : (hasBody ? "" : "<div id=\"exampleWrap\">") + match[0].replace("<!-- tools -->", "") + (hasBody ? "" : "</div>");
