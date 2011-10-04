@@ -7464,19 +7464,10 @@
             }
         },
         seriesDefaults: {
-            column: {
-                labels: {
-                    color: "#ffffff",
-                    background: "#564942",
-                    opacity: 0.7
-                }
-            },
-            bar: {
-                labels: {
-                    color: "#ffffff",
-                    background: "#564942",
-                    opacity: 0.7
-                }
+            labels: {
+                color: BLACK,
+                background: WHITE,
+                opacity: 0.5
             }
         },
         seriesColors: ["#ff5400", "#ff8b24", "#ffc066", "#9da600", "#688900", "#3e6100"],
@@ -7519,15 +7510,10 @@
             }
         },
         seriesDefaults: {
-            column: {
-                labels: {
-                    color: "#293135"
-                }
-            },
-            bar: {
-                labels: {
-                    color: "#293135"
-                }
+            labels: {
+                color: BLACK,
+                background: WHITE,
+                opacity: 0.5
             }
         },
         seriesColors: ["#0069a5", "#0098ee", "#7bd2f6", "#ffb800", "#ff8517", "#e34a00"],
