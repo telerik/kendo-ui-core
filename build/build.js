@@ -156,8 +156,7 @@ function buildExamples() {
         fs.writeFileSync(name, data);
     });
 
-    var navigation = fs.readFileSync("demos/examples/js/kendo.examples.js", "utf8");
-    navigation = navigation.match(/\/\/ BEGIN NAVIGATION([\s\S]*)\/\/ END NAVIGATION/g)[0];
+    var navigation = fs.readFileSync("demos/examples/js/kendo.examples.nav.js", "utf8");
     eval(navigation);
 
     var indexTemplate = kendoBuild.template(

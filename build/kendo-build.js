@@ -137,7 +137,15 @@ function processFilesRecursive(dir, filterRegex, callback) {
 }
 
 function copyTextFile(src, dest) {
-    fs.writeFileSync(dest, fs.readFileSync(src, "utf8"), "utf8");
+    writeText(dest, readText(src));
+}
+
+function readText(fileName) {
+    return fs.readFileSync(fileName, "utf8");
+}
+
+function writeText(fileName, text) {
+    fs.writeFileSync(fileName, text, "utf8");
 }
 
 exports.merge = merge;
@@ -153,4 +161,5 @@ exports.minifyJs = function(source) {
 exports.template = template;
 exports.processFilesRecursive = processFilesRecursive;
 exports.copyTextFile = copyTextFile;
+exports.readText = readText;
 
