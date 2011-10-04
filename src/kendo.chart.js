@@ -1185,6 +1185,7 @@
             ], chart.options);
 
             chart._refresh();
+            chart._attachEvents();
         },
 
         options: {
@@ -1279,7 +1280,8 @@
             chart.element.css("position", "relative");
             chart._view = model.getView();
             chart._viewElement = chart._view.renderTo(chart.element[0]);
-            chart._attachEvents();
+            chart._tooltip = new Tooltip(chart.element, chart.options.tooltip);
+            chart._highlight = new Highlight(chart._view, chart._viewElement);
         },
 
         _attachEvents: function() {
@@ -1287,9 +1289,6 @@
                 element = chart.element;
 
             element.bind(CLICK, proxy(chart._click, chart));
-
-            chart._tooltip = new Tooltip(chart.element, chart.options.tooltip);
-            chart._highlight = new Highlight(chart._view, chart._viewElement);
             element.bind(MOUSEOVER, proxy(chart._mouseOver, chart));
         },
 
