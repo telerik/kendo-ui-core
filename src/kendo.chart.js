@@ -6564,16 +6564,10 @@
             if (!tooltip.template) {
                 tooltip.template = Tooltip.template = template(
                     "<div style='display:none; position: absolute; font: <#= d.font #>;" +
-                    "border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px;" +
-                    "border: <#= d.border.width #>px solid <#= d.border.color #>;" +
+                    "border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" +
+                    "border: <#= d.border.width #>px solid;" +
                     "opacity: <#= d.opacity #>; filter: alpha(opacity=<#= d.opacity * 100 #>);" +
-                    "padding:0 0 0 1.4em; '>" +
-                    "<div style='white-space: nowrap; padding: .3em .4em; " +
-                    "border-top-right-radius: 2px; -moz-border-top-right-radius: 2px; " +
-                    "-webkit-border-top-right-radius: 2px; border-bottom-right-radius: 2px; " +
-                    "-moz-border-bottom-right-radius: 2px; -webkit-border-bottom-right-radius: 2px; " +
-                    " ' />" +
-                    "</div>"
+                    "padding: 2px 6px; white-space: nowrap;'></div>"
                 );
             }
 
@@ -6585,8 +6579,7 @@
             color: WHITE,
             font: SANS12,
             border: {
-                color: BLACK,
-                width: 0
+                width: 3
             },
             opacity: 1
         },
@@ -6594,7 +6587,6 @@
         show: function(point) {
             var tooltip = this,
                 element = tooltip.element,
-                textElement = element.children(0),
                 options = tooltip.options,
                 aboveAxis = point.options.aboveAxis,
                 isVertical = point.options.isVertical,
@@ -6614,15 +6606,14 @@
                 content = format(options.format, point.value);
             }
 
-            textElement
-                .html(content)
-                .css({ backgroundColor: options.background });
+            element.html(content);
 
             anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
 
             tooltip.element
                 .css({
-                   backgroundColor: point.options.color,
+                   backgroundColor: options.background,
+                   borderColor: options.border.color || point.options.color,
                    color: options.color,
                    opacity: options.opacity
                 })
@@ -7450,6 +7441,11 @@
             majorGridLines: {
                 color: "#58595b"
             }
+        },
+        tooltip: {
+            background: "#393939",
+            color: WHITE,
+            opacity: 0.8
         }
     });
 
@@ -7494,8 +7490,9 @@
             }
         },
         tooltip: {
-            background: "#564942",
-            opacity: 0.9
+            background: WHITE,
+            color: BLACK,
+            opacity: 0.8
         }
     });
 
@@ -7538,6 +7535,11 @@
             majorGridLines: {
                 color: "#c4d0d5"
             }
+        },
+        tooltip: {
+            background: WHITE,
+            color: BLACK,
+            opacity: 0.8
         }
     });
 
