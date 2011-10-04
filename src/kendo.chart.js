@@ -4224,7 +4224,7 @@
 
             segment = new PieSegment(value, sector, fields.series);
             segment.options.id = uniqueId();
-            $.extend(segment.fields);
+            extend(segment, fields);
             chart.append(segment);
             chart.segments.push(segment);
         },
