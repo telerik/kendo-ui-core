@@ -1911,7 +1911,8 @@
                         strokeOpacity: options.opacity,
                         fill: options.background,
                         fillOpacity: options.opacity,
-                        animation: options.animation
+                        animation: options.animation,
+                        zIndex: options.zIndex
                     }, renderOptions))
                 );
             }
@@ -1988,16 +1989,12 @@
             ChartElement.fn.getViewElements.call(this, view);
 
             return [
-                view.createText(text.content, {
-                    id: options.id,
-                    x: text.box.x1, y: text.box.y1,
-                    baseline: text.baseline,
-                    font: options.font,
-                    color: options.color,
-                    rotation: options.rotation,
-                    size: options.size,
-                    animation: options.animation
-                })
+                view.createText(text.content,
+                    deepExtend({}, options, {
+                        x: text.box.x1, y: text.box.y1,
+                        baseline: text.baseline
+                    })
+                )
             ];
         }
     });
@@ -2882,7 +2879,9 @@
 
             var options = axis.options,
                 align = options.orientation === VERTICAL ? RIGHT : CENTER,
-                labelOptions = deepExtend({ }, options.labels, { align: align }),
+                labelOptions = deepExtend({ }, options.labels,
+                    { align: align, zIndex: options.zIndex }
+                ),
                 labelTemplate,
                 count = options.categories.length,
                 content,
@@ -6566,16 +6565,10 @@
             if (!tooltip.template) {
                 tooltip.template = Tooltip.template = template(
                     "<div style='display:none; position: absolute; font: <#= d.font #>;" +
-                    "border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px;" +
-                    "border: <#= d.border.width #>px solid <#= d.border.color #>;" +
+                    "border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" +
+                    "border: <#= d.border.width #>px solid;" +
                     "opacity: <#= d.opacity #>; filter: alpha(opacity=<#= d.opacity * 100 #>);" +
-                    "padding:0 0 0 1.4em; '>" +
-                    "<div style='white-space: nowrap; padding: .3em .4em; " +
-                    "border-top-right-radius: 2px; -moz-border-top-right-radius: 2px; " +
-                    "-webkit-border-top-right-radius: 2px; border-bottom-right-radius: 2px; " +
-                    "-moz-border-bottom-right-radius: 2px; -webkit-border-bottom-right-radius: 2px; " +
-                    " ' />" +
-                    "</div>"
+                    "padding: 2px 6px; white-space: nowrap;'></div>"
                 );
             }
 
@@ -6587,8 +6580,7 @@
             color: WHITE,
             font: SANS12,
             border: {
-                color: BLACK,
-                width: 0
+                width: 3
             },
             opacity: 1
         },
@@ -6596,7 +6588,6 @@
         show: function(point) {
             var tooltip = this,
                 element = tooltip.element,
-                textElement = element.children(0),
                 options = tooltip.options,
                 aboveAxis = point.options.aboveAxis,
                 isVertical = point.options.isVertical,
@@ -6616,15 +6607,14 @@
                 content = format(options.format, point.value);
             }
 
-            textElement
-                .html(content)
-                .css({ backgroundColor: options.background });
+            element.html(content);
 
             anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
 
             tooltip.element
                 .css({
-                   backgroundColor: point.options.color,
+                   backgroundColor: options.background,
+                   borderColor: options.border.color || point.options.color,
                    color: options.color,
                    opacity: options.opacity
                 })
@@ -7452,6 +7442,11 @@
             majorGridLines: {
                 color: "#58595b"
             }
+        },
+        tooltip: {
+            background: "#393939",
+            color: WHITE,
+            opacity: 0.8
         }
     });
 
@@ -7465,19 +7460,10 @@
             }
         },
         seriesDefaults: {
-            column: {
-                labels: {
-                    color: "#ffffff",
-                    background: "#564942",
-                    opacity: 0.7
-                }
-            },
-            bar: {
-                labels: {
-                    color: "#ffffff",
-                    background: "#564942",
-                    opacity: 0.7
-                }
+            labels: {
+                color: BLACK,
+                background: WHITE,
+                opacity: 0.5
             }
         },
         seriesColors: ["#ff5400", "#ff8b24", "#ffc066", "#9da600", "#688900", "#3e6100"],
@@ -7505,8 +7491,9 @@
             }
         },
         tooltip: {
-            background: "#564942",
-            opacity: 0.9
+            background: WHITE,
+            color: BLACK,
+            opacity: 0.8
         }
     });
 
@@ -7520,15 +7507,10 @@
             }
         },
         seriesDefaults: {
-            column: {
-                labels: {
-                    color: "#293135"
-                }
-            },
-            bar: {
-                labels: {
-                    color: "#293135"
-                }
+            labels: {
+                color: BLACK,
+                background: WHITE,
+                opacity: 0.5
             }
         },
         seriesColors: ["#0069a5", "#0098ee", "#7bd2f6", "#ffb800", "#ff8517", "#e34a00"],
@@ -7554,6 +7536,11 @@
             majorGridLines: {
                 color: "#c4d0d5"
             }
+        },
+        tooltip: {
+            background: WHITE,
+            color: BLACK,
+            opacity: 0.8
         }
     });
 
