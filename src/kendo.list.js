@@ -174,7 +174,7 @@
                 close: options.close
             });
 
-            width = wrapper.width() - (list.outerWidth() - list.width());
+            width = wrapper.outerWidth() - (list.outerWidth() - list.width());
 
             list.css({
                 fontFamily: wrapper.css("font-family"),
