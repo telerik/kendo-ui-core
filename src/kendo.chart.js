@@ -4187,7 +4187,7 @@
                     value = chart.pointValue(currentData);
                     angle = value * anglePerValue;
                     currentCategory = defined(currentData.name) ? currentData.name : "";
-                    explode = defined(currentData.explode) ? currentData.explode : false;
+                    explode = defined(currentData.explode) && data.length != 1 ? currentData.explode : false;
                     currentSeries.color = defined(currentData.color) ?
                                                currenData.color :
                                                colors[i % colorsCount];
@@ -5398,6 +5398,7 @@
                 circleSector = sector.circleSector,
                 startAngle = circleSector.startAngle,
                 endAngle = circleSector.angle + startAngle,
+                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
                 isReflexAngle = (endAngle - startAngle) > 180,
                 r = math.max(circleSector.r, 0),
                 cx = circleSector.c.x,

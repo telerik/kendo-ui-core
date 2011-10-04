@@ -766,6 +766,16 @@
                     ok(sector.render().indexOf("stroke='#f00'") > -1);
                 });
 
+                test("renders single pie sector with angle 360", function() {
+                    sector = new Chart.SVGSector(
+                            new Chart.Sector(
+                                new Point2D(135, 135), 135, 90, 360
+                            )
+                        );
+
+                    ok(sector.render().indexOf("d='M 135 0 A135 135 0 1,1 134.998 0 L 135 135 z'") > -1);
+                });
+
                 test("renders stroke width", function() {
                     sector.options.strokeWidth = "2";
                     ok(sector.render().indexOf("stroke-width='2'") > -1);

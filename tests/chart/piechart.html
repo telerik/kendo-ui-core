@@ -140,7 +140,7 @@
                     ok(pieChart.segments[0].explode == true);
                 });
 
-                test("sets segment different center if segment have explode property", function() {
+                test("sets segment different center if segment have explode sets to true", function() {
                     ok(pieChart.segments[0].sector.c != pieChart.segments[1].sector.c);
                 });
 
@@ -295,6 +295,7 @@
             (function() {
                 var PADDING = 5,
                     MARGIN = 5,
+                    START_ANGLE = 20,
                     pieSegment;
 
                 function PlotAreaStub() { }
@@ -305,6 +306,31 @@
                             categories: ["A"]
                         }
                     }
+                });
+
+                // ------------------------------------------------------------
+                module("Pie Chart / Configuration", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupPieChart(plotArea, {
+                            series: [ { data: [{ value: 1, explode: true }] } ],
+                            padding: PADDING,
+                            startAngle: START_ANGLE
+                        });
+                        pieSegment = pieChart.segments[0];
+                    }
+                });
+
+                test("sets padding to the pie chart", function() {
+                    equal(pieChart.options.padding, PADDING);
+                });
+
+                test("sets startAngle to the pie chart", function() {
+                    equal(pieChart.options.startAngle, START_ANGLE);
+                });
+
+                test("sets segments if segments are more then 1", function() {
+                    equal(pieSegment.explode, false);
                 });
 
                 // ------------------------------------------------------------
