@@ -640,6 +640,10 @@
             } else {
                 node = $(nodeData);
 
+                if (group.children()[index - 1] == node[0]) {
+                    return node;
+                }
+
                 if (node.closest(".k-treeview")[0] == that.wrapper[0]) {
                     that.remove(node);
                 }

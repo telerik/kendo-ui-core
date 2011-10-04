@@ -249,6 +249,34 @@
                 equals(rootGroup.find(".k-group").length, 0);
             });
 
+            test("append() of single child to same parent does not remove it", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView"),
+                    rootGroup = treeview.find("> .k-group"),
+                    subNode = treeviewObject.findByText("bar"),
+                    rootNode = treeviewObject.findByText("foo");
+
+                var appendedNode = treeviewObject.append(subNode, rootNode);
+
+                equals(subNode[0], appendedNode[0]);
+                equals(rootGroup.children().length, 1);
+                equals(rootNode.find(".k-group").length, 1);
+                equals(rootNode.find(".k-group").children().length, 1);
+
+                appendedNode = treeviewObject.append(subNode[0], rootNode);
+
+                equals(subNode[0], appendedNode[0]);
+                equals(rootGroup.children().length, 1);
+                equals(rootNode.find(".k-group").length, 1);
+                equals(rootNode.find(".k-group").children().length, 1);
+            });
+
             test("insertBefore(nodeData, element) inserts new node before element", function() {
                 var treeview = createTreeView({
                         dataSource: [
