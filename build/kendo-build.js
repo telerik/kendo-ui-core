@@ -88,6 +88,66 @@ function generateVersion() {
     return date.getFullYear() + ".2." + (date.getMonth() + 1) + "" + day;
 }
 
+function template(template) {
+    var paramName = "data",
+        begin =  "<#",
+        end = "#>",
+        useWithBlock = true,
+        functionBody = "var o;",
+        evalRegExp = /<#=(.+?)#>/g,
+        quoteRegExp = /'(?=[^<"]*#>)/g;
+
+    functionBody += useWithBlock ? "with(" + paramName + "){" : "";
+
+    functionBody += "o='";
+
+    functionBody += template
+        .replace(/\n/g, "\\n")
+        .replace(/\r/g, "")
+        .replace(/\t/g, "\\t")
+        .replace(quoteRegExp,"\t")
+        .split("'").join("\\'")
+        .split("\t").join("'")
+        .replace(evalRegExp, "'+($1)+'")
+        .split(begin).join("';")
+        .split(end).join("o+='");
+
+    functionBody += useWithBlock ? "';}" : "';";
+
+    functionBody += "return o;";
+
+    return new Function(paramName, functionBody);
+}
+
+function processFilesRecursive(dir, filterRegex, callback) {
+    var files = fs.readdirSync(dir),
+        fileName,
+        stat;
+
+    for (var i = 0; i < files.length; i++) {
+        var fileName = dir + "/" + files[i];
+        var stat = fs.statSync(fileName);
+
+        if (!stat.isFile()) {
+            processFilesRecursive(fileName, filterRegex, callback);
+        } else if (filterRegex.test(fileName)) {
+            callback(fileName);
+        }
+    }
+}
+
+function copyTextFile(src, dest) {
+    writeText(dest, readText(src));
+}
+
+function readText(fileName) {
+    return fs.readFileSync(fileName, "utf8");
+}
+
+function writeText(fileName, text) {
+    fs.writeFileSync(fileName, text, "utf8");
+}
+
 exports.merge = merge;
 exports.generateVersion = generateVersion;
 exports.rmdirSyncRecursive = rmdirSyncRecursive;
@@ -98,4 +158,8 @@ exports.minifyJs = function(source) {
     ast = uglify.ast_squeeze(ast);
     return uglify.gen_code(ast);
 };
+exports.template = template;
+exports.processFilesRecursive = processFilesRecursive;
+exports.copyTextFile = copyTextFile;
+exports.readText = readText;
 
