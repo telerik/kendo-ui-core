@@ -241,28 +241,27 @@
             that.navigate(value || that._viewedValue);
         },
 
-        _animate: function(oldView, newView, isFuture, differentView) {
+        _animate: function(oldTable, newTable, isFuture, differentView) {
             var that = this;
 
-            //put overlay over the calendar
-            if (!oldView.is(":visible")) {
-                newView.insertAfter(oldView);
-                oldView.remove();
+            if (!oldTable.is(":visible")) {
+                newTable.insertAfter(oldTable);
+                oldTable.remove();
             } else if (differentView) {
-                that._zoomIn(oldView, newView);
+                that._zoomIn(oldTable, newTable);
             } else {
-                that._animateHorizontal(oldView, newView, isFuture);
+                that._animateHorizontal(oldTable, newTable, isFuture);
             }
         },
 
-        _animateHorizontal: function(oldView, newView, isFuture) {
-            var viewWidth = oldView.outerWidth();
+        _animateHorizontal: function(oldTable, newTable, isFuture) {
+            var viewWidth = oldTable.outerWidth();
 
-            oldView.add(newView).css({width: viewWidth, 'float': 'left' });
+            oldTable.add(newTable).css({ width: viewWidth, 'float': 'left' });
 
-            oldView.wrap("<div/>");
+            oldTable.wrap("<div/>");
 
-            oldView.parent()
+            oldTable.parent()
                 .css({
                     position: 'relative',
                     width: viewWidth * 2,
@@ -270,44 +269,44 @@
                     left: isFuture ? 0 : -200
                 });
 
-                newView[isFuture ? "insertAfter" : "insertBefore"](oldView);
+                newTable[isFuture ? "insertAfter" : "insertBefore"](oldTable);
 
             //put in options
-            oldView.parent().kendoStop(true, true).kendoAnimate({
+            oldTable.parent().kendoStop(true, true).kendoAnimate({
                 effects: "slide:" + (isFuture ? "left" : "right"),
                 duration: 500,
                 divisor: 2,
                 complete: function() {
-                    oldView.remove();
-                    newView.unwrap();
+                    oldTable.remove();
+                    newTable.unwrap();
                 }
             });
         },
 
-        _zoomIn: function(oldView, newView) {
+        _zoomIn: function(oldTable, newTable) {
             var that = this,
-                viewWidth = oldView.outerWidth(),
+                viewWidth = oldTable.outerWidth(),
                 cell, position;
 
-            newView.css({
+            newTable.css({
                 position: "absolute",
-                top: 32, //oldView.prev().outerHeight(),
+                top: 32, //oldTable.prev().outerHeight(),
                 left: 0
-            }).insertBefore(oldView);
+            }).insertBefore(oldTable);
 
             if (transitionOrigin) {
                 cell = that._getCell(that._view.toDateString(that._viewedValue));
                 position = cell.position();
                 position = (position.left + parseInt(cell.width() / 2)) + "px" + " " + (position.top + parseInt(cell.height() / 2) + "px");
-                newView.css(transitionOrigin, position);
+                newTable.css(transitionOrigin, position);
             }
 
-            oldView.kendoStop(true, true).kendoAnimate({
+            oldTable.kendoStop(true, true).kendoAnimate({
                 effects: "fadeOut",
                 duration: 600,
                 complete: function() {
-                   oldView.remove();
-                   newView.css({
+                   oldTable.remove();
+                   newTable.css({
                         position: "static",
                         top: 0,
                         left: 0
@@ -316,7 +315,7 @@
             });
 
             //put in animation
-            newView.kendoStop(true, true).kendoAnimate({
+            newTable.kendoStop(true, true).kendoAnimate({
                 effects: "zoomIn",
                 duration: 400
             });
