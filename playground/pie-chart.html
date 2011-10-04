@@ -37,14 +37,29 @@
                     padding: 120,
                     labels: {
                         font: "12px Arial, sans-serif",
-                        visible: true
+                        visible: false
                     },
                     startAngle: 90
                 },
                 transitions: false,
                 series: [{
                     name: "World",
-                    data:[ 1, 2, 3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1, 2, 3, 3, 2, 1 ]
+                    data: [ {
+                        value: 10,
+                        explode: true
+                    }, {
+                        value: 10
+                    }, {
+                        value: 10,
+                        explode: true
+                    }, {
+                        value: 10
+                    }, {
+                        value: 10,
+                        explode: true
+                    }, {
+                        value: 10
+                    }]
                 }],
                 chartArea: {
                     border: {
