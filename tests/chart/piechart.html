@@ -41,7 +41,8 @@
                        data: [
                            {
                                value: 1,
-                               name: "A"
+                               name: "A",
+                               explode: true
                            }, {
                                value: 2,
                                name: "B"
@@ -133,6 +134,14 @@
 
                 test("sets segment dataItem", function() {
                     equal(typeof pieChart.segments[0].dataItem, "object");
+                });
+
+                test("sets segment explode", function() {
+                    ok(pieChart.segments[0].explode == true);
+                });
+
+                test("sets segment different center if segment have explode property", function() {
+                    ok(pieChart.segments[0].sector.c != pieChart.segments[1].sector.c);
                 });
 
             })();
