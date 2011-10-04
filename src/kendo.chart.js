@@ -81,6 +81,7 @@
         SWING = "swing",
         TOP = "top",
         TOOLTIP_OFFSET = 5,
+        TOOLTIP_ANIMATION_DURATION = 150,
         TRIANGLE = "triangle",
         UNDEFINED = "undefined",
         VERTICAL = "vertical",
@@ -6581,7 +6582,10 @@
             border: {
                 width: 3
             },
-            opacity: 1
+            opacity: 1,
+            animation: {
+                duration: TOOLTIP_ANIMATION_DURATION
+            }
         },
 
         show: function(point) {
@@ -6622,7 +6626,7 @@
                 .animate({
                     left: round(anchor.x) + "px",
                     top: round(anchor.y) + "px"
-                }, tooltip.visible ? 150 : 0);
+                }, options.animation.duration);
 
             tooltip.visible = true;
         },
