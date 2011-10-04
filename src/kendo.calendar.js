@@ -33,11 +33,16 @@
 
             Component.fn.init.call(that, element, options);
 
-            element.addClass("k-widget k-calendar");
-
+            element = that.element;
             options = that.options;
 
-            that.bind([CHANGE, NAVIGATE], options);
+            //get options from data attributes and extend options
+            //extend(options, {
+           //     value: element.data("value"),
+           //     format: element.data("format")
+           // });
+
+            element.addClass("k-widget k-calendar");
 
             that._templates();
 
@@ -47,7 +52,7 @@
                 that._footer();
             }
 
-            that.element
+            element
                 .delegate(CELLSELECTOR, MOUSEENTER, mouseenter)
                 .delegate(CELLSELECTOR, MOUSELEAVE, mouseleave)
                 .delegate(CELLSELECTOR, CLICK, function(e) {
@@ -67,6 +72,8 @@
 
             that._currentView = options.startView;
 
+            that.bind([CHANGE, NAVIGATE], options);
+
             that.value(options.value);
         },
 
@@ -74,9 +81,10 @@
             value: null,
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
-            footer : true,
-            depth: MONTH,
+            footer : '<#= kendo.toString(data,"D") #>',
+            format: kendo.culture().calendar.patterns.d,
             startView: MONTH,
+            depth: MONTH,
             month: {
                 content: "<#=data.value#>",
                 empty: " "
@@ -224,8 +232,7 @@
                 return that._value;
             }
 
-            //parse date
-            //value = kendo.parseDate(value, kendo.culture().calendar.patterns.d);
+            value = kendo.parseDate(value, options.format);
 
             if (value !== null) {
                 value = new Date(value);
@@ -338,7 +345,6 @@
             var that = this,
             element = that.element,
             today = new DATE(),
-            dateString = kendo.toString(today, "D"),
             link;
 
             if (!element.find(".k-footer")[0]) {
@@ -347,15 +353,17 @@
 
             link = element.find(".k-nav-today");
 
-            link.html(dateString);
-            link.attr("title", dateString);
+            link.html(template(that.options.footer)(today));
+            link.attr("title", kendo.toString(today, "D"));
 
             link.bind("click", function(e) {
                 e.preventDefault();
 
-                if (that._view.compare(that._viewedValue, today) === 0) {
+                if (that._view.compare(that._viewedValue, today) === 0 && that._currentView == that.options.depth) {
                     that._changeView = false;
                 }
+
+                that._currentView = that.options.depth;
 
                 that.value(today);
                 that.trigger(CHANGE);
