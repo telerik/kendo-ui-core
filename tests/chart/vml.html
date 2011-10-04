@@ -571,13 +571,13 @@
                 test("refresh updates path fill opacity", function() {
                     path.options.fillOpacity = 0.5;
                     path.refresh(domElement);
-                    equals(domElement.find("fill").attr("opacity"), "0.5");
+                    equals(domElement.find("fill")[0].opacity, "0.5");
                 });
 
                 test("refresh updates path stroke opacity", function() {
                     path.options.strokeOpacity = 0.5;
                     path.refresh(domElement);
-                    equals(domElement.find("stroke").attr("opacity"), "0.5");
+                    equals(domElement.find("stroke")[0].opacity, "0.5");
                 });
 
                 test("fill opacity is updated before rendering", function() {
@@ -620,7 +620,7 @@
 
                 test("refresh updates path v attribute", function() {
                     line.refresh(domElement);
-                    ok(domElement.find("path").attr("v").length > 0);
+                    ok(domElement.find("path")[0].v.length > 0);
                 });
 
             })();
