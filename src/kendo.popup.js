@@ -97,13 +97,7 @@
             $(document.documentElement).bind(MOUSEDOWN, proxy(that._mousedown, that));
 
             $(window).bind("resize", function() {
-                that.wrapper
-                    .removeData(POSITION)
-                    .removeData(LOCATION); // Remove position and location to force originals reset.
-
-                if (that.wrapper.is(":" + VISIBLE)) {
-                    that._update();
-                }
+                that.close();
             });
 
             if (options.toggleTarget) {
@@ -133,17 +127,18 @@
 
         open: function() {
             var that = this,
+                element = that.element,
                 options = that.options,
                 direction = "down",
                 animation;
 
             if (!that.visible()) {
 
-                if (that.element.data("animating") || that.trigger(OPEN)) {
+                if (element.data("animating") || that.trigger(OPEN)) {
                     return;
                 }
 
-                that.wrapper = kendo.wrap(that.element)
+                that.wrapper = kendo.wrap(element)
                                     .css({
                                         overflow: HIDDEN,
                                         display: "block",
@@ -169,7 +164,7 @@
                 if (options.anchor != BODY) {
                     var dirClass = ACTIVEBORDER + "-" + direction;
 
-                    that.element.addClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
+                    element.addClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
 
                     options.anchor
                         .addClass(dirClass)
@@ -178,8 +173,9 @@
                         .addClass(dirClass);
                 }
 
-                that.element.data(EFFECTS, animation.effects);
-                that.element.kendoStop(true).kendoAnimate(animation);
+                element.data(EFFECTS, animation.effects)
+                       .kendoStop(true)
+                       .kendoAnimate(animation);
             }
         },
 
@@ -284,19 +280,10 @@
                 aligned = true;
             }
 
-            var pos = wrapper.data(POSITION),
-                offset = wrapper.data(OFFSET);
+            var pos = getOffset(wrapper, POSITION),
+                offset = getOffset(wrapper),
+                anchorParent = anchor.offsetParent().parent(".k-animation-container"); // If the parent is positioned, get the current positions
 
-            if (!pos) {
-                pos = getOffset(wrapper, POSITION);
-                offset = getOffset(wrapper);
-
-                wrapper
-                    .data(POSITION, pos)
-                    .data(OFFSET, extend({}, offset));
-            }
-
-            var anchorParent = anchor.offsetParent().parent(".k-animation-container"); // If the parent is positioned, get the current positions
             if (anchorParent.length && anchorParent.data(FITTED)) {
                 pos = getOffset(wrapper, POSITION);
                 offset = getOffset(wrapper);

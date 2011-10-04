@@ -429,8 +429,8 @@
                     names: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                     namesAbbr: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
                 },
-                AM: ["AM"],
-                PM: ["PM"],
+                AM: [ "AM", "am", "AM" ],
+                PM: [ "PM", "pm", "PM" ],
                 patterns: {
                     d: "M/d/yyyy",
                     D: "dddd, MMMM dd, yyyy",
@@ -574,7 +574,7 @@
 
         formatAndPrecision = standardFormatRegExp.exec(format);
 
-        //standard formatting
+        /* standard formatting */
         if (formatAndPrecision) {
             format = formatAndPrecision[1].toLowerCase();
 
@@ -842,6 +842,204 @@
 
     kendo.toString = toString;
     })();
+
+
+(function() {
+
+    function outOfRange(value, start, end) {
+        return !(value >= start && value <= end);
+    }
+
+    function parseExact(value, format, culture) {
+        if (!value) {
+            return null;
+        }
+
+        var lookAhead = function (match) {
+                var i = 0;
+                while (format[idx] === match) {
+                    i++;
+                    idx++;
+                }
+                if (i > 0) {
+                    idx -= 1;
+                }
+                return i;
+            },
+            getNumber = function(size) {
+                var rg = new RegExp('^\\d{1,' + size + '}'),
+                    match = value.substr(valueIdx, size).match(rg);
+
+                if (match) {
+                    match = match[0];
+                    valueIdx += match.length;
+                    return parseInt(match, 10);
+                }
+                return null;
+            },
+            getIndexByName = function (names) {
+                var i = 0,
+                    length = names.length,
+                    name, nameLength;
+
+                for (; i < length; i++) {
+                    name = names[i];
+                    nameLength = name.length;
+
+                    if (value.substr(valueIdx, nameLength) == name) {
+                        valueIdx += nameLength;
+                        return i + 1;
+                    }
+                }
+                return null;
+            },
+            checkLiteral = function() {
+                if (value.charAt(valueIdx) == format[idx]) {
+                    valueIdx++;
+                }
+            },
+            calendar = culture.calendar,
+            year = null,
+            month = null,
+            day = null,
+            hours = null,
+            minutes = null,
+            seconds = null,
+            milliseconds = null,
+            idx = 0,
+            valueIdx = 0,
+            literal = false,
+            date = new Date(),
+            defaultYear = date.getFullYear(),
+            shortYearCutOff = 30,
+            ch, count, AM, PM, pmHour, length, pattern;
+
+        if (!format) {
+            format = "d"; //shord date format
+        }
+
+        //if format is part of the patterns get real format
+        pattern = calendar.patterns[format];
+        if (pattern) {
+            format = pattern;
+        }
+
+        format = format.split("");
+        length = format.length;
+
+        for (; idx < length; idx++) {
+            ch = format[idx];
+
+            if (literal) {
+                if (ch === "'") {
+                    literal = false;
+                } else {
+                    checkLiteral();
+                }
+            } else {
+                if (ch === "d") {
+                    count = lookAhead("d");
+                    day = count < 3 ? getNumber(2) : getIndexByName(calendar.days[count == 3 ? "namesAbbr" : "names"]);
+
+                    if (day === null || outOfRange(day, 1, 31)) {
+                        return null;
+                    }
+                } else if (ch === "M") {
+                    count = lookAhead("M");
+                    month = count < 3 ? getNumber(2) : getIndexByName(calendar.months[count == 3 ? 'namesAbbr' : 'names']);
+
+                    if (month === null || outOfRange(month, 1, 12)) {
+                        return null;
+                    }
+                    month -= 1; //because month is zero based
+                } else if (ch === "y") {
+                    count = lookAhead("y");
+                    year = getNumber(count < 3 ? 2 : 4);
+                    if (year === null) {
+                        year = defaultYear;
+                    }
+                    if (year < shortYearCutOff) {
+                        year = (defaultYear - defaultYear % 100) + year;
+                    }
+                } else if (ch === "h" ) {
+                    lookAhead("h");
+                    hours = getNumber(2);
+                    if (hours == 12) {
+                        hours = 0;
+                    }
+                    if (hours === null || outOfRange(hours, 0, 11)) {
+                        return null;
+                    }
+                } else if (ch === "H") {
+                    lookAhead("H");
+                    hours = getNumber(2);
+                    if (hours === null || outOfRange(hours, 0, 23)) {
+                        return null;
+                    }
+                } else if (ch === "m") {
+                    lookAhead("m");
+                    minutes = getNumber(2);
+                    if (minutes === null || outOfRange(minutes, 0, 59)) {
+                        return null;
+                    }
+                } else if (ch === "s") {
+                    lookAhead("s");
+                    seconds = getNumber(2);
+                    if (seconds === null || outOfRange(seconds, 0, 59)) {
+                        return null;
+                    }
+                } else if (ch === "f") {
+                    count = lookAhead("f");
+                    milliseconds = getNumber(count);
+                    if (milliseconds === null || outOfRange(milliseconds, 0, 999)) {
+                        return null;
+                    }
+                } else if (ch === "t") {
+                    count = lookAhead("t");
+                    pmHour = getIndexByName(calendar.PM);
+                } else if (ch === "'") {
+                    checkLiteral();
+                    literal = true;
+                } else {
+                    checkLiteral();
+                }
+            }
+        }
+
+        if (pmHour && hours < 12) {
+            hours += 12;
+        }
+
+        return new Date(year, month, day, hours, minutes, seconds, milliseconds);
+    }
+
+    kendo.parseDate = function(value, format, culture) {
+        if (value instanceof Date) {
+            return value;
+        }
+
+        format = $.isArray(format) ? format : [format];
+        culture = culture || kendo.culture();
+
+        if (typeof culture === STRING) {
+            kendo.culture(culture);
+            culture = kendo.culture();
+        }
+
+        var idx = 0,
+            length = format.length,
+            date = null;
+
+        for (; idx < length; idx++) {
+            date = parseExact(value, format[idx], culture);
+            if (date) {
+                return date;
+            }
+        }
+
+        return date;
+    }
+})();
 
     function throttle(delay, callback) {
         var timeoutId,

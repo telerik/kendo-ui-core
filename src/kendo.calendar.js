@@ -2,32 +2,30 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Component = ui.Component,
+        template = kendo.template,
+        transitions = kendo.support.transitions,
+        transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
         MONTH = "month",
         YEAR = "year",
         DECADE = "decade",
         CENTURY = "century",
         CLICK = "click",
+        CHANGE = "change",
+        NAVIGATE = "navigate",
         VALUE = "value",
+        HOVER = "k-state-hover",
         DISABLED = "k-state-disabled",
-        SELECTED = "k-state-selected",
         OTHERMONTH = ' class="k-other-month"',
+        CELLSELECTOR = "td:has(.k-link)",
+        MOUSEENTER = "mouseenter",
+        MOUSELEAVE = "mouseleave",
+        cellTemplate = template('<td<#=data.cssClass#>><a class="k-link" href="#" data-value="<#=data.dateString#>"><#=data.value#></a></td>');
+        cellEmptyTemplate = template("<td> </td>");
+        msPerMinute = 60000,
+        msPerDay = 86400000,
         extend = $.extend,
         proxy = $.proxy,
         DATE = Date;
-
-    function defineViewedDate(value, min, max) {
-        var today = new DATE();
-        if (value) {
-            today = new DATE(value);
-        }
-
-        if (min > today) {
-            today = new DATE(min);
-        } else if (max < today) {
-            today = new DATE(max);
-        }
-        return today;
-    }
 
     var Calendar = Component.extend({
         init: function(element, options) {
@@ -39,71 +37,73 @@
 
             options = that.options;
 
+            that.bind([CHANGE, NAVIGATE], options);
+
             that._templates();
 
             that._header();
 
-            that._viewedDate = viewedDate = defineViewedDate(options.value, options.min, options.max);
+            if (options.footer) {
+                that._footer();
+            }
 
-            that.element.delegate("td:has(.k-link)", CLICK, function(e) {
-                e.preventDefault();
-                that.navigateDown(new DATE($(e.currentTarget.children[0]).data(VALUE)));
-            });
+            that.element
+                .delegate(CELLSELECTOR, MOUSEENTER, mouseenter)
+                .delegate(CELLSELECTOR, MOUSELEAVE, mouseleave)
+                .delegate(CELLSELECTOR, CLICK, function(e) {
+                    e.preventDefault();
+                    var link = $(e.currentTarget.firstChild),
+                        date = new DATE(link.data(VALUE)),
+                        viewedValue = that._viewedValue;
 
-            that._currentView = options.firstView;
+                    if (link.parent().hasClass("k-other-month")) {
+                        viewedValue = date;
+                    } else {
+                        that._view.setDate(viewedValue, date);
+                    }
 
-            that.navigate();
+                    that.navigateDown(viewedValue);
+                });
+
+            that._currentView = options.startView;
+
+            that.value(options.value);
         },
 
         options: {
             value: null,
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
+            footer : true,
             depth: MONTH,
-            firstView: MONTH,
+            startView: MONTH,
             month: {
-                content: "<#=data.day#>",
+                content: "<#=data.value#>",
                 empty: " "
-            }
-        },
-
-        _setViewedDate: function(value) {
-            var that = this,
-            viewedDate = that._viewedDate,
-            currentView = that._currentView;
-
-            if (currentView === MONTH) {
-                viewedDate.setMonth(viewedDate.getMonth() + value);
-            } else {
-                if (currentView === DECADE) {
-                    value *= 10;
-                } else if (currentView === CENTURY) {
-                    value *= 100;
-                }
-
-                viewedDate.setFullYear(viewedDate.getFullYear() + value);
             }
         },
 
         navigateToPast: function() {
             var that = this;
-
-            that._setViewedDate(-1);
-
-            that.navigate();
+            if (!that._prevArrow.hasClass(DISABLED)) {
+                that.navigate(that._setViewedValue(-1));
+            }
         },
 
         navigateToFuture: function() {
             var that = this;
-
-            that._setViewedDate(1);
-
-            that.navigate();
+            if (!that._nextArrow.hasClass(DISABLED)) {
+                that.navigate(that._setViewedValue(1));
+            }
         },
 
         navigateUp: function() {
             var that = this,
                 currentView = that._currentView;
+
+            if (currentView == CENTURY) {
+                return;
+            }
 
             if (currentView === MONTH) {
                 currentView = YEAR;
@@ -124,11 +124,15 @@
             currentView = that._currentView;
 
             if (currentView === depth) {
-                if (calendar[currentView].compare(value, that._viewedDate) === 0) {
+                if (that._view.compare(value, that._viewedValue) === 0) {
                     that._changeView = false;
                 }
 
-                that.value(value);
+                if (+that._value != +value) {
+                    that.value(value);
+                    that.trigger(CHANGE);
+                }
+
                 return;
             }
 
@@ -147,58 +151,64 @@
 
         navigate: function(value, viewName) {
             var that = this,
-                dateString, calendarView, compare,
+                view, compare,
                 selectedValue = that._value,
+                viewedValue = that._viewedValue,
                 options = that.options,
                 min = options.min,
                 max = options.max,
-                oldView = that.view,
-                newView;
+                title = that._title,
+                oldTable = that._table,
+                isFuture = value && +value > +viewedValue,
+                differentView = !value || +value === +viewedValue,
+                newTable;
+
+            if (oldTable && oldTable.parent().data("animating")) {
+                return;
+            }
 
             if (!value) {
-                value = that._viewedDate;
+                value = that._viewedValue;
+            } else {
+                value = calendar.defineViewedValue(value, min, max);
+                that._viewedValue = new DATE(value);
             }
 
             if (!viewName) {
                 viewName = that._currentView;
+            } else {
+                that._currentView = viewName;
             }
 
-            calendarView = calendar[viewName];
-            compare = calendarView.compare;
+            that._view = view = calendar[viewName];
+            compare = view.compare;
 
-            that.title
-                .toggleClass(DISABLED, viewName === CENTURY)
-                .html(calendarView.title(value));
+            title.toggleClass(DISABLED, viewName === CENTURY)
+            that._prevArrow.toggleClass(DISABLED, compare(value, min) < 1);
+            that._nextArrow.toggleClass(DISABLED, compare(value, max) > -1);
 
-            that.prevArrow.toggleClass(DISABLED, compare(value, min) < 1);
-            that.nextArrow.toggleClass(DISABLED, compare(value, max) > -1);
+            if (!oldTable || that._changeView) {
+                title.html(view.title(value));
 
-            if (!oldView || that._changeView) {
-                newView = $(calendarView.content(extend({
+                newTable = $(view.content($.extend({
                     min: min,
                     max: max,
                     date: value
                 }, that[viewName])));
 
-                if (!oldView) {
-                    that.element.append(newView);
+                that._table = newTable;
+
+                if (!oldTable) {
+                    newTable.insertAfter(title.closest(".k-header"));
                 } else {
-                    newView.insertBefore(oldView);
-                    oldView.remove();
+                    that._animate(oldTable, newTable, isFuture, differentView);
                 }
 
-                that.view = newView;
+                that.trigger(NAVIGATE);
             }
 
             if (viewName === options.depth && selectedValue) {
-                dateString = calendarView.toDateString(selectedValue);
-
-                that.view.find("td:not(.k-other-month)")
-                    .removeClass(SELECTED)
-                    .filter(function() {
-                       return $(this).children().eq(0).data(VALUE) === dateString;
-                    })
-                    .addClass(SELECTED);
+                that._setClass("k-state-selected", view.toDateString(selectedValue));
             }
 
             that._changeView = true;
@@ -214,27 +224,148 @@
                 return that._value;
             }
 
+            //parse date
+            //value = kendo.parseDate(value, kendo.culture().calendar.patterns.d);
+
             if (value !== null) {
                 value = new Date(value);
 
-                if (isNaN(value.getDate())) {
+                if (!inRange(value, min, max)) {
                     value = null;
-                } else if(value < min) {
-                    value = new DATE(min);
-                } else if(value > max) {
-                    value = new DATE(max);
                 }
             }
 
             that._value = value;
-            that._viewedDate = new DATE(value);
+            that._viewedValue = calendar.defineViewedValue(value, min, max);
 
-            that.navigate(value, options.depth);
+            that.navigate(value || that._viewedValue);
+        },
+
+        _animate: function(oldTable, newTable, isFuture, differentView) {
+            var that = this;
+
+            if (!oldTable.is(":visible")) {
+                newTable.insertAfter(oldTable);
+                oldTable.remove();
+            } else if (differentView) {
+                that._zoomIn(oldTable, newTable);
+            } else {
+                that._animateHorizontal(oldTable, newTable, isFuture);
+            }
+        },
+
+        _animateHorizontal: function(oldTable, newTable, isFuture) {
+            var viewWidth = oldTable.outerWidth();
+
+            oldTable.add(newTable).css({ width: viewWidth, 'float': 'left' });
+
+            oldTable.wrap("<div/>");
+
+            oldTable.parent()
+                .css({
+                    position: 'relative',
+                    width: viewWidth * 2,
+                    'float': 'left',
+                    left: isFuture ? 0 : -200
+                });
+
+                newTable[isFuture ? "insertAfter" : "insertBefore"](oldTable);
+
+            //put in options
+            oldTable.parent().kendoStop(true, true).kendoAnimate({
+                effects: "slide:" + (isFuture ? "left" : "right"),
+                duration: 500,
+                divisor: 2,
+                complete: function() {
+                    oldTable.remove();
+                    newTable.unwrap();
+                }
+            });
+        },
+
+        _zoomIn: function(oldTable, newTable) {
+            var that = this,
+                viewWidth = oldTable.outerWidth(),
+                cell, position;
+
+            newTable.css({
+                position: "absolute",
+                top: 32, //oldTable.prev().outerHeight(),
+                left: 0
+            }).insertBefore(oldTable);
+
+            if (transitionOrigin) {
+                cell = that._getCell(that._view.toDateString(that._viewedValue));
+                position = cell.position();
+                position = (position.left + parseInt(cell.width() / 2)) + "px" + " " + (position.top + parseInt(cell.height() / 2) + "px");
+                newTable.css(transitionOrigin, position);
+            }
+
+            oldTable.kendoStop(true, true).kendoAnimate({
+                effects: "fadeOut",
+                duration: 600,
+                complete: function() {
+                   oldTable.remove();
+                   newTable.css({
+                        position: "static",
+                        top: 0,
+                        left: 0
+                    });
+                }
+            });
+
+            //put in animation
+            newTable.kendoStop(true, true).kendoAnimate({
+                effects: "zoomIn",
+                duration: 400
+            });
+        },
+
+        _focusCell: function(value) {
+            var that = this,
+                view = that._view;
+
+            if (view.compare(value, that._viewedValue) !== 0) {
+                that.navigate(value);
+            } else {
+                that._viewedValue = value;
+            }
+
+            that._setClass("k-state-focused", view.toDateString(value));
+        },
+
+        _footer: function() {
+            var that = this,
+            element = that.element,
+            today = new DATE(),
+            dateString = kendo.toString(today, "D"),
+            link;
+
+            if (!element.find(".k-footer")[0]) {
+                element.append('<div class="k-footer"><a href="#" class="k-link k-nav-today"></a></div>');
+            }
+
+            link = element.find(".k-nav-today");
+
+            link.html(dateString);
+            link.attr("title", dateString);
+
+            link.bind("click", function(e) {
+                e.preventDefault();
+
+                if (that._view.compare(that._viewedValue, today) === 0) {
+                    that._changeView = false;
+                }
+
+                that.value(today);
+                that.trigger(CHANGE);
+            });
         },
 
         _header: function() {
             var that = this,
-            element = that.element;
+            element = that.element,
+            links;
 
             if (!element.find(".k-header")[0]) {
                 element.html('<div class="k-header">'
@@ -244,57 +375,89 @@
                            + '</div>');
             }
 
-            that.prevArrow = element.find(".k-nav-prev")
-                                    .bind(CLICK, function(e) {
-                                        e.preventDefault();
-                                        if (!that.prevArrow.hasClass(DISABLED)) {
-                                            that.navigateToPast();
-                                        }
-                                    });
+            links = element.find(".k-link").hover(mouseenter, mouseleave);
 
-            that.title = element.find(".k-nav-fast")
-                                .bind(CLICK, function(e) {
-                                    e.preventDefault();
-                                    if (!that.title.hasClass(DISABLED)) {
-                                        that.navigateUp();
-                                    }
-                                });
+            that._prevArrow = links.eq(0)
+                                  .bind(CLICK, function(e) {
+                                      e.preventDefault();
+                                      if (!that._prevArrow.hasClass(DISABLED)) {
+                                          that.navigateToPast();
+                                      }
+                                  });
 
-            that.nextArrow = element.find(".k-nav-next")
-                                    .bind(CLICK, function(e) {
-                                        e.preventDefault();
-                                        if (!that.nextArrow.hasClass(DISABLED)) {
-                                            that.navigateToFuture();
-                                        }
-                                    });
+            that._title = links.eq(1)
+                              .bind(CLICK, function(e) {
+                                  e.preventDefault();
+                                  if (!that._title.hasClass(DISABLED)) {
+                                      that.navigateUp();
+                                  }
+                              });
+
+            that._nextArrow = links.eq(2)
+                                  .bind(CLICK, function(e) {
+                                      e.preventDefault();
+                                      if (!that._nextArrow.hasClass(DISABLED)) {
+                                          that.navigateToFuture();
+                                      }
+                                  });
+        },
+
+        _getCell: function(value) {
+            return this._table
+                       .find("td:not(.k-other-month)")
+                       .filter(function() {
+                           return $(this.firstChild).data(VALUE) === value;
+                       });
+        },
+
+        _setClass: function(className, value) {
+            this._table
+                .find("td:not(.k-other-month)")
+                .removeClass(className)
+                .filter(function() {
+                   return $(this.firstChild).data(VALUE) === value;
+                })
+                .addClass(className);
+        },
+
+        _setViewedValue: function(value) {
+            var that = this,
+            viewedValue = new DATE(that._viewedValue),
+            currentView = that._currentView;
+
+            if (currentView === MONTH) {
+                viewedValue.setMonth(viewedValue.getMonth() + value);
+            } else {
+                if (currentView === DECADE) {
+                    value *= 10;
+                } else if (currentView === CENTURY) {
+                    value *= 100;
+                }
+
+                viewedValue.setFullYear(viewedValue.getFullYear() + value);
+            }
+            return viewedValue;
         },
 
         _templates: function() {
             var that = this,
-                month = that.options.month,
-                template = kendo.template;
+                month = that.options.month;
 
             that.month = {
-                content: template('<td<#=data.otherMonth#>><a class="k-link" href="#" data-value="<#=data.dateString#>" title="<#=data.title#>">' + month.content + '</a></td>'),
+                content: template('<td<#=data.cssClass#>><a class="k-link" href="#" data-value="<#=data.dateString#>" title="<#=data.title#>">' + month.content + '</a></td>'),
                 empty: template("<td>" + month.empty + "</td>")
             };
         }
     });
 
-    kendo.ui.Calendar = Calendar;
+    ui.plugin("Calendar", Calendar);
 
     var calendar = {
-        msPerMinute: 60000,
-        msPerDay: 86400000,
         firstDayOfMonth: function (date) {
             return new DATE(
                 date.getFullYear(),
                 date.getMonth(),
-                1,
-                date.getHours(),
-                date.getMinutes(),
-                date.getSeconds(),
-                date.getMilliseconds()
+                1
             );
         },
 
@@ -303,7 +466,7 @@
                 firstVisibleDay = new DATE(date.getFullYear(), date.getMonth(), 0, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
 
             while (firstVisibleDay.getDay() != firstDayOfWeek) {
-                calendar.setTime(firstVisibleDay, -1 * calendar.msPerDay)
+                calendar.setTime(firstVisibleDay, -1 * msPerDay)
             }
 
             return firstVisibleDay;
@@ -314,7 +477,21 @@
                 resultDATE = new DATE(date.getTime() + time),
                 tzOffsetDiff = resultDATE.getTimezoneOffset() - tzOffsetBefore;
 
-            date.setTime(resultDATE.getTime() + tzOffsetDiff * calendar.msPerMinute);
+            date.setTime(resultDATE.getTime() + tzOffsetDiff * msPerMinute);
+        },
+
+        defineViewedValue: function (value, min, max) {
+            var today = new DATE();
+            if (value) {
+                today = new DATE(value);
+            }
+
+            if (min > today) {
+                today = new DATE(min);
+            } else if (max < today) {
+                today = new DATE(max);
+            }
+            return today;
         },
 
         month: {
@@ -322,7 +499,10 @@
                 return kendo.culture().calendar.months.names[date.getMonth()] + " " + date.getFullYear();
             },
             content: function(options) {
-                var idx = 0, data,
+                var that = this,
+                    idx = 0,
+                    min = options.min,
+                    max = options.max,
                     date = options.date,
                     currentCalendar = kendo.culture().calendar,
                     firstDayIdx = currentCalendar.firstDayOfWeek,
@@ -331,43 +511,59 @@
                     abbr = shiftArray(days.namesAbbr, firstDayIdx),
                     short = shiftArray(days.namesShort, firstDayIdx),
                     start = calendar.firstVisibleDay(date),
-                    firstDayOfMonth = calendar.firstDayOfMonth(date),
-                    lastDayOfMonth = new DATE(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth() + 1, 0),
-                    min = options.min,
-                    max = options.max,
-                    content = options.content,
-                    empty = options.empty,
+                    firstDayOfMonth = that.first(date),
+                    lastDayOfMonth = that.last(date),
+                    toDateString = that.toDateString,
+                    today = new DATE(),
                     html = '<table class="k-content"><thead><tr>';
 
                 for (; idx < 7; idx++) {
                     html += '<th abbr="' + abbr[idx] + '" scope="col" title="' + names[idx] + '">' + short[idx] + '</th>';
                 }
 
-                html += "</tr></thead><tbody><tr>";
+                today = +new DATE(today.getFullYear(), today.getMonth(), today.getDate());
 
-                start = new DATE(start.getFullYear(), start.getMonth(), start.getDate());
-                min = new DATE(min.getFullYear(), min.getMonth(), min.getDate());
-                max = new DATE(max.getFullYear(), max.getMonth(), max.getDate());
+                return view({
+                    cells: 42,
+                    perRow: 7,
+                    html: html += "</tr></thead><tbody><tr>",
+                    start: new DATE(start.getFullYear(), start.getMonth(), start.getDate()),
+                    min: new DATE(min.getFullYear(), min.getMonth(), min.getDate()),
+                    max: new DATE(max.getFullYear(), max.getMonth(), max.getDate()),
+                    content: options.content,
+                    empty: options.empty,
+                    setter: that.setDate,
+                    build: function(date, idx) {
+                        var cssClass = [],
+                            day = date.getDay();
 
-                for (idx = 0; idx < 42; idx++) {
-                    if (idx > 0 && idx % 7 == 0) {
-                        html += "</tr><tr>";
+                        if (date < firstDayOfMonth || date > lastDayOfMonth) {
+                            cssClass.push("k-other-month");
+                        }
+
+                        if (+date === today) {
+                            cssClass.push("k-today");
+                        }
+
+                        if (day === 0 || day === 6) {
+                            cssClass.push("k-weekend");
+                        }
+
+                        return {
+                            date: date,
+                            title: kendo.toString(date, "D"),
+                            value: date.getDate(),
+                            dateString: toDateString(date),
+                            cssClass: cssClass[0] ? ' class="' + cssClass.join(" ") + '"' : ""
+                        };
                     }
-
-                    data = {
-                        date: start,
-                        title: kendo.toString(start, "D"),
-                        day: start.getDate(),
-                        dateString: this.toDateString(start),
-                        otherMonth: start < firstDayOfMonth || start > lastDayOfMonth ? OTHERMONTH : ''
-                    };
-
-                    html += inRange(start, min, max) ? content(data) : empty(data);
-
-                    start.setDate(start.getDate() + 1);
-                }
-
-                return html + "</tr></tbody></table>";
+                });
+            },
+            first: function(date) {
+                return calendar.firstDayOfMonth(date);
+            },
+            last: function(date) {
+                return new DATE(date.getFullYear(), date.getMonth() + 1, 0);
             },
             compare: function(date1, date2) {
                 var result,
@@ -386,6 +582,13 @@
 
                 return result;
             },
+            setDate: function(date, value) {
+                if (value instanceof DATE) {
+                    date.setFullYear(value.getFullYear(), value.getMonth(), value.getDate());
+                } else {
+                    calendar.setTime(date, value * msPerDay);
+                }
+            },
             toDateString: function(date) {
                 return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
             }
@@ -397,26 +600,41 @@
             },
             content: function(options) {
                 var namesAbbr = kendo.culture().calendar.months.namesAbbr,
+                    toDateString = this.toDateString,
                     min = options.min,
                     max = options.max;
 
-                extend(options, {
+                return view({
                     min: new DATE(min.getFullYear(), min.getMonth(), 1),
                     max: new DATE(max.getFullYear(), max.getMonth(), 1),
                     start: new DATE(options.date.getFullYear(), 0, 1),
-                    setter: function(date) {
-                        date.setMonth(date.getMonth() + 1);
-                    },
-                    toString: function(date) {
-                        return namesAbbr[date.getMonth()];
-                    },
-                    toDateString: this.toDateString
+                    setter: this.setDate,
+                    build: function(date) {
+                        return {
+                            value: namesAbbr[date.getMonth()],
+                            dateString: toDateString(date),
+                            cssClass: ""
+                        };
+                    }
                 });
-
-                return view(options);
+            },
+            first: function(date) {
+                return new DATE(date.getFullYear(), 0, date.getDate());
+            },
+            last: function(date) {
+                return new DATE(date.getFullYear(), 11, date.getDate());
             },
             compare: function(date1, date2){
                 return compare(date1, date2);
+            },
+            setDate: function(date, value) {
+                if (value instanceof DATE) {
+                    date.setFullYear(value.getFullYear(),
+                                     value.getMonth(),
+                                     date.getDate());
+                } else {
+                    date.setMonth(date.getMonth() + value);
+                }
             },
             toDateString: function(date) {
                 return (date.getMonth() + 1) + "/1/" + date.getFullYear();
@@ -431,26 +649,36 @@
                 return start + "-" + (start + 9);
             },
             content: function(options) {
-                var year = options.date.getFullYear();
+                var year = options.date.getFullYear(),
+                    toDateString = this.toDateString;
 
-                extend(options, {
-                    view: DECADE,
-                    start: new DATE(year = year - year % 10 - 1, 0, 1),
+                return view({
+                    start: new DATE(year - year % 10 - 1, 0, 1),
                     min: new DATE(options.min.getFullYear(), 0, 1),
                     max: new DATE(options.max.getFullYear(), 0, 1),
-                    setter: function(date) {
-                        date.setFullYear(date.getFullYear() + 1);
-                    },
-                    toString: function(date) {
-                        return date.getFullYear();
-                    },
-                    toDateString: this.toDateString
+                    setter: this.setDate,
+                    build: function(date, idx) {
+                        return {
+                            value: date.getFullYear(),
+                            dateString: toDateString(date),
+                            cssClass: idx == 0 || idx == 11 ? OTHERMONTH : ""
+                        };
+                    }
                 });
-
-                return view(options);
+            },
+            first: function(date) {
+                var year = date.getFullYear();
+                return new DATE(year - year % 10, date.getMonth(), date.getDate());
+            },
+            last: function(date) {
+                var year = date.getFullYear();
+                return new DATE(year - year % 10 + 9, date.getMonth(), date.getDate());
             },
             compare: function(date1, date2) {
                 return compare(date1, date2, 10);
+            },
+            setDate: function(date, value) {
+                setDate(date, value, 1);
             },
             toDateString: function(date) {
                 return "1/1/" + date.getFullYear();
@@ -465,27 +693,46 @@
                 return start + "-" + (start + 99);
             },
             content: function(options) {
-                var year = options.date.getFullYear();
+                var year = options.date.getFullYear(),
+                    minYear = options.min.getFullYear(),
+                    maxYear = options.max.getFullYear(),
+                    toDateString = this.toDateString;
 
-                extend(options, {
-                    view: CENTURY,
+                minYear = minYear - minYear % 10;
+                maxYear = maxYear - maxYear % 10;
+
+                if (maxYear - minYear < 10) {
+                    maxYear = minYear + 9;
+                }
+
+                return view({
                     start: new DATE(year - year % 100 - 10, 0, 1),
-                    min: new DATE(options.min.getFullYear() - 10, 0, 1),
-                    max: new DATE(options.max.getFullYear(), 0, 1),
-                    setter: function(date) {
-                        date.setFullYear(date.getFullYear() + 10);
-                    },
-                    toString: function(date) {
+                    min: new DATE(minYear, 0, 1),
+                    max: new DATE(maxYear, 0, 1),
+                    setter: this.setDate,
+                    build: function(date, idx) {
                         var year = date.getFullYear();
-                        return year + "-" + (year + 9);
-                    },
-                    toDateString: this.toDateString
+                        return {
+                            value: year + "-" + (year + 9),
+                            dateString: toDateString(date),
+                            cssClass: idx == 0 || idx == 11 ? OTHERMONTH : ""
+                        };
+                    }
                 });
-
-                return view(options);
+            },
+            first: function(date) {
+                var year = date.getFullYear();
+                return new DATE(year - year % 100, date.getMonth(), date.getDate());
+            },
+            last: function(date) {
+                var year = date.getFullYear();
+                return new DATE(year - year % 100 + 99, date.getMonth(), date.getDate());
             },
             compare: function(date1, date2) {
                 return compare(date1, date2, 100);
+            },
+            setDate: function(date, value) {
+                setDate(date, value, 10);
             },
             toDateString: function(date) {
                 var year = date.getFullYear();
@@ -495,34 +742,31 @@
     }
 
     function view(options) {
-        var idx = 0, otherMonth,
+        var idx = 0,
+            data,
             view = options.view,
             min = options.min,
             max = options.max,
             start = options.start,
             setter = options.setter,
-            toString = options.toString,
+            build = options.build,
+            length = options.cells || 12,
+            cellsPerRow = options.perRow || 4,
             toDateString = options.toDateString,
-            html = '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>';
+            content = options.content || cellTemplate,
+            empty = options.empty || cellEmptyTemplate,
+            html = options.html || '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>';
 
-        for(; idx < 12; idx++) {
-            if (idx > 0 && idx % 4 == 0) {
+        for(; idx < length; idx++) {
+            if (idx > 0 && idx % cellsPerRow == 0) {
                 html += "</tr><tr>";
             }
 
-            if (inRange(start, min, max)) {
-                html += '<td';
+            data = build(start, idx);
 
-                if (view != undefined && (idx == 0 || idx == 11)) {
-                    html += OTHERMONTH;
-                }
+            html += inRange(start, min, max) ? content(data) : empty(data);
 
-                html += '><a class="k-link" data-value="' + toDateString(start) + '">' + toString(start) + "</a></td>";
-            } else {
-                html += "<td> </td>";
-            }
-
-            setter(start);
+            setter(start, 1);
         }
 
         return html + "</tr></tbody></table>";
@@ -530,20 +774,18 @@
 
     function compare(date1, date2, modifier) {
         var year1 = date1.getFullYear(),
-            year2 = date2.getFullYear(),
+            start  = date2.getFullYear(),
+            end = start,
             result = 0;
 
         if (modifier) {
-            if (year2 > year1) {
-                year1 += modifier;
-            } else if (year2 < year1) {
-                year1 -= modifier;
-            }
+            start = start - start % modifier;
+            end = start - start % modifier + modifier - (1 * modifier / 10);
         }
 
-        if (year1 > year2) {
+        if (year1 > end) {
             result = 1;
-        } else if (year1 < year2) {
+        } else if (year1 < start) {
             result = -1;
         }
 
@@ -557,6 +799,19 @@
 
     function shiftArray(array, idx) {
         return array.slice(idx).concat(array.slice(0, idx));
+    }
+
+    function setDate(date, value, multiplier) {
+        value = value instanceof DATE ? value.getFullYear() : date.getFullYear() + multiplier * value;
+        date.setFullYear(value);
+    }
+
+    function mouseenter() {
+        $(this).addClass(HOVER);
+    }
+
+    function mouseleave() {
+        $(this).removeClass(HOVER);
     }
 
     kendo.calendar = calendar;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Calendar rendering</title>
+        ._title>Calendar rendering<._title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
@@ -31,7 +31,7 @@
             test("define current", function() {
                 var cal = new Calendar(div),
                     today = new Date(),
-                    current = cal._viewedDate;
+                    current = cal._viewedValue;
 
                 equal(current.getFullYear(), today.getFullYear());
                 equal(current.getMonth(), today.getMonth());
@@ -41,9 +41,9 @@
             test("render header", function() {
                 var cal = new Calendar(div);
                 ok(cal.element.find(".k-header"));
-                ok(cal.prevArrow);
-                ok(cal.nextArrow);
-                ok(cal.title);
+                ok(cal._prevArrow);
+                ok(cal._nextArrow);
+                ok(cal._title);
             });
 
             test("render table after header", function() {
@@ -54,39 +54,123 @@
             test("render month view when init", function() {
                 var date = new Date(2011, 10, 10), cal = new Calendar(div, {value: date});
 
-                equal(cal.title.html(), "November 2011");
+                equal(cal._title.html(), "November 2011");
                 equal(cal.element.find(".k-content").find("a").length, 42);
             });
 
             test("render year view when init", function() {
-                var date = new Date(2011, 10, 10), cal = new Calendar(div, { value: date, firstView: "year" }),
+                var date = new Date(2011, 10, 10), cal = new Calendar(div, { value: date, startView: "year" }),
                 anchors = cal.element.find(".k-content").find("a"),
                 january = kendo.culture().calendar.months.namesAbbr[0];
 
-                equal(cal.title.html(), "2011");
+                equal(cal._title.html(), "2011");
                 equal(anchors.length, 12);
                 equal(anchors.eq(0).html(), january);
             });
 
             test("render decade view when init", function() {
                 var date = new Date(2011, 10, 10),
-                cal = new Calendar(div, { firstView: "decade", value: date }),
+                cal = new Calendar(div, { startView: "decade", value: date }),
                 anchors = cal.element.find(".k-content").find("a");
 
-                equal(cal.title.html(), "2010-2019");
+                equal(cal._title.html(), "2010-2019");
                 equal(anchors.length, 12);
                 equal(anchors.eq(0).html(), "2009");
             });
 
             test("render century view when init", function() {
                 var date = new Date(2011, 10, 10),
-                cal = new Calendar(div, { firstView: "century", value: date, max: new Date(2200, 10, 10) }),
+                cal = new Calendar(div, { startView: "century", value: date, max: new Date(2200, 10, 10) }),
                 anchors = cal.element.find(".k-content").find("a");
 
-                equal(cal.title.html(), "2000-2099");
+                equal(cal._title.html(), "2000-2099");
                 equal(anchors.length, 12);
                 equal(anchors.eq(0).html(), "1990-1999");
             });
+
+            test("calendar should wire TD click event", function() {
+                var cal = new Calendar(div);
+
+                stub(cal, "navigateDown");
+
+                cal.element.find("td:has(.k-link)").eq(0).click();
+
+                equal(cal.calls("navigateDown"), 1);
+            });
+
+            test("calendar should wire header buttons", function() {
+                var cal = new Calendar(div);
+
+                stub(cal, {
+                    navigateToPast: cal.navigateToPast,
+                    navigateToFuture: cal.navigateToFuture,
+                    navigateUp: cal.navigateUp
+                });
+
+                var links = cal.element.find(".k-header").find(".k-link");
+
+                links.eq(0).click();
+                links.eq(1).click();
+                links.eq(2).click();
+
+                equal(cal.calls("navigateToPast"), 1);
+                equal(cal.calls("navigateUp"), 1);
+                equal(cal.calls("navigateToFuture"), 1);
+            });
+
+            test("calendar should show hover state when hover TD", function() {
+                var cal = new Calendar(div);
+
+                var td = cal.element.find("td:has(.k-link)").eq(0);
+
+                td.mouseenter();
+
+                ok(td.hasClass("k-state-hover"));
+            });
+
+            test("calendar should remove hover state from TD", function() {
+                var cal = new Calendar(div);
+
+                var td = cal.element.find("td:has(.k-link)").eq(0);
+
+                td.mouseenter();
+                td.mouseleave();
+
+                ok(!td.hasClass("k-state-hover"));
+            });
+
+            test("calendar should show hover state to the header elements", function() {
+                var cal = new Calendar(div);
+
+                var links = cal.element.find(".k-header").find(".k-link");
+
+                links.eq(0).mouseenter();
+                links.eq(1).mouseenter();
+                links.eq(2).mouseenter();
+
+                ok(links.eq(0).hasClass("k-state-hover"));
+                ok(links.eq(1).hasClass("k-state-hover"));
+                ok(links.eq(2).hasClass("k-state-hover"));
+            });
+
+            test("calendar should remove hover state to the header elements", function() {
+                var cal = new Calendar(div);
+
+                var links = cal.element.find(".k-header").find(".k-link");
+
+                links.eq(0).mouseenter();
+                links.eq(1).mouseenter();
+                links.eq(2).mouseenter();
+
+                links.eq(0).mouseleave();
+                links.eq(1).mouseleave();
+                links.eq(2).mouseleave();
+
+                ok(!links.eq(0).hasClass("k-state-hover"));
+                ok(!links.eq(1).hasClass("k-state-hover"));
+                ok(!links.eq(2).hasClass("k-state-hover"));
+            });
+
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
