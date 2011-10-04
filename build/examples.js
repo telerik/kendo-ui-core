@@ -128,7 +128,7 @@ function updateBaseLocation(html, base) {
 
 function componentFromFilename(file) {
     var parts = file.substring(outputPath.length).split("/"),
-        candidate = parts[0];
+        candidate = parts[0] || parts[1];
 
     var exceptions = [
         "animation",
