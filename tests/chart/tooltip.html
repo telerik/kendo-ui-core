@@ -153,14 +153,14 @@
 
             test("positions tooltip on anchor", function() {
                 dataPointMock.tooltipAnchor = function() { return new Chart.Point2D(10, 10) };
+                tooltip.options.animation.duration = 0;
                 tooltip.options.offsetX = 0;
                 tooltip.options.offsetY = 0;
                 tooltip.show(dataPointMock);
 
                 same([parseInt(tooltip.element.css("top"), 10),
                       parseInt(tooltip.element.css("left"), 10)],
-                      [10, 10]
-                );
+                      [10, 10]);
             });
 
         </script>
