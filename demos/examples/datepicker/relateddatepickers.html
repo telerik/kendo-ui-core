@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Related DatePickers</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.calendar.js"></script>
+        <script src="../../../src/kendo.datepicker.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Basic usage</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+            <label for="start">Start date:</label>
+            <input id="start" value="10/10/2011" />
+            <br/>
+            <label for="end">End date:</label>
+            <input id="end" value="10/10/2012"/>
+            <script>
+                $(document).ready(function() {
+                    function startChange() {
+                        var startDate = start.value();
+
+                        startDate.setDate(startDate.getDate() + 1);
+
+                        //implement min()
+                        end.options.min = startDate;
+                        end.dateView.options.min = startDate;
+                        end.dateView.calendar.options.min = startDate;
+
+                        end.value(startDate);
+                    }
+
+                    function endChange() {
+                        var endDate = end.value();
+
+                        endDate.setDate(endDate.getDate() - 1);
+
+                        //implement max()
+                        start.options.max = endDate;
+                        start.dateView.options.max = endDate;
+                        start.dateView.calendar.options.max = endDate;
+
+                        start.value(endDate);
+                    }
+
+                    var start = $("#start").kendoDatePicker({
+                        change: startChange
+                    }).data("kendoDatePicker");
+
+                    var end = $("#end").kendoDatePicker({
+                        change: endChange
+                    }).data("kendoDatePicker");
+                });
+            </script>
+
+            <style scoped>
+                #example h3 {
+                    clear: both;
+                }
+
+                #example .code-sample {
+                    width: 60%;
+                    float:left;
+                    margin-bottom: 20px;
+                }
+
+                #example .output {
+                    width: 24%;
+                    margin-left: 4%;
+                    float:left;
+                }
+            </style>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
