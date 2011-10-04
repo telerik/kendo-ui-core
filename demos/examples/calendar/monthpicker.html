@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Month picker</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.calendar.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Events</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+            <div id="calendar"></div>
+            <input id="value"/>
+            <script>
+                $(document).ready(function() {
+                    function onChange() {
+                        $("#value").val(kendo.toString(calendar.value(), "d"));
+                    }
+
+                    var calendar = $("#calendar").kendoCalendar({
+                        change: onChange,
+                        startView: "decade", //defines the start view
+                        depth: "year" //defines when the calendar should return date
+                    }).data("kendoCalendar");
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>

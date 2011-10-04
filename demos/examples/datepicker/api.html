@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>API</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.calendar.js"></script>
+        <script src="../../../src/kendo.datepicker.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">API</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+            <input id="datepicker" />
+
+            <script>
+                $(document).ready(function() {
+                    $("#datepicker").kendoDatePicker()
+                                  .closest(".k-widget")
+                                  .attr("id", "datepicker_wrapper");
+
+                    var datepicker = $("#datepicker").data("kendoDatePicker");
+
+                    $("#enable").click(function() {
+                        //datepicker.enable();
+                        alert("no enable() yet");
+                    });
+
+                    $("#disable").click(function() {
+                        //datepicker.enable(false);
+                        alert("no enable(false) yet");
+                    });
+
+                    $("#open").click(function() {
+                        datepicker.open();
+                    });
+
+                    $("#close").click(function() {
+                        datepicker.close();
+                    });
+
+                    $("#set").click(function() {
+                        datepicker.value($("#value").val());
+                    });
+
+                    $("#get").click(function() {
+                        alert(datepicker.value());
+                    });
+                });
+           </script>
+            <div class="configuration" style="width: 210px">
+                <span class="configHead">Configuration</span>
+                <span class="configTitle">API Functions</span>
+                <ul class="options">
+                    <li>
+                        <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
+                    </li>
+                    <li>
+                        <button id="open" class="k-button">Open</button> or <button id="close" class="k-button">Close</button> the calendar
+                    </li>
+                    <li>
+                        <input id="value" value="10/10/2000" /> <button id="set" class="k-button">Set value</button>
+                    </li>
+                    <li>
+                        <button id="get" class="k-button">Get value</button>
+                    </li>
+                </ul>
+           </div>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
