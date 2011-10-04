@@ -51,10 +51,6 @@
             if (calendarElement.data(DATEVIEW) !== this) {
                 popup.options.anchor = options.anchor;
 
-                if (popup.wrapper) {
-                    popup.wrapper.data("position", "");
-                }
-
                 popup.unbind(OPEN)
                      .unbind(CLOSE)
                      .bind(OPEN, options)
