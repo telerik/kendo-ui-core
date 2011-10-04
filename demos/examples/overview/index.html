@@ -13,9 +13,12 @@
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.dropdownlist.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
         <script src="../../../src/kendo.pageable.js"></script>
         <script src="../../../src/kendo.sortable.js"></script>
-        <script src="../../../src/kendo.draganddrop.js"></script>
         <script src="../../../src/kendo.groupable.js"></script>
         <script src="../../../src/kendo.grid.js"></script>
         <script src="../../../src/kendo.chart.js"></script>
@@ -186,7 +189,7 @@
 
                 function createChart() {
                     $("#chart").kendoChart({
-                        theme: getSkin(),
+                        theme: $(document).data("kendoSkin") || "kendo",
                         dataSource: sharedDataSource,
                         legend: {
                             visible: false
@@ -233,10 +236,6 @@
                         createChart();
                     });
                 });
-
-                function getSkin() {
-                    return $("#skinSelector").val().toLowerCase();
-                }
             </script>
         </div>
         <!-- tools -->
