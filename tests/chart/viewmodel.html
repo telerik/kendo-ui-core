@@ -266,7 +266,7 @@
                     boxElement.reflow(targetBox);
 
                     equal(boxElement.box.height(), HEIGHT);
-                })
+                });
 
                 test("applies top margin", function() {
                     boxElement.options.margin.top = MARGIN;
@@ -659,6 +659,14 @@
                     equals(view.log.rect[0].style.id, "id");
                 });
 
+                test("renders zIndex", function() {
+                    boxElement.options.zIndex = 100;
+                    boxElement.reflow(targetBox);
+                    boxElement.getViewElements(view);
+
+                    equals(view.log.rect[0].style.zIndex, 100);
+                });
+
             })();
 
             (function() {
@@ -885,6 +893,21 @@
                     text.getViewElements(view);
 
                     equals(view.log.text[0].style.id, "id");
+                });
+
+                test("renders zIndex", function() {
+                    text.options.zIndex = 100;
+                    text.reflow(new Box2D());
+                    text.getViewElements(view);
+
+                    equals(view.log.text[0].style.zIndex, 100);
+                });
+
+                test("renders baseline", function() {
+                    text.reflow(new Box2D());
+                    text.getViewElements(view);
+
+                    equals(view.log.text[0].style.baseline, 13, TOLERANCE);
                 });
 
             })();

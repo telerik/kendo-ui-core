@@ -1911,7 +1911,8 @@
                         strokeOpacity: options.opacity,
                         fill: options.background,
                         fillOpacity: options.opacity,
-                        animation: options.animation
+                        animation: options.animation,
+                        zIndex: options.zIndex
                     }, renderOptions))
                 );
             }
@@ -1988,16 +1989,12 @@
             ChartElement.fn.getViewElements.call(this, view);
 
             return [
-                view.createText(text.content, {
-                    id: options.id,
-                    x: text.box.x1, y: text.box.y1,
-                    baseline: text.baseline,
-                    font: options.font,
-                    color: options.color,
-                    rotation: options.rotation,
-                    size: options.size,
-                    animation: options.animation
-                })
+                view.createText(text.content,
+                    deepExtend({}, options, {
+                        x: text.box.x1, y: text.box.y1,
+                        baseline: text.baseline
+                    })
+                )
             ];
         }
     });
@@ -2882,7 +2879,9 @@
 
             var options = axis.options,
                 align = options.orientation === VERTICAL ? RIGHT : CENTER,
-                labelOptions = deepExtend({ }, options.labels, { align: align }),
+                labelOptions = deepExtend({ }, options.labels,
+                    { align: align, zIndex: options.zIndex }
+                ),
                 labelTemplate,
                 count = options.categories.length,
                 content,
