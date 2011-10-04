@@ -253,7 +253,7 @@
             value: null,
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
-            format: "MM/dd/yyyy",
+            format: kendo.culture().calendar.patterns.d,
             startView: "month",
             depth: "month"
         },
