@@ -1358,11 +1358,10 @@
             duration: 400, //jQuery default duration
             reverse: false,
             init: noop,
-            complete: noop,
             teardown: noop,
             hide: false,
             show: false
-        }, { completeCallback: options.complete }, options); // Move external complete callback, so deferred.resolve can be always executed.
+        }, options, { completeCallback: options.complete, complete: noop }); // Move external complete callback, so deferred.resolve can be always executed.
 
         return element.queue(function () {
             fx.promise(element, options);
