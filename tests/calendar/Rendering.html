@@ -82,6 +82,15 @@
                 equal(+modified, +date);
             });
 
+            test("year.setDate should honer end day of month", function() {
+                var date = new Date(2011, 3, 1, 10, 10, 5555),
+                    modified = new Date(2011, 7, 31, 10, 10, 5555);
+
+                calendar.year.setDate(modified, -4);
+
+                equal(+modified, +date);
+            });
+
             test("year.setDate updates even the second param is date", function() {
                 var value = new Date(2011, 7, 31, 10, 10, 33, 111),
                     origin = new Date(2010, 7, 22, 20, 11, 44, 666);

@@ -1,41 +1,108 @@
 (function($, undefined) {
+    /**
+    * @name kendo.ui.DatePicker.Description
+    *
+    * @section
+    *   <p>
+    *       The DatePicker widget allows to the end user to select a date from a graphical calendar.
+    *       It supports custom templates for "month" view, configurable options for min and max date,
+    *       start view and the depth of the navigation.
+    *   </p>
+    *
+    *   <h3>Getting Started</h3>
+    *
+    * @exampleTitle Creating a DatePicker from existing INPUT element
+    * @example
+    * <!-- HTML -->
+    * <input id="datepicker"/>
+    *
+    * @exampleTitle DatePicker initialization
+    * @example
+    *   $(document).ready(function(){
+    *      $("#datepicker").kendoDatePicker();
+    *   });
+    * @section
+    *  <p>
+    *      When a DatePicker is initialized, it will automatically be displayed near the
+    *      location of the used HTML element.
+    *  </p>
+    *  <h3>Configuring DatePicker behaviors</h3>
+    *  <p>
+    *      DatePicker provides configuration options that can be easily set during initialization.
+    *      Among the properties that can be controlled:
+    *  </p>
+    *  <ul>
+    *      <li>Selected date</li>
+    *      <li>Minimum/Maximum date</li>
+    *      <li>Define format</li>
+    *      <li>Start view</li>
+    *      <li>Define the navigation depth (last view to which end user can navigate)</li>
+    *  </ul>
+    * @exampleTitle Create DatePicker with selected date and defined min and max date
+    * @example
+    *  $("#datepicker").kendoDatePicker({
+    *      value: new Date(),
+    *      min: new Date(1950, 0, 1),
+    *      max: new Date(2049, 11, 31)
+    *  });
+    *  @section
+    * <p>
+    *   DatePicker will set the value only if the entered date is valid and if it is in the defined range
+    * </p>
+    * @section
+    * <h3>Define start view and navigation depth</h3>
+    * <p>
+    *    The first rendered view can be defined with "startView" option. Navigation depth
+    *    can be controlled with "depth" option. Predefined views are:
+    *    <ul>
+    *       <li>"month" - shows the days from the month</li>
+    *       <li>"year" - shows the months of the year</li>
+    *       <li>"decade" - shows the years from the decade</li>
+    *       <li>"century" - shows the decades from the century</li>
+    *    </ul>
+    * </p>
+    *
+    * @exampleTitle Create Month picker
+    * @example
+    *  $("#calendar").kendoDatePicker({
+    *      startView: "year",
+    *      depth: "year"
+    *  });
+    *
+    */
+
     var kendo = window.kendo,
     ui = kendo.ui,
     Component = ui.Component,
     parse = kendo.parseDate,
     keys = kendo.keys,
-    defineViewedValue = kendo.calendar.defineViewedValue,
-    popup,
-    calendar,
-    DATEVIEW = "dateView",
+    DIV = "<div />",
+    CLICK = "click",
     OPEN = "open",
     CLOSE = "close",
-    MOUSEDOWN = (kendo.support.touch ? "touchstart" : "mousedown"),
     CHANGE = "change",
     NAVIGATE = "navigate",
-    DIV = "<div />",
-    proxy = $.proxy;
+    DATEVIEW = "dateView",
+    SELECTED = "k-state-selected",
+    MOUSEDOWN = (kendo.support.touch ? "touchstart" : "mousedown"),
+    cal = kendo.calendar,
+    isInRange = cal.isInRange,
+    restrictValue = cal.restrictValue,
+    proxy = $.proxy,
+    DATE = Date,
+    calendar;
 
     var DateView = function(options) {
         var that = this,
-            div;
+            body = document.body;
 
         if (!calendar) {
-            div = $(DIV);
-            div.appendTo(document.body);
-            calendar = new ui.Calendar(div);
-            popup = new ui.Popup(div);
-
-            calendar.element.bind("click", function(e) {
-                if (e.currentTarget.className.indexOf("k-state-selected") !== -1) {
-                    that.close();
-                }
-            });
+            calendar = new ui.Calendar($(DIV).hide().appendTo(body));
         }
 
-        that.options = options = options || {};
         that.calendar = calendar;
-        that.popup = popup;
+        that.options = options = options || {};
+        that.popup = new ui.Popup($(DIV).appendTo(body), options);
 
         that.value(options.value);
     }
@@ -46,17 +113,17 @@
                 popup = that.popup,
                 options = that.options,
                 calendar = that.calendar,
-                calendarElement = calendar.element;
+                element = calendar.element;
 
-            if (calendarElement.data(DATEVIEW) !== this) {
-                popup.options.anchor = options.anchor;
+            if (element.data(DATEVIEW) !== that) {
 
-                popup.unbind(OPEN)
-                     .unbind(CLOSE)
-                     .bind(OPEN, options)
-                     .bind([OPEN, CLOSE], options);
+                element.show()
+                       .appendTo(popup.element)
+                       .data(DATEVIEW, that)
+                       .bind(CLICK, proxy(that._click, that))
+                       .unbind(MOUSEDOWN)
+                       .bind(MOUSEDOWN, options.clearBlurTimeout);
 
-                calendarElement.data(DATEVIEW, this);
                 calendar.options.min = options.min;
                 calendar.options.max = options.max;
                 calendar.options.depth = options.depth;
@@ -65,13 +132,8 @@
 
                 calendar.unbind(CHANGE)
                         .unbind(NAVIGATE)
-                        .bind(NAVIGATE,function() {
-                            that._viewedValue = new Date(calendar._viewedValue);
-                            calendar._focusCell(calendar._viewedValue);
-                        })
+                        .bind(NAVIGATE, proxy(that._navigate, that))
                         .bind(CHANGE, options);
-
-                calendarElement.unbind(MOUSEDOWN).bind(MOUSEDOWN, options.clearBlurTimeout);
 
                 that.value(that._value);
             }
@@ -91,8 +153,6 @@
         toggle: function() {
             var that = this;
 
-            that._initCalendar();
-
             if (that.popup.visible()) {
                 that.close();
             } else {
@@ -105,70 +165,70 @@
                 options = that.options,
                 min = options.min,
                 max = options.max,
-                viewedValue = new Date(that._viewedValue),
+                viewedValue = new DATE(that._viewedValue),
                 calendar = that.calendar,
                 viewName = calendar._currentView,
                 view = calendar._view,
                 key = e.keyCode,
-                dateString, value;
+                dateString, value, prevent;
 
             if (keys.ESC == key) {
                 that.close();
                 return;
             }
 
-            //cache e.preventDefault()
             if (e.ctrlKey) {
                 if (keys.RIGHT == key) {
                     calendar.navigateToFuture();
-                    e.preventDefault();
+                    prevent = true;
                 } else if (keys.LEFT == key) {
                     calendar.navigateToPast();
-                    e.preventDefault();
+                    prevent = true;
                 } else if (keys.UP == key) {
                     calendar.navigateUp();
-                    e.preventDefault();
+                    prevent = true;
                 } else if (keys.DOWN == key) {
-                    e.preventDefault();
                     that._navigateDown();
+                    prevent = true;
                 }
             } else {
                 if (keys.RIGHT == key) {
                     value = 1;
-                    e.preventDefault();
+                    prevent = true;
                 } else if (keys.LEFT == key) {
                     value = -1;
-                    e.preventDefault();
+                    prevent = true;
                 } else if (keys.UP == key) {
                     value = viewName === "month" ? -7 : -4;
-                    e.preventDefault();
+                    prevent = true;
                 } else if (keys.DOWN == key) {
                     value = viewName === "month" ? 7 : 4;
-                    e.preventDefault();
+                    prevent = true;
                 } else if (keys.ENTER == key) {
-                    e.preventDefault();
+                    prevent = true;
                     that._navigateDown();
                 } else if (keys.HOME == key) {
-                    e.preventDefault();
-                    //find a way to combine this code with the one in the if(value) condition block
-                    that._viewedValue = viewedValue = defineViewedValue(view.first(viewedValue), options.min, options.max);
-                    calendar._focusCell(viewedValue);
+                    prevent = true;
+                    that._viewedValue = viewedValue = restrictValue(view.first(viewedValue), options.min, options.max);
+                    calendar._focus(viewedValue);
                 } else if (keys.END == key) {
-                    e.preventDefault();
-                    that._viewedValue = viewedValue = defineViewedValue(view.last(viewedValue), options.min, options.max);
-                    calendar._focusCell(viewedValue);
+                    prevent = true;
+                    that._viewedValue = viewedValue = restrictValue(view.last(viewedValue), options.min, options.max);
+                    calendar._focus(viewedValue);
                 } else if (keys.PAGEUP == key) {
                     calendar.navigateToPast();
                 } else if (keys.PAGEDOWN == key) {
                     calendar.navigateToFuture();
                 }
 
+                if (prevent) {
+                    e.preventDefault();
+                }
+
                 if (value) {
                     view.setDate(viewedValue, value);
-
-                    that._viewedValue = viewedValue = defineViewedValue(viewedValue, options.min, options.max);
-
-                    calendar._focusCell(viewedValue);
+                    that._viewedValue = viewedValue = restrictValue(viewedValue, options.min, options.max);
+                    calendar._focus(viewedValue);
                 }
             }
         },
@@ -179,12 +239,26 @@
                 options = that.options;
 
             that._value = value;
-            that._viewedValue = defineViewedValue(value, options.min, options.max);
+            that._viewedValue = new DATE(restrictValue(value, options.min, options.max));
 
-            if (calendar.element.data(DATEVIEW) === this) {
-                calendar._focusCell(that._viewedValue);
+            if (calendar.element.data(DATEVIEW) === that) {
+                calendar._focus(that._viewedValue);
                 calendar.value(value);
             }
+        },
+
+        _click: function(e) {
+            if (e.currentTarget.className.indexOf(SELECTED) !== -1) {
+                this.close();
+            }
+        },
+
+        _navigate: function() {
+            var that = this,
+                calendar = that.calendar;
+
+            that._viewedValue = new DATE(calendar._viewedValue);
+            calendar._focus(calendar._viewedValue);
         },
 
         _navigateDown: function() {
@@ -194,7 +268,7 @@
                 cell = calendar._table.find(".k-state-focused"),
                 value = new Date(cell.children(":first").data("value"));
 
-            if (cell.hasClass("k-state-selected")) {
+            if (!cell[0] || cell.hasClass(SELECTED)) {
                 that.close();
                 return;
             }
@@ -206,7 +280,19 @@
 
     kendo.DateView = DateView;
 
-    var DatePicker = Component.extend({
+    var DatePicker = Component.extend(/** @lends kendo.ui.DatePicker.prototype */{
+        /**
+         * @constructs
+         * @extends kendo.ui.Component
+         * @param {DomElement} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {Date} [value] <null> Specifies the selected date.
+         * @option {Date} [min] <Date(1900, 0, 1)> Specifies the minimum date, which the calendar can show.
+         * @option {Date} [max] <Date(2099, 11, 31)> Specifies the maximum date, which the calendar can show.
+         * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to parse value set with value() method.
+         * @option {String} [startView] <month> Specifies the start view.
+         * @option {String} [depth] Specifies the navigation depth.
+         */
         init: function(element, options) {
             var that = this,
                 dateView;
@@ -217,7 +303,6 @@
             options.format = options.format || kendo.culture().calendar.patterns["d"];
 
             that._wrapper();
-            that._icon();
 
             that.dateView = dateView = new DateView($.extend({}, options, {
                 anchor: that.wrapper,
@@ -230,19 +315,33 @@
                 clearBlurTimeout: proxy(that._clearBlurTimeout, that)
             }));
 
+            that._icon();
+
             that.element
                 .addClass("k-input")
                 .bind({
                     keydown: proxy(that._keydown, that),
-                    blur: function() {
-                        var value = this.value;
-                        that._bluring = setTimeout(function() {
-                            that._change(value);
-                            that.close();
-                        }, 100);
-                    }
+                    blur: proxy(that._blur, that)
                 });
 
+            /**
+            * Fires when the selected date is changed
+            * @name kendo.ui.DatePicker#change
+            * @event
+            * @param {Event} e
+            */
+            /**
+            * Fires when the calendar is opened
+            * @name kendo.ui.DatePicker#open
+            * @event
+            * @param {Event} e
+            */
+            /**
+            * Fires when the calendar is closed
+            * @name kendo.ui.DatePicker#close
+            * @event
+            * @param {Event} e
+            */
             that.bind(CHANGE, options);
 
             that._valid = true;
@@ -258,14 +357,41 @@
             depth: "month"
         },
 
+        /**
+        * Opens the calendar.
+        * @name kendo.ui.DatePicker#open
+        * @function
+        * @example
+        * datepicker.open();
+        */
         open: function() {
             this.dateView.open();
         },
 
+        /**
+        * Closes the calendar.
+        * @name kendo.ui.DatePicker#close
+        * @function
+        * @example
+        * datepicker.close();
+        */
         close: function() {
             this.dateView.close();
         },
 
+        /**
+        * Gets/Sets the value of the datepicker.
+        * @param {Date|String} value The value to set.
+        * @returns {Date} The value of the datepicker.
+        * @example
+        * var datepicker = $("#datepicker").data("kendoDatePicker");
+        *
+        * // get the value of the datepicker.
+        * var value = datepicker.value();
+        *
+        * // set the value of the datepicker.
+        * combobox.value("10/10/2000"); //parse "10/10/2000" date and selects it in the calendar.
+        */
         value: function(value) {
             var that = this,
                 options = that.options;
@@ -276,7 +402,7 @@
 
             value = parse(value, that.options.format);
 
-            if (!inRange(value, options.min, options.max)) {
+            if (!isInRange(value, options.min, options.max)) {
                 value = null;
             }
 
@@ -288,6 +414,16 @@
             }
 
             that._valid = true;
+        },
+
+        _blur: function() {
+            var that = this,
+                value = that._value;
+
+            that._bluring = setTimeout(function() {
+                that._change(value);
+                that.close();
+            }, 100);
         },
 
         _clearBlurTimeout: function() {
@@ -304,7 +440,7 @@
 
             value = parse(value, options.format);
 
-            if (value && !inRange(value, options.min, options.max)) {
+            if (value && !isInRange(value, options.min, options.max)) {
                 value = null;
             }
 
@@ -353,14 +489,8 @@
                 icon = $('<span class="k-select k-header"><span class="k-icon k-icon-calendar">select</span></span>').insertAfter(element);
             }
 
-            icon.bind({
-                click: function() {
-                    that.dateView.toggle();
-                },
-                mousedown: function() {
-                    that._clearBlurTimeout();
-                }
-            });
+            icon.bind(CLICK, proxy(that.dateView.toggle, that.dateView))
+                .bind(MOUSEDOWN, proxy(that._clearBlurTimeout, that));
         },
 
         _wrapper: function() {
@@ -379,11 +509,6 @@
             that.wrapper = wrapper.addClass("k-widget k-datepicker k-header");
         }
     });
-
-    //same in the calendar.js
-    function inRange(date, min, max) {
-        return +date >= +min && +date <= +max;
-    }
 
     ui.plugin("DatePicker", DatePicker);
 

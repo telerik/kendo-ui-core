@@ -39,6 +39,8 @@ var scripts = [
     "kendo.pageable.js",
     "kendo.popup.js",
     "kendo.list.js",
+    "kendo.calendar.js",
+    "kendo.datepicker.js",
     "kendo.autocomplete.js",
     "kendo.dropdownlist.js",
     "kendo.combobox.js",
