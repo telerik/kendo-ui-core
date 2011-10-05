@@ -128,6 +128,7 @@
         REFRESH = "refresh",
         RESIZE = "resize",
         ERROR = "error",
+        OVERFLOW = "overflow",
         localUrlRe = /^([a-z]+:)?\/\//i;
 
     function isLocalUrl(url) {
@@ -451,7 +452,9 @@
         open: function () {
             var that = this,
                 wrapper = that.wrapper,
-                showOptions = that.options.animation.open;
+                showOptions = that.options.animation.open,
+                contentElement = wrapper.children(KWINDOWCONTENT),
+                initialOverflow = contentElement.css(OVERFLOW);
 
             if (!that.trigger(OPEN)) {
                 if (that.options.modal) {
@@ -469,18 +472,20 @@
                 }
 
                 if (!wrapper.is(VISIBLE)) {
+                    contentElement.css(OVERFLOW, "hidden");
                     wrapper.show().kendoStop().kendoAnimate({
                         effects: showOptions.effects,
                         duration: showOptions.duration,
                         complete: function() {
                             that.trigger(ACTIVATE);
+                            contentElement.css(OVERFLOW, initialOverflow);
                         }
                     });
                 }
             }
 
             if (that.options.isMaximized) {
-               $("html, body").css("overflow", "hidden");
+               $("html, body").css(OVERFLOW, "hidden");
             }
 
             return that;
@@ -532,7 +537,7 @@
             }
 
             if (that.options.isMaximized) {
-                $("html, body").css("overflow", "");
+                $("html, body").css(OVERFLOW, "");
             }
 
             return that;
@@ -570,7 +575,7 @@
                 .find(".k-resize-handle").show().end()
                 .find(".k-window-titlebar .k-restore").addClass("k-maximize").removeClass("k-restore");
 
-            $("html, body").css("overflow", "");
+            $("html, body").css(OVERFLOW, "");
 
             that.options.isMaximized = false;
 
@@ -603,7 +608,7 @@
                 .find(".k-resize-handle").hide().end()
                 .find(".k-window-titlebar .k-maximize").addClass("k-restore").removeClass("k-maximize");
 
-            $("html, body").css("overflow", "hidden");
+            $("html, body").css(OVERFLOW, "hidden");
 
             that.options.isMaximized = true;
 
