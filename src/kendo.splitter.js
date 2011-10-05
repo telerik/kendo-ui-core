@@ -427,7 +427,7 @@
                 element = that.element,
                 panes = element.children(":not(.k-splitbar)"),
                 isHorizontal = that.orientation == HORIZONTAL,
-                splitBars = element.children(".k-splitbar");
+                splitBars = element.children(".k-splitbar"),
                 splitBarsCount = splitBars.length,
                 sizingProperty = isHorizontal ? "width" : "height",
                 totalSize = element[sizingProperty]();
