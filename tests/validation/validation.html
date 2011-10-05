@@ -244,6 +244,20 @@
                 validator.validate();
                 equal(input.next("div").text(), "invalid");
             });
+
+            test("validate returns false if input with type=number value does not match min attribute", function() {
+                var input = $('<input type="number" value="1" min="10" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=number value does match min attribute", function() {
+                var input = $('<input type="number" value="11" min="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
         </script>
     </body>
 </html>
