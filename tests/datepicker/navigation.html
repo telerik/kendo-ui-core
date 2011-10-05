@@ -386,7 +386,7 @@
                 dv._initCalendar();
                 dv.calendar.navigateUp();
 
-                dv.calendar._focusCell(dv._viewedValue);
+                dv.calendar._focus(dv._viewedValue);
 
                 dv.navigate(event);
 
@@ -411,7 +411,7 @@
                     selectedDate = new Date(2000, 10, 15);
 
                 dv._initCalendar();
-                dv.calendar._focusCell(selectedDate);
+                dv.calendar._focus(selectedDate);
 
                 dv.navigate(event);
 
@@ -504,7 +504,7 @@
 
                 dv.open();
 
-                dv.calendar._focusCell(dv._viewedValue);
+                dv.calendar._focus(dv._viewedValue);
 
                 dv.navigate(event);
 
@@ -525,7 +525,7 @@
                 dv.open();
 
                 dv.calendar.navigate(new Date(2000, 10, 10), "year");
-                dv.calendar._focusCell(dv._viewedValue);
+                dv.calendar._focus(dv._viewedValue);
                 dv.navigate(event);
 
                 ok(dv.popup.visible());
@@ -548,7 +548,7 @@
 
                 stub(dv.calendar, {navigateDown: dv.calendar.navigateDown});
 
-                dv.calendar._focusCell(focused);
+                dv.calendar._focus(focused);
                 dv.navigate(event);
 
                 equal(+dv.calendar.args("navigateDown")[0], +focused);
@@ -570,7 +570,7 @@
                 stub(dv.calendar, {navigateDown: dv.calendar.navigateDown});
 
                 dv.calendar.navigateUp();
-                dv.calendar._focusCell(dv._viewedValue);
+                dv.calendar._focus(dv._viewedValue);
 
                 dv.navigate(event);
 
@@ -601,20 +601,20 @@
                 var input = $("<input />"),
                     datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-                stub(datepicker.dateView.calendar, "_focusCell");
+                stub(datepicker.dateView.calendar, "_focus");
                 input.trigger({ type:"keydown", keyCode: 40});
 
-                equal(datepicker.dateView.calendar.calls("_focusCell"), 1);
+                equal(datepicker.dateView.calendar.calls("_focus"), 1);
             });
 
             test("keydown triggered from datepicker should call navigate method", function() {
                 var input = $("<input />"),
                     datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-                stub(datepicker.dateView.calendar, "_focusCell");
+                stub(datepicker.dateView.calendar, "_focus");
                 input.trigger({ type:"keydown", keyCode: 40});
 
-                equal(datepicker.dateView.calendar.calls("_focusCell"), 1);
+                equal(datepicker.dateView.calendar.calls("_focus"), 1);
             });
 
             asyncTest("type invalide date does not clear input", function() {
