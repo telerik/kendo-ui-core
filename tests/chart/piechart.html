@@ -19,6 +19,7 @@
                 chartBox = new Box2D(0, 0, 800, 600),
                 plotArea,
                 pieChart,
+                firstSegment,
                 TOLERANCE = 0.1,
                 root,
                 view;
@@ -33,6 +34,8 @@
 
                 pieChart.reflow(chartBox);
                 pieChart.getViewElements(view);
+
+                firstSegment = pieChart.segments[0];
             }
 
             (function() {
@@ -89,23 +92,23 @@
                 });
 
                 test("segments have set owner", function() {
-                    ok(pieChart.segments[0].owner === pieChart);
+                    ok(firstSegment.owner === pieChart);
                 });
 
                 test("sets segment category", function() {
-                    equal(pieChart.segments[0].category, "");
+                    equal(firstSegment.category, "");
                 });
 
                 test("sets segment series", function() {
-                    ok(pieChart.segments[0].series === values);
+                    ok(firstSegment.series === values);
                 });
 
                 test("sets segment series index", function() {
-                    ok(pieChart.segments[0].seriesIx === 0);
+                    ok(firstSegment.seriesIx === 0);
                 });
 
                 test("sets segment dataItem", function() {
-                    equal(typeof pieChart.segments[0].dataItem, "object");
+                    equal(typeof firstSegment.dataItem, "object");
                 });
 
                 // ------------------------------------------------------------
@@ -117,31 +120,74 @@
                 });
 
                 test("sets segment category", function() {
-                    equal(pieChart.segments[0].category, "A");
+                    equal(firstSegment.category, "A");
                 });
 
                 test("segments have set owner", function() {
-                    ok(pieChart.segments[0].owner === pieChart);
+                    ok(firstSegment.owner === pieChart);
                 });
 
                 test("sets segment series", function() {
-                    ok(pieChart.segments[0].series === dataValues);
+                    ok(firstSegment.series === dataValues);
                 });
 
                 test("sets segment series index", function() {
-                    ok(pieChart.segments[0].seriesIx === 0);
+                    ok(firstSegment.seriesIx === 0);
                 });
 
                 test("sets segment dataItem", function() {
-                    equal(typeof pieChart.segments[0].dataItem, "object");
+                    equal(typeof firstSegment.dataItem, "object");
                 });
 
                 test("sets segment explode", function() {
-                    ok(pieChart.segments[0].explode == true);
+                    ok(firstSegment.explode == true);
                 });
 
                 test("sets segment different center if segment have explode sets to true", function() {
-                    ok(pieChart.segments[0].sector.c != pieChart.segments[1].sector.c);
+                    ok(firstSegment.sector.c != pieChart.segments[1].sector.c);
+                });
+
+                // ------------------------------------------------------------
+                module("Pie Chart / Data Source", {
+                    setup: function() {
+                        var data = [
+                        ];
+
+                        plotArea = new PlotAreaStub();
+                        setupPieChart(plotArea, {
+                            series: [{
+                                nameField: "name",
+                                colorField: "color",
+                                explodeField: "explode",
+                                data: [ 10, 50 ],
+                                dataItems: [{
+                                    name: "A",
+                                    color: "red",
+                                    explode: true
+                                }, {
+                                    name: "B",
+                                    color: "green",
+                                    explode: false
+                                }]
+                            }]
+                        });
+                    }
+                });
+
+                test("sets segment angle based on value", function() {
+                    equal(firstSegment.sector.angle, 60);
+                });
+
+                test("sets segment category from dataItem", function() {
+                    equal(firstSegment.category, "A");
+                });
+
+                test("sets segment color from dataItem", function() {
+                    equal(firstSegment.options.color, "red");
+                });
+
+                test("sets segment explode from dataItem", function() {
+                    ok(firstSegment.explode == true);
                 });
 
             })();
@@ -317,7 +363,7 @@
                             padding: PADDING,
                             startAngle: START_ANGLE
                         });
-                        pieSegment = pieChart.segments[0];
+                        pieSegment = firstSegment;
                     }
                 });
 
@@ -355,7 +401,7 @@
                                 }
                             } ]
                         });
-                        pieSegment = pieChart.segments[0];
+                        pieSegment = firstSegment;
                     }
                 });
 
