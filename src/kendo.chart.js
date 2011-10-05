@@ -1518,7 +1518,7 @@
 
                 for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
                     var currentSeries = series[seriesIdx],
-                        value =  getter(currentSeries.field)(row);
+                        value = getter(currentSeries.field)(row);
 
                     if (currentSeries.field) {
                         if (dataIdx === 0) {
@@ -4279,7 +4279,8 @@
                 startAngle = options.startAngle,
                 colorsCount = colors.length,
                 series = options.series,
-                currentCategory,
+                dataItems,
+                currentName,
                 currentSeries,
                 currentData,
                 currentColor,
@@ -4293,27 +4294,26 @@
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
+                dataItems = currentSeries.dataItems,
                 data = currentSeries.data;
                 anglePerValue = 360 / chart.pointsTotal(data);
 
                 for (i = 0; i < data.length; i++) {
-                    currentData = data[i];
-                    value = chart.pointValue(currentData);
+                    currentData = chart.pointData(currentSeries, i);
+                    value = currentData.value;
                     angle = value * anglePerValue;
-                    currentCategory = defined(currentData.name) ? currentData.name : "";
-                    explode = defined(currentData.explode) && data.length != 1 ? currentData.explode : false;
-                    currentSeries.color = defined(currentData.color) ?
-                                               currenData.color :
-                                               colors[i % colorsCount];
+                    currentName = currentData.name;
+                    explode = data.length != 1 && !!currentData.explode;
+                    currentSeries.color = currentData.color ?
+                        currentData.color : colors[i % colorsCount];
 
                     callback(value, new Sector(null, 0, startAngle, angle), {
                         owner: chart,
-                        category: currentCategory,
+                        category: currentName,
                         categoryIx: i,
                         series: currentSeries,
                         seriesIx: seriesIx,
-                        dataItem: series.dataItems ?
-                            series.dataItems[categoryIx] : { value: value },
+                        dataItem: dataItems ? dataItems[i] : currentData,
                         explode: explode
                     });
 
@@ -4346,6 +4346,31 @@
 
         pointValue: function(point) {
             return defined(point.value) ? point.value : point;
+        },
+
+        pointData: function(series, index) {
+            var chart = this,
+                dataItems = series.dataItems,
+                data = series.data[index];
+
+            return {
+                value: chart.pointValue(data),
+                name: chart.pointGetter(series, index, "name"),
+                color: chart.pointGetter(series, index, "color"),
+                explode: chart.pointGetter(series, index, "explode")
+            };
+        },
+
+        pointGetter: function(series, index, prop) {
+            var valueField = series[prop + "Field"],
+                data = series.data[index],
+                value = data[prop];
+
+            if (valueField && series.dataItems) {
+                return getter(valueField)(series.dataItems[index]);
+            } else {
+                return defined(value) ? value : "";
+            }
         },
 
         pointsTotal: function(data) {
