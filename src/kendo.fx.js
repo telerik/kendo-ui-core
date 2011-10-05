@@ -493,7 +493,7 @@
                                 }
 
                             value in single && delete single[value];
-                            element.animate(single, extend({ queue: false }, options));
+                            element.animate(single, extend({ queue: false }, options, { show: false, hide: false })); // Stop animate from showing/hiding the element to be able to hide it later on.
                         }
                     });
                 });
