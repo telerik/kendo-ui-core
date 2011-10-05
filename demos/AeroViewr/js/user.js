@@ -27,7 +27,7 @@
                 return Math.min(result.photos.total, PAGESIZE);
             }
         },
-        searchDialect = function(data) {
+        searchparameterMap = function(data) {
             var params = {
                 text: $("#searchBox").val(),
                 extras: EXTRAS,
@@ -40,7 +40,7 @@
 
             return flickr.searchParams(params);
         },
-        defaultDialect = function(data) {
+        defaultparameterMap = function(data) {
             var params = { extras: "owner_name,tags", per_page: PAGESIZE };
 
             if (!$.support.cors) {
@@ -56,7 +56,7 @@
             }
         },
         setsDataSource = data.dataSource({
-            dialect: function(data) {
+            parameterMap: function(data) {
                 var params = {};
 
                 if (!$.support.cors) {
@@ -79,7 +79,7 @@
         setPhotosDataSource = data.dataSource({
             serverSorting: true,
             pageSize: computePageSize(imageSize.size),
-            dialect: defaultDialect,
+            parameterMap: defaultparameterMap,
             schema: defaultDeserializer,
             jsoncallback: "defaultCallback"
         }),
@@ -130,7 +130,7 @@
             $("#overlay").fadeIn();
             $("#exifButton").fadeOut();
             changeState("searchresult");
-            setPhotosDataSource.transport.dialect = searchDialect;
+            setPhotosDataSource.transport.parameterMap = searchparameterMap;
             setPhotosDataSource.reader = searchDeserializer;
 
             if (!$.support.cors) {
@@ -157,7 +157,7 @@
 
         if (state == "initial") {
             el.text("");
-            setPhotosDataSource.transport.dialect = defaultDialect;
+            setPhotosDataSource.transport.parameterMap = defaultparameterMap;
             setPhotosDataSource.reader = defaultDeserializer;
 
             if (!$.support.cors) {

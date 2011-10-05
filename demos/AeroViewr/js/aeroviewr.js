@@ -33,7 +33,7 @@ if (!isInferiorBrowser) {
         var tagHotListDataSource = data.dataSource( {
             serverFiltering: true,
             pageSize: 10,
-            dialect: function(data) {
+            parameterMap: function(data) {
                 var params = { tag: data.filter[0].value };
 
                 if (!$.support.cors) {

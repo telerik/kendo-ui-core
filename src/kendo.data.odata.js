@@ -28,7 +28,7 @@
                     jsonpCallback: "callback", //required by OData
                     jsonp: false // to prevent jQuery from adding the jsonpCallback in the query string - we will add it ourselves
                 },
-                dialect: function(options) {
+                parameterMap: function(options) {
                     var result = ["$format=json", "$inlinecount=allpages", "$callback=callback"],
                         data = options || {};
 

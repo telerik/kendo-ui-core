@@ -63,21 +63,21 @@
                 transport.read({ url: "foo" });
             });
 
-            test("read passes options.data to its dialect", function() {
-                var dialectWasCalled = false,
+            test("read passes options.data to its parameterMap", function() {
+                var parameterMapWasCalled = false,
                     transport = new RemoteTransport({
                         read: {
                             url: "foo"
                         },
-                        dialect: function() {
-                            dialectWasCalled = true;
+                        parameterMap: function() {
+                            parameterMapWasCalled = true;
                         }
                     });
 
                 $.mockjax({
                     url: "foo",
                     response: function() {
-                        ok(dialectWasCalled);
+                        ok(parameterMapWasCalled);
                         start();
                     }
                 });
@@ -85,7 +85,7 @@
                 transport.read({ url: "foo" });
             });
 
-            test("read passes constructor options.read.data to its dialect", function() {
+            test("read passes constructor options.read.data to its parameterMap", function() {
                 var data,
                     transport = new RemoteTransport({
                         read: {
@@ -94,7 +94,7 @@
                                 foo: "bar"
                             }
                         },
-                        dialect: function() {
+                        parameterMap: function() {
                             data = arguments[0];
                             return data;
                         }
@@ -112,7 +112,7 @@
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
-            test("read passes constructor data function result to its dialect", function() {
+            test("read passes constructor data function result to its parameterMap", function() {
                 var data,
                     transport = new RemoteTransport({
                         read: {
@@ -123,7 +123,7 @@
                                 }
                             }
                         },
-                        dialect: function() {
+                        parameterMap: function() {
                             data = arguments[0];
                             return data;
                         }
@@ -154,7 +154,7 @@
                                 }
                             }
                         },
-                        dialect: function() {
+                        parameterMap: function() {
                             data = arguments[0];
                             return data;
                         }
@@ -184,12 +184,12 @@
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
-            test("update passes data options to dialect", function() {
+            test("update passes data options to parameterMap", function() {
                 var data, transport = new RemoteTransport({
                         update: {
                             url: "foo"
                         },
-                        dialect: function() {
+                        parameterMap: function() {
                             data = arguments[0];
                             return data;
                         }
@@ -209,13 +209,13 @@
 
             });
 
-            test("the type argument of the dialect is update during updating", function() {
-                var dialectType, transport = new RemoteTransport({
+            test("the type argument of the parameterMap is update during updating", function() {
+                var parameterMapType, transport = new RemoteTransport({
                         update: {
                             url: "foo"
                         },
-                        dialect: function(data, type) {
-                            dialectType = type;
+                        parameterMap: function(data, type) {
+                            parameterMapType = type;
                             return data;
                         }
                     });
@@ -223,7 +223,7 @@
                 $.mockjax({
                     url: "foo",
                     response: function() {
-                        equal(dialectType, "update");
+                        equal(parameterMapType, "update");
                         start();
                     }
                 });
@@ -233,13 +233,13 @@
                 stop();
             });
 
-            test("the type argument of the dialect is destroy during destroying", function() {
-                var dialectType, transport = new RemoteTransport({
+            test("the type argument of the parameterMap is destroy during destroying", function() {
+                var parameterMapType, transport = new RemoteTransport({
                         destroy: {
                             url: "foo"
                         },
-                        dialect: function(data, type) {
-                            dialectType = type;
+                        parameterMap: function(data, type) {
+                            parameterMapType = type;
                             return data;
                         }
                     });
@@ -247,7 +247,7 @@
                 $.mockjax({
                     url: "foo",
                     response: function() {
-                        equal(dialectType, "destroy");
+                        equal(parameterMapType, "destroy");
                         start();
                     }
                 });
@@ -257,13 +257,13 @@
                 stop();
             });
 
-            test("the type argument of the dialect is create during creating", function() {
-                var dialectType, transport = new RemoteTransport({
+            test("the type argument of the parameterMap is create during creating", function() {
+                var parameterMapType, transport = new RemoteTransport({
                         create: {
                             url: "foo"
                         },
-                        dialect: function(data, type) {
-                            dialectType = type;
+                        parameterMap: function(data, type) {
+                            parameterMapType = type;
                             return data;
                         }
                     });
@@ -271,7 +271,7 @@
                 $.mockjax({
                     url: "foo",
                     response: function() {
-                        equal(dialectType, "create");
+                        equal(parameterMapType, "create");
                         start();
                     }
                 });
@@ -281,13 +281,13 @@
                 stop();
             });
 
-            test("the type argument of the dialect is read during reading", function() {
-                var dialectType, transport = new RemoteTransport({
+            test("the type argument of the parameterMap is read during reading", function() {
+                var parameterMapType, transport = new RemoteTransport({
                         read: {
                             url: "foo"
                         },
-                        dialect: function(data, type) {
-                            dialectType = type;
+                        parameterMap: function(data, type) {
+                            parameterMapType = type;
                             return data;
                         }
                     });
@@ -295,7 +295,7 @@
                 $.mockjax({
                     url: "foo",
                     response: function() {
-                        equal(dialectType, "read");
+                        equal(parameterMapType, "read");
                         start();
                     }
                 });
@@ -305,28 +305,28 @@
                 stop();
             });
 
-           test("dialect as plain object", function() {
+           test("parameterMap as plain object", function() {
                 var transport = new RemoteTransport({
-                    dialect: { take: "$take", skip: "$skip" }
+                    parameterMap: { take: "$take", skip: "$skip" }
                 });
 
-                var result = transport.dialect({ take: 1, skip: 1 });
+                var result = transport.parameterMap({ take: 1, skip: 1 });
                 equal(result["$take"], 1);
                 equal(result["$skip"], 1);
             });
 
-            test("dialect as plain object copies unsuported fields", function() {
+            test("parameterMap as plain object copies unsuported fields", function() {
                 var transport = new RemoteTransport({
-                    dialect: { take: "$take", skip: "$skip" }
+                    parameterMap: { take: "$take", skip: "$skip" }
                 });
 
-                var result = transport.dialect({ take: 1, skip: 1, foo: "bar" });
+                var result = transport.parameterMap({ take: 1, skip: 1, foo: "bar" });
                 equal(result["foo"], "bar");
             });
 
-            test("dialect as plain object calls functions", function() {
+            test("parameterMap as plain object calls functions", function() {
                 var transport = new RemoteTransport({
-                    dialect: {
+                    parameterMap: {
                         take: {
                             key: "$take",
                             value: function(take) {
@@ -336,7 +336,7 @@
                     }
                 });
 
-                var result = transport.dialect({ take: "foo" });
+                var result = transport.parameterMap({ take: "foo" });
 
                 equal(result["$take"], "foobar");
             });
@@ -644,21 +644,21 @@
                 });
             });
 
-            test("update calls its dialect", function() {
-                var dialectWasCalled = false,
+            test("update calls its parameterMap", function() {
+                var parameterMapWasCalled = false,
                     transport = new RemoteTransport({
                         update: {
                             url: "foo"
                         },
-                        dialect: function() {
-                            dialectWasCalled = true;
+                        parameterMap: function() {
+                            parameterMapWasCalled = true;
                         }
                     });
 
                 $.mockjax({
                     url: "foo",
                     response: function() {
-                        ok(dialectWasCalled);
+                        ok(parameterMapWasCalled);
                         start();
                     }
                 });
@@ -666,7 +666,7 @@
                 transport.update({ url: "foo" });
             });
 
-            test("update passes constructor options.update.data to its dialect", function() {
+            test("update passes constructor options.update.data to its parameterMap", function() {
                 var data,
                     transport = new RemoteTransport({
                         update: {
@@ -675,7 +675,7 @@
                                 foo: "bar"
                             }
                         },
-                        dialect: function() {
+                        parameterMap: function() {
                             data = arguments[0];
                             return data;
                         }
@@ -693,7 +693,7 @@
                 transport.update({ url: "foo", data: { baz: "moo" } });
             });
 
-            test("update passes constructor data function result to its dialect", function() {
+            test("update passes constructor data function result to its parameterMap", function() {
                 var data,
                     transport = new RemoteTransport({
                         update: {
@@ -704,7 +704,7 @@
                                 }
                             }
                         },
-                        dialect: function() {
+                        parameterMap: function() {
                             data = arguments[0];
                             return data;
                         }
