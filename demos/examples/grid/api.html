@@ -83,25 +83,35 @@
                         $("#grid").data("kendoGrid").clearSelection();
                     });
 
-                    $(".selectRow").click(function(e) {
-                        var grid = $("#grid").data("kendoGrid"),
-                            rowIndex = $("#selectRow").val(),
-                            row = grid.tbody.find(">tr:not(.k-grouping-row)").eq(rowIndex);
+                    var selectRow = function(e) {
+                        if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var grid = $("#grid").data("kendoGrid"),
+                                    rowIndex = $("#selectRow").val(),
+                                    row = grid.tbody.find(">tr:not(.k-grouping-row)").eq(rowIndex);
 
-                        grid.select(row);
-                    });
+                                grid.select(row);
+                            }
+                        },
+                        toggleGroup = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var grid = $("#grid").data("kendoGrid"),
+                                    rowIndex = $("#groupRow").val(),
+                                    row = grid.tbody.find(">tr.k-grouping-row").eq(rowIndex);
 
-                    $(".toggleGroup").click(function(e) {
-                        var grid = $("#grid").data("kendoGrid"),
-                            rowIndex = $("#groupRow").val(),
-                            row = grid.tbody.find(">tr.k-grouping-row").eq(rowIndex);
+                                if(row.has(".k-collapse").length) {
+                                    grid.collapseGroup(row);
+                                } else {
+                                    grid.expandGroup(row);
+                                }
+                            }
+                        };
 
-                        if(row.has(".k-collapse").length) {
-                            grid.collapseGroup(row);
-                        } else {
-                            grid.expandGroup(row);
-                        }
-                    });
+
+                    $(".selectRow").click(selectRow);
+                    $("#selectRow").keypress(selectRow);
+
+                    $(".toggleGroup").click(toggleGroup);
+                    $("#groupRow").keypress(toggleGroup);
                 });
             </script>
 
