@@ -46,10 +46,6 @@
                         <label for="alignColumn">- aligned in columns</label>
                     </li>
                     <li>
-                        <input id="alignLabels" type="checkbox" disabled="disabled" autocomplete="off" />
-                        <label for="alignLabels">Align labels</label>
-                    </li>
-                    <li>
                         <label for="startAngle">Start angle</label>
                         <input id="startAngle" style="width: 160px;" />
                     </li>
@@ -124,9 +120,10 @@
                 function setupConfigurator() {
                     $("#padding").kendoSlider({
                         showButtons: false,
-                        min: 60,
-                        max: 200,
-                        val: 120,
+                        min: 30,
+                        max: 100,
+                        val: 60,
+                        tickPlacement: "none",
                         slide: function(e) {
                             $("#padding").val(e.value);
                             setTimeout(refresh);
