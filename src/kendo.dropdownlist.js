@@ -87,11 +87,11 @@
     *
     *   <!-- Template -->
     *   <script id="scriptTemplate" type="text/x-kendo-template">
-    *       <# if (data.BoxArt.SmallUrl) { #>
+    *       # if (data.BoxArt.SmallUrl) { #
     *           <img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
-    *       <# } else { #>
+    *       # } else { #
     *           <img alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
-    *       <# } #>
+    *       # } #
     *   </script>
     *
     *   <!-- DropDownList initialization -->

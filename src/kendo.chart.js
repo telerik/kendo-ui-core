@@ -5201,10 +5201,10 @@
             if (!view.template) {
                 view.template = SVGView.template = template(
                     "<svg xmlns='" + SVG_NS + "' version='1.1' " +
-                    "width='<#= d.options.width #>px' height='<#= d.options.height #>px' " +
+                    "width='#= d.options.width #px' height='#= d.options.height #px' " +
                     "style='position: relative;'>" +
-                    "<#= d.renderDefinitions() #>" +
-                    "<#= d.renderContent() #></svg>"
+                    "#= d.renderDefinitions() #" +
+                    "#= d.renderContent() #</svg>"
                 );
             }
         },
@@ -5330,9 +5330,9 @@
             group.template = SVGGroup.template;
             if (!group.template) {
                 group.template = SVGGroup.template =
-                template("<g<#= d.renderAttr(\"id\", d.options.id) #>" +
-                           "<#= d.renderAttr(\"clip-path\", d.options.clipPath) #>>" +
-                         "<#= d.renderContent() #></g>");
+                template("<g#= d.renderAttr(\"id\", d.options.id) #" +
+                           "#= d.renderAttr(\"clip-path\", d.options.clipPath) #>" +
+                         "#= d.renderContent() #</g>");
             }
         }
     });
@@ -5346,8 +5346,8 @@
             clip.template = SVGClipPath.template;
             if (!clip.template) {
                 clip.template = SVGClipPath.template =
-                template("<clipPath<#= d.renderAttr(\"id\", d.options.id) #>>" +
-                         "<#= d.renderContent() #></clipPath>");
+                template("<clipPath#= d.renderAttr(\"id\", d.options.id) #>" +
+                         "#= d.renderContent() #</clipPath>");
             }
         }
     });
@@ -5362,13 +5362,13 @@
             text.template = SVGText.template;
             if (!text.template) {
                 text.template = SVGText.template = template(
-                    "<text <#= d.renderAttr(\"id\", d.options.id) #> " +
-                    "x='<#= Math.round(d.options.x) #>' " +
-                    "y='<#= Math.round(d.options.y + d.options.baseline) #>' " +
-                    "fill-opacity='<#= d.options.fillOpacity #>' " +
-                    "<#= d.options.rotation ? d.renderRotation() : '' #> " +
-                    "style='font: <#= d.options.font #>' fill='<#= d.options.color #>'>" +
-                    "<#= d.content #></text>"
+                    "<text #= d.renderAttr(\"id\", d.options.id) # " +
+                    "x='#= Math.round(d.options.x) #' " +
+                    "y='#= Math.round(d.options.y + d.options.baseline) #' " +
+                    "fill-opacity='#= d.options.fillOpacity #' " +
+                    "#= d.options.rotation ? d.renderRotation() : '' # " +
+                    "style='font: #= d.options.font #' fill='#= d.options.color #'>" +
+                    "#= d.content #</text>"
                 );
             }
         },
@@ -5422,15 +5422,15 @@
             path.template = SVGPath.template;
             if (!path.template) {
                 path.template = SVGPath.template = template(
-                    "<path <#= d.renderAttr(\"id\", d.options.id) #>" +
-                    "d='<#= d.renderPoints() #>' " +
-                    "<#= d.renderAttr(\"stroke\", d.options.stroke) #> " +
-                    "<#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #>" +
-                    "<#= d.renderDashType() #> " +
-                    "stroke-linecap='<#= d.renderLinecap() #>' " +
-                    "fill-opacity='<#= d.options.fillOpacity #>' " +
-                    "stroke-opacity='<#= d.options.strokeOpacity #>' " +
-                    "fill='<#= d.options.fill || \"none\" #>'></path>"
+                    "<path #= d.renderAttr(\"id\", d.options.id) #" +
+                    "d='#= d.renderPoints() #' " +
+                    "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
+                    "#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #" +
+                    "#= d.renderDashType() # " +
+                    "stroke-linecap='#= d.renderLinecap() #' " +
+                    "fill-opacity='#= d.options.fillOpacity #' " +
+                    "stroke-opacity='#= d.options.strokeOpacity #' " +
+                    "fill='#= d.options.fill || \"none\" #'></path>"
                 );
             }
         },
@@ -5528,11 +5528,11 @@
             sector.pathTemplate = SVGSector.pathTemplate;
             if (!sector.pathTemplate) {
                 sector.pathTemplate = SVGSector.pathTemplate = template(
-                    "M <#= d.firstPoint.x #> <#= d.firstPoint.y #> " +
-                    "A<#= d.r #> <#= d.r #> " +
-                    "0 <#= d.isReflexAngle ? '1' : '0' #>,1 " +
-                    "<#= d.secondPoint.x #> <#= d.secondPoint.y #> " +
-                    "L <#= d.cx #> <#= d.cy #> z"
+                    "M #= d.firstPoint.x # #= d.firstPoint.y # " +
+                    "A#= d.r # #= d.r # " +
+                    "0 #= d.isReflexAngle ? '1' : '0' #,1 " +
+                    "#= d.secondPoint.x # #= d.secondPoint.y # " +
+                    "L #= d.cx # #= d.cy # z"
                 );
             }
 
@@ -5589,14 +5589,14 @@
             circle.template = SVGCircle.template;
             if (!circle.template) {
                 circle.template = SVGCircle.template = template(
-                    "<circle <#= d.renderAttr(\"id\", d.options.id) #> " +
-                    "cx='<#= d.center[0] #>' cy='<#= d.center[1] #>' " +
-                    "r='<#= d.radius #>' " +
-                    "<#= d.renderAttr(\"stroke\", d.options.stroke) #> " +
-                    "<#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #>" +
-                    "fill-opacity='<#= d.options.fillOpacity #>' " +
-                    "stroke-opacity='<#= d.options.strokeOpacity #>'  " +
-                    "fill='<#= d.options.fill || \"none\" #>'></circle>"
+                    "<circle #= d.renderAttr(\"id\", d.options.id) # " +
+                    "cx='#= d.center[0] #' cy='#= d.center[1] #' " +
+                    "r='#= d.radius #' " +
+                    "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
+                    "#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #" +
+                    "fill-opacity='#= d.options.fillOpacity #' " +
+                    "stroke-opacity='#= d.options.strokeOpacity #'  " +
+                    "fill='#= d.options.fill || \"none\" #'></circle>"
                 );
             }
         },
@@ -5617,15 +5617,15 @@
             gradient.stopTemplate = SVGLinearGradient.stopTemplate;
             if (!gradient.template) {
                 gradient.template = SVGLinearGradient.template = template(
-                    "<linearGradient id='<#= d.options.id #>' " +
-                    "gradientTransform='rotate(<#= d.options.rotation #>)'> " +
-                    "<#= d.renderStops() #>" +
+                    "<linearGradient id='#= d.options.id #' " +
+                    "gradientTransform='rotate(#= d.options.rotation #)'> " +
+                    "#= d.renderStops() #" +
                     "</linearGradient>"
                 );
 
                 gradient.stopTemplate = SVGLinearGradient.stopTemplate = template(
-                    "<stop offset='<#= Math.round(d.offset * 100) #>%' " +
-                    "style='stop-color:<#= d.color #>;stop-opacity:<#= d.opacity #>' />");
+                    "<stop offset='#= Math.round(d.offset * 100) #%' " +
+                    "style='stop-color:#= d.color #;stop-opacity:#= d.opacity #' />");
             }
         },
 
@@ -5662,17 +5662,17 @@
             gradient.stopTemplate = SVGRadialGradient.stopTemplate;
             if (!gradient.template) {
                 gradient.template = SVGRadialGradient.template = template(
-                    "<radialGradient id='<#= d.options.id #>' " +
-                    "cx='<#= d.options.cx #>' cy='<#= d.options.cy #>' " +
-                    "fx='<#= d.options.cx #>' fy='<#= d.options.cy #>' " +
-                    "r='<#= d.options.r #>' gradientUnits='userSpaceOnUse'>" +
-                    "<#= d.renderStops() #>" +
+                    "<radialGradient id='#= d.options.id #' " +
+                    "cx='#= d.options.cx #' cy='#= d.options.cy #' " +
+                    "fx='#= d.options.cx #' fy='#= d.options.cy #' " +
+                    "r='#= d.options.r #' gradientUnits='userSpaceOnUse'>" +
+                    "#= d.renderStops() #" +
                     "</radialGradient>"
                 );
 
                 gradient.stopTemplate = SVGRadialGradient.stopTemplate = template(
-                    "<stop offset='<#= Math.round(d.offset * 100) #>%' " +
-                    "style='stop-color:<#= d.color #>;stop-opacity:<#= d.opacity #>' />");
+                    "<stop offset='#= Math.round(d.offset * 100) #%' " +
+                    "style='stop-color:#= d.color #;stop-opacity:#= d.opacity #' />");
             }
         },
 
@@ -5796,10 +5796,10 @@
             view.template = VMLView.template;
             if (!view.template) {
                 view.template = VMLView.template = template(
-                    "<div style='width:<#= d.options.width #>px; " +
-                    "height:<#= d.options.height #>px; " +
+                    "<div style='width:#= d.options.width #px; " +
+                    "height:#= d.options.height #px; " +
                     "position: relative;'>" +
-                    "<#= d.renderContent() #></div>"
+                    "#= d.renderContent() #</div>"
                 );
             }
         },
@@ -5905,12 +5905,12 @@
             text.template = VMLText.template;
             if (!text.template) {
                 text.template = VMLText.template = template(
-                    "<kvml:textbox <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "<kvml:textbox #= d.renderAttr(\"id\", d.options.id) # " +
                     "style='position: absolute; " +
-                    "left: <#= d.options.x #>px; top: <#= d.options.y #>px; " +
-                    "font: <#= d.options.font #>; color: <#= d.options.color #>; " +
-                    "visibility: <#= d.renderVisibility() #>; white-space: nowrap;'>" +
-                    "<#= d.content #></kvml:textbox>"
+                    "left: #= d.options.x #px; top: #= d.options.y #px; " +
+                    "font: #= d.options.font #; color: #= d.options.color #; " +
+                    "visibility: #= d.renderVisibility() #; white-space: nowrap;'>" +
+                    "#= d.content #</kvml:textbox>"
                 );
             }
         },
@@ -5946,13 +5946,13 @@
             text.template = VMLRotatedText.template;
             if (!text.template) {
                 text.template = VMLRotatedText.template = template(
-                    "<kvml:shape <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "<kvml:shape #= d.renderAttr(\"id\", d.options.id) # " +
                     "style='position: absolute; top: 0px; left: 0px; " +
                     "width: 1px; height: 1px;' stroked='false' coordsize='1,1'>" +
-                    "<#= d.renderPath() #>" +
-                    "<kvml:fill color='<#= d.options.color #>' />" +
-                    "<kvml:textpath on='true' style='font: <#= d.options.font #>;' " +
-                    "fitpath='false' string='<#= d.content #>' /></kvml:shape>"
+                    "#= d.renderPath() #" +
+                    "<kvml:fill color='#= d.options.color #' />" +
+                    "<kvml:textpath on='true' style='font: #= d.options.font #;' " +
+                    "fitpath='false' string='#= d.content #' /></kvml:shape>"
                 );
             }
         },
@@ -5994,11 +5994,11 @@
             path.template = VMLPath.template;
             if (!path.template) {
                 path.template = VMLPath.template = template(
-                    "<kvml:shape <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "<kvml:shape #= d.renderAttr(\"id\", d.options.id) # " +
                     "style='position:absolute; width:1px; height:1px;' " +
                     "coordorigin='0 0' coordsize='1 1'>" +
-                        "<kvml:path v='<#= d.renderPoints() #> e' />" +
-                        "<#= d.fill.render() + d.stroke.render() #>" +
+                        "<kvml:path v='#= d.renderPoints() # e' />" +
+                        "#= d.fill.render() + d.stroke.render() #" +
                     "</kvml:shape>"
                 );
             }
@@ -6102,10 +6102,10 @@
             sector.pathTemplate = VMLSector.pathTemplate;
             if (!sector.pathTemplate) {
                 sector.pathTemplate = VMLSector.pathTemplate = template(
-                   "M <#= d.cx #> <#= d.cy #> " +
-                   "AE <#= d.cx #> <#= d.cy #> " +
-                   "<#= d.r #> <#= d.r #> " +
-                   "<#= d.sa #> <#= d.a #> X E"
+                   "M #= d.cx # #= d.cy # " +
+                   "AE #= d.cx # #= d.cy # " +
+                   "#= d.r # #= d.r # " +
+                   "#= d.sa # #= d.a # X E"
                 );
             }
 
@@ -6141,11 +6141,11 @@
             stroke.template = VMLStroke.template;
             if (!stroke.template) {
                 stroke.template = VMLStroke.template = template(
-                    "<kvml:stroke on='<#= !!d.options.stroke #>' " +
-                    "<#= d.renderAttr(\"color\", d.options.stroke) #>" +
-                    "<#= d.renderAttr(\"weight\", d.options.strokeWidth) #>" +
-                    "<#= d.renderAttr(\"dashstyle\", d.options.dashType) #>" +
-                    "<#= d.renderAttr(\"opacity\", d.options.strokeOpacity) #> />"
+                    "<kvml:stroke on='#= !!d.options.stroke #' " +
+                    "#= d.renderAttr(\"color\", d.options.stroke) #" +
+                    "#= d.renderAttr(\"weight\", d.options.strokeWidth) #" +
+                    "#= d.renderAttr(\"dashstyle\", d.options.dashType) #" +
+                    "#= d.renderAttr(\"opacity\", d.options.strokeOpacity) # />"
                 );
             }
         }
@@ -6159,10 +6159,10 @@
             stroke.template = VMLFill.template;
             if (!stroke.template) {
                 stroke.template = VMLFill.template = template(
-                    "<kvml:fill on='<#= !!d.options.fill #>' " +
-                    "<#= d.renderAttr(\"color\", d.options.fill) #>" +
-                    "<#= d.renderAttr(\"weight\", d.options.fillWidth) #>" +
-                    "<#= d.renderAttr(\"opacity\", d.options.fillOpacity) #> />"
+                    "<kvml:fill on='#= !!d.options.fill #' " +
+                    "#= d.renderAttr(\"color\", d.options.fill) #" +
+                    "#= d.renderAttr(\"weight\", d.options.fillWidth) #" +
+                    "#= d.renderAttr(\"opacity\", d.options.fillOpacity) # />"
                 );
             }
         }
@@ -6179,12 +6179,12 @@
             circle.template = VMLCircle.template;
             if (!circle.template) {
                 circle.template = VMLCircle.template = template(
-                    "<kvml:oval <#= d.renderAttr(\"id\", d.options.id) #> " +
+                    "<kvml:oval #= d.renderAttr(\"id\", d.options.id) # " +
                             "style='position:absolute; " +
-                            "width:<#= d.radius * 2 #>px; height:<#= d.radius * 2 #>px; " +
-                            "top:<#= d.center[1] - d.radius #>px; " +
-                            "left:<#= d.center[0] - d.radius #>px;'>" +
-                        "<#= d.fill.render() + d.stroke.render() #>" +
+                            "width:#= d.radius * 2 #px; height:#= d.radius * 2 #px; " +
+                            "top:#= d.center[1] - d.radius #px; " +
+                            "left:#= d.center[0] - d.radius #px;'>" +
+                        "#= d.fill.render() + d.stroke.render() #" +
                     "</kvml:oval>"
                 );
             }
@@ -6206,9 +6206,9 @@
             group.template = VMLGroup.template;
             if (!group.template) {
                 group.template = VMLGroup.template = template(
-                    "<div <#= d.renderAttr(\"id\", d.options.id) #>" +
+                    "<div #= d.renderAttr(\"id\", d.options.id) #" +
                     "style='position: absolute; white-space: nowrap;'>" +
-                    "<#= d.renderContent() #></div>"
+                    "#= d.renderContent() #</div>"
                 );
             }
         }
@@ -6223,18 +6223,18 @@
             clipRect.clipTemplate = VMLClipRect.clipTemplate;
             if (!clipRect.template) {
                 clipRect.template = VMLClipRect.template = template(
-                    "<div <#= d.renderAttr(\"id\", d.options.id) #>" +
+                    "<div #= d.renderAttr(\"id\", d.options.id) #" +
                         "style='position:absolute; " +
-                        "width:<#= d.box.width() #>px; height:<#= d.box.height() #>px; " +
-                        "top:<#= d.box.y1 #>px; " +
-                        "left:<#= d.box.x1 #>px; " +
-                        "clip:<#= d._renderClip() #>;' >" +
-                    "<#= d.renderContent() #></div>"
+                        "width:#= d.box.width() #px; height:#= d.box.height() #px; " +
+                        "top:#= d.box.y1 #px; " +
+                        "left:#= d.box.x1 #px; " +
+                        "clip:#= d._renderClip() #;' >" +
+                    "#= d.renderContent() #</div>"
                 );
 
                 clipRect.clipTemplate = VMLClipRect.clipTemplate = template(
-                    "rect(<#= d.points[0].y #>px <#= d.points[1].x #>px " +
-                         "<#= d.points[2].y #>px <#= d.points[0].x #>px)"
+                    "rect(#= d.points[0].y #px #= d.points[1].x #px " +
+                         "#= d.points[2].y #px #= d.points[0].x #px)"
                 );
             }
 
@@ -6268,8 +6268,8 @@
             gradient.template = VMLLinearGradient.template;
             if (!gradient.template) {
                 gradient.template = VMLLinearGradient.template = template(
-                    "<kvml:fill type='gradient' angle='<#= 270 - d.options.rotation #>' " +
-                    "colors='<#= d.renderColors() #>' opacity='<#= d.options.opacity #>' />"
+                    "<kvml:fill type='gradient' angle='#= 270 - d.options.rotation #' " +
+                    "colors='#= d.renderColors() #' opacity='#= d.options.opacity #' />"
                 );
             }
         },
@@ -6726,10 +6726,10 @@
             tooltip.template = Tooltip.template;
             if (!tooltip.template) {
                 tooltip.template = Tooltip.template = template(
-                    "<div style='display:none; position: absolute; font: <#= d.font #>;" +
+                    "<div style='display:none; position: absolute; font: #= d.font #;" +
                     "border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" +
-                    "border: <#= d.border.width #>px solid;" +
-                    "opacity: <#= d.opacity #>; filter: alpha(opacity=<#= d.opacity * 100 #>);" +
+                    "border: #= d.border.width #px solid;" +
+                    "opacity: #= d.opacity #; filter: alpha(opacity=#= d.opacity * 100 #);" +
                     "padding: 2px 6px; white-space: nowrap;'></div>"
                 );
             }
