@@ -650,7 +650,7 @@
 
     var RemoteTransport = Class.extend( {
         init: function(options) {
-            var that = this, dialect;
+            var that = this, parameterMap;
 
             options = that.options = extend({}, that.options, options);
 
@@ -667,14 +667,14 @@
                 add: noop
             }
 
-            dialect = options.dialect;
+            parameterMap = options.parameterMap;
 
-            that.dialect = isFunction(dialect) ? dialect : function(options) {
+            that.parameterMap = isFunction(parameterMap) ? parameterMap : function(options) {
                 var result = {};
 
                 each(options, function(option, value) {
-                    if (option in dialect) {
-                        option = dialect[option];
+                    if (option in parameterMap) {
+                        option = parameterMap[option];
                         if (isPlainObject(option)) {
                             value = option.value(value);
                             option = option.key;
@@ -689,7 +689,7 @@
         },
 
         options: {
-            dialect: identity
+            parameterMap: identity
         },
 
         create: function(options) {
@@ -739,7 +739,7 @@
                 data = isFunction(operation.data) ? operation.data() : operation.data;
 
             options = extend(true, {}, operation, options);
-            options.data = that.dialect(extend(data, options.data), type);
+            options.data = that.parameterMap(extend(data, options.data), type);
 
             return options;
         }
@@ -893,12 +893,12 @@
          * @option {String} [transport.read.dataType] The type of data that you're expecting back from the server
          * @option {Object|Function} [transport.read.data] Additional data to be send to the server
          *
-         * @option {Function} [transport.dialect] Convert the request parameters from dataSource format to remote service specific format.
+         * @option {Function} [transport.parameterMap] Convert the request parameters from dataSource format to remote service specific format.
          * _example
          *  var dataSource = new kendo.data.DataSource({
          *      transport: {
          *        read: "Catalog/Titles",
-         *        dialect: function(options) {
+         *        parameterMap: function(options) {
          *           return {
          *              pageIndex: options.page,
          *              size: options.pageSize,

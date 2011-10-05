@@ -12,7 +12,7 @@
         dataSource = data.dataSource({
             pageSize: computePageSize(120, true),
             serverSorting: true,
-            dialect: function(data) {
+            parameterMap: function(data) {
                 var params = {
                     text: $("#searchBox").val(),
                     extras: EXTRAS,
@@ -29,7 +29,7 @@
             jsoncallback: "searchPhotos"
         }),
         mostPopularDataSource = data.dataSource({
-            dialect: function(data) {
+            parameterMap: function(data) {
                 var params = {
                     extras: EXTRAS,
                     per_page: 100
