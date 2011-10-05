@@ -4,16 +4,20 @@
     Component = ui.Component,
     parse = kendo.parseDate,
     keys = kendo.keys,
-    defineViewedValue = kendo.calendar.defineViewedValue,
-    calendar,
-    DATEVIEW = "dateView",
+    DIV = "<div />",
     OPEN = "open",
     CLOSE = "close",
-    MOUSEDOWN = (kendo.support.touch ? "touchstart" : "mousedown"),
     CHANGE = "change",
     NAVIGATE = "navigate",
-    DIV = "<div />",
-    proxy = $.proxy;
+    DATEVIEW = "dateView",
+    SELECTED = "k-state-selected",
+    MOUSEDOWN = (kendo.support.touch ? "touchstart" : "mousedown"),
+    cal = kendo.calendar,
+    isInRange = cal.isInRange,
+    restrictValue = cal.restrictValue,
+    proxy = $.proxy,
+    DATE = Date,
+    calendar;
 
     var DateView = function(options) {
         var that = this,
@@ -25,11 +29,7 @@
 
         that.calendar = calendar;
         that.options = options = options || {};
-        that.popup = new ui.Popup($(DIV).appendTo(body), {
-            anchor: options.anchor,
-            close: options.close,
-            open: options.open
-        });
+        that.popup = new ui.Popup($(DIV).appendTo(body), options);
 
         that.value(options.value);
     }
@@ -40,33 +40,28 @@
                 popup = that.popup,
                 options = that.options,
                 calendar = that.calendar,
-                calendarElement = calendar.element;
+                element = calendar.element;
 
-            if (calendarElement.data(DATEVIEW) !== this) {
-                calendarElement.show().appendTo(popup.element);
+            if (element.data(DATEVIEW) !== that) {
 
-                calendarElement.bind("click", function(e) {
-                    if (e.currentTarget.className.indexOf("k-state-selected") !== -1) {
-                        that.close();
-                    }
-                });
+                element.show()
+                       .appendTo(popup.element)
+                       .bind("click", proxy(that._click, that))
+                       .data(DATEVIEW, that);
+                       .unbind(MOUSEDOWN)
+                       .bind(MOUSEDOWN, options.clearBlurTimeout);
 
-                calendarElement.data(DATEVIEW, this);
-                calendar.options.min = options.min;
-                calendar.options.max = options.max;
+                calendar.min(options.min);
+                calendar.max(options.max);
+
                 calendar.options.depth = options.depth;
                 calendar.options.startView = options.startView;
                 calendar._currentView = options.startView;
 
                 calendar.unbind(CHANGE)
                         .unbind(NAVIGATE)
-                        .bind(NAVIGATE,function() {
-                            that._viewedValue = new Date(calendar._viewedValue);
-                            calendar._focusCell(calendar._viewedValue);
-                        })
+                        .bind(NAVIGATE, proxy(that._navigate, that))
                         .bind(CHANGE, options);
-
-                calendarElement.unbind(MOUSEDOWN).bind(MOUSEDOWN, options.clearBlurTimeout);
 
                 that.value(that._value);
             }
@@ -98,7 +93,7 @@
                 options = that.options,
                 min = options.min,
                 max = options.max,
-                viewedValue = new Date(that._viewedValue),
+                viewedValue = new DATE(that._viewedValue),
                 calendar = that.calendar,
                 viewName = calendar._currentView,
                 view = calendar._view,
@@ -144,11 +139,11 @@
                 } else if (keys.HOME == key) {
                     e.preventDefault();
                     //find a way to combine this code with the one in the if(value) condition block
-                    that._viewedValue = viewedValue = defineViewedValue(view.first(viewedValue), options.min, options.max);
+                    that._viewedValue = viewedValue = restrictValue(view.first(viewedValue), options.min, options.max);
                     calendar._focusCell(viewedValue);
                 } else if (keys.END == key) {
                     e.preventDefault();
-                    that._viewedValue = viewedValue = defineViewedValue(view.last(viewedValue), options.min, options.max);
+                    that._viewedValue = viewedValue = restrictValue(view.last(viewedValue), options.min, options.max);
                     calendar._focusCell(viewedValue);
                 } else if (keys.PAGEUP == key) {
                     calendar.navigateToPast();
@@ -159,7 +154,7 @@
                 if (value) {
                     view.setDate(viewedValue, value);
 
-                    that._viewedValue = viewedValue = defineViewedValue(viewedValue, options.min, options.max);
+                    that._viewedValue = viewedValue = restrictValue(viewedValue, options.min, options.max);
 
                     calendar._focusCell(viewedValue);
                 }
@@ -172,12 +167,26 @@
                 options = that.options;
 
             that._value = value;
-            that._viewedValue = defineViewedValue(value, options.min, options.max);
+            that._viewedValue = restrictValue(value, options.min, options.max);
 
             if (calendar.element.data(DATEVIEW) === this) {
                 calendar._focusCell(that._viewedValue);
                 calendar.value(value);
             }
+        },
+
+        _click: function(e) {
+            if (e.currentTarget.className.indexOf(SELECTED) !== -1) {
+                that.close();
+            }
+        },
+
+        _navigate: function() {
+            var that = this,
+                calendar = that.calendar;
+
+            that._viewedValue = new DATE(calendar._viewedValue);
+            calendar._focus(calendar._viewedValue);
         },
 
         _navigateDown: function() {
@@ -187,7 +196,7 @@
                 cell = calendar._table.find(".k-state-focused"),
                 value = new Date(cell.children(":first").data("value"));
 
-            if (!cell[0] || cell.hasClass("k-state-selected")) {
+            if (!cell[0] || cell.hasClass(SELECTED)) {
                 that.close();
                 return;
             }
