@@ -248,6 +248,8 @@
         _wait: function (e) {
             var that = this;
 
+            e.stopImmediatePropagation();
+
             that._startDrag(e);
 
             // Prevent text selection for Gecko and WebKit
