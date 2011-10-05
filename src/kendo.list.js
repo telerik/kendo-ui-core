@@ -45,7 +45,7 @@
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
 
-            that.list = $("<div class='k-listContainer'/>")
+            that.list = $("<div class='k-list-container'/>")
                             .attr(ID, that.element.attr(ID) + "-list")
                             .append(that.ul);
 
