@@ -4364,7 +4364,8 @@
         pointGetter: function(series, index, prop) {
             var valueField = series[prop + "Field"],
                 data = series.data[index],
-                value = data[valueField];
+                value = data[prop];
+
             if (valueField && series.dataItems) {
                 return getter(valueField)(series.dataItems[index]);
             } else {
