@@ -345,7 +345,7 @@
             that.bind(CHANGE, options);
 
             that._valid = true;
-            that.value(options.value);
+            that.value(options.value || that.element.val());
         },
 
         options: {
