@@ -635,7 +635,22 @@
                                      value.getMonth(),
                                      date.getDate());
                 } else {
-                    date.setMonth(date.getMonth() + value);
+                    var day = date.getDate(),
+                        month = date.getMonth();
+
+                    month = month + value;
+
+                    date.setMonth(month);
+
+                    if (month > 11) {
+                        month -= 11;
+                    } else if (month < 0) {
+                        month = 11 - month;
+                    }
+
+                    if (date.getMonth() != month) {
+                        date.setMonth(month);
+                    }
                 }
             },
             toDateString: function(date) {
@@ -782,7 +797,7 @@
 
         if (modifier) {
             start = start - start % modifier;
-            end = start - start % modifier + modifier - (1 * modifier / 10);
+            end = start - start % modifier + modifier - 1;
         }
 
         if (year1 > end) {
