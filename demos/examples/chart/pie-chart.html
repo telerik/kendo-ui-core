@@ -14,6 +14,8 @@
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.chart.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.slider.js"></script>
         <!-- script -->
     </head>
     <body>
@@ -23,6 +25,31 @@
         <div class="description">Pie Chart</div>
         <!-- description -->
         <div id="example" class="k-content">
+            <div class="configuration" style="width:170px;">
+                <span class="configHead">Configuration</span>
+                <span class="configTitle">Pie Chart</span>
+                <ul class="options">
+                    <li>
+                        <input id="labels" type="checkbox" autocomplete="off" />
+                        <label for="labels">Show labels</label>
+                    </li>
+                    <li>
+                        <input id="alignLabels" type="checkbox" disabled="disabled" autocomplete="off" />
+                        <label for="alignLabels">Align labels</label>
+                    </li>
+                    <li>
+                        <label for="padding">Padding</label>
+                        <input id="padding" style="width: 100%;" />
+                    </li>
+                    <li>
+                        <label for="startAngle">Start angle</label>
+                        <input id="startAngle" style="width: 100%;" />
+                    </li>
+                </ul>
+            </div>
+            <div style="margin-right:210px;">
+                <div id="chart" style="width:500px; height:400px;margin: 0 auto;"></div>
+            </div>
             <div id="chart" style="width:650px; height:450px;margin: 0 auto;"></div>
             <script>
                 function createChart() {
@@ -43,15 +70,15 @@
                             }, {
                                 name: "Solar", value: 2
                             }, {
-                                name: "Hydro", value: 49
+                                name: "Nuclear", value: 49
                             }, {
                                 name: "Wind", value: 27
                             }],
-                            startAngle: 60
+                            startAngle: 160
                         }],
                         tooltip: {
                             visible: true,
-                            format: "{0}%"
+                            template: "<#= category #> - <#= value #> %"
                         }
                     });
                 }
@@ -62,7 +89,53 @@
                     $(document).bind("kendo:skinChange", function(e) {
                         createChart();
                     });
+
+                    setupConfigurator();
                 });
+
+                function setupConfigurator() {
+                    $("#padding").kendoSlider({
+                        showButtons: false,
+                        min: 60,
+                        max: 200,
+                        val: 120,
+                        slide: function(e) {
+                            $("#padding").val(e.value);
+                            setTimeout(refresh);
+                        },
+                        change: refresh
+                    });
+
+                    $("#startAngle").kendoSlider({
+                        showButtons: false,
+                        max: 360,
+                        val: 160,
+                        slide: function(e) {
+                            $("#startAngle").val(e.value);
+                            setTimeout(refresh);
+                        },
+                        change: refresh
+                    });
+                    $(".configuration").live("change", refresh);
+                }
+
+                function refresh() {
+                    var chart = $("#chart").data("kendoChart"),
+                        pieSeries = chart.options.series[0],
+                        labels = $("#labels").prop("checked"),
+                        startAngle = parseInt($("#startAngle").val(), 10),
+                        padding = parseInt($("#padding").val(), 10);
+
+                    chart.options.transitions = false;
+                    pieSeries.labels.visible = labels;
+                    pieSeries.labels.align
+                    pieSeries.startAngle = startAngle;
+                    pieSeries.padding = padding;
+
+                    $("#alignLabels").attr("disabled", !labels);
+
+                    chart.refresh();
+                }
             </script>
         </div>
         <!-- tools -->
