@@ -3975,6 +3975,12 @@
             },
             animation: {
                 type: PIE
+            },
+            highlight: {
+                visible: true,
+                border: {
+                    width: 1
+                }
             }
         },
 
