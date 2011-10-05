@@ -86,14 +86,32 @@
             <script>
                 $(document).ready(function() {
                     var getItem = function (target) {
-                        var itemIndex = target[0].value;
+                            var itemIndex = target[0].value;
 
-                        return tabStrip.tabGroup.children("li").eq(itemIndex);
-                    };
-
-                    $(".selectTab").click(function(e) {
-                        tabStrip.select(getItem($("#tabIndex")));
-                    });
+                            return tabStrip.tabGroup.children("li").eq(itemIndex);
+                        },
+                        select = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                tabStrip.select(getItem($("#tabIndex")));
+                        },
+                        append = function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                tabStrip.append({
+                                    text: $("#appendText").val()
+                                });
+                        },
+                        before = function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                tabStrip.insertBefore({
+                                    text: $("#beforeText").val()
+                                }, tabStrip.select());
+                        },
+                        after = function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                tabStrip.insertAfter({
+                                    text: $("#afterText").val()
+                                }, tabStrip.select());
+                        };
 
                     $(".toggleTab").click(function(e) {
                         var tab = tabStrip.select();
@@ -110,23 +128,17 @@
                         tabStrip.select(otherTab);
                     });
 
-                    $(".appendItem").click( function (e) {
-                        tabStrip.append({
-                                text: $("#appendText").val()
-                            });
-                    });
+                    $(".selectTab").click(select);
+                    $("#tabIndex").keypress(select);
 
-                    $(".beforeItem").click( function (e) {
-                        tabStrip.insertBefore({
-                                text: $("#beforeText").val()
-                            }, tabStrip.select());
-                    });
+                    $(".appendItem").click(append);
+                    $("#appendText").keypress(append);
 
-                    $(".afterItem").click( function (e) {
-                        tabStrip.insertAfter({
-                                text: $("#afterText").val()
-                            }, tabStrip.select());
-                    });
+                    $(".beforeItem").click(before);
+                    $("#beforeText").keypress(before);
+
+                    $(".afterItem").click(after);
+                    $("#afterText").keypress(after);
                 });
 
                 var tabStrip = $("#tabstrip").kendoTabStrip().css({ marginRight: "220px" }).data("kendoTabStrip");

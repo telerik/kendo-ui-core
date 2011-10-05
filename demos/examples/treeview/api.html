@@ -54,20 +54,36 @@
             <script>
                 $(document).ready(function() {
                     var treeview = $("#treeview").kendoTreeView({
-                        dataSource: [
-                            { text: "Item 1", expanded: true, items: [
-                                { text: "Item 1.1" },
-                                { text: "Item 1.2" },
-                                { text: "Item 1.3" }
-                            ] },
-                            { text: "Item 2", items: [
-                                { text: "Item 2.1" },
-                                { text: "Item 2.2" },
-                                { text: "Item 2.3" }
-                            ] },
-                            { text: "Item 3" }
-                        ]
-                    }).data("kendoTreeView");
+                            dataSource: [
+                                { text: "Item 1", expanded: true, items: [
+                                    { text: "Item 1.1" },
+                                    { text: "Item 1.2" },
+                                    { text: "Item 1.3" }
+                                ] },
+                                { text: "Item 2", items: [
+                                    { text: "Item 2.1" },
+                                    { text: "Item 2.2" },
+                                    { text: "Item 2.3" }
+                                ] },
+                                { text: "Item 3" }
+                            ]
+                        }).data("kendoTreeView"),
+                        append = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var selectedNode = treeview.select();
+
+                                // passing a falsy value as the second append() parameter
+                                // will append the new node to the root group
+                                if (selectedNode.length == 0) {
+                                    selectedNode = null;
+                                }
+
+                                treeview.append({
+                                    text: $("#text").val()
+                                }, selectedNode);
+                            }
+                        };
+
 
                     $("#disableNode").click(function() {
                         var selectedNode = treeview.select();
@@ -95,19 +111,8 @@
                         treeview.collapse(".k-item");
                     });
 
-                    $("#appendNodeToSelected").click(function() {
-                        var selectedNode = treeview.select();
-
-                        // passing a falsy value as the second append() parameter
-                        // will append the new node to the root group
-                        if (selectedNode.length == 0) {
-                            selectedNode = null;
-                        }
-
-                        treeview.append({
-                            text: $("#text").val()
-                        }, selectedNode);
-                    });
+                    $("#appendNodeToSelected").click(append);
+                    $("#text").keypress(append);
                 });
             </script>
 
