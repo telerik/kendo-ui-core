@@ -65,8 +65,10 @@
         RADIAL = "radial",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
-        SANS12 = "12px Verdana, sans-serif",
-        SANS16 = "16px Verdana, sans-serif",
+        SANS = "Arial,Helvetica,sans-serif",
+        SANS11 = "11px " + SANS,
+        SANS12 = "12px " + SANS,
+        SANS16 = "16px " + SANS,
         SERIES_CLICK = "seriesClick",
         SQUARE = "square",
         SVG_DASH_TYPE = {
@@ -284,7 +286,7 @@
          * });
          * @option {Object} [title] The chart title configuration options.
          * @option {String} [title.text] The title of the chart.
-         * @option {String} [title.font] <"16px Verdana, sans-serif"> The font style of the title.
+         * @option {String} [title.font] <"16px Arial,Helvetica,sans-serif"> The font style of the title.
          * @option {String} [title.position] <"top"> The positions of the title.
          *    <dl>
          *         <dt>
@@ -342,7 +344,7 @@
          * @option {Number} [title.border.width] <0> The width of the border.
          * @option {String} [title.border.color] <"black"> The color of the border.
          * @option {Object} [legend] The chart legend configuration options.
-         * @option {String} [legend.font] <12px Verdana, sans-serif> The font style of the legend.
+         * @option {String} [legend.font] <12px Arial,Helvetica,sans-serif> The font style of the legend.
          * @option {String} [legend.position] <right> The positions of the legend.
          *    <dl>
          *         <dt>
@@ -449,7 +451,7 @@
          * @option {String} [valueAxis.line.color] <"black"> The color of the lines.
          * @option {Boolean} [valueAxis.line.visible] <true> The visibility of the lines.
          * @option {Object} [valueAxis.labels] Configures the axis labels.
-         * @option {String} [valueAxis.labels.font] <"12px Verdana, sans-serif">
+         * @option {String} [valueAxis.labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
          * @option {Boolean} [valueAxis.labels.visible] <true> The visibility of the labels.
          * @option {Number|Object} [valueAxis.labels.margin] <0> The margin of the labels.
@@ -553,7 +555,7 @@
          * @option {String} [categoryAxis.line.color] <"black"> The color of the lines.
          * @option {Boolean} [categoryAxis.line.visible] <true> The visibility of the lines.
          * @option {Object} [categoryAxis.labels] Configures the axis labels.
-         * @option {String} [categoryAxis.labels.font] <"12px Verdana, sans-serif">
+         * @option {String} [categoryAxis.labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
          * @option {Boolean} [categoryAxis.labels.visible] <true> The visibility of the labels.
          * @option {Number|Object} [categoryAxis.labels.margin] <0> The margin of the labels.
@@ -614,7 +616,7 @@
          * @option {Number} [seriesDefaults.gap] <1.5> The distance between category clusters.
          * @option {Number} [seriesDefaults.spacing] <0.4> Space between bars.
          * @option {Object} [seriesDefaults.labels] Configures the series data labels.
-         * @option {String} [seriesDefaults.labels.font] <"12px Verdana, sans-serif">
+         * @option {String} [seriesDefaults.labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
          * @option {Boolean} [seriesDefaults.labels.visible] <true> The visibility of the labels.
          * @option {Number|Object} [seriesDefaults.labels.margin] <0> The margin of the labels.
@@ -717,7 +719,7 @@
          * @option {String} [series.type="bar".color] The series base color.
          * @option {Number} [series.type="bar".opacity] <1> The series opacity.
          * @option {Object} [series.type="bar".labels] Configures the series data labels.
-         * @option {String} [series.type="bar".labels.font] <"12px Verdana, sans-serif">
+         * @option {String} [series.type="bar".labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
          * @option {String} [series.type="bar".labels.position] <"outsideEnd">
          * Defines the position of the bar labels.
@@ -818,7 +820,7 @@
          * @option {String} [series.type="column".color] The series base color.
          * @option {Number} [series.type="column".opacity] <1> The series opacity.
          * @option {Object} [series.type="column".labels] Configures the series data labels.
-         * @option {String} [series.type="column".labels.font] <"12px Verdana, sans-serif">
+         * @option {String} [series.type="column".labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
          * @option {String} [series.type="column".labels.position] <"outsideEnd">
          * Defines the position of the column labels.
@@ -918,7 +920,7 @@
          * @option {String} [series.type="line".color] The series base color.
          * @option {Number} [series.type="line".opacity] <1> The series opacity.
          * @option {Object} [series.type="line".labels] Configures the series data labels.
-         * @option {String} [series.type="line".labels.font] <"12px Verdana, sans-serif">
+         * @option {String} [series.type="line".labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
          * @option {String} [series.type="line".labels.missingValues] <"gap">
          * Configures the behavior for handling missing values in line series.
@@ -1117,7 +1119,7 @@
          *          template: "${category} - ${value}"
          *      }
          * });
-         * @option {String} [tooltip.font] <"12px Tahoma,sans-serif"> The tooltip font.
+         * @option {String} [tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
          * @option {String} [tooltip.color]
          * The text color of the tooltip. The default is the same as the series labels color.
          * @option {String} [tooltip.background]
@@ -1935,7 +1937,7 @@
         },
 
         options: {
-            font: "10pt Verdana, sans-serif",
+            font: SANS12,
             color: BLACK,
             align: LEFT,
             vAlign: ""
@@ -7361,33 +7363,30 @@
     });
 
     // Themes
-    var TAHOMA11 = "11px Tahoma,sans-serif",
-        TAHOMA12 = "12px Tahoma,sans-serif",
-        TAHOMA16 = "16px Tahoma,sans-serif",
-        baseTheme = {
+    var baseTheme = {
             title: {
-                font: TAHOMA16
+                font: SANS16
             },
             legend: {
-                font: TAHOMA12
+                font: SANS12
             },
             seriesDefaults: {
                 labels: {
-                    font: TAHOMA11
+                    font: SANS11
                 }
             },
             categoryAxis: {
                 labels: {
-                    font: TAHOMA12
+                    font: SANS12
                 }
             },
             valueAxis: {
                 labels: {
-                    font: TAHOMA12
+                    font: SANS12
                 }
             },
             tooltip: {
-                font: TAHOMA12
+                font: SANS12
             }
         };
 
