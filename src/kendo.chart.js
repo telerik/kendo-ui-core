@@ -2049,7 +2049,8 @@
             animation: {
                 type: FADEIN,
                 delay: INITIAL_ANIMATION_DURATION
-            }
+            },
+            zIndex: 1
         },
 
         reflow: function(targetBox) {
