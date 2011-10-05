@@ -2,8 +2,7 @@ var less = require("./less-js/lib/less"),
     fs = require("fs");
 
 function generateThemes(themesFolder) {
-    var template = fs.readFileSync(themesFolder + "template.less", "utf8"),
-        themes = fs.readdirSync(themesFolder)
+    var themes = fs.readdirSync(themesFolder)
                     .filter(function(file) {
                         return file != "template.less" && /\.less$/i.test(file);
                     })
@@ -12,14 +11,18 @@ function generateThemes(themesFolder) {
                     });
 
     themes.forEach(function(theme) {
-        var constants = fs.readFileSync(theme, "utf8"),
+        var skinTemplate = fs.readFileSync(theme, "utf8"),
             themeName = /\/([^\/]+)\.less/i.exec(theme)[1];
 
-        less.render(constants + template, function (e, css) {
+        var parser = new(less.Parser)({
+            paths: ['styles'] // Specify search paths for @import directives
+        });
+
+        parser.parse(skinTemplate, function (e, tree) {
             if (e) {
                 console.log("ERROR: `" + theme + "` theme generation failed: " + e.message);
             } else {
-                fs.writeFileSync(themesFolder + "kendo." + themeName + ".css", css, "utf8");
+                fs.writeFileSync(themesFolder + "kendo." + themeName + ".css", tree.toCSS(/* { compress: true } */), "utf8");
 
                 console.log("theme `" + themeName + "` generated successfully.");
             }

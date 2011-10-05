@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>TabStrip Sandbox</title>
+    <link type="text/css" href="../styles/kendo.common.css" rel="stylesheet"/>
+    <link type="text/css" href="../styles/blueopal.less" rel="stylesheet/less"/>
+
+    <script src="../src/jquery.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.tabstrip.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.groupable.js"></script>
+    <script src="../src/kendo.pageable.js"></script>
+    <script src="../src/kendo.sortable.js"></script>
+    <script src="../src/kendo.resizable.js"></script>
+    <script src="../src/kendo.grid.js"></script>
+    <script src="../src/kendo.splitter.js"></script>
+    <script src="../demos/examples/js/people.js"></script>
+    <script src="../build/less-js/dist/less.js"></script>
+</head>
+<body>
+
+<div id="tabstrip" style="height: 100%; border: 1">
+           <ul>
+               <li>First tab</li>
+               <li>Second tab</li>
+           </ul>
+           <div>
+
+           </div>
+           <div>
+               <div id="vertical" >
+                   <div>
+                       <div id="horizontal1" >
+                           <div><div id="grid"></div></div>
+                           <div><div id="grid1"></div></div>
+                       </div>
+                   </div>
+                   <div>
+                       <div id="horizontal2" >
+                           <div></div>
+                           <div></div>
+                       </div>
+                   </div>
+                   <div>
+                       <div id="horizontal3" >
+                           <div></div>
+                           <div></div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       <script type="text/javascript">
+           function onSelect(e) {
+               console.log($(e.contentElement).find(".k-splitter").data("kendoSplitter"));
+               setTimeout( function () {
+                    $(e.contentElement).find(".k-splitter").trigger("resize");
+               }, 0 );
+           }
+
+               $(document).ready(function() {
+                  $("#tabstrip").kendoTabStrip({ select: onSelect });
+
+                  $("#grid").kendoGrid({
+                       dataSource: {
+                           data: createRandomData(50),
+                           pageSize: 10
+                       },
+                       height: 250,
+                       groupable: true,
+                       scrollable: true,
+                       sortable: true,
+                       pageable: true,
+                       columns: [
+                          {
+                              field: "FirstName",
+                               title: "First Name"
+                           },
+                           {
+                             field: "LastName",
+                             title: "Last Name"
+                           },
+                          {
+                             field: "City"
+                           },
+                          {
+                             field: "Title"
+                          },
+                          {
+                             field: "BirthDate",
+                             title: "Birth Date",
+                             template: '<#= kendo.toString(BirthDate,"dd MMMM yyyy") #>'
+                           },
+                           {
+                               field: "Age"
+                           }
+                       ]
+                  });
+                   $("#grid1").kendoGrid({
+                       height: 250,
+                       groupable: true,
+                       scrollable: true,
+                       sortable: true,
+                       pageable: true,
+                       columns: [
+                          {
+                              field: "FirstName",
+                               title: "First Name"
+                           },
+                           {
+                              field: "LastName",
+                               title: "Last Name"
+                           }
+                       ]
+                  });
+                   $("#vertical").kendoSplitter({
+                       orientation: "vertical",
+                       panes: [
+                           { collapsible: true },
+                           { collapsible: true },
+                           { collapsible: true }
+                       ]
+                   });
+                   $("#horizontal1,#horizontal2,#horizontal3").kendoSplitter({
+                       orientation: "horizontal",
+                       panes: [ {}, {} ]
+                   }).css({
+                        height: "100%",
+                        border: 0
+                   });
+
+              });
+
+
+           </script>
+     </div>
+
+</body>
+</html>
