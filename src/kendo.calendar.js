@@ -523,7 +523,7 @@
                     lastDayOfMonth = that.last(date),
                     toDateString = that.toDateString,
                     today = new DATE(),
-                    html = '<table class="k-content"><thead><tr>';
+                    html = '<table class="k-content" cellspacing="0"><thead><tr>';
 
                 for (; idx < 7; idx++) {
                     html += '<th abbr="' + abbr[idx] + '" scope="col" title="' + names[idx] + '">' + short[idx] + '</th>';

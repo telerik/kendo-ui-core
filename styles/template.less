@@ -313,6 +313,13 @@ td.k-group-cell,
     border-color: @hover-border-color;
 }
 
+.k-state-hover>.k-link,
+.k-state-focused>.k-link,
+.k-other-month.k-state-hover .k-link
+{
+    color: @hover-text-color;
+}
+
 .k-autocomplete.k-state-hover,
 .k-picker-wrap.k-state-hover,
 .k-dropdown-wrap.k-state-hover
@@ -325,7 +332,6 @@ td.k-group-cell,
 {
     color: @hover-text-color;
 }
-
 
 .k-dropdown .k-state-focused .k-input
 {
@@ -340,6 +346,11 @@ td.k-group-cell,
     color: @selected-text-color;
     background-color: @selected-background-color;
     border-color: @selected-border-color;
+}
+
+.k-state-selected>.k-link
+{
+    color: @selected-text-color;
 }
 
 .k-state-error
