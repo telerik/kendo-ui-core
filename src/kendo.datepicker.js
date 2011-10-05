@@ -34,9 +34,9 @@
     *  <ul>
     *      <li>Selected date</li>
     *      <li>Minimum/Maximum date</li>
+    *      <li>Define format</li>
     *      <li>Start view</li>
     *      <li>Define the navigation depth (last view to which end user can navigate)</li>
-    *      <li>Define format</li>
     *  </ul>
     * @exampleTitle Create DatePicker with selected date and defined min and max date
     * @example
@@ -45,8 +45,9 @@
     *      min: new Date(1950, 0, 1),
     *      max: new Date(2049, 11, 31)
     *  });
+    *  @section
     * <p>
-    *   DatePicker will set its value only if the entered date is valid and if it is in the defined range
+    *   DatePicker will set the value only if the entered date is valid and if it is in the defined range
     * </p>
     * @section
     * <h3>Define start view and navigation depth</h3>

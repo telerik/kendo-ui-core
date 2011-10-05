@@ -11,7 +11,7 @@
     *
     *   <h3>Getting Started</h3>
     *
-    * @exampleTitle Creating a calendar from existing DIV element
+    * @exampleTitle Creating a Calendar from existing DIV element
     * @example
     * <!-- HTML -->
     * <div id="calendar"></div>
@@ -85,12 +85,15 @@
     *  <p>
     *     This templates wraps the "value" in a div HTML element. Here is an example of the object
     *     passed to the template function:
-    *     {
-    *        date: date, // Date object corresponding to the current cell
-    *        title: kendo.toString(date, "D"),
-    *        value: date.getDate(),
-    *        dateString: toDateString(date) //Date formatted using "MM/dd/yyyy" format
-    *     };
+    *  </p>
+    * @exampleTitle Structure of the data object passed to the template
+    * @example
+    *  data = {
+    *    date: date, // Date object corresponding to the current cell
+    *    title: kendo.toString(date, "D"),
+    *    value: date.getDate(),
+    *    dateString: toDateString(date) //Date formatted using "MM/dd/yyyy" format
+    *  };
     */
     var kendo = window.kendo,
         ui = kendo.ui,
