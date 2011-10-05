@@ -5,6 +5,10 @@
         template = kendo.template,
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
+        cellTemplate = template('<td<#=data.cssClass#>><a class="k-link" href="#" data-value="<#=data.dateString#>"><#=data.value#></a></td>'),
+        cellEmptyTemplate = template("<td> </td>"),
+        LEFT = "left",
+        SLIDE = "slide",
         MONTH = "month",
         YEAR = "year",
         DECADE = "decade",
@@ -15,16 +19,15 @@
         VALUE = "value",
         HOVER = "k-state-hover",
         DISABLED = "k-state-disabled",
-        OTHERMONTH = ' class="k-other-month"',
+        OTHERMONTH = "k-other-month",
+        OTHERMONTHCLASS = ' class="' + OTHERMONTH + '"',
         CELLSELECTOR = "td:has(.k-link)",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
-        cellTemplate = template('<td<#=data.cssClass#>><a class="k-link" href="#" data-value="<#=data.dateString#>"><#=data.value#></a></td>');
-        cellEmptyTemplate = template("<td> </td>");
         msPerMinute = 60000,
         msPerDay = 86400000,
-        extend = $.extend,
         proxy = $.proxy,
+        extend = $.extend,
         DATE = Date;
 
     var Calendar = Component.extend({
@@ -49,20 +52,7 @@
             element
                 .delegate(CELLSELECTOR, MOUSEENTER, mouseenter)
                 .delegate(CELLSELECTOR, MOUSELEAVE, mouseleave)
-                .delegate(CELLSELECTOR, CLICK, function(e) {
-                    e.preventDefault();
-                    var link = $(e.currentTarget.firstChild),
-                        date = new DATE(link.data(VALUE)),
-                        viewedValue = that._viewedValue;
-
-                    if (link.parent().hasClass("k-other-month")) {
-                        viewedValue = date;
-                    } else {
-                        that._view.setDate(viewedValue, date);
-                    }
-
-                    that.navigateDown(viewedValue);
-                });
+                .delegate(CELLSELECTOR, CLICK, proxy(that._click, that));
 
             that._currentView = options.startView;
 
@@ -82,6 +72,17 @@
             month: {
                 content: "<#=data.value#>",
                 empty: " "
+            },
+            animation: {
+                horizontal: {
+                    effects: SLIDE,
+                    duration: 500,
+                    divisor: 2
+                },
+                vertical: {
+                    effects: "zoomIn",
+                    duration: 400
+                }
             }
         },
 
@@ -154,15 +155,15 @@
         navigate: function(value, viewName) {
             var that = this,
                 view, compare,
-                selectedValue = that._value,
-                viewedValue = that._viewedValue,
                 options = that.options,
                 min = options.min,
                 max = options.max,
                 title = that._title,
                 oldTable = that._table,
-                isFuture = value && +value > +viewedValue,
-                differentView = !value || +value === +viewedValue,
+                selectedValue = that._value,
+                viewedValue = that._viewedValue,
+                future = value && +value > +viewedValue,
+                vertical = !value || +value === +viewedValue,
                 newTable;
 
             if (oldTable && oldTable.parent().data("animating")) {
@@ -170,10 +171,9 @@
             }
 
             if (!value) {
-                value = that._viewedValue;
+                value = viewedValue;
             } else {
-                value = calendar.defineViewedValue(value, min, max);
-                that._viewedValue = new DATE(value);
+                that._viewedValue = value = new DATE(restrictValue(value, min, max))
             }
 
             if (!viewName) {
@@ -192,7 +192,7 @@
             if (!oldTable || that._changeView) {
                 title.html(view.title(value));
 
-                newTable = $(view.content($.extend({
+                newTable = $(view.content(extend({
                     min: min,
                     max: max,
                     date: value
@@ -200,11 +200,12 @@
 
                 that._table = newTable;
 
-                if (!oldTable) {
-                    newTable.insertAfter(title.closest(".k-header"));
-                } else {
-                    that._animate(oldTable, newTable, isFuture, differentView);
-                }
+                that._animate({
+                    oldTable: oldTable,
+                    newTable: newTable,
+                    vertical: vertical,
+                    future: future
+                });
 
                 that.trigger(NAVIGATE);
             }
@@ -231,98 +232,125 @@
             if (value !== null) {
                 value = new Date(value);
 
-                if (!inRange(value, min, max)) {
+                if (!isInRange(value, min, max)) {
                     value = null;
                 }
             }
 
             that._value = value;
-            that._viewedValue = calendar.defineViewedValue(value, min, max);
+            that._viewedValue = new DATE(restrictValue(value, min, max));
 
             that.navigate(value || that._viewedValue);
         },
 
-        _animate: function(oldTable, newTable, isFuture, differentView) {
-            var that = this;
+        _animate: function(options) {
+            var that = this,
+                oldTable = options.oldTable,
+                newTable = options.newTable;
 
-            if (!oldTable.is(":visible")) {
+            if (!oldTable) {
+                newTable.insertAfter(that.element[0].firstChild);
+            } else if (!oldTable.is(":visible") || that.options.animation === false) {
                 newTable.insertAfter(oldTable);
                 oldTable.remove();
-            } else if (differentView) {
-                that._zoomIn(oldTable, newTable);
             } else {
-                that._animateHorizontal(oldTable, newTable, isFuture);
+                if (options.vertical) {
+                    that._animateVertical(oldTable, newTable);
+                } else {
+                    that._animateHorizontal(oldTable, newTable, options.future);
+                }
             }
         },
 
-        _animateHorizontal: function(oldTable, newTable, isFuture) {
-            var viewWidth = oldTable.outerWidth();
+        _animateHorizontal: function(oldTable, newTable, future) {
+            var that = this,
+                horizontal = that.options.animation.horizontal,
+                effects = horizontal.effects,
+                viewWidth = oldTable.outerWidth();
 
-            oldTable.add(newTable).css({ width: viewWidth, 'float': 'left' });
+                if (effects && effects.indexOf(SLIDE) != -1) {
+                    oldTable.add(newTable).css({ width: viewWidth, "float": LEFT });
 
-            oldTable.wrap("<div/>");
+                    oldTable.wrap("<div/>");
 
-            oldTable.parent()
-                .css({
-                    position: 'relative',
-                    width: viewWidth * 2,
-                    'float': 'left',
-                    left: isFuture ? 0 : -200
-                });
+                    oldTable.parent()
+                    .css({
+                        position: "relative",
+                        width: viewWidth * 2,
+                        "float": LEFT,
+                        left: future ? 0 : -200
+                    });
 
-                newTable[isFuture ? "insertAfter" : "insertBefore"](oldTable);
+                    newTable[future ? "insertAfter" : "insertBefore"](oldTable);
 
-            //put in options
-            oldTable.parent().kendoStop(true, true).kendoAnimate({
-                effects: "slide:" + (isFuture ? "left" : "right"),
-                duration: 500,
-                divisor: 2,
-                complete: function() {
-                    oldTable.remove();
-                    newTable.unwrap();
+                    extend(horizontal, {
+                        effects: SLIDE + ":" + (future ? LEFT : "right"),
+                        complete: function() {
+                            oldTable.remove();
+                            newTable.css("float", "").unwrap();
+                        }
+                    });
+
+                    oldTable.parent().kendoStop(true, true).kendoAnimate(horizontal);
                 }
-            });
         },
 
-        _zoomIn: function(oldTable, newTable) {
+        _animateVertical: function(oldTable, newTable) {
             var that = this,
+                vertical = that.options.animation.vertical,
+                effects = vertical.effects,
                 viewWidth = oldTable.outerWidth(),
                 cell, position;
 
-            newTable.css({
-                position: "absolute",
-                top: 32, //oldTable.prev().outerHeight(),
-                left: 0
-            }).insertBefore(oldTable);
+            if (effects && effects.indexOf("zoomIn") != -1) {
+                newTable.css({
+                    position: "absolute",
+                    top: oldTable.prev().outerHeight(),
+                    left: 0
+                }).insertBefore(oldTable);
 
-            if (transitionOrigin) {
-                cell = that._getCell(that._view.toDateString(that._viewedValue));
-                position = cell.position();
-                position = (position.left + parseInt(cell.width() / 2)) + "px" + " " + (position.top + parseInt(cell.height() / 2) + "px");
-                newTable.css(transitionOrigin, position);
-            }
-
-            oldTable.kendoStop(true, true).kendoAnimate({
-                effects: "fadeOut",
-                duration: 600,
-                complete: function() {
-                   oldTable.remove();
-                   newTable.css({
-                        position: "static",
-                        top: 0,
-                        left: 0
-                    });
+                if (transitionOrigin) {
+                    cell = that._getCell(that._view.toDateString(that._viewedValue));
+                    position = cell.position();
+                    position = (position.left + parseInt(cell.width() / 2)) + "px" + " " + (position.top + parseInt(cell.height() / 2) + "px");
+                    newTable.css(transitionOrigin, position);
                 }
-            });
 
-            //put in animation
-            newTable.kendoStop(true, true).kendoAnimate({
-                effects: "zoomIn",
-                duration: 400
-            });
+                oldTable.kendoStop(true, true).kendoAnimate({
+                    effects: "fadeOut",
+                    duration: 600,
+                    complete: function() {
+                        oldTable.remove();
+                        newTable.css({
+                            position: "static",
+                            top: 0,
+                            left: 0
+                        });
+                    }
+                });
+
+                newTable.kendoStop(true, true).kendoAnimate(vertical);
+            }
         },
 
-        _focusCell: function(value) {
+        _click: function(e) {
+            var that = this,
+                link = $(e.currentTarget.firstChild),
+                date = new DATE(link.data(VALUE)),
+                viewedValue = that._viewedValue;
+
+            e.preventDefault();
+
+            if (link.parent().hasClass(OTHERMONTH)) {
+                viewedValue = date;
+            } else {
+                that._view.setDate(viewedValue, date);
+            }
+
+            that.navigateDown(viewedValue);
+        },
+
+        _focus: function(value) {
             var that = this,
                 view = that._view;
 
@@ -338,30 +366,16 @@
         _footer: function() {
             var that = this,
             element = that.element,
-            today = new DATE(),
-            link;
+            today = new DATE();
 
             if (!element.find(".k-footer")[0]) {
                 element.append('<div class="k-footer"><a href="#" class="k-link k-nav-today"></a></div>');
             }
 
-            link = element.find(".k-nav-today");
-
-            link.html(template(that.options.footer)(today));
-            link.attr("title", kendo.toString(today, "D"));
-
-            link.bind("click", function(e) {
-                e.preventDefault();
-
-                if (that._view.compare(that._viewedValue, today) === 0 && that._currentView == that.options.depth) {
-                    that._changeView = false;
-                }
-
-                that._currentView = that.options.depth;
-
-                that.value(today);
-                that.trigger(CHANGE);
-            });
+            element.find(".k-nav-today")
+                   .html(template(that.options.footer)(today))
+                   .attr("title", kendo.toString(today, "D"))
+                   .bind(CLICK, proxy(that._todayClick, that));
         },
 
         _header: function() {
@@ -406,7 +420,7 @@
 
         _getCell: function(value) {
             return this._table
-                       .find("td:not(.k-other-month)")
+                       .find("td:not(." + OTHERMONTH + ")")
                        .filter(function() {
                            return $(this.firstChild).data(VALUE) === value;
                        });
@@ -414,7 +428,7 @@
 
         _setClass: function(className, value) {
             this._table
-                .find("td:not(.k-other-month)")
+                .find("td:not(." + OTHERMONTH + ")")
                 .removeClass(className)
                 .filter(function() {
                    return $(this.firstChild).data(VALUE) === value;
@@ -439,6 +453,22 @@
                 viewedValue.setFullYear(viewedValue.getFullYear() + value);
             }
             return viewedValue;
+        },
+
+        _todayClick: function(e) {
+            var that = this,
+                today = new DATE();
+
+            e.preventDefault();
+
+            if (that._view.compare(that._viewedValue, today) === 0 && that._currentView == that.options.depth) {
+                that._changeView = false;
+            }
+
+            that._currentView = that.options.depth;
+
+            that.value(today);
+            that.trigger(CHANGE);
         },
 
         _templates: function() {
@@ -480,20 +510,6 @@
                 tzOffsetDiff = resultDATE.getTimezoneOffset() - tzOffsetBefore;
 
             date.setTime(resultDATE.getTime() + tzOffsetDiff * msPerMinute);
-        },
-
-        defineViewedValue: function (value, min, max) {
-            var today = new DATE();
-            if (value) {
-                today = new DATE(value);
-            }
-
-            if (min > today) {
-                today = new DATE(min);
-            } else if (max < today) {
-                today = new DATE(max);
-            }
-            return today;
         },
 
         month: {
@@ -540,7 +556,7 @@
                             day = date.getDay();
 
                         if (date < firstDayOfMonth || date > lastDayOfMonth) {
-                            cssClass.push("k-other-month");
+                            cssClass.push(OTHERMONTH);
                         }
 
                         if (+date === today) {
@@ -636,9 +652,7 @@
                                      date.getDate());
                 } else {
                     var day = date.getDate(),
-                        month = date.getMonth();
-
-                    month = month + value;
+                        month = date.getMonth() + value;
 
                     date.setMonth(month);
 
@@ -678,7 +692,7 @@
                         return {
                             value: date.getFullYear(),
                             dateString: toDateString(date),
-                            cssClass: idx == 0 || idx == 11 ? OTHERMONTH : ""
+                            cssClass: idx == 0 || idx == 11 ? OTHERMONTHCLASS : ""
                         };
                     }
                 });
@@ -732,7 +746,7 @@
                         return {
                             value: year + "-" + (year + 9),
                             dateString: toDateString(date),
-                            cssClass: idx == 0 || idx == 11 ? OTHERMONTH : ""
+                            cssClass: idx == 0 || idx == 11 ? OTHERMONTHCLASS : ""
                         };
                     }
                 });
@@ -781,7 +795,7 @@
 
             data = build(start, idx);
 
-            html += inRange(start, min, max) ? content(data) : empty(data);
+            html += isInRange(start, min, max) ? content(data) : empty(data);
 
             setter(start, 1);
         }
@@ -807,10 +821,23 @@
         }
 
         return result;
-
     }
 
-    function inRange(date, min, max) {
+    function restrictValue (value, min, max) {
+        var today = new DATE();
+        if (value) {
+            today = new DATE(value);
+        }
+
+        if (min > today) {
+            today = new DATE(min);
+        } else if (max < today) {
+            today = new DATE(max);
+        }
+        return today;
+    }
+
+    function isInRange(date, min, max) {
         return +date >= +min && +date <= +max;
     }
 
@@ -830,6 +857,9 @@
     function mouseleave() {
         $(this).removeClass(HOVER);
     }
+
+    calendar.restrictValue = restrictValue;
+    calendar.isInRange = isInRange;
 
     kendo.calendar = calendar;
 
