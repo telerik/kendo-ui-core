@@ -102,27 +102,27 @@
 
         templates = {
             group: template(
-                "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
-                    "<#= renderItems(data) #>" +
+                "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
+                    "#= renderItems(data) #" +
                 "</ul>"
             ),
             itemWrapper: template(
-                "<<#= tag(item) #> class='<#= textClass(item) #>'<#= textAttributes(item) #>>" +
-                    "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
-                    "<#= arrow(data) #>" +
-                "</<#= tag(item) #>>"
+                "<#= tag(item) # class='#= textClass(item) #'#= textAttributes(item) #>" +
+                    "#= image(item) ##= sprite(item) ##= text(item) #" +
+                    "#= arrow(data) #" +
+                "</#= tag(item) #>"
             ),
             item: template(
-                "<li class='<#= wrapperCssClass(group, item) #>'>" +
-                    "<#= itemWrapper(data) #>" +
-                    "<# if (item.items) { #>" +
-                    "<#= subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded } }) #>" +
-                    "<# } #>" +
+                "<li class='#= wrapperCssClass(group, item) #'>" +
+                    "#= itemWrapper(data) #" +
+                    "# if (item.items) { #" +
+                    "#= subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded } }) #" +
+                    "# } #" +
                 "</li>"
             ),
-            image: template("<img class='k-image' alt='' src='<#= imageUrl #>' />"),
-            arrow: template("<span class='<#= arrowClass(item, group) #>'></span>"),
-            sprite: template("<span class='k-sprite <#= spriteCssClass #>'></span>"),
+            image: template("<img class='k-image' alt='' src='#= imageUrl #' />"),
+            arrow: template("<span class='#= arrowClass(item, group) #'></span>"),
+            sprite: template("<span class='k-sprite #= spriteCssClass #'></span>"),
             empty: template("")
         },
 

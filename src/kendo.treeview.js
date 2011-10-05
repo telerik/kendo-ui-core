@@ -163,31 +163,31 @@
 
 
     templates = {
-        dragClue: template("<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span><#= text #></div>"),
+        dragClue: template("<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span>#= text #</div>"),
         group: template(
-            "<ul class='<#= groupCssClass(group) #>'<#= groupAttributes(group) #>>" +
-                "<#= renderItems(data) #>" +
+            "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
+                "#= renderItems(data) #" +
             "</ul>"
         ),
         itemWrapper: template(
-            "<div class='<#= cssClass(group, item) #>'>" +
-                "<#= toggleButton(data) #>" +
-                "<<#= tag(item) #> class='<#= textClass(item) #>'<#= textAttributes(item) #>>" +
-                    "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
-                "</<#= tag(item) #>>" +
+            "<div class='#= cssClass(group, item) #'>" +
+                "#= toggleButton(data) #" +
+                "<#= tag(item) # class='#= textClass(item) #'#= textAttributes(item) #>" +
+                    "#= image(item) ##= sprite(item) ##= text(item) #" +
+                "</#= tag(item) #>" +
             "</div>"
         ),
         item: template(
-            "<li class='<#= wrapperCssClass(group, item) #>'>" +
-                "<#= itemWrapper(data) #>" +
-                "<# if (item.items) { #>" +
-                "<#= subGroup({ items: item.items, treeview: treeview, group: { expanded: item.expanded } }) #>" +
-                "<# } #>" +
+            "<li class='#= wrapperCssClass(group, item) #'>" +
+                "#= itemWrapper(data) #" +
+                "# if (item.items) { #" +
+                "#= subGroup({ items: item.items, treeview: treeview, group: { expanded: item.expanded } }) #" +
+                "# } #" +
             "</li>"
         ),
-        image: template("<img class='k-image' alt='' src='<#= imageUrl #>' />"),
-        toggleButton: template("<span class='<#= toggleButtonClass(item) #>'></span>"),
-        sprite: template("<span class='k-sprite <#= spriteCssClass #>'></span>"),
+        image: template("<img class='k-image' alt='' src='#= imageUrl #' />"),
+        toggleButton: template("<span class='#= toggleButtonClass(item) #'></span>"),
+        sprite: template("<span class='k-sprite #= spriteCssClass #'></span>"),
         empty: template("")
     };
 

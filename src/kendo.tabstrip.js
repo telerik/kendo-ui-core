@@ -161,20 +161,20 @@
 
         templates = {
             content: template(
-                "<div class='k-content'<#= contentAttributes(data) #>><#= content(item) #></div>"
+                "<div class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
             ),
             itemWrapper: template(
-                "<<#= tag(item) #> class='k-link'<#= contentUrl(item) #><#= textAttributes(item) #>>" +
-                    "<#= image(item) #><#= sprite(item) #><#= text(item) #>" +
-                "</<#= tag(item) #>>"
+                "<#= tag(item) # class='k-link'#= contentUrl(item) ##= textAttributes(item) #>" +
+                    "#= image(item) ##= sprite(item) ##= text(item) #" +
+                "</#= tag(item) #>"
             ),
             item: template(
-                "<li class='<#= wrapperCssClass(group, item) #>'>" +
-                    "<#= itemWrapper(data) #>" +
+                "<li class='#= wrapperCssClass(group, item) #'>" +
+                    "#= itemWrapper(data) #" +
                 "</li>"
             ),
-            image: template("<img class='k-image' alt='' src='<#= imageUrl #>' />"),
-            sprite: template("<span class='k-sprite <#= spriteCssClass #>'></span>"),
+            image: template("<img class='k-image' alt='' src='#= imageUrl #' />"),
+            sprite: template("<span class='k-sprite #= spriteCssClass #'></span>"),
             empty: template("")
         },
 

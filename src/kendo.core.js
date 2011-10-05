@@ -14,7 +14,6 @@
         JSON = JSON || {},
         support = {},
         boxShadowRegExp = /(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i,
-        newLineTabRegExp = /[\r\t\n]/g,
         FUNCTION = "function",
         STRING = "string",
         NUMBER = "number",
@@ -136,7 +135,7 @@
      * @exampleTitle Basic template
      * @example
      *
-     *  var inlineTemplate = kendo.template("Hello, <#= firstName #> <#= lastName #>");
+     *  var inlineTemplate = kendo.template("Hello, #= firstName # #= lastName #");
      *  var inlineData = { firstName: "John", lastName: "Doe" };
      *  $("#inline").html(inlineTemplate(inlineData));
      *
@@ -216,9 +215,11 @@
 
             functionBody += "o=";
 
-            parts = template.replace(newLineTabRegExp, " ")
-                            .replace(encodeRegExp, "#=e($1)#")
-                            .split("#");
+            parts = template
+                .replace(/(\n|\r|\t)/g, "\\$1")
+                .replace(encodeRegExp, "#=e($1)#")
+                .replace(/\\#/g, "__SHARP__")
+                .split("#");
 
             for (idx = 0; idx < parts.length; idx ++) {
               part = parts[idx];
@@ -238,7 +239,7 @@
 
             functionBody += "return o;";
 
-            console.log(functionBody);
+            functionBody = functionBody.replace(/__SHARP__/g, '#');
 
             return new Function(paramName, functionBody);
         }

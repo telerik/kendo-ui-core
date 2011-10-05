@@ -129,7 +129,7 @@
      *         {
      *             field: "sales",
      *             title: "Sales",
-     *             template: '<#= kendo.toString(sales, "N0") #>'
+     *             template: '#= kendo.toString(sales, "N0") #'
      *     }]
      * });
      */
