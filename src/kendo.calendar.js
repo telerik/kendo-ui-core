@@ -1,4 +1,97 @@
 (function($, undefined) {
+    /**
+    * @name kendo.ui.Calendar.Description
+    *
+    * @section
+    *   <p>
+    *       The Calendar widget allows to the end user to select a date from a graphical calendar
+    *       presented in a single month interface. It supports custom templates for "month" view,
+    *       configurable options for min and max date, start view and the depth of the navigation.
+    *   </p>
+    *
+    *   <h3>Getting Started</h3>
+    *
+    * @exampleTitle Creating a calendar from existing DIV element
+    * @example
+    * <!-- HTML -->
+    * <div id="calendar"></div>
+    *
+    * @exampleTitle Calendar initialization
+    * @example
+    *   $(document).ready(function(){
+    *      $("#calendar").kendoCalendar();
+    *   });
+    * @section
+    *  <p>
+    *      When a Calendar is initialized, it will automatically be displayed near the
+    *      location of the used HTML element.
+    *  </p>
+    *  <h3>Configuring Calendar behaviors</h3>
+    *  <p>
+    *      Calendar provides many configuration options that can be easily set during initialization.
+    *      Among the properties that can be controlled:
+    *  </p>
+    *  <ul>
+    *      <li>Selected date</li>
+    *      <li>Minimum/Maximum date</li>
+    *      <li>Start view</li>
+    *      <li>Define the navigation depth (last view to which end user can navigate)</li>
+    *      <li>Day template</li>
+    *      <li>Footer template</li>
+    *  </ul>
+    * @exampleTitle Create Calendar with selected date and defined min and max date
+    * @example
+    *  $("#calendar").kendoCalendar({
+    *      value: new Date(),
+    *      min: new Date(1950, 0, 1),
+    *      max: new Date(2049, 11, 31)
+    *  });
+    * <p>
+    *   Calendar will not navigate to dates less than min and bigger than max date.
+    * </p>
+    * @section
+    * <h3>Define start view and navigation depth</h3>
+    * <p>
+    *    The first rendered view can be defined with "startView" option. Navigation depth
+    *    can be controlled with "depth" option. Predefined views are:
+    *    <ul>
+    *       <li>"month" - shows the days from the month</li>
+    *       <li>"year" - shows the months of the year</li>
+    *       <li>"decade" - shows the years from the decade</li>
+    *       <li>"century" - shows the decades from the century</li>
+    *    </ul>
+    * </p>
+    *
+    * @exampleTitle Create Calendar, which allows to select month
+    * @example
+    *  $("#calendar").kendoCalendar({
+    *      startView: "year",
+    *      depth: "year"
+    *  });
+    *
+    *  @section
+    * <h3>Customize day template</h3>
+    * <p>
+    *   Calendar allows to customize content of the rendered day in the "month" view.
+    *
+    * @exampleTitle Create Calendar with custom template
+    * @example
+    *  $("#calendar").kendoCalendar({
+    *      month: {
+    *         content: '<div class="custom"><#=data.value#></div>'
+    *      }
+    *  });
+    *  @section
+    *  <p>
+    *     This templates wraps the "value" in a div HTML element. Here is an example of the object
+    *     passed to the template function:
+    *     {
+    *        date: date, // Date object corresponding to the current cell
+    *        title: kendo.toString(date, "D"),
+    *        value: date.getDate(),
+    *        dateString: toDateString(date) //Date formatted using "MM/dd/yyyy" format
+    *     };
+    */
     var kendo = window.kendo,
         ui = kendo.ui,
         Component = ui.Component,
@@ -30,7 +123,23 @@
         extend = $.extend,
         DATE = Date;
 
-    var Calendar = Component.extend({
+    var Calendar = Component.extend(/** @lends kendo.ui.Calendar.prototype */{
+        /**
+         * @constructs
+         * @extends kendo.ui.Component
+         * @param {DomElement} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {Date} [value] <null> Specifies the selected date.
+         * @option {Date} [min] <Date(1900, 0, 1)> Specifies the minimum date, which the calendar can show.
+         * @option {Date} [max] <Date(2099, 11, 31)> Specifies the maximum date, which the calendar can show.
+         * @option {String} [footer] <> Specifies the content of the footer. If false, the footer will not be rendered.
+         * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to parse value set with value() method.
+         * @option {String} [startView] <month> Specifies the start view.
+         * @option {String} [depth] Specifies the navigation depth.
+         * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
+         * @option {Animation} [animation.horizontal] The animation that will be used when navigate horizontally.
+         * @option {Animation} [animation.vertical] The animation that will be used when navigate vertically.
+         */
         init: function(element, options) {
             var that = this;
 
@@ -56,7 +165,22 @@
 
             that._currentView = options.startView;
 
-            that.bind([CHANGE, NAVIGATE], options);
+            that.bind([
+                /**
+                * Fires when the selected date is changed
+                * @name kendo.ui.Calendar#change
+                * @event
+                * @param {Event} e
+                */
+                /**
+                * Fires when navigate
+                * @name kendo.ui.Calendar#navigate
+                * @event
+                * @param {Event} e
+                */
+                CHANGE,
+                NAVIGATE
+            ], options);
 
             that.value(options.value);
         },
@@ -86,6 +210,11 @@
             }
         },
 
+        /**
+        * Navigates to the past
+        * @example
+        * calendar.navigateToPast();
+        */
         navigateToPast: function() {
             var that = this;
             if (!that._prevArrow.hasClass(DISABLED)) {
@@ -93,6 +222,11 @@
             }
         },
 
+        /**
+        * Navigates to the future
+        * @example
+        * calendar.navigateToFuture();
+        */
         navigateToFuture: function() {
             var that = this;
             if (!that._nextArrow.hasClass(DISABLED)) {
@@ -100,6 +234,11 @@
             }
         },
 
+        /**
+        * Navigates to the upper view
+        * @example
+        * calendar.navigateUp();
+        */
         navigateUp: function() {
             var that = this,
                 currentView = that._currentView;
@@ -121,6 +260,12 @@
             that.navigate();
         },
 
+        /**
+        * Navigates to the lower view
+        * @param {Date} value Desired date
+        * @example
+        * calendar.navigateDown(value);
+        */
         navigateDown: function(value) {
             var that = this,
             depth = that.options.depth,
@@ -152,6 +297,13 @@
             that.navigate(value);
         },
 
+        /**
+        * Navigates to view
+        * @param {Date} value Desired date
+        * @param {String} viewName Desired view
+        * @example
+        * calendar.navigate(value, view);
+        */
         navigate: function(value, viewName) {
             var that = this,
                 view, compare,
@@ -217,6 +369,19 @@
             that._changeView = true;
         },
 
+        /**
+        * Gets/Sets the value of the calendar.
+        * @param {Date|String} value The date to set.
+        * @returns {Date} The value of the calendar.
+        * @example
+        * var calendar = $("#calendar").data("kendoCalendar");
+        *
+        * // get the value of the calendar.
+        * var value = calendar.value();
+        *
+        * // set the value of the calendar.
+        * calendar.value(new Date()); //looks for item which has value "1"
+        */
         value: function(value) {
             var that = this,
             options = that.options,
@@ -862,5 +1027,4 @@
     calendar.isInRange = isInRange;
 
     kendo.calendar = calendar;
-
 })(jQuery);
