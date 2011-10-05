@@ -19,3 +19,4 @@ functional-tests/**/TestResults/
 functional-tests/**/Results/
 functional-tests/Results/
 functional-tests/**/Backup/
+functional-tests/**/TestLists/
