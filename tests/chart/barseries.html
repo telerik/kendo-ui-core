@@ -532,6 +532,10 @@
                     });
                 });
 
+                test("labels have zIndex", function() {
+                    equals(series.points[0].children[0].children[0].options.zIndex, 1);
+                });
+
                 // ------------------------------------------------------------
                 module("Column Chart / Labels / Negative Values", {
                     setup: function() {
