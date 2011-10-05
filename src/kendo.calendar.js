@@ -4,9 +4,9 @@
     *
     * @section
     *   <p>
-    *       The Calendar widget allows to the end user to select a date from a graphical calendar
-    *       presented in a single month interface. It supports custom templates for "month" view,
-    *       configurable options for min and max date, start view and the depth of the navigation.
+    *       The Calendar widget allows to the end user to select a date from a graphical calendar.
+    *       It supports custom templates for "month" view, configurable options for min and max date,
+    *       start view and the depth of the navigation.
     *   </p>
     *
     *   <h3>Getting Started</h3>
