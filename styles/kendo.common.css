@@ -788,6 +788,12 @@ div.k-window-content
     border-width: 0;
 }
 
+*+html .k-menu .k-item .k-item,
+*+html .k-menu-vertical .k-item
+{
+    zoom: normal;
+}
+
 .k-menu .k-image,
 .k-menu .k-sprite
 {
@@ -814,11 +820,6 @@ div.k-window-content
 {
     display: block;
     border-width: 0;
-}
-
-.k-menu .k-group .k-link
-{
-    zoom: 1;
 }
 
 .k-menu .k-arrow-down
