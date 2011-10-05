@@ -46,7 +46,21 @@
                                   .closest(".k-widget")
                                   .attr("id", "products_wrapper");
 
-                    var dropdownlist = $("#products").data("kendoDropDownList");
+                    var dropdownlist = $("#products").data("kendoDropDownList"),
+                        setValue = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                dropdownlist.value($("#value").val());
+                        },
+                        setIndex = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var index = parseInt($("#index").val());
+                                dropdownlist.select(index);
+                            }
+                        },
+                        setSearch = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                dropdownlist.search($("#word").val());
+                        };
 
                     $("#enable").click(function() {
                         dropdownlist.enable();
@@ -64,10 +78,6 @@
                         dropdownlist.close();
                     });
 
-                    $("#setValue").click(function() {
-                        dropdownlist.value($("#value").val());
-                    });
-
                     $("#getValue").click(function() {
                         alert(dropdownlist.value());
                     });
@@ -76,14 +86,14 @@
                         alert(dropdownlist.text());
                     });
 
-                    $("#select").click(function() {
-                        var index = parseInt($("#index").val());
-                        dropdownlist.select(index);
-                    });
+                    $("#setValue").click(setValue);
+                    $("#value").keypress(setValue);
 
-                    $("#find").click(function() {
-                        dropdownlist.search($("#word").val());
-                    });
+                    $("#select").click(setIndex);
+                    $("#index").keypress(setIndex);
+
+                    $("#find").click(setSearch);
+                    $("#word").keypress(setSearch);
                 });
            </script>
             <div class="configuration" style="width: 210px">

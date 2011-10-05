@@ -100,52 +100,74 @@
             <script>
                 $(document).ready(function() {
                     var getItem = function (target) {
-                        var itemIndexes = target.val().split(/[.,]/),
-                            rootItem = itemIndexes[0] != "" ?
-                                            menu.element.children("li").eq(itemIndexes[0]) :
-                                            false;
+                            var itemIndexes = target.val().split(/[.,]/),
+                                rootItem = itemIndexes[0] != "" ?
+                                                menu.element.children("li").eq(itemIndexes[0]) :
+                                                false;
 
-                        return itemIndexes.length > 1 ?
-                                    rootItem.find(".k-group > .k-item").eq(itemIndexes[1]) :
-                                    rootItem;
-                    };
+                            return itemIndexes.length > 1 ?
+                                        rootItem.find(".k-group > .k-item").eq(itemIndexes[1]) :
+                                        rootItem;
+                        },
+                        toggle = function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var item = getItem($("#toggleIndex"));
+                                menu.enable(item, item.hasClass("k-state-disabled"));
+                            }
+                        },
+                        trigger =  function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var item = getItem($("#triggerIndex"));
 
-                    $(".toggleItem").click( function (e) {
-                        var item = getItem($("#toggleIndex"));
+                                if (item.hasClass("k-state-active"))
+                                    menu.close(item);
+                                else
+                                    menu.open(item);
+                            }
+                        },
+                        remove = function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                menu.remove(getItem($("#removeIndex")));
+                        },
+                        append = function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                menu.append({
+                                        text: $("#appendText").val()
+                                    }, getItem($("#appendIndex")));
+                            }
+                        },
+                        before = function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                menu.insertBefore({
+                                        text: $("#beforeText").val()
+                                    }, getItem($("#beforeIndex")));
+                            }
+                        },
+                        after = function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                menu.insertAfter({
+                                        text: $("#afterText").val()
+                                    }, getItem($("#afterIndex")));
+                            }
+                        };
 
-                        menu.enable(item, item.hasClass("k-state-disabled"));
-                    });
+                    $(".toggleItem").click(toggle);
+                    $("#toggleIndex").keypress(toggle);
 
-                    $(".triggerItem").click( function (e) {
-                        var item = getItem($("#triggerIndex"));
+                    $(".triggerItem").click(trigger);
+                    $("#triggerIndex").keypress(trigger);
 
-                        if (item.hasClass("k-state-active"))
-                            menu.close(item);
-                        else
-                            menu.open(item);
-                    });
+                    $(".removeItem").click(remove);
+                    $("#removeIndex").keypress(remove);
 
-                    $(".removeItem").click( function (e) {
-                        menu.remove(getItem($("#removeIndex")));
-                    });
+                    $(".appendItem").click(append);
+                    $("#appendText,#appendIndex").keypress(append);
 
-                    $(".appendItem").click( function (e) {
-                        menu.append({
-                                text: $("#appendText").val()
-                            }, getItem($("#appendIndex")));
-                    });
+                    $(".beforeItem").click(before);
+                    $("#beforeText,#beforeIndex").keypress(before);
 
-                    $(".beforeItem").click( function (e) {
-                        menu.insertBefore({
-                                text: $("#beforeText").val()
-                            }, getItem($("#beforeIndex")));
-                    });
-
-                    $(".afterItem").click( function (e) {
-                        menu.insertAfter({
-                                text: $("#afterText").val()
-                            }, getItem($("#afterIndex")));
-                    });
+                    $(".afterItem").click(after);
+                    $("#afterText,#afterIndex").keypress(after);
                 });
 
                 var menu = $("#menu").kendoMenu().css({ marginRight: "220px" }).data("kendoMenu");

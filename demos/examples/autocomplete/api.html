@@ -26,7 +26,12 @@
         <!-- description -->
         <div id="example" class="k-content">
 
-            <input id="products" />
+            <div class="code-sample output">
+                <h4 class="code-title">Output:</h4>
+                <div class="prettyprint">
+                    <input id="products" />
+                </div>
+            </div>
 
             <script>
                 $(document).ready(function() {
@@ -45,18 +50,23 @@
 
                     $("#products").kendoAutoComplete(data);
 
-                    var autocomplete = $("#products").data("kendoAutoComplete");
+                    var autocomplete = $("#products").data("kendoAutoComplete"),
+                        setValue = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                autocomplete.value($("#value").val());
+                        },
+                        setSearch = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                autocomplete.search($("#word").val());
+                        };
 
-                    $("#set").click(function() {
-                        autocomplete.value($("#value").val());
-                    });
+                    $("#set").click(setValue);
+                    $("#value").keypress(setValue);
+                    $("#search").click(setSearch);
+                    $("#word").keypress(setSearch);
 
                     $("#get").click(function() {
                         alert(autocomplete.value());
-                    });
-
-                    $("#search").click(function() {
-                        autocomplete.search($("#word").val());
                     });
                 });
            </script>
@@ -97,11 +107,6 @@ var data = [
             </div>
 
             <style scoped>
-                #products,
-                #example .code-sample {
-                    float: left;
-                }
-
                 #products {
                     margin-right: 50px;
                 }

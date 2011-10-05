@@ -54,7 +54,21 @@
                         change: filterTypeOnChanged
                     });
 
-                    var combobox = $("#products").data("kendoComboBox");
+                    var combobox = $("#products").data("kendoComboBox"),
+                        setValue = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                combobox.value($("#value").val());
+                        },
+                        setIndex = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var index = parseInt($("#index").val());
+                                combobox.select(index);
+                            }
+                        },
+                        setSearch = function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                                combobox.search($("#word").val());
+                        };
 
                     $("#enable").click(function() {
                         combobox.enable();
@@ -72,10 +86,6 @@
                         combobox.close();
                     });
 
-                    $("#setValue").click(function() {
-                        combobox.value($("#value").val());
-                    });
-
                     $("#getValue").click(function() {
                         alert(combobox.value());
                     });
@@ -84,14 +94,14 @@
                         alert(combobox.text());
                     });
 
-                    $("#select").click(function() {
-                        var index = parseInt($("#index").val());
-                        combobox.select(index);
-                    });
+                    $("#setValue").click(setValue);
+                    $("#value").keypress(setValue);
 
-                    $("#find").click(function() {
-                        combobox.search($("#word").val());
-                    });
+                    $("#select").click(setIndex);
+                    $("#index").keypress(setIndex);
+
+                    $("#find").click(setSearch);
+                    $("#word").keypress(setSearch);
 
                     function filterTypeOnChanged() {
                         combobox.options.filter = $("#filter").val();
