@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>8153d96e-938a-4ed2-ad08-daa094f81296</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f5bc0547-b31e-4e12-9f57-4940b3b608e7</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>3d5f8203-928e-4440-8644-a86d9abc118d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c9826dba-b746-43b4-9ddb-a003baa2fdee</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -147,33 +147,28 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '2000' msec.</d2p1:Description>
+      <d2p1:Description>Wait for '1000' msec.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>810e1a6b-8674-41ab-93e3-1fb26137e301</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b0be20a5-bf8d-432b-af58-a139ebf5451c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
         <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>Before</d2p1:Pause>
+        <d2p1:Pause>None</d2p1:Pause>
         <d2p1:RunsAgainstVersion />
         <d2p1:StepType>Action</d2p1:StepType>
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>2000</WaitTime>
+        <WaitTime>1000</WaitTime>
       </d2p1:Step>
-      <d2p1:StepImageKey>FillValueKeyboardmq3czjrw.r12</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FillValueKeyboardrziyo4kc.xse</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -184,7 +179,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d188d9c2-f10c-4c18-8853-53ec18592d76</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f13824c1-e084-4e6d-b152-60ef2e325c45</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopKeyboardActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -271,7 +266,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ee346697-b04d-4d22-b835-660016e3555a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b3c10ba1-9c7c-4224-b954-d2c305b60fdb</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -304,7 +299,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>75d413bc-659c-4f4f-b623-d8240aa1b2fc</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>da595a9e-953c-425a-94f2-ae1afc08332f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopKeyboardActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -391,7 +386,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>07752a02-48d7-46b6-8cf4-e524f6d7dc9a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0e3199d8-eb86-4038-8274-96283cffdd1b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -476,7 +471,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>5c03c705-edea-4d23-be6e-e36bcccfcc76</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>20c01bed-3a4b-4c79-bb67-56cf4e2ed5ee</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -561,8 +556,8 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.817.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.2.928.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.2.928.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
@@ -580,8 +575,13 @@
   <Priority>0</Priority>
   <ProfilerBenchmarkResultsFilePath i:nil="true" />
   <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
-  <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <ProfilerResultsDirectory i:nil="true" />
+  <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+    <d2p1:KeyValueOfstringbase64Binary>
+      <d2p1:Key>ArtOfTest.WebAii.Design.Execution.Profiler.ProfilerResultsMetadata</d2p1:Key>
+      <d2p1:Value>AAEAAAD/////AQAAAAAAAAAMAgAAAF9BcnRPZlRlc3QuV2ViQWlpLkRlc2lnbiwgVmVyc2lvbj0yMDExLjIuOTI4LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49NGZjNjJiYmMzODI3YWIxZAwDAAAAWEFydE9mVGVzdC5XZWJBaWksIFZlcnNpb249MjAxMS4yLjkyOC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTRmZDVmNjViZTEyMzc3NmMMBAAAAGhUZWxlcmlrLlRlc3RpbmdGcmFtZXdvcmsuSW50ZXJvcCwgVmVyc2lvbj0yMDExLjIuOTI4LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49OGNhMDBkM2UwZWJkNGI4YgUBAAAAQkFydE9mVGVzdC5XZWJBaWkuRGVzaWduLkV4ZWN1dGlvbi5Qcm9maWxlci5Qcm9maWxlclJlc3VsdHNNZXRhZGF0YQ4AAAAKX3Jlc3VsdHNJZAxfb3duZXJUZXN0SWQKX3N0YXJ0VGltZQpfdG90YWxUaW1lG19iQ29sbGVjdFByb2ZpbGVyU2FtcGxlRGF0YQpfc3RyU2VydmVyDF9pU2VydmVyUG9ydA9fc3RyRGVzY3JpcHRpb24KX3N0ckZvbGRlcgxfc3RyRmlsZVBhdGgMX2Jyb3dzZXJUeXBlD19icm93c2VyVmVyc2lvbhxfYkNsZWFyQnJvd3NlckNhY2hlQmVmb3JlUnVuF19iV2FybVVwU2VydmVyQmVmb3JlUnVuAwMAAAABAAEBAQQEAAALU3lzdGVtLkd1aWQLU3lzdGVtLkd1aWQNDAEIKkFydE9mVGVzdC5XZWJBaWkuQ29yZS5Ccm93c2VyRXhlY3V0aW9uVHlwZQMAAAApVGVsZXJpay5UZXN0aW5nRnJhbWV3b3JrLlVuaXZlcnNhbFZlcnNpb24EAAAAAQECAAAABPv///8LU3lzdGVtLkd1aWQLAAAAAl9hAl9iAl9jAl9kAl9lAl9mAl9nAl9oAl9pAl9qAl9rAAAAAAAAAAAAAAAIBwcCAgICAgICAgAAAAAAAAAAAAAAAAAAAAAB+v////v///95wKtDdP1JR524civdFLv7AAAAAAAAAAAAAAAAAAAAAAAGBwAAAApBR0dFT1JHSUVWSh8AAAoGCAAAACdDOlxVc2Vyc1xhZ2dlb3JnaWV2XEFwcERhdGFcTG9jYWxcVGVtcFwKBff///8qQXJ0T2ZUZXN0LldlYkFpaS5Db3JlLkJyb3dzZXJFeGVjdXRpb25UeXBlAQAAAAd2YWx1ZV9fAAgDAAAAAQAAAAoAAAs=</d2p1:Value>
+    </d2p1:KeyValueOfstringbase64Binary>
+  </ProfilerConfigurations>
+  <ProfilerResultsDirectory>C:\Users\aggeorgiev\AppData\Local\Temp\</ProfilerResultsDirectory>
   <ProfilerServerName i:nil="true" />
   <ResourceFilePath>UIWidgets\AutoComplete\API\FillValueKeyboard.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
