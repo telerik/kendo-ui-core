@@ -2,7 +2,15 @@
     var kendo = window.kendo,
         validation = kendo.support.validation,
         INVALID = "t-invalid",
+        emailRegExp = /^[a-z0-9_.%+\-]+@[0-9a-z.\-]+\.[a-z.]{2,6}$/i,
         Component = kendo.ui.Component;
+
+    var matcher = function(value, pattern) {
+        if (typeof pattern === "string") {
+            pattern = new RegExp('^(?:' + pattern + ')$');
+        }
+        return pattern.test(value);
+    };
 
     var Validator = Component.extend( {
         init: function(element, options) {
@@ -22,12 +30,43 @@
                     }
                     return true;
                 },
+                pattern: function(input) {
+                    if (input.filter("[type=text]").filter("[pattern]").length && input.val() !== "") {
+                        return matcher(input.val(), input.attr("pattern"));
+                    }
+                    return true;
+                },
                 min: function(input) {
                     if (input.filter("[type=number]").filter("[min]").length && input.val() !== "") {
                         var min = parseInt(input.attr("min"),10) || 0,
                             val = parseInt(input.val(), 10);
 
                         return min < val;
+                    }
+                    return true;
+                },
+                max: function(input) {
+                    if (input.filter("[type=number]").filter("[max]").length && input.val() !== "") {
+                        var max = parseInt(input.attr("max"),10) || 0,
+                            val = parseInt(input.val(), 10);
+
+                        return max > val;
+                    }
+                    return true;
+                },
+                step: function(input) {
+                    if (input.filter("[type=number]").filter("[step]").length && input.val() !== "") {
+                        var min = parseInt(input.attr("min"), 10) || 0,
+                            step = parseInt(input.attr("step"), 10) || 0,
+                            val = parseInt(input.val(), 10);
+
+                        return (val-min)%step === 0;
+                    }
+                    return true;
+                },
+                email: function(input) {
+                    if (input.filter("[type=email]").length && input.val() !== "") {
+                        return matcher(input.val(), emailRegExp);
                     }
                     return true;
                 }
@@ -41,7 +80,7 @@
                 invalid = false;
                 length;
 
-            that._messages = [];
+            that._errors = [];
 
             if (!that.element.is(":input")) {
                 inputs = that.element.find(":input");
@@ -58,7 +97,6 @@
 
         _validateInput: function(input) {
             var that = this,
-                individualErrors = that.options.individualErrors,
                 template = that._individualErrorTemplate,
                 valid = validation ? input[0].checkValidity() :  that._checkValidity(input),
                 lbl,
@@ -66,12 +104,10 @@
 
             if (!valid) {
                 message = kendo.format(input.attr("validationMessage") || input.attr("title") || "", input.attr("name"));
-                that._messages.push(message);
+                that._errors.push(message);
 
-                if (individualErrors) {
-                    $(template({ message: message })).addClass(INVALID).insertAfter(input);
-                }
-            } else if (individualErrors) {
+                $(template({ message: message })).addClass(INVALID).insertAfter(input);
+            } else {
                 lbl = input.next();
                 if (lbl.hasClass(INVALID)) {
                     lbl.remove();
@@ -84,7 +120,7 @@
         _checkValidity: function(input) {
             var rules = this.options.rules;
 
-            for (rule in rules) {
+            for (var rule in rules) {
                 if (!rules[rule](input)) {
                     return false;
                 }
@@ -93,8 +129,8 @@
             return true;
         },
 
-        messages: function() {
-            return this._messages || [];
+        errors: function() {
+            return this._errors || [];
         }
     });
 

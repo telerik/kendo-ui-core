@@ -1272,8 +1272,11 @@
         support.devicePixelRatio = window.devicePixelRatio === undefined ? 1 : window.devicePixelRatio;
 
         function validation() {
-            if (document.createElement("INPUT").checkValidity) {
-                return true;
+            var input = document.createElement("INPUT");
+            if (input.checkValidity && input.validity) {
+                if (!$(input).attr("type", "number").attr("min", 10).val(1)[0].checkValidity()) {
+                    return true;
+                }
             }
             return false;
         }

@@ -23,12 +23,15 @@
                 Validator = kendo.ui.Validator;
 
             function setup(element, options) {
+                if (!element.parent().length) {
+                    element.appendTo(container);
+                }
                 return new Validator(element, $.extend({}, options));
             }
 
             module("kendo.ui.validation", {
                 setup: function() {
-                    container = $("<div/>");
+                    container = $("<div/>").appendTo("<form/>").appendTo($(document.body));
                 },
                 teardown: function() {
                     container.remove();
@@ -105,7 +108,7 @@
                 var input = $('<input type="text" required  validationMessage="message" />'),
                     validator = setup(input);
 
-                equal(validator.messages().length, 0);
+                equal(validator.errors().length, 0);
             });
 
             test("messages returns validationMessage attribute value for single invalid element", function() {
@@ -113,7 +116,7 @@
                     validator = setup(input);
 
                     validator.validate();
-                var messages = validator.messages();
+                var messages = validator.errors();
                 equal(messages.length, 1);
                 equal(messages[0], "message");
             });
@@ -123,7 +126,7 @@
                     validator = setup(input);
 
                     validator.validate();
-                var messages = validator.messages();
+                var messages = validator.errors();
                 equal(messages.length, 1);
                 equal(messages[0], "message");
             });
@@ -133,7 +136,7 @@
                     validator = setup(input);
 
                     validator.validate();
-                var messages = validator.messages();
+                var messages = validator.errors();
                 equal(messages.length, 1);
                 equal(messages[0], "validationMessage");
             });
@@ -143,7 +146,7 @@
                     validator = setup(input);
 
                     validator.validate();
-                var messages = validator.messages();
+                var messages = validator.errors();
                 equal(messages.length, 1);
                 equal(messages[0], "");
             });
@@ -154,7 +157,7 @@
 
                 validator.validate();
 
-                var messages = validator.messages();
+                var messages = validator.errors();
                 equal(messages.length, 1);
                 equal(messages[0], "Foo is invalid");
             });
@@ -165,7 +168,7 @@
 
                 validator.validate();
 
-                var messages = validator.messages();
+                var messages = validator.errors();
                 equal(messages.length, 2);
                 equal(messages[0], "input1 message");
                 equal(messages[1], "input2 message");
@@ -179,7 +182,7 @@
                 input.val("someValue");
                 validator.validate();
 
-                var messages = validator.messages();
+                var messages = validator.errors();
                 equal(messages.length, 0);
             });
 
@@ -193,38 +196,30 @@
 
                 validator.validate();
 
-                var messages = validator.messages();
+                var messages = validator.errors();
                 equal(messages.length, 1);
                 equal(messages[0], "input2 message");
             });
 
-            test("individualErrors=true displayes message next to the validated element", function() {
+            test("displayes message next to the validated element", function() {
                 var input = $('<input type="text" required validationMessage="invalid" />'),
-                validator = setup(input, { individualErrors: true });
+                validator = setup(input);
                 validator.validate();
 
                 equal(input.next("span").text(), "invalid");
             });
 
-            test("individualErrors=false does not displayes message next to the validated element", function() {
-                var input = $('<input type="text" required validationMessage="invalid" />'),
-                validator = setup(input, { individualErrors: false });
-                validator.validate();
-
-                ok(!input.next("span").length);
-            });
-
-            test("individualErrors=true does not displayes message if element is valid", function() {
+            test("does not displayes message if element is valid", function() {
                 var input = $('<input type="text" required validationMessage="invalid" value="1" />'),
-                validator = setup(input, { individualErrors: true });
+                validator = setup(input);
                 validator.validate();
 
                 ok(!input.next("span").length);
             });
 
-            test("individualErrors=true message element is hidden if element change its state from invalid to valid", function() {
+            test("message element is hidden if element change its state from invalid to valid", function() {
                 var input = $('<input type="text" required validationMessage="invalid" />'),
-                    validator = setup(input, { individualErrors: true });
+                    validator = setup(input);
 
                 validator.validate();
 
@@ -238,11 +233,17 @@
             test("individualErrors template overrides the default template", function() {
                 var input = $('<input type="text" required validationMessage="invalid"/>'),
                 validator = setup(input, {
-                    individualErrors: true,
                     individualErrorTemplate: "<div>${message}</div>"
                 });
                 validator.validate();
                 equal(input.next("div").text(), "invalid");
+            });
+
+            test("validate returns true if input with type=text value does not match min attribute", function() {
+                var input = $('<input type="text" value="1" min="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
             });
 
             test("validate returns false if input with type=number value does not match min attribute", function() {
@@ -254,6 +255,83 @@
 
             test("validate returns true if input with type=number value does match min attribute", function() {
                 var input = $('<input type="number" value="11" min="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=number value does not match max attribute", function() {
+                var input = $('<input type="number" value="11" max="10" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=text value does not match max attribute", function() {
+                var input = $('<input type="text" value="11" max="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns true if input with type=number value does match max attribute", function() {
+                var input = $('<input type="number" value="9" max="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=number value does not match step attribute and have min set", function() {
+                var input = $('<input type="number" value="6" max="10" step="3" min="5" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=number value does match step attribute and have both max and min set", function() {
+                var input = $('<input type="number" value="8" max="10" step="3" min="5" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate min defaults to 0 if not set and step is set - invalid value", function() {
+                var input = $('<input type="number" value="8" step="3" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate min defaults to 0 if not set and step is set - valid value", function() {
+                var input = $('<input type="number" value="8" step="4" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=text value does not match pattern attribute", function() {
+                var input = $('<input type="text" value="aaa" pattern="\\d"/>'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=text value does match pattern attribute", function() {
+                var input = $('<input type="text" value="6" pattern="\\d"/>'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=email value is not valid email", function() {
+                var input = $('<input type="email" value="aaaaa" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=email value is valid email", function() {
+                var input = $('<input type="email" value="test@test.com" />'),
                     validator = setup(input);
 
                 ok(validator.validate());
