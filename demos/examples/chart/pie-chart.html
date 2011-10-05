@@ -52,6 +52,25 @@
             </div>
             <div id="chart" style="width:650px; height:450px;margin: 0 auto;"></div>
             <script>
+                var data = [
+                    {
+                        "source": "Hydro",
+                        "percentage": 22
+                    },
+                    {
+                        "source": "Solar",
+                        "percentage": 2
+                    },
+                    {
+                        "source": "Nuclear",
+                        "percentage": 49
+                    },
+                    {
+                        "source": "Wind",
+                        "percentage": 27
+                    }
+                ];
+
                 function createChart() {
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin") || "kendo",
@@ -61,19 +80,13 @@
                         legend: {
                             position: "bottom"
                         },
-                        seriesDefaults: {
+                        dataSource: {
+                            data: data
                         },
                         series: [{
                             type: "pie",
-                            data: [{
-                                name: "Hydro", value: 22
-                            }, {
-                                name: "Solar", value: 2
-                            }, {
-                                name: "Nuclear", value: 49
-                            }, {
-                                name: "Wind", value: 27
-                            }],
+                            field: "percentage",
+                            nameField: "source",
                             startAngle: 160
                         }],
                         tooltip: {
