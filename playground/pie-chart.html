@@ -33,18 +33,10 @@
                     visible: true
                 },
                 dataSource: data,
-                seriesDefaults: {
-                    type: "pie",
-                    padding: 120,
-                    labels: {
-                        font: "12px Arial, sans-serif",
-                        visible: true,
-                        align: "column"
-                    },
-                    startAngle: -95
-                },
+                seriesDefaults: {},
                 transitions: false,
                 series: [{
+                    type: "pie",
                     name: "World",
                     data: [{
                           value: 2,
@@ -115,7 +107,7 @@
                     visible: true
                 }
             });
-
+/*
             $("#container1").kendoChart({
                 title: {
                     text: "Lollipop",
@@ -861,6 +853,7 @@
                     }
                 }
             });
+                */
         });
 
         function refresh() {

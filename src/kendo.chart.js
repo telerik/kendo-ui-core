@@ -615,10 +615,11 @@
          * A value indicating if the series should be stacked.
          * @option {Number} [seriesDefaults.gap] <1.5> The distance between category clusters.
          * @option {Number} [seriesDefaults.spacing] <0.4> Space between bars.
+         * @option {Number} [seriesDefaults.padding] <60> Pie chart padding (on all sides 60).
          * @option {Object} [seriesDefaults.labels] Configures the series data labels.
          * @option {String} [seriesDefaults.labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
-         * @option {Boolean} [seriesDefaults.labels.visible] <true> The visibility of the labels.
+         * @option {Boolean} [seriesDefaults.labels.visible] <false> The visibility of the labels.
          * @option {Number|Object} [seriesDefaults.labels.margin] <0> The margin of the labels.
          * _example
          * // sets the top, right, bottom and left margin to 3px.
@@ -700,6 +701,8 @@
          * The default options for all column series. For more details see the series options.
          * @option {Object} [seriesDefaults.line] The line configuration options.
          * The default options for all line series. For more details see the series options.
+         * @option {Object} [seriesDefaults.pie] The pie configuration options.
+         * The default options for all pie series. For more details see the series options.
          * @option {Array} [series] Array of series definitions.
          * <p>
          * The series type is determined by the value of the type field.
@@ -750,7 +753,7 @@
          *              Not applicable for stacked bar series.
          *         </dd>
          *    </dl>
-         * @option {Boolean} [series.type="bar".labels.visible] <true> The visibility of the labels.
+         * @option {Boolean} [series.type="bar".labels.visible] <false> The visibility of the labels.
          * @option {Number|Object} [series.type="bar".labels.margin] <2> The margin of the labels.
          * _example
          * // sets the top, right, bottom and left margin to 3px.
@@ -851,7 +854,7 @@
          *              Not applicable for stacked bar series.
          *         </dd>
          *    </dl>
-         * @option {Boolean} [series.type="column".labels.visible] <true> The visibility of the labels.
+         * @option {Boolean} [series.type="column".labels.visible] <false> The visibility of the labels.
          * @option {Number|Object} [series.type="column".labels.margin] <2> The margin of the labels.
          * _example
          * // sets the top, right, bottom and left margin to 3px.
@@ -1002,7 +1005,7 @@
          *              The label is positioned at the left of the line chart marker.
          *         </dd>
          *    </dl>
-         * @option {Boolean} [series.type="line".labels.visible] <true> The visibility of the labels.
+         * @option {Boolean} [series.type="line".labels.visible] <false> The visibility of the labels.
          * @option {Number|Object} [series.type="line".labels.margin] <{ left: 5, right: 5}>
          * The margin of the labels.
          * _example
@@ -1057,6 +1060,104 @@
          * _example
          * //sets format of the labels
          * format: "{0:C}"
+
+         * @option [series.type="pie"] The type of the series.
+         * @option {Boolean} [series.type="pie".explode] <false>
+         * A value indicating if the pie point should be selected.
+         * @option {String} [series.type="pie".name] The series name.
+         * @option {String} [series.type="pie".color] The series base color.
+         * @option {Number} [series.type="pie".opacity] <1> The series opacity.
+         * @option {Object} [series.type="pie".labels] Configures the series data labels.
+         * @option {String} [series.type="pie".labels.font] <"12px Arial, sans-serif">
+         * The font style of the labels.
+         * @option {Boolean} [series.type="pie".labels.visible] <false> The visibility of the labels.
+         * @option {Number|Object} [series.type="pie".labels.margin] <0.5> The margin of the labels.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 2px (by default)
+         * margin: { top: 1, left: 1 }
+         * @option {Number|Object} [series.type="pie".labels.padding] <0> The padding of the labels.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 2px (by default)
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [series.type="pie".labels.border] The border of the labels.
+         * @option {Number} [series.type="pie".labels.border.width] <0> The width of the border.
+         * @option {String} [series.type="pie".labels.border.color] <"black"> The color of the border.
+         * @option {String/Function} [series.type="pie".labels.template] The label template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
+         *     </li>
+         * </ul>
+         * _example
+         * // chart intialization
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              type: "pie",
+         *              name: "Series 1",
+         *              data: [
+         *                  { value: 200, name: 2000 },
+         *                  { value: 450, name: 2001 },
+         *                  { value: 300, name: 2002 },
+         *                  { value: 125, name: 2003 }
+         *              ],
+         *              labels: {
+         *                  // label template
+         *                  template: "${ value }%",
+         *                  visible: true
+         *              }
+         *          }
+         *      ],
+         *      categoryAxis: {
+         *          categories: [2000, 2001, 2002, 2003]
+         *      }
+         * });
+         * @option {String} [series.type="pie".labels.format] The format of the labels.
+         * _example
+         * //sets format of the labels
+         * format: "{0:C}"
+         * @option {Object} [series.type="pie".border] The border of the series.
+         * @option {Number} [series.type="pie".border.width] <1> The width of the border.
+         * @option {String} [series.type="pie".border.color] <the color of the curren series>
+         * The color of the border.
+         * @option {String} [series.type="pie".overlay] <"glass"> The effects overlay.
+         * @option {Object} [series.type="pie".connector] The labels connector options.
+         * @option {Number} [series.type="pie".connector.width] <1> The width of the connector line.
+         * @option {String} [series.type="pie".connector.color] <"#939393"> The color of the connector line.
+         * @option {Number} [series.type="pie".connector.padding] <4>
+         * The padding between the connector line and the label.
+         * @option {number} [series.type="pie".startAngle] <90> The start angle of the first pie point.
+         * @option {String} [series.type="line".labels.align] <"circle">
+         * Defines the align of the pie labels.
+         *    <dl>
+         *         <dt>
+         *              "circle"
+         *         </dt>
+         *         <dd>
+         *              The labels are positioned in circle around the pie chart.
+         *         </dd>
+         *         <dt>
+         *              "column"
+         *         </dt>
+         *         <dd>
+         *              The labels are positioned in 2 columns around the pie chart.
+         *         </dd>
+         *    </dl>
          * @option {Object} [chartArea] The chart area configuration options.
          * This is the entire visible area of the chart.
          * @option {String} [chartArea.background] <"white"> The background color of the chart area.
@@ -4157,7 +4258,7 @@
 
         options: {
             startAngle: 90,
-            padding: 120,
+            padding: 60,
             connector: {
                 width: 1,
                 color: "#939393",
@@ -4285,10 +4386,10 @@
                 segment = segments[i];
 
                 sector = segment.sector;
-                sector.r = (minWidth - padding) / 2;
+                sector.r = minWidth / 2 - padding;
                 sector.c = new Point2D(
-                    sector.r + newBox.x1 + padding / 2,
-                    sector.r + newBox.y1 + padding / 2
+                    sector.r + newBox.x1 + padding,
+                    sector.r + newBox.y1 + padding
                 );
 
                 if (segment.explode) {
@@ -4573,6 +4674,7 @@
     var PlotArea = ChartElement.extend({
         init: function(options) {
             var plotArea = this;
+
             ChartElement.fn.init.call(plotArea, options);
 
             plotArea.render();
@@ -6948,6 +7050,7 @@
         delete baseSeriesDefaults.bar;
         delete baseSeriesDefaults.column;
         delete baseSeriesDefaults.line;
+        delete baseSeriesDefaults.pie;
 
         for (i = 0; i < seriesLength; i++) {
             seriesType = series[i].type || options.seriesDefaults.type;
