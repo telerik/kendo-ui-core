@@ -195,13 +195,12 @@
         compile: function(template, options) {
             var settings = extend({}, this, options),
                 paramName = settings.paramName,
-                begin =  "<#",
-                end = "#>",
                 useWithBlock = settings.useWithBlock,
                 functionBody = "var o,e=kendo.htmlEncode;",
                 encodeRegExp = /\${([^}]*)}/g,
-                evalRegExp = /<#=(.+?)#>/g,
-                quoteRegExp = /'(?=[^<"]*#>)/g;
+                parts,
+                part,
+                idx;
 
             if (isFunction(template)) {
                 if (template.length === 2) {
@@ -215,20 +214,31 @@
 
             functionBody += useWithBlock ? "with(" + paramName + "){" : "";
 
-            functionBody += "o='";
+            functionBody += "o=";
 
-            functionBody += template.replace(newLineTabRegExp, " ")
-                .replace(quoteRegExp,"\t")
-                .split("'").join("\\'")
-                .split("\t").join("'")
-                .replace(encodeRegExp, "'+e($1)+'")
-                .replace(evalRegExp, "'+($1)+'")
-                .split(begin).join("';")
-                .split(end).join("o+='");
+            parts = template.replace(newLineTabRegExp, " ")
+                            .replace(encodeRegExp, "#=e($1)#")
+                            .split("#");
 
-            functionBody += useWithBlock ? "';}" : "';";
+            for (idx = 0; idx < parts.length; idx ++) {
+              part = parts[idx];
+
+              if (idx % 2 === 0) {
+                functionBody += "\'" + part.split("'").join("\\'") + "'";
+              } else {
+                if (part.charAt(0) === "=") {
+                  functionBody += "+(" + part.substring(1) + ")+";
+                } else {
+                  functionBody += ";" + part + "o+=";
+                }
+              }
+            }
+
+            functionBody += useWithBlock ? ";}" : ";";
 
             functionBody += "return o;";
+
+            console.log(functionBody);
 
             return new Function(paramName, functionBody);
         }
