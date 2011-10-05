@@ -22,6 +22,8 @@ function build() {
         "src/kendo.autocomplete.js",
         "src/kendo.dropdownlist.js",
         "src/kendo.combobox.js",
+        "src/kendo.calendar.js",
+        "src/kendo.datepicker.js",
         "src/kendo.menu.js",
         "src/kendo.slider.js",
         "src/kendo.splitter.js",

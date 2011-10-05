@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        ._title>Calendar API<._title>
+        <title>Calendar API</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
@@ -29,7 +29,7 @@
             });
 
             test("navigate method render view using default values", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     date = new Date(),
                     firstVisibleDate = kendo.calendar.firstVisibleDay(date);
 
@@ -37,7 +37,7 @@
             });
 
             test("navigate method render view depending on given date and view", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, { animation: false }),
                     date = new Date(2000, 10, 10);
 
                 cal.navigate(date, "decade");
@@ -132,7 +132,7 @@
             });
 
             test("navigate should select date equal to _value", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     value = new Date(2000, 10, 10);
 
                 cal.navigateDown(value);
@@ -143,7 +143,7 @@
             });
 
             test("navigateToPast should navigate to previous month when month view", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue),
                     names = kendo.culture().calendar.months.names;
 
@@ -156,7 +156,7 @@
             });
 
             test("navigateToPast should navigate to previous year when year view", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "year";
@@ -169,7 +169,7 @@
             });
 
             test("navigateToPast should navigate to previous decade when decade view", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "decade";
@@ -185,7 +185,7 @@
             });
 
             test("navigateToPast should navigate to previous century when century view", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "century";
@@ -201,7 +201,7 @@
             });
 
             test("navigateToFuture should navigate to next month when month view", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue),
                     names = kendo.culture().calendar.months.names;
 
@@ -215,7 +215,7 @@
             });
 
             test("navigateToFuture should navigate to next year when year view", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "year";
@@ -228,7 +228,7 @@
             });
 
             test("navigateToFuture should navigate to next decade when decade view", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "decade";
@@ -245,7 +245,8 @@
 
             test("navigateToFuture should navigate to next century when century view", function() {
                 var cal = new Calendar(div, {
-                        max: new Date(2400, 10, 10)
+                        max: new Date(2400, 10, 10),
+                        animation: false
                     }),
                     modified = new Date(cal._viewedValue);
 
@@ -262,7 +263,7 @@
             });
 
             test("navigateUp should navigate upper view (year)", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "month";
@@ -273,7 +274,7 @@
             });
 
             test("navigateUp should navigate upper view (decade)", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "year";
@@ -284,7 +285,7 @@
             });
 
             test("navigateUp should navigate upper view (century)", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "decade";
@@ -296,7 +297,7 @@
             });
 
             test("navigateDown should navigate lower view (decade)", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "century";
@@ -307,7 +308,7 @@
             });
 
             test("navigateDown should navigate lower view (year)", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "decade";
@@ -318,7 +319,7 @@
             });
 
             test("navigateDown should navigate lower view (month)", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "year";
@@ -329,7 +330,7 @@
             });
 
             test("navigateDown should navigate lower view (month)", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._viewedValue);
 
                 cal._currentView = "year";
@@ -340,7 +341,7 @@
             });
 
             test("navigateDown with date navigate to cell's date", function() {
-                var cal = stub(new Calendar(div), "navigate"),
+                var cal = stub(new Calendar(div, {animation: false}), "navigate"),
                     value = new Date(2000, 10, 10);
 
                 cal._currentView = "year";
@@ -352,7 +353,7 @@
             });
 
             test("navigateDown should call value method if _currentView === options.depth", function() {
-                var cal = stub(new Calendar(div), "value"),
+                var cal = stub(new Calendar(div, {animation: false}), "value"),
                     value = new Date(2000, 10, 10);
 
                 cal.navigateDown(value);
@@ -362,7 +363,7 @@
             });
 
             test("navigate should put in range passed date", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     value = new Date(1800, 10, 10);
 
                 cal.navigate(value);
@@ -371,7 +372,7 @@
             });
 
             test("value should select set selectedValue property", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     value = new Date(2000, 10, 10);
 
                 cal.value(value);
@@ -380,7 +381,7 @@
             });
 
             test("value should return selectedValue", function() {
-                var cal = new Calendar(div),
+                var cal = new Calendar(div, {animation: false}),
                     value = new Date(2000, 10, 10);
 
                 cal._value = value;
@@ -402,7 +403,7 @@
 
             test("value method should update selection of the view", function() {
                 var value = new Date(2000,10,10),
-                    cal = new Calendar(div, {value: value});
+                    cal = new Calendar(div, {value: value, animation: false});
 
                     value.setDate(17);
 
@@ -413,7 +414,7 @@
 
             test("value should clear _value if null", function() {
                 var value = new Date(2000,10,10),
-                    cal = new Calendar(div, {min: value});
+                    cal = new Calendar(div, {min: value, animation: false});
 
                 cal.value(null);
 
@@ -423,7 +424,7 @@
 
             test("value should not accept value lower than min", function() {
                 var value = new Date(2000,10,10),
-                    cal = new Calendar(div, {min: value});
+                    cal = new Calendar(div, {min: value, animation: false});
 
                 cal.value(new Date(1900, 10,10));
 
@@ -432,7 +433,7 @@
 
             test("value should not accept value bigger than max", function() {
                 var value = new Date(2000,10,10),
-                    cal = new Calendar(div, {max: value});
+                    cal = new Calendar(div, {max: value, animation: false});
 
                 cal.value(new Date(2900, 10,10));
 
@@ -441,7 +442,7 @@
 
             test("value should not accept invalid date", function() {
                 var value = new Date(2000,10,10),
-                    cal = new Calendar(div, {max: value});
+                    cal = new Calendar(div, {max: value, animation: false});
 
                 cal.value("dsadasDA");
 
@@ -450,9 +451,9 @@
 
             test("focus date depending on given value", function() {
                 var value = new Date(2000,10,10),
-                    cal = new Calendar(div);
+                    cal = new Calendar(div, {animation: false});
 
-                cal._focusCell(value);
+                cal._focus(value);
 
                 equal(cal._table.find(".k-state-focused").length, 1);
                 equal(cal._table.find(".k-state-focused").text(), "10");
@@ -461,11 +462,11 @@
             test("focus date in current view without navigating", function() {
                 var value = new Date(2000,10,10),
                     viewedValue = new Date(2000, 10, 15),
-                    cal = new Calendar(div, {value: value});
+                    cal = new Calendar(div, {value: value, animation: false});
 
                 cal.navigate(null, "year");
 
-                cal._focusCell(value);
+                cal._focus(value);
 
                 equal(cal._table.find(".k-state-focused").length, 1);
                 equal(cal._table.find(".k-state-focused").text(), "Nov");
@@ -474,14 +475,14 @@
             test("focus should not call navigate if need to focus next cell in current decade view", function() {
                 var value = new Date(2005,10,10),
                     viewedValue = new Date(2004, 10, 15),
-                    cal = new Calendar(div);
+                    cal = new Calendar(div, {animation: false});
 
                 cal._viewedValue = viewedValue;
                 cal._view = kendo.calendar["decade"];
 
                 stub(cal, {navigate: cal.navigate});
 
-                cal._focusCell(value);
+                cal._focus(value);
 
                 equal(cal.calls("navigate"), 0);
             });
