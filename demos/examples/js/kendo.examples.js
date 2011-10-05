@@ -34,7 +34,7 @@
         referenceUrl = "",
         regexes = {
             description: /<div[^>]*description[^>]*>(([\r\n]|.)*?)<\/\w+>\s*?<!-- description -->/im,
-            body: /<div id="example([Wrap]*)"[^>]*?>(([\r\n]|.)*?)<!-- tools -->/im,
+            body: /<div id="example([Wrap]*)"[^>]*?>\s*<script[^>]*?>[^>]*script>(([\r\n]|.)*?)<!-- tools -->/im,
             helpData: /<!--\s*help-data\s*-->(([\r\n]|.)*?)<!--\s*help-data\s*-->/im,
             helpTabs: /<!--\s*help-tabs\s*-->(([\r\n]|.)*?)<!--\s*help-tabs\s*-->/im,
             tools: /\s*<!-- tools -->(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig,
@@ -145,7 +145,7 @@
                     }}));
 
                     exampleBody.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
-                        exampleBody.empty().html(Application.body(html));
+                        exampleBody.html(Application.body(html));
                         setTimeout(function() {
                             exampleBody.kendoStop(true).kendoAnimate(animation.show);
                         }, 100);

@@ -74,6 +74,33 @@
                             if(!isNaN(index) && index < panes.length) {
                                 return panes[index];
                             }
+                        },
+                        setSize = function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var pane = getPane($("#index").val());
+
+                                if (!pane) return;
+
+                                splitter.size(pane, $("#size").val());
+                            }
+                        },
+                        setMinSize = function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var pane = getPane($("#index").val());
+
+                                if (!pane) return;
+
+                                splitter.min(pane, $("#min").val());
+                            }
+                        },
+                        setMaxSize = function (e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var pane = getPane($("#index").val());
+
+                                if (!pane) return;
+
+                                splitter.max(pane, $("#max").val());
+                            }
                         };
 
                     $("#toggle").click( function (e) {
@@ -83,29 +110,14 @@
                         splitter.toggle(pane, $(pane).width() <= 0);
                     });
 
-                    $("#setSize").click( function (e) {
-                        var pane = getPane($("#index").val());
+                    $("#setSize").click(setSize);
+                    $("#size").keypress(setSize);
 
-                        if (!pane) return;
+                    $("#setMinSize").click(setMinSize);
+                    $("#min").keypress(setMinSize);
 
-                        splitter.size(pane, $("#size").val());
-                    });
-
-                    $("#setMinSize").click( function (e) {
-                        var pane = getPane($("#index").val());
-
-                        if (!pane) return;
-
-                        splitter.min(pane, $("#min").val());
-                    });
-
-                    $("#setMaxSize").click( function (e) {
-                        var pane = getPane($("#index").val());
-
-                        if (!pane) return;
-
-                        splitter.max(pane, $("#max").val());
-                    });
+                    $("#setMaxSize").click(setMaxSize);
+                    $("#max").keypress(setMaxSize);
 
                     var splitter = $("#splitter").kendoSplitter({
                         orientation: "horizontal",
