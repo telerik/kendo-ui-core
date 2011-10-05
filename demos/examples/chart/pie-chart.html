@@ -34,16 +34,28 @@
                         <label for="labels">Show labels</label>
                     </li>
                     <li>
+                        <input id="alignCircle" name="alignType"
+                               type="radio" value="circle" checked="checked"
+                               disabled="disabled" autocomplete="off" />
+                        <label for="alignCircle">- aligned in circle</label>
+                    </li>
+                    <li>
+                        <input id="alignColumn" name="alignType"
+                               type="radio" value="column"
+                               disabled="disabled" autocomplete="off" />
+                        <label for="alignColumn">- aligned in columns</label>
+                    </li>
+                    <li>
                         <input id="alignLabels" type="checkbox" disabled="disabled" autocomplete="off" />
                         <label for="alignLabels">Align labels</label>
                     </li>
                     <li>
-                        <label for="padding">Padding</label>
-                        <input id="padding" style="width: 160px;" />
-                    </li>
-                    <li>
                         <label for="startAngle">Start angle</label>
                         <input id="startAngle" style="width: 160px;" />
+                    </li>
+                    <li>
+                        <label for="padding">Padding</label>
+                        <input id="padding" style="width: 160px;" />
                     </li>
                 </ul>
             </div>
@@ -87,7 +99,10 @@
                             type: "pie",
                             field: "percentage",
                             nameField: "source",
-                            startAngle: 160
+                            startAngle: 160,
+                            labels: {
+                                //align: "circle"
+                            }
                         }],
                         tooltip: {
                             visible: true,
@@ -129,6 +144,7 @@
                         },
                         change: refresh
                     });
+
                     $(".configuration").live("change", refresh);
                 }
 
@@ -136,16 +152,18 @@
                     var chart = $("#chart").data("kendoChart"),
                         pieSeries = chart.options.series[0],
                         labels = $("#labels").prop("checked"),
+                        alignInputs = $("input[name='alignType']"),
+                        alignLabels = alignInputs.filter(":checked").val(),
                         startAngle = parseInt($("#startAngle").val(), 10),
                         padding = parseInt($("#padding").val(), 10);
 
                     chart.options.transitions = false;
                     pieSeries.labels.visible = labels;
-                    pieSeries.labels.align
+                    pieSeries.labels.align = alignLabels;
                     pieSeries.startAngle = startAngle;
                     pieSeries.padding = padding;
 
-                    $("#alignLabels").attr("disabled", !labels);
+                    alignInputs.attr("disabled", !labels);
 
                     chart.refresh();
                 }
