@@ -71,19 +71,46 @@
 
             <script>
                 $(document).ready(function() {
-                    var slider = $("#slider").kendoSlider().data("kendoSlider");
-                    var rangeSlider = $("#rangeslider").kendoRangeSlider().data("kendoRangeSlider");
+                    var slider = $("#slider").kendoSlider().data("kendoSlider"),
+                        rangeSlider = $("#rangeslider").kendoRangeSlider().data("kendoRangeSlider"),
+                        setValue = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var value = parseInt($("#newValue").val(), 10);
 
-                    $("#setSliderValue").click(function() {
-                        var value = parseInt($("#newValue").val(), 10);
+                                if (isNaN(value) || value < 0 || value > 10) {
+                                    alert("Value must be a number between 0 and 10");
+                                    return;
+                                }
 
-                        if (isNaN(value) || value < 0 || value > 10) {
-                            alert("Value must be a number between 0 and 10");
-                            return;
-                        }
+                                slider.value(value);
+                            }
+                        },
+                        setStartValue = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var startValue = parseInt($("#startValue").val(), 10);
 
-                        slider.value(value);
-                    });
+                                if (isNaN(startValue) || startValue < 0 || startValue > 10) {
+                                    alert("Value must be a number between 0 and 10");
+                                    return;
+                                }
+
+                                var endValue = getValues()[1];
+                                rangeSlider.values(startValue, endValue);
+                            }
+                        },
+                        setEndValue = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var startValue = getValues()[0];
+                                var endValue = parseInt($("#endValue").val(), 10);
+
+                                if (isNaN(endValue) || endValue < 0 || endValue > 10) {
+                                    alert("Value must be a number between 0 and 10");
+                                    return;
+                                }
+
+                                rangeSlider.values(startValue, endValue);
+                            }
+                        };
 
                     $("#getSliderValue").click(function() {
                         alert(slider.value());
@@ -101,29 +128,14 @@
                         return rangeSlider.values();
                     }
 
-                    $("#setStartValue").click(function() {
-                        var startValue = parseInt($("#startValue").val(), 10);
+                    $("#setSliderValue").click(setValue);
+                    $("#newValue").keypress(setValue);
 
-                        if (isNaN(startValue) || startValue < 0 || startValue > 10) {
-                            alert("Value must be a number between 0 and 10");
-                            return;
-                        }
+                    $("#setStartValue").click(setStartValue);
+                    $("#startValue").keypress(setStartValue);
 
-                        var endValue = getValues()[1];
-                        rangeSlider.values(startValue, endValue);
-                    });
-
-                    $("#setEndValue").click(function() {
-                        var startValue = getValues()[0];
-                        var endValue = parseInt($("#endValue").val(), 10);
-
-                        if (isNaN(endValue) || endValue < 0 || endValue > 10) {
-                            alert("Value must be a number between 0 and 10");
-                            return;
-                        }
-
-                        rangeSlider.values(startValue, endValue);
-                    });
+                    $("#setEndValue").click(setEndValue);
+                    $("#endValue").keypress(setEndValue);
 
                     $("#getRangeSliderValue").click(function() {
                         alert(getValues());
