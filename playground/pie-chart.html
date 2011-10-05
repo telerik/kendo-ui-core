@@ -24,12 +24,13 @@
             $("#container").kendoChart({
                 title: {
                     text: "Lollipop",
-                    position: "top"
+                    position: "top",
+                    visible: false
                 },
                 theme: "black",
                 legend: {
                     position: "left",
-                    visible: false
+                    visible: true
                 },
                 dataSource: data,
                 seriesDefaults: {
@@ -37,29 +38,72 @@
                     padding: 120,
                     labels: {
                         font: "12px Arial, sans-serif",
-                        visible: false
+                        visible: true,
+                        align: "column"
                     },
-                    startAngle: 90
+                    startAngle: -95
                 },
                 transitions: false,
                 series: [{
                     name: "World",
-                    data: [ {
-                        value: 10,
-                        explode: true
-                    }, {
-                        value: 10
-                    }, {
-                        value: 10,
-                        explode: true
-                    }, {
-                        value: 10
-                    }, {
-                        value: 10,
-                        explode: true
-                    }, {
-                        value: 10
-                    }]
+                    data: [{
+                          value: 2,
+                          name: "Value H"
+                      }, {
+                          value: 2,
+                          name: "Value H"
+                      }, {
+                          value: 2,
+                          name: "Value H"
+                      }, {
+                          value: 2,
+                          name: "Value H"
+                      }, {
+                          value: 2,
+                          name: "Value H"
+                      }, {
+                          value: 2,
+                          name: "Value H"
+                      }, {
+                          value: 10,
+                          name: "Value H"
+                      }, {
+                          value: 5,
+                          name: "Value H"
+                      }, {
+                          value: 3,
+                          name: "Value H"
+                      }, {
+                          value: 8,
+                          name: "Value H"
+                      }, {
+                          value: 11,
+                          name: "Value H"
+                      }, {
+                          value: 5,
+                          name: "Value H"
+                      }, {
+                          value: 1,
+                          name: "Value H"
+                      }, {
+                          value: 2,
+                          name: "Value H"
+                      }, {
+                          value: 2,
+                          name: "Value H"
+                      }, {
+                          value: 2,
+                          name: "Value H"
+                      }, {
+                          value: 2,
+                          name: "Value H"
+                      }, {
+                          value: 2,
+                          name: "Value H"
+                      }, {
+                          value: 2,
+                          name: "Value H"
+                      }]
                 }],
                 chartArea: {
                     border: {
@@ -71,11 +115,12 @@
                     visible: true
                 }
             });
-/*
+
             $("#container1").kendoChart({
                 title: {
                     text: "Lollipop",
-                    position: "top"
+                    position: "top",
+                    visible: false
                 },
                 theme: "kendo",
                 legend: {
@@ -193,7 +238,8 @@
             $("#container2").kendoChart({
                 title: {
                     text: "Lollipop",
-                    position: "top"
+                    position: "top",
+                    visible: false
                 },
                 theme: "kendo",
                 legend: {
@@ -314,7 +360,8 @@
             $("#container3").kendoChart({
                 title: {
                     text: "Lollipop",
-                    position: "top"
+                    position: "top",
+                    visible: false
                 },
                 theme: "kendo",
                 legend: {
@@ -441,7 +488,8 @@
             $("#container4").kendoChart({
                 title: {
                     text: "Lollipop",
-                    position: "top"
+                    position: "top",
+                    visible: false
                 },
                 theme: "kendo",
                 legend: {
@@ -580,7 +628,8 @@
             $("#container5").kendoChart({
                 title: {
                     text: "Lollipop",
-                    position: "top"
+                    position: "top",
+                    visible: false
                 },
                 theme: "kendo",
                 legend: {
@@ -632,7 +681,8 @@
             $("#container6").kendoChart({
                 title: {
                     text: "Lollipop",
-                    position: "top"
+                    position: "top",
+                    visible: false
                 },
                 theme: "kendo",
                 legend: {
@@ -699,7 +749,8 @@
             $("#container7").kendoChart({
                 title: {
                     text: "Lollipop",
-                    position: "top"
+                    position: "top",
+                    visible: false
                 },
                 theme: "kendo",
                 legend: {
@@ -809,7 +860,7 @@
                         color: "black"
                     }
                 }
-            }); */
+            });
         });
 
         function refresh() {
@@ -853,10 +904,33 @@
                 chart.options.series[0].startAngle = (chart.options.series[0].startAngle + 1) % 360; chart.refresh();
             }, 50);
         }
+
+        function change() {
+            var chart = $("#container").data("kendoChart"),
+                align = $("#alignOn").prop("checked") ? "circle" : "column",
+                series = chart.options.series;
+            for (var i = 0, length = chart.options.series.length; i < length; i++) {
+                series[i].labels.align = align;
+            };
+
+            chart.refresh();
+        }
     </script>
     <input type="button" onclick="clickMe()" value="GAS!" />
+
     <div id="container" style="width: 600px; height: 400px; margin-left: 100px;
         -webkit-transform: translateZ(0); float: left;"></div>
+    <div>
+        <input id="alignOn" name="align"
+                type="radio" checked="checked" autocomplete="off" />
+        <label for="alignOn">ON</label>
+
+        <input id="alignOff" name="align"
+               type="radio" value="OFF" autocomplete="off" />
+        <label for="alignOff">OFF</label>
+
+        <input type="button" onclick="change()" value="apply!" />
+    </div>
     <div id="container1" style="width: 600px; height: 400px; margin-right: 100px;
         -webkit-transform: translateZ(0); float: right;"></div>
 

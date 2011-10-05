@@ -3971,7 +3971,8 @@
                 visible: false,
                 distance: 35,
                 font: ARIAL12,
-                margin: getSpacing(0.5)
+                margin: getSpacing(0.5),
+                align: CIRCLE
             },
             animation: {
                 type: PIE
@@ -4008,17 +4009,19 @@
             }
 
             if (labels.visible) {
-                segment.label = new TextBox(labelText,
-                    deepExtend({
+                segment.label = new TextBox(labelText, {
                         id: uniqueId(),
                         align: CENTER,
                         vAlign: "",
                         animation: {
                             type: FADEIN,
                             delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
-                        }
-                    }, labels)
-                );
+                        },
+                        font: labels.font,
+                        margin: labels.margin,
+                        padding: labels.padding,
+                        color: labels.color
+                    });
 
                 segment.append(segment.label);
                 segment.registerId(segment.label.options.id);
@@ -4046,18 +4049,20 @@
                 labelDistance = options.labels.distance,
                 startAngle = segment.sector.startAngle % 90,
                 lp,
+                x1,
+                y1,
                 angle = sector.middle();
 
             if (label) {
                 lp = sector.clone().expand(labelDistance).point(angle);
-
-                label.reflow(new Box2D(lp.x, lp.y, lp.x, lp.y));
-
                 if (lp.x >= sector.c.x) {
+                    x1 = lp.x + label.box.width();
                     label.orientation = RIGHT;
                 } else {
+                    x1 = lp.x - label.box.width();
                     label.orientation = LEFT;
                 }
+                label.reflow(new Box2D(x1, lp.y - label.box.height(), lp.x, lp.y));
             }
         },
 
@@ -4111,8 +4116,8 @@
 
         getOutlineElement: function(view, options) {
             var segment = this,
-                highlight = segment.options.highlight,
-                border = highlight.border,
+                highlight = segment.options.highlight || {},
+                border = highlight.border || {},
                 outlineId = segment.options.id + OUTLINE_SUFFIX;
 
             segment.registerId(outlineId);
@@ -4341,7 +4346,7 @@
                 lr = sector.r + segment.options.labels.distance,
                 i;
 
-            distance = round(firstBox.y1 - (sector.c.y - lr - firstBox.height()));
+            distance = round(firstBox.y1 - (sector.c.y - lr - firstBox.height() - firstBox.height() / 2));
             distances.push(distance);
             for (i = 0; i < count; i++) {
                 firstBox = labels[i].box;
@@ -4350,8 +4355,7 @@
                 distances.push(distance);
             }
 
-            labelBox = labels[count].box;
-            distance = round(sector.c.y + lr + firstBox.height() - firstBox.y2);
+            distance = round(sector.c.y + lr - labels[count].box.y2 - labels[count].box.height() / 2);
             distances.push(distance);
 
             return distances;
@@ -4401,6 +4405,7 @@
                 boxX,
                 box;
 
+            distances[0] += 2;
             for (i = 0; i < labelsCount; i++) {
                 label = labels[i];
                 boxY += distances[i];
@@ -4411,13 +4416,18 @@
                     boxY,
                     boxY + box.height(),
                     label.orientation == RIGHT);
-
+                    if ( i == 0 ) {
+                    }
                 if (label.orientation == RIGHT) {
-                    boxX = sector.r + sector.c.x + labelDistance;
+                    if (segment.options.labels.align !== CIRCLE) {
+                        boxX = sector.r + sector.c.x + labelDistance;
+                    }
                     label.reflow(new Box2D(boxX + box.width(), boxY,
                         boxX, boxY));
                 } else {
-                    boxX = sector.c.x - sector.r - labelDistance;
+                    if (segment.options.labels.align !== CIRCLE) {
+                        boxX = sector.c.x - sector.r - labelDistance;
+                    }
                     label.reflow(new Box2D(boxX - box.width(), boxY,
                         boxX, boxY));
                 }
@@ -4469,7 +4479,15 @@
 
                         if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
                             crossing.x < sector.c.x) {
-                            points.push(new Point2D(sector.c.x + sector.r + space, start.y));
+                            if (segment.options.labels.align !== COLUMN) {
+                                if (sector.c.x + sector.r + space < end.x - space) {
+                                    points.push(new Point2D(sector.c.x + sector.r + space, start.y));
+                                } else {
+                                    points.push(new Point2D(start.x + space * 2, start.y));
+                                }
+                            } else {
+                                points.push(new Point2D(sector.c.x + sector.r + space, start.y));
+                            }
                             points.push(new Point2D(end.x - space, end.y));
                         } else {
                             crossing.y = end.y;
@@ -4482,8 +4500,16 @@
                         crossing.x = math.max(crossing.x, end.x + space);
 
                         if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
-                                crossing.x > sector.c.x) {
-                            points.push(new Point2D(sector.c.x - sector.r - space, start.y));
+                            crossing.x > sector.c.x) {
+                            if (segment.options.labels.align !== COLUMN) {
+                                if (sector.c.x - sector.r - space > end.x + space) {
+                                    points.push(new Point2D(sector.c.x - sector.r - space, start.y));
+                                } else {
+                                    points.push(new Point2D(start.x - space * 2, start.y));
+                                }
+                            } else {
+                                points.push(new Point2D(sector.c.x - sector.r - space, start.y));
+                            }
                             points.push(new Point2D(end.x + space, end.y));
                         } else {
                             crossing.y = end.y;
