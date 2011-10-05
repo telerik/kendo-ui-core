@@ -472,9 +472,9 @@
         */
         toggle: function(toggle) {
             var that = this;
-            that._toggle(toggle);
-            that.input[0].focus();
             clearTimeout(that._bluring);
+            that.input[0].focus();
+            setTimeout( function () { that._toggle(toggle); }, 0); // Fixes an annoying flickering issue in iOS.
         },
 
         /**

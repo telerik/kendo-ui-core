@@ -94,7 +94,7 @@
 
                 element.css(TRANSITION, options.exclusive + " " + options.duration + "ms " + options.ease);
                 setTimeout(function() {
-                    element.css(TRANSITION, "none").css(HEIGHT);
+                    element.css(TRANSITION, NONE).css(HEIGHT);
                 }, options.duration); // TODO: this should fire a kendoAnimate session instead.
             }
 
