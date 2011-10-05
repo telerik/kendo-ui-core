@@ -317,7 +317,7 @@
                     .live("click", function(e) {
                         e.preventDefault();
 
-                        if (!location.href.match($(this).attr("href")) && !$("#exampleWrap").data("animating")) {
+                        if (!location.href.match($(this).attr("href"))) {
                             var element = $(this);
 
                             $("#nav").find(".chosen").removeClass("chosen");
