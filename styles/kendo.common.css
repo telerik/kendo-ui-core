@@ -41,6 +41,7 @@
 
 .k-widget,
 .k-input[type="text"],
+.k-picker-wrap .k-input,
 .k-button
 {
     font-size: 100%;
@@ -229,7 +230,7 @@ html body .k-button-bare
 .k-clear-filter { background-position: -16px -240px; }
 
 .k-refresh { background-position: -32px -240px; }
-.k-icon-calendar { background-position: -48px -240px; }
+.k-icon-calendar { background-position: -48px -239px; }
 .k-icon-clock { background-position: -64px -336px; }
 
 .k-edit { background-position: 0 -336px; }
@@ -935,6 +936,11 @@ div.k-window-content
     line-height: 1.6em;
     vertical-align: middle;
     text-overflow: ellipsis;
+}
+
+.k-grid .k-grouping-row td
+{
+    overflow: visible;
 }
 
 .k-grid-header-wrap,
@@ -1681,8 +1687,8 @@ div.k-datetimepicker .k-select+.k-select
 .k-picker-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
-    min-height: 1.6em;
-    line-height: 1.45em;
+    min-height: 1.35em;
+    line-height: 1.35em;
     vertical-align: middle;
     padding: 3px 5px;
 }
@@ -1757,10 +1763,10 @@ div.k-datetimepicker .k-select+.k-select
     text-decoration: underline;
 }
 
-.k-calendar .k-header
+.k-calendar .k-header,
+.k-calendar .k-footer
 {
     position: relative;
-    padding: .4em 0;
     text-align: center;
     zoom: 1;
 }
@@ -1777,6 +1783,7 @@ div.k-datetimepicker .k-select+.k-select
 .k-calendar .k-content
 {
     display: table;
+    border-spacing: 0;
     width: 100%;
     height: 169px;
     border-width: 0;
@@ -1796,6 +1803,7 @@ div.k-datetimepicker .k-select+.k-select
 {
     display: inline-block;
     width: 75%;
+    padding: .4em 0;
 }
 
 .k-calendar .k-nav-fast .k-icon
@@ -1841,6 +1849,16 @@ div.k-datetimepicker .k-select+.k-select
 {
     padding: .25em 0 .3em;
     text-align: center;
+}
+
+.k-calendar .k-footer
+{
+    padding: .4em 0;
+}
+
+.k-calendar .k-nav-today:hover
+{
+    text-decoration:underline;
 }
 
 /* Date/Time Pickers */
