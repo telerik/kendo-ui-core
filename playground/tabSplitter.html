@@ -1,5 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
     <title>TabStrip Sandbox</title>
@@ -55,10 +54,9 @@
            </div>
        <script type="text/javascript">
            function onSelect(e) {
-               console.log($(e.contentElement).find(".k-splitter").data("kendoSplitter"));
                setTimeout( function () {
                     $(e.contentElement).find(".k-splitter").trigger("resize");
-               }, 0 );
+               }, 400 );
            }
 
                $(document).ready(function() {
