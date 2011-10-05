@@ -36,12 +36,6 @@
             element = that.element;
             options = that.options;
 
-            //get options from data attributes and extend options
-            //extend(options, {
-           //     value: element.data("value"),
-           //     format: element.data("format")
-           // });
-
             element.addClass("k-widget k-calendar");
 
             that._templates();

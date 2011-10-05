@@ -34,6 +34,43 @@
                 }
             });
 
+            test("DateView should re assign shared calendar", function() {
+                var options = {
+                    anchor: $("<input/>"),
+                    value: new Date (2000, 10, 10),
+                    min: new Date (1900, 10, 10),
+                    max: new Date (2100, 10, 10),
+                    change: function() {},
+                    open: function() {},
+                    close: function() {},
+                    startView: "month",
+                    depth: "month"
+                },
+                dv1 = new DateView({
+                    value: new Date(),
+                    min: new Date(),
+                    max: new Date(),
+                    startView: "month",
+                    depth: "month"
+                }),
+                dv2 = new DateView(options);
+
+                dv2._initCalendar();
+
+                var calendar = dv1.calendar,
+                    popup = dv2.popup;
+
+                equal(+calendar._value, +options.value);
+                equal(+calendar.options.min, +options.min);
+                equal(+calendar.options.max, +options.max);
+                equal(calendar._events["change"][0], options.change);
+                equal(calendar.element.data("dateView"), dv2);
+
+                equal(popup.options.anchor, dv2.options.anchor);
+                equal(popup._events["open"][0], dv2.options.open);
+                equal(popup._events["close"][0], dv2.options.close);
+            });
+
             //DateView
             test("DateView should create shared calendar", function() {
                 var dateView = new DateView();

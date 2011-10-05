@@ -5,7 +5,6 @@
     parse = kendo.parseDate,
     keys = kendo.keys,
     defineViewedValue = kendo.calendar.defineViewedValue,
-    popup,
     calendar,
     DATEVIEW = "dateView",
     OPEN = "open",
@@ -18,24 +17,19 @@
 
     var DateView = function(options) {
         var that = this,
-            div;
+            body = document.body;
 
         if (!calendar) {
-            div = $(DIV);
-            div.appendTo(document.body);
-            calendar = new ui.Calendar(div);
-            popup = new ui.Popup(div);
-
-            calendar.element.bind("click", function(e) {
-                if (e.currentTarget.className.indexOf("k-state-selected") !== -1) {
-                    that.close();
-                }
-            });
+            calendar = new ui.Calendar($(DIV).hide().appendTo(body));
         }
 
-        that.options = options = options || {};
         that.calendar = calendar;
-        that.popup = popup;
+        that.options = options = options || {};
+        that.popup = new ui.Popup($(DIV).appendTo(body), {
+            anchor: options.anchor,
+            close: options.close,
+            open: options.open
+        });
 
         that.value(options.value);
     }
@@ -49,12 +43,13 @@
                 calendarElement = calendar.element;
 
             if (calendarElement.data(DATEVIEW) !== this) {
-                popup.options.anchor = options.anchor;
+                calendarElement.show().appendTo(popup.element);
 
-                popup.unbind(OPEN)
-                     .unbind(CLOSE)
-                     .bind(OPEN, options)
-                     .bind([OPEN, CLOSE], options);
+                calendarElement.bind("click", function(e) {
+                    if (e.currentTarget.className.indexOf("k-state-selected") !== -1) {
+                        that.close();
+                    }
+                });
 
                 calendarElement.data(DATEVIEW, this);
                 calendar.options.min = options.min;
@@ -90,8 +85,6 @@
 
         toggle: function() {
             var that = this;
-
-            that._initCalendar();
 
             if (that.popup.visible()) {
                 that.close();
@@ -194,7 +187,7 @@
                 cell = calendar._table.find(".k-state-focused"),
                 value = new Date(cell.children(":first").data("value"));
 
-            if (cell.hasClass("k-state-selected")) {
+            if (!cell[0] || cell.hasClass("k-state-selected")) {
                 that.close();
                 return;
             }

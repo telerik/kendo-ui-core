@@ -385,6 +385,9 @@
                 stub(dv.calendar, { navigateDown: dv.calendar.navigateDown });
                 dv._initCalendar();
                 dv.calendar.navigateUp();
+
+                dv.calendar._focusCell(dv._viewedValue);
+
                 dv.navigate(event);
 
                 equal(dv.calendar.calls("navigateDown"), 1);
@@ -501,6 +504,8 @@
 
                 dv.open();
 
+                dv.calendar._focusCell(dv._viewedValue);
+
                 dv.navigate(event);
 
                 ok(!dv.popup.visible());
@@ -520,6 +525,7 @@
                 dv.open();
 
                 dv.calendar.navigate(new Date(2000, 10, 10), "year");
+                dv.calendar._focusCell(dv._viewedValue);
                 dv.navigate(event);
 
                 ok(dv.popup.visible());
@@ -564,6 +570,7 @@
                 stub(dv.calendar, {navigateDown: dv.calendar.navigateDown});
 
                 dv.calendar.navigateUp();
+                dv.calendar._focusCell(dv._viewedValue);
 
                 dv.navigate(event);
 
