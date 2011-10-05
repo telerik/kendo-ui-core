@@ -673,8 +673,8 @@
                 var title,
                     titleTextBox,
                     titleText,
-                    TITLE_TEXT_HEIGHT = 17,
-                    TITLE_TEXT_WIDTH = 37,
+                    TITLE_TEXT_HEIGHT = 18,
+                    TITLE_TEXT_WIDTH = 29,
                     MARGIN = 10,
                     PADDING = 5;
 
@@ -1091,7 +1091,7 @@
 
                     var legendBox = legend.children[0].box;
 
-                    sameBox(legendBox, new Box2D(464, 976, 515, 990), TOLERANCE);
+                    sameBox(legendBox, new Box2D(465, 975, 511, 990), TOLERANCE);
                 });
 
                 test("positions legend to the top should have correct box", function() {
@@ -1101,7 +1101,7 @@
 
                     var legendBox = legend.children[0].box;
 
-                    sameBox(legendBox, new Box2D(464, 15, 515, 29), TOLERANCE);
+                    sameBox(legendBox, new Box2D(465, 15, 511, 30), TOLERANCE);
                 });
 
                 test("positions legend to the bottom", function() {
@@ -1225,7 +1225,7 @@
                 });
 
                 test("renders box with padding", function() {
-                    sameBox(legendBox, new Box2D(915, 483, 1000, 517), TOLERANCE);
+                    sameBox(legendBox, new Box2D(919, 482, 1000, 517), TOLERANCE);
                 });
 
                 test("renders border width", function() {

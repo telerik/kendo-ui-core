@@ -21,7 +21,8 @@
                 lineChart,
                 root,
                 view,
-                pointCoordinates;
+                pointCoordinates,
+                TOLERANCE = 1;
 
             function setupLineChart(plotArea, options) {
                 view = new ViewStub();
@@ -41,8 +42,7 @@
                     negativeSeries = { data: [-1, -2], labels: {} },
                     sparseSeries = { data: [1, 2, undefined, 2] },
                     VALUE_AXIS_MAX = 2,
-                    CATEGORY_AXIS_Y = 2,
-                    TOLERANCE = 0.1;
+                    CATEGORY_AXIS_Y = 2;
 
                 function PlotAreaStub() { }
 
@@ -927,22 +927,22 @@
 
                 test("label is positioned above marker", function() {
                     createPoint({ labels: { visible: true, position: "above" } });
-                    sameBox(label.box, new Box2D(39, -36, 61, -6));
+                    sameBox(label.box, new Box2D(39, -35, 60, -6), TOLERANCE);
                 });
 
                 test("label is positioned below marker", function() {
                     createPoint({ labels: { visible: true, position: "below" } });
-                    sameBox(marker.box, new Box2D(44, -6, 56, 6));
+                    sameBox(marker.box, new Box2D(44, -6, 56, 6), TOLERANCE);
                 });
 
                 test("label is positioned right of marker", function() {
                     createPoint({ labels: { visible: true, position: "right" } });
-                    sameBox(marker.box, new Box2D(44, -6, 56, 6));
+                    sameBox(marker.box, new Box2D(44, -6, 56, 6), TOLERANCE);
                 });
 
                 test("label is positioned left of marker", function() {
                     createPoint({ labels: { visible: true, position: "left" } });
-                    sameBox(marker.box, new Box2D(44, -6, 56, 6));
+                    sameBox(marker.box, new Box2D(44, -6, 56, 6), TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
