@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Related DatePickers</title>
+        <title>Range selection</title>
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
@@ -22,7 +22,7 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Basic usage</div>
+        <div class="description">Range selection</div>
         <!-- description -->
         <div id="example" class="k-content">
             <label for="start">Start date:</label>
@@ -35,27 +35,21 @@
                     function startChange() {
                         var startDate = start.value();
 
-                        startDate.setDate(startDate.getDate() + 1);
+                        if (!startDate) {
+                            startDate.setDate(startDate.getDate() + 1);
+                        }
 
-                        //implement min()
-                        end.options.min = startDate;
-                        end.dateView.options.min = startDate;
-                        end.dateView.calendar.options.min = startDate;
-
-                        end.value(startDate);
+                        end.min(startDate);
                     }
 
                     function endChange() {
                         var endDate = end.value();
 
-                        endDate.setDate(endDate.getDate() - 1);
+                        if (!endDate) {
+                            endDate.setDate(endDate.getDate() - 1);
+                        }
 
-                        //implement max()
-                        start.options.max = endDate;
-                        start.dateView.options.max = endDate;
-                        start.dateView.calendar.options.max = endDate;
-
-                        start.value(endDate);
+                        start.max(endDate);
                     }
 
                     var start = $("#start").kendoDatePicker({
@@ -65,6 +59,9 @@
                     var end = $("#end").kendoDatePicker({
                         change: endChange
                     }).data("kendoDatePicker");
+
+                    start.max(end.value());
+                    end.min(start.value());
                 });
             </script>
 
