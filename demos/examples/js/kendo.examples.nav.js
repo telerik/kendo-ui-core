@@ -127,8 +127,8 @@ var categories = {
                     url: "datepicker/monthpicker.html"
                 },
                 {
-                    text: "Related datepickers",
-                    url: "datepicker/relateddatepickers.html"
+                    text: "Range selection",
+                    url: "datepicker/rangeselection.html"
                 },
                 {
                     text: "Events",

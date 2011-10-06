@@ -402,9 +402,11 @@
                 icon = that._icon,
                 element = that.element;
 
+            icon.unbind(CLICK)
+                .unbind(MOUSEDOWN);
+
             if (value === false) {
                 element.attr(DISABLED, DISABLED);
-                icon.unbind(CLICK).unbind(MOUSEDOWN);
             } else {
                 element.removeAttr(DISABLED);
                 icon.bind(CLICK, proxy(that._click, that))
