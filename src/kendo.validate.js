@@ -11,7 +11,15 @@
             pattern = new RegExp('^(?:' + pattern + ')$');
         }
         return pattern.test(value);
-    };
+    },
+    patternMatcher = function(input, selector, pattern) {
+        var value = input.val();
+
+        if (input.filter(selector).length && value !== "") {
+            return matcher(value, pattern);
+        }
+        return true;
+    }
 
     var Validator = Component.extend( {
         init: function(element, options) {
@@ -19,11 +27,11 @@
 
             Component.fn.init.call(that, element, options);
 
-            that._individualErrorTemplate = kendo.template(that.options.individualErrorTemplate);
+            that._errorTemplate = kendo.template(that.options.errorTemplate);
         },
 
         options: {
-            individualErrorTemplate: "<span>${message}</span>",
+            errorTemplate: "<span>${message}</span>",
             rules: {
                 required: function(input) {
                     if (input.filter("[required]").length && input.val() === "") {
@@ -32,14 +40,14 @@
                     return true;
                 },
                 pattern: function(input) {
-                    if (input.filter("[type=text],[type=email],[type=url],[type=tel]").filter("[pattern]").length && input.val() !== "") {
+                    if (input.filter("[type=text],[type=email],[type=url],[type=tel],[type=search]").filter("[pattern]").length && input.val() !== "") {
                         return matcher(input.val(), input.attr("pattern"));
                     }
                     return true;
                 },
                 min: function(input) {
                     if (input.filter("[type=number]").filter("[min]").length && input.val() !== "") {
-                        var min = parseInt(input.attr("min"),10) || 0,
+                        var min = parseInt(input.attr("min"), 10) || 0,
                             val = parseInt(input.val(), 10);
 
                         return min < val;
@@ -48,7 +56,7 @@
                 },
                 max: function(input) {
                     if (input.filter("[type=number]").filter("[max]").length && input.val() !== "") {
-                        var max = parseInt(input.attr("max"),10) || 0,
+                        var max = parseInt(input.attr("max"), 10) || 0,
                             val = parseInt(input.val(), 10);
 
                         return max > val;
@@ -66,16 +74,10 @@
                     return true;
                 },
                 email: function(input) {
-                    if (input.filter("[type=email]").length && input.val() !== "") {
-                        return matcher(input.val(), emailRegExp);
-                    }
-                    return true;
+                    return patternMatcher(input, "[type=email]", emailRegExp);
                 },
                 url: function(input) {
-                    if (input.filter("[type=url]").length && input.val() !== "") {
-                        return matcher(input.val(), urlRegExp);
-                    }
-                    return true;
+                    return patternMatcher(input, "[type=url]", urlRegExp);
                 }
             }
         },
@@ -104,7 +106,7 @@
 
         _validateInput: function(input) {
             var that = this,
-                template = that._individualErrorTemplate,
+                template = that._errorTemplate,
                 valid = validation ? input[0].checkValidity() :  that._checkValidity(input),
                 lbl,
                 message;
