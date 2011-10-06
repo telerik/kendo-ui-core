@@ -90,31 +90,44 @@ function generateVersion() {
 
 function template(template) {
     var paramName = "data",
-        begin =  "<#",
-        end = "#>",
         useWithBlock = true,
         functionBody = "var o;",
-        evalRegExp = /<#=(.+?)#>/g,
-        quoteRegExp = /'(?=[^<"]*#>)/g;
+        encodeRegExp = /\${([^}]*)}/g,
+        parts,
+        part,
+        idx;
 
     functionBody += useWithBlock ? "with(" + paramName + "){" : "";
 
-    functionBody += "o='";
+    functionBody += "o=";
 
-    functionBody += template
-        .replace(/\n/g, "\\n")
-        .replace(/\r/g, "")
-        .replace(/\t/g, "\\t")
-        .replace(quoteRegExp,"\t")
-        .split("'").join("\\'")
-        .split("\t").join("'")
-        .replace(evalRegExp, "'+($1)+'")
-        .split(begin).join("';")
-        .split(end).join("o+='");
+    parts = template
+        .replace(/\n/g, '\\n')
+        .replace(/\r/g, '\\r')
+        .replace(/\t/g, '\\t')
+        .replace(encodeRegExp, "#=e($1)#")
+        .replace(/\\#/g, "__SHARP__")
+        .split("#");
 
-    functionBody += useWithBlock ? "';}" : "';";
+    for (idx = 0; idx < parts.length; idx ++) {
+      part = parts[idx];
+
+      if (idx % 2 === 0) {
+        functionBody += "\'" + part.split("'").join("\\'") + "'";
+      } else {
+        if (part.charAt(0) === "=") {
+          functionBody += "+(" + part.substring(1) + ")+";
+        } else {
+          functionBody += ";" + part + "o+=";
+        }
+      }
+    }
+
+    functionBody += useWithBlock ? ";}" : ";";
 
     functionBody += "return o;";
+
+    functionBody = functionBody.replace(/__SHARP__/g, '#');
 
     return new Function(paramName, functionBody);
 }

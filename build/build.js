@@ -147,6 +147,19 @@ function processStyles() {
     });
 }
 
+function buildExamplesIndex() {
+    var navigation = fs.readFileSync("demos/examples/js/kendo.examples.nav.js", "utf8");
+    eval(navigation);
+
+    var indexTemplate = kendoBuild.template(
+        fs.readFileSync("demos/examples/simple-index.html", "utf-8")
+    );
+
+    delete categories.overview;
+
+    fs.writeFileSync(PATH + "/examples/index.html", indexTemplate(categories));
+}
+
 function buildExamples() {
     kendoBuild.copyDirSyncRecursive("demos/examples", PATH + "/examples");
     kendoBuild.copyTextFile("src/jquery.js", PATH + "/examples/js/jquery.js");
@@ -158,20 +171,7 @@ function buildExamples() {
         fs.writeFileSync(name, data);
     });
 
-    var navigation = fs.readFileSync("demos/examples/js/kendo.examples.nav.js", "utf8");
-    eval(navigation);
-
-    var indexTemplate = kendoBuild.template(
-        fs.readFileSync("demos/examples/simple-index.html", "utf-8")
-    );
-
-    var index = "";
-    for (var c in categories) {
-        if (c !== "overview") {
-            index += indexTemplate({ name: c, children: categories[c] });
-        }
-    }
-    fs.writeFileSync(PATH + "/examples/index.html", index);
+    buildExamplesIndex();
 }
 
 console.log("build initiated.");

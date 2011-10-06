@@ -2,26 +2,65 @@
 <html>
 <head>
     <title>Kendo UI Examples</title>
+
+    <style>
+        html, body, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            color: \#a2441c;
+        }
+
+        a:hover {
+            color: \#ef652a;
+        }
+
+        html {
+            font: 75% arial,helvetica,sans-serif;
+            background: \#333;
+        }
+
+        \#page {
+            background: \#fff;
+            width: 56em;
+            margin: 0 auto;
+            box-shadow: 0 0 6px \#aaa;
+            border: solid \#666;
+            border-width: 0 1px;
+            padding: 1em 3em;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 2em;
+        }
+
+        li {
+            padding: .2em 0;
+        }
+    </style>
 </head>
 <body>
-    <h2>
-        #= name[0].toUpperCase() + name.substring(1) #
-    </h2>
-    <ul>
-        # for(var i = 0; i < children.length; i++) { #
+    <div id="page">
+    # for (var categoryName in data) { #
+        <h1>#= categoryName[0].toUpperCase() + categoryName.substring(1) #</h1>
+
+        <ul>
+        # for (var i = 0, children = data[categoryName]; i < children.length; i++) { #
             <li>
-                #= children[i].text #
+                <h2>#= children[i].text #</h2>
                 <ul>
-                # for (var k = 0; k < children[i].items.length; k++) { #
-                <li>
-                    <a href='#= children[i].items[k].url #'>
-                        #= children[i].items[k].text #
-                    </a>
-                </li>
+                # for (var k = 0, items = children[i].items; k < items.length; k++) { #
+                    <li><a href='#= items[k].url #'>#= items[k].text #</a></li>
                 # } #
-            </ul>
-        </li>
+                </ul>
+
+            </li>
         # } #
-    </ul>
+        </ul>
+    # } #
+    </div>
 </body>
 </html>
