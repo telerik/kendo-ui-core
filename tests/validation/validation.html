@@ -142,16 +142,6 @@
                 equal(messages[0], "validationMessage");
             });
 
-            test("errors returns empty string if both validationMessage and title are not set for single invalid element", function() {
-                var input = $('<input type="text" required />'),
-                    validator = setup(input);
-
-                    validator.validate();
-                var messages = validator.errors();
-                equal(messages.length, 1);
-                equal(messages[0], "");
-            });
-
             test("errors returns formatted with input name message if set for single invalid element", function() {
                 var input = $('<input type="text" name="Foo" required validationMessage="{0} is invalid"/>'),
                     validator = setup(input);
@@ -476,6 +466,15 @@
                 container.find(":input").trigger("blur");
                 ok(container.find(":input").eq(0).hasClass("k-invalid"));
                 ok(container.find(":input").eq(1).hasClass("k-invalid"));
+            });
+
+            test("message for required is applied", function() {
+                var input = $('<input type="text" required />'),
+                validator = setup(input, {messages: { required: "Field is required" } });
+
+                validator.validate();
+
+                equal(validator.errors()[0], "Field is required");
             });
         </script>
     </body>
