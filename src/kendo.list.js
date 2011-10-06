@@ -240,18 +240,18 @@
 
             if (!item) return;
 
-            var list = this.list[0],
+            var ul = this.ul[0],
                 itemOffsetTop = item.offsetTop,
                 itemOffsetHeight = item.offsetHeight,
-                listScrollTop = list.scrollTop,
-                listOffsetHeight = list.clientHeight,
+                ulScrollTop = ul.scrollTop,
+                ulOffsetHeight = ul.clientHeight,
                 bottomDistance = itemOffsetTop + itemOffsetHeight;
 
-            list.scrollTop = listScrollTop > itemOffsetTop
+            ul.scrollTop = ulScrollTop > itemOffsetTop
                         ? itemOffsetTop
-                        : bottomDistance > (listScrollTop + listOffsetHeight)
-                        ? bottomDistance - listOffsetHeight
-                        : listScrollTop;
+                        : bottomDistance > (ulScrollTop + ulOffsetHeight)
+                        ? bottomDistance - ulOffsetHeight
+                        : ulScrollTop;
         },
 
         _template: function() {

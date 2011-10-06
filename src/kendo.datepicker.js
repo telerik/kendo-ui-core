@@ -77,7 +77,7 @@
     parse = kendo.parseDate,
     keys = kendo.keys,
     DIV = "<div />",
-    CLICK = "click",
+    CLICK = (kendo.support.touch ? "touchend" : "click"),
     OPEN = "open",
     CLOSE = "close",
     CHANGE = "change",
@@ -85,6 +85,8 @@
     DATEVIEW = "dateView",
     DISABLED = "disabled",
     SELECTED = "k-state-selected",
+    HOVER = "k-state-hover",
+    HOVEREVENTS = "mouseenter mouseleave",
     MOUSEDOWN = (kendo.support.touch ? "touchstart" : "mousedown"),
     cal = kendo.calendar,
     isInRange = cal.isInRange,
@@ -103,10 +105,10 @@
 
         that.calendar = calendar;
         that.options = options = options || {};
-        that.popup = new ui.Popup($(DIV).appendTo(body), options);
+        that.popup = new ui.Popup($(DIV).addClass("k-calendar-container").appendTo(body), options);
 
         that.value(options.value);
-    }
+    };
 
     DateView.prototype = {
         _initCalendar: function() {
@@ -301,7 +303,7 @@
             calendar._view.setDate(viewedValue, value);
             calendar.navigateDown(viewedValue);
         }
-    }
+    };
 
     kendo.DateView = DateView;
 
@@ -343,12 +345,15 @@
 
             that._icon();
 
-            element
-                .addClass("k-input")
-                .bind({
-                    keydown: proxy(that._keydown, that),
-                    blur: proxy(that._blur, that)
-                });
+            that.input = element
+                            .addClass("k-input")
+                            .bind({
+                                keydown: proxy(that._keydown, that),
+                                focus: function() {
+                                    that.input.parent().addClass("k-state-focused");
+                                },
+                                blur: proxy(that._blur, that)
+                            });
 
 
             /**
@@ -400,17 +405,28 @@
         enable: function(value) {
             var that = this,
                 icon = that._icon,
+                wrapper = that.wrapper.children(".k-picker-wrap"),
                 element = that.element;
 
             icon.unbind(CLICK)
                 .unbind(MOUSEDOWN);
 
             if (value === false) {
+                wrapper
+                    .addClass(DISABLED)
+                    .unbind(HOVEREVENTS);
+
                 element.attr(DISABLED, DISABLED);
             } else {
-                element.removeAttr(DISABLED);
+                wrapper
+                    .removeClass(DISABLED)
+                    .bind(HOVEREVENTS, that._toggleHover);
+
+                element
+                    .removeAttr(DISABLED);
+
                 icon.bind(CLICK, proxy(that._click, that))
-                    .bind(MOUSEDOWN, proxy(that._clearBlurTimeout, that));
+                    .bind(MOUSEDOWN, proxy(that._clearBlurTimeout, that))
             }
         },
 
@@ -536,12 +552,18 @@
             that._valid = true;
         },
 
+        _toggleHover: function(e) {
+            if (!kendo.support.touch)
+                $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
+        },
+
         _blur: function() {
             var that = this;
 
             that._bluring = setTimeout(function() {
                 that._change(that.element.val());
                 that.close();
+                that.input.parent().removeClass("k-state-focused");
             }, 100);
         },
 
@@ -550,7 +572,7 @@
             setTimeout(function() {
                 clearTimeout(that._bluring);
                 that.element.focus();
-            });
+            }, 0);
         },
 
         _click: function() {
@@ -609,7 +631,7 @@
             icon = element.next("span.k-select");
 
             if (!icon[0]) {
-                icon = $('<span class="k-select k-header"><span class="k-icon k-icon-calendar">select</span></span>').insertAfter(element);
+                icon = $('<span class="k-select"><span class="k-icon k-icon-calendar">select</span></span>').insertAfter(element);
             }
 
             that._icon = icon;
@@ -628,6 +650,11 @@
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
+            element.css({
+                width: "100%",
+                height: "auto"
+            });
+
             that.wrapper = wrapper.addClass("k-widget k-datepicker k-header");
         }
     });
