@@ -537,11 +537,10 @@
         },
 
         _blur: function() {
-            var that = this,
-                value = that._value;
+            var that = this;
 
             that._bluring = setTimeout(function() {
-                that._change(value);
+                that._change(that.element.val());
                 that.close();
             }, 100);
         },
