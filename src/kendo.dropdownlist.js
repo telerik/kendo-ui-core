@@ -465,7 +465,7 @@
             setTimeout(function() {
                 that._word += String.fromCharCode(e.keyCode || e.charCode);
                 that._search();
-            });
+            }, 0);
         },
 
         _search: function() {

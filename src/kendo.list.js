@@ -238,7 +238,8 @@
         },
 
         _toggleHover: function(e) {
-            $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
+            if (!kendo.support.touch)
+                $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
 
         _toggle: function(open) {

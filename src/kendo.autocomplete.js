@@ -374,7 +374,7 @@
         _accept: function (li) {
             var that = this;
 
-            that._focus(li);
+            setTimeout( function () { that._focus(li) }, 0);
 
             moveCaretAtEnd(that.element[0]);
         },

@@ -519,7 +519,7 @@
                 previous;
 
             if (li) {
-                that._focus(li);
+                setTimeout( function () { that._focus(li); }, 0);
             } else {
                 previous = that.previous;
                 that.value(that.text());
