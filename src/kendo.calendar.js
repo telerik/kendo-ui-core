@@ -102,7 +102,7 @@
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
         cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#">#=data.value#</a></td>');
-        cellEmptyTemplate = template("<td> </td>");
+        cellEmptyTemplate = template("<td>&nbsp;</td>");
         LEFT = "left",
         SLIDE = "slide",
         MONTH = "month",
@@ -139,9 +139,6 @@
          * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to parse value set with value() method.
          * @option {String} [startView] <month> Specifies the start view.
          * @option {String} [depth] Specifies the navigation depth.
-         * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
-         * @option {Animation} [animation.horizontal] The animation that will be used when navigate horizontally.
-         * @option {Animation} [animation.vertical] The animation that will be used when navigate vertically.
          */
         init: function(element, options) {
             var that = this;
@@ -198,7 +195,7 @@
             depth: MONTH,
             month: {
                 content: "#=data.value#",
-                empty: " "
+                empty: "&nbsp;"
             },
             animation: {
                 horizontal: {
@@ -984,7 +981,7 @@
                     build: function(date, idx) {
                         var year = date.getFullYear();
                         return {
-                            value: year + "-" + (year + 9),
+                            value: year + " - " + (year + 9),
                             dateString: toDateString(date),
                             cssClass: idx == 0 || idx == 11 ? OTHERMONTHCLASS : ""
                         };
