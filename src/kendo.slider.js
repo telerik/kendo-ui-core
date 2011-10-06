@@ -953,10 +953,10 @@
             }
 
             if (owner._isHorizontal) {
-                positionLeft += round((that.dragHandle[owner._size]() - that.tooltipDiv.outerWidth()) / 2) - 1;
+                positionLeft -= parseInt((that.tooltipDiv.outerWidth() - that.dragHandle[owner._size]()) / 2) + 1;
                 positionTop -= that.tooltipDiv.outerHeight() + callout.height() + margin;
             } else {
-                positionTop += round((that.dragHandle[owner._size]() - that.tooltipDiv.outerHeight()) / 2) - 1;
+                positionTop -= parseInt((that.tooltipDiv.outerHeight() - that.dragHandle[owner._size]()) / 2) + 1;
                 positionLeft -= that.tooltipDiv.outerWidth() + callout.width() + margin;
             }
 
