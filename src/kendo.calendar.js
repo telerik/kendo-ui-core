@@ -102,7 +102,7 @@
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
         cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#">#=data.value#</a></td>');
-        cellEmptyTemplate = template("<td> </td>");
+        cellEmptyTemplate = template("<td>&nbsp;</td>");
         LEFT = "left",
         SLIDE = "slide",
         MONTH = "month",
@@ -195,7 +195,7 @@
             depth: MONTH,
             month: {
                 content: "#=data.value#",
-                empty: " "
+                empty: "&nbsp;"
             },
             animation: {
                 horizontal: {
@@ -981,7 +981,7 @@
                     build: function(date, idx) {
                         var year = date.getFullYear();
                         return {
-                            value: year + "-" + (year + 9),
+                            value: year + " - " + (year + 9),
                             dateString: toDateString(date),
                             cssClass: idx == 0 || idx == 11 ? OTHERMONTHCLASS : ""
                         };
