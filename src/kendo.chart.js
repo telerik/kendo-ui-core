@@ -108,9 +108,14 @@
      * </p>
      *
      * <p>
-     * Currently supported chart types: <strong>Bar</strong>,
-     * <strong>Column</strong>, and <strong>Line</strong>.
+     * Supported chart types:
      * </p>
+     * <ul>
+     *     <li>Bar</li>
+     *     <li>Column</li>
+     *     <li>Line</li>
+     *     <li>Pie</li>
+     * </ul>
      *
      * <p>
      * Please visit the Kendo UI Road Map for additional information about
@@ -615,7 +620,6 @@
          * A value indicating if the series should be stacked.
          * @option {Number} [seriesDefaults.gap] <1.5> The distance between category clusters.
          * @option {Number} [seriesDefaults.spacing] <0.4> Space between bars.
-         * @option {Number} [seriesDefaults.padding] <60> Pie chart padding (on all sides 60).
          * @option {Object} [seriesDefaults.labels] Configures the series data labels.
          * @option {String} [seriesDefaults.labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
@@ -1060,12 +1064,54 @@
          * _example
          * //sets format of the labels
          * format: "{0:C}"
-
+         *
          * @option [series.type="pie"] The type of the series.
-         * @option {Boolean} [series.type="pie".explode] <false>
-         * A value indicating if the pie point should be selected.
-         * @option {String} [series.type="pie".name] The series name.
-         * @option {String} [series.type="pie".color] The series base color.
+         * @option {Array} [series.type="pie".data] Array of data items (optional).
+         * The pie chart can be bound to an array of numbers or an array of objects
+         * with the following fields:
+         *    <dl>
+         *         <dt>
+         *              value
+         *         </dt>
+         *         <dd>
+         *              The sector value.
+         *         </dd>
+         *         <dt>
+         *              name
+         *         </dt>
+         *         <dd>
+         *              The sector name that is shown in the legend.
+         *         </dd>
+         *         <dt>
+         *              color
+         *         </dt>
+         *         <dd>
+         *              The sector color.
+         *         </dd>
+         *         <dt>
+         *              explode
+         *         </dt>
+         *         <dd>
+         *              A boolean value indicating whether to explode the sector.
+         *         </dd>
+         *    </dl>
+         *  _example
+         *  // ...
+         *  series:[{
+         *      type: "pie",
+         *      data:[{
+         *          value: 40,
+         *          name: "Apples"
+         *      }, {
+         *          value: 60,
+         *          name: "Oranges",
+         *          color: "#ff6103"
+         *          }
+         *      ],
+         *      name: "Sales in Percent"
+         *  }]
+         *  // ...
+         * @option {Number} [series.type="pie".padding] <60> The padding around the pie chart (equal on all sides).
          * @option {Number} [series.type="pie".opacity] <1> The series opacity.
          * @option {Object} [series.type="pie".labels] Configures the series data labels.
          * @option {String} [series.type="pie".labels.font] <"12px Arial, sans-serif">
@@ -1092,14 +1138,32 @@
          * @option {String} [series.type="pie".labels.border.color] <"black"> The color of the border.
          * @option {String/Function} [series.type="pie".labels.template] The label template.
          * Template variables:
-         * <ul>
-         *     <li><strong>value</strong> - the point value</li>
-         *     <li><strong>category</strong> - the category name</li>
-         *     <li><strong>series</strong> - the data series</li>
-         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
-         *         Will be null if binding to array.
-         *     </li>
-         * </ul>
+         *     <dl>
+         *         <dt>
+         *              value
+         *         </dt>
+         *         <dd>
+         *              the point value
+         *         </dd>
+         *         <dt>
+         *              category
+         *         </dt>
+         *         <dd>
+         *              the category name
+         *         </dd>
+         *         <dt>
+         *              series
+         *         </dt>
+         *         <dd>
+         *              the data series
+         *         </dd>
+         *         <dt>
+         *              dataItem
+         *         </dt>
+         *         <dd>
+         *              the original data item used to construct the point (when binding from dataSource)
+         *         </dd>
+         *     </dl>
          * _example
          * // chart intialization
          * $("#chart").kendoChart({
@@ -1141,9 +1205,9 @@
          * @option {String} [series.type="pie".connector.color] <"#939393"> The color of the connector line.
          * @option {Number} [series.type="pie".connector.padding] <4>
          * The padding between the connector line and the label.
-         * @option {number} [series.type="pie".startAngle] <90> The start angle of the first pie point.
+         * @option {number} [series.type="pie".startAngle] <90> The start angle of the first pie segment.
          * @option {String} [series.type="line".labels.align] <"circle">
-         * Defines the align of the pie labels.
+         * Defines the alignment of the pie labels.
          *    <dl>
          *         <dt>
          *              "circle"
