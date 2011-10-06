@@ -36,18 +36,7 @@
                     var calendar = $("#calendar").data("kendoCalendar");
                     calendar.value(new Date());
 
-                    $("#value").kendoDatePicker();
-                    $("#direction").kendoDropDownList();
-
-                    $("#set").click(function() {
-                        calendar.value($("#value").val());
-                    });
-
-                    $("#get").click(function() {
-                        alert(calendar.value());
-                    });
-
-                    $("#navigate").click(function() {
+                    var navigate = function () {
                         var value = $("#direction").val();
                         switch(value) {
                             case "up":
@@ -63,7 +52,26 @@
                                 calendar.navigateToFuture();
                                 break;
                         }
+                    },
+                    setValue = function () {
+                        calendar.value($("#value").val());
+                    };
+
+                    $("#get").click(function() {
+                        alert(calendar.value());
                     });
+
+                    $("#value").kendoDatePicker({
+                        change: setValue
+                    });
+
+                    $("#set").click(setValue);
+
+                    $("#direction").kendoDropDownList({
+                        change: navigate
+                    });
+
+                    $("#navigate").click(navigate);
                 });
            </script>
            <div class="configuration" style="width: 210px">
