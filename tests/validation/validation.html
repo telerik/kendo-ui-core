@@ -364,6 +364,34 @@
 
                 ok(validator.validate());
             });
+
+            test("validate returns false if input with type=url value does not match the pattern", function() {
+                var input = $('<input type="url" value="http://test.test" pattern="https?://www.+" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=url value does match the pattern", function() {
+                var input = $('<input type="url" value="http://www.test.test" pattern="https?://www.+" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=tel value does not match the pattern", function() {
+                var input = $('<input type="tel" value="test" pattern="\\d+" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=tel value does match the pattern", function() {
+                var input = $('<input type="tel" value="666" pattern="\\d+" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
         </script>
     </body>
 </html>
