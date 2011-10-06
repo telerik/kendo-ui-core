@@ -310,7 +310,7 @@ a.bigButton:hover
 #navi li
 {
     vertical-align: top;
-    margin-left: 38px;
+    margin-left: 25px;
 }
 
 #navi li a
@@ -708,7 +708,7 @@ a.bigButton
 #footer ul,
 #footer #telerik
 {
-    margin:1em 0 0;
+    margin:1.3em 0 0;
 }
 
 #footer ul
@@ -720,9 +720,8 @@ a.bigButton
 #footer li
 {
     display:inline;
-    margin:0 1.2em 0 0;
+    margin:0 .6em 0 0;
     padding:0;
-    font-size:1.2em;
 }
 
 #footer a
