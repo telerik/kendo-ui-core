@@ -5,9 +5,9 @@
         <!-- meta -->
         <title>Month picker</title>
         <!-- css -->
-        <link href="../styles/examples.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <link href="../styles/examples.css" rel="stylesheet" />
+        <link href="../../../styles/kendo.common.css" rel="stylesheet" />
+        <link href="../../../styles/kendo.kendo.css" rel="stylesheet" />
         <!-- css -->
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
@@ -25,12 +25,18 @@
         <div class="description">Month picker</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <input id="datepicker"/>
+            <input id="datepicker" style="width: 130px" />
             <script>
                 $(document).ready(function() {
                     $("#datepicker").kendoDatePicker({
-                        startView: "decade", //defines the start view
-                        depth: "year" //defines when the calendar should return date
+                        // defines the start view
+                        startView: "decade",
+
+                        // defines when the calendar should return date
+                        depth: "year",
+
+                        // defines that the only the month should be displayed in the picker input
+                        format: "MMMM yyyy"
                     });
                 });
             </script>
