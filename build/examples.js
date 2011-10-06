@@ -356,7 +356,7 @@ function build(origin, destination, kendoCDN) {
     }
 
     console.log("parsing master page...");
-    var indexHtml = fs.readFileSync(examplesLocation + "/buildTemplate.html", "utf8");
+    var indexHtml = kendoBuild.readText("build/templates/buildTemplate.html");
 
     "nav,script,tools,css,meta".split(",").forEach(function(region) {
         var re = new RegExp("<!--\\s*" + region + "\\s*-->([\\u000a\\u000d\\u2028\\u2029]|.)*<!--\\s*" + region + "\\s*-->", "ig");
@@ -380,7 +380,6 @@ function build(origin, destination, kendoCDN) {
     kendoBuild.copyDirSyncRecursive(originJS, outputPath + "/js");
     kendoBuild.copyDirSyncRecursive(originStyles, outputPath + "/styles", true, /\.(css|png|jpg|jpeg|gif)$/i);
     fs.unlinkSync(outputPath + "/template.html");
-    fs.unlinkSync(outputPath + "/buildTemplate.html");
 
     if (!kendoCDN) {
         fs.writeFileSync(outputPath + "/js/jquery.js", fs.readFileSync("src/jquery.js", "utf8"), "utf8");
