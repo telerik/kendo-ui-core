@@ -278,7 +278,7 @@
 
             //calculate z-index
             anchor.parents().andSelf().each(function () {
-                zIndex = $(this).css("zIndex");
+                var zIndex = $(this).css("zIndex");
                 if (!isNaN(zIndex)) {
                     zIndex = Number(zIndex) + 1;
                     return false;

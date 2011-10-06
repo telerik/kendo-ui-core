@@ -34,18 +34,9 @@
                     $("#calendar").kendoCalendar();
 
                     var calendar = $("#calendar").data("kendoCalendar");
+                    calendar.value(new Date());
 
-                    $("#direction").kendoDropDownList();
-
-                    $("#set").click(function() {
-                        calendar.value($("#value").val());
-                    });
-
-                    $("#get").click(function() {
-                        alert(calendar.value());
-                    });
-
-                    $("#navigate").click(function() {
+                    var navigate = function () {
                         var value = $("#direction").val();
                         switch(value) {
                             case "up":
@@ -61,7 +52,26 @@
                                 calendar.navigateToFuture();
                                 break;
                         }
+                    },
+                    setValue = function () {
+                        calendar.value($("#value").val());
+                    };
+
+                    $("#get").click(function() {
+                        alert(calendar.value());
                     });
+
+                    $("#value").kendoDatePicker({
+                        change: setValue
+                    });
+
+                    $("#set").click(setValue);
+
+                    $("#direction").kendoDropDownList({
+                        change: navigate
+                    });
+
+                    $("#navigate").click(navigate);
                 });
            </script>
            <div class="configuration" style="width: 210px">
@@ -69,22 +79,27 @@
                <span class="configTitle">API Functions</span>
                <ul class="options">
                    <li>
-                   <input id="value" value="10/10/2000" />
-                   <button id="set" class="k-button">Set value</button> <button id="get" class="k-button">Get value</button>
+                       <button id="get" class="k-button">Get value</button>
                    </li>
                    <li>
-                   <label for="direction" style="display: block; margin-bottom: 2px;">Navigate:</label>
-                   <select id="direction" style="vertical-align: top; width: 120px; float: right; margin-bottom: 3px;">
-                       <option value="up">Up</option>
-                       <option value="down">Down</option>
-                       <option value="past">To past</option>
-                       <option value="future" selected="selected">To future</option>
-                   </select>
-                   <button id="navigate" class="k-button">Navigate</button>
+                       <input id="value" value="10/10/2000" style="float:none" />
+                       <button id="set" class="k-button">Set value</button>
+                   </li>
+               </ul>
+               <span class="configTitle">Navigation</span>
+               <ul class="options">
+                   <li>
+                       <select id="direction" style="vertical-align: top; width: 120px; margin-bottom: 3px;">
+                           <option value="up">upper view</option>
+                           <option value="down">lower view</option>
+                           <option value="past">past</option>
+                           <option value="future" selected="selected">future</option>
+                       </select>
+                       <button id="navigate" class="k-button">Navigate</button>
                    </li>
                </ul>
            </div>
-        </div>
+       </div>
         <!-- tools -->
         <!-- tools -->
     </body>
