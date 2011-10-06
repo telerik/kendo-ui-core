@@ -31,13 +31,17 @@
                     </li>
                     <li>
                         <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" placeholder="e.g. ryan@example.net" title="Please enter a valid email" required />
+                        <input type="email" id="email" name="Email" placeholder="e.g. ryan@example.net"  required />
                     </li>
                     <li>
                         <label for="tel">Phone *</label>
                         <input type="tel" id="tel" name="tel" pattern="\d{10}" placeholder="Please enter a ten digit phone number" required
                          validationMessage="Please enter a ten digit phone number"/>
-                    </li>
+                     </li>
+                     <li>
+                        <label for="search">*</label>
+                        <input type="search" id="search" name="search" required/>
+                     </li>
                 </ul>
             </fieldset>
 
@@ -47,6 +51,24 @@
 
             <script>
                 $(document).ready(function() {
+                    var data = [
+                            "12 Angry Men",
+                            "Il buono, il brutto, il cattivo.",
+                            "Inception",
+                            "One Flew Over the Cuckoo's Nest",
+                            "Pulp Fiction",
+                            "Schindler's List",
+                            "The Dark Knight",
+                            "The Godfather",
+                            "The Godfather: Part II",
+                            "The Shawshank Redemption"
+                        ];
+
+                    $("#search").kendoAutoComplete({
+                        dataSource: data,
+                        separator: ", "
+                    });
+
                     var validator = $("fieldset").kendoValidator().data("kendoValidator"),
                         status = $(".status");
 
