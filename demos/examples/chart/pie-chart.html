@@ -95,10 +95,10 @@
                             type: "pie",
                             field: "percentage",
                             nameField: "source",
-                            startAngle: 160,
-                            labels: {
-                                //align: "circle"
-                            }
+                            startAngle:
+                                $("#startAngle").data("kendoSlider").value(),
+                            padding:
+                                $("#padding").data("kendoSlider").value()
                         }],
                         tooltip: {
                             visible: true,
@@ -108,13 +108,12 @@
                 }
 
                 $(document).ready(function() {
+                    setupConfigurator();
                     createChart();
 
                     $(document).bind("kendo:skinChange", function(e) {
                         createChart();
                     });
-
-                    setupConfigurator();
                 });
 
                 function setupConfigurator() {
