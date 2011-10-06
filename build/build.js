@@ -148,11 +148,11 @@ function processStyles() {
 }
 
 function buildExamplesIndex() {
-    var navigation = fs.readFileSync("demos/examples/js/kendo.examples.nav.js", "utf8");
+    var navigation = kendoBuild.readText("demos/examples/js/kendo.examples.nav.js");
     eval(navigation);
 
     var indexTemplate = kendoBuild.template(
-        fs.readFileSync("demos/examples/simple-index.html", "utf-8")
+        kendoBuild.readText("build/templates/simple-index.html")
     );
 
     delete categories.overview;
