@@ -351,7 +351,7 @@
                             .bind({
                                 keydown: proxy(that._keydown, that),
                                 focus: function() {
-                                    that._clearBlurTimeout();
+                                    clearTimeout(that._bluring);
                                     that.input.parent().addClass("k-state-focused");
                                 },
                                 blur: proxy(that._blur, that)
@@ -571,6 +571,7 @@
 
         _clearBlurTimeout: function() {
             var that = this;
+
             setTimeout(function() {
                 clearTimeout(that._bluring);
                 that.element.focus();
