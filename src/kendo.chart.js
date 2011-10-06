@@ -1077,10 +1077,10 @@
          *              The sector value.
          *         </dd>
          *         <dt>
-         *              name
+         *              category
          *         </dt>
          *         <dd>
-         *              The sector name that is shown in the legend.
+         *              The sector category that is shown in the legend.
          *         </dd>
          *         <dt>
          *              color
@@ -1101,10 +1101,10 @@
          *      type: "pie",
          *      data:[{
          *          value: 40,
-         *          name: "Apples"
+         *          category: "Apples"
          *      }, {
          *          value: 60,
-         *          name: "Oranges",
+         *          category: "Oranges",
          *          color: "#ff6103"
          *          }
          *      ],
@@ -1175,10 +1175,10 @@
          *              type: "pie",
          *              name: "Series 1",
          *              data: [
-         *                  { value: 200, name: 2000 },
-         *                  { value: 450, name: 2001 },
-         *                  { value: 300, name: 2002 },
-         *                  { value: 125, name: 2003 }
+         *                  { value: 200, category: 2000 },
+         *                  { value: 450, category: 2001 },
+         *                  { value: 300, category: 2002 },
+         *                  { value: 125, category: 2003 }
          *              ],
          *              labels: {
          *                  // label template
@@ -4366,7 +4366,7 @@
                     currentData = chart.pointData(currentSeries, i);
                     value = currentData.value;
                     angle = value * anglePerValue;
-                    currentName = currentData.name;
+                    currentName = currentData.category;
                     explode = data.length != 1 && !!currentData.explode;
                     currentSeries.color = currentData.color ?
                         currentData.color : colors[i % colorsCount];
@@ -4419,7 +4419,7 @@
 
             return {
                 value: chart.pointValue(data),
-                name: chart.pointGetter(series, index, "name"),
+                category: chart.pointGetter(series, index, "category"),
                 color: chart.pointGetter(series, index, "color"),
                 explode: chart.pointGetter(series, index, "explode")
             };
@@ -4588,7 +4588,8 @@
                 segment = segments[0],
                 sector = segment.sector,
                 labelsCount = labels.length,
-                labelDistance = segment.options.labels.distance,
+                labelOptions = segment.options.labels,
+                labelDistance = labelOptions.distance,
                 boxY = sector.c.y - (sector.r + labelDistance) - labels[0].box.height(),
                 label,
                 boxX,
@@ -4607,13 +4608,13 @@
                     label.orientation == RIGHT);
 
                 if (label.orientation == RIGHT) {
-                    if (segment.options.labels.align !== CIRCLE) {
+                    if (labelOptions.align !== CIRCLE) {
                         boxX = sector.r + sector.c.x + labelDistance;
                     }
                     label.reflow(new Box2D(boxX + box.width(), boxY,
                         boxX, boxY));
                 } else {
-                    if (segment.options.labels.align !== CIRCLE) {
+                    if (labelOptions.align !== CIRCLE) {
                         boxX = sector.c.x - sector.r - labelDistance;
                     }
                     label.reflow(new Box2D(boxX - box.width(), boxY,
