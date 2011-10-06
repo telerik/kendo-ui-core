@@ -286,7 +286,7 @@
                 pageable: $(".paging").data("kendoPageable"),
                 selectable: true,
                 columns: [
-                    { template: '<img data-photoid="<#= id #>" alt="<#= kendo.htmlEncode(title) #>" src="http://farm<#=farm#>.static.flickr.com/<#=server#>/<#=id#>_<#=secret#>_s.jpg">', title: "PHOTO" },
+                    { template: '<img data-photoid="#= id #" alt="#= kendo.htmlEncode(title) #" src="http://farm#=farm#.static.flickr.com/#=server#/#=id#_#=secret#_s.jpg">', title: "PHOTO" },
                     { field: "ownername", title: "AUTHOR" },
                     { field: "title", title: "TITLE" },
                     { field: "tags", title: "TAGS"}

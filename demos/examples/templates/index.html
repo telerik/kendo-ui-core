@@ -43,12 +43,12 @@
             <div id="blog-preview"></div>
 
             <script type="text/x-kendo-template" id="template">
-                <h3 class="k-widget k-header"><#= title #></h3>
+                <h3 class="k-widget k-header">#= title #</h3>
                 <article>
-                    <img alt="<#= twitter #>" title="<#= twitter #>" width="73" height="73" class="t=widget"
-                        src="http://api.twitter.com/1/users/profile_image?screen_name=<#= twitter #>&size=bigger" />
-                    <h4>posted on <time><#= new Date().toLocaleDateString() #></time> by <strong><#= twitter #></strong></h4>
-                    <p><#= content #></p>
+                    <img alt="#= twitter #" title="#= twitter #" width="73" height="73" class="t=widget"
+                        src="http://api.twitter.com/1/users/profile_image?screen_name=#= twitter #&size=bigger" />
+                    <h4>posted on <time>#= new Date().toLocaleDateString() #</time> by <strong>#= twitter #</strong></h4>
+                    <p>#= content #</p>
                 </article>
             </script>
 

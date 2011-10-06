@@ -63,14 +63,14 @@
 
             <script id="template" type="text/x-kendo-template">
                 <li class="title">
-                    <# if (BoxArt.LargeUrl) { #>
-                        <img src="<#= BoxArt.LargeUrl #>" />
-                    <# } #>
+                    # if (BoxArt.LargeUrl) { #
+                        <img src="#= BoxArt.LargeUrl #" />
+                    # } #
                     <dl>
                         <dt>Name:</dt>
-                        <dd><#= Name #></dd>
+                        <dd>#= Name #</dd>
                         <dt>Average Rating:</dt>
-                        <dd><#= AverageRating #></dd>
+                        <dd>#= AverageRating #</dd>
                     </dl>
                 </li>
             </script>
