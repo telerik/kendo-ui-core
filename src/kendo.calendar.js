@@ -139,9 +139,6 @@
          * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to parse value set with value() method.
          * @option {String} [startView] <month> Specifies the start view.
          * @option {String} [depth] Specifies the navigation depth.
-         * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
-         * @option {Animation} [animation.horizontal] The animation that will be used when navigate horizontally.
-         * @option {Animation} [animation.vertical] The animation that will be used when navigate vertically.
          */
         init: function(element, options) {
             var that = this;
