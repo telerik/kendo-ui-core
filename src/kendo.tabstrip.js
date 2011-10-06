@@ -410,14 +410,16 @@
 
         /**
          * Appends a TabStrip item to the end of the tab list.
-         * @param {Selector} tab Target tab, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Selector} tab Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
          * @example
          * tabStrip.append(
          *     [{
-         *         text: "Item 1"
+         *         text: "Item 1",
+         *         content: "text"
          *     },
          *     {
-         *         text: "Item 2"
+         *         text: "Item 2",
+         *         contentUrl: "partialContent.html"
          *     }]
          * );
          */
@@ -436,15 +438,17 @@
 
         /**
          * Inserts a TabStrip item before the specified referenceItem
-         * @param {Selector} item Target tab, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Selector} item Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
          * @param {Item} referenceTab A reference tab to insert the new item before
          * @example
          * tabStrip.insertBefore(
          *     [{
-         *         text: "Item 1"
+         *         text: "Item 1",
+         *         content: "text"
          *     },
          *     {
-         *         text: "Item 2"
+         *         text: "Item 2",
+         *         contentUrl: "partialContent.html"
          *     }],
          *     referenceItem
          * );
@@ -465,15 +469,17 @@
 
         /**
          * Inserts a TabStrip tab after the specified referenceTab
-         * @param {Selector} item Target tab, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Selector} item Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
          * @param {Item} referenceTab A reference tab to insert the new item after
          * @example
          * tabStrip.insertAfter(
          *     [{
-         *         text: "Item 1"
+         *         text: "Item 1",
+         *         content: "text"
          *     },
          *     {
-         *         text: "Item 2"
+         *         text: "Item 2",
+         *         contentUrl: "partialContent.html"
          *     }],
          *     referenceItem
          * );
