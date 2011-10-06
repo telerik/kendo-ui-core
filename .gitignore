@@ -20,3 +20,5 @@ functional-tests/**/Results/
 functional-tests/Results/
 functional-tests/**/Backup/
 functional-tests/**/TestLists/
+app.js
+node_modules

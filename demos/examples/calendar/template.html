@@ -51,13 +51,13 @@
                         data: birthdays,
                         month: {
                             //inline template
-                            content: '<# if ($.inArray(+data.date, [' + birthdays + ']) >= 0) { #>' +
-                                     '<div class="birthday"><#=data.value#></div>' +
-                                     '<# } else { #> ' +
-                                     '<#=data.value#> ' +
-                                     '<# } #>'
+                            content: '# if ($.inArray(+data.date, [' + birthdays + '])= 0) { #' +
+                                     '<div class="birthday">#=data.value#</div>' +
+                                     '# } else { # ' +
+                                     '#=data.value# ' +
+                                     '# } #'
                         },
-                        footer: "TODAY - <#=kendo.toString(data, 'd') #>"
+                        footer: "TODAY - #=kendo.toString(data, 'd') #"
                     });
                 });
             </script>

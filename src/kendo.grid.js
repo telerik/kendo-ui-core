@@ -351,7 +351,7 @@
          *          {
          *              field: "BirthDate",
          *              title: "Birth Date",
-         *              template: '<#= kendo.toString(BirthDate,"dd MMMM yyyy") #>'
+         *              template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
          *         }
          *      ]
          *   });
@@ -954,7 +954,7 @@
                         // render the id as data-id attribute
                         type = typeof id;
 
-                        rowTemplate += ' data-id="<#=';
+                        rowTemplate += ' data-id="#=';
 
                         if (type === STRING) {
                             if (!settings.useWithBlock) {
@@ -967,7 +967,7 @@
                             templateFunctionCount++;
                         }
 
-                        rowTemplate += '#>"';
+                        rowTemplate += '#"';
                     }
                 }
 
@@ -986,19 +986,19 @@
 
                     if (type === FUNCTION) {
                         templateFunctionStorage["tmpl" + templateFunctionCount] = template;
-                        rowTemplate += "<#=this.tmpl" + templateFunctionCount + "(" + paramName + ")#>";
+                        rowTemplate += "#=this.tmpl" + templateFunctionCount + "(" + paramName + ")#";
                         templateFunctionCount ++;
                     } else if (type === STRING) {
                         rowTemplate += template;
                     } else {
-                        rowTemplate += column.encoded ? "${" : "<#=";
+                        rowTemplate += column.encoded ? "${" : "#=";
 
                         if (!settings.useWithBlock) {
                             rowTemplate += paramName + ".";
                         }
 
                         rowTemplate += column.field;
-                        rowTemplate += column.encoded ? "}" : "#>";
+                        rowTemplate += column.encoded ? "}" : "#";
                     }
 
                     rowTemplate += "</td>";

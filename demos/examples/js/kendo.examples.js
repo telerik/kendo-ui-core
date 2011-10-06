@@ -479,9 +479,9 @@ function initializeNavigation (normalizedUrl) {
                             { text: "Blue Opal", control: "Menu", value: "blueopal" },
                             { text: "Black", control: "Menu", value: "black" }
                         ],
-            template: '<span class="thumbLink" href="#">\
-                        <span class="thumb <#= data.text.toLowerCase() #>Thumb" style="background-image: url(<#= initialRelativePath #>styles/<#= data.control #>/thumbSprite.png)">\
-                        <span class="gloss"></span></span><span class="skinTitle"><#= data.text #></span></span>'
+            template: '<span class="thumbLink">\
+                        <span class="thumb #= data.text.toLowerCase() #Thumb" style="background-image: url(#= initialRelativePath #styles/#= data.control #/thumbSprite.png)">\
+                        <span class="gloss"></span></span><span class="skinTitle">#= data.text #</span></span>'
         });
 
         if (kendoSkin) {
