@@ -101,8 +101,8 @@
         template = kendo.template,
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
-        cellTemplate = template('<td<#=data.cssClass#>><a class="k-link" href="#" data-value="<#=data.dateString#>"><#=data.value#></a></td>'),
-        cellEmptyTemplate = template("<td> </td>"),
+        cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#">#=data.value#</a></td>');
+        cellEmptyTemplate = template("<td> </td>");
         LEFT = "left",
         SLIDE = "slide",
         MONTH = "month",
@@ -192,12 +192,12 @@
             value: null,
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
-            footer : '<#= kendo.toString(data,"D") #>',
+            footer : '#= kendo.toString(data,"D") #',
             format: kendo.culture().calendar.patterns.d,
             startView: MONTH,
             depth: MONTH,
             month: {
-                content: "<#=data.value#>",
+                content: "#=data.value#",
                 empty: " "
             },
             animation: {
@@ -644,7 +644,7 @@
                 month = that.options.month;
 
             that.month = {
-                content: template('<td<#=data.cssClass#>><a class="k-link" href="#" data-value="<#=data.dateString#>" title="<#=data.title#>">' + month.content + '</a></td>'),
+                content: template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#" title="#=data.title#">' + month.content + '</a></td>'),
                 empty: template("<td>" + month.empty + "</td>")
             };
         }

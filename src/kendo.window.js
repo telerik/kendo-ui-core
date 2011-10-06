@@ -704,23 +704,23 @@
         wrapper: template("<div class='k-widget k-window'></div>"),
         titlebar: template(
             "<div class='k-window-titlebar k-header'>&nbsp;" +
-                "<span class='k-window-title'><#= title #></span>" +
+                "<span class='k-window-title'>#= title #</span>" +
                 "<div class='k-window-actions k-header'>" +
-                "<# for (var i = 0; i < actions.length; i++) { #>" +
-                    "<a href='#' class='k-window-action k-link'>" +
-                        "<span class='k-icon k-<#= actions[i].toLowerCase() #>'><#= actions[i] #></span>" +
+                "# for (var i = 0; i < actions.length; i++) { #" +
+                    "<a href='\\#' class='k-window-action k-link'>" +
+                        "<span class='k-icon k-#= actions[i].toLowerCase() #'>#= actions[i] #</span>" +
                     "</a>" +
-                "<# } #>" +
+                "# } #" +
                 "</div>" +
             "</div>"
         ),
         iframe: template(
-            "<iframe src='<#= contentUrl #>' title='<#= title #>' frameborder='0'" +
+            "<iframe src='#= contentUrl #' title='#= title #' frameborder='0'" +
                 " style='border:0;width:100%;height:100%;'>" +
                     "This page requires frames in order to show content" +
             "</iframe>"
         ),
-        resizeHandle: template("<div class='k-resize-handle k-resize-<#= data #>'></div>")
+        resizeHandle: template("<div class='k-resize-handle k-resize-#= data #'></div>")
     };
 
     function createWindow(element, options) {
@@ -799,7 +799,7 @@
 
                         /// TODO: use Math.min / Math.max to sort these out
                         wrapper.css({
-                            left: e.pageX > (windowRight - wnd.options.minWidth) ? windowRight - wnd.options.minWidth
+                            left: e.pageX (windowRight - wnd.options.minWidth) ? windowRight - wnd.options.minWidth
                                 : e.pageX < (windowRight - wnd.options.maxWidth) ? windowRight - wnd.options.maxWidth
                                 : e.pageX,
                             width: (width < wnd.options.minWidth ? wnd.options.minWidth
