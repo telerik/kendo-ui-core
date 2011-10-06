@@ -3,7 +3,7 @@ var fs = require("fs");
 var path = require("path");
 var sys = require("sys");
 
-var html = fs.readFileSync("demos/aeroviewr/index.html", "utf8");
+var html = fs.readFileSync("demos/AeroViewr/index.html", "utf8");
 
 var VERSION = "1.0.1";
 
@@ -36,7 +36,7 @@ function replaceBlock(block, replace) {
     return sections[0] + replace + sections[2];
 }
 
-kendoBuild.copyDirSyncRecursive("demos/aeroviewr", "live");
+kendoBuild.copyDirSyncRecursive("demos/AeroViewr", "live");
 fs.unlinkSync("live/js/aeroviewr.js");
 fs.unlinkSync("live/js/visitor.js");
 fs.unlinkSync("live/js/upload.js");
@@ -46,7 +46,7 @@ fs.unlinkSync("live/js/flickr.js");
 fs.unlinkSync("live/js/slideshow.js");
 
 processFileGroup("kendo","", /src="..\/..\/([^"]*)/);
-processFileGroup("aeroviewr", "demos/aeroviewr/", /src="([^"]*)/);
+processFileGroup("aeroviewr", "demos/AeroViewr/", /src="([^"]*)/);
 
 html = replaceBlock("jquery",  '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>');
 html = replaceBlock("kendo",  '<script src="js/kendo.all.min.js?v=' + VERSION + '"></script>');
