@@ -15,26 +15,26 @@
 .k-tooltip,
 .k-grid-pager,
 .k-tabstrip-items .k-item,
-.k-link.k-state-hover
-{
-    background-repeat: repeat-x;
-    background-position: 0 center;
-}
-
-.k-tabstrip,
+.k-link.k-state-hover,
 .k-autocomplete,
 .k-dropdown-wrap,
 .k-picker-wrap,
 .k-autocomplete.k-state-hover,
 .k-dropdown-wrap.k-state-hover,
 .k-picker-wrap.k-state-hover,
+{
+    background-repeat: repeat-x;
+    background-position: 0 center;
+}
+
+.k-tabstrip,
 .k-menu-vertical,
 .k-editor,
 .k-tooltip,
 .k-state-hover,
 .k-state-selected
 {
-    background-position: 0 50%;
+    background-position: 0 -258px;
 }
 
 /* widget */
