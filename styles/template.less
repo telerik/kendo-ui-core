@@ -161,10 +161,13 @@ td.k-group-cell,
 
 .k-widget,
 .k-widget .k-dropdown-wrap,
+.k-widget .k-picker-wrap,
 .k-autocomplete.k-header,
 .k-autocomplete.k-state-focused,
 .k-dropdown-wrap.k-state-focused,
-.k-dropdown-wrap.k-state-focused:hover
+.k-dropdown-wrap.k-state-focused:hover,
+.k-picker-wrap.k-state-focused,
+.k-picker-wrap.k-state-focused:hover
 {
     border-color: @widget-border-color;
     background-color: @select-background-color;
@@ -173,7 +176,8 @@ td.k-group-cell,
 .k-autocomplete .k-input,
 .k-dropdown-wrap .k-input,
 .k-autocomplete.k-state-focused .k-input,
-.k-dropdown-wrap.k-state-focused .k-input
+.k-dropdown-wrap.k-state-focused .k-input,
+.k-picker-wrap.k-state-focused .k-input
 {
     border-color: @widget-border-color;
 }
@@ -192,6 +196,7 @@ td.k-group-cell,
 }
 
 .k-combobox .k-input,
+.k-picker-wrap .k-input,
 .k-autocomplete .k-input
 {
     color: @input-text-color;
@@ -214,6 +219,7 @@ td.k-group-cell,
 .k-grid-header,
 .k-toolbar,
 .k-dropdown-wrap,
+.k-picker-wrap,
 .k-grouping-header,
 .k-tooltip,
 .k-grid-pager,
@@ -441,6 +447,9 @@ td.k-group-cell,
 .k-dropdown-wrap.k-state-focused,
 .k-dropdown-wrap.k-state-hover,
 .k-dropdown-wrap.k-state-active,
+.k-picker-wrap.k-state-focused,
+.k-picker-wrap.k-state-hover,
+.k-picker-wrap.k-state-active,
 .k-imagebrowser .k-image
 {
     .box-shadow(2px 2px 2px 0 @shadow-color);
@@ -453,7 +462,8 @@ td.k-group-cell,
 }
 
 .k-autocomplete .k-input,
-.k-combobox .k-input
+.k-combobox .k-input,
+.k-picker-wrap .k-input
 {
     .box-shadow(inset 0 0 1px 1px @shadow-inset-color);
 }

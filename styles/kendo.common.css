@@ -47,6 +47,7 @@
     font-size: 100%;
     border-style: solid;
     border-width: 1px;
+    -webkit-appearance: none;
 }
 
 /* button */
@@ -171,7 +172,7 @@ html body .k-button-bare
 .k-editor-button .k-tool-icon
 {
     display: inline-block;
-    width: 15px;
+    width: 16px;
     height: 16px;
     overflow: hidden;
     background-color: transparent;
@@ -1458,6 +1459,7 @@ html body .k-grid tbody .k-button-icon
 
 /* ComboBox & DropDownList */
 
+div.k-datepicker,
 div.k-combobox,
 div.k-dropdown
 {
@@ -1466,6 +1468,7 @@ div.k-dropdown
 
 .k-autocomplete,
 .k-combobox,
+.k-datepicker,
 .k-dropdown,
 .k-selectbox
 {
@@ -1490,7 +1493,13 @@ div.k-dropdown
     border-radius: 4px;
 }
 
-.k-list-container
+.k-calendar-container .k-header
+{
+    background: none;
+}
+
+.k-list-container,
+.k-calendar-container
 {
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -1501,9 +1510,11 @@ div.k-dropdown
     border-radius: 4px;
 }
 
+.k-calendar-container.k-state-border-up,
 .k-list-container.k-state-border-up,
 .k-autocomplete.k-state-border-up,
-.k-dropdown-wrap.k-state-border-up
+.k-dropdown-wrap.k-state-border-up,
+.k-picker-wrap.k-state-border-up
 {
     border-top: 0;
     padding-top: 3px;
@@ -1512,9 +1523,11 @@ div.k-dropdown
     border-radius: 0 0 4px 4px;
 }
 
+.k-calendar-container.k-state-border-down,
 .k-list-container.k-state-border-down,
 .k-autocomplete.k-state-border-down,
-.k-dropdown-wrap.k-state-border-down
+.k-dropdown-wrap.k-state-border-down,
+.k-picker-wrap.k-state-border-down
 {
     border-bottom: 0;
     padding-bottom: 3px;
@@ -1523,6 +1536,7 @@ div.k-dropdown
     border-radius: 4px 4px 0 0;
 }
 
+.k-animation-container .k-calendar-container,
 .k-list-container.k-state-border-right
 {
     -webkit-border-top-right-radius: 4px;
@@ -1728,6 +1742,11 @@ div.k-datetimepicker .k-select+.k-select
     cursor: default;
 }
 
+.k-popup .k-calendar
+{
+    border: 0;
+}
+
 .k-list
 {
     height: 100%;
@@ -1761,9 +1780,13 @@ div.k-datetimepicker .k-select+.k-select
     overflow: hidden;
 }
 
+.k-calendar td,
 .k-calendar .k-link
 {
     text-decoration: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .k-calendar .k-action-link
@@ -1812,7 +1835,7 @@ div.k-datetimepicker .k-select+.k-select
 {
     display: inline-block;
     width: 75%;
-    padding: .4em 0;
+    margin: .4em 0;
 }
 
 .k-calendar .k-nav-fast .k-icon
