@@ -97,19 +97,20 @@
     */
     var kendo = window.kendo,
         ui = kendo.ui,
+        touch = kendo.support.touch,
         Component = ui.Component,
         template = kendo.template,
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
-        cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#">#=data.value#</a></td>');
-        cellEmptyTemplate = template("<td>&nbsp;</td>");
+        cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#">#=data.value#</a></td>'),
+        cellEmptyTemplate = template("<td>&nbsp;</td>"),
         LEFT = "left",
         SLIDE = "slide",
         MONTH = "month",
         YEAR = "year",
         DECADE = "decade",
         CENTURY = "century",
-        CLICK = "click",
+        CLICK = touch ? "touchend" : "click",
         CHANGE = "change",
         NAVIGATE = "navigate",
         VALUE = "value",
