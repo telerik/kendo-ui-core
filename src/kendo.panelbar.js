@@ -572,15 +572,17 @@
 
         /**
          * Appends a PanelBar item in the specified referenceItem
-         * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Selector} item Target item, specified as a JSON object. You can pass item text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
          * @param {Item} referenceItem A reference item to append the new item in
          * @example
          * panelBar.append(
          *     [{
-         *         text: "Item 1"
+         *         text: "Item 1",
+         *         content: "text"
          *     },
          *     {
-         *         text: "Item 2"
+         *         text: "Item 2",
+         *         contentUrl: "partialContent.html"
          *     }],
          *     referenceItem
          * );
@@ -607,15 +609,17 @@
 
         /**
          * Inserts a PanelBar item before the specified referenceItem
-         * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Selector} item Target item, specified as a JSON object. You can pass item text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
          * @param {Item} referenceItem A reference item to insert the new item before
          * @example
          * panelBar.insertBefore(
          *     [{
-         *         text: "Item 1"
+         *         text: "Item 1",
+         *         content: "text"
          *     },
          *     {
-         *         text: "Item 2"
+         *         text: "Item 2",
+         *         contentUrl: "partialContent.html"
          *     }],
          *     referenceItem
          * );
@@ -641,15 +645,17 @@
 
         /**
          * Inserts a PanelBar item after the specified referenceItem
-         * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
+         * @param {Selector} item Target item, specified as a JSON object. You can pass item text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
          * @param {Item} referenceItem A reference item to insert the new item after
          * @example
          * panelBar.insertAfter(
          *     [{
-         *         text: "Item 1"
+         *         text: "Item 1",
+         *         content: "text"
          *     },
          *     {
-         *         text: "Item 2"
+         *         text: "Item 2",
+         *         contentUrl: "partialContent.html"
          *     }],
          *     referenceItem
          * );
