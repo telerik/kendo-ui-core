@@ -30,21 +30,15 @@
             <script>
                 $(document).ready(function() {
                     function onOpen() {
-                        if ("kendoConsole" in window) {
-                            kendoConsole.log("event: open");
-                        }
+                        kendoConsole.log("Open");
                     }
 
                     function onClose() {
-                        if ("kendoConsole" in window) {
-                            kendoConsole.log("event: close");
-                        }
+                        kendoConsole.log("Close");
                     }
 
                     function onChange() {
-                        if ("kendoConsole" in window) {
-                            kendoConsole.log("event: change");
-                        }
+                        kendoConsole.log("Change :: " + kendo.toString(this.value(), 'd'));
                     }
 
                     $("#datepicker").kendoDatePicker({
