@@ -94,41 +94,26 @@
                             type: "pie",
                             field: "percentage",
                             nameField: "source",
-                            startAngle:
-                                $("#startAngle").data("kendoSlider").value(),
-                            padding:
-                                $("#padding").data("kendoSlider").value()
+                            startAngle: 160
                         }],
                         tooltip: {
                             visible: true,
-                            template: "#= category # - #= value # %"
+                            template: "${ category } - ${ value }%"
                         }
                     });
                 }
 
                 $(document).ready(function() {
-                    setupConfigurator();
                     createChart();
+                    setupConfigurator();
 
                     $(document).bind("kendo:skinChange", function(e) {
                         createChart();
+                        resetConfigurator();
                     });
                 });
 
                 function setupConfigurator() {
-                    $("#padding").kendoSlider({
-                        showButtons: false,
-                        min: 30,
-                        max: 100,
-                        val: 60,
-                        tickPlacement: "none",
-                        slide: function(e) {
-                            $("#padding").val(e.value);
-                            setTimeout(refresh);
-                        },
-                        change: refresh
-                    });
-
                     $("#startAngle").kendoSlider({
                         showButtons: false,
                         max: 360,
@@ -140,7 +125,28 @@
                         change: refresh
                     });
 
+                    $("#padding").kendoSlider({
+                        showButtons: false,
+                        min: 20,
+                        max: 100,
+                        val: 30,
+                        tickPlacement: "none",
+                        slide: function(e) {
+                            $("#padding").val(e.value);
+                            setTimeout(refresh);
+                        },
+                        change: refresh
+                    });
+
+                    resetConfigurator();
+
                     $(".configuration").live("change", refresh);
+                }
+
+                function resetConfigurator() {
+                    $("#labels").prop("checked", false);
+                    $("#startAngle").data("kendoSlider").value(160);
+                    $("#padding").data("kendoSlider").value(60);
                 }
 
                 function refresh() {
