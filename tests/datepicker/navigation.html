@@ -320,7 +320,7 @@
                 dv.navigate(event);
 
                 equal(+dv._viewedValue, +focusedDate);
-                equal(dv.calendar._table.find(".k-state-focused").text(), "2010-2019");
+                equal(dv.calendar._table.find(".k-state-focused").text(), "2010 - 2019");
             });
 
             test("navigate should focus previous decade in century view", function() {
@@ -336,7 +336,7 @@
                 dv.navigate(event);
 
                 equal(+dv._viewedValue, +focusedDate);
-                equal(dv.calendar._table.find(".k-state-focused").text(), "1990-1999");
+                equal(dv.calendar._table.find(".k-state-focused").text(), "1990 - 1999");
             });
 
             test("navigate should focus decade on previous row in century view", function() {
@@ -352,7 +352,7 @@
                 dv.navigate(event);
 
                 equal(+dv._viewedValue, +focusedDate);
-                equal(dv.calendar._table.find(".k-state-focused").text(), "1960-1969");
+                equal(dv.calendar._table.find(".k-state-focused").text(), "1960 - 1969");
             });
 
             test("navigate should focus decade on next row in century view", function() {
@@ -368,7 +368,7 @@
                 dv.navigate(event);
 
                 equal(+dv._viewedValue, +focusedDate);
-                equal(dv.calendar._table.find(".k-state-focused").text(), "2040-2049");
+                equal(dv.calendar._table.find(".k-state-focused").text(), "2040 - 2049");
             });
 
             //Navigate through views

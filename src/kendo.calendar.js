@@ -896,7 +896,7 @@
                     if (month > 11) {
                         month -= 11;
                     } else if (month < 0) {
-                        month = 11 - month;
+                        month = 11 + month;
                     }
 
                     if (date.getMonth() != month) {
