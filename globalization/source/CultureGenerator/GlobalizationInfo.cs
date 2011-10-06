@@ -80,6 +80,7 @@ namespace CultureGenerator
             globalization["PM"] = string.IsNullOrEmpty(pm) ? new string[] { am } : new string[] { pm, pm.ToLower(cultureInfo), pm.ToUpper(cultureInfo) };
             globalization["DateSeparator"] = dateTimeFormats.DateSeparator;
             globalization["TimeSeparator"] = dateTimeFormats.TimeSeparator;
+            globalization["FirstDayOfWeek"] = (int)dateTimeFormats.FirstDayOfWeek;
 
             return globalization;
         }
