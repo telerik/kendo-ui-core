@@ -73,11 +73,12 @@
 
     var kendo = window.kendo,
     ui = kendo.ui,
+    touch = kendo.support.touch,
     Component = ui.Component,
     parse = kendo.parseDate,
     keys = kendo.keys,
     DIV = "<div />",
-    CLICK = (kendo.support.touch ? "touchend" : "click"),
+    CLICK = (touch ? "touchend" : "click"),
     OPEN = "open",
     CLOSE = "close",
     CHANGE = "change",
@@ -87,7 +88,7 @@
     SELECTED = "k-state-selected",
     HOVER = "k-state-hover",
     HOVEREVENTS = "mouseenter mouseleave",
-    MOUSEDOWN = (kendo.support.touch ? "touchstart" : "mousedown"),
+    MOUSEDOWN = (touch ? "touchstart" : "mousedown"),
     cal = kendo.calendar,
     isInRange = cal.isInRange,
     restrictValue = cal.restrictValue,
@@ -120,8 +121,7 @@
 
             if (element.data(DATEVIEW) !== that) {
 
-                element.show()
-                       .appendTo(popup.element)
+                element.appendTo(popup.element)
                        .data(DATEVIEW, that)
                        .bind(CLICK, proxy(that._click, that))
                        .unbind(MOUSEDOWN)
@@ -138,6 +138,8 @@
                         .bind(NAVIGATE, proxy(that._navigate, that))
                         .bind(CHANGE, options);
 
+                element.show();
+
                 that.value(that._value);
             }
         },
@@ -146,7 +148,7 @@
             var that = this;
 
             that._initCalendar();
-            that.popup.open();
+            setTimeout( function () { that.popup.open(); }, 0);
         },
 
         close: function() {
@@ -180,11 +182,7 @@
         toggle: function() {
             var that = this;
 
-            if (that.popup.visible()) {
-                that.close();
-            } else {
-                that.open();
-            }
+            that[that.popup.visible() ? "close" : "open"]();
         },
 
         navigate: function(e) {
@@ -350,6 +348,7 @@
                             .bind({
                                 keydown: proxy(that._keydown, that),
                                 focus: function() {
+                                    that._clearBlurTimeout();
                                     that.input.parent().addClass("k-state-focused");
                                 },
                                 blur: proxy(that._blur, that)
@@ -553,7 +552,7 @@
         },
 
         _toggleHover: function(e) {
-            if (!kendo.support.touch)
+            if (!touch)
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
 
