@@ -1100,7 +1100,7 @@ div.skinSelector .k-state-active
     border-radius: 5px;
 }
 
-.skinSelector .k-input
+#topnavWrap .skinSelector .k-input
 {
     color:#333;
 }
