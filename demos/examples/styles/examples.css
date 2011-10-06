@@ -647,6 +647,8 @@ a.bigButton
 .templatesIcon { background-position: -50px -230px; }
 .dragdropIcon { background-position: -50px -260px; }
 .integrationIcon { background-position: -50px -320px; }
+.calendarIcon { background-position: -50px -380px; }
+.datepickerIcon { background-position: -50px -410px; }
 
 /*example content*/
 
@@ -1100,6 +1102,15 @@ div.skinSelector .k-state-active
     border-radius: 5px;
 }
 
+.skinSelector .k-dropdown-wrap.k-state-focused,
+.skinSelector .k-dropdown-wrap.k-state-hover,
+.skinSelector .k-dropdown-wrap.k-state-active
+{
+    -moz-box-shadow: 2px 2px 2px 0 #aaa;
+    -webkit-box-shadow: 2px 2px 2px 0 #aaa;
+    box-shadow: 2px 2px 2px 0 #aaa;
+}
+
 #topnavWrap .skinSelector .k-input
 {
     color:#333;
@@ -1541,7 +1552,8 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 .itemsOutline
 {
     display: block;
-    padding-bottom: 60px;
+    margin:1em 0 0;
+    padding:0 0 60px;
 }
 
 .itemsOutline,
@@ -1557,24 +1569,23 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     display: inline-block;
     width: 25%;
     font-size: 14px;
-    background-position: -160px -180px;
+    background-position: -162px -194px;
 }
 *+html .itemsOutline li { display: inline; zoom: 1; }
 
 .itemsOutline .widgets
 {
-    background-position: -160px -280px;
+    background-position: -162px -314px;
 }
 
 .itemsOutline .integration
 {
-    background-position: -160px -380px;
+    background-position: -162px -434px;
 }
 
 .itemsOutline strong
 {
     display: block;
-    margin-top: .7em;
     font-size: 18px;
     font-weight: normal;
     line-height: 1.8em;

@@ -94,7 +94,7 @@ var categories = {
         },
         {
             text: "Calendar",
-            spriteCssClass: "chartIcon",
+            spriteCssClass: "calendarIcon",
             items: [
                 {
                     text: "Basic usage",
@@ -172,7 +172,7 @@ var categories = {
         },
         {
             text: "DatePicker",
-            spriteCssClass: "chartIcon",
+            spriteCssClass: "datepickerIcon",
             items: [
                 {
                     text: "Basic usage",
