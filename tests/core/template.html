@@ -116,6 +116,11 @@
                 equal($.trim(t({ foo: 1 })), "<strong>1</strong>");
             });
 
+            test("template preserves whitespace as is", function() {
+                var t = template.compile("<p>\n\t<strong>${foo}</strong>\n</p>");
+                equal($.trim(t({ foo: 1 })), "<p>\n\t<strong>1</strong>\n</p>");
+            });
+
             test("template with raw expression defined in a script block", function() {
                 var t = template.compile($("#raw").text());
                 equal($.trim(t({ foo: 1 })), "<strong>1</strong>");

@@ -216,7 +216,9 @@
             functionBody += "o=";
 
             parts = template
-                .replace(/(\n|\r|\t)/g, "\\$1")
+                .replace(/\n/g, '\\n')
+                .replace(/\r/g, '\\r')
+                .replace(/\t/g, '\\t')
                 .replace(encodeRegExp, "#=e($1)#")
                 .replace(/\\#/g, "__SHARP__")
                 .split("#");
