@@ -61,6 +61,11 @@
                 equal(t({ foo: "bar" }), "bar");
             });
 
+            test("template ignores escaped sharp symbols", function() {
+              var t = template.compile('<a href="\\#">#= "foo"#</a>');
+              equal(t({}), '<a href="#">foo</a>');
+            });
+
             test("template evaluates value expressions in single quotes", function() {
                 var t = template.compile("'#= foo #'");
                 equal(t({ foo: "bar" }), "'bar'");
