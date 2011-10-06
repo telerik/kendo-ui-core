@@ -1023,6 +1023,10 @@
             hours += 12;
         }
 
+        if (day === null && year && month) {
+            day = 1;
+        }
+
         return new Date(year, month, day, hours, minutes, seconds, milliseconds);
     }
 

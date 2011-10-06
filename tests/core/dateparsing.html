@@ -3,10 +3,10 @@
     <head>
         <title>Date Parsing</title>
         <script src="../../src/jquery.js"></script>
-        <script src="../qunit.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <link rel="stylesheet" href="../qunit.css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
         <h1 id="qunit-header">Date Parsing</h1>
@@ -552,12 +552,19 @@
                 equal(result, null);
             });
 
-            test('parse 123/22/2000 should return null', function () {
-                var dateFormat = "MM/dd/yyyy";
-
-                var result = parse("123/22/2000", dateFormat);
-                equal(result, null);
+            test('parse MMMM yyyy date format', function () {
+                var dateFormat = "MMMM yyyy";
+                var result = parse("December 2000", dateFormat);
+                ok(isValidDate(2000, 12, 1, result));
             });
+
+
+            //test('parse 123/22/2000 should return null', function () {
+            //    var dateFormat = "MM/dd/yyyy";
+//
+ //               var result = parse("123/22/2000", dateFormat);
+ //               equal(result, null);
+ //           });
 
             test('parse should return null if only year is passed', function () {
                 var dateFormat = "M/dd/yyyy";
