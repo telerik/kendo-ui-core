@@ -274,7 +274,7 @@
                 collisions = that.collisions,
                 aligned = false,
                 zoomLevel = kendo.support.zoomLevel(),
-                zIndex = "auto";
+                zIndex = 10002;
 
             //calculate z-index
             anchor.parents().andSelf().each(function () {
