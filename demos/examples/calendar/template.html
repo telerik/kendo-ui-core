@@ -51,7 +51,7 @@
                         data: birthdays,
                         month: {
                             //inline template
-                            content: '# if ($.inArray(+data.date, [' + birthdays + '])= 0) { #' +
+                            content: '# if ($.inArray(+data.date, [' + birthdays + ']) != -1) { #' +
                                      '<div class="birthday">#=data.value#</div>' +
                                      '# } else { # ' +
                                      '#=data.value# ' +
