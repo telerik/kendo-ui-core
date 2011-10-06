@@ -291,7 +291,10 @@
                 calendar = that.calendar,
                 viewedValue = calendar._viewedValue,
                 cell = calendar._table.find(".k-state-focused"),
-                value = new Date(cell.children(":first").data("value"));
+                value = cell.children(":first").data("value").split("/");
+
+            //Safari cannot create corretly date from "1/1/2090"
+            value = new DATE(parseInt(value[2]), parseInt(value[0]) - 1, parseInt(value[1]));
 
             if (!cell[0] || cell.hasClass(SELECTED)) {
                 that.close();
