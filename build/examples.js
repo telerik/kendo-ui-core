@@ -149,6 +149,7 @@ function importComponentHelp(exampleHTML, component) {
         "animation": "kendo.Animation",
         "autocomplete": "kendo.ui.AutoComplete",
         "combobox": "kendo.ui.ComboBox",
+        "datepicker": "kendo.ui.DatePicker",
         "dropdownlist": "kendo.ui.DropDownList",
         "droptarget": "kendo.ui.DropTarget",
         "datasource": "kendo.data.DataSource",
