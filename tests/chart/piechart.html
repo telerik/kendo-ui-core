@@ -44,11 +44,11 @@
                        data: [
                            {
                                value: 1,
-                               name: "A",
+                               category: "A",
                                explode: true
                            }, {
                                value: 2,
-                               name: "B"
+                               category: "B"
                            }
                        ]
                     };
@@ -156,16 +156,16 @@
                         plotArea = new PlotAreaStub();
                         setupPieChart(plotArea, {
                             series: [{
-                                nameField: "name",
+                                categoryField: "category",
                                 colorField: "color",
                                 explodeField: "explode",
                                 data: [ 10, 50 ],
                                 dataItems: [{
-                                    name: "A",
+                                    category: "A",
                                     color: "red",
                                     explode: true
                                 }, {
-                                    name: "B",
+                                    category: "B",
                                     color: "green",
                                     explode: false
                                 }]
@@ -266,13 +266,13 @@
                                 data: [
                                     {
                                         value: 100,
-                                        name: "Value A"
+                                        category: "Value A"
                                     }, {
                                         value: 200,
-                                        name: "Value B"
+                                        category: "Value B"
                                     }, {
                                         value: 300,
-                                        name: "Value C"
+                                        category: "Value C"
                                     }
                                 ]
                             }],
