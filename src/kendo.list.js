@@ -153,20 +153,9 @@
         _popup: function() {
             var that = this,
                 list = that.list,
-
-                zIndex = "auto",
-                width,
                 options = that.options,
-                wrapper = that.wrapper;
-
-            //calculate z-index
-            wrapper.parents().andSelf().each(function () {
-                zIndex = $(this).css("zIndex");
-                if (!isNaN(zIndex)) {
-                    zIndex = Number(zIndex) + 1;
-                    return false;
-                }
-            });
+                wrapper = that.wrapper,
+                width;
 
             that.popup = new ui.Popup(list, {
                 anchor: wrapper,
@@ -178,8 +167,7 @@
 
             list.css({
                 fontFamily: wrapper.css("font-family"),
-                width: width,
-                zIndex: zIndex
+                width: width
             });
         },
 

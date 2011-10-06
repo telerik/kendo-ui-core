@@ -273,7 +273,19 @@
                 positions = options.position.toLowerCase().split(" "),
                 collisions = that.collisions,
                 aligned = false,
-                zoomLevel = kendo.support.zoomLevel();
+                zoomLevel = kendo.support.zoomLevel(),
+                zIndex = "auto";
+
+            //calculate z-index
+            anchor.parents().andSelf().each(function () {
+                zIndex = $(this).css("zIndex");
+                if (!isNaN(zIndex)) {
+                    zIndex = Number(zIndex) + 1;
+                    return false;
+                }
+            });
+
+            wrapper.css("zIndex", zIndex);
 
             if (options.appendTo === Popup.fn.options.appendTo) {
                 wrapper.css(that._align(origins, positions));
