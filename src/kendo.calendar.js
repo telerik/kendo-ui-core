@@ -110,7 +110,7 @@
         YEAR = "year",
         DECADE = "decade",
         CENTURY = "century",
-        CLICK = touch ? "touchend" : "click",
+        CLICK = "click",
         CHANGE = "change",
         NAVIGATE = "navigate",
         VALUE = "value",
@@ -633,27 +633,24 @@
                            + '</div>');
             }
 
-            links = element.find(".k-link").hover(mouseenter, mouseleave);
+            links = element.find(".k-link").hover(mouseenter, mouseleave).click(false);
 
             that._prevArrow = links.eq(0)
-                                  .bind(CLICK, function(e) {
-                                      e.preventDefault();
+                                  .bind(touch ? "touchend" : CLICK, function(e) {
                                       if (!that._prevArrow.hasClass(DISABLED)) {
                                           that.navigateToPast();
                                       }
                                   });
 
             that._title = links.eq(1)
-                              .bind(CLICK, function(e) {
-                                  e.preventDefault();
+                              .bind(touch ? "touchend" : CLICK, function(e) {
                                   if (!that._title.hasClass(DISABLED)) {
                                       that.navigateUp();
                                   }
                               });
 
             that._nextArrow = links.eq(2)
-                                  .bind(CLICK, function(e) {
-                                      e.preventDefault();
+                                  .bind(touch ? "touchend" : CLICK, function(e) {
                                       if (!that._nextArrow.hasClass(DISABLED)) {
                                           that.navigateToFuture();
                                       }
