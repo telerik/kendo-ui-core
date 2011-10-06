@@ -35,6 +35,10 @@
 
                     var datepicker = $("#datepicker").data("kendoDatePicker");
 
+                    var setValue = function () {
+                        datepicker.value($("#value").val());
+                    };
+
                     $("#enable").click(function() {
                         datepicker.enable();
                     });
@@ -51,9 +55,11 @@
                         datepicker.close();
                     });
 
-                    $("#set").click(function() {
-                        datepicker.value($("#value").val());
+                    $("#value").kendoDatePicker({
+                        change: setValue
                     });
+
+                    $("#set").click(setValue);
 
                     $("#get").click(function() {
                         alert(datepicker.value());
@@ -65,16 +71,17 @@
                 <span class="configTitle">API Functions</span>
                 <ul class="options">
                     <li>
+                       <button id="get" class="k-button">Get value</button>
+                   </li>
+                   <li>
+                       <input id="value" value="10/10/2000" style="float:none" />
+                       <button id="set" class="k-button">Set value</button>
+                   </li>
+                    <li>
                         <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
                     </li>
                     <li>
                         <button id="open" class="k-button">Open</button> or <button id="close" class="k-button">Close</button> the calendar
-                    </li>
-                    <li>
-                        <input id="value" value="10/10/2000" style="width:6em" /> <button id="set" class="k-button">Set value</button>
-                    </li>
-                    <li>
-                        <button id="get" class="k-button">Get value</button>
                     </li>
                 </ul>
            </div>

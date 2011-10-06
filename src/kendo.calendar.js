@@ -344,6 +344,10 @@
             depth = that.options.depth,
             currentView = that._currentView;
 
+            if (!value) {
+                return;
+            }
+
             if (currentView === depth) {
                 if (that._view.compare(value, that._viewedValue) === 0) {
                     that._changeView = false;
