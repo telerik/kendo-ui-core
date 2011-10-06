@@ -793,6 +793,7 @@ div.k-window-content
 *+html .k-menu-vertical .k-item
 {
     zoom: normal;
+    
 }
 
 .k-menu .k-image,
@@ -821,6 +822,11 @@ div.k-window-content
 {
     display: block;
     border-width: 0;
+}
+
+*+html .k-menu .k-group .k-link
+{
+    width: 100%;
 }
 
 .k-menu .k-arrow-down
