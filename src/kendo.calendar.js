@@ -509,7 +509,7 @@
                 viewWidth = oldTable.outerWidth();
 
                 if (effects && effects.indexOf(SLIDE) != -1) {
-                    oldTable.add(newTable).css({ width: viewWidth, "float": LEFT });
+                    oldTable.add(newTable).css({ width: viewWidth });
 
                     oldTable.wrap("<div/>");
 
@@ -527,7 +527,7 @@
                         effects: SLIDE + ":" + (future ? LEFT : "right"),
                         complete: function() {
                             oldTable.remove();
-                            newTable.css("float", "").unwrap();
+                            newTable.unwrap();
                         }
                     });
 
