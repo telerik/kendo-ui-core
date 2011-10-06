@@ -83,6 +83,7 @@
     CHANGE = "change",
     NAVIGATE = "navigate",
     DATEVIEW = "dateView",
+    DISABLED = "disabled",
     SELECTED = "k-state-selected",
     MOUSEDOWN = (kendo.support.touch ? "touchstart" : "mousedown"),
     cal = kendo.calendar,
@@ -148,6 +149,30 @@
 
         close: function() {
             this.popup.close();
+        },
+
+        min: function(value) {
+            var that = this,
+                options = that.options,
+                calendar = that.calendar;
+
+            options.min = value;
+
+            if (calendar.element.data(DATEVIEW) === that) {
+                calendar.min(value);
+            }
+        },
+
+        max: function(value) {
+            var that = this,
+                options = that.options,
+                calendar = that.calendar;
+
+            options.max = value;
+
+            if (calendar.element.data(DATEVIEW) === that) {
+                calendar.max(value);
+            }
         },
 
         toggle: function() {
@@ -295,9 +320,10 @@
          */
         init: function(element, options) {
             var that = this,
-                dateView;
+                dateView, enable;
 
             Component.fn.init.call(that, element, options);
+            element = that.element;
             options = that.options;
 
             options.format = options.format || kendo.culture().calendar.patterns["d"];
@@ -317,12 +343,13 @@
 
             that._icon();
 
-            that.element
+            element
                 .addClass("k-input")
                 .bind({
                     keydown: proxy(that._keydown, that),
                     blur: proxy(that._blur, that)
                 });
+
 
             /**
             * Fires when the selected date is changed
@@ -345,6 +372,7 @@
             that.bind(CHANGE, options);
 
             that._valid = true;
+            that.enable(!element.is('[disabled]'));
             that.value(options.value || that.element.val());
         },
 
@@ -355,6 +383,33 @@
             format: kendo.culture().calendar.patterns.d,
             startView: "month",
             depth: "month"
+        },
+
+        /**
+        * Enable/Disable datepicker widget.
+        * @param {Boolean} value The value, which defines whether to enable/disable datepicker.
+        * @example
+        * var datepicker = $("#datepicker").data("kendoDatePicker");
+        *
+        * // disables the datepicker
+        * datepicker.enable(false);
+        *
+        * // enables the datepicker
+        * datepicker.enable(true);
+        */
+        enable: function(value) {
+            var that = this,
+                icon = that._icon,
+                element = that.element;
+
+            if (value === false) {
+                element.attr(DISABLED, DISABLED);
+                icon.unbind(CLICK).unbind(MOUSEDOWN);
+            } else {
+                element.removeAttr(DISABLED);
+                icon.bind(CLICK, proxy(that._click, that))
+                    .bind(MOUSEDOWN, proxy(that._clearBlurTimeout, that));
+            }
         },
 
         /**
@@ -380,6 +435,68 @@
         },
 
         /**
+        * Gets/Sets the min value of the datepicker.
+        * @param {Date|String} value The min date to set.
+        * @returns {Date} The min value of the datepicker.
+        * @example
+        * var datepicker = $("#datepicker").data("kendoDatePicker");
+        *
+        * // get the min value of the datepicker.
+        * var min = datepicker.min();
+        *
+        * // set the min value of the datepicker.
+        * datepicker.min(new Date(1900, 0, 1));
+        */
+        min: function(value) {
+            var that = this,
+                options = that.options;
+
+            if (value === undefined) {
+                return options.min;
+            }
+
+            value = parse(value, options.format);
+
+            if (!value) {
+                return;
+            }
+
+            options.min = new DATE(value);
+            that.dateView.min(value);
+        },
+
+        /**
+        * Gets/Sets the max value of the datepicker.
+        * @param {Date|String} value The max date to set.
+        * @returns {Date} The max value of the datepicker.
+        * @example
+        * var datepicker = $("#datepicker").data("kendoDatePicker");
+        *
+        * // get the max value of the datepicker.
+        * var max = datepicker.max();
+        *
+        * // set the max value of the datepicker.
+        * datepicker.max(new Date(1900, 0, 1));
+        */
+        max: function(value) {
+            var that = this,
+                options = that.options;
+
+            if (value === undefined) {
+                return options.max;
+            }
+
+            value = parse(value, options.format);
+
+            if (!value) {
+                return;
+            }
+
+            options.max = new DATE(value);
+            that.dateView.max(value);
+        },
+
+        /**
         * Gets/Sets the value of the datepicker.
         * @param {Date|String} value The value to set.
         * @returns {Date} The value of the datepicker.
@@ -390,17 +507,18 @@
         * var value = datepicker.value();
         *
         * // set the value of the datepicker.
-        * combobox.value("10/10/2000"); //parse "10/10/2000" date and selects it in the calendar.
+        * datepicker.value("10/10/2000"); //parse "10/10/2000" date and selects it in the calendar.
         */
         value: function(value) {
             var that = this,
-                options = that.options;
+                options = that.options,
+                format = options.format;
 
             if (value === undefined) {
                 return that._value;
             }
 
-            value = parse(value, that.options.format);
+            value = parse(value, format);
 
             if (!isInRange(value, options.min, options.max)) {
                 value = null;
@@ -410,7 +528,7 @@
             that.dateView.value(value);
 
             if (that._valid) {
-                that.element.val(kendo.toString(value, that.options.format));
+                that.element.val(kendo.toString(value, format));
             }
 
             that._valid = true;
@@ -432,6 +550,10 @@
                 clearTimeout(that._bluring);
                 that.element.focus();
             });
+        },
+
+        _click: function() {
+            this.dateView.toggle();
         },
 
         _change: function(value) {
@@ -489,8 +611,7 @@
                 icon = $('<span class="k-select k-header"><span class="k-icon k-icon-calendar">select</span></span>').insertAfter(element);
             }
 
-            icon.bind(CLICK, proxy(that.dateView.toggle, that.dateView))
-                .bind(MOUSEDOWN, proxy(that._clearBlurTimeout, that));
+            that._icon = icon;
         },
 
         _wrapper: function() {

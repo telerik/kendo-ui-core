@@ -56,11 +56,10 @@
 
             test("value method call calendar.value() only if it is assigned to the dateView", function() {
                 var date = new Date(2000, 10, 10),
-                dv1 = new DateView({
-                    value: date,
-
-                    startView: "month"
-                });
+                    dv1 = new DateView({
+                        value: date,
+                        startView: "month"
+                    });
 
                 dv1.calendar.element.data("dateView", {});
                 dv1.calendar.value(null);
@@ -71,6 +70,52 @@
                 equal(+dv1._value, +date);
                 notEqual(+dv1.calendar.value(), +date);
 
+            });
+
+            test("min() should set the options.min", function() {
+                var date = new Date(2000, 10, 10),
+                    dv1 = new DateView();
+
+                dv1.min(date);
+
+                equal(+dv1.options.min, +date);
+            });
+
+            test("min() should call calendar.min()", function() {
+                var date = new Date(2000, 10, 10),
+                    dv1 = new DateView(),
+                    calendar = dv1.calendar;
+
+                stub(calendar, {min: calendar.min});
+
+                calendar.element.data("dateView", dv1);
+
+                dv1.min(date);
+
+                equal(calendar.calls("min"), 1);
+            });
+
+            test("max() should set the options.max", function() {
+                var date = new Date(2000, 10, 10),
+                    dv1 = new DateView();
+
+                dv1.max(date);
+
+                equal(+dv1.options.max, +date);
+            });
+
+            test("max() should call calendar.max()", function() {
+                var date = new Date(2000, 10, 10),
+                    dv1 = new DateView(),
+                    calendar = dv1.calendar;
+
+                stub(calendar, {max: calendar.max});
+
+                calendar.element.data("dateView", dv1);
+
+                dv1.max(date);
+
+                equal(calendar.calls("max"), 1);
             });
 
             //DatePicker
@@ -181,6 +226,92 @@
                 equal(datepicker.calls("value"), 0);
             });
 
+            test("min() should return min value", function() {
+                var value = new Date("10/22/2000"),
+                datepicker = input.kendoDatePicker({min: value}).data("kendoDatePicker");
+
+                var result = datepicker.min();
+
+                equal(+result, +value);
+            });
+
+            test("min() should set the min value of the datepicker", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
+                    value = new Date("10/22/2000");
+
+                datepicker.min(value);
+
+                equal(+datepicker.options.min, +value);
+            });
+
+            test("min() should call dateView.min()", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
+                    value = new Date("10/22/2000");
+
+                stub(datepicker.dateView, { min: datepicker.dateView.min });
+
+                datepicker.min(value);
+
+                equal(datepicker.dateView.calls("min"), 1);
+            });
+
+            test("max() should return max value", function() {
+                var value = new Date("10/22/2000"),
+                datepicker = input.kendoDatePicker({max: value}).data("kendoDatePicker");
+
+                var result = datepicker.max();
+
+                equal(+result, +value);
+            });
+
+            test("max() should set the max value of the datepicker", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
+                    value = new Date("10/22/2000");
+
+                datepicker.max(value);
+
+                equal(+datepicker.options.max, +value);
+            });
+
+            test("max() should call dateView.max()", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
+                    value = new Date("10/22/2000");
+
+                stub(datepicker.dateView, { max: datepicker.dateView.max });
+
+                datepicker.max(value);
+
+                equal(datepicker.dateView.calls("max"), 1);
+            });
+
+            test("enable(false) should disable input element", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.enable(false);
+
+                equal(datepicker.element.attr("disabled"), "disabled");
+            });
+
+            test("enable(false) should unbind icon click", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.enable(false);
+
+                stub(datepicker.dateView, {toggle: datepicker.dateView.toggle});
+
+                datepicker.wrapper.find(".k-select").click();
+
+                ok(!datepicker.dateView.popup.visible());
+            });
+
+            test("enable() should remove disable attribute", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.enable(false);
+                datepicker.enable(true);
+
+                equal(datepicker.element.attr("disabled"), undefined);
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

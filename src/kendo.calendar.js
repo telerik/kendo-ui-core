@@ -214,6 +214,78 @@
         },
 
         /**
+        * Gets/Sets the min value of the calendar.
+        * @param {Date|String} value The min date to set.
+        * @returns {Date} The min value of the calendar.
+        * @example
+        * var calendar = $("#calendar").data("kendoCalendar");
+        *
+        * // get the min value of the calendar.
+        * var min = calendar.min();
+        *
+        * // set the min value of the calendar.
+        * calendar.min(new Date(1900, 0, 1));
+        */
+        min: function(value) {
+            var that = this,
+                options = that.options;
+
+            if (value === undefined) {
+                return options.min;
+            }
+
+            value = kendo.parseDate(value, options.format);
+
+            if (!value) {
+                return;
+            }
+
+            options.min = new DATE(value);
+
+            if (+value > +that._value) {
+                that.value(null);
+            } else if (that._view.compare(value, that._viewedValue) > -1) {
+                that.navigate();
+            }
+        },
+
+        /**
+        * Gets/Sets the max value of the calendar.
+        * @param {Date|String} value The max date to set.
+        * @returns {Date} The max value of the calendar.
+        * @example
+        * var calendar = $("#calendar").data("kendoCalendar");
+        *
+        * // get the max value of the calendar.
+        * var max = calendar.max();
+        *
+        * // set the max value of the calendar.
+        * calendar.max(new Date(2100, 0, 1));
+        */
+        max: function(value) {
+            var that = this,
+                options = that.options;
+
+            if (value === undefined) {
+                return options.max;
+            }
+
+            value = kendo.parseDate(value, options.format);
+
+            if (!value) {
+                return;
+            }
+
+            options.max = new DATE(value);
+
+            if (+value < +that._value) {
+                that.value(null);
+            } else if (that._view.compare(value, that._viewedValue) < 1) {
+                that.navigate();
+            }
+        },
+
+        /**
         * Navigates to the past
         * @example
         * calendar.navigateToPast();
@@ -383,7 +455,7 @@
         * var value = calendar.value();
         *
         * // set the value of the calendar.
-        * calendar.value(new Date()); //looks for item which has value "1"
+        * calendar.value(new Date());
         */
         value: function(value) {
             var that = this,
