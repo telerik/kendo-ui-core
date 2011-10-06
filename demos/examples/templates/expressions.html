@@ -25,7 +25,7 @@
             <div class="code-sample">
                 <h4 class="code-title">Source:</h4>
                 <pre class="prettyprint">
-var inlineTemplate = kendo.template("Hello, &lt;#= firstName #&gt; &lt;#= lastName #&gt;");
+var inlineTemplate = kendo.template("Hello, #= firstName # #= lastName #");
 var inlineData = { firstName: "John", lastName: "Doe" };
 $("#inline").html(inlineTemplate(inlineData));</pre>
             </div>
@@ -39,7 +39,7 @@ $("#inline").html(inlineTemplate(inlineData));</pre>
                 <h4 class="code-title">Source:</h4>
                 <pre class="prettyprint">
 &lt;script id="scriptTemplate" <strong>type="text/x-kendo-template"</strong>&gt;
-    Hello, &lt;#= firstName #&gt; &lt;#= lastName #&gt;
+    Hello, #= firstName # #= lastName #
 &lt;/script&gt;
 
 &lt;script&gt;
@@ -72,9 +72,9 @@ $("#encoding").html(encodingTemplate(encodingData));</pre>
                 <pre class="prettyprint lang-html">
 &lt;script id="javascriptTemplate" type="text/x-kendo-template"&gt;
     &lt;ul&gt;
-    &lt;# for (var i = 0; i &lt; data.length; i++) { #&gt;
-        &lt;li&gt;&lt;#= data[i] #&gt;&lt;/li&gt;
-    &lt;# } #&gt;
+    # for (var i = 0; i &lt; data.length; i++) { #
+        &lt;li&gt;#= data[i] #&lt;/li&gt;
+    # } #
     &lt;ul&gt;
 &lt;script&gt;
 
@@ -90,19 +90,19 @@ $("#encoding").html(encodingTemplate(encodingData));</pre>
             </div>
 
             <script id="scriptTemplate" type="text/x-kendo-template">
-                Hello, <#= firstName #> <#= lastName #>!
+                Hello, #= firstName # #= lastName #!
             </script>
 
             <script id="javascriptTemplate" type="text/x-kendo-template">
                 <ul>
-                    <# for (var i = 0; i < data.length; i++) { #>
-                        <li><#= data[i] #></li>
-                    <# } #>
+                    # for (var i = 0; i < data.length; i++) { #
+                        <li>#= data[i] #</li>
+                    # } #
                 </ul>
             </script>
 
             <script>
-                var inlineTemplate = kendo.template("Hello, <#= firstName #> <#= lastName #>!");
+                var inlineTemplate = kendo.template("Hello, #= firstName # #= lastName #!");
                 var inlineData = { firstName: "John", lastName: "Doe" };
                 $("#inline").html(inlineTemplate(inlineData));
 
