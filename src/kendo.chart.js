@@ -1195,18 +1195,7 @@
          * _example
          * //sets format of the labels
          * format: "{0:C}"
-         * @option {Object} [series.type="pie".border] The border of the series.
-         * @option {Number} [series.type="pie".border.width] <1> The width of the border.
-         * @option {String} [series.type="pie".border.color] <the color of the curren series>
-         * The color of the border.
-         * @option {String} [series.type="pie".overlay] <"glass"> The effects overlay.
-         * @option {Object} [series.type="pie".connector] The labels connector options.
-         * @option {Number} [series.type="pie".connector.width] <1> The width of the connector line.
-         * @option {String} [series.type="pie".connector.color] <"#939393"> The color of the connector line.
-         * @option {Number} [series.type="pie".connector.padding] <4>
-         * The padding between the connector line and the label.
-         * @option {number} [series.type="pie".startAngle] <90> The start angle of the first pie segment.
-         * @option {String} [series.type="line".labels.align] <"circle">
+         * @option {String} [series.type="pie".labels.align] <"circle">
          * Defines the alignment of the pie labels.
          *    <dl>
          *         <dt>
@@ -1219,9 +1208,20 @@
          *              "column"
          *         </dt>
          *         <dd>
-         *              The labels are positioned in 2 columns around the pie chart.
+         *              The labels are positioned in columns to the left and right of the pie chart.
          *         </dd>
          *    </dl>
+         * @option {Object} [series.type="pie".border] The border of the series.
+         * @option {Number} [series.type="pie".border.width] <1> The width of the border.
+         * @option {String} [series.type="pie".border.color] <the color of the curren series>
+         * The color of the border.
+         * @option {String} [series.type="pie".overlay] <"glass"> The effects overlay.
+         * @option {Object} [series.type="pie".connector] The labels connector options.
+         * @option {Number} [series.type="pie".connector.width] <1> The width of the connector line.
+         * @option {String} [series.type="pie".connector.color] <"#939393"> The color of the connector line.
+         * @option {Number} [series.type="pie".connector.padding] <4>
+         * The padding between the connector line and the label.
+         * @option {number} [series.type="pie".startAngle] <90> The start angle of the first pie segment.
          * @option {Object} [chartArea] The chart area configuration options.
          * This is the entire visible area of the chart.
          * @option {String} [chartArea.background] <"white"> The background color of the chart area.
