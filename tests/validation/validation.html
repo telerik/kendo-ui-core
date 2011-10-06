@@ -233,7 +233,7 @@
             test("individualErrors template overrides the default template", function() {
                 var input = $('<input type="text" required validationMessage="invalid"/>'),
                 validator = setup(input, {
-                    individualErrorTemplate: "<div>${message}</div>"
+                    errorTemplate: "<div>${message}</div>"
                 });
                 validator.validate();
                 equal(input.next("div").text(), "invalid");
@@ -388,6 +388,20 @@
 
             test("validate returns true if input with type=tel value does match the pattern", function() {
                 var input = $('<input type="tel" value="666" pattern="\\d+" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=search value does not match the pattern", function() {
+                var input = $('<input type="search" value="test" pattern="\\d+" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=search value does match the pattern", function() {
+                var input = $('<input type="search" value="666" pattern="\\d+" />'),
                     validator = setup(input);
 
                 ok(validator.validate());
