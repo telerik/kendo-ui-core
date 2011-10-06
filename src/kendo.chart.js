@@ -4480,7 +4480,6 @@
                 distance = round(secondBox.y1 - firstBox.y2);
                 distances.push(distance);
             }
-
             distance = round(sector.c.y + lr - labels[count].box.y2 - labels[count].box.height() / 2);
             distances.push(distance);
 
@@ -4542,8 +4541,7 @@
                     boxY,
                     boxY + box.height(),
                     label.orientation == RIGHT);
-                    if ( i == 0 ) {
-                    }
+
                 if (label.orientation == RIGHT) {
                     if (segment.options.labels.align !== CIRCLE) {
                         boxX = sector.r + sector.c.x + labelDistance;
@@ -4567,6 +4565,7 @@
                 options = chart.options,
                 connector = options.connector,
                 segments = chart.segments,
+                connectorLine,
                 sector,
                 count = segments.length,
                 space = 4,
@@ -4592,51 +4591,56 @@
                         centerPoint = sector.c,
                         start = sector.point(angle),
                         middle = new Point2D(box.x1, box.center().y),
+                        sr,
                         end,
                         crossing;
 
                     start = sector.clone().expand(connector.padding).point(angle);
                     points.push(start);
                     if (label.orientation == RIGHT) {
-                        end = new Point2D(box.x1 - connector.padding, box.center().y),
-                        crossing = intersection(centerPoint, start, middle, end) ||
-                                   new Point2D(end.x - space, end.y);
-                        crossing.x = math.min(crossing.x, end.x - space);
+                        end = new Point2D(box.x1 - connector.padding, box.center().y);
+                        crossing = intersection(centerPoint, start, middle, end);
+                        middle = new Point2D(end.x - space, end.y);
+                        crossing = crossing || middle;
+                        crossing.x = math.min(crossing.x, middle.x);
 
                         if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
                             crossing.x < sector.c.x) {
+                            sr = sector.c.x + sector.r + space;
                             if (segment.options.labels.align !== COLUMN) {
-                                if (sector.c.x + sector.r + space < end.x - space) {
-                                    points.push(new Point2D(sector.c.x + sector.r + space, start.y));
+                                if (sr < middle.x) {
+                                    points.push(new Point2D(sr, start.y));
                                 } else {
                                     points.push(new Point2D(start.x + space * 2, start.y));
                                 }
                             } else {
-                                points.push(new Point2D(sector.c.x + sector.r + space, start.y));
+                                points.push(new Point2D(sr, start.y));
                             }
-                            points.push(new Point2D(end.x - space, end.y));
+                            points.push(new Point2D(middle.x, end.y));
                         } else {
                             crossing.y = end.y;
                             points.push(crossing);
                         }
                     } else {
-                        end = new Point2D(box.x2 + connector.padding, box.center().y),
-                        crossing = intersection(centerPoint, start, middle, end) ||
-                                   new Point2D(end.x + space, end.y);
-                        crossing.x = math.max(crossing.x, end.x + space);
+                        end = new Point2D(box.x2 + connector.padding, box.center().y);
+                        crossing = intersection(centerPoint, start, middle, end);
+                        middle = new Point2D(end.x + space, end.y);
+                        crossing = crossing || middle;
+                        crossing.x = math.max(crossing.x, middle.x);
 
                         if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
                             crossing.x > sector.c.x) {
+                            sr = sector.c.x - sector.r - space;
                             if (segment.options.labels.align !== COLUMN) {
-                                if (sector.c.x - sector.r - space > end.x + space) {
-                                    points.push(new Point2D(sector.c.x - sector.r - space, start.y));
+                                if (sr > middle.x) {
+                                    points.push(new Point2D(sr, start.y));
                                 } else {
                                     points.push(new Point2D(start.x - space * 2, start.y));
                                 }
                             } else {
-                                points.push(new Point2D(sector.c.x - sector.r - space, start.y));
+                                points.push(new Point2D(sr, start.y));
                             }
-                            points.push(new Point2D(end.x + space, end.y));
+                            points.push(new Point2D(middle.x, end.y));
                         } else {
                             crossing.y = end.y;
                             points.push(crossing);
@@ -4644,7 +4648,7 @@
                     }
 
                     points.push(end);
-                    var connectorLine = view.createPolyline(points, false, {
+                    connectorLine = view.createPolyline(points, false, {
                         id: uniqueId(),
                         stroke: connector.color,
                         strokeWidth: connector.width,
