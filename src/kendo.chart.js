@@ -1077,10 +1077,10 @@
          *              The sector value.
          *         </dd>
          *         <dt>
-         *              name
+         *              category
          *         </dt>
          *         <dd>
-         *              The sector name that is shown in the legend.
+         *              The sector category that is shown in the legend.
          *         </dd>
          *         <dt>
          *              color
@@ -1101,10 +1101,10 @@
          *      type: "pie",
          *      data:[{
          *          value: 40,
-         *          name: "Apples"
+         *          category: "Apples"
          *      }, {
          *          value: 60,
-         *          name: "Oranges",
+         *          category: "Oranges",
          *          color: "#ff6103"
          *          }
          *      ],
@@ -1175,10 +1175,10 @@
          *              type: "pie",
          *              name: "Series 1",
          *              data: [
-         *                  { value: 200, name: 2000 },
-         *                  { value: 450, name: 2001 },
-         *                  { value: 300, name: 2002 },
-         *                  { value: 125, name: 2003 }
+         *                  { value: 200, category: 2000 },
+         *                  { value: 450, category: 2001 },
+         *                  { value: 300, category: 2002 },
+         *                  { value: 125, category: 2003 }
          *              ],
          *              labels: {
          *                  // label template
