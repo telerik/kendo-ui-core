@@ -32,7 +32,7 @@
                     return true;
                 },
                 pattern: function(input) {
-                    if (input.filter("[type=text],[type=email]").filter("[pattern]").length && input.val() !== "") {
+                    if (input.filter("[type=text],[type=email],[type=url],[type=tel]").filter("[pattern]").length && input.val() !== "") {
                         return matcher(input.val(), input.attr("pattern"));
                     }
                     return true;
