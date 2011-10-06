@@ -23,8 +23,6 @@
         <div class="description">Customizing templates</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <h3>Customizing templates</h3>
-
             <div class="configuration">
                 <span class="infoHead">Information</span>
                 <p>
@@ -32,9 +30,7 @@
                 </p>
             </div>
 
-            <div>
-                <div id="calendar"/>
-            </div>
+            <div id="calendar" style="width: 300px;"></div>
 
             <script>
                 $(document).ready(function() {
@@ -48,29 +44,31 @@
 
                     $("#calendar").kendoCalendar({
                         value: "10/10/2011",
-                        data: birthdays,
                         month: {
-                            //inline template
+                            // template for dates in month view
                             content: '# if ($.inArray(+data.date, [' + birthdays + ']) != -1) { #' +
-                                     '<div class="birthday">#=data.value#</div>' +
-                                     '# } else { # ' +
-                                     '#=data.value# ' +
-                                     '# } #'
+                                         '<div class="birthday"></div>' +
+                                     '# } #' +
+                                     '#= data.value #'
                         },
-                        footer: "TODAY - #=kendo.toString(data, 'd') #"
+                        footer: "Today - #=kendo.toString(data, 'd') #"
                     });
                 });
             </script>
 
             <style scoped>
-                #example h3 {
-                    clear: both;
+                #calendar {
+                    margin-top: 2em;
                 }
 
                 .birthday {
-                    background-color: red;
+                    background: transparent url(../content/calendar/cake.png) no-repeat 0 50%;
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    vertical-align: middle;
+                    margin-right: 3px;
                 }
-
             </style>
         </div>
         <!-- tools -->
