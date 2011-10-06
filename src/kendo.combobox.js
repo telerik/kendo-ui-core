@@ -629,7 +629,9 @@
         _keydown: function(e) {
             var that = this;
 
-            if (!that._move(e)) {
+            if (kendo.keys.TAB === e.keyCode) {
+                that.text(that.input.val());
+            } else if (!that._move(e)) {
                 that._search();
             }
 

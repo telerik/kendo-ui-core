@@ -198,6 +198,20 @@
                 combobox.input.focus().press(keys.ENTER);
             });
 
+            test("press TAB should call text()", function() {
+                var combobox = input.kendoComboBox(data).data("kendoComboBox");
+
+
+                combobox.input.focus().val("item");
+
+                stub(combobox, {text: combobox.text});
+
+                combobox.input.press(keys.TAB);
+
+                equal(combobox.calls("text"), 1);
+                equal(combobox.args("text")[0], "item");
+            });
+
             asyncTest("press esc should close popup when no change in selection", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
