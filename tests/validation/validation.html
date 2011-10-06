@@ -104,24 +104,25 @@
                 ok(validator.validate());
             });
 
-            test("messages returns empty array if validate is not executed", function() {
+            test("errors returns empty array if validate is not executed", function() {
                 var input = $('<input type="text" required  validationMessage="message" />'),
                     validator = setup(input);
 
                 equal(validator.errors().length, 0);
             });
 
-            test("messages returns validationMessage attribute value for single invalid element", function() {
+            test("errors returns validationMessage attribute value for single invalid element", function() {
                 var input = $('<input type="text" required  validationMessage="message" />'),
                     validator = setup(input);
 
-                    validator.validate();
+                validator.validate();
                 var messages = validator.errors();
+
                 equal(messages.length, 1);
                 equal(messages[0], "message");
             });
 
-            test("messages returns title if no validationMessage attribute for single invalid element", function() {
+            test("errors returns title if no validationMessage attribute for single invalid element", function() {
                 var input = $('<input type="text" required  title="message" />'),
                     validator = setup(input);
 
@@ -131,7 +132,7 @@
                 equal(messages[0], "message");
             });
 
-            test("messages returns validationMessage if both validationMessage and title are set for single invalid element", function() {
+            test("errors returns validationMessage if both validationMessage and title are set for single invalid element", function() {
                 var input = $('<input type="text" required  title="message" validationMessage="validationMessage"/>'),
                     validator = setup(input);
 
@@ -141,7 +142,7 @@
                 equal(messages[0], "validationMessage");
             });
 
-            test("messages returns empty string if both validationMessage and title are not set for single invalid element", function() {
+            test("errors returns empty string if both validationMessage and title are not set for single invalid element", function() {
                 var input = $('<input type="text" required />'),
                     validator = setup(input);
 
@@ -151,7 +152,7 @@
                 equal(messages[0], "");
             });
 
-            test("messages returns formatted with input name message if set for single invalid element", function() {
+            test("errors returns formatted with input name message if set for single invalid element", function() {
                 var input = $('<input type="text" name="Foo" required validationMessage="{0} is invalid"/>'),
                     validator = setup(input);
 
@@ -162,8 +163,8 @@
                 equal(messages[0], "Foo is invalid");
             });
 
-            test("messages returns messages for every invalid element", function() {
-                container.append($('<input type="text" required="required" title="input1 message" /><input type="text" required="required" title="input2 message"/>'));
+            test("errors returns messages for every invalid element", function() {
+                container.append($('<input name="input1" type="text" required="required" title="input1 message" /><input name="input2" type="text" required="required" title="input2 message"/>'));
                 var validator = setup(container);
 
                 validator.validate();
@@ -174,7 +175,7 @@
                 equal(messages[1], "input2 message");
             });
 
-            test("messages is cleared if revalidated single input", function() {
+            test("errors is cleared if revalidated single input", function() {
                 var input = $('<input type="text" required />'),
                     validator = setup(input);
 
@@ -186,8 +187,8 @@
                 equal(messages.length, 0);
             });
 
-            test("messages are reset if element is valid multiple inputs", function() {
-                container.append($('<input type="text" required="required" title="input1 message" /><input type="text" required="required" title="input2 message"/>'));
+            test("errors are reset if element is valid multiple inputs", function() {
+                container.append($('<input name="input1" type="text" required="required" title="input1 message" /><input name="input2" type="text" required="required" title="input2 message"/>'));
                 var validator = setup(container);
 
                 validator.validate();
@@ -207,6 +208,17 @@
                 validator.validate();
 
                 equal(input.next("span").text(), "invalid");
+            });
+
+            test("multiple calls to validation does not render multiple messages", function() {
+                var input = $('<input type="text" required validationMessage="invalid" />'),
+                validator = setup(input);
+
+                validator.validate();
+                validator.validate();
+                validator.validate();
+
+                equal(input.parent().find("span.k-invalid-msg").length, 1);
             });
 
             test("does not displayes message if element is valid", function() {
@@ -405,6 +417,65 @@
                     validator = setup(input);
 
                 ok(validator.validate());
+            });
+
+            test("validate class is added to the invalid inputs", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                validator.validate();
+
+                ok(input.hasClass("k-invalid"));
+            });
+
+            test("validate class is not added to the valid inputs", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                input.val(1);
+
+                validator.validate();
+
+                ok(!input.hasClass("k-invalid"));
+            });
+
+            test("validate class is remove to if invalid inputs pass validation", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                validator.validate();
+
+                input.val(1);
+
+                validator.validate();
+
+                ok(!input.hasClass("k-invalid"));
+            });
+
+            test("field is revalidated on blur", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                input.trigger("blur");
+                ok(input.hasClass("k-invalid"));
+            });
+
+            test("multiple errors are not added when invalid input is blured several times", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                input.trigger("blur");
+                input.trigger("blur");
+                equal(validator.errors().length, 1);
+            });
+
+            test("field is revalidated on blur with container", function() {
+                container.append($('<input type="text" required="required" title="input1 message" /><input type="text" required="required" title="input2 message"/>'));
+                var validator = setup(container);
+
+                container.find(":input").trigger("blur");
+                ok(container.find(":input").eq(0).hasClass("k-invalid"));
+                ok(container.find(":input").eq(1).hasClass("k-invalid"));
             });
         </script>
     </body>
