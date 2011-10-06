@@ -577,16 +577,19 @@
 
         _click: function(e) {
             var that = this,
+                viewedValue = that._viewedValue,
                 link = $(e.currentTarget.firstChild),
-                date = new DATE(link.data(VALUE)),
-                viewedValue = that._viewedValue;
+                value = link.data(VALUE).split("/");
+
+            //Safari cannot create corretly date from "1/1/2090"
+            value = new DATE(parseInt(value[2]), parseInt(value[0]) - 1, parseInt(value[1]));
 
             e.preventDefault();
 
             if (link.parent().hasClass(OTHERMONTH)) {
-                viewedValue = date;
+                viewedValue = value;
             } else {
-                that._view.setDate(viewedValue, date);
+                that._view.setDate(viewedValue, value);
             }
 
             that.navigateDown(viewedValue);
