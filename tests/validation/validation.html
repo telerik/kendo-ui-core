@@ -336,6 +336,34 @@
 
                 ok(validator.validate());
             });
+
+            test("validate returns false if input with type=email value does not match the pattern", function() {
+                var input = $('<input type="email" value="test@test.com" pattern="6test?@\\w+\\.\\w+" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns false if input with type=email value does not match the pattern", function() {
+                var input = $('<input type="email" value="6test@test.com" pattern="6test?@\\w+\\.\\w+" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=url value does not match", function() {
+                var input = $('<input type="url" value="test" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=url value match", function() {
+                var input = $('<input type="url" value="http://www.test.test" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
         </script>
     </body>
 </html>
