@@ -515,7 +515,7 @@
                         position: "relative",
                         width: viewWidth * 2,
                         "float": LEFT,
-                        left: future ? 0 : -200
+                        left: future ? 0 : -viewWidth
                     });
 
                     newTable[future ? "insertAfter" : "insertBefore"](oldTable);
