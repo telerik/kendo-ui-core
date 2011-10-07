@@ -39,7 +39,7 @@
                 required: "{0} is required",
                 pattern: "{0} is not valid",
                 min: "{0} should be greater than {1}",
-                max: "{0} should be smaller then {1}",
+                max: "{0} should be smaller than {1}",
                 step: "{0} is not valid",
                 email: "{0} is not valid email",
                 url: "{0} is not valid URL"
@@ -161,7 +161,7 @@
 
             customMessage = $.isFunction(customMessage) ? customMessage(input) : customMessage;
 
-            return kendo.format(input.attr("validationMessage") || input.attr("title") || customMessage || "", fieldName);
+            return kendo.format(input.attr("validationMessage") || input.attr("title") || customMessage || "", fieldName, input.attr(ruleKey));
         },
 
         _checkValidity: function(input) {
