@@ -26,6 +26,11 @@
                 element.css({ width: "45px", height: "35px" });
             }
 
+            function showNow(point) {
+                tooltip.point = point;
+                tooltip._show();
+            }
+
             // ------------------------------------------------------------
             module("Tooltip", {
                 setup: function() {
@@ -86,68 +91,78 @@
                 equals(element.css("white-space"), "nowrap");
             });
 
+            asyncTest("show displays tooltip for last point with a delay", function() {
+                tooltip.show({ /* Fake */ });
+                tooltip.show(dataPointMock);
+
+                setTimeout(function() {
+                    equals(element.text(), "1");
+                    start();
+                }, 120);
+            });
+
             test("can override border color", function() {
                 createTooltip({ border: { color: RED } });
-                tooltip.show(dataPointMock);
+                showNow(dataPointMock);
                 equals(element.css("border-top-color").replace(/\s/g, ''), RED);
             });
 
             test("sets border color to current point color", function() {
-                tooltip.show(dataPointMock);
+                showNow(dataPointMock);
                 equals(element.css("border-top-color").replace(/\s/g, ''), RED);
             });
 
             test("sets div background", function() {
                 tooltip.options.background = BLUE;
-                tooltip.show(dataPointMock);
+                showNow(dataPointMock);
                 equals(element.css("backgroundColor").replace(/\s/g, ''), BLUE);
             });
 
             test("sets text color", function() {
                 createTooltip({ color: GREEN });
-                tooltip.show(dataPointMock);
+                showNow(dataPointMock);
                 equals(element.css("color").replace(/\s/g, ''), GREEN);
             });
 
             test("applies format", function() {
                 createTooltip({ format: "{0}%" });
-                tooltip.show(dataPointMock);
+                showNow(dataPointMock);
                 equals(element.text(), "1%");
             });
 
             test("renders template", function() {
                 createTooltip({ template: "${value}%" });
-                tooltip.show(dataPointMock);
+                showNow(dataPointMock);
                 equals(element.text(), "1%");
             });
 
             test("renders compiled template", function() {
                 createTooltip({ template: kendo.template("${value}%") });
-                tooltip.show(dataPointMock);
+                showNow(dataPointMock);
                 equals(element.text(), "1%");
             });
 
             test("renders template when format is set", function() {
                 createTooltip({ format: "{0} percent", template: "${value}%" });
-                tooltip.show(dataPointMock);
+                showNow(dataPointMock);
                 equals(element.text(), "1%");
             });
 
             test("template context has category", function() {
                 createTooltip({ template: "${category}" });
-                tooltip.show(dataPointMock);
+                showNow(dataPointMock);
                 equals(element.text(), "category");
             });
 
             test("template context has series", function() {
                 createTooltip({ template: "${series.name}" });
-                tooltip.show(dataPointMock);
+                showNow(dataPointMock);
                 equals(element.text(), "series");
             });
 
             test("template context has dataItem", function() {
                 createTooltip({ template: "${dataItem.field}" });
-                tooltip.show(dataPointMock);
+                showNow(dataPointMock);
                 equals(element.text(), "value");
             });
 
@@ -156,7 +171,7 @@
                 tooltip.options.animation.duration = 0;
                 tooltip.options.offsetX = 0;
                 tooltip.options.offsetY = 0;
-                tooltip.show(dataPointMock);
+                showNow(dataPointMock);
 
                 same([parseInt(tooltip.element.css("top"), 10),
                       parseInt(tooltip.element.css("left"), 10)],

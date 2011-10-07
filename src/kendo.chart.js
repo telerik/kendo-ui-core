@@ -82,8 +82,9 @@
         SVG_NS = "http://www.w3.org/2000/svg",
         SWING = "swing",
         TOP = "top",
-        TOOLTIP_OFFSET = 5,
         TOOLTIP_ANIMATION_DURATION = 150,
+        TOOLTIP_OFFSET = 5,
+        TOOLTIP_SHOW_DELAY = 100,
         TRIANGLE = "triangle",
         UNDEFINED = "undefined",
         VERTICAL = "vertical",
@@ -6820,14 +6821,28 @@
         },
 
         show: function(point) {
+            var tooltip = this;
+
+            tooltip.point = point;
+            setTimeout(proxy(tooltip._show, tooltip), TOOLTIP_SHOW_DELAY);
+        },
+
+        _show: function() {
             var tooltip = this,
+                point = tooltip.point,
                 element = tooltip.element,
                 options = tooltip.options,
-                aboveAxis = point.options.aboveAxis,
-                isVertical = point.options.isVertical,
                 anchor,
                 template,
-                content = point.value.toString();
+                content,
+                top,
+                left;
+
+            if (!point) {
+                return;
+            }
+
+            content = point.value.toString();
 
             if (options.template) {
                 template = baseTemplate(options.template);
@@ -6844,6 +6859,12 @@
             element.html(content);
 
             anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
+            top = round(anchor.y) + "px";
+            left = round(anchor.x) + "px";
+
+            if (!tooltip.visible) {
+                tooltip.element.css({top: top, left: left});
+            }
 
             tooltip.element
                 .css({
@@ -6855,8 +6876,8 @@
                 .stop(true, true)
                 .show()
                 .animate({
-                    left: round(anchor.x) + "px",
-                    top: round(anchor.y) + "px"
+                    left: left,
+                    top: top
                 }, options.animation.duration);
 
             tooltip.visible = true;
@@ -6868,6 +6889,7 @@
             if (tooltip.visible) {
                 tooltip.element.fadeOut();
 
+                tooltip.point = null;
                 tooltip.visible = false;
             }
         }
