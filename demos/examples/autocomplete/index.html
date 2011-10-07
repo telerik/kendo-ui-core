@@ -25,11 +25,12 @@
         <div class="description">Basic usage</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <span style="font-weight: bold; margin-left:3px;">Search for a movie:</span>
-            <br />
+            <label for="input">Search for a movie:</label>
+
             <input id="input" />
-            <span style="color: Gray; font-style: italic; vertical-align: middle;">Type 'The' or any title from the box
-                on the right</span>
+
+            <div class="hint">Start typing any title from the list on the right</div>
+
             <script>
                 $(document).ready(function () {
                     var data = [
@@ -70,15 +71,26 @@ var data = [
 ];</pre>
             </div>
             <style scoped="scoped">
-                #input
-                {
+                label {
                     float: left;
-                    margin-right: 50px;
+                    line-height: 22px;
+                    padding: 0 5px 10px 0;
                 }
 
-                #example .code-sample
+                .k-autocomplete
                 {
-                    margin-top: 0;
+                    vertical-align: middle;
+                }
+
+                .hint {
+                    line-height: 22px;
+                    color: #aaa;
+                    font-style: italic;
+                }
+
+                .code-sample
+                {
+                    margin-top: -50px;
                     width: 300px;
                     float: right;
                 }

@@ -26,26 +26,30 @@
         <div class="description">Binding to remote data</div>
         <!-- description -->
         <div id="example" class="k-content">
-            Search Netflix for a movie title (minimum 3 characters):
+            <label for="titles">Search Netflix for a movie title (minimum 3 characters):</label>
             <input id="titles"/>
 
             <script>
-                $(document).ready(function() {
-                    $("#titles").kendoAutoComplete({
-                        minLength: 3,
-                        dataTextField: "Name",
-                        dataSource: {
-                            type: "odata",
-                            severFiltering: true,
-                            serverPaging: true,
-                            pageSize: 20,
-                            transport: {
-                                read: "http://odata.netflix.com/Catalog/Titles"
-                            }
+                $("#titles").kendoAutoComplete({
+                    minLength: 3,
+                    dataTextField: "Name",
+                    dataSource: {
+                        type: "odata",
+                        severFiltering: true,
+                        serverPaging: true,
+                        pageSize: 20,
+                        transport: {
+                            read: "http://odata.netflix.com/Catalog/Titles"
                         }
-                    });
+                    }
                 });
             </script>
+
+            <style scoped>
+                .k-autocomplete {
+                    vertical-align: middle;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
