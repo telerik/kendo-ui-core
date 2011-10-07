@@ -30,7 +30,8 @@
                 <p>Start typing a movie title in the AutoComplete (minimum 3 characters) to open it. </p>
             </div>
 
-            <label>Search Netflix (type at least 3 characters): <input id="titles" /></label>
+            <label for="titles">Search Netflix (type at least 3 characters):</label>
+            <input id="titles" />
 
             <script>
                 $(document).ready(function() {
@@ -59,6 +60,10 @@
             </script>
 
             <style scoped>
+                .k-autocomplete {
+                    vertical-align: middle;
+                }
+
                 #titles-list .k-item {
                     overflow: hidden; /* clear floated images */
                 }
