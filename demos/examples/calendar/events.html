@@ -25,24 +25,19 @@
         <!-- description -->
         <div id="example" class="k-content">
             <div id="calendar"></div>
+
             <script>
-                $(document).ready(function() {
-                    function onChange() {
-                        if ("kendoConsole" in window) {
-                            kendoConsole.log("event: change");
-                        }
-                    }
+                function onChange() {
+                    kendoConsole.log("Change :: " + kendo.toString(this.value(), 'd'));
+                }
 
-                    function onNavigate() {
-                        if ("kendoConsole" in window) {
-                            kendoConsole.log("event: navigate");
-                        }
-                    }
+                function onNavigate() {
+                    kendoConsole.log("Navigate");
+                }
 
-                    $("#calendar").kendoCalendar({
-                        change: onChange,
-                        navigate: onNavigate
-                    });
+                $("#calendar").kendoCalendar({
+                    change: onChange,
+                    navigate: onNavigate
                 });
             </script>
         </div>
