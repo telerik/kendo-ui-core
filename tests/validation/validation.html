@@ -470,11 +470,45 @@
 
             test("message for required is applied", function() {
                 var input = $('<input type="text" required />'),
-                validator = setup(input, {messages: { required: "Field is required" } });
+                validator = setup(input, { messages: { required: "Field is required" } });
 
                 validator.validate();
 
                 equal(validator.errors()[0], "Field is required");
+            });
+
+            test("message as function", function() {
+                var input = $('<input type="text" required />'),
+                    element,
+                    validator = setup(input, { messages: {
+                            required: function() {
+                                element = arguments[0];
+                                return "Field is required";
+                            }
+                    }});
+
+                validator.validate();
+
+                equal(validator.errors()[0], "Field is required");
+                ok(element);
+            });
+
+            test("custom validation rule is executed", function() {
+                var input = $('<input name="Field" type="text" />'),
+                    element,
+                    validator = setup(input, {
+                        rules: {
+                            custom: function() {
+                                element = arguments[0];
+                                return false
+                            }
+                        },
+                        messages: { custom: "Custom message" }
+                    });
+
+                ok(!validator.validate());
+                equal(element[0], input[0]);
+                equal(validator.errors()[0], "Custom message");
             });
         </script>
     </body>
