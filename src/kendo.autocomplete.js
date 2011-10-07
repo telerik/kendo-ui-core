@@ -413,7 +413,7 @@
                     that._move(current ? current.prev() : $(ul.lastChild));
                 }
                 e.preventDefault();
-            } else if (key === keys.ENTER) {
+            } else if (key === keys.ENTER || key === keys.TAB) {
                 that._accept(current);
             } else if (key === keys.ESC) {
                 that.close();
