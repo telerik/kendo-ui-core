@@ -374,7 +374,11 @@
         _accept: function (li) {
             var that = this;
 
-            setTimeout( function () { that._focus(li) }, 0);
+            if (kendo.support.touch) {
+                setTimeout( function () { that._focus(li) }, 0);
+            } else {
+                that._focus(li);
+            }
 
             moveCaretAtEnd(that.element[0]);
         },
