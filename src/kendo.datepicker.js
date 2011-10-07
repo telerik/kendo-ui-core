@@ -351,10 +351,6 @@
                             .bind({
                                 keydown: proxy(that._keydown, that),
                                 focus: function(e) {
-                                    if (touch) {
-                                        e.preventDefault();
-                                    }
-
                                     clearTimeout(that._bluring);
                                     that.input.parent().addClass("k-state-focused");
                                 },
@@ -568,7 +564,9 @@
 
             that._bluring = setTimeout(function() {
                 that._change(that.element.val());
-                that.close();
+                if (!touch) {
+                    that.close();
+                }
                 that.input.parent().removeClass("k-state-focused");
             }, 100);
         },

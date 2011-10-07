@@ -159,7 +159,7 @@ html
 #header h1
 {
     float:left;
-    width:160px;
+    width:170px;
 }
 
 #logo
@@ -195,7 +195,7 @@ a.bigButton
 {
     text-decoration:none;
     color:#2e2e2e;
-    font-size:1.2em;
+    font-size:17px;
     line-height:2.1;
 }
 
@@ -247,7 +247,7 @@ a.bigButton:hover
 .overview #header h1
 {
     margin-top: -15px;
-    width: 240px;
+    width: 250px;
     height: 72px;
 }
 *+html .overview #header h1 { margin-top: 12px; }
@@ -315,7 +315,7 @@ a.bigButton:hover
 
 #navi li a
 {
-    line-height: 43px;
+    line-height: 40px;
 }
 
 #navi-top
@@ -1082,16 +1082,18 @@ pre.prettyprint
 
 #topnavWrap .skinSelector
 {
+    margin-right: 4px;
     float: right;
     display: none;
     width: 200px;
     font: 12px Arial, Helvetica, sans-serif;
 }
 
-div.skinSelector .k-state-default,
-div.skinSelector .k-state-hover,
-div.skinSelector .k-state-hover:hover,
-div.skinSelector .k-state-active
+div.skinSelector .k-dropdown-wrap.k-state-default,
+div.skinSelector .k-dropdown-wrap.k-state-hover,
+div.skinSelector .k-dropdown-wrap.k-state-hover:hover,
+div.skinSelector .k-dropdown-wrap.k-state-active,
+div.skinSelector .k-dropdown-wrap.k-state-focused
 {
     color: #333;
     background: #FFF;
@@ -1535,7 +1537,6 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 
 .overview #example
 {
-    width:960px;
     padding-top: 10px;
     margin-left:auto;
     margin-right:auto;
@@ -1650,7 +1651,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 {
     float:left;
     width: 380px;
-    margin:1.6em 44px 0;
+    margin:1.6em 32px 0;
     padding-bottom:60px;
     vertical-align: top;
     text-align:left;
