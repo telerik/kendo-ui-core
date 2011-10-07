@@ -477,6 +477,24 @@
                 equal(validator.errors()[0], "Field is required");
             });
 
+            test("message for min is applied with min attribute value", function() {
+                var input = $('<input name="Foo" type="number" min="2" value="1" />'),
+                validator = setup(input);
+
+                validator.validate();
+
+                equal(validator.errors()[0], "Foo should be greater than 2");
+            });
+
+            test("message for max is applied with max attribute value", function() {
+                var input = $('<input name="Foo" type="number" max="2" value="10" />'),
+                validator = setup(input);
+
+                validator.validate();
+
+                equal(validator.errors()[0], "Foo should be smaller than 2");
+            });
+
             test("message as function", function() {
                 var input = $('<input type="text" required />'),
                     element,
