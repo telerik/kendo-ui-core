@@ -3,4 +3,4 @@
 	url = https://github.com/telerik/less.js.git
 [submodule "tests/qunit"]
 	path = tests/qunit
-	url = git://github.com/telerik/qunit.git
+	url = https://github.com/telerik/qunit.git
