@@ -36,7 +36,7 @@
         options: {
             errorTemplate: "<span>${message}</span>",
             messages: {
-                required: "{0} is required.",
+                required: "{0} is required",
                 pattern: "{0} is not valid",
                 min: "{0} should be greater than {1}",
                 max: "{0} should be smaller then {1}",
@@ -111,7 +111,7 @@
             var that = this,
                 inputs,
                 idx,
-                invalid = false;
+                invalid = false,
                 length;
 
             that._errors = {};
@@ -144,7 +144,7 @@
             }
 
             if (!valid) {
-                message = kendo.format(input.attr("validationMessage") || input.attr("title") || customMessages[result.key] || "", fieldName);
+                message = that._extractMessage(input, result.key);
                 that._errors[fieldName] = message;
                 $(template({ message: message })).addClass(INVALIDMSG).insertAfter(input);
             }
@@ -152,6 +152,16 @@
             input.toggleClass(INVALIDINPUT, !valid);
 
             return valid;
+        },
+
+        _extractMessage: function(input, ruleKey) {
+            var that = this,
+                customMessage = that.options.messages[ruleKey],
+                fieldName = input.attr("name");
+
+            customMessage = $.isFunction(customMessage) ? customMessage(input) : customMessage;
+
+            return kendo.format(input.attr("validationMessage") || input.attr("title") || customMessage || "", fieldName);
         },
 
         _checkValidity: function(input) {
