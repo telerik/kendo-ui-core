@@ -129,11 +129,7 @@
         RESIZE = "resize",
         ERROR = "error",
         OVERFLOW = "overflow",
-        localUrlRe = /^([a-z]+:)?\/\//i;
-
-    function isLocalUrl(url) {
-        return url && !localUrlRe.test(url);
-    }
+        isLocalUrl = kendo.isLocalUrl;
 
     function windowObject(element) {
         return element.children(KWINDOWCONTENT).data("kendoWindow");
