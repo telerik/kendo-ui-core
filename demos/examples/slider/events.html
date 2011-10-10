@@ -24,28 +24,28 @@
         <div class="description">Events</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <input type="range" id="slider" />
+            <input id="slider" />
             <br />
             <div id="rangeslider" style="margin-top: 40px;">
-                <input type="range" />
-                <input type="range" />
+                <input />
+                <input />
             </div>
             <script>
                 function sliderOnSlide(e) {
                     kendoConsole.log("Change :: new value is: " + e.value);
-                };
+                }
 
                 function sliderOnChange(e) {
                     kendoConsole.log("Slide :: new slide value is: " + e.value);
-                };
+                }
 
                 function rangeSliderOnSlide(e) {
                     kendoConsole.log("Slide :: new slide value are: " + e.values.toString().replace(",", " - "));
-                };
+                }
 
                 function rangeSliderOnChange(e) {
                     kendoConsole.log("Change :: new values are: " + e.values.toString().replace(",", " - "));
-                };
+                }
 
                 $(document).ready(function() {
                     $("#slider").kendoSlider({
