@@ -39,6 +39,10 @@
                          validationMessage="Please enter a ten digit phone number"/>
                      </li>
                      <li>
+                        <label for="tel">Age *</label>
+                       <input name="slider" type="range" min="2" max="10" step="3" />
+                     </li>
+                     <li>
                         <label for="search">kendoAutoComplete *</label>
                         <input type="search" id="search" name="search" required/>
                      </li>
@@ -63,7 +67,7 @@
                             "The Godfather: Part II",
                             "The Shawshank Redemption"
                         ];
-
+                    $("input[type=range]").kendoSlider();
                     $("#search").kendoAutoComplete({
                         dataSource: data,
                         separator: ", "
