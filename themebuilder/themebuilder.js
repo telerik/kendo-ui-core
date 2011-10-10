@@ -249,19 +249,19 @@
             render: function() {
                 var constants = this.constants && this.constants.constants,
                     colorPickerTemplate = kendo.template(
-                        "<# var id = prefix + \"-\" + property.property; #>" +
-                        "<label for='<#= id #>'><#= property.label #></label>" +
-                        "<input id='<#= id #>' value='<#= property.value #>' />"
+                        "# var id = prefix + \"-\" + property.property; #" +
+                        "<label for='#= id #'>#= property.label #</label>" +
+                        "<input id='#= id #' value='#= property.value #' />"
                     ),
                     propertyGroupTemplate = kendo.template(
-                        "<li><#= title #>" +
+                        "<li>#= title #" +
                             "<div class='styling-options'>" +
-                                "<# for (var i = 0, len = properties.length; i < len; i++) { #>" +
-                                    "<#= propertyTemplate({" +
+                                "# for (var i = 0, len = properties.length; i < len; i++) { #" +
+                                    "#= propertyTemplate({" +
                                         "property: properties[i]," +
                                         "prefix: prefix" +
-                                    "}) #>" +
-                                "<# } #>" +
+                                    "}) #" +
+                                "# } #" +
                             "</div>" +
                         "</li>"
                     );
@@ -274,7 +274,7 @@
                                 return propertyGroupTemplate($.extend(x, {
                                     propertyTemplate: colorPickerTemplate
                                 }));
-                            }).join("") +
+                            }).join("").replace(/(#[a-z0-9]+)/gi, "\\$1") +
                         "</ul>" +
                         "<button type='button' class='k-style-apply k-button'>Download</button>" +
                     "</div>"
