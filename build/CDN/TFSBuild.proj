@@ -138,6 +138,10 @@
 		</SolutionToBuild>
 	</ItemGroup>
 
+    <Target Name="BeforeGet">
+        <Exec Command='"C:\Program Files (x86)\Git\bin\sh.exe" --login -i "c:\kendo\tfs-sync.sh"' />
+    </Target>
+
 	<Target Name="AfterCompile">
 		<MSBuild Projects="$(SolutionRoot)\Build\DeployCDN.proj" Properties="ResourcesRoot=$(SolutionRoot)\Deploy;"/>
 	</Target>

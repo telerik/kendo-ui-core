@@ -138,6 +138,11 @@
 		</SolutionToBuild>
 	</ItemGroup>
 
+
+    <Target Name="BeforeGet">
+        <Exec Command='"C:\Program Files (x86)\Git\bin\sh.exe" --login -i "c:\kendo\tfs-sync.sh"' />
+    </Target>
+
 	<PropertyGroup>
 		<SkipLabel>true</SkipLabel>
 		<SkipPostBuild>true</SkipPostBuild>
