@@ -21,7 +21,7 @@
 .k-picker-wrap,
 .k-autocomplete.k-state-hover,
 .k-dropdown-wrap.k-state-hover,
-.k-picker-wrap.k-state-hover,
+.k-picker-wrap.k-state-hover
 {
     background-repeat: repeat-x;
     background-position: 0 center;
