@@ -111,7 +111,7 @@
         extend = $.extend,
         proxy = $.proxy,
         Component = ui.Component,
-        pxUnitsRegex = /^\d+px$/i,
+        pxUnitsRegex = /^\d+(\.\d+)?px$/i,
         percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
         EXPAND = "expand",
         COLLAPSE = "collapse",
