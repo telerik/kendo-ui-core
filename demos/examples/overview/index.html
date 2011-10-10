@@ -229,10 +229,10 @@
                             change: filterCountries
                         });
 
-                    filterCountries();
-
                     createGrid();
                     createChart();
+
+                    filterCountries();
 
                     $(document).bind("kendo:skinChange", function(e) {
                         createChart();
