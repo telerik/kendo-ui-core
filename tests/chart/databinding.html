@@ -52,7 +52,7 @@
                     });
                 });
 
-                test("categories are populated", function() {
+                asyncTest("categories are populated", function() {
                     createChart({
                         dataSource: [{
                             period: "Jan",
@@ -69,6 +69,30 @@
                             start();
                         }
                     });
+                });
+
+                asyncTest("data binding is not performed when autoBind is false", function() {
+                    createChart({
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }],
+                        autoBind: false,
+                        series: [{
+                            field: "sales"
+                        }],
+                        dataBound: function() {
+                            ok(false);
+                        }
+                    });
+
+                    setTimeout(function() {
+                        equal(chart.options.series[0].data.length, 0);
+                        start();
+                    }, 50);
                 });
 
             })();

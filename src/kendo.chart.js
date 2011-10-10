@@ -1372,6 +1372,7 @@
             categoryAxis: {
                 categories: []
             },
+            autoBind: true,
             seriesDefaults: {
                 type: COLUMN,
                 data: [],
@@ -1414,8 +1415,8 @@
 
         _refresh: function() {
             var chart = this;
-            if (chart.options.dataSource) {
-                chart.dataSource.read();
+            if (chart.options.dataSource && chart.options.autoBind) {
+                chart.dataSource.query();
             } else {
                 chart._redraw();
             }
