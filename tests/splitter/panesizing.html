@@ -153,6 +153,19 @@
                 equals(panes.eq(1).height(), 101);
             });
 
+            test("sub-pixel pane sizes", function() {
+                var splitter = $(getSplitterHtml()).height(208).appendTo(document.body).kendoSplitter({
+                        orientation: "vertical",
+                        panes: [
+                            { size: "20.0004px" },
+                            {}
+                        ]
+                    }),
+                    panes = splitter.find(".k-pane");
+
+                equals(panes[0].style.height, "20px");
+            });
+
             module("Sizing with collapsing", {
                 teardown: function() {
                     $('.k-splitter').remove();
