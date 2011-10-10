@@ -192,6 +192,7 @@
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin") || "kendo",
                         dataSource: sharedDataSource,
+                        autoBind: false,
                         legend: {
                             visible: false
                         },
