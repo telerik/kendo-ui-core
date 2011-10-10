@@ -232,7 +232,7 @@
                 if (part.charAt(0) === "=") {
                   functionBody += "+(" + part.substring(1) + ")+";
                 } else {
-                  functionBody += ";" + part + "o+=";
+                  functionBody += ";" + part + ";o+=";
                 }
               }
             }
