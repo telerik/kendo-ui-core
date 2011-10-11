@@ -4,6 +4,7 @@ var fs = require("fs"),
     docs = require("./docs"),
     themes = require("./themes"),
     kendoBuild = require("./kendo-build"),
+    kendoScripts = require("./kendo-scripts"),
     cssmin = require("./lib/cssmin").cssmin,
 
 /* options  */
@@ -374,6 +375,9 @@ function build(origin, destination, kendoCDN) {
     });
 
     themes.build();
+
+    console.log("merging multipart scripts...");
+    kendoScripts.mergeScripts("src/");
 
     console.log("copying resources...");
     kendoBuild.copyDirSyncRecursive(examplesLocation, outputPath);
