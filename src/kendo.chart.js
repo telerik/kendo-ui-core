@@ -294,41 +294,45 @@
          * @option {String} [title.text] The title of the chart.
          * @option {String} [title.font] <"16px Arial,Helvetica,sans-serif"> The font style of the title.
          * @option {String} [title.position] <"top"> The positions of the title.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "top"
+         *              <code>"top"</code>
          *         </dt>
          *         <dd>
          *              The title is positioned on the top.
          *         </dd>
          *         <dt>
-         *              "bottom"
+         *              <code>"bottom"</code>
          *         </dt>
          *         <dd>
          *              The title is positioned on the bottom.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {String} [title.align] <"center"> The alignment of the title.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "left"
+         *              <code>"left"</code>
          *         </dt>
          *         <dd>
          *              The text is aligned to the left.
          *         </dd>
          *         <dt>
-         *              "center"
+         *              <code>"center"</code>
          *         </dt>
          *         <dd>
          *              The text is aligned to the middle.
          *         </dd>
          *         <dt>
-         *              "right"
+         *              <code>"right"</code>
          *         </dt>
          *         <dd>
          *              The text is aligned to the right.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Boolean} [title.visible] <false> The visibility of the title.
          * @option {Number|Object} [title.margin] <5> The margin of the title.
          * _example
@@ -349,41 +353,90 @@
          * @option {Object} [title.border] The border of the title.
          * @option {Number} [title.border.width] <0> The width of the border.
          * @option {String} [title.border.color] <"black"> The color of the border.
+         * @option {String} [title.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Object} [legend] The chart legend configuration options.
          * @option {String} [legend.font] <12px Arial,Helvetica,sans-serif> The font style of the legend.
          * @option {String} [legend.position] <right> The positions of the legend.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "top"
+         *              <code>"top"</code>
          *         </dt>
          *         <dd>
          *              The legend is positioned on the top.
          *         </dd>
          *         <dt>
-         *              "bottom"
+         *              <code>"bottom"</code>
          *         </dt>
          *         <dd>
          *              The legend is positioned on the bottom.
          *         </dd>
          *         <dt>
-         *              "left"
+         *              <code>"left"</code>
          *         </dt>
          *         <dd>
          *              The legend is positioned on the left.
          *         </dd>
          *         <dt>
-         *              "right"
+         *              <code>"right"</code>
          *         </dt>
          *         <dd>
          *              The legend is positioned on the right.
          *         </dd>
          *         <dt>
-         *              "custom"
+         *              <code>"custom"</code>
          *         </dt>
          *         <dd>
          *              The legend is positioned using OffsetX and OffsetY.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Number} [legend.offsetX] <0> The X offset from its position.
          * @option {Number} [legend.offsetY] <0> The Y offset from its position.
          * @option {Boolean} [legend.visible] <true> The visibility of the legend.
@@ -406,6 +459,53 @@
          * @option {Object} [legend.border] The border of the legend.
          * @option {Number} [legend.border.width] <0> The width of the border.
          * @option {String} [legend.border.color] <"black"> The color of the border.
+         * @option {String} [legend.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Object} [valueAxis] The value axis configuration options.
          * @option {Number} [valueAxis.axisCrossingValue] <0>
          * Value at which the first perpendicular axis crosses this axis.
@@ -414,36 +514,40 @@
          * @option {Number} [valueAxis.majorUnits] The interval between major divisions.
          * @option {Number} [valueAxis.minorTickSize] <3> The axis minor tick size.
          * @option {String} [valueAxis.minorTickType] <none> The minor tick type.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "outside"
+         *              <code>"outside"</code>
          *         </dt>
          *         <dd>
          *              The tick is drawn on the outer side of the axis.
          *         </dd>
          *         <dt>
-         *              "none"
+         *              <code>"none"</code>
          *         </dt>
          *         <dd>
          *              No tick is drawn.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Number} [valueAxis.majorTickSize] <4> The axis major tick size.
          * @option {String} [valueAxis.majorTickType] <outside> The major tick type.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "outside"
+         *              <code>"outside"</code>
          *         </dt>
          *         <dd>
          *              The tick is drawn on the outer side of the axis.
          *         </dd>
          *         <dt>
-         *              "none"
+         *              <code>"none"</code>
          *         </dt>
          *         <dd>
          *              No tick is drawn.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Object} [valueAxis.minorGridLines] Configures the minor grid lines.
          * @option {Number} [valueAxis.minorGridLines.width] <1> The width of the lines.
          * @option {String} [valueAxis.minorGridLines.color] <"black"> The color of the lines.
@@ -479,6 +583,53 @@
          * @option {Object} [valueAxis.labels.border] The border of the labels.
          * @option {Number} [valueAxis.labels.border.width] <0> The width of the border.
          * @option {String} [valueAxis.labels.border.color] <"black"> The color of the border.
+         * @option {String} [valueAxis.labels.border.dashType] <"black"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Number} [valueAxis.labels.rotation] <0> The rotation angle of the labels.
          * @option {String/Function} [valueAxis.labels.template] The label template.
          * Template variables:
@@ -518,6 +669,7 @@
          * Category index at which the first perpendicular axis crosses this axis.
          * @option {Number} [categoryAxis.minorTickSize] <3> The axis minor tick size.
          * @option {String} [categoryAxis.minorTickType] <"none"> The axis minor tick size.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
          *              "outside"
@@ -532,8 +684,10 @@
          *              No tick is drawn.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Number} [categoryAxis.majorTickSize] <3> The axis major tick size.
          * @option {String} [categoryAxis.majorTickType] <"outside"> The axis major tick size.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
          *              "outside"
@@ -548,6 +702,7 @@
          *              No tick is drawn.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Object} [categoryAxis.minorGridLines] Configures the minor grid lines.
          * @option {Number} [categoryAxis.minorGridLines.width] <1> The width of the lines.
          * @option {String} [categoryAxis.minorGridLines.color] <"black"> The color of the lines.
@@ -583,6 +738,53 @@
          * @option {Object} [categoryAxis.labels.border] The border of the labels.
          * @option {Number} [categoryAxis.labels.border.width] <0> The width of the border.
          * @option {String} [categoryAxis.labels.border.color] <"black"> The color of the border.
+         * @option {String} [categoryAxis.labels.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Number} [categoryAxis.labels.rotation] <0> The rotation angle of the labels.
          * @option {String/Function} [categoryAxis.labels.template] The label template.
          * Template variables:
@@ -644,6 +846,53 @@
          * @option {Object} [seriesDefaults.labels.border] The border of the labels.
          * @option {Number} [seriesDefaults.labels.border.width] <0> The width of the border.
          * @option {String} [seriesDefaults.labels.border.color] <"black"> The color of the border.
+         * @option {String} [seriesDefaults.labels.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String/Function} [seriesDefaults.labels.template] The label template.
          * Template variables:
          * <ul>
@@ -684,8 +933,56 @@
          * @option {Object} [seriesDefaults.border] The border of the series.
          * @option {Number} [seriesDefaults.border.width] <0> The width of the border.
          * @option {String} [seriesDefaults.border.color] <"black"> The color of the border.
+         * @option {String} [seriesDefaults.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Object} [seriesDefaults.overlay] The effects overlay.
          * @option {String} [seriesDefaults.overlay.gradient] <"glass"> Gradient name.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
          *              "glass"
@@ -700,6 +997,7 @@
          *              The bars have no effect overlay.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Object} [seriesDefaults.bar]
          * The default options for all bar series. For more details see the series options.
          * @option {Object} [seriesDefaults.column] The column configuration options.
@@ -731,6 +1029,7 @@
          * The font style of the labels.
          * @option {String} [series.type="bar".labels.position] <"outsideEnd">
          * Defines the position of the bar labels.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
          *              "center"
@@ -758,6 +1057,7 @@
          *              Not applicable for stacked bar series.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Boolean} [series.type="bar".labels.visible] <false> The visibility of the labels.
          * @option {Number|Object} [series.type="bar".labels.margin] <2> The margin of the labels.
          * _example
@@ -778,6 +1078,53 @@
          * @option {Object} [series.type="bar".labels.border] The border of the labels.
          * @option {Number} [series.type="bar".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="bar".labels.border.color] <"black"> The color of the border.
+         * @option {String} [series.type="bar".labels.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String/Function} [series.type="bar".labels.template] The label template.
          * Template variables:
          * <ul>
@@ -818,6 +1165,53 @@
          * @option {Number} [series.type="bar".border.width] <1> The width of the border.
          * @option {String} [series.type="bar".border.color] <the color of the curren series>
          * The color of the border.
+         * @option {String} [series.type="bar".border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String} [series.type="bar".overlay] <"glass"> The effects overlay.
          * @option [series.type="column"] The type of the series.
          * @option {Boolean} [series.type="column".stacked] <false>
@@ -832,6 +1226,7 @@
          * The font style of the labels.
          * @option {String} [series.type="column".labels.position] <"outsideEnd">
          * Defines the position of the column labels.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
          *              "center"
@@ -859,6 +1254,7 @@
          *              Not applicable for stacked bar series.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Boolean} [series.type="column".labels.visible] <false> The visibility of the labels.
          * @option {Number|Object} [series.type="column".labels.margin] <2> The margin of the labels.
          * _example
@@ -880,6 +1276,53 @@
          * @option {Number} [series.type="column".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="column".labels.border.color] <"black">
          * The color of the border.
+         * @option {String} [series.type="column".labels.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String/Function} [series.type="column".labels.template] The label template.
          * Template variables:
          * <ul>
@@ -920,6 +1363,53 @@
          * @option {Number} [series.type="column".border.width] <1> The width of the border.
          * @option {String} [series.type="column".border.color] <the color of the current series>
          * The color of the border.
+         * @option {String} [series.type="column".border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String} [series.type="column".overlay] <"glass"> The effects overlay.
          * @option [series.type="line"] The type of the series.
          * @option {Boolean} [series.type="line".stacked] <false>
@@ -932,6 +1422,7 @@
          * The font style of the labels.
          * @option {String} [series.type="line".labels.missingValues] <"gap">
          * Configures the behavior for handling missing values in line series.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
          *              "interpolate"
@@ -952,9 +1443,11 @@
          *              The line stops before the missing point and continues after it.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Object} [series.type="line".markers] Configures the line markers.
          * @option {String} [series.type="line".markers.type] <"square">
          * Configures the markers shape type.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
          *              "square"
@@ -975,6 +1468,7 @@
          *              The marker shape is circle.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Number} [series.type="line".markers.size] <6> The marker size.
          * @option {Boolean} [series.type="line".markers.visible] <true> The markers visibility.
          * @option {Object} [series.type="line".markers.border] The border of the markers.
@@ -984,6 +1478,7 @@
          * The background color of the current series markers.
          * @option {String} [series.type="line".labels.position] <"above">
          * Defines the position of the bar labels.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
          *              "above"
@@ -1010,6 +1505,7 @@
          *              The label is positioned at the left of the line chart marker.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Boolean} [series.type="line".labels.visible] <false> The visibility of the labels.
          * @option {Number|Object} [series.type="line".labels.margin] <{ left: 5, right: 5}>
          * The margin of the labels.
@@ -1031,6 +1527,53 @@
          * @option {Object} [series.type="line".labels.border] The border of the labels.
          * @option {Number} [series.type="line".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="line".labels.border.color] <"black"> The color of the border.
+         * @option {String} [series.type="line".labels.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String/Function} [series.type="line".labels.template] The label template.
          * Template variables:
          * <ul>
@@ -1070,6 +1613,7 @@
          * @option {Array} [series.type="pie".data] Array of data items (optional).
          * The pie chart can be bound to an array of numbers or an array of objects
          * with the following fields:
+         * <div class="details-list">
          *    <dl>
          *         <dt>
          *              value
@@ -1096,6 +1640,7 @@
          *              A boolean value indicating whether to explode the sector.
          *         </dd>
          *    </dl>
+         * </div>
          *  _example
          *  // ...
          *  series:[{
@@ -1137,8 +1682,56 @@
          * @option {Object} [series.type="pie".labels.border] The border of the labels.
          * @option {Number} [series.type="pie".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="pie".labels.border.color] <"black"> The color of the border.
+         * @option {String} [series.type="pie".labels.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String/Function} [series.type="pie".labels.template] The label template.
          * Template variables:
+         * <div class="details-list">
          *     <dl>
          *         <dt>
          *              value
@@ -1165,6 +1758,7 @@
          *              the original data item used to construct the point (when binding from dataSource)
          *         </dd>
          *     </dl>
+         * </div>
          * _example
          * // chart intialization
          * $("#chart").kendoChart({
@@ -1198,6 +1792,7 @@
          * format: "{0:C}"
          * @option {String} [series.type="pie".labels.align] <"circle">
          * Defines the alignment of the pie labels.
+         * <div class="details-list">
          *    <dl>
          *         <dt>
          *              "circle"
@@ -1212,10 +1807,58 @@
          *              The labels are positioned in columns to the left and right of the pie chart.
          *         </dd>
          *    </dl>
+         * </div>
          * @option {Object} [series.type="pie".border] The border of the series.
          * @option {Number} [series.type="pie".border.width] <1> The width of the border.
          * @option {String} [series.type="pie".border.color] <the color of the curren series>
          * The color of the border.
+         * @option {String} [series.type="pie".border.dashType] <solid> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String} [series.type="pie".overlay] <"glass"> The effects overlay.
          * @option {Object} [series.type="pie".connector] The labels connector options.
          * @option {Number} [series.type="pie".connector.width] <1> The width of the connector line.
@@ -1237,6 +1880,53 @@
          * @option {Object} [chartArea.border] The border of the chart area.
          * @option {Number} [chartArea.border.width] <0> The width of the border.
          * @option {String} [chartArea.border.color] <"black"> The color of the border.
+         * @option {String} [chartArea.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Object} [plotArea]
          * The plot area configuration options. This is the area containing the plotted series.
          * @option {String} [plotArea.background] <"white"> The background color of the plot area.
@@ -1251,6 +1941,53 @@
          * @option {Object} [plotArea.border] The border of the plot area.
          * @option {Number} [plotArea.border.width] <0> The width of the border.
          * @option {String} [plotArea.border.color] <"black"> The color of the border.
+         * @option {String} [plotArea.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Object} [tooltip] The data point tooltip configuration options.
          * @option {String} [tooltip.format] The tooltip format.
          * _example
@@ -1989,8 +2726,8 @@
         options: {
             align: LEFT,
             vAlign: TOP,
-            margin: { },
-            padding: { },
+            margin: {},
+            padding: {},
             border: {
                 color: BLACK,
                 width: 0
@@ -2603,53 +3340,53 @@
 
             if (options.majorTickType.toLowerCase() === OUTSIDE) {
                 ticks = ticks.concat(map(majorTicks, function(pos) {
-                                        return {
-                                            pos: pos,
-                                            size: options.majorTickSize,
-                                            width: options.line.width,
-                                            color: options.line.color
-                                        };
-                                    }));
+                    return {
+                        pos: pos,
+                        size: options.majorTickSize,
+                        width: options.line.width,
+                        color: options.line.color
+                    };
+                }));
             }
 
             if (options.minorTickType.toLowerCase()  === OUTSIDE) {
                 ticks = ticks.concat(map(axis.getMinorTickPositions(), function(pos) {
-                            if (options.majorTickType.toLowerCase() !== NONE) {
-                                if (!inArray(pos, majorTicks)) {
-                                    return {
-                                        pos: pos,
-                                        size: options.minorTickSize,
-                                        width: options.line.width,
-                                        color: options.line.color
-                                    };
-                                }
-                            } else {
-                                    return {
-                                        pos: pos,
-                                        size: options.minorTickSize,
-                                        width: options.line.width,
-                                        color: options.line.color
-                                    };
-                            }
-                        }));
+                    if (options.majorTickType.toLowerCase() !== NONE) {
+                        if (!inArray(pos, majorTicks)) {
+                            return {
+                                pos: pos,
+                                size: options.minorTickSize,
+                                width: options.line.width,
+                                color: options.line.color
+                            };
+                        }
+                    } else {
+                        return {
+                            pos: pos,
+                            size: options.minorTickSize,
+                            width: options.line.width,
+                            color: options.line.color
+                        };
+                    }
+                }));
             }
 
             return map(ticks, function(tick) {
                 if (isVertical) {
                     return view.createLine(
-                            box.x2 - tick.size, tick.pos, box.x2, tick.pos,
-                            {
-                                strokeWidth: tick.width,
-                                stroke: tick.color
-                            }
+                        box.x2 - tick.size, tick.pos, box.x2, tick.pos,
+                        {
+                            strokeWidth: tick.width,
+                            stroke: tick.color
+                        }
                     );
                 } else {
                     return view.createLine(
-                            tick.pos, box.y1, tick.pos, box.y1 + tick.size,
-                            {
-                                strokeWidth: tick.width,
-                                stroke: tick.color
-                            }
+                        tick.pos, box.y1, tick.pos, box.y1 + tick.size,
+                        {
+                            strokeWidth: tick.width,
+                            stroke: tick.color
+                        }
                     );
                 }
             });
@@ -2691,7 +3428,7 @@
 
                 if (isVertical) {
                     if (positions == ON_MINOR_TICKS) {
-                        firstTickPosition = tickPositions[i],
+                        firstTickPosition = tickPositions[i];
                         nextTickPosition = tickPositions[i + 1];
 
                         middle = firstTickPosition + (nextTickPosition - firstTickPosition) / 2;
@@ -2703,7 +3440,7 @@
                                          labelX, labelPos)
                 } else {
                     if (positions == ON_MINOR_TICKS) {
-                        firstTickPosition = tickPositions[i],
+                        firstTickPosition = tickPositions[i];
                         nextTickPosition = tickPositions[i + 1];
                     } else {
                         firstTickPosition = labelPos;
@@ -3063,7 +3800,7 @@
                 if (labelOptions.template) {
                     labelTemplate = baseTemplate(labelOptions.template);
                     content = labelTemplate({ value: content });
-            }
+                }
 
                 axis.append(new TextBox(content, labelOptions));
             }
@@ -3122,11 +3859,11 @@
 
             if (line.width > 0) {
                 lineOptions = {
-                        strokeWidth: line.width,
-                        stroke: line.color,
-                        dashType: line.dashType,
-                        zIndex: line.zIndex
-                    };
+                    strokeWidth: line.width,
+                    stroke: line.color,
+                    dashType: line.dashType,
+                    zIndex: line.zIndex
+                };
 
                 if (isVertical) {
                     childElements.push(view.createLine(
@@ -3322,7 +4059,7 @@
             },
             animation: {
                 type: BAR
-        },
+            },
             opacity: 1
         },
 
@@ -3402,12 +4139,10 @@
                 elements = [],
                 label = bar.children[0];
 
-            elements.push(
-                view.createRect(box, rectStyle)
-            );
+            elements.push(view.createRect(box, rectStyle));
+
             append(elements,
-                ChartElement.fn.getViewElements.call(bar, view)
-            );
+                ChartElement.fn.getViewElements.call(bar, view));
 
             bar.registerId(options.id);
             if (label) {
@@ -3556,10 +4291,11 @@
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
                 valueAxis = isVertical ? plotArea.axisY : plotArea.axisX,
-                axisCrossingValue = valueAxis.options.axisCrossingValue;
+                axisCrossingValue = valueAxis.options.axisCrossingValue,
+                point;
 
             chart.traverseDataPoints(function(value, category, categoryIx) {
-                var point = chartPoints[pointIx++];
+                point = chartPoints[pointIx++];
                 if (point && point.plotValue) {
                     value = point.plotValue;
                 }
@@ -3685,8 +4421,8 @@
 
             if (isStacked) {
                 var stackWrap = cluster.children[0],
-                positiveStack,
-                negativeStack;
+                    positiveStack,
+                    negativeStack;
 
                 if (!stackWrap) {
                     stackWrap = new ChartElement();
