@@ -542,6 +542,32 @@
                 equal(element[0], input[0]);
                 equal(validator.errors()[0], "Custom message");
             });
+
+            test("form submit is preveneted if container is form element and validation fails", function() {
+                container.append($('<form><input type="text" required="required" title="input1 message" /></form>'));
+                var validator = setup(container.find("form")),
+                    called = false;
+
+                container.find("form").bind("submit", function(e) {
+                    called = true;
+                    e.preventDefault();
+                }).trigger("submit");
+
+                ok(!called);
+            });
+
+            test("form is submited if container is form element and validation pass", function() {
+                container.append($('<form><input type="text" required="required" title="input1 message" value="1" /></form>'));
+                var validator = setup(container.find("form")),
+                    called = false;
+
+                container.find("form").bind("submit", function(e) {
+                    called = true;
+                    e.preventDefault();
+                }).trigger("submit");
+
+                ok(called);
+            });
         </script>
     </body>
 </html>

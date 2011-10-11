@@ -103,6 +103,18 @@
         _attachEvents: function() {
             var that = this;
             if (!that.element.is(INPUTSELECTOR)) {
+
+                if (that.element.is("form")) {
+                    that.element.submit(function(e) {
+                        if (!that.validate()) {
+                            e.stopPropagation();
+                            e.stopImmediatePropagation();
+                            e.preventDefault();
+                            return false;
+                        }
+                    });
+                }
+
                 that.element.delegate(INPUTSELECTOR, "blur", function() {
                     that._validateInput($(this));
                 });
