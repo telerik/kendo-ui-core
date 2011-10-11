@@ -2315,7 +2315,7 @@
                 var row = data[dataIdx];
 
                 if (categoryAxis.field) {
-                    var category = getter(categoryAxis.field)(row);
+                    var category = getter(categoryAxis.field, true)(row);
                     if (dataIdx === 0) {
                         categoryAxis.categories = [category];
                     } else {
@@ -2325,7 +2325,7 @@
 
                 for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
                     var currentSeries = series[seriesIdx],
-                        value = getter(currentSeries.field)(row);
+                        value = getter(currentSeries.field, true)(row);
 
                     if (currentSeries.field) {
                         if (dataIdx === 0) {
@@ -5173,7 +5173,7 @@
                 value = data[prop];
 
             if (valueField && series.dataItems) {
-                return getter(valueField)(series.dataItems[index]);
+                return getter(valueField, true)(series.dataItems[index]);
             } else {
                 return defined(value) ? value : "";
             }
