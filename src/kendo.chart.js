@@ -14,6 +14,10 @@
         getter = kendo.getter,
         extend = $.extend;
 
+    var template = function(definition) {
+        return baseTemplate(definition, { useWithBlock: false, paramName: "d" });
+    }
+
     // Constants ==============================================================
     var ABOVE = "above",
         ARIAL12 = "12px Arial, sans-serif",
@@ -8215,10 +8219,6 @@
             return overlay;
     }
     buildGradient.cache = {};
-
-    function template(definition) {
-        return baseTemplate(definition, { useWithBlock: false, paramName: "d" });
-    }
 
     function updateArray(arr, prop, value) {
         var i,
