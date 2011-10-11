@@ -75,8 +75,14 @@ function mkdir(newDir) {
 }
 
 function zip(name, filesPath) {
-    var zipCommand = os.type() == "Linux" ? "7z" : path.resolve("./build/lib/7z/7z"),
-    archive = spawn(zipCommand, ["a", "-tzip", name, '*'], {cwd: filesPath});
+    // cross-platform development example
+    var archive;
+
+    if (os.type() == "Linux") {
+        archive = spawn("7z", [ "a", "-tzip", path.resolve(name), '*' ], { cwd: path.resolve(filesPath) });
+    } else {
+        archive = spawn("./build/lib/7z/7z", [ "a", "-tzip", name, path.join(filesPath, '*') ]);
+    }
 
     archive.stderr.on('data', function (data) {
         sys.print('stderr: ' + data);
@@ -205,7 +211,7 @@ examples.build(PATH, ONLINEEXAMPLES, KENDOCDN);
 
 //archives
 console.log("packaging distribution...");
-zip(path.resolve(path.join(RELEASE, "KendoUI_" + VERSION + ".zip")), PATH);
+zip(path.join(RELEASE, "KendoUI_" + VERSION + ".zip"), PATH);
 
 console.log("packaging online examples...");
-zip(path.resolve(path.join(RELEASE, "OnlineExamples_" + VERSION + ".zip")), ONLINEEXAMPLES);
+zip(path.join(RELEASE, "OnlineExamples_" + VERSION + ".zip"), ONLINEEXAMPLES);
