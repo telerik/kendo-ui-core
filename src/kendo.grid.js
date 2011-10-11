@@ -165,6 +165,8 @@
                 maxHeight = 250000,
                 dataSource = that.dataSource,
                 rangeStart = that._rangeStart,
+                scrollbar = kendo.support.scrollbar(),
+                wrapperElement = that.wrapper[0],
                 itemHeight;
 
             kendo.ui.progress(that.wrapper, false);
@@ -172,7 +174,9 @@
 
             itemHeight = that.itemHeight = that.options.itemHeight() || 0;
 
-            totalHeight = dataSource.total() * itemHeight;
+            var addScrollBarHeight = (wrapperElement.scrollWidth > wrapperElement.offsetWidth) ? scrollbar : 0;
+
+            totalHeight = dataSource.total() * itemHeight + addScrollBarHeight;
 
             for (idx = 0; idx < math.round(totalHeight / maxHeight); idx++) {
                 html += '<div style="width:1px;height:' + maxHeight + 'px"></div>';
@@ -183,7 +187,7 @@
             }
 
             that.verticalScrollbar.html(html);
-            that.wrapper[0].scrollTop = that._scrollTop;
+            wrapperElement.scrollTop = that._scrollTop;
 
             if (rangeStart && !that._fetching) { // we are rebound from outside local range should be reset
                 that._rangeStart = dataSource.skip();
@@ -812,6 +816,18 @@
                 }
 
                 that.content.height(height);
+
+                var scrollables = header.find(">.k-grid-header-wrap"); // add footer when implemented
+
+                if (scrollable.virtual) {
+                    that.content.find(">.k-virtual-scrollable-wrap").bind('scroll', function () {
+                        scrollables.scrollLeft(this.scrollLeft);
+                    });
+                } else {
+                    that.content.bind('scroll', function () {
+                        scrollables.scrollLeft(this.scrollLeft);
+                    });
+                }
             }
         },
 
