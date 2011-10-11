@@ -988,7 +988,7 @@ div.k-grid-header .k-header
 .k-virtual-scrollable-wrap
 {
     height: 100%;
-    overflow: hidden;
+    overflow-y: hidden;
 }
 
 .k-grid-header table,
