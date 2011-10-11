@@ -175,4 +175,5 @@ exports.template = template;
 exports.processFilesRecursive = processFilesRecursive;
 exports.copyTextFile = copyTextFile;
 exports.readText = readText;
+exports.writeText = writeText;
 
