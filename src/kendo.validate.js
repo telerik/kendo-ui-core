@@ -19,7 +19,13 @@
                 return patternMatcher(value, pattern);
             }
             return true;
-        }
+        },
+        hasAttribute = function(input, name) {
+            if (input.length)  {
+                return input[0].attributes[name] !== undefined;
+            }
+            return false;
+        };
 
     var Validator = Component.extend( {
         init: function(element, options) {
@@ -46,7 +52,7 @@
             },
             rules: {
                 required: function(input) {
-                    if (input.filter("[required]").length && input.val() === "") {
+                    if (hasAttribute(input, "required") && input.val() === "") {
                         return false;
                     }
                     return true;
@@ -62,7 +68,7 @@
                         var min = parseInt(input.attr("min"), 10) || 0,
                             val = parseInt(input.val(), 10);
 
-                        return min < val;
+                        return min <= val;
                     }
                     return true;
                 },
@@ -71,7 +77,7 @@
                         var max = parseInt(input.attr("max"), 10) || 0,
                             val = parseInt(input.val(), 10);
 
-                        return max > val;
+                        return max >= val;
                     }
                     return true;
                 },
