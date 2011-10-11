@@ -712,7 +712,7 @@
         ),
         iframe: template(
             "<iframe src='#= contentUrl #' title='#= title #' frameborder='0'" +
-                " style='border:0;width:100%;height:100%;'>" +
+                " class='k-content-frame'>" +
                     "This page requires frames in order to show content" +
             "</iframe>"
         ),
