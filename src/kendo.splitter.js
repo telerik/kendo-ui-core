@@ -117,6 +117,7 @@
         COLLAPSE = "collapse",
         CONTENTLOAD = "contentLoad",
         RESIZE = "resize",
+        LAYOUTCHANGE = "layoutChange",
         HORIZONTAL = "horizontal",
         VERTICAL = "vertical",
         MOUSEENTER = "mouseenter",
@@ -262,7 +263,13 @@
                  * @param {Event} e
                  * @param {Element} e.pane The pane which is resized
                  */
-                RESIZE
+                RESIZE,
+                /**
+                 * Fires when the splitter layout has changed
+                 * @name kendo.ui.Splitter#layoutChange
+                 * @event
+                 */
+                LAYOUTCHANGE
             ], that.options);
 
             that.bind(RESIZE, proxy(that._resize, that));
@@ -491,6 +498,8 @@
                     child.style[positioningProperty] = Math.floor(sum) + "px";
                     sum += child[sizingDomProperty];
                 });
+
+            that.trigger(LAYOUTCHANGE);
         },
         toggle: function(pane, expand) {
             var pane = $(pane),

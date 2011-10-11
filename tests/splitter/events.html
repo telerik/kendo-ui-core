@@ -57,6 +57,23 @@
 
                 ok(triggered);
             });
+
+            test("layoutChange is triggered after resize", function() {
+                var triggered = false,
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ {}, {}, {} ]
+                        });
+
+                splitter.data("kendoSplitter").bind("layoutChange", function() {
+                    triggered = true;
+                });
+
+                splitter.data("kendoSplitter").trigger("resize");
+
+                ok(triggered);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
