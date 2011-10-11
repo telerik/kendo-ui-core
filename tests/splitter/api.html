@@ -150,11 +150,11 @@
 
             test("toggle(true) converts associated arrow to collapse arrow", function() {
                 var splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { collapsible: true, collapsed: true }, {} ]
-                }),
-                previousArrow = splitter.find(".k-expand-prev");
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true, collapsed: true }, {} ]
+                        }),
+                    previousArrow = splitter.find(".k-expand-prev");
 
                 splitter.data("kendoSplitter").toggle(".k-pane:first", true);
 
@@ -164,10 +164,10 @@
 
             test("toggle(true) enables splitbar resize", function() {
                 var splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { collapsible: true, collapsed: true }, {} ]
-                });
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true, collapsed: true }, {} ]
+                        });
 
                 splitter.data("kendoSplitter").toggle(".k-pane:first", true);
 
@@ -176,10 +176,10 @@
 
             test("toggle(true) does not add splibar hover style", function() {
                 var splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { collapsible: true, collapsed: true }, {} ]
-                });
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true, collapsed: true }, {} ]
+                        });
 
                 splitter.data("kendoSplitter").toggle(".k-pane:first", true);
 
@@ -188,10 +188,10 @@
 
             test("toggle() without arguments toggles pane collapsed state", function() {
                 var splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { collapsible: true, collapsed: true }, {} ]
-                });
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true, collapsed: true }, {} ]
+                        });
 
                 splitter.data("kendoSplitter").toggle(".k-pane:first");
                 ok(!splitter.find(".k-pane:first").data("pane").collapsed);
@@ -201,10 +201,10 @@
 
                 splitter.remove();
                 splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { collapsible: true }, {} ]
-                });
+                    .appendTo(document.body)
+                    .kendoSplitter({
+                        panes: [ { collapsible: true }, {} ]
+                    });
 
                 splitter.data("kendoSplitter").toggle(".k-pane:first");
                 ok(splitter.find(".k-pane:first").data("pane").collapsed);
@@ -215,11 +215,11 @@
 
             test("collapse() calls toggle(false)", function() {
                 var args,
-                splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { collapsible: true }, {} ]
-                }).data("kendoSplitter");
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, {} ]
+                        }).data("kendoSplitter");
 
                 splitter.toggle = function() {
                     args = arguments;
@@ -235,11 +235,11 @@
 
             test("expand() calls toggle(true)", function() {
                 var args,
-                splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { collapsible: true }, {} ]
-                }).data("kendoSplitter");
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, {} ]
+                        }).data("kendoSplitter");
 
                 splitter.toggle = function() {
                     args = arguments;
@@ -255,11 +255,11 @@
 
             test("size() gets/sets pane size", function() {
                 var splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { size: "110px" }, {} ]
-                }).data("kendoSplitter"),
-                firstPane = $(".k-pane:first", splitter.element);
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { size: "110px" }, {} ]
+                        }).data("kendoSplitter"),
+                    firstPane = $(".k-pane:first", splitter.element);
 
                 equals(splitter.size(firstPane), "110px");
 
@@ -270,11 +270,11 @@
 
             test("min() gets/sets pane min", function() {
                 var splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { min: "110px", size: "200px" }, {} ]
-                }).data("kendoSplitter"),
-                firstPane = $(".k-pane:first", splitter.element);
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { min: "110px", size: "200px" }, {} ]
+                        }).data("kendoSplitter"),
+                    firstPane = $(".k-pane:first", splitter.element);
 
                 equals(splitter.min(firstPane), "110px");
 
@@ -285,11 +285,11 @@
 
             test("max() gets/sets pane max", function() {
                 var splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { max: "200px", size: "110px" }, {} ]
-                }).data("kendoSplitter"),
-                firstPane = $(".k-pane:first", splitter.element);
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { max: "200px", size: "110px" }, {} ]
+                        }).data("kendoSplitter"),
+                    firstPane = $(".k-pane:first", splitter.element);
 
                 equals(splitter.max(firstPane), "200px");
 
@@ -300,19 +300,37 @@
 
             test("size(value) triggers resize", function() {
                 var triggered = false,
-                splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { size: "110px" }, {} ]
-                })
-                .data("kendoSplitter")
-                .bind("resize", function() {
-                    triggered = true;
-                });
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { size: "110px" }, {} ]
+                        })
+                        .data("kendoSplitter")
+                        .bind("resize", function() {
+                            triggered = true;
+                        });
 
                 splitter.size(".k-pane:first", "120px");
 
                 ok(triggered);
+            });
+
+            test("ajaxRequest() with remote URL", function() {
+                var splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ {}, {} ]
+                        }),
+                    url = "http://google.com";
+
+                splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
+
+                var pane = splitter.find(".k-pane:first"),
+                    iframe = pane.find("> iframe");
+
+                equals(iframe.length, 1);
+                equals(iframe.attr("src"), url);
+                ok(!pane.hasClass("k-scrollable"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
