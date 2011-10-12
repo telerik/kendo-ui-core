@@ -568,6 +568,14 @@
 
                 ok(called);
             });
+
+            test("novalidate is added to the form if container is a form element", function() {
+                container.append($('<form><input type="text" required="required" title="input1 message" /></form>'));
+                var form = container.find("form"),
+                    validator = setup(form);
+
+                ok(form.attr("novalidate"), "novalidate");
+            });
         </script>
     </body>
 </html>

@@ -35,6 +35,10 @@
 
             that._errorTemplate = kendo.template(that.options.errorTemplate);
 
+            if (that.element.is("form")) {
+                that.element.attr("novalidate", "novalidate");
+            }
+
             that._errors = {};
             that._attachEvents();
         },
