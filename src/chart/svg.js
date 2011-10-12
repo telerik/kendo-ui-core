@@ -26,6 +26,7 @@
         COORD_PRECISION = Chart.COORD_PRECISION,
         DEFAULT_WIDTH = Chart.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = Chart.DEFAULT_HEIGHT,
+        DEFAULT_FONT = Chart.DEFAULT_FONT,
         GLOBAL_CLIP = "globalClip",
         RADIAL = "radial",
         SQUARE = "square",
@@ -205,7 +206,7 @@
             x: 0,
             y: 0,
             baseline: 0,
-            font: "inherit",
+            font: DEFAULT_FONT,
             size: {
                 width: 0,
                 height: 0

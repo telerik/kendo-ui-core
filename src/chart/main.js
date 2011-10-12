@@ -20,7 +20,7 @@
 
     // Constants ==============================================================
     var ABOVE = "above",
-        ARIAL12 = "12px Arial, sans-serif",
+        DEFAULT_FONT = "12px sans-serif",
         ANIMATION_STEP = 10,
         BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
@@ -47,7 +47,6 @@
         HEIGHT = "height",
         HORIZONTAL = "horizontal",
         INITIAL_ANIMATION_DURATION = 600,
-        INHERIT = "inherit",
         INSIDE_BASE = "insideBase",
         INSIDE_END = "insideEnd",
         INTERPOLATE = "interpolate",
@@ -850,6 +849,7 @@
         },
 
         options: {
+            font: DEFAULT_FONT,
             color: BLACK,
             align: LEFT,
             vAlign: ""
@@ -2877,7 +2877,7 @@
             labels: {
                 visible: false,
                 distance: 35,
-                font: ARIAL12,
+                font: DEFAULT_FONT,
                 margin: getSpacing(0.5),
                 align: CIRCLE
             },
@@ -4977,6 +4977,7 @@
         CLIP: CLIP,
         DEFAULT_WIDTH: DEFAULT_WIDTH,
         DEFAULT_HEIGHT: DEFAULT_HEIGHT,
+        DEFAULT_FONT: DEFAULT_FONT,
         template: template,
         rotatePoint: rotatePoint,
         round: round,
