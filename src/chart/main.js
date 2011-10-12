@@ -4973,12 +4973,10 @@
     kendo.ui.plugin("Chart", Chart);
 
     deepExtend(Chart, {
-        const: {
-            COORD_PRECISION: COORD_PRECISION,
-            CLIP: CLIP,
-            DEFAULT_WIDTH: DEFAULT_WIDTH,
-            DEFAULT_HEIGHT: DEFAULT_HEIGHT
-        },
+        COORD_PRECISION: COORD_PRECISION,
+        CLIP: CLIP,
+        DEFAULT_WIDTH: DEFAULT_WIDTH,
+        DEFAULT_HEIGHT: DEFAULT_HEIGHT,
         template: template,
         rotatePoint: rotatePoint,
         round: round,
