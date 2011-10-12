@@ -1518,7 +1518,8 @@
             }
         }
         return new Array(count).join("(") + result;
-    }
+    },
+    localUrlRe = /^([a-z]+:)?\/\//i;
 
     extend(kendo, /** @lends kendo */ {
         /**
@@ -1592,6 +1593,9 @@
         touchLocation: touchLocation,
         eventTarget: eventTarget,
         htmlEncode: htmlEncode,
+        isLocalUrl: function(url) {
+            return url && !localUrlRe.test(url);
+        },
         /** @ignore */
         getter: function(expression, safe) {
             expression = expression || "";

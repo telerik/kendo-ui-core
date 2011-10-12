@@ -41,7 +41,8 @@
     *       <li>Orientation of the splitter</li>
     *   </ul>
     *   <p>
-    *       Pane properties are set for each individual pane in a Splitter, whereas Splitter properties apply to the entire widget.
+    *       Pane properties are set for each individual pane in a Splitter,
+    *       whereas Splitter properties apply to the entire widget.
     *   </p>
     * @exampleTitle Setting Splitter and Pane properties
     * @example
@@ -65,7 +66,7 @@
     *   </p>
     * @exampleTitle Creating nested Splitter layout
     * @example
-    *   <!-- Define nested HTML layout with divs-->
+    *   <!-- Define nested HTML layout with divs -->
     *   <div id="horizontalSplitter">
     *       <div><p>Left Side Pane Content</p></div>
     *       <div>
@@ -77,10 +78,10 @@
     *   </div>
     * @exampleTitle
     * @example
-    *   //Initialize both Splitters with the proper orientation
-    *   $(document).ready(function(){
+    *   // Initialize both Splitters with the proper orientation
+    *   $(document).ready(function() {
     *       $("horizontalSplitter").kendoSplitter();
-    *       $("verticalSplitter").kendoSplitter({orientation: "vertical"});
+    *       $("verticalSplitter").kendoSplitter({ orientation: "vertical" });
     *   });
     *
     * @section
@@ -88,21 +89,28 @@
     *   <p>
     *       While any valid technique for loading Ajax content can be used, Splitter provides built-in
     *       support for asynchronously loading content from URLs. These URLs should return HTML fragments
-    *       that can be loaded in a Splitter pane. Ajax content loading must be configured for each Pane that should use it.
+    *       that can be loaded in a Splitter pane. If you want to load a whole page in an IFRAME,
+    *       you can do so by specifying the complete URL (e.g. http://kendoui.com/)
+    *       Ajax content loading must be configured for each Pane that should use it.
     *   </p>
     * @exampleTitle Loading Splitter content asynchronously
     * @example
-    *   <!-- Define the Splitter HTML-->
+    *   <!-- Define the Splitter HTML -->
     *   <div id="splitter">
     *       <div>Area 1 with Static Content</div>
-    *       <div> </div>
+    *       <div></div>
+    *       <div></div>
     *   </div>
     * @exampleTitle
     * @example
-    *   //Initialize the Splitter and configure async loading for one pane
-    *   $(document).ready(function(){
+    *   // Initialize the Splitter and configure async loading for one pane, and an iframe for a thrid pane
+    *   $(document).ready(function() {
     *       $("#splitter").kendoSplitter({
-    *           panes: [null,{ contentUrl: "html-content-snippet.html"}]
+    *           panes: [
+    *               {},
+    *               { contentUrl: "html-content-snippet.html" },
+    *               { contentUrl: "http://kendoui.com" }
+    *           ]
     *       });
     *   });
     */
@@ -279,6 +287,7 @@
             that.element
                 .delegate(splitbarSelector, MOUSEENTER, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                 .delegate(splitbarSelector, MOUSELEAVE, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
+                .delegate(splitbarSelector, "mousedown", function() { that.element.find("> .k-pane > .k-content-frame").after("<div class='k-overlay' />"); })
                 .delegate(expandCollapseSelector, MOUSEENTER, function() { $(this).addClass("k-state-hover")})
                 .delegate(expandCollapseSelector, MOUSELEAVE, function() { $(this).removeClass('k-state-hover')})
                 .delegate(".k-splitbar .k-collapse-next, .k-splitbar .k-collapse-prev", CLICK, that._arrowClick(COLLAPSE))
@@ -320,7 +329,7 @@
 
         /**
         * Loads the pane content from the specified URL.
-        * @param {Selector|DomElement|jQueryObject} pane The pane whose content
+        * @param {Selector|DomElement|jQueryObject} pane The pane whose content should be loaded.
         * @param {String} url The URL which returns the pane content.
         * @param {Object|String} data Data to be sent to the server.
         * @example
@@ -337,17 +346,24 @@
             if (url) {
                 pane.append("<span class='k-icon k-loading k-pane-loading' />");
 
-                $.ajax({
-                    url: url,
-                    data: data || {},
-                    type: "GET",
-                    dataType: "html",
-                    success: function (data) {
-                        pane.html(data);
+                if (kendo.isLocalUrl(url)) {
+                    $.ajax({
+                        url: url,
+                        data: data || {},
+                        type: "GET",
+                        dataType: "html",
+                        success: function (data) {
+                            pane.html(data);
 
-                        that.trigger(CONTENTLOAD, { pane: pane[0] });
-                    }
-                });
+                            that.trigger(CONTENTLOAD, { pane: pane[0] });
+                        }
+                    });
+                } else {
+                    pane.removeClass("k-scrollable")
+                        .html("<iframe src='" + url + "' frameborder='0' class='k-content-frame'>" +
+                                "This page requires frames in order to show content" +
+                            + "</iframe>");
+                }
             }
         },
         _triggerAction: function(type, pane) {
@@ -661,11 +677,13 @@
             return this._minPosition;
         },
         _stop: function(e) {
-            var that = this;
+            var that = this,
+                splitBar = $(e.currentTarget);
+
+            splitBar.siblings(".k-pane").find("> .k-content-frame + .k-overlay").remove();
 
             if (e.keyCode !== kendo.keys.ESC) {
                 var ghostPosition = e.position,
-                    splitBar = $(e.currentTarget),
                     previousPane = splitBar.prev(),
                     nextPane = splitBar.next(),
                     previousPaneConfig = previousPane.data(PANE),
