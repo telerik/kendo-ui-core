@@ -129,11 +129,7 @@
         RESIZE = "resize",
         ERROR = "error",
         OVERFLOW = "overflow",
-        localUrlRe = /^([a-z]+:)?\/\//i;
-
-    function isLocalUrl(url) {
-        return url && !localUrlRe.test(url);
-    }
+        isLocalUrl = kendo.isLocalUrl;
 
     function windowObject(element) {
         return element.children(KWINDOWCONTENT).data("kendoWindow");
@@ -716,7 +712,7 @@
         ),
         iframe: template(
             "<iframe src='#= contentUrl #' title='#= title #' frameborder='0'" +
-                " style='border:0;width:100%;height:100%;'>" +
+                " class='k-content-frame'>" +
                     "This page requires frames in order to show content" +
             "</iframe>"
         ),
