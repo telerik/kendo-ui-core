@@ -26,9 +26,9 @@
 
     // Constants ==============================================================
     var BLACK = "#000",
-        CLIP = Chart.const.CLIP,
-        DEFAULT_WIDTH = Chart.const.DEFAULT_WIDTH,
-        DEFAULT_HEIGHT = Chart.const.DEFAULT_HEIGHT,
+        CLIP = Chart.CLIP,
+        DEFAULT_WIDTH = Chart.DEFAULT_WIDTH,
+        DEFAULT_HEIGHT = Chart.DEFAULT_HEIGHT,
         INHERIT = "inherit",
         OBJECT = "object",
         RADIAL = "radial";
@@ -637,7 +637,7 @@
 
     // Helpers ================================================================
     function isIE9CompatibilityView() {
-        return $.browser.msie && !supportsSVG() && typeof window.performance !== UNDEFINED;
+        return $.browser.msie && !supportsSVG() && typeof window.performance !== "undefined";
     }
 
     function blendColors(base, overlay, alpha) {

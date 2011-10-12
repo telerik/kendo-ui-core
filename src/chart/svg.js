@@ -22,10 +22,10 @@
         math = Math;
 
     // Constants ==============================================================
-    var CLIP = Chart.const.CLIP,
-        COORD_PRECISION = Chart.const.COORD_PRECISION,
-        DEFAULT_WIDTH = Chart.const.DEFAULT_WIDTH,
-        DEFAULT_HEIGHT = Chart.const.DEFAULT_HEIGHT,
+    var CLIP = Chart.CLIP,
+        COORD_PRECISION = Chart.COORD_PRECISION,
+        DEFAULT_WIDTH = Chart.DEFAULT_WIDTH,
+        DEFAULT_HEIGHT = Chart.DEFAULT_HEIGHT,
         GLOBAL_CLIP = "globalClip",
         RADIAL = "radial",
         SQUARE = "square",
