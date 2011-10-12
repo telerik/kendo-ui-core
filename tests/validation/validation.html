@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.validation tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.validate.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.validation Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var container,
+                Validator = kendo.ui.Validator;
+
+            function setup(element, options) {
+                if (!element.parent().length) {
+                    element.appendTo(container);
+                }
+                return new Validator(element, $.extend({}, options));
+            }
+
+            module("kendo.ui.validation", {
+                setup: function() {
+                    container = $("<div/>").appendTo("<form/>").appendTo($(document.body));
+                },
+                teardown: function() {
+                    container.remove();
+                }
+            });
+
+            test("validate returns false for empty input with attribute required", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true for non empty input with attribute required", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                input.val("someValue");
+
+                ok(validator.validate());
+            });
+
+            test("validate returns true for non empty input with attribute required which is initially invalid", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+
+                input.val("someValue");
+
+                ok(validator.validate());
+            });
+
+            test("checkValidity returns true for non empty input with attribute required", function() {
+                var input = $('<input type="text" required="required" />'),
+                    validator = setup(input);
+
+                input.val("someValue");
+
+                ok(validator._checkValidity(input));
+            });
+
+            test("validates multiple input elements if initialized with container", function() {
+                container.append($('<input type="text" required="required" /><input type="text" required="required" />'));
+                var validator = setup(container);
+                ok(!validator.validate());
+            });
+
+            test("validate returns false if at least one element is invalid", function() {
+                container.append($('<input type="text" required="required" value="1" /><input type="text" required="required" />'));
+                var validator = setup(container);
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if every element is valid", function() {
+                container.append($('<input type="text" required="required" value="1" /><input type="text" required="required" value="2" />'));
+                var validator = setup(container);
+                ok(validator.validate());
+            });
+
+            test("validate returns true container does not contain input elements", function() {
+                container.append($('<span />'));
+                var validator = setup(container);
+                ok(validator.validate());
+            });
+
+            test("validate returns true container is empty", function() {
+                container.empty();
+                var validator = setup(container);
+                ok(validator.validate());
+            });
+
+            test("errors returns empty array if validate is not executed", function() {
+                var input = $('<input type="text" required  validationMessage="message" />'),
+                    validator = setup(input);
+
+                equal(validator.errors().length, 0);
+            });
+
+            test("errors returns validationMessage attribute value for single invalid element", function() {
+                var input = $('<input type="text" required  validationMessage="message" />'),
+                    validator = setup(input);
+
+                validator.validate();
+                var messages = validator.errors();
+
+                equal(messages.length, 1);
+                equal(messages[0], "message");
+            });
+
+            test("errors returns title if no validationMessage attribute for single invalid element", function() {
+                var input = $('<input type="text" required  title="message" />'),
+                    validator = setup(input);
+
+                    validator.validate();
+                var messages = validator.errors();
+                equal(messages.length, 1);
+                equal(messages[0], "message");
+            });
+
+            test("errors returns validationMessage if both validationMessage and title are set for single invalid element", function() {
+                var input = $('<input type="text" required  title="message" validationMessage="validationMessage"/>'),
+                    validator = setup(input);
+
+                    validator.validate();
+                var messages = validator.errors();
+                equal(messages.length, 1);
+                equal(messages[0], "validationMessage");
+            });
+
+            test("errors returns formatted with input name message if set for single invalid element", function() {
+                var input = $('<input type="text" name="Foo" required validationMessage="{0} is invalid"/>'),
+                    validator = setup(input);
+
+                validator.validate();
+
+                var messages = validator.errors();
+                equal(messages.length, 1);
+                equal(messages[0], "Foo is invalid");
+            });
+
+            test("errors returns messages for every invalid element", function() {
+                container.append($('<input name="input1" type="text" required="required" title="input1 message" /><input name="input2" type="text" required="required" title="input2 message"/>'));
+                var validator = setup(container);
+
+                validator.validate();
+
+                var messages = validator.errors();
+                equal(messages.length, 2);
+                equal(messages[0], "input1 message");
+                equal(messages[1], "input2 message");
+            });
+
+            test("errors is cleared if revalidated single input", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                validator.validate();
+                input.val("someValue");
+                validator.validate();
+
+                var messages = validator.errors();
+                equal(messages.length, 0);
+            });
+
+            test("errors are reset if element is valid multiple inputs", function() {
+                container.append($('<input name="input1" type="text" required="required" title="input1 message" /><input name="input2" type="text" required="required" title="input2 message"/>'));
+                var validator = setup(container);
+
+                validator.validate();
+
+                container.find(":input").first().val("someValue");
+
+                validator.validate();
+
+                var messages = validator.errors();
+                equal(messages.length, 1);
+                equal(messages[0], "input2 message");
+            });
+
+            test("existing error message element container is reused", function() {
+                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-for="foo"/>')),
+                validator = setup(container);
+                validator.validate();
+
+                var span = container.find("span");
+                ok(!span.eq(0).hasClass("k-invalid-msg"));
+                ok(span.eq(1).hasClass("k-invalid-msg"));
+                ok(span.eq(1).text(), "invalid");
+            });
+
+            test("existing error message element container is reused on multiple validate calls", function() {
+                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-for="foo"/>')),
+                validator = setup(container);
+                validator.validate();
+                validator.validate();
+
+                equal(container.find("span.k-invalid-msg").length, 1);
+            });
+
+            test("displayes message next to the validated element", function() {
+                var input = $('<input type="text" required validationMessage="invalid" />'),
+                validator = setup(input);
+                validator.validate();
+
+                equal(input.next("span").text(), "invalid");
+            });
+
+            test("multiple calls to validation does not render multiple messages", function() {
+                var input = $('<input type="text" required validationMessage="invalid" />'),
+                validator = setup(input);
+
+                validator.validate();
+                validator.validate();
+                validator.validate();
+
+                equal(input.parent().find("span.k-invalid-msg").length, 1);
+            });
+
+            test("does not displayes message if element is valid", function() {
+                var input = $('<input type="text" required validationMessage="invalid" value="1" />'),
+                validator = setup(input);
+                validator.validate();
+
+                ok(!input.next("span").length);
+            });
+
+            test("message element is hidden if element change its state from invalid to valid", function() {
+                var input = $('<input type="text" required validationMessage="invalid" />'),
+                    validator = setup(input);
+
+                validator.validate();
+
+                input.val("someValue");
+
+                validator.validate();
+
+                ok(!input.next("span:visible").length);
+            });
+
+            test("individualErrors template overrides the default template", function() {
+                var input = $('<input type="text" required validationMessage="invalid"/>'),
+                validator = setup(input, {
+                    errorTemplate: "<div>${message}</div>"
+                });
+                validator.validate();
+                equal(input.next("div").text(), "invalid");
+            });
+
+            test("validate returns true if input with type=text value does not match min attribute", function() {
+                var input = $('<input type="text" value="1" min="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=number value does not match min attribute", function() {
+                var input = $('<input type="number" value="1" min="10" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=number value does match min attribute", function() {
+                var input = $('<input type="number" value="11" min="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns true if input with type=number value does have same value as min attribute", function() {
+                var input = $('<input type="number" value="10" min="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns true if input with type=number value does have same value as max attribute", function() {
+                var input = $('<input type="number" value="10" max="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=number value does not match max attribute", function() {
+                var input = $('<input type="number" value="11" max="10" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=text value does not match max attribute", function() {
+                var input = $('<input type="text" value="11" max="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns true if input with type=number value does match max attribute", function() {
+                var input = $('<input type="number" value="9" max="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=number value does not match step attribute and have min set", function() {
+                var input = $('<input type="number" value="6" max="10" step="3" min="5" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=number value does match step attribute and have both max and min set", function() {
+                var input = $('<input type="number" value="8" max="10" step="3" min="5" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate min defaults to 0 if not set and step is set - invalid value", function() {
+                var input = $('<input type="number" value="8" step="3" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate min defaults to 0 if not set and step is set - valid value", function() {
+                var input = $('<input type="number" value="8" step="4" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=text value does not match pattern attribute", function() {
+                var input = $('<input type="text" value="aaa" pattern="\\d"/>'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=text value does match pattern attribute", function() {
+                var input = $('<input type="text" value="6" pattern="\\d"/>'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=email value is not valid email", function() {
+                var input = $('<input type="email" value="aaaaa" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=email value is valid email", function() {
+                var input = $('<input type="email" value="test@test.com" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=email value does not match the pattern", function() {
+                var input = $('<input type="email" value="test@test.com" pattern="6test?@\\w+\\.\\w+" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns false if input with type=email value does not match the pattern", function() {
+                var input = $('<input type="email" value="6test@test.com" pattern="6test?@\\w+\\.\\w+" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=url value does not match", function() {
+                var input = $('<input type="url" value="test" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=url value match", function() {
+                var input = $('<input type="url" value="http://www.test.test" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=url value does not match the pattern", function() {
+                var input = $('<input type="url" value="http://test.test" pattern="https?://www.+" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=url value does match the pattern", function() {
+                var input = $('<input type="url" value="http://www.test.test" pattern="https?://www.+" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=tel value does not match the pattern", function() {
+                var input = $('<input type="tel" value="test" pattern="\\d+" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=tel value does match the pattern", function() {
+                var input = $('<input type="tel" value="666" pattern="\\d+" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=search value does not match the pattern", function() {
+                var input = $('<input type="search" value="test" pattern="\\d+" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=search value does match the pattern", function() {
+                var input = $('<input type="search" value="666" pattern="\\d+" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate class is added to the invalid inputs", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                validator.validate();
+
+                ok(input.hasClass("k-invalid"));
+            });
+
+            test("validate class is not added to the valid inputs", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                input.val(1);
+
+                validator.validate();
+
+                ok(!input.hasClass("k-invalid"));
+            });
+
+            test("validate class is remove to if invalid inputs pass validation", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                validator.validate();
+
+                input.val(1);
+
+                validator.validate();
+
+                ok(!input.hasClass("k-invalid"));
+            });
+
+            test("field is revalidated on blur", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                input.trigger("blur");
+                ok(input.hasClass("k-invalid"));
+            });
+
+            test("multiple errors are not added when invalid input is blured several times", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input);
+
+                input.trigger("blur");
+                input.trigger("blur");
+                equal(validator.errors().length, 1);
+            });
+
+            test("field is revalidated on blur with container", function() {
+                container.append($('<input type="text" required="required" title="input1 message" /><input type="text" required="required" title="input2 message"/>'));
+                var validator = setup(container);
+
+                container.find(":input").trigger("blur");
+                ok(container.find(":input").eq(0).hasClass("k-invalid"));
+                ok(container.find(":input").eq(1).hasClass("k-invalid"));
+            });
+
+            test("message for required is applied", function() {
+                var input = $('<input type="text" required />'),
+                validator = setup(input, { messages: { required: "Field is required" } });
+
+                validator.validate();
+
+                equal(validator.errors()[0], "Field is required");
+            });
+
+            test("message for min is applied with min attribute value", function() {
+                var input = $('<input name="Foo" type="number" min="2" value="1" />'),
+                validator = setup(input);
+
+                validator.validate();
+
+                equal(validator.errors()[0], "Foo should be greater than 2");
+            });
+
+            test("message for max is applied with max attribute value", function() {
+                var input = $('<input name="Foo" type="number" max="2" value="10" />'),
+                validator = setup(input);
+
+                validator.validate();
+
+                equal(validator.errors()[0], "Foo should be smaller than 2");
+            });
+
+            test("message as function", function() {
+                var input = $('<input type="text" required />'),
+                    element,
+                    validator = setup(input, { messages: {
+                            required: function() {
+                                element = arguments[0];
+                                return "Field is required";
+                            }
+                    }});
+
+                validator.validate();
+
+                equal(validator.errors()[0], "Field is required");
+                ok(element);
+            });
+
+            test("custom validation rule is executed", function() {
+                var input = $('<input name="Field" type="text" />'),
+                    element,
+                    validator = setup(input, {
+                        rules: {
+                            custom: function() {
+                                element = arguments[0];
+                                return false
+                            }
+                        },
+                        messages: { custom: "Custom message" }
+                    });
+
+                ok(!validator.validate());
+                equal(element[0], input[0]);
+                equal(validator.errors()[0], "Custom message");
+            });
+
+            test("form submit is preveneted if container is form element and validation fails", function() {
+                container.append($('<form><input type="text" required="required" title="input1 message" /></form>'));
+                var validator = setup(container.find("form")),
+                    called = false;
+
+                container.find("form").bind("submit", function(e) {
+                    called = true;
+                    e.preventDefault();
+                }).trigger("submit");
+
+                ok(!called);
+            });
+
+            test("form is submited if container is form element and validation pass", function() {
+                container.append($('<form><input type="text" required="required" title="input1 message" value="1" /></form>'));
+                var validator = setup(container.find("form")),
+                    called = false;
+
+                container.find("form").bind("submit", function(e) {
+                    called = true;
+                    e.preventDefault();
+                }).trigger("submit");
+
+                ok(called);
+            });
+
+            test("novalidate is added to the form if container is a form element", function() {
+                container.append($('<form><input type="text" required="required" title="input1 message" /></form>'));
+                var form = container.find("form"),
+                    validator = setup(form);
+
+                ok(form.attr("novalidate"), "novalidate");
+            });
+        </script>
+    </body>
+</html>

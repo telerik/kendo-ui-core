@@ -53,6 +53,16 @@ var categories = {
                     url: "dragdrop/events.html"
                 }
             ]
+        },
+        {
+            text: "Validation",
+            spriteCssClass: "validationIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "validation/index.html"
+                }
+            ]
         }
     ],
     widgets: [
