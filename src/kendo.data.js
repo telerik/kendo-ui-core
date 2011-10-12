@@ -1169,6 +1169,11 @@
             that.trigger(CHANGE);
         },
 
+        /**
+         * Returns the raw data record at the specified index
+         * @param {Number} The zero-based index of the data record
+         * @returns {Object}
+         */
         at: function(index) {
             return this._data[index];
         },
