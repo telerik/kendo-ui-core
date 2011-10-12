@@ -22,3 +22,4 @@ functional-tests/**/Backup/
 functional-tests/**/TestLists/
 app.js
 node_modules
+src/kendo.chart.js

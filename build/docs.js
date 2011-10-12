@@ -32,7 +32,7 @@ function build() {
         "src/kendo.treeview.js",
         "src/kendo.window.js",
         "src/kendo.upload.js",
-        "src/kendo.chart.js",
+        "src/chart/docs.js",
         "src/kendo.grid.js"
     ]);
 }

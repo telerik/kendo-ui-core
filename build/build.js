@@ -4,6 +4,7 @@ var fs = require("fs"),
     os = require("os"),
     themes = require("./themes"),
     kendoBuild = require("./kendo-build"),
+    kendoScripts = require("./kendo-scripts"),
     cssmin = require("./lib/cssmin").cssmin,
     examples = require("./examples"),
     spawn = require('child_process').spawn,
@@ -186,7 +187,9 @@ function buildExamples() {
 console.log("build initiated.");
 createDirectories();
 
-//processing
+console.log("merging multipart scripts...");
+kendoScripts.mergeScripts("src/");
+
 console.log("processing scripts...");
 processScripts();
 
