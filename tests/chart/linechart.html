@@ -699,7 +699,11 @@
                     SERIES_NAME = "series";
 
                 function createPoint(options) {
-                    point = new LinePoint(VALUE, options);
+                    point = new LinePoint(VALUE,
+                        $.extend(true, {
+                            labels: { font: SANS12 }
+                        }, options)
+                    );
 
                     point.category = CATEGORY;
                     point.dataItem = { value: VALUE };
