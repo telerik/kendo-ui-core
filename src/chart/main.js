@@ -97,7 +97,7 @@
         ZERO_THRESHOLD = 0.2;
 
     // Chart ==================================================================
-    var Chart = Component.extend(/** @lends kendo.ui.Chart.prototype */ {
+    var Chart = Component.extend({
         init: function(element, options) {
             var chart = this,
                 theme;
@@ -124,26 +124,7 @@
             applySeriesDefaults(chart.options);
 
             chart.bind([
-                /**
-                 * Fires when the chart has received data from the data source
-                 * and is about to render it.
-                 * @name kendo.ui.Chart#dataBound
-                 * @event
-                 * @param {Event} e
-                 */
                 DATABOUND,
-
-                /**
-                 * Fires when chart series are clicked.
-                 * @name kendo.ui.Chart#seriesClick
-                 * @event
-                 * @param {Event} e
-                 * @param {Object} e.value The data point value.
-                 * @param {Object} e.category The data point category
-                 * @param {Object} e.series The clicked series.
-                 * @param {Object} e.dataItem The original data item (when binding to dataSource).
-                 * @param {Object} e.element The DOM element of the data point.
-                 */
                 SERIES_CLICK
             ], chart.options);
 
@@ -189,14 +170,6 @@
             transitions: true
         },
 
-        /**
-         * Reloads the data and repaints the chart.
-         * @example
-         * var chart = $("#chart").data("kendoChart");
-         *
-         * // refreshes the chart
-         * chart.refresh();
-         */
         refresh: function() {
             var chart = this;
 
@@ -4551,7 +4524,7 @@
         this.view = view;
     }
 
-    SVGOverlayDecorator.prototype = /** @ignore */ {
+    SVGOverlayDecorator.prototype = {
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
@@ -4582,7 +4555,7 @@
         this.view = view;
     }
 
-    SVGGradientDecorator.prototype = /** @ignore */ {
+    SVGGradientDecorator.prototype = {
         decorate: function(element) {
             var decorator = this,
                 options = element.options;
@@ -5153,7 +5126,7 @@
         this.view = view;
     }
 
-    VMLOverlayDecorator.prototype = /** @ignore */ {
+    VMLOverlayDecorator.prototype = {
         decorate: function(element) {
             var options = element.options,
                 overlay = buildGradient(element.options.overlay);
@@ -5176,7 +5149,7 @@
         this.view = view;
     }
 
-    VMLGradientDecorator.prototype = /** @ignore */ {
+    VMLGradientDecorator.prototype = {
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
@@ -6044,7 +6017,7 @@
         color.b = color.normalizeByte(color.b);
     };
 
-    Color.prototype = /** @ignore */ {
+    Color.prototype = {
         toHex: function() {
             var color = this,
                 pad = color.padDigit,

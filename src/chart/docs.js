@@ -1945,7 +1945,37 @@
          * @option {Boolean} [transitions] <true>
          * A value indicating if transition animations should be played.
          */
-        init: function() { }
+        init: function() {
+            /**
+             * Fires when the chart has received data from the data source
+             * and is about to render it.
+             * @name kendo.ui.Chart#dataBound
+             * @event
+             * @param {Event} e
+             */
+
+            /**
+             * Fires when chart series are clicked.
+             * @name kendo.ui.Chart#seriesClick
+             * @event
+             * @param {Event} e
+             * @param {Object} e.value The data point value.
+             * @param {Object} e.category The data point category
+             * @param {Object} e.series The clicked series.
+             * @param {Object} e.dataItem The original data item (when binding to dataSource).
+             * @param {Object} e.element The DOM element of the data point.
+             */
+        },
+
+        /**
+         * Reloads the data and repaints the chart.
+         * @example
+         * var chart = $("#chart").data("kendoChart");
+         *
+         * // refreshes the chart
+         * chart.refresh();
+         */
+        refresh: function() { }
     };
 
 })(jQuery);
