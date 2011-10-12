@@ -475,7 +475,7 @@ function initializeNavigation (normalizedUrl) {
 
         skinSelector.kendoDropDownList({
             dataSource: [
-                            { text: "Kendo", control: "Menu", value: "kendo" },
+                            { text: "Hakama", control: "Menu", value: "hakama" },
                             { text: "Blue Opal", control: "Menu", value: "blueopal" },
                             { text: "Black", control: "Menu", value: "black" }
                         ],
