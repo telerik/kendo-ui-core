@@ -145,7 +145,7 @@
                     }}));
 
                     exampleBody.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
-                        exampleBody.html(Application.body(html));
+                        exampleBody.empty().html(Application.body(html));
                         setTimeout(function() {
                             exampleBody.kendoStop(true).kendoAnimate(animation.show);
                         }, 100);
