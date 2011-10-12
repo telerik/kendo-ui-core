@@ -8,6 +8,7 @@ var multipartScripts = [
     { output: "kendo.chart.js",
       inputs: ["chart/main.js",
                "chart/svg.js",
+               "chart/vml.js",
                "chart/themes.js"]
     }
 ];

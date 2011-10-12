@@ -1,7 +1,8 @@
 (function () {
 
     // Imports ================================================================
-    var kendo = window.kendo,
+    var $ = jQuery,
+        kendo = window.kendo,
         Class = kendo.Class,
         Chart = kendo.ui.Chart,
         BarAnimationDecorator = Chart.BarAnimationDecorator,
