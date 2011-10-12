@@ -22,6 +22,7 @@
         <div class="description">Basic usage</div>
         <!-- description -->
         <div id="example" class="k-content">
+            <form novalidate>
             <fieldset>
                 <legend>Your details</legend>
                 <ul>
@@ -37,20 +38,20 @@
                         <label for="tel">Phone *</label>
                         <input type="tel" id="tel" name="tel" pattern="\d{10}" placeholder="Please enter a ten digit phone number" required
                          validationMessage="Please enter a ten digit phone number"/>
-                     </li>
+                         </li>
                      <li>
                         <label for="tel">Age *</label>
-                       <input name="slider" type="range" min="2" max="10" step="3" />
+                        <input name="slider" type="range" min="16" max="100" />
                      </li>
                      <li>
-                        <label for="search">kendoAutoComplete *</label>
+                        <label for="search">Movie *</label>
                         <input type="search" id="search" name="search" required/>
-                     </li>
+                    </li>
                 </ul>
             </fieldset>
 
-            <button class="k-button" type="button">Submit</button>
-
+            <button class="k-button" type="submit">Submit</button>
+        </form>
             <h3 class="status"></h3>
 
             <script>
@@ -73,7 +74,7 @@
                         separator: ", "
                     });
 
-                    var validator = $("fieldset").kendoValidator().data("kendoValidator"),
+                    var validator = $("form").kendoValidator().data("kendoValidator"),
                         status = $(".status");
 
                     $("button").click(function() {
@@ -87,19 +88,17 @@
             </script>
 
             <style>
+                input:required:invalid, input:focus:invalid, input:required:valid
+                {
+                    background:none;
+                }
+
                 .k-invalid-msg {
                     color: red;
                     font-weight: bold;
                     margin-left: 5px;
                 }
 
-                .k-invalid {
-                    background: red;
-                    border: 1px solid black;
-                }
-                .input:invalid {
-                    border: none;
-                }
                 .valid-msg {
                     color: green;
                     font-weight: bold;
