@@ -192,6 +192,26 @@
                 equal(messages[0], "input2 message");
             });
 
+            test("existing error message element container is reused", function() {
+                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-for="foo"/>')),
+                validator = setup(container);
+                validator.validate();
+
+                var span = container.find("span");
+                ok(!span.eq(0).hasClass("k-invalid-msg"));
+                ok(span.eq(1).hasClass("k-invalid-msg"));
+                ok(span.eq(1).text(), "invalid");
+            });
+
+            test("existing error message element container is reused on multiple validate calls", function() {
+                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-for="foo"/>')),
+                validator = setup(container);
+                validator.validate();
+                validator.validate();
+
+                equal(container.find("span.k-invalid-msg").length, 1);
+            });
+
             test("displayes message next to the validated element", function() {
                 var input = $('<input type="text" required validationMessage="invalid" />'),
                 validator = setup(input);
@@ -229,7 +249,7 @@
 
                 validator.validate();
 
-                ok(!input.next("span").length);
+                ok(!input.next("span:visible").length);
             });
 
             test("individualErrors template overrides the default template", function() {
