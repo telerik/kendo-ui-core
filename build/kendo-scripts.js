@@ -6,7 +6,8 @@ var fs = require("fs"),
 // Configuration ==============================================================
 var multipartScripts = [
     { output: "kendo.chart.js",
-      inputs: ["chart/main.js",
+      inputs: ["chart/docs.js",
+               "chart/main.js",
                "chart/themes.js"]
     }
 ];
