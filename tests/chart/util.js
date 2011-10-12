@@ -1,3 +1,8 @@
+var SANS = "Arial,Helvetica,sans-serif",
+    SANS11 = "11px " + SANS,
+    SANS12 = "12px " + SANS,
+    SANS16 = "16px " + SANS;
+
 function ViewStub() {
     var view = this,
         log = view.log = { };

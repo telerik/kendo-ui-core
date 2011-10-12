@@ -19,7 +19,9 @@
                 font: SANS16
             },
             legend: {
-                font: SANS12
+                labels: {
+                    font: SANS12
+                }
             },
             seriesDefaults: {
                 labels: {
@@ -40,6 +42,8 @@
                 font: SANS12
             }
         };
+
+    Chart.themes = { };
 
     Chart.themes.black = deepExtend({}, baseTheme, {
         title: {
@@ -196,5 +200,8 @@
             opacity: 0.8
         }
     });
+
+    // Set default theme
+    Chart.prototype.options.theme = "kendo";
 
 })(jQuery);

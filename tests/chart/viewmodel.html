@@ -681,6 +681,7 @@
                 function createTitle(options) {
                     title = new kendo.ui.Chart.Title($.extend({
                         text: "Title",
+                        font: SANS16,
                         margin: MARGIN,
                         padding: PADDING }, options));
                     title.reflow(chartBox);
@@ -828,7 +829,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        text = new Chart.Text();
+                        text = new Chart.Text("", { font: SANS12 });
                     }
                 });
 
@@ -953,7 +954,10 @@
 
                 function createLegend(options) {
                     legend = new Chart.Legend($.extend(true,{
-                        items: [ { name: "Series 1" } ]
+                        items: [ { name: "Series 1" } ],
+                        labels: {
+                            font: SANS12
+                        }
                     }, options));
 
                     legend.reflow(chartBox);
@@ -1155,7 +1159,10 @@
                         moduleSetup();
 
                         legend = new Chart.Legend({
-                            items: [ { name: "Series 1", color: "#f00" } ]
+                            items: [ { name: "Series 1", color: "#f00" } ],
+                            labels: {
+                                font: SANS12
+                            }
                         });
 
                         legend.reflow(chartBox);
@@ -1208,6 +1215,9 @@
 
                         legend = new Chart.Legend({
                             items: [ { name: "Series 1", color: "#f00" } ],
+                            labels: {
+                                font: SANS12
+                            },
                             border: {
                                 color: BORDER_COLOR,
                                 width: BORDER_WIDTH,
