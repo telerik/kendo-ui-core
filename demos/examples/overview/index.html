@@ -236,6 +236,7 @@
 
                     $(document).bind("kendo:skinChange", function(e) {
                         createChart();
+                        sharedDataSource.read();
                     });
                 });
             </script>
