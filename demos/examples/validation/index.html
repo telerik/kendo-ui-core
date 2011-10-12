@@ -22,15 +22,24 @@
         <div class="description">Basic usage</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <form novalidate>
             <fieldset>
-                <legend>Your details</legend>
+                <legend>Ticket form:</legend>
                 <ul>
                     <li>
-                        <label for="fullname">Name *</label>
+                        <label for="fullname">Your Name *</label>
                         <input type="text" id="fullname" name="fullname" placeholder="Full name" required validationMessage="Please enter {0}!" />
                     </li>
                     <li>
+                        <label for="search">Movie *</label>
+                        <input type="search" id="search" name="search" required validationMessage="Please select movie"/>
+                        <span class="k-invalid-msg" data-for="search"></span>
+                    </li>
+                    <li>
+                        <label for="amount">Amount</label>
+                        <input name="Amount" type="number" min="1" max="10" value="1" required/>
+                        <span class="k-invalid-msg" data-for="amount"></span>
+                     </li>
+                                       <li>
                         <label for="email">Email *</label>
                         <input type="email" id="email" name="Email" placeholder="e.g. ryan@example.net"  required />
                     </li>
@@ -38,20 +47,12 @@
                         <label for="tel">Phone *</label>
                         <input type="tel" id="tel" name="tel" pattern="\d{10}" placeholder="Please enter a ten digit phone number" required
                          validationMessage="Please enter a ten digit phone number"/>
-                         </li>
-                     <li>
-                        <label for="tel">Age *</label>
-                        <input name="slider" type="range" min="16" max="100" />
                      </li>
-                     <li>
-                        <label for="search">Movie *</label>
-                        <input type="search" id="search" name="search" required/>
-                    </li>
                 </ul>
             </fieldset>
 
             <button class="k-button" type="submit">Submit</button>
-        </form>
+
             <h3 class="status"></h3>
 
             <script>
@@ -68,40 +69,43 @@
                             "The Godfather: Part II",
                             "The Shawshank Redemption"
                         ];
-                    $("input[type=range]").kendoSlider();
+
                     $("#search").kendoAutoComplete({
                         dataSource: data,
                         separator: ", "
                     });
 
-                    var validator = $("form").kendoValidator().data("kendoValidator"),
+                    var validator = $("fieldset").kendoValidator().data("kendoValidator"),
                         status = $(".status");
 
                     $("button").click(function() {
                         if (validator.validate()) {
-                            status.text("Success!").addClass("valid-msg");
+                            status.text("Hooray! Your tickets has been booked!").addClass("valid");
                         } else {
-                            status.text("Invalid!").addClass("t-invalid");
+                            status.text("Oops! There is invalid data in the form.").addClass("invalid");
                         }
                     });
                 });
             </script>
 
             <style>
-                input:required:invalid, input:focus:invalid, input:required:valid
-                {
-                    background:none;
+                input:invalid, input:-moz-ui-valid {
+                    box-shadow: none;
                 }
-
                 .k-invalid-msg {
+                    display: none;
                     color: red;
                     font-weight: bold;
                     margin-left: 5px;
                 }
 
-                .valid-msg {
+                .valid {
                     color: green;
                     font-weight: bold;
+                }
+
+                .invalid {
+                    color: red;
                 }
 
                 fieldset ul {
@@ -109,6 +113,10 @@
                 }
                 fieldset li {
                     margin: 3px;
+                }
+                fieldset label {
+                    display: inline-block;
+                    width: 75px;
                 }
             </style>
         </div>
