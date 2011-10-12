@@ -153,6 +153,23 @@
      *  HTML tags are encoded like this - <strong>lorem ipsum</strong>
      */
 
+     function compilePart(part, stringPart) {
+         if (stringPart) {
+             return "'" +
+                 part.split("'").join("\\'")
+                 .replace(/\n/g, "\\n")
+                 .replace(/\r/g, "\\r")
+                 .replace(/\t/g, "\\t")
+                 + "'";
+         } else {
+             if (part.charAt(0) === "=") {
+                 return "+(" + part.substring(1) + ")+";
+             } else {
+                 return ";" + part + ";o+=";
+             }
+         }
+     }
+
     /**
      * @name kendo.Template
      * @namespace
@@ -216,34 +233,25 @@
             functionBody += "o=";
 
             parts = template
-                .replace(/\n/g, '\\n')
-                .replace(/\r/g, '\\r')
-                .replace(/\t/g, '\\t')
                 .replace(encodeRegExp, "#=e($1)#")
                 .replace(/\\#/g, "__SHARP__")
                 .split("#");
 
             for (idx = 0; idx < parts.length; idx ++) {
-              part = parts[idx];
-
-              if (idx % 2 === 0) {
-                functionBody += "\'" + part.split("'").join("\\'") + "'";
-              } else {
-                if (part.charAt(0) === "=") {
-                  functionBody += "+(" + part.substring(1) + ")+";
-                } else {
-                  functionBody += ";" + part + ";o+=";
-                }
-              }
+                functionBody += compilePart(parts[idx], idx % 2 === 0);
             }
 
             functionBody += useWithBlock ? ";}" : ";";
 
             functionBody += "return o;";
 
-            functionBody = functionBody.replace(/__SHARP__/g, '#');
+            functionBody = functionBody.replace(/__SHARP__/g, "#");
 
-            return new Function(paramName, functionBody);
+            try {
+                return new Function(paramName, functionBody);
+            } catch(e) {
+                throw new Error(kendo.format("Invalid template:'{0}' Generated code:'{1}'", template, functionBody));
+            }
         }
     };
 
