@@ -3990,6 +3990,30 @@
             while(anim = view.animations.shift()) {
                 anim.play();
             }
+        },
+
+        buildGradient: function(options) {
+            var view = this,
+                cache = view._gradientCache,
+                hashCode,
+                overlay,
+                definition;
+
+            if (!cache) {
+                cache = view._gradientCache = [];
+            }
+
+            if (options) {
+                hashCode = getHash(options);
+                overlay = cache[hashCode];
+                definition = Chart.Gradients[options.gradient];
+                if (!overlay && definition) {
+                    overlay = deepExtend({ id: uniqueId() }, definition, options);
+                    cache[hashCode] = overlay;
+                }
+            }
+
+            return overlay;
         }
     });
 
@@ -4893,25 +4917,6 @@
         }
     };
 
-    function buildGradient(options) {
-            var hashCode,
-                overlay,
-                definition;
-
-            if (options) {
-                hashCode = getHash(options);
-                overlay = buildGradient.cache[hashCode];
-                definition = Chart.Gradients[options.gradient];
-                if (!overlay && definition) {
-                    overlay = deepExtend({ id: uniqueId() }, definition, options);
-                    buildGradient.cache[hashCode] = overlay;
-                }
-            }
-
-            return overlay;
-    }
-    buildGradient.cache = {};
-
     function updateArray(arr, prop, value) {
         var i,
             length = arr.length;
@@ -5020,8 +5025,7 @@
         PieAnimationDecorator: PieAnimationDecorator,
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
-        categoriesCount: categoriesCount,
-        buildGradient: buildGradient
+        categoriesCount: categoriesCount
     });
 
 })(jQuery);
