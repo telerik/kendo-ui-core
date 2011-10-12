@@ -25,16 +25,16 @@
 <body>
     <script type="text/html" id="item_tmpl">
         <ul class="k-list">
-        <# for (var i = 0; i < data.length; i++) {
-            var item = data[i]; #>
+          # for (var i = 0; i < data.length; i++) {
+            var item = data[i] #
             <li class="k-item">
-                <label for="isdone_<#= i #>" <#= (item.done ? " class='k-item-checked'" : "") #>>
-                    <input type="checkbox" id="isdone_<#= i #>" <#= (item.done ? " checked='checked'" : "") #> />
-                    <span><#= item.title #></span>
-                    <a href="#" class="more-details">&nbsp;</a>
+                <label for="isdone_#= i #" #= (item.done ? " class='k-item-checked'" : "") #>
+                    <input type="checkbox" id="isdone_#= i #" #= (item.done ? " checked='checked'" : "") # />
+                    <span>#= item.title #</span>
+                    <a href="\\#" class="more-details">&nbsp;</a>
                 </label>
             </li>
-        <# } #>
+        # } #
         </ul>
     </script>
     <div class="k-slot">
