@@ -29,7 +29,7 @@
         CLIP = Chart.CLIP,
         DEFAULT_WIDTH = Chart.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = Chart.DEFAULT_HEIGHT,
-        INHERIT = "inherit",
+        DEFAULT_FONT = Chart.DEFAULT_FONT,
         OBJECT = "object",
         RADIAL = "radial";
 
@@ -172,7 +172,7 @@
         options: {
             x: 0,
             y: 0,
-            font: INHERIT,
+            font: DEFAULT_FONT,
             color: BLACK,
             fillOpacity: 1
         },
@@ -214,7 +214,7 @@
         options: {
             x: 0,
             y: 0,
-            font: INHERIT,
+            font: DEFAULT_FONT,
             color: BLACK,
             size: {
                 width: 0,
