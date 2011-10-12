@@ -107,7 +107,7 @@
         }
     });
 
-    themes.kendo = deepExtend({}, baseTheme, {
+    themes.hakama = deepExtend({}, baseTheme, {
         title: {
             color: "#8e8e8e"
         },
@@ -203,7 +203,7 @@
 
     // Exports ================================================================
     Chart.themes = themes;
-    Chart.prototype.options.theme = "kendo";
+    Chart.prototype.options.theme = "hakama";
 
 })(jQuery);
 
