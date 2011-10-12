@@ -48,6 +48,7 @@
         HEIGHT = "height",
         HORIZONTAL = "horizontal",
         INITIAL_ANIMATION_DURATION = 600,
+        INHERIT = "inherit",
         INSIDE_BASE = "insideBase",
         INSIDE_END = "insideEnd",
         INTERPOLATE = "interpolate",
@@ -69,10 +70,6 @@
         RADIAL = "radial",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
-        SANS = "Arial,Helvetica,sans-serif",
-        SANS11 = "11px " + SANS,
-        SANS12 = "12px " + SANS,
-        SANS16 = "16px " + SANS,
         SERIES_CLICK = "seriesClick",
         SQUARE = "square",
         SVG_DASH_TYPE = {
@@ -2099,7 +2096,6 @@
         },
 
         options: {
-            theme: "default",
             chartArea: {},
             title: {
                 visible: true
@@ -2343,16 +2339,6 @@
             chart._redraw();
         }
     });
-
-
-    // **************************
-    // Themes
-    // **************************
-    Chart.themes = {
-        "default": {
-            seriesColors: ["#d7df23", "#adc32b", "#799b28", "#4c7520"]
-        }
-    };
 
 
     // **************************
@@ -2845,7 +2831,6 @@
         },
 
         options: {
-            font: SANS12,
             color: BLACK,
             align: LEFT,
             vAlign: ""
@@ -2942,7 +2927,6 @@
         },
 
         options: {
-            font: SANS12,
             position: OUTSIDE_END,
             margin: getSpacing(3),
             padding: getSpacing(4),
@@ -3047,7 +3031,6 @@
 
         options: {
             text: "",
-            font: SANS16,
             color: BLACK,
             position: TOP,
             align: CENTER,
@@ -3075,9 +3058,7 @@
         options: {
             position: RIGHT,
             items: [],
-            labels: {
-                font: SANS12
-            },
+            labels: {},
             offsetX: 0,
             offsetY: 0,
             margin: getSpacing(10),
@@ -6188,7 +6169,7 @@
             x: 0,
             y: 0,
             baseline: 0,
-            font: SANS16,
+            font: INHERIT,
             size: {
                 width: 0,
                 height: 0
@@ -6729,7 +6710,7 @@
         options: {
             x: 0,
             y: 0,
-            font: SANS16,
+            font: INHERIT,
             color: BLACK,
             fillOpacity: 1
         },
@@ -6771,7 +6752,7 @@
         options: {
             x: 0,
             y: 0,
-            font: SANS16,
+            font: INHERIT,
             color: BLACK,
             size: {
                 width: 0,
@@ -7551,7 +7532,6 @@
         options: {
             background: BLACK,
             color: WHITE,
-            font: SANS12,
             border: {
                 width: 3
             },
