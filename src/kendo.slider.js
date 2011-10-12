@@ -604,7 +604,7 @@
             });
 
             var move = proxy(function (e, sign) {
-                var index = math.ceil(options.val / options.smallStep);
+                var index = math.ceil(options.val / options.smallStep) - options.min;
 
                 if (index >= that._values.length - 1 || index <= 0) {
                     this._setValueInRange(options.val + (sign * options.smallStep));
