@@ -43,9 +43,9 @@
             }
         };
 
-    Chart.themes = { };
+    var themes = { };
 
-    Chart.themes.black = deepExtend({}, baseTheme, {
+    themes.black = deepExtend({}, baseTheme, {
         title: {
             color: WHITE
         },
@@ -107,7 +107,7 @@
         }
     });
 
-    Chart.themes.kendo = deepExtend({}, baseTheme, {
+    themes.kendo = deepExtend({}, baseTheme, {
         title: {
             color: "#8e8e8e"
         },
@@ -154,7 +154,7 @@
         }
     });
 
-    Chart.themes.blueopal = deepExtend({}, baseTheme, {
+    themes.blueopal = deepExtend({}, baseTheme, {
         title: {
             color: "#293135"
         },
@@ -201,7 +201,9 @@
         }
     });
 
-    // Set default theme
+    // Exports ================================================================
+    Chart.themes = themes;
     Chart.prototype.options.theme = "kendo";
 
 })(jQuery);
+
