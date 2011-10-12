@@ -89,7 +89,8 @@
     *   <p>
     *       While any valid technique for loading Ajax content can be used, Splitter provides built-in
     *       support for asynchronously loading content from URLs. These URLs should return HTML fragments
-    *       that can be loaded in a Splitter pane.
+    *       that can be loaded in a Splitter pane. If you want to load a whole page in an IFRAME,
+    *       you can do so by specifying the complete URL (e.g. http://kendoui.com/)
     *       Ajax content loading must be configured for each Pane that should use it.
     *   </p>
     * @exampleTitle Loading Splitter content asynchronously
@@ -98,13 +99,18 @@
     *   <div id="splitter">
     *       <div>Area 1 with Static Content</div>
     *       <div></div>
+    *       <div></div>
     *   </div>
     * @exampleTitle
     * @example
-    *   // Initialize the Splitter and configure async loading for one pane
+    *   // Initialize the Splitter and configure async loading for one pane, and an iframe for a thrid pane
     *   $(document).ready(function() {
     *       $("#splitter").kendoSplitter({
-    *           panes: [{}, { contentUrl: "html-content-snippet.html"}]
+    *           panes: [
+    *               {},
+    *               { contentUrl: "html-content-snippet.html" },
+    *               { contentUrl: "http://kendoui.com" }
+    *           ]
     *       });
     *   });
     */
