@@ -133,8 +133,16 @@
 
             test("can execute code in template defined inside a script block", function() {
                 var t = template.compile($("#code").text());
-
                 equal($.trim(t({})), "foo");
+            });
+
+            test("template executes multiline expression", function() {
+                var t = template.compile($("#multiline-expression").text());
+                equal($.trim(t({})), "ab");
+            });
+
+            test("template throws error on invalid template", function() {
+                raises(function() { template.compile('<a href="#">link</a>') }, /Invalid template/, "Template does not raise proper error");
             });
         </script>
         <script id="encoded" type="text/x-jquery-template">
@@ -145,6 +153,12 @@
         </script>
         <script id="code" type="text/x-jquery-template">
             # var foo = "foo"; ##= foo #
+        </script>
+
+        <script type="text/x-jquery-template" id="multiline-expression">
+          # var a = "a",
+            b = "b" #
+          #= a + b #
         </script>
     </body>
 </html>
