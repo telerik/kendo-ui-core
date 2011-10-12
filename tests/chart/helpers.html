@@ -445,26 +445,6 @@
                 });
             });
 
-            // ------------------------------------------------------------
-            module("buildGradient");
-
-            test("builds gradient from name", function() {
-                equals(Chart.buildGradient({ gradient: "glass" }).type, "linear");
-            });
-
-            test("returns undefined when no gradient exists", function() {
-                equals(typeof Chart.buildGradient("x"), "undefined");
-            });
-
-            test("applies options", function() {
-                equals(Chart.buildGradient({ gradient: "glass", rotation: 90 }).rotation, 90);
-            });
-
-            test("returns same gradient for same options", function() {
-                equals(Chart.buildGradient({ gradient: "glass", rotation: 90 }).id,
-                       Chart.buildGradient({ gradient: "glass", rotation: 90 }).id);
-            });
-
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

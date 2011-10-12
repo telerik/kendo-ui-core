@@ -13,7 +13,6 @@
         ExpandAnimation = Chart.ExpandAnimation,
         ViewBase = Chart.ViewBase,
         ViewElement = Chart.ViewElement,
-        buildGradient = Chart.buildGradient,
         deepExtend = Chart.deepExtend,
         template = Chart.template,
         uniqueId = Chart.uniqueId,
@@ -612,7 +611,7 @@
                 gradient;
 
             if (paint && paint.gradient) {
-                overlay = buildGradient(paint);
+                overlay = view.buildGradient(paint);
                 if (overlay) {
                 overlayId = overlay.id;
                 gradient = definitions[overlayId];

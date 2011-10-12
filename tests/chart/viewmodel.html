@@ -1317,6 +1317,30 @@
                     equals(order, "321");
                 });
 
+                // ------------------------------------------------------------
+                module("ViewBase / buildGradient", {
+                    setup: function() {
+                        view = new Chart.ViewBase();
+                    }
+                });
+
+                test("builds gradient from name", function() {
+                    equals(view.buildGradient({ gradient: "glass" }).type, "linear");
+                });
+
+                test("returns undefined when no gradient exists", function() {
+                    equals(typeof view.buildGradient("x"), "undefined");
+                });
+
+                test("applies options", function() {
+                    equals(view.buildGradient({ gradient: "glass", rotation: 90 }).rotation, 90);
+                });
+
+                test("returns same gradient for same options", function() {
+                    equals(view.buildGradient({ gradient: "glass", rotation: 90 }).id,
+                           view.buildGradient({ gradient: "glass", rotation: 90 }).id);
+                });
+
             })();
         </script>
 

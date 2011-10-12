@@ -14,7 +14,6 @@
         ExpandAnimation = Chart.ExpandAnimation,
         ViewBase = Chart.ViewBase,
         ViewElement = Chart.ViewElement,
-        buildGradient = Chart.buildGradient,
         deepExtend = Chart.deepExtend,
         template = Chart.template,
         uniqueId = Chart.uniqueId,
@@ -563,7 +562,8 @@
     VMLOverlayDecorator.prototype = {
         decorate: function(element) {
             var options = element.options,
-                overlay = buildGradient(element.options.overlay);
+                view = this.view,
+                overlay = view.buildGradient(element.options.overlay);
 
             if (!overlay || overlay.type === RADIAL) {
                 return element;
@@ -592,7 +592,7 @@
 
             if (fill) {
                 if (fill.gradient) {
-                    fill = buildGradient(fill);
+                    fill = view.buildGradient(fill);
                 }
 
             if (typeof fill === OBJECT) {
