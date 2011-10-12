@@ -277,6 +277,11 @@
 
         init: function(element, options) {
             element = $(element);
+
+            if (element.is("ul")) {
+                element = element.wrapAll("<div />").parent();
+            }
+
             var that = this;
 
             if (options && ("animation" in options) && !options.animation) {

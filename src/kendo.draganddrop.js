@@ -224,7 +224,7 @@
             group: "default",
             cursorOffset: {
                 left: 10,
-                top: 10
+                top: touch ? -40 / kendo.support.zoomLevel() : 10
             },
             dropped: false
         },
