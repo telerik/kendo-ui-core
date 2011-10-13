@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Configurator</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../configurator/script-builder.js"></script>
+        <script type="text/javascript">
+
+            // ------------------------------------------------------------
+            module("configureScripts", {
+                setup: function() {
+                }
+            });
+
+            test("configures component with no dependencies", function() {
+                same(
+                    configureScripts({
+                            a: "a.js"
+                        },
+                        [ "a" ]
+                    ),
+                    [ "a.js" ]
+                );
+            });
+
+            test("configures component with single dependency", function() {
+                same(
+                    configureScripts([{
+                            name: "a",
+                            source: "a.js"
+                        }, {
+                            name: "b",
+                            source: "b.js",
+                            requires: [ "a" ]
+                        }],
+                        [ "b" ]
+                    ),
+                    [ "a.js", "b.js" ]
+                );
+            });
+
+            test("includes common dependency only once", function() {
+                same(
+                    configureScripts([{
+                            name: "a",
+                            source: "a.js"
+                        }, {
+                            name: "b",
+                            source: "b.js",
+                            requires: [ "a" ]
+                        }, {
+                            name: "c",
+                            source: "c.js",
+                            requires: [ "a" ]
+                        }],
+                        [ "b", "c" ]
+                    ),
+                    [ "a.js", "b.js", "c.js" ]
+                );
+            });
+
+            test("includes modules", function() {
+                same(
+                    configureScripts([{
+                            name: "a",
+                            source: "a.js",
+                            modules: [{
+                                name: "1",
+                                source: "a-1.js"
+                            }, {
+                                name: "2",
+                                source: "a-2.js"
+                            }]
+                        }],
+                        [ "a" ]
+                    ),
+                    [ "a.js" ]
+                );
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.configurator</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
