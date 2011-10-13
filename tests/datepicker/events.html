@@ -96,7 +96,9 @@
                                       .data("kendoDatePicker");
 
                 datepicker.open();
-                input.next().click();
+                setTimeout(function() {
+                    datepicker._icon.click();
+                }, 200);
             });
 
             asyncTest("raise close event document click", function() {
@@ -110,7 +112,9 @@
 
                 datepicker.open();
 
-                $(document.documentElement).mousedown();
+                setTimeout(function() {
+                    $(document.documentElement).mousedown();
+                }, 200);
             });
 
         </script>
