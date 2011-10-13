@@ -40,7 +40,7 @@
                 var cal = new Calendar(div, { animation: false }),
                     date = new Date(2000, 10, 10);
 
-                cal.navigate(date, "decade");
+                cal.navigate(date, 2);
 
                 equal(cal.element.find(".k-content").find("a:first").html(), "1999");
             });
@@ -70,7 +70,7 @@
                     cal = new Calendar(div, {
                         value: date,
                         min: date,
-                        firstView: "year"
+                        firstView: 1
                     });
 
                 ok(cal._prevArrow.hasClass("k-state-disabled"));
@@ -81,7 +81,7 @@
                     cal = new Calendar(div, {
                         value: date,
                         max: date,
-                        firstView: "year"
+                        firstView: 1
                     });
 
                 ok(cal._nextArrow.hasClass("k-state-disabled"));
@@ -92,7 +92,7 @@
                     cal = new Calendar(div, {
                         value: date,
                         min: date,
-                        firstView: "decade"
+                        firstView: 2
                     });
 
                 ok(cal._prevArrow.hasClass("k-state-disabled"));
@@ -103,7 +103,7 @@
                     cal = new Calendar(div, {
                         value: date,
                         max: date,
-                        firstView: "decade"
+                        firstView: 2
                     });
 
                 ok(cal._nextArrow.hasClass("k-state-disabled"));
@@ -114,7 +114,7 @@
                     cal = new Calendar(div, {
                         value: date,
                         min: date,
-                        firstView: "century"
+                        firstView: 3
                     });
 
                 ok(cal._prevArrow.hasClass("k-state-disabled"));
@@ -125,7 +125,7 @@
                     cal = new Calendar(div, {
                         value: date,
                         max: date,
-                        firstView: "century"
+                        firstView: 3
                     });
 
                 ok(cal._nextArrow.hasClass("k-state-disabled"));
@@ -159,7 +159,7 @@
                 var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._current);
 
-                cal._index = "year";
+                cal._index = 1;
                 modified.setFullYear(modified.getFullYear() - 1);
 
                 cal.navigateToPast();
@@ -172,7 +172,7 @@
                 var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._current);
 
-                cal._index = "decade";
+                cal._index = 2;
                 modified.setFullYear(modified.getFullYear() - 10);
 
 
@@ -188,7 +188,7 @@
                 var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._current);
 
-                cal._index = "century";
+                cal._index = 3;
                 modified.setFullYear(modified.getFullYear() - 100);
 
 
@@ -205,7 +205,7 @@
                     modified = new Date(cal._current),
                     names = kendo.culture().calendar.months.names;
 
-                cal._index = "month";
+                cal._index = 0;
                 modified.setMonth(modified.getMonth() + 1);
 
                 cal.navigateToFuture();
@@ -218,7 +218,7 @@
                 var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._current);
 
-                cal._index = "year";
+                cal._index = 1;
                 modified.setFullYear(modified.getFullYear() + 1);
 
                 cal.navigateToFuture();
@@ -231,7 +231,7 @@
                 var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._current);
 
-                cal._index = "decade";
+                cal._index = 2;
                 modified.setFullYear(modified.getFullYear() + 10);
 
 
@@ -250,7 +250,7 @@
                     }),
                     modified = new Date(cal._current);
 
-                cal._index = "century";
+                cal._index = 3;
                 modified.setFullYear(modified.getFullYear() + 100);
 
 
@@ -266,33 +266,33 @@
                 var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._current);
 
-                cal._index = "month";
+                cal._index = 0;
 
                 cal.navigateUp();
 
-                equal(cal._index, "year");
+                equal(cal._index, 1);
             });
 
             test("navigateUp should navigate upper view (decade)", function() {
                 var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._current);
 
-                cal._index = "year";
+                cal._index = 1;
 
                 cal.navigateUp();
 
-                equal(cal._index, "decade");
+                equal(cal._index, 2);
             });
 
             test("navigateUp should navigate upper view (century)", function() {
                 var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._current);
 
-                cal._index = "decade";
+                cal._index = 2;
 
                 cal.navigateUp();
 
-                equal(cal._index, "century");
+                equal(cal._index, 3);
                 ok(cal._title.hasClass("k-state-disabled"));
             });
 
@@ -300,51 +300,51 @@
                 var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._current);
 
-                cal._index = "century";
+                cal._index = 3;
 
                 cal.navigateDown(modified);
 
-                equal(cal._index, "decade");
+                equal(cal._index, 2);
             });
 
             test("navigateDown should navigate lower view (year)", function() {
                 var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._current);
 
-                cal._index = "decade";
+                cal._index = 2;
 
                 cal.navigateDown(modified);
 
-                equal(cal._index, "year");
+                equal(cal._index, 1);
             });
 
             test("navigateDown should navigate lower view (month)", function() {
                 var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._current);
 
-                cal._index = "year";
+                cal._index = 1;
 
                 cal.navigateDown(modified);
 
-                equal(cal._index, "month");
+                equal(cal._index, 0);
             });
 
             test("navigateDown should navigate lower view (month)", function() {
                 var cal = new Calendar(div, {animation: false}),
                     modified = new Date(cal._current);
 
-                cal._index = "year";
+                cal._index = 1;
 
                 cal.navigateDown(modified);
 
-                equal(cal._index, "month");
+                equal(cal._index, 0);
             });
 
             test("navigateDown with date navigate to cell's date", function() {
                 var cal = stub(new Calendar(div, {animation: false}), "navigate"),
                     value = new Date(2000, 10, 10);
 
-                cal._index = "year";
+                cal._index = 1;
 
                 cal.navigateDown(value);
 
@@ -464,7 +464,7 @@
                     viewedValue = new Date(2000, 10, 15),
                     cal = new Calendar(div, {value: value, animation: false});
 
-                cal.navigate(null, "year");
+                cal.navigate(null, 1);
 
                 cal._focus(value);
 
@@ -478,7 +478,7 @@
                     cal = new Calendar(div, {animation: false});
 
                 cal._current = viewedValue;
-                cal._view = kendo.calendar["decade"];
+                cal._view = kendo.calendar.views[2];
 
                 stub(cal, {navigate: cal.navigate});
 
@@ -491,22 +491,11 @@
                 var value = new Date(2000, 10, 10),
                     cal = new Calendar(div, {value: value});
 
-                stub(kendo.calendar.month, "content");
+                stub(kendo.calendar.views[0], "content");
 
                 cal.navigateDown(value);
 
-                equal(kendo.calendar.month.calls("content"), 0);
-            });
-
-            test("navigate should not re-render view if it was not changed", function() {
-                var value = new Date(2000, 10, 10),
-                    cal = new Calendar(div, {value: value, min: value});
-
-                stub(kendo.calendar.month, "content");
-
-                cal.navigateToPast(value);
-
-                equal(kendo.calendar.month.calls("content"), 0);
+                equal(kendo.calendar.views[0].calls("content"), 0);
             });
 
             test("min() returns current min value", function() {
