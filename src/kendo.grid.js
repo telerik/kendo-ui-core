@@ -526,7 +526,7 @@
                 detailViewTemplate = that.detailViewTemplate,
                 hasDetails = detailViewTemplate !== undefined
 
-            that.tbody.delegate(".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", "click", function() {
+            that.tbody.delegate(".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", "click", function(e) {
                 var button = $(this),
                     expanding = button.hasClass("k-plus"),
                     masterRow = button.closest("tr.k-master-row");
@@ -538,6 +538,8 @@
                     $(detailViewTemplate(that.dataItem(masterRow))).insertAfter(masterRow);
                 }
                 masterRow.next().toggle(expanding);
+
+                e.preventDefault();
             });
         },
 
