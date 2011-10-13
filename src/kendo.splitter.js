@@ -438,6 +438,7 @@
 
                 pane.after("<div class='k-splitbar k-state-default k-splitbar-" + this.orientation +
                         (isSplitBarDraggable && !previousPane.collapsed && !nextPane.collapsed ?  " k-splitbar-draggable-" + this.orientation : "") +
+                        (!isSplitBarDraggable && !previousPane.collapsible && !nextPane.collapsible ?  " k-splitbar-static-" + this.orientation : "") +
                     "'>" + catIconIf("k-collapse-prev", previousPane.collapsible && !previousPane.collapsed) +
                     catIconIf("k-expand-prev", previousPane.collapsible && previousPane.collapsed) +
                     catIconIf("k-resize-handle", isSplitBarDraggable) +

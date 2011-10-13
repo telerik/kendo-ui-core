@@ -2885,6 +2885,12 @@ div.k-slider
     height: 300px;
 }
 
+.k-pane > .k-splitter:first-child
+{
+    border-width: 0;
+    overflow: hidden;
+}
+
 .k-splitter .k-pane
 {
     overflow: hidden;
@@ -2964,6 +2970,16 @@ div.k-slider
 
 .k-splitbar-horizontal .k-collapse-prev { margin-top: -31px; }
 .k-splitbar-horizontal .k-collapse-next { margin-top: 11px; }
+
+.k-splitbar-static-horizontal
+{
+    width:1px;
+}
+
+.k-splitbar-static-vertical
+{
+    height:1px;
+}
 
 .k-splitbar-vertical .k-icon
 {
