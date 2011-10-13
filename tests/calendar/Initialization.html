@@ -29,6 +29,18 @@
                 }
             });
 
+            test("if start is not correct should set MONTH view", function() {
+                var cal = new Calendar(div, {start: "not real view"});
+
+                equal(cal._index, 0);
+            });
+
+            test("if depth is bigger then start set it to MONTH view", function() {
+                var cal = new Calendar(div, {depth: "year"});
+
+                equal(cal.options.depth, "month");
+            });
+
             test("define current", function() {
                 var cal = new Calendar(div),
                     current = cal._current,
