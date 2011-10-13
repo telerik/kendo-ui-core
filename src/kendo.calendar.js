@@ -189,9 +189,7 @@
                 NAVIGATE
             ], options);
 
-            if (!options.format) {
-                options.format = kendo.culture().calendar.patterns.d;
-            }
+            options.format = options.format || kendo.culture().calendar.patterns.d;
 
             value = options.value;
             index = views[options.start];
@@ -1082,6 +1080,7 @@
 
     calendar.restrictValue = restrictValue;
     calendar.isInRange = isInRange;
+    calendar.viewEnum = views;
 
     kendo.calendar = calendar;
 })(jQuery);
