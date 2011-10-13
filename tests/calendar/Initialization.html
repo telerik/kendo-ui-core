@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        ._title>Calendar rendering<._title>
+        <title>Calendar rendering</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
@@ -17,7 +17,8 @@
         <ol id="qunit-tests"></ol>
         <script>
 
-            var Calendar = kendo.ui.Calendar;
+            var Calendar = kendo.ui.Calendar,
+                div;
 
             module("kendo.ui.Calendar initialization", {
                 setup: function() {
@@ -28,10 +29,22 @@
                 }
             });
 
+            test("if start is not correct should set MONTH view", function() {
+                var cal = new Calendar(div, {start: "not real view"});
+
+                equal(cal._index, 0);
+            });
+
+            test("if depth is bigger then start set it to MONTH view", function() {
+                var cal = new Calendar(div, {depth: "year"});
+
+                equal(cal.options.depth, "month");
+            });
+
             test("define current", function() {
                 var cal = new Calendar(div),
-                    today = new Date(),
-                    current = cal._viewedValue;
+                    current = cal._current,
+                    today = new Date();
 
                 equal(current.getFullYear(), today.getFullYear());
                 equal(current.getMonth(), today.getMonth());
@@ -59,7 +72,7 @@
             });
 
             test("render year view when init", function() {
-                var date = new Date(2011, 10, 10), cal = new Calendar(div, { value: date, startView: "year" }),
+                var date = new Date(2011, 10, 10), cal = new Calendar(div, { value: date, start: "year" }),
                 anchors = cal.element.find(".k-content").find("a"),
                 january = kendo.culture().calendar.months.namesAbbr[0];
 
@@ -70,7 +83,7 @@
 
             test("render decade view when init", function() {
                 var date = new Date(2011, 10, 10),
-                cal = new Calendar(div, { startView: "decade", value: date }),
+                cal = new Calendar(div, { start: "decade", value: date }),
                 anchors = cal.element.find(".k-content").find("a");
 
                 equal(cal._title.html(), "2010-2019");
@@ -80,12 +93,12 @@
 
             test("render century view when init", function() {
                 var date = new Date(2011, 10, 10),
-                cal = new Calendar(div, { startView: "century", value: date, max: new Date(2200, 10, 10) }),
+                cal = new Calendar(div, { start: "century", value: date, max: new Date(2200, 10, 10) }),
                 anchors = cal.element.find(".k-content").find("a");
 
                 equal(cal._title.html(), "2000-2099");
                 equal(anchors.length, 12);
-                equal(anchors.eq(0).html(), "1990-1999");
+                equal(anchors.eq(0).html(), "1990 - 1999");
             });
 
             test("calendar should wire TD click event", function() {
@@ -99,7 +112,7 @@
             });
 
             test("calendar should wire header buttons", function() {
-                var cal = new Calendar(div);
+                var cal = new Calendar(div), links, current, view;
 
                 stub(cal, {
                     navigateToPast: cal.navigateToPast,
@@ -107,15 +120,19 @@
                     navigateUp: cal.navigateUp
                 });
 
-                var links = cal.element.find(".k-header").find(".k-link");
+                links = cal.element.find(".k-header").find(".k-link");
 
+                current = new Date(cal._current);
                 links.eq(0).click();
-                links.eq(1).click();
-                links.eq(2).click();
+                notEqual(+cal._current, +current);
 
-                equal(cal.calls("navigateToPast"), 1);
-                equal(cal.calls("navigateUp"), 1);
-                equal(cal.calls("navigateToFuture"), 1);
+                current = new Date(cal._current);
+                links.eq(2).click();
+                notEqual(+cal._current, +current);
+
+                view = cal._view;
+                links.eq(1).click();
+                ok(view != cal._view);
             });
 
             test("calendar should show hover state when hover TD", function() {
