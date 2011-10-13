@@ -257,7 +257,7 @@
             test("month view should render data-val attribute", function() {
                 var max = new Date(2011, 9, 19),
                     today = new Date(2011, 9, 10),
-                    value = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+                    value = today.getFullYear() + "/" + today.getMonth() + "/" + today.getDate();
 
                 div.html(calendar.month.content({
                     date: today,
@@ -317,7 +317,7 @@
 
                 var cell = div.find("tbody").find("tr:first").find(".k-other-month:last").next();
 
-                equal(cell.children().data("value"), "9/1/2011");
+                equal(cell.children().data("value"), "2011/8/1");
             });
 
             test("month view renders k-today if today is in the current view", function() {
@@ -394,7 +394,7 @@
 
             test("year view renders cells with data-val", function() {
                 var today = new Date(2011, 9, 10),
-                    value = (today.getMonth() + 1) + "/1/" + today.getFullYear(),
+                    value = today.getFullYear() + "/" + today.getMonth() + "/1",
                     monthName = kendo.culture().calendar.months.namesAbbr[9];
 
                 div.html(calendar.year.content({
@@ -442,7 +442,7 @@
 
             test("decade view renders cells with data-val", function() {
                 var today = new Date(2011, 9, 10),
-                    value = "1/1/2011";
+                    value = "2011/0/1";
 
                 div.html(calendar.decade.content({
                     date: today,
@@ -501,8 +501,6 @@
                     max: today
                 }));
 
-                console.log(div.html());
-
                 equal(div.find("tbody").find("td > a").length, 1);
                 equal(div.find("tbody").find("a").html(), "2010 - 2019");
             });
@@ -521,7 +519,7 @@
 
             test("century view renders cells with data-val", function() {
                 var today = new Date(2011, 9, 10),
-                    value = "1/1/2010";
+                    value = "2010/0/1";
 
                 div.html(calendar.century.content({
                     date: today,
