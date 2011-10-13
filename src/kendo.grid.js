@@ -476,6 +476,8 @@
 
             that._selectable();
 
+            that._detailView();
+
             that.bind([
                 /**
                  * Fires when the grid selection has changed.
@@ -517,6 +519,33 @@
             that.table = table.attr("cellspacing", 0);
 
             that._wrapper();
+        },
+
+        _detailView: function() {
+            var that = this,
+                detailViewTemplate = that.detailViewTemplate,
+                hasDetails = detailViewTemplate !== undefined
+
+            that.tbody.delegate(".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", "click", function() {
+                var button = $(this),
+                    expanding = button.hasClass("k-plus"),
+                    masterRow = button.closest("tr.k-master-row");
+
+                button.toggleClass("k-plus", !expanding)
+                    .toggleClass("k-minus", expanding);
+
+                if(hasDetails && !masterRow.next().hasClass("k-detail-row")) {
+                    $(detailViewTemplate(that.dataItem(masterRow))).insertAfter(masterRow);
+                }
+                masterRow.next().toggle(expanding);
+            });
+        },
+
+        dataItem: function(tr) {
+            var that = this,
+                view = that.dataSource.view();
+
+            return view[that.tbody.find('> tr:not(.k-grouping-row,.k-detail-row)').index($(tr))]
         },
 
         _groupable: function() {
@@ -955,13 +984,23 @@
                 templateFunctionCount = 0,
                 column,
                 type,
+                hasDetails = that.options.detailTemplate !== undefined,
+                className = [],
                 groups = that.dataSource.group().length;
 
             if (!rowTemplate) {
                 rowTemplate = "<tr";
 
                 if (alt) {
-                    rowTemplate += ' class="k-alt"';
+                    className.push("k-alt");
+                }
+
+                if (hasDetails) {
+                    className.push("k-master-row");
+                }
+
+                if (className.length) {
+                    rowTemplate += ' class="' + className.join(" ") + '"';
                 }
 
                 if (model) {
@@ -991,6 +1030,10 @@
 
                 if (groups > 0) {
                     rowTemplate += groupCells(groups);
+                }
+
+                if (hasDetails) {
+                    rowTemplate += '<td class="k-hierarchy-cell"><a class="k-icon k-plus" href="\\#"></a></td>';
                 }
 
                 for (idx = 0; idx < length; idx++) {
@@ -1039,6 +1082,48 @@
 
             that.rowTemplate = that._tmpl(options.rowTemplate);
             that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, true);
+
+            if (options.detailTemplate) {
+                that.detailViewTemplate = that._detailTmpl(options.detailTemplate);
+            }
+        },
+
+        _detailTmpl: function(template) {
+            var that = this,
+                html = "",
+                settings = extend({}, kendo.Template, that.options.templateSettings),
+                paramName = settings.paramName,
+                templateFunctionStorage = {},
+                templateFunctionCount = 0,
+                type = typeof template;
+
+            html += '<tr class="k-detail-row"><td class="k-hierarchy-cell"></td><td class="k-detail-cell"' + (that.columns.length ? ' colspan="' + that.columns.length + '"' : '') + ">";
+
+            if (type === FUNCTION) {
+                templateFunctionStorage["tmpl" + templateFunctionCount] = template;
+                html += "#=this.tmpl" + templateFunctionCount + "(" + paramName + ")#";
+                templateFunctionCount ++;
+            } else {
+                html += template;
+            }
+
+            html += "</td></tr>";
+
+            html = kendo.template(html, settings);
+
+            if (templateFunctionCount > 0) {
+                return proxy(html, templateFunctionStorage);
+            }
+
+            return html;
+        },
+
+        expandRow: function(tr) {
+            $(tr).find('> td .k-plus, > td .k-expand').click();
+        },
+
+        collapseRow: function(tr) {
+            $(tr).find('> td .k-minus, > td .k-plus').click();
         },
 
         _thead: function() {
@@ -1065,6 +1150,10 @@
             }
 
             if (!tr.children().length) {
+                if (that.options.detailTemplate) {
+                    html += '<th class="k-hierarchy-cell">&nbsp;</th>';
+                }
+
                 for (idx = 0, length = columns.length; idx < length; idx++) {
                     th = columns[idx];
                     html += "<th data-field='" + th.field + "'>" + (th.title || th.field) + "</th>";
@@ -1104,6 +1193,10 @@
                     return "<col />";
                 }),
                 groups = that.dataSource.group().length;
+
+            if (that.options.detailTemplate) {
+                cols.splice(0, 0, '<col class="k-hierarchy-col" />');
+            }
 
             if (colgroup.length) {
                 colgroup.remove();
