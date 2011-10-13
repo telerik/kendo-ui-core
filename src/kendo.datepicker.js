@@ -131,11 +131,11 @@
                        .data(DATEVIEW, that)
                        .bind(CLICK, proxy(that._click, that))
                        .unbind(MOUSEDOWN)
-                       .bind(MOUSEDOWN, options.clearBlurTimeout);
+                       .bind(MOUSEDOWN, options.clearBlurTimeout)
+                       .show();
 
-                //use min() and max();
-                calendar.options.min = options.min;
-                calendar.options.max = options.max;
+                calendar.min(options.min);
+                calendar.max(options.max);
 
                 calendar.options.depth = options.depth;
                 calendar.options.start = options.start;
@@ -145,8 +145,6 @@
                         .unbind(NAVIGATE)
                         .bind(NAVIGATE, proxy(that._navigate, that))
                         .bind(CHANGE, options);
-
-                element.show();
 
                 that.value(that._value);
             }
