@@ -957,9 +957,15 @@ div.k-window-content
     text-overflow: ellipsis;
 }
 
-.k-grid .k-grouping-row td
+.k-grid .k-grouping-row td,
+.k-grid .k-hierarchy-cell
 {
     overflow: visible;
+}
+
+.k-grid-edit-row td
+{
+   text-overflow: clip;
 }
 
 .k-grid-header-wrap,
