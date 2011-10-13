@@ -4,30 +4,18 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-    <script src="@Url.Content("~/Scripts/jquery.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo.core.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo.model.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo.data.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo.selectable.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo.grid.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo.menu.js")"></script>
-    <link href="http://cdn.kendostatic.com/2011.2.804/styles/kendo.common.min.css" rel="stylesheet"/>
-    <link href="http://cdn.kendostatic.com/2011.2.804/styles/kendo.kendo.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2011.3.1007/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2011.3.1007/styles/kendo.blueopal.min.css" rel="stylesheet"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2011.3.1007/js/kendo.all.min.js"></script>
 </head>
 
 <body>
-    <ul id="menu">
-        <li>
-            @Html.ActionLink("{batch: false}", "Index")
-        </li>
-        <li>
-            @Html.ActionLink("{batch: 'multiple'}", "BatchMultiple")
-        </li>
-    </ul>
+    @Html.ActionLink("Single request update", "Index")
+    @Html.ActionLink("Batch updates", "Batch")
     <script>
-    $(document).ready(function() {
-        $("#menu").kendoMenu();
-    }); 
+       $(function() {
+       }); 
     </script>
     @RenderBody()
 </body>
