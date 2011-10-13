@@ -50,7 +50,7 @@
 
                 date.setDate(21);
 
-                calendar.month.setDate(modified, -10);
+                calendar.views[0].setDate(modified, -10);
 
                 equal(+modified, +date);
             });
@@ -59,7 +59,7 @@
                 var value = new Date(2011, 7, 31, 10, 10, 33, 111),
                     origin = new Date(2010, 7, 22, 20, 11, 44, 666);
 
-                calendar.month.setDate(origin, value);
+                calendar.views[0].setDate(origin, value);
 
                 equal(origin.getFullYear(), value.getFullYear());
                 equal(origin.getMonth(), value.getMonth());
@@ -77,7 +77,7 @@
 
                 date.setMonth(11);
 
-                calendar.year.setDate(modified, 4);
+                calendar.views[1].setDate(modified, 4);
 
                 equal(+modified, +date);
             });
@@ -86,7 +86,7 @@
                 var date = new Date(2011, 3, 1, 10, 10, 5555),
                     modified = new Date(2011, 7, 31, 10, 10, 5555);
 
-                calendar.year.setDate(modified, -4);
+                calendar.views[1].setDate(modified, -4);
 
                 equal(+modified, +date);
             });
@@ -95,7 +95,7 @@
                 var value = new Date(2011, 7, 31, 10, 10, 33, 111),
                     origin = new Date(2010, 7, 22, 20, 11, 44, 666);
 
-                calendar.year.setDate(origin, value);
+                calendar.views[1].setDate(origin, value);
 
                 equal(origin.getFullYear(), value.getFullYear());
                 equal(origin.getMonth(), value.getMonth());
@@ -112,7 +112,7 @@
 
                 date.setFullYear(2005);
 
-                calendar.decade.setDate(modified, -6);
+                calendar.views[2].setDate(modified, -6);
 
                 equal(+modified, +date);
             });
@@ -121,7 +121,7 @@
                 var value = new Date(2011, 7, 31, 10, 10, 33, 111),
                     origin = new Date(2010, 7, 22, 20, 11, 44, 666);
 
-                calendar.decade.setDate(origin, value);
+                calendar.views[2].setDate(origin, value);
 
                 equal(origin.getFullYear(), value.getFullYear());
                 equal(origin.getMonth(), 7);
@@ -138,7 +138,7 @@
 
                 date.setFullYear(2001);
 
-                calendar.century.setDate(modified, -1);
+                calendar.views[3].setDate(modified, -1);
 
                 equal(+modified, +date);
             });
@@ -147,7 +147,7 @@
                 var value = new Date(2000, 7, 31, 10, 10, 33, 111),
                     origin = new Date(2010, 7, 22, 20, 11, 44, 666);
 
-                calendar.century.setDate(origin, value);
+                calendar.views[3].setDate(origin, value);
 
                 equal(origin.getFullYear(), value.getFullYear());
                 equal(origin.getMonth(), 7);
@@ -162,14 +162,14 @@
                 var date = new Date(),
                     text = kendo.culture().calendar.months.names[date.getMonth()] + " " + date.getFullYear();
 
-                    equal(calendar.month.title(date), text);
+                    equal(calendar.views[0].title(date), text);
             });
 
             test("month view renders days", function() {
                 var today = new Date(),
                     days = kendo.culture().calendar.days;
 
-                div.html(calendar.month.content({
+                div.html(calendar.views[0].content({
                         date: today,
                         empty: template.empty,
                         content: template.content,
@@ -192,7 +192,7 @@
 
                 kendo.culture().calendar.firstDayOfWeek = 1;
 
-                div.html(calendar.month.content({
+                div.html(calendar.views[0].content({
                     date: today,
                     empty: template.empty,
                     content: template.content,
@@ -210,7 +210,7 @@
             test("month view honors firstVisibleDay", function() {
                 var today = new Date(2011, 9, 10);
 
-                div.html(calendar.month.content({
+                div.html(calendar.views[0].content({
                     date: today,
                     empty: template.empty,
                     content: template.content,
@@ -225,7 +225,7 @@
                 var today = new Date(2011, 9, 10),
                     firstVisibleDay = calendar.firstVisibleDay(today);
 
-                div.html(calendar.month.content({
+                div.html(calendar.views[0].content({
                     date: today,
                     empty: template.empty,
                     content: template.content,
@@ -241,7 +241,7 @@
                 var today = new Date(2011, 9, 10),
                 max = new Date(2011, 9, 19);
 
-                div.html(calendar.month.content({
+                div.html(calendar.views[0].content({
                     date: today,
                     empty: template.empty,
                     min: new Date(today),
@@ -249,7 +249,7 @@
                     content: template.content
                 }));
 
-                equal(div.find("tbody").find("td").html(), " ");
+                equal(div.find("tbody").find("td").html(), "&nbsp;");
                 equal(div.find("tbody").find("a:first").html(), today.getDate() + "");
                 equal(div.find("tbody").find("a:last").html(), max.getDate() + "");
             });
@@ -257,9 +257,9 @@
             test("month view should render data-val attribute", function() {
                 var max = new Date(2011, 9, 19),
                     today = new Date(2011, 9, 10),
-                    value = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+                    value = today.getFullYear() + "/" + today.getMonth() + "/" + today.getDate();
 
-                div.html(calendar.month.content({
+                div.html(calendar.views[0].content({
                     date: today,
                     empty: template.empty,
                     min: new Date(today),
@@ -274,7 +274,7 @@
                 var today = new Date(2011, 9, 10),
                     firstDay = kendo.calendar.firstVisibleDay(today);
 
-                div.html(calendar.month.content({
+                div.html(calendar.views[0].content({
                     date: today,
                     empty: template.empty,
                     min: new Date(1900,0,1),
@@ -289,7 +289,7 @@
             test("month view should not render k-other-month to last day of month", function() {
                 var today = new Date(2011, 8, 12, 10, 10, 10);
 
-                div.html(calendar.month.content({
+                div.html(calendar.views[0].content({
                     date: today,
                     empty: template.empty,
                     min: new Date(1900,0,1),
@@ -307,7 +307,7 @@
             test("month view do not apply k-other-month to the first day of the month", function() {
                 var today = new Date(2011, 8, 20, 14, 40, 0);
 
-                div.html(calendar.month.content({
+                div.html(calendar.views[0].content({
                     date: today,
                     min: new Date(1900,0,1),
                     max: new Date(2900,0,1),
@@ -317,13 +317,13 @@
 
                 var cell = div.find("tbody").find("tr:first").find(".k-other-month:last").next();
 
-                equal(cell.children().data("value"), "9/1/2011");
+                equal(cell.children().data("value"), "2011/8/1");
             });
 
             test("month view renders k-today if today is in the current view", function() {
                 var today = new Date();
 
-                div.html(calendar.month.content({
+                div.html(calendar.views[0].content({
                     date: today,
                     empty: template.empty,
                     min: new Date(1900,0,1),
@@ -340,7 +340,7 @@
             test("month view renders k-weekend", function() {
                 var today = new Date(2011, 9, 10);
 
-                div.html(calendar.month.content({
+                div.html(calendar.views[0].content({
                     date: today,
                     empty: template.empty,
                     min: new Date(1900,0,1),
@@ -356,7 +356,7 @@
             test("year view renders title", function() {
                 var today = new Date(2011, 9, 10);
 
-                equal(calendar.year.title(today), today.getFullYear() + "");
+                equal(calendar.views[1].title(today), today.getFullYear() + "");
             });
 
             test("year view renders meta view  4x3 cells", function() {
@@ -364,7 +364,7 @@
                     firstMonth = kendo.culture().calendar.months.namesAbbr[0],
                     lastMonth = kendo.culture().calendar.months.namesAbbr[11];
 
-                div.html(calendar.year.content({
+                div.html(calendar.views[1].content({
                     date: today,
                     min: new Date(2000, 10, 10),
                     max: new Date(2020, 10, 10)
@@ -380,7 +380,7 @@
                 var today = new Date(2011, 9, 10),
                     monthName = kendo.culture().calendar.months.namesAbbr[9];
 
-                div.html(calendar.year.content({
+                div.html(calendar.views[1].content({
                     date: today,
                     min: today,
                     max: today
@@ -394,10 +394,10 @@
 
             test("year view renders cells with data-val", function() {
                 var today = new Date(2011, 9, 10),
-                    value = (today.getMonth() + 1) + "/1/" + today.getFullYear(),
+                    value = today.getFullYear() + "/" + today.getMonth() + "/1",
                     monthName = kendo.culture().calendar.months.namesAbbr[9];
 
-                div.html(calendar.year.content({
+                div.html(calendar.views[1].content({
                     date: today,
                     min: today,
                     max: today
@@ -408,13 +408,13 @@
 
             test("decade title renders decade range title", function() {
                 var today = new Date(2011, 9, 10);
-                equal(calendar.decade.title(today), "2010-2019");
+                equal(calendar.views[2].title(today), "2010-2019");
             });
 
             test("decade view renders meta view  4x3 cells", function() {
                 var today = new Date(2011, 9, 10);
 
-                div.html(calendar.decade.content({
+                div.html(calendar.views[2].content({
                     date: today,
                     min: new Date(2000, 10, 10),
                     max: new Date(2020, 10, 10)
@@ -429,7 +429,7 @@
             test("decade view renders only years in range", function() {
                 var today = new Date(2011, 9, 10);
 
-                div.html(calendar.decade.content({
+                div.html(calendar.views[2].content({
                     date: today,
                     min: today,
                     max: today
@@ -442,9 +442,9 @@
 
             test("decade view renders cells with data-val", function() {
                 var today = new Date(2011, 9, 10),
-                    value = "1/1/2011";
+                    value = "2011/0/1";
 
-                div.html(calendar.decade.content({
+                div.html(calendar.views[2].content({
                     date: today,
                     min: today,
                     max: today
@@ -457,7 +457,7 @@
                 var today = new Date(2011, 9, 10),
                     cells;
 
-                div.html(calendar.decade.content({
+                div.html(calendar.views[2].content({
                     date: today,
                     min: new Date(1900, 1, 1),
                     max: new Date(2100, 1, 1)
@@ -474,13 +474,13 @@
             test("century title renders century title", function() {
                 var today = new Date(2011, 9, 10);
 
-                equal(calendar.century.title(today), "2000-2099");
+                equal(calendar.views[3].title(today), "2000-2099");
             });
 
             test("century view renders meta view  4x3 cells", function() {
                 var today = new Date(2011, 9, 10);
 
-                div.html(calendar.century.content({
+                div.html(calendar.views[3].content({
                     date: today,
                     min: new Date(1800, 10, 10),
                     max: new Date(2220, 10, 10)
@@ -488,29 +488,27 @@
 
                 equal(div.find("tbody").find("tr:first").find("td").length, 4);
                 equal(div.find("tbody").find("td > a").length, 12);
-                equal(div.find("tbody").find("a:first").html(), "1990-1999");
-                equal(div.find("tbody").find("a:last").html(), "2100-2109");
+                equal(div.find("tbody").find("a:first").html(), "1990 - 1999");
+                equal(div.find("tbody").find("a:last").html(), "2100 - 2109");
             });
 
             test("century view renders only years in range", function() {
                 var today = new Date(2011, 9, 10);
 
-                div.html(calendar.century.content({
+                div.html(calendar.views[3].content({
                     date: today,
                     min: today,
                     max: today
                 }));
 
-                console.log(div.html());
-
                 equal(div.find("tbody").find("td > a").length, 1);
-                equal(div.find("tbody").find("a").html(), "2010-2019");
+                equal(div.find("tbody").find("a").html(), "2010 - 2019");
             });
 
             test("century view does not render decades less then min", function() {
                 var today = new Date(1910, 9, 10);
 
-                div.html(calendar.century.content({
+                div.html(calendar.views[3].content({
                     date: today,
                     min: new Date(1900, 0, 1),
                     max: new Date(1950, 0, 1)
@@ -521,9 +519,9 @@
 
             test("century view renders cells with data-val", function() {
                 var today = new Date(2011, 9, 10),
-                    value = "1/1/2010";
+                    value = "2010/0/1";
 
-                div.html(calendar.century.content({
+                div.html(calendar.views[3].content({
                     date: today,
                     min: today,
                     max: today
@@ -536,7 +534,7 @@
                 var today = new Date(2011, 9, 10),
                     cells;
 
-                div.html(calendar.century.content({
+                div.html(calendar.views[3].content({
                     date: today,
                     min: new Date(1800, 10, 10),
                     max: new Date(2220, 10, 10)
@@ -558,6 +556,18 @@
                 ok(div.find(".k-footer").children()[0].nodeName, "a");
                 ok(div.find(".k-footer").children().html(),kendo.toString(new Date(), "D"));
                 ok(div.find(".k-footer").children().attr("title"),kendo.toString(new Date(), "D"));
+            });
+
+            test("if no options.month then build template without WITH block", function() {
+                var cal = new kendo.ui.Calendar($("<div/>"));
+
+                ok(cal.month.content.toString().indexOf("with") == -1);
+            });
+
+            test("set options.month build template with WITH block", function() {
+                var cal = new kendo.ui.Calendar($("<div/>"), {month: {content: "#=value#" }});
+
+                ok(cal.month.content.toString().indexOf("with") != -1);
             });
 
         </script>

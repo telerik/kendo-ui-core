@@ -97,7 +97,7 @@
                 div.find("tbody").find("td:not(.k-other-month):first").click(); //click "2000" cell
                 div.find("tbody").find("td:last").prev().click(); //click "Nov" cell
 
-                equal(+calendar._viewedValue, +date);
+                equal(+calendar._current, +date);
             });
 
             test("click on cell should persist _viewedValue", function() {
