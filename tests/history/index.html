@@ -38,12 +38,25 @@
                 equal(expected, l.href);
             }
 
-            test("History uses hashbang by default", function() {
+            module("History");
+
+            test("supports back button", function() {
+                hist.start({});
+                hist.navigate("/new-location");
+                setTimeout(function() {
+                    url(initial);
+                }, 0);
+                history.back();
+            });
+
+            module("History navigation");
+
+            test("uses hashbang by default", function() {
                 hist.navigate("/new-location");
                 url(initial + "#/new-location");
             });
 
-            test("History uses pushState if possible and asked to", function() {
+            test("uses pushState if possible and asked to", function() {
                 hist.start({pushState: true});
                 hist.navigate("/new-location");
                 if (!!pushStateSupported) {
@@ -54,13 +67,12 @@
                 }
             });
 
-            test("History supports back button", function() {
-                hist.start({});
+            test("does not pushState if identical", function() {
+                hist.start({pushState: true});
                 hist.navigate("/new-location");
-                setTimeout(function() {
-                    url(initial);
-                }, 0);
-                history.back();
+                var length = history.length;
+                hist.navigate("/new-location");
+                equal(history.length, length);
             });
         </script>
     </body>

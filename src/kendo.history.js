@@ -1,21 +1,26 @@
 (function($, undefined) {
-    var loc = window.location,
-        hist = window.history,
-        doc = document;
+    var location = window.location,
+        history = window.history,
+        pushStateSupported = window.history && window.history.pushState,
+        document = window.document;
 
 
     kendo.History = {
-        _pushStateSupported: window.history && window.history.pushState,
-
         start: function(options) {
-            this._doPushState = !!options["pushState"] && this._pushStateSupported;
+            this._pushState = !!options["pushState"] && pushStateSupported;
+            this.fragment = "";
         },
 
-        navigate: function(location) {
-            if (this._doPushState) {
-                hist.pushState({}, doc.title, loc.protocol + '//' + loc.host + location);
+        navigate: function(to) {
+            if (this.fragment === to || this.fragment === decodeURIComponent(to)) {
+                return;
+            }
+
+            if (this._pushState) {
+                history.pushState({}, document.title, location.protocol + '//' + location.host + to);
+                this.fragment = to;
             } else {
-                loc.hash = location;
+                this.fragment = location.hash = to;
             }
         }
     }
