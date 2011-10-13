@@ -144,35 +144,35 @@
 
             test("navigateToPast should navigate to previous month when month view", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue),
+                    modified = new Date(cal._current),
                     names = kendo.culture().calendar.months.names;
 
                 modified.setMonth(modified.getMonth() - 1);
 
                 cal.navigateToPast();
 
-                equal(+cal._viewedValue, +modified);
+                equal(+cal._current, +modified);
                 ok(cal._title.html().indexOf(names[modified.getMonth()]) !== -1);
             });
 
             test("navigateToPast should navigate to previous year when year view", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "year";
+                cal._index = "year";
                 modified.setFullYear(modified.getFullYear() - 1);
 
                 cal.navigateToPast();
 
                 ok(cal._title.html(), modified.getFullYear());
-                equal(+cal._viewedValue, +modified);
+                equal(+cal._current, +modified);
             });
 
             test("navigateToPast should navigate to previous decade when decade view", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "decade";
+                cal._index = "decade";
                 modified.setFullYear(modified.getFullYear() - 10);
 
 
@@ -181,14 +181,14 @@
                 cal.navigateToPast();
 
                 ok(cal._title.html(), start + "-" + (start + 9));
-                equal(+cal._viewedValue, +modified);
+                equal(+cal._current, +modified);
             });
 
             test("navigateToPast should navigate to previous century when century view", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "century";
+                cal._index = "century";
                 modified.setFullYear(modified.getFullYear() - 100);
 
 
@@ -197,41 +197,41 @@
                 cal.navigateToPast();
 
                 ok(cal._title.html(), start + "-" + (start + 99));
-                equal(+cal._viewedValue, +modified);
+                equal(+cal._current, +modified);
             });
 
             test("navigateToFuture should navigate to next month when month view", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue),
+                    modified = new Date(cal._current),
                     names = kendo.culture().calendar.months.names;
 
-                cal._currentView = "month";
+                cal._index = "month";
                 modified.setMonth(modified.getMonth() + 1);
 
                 cal.navigateToFuture();
 
-                equal(+cal._viewedValue, +modified);
+                equal(+cal._current, +modified);
                 ok(cal._title.html().indexOf(names[modified.getMonth()]) !== -1);
             });
 
             test("navigateToFuture should navigate to next year when year view", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "year";
+                cal._index = "year";
                 modified.setFullYear(modified.getFullYear() + 1);
 
                 cal.navigateToFuture();
 
                 ok(cal._title.html(), modified.getFullYear());
-                equal(+cal._viewedValue, +modified);
+                equal(+cal._current, +modified);
             });
 
             test("navigateToFuture should navigate to next decade when decade view", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "decade";
+                cal._index = "decade";
                 modified.setFullYear(modified.getFullYear() + 10);
 
 
@@ -240,7 +240,7 @@
                 cal.navigateToFuture();
 
                 ok(cal._title.html(), start + "-" + (start + 9));
-                equal(+cal._viewedValue, +modified);
+                equal(+cal._current, +modified);
             });
 
             test("navigateToFuture should navigate to next century when century view", function() {
@@ -248,9 +248,9 @@
                         max: new Date(2400, 10, 10),
                         animation: false
                     }),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "century";
+                cal._index = "century";
                 modified.setFullYear(modified.getFullYear() + 100);
 
 
@@ -259,92 +259,92 @@
                 cal.navigateToFuture();
 
                 ok(cal._title.html(), start + "-" + (start + 99));
-                equal(+cal._viewedValue, +modified);
+                equal(+cal._current, +modified);
             });
 
             test("navigateUp should navigate upper view (year)", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "month";
+                cal._index = "month";
 
                 cal.navigateUp();
 
-                equal(cal._currentView, "year");
+                equal(cal._index, "year");
             });
 
             test("navigateUp should navigate upper view (decade)", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "year";
+                cal._index = "year";
 
                 cal.navigateUp();
 
-                equal(cal._currentView, "decade");
+                equal(cal._index, "decade");
             });
 
             test("navigateUp should navigate upper view (century)", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "decade";
+                cal._index = "decade";
 
                 cal.navigateUp();
 
-                equal(cal._currentView, "century");
+                equal(cal._index, "century");
                 ok(cal._title.hasClass("k-state-disabled"));
             });
 
             test("navigateDown should navigate lower view (decade)", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "century";
+                cal._index = "century";
 
                 cal.navigateDown(modified);
 
-                equal(cal._currentView, "decade");
+                equal(cal._index, "decade");
             });
 
             test("navigateDown should navigate lower view (year)", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "decade";
+                cal._index = "decade";
 
                 cal.navigateDown(modified);
 
-                equal(cal._currentView, "year");
+                equal(cal._index, "year");
             });
 
             test("navigateDown should navigate lower view (month)", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "year";
+                cal._index = "year";
 
                 cal.navigateDown(modified);
 
-                equal(cal._currentView, "month");
+                equal(cal._index, "month");
             });
 
             test("navigateDown should navigate lower view (month)", function() {
                 var cal = new Calendar(div, {animation: false}),
-                    modified = new Date(cal._viewedValue);
+                    modified = new Date(cal._current);
 
-                cal._currentView = "year";
+                cal._index = "year";
 
                 cal.navigateDown(modified);
 
-                equal(cal._currentView, "month");
+                equal(cal._index, "month");
             });
 
             test("navigateDown with date navigate to cell's date", function() {
                 var cal = stub(new Calendar(div, {animation: false}), "navigate"),
                     value = new Date(2000, 10, 10);
 
-                cal._currentView = "year";
+                cal._index = "year";
 
                 cal.navigateDown(value);
 
@@ -352,7 +352,7 @@
                 equal(+cal.args("navigate")[0], +value);
             });
 
-            test("navigateDown should call value method if _currentView === options.depth", function() {
+            test("navigateDown should call value method if _index === options.depth", function() {
                 var cal = stub(new Calendar(div, {animation: false}), "value"),
                     value = new Date(2000, 10, 10);
 
@@ -368,7 +368,7 @@
 
                 cal.navigate(value);
 
-                equal(+cal._viewedValue, +cal.options.min);
+                equal(+cal._current, +cal.options.min);
             });
 
             test("value should select set selectedValue property", function() {
@@ -477,7 +477,7 @@
                     viewedValue = new Date(2004, 10, 15),
                     cal = new Calendar(div, {animation: false});
 
-                cal._viewedValue = viewedValue;
+                cal._current = viewedValue;
                 cal._view = kendo.calendar["decade"];
 
                 stub(cal, {navigate: cal.navigate});
@@ -538,7 +538,7 @@
                  equal(cal.calls("navigate"), 0);
             });
 
-            test("Should navigate if min is bigger then _viewedValue", function() {
+            test("Should navigate if min is bigger then _current", function() {
                  var value = new Date(2000, 10, 10),
                      cal = new Calendar(div, {value: value});
 
@@ -585,7 +585,7 @@
                  equal(cal.calls("navigate"), 0);
             });
 
-            test("Should navigate if max is less then _viewedValue", function() {
+            test("Should navigate if max is less then _current", function() {
                  var value = new Date(2000, 10, 10),
                      cal = new Calendar(div, {value: value});
 
