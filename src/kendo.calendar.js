@@ -535,7 +535,7 @@
                 value = link.data(VALUE).split("/");
 
             //Safari cannot create corretly date from "1/1/2090"
-            value = new DATE(parseInt(value[2]), parseInt(value[0]) - 1, parseInt(value[1]));
+            value = new DATE(value[0], value[1], value[2]);
 
             e.preventDefault();
 
@@ -834,7 +834,7 @@
                 }
             },
             toDateString: function(date) {
-                return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+                return date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
             }
         },
 
@@ -894,7 +894,7 @@
                 }
             },
             toDateString: function(date) {
-                return (date.getMonth() + 1) + "/1/" + date.getFullYear();
+                return date.getFullYear() + "/" + date.getMonth() + "/1";
             }
         },
         decade: {
@@ -938,7 +938,7 @@
                 setDate(date, value, 1);
             },
             toDateString: function(date) {
-                return "1/1/" + date.getFullYear();
+                return date.getFullYear() + "/0/1";
             }
         },
         century: {
@@ -993,7 +993,7 @@
             },
             toDateString: function(date) {
                 var year = date.getFullYear();
-                return "1/1/" + (year - year % 10);
+                return (year - year % 10) + "/0/1";
             }
         }
     }
