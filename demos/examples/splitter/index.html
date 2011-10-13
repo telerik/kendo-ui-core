@@ -27,11 +27,11 @@
             <div id="vertical" style="height: 300px">
                 <div>
                     <p>
-                        Outer splitter : top pane
+                        Outer splitter : top pane (resizable and collapsible)
                     </p>
                 </div>
                 <div>
-                    <div id="horizontal" style="height: 100%; width: 100%; border: 0; overflow:hidden;">
+                    <div id="horizontal" style="height: 100%; width: 100%;">
                         <div>
                             <p>
                                 Inner splitter :: left pane
@@ -51,7 +51,7 @@
                 </div>
                 <div>
                     <p>
-                        Outer splitter : bottom pane
+                        Outer splitter : bottom pane (non-resizable, non-collapsible)
                     </p>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                         panes: [
                             { collapsible: true, size: "100px" },
                             { collapsible: false },
-                            { collapsible: true, size: "20%" }
+                            { collapsible: false, resizable: false, size: "20%" }
                         ]
                     });
 
