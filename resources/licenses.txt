@@ -1,4 +1,4 @@
-The following 3rd party products are used in JavaScript code for Kendo UI
+The following open source libraries are used in Kendo UI
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 jQuery JavaScript library
