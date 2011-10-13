@@ -103,8 +103,8 @@
         template = kendo.template,
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
-        cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#">#=data.value#</a></td>'),
-        emptyCellTemplate = template("<td>&nbsp;</td>"),
+        cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
+        emptyCellTemplate = template("<td>&nbsp;</td>", { useWithBlock: false }),
         MIN = "min",
         LEFT = "left",
         SLIDE = "slide",
@@ -204,10 +204,6 @@
             footer : '#= kendo.toString(data,"D") #',
             start: MONTH,
             depth: MONTH,
-            month: {
-                content: "#=data.value#",
-                empty: "&nbsp;"
-            },
             animation: {
                 horizontal: {
                     effects: SLIDE,
@@ -563,8 +559,8 @@
 
         _footer: function() {
             var that = this,
-            element = that.element,
-            today = new DATE();
+                element = that.element,
+                today = new DATE();
 
             if (!element.find(".k-footer")[0]) {
                 element.append('<div class="k-footer"><a href="#" class="k-link k-nav-today"></a></div>');
@@ -699,11 +695,13 @@
 
         _templates: function() {
             var that = this,
-                month = that.options.month;
+                month = that.options.month || {},
+                content = month.content,
+                empty = month.empty;
 
             that.month = {
-                content: template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#" title="#=data.title#">' + month.content + '</a></td>'),
-                empty: template("<td>" + month.empty + "</td>")
+                content: template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
+                empty: template("<td>" + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
             };
         }
     });

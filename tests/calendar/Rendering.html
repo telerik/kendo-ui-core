@@ -558,6 +558,18 @@
                 ok(div.find(".k-footer").children().attr("title"),kendo.toString(new Date(), "D"));
             });
 
+            test("if no options.month then build template without WITH block", function() {
+                var cal = new kendo.ui.Calendar($("<div/>"));
+
+                ok(cal.month.content.toString().indexOf("with") == -1);
+            });
+
+            test("set options.month build template with WITH block", function() {
+                var cal = new kendo.ui.Calendar($("<div/>"), {month: {content: "#=value#" }});
+
+                ok(cal.month.content.toString().indexOf("with") != -1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
