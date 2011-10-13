@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.History tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.History Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var hist = kendo.History,
+                l = window.location,
+                initial = l.href;
+
+
+
+            QUnit.reset = function() {
+                window.history.pushState({}, "kendo.History tests", initial);
+                hist.start({});
+            };
+
+            test("History is defined", function() {
+                ok(hist, "History class does not exist");
+            });
+
+            test("History uses hashbang by default", function() {
+                hist.navigate("/new-location");
+                equal(l.href, initial + "#/new-location");
+            });
+
+            test("History uses pushState if asked", function() {
+                hist.start({pushState: true});
+                hist.navigate("/new-location");
+                equal(l.href, l.protocol + "//" + l.host + "/new-location");
+            });
+        </script>
+    </body>
+</html>
