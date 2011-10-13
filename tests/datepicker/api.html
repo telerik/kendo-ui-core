@@ -38,14 +38,14 @@
                 var date = new Date(2000, 10, 10),
                 dv1 = new DateView({
                     value: date,
-                    startView: "month",
+                    start: "month",
                     anchor: $("<input/>"),
                     min: new Date (1900, 10, 10),
                     max: new Date (2100, 10, 10),
                     depth: "month"
                 });
 
-                dv1._initCalendar();
+                dv1._calendar();
                 date.setDate(20);
 
                 dv1.value(date);
@@ -58,7 +58,7 @@
                 var date = new Date(2000, 10, 10),
                     dv1 = new DateView({
                         value: date,
-                        startView: "month"
+                        start: "month"
                     });
 
                 dv1.calendar.element.data("dateView", {});
@@ -119,15 +119,18 @@
             });
 
             //DatePicker
-            test("open method opens the dateView", function() {
+            asyncTest("open method opens the dateView", function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-                stub(datepicker.dateView, "_initCalendar");
-                stub(datepicker.dateView.popup, "open");
+                stub(datepicker.dateView, "_calendar");
+                stub(datepicker.dateView.popup, {open: datepicker.dateView.popup.open});
 
                 datepicker.open();
 
-                equal(datepicker.dateView.popup.calls("open"), 1);
+                setTimeout(function() {
+                    equal(datepicker.dateView.popup.calls("open"), 1);
+                    start();
+                }, 200);
             });
 
             test("close method should closes the dateView", function() {
