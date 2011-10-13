@@ -21,28 +21,46 @@
         <script>
             var hist = kendo.History,
                 l = window.location,
-                initial = l.href;
-
+                initial = l.href.replace(/#.*$/, ""),
+                pushStateSupported = window.history.pushState;
 
 
             QUnit.reset = function() {
-                window.history.pushState({}, "kendo.History tests", initial);
+                if (window.history.replaceState) {
+                    window.history.replaceState({}, '', initial);
+                } else {
+                    window.location.hash = '';
+                }
                 hist.start({});
             };
 
-            test("History is defined", function() {
-                ok(hist, "History class does not exist");
-            });
+            function url(expected) {
+                equal(expected, l.href);
+            }
 
             test("History uses hashbang by default", function() {
                 hist.navigate("/new-location");
-                equal(l.href, initial + "#/new-location");
+                url(initial + "#/new-location");
             });
 
-            test("History uses pushState if asked", function() {
+            test("History uses pushState if possible and asked to", function() {
                 hist.start({pushState: true});
                 hist.navigate("/new-location");
-                equal(l.href, l.protocol + "//" + l.host + "/new-location");
+                if (!!pushStateSupported) {
+                    url(l.protocol + "//" + l.host + "/new-location");
+                }
+                else {
+                    url(initial + "#/new-location");
+                }
+            });
+
+            test("History supports back button", function() {
+                hist.start({});
+                hist.navigate("/new-location");
+                setTimeout(function() {
+                    url(initial);
+                }, 0);
+                history.back();
             });
         </script>
     </body>

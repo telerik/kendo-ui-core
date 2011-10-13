@@ -5,8 +5,10 @@
 
 
     kendo.History = {
+        _pushStateSupported: window.history && window.history.pushState,
+
         start: function(options) {
-            this._doPushState = !!options["pushState"];
+            this._doPushState = !!options["pushState"] && this._pushStateSupported;
         },
 
         navigate: function(location) {
