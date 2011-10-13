@@ -249,7 +249,7 @@
                     content: template.content
                 }));
 
-                equal(div.find("tbody").find("td").html(), " ");
+                equal(div.find("tbody").find("td").html(), "&nbsp;");
                 equal(div.find("tbody").find("a:first").html(), today.getDate() + "");
                 equal(div.find("tbody").find("a:last").html(), max.getDate() + "");
             });
@@ -488,8 +488,8 @@
 
                 equal(div.find("tbody").find("tr:first").find("td").length, 4);
                 equal(div.find("tbody").find("td > a").length, 12);
-                equal(div.find("tbody").find("a:first").html(), "1990-1999");
-                equal(div.find("tbody").find("a:last").html(), "2100-2109");
+                equal(div.find("tbody").find("a:first").html(), "1990 - 1999");
+                equal(div.find("tbody").find("a:last").html(), "2100 - 2109");
             });
 
             test("century view renders only years in range", function() {
@@ -504,7 +504,7 @@
                 console.log(div.html());
 
                 equal(div.find("tbody").find("td > a").length, 1);
-                equal(div.find("tbody").find("a").html(), "2010-2019");
+                equal(div.find("tbody").find("a").html(), "2010 - 2019");
             });
 
             test("century view does not render decades less then min", function() {
