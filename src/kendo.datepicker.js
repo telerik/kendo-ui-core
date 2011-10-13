@@ -52,7 +52,7 @@
     * @section
     * <h3>Define start view and navigation depth</h3>
     * <p>
-    *    The first rendered view can be defined with "startView" option. Navigation depth
+    *    The first rendered view can be defined with "start" option. Navigation depth
     *    can be controlled with "depth" option. Predefined views are:
     *    <ul>
     *       <li>"month" - shows the days from the month</li>
@@ -65,7 +65,7 @@
     * @exampleTitle Create Month picker
     * @example
     *  $("#calendar").kendoDatePicker({
-    *      startView: "year",
+    *      start: "year",
     *      depth: "year"
     *  });
     *
@@ -85,26 +85,32 @@
     NAVIGATE = "navigate",
     DATEVIEW = "dateView",
     DISABLED = "disabled",
+    FOCUSED = "k-state-focused",
     SELECTED = "k-state-selected",
     HOVER = "k-state-hover",
     HOVEREVENTS = "mouseenter mouseleave",
     MOUSEDOWN = (touch ? "touchstart" : "mousedown"),
-    cal = kendo.calendar,
-    isInRange = cal.isInRange,
-    restrictValue = cal.restrictValue,
+    MIN = "min",
+    MAX = "max",
+    MONTH = "month",
+    FIRST = "first",
+    calendar = kendo.calendar,
+    views = calendar.viewEnum,
+    isInRange = calendar.isInRange,
+    restrictValue = calendar.restrictValue,
     proxy = $.proxy,
     DATE = Date,
-    calendar;
+    sharedCalendar;
 
     var DateView = function(options) {
         var that = this,
             body = document.body;
 
-        if (!calendar) {
-            calendar = new ui.Calendar($(DIV).hide().appendTo(body));
+        if (!sharedCalendar) {
+            sharedCalendar = new ui.Calendar($(DIV).hide().appendTo(body));
         }
 
-        that.calendar = calendar;
+        that.calendar = sharedCalendar;
         that.options = options = options || {};
         that.popup = new ui.Popup($(DIV).addClass("k-calendar-container").appendTo(body), options);
 
@@ -112,7 +118,7 @@
     };
 
     DateView.prototype = {
-        _initCalendar: function() {
+        _calendar: function() {
             var that = this,
                 popup = that.popup,
                 options = that.options,
@@ -125,20 +131,20 @@
                        .data(DATEVIEW, that)
                        .bind(CLICK, proxy(that._click, that))
                        .unbind(MOUSEDOWN)
-                       .bind(MOUSEDOWN, options.clearBlurTimeout);
+                       .bind(MOUSEDOWN, options.clearBlurTimeout)
+                       .show();
 
-                calendar.options.min = options.min;
-                calendar.options.max = options.max;
+                calendar.min(options.min);
+                calendar.max(options.max);
+
                 calendar.options.depth = options.depth;
-                calendar.options.startView = options.startView;
-                calendar._currentView = options.startView;
+                calendar.options.start = options.start;
+                calendar._index = views[options.start];
 
                 calendar.unbind(CHANGE)
                         .unbind(NAVIGATE)
                         .bind(NAVIGATE, proxy(that._navigate, that))
                         .bind(CHANGE, options);
-
-                element.show();
 
                 that.value(that._value);
             }
@@ -147,8 +153,8 @@
         open: function() {
             var that = this;
 
-            that._initCalendar();
-            setTimeout( function () { that.popup.open(); }, 0);
+            that._calendar();
+            setTimeout( function () { that.popup.open(); });
         },
 
         close: function() {
@@ -156,33 +162,17 @@
         },
 
         min: function(value) {
-            var that = this,
-                options = that.options,
-                calendar = that.calendar;
-
-            options.min = value;
-
-            if (calendar.element.data(DATEVIEW) === that) {
-                calendar.min(value);
-            }
+            this._option(MIN, value);
         },
 
         max: function(value) {
-            var that = this,
-                options = that.options,
-                calendar = that.calendar;
-
-            options.max = value;
-
-            if (calendar.element.data(DATEVIEW) === that) {
-                calendar.max(value);
-            }
+            this._option(MAX, value);
         },
 
         toggle: function() {
             var that = this;
 
-            that[that.popup.visible() ? "close" : "open"]();
+            that[that.popup.visible() ? CLOSE : OPEN]();
         },
 
         navigate: function(e) {
@@ -190,59 +180,55 @@
                 options = that.options,
                 min = options.min,
                 max = options.max,
-                viewedValue = new DATE(that._viewedValue),
+                currentValue = new DATE(that._current),
                 calendar = that.calendar,
-                viewName = calendar._currentView,
+                index = calendar._index,
                 view = calendar._view,
                 key = e.keyCode,
-                dateString, value, prevent;
+                dateString, value, prevent, method;
 
-            if (keys.ESC == key) {
+            if (key == keys.ESC) {
                 that.close();
                 return;
             }
 
             if (e.ctrlKey) {
-                if (keys.RIGHT == key) {
+                if (key == keys.RIGHT) {
                     calendar.navigateToFuture();
                     prevent = true;
-                } else if (keys.LEFT == key) {
+                } else if (key == keys.LEFT) {
                     calendar.navigateToPast();
                     prevent = true;
-                } else if (keys.UP == key) {
+                } else if (key == keys.UP) {
                     calendar.navigateUp();
                     prevent = true;
-                } else if (keys.DOWN == key) {
+                } else if (key == keys.DOWN) {
                     that._navigateDown();
                     prevent = true;
                 }
             } else {
-                if (keys.RIGHT == key) {
+                if (key == keys.RIGHT) {
                     value = 1;
                     prevent = true;
-                } else if (keys.LEFT == key) {
+                } else if (key == keys.LEFT) {
                     value = -1;
                     prevent = true;
-                } else if (keys.UP == key) {
-                    value = viewName === "month" ? -7 : -4;
+                } else if (key == keys.UP) {
+                    value = index === 0 ? -7 : -4;
                     prevent = true;
-                } else if (keys.DOWN == key) {
-                    value = viewName === "month" ? 7 : 4;
+                } else if (key == keys.DOWN) {
+                    value = index === 0 ? 7 : 4;
                     prevent = true;
-                } else if (keys.ENTER == key) {
-                    prevent = true;
+                } else if (key == keys.ENTER) {
                     that._navigateDown();
-                } else if (keys.HOME == key) {
                     prevent = true;
-                    that._viewedValue = viewedValue = restrictValue(view.first(viewedValue), options.min, options.max);
-                    calendar._focus(viewedValue);
-                } else if (keys.END == key) {
+                } else if (key == keys.HOME || key == keys.END) {
+                    method = key == keys.HOME ? FIRST : "last";
+                    currentValue = view[method](currentValue);
                     prevent = true;
-                    that._viewedValue = viewedValue = restrictValue(view.last(viewedValue), options.min, options.max);
-                    calendar._focus(viewedValue);
-                } else if (keys.PAGEUP == key) {
+                } else if (key == keys.PAGEUP) {
                     calendar.navigateToPast();
-                } else if (keys.PAGEDOWN == key) {
+                } else if (key == keys.PAGEDOWN) {
                     calendar.navigateToFuture();
                 }
 
@@ -250,10 +236,13 @@
                     e.preventDefault();
                 }
 
-                if (value) {
-                    view.setDate(viewedValue, value);
-                    that._viewedValue = viewedValue = restrictValue(viewedValue, options.min, options.max);
-                    calendar._focus(viewedValue);
+                if (value || method) {
+                    if (!method) {
+                        view.setDate(currentValue, value);
+                    }
+
+                    that._current = currentValue = restrictValue(currentValue, options.min, options.max);
+                    calendar._focus(currentValue);
                 }
             }
         },
@@ -264,10 +253,10 @@
                 options = that.options;
 
             that._value = value;
-            that._viewedValue = new DATE(restrictValue(value, options.min, options.max));
+            that._current = new DATE(restrictValue(value, options.min, options.max));
 
             if (calendar.element.data(DATEVIEW) === that) {
-                calendar._focus(that._viewedValue);
+                calendar._focus(that._current);
                 calendar.value(value);
             }
         },
@@ -282,27 +271,39 @@
             var that = this,
                 calendar = that.calendar;
 
-            that._viewedValue = new DATE(calendar._viewedValue);
-            calendar._focus(calendar._viewedValue);
+            that._current = new DATE(calendar._current);
+            calendar._focus(calendar._current);
         },
 
         _navigateDown: function() {
             var that = this,
                 calendar = that.calendar,
-                viewedValue = calendar._viewedValue,
-                cell = calendar._table.find(".k-state-focused"),
-                value = cell.children(":first").data("value").split("/");
+                currentValue = calendar._current,
+                cell = calendar._table.find("." + FOCUSED),
+                value = cell.children(":" + FIRST).data("value").split("/");
 
             //Safari cannot create corretly date from "1/1/2090"
-            value = new DATE(parseInt(value[2]), parseInt(value[0]) - 1, parseInt(value[1]));
+            value = new DATE(value[0], value[1], value[2]);
 
             if (!cell[0] || cell.hasClass(SELECTED)) {
                 that.close();
                 return;
             }
 
-            calendar._view.setDate(viewedValue, value);
-            calendar.navigateDown(viewedValue);
+            calendar._view.setDate(currentValue, value);
+            calendar.navigateDown(currentValue);
+        },
+
+        _option: function(option, value) {
+            var that = this,
+                options = that.options,
+                calendar = that.calendar;
+
+            options[option] = value;
+
+            if (calendar.element.data(DATEVIEW) === that) {
+                calendar[option](value);
+            }
         }
     };
 
@@ -318,18 +319,31 @@
          * @option {Date} [min] <Date(1900, 0, 1)> Specifies the minimum date, which the calendar can show.
          * @option {Date} [max] <Date(2099, 11, 31)> Specifies the maximum date, which the calendar can show.
          * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to parse value set with value() method.
-         * @option {String} [startView] <month> Specifies the start view.
+         * @option {String} [start] <month> Specifies the start view.
          * @option {String} [depth] Specifies the navigation depth.
          */
         init: function(element, options) {
             var that = this,
-                dateView, enable;
+                dateView, enable, index, depth;
 
             Component.fn.init.call(that, element, options);
             element = that.element;
             options = that.options;
 
-            options.format = options.format || kendo.culture().calendar.patterns["d"];
+            options.format = options.format || kendo.culture().calendar.patterns.d;
+
+            //prevent setting incorrect start and depth
+            index = views[options.start];
+            depth = views[options.depth];
+
+            if (isNaN(index)) {
+                options.start = MONTH;
+            }
+
+            if (depth === undefined || depth > index) {
+                options.depth = MONTH;
+            }
+            //end
 
             that._wrapper();
 
@@ -350,9 +364,9 @@
                             .addClass("k-input")
                             .bind({
                                 keydown: proxy(that._keydown, that),
-                                focus: function(e) {
+                                focus: function(e) { // move to _focus ?!?!
                                     clearTimeout(that._bluring);
-                                    that.input.parent().addClass("k-state-focused");
+                                    that.input.parent().addClass(FOCUSED);
                                 },
                                 blur: proxy(that._blur, that)
                             });
@@ -387,9 +401,8 @@
             value: null,
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
-            format: kendo.culture().calendar.patterns.d,
-            startView: "month",
-            depth: "month"
+            start: MONTH,
+            depth: MONTH
         },
 
         /**
@@ -468,21 +481,7 @@
         * datepicker.min(new Date(1900, 0, 1));
         */
         min: function(value) {
-            var that = this,
-                options = that.options;
-
-            if (value === undefined) {
-                return options.min;
-            }
-
-            value = parse(value, options.format);
-
-            if (!value) {
-                return;
-            }
-
-            options.min = new DATE(value);
-            that.dateView.min(value);
+            return this._option(MIN, value);
         },
 
         /**
@@ -499,21 +498,7 @@
         * datepicker.max(new Date(1900, 0, 1));
         */
         max: function(value) {
-            var that = this,
-                options = that.options;
-
-            if (value === undefined) {
-                return options.max;
-            }
-
-            value = parse(value, options.format);
-
-            if (!value) {
-                return;
-            }
-
-            options.max = new DATE(value);
-            that.dateView.max(value);
+            return this._option(MAX, value);
         },
 
         /**
@@ -555,8 +540,9 @@
         },
 
         _toggleHover: function(e) {
-            if (!touch)
+            if (!touch) {
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
+            }
         },
 
         _blur: function() {
@@ -567,7 +553,7 @@
                 if (!touch) {
                     that.close();
                 }
-                that.input.parent().removeClass("k-state-focused");
+                that.input.parent().removeClass(FOCUSED);
             }, 100);
         },
 
@@ -577,7 +563,7 @@
             setTimeout(function() {
                 clearTimeout(that._bluring);
                 that.element.focus();
-            }, 0);
+            });
         },
 
         _click: function() {
@@ -612,17 +598,17 @@
                 dateView = that.dateView;
 
             if (e.altKey) {
-                if (keys.DOWN == key) {
+                if (key == keys.DOWN) {
                     that.open();
                     e.preventDefault();
-                } else if (keys.UP == key) {
+                } else if (key == keys.UP) {
                     that.close();
                     e.preventDefault();
                 }
             } else {
                 if (dateView.popup.visible()) {
                     dateView.navigate(e);
-                } else if (keys.ENTER == key) {
+                } else if (key == keys.ENTER) {
                     that._change(e.currentTarget.value);
                 }
             }
@@ -640,6 +626,24 @@
             }
 
             that._icon = icon;
+        },
+
+        _option: function(option, value) {
+            var that = this,
+                options = that.options;
+
+            if (value === undefined) {
+                return options[option];
+            }
+
+            value = parse(value, options.format);
+
+            if (!value) {
+                return;
+            }
+
+            options[option] = new DATE(value);
+            that.dateView[option](value);
         },
 
         _wrapper: function() {
