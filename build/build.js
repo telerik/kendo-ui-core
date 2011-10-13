@@ -206,6 +206,9 @@ console.log("copying license agreement...");
 var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");
 fs.writeFileSync(PATH + "/Kendo\ Beta\ EULA.pdf", data);
 
+data = fs.readFileSync("resources/licenses.txt");
+fs.writeFileSync(PATH + "/licenses.txt", data);
+
 console.log("building examples...");
 buildExamples();
 
