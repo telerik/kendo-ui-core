@@ -4,50 +4,73 @@ var kendoComponents = [{
     }, {
         name: "data",
         source: "kendo.data.js",
-        requires: [ "core" ]
+        depends: [ "core" ]
     }, {
-        name: "chart",
-        requires: [ "data" ],
-        source: "kendo.chart.js",
-        modules: [{
-                name: "main",
-                source: "chart/main.js"
+        name: "sortable",
+        source: "kendo.sortable.js",
+        depends: [ "data" ]
+    }, {
+        name: "pager",
+        source: "kendo.pager.js",
+        depends: [ "data" ]
+    }, {
+        name: "selectable",
+        source: "kendo.selectable.js",
+        depends: [ "core" ]
+    }, {
+        name: "grid",
+        source: "kendo.grid.js",
+        depends: [ "data", "navigatable" ],
+        features: [{
+                name: "grid-sorting",
+                depends: [ "sortable" ]
             }, {
-                name: "svg",
-                source: "chart/svg.js"
+                name: "grid-paging",
+                depends: [ "pageable" ]
             }, {
-                name: "vml",
-                optional: true,
-                source: "chart/vml.js"
-            }, {
-                name: "themes",
-                optional: true,
-                source: "chart/themes.js"
+                name: "grid-selection",
+                depends: [ "sortable" ]
             }
         ]
+    }, {
+        name: "chart",
+        source: "kendo.chart.js",
+        depends: [ "data" ]
     }
 ];
 
-function configureScripts(components, features) {
+function resolveScripts(definitions, features) {
     var scripts = [];
     features.forEach(function(f) {
-        resolve(components, f, scripts);
+        resolve(definitions, f, scripts);
     });
     return scripts;
 }
 
-function resolve(components, feature, scripts) {
-    var match =
-        components.filter(function(c) { return c.name === feature })[0];
+function resolve(definitions, feature, scripts) {
+    var componentName = feature.split("-")[0],
+        featureName = feature.split("-")[1],
+        component = definitions.filter(function(c) {
+        return c.name === componentName })[0];
 
-    if (match.requires) {
-        match.requires.forEach(function(requisite) {
-            resolve(components, requisite, scripts);
+    if (featureName && component.features) {
+        component.features.forEach(function(feature) {
+            if (feature.depends) {
+                feature.depends.forEach(function(fd) {
+                    resolve(definitions, fd, scripts);
+                });
+            }
         });
     }
 
-    if (scripts.indexOf(match.source) === -1) {
-        scripts.push(match.source);
+    if (component.depends) {
+        component.depends.forEach(function(requisite) {
+            resolve(definitions, requisite, scripts);
+        });
+    }
+
+    if (scripts.indexOf(component.source) === -1) {
+        scripts.push(component.source);
     }
 }
 
