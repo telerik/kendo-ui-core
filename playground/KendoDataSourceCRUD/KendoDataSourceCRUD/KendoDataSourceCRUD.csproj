@@ -119,7 +119,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\BatchMultiple.cshtml" />
+    <Content Include="Views\Home\Batch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\" />

@@ -1,4 +1,4 @@
-﻿<h2>Single request update</h2>
+﻿<h2>Batch updates</h2>
 
 <table id="products">
     <thead>
@@ -28,10 +28,24 @@ $(document).ready(function() {
         transport: {
             read: "@Url.Action("Read", "Home")",
             update: {
-                url: "@Url.Action("Update", "Home")",
+                url: "@Url.Action("UpdateProducts", "Home")",
                 type: "POST"
+            },
+            dialect: function(data, type) {
+                if (type == "update") {
+                    var products = {};
+
+                    $.each(data.models, function(index, product) {
+                        for (var key in product) {
+                            products["[" + index +"]" + "." + key] = product[key];
+                        }
+                    });
+
+                    return products;
+                }
             }
         },
+        batch: true,
         schema: {
             model: Product
         }

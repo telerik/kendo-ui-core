@@ -15,7 +15,7 @@ namespace KendoDataSourceCRUD.Controllers
             return View();
         }
 
-        public ActionResult BatchMultiple()
+        public ActionResult Batch()
         {
             return View();
         }
@@ -55,16 +55,7 @@ namespace KendoDataSourceCRUD.Controllers
 
         public ActionResult Update(Product model)
         {
-            var products = Products();
-
-            var product = products.FirstOrDefault(p => p.ID == model.ID);
-
-            if (product != null)
-            {
-                product.Name = model.Name;
-            }
-
-            return Json(products);
+            return Json(model);
         }
     }
 }
