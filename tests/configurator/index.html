@@ -8,7 +8,6 @@
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
-        <script src="../../src/kendo.core.js"></script>
         <script src="../../configurator/script-builder.js"></script>
         <script type="text/javascript">
 
@@ -18,10 +17,7 @@
                 resolver = new ScriptResolver(config);
             }
 
-            module("resolveScripts", {
-                setup: function() {
-                }
-            });
+            module("ScriptResolver");
 
             test("component with no dependencies", function() {
                 createResolver([{
@@ -83,6 +79,22 @@
                 }]);
 
                 resolver.addComponent("a", [ "a-1" ]);
+
+                same(resolver.scripts, [ "b.js", "a.js" ]);
+            });
+
+            test("circular dependencies", function() {
+                createResolver([{
+                    name: "a",
+                    source: "a.js",
+                    depends: [ "b" ]
+                }, {
+                    name: "b",
+                    source: "b.js",
+                    depends: [ "a" ]
+                }]);
+
+                resolver.addComponent("a");
 
                 same(resolver.scripts, [ "b.js", "a.js" ]);
             });
