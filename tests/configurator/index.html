@@ -8,80 +8,83 @@
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
+        <script src="../../src/kendo.core.js"></script>
         <script src="../../configurator/script-builder.js"></script>
         <script type="text/javascript">
 
             // ------------------------------------------------------------
+            var resolver;
+            function createResolver(config) {
+                resolver = new ScriptResolver(config);
+            }
+
             module("resolveScripts", {
                 setup: function() {
                 }
             });
 
             test("component with no dependencies", function() {
-                same(
-                    resolveScripts([{
-                            name: "a",
-                            source: "a.js"
-                        }],
-                        [ "a" ]
-                    ),
-                    [ "a.js" ]
-                );
+                createResolver([{
+                    name: "a",
+                    source: "a.js"
+                }]);
+
+                resolver.addComponent("a");
+
+                same(resolver.scripts, [ "a.js" ]);
             });
 
             test("component with single dependency", function() {
-                same(
-                    resolveScripts([{
-                            name: "a",
-                            source: "a.js"
-                        }, {
-                            name: "b",
-                            source: "b.js",
-                            depends: [ "a" ]
-                        }],
-                        [ "b" ]
-                    ),
-                    [ "a.js", "b.js" ]
-                );
+                createResolver([{
+                    name: "a",
+                    source: "a.js"
+                }, {
+                    name: "b",
+                    source: "b.js",
+                    depends: [ "a" ]
+                }]);
+
+                resolver.addComponent("b");
+
+                same(resolver.scripts, [ "a.js", "b.js" ]);
             });
 
             test("includes common dependency only once", function() {
-                same(
-                    resolveScripts([{
-                            name: "a",
-                            source: "a.js"
-                        }, {
-                            name: "b",
-                            source: "b.js",
-                            depends: [ "a" ]
-                        }, {
-                            name: "c",
-                            source: "c.js",
-                            depends: [ "a" ]
-                        }],
-                        [ "b", "c" ]
-                    ),
-                    [ "a.js", "b.js", "c.js" ]
-                );
+                createResolver([{
+                    name: "a",
+                    source: "a.js"
+                }, {
+                    name: "b",
+                    source: "b.js",
+                    depends: [ "a" ]
+                }, {
+                    name: "c",
+                    source: "c.js",
+                    depends: [ "a" ]
+                }]);
+
+                resolver.addComponent("b");
+                resolver.addComponent("c");
+
+                same(resolver.scripts, [ "a.js", "b.js", "c.js" ]);
             });
 
             test("depending features", function() {
-                same(
-                    resolveScripts([{
-                            name: "a",
-                            source: "a.js",
-                            features: [{
-                                name: "a-1",
-                                depends: [ "b" ]
-                            }]
-                        }, {
-                            name: "b",
-                            source: "b.js"
-                        }],
-                        [ "a", "a-1" ]
-                    ),
-                    [ "b.js", "a.js" ]
-                );
+                createResolver([{
+                    name: "a",
+                    source: "a.js",
+                    features: [{
+                        name: "a-1",
+                        depends: [ "b" ]
+                    }]
+                }, {
+                    name: "b",
+                    source: "b.js"
+                }]);
+
+                resolver.addComponent("a", [ "a-1" ]);
+
+                same(resolver.scripts, [ "b.js", "a.js" ]);
             });
 
         </script>
