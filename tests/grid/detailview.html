@@ -368,6 +368,46 @@
                 equal(args.masterRow[0], masterRow[0]);
                 equal(args.detailRow[0], masterRow.next()[0]);
             });
+
+            test("detailInit event is raised when detail template is created", function() {
+                var args,
+                    grid = new Grid(table(), {
+                        dataSource: [{ foo: "foo" }, { foo: "bar" }, { foo: "boo" }],
+                        columns: [{ field: "foo" }],
+                        detailTemplate: "<span id='test'></span>",
+                        detailInit: function() {
+                           args = arguments[0];
+                        }
+                    }),
+                    masterRow = grid.tbody.find("tr.k-master-row:first");
+
+                grid.expandRow(masterRow);
+
+                equal(args.masterRow[0], masterRow[0]);
+                equal(args.detailRow[0], masterRow.next()[0]);
+                equal(args.data.foo, "foo");
+                ok(grid.tbody.find("span#test").length);
+            });
+
+            test("detailInit event is raised only once per item", function() {
+                var count = 0,
+                    grid = new Grid(table(), {
+                        dataSource: [{ foo: "foo" }, { foo: "bar" }, { foo: "boo" }],
+                        columns: [{ field: "foo" }],
+                        detailTemplate: "<span id='test'></span>",
+                        detailInit: function() {
+                            count++;
+                        }
+                    }),
+                    masterRow = grid.tbody.find("tr.k-master-row:first");
+
+                grid.expandRow(masterRow);
+                grid.collapseRow(masterRow);
+                grid.expandRow(masterRow);
+                grid.collapseRow(masterRow);
+
+                equal(count, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
