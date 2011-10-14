@@ -150,7 +150,7 @@
          * @option {String} [depth] Specifies the navigation depth.
          */
         init: function(element, options) {
-            var that = this, value, index, depth;
+            var that = this, value;
 
             Component.fn.init.call(that, element, options);
 
@@ -189,19 +189,10 @@
                 NAVIGATE
             ], options);
 
-            options.format = options.format || kendo.culture().calendar.patterns.d;
-
             value = options.value;
-            index = views[options.start];
-            depth = views[options.depth];
+            validate(options);
 
-            //do not allow to define depth bigger then the start view
-            if (depth === undefined || depth > index) {
-                options.depth = MONTH;
-            }
-
-            // if start view is not defined set "month" view
-            that._index = !isNaN(index) ? index : 0;
+            that._index = views[options.start];
             that._current = new DATE(restrictValue(value, options.min, options.max));
 
             that.value(value);
@@ -1065,9 +1056,26 @@
         $(this).removeClass(HOVER);
     }
 
+    function validate(options) {
+        var start = views[options.start],
+            depth = views[options.depth];
+
+        if (isNaN(start)) {
+            start = 0;
+            options.start = MONTH;
+        }
+
+        if (depth === undefined || depth > start) {
+            options.depth = MONTH;
+        }
+
+        options.format = options.format || kendo.culture().calendar.patterns.d;
+    }
+
     calendar.restrictValue = restrictValue;
     calendar.isInRange = isInRange;
-    calendar.viewEnum = views;
+    calendar.validate = validate;
+    calendar.viewsEnum = views;
 
     kendo.calendar = calendar;
 })(jQuery);
