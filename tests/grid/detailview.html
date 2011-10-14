@@ -333,6 +333,41 @@
                 grid.expandRow(masterRow);
                 equal(count,1);
             });
+
+            test("detailExpand event is raised when detail template is expanded", function() {
+                var args,
+                    grid = new Grid(table(), {
+                        dataSource: [{ foo: "foo" }, { foo: "bar" }, { foo: "boo" }],
+                        columns: [{ field: "foo" }],
+                        detailTemplate: "#= foo #",
+                        detailExpand: function() {
+                           args = arguments[0];
+                        }
+                    }),
+                    masterRow = grid.tbody.find("tr.k-master-row:first");
+
+                grid.expandRow(masterRow);
+                equal(args.masterRow[0], masterRow[0]);
+                equal(args.detailRow[0], masterRow.next()[0]);
+            });
+
+            test("detailCollapse event is raised when detail template is expanded", function() {
+                var args,
+                    grid = new Grid(table(), {
+                        dataSource: [{ foo: "foo" }, { foo: "bar" }, { foo: "boo" }],
+                        columns: [{ field: "foo" }],
+                        detailTemplate: "#= foo #",
+                        detailCollapse: function() {
+                           args = arguments[0];
+                        }
+                    }),
+                    masterRow = grid.tbody.find("tr.k-master-row:first");
+
+                grid.expandRow(masterRow);
+                grid.collapseRow(masterRow);
+                equal(args.masterRow[0], masterRow[0]);
+                equal(args.detailRow[0], masterRow.next()[0]);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
