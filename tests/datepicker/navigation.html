@@ -20,18 +20,19 @@
         <script>
 
             var DateView = kendo.DateView,
-                keys = kendo.keys;
+                keys = kendo.keys,
+                div, input;
 
             QUnit.config.testTimeout = 500;
-            //QUnit.config.autorun = false;
-            QUnit.config.blocking = true;
 
             module("kendo.ui.DatePicker API", {
                 setup: function() {
                     div = $("<div />").appendTo(document.body);
+                    input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
                     div.remove();
+                    input.remove();
                 }
             });
 
@@ -65,7 +66,10 @@
                         depth: "month"
                     });
 
-                dv._calendar();
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
+
+                dv.open();
+
                 dv.navigate(upEvent);
                 dv.navigate(upEvent);
 
@@ -87,6 +91,8 @@
                         max: date
                     });
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
+
                 dv._calendar();
                 dv.navigate(event);
 
@@ -99,6 +105,7 @@
                     date = new Date(2000, 11, 1),
                     dv = new DateView({start: "month", depth: "month", value: date, min: date, max: new Date(2100, 10, 10)});
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.navigate(event);
 
@@ -119,10 +126,10 @@
 
                 kendo.calendar.views[0].setDate(focusedDate, 1);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.navigate(event);
 
-                equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
 
             });
@@ -134,10 +141,10 @@
 
                 focusedDate.setDate(focusedDate.getDate() - 1);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.navigate(event);
 
-                equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
             });
 
@@ -148,10 +155,10 @@
 
                 focusedDate.setDate(focusedDate.getDate() - 7);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.navigate(event);
 
-                equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
             });
 
@@ -162,10 +169,10 @@
 
                 focusedDate.setDate(focusedDate.getDate() + 7);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.navigate(event);
 
-                equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
             });
 
@@ -175,6 +182,7 @@
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1999, 10, 10), max: new Date(2111, 10, 10)}),
                     focusedDate = new Date(dv._current);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar.navigateUp();
 
@@ -182,9 +190,7 @@
 
                 dv.navigate(event);
 
-                equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), "Dec");
-
             });
 
             test("navigate should focus previous month in year view", function() {
@@ -192,6 +198,7 @@
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1999, 10, 10), max: new Date(2111, 10, 10)}),
                     focusedDate = new Date(dv._current);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar.navigateUp();
 
@@ -208,6 +215,7 @@
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1999, 10, 10), max: new Date(2111, 10, 10)}),
                     focusedDate = new Date(dv._current);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar.navigateUp();
 
@@ -219,11 +227,12 @@
                 equal(dv.calendar._table.find(".k-state-focused").text(), "Jul");
             });
 
-            test("navigate should focus month on next row in year view", function() {
+            asyncTest("navigate should focus month on next row in year view", function() {
                 var event = { keyCode: keys.DOWN, preventDefault: $.noop },
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1999, 10, 10), max: new Date(2111, 10, 10)}),
                     focusedDate = new Date(dv._current);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar.navigateUp();
 
@@ -231,8 +240,11 @@
 
                 dv.navigate(event);
 
-                equal(+dv._current, +focusedDate);
-                equal(dv.calendar._table.find(".k-state-focused").text(), "Mar");
+                setTimeout(function() {
+                    equal(+dv._current, +focusedDate);
+                    equal(dv.calendar._table.find(".k-state-focused").text(), "Mar");
+                    start();
+                },300);
             });
 
             //DECADE VIEW
@@ -241,6 +253,7 @@
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1999, 10, 10), max: new Date(2111, 10, 10)}),
                     focusedDate = new Date(dv._current);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar.navigate(null, "decade");
 
@@ -258,6 +271,7 @@
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1999, 10, 10), max: new Date(2111, 10, 10)}),
                     focusedDate = new Date(dv._current);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar.navigate(null, "decade");
 
@@ -281,6 +295,7 @@
                     }),
                     focusedDate = new Date(dv._current);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar.navigate(null, "decade");
 
@@ -297,6 +312,7 @@
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)}),
                     focusedDate = new Date(dv._current);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar.navigate(null, "decade");
 
@@ -314,6 +330,7 @@
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)}),
                     focusedDate = new Date(dv._current);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar.navigate(null, "century");
 
@@ -330,6 +347,7 @@
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)}),
                     focusedDate = new Date(dv._current);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar.navigate(null, "century");
 
@@ -346,6 +364,7 @@
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)}),
                     focusedDate = new Date(dv._current);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar.navigate(null, "century");
 
@@ -362,6 +381,7 @@
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)}),
                     focusedDate = new Date(dv._current);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar.navigate(null, "century");
 
@@ -384,6 +404,7 @@
                         max: new Date(2111, 10, 10)
                     });
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 stub(dv.calendar, { navigateDown: dv.calendar.navigateDown });
                 dv._calendar();
                 dv.calendar.navigateUp();
@@ -412,6 +433,7 @@
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)}),
                     selectedDate = new Date(2000, 10, 15);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.calendar._focus(selectedDate);
 
@@ -424,6 +446,7 @@
                 var event = { keyCode: keys.LEFT, ctrlKey: true, preventDefault: $.noop },
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 stub(dv.calendar, "navigateToPast");
 
                 dv._calendar();
@@ -436,6 +459,7 @@
                 var event = { keyCode: keys.RIGHT, ctrlKey: true, preventDefault: $.noop },
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 stub(dv.calendar, "navigateToFuture");
 
                 dv._calendar();
@@ -448,6 +472,7 @@
                 var event = { keyCode: keys.HOME, preventDefault: $.noop },
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.navigate(event);
 
@@ -460,6 +485,7 @@
                 var event = { keyCode: keys.END, preventDefault: $.noop },
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 dv.navigate(event);
 
@@ -472,6 +498,7 @@
                 var event = { keyCode: keys.PAGEUP, preventDefault: $.noop },
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
                 stub(dv.calendar, {navigateToPast: dv.calendar.navigateToPast});
 
@@ -484,6 +511,7 @@
                 var event = { keyCode: keys.PAGEDOWN, preventDefault: $.noop },
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
 
                 stub(dv.calendar, {navigateToFuture: dv.calendar.navigateToFuture});
@@ -504,6 +532,7 @@
                     depth: "month"
                 });
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv.open();
 
                 dv.calendar._focus(dv._current);
@@ -513,7 +542,7 @@
                 ok(!dv.popup.visible());
             });
 
-            test("Enter should focus viewedDate", function() {
+            asyncTest("Enter should focus viewedDate", function() {
                 var event = { keyCode: keys.ENTER, preventDefault: $.noop },
                 dv = new DateView({
                     anchor: $("<input />"),
@@ -524,14 +553,18 @@
                     depth: "month"
                 });
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv.open();
 
                 dv.calendar.navigate(new Date(2000, 10, 10), "year");
                 dv.calendar._focus(dv._current);
                 dv.navigate(event);
 
-                ok(dv.popup.visible());
-                equal(dv.calendar._table.find(".k-state-focused").length, 1);
+                setTimeout(function() {
+                    ok(dv.popup.visible());
+                    equal(dv.calendar._table.find(".k-state-focused").length, 1);
+                    start();
+                }, 400);
             });
 
             test("Enter should select date", function() {
@@ -546,6 +579,7 @@
                 }),
                 focused = new Date(2000, 10, 11);
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv.open();
 
                 stub(dv.calendar, {navigateDown: dv.calendar.navigateDown});
@@ -567,6 +601,7 @@
                         depth: "month"
                     });
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv.open();
 
                 stub(dv.calendar, {navigateDown: dv.calendar.navigateDown});
@@ -590,6 +625,7 @@
                     depth: "month"
                 });
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv.open();
 
                 stub(dv.popup, "close");
@@ -599,24 +635,34 @@
                 equal(dv.popup.calls("close"), 1);
             });
 
-            test("keydown triggered from datepicker should call navigate method", function() {
-                var input = $("<input />"),
-                    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+            asyncTest("keydown triggered from datepicker should call navigate method", function() {
+                var datepicker = input.kendoDatePicker({value: new Date(2000, 10, 10)}).data("kendoDatePicker");
 
-                stub(datepicker.dateView.calendar, "_focus");
-                input.trigger({ type:"keydown", keyCode: 40});
+                datepicker.dateView.calendar = div.kendoCalendar().data("kendoCalendar");
+                datepicker.open();
 
-                equal(datepicker.dateView.calendar.calls("_focus"), 1);
+                setTimeout(function() {
+                    stub(datepicker.dateView, "navigate");
+                    input.focus().trigger({ type:"keydown", keyCode: 40});
+
+                    equal(datepicker.dateView.calls("navigate"), 1);
+                    start();
+                }, 200);
             });
 
-            test("keydown triggered from datepicker should call navigate method", function() {
-                var input = $("<input />"),
-                    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+            asyncTest("keydown triggered from datepicker should call navigate method", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-                stub(datepicker.dateView.calendar, "_focus");
-                input.trigger({ type:"keydown", keyCode: 40});
+                datepicker.dateView.calendar = div.kendoCalendar().data("kendoCalendar");
+                datepicker.open();
 
-                equal(datepicker.dateView.calendar.calls("_focus"), 1);
+                setTimeout(function() {
+                    stub(datepicker.dateView.calendar, "_focus");
+                    input.focus().trigger({ type:"keydown", keyCode: 40});
+
+                    equal(datepicker.dateView.calendar.calls("_focus"), 1);
+                    start();
+                }, 200);
             });
 
             asyncTest("type invalide date does not clear input", function() {
@@ -646,6 +692,7 @@
                     }
                 });
 
+                dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv.open();
                 dv.value(new Date());
 
