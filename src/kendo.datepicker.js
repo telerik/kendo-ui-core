@@ -95,7 +95,7 @@
     MONTH = "month",
     FIRST = "first",
     calendar = kendo.calendar,
-    views = calendar.viewEnum,
+    views = calendar.viewsEnum,
     isInRange = calendar.isInRange,
     restrictValue = calendar.restrictValue,
     proxy = $.proxy,
@@ -326,25 +326,13 @@
          */
         init: function(element, options) {
             var that = this,
-                dateView, enable, index, depth;
+                dateView, enable;
 
             Component.fn.init.call(that, element, options);
             element = that.element;
             options = that.options;
 
-            options.format = options.format || kendo.culture().calendar.patterns.d;
-
-            //prevent setting incorrect start and depth
-            index = views[options.start];
-            depth = views[options.depth];
-
-            if (isNaN(index)) {
-                options.start = MONTH;
-            }
-
-            if (depth === undefined || depth > index) {
-                options.depth = MONTH;
-            }
+            calendar.validate(options);
 
             that._wrapper();
 
@@ -365,7 +353,7 @@
                             .addClass("k-input")
                             .bind({
                                 keydown: proxy(that._keydown, that),
-                                focus: function(e) { // move to _focus ?!?!
+                                focus: function(e) {
                                     clearTimeout(that._bluring);
                                     that.input.parent().addClass(FOCUSED);
                                 },
