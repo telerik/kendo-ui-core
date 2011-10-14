@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <title>Data-kendo-role</title>
+    <script src="../src/jquery.js"></script>
+    <script>
+        $.fn.kendoMobileButton = function() {
+            return $(this).addClass("k-button");
+        }
+
+        $.fn.kendoMobileNavBar = function() {
+            return $(this).addClass("k-navbar");
+        }
+    </script>
+</head>
+<body>
+    <input data-kendo-role="button">
+    <input data-kendo-role="button">
+    <input data-kendo-role="button">
+    <input data-kendo-role="button">
+    <input data-kendo-role="button">
+    <input data-kendo-role="button">
+    <input data-kendo-role="button">
+    <input data-kendo-role="button">
+    <input data-kendo-role="button">
+    <input data-kendo-role="button">
+    <input data-kendo-role="button">
+
+    <div data-kendo-role="navbar"></div>
+    <div data-kendo-role="navbar"></div>
+    <div data-kendo-role="navbar"></div>
+    <div data-kendo-role="navbar"></div>
+    <div data-kendo-role="navbar"></div>
+    <div data-kendo-role="navbar"></div>
+    <div data-kendo-role="navbar"></div>
+    <div data-kendo-role="navbar"></div>
+    <div data-kendo-role="navbar"></div>
+    <div data-kendo-role="navbar"></div>
+    <div data-kendo-role="navbar"></div>
+
+    <script>
+        $(function() {
+            var start = new Date();
+
+            $("[data-kendo-role=tabstrip]").kendoTabStrip();
+
+            $("[data-kendo-role=tabstrip]").kendoMobileTabStrip();
+
+            var end = new Date();
+        });
+    </script>
+</body>
+</html>

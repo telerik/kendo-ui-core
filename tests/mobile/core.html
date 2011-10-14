@@ -1,0 +1,72 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <title>kendo.mobile.code Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.core.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.core Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var MobileWidget = kendo.ui.MobileWidget;
+
+            var MyMobileWidget = MobileWidget.extend({
+                options: {
+                    foo: "foo",
+                    bar: "bar"
+                }
+            });
+
+            kendo.ui.plugin("MobileWidget", MyMobileWidget);
+
+            module("mobile core", {
+                setup: function() {
+                },
+                teardown: function() {
+                }
+            });
+
+            test("MobileWidget is Obserbable", function() {
+                var widget = new MobileWidget();
+
+                ok(widget instanceof kendo.Observable);
+            });
+
+            test("element is initialized", function() {
+                var dom = $("<div />");
+                var widget = new MobileWidget(dom);
+
+                equal(widget.element[0], dom[0]);
+            });
+
+            test("options are read from data attributes", function() {
+                var dom = $('<div data-kendo-foo="bar" data-kendo-bar="baz" />');
+
+                var widget = new MyMobileWidget(dom);
+
+                equal(widget.options.foo, "bar");
+                equal(widget.options.bar, "baz");
+            });
+
+            test("default option values are preserved if matching data attribute is not present", function() {
+                var dom = $('<div data-kendo-bar="baz" />');
+
+                var widget = new MyMobileWidget(dom);
+
+                equal(widget.options.foo, "foo");
+            });
+        </script>
+    </body>
+</html>
+
