@@ -34,24 +34,24 @@
                 }
             });
 
-            test("detailViewTemplate renders rows element with css class name", function() {
+            test("detailTemplate renders rows element with css class name", function() {
                 var grid = new Grid(table(), {
                     dataSource: [],
                     columns: [{ field: "foo" }, { field: "bar" }],
                     detailTemplate: "foo"
                 });
 
-                ok($(grid.detailViewTemplate({})).hasClass("k-detail-row"));
+                ok($(grid.detailTemplate({})).hasClass("k-detail-row"));
             });
 
-            test("detailViewTemplate renders rows element", function() {
+            test("detailTemplate renders rows element", function() {
                 var grid = new Grid(table(), {
                     dataSource: [],
                     columns: [{ field: "foo" }, { field: "bar" }],
                     detailTemplate: "foo"
                 });
 
-                ok($(grid.detailViewTemplate({})).is("tr"));
+                ok($(grid.detailTemplate({})).is("tr"));
             });
 
             test("template has two cells if no grouping is applied", function() {
@@ -61,7 +61,7 @@
                     detailTemplate: "foo"
                 });
 
-                equal($(grid.detailViewTemplate({})).find("td").length, 2);
+                equal($(grid.detailTemplate({})).find("td").length, 2);
             });
 
             test("detailView cell has colspan equal to the column number", function() {
@@ -71,7 +71,7 @@
                     detailTemplate: "foo"
                 });
 
-                equal($(grid.detailViewTemplate({})).find("td").last().attr("colspan"), 2);
+                equal($(grid.detailTemplate({})).find("td").last().attr("colspan"), 2);
             });
 
             test("detailView cell has no colspan applied if there are no columns", function() {
@@ -80,7 +80,7 @@
                     detailTemplate: "foo"
                 });
 
-                ok(!$(grid.detailViewTemplate({})).find("td").last().attr("colspan"));
+                ok(!$(grid.detailTemplate({})).find("td").last().attr("colspan"));
             });
 
             test("detailView first cell has css class applied", function() {
@@ -90,7 +90,7 @@
                     detailTemplate: "foo"
                 });
 
-                ok($(grid.detailViewTemplate({})).find("td").first().hasClass("k-hierarchy-cell"));
+                ok($(grid.detailTemplate({})).find("td").first().hasClass("k-hierarchy-cell"));
             });
 
             test("template content is added to the detailView row last cell", function() {
@@ -100,13 +100,13 @@
                     detailTemplate: "foo"
                 });
 
-                equal($(grid.detailViewTemplate({})).find("td").last().text(), "foo");
+                equal($(grid.detailTemplate({})).find("td").last().text(), "foo");
             });
 
-            test("default detailViewTemplate uses specified template settings renders data for the columns", function() {
+            test("default detailTemplate uses specified template settings renders data for the columns", function() {
                 var grid = new Grid(table(), { templateSettings: {useWithBlock: false, paramName: "item" }, dataSource: [], columns: [{ field: "foo" }], detailTemplate: "#= item.foo #" });
 
-                ok(grid.detailViewTemplate.toString().indexOf("item.foo") > -1);
+                ok(grid.detailTemplate.toString().indexOf("item.foo") > -1);
             });
 
             test("template (as function) content is added to the detailView row last cell", function() {
@@ -118,7 +118,7 @@
                     }
                 });
 
-                equal($(grid.detailViewTemplate({})).find("td").last().text(), "baz");
+                equal($(grid.detailTemplate({})).find("td").last().text(), "baz");
             });
 
             test("css class is added to the data rows when detailView is declared", function() {
@@ -180,7 +180,7 @@
                 equal(grid.tbody.find(".k-detail-row").find("td:last").text(), "foo");
             });
 
-            test("detailViewTemplate is not rendered if no template is declared", function() {
+            test("detailTemplate is not rendered if no template is declared", function() {
                 var grid = new Grid(table(), {
                     dataSource: [{ foo: "foo" }],
                     columns: [{ field: "foo" }]
