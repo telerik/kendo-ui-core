@@ -521,6 +521,7 @@
 
         _click: function(e) {
             var that = this,
+                options = that.options,
                 currentValue = that._current,
                 link = $(e.currentTarget.firstChild),
                 value = link.data(VALUE).split("/");
@@ -536,7 +537,7 @@
                 that._view.setDate(currentValue, value);
             }
 
-            that.navigateDown(currentValue);
+            that.navigateDown(restrictValue(currentValue, options.min, options.max));
         },
 
         _focus: function(value) {
@@ -607,32 +608,21 @@
         },
 
         _navigate: function(arrow, modifier) {
-            var that = this;
+            var that = this,
+                index = that._index + 1,
+                currentValue = new DATE(that._current);
 
             arrow = that[arrow];
 
             if (!arrow.hasClass(DISABLED)) {
-                that.navigate(that._move(modifier));
-            }
-        },
-
-        _move: function(modifier) {
-            var that = this,
-            index = that._index,
-            currentValue = new DATE(that._current);
-
-            if (index === 0) { //month
-                currentValue.setMonth(currentValue.getMonth() + modifier);
-            } else {
-                if (index === 2) { //decade
-                    modifier *= 10;
-                } else if (index === 3) { //century
-                    modifier *= 100;
+                if (index > 3) {
+                    currentValue.setFullYear(currentValue.getFullYear() + 100 * modifier);
+                } else {
+                    calendar.views[index].setDate(currentValue, modifier);
                 }
 
-                currentValue.setFullYear(currentValue.getFullYear() + modifier);
+                that.navigate(currentValue);
             }
-            return currentValue;
         },
 
         _option: function(option, value) {
@@ -869,19 +859,16 @@
                     value.getMonth(),
                     date.getDate());
                 } else {
-                    var day = date.getDate(),
-                    month = date.getMonth() + value;
+                    var month = date.getMonth() + value;
 
                     date.setMonth(month);
 
                     if (month > 11) {
                         month -= 12;
-                    } else if (month < 0) {
-                        month = 12 + month;
                     }
 
                     if (date.getMonth() != month) {
-                        date.setMonth(month);
+                        date.setDate(0);
                     }
                 }
             },

@@ -601,6 +601,16 @@
                  equal(cal.calls("navigate"), 1);
             });
 
+            test("_navigate should set correct date if month has 30 days", function() {
+                var cal = new Calendar(div);
+                cal._current = new Date(2099, 11, 31);
+
+                stub(cal, "navigate");
+                cal._navigate("_prevArrow", -1);
+
+                equal(+cal.args("navigate")[0], +(new Date(2099, 10, 30)));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
