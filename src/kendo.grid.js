@@ -19,6 +19,8 @@
         FIRST_CELL_SELECTOR = CELL_SELECTOR + ":first",
         CHANGE = "change",
         DATABOUND = "dataBound",
+        DETAILEXPAND = "detailExpand",
+        DETAILCOLLAPSE = "detailCollapse",
         FOCUSED = "k-state-focused",
         FOCUSABLE = "k-focusable",
         SELECTED = "k-state-selected",
@@ -494,7 +496,9 @@
                  * @event
                  * @param {Event} e
                  */
-                DATABOUND
+                DATABOUND,
+                DETAILEXPAND,
+                DETAILCOLLAPSE
             ], that.options);
 
             if (that.options.autoBind) {
@@ -1106,6 +1110,7 @@
                 var button = $(this),
                     expanding = button.hasClass("k-plus"),
                     masterRow = button.closest("tr.k-master-row"),
+                    detailRow,
                     detailTemplate = that.detailTemplate,
                     hasDetails = detailTemplate !== undefined
 
@@ -1116,7 +1121,10 @@
                     $(detailTemplate(that.dataItem(masterRow))).insertAfter(masterRow);
                 }
 
-                masterRow.next().toggle(expanding);
+                detailRow = masterRow.next();
+
+                that.trigger(expanding ? DETAILEXPAND : DETAILCOLLAPSE, { masterRow: masterRow, detailRow: detailRow});
+                detailRow.toggle(expanding);
 
                 e.preventDefault();
             });
