@@ -875,9 +875,9 @@
                     date.setMonth(month);
 
                     if (month > 11) {
-                        month -= 11;
+                        month -= 12;
                     } else if (month < 0) {
-                        month = 11 + month;
+                        month = 12 + month;
                     }
 
                     if (date.getMonth() != month) {
