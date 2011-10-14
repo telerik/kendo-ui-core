@@ -476,7 +476,7 @@
 
             that._selectable();
 
-            that._detailView();
+            that._details();
 
             that.bind([
                 /**
@@ -521,10 +521,10 @@
             that._wrapper();
         },
 
-        _detailView: function() {
+        _details: function() {
             var that = this,
-                detailViewTemplate = that.detailViewTemplate,
-                hasDetails = detailViewTemplate !== undefined
+                detailTemplate = that.detailTemplate,
+                hasDetails = detailTemplate !== undefined
 
             that.tbody.delegate(".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", "click", function(e) {
                 var button = $(this),
@@ -535,7 +535,7 @@
                     .toggleClass("k-minus", expanding);
 
                 if(hasDetails && !masterRow.next().hasClass("k-detail-row")) {
-                    $(detailViewTemplate(that.dataItem(masterRow))).insertAfter(masterRow);
+                    $(detailTemplate(that.dataItem(masterRow))).insertAfter(masterRow);
                 }
                 masterRow.next().toggle(expanding);
 
@@ -1086,7 +1086,7 @@
             that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, true);
 
             if (options.detailTemplate) {
-                that.detailViewTemplate = that._detailTmpl(options.detailTemplate);
+                that.detailTemplate = that._detailTmpl(options.detailTemplate);
             }
         },
 
