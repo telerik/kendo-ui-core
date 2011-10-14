@@ -22,13 +22,13 @@ var kendoConfig = [{
         source: "kendo.grid.js",
         depends: [ "data", "navigatable" ],
         features: [{
-                name: "grid-sorting",
+                name: "sorting",
                 depends: [ "sortable" ]
             }, {
-                name: "grid-paging",
+                name: "paging",
                 depends: [ "pageable" ]
             }, {
-                name: "grid-selection",
+                name: "selection",
                 depends: [ "sortable" ]
             }
         ]
@@ -44,6 +44,8 @@ var kendoConfig = [{
 function ScriptResolver(config) {
     this.config = config;
     this.scripts = [];
+    this.resolved = [];
+    this.seen = [];
 }
 
 ScriptResolver.prototype = {
@@ -63,15 +65,27 @@ ScriptResolver.prototype = {
 
     resolve: function(component) {
         var resolver = this,
-            depends = component.depends || [];
+            depends = component.depends || [],
+            seen = resolver.seen,
+            resolved = resolver.resolved;
 
-        depends.forEach(function(dependancy) {
+        seen.push(component.name);
+
+        depends.forEach(function(dependancyName) {
+            if (!inArray(resolved, dependancyName) &&
+                 inArray(seen, dependancyName)) {
+
+                // Circular dependancy
+                return;
+            }
+
             resolver.resolve(
-                resolver.findComponent(dependancy)
+                resolver.findComponent(dependancyName)
             );
         });
 
         resolver.registerScript(component.source);
+        resolver.resolved.push(component);
     },
 
     registerScript: function(source) {
@@ -99,6 +113,10 @@ function findByName(arr, name) {
             return entry;
         }
     }
+}
+
+function inArray(arr, element) {
+    return arr.indexOf(element) !== -1;
 }
 
 window.ScriptResolver = ScriptResolver;
