@@ -22,6 +22,8 @@
             var ComboBox = kendo.ui.ComboBox,
                 input;
 
+            QUnit.config.testTimeout = 500;
+
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             }
