@@ -64,7 +64,7 @@ app.view("expenses.new", {
             }
 
             expenseData.push(newExpense);
-            app.navigate("");
+            app.navigate("/");
             return false;
         }
     }
@@ -77,4 +77,4 @@ app.view("expenses.show", {
     }
 });
 
-app.init({root: "/playground/mvc/", pushState: true});
+app.init({root: "/playground/mvc/", pushState: false});
