@@ -227,13 +227,11 @@
                     currentValue = view[method](currentValue);
                     prevent = true;
                 } else if (key == keys.PAGEUP) {
+                    prevent = true;
                     calendar.navigateToPast();
                 } else if (key == keys.PAGEDOWN) {
+                    prevent = true;
                     calendar.navigateToFuture();
-                }
-
-                if (prevent) {
-                    e.preventDefault();
                 }
 
                 if (value || method) {
@@ -244,6 +242,10 @@
                     that._current = currentValue = restrictValue(currentValue, options.min, options.max);
                     calendar._focus(currentValue);
                 }
+            }
+
+            if (prevent) {
+                e.preventDefault();
             }
         },
 
@@ -343,7 +345,6 @@
             if (depth === undefined || depth > index) {
                 options.depth = MONTH;
             }
-            //end
 
             that._wrapper();
 
