@@ -73,6 +73,24 @@
                 ok(!called);
             });
 
+            test("click on cell put in range", function() {
+                var called = false,
+                    date = new Date(2000, 10, 1);
+
+                var calendar = new Calendar(div, {
+                    value: date,
+                    max: date
+                });
+
+                calendar._current = new Date(2000, 10, 1, 16, 0, 0);
+
+                stub(calendar, { navigateDown: calendar.navigateDown});
+
+                div.find("tbody").find("td:has(.k-link)").last().click();
+
+                equal(+calendar.args("navigateDown")[0], +date);
+            });
+
             test("navigate event should raise when change view", function() {
                 var called = false, view, cal = new Calendar(div, {
                     navigate: function(e) {
