@@ -58,24 +58,30 @@
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
            });
 
-            test("click first li should update text and value", function() {
+            asyncTest("click first li should update text and value", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
-                combobox.dataSource.read();
+                combobox.open();
                 combobox.ul.children().eq(1).click();
 
-                equal(combobox.text(), data[1].text);
-                equal(combobox.value(), data[1].value);
+                setTimeout(function() {
+                    equal(combobox.text(), data[1].text);
+                    equal(combobox.value(), data[1].value);
+                    start();
+                }, 300);
             });
 
             test("value should be set to item.text if no item.value", function() {
                 var localData = [{text: "Foo", value: 1}, {text:"Bar"}],
                     combobox = input.kendoComboBox(localData).data("kendoComboBox");
 
-                combobox.dataSource.read();
+                combobox.dataSource.fetch();
                 combobox.ul.children().eq(1).click();
 
-                equal(combobox.text(), data[1].text);
-                equal(combobox.value(), data[1].text);
+                setTimeout(function() {
+                    equal(combobox.text(), data[1].text);
+                    equal(combobox.value(), data[1].text);
+                    start();
+                }, 300);
             });
 
             test("select li should update text and value", function() {
@@ -226,18 +232,18 @@
                 combobox.input.focus().press(keys.ESC);
             });
 
-            test("pressing enter calls _blur", function() {
+            asyncTest("pressing enter calls _blur", function() {
                 var blurWasCalled, combobox = new ComboBox(input, {
                     dataSource: data
                 });
 
                 combobox._blur = function(li) {
-                    blurWasCalled = true;
+                    ok(true);
+                    start();
                 };
 
                 combobox._current = combobox.ul.children().first();
                 combobox.input.focus().press(kendo.keys.ENTER);
-                ok(blurWasCalled);
             });
 
             asyncTest("pressing alt + down should open popup", function() {

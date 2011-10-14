@@ -170,7 +170,7 @@
                 combobox.search("f");
             });
 
-            test("rebound list should use correct dataItem to update text and value", function() {
+            asyncTest("rebound list should use correct dataItem to update text and value", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: data
                 });
@@ -180,12 +180,15 @@
                 combobox.search("b");
                 combobox.ul.children().eq(1).click();
 
-                equal(combobox.ul.children().length, 2);
-                equal(combobox.value(), data[2].value);
-                equal(combobox.text(), data[2].text);
+                setTimeout(function() {
+                    equal(combobox.ul.children().length, 2);
+                    equal(combobox.value(), data[2].value);
+                    equal(combobox.text(), data[2].text);
+                    start();
+                },200);
             });
 
-            test("reopen ul after filter should show all data", function() {
+            asyncTest("reopen ul after filter should show all data", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: data
                 });
@@ -194,13 +197,17 @@
                 combobox.text("b");
                 combobox.search("b");
                 combobox.ul.children().eq(1).click();
-                combobox.open();
 
-                equal(combobox.ul.children().length, data.length);
-                ok(combobox._current.hasClass("k-state-selected"));
+                setTimeout(function() {
+                    combobox.open();
+
+                    equal(combobox.ul.children().length, data.length);
+                    ok(combobox._current.hasClass("k-state-selected"));
+                    start();
+                },200);
             });
 
-            test("rebound ul should has item selected", function() {
+            asyncTest("rebound ul should has item selected", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: data
                 });
@@ -210,9 +217,12 @@
                 combobox.search("b");
                 combobox.ul.children().eq(1).click();
 
-                combobox.open();
+                setTimeout(function() {
+                    combobox.open();
 
-                equal(combobox.ul.children().length, data.length);
+                    equal(combobox.ul.children().length, data.length);
+                    start();
+                },200);
             });
 
             asyncTest("typing should trigger search", function() {
