@@ -167,6 +167,8 @@
                 rangeStart = that._rangeStart,
                 scrollbar = kendo.support.scrollbar(),
                 wrapperElement = that.wrapper[0],
+                totalHeight,
+                idx,
                 itemHeight;
 
             kendo.ui.progress(that.wrapper, false);
