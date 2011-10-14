@@ -33,7 +33,7 @@
                 $(win).one('load', function() {
                     hist = win.hist,
                     loc = win.location,
-                    initial = loc.href,
+                    initial = loc.href.replace(/#.*$/, ''),
                     _history = win.history;
                     QUnit.start();
                 });

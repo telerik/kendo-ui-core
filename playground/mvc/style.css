@@ -65,6 +65,7 @@ dt {
 }
 
 dd {
+    float: none;
     font-weight: bold;
 }
 

@@ -8,7 +8,7 @@ app.route({ '/': 'expenses.index' });
 app.contentElement = function() { return $("#content"); };
 
 $(document).delegate("[data-kendo-type=mvc-link]", "click", function() {
-    app.navigate($(this).attr("href"));
+    app.navigate($(this).attr("href").replace(location.protocol + "//" + location.host, ''));
     return false;
 });
 
@@ -37,7 +37,8 @@ app.controller("expenses", {
 
 app.view("expenses.index", {
     render: function() {
-        var t = kendo.Template.compile($("#expenses-template").text());
+        var t = kendo.Template.compile($("#expenses-template").html());
+
         $("#content").html(t({}));
 
         $("#grid").kendoGrid({
@@ -72,7 +73,7 @@ app.view("expenses.new", {
 
 app.view("expenses.show", {
     render: function() {
-        var t = kendo.Template.compile($("#expense-template").text());
+        var t = kendo.Template.compile($("#expense-template").html());
         $("#content").html(t({expense: this.expense}));
     }
 });
