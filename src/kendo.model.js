@@ -196,6 +196,8 @@
 
         _map: function() {
             var that = this,
+                idx,
+                length,
                 data = that._data,
                 model = that.options.model;
 
