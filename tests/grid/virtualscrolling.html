@@ -42,6 +42,7 @@
             var Grid = kendo.ui.Grid,
                 DataSource = kendo.data.DataSource,
                 VirtualScrollable = kendo.ui.VirtualScrollable,
+                progress,
                 dataSource,
                 timeout,
                 container;
@@ -84,9 +85,11 @@
                 data._total = total;
                 return data;
             }
+
             module("kendo.ui.VirtualScrollable", {
                 setup: function() {
                     timeout = window.setTimeout;
+                    progress = kendo.ui.progress;
                     window.setTimeout = function(callback) {
                         callback();
                     }
@@ -94,6 +97,7 @@
                 },
                 teardown: function() {
                     container.remove();
+                    kendo.ui.progress = progress;
                     window.setTimeout = timeout;
                 }
             });
@@ -195,7 +199,7 @@
                 firstRowIndex = 1,
                 lastRowIndex = 2;
                 scroller._fetch(firstRowIndex, lastRowIndex);
-                stop(1);
+                stop();
             });
 
             test("fetch does not show loading mask if items are present", function() {
@@ -436,6 +440,7 @@
                 equal(scroller._rangeStart, data.skip());
                 equal(data.skip(), 200);
             });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
