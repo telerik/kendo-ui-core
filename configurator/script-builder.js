@@ -1,4 +1,4 @@
-var kendoComponents = [{
+var kendoConfig = [{
         name: "core",
         source: "kendo.core.js"
     }, {
@@ -39,38 +39,68 @@ var kendoComponents = [{
     }
 ];
 
-function resolveScripts(definitions, features) {
-    var scripts = [];
-    features.forEach(function(f) {
-        resolve(definitions, f, scripts);
-    });
-    return scripts;
+(function() {
+
+function ScriptResolver(config) {
+    this.config = config;
+    this.scripts = [];
 }
 
-function resolve(definitions, feature, scripts) {
-    var componentName = feature.split("-")[0],
-        featureName = feature.split("-")[1],
-        component = definitions.filter(function(c) {
-        return c.name === componentName })[0];
+ScriptResolver.prototype = {
+    addComponent: function(name, features) {
+        var resolver = this,
+            features = features || [],
+            component = resolver.findComponent(name);
 
-    if (featureName && component.features) {
-        component.features.forEach(function(feature) {
-            if (feature.depends) {
-                feature.depends.forEach(function(fd) {
-                    resolve(definitions, fd, scripts);
-                });
-            }
+        features.forEach(function(featureName) {
+            resolver.resolve(
+                findByName(component.features, featureName)
+            );
         });
-    }
 
-    if (component.depends) {
-        component.depends.forEach(function(requisite) {
-            resolve(definitions, requisite, scripts);
+        resolver.resolve(component);
+    },
+
+    resolve: function(component) {
+        var resolver = this,
+            depends = component.depends || [];
+
+        depends.forEach(function(dependancy) {
+            resolver.resolve(
+                resolver.findComponent(dependancy)
+            );
         });
-    }
 
-    if (scripts.indexOf(component.source) === -1) {
-        scripts.push(component.source);
+        resolver.registerScript(component.source);
+    },
+
+    registerScript: function(source) {
+        var scripts = this.scripts;
+
+        if (source && scripts.indexOf(source) === -1) {
+            scripts.push(source);
+        }
+    },
+
+    findComponent: function(name) {
+        return findByName(this.config, name);
+    }
+};
+
+function findByName(arr, name) {
+    var result,
+        i,
+        length = arr.length,
+        entry;
+
+    for (i = 0; i < length; i++) {
+        entry = arr[i];
+        if (entry.name === name) {
+            return entry;
+        }
     }
 }
 
+window.ScriptResolver = ScriptResolver;
+
+})();
