@@ -7,6 +7,7 @@
 
 
     var History = kendo.Observable.extend({
+
         start: function(options) {
             options = options || {};
 
@@ -24,8 +25,7 @@
                 location.replace(that.root + '#' + that.stripRoot(location.pathname));
                 return true;
             } else if (that._pushState && atRoot && location.hash) {
-                that.fragment = location.hash.replace(hashStrip, '');
-                history.replaceState({}, document.title, that.makePushStateUrl(that.fragment));
+                history.replaceState({}, document.title, that.makePushStateUrl(location.hash.replace(hashStrip, '')));
             }
 
             if (that._pushState) {
@@ -35,6 +35,8 @@
             } else {
                 setInterval(checkUrlProxy, checkUrlInterval);
             }
+
+            that.checkUrl();
         },
 
         checkUrl: function() {
@@ -67,7 +69,7 @@
 
                 return that.stripRoot(fragment);
             } else {
-                return location.hash.replace(hashStrip, '');
+                return location.hash.replace(hashStrip, '') || '/';
             }
         },
 

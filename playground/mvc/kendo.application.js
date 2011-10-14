@@ -111,32 +111,49 @@
     kendo.Application = {
         _views: {},
         _controllers: {},
+        _handlers: [],
 
         init: function(options) {
-            kendo.History.start(options);
+            var that = this, history = kendo.history;
+
+            history.change(function(e) {
+                var location = e.location, idx;
+
+                for (idx = 0; idx < that._handlers.length; idx ++) {
+                  handler = that._handlers[idx];
+                  if (handler.route.test(location)) {
+                    handler.callback(location);
+                    return true;
+                  }
+                }
+
+                return false;
+            });
+
+            history.start(options);
         },
 
         navigate: function(fragment) {
-            kendo.History.navigate(fragment);
+            kendo.history.navigate(fragment);
         },
 
         route: function(routes) {
             var that = this;
             $.each(routes, function(routeString, routeDef) {
-                if (routeString === '/') {
-                    routeString = '';
-                }
-
                 var route = _routeToRegExp(routeString);
 
-                kendo.History.route(route, function(fragment) {
+                that.addRoute(route, function(fragment) {
                     var routeParts = routeDef.split('.'),
-                    actionName = routeParts[1],
-                    Controller = that._controllers[routeParts[0]];
+                        actionName = routeParts[1],
+                        Controller = that._controllers[routeParts[0]];
 
                     new Controller()._run(actionName, _extractParameters(route, fragment));
                 });
             });
+        },
+
+        addRoute : function(route, callback) {
+            this._handlers.unshift({route : route, callback : callback});
         },
 
         view: function(viewName, options) {
@@ -145,13 +162,15 @@
 
         controller: function(controllerName, actions) {
             actions._name = controllerName;
-            var Controller = kendo.Controller.extend(actions);
+
+            var that = this, Controller = kendo.Controller.extend(actions);
+
             this._controllers[controllerName] = Controller;
 
             $.each(actions, function(actionName, callback) {
-                var route, routeString;
-                routeString = '/' + controllerName + '/' + actionName;
-                var argsExpected = callback.length;
+                var route,
+                    routeString = '/' + controllerName + '/' + actionName,
+                    argsExpected = callback.length;
 
                 while (argsExpected -- > 0) {
                     routeString += "/:a";
@@ -159,8 +178,7 @@
 
                 route = _routeToRegExp(routeString);
 
-                console.log(route);
-                kendo.History.route(route, function(fragment) {
+                that.addRoute(route, function(fragment) {
                     new Controller()._run(actionName, _extractParameters(route, fragment));
                 });
             });
