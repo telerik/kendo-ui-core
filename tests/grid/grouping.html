@@ -67,7 +67,20 @@
                 equal(groupingRowCell.attr("colspan"), 2);
             });
 
+            test("first level grouping row colspans is columns + number of groups and detailView if declared", function() {
+                var grid = new Grid(table(), {
+                    data:[{foo: "foo"}, {foo: "bar"}],
+                    groupable: true,
+                    detailTemplate: "ddd"
+                });
+                grid.dataSource.group({field: "foo"});
+
+                var groupingRowCell = grid.tbody.find("tr.k-grouping-row>td:first");
+                equal(groupingRowCell.attr("colspan"), 3);
+            });
+
             test("nesting groups created grouping row for every group", function() {
+
                 var grid = new Grid(table(), {
                     data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true
                 });

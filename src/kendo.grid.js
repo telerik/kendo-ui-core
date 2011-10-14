@@ -521,35 +521,6 @@
             that._wrapper();
         },
 
-        _details: function() {
-            var that = this,
-                detailTemplate = that.detailTemplate,
-                hasDetails = detailTemplate !== undefined
-
-            that.tbody.delegate(".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", "click", function(e) {
-                var button = $(this),
-                    expanding = button.hasClass("k-plus"),
-                    masterRow = button.closest("tr.k-master-row");
-
-                button.toggleClass("k-plus", !expanding)
-                    .toggleClass("k-minus", expanding);
-
-                if(hasDetails && !masterRow.next().hasClass("k-detail-row")) {
-                    $(detailTemplate(that.dataItem(masterRow))).insertAfter(masterRow);
-                }
-                masterRow.next().toggle(expanding);
-
-                e.preventDefault();
-            });
-        },
-
-        dataItem: function(tr) {
-            var that = this,
-                view = that.dataSource.view();
-
-            return view[that.tbody.find('> tr:not(.k-grouping-row,.k-detail-row)').index($(tr))]
-        },
-
         _groupable: function() {
             var that = this,
                 wrapper = that.wrapper,
@@ -1097,9 +1068,15 @@
                 paramName = settings.paramName,
                 templateFunctionStorage = {},
                 templateFunctionCount = 0,
+                groups = that.dataSource.group().length,
+                columns = that.columns.length,
                 type = typeof template;
 
-            html += '<tr class="k-detail-row"><td class="k-hierarchy-cell"></td><td class="k-detail-cell"' + (that.columns.length ? ' colspan="' + that.columns.length + '"' : '') + ">";
+                html += '<tr class="k-detail-row">';
+                if (groups > 0) {
+                    html += groupCells(groups);
+                }
+                html += '<td class="k-hierarchy-cell"></td><td class="k-detail-cell"' + (columns ? ' colspan="' + columns + '"' : '') + ">";
 
             if (type === FUNCTION) {
                 templateFunctionStorage["tmpl" + templateFunctionCount] = template;
@@ -1118,6 +1095,33 @@
             }
 
             return html;
+        },
+
+        _details: function() {
+            var that = this;
+
+            that.tbody.delegate(".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", CLICK, function(e) {
+                var button = $(this),
+                    expanding = button.hasClass("k-plus"),
+                    masterRow = button.closest("tr.k-master-row"),
+                    detailTemplate = that.detailTemplate,
+                    hasDetails = detailTemplate !== undefined
+
+                button.toggleClass("k-plus", !expanding)
+                    .toggleClass("k-minus", expanding);
+
+                if(hasDetails && !masterRow.next().hasClass("k-detail-row")) {
+                    $(detailTemplate(that.dataItem(masterRow))).insertAfter(masterRow);
+                }
+
+                masterRow.next().toggle(expanding);
+
+                e.preventDefault();
+            });
+        },
+
+        dataItem: function(tr) {
+            return this._data[this.tbody.find('> tr:not(.k-grouping-row,.k-detail-row)').index($(tr))]
         },
 
         expandRow: function(tr) {
@@ -1225,6 +1229,7 @@
                 that._templates();
             }
         },
+
         _rowsHtml: function(data) {
             var that = this,
                 html = "",
@@ -1239,10 +1244,13 @@
                 } else {
                     html += rowTemplate(data[idx]);
                 }
+
+                that._data.push(data[idx]);
             }
 
             return html;
         },
+
         _groupRowHtml: function(group, colspan, level) {
             var that = this,
                 html = "",
@@ -1309,6 +1317,7 @@
                 }
             });
         },
+
         _updateHeader: function(groups) {
             var that = this,
                 cells = that.thead.find("th.k-group-cell"),
@@ -1361,6 +1370,8 @@
 
             that._progress(false);
 
+            that._data = [];
+
             if (!that.columns.length) {
                 that._autoColumns(that._firstDataItem(data[0], groups));
                 colspan = groups + that.columns.length;
@@ -1376,6 +1387,11 @@
             }
 
             if(groups > 0) {
+
+                if (that.detailTemplate) {
+                    colspan++;
+                }
+
                 for (idx = 0, length = data.length; idx < length; idx++) {
                     html += that._groupRowHtml(data[idx], colspan, 0);
                 }
