@@ -143,56 +143,56 @@
                 ok(!changeWasCalled);
             });
 
-            test("clicking an item raises the change event", function() {
-                var changeWasCalled = false, combobox = new ComboBox(input, {
+            asyncTest("clicking an item raises the change event", function() {
+                var combobox = new ComboBox(input, {
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     change: function() {
-                        changeWasCalled = true;
+                        ok(true);
+                        start();
                     }
                 });
 
                 combobox.input.focus();
 
                 combobox.ul.children().eq(1).click();
-                ok(changeWasCalled);
             });
 
-            test("change should be raised on enter", function() {
+            asyncTest("change should be raised on enter", function() {
                 var changeWasCalled = false, combobox = new ComboBox(input, {
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     change: function() {
-                        changeWasCalled = true;
+                        ok(true);
+                        start();
                     }
                 });
 
                 combobox.input.focus();
                 combobox.input.press(kendo.keys.DOWN);
                 combobox.input.press(kendo.keys.ENTER);
-
-                ok(changeWasCalled);
             });
 
-            test("change should be raised on tab", function() {
+            asyncTest("change should be raised on tab", function() {
                 var changeWasCalled = false, combobox = new ComboBox(input, {
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     change: function() {
-                        changeWasCalled = true;
+                        ok(true);
+                        start();
                     }
                 });
 
                 combobox.input.focus();
                 combobox.input.press(kendo.keys.DOWN);
                 combobox.input.press(kendo.keys.TAB);
-
-                ok(changeWasCalled);
+                combobox.input.blur();
             });
 
-            test("clicking an item raises the change event of HTML select", function() {
-                var origCalled = false,
-                    select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
+            asyncTest("clicking an item raises the change event of HTML select", function() {
+                var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
                                 .bind("change", function() {
-                                    origCalled = true;
+                                    ok(true);
+                                    start();
                                 });
+
                 var combobox = new ComboBox(select, {
                     dataSource: [{text: "foo"}, {text: "bar"}]
                 });
@@ -200,7 +200,6 @@
                 combobox.input.focus();
 
                 combobox.ul.children().eq(1).click();
-                ok(origCalled);
             });
 
             asyncTest("raise change on custom value", function() {
