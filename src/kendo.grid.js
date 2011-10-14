@@ -17,6 +17,7 @@
         ROW_SELECTOR = "tbody>tr:not(.k-grouping-row):visible",
         CELL_SELECTOR =  ROW_SELECTOR + ">td:not(.k-group-cell)",
         FIRST_CELL_SELECTOR = CELL_SELECTOR + ":first",
+        DETAILINIT = "detailInit",
         CHANGE = "change",
         DATABOUND = "dataBound",
         DETAILEXPAND = "detailExpand",
@@ -497,8 +498,27 @@
                  * @param {Event} e
                  */
                 DATABOUND,
+                /**
+                 * Fires when the grid detail row is expanded.
+                 * @name kendo.ui.Grid#detailExpand
+                 * @event
+                 * @param {Event} e
+                 */
                 DETAILEXPAND,
-                DETAILCOLLAPSE
+                /**
+                 * Fires when the grid detail row is collapsed.
+                 * @name kendo.ui.Grid#detailCollapse
+                 * @event
+                 * @param {Event} e
+                 */
+                DETAILCOLLAPSE,
+                /**
+                 * Fires when the grid detail is initialized.
+                 * @name kendo.ui.Grid#detailInit
+                 * @event
+                 * @param {Event} e
+                 */
+                DETAILINIT
             ], that.options);
 
             if (that.options.autoBind) {
@@ -1106,19 +1126,24 @@
         _details: function() {
             var that = this;
 
-            that.tbody.delegate(".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", CLICK, function(e) {
+
+            that.table.delegate(".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", CLICK, function(e) {
                 var button = $(this),
                     expanding = button.hasClass("k-plus"),
                     masterRow = button.closest("tr.k-master-row"),
                     detailRow,
                     detailTemplate = that.detailTemplate,
+                    data,
                     hasDetails = detailTemplate !== undefined
 
                 button.toggleClass("k-plus", !expanding)
                     .toggleClass("k-minus", expanding);
 
                 if(hasDetails && !masterRow.next().hasClass("k-detail-row")) {
-                    $(detailTemplate(that.dataItem(masterRow))).insertAfter(masterRow);
+                    data = that.dataItem(masterRow),
+                    $(detailTemplate(data)).insertAfter(masterRow);
+
+                    that.trigger(DETAILINIT, { masterRow: masterRow, detailRow: masterRow.next(), data: data });
                 }
 
                 detailRow = masterRow.next();
@@ -1127,6 +1152,7 @@
                 detailRow.toggle(expanding);
 
                 e.preventDefault();
+                return false;
             });
         },
 

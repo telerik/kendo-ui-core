@@ -261,6 +261,10 @@ var categories = {
                     url: "grid/virtualization-remote-data.html"
                 },
                 {
+                    text: "Hierarchy",
+                    url: "grid/hierarchy.html"
+                },
+                {
                     text: "Sorting",
                     url: "grid/sorting.html"
                 },

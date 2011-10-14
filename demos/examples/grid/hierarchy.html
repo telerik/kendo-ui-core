@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Hierarchy</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.hakama.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../js/kendo.data.odata.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.pageable.js"></script>
+        <script src="../../../src/kendo.sortable.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.groupable.js"></script>
+        <script src="../../../src/kendo.grid.js"></script>
+        <script src="../js/people.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Hierarchy</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <script type="text/x-kendo-template" id="template">
+                <div class="orders"></div>
+            </script>
+
+            <script>
+                $(document).ready(function() {
+                    var element = $("#grid").kendoGrid({
+                        dataSource: {
+                            type: "odata",
+                            transport: {
+                                read: "http://services.odata.org/Northwind/Northwind.svc/Employees"
+                            },
+                            pageSize: 5,
+                            serverPaging: true,
+                            serverSorting: true
+                        },
+                        height: 250,
+                        sortable: true,
+                        pageable: true,
+                        detailTemplate: kendo.template($("#template").html()),
+                        detailInit: detailInit,
+                        dataBound: function() {
+                            this.expandRow(this.tbody.find("tr.k-master-row").first());
+                        },
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Country"
+                            },
+                            {
+                                field: "City"
+                            },
+                            {
+                                field: "Title"
+                            }
+                        ]
+                    });
+                });
+
+                function detailInit(e) {
+                    e.detailRow.find(".orders").kendoGrid({
+                            dataSource: {
+                                type: "odata",
+                                transport: {
+                                    read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
+                                },
+                                serverPaging: true,
+                                serverSorting: true,
+                                serverFiltering: true,
+                                pageSize:3,
+                                filter: { field: "EmployeeID", operator: "eq", value: e.data.EmployeeID }
+                            },
+                            scrollable: false,
+                            sortable: true,
+                            pageable: true,
+                            columns: [ "OrderID", "ShipCountry", "ShipAddress", "ShipName" ]
+                        });
+                }
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
