@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Hierarchy</title>
+        <title>Detail Template</title>
         <!-- css -->
         <link href="../styles/examples.css" rel="stylesheet"/>
         <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
@@ -26,13 +26,36 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Hierarchy</div>
+        <div class="description">Detail Template</div>
         <!-- description -->
         <div id="example" class="k-content">
             <div id="grid"></div>
 
             <script type="text/x-kendo-template" id="template">
-                <div class="orders"></div>
+                <div class="tabstrip">
+                    <ul>
+                        <li class="k-state-active">
+                           Orders
+                        </li>
+                        <li>
+                            Contact Information
+                        </li>
+                    </ul>
+                    <div>
+                        <div class="orders"></div>
+                    </div>
+                    <div>
+                        <div class='employee-details'>
+                            <ul>
+                                <li><label>Country:</label>#= Country #</li>
+                                <li><label>City:</label>#= City #</li>
+                                <li><label>Address:</label>#= Address #</li>
+                                <li><label>Home Phone:</label>#= HomePhone #</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </script>
 
             <script>
@@ -43,7 +66,7 @@
                             transport: {
                                 read: "http://services.odata.org/Northwind/Northwind.svc/Employees"
                             },
-                            pageSize: 6,
+                            pageSize: 5,
                             serverPaging: true,
                             serverSorting: true
                         },
@@ -78,7 +101,11 @@
                 });
 
                 function detailInit(e) {
-                    e.detailRow.find(".orders").kendoGrid({
+                    var detailRow = e.detailRow;
+
+                    detailRow.find(".tabstrip").kendoTabStrip();
+
+                    detailRow.find(".orders").kendoGrid({
                         dataSource: {
                             type: "odata",
                             transport: {
@@ -97,6 +124,22 @@
                     });
                 }
             </script>
+            <style scoped="scoped">
+                .employee-details ul
+                {
+                    list-style:none;
+                    font-style:italic;
+                    margin-bottom: 20px;
+                }
+
+                .employee-details label
+                {
+                    display:inline-block;
+                    width:90px;
+                    font-style:normal;
+                    font-weight:bold;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
