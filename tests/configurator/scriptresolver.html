@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Configurator</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../configurator/script-builder.js"></script>
+        <script type="text/javascript">
+
+            // ------------------------------------------------------------
+            var resolver;
+            function createResolver(config) {
+                resolver = new ScriptResolver(config);
+            }
+
+            module("ScriptResolver");
+
+            test("component with no dependencies", function() {
+                createResolver([{
+                    name: "a",
+                    source: "a.js"
+                }]);
+
+                resolver.addComponent("a");
+
+                same(resolver.scripts, [ "a.js" ]);
+            });
+
+            test("component with single dependency", function() {
+                createResolver([{
+                    name: "a",
+                    source: "a.js"
+                }, {
+                    name: "b",
+                    source: "b.js",
+                    depends: [ "a" ]
+                }]);
+
+                resolver.addComponent("b");
+
+                same(resolver.scripts, [ "a.js", "b.js" ]);
+            });
+
+            test("includes common dependency only once", function() {
+                createResolver([{
+                    name: "a",
+                    source: "a.js"
+                }, {
+                    name: "b",
+                    source: "b.js",
+                    depends: [ "a" ]
+                }, {
+                    name: "c",
+                    source: "c.js",
+                    depends: [ "a" ]
+                }]);
+
+                resolver.addComponent("b");
+                resolver.addComponent("c");
+
+                same(resolver.scripts, [ "a.js", "b.js", "c.js" ]);
+            });
+
+            test("depending features", function() {
+                createResolver([{
+                    name: "a",
+                    source: "a.js",
+                    features: [{
+                        name: "a-1",
+                        depends: [ "b" ]
+                    }]
+                }, {
+                    name: "b",
+                    source: "b.js"
+                }]);
+
+                resolver.addComponent("a", [ "a-1" ]);
+
+                same(resolver.scripts, [ "b.js", "a.js" ]);
+            });
+
+            test("circular dependencies", function() {
+                createResolver([{
+                    name: "a",
+                    source: "a.js",
+                    depends: [ "b" ]
+                }, {
+                    name: "b",
+                    source: "b.js",
+                    depends: [ "a" ]
+                }]);
+
+                resolver.addComponent("a");
+
+                same(resolver.scripts, [ "b.js", "a.js" ]);
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.configurator</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
