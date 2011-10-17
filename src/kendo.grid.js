@@ -473,16 +473,6 @@
 
             that._groupable();
 
-            that._thead();
-
-            that._templates();
-
-            that._navigatable();
-
-            that._selectable();
-
-            that._details();
-
             that.bind([
                 /**
                  * Fires when the grid selection has changed.
@@ -520,6 +510,16 @@
                  */
                 DETAILINIT
             ], that.options);
+
+            that._thead();
+
+            that._templates();
+
+            that._navigatable();
+
+            that._selectable();
+
+            that._details();
 
             if (that.options.autoBind) {
                 that.dataSource.query();
@@ -983,7 +983,7 @@
                 templateFunctionCount = 0,
                 column,
                 type,
-                hasDetails = that.options.detailTemplate !== undefined,
+                hasDetails = that._hasDetails(),
                 className = [],
                 groups = that.dataSource.group().length;
 
@@ -1082,8 +1082,8 @@
             that.rowTemplate = that._tmpl(options.rowTemplate);
             that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, true);
 
-            if (options.detailTemplate) {
-                that.detailTemplate = that._detailTmpl(options.detailTemplate);
+            if (that._hasDetails()) {
+                that.detailTemplate = that._detailTmpl(options.detailTemplate || "");
             }
         },
 
@@ -1123,9 +1123,14 @@
             return html;
         },
 
-        _details: function() {
+        _hasDetails: function() {
             var that = this;
 
+            return that.options.detailTemplate !== undefined  || (that._events[DETAILINIT] || []).length;
+        },
+
+        _details: function() {
+            var that = this;
 
             that.table.delegate(".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", CLICK, function(e) {
                 var button = $(this),
@@ -1134,7 +1139,7 @@
                     detailRow,
                     detailTemplate = that.detailTemplate,
                     data,
-                    hasDetails = detailTemplate !== undefined
+                    hasDetails = that._hasDetails();
 
                 button.toggleClass("k-plus", !expanding)
                     .toggleClass("k-minus", expanding);
@@ -1143,7 +1148,7 @@
                     data = that.dataItem(masterRow),
                     $(detailTemplate(data)).insertAfter(masterRow);
 
-                    that.trigger(DETAILINIT, { masterRow: masterRow, detailRow: masterRow.next(), data: data });
+                    that.trigger(DETAILINIT, { masterRow: masterRow, detailRow: masterRow.next(), data: data, detailCell: masterRow.next().find(".k-detail-cell") });
                 }
 
                 detailRow = masterRow.next();
@@ -1192,7 +1197,7 @@
             }
 
             if (!tr.children().length) {
-                if (that.options.detailTemplate) {
+                if (that._hasDetails()) {
                     html += '<th class="k-hierarchy-cell">&nbsp;</th>';
                 }
 
@@ -1236,7 +1241,7 @@
                 }),
                 groups = that.dataSource.group().length;
 
-            if (that.options.detailTemplate) {
+            if (that._hasDetails()) {
                 cols.splice(0, 0, '<col class="k-hierarchy-col" />');
             }
 

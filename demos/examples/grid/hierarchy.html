@@ -31,10 +31,6 @@
         <div id="example" class="k-content">
             <div id="grid"></div>
 
-            <script type="text/x-kendo-template" id="template">
-                <div class="orders"></div>
-            </script>
-
             <script>
                 $(document).ready(function() {
                     var element = $("#grid").kendoGrid({
@@ -50,7 +46,6 @@
                         height: 450,
                         sortable: true,
                         pageable: true,
-                        detailTemplate: kendo.template($("#template").html()),
                         detailInit: detailInit,
                         dataBound: function() {
                             this.expandRow(this.tbody.find("tr.k-master-row").first());
@@ -78,7 +73,7 @@
                 });
 
                 function detailInit(e) {
-                    e.detailRow.find(".orders").kendoGrid({
+                    $("<div/>").kendoGrid({
                         dataSource: {
                             type: "odata",
                             transport: {
@@ -94,7 +89,7 @@
                         sortable: true,
                         pageable: true,
                         columns: [ "OrderID", "ShipCountry", "ShipAddress", "ShipName" ]
-                    });
+                    }).appendTo(e.detailCell);
                 }
             </script>
         </div>
