@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Detail Template</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.hakama.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../js/kendo.data.odata.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.pageable.js"></script>
+        <script src="../../../src/kendo.sortable.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.groupable.js"></script>
+        <script src="../../../src/kendo.grid.js"></script>
+        <script src="../js/people.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Detail Template</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <script type="text/x-kendo-template" id="template">
+                <div class="tabstrip">
+                    <ul>
+                        <li class="k-state-active">
+                           Orders
+                        </li>
+                        <li>
+                            Contact Information
+                        </li>
+                    </ul>
+                    <div>
+                        <div class="orders"></div>
+                    </div>
+                    <div>
+                        <div class='employee-details'>
+                            <ul>
+                                <li><label>Country:</label>#= Country #</li>
+                                <li><label>City:</label>#= City #</li>
+                                <li><label>Address:</label>#= Address #</li>
+                                <li><label>Home Phone:</label>#= HomePhone #</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </script>
+
+            <script>
+                $(document).ready(function() {
+                    var element = $("#grid").kendoGrid({
+                        dataSource: {
+                            type: "odata",
+                            transport: {
+                                read: "http://services.odata.org/Northwind/Northwind.svc/Employees"
+                            },
+                            pageSize: 5,
+                            serverPaging: true,
+                            serverSorting: true
+                        },
+                        height: 450,
+                        sortable: true,
+                        pageable: true,
+                        detailTemplate: kendo.template($("#template").html()),
+                        detailInit: detailInit,
+                        dataBound: function() {
+                            this.expandRow(this.tbody.find("tr.k-master-row").first());
+                        },
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Country"
+                            },
+                            {
+                                field: "City"
+                            },
+                            {
+                                field: "Title"
+                            }
+                        ]
+                    });
+                });
+
+                function detailInit(e) {
+                    var detailRow = e.detailRow;
+
+                    detailRow.find(".tabstrip").kendoTabStrip();
+
+                    detailRow.find(".orders").kendoGrid({
+                        dataSource: {
+                            type: "odata",
+                            transport: {
+                                read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
+                            },
+                            serverPaging: true,
+                            serverSorting: true,
+                            serverFiltering: true,
+                            pageSize:6,
+                            filter: { field: "EmployeeID", operator: "eq", value: e.data.EmployeeID }
+                        },
+                        scrollable: false,
+                        sortable: true,
+                        pageable: true,
+                        columns: [ "OrderID", "ShipCountry", "ShipAddress", "ShipName" ]
+                    });
+                }
+            </script>
+            <style scoped="scoped">
+                .employee-details ul
+                {
+                    list-style:none;
+                    font-style:italic;
+                    margin-bottom: 20px;
+                }
+
+                .employee-details label
+                {
+                    display:inline-block;
+                    width:90px;
+                    font-style:normal;
+                    font-weight:bold;
+                }
+            </style>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+

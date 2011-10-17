@@ -30,5 +30,9 @@ tests.push(
     {
         page: "grid/virtualscrolling.html",
         title: "virtual scrolling"
+    },
+    {
+        page: "grid/detailview.html",
+        title: "detail view"
     }
 );
