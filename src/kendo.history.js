@@ -3,6 +3,9 @@
         history = window.history,
         checkUrlInterval = 50,
         hashStrip = /^#*/,
+        docMode = window.document.documentMode,
+        oldIE = $.browser.msie && (!docMode || docMode <= 8),
+        hashChangeSupported = ("onhashchange" in window) && !oldIE,
         document = window.document;
 
 
@@ -30,7 +33,7 @@
 
             if (that._pushState) {
                 $(window).bind("popstate", checkUrlProxy);
-            } else if ("onhashchange" in window) {
+            } else if (hashChangeSupported) {
                 $(window).bind("hashchange", checkUrlProxy);
             } else {
                 setInterval(checkUrlProxy, checkUrlInterval);
@@ -43,7 +46,7 @@
             var that = this, current = that.currentLocation();
 
             if (current != that.fragment) {
-               that.navigate(current);
+                that.navigate(current);
             }
         },
 
