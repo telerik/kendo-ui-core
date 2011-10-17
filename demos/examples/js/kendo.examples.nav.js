@@ -265,6 +265,10 @@ var categories = {
                     url: "grid/hierarchy.html"
                 },
                 {
+                    text: "Detail template",
+                    url: "grid/detailtemplate.html"
+                },
+                {
                     text: "Sorting",
                     url: "grid/sorting.html"
                 },
