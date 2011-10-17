@@ -679,7 +679,8 @@
             return number;
         }
 
-        /* custom formatting */
+        //custom formatting
+        //
         //separate format by sections.
         format = format.split(";");
         if (negative && format[1]) {
@@ -1063,6 +1064,29 @@
         }
 
         return date;
+    }
+
+    var nonBreakingSpaceRegExp = /\u00A0/g;
+
+    kendo.parseFloat = function(value, culture) {
+        culture = kendo.cultures[culture] || kendo.cultures.current;
+
+        var numberFormat = culture.numberFormat,
+            separator = numberFormat[","].replace(nonBreakingSpaceRegExp, " ");
+
+        value = value.replace(numberFormat.currency.symbol, "");
+        value = value.replace(numberFormat.percent.symbol, "");
+
+        value = value.split(separator).join("");
+        value = value.replace(culture.numberFormat["."], ".");
+
+        value = parseFloat(value);
+
+        if (isNaN(value)) {
+            value = null;
+        }
+
+        return value;
     }
 })();
 

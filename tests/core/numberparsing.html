@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Number Parsing</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Number Parsing</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var parseF = kendo.parseFloat;
+
+            test("Parse string and return number", function() {
+                var value = "12.12";
+
+                equal(parseF(value), 12.12);
+            });
+
+            test("Return null if incorrect number", function() {
+                var value = "not a number";
+
+                equal(parseF(value), null);
+            });
+
+            test("parse globalized float number", function() {
+                var value = "12,13",
+                    cultureSelector = "bg-BG";
+
+                equal(parseF(value, cultureSelector), 12.13);
+            });
+
+            test("parse globalized number with group separators", function() {
+                var value = "1 123 112,13",
+                    cultureSelector = "bg-BG";
+
+                equal(parseF("1,123.12", "en-US"), 1123.12);
+                equal(parseF(value, cultureSelector), 1123112.13);
+            });
+
+            test("parse should parse currency number", function() {
+                var value = "$ 12";
+
+                equal(parseF(value, "en-US"), 12);
+            });
+
+            test("parse should parse percent number", function() {
+                var value = "% 12";
+
+                equal(parseF(value, "en-US"), 12);
+            });
+        </script>
+    </body>
+</html>
