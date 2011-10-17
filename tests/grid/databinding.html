@@ -25,6 +25,27 @@
 
                 equal(grid.tbody.find(">tr").length, 2);
             });
+
+            test("dataItem return data for given row", function() {
+                var grid = new Grid($("<table><tbody/></table>")[0], { dataSource: [1,2] });
+
+                var rows = grid.tbody.find("tr");
+                equal(grid.dataItem(rows.first()), 1);
+                equal(grid.dataItem(rows.eq(1)), 2);
+            });
+
+            test("dataItem return data for given row when grouping is applied", function() {
+                var grid = new Grid($("<table><tbody/></table>")[0], {
+                    dataSource: {
+                        data: [ { foo: 1 }, { foo: 2 }],
+                        group: [ { field: "foo" } ]
+                } });
+
+                var rows = grid.tbody.find("tr:not(.k-grouping-row)");
+
+                equal(grid.dataItem(rows.first()).foo, 1);
+                equal(grid.dataItem(rows.eq(1)).foo, 2);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
