@@ -408,6 +408,24 @@
 
                 equal(count, 1);
             });
+
+            test("expandRow shows the detailView for given master row if no detailTemplate but detailInit is attached", function() {
+                var grid = new Grid(table(), {
+                    dataSource: [{ foo: "foo" }, { foo: "bar" }, { foo: "boo" }],
+                    columns: [{ field: "foo" }],
+                    detailInit: function(e) {
+                        e.detailCell.text("foo");
+                    },
+                    scrollable: true
+                }),
+                masterRow = grid.tbody.find("tr.k-master-row:first");
+
+                grid.expandRow(masterRow);
+
+                var detailRow = masterRow.next(":visible");
+                ok(detailRow.hasClass("k-detail-row"));
+                equal(detailRow.find(".k-detail-cell").text(), "foo");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
