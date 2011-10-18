@@ -43,22 +43,68 @@
                     category: "Framework",
                     source: "kendo.core.js"
                 }, {
+                    id: "fx",
+                    name: "Effects",
+                    category: "Framework",
+                    source: "kendo.fx.js",
+                    depends: [ "core" ]
+                }, {
+                    id: "odata",
+                    name: "OData",
+                    category: "Framework",
+                    source: "kendo.data.odata.js",
+                    depends: [ "core" ]
+                }, {
+                    id: "xml",
+                    name: "XML",
+                    category: "Framework",
+                    source: "kendo.data.xml.js",
+                    depends: [ "core" ]
+                }, {
+                    id: "model",
+                    name: "Model",
+                    category: "Framework",
+                    source: "kendo.model.js",
+                    depends: [ "core" ]
+                }, {
                     id: "data",
                     name: "Data source",
                     category: "Framework",
                     source: "kendo.data.js",
+                    depends: [ "core" ],
+                    features: [{
+                            id: "data-odata",
+                            name: "OData",
+                            depends: [ "odata" ]
+                        }, {
+                            id: "data-XML",
+                            name: "XML",
+                            depends: [ "xml" ]
+                        }
+                    ]
+                }, {
+                    id: "draganddrop",
+                    name: "Drag & drop",
+                    category: "Framework",
+                    source: "kendo.draganddrop.js",
                     depends: [ "core" ]
+                }, {
+                    id: "groupable",
+                    name: "Groupable",
+                    category: "Framework",
+                    source: "kendo.groupable.js",
+                    depends: [ "core", "draganddrop" ]
+                }, {
+                    id: "resizable",
+                    name: "Resizable",
+                    category: "Framework",
+                    source: "kendo.resizable.js",
+                    depends: [ "core", "draganddrop" ]
                 }, {
                     id: "sortable",
                     name: "Sortable",
                     category: "Framework",
                     source: "kendo.sortable.js",
-                    depends: [ "data" ]
-                }, {
-                    id: "pager",
-                    name: "Pager",
-                    category: "Framework",
-                    source: "kendo.pager.js",
                     depends: [ "data" ]
                 }, {
                     id: "selectable",
@@ -67,11 +113,71 @@
                     source: "kendo.selectable.js",
                     depends: [ "core" ]
                 }, {
+                    id: "scroller",
+                    name: "Scroller",
+                    category: "Framework",
+                    source: "kendo.scroller.js",
+                    depends: [ "core" ]
+                }, {
+                    id: "pageable",
+                    name: "Pageable",
+                    category: "Framework",
+                    source: "kendo.pageable.js",
+                    depends: [ "data" ]
+                }, {
+                    id: "popup",
+                    name: "Pop-up",
+                    category: "Framework",
+                    source: "kendo.popup.js",
+                    depends: [ "data" ]
+                }, {
+                    id: "list",
+                    name: "List",
+                    category: "Framework",
+                    source: "kendo.list.js",
+                    depends: [ "data" ]
+                }, {
                     id: "navigatable",
                     name: "Navigatable",
                     category: "Framework",
                     source: "kendo.navigatable.js",
                     depends: [ "core" ]
+                }, {
+                    id: "autocomplete",
+                    name: "AutoComplete",
+                    category: "Widgets",
+                    source: "kendo.autocomplete.js",
+                    depends: [ "data" ]
+                }, {
+                    id: "calendar",
+                    name: "Calendar",
+                    category: "Widgets",
+                    source: "kendo.calendar.js",
+                    depends: [ "data" ]
+                }, {
+                    id: "chart",
+                    name: "Chart",
+                    category: "Widgets",
+                    source: "kendo.chart.js",
+                    depends: [ "data" ]
+                }, {
+                    id: "combobox",
+                    name: "ComboBox",
+                    category: "Widgets",
+                    source: "kendo.combobox.js",
+                    depends: [ "data" ]
+                }, {
+                    id: "datepicker",
+                    name: "DatePicker",
+                    category: "Widgets",
+                    source: "kendo.datepicker.js",
+                    depends: [ "data" ]
+                }, {
+                    id: "dropdownlist",
+                    name: "DropDownList",
+                    category: "Widgets",
+                    source: "kendo.dropdownlist.js",
+                    depends: [ "data" ]
                 }, {
                     id: "grid",
                     name: "Grid",
@@ -85,7 +191,7 @@
                         }, {
                             id: "grid-paging",
                             name: "Paging",
-                            depends: [ "pager" ]
+                            depends: [ "pageable" ]
                         }, {
                             id: "grid-selection",
                             name: "Selection",
@@ -93,10 +199,10 @@
                         }
                     ]
                 }, {
-                    id: "chart",
-                    name: "Chart",
+                    id: "menu",
+                    name: "Menu",
                     category: "Widgets",
-                    source: "kendo.chart.js",
+                    source: "kendo.menu.js",
                     depends: [ "data" ]
                 }
             ];
