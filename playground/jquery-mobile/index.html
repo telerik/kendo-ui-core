@@ -9,13 +9,21 @@
     <title>Index</title>
 </head>
 <body>
-    <div data-role="page">
+    <div data-role="page" id="page1">
         <div data-role="header">
             <h1>Index</h1>
-            <a href="foo.html">Foo</a>
         </div>
         <div data-role="content">
             index.html
+			<a href="#page3">Page 3</a>
+            <a href="foo.html">Foo1</a>
+            <a href="foo.html#page2">Foo2</a>
+        </div>
+    </div>
+
+	<div data-role="page" id="page3">
+        <div data-role="content">
+			Page 3
         </div>
     </div>
 </body>
