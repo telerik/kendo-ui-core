@@ -74,7 +74,7 @@
         }
 
         /* missing constants:
-         * @gradientUrl: "..."; // on Telerik CDN
+         * @texture-url: "..."; // on Telerik CDN
          * @image-folder: "BlueOpal"; // we should think of something that allows us to change the gradients
         * @loading-panel-color: #fff;
         * @shadow-color: #aaa;
@@ -89,16 +89,8 @@
             properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
         }, {
             prefix: "@header",
-            title: "Headers",
-            properties: returnProperties([BGCOLOR, COLOR])
-        }, {
-            prefix: "@link",
-            title: "Links",
-            properties: returnProperties([COLOR])
-        }, {
-            prefix: "@button",
-            title: "Buttons",
-            properties: returnProperties([BGCOLOR, COLOR])
+            title: "Headers and buttons",
+            properties: returnProperties([BGCOLOR])
         }, {
             prefix: "@tooltip",
             title: "Tooltips",
@@ -132,10 +124,6 @@
             prefix: "@content",
             title: "Content wrappers",
             properties: returnProperties([BGCOLOR])
-        }, {
-            prefix: "@group",
-            title: "Item groups",
-            properties: returnProperties([BGCOLOR, BORDERCOLOR])
         }, {
             prefix: "@input",
             title: "Textboxes",
