@@ -30,21 +30,21 @@
                 pushStateSupported = window.history.pushState,
                 root = location.pathname.replace("index.html", "sandbox/");
 
-            console.log(location.pathname);
+            module("History", {
+                setup: function() {
+                    QUnit.stop();
+                    $("#iframe-container").html('<iframe src="sandbox/"></iframe>');
+                    win = window.frames[0].window;
 
-            QUnit.testStart = function() {
-                QUnit.stop();
-                $("#iframe-container").html('<iframe src="sandbox/"></iframe>');
-                win = window.frames[0].window;
-
-                $(win).one('load', function() {
-                    loc = win.location,
-                    initial = loc.href.replace(/#.*$/, ''),
-                    kendoHistory = win.kendo.history,
-                    _history = win.history;
-                    QUnit.start();
-                });
-            }
+                    $(win).one('load', function() {
+                        loc = win.location,
+                        initial = loc.href.replace(/#.*$/, ''),
+                        kendoHistory = win.kendo.history,
+                        _history = win.history;
+                        QUnit.start();
+                    });
+                }
+            });
 
             function url(expected) {
                 equal(loc.href, expected);
@@ -57,8 +57,6 @@
             function startWithPushState() {
                 kendoHistory.start({pushState: true, root: root});
             }
-
-            module("history navigation");
 
             test("uses hashbang by default", function() {
                 startWithHash();
@@ -161,6 +159,21 @@
                 });
 
                 kendoHistory.navigate("/new-location");
+            });
+
+            test("allows setting of root", function() {
+                if (!pushStateSupported) {
+                    return;
+                }
+                kendoHistory.start({root: root + "/subdir/", pushState: true});
+                kendoHistory.navigate('/new-location');
+                url(initial + "subdir/new-location");
+            });
+
+            test("strips hash from passed urls", function() {
+                startWithHash();
+                kendoHistory.navigate('#/new-location');
+                equal(kendoHistory.current, '/new-location');
             });
 
             asyncTest("listens for outside url changes (hashChange)", function() {
