@@ -1072,18 +1072,46 @@
         culture = kendo.cultures[culture] || kendo.cultures.current;
 
         var numberFormat = culture.numberFormat,
-            separator = numberFormat[","].replace(nonBreakingSpaceRegExp, " ");
+            currency = numberFormat.currency,
+            percent = numberFormat.percent,
+            currencySymbol = currency.symbol,
+            percentSymbol = percent.symbol,
+            POINT = ".",
+            COMMA = ",",
+            negative = value.indexOf("-") > -1,
+            separator,
+            pattern;
 
-        value = value.replace(numberFormat.currency.symbol, "");
-        value = value.replace(numberFormat.percent.symbol, "");
-
-        value = value.split(separator).join("");
-        value = value.replace(culture.numberFormat["."], ".");
+        if (value.indexOf(currencySymbol) > -1) {
+            pattern = currency.pattern[0].replace("$", currencySymbol).split("n");
+            if (value.indexOf(pattern[0]) > -1 && value.indexOf(pattern[1]) > -1) {
+                value = value.replace(pattern[0], "").replace(pattern[1]);
+                negative = true;
+            }
+            separator = currency[COMMA].replace(nonBreakingSpaceRegExp, " ");
+            value = value.replace(currencySymbol, "")
+                         .replace("-", "")
+                         .split(separator).join("")
+                         .replace(currency[POINT], POINT);
+        } else if (value.indexOf(percentSymbol) > -1) {
+            separator = percent[COMMA].replace(nonBreakingSpaceRegExp, " ");
+            value = value.replace(percentSymbol, "")
+                         .replace("-", "")
+                         .split(separator).join("")
+                         .replace(percent[POINT], POINT);
+        } else {
+            separator = numberFormat[COMMA].replace(nonBreakingSpaceRegExp, " ");
+            value = value.replace("-", "")
+                         .split(separator).join("")
+                         .replace(culture.numberFormat[POINT], POINT);
+        }
 
         value = parseFloat(value);
 
         if (isNaN(value)) {
             value = null;
+        } else if (negative) {
+            value *= -1;
         }
 
         return value;
