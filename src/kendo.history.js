@@ -60,12 +60,12 @@
             }
         },
 
-
         _pushStateSupported: function() {
             return window.history && window.history.pushState;
         },
 
-        _checkUrl: function() {
+        _checkUrl: function(e) {
+            console.log("checkUrl", e);
             var that = this, current = that._currentLocation();
 
             if (current != that._fragment) {
@@ -114,7 +114,7 @@
             this.bind('change', callback);
         },
 
-        navigate: function(to) {
+        navigate: function(to, silent) {
             var that = this;
 
             if (that._fragment === to || that._fragment === decodeURIComponent(to)) {
@@ -128,7 +128,9 @@
                 that._fragment = location.hash = to;
             }
 
-            that.trigger("change", { location: that._fragment });
+            if (!silent) {
+                that.trigger("change", { location: that._fragment });
+            }
         }
     });
 
