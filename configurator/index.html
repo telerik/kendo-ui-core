@@ -40,35 +40,42 @@
             var kendoConfig = [{
                     id: "core",
                     name: "Core",
+                    category: "Framework",
                     source: "kendo.core.js"
                 }, {
                     id: "data",
                     name: "Data source",
+                    category: "Framework",
                     source: "kendo.data.js",
                     depends: [ "core" ]
                 }, {
                     id: "sortable",
                     name: "Sortable",
+                    category: "Framework",
                     source: "kendo.sortable.js",
                     depends: [ "data" ]
                 }, {
                     id: "pager",
                     name: "Pager",
+                    category: "Framework",
                     source: "kendo.pager.js",
                     depends: [ "data" ]
                 }, {
                     id: "selectable",
                     name: "Selectable",
+                    category: "Framework",
                     source: "kendo.selectable.js",
                     depends: [ "core" ]
                 }, {
                     id: "navigatable",
                     name: "Navigatable",
+                    category: "Framework",
                     source: "kendo.navigatable.js",
                     depends: [ "core" ]
                 }, {
                     id: "grid",
                     name: "Grid",
+                    category: "Widgets",
                     source: "kendo.grid.js",
                     depends: [ "data", "navigatable" ],
                     features: [{
@@ -88,6 +95,7 @@
                 }, {
                     id: "chart",
                     name: "Chart",
+                    category: "Widgets",
                     source: "kendo.chart.js",
                     depends: [ "data" ]
                 }
@@ -95,7 +103,15 @@
         </script>
     </head>
     <body>
-        <ul id="configurator"></ul>
+        <div id="configurator"></div>
+
+        <script id="categoryTemplate" type="text/x-kendo-tmpl">
+            <h2>#= data #</h2>
+            <ul class="category" data-id="#= data #">
+                #= renderComponents(data) #
+            </ul>
+        </script>
+
         <script id="componentTemplate" type="text/x-kendo-tmpl">
             <li class="component" data-id="#= id #">
                 <span class="require"></span>
@@ -107,23 +123,27 @@
                 # } #
             </li>
         </script>
+
         <script id="featureTemplate" type="text/x-kendo-tmpl">
             <li class="feature" data-id="#= id #">
                 <span class="require"></span>
                 <span class="name">#= name #</span>
             </li>
         </script>
+
         <script type="text/javascript">
-            var resolver = new ScriptResolver(kendoConfig);
-            var componentTemplate = kendo.template($("#componentTemplate").html()),
-                featureTemplate = kendo.template($("#featureTemplate").html());
+            var resolver,
+                categoryTemplate,
+                componentTemplate,
+                featureTemplate;
 
             $(document).ready(function() {
-                var configurator = $("#configurator");
+                resolver = new ScriptResolver(kendoConfig);
+                categoryTemplate = template("categoryTemplate");
+                componentTemplate = template("componentTemplate");
+                featureTemplate = template("featureTemplate");
 
-                $.each(kendoConfig, function() {
-                    configurator.append($(componentTemplate(this)));
-                });
+                renderCategories();
 
                 $(".require").bind("click", function() {
                     var checkbox = $(this);
@@ -153,6 +173,36 @@
                 });
             });
 
+            function renderCategories() {
+                var categories = {};
+                $.each(kendoConfig, function(i, component) {
+                    categories[component.category] = true;
+                });
+
+                for (var category in categories) {
+                    $("#configurator").append(categoryTemplate(category));
+                }
+            }
+
+            function renderComponents(category) {
+                var result = "";
+                $.each(kendoConfig, function(i, component) {
+                    if (component.category === category) {
+                        result += componentTemplate(component);
+                    }
+                });
+
+                return result;
+            }
+
+            function renderFeatures(component) {
+                var result = '';
+                $.each(component.features, function() {
+                    result += featureTemplate(this);
+                });
+                return result;
+            }
+
             function refreshScripts() {
                 resolver.reset();
 
@@ -176,12 +226,8 @@
                 return $(element).find(".implicit, .explicit").length > 0;
             }
 
-            function renderFeatures(component) {
-                var result = '';
-                $.each(component.features, function() {
-                    result += featureTemplate(this);
-                });
-                return result;
+            function template(id) {
+                return kendo.template($("#" + id).html())
             }
 
             function capitalize(word) {
