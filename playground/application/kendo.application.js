@@ -1,47 +1,50 @@
 (function($, undefined) {
-    kendo.View = kendo.Class.extend({
-        init: function(element, options) {
-            this.options = options;
-            this.element = element;
 
-            if (element) {
-                element.data("kendoView", this);
-                this._bindEvents();
-            }
+    function extractView(html) {
+        var bodyInnerHTML = /<body[^>]*>((.|\n)*)<\/body>/im.exec(html)[1];
+
+        var placeholder = $("<div/>");
+
+        placeholder[0].innerHTML = bodyInnerHTML;
+        return placeholder.find("[data-kendo-role=view]").first();
+    }
+
+    function findView(url, callback) {
+        var element = $(url + ", [data-kendo-url='" + url + "']").first(),
+            view = element.data("kendoView");
+
+        if (view) {
+            callback(view);
+        } else if (url.charAt(0) === "#") {
+            callback(new kendo.View($(url)));
+        } else {
+            $.ajax({
+                url: url,
+                dataType: "html",
+                success: function(html) {
+                    element = extractView(html);
+
+                    element.hide().attr("data-kendo-url", url);
+                    $(document.body).append(element);
+
+                    callback(new kendo.View(element));
+                }
+            });
+        }
+    }
+
+    kendo.View = kendo.Class.extend({
+        init: function(element) {
+            this.element = element;
+            element.data("kendoView", this);
+            this._bindEvents();
         },
 
-        render: function(success) {
-            var that = this;
-
-            success = success || $.noop;
-
-            if (that.element) {
-                success(that.element);
-            } else {
-                $.ajax({
-                    url: this.options.url,
-                    dataType: "html",
-                    success: function(html) {
-                        var bodyInnerHTML = /<body[^>]*>((.|\n)*)<\/body>/im.exec(html)[1];
-
-                        var placeholder = $("<div/>");
-
-                        placeholder[0].innerHTML = bodyInnerHTML;
-                        that.element = placeholder.find("[data-kendo-role=view]").first();
-                        that.element.hide().attr("data-kendo-url", that.options.url).data("kendoView", that);
-
-                        $(document.body).append(that.element);
-                        success(that.element);
-                        that._bindEvents();
-                    }
-                });
-            }
+        _bindToElement: function(element) {
+            return element;
         },
 
         replace: function(view) {
-            if (view == this) {
-                return;
-            }
             this.element.show();
             view.hide();
             return this;
@@ -80,23 +83,10 @@
         },
 
         loadView: function(url) {
+            var that = this;
 
-            var that = this, view;
-
-            var element = $(url + ", [data-kendo-url='" + url + "']").first();
-            view = element.data("kendoView");
-
-            if (!view) {
-                if (url.charAt(0) === "#") {
-                    view = new kendo.View($(url), { url: url });
-                } else {
-                    view = new kendo.View(null, { url: url });
-                }
-            }
-
-            view.render(function(element) {
+            findView(url, function(view) {
                 kendo.history.navigate(url, true);
-
                 that._view = view.replace(that._view);
             });
         }
