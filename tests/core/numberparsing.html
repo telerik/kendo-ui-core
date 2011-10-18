@@ -129,6 +129,18 @@
 
                 equal(parseF(value), -1123.23);
             });
+
+            test("parse exponential number", function() {
+                var value = "1.23432e+5";
+
+                equal(parseF(value), 123432);
+            });
+
+            test("parse negative exponential number", function() {
+                var value = "-1.23432e-1";
+
+                equal(parseF(value), -0.123432);
+            });
         </script>
     </body>
 </html>
