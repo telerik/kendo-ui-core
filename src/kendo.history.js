@@ -18,7 +18,7 @@
 
             that._pushStateRequested = !!options["pushState"];
             that._pushState = that._pushStateRequested && that._pushStateSupported();
-            that._fragment = "";
+            that.current = "";
             that.root = options["root"] || "/";
 
 
@@ -65,10 +65,9 @@
         },
 
         _checkUrl: function(e) {
-            console.log("checkUrl", e);
             var that = this, current = that._currentLocation();
 
-            if (current != that._fragment) {
+            if (current != that.current) {
                 that.navigate(current);
             }
         },
@@ -117,19 +116,21 @@
         navigate: function(to, silent) {
             var that = this;
 
-            if (that._fragment === to || that._fragment === decodeURIComponent(to)) {
+            to = to.replace(hashStrip, '');
+
+            if (that.current === to || that.current === decodeURIComponent(to)) {
                 return;
             }
 
             if (that._pushState) {
                 history.pushState({}, document.title, that._makePushStateUrl(to));
-                that._fragment = to;
+                that.current = to;
             } else {
-                that._fragment = location.hash = to;
+                location.hash = that.current = to;
             }
 
             if (!silent) {
-                that.trigger("change", { location: that._fragment });
+                that.trigger("change", { location: that.current });
             }
         }
     });
