@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="script-builder.js"></script>
+        <link rel="stylesheet" href="../styles/kendo.common.css" />
+        <link rel="stylesheet" href="../styles/kendo.blueopal.css" />
+        <style type="text/css">
+            .require {
+                background: url(images/checkboxes.gif) no-repeat 0 -13px;
+                width: 13px;
+                height: 13px;
+                border: none;
+                display: inline-block;
+                overflow: hidden;
+            }
+
+            .require:hover {
+                background-position: 0 -26px;
+            }
+
+            .implicit {
+                background-position: 0 -52px;
+            }
+
+            .implicit:hover {
+                background-position: 0 -65px;
+            }
+
+            .explicit {
+                background-position: 0 -91px;
+            }
+
+            .explicit:hover {
+                background-position: 0 -104px;
+            }
+        </style>
+    </head>
+    <body>
+        <ul id="configurator"></ul>
+        <script id="componentTemplate" type="text/x-kendo-tmpl">
+            <li class="component" data-name="#= name #">
+                <span class="require"></span>
+                <span class="name">#= name #</span>
+                # if (data.features) { #
+                    <ul class="features">
+                        #= renderFeatures(data) #
+                    </ul>
+                # } #
+            </li>
+        </script>
+        <script id="featureTemplate" type="text/x-kendo-tmpl">
+            <li class="feature" data-name="#= name #">
+                <span class="require"></span>
+                <span class="name">#= name #</span>
+            </li>
+        </script>
+        <script type="text/javascript">
+            var resolver = new ScriptResolver(kendoConfig);
+            var componentTemplate = kendo.template($("#componentTemplate").html()),
+                featureTemplate = kendo.template($("#featureTemplate").html());
+
+            $(document).ready(function() {
+                var configurator = $("#configurator");
+
+                $.each(kendoConfig, function() {
+                    configurator.append($(componentTemplate(this)));
+                });
+
+                $(".require").bind("click", function() {
+                    var checkbox = $(this);
+
+                    if (checkbox.hasClass("explicit")) {
+                        checkbox.removeClass("explicit");
+                    } else if (checkbox.hasClass("implicit")) {
+                        checkbox.removeClass("implicit")
+                                .addClass("explicit");
+                    } else {
+                        checkbox.addClass("explicit");
+                    }
+
+
+                    $(".require").removeClass("implicit");
+
+                    refreshScripts();
+
+                    $(".component, .feature").each(function() {
+                        var checkbox = $("> .require", this);
+                        if (resolver.resolved.indexOf($(this).data("name")) > -1) {
+                            if (!checkbox.hasClass("explicit")) {
+                                checkbox.addClass("implicit");
+                            }
+                        }
+                    });
+                });
+            });
+
+            function refreshScripts() {
+                resolver.reset();
+
+                $(".component").each(function() {
+                    var component = $(this);
+                    if (required(component)) {
+                        var features = $.map(component.find(".feature"), function(feature) {
+                            if (required(feature)) {
+                                return $(feature).data("name");
+                            }
+                        });
+
+                        resolver.addComponent(component.data("name"), features);
+                    }
+                });
+
+                console.log(resolver.scripts);
+            }
+
+            function required(element) {
+                return $(element).find(".implicit, .explicit").length > 0;
+            }
+
+            function renderFeatures(component) {
+                var result = '';
+                $.each(component.features, function() {
+                    result += featureTemplate(this);
+                });
+                return result;
+            }
+
+            function capitalize(word) {
+                return word.charAt(0).toUpperCase() + word.slice(1);
+            }
+        </script>
+    </body>
+</html>
