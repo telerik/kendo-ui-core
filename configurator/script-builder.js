@@ -18,6 +18,10 @@ var kendoConfig = [{
         source: "kendo.selectable.js",
         depends: [ "core" ]
     }, {
+        name: "navigatable",
+        source: "kendo.navigatable.js",
+        depends: [ "core" ]
+    }, {
         name: "grid",
         source: "kendo.grid.js",
         depends: [ "data", "navigatable" ],
@@ -26,10 +30,10 @@ var kendoConfig = [{
                 depends: [ "sortable" ]
             }, {
                 name: "paging",
-                depends: [ "pageable" ]
+                depends: [ "pager" ]
             }, {
                 name: "selection",
-                depends: [ "sortable" ]
+                depends: [ "selectable" ]
             }
         ]
     }, {
@@ -54,13 +58,19 @@ ScriptResolver.prototype = {
             features = features || [],
             component = resolver.findComponent(name);
 
-        features.forEach(function(featureName) {
+        $.each(features, function() {
             resolver.resolve(
-                findByName(component.features, featureName)
+                findByName(component.features, this.toString())
             );
         });
 
         resolver.resolve(component);
+    },
+
+    reset: function() {
+        this.scripts = [];
+        this.resolved = [];
+        this.seen = [];
     },
 
     resolve: function(component) {
@@ -85,7 +95,7 @@ ScriptResolver.prototype = {
         });
 
         resolver.registerScript(component.source);
-        resolver.resolved.push(component);
+        resolver.resolved.push(component.name);
     },
 
     registerScript: function(source) {
