@@ -6,22 +6,22 @@ function ScriptResolver(config) {
 }
 
 ScriptResolver.prototype = {
-    addComponent: function(name, features) {
+    addComponent: function(id, features) {
         var resolver = this,
             features = features || [],
-            component = resolver._findComponent(name),
+            component = resolver._findComponent(id),
             currentFeature;
 
         if (!component) {
-             throw new Error("Missing configuration for " + name);
+             throw new Error("Missing configuration for " + id);
         }
 
         $.each(features, function(i, val) {
-            currentFeature = findByName(component.features || [], val);
+            currentFeature = findById(component.features || [], val);
 
             if (!currentFeature) {
                  throw new Error(
-                     "Missing feature " + val + " for " + name
+                     "Missing feature " + val + " for " + id
                  );
             }
 
@@ -47,24 +47,24 @@ ScriptResolver.prototype = {
             dependancy,
             circularDependancy;
 
-        seen.push(component.name);
-        depends.forEach(function(dependancyName) {
+        seen.push(component.id);
+        depends.forEach(function(dependancyId) {
             circularDependancy =
-                !inArray(resolved, dependancyName) &&
-                 inArray(seen, dependancyName);
+                !inArray(resolved, dependancyId) &&
+                 inArray(seen, dependancyId);
 
             if (circularDependancy) {
                  throw new Error(
-                     "Circular dependancy for " + dependancyName
+                     "Circular dependancy for " + dependancyId
                  );
             }
 
-            dependancy = resolver._findComponent(dependancyName);
+            dependancy = resolver._findComponent(dependancyId);
 
             if (!dependancy) {
                  throw new Error(
-                     "Unable to resolve " + dependancyName +
-                     " required by " + component.name
+                     "Unable to resolve " + dependancyId +
+                     " required by " + component.id
                  );
             }
 
@@ -72,7 +72,7 @@ ScriptResolver.prototype = {
         });
 
         resolver._registerScript(component.source);
-        resolver.resolved.push(component.name);
+        resolver.resolved.push(component.id);
     },
 
     _registerScript: function(source) {
@@ -83,12 +83,12 @@ ScriptResolver.prototype = {
         }
     },
 
-    _findComponent: function(name) {
-        return findByName(this.config, name);
+    _findComponent: function(id) {
+        return findById(this.config, id);
     }
 };
 
-function findByName(arr, name) {
+function findById(arr, id) {
     var result,
         i,
         length = arr.length,
@@ -96,7 +96,7 @@ function findByName(arr, name) {
 
     for (i = 0; i < length; i++) {
         entry = arr[i];
-        if (entry.name === name) {
+        if (entry.id === id) {
             return entry;
         }
     }
