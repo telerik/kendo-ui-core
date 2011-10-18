@@ -83,7 +83,33 @@
                 same(resolver.scripts, [ "b.js", "a.js" ]);
             });
 
-            test("circular dependencies", function() {
+            test("signals missing components", function() {
+                createResolver([]);
+
+                raises(function() {
+                    resolver.addComponent("a");
+                }, function(error) {
+                    return error.message ===
+                        "Missing configuration for a";
+                });
+            });
+
+            test("signals missing dependencies", function() {
+                createResolver([{
+                    name: "a",
+                    source: "a.js",
+                    depends: [ "b" ]
+                }]);
+
+                raises(function() {
+                    resolver.addComponent("a");
+                }, function(error) {
+                    return error.message ===
+                        "Unable to resolve b required by a";
+                });
+            });
+
+            test("signals circular dependencies", 1, function() {
                 createResolver([{
                     name: "a",
                     source: "a.js",
@@ -94,9 +120,26 @@
                     depends: [ "a" ]
                 }]);
 
-                resolver.addComponent("a");
+                raises(function() {
+                    resolver.addComponent("a");
+                }, function(error) {
+                    return error.message ===
+                        "Circular dependancy for a";
+                });
+            });
 
-                same(resolver.scripts, [ "b.js", "a.js" ]);
+            test("signals missing features", function() {
+                createResolver([{
+                    name: "a",
+                    source: "a.js"
+                }]);
+
+                raises(function() {
+                    resolver.addComponent("a", [ "f" ]);
+                }, function(error) {
+                    return error.message ===
+                        "Missing feature f for a";
+                });
             });
 
         </script>
