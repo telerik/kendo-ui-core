@@ -217,15 +217,30 @@
 
                 that.constants.update(e.name, e.value);
 
-                parser.parse(that.constants.serialize() +
-                    '\n@image-folder: "BlueOpal";\n@loading-panel-color: #fff;\n@shadow-color: #aaa;\n@shadow-inset-color: #555;\n@shadow-light-color: #aaa;\n@input-text-color: #000;\n' +
-                    that.templateInfo.template, function (err, tree) {
-                    if (err) {
-                        return console.error(err);
-                    }
+                var serializedVariables = that.constants.serialize() +
+                    // TODO: extract image-folder and texture url from skin
+                    '\n@image-folder: "BlueOpal";' +
+                    '\n@texture-url: "BlueOpal/gradient.png";' +
+                    '\n@loading-panel-color: #fff;' +
+                    '\n@group-background-color: #fff;' +
+                    '\n@shadow-color: #aaa;' +
+                    '\n@shadow-inset-color: #555;' +
+                    '\n@shadow-light-color: #aaa;' +
+                    '\n@select-background-color: #e9e9e9;' +
+                    '\n@select-border-color: #aaa;' +
+                    '\n@select-hover-background-color: #aaa;' +
+                    '\n@input-text-color: #000;\n';
 
-                    that.updateStyleSheet(tree.toCSS());
-                });
+                parser.parse(
+                    serializedVariables + that.templateInfo.template,
+                    function (err, tree) {
+                        if (err && console) {
+                            return console.error(err);
+                        }
+
+                        that.updateStyleSheet(tree.toCSS());
+                    }
+                );
             },
             updateStyleSheet: function(cssText) {
                 var doc = document,
@@ -276,7 +291,7 @@
                                 }));
                             }).join("").replace(/(#[a-z0-9]+)/gi, "\\$1") +
                         "</ul>" +
-                        "<button type='button' class='k-style-apply k-button'>Download</button>" +
+                        "<button type='button' class='k-action-download k-button'>Download</button>" +
                     "</div>"
                 )({}))
                     .appendTo(document.body);
