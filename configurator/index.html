@@ -38,45 +38,56 @@
         </style>
         <script type="text/javascript">
             var kendoConfig = [{
-                    name: "core",
+                    id: "core",
+                    name: "Core",
                     source: "kendo.core.js"
                 }, {
-                    name: "data",
+                    id: "data",
+                    name: "Data source",
                     source: "kendo.data.js",
                     depends: [ "core" ]
                 }, {
-                    name: "sortable",
+                    id: "sortable",
+                    name: "Sortable",
                     source: "kendo.sortable.js",
                     depends: [ "data" ]
                 }, {
-                    name: "pager",
+                    id: "pager",
+                    name: "Pager",
                     source: "kendo.pager.js",
                     depends: [ "data" ]
                 }, {
-                    name: "selectable",
+                    id: "selectable",
+                    name: "Selectable",
                     source: "kendo.selectable.js",
                     depends: [ "core" ]
                 }, {
-                    name: "navigatable",
+                    id: "navigatable",
+                    name: "Navigatable",
                     source: "kendo.navigatable.js",
                     depends: [ "core" ]
                 }, {
-                    name: "grid",
+                    id: "grid",
+                    name: "Grid",
                     source: "kendo.grid.js",
                     depends: [ "data", "navigatable" ],
                     features: [{
-                            name: "sorting",
+                            id: "grid-sorting",
+                            name: "Sorting",
                             depends: [ "sortable" ]
                         }, {
-                            name: "paging",
+                            id: "grid-paging",
+                            name: "Paging",
                             depends: [ "pager" ]
                         }, {
-                            name: "selection",
+                            id: "grid-selection",
+                            name: "Selection",
                             depends: [ "selectable" ]
                         }
                     ]
                 }, {
-                    name: "chart",
+                    id: "chart",
+                    name: "Chart",
                     source: "kendo.chart.js",
                     depends: [ "data" ]
                 }
@@ -86,7 +97,7 @@
     <body>
         <ul id="configurator"></ul>
         <script id="componentTemplate" type="text/x-kendo-tmpl">
-            <li class="component" data-name="#= name #">
+            <li class="component" data-id="#= id #">
                 <span class="require"></span>
                 <span class="name">#= name #</span>
                 # if (data.features) { #
@@ -97,7 +108,7 @@
             </li>
         </script>
         <script id="featureTemplate" type="text/x-kendo-tmpl">
-            <li class="feature" data-name="#= name #">
+            <li class="feature" data-id="#= id #">
                 <span class="require"></span>
                 <span class="name">#= name #</span>
             </li>
@@ -133,7 +144,7 @@
 
                     $(".component, .feature").each(function() {
                         var checkbox = $("> .require", this);
-                        if (resolver.resolved.indexOf($(this).data("name")) > -1) {
+                        if (resolver.resolved.indexOf($(this).data("id")) > -1) {
                             if (!checkbox.hasClass("explicit")) {
                                 checkbox.addClass("implicit");
                             }
@@ -150,11 +161,11 @@
                     if (required(component)) {
                         var features = $.map(component.find(".feature"), function(feature) {
                             if (required(feature)) {
-                                return $(feature).data("name");
+                                return $(feature).data("id");
                             }
                         });
 
-                        resolver.addComponent(component.data("name"), features);
+                        resolver.addComponent(component.data("id"), features);
                     }
                 });
 

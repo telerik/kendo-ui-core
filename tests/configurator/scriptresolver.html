@@ -8,7 +8,7 @@
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
-        <script src="../../configurator/script-builder.js"></script>
+        <script src="../../configurator/script-resolver.js"></script>
         <script type="text/javascript">
 
             // ------------------------------------------------------------
@@ -21,7 +21,7 @@
 
             test("component with no dependencies", function() {
                 createResolver([{
-                    name: "a",
+                    id: "a",
                     source: "a.js"
                 }]);
 
@@ -32,10 +32,10 @@
 
             test("component with single dependency", function() {
                 createResolver([{
-                    name: "a",
+                    id: "a",
                     source: "a.js"
                 }, {
-                    name: "b",
+                    id: "b",
                     source: "b.js",
                     depends: [ "a" ]
                 }]);
@@ -47,14 +47,14 @@
 
             test("includes common dependency only once", function() {
                 createResolver([{
-                    name: "a",
+                    id: "a",
                     source: "a.js"
                 }, {
-                    name: "b",
+                    id: "b",
                     source: "b.js",
                     depends: [ "a" ]
                 }, {
-                    name: "c",
+                    id: "c",
                     source: "c.js",
                     depends: [ "a" ]
                 }]);
@@ -67,14 +67,14 @@
 
             test("depending features", function() {
                 createResolver([{
-                    name: "a",
+                    id: "a",
                     source: "a.js",
                     features: [{
-                        name: "a-1",
+                        id: "a-1",
                         depends: [ "b" ]
                     }]
                 }, {
-                    name: "b",
+                    id: "b",
                     source: "b.js"
                 }]);
 
@@ -96,7 +96,7 @@
 
             test("signals missing dependencies", function() {
                 createResolver([{
-                    name: "a",
+                    id: "a",
                     source: "a.js",
                     depends: [ "b" ]
                 }]);
@@ -111,11 +111,11 @@
 
             test("signals circular dependencies", 1, function() {
                 createResolver([{
-                    name: "a",
+                    id: "a",
                     source: "a.js",
                     depends: [ "b" ]
                 }, {
-                    name: "b",
+                    id: "b",
                     source: "b.js",
                     depends: [ "a" ]
                 }]);
@@ -130,7 +130,7 @@
 
             test("signals missing features", function() {
                 createResolver([{
-                    name: "a",
+                    id: "a",
                     source: "a.js"
                 }]);
 
