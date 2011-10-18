@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="../styles/kendo.common.css" />
         <link rel="stylesheet" href="../styles/kendo.blueopal.css" />
         <style type="text/css">
-            .require {
+            .checkbox {
                 background: url(images/checkboxes.gif) no-repeat 0 -13px;
                 width: 13px;
                 height: 13px;
@@ -16,7 +16,7 @@
                 overflow: hidden;
             }
 
-            .require:hover {
+            .checkbox:hover {
                 background-position: 0 -26px;
             }
 
@@ -114,7 +114,7 @@
 
         <script id="componentTemplate" type="text/x-kendo-tmpl">
             <li class="component" data-id="#= id #">
-                <span class="require"></span>
+                <span class="checkbox"></span>
                 <span class="name">#= name #</span>
                 # if (data.features) { #
                     <ul class="features">
@@ -126,7 +126,7 @@
 
         <script id="featureTemplate" type="text/x-kendo-tmpl">
             <li class="feature" data-id="#= id #">
-                <span class="require"></span>
+                <span class="checkbox"></span>
                 <span class="name">#= name #</span>
             </li>
         </script>
@@ -145,7 +145,7 @@
 
                 renderCategories();
 
-                $(".require").bind("click", function() {
+                $(".checkbox").bind("click", function() {
                     var checkbox = $(this);
 
                     if (checkbox.hasClass("explicit")) {
@@ -158,12 +158,12 @@
                     }
 
 
-                    $(".require").removeClass("implicit");
+                    $(".checkbox").removeClass("implicit");
 
                     refreshScripts();
 
                     $(".component, .feature").each(function() {
-                        var checkbox = $("> .require", this);
+                        var checkbox = $("> .checkbox", this);
                         if (resolver.resolved.indexOf($(this).data("id")) > -1) {
                             if (!checkbox.hasClass("explicit")) {
                                 checkbox.addClass("implicit");
@@ -196,10 +196,11 @@
             }
 
             function renderFeatures(component) {
-                var result = '';
-                $.each(component.features, function() {
-                    result += featureTemplate(this);
+                var result = "";
+                $.each(component.features, function(i, feature) {
+                    result += featureTemplate(feature);
                 });
+
                 return result;
             }
 
