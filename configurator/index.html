@@ -145,31 +145,16 @@
 
                 renderCategories();
 
-                $(".checkbox").bind("click", function() {
+                $("#configurator .checkbox").bind("click", function() {
                     var checkbox = $(this);
 
                     if (checkbox.hasClass("explicit")) {
                         checkbox.removeClass("explicit");
-                    } else if (checkbox.hasClass("implicit")) {
-                        checkbox.removeClass("implicit")
-                                .addClass("explicit");
                     } else {
                         checkbox.addClass("explicit");
                     }
 
-
-                    $(".checkbox").removeClass("implicit");
-
-                    refreshScripts();
-
-                    $(".component, .feature").each(function() {
-                        var checkbox = $("> .checkbox", this);
-                        if (resolver.resolved.indexOf($(this).data("id")) > -1) {
-                            if (!checkbox.hasClass("explicit")) {
-                                checkbox.addClass("implicit");
-                            }
-                        }
-                    });
+                    updateDependencies();
                 });
             });
 
@@ -204,10 +189,12 @@
                 return result;
             }
 
-            function refreshScripts() {
+            function updateDependencies() {
+                $("#configurator .checkbox").removeClass("implicit");
+
                 resolver.reset();
 
-                $(".component").each(function() {
+                $("#configurator .component").each(function() {
                     var component = $(this);
                     if (required(component)) {
                         var features = $.map(component.find(".feature"), function(feature) {
@@ -217,6 +204,15 @@
                         });
 
                         resolver.addComponent(component.data("id"), features);
+                    }
+                });
+
+                $("#configurator .component, #configurator .feature").each(function() {
+                    var checkbox = $("> .checkbox", this);
+                    if (resolver.resolved.indexOf($(this).data("id")) > -1) {
+                        if (!checkbox.hasClass("explicit")) {
+                            checkbox.addClass("implicit");
+                        }
                     }
                 });
 
