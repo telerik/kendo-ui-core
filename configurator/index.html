@@ -3,7 +3,7 @@
     <head>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
-        <script src="script-builder.js"></script>
+        <script src="script-resolver.js"></script>
         <link rel="stylesheet" href="../styles/kendo.common.css" />
         <link rel="stylesheet" href="../styles/kendo.blueopal.css" />
         <style type="text/css">
@@ -36,6 +36,52 @@
                 background-position: 0 -104px;
             }
         </style>
+        <script type="text/javascript">
+            var kendoConfig = [{
+                    name: "core",
+                    source: "kendo.core.js"
+                }, {
+                    name: "data",
+                    source: "kendo.data.js",
+                    depends: [ "core" ]
+                }, {
+                    name: "sortable",
+                    source: "kendo.sortable.js",
+                    depends: [ "data" ]
+                }, {
+                    name: "pager",
+                    source: "kendo.pager.js",
+                    depends: [ "data" ]
+                }, {
+                    name: "selectable",
+                    source: "kendo.selectable.js",
+                    depends: [ "core" ]
+                }, {
+                    name: "navigatable",
+                    source: "kendo.navigatable.js",
+                    depends: [ "core" ]
+                }, {
+                    name: "grid",
+                    source: "kendo.grid.js",
+                    depends: [ "data", "navigatable" ],
+                    features: [{
+                            name: "sorting",
+                            depends: [ "sortable" ]
+                        }, {
+                            name: "paging",
+                            depends: [ "pager" ]
+                        }, {
+                            name: "selection",
+                            depends: [ "selectable" ]
+                        }
+                    ]
+                }, {
+                    name: "chart",
+                    source: "kendo.chart.js",
+                    depends: [ "data" ]
+                }
+            ];
+        </script>
     </head>
     <body>
         <ul id="configurator"></ul>
