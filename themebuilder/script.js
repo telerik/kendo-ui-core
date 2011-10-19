@@ -52,99 +52,93 @@
         return;
     }
 
-    function buildConstants() {
-        var properties = {
-                bgColor: { property: "background-color", label: "Background" },
-                color: { property: "color", lessSuffix: "text-color", label: "Text color" },
-                borderColor: { property: "border-color", label: "Border color" }
+    var constant = function(target, property, values){
+            return {
+                target: target,
+                property: property,
+                values: values
+            };
+        },
+        BGCOLOR = "background-color",
+        BORDERCOLOR = "border-color",
+        COLOR = "color",
+        constants = {
+            "@image-folder": {
+                readonly: true,
+                infer: function() {
+                    // TODO: compute from current skin. determine what should be the context for this function.
+                    return "\"http://localhost/kendo/live/styles/Black/\"";
+                }
             },
-            extend = $.extend,
-            BGCOLOR = "bgColor",
-            COLOR = "color",
-            BORDERCOLOR = "borderColor";
 
-        function returnProperties(propertyNames) {
-            var result = [], j;
+            "@texture-url": constant(".k-header", "background-image", [
+                "http://localhost/kendo/live/styles/Black/gradient.png",
+                "http://localhost/kendo/live/styles/BlueOpal/gradient.png",
+                "http://localhost/kendo/live/styles/Hakama/gradient.png"
+            ]),
 
-            for (j = 0; j < propertyNames.length; j++) {
-                result.push(extend({}, properties[propertyNames[j]]));
-            }
+            "@widget-background-color":         constant(".k-widget", BGCOLOR),
+            "@widget-border-color":             constant(".k-widget", BORDERCOLOR),
+            "@widget-text-color":               constant(".k-widget", COLOR),
 
-            return result;
-        }
+            "@header-background-color":         constant(".k-header", BGCOLOR),
+            "@header-text-color":               constant(".k-header", COLOR),
 
-        /* missing constants:
-         * @texture-url: "..."; // on Telerik CDN
-         * @image-folder: "BlueOpal"; // we should think of something that allows us to change the gradients
-        * @loading-panel-color: #fff;
-        * @shadow-color: #aaa;
-        * @shadow-inset-color: #555;
-        * @shadow-light-color: #aaa;
-        * @input-text-color: #000;
-         */
+            "@button-background-color":         constant(".k-button", BGCOLOR),
+            "@button-text-color":               constant(".k-button", COLOR),
 
-        return [{
-            prefix: "@widget",
-            title: "Widgets",
-            properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
-        }, {
-            prefix: "@header",
-            title: "Headers and buttons",
-            properties: returnProperties([BGCOLOR])
-        }, {
-            prefix: "@tooltip",
-            title: "Tooltips",
-            properties: returnProperties([BGCOLOR, COLOR])
-        }, {
-            prefix: "@hover",
-            cssClass: "k-state-hover",
-            title: "Hover state",
-            properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
-        }, {
-            prefix: "@selected",
-            cssClass: "k-state-selected",
-            title: "Selected state",
-            properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
-        }, {
-            prefix: "@active",
-            cssClass: "k-state-active",
-            title: "Active state",
-            properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
-        }, {
-            prefix: "@disabled",
-            cssClass: "k-state-disabled",
-            title: "Disabled state",
-            properties: returnProperties([COLOR])
-        }, {
-            prefix: "@error",
-            cssClass: "k-state-error",
-            title: "Error state",
-            properties: returnProperties([BGCOLOR, COLOR, BORDERCOLOR])
-        }, {
-            prefix: "@content",
-            title: "Content wrappers",
-            properties: returnProperties([BGCOLOR])
-        }, {
-            prefix: "@input",
-            title: "Textboxes",
-            properties: returnProperties([BGCOLOR])
-        }, {
-            prefix: "@splitbar",
-            title: "Splitbars",
-            properties: returnProperties([BGCOLOR])
-        }, {
-            prefix: "@alt",
-            title: "Grid alt rows",
-            properties: returnProperties([BGCOLOR])
-        }, {
-            prefix: "@loading",
-            title: "Loading panels",
-            properties: returnProperties([BGCOLOR])
-        }];
-    }
+            "@group-background-color":          constant(".k-group", BGCOLOR),
+            "@group-border-color":              constant(".k-group", BORDERCOLOR),
+
+            "@content-background-color":        constant(".k-content", BGCOLOR),
+
+            "@select-background-color":         constant(".k-group", BGCOLOR),
+            "@select-border-color":             constant(".k-group", BORDERCOLOR),
+            "@select-group-background-color":   constant(".k-group", BGCOLOR),
+            "@select-hover-background-color":   constant(".k-group", BORDERCOLOR),
+
+            "@hover-background-color":          constant(".k-state-hover", BGCOLOR),
+            "@hover-border-color":              constant(".k-state-hover", BORDERCOLOR),
+            "@hover-text-color":                constant(".k-state-hover", COLOR),
+
+            "@selected-background-color":       constant(".k-state-selected", BGCOLOR),
+            "@selected-border-color":           constant(".k-state-selected", BORDERCOLOR),
+            "@selected-text-color":             constant(".k-state-selected", COLOR),
+
+            "@active-background-color":         constant(".k-state-active", BGCOLOR),
+            "@active-border-color":             constant(".k-state-active", BORDERCOLOR),
+            "@active-text-color":               constant(".k-state-active", COLOR),
+
+            "@error-background-color":          constant(".k-state-error", BGCOLOR),
+            "@error-border-color":              constant(".k-state-error", BORDERCOLOR),
+            "@error-text-color":                constant(".k-state-error", COLOR),
+
+            "@disabled-text-color":             constant(".k-state-disabled", COLOR),
+
+            "@alt-background-color":            constant(".k-alt", BGCOLOR),
+            "@input-background-color":          constant(".k-input", BGCOLOR),
+            "@input-text-color":                constant(".k-input", COLOR),
+            "@shadow-color":                    constant(".k-popup", "box-shadow"),
+            "@shadow-inset-color":              constant(".k-autocomplete .k-input", "box-shadow"),
+            "@link-text-color":                 constant(".k-link", COLOR),
+            "@tooltip-background-color":        constant(".k-tooltip", BGCOLOR),
+            "@tooltip-text-color":              constant(".k-tooltip", COLOR),
+            "@border-radius":                   constant(".k-link", "border-radius"),
+            "@loading-panel-color":             constant(".k-loading-color", BGCOLOR),
+            "@splitbar-background-color":       constant(".k-splitbar", BGCOLOR)
+        },
+        constantsHierarchy = {
+            "Widget": /^@widget.*/,
+            "Headers": /^@header.*/,
+            "Buttons": /^@button.*/,
+            "Groups and content areas": /^@(group|content).*/,
+            "Select boxes and pickers": /^@select.*/,
+            "Widget states": /^@(hover|selected|active|error|disabled).*/,
+            "Misc": /^@(alt|input|shadow|link|tooltip|border|loading|splitbar)/
+        };
 
     window.lessLoaded = function(lessTemplate) {
-        new kendo.ThemeBuilder(lessTemplate, new kendo.LessConstants(buildConstants()));
+        new kendo.ThemeBuilder(lessTemplate, new kendo.LessConstants(constants), constantsHierarchy);
     };
 
     queue.push(function(){
