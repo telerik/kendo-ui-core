@@ -1,7 +1,7 @@
 (function($, undefined) {
 
     function extractView(html) {
-        if (/<body[^>]*>((.|\n)*)<\/body>/im.test(html)) {
+        if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/im.test(html)) {
             html = RegExp.$1;
         }
 
