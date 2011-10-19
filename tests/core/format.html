@@ -20,6 +20,33 @@
         <script>
             var format = kendo.format;
 
+            kendo.cultures["custom"] = {
+                name: "custom",
+                numberFormat: {
+                    pattern: ["-n"],
+                    decimals: 2,
+                    ",": ",",
+                    ".": ".",
+                    groupSize: [3],
+                    percent: {
+                        pattern: ["-n %","n %"],
+                        decimals: 2,
+                        ",": ",",
+                        ".": ".",
+                        groupSize: [3],
+                        symbol: "%"
+                    },
+                    currency: {
+                        pattern: ["($n)","$n"],
+                        decimals: 4,
+                        ",": "",
+                        ".": ",",
+                        groupSize: [3],
+                        symbol: "!"
+                    }
+                }
+            };
+
             test("format replaces the placeholder with the specified value", function() {
                 equal(format("foo {0}", "bar"), "foo bar");
             });
