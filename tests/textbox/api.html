@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TextBox API</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.textbox.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">TextBox API</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var TextBox = kendo.ui.TextBox,
+                input;
+
+            module("kendo.ui.TextBox API", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            test("value method should return current value", function() {
+                var textbox = new TextBox(input), value = 10;
+
+                textbox._value = value;
+
+                equal(textbox.value(), value);
+            });
+
+            test("value should parse value and set _value", function() {
+                var textbox = new TextBox(input), value = "12.32";
+
+                textbox.value(value);
+
+                deepEqual(textbox.value(), 12.32);
+            });
+
+            test("value should set value of the input", function() {
+                var textbox = new TextBox(input), value = "12.32";
+
+                textbox.value(value);
+
+                equal(input.val(), value);
+            });
+
+            test("set value to the INPUT element should have correct decimals", function() {
+                var textbox = new TextBox(input), value = "12.347";
+
+                textbox.value(value);
+
+                equal(input.val(), "12.35");
+            });
+
+            test("set value to the INPUT element should have correct decimals", function() {
+                var textbox = new TextBox(input), value = "12.347";
+
+                textbox.value(value);
+
+                equal(input.val(), "12.35");
+            });
+
+            test("value should be fixed", function() {
+                var textbox = new TextBox(input), value = "12.347";
+
+                textbox.value(value);
+
+                equal(input.val(), "12.35");
+            });
+
+            test("formatted value should be set to _text", function() {
+                var textbox = new TextBox(input), value = "12.347";
+
+                textbox.value(value);
+
+                equal(textbox._text.html(), "12.35");
+            });
+
+            test("value of the currency textbox", function() {
+                var textbox = new TextBox(input, {
+                        format: "c"
+                    }),
+                    value = "12.347",
+                    number = 12.35;
+
+                textbox.value(value);
+
+                equal(textbox.value(), number);
+                equal(input.val(), number.toString());
+                equal(textbox._text.html(), kendo.toString(number, "c"));
+            });
+
+            test("value of the percent textbox", function() {
+                var textbox = new TextBox(input, {
+                        format: "p"
+                    }),
+                    value = "12.347",
+                    number = 12.35;
+
+                textbox.value(value);
+
+                equal(textbox.value(), number);
+                equal(input.val(), number.toString());
+                equal(textbox._text.html(), kendo.toString(number, "p"));
+            });
+
+            test("set null", function() {
+                var textbox = new TextBox(input.val("10"));
+
+                textbox.value(null);
+
+                equal(textbox._value, null);
+                equal(textbox.element.val(), "");
+                equal(textbox._text.html(), textbox.options.empty);
+            });
+
+            test("set value with custom decimal numbers", function() {
+                var textbox = new TextBox(input),
+                    value = 12.3777777;
+
+                textbox.options.format = "n3";
+                textbox.options.decimals = 3;
+
+                textbox.value(value);
+
+                equal(textbox._value, 12.378);
+                equal(textbox.element.val(), value.toFixed(3));
+                equal(textbox._text.html(), kendo.toString(value, "n3"));
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

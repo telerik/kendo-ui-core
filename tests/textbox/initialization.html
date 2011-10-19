@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TextBox Initialization</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.textbox.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">TextBox Initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var TextBox = kendo.ui.TextBox,
+                input;
+
+            module("kendo.ui.TextBox initialization", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            test("Should render wrapper", function() {
+                var textbox = new TextBox(input),
+                    wrapper = textbox.wrapper;
+
+                ok(wrapper);
+                ok(wrapper.hasClass("k-widget k-textbox"));
+            });
+
+            test("Should render up and down arrows", function() {
+                var textbox = new TextBox(input),
+                    upArrow = textbox._upArrow,
+                    downArrow = textbox._downArrow;
+
+                ok(upArrow);
+                ok(downArrow);
+                ok(upArrow.hasClass("k-link k-icon k-arrow-up"));
+                ok(downArrow.hasClass("k-link k-icon k-arrow-down"));
+                ok(upArrow.attr("title"), "Increase value");
+                ok(downArrow.attr("title"), "Decrease value");
+                ok(upArrow.html(), "Increment");
+                ok(downArrow.html(), "Decrement");
+                ok(upArrow.data("events").mousedown);
+                ok(downArrow.data("events").mousedown);
+            });
+
+            test("Should render div containing the formatted value", function() {
+                input.addClass("custom").css("color", "red");
+
+                var textbox = new TextBox(input),
+                    text = textbox._text;
+
+                //ok(text.is(":visible"));
+                ok(text[0].nodeName, "DIV");
+                ok(!text.hasClass("k-input"));
+                ok(text.hasClass("custom"));
+                ok(text.hasClass("k-formatted-value"));
+                equal(text.next()[0].nodeName, "INPUT");
+                equal(text[0].style.cssText, input[0].style.cssText);
+            });
+
+            test("Should get value from input", function() {
+                var textbox = new TextBox(input.val("12"));
+
+                equal(textbox.value(), 12);
+                equal(textbox.element.val(), "12");
+                equal(textbox._text.html(), "12.00");
+            });
+
+            test("Bind change events", function() {
+                var textbox = new TextBox(input.val("12"), {
+                    change: function() {}
+                });
+
+                equal(textbox._events["change"][0], textbox.options.change);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
