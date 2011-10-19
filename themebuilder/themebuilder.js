@@ -43,64 +43,37 @@
                     .css("backgroundColor", this.value());
             }
         }),
+        hexValueRe = /^#([0-9a-f]{3}){1,2}$/i,
         rgbValuesRe = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/gi,
         LessConstants = kendo.Observable.extend({
+            // TODO: can this be converted to an array-like object?
             init: function(constants) {
-                this.constants = constants || [];
+                this.constants = constants || {};
             },
 
             update: function(name, value) {
-                var prefix = name.split("-")[0],
-                    property = name.split("-").slice(1).join("-"),
-                    constants = this.constants,
-                    properties,
-                    i;
-
-                    for (i = 0; i < constants.length; i++) {
-                        if (constants[i].prefix == prefix) {
-                            properties = constants[i].properties;
-                            for (j = 0; j < properties.length; j++) {
-                                if (properties[j].property == property) {
-                                    properties[j].value = value;
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                    }
+                var constant = this.constants[name];
+                if (constant) {
+                    constant.value = value;
+                }
             },
 
             serialize: function() {
-                var result = [],
-                    constants = this.constants,
-                    constant, props, i, j, len;
-
-                for (j = 0; j < constants.length; j++) {
-                    constant = constants[j];
-
-                    for (i = 0, props = constant.properties, len = props.length; i < len; i++) {
-                        result.push(constant.prefix + "-" + (props[i].lessSuffix || props[i].property) + ": " + props[i].value + ";");
-                    }
-                }
-
-                return result.join("\n");
+                return $.map(this.constants, function(item, key) {
+                    return key + ": " + item.value + ";"
+                }).join("\n");
             },
 
             colors: function() {
                 var constants = this.constants,
-                    properties,
-                    i, j,
                     result = [];
 
-                for (i = 0; i < constants.length; i++) {
-                    properties = constants[i].properties;
-
-                    for (j = 0; j < properties.length; j++) {
-                        if ($.inArray(properties[j].value, result) < 0) {
-                            result.push(properties[j].value);
-                        }
+                $.each(constants, function() {
+                    var value = this.value;
+                    if (hexValueRe.test(value) && $.inArray(value, result) < 0) {
+                        result.push(value);
                     }
-                }
+                });
 
                 return result;
             },
@@ -108,48 +81,57 @@
             infer: function() {
                 var constants = this.constants, constant,
                     c, i,
-                    prototype,
-                    property, value;
+                    property, value,
+                    prototype = $("<div style='border-style:solid;' />").appendTo(document.body);
 
-                for (c = 0; c < constants.length; c++) {
-                    constant = constants[c];
+                for (constant in constants) {
+                    constant = constants[constant];
 
-                    prototype = $("<div style='border-style:solid;' class='" +
-                                        (constant.cssClass ? constant.cssClass : constant.prefix.replace("@", "k-")) +
-                                "' />").appendTo(document.body);
+                    if (constant.infer) {
+                        // computed constant
+                        constant.value = constant.infer();
+                    } else {
+                        // TODO: make it work with complex selectors (targets) -- ".foo .bar"
+                        prototype[0].className = constant.target.substring(1);
 
-                    for (i = 0; i < constant.properties.length; i++) {
-                        property = constant.properties[i].property;
+                        property = constant.property;
                         value = prototype.css(property);
 
                         if (!value && property == "border-color") {
                             value = prototype.css("border-top-color");
                         }
 
-                        if (value) {
-                            // convert rgb() values to hex
+                        if (!value && property == "border-radius") {
+                            value = "0";
+                        }
+
+                        if (rgbValuesRe.test(value)) {
                             value = value.replace(rgbValuesRe, function(match, r, g, b) {
                                 function pad(x) { return x.length == 1 ? "0" + x : x }
-                                return "#" + pad((+r).toString(16)) + pad((+g).toString(16)) + pad((+b).toString(16));
+                                return "#" + pad((+r).toString(16)) +
+                                             pad((+g).toString(16)) +
+                                             pad((+b).toString(16));
                             });
                         }
 
-                        constant.properties[i].value = value;
+                        constant.value = value;
                     }
-
-                    prototype.remove();
                 }
+
+                prototype.remove();
             }
         }),
 
         ThemeBuilder = kendo.Observable.extend({
-            init: function(templateInfo, constants) {
+            init: function(templateInfo, constants, constantsHierarchy) {
                 var that = this,
                     themeColorsDataSource;
 
                 that.templateInfo = templateInfo;
 
                 that.constants = constants;
+
+                that.constantsHierarchy = constantsHierarchy;
 
                 if (constants) {
                     constants.infer();
@@ -217,22 +199,7 @@
 
                 that.constants.update(e.name, e.value);
 
-                var serializedVariables = that.constants.serialize() +
-                    // TODO: extract image-folder and texture url from skin
-                    '\n@image-folder: "BlueOpal";' +
-                    '\n@texture-url: "BlueOpal/gradient.png";' +
-                    '\n@loading-panel-color: #fff;' +
-                    '\n@group-background-color: #fff;' +
-                    '\n@shadow-color: #aaa;' +
-                    '\n@shadow-inset-color: #555;' +
-                    '\n@shadow-light-color: #aaa;' +
-                    '\n@select-background-color: #e9e9e9;' +
-                    '\n@select-border-color: #aaa;' +
-                    '\n@select-hover-background-color: #aaa;' +
-                    '\n@input-text-color: #000;\n';
-
-                parser.parse(
-                    serializedVariables + that.templateInfo.template,
+                parser.parse(that.constants.serialize() + that.templateInfo.template,
                     function (err, tree) {
                         if (err && console) {
                             return console.error(err);
@@ -262,39 +229,52 @@
                 }
             },
             render: function() {
-                var constants = this.constants && this.constants.constants,
+                var that = this,
                     colorPickerTemplate = kendo.template(
-                        "# var id = prefix + \"-\" + property.property; #" +
-                        "<label for='#= id #'>#= property.label #</label>" +
-                        "<input id='#= id #' value='#= property.value #' />"
+                        "<label for='#= name #'>#= constant.property #</label>" +
+                        "<input id='#= name #' value='#= constant.value #' />"
                     ),
+                    editorTemplates = {
+                        "color": colorPickerTemplate,
+                        "background-color": colorPickerTemplate,
+                        "border-color": colorPickerTemplate
+                    },
                     propertyGroupTemplate = kendo.template(
                         "<li>#= title #" +
                             "<div class='styling-options'>" +
-                                "# for (var i = 0, len = properties.length; i < len; i++) { #" +
-                                    "#= propertyTemplate({" +
-                                        "property: properties[i]," +
-                                        "prefix: prefix" +
-                                    "}) #" +
+                                "# for (var constantName in constants) {" +
+                                    "var c = constants[constantName], p = c.property;" +
+                                    "if (c.readonly) continue; #" +
+                                    "#= editorTemplates[p] ? editorTemplates[p]({ " +
+                                        "name: constantName, constant: c" +
+                                        "}) : '<div>' + p + '</div>' #" +
                                 "# } #" +
                             "</div>" +
                         "</li>"
                     );
 
-                $(kendo.template(
-                    "<div id='kendo-themebuilder'>" +
+                $("<div id='kendo-themebuilder'>" +
                         "<button type='button' class='k-items-collapse k-button'>Collapse panels</button>" +
                         "<ul id='stylable-elements'>" +
-                            $.map(constants || [], function(x) {
-                                return propertyGroupTemplate($.extend(x, {
-                                    propertyTemplate: colorPickerTemplate
+                            $.map(that.constantsHierarchy || {}, function(section, title) {
+                                var matchedConstants = [],
+                                    constants = that.constants.constants;
+
+                                for (var constant in constants) {
+                                    if (section.test(constant)) {
+                                        matchedConstants.push(constants[constant]);
+                                    }
+                                }
+
+                                return propertyGroupTemplate($.extend(section, {
+                                    title: title,
+                                    constants: matchedConstants,
+                                    editorTemplates: editorTemplates
                                 }));
-                            }).join("").replace(/(#[a-z0-9]+)/gi, "\\$1") +
+                            }).join("") +
                         "</ul>" +
                         "<button type='button' class='k-action-download k-button'>Download</button>" +
-                    "</div>"
-                )({}))
-                    .appendTo(document.body);
+                    "</div>").appendTo(document.body);
             }
         });
 
