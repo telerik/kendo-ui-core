@@ -257,12 +257,12 @@
                         "<button type='button' class='k-items-collapse k-button'>Collapse panels</button>" +
                         "<ul id='stylable-elements'>" +
                             $.map(that.constantsHierarchy || {}, function(section, title) {
-                                var matchedConstants = [],
+                                var matchedConstants = {},
                                     constants = that.constants.constants;
 
                                 for (var constant in constants) {
                                     if (section.test(constant)) {
-                                        matchedConstants.push(constants[constant]);
+                                        matchedConstants[constant] = $.extend({}, constants[constant]);
                                     }
                                 }
 
