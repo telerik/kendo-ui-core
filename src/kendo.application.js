@@ -1,25 +1,25 @@
 (function($, undefined) {
 
+    var kendo = window.kendo,
+        history = kendo.history,
+        div = $("<div/>"),
+        VIEW_SELECTOR = "[data-kendo-role=view]";
+
     function extractView(html) {
-        if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/im.test(html)) {
+        if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
             html = RegExp.$1;
         }
 
-        var placeholder = $("<div/>");
-
-        placeholder[0].innerHTML = html;
-        return placeholder.find("[data-kendo-role=view]").first();
+        div[0].innerHTML = html;
+        return div.find(VIEW_SELECTOR).first();
     }
 
-    kendo.View = kendo.Class.extend({
+    var View = kendo.Class.extend({
         init: function(element) {
-            this.element = element;
-            element.data("kendoView", this);
-            this._bindEvents();
-        },
+            var that = this;
 
-        _bindToElement: function(element) {
-            return element;
+            that.element = element.data("kendoView", that);
+            that._bindEvents();
         },
 
         replace: function(view) {
@@ -47,18 +47,20 @@
             this.element = element;
         },
 
-        start: function(history) {
-            var that = this;
+        start: function(options) {
+            var that = this, views;
+
             that.element = that.element ? $(that.element) : $(document.body);
 
-            history = $.extend(history, {silent: true});
+            views = that.element.find(VIEW_SELECTOR);
 
-            kendo.history.start(history);
+            views.not(":first").hide();
 
-            that.element.find("[data-kendo-role=view]").not(":first").hide();
-            that._view = new kendo.View(that.element.find("[data-kendo-role=view]").first(), { url: kendo.history._fragment });
+            that._view = new View(views.first(), { url: history.current });
 
-            kendo.history.change(function(e) {
+            history.start($.extend(options, {silent: true}));
+
+            history.change(function(e) {
                 that.changeView(e.location);
             });
         },
@@ -67,7 +69,7 @@
             var that = this;
 
             that._findView(url, function(view) {
-                kendo.history.navigate(url, true);
+                history.navigate(url, true);
                 that._view = view.replace(that._view);
                 that.trigger("viewChange", {view: view});
             });
@@ -81,7 +83,7 @@
             if (view) {
                 callback(view);
             } else if (url.charAt(0) === "#") {
-                callback(new kendo.View($(url)));
+                callback(new View($(url)));
             } else {
                 $.ajax({
                     url: url,
@@ -92,7 +94,7 @@
                         element.hide().attr("data-kendo-url", url);
                         that.element.append(element);
 
-                        callback(new kendo.View(element));
+                        callback(new View(element));
                     }
                 });
             }
