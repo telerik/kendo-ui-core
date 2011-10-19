@@ -144,7 +144,7 @@
                     name: "List",
                     category: "Framework",
                     source: "kendo.list.min.js",
-                    depends: [ "core" ],
+                    depends: [ "data", "popup" ],
                     hidden: true
                 },
 
@@ -154,7 +154,7 @@
                     name: "AutoComplete",
                     category: "Widgets",
                     source: "kendo.autocomplete.min.js",
-                    depends: [ "data", "list" ]
+                    depends: [ "list" ]
                 }, {
                     id: "calendar",
                     name: "Calendar",
@@ -172,7 +172,7 @@
                     name: "ComboBox",
                     category: "Widgets",
                     source: "kendo.combobox.min.js",
-                    depends: [ "data", "list" ]
+                    depends: [ "list" ]
                 }, {
                     id: "datepicker",
                     name: "DatePicker",
@@ -184,7 +184,7 @@
                     name: "DropDownList",
                     category: "Widgets",
                     source: "kendo.dropdownlist.min.js",
-                    depends: [ "data", "list" ]
+                    depends: [ "list" ]
                 }, {
                     id: "grid",
                     name: "Grid",
@@ -203,19 +203,23 @@
                             id: "grid-selection",
                             name: "Selection",
                             depends: [ "selectable" ]
+                        }, {
+                            id: "grid-grouping",
+                            name: "Grouping",
+                            depends: [ "groupable" ]
                     }]
                 }, {
                     id: "menu",
                     name: "Menu",
                     category: "Widgets",
                     source: "kendo.menu.min.js",
-                    depends: [ "data", "popup" ]
+                    depends: [ "popup" ]
                 }, {
                     id: "panelbar",
                     name: "PanelBar",
                     category: "Widgets",
                     source: "kendo.panelbar.min.js",
-                    depends: [ "data" ]
+                    depends: [ "core" ]
                 }, {
                     id: "slider",
                     name: "Slider",
@@ -239,7 +243,7 @@
                     name: "TreeView",
                     category: "Widgets",
                     source: "kendo.treeview.min.js",
-                    depends: [ "data", "draganddrop" ]
+                    depends: [ "draganddrop" ]
                 }, {
                     id: "upload",
                     name: "Upload",
@@ -289,12 +293,14 @@
         <script id="infoTemplate" type="text/x-kendo-tmpl">
             <dl>
                 <dt>Combined script size:</dt>
-                <dd>#= formatBytes(data.size) # (#= formatBytes(data.compressedSize) # compressed)</dd>
+                <dd>#= formatBytes(size) # (#= formatBytes(compressedSize) # compressed)</dd>
             </dl>
+            <a href="#= getUrl #">Download</a>
         </script>
 
         <script type="text/javascript">
-            var INFO_SERVICE = "http://localhost/kendo-download/info.ashx",
+            var INFO_SERVICE = "http://tsonev/kendo-download/info.ashx",
+                GET_SERVICE = "http://tsonev/kendo-download/get.ashx",
                 VERSION = "2011.2.1007";
 
             var resolver,
@@ -393,16 +399,21 @@
             }
 
             function updateInfo() {
+                console.log(resolver.scripts);
+
+                var params = {
+                    c: $.map(resolver.scripts, function(script) { return script.split(".")[1]; }),
+                    v: VERSION,
+                    min: "1"
+                };
+
                 $.ajax({
                     type: "GET",
                     url: INFO_SERVICE,
-                    data: {
-                        c: $.map(resolver.scripts, function(script) { return script.split(".")[1]; }),
-                        v: VERSION,
-                        min: "1"
-                    },
+                    data: params,
                     traditional: true,
                     success: function(data) {
+                        data.getUrl = GET_SERVICE + "?" + $.param(params, true);
                         $("#infoPanel").html(infoTemplate(data));
                     }
                 });

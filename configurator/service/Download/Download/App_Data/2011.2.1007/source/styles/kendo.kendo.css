@@ -1,0 +1,294 @@
+/* Kendo skin */
+/* main colors */
+.k-widget,
+.k-input,
+.k-group,
+.k-content,
+.k-header,
+.k-editable-area,
+.k-separator,
+.k-colorpicker .k-arrow-down,
+.k-autocomplete,
+.k-dropdown-wrap,
+.k-toolbar,
+.k-grouping-header,
+.k-grid-pager,
+.k-group-footer td,
+.k-grid-footer,
+.k-footer-template td,
+.k-state-default,
+.k-state-default .k-select,
+.k-state-disabled,
+.k-panelbar .k-link,
+.k-grid-header-wrap,
+.k-grid-header,
+.k-grid td,
+.k-grid-footer-wrap,
+.k-grid-pager,
+.k-grouping-header,
+.k-grouping-header .k-group-indicator,
+.k-dropdown-wrap,
+.k-autocomplete,
+.k-panelbar .k-link,
+.k-panelbar .k-group,
+.k-panelbar .k-content,
+.k-calendar th,
+.k-slider-track,
+.k-splitbar,
+.k-dropzone-active,
+.k-upload-files,
+.k-tiles,
+.k-toolbar,
+.k-dropdown-wrap,
+.k-tooltip,
+.k-progress {
+  border-color: #c5c5c5;
+}
+.k-group,
+.k-toolbar,
+.k-grouping-header,
+.k-grid-pager,
+.k-group-footer td,
+.k-grid-footer,
+.k-footer-template td,
+.k-widget .k-status,
+.k-grouping-row td,
+td.k-group-cell,
+.k-calendar th,
+.k-dropzone-hovered,
+.k-upload-files {
+  background-color: #ebebeb;
+}
+.k-list-container {
+  border-color: #c5c5c5;
+  background-color: #e9e9e9;
+}
+.k-content, .k-editable-area, .k-tiles {
+  background-color: #ffffff;
+}
+.k-alt, .k-separator {
+  background-color: #f5f5f5;
+}
+.k-widget,
+.k-widget .k-dropdown-wrap,
+.k-widget .k-picker-wrap,
+.k-autocomplete.k-header,
+.k-autocomplete.k-state-focused,
+div.k-dropdown-wrap.k-state-active,
+.k-dropdown-wrap.k-state-focused,
+.k-dropdown-wrap.k-state-focused:hover,
+div.k-picker-wrap.k-state-active,
+.k-picker-wrap.k-state-focused,
+.k-picker-wrap.k-state-focused:hover {
+  border-color: #c5c5c5;
+  background-color: #e9e9e9;
+}
+.k-autocomplete .k-input,
+.k-dropdown-wrap .k-input,
+.k-autocomplete.k-state-focused .k-input,
+.k-dropdown-wrap.k-state-focused .k-input,
+.k-picker-wrap.k-state-focused .k-input {
+  border-color: #c5c5c5;
+}
+.k-input {
+  background-color: #ffffff;
+}
+.k-widget,
+.k-input,
+.k-popup,
+.k-content {
+  color: #2e2e2e;
+}
+.k-combobox .k-input, .k-picker-wrap .k-input, .k-autocomplete .k-input {
+  color: #2e2e2e;
+}
+.k-link:link, .k-link:visited {
+  color: #2e2e2e;
+}
+.k-header {
+  color: #2e2e2e;
+}
+/* gradient */
+.k-header,
+.k-grid-header,
+.k-toolbar,
+.k-dropdown-wrap,
+.k-picker-wrap,
+.k-grouping-header,
+.k-tooltip,
+.k-grid-pager,
+.k-button,
+.k-autocomplete,
+.k-state-hover,
+.k-state-selected,
+.k-state-focused,
+.k-tabstrip-items .k-item {
+  background-image: url('Kendo/gradient.png');
+}
+.k-header,
+.k-grid-header,
+.k-toolbar,
+.k-grouping-header,
+.k-tooltip,
+.k-grid-pager,
+.k-button {
+  background-color: #e3e3e3;
+}
+/* icons */
+.k-icon,
+.k-grouping-dropclue,
+.k-treeview .k-drop-hint,
+.k-slider .k-draghandle,
+.k-slider-horizontal .k-slider-track,
+.k-slider-horizontal .k-slider-selection,
+.k-callout,
+.k-splitbar-vertical,
+.k-ghost-splitbar-vertical,
+.k-progress,
+.k-progress-status {
+  background-image: url('Kendo/sprite.png');
+}
+.k-slider-vertical .k-slider-track,
+.k-slider-vertical .k-slider-selection,
+.k-splitbar-horizontal,
+.k-ghost-splitbar-horizontal {
+  background-image: url('Kendo/sprite-vertical.png');
+}
+.k-editor .k-tool-icon {
+  background-image: url('Kendo/editor.png');
+}
+.k-loading {
+  background-image: url('Kendo/loading.gif');
+}
+.k-loading-image {
+  background-image: url('Kendo/loading-image.gif');
+}
+.k-loading-color {
+  background-color: #ffffff;
+}
+.k-button {
+  color: #2e2e2e;
+}
+.k-button, .k-button.k-state-disabled:hover, .k-state-disabled .k-button:hover {
+  border-color: #c5c5c5;
+  background-color: #e3e3e3;
+}
+.k-button:hover {
+  border-color: #f0713a;
+  background-color: #f0713a;
+}
+/* states */
+.k-state-active, .k-state-active:hover, .k-active-filter {
+  background-color: #ffffff;
+  border-color: #f0713a;
+}
+.k-state-hover,
+.k-state-hover:hover,
+.k-list > .k-state-hover,
+.k-list > .k-state-focused,
+.k-state-focused,
+.k-marquee {
+  color: #ffffff;
+  background-color: #f0713a;
+  border-color: #f0713a;
+}
+.k-state-hover > .k-link, .k-state-focused > .k-link, .k-other-month.k-state-hover .k-link {
+  color: #ffffff;
+}
+.k-autocomplete.k-state-hover, .k-picker-wrap.k-state-hover, .k-dropdown-wrap.k-state-hover {
+  background-color: #f0713a;
+  border-color: #f0713a;
+}
+.k-dropdown .k-state-hover .k-input {
+  color: #ffffff;
+}
+.k-dropdown .k-state-focused .k-input {
+  color: #2e2e2e;
+}
+.k-state-selected,
+.k-list > .k-state-selected,
+.k-panelbar .k-state-selected,
+.k-button:active {
+  color: #ffffff;
+  background-color: #564942;
+  border-color: #564942;
+}
+.k-state-selected > .k-link {
+  color: #ffffff;
+}
+.k-state-error {
+  border-color: #e20000;
+  background-color: #ff5252;
+  color: #ffffff;
+}
+.k-state-disabled,
+.k-state-disabled .k-link,
+.k-state-disabled .k-button,
+.k-other-month .k-link,
+.k-dropzone em,
+.k-tile-empty strong,
+.k-slider .k-draghandle {
+  color: #9f9e9e;
+}
+/* Slider */
+.k-slider-horizontal .k-tick {
+  background-image: url('Kendo/slider-h.gif');
+}
+.k-slider-vertical .k-tick {
+  background-image: url('Kendo/slider-v.gif');
+}
+/* Tooltip */
+.k-tooltip {
+  border-color: #564942;
+  background-color: #564942;
+  color: #ffffff;
+}
+/* Splitter */
+.k-splitbar {
+  background-color: #e3e3e3;
+}
+/* Upload */
+.k-progress-status {
+  border-color: #f0713a transparent;
+}
+/* ImageBrowser */
+.k-tile {
+  border-color: #ffffff;
+  background-image: url('Kendo/gradient.png');
+}
+.k-tiles li.k-state-hover {
+  border-color: #f0713a;
+}
+.k-tiles li.k-state-selected {
+  border-color: #564942;
+}
+.k-tile .k-folder {
+  background-image: url('Kendo/imagebrowser.png');
+}
+/* Shadows */
+.k-popup,
+.k-menu .k-group,
+.k-grid .k-filter-options,
+.k-time-popup,
+.k-datepicker-calendar,
+.k-autocomplete:hover,
+.k-autocomplete.k-state-focused,
+.k-dropdown-wrap.k-state-focused,
+.k-dropdown-wrap.k-state-hover,
+.k-dropdown-wrap.k-state-active,
+.k-picker-wrap.k-state-focused,
+.k-picker-wrap.k-state-hover,
+.k-picker-wrap.k-state-active,
+.k-imagebrowser .k-image {
+  box-shadow: 2px 2px 2px 0 #aaaaaa;
+  -webkit-box-shadow: 2px 2px 2px 0 #aaaaaa;
+}
+.k-window {
+  border-color: #aaaaaa;
+  box-shadow: 1px 1px 7px 1px #aaaaaa;
+  -webkit-box-shadow: 1px 1px 7px 1px #aaaaaa;
+}
+.k-autocomplete .k-input, .k-combobox .k-input, .k-picker-wrap .k-input {
+  box-shadow: inset 0 0 1px 1px #dddddd;
+  -webkit-box-shadow: inset 0 0 1px 1px #dddddd;
+}
