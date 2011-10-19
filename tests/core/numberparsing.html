@@ -157,6 +157,27 @@
 
                 equal(parseF(value), -0.123432);
             });
+
+            test("parseInt should return int number", function() {
+
+                var value = "1,232.12";
+
+                equal(kendo.parseInt(value), 1232);
+            });
+
+            test("parse should call Globalize if it available", function() {
+                var called = false;
+
+                window.Globalize = {};
+                window.Globalize.parseFloat = function() {
+                    called = true;
+                }
+
+                parseF("1");
+
+                ok(called);
+                window.Globalized = null;
+            });
         </script>
     </body>
 </html>
