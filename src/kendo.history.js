@@ -16,10 +16,11 @@
 
             var that = this;
 
-            that._pushStateRequested = !!options["pushState"];
+            that._pushStateRequested = !!options.pushState;
             that._pushState = that._pushStateRequested && that._pushStateSupported();
-            that.current = "";
-            that.root = options["root"] || "/";
+            that.current = this._currentLocation();
+            that.root = options.root || "/";
+            that._interval = 0;
 
 
             if (that._normalizeUrl()) {
@@ -27,7 +28,16 @@
             }
 
             that._listenToLocationChange();
-            that._checkUrl();
+            if (!options.silent) {
+                that._checkUrl();
+            }
+        },
+
+        stop: function() {
+            $(window).unbind(".kendo");
+            this.unbind("change");
+            this.current = "/";
+            clearInterval(this._interval);
         },
 
         _normalizeUrl: function() {
@@ -52,11 +62,11 @@
             var that = this, _checkUrlProxy = $.proxy(that._checkUrl, that);
 
             if (this._pushState) {
-                $(window).bind("popstate", _checkUrlProxy);
+                $(window).bind("popstate.kendo", _checkUrlProxy);
             } else if (hashChangeSupported) {
-                $(window).bind("hashchange", _checkUrlProxy);
+                $(window).bind("hashchange.kendo", _checkUrlProxy);
             } else {
-                setInterval(_checkUrlProxy, _checkUrlInterval);
+                that._interval = setInterval(_checkUrlProxy, _checkUrlInterval);
             }
         },
 

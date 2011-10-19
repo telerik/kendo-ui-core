@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.application tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.application.js"></script>
+        <script src="../jquery.mockjax.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.application Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+
+        <script>
+            var application;
+
+            QUnit.config.testTimeout = 500;
+
+            module("kendo.Application", {
+                setup: function() {
+                    location.hash = '';
+                    $.mockjaxSettings.responseTime = 0;
+                    $.mockjaxSettings.contentType = "text/html";
+                },
+
+                teardown: function() {
+                    $.mockjaxClear();
+                    kendo.history.stop();
+                }
+            });
+
+            function setup(html) {
+                $("#qunit-fixture").html(html);
+                application = new kendo.Application($("#qunit-fixture"));
+                application.start();
+            }
+
+            test("switches to local view", function() {
+                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+                application.changeView("#page2");
+                ok(!$("#page1").is(":visible"), "First page is hidden");
+                ok($("#page2").is(":visible"), "Second page is visible");
+            });
+
+            asyncTest("switches to remote view", function() {
+                expect(3);
+
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<body><div data-kendo-role="view" id="page2">Page 2</div></body>'
+                });
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+
+                application.bind("viewChange", function() {
+                    start();
+                    ok(!$("#page1").is(":visible"), "First page is hidden");
+                    ok($("#page2").is(":visible"), "Second page is present");
+                    equal($("#qunit-fixture").has("#page2").length, 1, "Remote view is inserted in the application DOM element");
+                });
+
+                application.changeView("page2.html");
+            });
+
+            asyncTest("reuses an already loaded remote page", function() {
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                });
+
+                application.changeView("page2.html");
+
+                application.bind("viewChange", function() {
+                    application.unbind("viewChange");
+
+                    application.changeView("#page1");
+
+                    $.mockjaxClear();
+
+                    $.mockjax({
+                        url: "page2.html",
+                        response: function() {
+                            start();
+                            ok(false, "Does not make second ajax request");
+                        }
+                    });
+
+                    application.bind("viewChange", function() {
+                        start();
+                        ok($("#page2").is(":visible"), "Second page is present");
+                    });
+
+                    application.changeView("page2.html");
+                });
+            });
+
+            asyncTest("switches to partial remote view", function() {
+                expect(2);
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                });
+
+                application.bind("viewChange", function() {
+                    start();
+                    ok(!$("#page1").is(":visible"), "First page is hidden");
+                    ok($("#page2").is(":visible"), "Second page is present");
+                });
+
+                application.changeView("page2.html");
+            });
+
+        </script>
+    </body>
+</html>
