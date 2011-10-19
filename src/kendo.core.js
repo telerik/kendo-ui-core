@@ -4,7 +4,6 @@
      * @namespace This object contains all code introduced by the Kendo project, plus helper functions that are used across all components.
      */
     var kendo = window.kendo = window.kendo || {},
-        globalize = window.Globalize,
         extend = $.extend,
         each = $.each,
         proxy = $.proxy,
@@ -837,6 +836,7 @@
     }
 
     function toString(value, fmt) {
+        var globalize = window.Globalize;
         if (globalize) {
             return globalize.format(value, fmt);
         }
@@ -1044,12 +1044,18 @@
             return value;
         }
 
+        var idx = 0,
+            date = null,
+            globalize = window.Globalize,
+            length;
+
         if (globalize) {
             return globalize.parseDate(value, format, culture);
         }
 
-        format = $.isArray(format) ? format : [format];
         culture = culture || kendo.culture();
+        format = $.isArray(format) ? format : [format];
+        length = format.length;
 
         if (typeof culture === STRING) {
             kendo.culture(culture);
@@ -1089,6 +1095,7 @@
            return value;
         }
 
+        var globalize = window.Globalize;
         if (globalize) {
             return globalize.parseFloat(value, culture);
         }
