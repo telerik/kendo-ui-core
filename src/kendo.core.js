@@ -4,6 +4,7 @@
      * @namespace This object contains all code introduced by the Kendo project, plus helper functions that are used across all components.
      */
     var kendo = window.kendo = window.kendo || {},
+        globalize = window.Globalize,
         extend = $.extend,
         each = $.each,
         proxy = $.proxy,
@@ -836,7 +837,6 @@
     }
 
     function toString(value, fmt) {
-        var globalize = window.Globalize;
         if (globalize) {
             return globalize.format(value, fmt);
         }
@@ -1044,6 +1044,10 @@
             return value;
         }
 
+        if (globalize) {
+            return globalize.parseDate(value, format, culture);
+        }
+
         format = $.isArray(format) ? format : [format];
         culture = culture || kendo.culture();
 
@@ -1068,43 +1072,54 @@
 
     var nonBreakingSpaceRegExp = /\u00A0/g;
 
+    kendo.parseInt = function(value, culture) {
+        var result = kendo.parseFloat(value, culture);
+        if (result) {
+            result = result | 0;
+        }
+        return result;
+    }
+
     kendo.parseFloat = function(value, culture) {
+        if (!value) {
+           return null;
+        }
+
+        if (typeof value === NUMBER) {
+           return value;
+        }
+
+        if (globalize) {
+            return globalize.parseFloat(value, culture);
+        }
+
+        value = value.toString();
         culture = kendo.cultures[culture] || kendo.cultures.current;
 
-        var numberFormat = culture.numberFormat,
-            currency = numberFormat.currency,
-            percent = numberFormat.percent,
-            currencySymbol = currency.symbol,
+        var number = culture.numberFormat,
+            percent = number.percent,
+            currency = number.currency,
+            symbol = currency.symbol,
             percentSymbol = percent.symbol,
-            POINT = ".",
-            COMMA = ",",
             negative = value.indexOf("-") > -1,
-            separator,
-            pattern;
+            parts;
 
-        if (value.indexOf(currencySymbol) > -1) {
-            pattern = currency.pattern[0].replace("$", currencySymbol).split("n");
-            if (value.indexOf(pattern[0]) > -1 && value.indexOf(pattern[1]) > -1) {
-                value = value.replace(pattern[0], "").replace(pattern[1]);
+        if (value.indexOf(symbol) > -1) {
+            number = currency;
+            parts = number.pattern[0].replace("$", symbol).split("n");
+            if (value.indexOf(parts[0]) > -1 && value.indexOf(parts[1]) > -1) {
+                value = value.replace(parts[0], "").replace(parts[1], "");
                 negative = true;
             }
-            separator = currency[COMMA].replace(nonBreakingSpaceRegExp, " ");
-            value = value.replace(currencySymbol, "")
-                         .replace("-", "")
-                         .split(separator).join("")
-                         .replace(currency[POINT], POINT);
         } else if (value.indexOf(percentSymbol) > -1) {
-            separator = percent[COMMA].replace(nonBreakingSpaceRegExp, " ");
-            value = value.replace(percentSymbol, "")
-                         .replace("-", "")
-                         .split(separator).join("")
-                         .replace(percent[POINT], POINT);
-        } else {
-            separator = numberFormat[COMMA].replace(nonBreakingSpaceRegExp, " ");
-            value = value.replace("-", "")
-                         .split(separator).join("")
-                         .replace(culture.numberFormat[POINT], POINT);
+            number = percent;
+            symbol = percentSymbol;
         }
+
+        value = value.replace("-", "")
+                     .replace(symbol, "")
+                     .split(number[","].replace(nonBreakingSpaceRegExp, " ")).join("")
+                     .replace(number["."], ".");
 
         value = parseFloat(value);
 

@@ -49,10 +49,26 @@
 
             kendo.cultures["custom"] = customCulture;
 
+            test("Parse number and return number", function() {
+                var value = 12.12;
+
+                equal(parseF(value), 12.12);
+            });
+
             test("Parse string and return number", function() {
                 var value = "12.12";
 
                 equal(parseF(value), 12.12);
+            });
+
+            test("Return null if incorrect value", function() {
+                var value = {};
+
+                equal(parseF(value), null);
+            });
+
+            test("Return null no value", function() {
+                equal(parseF(), null);
             });
 
             test("Return null if incorrect number", function() {
