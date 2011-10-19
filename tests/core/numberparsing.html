@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Number Parsing</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Number Parsing</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var parseF = kendo.parseFloat,
+            customCulture = {
+                name: "bg-BG",
+                numberFormat: {
+                    pattern: ["-n"],
+                    decimals: 2,
+                    ",": " ",
+                    ".": ",",
+                    groupSize: [3],
+                    percent: {
+                        pattern: ["-n %","n %"],
+                        decimals: 2,
+                        ",": ".",
+                        ".": ",",
+                        groupSize: [3],
+                        symbol: "%"
+                    },
+                    currency: {
+                        pattern: ["($n)","n $"],
+                        decimals: 2,
+                        ",": ".",
+                        ".": ",",
+                        groupSize: [3],
+                        symbol: "lv"
+                    }
+                }
+            };
+
+            kendo.cultures["custom"] = customCulture;
+
+            test("Parse number and return number", function() {
+                var value = 12.12;
+
+                equal(parseF(value), 12.12);
+            });
+
+            test("Parse string and return number", function() {
+                var value = "12.12";
+
+                equal(parseF(value), 12.12);
+            });
+
+            test("Return null if incorrect value", function() {
+                var value = {};
+
+                equal(parseF(value), null);
+            });
+
+            test("Return null no value", function() {
+                equal(parseF(), null);
+            });
+
+            test("Return null if incorrect number", function() {
+                var value = "not a number";
+
+                equal(parseF(value), null);
+            });
+
+            test("parse globalized float number", function() {
+                var value = "12,13",
+                    cultureSelector = "bg-BG";
+
+                equal(parseF(value, cultureSelector), 12.13);
+            });
+
+            test("parse globalized number with group separators", function() {
+                var value = "1 123 112,13",
+                    cultureSelector = "bg-BG";
+
+                equal(parseF("1,123.12", "en-US"), 1123.12);
+                equal(parseF(value, cultureSelector), 1123112.13);
+            });
+
+            test("parse should parse currency number", function() {
+                var value = "$ 12";
+
+                equal(parseF(value, "en-US"), 12);
+            });
+
+            test("parse should parse percent number", function() {
+                var value = "% 12";
+
+                equal(parseF(value, "en-US"), 12);
+            });
+
+            test("parseFloat should use decimal separator from currency object", function() {
+                var currency = customCulture.numberFormat.currency,
+                    value = "lv 1" + currency[","] + "123" + currency["."] + "12",
+                    expected = 1123.12;
+
+                equal(parseF(value, "custom"), expected);
+            });
+
+            test("parse should use decimal separator from percent object", function() {
+                var percent = customCulture.numberFormat.percent,
+                    value = "% 1" + percent[","] + "123" + percent["."] + "12",
+                    expected = 1123.12;
+
+                equal(parseF(value, "custom"), expected);
+            });
+
+            test("parseF should parse negative number", function() {
+                var value = "-12,123.322";
+
+                equal(parseF(value), -12123.322);
+            });
+
+            test("parseF should parse negative currency number", function() {
+                var value = kendo.culture().numberFormat.currency.pattern[0].replace("n", "1,123.23");
+
+                equal(parseF(value), -1123.23);
+            });
+
+            test("parseF should parse negative currency number (not en-US) ", function() {
+                var value = kendo.culture().numberFormat.currency.pattern[0].replace("n", "1.123,23");
+
+                value = value.replace("$", customCulture.numberFormat.currency.symbol);
+
+                equal(parseF(value, "custom"), -1123.23);
+            });
+
+            test("parseF should parse negative percent number", function() {
+                var value = kendo.culture().numberFormat.percent.pattern[0].replace("n", "1,123.23");
+
+                equal(parseF(value), -1123.23);
+            });
+
+            test("parse exponential number", function() {
+                var value = "1.23432e+5";
+
+                equal(parseF(value), 123432);
+            });
+
+            test("parse negative exponential number", function() {
+                var value = "-1.23432e-1";
+
+                equal(parseF(value), -0.123432);
+            });
+
+            test("parseInt should return int number", function() {
+
+                var value = "1,232.12";
+
+                equal(kendo.parseInt(value), 1232);
+            });
+
+            test("parse should call Globalize if it available", function() {
+                var called = false;
+
+                window.Globalize = {};
+                window.Globalize.parseFloat = function() {
+                    called = true;
+                }
+
+                parseF("1");
+
+                ok(called);
+                window.Globalized = null;
+            });
+        </script>
+    </body>
+</html>

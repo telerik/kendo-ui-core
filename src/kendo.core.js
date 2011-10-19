@@ -679,7 +679,8 @@
             return number;
         }
 
-        /* custom formatting */
+        //custom formatting
+        //
         //separate format by sections.
         format = format.split(";");
         if (negative && format[1]) {
@@ -1043,8 +1044,18 @@
             return value;
         }
 
-        format = $.isArray(format) ? format : [format];
+        var idx = 0,
+            date = null,
+            globalize = window.Globalize,
+            length;
+
+        if (globalize) {
+            return globalize.parseDate(value, format, culture);
+        }
+
         culture = culture || kendo.culture();
+        format = $.isArray(format) ? format : [format];
+        length = format.length;
 
         if (typeof culture === STRING) {
             kendo.culture(culture);
@@ -1063,6 +1074,69 @@
         }
 
         return date;
+    }
+
+    var nonBreakingSpaceRegExp = /\u00A0/g;
+
+    kendo.parseInt = function(value, culture) {
+        var result = kendo.parseFloat(value, culture);
+        if (result) {
+            result = result | 0;
+        }
+        return result;
+    }
+
+    kendo.parseFloat = function(value, culture) {
+        if (!value) {
+           return null;
+        }
+
+        if (typeof value === NUMBER) {
+           return value;
+        }
+
+        var globalize = window.Globalize;
+        if (globalize) {
+            return globalize.parseFloat(value, culture);
+        }
+
+        value = value.toString();
+        culture = kendo.cultures[culture] || kendo.cultures.current;
+
+        var number = culture.numberFormat,
+            percent = number.percent,
+            currency = number.currency,
+            symbol = currency.symbol,
+            percentSymbol = percent.symbol,
+            negative = value.indexOf("-") > -1,
+            parts;
+
+        if (value.indexOf(symbol) > -1) {
+            number = currency;
+            parts = number.pattern[0].replace("$", symbol).split("n");
+            if (value.indexOf(parts[0]) > -1 && value.indexOf(parts[1]) > -1) {
+                value = value.replace(parts[0], "").replace(parts[1], "");
+                negative = true;
+            }
+        } else if (value.indexOf(percentSymbol) > -1) {
+            number = percent;
+            symbol = percentSymbol;
+        }
+
+        value = value.replace("-", "")
+                     .replace(symbol, "")
+                     .split(number[","].replace(nonBreakingSpaceRegExp, " ")).join("")
+                     .replace(number["."], ".");
+
+        value = parseFloat(value);
+
+        if (isNaN(value)) {
+            value = null;
+        } else if (negative) {
+            value *= -1;
+        }
+
+        return value;
     }
 })();
 
