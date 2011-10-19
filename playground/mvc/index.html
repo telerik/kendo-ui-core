@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kendo MVC Example</title>
+        <link rel="stylesheet" href="/styles/kendo.common.css" />
+        <link rel="stylesheet" href="/styles/kendo.blueopal.css" />
+        <link rel="stylesheet" href="/playground/mvc/style.css" />
+    </head>
+
+    <body>
+        <header> <h1>Kendo MVC Example - Expense.app</h1> </header>
+        <div id="content"></div>
+
+        <footer> Copyright &copy; 2011 Telerik Inc. All rights reserved.  </footer>
+
+        <script id="expenses-template" type="text/x-jquery-template">
+            <a href="/expenses/new" data-kendo-type="mvc-link" class="button">new expense</a>
+
+            <div id="grid">
+            </div>
+        </script>
+
+        <script id="expense-template" type="text/x-jquery-template">
+            <h2>Expense: ${expense.name}</h2>
+            <dl>
+                <dt>Category:</dt>
+                <dd>${expense.category}</dd>
+                <dt>Amount:</dt>
+                <dd>$${expense.amount}</dd>
+            </dl>
+
+            <div id="buttons">
+                <a href="/" data-kendo-type="mvc-link">&laquo; back</a>
+            </div>
+        </script>
+
+        <script src="/src/jquery.js"></script>
+        <script src="/src/kendo.core.js"></script>
+        <script src="/src/kendo.model.js"></script>
+        <script src="/src/kendo.data.js"></script>
+        <script src="/src/kendo.grid.js"></script>
+        <script src="/src/kendo.history.js"></script>
+        <script src="/playground/mvc/kendo.application.js"></script>
+        <script src="/playground/mvc/expenses.js"></script>
+    </body>
+</html>

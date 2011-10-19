@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.History tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.History Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="iframe-container">
+
+        </div>
+
+        <script>
+            var pushStateSupported = window.history.pushState;
+            var win, hist, initial, win, _history, root, loc;
+
+
+            QUnit.testStart = function() {
+                QUnit.stop();
+                $("#iframe-container").html('<iframe src="sandbox/"></iframe>');
+                win = window.frames[0].window;
+
+                $(win).one('load', function() {
+                    hist = win.hist,
+                    loc = win.location,
+                    initial = loc.href.replace(/#.*$/, ''),
+                    _history = win.history;
+                    QUnit.start();
+                });
+            }
+
+            function url(expected) {
+                equal(loc.href, expected);
+            }
+
+            function startWithHash() {
+                hist.start({root: "/tests/history/sandbox/"});
+            }
+            function startWithPushState() {
+                hist.start({pushState: true, root: "/tests/history/sandbox/"});
+            }
+
+            module("History navigation");
+
+            test("uses hashbang by default", function() {
+                startWithHash();
+                hist.navigate("/new-location");
+                url(initial + "#/new-location");
+            });
+
+            test("uses pushState if possible and asked to", function() {
+                startWithPushState();
+                hist.navigate("/new-location");
+                if (!!pushStateSupported) {
+                    url(initial + "new-location");
+                }
+                else {
+                    url(initial + "#/new-location");
+                }
+            });
+
+            test("does not pushState if identical", function() {
+                startWithPushState();
+                hist.navigate("/new-location");
+                var length = history.length;
+                hist.navigate("/new-location");
+                equal(history.length, length);
+            });
+
+            asyncTest("transforms pushState to non-push state when needed", function() {
+                expect(1);
+
+                if (!pushStateSupported) {
+                    start();
+                    ok(true);
+                    return;
+                }
+
+                startWithPushState();
+
+                hist.navigate("/new-location");
+
+                var currentLocation = loc.href;
+
+                var check = function() {
+                    var newLocation = frames[0].window.location.href;
+                    if (newLocation != currentLocation) {
+                        start();
+                        equal(newLocation, initial + "#/new-location");
+                    } else {
+                      setTimeout(check, 100);
+                    }
+                }
+
+                hist._pushStateSupported = function() { return false; }
+                startWithPushState();
+                check();
+            });
+
+            asyncTest("transforms hash to push state on start", function() {
+                expect(1);
+
+                if (!pushStateSupported) {
+                    start();
+                    ok(true);
+                    return;
+                }
+
+                startWithHash();
+                hist.navigate("/new-location");
+
+                var currentLocation = loc.href;
+
+                var check = function() {
+                    var newLocation = frames[0].window.location.href;
+                    if (newLocation != currentLocation) {
+                        start();
+                        equal(newLocation, initial + "new-location");
+                    } else {
+                      setTimeout(check, 100);
+                    }
+                }
+
+                startWithPushState();
+                check();
+            });
+
+            test("allows setting of root", function() {
+                if (!pushStateSupported) {
+                    return;
+                }
+                hist.start({root: "/tests/history/sandbox/subdir/", pushState: true});
+                hist.navigate('/new-location');
+                url(initial + "subdir/new-location");
+            });
+
+            test("triggers events when history changed", function() {
+                expect(1);
+                startWithHash();
+
+                hist.change(function(e) {
+                    equal("/new-location", e.location);
+                });
+
+                hist.navigate("/new-location");
+            });
+
+            asyncTest("listens for outside url changes (hashChange)", function() {
+                expect(1);
+                startWithHash();
+
+                hist.change(function(e) {
+                    start();
+                    equal("/outside-location", e.location);
+                });
+
+                win.location.hash = "/outside-location";
+            });
+        </script>
+    </body>
+</html>
