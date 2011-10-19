@@ -124,6 +124,23 @@
                 application.changeView("page2.html");
             });
 
+            asyncTest("deals with various newline characters when loading remote view", function() {
+                expect(1);
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<html><head></head><body><div id="page2" data-kendo-role="view">View\n\u000a\u000a\u000d\u2028\u2029</div></body>\r\n</html>'
+                });
+
+                application.bind("viewChange", function() {
+                    start();
+                    ok($("#page2").is(":visible"), "Second page is loaded");
+                });
+
+                application.changeView("page2.html");
+            });
+
         </script>
     </body>
 </html>
