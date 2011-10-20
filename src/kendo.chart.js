@@ -3227,7 +3227,7 @@
                 segment = segments[i];
 
                 sector = segment.sector;
-                sector.r = minWidth / 2 - padding;
+                sector.r = math.max(minWidth / 2 - padding, 0);
                 sector.c = new Point2D(
                     sector.r + newBox.x1 + padding,
                     sector.r + newBox.y1 + padding
