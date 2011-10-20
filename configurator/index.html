@@ -399,10 +399,12 @@
             }
 
             function updateInfo() {
-                console.log(resolver.scripts);
+                var scripts = $.map(resolver.scripts, function(script) {
+                    return script.match(/kendo\.(.*)\.min\.js/)[1];
+                });
 
                 var params = {
-                    c: $.map(resolver.scripts, function(script) { return script.split(".")[1]; }),
+                    c: scripts,
                     v: VERSION,
                     min: "1"
                 };

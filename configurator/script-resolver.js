@@ -47,7 +47,7 @@ ScriptResolver.prototype = {
             dependancy,
             circularDependancy;
 
-        seen.push(component.id);
+        resolver._register(seen, component.id);
         depends.forEach(function(dependancyId) {
             circularDependancy =
                 !inArray(resolved, dependancyId) &&
@@ -71,15 +71,13 @@ ScriptResolver.prototype = {
             resolver._resolve(dependancy);
         });
 
-        resolver._registerScript(component.source);
-        resolver.resolved.push(component.id);
+        resolver._register(resolver.scripts, component.source);
+        resolver._register(resolved, component.id);
     },
 
-    _registerScript: function(source) {
-        var scripts = this.scripts;
-
-        if (source && scripts.indexOf(source) === -1) {
-            scripts.push(source);
+    _register: function(registry, entry) {
+        if (entry && registry.indexOf(entry) === -1) {
+            registry.push(entry);
         }
     },
 

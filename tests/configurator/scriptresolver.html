@@ -142,6 +142,29 @@
                 });
             });
 
+            test("registers resolved components", function() {
+                createResolver([{
+                    id: "a",
+                    source: "a.js"
+                }]);
+
+                resolver.addComponent("a");
+
+                same(resolver.resolved, ["a"]);
+            });
+
+            test("does not register resolved component twice", function() {
+                createResolver([{
+                    id: "a",
+                    source: "a.js"
+                }]);
+
+                resolver.addComponent("a");
+                resolver.addComponent("a");
+
+                same(resolver.resolved, ["a"]);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.configurator</h1>
