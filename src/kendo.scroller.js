@@ -133,22 +133,23 @@
         },
 
         options: {
-                acceleration: 10,
-                velocity: .5,
-                pagingVelocity: 5,
-                friction: .98,
-                bounceAcceleration: .1,
-                bounceDeceleration: .1,
-                bounceLimit: 0,
-                bounceStop: 100,
-                framerate: 30,
-                zoomFactor: 1,
+            name: "Scroller",
+            acceleration: 10,
+            velocity: .5,
+            pagingVelocity: 5,
+            friction: .98,
+            bounceAcceleration: .1,
+            bounceDeceleration: .1,
+            bounceLimit: 0,
+            bounceStop: 100,
+            framerate: 30,
+            zoomFactor: 1,
 
-                useOnDesktop: true,
-                showArrows: true,
-                scrollbarOpacity: .7,
-                scrollArrowsOpacity: .84
-            },
+            useOnDesktop: true,
+            showArrows: true,
+            scrollbarOpacity: .7,
+            scrollArrowsOpacity: .84
+        },
 
         _create: function () {
             var that = this,
@@ -733,5 +734,5 @@
         event.target.dispatchEvent(evt);
     }
 
-    kendo.ui.plugin("Scroller", Scroller);
+    kendo.ui.plugin(Scroller);
 })(jQuery);

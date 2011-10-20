@@ -34,6 +34,7 @@
         },
 
         options: {
+            name: "Resizable",
             orientation: HORIZONTAL
         },
         _max: function(e) {
@@ -104,6 +105,6 @@
         }
     });
 
-    kendo.ui.plugin("Resizable", Resizable);
+    kendo.ui.plugin(Resizable);
 
 })(jQuery);

@@ -1735,19 +1735,20 @@
          * Also triggers the init event, when the widget has been created.
          * @name kendo.ui.plugin
          * @function
-         * @param {String} name The name of the widget.
          * @param {kendo.ui.Widget} widget The widget function.
          * @example
          * function TextBox(element, options);
-         * kendo.ui.plugin("TextBox", TextBox);
+         * kendo.ui.plugin(TextBox);
          *
          * // initialize a new TextBox for each input, with the given options object.
          * $("input").kendoTextBox({ });
          * // get the TextBox object and call the value API method
          * $("input").data("kendoTextBox").value();
          */
-        plugin: function(name, widget) {
+        plugin: function(widget) {
             // expose it in the kendo.ui namespace
+            var name = widget.fn.options.name;
+
             kendo.ui[name] = widget;
 
             name = "kendo" + name;

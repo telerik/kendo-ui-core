@@ -196,6 +196,7 @@
         },
 
         options: {
+            name: "DropDownList",
             enable: true,
             index: 0,
             autoBind: true,
@@ -524,5 +525,5 @@
         }
     });
 
-    ui.plugin("DropDownList", DropDownList);
+    ui.plugin(DropDownList);
 })(jQuery);

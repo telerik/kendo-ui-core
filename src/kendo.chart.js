@@ -122,6 +122,7 @@
         },
 
         options: {
+            name: "Chart",
             chartArea: {},
             title: {
                 visible: true
@@ -4984,7 +4985,7 @@
 
     // Exports ================================================================
 
-    kendo.ui.plugin("Chart", Chart);
+    kendo.ui.plugin(Chart);
 
     deepExtend(Chart, {
         COORD_PRECISION: COORD_PRECISION,
