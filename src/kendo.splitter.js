@@ -118,7 +118,7 @@
         ui = kendo.ui,
         extend = $.extend,
         proxy = $.proxy,
-        Component = ui.Component,
+        Widget = ui.Widget,
         pxUnitsRegex = /^\d+(\.\d+)?px$/i,
         percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
         EXPAND = "expand",
@@ -162,11 +162,11 @@
         };
     }
 
-    var Splitter = Component.extend(/** @lends kendo.ui.Splitter.prototype */ {
+    var Splitter = Widget.extend(/** @lends kendo.ui.Splitter.prototype */ {
         /**
          * Creates a Splitter instance.
          * @constructs
-         * @extends kendo.ui.Component
+         * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {String} [orientation] <horizontal> Specifies the orientation of the splitter.
@@ -234,7 +234,7 @@
                     that.trigger(RESIZE);
                 };
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
             splitbarSelector = ".k-splitbar-draggable-" + that.orientation;

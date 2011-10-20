@@ -7,13 +7,13 @@
         FIELD = "field",
         DESC = "desc",
         TLINK = ".k-link",
-        Component = kendo.ui.Component;
+        Widget = kendo.ui.Widget;
 
-    var Sortable = Component.extend({
+    var Sortable = Widget.extend({
         init: function(element, options) {
             var that = this, link;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             that.dataSource = that.options.dataSource.bind("change", proxy(that.refresh, that));
             link = that.element.find(TLINK);

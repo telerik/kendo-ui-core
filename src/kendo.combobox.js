@@ -78,7 +78,7 @@
     *   <p>
     *       ComboBox leverages Kendo UI high-performance Templates to give you complete control
     *       over item rendering. For a complete overview of Kendo UI Template capabilities and syntax,
-    *       please review the <a href="../templates/index.html" title="Kendo UI Template">Kendo UI Template</a> component demos and documentation.
+    *       please review the <a href="../templates/index.html" title="Kendo UI Template">Kendo UI Template</a> demos and documentation.
     *   </p>
     * @exampleTitle Basic item template customization
     * @example
@@ -139,7 +139,7 @@
         * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the ComboBox will be bound to.
         * @option {Boolean} [enable] <true> Controls whether the ComboBox should be initially enabled.
         * @option {Number} [index] <-1> Defines the initial selected item.
-        * @option {Boolean} [autoBind] <true> Controls whether to bind the component on initialization.
+        * @option {Boolean} [autoBind] <true> Controls whether to bind the widget on initialization.
         * @option {Boolean} [highlightFirst] <true> Controls whether the first item will be automatically highlighted.
         * @option {Boolean} [suggest] <false> Controls whether the ComboBox should automatically auto-type the rest of text.
         * @option {Number} [delay] <200> Specifies the delay in ms after which the ComboBox will start filtering dataSource.
@@ -254,7 +254,7 @@
         */
 
         /**
-        * Enables/disables the combobox component
+        * Enables/disables the combobox widget
         * @param {Boolean} enable Desired state
         */
         enable: function(enable) {

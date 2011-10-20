@@ -5,7 +5,7 @@
         extend = $.extend,
         browser = $.browser,
         proxy = $.proxy,
-        Component = ui.Component,
+        Widget = ui.Widget,
         events = [ "showArrow" ],
         touch = support.touch || support.pointers,
         hasHW3D = support.hasHW3D,
@@ -84,13 +84,13 @@
                                      };
     }
 
-    var Scroller = Component.extend({
+    var Scroller = Widget.extend({
         init: function (element, options) {
             var that = this;
 
             if (options && options !== false && options.useOnDesktop === false) return false; // Stop the initialization if on desktop and disabled.
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             options = that.options;
 
@@ -733,5 +733,5 @@
         event.target.dispatchEvent(evt);
     }
 
-    kendo.ui.plugin("Scroller", Scroller, Component);
+    kendo.ui.plugin("Scroller", Scroller);
 })(jQuery);

@@ -4,8 +4,8 @@
      *
      * @section
      *  <p>
-     *      The TabStrip widget displays a collection of tabs with associated tab content. 
-     *      TabStrips are composed of an HTML unordered list of items, which represent the tabs, 
+     *      The TabStrip widget displays a collection of tabs with associated tab content.
+     *      TabStrips are composed of an HTML unordered list of items, which represent the tabs,
      *      and a collection of HTML divs, which define the tab content.
      *  </p>
      *  <h3>Getting Started</h3>
@@ -14,8 +14,8 @@
      * @example
      *  <div id="tabstrip">
      *      <ul>
-	 *          <li>First Tab</li>
-	 *          <li>Second Tab</li>
+     *          <li>First Tab</li>
+     *          <li>Second Tab</li>
      *      </ul>
      *      <div>First Tab Content</div>
      *      <div>Second Tab Content</div>
@@ -30,8 +30,8 @@
      *  </p>
      *  <h3>Loading TabStrip content with Ajax</h3>
      *  <p>
-     *      While any valid technique for loading Ajax content can be used, TabStrip provides 
-     *      built-in support for asynchronously loading content from URLs. These URLs should 
+     *      While any valid technique for loading Ajax content can be used, TabStrip provides
+     *      built-in support for asynchronously loading content from URLs. These URLs should
      *      return HTML fragments that can be loaded in a TabStrip content area.
      *  </p>
      * @exampleTitle Loading Tab content asynchronously
@@ -39,31 +39,31 @@
      *  <!-- Define the TabStrip HTML -->
      *  <div id="tabstrip">
      *      <ul>
-	 *          <li>First Tab</li>
-	 *          <li>Second Tab</li>
+     *          <li>First Tab</li>
+     *          <li>Second Tab</li>
      *      </ul>
      *      <div> </div>
      *      <div> </div>
      *  </div>
-     * @exampleTitle 
+     * @exampleTitle
      * @example
      *  //Initialize TabStrip and configure one tab with async content loading
      *  $(document).ready(function(){
-	 *      $("#tabstrip").kendoTabStrip({
-	 *        contentUrls: [null, "html-content-snippet.html"]
-	 *      });
+     *      $("#tabstrip").kendoTabStrip({
+     *        contentUrls: [null, "html-content-snippet.html"]
+     *      });
      *  });
      *
      * @section
      *  <h3>Dynamically configure TabStrip tabs</h3>
      *  <p>
-     *      The TabStrip API provides several methods for dynamically adding or removing Tabs. To add tabs, 
-     *      provide the new item as a JSON object along with a reference item that will be used to determine 
+     *      The TabStrip API provides several methods for dynamically adding or removing Tabs. To add tabs,
+     *      provide the new item as a JSON object along with a reference item that will be used to determine
      *      the placement in the TabStrip.
      *  <p>
      *  <br/>
      *  <p>
-     *      A reference item is simply a target Tab HTML element that already exists in the TabStrip. Any valid 
+     *      A reference item is simply a target Tab HTML element that already exists in the TabStrip. Any valid
      *      jQuery selector can be used to obtain a reference to the target item. For examples, see the <a href="../tabstrip/api.html" title="TabStrip  API demos">TabStrip  API demos</a>.
      *  </p>
      *  <br/>
@@ -75,17 +75,17 @@
      *  var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
      *
      *  tabstrip.insertAfter(
-	 *      { text: "New Tab" },
-	 *      tabstrip.tabGroup.children("li:last")
+     *      { text: "New Tab" },
+     *      tabstrip.tabGroup.children("li:last")
      *  );
      * @section
      *  <h3>Selecting a Tab on Initial Load</h3>
      *  <p>
      *      A common desire with TabStrips is to select a tab and display its associated content on initial load. There are two ways to accomplish this with TabStrip:
      *  </p>
-     *  <ol>                
+     *  <ol>
      *      <li>Manually add the "k-state-active" class to the Tab that should be selected</li>
-     *      <li>Use the TabStrip API to target and select a Tab</li>                
+     *      <li>Use the TabStrip API to target and select a Tab</li>
      *  </ol>
      *  <p>
      *      Both approaches produce the same end result. The first approach requires no additional JavaScript, but does require a small amount of HTML configuration.
@@ -95,8 +95,8 @@
      * @example
      *  <div id="tabstrip">
      *      <ul>
-	 *          <li class="k-state-active">First Tab</li>
-	 *          <li>Second Tab</li>
+     *          <li class="k-state-active">First Tab</li>
+     *          <li>Second Tab</li>
      *      </ul>
      *      <div> </div>
      *      <div> </div>
@@ -105,14 +105,14 @@
      * @example
      *  //Initialize the TabStrip
      *  $(document).ready(function(){
-	 *      $("#tabstrip").kendoTabStrip();
+     *      $("#tabstrip").kendoTabStrip();
      *  });
      * @exampleTitle Selecting a default tab using the TabStrip API
      * @example
      *  <div id="tabstrip">
      *      <ul>
-	 *          <li>First Tab</li>
-	 *          <li>Second Tab</li>
+     *          <li>First Tab</li>
+     *          <li>Second Tab</li>
      *      </ul>
      *      <div> </div>
      *      <div> </div>
@@ -122,8 +122,8 @@
      * @example
      *  //Initialize the TabStrip and select first tab
      *  $(document).ready(function(){
-	 *      var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
-	 *      tabstrip.select(tabstrip.tabGroup.children("li:first"));
+     *      var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+     *      tabstrip.select(tabstrip.tabGroup.children("li:first"));
      *  });
      */
     var kendo = window.kendo,
@@ -133,7 +133,7 @@
         trim = $.trim,
         extend = $.extend,
         template = kendo.template,
-        Component = ui.Component,
+        Widget = ui.Widget,
         excludedNodesRegExp = /^(a|div)$/i,
         IMG = "img",
         HREF = "href",
@@ -262,15 +262,15 @@
         tabs.filter(":last-child").addClass(LAST);
     }
 
-    var TabStrip = Component.extend({/** @lends kendo.ui.TabStrip.prototype */
+    var TabStrip = Widget.extend({/** @lends kendo.ui.TabStrip.prototype */
         /**
          * Creates a TabStrip instance.
          * @constructs
-         * @extends kendo.ui.Component
-         * @class TabStrip UI component
+         * @extends kendo.ui.Widget
+         * @class TabStrip UI widget
          * @param {Selector} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Object} [animation] A collection of <b>Animation</b> objects, used to change default animations. A value of false will disable all animations in the component.
+         * @option {Object} [animation] A collection of <b>Animation</b> objects, used to change default animations. A value of false will disable all animations in the widget.
          * @option {Animation} [animation.open] The animation that will be used when opening content.
          * @option {Animation} [animation.close] The animation that will be used when closing content.
          */
@@ -288,7 +288,7 @@
                 options.animation = { open: { effects: {} }, close: { effects: {} } }; // No animation
             }
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             options = that.options;
 
@@ -815,6 +815,6 @@
         }
     });
 
-    kendo.ui.plugin("TabStrip", TabStrip, Component);
+    kendo.ui.plugin("TabStrip", TabStrip);
 
 })(jQuery);

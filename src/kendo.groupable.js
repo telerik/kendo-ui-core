@@ -1,6 +1,6 @@
 (function ($, undefined) {
     var kendo = window.kendo,
-        Component = kendo.ui.Component,
+        Widget = kendo.ui.Widget,
         proxy = $.proxy,
         CONTAINER_EMPTY_TEXT = "Drag a column header and drop it here to group by that column",
         indicatorTmpl = kendo.template('<div class="k-group-indicator" data-field="${data.field}" data-dir="${data.dir || "asc"}">' +
@@ -11,15 +11,15 @@
                 '<a class="k-button k-button-icon k-button-bare">' +
                     '<span class="k-icon k-group-delete"></span>' +
                 '</a>' +
-             '</div>',  { useWithBlock:false }),        
+             '</div>',  { useWithBlock:false }),
         hint = function(target) {
             return $('<div class="k-header k-drag-clue" />')
                 .html(target.data("field"))
                 .prepend('<span class="k-icon k-drag-status k-denied" />');
         },
-        dropCue = $('<div class="k-grouping-dropclue"/>');    
+        dropCue = $('<div class="k-grouping-dropclue"/>');
 
-    var Groupable = Component.extend({
+    var Groupable = Widget.extend({
         init: function(element, options) {
             var that = this,
                 groupContainer,
@@ -27,8 +27,8 @@
                 intializePositions = proxy(that._intializePositions, that),
                 dropCuePositions = that._dropCuePositions = [];
 
-            Component.fn.init.call(that, element, options);
-            
+            Widget.fn.init.call(that, element, options);
+
             groupContainer = that.groupContainer = $(that.options.groupContainer, that.element)
                 .kendoDropTarget({
                     group: group,
@@ -231,7 +231,7 @@
         },
         _intializePositions: function() {
             var that = this,
-                indicators = $(".k-group-indicator", that.groupContainer), 
+                indicators = $(".k-group-indicator", that.groupContainer),
                 left;
             that._dropCuePositions = $.map(indicators, function(item) {
                 item = $(item);

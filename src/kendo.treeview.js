@@ -72,7 +72,7 @@
         ui = kendo.ui,
         extend = $.extend,
         template = kendo.template,
-        Component = ui.Component,
+        Widget = ui.Widget,
         proxy = $.proxy,
         SELECT = "select",
         EXPAND = "expand",
@@ -191,14 +191,14 @@
         empty: template("")
     };
 
-    TreeView = Component.extend(/** @lends kendo.ui.TreeView.prototype */ {
+    TreeView = Widget.extend(/** @lends kendo.ui.TreeView.prototype */ {
         /**
          * @constructs
-         * @extends kendo.ui.Component
+         * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {Array} [dataSource] The data that the TreeView will be bound to.
-         * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
+         * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the widget.
          * @option {Boolean} [dragAndDrop] <false> Controls whether the treeview nodes can be dragged and rearranged.
          * @option {Animation} [animation.expand] The animation that will be used when expanding items.
          * @option {Animation} [animation.collapse] The animation that will be used when collapsing items.
@@ -210,7 +210,7 @@
 
             options = $.isArray(options) ? (dataInit = true, { dataSource: options }) : options;
 
-            Component.prototype.init.call(that, element, options);
+            Widget.prototype.init.call(that, element, options);
 
             element = that.element;
             options = that.options;

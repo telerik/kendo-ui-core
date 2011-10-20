@@ -2,7 +2,7 @@
     var kendo = window.kendo,
         keys = kendo.keys,
         touch = kendo.support.touch,
-        Component = kendo.ui.Component,
+        Widget = kendo.ui.Widget,
         proxy = $.proxy,
         MOUSEUP = touch? "touchend" : "mouseup",
         MOUSEDOWN = touch? "touchstart" : "mousedown",
@@ -15,11 +15,11 @@
         CHANGE = "change",
         UNSELECTING = "k-state-unselecting";
 
-    var Selectable = Component.extend({
+    var Selectable = Widget.extend({
         init: function(element, options) {
             var that = this;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             that._marquee = $("<div class='k-marquee'></div>");
             that._lastActive = null;
