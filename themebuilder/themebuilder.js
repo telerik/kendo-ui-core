@@ -1,4 +1,4 @@
-(function($, kendo) {
+;(function($, kendo) {
 
     var proxy = $.proxy,
         CHANGE = "change",
