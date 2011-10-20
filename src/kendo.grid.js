@@ -4,7 +4,7 @@
         DataSource = kendo.data.DataSource,
         Groupable = kendo.ui.Groupable,
         tbodySupportsInnerHtml = kendo.support.tbodyInnerHtml,
-        Component = ui.Component,
+        Widget = ui.Widget,
         keys = kendo.keys,
         isPlainObject = $.isPlainObject,
         extend = $.extend,
@@ -31,11 +31,11 @@
         FUNCTION = "function",
         STRING = "string";
 
-    var VirtualScrollable =  Component.extend({
+    var VirtualScrollable =  Widget.extend({
         init: function(element, options) {
             var that = this;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
             that.dataSource = options.dataSource;
             that.dataSource.bind(CHANGE, proxy(that.refresh, that));
             that.wrap();
@@ -317,10 +317,10 @@
      *       });
      *   });
      */
-    var Grid = Component.extend(/** @lends kendo.ui.Grid.prototype */ {
+    var Grid = Widget.extend(/** @lends kendo.ui.Grid.prototype */ {
         /**
          * @constructs
-         * @extends kendo.ui.Component
+         * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or Object with DataSource configuration.
@@ -459,7 +459,7 @@
 
             options = isArray(options) ? { dataSource: options } : options;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             that._element();
 

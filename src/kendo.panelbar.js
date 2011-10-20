@@ -128,7 +128,7 @@
         extend = $.extend,
         each = $.each,
         template = kendo.template,
-        Component = ui.Component,
+        Widget = ui.Widget,
         excludedNodesRegExp = /^(ul|a|div)$/i,
         IMG = "img",
         HREF = "href",
@@ -326,15 +326,15 @@
         items.filter(":last-child").addClass(LAST);
     }
 
-    var PanelBar = Component.extend({/** @lends kendo.ui.PanelBar.prototype */
+    var PanelBar = Widget.extend({/** @lends kendo.ui.PanelBar.prototype */
         /**
          * Creates a PanelBar instance.
          * @constructs
-         * @extends kendo.ui.Component
-         * @class PanelBar UI component
+         * @extends kendo.ui.Widget
+         * @class PanelBar UI widget
          * @param {Selector} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Object} [animation] A collection of <b>Animation</b> objects, used to change default animations. A value of false will disable all animations in the component.
+         * @option {Object} [animation] A collection of <b>Animation</b> objects, used to change default animations. A value of false will disable all animations in the widget.
          * @option {Animation} [animation.open] The animation that will be used when expanding items.
          * @option {Animation} [animation.close] The animation that will be used when collapsing items.
          * @option {String} [expandMode] <multiple> Specifies if PanelBar should collapse the already expanded item when expanding next item
@@ -345,7 +345,7 @@
             var that = this,
                 content;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             options = that.options;
 
@@ -1007,6 +1007,6 @@
         }
     });
 
-    kendo.ui.plugin("PanelBar", PanelBar, Component);
+    kendo.ui.plugin("PanelBar", PanelBar);
 
 })(jQuery);

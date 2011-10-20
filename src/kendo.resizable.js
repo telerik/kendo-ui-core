@@ -1,7 +1,7 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        Component = ui.Component,
+        Widget = ui.Widget,
         proxy = $.proxy,
         isFunction = $.isFunction,
         extend = $.extend,
@@ -11,11 +11,11 @@
         RESIZE = "resize",
         RESIZEEND = "resizeend";
 
-    var Resizable = Component.extend({
+    var Resizable = Widget.extend({
         init: function(element, options) {
             var that = this;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
             that._positionMouse = that.orientation == HORIZONTAL ? "pageX" : "pageY";

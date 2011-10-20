@@ -106,7 +106,7 @@
      *  });
      */
     var kendo = window.kendo,
-        Component = kendo.ui.Component,
+        Widget = kendo.ui.Widget,
         Draggable = kendo.ui.Draggable,
         fx = kendo.fx,
         proxy = $.proxy,
@@ -143,10 +143,10 @@
     }
 
 
-    var Window = Component.extend(/** @lends kendo.ui.Window.prototype */ {
+    var Window = Widget.extend(/** @lends kendo.ui.Window.prototype */ {
         /**
          * @constructs
-         * @extends kendo.ui.Component
+         * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {Boolean} [modal] <false> Specifies whether the window should block interaction with other page elements.
@@ -158,7 +158,7 @@
          * @option {String} [contentUrl] Specifies a URL that the window should load its content from. For remote URLs, a container iframe element is automatically created.
          * @option {Array<String>} [actions] <"Close"> The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize", "Maximize".
          * @option {String} [title] The text in the window title bar.
-         * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the component.
+         * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the widget.
          * @option {Animation} [animation.open] The animation that will be used when the window opens.
          * @option {Animation} [animation.close] The animation that will be used when the window closes.
          */
@@ -169,7 +169,7 @@
                 titleBar, offset,
                 isVisible = false;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
             options = that.options;
             element = that.element;
 

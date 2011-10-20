@@ -1,16 +1,16 @@
 (function($, window, undefined) {
     var kendo = window.kendo,
         extend = $.extend,
-        Component = kendo.ui.Component,
+        Widget = kendo.ui.Widget,
         touchLocation = kendo.touchLocation;
 
-    var Pincer = Component.extend({
+    var Pincer = Widget.extend({
         init: function(element, options) {
             this.element = $(element);
 
             this._gesture = false;
 
-            Component.fn.init.call(this, element, options);
+            Widget.fn.init.call(this, element, options);
 
             this._gestureStartProxy = $.proxy(this._onGestureStart, this),
             this._gestureChangeProxy = $.proxy(this._onGestureChange, this),

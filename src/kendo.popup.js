@@ -25,17 +25,17 @@
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         extend = $.extend,
         proxy = $.proxy,
-        Component = ui.Component;
+        Widget = ui.Widget;
 
     function contains(container, target) {
         return container === target || $.contains(container, target);
     }
 
-    var Popup = Component.extend({
+    var Popup = Widget.extend({
         init: function(element, options) {
             var that = this;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             options = that.options;
 
