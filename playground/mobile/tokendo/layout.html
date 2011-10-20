@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="k-meego">
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta content="minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
+    
+    <link rel="apple-touch-icon" href="images/kendo.png" />
+    <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
+    <title>Mobile Test App</title>
+
+    <link rel="stylesheet/less" type="text/css" href="layout.less">
+    <link rel="stylesheet" href="scroll-container.css" />
+
+    <script src="../examples/less.js"></script>
+    <script src="../../../src/jquery.js"></script>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.fx.js"></script>
+    <script src="../../../src/kendo.scroller.js"></script>
+    <script src="../../../src/kendo.mobile.core.js"></script>
+    <script src="../../../src/kendo.mobile.toggle.js"></script>
+    <script src="../../../src/kendo.mobile.application.js"></script>
+    <script src="../../../src/kendo.mobile.view.js"></script>
+
+    <style type="text/css">
+        .k-content
+        {
+            background: silver;
+        }
+        .k-contentIn
+        {
+            padding: 20px;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="k-slot">
+        <div class="k-showcase">
+            <div class="k-view">
+                <div class="k-header">
+                    <div class="k-toolbar">
+                        <button style="float: right"><span>About</span></button>
+                    </div>
+                </div>
+
+                <div class="k-content">
+                    <div class="k-contentIn">
+                        <div class="k-buttonStrip">
+                            <button class="active">
+                                <span>Button 1</span>
+                            </button>
+                            <button>
+                                <span>Button 2</span><span class="msg">3</span>
+                            </button>
+                            <button>
+                                <span>Button 3</span>
+                            </button>
+                        </div>
+                        <br>
+                        <input type="checkbox" id="toggle" />
+                        <button id="togl"><span>Toggle the baton</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="k-tabStrip">
+        <button class="k-state-active">
+            <span class="k-icon"></span><span>Featured</span>
+        </button>
+        <button>
+            <span class="k-icon"></span><span>Genius</span><span class="k-message">3</span>
+        </button>
+        <button>
+            <span class="k-icon"></span><span>Top Charts</span>
+        </button>
+        <button>
+            <span class="k-icon"></span><span>Categories</span>
+        </button>
+    </div>
+    <script>
+        $(document)
+            .bind("appinit", function (e, args) {
+    //                console.log("appinit", args);
+            })
+            .bind("viewinit", function (e, args) {
+    //                console.log("viewinit", args);
+            });
+
+        $("#toggle").kendoToggleButton();
+        $("#togl").click(function () {
+            $("#toggle").data("kendoToggleButton").toggle();
+        });
+
+    </script>
+</body>
+</html>
+
+
+

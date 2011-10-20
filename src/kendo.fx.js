@@ -560,6 +560,24 @@
                 return extend(extender, options.properties);
             }
         },
+        slideTo: {
+            setup: function(element, options) {
+                var direction = kendo.directions[options.direction],
+                    offset = -direction.modifier * options.offset,
+                    extender = {}, reverse = options.reverse;
+
+                if (transitions) {
+                    element.css(TRANSFORM, direction.transition + "(" + (!reverse ? offset : 0) + "px)");
+                    extender[direction.transition] = reverse ? offset + PX : 0;
+                } else {
+                    !reverse && element.css(direction.property, offset + PX);
+                    extender[direction.property] = reverse ? offset + PX : 0;
+                }
+                element.css(direction.property);
+
+                return extend(extender, options.properties);
+            }
+        },
         slideIn: {
             setup: function(element, options) {
                 var direction = kendo.directions[options.direction],
