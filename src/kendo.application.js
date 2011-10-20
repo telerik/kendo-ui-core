@@ -58,6 +58,8 @@
 
             that._view = new View(views.first(), { url: history.current });
 
+            that.trigger("viewInit", { view: that._view });
+
             history.start($.extend(options, {silent: true}));
 
             history.change(function(e) {
@@ -68,22 +70,29 @@
         changeView: function(url) {
             var that = this;
 
-            that._findView(url, function(view) {
+            that._findView(url, function(view, init) {
                 history.navigate(url, true);
                 that._view = view.replace(that._view);
-                that.trigger("viewChange", {view: view});
+                if (init) {
+                    that.trigger("viewInit", { view: view });
+                }
+                that.trigger("viewChange", { view: view });
             });
         },
 
         _findView: function(url, callback) {
-            var that = this;
-            var element = that.element.find(url + ", [data-kendo-url='" + url + "']").first(),
+            var that = this,
+                view,
+                element;
+
+            element = that.element.find(url + ", [data-kendo-url='" + url + "']").first();
+
             view = element.data("kendoView");
 
             if (view) {
-                callback(view);
+                callback(view, false);
             } else if (url.charAt(0) === "#") {
-                callback(new View($(url)));
+                callback(new View(element), true);
             } else {
                 $.ajax({
                     url: url,
@@ -94,7 +103,7 @@
                         element.hide().attr("data-kendo-url", url);
                         that.element.append(element);
 
-                        callback(new View(element));
+                        callback(new View(element), true);
                     }
                 });
             }
