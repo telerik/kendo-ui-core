@@ -1,12 +1,8 @@
-/*reset start*/
-
 #kendo-themebuilder-wrapper .k-window-actions,
 #kendo-themebuilder .styling-options
 {
     width: auto;
 }
-
-/*reset end*/
 
 #kendo-themebuilder
 {
@@ -46,9 +42,14 @@
     margin-right: .2em;
 }
 
+.k-colorpicker .k-select
+{
+    padding: 3px;
+}
+
 .k-colorpicker .k-arrow-down
 {
-    margin-top: 1px;
+    margin-top: -1px;
 }
 
 .k-colorpicker .k-input,
