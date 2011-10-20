@@ -430,6 +430,7 @@
             }
         },
         options: {
+            name: "PanelBar",
             animation: {
                 open: {
                     effects: "expandVertical",
@@ -1007,6 +1008,6 @@
         }
     });
 
-    kendo.ui.plugin("PanelBar", PanelBar);
+    kendo.ui.plugin(PanelBar);
 
 })(jQuery);

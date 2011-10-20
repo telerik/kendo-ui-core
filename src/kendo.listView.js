@@ -33,6 +33,7 @@
             }
         },
         options: {
+            name: "ListView",
             autoBind: true,
             template: ""
         },
@@ -133,5 +134,5 @@
        }
     });
 
-    kendo.ui.plugin("ListView", ListView);
+    kendo.ui.plugin(ListView);
 })(jQuery);

@@ -343,6 +343,7 @@
             }
         },
         options: {
+            name: "TabStrip",
             animation: {
                 open: {
                     effects: "expandVertical fadeIn",
@@ -815,6 +816,6 @@
         }
     });
 
-    kendo.ui.plugin("TabStrip", TabStrip);
+    kendo.ui.plugin(TabStrip);
 
 })(jQuery);

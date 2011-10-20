@@ -332,6 +332,7 @@
         },
 
         options: {
+            name: "TreeView",
             dataSource: {},
             animation: {
                 expand: {
@@ -1088,5 +1089,5 @@
         }
     };
 
-    ui.plugin("TreeView", TreeView);
+    ui.plugin(TreeView);
 })(jQuery);

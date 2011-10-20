@@ -387,6 +387,7 @@
         },
 
         options: {
+            name: "DatePicker",
             value: null,
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
@@ -657,6 +658,6 @@
         }
     });
 
-    ui.plugin("DatePicker", DatePicker);
+    ui.plugin(DatePicker);
 
 })(jQuery);

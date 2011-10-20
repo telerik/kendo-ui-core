@@ -105,6 +105,7 @@
             }
         },
         options: {
+            name: "Popup",
             toggleEvent: "click",
             origin: BOTTOM + " " + LEFT,
             position: TOP + " " + LEFT,
@@ -398,5 +399,5 @@
         }
     });
 
-    ui.plugin("Popup", Popup);
+    ui.plugin(Popup);
 })(jQuery);

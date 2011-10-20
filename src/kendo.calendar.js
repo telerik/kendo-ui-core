@@ -199,6 +199,7 @@
         },
 
         options: {
+            name: "Calendar",
             value: null,
             min: new DATE(1900, 0, 1),
             max: new DATE(2099, 11, 31),
@@ -681,7 +682,7 @@
         }
     });
 
-    ui.plugin("Calendar", Calendar);
+    ui.plugin(Calendar);
 
     var calendar = {
         firstDayOfMonth: function (date) {

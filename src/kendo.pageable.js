@@ -20,6 +20,7 @@
         },
 
         options: {
+            name: "Pageable",
             selectTemplate: '<li><span class="k-state-active">#= text #</span></li>',
             linkTemplate: '<li><a href="\\#" class="k-link" data-page="#= idx #">#= text #</a></li>',
             buttonCount: 10
@@ -81,5 +82,5 @@
         }
     });
 
-    kendo.ui.plugin("Pageable", Pageable);
+    kendo.ui.plugin(Pageable);
 })(jQuery);

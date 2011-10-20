@@ -221,6 +221,7 @@
         },
 
         options: {
+            name: "ComboBox",
             enable: true,
             index: -1,
             autoBind: true,
@@ -686,5 +687,5 @@
         }
     });
 
-    ui.plugin("ComboBox", ComboBox);
+    ui.plugin(ComboBox);
 })(jQuery);

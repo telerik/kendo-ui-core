@@ -38,6 +38,7 @@
         },
 
         options: {
+            name: "View",
             title: "",
             formInit: true,
             scroller: true,
@@ -72,6 +73,6 @@
         }
     });
 
-    kendo.ui.plugin("View", View, Widget);
+    kendo.ui.plugin(View);
 
 })(jQuery);
