@@ -45,6 +45,7 @@
         },
 
         options: {
+            name: "Validator",
             errorTemplate: "<span>${message}</span>",
             messages: {
                 required: "{0} is required",
@@ -217,5 +218,5 @@
         }
     });
 
-    kendo.ui.plugin("Validator", Validator);
+    kendo.ui.plugin(Validator);
 })(jQuery);

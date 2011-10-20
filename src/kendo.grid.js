@@ -42,6 +42,7 @@
         },
 
         options: {
+            name: "VirtualScrollable",
             itemHeight: $.noop
         },
 
@@ -527,6 +528,7 @@
         },
 
         options: {
+            name: "Grid",
             columns: [],
             autoBind: true,
             scrollable: true,
@@ -1453,6 +1455,6 @@
        }
    });
 
-   ui.plugin("Grid", Grid);
-   ui.plugin("VirtualScrollable", VirtualScrollable);
+   ui.plugin(Grid);
+   ui.plugin(VirtualScrollable);
 })(jQuery);

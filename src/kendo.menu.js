@@ -332,6 +332,7 @@
             ], that.options);
         },
         options: {
+            name: "Menu",
             animation: {
                 open: {
                     duration: 200,
@@ -733,6 +734,6 @@
         }
     });
 
-    kendo.ui.plugin("Menu", Menu);
+    kendo.ui.plugin(Menu);
 
 })(jQuery);

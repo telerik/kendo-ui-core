@@ -203,6 +203,7 @@
         },
 
         options: {
+            name: "AutoComplete",
             suggest: false,
             minLength: 1,
             delay: 200,
@@ -460,5 +461,5 @@
         }
     });
 
-    ui.plugin("AutoComplete", AutoComplete);
+    ui.plugin(AutoComplete);
 })(jQuery);

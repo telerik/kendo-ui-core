@@ -407,6 +407,7 @@
         },
 
         options: {
+            name: "Upload",
             enabled: true,
             multiple: true,
             showFileList: true,
@@ -1425,5 +1426,5 @@
 
         return tokens;
     }
-    kendo.ui.plugin("Upload", Upload);
+    kendo.ui.plugin(Upload);
 })(jQuery);

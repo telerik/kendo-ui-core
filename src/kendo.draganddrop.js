@@ -111,6 +111,7 @@
         },
 
         options: {
+            name: "DropTarget",
             group: "default"
         },
 
@@ -143,7 +144,7 @@
         }
     });
 
-    kendo.ui.plugin("DropTarget", DropTarget);
+    kendo.ui.plugin(DropTarget);
 
     /**
      * @name kendo.ui.Draggable.Description
@@ -220,6 +221,7 @@
         },
 
         options: {
+            name: "Draggable",
             distance: 5,
             group: "default",
             cursorOffset: {
@@ -392,6 +394,6 @@
         }
     });
 
-    kendo.ui.plugin("Draggable", Draggable);
+    kendo.ui.plugin(Draggable);
 
  })(jQuery);

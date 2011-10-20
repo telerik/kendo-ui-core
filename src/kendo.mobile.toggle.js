@@ -58,6 +58,7 @@
         },
 
         options: {
+            name: "MobileToggleButton",
             enable: true
         },
 
@@ -133,5 +134,5 @@
 
     });
 
-    ui.plugin("ToggleButton", ToggleButton);
+    ui.plugin(ToggleButton);
 })(jQuery);
