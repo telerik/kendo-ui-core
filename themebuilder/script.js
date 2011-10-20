@@ -1,24 +1,16 @@
 // bootstrapper file for Kendo ThemeBuilder
 (function() {
-    var queue = [],
-        doc = document,
+    var doc = document,
         UNDEFINED = "undefined",
         head = doc.getElementsByTagName("head")[0],
-        applicationRoot = "http://localhost/kendo/themebuilder/",
-        jQueryJs = "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js",
-        stylesRoot = "http://localhost/kendo/live/styles/",
-        kendoCommonCss = stylesRoot + "kendo.common.css",
-        kendoSkinCss = stylesRoot + "kendo.kendo.css",
-        kendoAllJs = "http://localhost/kendo/deploy/kendoUI/js/kendo.all.min.js",
-        lessJs = "less.js",
-        themebuilderJs = "themebuilder.js",
-        templateJs = "template.js",
-        colorEngineJs = "colorengine.js",
-        stylesCss = "styles.css";
 
-    // do not initialize twice
+        // caution: the variables below are changed during builds.
+        //          update build/themebuilder.js if you change their names!
+        applicationRoot = "http://localhost/kendo/themebuilder/",
+        requiredFiles = ["less.js", "themebuilder.js", "colorengine.js", "template.js"];
+
+    // do not initialize twice, just reopen window
     if (typeof kendo != UNDEFINED && kendo.ThemeBuilder) {
-        // reopen themebuilder
         $("#kendo-themebuilder-wrapper").data("kendoThemeBuilder").open();
         return;
     }
@@ -31,10 +23,10 @@
         head.appendChild(script);
     }
 
+    // show error message on pages that we can not work with
     if (typeof jQuery == UNDEFINED || typeof kendo == UNDEFINED) {
-        // show error message -- not a relevant page
         var messageId = 'kendoThemeBuilderMessage',
-            styles = 'position:absolute;top:50%;margin-top:-1.6em;left:50%;margin-left:-16em;z-index:9999999;font:12px sans-serif;text-align:center;width:32em;padding:1em;border:1px solid #2å2å2å;background:#f2f2f2;color:#ef652a;-moz-box-shadow: 1px 1px 7px 1px #666;-webkit-box-shadow: 1px 1px 7px 1px #666;box-shadow: 1px 1px 7px 1px #666;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;';
+            styles = 'position:absolute;top:50%;margin-top:-1.6em;left:50%;margin-left:-16em;z-index:9999999;font:12px sans-serif;text-align:center;width:32em;padding:1em;border:1px solid #2a2a2a;background:#f2f2f2;color:#ef652a;-moz-box-shadow: 1px 1px 7px 1px #666;-webkit-box-shadow: 1px 1px 7px 1px #666;box-shadow: 1px 1px 7px 1px #666;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;';
 
         if (!doc.getElementById(messageId)) {
             var messageWrap = doc.createElement("div");
@@ -128,12 +120,12 @@
             "@splitbar-background-color":       constant(".k-splitbar", BGCOLOR)
         },
         constantsHierarchy = {
-            "Widget": /^@widget.*/,
-            "Headers": /^@header.*/,
-            "Buttons": /^@button.*/,
-            "Groups and content areas": /^@(group|content).*/,
-            "Select boxes and pickers": /^@select.*/,
-            "Widget states": /^@(hover|selected|active|error|disabled).*/,
+            //"Widget": /^@widget.*/,
+            //"Headers": /^@header.*/,
+            //"Buttons": /^@button.*/,
+            //"Groups and content areas": /^@(group|content).*/,
+            //"Select boxes and pickers": /^@select.*/,
+            //"Widget states": /^@(hover|selected|active|error|disabled).*/,
             "Misc": /^@(alt|input|shadow|link|tooltip|border|loading|splitbar)/
         };
 
@@ -141,22 +133,11 @@
         new kendo.ThemeBuilder(lessTemplate, new kendo.LessConstants(constants), constantsHierarchy);
     };
 
-    queue.push(function(){
-        $("<link rel='stylesheet' href='" + applicationRoot + stylesCss + "' />").appendTo("head");
+    $("<link rel='stylesheet' href='" + applicationRoot + "styles.css' />").appendTo("head");
 
-        // TODO: these can be merged during build
-        getScript(applicationRoot + lessJs, function() {
-            getScript(applicationRoot + themebuilderJs, function() {
-                getScript(applicationRoot + colorEngineJs, function() {
-                    getScript(applicationRoot + templateJs);
-                });
-            });
-        });
-    });
-
-    (function resolveQueue() {
-        if (queue.length) {
-            queue.shift()(resolveQueue);
+    (function loadFileFromQueue() {
+        if (requiredFiles.length) {
+            getScript(applicationRoot + requiredFiles.shift(), loadFileFromQueue);
         }
     })();
 })();

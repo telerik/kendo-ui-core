@@ -1,24 +1,13 @@
 var kendoBuild = require("./kendo-build"),
-    fs = require("fs");
+    fs = require("fs"),
+    path = require("path"),
+    SOURCE_PATH = "themebuilder",
+    OUTPUT_PATH = path.join(SOURCE_PATH, "live"),
+    DEPLOYMENT_URL = "http://localhost/kendo/themebuilder/live/";
 
 // themebuilder-specific
 function wrap(source) {
     return "(function(window, undefined){\r\n" + source + "\r\n})(window);"
-}
-
-function buildModifiedLess() {
-    var less_libonly_src = [
-            "build/require.js",
-            "build/ecma-5.js",
-            "lib/less/parser.js",
-            "lib/less/functions.js",
-            "lib/less/tree/*.js",
-            "lib/less/tree.js"
-        ].map(function(relativePath) {
-            return "build/less-js/" + relativePath;
-        });
-
-    fs.writeFileSync("themebuilder/less.js", kendoBuild.minifyJs(wrap(kendoBuild.merge(less_libonly_src))));
 }
 
 function lessToJson(lessTemplate) {
@@ -27,18 +16,98 @@ function lessToJson(lessTemplate) {
             .replace(/"/g, '\\"')
             .replace(/'/g, "\\'")
             .replace(/\r\n/g, "\\n")
-            .replace(/(\n|\r)/g, "\\n");
+            .replace(/(\n|\r)/g, "\\n"),
+        outputTemplate = kendoBuild.template("lessLoaded({ version: '#= version #', template: '#= template #' })");
 
-    return "lessLoaded({ version: '" + kendoBuild.generateVersion() + "', template: '" + template + "' })";
+    return outputTemplate({
+            version: kendoBuild.generateVersion(),
+            template: template
+        });
 }
 
-function copyLessTemplates() {
-    fs.writeFileSync("themebuilder/template.js", lessToJson("styles/template.less"), "utf8");
+function mkdir(path) {
+    try {
+        fs.statSync(path);
+    } catch(e) {
+        fs.mkdirSync(path, fs.statSync("./").mode);
+    }
+}
+
+function replaceVariable(source, name, value) {
+    var variableAssignments = new RegExp(name + "\\s*=\\s*.*(,|;)\\s*$", "gim");
+
+    return source.replace(variableAssignments, name + "=" + value + "$1");
+}
+
+function createIndexPage() {
+}
+
+function createBootstrapper() {
+    var source = fs.readFileSync(path.join(SOURCE_PATH, "script.js"), "utf8");
+
+    // set the required resources to single concatenated script
+    source = replaceVariable(source, "requiredFiles", '["themebuilder-all.js"]');
+    source = replaceVariable(source, "applicationRoot", '"' + DEPLOYMENT_URL + '"');
+
+    fs.writeFileSync(
+        path.join(OUTPUT_PATH, "script.js"),
+        kendoBuild.minifyJs(source),
+        "utf8"
+    );
+}
+
+function mergeResources() {
+    var themeBuilderScripts = ["less.js", "themebuilder.js", "colorengine.js", "template.js"].map(function(x) {
+        return path.join(SOURCE_PATH, x);
+    });
+
+    // merge all resources into one
+    fs.writeFileSync(
+        path.join(OUTPUT_PATH, "themebuilder-all.js"),
+        kendoBuild.minifyJs(kendoBuild.merge(themeBuilderScripts)),
+        "utf8"
+    );
+
+    fs.writeFileSync(
+        path.join(OUTPUT_PATH, "styles.css"),
+        fs.readFileSync(path.join(SOURCE_PATH, "styles.css"), "utf8"),
+        "utf8"
+    );
+}
+
+function buildGeneratedSources() {
+    // build modified LESS.js
+    var less_libonly_src = [
+            "build/require.js",
+            "build/ecma-5.js",
+            "lib/less/parser.js",
+            "lib/less/functions.js",
+            "lib/less/tree/*.js",
+            "lib/less/tree.js"
+        ].map(function(relativePath) {
+            return path.join("build", "less-js", relativePath);
+        });
+
+    fs.writeFileSync(
+        path.join(SOURCE_PATH, "less.js"),
+        kendoBuild.minifyJs(wrap(kendoBuild.merge(less_libonly_src)))
+    );
+
+    // convert template.less to JSON
+    fs.writeFileSync(
+        path.join(SOURCE_PATH, "template.js"),
+        lessToJson(path.join("styles", "template.less")),
+        "utf8"
+    );
 }
 
 function build() {
-    buildModifiedLess();
-    copyLessTemplates();
+    kendoBuild.rmdirSyncRecursive(OUTPUT_PATH);
+    mkdir(OUTPUT_PATH);
+    buildGeneratedSources();
+    mergeResources();
+    createBootstrapper();
+    createIndexPage();
 }
 
 if (require.main === module) {
