@@ -563,7 +563,7 @@
         slideTo: {
             setup: function(element, options) {
                 var direction = kendo.directions[options.direction],
-                    offset = -direction.modifier * options.offset,
+                    offset = direction.modifier * options.offset,
                     extender = {}, reverse = options.reverse;
 
                 if (transitions) {
