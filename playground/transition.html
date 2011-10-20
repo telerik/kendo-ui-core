@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <title>Transition</title>
+        <style>
+            body {
+                width: 800px;
+                margin: 20px auto;
+            }
+            #container {
+                width: 100px;
+                height: 100px;
+                position: relative;
+            }
+
+            #a {
+                width: 100px;
+                height: 100px;
+                background: red;
+            }
+
+            #b {
+                width: 100px;
+                height: 100px;
+                background: blue;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="container">
+            <div id="a">
+                A div
+            </div>
+            <div id="b">
+                B div
+            </div>
+        </div>
+
+        <hr />
+        <dl>
+            <dt>Animation type:</dt>
+            <dd>
+            <select id="animation-type">
+                <option>slide:down</option>
+                <option>slide:up</option>
+                <option>slideIn:up</option>
+                <option>zoomIn fadeIn</option>
+                <option>fadeIn</option>
+                <option>fadeIn</option>
+                <option>slide:left</option>
+            </select>
+            </dd>
+        </dl>
+        <button id="apply">Apply</button>
+
+        <script>
+
+            var TRANSFORM = kendo.support.transitions.css + "transform";
+
+            $("#container")
+                .wrap('<div id="outer-container" style="overflow:hidden; position: relative;"></div>')
+                .css({"position": "relative"});
+
+            $("#outer-container").css({width: $("#container").outerWidth(), height: $("#container").outerHeight()});
+
+            $.fn.animateTo = function(element, options) {
+                var that = this,
+                reverse = options.reverse,
+                direction,
+                directionName,
+                container = $(element.parent()),
+                transitions = kendo.support.transitions,
+                animateContainer
+                ;
+
+                if (typeof options.effects === "string") {
+                    options.effects = kendo.parseEffects(options.effects);
+                }
+
+
+                $(that).show();
+
+                $.each(options.effects, function(name, definition) {
+                    directionName = directionName || definition.direction;
+                });
+
+
+                element.css({position: "absolute", "left": 0, "top": 0});
+
+                if (direction = kendo.directions[directionName]) {
+                    offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth());
+
+                    if (kendo.support.transitions) {
+                        element.css(TRANSFORM, direction.transition + "(" + (!reverse ? offset : 0) + "px)");
+                    } else {
+                        if (!reverse) {
+                            element.css(direction.property, offset + "px");
+                        }
+                    }
+                    element.css(direction.property); // Read a style to force Chrome to apply the change.
+                }
+
+                options.complete = function() {
+                    that.hide();
+                    if (!transitions) {
+                        setTimeout(function() {
+                            element.attr("style", "");
+                            container.attr("style", "");
+                        });
+                    }
+                }
+
+                animateContainer = "slide" in options.effects;
+
+                if (animateContainer) {
+                    container.kendoAnimate(options);
+                } else {
+                    element.kendoAnimate(options);
+                }
+            }
+
+            $("#apply").click(function() {
+                $("#a, #b, #container").attr("style", "");
+                $("#a").animateTo($("#b"), {effects: { slide: { ease: "cubic-bezier(0.0, 0, 0.72, 1.0)", direction: "up" }}, duration: 500  });
+            });
+            $("#apply").click();
+        </script>
+
+    </body>
+</html>
