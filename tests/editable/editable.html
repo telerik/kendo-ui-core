@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Editable Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Editable Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Editable = kendo.ui.Editable,
+                Model = kendo.data.Model,
+                div;
+
+            module("kendo.ui.Editable", {
+                setup: function() {
+                    div = $("<div />");
+                },
+                teardown: function() {
+                }
+            });
+
+            test("kendoEditable is attached to the target element", function() {
+                var element = div.kendoEditable();
+
+                ok(element.data("kendoEditable") instanceof Editable);
+            });
+
+            test("renders input element for field", function() {
+                var editable = new Editable(div, { fields: "foo" });
+
+                equal(editable.element.find(":input").length, 1);
+            });
+
+            test("input name is same as field", function() {
+                var editable = new Editable(div, { fields: "foo" });
+
+                equal(editable.element.find(":input[name=foo]").length, 1);
+            });
+
+            test("no inputs are rendered when no fields are specifed", function() {
+                var editable = new Editable(div, { });
+
+                ok(!editable.element.find(":input").length);
+            });
+
+            test("input is rendered for every field", function() {
+                var editable = new Editable(div, { fields: ["foo", "bar"] }),
+                    elements = editable.element.find(":input");
+
+                equal(elements.length, 2);
+                equal(elements.eq(0).attr("name"), "foo");
+                equal(elements.eq(1).attr("name"), "bar");
+            });
+
+            test("input value is bound to the value from model", function() {
+                var MyModel = Model.define(),
+                    model = new MyModel({ foo: "bar" }),
+                    editable = new Editable(div, { fields: "foo", model: model });
+
+                equal(editable.element.find("input[name=foo]").val(), "bar");
+            });
+        </script>
+    </body>
+</html>

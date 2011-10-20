@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>editable</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.model.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validate.js" type="text/javascript" charset="utf-8"></script>
+        <link href="http://cdn.kendostatic.com/2011.3.1007/styles/kendo.common.min.css" rel="stylesheet"/>
+        <link href="http://cdn.kendostatic.com/2011.3.1007/styles/kendo.kendo.min.css" rel="stylesheet"/>
+
+    </head>
+    <body>
+        <div id="grid"></div>
+        <script>
+            var grid,
+                dataSource,
+                validator;
+
+            $(document).ready(function() {
+                dataSource = new kendo.data.DataSource({
+                    data: [{foo: "foo 1", bar: "bar 1", id: 1}, {foo: "foo 2", bar: "bar 2", id: 2}],
+                    schema: {
+                        model: {
+                            id: "id"
+                        }
+                    }
+                });
+
+                grid = $("#grid").kendoGrid({
+                    dataSource: dataSource,
+                    columns: ["foo", "bar", "id"]
+                })
+                .delegate("td", "click", function(e) {
+                    if((grid.valid != undefined && !grid.valid) || $(e.target).is(":input")) {
+                        return;
+                    }
+                    $(".k-edit-cell").each(function() { display($(this))});
+                    var cell = $(this),
+                        model = dataSource.get(cell.closest("tr").data("id")),
+                        column = grid.columns[cell.index()];
+
+                    grid.td = cell.addClass("k-edit-cell");
+
+                    if (!cell.find(":input").length) {
+                        cell.empty().append($(editor(column.field)(model.data)));
+
+                        new kendo.data.ModelViewBinder(cell, model);
+                        cell.find(":input:visible:first").focus();
+                    }
+                })
+                .data("kendoGrid");
+
+                $(document).mousedown(function(e){
+                    if (grid.td && !$.contains(grid.td[0], e.target) && grid.td[0] != e.target && !$(e.target).closest('.k-animation-container').length) {
+                        grid.valid = validator.validate();
+                        if(grid.valid) {
+                            display(grid.td);
+                            grid.td.find(":input:visible:first").focus();
+                            grid.td = null;
+                        }
+                    }
+                });
+
+                validator = new kendo.ui.Validator(grid.element, {});
+
+            });
+
+            function display(cell) {
+                var model = dataSource.get(cell.closest("tr").data("id")),
+                    column = grid.columns[cell.index()],
+                    input = cell.find(":input");
+
+                cell.removeClass("k-edit-cell");
+                cell.empty().append(model.get(column.field));
+            }
+
+            function editor(fieldName) {
+                return kendo.template("<input type='text' required validationMessage='this field is required' name='" + fieldName + "' value='#=" + fieldName + "#' />");
+            }
+        </script>
+    </body>
+</html>
