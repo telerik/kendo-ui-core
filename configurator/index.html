@@ -31,6 +31,7 @@
                         #= renderFeatures(data) #
                     </ul>
                 # } #
+                <span class="description">#= data.description || "" #</span>
             </li>
         </script>
 
@@ -38,6 +39,7 @@
             <li class="feature" data-id="#= id #">
                 <span class="checkbox"></span>
                 <span class="name">#= name #</span>
+                <span class="description">#= data.description || "" #</span>
             </li>
         </script>
 
