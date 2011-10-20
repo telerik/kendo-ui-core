@@ -158,7 +158,7 @@
     var ChartDocs = /** @lends kendo.ui.Chart.prototype */ {
         /**
          * @constructs
-         * @extends kendo.ui.Component
+         * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {String} [theme] Sets Chart theme. Available themes: hakama, blueOpal, black.

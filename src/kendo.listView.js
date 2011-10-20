@@ -2,7 +2,7 @@
     var kendo = window.kendo,
         CHANGE = "change",
         DATABOUND = "dataBound"
-        Component = kendo.ui.Component,
+        Widget = kendo.ui.Widget,
         keys = kendo.keys,
         FOCUSSELECTOR =  "> li",
         CHANGE = "change",
@@ -10,13 +10,13 @@
         FOCUSABLE = "k-focusable",
         DataSource = kendo.data.DataSource;
 
-    var ListView = Component.extend( {
+    var ListView = Widget.extend( {
         init: function(element, options) {
             var that = this;
 
             options = $.isArray(options) ? { data: options } : options;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             that.bind([CHANGE,DATABOUND], options);
 

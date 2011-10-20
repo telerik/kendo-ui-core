@@ -131,7 +131,7 @@
      * });
      */
     var kendo = window.kendo,
-        Component = kendo.ui.Component,
+        Widget = kendo.ui.Widget,
         rFileExtension = /\.([^\.]+)$/,
         SELECT = "select",
         UPLOAD = "upload",
@@ -142,10 +142,10 @@
         LOAD = "load",
         REMOVE = "remove";
 
-    var Upload = Component.extend(/** @lends kendo.ui.Upload.prototype */{
+    var Upload = Widget.extend(/** @lends kendo.ui.Upload.prototype */{
         /**
          * @constructs
-         * @extends kendo.ui.Component
+         * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {Boolean} [enabled] <true>
@@ -168,7 +168,7 @@
          *     <dd>
          *         The URL of the handler that will receive the submitted files.
          *         The handler must accept POST requests containing one or more
-         *         files with the same name as the upload component.
+         *         files with the same name as the upload widget.
          *     </dd>
          *     <dt>
          *         removeUrl: (String)
@@ -223,7 +223,7 @@
         init: function(element, options) {
             var that = this;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             that.name = element.name;
             that.multiple = that.options.multiple;

@@ -78,7 +78,7 @@
     *   <p>
     *       DropDownList leverages Kendo UI high-performance Templates to give you complete control
     *       over item rendering. For a complete overview of Kendo UI Template capabilities and syntax,
-    *       please review the <a href="../templates/index.html" title="Kendo UI Template">Kendo UI Template</a> component demos and documentation.
+    *       please review the <a href="../templates/index.html" title="Kendo UI Template">Kendo UI Template</a> demos and documentation.
     *   </p>
     * @exampleTitle Basic item template customization
     * @example
@@ -136,7 +136,7 @@
          * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the DropDownList will be bound to.
          * @option {Boolean} [enable] <true> Controls whether the DropDownList should be initially enabled.
          * @option {Number} [index] <0> Defines the initial selected item.
-         * @option {Boolean} [autoBind] <true> Controls whether to bind the component on initialization.
+         * @option {Boolean} [autoBind] <true> Controls whether to bind the widget on initialization.
          * @option {Number} [delay] <500> Specifies the delay in ms before the search text typed by the end user is cleared.
          * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
          * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
@@ -214,7 +214,7 @@
         */
 
         /**
-        * Enables/disables the dropdownlist component
+        * Enables/disables the dropdownlist widget
         * @param {Boolean} enable Desired state
         */
         enable: function(enable) {

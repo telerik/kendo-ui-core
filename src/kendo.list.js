@@ -2,11 +2,11 @@
     /**
     * @name kendo.ui.List.Description
     *
-    * @section Common class for ComboBox, DropDownList and AutoComplete components.
+    * @section Common class for ComboBox, DropDownList and AutoComplete widgets.
     */
     var kendo = window.kendo,
         ui = kendo.ui,
-        Component = ui.Component,
+        Widget = ui.Widget,
         ID = "id",
         LI = "li",
         CHANGE = "change",
@@ -21,16 +21,16 @@
         return container === target || $.contains(container, target);
     }
 
-    var List = Component.extend(/** @lends kendo.ui.List */{
+    var List = Widget.extend(/** @lends kendo.ui.List */{
         /**
          * Creates a List instance.
          * @constructs
-         * @extends kendo.ui.Component
+         * @extends kendo.ui.Widget
          */
         init: function(element, options) {
             var that = this;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             that._template();
 
@@ -317,7 +317,7 @@
     /**
     * @name kendo.ui.Select.Description
     *
-    * @section Common class for ComboBox and DropDownList components.
+    * @section Common class for ComboBox and DropDownList widgets.
     */
     ui.Select = List.extend(/** @lends kendo.ui.Select */{
         /**

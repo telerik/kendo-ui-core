@@ -74,7 +74,7 @@
     var kendo = window.kendo,
     ui = kendo.ui,
     touch = kendo.support.touch,
-    Component = ui.Component,
+    Widget = ui.Widget,
     parse = kendo.parseDate,
     keys = kendo.keys,
     DIV = "<div />",
@@ -311,10 +311,10 @@
 
     kendo.DateView = DateView;
 
-    var DatePicker = Component.extend(/** @lends kendo.ui.DatePicker.prototype */{
+    var DatePicker = Widget.extend(/** @lends kendo.ui.DatePicker.prototype */{
         /**
          * @constructs
-         * @extends kendo.ui.Component
+         * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {Date} [value] <null> Specifies the selected date.
@@ -328,7 +328,7 @@
             var that = this,
                 dateView, enable;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
             element = that.element;
             options = that.options;
 
