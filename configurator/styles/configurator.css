@@ -1,0 +1,28 @@
+.checkbox {
+    background: url(../images/checkboxes.gif) no-repeat 0 -13px;
+    width: 13px;
+    height: 13px;
+    border: none;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.checkbox:hover {
+    background-position: 0 -26px;
+}
+
+.implicit {
+    background-position: 0 -52px;
+}
+
+.implicit:hover {
+    background-position: 0 -65px;
+}
+
+.explicit {
+    background-position: 0 -91px;
+}
+
+.explicit:hover {
+    background-position: 0 -104px;
+}
