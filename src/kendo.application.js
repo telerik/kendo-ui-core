@@ -76,7 +76,7 @@
                 if (init) {
                     that.trigger("viewInit", { view: view });
                 }
-                that.trigger("viewChange", { view: view });
+                that.trigger("viewShow", { view: view });
             });
         },
 

@@ -62,7 +62,7 @@
 
                 setup('<div data-kendo-role="view" id="page1">Page 1</div>');
 
-                application.bind("viewChange", function() {
+                application.bind("viewShow", function() {
                     start();
                     ok(!$("#page1").is(":visible"), "First page is hidden");
                     ok($("#page2").is(":visible"), "Second page is present");
@@ -82,8 +82,8 @@
 
                 application.changeView("page2.html");
 
-                application.bind("viewChange", function() {
-                    application.unbind("viewChange");
+                application.bind("viewShow", function() {
+                    application.unbind("viewShow");
 
                     application.changeView("#page1");
 
@@ -97,7 +97,7 @@
                         }
                     });
 
-                    application.bind("viewChange", function() {
+                    application.bind("viewShow", function() {
                         start();
                         ok($("#page2").is(":visible"), "Second page is present");
                     });
@@ -115,7 +115,7 @@
                     responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
                 });
 
-                application.bind("viewChange", function() {
+                application.bind("viewShow", function() {
                     start();
                     ok(!$("#page1").is(":visible"), "First page is hidden");
                     ok($("#page2").is(":visible"), "Second page is present");
@@ -133,7 +133,7 @@
                     responseText: '<html><head></head><body><div id="page2" data-kendo-role="view">View\n\u000a\u000a\u000d\u2028\u2029</div></body>\r\n</html>'
                 });
 
-                application.bind("viewChange", function() {
+                application.bind("viewShow", function() {
                     start();
                     ok($("#page2").is(":visible"), "Second page is loaded");
                 });
