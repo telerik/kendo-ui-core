@@ -192,9 +192,9 @@
                     source: "kendo.grid.min.js",
                     depends: [ "data" ],
                     features: [{
-                            id: "grid-sorting",
-                            name: "Sorting",
-                            depends: [ "sortable" ]
+                            id: "grid-grouping",
+                            name: "Grouping",
+                            depends: [ "groupable" ]
                         }, {
                             id: "grid-paging",
                             name: "Paging",
@@ -204,9 +204,9 @@
                             name: "Selection",
                             depends: [ "selectable" ]
                         }, {
-                            id: "grid-grouping",
-                            name: "Grouping",
-                            depends: [ "groupable" ]
+                            id: "grid-sorting",
+                            name: "Sorting",
+                            depends: [ "sortable" ]
                     }]
                 }, {
                     id: "menu",
@@ -263,6 +263,9 @@
     <body>
         <div id="configurator"></div>
         <div id="infoPanel"></div>
+        <div id="scriptList">
+            <pre></pre>
+        </div>
 
         <script id="categoryTemplate" type="text/x-kendo-tmpl">
             <h2>#= data #</h2>
@@ -296,12 +299,9 @@
                 <dd>#= formatBytes(size) # (#= formatBytes(compressedSize) # compressed)</dd>
             </dl>
             <a href="#= getUrl #">Download</a>
-            <pre>
-                # for (var i = 0; i < resolver.scripts.length; i++) { #
-                    &lt;script type="text/javascript" src="#= CDN_URL + resolver.scripts[i] #"&gt;&lt;script&gt;
-                # } #
-            </pre>
         </script>
+
+        <script id="scriptTemplate" type="text/x-kendo-tmpl">&lt;script type="text/javascript" src="#= data #"&gt;&lt;script&gt;</script>
 
         <script type="text/javascript">
             var INFO_SERVICE = "http://tsonev/kendo-download/info.ashx",
@@ -314,6 +314,7 @@
                 componentTemplate,
                 featureTemplate,
                 infoTemplate,
+                scriptTemplate,
                 showAdvanced = false;
 
             $(document).ready(function() {
@@ -322,6 +323,7 @@
                 componentTemplate = template("componentTemplate");
                 featureTemplate = template("featureTemplate");
                 infoTemplate = template("infoTemplate");
+                scriptTemplate = template("scriptTemplate");
 
                 renderCategories();
 
@@ -417,6 +419,12 @@
                         }
                     }
                 });
+
+                var scriptList = "";
+                for (var i = 0; i < resolver.scripts.length; i++) {
+                    scriptList += scriptTemplate(resolver.scripts[i]) + "\r\n";
+                }
+                $("#scriptList pre").html(scriptList);
             }
 
             function updateInfo() {
