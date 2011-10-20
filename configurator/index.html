@@ -319,13 +319,28 @@
 
                 renderCategories();
 
-                $("#configurator .checkbox").bind("click", function() {
-                    var checkbox = $(this);
+                $(".component > .name, .component > .checkbox").click(function(e) {
+                    var component = $(this).parent();
+                        checkbox = component.children(".checkbox");
 
                     if (checkbox.hasClass("explicit")) {
-                        checkbox.removeClass("explicit");
+                        component.find(".checkbox").removeClass("explicit");
                     } else {
                         checkbox.addClass("explicit");
+                    }
+
+                    updateDependencies();
+                    updateInfo();
+                });
+
+                $(".feature > .name, .feature > .checkbox").click(function(e) {
+                    var feature = $(this).parent(),
+                        component = feature.parents(".component"),
+                        checkbox = feature.children(".checkbox");
+
+                    checkbox.toggleClass("explicit");
+                    if (checkbox.hasClass("explicit")) {
+                        component.children(".checkbox").addClass("explicit");
                     }
 
                     updateDependencies();
@@ -388,7 +403,7 @@
                     }
                 });
 
-                $("#configurator .component, #configurator .feature").each(function() {
+                $("#configurator .component").each(function() {
                     var checkbox = $("> .checkbox", this);
                     if (resolver.resolved.indexOf($(this).data("id")) > -1) {
                         if (!checkbox.hasClass("explicit")) {
