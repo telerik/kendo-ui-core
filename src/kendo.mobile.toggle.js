@@ -32,7 +32,7 @@
 
             that.animation = {
                 all: {
-                    effects: "slideTo:left",
+                    effects: "slideTo:right",
                     duration: 200,
                     offset: 60
                 },
@@ -42,7 +42,7 @@
                 },
                 meego: {
                     animator: ".k-toggle-tip",
-                    effects: "slideTo:left",
+                    effects: "slideTo:right",
                     duration: 200,
                     offset: 30
                 }
@@ -104,6 +104,7 @@
                         reverse: back,
                         complete: function () {
                             handle.addClass("k-toggle-" + (back ? "on" : "off"));
+                            that.trigger(TOGGLE, { state: that.input[0].checked });
                         }
                     }, that.animation, extra ));
             }
