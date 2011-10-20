@@ -22,15 +22,14 @@
 
         $(document).ready(function() {
             $("#container").kendoChart({
-                title: {
-                    text: "Lollipop",
-                    position: "top",
-                    visible: false
-                },
                 theme: "black",
                 legend: {
-                    position: "left",
-                    visible: true
+                    position: "bottom",
+                    visible: true,
+                    border: {
+                        width: 1,
+                        color: "white"
+                    }
                 },
                 dataSource: data,
                 seriesDefaults: {},
@@ -40,67 +39,79 @@
                     name: "World",
                     data: [{
                           value: 2,
-                          category: "Value H"
-                      }, {
-                          value: 2,
-                          category: "Value H"
-                      }, {
-                          value: 2,
-                          category: "Value H"
-                      }, {
-                          value: 2,
-                          category: "Value H"
-                      }, {
-                          value: 2,
-                          category: "Value H"
-                      }, {
-                          value: 2,
-                          category: "Value H"
+                          category: "Avg 2011"
                       }, {
                           value: 10,
-                          category: "Value H"
+                          category: "Mar 20121111111"
                       }, {
-                          value: 5,
-                          category: "Value H"
+                          value: 10,
+                          category: "Mar 2013"
                       }, {
-                          value: 3,
-                          category: "Value H"
+                          value: 10,
+                          category: "Mar 2014"
                       }, {
-                          value: 8,
-                          category: "Value H"
+                          value: 10,
+                          category: "Mar 2015"
                       }, {
-                          value: 11,
-                          category: "Value H"
+                          value: 10,
+                          category: "Mar 2016"
                       }, {
-                          value: 5,
-                          category: "Value H"
+                          value: 10,
+                          category: "Mar 2017"
                       }, {
-                          value: 1,
-                          category: "Value H"
+                          value: 10,
+                          category: "Mar 20181111111"
                       }, {
-                          value: 2,
-                          category: "Value H"
+                          value: 10,
+                          category: "Mar 2011111111111111111111111111111118"
                       }, {
-                          value: 2,
-                          category: "Value H"
+                          value: 10,
+                          category: "Mar 2018"
                       }, {
-                          value: 2,
-                          category: "Value H"
+                          value: 10,
+                          category: "Mar 2018"
                       }, {
-                          value: 2,
-                          category: "Value H"
+                          value: 10,
+                          category: "Mar 2111018"
                       }, {
-                          value: 2,
-                          category: "Value H"
+                          value: 10,
+                          category: "Mar 20111118"
                       }, {
-                          value: 2,
-                          category: "Value H"
+                          value: 10,
+                          category: "Mar 2018"
+                      }, {
+                          value: 10,
+                          category: "Mar 2018"
+                      }, {
+                          value: 10,
+                          category: "Mar 2018"
+                      }, {
+                          value: 10,
+                          category: "Mar 20181111111"
+                      }, {
+                          value: 10,
+                          category: "Mar 2018aaaaaaaaa111a"
+                      }, {
+                          value: 10,
+                          category: "Mar 2018"
+                      }, {
+                          value: 10,
+                          category: "Mar 2018"
+                      }, {
+                          value: 10,
+                          category: "Mar 2018"
                       }]
                 }],
                 chartArea: {
                     border: {
                         width: 1,
-                        color: "black"
+                        color: "white"
+                    }
+                },
+                plotArea: {
+                    border: {
+                        width: 1,
+                        color: "white"
                     }
                 },
                 tooltip: {

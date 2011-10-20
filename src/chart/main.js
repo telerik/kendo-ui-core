@@ -1168,12 +1168,6 @@
                 group.children.push(view.createRect(markerBox, { fill: color, stroke: color }));
             }
 
-            // Sets the correct width of the label box
-            // when the position of the legend is top or bottom.
-            if (inArray(options.position, ["top", "bottom"])) {
-                labelBox.x2 += markerSize * (items.length + 1);
-            }
-
             if (children.length > 0) {
                 var padding = getSpacing(options.padding);
                 padding.left += markerSize * 2;
@@ -1237,41 +1231,54 @@
                 options = legend.options,
                 children = legend.children,
                 childrenCount = children.length,
-                labelBox = children[0].box.clone(),
+                box = children[0].box.clone(),
                 markerWidth = legend.markerSize() * 3,
                 offsetX,
                 offsetY,
                 margin = getSpacing(options.margin),
+                boxWidth = children[0].box.width() + markerWidth,
+                plotAreaWidth = targetBox.width(),
                 label,
+                labelY = 0,
                 i;
 
             // Position labels next to each other
             for (i = 1; i < childrenCount; i++) {
-                label = legend.children[i];
-                label.box.alignTo(legend.children[i - 1].box, RIGHT);
-                labelBox.wrap(label.box);
-                label.box.x1 = label.box.x1 + i * markerWidth;
+                label = children[i];
+
+                boxWidth += label.box.width() + markerWidth;
+                if (boxWidth > plotAreaWidth - markerWidth) {
+                    label.box = new Box2D(box.x1, box.y2,
+                        box.x1 + label.box.width(), box.y2 + label.box.height());
+                    boxWidth = label.box.width() + markerWidth;
+                    labelY = label.box.y1;
+                } else {
+                    label.box.alignTo(children[i - 1].box, RIGHT);
+                    label.box.y2 = labelY + label.box.height();
+                    label.box.y1 = labelY;
+                    label.box.translate(markerWidth, 0);
+                }
+                box.wrap(label.box);
             }
 
+            offsetX = (targetBox.width() - box.width() + markerWidth) / 2;
             if (options.position == TOP) {
-                offsetX = (targetBox.x2 - labelBox.width() - markerWidth) / 2;
                 offsetY = targetBox.y1 + margin.top;
-                labelBox.y2 = targetBox.y1 + labelBox.height() + margin.top + margin.bottom;
-                labelBox.y1 = targetBox.y1;
+                box.y1 = targetBox.y1;
+                box.y2 = targetBox.y1 + box.height() + margin.top + margin.bottom;
             } else {
-                offsetX = (targetBox.x2 - labelBox.width() - markerWidth) / 2;
-                offsetY = targetBox.y2 - labelBox.height() - margin.bottom;
-                labelBox.y1 = targetBox.y2 - labelBox.height() - margin.top - margin.bottom;
-                labelBox.y2 = targetBox.y2;
+                offsetY = targetBox.y2 - box.height() - margin.bottom;
+                box.y1 = targetBox.y2 - box.height() - margin.top - margin.bottom;
+                box.y2 = targetBox.y2;
             }
 
             legend.translateChildren(offsetX + options.offsetX,
                     offsetY + options.offsetY);
 
-            labelBox.x1 = targetBox.x1;
-            labelBox.x2 = targetBox.x2;
+            box.x1 = targetBox.x1;
+            box.x2 = targetBox.x2;
 
-            legend.box = labelBox;
+            legend.box = box;
         },
 
         customLayout: function (targetBox) {
@@ -1280,13 +1287,15 @@
                 children = legend.children,
                 childrenCount = children.length,
                 labelBox = children[0].box.clone(),
-                markerWidth = legend.markerSize() * 2;
+                markerWidth = legend.markerSize() * 2,
+                labelBox,
+                i;
 
             // Position labels next to each other
-            for (var i = 1; i < childrenCount; i++) {
-                var label = legend.children[i]
-                label.box.alignTo(legend.children[i - 1].box, BOTTOM);
-                labelBox.wrap(label.box);
+            for (i = 1; i < childrenCount; i++) {
+                labelBox = legend.children[i].box;
+                labelBox.alignTo(legend.children[i - 1].box, BOTTOM);
+                labelBox.wrap(labelBox);
             }
 
             legend.translateChildren(options.offsetX + markerWidth, options.offsetY);

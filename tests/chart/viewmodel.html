@@ -1095,7 +1095,7 @@
 
                     var legendBox = legend.children[0].box;
 
-                    sameBox(legendBox, new Box2D(465, 975, 511, 990), TOLERANCE);
+                    sameBox(legendBox, new Box2D(485, 975, 531.75, 990), TOLERANCE);
                 });
 
                 test("positions legend to the top should have correct box", function() {
@@ -1105,7 +1105,7 @@
 
                     var legendBox = legend.children[0].box;
 
-                    sameBox(legendBox, new Box2D(465, 15, 511, 30), TOLERANCE);
+                    sameBox(legendBox, new Box2D(485.75, 15, 532.75, 30), TOLERANCE);
                 });
 
                 test("positions legend to the bottom", function() {
@@ -1149,7 +1149,7 @@
                         margin: MARGIN
                     });
 
-                    equal(legend.box.height(), baseHeight + 2 * MARGIN);
+                    equal(legend.box.y1, chart.y2 -s baseHeight + 2 * MARGIN);
                 });
 
                 //--------------------------------------------------------------
