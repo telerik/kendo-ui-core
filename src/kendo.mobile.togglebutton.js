@@ -12,7 +12,7 @@
         extend = $.extend,
         proxy = $.proxy;
 
-    var ToggleButton = ui.MobileWidget.extend({
+    var MobileToggleButton = ui.MobileWidget.extend({
         init: function(element, options) {
             var that = this;
             element = $(element);
@@ -48,9 +48,10 @@
                 }
             };
 
-            element.delegate("input[type=checkbox]", "change", proxy(that._toggle, that));
-            element.delegate(handleSelector, MOUSEDOWN, proxy(that._trigger, that));
-            element.delegate(handleSelector, MOUSEUP, proxy(that._trigger, that));
+            element
+                .delegate("input[type=checkbox]", "change", proxy(that._toggle, that))
+                .delegate(handleSelector, MOUSEDOWN, proxy(that._trigger, that))
+                .delegate(handleSelector, MOUSEUP, proxy(that._trigger, that));
 
             that.bind([
                 TOGGLE
@@ -105,7 +106,7 @@
                         reverse: back,
                         complete: function () {
                             handle.addClass("k-toggle-" + (back ? "on" : "off"));
-                            that.trigger(TOGGLE, { state: that.input[0].checked });
+                            that.trigger(TOGGLE, { checked: that.input[0].checked });
                         }
                     }, that.animation, extra ));
             }
@@ -134,5 +135,5 @@
 
     });
 
-    ui.plugin(ToggleButton);
+    ui.plugin(MobileToggleButton);
 })(jQuery);

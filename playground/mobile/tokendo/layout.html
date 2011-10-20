@@ -18,7 +18,8 @@
     <script src="../../../src/kendo.fx.js"></script>
     <script src="../../../src/kendo.scroller.js"></script>
     <script src="../../../src/kendo.mobile.core.js"></script>
-    <script src="../../../src/kendo.mobile.toggle.js"></script>
+    <script src="../../../src/kendo.mobile.button.js"></script>
+    <script src="../../../src/kendo.mobile.togglebutton.js"></script>
     <script src="../../../src/kendo.mobile.application.js"></script>
     <script src="../../../src/kendo.mobile.view.js"></script>
 
@@ -58,8 +59,9 @@
                             </button>
                         </div>
                         <br>
-                        <input type="checkbox" id="toggle" />
-                        <button id="togl"><span>Toggle the baton</span></button>
+                        Show message: <input type="checkbox" id="toggle" />
+                        <br><br>
+                        <button id="button">Init Button</button>
                     </div>
                 </div>
             </div>
@@ -88,10 +90,8 @@
     //                console.log("viewinit", args);
             });
 
-        $("#toggle").kendoToggleButton();
-        $("#togl").click(function () {
-            $("#toggle").data("kendoToggleButton").toggle();
-        });
+        var toggle = $("#toggle").kendoMobileToggleButton().data("kendoMobileToggleButton");
+        var button = $("#button").kendoMobileButton().data("kendoMobileButton");
 
     </script>
 </body>
