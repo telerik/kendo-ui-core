@@ -390,7 +390,7 @@
 
     initialFolder = location.href.match(/\//g).length;
     initialRelativePath = getInitialStylePath();
-    kendoSkin = "kendo";
+    kendoSkin = "hakama";
 
     try {
         if (sessionStorage && sessionStorage.length) {
