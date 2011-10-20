@@ -103,6 +103,7 @@ body,
 {
     width: 100%;
     height: 100%;
+    .box-flex(1);
 }
 
 .k-view
@@ -190,7 +191,7 @@ body > .k-tabStrip,
 .k-content
 {
     .box-align(stretch);
-    .box-flex(1);
+    .box-flex(500);
     position: relative;
 }
 
@@ -317,14 +318,218 @@ body > .k-tabStrip,
     background-image: linearGradient(left top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
 }
 
+.k-ios .k-toggle
+{
+    -webkit-transform: translateZ(0);
+}
+
+.k-toggle
+{
+    display: inline-block;
+    padding: 1px;
+    width: 100px;
+    height: 30px;
+    line-height: 32px;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    .border-radius(4px);
+}
+
+.k-toggle-tip,
+.k-toggle-handle
+{
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 30px;
+    display: block;
+    position: absolute;
+}
+
+.k-toggle-tip
+{
+    z-index: 1;
+    border: 1px solid #969696;
+    background: linearGradient(top, rgb(255, 255, 255), rgb(215, 215, 215) 5%, rgb(255, 255, 255));
+    .border-radius(4px);
+    .box-shadow(0 0 3px 0 rgba(0,0,0,.5));
+}
+
+.k-ios .k-toggle-on .k-toggle-tip
+{
+    .box-shadow(-1px 0 2px 0 rgba(0,0,0,.2));
+}
+
+.k-ios .k-toggle-off .k-toggle-tip
+{
+    .box-shadow(1px 0 2px 0 rgba(0,0,0,.2));
+}
+
+.k-toggle-handle:after,
+.k-toggle-handle:before
+{
+    position: absolute;
+    font-weight: bold;
+    top: 0;
+    display: inline-block;
+    height: 100%;
+    width: 60px;
+    text-transform: uppercase;
+    text-align: center;
+    .border-radius(4px);
+}
+
+.k-toggle-on:after,
+.k-toggle-off:before
+{
+    display: none;
+}
+
+.k-toggle-handle:after
+{
+    content: "off";
+    left: 35px;
+    padding-left: 5px;
+    color: #7f7f7f;
+    text-shadow: 0 -1px 0 #555;
+    background: linearGradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%, rgb(250, 250, 250) 50%, rgb(255, 255, 255));
+    .box-shadow(~"inset 0 2px 2px #a4a4a4");
+    border: 1px solid #999;
+}
+
+.k-toggle-handle:before
+{
+    content: "on";
+    left: -60px;
+    padding-right: 5px;
+    color: #fff;
+    text-shadow: 0 -1px 0 #0e203e;
+    background: linearGradient(top, rgb(50, 120, 239), rgb(54, 128, 248) 50%, rgb(79, 146, 243) 50%, rgb(115, 171, 252));
+    .box-shadow(~"inset 0 2px 2px #0b3a8b");
+    border: 1px solid #2c5fae;
+}
+
+.k-android .k-toggle
+{
+    width: 3em;
+    height: 34px;
+}
+
+.k-android .k-toggle-tip
+{
+    position: relative;
+    background: none;
+    border: none;
+    .box-shadow(none);
+    width: 100%;
+    line-height: 1.6em;
+    text-align: center;
+}
+
+.k-android .k-toggle-tip:before
+{
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.k-android .k-toggle-on .k-toggle-tip:before
+{
+    content: "on";
+}
+
+.k-android .k-toggle-off .k-toggle-tip:before
+{
+    content: "off";
+}
+
+.k-android .k-toggle-handle
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .transform(~"translate(0,0) !important");
+}
+
+.k-android .k-toggle-handle:after,
+.k-android .k-toggle-handle:before
+{
+    content: "\a0";
+    width: 95%;
+    padding: 0;
+    margin: auto;
+    height: 5px;
+    left: 0;
+    position: absolute;
+    top: auto;
+    bottom: 0;
+}
+
+.k-meego .k-toggle
+{
+    width: 3.7em;
+}
+
+.k-meego .k-toggle,
+.k-meego .k-toggle-tip
+{
+    .border-radius(8px);
+}
+
+.k-meego .k-toggle-handle
+{
+    width: 100%;
+    height: 100%;
+    background: #d2d2d2;
+    .border-radius(10px);
+    .box-shadow(inset 0 2px 3px 0 #aaa);
+}
+
+.k-meego .k-toggle-on
+{
+    background: linearGradient(top, rgb(58, 150, 227), rgb(16, 128, 221));
+    .box-shadow(inset 0 2px 3px 0 #4c7698);
+}
+
+.k-meego .k-toggle-clicked .k-toggle-tip
+{
+    background: #d9d9d9;
+}
+
+.k-meego .k-toggle-handle:after,
+.k-meego .k-toggle-handle:before
+{
+    display: none;
+}
+
+.k-meego .k-toggle-tip
+{
+    margin: .3em;
+    width: 1.4em;
+    height: 1.4em;
+    background: #fff;
+    border-color: #fff;
+    .box-sizing(border-box);
+    .box-shadow(0 2px 3px 0 #aaa);
+}
+
+.k-meego .k-toggle-on .k-toggle-tip
+{
+    .box-shadow(0 2px 3px 0 #4c7698);
+}
+
 .k-android,
-.k-android .k-button
+.k-android .k-button,
+.k-android .k-toggle
 {
     font: normal 1em DroidSans, Helvetica, sans-serif;
 }
 
-.k-android .k-button
+.k-android .k-button,
+.k-android .k-toggle
 {
+    padding: .4em .7em;
+    margin: .1em;
     .border-radius(2pt);
     line-height: 2em;
     .box-shadow(0 1px 2px #373737);
@@ -338,6 +543,7 @@ body > .k-tabStrip,
 
 .k-android .k-toolbar,
 .k-android .k-button,
+.k-android .k-toggle,
 .k-android .k-buttonStrip,
 .k-android .k-tabStrip
 {
@@ -763,6 +969,10 @@ body > .k-tabStrip,
 input[type=checkbox]
 {
     display: none;
+}
+
+.k-list input[type=checkbox]
+{
     width: 36px;
     height: 36px;
     margin-left: .4em;
