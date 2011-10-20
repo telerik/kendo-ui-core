@@ -4,7 +4,7 @@
     var doc = document,
         kendo = window.kendo,
         Class = kendo.Class,
-        Component = kendo.ui.Component,
+        Widget = kendo.ui.Widget,
         DataSource = kendo.data.DataSource,
         baseTemplate = kendo.template,
         format = kendo.format,
@@ -86,12 +86,12 @@
         ZERO_THRESHOLD = 0.2;
 
     // Chart ==================================================================
-    var Chart = Component.extend({
+    var Chart = Widget.extend({
         init: function(element, options) {
             var chart = this,
                 theme;
 
-            Component.fn.init.call(chart, element);
+            Widget.fn.init.call(chart, element);
 
             if (options && options.dataSource) {
                 chart.dataSource = DataSource

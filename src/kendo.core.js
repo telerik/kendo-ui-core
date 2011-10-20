@@ -1,7 +1,7 @@
 ;(function($, undefined) {
     /**
      * @name kendo
-     * @namespace This object contains all code introduced by the Kendo project, plus helper functions that are used across all components.
+     * @namespace This object contains all code introduced by the Kendo project, plus helper functions that are used across all widgets.
      */
     var kendo = window.kendo = window.kendo || {},
         extend = $.extend,
@@ -254,7 +254,6 @@
             }
         }
     };
-
 
     //JSON stringify
 (function() {
@@ -1350,7 +1349,7 @@
      * Exposed by jQuery.
      * @ignore
      * @name jQuery.fn
-     * @namespace Handy jQuery plug-ins that are used by all Kendo components.
+     * @namespace Handy jQuery plug-ins that are used by all Kendo widgets.
      */
 
     function size(obj) {
@@ -1598,7 +1597,7 @@
     extend(kendo, /** @lends kendo */ {
         /**
          * @name kendo.ui
-         * @namespace Contains all classes for the Kendo UI components.
+         * @namespace Contains all classes for the Kendo UI widgets.
          */
         ui: {
             /**
@@ -1712,11 +1711,11 @@
         }
     });
 
-    var Component = Observable.extend( /** @lends kendo.ui.Component.prototype */ {
+    var Widget = Observable.extend( /** @lends kendo.ui.Widget.prototype */ {
         /**
-         * Initializes component. Sets `element` and `options` properties.
+         * Initializes widget. Sets `element` and `options` properties.
          * @constructs
-         * @class Represents a UI component. Base class for all Kendo components
+         * @class Represents a UI widget. Base class for all Kendo widgets
          * @extends kendo.Observable
          */
         init: function(element, options) {
@@ -1729,15 +1728,15 @@
     });
 
     extend(kendo.ui, /** @lends kendo.ui */{
-        Component: Component,
+        Widget: Widget,
         /**
-         * Helper method for writing new components.
-         * Exposes a jQuery plug-in that will handle the component creation and attach its client-side object in the appropriate data-kendo* attribute.
-         * Also triggers the init event, when the component has been created.
+         * Helper method for writing new widgets.
+         * Exposes a jQuery plug-in that will handle the widget creation and attach its client-side object in the appropriate data-kendo* attribute.
+         * Also triggers the init event, when the widget has been created.
          * @name kendo.ui.plugin
          * @function
-         * @param {String} name The name of the component.
-         * @param {kendo.ui.Component} component The component function.
+         * @param {String} name The name of the widget.
+         * @param {kendo.ui.Widget} widget The widget function.
          * @example
          * function TextBox(element, options);
          * kendo.ui.plugin("TextBox", TextBox);
@@ -1747,15 +1746,15 @@
          * // get the TextBox object and call the value API method
          * $("input").data("kendoTextBox").value();
          */
-        plugin: function(name, component) {
+        plugin: function(name, widget) {
             // expose it in the kendo.ui namespace
-            kendo.ui[name] = component;
+            kendo.ui[name] = widget;
 
             name = "kendo" + name;
             // expose a jQuery plugin
             $.fn[name] = function(options) {
                 $(this).each(function() {
-                    var comp = new component(this, options);
+                    var comp = new widget(this, options);
                     $(this).data(name, comp);
                 });
                 return this;

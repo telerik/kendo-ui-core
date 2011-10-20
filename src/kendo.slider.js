@@ -64,7 +64,7 @@
      *
      */
     var kendo = window.kendo,
-        Component = kendo.ui.Component,
+        Widget = kendo.ui.Widget,
         Draggable = kendo.ui.Draggable,
         keys = kendo.keys,
         extend = $.extend,
@@ -87,11 +87,11 @@
         PRECISION = 3,
         DISABLED = "disabled";
 
-    var SliderBase = Component.extend({
+    var SliderBase = Widget.extend({
         init: function(element, options) {
             var that = this;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
             options = that.options;
 
             that._distance = options.max - options.min;
@@ -489,7 +489,7 @@
     var Slider = SliderBase.extend(/** @lends kendo.ui.Slider.prototype */{
         /**
          * @constructs
-         * @extends kendo.ui.Component
+         * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {Boolean} [enabled] <true> Can be used to enable/disable the slider.
@@ -501,25 +501,25 @@
          * @option {String} [tooltip.format] Can be used to formatting of the text of the tooltip. Note that the applied format will also influence the appearance of the slider tick labels.
          * @option {Number} [val] <0> The value of the slider.
          * @option {String} [orientation] <"horizontal"> The orientation of the slider. Available options are "horizontal" and "vertical".
-         * @option {String} [tickPlacement] <"both"> the location of the tick marks in the component. Available options are:
+         * @option {String} [tickPlacement] <"both"> the location of the tick marks in the widget. Available options are:
          *     <dl>
          *         <dt>
          *              "topLeft"
          *         </dt>
          *         <dd>
-         *              Tick marks are located on the top of the horizontal component or on the left of the vertical component.
+         *              Tick marks are located on the top of the horizontal widget or on the left of the vertical widget.
          *         </dd>
          *         <dt>
          *              "bottomRight"
          *         </dt>
          *         <dd>
-         *              Tick marks are located on the bottom of the horizontal component or on the right side of the vertical component.
+         *              Tick marks are located on the bottom of the horizontal widget or on the right side of the vertical widget.
          *         </dd>
          *         <dt>
          *              "both"
          *         </dt>
          *         <dd>
-         *              Tick marks are located on both sides of the component.
+         *              Tick marks are located on both sides of the widget.
          *         </dd>
          *     </dl>
          * @option {Number} [smallStep] <1> The small step of the slider. The Value will be changed with SmallStep when the end user:
@@ -990,7 +990,7 @@
     var RangeSlider = SliderBase.extend(/** @lends kendo.ui.RangeSlider.prototype */{
         /**
          * @constructs
-         * @extends kendo.ui.Component
+         * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {Boolean} [enabled] <true> Can be used to enable/disable the rangeSlider.
@@ -1002,25 +1002,25 @@
          * @option {Number} [selectionStart] <0> The selection start value of the rangeSlider.
          * @option {Number} [selectionEnd] <10> The selection end value of the rangeSlider.
          * @option {String} [orientation] <"horizontal"> The orientation of the rangeSlider. Available options are "horizontal" and "vertical".
-         * @option {String} [tickPlacement] <"both"> the location of the tick marks in the component. Available options are:
+         * @option {String} [tickPlacement] <"both"> the location of the tick marks in the widget. Available options are:
          *     <dl>
          *         <dt>
          *              "topLeft"
          *         </dt>
          *         <dd>
-         *              Tick marks are located on the top of the horizontal component or on the left of the vertical component.
+         *              Tick marks are located on the top of the horizontal widget or on the left of the vertical widget.
          *         </dd>
          *         <dt>
          *              "bottomRight"
          *         </dt>
          *         <dd>
-         *              Tick marks are located on the bottom of the horizontal component or on the right side of the vertical component.
+         *              Tick marks are located on the bottom of the horizontal widget or on the right side of the vertical widget.
          *         </dd>
          *         <dt>
          *              "both"
          *         </dt>
          *         <dd>
-         *              Tick marks are located on both sides of the component.
+         *              Tick marks are located on both sides of the widget.
          *         </dd>
          *     </dl>
          * @option {Number} [smallStep] <1> The small step of the rangeSlider. The Value will be changed with SmallStep when the end user:

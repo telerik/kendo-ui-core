@@ -1,13 +1,13 @@
 (function($, undefined) {
     var kendo = window.kendo,
-        Component = kendo.ui.Component,
+        Widget = kendo.ui.Widget,
         proxy = $.proxy;
 
-    var Pageable = Component.extend( {
+    var Pageable = Widget.extend( {
         init: function(element, options) {
             var that = this;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             options = that.options;
             that.dataSource = options.dataSource;

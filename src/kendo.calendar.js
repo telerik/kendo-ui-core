@@ -98,7 +98,7 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         touch = kendo.support.touch,
-        Component = ui.Component,
+        Widget = ui.Widget,
         parse = kendo.parseDate,
         template = kendo.template,
         transitions = kendo.support.transitions,
@@ -135,10 +135,10 @@
             century: 3
         };
 
-    var Calendar = Component.extend(/** @lends kendo.ui.Calendar.prototype */{
+    var Calendar = Widget.extend(/** @lends kendo.ui.Calendar.prototype */{
         /**
          * @constructs
-         * @extends kendo.ui.Component
+         * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {Date} [value] <null> Specifies the selected date.
@@ -152,7 +152,7 @@
         init: function(element, options) {
             var that = this, value;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             element = that.element;
             options = that.options;

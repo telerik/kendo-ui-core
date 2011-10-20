@@ -5,13 +5,13 @@
         mobile = kendo.mobile,
         os = kendo.support.mobileOS,
         touch = kendo.support.touch,
-        Component = ui.Component;
+        Widget = ui.Widget;
 
-    var View = Component.extend({
+    var View = Widget.extend({
         init: function (element, options) {
             var that = this;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             options = that.options;
             element = that.element;
@@ -72,6 +72,6 @@
         }
     });
 
-    kendo.ui.plugin("View", View, Component);
+    kendo.ui.plugin("View", View, Widget);
 
 })(jQuery);
