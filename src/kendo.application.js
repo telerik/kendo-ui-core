@@ -72,10 +72,15 @@
 
             that._findView(url, function(view, init) {
                 history.navigate(url, true);
+
+                that.trigger("viewHide", { view: that._view });
+
                 that._view = view.replace(that._view);
+
                 if (init) {
                     that.trigger("viewInit", { view: view });
                 }
+
                 that.trigger("viewShow", { view: view });
             });
         },

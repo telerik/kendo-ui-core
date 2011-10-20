@@ -165,6 +165,18 @@
                 application.changeView("#page2");
             });
 
+            test("raises viewHide when switching to a local view", function() {
+                expect(1);
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+
+                application.bind("viewHide", function(e) {
+                    equal(e.view.element[0], $("#page1")[0], "Event is raised");
+                });
+
+                application.changeView("#page2");
+            });
+
             asyncTest("raises viewInit when switching to a remote view", function() {
                 expect(1);
 
