@@ -141,6 +141,79 @@
                 application.changeView("page2.html");
             });
 
+            test("raises viewInit for the local view", function() {
+                expect(1);
+
+                $("#qunit-fixture").html('<div data-kendo-role="view" id="page1">Page 1</div>');
+                application = new kendo.Application($("#qunit-fixture"));
+                application.bind("viewInit", function(e) {
+                    equal(e.view.element[0], $("#page1")[0], "Event is raised");
+                });
+
+                application.start();
+            });
+
+            test("raises viewInit when switching to a local view", function() {
+                expect(1);
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+
+                application.bind("viewInit", function(e) {
+                    equal(e.view.element[0], $("#page2")[0], "Event is raised");
+                });
+
+                application.changeView("#page2");
+            });
+
+            asyncTest("raises viewInit when switching to a remote view", function() {
+                expect(1);
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                });
+
+                application.bind("viewInit", function(e) {
+                    start();
+                    equal(e.view.element[0], $("#page2")[0], "Event is raised");
+                });
+
+                application.changeView("page2.html");
+            });
+
+            test("does not raise viewInit for already initialized local view", function() {
+                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+
+                application.changeView("#page2");
+
+                application.bind("viewInit", function(e) {
+                    ok(false, "Does not raise event");
+                });
+
+                application.changeView("#page1");
+            });
+
+            test("does not raise viewInit for already initialized remote view", function() {
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                });
+
+                application.changeView("page2.html");
+
+
+                application.changeView("#page1");
+
+                application.bind("viewInit", function(e) {
+                    ok(false, "Does not raise event");
+                });
+
+                application.changeView("page2.html");
+            });
         </script>
     </body>
 </html>
