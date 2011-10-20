@@ -14,7 +14,7 @@
   </DataInfo>
   <Description />
   <IndependentDescriptors />
-  <Name>ResizeAllPanels</Name>
+  <Name>ResizePanels</Name>
   <Steps xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
@@ -932,7 +932,7 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\Splitter\ResizeAllPanels.tstest</Path>
+  <Path>UIWidgets\Splitter\ResizePanels.tstest</Path>
   <Priority>0</Priority>
   <ProfilerBenchmarkResultsFilePath i:nil="true" />
   <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
@@ -944,7 +944,7 @@
   </ProfilerConfigurations>
   <ProfilerResultsDirectory>C:\Users\aggeorgiev\AppData\Local\Temp\1\</ProfilerResultsDirectory>
   <ProfilerServerName i:nil="true" />
-  <ResourceFilePath>UIWidgets\Splitter\ResizeAllPanels.resx</ResourceFilePath>
+  <ResourceFilePath>UIWidgets\Splitter\ResizePanels.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
