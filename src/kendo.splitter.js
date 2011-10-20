@@ -303,6 +303,7 @@
         },
 
         options: {
+            name: "Splitter",
             orientation: HORIZONTAL
         },
 
@@ -602,7 +603,7 @@
         max: panePropertyAccessor("max")
     });
 
-    ui.plugin("Splitter", Splitter);
+    ui.plugin(Splitter);
 
     var verticalDefaults = {
             sizingProperty: "height",

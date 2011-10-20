@@ -69,7 +69,13 @@
             });
 
             test("plugin extends jQuery.fn", function() {
-                kendo.ui.plugin("Foo", function(){}, Widget);
+                var foo = Widget.extend( {
+                    options: {
+                        name: "Foo"
+                    }
+                });
+
+                kendo.ui.plugin(foo);
 
                 ok($.fn.kendoFoo);
             });

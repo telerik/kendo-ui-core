@@ -33,6 +33,7 @@
         },
 
         options: {
+            name: "Selectable",
             filter: ">*",
             multiple: false
         },
@@ -276,6 +277,6 @@
         }
     });
 
-    kendo.ui.plugin("Selectable", Selectable);
+    kendo.ui.plugin(Selectable);
 
 })(jQuery);

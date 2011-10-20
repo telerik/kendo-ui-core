@@ -556,6 +556,7 @@
         },
 
         options: {
+            name: "Slider",
             val: 0,
             showButtons: true,
             increaseButtonTitle: "Increase",
@@ -981,7 +982,7 @@
 
     };
 
-    kendo.ui.plugin("Slider", Slider);
+    kendo.ui.plugin(Slider);
 
     //
     // RangeSlider
@@ -1059,6 +1060,7 @@
         },
 
         options: {
+            name: "RangeSlider",
             selectionStart: 0,
             selectionEnd: 10
         },
@@ -1309,6 +1311,6 @@
                                                      });
     };
 
-    kendo.ui.plugin("RangeSlider", RangeSlider);
+    kendo.ui.plugin(RangeSlider);
 
 })(jQuery);

@@ -27,6 +27,7 @@
         },
 
         options: {
+            name: "Sortable",
             mode: SINGLE,
             allowUnsort: true
         },
@@ -98,5 +99,5 @@
         }
     });
 
-    kendo.ui.plugin("Sortable", Sortable);
+    kendo.ui.plugin(Sortable);
 })(jQuery);

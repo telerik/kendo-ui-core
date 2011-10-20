@@ -118,6 +118,7 @@
             }
         },
         options: {
+            name: "Groupable",
             filter: "th"
         },
         indicator: function(field) {
@@ -251,6 +252,6 @@
         }
     });
 
-    kendo.ui.plugin("Groupable", Groupable);
+    kendo.ui.plugin(Groupable);
 
 })(jQuery);

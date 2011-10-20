@@ -317,6 +317,7 @@
         },
 
         options: {
+            name: "Window",
             animation: {
                 open: {
                     effects: { zoomIn: {}, fadeIn: {} },
@@ -900,6 +901,6 @@
         }
     };
 
-    kendo.ui.plugin("Window", Window);
+    kendo.ui.plugin(Window);
 
 })(jQuery);
