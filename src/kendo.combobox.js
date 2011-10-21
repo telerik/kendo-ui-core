@@ -617,11 +617,13 @@
             }
 
             input[0].style.cssText = element.style.cssText;
-            input.css({
-                width: "100%",
-                height: "auto"
-            });
-            input.addClass(element.className).show();
+            input.addClass(element.className)
+                 .val(element.value)
+                 .css({
+                    width: "100%",
+                    height: "auto"
+                 })
+                 .show();
 
             that._focused = that.input = input;
 
