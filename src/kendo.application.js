@@ -23,8 +23,7 @@
         },
 
         replace: function(view) {
-            this.element.show();
-            view.hide();
+            view.element.kendoAnimateTo(this.element, {effects: "slide"});
             return this;
         },
 
