@@ -18,6 +18,9 @@
                     model.id = that.getter(model.id);
                     if (model.fields) {
                         each(model.fields, function(field, value) {
+                            if (isPlainObject(value) && value.field) {
+                                value = value.field;
+                            }
                             model.fields[field] = that.getter(value);
                         });
                     }
