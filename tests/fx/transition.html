@@ -6,7 +6,6 @@
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.fx.js"></script>
-        <script src="../../src/kendo.transition.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
@@ -22,27 +21,22 @@
 
 
         <script>
-            function verifyDestinationDisplayed() {
-                start();
-                equal($("#b").position().top, 0);
-                equal($("#b").position().left, 0);
-                ok(!$("#a").is(":visible"));
-            }
-
             module("Transition", {
                 setup: function() {
                     $("#qunit-fixture").html('<div id="a">A div</div><div id="b">B div</div>');
                 }
             });
 
-            asyncTest("destination element slides up", function() {
-                $("#a").kendoAnimateTo($("#b"), {effects: "slide:up", duration: 40, complete: verifyDestinationDisplayed});
+            $.each(["slide", "zoom", "overlay", "fade"], function(i, effect) {
+                asyncTest("destination element " + effect + "s", function() {
+                    $("#a").kendoAnimateTo($("#b"), {effects: effect, duration: 40, complete: function() {
+                        equal($("#b").position().top, 0);
+                        equal($("#b").position().left, 0);
+                        ok(!$("#a").is(":visible"));
+                        start();
+                    }});
+                });
             });
-
-            asyncTest("destination element zooms", function() {
-                $("#a").kendoAnimateTo($("#b"), {effects: "zoom", duration: 40, complete: verifyDestinationDisplayed});
-            });
-
         </script>
     </body>
 </html>
