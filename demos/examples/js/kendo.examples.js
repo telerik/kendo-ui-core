@@ -42,7 +42,8 @@
             nav: /([^\/]+\/[^\/\?]+)(\?.*)?$/,
             title: /<title>(.*?)<\/title>/i,
             skin: /kendo\.\w+(\.min)?\.css/i
-        };
+        },
+        EXAMPLE_LOAD_DELAY = 400;
 
     window.selectCategory = function(element) {
         $("#topnav .selected").removeClass("selected");
@@ -147,7 +148,9 @@
                     exampleBody.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                         exampleBody.empty().html(Application.body(html));
                         setTimeout(function() {
-                            exampleBody.kendoStop(true).kendoAnimate(animation.show);
+                            exampleBody.kendoStop(true).kendoAnimate(extend({}, animation.show, { complete: function() {
+                                $(document).trigger("kendo:exampleLoaded");
+                            }}));
                         }, 100);
                     }}));
                 }
@@ -383,7 +386,10 @@
                 }
             });
 
-            $(document).data("kendoSkin", kendoSkin)
+            $(document).data("kendoSkin", kendoSkin);
+            setTimeout(function() {
+                $(document).trigger("kendo:exampleLoaded");
+            }, EXAMPLE_LOAD_DELAY);
         }
 
     };

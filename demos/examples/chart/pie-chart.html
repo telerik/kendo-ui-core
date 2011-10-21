@@ -103,7 +103,7 @@
                     });
                 }
 
-                $(document).ready(function() {
+                $(document).one("kendo:exampleLoaded", function() {
                     createChart();
                     setupConfigurator();
 
