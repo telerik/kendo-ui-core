@@ -13,6 +13,17 @@
     <body>
         <input id="textbox" style="width: 150px"/>
 
+        <style type="text/css">
+            .k-hide-text {
+                color: transparent;
+                letter-spacing: 999em\9;
+            }
+
+            /* Opera */
+            x:-o-prefocus, .k-hide-text {
+                text-indent: 999em;
+            }
+        </style>
         <script>
             $(document).ready(function() {
                 $("#textbox").kendoTextBox();
