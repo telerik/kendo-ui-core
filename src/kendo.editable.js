@@ -1,16 +1,20 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        Component = ui.Component,
+        Widget = ui.Widget,
         Binder = kendo.data.ModelViewBinder;
 
-    var Editable = Component.extend({
+    var Editable = Widget.extend({
         init: function(element, options) {
             var that = this;
 
-            Component.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             that.refresh();
+        },
+
+        options: {
+            name: "Editable"
         },
 
         refresh: function() {
@@ -32,5 +36,5 @@
         }
    });
 
-   ui.plugin("Editable", Editable);
+   ui.plugin(Editable);
 })(jQuery);
