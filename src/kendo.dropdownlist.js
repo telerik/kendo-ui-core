@@ -149,8 +149,10 @@
 
             Select.fn.init.call(that, element, options);
 
-            element = that.element;
             options = that.options;
+            element = that.element.focus(function() {
+                that.wrapper.focus();
+            });
 
             that._word = "";
 
