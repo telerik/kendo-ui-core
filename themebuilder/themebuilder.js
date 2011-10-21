@@ -2,7 +2,7 @@
 
     var proxy = $.proxy,
         CHANGE = "change",
-        Component = kendo.ui.Component,
+        Widget = kendo.ui.Widget,
         ColorPicker = kendo.ui.ComboBox.extend({
             init: function(element, options) {
                 var that = this;
@@ -173,6 +173,7 @@
                         animation: false
                     })
                     .find("input").kendoColorPicker({
+                        autoBind: false,
                         dataSource: themeColorsDataSource,
                         template: "<span style='background-color: ${ data.value }' class='k-icon k-color-preview'></span> " +
                                   "<span class='k-color-name'>${ data.text }</span>",
@@ -278,7 +279,11 @@
             }
         });
 
-    kendo.ui.plugin("ColorPicker", ColorPicker, Component);
+    ColorPicker.prototype.options = {
+        name: "ColorPicker"
+    };
+
+    kendo.ui.plugin(ColorPicker);
 
     $.extend(kendo, {
         LessConstants: LessConstants,
