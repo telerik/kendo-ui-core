@@ -20,18 +20,37 @@
             that._arrows();
             that._div();
 
-            value = options.value;
-            if (!value || value !== 0) {
-                value = element.val();
-            }
+            that._text.click(function() {
+                that.wrapper.focusin();
+            });
+            that.wrapper.bind({
+                focusin: function() {
+                    that._text.hide();
+                    element.focus();
+                    that._focus();
+                },
+                focusout: function() {
+                    that._text.show();
+                    that._blur();
+                }
+            });
 
             that.bind(CHANGE, options);
 
+            value = options.value;
+            if (!value && value !== 0) { //refactor
+                value = element.val();
+            }
+
             that.value(value);
+            that._blur();
         },
         options: {
             value: null,
+            min: null,
+            max: null,
             format: "n",
+            step: 1,
             empty: "Enter value"
         },
 
@@ -67,6 +86,21 @@
             that._text.html(value === null ? options.empty : kendo.toString(value, format));
         },
 
+        _adjust: function(value) {
+            var that = this,
+            options = that.options,
+            min = options.min,
+            max = options.max;
+
+            if (min !== null && value < min) {
+                value = min;
+            } else if (max !== null && value > max) {
+                value = max;
+            }
+
+            return value;
+        },
+
         _arrows: function() {
             var that = this,
             element = that.element,
@@ -80,9 +114,15 @@
                           + '<span class="k-link k-icon k-arrow-down" title="Decrease value">Decrement</span>')).insertAfter(element);
             }
 
-            that._upArrow = arrows.eq(0).bind(EVENTNAME, function() { that.step(1); });
-            that._downArrow = arrows.eq(1).bind(EVENTNAME, function() { that.step(-1); });
+            that._upArrow = arrows.eq(0).bind(EVENTNAME, function() { that._step(1); });
+            that._downArrow = arrows.eq(1).bind(EVENTNAME, function() { that._step(-1); });
 
+        },
+
+        _blur: function() {
+            var that = this;
+            that.element.addClass("k-hide-text");
+            that._text.show();
         },
 
         _div: function() {
@@ -100,6 +140,22 @@
 
             text[0].style.cssText = element.style.cssText;
             that._text = text.addClass(element.className.replace("k-input"));
+        },
+
+        _focus: function() {
+            var that = this;
+
+            that.element.removeClass("k-hide-text");
+            that._text.hide();
+        },
+
+        _step: function(step) {
+            var that = this,
+                value = that._value || 0;
+
+            value += that.options.step * kendo.parseFloat(step);
+            value = that._adjust(value);
+            that.value(value);
         },
 
         _wrapper: function() {

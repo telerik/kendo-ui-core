@@ -49,6 +49,11 @@
 
             kendo.cultures["custom"] = customCulture;
 
+            test("Parse zero returns zero", function() {
+                var value = 0;
+
+                equal(parseF(value), value);
+            });
             test("Parse number and return number", function() {
                 var value = 12.12;
 

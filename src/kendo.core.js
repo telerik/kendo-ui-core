@@ -1086,7 +1086,7 @@
     }
 
     kendo.parseFloat = function(value, culture) {
-        if (!value) {
+        if (!value && value !== 0) {
            return null;
         }
 

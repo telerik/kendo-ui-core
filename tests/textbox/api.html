@@ -29,6 +29,37 @@
                 }
             });
 
+            test("_step adjusts value", function() {
+                var textbox = new TextBox(input, {
+                    value: 10,
+                    max: 10
+                });
+
+                textbox._step(1);
+
+                equal(textbox.value(), 10);
+                equal(textbox.element.val(), "10");
+            });
+
+
+            test("_step modify input value", function() {
+                var textbox = new TextBox(input);
+
+                textbox._step(1);
+
+                equal(textbox.value(), 1);
+                equal(textbox.element.val(), "1");
+            });
+
+            test("_step parse passed _step", function() {
+                var textbox = new TextBox(input);
+
+                textbox._step("10");
+
+                equal(textbox.value(), 10);
+                equal(textbox.element.val(), "10");
+            });
+
             test("value method should return current value", function() {
                 var textbox = new TextBox(input), value = 10;
 
@@ -135,6 +166,31 @@
                 equal(textbox._value, 12.378);
                 equal(textbox.element.val(), value.toFixed(3));
                 equal(textbox._text.html(), kendo.toString(value, "n3"));
+            });
+
+            test("_blur should hide the input text and show the _text", function() {
+                var textbox = new TextBox(input);
+
+                ok(input.hasClass("k-hide-text"));
+                ok(textbox._text.is(":visible"));
+            });
+
+            test("_focus should show the input text and hide the _text", function() {
+                var textbox = new TextBox(input);
+
+                input.focus();
+
+                ok(!input.hasClass("k-hide-text"));
+                ok(!textbox._text.is(":visible"));
+            });
+
+            test("on blur should hide input text", function() {
+                var textbox = new TextBox(input);
+
+                input.focus().blur();
+
+                ok(input.hasClass("k-hide-text"));
+                ok(textbox._text.is(":visible"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
