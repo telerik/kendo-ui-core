@@ -14,7 +14,7 @@
             that.options = extend(true, {}, that.options, options);
 
             for (option in that.options) {
-                value = element.data("kendo-" + option);
+                value = element.data("kendo-" + option.toLowerCase());
 
                 if (value !== undefined) {
                     that.options[option] = value;
@@ -31,7 +31,8 @@
                 selector = options.selector;
 
             if (selector) {
-                element.find(selector).add(element.filter(selector))["kendo" + options.name]();
+                element.find(selector)
+                       .add(element.filter(selector))["kendo" + options.name]();
             }
         }
     });

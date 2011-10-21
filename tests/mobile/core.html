@@ -26,6 +26,7 @@
                     name: "MyMobileWidget",
                     foo: "foo",
                     bar: "bar",
+                    caseSensitive: "caseSensitive",
                     selector: "[data-kendo-role=my]"
                 }
             });
@@ -34,8 +35,10 @@
 
             module("mobile core", {
                 setup: function() {
+
                 },
                 teardown: function() {
+
                 }
             });
 
@@ -59,6 +62,22 @@
 
                 equal(widget.options.foo, "bar");
                 equal(widget.options.bar, "baz");
+            });
+
+            test("case sensitive options are read from lowercase data attributes", function() {
+                var dom = $('<div data-kendo-casesensitive="bar" />');
+
+                var widget = new MyMobileWidget(dom);
+
+                equal(widget.options.caseSensitive, "bar");
+            });
+
+            test("case sensitive options are read from case sensitive data attributes", function() {
+                var dom = $('<div data-kendo-caseSensitive="bar" />');
+
+                var widget = new MyMobileWidget(dom);
+
+                equal(widget.options.caseSensitive, "bar");
             });
 
             test("default option values are preserved if matching data attribute is not present", function() {
