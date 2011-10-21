@@ -120,8 +120,9 @@
         Select = ui.Select,
         CHANGE = "change",
         SELECT = "select",
-        SELECTED = "k-state-selected",
+        FOCUSED = "k-state-focused",
         DISABLED = "k-state-disabled",
+        SELECTED = "k-state-selected",
         HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
         INPUTWRAPPER = ".k-dropdown-wrap",
@@ -241,20 +242,16 @@
                         keydown: proxy(that._keydown, that),
                         keypress: proxy(that._keypress, that),
                         focusin: function() {
-                            that.span.parent().addClass("k-state-focused");
+                            that.span.parent().addClass(FOCUSED);
                             clearTimeout(that._bluring);
                         },
                         click: function() {
-                            if(!that.ul[0].firstChild) {
-                                that.dataSource.fetch();
-                            } else {
-                                that.toggle();
-                            }
+                            that.toggle();
                         },
                         focusout: function(e) {
                             that._bluring = setTimeout(function() {
                                 that._blur();
-                                that.span.parent().removeClass("k-state-focused");
+                                that.span.parent().removeClass(FOCUSED);
                             }, 100);
                         }
                     })
@@ -273,7 +270,7 @@
                 current = that._current;
 
             if (!that.ul[0].firstChild) {
-                that.options.autoBind = false;
+                that._open = true;
                 that.dataSource.fetch();
             } else {
                 that.popup.open();
@@ -318,7 +315,9 @@
 
             that.previous = that.value();
 
-            if (!options.autoBind) {
+            console.log(that._open);
+            if (that._open) {
+                //that._open = false;
                 that.toggle(length);
             }
 
