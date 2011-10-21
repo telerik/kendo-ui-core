@@ -29,6 +29,17 @@
                 }
             });
 
+            test("_change should call value() method", function() {
+                var textbox = new TextBox(input);
+
+                stub(textbox, {value: textbox.value});
+
+                textbox._change("22");
+
+                equal(textbox.calls("value"), 1);
+                equal(textbox.value(), 22);
+            });
+
             test("_step adjusts value", function() {
                 var textbox = new TextBox(input, {
                     value: 10,
@@ -168,6 +179,17 @@
                 equal(textbox._text.html(), kendo.toString(value, "n3"));
             });
 
+            test("value() adjust value", function() {
+                var textbox = new TextBox(input, {
+                    max: 12.35
+                }),
+                value = 12.3777777;
+
+                textbox.value(value);
+
+                equal(textbox._value, 12.35);
+            });
+
             test("_blur should hide the input text and show the _text", function() {
                 var textbox = new TextBox(input);
 
@@ -184,13 +206,16 @@
                 ok(!textbox._text.is(":visible"));
             });
 
-            test("on blur should hide input text", function() {
+            asyncTest("on blur should hide input text", function() {
                 var textbox = new TextBox(input);
 
                 input.focus().blur();
 
-                ok(input.hasClass("k-hide-text"));
-                ok(textbox._text.is(":visible"));
+                setTimeout(function() {
+                    ok(input.hasClass("k-hide-text"));
+                    ok(textbox._text.is(":visible"));
+                    start();
+                }, 200);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

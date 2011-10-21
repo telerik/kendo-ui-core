@@ -39,18 +39,41 @@
                 ok(!textbox._text.is(":visible"));
             });
 
-            test("blur should show the _text", function() {
+            asyncTest("blur should show the _text", function() {
                 var textbox = new TextBox(input);
 
                 input.focus().blur();
 
-                ok(textbox._text.is(":visible"));
+                setTimeout(function() {
+                    ok(textbox._text.is(":visible"));
+                    start();
+                }, 200);
             });
 
             test("focus div should focus element", function() {
                 var textbox = new TextBox(input);
 
                 textbox._text.click();
+
+                equal(input[0], document.activeElement);
+            });
+
+            asyncTest("_change should call value() method", function() {
+                var textbox = new TextBox(input, {
+                    change: function() {
+                        ok(true);
+                        equal(textbox.value(), 22);
+                        start();
+                    }
+                });
+
+                textbox._change("22");
+            });
+
+            test("click arrow should focus input", function() {
+                var textbox = new TextBox(input);
+
+                textbox._upArrow.mousedown();
 
                 equal(input[0], document.activeElement);
             });
