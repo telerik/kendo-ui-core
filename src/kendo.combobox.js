@@ -298,7 +298,7 @@
                 selected = that._selected;
 
             if (!that.ul[0].firstChild || (that._filtered && selected)) {
-                that.options.autoBind = false;
+                that._open = true;
                 that._filtered = false;
                 that._select();
             } else {
@@ -335,7 +335,8 @@
                 }
             }
 
-            if (!options.autoBind) {
+            if (that._open) {
+                that._open = false;
                 that.toggle(!!length);
             }
 
@@ -402,8 +403,7 @@
                 if (filter === "none") {
                     that._filter(word);
                 } else {
-                    that._filtered = true;
-                    options.autoBind = false;
+                    that._open = that._filtered = true;
                     that.dataSource.filter( {field: options.dataTextField, operator: filter, value: word } );
                 }
             }
@@ -565,7 +565,6 @@
                 };
 
             if (!that.ul[0].firstChild) {
-                options.autoBind = true;
                 dataSource.bind(CHANGE, function search() {
                     that.search(word);
                     dataSource.unbind(CHANGE, search);
@@ -618,11 +617,13 @@
             }
 
             input[0].style.cssText = element.style.cssText;
-            input.css({
-                width: "100%",
-                height: "auto"
-            });
-            input.addClass(element.className).show();
+            input.addClass(element.className)
+                 .val(element.value)
+                 .css({
+                    width: "100%",
+                    height: "auto"
+                 })
+                 .show();
 
             that._focused = that.input = input;
 
