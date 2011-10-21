@@ -6,7 +6,6 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.fx.js"></script>
-        <script src="../src/kendo.transition.js"></script>
         <title>Transition</title>
         <style>
             body {
@@ -54,6 +53,7 @@
         <script>
 
             $("#apply").click(function() {
+                $("#a").show();
                 $("#a").kendoAnimateTo($("#b"), { effects: $("#animation-type").val(), duration: 500 });
             });
             $("#apply").click();

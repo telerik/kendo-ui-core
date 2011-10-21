@@ -1432,7 +1432,7 @@
                 options.completeCallback(); // call the external complete callback
             }
 
-            element.dequeue();
+            return element;
         }
     };
 
@@ -1485,9 +1485,7 @@
     }
 
     function animateTo(element, destination, options, duration, reverse, complete) {
-        return element.queue(function () {
-            fx.transitionPromise(element, destination, prepareAnimationOptions(options, duration, reverse, complete));
-        });
+        return fx.transitionPromise(element, destination, prepareAnimationOptions(options, duration, reverse, complete));
     }
 
     extend($.fn, /** @lends jQuery.fn */{
