@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>transition tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">transition tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+
+            var animateTo = kendo.animateTo,
+                span;
+
+            module("transition", {
+                setup: function() {
+                    $("#qunit-fixture").html('<div id="a">A div</div><div id="b">B div</div>');
+                }
+            });
+
+            test("transition switches to destination element", function() {
+                $("#a").kendoAnimateTo($("#b"), "foo", function() {
+                    ok(!$("#a").is(":visible"));
+                    ok($("#b").is(":visible"));
+                });
+            });
+
+            test("transition with effect which does not exist calls the callback imeadiately", function() {
+                var callbackWasCalled = false;
+
+                $("#a").kendoAnimateTo($("#b"), "foo", function() {
+                    callbackWasCalled = true;
+                });
+
+                ok(callbackWasCalled);
+            });
+       </script>
+    </body>
+</html>
