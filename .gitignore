@@ -29,3 +29,4 @@ app.js
 node_modules
 themebuilder/less.js
 themebuilder/template.js
+themebuilder/themebuilder.css
