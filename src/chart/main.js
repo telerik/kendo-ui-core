@@ -3208,6 +3208,8 @@
                 padding = options.padding,
                 box = targetBox.clone(),
                 minWidth = math.min(box.width(), box.height()),
+                space = 5,
+                padding = options.padding > minWidth / 2 - space ? minWidth / 2 - space : options.padding,
                 newBox = new Box2D(box.x1, box.y1,
                     box.x1 + minWidth, box.y1 + minWidth),
                 newBoxCenter = newBox.center(),
