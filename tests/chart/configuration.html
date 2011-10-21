@@ -590,6 +590,14 @@
                     );
                 });
 
+                // ------------------------------------------------------------
+                module("CSS Class");
+
+                test("renders k-chart class", function() {
+                    createChart({ theme: "test" });
+
+                    ok($("#container").hasClass("k-chart"));
+                });
             })();
         </script>
 
