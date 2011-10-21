@@ -48,13 +48,14 @@
             </select>
             </dd>
         </dl>
+        <label><input type="checkbox" id="reverse" />Reverse</label>
         <button id="apply">Apply</button>
 
         <script>
 
             $("#apply").click(function() {
                 $("#a").show();
-                $("#a").kendoAnimateTo($("#b"), { effects: $("#animation-type").val(), duration: 500 });
+                $("#a").kendoAnimateTo($("#b"), { effects: $("#animation-type").val(), duration: 400, reverse: $("#reverse")[0].checked });
             });
             $("#apply").click();
         </script>
