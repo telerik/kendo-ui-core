@@ -186,7 +186,11 @@
         element.css(direction.property);
     }
 
-    function parseTransitionEffects(effects) {
+    function parseTransitionEffects(options) {
+        var options,
+            effects = options.effects,
+            mirror;
+            ;
         if (effects === "zoom") {
             effects = "zoomIn fadeIn";
         }
@@ -202,7 +206,16 @@
         if (/^overlay:(.+)$/.test(effects)) {
             effects = "slideIn:" + RegExp.$1;
         }
-        return kendo.parseEffects(effects)
+
+        mirror = options.reverse && ((typeof effects === "string" && /^slide:/.test(effects)) || (typeof effects === "object" && "slide" in effects));
+
+        if (mirror) {
+            delete options.reverse;
+        }
+
+        options.effects = $.extend(kendo.parseEffects(effects, mirror), {show: true});
+
+        return options;
     }
 
     if (transitions) {
@@ -551,14 +564,14 @@
             var direction,
                 callback,
                 container = wrapForAnimation(element),
+                options = parseTransitionEffects(options),
+                animatingContainer = "slide" in options.effects,
                 transitions = kendo.support.transitions;
 
             wrapForAnimation(container, {overflow: "hidden"}),
 
-            destination.css({position: "absolute", "left": 0, "top": 0});
+            destination.show().css({position: "absolute", "left": 0, "top": 0, width: container.width(), height: container.height()});
             container.append(destination);
-
-            options.effects = parseTransitionEffects(options.effects);
 
             $.each(options.effects, function(name, definition) {
                 direction = direction || definition.direction;
@@ -566,17 +579,16 @@
 
             positionElement(destination, kendo.directions[direction]);
 
-
             options.complete = function() {
                 setTimeout(function() {
                     element.hide();
                     destination.attr("style", "");
                     container.attr("style", "position:relative");
-                    options.completeCallback();
+                    options.completeCallback && options.completeCallback();
                 });
             }
 
-            if ("slide" in options.effects) {
+            if (animatingContainer) {
                 container.kendoAnimate(options);
             } else {
                 destination.kendoAnimate(options);
