@@ -1516,6 +1516,18 @@ div.k-dropdown
     background: none;
 }
 
+.k-widget,
+.k-chart,
+.k-grid,
+.k-slider,
+.k-splitter,
+.k-treeview,
+.k-panelbar
+{
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 .k-list-container,
 .k-calendar-container
 {

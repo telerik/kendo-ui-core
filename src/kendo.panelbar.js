@@ -304,7 +304,7 @@
     function updateArrow (items) {
         items = $(items);
 
-        items.find(".k-icon").remove();
+        items.children(".k-link").children(".k-icon").remove();
 
         items
             .filter(":has(.k-group),:has(.k-content)")
