@@ -3205,9 +3205,9 @@
         reflow: function(targetBox) {
             var chart = this,
                 options = chart.options,
-                padding = options.padding,
                 box = targetBox.clone(),
                 minWidth = math.min(box.width(), box.height()),
+                padding = options.padding > minWidth / 2 - 5 ? minWidth / 2 - 5 : options.padding,
                 newBox = new Box2D(box.x1, box.y1,
                     box.x1 + minWidth, box.y1 + minWidth),
                 newBoxCenter = newBox.center(),
@@ -3227,7 +3227,7 @@
                 segment = segments[i];
 
                 sector = segment.sector;
-                sector.r = math.max(minWidth / 2 - padding, 0);
+                sector.r = minWidth / 2 - padding;
                 sector.c = new Point2D(
                     sector.r + newBox.x1 + padding,
                     sector.r + newBox.y1 + padding
