@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.chart.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+
+            var data1 = [];
+            for (var i = 0; i < 500; ++i) {
+                data1.push([Math.sin(i / 5) * 0.25, Math.cos(i / 25)])
+            }
+
+            var data2 = [];
+            for (var i = 0; i < 500; i++) {
+                data2.push([Math.sin(i / 25), Math.cos(i / 10) * 0.5]);
+            }
+
+            $(document).ready(function() {
+                $("#container").kendoChart({
+                    theme: "blueOpal",
+                    title: {
+                        text: "Scatter chart",
+                        position: "top"
+                    },
+                    series: [
+                        {
+                            type: "scatter",
+                            name: "Plot 1",
+                            data: data1,
+                            markers: {
+                                type: "circle",
+                                background: "#ff5400"
+                            }
+                        }, {
+                            type: "scatter",
+                            name: "Plot 2",
+                            data: data2,
+                            markers: {
+                                type: "circle",
+                                background: "#ff5400"
+                            }
+                        }
+                    ]
+                });
+            });
+        </script>
+
+        <div id="container" style="width: 600px; height: 400px; float: left; margin-left: 100px;">
+        </div>
+
+    </body>
+</html>
+

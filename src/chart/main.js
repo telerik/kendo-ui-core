@@ -2888,6 +2888,149 @@
         }
     });
 
+    var ScatterChart = ChartElement.extend({
+        init: function(plotArea, options) {
+            var chart = this;
+
+            ChartElement.fn.init.call(chart, options);
+
+            chart.plotArea = plotArea;
+            chart._seriesMin = [Number.MAX_VALUE, Number.MAX_VALUE];
+            chart._seriesMax = [- Number.MAX_VALUE, - Number.MAX_VALUE];
+            chart.points = [];
+
+            chart.render();
+        },
+
+        options: {
+            series: []
+        },
+
+        render: function() {
+            var chart = this;
+
+            chart.traverseDataPoints(proxy(chart.addValue, chart));
+        },
+
+        addValue: function(x, y, pointIx, series, seriesIx) {
+            var chart = this,
+                point;
+
+            chart.updateRange(x, y);
+
+            point = chart.createPoint(x, y, series, seriesIx);
+            if (point) {
+                point.series = series;
+                point.seriesIx = seriesIx;
+                point.owner = chart;
+                point.dataItem = series.dataItems ?
+                    series.dataItems[pointIx] : { x: x, y: y };
+            }
+
+            chart.points.push(point);
+        },
+
+        updateRange: function(x, y) {
+            var chart = this;
+
+            if (defined(x)) {
+                chart._seriesMin[0] = math.min(chart._seriesMin[0], x);
+                chart._seriesMax[0] = math.max(chart._seriesMax[0], x);
+            }
+
+            if (defined(y)) {
+                chart._seriesMin[1] = math.min(chart._seriesMin[1], y);
+                chart._seriesMax[1] = math.max(chart._seriesMax[1], y);
+            }
+        },
+
+        valueRange: function() {
+            var chart = this;
+
+            if (chart.points.length) {
+                return { min: chart._seriesMin, max: chart._seriesMax };
+            }
+
+            return null;
+        },
+
+        createPoint: function(x, y, series, seriesIx) {
+            var chart = this,
+                options = chart.options;
+
+            var point = new LinePoint({x: x, y: y},
+                deepExtend({
+                    markers: {
+                        border: {
+                            color: series.color
+                        },
+                        opacity: series.opacity
+                    }
+                }, series)
+            );
+
+            chart.append(point);
+
+            return point;
+        },
+
+        reflow: function(targetBox) {
+            var chart = this,
+                options = chart.options,
+                plotArea = chart.plotArea,
+                chartPoints = chart.points,
+                axisX = plotArea.axisX,
+                axisY = plotArea.axisY,
+                pointIx = 0,
+                point;
+
+            chart.traverseDataPoints(function(x, y) {
+                point = chartPoints[pointIx++];
+
+                var slotX = plotArea.axisX.getSlot(x, x),
+                    slotY = plotArea.axisY.getSlot(y, y),
+                    pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
+
+                if (point) {
+                    point.reflow(pointSlot);
+                }
+            });
+
+            chart.box = targetBox;
+        },
+
+        getViewElements: function(view) {
+            var chart = this,
+                elements = ChartElement.fn.getViewElements.call(chart, view),
+                group = view.createGroup({
+                    animation: {
+                        type: CLIP
+                    }
+                });
+
+            group.children = elements;
+            return [group];
+        },
+
+        traverseDataPoints: function(callback) {
+            var chart = this,
+            options = chart.options,
+            series = options.series,
+            pointIx = 0,
+            seriesIx,
+            currentSeries,
+            pointData;
+
+            for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                currentSeries = series[seriesIx];
+                for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
+                    pointData = currentSeries.data[pointIx];
+                    callback(pointData[0], pointData[1], pointIx, currentSeries, seriesIx);
+                }
+            }
+        }
+    });
+
     var PieSegment = ChartElement.extend({
         init: function(value, sector, options) {
             var segment = this;
@@ -3582,11 +3725,12 @@
                 pieSeries = [],
                 barSeries = [],
                 lineSeries = [],
+                scatterSeries = [],
                 i;
 
             options.legend.items = [];
-            options.invertAxes = options.categoryAxis.orientation === VERTICAL,
-            options.range = { min: 0, max: 1 }
+            options.invertAxes = options.categoryAxis.orientation === VERTICAL;
+            options.range = { min: 0, max: 1 };
             plotArea.charts = [];
             for (i = 0; i < seriesLength; i++) {
                 currentSeries = series[i];
@@ -3597,6 +3741,8 @@
                     lineSeries.push(currentSeries);
                 } else if (currentSeries.type === PIE) {
                     pieSeries.push(currentSeries);
+                } else if (currentSeries.type === "scatter") {
+                    scatterSeries.push(currentSeries);
                 }
             }
 
@@ -3612,7 +3758,20 @@
                 plotArea.createPieChart(pieSeries);
             }
 
-            if (seriesLength != pieSeries.length || seriesLength == 0) {
+            if (scatterSeries.length > 0) {
+                plotArea.createScatterChart(scatterSeries);
+
+                plotArea.axisX = new NumericAxis(options.range.min[0], options.range.max[0],
+                    { orientation: HORIZONTAL, majorGridLines: { visible: false }, min: -1, max: 1  }
+                );
+
+                plotArea.axisY = new NumericAxis(options.range.min[1], options.range.max[1],
+                    { orientation: VERTICAL, majorGridLines: { visible: false }, min: -1, max: 1 }
+                );
+
+                plotArea.append(plotArea.axisY);
+                plotArea.append(plotArea.axisX);
+            } else if (seriesLength != pieSeries.length || seriesLength == 0) {
                 plotArea.createAxes(options.range.min, options.range.max, options.invertAxes);
             }
 
@@ -3678,6 +3837,23 @@
             options.range.min = math.min(options.range.min, lineChartRange.min);
             options.range.max = math.max(options.range.max, lineChartRange.max);
             plotArea.charts.push(lineChart);
+
+            plotArea.addToLegend(series);
+        },
+
+        createScatterChart: function(series) {
+            var plotArea = this,
+                options = plotArea.options,
+                firstSeries = series[0],
+                categoryAxis = options.categoryAxis,
+                categories = categoryAxis.categories,
+                // Override the original invertAxes
+                scatterChart = new ScatterChart(plotArea, { series: series }),
+                scatterChartRange = scatterChart.valueRange() || options.range;
+
+            // Override the original range
+            options.range = scatterChartRange;
+            plotArea.charts.push(scatterChart);
 
             plotArea.addToLegend(series);
         },
