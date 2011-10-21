@@ -449,12 +449,6 @@
     };
 
     kendo.fx.transitionPromise = function(element, destination, options) {
-        var completeCallback = options.complete;
-
-        options.complete = function() {
-            completeCallback();
-        }
-
         kendo.fx.animateTo(element, destination, options);
         return element;
     };
@@ -572,14 +566,13 @@
 
             positionElement(destination, kendo.directions[direction]);
 
-            callback = options.complete || $.noop;
 
             options.complete = function() {
                 setTimeout(function() {
                     element.hide();
                     destination.attr("style", "");
                     container.attr("style", "position:relative");
-                    callback();
+                    options.completeCallback();
                 });
             }
 
