@@ -1421,7 +1421,7 @@
         }
     };
 
-    function animate(element, options, duration, reverse, complete) {
+    function prepareAnimationOptions(options, duration, reverse, complete) {
         if (typeof options === STRING) {
             // options is the list of effect names separated by space e.g. animate(element, "fadeIn slideDown")
 
@@ -1450,7 +1450,7 @@
             };
         }
 
-        options = extend({
+        return extend({
             //default options
             effects: {},
             duration: 400, //jQuery default duration
@@ -1461,8 +1461,11 @@
             show: false
         }, options, { completeCallback: options.complete, complete: noop }); // Move external complete callback, so deferred.resolve can be always executed.
 
+    }
+
+    function animate(element, options, duration, reverse, complete) {
         return element.queue(function () {
-            fx.promise(element, options);
+            fx.promise(element, prepareAnimationOptions(options, duration, reverse, complete));
         });
     }
 
@@ -1470,6 +1473,7 @@
         kendoStop: function(clearQueue, gotoEnd) {
             return this.stop(clearQueue, gotoEnd);
         },
+
         kendoAnimate: function(options, duration, reverse, complete) {
             return animate(this, options, duration, reverse, complete);
         }
