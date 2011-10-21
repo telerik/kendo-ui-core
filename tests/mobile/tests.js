@@ -5,6 +5,10 @@ tests.push(
     },
     {
         page: "mobile/core.html",
-        title: "core"
+        title: "mobile core"
+    },
+    {
+        page: "mobile/button.html",
+        title: "mobile button"
     }
 );

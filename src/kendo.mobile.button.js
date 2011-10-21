@@ -1,33 +1,32 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        MobileWidget = ui.MobileWidget,
         mobile = kendo.mobile,
         support = kendo.support,
         touch = support.touch,
         os = support.mobileOS,
-        excludedNodesRegExp = /^(a|img)$/i,
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         MOUSEUP = touch ? "touchend" : "mouseup",
         CLICK = "click",
         extend = $.extend,
         proxy = $.proxy;
 
-    var MobileButton = ui.MobileWidget.extend({
+    var MobileButton = MobileWidget.extend({
         init: function(element, options) {
             var that = this;
-            element = $(element);
 
-            ui.MobileWidget.fn.init.call(that, element, options);
+            MobileWidget.fn.init.call(that, element, options);
 
-            element = that.element;
             options = that.options;
 
-            that._wrapper();
+            that._wrap();
 
             that._clickProxy = proxy(that._click, that);
-            that._triggerProxy = proxy(that._trigger, that);
 
-            that.enable();
+            that._pressProxy = proxy(that._press, that);
+
+            that.enable(options.enable);
 
             that.bind([
                 CLICK
@@ -41,18 +40,19 @@
 
         enable: function(enable) {
             var that = this;
-            enable = arguments.length ? enable : true;
+
+            enable = enable === undefined ? true: enable;
 
             if (enable) {
                 that.element
                     .bind(CLICK, that._clickProxy)
-                    .bind(MOUSEDOWN, that._triggerProxy)
-                    .bind(MOUSEUP, that._triggerProxy);
+                    .bind(MOUSEDOWN, that._pressProxy)
+                    .bind(MOUSEUP, that._pressProxy);
             } else {
-                that.text
+                that.element
                     .unbind(CLICK, that._clickProxy)
-                    .unbind(MOUSEDOWN, that._triggerProxy)
-                    .unbind(MOUSEUP, that._triggerProxy);
+                    .unbind(MOUSEDOWN, that._pressProxy)
+                    .unbind(MOUSEUP, that._pressProxy);
             }
         },
 
@@ -60,41 +60,30 @@
             this.enable(false);
         },
 
-        refresh: function() {
-        },
-
-        _trigger: function (e) {
-            this.element.toggleClass("k-button-clicked", e.type == MOUSEDOWN);
+        _press: function (e) {
+            this.element.toggleClass("k-state-active", e.type === MOUSEDOWN);
         },
 
         _click: function(e) {
             this.trigger(CLICK);
         },
 
-        _wrapper: function() {
-            var that = this;
+        _wrap: function() {
+            var that = this,
+                element = that.element,
+                span;
 
-            if (that.element.is("button")) {
-                that.element.addClass("k-button");
+            span = element.addClass("k-button")
+                          .children("span");
+
+            if (!span[0]) {
+                span = element.wrapInner("<span/>").children("span");
             }
 
-            that.textElement = that.element.children("span");
-            if (that.textElement.length) {
-                that.textElement.addClass("k-text");
-            } else {
-                that.textElement = that.element
-                                    .contents()
-                                    .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
-                                    .wrapAll("<span class='k-text'/>").parent();
-            }
-
-            that.image = that.element.children(".k-image, img").addClass("k-image");
-
-            if (!that.image.length) {
-                that.image = that.element.children(".k-sprite").addClass("k-sprite");
-            }
+            span.addClass("k-text")
+                .find("img")
+                .addClass("k-image");
         }
-
     });
 
     ui.plugin(MobileButton);
