@@ -21,9 +21,16 @@
         </div>
 
         <script>
-            var pushStateSupported = window.history.pushState;
-            var win, hist, initial, win, _history, root, loc;
+            var win,
+                kendoHistory,
+                _history,
+                initial,
+                win,
+                loc,
+                pushStateSupported = window.history.pushState,
+                root = location.pathname.replace("index.html", "sandbox/");
 
+            console.log(location.pathname);
 
             QUnit.testStart = function() {
                 QUnit.stop();
@@ -31,9 +38,9 @@
                 win = window.frames[0].window;
 
                 $(win).one('load', function() {
-                    hist = win.hist,
                     loc = win.location,
                     initial = loc.href.replace(/#.*$/, ''),
+                    kendoHistory = win.kendo.history,
                     _history = win.history;
                     QUnit.start();
                 });
@@ -44,23 +51,24 @@
             }
 
             function startWithHash() {
-                hist.start({root: "/tests/history/sandbox/"});
-            }
-            function startWithPushState() {
-                hist.start({pushState: true, root: "/tests/history/sandbox/"});
+                kendoHistory.start({root: root});
             }
 
-            module("History navigation");
+            function startWithPushState() {
+                kendoHistory.start({pushState: true, root: root});
+            }
+
+            module("history navigation");
 
             test("uses hashbang by default", function() {
                 startWithHash();
-                hist.navigate("/new-location");
+                kendoHistory.navigate("/new-location");
                 url(initial + "#/new-location");
             });
 
             test("uses pushState if possible and asked to", function() {
                 startWithPushState();
-                hist.navigate("/new-location");
+                kendoHistory.navigate("/new-location");
                 if (!!pushStateSupported) {
                     url(initial + "new-location");
                 }
@@ -71,9 +79,9 @@
 
             test("does not pushState if identical", function() {
                 startWithPushState();
-                hist.navigate("/new-location");
+                kendoHistory.navigate("/new-location");
                 var length = history.length;
-                hist.navigate("/new-location");
+                kendoHistory.navigate("/new-location");
                 equal(history.length, length);
             });
 
@@ -88,7 +96,7 @@
 
                 startWithPushState();
 
-                hist.navigate("/new-location");
+                kendoHistory.navigate("/new-location");
 
                 var currentLocation = loc.href;
 
@@ -102,7 +110,7 @@
                     }
                 }
 
-                hist._pushStateSupported = function() { return false; }
+                kendoHistory._pushStateSupported = function() { return false; }
                 startWithPushState();
                 check();
             });
@@ -117,7 +125,7 @@
                 }
 
                 startWithHash();
-                hist.navigate("/new-location");
+                kendoHistory.navigate("/new-location");
 
                 var currentLocation = loc.href;
 
@@ -139,8 +147,8 @@
                 if (!pushStateSupported) {
                     return;
                 }
-                hist.start({root: "/tests/history/sandbox/subdir/", pushState: true});
-                hist.navigate('/new-location');
+                kendoHistory.start({root: root + "/subdir/", pushState: true});
+                kendoHistory.navigate('/new-location');
                 url(initial + "subdir/new-location");
             });
 
@@ -148,18 +156,18 @@
                 expect(1);
                 startWithHash();
 
-                hist.change(function(e) {
+                kendoHistory.change(function(e) {
                     equal("/new-location", e.location);
                 });
 
-                hist.navigate("/new-location");
+                kendoHistory.navigate("/new-location");
             });
 
             asyncTest("listens for outside url changes (hashChange)", function() {
                 expect(1);
                 startWithHash();
 
-                hist.change(function(e) {
+                kendoHistory.change(function(e) {
                     start();
                     equal("/outside-location", e.location);
                 });
