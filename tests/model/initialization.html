@@ -49,6 +49,18 @@
                 ok(model.fields.foo);
             });
 
+            test("define assigns field type", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: { type: "string" }
+                    }
+                });
+
+                var model = new MyModel();
+
+                equal(model.fields.foo.type, "string");
+            });
+
             test("define if key is assign model is not new", function() {
                 var MyModel = Model.define({
                     id: "id"
