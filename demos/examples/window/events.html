@@ -50,24 +50,28 @@
 
                     function onOpen(e) {
                         kendoConsole.log("event :: open");
-                    };
+                    }
 
                     function onClose(e) {
                         undo.show();
                         kendoConsole.log("event :: close");
-                    };
+                    }
 
                     function onActivate(e) {
                         kendoConsole.log("event :: activate");
-                    };
+                    }
+
+                    function onDeactivate(e) {
+                        kendoConsole.log("event :: deactivate");
+                    }
 
                     function onRefresh(e) {
                         kendoConsole.log("event :: refresh");
-                    };
+                    }
 
                     function onResize(e) {
                         kendoConsole.log("event :: resize");
-                    };
+                    }
 
                     if (!window.data("kendoWindow")) {
                         window.kendoWindow({
@@ -75,9 +79,10 @@
                             title: "Kendo Window",
                             actions: ["Refresh", "Close"],
                             contentUrl: 'ajax/ajaxContent.html',
+                            open: onOpen,
                             activate: onActivate,
                             close: onClose,
-                            open: onOpen,
+                            deactivate: onDeactivate,
                             resize: onResize,
                             refresh: onRefresh
                         });

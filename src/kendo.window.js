@@ -124,6 +124,7 @@
         // events
         OPEN = "open",
         ACTIVATE = "activate",
+        DEACTIVATE = "deactivate",
         CLOSE = "close",
         REFRESH = "refresh",
         RESIZE = "resize",
@@ -273,6 +274,13 @@
                  * @param {Event} e
                  */
                 ACTIVATE,
+                /**
+                 * Fires when the window has finished its closing animation
+                 * @name kendo.ui.Window#deactivate
+                 * @event
+                 * @param {Event} e
+                 */
+                DEACTIVATE,
                 /**
                  * Fires when the window is being closed (by the user or through the close() method)
                  * @name kendo.ui.Window#close
@@ -529,6 +537,7 @@
                     duration: hideOptions.duration,
                     complete: function() {
                         wrapper.hide();
+                        that.trigger(DEACTIVATE);
                     }
                 });
             }
