@@ -7,24 +7,16 @@
             init: function(element, options) {
                 var that = this;
 
-                if (!options) {
-                    options = {};
-                }
-
-                if (!options.dataSource) {
-                    options.dataSource = [];
-                }
-
                 kendo.ui.ComboBox.fn.init.call(that, element, options);
 
                 that._updateColorPreview();
 
-                that.bind(CHANGE, proxy(that._change, that));
+                that.bind(CHANGE, proxy(that._colorChange, that));
 
                 that.wrapper.addClass("k-colorpicker");
             },
 
-            _change: function(e) {
+            _colorChange: function(e) {
                 var that = this;
 
                 that._updateColorPreview();
@@ -279,9 +271,9 @@
             }
         });
 
-    ColorPicker.prototype.options = {
+    ColorPicker.fn.options = $.extend(kendo.ui.ComboBox.fn.options, {
         name: "ColorPicker"
-    };
+    });
 
     kendo.ui.plugin(ColorPicker);
 

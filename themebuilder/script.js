@@ -11,7 +11,7 @@
 
     // do not initialize twice, just reopen window
     if (typeof kendo != UNDEFINED && kendo.ThemeBuilder) {
-        $("#kendo-themebuilder-wrapper").data("kendoThemeBuilder").open();
+        $("#k-tb-wrap").data("kendoThemeBuilder").open();
         return;
     }
 
