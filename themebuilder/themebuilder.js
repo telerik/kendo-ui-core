@@ -147,12 +147,12 @@
                 $(window).bind("resize.kendoThemeBuilder", $.proxy(this.updateMaxHeight, this));
 
                 that.element = that.content.closest(".k-window")
-                    .attr("id", "k-tb-wrap")
                     .css({
                         top: 20,
                         left: $(window).width() - 320
                     })
-                    .data("kendoThemeBuilder", that);
+                    .data("kendoThemeBuilder", that)
+                    .wrap("<div id='k-tb-wrap' />");
 
                 themeColorsDataSource = new kendo.data.DataSource({
                     data: constants ? constants.colors().map(function(x) {
