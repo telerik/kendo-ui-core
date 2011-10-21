@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid Editing</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.pageable.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.groupable.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Grid Editing</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                table,
+                DataSource = kendo.data.DataSource,
+                Model = kendo.data.Model,
+                dataSource;
+
+            function setup(options) {
+                options = $.extend({}, {
+                editable: true,
+                dataSource: new DataSource({
+                        schema: {
+                            model: {
+                            id: "foo"
+                            }
+                        },
+                        data: [{ foo: "bar" }, { foo: "baz" }]
+                    })
+                }, options);
+                dataSource = options.dataSource;
+
+                table.kendoGrid(options);
+            }
+
+            module("grid editing", {
+                setup: function() {
+                    table = document.createElement("table");
+                    document.body.appendChild(table);
+
+                    table = $(table);
+                },
+                teardown: function() {
+                    table.closest(".k-grid").remove();
+                }
+            });
+
+            test("cell click enters edit mode", function() {
+                setup();
+                var cell = table.find("td:first").click();
+
+                ok(cell.find(":input").length);
+            });
+
+            test("cell click does not enter edit mode if editable is false", function() {
+                setup({ editable: false } );
+                var cell = table.find("td:first").click();
+
+                ok(!cell.find(":input").length);
+            });
+
+
+            test("correct model is passed to the editable instance", function() {
+                setup();
+                var cell = table.find("td:first").click();
+
+                equal(cell.data("kendoEditable").options.model, dataSource.get("bar"));
+            });
+
+            test("k-edit-cell is applied on edited cell", function() {
+                setup();
+                var cell = table.find("td:first").click();
+
+                ok(cell.hasClass("k-edit-cell"));
+            });
+
+            test("clicking outside of the grid leaves edit mode", function() {
+                setup();
+
+                var cell = table.find("td:first").click();
+
+                $(document).click();
+
+                ok(!cell.hasClass("k-edit-cell"));
+            });
+
+            test("clicking outside of the grid restores display content", function() {
+                setup();
+
+                var cell = table.find("td:first").click();
+
+                $(document).click();
+
+                equal(cell.html(), "bar");
+            });
+
+            test("clicking on another editable cell sets previous to display mode", function() {
+                setup();
+
+                var cell = table.find("td:first").click();
+                table.find("td").eq(1).click();
+
+                ok(!cell.hasClass("k-edit-cell"));
+                ok(!cell.find(":input").length);
+            });
+
+            test("clicking twice on same input stays visible", function() {
+                setup();
+
+                var cell = table.find("td:first").click().find(":input").click().end();
+
+                ok(cell.hasClass("k-edit-cell"));
+                ok(cell.find(":input").length);
+            });
+
+            test("clicking on k-hierarchy-cell does not edit the cell", function() {
+                setup({ detailTemplate: "" });
+
+                var cell = table.find(".k-hierarchy-cell:first").click();
+
+                ok(!cell.find(":input").length);
+            });
+
+            test("clicking on k-detail-cell does not edit the cell", function() {
+                var grid, cell;
+                setup({ detailTemplate: "" });
+
+                grid = table.data("kendoGrid");
+                grid.expandRow(table.find("tr.k-master-row").first());
+                cell = table.find(".k-detail-cell:first").click();
+
+                ok(!cell.find(":input").length);
+            });
+
+            test("clicking on cell inside detail template does not edit the cell", function() {
+                var grid, cell;
+                setup({ detailTemplate: "<table><tr><td>template</td></tr></table>" });
+
+                grid = table.data("kendoGrid");
+                grid.expandRow(table.find("tr.k-master-row").first());
+                cell = table.find(".k-detail-cell:first").find("td").click().end();
+
+                ok(!cell.find(":input").length);
+            });
+
+            test("clicking on cell inside k-grouping-row does edit the cell", function() {
+                var grid, cell;
+                setup({ groupable: true });
+
+                grid = table.data("kendoGrid");
+                dataSource.group({ field: "id" });
+                cell = table.find(".k-grouping-row:first>td").click();
+
+                ok(!cell.find(":input").length);
+            });
+
+            test("clicking on cell inside k-group-cell does edit the cell", function() {
+                var grid, cell;
+                setup({ groupable: true });
+
+                grid = table.data("kendoGrid");
+                dataSource.group({ field: "id" });
+                cell = table.find(".k-group-cell:first").click();
+
+                ok(!cell.find(":input").length);
+            });
+
+            test("cellIndex returns cell index skipping the group cell", function() {
+                var grid, cell;
+                setup({ groupable: true });
+
+                grid = table.data("kendoGrid");
+                dataSource.group({ field: "id" });
+                cell = table.find("tr:not(.k-grouping-row):first>td:nth(1)");
+
+                equal(grid.cellIndex(cell), 0);
+            });
+
+            test("cellIndex returns cell index skipping the hierarchy cell", function() {
+                var grid, cell;
+                setup({ detailTemplate: "" });
+
+                grid = table.data("kendoGrid");
+                cell = table.find("tr:first>td:nth(1)");
+
+                equal(grid.cellIndex(cell), 0);
+            });
+
+            test("cellIndex returns cell index skipping both detail/hierarchy cell", function() {
+                var grid, cell;
+                setup({ detailTemplate: "", groupable: true });
+
+                grid = table.data("kendoGrid");
+                dataSource.group({ field: "id" });
+                cell = table.find("tr.k-master-row:first>td:nth(2)");
+
+                equal(grid.cellIndex(cell), 0);
+            });
+
+            test("edit cell input is populated with correct item value", function() {
+                var grid, cell;
+                setup({ detailTemplate: "" });
+
+                grid = table.data("kendoGrid");
+                cell = table.find("tr:first>td:nth(1)").click();
+
+                equal(cell.find(":input").val(), "bar");
+            });
+
+       </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

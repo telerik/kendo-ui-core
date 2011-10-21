@@ -5,11 +5,17 @@
         <title>editable</title>
         <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.groupable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pageable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.model.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.validate.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
         <link href="http://cdn.kendostatic.com/2011.3.1007/styles/kendo.common.min.css" rel="stylesheet"/>
         <link href="http://cdn.kendostatic.com/2011.3.1007/styles/kendo.kendo.min.css" rel="stylesheet"/>
 
@@ -19,11 +25,16 @@
         <script>
             var grid,
                 dataSource,
-                validator;
+                validator,
+                data = [];
 
             $(document).ready(function() {
+                for (var idx = 0; idx < 30; idx++) {
+                    data.push({foo: "foo " + idx, bar: "bar " + idx, id: idx});
+                }
                 dataSource = new kendo.data.DataSource({
-                    data: [{foo: "foo 1", bar: "bar 1", id: 1}, {foo: "foo 2", bar: "bar 2", id: 2}],
+                    data: data,
+                    pageSize: 10,
                     schema: {
                         model: {
                             id: "id"
@@ -33,9 +44,17 @@
 
                 grid = $("#grid").kendoGrid({
                     dataSource: dataSource,
-                    columns: ["foo", "bar", "id"]
+                    groupable: true,
+                    sortable: true,
+                    //scrollable: true,
+                    //selectable: "multi cell",
+                    //navigatable: true,
+                    pageable: true,
+                    editable: true,
+                    detailTemplate: "<table><tr><td>tashak</td></tr></table>",
+                    columns: ["id", "bar", "foo"]
                 })
-                .delegate("td", "click", function(e) {
+/*                .delegate("td", "click", function(e) {
                     if((grid.valid != undefined && !grid.valid) || $(e.target).is(":input")) {
                         return;
                     }
@@ -52,10 +71,10 @@
                         new kendo.data.ModelViewBinder(cell, model);
                         cell.find(":input:visible:first").focus();
                     }
-                })
+                })*/
                 .data("kendoGrid");
 
-                $(document).mousedown(function(e){
+                /*$(document).mousedown(function(e){
                     if (grid.td && !$.contains(grid.td[0], e.target) && grid.td[0] != e.target && !$(e.target).closest('.k-animation-container').length) {
                         grid.valid = validator.validate();
                         if(grid.valid) {
@@ -64,7 +83,7 @@
                             grid.td = null;
                         }
                     }
-                });
+                });*/
 
                 validator = new kendo.ui.Validator(grid.element, {});
 

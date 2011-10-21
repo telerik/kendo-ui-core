@@ -522,6 +522,8 @@
 
             that._details();
 
+            that._editable();
+
             if (that.options.autoBind) {
                 that.dataSource.query();
             }
@@ -547,6 +549,62 @@
             that.table = table.attr("cellspacing", 0);
 
             that._wrapper();
+        },
+
+        cellIndex: function(td) {
+            return $(td).parent().find('td:not(.k-group-cell,.k-hierarchy-cell)').index(td);
+        },
+
+        _editable: function() {
+            var that = this,
+                cell,
+                column,
+                id;
+
+            if (that.options.editable) {
+                that.table.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell)", "click", function(e) {
+                    if($(this).closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
+                        return;
+                    }
+
+                    $(".k-edit-cell").each(function() {
+                        cell = $(this);
+                        id = cell.closest("tr").data("id");
+                        column = that.columns[that.cellIndex(cell)];
+
+                        that._displayCell(cell, column, that.dataSource.get(id).data);
+                    });
+
+                    cell = $(this).addClass("k-edit-cell");
+                    id = cell.closest("tr").data("id");
+                    column = that.columns[that.cellIndex(cell)];
+
+                    cell.kendoEditable({
+                        fields: column.field,
+                        model: that.dataSource.get(id)
+                    });
+                });
+
+                $(document).click(function(e) {
+                    if (cell && !$.contains(cell[0], e.target) && cell[0] !== e.target) {
+                        that._displayCell(cell, column, that.dataSource.get(id).data);
+                    }
+                });
+            }
+        },
+
+        _displayCell: function(cell, column, dataItem) {
+            var that = this,
+                state = { storage: {}, count: 0 },
+                settings = extend({}, kendo.Template, that.options.templateSettings),
+                tmpl = kendo.template(that._cellTmpl(column, state), settings);
+
+            if (state.count > 0) {
+                tmpl = proxy(tmpl, state.storage);
+            }
+
+            cell.removeClass("k-edit-cell").empty()
+                .html(tmpl(dataItem));
         },
 
         _groupable: function() {
@@ -989,9 +1047,8 @@
                 length = that.columns.length,
                 template,
                 model = that.dataSource.options.schema.model,
-                templateFunctionStorage = {},
+                state = { storage: {}, count: 0 },
                 id,
-                templateFunctionCount = 0,
                 column,
                 type,
                 hasDetails = that._hasDetails(),
@@ -1027,9 +1084,9 @@
                             }
                             rowTemplate += id;
                         } else if (type === FUNCTION) {
-                            templateFunctionStorage["tmpl" + templateFunctionCount] = id;
-                            rowTemplate += 'this.tmpl' + templateFunctionCount + "(" + paramName + ")";
-                            templateFunctionCount++;
+                            state.storage["tmpl" + state.count] = id;
+                            rowTemplate += 'this.tmpl' + state.count + "(" + paramName + ")";
+                            state.count++;
                         }
 
                         rowTemplate += '#"';
@@ -1053,37 +1110,48 @@
 
                     rowTemplate += "<td>";
 
-                    if (type === FUNCTION) {
-                        templateFunctionStorage["tmpl" + templateFunctionCount] = template;
-                        rowTemplate += "#=this.tmpl" + templateFunctionCount + "(" + paramName + ")#";
-                        templateFunctionCount ++;
-                    } else if (type === STRING) {
-                        rowTemplate += template;
-                    } else {
-                        rowTemplate += column.encoded ? "${" : "#=";
-
-                        if (!settings.useWithBlock) {
-                            rowTemplate += paramName + ".";
-                        }
-
-                        rowTemplate += column.field;
-                        rowTemplate += column.encoded ? "}" : "#";
-                    }
+                    rowTemplate += that._cellTmpl(column, state);
 
                     rowTemplate += "</td>";
                 }
 
                 rowTemplate += "</tr>";
-
             }
 
             rowTemplate = kendo.template(rowTemplate, settings);
 
-            if (templateFunctionCount > 0) {
-                return proxy(rowTemplate, templateFunctionStorage);
+            if (state.count > 0) {
+                return proxy(rowTemplate, state.storage);
             }
 
             return rowTemplate;
+        },
+
+        _cellTmpl: function(column, state) {
+            var that = this,
+                settings = extend({}, kendo.Template, that.options.templateSettings),
+                template = column.template,
+                paramName = settings.paramName,
+                html = "",
+                type = typeof template;
+
+            if (type === FUNCTION) {
+                state.storage["tmpl" + state.count] = template;
+                html += "#=this.tmpl" + state.count + "(" + paramName + ")#";
+                state.count ++;
+            } else if (type === STRING) {
+                html += template;
+            } else {
+                html += column.encoded ? "${" : "#=";
+
+                if (!settings.useWithBlock) {
+                    html += paramName + ".";
+                }
+
+                html += column.field;
+                html += column.encoded ? "}" : "#";
+            }
+            return html;
         },
 
         _templates: function() {

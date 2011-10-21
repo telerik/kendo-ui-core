@@ -17,17 +17,18 @@
             var that = this,
                 idx,
                 length,
-                fields = that.options.fields || [];
+                fields = that.options.fields || [],
+                container = that.element.empty();
 
             if (!(fields instanceof Array)) {
                 fields = [fields];
             }
 
             for(idx = 0, length = fields.length; idx < length; idx++) {
-                $('<input name="' + fields[idx] + '"/>').appendTo(that.element);
+                $('<input name="' + fields[idx] + '"/>').appendTo(container);
             }
 
-            new Binder(that.element, that.options.model);
+            new Binder(container, that.options.model);
         }
    });
 
