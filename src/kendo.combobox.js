@@ -156,8 +156,10 @@
 
             Select.fn.init.call(that, element, options);
 
-            element = that.element;
             options = that.options;
+            element = that.element.focus(function() {
+                that.input.focus();
+            });
 
             that._wrapper();
 

@@ -23,7 +23,7 @@
      *
      * @exampleTitle Initialize the TabStrip using a jQuery selector to target the outer div
      * @example
-     * var tabStrip = $("#tabStrip").kendoTabStrip();
+     * var tabStrip = $("#tabstrip").kendoTabStrip();
      * @section
      *  <p>
      *      Tabs do not have to have content. If a tab should have no content, it is safe to omit the HTML div.
