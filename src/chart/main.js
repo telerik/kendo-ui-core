@@ -117,6 +117,8 @@
                 SERIES_CLICK
             ], chart.options);
 
+            $(element).addClass("k-chart");
+
             chart._refresh();
             chart._attachEvents();
         },
