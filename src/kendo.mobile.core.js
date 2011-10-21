@@ -2,19 +2,18 @@
     var kendo = window.kendo,
         extend = $.extend,
         mobile,
-        Observable = kendo.Observable;
+        Widget = kendo.ui.Widget;
 
-    var MobileWidget = Observable.extend({
+    var MobileWidget = Widget.extend({
         init: function(element, options) {
-            var that = this, option, value;
+            var that = this,
+                option,
+                value;
 
-            Observable.fn.init.call(that);
-
-            that.element = element = $(element);
-            that.options = extend(true, {}, that.options, options);
+            Widget.fn.init.call(that, element, options);
 
             for (option in that.options) {
-                value = element.data("kendo-" + option.toLowerCase());
+                value = that.element.data("kendo-" + option.toLowerCase());
 
                 if (value !== undefined) {
                     that.options[option] = value;
