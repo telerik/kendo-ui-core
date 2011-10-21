@@ -12,7 +12,19 @@
         extend = $.extend,
         proxy = $.proxy;
 
-    var MobileToggleButton = ui.MobileWidget.extend({
+    var Toggle = ui.MobileWidget.extend({
+        init: function (element, options) {
+            var that = this;
+            element = $(element);
+
+            ui.MobileWidget.fn.init.call(that, element, options);
+
+            element = that.element;
+            options = that.options;
+        }
+    });
+
+    var MobileToggleButton = Toggle.extend({
         init: function(element, options) {
             var that = this;
             element = $(element);
@@ -21,7 +33,7 @@
                 element = element.wrap("<label />").parent();
             }
 
-            ui.MobileWidget.fn.init.call(that, element, options);
+            Toggle.fn.init.call(that, element, options);
 
             element = that.element;
             options = that.options;
@@ -85,7 +97,7 @@
         },
 
         _trigger: function (e) {
-            this.handle.toggleClass("k-toggle-clicked", e.type == MOUSEDOWN);
+            this.handle.toggleClass("k-state-active", e.type == MOUSEDOWN);
         },
 
         _toggle: function(e) {

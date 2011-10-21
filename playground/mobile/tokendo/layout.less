@@ -491,7 +491,7 @@ body > .k-tabStrip,
     .box-shadow(inset 0 2px 3px 0 #4c7698);
 }
 
-.k-meego .k-toggle-clicked .k-toggle-tip
+.k-meego .k-state-active .k-toggle-tip
 {
     background: #d9d9d9;
 }
@@ -966,11 +966,13 @@ body > .k-tabStrip,
     background: #000;
 }
 
+input[type=radio],
 input[type=checkbox]
 {
     display: none;
 }
 
+.k-list input[type=radio],
 .k-list input[type=checkbox]
 {
     width: 36px;
