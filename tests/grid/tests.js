@@ -34,5 +34,9 @@ tests.push(
     {
         page: "grid/detailview.html",
         title: "detail view"
+    },
+    {
+        page: "grid/editing.html",
+        title: "editing"
     }
 );

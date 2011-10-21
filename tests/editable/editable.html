@@ -74,6 +74,15 @@
 
                 equal(editable.element.find("input[name=foo]").val(), "bar");
             });
+
+            test("container is cleared", function() {
+                div.append($("<span/>"));
+
+                var  editable = new Editable(div, { fields: "foo" });
+
+                equal(div.children().length, 1);
+                equal(div.find(":input").length, 1);
+            });
         </script>
     </body>
 </html>
