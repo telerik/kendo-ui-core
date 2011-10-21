@@ -224,7 +224,7 @@
             render: function() {
                 var that = this,
                     colorPickerTemplate = kendo.template(
-                        "<label for='#= name #'>#= constant.property #</label>" +
+                        "<label for='#= name #'>#= name #</label>" +
                         "<input id='#= name #' value='#= constant.value #' />"
                     ),
                     editorTemplates = {
