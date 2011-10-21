@@ -220,7 +220,7 @@
                     });
                 }
 
-                $(document).ready(function() {
+                $(document).one("kendo:exampleLoaded", function() {
                     $("#country")
                         .val("United States")
                         .kendoDropDownList({
