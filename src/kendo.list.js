@@ -145,7 +145,9 @@
                         .height(ul[0].scrollHeight > height ? height : "auto")
                         .hide();
 
-                    parent.show().height(height).hide();
+                    if (parent[0]) {
+                        parent.show().height(height).hide();
+                    }
                 }
             }
         },
