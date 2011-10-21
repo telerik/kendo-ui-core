@@ -12,7 +12,7 @@
         <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
         <link rel="stylesheet" href="../styles/kendo.common.css" type="text/css" media="screen" charset="utf-8">
-        <link rel="stylesheet" href="../styles/kendo.vista.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="../styles/kendo.blueopal.css" type="text/css" media="screen" charset="utf-8">
         <style type="text/css" media="screen">
             .k-state-selected
             {
@@ -68,6 +68,12 @@
         <fieldset>
             <legend> DropDownList - 10000 items </legend>
             <select id="bigSelect"></select>
+        </fieldset>
+        <fieldset>
+            <legend> Shared dataSource</legend>
+            <input  id="shared1" value="item4" /> /
+            <input  id="shared2" />
+            <input  id="shared3" />
         </fieldset>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
@@ -135,6 +141,29 @@
 
                 bigSelect.kendoDropDownList({
                     autoBind: false
+                });
+
+                window.sharedDataSource = new kendo.data.DataSource.create([
+                    {text: "item1", value: "1"},
+                    {text: "item2", value: "2"},
+                    {text: "item3", value: "3"},
+                    {text: "item4", value: "4"},
+                    {text: "item5", value: "5"}
+                ]);
+
+                $("#shared1").kendoDropDownList({
+                    autoBind: false,
+                    dataSource: sharedDataSource
+                });
+
+                $("#shared2").kendoDropDownList({
+                    autoBind: false,
+                    dataSource: sharedDataSource
+                });
+
+                $("#shared3").kendoDropDownList({
+                    autoBind: false,
+                    dataSource: sharedDataSource
                 });
             });
         </script>
