@@ -1271,7 +1271,7 @@
                 box.y2 = targetBox.y1 + box.height() + margin.top + margin.bottom;
             } else {
                 offsetY = targetBox.y2 - box.height() - margin.bottom;
-                box.y1 = targetBox.y2 - box.height() - margin.top - margin.bottom;
+                box.y1 = targetBox.y2 - box.height() - margin.top - margin.bottom + 5;
                 box.y2 = targetBox.y2;
             }
 
