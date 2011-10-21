@@ -24,8 +24,10 @@
                 $("#container").kendoChart({
                     theme: "blueOpal",
                     title: {
-                        text: "Scatter chart",
-                        position: "top"
+                        text: "Scatter chart"
+                    },
+                    legend: {
+                        position: "bottom"
                     },
                     series: [
                         {
@@ -33,16 +35,12 @@
                             name: "Plot 1",
                             data: data1,
                             markers: {
-                                type: "circle",
-                                background: "#ff5400"
                             }
                         }, {
                             type: "scatter",
                             name: "Plot 2",
                             data: data2,
                             markers: {
-                                type: "circle",
-                                background: "#ff5400"
                             }
                         }
                     ]
