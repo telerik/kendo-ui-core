@@ -102,6 +102,14 @@
                equal(arrow.html(), "select");
            });
 
+           test("text input should copy value of the hidden input on create", function() {
+               var combo = input.val("item").kendoComboBox({
+                    autoBind: false
+               }).data("kendoComboBox");
+
+               equal(combo.input.val(), input.val());
+           });
+
            test("data source is when pass DataSource", function() {
                var dataSource = kendo.data.DataSource.create([{text: 1, value: 1}, {text:2, value:2}]),
                combobox = new ComboBox(input, {dataSource: dataSource});
