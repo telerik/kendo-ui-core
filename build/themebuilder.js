@@ -1,5 +1,6 @@
 var kendoBuild = require("./kendo-build"),
     fs = require("fs"),
+    less = require("./less-js/lib/less"),
     path = require("path"),
     SOURCE_PATH = "themebuilder",
     OUTPUT_PATH = path.join(SOURCE_PATH, "live"),
@@ -57,7 +58,12 @@ function createBootstrapper() {
 }
 
 function mergeResources() {
-    var themeBuilderScripts = ["less.js", "themebuilder.js", "colorengine.js", "template.js"].map(function(x) {
+    var themeBuilderScripts = [
+        "less.js",
+        "themebuilder.js",
+        "colorengine.js",
+        "template.js"
+    ].map(function(x) {
         return path.join(SOURCE_PATH, x);
     });
 
@@ -76,7 +82,8 @@ function mergeResources() {
 }
 
 function buildGeneratedSources() {
-    // build modified LESS.js
+    console.log("building modified less.js...");
+
     var less_libonly_src = [
             "build/require.js",
             "build/ecma-5.js",
@@ -90,15 +97,38 @@ function buildGeneratedSources() {
 
     fs.writeFileSync(
         path.join(SOURCE_PATH, "less.js"),
-        kendoBuild.minifyJs(wrap(kendoBuild.merge(less_libonly_src)))
+        kendoBuild.minifyJs(wrap(kendoBuild.merge(less_libonly_src))),
+        "utf8"
     );
 
-    // convert template.less to JSON
+
+    console.log("converting template.less to JSON...");
+
     fs.writeFileSync(
         path.join(SOURCE_PATH, "template.js"),
         lessToJson(path.join("styles", "template.less")),
         "utf8"
     );
+
+
+    console.log("generating themebuilder css...");
+
+    var parser = new(less.Parser)({}),
+        skinTemplate = fs.readFileSync(path.join("styles", "black.less"), "utf8");
+
+    skinTemplate = skinTemplate.replace(/@import.*;/gm, "") +
+        "\n#k-tb-wrap {\n" +
+        fs.readFileSync(path.join("styles", "template.less"), "utf8") +
+        "\n}";
+
+    parser.parse(skinTemplate, function (e, tree) {
+        var generatedCss = tree.toCSS(/* { compress: true } */);
+
+        generatedCss += fs.readFileSync(path.join(SOURCE_PATH, "styles.css"), "utf8");
+
+        fs.writeFileSync(path.join(SOURCE_PATH, "themebuilder.css"), generatedCss, "utf8");
+    });
+
 }
 
 function build() {

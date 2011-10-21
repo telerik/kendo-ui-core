@@ -155,7 +155,7 @@
                 $(window).bind("resize.kendoThemeBuilder", $.proxy(this.updateMaxHeight, this));
 
                 that.element = that.content.closest(".k-window")
-                    .attr("id", "kendo-themebuilder-wrapper")
+                    .attr("id", "k-tb-wrap")
                     .css({
                         top: 20,
                         left: $(window).width() - 320

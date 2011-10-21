@@ -87,7 +87,7 @@
             "@select-background-color":         constant(".k-group", BGCOLOR),
             "@select-border-color":             constant(".k-group", BORDERCOLOR),
             "@select-group-background-color":   constant(".k-group", BGCOLOR),
-            "@select-hover-background-color":   constant(".k-group", BORDERCOLOR),
+            "@select-hover-background-color":   constant(".k-group", BGCOLOR),
 
             "@hover-background-color":          constant(".k-state-hover", BGCOLOR),
             "@hover-border-color":              constant(".k-state-hover", BORDERCOLOR),
@@ -120,12 +120,12 @@
             "@splitbar-background-color":       constant(".k-splitbar", BGCOLOR)
         },
         constantsHierarchy = {
-            //"Widget": /^@widget.*/,
-            //"Headers": /^@header.*/,
-            //"Buttons": /^@button.*/,
-            //"Groups and content areas": /^@(group|content).*/,
-            //"Select boxes and pickers": /^@select.*/,
-            //"Widget states": /^@(hover|selected|active|error|disabled).*/,
+            "Widget": /^@widget.*/,
+            "Headers": /^@header.*/,
+            "Buttons": /^@button.*/,
+            "Groups and content areas": /^@(group|content).*/,
+            "Select boxes and pickers": /^@select-.*/,
+            "Widget states": /^@(hover|selected|active|error|disabled).*/,
             "Misc": /^@(alt|input|shadow|link|tooltip|border|loading|splitbar)/
         };
 
@@ -133,7 +133,7 @@
         new kendo.ThemeBuilder(lessTemplate, new kendo.LessConstants(constants), constantsHierarchy);
     };
 
-    $("<link rel='stylesheet' href='" + applicationRoot + "styles.css' />").appendTo("head");
+    $("<link rel='stylesheet' href='" + applicationRoot + "themebuilder.css' />").appendTo("head");
 
     (function loadFileFromQueue() {
         if (requiredFiles.length) {
