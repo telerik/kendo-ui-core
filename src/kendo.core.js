@@ -1418,6 +1418,21 @@
             }
 
             element.dequeue();
+        },
+
+        transitionPromise: function(element, destination, options) {
+            var container = kendo.wrap(element);
+            kendo.wrap(container).css({overflow: "hidden"});
+            container.append(destination);
+
+            element.hide();
+            destination.show();
+
+            if (options.completeCallback) {
+                options.completeCallback(); // call the external complete callback
+            }
+
+            element.dequeue();
         }
     };
 
@@ -1469,6 +1484,12 @@
         });
     }
 
+    function animateTo(element, destination, options, duration, reverse, complete) {
+        return element.queue(function () {
+            fx.transitionPromise(element, destination, prepareAnimationOptions(options, duration, reverse, complete));
+        });
+    }
+
     extend($.fn, /** @lends jQuery.fn */{
         kendoStop: function(clearQueue, gotoEnd) {
             return this.stop(clearQueue, gotoEnd);
@@ -1476,6 +1497,10 @@
 
         kendoAnimate: function(options, duration, reverse, complete) {
             return animate(this, options, duration, reverse, complete);
+        },
+
+        kendoAnimateTo: function(destination, options, duration, reverse, complete) {
+            return animateTo(this, destination, options, duration, reverse, complete);
         }
     });
 
