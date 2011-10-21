@@ -4,6 +4,8 @@
         ui = kendo.ui,
         Component = ui.Component,
         DIV = "<div />"
+        HIDE = "k-hide-text",
+        INPUT = "k-input",
         CHANGE = "change";
 
     var TextBox = Component.extend(/** @lends kendo.ui.TextBox.prototype */{
@@ -13,7 +15,7 @@
 
             Component.fn.init.call(that, element, options);
 
-            element = that.element;
+            element = that.element.addClass(INPUT);
             options = that.options;
 
             that._wrapper();
@@ -23,15 +25,17 @@
             that._text.click(function() {
                 that.wrapper.focusin();
             });
+
             that.wrapper.bind({
                 focusin: function() {
-                    that._text.hide();
-                    element.focus();
+                    clearTimeout(that._bluring);
+                    that.element.focus();
                     that._focus();
                 },
                 focusout: function() {
-                    that._text.show();
-                    that._blur();
+                    that._bluring = setTimeout(function() {
+                        that._blur();
+                    }, 100);
                 }
             });
 
@@ -43,7 +47,9 @@
             }
 
             that.value(value);
+
             that._blur();
+            that._old = that._value;
         },
         options: {
             value: null,
@@ -81,7 +87,7 @@
                 value = parseFloat(value.toFixed(decimals));
             }
 
-            that._value = value;
+            that._value = value = that._adjust(value);
             that.element.val(value === null ? "" : value.toString().replace(".", numberFormat["."]));
             that._text.html(value === null ? options.empty : kendo.toString(value, format));
         },
@@ -114,15 +120,30 @@
                           + '<span class="k-link k-icon k-arrow-down" title="Decrease value">Decrement</span>')).insertAfter(element);
             }
 
-            that._upArrow = arrows.eq(0).bind(EVENTNAME, function() { that._step(1); });
-            that._downArrow = arrows.eq(1).bind(EVENTNAME, function() { that._step(-1); });
+            that._upArrow = arrows.eq(0).bind(EVENTNAME, function(e) { e.preventDefault(); that._step(1); });
+            that._downArrow = arrows.eq(1).bind(EVENTNAME, function(e) { e.preventDefault(); that._step(-1); });
 
         },
 
         _blur: function() {
-            var that = this;
-            that.element.addClass("k-hide-text");
+            var that = this,
+                element = that.element;
+
             that._text.show();
+            that._change(element.val());
+
+            element.addClass(HIDE).val();
+        },
+
+        _change: function(value) {
+            var that = this;
+
+            that.value(value);
+
+            if (that._old != that._value) {
+                that._old = that._value;
+                that.trigger(CHANGE);
+            }
         },
 
         _div: function() {
@@ -139,22 +160,26 @@
             }
 
             text[0].style.cssText = element.style.cssText;
-            that._text = text.addClass(element.className.replace("k-input"));
+            that._text = text.addClass(element.className.replace(INPUT));
         },
 
         _focus: function() {
             var that = this;
 
-            that.element.removeClass("k-hide-text");
+            that.element.removeClass(HIDE);
             that._text.hide();
         },
 
         _step: function(step) {
             var that = this,
+                element = that.element,
                 value = that._value || 0;
 
+            if (document.activeElement != element[0]) {
+                element.focus();
+            }
+
             value += that.options.step * kendo.parseFloat(step);
-            value = that._adjust(value);
             that.value(value);
         },
 
@@ -170,7 +195,7 @@
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
-            that.wrapper = wrapper.addClass("k-widget k-textbox").show();
+            that.wrapper = wrapper.addClass("k-widget k-numerictextbox").show(); //should be k-textbox
         }
     });
 
