@@ -379,6 +379,17 @@
                     equal(pieSegment.explode, false);
                 });
 
+                test("sets default radius to 5 pixels", function() {
+                    plotArea = new PlotAreaStub();
+                    setupPieChart(plotArea, {
+                        series: [ { data: [{ value: 1 }] } ],
+                        padding: 500
+                    });
+                    pieSegment = firstSegment;
+
+                    equal(pieSegment.sector.r, 5);
+                });
+
                 // ------------------------------------------------------------
                 module("Pie Chart / Labels / Configuration", {
                     setup: function() {
