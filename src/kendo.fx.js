@@ -133,15 +133,15 @@
         return effects;
     };
 
-    function parseInteger ( value ) {
-        return parseInt( value, 10 );
+    function parseInteger( value ) {
+        return parseInt(value, 10);
     }
 
-    function parseCSS (element, property) {
+    function parseCSS(element, property) {
         return parseInteger(element.css(property));
     }
 
-    function getComputedStyles(element, properties){
+    function getComputedStyles(element, properties) {
         var styles = {};
 
         if (properties) {
@@ -280,7 +280,7 @@
         });
     }
 
-    function animationProperty (element, property) {
+    function animationProperty(element, property) {
         if (transitions) {
             var transform = element.css(TRANSFORM),
                 match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
@@ -305,7 +305,7 @@
             return element.css(property);
     }
 
-    kendo.fx.promise = function (element, options) {
+    kendo.fx.promise = function(element, options) {
         var promises = [], effects = options.effects;
 
         if (typeof effects === "string") {
