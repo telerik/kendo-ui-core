@@ -71,6 +71,16 @@
                 equal(textbox.element.val(), "10");
             });
 
+            test("_step persist element value", function() {
+                var textbox = new TextBox(input);
+
+                input.val("10");
+                textbox._step(1);
+
+                equal(textbox.value(), 11);
+                equal(textbox.element.val(), "11");
+            });
+
             test("value method should return current value", function() {
                 var textbox = new TextBox(input), value = 10;
 
