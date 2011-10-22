@@ -3,6 +3,7 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Component = ui.Component,
+        parse = kendo.parseFloat,
         DIV = "<div />"
         HIDE = "k-hide-text",
         INPUT = "k-input",
@@ -81,7 +82,7 @@
                 decimals = numberFormat.decimals;
             }
 
-            value = kendo.parseFloat(value);
+            value = parse(value);
 
             if (value) {
                 value = parseFloat(value.toFixed(decimals));
@@ -120,8 +121,10 @@
                           + '<span class="k-link k-icon k-arrow-down" title="Decrease value">Decrement</span>')).insertAfter(element);
             }
 
-            that._upArrow = arrows.eq(0).bind(EVENTNAME, function(e) { e.preventDefault(); that._step(1); });
-            that._downArrow = arrows.eq(1).bind(EVENTNAME, function(e) { e.preventDefault(); that._step(-1); });
+            that._upArrow = arrows.eq(0).bind(EVENTNAME, function(e) { e.preventDefault(); that._spin(1); })
+                                        .bind("mouseup mouseleave", function() { that._stop(); });
+            that._downArrow = arrows.eq(1).bind(EVENTNAME, function(e) { e.preventDefault(); that._spin(-1); })
+                                          .bind("mouseup mouseleave", function() { that._stop(); });
 
         },
 
@@ -170,17 +173,32 @@
             that._text.hide();
         },
 
+        _spin: function(step, e) {
+            var that = this;
+
+            clearTimeout( that._spinning );
+            that._spinning = setTimeout(function() {
+                that._spin(step, event );
+            }, 300 );
+
+            that._step(step);
+        },
+
         _step: function(step) {
             var that = this,
                 element = that.element,
-                value = that._value || 0;
+                value = parse(element.val()) || 0;
 
             if (document.activeElement != element[0]) {
                 element.focus();
             }
 
-            value += that.options.step * kendo.parseFloat(step);
+            value += that.options.step * parse(step);
             that.value(value);
+        },
+
+        _stop: function() {
+            clearTimeout( this._spinning );
         },
 
         _wrapper: function() {
