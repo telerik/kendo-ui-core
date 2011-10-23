@@ -23,8 +23,16 @@
         },
 
         replace: function(view) {
-            view.element.kendoAnimateTo(this.element, {effects: "slide"});
-            return this;
+            var that = this,
+                back = that.nextView === view;
+
+            view.element.kendoAnimateTo(that.element, {effects: "slide", reverse: back});
+
+            if (!back) {
+              view.nextView = that;
+            }
+
+            return that;
         },
 
         hide: function() {
