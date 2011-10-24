@@ -156,12 +156,12 @@
                 dom.click();
             });
 
-            test("calls application changeView if present", function() {
+            test("calls application navigate if present", function() {
                 expect(2);
 
                 kendo.application = {};
 
-                stub(kendo.application, "changeView");
+                stub(kendo.application, "navigate");
 
                 var dom = $('<a href="foo">foo</a>');
 
@@ -169,8 +169,8 @@
 
                 dom.click();
 
-                equal(kendo.application.calls("changeView"), 1);
-                equal(kendo.application.args("changeView")[0], "foo");
+                equal(kendo.application.calls("navigate"), 1);
+                equal(kendo.application.args("navigate")[0], "foo");
             });
         </script>
     </body>

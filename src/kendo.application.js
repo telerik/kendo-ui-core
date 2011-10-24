@@ -54,11 +54,11 @@
             history.start($.extend(options, { silent: true }));
 
             history.change(function(e) {
-                that.changeView(e.location);
+                that.navigate(e.location);
             });
         },
 
-        changeView: function(url) {
+        navigate: function(url) {
             var that = this;
 
             that._findView(url, function(view) {

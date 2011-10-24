@@ -76,7 +76,7 @@
                 if (href) {
                     e.preventDefault();
 
-                    kendo.application.changeView(href);
+                    kendo.application.navigate(href);
                 }
             }
         },
