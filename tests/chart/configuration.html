@@ -37,6 +37,15 @@
                     }, options));
                 }
 
+                function createScatterChart(options) {
+                    createChart($.extend({
+                        series: [{
+                            type: "scatter",
+                            data: [[1, 1]]
+                        }]
+                    }, options));
+                }
+
                 function destroyChart() {
                     $("#container").empty();
                     chart = null;
@@ -110,6 +119,63 @@
                 });
 
                 // ------------------------------------------------------------
+                module("X Axis Configuration", {
+                    teardown: destroyChart
+                });
+
+                test("xAxis options are applied to X Axis", function() {
+                    createChart({
+                        xAxis: {
+                            categories: ["Alpha", "Beta", "Charlie"]
+                        }
+                    });
+
+                    same(plotArea.axisX.options.categories,
+                         chart.options.xAxis.categories);
+                });
+
+                // ------------------------------------------------------------
+                module("Y Axis Configuration", {
+                    teardown: destroyChart
+                });
+
+                test("yAxis options are applied to Y Axis", function() {
+                    createChart({
+                        yAxis: {
+                            min: 100
+                        }
+                    });
+
+                    same(plotArea.axisY.options.min,
+                         chart.options.yAxis.min);
+                });
+
+                // ------------------------------------------------------------
+                module("Axis Configuration / Scatter Chart", {
+                    teardown: destroyChart
+                });
+
+                test("xAxis settings are applied to X Axis", function() {
+                    createScatterChart({ xAxis: { min: 100 } });
+                    same(plotArea.axisX.options.min, 100);
+                });
+
+                test("xAxis orientation can't be set to vertical", function() {
+                    createScatterChart({ xAxis: { orientation: "vertical" } });
+                    same(plotArea.axisX.options.orientation, "horizontal");
+                });
+
+                test("yAxis settings are applied to Y Axis", function() {
+                    createScatterChart({ yAxis: { min: 100 } });
+                    same(plotArea.axisY.options.min, 100);
+                });
+
+                test("yAxis orientation can't be set to horizontal", function() {
+                    createScatterChart({ yAxis: { orientation: "horizontal" } });
+                    same(plotArea.axisY.options.orientation, "vertical");
+                });
+
+                // ------------------------------------------------------------
                 module("Axis defaults", {
                     teardown: destroyChart
                 });
@@ -132,6 +198,26 @@
                     });
 
                     ok(chart.options.valueAxis.flag === true);
+                });
+
+                test("axisDefaults are applied to xAxis", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: true
+                        }
+                    });
+
+                    ok(chart.options.xAxis.flag === true);
+                });
+
+                test("axisDefaults are applied to yAxis", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: true
+                        }
+                    });
+
+                    ok(chart.options.yAxis.flag === true);
                 });
 
                 test("categoryAxis settings override axisDefaults settings", function() {
@@ -158,6 +244,32 @@
                     });
 
                     ok(chart.options.valueAxis.flag === true);
+                });
+
+                test("xAxis settings override axisDefaults settings", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: false
+                        },
+                        xAxis: {
+                            flag: true
+                        }
+                    });
+
+                    ok(chart.options.xAxis.flag === true);
+                });
+
+                test("yAxis settings override axisDefaults settings", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: false
+                        },
+                        yAxis: {
+                            flag: true
+                        }
+                    });
+
+                    ok(chart.options.yAxis.flag === true);
                 });
 
                 test("axisDefaults override theme", function() {

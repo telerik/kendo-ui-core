@@ -3712,7 +3712,6 @@
                 width: 0
             },
             range: {},
-            invertAxis: false,
             legend: {}
         },
 
@@ -3727,9 +3726,7 @@
                 lineSeries = [],
                 scatterSeries = [],
                 i;
-
             options.legend.items = [];
-            options.invertAxes = options.categoryAxis.orientation === VERTICAL;
             options.range = { min: 0, max: 1 };
             plotArea.charts = [];
             for (i = 0; i < seriesLength; i++) {
@@ -3762,11 +3759,11 @@
                 plotArea.createScatterChart(scatterSeries);
 
                 plotArea.axisX = new NumericAxis(options.range.min[0], options.range.max[0],
-                    { orientation: HORIZONTAL, majorGridLines: { visible: false }, min: -1, max: 1  }
+                    deepExtend({}, options.xAxis, { orientation: HORIZONTAL })
                 );
 
                 plotArea.axisY = new NumericAxis(options.range.min[1], options.range.max[1],
-                    { orientation: VERTICAL, majorGridLines: { visible: false }, min: -1, max: 1 }
+                    deepExtend({}, options.yAxis, { orientation: VERTICAL })
                 );
 
                 plotArea.append(plotArea.axisY);
@@ -3887,11 +3884,15 @@
                 categoryAxis = new CategoryAxis(deepExtend({
                         orientation: invertAxes ? VERTICAL : HORIZONTAL,
                         axisCrossingValue: invertAxes ? categoriesCount : 0
-                    }, options.categoryAxis)
+                    },
+                    options.categoryAxis,
+                    invertAxes ? options.yAxis : options.xAxis)
                 ),
                 valueAxis = new NumericAxis(seriesMin, seriesMax, deepExtend({
                         orientation: invertAxes ? HORIZONTAL : VERTICAL
-                    }, options.valueAxis)
+                    },
+                    options.valueAxis,
+                    invertAxes ? options.xAxis : options.yAxis)
                 );
 
             plotArea.axisX = invertAxes ? valueAxis : categoryAxis;
@@ -4925,15 +4926,13 @@
     }
 
     function applyAxisDefaults(options) {
-        options.categoryAxis = deepExtend({},
-            options.axisDefaults,
-            options.categoryAxis
-        );
-
-        options.valueAxis = deepExtend({},
-            options.axisDefaults,
-            options.valueAxis
-        );
+        $.each(["category", "value", "x", "y"], function() {
+            var axisName = this + "Axis";
+            options[axisName] = deepExtend({},
+                options.axisDefaults,
+                options[axisName]
+            );
+        });
     }
 
     function incrementSlot(slots, index, value) {
