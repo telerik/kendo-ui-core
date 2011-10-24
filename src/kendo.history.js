@@ -16,10 +16,11 @@
 
             var that = this;
 
-            that._pushStateRequested = !!options["pushState"];
+            that._pushStateRequested = !!options.pushState;
             that._pushState = that._pushStateRequested && that._pushStateSupported();
-            that._fragment = "";
-            that.root = options["root"] || "/";
+            that.current = this._currentLocation();
+            that.root = options.root || "/";
+            that._interval = 0;
 
 
             if (that._normalizeUrl()) {
@@ -27,7 +28,16 @@
             }
 
             that._listenToLocationChange();
-            that._checkUrl();
+            if (!options.silent) {
+                that._checkUrl();
+            }
+        },
+
+        stop: function() {
+            $(window).unbind(".kendo");
+            this.unbind("change");
+            this.current = "/";
+            clearInterval(this._interval);
         },
 
         _normalizeUrl: function() {
@@ -52,23 +62,22 @@
             var that = this, _checkUrlProxy = $.proxy(that._checkUrl, that);
 
             if (this._pushState) {
-                $(window).bind("popstate", _checkUrlProxy);
+                $(window).bind("popstate.kendo", _checkUrlProxy);
             } else if (hashChangeSupported) {
-                $(window).bind("hashchange", _checkUrlProxy);
+                $(window).bind("hashchange.kendo", _checkUrlProxy);
             } else {
-                setInterval(_checkUrlProxy, _checkUrlInterval);
+                that._interval = setInterval(_checkUrlProxy, _checkUrlInterval);
             }
         },
-
 
         _pushStateSupported: function() {
             return window.history && window.history.pushState;
         },
 
-        _checkUrl: function() {
+        _checkUrl: function(e) {
             var that = this, current = that._currentLocation();
 
-            if (current != that._fragment) {
+            if (current != that.current) {
                 that.navigate(current);
             }
         },
@@ -114,21 +123,25 @@
             this.bind('change', callback);
         },
 
-        navigate: function(to) {
+        navigate: function(to, silent) {
             var that = this;
 
-            if (that._fragment === to || that._fragment === decodeURIComponent(to)) {
+            to = to.replace(hashStrip, '');
+
+            if (that.current === to || that.current === decodeURIComponent(to)) {
                 return;
             }
 
             if (that._pushState) {
                 history.pushState({}, document.title, that._makePushStateUrl(to));
-                that._fragment = to;
+                that.current = to;
             } else {
-                that._fragment = location.hash = to;
+                location.hash = that.current = to;
             }
 
-            that.trigger("change", { location: that._fragment });
+            if (!silent) {
+                that.trigger("change", { location: that.current });
+            }
         }
     });
 
