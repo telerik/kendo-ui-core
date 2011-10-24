@@ -315,7 +315,6 @@
 
             that.previous = that.value();
 
-            console.log(that._open);
             if (that._open) {
                 //that._open = false;
                 that.toggle(length);
