@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.MobileToggleButton/MobileCheckBox Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="../../src/kendo.mobile.togglebutton.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.MobileToggleButton/MobileCheckBox Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+
+            var ToggleButton = kendo.ui.MobileToggleButton;
+            var CheckBox = kendo.ui.MobileCheckBox;
+
+            /* ToggleButton */
+
+            test("ToggleButton can be initialized from input type='checkbox'", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+
+                var togglebutton = new ToggleButton(dom);
+
+                ok(togglebutton.element.hasClass("k-toggle"), "Should have specified CSS class");
+            });
+
+            test("ToggleButton can be initialized from label only", function() {
+                expect(1);
+
+                var dom = $("<label />");
+
+                var togglebutton = new ToggleButton(dom);
+
+                ok(togglebutton.element.hasClass("k-toggle"), "Should have specified CSS class");
+            });
+
+            test("ToggleButton reuses existing label", function() {
+                expect(1);
+
+                var dom = $("<label><input type='checkbox'/></label>");
+                var label = dom.filter("label");
+
+                var togglebutton = new ToggleButton(dom);
+
+                ok(label.hasClass("k-toggle"), "Should reuse existing label around the checkbox");
+            });
+
+            test("ToggleButton creates a toggle handle and tip", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+                var togglebutton = new ToggleButton(dom);
+
+                ok((dom.parent().find(".k-toggle-handle").length && dom.parent().find(".k-toggle-tip").length), "Should create a handle and a tip");
+            });
+
+            test("ToggleButton raises toggle event when changed", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+
+                var togglebutton = new ToggleButton(dom);
+
+                togglebutton.bind("toggle", function() {
+                    ok(true, "Should raise the click event");
+                });
+
+                dom.change();
+            });
+
+            test("ToggleButton should not raise toggle event when disabled", function() {
+                var dom = $("<input type='checkbox'/>");
+
+                var togglebutton = new ToggleButton(dom);
+                togglebutton.disable();
+
+                togglebutton.bind("toggle", function() {
+                    ok(false, "Should not raise the change event");
+                });
+
+                dom.change();
+            });
+
+            test("ToggleButton should apply active state when pressed", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+                var togglebutton = new ToggleButton(dom);
+
+                togglebutton.handle.mousedown();
+                ok(togglebutton.handle.hasClass("k-state-active"), "Should have active css class");
+            });
+
+            test("ToggleButton should remove active state when depressed", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+                var togglebutton = new ToggleButton(dom);
+
+                togglebutton.handle.mousedown();
+                togglebutton.handle.mouseup();
+                ok(!togglebutton.handle.hasClass("k-state-active"), "Should not have active css class");
+            });
+
+            test("ToggleButton should not apply active state when disabled", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+                var togglebutton = new ToggleButton(dom);
+
+                togglebutton.disable();
+
+                togglebutton.handle.mousedown();
+
+                ok(!togglebutton.handle.hasClass("k-state-active"), "Should not have active css class");
+            });
+
+            test("ToggleButton disable from configuration options", function() {
+                var dom = $("<input type='checkbox'/>");
+
+                var togglebutton = new ToggleButton(dom, { enable: false });
+
+                togglebutton.bind("toggle", function() {
+                    ok(false, "Should not raise the toggle event");
+                });
+
+                togglebutton.toggle();
+            });
+
+            test("ToggleButton should enable disabled togglebutton", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+
+                var togglebutton = new ToggleButton(dom);
+
+                togglebutton.disable();
+
+                togglebutton.bind("toggle", function() {
+                    ok(true, "Should raise the toggle event");
+                });
+
+                togglebutton.enable();
+
+                togglebutton.toggle();
+            });
+
+
+            /* CheckBox */
+
+            test("CheckBox can be initialized from input type='checkbox'", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+
+                var checkbox = new CheckBox(dom);
+
+                ok(checkbox.element.hasClass("k-checkbox"), "Should have specified CSS class");
+            });
+
+            test("CheckBox can be initialized from label only", function() {
+                expect(1);
+
+                var dom = $("<label />");
+
+                var checkbox = new CheckBox(dom);
+
+                ok(checkbox.element.hasClass("k-checkbox"), "Should have specified CSS class");
+            });
+
+            test("CheckBox reuses existing label", function() {
+                expect(1);
+
+                var dom = $("<label><input type='checkbox'/></label>");
+                var label = dom.filter("label");
+
+                var checkbox = new CheckBox(dom);
+
+                ok(label.hasClass("k-checkbox"), "Should reuse existing label around the checkbox");
+            });
+
+            test("CheckBox raises toggle event when changed", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+
+                var checkbox = new CheckBox(dom);
+
+                checkbox.bind("toggle", function() {
+                    ok(true, "Should raise the click event");
+                });
+
+                dom.change();
+            });
+
+            test("CheckBox should not raise toggle event when disabled", function() {
+                var dom = $("<input type='checkbox'/>");
+
+                var checkbox = new CheckBox(dom);
+                checkbox.disable();
+
+                checkbox.bind("toggle", function() {
+                    ok(false, "Should not raise the change event");
+                });
+
+                dom.change();
+            });
+
+            test("CheckBox should apply active state when pressed", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+                var checkbox = new CheckBox(dom);
+
+                checkbox.handle.mousedown();
+                ok(checkbox.handle.hasClass("k-state-active"), "Should have active css class");
+            });
+
+            test("CheckBox should remove active state when depressed", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+                var checkbox = new CheckBox(dom);
+
+                checkbox.handle.mousedown();
+                checkbox.handle.mouseup();
+                ok(!checkbox.handle.hasClass("k-state-active"), "Should not have active css class");
+            });
+
+            test("CheckBox should not apply active state when disabled", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+                var checkbox = new CheckBox(dom);
+
+                checkbox.disable();
+
+                checkbox.handle.mousedown();
+
+                ok(!checkbox.handle.hasClass("k-state-active"), "Should not have active css class");
+            });
+
+            test("CheckBox disable from configuration options", function() {
+                var dom = $("<input type='checkbox'/>");
+
+                var checkbox = new CheckBox(dom, { enable: false });
+
+                checkbox.bind("toggle", function() {
+                    ok(false, "Should not raise the toggle event");
+                });
+
+                checkbox.toggle();
+            });
+
+            test("CheckBox should enable disabled checkbox", function() {
+                expect(1);
+
+                var dom = $("<input type='checkbox'/>");
+
+                var checkbox = new CheckBox(dom);
+
+                checkbox.disable();
+
+                checkbox.bind("toggle", function() {
+                    ok(true, "Should raise the toggle event");
+                });
+
+                checkbox.enable();
+
+                checkbox.toggle();
+            });
+        </script>
+    </body>
+</html>

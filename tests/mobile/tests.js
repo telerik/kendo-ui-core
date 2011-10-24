@@ -10,5 +10,9 @@ tests.push(
     {
         page: "mobile/button.html",
         title: "mobile button"
-    }
+    },
+    {
+        page: "mobile/toggle.html",
+        title: "mobile toggle button"
+        }
 );
