@@ -566,11 +566,11 @@
                 container = wrapForAnimation(element),
                 options = parseTransitionEffects(options),
                 animatingContainer = "slide" in options.effects,
+                outerContainer = wrapForAnimation(container, {overflow: "hidden"}),
                 transitions = kendo.support.transitions;
 
-            wrapForAnimation(container, {overflow: "hidden"}),
 
-            destination.show().css({position: "absolute", "left": 0, "top": 0, width: container.width(), height: container.height()});
+            destination.show();
             container.append(destination);
 
             $.each(options.effects, function(name, definition) {
@@ -578,12 +578,14 @@
             });
 
             positionElement(destination, kendo.directions[direction]);
+            destination.css({position: "absolute", "left": 0, "top": 0});
 
             options.complete = function() {
                 setTimeout(function() {
                     element.hide();
                     destination.attr("style", "");
                     container.attr("style", "position:relative");
+                    outerContainer.attr("style", "position:relative");
                     options.completeCallback && options.completeCallback();
                 });
             }
