@@ -25,6 +25,7 @@
             var application;
 
             QUnit.config.testTimeout = 500;
+            QUnit.config.reorder = false;
 
             module("kendo.Application", {
                 setup: function() {
@@ -207,7 +208,7 @@
                 application.changeView("#page1");
             });
 
-            test("does not raise viewInit for already initialized remote view", function() {
+            asyncTest("does not raise viewInit for already initialized remote view", function() {
                 setup('<div data-kendo-role="view" id="page1">Page 1</div>');
 
                 $.mockjax({
@@ -215,13 +216,18 @@
                     responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
                 });
 
-                application.changeView("page2.html");
+                application.bind("viewShow", function() {
+                    start();
 
+                    application.unbind("viewShow");
 
-                application.changeView("#page1");
+                    application.changeView("#page1");
 
-                application.bind("viewInit", function(e) {
-                    ok(false, "Does not raise event");
+                    application.bind("viewInit", function(e) {
+                        ok(false, "Does not raise event");
+                    });
+
+                    application.changeView("page2.html");
                 });
 
                 application.changeView("page2.html");
@@ -253,6 +259,23 @@
                 equal(kendo.mobile.calls("enhance"), 1, "Calls kendo.mobile.enhance");
             });
 
+            asyncTest("does not raise error when trying to change to remote view starting with slash", function() {
+                expect(1);
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+
+                $.mockjax({
+                    url: "/page2",
+                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                });
+
+                application.bind("viewInit", function(e) {
+                    start();
+                    equal(e.view.element[0], $("#page2")[0], "Event is raised");
+                });
+
+                application.changeView("/page2");
+            });
         </script>
     </body>
 </html>
