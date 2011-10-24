@@ -29,14 +29,8 @@
             view.element.kendoAnimateTo(that.element, {effects: "slide", reverse: back});
 
             if (!back) {
-              view.nextView = that;
+                view.nextView = that;
             }
-
-            return that;
-        },
-
-        hide: function() {
-            this.element.hide();
         },
 
         _bindEvents: function () {
@@ -63,7 +57,7 @@
 
             views.not(":first").hide();
 
-            that._view = that._createView(views.first(), { url: history.current });
+            that._view = that._createView(views.first());
 
             history.start($.extend(options, { silent: true }));
 
@@ -80,14 +74,16 @@
 
                 that.trigger("viewHide", { view: that._view });
 
-                that._view = view.replace(that._view);
+                view.replace(that._view);
+
+                that._view = view;
 
                 that.trigger("viewShow", { view: view });
             });
         },
 
-        _createView: function(element, options) {
-            var view = new View(element, options);
+        _createView: function(element) {
+            var view = new View(element);
 
             this.trigger("viewInit", { view: view });
 
@@ -113,29 +109,30 @@
         _findView: function(url, callback) {
             var that = this,
                 view,
+                local = url.charAt(0) === "#",
                 element;
 
-            element = that.element.find(url + ", [data-kendo-url='" + url + "']").first();
+            element = that.element.find("[data-kendo-url='" + url + "']");
+
+            if (!element[0] && local) {
+                element = that.element.find(url);
+            }
 
             view = element.data("kendoView");
 
             if (view) {
                 callback(view);
-            } else if (url.charAt(0) === "#") {
+            } else if (local) {
                 callback(that._createView(element));
             } else {
-                $.ajax({
-                    url: url,
-                    dataType: "html",
-                    success: function(html) {
-                        callback(that._createRemoteView(url, html));
-                    }
+                $.get(url, function(html) {
+                    callback(that._createRemoteView(url, html));
                 });
             }
         }
     });
 
-    kendo.application = new Application();
+    kendo.application = new Application;
     kendo.Application = Application;
 
     $(function() {
