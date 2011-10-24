@@ -91,7 +91,12 @@
                 }
 
                 $(document).ready(function() {
-                    createChart();
+                    setTimeout(function() {
+                        createChart();
+
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                    }, 400);
 
                     $(document).bind("kendo:skinChange", function(e) {
                         createChart();
