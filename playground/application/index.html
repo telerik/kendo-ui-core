@@ -4,7 +4,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta content="minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
         <title>Index</title>
         <script src="../../src/jquery.js"></script>
@@ -12,15 +12,77 @@
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.history.js"></script>
         <script src="../../src/kendo.application.js"></script>
+        <style type="text/css">
+            * {
+                margin: 0;
+                padding: 0;
+                -webkit-touch-callout: none;
+                -moz-touch-callout: none;
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+                -moz-tap-highlight-color: rgba(0,0,0,0);
+            }
+            html {
+                height: 100%;
+                width: 100%;
+            }
+
+            .k-animation-container {
+                height: 100%;
+                width: 100%;
+            }
+
+            .k-animation-container > .k-animation-container, body {
+                height: 100%;
+            }
+
+            header, footer {
+                background: #EBEBEB;
+                padding: 20px;
+            }
+
+            footer {
+                font-size: 11px;
+            }
+
+            article {
+                height: 100%;
+                width: 100%;
+                display: -webkit-box;
+                display: -moz-box;
+                -webkit-box-orient: vertical;
+                -moz-box-orient: vertical;
+                -webkit-box-align: stretch;
+                -moz-box-align: stretch;
+            }
+
+            section {
+                overflow: auto;
+                -webkit-box-flex: 1;
+                -moz-box-flex: 1;
+            }
+        </style>
     </head>
     <body>
-        <section data-kendo-role="view" data-kendo-url="index.html">
-        <a href="view1.html">Remote View</a> | <a
-            href="#view2">Local view</a>
+
+        <div class="k-animation-container"> <div class="k-animation-container">
+        <article data-kendo-role="view" data-kendo-url="index.html">
+        <header> Our glorious header</header>
+
+        <section>
+            <a href="view1.html">Remote View</a> | <a href="#view2">Local view</a>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim accumsan justo non condimentum. In nisi dolor, dapibus a egestas et, porttitor in purus. Mauris vel lectus sed libero rutrum adipiscing ac vel nunc. Duis ac ligula id mi convallis iaculis. Donec rhoncus, quam nec tempus tristique, massa massa molestie lorem, eget venenatis dui arcu a elit. Ut sed tellus nec ligula lobortis convallis id vitae nisi. Etiam viverra elit ut ligula dignissim convallis ut in purus. Aliquam volutpat tincidunt erat, id tempor lacus bibendum eget. Aenean nec magna risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent dictum, orci nec pretium consequat, libero nisl tempor mauris, lacinia porta neque lectus a enim. Nulla at libero id ipsum adipiscing posuere at et velit. Nunc et urna nunc. Aenean et ante neque, sed iaculis justo.</p>
         </section>
 
-        <section data-kendo-role="view" id="view2">
-        <a href="index.html">Back to view 1</a>
+        <footer> Copyright &copy; Telerik 2011; </footer>
+        </article>
+
+        <article data-kendo-role="view" id="view2">
+        <header> Our glorious header </header>
+        <section>
+            <a href="index.html">Back to view 1</a>
         </section>
+        <footer> Copyright &copy; Telerik 2011; </footer>
+        </article>
+        </div> </div>
     </body>
 </html>
