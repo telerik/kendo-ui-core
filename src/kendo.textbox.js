@@ -7,7 +7,8 @@
         DIV = "<div />"
         HIDE = "k-hide-text",
         INPUT = "k-input",
-        CHANGE = "change";
+        CHANGE = "change",
+        NULL = null;
 
     var TextBox = Component.extend(/** @lends kendo.ui.TextBox.prototype */{
         init: function(element, options) {
@@ -43,7 +44,7 @@
             that.bind(CHANGE, options);
 
             value = options.value;
-            if (!value && value !== 0) { //refactor
+            if (value === null) {
                 value = element.val();
             }
 
@@ -53,12 +54,14 @@
             that._old = that._value;
         },
         options: {
-            value: null,
-            min: null,
-            max: null,
+            value: NULL,
+            min: NULL,
+            max: NULL,
             format: "n",
             step: 1,
-            empty: "Enter value"
+            empty: "Enter value",
+            upArrowText: "Increase value",
+            downArrowText: "Decrease value"
         },
 
         value: function(value) {
@@ -66,7 +69,8 @@
                 options = that.options,
                 format = options.format,
                 decimals = options.decimals,
-                numberFormat = kendo.culture().numberFormat;
+                numberFormat = kendo.culture().numberFormat,
+                isNULL;
 
             if (value === undefined) {
                 return that._value;
@@ -84,13 +88,15 @@
 
             value = parse(value);
 
-            if (value) {
+            isNULL = value === null;
+
+            if (!isNULL) {
                 value = parseFloat(value.toFixed(decimals));
             }
 
             that._value = value = that._adjust(value);
-            that.element.val(value === null ? "" : value.toString().replace(".", numberFormat["."]));
-            that._text.html(value === null ? options.empty : kendo.toString(value, format));
+            that.element.val(isNULL ? "" : value.toString().replace(".", numberFormat["."]));
+            that._text.html(isNULL ? options.empty : kendo.toString(value, format));
         },
 
         _adjust: function(value) {
@@ -99,9 +105,9 @@
             min = options.min,
             max = options.max;
 
-            if (min !== null && value < min) {
+            if (min !== NULL && value < min) {
                 value = min;
-            } else if (max !== null && value > max) {
+            } else if (max !== NULL && value > max) {
                 value = max;
             }
 
@@ -110,32 +116,45 @@
 
         _arrows: function() {
             var that = this,
+            arrows,
+            options = that.options,
             element = that.element,
-            EVENTNAME = kendo.support.touch ? "touchstart" : "mousedown",
-            arrows;
+            touch = kendo.support.touch,
+            TOUCHEND = "touchend",
+            START = touch ? "touchstart" : "mousedown",
+            END = touch ? "touchmove " + TOUCHEND : "mouseup mouseleave",
+            stop = function(e) {
+                if (!touch || kendo.eventTarget(e) != e.currentTarget || e.type === TOUCHEND) {
+                    that._stop();
+                }
+            };
 
             arrows = element.siblings(".k-icon");
 
             if (!arrows[0]) {
-                arrows = $(('<span class="k-link k-icon k-arrow-up" title="Increase value">Increment</span>'
-                          + '<span class="k-link k-icon k-arrow-down" title="Decrease value">Decrement</span>')).insertAfter(element);
+                arrows = $(buttonHtml("up", options.upArrowText) + buttonHtml("down", options.downArrowText)).insertAfter(element);
             }
 
-            that._upArrow = arrows.eq(0).bind(EVENTNAME, function(e) { e.preventDefault(); that._spin(1); })
-                                        .bind("mouseup mouseleave", function() { that._stop(); });
-            that._downArrow = arrows.eq(1).bind(EVENTNAME, function(e) { e.preventDefault(); that._spin(-1); })
-                                          .bind("mouseup mouseleave", function() { that._stop(); });
+            that._upArrow = arrows.eq(0)
+                                  .bind(END, stop)
+                                  .bind(START, function(e) {
+                                      e.preventDefault();
+                                      that._spin(1);
+                                  });
 
+            that._downArrow = arrows.eq(1)
+                                    .bind(END, stop)
+                                    .bind(START, function(e) {
+                                        e.preventDefault();
+                                        that._spin(-1);
+                                    });
         },
 
         _blur: function() {
-            var that = this,
-                element = that.element;
+            var that = this;
 
             that._text.show();
-            that._change(element.val());
-
-            element.addClass(HIDE).val();
+            that._change(that.element.addClass(HIDE).val());
         },
 
         _change: function(value) {
@@ -151,9 +170,9 @@
 
         _div: function() {
             var that = this,
+                CLASSNAME = "k-formatted-value",
                 element = that.element.show()[0],
                 wrapper = that.wrapper,
-                CLASSNAME = "k-formatted-value",
                 text;
 
            text = wrapper.find("." + CLASSNAME);
@@ -173,13 +192,15 @@
             that._text.hide();
         },
 
-        _spin: function(step, e) {
+        _spin: function(step, timeout) {
             var that = this;
+
+            timeout = timeout || 500;
 
             clearTimeout( that._spinning );
             that._spinning = setTimeout(function() {
-                that._spin(step, event );
-            }, 300 );
+                that._spin(step, 50);
+            }, timeout );
 
             that._step(step);
         },
@@ -194,6 +215,8 @@
             }
 
             value += that.options.step * parse(step);
+
+            value = that._adjust(value);
             that.value(value);
         },
 
@@ -213,9 +236,13 @@
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
-            that.wrapper = wrapper.addClass("k-widget k-numerictextbox").show(); //should be k-textbox
+            that.wrapper = wrapper.addClass("k-widget k-textbox").show();
         }
     });
+
+    function buttonHtml(className, text) {
+        return '<span class="k-link k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span>'
+    }
 
     ui.plugin("TextBox", TextBox);
 })(jQuery);
