@@ -69,7 +69,7 @@
 
     });
 
-    var MobileToggleButton = Toggle.extend({
+    var MobileSwitch = Toggle.extend({
         init: function(element, options) {
             var that = this;
             element = $(element);
@@ -106,7 +106,7 @@
         },
 
         options: {
-            name: "MobileToggleButton",
+            name: "MobileSwitch",
             enabled: true
         },
 
@@ -162,7 +162,7 @@
 
     });
 
-    ui.plugin(MobileToggleButton);
+    ui.plugin(MobileSwitch);
 
     var MobileCheckBox = Toggle.extend({
         init: function(element, options) {
