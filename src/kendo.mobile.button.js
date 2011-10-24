@@ -35,6 +35,7 @@
 
         options: {
             name: "MobileButton",
+            selector: "[data-kendo-role=button]",
             enable: true
         },
 
@@ -65,7 +66,19 @@
         },
 
         _click: function(e) {
-            this.trigger(CLICK);
+            var that = this, href;
+
+            that.trigger(CLICK);
+
+            if (kendo.application) {
+                href = that.element.attr("href");
+
+                if (href) {
+                    e.preventDefault();
+
+                    kendo.application.changeView(href);
+                }
+            }
         },
 
         _wrap: function() {

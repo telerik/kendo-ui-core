@@ -126,19 +126,6 @@
                 ok(!dom.hasClass("k-state-active"), "Should not have active css class");
             });
 
-            test("should not apply active state when disabled", function() {
-                expect(1);
-
-                var dom = $("<button>foo</button>");
-                var button = new Button(dom);
-
-                button.disable();
-
-                dom.mousedown();
-
-                ok(!dom.hasClass("k-state-active"), "Should not have active css class");
-            });
-
             test("disable from configuration options", function() {
                 var dom = $("<button>foo</button>");
 
@@ -167,6 +154,23 @@
                 button.enable();
 
                 dom.click();
+            });
+
+            test("calls application changeView if present", function() {
+                expect(2);
+
+                kendo.application = {};
+
+                stub(kendo.application, "changeView");
+
+                var dom = $('<a href="foo">foo</a>');
+
+                var button = new Button(dom);
+
+                dom.click();
+
+                equal(kendo.application.calls("changeView"), 1);
+                equal(kendo.application.args("changeView")[0], "foo");
             });
         </script>
     </body>
