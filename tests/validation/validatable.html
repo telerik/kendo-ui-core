@@ -6,7 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.validate.js"></script>
+        <script src="../../src/kendo.validatable.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -20,13 +20,13 @@
 
         <script>
             var container,
-                Validator = kendo.ui.Validator;
+                Validatable = kendo.ui.Validatable;
 
             function setup(element, options) {
                 if (!element.parent().length) {
                     element.appendTo(container);
                 }
-                return new Validator(element, $.extend({}, options));
+                return new Validatable(element, $.extend({}, options));
             }
 
             module("kendo.ui.validation", {

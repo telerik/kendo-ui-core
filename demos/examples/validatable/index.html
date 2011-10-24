@@ -12,7 +12,7 @@
         <!-- script -->
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
-        <script src="../../../src/kendo.validate.js"></script>
+        <script src="../../../src/kendo.validatable.js"></script>
         <!-- script -->
     </head>
     <body>
@@ -75,7 +75,7 @@
                         separator: ", "
                     });
 
-                    var validator = $("fieldset").kendoValidator().data("kendoValidator"),
+                    var validator = $("fieldset").kendoValidatable().data("kendoValidatable"),
                         status = $(".status");
 
                     $("button").click(function() {

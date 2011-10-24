@@ -60,7 +60,7 @@ var categories = {
             items: [
                 {
                     text: "Basic usage",
-                    url: "validation/index.html"
+                    url: "validatable/index.html"
                 }
             ]
         }

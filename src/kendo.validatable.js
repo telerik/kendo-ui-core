@@ -28,7 +28,7 @@
             return false;
         };
 
-    var Validator = Widget.extend( {
+    var Validatable = Widget.extend( {
         init: function(element, options) {
             var that = this;
 
@@ -45,7 +45,7 @@
         },
 
         options: {
-            name: "Validator",
+            name: "Validatable",
             errorTemplate: "<span>${message}</span>",
             messages: {
                 required: "{0} is required",
@@ -218,5 +218,5 @@
         }
     });
 
-    kendo.ui.plugin(Validator);
+    kendo.ui.plugin(Validatable);
 })(jQuery);
