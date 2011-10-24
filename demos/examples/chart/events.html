@@ -75,7 +75,7 @@
                     kendoConsole.log(kendo.format("Series click :: {0} ({1}): {2}%", e.series.name, e.category, e.value));
                 }
 
-                $(document).one("kendo:exampleLoaded", function() {
+                $(document).ready(function() {
                     createChart();
 
                     $(document).bind("kendo:skinChange", function(e) {

@@ -93,7 +93,7 @@
                     });
                 }
 
-                $(document).one("kendo:exampleLoaded", function() {
+                $(document).ready(function() {
                     createChart();
 
                     $(document).bind("kendo:skinChange", function(e) {
