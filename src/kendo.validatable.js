@@ -58,7 +58,8 @@
             },
             rules: {
                 required: function(input) {
-                    if (hasAttribute(input, "required") && input.val() === "") {
+                    var checkbox = input.filter("[type=checkbox]").length && input.attr("checked") !== "checked";
+                    if (hasAttribute(input, "required") && (input.val() === "" || checkbox)) {
                         return false;
                     }
                     return true;
