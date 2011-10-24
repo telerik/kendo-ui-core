@@ -48,7 +48,7 @@
 
             test("switches to local view", function() {
                 setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
-                application.changeView("#page2");
+                application.navigate("#page2");
                 ok(!$("#page1").is(":visible"), "First page is hidden");
                 ok($("#page2").is(":visible"), "Second page is visible");
             });
@@ -70,7 +70,7 @@
                     equal($("#qunit-fixture").has("#page2").length, 1, "Remote view is inserted in the application DOM element");
                 });
 
-                application.changeView("page2.html");
+                application.navigate("page2.html");
             });
 
             asyncTest("reuses an already loaded remote page", function() {
@@ -81,12 +81,12 @@
                     responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
                 });
 
-                application.changeView("page2.html");
+                application.navigate("page2.html");
 
                 application.bind("viewShow", function() {
                     application.unbind("viewShow");
 
-                    application.changeView("#page1");
+                    application.navigate("#page1");
 
                     $.mockjaxClear();
 
@@ -103,7 +103,7 @@
                         ok($("#page2").is(":visible"), "Second page is present");
                     });
 
-                    application.changeView("page2.html");
+                    application.navigate("page2.html");
                 });
             });
 
@@ -122,7 +122,7 @@
                     ok($("#page2").is(":visible"), "Second page is present");
                 });
 
-                application.changeView("page2.html");
+                application.navigate("page2.html");
             });
 
             asyncTest("deals with various newline characters when loading remote view", function() {
@@ -139,7 +139,7 @@
                     ok($("#page2").is(":visible"), "Second page is loaded");
                 });
 
-                application.changeView("page2.html");
+                application.navigate("page2.html");
             });
 
             test("raises viewInit for the local view", function() {
@@ -163,7 +163,7 @@
                     equal(e.view.element[0], $("#page2")[0], "Event is raised");
                 });
 
-                application.changeView("#page2");
+                application.navigate("#page2");
             });
 
             test("raises viewHide when switching to a local view", function() {
@@ -175,7 +175,7 @@
                     equal(e.view.element[0], $("#page1")[0], "Event is raised");
                 });
 
-                application.changeView("#page2");
+                application.navigate("#page2");
             });
 
             asyncTest("raises viewInit when switching to a remote view", function() {
@@ -193,19 +193,19 @@
                     equal(e.view.element[0], $("#page2")[0], "Event is raised");
                 });
 
-                application.changeView("page2.html");
+                application.navigate("page2.html");
             });
 
             test("does not raise viewInit for already initialized local view", function() {
                 setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
 
-                application.changeView("#page2");
+                application.navigate("#page2");
 
                 application.bind("viewInit", function(e) {
                     ok(false, "Does not raise event");
                 });
 
-                application.changeView("#page1");
+                application.navigate("#page1");
             });
 
             asyncTest("does not raise viewInit for already initialized remote view", function() {
@@ -221,16 +221,16 @@
 
                     application.unbind("viewShow");
 
-                    application.changeView("#page1");
+                    application.navigate("#page1");
 
                     application.bind("viewInit", function(e) {
                         ok(false, "Does not raise event");
                     });
 
-                    application.changeView("page2.html");
+                    application.navigate("page2.html");
                 });
 
-                application.changeView("page2.html");
+                application.navigate("page2.html");
             });
 
             test("calls enhance when a view is changed", function() {
@@ -242,7 +242,7 @@
 
                 stub(kendo.mobile, "enhance");
 
-                application.changeView("#page2");
+                application.navigate("#page2");
 
                 equal(kendo.mobile.calls("enhance"), 1, "Calls kendo.mobile.enhance");
             });
@@ -274,7 +274,7 @@
                     equal(e.view.element[0], $("#page2")[0], "Event is raised");
                 });
 
-                application.changeView("/page2");
+                application.navigate("/page2");
             });
         </script>
     </body>
