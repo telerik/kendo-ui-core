@@ -63,13 +63,7 @@
 
             views.not(":first").hide();
 
-            that._view = new View(views.first(), { url: history.current });
-
-            that.trigger("viewInit", { view: that._view });
-
-            if (kendo.mobile) {
-                kendo.mobile.enhance(that._view.element);
-            }
+            that._view = that._createView(views.first(), { url: history.current });
 
             history.start($.extend(options, { silent: true }));
 
@@ -81,23 +75,39 @@
         changeView: function(url) {
             var that = this;
 
-            that._findView(url, function(view, init) {
+            that._findView(url, function(view) {
                 history.navigate(url, true);
 
                 that.trigger("viewHide", { view: that._view });
 
                 that._view = view.replace(that._view);
 
-                if (init) {
-                    that.trigger("viewInit", { view: view });
-
-                    if (kendo.mobile) {
-                        kendo.mobile.enhance(view.element);
-                    }
-                }
-
                 that.trigger("viewShow", { view: view });
             });
+        },
+
+        _createView: function(element, options) {
+            var view = new View(element, options);
+
+            this.trigger("viewInit", { view: view });
+
+            if (kendo.mobile) {
+                kendo.mobile.enhance(view.element);
+            }
+
+            return view;
+        },
+
+        _createRemoteView: function(url, html) {
+            var that = this, element;
+
+            element = extractView(html);
+
+            element.hide().attr("data-kendo-url", url);
+
+            that.element.append(element);
+
+            return that._createView(element);
         },
 
         _findView: function(url, callback) {
@@ -110,20 +120,15 @@
             view = element.data("kendoView");
 
             if (view) {
-                callback(view, false);
+                callback(view);
             } else if (url.charAt(0) === "#") {
-                callback(new View(element), true);
+                callback(that._createView(element));
             } else {
                 $.ajax({
                     url: url,
                     dataType: "html",
                     success: function(html) {
-                        element = extractView(html);
-
-                        element.hide().attr("data-kendo-url", url);
-                        that.element.append(element);
-
-                        callback(new View(element), true);
+                        callback(that._createRemoteView(url, html));
                     }
                 });
             }
