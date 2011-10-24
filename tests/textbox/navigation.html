@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TextBox Navigation</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.textbox.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">TextBox Navigation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var TextBox = kendo.ui.TextBox,
+                input;
+
+            QUnit.config.testTimeout = 1000;
+
+            module("kendo.ui.TextBox Navigation", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            asyncTest("pressing mousedown of the up arrow increment value", function() {
+                var textbox = new TextBox(input);
+
+                textbox._upArrow.mousedown();
+
+                setTimeout(function() {
+                    textbox._stop();
+                    ok(textbox.value() > 1);
+                    start();
+                }, 700);
+            });
+
+            asyncTest("pressing mousedown of the down arrow decrement value", function() {
+                var textbox = new TextBox(input);
+
+                textbox._downArrow.mousedown();
+
+                setTimeout(function() {
+                    textbox._stop();
+                    ok(textbox.value() < -1);
+                    start();
+                }, 700);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

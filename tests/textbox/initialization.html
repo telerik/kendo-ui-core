@@ -46,10 +46,10 @@
                 ok(downArrow);
                 ok(upArrow.hasClass("k-link k-icon k-arrow-up"));
                 ok(downArrow.hasClass("k-link k-icon k-arrow-down"));
-                ok(upArrow.attr("title"), "Increase value");
-                ok(downArrow.attr("title"), "Decrease value");
-                ok(upArrow.html(), "Increment");
-                ok(downArrow.html(), "Decrement");
+                equal(upArrow.attr("title"), textbox.options.upArrowText);
+                equal(downArrow.attr("title"), textbox.options.downArrowText);
+                equal(upArrow.html(), textbox.options.upArrowText);
+                equal(downArrow.html(), textbox.options.downArrowText);
                 ok(upArrow.data("events").mousedown);
                 ok(downArrow.data("events").mousedown);
             });
@@ -60,7 +60,7 @@
                 var textbox = new TextBox(input),
                     text = textbox._text;
 
-                //ok(text.is(":visible"));
+                ok(text.is(":visible"));
                 ok(text[0].nodeName, "DIV");
                 ok(!text.hasClass("k-input"));
                 ok(text.hasClass("custom"));

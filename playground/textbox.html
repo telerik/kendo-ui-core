@@ -11,7 +11,7 @@
         <link href="../styles/kendo.blueopal.css" rel="stylesheet" />
     </head>
     <body>
-        <input id="textbox" style="width: 150px"/>
+        <input id="textbox" type="number" style="width: 150px"/>
 
         <style type="text/css">
             .k-hide-text {
@@ -22,6 +22,52 @@
             /* Opera */
             x:-o-prefocus, .k-hide-text {
                 text-indent: 999em;
+            }
+
+            /* from common */
+            div.k-textbox
+            {
+                display: inline-block;
+                vertical-align: middle;
+                border: 0;
+                background: transparent;
+                white-space: nowrap;
+            }
+
+            .k-textbox .k-input /*alignment of arrows in WebKit*/
+            {
+                margin: 0;
+            }
+
+            .k-formatted-value
+            {
+                position: absolute;
+                padding: 3px 4px 2px 3px;
+            }
+
+            .k-textbox .k-icon
+            {
+                margin-left: -16px;
+            }
+
+            .k-textbox .k-link
+            {
+                display: inline-block;
+                border-width: 0;
+            }
+
+            .k-textbox .k-arrow-up
+            {
+                height: 10px;
+                margin-top: 1px;
+                vertical-align: top;
+            }
+
+            .k-textbox .k-arrow-down
+            {
+                height: 11px;
+                margin-bottom: 1px;
+                vertical-align: bottom;
             }
         </style>
         <script>

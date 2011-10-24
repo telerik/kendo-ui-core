@@ -10,5 +10,9 @@ tests.push(
     {
         page: "textbox/events.html",
         title: "textbox events"
+    },
+    {
+        page: "textbox/navigation.html",
+        title: "textbox navigation"
     }
 );
