@@ -140,6 +140,109 @@
                 m.set("foo", "bar");
                 ok(!changeWasCalled);
             });
+
+            test("set converts value to defined type", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", type: "number" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", "1");
+                equal(m.get("bar"), 1);
+                equal(typeof m.get("bar"), "number");
+            });
+
+            test("setting number when no type defined", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", 1);
+                equal(m.get("bar"), 1);
+                equal(typeof m.get("bar"), "number");
+            });
+
+            test("set float number as string is parsed as float", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", type: "number" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", "1.1");
+                equal(m.get("bar"), 1.1);
+                equal(typeof m.get("bar"), "number");
+            });
+
+            test("set ignores type case", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", type: "Number" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", "1");
+                equal(m.get("bar"), 1);
+                equal(typeof m.get("bar"), "number");
+            });
+
+            test("set when no converter for the type", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", type: "foo" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", "1");
+                equal(m.get("bar"), "1");
+            });
+
+            test("set date as string is parsed", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", type: "date" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", "1/1/2000");
+                equal(m.get("bar").getTime(), new Date("1/1/2000").getTime());
+                equal(typeof m.get("bar"), "object");
+            });
+
+
+            test("set with custom converter", function() {
+                var wasCalled = false,
+                MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: {
+                            field: "bar",
+                            type: "string",
+                            converter: function(value) { wasCalled = true; }
+                        }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", "some value");
+                ok(wasCalled);
+            });
+
+            test("set with custom converter without type set", function() {
+                var wasCalled = false,
+                MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: {
+                            field: "bar",
+                            converter: function(value) { wasCalled = true; }
+                        }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", "some value");
+                ok(wasCalled);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

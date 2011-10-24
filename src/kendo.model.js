@@ -36,7 +36,15 @@
 
         return true;
     }
+    converters = {
+        "number": function(value) {
+            return kendo.parseFloat(value);
+        },
 
+        "date": function(value) {
+            return kendo.parseDate(value);
+        }
+    };
     var Model = Observable.extend({
         init: function(data) {
             var that = this;
@@ -66,6 +74,21 @@
             return this._accessor(field).get(this.data);
         },
 
+        _convert: function(field, value) {
+            var that = this,
+                converter;
+
+            field = (that.fields || {})[field];
+            if (field) {
+                converter = field.converter;
+                if (!converter && field.type) {
+                    converter = converters[field.type.toLowerCase()];
+                }
+            }
+
+            return converter ? converter(value) : value;
+        },
+
         set: function(fields, value) {
             var that = this,
                 field,
@@ -82,7 +105,7 @@
             for (field in values) {
                 accessor = that._accessor(field);
 
-                value = values[field];
+                value = that._convert(field, values[field]);
 
                 if (!equal(value, accessor.get(that.data))) {
                     accessor.set(that.data, value);
