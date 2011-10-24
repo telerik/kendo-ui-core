@@ -19,7 +19,6 @@
             var that = this;
 
             that.element = element.data("kendoView", that);
-            that._bindEvents();
         },
 
         replace: function(view) {
@@ -31,13 +30,6 @@
             if (!back) {
                 view.nextView = that;
             }
-        },
-
-        _bindEvents: function () {
-            this.element.find("a").click(function(e) {
-                e.preventDefault();
-                kendo.application.changeView($(this).attr("href"));
-            });
         }
     });
 
