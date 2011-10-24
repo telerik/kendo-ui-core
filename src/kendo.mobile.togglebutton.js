@@ -9,6 +9,7 @@
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         MOUSEUP = touch ? "touchend" : "mouseup",
         handleSelector = ".k-toggle-handle",
+        bindSelectors = ".k-checkbox",
         extend = $.extend,
         proxy = $.proxy;
 
@@ -21,7 +22,51 @@
 
             element = that.element;
             options = that.options;
+
+            that._toggleProxy = proxy(that._toggle, that);
+            that._triggerProxy = proxy(that._trigger, that);
+
+            that.bind([
+                TOGGLE
+            ], options);
+        },
+
+        enable: function(enable) {
+            enable = typeof enable === "boolean" ? enable : true;
+
+            var that = this;
+
+            if (enable) {
+                that.input.removeAttr("disabled");
+                that.element.delegate("input[type=checkbox]", "change", that._toggleProxy)
+                            .delegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
+                that.element.filter(bindSelectors).bind(MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
+            } else {
+                that.element.undelegate("input[type=checkbox]", "change", that._toggleProxy)
+                            .undelegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
+                that.element.filter(bindSelectors).unbind(MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
+                that.input.attr("disabled");
+            }
+        },
+
+        disable: function() {
+            this.enable(false);
+        },
+
+        toggle: function(toggle) {
+            var input = this.input,
+                checked = input[0].checked;
+
+            if (toggle != checked && !this.handle.data("animating") && !input.attr("disabled")) {
+                input[0].checked = typeof(toggle) === "boolean" ? toggle : !checked;
+                input.trigger("change");
+            }
+        },
+
+        _trigger: function (e) {
+            this.handle.toggleClass("k-state-active", e.type == MOUSEDOWN);
         }
+
     });
 
     var MobileToggleButton = Toggle.extend({
@@ -39,8 +84,7 @@
             options = that.options;
 
             that._wrapper();
-
-            that._enable();
+            that.enable(options.enable);
 
             that.animation = {
                 all: {
@@ -59,45 +103,14 @@
                     offset: 30
                 }
             };
-
-            element
-                .delegate("input[type=checkbox]", "change", proxy(that._toggle, that))
-                .delegate(handleSelector, MOUSEDOWN, proxy(that._trigger, that))
-                .delegate(handleSelector, MOUSEUP, proxy(that._trigger, that));
-
-            that.bind([
-                TOGGLE
-            ], options);
         },
 
         options: {
             name: "MobileToggleButton",
-            enable: true
-        },
-
-        enable: function(enable) {
-            this._enable(enable);
-        },
-
-        toggle: function(toggle) {
-            var input = this.input,
-                checked = input[0].checked;
-
-            if (toggle != checked && !this.handle.data("animating")) {
-                input[0].checked = typeof(toggle) === "boolean" ? toggle : !checked;
-                input.trigger("change");
-            }
+            enabled: true
         },
 
         refresh: function() {
-        },
-
-        _enable: function () {
-
-        },
-
-        _trigger: function (e) {
-            this.handle.toggleClass("k-state-active", e.type == MOUSEDOWN);
         },
 
         _toggle: function(e) {
@@ -127,14 +140,16 @@
         _wrapper: function() {
             var that = this;
 
-            if (that.element.is("label"))
+            if (that.element.is("label")) {
                 that.element.addClass("k-toggle");
+            }
 
             that.input = that.element.children("input[type=checkbox]");
-            if (that.input.length)
+            if (that.input.length) {
                 that.input.data("kendo-role", "toggle");
-            else
+            } else {
                 that.input = $("<input type='checkbox' data-kendo-role='toggle' />").appendTo(that.element);
+            }
 
             that.handle = that.element.children(".k-toggle-handle");
 
@@ -148,4 +163,56 @@
     });
 
     ui.plugin(MobileToggleButton);
+
+    var MobileCheckBox = Toggle.extend({
+        init: function(element, options) {
+            var that = this;
+            element = $(element);
+
+            if (element.is("input[type=checkbox]")) {
+                element = element.wrap("<label />").parent();
+            }
+
+            Toggle.fn.init.call(that, element, options);
+
+            element = that.element;
+            options = that.options;
+
+            that._wrapper();
+            that.enable(options.enable);
+        },
+
+        options: {
+            name: "MobileCheckBox",
+            enabled: true
+        },
+
+        refresh: function() {
+        },
+
+        _toggle: function() {
+            var that = this;
+
+            that.handle.toggleClass("k-checkbox-checked", that.input[0].checked);
+            that.trigger(TOGGLE, { checked: that.input[0].checked });
+        },
+
+        _wrapper: function() {
+            var that = this;
+
+            if (that.element.is("label"))
+                that.element.addClass("k-checkbox");
+
+            that.input = that.element.children("input[type=checkbox]");
+            if (that.input.length)
+                that.input.data("kendo-role", "checkbox");
+            else
+                that.input = $("<input type='checkbox' data-kendo-role='checkbox' />").appendTo(that.element);
+
+            that.handle = that.element;
+        }
+
+    });
+
+    ui.plugin(MobileCheckBox);
 })(jQuery);

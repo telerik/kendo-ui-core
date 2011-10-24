@@ -71,6 +71,22 @@
     transform: @arguments;
 }
 
+.transition() {
+    -webkit-transition: @arguments;
+    -moz-transition: @arguments;
+    -ms-transition: @arguments;
+    -o-transition: @arguments;
+    transition: @arguments;
+}
+
+.pTransition() {
+    -webkit-transition: "-webkit-@{arguments}";
+    -moz-transition: "-moz-@{arguments}";
+    -ms-transition: "-ms-@{arguments}";
+    -o-transition: "-o-@{arguments}";
+    transition: @arguments;
+}
+
 html, body
 {
     -ms-content-zooming: none;
@@ -323,7 +339,8 @@ body > .k-tabStrip,
     -webkit-transform: translateZ(0);
 }
 
-.k-toggle
+.k-toggle,
+.k-checkbox
 {
     display: inline-block;
     padding: 1px;
@@ -334,6 +351,58 @@ body > .k-tabStrip,
     position: relative;
     overflow: hidden;
     .border-radius(4px);
+}
+
+.k-checkbox
+{
+    width: 24px;
+    height: 24px;
+}
+
+.k-checkbox-checked:after
+{
+    content: "\a0";
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.k-ios .k-checkbox
+{
+    border: 3px solid #e5e5e5;
+    background-color: #fff;
+    .border-radius(15px);
+    .transition(~"all 100ms ease-out");
+}
+
+.k-ios .k-checkbox-checked
+{
+    border-color: #fff;
+    background-color: #BB0000;
+    background-image: linearGradient(top, rgba(241, 150, 155, 1), rgba(230, 70, 78, .5) 50%, rgba(222, 11, 21, .5) 50%, rgba(183, 0, 0, 0));
+    .box-shadow(0 2px 3px #333);
+}
+
+.k-android .k-checkbox
+{
+    width: 2.2em;
+    height: 2.2em;
+    border: 1px solid #000;
+    background-color: rgb(54, 54, 54);
+    background-image: linearGradient(top, rgb(54, 54, 54), rgb(43, 43, 43));
+    .border-radius(2px);
+    .box-sizing(border-box);
+    .box-shadow(0 0 1px 2px #808080);
+}
+
+.k-ios .k-checkbox-checked:after
+{
+    background: transparent url("images/ios-sprite.png") 2px -117px no-repeat;
+}
+
+.k-android .k-checkbox-checked:after
+{
+    background: transparent url("images/android-sprite.png") -2px -38px no-repeat;
 }
 
 .k-toggle-tip,
