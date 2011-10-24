@@ -1500,7 +1500,9 @@
             var majorDivisions = axis.getDivisions(options.majorUnit),
                 currentValue = options.min,
                 align = options.orientation === VERTICAL ? RIGHT : CENTER,
-                labelOptions = deepExtend({ }, options.labels, { align: align }),
+                labelOptions = deepExtend({ }, options.labels, {
+                    align: align, zIndex: options.zIndex
+                }),
                 labelText;
 
             for (i = 0; i < majorDivisions; i++) {
