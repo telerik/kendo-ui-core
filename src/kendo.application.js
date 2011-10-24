@@ -3,7 +3,9 @@
     var kendo = window.kendo,
         history = kendo.history,
         div = $("<div/>"),
-        VIEW_SELECTOR = "[data-kendo-role=view]";
+        VIEW_SELECTOR = "[data-kendo-role=view]",
+        HEADER_SELECTOR ="[data-kendo-role=header]",
+        FOOTER_SELECTOR ="[data-kendo-role=footer]";
 
     function extractView(html) {
         if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
@@ -19,18 +21,22 @@
             var that = this;
 
             that.element = element.data("kendoView", that);
+            that.header  = element.find(HEADER_SELECTOR);
+            that.footer  = element.find(FOOTER_SELECTOR);
         },
 
         replace: function(view) {
             var that = this,
-                back = that.nextView === view;
+            back = that.nextView === view;
 
+            view.header.kendoAnimateTo(that.header, {effects: "fade", reverse: back});
             view.element.kendoAnimateTo(that.element, {effects: "slide", reverse: back});
+            view.footer.kendoAnimateTo(that.footer, {effects: "fade", reverse: back});
 
             if (!back) {
                 view.nextView = that;
             }
-        }
+        },
     });
 
     var Application = kendo.Observable.extend({
@@ -50,12 +56,34 @@
             views.not(":first").hide();
 
             that._view = that._createView(views.first());
+            that.buildInitialStructure();
+            this.content.append(views);
 
             history.start($.extend(options, { silent: true }));
 
             history.change(function(e) {
                 that.navigate(e.location);
             });
+        },
+
+        buildInitialStructure: function () {
+            var that = this,
+                view = that._view,
+                element = that.element,
+
+                animationClass = 'k-animation-container',
+                scaffold = '<div class="' + animationClass + ' k-mobile-header"> \
+            <div class="' + animationClass + '"></div></div> \
+            <div class="' + animationClass + ' k-mobile-content"> \
+            <div class="' + animationClass + '"></div></div> \
+            <div class="' + animationClass + ' k-mobile-footer"> \
+            <div class="' + animationClass + '"></div></div>';
+
+            element.append($(scaffold));
+
+            element.find(".k-mobile-header > ." + animationClass).append(view.header);
+            element.find(".k-mobile-footer > ." + animationClass).append(view.footer);
+            this.content = element.find(".k-mobile-content > ." + animationClass);
         },
 
         navigate: function(url) {
@@ -100,9 +128,9 @@
 
         _findView: function(url, callback) {
             var that = this,
-                view,
-                local = url.charAt(0) === "#",
-                element;
+            view,
+            local = url.charAt(0) === "#",
+            element;
 
             element = that.element.find("[data-kendo-url='" + url + "']");
 
