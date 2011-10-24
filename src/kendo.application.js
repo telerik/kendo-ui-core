@@ -67,7 +67,11 @@
 
             that.trigger("viewInit", { view: that._view });
 
-            history.start($.extend(options, {silent: true}));
+            if (kendo.mobile) {
+                kendo.mobile.enhance(that._view.element);
+            }
+
+            history.start($.extend(options, { silent: true }));
 
             history.change(function(e) {
                 that.changeView(e.location);
@@ -86,6 +90,10 @@
 
                 if (init) {
                     that.trigger("viewInit", { view: view });
+
+                    if (kendo.mobile) {
+                        kendo.mobile.enhance(view.element);
+                    }
                 }
 
                 that.trigger("viewShow", { view: view });

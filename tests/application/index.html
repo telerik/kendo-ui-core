@@ -226,6 +226,33 @@
 
                 application.changeView("page2.html");
             });
+
+            test("calls enhance when a view is changed", function() {
+                expect(1);
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+
+                kendo.mobile = {};
+
+                stub(kendo.mobile, "enhance");
+
+                application.changeView("#page2");
+
+                equal(kendo.mobile.calls("enhance"), 1, "Calls kendo.mobile.enhance");
+            });
+
+            test("calls enhance when started", function() {
+                expect(1);
+
+                kendo.mobile = {};
+
+                stub(kendo.mobile, "enhance");
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+
+                equal(kendo.mobile.calls("enhance"), 1, "Calls kendo.mobile.enhance");
+            });
+
         </script>
     </body>
 </html>
