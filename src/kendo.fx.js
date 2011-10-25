@@ -575,7 +575,6 @@
                 container = wrapForAnimation(element),
                 options = parseTransitionEffects(options),
                 animatingContainer = "slide" in options.effects,
-                outerContainer = wrapForAnimation(container, {overflow: "hidden"}),
                 transitions = kendo.support.transitions;
 
             destination.show();
@@ -592,8 +591,7 @@
                 setTimeout(function() {
                     element.hide();
                     destination.attr("style", "");
-                    container.attr("style", "position:relative");
-                    outerContainer.attr("style", "position:relative");
+                    container.attr("style", "");
                     options.completeCallback && options.completeCallback();
                 }, 0);
             };
