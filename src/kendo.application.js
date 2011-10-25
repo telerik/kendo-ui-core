@@ -35,6 +35,7 @@
 
             this.header.wrap('<div class="k-mobile-header k-animation-container"></div>');
             this.footer.wrap('<div class="k-mobile-footer k-animation-container"></div>');
+            console.log("view init");
         },
 
         replace: function(view) {
@@ -42,9 +43,19 @@
             back = that.nextView === view;
 
 
-            view.header.kendoAnimateTo(that.header, { effects: "fade", reverse: back, duration: 1000 });
-            view.content.kendoAnimateTo(that.content, { effects: "slide", reverse: back, duration: 1000 });
-            view.footer.kendoAnimateTo(that.footer, { effects: "fade", reverse: back, duration: 1000 });
+            if (back) {
+                var animationType = view.element.data("kendoTransition") || "slide";
+            } else {
+                var animationType = this.element.data("kendoTransition") || "slide";
+            }
+
+            if (animationType === "slide") {
+                view.header.kendoAnimateTo(that.header, { effects: "fade", reverse: back });
+                view.content.kendoAnimateTo(that.content, { effects: "slide", reverse: back });
+                view.footer.kendoAnimateTo(that.footer, { effects: "fade", reverse: back });
+            } else {
+                view.element.kendoAnimateTo(that.element, {effects: animationType, reverse: back, duration: 400 });
+            }
 
             if (!back) {
                 view.nextView = that;
@@ -53,7 +64,6 @@
     });
 
     var Application = kendo.Observable.extend({
-
         init: function(element, options) {
             kendo.Observable.fn.init.call(this, options);
             this.element = element;
@@ -64,6 +74,7 @@
 
             that.element = that.element ? $(that.element) : $(document.body);
 
+            that.element.addClass("k-animation-container");
             views = that.element.find(VIEW_SELECTOR);
 
             views.not(":first").hide();
