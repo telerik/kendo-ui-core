@@ -207,7 +207,7 @@
             effects = "slideIn:" + RegExp.$1;
         }
 
-        mirror = options.reverse && /^(slide:|fadeIn)/.test(effects);
+        mirror = options.reverse && /^(slide)/.test(effects);
 
         if (mirror) {
             delete options.reverse;
@@ -575,6 +575,7 @@
                 container = wrapForAnimation(element),
                 options = parseTransitionEffects(options),
                 animatingContainer = "slide" in options.effects,
+                movingElement = options.reverse ? element : destination;
                 transitions = kendo.support.transitions;
 
             destination.show();
@@ -584,12 +585,12 @@
                 direction = direction || definition.direction;
             });
 
-            positionElement(destination, kendo.directions[direction]);
-            destination.css({position: "absolute", "left": 0, "top": 0});
+            positionElement(movingElement, kendo.directions[direction]);
+            element.css({position: "absolute", "left": 0, "top": 0});
 
             options.complete = function() {
                 setTimeout(function() {
-                    element.hide();
+                    element.attr("style", "").hide();
                     destination.attr("style", "");
                     container.attr("style", "");
                     options.completeCallback && options.completeCallback();
@@ -599,8 +600,9 @@
             if (animatingContainer) {
                 container.kendoAnimate(options);
             } else {
-                destination.kendoAnimate(options);
+                movingElement.kendoAnimate(options);
             }
+
         },
 
         fadeOut: {
