@@ -4,8 +4,12 @@
         history = kendo.history,
         div = $("<div/>"),
         VIEW_SELECTOR = "[data-kendo-role=view]",
-        HEADER_SELECTOR ="[data-kendo-role=header]",
-        FOOTER_SELECTOR ="[data-kendo-role=footer]";
+        HEADER_SELECTOR = "[data-kendo-role=header]",
+        FOOTER_SELECTOR = "[data-kendo-role=footer]",
+        ANIMATION_CLASS = "k-animation-container",
+        SCAFFOLD = kendo.template('<div class="${a} k-mobile-header"><div class="${a}"></div></div> \
+                                  <div class="${a} k-mobile-content"><div class="${a}"></div></div> \
+                                  <div class="${a} k-mobile-footer"><div class="${a}"></div></div>')({a: ANIMATION_CLASS});
 
     function extractView(html) {
         if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
@@ -69,21 +73,14 @@
         buildInitialStructure: function () {
             var that = this,
                 view = that._view,
-                element = that.element,
+                element = that.element;
 
-                animationClass = 'k-animation-container',
-                scaffold = '<div class="' + animationClass + ' k-mobile-header"> \
-            <div class="' + animationClass + '"></div></div> \
-            <div class="' + animationClass + ' k-mobile-content"> \
-            <div class="' + animationClass + '"></div></div> \
-            <div class="' + animationClass + ' k-mobile-footer"> \
-            <div class="' + animationClass + '"></div></div>';
+            element.append($(SCAFFOLD));
 
-            element.append($(scaffold));
+            this.content = element.find(".k-mobile-content > ." + ANIMATION_CLASS);
 
-            element.find(".k-mobile-header > ." + animationClass).append(view.header);
-            element.find(".k-mobile-footer > ." + animationClass).append(view.footer);
-            this.content = element.find(".k-mobile-content > ." + animationClass);
+            element.find(".k-mobile-header > ." + ANIMATION_CLASS).append(view.header);
+            element.find(".k-mobile-footer > ." + ANIMATION_CLASS).append(view.footer);
         },
 
         navigate: function(url) {
