@@ -754,7 +754,13 @@ body > .k-tabStrip,
     background-image: linearGradient(top, rgb(251,251,251), rgb(225,225,225) 50%, rgb(200,200,200));
 }
 
-.k-ios .k-radiogroup .k-button:hover
+.k-ios .k-state-disabled .k-button
+{
+    color: #aaa;
+    text-shadow: none;
+}
+
+.k-ios .k-radiogroup .k-state-hover
 {
     color: #fff;
     text-shadow: none;
@@ -762,7 +768,7 @@ body > .k-tabStrip,
     background-image: linearGradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
 }
 
-.k-ios .k-radiogroup .k-button.k-state-active
+.k-ios .k-radiogroup .k-state-active
 {
     color: #fff;
     text-shadow: none;
@@ -832,7 +838,7 @@ body > .k-tabStrip,
     background-color: #8891be;
 }
 
-.k-ios .k-toolbar .k-button.k-state-active
+.k-ios .k-toolbar .k-state-active
 {
     background-color: #a8b1de;
 }

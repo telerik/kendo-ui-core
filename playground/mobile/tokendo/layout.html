@@ -51,8 +51,6 @@
                         Show message: <input type="checkbox" id="toggle" />
                         <input id="checky" type="checkbox" />
                         <br><br>
-                        <button id="button">Init Button</button>
-
                         <div id="radio">
                             <label for="radio1">Test 1</label>
                             <input id="radio1" type="radio" name="three" />
@@ -60,13 +58,16 @@
                                 <input type="radio" name="three" />
                             </label>
                         </div>
-
+                        <br><br>
                         <label for="radioz">Test 1</label>
                         <input id="radioz" type="radio" name="two" />
                         <label>Test 2
                             <input type="radio" name="two" />
                         </label>
                         <input type="radio" name="two" />
+                        <br><br>
+                        <button id="button">Select Random Radio</button>
+
                     </div>
                 </div>
             </div>
@@ -95,11 +96,19 @@
     //                console.log("viewinit", args);
             });
 
+        function onToggle(e) {
+            console.log(e);
+        }
+
+        function onClick(e) {
+            radiogroup.select(Math.round(Math.random()*2));
+        }
+
         var toggle = $("#toggle").kendoMobileSwitch().data("kendoMobileSwitch"),
             checky = $("#checky").kendoMobileCheckBox().data("kendoMobileCheckBox"),
-            button = $("#button").kendoMobileButton().data("kendoMobileButton"),
+            button = $("#button").kendoMobileButton({ click: onClick }).data("kendoMobileButton"),
             radio = $("#radio").kendoMobileRadioGroup({ enable: false }).data("kendoMobileRadioGroup"),
-            radiogroup = $("#radioz").kendoMobileRadioGroup().data("kendoMobileRadioGroup");
+            radiogroup = $("#radioz").kendoMobileRadioGroup({ toggle: onToggle }).data("kendoMobileRadioGroup");
 
     </script>
 </body>
