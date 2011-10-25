@@ -24,6 +24,7 @@
 
     </head>
     <body>
+        <div id="relatedGrid"></div>
         <div id="grid"></div>
         <script>
             var grid,
@@ -37,7 +38,7 @@
                 }
                 dataSource = new kendo.data.DataSource({
                     data: data,
-                    pageSize: 10,
+                    pageSize: 5,
                     schema: {
                         model: {
                             id: "id",
@@ -49,65 +50,21 @@
                     }
                 });
 
-                grid = $("#grid").kendoGrid({
+
+                $("#grid").kendoGrid({
                     dataSource: dataSource,
-  //                  groupable: true,
- //                   sortable: true,
-                    //scrollable: true,
-                    //selectable: "multi cell",
-                    //navigatable: true,
                     pageable: true,
                     editable: true,
-//                    detailTemplate: "<table><tr><td>template</td></tr></table>",
-                    columns: ["id", "bar", "foo", "date"]
-                })
-/*                .delegate("td", "click", function(e) {
-                    if((grid.valid != undefined && !grid.valid) || $(e.target).is(":input")) {
-                        return;
-                    }
-                    $(".k-edit-cell").each(function() { display($(this))});
-                    var cell = $(this),
-                        model = dataSource.get(cell.closest("tr").data("id")),
-                        column = grid.columns[cell.index()];
-
-                    grid.td = cell.addClass("k-edit-cell");
-
-                    if (!cell.find(":input").length) {
-                        cell.empty().append($(editor(column.field)(model.data)));
-
-                        new kendo.data.ModelViewBinder(cell, model);
-                        cell.find(":input:visible:first").focus();
-                    }
-                })*/
-                .data("kendoGrid");
-
-                /*$(document).mousedown(function(e){
-                    if (grid.td && !$.contains(grid.td[0], e.target) && grid.td[0] != e.target && !$(e.target).closest('.k-animation-container').length) {
-                        grid.valid = validator.validate();
-                        if(grid.valid) {
-                            display(grid.td);
-                            grid.td.find(":input:visible:first").focus();
-                            grid.td = null;
-                        }
-                    }
-                });*/
-
-                validator = new kendo.ui.Validator(grid.element, {});
+                    columns: ["bar", "foo", "date"]
+                });
+                $("#relatedGrid").kendoGrid({
+                    dataSource: dataSource,
+                    pageable: true,
+                    columns: ["bar", "foo"]
+                });
 
             });
 
-            function display(cell) {
-                var model = dataSource.get(cell.closest("tr").data("id")),
-                    column = grid.columns[cell.index()],
-                    input = cell.find(":input");
-
-                cell.removeClass("k-edit-cell");
-                cell.empty().append(model.get(column.field));
-            }
-
-            function editor(fieldName) {
-                return kendo.template("<input type='text' required validationMessage='this field is required' name='" + fieldName + "' value='#=" + fieldName + "#' />");
-            }
         </script>
     </body>
 </html>

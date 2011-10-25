@@ -526,7 +526,7 @@
             that._editable();
 
             if (that.options.autoBind) {
-                that.dataSource.query();
+                that.dataSource.fetch();
             }
         },
 
