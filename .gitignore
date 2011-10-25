@@ -20,5 +20,11 @@ functional-tests/**/Results/
 functional-tests/Results/
 functional-tests/**/Backup/
 functional-tests/**/TestLists/
+functional-tests/KendoCustom/**/TestLists/
+functional-tests/KendoCustom/**/TestResults/
+functional-tests/KendoCustom/**/Results/
+functional-tests/KendoCustom/Results/
+functional-tests/KendoCustom/**/Backup/
+functional-tests/KendoCustom/**/TestLists/
 app.js
 node_modules
