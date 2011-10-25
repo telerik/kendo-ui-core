@@ -132,7 +132,7 @@
                 }
 
                 target
-                    .parents(".k-buttonStrip, .k-tabStrip, .k-toolbar")
+                    .parents(".k-radiogroup, .k-tabStrip, .k-toolbar")
                     .find(".k-state-active")
                     .removeClass("k-state-active");
 

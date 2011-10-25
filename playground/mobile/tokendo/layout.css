@@ -144,7 +144,7 @@ body > .k-tabStrip,
 }
 .k-toolbar,
 .k-button,
-.k-buttonStrip,
+.k-radiogroup,
 .k-tabStrip {
   background-origin: border-box;
   position: relative;
@@ -258,7 +258,7 @@ body > .k-tabStrip,
 }
 .k-android .k-toolbar,
 .k-android .k-button,
-.k-android .k-buttonStrip,
+.k-android .k-radiogroup,
 .k-android .k-tabStrip {
   color: #000;
   text-shadow: none;
@@ -287,11 +287,11 @@ body > .k-tabStrip,
 }
 .k-blackberry .k-toolbar,
 .k-blackberry .k-button,
-.k-blackberry .k-buttonStrip,
+.k-blackberry .k-radiogroup,
 .k-blackberry .k-tabStrip,
 .k-meego .k-toolbar,
 .k-meego .k-button,
-.k-meego .k-buttonStrip,
+.k-meego .k-radiogroup,
 .k-meego .k-tabStrip {
   font: normal 1em Arial, Helvetica, sans-serif;
   color: #333;
@@ -354,10 +354,10 @@ body > .k-tabStrip,
   background-image: -o-linear-gradient(top, rgba(255,255,255,0.3), rgba(210,210,210,0));
   background-image: linear-gradient(top, rgba(255,255,255,0.3), rgba(210,210,210,0));
 }
-.k-buttonStrip,
-.k-android .k-buttonStrip,
-.k-meego .k-buttonStrip,
-.k-blackberry .k-buttonStrip {
+.k-radiogroup,
+.k-android .k-radiogroup,
+.k-meego .k-radiogroup,
+.k-blackberry .k-radiogroup {
   padding: 0;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
@@ -369,28 +369,28 @@ body > .k-tabStrip,
   white-space: nowrap;
   display: table;
 }
-.k-buttonStrip > .k-button {
+.k-radiogroup > .k-button {
   display: table-cell;
 }
-.k-buttonStrip .k-button {
+.k-radiogroup .k-button {
   margin: 0;
   border-width: 1px 0 1px 1px;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-.k-buttonStrip .k-button:first-child {
+.k-radiogroup .k-button:first-child {
   -moz-border-radius: 5pt 0 0 5pt;
   -webkit-border-radius: 5pt 0 0 5pt;
   border-radius: 5pt 0 0 5pt;
 }
-.k-buttonStrip .k-button:last-child {
+.k-radiogroup .k-button:last-child {
   border-right-width: 1px;
   -moz-border-radius: 0 5pt 5pt 0;
   -webkit-border-radius: 0 5pt 5pt 0;
   border-radius: 0 5pt 5pt 0;
 }
-.k-ios .k-buttonStrip .k-button {
+.k-ios .k-radiogroup .k-button {
   font-weight: bold;
   color: #929292;
   text-shadow: 0 1px #fff;
@@ -401,7 +401,7 @@ body > .k-tabStrip,
   background-image: -o-linear-gradient(top, rgba(251,251,251,1), rgba(225,225,225,1) 50%, rgba(200,200,200,1));
   background-image: linear-gradient(top, rgba(251,251,251,1), rgba(225,225,225,1) 50%, rgba(200,200,200,1));
 }
-.k-ios .k-buttonStrip .k-button:hover {
+.k-ios .k-radiogroup .k-button:hover {
   color: #fff;
   text-shadow: none;
   border-color: #40506C #376ECC #3E75CA;
@@ -411,7 +411,7 @@ body > .k-tabStrip,
   background-image: -o-linear-gradient(top, rgba(64,80,108,1), rgba(141,174,237,1) 6%, rgba(66,132,229,1) 50%, rgba(45,120,228,1) 50%, rgba(45,119,224,1));
   background-image: linear-gradient(top, rgba(64,80,108,1), rgba(141,174,237,1) 6%, rgba(66,132,229,1) 50%, rgba(45,120,228,1) 50%, rgba(45,119,224,1));
 }
-.k-ios .k-buttonStrip .k-button.k-state-active {
+.k-ios .k-radiogroup .k-button.k-state-active {
   color: #fff;
   text-shadow: none;
   border-color: #103984 #225199 #225199;
@@ -423,7 +423,7 @@ body > .k-tabStrip,
   box-shadow: inset -1px 0 2px #103984;
   -webkit-box-shadow: inset -1px 0 2px #103984;
 }
-.k-blackberry .k-buttonStrip, .k-meego .k-buttonStrip {
+.k-blackberry .k-radiogroup, .k-meego .k-radiogroup {
   font-size: 1em;
 }
 .k-tabStrip, .k-toolbar {
@@ -463,7 +463,7 @@ body > .k-tabStrip,
     word-spacing: normal;
     width: 100%;
   }
-  .k-buttonStrip > .k-button {
+  .k-radiogroup > .k-button {
     display: inline-block;
   }
 }

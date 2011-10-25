@@ -59,7 +59,7 @@ html, body {
     display: block;
 }
 
-.android, .ios, .blackberry, .buttonStrip button {
+.android, .ios, .blackberry, .radiogroup button {
     position: relative;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     display: inline-block;
@@ -174,7 +174,7 @@ button * {
     background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(255, 255, 255, 0.3)), color-stop(1, rgba(210, 210, 210, 0)));
 }
 
-.buttonStrip {
+.radiogroup {
     padding: 0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
@@ -185,7 +185,7 @@ button * {
     background: none;
 }
 
-.buttonStrip button {
+.radiogroup button {
     margin: 0;
     border-width: 1px 0 1px 1px;
     -moz-border-radius: 0;
@@ -193,20 +193,20 @@ button * {
     border-radius: 0;
 }
 
-.buttonStrip button:first-child {
+.radiogroup button:first-child {
     -moz-border-radius: 5pt 0 0 5pt;
     -webkit-border-radius: 5pt 0 0 5pt;
     border-radius: 5pt 0 0 5pt;
 }
 
-.buttonStrip button:last-child {
+.radiogroup button:last-child {
     border-right-width: 1px;
     -moz-border-radius: 0 5pt 5pt 0;
     -webkit-border-radius: 0 5pt 5pt 0;
     border-radius: 0 5pt 5pt 0;
 }
 
-.buttonStrip.blackberry {
+.radiogroup.blackberry {
     font-size: 1em;
 }
 
