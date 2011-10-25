@@ -6,10 +6,8 @@
         VIEW_SELECTOR = "[data-kendo-role=view]",
         HEADER_SELECTOR = "[data-kendo-role=header]",
         FOOTER_SELECTOR = "[data-kendo-role=footer]",
-        ANIMATION_CLASS = "k-animation-container",
-        SCAFFOLD = kendo.template('<div class="${a} k-mobile-header"><div class="${a}"></div></div> \
-                                  <div class="${a} k-mobile-content"><div class="${a}"></div></div> \
-                                  <div class="${a} k-mobile-footer"><div class="${a}"></div></div>')({a: ANIMATION_CLASS});
+        CONTENT_SELECTOR = "[data-kendo-role=content]",
+        ANIMATION_CLASS = "k-animation-container";
 
     function extractView(html) {
         if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
@@ -25,17 +23,28 @@
             var that = this;
 
             that.element = element.data("kendoView", that);
-            that.header  = element.find(HEADER_SELECTOR);
-            that.footer  = element.find(FOOTER_SELECTOR);
+
+            element.wrapInner('<div class="k-mobile-content k-animation-container"><div data-kendo-role="content"></div></div>');
+            this.header = element.find(HEADER_SELECTOR);
+            this.content = element.find(CONTENT_SELECTOR);
+            this.footer = element.find(FOOTER_SELECTOR);
+            this.header.detach();
+            this.footer.detach();
+
+            element.addClass("k-mobile-view").prepend(this.header).append(this.footer);
+
+            this.header.wrap('<div class="k-mobile-header k-animation-container"></div>');
+            this.footer.wrap('<div class="k-mobile-footer k-animation-container"></div>');
         },
 
         replace: function(view) {
             var that = this,
             back = that.nextView === view;
 
-            view.header.kendoAnimateTo(that.header, {effects: "fade", reverse: back, duration: 5000});
-            view.element.kendoAnimateTo(that.element, {effects: "slide", reverse: back, duration: 5000});
-            view.footer.kendoAnimateTo(that.footer, {effects: "fade", reverse: back, duration: 5000});
+
+            view.header.kendoAnimateTo(that.header, { effects: "fade", reverse: back, duration: 1000 });
+            view.content.kendoAnimateTo(that.content, { effects: "slide", reverse: back, duration: 1000 });
+            view.footer.kendoAnimateTo(that.footer, { effects: "fade", reverse: back, duration: 1000 });
 
             if (!back) {
                 view.nextView = that;
@@ -60,27 +69,12 @@
             views.not(":first").hide();
 
             that._view = that._createView(views.first());
-            that.buildInitialStructure();
-            this.content.append(views);
 
             history.start($.extend(options, { silent: true }));
 
             history.change(function(e) {
                 that.navigate(e.location);
             });
-        },
-
-        buildInitialStructure: function() {
-            var that = this,
-                view = that._view,
-                element = that.element;
-
-            element.append($(SCAFFOLD));
-
-            this.content = element.find(".k-mobile-content > ." + ANIMATION_CLASS);
-
-            element.find(".k-mobile-header > ." + ANIMATION_CLASS).append(view.header);
-            element.find(".k-mobile-footer > ." + ANIMATION_CLASS).append(view.footer);
         },
 
         navigate: function(url) {
