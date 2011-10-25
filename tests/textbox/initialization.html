@@ -85,6 +85,13 @@
                 equal(textbox._events["change"][0], textbox.options.change);
             });
 
+            test("Get min/max value from the input", function() {
+               var textbox = new TextBox($("<input type='number' min='1' max='12' />"));
+
+               equal(textbox.options.min, 1);
+               equal(textbox.options.max, 12);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

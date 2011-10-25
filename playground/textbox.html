@@ -11,7 +11,7 @@
         <link href="../styles/kendo.blueopal.css" rel="stylesheet" />
     </head>
     <body>
-        <input id="textbox" type="number" style="width: 150px"/>
+        <input id="textbox" style="width: 150px"/>
 
         <style type="text/css">
             .k-hide-text {
@@ -72,7 +72,7 @@
         </style>
         <script>
             $(document).ready(function() {
-                $("#textbox").kendoTextBox();
+                $("#textbox").kendoTextBox({format: "c"});
             });
         </script>
     </body>

@@ -200,6 +200,36 @@
                 equal(textbox._value, 12.35);
             });
 
+            test("denable(false) should disable input element", function() {
+                var textbox = new TextBox(input);
+
+                textbox.enable(false);
+
+                equal(textbox.element.attr("disabled"), "disabled");
+            });
+
+            test("enable(false) should unbind arrows mousedown event", function() {
+                var textbox = new TextBox(input);
+
+                textbox.enable(false);
+
+                stub(textbox, {_step: textbox._step});
+
+                textbox._upArrow.mousedown();
+                textbox._downArrow.mousedown();
+
+                equal(textbox.calls("_step"), 0);
+            });
+
+            test("enable() should remove disable attribute", function() {
+                var textbox = new TextBox(input);
+
+                textbox.enable(false);
+                textbox.enable(true);
+
+                equal(textbox.element.attr("disabled"), undefined);
+            });
+
             test("_blur should hide the input text and show the _text", function() {
                 var textbox = new TextBox(input);
 
