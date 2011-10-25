@@ -58,8 +58,9 @@
             "@image-folder": {
                 readonly: true,
                 infer: function() {
-                    // TODO: compute from current skin. determine what should be the context for this function.
-                    return "\"http://localhost/kendo/live/styles/Black/\"";
+                    var icon = $("<div class='k-icon' />").css("display", "none").appendTo(document.body);
+
+                    return icon.css("background-image").replace(/url\(["']?(.*?)sprite\.png["']?\)$/i, "\"$1\"");
                 }
             },
 
