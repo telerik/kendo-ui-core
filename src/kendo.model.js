@@ -7,6 +7,7 @@
         accessor = kendo.accessor,
         each = $.each,
         CHANGE = "change",
+        MODELCHANGE = "modelChange",
         Observable = kendo.Observable,
         dateRegExp = /^\/Date\((.*?)\)\/$/;
 
@@ -215,7 +216,7 @@
 
             Observable.fn.init.call(that);
 
-            that.bind([CHANGE], options);
+            that.bind([CHANGE, MODELCHANGE], options);
         },
 
         options: {
@@ -259,6 +260,9 @@
 
                 if (data) {
                     model = that._models[id] = new that.options.model(data);
+                    model.bind(CHANGE, function () {
+                        that.trigger(MODELCHANGE, model);
+                    });
                 }
             }
 
@@ -274,6 +278,10 @@
                 data = model;
                 model = new that.options.model(model);
             }
+
+            model.bind(CHANGE, function () {
+                that.trigger(MODELCHANGE, model);
+            });
 
             that._data.push(data);
 
@@ -299,6 +307,8 @@
             if (model) {
                 that._data.splice(that._idMap[id], 1);
                 that._map();
+
+                model.unbind(CHANGE);
 
                 delete that._models[id];
 
