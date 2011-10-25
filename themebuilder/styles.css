@@ -27,8 +27,8 @@
     margin: .6em 0 0;
 }
 
-.k-color-preview,
-.k-colorpicker .k-arrow-down
+#kendo-themebuilder .k-color-preview,
+#kendo-themebuilder .k-colorpicker .k-arrow-down
 {
     border: 1px solid #aaa;
     background-image: none;
