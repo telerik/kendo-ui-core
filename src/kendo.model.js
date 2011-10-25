@@ -7,7 +7,8 @@
         accessor = kendo.accessor,
         each = $.each,
         CHANGE = "change",
-        Observable = kendo.Observable;
+        Observable = kendo.Observable,
+        dateRegExp = /^\/Date\((.*?)\)\/$/;
 
     function equal(x, y) {
         if (x === y) {
@@ -42,6 +43,12 @@
         },
 
         "date": function(value) {
+            if (typeof value === "string") {
+                var date = dateRegExp .exec(value);
+                if (date) {
+                    return new Date(parseInt(date[1]));
+                }
+            }
             return kendo.parseDate(value);
         }
     };

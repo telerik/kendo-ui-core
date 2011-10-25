@@ -243,6 +243,18 @@
                 m.set("bar", "some value");
                 ok(wasCalled);
             });
+
+            test("set date as .net date literal", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", type: "date" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", "/Date(836524800000)/");
+                equal(m.get("bar").getTime(), new Date(836524800000).getTime());
+                equal(typeof m.get("bar"), "object");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
