@@ -33,10 +33,10 @@
 
         enable: function(enable) {
             enable = typeof enable === "boolean" ? enable : true;
-
             var that = this;
 
             if (enable) {
+                that.element.removeClass("k-state-disabled");
                 that.input.removeAttr("disabled");
                 that.element.delegate("input[type=checkbox]", "change", that._toggleProxy)
                             .delegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
@@ -46,6 +46,7 @@
                             .undelegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
                 that.element.filter(bindSelectors).unbind(MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
                 that.input.attr("disabled");
+                that.element.addClass("k-state-disabled");
             }
         },
 
@@ -83,7 +84,7 @@
             element = that.element;
             options = that.options;
 
-            that._wrapper();
+            that._wrap();
             that.enable(options.enable);
 
             that.animation = {
@@ -107,7 +108,7 @@
 
         options: {
             name: "MobileSwitch",
-            enabled: true
+            enable: true
         },
 
         refresh: function() {
@@ -137,7 +138,7 @@
             }
         },
 
-        _wrapper: function() {
+        _wrap: function() {
             var that = this;
 
             if (that.element.is("label")) {
@@ -178,13 +179,13 @@
             element = that.element;
             options = that.options;
 
-            that._wrapper();
+            that._wrap();
             that.enable(options.enable);
         },
 
         options: {
             name: "MobileCheckBox",
-            enabled: true
+            enable: true
         },
 
         refresh: function() {
@@ -197,7 +198,7 @@
             that.trigger(TOGGLE, { checked: that.input[0].checked });
         },
 
-        _wrapper: function() {
+        _wrap: function() {
             var that = this;
 
             if (that.element.is("label"))

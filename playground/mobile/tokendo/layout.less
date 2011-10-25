@@ -247,7 +247,7 @@ body > .k-tabStrip,
 
 .k-toolbar,
 .k-button,
-.k-buttonStrip,
+.k-radiogroup,
 .k-tabStrip
 {
     background-origin: border-box;
@@ -613,7 +613,7 @@ body > .k-tabStrip,
 .k-android .k-toolbar,
 .k-android .k-button,
 .k-android .k-toggle,
-.k-android .k-buttonStrip,
+.k-android .k-radiogroup,
 .k-android .k-tabStrip
 {
     color: #000;
@@ -641,11 +641,11 @@ body > .k-tabStrip,
 
 .k-blackberry .k-toolbar,
 .k-blackberry .k-button,
-.k-blackberry .k-buttonStrip,
+.k-blackberry .k-radiogroup,
 .k-blackberry .k-tabStrip,
 .k-meego .k-toolbar,
 .k-meego .k-button,
-.k-meego .k-buttonStrip,
+.k-meego .k-radiogroup,
 .k-meego .k-tabStrip
 {
     font: normal 1em Arial, Helvetica, sans-serif;
@@ -708,10 +708,10 @@ body > .k-tabStrip,
     background-image: linearGradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
 }
 
-.k-buttonStrip,
-.k-android .k-buttonStrip,
-.k-meego .k-buttonStrip,
-.k-blackberry .k-buttonStrip
+.k-radiogroup,
+.k-android .k-radiogroup,
+.k-meego .k-radiogroup,
+.k-blackberry .k-radiogroup
 {
     padding: 0;
     .border-radius(0);
@@ -722,30 +722,30 @@ body > .k-tabStrip,
     display: table;
 }
 
-.k-buttonStrip > .k-button
+.k-radiogroup > .k-button
 {
     display: table-cell;
 }
 
-.k-buttonStrip .k-button
+.k-radiogroup .k-button
 {
     margin: 0;
     border-width: 1px 0 1px 1px;
     .border-radius(0);
 }
 
-.k-buttonStrip .k-button:first-child
+.k-radiogroup .k-button:first-child
 {
     .border-radius(5pt 0 0 5pt);
 }
 
-.k-buttonStrip .k-button:last-child
+.k-radiogroup .k-button:last-child
 {
     border-right-width: 1px;
     .border-radius(0 5pt 5pt 0);
 }
 
-.k-ios .k-buttonStrip .k-button
+.k-ios .k-radiogroup .k-button
 {
     font-weight: bold;
     color: #929292;
@@ -754,7 +754,7 @@ body > .k-tabStrip,
     background-image: linearGradient(top, rgb(251,251,251), rgb(225,225,225) 50%, rgb(200,200,200));
 }
 
-.k-ios .k-buttonStrip .k-button:hover
+.k-ios .k-radiogroup .k-button:hover
 {
     color: #fff;
     text-shadow: none;
@@ -762,7 +762,7 @@ body > .k-tabStrip,
     background-image: linearGradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
 }
 
-.k-ios .k-buttonStrip .k-button.k-state-active
+.k-ios .k-radiogroup .k-button.k-state-active
 {
     color: #fff;
     text-shadow: none;
@@ -771,8 +771,8 @@ body > .k-tabStrip,
     .box-shadow(inset -1px 0 2px #103984);
 }
 
-.k-blackberry .k-buttonStrip,
-.k-meego .k-buttonStrip
+.k-blackberry .k-radiogroup,
+.k-meego .k-radiogroup
 {
     font-size: 1em;
 }
@@ -809,7 +809,7 @@ body > .k-tabStrip,
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .k-showcase { position: absolute; }
     .k-tabContainer { display: table; word-spacing: normal; width: 100%; }
-    .k-buttonStrip > .k-button { display: inline-block; }
+    .k-radiogroup > .k-button { display: inline-block; }
 }
 
 .k-toolbar

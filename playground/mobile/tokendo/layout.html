@@ -20,6 +20,7 @@
     <script src="../../../src/kendo.mobile.core.js"></script>
     <script src="../../../src/kendo.mobile.button.js"></script>
     <script src="../../../src/kendo.mobile.switch.js"></script>
+    <script src="../../../src/kendo.mobile.radiogroup.js"></script>
     <script src="../../../src/kendo.mobile.application.js"></script>
     <script src="../../../src/kendo.mobile.view.js"></script>
 
@@ -47,32 +48,24 @@
 
                 <div class="k-content">
                     <div class="k-contentIn">
-                        <div class="k-buttonStrip">
-                            <button class="active">
-                                <span>Button 1</span>
-                            </button>
-                            <button>
-                                <span>Button 2</span><span class="msg">3</span>
-                            </button>
-                            <button>
-                                <span>Button 3</span>
-                            </button>
-                        </div>
-                        <br>
                         Show message: <input type="checkbox" id="toggle" />
                         <input id="checky" type="checkbox" />
                         <br><br>
                         <button id="button">Init Button</button>
 
-                        <input type="checkbox" />
-                        <input type="radio" />
+                        <div id="radio">
+                            <label for="radio1">Test 1</label>
+                            <input id="radio1" type="radio" name="three" />
+                            <label>Test 2
+                                <input type="radio" name="three" />
+                            </label>
+                        </div>
 
-                        <input type="checkbox" name="one" />
-                        <input type="checkbox" name="one" />
-                        <input type="checkbox" name="one" />
-
-                        <input type="radio" name="two" />
-                        <input type="radio" name="two" />
+                        <label for="radioz">Test 1</label>
+                        <input id="radioz" type="radio" name="two" />
+                        <label>Test 2
+                            <input type="radio" name="two" />
+                        </label>
                         <input type="radio" name="two" />
                     </div>
                 </div>
@@ -102,9 +95,11 @@
     //                console.log("viewinit", args);
             });
 
-        var toggle = $("#toggle").kendoMobileToggleButton().data("kendoMobileToggleButton");
-        var checky = $("#checky").kendoMobileCheckBox().data("kendoMobileCheckBox");
-        var button = $("#button").kendoMobileButton().data("kendoMobileButton");
+        var toggle = $("#toggle").kendoMobileSwitch().data("kendoMobileSwitch"),
+            checky = $("#checky").kendoMobileCheckBox().data("kendoMobileCheckBox"),
+            button = $("#button").kendoMobileButton().data("kendoMobileButton"),
+            radio = $("#radio").kendoMobileRadioGroup({ enable: false }).data("kendoMobileRadioGroup"),
+            radiogroup = $("#radioz").kendoMobileRadioGroup().data("kendoMobileRadioGroup");
 
     </script>
 </body>
