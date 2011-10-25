@@ -11,6 +11,8 @@
         <script src="../../src/kendo.splitter.js"></script>
         <script src="helper.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/kendo.common.css" />
+        <link rel="stylesheet" href="../../styles/kendo.blueopal.css" />
     </head>
     <body>
         <h1 id="qunit-header">Splitter collapse</h1>
@@ -220,7 +222,10 @@
                 var splitter = $(getSplitterHtml())
                         .appendTo(document.body)
                         .kendoSplitter({
-                            panes: [ { resizable: false, collapsible: true, collapsed: true }, { collapsible: false } ]
+                            panes: [
+                                { resizable: false, collapsible: true, collapsed: true },
+                                { collapsible: false }
+                            ]
                         });
 
                 splitter.data("kendoSplitter").expand(".k-pane:first");
@@ -232,13 +237,43 @@
                 var splitter = $(getSplitterHtml(3))
                         .appendTo(document.body)
                         .kendoSplitter({
-                            panes: [ { resizable: false, collapsible: true, collapsed: true }, { collapsible: false }, { collapsible: false } ]
+                            panes: [
+                                { resizable: false, collapsible: true, collapsed: true },
+                                { collapsible: false },
+                                { collapsible: false }
+                            ]
                         });
 
                 splitter.data("kendoSplitter").expand(".k-pane:first");
 
                 ok(splitter.find(".k-splitbar:first").is(":not(.k-splitbar-draggable-horizontal)"));
                 ok(splitter.find(".k-splitbar:last").is(".k-splitbar-draggable-horizontal"));
+            });
+
+            test("collapsing pane disables collapsing of next pane", function() {
+                var splitter = $(getSplitterHtml(2))
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, { collapsible: true } ]
+                        });
+
+                splitter.data("kendoSplitter").collapse(".k-pane:first");
+
+                ok(splitter.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
+                ok(!splitter.find(".k-splitbar .k-collapse-next").length);
+            });
+
+            test("collapsing pane disables collapsing of previous pane", function() {
+                var splitter = $(getSplitterHtml(2))
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, { collapsible: true } ]
+                        });
+
+                splitter.data("kendoSplitter").collapse(".k-pane:last");
+
+                ok(splitter.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
+                ok(!splitter.find(".k-splitbar .k-collapse-prev").length);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

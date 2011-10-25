@@ -28,10 +28,10 @@
 
             test("toggle(false) toggles pane state", function() {
                 var splitter = $(getSplitterHtml())
-                    .appendTo(document.body)
-                    .kendoSplitter({
-                        panes: [ { collapsible: true }, {} ]
-                    }),
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, {} ]
+                        }),
                     pane = splitter.find(".k-pane:first");
 
                 splitter.data("kendoSplitter").toggle(pane, false);
@@ -39,10 +39,10 @@
                 ok(pane.data("pane").collapsed);
 
                 splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ {}, { collapsible: true } ]
-                });
+                    .appendTo(document.body)
+                    .kendoSplitter({
+                        panes: [ {}, { collapsible: true } ]
+                    });
 
                 pane = splitter.find(".k-pane:last")
 
@@ -53,14 +53,14 @@
 
             test("toggle(false) triggers resize", function() {
                 var triggered = false,
-                splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { collapsible: true }, {} ],
-                    resize: function() {
-                        triggered = true;
-                    }
-                });
+                    splitter = $(getSplitterHtml())
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, {} ],
+                            resize: function() {
+                                triggered = true;
+                            }
+                        });
 
                 splitter.data("kendoSplitter").toggle(".k-pane:last", false);
 
@@ -69,13 +69,14 @@
 
             test("toggle(false) converts associated arrow to expand arrow", function() {
                 var splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { collapsible: true }, {} ]
-                }),
-                previousArrow = splitter.find(".k-collapse-prev");
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, {} ]
+                        });
 
                 splitter.data("kendoSplitter").toggle(".k-pane:first", false);
+
+                var previousArrow = splitter.find(".k-expand-prev");
 
                 ok(previousArrow.is(".k-expand-prev"));
                 ok(previousArrow.is(":not(.k-collapse-prev)"));
@@ -83,10 +84,10 @@
 
             test("toggle(false) disables splitbar resize", function() {
                 var splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { collapsible: true }, {} ]
-                });
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true }, {} ]
+                        });
 
                 splitter.data("kendoSplitter").toggle(".k-pane:first", false);
 
@@ -95,10 +96,10 @@
 
             test("toggle(true) removes splibar hover style", function() {
                 var splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { collapsible: true, collapsed: true }, {} ]
-                });
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true, collapsed: true }, {} ]
+                        });
 
                 splitter.find(".k-splitbar").addClass("k-splitbar-horizontal-hover");
 
@@ -109,21 +110,21 @@
 
             test("toggle(true) toggles pane state", function() {
                 var splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ { collapsible: true, collapsed: true }, {} ]
-                }),
-                pane = splitter.find(".k-pane:first");
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [ { collapsible: true, collapsed: true }, {} ]
+                        }),
+                    pane = splitter.find(".k-pane:first");
 
                 splitter.data("kendoSplitter").toggle(pane, true);
 
                 ok(!pane.data("pane").collapsed);
 
                 splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
-                    panes: [ {}, { collapsible: true, collapsed: true } ]
-                });
+                    .appendTo(document.body)
+                    .kendoSplitter({
+                        panes: [ {}, { collapsible: true, collapsed: true } ]
+                    });
 
                 pane = splitter.find(".k-pane:last")
 
@@ -153,10 +154,11 @@
                         .appendTo(document.body)
                         .kendoSplitter({
                             panes: [ { collapsible: true, collapsed: true }, {} ]
-                        }),
-                    previousArrow = splitter.find(".k-expand-prev");
+                        });
 
                 splitter.data("kendoSplitter").toggle(".k-pane:first", true);
+
+                var previousArrow = splitter.find(".k-collapse-prev");
 
                 ok(previousArrow.is(".k-collapse-prev"));
                 ok(previousArrow.is(":not(.k-expand-prev)"));
