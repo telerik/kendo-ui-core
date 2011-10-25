@@ -248,9 +248,9 @@
                     equals(path.options.fill, "url(#testGradient)");
                 });
 
-                test("ignores non-existent gradient fill", function() {
+                test("sets non-existent gradient fill to none", function() {
                     var path = view.createRect(new Box2D(), { fill: { gradient: "NA" } });
-                    equals(path.options.fill, "");
+                    equals(path.options.fill, "none");
                 });
 
                 test("preserves solid fill", function() {
@@ -887,6 +887,12 @@
                 test("registers gradient definition", function() {
                     decorator.decorate(rect);
                     ok(view.definitions.fillId);
+                });
+
+                test("sets transparent fill if gradient is invalid", function() {
+                    var rect = new Chart.SVGPath({ fill: { gradient: "" } });
+                    decorator.decorate(rect);
+                    equals(rect.options.fill, "none");
                 });
 
             })();

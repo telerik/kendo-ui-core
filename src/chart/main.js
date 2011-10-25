@@ -4997,6 +4997,7 @@
         DEFAULT_WIDTH: DEFAULT_WIDTH,
         DEFAULT_HEIGHT: DEFAULT_HEIGHT,
         DEFAULT_FONT: DEFAULT_FONT,
+        defined: defined,
         template: template,
         rotatePoint: rotatePoint,
         round: round,
