@@ -965,6 +965,7 @@
                                 .bind(ERROR, proxy(that._error, that))
                                 .bind(MODELCHANGE, proxy(that._modelChange, that));
         },
+
         _error: function() {
             this._progress(false);
         },
@@ -975,9 +976,23 @@
         _modelChange: function(model) {
             var that = this,
                 row = that.tbody.find("tr[data-id=" + model.id() +"]"),
+                changes = model.changes(),
+                cell,
+                column,
                 isAlt = row.hasClass("k-alt");
 
-            row.replaceWith($((isAlt ? that.altRowTemplate : that.rowTemplate)(model.data)));
+            if (row.has(".k-edit-cell")) {
+                row.find(">td:not(.k-group-cell,.k-hierarchy-cell,.k-edit-cell)").each(function() {
+                    cell = $(this);
+                    column = that.columns[that.cellIndex(cell)];
+
+                    if (column.field in changes) {
+                        that._displayCell(cell, column, model.data);
+                    }
+                });
+            } else {
+                row.replaceWith($((isAlt ? that.altRowTemplate : that.rowTemplate)(model.data)));
+            }
         },
 
         _pageable: function() {

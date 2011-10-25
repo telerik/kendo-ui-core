@@ -35,10 +35,13 @@
                 dataSource: new DataSource({
                         schema: {
                             model: {
-                            id: "foo"
+                                id: "foo",
+                                fields: {
+                                    name: "name"
+                                }
                             }
                         },
-                        data: [{ foo: "bar" }, { foo: "baz" }]
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
                     })
                 }, options);
                 dataSource = options.dataSource;
@@ -218,6 +221,21 @@
                 cell = table.find("tr:first>td:nth(1)").click();
 
                 equal(cell.find(":input").val(), "bar");
+            });
+
+            test("edit cell is not refreshed on modelChange", function() {
+                var grid, cell;
+                setup();
+
+                cell = table.find("tr:first>td:first").click();
+                grid = table.data("kendoGrid");
+                grid.dataSource.get("bar").set("name", "bart");
+
+                cell = table.find("tr:first>td:first");
+
+                ok(cell.find(":input").length);
+                equal(cell.find(":input").val(), "bar");
+                equal(cell.next().text(), "bart");
             });
 
        </script>
