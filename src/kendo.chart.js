@@ -4997,6 +4997,7 @@
         DEFAULT_WIDTH: DEFAULT_WIDTH,
         DEFAULT_HEIGHT: DEFAULT_HEIGHT,
         DEFAULT_FONT: DEFAULT_FONT,
+        defined: defined,
         template: template,
         rotatePoint: rotatePoint,
         round: round,
@@ -5059,6 +5060,7 @@
         ViewBase = Chart.ViewBase,
         ViewElement = Chart.ViewElement,
         deepExtend = Chart.deepExtend,
+        defined = Chart.defined,
         template = Chart.template,
         uniqueId = Chart.uniqueId,
         round = Chart.round,
@@ -5072,6 +5074,7 @@
         DEFAULT_HEIGHT = Chart.DEFAULT_HEIGHT,
         DEFAULT_FONT = Chart.DEFAULT_FONT,
         GLOBAL_CLIP = "globalClip",
+        NONE = "none",
         RADIAL = "radial",
         SQUARE = "square",
         SVG_NS = "http://www.w3.org/2000/svg",
@@ -5655,19 +5658,19 @@
                 overlayId,
                 gradient;
 
-            if (paint && paint.gradient) {
+            if (paint && defined(paint.gradient)) {
                 overlay = view.buildGradient(paint);
                 if (overlay) {
-                overlayId = overlay.id;
-                gradient = definitions[overlayId];
-                if (!gradient) {
-                    gradient = view.createGradient(overlay);
-                    definitions[overlayId] = gradient;
-                }
+                    overlayId = overlay.id;
+                    gradient = definitions[overlayId];
+                    if (!gradient) {
+                        gradient = view.createGradient(overlay);
+                        definitions[overlayId] = gradient;
+                    }
 
-                return "url(#" + gradient.options.id + ")";
-            } else {
-                    return "";
+                    return "url(#" + gradient.options.id + ")";
+                } else {
+                    return NONE;
                 }
             } else {
                 return paint;
