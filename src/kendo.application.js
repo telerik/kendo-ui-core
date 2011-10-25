@@ -33,9 +33,9 @@
             var that = this,
             back = that.nextView === view;
 
-            view.header.kendoAnimateTo(that.header, {effects: "fade", reverse: back});
-            view.element.kendoAnimateTo(that.element, {effects: "slide", reverse: back});
-            view.footer.kendoAnimateTo(that.footer, {effects: "fade", reverse: back});
+            view.header.kendoAnimateTo(that.header, {effects: "fade", reverse: back, duration: 5000});
+            view.element.kendoAnimateTo(that.element, {effects: "slide", reverse: back, duration: 5000});
+            view.footer.kendoAnimateTo(that.footer, {effects: "fade", reverse: back, duration: 5000});
 
             if (!back) {
                 view.nextView = that;
@@ -70,7 +70,7 @@
             });
         },
 
-        buildInitialStructure: function () {
+        buildInitialStructure: function() {
             var that = this,
                 view = that._view,
                 element = that.element;

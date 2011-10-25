@@ -207,7 +207,7 @@
             effects = "slideIn:" + RegExp.$1;
         }
 
-        mirror = options.reverse && ((typeof effects === "string" && /^slide:/.test(effects)) || (typeof effects === "object" && "slide" in effects));
+        mirror = options.reverse && /^(slide:|fadeIn)/.test(effects);
 
         if (mirror) {
             delete options.reverse;
@@ -577,7 +577,6 @@
                 animatingContainer = "slide" in options.effects,
                 outerContainer = wrapForAnimation(container, {overflow: "hidden"}),
                 transitions = kendo.support.transitions;
-
 
             destination.show();
             container.append(destination);
