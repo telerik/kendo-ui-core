@@ -307,7 +307,7 @@
             }
 
             operator = operator.toLowerCase();
-            operatorStrings = Filter.operatorStrings;
+            var operatorStrings = Filter.operatorStrings;
             for (var op in operatorStrings) {
                 if ($.inArray(operator, operatorStrings[op]) > -1) {
                     operator = op;
