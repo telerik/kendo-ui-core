@@ -139,6 +139,57 @@
                 equal(model.get("foo"), "bar");
             });
 
+            test("changing model value triggers modelChange", function() {
+                var data = [ { id: 1, foo: "foo" } ],
+                    model;
+
+                setup( { data: data, modelChange: function() { model = arguments[0]; }});
+
+                modelSet.get(1).set("foo", "bar");
+
+                ok(model);
+                equal(model.get("foo"), "bar");
+            });
+
+            test("changing multiple times same model triggers modelChange event once per change", function() {
+                var data = [ { id: 1, foo: "foo" } ],
+                    changeCount = 0;
+
+                setup( { data: data, modelChange: function() { changeCount++; }});
+
+                modelSet.get(1).set("foo", "baz");
+                modelSet.get(1).set("foo", "bar");
+
+                equal(changeCount, 2);
+            });
+
+            test("modelChange is triggered for new models", function() {
+                var data = [ { id: 1, foo: "foo" } ],
+                    model = new MyModel({ id: 2, foo: "foo"} ),
+                    changeCount = 0;
+
+                setup( { data: data, modelChange: function() { changeCount++; }});
+
+                modelSet.add(model);
+                modelSet.get(2).set("foo", "bar");
+                modelSet.get(2).set("foo", "baz");
+
+                equal(changeCount, 2);
+            });
+
+            test("modelChange is not triggered for removed models", function() {
+                var data = [ { id: 1, foo: "foo" } ],
+                    model,
+                    wasCalled = false;
+
+                setup( { data: data, modelChange: function() { wasCalled = true; }});
+
+                model = modelSet.get(1);
+                modelSet.remove(model);
+                model.set("foo", "bar");
+
+                ok(!wasCalled);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

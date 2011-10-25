@@ -19,6 +19,7 @@
         FIRST_CELL_SELECTOR = CELL_SELECTOR + ":first",
         DETAILINIT = "detailInit",
         CHANGE = "change",
+        MODELCHANGE = "modelChange",
         DATABOUND = "dataBound",
         DETAILEXPAND = "detailExpand",
         DETAILCOLLAPSE = "detailCollapse",
@@ -261,7 +262,7 @@
      *  @exampleTitle Initialize the Kendo Grid and configure columns & data binding
      *  @example
      *    $(document).ready(function(){
-     *       $("#grid").kendoGrid({
+     *       $("#grid").kendoGrid({modelSet.get(1)
      *           columns:[
      *               {
      *                   field: "FirstName",
@@ -961,13 +962,22 @@
             that.dataSource = DataSource.create(dataSource)
                                 .bind(CHANGE, proxy(that.refresh, that))
                                 .bind(REQUESTSTART, proxy(that._requestStart, that))
-                                .bind(ERROR, proxy(that._error, that));
+                                .bind(ERROR, proxy(that._error, that))
+                                .bind(MODELCHANGE, proxy(that._modelChange, that));
         },
         _error: function() {
             this._progress(false);
         },
         _requestStart: function() {
             this._progress(true);
+        },
+
+        _modelChange: function(model) {
+            var that = this,
+                row = that.tbody.find("tr[data-id=" + model.id() +"]"),
+                isAlt = row.hasClass("k-alt");
+
+            row.replaceWith($((isAlt ? that.altRowTemplate : that.rowTemplate)(model.data)));
         },
 
         _pageable: function() {

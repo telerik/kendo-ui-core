@@ -155,6 +155,7 @@
         UPDATE = "update",
         DESTROY = "destroy",
         CHANGE = "change",
+        MODELCHANGE = "modelChange",
         MULTIPLE = "multiple",
         SINGLE = "single",
         ERROR = "error",
@@ -986,6 +987,9 @@
                     transport: that.transport,
                     change: function() {
                         that.trigger(CHANGE);
+                    },
+                    modelChange: function(model) {
+                        that.trigger(MODELCHANGE, model);
                     }
                 });
             }
@@ -1007,7 +1011,7 @@
                          * @event
                          */
                         CHANGE,
-                        CREATE, DESTROY, UPDATE, REQUESTSTART], options);
+                        CREATE, DESTROY, UPDATE, REQUESTSTART, MODELCHANGE], options);
         },
 
         options: {
