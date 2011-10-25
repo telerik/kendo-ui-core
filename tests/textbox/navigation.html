@@ -20,6 +20,15 @@
             var TextBox = kendo.ui.TextBox,
                 input;
 
+            $.fn.pressKey = function(key, eventName) {
+                key = key || kendo.keys.DOWN;
+                eventName = eventName || "keydown";
+
+                $(this).trigger({ type: eventName, keyCode: key });
+
+                return $(this);
+            }
+
             QUnit.config.testTimeout = 1000;
 
             module("kendo.ui.TextBox Navigation", {
@@ -55,6 +64,31 @@
                 }, 700);
             });
 
+            test("pressing DOWN arrow calls _step()", function() {
+                var textbox = new TextBox(input);
+
+                stub(textbox, "_step");
+                input.pressKey();
+
+                equal(textbox.calls("_step"), 1);
+                equal(textbox.args("_step")[0], -1);
+            });
+
+            test("pressing UP arrow calls _step()", function() {
+                var textbox = new TextBox(input);
+
+                stub(textbox, "_step");
+                input.pressKey(kendo.keys.UP);
+
+                equal(textbox.calls("_step"), 1);
+                equal(textbox.args("_step")[0], 1);
+            });
+
+            test("typing letter is not allowed", function() {
+                var textbox = new TextBox(input);
+
+                ok(!textbox._prevent(60));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
