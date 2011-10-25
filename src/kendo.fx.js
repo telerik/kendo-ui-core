@@ -207,7 +207,7 @@
             effects = "slideIn:" + RegExp.$1;
         }
 
-        mirror = options.reverse && /^(slide)/.test(effects);
+        mirror = options.reverse && /^(slide:)/.test(effects);
 
         if (mirror) {
             delete options.reverse;
@@ -578,7 +578,8 @@
                 movingElement = options.reverse ? element : destination;
                 transitions = kendo.support.transitions;
 
-            destination.show();
+                console.log({width: element.width(), height: element.height()});
+            destination.css({width: element.width(), height: element.height()}).show();
             container.append(destination);
 
             $.each(options.effects, function(name, definition) {

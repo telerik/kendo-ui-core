@@ -16,6 +16,7 @@
                 width: 100px;
                 height: 100px;
                 position: relative;
+                overflow: hidden;
             }
 
             #a {
@@ -33,8 +34,10 @@
     </head>
     <body>
 
-        <div id="a"> A div </div>
-        <div id="b"> B div </div>
+        <div id="container">
+            <div id="a"> A div </div>
+            <div id="b"> B div </div>
+        </div>
 
         <hr />
         <dl>
@@ -43,7 +46,7 @@
             <select id="animation-type">
                 <option>slide</option>
                 <option>zoom</option>
-                <option>overlay</option>
+                <option>overlay:up</option>
                 <option>fade</option>
             </select>
             </dd>
