@@ -75,10 +75,12 @@ function mergeResources() {
     );
 
     fs.writeFileSync(
-        path.join(OUTPUT_PATH, "styles.css"),
-        fs.readFileSync(path.join(SOURCE_PATH, "styles.css"), "utf8"),
+        path.join(OUTPUT_PATH, "themebuilder.css"),
+        fs.readFileSync(path.join(SOURCE_PATH, "themebuilder.css"), "utf8"),
         "utf8"
     );
+
+    kendoBuild.copyDirSyncRecursive(path.join(SOURCE_PATH, "Black"), path.join(OUTPUT_PATH, "Black"));
 }
 
 function buildGeneratedSources() {
@@ -129,12 +131,14 @@ function buildGeneratedSources() {
         fs.writeFileSync(path.join(SOURCE_PATH, "themebuilder.css"), generatedCss, "utf8");
     });
 
+    kendoBuild.copyDirSyncRecursive(path.join("styles", "Black"), path.join(SOURCE_PATH, "Black"));
 }
 
 function build() {
     kendoBuild.rmdirSyncRecursive(OUTPUT_PATH);
     mkdir(OUTPUT_PATH);
     buildGeneratedSources();
+    console.log("building distribution...");
     mergeResources();
     createBootstrapper();
     createIndexPage();
