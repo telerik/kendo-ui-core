@@ -1546,6 +1546,11 @@ div.k-dropdown
     outline: 0;
 }
 
+.k-dropdown
+{
+    outline: 0;
+}
+
 .k-dropdown .k-input,
 .k-selectbox .k-input
 {
