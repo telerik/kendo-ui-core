@@ -4,6 +4,18 @@
         Widget = ui.Widget,
         Binder = kendo.data.ModelViewBinder;
 
+    var editors = {
+        "number": function(container, options) {
+            $('<input name="' + options.field + '" type="number"/>').appendTo(container);
+        },
+        "date": function(container, options) {
+            $('<input name="' + options.field + '" type="date"/>').appendTo(container).kendoDatePicker();
+        },
+        "string": function(container, options) {
+            $('<input type="text" name="' + options.field + '"/>').appendTo(container);
+        }
+    };
+
     var Editable = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -17,6 +29,18 @@
             name: "Editable"
         },
 
+        editor: function(field) {
+            var that = this,
+                model = that.options.model || {},
+                isObject = $.isPlainObject(field),
+                fieldName = isObject ? field.field : field,
+                modelField = (model.fields || {})[fieldName],
+                fieldType = modelField && modelField.type ? modelField.type : "string",
+                editor = isObject && field.editor ? field.editor : editors[fieldType];
+
+            return editor(that.element, $.extend(true, {}, isObject ? field : { field: fieldName }, { model: model }));
+        },
+
         refresh: function() {
             var that = this,
                 idx,
@@ -24,12 +48,12 @@
                 fields = that.options.fields || [],
                 container = that.element.empty();
 
-            if (!(fields instanceof Array)) {
+            if (!$.isArray(fields)) {
                 fields = [fields];
             }
 
             for(idx = 0, length = fields.length; idx < length; idx++) {
-                $('<input name="' + fields[idx] + '"/>').appendTo(container);
+                that.editor(fields[idx]);
             }
 
             new Binder(container, that.options.model);

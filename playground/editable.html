@@ -16,6 +16,9 @@
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.validate.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
         <link href="http://cdn.kendostatic.com/2011.3.1007/styles/kendo.common.min.css" rel="stylesheet"/>
         <link href="http://cdn.kendostatic.com/2011.3.1007/styles/kendo.kendo.min.css" rel="stylesheet"/>
 
@@ -30,29 +33,33 @@
 
             $(document).ready(function() {
                 for (var idx = 0; idx < 30; idx++) {
-                    data.push({foo: "foo " + idx, bar: "bar " + idx, id: idx});
+                    data.push({foo: "foo " + idx, bar: "bar " + idx, id: idx, date: new Date()});
                 }
                 dataSource = new kendo.data.DataSource({
                     data: data,
                     pageSize: 10,
                     schema: {
                         model: {
-                            id: "id"
+                            id: "id",
+                            fields: {
+                                foo: "foo",
+                                date: { field: "date", type: "date" }
+                            }
                         }
                     }
                 });
 
                 grid = $("#grid").kendoGrid({
                     dataSource: dataSource,
-                    groupable: true,
-                    sortable: true,
+  //                  groupable: true,
+ //                   sortable: true,
                     //scrollable: true,
                     //selectable: "multi cell",
                     //navigatable: true,
                     pageable: true,
                     editable: true,
-                    detailTemplate: "<table><tr><td>tashak</td></tr></table>",
-                    columns: ["id", "bar", "foo"]
+//                    detailTemplate: "<table><tr><td>template</td></tr></table>",
+                    columns: ["id", "bar", "foo", "date"]
                 })
 /*                .delegate("td", "click", function(e) {
                     if((grid.valid != undefined && !grid.valid) || $(e.target).is(":input")) {
