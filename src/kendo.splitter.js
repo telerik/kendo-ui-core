@@ -187,7 +187,7 @@
          * @option {Array} [panes] Array of pane definitions.
          * _example
          *  $("#splitter").kendoSplitter({
-         *      //definitions for the first three panes
+         *      // definitions for the first three panes
          *      panes: [
          *          {
          *              size: "200px",
@@ -415,37 +415,45 @@
                 that._triggerAction(arrowType, pane);
             };
         },
-        _appendSplitBars: function(panes) {
-            var splitBarsCount = panes.length - 1,
-                pane,
-                previousPane,
-                nextPane,
-                idx,
-                isSplitBarDraggable,
-                catIconIf = function(iconType, condition) {
+        _updateSplitBar: function(splitBar, previousPane, nextPane) {
+            var catIconIf = function(iconType, condition) {
                    return condition ? "<div class='k-icon " + iconType + "' />" : "";
-                };
+                },
+                orientation = this.orientation,
+                draggable = (previousPane.resizable !== false) && (nextPane.resizable !== false),
+                prevCollapsible = previousPane.collapsible,
+                prevCollapsed = previousPane.collapsed,
+                nextCollapsible = nextPane.collapsible,
+                nextCollapsed = nextPane.collapsed;
 
-            for (idx = 0; idx < splitBarsCount; idx++) {
-                pane = panes.eq(idx);
-                previousPane = pane.data(PANE);
-                nextPane = pane.next().data(PANE);
+            splitBar.addClass("k-splitbar k-state-default k-splitbar-" + orientation)
+                .removeClass("k-splitbar-" + orientation + "-hover")
+                .toggleClass("k-splitbar-draggable-" + orientation,
+                    draggable && !prevCollapsed && !nextCollapsed)
+                .toggleClass("k-splitbar-static-" + orientation,
+                    !draggable && !prevCollapsible && !nextCollapsible)
+                .html(
+                    catIconIf("k-collapse-prev", prevCollapsible && !prevCollapsed && !nextCollapsed) +
+                    catIconIf("k-expand-prev", prevCollapsible && prevCollapsed && !nextCollapsed) +
+                    catIconIf("k-resize-handle", draggable) +
+                    catIconIf("k-collapse-next", nextCollapsible && !nextCollapsed && !prevCollapsed) +
+                    catIconIf("k-expand-next", nextCollapsible && nextCollapsed && !prevCollapsed)
+                );
+        },
+        _updateSplitBars: function() {
+            var that = this;
+
+            this.element.children(".k-splitbar").each(function() {
+                var splitbar = $(this),
+                    previousPane = splitbar.prev(".k-pane").data(PANE),
+                    nextPane = splitbar.next(".k-pane").data(PANE);
 
                 if (!nextPane) {
-                    continue;
+                    return;
                 }
 
-                isSplitBarDraggable = (previousPane.resizable !== false) && (nextPane.resizable !== false);
-
-                pane.after("<div class='k-splitbar k-state-default k-splitbar-" + this.orientation +
-                        (isSplitBarDraggable && !previousPane.collapsed && !nextPane.collapsed ?  " k-splitbar-draggable-" + this.orientation : "") +
-                        (!isSplitBarDraggable && !previousPane.collapsible && !nextPane.collapsible ?  " k-splitbar-static-" + this.orientation : "") +
-                    "'>" + catIconIf("k-collapse-prev", previousPane.collapsible && !previousPane.collapsed) +
-                    catIconIf("k-expand-prev", previousPane.collapsible && previousPane.collapsed) +
-                    catIconIf("k-resize-handle", isSplitBarDraggable) +
-                    catIconIf("k-collapse-next", nextPane.collapsible && !nextPane.collapsed) +
-                    catIconIf("k-expand-next", nextPane.collapsible && nextPane.collapsed) + "</div>");
-            }
+                that._updateSplitBar(splitbar, previousPane, nextPane);
+            });
         },
         _resize: function() {
             var that = this,
@@ -459,8 +467,11 @@
 
             if (splitBarsCount === 0) {
                 splitBarsCount = panes.length - 1;
-                that._appendSplitBars(panes);
+                panes.slice(0, splitBarsCount).after("<div class='k-splitbar' />");
+                that._updateSplitBars();
                 splitBars = element.children(".k-splitbar");
+            } else {
+                that._updateSplitBars();
             }
 
             // discard splitbar sizes from total size
@@ -501,8 +512,11 @@
                 freeSizePaneWidth = Math.floor(totalSize / freeSizePanesCount);
 
             freeSizedPanes
-                .slice(0, freeSizePanesCount - 1).css(sizingProperty, freeSizePaneWidth).end()
-                .eq(freeSizePanesCount - 1).css(sizingProperty, totalSize - (freeSizePanesCount - 1) * freeSizePaneWidth);
+                .slice(0, freeSizePanesCount - 1)
+                    .css(sizingProperty, freeSizePaneWidth)
+                .end()
+                .eq(freeSizePanesCount - 1)
+                    .css(sizingProperty, totalSize - (freeSizePanesCount - 1) * freeSizePaneWidth);
 
             // arrange panes
             var sum = 0,
@@ -521,33 +535,11 @@
         },
         toggle: function(pane, expand) {
             var pane = $(pane),
-                previousSplitBar = pane.prev(".k-splitbar"),
-                nextSplitBar = pane.next(".k-splitbar"),
-                splitbars = previousSplitBar.add(nextSplitBar),
-                paneConfig = pane.data(PANE),
-                prevPaneConfig = pane.prevAll(".k-pane:first").data(PANE),
-                nextPaneConfig = pane.nextAll(".k-pane:first").data(PANE),
-                orentation = this.orientation,
-                hoverClass = "k-splitbar-" + orentation + "-hover",
-                draggableClass = "k-splitbar-draggable-" + orentation;
+                paneConfig = pane.data(PANE);
 
             if (arguments.length == 1) {
                 expand = paneConfig.collapsed === undefined ? false : paneConfig.collapsed;
             }
-
-            previousSplitBar
-                .toggleClass(draggableClass, expand && paneConfig.resizable !== false && (!prevPaneConfig || prevPaneConfig.resizable !== false))
-                .removeClass(hoverClass)
-                .find(expand ? ".k-expand-next" : ".k-collapse-next")
-                    .toggleClass("k-expand-next", !expand)
-                    .toggleClass("k-collapse-next", expand);
-
-            nextSplitBar
-                .toggleClass(draggableClass, expand && paneConfig.resizable !== false && (!nextPaneConfig || nextPaneConfig.resizable !== false))
-                .removeClass(hoverClass)
-                .find(expand ? ".k-expand-prev" : ".k-collapse-prev")
-                    .toggleClass("k-expand-prev", !expand)
-                    .toggleClass("k-collapse-prev", expand);
 
             paneConfig.collapsed = !expand;
 
@@ -557,7 +549,7 @@
         * Collapses the specified Pane item
         * @param {Selector|DomElement|jQueryObject} pane The pane, which will be collapsed.
         * @example
-        * splitter.collapse("#Item1"); //id of the first pane
+        * splitter.collapse("#Item1"); // id of the first pane
         */
         collapse: function(pane) {
             this.toggle(pane, false);
@@ -566,7 +558,7 @@
         * Expands the specified Pane item
         * @param {Selector|DomElement|jQueryObject} pane The pane, which will be expanded.
         * @example
-        * splitter.expand("#Item1"); //id of the first pane
+        * splitter.expand("#Item1"); // id of the first pane
         */
         expand: function(pane) {
             this.toggle(pane, true);
@@ -622,22 +614,23 @@
         };
 
     function PaneResizing(splitter) {
-        var that = this;
+        var that = this,
+            orientation = splitter.orientation;
 
         that.owner = splitter;
-        that._element = that.owner.element;
-        that.orientation = that.owner.orientation;
+        that._element = splitter.element;
+        that.orientation = orientation;
 
-        extend(that, that.orientation === HORIZONTAL ? horizontalDefaults : verticalDefaults);
+        extend(that, orientation === HORIZONTAL ? horizontalDefaults : verticalDefaults);
 
         that._resizable = new kendo.ui.Resizable(splitter.element, {
-            orientation: that.orientation,
-            handle: that.orientation == HORIZONTAL ? ".k-splitbar-draggable-horizontal" : ".k-splitbar-draggable-vertical",
+            orientation: orientation,
+            handle: ".k-splitbar-draggable-" + orientation,
             hint: proxy(that._createHint, that),
             start: proxy(that._start, that),
             max: proxy(that._max, that),
             min: proxy(that._min, that),
-            invalidClass:"k-restricted-size-" + that.orientation,
+            invalidClass:"k-restricted-size-" + orientation,
             resizeend: proxy(that._stop, that)
         });
     }
