@@ -30,11 +30,7 @@
             Component.fn.init.call(that, element, options);
 
             options = that.options;
-            element = that.element.addClass(INPUT)
-                          .bind({
-                              keydown: $.proxy(that._keydown, that)
-                          })
-                          .bind("paste", function(e) { console.log(e, e.target.value) });
+            element = that.element.addClass(INPUT).bind("keydown", $.proxy(that._keydown, that));
 
             that._wrapper();
             that._arrows();
@@ -117,12 +113,12 @@
 
                 upArrow.bind(MOUSEDOWN, function(e) {
                     e.preventDefault();
-                    that._spin(1);
+                    that._spin(1, e);
                 });
 
                 downArrow.bind(MOUSEDOWN, function(e) {
                     e.preventDefault();
-                    that._spin(-1);
+                    that._spin(-1, e);
                 });
             }
         },
