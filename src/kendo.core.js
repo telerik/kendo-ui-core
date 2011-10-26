@@ -1417,7 +1417,6 @@
 
         transitionPromise: function(element, destination, options) {
             var container = kendo.wrap(element);
-            kendo.wrap(container).css({overflow: "hidden"});
             container.append(destination);
 
             element.hide();
