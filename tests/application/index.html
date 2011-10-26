@@ -276,6 +276,28 @@
 
                 application.navigate("/page2");
             });
+
+            test("attaches animation containers to view structure", function() {
+                setup('<div data-kendo-role="view" id="page1"> \
+                    <header data-kendo-role="header">Header</header> \
+                    Content \
+                    <footer data-kendo-role="footer">Footer</footer> \
+                </div>');
+                equal($("#page1").has(".k-mobile-content.k-animation-container").length, 1);
+                equal($("#page1").has(".k-mobile-header.k-animation-container").length, 1);
+                equal($("#page1").has(".k-mobile-footer.k-animation-container").length, 1);
+            });
+
+            test("moves page contents to respective containers", function() {
+                setup('<div data-kendo-role="view" id="page1"> \
+                    <header data-kendo-role="header">Header</header> \
+                    Content \
+                    <footer data-kendo-role="footer">Footer</footer> \
+                </div>');
+                ok(/^\s+Content\s+$/.test($("#page1").find(".k-mobile-content.k-animation-container").text()));
+                equal($("#page1").find(".k-mobile-header.k-animation-container").text(), "Header");
+                equal($("#page1").find(".k-mobile-footer.k-animation-container").text(), "Footer");
+            });
         </script>
     </body>
 </html>
