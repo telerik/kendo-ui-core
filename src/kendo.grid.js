@@ -605,6 +605,7 @@
             }
 
             cell.removeClass("k-edit-cell").empty()
+                .removeData("kendoEditable")
                 .html(tmpl(dataItem));
         },
 
