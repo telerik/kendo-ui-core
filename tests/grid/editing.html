@@ -238,6 +238,16 @@
                 equal(cell.next().text(), "bart");
             });
 
+            test("editibale is destroyed after cell exit edit mode", function() {
+                setup();
+
+                table.find("tr>td:first").click();
+                $(document).click();
+
+                ok(!table.find("tr>td:first").hasClass(".k-edit-cell"));
+                ok(!table.find("tr>td:first").data("kendoEditable"));
+            });
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
