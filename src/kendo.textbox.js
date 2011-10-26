@@ -146,7 +146,7 @@
             }
 
             that._value = value = that._adjust(value);
-            that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : ""); //kendo.toString(value, "n" + decimals)
+            that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "");
             that._text.html(isNotNull ? kendo.toString(value, format) : options.empty);
         },
 
@@ -249,45 +249,44 @@
                 that._step(1);
             }
 
-            //should be stop it by condition (options.prevent = false) ?
-            if (!that._prevent(key) && !e.ctrlKey && !e.shiftKey) {
+            if (that._prevent(key) && !e.ctrlKey) {
                 e.preventDefault();
             }
         },
 
-        _prevent: function(key) { //optimize it and test it
+        _prevent: function(key) {
             var that = this,
-                valid = false,
+                prevent = true,
                 min = that.options.min,
                 element = that.element[0],
                 value = element.value,
-                separator = that._format(that.options.format)[POINT];
+                separator = that._format(that.options.format)[POINT],
+                idx, end;
 
-            if (key > 47 && key < 58) {
-                valid = true;
-            } else if (key > 95 && key < 106) {
-                valid = true;
-            } else if (key > 32 && key < 37) { //PageUp/PageDown Home/End
-                valid = true;
-            } else if (key == 46 || key == 45 || key == 37 || key == 39) {
-                valid = true;
+            if ((key > 16 && key < 21)
+             || (key > 32 && key < 37)
+             || (key > 47 && key < 58)
+             || (key > 95 && key < 106)
+             || key == keys.INSERT
+             || key == keys.DELETE
+             || key == keys.LEFT
+             || key == keys.RIGHT
+             || key == keys.TAB
+             || key == keys.BACKSPACE
+             || key == keys.ENTER) {
+                prevent = false;
             } else if (decimals[key] === separator && value.indexOf(separator) == -1) {
-                valid = true;
-            } else if (key > 16 && key < 21) {
-                valid = true;
-            } else if (key == 8 || key == 9 || key == 13) {
-                valid = true;
-            } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109) && getCaret(element) == 0) { //sign
-                valid = true;
+                prevent = false;
+            } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109) && caret(element) == 0) { //sign
+                prevent = false;
             } else if (key == 110 && value.indexOf(separator) == -1) {
-                valid = false;
-                var idx = getCaret(element),
+                idx = caret(element);
                 end = value.substring(idx);
 
                 element.value = value.substring(0, idx) + separator + end;
             }
 
-            return valid;
+            return prevent;
         },
 
         _spin: function(step, timeout) {
@@ -351,25 +350,15 @@
         return '<span class="k-link k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span>'
     }
 
-    function getCaret(el) { //optimize
-        if (el.selectionStart) {
-            return el.selectionStart;
-        } else if (document.selection) {
-            el.focus();
-
-            var r = document.selection.createRange();
-            if (r == NULL) {
-                return 0;
-            }
-
-            var re = el.createTextRange(),
-            rc = re.duplicate();
-            re.moveToBookmark(r.getBookmark());
-            rc.setEndPoint('EndToStart', re);
-
-            return rc.text.length;
+    function caret(element) {
+        var position = -1;
+        if (document.selection) {
+            position = element.value.indexOf(element.document.selection.createRange().text);
+        } else if (element.selectionStart !== undefined) {
+            position = element.selectionStart;
         }
-        return 0;
+
+        return position;
     }
 
     ui.plugin(TextBox);

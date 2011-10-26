@@ -7,6 +7,7 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.textbox.js"></script>
+        <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -18,6 +19,7 @@
         <script>
 
             var TextBox = kendo.ui.TextBox,
+                keys = kendo.keys,
                 input;
 
             $.fn.pressKey = function(key, eventName) {
@@ -84,10 +86,120 @@
                 equal(textbox.args("_step")[0], 1);
             });
 
+            test("typing digit is allowed", function() {
+                var textbox = new TextBox(input);
+
+                ok(!textbox._prevent(48 /* 0 */));
+            });
+
             test("typing letter is not allowed", function() {
                 var textbox = new TextBox(input);
 
-                ok(!textbox._prevent(60));
+                ok(textbox._prevent(65 /*a*/));
+            });
+
+            test("'-' is allowed", function() {
+                var textbox = new TextBox(input);
+
+                ok(!textbox._prevent(189 /* - */));
+                ok(!textbox._prevent(109 /* - numpad */));
+            });
+
+            test("Spacebar is not allowed", function() {
+                var textbox = new TextBox(input);
+
+                ok(textbox._prevent(keys.SPACEBAR));
+            });
+
+            test("Home/End should be allowed", function() {
+                var textbox = new TextBox(input);
+
+                ok(!textbox._prevent(keys.HOME));
+                ok(!textbox._prevent(keys.END));
+            });
+
+            test("INSERT and DELETE should be allowed", function() {
+                var textbox = new TextBox(input);
+
+                ok(!textbox._prevent(keys.INSERT));
+                ok(!textbox._prevent(keys.DELETE));
+            });
+
+            test("PAGEUP/PAGEDOWN should be allowed", function() {
+                var textbox = new TextBox(input);
+
+                ok(!textbox._prevent(keys.PAGEUP));
+                ok(!textbox._prevent(keys.PAGEDOWN));
+            });
+
+            test("LEFT/RIGHT arrow should be allowed", function() {
+                var textbox = new TextBox(input);
+
+                ok(!textbox._prevent(keys.LEFT));
+                ok(!textbox._prevent(keys.RIGHT));
+            });
+
+            test("UP/DOWN arrow should not be allowed", function() {
+                var textbox = new TextBox(input);
+
+                ok(textbox._prevent(keys.UP));
+                ok(textbox._prevent(keys.DOWN));
+            });
+
+            test("BACKSPACE should be allowed", function() {
+                var textbox = new TextBox(input);
+
+                ok(!textbox._prevent(keys.BACKSPACE));
+            });
+
+            test("ENTER should be allowed", function() {
+                var textbox = new TextBox(input);
+
+                ok(!textbox._prevent(keys.ENTER));
+            });
+
+            test("TAB should be allowed", function() {
+                var textbox = new TextBox(input);
+
+                ok(!textbox._prevent(keys.TAB));
+            });
+
+            test("Allow decimal separator '.' and do not allow ','", function() {
+                var textbox = new TextBox(input);
+
+                ok(textbox._prevent("188"));
+                ok(!textbox._prevent("190"));
+            });
+
+            test("Allow decimal separator ',' and do not allow '.' if diff culture", function() {
+                var textbox = new TextBox(input);
+
+                kendo.culture("bg-BG");
+
+                ok(!textbox._prevent("188"));
+                ok(textbox._prevent("190"));
+
+                kendo.culture("en-US");
+            });
+
+            test("110 key (numpad decimal point) should set '.'", function() {
+                var textbox = new TextBox(input);
+
+                input.pressKey(110);
+
+                equal(input.val(), ".");
+            });
+
+            test("110 key (numpad decimal point) should set ',' if BG culture", function() {
+                var textbox = new TextBox(input);
+
+                kendo.culture("bg-BG");
+
+                input.pressKey(110);
+
+                equal(input.val(), ",");
+
+                kendo.culture("en-US");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
