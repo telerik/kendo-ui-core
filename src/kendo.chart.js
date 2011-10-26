@@ -6341,7 +6341,16 @@
         decorate: function(element) {
             var options = element.options,
                 view = this.view,
-                overlay = view.buildGradient(element.options.overlay);
+                overlay;
+
+            if (options.overlay) {
+                overlay = view.buildGradient(
+                    deepExtend({}, options.overlay, {
+                        // Make the gradient definition unique for this color
+                        _overlayFill: options.fill
+                    })
+                );
+            }
 
             if (!overlay || overlay.type === RADIAL) {
                 return element;
@@ -6373,9 +6382,9 @@
                     fill = view.buildGradient(fill);
                 }
 
-            if (typeof fill === OBJECT) {
-                element.fill = view.createGradient(fill);
-            }
+                if (typeof fill === OBJECT) {
+                    element.fill = view.createGradient(fill);
+                }
             }
 
             return element;
