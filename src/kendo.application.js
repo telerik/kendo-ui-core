@@ -42,11 +42,10 @@
             var that = this,
             back = that.nextView === view;
 
-
             if (back) {
-                var animationType = view.element.data("kendoTransition") || "slide";
+                var animationType = view.element.data("kendoTransition");
             } else {
-                var animationType = this.element.data("kendoTransition") || "slide";
+                var animationType = that.element.data("kendoTransition");
             }
 
             if (animationType === "slide") {
@@ -54,13 +53,13 @@
                 view.content.kendoAnimateTo(that.content, { effects: "slide", reverse: back });
                 view.footer.kendoAnimateTo(that.footer, { effects: "fade", reverse: back });
             } else {
-                view.element.kendoAnimateTo(that.element, {effects: animationType, reverse: back, duration: 400 });
+                view.element.kendoAnimateTo(that.element, { effects: animationType, reverse: back });
             }
 
             if (!back) {
                 view.nextView = that;
             }
-        },
+        }
     });
 
     var Application = kendo.Observable.extend({
