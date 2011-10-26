@@ -1567,6 +1567,7 @@
          * @option {String} [series.type="pie".labels.font] <"12px Arial, sans-serif">
          * The font style of the labels.
          * @option {Boolean} [series.type="pie".labels.visible] <false> The visibility of the labels.
+         * @option {Number} [series.type="pie".labels.distance] <35> The distance of the labels.
          * @option {Number|Object} [series.type="pie".labels.margin] <0.5> The margin of the labels.
          * _example
          * // sets the top, right, bottom and left margin to 3px.
