@@ -577,7 +577,7 @@
                 movingElement = options.reverse ? element : destination,
                 transitions = kendo.support.transitions;
 
-            destination.css({width: element.width(), height: element.height()}).show();
+            destination.css({width: element.width(), height: element.height(), display: ''});
             container.append(destination);
 
             $.each(options.effects, function(name, definition) {
@@ -589,7 +589,7 @@
 
             options.complete = function() {
                 setTimeout(function() {
-                    element.attr("style", "").hide();
+                    element.attr("style", "display: none;");
                     destination.attr("style", "");
                     container.attr("style", "");
                     options.completeCallback && options.completeCallback();
