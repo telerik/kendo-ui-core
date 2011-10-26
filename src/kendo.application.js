@@ -25,17 +25,16 @@
             that.element = element.data("kendoView", that);
 
             element.wrapInner('<div class="k-mobile-content k-animation-container"><div data-kendo-role="content"></div></div>');
-            this.header = element.find(HEADER_SELECTOR);
-            this.content = element.find(CONTENT_SELECTOR);
-            this.footer = element.find(FOOTER_SELECTOR);
-            this.header.detach();
-            this.footer.detach();
+            that.header = element.find(HEADER_SELECTOR);
+            that.content = element.find(CONTENT_SELECTOR);
+            that.footer = element.find(FOOTER_SELECTOR);
+            that.header.detach();
+            that.footer.detach();
 
-            element.addClass("k-mobile-view").prepend(this.header).append(this.footer);
+            element.addClass("k-mobile-view").prepend(that.header).append(that.footer);
 
-            this.header.wrap('<div class="k-mobile-header k-animation-container"></div>');
-            this.footer.wrap('<div class="k-mobile-footer k-animation-container"></div>');
-            console.log("view init");
+            that.header.wrap('<div class="k-mobile-header k-animation-container"></div>');
+            that.footer.wrap('<div class="k-mobile-footer k-animation-container"></div>');
         },
 
         replace: function(view) {
