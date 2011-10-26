@@ -4,7 +4,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 
         <title>Index</title>
         <script src="../../src/jquery.js"></script>
@@ -19,14 +19,14 @@
                 margin: 0;
                 padding: 0;
                 -webkit-touch-callout: none;
-                -moz-touch-callout: none;
                 -webkit-tap-highlight-color: rgba(0,0,0,0);
-                -moz-tap-highlight-color: rgba(0,0,0,0);
+            }
+            html {
+                -webkit-text-size-adjust: none;
             }
 
             html, body {
                 height: 100%;
-                width: 100%;
                 overflow: hidden;
             }
 
@@ -37,14 +37,9 @@
                 width: 100%;
             }
 
-            footer {
-                font-size: 11px;
-            }
-
             .k-mobile-view {
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
-                -webkit-box-align: stretch;
                 height: 100%;
                 overflow: hidden;
             }
@@ -56,7 +51,7 @@
         </style>
     </head>
     <body>
-        <article data-kendo-role="view" data-kendo-url="index.html">
+        <article data-kendo-role="view">
 
         <header data-kendo-role="header"> Our glorious header</header>
 
@@ -76,7 +71,7 @@
         </article>
 
         <article data-kendo-role="view" id="view2" data-kendo-transition="overlay:up">
-        <header data-kendo-role="header"> Our glorious header </header>
+        <header data-kendo-role="header">My local header</header>
 
         <a href="index.html" data-kendo-role="button">Back to view 1</a>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a turpis turpis, cursus porta neque. Suspendisse facilisis vehicula ipsum sed aliquam. Mauris nibh mauris, rutrum sed congue at, accumsan consequat dui. Vivamus mollis, ante nec mollis dictum, arcu leo porta nunc, eu imperdiet nulla leo a risus. Suspendisse tincidunt vestibulum dictum. Etiam tincidunt risus sem, eu varius quam. Sed porttitor vestibulum sapien, non pretium velit cursus lobortis. Cras dapibus lacinia commodo.
@@ -87,9 +82,7 @@
 
         Suspendisse a purus nulla, vel tincidunt dui. Cras tincidunt tempus velit, sed ornare odio vestibulum a. Duis ligula diam, viverra nec consectetur non, tempor sed lacus. Cras viverra interdum sagittis. Nullam accumsan, purus euismod tempus laoreet, est erat vestibulum nunc, at tempus dui odio a ante. Curabitur dictum ligula vitae lectus hendrerit sollicitudin. Quisque ullamcorper magna iaculis lacus bibendum placerat vestibulum sapien varius. Donec sit amet lectus at enim commodo lobortis id in quam.
 
-        In purus nulla, tempor sit amet pharetra a, venenatis sit amet lacus. Nam lobortis mauris in ipsum condimentum a fermentum lacus molestie. Donec porta sollicitudin volutpat. Morbi interdum sodales risus, a molestie lorem euismod quis. Nam sit amet ipsum feugiat purus adipiscing scelerisque. Vivamus in lorem quis sapien congue cursus in vitae augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi neque tellus, accumsan pulvinar rhoncus eu, mollis id metus. Curabitur et sapien quis dui iaculis porttitor ac eget nisi. Maecenas facilisis neque at libero lacinia sed adipiscing mauris feugiat. Donec ac odio sed felis aliquam faucibus rutrum non ligula. Cras nunc nunc, sagittis sit amet venenatis vitae, elementum id ante.</p>
-
-        <footer data-kendo-role="footer"> Copyright &copy; Telerik 2011; </footer>
+        <footer data-kendo-role="footer">My local footer</footer>
         </article>
     </body>
 </html>
