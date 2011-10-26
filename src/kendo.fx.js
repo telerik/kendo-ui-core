@@ -187,10 +187,9 @@
     }
 
     function parseTransitionEffects(options) {
-        var options,
-            effects = options.effects,
+        var effects = options.effects,
             mirror;
-            ;
+
         if (effects === "zoom") {
             effects = "zoomIn fadeIn";
         }
@@ -575,10 +574,9 @@
                 container = wrapForAnimation(element),
                 options = parseTransitionEffects(options),
                 animatingContainer = "slide" in options.effects,
-                movingElement = options.reverse ? element : destination;
+                movingElement = options.reverse ? element : destination,
                 transitions = kendo.support.transitions;
 
-                console.log({width: element.width(), height: element.height()});
             destination.css({width: element.width(), height: element.height()}).show();
             container.append(destination);
 
