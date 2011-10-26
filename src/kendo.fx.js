@@ -564,13 +564,11 @@
                         }
                     });
                 });
-
             }
         },
 
         animateTo: function(element, destination, options) {
             var direction,
-                callback,
                 container = wrapForAnimation(element),
                 options = parseTransitionEffects(options),
                 animatingContainer = "slide" in options.effects,
@@ -587,14 +585,14 @@
             positionElement(movingElement, kendo.directions[direction]);
             element.css({position: "absolute", "left": 0, "top": 0});
 
-            options.complete = function() {
-                setTimeout(function() {
-                    element.attr("style", "display: none;");
-                    destination.attr("style", "");
-                    container.attr("style", "");
-                    options.completeCallback && options.completeCallback();
-                }, 0);
-            };
+            function callback() {
+                destination.attr("style", "");
+                container.attr("style", "");
+                element.attr("style", "display: none;");
+                options.completeCallback && options.completeCallback();
+            }
+
+            options.complete = $.browser.msie ? function() { setTimeout(callback) } : callback;
 
             if (animatingContainer) {
                 container.kendoAnimate(options);
