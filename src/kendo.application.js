@@ -7,7 +7,8 @@
         HEADER_SELECTOR = "[data-kendo-role=header]",
         FOOTER_SELECTOR = "[data-kendo-role=footer]",
         CONTENT_SELECTOR = "[data-kendo-role=content]",
-        ANIMATION_CLASS = "k-animation-container";
+        ANIMATION_CLASS = "k-animation-container",
+        animationContainer = kendo.template('<div class="k-mobile-${cssClass} ' + ANIMATION_CLASS + '">#= typeof inner === "undefined" ? "" : inner #</div>');
 
     function extractView(html) {
         if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
@@ -24,17 +25,16 @@
 
             that.element = element.data("kendoView", that);
 
-            element.wrapInner('<div class="k-mobile-content k-animation-container"><div data-kendo-role="content"></div></div>');
-            that.header = element.find(HEADER_SELECTOR);
+            element.wrapInner(animationContainer({cssClass: "content", inner: '<div data-kendo-role="content"></div>'}));
             that.content = element.find(CONTENT_SELECTOR);
-            that.footer = element.find(FOOTER_SELECTOR);
-            that.header.detach();
-            that.footer.detach();
+
+            that.header = element.find(HEADER_SELECTOR).detach();
+            that.footer = element.find(FOOTER_SELECTOR).detach();
 
             element.addClass("k-mobile-view").prepend(that.header).append(that.footer);
 
-            that.header.wrap('<div class="k-mobile-header k-animation-container"></div>');
-            that.footer.wrap('<div class="k-mobile-footer k-animation-container"></div>');
+            that.header.wrap(animationContainer({cssClass: "header"}));
+            that.footer.wrap(animationContainer({cssClass: "footer"}));
         },
 
         replace: function(view) {
