@@ -361,7 +361,8 @@
                         setupPieChart(plotArea, {
                             series: [ { data: [{ value: 1, explode: true }] } ],
                             padding: PADDING,
-                            startAngle: START_ANGLE
+                            startAngle: START_ANGLE,
+                            connectors: { width: 2, color: "blue", padding: 4 }
                         });
                         pieSegment = firstSegment;
                     }
@@ -377,6 +378,12 @@
 
                 test("sets segments if segments are more then 1", function() {
                     equal(pieSegment.explode, false);
+                });
+
+                test("sets connectors settings to the pie labels", function() {
+                    equal(pieChart.options.connectors.width, 2);
+                    equal(pieChart.options.connectors.color, "blue");
+                    equal(pieChart.options.connectors.padding, 4);
                 });
 
                 test("sets default radius to 5 pixels", function() {
