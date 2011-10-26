@@ -837,11 +837,11 @@
          * @option {Array|Object} [filter] <undefined> Sets initial filter
          * _example
          * // returns only data where orderId is equal to 10248
-         * filter: { field: "orderId", operation: "eq", value: 10248 }
+         * filter: { field: "orderId", operator: "eq", value: 10248 }
          *
          * // returns only data where orderId is equal to 10248 and customerName starts with Paul
-         * filter: [ { field: "orderId", operation: "eq", value: 10248 },
-         *           { field: "customerName", operation: "startswith", value: "Paul" } ]
+         * filter: [ { field: "orderId", operator: "eq", value: 10248 },
+         *           { field: "customerName", operator: "startswith", value: "Paul" } ]
          *
          * @option {Array|Object} [group] <undefined> Sets initial grouping
          * _example
@@ -1363,7 +1363,7 @@
         /**
          * Get current filters or filter the data.
          *<p>
-         * <i>Supported filter operations/aliases are</i>:
+         * <i>Supported filter operators/aliases are</i>:
          * <ul>
          * <li><strong>Equal To</strong>: "eq", "==", "isequalto", "equals", "equalto", "equal"</li>
          * <li><strong>Not Equal To</strong>: "neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "not", "ne"</li>
@@ -1378,10 +1378,10 @@
          * </p>
          * @param {Object|Array} [val] <undefined> Filter(s) to be applied to the data.
          * @example
-         * dataSource.filter({ field: "orderId", operation: "eq", value: 10428 });
+         * dataSource.filter({ field: "orderId", operator: "eq", value: 10428 });
          * dataSource.filter([
-         *      { field: "orderId", operation: "neq", value: 42 },
-         *      { field: "unitPrice", operation: "ge", value: 3.14 }
+         *      { field: "orderId", operator: "neq", value: 42 },
+         *      { field: "unitPrice", operator: "ge", value: 3.14 }
          * ]);
          * @returns {Array} Current filter descriptors
          */
