@@ -576,19 +576,20 @@
                 transitions = kendo.support.transitions;
 
             destination.css({width: element.width(), height: element.height(), display: ''});
-            container.append(destination);
 
             $.each(options.effects, function(name, definition) {
                 direction = direction || definition.direction;
             });
 
             positionElement(movingElement, kendo.directions[direction]);
-            element.css({position: "absolute", "left": 0, "top": 0});
+            movingElement.css({position: "absolute", "left": 0, "top": 0});
+
+            container.append(destination);
 
             function callback() {
+                element.attr("style", "display: none;");
                 destination.attr("style", "");
                 container.attr("style", "");
-                element.attr("style", "display: none;");
                 options.completeCallback && options.completeCallback();
             }
 
