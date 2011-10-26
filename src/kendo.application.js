@@ -23,7 +23,6 @@
 
             that.element = element.data("kendoView", that);
 
-
             element.wrapInner(animationContainer({
                 cssClass: "content",
                 inner: element.has(contentSelector).length ? "" : '<div ' + kendo.dataRole + '="content"></div>'
