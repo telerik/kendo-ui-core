@@ -32,12 +32,19 @@
                     }
                 },
                 dataSource: data,
-                seriesDefaults: {},
+                seriesDefaults: {
+                    labels: {
+                        visible: true
+                    },
+                    connectors: {
+                        width: 4
+                    }
+                },
                 transitions: false,
                 series: [{
                     type: "pie",
                     name: "World",
-                    padding: 250,
+                    padding: 50,
                     data: [{
                           value: 2,
                           category: "Avg 2011"

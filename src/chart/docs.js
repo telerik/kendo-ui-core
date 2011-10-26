@@ -1765,11 +1765,11 @@
          *    </dl>
          * </div>
          * @option {String} [series.type="pie".overlay] <"glass"> The effects overlay.
-         * @option {Object} [series.type="pie".connector] The labels connector options.
-         * @option {Number} [series.type="pie".connector.width] <1> The width of the connector line.
-         * @option {String} [series.type="pie".connector.color] <"#939393"> The color of the connector line.
-         * @option {Number} [series.type="pie".connector.padding] <4>
-         * The padding between the connector line and the label.
+         * @option {Object} [series.type="pie".connectors] The label connectors options.
+         * @option {Number} [series.type="pie".connectors.width] <1> The width of the connector line.
+         * @option {String} [series.type="pie".connectors.color] <"#939393"> The color of the connector line.
+         * @option {Number} [series.type="pie".connectors.padding] <4>
+         * The padding between the connector line and the label, and connector line and pie chart.
          * @option {number} [series.type="pie".startAngle] <90> The start angle of the first pie segment.
          * @option {Object} [chartArea] The chart area configuration options.
          * This is the entire visible area of the chart.

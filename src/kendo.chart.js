@@ -3077,7 +3077,7 @@
         options: {
             startAngle: 90,
             padding: 60,
-            connector: {
+            connectors: {
                 width: 1,
                 color: "#939393",
                 padding: 4
@@ -3339,7 +3339,7 @@
 
         reflowLabels: function(distances, labels) {
             var chart = this,
-                connector = chart.options,
+                connectors = chart.options,
                 segments = chart.segments,
                 segment = segments[0],
                 sector = segment.sector,
@@ -3384,7 +3384,7 @@
         getViewElements: function(view) {
             var chart = this,
                 options = chart.options,
-                connector = options.connector,
+                connectors = options.connectors,
                 segments = chart.segments,
                 connectorLine,
                 sector,
@@ -3416,10 +3416,10 @@
                         end,
                         crossing;
 
-                    start = sector.clone().expand(connector.padding).point(angle);
+                    start = sector.clone().expand(connectors.padding).point(angle);
                     points.push(start);
                     if (label.orientation == RIGHT) {
-                        end = new Point2D(box.x1 - connector.padding, box.center().y);
+                        end = new Point2D(box.x1 - connectors.padding, box.center().y);
                         crossing = intersection(centerPoint, start, middle, end);
                         middle = new Point2D(end.x - space, end.y);
                         crossing = crossing || middle;
@@ -3443,7 +3443,7 @@
                             points.push(crossing);
                         }
                     } else {
-                        end = new Point2D(box.x2 + connector.padding, box.center().y);
+                        end = new Point2D(box.x2 + connectors.padding, box.center().y);
                         crossing = intersection(centerPoint, start, middle, end);
                         middle = new Point2D(end.x + space, end.y);
                         crossing = crossing || middle;
@@ -3471,8 +3471,8 @@
                     points.push(end);
                     connectorLine = view.createPolyline(points, false, {
                         id: uniqueId(),
-                        stroke: connector.color,
-                        strokeWidth: connector.width,
+                        stroke: connectors.color,
+                        strokeWidth: connectors.width,
                         animation: {
                             type: FADEIN,
                             delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
@@ -3663,7 +3663,8 @@
                 pieChart = new PieChart(plotArea, {
                     series: series,
                     padding: firstSeries.padding,
-                    startAngle: firstSeries.startAngle
+                    startAngle: firstSeries.startAngle,
+                    connectors: firstSeries.connectors
                 }),
                 segments = pieChart.segments,
                 count = segments.length,
