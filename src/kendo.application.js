@@ -18,13 +18,18 @@
 
     var View = kendo.Class.extend({
         init: function(element) {
-            var that = this;
+            var that = this,
+                contentSelector = roleSelector("content");
 
             that.element = element.data("kendoView", that);
 
-            element.wrapInner(animationContainer({cssClass: "content", inner: '<div ' + kendo.dataRole + '="content"></div>'}));
-            that.content = element.find(roleSelector("content"));
 
+            element.wrapInner(animationContainer({
+                cssClass: "content",
+                inner: element.has(contentSelector).length ? "" : '<div ' + kendo.dataRole + '="content"></div>'
+            }));
+
+            that.content = element.find(roleSelector("content"));
             that.header = element.find(roleSelector("header")).detach();
             that.footer = element.find(roleSelector("footer")).detach();
 

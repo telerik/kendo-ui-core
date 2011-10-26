@@ -299,6 +299,11 @@
                 equal($("#page1").find(".k-mobile-header.k-animation-container").text(), "Header");
                 equal($("#page1").find(".k-mobile-footer.k-animation-container").text(), "Footer");
             });
+
+            test("uses content container if present", function() {
+                setup('<div data-kendo-role="view" id="page1"><div data-kendo-role="content">Header</div></div>');
+                equal($("#page1").find("[data-kendo-role=content]").length, 1);
+            });
         </script>
     </body>
 </html>
