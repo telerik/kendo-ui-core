@@ -139,6 +139,12 @@
                 equal($("form[action='" + uploadInstance.options.async.saveUrl + "'] input").attr("name"), "uploadInstance");
             });
 
+            test("input name is set to saveField", function() {
+                uploadInstance.options.async.saveField = "field";
+                simulateFileSelect();
+                equal($("form[action='" + uploadInstance.options.async.saveUrl + "'] input").attr("name"), "field");
+            });
+
             test("list element is created for the selected file", function() {
                 simulateFileSelect();
                 equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 1);

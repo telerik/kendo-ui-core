@@ -168,7 +168,14 @@
          *     <dd>
          *         The URL of the handler that will receive the submitted files.
          *         The handler must accept POST requests containing one or more
-         *         files with the same name as the upload widget.
+         *         fields with the same name as the original input name.
+         *     </dd>
+         *     <dt>
+         *         saveField: (String)
+         *     </dt>
+         *     <dd>
+         *         The name of the form field submitted to the Save URL.
+         *         The default value is the input name.
          *     </dd>
          *     <dt>
          *         removeUrl: (String)
@@ -883,7 +890,7 @@
         prepareUpload: function(sourceInput) {
             var upload = this.upload;
             var activeInput = $(upload.element);
-            var name = sourceInput.attr("name");
+            var name = upload.options.async.saveField || sourceInput.attr("name");
             upload._addInput(sourceInput.clone().val(""));
 
             sourceInput.attr("name", name);
@@ -1224,9 +1231,10 @@
         },
 
         createFormData: function(fileInfo) {
-            var formData = new FormData();
+            var formData = new FormData(),
+            upload = this.upload;
 
-            formData.append(this.upload.name, fileInfo.rawFile);
+            formData.append(upload.options.async.saveField || upload.name, fileInfo.rawFile);
 
             return formData;
         },
