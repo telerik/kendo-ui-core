@@ -3,10 +3,7 @@
     var kendo = window.kendo,
         history = kendo.history,
         div = $("<div/>"),
-        VIEW_SELECTOR = "[data-kendo-role=view]",
-        HEADER_SELECTOR = "[data-kendo-role=header]",
-        FOOTER_SELECTOR = "[data-kendo-role=footer]",
-        CONTENT_SELECTOR = "[data-kendo-role=content]",
+        roleSelector = kendo.roleSelector,
         ANIMATION_CLASS = "k-animation-container",
         animationContainer = kendo.template('<div class="k-mobile-${cssClass} ' + ANIMATION_CLASS + '">#= typeof inner === "undefined" ? "" : inner #</div>');
 
@@ -16,7 +13,7 @@
         }
 
         div[0].innerHTML = html;
-        return div.find(VIEW_SELECTOR).first();
+        return div.find(roleSelector("view")).first();
     }
 
     var View = kendo.Class.extend({
@@ -25,11 +22,11 @@
 
             that.element = element.data("kendoView", that);
 
-            element.wrapInner(animationContainer({cssClass: "content", inner: '<div data-kendo-role="content"></div>'}));
-            that.content = element.find(CONTENT_SELECTOR);
+            element.wrapInner(animationContainer({cssClass: "content", inner: '<div ' + kendo.dataRole + '="content"></div>'}));
+            that.content = element.find(roleSelector("content"));
 
-            that.header = element.find(HEADER_SELECTOR).detach();
-            that.footer = element.find(FOOTER_SELECTOR).detach();
+            that.header = element.find(roleSelector("header")).detach();
+            that.footer = element.find(roleSelector("footer")).detach();
 
             element.addClass("k-mobile-view").prepend(that.header).append(that.footer);
 
@@ -39,13 +36,8 @@
 
         replace: function(view) {
             var that = this,
-            back = that.nextView === view;
-
-            if (back) {
-                var animationType = view.element.data("kendoTransition");
-            } else {
-                var animationType = that.element.data("kendoTransition");
-            }
+                back = that.nextView === view,
+                animationType = (back ? view : that).element.data("kendoTransition");
 
             if (animationType === "slide") {
                 view.header.kendoAnimateTo(that.header, { effects: "fade", reverse: back });
@@ -72,8 +64,8 @@
 
             that.element = that.element ? $(that.element) : $(document.body);
 
-            that.element.addClass("k-animation-container");
-            views = that.element.find(VIEW_SELECTOR);
+            that.element.addClass(ANIMATION_CLASS);
+            views = that.element.find(roleSelector("view"));
 
             views.not(":first").hide();
 
