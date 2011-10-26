@@ -46,7 +46,7 @@
                 textbox._upArrow.mousedown();
 
                 setTimeout(function() {
-                    textbox._stop();
+                    clearTimeout(textbox._spinning);
                     ok(textbox.value() > 1);
                     start();
                 }, 700);
@@ -58,7 +58,7 @@
                 textbox._downArrow.mousedown();
 
                 setTimeout(function() {
-                    textbox._stop();
+                    clearTimeout(textbox._spinning);
                     ok(textbox.value() < -1);
                     start();
                 }, 700);
