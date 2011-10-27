@@ -71,7 +71,7 @@
                     return true;
                 },
                 min: function(input) {
-                    if (input.filter("[type=number],[type=range]").filter("[min]").length && input.val() !== "") {
+                    if (input.filter("[type=number],[type=range],[data-kendo-type=number]").filter("[min]").length && input.val() !== "") {
                         var min = parseInt(input.attr("min"), 10) || 0,
                             val = parseInt(input.val(), 10);
 
@@ -80,7 +80,7 @@
                     return true;
                 },
                 max: function(input) {
-                    if (input.filter("[type=number],[type=range]").filter("[max]").length && input.val() !== "") {
+                    if (input.filter("[type=number],[type=range],[data-kendo-type=number]").filter("[max]").length && input.val() !== "") {
                         var max = parseInt(input.attr("max"), 10) || 0,
                             val = parseInt(input.val(), 10);
 
@@ -89,7 +89,7 @@
                     return true;
                 },
                 step: function(input) {
-                    if (input.filter("[type=number],[type=range]").filter("[step]").length && input.val() !== "") {
+                    if (input.filter("[type=number],[type=range],[data-kendo-type=number]").filter("[step]").length && input.val() !== "") {
                         var min = parseInt(input.attr("min"), 10) || 0,
                             step = parseInt(input.attr("step"), 10) || 0,
                             val = parseInt(input.val(), 10);
@@ -99,10 +99,10 @@
                     return true;
                 },
                 email: function(input) {
-                    return matcher(input, "[type=email]", emailRegExp);
+                    return matcher(input, "[type=email],[data-kendo-type=email]", emailRegExp);
                 },
                 url: function(input) {
-                    return matcher(input, "[type=url]", urlRegExp);
+                    return matcher(input, "[type=url],[data-kendo-type=url]", urlRegExp);
                 }
             }
         },
