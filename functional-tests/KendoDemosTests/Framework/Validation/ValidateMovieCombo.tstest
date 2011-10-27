@@ -19,11 +19,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/validation/index.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/validatable/index.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>44a77e71-f200-4611-a6ce-468149720732</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c4848be8-5ebd-4662-aa2e-48a48beea91d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -45,7 +45,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/validation/index.html</d2p1:NavigateURL>
+        <d2p1:NavigateURL>/validatable/index.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>ValidateMovieCombox0uoqxeu.d1o</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>08323008-b56e-4b90-831c-d1abf38d6552</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3aab46fe-0703-45c5-929b-c8b863f9d6c9</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -148,7 +148,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>cd7eb87d-024f-4013-9252-35501f8e40cb</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>fd61358b-9bac-4a47-8cc8-9a839ed84d8b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -181,7 +181,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>8a0a5a7c-4b78-4c01-977e-4ca20e994188</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d5d4752f-d3c5-4132-b770-ca2477843f26</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -271,7 +271,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f624e129-ad44-4a21-956a-e68c3fb74b19</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>de734831-4dad-4864-b1d1-15b4647f554c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -356,7 +356,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>bfde2d47-6465-4b31-8b17-eda7eb512833</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>711d0fad-679f-44e4-8b14-8f25247f4b9e</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -446,7 +446,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>92744123-c986-4163-b9b8-a5007debe88f</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>456d3a3a-5306-4b3a-9a74-0fe79acd124a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -539,7 +539,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>4c6afdca-e4cd-4a7a-8146-1e06dc98f215</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0c08e444-9c4e-43dd-8c44-ccd8f7e11924</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -624,7 +624,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ab2877f1-6aa7-4ffc-b617-a63cf8f95801</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>46be5b4f-ba20-47c7-b2ad-77c16c3003c8</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -707,7 +707,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>10</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b87c6ee1-2e95-47ab-8455-27b07cd6bc28</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>09758ec1-c7fb-442d-a464-71b3400cfb54</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -797,7 +797,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>11</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>589c6bcd-ecaa-4e6d-8ca2-0bed65c87a36</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6f3281df-9e0d-413c-a3e2-bbcc74e90ddd</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">

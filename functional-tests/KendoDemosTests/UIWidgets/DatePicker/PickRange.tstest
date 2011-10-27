@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>998b0a67-917c-4dd5-9da1-784d3ea8f1dd</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>8095556d-47a3-4236-b5f1-561e88f6d6e3</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b2b57a5b-127c-4b3e-b169-d20542487463</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>53e562d7-79b2-49a2-8ab3-4faaa34d6330</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -130,7 +130,7 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
       </d2p1:Step>
       <d2p1:StepImageKey>PickRangehe3m4qap.5ms</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -143,7 +143,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c1a9be99-4e9d-43ba-ad3e-674a8d027719</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2b913df3-8915-498f-bca5-1af96a8f3a26</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -176,7 +176,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a5f413ea-e369-4ee6-acee-368144be3e33</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1cbb0b00-f1a2-4840-8fc9-bc3f1bda59a5</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -243,7 +243,7 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
       </d2p1:Step>
       <d2p1:StepImageKey>PickRangevlov2heo.zk2</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -256,7 +256,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>8565ca6d-5cd9-4be5-83d1-1a4759b3367b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3a4f3171-c612-4b00-9c56-fa8a6e2df719</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -289,7 +289,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d35b0363-8fd6-4ad8-832a-51b7dcd4bc63</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>efa614ee-ccc5-4a8e-a667-fa39507918e9</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -361,7 +361,7 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
       </d2p1:Step>
       <d2p1:StepImageKey>PickRangesytdhks2.bja</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -374,7 +374,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>77d29043-7aca-432a-b0c4-707fbc137430</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>48c537af-7ed0-4f5c-814f-6c8442890bf7</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -464,7 +464,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a3a86d61-2b99-4f11-a1c9-494f8f62ea70</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>385b0cde-ffa7-47d5-aac0-508165d714cd</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -497,7 +497,7 @@
       <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b40c3a4c-4e7c-4495-aca6-a970a2592240</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6c6bf91e-37ac-40d0-b93e-fda7654cf77d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -577,7 +577,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>10</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e678a743-5016-4b76-8aa0-f59b1fd36645</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>dba7dc5d-12c9-4bec-b28a-24f9577dff03</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -606,11 +606,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for textbox 'EndText' content 'Contains' '10/27/2012'.</d2p1:Description>
+      <d2p1:Description>Wait for textbox 'EndText' content 'Contains' '10/10/2012'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>11</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>1c21ac9a-1f55-4714-9a4d-8f7700279584</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>803a5b73-1663-4acd-9744-8033797dc40d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -683,7 +683,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <CompareType>Contains</CompareType>
-        <ExpectedValue>10/27/2012</ExpectedValue>
+        <ExpectedValue>10/10/2012</ExpectedValue>
       </d2p1:Step>
       <d2p1:StepImageKey>PickRange3ebx0hsv.c31</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -692,11 +692,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for textbox 'StartText' content 'Contains' '10/27/2012'.</d2p1:Description>
+      <d2p1:Description>Wait for textbox 'StartText' content 'Contains' '10/10/2011'.</d2p1:Description>
       <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>12</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>99dd5a72-2388-4219-9586-f30029026a3d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>944d08eb-2798-45ef-875b-ceff512dbda1</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -769,7 +769,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <CompareType>Contains</CompareType>
-        <ExpectedValue>10/27/2012</ExpectedValue>
+        <ExpectedValue>10/10/2011</ExpectedValue>
       </d2p1:Step>
       <d2p1:StepImageKey>PickRange3c3xbxk1.wfd</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
