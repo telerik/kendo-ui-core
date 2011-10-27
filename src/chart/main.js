@@ -272,7 +272,7 @@
                 highlight = chart._highlight,
                 point;
 
-            if (highlight.element === e.target) {
+            if (!highlight || highlight.element === e.target) {
                 return;
             }
 
