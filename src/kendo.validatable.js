@@ -109,6 +109,12 @@
                 },
                 url: function(input) {
                     return matcher(input, "[type=url],[data-kendo-type=url]", urlRegExp);
+                },
+                date: function(input) {
+                    if (input.filter("[type^=date],[data-kendo-type=date]").length && input.val() !== "") {
+                        return kendo.parseDate(input.val()) !== null;
+                    }
+                    return true;
                 }
             }
         },
