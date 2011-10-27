@@ -2939,7 +2939,8 @@
                         font: labels.font,
                         margin: labels.margin,
                         padding: labels.padding,
-                        color: labels.color
+                        color: labels.color,
+                        background: labels.background
                     });
 
                 segment.append(segment.label);
