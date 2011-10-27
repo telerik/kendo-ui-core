@@ -34,7 +34,7 @@
             test("focus should hide the _text and show the input value", function() {
                 var textbox = new TextBox(input);
 
-                input.focus();
+                textbox._text.focus();
 
                 ok(!textbox._text.is(":visible"));
             });
@@ -42,7 +42,8 @@
             asyncTest("blur should show the _text", function() {
                 var textbox = new TextBox(input);
 
-                input.focus().blur();
+                textbox._text.focus();
+                textbox.element.blur();
 
                 setTimeout(function() {
                     ok(textbox._text.is(":visible"));
@@ -53,7 +54,7 @@
             test("focus div should focus element", function() {
                 var textbox = new TextBox(input);
 
-                textbox._text.click();
+                textbox._text.focus();
 
                 equal(input[0], document.activeElement);
             });

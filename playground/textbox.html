@@ -11,7 +11,9 @@
         <link href="../styles/kendo.blueopal.css" rel="stylesheet" />
     </head>
     <body>
-        <input id="textbox" type="number" style="width: 150px"/>
+        <input type="number" step="2" min="-10" max="20" style="width: 150px"/>
+        <br />
+        <input id="textbox" style="width: 150px"/>
 
         <style type="text/css">
             .k-hide-text {
@@ -72,7 +74,7 @@
         </style>
         <script>
             $(document).ready(function() {
-                //$("#textbox").kendoTextBox({format: "c"});
+                $("#textbox").kendoTextBox({format: "c"});
             });
         </script>
     </body>

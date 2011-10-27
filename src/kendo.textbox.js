@@ -11,12 +11,12 @@
         HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
         DISABLED = "disabled",
-        DIV = "<div />"
         HIDE = "k-hide-text",
         INPUT = "k-input",
         CHANGE = "change",
         POINT = ".",
         NULL = null,
+        proxy = $.proxy,
         decimals = {
             190 : ".",
             188 : ","
@@ -25,36 +25,34 @@
     var TextBox = Widget.extend(/** @lends kendo.ui.TextBox.prototype */{
         init: function(element, options) {
             var that = this,
-                min, max, value;
+                isStep = options && options[step] !== undefined,
+                min, max, step, value;
 
             Widget.fn.init.call(that, element, options);
 
             options = that.options;
-            element = that.element.addClass(INPUT).bind("keydown", $.proxy(that._keydown, that));
+            element = that.element.addClass(INPUT)
+                          .bind({
+                              keydown: proxy(that._keydown, that),
+                              paste: proxy(that._paste, that)
+                          });
 
             that._wrapper();
             that._arrows();
-            that._div();
-
-            that._text.click(function() { that.wrapper.focusin(); });
-
-            that.wrapper.bind({
-                focusin: function() {
-                    clearTimeout(that._bluring);
-                    that.element.focus();
-                    that._toggleText(false);
-                },
-                focusout: function() {
-                    that._bluring = setTimeout(function() {
-                        that._blur();
-                    }, 100);
-                }
-            });
+            that._input();
 
             that.bind(CHANGE, options);
 
+            that.wrapper.bind({
+                focusin: proxy(that._focusin, that),
+                focusout: proxy(that._focusout, that),
+            });
+
+            that._text.click(function() { that.wrapper.focusin(); });
+
             min = parse(element.attr("min"));
             max = parse(element.attr("max"));
+            step = parse(element.attr("step"));
 
             if (options.min === NULL && min !== NULL) {
                 options.min = min;
@@ -62,6 +60,10 @@
 
             if (options.max === NULL && max !== NULL) {
                 options.max = max;
+            }
+
+            if (!isStep && step !== NULL) {
+                options.step = step;
             }
 
             value = options.value;
@@ -146,8 +148,8 @@
             }
 
             that._value = value = that._adjust(value);
+            that._text.val(isNotNull ? kendo.toString(value, format) : options.empty);
             that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "");
-            that._text.html(isNotNull ? kendo.toString(value, format) : options.empty);
         },
 
         _adjust: function(value) {
@@ -207,21 +209,18 @@
             }
         },
 
-        _div: function() {
-            var that = this,
-                CLASSNAME = "k-formatted-value",
-                element = that.element.show()[0],
-                wrapper = that.wrapper,
-                text;
+        _focusin: function() {
+            var that = this;
+            clearTimeout(that._bluring);
+            that._toggleText(false);
+            that.element.focus();
+        },
 
-           text = wrapper.find(POINT + CLASSNAME);
-
-            if (!text[0]) {
-                text = $(DIV).insertBefore(element).addClass(CLASSNAME);
-            }
-
-            text[0].style.cssText = element.style.cssText;
-            that._text = text.addClass(element.className.replace(INPUT));
+        _focusout: function() {
+            var that = this;
+            that._bluring = setTimeout(function() {
+                that._blur();
+            }, 100);
         },
 
         _format: function(format) {
@@ -239,6 +238,23 @@
             return numberFormat;
         },
 
+        _input: function() {
+            var that = this,
+                CLASSNAME = "k-formatted-value",
+                element = that.element.show()[0],
+                wrapper = that.wrapper,
+                text;
+
+           text = wrapper.find(POINT + CLASSNAME);
+
+            if (!text[0]) {
+                text = $("<input />").insertBefore(element).addClass(CLASSNAME);//.hide()
+            }
+
+            text[0].style.cssText = element.style.cssText;
+            that._text = text.addClass(element.className);
+        },
+
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode;
@@ -254,6 +270,18 @@
             }
         },
 
+        _paste: function(e) {
+            var that = this,
+                element = e.target,
+                value = element.value;
+                setTimeout(function() {
+                    if (parse(element.val()) === null) {
+                        that.value(value);
+                    }
+                });
+
+        },
+
         _prevent: function(key) {
             var that = this,
                 prevent = true,
@@ -261,14 +289,15 @@
                 element = that.element[0],
                 value = element.value,
                 separator = that._format(that.options.format)[POINT],
-                idx, end;
+                idx = caret(element),
+                end;
 
             if ((key > 16 && key < 21)
              || (key > 32 && key < 37)
              || (key > 47 && key < 58)
              || (key > 95 && key < 106)
-             || key == keys.INSERT
-             || key == keys.DELETE
+             || key == 45 /* INSERT */
+             || key == 46 /* DELETE */
              || key == keys.LEFT
              || key == keys.RIGHT
              || key == keys.TAB
@@ -277,10 +306,9 @@
                 prevent = false;
             } else if (decimals[key] === separator && value.indexOf(separator) == -1) {
                 prevent = false;
-            } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109) && caret(element) == 0) { //sign
+            } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109) && idx == 0) { //sign
                 prevent = false;
             } else if (key == 110 && value.indexOf(separator) == -1) {
-                idx = caret(element);
                 end = value.substring(idx);
 
                 element.value = value.substring(0, idx) + separator + end;
@@ -308,7 +336,7 @@
                 value = parse(element.val()) || 0;
 
             if (document.activeElement != element[0]) {
-                element.focus();
+                that.wrapper.focusin();
             }
 
             value += that.options.step * parse(step);
@@ -327,7 +355,7 @@
             var that = this;
 
             that._text.toggle(toggle);
-            that.element.toggleClass(HIDE, toggle)
+            that.element.toggle(!toggle);
         },
 
         _wrapper: function() {
@@ -337,8 +365,8 @@
 
             wrapper = element.parent();
 
-            if (!wrapper.is("div.k-widget")) {
-                wrapper = element.hide().wrap(DIV).parent();
+            if (!wrapper.is("span.k-widget")) {
+                wrapper = element.hide().wrap("<span/>").parent();
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
@@ -360,6 +388,7 @@
 
         return position;
     }
+
 
     ui.plugin(TextBox);
 })(jQuery);

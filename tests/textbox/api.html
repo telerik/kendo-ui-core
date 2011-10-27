@@ -134,7 +134,7 @@
 
                 textbox.value(value);
 
-                equal(textbox._text.html(), "12.35");
+                equal(textbox._text.val(), "12.35");
             });
 
             test("value of the currency textbox", function() {
@@ -148,7 +148,7 @@
 
                 equal(textbox.value(), number);
                 equal(input.val(), number.toString());
-                equal(textbox._text.html(), kendo.toString(number, "c"));
+                equal(textbox._text.val(), kendo.toString(number, "c"));
             });
 
             test("value of the percent textbox", function() {
@@ -162,7 +162,7 @@
 
                 equal(textbox.value(), number);
                 equal(input.val(), number.toString());
-                equal(textbox._text.html(), kendo.toString(number, "p"));
+                equal(textbox._text.val(), kendo.toString(number, "p"));
             });
 
             test("set null", function() {
@@ -172,7 +172,7 @@
 
                 equal(textbox._value, null);
                 equal(textbox.element.val(), "");
-                equal(textbox._text.html(), textbox.options.empty);
+                equal(textbox._text.val(), textbox.options.empty);
             });
 
             test("set value with custom decimal numbers", function() {
@@ -186,7 +186,7 @@
 
                 equal(textbox._value, 12.378);
                 equal(textbox.element.val(), value.toFixed(3));
-                equal(textbox._text.html(), kendo.toString(value, "n3"));
+                equal(textbox._text.val(), kendo.toString(value, "n3"));
             });
 
             test("value() adjust value", function() {
@@ -233,16 +233,25 @@
             test("_blur should hide the input text and show the _text", function() {
                 var textbox = new TextBox(input);
 
-                ok(input.hasClass("k-hide-text"));
+                ok(!input.is(":visible"));
                 ok(textbox._text.is(":visible"));
             });
 
             test("_focus should show the input text and hide the _text", function() {
                 var textbox = new TextBox(input);
 
-                input.focus();
+                textbox.wrapper.focusin();
 
-                ok(!input.hasClass("k-hide-text"));
+                ok(input.is(":visible"));
+                ok(!textbox._text.is(":visible"));
+            });
+
+            test("focusing text input should call _focus", function() {
+                var textbox = new TextBox(input);
+
+                textbox._text.focus();
+
+                ok(input.is(":visible"));
                 ok(!textbox._text.is(":visible"));
             });
 
@@ -252,7 +261,7 @@
                 input.focus().blur();
 
                 setTimeout(function() {
-                    ok(input.hasClass("k-hide-text"));
+                    ok(!input.is(":visible"));
                     ok(textbox._text.is(":visible"));
                     start();
                 }, 200);

@@ -121,8 +121,8 @@
             test("INSERT and DELETE should be allowed", function() {
                 var textbox = new TextBox(input);
 
-                ok(!textbox._prevent(keys.INSERT));
-                ok(!textbox._prevent(keys.DELETE));
+                ok(!textbox._prevent(45));
+                ok(!textbox._prevent(46));
             });
 
             test("PAGEUP/PAGEDOWN should be allowed", function() {
