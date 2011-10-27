@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TextBox API</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.textbox.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">TextBox API</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var TextBox = kendo.ui.TextBox,
+                input;
+
+            module("kendo.ui.TextBox API", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            test("_change should call value() method", function() {
+                var textbox = new TextBox(input);
+
+                stub(textbox, {value: textbox.value});
+
+                textbox._change("22");
+
+                equal(textbox.calls("value"), 1);
+                equal(textbox.value(), 22);
+            });
+
+            test("_step adjusts value", function() {
+                var textbox = new TextBox(input, {
+                    value: 10,
+                    max: 10
+                });
+
+                textbox._step(1);
+
+                equal(textbox.value(), 10);
+                equal(textbox.element.val(), "10");
+            });
+
+
+            test("_step modify input value", function() {
+                var textbox = new TextBox(input);
+
+                textbox._step(1);
+
+                equal(textbox.value(), 1);
+                equal(textbox.element.val(), "1");
+            });
+
+            test("_step parse passed _step", function() {
+                var textbox = new TextBox(input);
+
+                textbox._step("10");
+
+                equal(textbox.value(), 10);
+                equal(textbox.element.val(), "10");
+            });
+
+            test("_step persist element value", function() {
+                var textbox = new TextBox(input);
+
+                input.val("10");
+                textbox._step(1);
+
+                equal(textbox.value(), 11);
+                equal(textbox.element.val(), "11");
+            });
+
+            test("value method should return current value", function() {
+                var textbox = new TextBox(input), value = 10;
+
+                textbox._value = value;
+
+                equal(textbox.value(), value);
+            });
+
+            test("value should parse value and set _value", function() {
+                var textbox = new TextBox(input), value = "12.32";
+
+                textbox.value(value);
+
+                deepEqual(textbox.value(), 12.32);
+            });
+
+            test("value should set value of the input", function() {
+                var textbox = new TextBox(input), value = "12.32";
+
+                textbox.value(value);
+
+                equal(input.val(), value);
+            });
+
+            test("set value to the INPUT element should have correct decimals", function() {
+                var textbox = new TextBox(input), value = "12.347";
+
+                textbox.value(value);
+
+                equal(input.val(), "12.35");
+            });
+
+            test("set value to the INPUT element should have correct decimals", function() {
+                var textbox = new TextBox(input), value = "12.347";
+
+                textbox.value(value);
+
+                equal(input.val(), "12.35");
+            });
+
+            test("value should be fixed", function() {
+                var textbox = new TextBox(input), value = "12.347";
+
+                textbox.value(value);
+
+                equal(input.val(), "12.35");
+            });
+
+            test("formatted value should be set to _text", function() {
+                var textbox = new TextBox(input), value = "12.347";
+
+                textbox.value(value);
+
+                equal(textbox._text.val(), "12.35");
+            });
+
+            test("value of the currency textbox", function() {
+                var textbox = new TextBox(input, {
+                        format: "c"
+                    }),
+                    value = "12.347",
+                    number = 12.35;
+
+                textbox.value(value);
+
+                equal(textbox.value(), number);
+                equal(input.val(), number.toString());
+                equal(textbox._text.val(), kendo.toString(number, "c"));
+            });
+
+            test("value of the percent textbox", function() {
+                var textbox = new TextBox(input, {
+                        format: "p"
+                    }),
+                    value = "12.347",
+                    number = 12.35;
+
+                textbox.value(value);
+
+                equal(textbox.value(), number);
+                equal(input.val(), number.toString());
+                equal(textbox._text.val(), kendo.toString(number, "p"));
+            });
+
+            test("set null", function() {
+                var textbox = new TextBox(input.val("10"));
+
+                textbox.value(null);
+
+                equal(textbox._value, null);
+                equal(textbox.element.val(), "");
+                equal(textbox._text.val(), textbox.options.empty);
+            });
+
+            test("set value with custom decimal numbers", function() {
+                var textbox = new TextBox(input),
+                    value = 12.3777777;
+
+                textbox.options.format = "n3";
+                textbox.options.decimals = 3;
+
+                textbox.value(value);
+
+                equal(textbox._value, 12.378);
+                equal(textbox.element.val(), value.toFixed(3));
+                equal(textbox._text.val(), kendo.toString(value, "n3"));
+            });
+
+            test("value() adjust value", function() {
+                var textbox = new TextBox(input, {
+                    max: 12.35
+                }),
+                value = 12.3777777;
+
+                textbox.value(value);
+
+                equal(textbox._value, 12.35);
+            });
+
+            test("denable(false) should disable input element", function() {
+                var textbox = new TextBox(input);
+
+                textbox.enable(false);
+
+                equal(textbox.element.attr("disabled"), "disabled");
+            });
+
+            test("enable(false) should unbind arrows mousedown event", function() {
+                var textbox = new TextBox(input);
+
+                textbox.enable(false);
+
+                stub(textbox, {_step: textbox._step});
+
+                textbox._upArrow.mousedown();
+                textbox._downArrow.mousedown();
+
+                equal(textbox.calls("_step"), 0);
+            });
+
+            test("enable() should remove disable attribute", function() {
+                var textbox = new TextBox(input);
+
+                textbox.enable(false);
+                textbox.enable(true);
+
+                equal(textbox.element.attr("disabled"), undefined);
+            });
+
+            test("_blur should hide the input text and show the _text", function() {
+                var textbox = new TextBox(input);
+
+                ok(!input.is(":visible"));
+                ok(textbox._text.is(":visible"));
+            });
+
+            test("focusing text input should call _focus", function() {
+                var textbox = new TextBox(input);
+
+                textbox._text.click();
+
+                ok(input.is(":visible"));
+                ok(!textbox._text.is(":visible"));
+            });
+
+            asyncTest("on blur should hide input text", function() {
+                var textbox = new TextBox(input);
+
+                textbox._text.focus();
+                input.blur();
+
+                setTimeout(function() {
+                    ok(!input.is(":visible"));
+                    ok(textbox._text.is(":visible"));
+                    start();
+                }, 200);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
