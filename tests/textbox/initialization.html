@@ -54,19 +54,20 @@
                 ok(downArrow.data("events").mousedown);
             });
 
-            test("Should render div containing the formatted value", function() {
+            test("Should render INPUT containing the formatted value", function() {
                 input.addClass("custom").css("color", "red");
 
                 var textbox = new TextBox(input),
                     text = textbox._text;
 
                 ok(text.is(":visible"));
-                ok(text[0].nodeName, "DIV");
-                ok(!text.hasClass("k-input"));
+                ok(!input.is(":visible"));
+                ok(text[0].nodeName, "INPUT");
+                ok(text.hasClass("k-input"));
                 ok(text.hasClass("custom"));
                 ok(text.hasClass("k-formatted-value"));
+                ok(text[0].style.cssText.indexOf("color: red") != -1);
                 equal(text.next()[0].nodeName, "INPUT");
-                equal(text[0].style.cssText, input[0].style.cssText);
             });
 
             test("Should get value from input", function() {
@@ -74,7 +75,7 @@
 
                 equal(textbox.value(), 12);
                 equal(textbox.element.val(), "12");
-                equal(textbox._text.html(), "12.00");
+                equal(textbox._text.val(), "12.00");
             });
 
             test("Bind change events", function() {
@@ -90,6 +91,12 @@
 
                equal(textbox.options.min, 1);
                equal(textbox.options.max, 12);
+            });
+
+            test("Get step value from the input", function() {
+                var textbox = new TextBox($("<input type='number' step='10' />"));
+
+               equal(textbox.options.step, 10);
             });
 
         </script>
