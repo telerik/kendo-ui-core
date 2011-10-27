@@ -237,19 +237,10 @@
                 ok(textbox._text.is(":visible"));
             });
 
-            test("_focus should show the input text and hide the _text", function() {
-                var textbox = new TextBox(input);
-
-                textbox.wrapper.focusin();
-
-                ok(input.is(":visible"));
-                ok(!textbox._text.is(":visible"));
-            });
-
             test("focusing text input should call _focus", function() {
                 var textbox = new TextBox(input);
 
-                textbox._text.focus();
+                textbox._text.click();
 
                 ok(input.is(":visible"));
                 ok(!textbox._text.is(":visible"));
@@ -258,7 +249,8 @@
             asyncTest("on blur should hide input text", function() {
                 var textbox = new TextBox(input);
 
-                input.focus().blur();
+                textbox._text.focus();
+                input.blur();
 
                 setTimeout(function() {
                     ok(!input.is(":visible"));

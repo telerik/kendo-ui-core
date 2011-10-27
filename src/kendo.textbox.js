@@ -34,7 +34,8 @@
             element = that.element.addClass(INPUT)
                           .bind({
                               keydown: proxy(that._keydown, that),
-                              paste: proxy(that._paste, that)
+                              paste: proxy(that._paste, that),
+                              blur: proxy(that._focusout, that)
                           });
 
             that._wrapper();
@@ -43,12 +44,7 @@
 
             that.bind(CHANGE, options);
 
-            that.wrapper.bind({
-                focusin: proxy(that._focusin, that),
-                focusout: proxy(that._focusout, that),
-            });
-
-            that._text.focus(function() { that._focusin(); });
+            that._text.click(proxy(that._click, that));
 
             min = parse(element.attr("min"));
             max = parse(element.attr("max"));
@@ -74,6 +70,7 @@
 
             that._blur();
         },
+
         options: {
             value: NULL,
             min: NULL,
@@ -86,7 +83,7 @@
             downArrowText: "Decrease value"
         },
 
-        enable: function(enable) {
+        enable: function(enable) {//update because of the new rendering
             var that = this,
                 element = that.element;
                 wrapper = that.wrapper,
@@ -195,6 +192,31 @@
 
             that._toggleText(true);
             that._change(that.element.val());
+        },
+
+        _click: function(e) {
+            var that = this,
+            input = e.target,
+            idx = caret(input),
+            value = input.value.substring(0, idx),
+            format = that._format(that.options.format),
+            group = format[","],
+            groupRegExp = new RegExp("\\" + group, "g"),
+            extractRegExp = new RegExp("([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\d+)?"),
+            result = extractRegExp.exec(value),
+            caretPosition = 0;
+
+            if (result) {
+                caretPosition = result[0].replace(groupRegExp, "").length;
+
+                if (value.indexOf("(") != -1 && that._value < 0) {
+                    caretPosition++;
+                }
+            }
+
+            that._focusin();
+
+            caret(that.element[0], caretPosition);
         },
 
         _change: function(value) {
@@ -354,7 +376,10 @@
         _toggleText: function(toggle) {
             var that = this;
 
-            that._text.toggle(toggle);
+            toggle = !!toggle;
+
+            that._text.toggle(toggle); //calling enable() hides the _text ...
+
             that.element.toggle(!toggle);
         },
 
@@ -378,12 +403,25 @@
         return '<span class="k-link k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span>'
     }
 
-    function caret(element) {
-        var position = -1;
+    function caret(element, position) {
+        var range,
+            isPosition = position !== undefined;
+
         if (document.selection) {
-            position = element.value.indexOf(element.document.selection.createRange().text);
+            var range = element.document.selection.createRange();
+            if (isPosition) {
+                range.move("character", pos);
+                range.select();
+            } else {
+                position = element.value.indexOf(range.text);
+            }
         } else if (element.selectionStart !== undefined) {
-            position = element.selectionStart;
+            if (isPosition) {
+                element.focus();
+                element.setSelectionRange(position, position);
+            } else {
+                position = element.selectionStart;
+            }
         }
 
         return position;
