@@ -48,7 +48,7 @@
                 focusout: proxy(that._focusout, that),
             });
 
-            that._text.click(function() { that.wrapper.focusin(); });
+            that._text.focus(function() { that._focusin(); });
 
             min = parse(element.attr("min"));
             max = parse(element.attr("max"));
@@ -336,7 +336,7 @@
                 value = parse(element.val()) || 0;
 
             if (document.activeElement != element[0]) {
-                that.wrapper.focusin();
+                that._focusin();
             }
 
             value += that.options.step * parse(step);
@@ -388,7 +388,6 @@
 
         return position;
     }
-
 
     ui.plugin(TextBox);
 })(jQuery);
