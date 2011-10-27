@@ -13,7 +13,7 @@
     $(document.documentElement).addClass("k-" + (!os || (os && os.ios) ? "ios" : os.name));
 
     if (touch)
-        $(document.documentElement).bind("touchstart", function () { return false; });
+        $("header, footer, .k-header, .k-footer").live("touchstart", function () { return false; });
 
     if (pointers) {
         each(["touchstart", "touchend", "touchmove", "touchcancel", "gesturestart", "gestureend"], function(m, value) {

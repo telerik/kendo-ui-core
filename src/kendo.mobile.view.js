@@ -23,11 +23,13 @@
             if (!that.content.length)
                 that.content = $("<div class='k-content'/>").appendTo(element);
 
-            that.container = that.content;
+            that.container = that.content.children(".k-contentIn");
+            if (!that.container.length)
+                that.container = $("<div class='k-contentIn'/>").appendTo(that.content);
 
             if (options.scroller) {
-                that.scroller = that.content.kendoScroller({ showArrows: false }).data("kendoScroller");
-                that.container = that.scroller.scrollElement || that.content;
+                that.scroller = that.container.kendoScroller().data("kendoScroller");
+                that.container = that.scroller.scrollElement || that.container;
             }
 
             if (options.formInit) {
