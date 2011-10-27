@@ -662,6 +662,70 @@
 
                 ok(form.attr("novalidate"), "novalidate");
             });
+
+            test("validate skips button elements", function() {
+                container.append("<button type=button /><input type=submit /><input type=submit />");
+                var calledCount = 0,
+                    validator = setup(container, {
+                        rules: {
+                            custom: function() {
+                                calledCount++;
+                                return true;
+                            }
+                        }
+                    });
+
+                validator.validate();
+                equal(calledCount, 0);
+            });
+
+            test("validate skips input[type=submit] elements", function() {
+                container.append("<input type=submit />");
+                var calledCount = 0,
+                    validator = setup(container, {
+                        rules: {
+                            custom: function() {
+                                calledCount++;
+                                return true;
+                            }
+                        }
+                    });
+
+                validator.validate();
+                equal(calledCount, 0);
+            });
+
+            test("validate skips input[type=button] elements", function() {
+                container.append("<input type=button />");
+                var calledCount = 0,
+                    validator = setup(container, {
+                        rules: {
+                            custom: function() {
+                                calledCount++;
+                                return true;
+                            }
+                        }
+                    });
+
+                validator.validate();
+                equal(calledCount, 0);
+            });
+
+            test("validate skips input[type=reset] elements", function() {
+                container.append("<input type=reset />");
+                var calledCount = 0,
+                    validator = setup(container, {
+                        rules: {
+                            custom: function() {
+                                calledCount++;
+                                return true;
+                            }
+                        }
+                    });
+
+                validator.validate();
+                equal(calledCount, 0);
+            });
         </script>
     </body>
 </html>
