@@ -2,17 +2,53 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
+        extend = $.extend,
+        isFunction = $.isFunction,
+        inArray = $.inArray,
         Binder = kendo.data.ModelViewBinder;
+
+    var specialRules = ["url", "email", "number", "date", "boolean"];
+
+    function createInput(options) {
+        var field = options.model.fields[options.field],
+            type = field.type,
+            validation = field.validation,
+            ruleName,
+            rule,
+            attr = {
+                name: options.field,
+                type: type == "boolean" ? "checkbox" : "text"
+            };
+
+        for (ruleName in validation) {
+            rule = validation[ruleName];
+
+            if (inArray(ruleName, specialRules) >= 0) {
+                attr["data-kendo-type"] = ruleName;
+            } else if (!isFunction(rule)) {
+                attr[ruleName] = rule;
+            }
+        }
+
+        if (inArray(type, specialRules) >= 0) {
+            attr["data-kendo-type"] = type;
+        }
+
+        return $("<input />").attr(attr);
+    }
 
     var editors = {
         "number": function(container, options) {
-            $('<input name="' + options.field + '" type="number"/>').appendTo(container);
+            createInput(options).appendTo(container);
         },
         "date": function(container, options) {
-            $('<input name="' + options.field + '" type="date"/>').appendTo(container).kendoDatePicker();
+            createInput(options).appendTo(container).kendoDatePicker();
         },
         "string": function(container, options) {
-            $('<input type="text" name="' + options.field + '"/>').appendTo(container);
+            createInput(options).appendTo(container);
+        },
+        "boolean": function(container, options) {
+            createInput(options).appendTo(container);
         }
     };
 
@@ -38,7 +74,11 @@
                 fieldType = modelField && modelField.type ? modelField.type : "string",
                 editor = isObject && field.editor ? field.editor : editors[fieldType];
 
-            return editor(that.element, $.extend(true, {}, isObject ? field : { field: fieldName }, { model: model }));
+            editor = editor ? editor : editors["string"];
+
+            if (modelField) {
+                editor(that.element, extend(true, {}, isObject ? field : { field: fieldName }, { model: model }));
+            }
         },
 
         refresh: function() {
