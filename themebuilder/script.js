@@ -3,10 +3,14 @@
     var doc = document,
         UNDEFINED = "undefined",
         head = doc.getElementsByTagName("head")[0],
+        applicationRoot = (function() {
+            var scripts = document.getElementsByTagName("script"),
+                path = scripts[scripts.length-1].src.split('?')[0];
 
-        // caution: the variables below are changed during builds.
-        //          update build/themebuilder.js if you change their names!
-        applicationRoot = "http://localhost/kendo/themebuilder/",
+            return path.split("/").slice(0,-1).join("/") + "/";
+        })(),
+
+        // caution: the variable below is changed during builds. update build/themebuilder.js if you change its name!
         requiredFiles = ["less.js", "themebuilder.js", "colorengine.js", "template.js"];
 
     // do not initialize twice, just reopen window

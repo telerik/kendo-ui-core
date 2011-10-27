@@ -3,8 +3,7 @@ var kendoBuild = require("./kendo-build"),
     less = require("./less-js/lib/less"),
     path = require("path"),
     SOURCE_PATH = "themebuilder",
-    OUTPUT_PATH = path.join(SOURCE_PATH, "live"),
-    DEPLOYMENT_URL = "http://localhost/kendo/themebuilder/live/";
+    OUTPUT_PATH = path.join(SOURCE_PATH, "live");
 
 // themebuilder-specific
 function wrap(source) {
@@ -48,7 +47,6 @@ function createBootstrapper() {
 
     // set the required resources to single concatenated script
     source = replaceVariable(source, "requiredFiles", '["themebuilder-all.js"]');
-    source = replaceVariable(source, "applicationRoot", '"' + DEPLOYMENT_URL + '"');
 
     fs.writeFileSync(
         path.join(OUTPUT_PATH, "script.js"),
