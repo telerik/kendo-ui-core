@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Editable Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js" ></script>
+       <script src="../../src/kendo.validatable.js" ></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Editable Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Editable = kendo.ui.Editable,
+                Model = kendo.data.Model,
+                div;
+
+            module("kendo.ui.Editable", {
+                setup: function() {
+                    div = $("<div />");
+                },
+                teardown: function() {
+                }
+            });
+
+            test("setting required validation rule renderes required attr", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    required: true
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model });
+
+                ok(div.find(":input[required]").length);
+            });
+
+            test("setting custom validation rule does not renders attr", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    bar: function() {}
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model });
+
+                ok(!div.find(":input").data("kendo-type"));
+            });
+
+            test("setting multiple validation rules renders attr", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    required: true,
+                                    pattern: "foo"
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                ok(input.attr("required"));
+                ok(input.attr("pattern"));
+            });
+
+            test("setting url rule renderes data-kendo-type=url attr", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    url: true
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                ok(!input.attr("url"));
+                equal(input.data("kendo-type"), "url");
+            });
+
+            test("setting email rule renderes data-kendo-type=email attr", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    email: true
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                ok(!input.attr("email"));
+                equal(input.data("kendo-type"), "email");
+            });
+
+            test("for field of type number data-kendo-type=number attr is rendered", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "number"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                equal(input.data("kendo-type"), "number");
+            });
+
+            test("for field of type date data-kendo-type=date attr is rendered", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "date"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                equal(input.data("kendo-type"), "date");
+            });
+
+            test("for field of type boolean data-kendo-type=boolean attr is rendered", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "boolean"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                equal(input.data("kendo-type"), "boolean");
+            });
+
+            test("setting custom validation rule does not render attr", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    bar: function() { return true; }
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                ok(!input.data("kendo-type"));
+                ok(!input.attr("bar"));
+            });
+
+        </script>
+    </body>
+</html>

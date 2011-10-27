@@ -127,6 +127,42 @@
                 id = MyModel.id(data);
                 equal(id, 1);
             });
+
+            test("define assigns field validation rules", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            validation: {
+                                required: true
+                           }
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok($.isPlainObject(model.fields.foo.validation));
+                ok(model.fields.foo.validation.required);
+            });
+
+            test("define accepts custom validation rules", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            validation: {
+                                bar: $.noop
+                           }
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.fields.foo.validation.bar);
+                ok($.isFunction(model.fields.foo.validation.bar));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -14,7 +14,6 @@
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.validate.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
@@ -59,12 +58,11 @@
                 });
                 $("#relatedGrid").kendoGrid({
                     dataSource: dataSource,
-                    pageable: true,
-                    columns: ["bar", "foo"]
+                    pageable: true
                 });
 
             });
 
         </script>
     </body>
-</html>
+
