@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
+    
+    <link rel="apple-touch-icon" href="mobile/tokendo/images/kendo.png" />
+    <link rel="apple-touch-startup-image" href="mobile/tokendo/images/kendo_big.png" />
+    <title>Mobile Test App</title>
+
+    <link rel="stylesheet/less" type="text/css" href="mobile/tokendo/layout.less">
+    <link rel="stylesheet" href="mobile/tokendo/scroll-container.css" />
+
+    <script src="mobile/examples/less.js"></script>
+    <script src="../src/jquery.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.scroller.js"></script>
+    <script src="../src/kendo.mobile.core.js"></script>
+    <script src="../src/kendo.mobile.button.js"></script>
+    <script src="../src/kendo.mobile.switch.js"></script>
+    <script src="../src/kendo.mobile.radiogroup.js"></script>
+    <script src="../src/kendo.mobile.application.js"></script>
+    <script src="../src/kendo.mobile.view.js"></script>
+
+    <style type="text/css">
+        .k-content
+        {
+            -webkit-user-select: none;
+            background: silver;
+            display: block;
+        }
+        .k-contentIn
+        {
+            background: transparent;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+        }
+        .k-list
+        {
+            -webkit-transform: translateZ(0);
+        }
+        .k-content .k-list .k-item
+        {
+            vertical-align: middle;
+            height: 10em;
+            line-height: 10em;
+            padding-left: 12em;
+            background: transparent url("Icons/orm-comparison.png") no-repeat -150px -10px;
+        }
+        .k-list .k-item:nth-child(2n)
+        {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="k-slot">
+        <div class="k-showcase">
+            <div class="k-view">
+                <div class="k-header">
+                    <div class="k-toolbar">
+                        <button style="float: right"><span>About</span></button>
+                    </div>
+                </div>
+
+                <div class="k-content">
+                    <div class="k-contentIn">
+                        <ul class="k-list">
+                            <li class="k-item">Test 1<button>Testings</button></li>
+                            <li class="k-item">Test 2</li>
+                            <li class="k-item">Test 3<button>Mestings</button></li>
+                            <li class="k-item">Test 4</li>
+                            <li class="k-item">Test 5</li>
+                            <li class="k-item">Test 6</li>
+                            <li class="k-item">Test 7</li>
+                            <li class="k-item">Test 8</li>
+                            <li class="k-item">Test 9</li>
+                            <li class="k-item">Test 0</li>
+                            <li class="k-item">Test -</li>
+                            <li class="k-item">Test 11</li>
+                            <li class="k-item">Test 12</li>
+                            <li class="k-item">Test 13</li>
+                            <li class="k-item">Test 14</li>
+                            <li class="k-item">Test 15</li>
+                            <li class="k-item">Test 16</li>
+                            <li class="k-item">Test 17</li>
+                            <li class="k-item">Test 18</li>
+                            <li class="k-item">Test 19</li>
+                            <li class="k-item">Test 20</li>
+                            <li class="k-item">Test 21</li>
+                            <li class="k-item">Test 22</li>
+                            <li class="k-item">Test 23</li>
+                            <li class="k-item">Test 24</li>
+                            <li class="k-item">Test 25</li>
+                            <li class="k-item">Test 26</li>
+                            <li class="k-item">Test 27</li>
+                            <li class="k-item">Test 28</li>
+                            <li class="k-item">Test 29</li>
+                            <li class="k-item">Test 30</li>
+                            <li class="k-item">Test 31</li>
+                            <li class="k-item">Test 32</li>
+                            <li class="k-item">Test 33</li>
+                            <li class="k-item">Test 34</li>
+                            <li class="k-item">Test 35</li>
+                            <li class="k-item">Test 36</li>
+                            <li class="k-item">Test 37</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="k-tabStrip">
+        <button class="k-state-active">
+            <span class="k-icon"></span><span>Featured</span>
+        </button>
+        <button>
+            <span class="k-icon"></span><span>Genius</span><span class="k-message">3</span>
+        </button>
+        <button>
+            <span class="k-icon"></span><span>Top Charts</span>
+        </button>
+        <button>
+            <span class="k-icon"></span><span>Categories</span>
+        </button>
+    </div>
+    <script>
+        function onClick() {
+            console.log("clickings");
+        }
+
+        $(document).ready(function () {
+            var button = $(".k-list button").kendoMobileButton({ click: onClick });
+        });
+    </script>
+</body>
+</html>
+
+
+
