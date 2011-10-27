@@ -3,6 +3,10 @@ var fs = require("fs"),
     uglify = require("./lib/process");
 
 function rmdirSyncRecursive(path) {
+    if (!existsSync(path)) {
+        return;
+    }
+
     var files = fs.readdirSync(path)
         .map(function(fileName) { return path + "/" + fileName });
 
@@ -17,6 +21,19 @@ function rmdirSyncRecursive(path) {
     }
 
     return fs.rmdirSync(path);
+}
+
+function existsSync(path) {
+    try {
+        fs.lstatSync(path);
+        return true;
+    } catch(e) {
+        return false;
+    }
+}
+
+function copyFileSync(source, destination) {
+    fs.writeFileSync(destination, fs.readFileSync(source));
 }
 
 function copyDirSyncRecursive(sourceDir, newDirLocation, skipClean, filter) {
