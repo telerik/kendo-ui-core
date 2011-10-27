@@ -217,7 +217,7 @@
             });
 
             test("existing error message element container is reused", function() {
-                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-for="foo"/>')),
+                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"/>')),
                 validator = setup(container);
                 validator.validate();
 
@@ -228,7 +228,7 @@
             });
 
             test("existing error message element container is reused on multiple validate calls", function() {
-                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-for="foo"/>')),
+                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"/>')),
                 validator = setup(container);
                 validator.validate();
                 validator.validate();
@@ -292,6 +292,13 @@
                 ok(validator.validate());
             });
 
+            test("validate returns false if input with type=text and data-kendo-type=number value does not match min attribute", function() {
+                var input = $('<input type="text" value="1" min="10" data-kendo-type="number" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
             test("validate returns false if input with type=number value does not match min attribute", function() {
                 var input = $('<input type="number" value="1" min="10" />'),
                     validator = setup(input);
@@ -301,6 +308,13 @@
 
             test("validate returns true if input with type=number value does match min attribute", function() {
                 var input = $('<input type="number" value="11" min="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns true if input with type=text and data-kendo-type=number value does match min attribute", function() {
+                var input = $('<input type="text" value="11" min="10" data-kendo-type="number" />'),
                     validator = setup(input);
 
                 ok(validator.validate());
@@ -318,6 +332,13 @@
                     validator = setup(input);
 
                 ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=text and data-kendo-type=number value does not match max attribute", function() {
+                var input = $('<input type="text" value="11" max="10" data-kendo-type="number" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
             });
 
             test("validate returns false if input with type=number value does not match max attribute", function() {
@@ -339,6 +360,13 @@
                     validator = setup(input);
 
                 ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=text and data-kendo-type=number value does not match step attribute and have min set", function() {
+                var input = $('<input type="text" value="6" max="10" step="3" min="5" data-kendo-type="number" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
             });
 
             test("validate returns false if input with type=number value does not match step attribute and have min set", function() {
@@ -383,6 +411,13 @@
                 ok(validator.validate());
             });
 
+            test("validate returns false if input with type=text and data-kendo-type=email value is not valid email", function() {
+                var input = $('<input type="text" value="aaaaa" data-kendo-type="email" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
             test("validate returns false if input with type=email value is not valid email", function() {
                 var input = $('<input type="email" value="aaaaa" />'),
                     validator = setup(input);
@@ -409,6 +444,13 @@
                     validator = setup(input);
 
                 ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=text and data-kendo-type=url value does not match", function() {
+                var input = $('<input type="text" value="test" data-kendo-type="url" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
             });
 
             test("validate returns false if input with type=url value does not match", function() {
@@ -619,6 +661,70 @@
                     validator = setup(form);
 
                 ok(form.attr("novalidate"), "novalidate");
+            });
+
+            test("validate skips button elements", function() {
+                container.append("<button type=button /><input type=submit /><input type=submit />");
+                var calledCount = 0,
+                    validator = setup(container, {
+                        rules: {
+                            custom: function() {
+                                calledCount++;
+                                return true;
+                            }
+                        }
+                    });
+
+                validator.validate();
+                equal(calledCount, 0);
+            });
+
+            test("validate skips input[type=submit] elements", function() {
+                container.append("<input type=submit />");
+                var calledCount = 0,
+                    validator = setup(container, {
+                        rules: {
+                            custom: function() {
+                                calledCount++;
+                                return true;
+                            }
+                        }
+                    });
+
+                validator.validate();
+                equal(calledCount, 0);
+            });
+
+            test("validate skips input[type=button] elements", function() {
+                container.append("<input type=button />");
+                var calledCount = 0,
+                    validator = setup(container, {
+                        rules: {
+                            custom: function() {
+                                calledCount++;
+                                return true;
+                            }
+                        }
+                    });
+
+                validator.validate();
+                equal(calledCount, 0);
+            });
+
+            test("validate skips input[type=reset] elements", function() {
+                container.append("<input type=reset />");
+                var calledCount = 0,
+                    validator = setup(container, {
+                        rules: {
+                            custom: function() {
+                                calledCount++;
+                                return true;
+                            }
+                        }
+                    });
+
+                validator.validate();
+                equal(calledCount, 0);
             });
         </script>
     </body>
