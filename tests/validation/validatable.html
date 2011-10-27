@@ -726,6 +726,34 @@
                 validator.validate();
                 equal(calledCount, 0);
             });
+
+            test("validate returns false if input type=date value is not valid date", function() {
+                var input = $('<input type="date" value="foo"/>'),
+                    validator = setup(input);
+
+                ok(!validator.validate())
+            });
+
+            test("validate returns true if input type=date value is valid date", function() {
+                var input = $('<input type="date" value="1/1/2001"/>'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input type=text and data-kendo-type=date value is not valid date", function() {
+                var input = $('<input type="text" data-kendo-type="date" value="foo"/>'),
+                    validator = setup(input);
+
+                ok(!validator.validate())
+            });
+
+            test("validate returns true if input type=text and data-kendo-type=date value is valid date", function() {
+                var input = $('<input type="text" data-kendo-type="date" value="1/1/2001"/>'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
         </script>
     </body>
 </html>
