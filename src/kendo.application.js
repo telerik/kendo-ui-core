@@ -5,7 +5,7 @@
         div = $("<div/>"),
         roleSelector = kendo.roleSelector,
         ANIMATION_CLASS = "k-animation-container",
-        animationContainer = kendo.template('<div class="k-mobile-${cssClass} ' + ANIMATION_CLASS + '">#= typeof inner === "undefined" ? "" : inner #</div>');
+        animationContainer = kendo.template('<div class="k-mobile-${cssClass}-container ' + ANIMATION_CLASS + '"><div class="k-animation-content-container">#= typeof inner === "undefined" ? "" : inner #</div></div>');
 
     function extractView(html) {
         if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
@@ -25,12 +25,12 @@
 
             element.wrapInner(animationContainer({
                 cssClass: "content",
-                inner: element.has(contentSelector).length ? "" : '<div ' + kendo.dataRole + '="content"></div>'
+                inner: element.has(contentSelector).length ? "" : "<div " + kendo.dataRole + '="content"></div>'
             }));
 
-            that.content = element.find(roleSelector("content"));
-            that.header = element.find(roleSelector("header")).detach();
-            that.footer = element.find(roleSelector("footer")).detach();
+            that.content = element.find(roleSelector("content")).addClass("k-mobile-content");
+            that.header = element.find(roleSelector("header")).detach().addClass("k-mobile-header");
+            that.footer = element.find(roleSelector("footer")).detach().addClass("k-mobile-footer");
 
             element.addClass("k-mobile-view").prepend(that.header).append(that.footer);
 
@@ -48,7 +48,7 @@
                 view.content.kendoAnimateTo(that.content, { effects: "slide", reverse: back });
                 view.footer.kendoAnimateTo(that.footer, { effects: "fade", reverse: back });
             } else {
-                view.element.kendoAnimateTo(that.element, { effects: animationType, reverse: back });
+                view.element.kendoAnimateTo(that.element, { effects: animationType, reverse: back, duration: 10000 });
             }
 
             if (!back) {
