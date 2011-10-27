@@ -97,6 +97,7 @@
                  * @event
                  * @param {Event} e
                  * @param {jQueryObject} e.draggable Reference to the draggable that is dropped over the drop target.
+                 * @param {jQueryObject} e.draggable.currentTarget The element that the drag and drop operation started from.
                  */
                 DROP
             ], that.options);
@@ -172,7 +173,7 @@
          * @option {Integer} [distance] <5> The required distance that the mouse should travel in order to initiate a drag.
          * @option {Selector} [filter] Selects child elements that are draggable if a widget is attached to a container.
          * @option {String} [group] <"default"> Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.
-         * @option {Function|jQuery} [hint] Provides a way for customization of the drag indicator.
+         * @option {Function|jQueryObject} [hint] Provides a way for customization of the drag indicator.
          * _example
          *  //hint as a function
          *  $("#draggable").kendoDraggable({
@@ -183,7 +184,7 @@
          *
          * //hint as jQuery object
          *  $("#draggable").kendoDraggable({
-         *      hint: return $("#draggableHint");
+         *      hint: $("#draggableHint");
          *  });
          */
         init: function (element, options) {
