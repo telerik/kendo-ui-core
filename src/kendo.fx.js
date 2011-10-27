@@ -159,6 +159,8 @@
                         styles[value] = style[value.replace(/\-(\w)/g, function (strMatch, g1) { return g1.toUpperCase() })];
                     });
                 }
+        } else {
+            styles = document.defaultView.getComputedStyle(element, "");
         }
 
         return styles;
@@ -335,14 +337,16 @@
 
     function animationProperty(element, property) {
         if (transitions) {
-            var transform = element.css(TRANSFORM),
-                match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
+            var transform = element.css(TRANSFORM);
+            if (transform == "none") return property == "scale" ? 1 : 0;
+
+            var match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
                 computed = 0;
 
             if (match)
                 computed = parseInteger(match[1]);
             else {
-                match = transform.match(matrix3dRegExp) || [0, 0, 0];
+                match = transform.match(matrix3dRegExp) || [0, 0, 0, 0];
 
                 if (translateXRegExp.test(property)) {
                     computed = parseInteger(match[2]);
@@ -654,14 +658,15 @@
                     divisor = options.divisor || 1;
 
                 if (!reverse) {
-                    offset = (direction.modifier * 100 / divisor);
-                    !element.data(ORIGIN) && element.data(ORIGIN, animationProperty(element, direction.transition));
+                    var origin = element.data(ORIGIN);
+                    offset = (direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()) / divisor);
+                    !origin && origin !== 0  && element.data(ORIGIN, animationProperty(element, direction.transition));
                 }
 
                 if (transitions && options.transition !== false) {
-                    extender[direction.transition] = reverse ? (element.data(ORIGIN) || 0) + PX : offset + "%";
+                    extender[direction.transition] = reverse ? (element.data(ORIGIN) || 0) : offset + PX;
                 } else {
-                    extender[direction.property] = reverse ? (element.data(ORIGIN) || 0) + PX : offset + "%";
+                    extender[direction.property] = reverse ? (element.data(ORIGIN) || 0) + PX : offset + PX;
                 }
 
                 return extend(extender, options.properties);

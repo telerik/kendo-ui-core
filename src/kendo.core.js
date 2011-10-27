@@ -1271,6 +1271,7 @@
          * @property {Boolean}
          */
         support.hasHW3D = "WebKitCSSMatrix" in window && "m11" in new WebKitCSSMatrix();
+        support.hasNativeScrolling = typeof document.documentElement.style.webkitOverflowScrolling == "string";
 
         each([ "Moz", "webkit", "O", "ms" ], function () {
             var prefix = this.toString();
