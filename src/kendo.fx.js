@@ -643,7 +643,7 @@
                 if (transitions && options.transition !== false) {
                     extender[direction.transition] = reverse ? (element.data(ORIGIN) || 0) : offset + PX;
                 } else {
-                    extender[direction.property] = reverse ? (element.data(ORIGIN) || 0) + PX : offset + PX;
+                    extender[direction.property] = reverse ? (element.data(ORIGIN) || 0) : offset + PX;
                 }
 
                 return extend(extender, options.properties);
