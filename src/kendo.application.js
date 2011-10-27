@@ -48,7 +48,7 @@
                 view.content.kendoAnimateTo(that.content, { effects: "slide", reverse: back });
                 view.footer.kendoAnimateTo(that.footer, { effects: "fade", reverse: back });
             } else {
-                view.element.kendoAnimateTo(that.element, { effects: animationType, reverse: back, duration: 10000 });
+                view.element.kendoAnimateTo(that.element, { effects: animationType, reverse: back});
             }
 
             if (!back) {
