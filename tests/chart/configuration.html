@@ -505,6 +505,20 @@
                     equal(chart.options.series[1].color, "#cf0");
                 });
 
+                test("seriesDefaults overrides theme series settings", function() {
+                    createChart({
+                        theme: "black",
+                        seriesDefaults: {
+                            overlay: {
+                                gradient: "foo"
+                            }
+                        },
+                        series: [{}, {}]
+                    });
+
+                    equal(chart.options.series[0].overlay.gradient, "foo");
+                });
+
                 // ------------------------------------------------------------
                 module("Tooltip", {
                     teardown: destroyChart
