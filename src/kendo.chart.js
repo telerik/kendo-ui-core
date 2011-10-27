@@ -101,16 +101,16 @@
 
             options = deepExtend({}, chart.options, options);
             applyAxisDefaults(options);
+            applySeriesDefaults(options);
 
             theme = options.theme;
-
             chart.options = deepExtend(
                 {},
                 theme ? Chart.themes[theme] || Chart.themes[theme.toLowerCase()] : {},
                 options
             );
 
-            applySeriesDefaults(chart.options);
+            applySeriesColors(chart.options);
 
             chart.bind([
                 DATABOUND,
@@ -4690,7 +4690,6 @@
             i,
             seriesLength = series.length,
             seriesType,
-            colors = options.seriesColors || [],
             seriesDefaults = options.seriesDefaults,
             baseSeriesDefaults = deepExtend({}, options.seriesDefaults);
 
@@ -4703,10 +4702,22 @@
             seriesType = series[i].type || options.seriesDefaults.type;
 
             series[i] = deepExtend(
-                { color: colors[i % colors.length] },
+                {},
                 baseSeriesDefaults,
                 seriesDefaults[seriesType],
                 series[i]);
+        }
+    }
+
+    function applySeriesColors(options) {
+        var series = options.series,
+            i,
+            seriesLength = series.length,
+            currentSeries,
+            colors = options.seriesColors || [];
+
+        for (i = 0; i < seriesLength; i++) {
+            series[i].color = series[i].color || colors[i % colors.length];
         }
     }
 
