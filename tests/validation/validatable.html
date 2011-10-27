@@ -217,7 +217,7 @@
             });
 
             test("existing error message element container is reused", function() {
-                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-for="foo"/>')),
+                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"/>')),
                 validator = setup(container);
                 validator.validate();
 
@@ -228,7 +228,7 @@
             });
 
             test("existing error message element container is reused on multiple validate calls", function() {
-                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-for="foo"/>')),
+                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"/>')),
                 validator = setup(container);
                 validator.validate();
                 validator.validate();
