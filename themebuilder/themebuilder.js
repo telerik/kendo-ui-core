@@ -1,6 +1,7 @@
 ;(function($, kendo) {
 
     var proxy = $.proxy,
+        currentCss,
         CHANGE = "change",
         Widget = kendo.ui.Widget,
         ColorPicker = kendo.ui.ComboBox.extend({
@@ -176,6 +177,24 @@
                     var panelbar = $("#stylable-elements");
                     panelbar.data("kendoPanelBar").collapse($(".k-item", panelbar));
                 });
+
+                $(".k-action-download").click(function(e) {
+                    e.preventDefault();
+
+                    var downloadWindow = $("<div><textarea>foo</textarea></div>")
+                        .kendoWindow({
+                            modal: true,
+                            width: 600,
+                            height: 350,
+                            scrollable: false
+                        })
+                        .find("textarea").css({
+                            width: "100%",
+                            height: "100%"
+                        }).val(currentCss).end();
+
+                    downloadWindow.data("kendoWindow").center().open();
+                });
             },
             open: function() {
                 this.content.data("kendoWindow").open();
@@ -198,7 +217,9 @@
                             return console.error(err);
                         }
 
-                        that.updateStyleSheet(tree.toCSS());
+                        currentCss = tree.toCSS();
+
+                        that.updateStyleSheet(currentCss);
                     }
                 );
             },
