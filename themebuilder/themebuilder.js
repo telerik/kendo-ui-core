@@ -1,7 +1,6 @@
 ;(function($, kendo) {
 
     var proxy = $.proxy,
-        currentCss,
         CHANGE = "change",
         Widget = kendo.ui.Widget,
         ColorPicker = kendo.ui.ComboBox.extend({
@@ -181,19 +180,29 @@
                 $(".k-action-download").click(function(e) {
                     e.preventDefault();
 
-                    var downloadWindow = $("<div><textarea>foo</textarea></div>")
+                    var downloadWindow = $("<div><textarea></textarea></div>")
                         .kendoWindow({
                             modal: true,
                             width: 600,
                             height: 350,
                             scrollable: false
-                        })
-                        .find("textarea").css({
-                            width: "100%",
-                            height: "100%"
-                        }).val(currentCss).end();
+                        });
+
+                    downloadWindow.data("kendoWindow").wrapper
+                        .attr("id", "download-interface");
 
                     downloadWindow.data("kendoWindow").center().open();
+
+                    (new less.Parser()).parse(
+                        that.constants.serialize() + that.templateInfo.template,
+                        function (err, tree) {
+                            if (err && console) {
+                                return console.error(err);
+                            }
+
+                            downloadWindow.find("textarea").val(tree.toCSS());
+                        }
+                    );
                 });
             },
             open: function() {
@@ -217,9 +226,7 @@
                             return console.error(err);
                         }
 
-                        currentCss = tree.toCSS();
-
-                        that.updateStyleSheet(currentCss);
+                        that.updateStyleSheet(tree.toCSS());
                     }
                 );
             },

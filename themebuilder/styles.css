@@ -37,6 +37,14 @@
     border-radius: 5px;
 }
 
+#download-interface textarea {
+    border: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
 .k-color-preview
 {
     margin-right: .2em;
