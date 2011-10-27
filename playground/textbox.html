@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="contenk-type" content="text/html; charset=utf-8">
+        <title>TextBox</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.textbox.js" type="text/javascript" charset="utf-8"></script>
+
+        <link href="../styles/kendo.common.css" rel="stylesheet" />
+        <link href="../styles/kendo.blueopal.css" rel="stylesheet" />
+    </head>
+    <body>
+        <input id="textbox" style="width: 150px"/>
+
+        <script>
+            $(document).ready(function() {
+                $("#textbox").kendoTextBox({format: "c"});
+            });
+        </script>
+    </body>
+</html>

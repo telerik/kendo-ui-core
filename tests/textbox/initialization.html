@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TextBox Initialization</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.textbox.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">TextBox Initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var TextBox = kendo.ui.TextBox,
+                input;
+
+            module("kendo.ui.TextBox initialization", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            test("Should render wrapper", function() {
+                var textbox = new TextBox(input),
+                    wrapper = textbox.wrapper;
+
+                ok(wrapper);
+                ok(wrapper.hasClass("k-widget k-textbox"));
+            });
+
+            test("Should render up and down arrows", function() {
+                var textbox = new TextBox(input),
+                    upArrow = textbox._upArrow,
+                    downArrow = textbox._downArrow;
+
+                ok(upArrow);
+                ok(downArrow);
+                ok(upArrow.hasClass("k-link k-icon k-arrow-up"));
+                ok(downArrow.hasClass("k-link k-icon k-arrow-down"));
+                equal(upArrow.attr("title"), textbox.options.upArrowText);
+                equal(downArrow.attr("title"), textbox.options.downArrowText);
+                equal(upArrow.html(), textbox.options.upArrowText);
+                equal(downArrow.html(), textbox.options.downArrowText);
+                ok(upArrow.data("events").mousedown);
+                ok(downArrow.data("events").mousedown);
+            });
+
+            test("Should render INPUT containing the formatted value", function() {
+                input.addClass("custom").css("color", "red");
+
+                var textbox = new TextBox(input),
+                    text = textbox._text;
+
+                ok(text.is(":visible"));
+                ok(!input.is(":visible"));
+                ok(text[0].nodeName, "INPUT");
+                ok(text.hasClass("k-input"));
+                ok(text.hasClass("custom"));
+                ok(text.hasClass("k-formatted-value"));
+                ok(text[0].style.cssText.indexOf("color: red") != -1);
+                equal(text.next()[0].nodeName, "INPUT");
+            });
+
+            test("Should get value from input", function() {
+                var textbox = new TextBox(input.val("12"));
+
+                equal(textbox.value(), 12);
+                equal(textbox.element.val(), "12");
+                equal(textbox._text.val(), "12.00");
+            });
+
+            test("Bind change events", function() {
+                var textbox = new TextBox(input.val("12"), {
+                    change: function() {}
+                });
+
+                equal(textbox._events["change"][0], textbox.options.change);
+            });
+
+            test("Get min/max value from the input", function() {
+               var textbox = new TextBox($("<input type='number' min='1' max='12' />"));
+
+               equal(textbox.options.min, 1);
+               equal(textbox.options.max, 12);
+            });
+
+            test("Get step value from the input", function() {
+                var textbox = new TextBox($("<input type='number' step='10' />"));
+
+               equal(textbox.options.step, 10);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

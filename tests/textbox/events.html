@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TextBox Events</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.textbox.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">TextBox Events</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var TextBox = kendo.ui.TextBox,
+                input;
+
+            QUnit.config.testTimeout = 500;
+
+            module("kendo.ui.TextBox Events", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            test("focus should hide the _text and show the input value", function() {
+                var textbox = new TextBox(input);
+
+                textbox._text.click();
+
+                ok(!textbox._text.is(":visible"));
+            });
+
+            asyncTest("blur should show the _text", function() {
+                var textbox = new TextBox(input);
+
+                textbox._text.click();
+                textbox.element.blur();
+
+                setTimeout(function() {
+                    ok(textbox._text.is(":visible"));
+                    start();
+                }, 200);
+            });
+
+            test("focus div should focus element", function() {
+                var textbox = new TextBox(input);
+
+                textbox._text.click();
+
+                equal(input[0], document.activeElement);
+            });
+
+            asyncTest("_change should call value() method", function() {
+                var textbox = new TextBox(input, {
+                    change: function() {
+                        ok(true);
+                        equal(textbox.value(), 22);
+                        start();
+                    }
+                });
+
+                textbox._change("22");
+            });
+
+            test("click arrow should focus input", function() {
+                var textbox = new TextBox(input);
+
+                textbox._upArrow.mousedown();
+
+                equal(input[0], document.activeElement);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
