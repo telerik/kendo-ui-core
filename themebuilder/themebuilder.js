@@ -3,12 +3,20 @@
     var proxy = $.proxy,
         CHANGE = "change",
         KENDOWINDOW = "kendoWindow"
-        Widget = kendo.ui.Widget,
-        ColorPicker = kendo.ui.ComboBox.extend({
+        ui = kendo.ui,
+        Widget = ui.Widget,
+        ShadowInput = Widget.extend({
             init: function(element, options) {
                 var that = this;
 
-                kendo.ui.ComboBox.fn.init.call(that, element, options);
+                ui.Widget.fn.init.call(that, element, options);
+            }
+        }),
+        ColorPicker = ui.ComboBox.extend({
+            init: function(element, options) {
+                var that = this;
+
+                ui.ComboBox.fn.init.call(that, element, options);
 
                 that._updateColorPreview();
 
@@ -142,10 +150,10 @@
                         maxWidth: 300,
                         minHeight: 160,
                         maxHeight: $(window).height() - 100,
-                        close: this.removeUpdateHeightHandler
+                        close: that.removeUpdateHeightHandler
                     });
 
-                $(window).bind("resize.kendoThemeBuilder", $.proxy(this.updateMaxHeight, this));
+                $(window).bind("resize.kendoThemeBuilder", $.proxy(that.updateMaxHeight, that));
 
                 that.element = that.content.closest(".k-window")
                     .css({
@@ -161,22 +169,22 @@
                     }) : []
                 });
 
+                var propertyChangeProxy = proxy(that._propertyChange, that);
+
                 $("#stylable-elements")
                     .kendoPanelBar({
                         animation: false
                     })
-                    .find("input").kendoColorPicker({
+                    .find("input.k-colorpicker").kendoColorPicker({
                         autoBind: false,
                         dataSource: themeColorsDataSource,
                         change: proxy(that._propertyChange, that)
-                    });
+                    })
+                    //.find("input.k-numerictextbox").kendoNumericTextBox({
+                        //change: proxy(that._propertyChange, that)
+                    //});
 
                 $(".k-list-container[id^='@']").appendTo("#k-tb-wrap");
-
-                $(".k-items-collapse", that.element).click(function() {
-                    var panelbar = $("#stylable-elements");
-                    panelbar.data("kendoPanelBar").collapse($(".k-item", panelbar));
-                });
 
                 $(".k-action-download").click(proxy(that.download, that));
             },
@@ -189,12 +197,15 @@
                 var that = this,
                     downloadWindowObject,
                     windowWrapper
-                    downloadWindow = $("<div><textarea>Generating CSS...</textarea></div>")
+                    downloadWindow = $("<div>" +
+                        "<textarea class='k-content' rows='24' cols='80' readonly>Generating CSS...</textarea>" +
+                    "</div>")
                         .kendoWindow({
                             modal: true,
                             width: 600,
                             height: 350,
                             scrollable: false,
+                            title: "Your theme is ready!",
                             close: function() {
                                 downloadWindowObject.destroy();
                                 // TODO: this should be handled by the window
@@ -265,32 +276,30 @@
             },
             render: function() {
                 var that = this,
-                    colorPickerTemplate = kendo.template(
-                        "<label for='#= name #'>#= label || name #</label>" +
-                        "<input id='#= name #' value='#= constant.value #' />"
-                    ),
-                    editorTemplates = {
-                        "color": colorPickerTemplate,
-                        "background-color": colorPickerTemplate,
-                        "border-color": colorPickerTemplate
+                    colorPicker = "k-colorpicker",
+                    propertyEditors = {
+                        "color": colorPicker,
+                        "background-color": colorPicker,
+                        "border-color": colorPicker,
+                        "border-radius": "k-numerictextbox",
+                        "box-shadow": "k-shadowinput"
                     },
                     propertyGroupTemplate = kendo.template(
                         "<li>#= title #" +
                             "<div class='styling-options'>" +
-                                "# for (var constantName in constants) {" +
-                                    "var c = constants[constantName], p = c.property;" +
+                                "# for (var name in constants) {" +
+                                    "var c = constants[name];" +
                                     "if (c.readonly) continue; #" +
-                                    "#= editorTemplates[p] ? editorTemplates[p]({ " +
-                                        "label: labels[constantName]," +
-                                        "name: constantName, constant: c" +
-                                        "}) : '<div style=\"color: red\">' + p + '</div>' #" +
+                                    "<label for='#= name #'>#= labels[name] || name #</label>" +
+                                    "<input id='#= name #' class='#= editors[c.property] #' " +
+                                           "value='#= c.value #' />" +
                                 "# } #" +
                             "</div>" +
                         "</li>"
                     );
 
                 $("<div id='kendo-themebuilder'>" +
-                        "<button type='button' class='k-items-collapse k-button'>Collapse panels</button>" +
+                        "<button class='k-action-download k-button'>Download</button>" +
                         "<ul id='stylable-elements'>" +
                             $.map(that.constantsHierarchy || {}, function(section, title) {
                                 var matchedConstants = {},
@@ -306,11 +315,10 @@
                                     title: title,
                                     constants: matchedConstants,
                                     labels: section.labels,
-                                    editorTemplates: editorTemplates
+                                    editors: propertyEditors
                                 }));
                             }).join("") +
                         "</ul>" +
-                        "<button type='button' class='k-action-download k-button'>Download</button>" +
                     "</div>").appendTo(document.body);
             }
         });

@@ -46,6 +46,7 @@
     width: 100%;
     height: 100%;
     resize: none;
+    outline: none;
 }
 
 .k-color-preview
@@ -53,7 +54,9 @@
     margin-right: .2em;
 }
 
-#kendo-themebuilder .k-colorpicker
+#kendo-themebuilder .k-colorpicker,
+#kendo-themebuilder .k-numerictextbox,
+#kendo-themebuilder .k-shadowinput
 {
     width: 90px;
     margin-bottom: 5px;
@@ -70,7 +73,8 @@
 }
 
 .k-colorpicker .k-input,
-.k-color-name
+.k-color-name,
+#download-interface textarea
 {
     font: 12px Consolas, Courier, monospace;
 }
