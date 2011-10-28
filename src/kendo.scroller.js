@@ -137,11 +137,11 @@
                 that.friction = limitValue( friction, 0, 1 );
             },
 
-            startKineticAnimation: function(location, lastLocation, velocityFactor) {
+            startKineticAnimation: function(location, delta, velocityFactor) {
                 var that = this;
                 that.bounceLocation = location;
                 that.friction = .96;
-                that.decelerationVelocity = (location - lastLocation) / velocityFactor;
+                that.decelerationVelocity = - delta / velocityFactor;
             },
 
             changeDirection: function(delta) {
@@ -160,7 +160,7 @@
         });
     }
 
-    function limitValue (value, minLimit, maxLimit) {
+    function limitValue(value, minLimit, maxLimit) {
         return max( minLimit, min( maxLimit, value));
     }
 
@@ -276,13 +276,13 @@
         },
 
         _storeLastLocation: function(location) {
-            var that = this, xAxis = that.xAxis, yAxis = that.yAxis;
+            var that = this,
+                xAxis = that.xAxis,
+                locationDelta = that._locationDelta(location),
+                yAxis = that.yAxis;
 
-            var lastLocation = that.lastLocation;
-
-            if (xAxis.changeDirection(lastLocation.x - location.x) || yAxis.changeDirection(lastLocation.y - location.y)) {
-                this.directionChange = +new Date();
-                this.lastLocation = location;
+            if (xAxis.changeDirection(locationDelta.x) || yAxis.changeDirection(locationDelta.y)) {
+                that._updateLastLocation(location);
             }
         },
 
@@ -324,8 +324,7 @@
                 zoomLevel: support.zoomLevel()
             };
 
-            that.lastLocation = startLocation;
-            that.directionChange = +new Date();
+            that._updateLastLocation(startLocation);
 
             $(document)
                 .unbind(that._moveEvent, that._startProxy)
@@ -348,13 +347,13 @@
 
             var dip10 = 5 * that.start.zoomLevel,
                 currentLocation = touchLocation(e),
-                lastLocation = that.lastLocation;
+                locationDelta = this._locationDelta(currentLocation);
 
             if (currentLocation.idx != that.start.idx) {
                 return;
             }
 
-            if (abs(lastLocation.x - currentLocation.x) > dip10 || abs(lastLocation.y - currentLocation.y) > dip10) {
+            if (abs(locationDelta.x) > dip10 || abs(locationDelta.y) > dip10) {
 
                 that.xAxis = getAxisDimensions(that.xAxis, that.scrollElement, "Width", that.xScrollbar);
                 that.yAxis = getAxisDimensions(that.yAxis, that.scrollElement, "Height", that.yScrollbar);
@@ -370,6 +369,17 @@
                            .unbind(moveEvent, that._dragProxy)
                            .bind(moveEvent, that._dragProxy);
             }
+        },
+
+        _locationDelta: function(location) {
+            return { x: this.xAxis.lastLocation - location.x, y: this.yAxis.lastLocation - location.y };
+        },
+
+        _updateLastLocation: function (location) {
+            var that = this;
+            that.xAxis.lastLocation = location.x;
+            that.yAxis.lastLocation = location.y;
+            this.directionChange = +new Date();
         },
 
         _drag: function() {
@@ -416,15 +426,15 @@
 
         _initKineticAnimation: function(e) {
             var that = this,
-                lastLocation = that.lastLocation,
                 xAxis = that.xAxis,
                 yAxis = that.yAxis,
                 velocity = constants.velocity,
                 bounceLocation = touchLocation(e),
+                locationDelta = that._locationDelta(bounceLocation),
                 velocityFactor = (+new Date() - that.directionChange) / constants.acceleration;
 
-            xAxis.startKineticAnimation(bounceLocation.x, lastLocation.x, velocityFactor);
-            yAxis.startKineticAnimation(bounceLocation.y, lastLocation.y, velocityFactor);
+            xAxis.startKineticAnimation(bounceLocation.x, locationDelta.x, velocityFactor);
+            yAxis.startKineticAnimation(bounceLocation.y, locationDelta.y, velocityFactor);
 
             that.framerate = 1000 / constants.framerate;
             that.winding = false;
