@@ -2898,7 +2898,7 @@
 
             chart.plotArea = plotArea;
             chart._seriesMin = [Number.MAX_VALUE, Number.MAX_VALUE];
-            chart._seriesMax = [- Number.MAX_VALUE, - Number.MAX_VALUE];
+            chart._seriesMax = [-Number.MAX_VALUE, -Number.MAX_VALUE];
             chart.points = [];
 
             chart.render();
@@ -3016,12 +3016,12 @@
 
         traverseDataPoints: function(callback) {
             var chart = this,
-            options = chart.options,
-            series = options.series,
-            pointIx = 0,
-            seriesIx,
-            currentSeries,
-            pointData;
+                options = chart.options,
+                series = options.series,
+                pointIx = 0,
+                seriesIx,
+                currentSeries,
+                pointData;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
@@ -3030,6 +3030,101 @@
                     callback(pointData[0], pointData[1], pointIx, currentSeries, seriesIx);
                 }
             }
+        }
+    });
+
+    var ScatterLineChart = ScatterChart.extend({
+        init: function(plotArea, options) {
+            var chart = this;
+
+            chart.seriesPoints = [];
+            ScatterChart.fn.init.call(chart, plotArea, options);
+        },
+
+        options: {
+            series: []
+        },
+
+        addValue: function(x, y, pointIx, series, seriesIx) {
+            var chart = this,
+                point,
+                seriesPoints = chart.seriesPoints[seriesIx];
+
+            chart.updateRange(x, y);
+
+            if (!seriesPoints) {
+                chart.seriesPoints[seriesIx] = seriesPoints = [];
+            }
+
+            point = chart.createPoint(x, y, series, seriesIx);
+            if (point) {
+                point.series = series;
+                point.seriesIx = seriesIx;
+                point.owner = chart;
+                point.dataItem = series.dataItems ?
+                    series.dataItems[pointIx] : { x: x, y: y };
+            }
+
+            chart.points.push(point);
+            seriesPoints.push(point);
+        },
+
+        getViewElements: function(view) {
+            var chart = this,
+                options = chart.options,
+                series = options.series,
+                currentSeries,
+                seriesIx,
+                seriesPoints = chart.seriesPoints,
+                seriesCount = seriesPoints.length,
+                currentSeriesPoints,
+                linePoints,
+                point,
+                pointCount,
+                elements = ScatterChart.fn.getViewElements.call(chart, view),
+                group = view.createGroup({
+                    animation: {
+                        type: CLIP
+                    }
+                }),
+                lines = [];
+
+
+            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
+                currentSeriesPoints = seriesPoints[seriesIx];
+                pointCount = currentSeriesPoints.length;
+                currentSeries = series[seriesIx];
+                linePoints = [];
+
+                for (pointIx = 0; pointIx < pointCount; pointIx++) {
+                    point = currentSeriesPoints[pointIx];
+                    if (point) {
+                        pointCenter = point.markerBox().center();
+                        linePoints.push(new Point2D(pointCenter.x, pointCenter.y));
+                    }
+                }
+
+                if (linePoints.length > 1) {
+                    lines.push(
+                        chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx)
+                    );
+                }
+            }
+
+            group.children = lines.concat(elements);
+            return [group];
+        },
+
+        createLine: function(lineId, view, points, series, seriesIx) {
+            this.registerId(lineId, { seriesIx: seriesIx });
+            return view.createPolyline(points, false, {
+                id: lineId,
+                stroke: series.color,
+                strokeWidth: series.width,
+                strokeOpacity: series.opacity,
+                fill: "",
+                dashType: series.dashType
+            });
         }
     });
 
@@ -3727,7 +3822,9 @@
                 barSeries = [],
                 lineSeries = [],
                 scatterSeries = [],
+                scatterLineSeries = [],
                 i;
+
             options.legend.items = [];
             options.range = { min: 0, max: 1 };
             plotArea.charts = [];
@@ -3742,6 +3839,8 @@
                     pieSeries.push(currentSeries);
                 } else if (currentSeries.type === "scatter") {
                     scatterSeries.push(currentSeries);
+                } else if (currentSeries.type === "scatterLine") {
+                    scatterLineSeries.push(currentSeries);
                 }
             }
 
@@ -3757,8 +3856,12 @@
                 plotArea.createPieChart(pieSeries);
             }
 
-            if (scatterSeries.length > 0) {
-                plotArea.createScatterChart(scatterSeries);
+            if (scatterSeries.length > 0 || scatterLineSeries.length > 0) {
+                if (scatterSeries.length > 0) {
+                    plotArea.createScatterChart(scatterSeries);
+                } else {
+                    plotArea.createScatterLineChart(scatterLineSeries);
+                }
 
                 plotArea.axisX = new NumericAxis(options.range.min[0], options.range.max[0],
                     deepExtend({}, options.xAxis, { orientation: HORIZONTAL })
@@ -3853,6 +3956,23 @@
             // Override the original range
             options.range = scatterChartRange;
             plotArea.charts.push(scatterChart);
+
+            plotArea.addToLegend(series);
+        },
+
+        createScatterLineChart: function(series) {
+            var plotArea = this,
+                options = plotArea.options,
+                firstSeries = series[0],
+                categoryAxis = options.categoryAxis,
+                categories = categoryAxis.categories,
+                // Override the original invertAxes
+                scatterLineChart = new ScatterLineChart(plotArea, { series: series }),
+                scatterLineChartRange = scatterLineChart.valueRange() || options.range;
+
+            // Override the original range
+            options.range = scatterLineChartRange;
+            plotArea.charts.push(scatterLineChart);
 
             plotArea.addToLegend(series);
         },
