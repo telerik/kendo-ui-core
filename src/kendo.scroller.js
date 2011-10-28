@@ -77,10 +77,12 @@
 
                 return abs(this.decelerationVelocity) <= constants.velocity;
             },
-            updateScrollOffset: function(offset) {
+
+            updateScrollOffset: function(location) {
                 if (!this.hasScroll) return;
 
                 var that = this,
+                    offset = this.startLocation - location,
                     delta = -limitValue(offset, that.minStop, that.maxStop);
 
                 updateScrollbarPosition(delta, that.scrollbar, that);
@@ -277,8 +279,8 @@
                 xAxis = that.xAxis,
                 yAxis = that.yAxis;
 
-            xAxis.updateScrollOffset(start.x - location.x);
-            yAxis.updateScrollOffset(start.y - location.y);
+            xAxis.updateScrollOffset(location.x);
+            yAxis.updateScrollOffset(location.y);
 
             that.scrollElement.stop(true,true)[0].style[TRANSFORMSTYLE] = TRANSLATE3DPREFIX +
                                     xAxis.scrollOffset + "px," + yAxis.scrollOffset + PX + TRANSLATE3DSUFFIX;
@@ -300,6 +302,9 @@
 
             var startLocation = touchLocation(e),
                 scrollOffsets = getScrollOffsets(that.scrollElement);
+
+            that.xAxis.startLocation = startLocation.x - scrollOffsets.x;
+            that.yAxis.startLocation = startLocation.y - scrollOffsets.y;
 
             that.start = {
                 idx: startLocation.idx,
