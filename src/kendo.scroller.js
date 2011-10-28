@@ -324,22 +324,15 @@
         },
 
         _start: function () {
-            var that = this, e = getEvent(arguments);
+            var that = this,
+                currentLocation = that._getTouchLocation(getEvent(arguments));
 
-            if (that._dragCanceled) {
+            if (!currentLocation) {
                 return;
             }
-
-            e.preventDefault();
-            e.stopPropagation();
 
             var dip10 = 5 * that.start.zoomLevel,
-                currentLocation = touchLocation(e),
                 locationDelta = this._locationDelta(currentLocation);
-
-            if (currentLocation.idx != that.start.idx) {
-                return;
-            }
 
             if (abs(locationDelta.x) > dip10 || abs(locationDelta.y) > dip10) {
 
@@ -370,20 +363,27 @@
             this.directionChange = +new Date();
         },
 
-        _drag: function() {
-            var that = this, e = getEvent(arguments);
-            if (that._dragCanceled) return;
+        _getTouchLocation: function(event) {
+            event.preventDefault();
+            event.stopPropagation();
 
-            e.preventDefault();
-            e.stopPropagation();
-
-            var currentLocation = touchLocation(e);
-            if (currentLocation.idx != that.start.idx) {
+            var location = touchLocation(event);
+            if (location.idx != this.start.idx || this._dragCanceled) {
                 return;
             }
-            that._storeLastLocation( currentLocation );
 
-            that._applyCSS( currentLocation );
+            return location;
+        },
+
+        _drag: function() {
+            var that = this,
+                location = that._getTouchLocation(getEvent(arguments));
+
+            if (!location) return;
+
+            that._storeLastLocation(location);
+
+            that._applyCSS(location);
         },
 
         _stop: function () {
