@@ -69,6 +69,8 @@
             scrollOffset: 0,
             friction: .96,
             decelerationVelocity: 0,
+            bounceLocation: 0,
+            direction: 0,
             property: axisProperty.toLowerCase(),
             zoomLevel: kendo.support.zoomLevel(),
             scrollbar: scrollbar,
@@ -89,6 +91,7 @@
 
                 that.scrollOffset = delta / that.zoomLevel;
             },
+
             showScrollbar: function () {
                 if (!this.hasScroll) return;
 
@@ -100,19 +103,22 @@
                         })
                     .css(this.property, this.ratio);
             },
+
             hideScrollbar: function () {
                 if (!this.hasScroll) return;
 
                 this.scrollbar.css(OPACITY, 0);
             },
+
             decelerate: function () {
                 var that = this,
                     constraint = 0,
                     friction = that.friction,
                     scrollOffset = that.scrollOffset,
                     decelerationVelocity = that.decelerationVelocity * friction,
-                    bounceStop = constants.bounceStop,
-                    output = that.decelerationVelocity;
+                    bounceStop = constants.bounceStop;
+
+                    that.bounceLocation += that.decelerationVelocity;
 
                 if (-scrollOffset < that.minLimit) {
                     constraint = that.minLimit + scrollOffset;
@@ -129,8 +135,27 @@
 
                 that.decelerationVelocity = decelerationVelocity;
                 that.friction = limitValue( friction, 0, 1 );
+            },
 
-                return output;
+            startKineticAnimation: function(location, lastLocation, velocityFactor) {
+                var that = this;
+                that.bounceLocation = location;
+                that.friction = .96;
+                that.decelerationVelocity = (location - lastLocation) / velocityFactor;
+            },
+
+            changeDirection: function(delta) {
+                var that = this;
+
+                if (!that.hasScroll) {
+                    return false;
+                }
+
+                var newDirection = delta/abs(delta),
+                    directionChanged = newDirection !== that.direction;
+
+                that.direction = newDirection;
+                return directionChanged;
             }
         });
     }
@@ -251,19 +276,14 @@
         },
 
         _storeLastLocation: function(location) {
-            var that = this;
+            var that = this, xAxis = that.xAxis, yAxis = that.yAxis;
 
-            var lastLocation = that.lastLocation,
-                dX = lastLocation.x - location.x, dY = lastLocation.y - location.y,
-                newDirection = { x: that.xAxis.hasScroll ? dX/abs(dX) : 0, y: that.yAxis.hasScroll ? dY/abs(dY) : 0 },
-                oldDirection = that.direction;
+            var lastLocation = that.lastLocation;
 
-            if (newDirection.x != oldDirection.x || newDirection.y != oldDirection.y) {
+            if (xAxis.changeDirection(lastLocation.x - location.x) || yAxis.changeDirection(lastLocation.y - location.y)) {
                 this.directionChange = +new Date();
                 this.lastLocation = location;
             }
-
-            that.direction = newDirection;
         },
 
         _applyCSS: function ( location ) {
@@ -305,7 +325,6 @@
             };
 
             that.lastLocation = startLocation;
-            that.direction = { x: 0, y: 0 };
             that.directionChange = +new Date();
 
             $(document)
@@ -401,14 +420,11 @@
                 xAxis = that.xAxis,
                 yAxis = that.yAxis,
                 velocity = constants.velocity,
-                bounceLocation = that.bounceLocation = touchLocation(e),
-                velocityFactor = (+new Date() - that.directionChange) / constants.acceleration,
-                horizontalOffset = bounceLocation.x - lastLocation.x,
-                verticalOffset = bounceLocation.y - lastLocation.y;
+                bounceLocation = touchLocation(e),
+                velocityFactor = (+new Date() - that.directionChange) / constants.acceleration;
 
-            xAxis.decelerationVelocity = horizontalOffset / velocityFactor;
-            yAxis.decelerationVelocity = verticalOffset / velocityFactor;
-            xAxis.friction = yAxis.friction = .96;
+            xAxis.startKineticAnimation(bounceLocation.x, lastLocation.x, velocityFactor);
+            yAxis.startKineticAnimation(bounceLocation.y, lastLocation.y, velocityFactor);
 
             that.framerate = 1000 / constants.framerate;
             that.winding = false;
@@ -426,8 +442,8 @@
         _singleStep: function () {
             var that = this;
 
-            that.bounceLocation.x += that.xAxis.decelerate();
-            that.bounceLocation.y += that.yAxis.decelerate();
+            that.xAxis.decelerate();
+            that.yAxis.decelerate();
 
             if (that.xAxis.aboutToStop() && that.yAxis.aboutToStop()) {
                 that._endKineticAnimation();
@@ -452,7 +468,7 @@
                 }
             }
 
-            that._applyCSS( that.bounceLocation );
+            that._applyCSS( { x: that.xAxis.bounceLocation, y: that.yAxis.bounceLocation} );
 
             that.timeoutId = setTimeout( that._stepKineticProxy, framerate );
             that.lastCall = now;
