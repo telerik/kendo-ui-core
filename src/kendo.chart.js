@@ -2900,6 +2900,7 @@
             chart._seriesMin = [Number.MAX_VALUE, Number.MAX_VALUE];
             chart._seriesMax = [-Number.MAX_VALUE, -Number.MAX_VALUE];
             chart.points = [];
+            chart.seriesPoints = [];
 
             chart.render();
         },
@@ -2916,29 +2917,40 @@
 
         addValue: function(value, fields) {
             var chart = this,
-                point;
+                point,
+                seriesIx = fields.seriesIx,
+                seriesPoints = chart.seriesPoints[seriesIx];
 
             chart.updateRange(value);
 
-            point = chart.createPoint(value, fields.series, fields.seriesIx);
+            if (!seriesPoints) {
+                chart.seriesPoints[seriesIx] = seriesPoints = [];
+            }
+
+            point = chart.createPoint(value, fields.series, seriesIx);
             if (point) {
                 extend(point, fields);
             }
 
             chart.points.push(point);
+            seriesPoints.push(point);
         },
 
         updateRange: function(value) {
-            var chart = this;
+            var chart = this,
+                x = value.x,
+                y = value.y,
+                seriesMin = chart._seriesMin,
+                seriesMax = chart._seriesMax;
 
-            if (defined(value.x)) {
-                chart._seriesMin[0] = math.min(chart._seriesMin[0], value.x);
-                chart._seriesMax[0] = math.max(chart._seriesMax[0], value.x);
+            if (defined(x)) {
+                seriesMin[0] = math.min(seriesMin[0], x);
+                seriesMax[0] = math.max(seriesMax[0], x);
             }
 
-            if (defined(value.y)) {
-                chart._seriesMin[1] = math.min(chart._seriesMin[1], value.y);
-                chart._seriesMax[1] = math.max(chart._seriesMax[1], value.y);
+            if (defined(y)) {
+                seriesMin[1] = math.min(seriesMin[1], y);
+                seriesMax[1] = math.max(seriesMax[1], y);
             }
         },
 
@@ -3043,33 +3055,11 @@
         init: function(plotArea, options) {
             var chart = this;
 
-            chart.seriesPoints = [];
             ScatterChart.fn.init.call(chart, plotArea, options);
         },
 
         options: {
             series: []
-        },
-
-        addValue: function(value, fields) {
-            var chart = this,
-                point,
-                seriesIx = fields.seriesIx,
-                seriesPoints = chart.seriesPoints[seriesIx];
-
-            chart.updateRange(value);
-
-            if (!seriesPoints) {
-                chart.seriesPoints[seriesIx] = seriesPoints = [];
-            }
-
-            point = chart.createPoint(value, fields.series, seriesIx);
-            if (point) {
-                extend(point, fields);
-            }
-
-            chart.points.push(point);
-            seriesPoints.push(point);
         },
 
         getViewElements: function(view) {
@@ -3092,25 +3082,31 @@
                 }),
                 lines = [];
 
-
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeriesPoints = seriesPoints[seriesIx];
                 pointCount = currentSeriesPoints.length;
                 currentSeries = series[seriesIx];
                 linePoints = [];
+                interpolate = currentSeries.missingValues === INTERPOLATE;
 
                 for (pointIx = 0; pointIx < pointCount; pointIx++) {
                     point = currentSeriesPoints[pointIx];
                     if (point) {
                         pointCenter = point.markerBox().center();
                         linePoints.push(new Point2D(pointCenter.x, pointCenter.y));
+                    } else if (!interpolate) {
+                        if (linePoints.length > 1) {
+                            lines.push(
+                                chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx)
+                            );
+                        }
+                        linePoints = [];
                     }
                 }
 
                 if (linePoints.length > 1) {
                     lines.push(
-                        chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx)
-                    );
+                        chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx));
                 }
             }
 
