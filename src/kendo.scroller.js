@@ -176,15 +176,17 @@
             that.friction = limitValue( friction, 0, 1 );
         },
 
-        startKineticAnimation: function(location, delta, velocityFactor) {
-            var that = this;
+        startKineticAnimation: function(location, velocityFactor) {
+            var that = this,
+                delta = this.lastLocation - location;
+
             that.bounceLocation = location;
             that.friction = .96;
             that.decelerationVelocity = - delta / velocityFactor;
         },
 
-        changeDirection: function(delta) {
-            var that = this;
+        changeDirection: function(location) {
+            var that = this, delta = this.lastLocation - location;
 
             if (!that.hasScroll) {
                 return false;
@@ -206,7 +208,7 @@
         return max( minLimit, min( maxLimit, value));
     }
 
-    function getScrollOffsets (scrollElement) {
+    function getScrollOffsets(scrollElement) {
         scrollElement = $(scrollElement);
 
         var transformStyle = scrollElement[0].style[TRANSFORMSTYLE],
@@ -286,12 +288,9 @@
         },
 
         _storeLastLocation: function(location) {
-            var that = this,
-                xAxis = that.xAxis,
-                locationDelta = that._locationDelta(location),
-                yAxis = that.yAxis;
+            var that = this;
 
-            if (xAxis.changeDirection(locationDelta.x) || yAxis.changeDirection(locationDelta.y)) {
+            if (that.xAxis.changeDirection(location.x) || that.yAxis.changeDirection(location.y)) {
                 that._updateLastLocation(location);
             }
         },
@@ -362,13 +361,6 @@
             }
         },
 
-        _locationDelta: function(location) {
-            return {
-                x: this.xAxis.lastLocation - location.x,
-                y: this.yAxis.lastLocation - location.y
-            };
-        },
-
         _updateLastLocation: function(location) {
             var that = this;
             that.xAxis.lastLocation = location.x;
@@ -425,11 +417,10 @@
                 xAxis = that.xAxis,
                 yAxis = that.yAxis,
                 bounceLocation = touchLocation(e),
-                locationDelta = that._locationDelta(bounceLocation),
                 velocityFactor = (+new Date() - that.directionChange) / ACCELERATION;
 
-            xAxis.startKineticAnimation(bounceLocation.x, locationDelta.x, velocityFactor);
-            yAxis.startKineticAnimation(bounceLocation.y, locationDelta.y, velocityFactor);
+            xAxis.startKineticAnimation(bounceLocation.x, velocityFactor);
+            yAxis.startKineticAnimation(bounceLocation.y, velocityFactor);
 
             that.winding = true;
             that.lastCall = +new Date();
