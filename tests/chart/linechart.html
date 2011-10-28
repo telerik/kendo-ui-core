@@ -1084,6 +1084,21 @@
                     equals(view.log.rect[0].style.id, "id");
                 });
 
+                test("does not render element when hidden", function() {
+                    createShape({ visible: false });
+                    equals(view.log.rect.length, 0);
+                });
+
+                test("does not render element when hidden (triangle)", function() {
+                    createShape({ visible: false,  type: "triangle"});
+                    equals(view.log.path.length, 0);
+                });
+
+                test("does not render element when hidden (circle)", function() {
+                    createShape({ visible: false,  type: "circle"});
+                    equals(view.log.circle.length, 0);
+                });
+
             })();
 
         </script>

@@ -2536,6 +2536,10 @@
                 element = BoxElement.fn.getViewElements.call(marker, view, renderOptions)[0],
                 halfWidth = box.width() / 2;
 
+            if (!element) {
+                return [];
+            }
+
             if (type === TRIANGLE) {
                 element = view.createPolyline([
                     new Point2D(box.x1 + halfWidth, box.y1),
