@@ -266,7 +266,7 @@
             render: function() {
                 var that = this,
                     colorPickerTemplate = kendo.template(
-                        "<label for='#= name #'>#= name #</label>" +
+                        "<label for='#= name #'>#= label || name #</label>" +
                         "<input id='#= name #' value='#= constant.value #' />"
                     ),
                     editorTemplates = {
@@ -281,8 +281,9 @@
                                     "var c = constants[constantName], p = c.property;" +
                                     "if (c.readonly) continue; #" +
                                     "#= editorTemplates[p] ? editorTemplates[p]({ " +
+                                        "label: labels[constantName]," +
                                         "name: constantName, constant: c" +
-                                        "}) : '<div>' + p + '</div>' #" +
+                                        "}) : '<div style=\"color: red\">' + p + '</div>' #" +
                                 "# } #" +
                             "</div>" +
                         "</li>"
@@ -296,7 +297,7 @@
                                     constants = that.constants.constants;
 
                                 for (var constant in constants) {
-                                    if (section.test(constant)) {
+                                    if (section.constants.test(constant)) {
                                         matchedConstants[constant] = $.extend({}, constants[constant]);
                                     }
                                 }
@@ -304,6 +305,7 @@
                                 return propertyGroupTemplate($.extend(section, {
                                     title: title,
                                     constants: matchedConstants,
+                                    labels: section.labels,
                                     editorTemplates: editorTemplates
                                 }));
                             }).join("") +
