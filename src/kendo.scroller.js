@@ -398,20 +398,13 @@
         _initKineticAnimation: function(e) {
             var that = this,
                 lastLocation = that.lastLocation,
-                bounceLocation = that.bounceLocation = touchLocation(e);
-
-            var velocityFactor = (+new Date() - that.directionChange) / constants.acceleration,
-                horizontalOffset = bounceLocation.x - lastLocation.x,
-                verticalOffset = bounceLocation.y - lastLocation.y;
-
-            that._startKineticAnimation( horizontalOffset, verticalOffset, velocityFactor );
-        },
-
-        _startKineticAnimation: function ( horizontalOffset, verticalOffset, velocityFactor ) {
-            var that = this,
                 xAxis = that.xAxis,
                 yAxis = that.yAxis,
-                velocity = constants.velocity;
+                velocity = constants.velocity,
+                bounceLocation = that.bounceLocation = touchLocation(e),
+                velocityFactor = (+new Date() - that.directionChange) / constants.acceleration,
+                horizontalOffset = bounceLocation.x - lastLocation.x,
+                verticalOffset = bounceLocation.y - lastLocation.y;
 
             xAxis.decelerationVelocity = horizontalOffset / velocityFactor;
             yAxis.decelerationVelocity = verticalOffset / velocityFactor;
