@@ -198,6 +198,7 @@
                     box,
                     label,
                     root,
+                    sector,
                     VALUE = 1,
                     CATEGORY = "A",
                     SERIES_NAME = "series";
@@ -216,6 +217,10 @@
 
                     root = new Chart.RootElement();
                     root.append(segment);
+
+                    view = new ViewStub();
+                    segment.getViewElements(view);
+                    sector = view.log.sector[0];
                 }
 
                 // ------------------------------------------------------------
@@ -242,6 +247,23 @@
                 test("tooltipAnchor is set distance from segment", function() {
                     var anchor = segment.tooltipAnchor(10, 10);
                     same([Math.round(anchor.x), Math.round(anchor.y)], [81, -77], TOLERANCE);
+                });
+
+                test("sets overlay radius", function() {
+                    equals(sector.style.overlay.r, segment.sector.r);
+                });
+
+                test("sets overlay cx", function() {
+                    equals(sector.style.overlay.cx, segment.sector.c.x);
+                });
+
+                test("sets overlay cy", function() {
+                    equals(sector.style.overlay.cy, segment.sector.c.y);
+                });
+
+                test("does not set overlay options when no overlay is defined", function() {
+                    createSegment({ overlay: null });
+                    ok(!sector.style.overlay);
                 });
 
             })();

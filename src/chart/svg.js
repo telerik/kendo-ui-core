@@ -573,7 +573,7 @@
                 overlay;
 
             if (options.overlay) {
-            element.options.id = uniqueId();
+                element.options.id = uniqueId();
 
                 group = view.createGroup();
                 overlay = element.clone();
@@ -583,11 +583,11 @@
                 overlay.options.id = id;
                 overlay.options.fill = options.overlay;
 
-            return group;
+                return group;
             } else {
                 return element;
+            }
         }
-    }
     }
 
     function SVGGradientDecorator(view) {
