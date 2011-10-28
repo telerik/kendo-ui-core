@@ -245,7 +245,29 @@
                 table.find("tr>td:first").click();
                 $(document).click();
 
-                ok(!table.find("tr>td:first").hasClass(".k-edit-cell"));
+                ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(!table.find("tr>td:first").data("kendoEditable"));
+            });
+
+            test("click on cell of a readonly field does not enter edit mode", function() {
+                setup({
+                    dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "foo",
+                                fields: {
+                                    name: "name",
+                                    foo: { field: "foo", readonly: true }
+                                }
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                    })
+                });
+
+                table.find("tr>td:first").click();
+
+                ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
                 ok(!table.find("tr>td:first").data("kendoEditable"));
             });
 

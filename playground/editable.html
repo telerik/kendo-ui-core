@@ -14,6 +14,7 @@
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validatable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
@@ -42,7 +43,10 @@
                         model: {
                             id: "id",
                             fields: {
-                                foo: "foo",
+                                foo: {
+                                    field: "foo",
+                                    readonly: true
+                                },
                                 date: { field: "date", type: "date" }
                             }
                         }
