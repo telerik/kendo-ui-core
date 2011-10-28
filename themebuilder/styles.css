@@ -18,7 +18,10 @@
 #kendo-themebuilder label
 {
     display: inline-block;
-    width: 40%;
+    width: 56%;
+    padding-right: 4%;
+    text-align: right;
+    color: #afafaf;
 }
 
 #kendo-themebuilder #stylable-elements,
@@ -48,6 +51,12 @@
 .k-color-preview
 {
     margin-right: .2em;
+}
+
+#kendo-themebuilder .k-colorpicker
+{
+    width: 90px;
+    margin-bottom: 5px;
 }
 
 .k-colorpicker .k-select
