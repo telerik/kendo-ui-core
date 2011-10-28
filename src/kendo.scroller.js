@@ -52,12 +52,12 @@
         }
     }
 
-    function getAxisDimensions (element, axisProperty, scrollbar) {
+    function getAxisDimensions (axis, element, axisProperty, scrollbar) {
         var scrollSize = element["inner" + axisProperty](),
             boxSize = element.parent()["inner" + axisProperty](),
             scroll = scrollSize - boxSize;
 
-        return {
+        return $.extend(axis, {
             minLimit: boxSize * constants.bounceLimit,
             maxLimit: scroll + boxSize * constants.bounceLimit,
             minStop: -constants.bounceStop,
@@ -130,8 +130,7 @@
 
                 return output;
             }
-
-        }
+        });
     }
 
     function limitValue (value, minLimit, maxLimit) {
@@ -322,13 +321,6 @@
                 .bind(that._endEvent, that._stopProxy);
         },
 
-        _initializeBoxModel: function () {
-            var that = this;
-
-            that.xAxis = getAxisDimensions(that.scrollElement, "Width", that.xScrollbar);
-            that.yAxis = getAxisDimensions(that.scrollElement, "Height", that.yScrollbar);
-        },
-
         _start: function () {
             var that = this, e = getEvent(arguments);
 
@@ -349,7 +341,8 @@
 
             if (abs(lastLocation.x - currentLocation.x) > dip10 || abs(lastLocation.y - currentLocation.y) > dip10) {
 
-                that._initializeBoxModel();
+                that.xAxis = getAxisDimensions(that.xAxis, that.scrollElement, "Width", that.xScrollbar);
+                that.yAxis = getAxisDimensions(that.yAxis, that.scrollElement, "Height", that.yScrollbar);
                 that._storeLastLocation( currentLocation );
                 that._dragged = true;
 
