@@ -5,15 +5,16 @@
         Widget = ui.Widget,
         parse = kendo.parseFloat,
         touch = kendo.support.touch,
+        CHANGE = "change",
+        CHAR = "character",
+        DISABLED = "disabled",
+        INPUT = "k-input",
         TOUCHEND = "touchend",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         MOUSEUP = touch ? "touchmove " + TOUCHEND : "mouseup mouseleave",
+        HIDE = "k-hide-text",
         HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
-        DISABLED = "disabled",
-        HIDE = "k-hide-text",
-        INPUT = "k-input",
-        CHANGE = "change",
         POINT = ".",
         NULL = null,
         proxy = $.proxy,
@@ -44,7 +45,7 @@
 
             that.bind(CHANGE, options);
 
-            that._text.click(proxy(that._click, that));
+            that._text.focus(proxy(that._click, that));
 
             min = parse(element.attr("min"));
             max = parse(element.attr("max"));
@@ -195,28 +196,32 @@
         },
 
         _click: function(e) {
-            var that = this,
-            input = e.target,
-            idx = caret(input),
-            value = input.value.substring(0, idx),
-            format = that._format(that.options.format),
-            group = format[","],
-            groupRegExp = new RegExp("\\" + group, "g"),
-            extractRegExp = new RegExp("([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\d+)?"),
-            result = extractRegExp.exec(value),
-            caretPosition = 0;
+            var that = this;
 
-            if (result) {
-                caretPosition = result[0].replace(groupRegExp, "").length;
+            clearTimeout(that._focusing);
+            that._focusing = setTimeout(function() {
+                var input = e.target,
+                    idx = caret(input),
+                    value = input.value.substring(0, idx),
+                    format = that._format(that.options.format),
+                    group = format[","],
+                    groupRegExp = new RegExp("\\" + group, "g"),
+                    extractRegExp = new RegExp("([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\d+)?"),
+                    result = extractRegExp.exec(value),
+                    caretPosition = 0;
 
-                if (value.indexOf("(") != -1 && that._value < 0) {
-                    caretPosition++;
+                if (result) {
+                    caretPosition = result[0].replace(groupRegExp, "").length;
+
+                    if (value.indexOf("(") != -1 && that._value < 0) {
+                        caretPosition++;
+                    }
                 }
-            }
 
-            that._focusin();
+                that._focusin();
 
-            caret(that.element[0], caretPosition);
+                caret(that.element[0], caretPosition);
+            });
         },
 
         _change: function(value) {
@@ -408,12 +413,14 @@
             isPosition = position !== undefined;
 
         if (document.selection) {
-            var range = element.document.selection.createRange();
+            element.focus();
+            var range = document.selection.createRange();
             if (isPosition) {
-                range.move("character", pos);
+                range.move(CHAR, position);
                 range.select();
             } else {
-                position = element.value.indexOf(range.text);
+                range.moveStart(CHAR, -element.value.length);
+                position = range.text.length;
             }
         } else if (element.selectionStart !== undefined) {
             if (isPosition) {
