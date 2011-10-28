@@ -301,8 +301,6 @@
 
             that.start = {
                 idx: startLocation.idx,
-                x: startLocation.x - scrollOffsets.x,
-                y: startLocation.y - scrollOffsets.y,
                 zoomLevel: support.zoomLevel()
             };
 
