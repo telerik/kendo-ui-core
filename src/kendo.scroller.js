@@ -194,13 +194,18 @@
 
     var Scroller = Widget.extend({
         init: function (element, options) {
-            var that = this;
+            var that = this, scrollElement, children;
 
             if (options && options !== false && options.useOnDesktop === false) return false; // Stop the initialization if on desktop and disabled.
 
             Widget.fn.init.call(that, element, options);
 
-            options = that.options;
+            element = that.element,
+            options = that.options,
+            scrollElement = $('<div class="k-scroll-container"/>'),
+            children = element.children(":not(script)");
+            that.xAxis = {};
+            that.yAxis = {};
 
             that.bind(events, options);
 
@@ -218,23 +223,7 @@
                 _stepKinetikProxy: proxy( that._stepKineticAnimation, that )
             });
 
-            that._create();
-        },
-
-        options: {
-            name: "Scroller",
-
-            useOnDesktop: true
-        },
-
-        _create: function () {
-            var that = this,
-                element = that.element,
-                scrollElement = $('<div class="k-scroll-container"/>'),
-                children = element.children(":not(script)");
-
-            element
-                .css("overflow", "hidden");
+            element.css("overflow", "hidden");
 
             if (children.length)
                 children.wrapAll(scrollElement);
@@ -254,7 +243,11 @@
                 .bind(that._startEvent, that._waitProxy);
 
             browser.mozilla && element.bind("mousedown", false );
+        },
 
+        options: {
+            name: "Scroller",
+            useOnDesktop: true
         },
 
         _storeLastLocation: function(location) {
