@@ -247,14 +247,10 @@
             that.scrollElement = element.children(":not(script)");
             that._scrollbars.appendTo(element);
 
-            that._moveEvent = MOVEEVENT;
-            that._startEvent = STARTEVENT;
-            that._endEvent = ENDEVENT;
-
             element
                 .bind("gesturestart", that._gestureStartProxy )
                 .bind("gestureend", that._gestureEndProxy )
-                .bind(that._startEvent, that._waitProxy);
+                .bind(STARTEVENT, that._waitProxy);
 
             browser.mozilla && element.bind("mousedown", false );
         },
@@ -316,12 +312,12 @@
             that._updateLastLocation(startLocation);
 
             $(document)
-                .unbind(that._moveEvent, that._startProxy)
-                .bind(that._moveEvent, that._startProxy);
+                .unbind(MOVEEVENT, that._startProxy)
+                .bind(MOVEEVENT, that._startProxy);
 
             that.element
-                .unbind(that._endEvent, that._stopProxy) // Make sure previous event is removed
-                .bind(that._endEvent, that._stopProxy);
+                .unbind(ENDEVENT, that._stopProxy) // Make sure previous event is removed
+                .bind(ENDEVENT, that._stopProxy);
         },
 
         _start: function() {
@@ -342,14 +338,12 @@
                 that._storeLastLocation( currentLocation );
                 that._dragged = true;
 
-                var moveEvent = that._moveEvent;
-
                 that.xAxis.showScrollbar();
                 that.yAxis.showScrollbar();
 
-                $(document).unbind(moveEvent, that._startProxy)
-                           .unbind(moveEvent, that._dragProxy)
-                           .bind(moveEvent, that._dragProxy);
+                $(document).unbind(MOVEEVENT, that._startProxy)
+                           .unbind(MOVEEVENT, that._dragProxy)
+                           .bind(MOVEEVENT, that._dragProxy);
             }
         },
 
@@ -394,7 +388,7 @@
             var that = this;
             if (that._dragCanceled) return;
             that._unbindFromMove();
-            that.element.unbind(that._endEvent, that._stopProxy);
+            that.element.unbind(ENDEVENT, that._stopProxy);
 
             if (that._dragged) {
                 that._dragged = false;
@@ -407,8 +401,8 @@
         _unbindFromMove: function() {
             var that = this;
             $(document)
-                 .unbind(that._moveEvent, that._startProxy)
-                 .unbind(that._moveEvent, that._dragProxy);
+                 .unbind(MOVEEVENT, that._startProxy)
+                 .unbind(MOVEEVENT, that._dragProxy);
         },
 
         _initKineticAnimation: function(e) {
