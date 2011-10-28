@@ -2914,35 +2914,31 @@
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
 
-        addValue: function(x, y, pointIx, series, seriesIx) {
+        addValue: function(value, fields) {
             var chart = this,
                 point;
 
-            chart.updateRange(x, y);
+            chart.updateRange(value);
 
-            point = chart.createPoint(x, y, series, seriesIx);
+            point = chart.createPoint(value, fields.series, fields.seriesIx);
             if (point) {
-                point.series = series;
-                point.seriesIx = seriesIx;
-                point.owner = chart;
-                point.dataItem = series.dataItems ?
-                    series.dataItems[pointIx] : { x: x, y: y };
+                extend(point, fields);
             }
 
             chart.points.push(point);
         },
 
-        updateRange: function(x, y) {
+        updateRange: function(value) {
             var chart = this;
 
-            if (defined(x)) {
-                chart._seriesMin[0] = math.min(chart._seriesMin[0], x);
-                chart._seriesMax[0] = math.max(chart._seriesMax[0], x);
+            if (defined(value.x)) {
+                chart._seriesMin[0] = math.min(chart._seriesMin[0], value.x);
+                chart._seriesMax[0] = math.max(chart._seriesMax[0], value.x);
             }
 
-            if (defined(y)) {
-                chart._seriesMin[1] = math.min(chart._seriesMin[1], y);
-                chart._seriesMax[1] = math.max(chart._seriesMax[1], y);
+            if (defined(value.y)) {
+                chart._seriesMin[1] = math.min(chart._seriesMin[1], value.y);
+                chart._seriesMax[1] = math.max(chart._seriesMax[1], value.y);
             }
         },
 
@@ -2956,11 +2952,11 @@
             return null;
         },
 
-        createPoint: function(x, y, series, seriesIx) {
+        createPoint: function(value, series, seriesIx) {
             var chart = this,
                 options = chart.options;
 
-            var point = new LinePoint({x: x, y: y},
+            var point = new LinePoint(value,
                 deepExtend({
                     markers: {
                         border: {
@@ -2986,11 +2982,11 @@
                 pointIx = 0,
                 point;
 
-            chart.traverseDataPoints(function(x, y) {
+            chart.traverseDataPoints(function(value) {
                 point = chartPoints[pointIx++];
 
-                var slotX = plotArea.axisX.getSlot(x, x),
-                    slotY = plotArea.axisY.getSlot(y, y),
+                var slotX = plotArea.axisX.getSlot(value.x, value.x),
+                    slotY = plotArea.axisY.getSlot(value.y, value.y),
                     pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
 
                 if (point) {
@@ -3021,13 +3017,23 @@
                 pointIx = 0,
                 seriesIx,
                 currentSeries,
+                dataItems,
+                value,
                 pointData;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
                     pointData = currentSeries.data[pointIx];
-                    callback(pointData[0], pointData[1], pointIx, currentSeries, seriesIx);
+                    dataItems = currentSeries.dataItems;
+                    value = { x: pointData[0], y: pointData[1] };
+
+                    callback(value, {
+                        pointIx: pointIx,
+                        series: currentSeries,
+                        seriesIx: seriesIx,
+                        dataItem: dataItems ? dataItems[i] : value
+                    });
                 }
             }
         }
@@ -3045,24 +3051,21 @@
             series: []
         },
 
-        addValue: function(x, y, pointIx, series, seriesIx) {
+        addValue: function(value, fields) {
             var chart = this,
                 point,
+                seriesIx = fields.seriesIx,
                 seriesPoints = chart.seriesPoints[seriesIx];
 
-            chart.updateRange(x, y);
+            chart.updateRange(value);
 
             if (!seriesPoints) {
                 chart.seriesPoints[seriesIx] = seriesPoints = [];
             }
 
-            point = chart.createPoint(x, y, series, seriesIx);
+            point = chart.createPoint(value, fields.series, seriesIx);
             if (point) {
-                point.series = series;
-                point.seriesIx = seriesIx;
-                point.owner = chart;
-                point.dataItem = series.dataItems ?
-                    series.dataItems[pointIx] : { x: x, y: y };
+                extend(point, fields);
             }
 
             chart.points.push(point);
