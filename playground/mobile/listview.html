@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <title>Listview</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.core.js"></script>
+        <style>
+            ul[data-kendo-role=listview],
+            ul[data-kendo-role=listsection]
+            {
+                list-style:none;
+                padding:0;
+                background: white;
+            }
+
+            ul[data-kendo-role=listview] li
+            {
+                border-bottom: 1px solid black;
+            }
+
+            ul[data-kendo-role=listview] li:last-child
+            {
+                border: none;
+            }
+
+            .k-section-title
+            {
+                background: blue;
+            }
+
+            .k-listview-group li
+            {
+                color: black;
+                border: none;
+            }
+
+            ul.k-listview-group
+            {
+                background: blue;
+                color: white;
+                padding: 5px;
+            }
+
+            .k-listview-group ul
+            {
+                border: 1px solid black;
+                background: white;
+                -webkit-border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Regular listview</h1>
+        <ul data-kendo-role="listview">
+            <li>Austria</li>
+            <li>Bulgaria</li>
+            <li>Germany</li>
+        </ul>
+        <h1>Regular listview with sections</h1>
+        <ul data-kendo-role="listview">
+            <li class="k-section-title">
+                Europe
+                <ul data-kendo-role="listsection">
+                    <li>Austria</li>
+                    <li>Bulgaria</li>
+                    <li>Germany</li>
+                </ul>
+            </li>
+            <li class="k-section-title">
+                Asia
+                <ul data-kendo-role="listsection">
+                    <li>China</li>
+                    <li>India</li>
+                    <li>Korea</li>
+                </ul>
+            </li>
+        </ul>
+        <h1>Grouped listview</h1>
+        <ul data-kendo-role="listview" class="k-listview-group" >
+            <li>
+                Europe
+                <ul data-kendo-role="listsection">
+                    <li>Austria</li>
+                    <li>Bulgaria</li>
+                    <li>Germany</li>
+                </ul>
+            </li>
+            <li>
+                Asia
+                <ul data-kendo-role="listsection">
+                    <li>China</li>
+                    <li>India</li>
+                    <li>Korea</li>
+                </ul>
+            </li>
+        </ul>
+    </body>
+</html>
