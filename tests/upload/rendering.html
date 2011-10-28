@@ -95,6 +95,21 @@
                 ok(!uploadInstance.wrapper.hasClass("k-state-disabled"));
             });
 
+            test("remove icon is rendered", function() {
+                simulateFileSelect();
+                equal($(".k-upload-files li.k-file button.k-upload-action span.k-delete", uploadInstance.wrapper).length, 1);
+            });
+
+            test("file name is rendered", function() {
+                simulateFileSelect();
+                equal($(".k-filename", uploadInstance.wrapper).text(), "first.txt");                    
+            });
+
+            test("file name is rendered as tooltip", function() {
+                simulateFileSelect();
+                equal($(".k-filename", uploadInstance.wrapper).attr("title"), "first.txt");                    
+            });
+
             // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("Upload / Rendering / Drag and drop", {
