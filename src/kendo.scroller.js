@@ -44,6 +44,14 @@
         };
 
 
+    function getEvent(args) {
+        if (args[1] && "changedTouches" in args[1]) {
+            return args[1];
+        } else {
+            return args[0];
+        }
+    }
+
     function getAxisDimensions (element, axisProperty, scrollbar) {
         var scrollSize = element["inner" + axisProperty](),
             boxSize = element.parent()["inner" + axisProperty](),
@@ -285,11 +293,8 @@
             this._dragCanceled = false;
         },
 
-        _wait: function (e) {
-            if (arguments[1] && "changedTouches" in arguments[1])
-                e = arguments[1];
-
-            var that = this;
+        _wait: function () {
+            var that = this, e = getEvent(arguments);
 
             that._dragged = false;
             clearTimeout(that.timeoutId);
@@ -324,11 +329,8 @@
             that.yAxis = getAxisDimensions(that.scrollElement, "Height", that.yScrollbar);
         },
 
-        _start: function (e) {
-            if (arguments[1] && "changedTouches" in arguments[1])
-                e = arguments[1];
-
-            var that = this;
+        _start: function () {
+            var that = this, e = getEvent(arguments);
 
             if (that._dragCanceled) {
                 return;
@@ -362,11 +364,8 @@
             }
         },
 
-        _drag: function (e) {
-            if (arguments[1] && "changedTouches" in arguments[1])
-                e = arguments[1];
-
-            var that = this;
+        _drag: function() {
+            var that = this, e = getEvent(arguments);
             if (that._dragCanceled) return;
 
             e.preventDefault();
@@ -381,10 +380,7 @@
             that._applyCSS( currentLocation );
         },
 
-        _stop: function (e) {
-            if (arguments[1] && "changedTouches" in arguments[1])
-                e = arguments[1];
-
+        _stop: function () {
             var that = this;
             if (that._dragCanceled) return;
 
@@ -397,7 +393,7 @@
             if (that._dragged) {
                 that._dragged = false;
 
-                that._initKineticAnimation(e);
+                that._initKineticAnimation(getEvent(arguments));
             } else {
                 that._hideScrollHints();
             }
@@ -410,9 +406,7 @@
             that.yAxis.hideScrollbar();
         },
 
-        _initKineticAnimation: function (e) {
-            if (arguments[1] && "changedTouches" in arguments[1])
-                e = arguments[1];
+        _initKineticAnimation: function(e) {
 
             var that = this,
                 lastLocation = that.lastLocation,
