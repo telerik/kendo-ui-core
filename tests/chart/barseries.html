@@ -1517,6 +1517,11 @@
                     same(rect.style.overlay.rotation, 0);
                 });
 
+                test("does not set overlay options when no overlay is defined", function() {
+                    createBar({ overlay: null });
+                    ok(!rect.style.overlay);
+                });
+
                 test("sets default border color based on color", function() {
                     createBar({ color: "#cf0" });
                     equals(rect.style.stroke, "#a3cc00");

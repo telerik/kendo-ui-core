@@ -2144,7 +2144,6 @@
                 rectStyle = deepExtend({
                     id: options.id,
                     fill: options.color,
-                    overlay: deepExtend({rotation: normalAngle }, options.overlay),
                     normalAngle: normalAngle,
                     aboveAxis: options.aboveAxis,
                     fillOpacity: options.opacity,
@@ -2154,6 +2153,10 @@
                 }, border),
                 elements = [],
                 label = bar.children[0];
+
+            if (options.overlay) {
+                rectStyle.overlay = deepExtend({rotation: normalAngle }, options.overlay);
+            }
 
             elements.push(view.createRect(box, rectStyle));
 
@@ -2997,16 +3000,21 @@
                     strokeWidth: borderOptions.width,
                     dashType: borderOptions.dashType
                 } : {},
-                elements = [];
+                elements = [],
+                overlay = options.overlay;
+
+            if (overlay) {
+                overlay = deepExtend({}, options.overlay, {
+                    r: sector.r,
+                    cx: sector.c.x,
+                    cy: sector.c.y
+                })
+            }
 
             elements.push(view.createSector(sector, deepExtend({
                 id: options.id,
                 fill: options.color,
-                overlay: deepExtend({}, options.overlay, {
-                    r: sector.r,
-                    cx: sector.c.x,
-                    cy: sector.c.y
-                }),
+                overlay: overlay,
                 fillOpacity: options.opacity,
                 strokeOpacity: options.opacity,
                 animation: deepExtend(options.animation, {
