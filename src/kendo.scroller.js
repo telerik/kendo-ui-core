@@ -253,7 +253,7 @@
 
             var lastLocation = that.lastLocation,
                 dX = lastLocation.x - location.x, dY = lastLocation.y - location.y,
-                newDirection = { x: that.xInfo.hasScroll ? dX/abs(dX) : 0, y: that.yInfo.hasScroll ? dY/abs(dY) : 0 },
+                newDirection = { x: that.xAxis.hasScroll ? dX/abs(dX) : 0, y: that.yAxis.hasScroll ? dY/abs(dY) : 0 },
                 oldDirection = that.direction;
 
             if (newDirection.x != oldDirection.x || newDirection.y != oldDirection.y) {
@@ -267,14 +267,14 @@
         _applyCSS: function ( location ) {
             var that = this,
                 start = that.start,
-                xInfo = that.xInfo,
-                yInfo = that.yInfo;
+                xAxis = that.xAxis,
+                yAxis = that.yAxis;
 
-            xInfo.updateScrollOffset(start.x - location.x);
-            yInfo.updateScrollOffset(start.y - location.y);
+            xAxis.updateScrollOffset(start.x - location.x);
+            yAxis.updateScrollOffset(start.y - location.y);
 
             that.scrollElement.stop(true,true)[0].style[TRANSFORMSTYLE] = TRANSLATE3DPREFIX +
-                                    xInfo.scrollOffset + "px," + yInfo.scrollOffset + PX + TRANSLATE3DSUFFIX;
+                                    xAxis.scrollOffset + "px," + yAxis.scrollOffset + PX + TRANSLATE3DSUFFIX;
         },
 
         _onGestureStart: function () {
@@ -320,8 +320,8 @@
         _initializeBoxModel: function () {
             var that = this;
 
-            that.xInfo = getAxisDimensions(that.scrollElement, "Width", that.xScrollbar);
-            that.yInfo = getAxisDimensions(that.scrollElement, "Height", that.yScrollbar);
+            that.xAxis = getAxisDimensions(that.scrollElement, "Width", that.xScrollbar);
+            that.yAxis = getAxisDimensions(that.scrollElement, "Height", that.yScrollbar);
         },
 
         _start: function (e) {
@@ -353,8 +353,8 @@
 
                 var moveEvent = that._moveEvent;
 
-                that.xInfo.showScrollbar();
-                that.yInfo.showScrollbar();
+                that.xAxis.showScrollbar();
+                that.yAxis.showScrollbar();
 
                 $(document).unbind(moveEvent, that._startProxy)
                            .unbind(moveEvent, that._dragProxy)
@@ -406,8 +406,8 @@
         _hideScrollHints: function() {
             var that = this;
 
-            that.xInfo.hideScrollbar();
-            that.yInfo.hideScrollbar();
+            that.xAxis.hideScrollbar();
+            that.yAxis.hideScrollbar();
         },
 
         _initKineticAnimation: function (e) {
@@ -427,18 +427,18 @@
 
         _startKineticAnimation: function ( horizontalOffset, verticalOffset, velocityFactor ) {
             var that = this,
-                xInfo = that.xInfo,
-                yInfo = that.yInfo,
+                xAxis = that.xAxis,
+                yAxis = that.yAxis,
                 velocity = constants.velocity;
 
-            xInfo.decelerationVelocity = horizontalOffset / velocityFactor;
-            yInfo.decelerationVelocity = verticalOffset / velocityFactor;
-            xInfo.friction = yInfo.friction = .96;
+            xAxis.decelerationVelocity = horizontalOffset / velocityFactor;
+            yAxis.decelerationVelocity = verticalOffset / velocityFactor;
+            xAxis.friction = yAxis.friction = .96;
 
             that.framerate = 1000 / constants.framerate;
             that.winding = false;
 
-            if (abs(xInfo.decelerationVelocity) > velocity || abs(yInfo.decelerationVelocity) > velocity) {
+            if (!xAxis.aboutToStop() || !yAxis.aboutToStop()) {
                 that.winding = true;
                 that.lastCall = +new Date();
                 clearTimeout(that.timeoutId);
@@ -451,10 +451,10 @@
         _singleStep: function () {
             var that = this;
 
-            that.bounceLocation.x += that.xInfo.decelerate();
-            that.bounceLocation.y += that.yInfo.decelerate();
+            that.bounceLocation.x += that.xAxis.decelerate();
+            that.bounceLocation.y += that.yAxis.decelerate();
 
-            if (that.xInfo.aboutToStop() && that.yInfo.aboutToStop()) {
+            if (that.xAxis.aboutToStop() && that.yAxis.aboutToStop()) {
                 that._endKineticAnimation();
                 return true;
             }
