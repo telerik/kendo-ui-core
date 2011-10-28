@@ -6,7 +6,7 @@
         browser = $.browser,
         proxy = $.proxy,
         Widget = ui.Widget,
-        events = [ "showArrow" ],
+        events = ["showArrow"],
         touch = support.touch || support.pointers,
         hasHW3D = support.hasHW3D,
         cssPrefix = support.transitions.css,
@@ -45,7 +45,7 @@
         }
     }
 
-    function getAxisDimensions (axis, element, axisProperty, scrollbar) {
+    function getAxisDimensions(axis, element, axisProperty, scrollbar) {
         var scrollSize = element["inner" + axisProperty](),
             boxSize = element.parent()["inner" + axisProperty](),
             scroll = scrollSize - boxSize;
@@ -69,7 +69,7 @@
             zoomLevel: kendo.support.zoomLevel(),
             scrollbar: scrollbar,
 
-            aboutToStop: function () {
+            aboutToStop: function() {
                 if (!this.hasScroll) return true;
 
                 return abs(this.decelerationVelocity) <= VELOCITY;
@@ -87,7 +87,7 @@
                 that.scrollOffset = delta / that.zoomLevel;
             },
 
-            showScrollbar: function () {
+            showScrollbar: function() {
                 if (!this.hasScroll) return;
 
                 this.scrollbar
@@ -96,13 +96,13 @@
                     .css(this.property, this.ratio);
             },
 
-            hideScrollbar: function () {
+            hideScrollbar: function() {
                 if (!this.hasScroll) return;
 
                 this.scrollbar.css(OPACITY, 0);
             },
 
-            decelerate: function () {
+            decelerate: function() {
                 var that = this,
                     constraint = 0,
                     friction = that.friction,
@@ -207,7 +207,7 @@
     }
 
     var Scroller = Widget.extend({
-        init: function (element, options) {
+        init: function(element, options) {
             var that = this, scrollElement, children;
 
             if (options && options !== false && options.useOnDesktop === false) return false; // Stop the initialization if on desktop and disabled.
@@ -275,7 +275,7 @@
             }
         },
 
-        _applyCSS: function ( location ) {
+        _applyCSS: function(location) {
             var that = this,
                 start = that.start,
                 xAxis = that.xAxis,
@@ -288,15 +288,15 @@
                                     xAxis.scrollOffset + "px," + yAxis.scrollOffset + PX + TRANSLATE3DSUFFIX;
         },
 
-        _onGestureStart: function () {
+        _onGestureStart: function() {
             this._dragCanceled = true;
         },
 
-        _onGestureEnd: function () {
+        _onGestureEnd: function() {
             this._dragCanceled = false;
         },
 
-        _wait: function () {
+        _wait: function() {
             var that = this, e = getEvent(arguments);
 
             that._dragged = false;
@@ -324,7 +324,7 @@
                 .bind(that._endEvent, that._stopProxy);
         },
 
-        _start: function () {
+        _start: function() {
             var that = this,
                 currentLocation = that._getTouchLocation(getEvent(arguments));
 
@@ -354,10 +354,13 @@
         },
 
         _locationDelta: function(location) {
-            return { x: this.xAxis.lastLocation - location.x, y: this.yAxis.lastLocation - location.y };
+            return {
+                x: this.xAxis.lastLocation - location.x,
+                y: this.yAxis.lastLocation - location.y
+            };
         },
 
-        _updateLastLocation: function (location) {
+        _updateLastLocation: function(location) {
             var that = this;
             that.xAxis.lastLocation = location.x;
             that.yAxis.lastLocation = location.y;
@@ -387,7 +390,7 @@
             that._applyCSS(location);
         },
 
-        _stop: function () {
+        _stop: function() {
             var that = this;
             if (that._dragCanceled) return;
             that._unbindFromMove();
@@ -421,16 +424,16 @@
 
             that.winding = true;
             that.lastCall = +new Date();
-            that.timeoutId = setTimeout( that._stepKineticProxy, FRAMERATE);
+            that.timeoutId = setTimeout(that._stepKineticProxy, FRAMERATE);
         },
 
-        _stepKineticAnimation: function () {
+        _stepKineticAnimation: function() {
             var that = this;
             if (!that.winding) return;
 
             var now = +new Date(),
                 timeDelta = now - that.lastCall,
-                animationIterator = round( timeDelta / FRAMERATE - 1 );
+                animationIterator = round(timeDelta / FRAMERATE - 1);
 
             while (animationIterator-- >= 0) {
                 that.xAxis.decelerate();
@@ -441,9 +444,9 @@
                 }
             }
 
-            that._applyCSS( { x: that.xAxis.bounceLocation, y: that.yAxis.bounceLocation} );
+            that._applyCSS({ x: that.xAxis.bounceLocation, y: that.yAxis.bounceLocation});
 
-            that.timeoutId = setTimeout( that._stepKineticProxy, FRAMERATE );
+            that.timeoutId = setTimeout(that._stepKineticProxy, FRAMERATE);
             that.lastCall = now;
         },
 
