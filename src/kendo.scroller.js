@@ -54,140 +54,148 @@
         }
     }
 
-    function getAxisDimensions(axis, element, axisProperty, scrollbar) {
-        var scrollSize = element["inner" + axisProperty](),
-            boxSize = element.parent()["inner" + axisProperty](),
-            scroll = scrollSize - boxSize;
+    function Axis(element, property, scrollbar) {
+        var that = this;
+        that.element = element;
+        that.sizeName = "inner" + property;
+        that.property = property.toLowerCase();
+        that.scrollbar = scrollbar;
+        that.horizontal = property == "Width";
 
-        return $.extend(axis, {
-            initiated: true,
-            minLimit: boxSize * BOUNCE_LIMIT,
-            maxLimit: scroll + boxSize * BOUNCE_LIMIT,
-            minStop: - BOUNCE_STOP,
-            maxStop: scroll + BOUNCE_STOP,
-            ratio: ~~(boxSize / scrollSize * boxSize),
-            size: boxSize,
-            hasScroll: scroll > 0,
-            horizontal: axisProperty == "Width",
-            scrollOffset: 0,
-            friction: .96,
-            decelerationVelocity: 0,
-            bounceLocation: 0,
-            direction: 0,
-            property: axisProperty.toLowerCase(),
-            zoomLevel: kendo.support.zoomLevel(),
-            scrollbar: scrollbar,
-
-            aboutToStop: function() {
-                if (!this.hasScroll) return true;
-
-                return abs(this.decelerationVelocity) <= VELOCITY;
-            },
-
-            updateScrollOffset: function(location) {
-                if (!this.hasScroll) return 0;
-
-                var that = this,
-                    offset = this.startLocation - location,
-                    delta = -limitValue(offset, that.minStop, that.maxStop);
-
-                that.updateScrollbarPosition(delta);
-
-                return that.scrollOffset = delta / that.zoomLevel;
-            },
-
-            updateScrollbarPosition: function(position) {
-                var that = this,
-                    offsetValue,
-                    offset = "",
-                    delta = 0,
-                    cssModel = {},
-                    size,
-                    limit = 0;
-
-                position = -position;
-
-                if (position > that.maxLimit) {
-                    limit = position - that.maxLimit;
-                } else if (position < that.minLimit) {
-                    limit = position;
-                }
-
-                delta = limitValue(limit, -BOUNCE_STOP, BOUNCE_STOP);
-
-                size = max(that.ratio - abs(delta), 20);
-
-                offsetValue = limitValue(position * that.ratio / that.size + delta, 0, that.size - size);
-
-                offset = that.horizontal ? offsetValue + "px,0" : "0," + offsetValue + PX;
-
-                cssModel[TRANSFORM] = to3DProperty(offset);
-                cssModel[that.property] = size + PX;
-
-                that.scrollbar.css(cssModel);
-            },
-
-            showScrollbar: function() {
-                if (!this.hasScroll) return;
-
-                this.scrollbar
-                    .show()
-                    .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
-                    .css(this.property, this.ratio);
-            },
-
-            hideScrollbar: function() {
-                if (!this.hasScroll) return;
-
-                this.scrollbar.css(OPACITY, 0);
-            },
-
-            decelerate: function() {
-                var that = this,
-                    constraint = 0,
-                    friction = that.friction,
-                    scrollOffset = that.scrollOffset,
-                    decelerationVelocity = that.decelerationVelocity * friction;
-
-                    that.bounceLocation += that.decelerationVelocity;
-
-                if (-scrollOffset < that.minLimit) {
-                    constraint = that.minLimit + scrollOffset;
-                } else if (-scrollOffset > that.maxLimit) {
-                    constraint = that.maxLimit + scrollOffset;
-                }
-
-                if (constraint) {
-                    friction -= limitValue( (BOUNCE_STOP - abs(constraint)) / BOUNCE_STOP, 0, .9 );
-                    decelerationVelocity -= constraint * BOUNCE_DECELERATION;
-                }
-
-                that.decelerationVelocity = decelerationVelocity;
-                that.friction = limitValue( friction, 0, 1 );
-            },
-
-            startKineticAnimation: function(location, delta, velocityFactor) {
-                var that = this;
-                that.bounceLocation = location;
-                that.friction = .96;
-                that.decelerationVelocity = - delta / velocityFactor;
-            },
-
-            changeDirection: function(delta) {
-                var that = this;
-
-                if (!that.hasScroll) {
-                    return false;
-                }
-
-                var newDirection = delta/abs(delta),
-                    directionChanged = newDirection !== that.direction;
-
-                that.direction = newDirection;
-                return directionChanged;
-            }
-        });
+        that.init();
     }
+
+    Axis.prototype = {
+        init: function() {
+            var that = this,
+                scrollSize = that.element[that.sizeName](),
+                boxSize = that.element.parent()[that.sizeName](),
+                scroll = scrollSize - boxSize;
+
+            that.minLimit = boxSize * BOUNCE_LIMIT;
+            that.maxLimit = scroll + this.minLimit;
+            that.minStop = - BOUNCE_STOP;
+            that.maxStop = scroll + BOUNCE_STOP;
+            that.ratio = ~~(boxSize / scrollSize * boxSize);
+            that.size = boxSize;
+            that.hasScroll = scroll > 0;
+            that.scrollOffset = 0;
+            that.friction = .96;
+            that.decelerationVelocity = 0;
+            that.bounceLocation = 0;
+            that.direction = 0;
+            that.zoomLevel = kendo.support.zoomLevel();
+        },
+
+        aboutToStop: function() {
+            if (!this.hasScroll) return true;
+
+            return abs(this.decelerationVelocity) <= VELOCITY;
+        },
+
+        updateScrollOffset: function(location) {
+            if (!this.hasScroll) return 0;
+
+            var that = this,
+                offset = this.startLocation - location,
+                delta = -limitValue(offset, that.minStop, that.maxStop);
+
+            that.updateScrollbarPosition(delta);
+
+            return that.scrollOffset = delta / that.zoomLevel;
+        },
+
+        updateScrollbarPosition: function(position) {
+            var that = this,
+                offsetValue,
+                offset = "",
+                delta = 0,
+                cssModel = {},
+                size,
+                limit = 0;
+
+            position = -position;
+
+            if (position > that.maxLimit) {
+                limit = position - that.maxLimit;
+            } else if (position < that.minLimit) {
+                limit = position;
+            }
+
+            delta = limitValue(limit, -BOUNCE_STOP, BOUNCE_STOP);
+
+            size = max(that.ratio - abs(delta), 20);
+
+            offsetValue = limitValue(position * that.ratio / that.size + delta, 0, that.size - size);
+
+            offset = that.horizontal ? offsetValue + "px,0" : "0," + offsetValue + PX;
+
+            cssModel[TRANSFORM] = to3DProperty(offset);
+            cssModel[that.property] = size + PX;
+
+            that.scrollbar.css(cssModel);
+        },
+
+        showScrollbar: function() {
+            if (!this.hasScroll) return;
+
+            this.scrollbar
+                .show()
+                .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
+                .css(this.property, this.ratio);
+        },
+
+        hideScrollbar: function() {
+            if (!this.hasScroll) return;
+
+            this.scrollbar.css(OPACITY, 0);
+        },
+
+        decelerate: function() {
+            var that = this,
+                constraint = 0,
+                friction = that.friction,
+                scrollOffset = that.scrollOffset,
+                decelerationVelocity = that.decelerationVelocity * friction;
+
+                that.bounceLocation += that.decelerationVelocity;
+
+            if (-scrollOffset < that.minLimit) {
+                constraint = that.minLimit + scrollOffset;
+            } else if (-scrollOffset > that.maxLimit) {
+                constraint = that.maxLimit + scrollOffset;
+            }
+
+            if (constraint) {
+                friction -= limitValue( (BOUNCE_STOP - abs(constraint)) / BOUNCE_STOP, 0, .9 );
+                decelerationVelocity -= constraint * BOUNCE_DECELERATION;
+            }
+
+            that.decelerationVelocity = decelerationVelocity;
+            that.friction = limitValue( friction, 0, 1 );
+        },
+
+        startKineticAnimation: function(location, delta, velocityFactor) {
+            var that = this;
+            that.bounceLocation = location;
+            that.friction = .96;
+            that.decelerationVelocity = - delta / velocityFactor;
+        },
+
+        changeDirection: function(delta) {
+            var that = this;
+
+            if (!that.hasScroll) {
+                return false;
+            }
+
+            var newDirection = delta/abs(delta),
+                directionChanged = newDirection !== that.direction;
+
+            that.direction = newDirection;
+            return directionChanged;
+        }
+    };
 
     function limitValue(value, minLimit, maxLimit) {
         return max( minLimit, min( maxLimit, value));
@@ -230,9 +238,6 @@
             scrollElement = $('<div class="k-scroll-container"/>'),
             children = element.children(":not(script)");
 
-            that.xAxis = {};
-            that.yAxis = {};
-
             that.bind(events, options);
 
             that.xScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
@@ -264,6 +269,9 @@
                 .bind("gestureend", that._gestureEndProxy )
                 .bind(STARTEVENT, that._waitProxy);
 
+            that.xAxis = new Axis(that.scrollElement, "Width", that.xScrollbar);
+            that.yAxis = new Axis(that.scrollElement, "Height", that.yScrollbar);
+
             browser.mozilla && element.bind("mousedown", false );
         },
 
@@ -289,7 +297,7 @@
                 xOffset = that.xAxis.updateScrollOffset(location.x),
                 yOffset = that.yAxis.updateScrollOffset(location.y);
 
-            that.scrollElement.stop(true,true)[0].style[TRANSFORMSTYLE] = to3DProperty(xOffset + PX + "," + yOffset + PX)
+            that.scrollElement.stop(true,true)[0].style[TRANSFORMSTYLE] = to3DProperty(xOffset + PX + "," + yOffset + PX);
         },
 
         _onGestureStart: function() {
@@ -341,8 +349,9 @@
 
             if (abs(locationDelta.x) > dip10 || abs(locationDelta.y) > dip10) {
 
-                that.xAxis = getAxisDimensions(that.xAxis, that.scrollElement, "Width", that.xScrollbar);
-                that.yAxis = getAxisDimensions(that.yAxis, that.scrollElement, "Height", that.yScrollbar);
+                that.xAxis.init();
+                that.yAxis.init();
+
                 that._storeLastLocation( currentLocation );
                 that._dragged = true;
 
@@ -454,10 +463,6 @@
 
        _endKineticAnimation: function(forceEnd) {
            var that = this;
-
-           if (!that.xAxis.initiated) {
-                return false;
-           }
 
            if (!that.xAxis.aboutToStop() || !that.yAxis.aboutToStop()) {
                if (!forceEnd) {
