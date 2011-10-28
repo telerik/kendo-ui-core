@@ -560,6 +560,7 @@
             var that = this,
                 cell,
                 column,
+                model,
                 id;
 
             if (that.options.editable) {
@@ -576,14 +577,18 @@
                         that._displayCell(cell, column, that.dataSource.get(id).data);
                     });
 
-                    cell = $(this).addClass("k-edit-cell");
+                    cell = $(this);
                     id = cell.closest("tr").data("id");
                     column = that.columns[that.cellIndex(cell)];
+                    model = that.dataSource.get(id);
 
-                    cell.kendoEditable({
-                        fields: column.field,
-                        model: that.dataSource.get(id)
-                    });
+                    if(!model._readOnly(column.field)) {
+                        cell.addClass("k-edit-cell")
+                            .kendoEditable({
+                                fields: column.field,
+                                model: model
+                            });
+                    }
                 });
 
                 $(document).click(function(e) {

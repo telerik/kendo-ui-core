@@ -97,6 +97,11 @@
             return converter ? converter(value) : value;
         },
 
+        _readOnly: function(field) {
+            field = (this.fields || {})[field];
+            return !!(field ? field.readonly : false);
+        },
+
         set: function(fields, value) {
             var that = this,
                 field,
@@ -115,7 +120,7 @@
 
                 value = that._convert(field, values[field]);
 
-                if (!equal(value, accessor.get(that.data))) {
+                if (!that._readOnly(field) && !equal(value, accessor.get(that.data))) {
                     accessor.set(that.data, value);
                     that._modified = modified = true;
                 }

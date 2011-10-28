@@ -163,6 +163,22 @@
                 ok(model.fields.foo.validation.bar);
                 ok($.isFunction(model.fields.foo.validation.bar));
             });
+
+            test("field can be set as readonly", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            readonly: true
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.fields.foo.readonly);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

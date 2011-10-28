@@ -5,7 +5,8 @@
         extend = $.extend,
         isFunction = $.isFunction,
         inArray = $.inArray,
-        Binder = kendo.data.ModelViewBinder;
+        Binder = kendo.data.ModelViewBinder,
+        DATATYPE = "data-kendo-type";
 
     var specialRules = ["url", "email", "number", "date", "boolean"];
 
@@ -24,14 +25,14 @@
             rule = validation[ruleName];
 
             if (inArray(ruleName, specialRules) >= 0) {
-                attr["data-kendo-type"] = ruleName;
+                attr[DATATYPE] = ruleName;
             } else if (!isFunction(rule)) {
                 attr[ruleName] = rule;
             }
         }
 
         if (inArray(type, specialRules) >= 0) {
-            attr["data-kendo-type"] = type;
+            attr[DATATYPE] = type;
         }
 
         return $("<input />").attr(attr);
@@ -62,11 +63,13 @@
         },
 
         options: {
-            name: "Editable"
+            name: "Editable",
+            editors: editors
         },
 
         editor: function(field) {
             var that = this,
+                editors = that.options.editors,
                 model = that.options.model || {},
                 isObject = $.isPlainObject(field),
                 fieldName = isObject ? field.field : field,

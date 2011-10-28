@@ -255,6 +255,19 @@
                 equal(m.get("bar").getTime(), new Date(836524800000).getTime());
                 equal(typeof m.get("bar"), "object");
             });
+
+            test("setting value of field marked as readonly is ignored", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", readonly: true }
+                    }
+                }), m = new MyModel({ bar: "foo" });
+
+                m.set("bar", "baz");
+                equal(m.get("bar"), "foo");
+                ok(!m._modified);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
