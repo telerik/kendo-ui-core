@@ -53,8 +53,35 @@
             return args[0];
         }
     }
+    function limitValue(value, minLimit, maxLimit) {
+        return max( minLimit, min( maxLimit, value));
+    }
 
-    function Axis(element, property, scrollbar) {
+    function getScrollOffsets(scrollElement) {
+        scrollElement = $(scrollElement);
+
+        var transformStyle = scrollElement[0].style[TRANSFORMSTYLE],
+            transforms = (transformStyle ? transformStyle.match(TRANSLATION_REGEXP) || transformStyle.match(SINGLE_TRANSLATION_REGEXP) || DEFAULT_MATRIX : DEFAULT_MATRIX);
+
+        if (transforms) {
+            if (transforms[2] == "Y") {
+                transforms[4] = transforms[3];
+                transforms[3] = 0;
+            } else
+                transforms[2] == "X" && (transforms[4] = 0);
+        }
+
+        return support.transitions ? {
+                                         x: +transforms[3],
+                                         y: +transforms[4]
+                                     } :
+                                     {
+                                         x: parseInt(scrollElement.css("marginLeft"), 10) || 0,
+                                         y: parseInt(scrollElement.css("marginTop"), 10) || 0
+                                     };
+    }
+
+    var Axis = function(element, property, scrollbar) {
         var that = this;
         that.element = element;
         that.sizeName = "inner" + property;
@@ -204,33 +231,6 @@
         }
     };
 
-    function limitValue(value, minLimit, maxLimit) {
-        return max( minLimit, min( maxLimit, value));
-    }
-
-    function getScrollOffsets(scrollElement) {
-        scrollElement = $(scrollElement);
-
-        var transformStyle = scrollElement[0].style[TRANSFORMSTYLE],
-            transforms = (transformStyle ? transformStyle.match(TRANSLATION_REGEXP) || transformStyle.match(SINGLE_TRANSLATION_REGEXP) || DEFAULT_MATRIX : DEFAULT_MATRIX);
-
-        if (transforms) {
-            if (transforms[2] == "Y") {
-                transforms[4] = transforms[3];
-                transforms[3] = 0;
-            } else
-                transforms[2] == "X" && (transforms[4] = 0);
-        }
-
-        return support.transitions ? {
-                                         x: +transforms[3],
-                                         y: +transforms[4]
-                                     } :
-                                     {
-                                         x: parseInt(scrollElement.css("marginLeft"), 10) || 0,
-                                         y: parseInt(scrollElement.css("marginTop"), 10) || 0
-                                     };
-    }
 
     var Scroller = Widget.extend({
         init: function(element, options) {
@@ -339,21 +339,23 @@
 
         _start: function() {
             var that = this,
+                xAxis = that.xAxis,
+                yAxis = that.yAxis,
                 currentLocation = that._getTouchLocation(getEvent(arguments));
 
             if (!currentLocation) {
                 return;
             }
 
-            if (that.xAxis.sufficient(currentLocation.x) || that.yAxis.sufficient(currentLocation.y)) {
-                that.xAxis.init();
-                that.yAxis.init();
+            if (xAxis.sufficient(currentLocation.x) || yAxis.sufficient(currentLocation.y)) {
+                xAxis.init();
+                yAxis.init();
 
                 that._storeLastLocation( currentLocation );
                 that._dragged = true;
 
-                that.xAxis.showScrollbar();
-                that.yAxis.showScrollbar();
+                xAxis.showScrollbar();
+                yAxis.showScrollbar();
 
                 $(document).unbind(MOVEEVENT, that._startProxy)
                            .unbind(MOVEEVENT, that._dragProxy)
@@ -406,21 +408,18 @@
        },
 
         _unbindFromMove: function() {
-            var that = this;
             $(document)
-                 .unbind(MOVEEVENT, that._startProxy)
-                 .unbind(MOVEEVENT, that._dragProxy);
+                 .unbind(MOVEEVENT, this._startProxy)
+                 .unbind(MOVEEVENT, this._dragProxy);
         },
 
         _initKineticAnimation: function(e) {
             var that = this,
-                xAxis = that.xAxis,
-                yAxis = that.yAxis,
                 bounceLocation = touchLocation(e),
                 velocityFactor = (+new Date() - that.directionChange) / ACCELERATION;
 
-            xAxis.startKineticAnimation(bounceLocation.x, velocityFactor);
-            yAxis.startKineticAnimation(bounceLocation.y, velocityFactor);
+            that.xAxis.startKineticAnimation(bounceLocation.x, velocityFactor);
+            that.yAxis.startKineticAnimation(bounceLocation.y, velocityFactor);
 
             that.winding = true;
             that.lastCall = +new Date();
@@ -428,7 +427,10 @@
         },
 
         _stepKineticAnimation: function() {
-            var that = this;
+            var that = this,
+                xAxis = that.xAxis,
+                yAxis = that.yAxis;
+
             if (!that.winding) return;
 
             var now = +new Date(),
@@ -436,24 +438,26 @@
                 animationIterator = round(timeDelta / FRAMERATE - 1);
 
             while (animationIterator-- >= 0) {
-                that.xAxis.decelerate();
-                that.yAxis.decelerate();
+                xAxis.decelerate();
+                yAxis.decelerate();
 
                 if (that._endKineticAnimation()) {
                     return;
                 }
             }
 
-            that._applyCSS({ x: that.xAxis.bounceLocation, y: that.yAxis.bounceLocation});
+            that._applyCSS({ x: xAxis.bounceLocation, y: yAxis.bounceLocation});
 
             that.timeoutId = setTimeout(that._stepKineticProxy, FRAMERATE);
             that.lastCall = now;
         },
 
        _endKineticAnimation: function(forceEnd) {
-           var that = this;
+            var that = this,
+                xAxis = that.xAxis,
+                yAxis = that.yAxis;
 
-           if (!that.xAxis.aboutToStop() || !that.yAxis.aboutToStop()) {
+           if (!xAxis.aboutToStop() || !yAxis.aboutToStop()) {
                if (!forceEnd) {
                    return false;
                }
@@ -462,8 +466,8 @@
            that.winding = false;
            clearTimeout(that.timeoutId);
 
-           that.xAxis.hideScrollbar();
-           that.yAxis.hideScrollbar();
+           xAxis.hideScrollbar();
+           yAxis.hideScrollbar();
            return true;
        }
     });
