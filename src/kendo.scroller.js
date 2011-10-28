@@ -68,6 +68,7 @@
             property: axisProperty.toLowerCase(),
             zoomLevel: kendo.support.zoomLevel(),
             scrollbar: scrollbar,
+
             aboutToStop: function () {
                 if (!this.hasScroll) return true;
 
@@ -396,7 +397,7 @@
                 that._dragged = false;
                 that._initKineticAnimation(getEvent(arguments));
             } else {
-                that._hideScrollHints();
+                that._endKineticAnimation(true);
             }
        },
 
@@ -421,14 +422,6 @@
             that.winding = true;
             that.lastCall = +new Date();
             that.timeoutId = setTimeout( that._stepKineticProxy, FRAMERATE);
-            if (!xAxis.aboutToStop() || !yAxis.aboutToStop()) {
-                that.winding = true;
-                that.lastCall = +new Date();
-                clearTimeout(that.timeoutId);
-                that.timeoutId = setTimeout( that._stepKineticProxy, that.framerate );
-            } else {
-                that._endKineticAnimation();
-            }
         },
 
         _stepKineticAnimation: function () {
@@ -443,9 +436,8 @@
                 that.xAxis.decelerate();
                 that.yAxis.decelerate();
 
-                if (that.xAxis.aboutToStop() && that.yAxis.aboutToStop()) {
-                    that._endKineticAnimation();
-                    return true;
+                if (that._endKineticAnimation()) {
+                    return;
                 }
             }
 
@@ -455,14 +447,26 @@
             that.lastCall = now;
         },
 
-        _endKineticAnimation: function () {
-            var that = this;
+       _endKineticAnimation: function(forceEnd) {
+           var that = this;
 
-            that.winding = false;
-            clearTimeout(that.timeoutId);
+           if (!that.xAxis.initiated) {
+                return false;
+           }
 
-            that._hideScrollHints();
-        }
+           if (!that.xAxis.aboutToStop() || !that.yAxis.aboutToStop()) {
+               if (!forceEnd) {
+                   return false;
+               }
+           }
+
+           that.winding = false;
+           clearTimeout(that.timeoutId);
+
+           that.xAxis.hideScrollbar();
+           that.yAxis.hideScrollbar();
+           return true;
+       }
     });
 
     kendo.ui.plugin(Scroller);
