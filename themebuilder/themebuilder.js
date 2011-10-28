@@ -2,6 +2,7 @@
 
     var proxy = $.proxy,
         CHANGE = "change",
+        KENDOWINDOW = "kendoWindow"
         Widget = kendo.ui.Widget,
         ColorPicker = kendo.ui.ComboBox.extend({
             init: function(element, options) {
@@ -167,49 +168,62 @@
                     .find("input").kendoColorPicker({
                         autoBind: false,
                         dataSource: themeColorsDataSource,
-                        template: "<span style='background-color: ${ data.value }' class='k-icon k-color-preview'></span> " +
-                                  "<span class='k-color-name'>${ data.text }</span>",
                         change: proxy(that._propertyChange, that)
                     });
+
+                $(".k-list-container[id^='@']").appendTo("#k-tb-wrap");
 
                 $(".k-items-collapse", that.element).click(function() {
                     var panelbar = $("#stylable-elements");
                     panelbar.data("kendoPanelBar").collapse($(".k-item", panelbar));
                 });
 
-                $(".k-action-download").click(function(e) {
-                    e.preventDefault();
+                $(".k-action-download").click(proxy(that.download, that));
+            },
+            open: function() {
+                this.content.data(KENDOWINDOW).open();
+            },
+            download: function(e) {
+                e.preventDefault();
 
-                    var downloadWindow = $("<div><textarea></textarea></div>")
+                var that = this,
+                    downloadWindowObject,
+                    windowWrapper
+                    downloadWindow = $("<div><textarea>Generating CSS...</textarea></div>")
                         .kendoWindow({
                             modal: true,
                             width: 600,
                             height: 350,
-                            scrollable: false
+                            scrollable: false,
+                            close: function() {
+                                downloadWindowObject.destroy();
+                                // TODO: this should be handled by the window
+                                $("#k-tb-wrap .k-overlay").remove();
+                            }
                         });
 
-                    downloadWindow.data("kendoWindow").wrapper
-                        .attr("id", "download-interface");
+                downloadWindowObject = downloadWindow.data(KENDOWINDOW);
 
-                    downloadWindow.data("kendoWindow").center().open();
+                windowWrapper = downloadWindowObject.wrapper;
 
-                    (new less.Parser()).parse(
-                        that.constants.serialize() + that.templateInfo.template,
-                        function (err, tree) {
-                            if (err && console) {
-                                return console.error(err);
-                            }
+                windowWrapper.prev(".k-overlay").appendTo("#k-tb-wrap");
+                windowWrapper.attr("id", "download-interface").appendTo("#k-tb-wrap");
 
-                            downloadWindow.find("textarea").val(tree.toCSS());
+                downloadWindowObject.center().open();
+
+                (new less.Parser()).parse(
+                    that.constants.serialize() + that.templateInfo.template,
+                    function (err, tree) {
+                        if (err && console) {
+                            return console.error(err);
                         }
-                    );
-                });
-            },
-            open: function() {
-                this.content.data("kendoWindow").open();
+
+                        downloadWindow.find("textarea").val(tree.toCSS());
+                    }
+                );
             },
             updateMaxHeight: function() {
-                this.content.data("kendoWindow").options.maxHeight = $(window).height() - 100;
+                this.content.data(KENDOWINDOW).options.maxHeight = $(window).height() - 100;
             },
             removeUpdateHeightHandler: function() {
                 $(window).unbind("resize.kendoThemeBuilder");
@@ -300,7 +314,9 @@
         });
 
     ColorPicker.fn.options = $.extend(kendo.ui.ComboBox.fn.options, {
-        name: "ColorPicker"
+        name: "ColorPicker",
+        template: "<span style='background-color: ${ data.value }' class='k-icon k-color-preview'></span> " +
+                  "<span class='k-color-name'>${ data.text }</span>"
     });
 
     kendo.ui.plugin(ColorPicker);
