@@ -8,7 +8,6 @@
         Widget = ui.Widget,
         events = ["showArrow"],
         touch = support.touch || support.pointers,
-        hasHW3D = support.hasHW3D,
         cssPrefix = support.transitions.css,
         stylePrefix = support.transitions.prefix,
         touchLocation = kendo.touchLocation,
@@ -16,16 +15,15 @@
         max = Math.max,
         abs = Math.abs,
         round = Math.round,
-        translationRegExp = /(translate[3d]*\(|matrix\(([\s\w\d]*,){4,4})\s*(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)[\w\s]*.*?\)/i,
-        singleTranslationRegExp = /(translate([XY])\(\s*(-?[\d\.]+)?[\w\s]*\))/i,
+        TRANSLATION_REGEXP = /(translate[3d]*\(|matrix\(([\s\w\d]*,){4,4})\s*(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)[\w\s]*.*?\)/i,
+        SINGLE_TRANSLATION_REGEXP = /(translate([XY])\(\s*(-?[\d\.]+)?[\w\s]*\))/i,
+        DEFAULT_MATRIX = [0, 0, 0, 0, 0],
         PX = "px",
         WIDTH = "width",
         OPACITY = "opacity",
         VISIBLE = "visible",
         TRANSFORM = cssPrefix + "transform",
         TRANSFORMSTYLE = stylePrefix + "Transform",
-        TRANSLATE3DSUFFIX = (hasHW3D ? ", 0)" : ")"),
-        TRANSLATE3DPREFIX = "translate" + (hasHW3D ? "3d(" : "("),
         STARTEVENT = touch ? "touchstart" : "mousedown",
         MOVEEVENT = touch ? "touchmove" : "mousemove",
         ENDEVENT = touch ? "touchend" : "mouseup",
@@ -35,7 +33,18 @@
         BOUNCE_LIMIT = 0,
         BOUNCE_STOP = 100,
         BOUNCE_DECELERATION = .1,
+        to3DProperty,
         SCROLLBAR_OPACITY = .7;
+
+        if (support.hasHW3D) {
+            to3DProperty = function(value) {
+                return "translate3d(" + value + ", 0)";
+            }
+        } else {
+            to3DProperty = function(value) {
+                return "translate(" + value + ")";
+            }
+        }
 
     function getEvent(args) {
         if (args[1] && "changedTouches" in args[1]) {
@@ -76,15 +85,46 @@
             },
 
             updateScrollOffset: function(location) {
-                if (!this.hasScroll) return;
+                if (!this.hasScroll) return 0;
 
                 var that = this,
                     offset = this.startLocation - location,
                     delta = -limitValue(offset, that.minStop, that.maxStop);
 
-                updateScrollbarPosition(delta, that.scrollbar, that);
+                that.updateScrollbarPosition(delta);
 
-                that.scrollOffset = delta / that.zoomLevel;
+                return that.scrollOffset = delta / that.zoomLevel;
+            },
+
+            updateScrollbarPosition: function(position) {
+                var that = this,
+                    offsetValue,
+                    offset = "",
+                    delta = 0,
+                    cssModel = {},
+                    size,
+                    limit = 0;
+
+                position = -position;
+
+                if (position > that.maxLimit) {
+                    limit = position - that.maxLimit;
+                } else if (position < that.minLimit) {
+                    limit = position;
+                }
+
+                delta = limitValue(limit, -BOUNCE_STOP, BOUNCE_STOP);
+
+                size = max(that.ratio - abs(delta), 20);
+
+                offsetValue = limitValue(position * that.ratio / that.size + delta, 0, that.size - size);
+
+                offset = that.horizontal ? offsetValue + "px,0" : "0," + offsetValue + PX;
+
+                cssModel[TRANSFORM] = to3DProperty(offset);
+                cssModel[that.property] = size + PX;
+
+                that.scrollbar.css(cssModel);
             },
 
             showScrollbar: function() {
@@ -153,40 +193,11 @@
         return max( minLimit, min( maxLimit, value));
     }
 
-    function updateScrollbarPosition(position, scrollbar, info) {
-        var offsetValue, offset = "", delta = 0, cssModel = {}, size, limit = 0;
-
-        position = -position;
-
-        if (position > info.maxLimit) {
-            limit = position - info.maxLimit;
-        } else if (position < info.minLimit) {
-            limit = position;
-        }
-
-        delta = limitValue(limit, -BOUNCE_STOP, BOUNCE_STOP);
-
-        size = max( info.ratio - abs(delta), 20 );
-
-        offsetValue = limitValue( position * info.ratio / info.size + delta, 0, info.size - size );
-
-        if (info.horizontal) {
-            offset = offsetValue + "px,0";
-        } else {
-            offset = "0," + offsetValue + PX;
-        }
-
-        cssModel[TRANSFORM] = TRANSLATE3DPREFIX + offset + TRANSLATE3DSUFFIX;
-        cssModel[info.property] = size + PX;
-
-        scrollbar.css( cssModel );
-    }
-
     function getScrollOffsets (scrollElement) {
         scrollElement = $(scrollElement);
 
         var transformStyle = scrollElement[0].style[TRANSFORMSTYLE],
-            transforms = (transformStyle ? transformStyle.match(translationRegExp) || transformStyle.match(singleTranslationRegExp) || [0, 0, 0, 0, 0] : [0, 0, 0, 0, 0]);
+            transforms = (transformStyle ? transformStyle.match(TRANSLATION_REGEXP) || transformStyle.match(SINGLE_TRANSLATION_REGEXP) || DEFAULT_MATRIX : DEFAULT_MATRIX);
 
         if (transforms) {
             if (transforms[2] == "Y") {
@@ -218,6 +229,7 @@
             options = that.options,
             scrollElement = $('<div class="k-scroll-container"/>'),
             children = element.children(":not(script)");
+
             that.xAxis = {};
             that.yAxis = {};
 
@@ -274,14 +286,10 @@
         _applyCSS: function(location) {
             var that = this,
                 start = that.start,
-                xAxis = that.xAxis,
-                yAxis = that.yAxis;
+                xOffset = that.xAxis.updateScrollOffset(location.x),
+                yOffset = that.yAxis.updateScrollOffset(location.y);
 
-            xAxis.updateScrollOffset(location.x);
-            yAxis.updateScrollOffset(location.y);
-
-            that.scrollElement.stop(true,true)[0].style[TRANSFORMSTYLE] = TRANSLATE3DPREFIX +
-                                    xAxis.scrollOffset + "px," + yAxis.scrollOffset + PX + TRANSLATE3DSUFFIX;
+            that.scrollElement.stop(true,true)[0].style[TRANSFORMSTYLE] = to3DProperty(xOffset + PX + "," + yOffset + PX)
         },
 
         _onGestureStart: function() {
