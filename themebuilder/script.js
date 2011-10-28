@@ -29,7 +29,7 @@
 
     // show error message on pages that we can not work with
     if (typeof jQuery == UNDEFINED || typeof kendo == UNDEFINED) {
-        var messageId = 'kendoThemeBuilderMessage',
+        var messageId = 'k-tb-message',
             styles = 'position:absolute;top:50%;margin-top:-1.6em;left:50%;margin-left:-16em;z-index:9999999;font:12px sans-serif;text-align:center;width:32em;padding:1em;border:1px solid #2a2a2a;background:#f2f2f2;color:#ef652a;-moz-box-shadow: 1px 1px 7px 1px #666;-webkit-box-shadow: 1px 1px 7px 1px #666;box-shadow: 1px 1px 7px 1px #666;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;';
 
         if (!doc.getElementById(messageId)) {
@@ -64,11 +64,12 @@
                 infer: function() {
                     var icon = $("<div class='k-icon' />").css("display", "none").appendTo(document.body);
 
-                    return icon.css("background-image").replace(/url\(["']?(.*?)sprite\.png["']?\)$/i, "\"$1\"");
+                    return icon.css("background-image").replace(/url\(["']?(.*?)\/sprite\.png["']?\)$/i, "\"$1\"");
                 }
             },
 
             "@texture-url": constant(".k-header", "background-image", [
+                // TODO: map these to the CDN
                 "http://localhost/kendo/live/styles/Black/gradient.png",
                 "http://localhost/kendo/live/styles/BlueOpal/gradient.png",
                 "http://localhost/kendo/live/styles/Hakama/gradient.png"
