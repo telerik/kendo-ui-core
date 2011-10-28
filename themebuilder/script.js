@@ -125,13 +125,85 @@
             "@splitbar-background-color":       constant(".k-splitbar", BGCOLOR)
         },
         constantsHierarchy = {
-            "Widget": /^@widget.*/,
-            "Headers": /^@header.*/,
-            "Buttons": /^@button.*/,
-            "Groups and content areas": /^@(group|content).*/,
-            "Select boxes and pickers": /^@select-.*/,
-            "Widget states": /^@(hover|selected|active|error|disabled).*/,
-            "Misc": /^@(alt|input|shadow|link|tooltip|border|loading|splitbar)/
+            "Widgets": {
+                constants: /^@widget.*/,
+                labels: {
+                    "@widget-background-color":  "Background",
+                    "@widget-border-color":      "Border color",
+                    "@widget-text-color":        "Text color"
+                }
+            },
+            "Headers and links": {
+                constants: /^@(header|link).*/,
+                labels: {
+                    "@header-background-color":  "Header background",
+                    "@header-text-color":        "Header text color",
+
+                    "@link-text-color":          "Link text color"
+                }
+            },
+            "Buttons": {
+                constants: /^@button.*/,
+                labels: {
+                    "@button-background-color": "Background",
+                    "@button-text-color":       "Text color"
+                }
+            },
+            "Groups and content areas": {
+                constants: /^@(group|content).*/,
+                labels: {
+                    "@group-background-color":   "Group background",
+                    "@group-border-color":       "Group border color",
+                    "@content-background-color": "Content area color"
+                }
+            },
+            "Inputs, pickers, and select boxes": {
+                constants: /^@(select|input)-.*/,
+                labels: {
+                    "@select-background-color":       "Background",
+                    "@select-border-color":           "Border color",
+                    "@select-group-background-color": "Popup background",
+                    "@select-hover-background-color": "Item hover state",
+
+                    "@input-background-color":        "Input background",
+                    "@input-text-color":              "Input text color"
+                }
+            },
+            "Widget states": {
+                constants: /^@(hover|selected|active|error|disabled).*/,
+                labels: {
+                    "@hover-background-color":        "Hover background",
+                    "@hover-border-color":            "Hover border color",
+                    "@hover-text-color":              "Hover text color",
+
+                    "@selected-background-color":     "Selection background",
+                    "@selected-border-color":         "Selection border color",
+                    "@selected-text-color":           "Selection text color",
+
+                    "@active-background-color":       "Active background",
+                    "@active-border-color":           "Active border color",
+                    "@active-text-color":             "Active text color",
+
+                    "@error-background-color":        "Error background",
+                    "@error-border-color":            "Error border color",
+                    "@error-text-color":              "Error text color",
+
+                    "@disabled-text-color":           "Disabled text color"
+                }
+            },
+            "Misc": {
+                constants: /^@(alt|shadow|tooltip|border|loading|splitbar)/,
+                labels: {
+                    "@border-radius":             "Border radius",
+                    "@alt-background-color":      "Alternating color",
+                    "@shadow-color":              "Shadow color",
+                    "@shadow-inset-color":        "Inset shadow",
+                    "@tooltip-background-color":  "Tooltip background",
+                    "@tooltip-text-color":        "Tooltip text color",
+                    "@loading-panel-color":       "Loading panel background",
+                    "@splitbar-background-color": "Splitbar background"
+                }
+            },
         };
 
     window.lessLoaded = function(lessTemplate) {
