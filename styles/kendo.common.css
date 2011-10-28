@@ -3164,7 +3164,13 @@ html .k-upload
     position: relative;
     display: inline-block;
     min-width: 120px;
+    max-width: 200px;
     vertical-align: middle;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .k-progress,
@@ -3575,6 +3581,8 @@ div.k-chart
 
 *+html .k-splitbar-draggable-vertical .k-resize-handle,
 *+html .k-splitbar-draggable-horizontal .k-resize-handle,
+
+*+html .t-filename,
 
 *+html div.k-window,
 *+html .k-window-titlebar .k-window-action
