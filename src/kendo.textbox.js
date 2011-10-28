@@ -275,7 +275,7 @@
            text = wrapper.find(POINT + CLASSNAME);
 
             if (!text[0]) {
-                text = $("<input />").insertBefore(element).addClass(CLASSNAME);//.hide()
+                text = $("<input />").insertBefore(element).addClass(CLASSNAME);
             }
 
             text[0].style.cssText = element.style.cssText;
@@ -301,12 +301,11 @@
             var that = this,
                 element = e.target,
                 value = element.value;
-                setTimeout(function() {
-                    if (parse(element.val()) === null) {
-                        that.value(value);
-                    }
-                });
-
+            setTimeout(function() {
+                if (parse(element.val()) === NULL) {
+                    that.value(value);
+                }
+            });
         },
 
         _prevent: function(key) {
@@ -382,9 +381,7 @@
             var that = this;
 
             toggle = !!toggle;
-
-            that._text.toggle(toggle); //calling enable() hides the _text ...
-
+            that._text.toggle(toggle);
             that.element.toggle(!toggle);
         },
 
