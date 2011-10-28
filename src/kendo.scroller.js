@@ -85,6 +85,7 @@
             that.bounceLocation = 0;
             that.direction = 0;
             that.zoomLevel = kendo.support.zoomLevel();
+            that.dip10 = 5 * that.zoomLevel;
         },
 
         aboutToStop: function() {
@@ -194,6 +195,10 @@
 
             that.direction = newDirection;
             return directionChanged;
+        },
+
+        sufficient: function(location) {
+            return abs(this.lastLocation - location) > this.dip10;
         }
     };
 
@@ -320,10 +325,7 @@
             that.xAxis.startLocation = startLocation.x - scrollOffsets.x;
             that.yAxis.startLocation = startLocation.y - scrollOffsets.y;
 
-            that.start = {
-                idx: startLocation.idx,
-                zoomLevel: support.zoomLevel()
-            };
+            that.idx = startLocation.idx;
 
             that._updateLastLocation(startLocation);
 
@@ -344,11 +346,7 @@
                 return;
             }
 
-            var dip10 = 5 * that.start.zoomLevel,
-                locationDelta = this._locationDelta(currentLocation);
-
-            if (abs(locationDelta.x) > dip10 || abs(locationDelta.y) > dip10) {
-
+            if (that.xAxis.sufficient(currentLocation.x) || that.yAxis.sufficient(currentLocation.y)) {
                 that.xAxis.init();
                 that.yAxis.init();
 
@@ -383,7 +381,7 @@
             event.stopPropagation();
 
             var location = touchLocation(event);
-            if (location.idx != this.start.idx || this._dragCanceled) {
+            if (location.idx != this.idx || this._dragCanceled) {
                 return;
             }
 
