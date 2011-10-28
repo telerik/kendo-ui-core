@@ -29,20 +29,13 @@
         STARTEVENT = touch ? "touchstart" : "mousedown",
         MOVEEVENT = touch ? "touchmove" : "mousemove",
         ENDEVENT = touch ? "touchend" : "mouseup",
-        constants = {
-            acceleration: 20,
-            velocity: .5,
-            pagingVelocity: 5,
-            friction: 1,
-            bounceAcceleration: .1,
-            bounceDeceleration: .1,
-            bounceLimit: 0,
-            bounceStop: 100,
-            framerate: 30,
-            scrollbarOpacity: .7,
-            scrollArrowsOpacity: .84
-        };
-
+        FRAMERATE = 1000 / 30,
+        ACCELERATION = 20,
+        VELOCITY = .5,
+        BOUNCE_LIMIT = 0,
+        BOUNCE_STOP = 100,
+        BOUNCE_DECELERATION = .1,
+        SCROLLBAR_OPACITY = .7;
 
     function getEvent(args) {
         if (args[1] && "changedTouches" in args[1]) {
@@ -58,10 +51,11 @@
             scroll = scrollSize - boxSize;
 
         return $.extend(axis, {
-            minLimit: boxSize * constants.bounceLimit,
-            maxLimit: scroll + boxSize * constants.bounceLimit,
-            minStop: -constants.bounceStop,
-            maxStop: scroll + constants.bounceStop,
+            initiated: true,
+            minLimit: boxSize * BOUNCE_LIMIT,
+            maxLimit: scroll + boxSize * BOUNCE_LIMIT,
+            minStop: - BOUNCE_STOP,
+            maxStop: scroll + BOUNCE_STOP,
             ratio: ~~(boxSize / scrollSize * boxSize),
             size: boxSize,
             hasScroll: scroll > 0,
@@ -77,7 +71,7 @@
             aboutToStop: function () {
                 if (!this.hasScroll) return true;
 
-                return abs(this.decelerationVelocity) <= constants.velocity;
+                return abs(this.decelerationVelocity) <= VELOCITY;
             },
 
             updateScrollOffset: function(location) {
@@ -97,10 +91,7 @@
 
                 this.scrollbar
                     .show()
-                    .css({
-                            opacity: constants.scrollbarOpacity,
-                            visibility: VISIBLE
-                        })
+                    .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
                     .css(this.property, this.ratio);
             },
 
@@ -115,8 +106,7 @@
                     constraint = 0,
                     friction = that.friction,
                     scrollOffset = that.scrollOffset,
-                    decelerationVelocity = that.decelerationVelocity * friction,
-                    bounceStop = constants.bounceStop;
+                    decelerationVelocity = that.decelerationVelocity * friction;
 
                     that.bounceLocation += that.decelerationVelocity;
 
@@ -127,10 +117,8 @@
                 }
 
                 if (constraint) {
-                    var constrainFactor = 0;
-                    friction -= limitValue( (bounceStop - abs(constraint)) / bounceStop, 0, .9 );
-                    constrainFactor = constraint * constants.bounceDeceleration;
-                    decelerationVelocity -= constrainFactor;
+                    friction -= limitValue( (BOUNCE_STOP - abs(constraint)) / BOUNCE_STOP, 0, .9 );
+                    decelerationVelocity -= constraint * BOUNCE_DECELERATION;
                 }
 
                 that.decelerationVelocity = decelerationVelocity;
@@ -175,7 +163,7 @@
             limit = position;
         }
 
-        delta = limitValue(limit, -constants.bounceStop, constants.bounceStop);
+        delta = limitValue(limit, -BOUNCE_STOP, BOUNCE_STOP);
 
         size = max( info.ratio - abs(delta), 20 );
 
@@ -428,17 +416,16 @@
             var that = this,
                 xAxis = that.xAxis,
                 yAxis = that.yAxis,
-                velocity = constants.velocity,
                 bounceLocation = touchLocation(e),
                 locationDelta = that._locationDelta(bounceLocation),
-                velocityFactor = (+new Date() - that.directionChange) / constants.acceleration;
+                velocityFactor = (+new Date() - that.directionChange) / ACCELERATION;
 
             xAxis.startKineticAnimation(bounceLocation.x, locationDelta.x, velocityFactor);
             yAxis.startKineticAnimation(bounceLocation.y, locationDelta.y, velocityFactor);
 
-            that.framerate = 1000 / constants.framerate;
-            that.winding = false;
-
+            that.winding = true;
+            that.lastCall = +new Date();
+            that.timeoutId = setTimeout( that._stepKineticProxy, FRAMERATE);
             if (!xAxis.aboutToStop() || !yAxis.aboutToStop()) {
                 that.winding = true;
                 that.lastCall = +new Date();
@@ -454,9 +441,8 @@
             if (!that.winding) return;
 
             var now = +new Date(),
-                framerate = that.framerate,
                 timeDelta = now - that.lastCall,
-                animationIterator = round( timeDelta / framerate - 1 );
+                animationIterator = round( timeDelta / FRAMERATE - 1 );
 
             while (animationIterator-- >= 0) {
                 that.xAxis.decelerate();
@@ -470,7 +456,7 @@
 
             that._applyCSS( { x: that.xAxis.bounceLocation, y: that.yAxis.bounceLocation} );
 
-            that.timeoutId = setTimeout( that._stepKineticProxy, framerate );
+            that.timeoutId = setTimeout( that._stepKineticProxy, FRAMERATE );
             that.lastCall = now;
         },
 
