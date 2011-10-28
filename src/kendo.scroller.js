@@ -439,20 +439,6 @@
             }
         },
 
-        _singleStep: function () {
-            var that = this;
-
-            that.xAxis.decelerate();
-            that.yAxis.decelerate();
-
-            if (that.xAxis.aboutToStop() && that.yAxis.aboutToStop()) {
-                that._endKineticAnimation();
-                return true;
-            }
-
-            return false;
-        },
-
         _stepKineticAnimation: function () {
             var that = this;
             if (!that.winding) return;
@@ -463,8 +449,12 @@
                 animationIterator = round( timeDelta / framerate - 1 );
 
             while (animationIterator-- >= 0) {
-                if (that._singleStep()) {
-                    return;
+                that.xAxis.decelerate();
+                that.yAxis.decelerate();
+
+                if (that.xAxis.aboutToStop() && that.yAxis.aboutToStop()) {
+                    that._endKineticAnimation();
+                    return true;
                 }
             }
 
