@@ -220,7 +220,7 @@
                 _dragProxy: proxy(that._drag, that),
                 _gestureStartProxy: proxy(that._onGestureStart, that),
                 _gestureEndProxy: proxy(that._onGestureEnd, that),
-                _stepKinetikProxy: proxy( that._stepKineticAnimation, that )
+                _stepKineticProxy: proxy( that._stepKineticAnimation, that )
             });
 
             element.css("overflow", "hidden");
@@ -396,7 +396,6 @@
         },
 
         _initKineticAnimation: function(e) {
-
             var that = this,
                 lastLocation = that.lastLocation,
                 bounceLocation = that.bounceLocation = touchLocation(e);
@@ -425,7 +424,7 @@
                 that.winding = true;
                 that.lastCall = +new Date();
                 clearTimeout(that.timeoutId);
-                that.timeoutId = setTimeout( that._stepKinetikProxy, that.framerate );
+                that.timeoutId = setTimeout( that._stepKineticProxy, that.framerate );
             } else {
                 that._endKineticAnimation();
             }
@@ -462,7 +461,7 @@
 
             that._applyCSS( that.bounceLocation );
 
-            that.timeoutId = setTimeout( that._stepKinetikProxy, framerate );
+            that.timeoutId = setTimeout( that._stepKineticProxy, framerate );
             that.lastCall = now;
         },
 
