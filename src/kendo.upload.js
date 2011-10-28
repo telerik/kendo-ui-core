@@ -541,7 +541,8 @@
             }
 
             existingFileEntries = $(".k-file", fileList);
-            fileEntry = $("<li class='k-file'><span class='k-icon'></span><span class='k-filename'>" + name + "</span></li>")
+            fileEntry =
+                $("<li class='k-file'><span class='k-icon'></span><span class='k-filename' title='" + name + "'>" + name + "</span></li>")
                 .appendTo(fileList)
                 .data(data);
 

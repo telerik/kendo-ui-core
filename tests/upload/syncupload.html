@@ -58,11 +58,6 @@
                 equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 1);
             });
 
-            test("remove icon is rendered", function() {
-                simulateFileSelect();
-                equal($(".k-upload-files li.k-file button.k-upload-action span.k-delete", uploadInstance.wrapper).length, 1);
-            });
-
             test("clicking remove should remove file entry", function() {
                 simulateFileSelect();
                 simulateFileSelect();
