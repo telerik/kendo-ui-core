@@ -389,27 +389,22 @@
         _stop: function () {
             var that = this;
             if (that._dragCanceled) return;
-
+            that._unbindFromMove();
             that.element.unbind(that._endEvent, that._stopProxy);
-
-            $(document)
-                 .unbind(that._moveEvent, that._startProxy)
-                 .unbind(that._moveEvent, that._dragProxy);
 
             if (that._dragged) {
                 that._dragged = false;
-
                 that._initKineticAnimation(getEvent(arguments));
             } else {
                 that._hideScrollHints();
             }
        },
 
-        _hideScrollHints: function() {
+        _unbindFromMove: function() {
             var that = this;
-
-            that.xAxis.hideScrollbar();
-            that.yAxis.hideScrollbar();
+            $(document)
+                 .unbind(that._moveEvent, that._startProxy)
+                 .unbind(that._moveEvent, that._dragProxy);
         },
 
         _initKineticAnimation: function(e) {
