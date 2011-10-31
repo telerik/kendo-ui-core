@@ -468,7 +468,7 @@
                 },
                 "/": "/",
                 ":": ":",
-                firstDayOfWeek: 0
+                firstDay: 0
             }
         }
     }};
