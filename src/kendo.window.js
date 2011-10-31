@@ -891,7 +891,8 @@
 
     WindowDragging.prototype = /** @ignore */{
         dragstart: function (e) {
-            var wnd = this.owner;
+            var wnd = this.owner,
+                $element = $(wnd.element);
 
             wnd.initialWindowPosition = wnd.wrapper.position();
 
@@ -899,6 +900,13 @@
                 left: e.pageX - wnd.initialWindowPosition.left,
                 top: e.pageY - wnd.initialWindowPosition.top
             };
+
+            var actionsElement = $element.find(".k-window-actions");
+            if (actionsElement.length > 0) {
+                wnd.minLeftPosition = actionsElement.outerWidth() + parseInt(actionsElement.css("right"), 10) - $element.outerWidth();
+            } else {
+                wnd.minLeftPosition =  20 - $element.outerWidth(); // at least 20px remain visible
+            }
 
             $(".k-resize-handle", wnd.wrapper).hide();
 
@@ -909,7 +917,7 @@
         drag: function (e) {
             var wnd = this.owner,
                 coordinates = {
-                    left: e.pageX - wnd.startPosition.left,
+                    left: Math.max(e.pageX - wnd.startPosition.left, wnd.minLeftPosition),
                     top: Math.max(e.pageY - wnd.startPosition.top, 0)
                 };
 
