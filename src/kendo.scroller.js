@@ -166,12 +166,6 @@
         },
 
         showScrollbar: function() {
-            if (!this.hasScroll) return;
-
-            this.scrollbar
-                .show()
-                .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
-                .css(this.property, this.ratio);
         },
 
         hideScrollbar: function() {
@@ -232,8 +226,21 @@
             this._updateLastLocation(location);
         },
 
-        sufficient: function(location) {
-            return abs(this.lastLocation - location) > this.dip10;
+        startScrolling: function(location) {
+            var that = this;
+
+            if (!abs(that.lastLocation - location) > that.dip10 || !that.hasScroll) {
+                return false;
+            }
+
+            that.init();
+            that.changeDirection(location);
+
+            that.scrollbar.show()
+                .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
+                .css(that.property, that.ratio);
+
+            return true;
         },
 
         _updateLastLocation: function(location) {
@@ -300,11 +307,6 @@
             useOnDesktop: true
         },
 
-        _storeLastLocation: function(location) {
-            this.xAxis.changeDirection(location.x);
-            this.yAxis.changeDirection(location.y);
-        },
-
         _applyCSS: function(location) {
             var that = this,
                 start = that.start,
@@ -355,20 +357,18 @@
                 return;
             }
 
-            if (xAxis.sufficient(currentLocation.x) || yAxis.sufficient(currentLocation.y)) {
-                xAxis.init();
-                yAxis.init();
+            var xAxisStarted = xAxis.startScrolling(currentLocation.x),
+            yAxisStarted = yAxis.startScrolling(currentLocation.y);
 
-                that._storeLastLocation(currentLocation);
+            if (xAxisStarted || yAxisStarted) {
+
                 that._dragged = true;
-
-                xAxis.showScrollbar();
-                yAxis.showScrollbar();
 
                 $(document).unbind(MOVEEVENT, that._startProxy)
                            .unbind(MOVEEVENT, that._dragProxy)
                            .bind(MOVEEVENT, that._dragProxy);
             }
+
         },
 
         _getTouchLocation: function(event) {
@@ -389,7 +389,8 @@
 
             if (!location) return;
 
-            that._storeLastLocation(location);
+            that.xAxis.changeDirection(location.x);
+            that.yAxis.changeDirection(location.y);
 
             that._applyCSS(location);
         },
