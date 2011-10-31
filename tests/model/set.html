@@ -268,6 +268,22 @@
                 ok(!m._modified);
             });
 
+            test("readOnly returns true for field marked as readonly", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", readonly: true }
+                    }
+                }), m = new MyModel({ bar: "foo" });
+
+                ok(m.readOnly("bar"));
+            });
+
+            test("readOnly returns false when no fields definition", function() {
+                var MyModel = kendo.data.Model.define(),
+                    m = new MyModel({ bar: "foo" });
+                ok(!m.readOnly("bar"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

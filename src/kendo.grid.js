@@ -582,18 +582,21 @@
                     column = that.columns[that.cellIndex(cell)];
                     model = that.dataSource.get(id);
 
-                    if(!model._readOnly(column.field)) {
+                    if(!model.readOnly(column.field)) {
                         cell.addClass("k-edit-cell")
                             .kendoEditable({
                                 fields: column.field,
                                 model: model
                             });
+                    } else {
+                        cell = null;
                     }
                 });
 
                 $(document).click(function(e) {
-                    if (cell && !$.contains(cell[0], e.target) && cell[0] !== e.target && !$(e.target).closest('.k-animation-container').length) {
-                        that._displayCell(cell, column, that.dataSource.get(id).data);
+                    if (cell && !$.contains(cell[0], e.target) && cell[0] !== e.target && !$(e.target).closest(".k-animation-container").length) {
+                        that._displayCell(cell, column, model.data);
+                        cell = null;
                     }
                 });
             }
