@@ -54,13 +54,13 @@
     *      decimals: 3
     *  });
     * @section
-    * @exampleTitle Create currency NumericTextBox widjet
+    * @exampleTitle Create Currency NumericTextBox widget
     * @example
     *  $("#textbox").kendoNumericTextBox({
     *      format: "c2" //Define currency type and 2 digits precision
     *  });
     * @section
-    * @exampleTitle Create percentage NumericTextBox widjet
+    * @exampleTitle Create Percentage NumericTextBox widget
     * @example
     *  $("#textbox").kendoNumericTextBox({
     *      format: "p",
