@@ -84,7 +84,8 @@
     var Axis = function(element, property, scrollbar) {
         var that = this;
         that.element = element;
-        that.sizeName = "inner" + property;
+        that.scrollSizeName = "scroll" + property;
+        that.boxSizeName = "inner" + property;
         that.property = property.toLowerCase();
         that.scrollbar = scrollbar;
         that.horizontal = property == "Width";
@@ -96,8 +97,8 @@
     Axis.prototype = {
         init: function() {
             var that = this,
-                scrollSize = that.element[that.sizeName](),
-                boxSize = that.element.parent()[that.sizeName](),
+                scrollSize = that.element[0][that.scrollSizeName],
+                boxSize = that.element.parent()[that.boxSizeName](),
                 scroll = scrollSize - boxSize;
 
             that.minLimit = boxSize * BOUNCE_LIMIT;
