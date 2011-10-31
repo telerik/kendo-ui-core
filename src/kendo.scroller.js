@@ -196,14 +196,14 @@
             _changeDirection(location);
 
             scrollbar.show()
-            .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
-            .css(cssProperty, ratio);
+                .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
+                .css(cssProperty, ratio);
 
             dragged = true;
 
             $(document).unbind(MOVEEVENT, _start)
-            .unbind(MOVEEVENT, _drag)
-            .bind(MOVEEVENT, _drag);
+                .unbind(MOVEEVENT, _drag)
+                .bind(MOVEEVENT, _drag);
 
         }
 
