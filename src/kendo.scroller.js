@@ -265,23 +265,25 @@
 
             element.css("overflow", "hidden");
 
-            if (children.length)
+            if (children.length) {
                 children.wrapAll(scrollElement);
-            else
+            }
+            else {
                 element.append(scrollElement);
+            }
 
             that.scrollElement = element.children(":not(script)");
             that._scrollbars.appendTo(element);
 
             element
-                .bind("gesturestart", that._gestureStartProxy )
-                .bind("gestureend", that._gestureEndProxy )
+                .bind("gesturestart", that._gestureStartProxy)
+                .bind("gestureend", that._gestureEndProxy)
                 .bind(STARTEVENT, that._waitProxy);
 
             that.xAxis = new Axis(that.scrollElement, "Width", that.xScrollbar);
             that.yAxis = new Axis(that.scrollElement, "Height", that.yScrollbar);
 
-            browser.mozilla && element.bind("mousedown", false );
+            browser.mozilla && element.bind("mousedown", false);
         },
 
         options: {
@@ -353,7 +355,7 @@
                 xAxis.init();
                 yAxis.init();
 
-                that._storeLastLocation( currentLocation );
+                that._storeLastLocation(currentLocation);
                 that._dragged = true;
 
                 xAxis.showScrollbar();
