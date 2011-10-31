@@ -116,24 +116,6 @@
                     }
                 });
 
-                test("SVGView is created if browser supports SVG", function() {
-                    Chart.RootElement.prototype.supportsSVG = function() { return true; };
-                    createRoot();
-                    ok(rootElement.getView() instanceof Chart.SVGView);
-                });
-
-                test("VMLView is created if browser does not support SVG", function() {
-                    Chart.RootElement.prototype.supportsSVG = function() { return false; };
-                    createRoot();
-                    ok(rootElement.getView() instanceof Chart.VMLView);
-                });
-
-                test("sets dimensions on view element", 2, function() {
-                    var view = rootElement.getView();
-                    equals(view.options.width, 600);
-                    equals(view.options.height, 400);
-                });
-
                 test("creates view elements for child elements", function() {
                     var group = new ViewElementStub(),
                         text = new ViewElementStub();
@@ -141,9 +123,9 @@
                     rootElement.children.push(new ChartElementStub(group));
                     rootElement.children.push(new ChartElementStub(text));
 
-                    var view = rootElement.getView(view);
-                    view.children.shift(); // Remove the rect
-                    deepEqual(view.children, [ group, text ]);
+                    var viewElements = rootElement.getViewElements(view);
+                    viewElements.shift(); // Remove the rect
+                    deepEqual(viewElements, [ group, text ]);
                 });
 
                 test("reflow is called for all children", 2, function() {
