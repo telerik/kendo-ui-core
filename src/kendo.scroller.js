@@ -88,6 +88,7 @@
         that.property = property.toLowerCase();
         that.scrollbar = scrollbar;
         that.horizontal = property == "Width";
+        that.name = that.horizontal ? "x" : "y";
 
         that.init();
     }
@@ -131,7 +132,8 @@
 
             that.updateScrollbarPosition(delta);
 
-            return that.scrollOffset = delta / that.zoomLevel;
+            var position = that.scrollOffset = delta / that.zoomLevel;
+            that.element[0].style[TRANSFORMSTYLE] = "translate" + that.name + "(" + position + PX + ")";
         },
 
         updateScrollbarPosition: function(position) {
@@ -307,15 +309,6 @@
             useOnDesktop: true
         },
 
-        _applyCSS: function(location) {
-            var that = this,
-                start = that.start,
-                xOffset = that.xAxis.updateScrollOffset(location.x),
-                yOffset = that.yAxis.updateScrollOffset(location.y);
-
-            that.scrollElement.stop(true,true)[0].style[TRANSFORMSTYLE] = to3DProperty(xOffset + PX + "," + yOffset + PX);
-        },
-
         _onGestureStart: function() {
             this._dragCanceled = true;
         },
@@ -349,18 +342,15 @@
 
         _start: function() {
             var that = this,
-                xAxis = that.xAxis,
-                yAxis = that.yAxis,
                 currentLocation = that._getTouchLocation(getEvent(arguments));
 
             if (!currentLocation) {
                 return;
             }
 
-            var xAxisStarted = xAxis.startScrolling(currentLocation.x),
-            yAxisStarted = yAxis.startScrolling(currentLocation.y);
+            var started = that._passToAxes("startScrolling", currentLocation);
 
-            if (xAxisStarted || yAxisStarted) {
+            if (started[0] || started[1]) {
 
                 that._dragged = true;
 
@@ -389,10 +379,8 @@
 
             if (!location) return;
 
-            that.xAxis.changeDirection(location.x);
-            that.yAxis.changeDirection(location.y);
-
-            that._applyCSS(location);
+            that._passToAxes("changeDirection", location);
+            that._passToAxes("updateScrollOffset", location);
         },
 
         _stop: function() {
@@ -416,11 +404,9 @@
         },
 
         _initKineticAnimation: function(e) {
-            var that = this,
-                bounceLocation = touchLocation(e);
+            var that = this;
 
-            that.xAxis.startKineticAnimation(bounceLocation.x);
-            that.yAxis.startKineticAnimation(bounceLocation.y);
+            that._passToAxes("startKineticAnimation", touchLocation(e));
 
             that.winding = true;
             that.lastCall = +new Date();
@@ -429,8 +415,7 @@
 
         _stepKineticAnimation: function() {
             var that = this,
-                xAxis = that.xAxis,
-                yAxis = that.yAxis;
+                bounceLocation;
 
             if (!that.winding) return;
 
@@ -439,15 +424,14 @@
                 animationIterator = round(timeDelta / FRAMERATE - 1);
 
             while (animationIterator-- >= 0) {
-                xAxis.decelerate();
-                yAxis.decelerate();
+                that._passToAxes("decelerate");
 
                 if (that._endKineticAnimation()) {
                     return;
                 }
             }
 
-            that._applyCSS({ x: xAxis.bounceLocation, y: yAxis.bounceLocation});
+            that._passToAxes("updateScrollOffset", {x: that.xAxis.bounceLocation, y: that.yAxis.bounceLocation});
 
             that.timeoutId = setTimeout(that._stepKineticProxy, FRAMERATE);
             that.lastCall = now;
@@ -455,10 +439,9 @@
 
        _endKineticAnimation: function(forceEnd) {
             var that = this,
-                xAxis = that.xAxis,
-                yAxis = that.yAxis;
+                stopStatus = that._passToAxes('aboutToStop');
 
-           if (!xAxis.aboutToStop() || !yAxis.aboutToStop()) {
+           if (!stopStatus[0] || !stopStatus[1]) {
                if (!forceEnd) {
                    return false;
                }
@@ -467,9 +450,13 @@
            that.winding = false;
            clearTimeout(that.timeoutId);
 
-           xAxis.hideScrollbar();
-           yAxis.hideScrollbar();
+           that._passToAxes("hideScrollbar");
            return true;
+       },
+
+       _passToAxes: function(functionName, coordinates) {
+           coordinates = coordinates || {x: undefined, y: undefined};
+           return [this.xAxis[functionName](coordinates.x), this.yAxis[functionName](coordinates.y)];
        }
     });
 
