@@ -148,6 +148,13 @@
         }
     });
 
+    VMLView.fromModel = function(model) {
+        var view = new VMLView(model.options);
+        [].push.apply(view.children, model.getViewElements(view));
+
+        return view;
+    }
+
     // Primitives =============================================================
     var VMLText = ViewElement.extend({
         init: function(content, options) {

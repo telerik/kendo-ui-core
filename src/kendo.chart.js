@@ -184,6 +184,28 @@
             var chart = this,
                 options = chart.options,
                 element = chart.element,
+                model = chart._model = chart._getModel(),
+                plotArea = chart._plotArea = model._plotArea,
+                viewClass = chart._supportsSVG() ? Chart.SVGView : Chart.VMLView,
+                view = chart._view = viewClass.fromModel(model);
+
+            element.css("position", "relative");
+            chart._viewElement = view.renderTo(element[0]);
+            chart._tooltip = new Tooltip(element, options.tooltip);
+            chart._highlight = new Highlight(view, chart._viewElement);
+        },
+
+        svg: function() {
+            var model = this._getModel(),
+                view = Chart.SVGView.fromModel(model);
+
+            return view.render();
+        },
+
+        _getModel: function() {
+            var chart = this,
+                options = chart.options,
+                element = chart.element,
                 model = new RootElement(deepExtend({
                     width: element.width() || DEFAULT_WIDTH,
                     height: element.height() || DEFAULT_HEIGHT,
@@ -191,26 +213,22 @@
                     }, options.chartArea)),
                 plotArea;
 
-            chart._model = model;
-
             if (options.title && options.title.visible && options.title.text) {
                 model.append(new Title(options.title));
             }
 
-
-            plotArea = chart._plotArea = new PlotArea(options);
+            plotArea = model._plotArea = new PlotArea(options);
             if (options.legend.visible) {
                 model.append(new Legend(plotArea.options.legend));
             }
             model.append(plotArea);
             model.reflow();
 
-            chart.element.css("position", "relative");
-            chart._view = model.getView();
-            chart._viewElement = chart._view.renderTo(chart.element[0]);
-            chart._tooltip = new Tooltip(chart.element, chart.options.tooltip);
-            chart._highlight = new Highlight(chart._view, chart._viewElement);
+            return model;
         },
+
+        // Needs to be overridable in tests
+        _supportsSVG: supportsSVG,
 
         _attachEvents: function() {
             var chart = this,
@@ -692,16 +710,6 @@
             }
         },
 
-        getView: function() {
-            var root = this,
-                options = root.options,
-                view = root.supportsSVG() ? new Chart.SVGView(options) : new Chart.VMLView(options);
-
-            append(view.children, root.getViewElements(view));
-
-            return view;
-        },
-
         getViewElements: function(view) {
             var root = this,
                 options = root.options,
@@ -723,10 +731,7 @@
 
         getRoot: function() {
             return this;
-        },
-
-        // Needs to be overridable in tests
-        supportsSVG: supportsSVG
+        }
     });
 
     var BoxElement = ChartElement.extend({
@@ -5253,6 +5258,13 @@
         }
     });
 
+    SVGView.fromModel = function(model) {
+        var view = new SVGView(model.options);
+        [].push.apply(view.children, model.getViewElements(view));
+
+        return view;
+    }
+
     // Primitives =============================================================
     var SVGText = ViewElement.extend({
         init: function(content, options) {
@@ -5950,6 +5962,13 @@
             return new VMLLinearGradient(options);
         }
     });
+
+    VMLView.fromModel = function(model) {
+        var view = new VMLView(model.options);
+        [].push.apply(view.children, model.getViewElements(view));
+
+        return view;
+    }
 
     // Primitives =============================================================
     var VMLText = ViewElement.extend({
