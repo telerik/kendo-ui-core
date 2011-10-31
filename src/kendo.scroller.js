@@ -268,19 +268,16 @@
             Widget.fn.init.call(that, element, options);
 
             element = that.element,
-            options = that.options,
             scrollElement = $('<div class="k-scroll-container"/>'),
             children = element.children(":not(script)");
 
-            that.bind(events, options);
+            that.bind(events, that.options);
 
             extend(that, {
                 _waitProxy: proxy(that._wait, that),
                 _startProxy: proxy(that._start, that),
                 _stopProxy: proxy(that._stop, that),
                 _dragProxy: proxy(that._drag, that),
-                _gestureStartProxy: proxy(that._onGestureStart, that),
-                _gestureEndProxy: proxy(that._onGestureEnd, that),
                 _stepKineticProxy: proxy(that._stepKineticAnimation, that)
             });
 
@@ -296,8 +293,8 @@
             that.scrollElement = element.children(":not(script)");
 
             element
-                .bind("gesturestart", that._gestureStartProxy)
-                .bind("gestureend", that._gestureEndProxy)
+                .bind("gesturestart", function() { that._dragCanceled = true; } )
+                .bind("gestureend", function() { that._dragCanceled = false; } )
                 .bind(STARTEVENT, that._waitProxy);
 
             that.xAxis = new Axis(that.scrollElement, "Width");
@@ -309,14 +306,6 @@
         options: {
             name: "Scroller",
             useOnDesktop: true
-        },
-
-        _onGestureStart: function() {
-            this._dragCanceled = true;
-        },
-
-        _onGestureEnd: function() {
-            this._dragCanceled = false;
         },
 
         _wait: function() {
