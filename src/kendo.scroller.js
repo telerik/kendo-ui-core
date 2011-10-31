@@ -29,8 +29,9 @@
         BOUNCE_LIMIT = 0,
         BOUNCE_STOP = 100,
         BOUNCE_DECELERATION = .1,
-        to3DProperty,
         SCROLLBAR_OPACITY = .7;
+        INITIAL_FRICTION = .96,
+        to3DProperty,
 
         if (support.hasHW3D) {
             to3DProperty = function(value) {
@@ -252,7 +253,7 @@
            var location = touchLocation(e)[name];
 
            bounceLocation = location;
-           friction = .96;
+           friction = INITIAL_FRICTION;
            decelerationVelocity = - (lastLocation - location) / ((+new Date() - directionChange) / ACCELERATION);
            winding = true;
            _queueNextStep();
@@ -327,7 +328,7 @@
            direction = 0;
            directionChange =+ new Date();
            scrollOffset = 0;
-           friction = .96;
+           friction = INITIAL_FRICTION;
 
            element
            .bind("gesturestart", function() { dragCanceled = true; } )
