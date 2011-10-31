@@ -70,12 +70,12 @@
                                      };
     }
 
-    var Axis = function(element, property, updateCallback) {
-        var that = this,
-            boxSizeName = "inner" + property,
+    var Axis = function(scrollElement, property, updateCallback) {
+        var boxSizeName = "inner" + property,
             cssProperty = property.toLowerCase(),
             horizontal = property == "Width",
             scrollSizeName = "scroll" + property,
+            element = scrollElement.parent(),
             scrollbar = $('<div class="touch-scrollbar ' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />'),
             name = horizontal ? "x" : "y",
             dip10,
@@ -93,9 +93,16 @@
             scrollOffset,
             boxSize,
             friction,
-            lastLocation;
+            lastLocation,
+            startLocation,
+            idx,
+            timeoutId,
+            winding,
+            dragCanceled,
+            lastCall,
+            dragged;
 
-        element.parent().append(scrollbar);
+        element.append(scrollbar);
 
         function _updateLastLocation (location) {
             lastLocation = location;
@@ -140,7 +147,7 @@
         }
 
         function _updateScrollOffset(location) {
-            var delta = -limitValue(that.startLocation - location, minStop, maxStop),
+            var delta = -limitValue(startLocation - location, minStop, maxStop),
                 position = scrollOffset = delta / zoomLevel;
 
             updateCallback(name, position);
@@ -148,62 +155,123 @@
             _updateScrollbarPosition(delta);
         }
 
-        extend(that, {
-            init: function() {
-                var scrollSize = element[0][scrollSizeName],
-                    scroll;
+        function _wait(e) {
+            if (!enabled) {
+                return;
+            }
 
-                boxSize = element.parent()[boxSizeName]();
-                scroll = scrollSize - boxSize;
-                enabled = scroll > 0;
-                zoomLevel = kendo.support.zoomLevel();
-                dip10 = 5 * zoomLevel;
-                minLimit = boxSize * BOUNCE_LIMIT;
-                maxLimit = scroll + minLimit;
-                minStop = - BOUNCE_STOP;
-                maxStop = scroll + BOUNCE_STOP;
-                ratio = ~~(boxSize / scrollSize * boxSize);
-                decelerationVelocity = 0;
-                bounceLocation = 0;
-                direction = 0;
-                directionChange =+ new Date();
-                scrollOffset = 0;
-                friction = .96;
-            },
+            dragged = false;
+            clearTimeout(timeoutId);
 
-            startScrolling: function(location) {
-                if (!abs(lastLocation - location) > dip10 || !enabled) {
-                    return false;
-                }
+            var location = touchLocation(e),
+                scrollOffset  = getScrollOffsets(scrollElement)[name];
 
-                that.init();
-                _changeDirection(location);
+            idx = location.idx;
 
-                scrollbar.show()
-                    .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
-                    .css(cssProperty, ratio);
+            startLocation = location[name] - scrollOffset;
+            _updateLastLocation(location[name]);
 
-                return true;
-            },
+            $(document)
+                .unbind(MOVEEVENT, _start)
+                .bind(MOVEEVENT, _start);
 
-            aboutToStop: function() {
-                if (!enabled) return true;
+            scrollElement
+                .unbind(ENDEVENT, _stop) // Make sure previous event is removed
+                .bind(ENDEVENT, _stop);
+        }
 
-                return abs(decelerationVelocity) <= VELOCITY;
-            },
+        function _start(e) {
+            var location = _getTouchLocation(e);
 
-            hideScrollbar: function() {
-                if (!enabled) return;
-                scrollbar.css(OPACITY, 0);
-            },
+            if (!location) {
+                return;
+            }
 
-            decelerate: function() {
-                if (!enabled) return 0;
+            if (!abs(lastLocation - location) > dip10) {
+                return;
+            }
 
-                var constraint = 0,
-                    velocity = decelerationVelocity * friction;
+            _init();
+            _changeDirection(location);
 
-                    bounceLocation += decelerationVelocity;
+            scrollbar.show()
+            .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
+            .css(cssProperty, ratio);
+
+            dragged = true;
+
+            $(document).unbind(MOVEEVENT, _start)
+            .unbind(MOVEEVENT, _drag)
+            .bind(MOVEEVENT, _drag);
+
+        }
+
+        function _getTouchLocation(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            var location = touchLocation(event);
+            if (location.idx != idx || dragCanceled) {
+                return;
+            }
+
+            return location[name];
+        }
+
+        function _drag(e) {
+            var location = _getTouchLocation(e);
+
+            if (!location) {
+                return;
+            }
+
+            _changeDirection(location);
+            _updateScrollOffset(location);
+        }
+
+        function _stop(e) {
+            if (dragCanceled) return;
+            _unbindFromMove();
+            element.unbind(ENDEVENT, _stop);
+
+            if (dragged) {
+                dragged = false;
+                _initKineticAnimation(e);
+            } else {
+                _endKineticAnimation(true);
+            }
+       }
+
+       function _unbindFromMove() {
+           $(document)
+                .unbind(MOVEEVENT, _start)
+                .unbind(MOVEEVENT, _drag);
+       }
+
+       function _initKineticAnimation(e) {
+           var location = touchLocation(e)[name];
+
+           bounceLocation = location;
+           friction = .96;
+           decelerationVelocity = - (lastLocation - location) / ((+new Date() - directionChange) / ACCELERATION);
+           winding = true;
+           _queueNextStep();
+       }
+
+       function _queueNextStep() {
+           lastCall = +new Date();
+           timeoutId = setTimeout(_stepKineticAnimation, FRAMERATE);
+       }
+
+       function _stepKineticAnimation() {
+            var animationIterator = round((+new Date() - lastCall) / FRAMERATE - 1), constraint, velocity;
+
+            if (!winding) return;
+
+            while (animationIterator-- >= 0) {
+                constraint = 0;
+                velocity = decelerationVelocity * friction;
+                bounceLocation += decelerationVelocity;
 
                 if (-scrollOffset < minLimit) {
                     constraint = minLimit + scrollOffset;
@@ -219,30 +287,55 @@
                 decelerationVelocity = velocity;
                 friction = limitValue(friction, 0, 1);
                 _updateScrollOffset(bounceLocation);
-            },
 
-            startKineticAnimation: function(location) {
-                bounceLocation = location;
-                friction = .96;
-                decelerationVelocity = - (lastLocation - location) / ((+new Date() - directionChange) / ACCELERATION);
-            },
-
-            drag: function(location) {
-                if (!enabled) {
+                if (_endKineticAnimation()) {
                     return;
                 }
-
-                _changeDirection(location);
-                _updateScrollOffset(location);
-            },
-
-            setStartLocation: function(location, offset) {
-                that.startLocation = location - offset;
-                _updateLastLocation(location);
             }
-        });
 
-        that.init();
+            _queueNextStep();
+       }
+
+       function _endKineticAnimation(forceEnd) {
+           if (!forceEnd && abs(decelerationVelocity) > VELOCITY) {
+               return false;
+           }
+
+           winding = false;
+           clearTimeout(timeoutId);
+
+           scrollbar.css(OPACITY, 0);
+           return true;
+       }
+
+       function _init() {
+           var scrollSize = scrollElement[0][scrollSizeName],
+           scroll;
+
+           boxSize = element[boxSizeName]();
+           scroll = scrollSize - boxSize;
+           enabled = scroll > 0;
+           zoomLevel = kendo.support.zoomLevel();
+           dip10 = 5 * zoomLevel;
+           minLimit = boxSize * BOUNCE_LIMIT;
+           maxLimit = scroll + minLimit;
+           minStop = - BOUNCE_STOP;
+           maxStop = scroll + BOUNCE_STOP;
+           ratio = ~~(boxSize / scrollSize * boxSize);
+           decelerationVelocity = 0;
+           bounceLocation = 0;
+           direction = 0;
+           directionChange =+ new Date();
+           scrollOffset = 0;
+           friction = .96;
+
+           element
+           .bind("gesturestart", function() { dragCanceled = true; } )
+           .bind("gestureend", function() { dragCanceled = false; } )
+           .bind(STARTEVENT, _wait);
+       }
+
+       _init();
     };
 
     var Scroller = Widget.extend({
@@ -257,14 +350,7 @@
             scrollElement = $('<div class="k-scroll-container"/>'),
             children = element.children(":not(script)");
 
-            extend(that, {
-                _waitProxy: proxy(that._wait, that),
-                _startProxy: proxy(that._start, that),
-                _stopProxy: proxy(that._stop, that),
-                _dragProxy: proxy(that._drag, that),
-                _updateTransformProxy: proxy(that._updateTransform, that),
-                _stepKineticProxy: proxy(that._stepKineticAnimation, that)
-            });
+            var _updateTransformProxy = proxy(that._updateTransform, that);
 
             element.css("overflow", "hidden");
 
@@ -277,14 +363,9 @@
 
             that.scrollElement = element.children(":not(script)");
 
-            element
-                .bind("gesturestart", function() { that._dragCanceled = true; } )
-                .bind("gestureend", function() { that._dragCanceled = false; } )
-                .bind(STARTEVENT, that._waitProxy);
-
             that.transform = {x: 0, y: 0};
-            that.xAxis = new Axis(that.scrollElement, "Width", that._updateTransformProxy);
-            that.yAxis = new Axis(that.scrollElement, "Height", that._updateTransformProxy);
+            that.xAxis = new Axis(that.scrollElement, "Width", _updateTransformProxy);
+            that.yAxis = new Axis(that.scrollElement, "Height", _updateTransformProxy);
 
             $.browser.mozilla && element.bind("mousedown", false);
         },
@@ -298,146 +379,7 @@
         options: {
             name: "Scroller",
             useOnDesktop: true
-        },
-
-        _wait: function(e) {
-            var that = this;
-
-            that._dragged = false;
-            clearTimeout(that.timeoutId);
-
-            var startLocation = touchLocation(e),
-                scrollOffsets = getScrollOffsets(that.scrollElement);
-
-            that.idx = startLocation.idx;
-
-            that.xAxis.setStartLocation(startLocation.x, scrollOffsets.x);
-            that.yAxis.setStartLocation(startLocation.y, scrollOffsets.y);
-
-            $(document)
-                .unbind(MOVEEVENT, that._startProxy)
-                .bind(MOVEEVENT, that._startProxy);
-
-            that.element
-                .unbind(ENDEVENT, that._stopProxy) // Make sure previous event is removed
-                .bind(ENDEVENT, that._stopProxy);
-        },
-
-        _start: function(e) {
-            var that = this,
-                currentLocation = that._getTouchLocation(e);
-
-            if (!currentLocation) {
-                return;
-            }
-
-            var started = that._passToAxes("startScrolling", currentLocation);
-
-            if (started[0] || started[1]) {
-
-                that._dragged = true;
-
-                $(document).unbind(MOVEEVENT, that._startProxy)
-                           .unbind(MOVEEVENT, that._dragProxy)
-                           .bind(MOVEEVENT, that._dragProxy);
-            }
-
-        },
-
-        _getTouchLocation: function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            var location = touchLocation(event);
-            if (location.idx != this.idx || this._dragCanceled) {
-                return;
-            }
-
-            return location;
-        },
-
-        _drag: function(e) {
-            var that = this,
-                location = that._getTouchLocation(e);
-
-            if (!location) return;
-
-            that._passToAxes("drag", location);
-        },
-
-        _stop: function(e) {
-            var that = this;
-            if (that._dragCanceled) return;
-            that._unbindFromMove();
-            that.element.unbind(ENDEVENT, that._stopProxy);
-
-            if (that._dragged) {
-                that._dragged = false;
-                that._initKineticAnimation(e);
-            } else {
-                that._endKineticAnimation(true);
-            }
-       },
-
-        _unbindFromMove: function() {
-            $(document)
-                 .unbind(MOVEEVENT, this._startProxy)
-                 .unbind(MOVEEVENT, this._dragProxy);
-        },
-
-        _initKineticAnimation: function(e) {
-            var that = this;
-
-            that._passToAxes("startKineticAnimation", touchLocation(e));
-
-            that.winding = true;
-            that._queueNextStep();
-        },
-
-        _queueNextStep: function() {
-            var that = this;
-            that.lastCall = +new Date();
-            that.timeoutId = setTimeout(that._stepKineticProxy, FRAMERATE);
-        },
-
-        _stepKineticAnimation: function() {
-            var that = this;
-                animationIterator = round((+new Date() - that.lastCall) / FRAMERATE - 1);
-
-            if (!that.winding) return;
-
-            while (animationIterator-- >= 0) {
-                that._passToAxes("decelerate");
-
-                if (that._endKineticAnimation()) {
-                    return;
-                }
-            }
-
-            that._queueNextStep();
-        },
-
-       _endKineticAnimation: function(forceEnd) {
-            var that = this,
-                stopStatus = that._passToAxes("aboutToStop");
-
-           if (!stopStatus[0] || !stopStatus[1]) {
-               if (!forceEnd) {
-                   return false;
-               }
-           }
-
-           that.winding = false;
-           clearTimeout(that.timeoutId);
-
-           that._passToAxes("hideScrollbar");
-           return true;
-       },
-
-       _passToAxes: function(functionName, coordinates) {
-           coordinates = coordinates || {x: undefined, y: undefined};
-           return [this.xAxis[functionName](coordinates.x), this.yAxis[functionName](coordinates.y)];
-       }
+        }
     });
 
     kendo.ui.plugin(Scroller);
