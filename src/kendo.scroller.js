@@ -3,13 +3,9 @@
         ui = kendo.ui,
         support = kendo.support,
         extend = $.extend,
-        browser = $.browser,
         proxy = $.proxy,
         Widget = ui.Widget,
-        events = ["showArrow"],
         touch = support.touch || support.pointers,
-        cssPrefix = support.transitions.css,
-        stylePrefix = support.transitions.prefix,
         touchLocation = kendo.touchLocation,
         min = Math.min,
         max = Math.max,
@@ -22,8 +18,8 @@
         WIDTH = "width",
         OPACITY = "opacity",
         VISIBLE = "visible",
-        TRANSFORM = cssPrefix + "transform",
-        TRANSFORMSTYLE = stylePrefix + "Transform",
+        TRANSFORM = support.transitions.css + "transform",
+        TRANSFORMSTYLE = support.transitions.prefix + "Transform",
         STARTEVENT = touch ? "touchstart" : "mousedown",
         MOVEEVENT = touch ? "touchmove" : "mousemove",
         ENDEVENT = touch ? "touchend" : "mouseup",
@@ -53,6 +49,7 @@
             return args[0];
         }
     }
+
     function limitValue(value, minLimit, maxLimit) {
         return max( minLimit, min( maxLimit, value));
     }
