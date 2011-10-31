@@ -45,7 +45,7 @@
 
         "date": function(value) {
             if (typeof value === "string") {
-                var date = dateRegExp .exec(value);
+                var date = dateRegExp.exec(value);
                 if (date) {
                     return new Date(parseInt(date[1]));
                 }
@@ -97,9 +97,9 @@
             return converter ? converter(value) : value;
         },
 
-        _readOnly: function(field) {
+        readOnly: function(field) {
             field = (this.fields || {})[field];
-            return !!(field ? field.readonly : false);
+            return field ? !!field.readonly : false;
         },
 
         set: function(fields, value) {
@@ -116,11 +116,15 @@
             }
 
             for (field in values) {
+                if(that.readOnly(field)) {
+                    continue;
+                }
+
                 accessor = that._accessor(field);
 
                 value = that._convert(field, values[field]);
 
-                if (!that._readOnly(field) && !equal(value, accessor.get(that.data))) {
+                if (!equal(value, accessor.get(that.data))) {
                     accessor.set(that.data, value);
                     that._modified = modified = true;
                 }
