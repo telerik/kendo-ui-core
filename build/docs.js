@@ -25,6 +25,7 @@ function build() {
         "src/kendo.calendar.js",
         "src/kendo.datepicker.js",
         "src/kendo.menu.js",
+        "src/kendo.numerictextbox.js",
         "src/kendo.slider.js",
         "src/kendo.splitter.js",
         "src/kendo.panelbar.js",
