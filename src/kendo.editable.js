@@ -71,13 +71,12 @@
             editors: editors
         },
 
-        editor: function(field) {
+        editor: function(field, modelField) {
             var that = this,
                 editors = that.options.editors,
-                model = that.options.model || {},
                 isObject = isPlainObject(field),
                 fieldName = isObject ? field.field : field,
-                modelField = (model.fields || {})[fieldName],
+                model = that.options.model || {},
                 fieldType = modelField && modelField.type ? modelField.type : "string",
                 editor = isObject && field.editor ? field.editor : editors[fieldType];
 
@@ -114,7 +113,7 @@
                     }
                 }
 
-                that.editor(field);
+                that.editor(field, modelField);
             }
 
             new Binder(container, that.options.model);
