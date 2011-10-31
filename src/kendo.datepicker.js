@@ -64,7 +64,7 @@
     *
     * @exampleTitle Create Month picker
     * @example
-    *  $("#calendar").kendoDatePicker({
+    *  $("#datepicker").kendoDatePicker({
     *      start: "year",
     *      depth: "year"
     *  });
@@ -396,8 +396,8 @@
         },
 
         /**
-        * Enable/Disable datepicker widget.
-        * @param {Boolean} value The value, which defines whether to enable/disable datepicker.
+        * Enable/Disable the datepicker widget.
+        * @param {Boolean} enable The argument, which defines whether to enable/disable the datepicker.
         * @example
         * var datepicker = $("#datepicker").data("kendoDatePicker");
         *
@@ -407,7 +407,7 @@
         * // enables the datepicker
         * datepicker.enable(true);
         */
-        enable: function(value) {
+        enable: function(enable) {
             var that = this,
                 icon = that._icon,
                 wrapper = that.wrapper.children(".k-picker-wrap"),
@@ -416,7 +416,7 @@
             icon.unbind(CLICK)
                 .unbind(MOUSEDOWN);
 
-            if (value === false) {
+            if (enable === false) {
                 wrapper
                     .addClass(DISABLED)
                     .unbind(HOVEREVENTS);
