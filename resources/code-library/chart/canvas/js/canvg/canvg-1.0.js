@@ -783,12 +783,15 @@ if(!Array.indexOf){
 
 				// font
 				if (typeof(ctx.font) != 'undefined') {
+                    var fontParts = this.style("font").value.split(" ");
+                    var fontSize = parseInt(fontParts[0]) || "";
+                    var fontFamily = fontParts[1];
 					ctx.font = svg.Font.CreateFont( 
 						this.style('font-style').value, 
 						this.style('font-variant').value, 
 						this.style('font-weight').value, 
-						this.style('font-size').hasValue() ? this.style('font-size').Length.toPixels() + 'px' : '', 
-						this.style('font-family').value).toString();
+						this.style('font-size').hasValue() ? this.style('font-size').Length.toPixels() + 'px' : fontSize ? fontSize + "px" : '', 
+						this.style('font-family').value || fontFamily).toString();
 				}
 				
 				// transform
