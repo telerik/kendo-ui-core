@@ -154,6 +154,7 @@ function importComponentHelp(exampleHTML, component) {
         "dropdownlist": "kendo.ui.DropDownList",
         "droptarget": "kendo.ui.DropTarget",
         "datasource": "kendo.data.DataSource",
+        "numerictextbox": "kendo.ui.NumericTextBox",
         "panelbar": "kendo.ui.PanelBar",
         "rangeslider": "kendo.ui.RangeSlider",
         "tabstrip": "kendo.ui.TabStrip",

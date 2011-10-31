@@ -1,19 +1,89 @@
 (function($, undefined) {
+    /**
+    * @name kendo.ui.NumericTextBox.Description
+    *
+    * @section
+    * <p>
+    *    The NumericTextBox widget can convert an INPUT element into a numeric, percentage or currency textbox.
+    *    The type is defined depending on the specified format. The widget renders spin buttons and with their help you can
+    *    increment/decrement the value with a predefined step. The NumericTextBox widget accepts only numeric entries.
+    *    The widget uses <em>kendo.culture.current</em> culture in order to determine number precision and other culture
+    *    specific properties.
+    * </p>
+    *
+    * <h3>Getting Started</h3>
+    *
+    * @exampleTitle Creating a NumericTextBox from existing INPUT element
+    * @example
+    * <!-- HTML -->
+    * <input id="textbox" />
+    *
+    * @exampleTitle NumericTextBox initialization
+    * @example
+    *   $(document).ready(function(){
+    *      $("#textbox").kendoNumericTextBox();
+    *   });
+    * @section
+    *  <p>
+    *      When a NumericTextBox is initialized, it will automatically wraps the input element with SPAN
+    *      element and will render spin buttons.
+    *  </p>
+    *  <h3>Configuring NumericTextBox behaviors</h3>
+    *  <p>
+    *      NumericTextBox provides configuration options that can be easily set during initialization.
+    *      Among the properties that can be controlled:
+    *  </p>
+    *  <ul>
+    *      <li>Value of the NumericTextBox</li>
+    *      <li>Min/Max values</li>
+    *      <li>Increment step</li>
+    *      <li>Precision of the number</li>
+    *      <li>Number format. Any valid number format is allowed.</li>
+    *  </ul>
+    *  <p>
+    *      To see a full list of available properties and values, review the Slider Configuration API documentation tab.
+    *  </p>
+    * @exampleTitle Customizing NumericTextBox defaults
+    * @example
+    *  $("#textbox").kendoNumericTextBox({
+    *      value: 10,
+    *      min: -10,
+    *      max: 100,
+    *      step: 0.75,
+    *      format: "n",
+    *      decimals: 3
+    *  });
+    * @section
+    * @exampleTitle Create Currency NumericTextBox widget
+    * @example
+    *  $("#textbox").kendoNumericTextBox({
+    *      format: "c2" //Define currency type and 2 digits precision
+    *  });
+    * @section
+    * @exampleTitle Create Percentage NumericTextBox widget
+    * @example
+    *  $("#textbox").kendoNumericTextBox({
+    *      format: "p",
+    *      value: 0.15 // 15 %
+    *  });
+    */
+
     var kendo = window.kendo,
         keys = kendo.keys,
         ui = kendo.ui,
         Widget = ui.Widget,
         parse = kendo.parseFloat,
         touch = kendo.support.touch,
+        CHANGE = "change",
+        CHAR = "character",
+        DISABLED = "disabled",
+        INPUT = "k-input",
         TOUCHEND = "touchend",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         MOUSEUP = touch ? "touchmove " + TOUCHEND : "mouseup mouseleave",
+        HIDE = "k-hide-text",
         HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
-        DISABLED = "disabled",
-        HIDE = "k-hide-text",
-        INPUT = "k-input",
-        CHANGE = "change",
         POINT = ".",
         NULL = null,
         proxy = $.proxy,
@@ -22,7 +92,21 @@
             188 : ","
         };
 
-    var TextBox = Widget.extend(/** @lends kendo.ui.TextBox.prototype */{
+    var NumericTextBox = Widget.extend(/** @lends kendo.ui.NumericTextBox.prototype */{
+        /**
+         * @constructs
+         * @extends kendo.ui.Widget
+         * @param {DomElement} element DOM element
+         * @param {Object} options Configuration options
+         * @option {Number} [value] <null> Specifies the value of the NumericTextBox widget.
+         * @option {Number} [min] <null> Specifies the smallest value, which user can enter.
+         * @option {Number} [max] <null> Specifies the biggest value, which user can enter.
+         * @option {Number} [decimals] <null> Specifies the number precision. If not set precision defined by current culture is used.
+         * @option {String} [format] <n> Specifies the format of the number. Any valid number format is allowed.
+         * @option {String} [empty] <Enter value> Specifies the text displayed when the input is empty.
+         * @option {String} [upArrowText] <Increase value> Specifies the title of the up arrow.
+         * @option {String} [downArrowText] <Decrease value> Specifies the title of the down arrow.
+         */
         init: function(element, options) {
             var that = this,
                 isStep = options && options[step] !== undefined,
@@ -42,9 +126,15 @@
             that._arrows();
             that._input();
 
+            /**
+            * Fires when the value is changed
+            * @name kendo.ui.NumericTextBox#change
+            * @event
+            * @param {Event} e
+            */
             that.bind(CHANGE, options);
 
-            that._text.click(proxy(that._click, that));
+            that._text.focus(proxy(that._click, that));
 
             min = parse(element.attr("min"));
             max = parse(element.attr("max"));
@@ -72,18 +162,30 @@
         },
 
         options: {
-            value: NULL,
+            name: "NumericTextBox",
             min: NULL,
             max: NULL,
+            value: NULL,
             step: 1,
             format: "n",
-            name: "TextBox",
             empty: "Enter value",
             upArrowText: "Increase value",
             downArrowText: "Decrease value"
         },
 
-        enable: function(enable) {//update because of the new rendering
+        /**
+        * Enable/Disable the numerictextbox widget.
+        * @param {Boolean} enable The argument, which defines whether to enable/disable tha numerictextbox.
+        * @example
+        * var textbox = $("#textbox").data("kendoNumericTextBox");
+        *
+        * // disables the numerictextbox
+        * numerictextbox.enable(false);
+        *
+        * // enables the numerictextbox
+        * numerictextbox.enable(true);
+        */
+        enable: function(enable) {
             var that = this,
                 element = that.element;
                 wrapper = that.wrapper,
@@ -120,6 +222,19 @@
             }
         },
 
+        /**
+        * Gets/Sets the value of the numerictextbox.
+        * @param {Number|String} value The value to set.
+        * @returns {Number} The value of the numerictextbox.
+        * @example
+        * var numerictextbox = $("#textbox").data("kendoNumericTextBox");
+        *
+        * // get the value of the numerictextbox.
+        * var value = numerictextbox.value();
+        *
+        * // set the value of the numerictextbox.
+        * numerictextbox.value("10.20");
+        */
         value: function(value) {
             var that = this,
                 options = that.options,
@@ -195,28 +310,32 @@
         },
 
         _click: function(e) {
-            var that = this,
-            input = e.target,
-            idx = caret(input),
-            value = input.value.substring(0, idx),
-            format = that._format(that.options.format),
-            group = format[","],
-            groupRegExp = new RegExp("\\" + group, "g"),
-            extractRegExp = new RegExp("([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\d+)?"),
-            result = extractRegExp.exec(value),
-            caretPosition = 0;
+            var that = this;
 
-            if (result) {
-                caretPosition = result[0].replace(groupRegExp, "").length;
+            clearTimeout(that._focusing);
+            that._focusing = setTimeout(function() {
+                var input = e.target,
+                    idx = caret(input),
+                    value = input.value.substring(0, idx),
+                    format = that._format(that.options.format),
+                    group = format[","],
+                    groupRegExp = new RegExp("\\" + group, "g"),
+                    extractRegExp = new RegExp("([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\d+)?"),
+                    result = extractRegExp.exec(value),
+                    caretPosition = 0;
 
-                if (value.indexOf("(") != -1 && that._value < 0) {
-                    caretPosition++;
+                if (result) {
+                    caretPosition = result[0].replace(groupRegExp, "").length;
+
+                    if (value.indexOf("(") != -1 && that._value < 0) {
+                        caretPosition++;
+                    }
                 }
-            }
 
-            that._focusin();
+                that._focusin();
 
-            caret(that.element[0], caretPosition);
+                caret(that.element[0], caretPosition);
+            });
         },
 
         _change: function(value) {
@@ -270,7 +389,7 @@
            text = wrapper.find(POINT + CLASSNAME);
 
             if (!text[0]) {
-                text = $("<input />").insertBefore(element).addClass(CLASSNAME);//.hide()
+                text = $("<input />").insertBefore(element).addClass(CLASSNAME);
             }
 
             text[0].style.cssText = element.style.cssText;
@@ -296,12 +415,11 @@
             var that = this,
                 element = e.target,
                 value = element.value;
-                setTimeout(function() {
-                    if (parse(element.val()) === null) {
-                        that.value(value);
-                    }
-                });
-
+            setTimeout(function() {
+                if (parse(element.val()) === NULL) {
+                    that.value(value);
+                }
+            });
         },
 
         _prevent: function(key) {
@@ -377,9 +495,7 @@
             var that = this;
 
             toggle = !!toggle;
-
-            that._text.toggle(toggle); //calling enable() hides the _text ...
-
+            that._text.toggle(toggle);
             that.element.toggle(!toggle);
         },
 
@@ -408,12 +524,14 @@
             isPosition = position !== undefined;
 
         if (document.selection) {
-            var range = element.document.selection.createRange();
+            element.focus();
+            var range = document.selection.createRange();
             if (isPosition) {
-                range.move("character", pos);
+                range.move(CHAR, position);
                 range.select();
             } else {
-                position = element.value.indexOf(range.text);
+                range.moveStart(CHAR, -element.value.length);
+                position = range.text.length;
             }
         } else if (element.selectionStart !== undefined) {
             if (isPosition) {
@@ -427,5 +545,5 @@
         return position;
     }
 
-    ui.plugin(TextBox);
+    ui.plugin(NumericTextBox);
 })(jQuery);

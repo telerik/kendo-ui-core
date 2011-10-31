@@ -312,6 +312,28 @@ var categories = {
                 }
         ] },
         {
+            text: "NumericTextBox",
+            spriteCssClass: "numerictextboxIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "numerictextbox/index.html"
+                },
+                {
+                    text: "Globalization",
+                    url: "numerictextbox/globalization.html"
+                },
+                {
+                    text: "Events",
+                    url: "numerictextbox/events.html"
+                },
+                {
+                    text: "API",
+                    url: "numerictextbox/api.html"
+                }
+            ]
+        },
+        {
             text: "PanelBar",
             spriteCssClass: "panelBarIcon",
             items: [
