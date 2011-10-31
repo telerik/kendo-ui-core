@@ -4,8 +4,10 @@
         Widget = ui.Widget,
         extend = $.extend,
         isFunction = $.isFunction,
+        isPlainObject = $.isPlainObject,
         inArray = $.inArray,
         Binder = kendo.data.ModelViewBinder,
+        Validatable = ui.Validatable,
         DATATYPE = "data-kendo-type";
 
     var specialRules = ["url", "email", "number", "date", "boolean"];
@@ -27,8 +29,10 @@
             if (inArray(ruleName, specialRules) >= 0) {
                 attr[DATATYPE] = ruleName;
             } else if (!isFunction(rule)) {
-                attr[ruleName] = rule;
+                attr[ruleName] = isPlainObject(rule) ? rule.value || ruleName : rule;
             }
+
+            attr["data-kendo-" + ruleName + "-msg"] = rule.message;
         }
 
         if (inArray(type, specialRules) >= 0) {
@@ -71,7 +75,7 @@
             var that = this,
                 editors = that.options.editors,
                 model = that.options.model || {},
-                isObject = $.isPlainObject(field),
+                isObject = isPlainObject(field),
                 fieldName = isObject ? field.field : field,
                 modelField = (model.fields || {})[fieldName],
                 fieldType = modelField && modelField.type ? modelField.type : "string",
@@ -89,17 +93,33 @@
                 idx,
                 length,
                 fields = that.options.fields || [],
-                container = that.element.empty();
+                container = that.element.empty(),
+                model = that.options.model || {},
+                rules = {};
 
             if (!$.isArray(fields)) {
                 fields = [fields];
             }
 
             for(idx = 0, length = fields.length; idx < length; idx++) {
-                that.editor(fields[idx]);
+                var field = fields[idx],
+                    isObject = isPlainObject(field),
+                    fieldName = isObject ? field.field : field,
+                    modelField = (model.fields || {})[fieldName],
+                    validation = modelField ? (modelField.validation || {}) : {};
+
+                for (var rule in validation) {
+                    if (isFunction(validation[rule])) {
+                        rules[rule] = validation[rule];
+                    }
+                }
+
+                that.editor(field);
             }
 
             new Binder(container, that.options.model);
+
+            that.validatable = new Validatable(container, { rules: rules });
         }
    });
 
