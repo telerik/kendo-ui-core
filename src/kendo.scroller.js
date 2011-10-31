@@ -155,13 +155,11 @@
         },
 
         startKineticAnimation: function(location) {
-            var that = this,
-                velocityFactor = (+new Date() - that.directionChange) / ACCELERATION,
-                delta = this.lastLocation - location;
+            var that = this;
 
             that.bounceLocation = location;
             that.friction = .96;
-            that.decelerationVelocity = - delta / velocityFactor;
+            that.decelerationVelocity = - (this.lastLocation - location) / ((+new Date() - that.directionChange) / ACCELERATION);
         },
 
         drag: function(location) {
@@ -240,8 +238,7 @@
             if (!this.hasScroll) return 0;
 
             var that = this,
-                offset = this.startLocation - location,
-                delta = -limitValue(offset, that.minStop, that.maxStop),
+                delta = -limitValue(this.startLocation - location, that.minStop, that.maxStop),
                 position = that.scrollOffset = delta / that.zoomLevel;
 
             that.element[0].style[TRANSFORMSTYLE] = "translate" + that.name + "(" + position + PX + ")";
