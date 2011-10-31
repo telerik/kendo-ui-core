@@ -79,11 +79,12 @@
     }
 
     var Axis = function(element, property, callback) {
-        var that = this, scrollbarCssClass;
+        var that = this,
+            boxSizeName = "inner" + property,
+            dip10,
+            scrollSizeName = "scroll" + property;
 
         that.element = element;
-        that.scrollSizeName = "scroll" + property;
-        that.boxSizeName = "inner" + property;
         that.property = property.toLowerCase();
         that.horizontal = property == "Width";
         that.scrollbar = $('<div class="touch-scrollbar ' + (that.horizontal ? "horizontal" : "vertical") + '-scrollbar" />');
@@ -92,14 +93,9 @@
 
         that.element.parent().append(that.scrollbar);
 
-        that.init();
-    }
-
-    Axis.prototype = {
-        init: function() {
-            var that = this,
-                scrollSize = that.element[0][that.scrollSizeName],
-                boxSize = that.element.parent()[that.boxSizeName](),
+        that.init = function() {
+            var scrollSize = that.element[0][scrollSizeName],
+                boxSize = that.element.parent()[boxSizeName](),
                 scroll = scrollSize - boxSize;
 
             that.minLimit = boxSize * BOUNCE_LIMIT;
@@ -115,24 +111,38 @@
             that.bounceLocation = 0;
             that.direction = 0;
             that.zoomLevel = kendo.support.zoomLevel();
-            that.dip10 = 5 * that.zoomLevel;
+            dip10 = 5 * that.zoomLevel;
             that.directionChange =+ new Date();
-        },
+        }
 
-        aboutToStop: function() {
-            if (!this.hasScroll) return true;
+        that.startScrolling = function(location) {
+            if (!abs(that.lastLocation - location) > dip10 || !that.hasScroll) {
+                return false;
+            }
 
-            return abs(this.decelerationVelocity) <= VELOCITY;
-        },
+            that.init();
+            that._changeDirection(location);
 
-        hideScrollbar: function() {
-            if (!this.hasScroll) return;
-            this.scrollbar.css(OPACITY, 0);
-        },
+            that.scrollbar.show()
+                .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
+                .css(that.property, that.ratio);
 
-        decelerate: function() {
-            var that = this,
-                constraint = 0,
+            return true;
+        }
+
+        that.aboutToStop = function() {
+            if (!that.hasScroll) return true;
+
+            return abs(that.decelerationVelocity) <= VELOCITY;
+        }
+
+        that.hideScrollbar = function() {
+            if (!that.hasScroll) return;
+            that.scrollbar.css(OPACITY, 0);
+        }
+
+        that.decelerate = function() {
+            var constraint = 0,
                 friction = that.friction,
                 scrollOffset = that.scrollOffset,
                 decelerationVelocity = that.decelerationVelocity * friction;
@@ -153,51 +163,31 @@
             that.decelerationVelocity = decelerationVelocity;
             that.friction = limitValue( friction, 0, 1 );
             that._updateScrollOffset(that.bounceLocation);
-        },
+        }
 
-        startKineticAnimation: function(location) {
-            var that = this;
-
+        that.startKineticAnimation = function(location) {
             that.bounceLocation = location;
             that.friction = .96;
-            that.decelerationVelocity = - (this.lastLocation - location) / ((+new Date() - that.directionChange) / ACCELERATION);
-        },
+            that.decelerationVelocity = - (that.lastLocation - location) / ((+new Date() - that.directionChange) / ACCELERATION);
+        }
 
-        drag: function(location) {
-            this._changeDirection(location);
-            this._updateScrollOffset(location);
-        },
-
-        setStartLocation: function(location, scrollOffset) {
-            this.startLocation = location - scrollOffset;
-            this._updateLastLocation(location);
-        },
-
-        startScrolling: function(location) {
-            var that = this;
-
-            if (!abs(that.lastLocation - location) > that.dip10 || !that.hasScroll) {
-                return false;
-            }
-
-            that.init();
+        that.drag = function(location) {
             that._changeDirection(location);
+            that._updateScrollOffset(location);
+        }
 
-            that.scrollbar.show()
-                .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
-                .css(that.property, that.ratio);
+        that.setStartLocation = function(location, scrollOffset) {
+            that.startLocation = location - scrollOffset;
+            that._updateLastLocation(location);
+        }
 
-            return true;
-        },
+        that._updateLastLocation = function(location) {
+            that.lastLocation = location;
+            that.directionChange =+ new Date();
+        }
 
-        _updateLastLocation: function(location) {
-            this.lastLocation = location;
-            this.directionChange =+ new Date();
-        },
-
-        _updateScrollbarPosition: function(position) {
-            var that = this,
-                offsetValue,
+        that._updateScrollbarPosition = function(position) {
+            var offsetValue,
                 delta = 0,
                 size,
                 limit = 0;
@@ -219,11 +209,10 @@
             that.scrollbar
                 .css(TRANSFORM, to3DProperty(that.horizontal ? offsetValue + "px,0" : "0," + offsetValue + PX))
                 .css(that.property, size + PX);
-        },
+        }
 
-        _changeDirection: function(location) {
-            var that = this,
-                delta = this.lastLocation - location,
+        that._changeDirection = function(location) {
+            var delta = that.lastLocation - location,
                 newDirection = delta/abs(delta);
 
             if (!that.hasScroll || newDirection === that.direction) {
@@ -234,17 +223,19 @@
             that._updateLastLocation(location);
         },
 
-        _updateScrollOffset: function(location) {
-            if (!this.hasScroll) return 0;
 
-            var that = this,
-                delta = -limitValue(this.startLocation - location, that.minStop, that.maxStop),
+        that._updateScrollOffset = function(location) {
+            if (!that.hasScroll) return 0;
+
+            var delta = -limitValue(that.startLocation - location, that.minStop, that.maxStop),
                 position = that.scrollOffset = delta / that.zoomLevel;
 
             that.updateCallback(that.name, position);
 
             that._updateScrollbarPosition(delta);
         }
+
+        that.init();
     };
 
 
