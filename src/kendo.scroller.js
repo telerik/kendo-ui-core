@@ -215,21 +215,30 @@
         },
 
         changeDirection: function(location) {
-            var that = this, delta = this.lastLocation - location;
+            var that = this,
+                delta = this.lastLocation - location,
+                newDirection = delta/abs(delta);
 
-            if (!that.hasScroll) {
-                return false;
+            if (!that.hasScroll || newDirection === that.direction) {
+                return;
             }
 
-            var newDirection = delta/abs(delta),
-                directionChanged = newDirection !== that.direction;
-
             that.direction = newDirection;
-            return directionChanged;
+            that._updateLastLocation(location);
+        },
+
+        setStartLocation: function(location, scrollOffset) {
+            this.startLocation = location - scrollOffset;
+            this._updateLastLocation(location);
         },
 
         sufficient: function(location) {
             return abs(this.lastLocation - location) > this.dip10;
+        },
+
+        _updateLastLocation: function(location) {
+            this.lastLocation = location;
+            this.directionChange =+ new Date();
         }
     };
 
@@ -292,11 +301,8 @@
         },
 
         _storeLastLocation: function(location) {
-            var that = this;
-
-            if (that.xAxis.changeDirection(location.x) || that.yAxis.changeDirection(location.y)) {
-                that._updateLastLocation(location);
-            }
+            this.xAxis.changeDirection(location.x);
+            this.yAxis.changeDirection(location.y);
         },
 
         _applyCSS: function(location) {
@@ -325,12 +331,10 @@
             var startLocation = touchLocation(e),
                 scrollOffsets = getScrollOffsets(that.scrollElement);
 
-            that.xAxis.startLocation = startLocation.x - scrollOffsets.x;
-            that.yAxis.startLocation = startLocation.y - scrollOffsets.y;
-
             that.idx = startLocation.idx;
 
-            that._updateLastLocation(startLocation);
+            that.xAxis.setStartLocation(startLocation.x, scrollOffsets.x);
+            that.yAxis.setStartLocation(startLocation.y, scrollOffsets.y);
 
             $(document)
                 .unbind(MOVEEVENT, that._startProxy)
@@ -365,14 +369,6 @@
                            .unbind(MOVEEVENT, that._dragProxy)
                            .bind(MOVEEVENT, that._dragProxy);
             }
-        },
-
-        _updateLastLocation: function(location) {
-            var that = this;
-            that.xAxis.lastLocation = location.x;
-            that.yAxis.lastLocation = location.y;
-            this.xAxis.directionChange = +new Date();
-            this.yAxis.directionChange = +new Date();
         },
 
         _getTouchLocation: function(event) {
