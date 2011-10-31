@@ -6,19 +6,104 @@
         touch = support.touch,
         os = support.mobileOS,
         TOGGLE = "toggle",
+        SNAP = "snap",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
+        MOUSEMOVE = touch ? "touchmove" : "mousemove",
         MOUSEUP = touch ? "touchend" : "mouseup",
         handleSelector = ".k-toggle-handle",
         bindSelectors = ".k-checkbox",
+        TRANSFORMSTYLE = support.transitions.prefix + "Transform",
         extend = $.extend,
-        proxy = $.proxy;
+        proxy = $.proxy,
+        switchAnimation = {
+            all: {
+                effects: "slideTo",
+                duration: 200
+            },
+            android: {
+                effects: {},
+                duration: 0
+            },
+            meego: {
+                animator: ".k-toggle-tip",
+                effects: "slideTo",
+                duration: 200
+            }
+        };
 
-    var Toggle = ui.MobileWidget.extend({
+
+    function limitValue(value, minLimit, maxLimit) {
+        return Math.max( minLimit, Math.min( maxLimit, value));
+    }
+
+    function getAxisLocation(e, element, axis) {
+        return kendo.touchLocation(e)[axis] - element.offset()[axis == "x" ? "left" : "top"]
+    }
+
+    var SlidingHelper = ui.MobileWidget.extend({
         init: function (element, options) {
             var that = this;
-            element = $(element);
 
             ui.MobileWidget.fn.init.call(that, element, options);
+
+            if (!that.options.handle) return;
+
+            that.axis = that.options.axis;
+
+            that._startProxy = proxy(that._start, that);
+            that._moveProxy = proxy(that._move, that);
+            that._stopProxy = proxy(that._stop, that);
+
+            element
+                .bind(MOUSEDOWN, that._startProxy)
+                .bind(MOUSEDOWN, proxy(that._prepare, that));
+            that.bind([ SNAP ], options);
+        },
+
+        options: {
+            axis: "x",
+            snaps: 2
+        },
+
+        _start: function (e) {
+            var that = this;
+
+            that.width = that.element.width();
+            that.animator = extend({ animator: that.animator }, that.options).animator;
+            that.constrain = that.width - that.animator.outerWidth(true);
+            that.location = limitValue(getAxisLocation(e, that.element, that.axis), 20, that.constrain + 20);
+
+            $(document)
+                .bind(MOUSEMOVE, that._moveProxy)
+                .bind(MOUSEUP, that._stopProxy);
+        },
+
+        _move: function (e) {
+            var that = this,
+                axis = that.axis,
+                location = getAxisLocation(e, that.element, that.axis);
+
+            that.location = limitValue(location, 20, that.constrain + 20);
+            that.animator[0].style[TRANSFORMSTYLE] = "translate" + axis + "(" + (that.location - 20) + "px)"; // TODO: remove the 20 :)
+        },
+
+        _stop: function () {
+            var that = this,
+                snapPart = that.width / (that.options.snaps - 1);
+
+            that.trigger(SNAP, { snapTo: Math.round(that.location / snapPart) });
+
+            $(document)
+                .unbind(MOUSEMOVE, that._moveProxy)
+                .unbind(MOUSEUP, that._stopProxy);
+        }
+    });
+
+    var Toggle = SlidingHelper.extend({
+        init: function (element, options) {
+            var that = this;
+
+            SlidingHelper.fn.init.call(that, element, options);
 
             element = that.element;
             options = that.options;
@@ -79,7 +164,9 @@
                 element = element.wrap("<label />").parent();
             }
 
-            Toggle.fn.init.call(that, element, options);
+            Toggle.fn.init.call(that, element, extend(options, { handle: handleSelector }));
+
+            switchAnimation = os.name in switchAnimation ? switchAnimation[os.name] : switchAnimation.all;
 
             element = that.element;
             options = that.options;
@@ -87,23 +174,7 @@
             that._wrap();
             that.enable(options.enable);
 
-            that.animation = {
-                all: {
-                    effects: "slideTo:right",
-                    duration: 200,
-                    offset: 60
-                },
-                android: {
-                    effects: {},
-                    duration: 0
-                },
-                meego: {
-                    animator: ".k-toggle-tip",
-                    effects: "slideTo:right",
-                    duration: 200,
-                    offset: 30
-                }
-            };
+            that.bind(SNAP, proxy(that._snap, that));
         },
 
         options: {
@@ -114,27 +185,36 @@
         refresh: function() {
         },
 
-        _toggle: function(e) {
+        _toggle: function() {
+            var that = this;
+
+            that._prepare();
+            that._snap({ snapTo: that.input[0].checked })
+        },
+
+        _prepare: function() {
+            this.handle
+                .removeClass("k-toggle-on")
+                .removeClass("k-toggle-off");
+        },
+
+        _snap: function (e) {
             var that = this,
-                extra = os.name in that.animation ? that.animation[os.name] : that.animation.all,
                 handle = that.handle,
-                animator = "animator" in extra ? handle.children(extra["animator"]) : handle,
-                back = that.input[0].checked;
+                checked = (e.snapTo == 1);
 
             if (!handle.data("animating")) {
-                handle
-                    .removeClass("k-toggle-on")
-                    .removeClass("k-toggle-off");
-
-                animator
+                that.animator
                     .kendoStop(true, true)
                     .kendoAnimate(extend({
-                        reverse: back,
                         complete: function () {
-                            handle.addClass("k-toggle-" + (back ? "on" : "off"));
-                            that.trigger(TOGGLE, { checked: that.input[0].checked });
+                            handle.addClass("k-toggle-" + (checked ? "on" : "off"));
+                            that.input[0].checked = checked;
+                            that.trigger(TOGGLE, { checked: checked });
                         }
-                    }, that.animation, extra ));
+                    }, switchAnimation, {
+                        offset: e.snapTo * (that.element.width() - that.animator.outerWidth(true)) + "px,0"
+                    }));
             }
         },
 
@@ -159,6 +239,7 @@
                                     .appendTo(that.element)
                                     .append("<span class='k-toggle-tip' />");
             }
+            that.animator = "animator" in switchAnimation ? that.handle.find(switchAnimation.animator) : that.handle;
         }
 
     });

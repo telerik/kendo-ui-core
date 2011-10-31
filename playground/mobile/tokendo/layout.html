@@ -101,10 +101,11 @@
         }
 
         function onClick(e) {
+            toggle.toggle(Math.round(Math.random()*1));
             radiogroup.select(Math.round(Math.random()*2));
         }
 
-        var toggle = $("#toggle").kendoMobileSwitch().data("kendoMobileSwitch"),
+        var toggle = $("#toggle").kendoMobileSwitch({ toggle: onToggle }).data("kendoMobileSwitch"),
             checky = $("#checky").kendoMobileCheckBox().data("kendoMobileCheckBox"),
             button = $("#button").kendoMobileButton({ click: onClick }).data("kendoMobileButton"),
             radio = $("#radio").kendoMobileRadioGroup({ enable: false }).data("kendoMobileRadioGroup"),
