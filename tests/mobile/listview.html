@@ -1,0 +1,48 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <title>kendo.ui.MobileListView Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.MobileListView Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var ListView = kendo.ui.MobileListView;
+
+            module("mobile listview", {
+                setup: function() {
+
+                },
+                teardown: function() {
+
+                }
+            });
+
+            test("name is MobileListView", function() {
+                equal(ListView.fn.options.name, "MobileListView", "Name is properly set");
+            });
+
+            test("applies k-listview css class", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom);
+
+                ok(dom.is(".k-listview"), "Css class is applied");
+            });
+        </script>
+    </body>
+</html>
+
