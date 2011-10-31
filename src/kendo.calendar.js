@@ -694,10 +694,10 @@
         },
 
         firstVisibleDay: function (date) {
-            var firstDayOfWeek = kendo.culture().calendar.firstDayOfWeek,
+            var firstDay = kendo.culture().calendar.firstDay,
             firstVisibleDay = new DATE(date.getFullYear(), date.getMonth(), 0, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
 
-            while (firstVisibleDay.getDay() != firstDayOfWeek) {
+            while (firstVisibleDay.getDay() != firstDay) {
                 calendar.setTime(firstVisibleDay, -1 * MS_PER_DAY)
             }
 
@@ -723,7 +723,7 @@
                 max = options.max,
                 date = options.date,
                 currentCalendar = kendo.culture().calendar,
-                firstDayIdx = currentCalendar.firstDayOfWeek,
+                firstDayIdx = currentCalendar.firstDay,
                 days = currentCalendar.days,
                 names = shiftArray(days.names, firstDayIdx),
                 abbr = shiftArray(days.namesAbbr, firstDayIdx),

@@ -64,7 +64,7 @@
                 },
                 "/": "{{DateSeparator}}",
                 ":": "{{TimeSeparator}}",
-                firstDayOfWeek: {{FirstDayOfWeek}}
+                firstDay: {{FirstDayOfWeek}}
             }
         }
     }
