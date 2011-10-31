@@ -70,7 +70,7 @@
                                      };
     }
 
-    var Axis = function(scrollElement, property, updateCallback) {
+    function Axis(scrollElement, property, updateCallback) {
         var boxSizeName = "inner" + property,
             cssProperty = property.toLowerCase(),
             horizontal = property == "Width",
@@ -364,8 +364,8 @@
             that.scrollElement = element.children(":not(script)");
 
             that.transform = {x: 0, y: 0};
-            that.xAxis = new Axis(that.scrollElement, "Width", _updateTransformProxy);
-            that.yAxis = new Axis(that.scrollElement, "Height", _updateTransformProxy);
+            Axis(that.scrollElement, "Width", _updateTransformProxy);
+            Axis(that.scrollElement, "Height", _updateTransformProxy);
 
             $.browser.mozilla && element.bind("mousedown", false);
         },
