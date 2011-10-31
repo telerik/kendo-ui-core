@@ -135,6 +135,17 @@
                 equal(validator.errors().length, 0);
             });
 
+            test("errors returns type specific message if attribute is set for single invalid element", function() {
+                var input = $('<input type="text" required  data-kendo-required-msg="required message" validationMessage="message" />'),
+                    validator = setup(input);
+
+                validator.validate();
+                var messages = validator.errors();
+
+                equal(messages.length, 1);
+                equal(messages[0], "required message");
+            });
+
             test("errors returns validationMessage attribute value for single invalid element", function() {
                 var input = $('<input type="text" required  validationMessage="message" />'),
                     validator = setup(input);

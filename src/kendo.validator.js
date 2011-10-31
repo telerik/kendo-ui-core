@@ -265,7 +265,7 @@
 
             customMessage = $.isFunction(customMessage) ? customMessage(input) : customMessage;
 
-            return kendo.format(input.attr("validationMessage") || input.attr("title") || customMessage || "", fieldName, input.attr(ruleKey));
+            return kendo.format(input.data("kendo-" + ruleKey + "-msg") || input.attr("validationMessage") || input.attr("title") || customMessage || "", fieldName, input.attr(ruleKey));
         },
 
         _checkValidity: function(input) {

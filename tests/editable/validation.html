@@ -197,6 +197,142 @@
                 ok(!input.attr("bar"));
             });
 
+            test("custom validation message is rendered as input attr", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    required: { message: "my message" }
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                equal(input.data("kendo-required-msg"), "my message");
+            });
+
+            test("validation message is not rendered as input attr", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    required: true
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                ok(!input.filter("[data-kendo-required-msg]").length);
+            });
+
+            test("multiple custom validation messages are rendered as input attr", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    required: { message: "required message" },
+                                    email: { message: "email message" }
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                equal(input.attr("required"), "required");
+                equal(input.data("kendo-required-msg"), "required message");
+                equal(input.data("kendo-email-msg"), "email message");
+            });
+
+            test("for field of type number min constraint attr is rendered", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "number",
+                                validation: {
+                                    min: 10
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                equal(input.attr("min"), 10);
+            });
+
+            test("for field of type number min constraint and validation message attrs are rendered", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "number",
+                                validation: {
+                                    min: { value: 10, message: "min message" }
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                equal(input.attr("min"), 10);
+                equal(input.data("kendo-min-msg"), "min message");
+            });
+
+            test("for field of type email and validation message attrs are rendered", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    email: { message: "email message" }
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                equal(input.data("kendo-type"), "email");
+                equal(input.data("kendo-email-msg"), "email message");
+            });
+
+           test("custom validation rules are assign to validation instance", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    foo: function() {
+
+                                    }
+                                }
+                            }
+                        }
+                    }),
+                model = new MyModel(),
+                editable = new Editable(div, { fields: "foo", model: model }),
+                validatable = editable.validatable,
+                input = div.find(":input");
+
+                ok($.isFunction(validatable.options.rules.foo));
+            });
+
         </script>
     </body>
 </html>
