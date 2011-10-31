@@ -42,14 +42,6 @@
             }
         }
 
-    function getEvent(args) {
-        if (args[1] && "changedTouches" in args[1]) {
-            return args[1];
-        } else {
-            return args[0];
-        }
-    }
-
     function limitValue(value, minLimit, maxLimit) {
         return max(minLimit, min(maxLimit, value));
     }
@@ -308,8 +300,8 @@
             useOnDesktop: true
         },
 
-        _wait: function() {
-            var that = this, e = getEvent(arguments);
+        _wait: function(e) {
+            var that = this;
 
             that._dragged = false;
             clearTimeout(that.timeoutId);
@@ -331,9 +323,9 @@
                 .bind(ENDEVENT, that._stopProxy);
         },
 
-        _start: function() {
+        _start: function(e) {
             var that = this,
-                currentLocation = that._getTouchLocation(getEvent(arguments));
+                currentLocation = that._getTouchLocation(e);
 
             if (!currentLocation) {
                 return;
@@ -364,16 +356,16 @@
             return location;
         },
 
-        _drag: function() {
+        _drag: function(e) {
             var that = this,
-                location = that._getTouchLocation(getEvent(arguments));
+                location = that._getTouchLocation(e);
 
             if (!location) return;
 
             that._passToAxes("drag", location);
         },
 
-        _stop: function() {
+        _stop: function(e) {
             var that = this;
             if (that._dragCanceled) return;
             that._unbindFromMove();
@@ -381,7 +373,7 @@
 
             if (that._dragged) {
                 that._dragged = false;
-                that._initKineticAnimation(getEvent(arguments));
+                that._initKineticAnimation(e);
             } else {
                 that._endKineticAnimation(true);
             }
