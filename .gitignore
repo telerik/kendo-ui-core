@@ -8,7 +8,6 @@ tags
 *.pdb
 *.gpState
 .DS_Store
-*.min.js
 live/
 release/
 deploy/
