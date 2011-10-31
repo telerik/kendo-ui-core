@@ -113,6 +113,7 @@
             that.direction = 0;
             that.zoomLevel = kendo.support.zoomLevel();
             that.dip10 = 5 * that.zoomLevel;
+            that.directionChange =+ new Date();
         },
 
         aboutToStop: function() {
@@ -203,8 +204,9 @@
             that.friction = limitValue( friction, 0, 1 );
         },
 
-        startKineticAnimation: function(location, velocityFactor) {
+        startKineticAnimation: function(location) {
             var that = this,
+                velocityFactor = (+new Date() - that.directionChange) / ACCELERATION,
                 delta = this.lastLocation - location;
 
             that.bounceLocation = location;
@@ -367,7 +369,8 @@
             var that = this;
             that.xAxis.lastLocation = location.x;
             that.yAxis.lastLocation = location.y;
-            this.directionChange = +new Date();
+            this.xAxis.directionChange = +new Date();
+            this.yAxis.directionChange = +new Date();
         },
 
         _getTouchLocation: function(event) {
@@ -415,11 +418,10 @@
 
         _initKineticAnimation: function(e) {
             var that = this,
-                bounceLocation = touchLocation(e),
-                velocityFactor = (+new Date() - that.directionChange) / ACCELERATION;
+                bounceLocation = touchLocation(e);
 
-            that.xAxis.startKineticAnimation(bounceLocation.x, velocityFactor);
-            that.yAxis.startKineticAnimation(bounceLocation.y, velocityFactor);
+            that.xAxis.startKineticAnimation(bounceLocation.x);
+            that.yAxis.startKineticAnimation(bounceLocation.y);
 
             that.winding = true;
             that.lastCall = +new Date();
