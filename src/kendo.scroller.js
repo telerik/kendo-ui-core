@@ -81,15 +81,18 @@
                                      };
     }
 
-    var Axis = function(element, property, scrollbar) {
-        var that = this;
+    var Axis = function(element, property) {
+        var that = this, scrollbarCssClass;
+
         that.element = element;
         that.scrollSizeName = "scroll" + property;
         that.boxSizeName = "inner" + property;
         that.property = property.toLowerCase();
-        that.scrollbar = scrollbar;
         that.horizontal = property == "Width";
+        that.scrollbar = $('<div class="touch-scrollbar ' + (that.horizontal ? "horizontal" : "vertical") + '-scrollbar" />');
         that.name = that.horizontal ? "x" : "y";
+
+        that.element.parent().append(that.scrollbar);
 
         that.init();
     }
@@ -168,9 +171,6 @@
             that.scrollbar.css(cssModel);
         },
 
-        showScrollbar: function() {
-        },
-
         hideScrollbar: function() {
             if (!this.hasScroll) return;
 
@@ -199,6 +199,7 @@
 
             that.decelerationVelocity = decelerationVelocity;
             that.friction = limitValue( friction, 0, 1 );
+            that.updateScrollOffset(that.bounceLocation);
         },
 
         startKineticAnimation: function(location) {
@@ -222,6 +223,11 @@
 
             that.direction = newDirection;
             that._updateLastLocation(location);
+        },
+
+        drag: function(location) {
+            this.changeDirection(location);
+            this.updateScrollOffset(location);
         },
 
         setStartLocation: function(location, scrollOffset) {
@@ -268,10 +274,6 @@
 
             that.bind(events, options);
 
-            that.xScrollbar = $('<div class="touch-scrollbar horizontal-scrollbar" />');
-            that.yScrollbar = that.xScrollbar.clone().removeClass("horizontal-scrollbar").addClass("vertical-scrollbar");
-            that._scrollbars = $().add(that.xScrollbar).add(that.yScrollbar);
-
             extend(that, {
                 _waitProxy: proxy(that._wait, that),
                 _startProxy: proxy(that._start, that),
@@ -279,7 +281,7 @@
                 _dragProxy: proxy(that._drag, that),
                 _gestureStartProxy: proxy(that._onGestureStart, that),
                 _gestureEndProxy: proxy(that._onGestureEnd, that),
-                _stepKineticProxy: proxy( that._stepKineticAnimation, that )
+                _stepKineticProxy: proxy(that._stepKineticAnimation, that)
             });
 
             element.css("overflow", "hidden");
@@ -292,15 +294,14 @@
             }
 
             that.scrollElement = element.children(":not(script)");
-            that._scrollbars.appendTo(element);
 
             element
                 .bind("gesturestart", that._gestureStartProxy)
                 .bind("gestureend", that._gestureEndProxy)
                 .bind(STARTEVENT, that._waitProxy);
 
-            that.xAxis = new Axis(that.scrollElement, "Width", that.xScrollbar);
-            that.yAxis = new Axis(that.scrollElement, "Height", that.yScrollbar);
+            that.xAxis = new Axis(that.scrollElement, "Width");
+            that.yAxis = new Axis(that.scrollElement, "Height");
 
             browser.mozilla && element.bind("mousedown", false);
         },
@@ -380,8 +381,7 @@
 
             if (!location) return;
 
-            that._passToAxes("changeDirection", location);
-            that._passToAxes("updateScrollOffset", location);
+            that._passToAxes("drag", location);
         },
 
         _stop: function() {
@@ -410,19 +410,20 @@
             that._passToAxes("startKineticAnimation", touchLocation(e));
 
             that.winding = true;
+            that._queueNextStep();
+        },
+
+        _queueNextStep: function() {
+            var that = this;
             that.lastCall = +new Date();
             that.timeoutId = setTimeout(that._stepKineticProxy, FRAMERATE);
         },
 
         _stepKineticAnimation: function() {
-            var that = this,
-                bounceLocation;
+            var that = this;
+                animationIterator = round((+new Date() - that.lastCall) / FRAMERATE - 1);
 
             if (!that.winding) return;
-
-            var now = +new Date(),
-                timeDelta = now - that.lastCall,
-                animationIterator = round(timeDelta / FRAMERATE - 1);
 
             while (animationIterator-- >= 0) {
                 that._passToAxes("decelerate");
@@ -432,10 +433,7 @@
                 }
             }
 
-            that._passToAxes("updateScrollOffset", {x: that.xAxis.bounceLocation, y: that.yAxis.bounceLocation});
-
-            that.timeoutId = setTimeout(that._stepKineticProxy, FRAMERATE);
-            that.lastCall = now;
+            that._queueNextStep();
         },
 
        _endKineticAnimation: function(forceEnd) {
