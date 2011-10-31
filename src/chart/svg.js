@@ -182,6 +182,13 @@
         }
     });
 
+    SVGView.fromModel = function(model) {
+        var view = new SVGView(model.options);
+        [].push.apply(view.children, model.getViewElements(view));
+
+        return view;
+    }
+
     // Primitives =============================================================
     var SVGText = ViewElement.extend({
         init: function(content, options) {

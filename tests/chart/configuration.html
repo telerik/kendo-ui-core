@@ -43,6 +43,31 @@
                 }
 
                 // ------------------------------------------------------------
+                module("View", {
+                    setup: function() {
+                        createChart();
+                    }
+                });
+
+                test("SVGView is created if browser supports SVG", function() {
+                    Chart.prototype._supportsSVG = function() { return true; };
+                    createChart();
+                    ok(chart._view instanceof Chart.SVGView);
+                });
+
+                test("VMLView is created if browser does not support SVG", function() {
+                    Chart.prototype._supportsSVG = function() { return false; };
+                    createChart();
+                    ok(chart._view instanceof Chart.VMLView);
+                });
+
+                test("sets dimensions on view element", 2, function() {
+                    var view = chart._view;
+                    equals(view.options.width, 600);
+                    equals(view.options.height, 400);
+                });
+
+                // ------------------------------------------------------------
                 module("Category Axis Configuration", {
                     teardown: destroyChart
                 });
@@ -623,7 +648,7 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
 
-        <div id="container">
+        <div id="container" style="width: 600px; height: 400px">
         </div>
     </body>
 </html>
