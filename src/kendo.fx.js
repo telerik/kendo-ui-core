@@ -674,18 +674,16 @@
         },
         slideTo: {
             setup: function(element, options) {
-                var direction = kendo.directions[options.direction],
-                    offset = direction.modifier * options.offset,
+                var offset = (options.offset+"").split(","),
                     extender = {}, reverse = options.reverse;
 
                 if (transitions && options.transition !== false) {
-                    element.css(TRANSFORM, direction.transition + "(" + (!reverse ? offset : 0) + "px)");
-                    extender[direction.transition] = reverse ? offset + PX : 0;
+                    extender["translate"] = !reverse ? offset + PX : 0;
                 } else {
-                    !reverse && element.css(direction.property, offset + PX);
-                    extender[direction.property] = reverse ? offset + PX : 0;
+                    extender["left"] = !reverse ? offset[0] : 0;
+                    extender["top"] = !reverse ? offset[1] : 0;
                 }
-                element.css(direction.property);
+                element.css("left");
 
                 return extend(extender, options.properties);
             }
