@@ -51,7 +51,7 @@
     }
 
     function limitValue(value, minLimit, maxLimit) {
-        return max( minLimit, min( maxLimit, value));
+        return max(minLimit, min(maxLimit, value));
     }
 
     function getScrollOffsets(scrollElement) {
@@ -78,115 +78,39 @@
                                      };
     }
 
-    var Axis = function(element, property, callback) {
+    var Axis = function(element, property, updateCallback) {
         var that = this,
             boxSizeName = "inner" + property,
+            cssProperty = property.toLowerCase(),
+            horizontal = property == "Width",
+            scrollSizeName = "scroll" + property,
+            scrollbar = $('<div class="touch-scrollbar ' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />'),
+            name = horizontal ? "x" : "y",
             dip10,
-            scrollSizeName = "scroll" + property;
+            enabled,
+            minLimit,
+            maxLimit,
+            minStop,
+            maxStop,
+            ratio,
+            decelerationVelocity,
+            bounceLocation,
+            direction,
+            zoomLevel,
+            directionChange,
+            scrollOffset,
+            boxSize,
+            friction,
+            lastLocation;
 
-        that.element = element;
-        that.property = property.toLowerCase();
-        that.horizontal = property == "Width";
-        that.scrollbar = $('<div class="touch-scrollbar ' + (that.horizontal ? "horizontal" : "vertical") + '-scrollbar" />');
-        that.name = that.horizontal ? "x" : "y";
-        that.updateCallback = callback;
+        element.parent().append(scrollbar);
 
-        that.element.parent().append(that.scrollbar);
-
-        that.init = function() {
-            var scrollSize = that.element[0][scrollSizeName],
-                boxSize = that.element.parent()[boxSizeName](),
-                scroll = scrollSize - boxSize;
-
-            that.minLimit = boxSize * BOUNCE_LIMIT;
-            that.maxLimit = scroll + this.minLimit;
-            that.minStop = - BOUNCE_STOP;
-            that.maxStop = scroll + BOUNCE_STOP;
-            that.ratio = ~~(boxSize / scrollSize * boxSize);
-            that.size = boxSize;
-            that.hasScroll = scroll > 0;
-            that.scrollOffset = 0;
-            that.friction = .96;
-            that.decelerationVelocity = 0;
-            that.bounceLocation = 0;
-            that.direction = 0;
-            that.zoomLevel = kendo.support.zoomLevel();
-            dip10 = 5 * that.zoomLevel;
-            that.directionChange =+ new Date();
+        function _updateLastLocation (location) {
+            lastLocation = location;
+            directionChange =+ new Date();
         }
 
-        that.startScrolling = function(location) {
-            if (!abs(that.lastLocation - location) > dip10 || !that.hasScroll) {
-                return false;
-            }
-
-            that.init();
-            that._changeDirection(location);
-
-            that.scrollbar.show()
-                .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
-                .css(that.property, that.ratio);
-
-            return true;
-        }
-
-        that.aboutToStop = function() {
-            if (!that.hasScroll) return true;
-
-            return abs(that.decelerationVelocity) <= VELOCITY;
-        }
-
-        that.hideScrollbar = function() {
-            if (!that.hasScroll) return;
-            that.scrollbar.css(OPACITY, 0);
-        }
-
-        that.decelerate = function() {
-            var constraint = 0,
-                friction = that.friction,
-                scrollOffset = that.scrollOffset,
-                decelerationVelocity = that.decelerationVelocity * friction;
-
-                that.bounceLocation += that.decelerationVelocity;
-
-            if (-scrollOffset < that.minLimit) {
-                constraint = that.minLimit + scrollOffset;
-            } else if (-scrollOffset > that.maxLimit) {
-                constraint = that.maxLimit + scrollOffset;
-            }
-
-            if (constraint) {
-                friction -= limitValue((BOUNCE_STOP - abs(constraint)) / BOUNCE_STOP, 0, .9);
-                decelerationVelocity -= constraint * BOUNCE_DECELERATION;
-            }
-
-            that.decelerationVelocity = decelerationVelocity;
-            that.friction = limitValue( friction, 0, 1 );
-            that._updateScrollOffset(that.bounceLocation);
-        }
-
-        that.startKineticAnimation = function(location) {
-            that.bounceLocation = location;
-            that.friction = .96;
-            that.decelerationVelocity = - (that.lastLocation - location) / ((+new Date() - that.directionChange) / ACCELERATION);
-        }
-
-        that.drag = function(location) {
-            that._changeDirection(location);
-            that._updateScrollOffset(location);
-        }
-
-        that.setStartLocation = function(location, scrollOffset) {
-            that.startLocation = location - scrollOffset;
-            that._updateLastLocation(location);
-        }
-
-        that._updateLastLocation = function(location) {
-            that.lastLocation = location;
-            that.directionChange =+ new Date();
-        }
-
-        that._updateScrollbarPosition = function(position) {
+        function _updateScrollbarPosition(position) {
             var offsetValue,
                 delta = 0,
                 size,
@@ -194,50 +118,140 @@
 
             position = -position;
 
-            if (position > that.maxLimit) {
-                limit = position - that.maxLimit;
-            } else if (position < that.minLimit) {
+            if (position > maxLimit) {
+                limit = position - maxLimit;
+            } else if (position < minLimit) {
                 limit = position;
             }
 
             delta = limitValue(limit, -BOUNCE_STOP, BOUNCE_STOP);
 
-            size = max(that.ratio - abs(delta), 20);
+            size = max(ratio - abs(delta), 20);
 
-            offsetValue = limitValue(position * that.ratio / that.size + delta, 0, that.size - size);
+            offsetValue = limitValue(position * ratio / boxSize + delta, 0, boxSize - size);
 
-            that.scrollbar
-                .css(TRANSFORM, to3DProperty(that.horizontal ? offsetValue + "px,0" : "0," + offsetValue + PX))
-                .css(that.property, size + PX);
+            scrollbar
+                .css(TRANSFORM, to3DProperty(horizontal ? offsetValue + "px,0" : "0," + offsetValue + PX))
+                .css(cssProperty, size + PX);
         }
 
-        that._changeDirection = function(location) {
-            var delta = that.lastLocation - location,
+        function _changeDirection(location) {
+            var delta = lastLocation - location,
                 newDirection = delta/abs(delta);
 
-            if (!that.hasScroll || newDirection === that.direction) {
+            if (newDirection === direction) {
                 return;
             }
 
-            that.direction = newDirection;
-            that._updateLastLocation(location);
-        },
-
-
-        that._updateScrollOffset = function(location) {
-            if (!that.hasScroll) return 0;
-
-            var delta = -limitValue(that.startLocation - location, that.minStop, that.maxStop),
-                position = that.scrollOffset = delta / that.zoomLevel;
-
-            that.updateCallback(that.name, position);
-
-            that._updateScrollbarPosition(delta);
+            direction = newDirection;
+            _updateLastLocation(location);
         }
+
+        function _updateScrollOffset(location) {
+            var delta = -limitValue(that.startLocation - location, minStop, maxStop),
+                position = scrollOffset = delta / zoomLevel;
+
+            updateCallback(name, position);
+
+            _updateScrollbarPosition(delta);
+        }
+
+        extend(that, {
+            init: function() {
+                var scrollSize = element[0][scrollSizeName],
+                    scroll;
+
+                boxSize = element.parent()[boxSizeName]();
+                scroll = scrollSize - boxSize;
+                enabled = scroll > 0;
+                zoomLevel = kendo.support.zoomLevel();
+                dip10 = 5 * zoomLevel;
+                minLimit = boxSize * BOUNCE_LIMIT;
+                maxLimit = scroll + minLimit;
+                minStop = - BOUNCE_STOP;
+                maxStop = scroll + BOUNCE_STOP;
+                ratio = ~~(boxSize / scrollSize * boxSize);
+                decelerationVelocity = 0;
+                bounceLocation = 0;
+                direction = 0;
+                directionChange =+ new Date();
+                scrollOffset = 0;
+                friction = .96;
+            },
+
+            startScrolling: function(location) {
+                if (!abs(lastLocation - location) > dip10 || !enabled) {
+                    return false;
+                }
+
+                that.init();
+                _changeDirection(location);
+
+                scrollbar.show()
+                    .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
+                    .css(cssProperty, ratio);
+
+                return true;
+            },
+
+            aboutToStop: function() {
+                if (!enabled) return true;
+
+                return abs(decelerationVelocity) <= VELOCITY;
+            },
+
+            hideScrollbar: function() {
+                if (!enabled) return;
+                scrollbar.css(OPACITY, 0);
+            },
+
+            decelerate: function() {
+                if (!enabled) return 0;
+
+                var constraint = 0,
+                    velocity = decelerationVelocity * friction;
+
+                    bounceLocation += decelerationVelocity;
+
+                if (-scrollOffset < minLimit) {
+                    constraint = minLimit + scrollOffset;
+                } else if (-scrollOffset > maxLimit) {
+                    constraint = maxLimit + scrollOffset;
+                }
+
+                if (constraint) {
+                    friction -= limitValue((BOUNCE_STOP - abs(constraint)) / BOUNCE_STOP, 0, .9);
+                    velocity -= constraint * BOUNCE_DECELERATION;
+                }
+
+                decelerationVelocity = velocity;
+                friction = limitValue(friction, 0, 1);
+                _updateScrollOffset(bounceLocation);
+            },
+
+            startKineticAnimation: function(location) {
+                bounceLocation = location;
+                friction = .96;
+                decelerationVelocity = - (lastLocation - location) / ((+new Date() - directionChange) / ACCELERATION);
+            },
+
+            drag: function(location) {
+                if (!enabled) {
+                    return;
+                }
+
+                _changeDirection(location);
+                _updateScrollOffset(location);
+            },
+
+            setStartLocation: function(location, offset) {
+                that.startLocation = location - offset;
+                _updateLastLocation(location);
+            }
+        });
 
         that.init();
     };
-
 
     var Scroller = Widget.extend({
         init: function(element, options) {
