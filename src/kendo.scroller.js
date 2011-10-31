@@ -78,7 +78,7 @@
                                      };
     }
 
-    var Axis = function(element, property) {
+    var Axis = function(element, property, callback) {
         var that = this, scrollbarCssClass;
 
         that.element = element;
@@ -88,6 +88,7 @@
         that.horizontal = property == "Width";
         that.scrollbar = $('<div class="touch-scrollbar ' + (that.horizontal ? "horizontal" : "vertical") + '-scrollbar" />');
         that.name = that.horizontal ? "x" : "y";
+        that.updateCallback = callback;
 
         that.element.parent().append(that.scrollbar);
 
@@ -233,7 +234,6 @@
             that._updateLastLocation(location);
         },
 
-
         _updateScrollOffset: function(location) {
             if (!this.hasScroll) return 0;
 
@@ -241,10 +241,10 @@
                 delta = -limitValue(this.startLocation - location, that.minStop, that.maxStop),
                 position = that.scrollOffset = delta / that.zoomLevel;
 
-            that.element[0].style[TRANSFORMSTYLE] = "translate" + that.name + "(" + position + PX + ")";
+            that.updateCallback(that.name, position);
 
             that._updateScrollbarPosition(delta);
-        },
+        }
     };
 
 
@@ -260,13 +260,12 @@
             scrollElement = $('<div class="k-scroll-container"/>'),
             children = element.children(":not(script)");
 
-            that.bind(events, that.options);
-
             extend(that, {
                 _waitProxy: proxy(that._wait, that),
                 _startProxy: proxy(that._start, that),
                 _stopProxy: proxy(that._stop, that),
                 _dragProxy: proxy(that._drag, that),
+                _updateTransformProxy: proxy(that._updateTransform, that),
                 _stepKineticProxy: proxy(that._stepKineticAnimation, that)
             });
 
@@ -286,10 +285,17 @@
                 .bind("gestureend", function() { that._dragCanceled = false; } )
                 .bind(STARTEVENT, that._waitProxy);
 
-            that.xAxis = new Axis(that.scrollElement, "Width");
-            that.yAxis = new Axis(that.scrollElement, "Height");
+            that.transform = {x: 0, y: 0};
+            that.xAxis = new Axis(that.scrollElement, "Width", that._updateTransformProxy);
+            that.yAxis = new Axis(that.scrollElement, "Height", that._updateTransformProxy);
 
-            browser.mozilla && element.bind("mousedown", false);
+            $.browser.mozilla && element.bind("mousedown", false);
+        },
+
+        _updateTransform: function(property, value) {
+            var that = this;
+            that.transform[property] = value;
+            that.scrollElement[0].style[TRANSFORMSTYLE] = to3DProperty(that.transform.x + PX + "," + that.transform.y + PX);
         },
 
         options: {
