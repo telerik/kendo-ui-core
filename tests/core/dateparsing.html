@@ -54,6 +54,12 @@
                 return isValid;
             }
 
+            test("parse should use calendar.patterns if no format is provided", function() {
+                var result = parse("10/12/2000 10:10:10 AM");
+
+                equal(+result, +(new Date(2000,9,12,10,10,10)));
+            });
+
             test("parse method returns null if not value", function() {
                 var result = parse();
 

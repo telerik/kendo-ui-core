@@ -867,6 +867,9 @@
 
 (function() {
 
+    var nonBreakingSpaceRegExp = /\u00A0/g,
+        formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"];
+
     function outOfRange(value, start, end) {
         return !(value >= start && value <= end);
     }
@@ -1038,7 +1041,7 @@
         return new Date(year, month, day, hours, minutes, seconds, milliseconds);
     }
 
-    kendo.parseDate = function(value, format, culture) {
+    kendo.parseDate = function(value, formats, culture) {
         if (value instanceof Date) {
             return value;
         }
@@ -1046,27 +1049,36 @@
         var idx = 0,
             date = null,
             globalize = window.Globalize,
-            length;
+            length, property, patterns;
 
         if (globalize) {
-            return globalize.parseDate(value, format, culture);
+            return globalize.parseDate(value, formats, culture);
         }
 
-        culture = culture || kendo.culture();
-        format = $.isArray(format) ? format : [format];
-        length = format.length;
-
-        if (typeof culture === STRING) {
+        if (!culture) {
+            culture = kendo.culture();
+        } else if (typeof culture === STRING) {
             kendo.culture(culture);
             culture = kendo.culture();
         }
 
-        var idx = 0,
-            length = format.length,
-            date = null;
+        if (!formats) {
+            formats = [];
+            patterns = culture.calendar.patterns;
+            length = formatsSequence.length;
+
+            for (; idx < length; idx++) {
+                formats[idx] = patterns[formatsSequence[idx]];
+            }
+
+            idx = 0;
+        }
+
+        formats = $.isArray(formats) ? formats: [formats];
+        length = formats.length;
 
         for (; idx < length; idx++) {
-            date = parseExact(value, format[idx], culture);
+            date = parseExact(value, formats[idx], culture);
             if (date) {
                 return date;
             }
@@ -1074,8 +1086,6 @@
 
         return date;
     }
-
-    var nonBreakingSpaceRegExp = /\u00A0/g;
 
     kendo.parseInt = function(value, culture) {
         var result = kendo.parseFloat(value, culture);
