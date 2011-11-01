@@ -2,7 +2,6 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         support = kendo.support,
-        extend = $.extend,
         proxy = $.proxy,
         Widget = ui.Widget,
         touch = support.touch || support.pointers,
@@ -16,7 +15,6 @@
         SINGLE_TRANSLATION_REGEXP = /(translate([XY])\(\s*(-?[\d\.]+)?[\w\s]*\))/i,
         DEFAULT_MATRIX = [0, 0, 0, 0, 0],
         PX = "px",
-        WIDTH = "width",
         OPACITY = "opacity",
         VISIBLE = "visible",
         TRANSFORM = support.transitions.css + "transform",
@@ -48,7 +46,7 @@
     }
 
     function numericCssValue(element, property) {
-        return parseInt(element.css(proeprty), 10) || 0;
+        return parseInt(element.css(property), 10) || 0;
     }
 
     function getScrollOffsets(scrollElement) {
@@ -210,7 +208,7 @@
 
             var location = touchLocation(event);
             if (location.idx != idx || dragCanceled) {
-                return;
+                return false;
             }
 
             return location[name];
@@ -336,7 +334,7 @@
            .bind(STARTEVENT, wait);
 
        init();
-    };
+    }
 
     var Scroller = Widget.extend({
         init: function(element, options) {
@@ -346,9 +344,9 @@
 
             Widget.fn.init.call(that, element, options);
 
-            element = that.element,
-            scrollElement = $('<div class="k-scroll-container"/>'),
-            children = element.children(":not(script)");
+            element = that.element;
+            scrollElement = $('<div class="k-scroll-container"/>');
+            children = element.contents(":not(script)");
 
             var _updateTransformProxy = proxy(that._updateTransform, that);
 
