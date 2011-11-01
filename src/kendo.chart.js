@@ -5343,6 +5343,7 @@
                     "#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #" +
                     "#= d.renderDashType() # " +
                     "stroke-linecap='#= d.renderLinecap() #' " +
+                    "stroke-linejoin='round' " +
                     "fill-opacity='#= d.options.fillOpacity #' " +
                     "stroke-opacity='#= d.options.strokeOpacity #' " +
                     "fill='#= d.options.fill || \"none\" #'></path>"
