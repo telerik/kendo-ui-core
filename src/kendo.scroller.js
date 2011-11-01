@@ -116,12 +116,10 @@
             var delta = lastLocation - location,
                 newDirection = delta/abs(delta);
 
-            if (newDirection === direction) {
-                return;
+            if (newDirection !== direction) {
+                direction = newDirection;
+                updateLastLocation(location);
             }
-
-            direction = newDirection;
-            updateLastLocation(location);
         }
 
         function updateScrollOffset(location) {
@@ -182,11 +180,7 @@
         function start(e) {
             var location = getTouchLocation(e);
 
-            if (!location) {
-                return;
-            }
-
-            if (abs(lastLocation - location) <= dip10) {
+            if (!location || abs(lastLocation - location) <= dip10) {
                 return;
             }
 
@@ -210,22 +204,18 @@
             event.stopPropagation();
 
             var location = touchLocation(event);
-            if (location.idx !== idx || dragCanceled) {
-                return false;
+            if (location.idx === idx && !dragCanceled) {
+                return location[name];
             }
-
-            return location[name];
         }
 
         function drag(e) {
             var location = getTouchLocation(e);
 
-            if (!location) {
-                return;
+            if (location) {
+                changeDirection(location);
+                updateScrollOffset(location);
             }
-
-            changeDirection(location);
-            updateScrollOffset(location);
         }
 
         function stop(e) {
