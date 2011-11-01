@@ -24,21 +24,21 @@
         ENDEVENT = touch ? "touchend" : "mouseup",
         FRAMERATE = 1000 / 30,
         ACCELERATION = 20,
-        VELOCITY = .5,
+        VELOCITY = 0.5,
         BOUNCE_LIMIT = 0,
         BOUNCE_STOP = 100,
-        BOUNCE_DECELERATION = .1,
-        SCROLLBAR_OPACITY = .7,
-        INITIAL_FRICTION = .96;
+        BOUNCE_DECELERATION = 0.1,
+        SCROLLBAR_OPACITY = 0.7,
+        INITIAL_FRICTION = 0.96;
 
         if (support.hasHW3D) {
             to3DProperty = function(value) {
                 return "translate3d(" + value + ", 0)";
-            }
+            };
         } else {
             to3DProperty = function(value) {
                 return "translate(" + value + ")";
-            }
+            };
         }
 
     function limitValue(value, minLimit, maxLimit) {
@@ -56,11 +56,14 @@
             transforms = (transformStyle ? transformStyle.match(TRANSLATION_REGEXP) || transformStyle.match(SINGLE_TRANSLATION_REGEXP) || DEFAULT_MATRIX : DEFAULT_MATRIX);
 
         if (transforms) {
-            if (transforms[2] == "Y") {
+            if (transforms[2] === "Y") {
                 transforms[4] = transforms[3];
                 transforms[3] = 0;
-            } else
-                transforms[2] == "X" && (transforms[4] = 0);
+            } else {
+                if (transforms[2] === "X") {
+                    transforms[4] = 0;
+                }
+            }
         }
 
         if (support.transitions) {
@@ -73,7 +76,7 @@
     function Axis(scrollElement, property, updateCallback) {
         var boxSizeName = "inner" + property,
             cssProperty = property.toLowerCase(),
-            horizontal = property == "Width",
+            horizontal = property === "Width",
             scrollSizeName = "scroll" + property,
             element = scrollElement.parent(),
             scrollbar = $('<div class="touch-scrollbar ' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />'),
@@ -183,7 +186,7 @@
                 return;
             }
 
-            if (!abs(lastLocation - location) > dip10) {
+            if (abs(lastLocation - location) <= dip10) {
                 return;
             }
 
@@ -207,7 +210,7 @@
             event.stopPropagation();
 
             var location = touchLocation(event);
-            if (location.idx != idx || dragCanceled) {
+            if (location.idx !== idx || dragCanceled) {
                 return false;
             }
 
@@ -226,7 +229,9 @@
         }
 
         function stop(e) {
-            if (dragCanceled) return;
+            if (dragCanceled) {
+                return;
+            }
 
             var location = getTouchLocation(e);
 
@@ -256,7 +261,9 @@
        function stepKineticAnimation() {
            var animationIterator = round((+new Date() - lastCall) / FRAMERATE - 1), constraint, velocity;
 
-           if (!winding) return;
+           if (!winding) {
+               return;
+           }
 
            while (animationIterator-- >= 0) {
                constraint = 0;
@@ -270,7 +277,7 @@
                }
 
                if (constraint) {
-                   friction -= limitValue((BOUNCE_STOP - abs(constraint)) / BOUNCE_STOP, 0, .9);
+                   friction -= limitValue((BOUNCE_STOP - abs(constraint)) / BOUNCE_STOP, 0, 0.9);
                    velocity -= constraint * BOUNCE_DECELERATION;
                }
 
@@ -340,7 +347,9 @@
         init: function(element, options) {
             var that = this, scrollElement, children;
 
-            if (options && options !== false && options.useOnDesktop === false) return false; // Stop the initialization if on desktop and disabled.
+            if (options && options !== false && options.useOnDesktop === false) {
+                return false;
+            }
 
             Widget.fn.init.call(that, element, options);
 
@@ -365,7 +374,9 @@
             Axis(that.scrollElement, "Width", _updateTransformProxy);
             Axis(that.scrollElement, "Height", _updateTransformProxy);
 
-            $.browser.mozilla && element.bind("mousedown", false);
+            if ($.browser.mozilla) {
+                element.bind("mousedown", false);
+            }
         },
 
         _updateTransform: function(property, value) {
