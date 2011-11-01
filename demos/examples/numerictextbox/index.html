@@ -84,6 +84,27 @@
                 </div>
             </div>
 
+            <h3>Creating a NumericTextBox from <code>&lt;input /&gt; using custom format</code></h3>
+            <div class="code-sample">
+                <h4 class="code-title">Source:</h4>
+                <pre class="prettyprint">
+&lt;input id="custom" value="10" /&gt;
+
+&lt;script&gt;
+    $("#custom").kendoNumericTextBox({
+        format: "#.00 pounds",
+    });
+&lt;/script&gt;
+</pre>
+            </div>
+            <div class="code-sample output">
+                <h4 class="code-title">Output:</h4>
+                <div class="prettyprint">
+                    <input id="custom" value="10" />
+                </div>
+            </div>
+
+
             <script>
                 $(document).ready(function() {
                     // create NumericTextBox from input HTML element
@@ -101,6 +122,11 @@
                         min: 0,
                         max: 1,
                         step: 0.01
+                    });
+
+                    // create NumericTextBox from input HTML element using custom format
+                    $("#custom").kendoNumericTextBox({
+                        format: "#.00 dollars"
                     });
                 });
             </script>
