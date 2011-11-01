@@ -190,7 +190,7 @@
             test("month view renderer honors firstDayOfWeek property", function() {
                 var today = new Date(2011, 9, 10);
 
-                kendo.culture().calendar.firstDayOfWeek = 1;
+                kendo.culture().calendar.firstDay = 1;
 
                 div.html(calendar.views[0].content({
                     date: today,
@@ -204,7 +204,7 @@
                 equal(div.find("thead").find("th").eq(0).attr("title"), kendo.culture().calendar.days.names[1]);
                 equal(div.find("thead").find("th").eq(0).attr("abbr"), kendo.culture().calendar.days.namesAbbr[1]);
 
-                kendo.culture().calendar.firstDayOfWeek = 0;
+                kendo.culture().calendar.firstDay = 0;
             });
 
             test("month view honors firstVisibleDay", function() {
