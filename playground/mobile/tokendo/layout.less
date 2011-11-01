@@ -236,6 +236,7 @@ body > .k-tabStrip,
     left: 0;
     color: #fff;
     font-size: 1.5em;
+    font-weight: bold;
     line-height: 2.1em;
     text-shadow: 0 -1pt #777;
 }
@@ -288,7 +289,7 @@ body > .k-tabStrip,
 .k-ios,
 .k-ios .k-button
 {
-    font: normal .95em Helvetica, sans-serif;
+    font: normal .95em Helvetica Neue, sans-serif;
 }
 
 .k-ios .k-button.k-state-active
@@ -343,11 +344,12 @@ body > .k-tabStrip,
 .k-toggle,
 .k-checkbox
 {
+    font-size: 1em;
     display: inline-block;
     padding: 1px;
     width: 100px;
-    height: 30px;
-    line-height: 32px;
+    height: 1.75em;
+    line-height: 1.85em;
     vertical-align: middle;
     position: relative;
     overflow: hidden;
@@ -356,8 +358,8 @@ body > .k-tabStrip,
 
 .k-checkbox
 {
-    width: 24px;
-    height: 24px;
+    width: 1.2em;
+    height: 1.2em;
 }
 
 .k-checkbox-checked:after
@@ -412,7 +414,7 @@ body > .k-tabStrip,
     top: 0;
     left: 0;
     width: 40px;
-    height: 30px;
+    height: 1.75em;
     display: block;
     position: absolute;
 }
@@ -462,7 +464,6 @@ body > .k-tabStrip,
     left: 35px;
     padding-left: 5px;
     color: #7f7f7f;
-    text-shadow: 0 -1px 0 #555;
     background: linearGradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%, rgb(250, 250, 250) 50%, rgb(255, 255, 255));
     .box-shadow(~"inset 0 2px 2px #a4a4a4");
     border: 1px solid #999;
@@ -746,13 +747,19 @@ body > .k-tabStrip,
     .border-radius(0 5pt 5pt 0);
 }
 
+.k-ios .k-radiogroup
+{
+}
+
 .k-ios .k-radiogroup .k-button
 {
+    font-size: 1.3em;
     font-weight: bold;
     color: #929292;
     text-shadow: 0 1px #fff;
-    border-color: #B4B8BA #C7CBCF #9FA3A4;
+    border-color: #B4B8BA #9FA3A4 #9FA3A4;
     background-image: linearGradient(top, rgb(251,251,251), rgb(225,225,225) 50%, rgb(200,200,200));
+    .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
 }
 
 .k-ios .k-state-disabled .k-button
@@ -963,47 +970,96 @@ body > .k-tabStrip,
 
 .k-list
 {
-    color: #000;
-    padding: 0;
-    margin: 0;
+    background: #fff;
 }
 
-.k-item
+.k-listview,
+.k-list
+{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.k-listgroup
+{
+    margin: 1em;
+}
+
+.k-listgroup.k-list,
+.k-listgroup .k-list
+{
+    overflow: hidden;
+    border: 1px solid #999;
+    .border-radius(10px);
+    .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
+}
+
+.k-listgroup.k-list .k-item:first-child,
+.k-listgroup .k-list .k-item:first-child
+{
+    .box-shadow(inset 0 1px 0 0 rgba(200,200,200,.4));
+}
+
+.k-listview .k-toggle
+{
+    float: right;
+    vertical-align: middle;
+}
+
+.k-list-title
+{
+    color: #FFF;
+    display: block;
+    font-weight: bold;
+    padding: 0.2em 0.8em;
+    text-shadow: 0 1px 1px rgba(100,100,100,.8);
+    border: 1px solid #78858e;
+    border-width: 1px 0;
+    background: linearGradient(top, rgb(136, 152, 165), rgb(172, 184, 196));
+    .box-shadow(inset 0 1px 0 #c5cfd6);
+}
+
+.k-listgroup .k-list-title
+{
+    color: #444;
+    padding: 0 .8em .4em;
+    background: none;
+    border: none;
+    .box-shadow(none);
+    text-shadow: 0 1px 1px rgba(255,255,255,.8);
+}
+
+.k-listview .k-item
 {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: .6em .6em .6em .8em;
     display: block;
     border-bottom: 1px solid #E9E9E9;
     position: relative;
+    vertical-align: middle;
+    .box-sizing(border-box);
 }
 
-.k-ios .k-item
+.k-listview .k-item:last-child
 {
-    line-height: 1.3em;
+    border: 0;
+}
+
+.k-ios .k-item .k-text
+{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.6em;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 .k-android .k-item
 {
     line-height: 2.6em;
     border-bottom: 1px solid #444;
-}
-
-.k-item label
-{
-    display: block;
-}
-
-.k-ios .k-item label
-{
-    line-height: 36px;
-    padding-left: 36px;
-}
-
-.k-android .k-item label
-{
-    line-height: 56px;
-    padding-left: 56px;
 }
 
 .k-default-content
@@ -1021,11 +1077,6 @@ body > .k-tabStrip,
 .k-android .k-list
 {
     color: #fff;
-}
-
-.k-ios .k-list .k-item
-{
-    height: 36px;
 }
 
 .k-android .k-list .k-item

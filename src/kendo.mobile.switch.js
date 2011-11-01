@@ -30,7 +30,7 @@
                 duration: 200
             }
         };
-
+    switchAnimation = os.name in switchAnimation ? switchAnimation[os.name] : switchAnimation.all;
 
     function limitValue(value, minLimit, maxLimit) {
         return Math.max( minLimit, Math.min( maxLimit, value));
@@ -165,8 +165,6 @@
             }
 
             Toggle.fn.init.call(that, element, extend(options, { handle: handleSelector }));
-
-            switchAnimation = os.name in switchAnimation ? switchAnimation[os.name] : switchAnimation.all;
 
             element = that.element;
             options = that.options;
