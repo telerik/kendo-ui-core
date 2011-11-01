@@ -35,12 +35,45 @@
                 equal(ListView.fn.options.name, "MobileListView", "Name is properly set");
             });
 
-            test("applies k-listview css class", function() {
+            test("applies css classes", function() {
                 var dom = $("<ul/>");
 
                 new ListView(dom);
 
                 ok(dom.is(".k-listview"), "Css class is applied");
+                ok(dom.is(".k-list"), "Css class is applied");
+            });
+
+            test("applies css classes to items", function() {
+                var dom = $("<ul><li/></ul>");
+
+                new ListView(dom);
+
+                ok(dom.find("li").is(".k-item"), "Css class is applied");
+            });
+
+            test("does not apply css classes to items when displayed as group", function() {
+                var dom = $("<ul><li/></ul>");
+
+                new ListView(dom, { display: "group" });
+
+                ok(!dom.find("li").is(".k-item"), "Css class is not applied");
+            });
+
+            test("does not apply css classes to items when displayed as group", function() {
+                var dom = $("<ul><li/></ul>");
+
+                new ListView(dom, { display: "group" });
+
+                ok(!dom.find("li").is(".k-item"), "Css class is not applied");
+            });
+
+            test("applies css classes to child lists when displayed as group", function() {
+                var dom = $("<ul><li><ul/></li></ul>");
+
+                new ListView(dom, { display: "group" });
+
+                ok(dom.find("ul").is(".k-list"), "Css class is applied");
             });
         </script>
     </body>
