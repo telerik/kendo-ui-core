@@ -386,14 +386,16 @@
                 wrapper = that.wrapper,
                 text;
 
-           text = wrapper.find(POINT + CLASSNAME);
+            element.type = "text";
+
+            text = wrapper.find(POINT + CLASSNAME);
 
             if (!text[0]) {
                 text = $("<input />").insertBefore(element).addClass(CLASSNAME);
             }
 
             text[0].style.cssText = element.style.cssText;
-            that._text = text.addClass(element.className);
+            that._text = text.attr("readonly", true).addClass(element.className);
         },
 
         _keydown: function(e) {
