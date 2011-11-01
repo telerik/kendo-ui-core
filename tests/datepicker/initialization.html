@@ -178,27 +178,14 @@
                     datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
                 stub(datepicker, {
-                    value: datepicker.value,
+                    _change: datepicker.value,
                     close: datepicker.close
                 });
 
                 datepicker.dateView.options.change();
 
-                equal(datepicker.calls("value"), 1);
+                equal(datepicker.calls("_change"), 1);
                 equal(datepicker.calls("close"), 1);
-            });
-
-            test("dateView onChange should trigger change", function() {
-                var called = false,
-                    datepicker = input.kendoDatePicker({
-                        change: function() {
-                            called=true;
-                        }
-                    }).data("kendoDatePicker");
-
-                datepicker.dateView.options.change();
-
-                ok(called);
             });
 
             asyncTest("DatePicker wire icon click", function() {

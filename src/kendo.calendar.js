@@ -1024,6 +1024,9 @@
 
     function restrictValue (value, min, max) {
         var today = new DATE();
+
+        today = new DATE(today.getFullYear(), today.getMonth(), today.getDate());
+
         if (value) {
             today = new DATE(value);
         }

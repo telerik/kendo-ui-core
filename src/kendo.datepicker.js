@@ -340,8 +340,7 @@
                 anchor: that.wrapper,
                 change: function() {
                     that._valid = true;
-                    that.value(dateView.calendar.value());
-                    that.trigger(CHANGE);
+                    that._change(dateView.calendar.value());
                     that.close();
                 },
                 clearBlurTimeout: proxy(that._clearBlurTimeout, that)
