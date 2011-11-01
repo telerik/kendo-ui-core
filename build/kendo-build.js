@@ -58,7 +58,7 @@ function copyDirSyncRecursive(sourceDir, newDirLocation, skipClean, filter) {
 
         if (fileInfo.isDirectory()) {
             fs.mkdirSync(destinationPath, fileInfo.mode);
-            copyDirSyncRecursive(sourcePath, destinationPath);
+            copyDirSyncRecursive(sourcePath, destinationPath, skipClean, filter);
 
             if (!fs.readdirSync(destinationPath).length) {
                 fs.rmdirSync(destinationPath);
