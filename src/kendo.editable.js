@@ -118,7 +118,7 @@
 
             new Binder(container, that.options.model);
 
-            that.validatable = new Validatable(container, { rules: rules });
+            that.validatable = container.kendoValidatable({ rules: rules }).data("kendoValidatable");
         }
    });
 

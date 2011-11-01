@@ -77,7 +77,6 @@
                 ok(!cell.find(":input").length);
             });
 
-
             test("correct model is passed to the editable instance", function() {
                 setup();
                 var cell = table.find("td:first").click();
@@ -97,7 +96,7 @@
 
                 var cell = table.find("td:first").click();
 
-                $(document).click();
+                table.data("kendoGrid")._closeCell();
 
                 ok(!cell.hasClass("k-edit-cell"));
             });
@@ -107,7 +106,7 @@
 
                 var cell = table.find("td:first").click();
 
-                $(document).click();
+                 table.data("kendoGrid")._closeCell();
 
                 equal(cell.html(), "bar");
             });
@@ -244,7 +243,7 @@
                 setup();
 
                 table.find("tr>td:first").click();
-                $(document).click();
+                table.data("kendoGrid")._closeCell();
 
                 ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
                 ok(!table.find("tr>td:first").data("kendoEditable"));
@@ -272,26 +271,28 @@
                 ok(!table.find("tr>td:first").data("kendoEditable"));
             });
 
-            test("clicking document does not re-render readonly cell", function() {
+            test("validate is called when cell leaves edit mode", function() {
                 setup({
                     dataSource: new DataSource({
                         schema: {
                             model: {
                                 id: "foo",
                                 fields: {
-                                    foo: { field: "foo", readonly: true }
+                                    name: "name",
+                                    foo: { field: "foo" }
                                 }
                             }
                         },
-                        data: [{ foo: "bar" }, { foo: "baz" }]
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
                     })
                 });
 
-                table.find("tr>td:first").click();
-                var displayCell = stub(table.data("kendoGrid"), "_displayCell");
-                $(document).click();
 
-                equal(displayCell.calls("_displayCell"), 0);
+                table.find("tr>td:first").click();
+                var validate = stub(table.find("tr>td:first").data("kendoValidatable"), "validate");
+                table.data("kendoGrid")._closeCell();
+
+                ok(validate.calls("validate"));
             });
 
        </script>
