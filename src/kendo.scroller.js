@@ -335,49 +335,36 @@
 
     var Scroller = Widget.extend({
         init: function(element, options) {
-            var that = this, scrollElement, children;
-
-            if (options && options !== false && options.useOnDesktop === false) {
-                return false;
-            }
+            var that = this, scrollElement;
 
             Widget.fn.init.call(that, element, options);
 
             element = that.element;
-            scrollElement = $('<div class="k-scroll-container"/>');
-            children = element.contents(":not(script)");
 
-            var _updateTransformProxy = proxy(that._updateTransform, that);
+            element
+                .css("overflow", "hidden")
+                .wrapInner('<div class="k-scroll-container"/>');
 
-            element.css("overflow", "hidden");
+            scrollElement = element.children().first();
 
-            if (children.length) {
-                children.wrapAll(scrollElement);
+            transform = {x: 0, y: 0};
+
+            function updateTransform(property, value) {
+                transform[property] = value;
+                scrollElement[0].style[TRANSFORMSTYLE] = to3DProperty(transform.x + PX + "," + transform.y + PX);
             }
-            else {
-                element.append(scrollElement);
-            }
 
-            that.scrollElement = element.children(":not(script)");
-
-            that.transform = {x: 0, y: 0};
-            Axis(that.scrollElement, "Width", _updateTransformProxy);
-            Axis(that.scrollElement, "Height", _updateTransformProxy);
+            Axis(scrollElement, "Width", updateTransform);
+            Axis(scrollElement, "Height", updateTransform);
 
             if ($.browser.mozilla) {
                 element.bind("mousedown", false);
             }
         },
 
-        _updateTransform: function(property, value) {
-            var that = this;
-            that.transform[property] = value;
-            that.scrollElement[0].style[TRANSFORMSTYLE] = to3DProperty(that.transform.x + PX + "," + that.transform.y + PX);
-        },
-
         options: {
             name: "Scroller",
-            useOnDesktop: true
+            useOnDesktop: false
         }
     });
 
