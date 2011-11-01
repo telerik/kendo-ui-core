@@ -132,6 +132,13 @@ function buildGeneratedSources() {
     kendoBuild.copyDirSyncRecursive(path.join("styles", "Black"), path.join(SOURCE_PATH, "Black"));
 }
 
+function copyThemes() {
+    var themesPath = path.join(OUTPUT_PATH, "themes");
+    mkdir(themesPath);
+    require("./themes").build();
+    kendoBuild.copyDirSyncRecursive("styles", themesPath, false, /\.(?!less)[a-z]+$/i);
+}
+
 function build() {
     kendoBuild.rmdirSyncRecursive(OUTPUT_PATH);
     mkdir(OUTPUT_PATH);
@@ -140,6 +147,7 @@ function build() {
     mergeResources();
     createBootstrapper();
     createIndexPage();
+    copyThemes();
 }
 
 if (require.main === module) {

@@ -62,17 +62,19 @@
             "@image-folder": {
                 readonly: true,
                 infer: function() {
-                    var icon = $("<div class='k-icon' />").css("display", "none").appendTo(document.body);
+                    var icon = $("<div class='k-icon' />")
+                            .css("display", "none")
+                            .appendTo(document.body);
 
-                    return icon.css("background-image").replace(/url\(["']?(.*?)\/sprite\.png["']?\)$/i, "\"$1\"");
+                    return icon.css("background-image")
+                            .replace(/url\(["']?(.*?)\/sprite\.png["']?\)$/i, "\"$1\"");
                 }
             },
 
             "@texture-url": constant(".k-header", "background-image", [
-                // TODO: map these to the CDN
-                "http://localhost/kendo/live/styles/Black/gradient.png",
-                "http://localhost/kendo/live/styles/BlueOpal/gradient.png",
-                "http://localhost/kendo/live/styles/Hakama/gradient.png"
+                "url('" + applicationRoot + "themes/Black/gradient.png')",
+                "url('" + applicationRoot + "themes/BlueOpal/gradient.png')",
+                "url('" + applicationRoot + "themes/Kendo/gradient.png')"
             ]),
 
             "@widget-background-color":         constant(".k-widget", BGCOLOR),
