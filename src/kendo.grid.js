@@ -569,10 +569,12 @@
                 column,
                 handler = function () {
                     var target = document.activeElement,
-                        cell = that.cell;
+                        cell = that._editContainer;
 
                     if (cell && !$.contains(cell[0], target) && cell[0] !== target && !$(target).closest(".k-animation-container").length) {
-                        that._closeCell();
+                        if (that._validate()) {
+                            that._closeCell();
+                        }
                     }
                 };
 
@@ -584,22 +586,24 @@
                         return;
                     }
 
-                    if (that.cell) {
-                        that._closeCell();
-                    }
+                    if (that._validate()) {
+                        if (that._editContainer) {
+                            that._closeCell();
+                        }
 
-                    cell = $(this);
-                    column = that.columns[that.cellIndex(cell)];
-                    model = that._modelFromCell(cell);
+                        cell = $(this);
+                        column = that.columns[that.cellIndex(cell)];
+                        model = that._modelFromCell(cell);
 
-                    if (!model.readOnly(column.field)) {
-                        that.cell = cell;
+                        if (!model.readOnly(column.field)) {
+                            that._editContainer = cell;
 
-                        cell.addClass("k-edit-cell")
-                            .kendoEditable({
-                                fields: column.field,
-                                model: model
-                            });
+                            cell.addClass("k-edit-cell")
+                                .kendoEditable({
+                                    fields: column.field,
+                                    model: model
+                                });
+                        }
                     }
                 });
 
@@ -614,16 +618,26 @@
             }
         },
 
+        _validate: function() {
+            var container = this._editContainer;
+            if (container) {
+                return container.data("kendoValidatable").validate();
+            }
+            return true;
+        },
+
         _closeCell: function() {
             var that = this,
-                cell = that.cell,
+                cell = that._editContainer,
                 id = cell.closest("tr").data("id"),
                 column = that.columns[that.cellIndex(cell)];
 
-            cell.data("kendoValidatable").validate();
+            cell.removeClass("k-edit-cell")
+                .removeData("kendoValidatable")
+                .removeData("kendoEditable");
 
             that._displayCell(cell, column, that.dataSource.get(id).data);
-            that.cell = null;
+            that._editContainer = null;
         },
 
         _displayCell: function(cell, column, dataItem) {
@@ -636,9 +650,7 @@
                 tmpl = proxy(tmpl, state.storage);
             }
 
-            cell.removeClass("k-edit-cell").empty()
-                .removeData("kendoEditable")
-                .html(tmpl(dataItem));
+            cell.empty().html(tmpl(dataItem));
         },
 
         _groupable: function() {
