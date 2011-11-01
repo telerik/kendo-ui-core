@@ -4334,11 +4334,13 @@
             if (point.getOutlineElement) {
                 outline = point.getOutlineElement(view, highlight.options);
 
-                element = view.renderElement(outline);
-                viewElement.appendChild(element);
+                if (outline) {
+                    element = view.renderElement(outline);
+                    viewElement.appendChild(element);
 
-                highlight.element = element;
-                highlight.visible = true;
+                    highlight.element = element;
+                    highlight.visible = true;
+                }
             }
         },
 
