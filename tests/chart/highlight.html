@@ -29,6 +29,12 @@
                 highlight = new Chart.Highlight(viewMock, $("#viewElement")[0], options);
             }
 
+            var ElementStub = {
+                getOutlineElement: function() {
+                    return new Chart.ViewElement();
+                }
+            }
+
             // ------------------------------------------------------------
             module("Highlight", {
                 setup: function() {
@@ -67,18 +73,23 @@
             });
 
             test("Renders outline element", function() {
-                highlight.show({ getOutlineElement: function() { } });
+                highlight.show(ElementStub);
                 equals($(".outline").length, 1);
             });
 
-            test("Removes outline element", function() {
+            test("Does not render outline if no outline element exists", function() {
                 highlight.show({ getOutlineElement: function() { } });
+                equals($(".outline").length, 0);
+            });
+
+            test("Removes outline element", function() {
+                highlight.show(ElementStub);
                 highlight.hide();
                 equals($(".outline").length, 0);
             });
 
             test("Sets visible property on show", function() {
-                highlight.show({ getOutlineElement: function() { } });
+                highlight.show(ElementStub);
                 ok(highlight.visible);
             });
 
