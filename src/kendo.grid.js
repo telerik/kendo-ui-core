@@ -556,50 +556,74 @@
             return $(td).parent().find('td:not(.k-group-cell,.k-hierarchy-cell)').index(td);
         },
 
+        _modelFromCell: function(cell) {
+            var id = cell.closest("tr").data("id");
+
+            return this.dataSource.get(id);
+        },
+
         _editable: function() {
             var that = this,
                 cell,
-                column,
                 model,
-                id;
+                column,
+                handler = function () {
+                    var target = document.activeElement,
+                        cell = that.cell;
+
+                    if (cell && !$.contains(cell[0], target) && cell[0] !== target && !$(target).closest(".k-animation-container").length) {
+                        that._closeCell();
+                    }
+                };
 
             if (that.options.editable) {
-                that.table.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell)", "click", function(e) {
-                    if($(this).closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
+
+                that.table.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell)", CLICK, function(e) {
+
+                    if ($(this).closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
                         return;
                     }
 
-                    $(".k-edit-cell").each(function() {
-                        cell = $(this);
-                        id = cell.closest("tr").data("id");
-                        column = that.columns[that.cellIndex(cell)];
-
-                        that._displayCell(cell, column, that.dataSource.get(id).data);
-                    });
+                    if (that.cell) {
+                        that._closeCell();
+                    }
 
                     cell = $(this);
-                    id = cell.closest("tr").data("id");
                     column = that.columns[that.cellIndex(cell)];
-                    model = that.dataSource.get(id);
+                    model = that._modelFromCell(cell);
 
-                    if(!model.readOnly(column.field)) {
+                    if (!model.readOnly(column.field)) {
+                        that.cell = cell;
+
                         cell.addClass("k-edit-cell")
                             .kendoEditable({
                                 fields: column.field,
                                 model: model
                             });
-                    } else {
-                        cell = null;
                     }
                 });
 
-                $(document).click(function(e) {
-                    if (cell && !$.contains(cell[0], e.target) && cell[0] !== e.target && !$(e.target).closest(".k-animation-container").length) {
-                        that._displayCell(cell, column, model.data);
-                        cell = null;
-                    }
+                that.element.bind("focusin", function(e) {
+                    clearTimeout(that.timer);
+                    that.timer = null;
+                });
+
+                that.element.bind("focusout", function(e) {
+                    that.timer = setTimeout(handler, 1);
                 });
             }
+        },
+
+        _closeCell: function() {
+            var that = this,
+                cell = that.cell,
+                id = cell.closest("tr").data("id"),
+                column = that.columns[that.cellIndex(cell)];
+
+            cell.data("kendoValidatable").validate();
+
+            that._displayCell(cell, column, that.dataSource.get(id).data);
+            that.cell = null;
         },
 
         _displayCell: function(cell, column, dataItem) {
