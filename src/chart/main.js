@@ -2968,6 +2968,10 @@
             var chart = this,
                 options = chart.options;
 
+            if (!defined(value.x) || !defined(value.y)) {
+                return null;
+            }
+
             var point = new LinePoint(value,
                 deepExtend({
                     markers: {
@@ -3036,7 +3040,7 @@
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
-                    pointData = currentSeries.data[pointIx];
+                    pointData = currentSeries.data[pointIx] || [];
                     dataItems = currentSeries.dataItems;
                     value = { x: pointData[0], y: pointData[1] };
 
@@ -3044,7 +3048,8 @@
                         pointIx: pointIx,
                         series: currentSeries,
                         seriesIx: seriesIx,
-                        dataItem: dataItems ? dataItems[i] : value
+                        dataItem: dataItems ? dataItems[i] : value,
+                        owner: chart
                     });
                 }
             }
@@ -5365,6 +5370,7 @@
         PieSegment: PieSegment,
         PieChart: PieChart,
         ViewElement: ViewElement,
+        ScatterLineChart: ScatterLineChart,
         ViewBase: ViewBase,
         deepExtend: deepExtend,
         Color: Color,
