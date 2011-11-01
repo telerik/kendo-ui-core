@@ -1976,7 +1976,15 @@
          * // refreshes the chart
          * chart.refresh();
          */
-        refresh: function() { }
+        refresh: function() { },
+
+        /**
+         * Returns the SVG representation of the current chart. The browser does not need to support SVG.
+         * @example
+         * var chart = $("#chart").data("kendoChart");
+         * var svgText = chart.svg();
+         */
+        svg: function() { }
     };
 
 })(jQuery);
