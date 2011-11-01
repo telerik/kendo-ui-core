@@ -339,6 +339,10 @@
 
             Widget.fn.init.call(that, element, options);
 
+            if (!support.mobileOS && !that.options.useOnDesktop) {
+                return;
+            }
+
             element = that.element;
 
             element
