@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TextBox API</title>
+        <title>NumericTextBox API</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.textbox.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
-        <h1 id="qunit-header">TextBox API</h1>
+        <h1 id="qunit-header">NumericTextBox API</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
 
-            var TextBox = kendo.ui.TextBox,
+            var NumericTextBox = kendo.ui.NumericTextBox,
                 input;
 
-            module("kendo.ui.TextBox API", {
+            module("kendo.ui.NumericTextBox API", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
                 },
@@ -30,7 +30,7 @@
             });
 
             test("_change should call value() method", function() {
-                var textbox = new TextBox(input);
+                var textbox = new NumericTextBox(input);
 
                 stub(textbox, {value: textbox.value});
 
@@ -41,7 +41,7 @@
             });
 
             test("_step adjusts value", function() {
-                var textbox = new TextBox(input, {
+                var textbox = new NumericTextBox(input, {
                     value: 10,
                     max: 10
                 });
@@ -54,7 +54,7 @@
 
 
             test("_step modify input value", function() {
-                var textbox = new TextBox(input);
+                var textbox = new NumericTextBox(input);
 
                 textbox._step(1);
 
@@ -63,7 +63,7 @@
             });
 
             test("_step parse passed _step", function() {
-                var textbox = new TextBox(input);
+                var textbox = new NumericTextBox(input);
 
                 textbox._step("10");
 
@@ -72,7 +72,7 @@
             });
 
             test("_step persist element value", function() {
-                var textbox = new TextBox(input);
+                var textbox = new NumericTextBox(input);
 
                 input.val("10");
                 textbox._step(1);
@@ -82,7 +82,7 @@
             });
 
             test("value method should return current value", function() {
-                var textbox = new TextBox(input), value = 10;
+                var textbox = new NumericTextBox(input), value = 10;
 
                 textbox._value = value;
 
@@ -90,7 +90,7 @@
             });
 
             test("value should parse value and set _value", function() {
-                var textbox = new TextBox(input), value = "12.32";
+                var textbox = new NumericTextBox(input), value = "12.32";
 
                 textbox.value(value);
 
@@ -98,7 +98,7 @@
             });
 
             test("value should set value of the input", function() {
-                var textbox = new TextBox(input), value = "12.32";
+                var textbox = new NumericTextBox(input), value = "12.32";
 
                 textbox.value(value);
 
@@ -106,7 +106,7 @@
             });
 
             test("set value to the INPUT element should have correct decimals", function() {
-                var textbox = new TextBox(input), value = "12.347";
+                var textbox = new NumericTextBox(input), value = "12.347";
 
                 textbox.value(value);
 
@@ -114,7 +114,7 @@
             });
 
             test("set value to the INPUT element should have correct decimals", function() {
-                var textbox = new TextBox(input), value = "12.347";
+                var textbox = new NumericTextBox(input), value = "12.347";
 
                 textbox.value(value);
 
@@ -122,7 +122,7 @@
             });
 
             test("value should be fixed", function() {
-                var textbox = new TextBox(input), value = "12.347";
+                var textbox = new NumericTextBox(input), value = "12.347";
 
                 textbox.value(value);
 
@@ -130,7 +130,7 @@
             });
 
             test("formatted value should be set to _text", function() {
-                var textbox = new TextBox(input), value = "12.347";
+                var textbox = new NumericTextBox(input), value = "12.347";
 
                 textbox.value(value);
 
@@ -138,7 +138,7 @@
             });
 
             test("value of the currency textbox", function() {
-                var textbox = new TextBox(input, {
+                var textbox = new NumericTextBox(input, {
                         format: "c"
                     }),
                     value = "12.347",
@@ -152,7 +152,7 @@
             });
 
             test("value of the percent textbox", function() {
-                var textbox = new TextBox(input, {
+                var textbox = new NumericTextBox(input, {
                         format: "p"
                     }),
                     value = "12.347",
@@ -166,7 +166,7 @@
             });
 
             test("set null", function() {
-                var textbox = new TextBox(input.val("10"));
+                var textbox = new NumericTextBox(input.val("10"));
 
                 textbox.value(null);
 
@@ -176,7 +176,7 @@
             });
 
             test("set value with custom decimal numbers", function() {
-                var textbox = new TextBox(input),
+                var textbox = new NumericTextBox(input),
                     value = 12.3777777;
 
                 textbox.options.format = "n3";
@@ -190,7 +190,7 @@
             });
 
             test("value() adjust value", function() {
-                var textbox = new TextBox(input, {
+                var textbox = new NumericTextBox(input, {
                     max: 12.35
                 }),
                 value = 12.3777777;
@@ -201,7 +201,7 @@
             });
 
             test("denable(false) should disable input element", function() {
-                var textbox = new TextBox(input);
+                var textbox = new NumericTextBox(input);
 
                 textbox.enable(false);
 
@@ -209,7 +209,7 @@
             });
 
             test("enable(false) should unbind arrows mousedown event", function() {
-                var textbox = new TextBox(input);
+                var textbox = new NumericTextBox(input);
 
                 textbox.enable(false);
 
@@ -222,7 +222,7 @@
             });
 
             test("enable() should remove disable attribute", function() {
-                var textbox = new TextBox(input);
+                var textbox = new NumericTextBox(input);
 
                 textbox.enable(false);
                 textbox.enable(true);
@@ -231,14 +231,14 @@
             });
 
             test("_blur should hide the input text and show the _text", function() {
-                var textbox = new TextBox(input);
+                var textbox = new NumericTextBox(input);
 
                 ok(!input.is(":visible"));
                 ok(textbox._text.is(":visible"));
             });
 
             asyncTest("focusing text input should call _focus", function() {
-                var textbox = new TextBox(input);
+                var textbox = new NumericTextBox(input);
 
                 textbox._text.focus();
 
@@ -250,7 +250,7 @@
             });
 
             asyncTest("on blur should hide input text", function() {
-                var textbox = new TextBox(input);
+                var textbox = new NumericTextBox(input);
 
                 textbox._text.focus();
                 setTimeout(function() { input.blur(); }, 150);

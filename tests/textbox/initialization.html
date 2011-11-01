@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TextBox Initialization</title>
+        <title>NumericTextBox Initialization</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.textbox.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
-        <h1 id="qunit-header">TextBox Initialization</h1>
+        <h1 id="qunit-header">NumericTextBox Initialization</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
 
-            var TextBox = kendo.ui.TextBox,
+            var NumericTextBox = kendo.ui.NumericTextBox,
                 input;
 
-            module("kendo.ui.TextBox initialization", {
+            module("kendo.ui.NumericTextBox initialization", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
                 },
@@ -30,7 +30,7 @@
             });
 
             test("Should render wrapper", function() {
-                var textbox = new TextBox(input),
+                var textbox = new NumericTextBox(input),
                     wrapper = textbox.wrapper;
 
                 ok(wrapper);
@@ -38,7 +38,7 @@
             });
 
             test("Should render up and down arrows", function() {
-                var textbox = new TextBox(input),
+                var textbox = new NumericTextBox(input),
                     upArrow = textbox._upArrow,
                     downArrow = textbox._downArrow;
 
@@ -57,7 +57,7 @@
             test("Should render INPUT containing the formatted value", function() {
                 input.addClass("custom").css("color", "red");
 
-                var textbox = new TextBox(input),
+                var textbox = new NumericTextBox(input),
                     text = textbox._text;
 
                 ok(text.is(":visible"));
@@ -70,8 +70,22 @@
                 equal(text.next()[0].nodeName, "INPUT");
             });
 
+            test("Fake input should be readonly", function() {
+                var textbox = new NumericTextBox(input);
+
+                ok(textbox._text.attr("readonly"));
+            });
+
+            test("Change type of the element", function() {
+                input[0].type = "number";
+
+                var textbox = new NumericTextBox(input);
+
+                equal(textbox.element[0].type, "text");
+            });
+
             test("Should get value from input", function() {
-                var textbox = new TextBox(input.val("12"));
+                var textbox = new NumericTextBox(input.val("12"));
 
                 equal(textbox.value(), 12);
                 equal(textbox.element.val(), "12");
@@ -79,7 +93,7 @@
             });
 
             test("Bind change events", function() {
-                var textbox = new TextBox(input.val("12"), {
+                var textbox = new NumericTextBox(input.val("12"), {
                     change: function() {}
                 });
 
@@ -87,14 +101,14 @@
             });
 
             test("Get min/max value from the input", function() {
-               var textbox = new TextBox($("<input type='number' min='1' max='12' />"));
+               var textbox = new NumericTextBox($("<input type='number' min='1' max='12' />"));
 
                equal(textbox.options.min, 1);
                equal(textbox.options.max, 12);
             });
 
             test("Get step value from the input", function() {
-                var textbox = new TextBox($("<input type='number' step='10' />"));
+                var textbox = new NumericTextBox($("<input type='number' step='10' />"));
 
                equal(textbox.options.step, 10);
             });
