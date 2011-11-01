@@ -134,7 +134,7 @@
                 equals(treeview.data("kendoTreeView").text(node), "foo");
             });
 
-            test("findByText(text) returns correct node", function() {
+            test("findByText(text) returns single node", function() {
                 var treeview = createTreeView({
                         dataSource: [
                             { text: "foo", items: [
@@ -146,6 +146,22 @@
                 var node = treeview.find(".k-item:first");
 
                 equals(treeview.data("kendoTreeView").findByText("foo")[0], node[0]);
+            });
+
+            test("findByText(text) returns multiple nodes", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo" },
+                            { text: "bar" },
+                            { text: "foo" }
+                        ]
+                    });
+
+                var nodes = treeview.find(".k-item"),
+                    result = treeview.data("kendoTreeView").findByText("foo");
+
+                equals(result[0], nodes[0]);
+                equals(result[1], nodes[2]);
             });
 
             test("append(nodeData, root) appends new node to empty parent", function() {

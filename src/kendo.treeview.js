@@ -769,25 +769,17 @@
         /**
          * Searches the treeview for a node that has specific text.
          * @param {String} text The text that is being searched for.
-         * @returns {Node} The first node that contains the text.
+         * @returns {jQueryObject} All nodes that have the text.
          * @example
          * var treeview = $("#treeview").data("kendoTreeView");
          *
          * // searches the treeview for the item that has the text "foo"
          * var foundNode = treeview.findByText("foo");
          */
-        findByText: function (text) {
-            var result;
-
-            this.element.find(".k-in").each(function() {
-                var that = $(this);
-                if (that.text() == text) {
-                    result = that.closest(NODE);
-                    return false;
-                }
-            });
-
-            return result;
+        findByText: function(text) {
+            return $(this.element).find(".k-in").filter(function(i, element) {
+                return $(element).text() == text;
+            }).closest(NODE);
         }
     });
 
