@@ -31,7 +31,6 @@
         }
         .k-contentIn
         {
-            padding: 20px;
             background: transparent;
         }
     </style>
@@ -50,7 +49,6 @@
                     <div class="k-contentIn">
                         Show message: <input type="checkbox" id="toggle" />
                         <input id="checky" type="checkbox" />
-                        <br><br>
                         <div id="radio">
                             <label for="radio1">Test 1</label>
                             <input id="radio1" type="radio" name="three" />
@@ -58,7 +56,6 @@
                                 <input type="radio" name="three" />
                             </label>
                         </div>
-                        <br><br>
                         <label for="radioz">Test 1</label>
                         <input id="radioz" type="radio" name="two" />
                         <label>Test 2
@@ -68,6 +65,42 @@
                         <br><br>
                         <button id="button">Select Random Radio</button>
 
+                        <ul data-kendo-role="listview">
+                            <li>Airplane Mode <input type="checkbox" data-kendo-role="switch" /></li>
+                            <li>Hot Balloon Mode <input type="checkbox" data-kendo-role="switch" /></li>
+                        </ul>
+
+                        <ul data-kendo-role="listview" data-kendo-display="group">
+                            <li>Airplane Mode <input type="checkbox" data-kendo-role="switch" /></li>
+                            <li>Dirigible Mode <input type="checkbox" data-kendo-role="switch" /></li>
+                        </ul>
+
+                        <ul data-kendo-role="listview">
+                            <li>
+                                A
+                                <ul>
+                                    <li>Alderaan<input type="checkbox" data-kendo-role="switch" /></li>
+                                    <li>Alpha Centauri<input type="checkbox" data-kendo-role="switch" /></li>
+                                </ul>
+                            </li>
+                            <li>
+                                B
+                                <ul>
+                                    <li>Betelgeuse<input type="checkbox" data-kendo-role="switch" /></li>
+                                    <li>Beta Centauri<input type="checkbox" data-kendo-role="switch" /></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul data-kendo-role="listview" data-kendo-display="group">
+                            <li>
+                                Choose a modus:
+                                <ul>
+                                    <li>Hot Balloon Mode <input type="checkbox" data-kendo-role="switch" /></li>
+                                    <li>Dirigible Mode <input type="checkbox" data-kendo-role="switch" /></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -105,11 +138,33 @@
             radiogroup.select(Math.round(Math.random()*2));
         }
 
-        var toggle = $("#toggle").kendoMobileSwitch({ toggle: onToggle }).data("kendoMobileSwitch"),
+        var toggle = $("#toggle,[data-kendo-role=switch]").kendoMobileSwitch({ toggle: onToggle }).data("kendoMobileSwitch"),
             checky = $("#checky").kendoMobileCheckBox().data("kendoMobileCheckBox"),
             button = $("#button").kendoMobileButton({ click: onClick }).data("kendoMobileButton"),
             radio = $("#radio").kendoMobileRadioGroup({ enable: false }).data("kendoMobileRadioGroup"),
             radiogroup = $("#radioz").kendoMobileRadioGroup({ toggle: onToggle }).data("kendoMobileRadioGroup");
+
+        $(document).ready(function () {
+            var listviews = $("[data-kendo-role=listview]");
+            listviews
+                    .addClass("k-listview")
+                    .find("li:not(:has(ul))")
+                    .addClass("k-item")
+                    .parent("ul")
+                    .addClass("k-list");
+
+            listviews
+                    .children("li:not(.k-item)")
+                    .contents(":not(.k-list)")
+                    .filter(function() { return $.trim($(this).text()) != ""; })
+                    .wrap("<span class='k-list-title'/>");
+
+            listviews
+                    .find(".k-item")
+                    .contents(":not(label):not(div)")
+                    .wrap("<span class='k-text'/>");
+            $("[data-kendo-display=group]").addClass("k-listgroup");
+        });
 
     </script>
 </body>
