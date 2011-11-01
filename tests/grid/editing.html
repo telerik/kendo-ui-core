@@ -290,9 +290,41 @@
 
                 table.find("tr>td:first").click();
                 var validate = stub(table.find("tr>td:first").data("kendoValidatable"), "validate");
-                table.data("kendoGrid")._closeCell();
+                table.find("tr>td:nth(1)").click();
 
                 ok(validate.calls("validate"));
+            });
+
+            test("cell does not leaves edit mode if validation fails when another editable cell is clicked", function() {
+                setup({
+                    dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "foo",
+                                fields: {
+                                    name: "name",
+                                    foo: {
+                                        field: "foo",
+                                        validation: {
+                                            foo: function() {
+                                                return false;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                    })
+                });
+
+
+                table.find("tr>td:first").click();
+
+                table.find("tr>td:nth(1)").click();
+
+                ok(table.find("tr>td:first").hasClass("k-edit-cell"));
+                equal(table.find("td.k-edit-cell").length, 1);
             });
 
        </script>

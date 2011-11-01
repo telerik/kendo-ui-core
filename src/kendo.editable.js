@@ -12,15 +12,14 @@
 
     var specialRules = ["url", "email", "number", "date", "boolean"];
 
-    function createInput(options) {
+    function createAttributes(options) {
         var field = options.model.fields[options.field],
             type = field.type,
             validation = field.validation,
             ruleName,
             rule,
             attr = {
-                name: options.field,
-                type: type == "boolean" ? "checkbox" : "text"
+                name: options.field
             };
 
         for (ruleName in validation) {
@@ -39,21 +38,26 @@
             attr[DATATYPE] = type;
         }
 
-        return $("<input />").attr(attr);
+        return attr;
     }
 
     var editors = {
         "number": function(container, options) {
-            createInput(options).appendTo(container);
+            var attr = createAttributes(options);
+            $('<input type="text"/>').attr(attr).appendTo(container);
         },
         "date": function(container, options) {
-            createInput(options).appendTo(container).kendoDatePicker();
+            var attr = createAttributes(options);
+            $('<input type="text"/>').attr(attr).appendTo(container).kendoDatePicker();
+            $('<span data-kendo-for="' + options.field + '" class="k-invalid-msg" />').appendTo(container);
         },
         "string": function(container, options) {
-            createInput(options).appendTo(container);
+            var attr = createAttributes(options);
+            $('<input type="text"/>').attr(attr).appendTo(container);
         },
         "boolean": function(container, options) {
-            createInput(options).appendTo(container);
+            var attr = createAttributes(options);
+            $('<input type="checkbox"/>').attr(attr).appendTo(container);
         }
     };
 
@@ -119,6 +123,8 @@
             new Binder(container, that.options.model);
 
             that.validatable = container.kendoValidatable({ rules: rules }).data("kendoValidatable");
+
+            container.find(":input:visible:first").focus();
         }
    });
 

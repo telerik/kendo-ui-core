@@ -118,7 +118,8 @@
                 max: "{0} should be smaller than {1}",
                 step: "{0} is not valid",
                 email: "{0} is not valid email",
-                url: "{0} is not valid URL"
+                url: "{0} is not valid URL",
+                date: "{0} is not valid date"
             },
             rules: {
                 required: function(input) {
