@@ -11,6 +11,7 @@
         max = Math.max,
         abs = Math.abs,
         round = Math.round,
+        to3DProperty,
         TRANSLATION_REGEXP = /(translate[3d]*\(|matrix\(([\s\w\d]*,){4,4})\s*(-?[\d\.]+)?[\w\s]*,?\s*(-?[\d\.]+)[\w\s]*.*?\)/i,
         SINGLE_TRANSLATION_REGEXP = /(translate([XY])\(\s*(-?[\d\.]+)?[\w\s]*\))/i,
         DEFAULT_MATRIX = [0, 0, 0, 0, 0],
@@ -29,9 +30,8 @@
         BOUNCE_LIMIT = 0,
         BOUNCE_STOP = 100,
         BOUNCE_DECELERATION = .1,
-        SCROLLBAR_OPACITY = .7;
-        INITIAL_FRICTION = .96,
-        to3DProperty,
+        SCROLLBAR_OPACITY = .7,
+        INITIAL_FRICTION = .96;
 
         if (support.hasHW3D) {
             to3DProperty = function(value) {
@@ -45,6 +45,10 @@
 
     function limitValue(value, minLimit, maxLimit) {
         return max(minLimit, min(maxLimit, value));
+    }
+
+    function numericCssValue(element, property) {
+        return parseInt(element.css(proeprty), 10) || 0;
     }
 
     function getScrollOffsets(scrollElement) {
@@ -61,14 +65,11 @@
                 transforms[2] == "X" && (transforms[4] = 0);
         }
 
-        return support.transitions ? {
-                                         x: +transforms[3],
-                                         y: +transforms[4]
-                                     } :
-                                     {
-                                         x: parseInt(scrollElement.css("marginLeft"), 10) || 0,
-                                         y: parseInt(scrollElement.css("marginTop"), 10) || 0
-                                     };
+        if (support.transitions) {
+            return {x: +transforms[3], y: +transforms[4]};
+        } else {
+            return {x: numericCssValue(scrollElement, "marginLeft"), y: numericCssValue(scrollElement, "marginTop")};
+        }
     }
 
     function Axis(scrollElement, property, updateCallback) {
@@ -105,37 +106,12 @@
 
         element.append(scrollbar);
 
-        function _updateLastLocation (location) {
+        function updateLastLocation(location) {
             lastLocation = location;
             directionChange =+ new Date();
         }
 
-        function _updateScrollbarPosition(position) {
-            var offsetValue,
-                delta = 0,
-                size,
-                limit = 0;
-
-            position = -position;
-
-            if (position > maxLimit) {
-                limit = position - maxLimit;
-            } else if (position < minLimit) {
-                limit = position;
-            }
-
-            delta = limitValue(limit, -BOUNCE_STOP, BOUNCE_STOP);
-
-            size = max(ratio - abs(delta), 20);
-
-            offsetValue = limitValue(position * ratio / boxSize + delta, 0, boxSize - size);
-
-            scrollbar
-                .css(TRANSFORM, to3DProperty(horizontal ? offsetValue + "px,0" : "0," + offsetValue + PX))
-                .css(cssProperty, size + PX);
-        }
-
-        function _changeDirection(location) {
+        function changeDirection(location) {
             var delta = lastLocation - location,
                 newDirection = delta/abs(delta);
 
@@ -144,19 +120,38 @@
             }
 
             direction = newDirection;
-            _updateLastLocation(location);
+            updateLastLocation(location);
         }
 
-        function _updateScrollOffset(location) {
-            var delta = -limitValue(startLocation - location, minStop, maxStop),
-                position = scrollOffset = delta / zoomLevel;
+        function updateScrollOffset(location) {
+            var offset = limitValue(startLocation - location, minStop, maxStop),
+                offsetValue,
+                delta = 0,
+                size,
+                limit = 0;
 
-            updateCallback(name, position);
+            scrollOffset = -offset / zoomLevel;
 
-            _updateScrollbarPosition(delta);
+            if (offset > maxLimit) {
+                limit = offset - maxLimit;
+            } else if (offset < minLimit) {
+                limit = offset;
+            }
+
+            delta = limitValue(limit, -BOUNCE_STOP, BOUNCE_STOP);
+
+            size = max(ratio - abs(delta), 20);
+
+            offsetValue = limitValue(offset * ratio / boxSize + delta, 0, boxSize - size);
+
+            scrollbar
+                .css(TRANSFORM, to3DProperty(horizontal ? offsetValue + "px,0" : "0," + offsetValue + PX))
+                .css(cssProperty, size + PX);
+
+            updateCallback(name, scrollOffset);
         }
 
-        function _wait(e) {
+        function wait(e) {
             if (!enabled) {
                 return;
             }
@@ -165,24 +160,26 @@
             clearTimeout(timeoutId);
 
             var location = touchLocation(e),
-                scrollOffset  = getScrollOffsets(scrollElement)[name];
+                coordinate = location[name];
+
+            scrollOffset  = getScrollOffsets(scrollElement)[name];
 
             idx = location.idx;
 
-            startLocation = location[name] - scrollOffset;
-            _updateLastLocation(location[name]);
+            startLocation = coordinate - scrollOffset;
+            updateLastLocation(coordinate);
 
             $(document)
-                .unbind(MOVEEVENT, _start)
-                .bind(MOVEEVENT, _start);
+                .unbind(MOVEEVENT, start)
+                .bind(MOVEEVENT, start);
 
             scrollElement
-                .unbind(ENDEVENT, _stop) // Make sure previous event is removed
-                .bind(ENDEVENT, _stop);
+                .unbind(ENDEVENT, stop) // Make sure previous event is removed
+                .bind(ENDEVENT, stop);
         }
 
-        function _start(e) {
-            var location = _getTouchLocation(e);
+        function start(e) {
+            var location = getTouchLocation(e);
 
             if (!location) {
                 return;
@@ -192,8 +189,8 @@
                 return;
             }
 
-            _init();
-            _changeDirection(location);
+            init();
+            changeDirection(location);
 
             scrollbar.show()
                 .css({opacity: SCROLLBAR_OPACITY, visibility: VISIBLE})
@@ -201,13 +198,13 @@
 
             dragged = true;
 
-            $(document).unbind(MOVEEVENT, _start)
-                .unbind(MOVEEVENT, _drag)
-                .bind(MOVEEVENT, _drag);
+            $(document).unbind(MOVEEVENT, start)
+                .unbind(MOVEEVENT, drag)
+                .bind(MOVEEVENT, drag);
 
         }
 
-        function _getTouchLocation(event) {
+        function getTouchLocation(event) {
             event.preventDefault();
             event.stopPropagation();
 
@@ -219,85 +216,79 @@
             return location[name];
         }
 
-        function _drag(e) {
-            var location = _getTouchLocation(e);
+        function drag(e) {
+            var location = getTouchLocation(e);
 
             if (!location) {
                 return;
             }
 
-            _changeDirection(location);
-            _updateScrollOffset(location);
+            changeDirection(location);
+            updateScrollOffset(location);
         }
 
-        function _stop(e) {
+        function stop(e) {
             if (dragCanceled) return;
-            _unbindFromMove();
-            element.unbind(ENDEVENT, _stop);
+
+            var location = getTouchLocation(e);
+
+            $(document)
+                .unbind(MOVEEVENT, start)
+                .unbind(MOVEEVENT, drag);
+
+            element.unbind(ENDEVENT, stop);
 
             if (dragged) {
                 dragged = false;
-                _initKineticAnimation(e);
+                bounceLocation = location;
+                friction = INITIAL_FRICTION;
+                decelerationVelocity = - (lastLocation - location) / ((+new Date() - directionChange) / ACCELERATION);
+                winding = true;
+                queueNextStep();
             } else {
-                _endKineticAnimation(true);
+                endKineticAnimation(true);
             }
        }
 
-       function _unbindFromMove() {
-           $(document)
-                .unbind(MOVEEVENT, _start)
-                .unbind(MOVEEVENT, _drag);
-       }
-
-       function _initKineticAnimation(e) {
-           var location = touchLocation(e)[name];
-
-           bounceLocation = location;
-           friction = INITIAL_FRICTION;
-           decelerationVelocity = - (lastLocation - location) / ((+new Date() - directionChange) / ACCELERATION);
-           winding = true;
-           _queueNextStep();
-       }
-
-       function _queueNextStep() {
+       function queueNextStep() {
            lastCall = +new Date();
-           timeoutId = setTimeout(_stepKineticAnimation, FRAMERATE);
+           timeoutId = setTimeout(stepKineticAnimation, FRAMERATE);
        }
 
-       function _stepKineticAnimation() {
-            var animationIterator = round((+new Date() - lastCall) / FRAMERATE - 1), constraint, velocity;
+       function stepKineticAnimation() {
+           var animationIterator = round((+new Date() - lastCall) / FRAMERATE - 1), constraint, velocity;
 
-            if (!winding) return;
+           if (!winding) return;
 
-            while (animationIterator-- >= 0) {
-                constraint = 0;
-                velocity = decelerationVelocity * friction;
-                bounceLocation += decelerationVelocity;
+           while (animationIterator-- >= 0) {
+               constraint = 0;
+               velocity = decelerationVelocity * friction;
+               bounceLocation += decelerationVelocity;
 
-                if (-scrollOffset < minLimit) {
-                    constraint = minLimit + scrollOffset;
-                } else if (-scrollOffset > maxLimit) {
-                    constraint = maxLimit + scrollOffset;
-                }
+               if (-scrollOffset < minLimit) {
+                   constraint = minLimit + scrollOffset;
+               } else if (-scrollOffset > maxLimit) {
+                   constraint = maxLimit + scrollOffset;
+               }
 
-                if (constraint) {
-                    friction -= limitValue((BOUNCE_STOP - abs(constraint)) / BOUNCE_STOP, 0, .9);
-                    velocity -= constraint * BOUNCE_DECELERATION;
-                }
+               if (constraint) {
+                   friction -= limitValue((BOUNCE_STOP - abs(constraint)) / BOUNCE_STOP, 0, .9);
+                   velocity -= constraint * BOUNCE_DECELERATION;
+               }
 
-                decelerationVelocity = velocity;
-                friction = limitValue(friction, 0, 1);
-                _updateScrollOffset(bounceLocation);
+               decelerationVelocity = velocity;
+               friction = limitValue(friction, 0, 1);
+               updateScrollOffset(bounceLocation);
 
-                if (_endKineticAnimation()) {
-                    return;
-                }
-            }
+               if (endKineticAnimation()) {
+                   return;
+               }
+           }
 
-            _queueNextStep();
+           queueNextStep();
        }
 
-       function _endKineticAnimation(forceEnd) {
+       function endKineticAnimation(forceEnd) {
            if (!forceEnd && abs(decelerationVelocity) > VELOCITY) {
                return false;
            }
@@ -309,7 +300,15 @@
            return true;
        }
 
-       function _init() {
+       function gestureStart() {
+           dragCanceled = true;
+       }
+
+       function gestureEnd() {
+           dragCanceled = true;
+       }
+
+       function init() {
            var scrollSize = scrollElement[0][scrollSizeName],
            scroll;
 
@@ -329,14 +328,14 @@
            directionChange =+ new Date();
            scrollOffset = 0;
            friction = INITIAL_FRICTION;
-
-           element
-           .bind("gesturestart", function() { dragCanceled = true; } )
-           .bind("gestureend", function() { dragCanceled = false; } )
-           .bind(STARTEVENT, _wait);
        }
 
-       _init();
+       element
+           .bind("gesturestart", gestureStart)
+           .bind("gestureend", gestureEnd)
+           .bind(STARTEVENT, wait);
+
+       init();
     };
 
     var Scroller = Widget.extend({
