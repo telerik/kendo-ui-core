@@ -3,9 +3,7 @@
     var kendo = window.kendo,
         history = kendo.history,
         div = $("<div/>"),
-        roleSelector = kendo.roleSelector,
-        ANIMATION_CLASS = "k-animation-container",
-        animationContainer = kendo.template('<div class="k-mobile-${cssClass}-container ' + ANIMATION_CLASS + '"><div class="k-animation-content-container">#= typeof inner === "undefined" ? "" : inner #</div></div>');
+        roleSelector = kendo.roleSelector;
 
     function extractView(html) {
         if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
@@ -23,19 +21,15 @@
 
             that.element = element.data("kendoView", that);
 
-            element.wrapInner(animationContainer({
-                cssClass: "content",
-                inner: element.has(contentSelector).length ? "" : "<div " + kendo.dataRole + '="content"></div>'
-            }));
+            if (element.has(contentSelector).length === 0) {
+              element.wrapInner("<div " + kendo.dataRole + '="content"></div>');
+            }
 
             that.content = element.find(roleSelector("content")).addClass("k-mobile-content");
             that.header = element.find(roleSelector("header")).detach().addClass("k-mobile-header");
             that.footer = element.find(roleSelector("footer")).detach().addClass("k-mobile-footer");
 
             element.addClass("k-mobile-view").prepend(that.header).append(that.footer);
-
-            that.header.wrap(animationContainer({cssClass: "header"}));
-            that.footer.wrap(animationContainer({cssClass: "footer"}));
         },
 
         replace: function(view) {
@@ -43,12 +37,22 @@
                 back = that.nextView === view,
                 animationType = (back ? view : that).element.data("kendoTransition");
 
+            this.element.css("display", "");
+
+            if (back) {
+              this.element.css("z-index", 0);
+              view.element.css("z-index", 1);
+            } else {
+              this.element.css("z-index", 1);
+              view.element.css("z-index", 0);
+            }
+
             if (animationType === "slide") {
                 view.header.kendoAnimateTo(that.header, { effects: "fade", reverse: back });
-                view.content.kendoAnimateTo(that.content, { effects: "slide", reverse: back });
+                view.content.kendoAnimateTo(that.content, { effects: "slide", reverse: back,  complete: function() { view.element.hide() } });
                 view.footer.kendoAnimateTo(that.footer, { effects: "fade", reverse: back });
             } else {
-                view.element.kendoAnimateTo(that.element, { effects: animationType, reverse: back});
+                view.element.kendoAnimateTo(that.element, { effects: animationType, reverse: back, complete: function() { view.element.hide() } });
             }
 
             if (!back) {
@@ -68,7 +72,6 @@
 
             that.element = that.element ? $(that.element) : $(document.body);
 
-            that.element.addClass(ANIMATION_CLASS);
             views = that.element.find(roleSelector("view"));
 
             views.not(":first").hide();
