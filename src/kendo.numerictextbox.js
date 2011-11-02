@@ -75,7 +75,6 @@
         parse = kendo.parseFloat,
         touch = kendo.support.touch,
         CHANGE = "change",
-        CHAR = "character",
         DISABLED = "disabled",
         INPUT = "k-input",
         TOUCHEND = "touchend",
@@ -404,7 +403,7 @@
                 element = e.target,
                 value = element.value;
             setTimeout(function() {
-                if (parse(element.val()) === NULL) {
+                if (parse(element.value) === NULL) {
                     that._update(value);
                 }
             });
@@ -540,11 +539,16 @@
             element.focus();
             var range = document.selection.createRange();
             if (isPosition) {
-                range.move(CHAR, position);
+                range.move("character", position);
                 range.select();
             } else {
-                range.moveStart(CHAR, -element.value.length);
-                position = range.text.length;
+                var rangeElement = element.createTextRange(),
+                    rangeDuplicated = rangeElement.duplicate();
+                    rangeElement.moveToBookmark(range.getBookmark());
+                    rangeDuplicated.setEndPoint('EndToStart', rangeElement);
+
+                position = rangeDuplicated.text.length;
+
             }
         } else if (element.selectionStart !== undefined) {
             if (isPosition) {
