@@ -348,7 +348,9 @@ body > .k-tabStrip,
     display: inline-block;
     padding: 1px;
     width: 100px;
+    height: 28px;
     height: 1.75rem;
+    line-height: 32px;
     line-height: 1.85rem;
     vertical-align: middle;
     position: relative;
@@ -358,6 +360,8 @@ body > .k-tabStrip,
 
 .k-checkbox
 {
+    width: 20px;
+    height: 20px;
     width: 1.2rem;
     height: 1.2rem;
 }
@@ -414,6 +418,7 @@ body > .k-tabStrip,
     top: 0;
     left: 0;
     width: 40px;
+    height: 28px;
     height: 1.75rem;
     display: block;
     position: absolute;
@@ -442,6 +447,8 @@ body > .k-tabStrip,
 .k-toggle-handle:before
 {
     position: absolute;
+    font-size: 15px;
+    font-size: 1rem;
     font-weight: bold;
     top: 0;
     display: inline-block;
@@ -1015,13 +1022,14 @@ body > .k-tabStrip,
     padding: .2em 0 0;
     text-indent: .8em;
     text-shadow: 0 1px 1px rgba(100,100,100,.8);
-    border-top: 1px solid #78858e;
+    border-top: 1px solid #c5cfd6;
     background: linearGradient(top, rgb(136, 152, 165), rgb(172, 184, 196));
-    .box-shadow(inset 0 1px 0 #c5cfd6);
+    .box-shadow(0 -1px 0 #78858e);
 }
 
 .k-listview .k-list
 {
+    margin-top: 2px;
     text-indent: 0;
     border-top: 1px solid #78858e;
 }
@@ -1033,7 +1041,7 @@ body > .k-tabStrip,
     background: none;
     border: none;
     .box-shadow(none);
-    line-height: 1.75em;
+    line-height: 1.65em;
     text-shadow: 0 1px 1px rgba(255,255,255,.8);
 }
 
