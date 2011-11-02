@@ -93,6 +93,7 @@
                         constant.value = constant.infer();
                     } else {
                         // TODO: make it work with complex selectors (targets) -- ".foo .bar"
+                        //       see misc / inset shadow
                         prototype[0].className = constant.target.substring(1);
 
                         property = constant.property;
@@ -169,7 +170,13 @@
                     }) : []
                 });
 
-                var propertyChangeProxy = proxy(that._propertyChange, that);
+                function changeHandler(e) {
+                    console.log(this.value());
+                    that._propertyChange({
+                        name: this.element.id,
+                        value: this.value()
+                    });
+                }
 
                 $("#stylable-elements")
                     .kendoPanelBar({
@@ -178,11 +185,14 @@
                     .find("input.k-colorpicker").kendoColorPicker({
                         autoBind: false,
                         dataSource: themeColorsDataSource,
-                        change: proxy(that._propertyChange, that)
-                    })
-                    //.find("input.k-numerictextbox").kendoNumericTextBox({
-                        //change: proxy(that._propertyChange, that)
-                    //});
+                        change: changeHandler
+                    }).end()
+                    .find("input.k-numerictextbox").kendoNumericTextBox({
+                        min: 0,
+                        max: 50,
+                        step: 1,
+                        change: changeHandler
+                    }).end();
 
                 $(".k-list-container[id^='@']").appendTo("#k-tb-wrap");
 
