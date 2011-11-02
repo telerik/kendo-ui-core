@@ -348,8 +348,8 @@ body > .k-tabStrip,
     display: inline-block;
     padding: 1px;
     width: 100px;
-    height: 1.75em;
-    line-height: 1.85em;
+    height: 1.75rem;
+    line-height: 1.85rem;
     vertical-align: middle;
     position: relative;
     overflow: hidden;
@@ -358,8 +358,8 @@ body > .k-tabStrip,
 
 .k-checkbox
 {
-    width: 1.2em;
-    height: 1.2em;
+    width: 1.2rem;
+    height: 1.2rem;
 }
 
 .k-checkbox-checked:after
@@ -414,7 +414,7 @@ body > .k-tabStrip,
     top: 0;
     left: 0;
     width: 40px;
-    height: 1.75em;
+    height: 1.75rem;
     display: block;
     position: absolute;
 }
@@ -973,8 +973,8 @@ body > .k-tabStrip,
     background: #fff;
 }
 
-.k-listview,
-.k-list
+.k-list,
+.k-listview
 {
     padding: 0;
     margin: 0;
@@ -995,8 +995,8 @@ body > .k-tabStrip,
     .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
 }
 
-.k-listgroup.k-list .k-item:first-child,
-.k-listgroup .k-list .k-item:first-child
+.k-listgroup.k-list > li:first-child,
+.k-listgroup .k-list > li:first-child
 {
     .box-shadow(inset 0 1px 0 0 rgba(200,200,200,.4));
 }
@@ -1007,56 +1007,66 @@ body > .k-tabStrip,
     vertical-align: middle;
 }
 
-.k-list-title
+.k-listview:not(.k-list) > li
 {
     color: #FFF;
     display: block;
     font-weight: bold;
-    padding: 0.2em 0.8em;
+    padding: .2em 0 0;
+    text-indent: .8em;
     text-shadow: 0 1px 1px rgba(100,100,100,.8);
-    border: 1px solid #78858e;
-    border-width: 1px 0;
+    border-top: 1px solid #78858e;
     background: linearGradient(top, rgb(136, 152, 165), rgb(172, 184, 196));
     .box-shadow(inset 0 1px 0 #c5cfd6);
 }
 
-.k-listgroup .k-list-title
+.k-listview .k-list
+{
+    text-indent: 0;
+    border-top: 1px solid #78858e;
+}
+
+.k-listgroup:not(.k-list) > li
 {
     color: #444;
-    padding: 0 .8em .4em;
+    padding: 0;
     background: none;
     border: none;
     .box-shadow(none);
+    line-height: 1.75em;
     text-shadow: 0 1px 1px rgba(255,255,255,.8);
 }
 
-.k-listview .k-item
+.k-list > li
 {
-    list-style-type: none;
     margin: 0;
-    padding: .6em .6em .6em .8em;
+    color: #000;
     display: block;
-    border-bottom: 1px solid #E9E9E9;
     position: relative;
+    list-style-type: none;
     vertical-align: middle;
     .box-sizing(border-box);
+    padding: .6em .6em .6em .8em;
+    border-bottom: 1px solid #E9E9E9;
+    text-shadow: none;
 }
 
-.k-listview .k-item:last-child
+.k-list > li:last-child,
+.k-listview > li:last-child
 {
-    border: 0;
+    border-bottom: 0;
 }
 
-.k-ios .k-item .k-text
+.k-ios .k-list > li
 {
-    display: inline-block;
+    display: block;
     vertical-align: middle;
     line-height: 1.6em;
     font-size: 1.2em;
     font-weight: bold;
 }
 
-.k-android .k-item
+.k-android .k-list > li
 {
     line-height: 2.6em;
     border-bottom: 1px solid #444;
