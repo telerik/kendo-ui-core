@@ -572,7 +572,7 @@
                         cell = that._editContainer;
 
                     if (cell && !$.contains(cell[0], target) && cell[0] !== target && !$(target).closest(".k-animation-container").length) {
-                        if (that._validate()) {
+                        if (that.editable.end()) {
                             that._closeCell();
                         }
                     }
@@ -580,64 +580,67 @@
 
             if (that.options.editable) {
 
-                that.table.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell)", CLICK, function(e) {
+                that.wrapper.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell)", CLICK, function(e) {
 
                     if ($(this).closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
                         return;
                     }
 
-                    if (that._validate()) {
-                        if (that._editContainer) {
+                    if (that.editable) {
+                        if (that.editable.end()) {
                             that._closeCell();
+                            that._editCell($(this));
                         }
-
-                        cell = $(this);
-                        column = that.columns[that.cellIndex(cell)];
-                        model = that._modelFromCell(cell);
-
-                        if (!model.readOnly(column.field)) {
-                            that._editContainer = cell;
-
-                            cell.addClass("k-edit-cell")
-                                .kendoEditable({
-                                    fields: column.field,
-                                    model: model
-                                });
-                        }
+                    } else {
+                        that._editCell($(this));
                     }
+
                 });
 
-                that.element.bind("focusin", function(e) {
+                that.wrapper.bind("focusin", function(e) {
                     clearTimeout(that.timer);
                     that.timer = null;
                 });
 
-                that.element.bind("focusout", function(e) {
+                that.wrapper.bind("focusout", function(e) {
                     that.timer = setTimeout(handler, 1);
                 });
             }
         },
 
-        _validate: function() {
-            var container = this._editContainer;
-            if (container) {
-                return container.data("kendoValidatable").validate();
+        _editCell: function(cell) {
+            var that = this,
+                column = that.columns[that.cellIndex(cell)],
+                model = that._modelFromCell(cell);
+
+            if (!model.readOnly(column.field)) {
+                that._editContainer = cell;
+                that.editable = cell.addClass("k-edit-cell")
+                    .kendoEditable({
+                        fields: column.field,
+                        model: model
+                    }).data("kendoEditable");
             }
-            return true;
+        },
+
+        _distroyEditable: function() {
+            var that = this;
+
+            if (that.editable) {
+                that.editable.distroy();
+                delete that.editable;
+                that._editContainer = null;
+            }
         },
 
         _closeCell: function() {
             var that = this,
-                cell = that._editContainer,
+                cell = that._editContainer.removeClass("k-edit-cell"),
                 id = cell.closest("tr").data("id"),
                 column = that.columns[that.cellIndex(cell)];
 
-            cell.removeClass("k-edit-cell")
-                .removeData("kendoValidatable")
-                .removeData("kendoEditable");
-
             that._displayCell(cell, column, that.dataSource.get(id).data);
-            that._editContainer = null;
+            that._distroyEditable();
         },
 
         _displayCell: function(cell, column, dataItem) {
@@ -1558,6 +1561,8 @@
                 placeholder,
                 groups = (that.dataSource.group() || []).length,
                 colspan = groups + that.columns.length;
+
+            that._distroyEditable();
 
             that._progress(false);
 

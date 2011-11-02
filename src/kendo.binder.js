@@ -40,9 +40,12 @@
 
             that.bind([CHANGE], that.options);
 
-            that.element.find("input,select")
-                .add(that.element)
-                .bind(CHANGE, $.proxy(that._change, that))
+            var elements = that.element.find("input,select,textarea");
+            if (!elements.length) {
+                elements = that.element;
+            }
+
+            elements.bind(CHANGE, $.proxy(that._change, that))
                 .each(function() {
                     var mapping = that._map(this);
                     if (mapping) {

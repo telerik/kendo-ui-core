@@ -333,6 +333,128 @@
                 ok($.isFunction(validatable.options.rules.foo));
             });
 
+            test("model is not updated if validation fails", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    foo: function() {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel({ foo: "bar" }),
+                    editable = new Editable(div, { fields: "foo", model: model }),
+                    input = div.find(":input");
+
+                input.val("foo").trigger("change");
+
+                equal(model.get("foo"), "bar");
+            });
+
+            test("change event is triggered if validation success", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    foo: function() {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel({ foo: "bar" }),
+                    wasCalled = false,
+                    editable = new Editable(div, { fields: "foo", model: model, change: function() { wasCalled = true; } }),
+                    input = div.find(":input");
+
+                input.val("foo").trigger("change");
+
+                equal(model.get("foo"), "foo");
+                ok(wasCalled);
+            });
+
+            test("change event is not triggered if validation fails", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    foo: function() {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel({ foo: "bar" }),
+                    wasCalled = false,
+                    editable = new Editable(div, { fields: "foo", model: model, change: function() { wasCalled = true; } }),
+                    input = div.find(":input");
+
+                input.val("foo").trigger("change");
+
+                equal(model.get("foo"), "bar");
+                ok(!wasCalled);
+            });
+
+            test("end method triggers validation", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    foo: function() {
+                                    }
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel({ foo: "bar" }),
+                    editable = new Editable(div, { fields: "foo", model: model });
+
+                var validatable = stub(editable.validatable, "validate");
+                editable.end();
+
+                equal(validatable.calls("validate"), 1);
+            });
+
+            test("end method returns false when validation fails", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    foo: function() {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel({ foo: "bar" }),
+                    editable = new Editable(div, { fields: "foo", model: model });
+
+                ok(!editable.end());
+            });
+
+            test("end method returns true when validation pass", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: "foo"
+                        }
+                    }),
+                    model = new MyModel({ foo: "bar" }),
+                    editable = new Editable(div, { fields: "foo", model: model });
+
+                ok(editable.end());
+            });
+
         </script>
     </body>
 </html>
