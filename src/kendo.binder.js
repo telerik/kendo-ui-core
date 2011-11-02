@@ -1,7 +1,9 @@
 (function ($, undefined) {
     var kendo = window.kendo,
+        Observable = kendo.Observable,
         data = kendo.data,
-        Model = data.Model;
+        Model = data.Model,
+        CHANGE = "change";
 
     function bindSelect(select, model) {
         select = $(select);
@@ -25,17 +27,22 @@
         }
     }
 
-    var ModelViewBinder = kendo.Class.extend({
+    var ModelViewBinder = Observable.extend({
         init: function(element, model, options) {
             var that = this;
 
             that.element = $(element);
             that.options = options || {};
+
+            Observable.fn.init.call(that);
+
             that.model = model instanceof Model ? model : new (Model.define())(model);
+
+            that.bind([CHANGE], that.options);
 
             that.element.find("input,select")
                 .add(that.element)
-                .bind("change", $.proxy(that._change, that))
+                .bind(CHANGE, $.proxy(that._change, that))
                 .each(function() {
                     var mapping = that._map(this);
                     if (mapping) {
@@ -80,7 +87,10 @@
                         if (setting.parse) {
                            value = setting.parse(value);
                         }
-                        model.set(field, value);
+
+                        if (!that.trigger(CHANGE)) {
+                            model.set(field, value);
+                        }
                     }
                 }
             }
