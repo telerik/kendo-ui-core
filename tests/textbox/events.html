@@ -42,19 +42,6 @@
                 }, 100);
             });
 
-            asyncTest("blur should show the _text", function() {
-                var textbox = new NumericTextBox(input);
-
-                textbox._text.focus();
-
-                setTimeout(function() { textbox.element.blur(); }, 150);
-
-                setTimeout(function() {
-                    ok(textbox._text.is(":visible"));
-                    start();
-                }, 300);
-            });
-
             asyncTest("focus div should focus element", function() {
                 var textbox = new NumericTextBox(input);
 
@@ -84,6 +71,23 @@
                 textbox._upArrow.mousedown();
 
                 equal(input[0], document.activeElement);
+            });
+
+            asyncTest("value() should not raise change event", function() {
+                var textbox = new NumericTextBox(input, {
+                    change: function() {
+                        ok(false);
+                        start();
+                    }
+                });
+
+                textbox.value("22");
+                textbox._blur();
+
+                setTimeout(function() {
+                    ok(true);
+                    start();
+                }, 400);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
