@@ -303,7 +303,7 @@
                     format = that._format(that.options.format),
                     group = format[","],
                     groupRegExp = new RegExp("\\" + group, "g"),
-                    extractRegExp = new RegExp("([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\d+)?"),
+                    extractRegExp = new RegExp("([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\\d+)?"),
                     result = extractRegExp.exec(value),
                     caretPosition = 0;
 
