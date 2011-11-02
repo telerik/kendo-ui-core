@@ -166,17 +166,18 @@
         return styles;
     }
 
-    function wrapForAnimation(element, options) {
-        options = options || {};
-        return kendo.wrap(element).css($.extend({position: "relative"}, options));
+    function slideToSlideIn(options) {
+      options.effects.slideIn = options.effects.slide;
+      delete options.effects.slide;
+      return options;
     }
 
-    function positionElement(element, direction) {
+    function positionElement(element, direction, container) {
         if (!direction) {
             return;
         }
 
-        var offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth());
+        var offset = -direction.modifier * (direction.vertical ? container.outerHeight() : container.outerWidth());
 
         if (kendo.support.transitions) {
             element.css(TRANSFORM, direction.transition + "(" + offset + PX + ")");
@@ -575,38 +576,29 @@
 
         animateTo: function(element, destination, options) {
             var direction,
-                container = wrapForAnimation(element),
-                options = parseTransitionEffects(options),
-                animatingContainer = "slide" in options.effects,
-                movingElement = options.reverse ? element : destination,
-                transitions = kendo.support.transitions;
-
-            destination.css({width: element.width(), height: element.height(), display: ''});
+                container = element.parent(),
+                options = parseTransitionEffects(options);
 
             $.each(options.effects, function(name, definition) {
                 direction = direction || definition.direction;
             });
 
-            positionElement(movingElement, kendo.directions[direction]);
-            movingElement.css({position: "absolute", "left": 0, "top": 0});
-
-            container.append(destination);
-
             function callback() {
-                element.attr("style", "display: none;");
-                destination.attr("style", "");
-                container.attr("style", "");
                 options.completeCallback && options.completeCallback();
             }
 
             options.complete = $.browser.msie ? function() { setTimeout(callback) } : callback;
 
-            if (animatingContainer) {
-                container.kendoAnimate(options);
+            if ("slide" in options.effects) {
+              positionElement(destination, kendo.directions[direction], container);
+              element.kendoAnimate(options);
+              destination.kendoAnimate(slideToSlideIn(options));
             } else {
-                movingElement.kendoAnimate(options);
+              movingElement = options.reverse ? element : destination,
+              staticElement = options.reverse ? destination : element;
+              positionElement(movingElement, kendo.directions[direction], container);
+              movingElement.kendoAnimate(options);
             }
-
         },
 
         fadeOut: {
