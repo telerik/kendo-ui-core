@@ -26,8 +26,8 @@
             }
 
             that.content = element.find(roleSelector("content")).addClass("k-mobile-content");
-            that.header = element.find(roleSelector("header")).detach().addClass("k-mobile-header");
-            that.footer = element.find(roleSelector("footer")).detach().addClass("k-mobile-footer");
+            that.header = element.find(roleSelector("header")).addClass("k-mobile-header");
+            that.footer = element.find(roleSelector("footer")).addClass("k-mobile-footer");
 
             element.addClass("k-mobile-view").prepend(that.header).append(that.footer);
         },
@@ -48,9 +48,35 @@
             }
 
             if (animationType === "slide") {
-                view.header.kendoAnimateTo(that.header, { effects: "fade", reverse: back });
-                view.content.kendoAnimateTo(that.content, { effects: "slide", reverse: back,  complete: function() { view.element.hide() } });
-                view.footer.kendoAnimateTo(that.footer, { effects: "fade", reverse: back });
+                var slidingElements = that.content;
+                var slidingSource = view.content;
+
+                if (!that.header.length) {
+                    slidingSource = slidingSource.add(view.header);
+                }
+
+                if (!that.footer.length) {
+                    slidingSource = slidingSource.add(view.footer);
+                }
+
+                if (!view.header.length) {
+                    slidingElements = slidingElements.add(that.header);
+                }
+
+                if (!view.footer.length) {
+                    slidingElements = slidingElements.add(that.footer);
+                }
+
+                if (that.header.length && view.header.length) {
+                    view.header.kendoAnimateTo(that.header, {effects: "fade", reverse: back});
+                }
+
+                if (that.footer.length && view.footer.length) {
+                    view.footer.kendoAnimateTo(that.footer, {effects: "fade", reverse: back});
+                }
+
+                slidingSource.kendoAnimateTo(slidingElements, { effects: "slide", reverse: back, complete: function() { view.element.hide() } });
+
             } else {
                 view.element.kendoAnimateTo(that.element, { effects: animationType, reverse: back, complete: function() { view.element.hide() } });
             }
