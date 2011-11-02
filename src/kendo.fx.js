@@ -81,7 +81,7 @@
         }
     });
 
-    kendo.toggleClass = function (element, classes, options, add) {
+    kendo.toggleClass = function(element, classes, options, add) {
         if (classes) {
             classes = classes.split(" ");
 
@@ -133,7 +133,7 @@
         return effects;
     };
 
-    function parseInteger( value ) {
+    function parseInteger(value) {
         return parseInt(value, 10);
     }
 
@@ -221,14 +221,14 @@
 
     if (transitions) {
 
-        function keys (obj) {
+        function keys(obj) {
             var acc = [];
             for (var propertyName in obj)
                 acc.push(propertyName);
             return acc;
         }
 
-        function removeTransitionStyles (element) {
+        function removeTransitionStyles(element) {
             element.css(TRANSITION, NONE);
 
             if (!browser.safari) {
@@ -236,7 +236,7 @@
             }
         }
 
-        function activateTask (currentTransition) {
+        function activateTask(currentTransition) {
             var element = currentTransition.object;
 
             if (!currentTransition) return;
@@ -244,8 +244,8 @@
             element.css(currentTransition.setup);
             element.css(TRANSITION);
 
-            setTimeout(function () {
-                element.data(ABORT_ID, setTimeout(function () {
+            setTimeout(function() {
+                element.data(ABORT_ID, setTimeout(function() {
 
                     removeTransitionStyles(element);
                     element.dequeue();
@@ -378,37 +378,37 @@
             // create a promise for each effect
             promise = $.Deferred(function(deferred) {
                 if (size(effects)) {
-                    var opts = extend( {}, options, { complete: deferred.resolve } );
+                    var opts = extend({}, options, { complete: deferred.resolve });
 
                     each(effects, function(effectName, settings) {
                         var effect = kendo.fx[effectName];
 
                         if (effect) {
-                            opts = extend( true, opts, settings );
+                            opts = extend(true, opts, settings);
 
-                            each( methods, function (idx) {
+                            each(methods, function (idx) {
                                 if (effect[idx])
-                                    methods[idx].push( effect[idx] );
+                                    methods[idx].push(effect[idx]);
                             });
 
-                            each( props, function (idx) {
+                            each(props, function(idx) {
                                 if (effect[idx])
-                                    $.merge( props[idx], effect[idx] );
+                                    $.merge(props[idx], effect[idx]);
                             });
 
                             if (effect["css"])
-                                css = extend( css, effect.css );
+                                css = extend(css, effect.css);
                         }
                     });
 
                     if (methods.setup.length) {
-                        each ($.unique(props.keep), function (idx, value) {
+                        each ($.unique(props.keep), function(idx, value) {
                             if (!element.data(value))
                                 element.data(value, element.css(value));
                         });
 
                         if (options.show) {
-                            css = extend( css, { display: element.data("olddisplay") || "block" } ); // Add show to the set
+                            css = extend(css, { display: element.data("olddisplay") || "block" }); // Add show to the set
                         }
 
                         if (css.transform) {
@@ -419,11 +419,11 @@
                         element.css(css);
                         element.css("overflow"); // Nudge Chrome
 
-                        each (methods.setup, function () { properties = extend( properties, this(element, opts)) });
+                        each (methods.setup, function() { properties = extend(properties, this(element, opts)) });
 
                         if (kendo.fx["animate"]) {
                             options.init();
-                            kendo.fx.animate ( element, properties, opts);
+                            kendo.fx.animate(element, properties, opts);
                         }
 
                         return;
@@ -451,18 +451,20 @@
             }
 
             if (size(effects)) {
-                var restore = function () {
+                var restore = function() {
                     each ($.unique(props.restore), function(idx, value) {
                         element.css(value, element.data(value));
                     });
                 };
 
-                if ($.browser.msie)
+                if ($.browser.msie) {
                     setTimeout(restore, 0); // Again jQuery callback in IE.
-                else
+                }
+                else {
                     restore();
+                }
 
-                each( methods.teardown, function () { this(element, options.reverse); } ); // call the internal completion callbacks
+                each(methods.teardown, function() { this(element, options.reverse); }); // call the internal completion callbacks
             }
 
             if (options.completeCallback) {
@@ -477,7 +479,7 @@
     };
 
     extend(kendo.fx, {
-        animate: function (elements, properties, options) {
+        animate: function(elements, properties, options) {
             var useTransition = options.transition !== false;
             delete options.transition;
 
@@ -488,7 +490,7 @@
                     var params,
                         currentValue = properties ? properties[value]+ " " : null; // We need to match
 
-                    elements.each(function () {
+                    elements.each(function() {
                         if (currentValue) {
                             var element = $(this),
                                 single = properties;
@@ -609,7 +611,7 @@
 
         fadeOut: {
             css: {
-                opacity: function () {
+                opacity: function() {
                     var element = $(this);
                     return element.data("reverse") && !this.style.opacity ? 0 : undefined;
                 }
@@ -620,7 +622,7 @@
         },
         fadeIn: {
             css: {
-                opacity: function () {
+                opacity: function() {
                     var element = $(this);
                     return !element.data("reverse") && !this.style.opacity ? 0 : undefined;
                 }
@@ -631,7 +633,7 @@
         },
         zoomIn: {
             css: {
-                transform: function () {
+                transform: function() {
                     var element = $(this);
                     return !element.data("reverse") && transitions ? "scale(.01)" : undefined;
                 }
@@ -642,7 +644,7 @@
         },
         zoomOut: {
             css: {
-                transform: function () {
+                transform: function() {
                     var element = $(this);
                     return element.data("reverse") && transitions ? "scale(.01)" : undefined;
                 }
@@ -710,7 +712,7 @@
             keep: [ OVERFLOW ],
             css: { overflow: HIDDEN },
             restore: [ OVERFLOW ],
-            setup: function (element, options) {
+            setup: function(element, options) {
                 var reverse = options.reverse,
                     setHeight = element[0].style.height,
                     oldHeight = element.data(HEIGHT),
@@ -724,10 +726,10 @@
 
                 return extend({ height: (reverse ? 0 : height) + PX }, options.properties);
             },
-            teardown: function (element) {
+            teardown: function(element) {
                 var height = element.data(HEIGHT);
                 if (height == AUTO || height === BLANK) {
-                    setTimeout( function () { element.css(HEIGHT, AUTO).css(HEIGHT); }, 0 ); // jQuery animate complete callback in IE is called before the last animation step!
+                    setTimeout(function() { element.css(HEIGHT, AUTO).css(HEIGHT); }, 0); // jQuery animate complete callback in IE is called before the last animation step!
                 }
             }
         },
