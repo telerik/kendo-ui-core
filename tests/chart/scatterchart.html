@@ -19,28 +19,29 @@
                 Box2D = Chart.Box2D,
                 chartBox = new Box2D(0, 0, 800, 600),
                 plotArea,
-                scatterLineChart,
+                scatterChart,
                 root,
                 view,
                 pointCoordinates,
                 TOLERANCE = 1;
 
-            function setupScatterLineChart(plotArea, options) {
+            function setupScatterChart(plotArea, options) {
                 view = new ViewStub();
 
-                scatterLineChart = new Chart.ScatterLineChart(plotArea, options);
+                scatterChart = new Chart.ScatterChart(plotArea, options);
 
                 root = new Chart.RootElement();
-                root.append(scatterLineChart);
+                root.append(scatterChart);
 
-                scatterLineChart.reflow();
-                scatterLineChart.getViewElements(view);
-                pointCoordinates = mapPoints(view.log.path[0].points);
+                scatterChart.reflow();
+                scatterChart.getViewElements(view);
+
+                pointCoordinates = mapPoints(view.log.circle[0].center);
             }
 
             (function() {
                 var series = { data: [[1, 1], [2, 2]], labels: {} },
-                    sparseSeries = { data: [[1, 1], [2, 2], undefined, [2, 2]] },
+                    sparseSeries = { data: [[1, 1], [2, 2], undefined, [2, 2]], labels: {} },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2;
 
@@ -70,30 +71,30 @@
                 module("Scatter Line Chart / series", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
-                        setupScatterLineChart(plotArea, { series: [ series ] });
+                        setupScatterChart(plotArea, { series: [ series ] });
                     }
                 });
 
-                test("Creates points for scatterLineChart data points", function() {
-                    equal(scatterLineChart.points.length, series.data.length);
+                test("Creates points for scatterChart data points", function() {
+                    equal(scatterChart.points.length, series.data.length);
                 });
 
                 test("Reports minimum series value", function() {
-                    same(scatterLineChart.valueRange().min, series.data[0]);
+                    same(scatterChart.valueRange().min, series.data[0]);
                 });
 
                 test("Reports maximum series value", function() {
-                    same(scatterLineChart.valueRange().max, series.data[1]);
+                    same(scatterChart.valueRange().max, series.data[1]);
                 });
 
                 test("points have set width", function() {
-                    $.each(scatterLineChart.points, function() {
+                    $.each(scatterChart.points, function() {
                         equal(this.box.width(), 1);
                     });
                 });
 
                 test("points have set height according to value", function() {
-                    var pointHeights = $.map(scatterLineChart.points, function(point) {
+                    var pointHeights = $.map(scatterChart.points, function(point) {
                         return point.box.height();
                     });
 
@@ -101,156 +102,69 @@
                 });
 
                 test("sets point owner", function() {
-                    ok(scatterLineChart.points[0].owner === scatterLineChart);
+                    ok(scatterChart.points[0].owner === scatterChart);
                 });
 
                 test("sets point series", function() {
-                    ok(scatterLineChart.points[0].series === series);
+                    ok(scatterChart.points[0].series === series);
                 });
 
                 test("sets point series index", function() {
-                    ok(scatterLineChart.points[0].seriesIx === 0);
+                    ok(scatterChart.points[0].seriesIx === 0);
                 });
 
                 test("sets point dataItem", function() {
-                    equal(typeof scatterLineChart.points[0].dataItem, "object");
+                    equal(typeof scatterChart.points[0].dataItem, "object");
                 });
 
                 // ------------------------------------------------------------
                 module("Scatter Line Chart / Missing values", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
-                        setupScatterLineChart(plotArea, {
+                        setupScatterChart(plotArea, {
                             series: [ sparseSeries ]
                         });
                     }
                 });
 
                 test("Reports minimum series value", function() {
-                    same(scatterLineChart.valueRange().min, [1, 1]);
+                    same(scatterChart.valueRange().min, [1, 1]);
                 });
 
                 test("Reports maximum series value", function() {
-                    same(scatterLineChart.valueRange().max, [2, 2]);
+                    same(scatterChart.valueRange().max, [2, 2]);
                 });
 
                 test("omits missing points by default", function() {
-                    equals(scatterLineChart.points[2], null);
+                    equals(scatterChart.points[2], null);
                 });
 
                 test("omits missing points when interpolating", function() {
-                    setupScatterLineChart(plotArea, {
+                    setupScatterChart(plotArea, {
                         series: [
                             $.extend({ missingValues: "interpolate" }, sparseSeries)
                         ]
                     });
 
-                    equals(scatterLineChart.points[2], null);
+                    equals(scatterChart.points[2], null);
                 });
 
                 // ------------------------------------------------------------
                 module("Scatter Line Chart / Rendering", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
-                        setupScatterLineChart(plotArea, {
-                            series: [
-                                    $.extend({
-                                        width: 4,
-                                        color: "#cf0",
-                                        opacity: 0.5
-                                    },
-                                    series
-                                )
-                            ]
-                        });
+                        setupScatterChart(plotArea, { series: [ series ] });
                     }
-                });
-
-                test("sets line width", function() {
-                    equals(view.log.path[0].style.strokeWidth, 4);
-                });
-
-                test("sets line color", function() {
-                    equals(view.log.path[0].style.stroke, "#cf0");
-                });
-
-                test("sets line opacity", function() {
-                    equals(view.log.path[0].style.strokeOpacity, 0.5);
-                });
-
-                test("registers line with root", function() {
-                    ok(root.idMap[view.log.path[0].style.id] === scatterLineChart);
-                });
-
-                test("registers line metadata", function() {
-                    ok(root.idMapMetadata[view.log.path[0].style.id].seriesIx === 0);
-                });
-
-                test("renders line chart group", function() {
-                    equals(view.log.group.length, 2);
                 });
 
                 test("sets group animation", function() {
                     equals(view.log.group[0].options.animation.type, "clip");
                 });
 
-                // ------------------------------------------------------------
-                module("Scatter Line Chart / Rendering / Missing Values", {
-                    setup: function() {
-                        plotArea = new PlotAreaStub();
-                    }
-                });
-
-                test("line stops before missing value", function() {
-                    setupScatterLineChart(plotArea, {
-                        series: [
-                            sparseSeries
-                        ]
-                    });
-
-                    same(pointCoordinates, [
-                        [ 1.5, 1 ], [ 2.5, 0 ]
-                    ]);
-                });
-
-                test("no line is created for isolated points", function() {
-                    setupScatterLineChart(plotArea, {
-                        series: [
-                            sparseSeries
-                        ]
-                    });
-
-                    equals(view.log.path.length, 1);
-                });
-
-                test("line continues after missing value", function() {
-                    setupScatterLineChart(plotArea, {
-                        series: [{
-                            data: [ null, [1, 1], [2, 2]]
-                        }]
-                    });
-
-                    same(pointCoordinates, [
-                        [ 1.5, 1 ], [ 2.5, 0 ]
-                    ]);
-                });
-
-                test("line is drawn between existing points", function() {
-                    setupScatterLineChart(plotArea, {
-                        series: [
-                            $.extend({ missingValues: "interpolate" }, sparseSeries)
-                        ]
-                    });
-
-                    same(pointCoordinates, [
-                        [ 1.5, 1 ], [ 2.5, 0 ], [ 2.5, 0 ]
-                    ]);
-                });
-
             })();
 
             (function() {
-                var scatterLineChart,
+                var scatterChart,
                     MARGIN = PADDING = BORDER = 5,
                     linePoint;
 
@@ -269,9 +183,9 @@
                     }
                 });
 
-                function createScatterLineChart(options) {
+                function createScatterChart(options) {
                     plotArea = new PlotAreaStub();
-                    scatterLineChart = new Chart.ScatterLineChart(plotArea, {
+                    scatterChart = new Chart.ScatterChart(plotArea, {
                         series: [$.extend({
                             data: [[0, 0], [1, 1]],
                             color: "#f00",
@@ -298,13 +212,13 @@
                             dashType: "dot"
                         }, options)]
                     });
-                    scatterLinePoint = scatterLineChart.points[0];
+                    scatterLinePoint = scatterChart.points[0];
                 }
 
                 // ------------------------------------------------------------
                 module("Scatter Line Chart / Configuration", {
                     setup: function() {
-                        createScatterLineChart();
+                        createScatterChart();
                     }
                 });
 
@@ -329,7 +243,7 @@
                 });
 
                 test("applies border color to point markers", function() {
-                    createScatterLineChart({ markers: { border: { color: "marker-border" } } });
+                    createScatterChart({ markers: { border: { color: "marker-border" } } });
                     equal(scatterLinePoint.options.markers.border.color, "marker-border");
                 });
 

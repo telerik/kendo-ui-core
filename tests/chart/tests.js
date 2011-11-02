@@ -72,7 +72,11 @@ tests.push(
         title: "Animations"
     },
     {
-        page: "chart/scatterline.html",
-        title: "Scatter Line"
+        page: "chart/scatterlinechart.html",
+        title: "Scatter Line Chart"
+    },
+    {
+        page: "chart/scatterchart.html",
+        title: "Scatter Chart"
     }
 );

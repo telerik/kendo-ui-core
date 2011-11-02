@@ -610,7 +610,12 @@
                     setup: function() {
                         Chart.themes.test = {
                             flag: true,
-                            seriesColors: ["#f00", "#cf0"]
+                            seriesColors: ["#f00", "#cf0"],
+                            seriesDefaults: {
+                                scatter: {
+                                    flag: false
+                                }
+                            }
                         };
                     },
                     teardown: destroyChart
@@ -654,6 +659,33 @@
                     });
 
                     equal(chart.options.series[0].overlay.gradient, "foo");
+                });
+
+                test("applies theme seriesDefaults", function() {
+                    createChart({
+                        theme: "test",
+                        seriesDefaults: {
+                            type: "scatter"
+                        },
+                        series: [{}, {}]
+                    });
+
+                    ok(chart.options.series[0].flag === false);
+                });
+
+                test("seriesDefaults overrides theme seriesDefaults", function() {
+                    createChart({
+                        theme: "test",
+                        seriesDefaults: {
+                            type: "scatter",
+                            scatter: {
+                                flag: true
+                            }
+                        },
+                        series: [{}, {}]
+                    });
+
+                    ok(chart.options.series[0].flag);
                 });
 
                 // ------------------------------------------------------------
