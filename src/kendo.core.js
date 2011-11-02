@@ -587,6 +587,10 @@
             return EMPTY;
         }
 
+        if (!isFinite(number)) {
+            return number;
+        }
+
         //if no format then return number.toString() or number.toLocaleString() if culture.name is not defined
         if (!format) {
             return culture.name.length ? number.toLocaleString() : number.toString();

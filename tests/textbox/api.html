@@ -29,14 +29,14 @@
                 }
             });
 
-            test("_change should call value() method", function() {
+            test("_change should call _update() method", function() {
                 var textbox = new NumericTextBox(input);
 
-                stub(textbox, {value: textbox.value});
+                stub(textbox, {_update: textbox._update});
 
                 textbox._change("22");
 
-                equal(textbox.calls("value"), 1);
+                equal(textbox.calls("_update"), 1);
                 equal(textbox.value(), 22);
             });
 
@@ -200,12 +200,17 @@
                 equal(textbox._value, 12.35);
             });
 
-            test("denable(false) should disable input element", function() {
-                var textbox = new NumericTextBox(input);
+            test("enable(false) should disable input element", function() {
+                var textbox = new NumericTextBox(input),
+                    text = textbox._text;
 
                 textbox.enable(false);
 
-                equal(textbox.element.attr("disabled"), "disabled");
+                ok(!input.is(":visible"));
+                equal(input.attr("disabled"), "disabled");
+
+                ok(text.is(":visible"));
+                equal(text.attr("disabled"), "disabled");
             });
 
             test("enable(false) should unbind arrows mousedown event", function() {
@@ -222,12 +227,18 @@
             });
 
             test("enable() should remove disable attribute", function() {
-                var textbox = new NumericTextBox(input);
+
+                var textbox = new NumericTextBox(input),
+                    text = textbox._text;
 
                 textbox.enable(false);
                 textbox.enable(true);
 
-                equal(textbox.element.attr("disabled"), undefined);
+                ok(!input.is(":visible"));
+                equal(input.attr("disabled"), undefined);
+
+                ok(text.is(":visible"));
+                equal(text.attr("disabled"), undefined);
             });
 
             test("_blur should hide the input text and show the _text", function() {
@@ -253,13 +264,13 @@
                 var textbox = new NumericTextBox(input);
 
                 textbox._text.focus();
-                setTimeout(function() { input.blur(); }, 150);
+                setTimeout(function() { input.blur(); }, 250);
 
                 setTimeout(function() {
                     ok(!input.is(":visible"));
                     ok(textbox._text.is(":visible"));
                     start();
-                }, 300);
+                }, 500);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

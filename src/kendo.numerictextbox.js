@@ -75,7 +75,6 @@
         parse = kendo.parseFloat,
         touch = kendo.support.touch,
         CHANGE = "change",
-        CHAR = "character",
         DISABLED = "disabled",
         INPUT = "k-input",
         TOUCHEND = "touchend",
@@ -154,11 +153,8 @@
 
             value = options.value;
             that.value(value !== NULL ? value : element.val());
-            that._old = that._value;
 
             that.enable(!element.is('[disabled]'));
-
-            that._blur();
         },
 
         options: {
@@ -187,6 +183,7 @@
         */
         enable: function(enable) {
             var that = this,
+                text = that._text,
                 element = that.element;
                 wrapper = that.wrapper,
                 upArrow = that._upArrow,
@@ -195,19 +192,21 @@
             upArrow.unbind(MOUSEDOWN);
             downArrow.unbind(MOUSEDOWN);
 
-            that._toggleText(enable);
+            that._toggleText(true);
 
             if (enable === false) {
                 wrapper
                     .addClass(DISABLED)
                     .unbind(HOVEREVENTS);
 
+                text.attr(DISABLED, DISABLED);
                 element.attr(DISABLED, DISABLED);
             } else {
                 wrapper
                     .removeClass(DISABLED)
                     .bind(HOVEREVENTS, that._toggleHover);
 
+                text.removeAttr(DISABLED);
                 element.removeAttr(DISABLED);
 
                 upArrow.bind(MOUSEDOWN, function(e) {
@@ -236,32 +235,14 @@
         * numerictextbox.value("10.20");
         */
         value: function(value) {
-            var that = this,
-                options = that.options,
-                format = options.format,
-                decimals = options.decimals,
-                numberFormat = that._format(format),
-                isNotNull;
+            var that = this;
 
             if (value === undefined) {
                 return that._value;
             }
 
-            if (decimals === undefined) {
-                decimals = numberFormat.decimals;
-            }
-
-            value = parse(value);
-
-            isNotNull = value !== NULL;
-
-            if (isNotNull) {
-                value = parseFloat(value.toFixed(decimals));
-            }
-
-            that._value = value = that._adjust(value);
-            that._text.val(isNotNull ? kendo.toString(value, format) : options.empty);
-            that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "");
+            that._update(value);
+            that._old = that._value;
         },
 
         _adjust: function(value) {
@@ -290,6 +271,8 @@
             if (!arrows[0]) {
                 arrows = $(buttonHtml("up", options.upArrowText) + buttonHtml("down", options.downArrowText))
                         .insertAfter(element);
+
+                arrows.wrapAll('<span class="k-select"/>');
             }
 
             arrows.bind(MOUSEUP, function(e) {
@@ -320,7 +303,7 @@
                     format = that._format(that.options.format),
                     group = format[","],
                     groupRegExp = new RegExp("\\" + group, "g"),
-                    extractRegExp = new RegExp("([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\d+)?"),
+                    extractRegExp = new RegExp("([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\\d+)?"),
                     result = extractRegExp.exec(value),
                     caretPosition = 0;
 
@@ -341,7 +324,7 @@
         _change: function(value) {
             var that = this;
 
-            that.value(value);
+            that._update(value);
             value = that._value;
 
             if (that._old != value) {
@@ -386,13 +369,15 @@
                 wrapper = that.wrapper,
                 text;
 
-            element.type = "text";
 
             text = wrapper.find(POINT + CLASSNAME);
 
             if (!text[0]) {
                 text = $("<input />").insertBefore(element).addClass(CLASSNAME);
             }
+
+            element.type = "text";
+            text[0].type = "text";
 
             text[0].style.cssText = element.style.cssText;
             that._text = text.attr("readonly", true).addClass(element.className);
@@ -418,8 +403,8 @@
                 element = e.target,
                 value = element.value;
             setTimeout(function() {
-                if (parse(element.val()) === NULL) {
-                    that.value(value);
+                if (parse(element.value) === NULL) {
+                    that._update(value);
                 }
             });
         },
@@ -483,8 +468,7 @@
 
             value += that.options.step * parse(step);
 
-            value = that._adjust(value);
-            that.value(value);
+            that._update(that._adjust(value));
         },
 
         _toggleHover: function(e) {
@@ -501,6 +485,31 @@
             that.element.toggle(!toggle);
         },
 
+        _update: function(value) {
+            var that = this,
+                options = that.options,
+                format = options.format,
+                decimals = options.decimals,
+                numberFormat = that._format(format),
+                isNotNull;
+
+            if (decimals === undefined) {
+                decimals = numberFormat.decimals;
+            }
+
+            value = parse(value);
+
+            isNotNull = value !== NULL;
+
+            if (isNotNull) {
+                value = parseFloat(value.toFixed(decimals));
+            }
+
+            that._value = value = that._adjust(value);
+            that._text.val(isNotNull ? kendo.toString(value, format) : options.empty);
+            that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "");
+        },
+
         _wrapper: function() {
             var that = this,
                 element = that.element,
@@ -509,16 +518,17 @@
             wrapper = element.parent();
 
             if (!wrapper.is("span.k-widget")) {
-                wrapper = element.hide().wrap("<span/>").parent();
+                wrapper = element.hide().wrap('<span class="k-textbox-wrap k-state-default" />').parent();
+                wrapper = wrapper.wrap("<span/>").parent();
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
-            that.wrapper = wrapper.addClass("k-widget k-textbox").show();
+            that.wrapper = wrapper.addClass("k-widget k-numerictextbox").show();
         }
     });
 
     function buttonHtml(className, text) {
-        return '<span class="k-link k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span>'
+        return '<span unselectable="on" class="k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span>'
     }
 
     function caret(element, position) {
@@ -529,11 +539,16 @@
             element.focus();
             var range = document.selection.createRange();
             if (isPosition) {
-                range.move(CHAR, position);
+                range.move("character", position);
                 range.select();
             } else {
-                range.moveStart(CHAR, -element.value.length);
-                position = range.text.length;
+                var rangeElement = element.createTextRange(),
+                    rangeDuplicated = rangeElement.duplicate();
+                    rangeElement.moveToBookmark(range.getBookmark());
+                    rangeDuplicated.setEndPoint('EndToStart', rangeElement);
+
+                position = rangeDuplicated.text.length;
+
             }
         } else if (element.selectionStart !== undefined) {
             if (isPosition) {
