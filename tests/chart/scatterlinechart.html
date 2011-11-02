@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+            var Chart = kendo.ui.Chart,
+                Box2D = Chart.Box2D,
+                chartBox = new Box2D(0, 0, 800, 600),
+                scatterLineChart,
+                root,
+                view,
+                pointCoordinates,
+                TOLERANCE = 1;
+
+            function setupScatterLineChart(plotArea, options) {
+                view = new ViewStub();
+
+                scatterLineChart = new Chart.ScatterLineChart(plotArea, options);
+
+                root = new Chart.RootElement();
+                root.append(scatterLineChart);
+
+                scatterLineChart.reflow();
+                scatterLineChart.getViewElements(view);
+                pointCoordinates = mapPoints(view.log.path[0].points);
+            }
+
+            (function() {
+                var series = { data: [[1, 1], [2, 2]], labels: {} },
+                    sparseSeries = { data: [[1, 1], [2, 2], undefined, [2, 2]], labels: {} },
+                    VALUE_AXIS_MAX = 2,
+                    CATEGORY_AXIS_Y = 2;
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    axisX: {
+                        getSlot: function(categoryIndex) {
+                            return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
+                            categoryIndex + 1, CATEGORY_AXIS_Y);
+                        }
+                    },
+                    axisY: {
+                        getSlot: function(value) {
+                            var value = typeof value === "undefined" ? 0 : value,
+                                valueY = VALUE_AXIS_MAX - value,
+                                slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
+                                slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+
+                            return new Box2D(0, slotTop, 0, slotBottom);
+                        },
+                        options: {}
+                    }
+                });
+
+                // ------------------------------------------------------------
+                module("Scatter Line Chart / series", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupScatterLineChart(plotArea, { series: [ series ] });
+                    }
+                });
+
+                test("Creates points for scatterLineChart data points", function() {
+                    equal(scatterLineChart.points.length, series.data.length);
+                });
+
+                test("Reports minimum series value", function() {
+                    same(scatterLineChart.valueRange().min, series.data[0]);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(scatterLineChart.valueRange().max, series.data[1]);
+                });
+
+                test("points have set width", function() {
+                    $.each(scatterLineChart.points, function() {
+                        equal(this.box.width(), 1);
+                    });
+                });
+
+                test("points have set height according to value", function() {
+                    var pointHeights = $.map(scatterLineChart.points, function(point) {
+                        return point.box.height();
+                    });
+
+                    same(pointHeights, [1, 2]);
+                });
+
+                test("sets point owner", function() {
+                    ok(scatterLineChart.points[0].owner === scatterLineChart);
+                });
+
+                test("sets point series", function() {
+                    ok(scatterLineChart.points[0].series === series);
+                });
+
+                test("sets point series index", function() {
+                    ok(scatterLineChart.points[0].seriesIx === 0);
+                });
+
+                test("sets point dataItem", function() {
+                    equal(typeof scatterLineChart.points[0].dataItem, "object");
+                });
+
+                // ------------------------------------------------------------
+                module("Scatter Line Chart / Missing values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupScatterLineChart(plotArea, {
+                            series: [ sparseSeries ]
+                        });
+                    }
+                });
+
+                test("Reports minimum series value", function() {
+                    same(scatterLineChart.valueRange().min, [1, 1]);
+                });
+
+                test("Reports maximum series value", function() {
+                    same(scatterLineChart.valueRange().max, [2, 2]);
+                });
+
+                test("omits missing points by default", function() {
+                    equals(scatterLineChart.points[2], null);
+                });
+
+                test("omits missing points when interpolating", function() {
+                    setupScatterLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "interpolate" }, sparseSeries)
+                        ]
+                    });
+
+                    equals(scatterLineChart.points[2], null);
+                });
+
+                // ------------------------------------------------------------
+                module("Scatter Line Chart / Rendering", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupScatterLineChart(plotArea, {
+                            series: [
+                                    $.extend({
+                                        width: 4,
+                                        color: "#cf0",
+                                        opacity: 0.5
+                                    },
+                                    series
+                                )
+                            ]
+                        });
+                    }
+                });
+
+                test("sets line width", function() {
+                    equals(view.log.path[0].style.strokeWidth, 4);
+                });
+
+                test("sets line color", function() {
+                    equals(view.log.path[0].style.stroke, "#cf0");
+                });
+
+                test("sets line opacity", function() {
+                    equals(view.log.path[0].style.strokeOpacity, 0.5);
+                });
+
+                test("registers line with root", function() {
+                    ok(root.idMap[view.log.path[0].style.id] === scatterLineChart);
+                });
+
+                test("registers line metadata", function() {
+                    ok(root.idMapMetadata[view.log.path[0].style.id].seriesIx === 0);
+                });
+
+                test("renders line chart group", function() {
+                    equals(view.log.group.length, 2);
+                });
+
+                test("sets group animation", function() {
+                    equals(view.log.group[0].options.animation.type, "clip");
+                });
+
+                // ------------------------------------------------------------
+                module("Scatter Line Chart / Rendering / Missing Values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                    }
+                });
+
+                test("line stops before missing value", function() {
+                    setupScatterLineChart(plotArea, {
+                        series: [
+                            sparseSeries
+                        ]
+                    });
+
+                    same(pointCoordinates, [
+                        [ 1.5, 1 ], [ 2.5, 0 ]
+                    ]);
+                });
+
+                test("no line is created for isolated points", function() {
+                    setupScatterLineChart(plotArea, {
+                        series: [
+                            sparseSeries
+                        ]
+                    });
+
+                    equals(view.log.path.length, 1);
+                });
+
+                test("line continues after missing value", function() {
+                    setupScatterLineChart(plotArea, {
+                        series: [{
+                            data: [ null, [1, 1], [2, 2]],
+                            labels: {}
+                        }]
+                    });
+
+                    same(pointCoordinates, [
+                        [ 1.5, 1 ], [ 2.5, 0 ]
+                    ]);
+                });
+
+                test("line is drawn between existing points", function() {
+                    setupScatterLineChart(plotArea, {
+                        series: [
+                            $.extend({ missingValues: "interpolate" }, sparseSeries)
+                        ]
+                    });
+
+                    same(pointCoordinates, [
+                        [ 1.5, 1 ], [ 2.5, 0 ], [ 2.5, 0 ]
+                    ]);
+                });
+
+            })();
+
+            (function() {
+                var scatterLineChart,
+                    MARGIN = PADDING = BORDER = 5,
+                    linePoint,
+                    TEMPLATE = "template",
+                    FORMAT = "format";
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    axisX: {
+                        getSlot: function(value) {
+                            return new Box2D();
+                        }
+                    },
+                    axisY: {
+                        getSlot: function(categoryIndex) {
+                            return new Box2D();
+                        }
+                    }
+                });
+
+                function createScatterLineChart(options) {
+                    plotArea = new PlotAreaStub();
+                    scatterLineChart = new Chart.ScatterLineChart(plotArea, {
+                        series: [$.extend({
+                            data: [[0, 0], [1, 1]],
+                            color: "#f00",
+                            markers: {
+                                visible: false,
+                                size: 10,
+                                type: "triangle",
+                                border: {
+                                    width: BORDER
+                                }
+                            },
+                            labels: {
+                                visible: false,
+                                color: "labels-color",
+                                background: "labels-background",
+                                border: {
+                                    color: "labels-border",
+                                    width: BORDER
+                                },
+                                margin: MARGIN,
+                                padding: PADDING,
+                                template: TEMPLATE,
+                                format: FORMAT
+                            },
+                            opacity: 0.5,
+                            dashType: "dot"
+                        }, options)]
+                    });
+                    scatterLinePoint = scatterLineChart.points[0];
+                }
+
+                // ------------------------------------------------------------
+                module("Scatter Line Chart / Configuration", {
+                    setup: function() {
+                        createScatterLineChart();
+                    }
+                });
+
+                test("applies visible to point markers", function() {
+                    equal(scatterLinePoint.options.markers.visible, false);
+                });
+
+                test("applies series color to point markers border", function() {
+                    equal(scatterLinePoint.options.markers.border.color, "#f00");
+                });
+
+                test("applies series opacity color to point markers", function() {
+                    equal(scatterLinePoint.options.markers.opacity, 0.5);
+                });
+
+                test("applies size to point markers", function() {
+                    equal(scatterLinePoint.options.markers.size, 10);
+                });
+
+                test("applies type to point markers", function() {
+                    equal(scatterLinePoint.options.markers.type, "triangle");
+                });
+
+                test("applies border color to point markers", function() {
+                    createScatterLineChart({ markers: { border: { color: "marker-border" } } });
+                    equal(scatterLinePoint.options.markers.border.color, "marker-border");
+                });
+
+                test("applies border width to point markers.", function() {
+                    equal(scatterLinePoint.options.markers.border.width, BORDER);
+                });
+
+                test("applies visible to point labels", function() {
+                    equal(scatterLinePoint.options.labels.visible, false);
+                });
+
+                test("applies color to point labels", function() {
+                    equal(scatterLinePoint.options.labels.color, "labels-color");
+                });
+
+                test("applies background to point labels", function() {
+                    equal(scatterLinePoint.options.labels.background, "labels-background");
+                });
+
+                test("applies border color to point labels", function() {
+                    equal(scatterLinePoint.options.labels.border.color, "labels-border");
+                });
+
+                test("applies border width to point labels", function() {
+                    equal(scatterLinePoint.options.labels.border.width, BORDER);
+                });
+
+                test("applies padding to point labels", function() {
+                    equal(scatterLinePoint.options.labels.padding, PADDING);
+                });
+
+                test("applies margin to point labels", function() {
+                    equal(scatterLinePoint.options.labels.margin, MARGIN);
+                });
+
+                test("applies dashType to point labels", function() {
+                    equal(scatterLinePoint.options.dashType, "dot");
+                });
+
+                test("applies template to point labels", function() {
+                    equal(scatterLinePoint.options.labels.template, TEMPLATE);
+                });
+
+                test("applies format to point labels", function() {
+                    equal(scatterLinePoint.options.labels.format, FORMAT);
+                });
+
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container">
+        </div>
+    </body>
+</html>

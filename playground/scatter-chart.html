@@ -22,7 +22,7 @@
 
             $(document).ready(function() {
                 $("#container").kendoChart({
-                    theme: "blueOpal",
+                    theme: "hakama",
                     title: {
                         text: "Scatter chart"
                     },
@@ -46,12 +46,18 @@
                     },
                     series: [
                         {
+                            labels: {
+                                visible: true
+                            },
                             type: "scatterLine",
                             name: "Plot 1",
                             data: [null, [1, 1], [2, 2] ],
                             missingValues: ""
                         }
-                    ]
+                    ],
+                    tooltip: {
+                        visible: true
+                    }
                 });
             });
         </script>

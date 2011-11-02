@@ -8,6 +8,7 @@
         DataSource = kendo.data.DataSource,
         baseTemplate = kendo.template,
         format = kendo.format,
+        formatFunctionName = "kendo.format",
         map = $.map,
         math = Math,
         proxy = $.proxy,
@@ -89,6 +90,7 @@
     var Chart = Widget.extend({
         init: function(element, options) {
             var chart = this,
+                themeOptions,
                 theme;
 
             Widget.fn.init.call(chart, element);
@@ -100,15 +102,12 @@
             }
 
             options = deepExtend({}, chart.options, options);
-            applyAxisDefaults(options);
-            applySeriesDefaults(options);
-
             theme = options.theme;
-            chart.options = deepExtend(
-                {},
-                theme ? Chart.themes[theme] || Chart.themes[theme.toLowerCase()] : {},
-                options
-            );
+            themeOptions = theme ? Chart.themes[theme] || Chart.themes[theme.toLowerCase()] : {};
+            applyAxisDefaults(options, themeOptions);
+            applySeriesDefaults(options, themeOptions);
+
+            chart.options = deepExtend({}, themeOptions, options);
 
             applySeriesColors(chart.options);
 
@@ -2637,14 +2636,14 @@
             }
 
             point.marker = new ShapeElement({
-                    id: uniqueId(),
-                    visible: markers.visible,
-                    type: markers.type,
-                    width: markers.size,
-                    height: markers.size,
-                    background: markerBackground,
-                    border: markerBorder,
-                    opacity: markers.opacity
+                id: uniqueId(),
+                visible: markers.visible,
+                type: markers.type,
+                width: markers.size,
+                height: markers.size,
+                background: markerBackground,
+                border: markerBorder,
+                opacity: markers.opacity
             });
 
             point.append(point.marker);
@@ -2738,7 +2737,11 @@
             element.registerId(outlineId);
             options = deepExtend({}, options, { id: outlineId });
 
-            return marker.getViewElements(view, options)[0];
+            return marker.getViewElements(view, deepExtend(options, {
+                fill: marker.options.border.color,
+                fillOpacity: 1,
+                strokeOpacity: 0
+            }))[0];
         },
 
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
@@ -2966,7 +2969,8 @@
 
         createPoint: function(value, series, seriesIx) {
             var chart = this,
-                options = chart.options;
+                options = chart.options,
+                labelsFormat = series.labels.format || "{0}, {1}";
 
             if (!defined(value.x) || !defined(value.y)) {
                 return null;
@@ -2979,6 +2983,9 @@
                             color: series.color
                         },
                         opacity: series.opacity
+                    },
+                    labels: {
+                        template: "#= " + formatFunctionName + "('" + labelsFormat + "', value.x, value.y) #"
                     }
                 }, series)
             );
@@ -3129,6 +3136,37 @@
                 fill: "",
                 dashType: series.dashType
             });
+        },
+
+        getSeriesPoint: function(x, y, seriesIx) {
+            var chart = this,
+                isVertical = chart.options.isVertical,
+                axis = isVertical ? X : Y,
+                pos = isVertical ? x : y,
+                points = chart.seriesPoints[seriesIx],
+                nearestPointDistance = Number.MAX_VALUE,
+                pointsLength = points.length,
+                currentPoint,
+                pointBox,
+                pointDistance,
+                nearestPoint,
+                i;
+
+            for (i = 0; i < pointsLength; i++) {
+                currentPoint = points[i];
+
+                if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null) {
+                    pointBox = currentPoint.box;
+                    pointDistance = math.abs(pointBox.center()[axis] - pos);
+
+                    if (pointDistance < nearestPointDistance) {
+                        nearestPoint = currentPoint;
+                        nearestPointDistance = pointDistance;
+                    }
+                }
+            }
+
+            return nearestPoint;
         }
     });
 
@@ -5015,18 +5053,21 @@
         return round(start + (end - start) * progress, COORD_PRECISION);
     }
 
-    function applySeriesDefaults(options) {
+    function applySeriesDefaults(options, themeOptions) {
         var series = options.series,
             i,
             seriesLength = series.length,
             seriesType,
             seriesDefaults = options.seriesDefaults,
-            baseSeriesDefaults = deepExtend({}, options.seriesDefaults);
+            baseSeriesDefaults = deepExtend({}, options.seriesDefaults),
+            themeSeriesDefaults = themeOptions ? themeOptions.seriesDefaults : {};
 
         delete baseSeriesDefaults.bar;
         delete baseSeriesDefaults.column;
         delete baseSeriesDefaults.line;
         delete baseSeriesDefaults.pie;
+        delete baseSeriesDefaults.scatter;
+        delete baseSeriesDefaults.scatterLine;
 
         for (i = 0; i < seriesLength; i++) {
             seriesType = series[i].type || options.seriesDefaults.type;
@@ -5034,6 +5075,7 @@
             series[i] = deepExtend(
                 {},
                 baseSeriesDefaults,
+                themeSeriesDefaults[seriesType],
                 seriesDefaults[seriesType],
                 series[i]);
         }
@@ -5370,6 +5412,7 @@
         PieSegment: PieSegment,
         PieChart: PieChart,
         ViewElement: ViewElement,
+        ScatterChart: ScatterChart,
         ScatterLineChart: ScatterLineChart,
         ViewBase: ViewBase,
         deepExtend: deepExtend,
