@@ -31,10 +31,13 @@
 
             test("Should render wrapper", function() {
                 var textbox = new NumericTextBox(input),
-                    wrapper = textbox.wrapper;
+                    wrapper = textbox.wrapper,
+                    innerWrapper = wrapper.children();
 
-                ok(wrapper);
-                ok(wrapper.hasClass("k-widget k-textbox"));
+                ok(wrapper.hasClass("k-widget k-numerictextbox"));
+
+                ok(innerWrapper.eq(0).hasClass("k-textbox-wrap"));
+                equal(innerWrapper.length, 1);
             });
 
             test("Should render up and down arrows", function() {
@@ -42,10 +45,9 @@
                     upArrow = textbox._upArrow,
                     downArrow = textbox._downArrow;
 
-                ok(upArrow);
-                ok(downArrow);
-                ok(upArrow.hasClass("k-link k-icon k-arrow-up"));
-                ok(downArrow.hasClass("k-link k-icon k-arrow-down"));
+                ok(upArrow.parent().hasClass("k-select"));
+                ok(upArrow.hasClass("k-icon k-arrow-up"));
+                ok(downArrow.hasClass("k-icon k-arrow-down"));
                 equal(upArrow.attr("title"), textbox.options.upArrowText);
                 equal(downArrow.attr("title"), textbox.options.downArrowText);
                 equal(upArrow.html(), textbox.options.upArrowText);

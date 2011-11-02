@@ -290,6 +290,8 @@
             if (!arrows[0]) {
                 arrows = $(buttonHtml("up", options.upArrowText) + buttonHtml("down", options.downArrowText))
                         .insertAfter(element);
+
+                arrows.wrapAll('<span class="k-select"/>');
             }
 
             arrows.bind(MOUSEUP, function(e) {
@@ -509,16 +511,17 @@
             wrapper = element.parent();
 
             if (!wrapper.is("span.k-widget")) {
-                wrapper = element.hide().wrap("<span/>").parent();
+                wrapper = element.hide().wrap('<span class="k-textbox-wrap k-state-default" />').parent();
+                wrapper = wrapper.wrap("<span/>").parent();
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
-            that.wrapper = wrapper.addClass("k-widget k-textbox").show();
+            that.wrapper = wrapper.addClass("k-widget k-numerictextbox").show();
         }
     });
 
     function buttonHtml(className, text) {
-        return '<span class="k-link k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span>'
+        return '<span class="k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span>'
     }
 
     function caret(element, position) {
