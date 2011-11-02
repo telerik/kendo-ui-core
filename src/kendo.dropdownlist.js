@@ -42,7 +42,7 @@
     * @exampleTitle DropDownList initialization
     * @example
     *   $(document).ready(function(){
-    *       $("#dropdownlist").kendDropDownList();
+    *       $("#dropdownlist").kendoDropDownList();
     *   });
     *
     * @section
