@@ -8,6 +8,7 @@
         inArray = $.inArray,
         Binder = kendo.data.ModelViewBinder,
         Validatable = ui.Validatable,
+        CHANGE = "change",
         DATATYPE = "data-kendo-type";
 
     var specialRules = ["url", "email", "number", "date", "boolean"];
@@ -67,6 +68,8 @@
 
             Widget.fn.init.call(that, element, options);
 
+            that.bind([CHANGE], that.options);
+
             that.refresh();
         },
 
@@ -91,6 +94,24 @@
             }
         },
 
+        _binderChange: function(e) {
+            var that = this;
+            if (!that.validatable.validate()) {
+                e.preventDefault();
+            } else {
+                that.trigger(CHANGE);
+            }
+        },
+
+        end: function() {
+            return this.validatable.validate();
+        },
+
+        distroy: function() {
+            this.element.removeData("kendoValidatable")
+                .removeData("kendoEditable");
+        },
+
         refresh: function() {
             var that = this,
                 idx,
@@ -104,7 +125,7 @@
                 fields = [fields];
             }
 
-            for(idx = 0, length = fields.length; idx < length; idx++) {
+            for (idx = 0, length = fields.length; idx < length; idx++) {
                 var field = fields[idx],
                     isObject = isPlainObject(field),
                     fieldName = isObject ? field.field : field,
@@ -120,7 +141,7 @@
                 that.editor(field, modelField);
             }
 
-            new Binder(container, that.options.model);
+            new Binder(container, that.options.model, { change: $.proxy(that._binderChange, that) });
 
             that.validatable = container.kendoValidatable({ rules: rules }).data("kendoValidatable");
 

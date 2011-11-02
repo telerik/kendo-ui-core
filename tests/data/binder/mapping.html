@@ -110,16 +110,15 @@
                 ok(wasCalled);
             });
 
-            test("preventing change event does not update the model", function() {
-                var binder = new Binder(textbox.attr("name", "foo"), { foo: "bar" }, { change: function(e) { e.preventDefault(); } });
+            test("change event is called only once", function() {
+                var timesCalled = 0;
+                var binder = new Binder(textbox.attr("name", "foo").wrap("<div />").parent(), { foo: "bar" }, { change: function() { timesCalled++; } });
 
-                var mapping = binder._map(textbox[0]);
+                textbox.trigger("change");
 
-                textbox.val("foo");
-                mapping.bindModel();
-
-                equal(binder.model.get("foo"), "bar");
+                equal(timesCalled, 1);
             });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
