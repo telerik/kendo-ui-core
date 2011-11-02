@@ -154,11 +154,8 @@
 
             value = options.value;
             that.value(value !== NULL ? value : element.val());
-            that._old = that._value;
 
             that.enable(!element.is('[disabled]'));
-
-            that._blur();
         },
 
         options: {
@@ -187,6 +184,7 @@
         */
         enable: function(enable) {
             var that = this,
+                text = that._text,
                 element = that.element;
                 wrapper = that.wrapper,
                 upArrow = that._upArrow,
@@ -195,19 +193,21 @@
             upArrow.unbind(MOUSEDOWN);
             downArrow.unbind(MOUSEDOWN);
 
-            that._toggleText(enable);
+            that._toggleText(true);
 
             if (enable === false) {
                 wrapper
                     .addClass(DISABLED)
                     .unbind(HOVEREVENTS);
 
+                text.attr(DISABLED, DISABLED);
                 element.attr(DISABLED, DISABLED);
             } else {
                 wrapper
                     .removeClass(DISABLED)
                     .bind(HOVEREVENTS, that._toggleHover);
 
+                text.removeAttr(DISABLED);
                 element.removeAttr(DISABLED);
 
                 upArrow.bind(MOUSEDOWN, function(e) {
@@ -236,32 +236,14 @@
         * numerictextbox.value("10.20");
         */
         value: function(value) {
-            var that = this,
-                options = that.options,
-                format = options.format,
-                decimals = options.decimals,
-                numberFormat = that._format(format),
-                isNotNull;
+            var that = this;
 
             if (value === undefined) {
                 return that._value;
+            } else {
+                that._update(value);
+                that._old = that._value;
             }
-
-            if (decimals === undefined) {
-                decimals = numberFormat.decimals;
-            }
-
-            value = parse(value);
-
-            isNotNull = value !== NULL;
-
-            if (isNotNull) {
-                value = parseFloat(value.toFixed(decimals));
-            }
-
-            that._value = value = that._adjust(value);
-            that._text.val(isNotNull ? kendo.toString(value, format) : options.empty);
-            that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "");
         },
 
         _adjust: function(value) {
@@ -343,7 +325,7 @@
         _change: function(value) {
             var that = this;
 
-            that.value(value);
+            that._update(value);
             value = that._value;
 
             if (that._old != value) {
@@ -388,13 +370,15 @@
                 wrapper = that.wrapper,
                 text;
 
-            element.type = "text";
 
             text = wrapper.find(POINT + CLASSNAME);
 
             if (!text[0]) {
                 text = $("<input />").insertBefore(element).addClass(CLASSNAME);
             }
+
+            element.type = "text";
+            text[0].type = "text";
 
             text[0].style.cssText = element.style.cssText;
             that._text = text.attr("readonly", true).addClass(element.className);
@@ -421,7 +405,7 @@
                 value = element.value;
             setTimeout(function() {
                 if (parse(element.val()) === NULL) {
-                    that.value(value);
+                    that._update(value);
                 }
             });
         },
@@ -485,8 +469,7 @@
 
             value += that.options.step * parse(step);
 
-            value = that._adjust(value);
-            that.value(value);
+            that._update(that._adjust(value));
         },
 
         _toggleHover: function(e) {
@@ -501,6 +484,31 @@
             toggle = !!toggle;
             that._text.toggle(toggle);
             that.element.toggle(!toggle);
+        },
+
+        _update: function(value) {
+            var that = this,
+                options = that.options,
+                format = options.format,
+                decimals = options.decimals,
+                numberFormat = that._format(format),
+                isNotNull;
+
+            if (decimals === undefined) {
+                decimals = numberFormat.decimals;
+            }
+
+            value = parse(value);
+
+            isNotNull = value !== NULL;
+
+            if (isNotNull) {
+                value = parseFloat(value.toFixed(decimals));
+            }
+
+            that._value = value = that._adjust(value);
+            that._text.val(isNotNull ? kendo.toString(value, format) : options.empty);
+            that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "");
         },
 
         _wrapper: function() {
