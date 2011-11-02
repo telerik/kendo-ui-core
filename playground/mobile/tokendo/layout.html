@@ -47,24 +47,6 @@
 
                 <div class="k-content">
                     <div class="k-contentIn">
-                        Show message: <input type="checkbox" id="toggle" />
-                        <input id="checky" type="checkbox" />
-                        <div id="radio">
-                            <label for="radio1">Test 1</label>
-                            <input id="radio1" type="radio" name="three" />
-                            <label>Test 2
-                                <input type="radio" name="three" />
-                            </label>
-                        </div>
-                        <label for="radioz">Test 1</label>
-                        <input id="radioz" type="radio" name="two" />
-                        <label>Test 2
-                            <input type="radio" name="two" />
-                        </label>
-                        <input type="radio" name="two" />
-                        <br><br>
-                        <button id="button">Select Random Radio</button>
-
                         <ul data-kendo-role="listview">
                             <li>Airplane Mode <input type="checkbox" data-kendo-role="switch" /></li>
                             <li>Hot Balloon Mode <input type="checkbox" data-kendo-role="switch" /></li>
@@ -101,6 +83,24 @@
                                 </ul>
                             </li>
                         </ul>
+
+                        Show message: <input type="checkbox" id="toggle" />
+                        <input id="checky" type="checkbox" />
+                        <div id="radio">
+                            <label for="radio1">Test 1</label>
+                            <input id="radio1" type="radio" name="three" />
+                            <label>Test 2
+                                <input type="radio" name="three" />
+                            </label>
+                        </div>
+                        <label for="radioz">Test 1</label>
+                        <input id="radioz" type="radio" name="two" />
+                        <label>Test 2
+                            <input type="radio" name="two" />
+                        </label>
+                        <input type="radio" name="two" />
+                        <br><br>
+                        <button id="button">Select Random Radio</button>
                     </div>
                 </div>
             </div>
@@ -149,20 +149,9 @@
             listviews
                     .addClass("k-listview")
                     .find("li:not(:has(ul))")
-                    .addClass("k-item")
                     .parent("ul")
                     .addClass("k-list");
 
-            listviews
-                    .children("li:not(.k-item)")
-                    .contents(":not(.k-list)")
-                    .filter(function() { return $.trim($(this).text()) != ""; })
-                    .wrap("<span class='k-list-title'/>");
-
-            listviews
-                    .find(".k-item")
-                    .contents(":not(label):not(div)")
-                    .wrap("<span class='k-text'/>");
             $("[data-kendo-display=group]").addClass("k-listgroup");
         });
 
