@@ -240,10 +240,10 @@
 
             if (value === undefined) {
                 return that._value;
-            } else {
-                that._update(value);
-                that._old = that._value;
             }
+
+            that._update(value);
+            that._old = that._value;
         },
 
         _adjust: function(value) {
@@ -529,7 +529,7 @@
     });
 
     function buttonHtml(className, text) {
-        return '<span class="k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span>'
+        return '<span unselectable="on" class="k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span>'
     }
 
     function caret(element, position) {
