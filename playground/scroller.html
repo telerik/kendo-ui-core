@@ -135,6 +135,7 @@
 
         $(document).ready(function () {
             var button = $(".k-list button").kendoMobileButton({ click: onClick });
+            $(".k-contentIn").data("kendoScroller").bind("scroll", function(e) { console.log(e.x, e.y) });
         });
     </script>
 </body>

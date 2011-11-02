@@ -340,6 +340,10 @@
             Widget.fn.init.call(that, element, options);
 
             if (!support.mobileOS && !that.options.useOnDesktop) {
+                that.element.bind("scroll", function() {
+                    that.trigger("scroll", {x: that.element.scrollLeft(), y: that.element.scrollTop()});
+                });
+
                 return;
             }
 
@@ -354,8 +358,12 @@
             transform = {x: 0, y: 0};
 
             function updateTransform(property, value) {
-                transform[property] = value;
-                scrollElement[0].style[TRANSFORMSTYLE] = to3DProperty(transform.x + PX + "," + transform.y + PX);
+                value = round(value);
+                if (value !== transform[property]) {
+                    transform[property] = value;
+                    scrollElement[0].style[TRANSFORMSTYLE] = to3DProperty(transform.x + PX + "," + transform.y + PX);
+                    that.trigger("scroll", {x: -transform.x, y: -transform.y});
+                }
             }
 
             Axis(scrollElement, "Width", updateTransform);
