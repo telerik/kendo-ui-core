@@ -8,92 +8,107 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
         <style>
-            ul[data-kendo-role=listview],
-            ul[data-kendo-role=listsection]
+            body
             {
-                list-style:none;
-                padding:0;
+                font: normal 0.95em Helvetica Neue, sans-serif;
+                background: silver;
+                padding: 0;
+                margin: 0;
+            }
+
+            .k-listview, .k-list
+            {
+                padding: 0;
+                margin:0;
+            }
+
+            .k-list
+            {
+                list-style: none;
                 background: white;
             }
 
-            ul[data-kendo-role=listview] li
+            .k-list > li
             {
-                border-bottom: 1px solid black;
+                line-height: 1.6em;
+                font-size: 1.2em;
+                font-weight: bold;
+                border-bottom: 1px solid #E9E9E9;
+                padding: .6em .6em .6em .8em;
             }
 
-            ul[data-kendo-role=listview] li:last-child
+            .k-listinset,
+            .k-listinsetgroup .k-list
             {
-                border: none;
+                -webkit-border-radius: 10px;
+                margin: 1em;
             }
 
-            .k-section-title
+            .k-listinset > li:last-child,
+            .k-listinsetgroup .k-list > li:last-child
             {
-                background: blue;
+                border-bottom: 0;
             }
 
-            .k-listview-group li
+            .k-listgroup > li
             {
-                color: black;
-                border: none;
+                padding: .2em 0 0;
+                text-indent: .8em;
+                border-top: 1px solid #C5CFD6;
+                background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(136, 152, 165, 1)), color-stop(1, rgba(172, 184, 196, 1)));
+                box-shadow: 0 -1px 0 #78858e;
             }
 
-            ul.k-listview-group
+            .k-listinsetgroup > li
             {
-                background: blue;
-                color: white;
-                padding: 5px;
-            }
-
-            .k-listview-group ul
-            {
-                border: 1px solid black;
-                background: white;
-                -webkit-border-radius: 5px;
+                line-height: 1.65em;
+                text-indent: .8em;
+                text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
             }
         </style>
     </head>
     <body>
-        <h1>Regular listview</h1>
-        <ul data-kendo-role="listview">
-            <li>Austria</li>
-            <li>Bulgaria</li>
-            <li>Germany</li>
+        <h3>Plain-style list view</h3>
+        <ul data-kendo-role="listview" class="k-listview k-list">
+            <li>Albania</li>
+            <li>Algeria</li>
+            <li>Australia</li>
         </ul>
-        <h1>Regular listview with sections</h1>
-        <ul data-kendo-role="listview">
-            <li class="k-section-title">
-                Europe
-                <ul data-kendo-role="listsection">
-                    <li>Austria</li>
-                    <li>Bulgaria</li>
-                    <li>Germany</li>
+        <h3>Inset-style list view</h3>
+        <ul data-kendo-role="listview" data-kendo-style="inset" class="k-listview k-list k-listinset">
+            <li>Albania</li>
+            <li>Algeria</li>
+            <li>Australia</li>
+        </ul>
+        <h3>Plain-style list view with groups</h3>
+        <ul data-kendo-role="listview" data-kendo-type="group" class="k-listview k-listgroup">
+            <li>A
+                <ul class="k-list">
+                    <li>Albania</li>
+                    <li>Algeria</li>
+                    <li>Australia</li>
                 </ul>
             </li>
-            <li class="k-section-title">
-                Asia
-                <ul data-kendo-role="listsection">
-                    <li>China</li>
-                    <li>India</li>
-                    <li>Korea</li>
+            <li>B
+                <ul class="k-list">
+                    <li>Bangladesh</li>
+                    <li>Bulgaria</li>
                 </ul>
             </li>
         </ul>
-        <h1>Grouped listview</h1>
-        <ul data-kendo-role="listview" class="k-listview-group" >
-            <li>
-                Europe
-                <ul data-kendo-role="listsection">
-                    <li>Austria</li>
-                    <li>Bulgaria</li>
-                    <li>Germany</li>
+        <h3>Inset-style list view with groups</h3>
+        <ul data-kendo-role="listview" data-kendo-type="group" data-kendo-style="inset" class="k-listview k-listinsetgroup">
+            <li>A
+                <ul class="k-list">
+                    <li>Albania</li>
+                    <li>Algeria</li>
+                    <li>Australia</li>
                 </ul>
             </li>
-            <li>
-                Asia
-                <ul data-kendo-role="listsection">
-                    <li>China</li>
-                    <li>India</li>
-                    <li>Korea</li>
+            <li>B
+                <ul class="k-list">
+                    <li>Bangladesh</li>
+                    <li>Bulgaria</li>
                 </ul>
             </li>
         </ul>
