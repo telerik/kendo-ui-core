@@ -19,66 +19,71 @@
             var that = this,
                 contentSelector = roleSelector("content");
 
-            that.element = element.data("kendoView", that);
+            that.element = element.data("kendoView", that).addClass("k-mobile-view");
 
-            if (element.has(contentSelector).length === 0) {
+            that.header = element.find(roleSelector("header")).addClass("k-mobile-header");
+            that.footer = element.find(roleSelector("footer")).addClass("k-mobile-footer");
+
+            if (!element.has(contentSelector)[0]) {
               element.wrapInner("<div " + kendo.dataRole + '="content"></div>');
             }
 
             that.content = element.find(roleSelector("content")).addClass("k-mobile-content");
-            that.header = element.find(roleSelector("header")).addClass("k-mobile-header");
-            that.footer = element.find(roleSelector("footer")).addClass("k-mobile-footer");
-
-            element.addClass("k-mobile-view").prepend(that.header).append(that.footer);
+            that.element.prepend(that.header).append(that.footer);
         },
 
         replace: function(view) {
             var that = this,
                 back = that.nextView === view,
-                animationType = (back ? view : that).element.data("kendoTransition");
+                animationType = (back ? view : that).element.data("kendoTransition"),
+                slidingSource = view.content,
+                slidingDestination = that.content,
+                callback = function() { view.element.hide() },
+                myHeader = that.header,
+                myFooter = that.footer,
+                myElement = that.element,
+                viewElement = view.element,
+                viewHeader = view.header,
+                viewFooter = view.footer;
 
-            this.element.css("display", "");
+            myElement.css("display", "");
 
             if (back) {
-              this.element.css("z-index", 0);
-              view.element.css("z-index", 1);
+              myElement.css("z-index", 0);
+              viewElement.css("z-index", 1);
             } else {
-              this.element.css("z-index", 1);
-              view.element.css("z-index", 0);
+              myElement.css("z-index", 1);
+              viewElement.css("z-index", 0);
             }
 
             if (animationType === "slide") {
-                var slidingElements = that.content;
-                var slidingSource = view.content;
-
-                if (!that.header.length) {
-                    slidingSource = slidingSource.add(view.header);
+                if (!myHeader[0]) {
+                    slidingSource = slidingSource.add(viewHeader);
                 }
 
-                if (!that.footer.length) {
-                    slidingSource = slidingSource.add(view.footer);
+                if (!myFooter[0]) {
+                    slidingSource = slidingSource.add(viewFooter);
                 }
 
-                if (!view.header.length) {
-                    slidingElements = slidingElements.add(that.header);
+                if (!viewHeader[0]) {
+                    slidingDestination = slidingDestination.add(myHeader);
                 }
 
-                if (!view.footer.length) {
-                    slidingElements = slidingElements.add(that.footer);
+                if (!viewFooter[0]) {
+                    slidingDestination = slidingDestination.add(myFooter);
                 }
 
-                if (that.header.length && view.header.length) {
-                    view.header.kendoAnimateTo(that.header, {effects: "fade", reverse: back});
+                if (myHeader[0] && viewHeader[0]) {
+                    viewHeader.kendoAnimateTo(myHeader.header, {effects: "fade", reverse: back});
                 }
 
-                if (that.footer.length && view.footer.length) {
-                    view.footer.kendoAnimateTo(that.footer, {effects: "fade", reverse: back});
+                if (myFooter[0] && viewFooter[0]) {
+                    viewFooter.kendoAnimateTo(myFooter, {effects: "fade", reverse: back});
                 }
 
-                slidingSource.kendoAnimateTo(slidingElements, { effects: "slide", reverse: back, complete: function() { view.element.hide() } });
-
+                slidingSource.kendoAnimateTo(slidingDestination, {effects: "slide", reverse: back, complete: callback});
             } else {
-                view.element.kendoAnimateTo(that.element, { effects: animationType, reverse: back, complete: function() { view.element.hide() } });
+                viewElement.kendoAnimateTo(myElement, {effects: animationType, reverse: back, complete: callback});
             }
 
             if (!back) {
