@@ -95,6 +95,65 @@
                     }, 50);
                 });
 
+                asyncTest("series data is cleaned when data source returns empty view", 2, function() {
+                    var dataSource = new kendo.data.DataSource({
+                        data: [{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }]
+                    });
+
+                    createChart({
+                        dataSource: dataSource,
+                        series: [{
+                            field: "sales"
+                        }]
+                    });
+
+                    chart.bind("dataBound", function() {
+                            var series = this.options.series[0];
+                            equal(series.data.length, 0);
+                            equal(series.dataItems.length, 0);
+                            start();
+                        }
+                    );
+
+                    dataSource.query( { filter: { field: "period", operator: "==", value: "Mar" } } );
+                });
+
+                asyncTest("series data is not cleaned when defined inline", 1, function() {
+                    var dataSource = new kendo.data.DataSource({
+                        data: [{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }]
+                    });
+
+                    createChart({
+                        dataSource: dataSource,
+                        series: [{
+                            field: "sales"
+                        }, {
+                            data: [ 1 ]
+                        }]
+                    });
+
+                    chart.bind("dataBound", function() {
+                            var series = this.options.series[1];
+                            equal(series.data.length, 1);
+                            start();
+                        }
+                    );
+
+                    dataSource.query( { filter: { field: "period", operator: "==", value: "Mar" } } );
+                });
+
             })();
         </script>
 
