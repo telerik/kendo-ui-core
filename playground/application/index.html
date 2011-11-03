@@ -7,12 +7,16 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 
         <title>Kendo mobile application</title>
+        <link rel="stylesheet/less" type="text/css" href="../mobile/tokendo/layout.less" />
+        <script src="../mobile/examples/less.js"></script>
 
         <link rel="stylesheet" href="../../playground/mobile/tokendo/scroll-container.css" />
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
         <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
         <script src="../../src/kendo.scroller.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.history.js"></script>
@@ -32,11 +36,12 @@
             html, body {
                 height: 100%;
                 overflow: hidden;
+                background: silver;
             }
 
             header, footer {
                 background: #EBEBEB;
-                padding: 20px 0;
+                padding: 10px 0;
                 text-indent: 30px;
                 width: 100%;
             }
@@ -48,18 +53,19 @@
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
                 height: 100%;
+                width: 100%;
                 overflow: hidden;
                 -webkit-transform: translatez(0);
             }
 
             .k-mobile-content {
                 -webkit-box-flex: 1;
-                background: white;
                 display: block;
                 overflow: auto;
                 overflow-y: auto;
                 overflow-x: visible;
                 position: relative;
+                background: silver;
             }
 
             .k-animation-content-container {
@@ -70,31 +76,46 @@
     <body>
         <article data-kendo-role="view" data-kendo-url="index.html">
 
-        <header data-kendo-role="header"> Our glorious header</header>
+        <header data-kendo-role="header" style="text-align: center"> Settings: <a href="#about" data-kendo-role="button" style="float: right; margin-right: 10px;">About</a></header>
 
-        <div data=kendo-role="content">
-            <a href="view1.html" data-kendo-role="button">Remote View</a> | <a href="#view2" data-kendo-role="button">Local view</a> | <a href="#view3" data-kendo-role="button">Dialog</a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a turpis turpis, cursus porta neque. Suspendisse facilisis vehicula ipsum sed aliquam. Mauris nibh mauris, rutrum sed congue at, accumsan consequat dui. Vivamus mollis, ante nec mollis dictum, arcu leo porta nunc, eu imperdiet nulla leo a risus. Suspendisse tincidunt vestibulum dictum. Etiam tincidunt risus sem, eu varius quam. Sed porttitor vestibulum sapien, non pretium velit cursus lobortis. Cras dapibus lacinia commodo.
+        <div data-kendo-role="content">
 
-            Etiam mattis arcu at nisl semper quis interdum augue hendrerit. Aliquam tellus sapien, tristique non placerat sit amet, blandit nec lectus. Etiam dapibus purus sed turpis aliquam viverra. Nam bibendum ante non mauris tempor ut posuere purus hendrerit. Nam in eleifend lorem. Nam vehicula fringilla erat quis porta. Vestibulum vitae mattis ligula. Vivamus tortor libero, malesuada in varius et, hendrerit in sapien. Suspendisse vel tortor nec augue condimentum lacinia pellentesque vitae dolor. Sed facilisis imperdiet enim, nec aliquam sapien viverra quis. Integer leo arcu, fermentum non fermentum id, semper id nisi. Nullam pellentesque nunc at nisl dignissim tempor. Maecenas aliquet aliquet varius.
-
-            In consequat hendrerit massa consequat molestie. Proin at aliquet orci. Sed sed est vel libero faucibus feugiat. Suspendisse ullamcorper ultrices lorem vitae lobortis. Aliquam fringilla risus eget ligula faucibus posuere in nec eros. Aliquam erat volutpat. Etiam id eros vel massa lacinia aliquam. Mauris dictum venenatis lacus, non tristique tortor ultricies dictum. Integer venenatis est non lorem pharetra consequat. Duis et nisi ac eros fermentum viverra. Cras fermentum blandit tempor. Nullam malesuada lobortis molestie.
-
-            Suspendisse a purus nulla, vel tincidunt dui. Cras tincidunt tempus velit, sed ornare odio vestibulum a. Duis ligula diam, viverra nec consectetur non, tempor sed lacus. Cras viverra interdum sagittis. Nullam accumsan, purus euismod tempus laoreet, est erat vestibulum nunc, at tempus dui odio a ante. Curabitur dictum ligula vitae lectus hendrerit sollicitudin. Quisque ullamcorper magna iaculis lacus bibendum placerat vestibulum sapien varius. Donec sit amet lectus at enim commodo lobortis id in quam.
-
-            In purus nulla, tempor sit amet pharetra a, venenatis sit amet lacus. Nam lobortis mauris in ipsum condimentum a fermentum lacus molestie. Donec porta sollicitudin volutpat. Morbi interdum sodales risus, a molestie lorem euismod quis. Nam sit amet ipsum feugiat purus adipiscing scelerisque. Vivamus in lorem quis sapien congue cursus in vitae augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi neque tellus, accumsan pulvinar rhoncus eu, mollis id metus. Curabitur et sapien quis dui iaculis porttitor ac eget nisi. Maecenas facilisis neque at libero lacinia sed adipiscing mauris feugiat. Donec ac odio sed felis aliquam faucibus rutrum non ligula. Cras nunc nunc, sagittis sit amet venenatis vitae, elementum id ante.</p>
-
-            <a href="view2.html" data-kendo-role="button">View without heder and footer</a>
+            <ul data-kendo-role="listview" data-kendo-style="inset">
+                <li>Airplane mode <a href="#airplane-mode" data-kendo-role="button">On (dialog)</a></li>
+                <li>Wi-Fi <a href="wifis.html" data-kendo-role="button">Select ...</a></li>
+            </ul>
         </div>
 
         <footer data-kendo-role="footer"> Copyright &copy; Telerik 2011; </footer>
 
         </article>
 
-        <article data-kendo-role="view" id="view2" data-kendo-transition="overlay:up">
-        <header data-kendo-role="header">My local header</header>
+        <article data-kendo-role="view" id="airplane-mode" data-kendo-transition="overlay:up">
 
-        <a href="index.html" data-kendo-role="button">Back to view 1</a>
+        <header data-kendo-role="header"><a href="index.html" data-kendo-role="button">Back</a> Airplane mode</header>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a turpis turpis, cursus porta neque. Suspendisse facilisis vehicula ipsum sed aliquam. Mauris nibh mauris, rutrum sed congue at, accumsan consequat dui. Vivamus mollis, ante nec mollis dictum, arcu leo porta nunc, eu imperdiet nulla leo a risus. Suspendisse tincidunt vestibulum dictum. Etiam tincidunt risus sem, eu varius quam. Sed porttitor vestibulum sapien, non pretium velit cursus lobortis. Cras dapibus lacinia commodo.
+
+        Etiam mattis arcu at nisl semper quis interdum augue hendrerit. Aliquam tellus sapien, tristique non placerat sit amet, blandit nec lectus. Etiam dapibus purus sed turpis aliquam viverra. Nam bibendum ante non mauris tempor ut posuere purus hendrerit. Nam in eleifend lorem. Nam vehicula fringilla erat quis porta. Vestibulum vitae mattis ligula. Vivamus tortor libero, malesuada in varius et, hendrerit in sapien. Suspendisse vel tortor nec augue condimentum lacinia pellentesque vitae dolor. Sed facilisis imperdiet enim, nec aliquam sapien viverra quis. Integer leo arcu, fermentum non fermentum id, semper id nisi. Nullam pellentesque nunc at nisl dignissim tempor. Maecenas aliquet aliquet varius.
+
+        In consequat hendrerit massa consequat molestie. Proin at aliquet orci. Sed sed est vel libero faucibus feugiat. Suspendisse ullamcorper ultrices lorem vitae lobortis. Aliquam fringilla risus eget ligula faucibus posuere in nec eros. Aliquam erat volutpat. Etiam id eros vel massa lacinia aliquam. Mauris dictum venenatis lacus, non tristique tortor ultricies dictum. Integer venenatis est non lorem pharetra consequat. Duis et nisi ac eros fermentum viverra. Cras fermentum blandit tempor. Nullam malesuada lobortis molestie.
+
+        Suspendisse a purus nulla, vel tincidunt dui. Cras tincidunt tempus velit, sed ornare odio vestibulum a. Duis ligula diam, viverra nec consectetur non, tempor sed lacus. Cras viverra interdum sagittis. Nullam accumsan, purus euismod tempus laoreet, est erat vestibulum nunc, at tempus dui odio a ante. Curabitur dictum ligula vitae lectus hendrerit sollicitudin. Quisque ullamcorper magna iaculis lacus bibendum placerat vestibulum sapien varius. Donec sit amet lectus at enim commodo lobortis id in quam.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a turpis turpis, cursus porta neque. Suspendisse facilisis vehicula ipsum sed aliquam. Mauris nibh mauris, rutrum sed congue at, accumsan consequat dui. Vivamus mollis, ante nec mollis dictum, arcu leo porta nunc, eu imperdiet nulla leo a risus. Suspendisse tincidunt vestibulum dictum. Etiam tincidunt risus sem, eu varius quam. Sed porttitor vestibulum sapien, non pretium velit cursus lobortis. Cras dapibus lacinia commodo.
+
+        Etiam mattis arcu at nisl semper quis interdum augue hendrerit. Aliquam tellus sapien, tristique non placerat sit amet, blandit nec lectus. Etiam dapibus purus sed turpis aliquam viverra. Nam bibendum ante non mauris tempor ut posuere purus hendrerit. Nam in eleifend lorem. Nam vehicula fringilla erat quis porta. Vestibulum vitae mattis ligula. Vivamus tortor libero, malesuada in varius et, hendrerit in sapien. Suspendisse vel tortor nec augue condimentum lacinia pellentesque vitae dolor. Sed facilisis imperdiet enim, nec aliquam sapien viverra quis. Integer leo arcu, fermentum non fermentum id, semper id nisi. Nullam pellentesque nunc at nisl dignissim tempor. Maecenas aliquet aliquet varius.
+
+        In consequat hendrerit massa consequat molestie. Proin at aliquet orci. Sed sed est vel libero faucibus feugiat. Suspendisse ullamcorper ultrices lorem vitae lobortis. Aliquam fringilla risus eget ligula faucibus posuere in nec eros. Aliquam erat volutpat. Etiam id eros vel massa lacinia aliquam. Mauris dictum venenatis lacus, non tristique tortor ultricies dictum. Integer venenatis est non lorem pharetra consequat. Duis et nisi ac eros fermentum viverra. Cras fermentum blandit tempor. Nullam malesuada lobortis molestie.
+
+        Suspendisse a purus nulla, vel tincidunt dui. Cras tincidunt tempus velit, sed ornare odio vestibulum a. Duis ligula diam, viverra nec consectetur non, tempor sed lacus. Cras viverra interdum sagittis. Nullam accumsan, purus euismod tempus laoreet, est erat vestibulum nunc, at tempus dui odio a ante. Curabitur dictum ligula vitae lectus hendrerit sollicitudin. Quisque ullamcorper magna iaculis lacus bibendum placerat vestibulum sapien varius. Donec sit amet lectus at enim commodo lobortis id in quam.</p>
+
+        </article>
+
+        <article data-kendo-role="view" id="about" data-kendo-transition="zoom">
+        <header data-kendo-role="header">About <a href="index.html" data-kendo-role="button" style="float: right; margin-right: 10px">Back</a> </header>
+
+
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a turpis turpis, cursus porta neque. Suspendisse facilisis vehicula ipsum sed aliquam. Mauris nibh mauris, rutrum sed congue at, accumsan consequat dui. Vivamus mollis, ante nec mollis dictum, arcu leo porta nunc, eu imperdiet nulla leo a risus. Suspendisse tincidunt vestibulum dictum. Etiam tincidunt risus sem, eu varius quam. Sed porttitor vestibulum sapien, non pretium velit cursus lobortis. Cras dapibus lacinia commodo.
 
         Etiam mattis arcu at nisl semper quis interdum augue hendrerit. Aliquam tellus sapien, tristique non placerat sit amet, blandit nec lectus. Etiam dapibus purus sed turpis aliquam viverra. Nam bibendum ante non mauris tempor ut posuere purus hendrerit. Nam in eleifend lorem. Nam vehicula fringilla erat quis porta. Vestibulum vitae mattis ligula. Vivamus tortor libero, malesuada in varius et, hendrerit in sapien. Suspendisse vel tortor nec augue condimentum lacinia pellentesque vitae dolor. Sed facilisis imperdiet enim, nec aliquam sapien viverra quis. Integer leo arcu, fermentum non fermentum id, semper id nisi. Nullam pellentesque nunc at nisl dignissim tempor. Maecenas aliquet aliquet varius.
@@ -102,23 +123,13 @@
         In consequat hendrerit massa consequat molestie. Proin at aliquet orci. Sed sed est vel libero faucibus feugiat. Suspendisse ullamcorper ultrices lorem vitae lobortis. Aliquam fringilla risus eget ligula faucibus posuere in nec eros. Aliquam erat volutpat. Etiam id eros vel massa lacinia aliquam. Mauris dictum venenatis lacus, non tristique tortor ultricies dictum. Integer venenatis est non lorem pharetra consequat. Duis et nisi ac eros fermentum viverra. Cras fermentum blandit tempor. Nullam malesuada lobortis molestie.
 
         Suspendisse a purus nulla, vel tincidunt dui. Cras tincidunt tempus velit, sed ornare odio vestibulum a. Duis ligula diam, viverra nec consectetur non, tempor sed lacus. Cras viverra interdum sagittis. Nullam accumsan, purus euismod tempus laoreet, est erat vestibulum nunc, at tempus dui odio a ante. Curabitur dictum ligula vitae lectus hendrerit sollicitudin. Quisque ullamcorper magna iaculis lacus bibendum placerat vestibulum sapien varius. Donec sit amet lectus at enim commodo lobortis id in quam.
-
-        <footer data-kendo-role="footer">My local footer</footer>
         </article>
 
-        <article data-kendo-role="view" id="view3" data-kendo-transition="zoom">
-        <header data-kendo-role="header">My local header</header>
-
-        <a href="index.html" data-kendo-role="button">Back to view 1</a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a turpis turpis, cursus porta neque. Suspendisse facilisis vehicula ipsum sed aliquam. Mauris nibh mauris, rutrum sed congue at, accumsan consequat dui. Vivamus mollis, ante nec mollis dictum, arcu leo porta nunc, eu imperdiet nulla leo a risus. Suspendisse tincidunt vestibulum dictum. Etiam tincidunt risus sem, eu varius quam. Sed porttitor vestibulum sapien, non pretium velit cursus lobortis. Cras dapibus lacinia commodo.
-
-        Etiam mattis arcu at nisl semper quis interdum augue hendrerit. Aliquam tellus sapien, tristique non placerat sit amet, blandit nec lectus. Etiam dapibus purus sed turpis aliquam viverra. Nam bibendum ante non mauris tempor ut posuere purus hendrerit. Nam in eleifend lorem. Nam vehicula fringilla erat quis porta. Vestibulum vitae mattis ligula. Vivamus tortor libero, malesuada in varius et, hendrerit in sapien. Suspendisse vel tortor nec augue condimentum lacinia pellentesque vitae dolor. Sed facilisis imperdiet enim, nec aliquam sapien viverra quis. Integer leo arcu, fermentum non fermentum id, semper id nisi. Nullam pellentesque nunc at nisl dignissim tempor. Maecenas aliquet aliquet varius.
-
-        In consequat hendrerit massa consequat molestie. Proin at aliquet orci. Sed sed est vel libero faucibus feugiat. Suspendisse ullamcorper ultrices lorem vitae lobortis. Aliquam fringilla risus eget ligula faucibus posuere in nec eros. Aliquam erat volutpat. Etiam id eros vel massa lacinia aliquam. Mauris dictum venenatis lacus, non tristique tortor ultricies dictum. Integer venenatis est non lorem pharetra consequat. Duis et nisi ac eros fermentum viverra. Cras fermentum blandit tempor. Nullam malesuada lobortis molestie.
-
-        Suspendisse a purus nulla, vel tincidunt dui. Cras tincidunt tempus velit, sed ornare odio vestibulum a. Duis ligula diam, viverra nec consectetur non, tempor sed lacus. Cras viverra interdum sagittis. Nullam accumsan, purus euismod tempus laoreet, est erat vestibulum nunc, at tempus dui odio a ante. Curabitur dictum ligula vitae lectus hendrerit sollicitudin. Quisque ullamcorper magna iaculis lacus bibendum placerat vestibulum sapien varius. Donec sit amet lectus at enim commodo lobortis id in quam.
-
-        <footer data-kendo-role="footer">My local footer</footer>
-        </article>
+        <script>
+            kendo.application.bind("viewInit", function(e) {
+                var view = e.view;
+                view.element.find("#wifis").kendoMobileListView({style: "inset", dataSource: ["T2H2", "T3M1", "Get off my lawn!", "MVCTeamWiFi", "Elvis is alive"]});
+            });
+        </script>
     </body>
 </html>
