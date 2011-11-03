@@ -19,9 +19,11 @@
 .k-autocomplete,
 .k-dropdown-wrap,
 .k-picker-wrap,
+.k-numeric-wrap,
 .k-autocomplete.k-state-hover,
 .k-dropdown-wrap.k-state-hover,
-.k-picker-wrap.k-state-hover
+.k-picker-wrap.k-state-hover,
+.k-numeric-wrap.k-state-hover
 {
     background-repeat: repeat-x;
     background-position: 0 center;
@@ -1478,6 +1480,7 @@ html body .k-grid tbody .k-button-icon
 /* ComboBox & DropDownList */
 
 div.k-datepicker,
+span.k-numerictextbox,
 div.k-combobox,
 div.k-dropdown
 {
@@ -1487,6 +1490,7 @@ div.k-dropdown
 .k-autocomplete,
 .k-combobox,
 .k-datepicker,
+.k-numerictextbox,
 .k-dropdown,
 .k-selectbox
 {
@@ -1501,7 +1505,8 @@ div.k-dropdown
 
 .k-autocomplete,
 .k-dropdown-wrap,
-.k-picker-wrap
+.k-picker-wrap,
+.k-numeric-wrap
 {
     position: relative;
     cursor: default;
@@ -1509,6 +1514,11 @@ div.k-dropdown
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
+}
+
+.k-numeric-wrap
+{
+    display: inline-block;
 }
 
 .k-calendar-container .k-header
@@ -1544,7 +1554,8 @@ div.k-dropdown
 .k-list-container.k-state-border-up,
 .k-autocomplete.k-state-border-up,
 .k-dropdown-wrap.k-state-border-up,
-.k-picker-wrap.k-state-border-up
+.k-picker-wrap.k-state-border-up,
+.k-numeric-wrap.k-state-border-up
 {
     border-top: 0;
     padding-top: 3px;
@@ -1557,7 +1568,8 @@ div.k-dropdown
 .k-list-container.k-state-border-down,
 .k-autocomplete.k-state-border-down,
 .k-dropdown-wrap.k-state-border-down,
-.k-picker-wrap.k-state-border-down
+.k-picker-wrap.k-state-border-down,
+.k-numeric-wrap.k-state-border-down
 {
     border-bottom: 0;
     padding-bottom: 3px;
@@ -1579,7 +1591,8 @@ div.k-dropdown
 
 .k-autocomplete,
 .k-dropdown-wrap,
-.k-picker-wrap
+.k-picker-wrap,
+.k-numeric-wrap
 {
     border-width: 1px;
     border-style: solid;
@@ -1595,7 +1608,9 @@ div.k-dropdown
 .k-dropdown-wrap.k-state-focused,
 .k-dropdown-wrap.k-state-hover,
 .k-picker-wrap.k-state-focused,
-.k-picker-wrap.k-state-hover
+.k-picker-wrap.k-state-hover,
+.k-numeric-wrap.k-state-focused,
+.k-numeric-wrap.k-state-hover
 {
     -webkit-transition: -webkit-box-shadow .15s ease-out;
     -moz-transition: -moz-box-shadow .15s ease-out;
@@ -1605,6 +1620,7 @@ div.k-dropdown
 }
 
 .k-picker-wrap .k-input,
+.k-numeric-wrap .k-input,
 .k-combobox .k-input
 {
     width: 100%;
@@ -1612,6 +1628,7 @@ div.k-dropdown
 }
 
 .k-picker-wrap .k-input,
+.k-numeric-wrap .k-input,
 .k-dropdown-wrap .k-input,
 .k-selectbox .k-input
 {
@@ -1626,9 +1643,10 @@ div.k-dropdown
     background: transparent;
 }
 
-*+html .k-picker-wrap .k-input, *+html .k-combobox .k-input { margin: -1px 0; } /* removes excessive spacing */
+*+html .k-picker-wrap .k-input, *+html .k-numeric-wrap .k-input, *+html .k-combobox .k-input { margin: -1px 0; } /* removes excessive spacing */
 
 .k-picker-wrap .k-select,
+.k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
     position: absolute; /* icon positioning */
@@ -1641,14 +1659,16 @@ div.k-dropdown
 }
 
 .k-combobox .k-select,
-.k-picker-wrap .k-select
+.k-picker-wrap .k-select,
+.k-numeric-wrap .k-select
 {
     border-style: solid;
     border-width: 0;
     border-color: inherit; /* skin-related, inherit does not work in ie7- */
 }
 
-.k-picker-wrap .k-select
+.k-picker-wrap .k-select,
+.k-numeric-wrap .k-select
 {
     padding: 0 2px;
 }
@@ -1702,6 +1722,7 @@ div.k-datetimepicker .k-select+.k-select
 }
 
 .k-picker-wrap .k-select,
+.k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
     position: absolute;
@@ -1715,9 +1736,16 @@ div.k-datetimepicker .k-select+.k-select
     height: 18px;
 }
 
+.k-numeric-wrap .k-icon
+{
+    height: 11px;
+}
+
 .k-autocomplete .k-input,
 .k-dropdown-wrap .k-input,
-.k-picker-wrap .k-input
+.k-picker-wrap .k-input,
+.k-numeric-wrap .k-input,
+.k-numeric-wrap .k-link
 {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -1726,6 +1754,7 @@ div.k-datetimepicker .k-select+.k-select
 
 .k-autocomplete .k-input,
 .k-picker-wrap .k-input,
+.k-numeric-wrap .k-input,
 .k-combobox .k-input
 {
     min-height: 1.35em;
@@ -1737,6 +1766,7 @@ div.k-datetimepicker .k-select+.k-select
 }
 
 .k-picker-wrap .k-select,
+.k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
     min-height: 1.35em;
@@ -1747,6 +1777,7 @@ div.k-datetimepicker .k-select+.k-select
 
 .k-dropdown-wrap .k-select,
 .k-picker-wrap .k-select,
+.k-numeric-wrap .k-select,
 .k-datetimepicker .k-select+.k-select
 {
     -moz-border-radius: 0 4px 4px 0;
@@ -2113,13 +2144,9 @@ div.k-treeview
 
 /* NumericTextBox */
 
-div.k-numerictextbox
+span.k-numerictextbox
 {
-    display: inline-block;
-    vertical-align: middle;
-    border: 0;
     background: transparent;
-    white-space: nowrap;
 }
 
 .k-numerictextbox .k-input /*alignment of arrows in WebKit*/
@@ -2129,31 +2156,26 @@ div.k-numerictextbox
 
 .k-formatted-value
 {
+    
 }
 
-.k-numerictextbox .k-icon
+.k-numerictextbox .k-select 
 {
-    margin-left: -16px;
+    padding-top:1px;
+    padding-bottom:1px;
 }
 
 .k-numerictextbox .k-link
 {
-    display: inline-block;
+    display: block;
+    height: 11px;
+    line-height: 11px;
     border-width: 0;
 }
 
-.k-numerictextbox .k-arrow-up
+.k-numerictextbox .k-icon
 {
-    height: 10px;
-    margin-top: 1px;
     vertical-align: top;
-}
-
-.k-numerictextbox .k-arrow-down
-{
-    height: 11px;
-    margin-bottom: 1px;
-    vertical-align: bottom;
 }
 
 /* ColorPicker */
@@ -3550,10 +3572,10 @@ div.k-chart
 *+html .k-dropdown,
 *+html .k-selectbox,
 *+html .k-picker-wrap .k-select,
-*+html .k-dropdown-wrap .k-select,
+*+html .k-dropdown-wrap .k-select
 
-*+html div.k-numerictextbox,
-*+html .k-numerictextbox .k-link,
+*+html .k-numerictextbox,
+*+html .k-numeric-wrap
 
 *+html .k-timepicker,
 *+html .k-datepicker,
