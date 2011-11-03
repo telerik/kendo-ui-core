@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid Deleting</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.pageable.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.groupable.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.validatable.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Grid Deleting</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                table,
+                DataSource = kendo.data.DataSource,
+                Model = kendo.data.Model,
+                dataSource;
+
+            function setup(options) {
+                options = $.extend({}, {
+                editable: true,
+                dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "foo",
+                                fields: {
+                                    name: "name",
+                                    foo: "foo"
+                                }
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                    })
+                }, options);
+                dataSource = options.dataSource;
+
+                return table.kendoGrid(options).data("kendoGrid");
+            }
+
+            module("grid deleting", {
+                setup: function() {
+                    table = document.createElement("table");
+                    document.body.appendChild(table);
+
+                    table = $(table);
+                },
+                teardown: function() {
+                    table.closest(".k-grid").remove();
+                }
+            });
+
+            test("deleteRow calls DataSource remove method", function() {
+                var grid = setup();
+                var removeMethod = stub(dataSource, "remove");
+
+                grid.deleteRow(table.find("tbody>tr:first"));
+
+                ok(removeMethod.calls("remove"));
+                ok(removeMethod.args("remove", 0)[0] instanceof Model);
+                equal(removeMethod.args("remove", 0)[0].get("foo"), "bar");
+            });
+
+            test("deleteRow with html element as argument calls DataSource remove method", function() {
+                var grid = setup();
+
+                var removeMethod = stub(dataSource, "remove");
+
+                grid.deleteRow(table.find("tbody>tr:first")[0]);
+
+                ok(removeMethod.calls("remove"));
+                ok(removeMethod.args("remove", 0)[0] instanceof Model);
+                equal(removeMethod.args("remove", 0)[0].get("foo"), "bar");
+            });
+
+            test("deleteRow hides coresponding row from the grid", function() {
+                var grid = setup();
+
+                var tr = table.find("tbody>tr:first");
+
+                grid.deleteRow(tr);
+
+                ok(!tr.is(":visible"));
+            });
+
+            test("deleteRow does not call DataSource remove method if not existing row", function() {
+                var grid = setup();
+                var removeMethod = stub(dataSource, "remove");
+
+                grid.deleteRow($("<tr />"));
+
+                ok(!removeMethod.calls("remove"));
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
