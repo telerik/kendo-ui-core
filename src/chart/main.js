@@ -346,6 +346,14 @@
                 categoryAxis = options.categoryAxis,
                 data = chart.dataSource.view();
 
+            for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
+                var currentSeries = series[seriesIdx];
+                if (currentSeries.field) {
+                    currentSeries.data = [];
+                    currentSeries.dataItems = [];
+                }
+            }
+
             for (var dataIdx = 0, dataLength = data.length; dataIdx < dataLength; dataIdx++) {
                 var row = data[dataIdx];
 
