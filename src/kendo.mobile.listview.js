@@ -5,22 +5,32 @@
 
     var MobileListView = MobileWidget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                grouped,
+                inset;
 
             MobileWidget.fn.init.call(that, element, options);
 
-            that.element.addClass("k-listview k-list");
-            if (that.options.display !== "group") {
-                that.element.children()
-                    .addClass("k-item");
-            } else {
-                that.element.children().children("ul").addClass("k-list");
+            grouped = that.options.type === "group";
+            inset = that.options.style === "inset";
+
+            that.element.addClass("k-listview")
+                .toggleClass("k-list", !grouped)
+                .toggleClass("k-listinset", !grouped && inset)
+                .toggleClass("k-listgroup", grouped && !inset)
+                .toggleClass("k-listgroupinset", grouped && inset);
+
+            if (grouped) {
+                that.element
+                    .children()
+                    .children("ul")
+                    .addClass("k-list");
             }
         },
 
         options: {
             name: "MobileListView",
-            display: "flat"
+            type: "flat"
         }
     });
 
