@@ -18,6 +18,8 @@
 
                 ui.ComboBox.fn.init.call(that, element, options);
 
+                that.list.width(84);
+
                 that._updateColorPreview();
 
                 that.bind(CHANGE, proxy(that._colorChange, that));
@@ -171,7 +173,6 @@
                 });
 
                 function changeHandler(e) {
-                    console.log(this.value());
                     that._propertyChange({
                         name: this.element.id,
                         value: this.value()
@@ -232,16 +233,9 @@
 
                 downloadWindowObject.center().open();
 
-                (new less.Parser()).parse(
-                    that.constants.serialize() + that.templateInfo.template,
-                    function (err, tree) {
-                        if (err && console) {
-                            return console.error(err);
-                        }
-
-                        downloadWindow.find("textarea").val(tree.toCSS());
-                    }
-                );
+                that._generateTheme(function(css) {
+                    downloadWindow.find("textarea").val(css);
+                });
             },
             updateMaxHeight: function() {
                 this.content.data(KENDOWINDOW).options.maxHeight = $(window).height() - 100;
@@ -249,21 +243,26 @@
             removeUpdateHeightHandler: function() {
                 $(window).unbind("resize.kendoThemeBuilder");
             },
-            _propertyChange: function(e) {
-                var that = this,
-                    parser = new less.Parser();
-
-                that.constants.update(e.name, e.value);
-
-                parser.parse(that.constants.serialize() + that.templateInfo.template,
+            _generateTheme: function(callback) {
+                (new less.Parser()).parse(
+                    this.constants.serialize() + this.templateInfo.template,
                     function (err, tree) {
                         if (err && console) {
                             return console.error(err);
                         }
 
-                        that.updateStyleSheet(tree.toCSS());
+                        callback(tree.toCSS());
                     }
                 );
+            },
+            _propertyChange: function(e) {
+                var that = this;
+
+                that.constants.update(e.name, e.value);
+
+                that._generateTheme(function(css) {
+                    that.updateStyleSheet(css);
+                });
             },
             updateStyleSheet: function(cssText) {
                 var doc = document,
@@ -335,8 +334,9 @@
 
     ColorPicker.fn.options = $.extend(kendo.ui.ComboBox.fn.options, {
         name: "ColorPicker",
-        template: "<span style='background-color: ${ data.value }' class='k-icon k-color-preview'></span> " +
-                  "<span class='k-color-name'>${ data.text }</span>"
+        template: "<span style='background-color: ${ data.value }' "+
+                        "class='k-icon k-color-preview' " +
+                        "title='${ data.text }'></span> "
     });
 
     kendo.ui.plugin(ColorPicker);
