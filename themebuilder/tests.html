@@ -114,6 +114,21 @@
                 equals(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-arrow-down").css("backgroundColor")), "#ff0000");
             });
 
+            test("change handler is called only once on change", function() {
+                var called = 0;
+
+                colorPicker = $("<input value='#ff0000' />").appendTo(document.body).kendoColorPicker({
+                        change: function() {
+                            called++;
+                        }
+                    });
+
+
+                colorPicker.data("kendoColorPicker").trigger("change");
+
+                equals(called, 1);
+            });
+
             var constant = function(target, property, values){
                     return {
                         target: target,
@@ -271,7 +286,7 @@
                 ok(inferred);
             });
 
-            test("_propertyChanged updates constant", function() {
+            test("_propertyChange updates constant", function() {
                 var color = "#b4d455",
                     constants = new LessConstants({
                         "@foo": constant(".k-widget", "background-color")
@@ -284,6 +299,30 @@
                 });
 
                 equals(constants.constants["@foo"].value, color)
+            });
+
+            test("changing input value triggers _propertyChange", function() {
+                expect(2);
+                var color = "#b4d455",
+                    constants = new LessConstants({
+                        "@foo": constant(".k-widget", "background-color")
+                    }),
+                    themebuilder = new ThemeBuilder(
+                        { template: '' },
+                        constants, {
+                            "Foos": {
+                                constants: /^@/,
+                                labels: {}
+                            }
+                        });
+
+                themebuilder._propertyChange = function(e) {
+                    equals(e.name, "@foo");
+                    equals(e.value, color);
+                };
+
+                themebuilder.element.find("[id='@foo']").val(color)
+                    .data("kendoColorPicker").trigger("change");
             });
 
             module("ColorEngine");

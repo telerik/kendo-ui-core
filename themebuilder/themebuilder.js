@@ -16,15 +16,23 @@
             init: function(element, options) {
                 var that = this;
 
+                if (options && options.change) {
+                    options.colorPickerChange = options.change;
+                    delete options.change;
+                }
+
                 ui.ComboBox.fn.init.call(that, element, options);
 
-                that.list.width(84);
+                that.list.width(210);
+                that.popup.options.origin = "bottom right";
+                that.popup.options.position = "top right";
 
                 that._updateColorPreview();
 
                 that.bind(CHANGE, proxy(that._colorChange, that));
 
-                that.wrapper.addClass("k-colorpicker");
+                that.wrapper.addClass("k-colorpicker")
+                    .find(".k-colorpicker").removeClass(".k-colorpicker");
             },
 
             _colorChange: function(e) {
@@ -33,8 +41,8 @@
                 that._updateColorPreview();
 
                 // trigger change event?
-                if (that.options.change) {
-                    that.options.change.call(that, {
+                if (that.options.colorPickerChange) {
+                    that.options.colorPickerChange.call(that, {
                         name: that.element.attr("id"),
                         value: that.element.val()
                     });
@@ -167,14 +175,15 @@
                     .wrap("<div id='k-tb-wrap' />");
 
                 themeColorsDataSource = new kendo.data.DataSource({
-                    data: constants ? constants.colors().map(function(x) {
+                    data: $.map(("#c00000,#ff0000,#ffc000,#ffff00,#92d050,#00b050,#00b0f0,#0070c0,#002060,#7030a0," + 
+                                 "#ffffff,#e3e3e3,#c4c4c4,#a8a8a8,#8a8a8a,#6e6e6e,#525252,#363636,#1a1a1a,#000000").split(","), function(x) {
                         return { text: x, value: x };
-                    }) : []
+                    })
                 });
 
                 function changeHandler(e) {
                     that._propertyChange({
-                        name: this.element.id,
+                        name: this.element[0].id,
                         value: this.value()
                     });
                 }
