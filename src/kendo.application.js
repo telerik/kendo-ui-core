@@ -74,7 +74,7 @@
                 }
 
                 if (myHeader[0] && viewHeader[0]) {
-                    viewHeader.kendoAnimateTo(myHeader.header, {effects: "fade", reverse: back});
+                    viewHeader.kendoAnimateTo(myHeader, {effects: "fade", reverse: back});
                 }
 
                 if (myFooter[0] && viewFooter[0]) {
