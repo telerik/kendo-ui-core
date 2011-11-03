@@ -1,4 +1,4 @@
-.touch-scrollbar
+.k-touch-scrollbar
 {
     position: absolute;
     visibility: hidden;
@@ -19,14 +19,14 @@
     border-radius: .4em;
 }
 
-.vertical-scrollbar
+.k-vertical-scrollbar
 {
     height: 100%;
     right: 1px;
     top: 0;
 }
 
-.horizontal-scrollbar
+.k-horizontal-scrollbar
 {
     width: 100%;
     left: 0;
