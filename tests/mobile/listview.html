@@ -1,6 +1,7 @@
 <!DOCTYPE dom>
 <html>
     <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>kendo.ui.MobileListView Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
@@ -42,39 +43,48 @@
 
                 ok(dom.is(".k-listview"), "Css class is applied");
                 ok(dom.is(".k-list"), "Css class is applied");
+                ok(!dom.is(".k-listgroup"), "Css class is not applied");
             });
 
-            test("applies css classes to items", function() {
-                var dom = $("<ul><li/></ul>");
+            test("applies inset css classes", function() {
+                var dom = $("<ul/>");
 
-                new ListView(dom);
+                new ListView(dom, { style: "inset" });
 
-                ok(dom.find("li").is(".k-item"), "Css class is applied");
+                ok(dom.is(".k-listview"), "Css class is applied");
+                ok(dom.is(".k-list"), "Css class is applied");
+                ok(dom.is(".k-listinset"), "Css class is applied");
             });
 
-            test("does not apply css classes to items when displayed as group", function() {
-                var dom = $("<ul><li/></ul>");
+            test("applies group css classes", function() {
+                var dom = $("<ul/>");
 
-                new ListView(dom, { display: "group" });
+                new ListView(dom, { type: "group" });
 
-                ok(!dom.find("li").is(".k-item"), "Css class is not applied");
+                ok(dom.is(".k-listview"), "Css class is applied");
+                ok(dom.is(".k-listgroup"), "Css class is applied");
+                ok(!dom.is(".k-list"), "Css class is not applied");
             });
 
-            test("does not apply css classes to items when displayed as group", function() {
-                var dom = $("<ul><li/></ul>");
+            test("applies group and inset css classes", function() {
+                var dom = $("<ul/>");
 
-                new ListView(dom, { display: "group" });
+                new ListView(dom, { type: "group", style: "inset" });
 
-                ok(!dom.find("li").is(".k-item"), "Css class is not applied");
+                ok(dom.is(".k-listview"), "Css class is applied");
+                ok(dom.is(".k-listgroupinset"), "Css class not applied");
+                ok(!dom.is(".k-listgroup"), "Css class is not applied");
+                ok(!dom.is(".k-list"), "Css class is not applied");
             });
 
-            test("applies css classes to child lists when displayed as group", function() {
+            test("applies css class to child lists when grouped", function() {
                 var dom = $("<ul><li><ul/></li></ul>");
 
-                new ListView(dom, { display: "group" });
+                new ListView(dom, { type: "group" });
 
                 ok(dom.find("ul").is(".k-list"), "Css class is applied");
             });
+
         </script>
     </body>
 </html>
