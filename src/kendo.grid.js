@@ -556,8 +556,8 @@
             return $(td).parent().find('td:not(.k-group-cell,.k-hierarchy-cell)').index(td);
         },
 
-        _modelFromCell: function(cell) {
-            var id = cell.closest("tr").data("id");
+        _modelForContainer: function(container) {
+            var id = (container.is("tr") ? container : container.closest("tr")).data("id");
 
             return this.dataSource.get(id);
         },
@@ -605,13 +605,14 @@
                 that.wrapper.bind("focusout", function(e) {
                     that.timer = setTimeout(handler, 1);
                 });
+
             }
         },
 
         _editCell: function(cell) {
             var that = this,
                 column = that.columns[that.cellIndex(cell)],
-                model = that._modelFromCell(cell);
+                model = that._modelForContainer(cell);
 
             if (!model.readOnly(column.field)) {
                 that._editContainer = cell;
@@ -654,6 +655,16 @@
             }
 
             cell.empty().html(tmpl(dataItem));
+        },
+
+        deleteRow: function(row) {
+            var that = this, model;
+
+            row = $(row).hide();
+            model = that._modelForContainer(row);
+            if (model) {
+                that.dataSource.remove(model);
+            }
         },
 
         _groupable: function() {

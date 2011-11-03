@@ -25,7 +25,7 @@
     </head>
     <body>
         <div id="relatedGrid"></div>
-        <div id="grid"></div>
+        <div id="grid" ></div>
         <script>
             var grid,
                 dataSource,
@@ -59,8 +59,10 @@
                     dataSource: dataSource,
                     pageable: true,
                     editable: true,
+                    scrollable: true,
                     columns: ["bar", "foo", "date"]
                 });
+
                 $("#relatedGrid").kendoGrid({
                     dataSource: dataSource,
                     pageable: true
