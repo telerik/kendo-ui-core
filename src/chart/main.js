@@ -247,8 +247,8 @@
                 point;
 
             if (chartElement) {
-                if (chartElement.getSeriesPoint && metadata) {
-                    point = chartElement.getSeriesPoint(coords.x, coords.y, metadata.seriesIx);
+                if (chartElement.getNearestPoint && metadata) {
+                    point = chartElement.getNearestPoint(coords.x, coords.y, metadata.seriesIx);
                 } else {
                     point = chartElement;
                 }
@@ -319,7 +319,7 @@
             if (chart._plotArea.box.containsPoint(coords.x, coords.y)) {
                 if (point && point.series.type === LINE) {
                     owner = point.owner;
-                    seriesPoint = owner.getSeriesPoint(coords.x, coords.y, point.seriesIx);
+                    seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
                         chart._activePoint = seriesPoint;
 
@@ -2386,37 +2386,6 @@
                     callback(value, currentCategory, categoryIx, currentSeries, seriesIx);
                 }
             }
-        },
-
-        getSeriesPoint: function(x, y, seriesIx) {
-            var chart = this,
-                isVertical = chart.options.isVertical,
-                axis = isVertical ? X : Y,
-                pos = isVertical ? x : y,
-                points = chart.seriesPoints[seriesIx],
-                nearestPointDistance = Number.MAX_VALUE,
-                pointsLength = points.length,
-                currentPoint,
-                pointBox,
-                pointDistance,
-                nearestPoint,
-                i;
-
-            for (i = 0; i < pointsLength; i++) {
-                currentPoint = points[i];
-
-                if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null) {
-                    pointBox = currentPoint.box;
-                    pointDistance = math.abs(pointBox.center()[axis] - pos);
-
-                    if (pointDistance < nearestPointDistance) {
-                        nearestPoint = currentPoint;
-                        nearestPointDistance = pointDistance;
-                    }
-                }
-            }
-
-            return nearestPoint;
         }
     });
 
@@ -2767,6 +2736,95 @@
         }
     });
 
+    var LineChartMixin = {
+        createLines: function(view) {
+            var chart = this,
+                options = chart.options,
+                series = options.series,
+                seriesPoints = chart.seriesPoints,
+                currentSeries,
+                seriesIx,
+                seriesCount = seriesPoints.length,
+                currentSeriesPoints,
+                linePoints,
+                point,
+                pointCount,
+                lines = [];
+
+            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
+                currentSeriesPoints = seriesPoints[seriesIx];
+                pointCount = currentSeriesPoints.length;
+                currentSeries = series[seriesIx];
+                linePoints = [];
+
+                for (pointIx = 0; pointIx < pointCount; pointIx++) {
+                    point = currentSeriesPoints[pointIx];
+                    if (point) {
+                        pointCenter = point.markerBox().center();
+                        linePoints.push(new Point2D(pointCenter.x, pointCenter.y));
+                    } else if (currentSeries.missingValues !== INTERPOLATE) {
+                        if (linePoints.length > 1) {
+                            lines.push(
+                                chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx)
+                            );
+                        }
+                        linePoints = [];
+                    }
+                }
+
+                if (linePoints.length > 1) {
+                    lines.push(
+                        chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx));
+                }
+            }
+
+            return lines;
+        },
+
+        createLine: function(lineId, view, points, series, seriesIx) {
+            this.registerId(lineId, { seriesIx: seriesIx });
+            return view.createPolyline(points, false, {
+                id: lineId,
+                stroke: series.color,
+                strokeWidth: series.width,
+                strokeOpacity: series.opacity,
+                fill: "",
+                dashType: series.dashType
+            });
+        },
+
+        getNearestPoint: function(x, y, seriesIx) {
+            var chart = this,
+                isVertical = chart.options.isVertical,
+                axis = isVertical ? X : Y,
+                pos = isVertical ? x : y,
+                points = chart.seriesPoints[seriesIx],
+                nearestPointDistance = Number.MAX_VALUE,
+                pointsLength = points.length,
+                currentPoint,
+                pointBox,
+                pointDistance,
+                nearestPoint,
+                i;
+
+            for (i = 0; i < pointsLength; i++) {
+                currentPoint = points[i];
+
+                if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null) {
+                    pointBox = currentPoint.box;
+                    pointDistance = math.abs(pointBox.center()[axis] - pos);
+
+                    if (pointDistance < nearestPointDistance) {
+                        nearestPoint = currentPoint;
+                        nearestPointDistance = pointDistance;
+                    }
+                }
+            }
+
+            return nearestPoint;
+        }
+    };
+
     var LineChart = CategoricalChart.extend({
         init: function(plotArea, options) {
             var chart = this;
@@ -2837,72 +2895,20 @@
 
         getViewElements: function(view) {
             var chart = this,
-                options = chart.options,
                 elements = CategoricalChart.fn.getViewElements.call(chart, view),
-                series = options.series,
-                currentSeries,
-                seriesIx,
-                seriesPoints = chart.seriesPoints,
-                seriesCount = seriesPoints.length,
-                currentSeriesPoints,
-                pointIx,
-                pointCount,
-                point,
-                pointCenter,
-                linePoints,
-                interpolate,
-                lines = [],
                 group = view.createGroup({
                     animation: {
                         type: CLIP
                     }
-                });
+                }),
+                lines = chart.createLines(view);
 
-            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
-                currentSeriesPoints = seriesPoints[seriesIx];
-                pointCount = currentSeriesPoints.length;
-                currentSeries = series[seriesIx];
-                linePoints = [];
-                interpolate = currentSeries.missingValues === INTERPOLATE;
-
-                for (pointIx = 0; pointIx < pointCount; pointIx++) {
-                    point = currentSeriesPoints[pointIx];
-                    if (point) {
-                        pointCenter = point.markerBox().center();
-                        linePoints.push(new Point2D(pointCenter.x, pointCenter.y));
-                    } else if (!interpolate) {
-                        if (linePoints.length > 1) {
-                            lines.push(
-                                chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx)
-                            );
-                        }
-                        linePoints = [];
-                    }
-                }
-
-                if (linePoints.length > 1) {
-                    lines.push(
-                        chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx)
-                    );
-                }
-            }
 
             group.children = lines.concat(elements);
             return [group];
-        },
-
-        createLine: function(lineId, view, points, series, seriesIx) {
-            this.registerId(lineId, { seriesIx: seriesIx });
-            return view.createPolyline(points, false, {
-                id: lineId,
-                stroke: series.color,
-                strokeWidth: series.width,
-                strokeOpacity: series.opacity,
-                fill: "",
-                dashType: series.dashType
-            });
         }
     });
+    deepExtend(LineChart.fn, LineChartMixin);
 
     var ScatterChart = ChartElement.extend({
         init: function(plotArea, options) {
@@ -3075,111 +3081,21 @@
     });
 
     var ScatterLineChart = ScatterChart.extend({
-        init: function(plotArea, options) {
-            var chart = this;
-
-            ScatterChart.fn.init.call(chart, plotArea, options);
-        },
-
-        options: {
-            series: []
-        },
-
         getViewElements: function(view) {
             var chart = this,
-                options = chart.options,
-                series = options.series,
-                currentSeries,
-                seriesIx,
-                seriesPoints = chart.seriesPoints,
-                seriesCount = seriesPoints.length,
-                currentSeriesPoints,
-                linePoints,
-                point,
-                pointCount,
                 elements = ScatterChart.fn.getViewElements.call(chart, view),
                 group = view.createGroup({
                     animation: {
                         type: CLIP
                     }
                 }),
-                lines = [];
-
-            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
-                currentSeriesPoints = seriesPoints[seriesIx];
-                pointCount = currentSeriesPoints.length;
-                currentSeries = series[seriesIx];
-                linePoints = [];
-                interpolate = currentSeries.missingValues === INTERPOLATE;
-
-                for (pointIx = 0; pointIx < pointCount; pointIx++) {
-                    point = currentSeriesPoints[pointIx];
-                    if (point) {
-                        pointCenter = point.markerBox().center();
-                        linePoints.push(new Point2D(pointCenter.x, pointCenter.y));
-                    } else if (!interpolate) {
-                        if (linePoints.length > 1) {
-                            lines.push(
-                                chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx)
-                            );
-                        }
-                        linePoints = [];
-                    }
-                }
-
-                if (linePoints.length > 1) {
-                    lines.push(
-                        chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx));
-                }
-            }
+                lines = chart.createLines(view);
 
             group.children = lines.concat(elements);
             return [group];
-        },
-
-        createLine: function(lineId, view, points, series, seriesIx) {
-            this.registerId(lineId, { seriesIx: seriesIx });
-            return view.createPolyline(points, false, {
-                id: lineId,
-                stroke: series.color,
-                strokeWidth: series.width,
-                strokeOpacity: series.opacity,
-                fill: "",
-                dashType: series.dashType
-            });
-        },
-
-        getSeriesPoint: function(x, y, seriesIx) {
-            var chart = this,
-                isVertical = chart.options.isVertical,
-                axis = isVertical ? X : Y,
-                pos = isVertical ? x : y,
-                points = chart.seriesPoints[seriesIx],
-                nearestPointDistance = Number.MAX_VALUE,
-                pointsLength = points.length,
-                currentPoint,
-                pointBox,
-                pointDistance,
-                nearestPoint,
-                i;
-
-            for (i = 0; i < pointsLength; i++) {
-                currentPoint = points[i];
-
-                if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null) {
-                    pointBox = currentPoint.box;
-                    pointDistance = math.abs(pointBox.center()[axis] - pos);
-
-                    if (pointDistance < nearestPointDistance) {
-                        nearestPoint = currentPoint;
-                        nearestPointDistance = pointDistance;
-                    }
-                }
-            }
-
-            return nearestPoint;
         }
     });
+    deepExtend(ScatterLineChart.fn, LineChartMixin);
 
     var PieSegment = ChartElement.extend({
         init: function(value, sector, options) {
@@ -3337,19 +3253,6 @@
             );
 
             return elements;
-        },
-
-        registerId: function(id, metadata) {
-            var element = this,
-                root;
-
-            root = element.getRoot();
-            if (root) {
-                root.idMap[id] = element;
-                if (metadata) {
-                    root.idMapMetadata[id] = metadata;
-                }
-            }
         },
 
         getOutlineElement: function(view, options) {
