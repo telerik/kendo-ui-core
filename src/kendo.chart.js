@@ -343,7 +343,11 @@
                 options = chart.options,
                 series = options.series,
                 categoryAxis = options.categoryAxis,
-                data = chart.dataSource.view();
+                data = chart.dataSource.view(),
+                row,
+                category,
+                currentSeries,
+                value;
 
             for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
                 var currentSeries = series[seriesIdx];
@@ -354,10 +358,10 @@
             }
 
             for (var dataIdx = 0, dataLength = data.length; dataIdx < dataLength; dataIdx++) {
-                var row = data[dataIdx];
+                row = data[dataIdx];
 
                 if (categoryAxis.field) {
-                    var category = getter(categoryAxis.field, true)(row);
+                    category = getter(categoryAxis.field, true)(row);
                     if (dataIdx === 0) {
                         categoryAxis.categories = [category];
                     } else {
@@ -366,10 +370,15 @@
                 }
 
                 for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
-                    var currentSeries = series[seriesIdx],
-                        value = getter(currentSeries.field, true)(row);
+                    currentSeries = series[seriesIdx];
 
                     if (currentSeries.field) {
+                        value = getter(currentSeries.field, true)(row);
+                    } else if (currentSeries.xField && currentSeries.yField) {
+                        value = [getter(currentSeries.xField, true)(row), getter(currentSeries.yField, true)(row)];
+                    }
+
+                    if (defined(value)) {
                         if (dataIdx === 0) {
                             currentSeries.data = [value];
                             currentSeries.dataItems = [row];
@@ -591,7 +600,7 @@
                 radianAngle = angle * DEGREE,
                 ax = math.cos(radianAngle),
                 ay = math.sin(radianAngle),
-                x = sector.c.x - (ax * sector.r)
+                x = sector.c.x - (ax * sector.r),
                 y = sector.c.y - (ay * sector.r);
 
             return new Point2D(x, y);
@@ -1303,7 +1312,6 @@
                 childrenCount = children.length,
                 labelBox = children[0].box.clone(),
                 markerWidth = legend.markerSize() * 2,
-                labelBox,
                 i;
 
             // Position labels next to each other
@@ -1442,9 +1450,12 @@
                 isVertical = axis.options.orientation === VERTICAL,
                 children = axis.children,
                 tickPositions = axis.getMajorTickPositions(),
-                tickSize = axis.getActualTickSize();
+                tickSize = axis.getActualTickSize(),
+                labelBox,
+                labelY,
+                i;
 
-            for (var i = 0; i < children.length; i++) {
+            for (i = 0; i < children.length; i++) {
                 var label = children[i],
                     tickIx = isVertical ? (children.length - 1 - i) : i,
                     labelSize = isVertical ? label.box.height() : label.box.width(),
@@ -2970,7 +2981,7 @@
         createPoint: function(value, series, seriesIx) {
             var chart = this,
                 options = chart.options,
-                labelsFormat = series.labels.format || "{0}, {1}"
+                labelsFormat = series.labels.format || "{0}, {1}";
 
             if (!defined(value.x) || !defined(value.y)) {
                 return null;
@@ -3055,7 +3066,7 @@
                         pointIx: pointIx,
                         series: currentSeries,
                         seriesIx: seriesIx,
-                        dataItem: dataItems ? dataItems[i] : value,
+                        dataItem: dataItems ? dataItems[pointIx] : value,
                         owner: chart
                     });
                 }
@@ -3416,6 +3427,8 @@
                 data,
                 total,
                 anglePerValue,
+                value,
+                explode,
                 i;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
@@ -3657,7 +3670,8 @@
                 boxY = sector.c.y - (sector.r + labelDistance) - labels[0].box.height(),
                 label,
                 boxX,
-                box;
+                box,
+                i;
 
             distances[0] += 2;
             for (i = 0; i < labelsCount; i++) {
@@ -5127,9 +5141,10 @@
             re,
             processor,
             parts,
+            i,
             channels;
 
-        if(arguments.length === 1) {
+        if (arguments.length === 1) {
             value = color.resolveColor(value);
 
             for (i = 0; i < formats.length; i++) {
@@ -5159,8 +5174,8 @@
         toHex: function() {
             var color = this,
                 pad = color.padDigit,
-                r = color.r.toString(16);
-                g = color.g.toString(16);
+                r = color.r.toString(16),
+                g = color.g.toString(16),
                 b = color.b.toString(16);
 
             return "#" + pad(r) + pad(g) + pad(b);

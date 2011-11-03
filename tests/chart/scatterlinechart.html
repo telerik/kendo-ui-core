@@ -381,6 +381,47 @@
 
             })();
 
+            (function() {
+                var data = [{
+                        xValue: 3,
+                        yValue: 1
+                    }, {
+                        xValue: 2,
+                        yValue: 2
+                    }, {
+                        xValue: 2,
+                        yValue: 2
+                    }],
+                    points;
+
+                // ------------------------------------------------------------
+                module("Scatter Chart / Integration", {
+                    setup: function() {
+                        $("#container").kendoChart({
+                            dataSource: {
+                                data: data
+                            },
+                            series: [{
+                                type: "scatter",
+                                xField: "xValue",
+                                yField: "yValue"
+                            }]
+                        });
+
+                        var chart = $("#container").data("kendoChart");
+                        points = chart._plotArea.charts[0].points;
+                    },
+                    teardown: function() {
+                        $("#container").empty();
+                    }
+                });
+
+                test("gets data from x and y field", function() {
+                    equal(points.length, 3);
+                });
+
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

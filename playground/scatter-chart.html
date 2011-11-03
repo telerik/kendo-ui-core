@@ -20,11 +20,22 @@
                 data2.push([Math.sin(i / 25), Math.cos(i / 10) * 0.5]);
             }
 
+            var data = [{
+                xValue: 3,
+                yValue: 1
+            },{
+                xValue: 2,
+                yValue: 2
+            }];
+
             $(document).ready(function() {
                 $("#container").kendoChart({
                     theme: "hakama",
                     title: {
                         text: "Scatter chart"
+                    },
+                    dataSource: {
+                        data: data
                     },
                     legend: {
                         position: "bottom"
@@ -51,8 +62,9 @@
                             },
                             type: "scatterLine",
                             name: "Plot 1",
-                            data: [null, [1, 1], [2, 2] ],
-                            missingValues: ""
+                            missingValues: "",
+                            xField: "xValue",
+                            yField: "yValue"
                         }
                     ],
                     tooltip: {
