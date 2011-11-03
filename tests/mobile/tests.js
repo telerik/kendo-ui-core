@@ -14,5 +14,9 @@ tests.push(
     {
         page: "mobile/toggle.html",
         title: "mobile toggle button"
-        }
+    },
+    {
+        page: "mobile/listview/index.html",
+        title: "listview"
+    }
 );

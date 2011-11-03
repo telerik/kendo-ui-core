@@ -1,6 +1,7 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        DataSource = kendo.data.DataSource,
         MobileWidget = ui.MobileWidget;
 
     var MobileListView = MobileWidget.extend({
@@ -11,8 +12,9 @@
 
             MobileWidget.fn.init.call(that, element, options);
 
-            grouped = that.options.type === "group";
-            inset = that.options.style === "inset";
+            options = that.options;
+            grouped = options.type === "group";
+            inset = options.style === "inset";
 
             that.element.addClass("k-listview")
                 .toggleClass("k-list", !grouped)
@@ -26,11 +28,26 @@
                     .children("ul")
                     .addClass("k-list");
             }
+
+            if (options.dataSource) {
+                that._template = kendo.template("<li>" + options.template + "</li>");
+                that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that.refresh, that));
+                that.dataSource.query();
+            }
+        },
+
+        refresh: function() {
+            var that = this,
+                view = that.dataSource.view();
+
+            that.element.html(kendo.render(that._template, view));
         },
 
         options: {
             name: "MobileListView",
-            type: "flat"
+            type: "flat",
+            template: "#=data#",
+            style: ""
         }
     });
 
