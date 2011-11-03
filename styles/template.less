@@ -166,6 +166,7 @@ td.k-group-cell,
 
 .k-widget .k-dropdown-wrap,
 .k-widget .k-picker-wrap,
+.k-widget .k-numeric-wrap,
 .k-autocomplete.k-header,
 .k-autocomplete.k-state-focused,
 div.k-dropdown-wrap.k-state-active,
@@ -173,7 +174,10 @@ div.k-dropdown-wrap.k-state-active,
 .k-dropdown-wrap.k-state-focused:hover,
 div.k-picker-wrap.k-state-active,
 .k-picker-wrap.k-state-focused,
-.k-picker-wrap.k-state-focused:hover
+.k-picker-wrap.k-state-focused:hover,
+span.k-numeric-wrap.k-state-active,
+.k-numeric-wrap.k-state-focused,
+.k-numeric-wrap.k-state-focused:hover
 {
     border-color: @widget-border-color;
     background-color: @select-background-color;
@@ -183,7 +187,8 @@ div.k-picker-wrap.k-state-active,
 .k-dropdown-wrap .k-input,
 .k-autocomplete.k-state-focused .k-input,
 .k-dropdown-wrap.k-state-focused .k-input,
-.k-picker-wrap.k-state-focused .k-input
+.k-picker-wrap.k-state-focused .k-input,
+.k-numeric-wrap.k-state-focused .k-input
 {
     border-color: @widget-border-color;
 }
@@ -203,6 +208,7 @@ div.k-picker-wrap.k-state-active,
 
 .k-combobox .k-input,
 .k-picker-wrap .k-input,
+.k-numeric-wrap .k-input,
 .k-autocomplete .k-input
 {
     color: @input-text-color;
@@ -334,6 +340,7 @@ div.k-picker-wrap.k-state-active,
 
 .k-autocomplete.k-state-hover,
 .k-picker-wrap.k-state-hover,
+.k-numeric-wrap.k-state-hover,
 .k-dropdown-wrap.k-state-hover
 {
     background-color: @select-hover-background-color;
