@@ -105,6 +105,21 @@
                 ok(!removeMethod.calls("remove"));
             });
 
+            test("delete button is shown on data row hover", function() {
+                setup();
+
+                var tr = table.find("tbody>tr:first").trigger("mouseenter");
+
+                ok(table.parent().find(".k-button>.k-delete").length);
+            });
+
+            test("delete button is removed on data row mouseleave", function() {
+                setup();
+
+                var tr = table.find("tbody>tr:first").trigger("mouseenter").trigger("mouseleave");
+
+                ok(!table.parent().find(".k-button>.k-delete").length);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

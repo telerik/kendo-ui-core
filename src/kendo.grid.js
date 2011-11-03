@@ -606,6 +606,31 @@
                     that.timer = setTimeout(handler, 1);
                 });
 
+                that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row)", {
+                    mouseenter: function(e) {
+                        var tr = $(this), button;
+
+                        button = $('<a class="k-button k-button-icon"><span class="k-icon k-delete"></span></a>')
+                            .css({
+                                position: "absolute",
+                                visibility: "hidden"
+                            })
+                            .click(function(e) {
+                                that.deleteRow(tr);
+                                e.stopPropagation();
+                            })
+                            .appendTo(tr.find(">td:visible:first"));
+
+                        button.css({
+                            visibility: "visible",
+                            top: tr.position().top + ((tr.outerHeight() - button.outerHeight(true)) / 2),
+                            left: $(document).scrollLeft() + tr.width() - button.outerWidth(true)
+                        });
+                    },
+                    mouseleave: function() {
+                        that.wrapper.find(".k-button:has(.k-delete)").remove();
+                    }
+                });
             }
         },
 
