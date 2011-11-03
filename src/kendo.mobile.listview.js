@@ -30,9 +30,20 @@
             }
 
             if (options.dataSource) {
-                that._template = kendo.template("<li>" + options.template + "</li>");
+                that._template();
                 that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that.refresh, that));
                 that.dataSource.query();
+            }
+        },
+
+        _template: function() {
+            var that = this,
+                template = that.options.template;
+
+            if (typeof template === "function") {
+                that.template = $.proxy(kendo.template("<li>#=this.tmpl(data)#</li>"), { tmpl: template });
+            } else {
+                that.template = kendo.template("<li>" + template + "</li>");
             }
         },
 
@@ -40,13 +51,13 @@
             var that = this,
                 view = that.dataSource.view();
 
-            that.element.html(kendo.render(that._template, view));
+            that.element.html(kendo.render(that.template, view));
         },
 
         options: {
             name: "MobileListView",
             type: "flat",
-            template: "#=data#",
+            template: "${data}",
             style: ""
         }
     });

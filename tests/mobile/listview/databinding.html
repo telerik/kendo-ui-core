@@ -54,7 +54,7 @@
                 equal(dom.children().first().text(), "1");
             });
 
-            test("can set template", function() {
+            test("uses custom template", function() {
                 var dom = $("<ul/>");
 
                 new ListView(dom, {
@@ -63,6 +63,29 @@
                 });
 
                 equal(dom.children().first().text(), "foo");
+            });
+
+            test("default template escapes html entities", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: ["<i>"]
+                });
+
+                equal(dom.children().first().html(), "&lt;i&gt;");
+            });
+
+            test("custom template as functione", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: [ { text: "foo" }],
+                    template: function(data) {
+                        return data.text;
+                    }
+                });
+
+                equal(dom.children().first().html(), "foo");
             });
         </script>
     </body>
