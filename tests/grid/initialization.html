@@ -364,6 +364,13 @@
                     });
                 ok(called);
             });
+
+            test("initialization from rendered table should disable encoding", function() {
+                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                var grid = new Grid(table, {scrollable: false});
+                
+                equal(grid.columns[0].encoded, false);
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
