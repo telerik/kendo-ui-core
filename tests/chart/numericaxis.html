@@ -340,6 +340,14 @@
                          ["$0.00", "$0.20", "$0.40", "$0.60", "$0.80", "$1.00", "$1.20"]);
                 });
 
+                test("labels have set zIndex", 1, function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, { zIndex: 2 });
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+
+                    equals(view.log.text[0].style.zIndex, 2);
+                });
+
             })();
 
             (function() {
