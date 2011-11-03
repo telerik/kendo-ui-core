@@ -146,31 +146,44 @@
                 test("sets segment different center if segment have explode sets to true", function() {
                     ok(firstSegment.sector.c != pieChart.segments[1].sector.c);
                 });
+            })();
+
+
+            (function() {
+                var data = [{
+                        value: 10,
+                        explode: true,
+                        color: "red",
+                        category: "A"
+                    }, {
+                        value: 50,
+                        explode: false,
+                        color: "red",
+                        category: "B"
+                    }],
+                    chart,
+                    pieChart,
+                    firstSegment;
 
                 // ------------------------------------------------------------
                 module("Pie Chart / Data Source", {
                     setup: function() {
-                        var data = [
-                        ];
-
-                        plotArea = new PlotAreaStub();
-                        setupPieChart(plotArea, {
+                        $("#container").kendoChart({
+                            dataSource: {
+                                data: data
+                            },
                             series: [{
+                                type: "pie",
+                                field: "value",
                                 categoryField: "category",
                                 colorField: "color",
-                                explodeField: "explode",
-                                data: [ 10, 50 ],
-                                dataItems: [{
-                                    category: "A",
-                                    color: "red",
-                                    explode: true
-                                }, {
-                                    category: "B",
-                                    color: "green",
-                                    explode: false
-                                }]
+                                explodeField: "explode"
                             }]
                         });
+
+                        chart = $("#container").data("kendoChart");
+                        pieChart = chart._plotArea.charts[0];
+                        firstSegment = pieChart.segments[0];
                     }
                 });
 
@@ -201,6 +214,8 @@
                     sector,
                     VALUE = 1,
                     CATEGORY = "A",
+                    segment,
+                    view,
                     SERIES_NAME = "series";
 
                 function createSegment(options) {

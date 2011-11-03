@@ -71,6 +71,21 @@
                 overlay: {
                     gradient: "sharpBevel"
                 }
+            },
+            line: {
+                markers: {
+                    background: "#393939"
+                }
+            },
+            scatter: {
+                markers: {
+                    background: "#393939"
+                }
+            },
+            scatterLine: {
+                markers: {
+                    background: "#393939"
+                }
             }
         },
         chartArea: {
