@@ -29,6 +29,7 @@
             }
 
             that.content = element.find(roleSelector("content")).addClass("k-mobile-content");
+            that.content.kendoScroller();
             that.element.prepend(that.header).append(that.footer);
         },
 

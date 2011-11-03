@@ -6,11 +6,14 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 
-        <title>Index</title>
+        <title>Kendo mobile application</title>
+
+        <link rel="stylesheet" href="../../playground/mobile/tokendo/scroll-container.css" />
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
         <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.scroller.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.history.js"></script>
         <script src="../../src/kendo.application.js"></script>
@@ -56,6 +59,7 @@
                 overflow: auto;
                 overflow-y: auto;
                 overflow-x: visible;
+                position: relative;
             }
 
             .k-animation-content-container {
@@ -68,18 +72,20 @@
 
         <header data-kendo-role="header"> Our glorious header</header>
 
-        <a href="view1.html" data-kendo-role="button">Remote View</a> | <a href="#view2" data-kendo-role="button">Local view</a> | <a href="#view3" data-kendo-role="button">Dialog</a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a turpis turpis, cursus porta neque. Suspendisse facilisis vehicula ipsum sed aliquam. Mauris nibh mauris, rutrum sed congue at, accumsan consequat dui. Vivamus mollis, ante nec mollis dictum, arcu leo porta nunc, eu imperdiet nulla leo a risus. Suspendisse tincidunt vestibulum dictum. Etiam tincidunt risus sem, eu varius quam. Sed porttitor vestibulum sapien, non pretium velit cursus lobortis. Cras dapibus lacinia commodo.
+        <div data=kendo-role="content">
+            <a href="view1.html" data-kendo-role="button">Remote View</a> | <a href="#view2" data-kendo-role="button">Local view</a> | <a href="#view3" data-kendo-role="button">Dialog</a>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a turpis turpis, cursus porta neque. Suspendisse facilisis vehicula ipsum sed aliquam. Mauris nibh mauris, rutrum sed congue at, accumsan consequat dui. Vivamus mollis, ante nec mollis dictum, arcu leo porta nunc, eu imperdiet nulla leo a risus. Suspendisse tincidunt vestibulum dictum. Etiam tincidunt risus sem, eu varius quam. Sed porttitor vestibulum sapien, non pretium velit cursus lobortis. Cras dapibus lacinia commodo.
 
-        Etiam mattis arcu at nisl semper quis interdum augue hendrerit. Aliquam tellus sapien, tristique non placerat sit amet, blandit nec lectus. Etiam dapibus purus sed turpis aliquam viverra. Nam bibendum ante non mauris tempor ut posuere purus hendrerit. Nam in eleifend lorem. Nam vehicula fringilla erat quis porta. Vestibulum vitae mattis ligula. Vivamus tortor libero, malesuada in varius et, hendrerit in sapien. Suspendisse vel tortor nec augue condimentum lacinia pellentesque vitae dolor. Sed facilisis imperdiet enim, nec aliquam sapien viverra quis. Integer leo arcu, fermentum non fermentum id, semper id nisi. Nullam pellentesque nunc at nisl dignissim tempor. Maecenas aliquet aliquet varius.
+            Etiam mattis arcu at nisl semper quis interdum augue hendrerit. Aliquam tellus sapien, tristique non placerat sit amet, blandit nec lectus. Etiam dapibus purus sed turpis aliquam viverra. Nam bibendum ante non mauris tempor ut posuere purus hendrerit. Nam in eleifend lorem. Nam vehicula fringilla erat quis porta. Vestibulum vitae mattis ligula. Vivamus tortor libero, malesuada in varius et, hendrerit in sapien. Suspendisse vel tortor nec augue condimentum lacinia pellentesque vitae dolor. Sed facilisis imperdiet enim, nec aliquam sapien viverra quis. Integer leo arcu, fermentum non fermentum id, semper id nisi. Nullam pellentesque nunc at nisl dignissim tempor. Maecenas aliquet aliquet varius.
 
-        In consequat hendrerit massa consequat molestie. Proin at aliquet orci. Sed sed est vel libero faucibus feugiat. Suspendisse ullamcorper ultrices lorem vitae lobortis. Aliquam fringilla risus eget ligula faucibus posuere in nec eros. Aliquam erat volutpat. Etiam id eros vel massa lacinia aliquam. Mauris dictum venenatis lacus, non tristique tortor ultricies dictum. Integer venenatis est non lorem pharetra consequat. Duis et nisi ac eros fermentum viverra. Cras fermentum blandit tempor. Nullam malesuada lobortis molestie.
+            In consequat hendrerit massa consequat molestie. Proin at aliquet orci. Sed sed est vel libero faucibus feugiat. Suspendisse ullamcorper ultrices lorem vitae lobortis. Aliquam fringilla risus eget ligula faucibus posuere in nec eros. Aliquam erat volutpat. Etiam id eros vel massa lacinia aliquam. Mauris dictum venenatis lacus, non tristique tortor ultricies dictum. Integer venenatis est non lorem pharetra consequat. Duis et nisi ac eros fermentum viverra. Cras fermentum blandit tempor. Nullam malesuada lobortis molestie.
 
-        Suspendisse a purus nulla, vel tincidunt dui. Cras tincidunt tempus velit, sed ornare odio vestibulum a. Duis ligula diam, viverra nec consectetur non, tempor sed lacus. Cras viverra interdum sagittis. Nullam accumsan, purus euismod tempus laoreet, est erat vestibulum nunc, at tempus dui odio a ante. Curabitur dictum ligula vitae lectus hendrerit sollicitudin. Quisque ullamcorper magna iaculis lacus bibendum placerat vestibulum sapien varius. Donec sit amet lectus at enim commodo lobortis id in quam.
+            Suspendisse a purus nulla, vel tincidunt dui. Cras tincidunt tempus velit, sed ornare odio vestibulum a. Duis ligula diam, viverra nec consectetur non, tempor sed lacus. Cras viverra interdum sagittis. Nullam accumsan, purus euismod tempus laoreet, est erat vestibulum nunc, at tempus dui odio a ante. Curabitur dictum ligula vitae lectus hendrerit sollicitudin. Quisque ullamcorper magna iaculis lacus bibendum placerat vestibulum sapien varius. Donec sit amet lectus at enim commodo lobortis id in quam.
 
-        In purus nulla, tempor sit amet pharetra a, venenatis sit amet lacus. Nam lobortis mauris in ipsum condimentum a fermentum lacus molestie. Donec porta sollicitudin volutpat. Morbi interdum sodales risus, a molestie lorem euismod quis. Nam sit amet ipsum feugiat purus adipiscing scelerisque. Vivamus in lorem quis sapien congue cursus in vitae augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi neque tellus, accumsan pulvinar rhoncus eu, mollis id metus. Curabitur et sapien quis dui iaculis porttitor ac eget nisi. Maecenas facilisis neque at libero lacinia sed adipiscing mauris feugiat. Donec ac odio sed felis aliquam faucibus rutrum non ligula. Cras nunc nunc, sagittis sit amet venenatis vitae, elementum id ante.</p>
+            In purus nulla, tempor sit amet pharetra a, venenatis sit amet lacus. Nam lobortis mauris in ipsum condimentum a fermentum lacus molestie. Donec porta sollicitudin volutpat. Morbi interdum sodales risus, a molestie lorem euismod quis. Nam sit amet ipsum feugiat purus adipiscing scelerisque. Vivamus in lorem quis sapien congue cursus in vitae augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi neque tellus, accumsan pulvinar rhoncus eu, mollis id metus. Curabitur et sapien quis dui iaculis porttitor ac eget nisi. Maecenas facilisis neque at libero lacinia sed adipiscing mauris feugiat. Donec ac odio sed felis aliquam faucibus rutrum non ligula. Cras nunc nunc, sagittis sit amet venenatis vitae, elementum id ante.</p>
 
-        <a href="view2.html" data-kendo-role="button">View without heder and footer</a>
+            <a href="view2.html" data-kendo-role="button">View without heder and footer</a>
+        </div>
 
         <footer data-kendo-role="footer"> Copyright &copy; Telerik 2011; </footer>
 
