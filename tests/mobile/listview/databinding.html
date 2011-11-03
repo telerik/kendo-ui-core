@@ -1,0 +1,69 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>kendo.ui.MobileListView DataBinding Tests</title>
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.mobile.core.js"></script>
+        <script src="../../../src/kendo.mobile.listview.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.MobileListView DataBinding Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var ListView = kendo.ui.MobileListView;
+
+            module("mobile listview", {
+                setup: function() {
+
+                },
+                teardown: function() {
+
+                }
+            });
+
+            test("binds to flat datasource", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: [1, 2]
+                });
+
+                equal(dom.children().length, 2);
+            });
+
+            test("default template expects string as data item", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: [1, 2]
+                });
+
+                equal(dom.children().first().text(), "1");
+            });
+
+            test("can set template", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: [ { text: "foo" } ],
+                    template: "#= text #"
+                });
+
+                equal(dom.children().first().text(), "foo");
+            });
+        </script>
+    </body>
+</html>
