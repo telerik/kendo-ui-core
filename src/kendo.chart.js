@@ -351,7 +351,7 @@
 
             for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
                 var currentSeries = series[seriesIdx];
-                if (currentSeries.field) {
+                if (currentSeries.field || (currentSeries.xField && currentSeries.yField)) {
                     currentSeries.data = [];
                     currentSeries.dataItems = [];
                 }
@@ -376,6 +376,8 @@
                         value = getter(currentSeries.field, true)(row);
                     } else if (currentSeries.xField && currentSeries.yField) {
                         value = [getter(currentSeries.xField, true)(row), getter(currentSeries.yField, true)(row)];
+                    } else {
+                        value = undefined;
                     }
 
                     if (defined(value)) {
