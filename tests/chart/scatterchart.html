@@ -14,7 +14,6 @@
         <script src="util.js"></script>
 
         <script type="text/javascript">
-
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
                 chartBox = new Box2D(0, 0, 800, 600),
@@ -68,7 +67,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Scatter Line Chart / series", {
+                module("Scatter Chart / series", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupScatterChart(plotArea, { series: [ series ] });
@@ -118,7 +117,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Scatter Line Chart / Missing values", {
+                module("Scatter Chart / Missing values", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupScatterChart(plotArea, {
@@ -150,7 +149,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Scatter Line Chart / Rendering", {
+                module("Scatter Chart / Rendering", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupScatterChart(plotArea, { series: [ series ] });
@@ -166,7 +165,8 @@
             (function() {
                 var scatterChart,
                     MARGIN = PADDING = BORDER = 5,
-                    linePoint;
+                    linePoint,
+                    scatterPoint;
 
                 function PlotAreaStub() { }
 
@@ -212,75 +212,116 @@
                             dashType: "dot"
                         }, options)]
                     });
-                    scatterLinePoint = scatterChart.points[0];
+                    scatterPoint = scatterChart.points[0];
                 }
 
                 // ------------------------------------------------------------
-                module("Scatter Line Chart / Configuration", {
+                module("Scatter Chart / Configuration", {
                     setup: function() {
                         createScatterChart();
                     }
                 });
 
                 test("applies visible to point markers", function() {
-                    equal(scatterLinePoint.options.markers.visible, false);
+                    equal(scatterPoint.options.markers.visible, false);
                 });
 
                 test("applies series color to point markers border", function() {
-                    equal(scatterLinePoint.options.markers.border.color, "#f00");
+                    equal(scatterPoint.options.markers.border.color, "#f00");
                 });
 
                 test("applies series opacity color to point markers", function() {
-                    equal(scatterLinePoint.options.markers.opacity, 0.5);
+                    equal(scatterPoint.options.markers.opacity, 0.5);
                 });
 
                 test("applies size to point markers", function() {
-                    equal(scatterLinePoint.options.markers.size, 10);
+                    equal(scatterPoint.options.markers.size, 10);
                 });
 
                 test("applies type to point markers", function() {
-                    equal(scatterLinePoint.options.markers.type, "triangle");
+                    equal(scatterPoint.options.markers.type, "triangle");
                 });
 
                 test("applies border color to point markers", function() {
                     createScatterChart({ markers: { border: { color: "marker-border" } } });
-                    equal(scatterLinePoint.options.markers.border.color, "marker-border");
+                    equal(scatterPoint.options.markers.border.color, "marker-border");
                 });
 
                 test("applies border width to point markers.", function() {
-                    equal(scatterLinePoint.options.markers.border.width, BORDER);
+                    equal(scatterPoint.options.markers.border.width, BORDER);
                 });
 
                 test("applies visible to point labels", function() {
-                    equal(scatterLinePoint.options.labels.visible, false);
+                    equal(scatterPoint.options.labels.visible, false);
                 });
 
                 test("applies color to point labels", function() {
-                    equal(scatterLinePoint.options.labels.color, "labels-color");
+                    equal(scatterPoint.options.labels.color, "labels-color");
                 });
 
                 test("applies background to point labels", function() {
-                    equal(scatterLinePoint.options.labels.background, "labels-background");
+                    equal(scatterPoint.options.labels.background, "labels-background");
                 });
 
                 test("applies border color to point labels", function() {
-                    equal(scatterLinePoint.options.labels.border.color, "labels-border");
+                    equal(scatterPoint.options.labels.border.color, "labels-border");
                 });
 
                 test("applies border width to point labels", function() {
-                    equal(scatterLinePoint.options.labels.border.width, BORDER);
+                    equal(scatterPoint.options.labels.border.width, BORDER);
                 });
 
                 test("applies padding to point labels", function() {
-                    equal(scatterLinePoint.options.labels.padding, PADDING);
+                    equal(scatterPoint.options.labels.padding, PADDING);
                 });
 
                 test("applies margin to point labels", function() {
-                    equal(scatterLinePoint.options.labels.margin, MARGIN);
+                    equal(scatterPoint.options.labels.margin, MARGIN);
                 });
 
                 test("applies margin to point labels", function() {
-                    equal(scatterLinePoint.options.dashType, "dot");
+                    equal(scatterPoint.options.dashType, "dot");
+                });
+
+            })();
+
+            (function() {
+                var data = [{
+                        xValue: 3,
+                        yValue: 1
+                    }, {
+                        xValue: 2,
+                        yValue: 2
+                    }, {
+                        xValue: 2,
+                        yValue: 2
+                    }],
+                    points;
+
+                // ------------------------------------------------------------
+                module("Scatter Chart / Integration", {
+                    setup: function() {
+                        $("#container").kendoChart({
+                            dataSource: {
+                                data: data
+                            },
+                            series: [{
+                                type: "scatter",
+                                xField: "xValue",
+                                yField: "yValue"
+                            }]
+                        });
+
+                        var chart = $("#container").data("kendoChart");
+                        points = chart._plotArea.charts[0].points;
+                    },
+                    teardown: function() {
+                        $("#container").empty();
+                    }
+                });
+
+                test("gets data from x and y field", function() {
+                    equal(points.length, 3);
                 });
 
             })();
