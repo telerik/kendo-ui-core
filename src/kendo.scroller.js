@@ -333,7 +333,7 @@
        init();
     }
 
-    var Scroller = Widget.extend({
+    var Scroller = kendo.ui.MobileWidget.extend({
         init: function(element, options) {
             var that = this, scrollElement;
 
@@ -376,7 +376,8 @@
 
         options: {
             name: "Scroller",
-            useOnDesktop: false
+            selector: "[data-kendo-role=scroller]",
+            useOnDesktop: true
         }
     });
 
