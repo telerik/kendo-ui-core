@@ -948,7 +948,8 @@
         _columns: function(columns) {
             var that = this,
                 table = that.table,
-                cols = table.find("col");
+                cols = table.find("col"),
+                datasource = that.options.dataSource;
 
             // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
             columns = columns.length ? columns : map(table.find("th"), function(th, idx) {
@@ -966,9 +967,11 @@
                 };
             });
 
+            var autoEncodeColumns = ($("tbody tr", that.table).length > 0 && !that.options.data && (!datasource || !datasource.transport)) ? false : true;
+
             that.columns = map(columns, function(column) {
                 column = typeof column === STRING ? { field: column } : column;
-                return extend({ encoded: true }, column);
+                return extend({ encoded: autoEncodeColumns }, column);
             });
         },
 
