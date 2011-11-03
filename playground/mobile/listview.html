@@ -1,69 +1,26 @@
 <!DOCTYPE HTML>
-<html>
+<html class="k-ios">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta content="minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
 
         <title>Listview</title>
+        <link rel="stylesheet/less" type="text/css" href="tokendo/layout.less" />
+
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="examples/less.js"></script>
         <style>
             body
             {
-                font: normal 0.95em Helvetica Neue, sans-serif;
                 background: silver;
                 padding: 0;
                 margin: 0;
             }
 
-            .k-listview, .k-list
-            {
-                padding: 0;
-                margin:0;
-            }
-
-            .k-list
-            {
-                list-style: none;
-                background: white;
-            }
-
-            .k-list > li
-            {
-                line-height: 1.6em;
-                font-size: 1.2em;
-                font-weight: bold;
-                border-bottom: 1px solid #E9E9E9;
-                padding: .6em .6em .6em .8em;
-            }
-
-            .k-listinset,
-            .k-listinsetgroup .k-list
-            {
-                -webkit-border-radius: 10px;
-                margin: 1em;
-            }
-
-            .k-listinset > li:last-child,
-            .k-listinsetgroup .k-list > li:last-child
-            {
-                border-bottom: 0;
-            }
-
-            .k-listgroup > li
-            {
-                padding: .2em 0 0;
-                text-indent: .8em;
-                border-top: 1px solid #C5CFD6;
-                background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(136, 152, 165, 1)), color-stop(1, rgba(172, 184, 196, 1)));
-                box-shadow: 0 -1px 0 #78858e;
-            }
-
-            .k-listinsetgroup > li
-            {
-                line-height: 1.65em;
-                text-indent: .8em;
-                text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+            html, body {
+                height: auto;
             }
         </style>
     </head>
@@ -71,13 +28,11 @@
         <h3>Plain-style list view</h3>
         <ul data-kendo-role="listview" class="k-listview k-list">
             <li>Albania</li>
-            <li>Algeria</li>
             <li>Australia</li>
         </ul>
         <h3>Inset-style list view</h3>
         <ul data-kendo-role="listview" data-kendo-style="inset" class="k-listview k-list k-listinset">
             <li>Albania</li>
-            <li>Algeria</li>
             <li>Australia</li>
         </ul>
         <h3>Plain-style list view with groups</h3>
@@ -85,7 +40,6 @@
             <li>A
                 <ul class="k-list">
                     <li>Albania</li>
-                    <li>Algeria</li>
                     <li>Australia</li>
                 </ul>
             </li>
@@ -101,7 +55,6 @@
             <li>A
                 <ul class="k-list">
                     <li>Albania</li>
-                    <li>Algeria</li>
                     <li>Australia</li>
                 </ul>
             </li>
