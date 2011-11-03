@@ -79,7 +79,7 @@
             horizontal = property === "Width",
             scrollSizeName = "scroll" + property,
             element = scrollElement.parent(),
-            scrollbar = $('<div class="k-touch-scrollbar ' + (horizontal ? "k-horizontal" : "k-vertical") + '-scrollbar" />'),
+            scrollbar = $('<div class="touch-scrollbar ' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />'),
             name = horizontal ? "x" : "y",
             dip10,
             enabled,
@@ -377,7 +377,7 @@
         options: {
             name: "Scroller",
             selector: "[data-kendo-role=scroller]",
-            useOnDesktop: true
+            useOnDesktop: false
         }
     });
 

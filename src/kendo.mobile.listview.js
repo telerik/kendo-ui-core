@@ -56,6 +56,7 @@
 
         options: {
             name: "MobileListView",
+            selector: "[data-kendo-role=listview]",
             type: "flat",
             template: "${data}",
             style: ""

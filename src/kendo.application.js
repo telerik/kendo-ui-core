@@ -29,7 +29,6 @@
             }
 
             that.content = element.find(roleSelector("content")).addClass("k-mobile-content");
-            that.content.kendoScroller();
             that.element.prepend(that.header).append(that.footer);
         },
 
@@ -39,7 +38,10 @@
                 animationType = (back ? view : that).element.data("kendoTransition"),
                 slidingSource = view.content,
                 slidingDestination = that.content,
-                callback = function() { view.element.hide() },
+                callback = function() {
+                    view.element.hide();
+                    // that.content.kendoScroller();
+                },
                 myHeader = that.header,
                 myFooter = that.footer,
                 myElement = that.element,
