@@ -28,6 +28,11 @@
 
             that.enable(options.enable);
 
+
+            // Hack to prevent the addressbar
+            // flashing when clicking the buttons
+            that._href = that.element.attr("href");
+
             that.bind([
                 CLICK
             ], options);
@@ -62,21 +67,27 @@
         },
 
         _press: function (e) {
-            this.element.toggleClass("k-state-active", e.type === MOUSEDOWN);
+            var element = this.element;
+            element.toggleClass("k-state-active", e.type === MOUSEDOWN);
+
+            if (e.type === MOUSEDOWN) {
+                element.attr("href", "#!");
+            }
         },
 
         _click: function(e) {
-            var that = this, href;
+            var that = this, href = that._href;
 
             that.trigger(CLICK);
 
             if (kendo.application) {
-                href = that.element.attr("href");
 
                 if (href) {
                     e.preventDefault();
-
                     kendo.application.navigate(href);
+
+                    // restore href, to keep the status bar displaying the correct location
+                    that.element.attr("href", href);
                 }
             }
         },
