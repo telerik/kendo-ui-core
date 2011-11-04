@@ -709,6 +709,12 @@
                     point.dataItem = { value: VALUE };
                     point.series = { name: SERIES_NAME };
 
+                    point.owner = {
+                        formatPointValue: function(value, tooltipFormat) {
+                            return kendo.format(tooltipFormat, value);
+                        }
+                    }
+
                     box = new Box2D(0, 0, 100, 100);
                     point.reflow(box);
 
