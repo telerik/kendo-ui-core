@@ -4419,7 +4419,7 @@
                 var loop = function() {
                     time = +new Date();
                     pos = time > finish ? 1 : (time - start) / duration;
-                    easingPos = easing(pos, time - start, 0, 1);
+                    easingPos = easing(pos, time - start, 0, 1, duration);
 
                     anim.step(easingPos);
 
