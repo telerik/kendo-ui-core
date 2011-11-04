@@ -583,7 +583,12 @@
                 direction = direction || definition.direction;
             });
 
-            options.complete = $.browser.msie ? function() { setTimeout(options.completeCallback) } : options.completeCallback;
+            function complete() {
+                destination.attr("style", "");
+                options.completeCallback && options.completeCallback();
+            }
+
+            options.complete = $.browser.msie ? function() { setTimeout(complete) } : complete;
 
             if ("slide" in options.effects) {
               positionElement(destination, kendo.directions[direction], container);
