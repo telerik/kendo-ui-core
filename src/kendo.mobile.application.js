@@ -146,7 +146,7 @@
         start: function(options) {
             var that = this, views;
 
-            that.options = options;
+            that.options = options || {};
 
             that._attachMeta();
 
