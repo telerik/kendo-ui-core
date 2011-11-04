@@ -8,7 +8,6 @@
         DataSource = kendo.data.DataSource,
         baseTemplate = kendo.template,
         format = kendo.format,
-        formatFunctionName = "kendo.format",
         map = $.map,
         math = Math,
         proxy = $.proxy,
@@ -2246,6 +2245,12 @@
             }
 
             return new Point2D(x, y);
+        },
+
+        formatPointValue: function(format) {
+            var point = this;
+
+            return point.owner.formatPointValue(point.value, format);
         }
     });
 
@@ -2388,6 +2393,12 @@
                     callback(value, currentCategory, categoryIx, currentSeries, seriesIx);
                 }
             }
+        },
+
+        formatPointValue: function(format) {
+            var point = this;
+
+            return point.owner.formatPointValue(point.value, format);
         }
     });
 
@@ -2508,6 +2519,10 @@
             for (i = 0; i < childrenLength; i++) {
                 children[i].reflow(categorySlots[i]);
             }
+        },
+
+        formatPointValue: function(value, tooltipFormat) {
+            return format(tooltipFormat, value);
         }
     });
 
@@ -2607,16 +2622,6 @@
                     new Color(markerBackground).brightness(BAR_BORDER_BRIGHTNESS).toHex();
             }
 
-            if (labels.template) {
-                var labelTemplate = baseTemplate(labels.template);
-                labelText = labelTemplate({
-                    dataItem: point.dataItem,
-                    category: point.category,
-                    value: point.value,
-                    series: point.series
-                });
-            }
-
             point.marker = new ShapeElement({
                 id: uniqueId(),
                 visible: markers.visible,
@@ -2631,6 +2636,17 @@
             point.append(point.marker);
 
             if (labels.visible) {
+                if (labels.template) {
+                    var labelTemplate = baseTemplate(labels.template);
+                    labelText = labelTemplate({
+                        dataItem: point.dataItem,
+                        category: point.category,
+                        value: point.value,
+                        series: point.series
+                    });
+                } else if (labels.format) {
+                    labelText = point.formatPointValue(labels.format);
+                }
                 point.label = new TextBox(labelText,
                     deepExtend({
                         id: uniqueId(),
@@ -2640,7 +2656,7 @@
                             left: 5,
                             right: 5
                         }
-                    }, labels)
+                    }, labels, { format: "" })
                 );
                 point.append(point.label);
             }
@@ -2735,6 +2751,12 @@
                 markerBox.x2 + TOOLTIP_OFFSET,
                 aboveAxis ? markerBox.y1 - tooltipHeight : markerBox.y2
             );
+        },
+
+        formatPointValue: function(format) {
+            var point = this;
+
+            return point.owner.formatPointValue(point.value, format);
         }
     });
 
@@ -2988,8 +3010,7 @@
 
         createPoint: function(value, series, seriesIx) {
             var chart = this,
-                options = chart.options,
-                labelsFormat = series.labels.format || "{0}, {1}";
+                options = chart.options;
 
             if (!defined(value.x) || !defined(value.y)) {
                 return null;
@@ -3003,8 +3024,11 @@
                         },
                         opacity: series.opacity
                     },
+                    tooltip: {
+                        format: "{0}, {1}"
+                    },
                     labels: {
-                        template: "#= " + formatFunctionName + "('" + labelsFormat + "', value.x, value.y) #"
+                        format: "{0}, {1}"
                     }
                 }, series)
             );
@@ -3079,6 +3103,10 @@
                     });
                 }
             }
+        },
+
+        formatPointValue: function(value, tooltipFormat) {
+            return format(tooltipFormat, value.x, value.y);
         }
     });
 
@@ -3745,6 +3773,12 @@
 
         pointInCircle: function(point, c, r) {
             return sqr(c.x - point.x) + sqr(c.y - point.y) < sqr(r);
+        },
+
+        formatPointValue: function(format) {
+            var point = this;
+
+            return point.owner.formatPointValue(point.value, format);
         }
     });
 
@@ -4675,16 +4709,21 @@
                 anchor,
                 template,
                 content,
+                pointTooltipOptions,
+                tooltipFormat,
+                tooltipTemplate,
                 top,
                 left;
 
             if (!point) {
                 return;
             }
-
             content = point.value.toString();
+            pointTooltipOptions = point.options.tooltip;
+            tooltipFormat = defined(pointTooltipOptions) ? pointTooltipOptions.format : options.format;
+            tooltipTemplate = defined(pointTooltipOptions) ? pointTooltipOptions.template : options.template;
 
-            if (options.template) {
+            if (tooltipTemplate) {
                 template = baseTemplate(options.template);
                 content = template({
                     value: point.value,
@@ -4692,8 +4731,8 @@
                     series: point.series,
                     dataItem: point.dataItem
                 });
-            } else if (options.format) {
-                content = format(options.format, point.value);
+            } else if (tooltipFormat) {
+                content = point.formatPointValue(tooltipFormat);
             }
 
             element.html(content);
