@@ -355,7 +355,8 @@
                     show: false,
                     hide: true
                 }
-            }
+            },
+            collapsible: false
         },
 
         /**
@@ -625,9 +626,10 @@
                 item = $(e.currentTarget),
                 link = item.find("." + LINK),
                 href = link.attr(HREF),
+                collapse = that.options.collapsible,
                 content = $(that.contentElement(item.index()));
 
-            if (item.is("." + DISABLEDSTATE + ",." + ACTIVESTATE)) {
+            if (item.is("." + DISABLEDSTATE + (!collapse ? ",." + ACTIVESTATE : ""))) {
                 e.preventDefault();
                 return;
             }
@@ -647,22 +649,52 @@
                     return;
                 }
 
+                if (collapse && item.is("." + ACTIVESTATE)) {
+                    that.deactivateTab(item);
+                    e.preventDefault();
+
+                    return;
+                }
+
                 if (that.activateTab(item)) {
                     e.preventDefault();
                 }
+
             }
+        },
+
+        deactivateTab: function (item) {
+            var that = this,
+                closeAnimation = that.options.animation.close,
+                openAnimation = that.options.animation.open;
+
+            closeAnimation = closeAnimation && "effects" in closeAnimation ? closeAnimation :
+                                   extend( extend({ reverse: true }, openAnimation), { show: false, hide: true });
+
+            if (kendo.size(openAnimation.effects)) {
+                item.kendoAddClass(DEFAULTSTATE, { duration: openAnimation.duration });
+                item.kendoRemoveClass(ACTIVESTATE, { duration: openAnimation.duration });
+            } else {
+                item.addClass(DEFAULTSTATE);
+                item.removeClass(ACTIVESTATE);
+            }
+
+            that.contentElements
+                    .filter("." + ACTIVESTATE)
+                    .kendoStop(true, true)
+                    .kendoAnimate( closeAnimation )
+                    .removeClass(ACTIVESTATE);
         },
 
         activateTab: function (item) {
             var that = this,
-                hasCloseAnimation = that.options.animation.close && "effects" in that.options.animation.close,
-                closeAnimation = hasCloseAnimation ?
-                                       that.options.animation.close :
-                                       extend( extend({ reverse: true }, that.options.animation.open), { show: false, hide: true }),
                 openAnimation = that.options.animation.open,
+                closeAnimation = that.options.animation.close,
                 neighbours = item.parent().children(),
                 oldTab = neighbours.filter("." + ACTIVESTATE),
                 itemIndex = neighbours.index(item);
+
+            closeAnimation = closeAnimation && "effects" in closeAnimation ? closeAnimation : extend( extend({ reverse: true }, openAnimation), { show: false, hide: true });
 
             // deactivate previously active tab
             if (kendo.size(openAnimation.effects)) {
