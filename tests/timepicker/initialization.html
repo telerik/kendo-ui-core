@@ -7,7 +7,6 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.popup.js"></script>
-        <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.timepicker.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -20,6 +19,7 @@
         <script>
 
             var TimeView = kendo.TimeView,
+                MIDNIGHT = new Date(0, 0, 0, 0, 0, 0),
                 div, input;
 
             module("kendo.ui.TimePicker initialization", {
@@ -29,6 +29,99 @@
                 teardown: function() {
                     input.parents(".k-widget").andSelf().remove();
                 }
+            });
+
+            test("TimeView creates popup", function() {
+                var tv = new TimeView({
+                    anchor: input,
+                    min: MIDNIGHT,
+                    max: MIDNIGHT
+                });
+
+                ok(tv.popup);
+                ok(tv.popup.element.is("div"));
+                ok(tv.popup.element.hasClass("k-list-container"));
+                ok(tv.popup.element.children(":first").is("ul"));
+                ok(tv.popup.element.children(":first").hasClass("k-list k-reset"));
+                equal(tv.popup.options.anchor, input);
+            });
+
+            test("TimeView create template function", function() {
+                var tv = new TimeView({
+                        format: "hh:mm tt",
+                        anchor: input,
+                        min: MIDNIGHT,
+                        max: MIDNIGHT
+                    }),
+                    date = new Date(2000, 10, 10, 10, 10, 0);
+
+                equal(tv.template(kendo.toString(date, "hh:mm tt")), '<li class="k-item" unselectable="on">' + kendo.toString(date, "hh:mm tt") + '</li>');
+            });
+
+            test("TimeView wire required events of UL", function() {
+                var options = {
+                    clearBlurTimeout: function () { }
+                },
+                tv = new TimeView(options);
+
+                ok(tv.ul.data("events").click);
+                ok(tv.ul.data("events").mousedown);
+                ok(tv.ul.data("events").mouseenter);
+                ok(tv.ul.data("events").mouseleave);
+            });
+
+            test("refresh() should render li items", function() {
+                var tv = new TimeView({
+                    min: MIDNIGHT,
+                    max: MIDNIGHT,
+                    interval: 30
+                });
+
+                tv.refresh();
+
+                ok(tv.ul.find("li").length > 0);
+            });
+
+            test("refresh() should render all hours in a day", function() {
+                var tv = new TimeView({
+                    min: MIDNIGHT,
+                    max: MIDNIGHT,
+                    interval: 30
+                });
+
+                tv.refresh();
+
+                equal(tv.ul.find("li").length, 48);
+                equal(tv.ul.find("li:first").html(), "12:00 AM");
+                equal(tv.ul.find("li:last").html(), "11:30 PM");
+            });
+
+            test("refresh() should render 5 hours only", function() {
+                var tv = new TimeView({
+                    min: new Date(10, 10, 10, 10, 0, 0),
+                    max: new Date(10, 10, 10, 12, 0, 0),
+                    interval: 30
+                });
+
+                tv.refresh();
+
+                equal(tv.ul.find("li").length, 5);
+                equal(tv.ul.find("li:first").html(), "10:00 AM");
+                equal(tv.ul.find("li:last").html(), "12:00 PM");
+            });
+
+            test("refresh() should honor min and max", function() {
+                var tv = new TimeView({
+                    min: new Date(10, 10, 10, 10, 10, 0),
+                    max: new Date(10, 10, 10, 11, 50, 0),
+                    interval: 30
+                });
+
+                tv.refresh();
+
+                equal(tv.ul.find("li").length, 5);
+                equal(tv.ul.find("li:first").html(), "10:10 AM");
+                equal(tv.ul.find("li:last").html(), "11:50 AM");
             });
 
        </script>
