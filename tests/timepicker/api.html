@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TimePicker API</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.timepicker.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">TimePicker API</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var TimeView = kendo.TimeView,
+                MIDNIGHT = new Date(0, 0, 0, 0, 0, 0),
+                div, input;
+
+            module("kendo.ui.TimePicker API", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            test("open TimeView", function() {
+                var tv = new TimeView({
+                    anchor: input
+                });
+
+                tv.open();
+
+                ok(tv.popup.element.is(":visible"));
+            });
+
+            test("close TimeView", function() {
+                var tv = new TimeView({
+                    anchor: input
+                });
+
+                tv.open();
+                tv.close();
+
+                ok(!tv.popup.element.is(":visible"));
+            });
+
+            test("value() method should select li", function() {
+                var tv = new TimeView({
+                    min: MIDNIGHT,
+                    max: MIDNIGHT,
+                    interval: 30
+                }),
+                date = new Date(2000, 10, 10, 10, 0, 0);
+
+                tv.refresh();
+
+                tv.value(date);
+
+                equal(tv.ul.find("li.k-state-selected").length, 1);
+                equal(tv.ul.find("li.k-state-selected").html(), "10:00 AM");
+            });
+
+            test("click() select li and set date", function() {
+                var date = new Date(2000, 10, 10, 10, 0, 0),
+                tv = new TimeView({
+                    min: MIDNIGHT,
+                    max: MIDNIGHT,
+                    interval: 30,
+                    value: date
+                });
+
+                tv.refresh();
+
+                var expected = new Date(2000, 10, 10, 14, 0, 0);
+
+                var li = tv.ul.find("li")
+                           .filter(function() {
+                               return $(this).text() == "2:00 PM";
+                           });
+
+                tv.click({currentTarget: li[0]});
+
+                equal(tv.ul.find("li.k-state-selected")[0], li[0]);
+                equal(+tv._value, +expected);
+            });
+
+            test("current() should persist current selected LI", function() {
+                var tv = new TimeView({
+                    min: MIDNIGHT,
+                    max: MIDNIGHT,
+                    interval: 30
+                });
+
+                tv.refresh();
+
+                equal(tv.current(), undefined);
+
+                tv.current(tv.ul.find("li:first"));
+
+                equal(tv.ul.find("li.k-state-selected").length, 1);
+                equal(tv.current().index(), tv.ul.find("li.k-state-selected").index());
+            });
+
+       </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
