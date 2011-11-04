@@ -79,7 +79,7 @@
             horizontal = property === "Width",
             scrollSizeName = "scroll" + property,
             element = scrollElement.parent(),
-            scrollbar = $('<div class="touch-scrollbar ' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />'),
+            scrollbar = $('<div class="k-touch-scrollbar k-' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />'),
             name = horizontal ? "x" : "y",
             dip10,
             enabled,
@@ -151,6 +151,7 @@
         }
 
         function wait(e) {
+            init();
             if (!enabled) {
                 return;
             }
@@ -184,7 +185,6 @@
                 return;
             }
 
-            init();
             changeDirection(location);
 
             scrollbar.show()
@@ -329,8 +329,6 @@
            .bind("gesturestart", gestureStart)
            .bind("gestureend", gestureEnd)
            .bind(STARTEVENT, wait);
-
-       init();
     }
 
     var Scroller = kendo.ui.MobileWidget.extend({
@@ -377,7 +375,7 @@
         options: {
             name: "Scroller",
             selector: "[data-kendo-role=scroller]",
-            useOnDesktop: false
+            useOnDesktop: true
         }
     });
 
