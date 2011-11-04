@@ -3023,6 +3023,12 @@
                             color: series.color
                         },
                         opacity: series.opacity
+                    },
+                    tooltip: {
+                        format: "{0}, {1}"
+                    },
+                    labels: {
+                        format: "{0}, {1}"
                     }
                 }, series)
             );
