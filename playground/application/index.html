@@ -2,10 +2,6 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-
         <title>Kendo mobile application</title>
         <link rel="stylesheet/less" type="text/css" href="../mobile/tokendo/layout.less" />
         <script src="../mobile/examples/less.js"></script>
@@ -37,6 +33,10 @@
                 height: 100%;
                 overflow: hidden;
                 background: silver;
+            }
+
+            body {
+                -webkit-transform: translatez(0);
             }
 
             header, footer {
@@ -72,6 +72,13 @@
                 overflow: hidden;
             }
         </style>
+
+        <script>
+            kendo.application.bind("viewInit", function(e) {
+                var view = e.view;
+                view.element.find("#wifis").kendoMobileListView({style: "inset", dataSource: ["T2H2", "T3M1", "Get off my lawn!", "MVCTeamWiFi", "Elvis is alive"]});
+            });
+        </script>
     </head>
     <body>
         <article data-kendo-role="view" data-kendo-url="index.html">
@@ -113,8 +120,8 @@
         </article>
 
         <article data-kendo-role="view" id="about" data-kendo-transition="zoom">
-        <header data-kendo-role="header">About <a href="index.html" data-kendo-role="button" style="float: right; margin-right: 10px">Back</a> </header>
 
+        <header data-kendo-role="header">About <a href="index.html" data-kendo-role="button" style="float: right; margin-right: 10px">Back</a> </header>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a turpis turpis, cursus porta neque. Suspendisse facilisis vehicula ipsum sed aliquam. Mauris nibh mauris, rutrum sed congue at, accumsan consequat dui. Vivamus mollis, ante nec mollis dictum, arcu leo porta nunc, eu imperdiet nulla leo a risus. Suspendisse tincidunt vestibulum dictum. Etiam tincidunt risus sem, eu varius quam. Sed porttitor vestibulum sapien, non pretium velit cursus lobortis. Cras dapibus lacinia commodo.
 
@@ -124,12 +131,5 @@
 
         Suspendisse a purus nulla, vel tincidunt dui. Cras tincidunt tempus velit, sed ornare odio vestibulum a. Duis ligula diam, viverra nec consectetur non, tempor sed lacus. Cras viverra interdum sagittis. Nullam accumsan, purus euismod tempus laoreet, est erat vestibulum nunc, at tempus dui odio a ante. Curabitur dictum ligula vitae lectus hendrerit sollicitudin. Quisque ullamcorper magna iaculis lacus bibendum placerat vestibulum sapien varius. Donec sit amet lectus at enim commodo lobortis id in quam.
         </article>
-
-        <script>
-            kendo.application.bind("viewInit", function(e) {
-                var view = e.view;
-                view.element.find("#wifis").kendoMobileListView({style: "inset", dataSource: ["T2H2", "T3M1", "Get off my lawn!", "MVCTeamWiFi", "Elvis is alive"]});
-            });
-        </script>
     </body>
 </html>

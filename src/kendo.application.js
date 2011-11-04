@@ -3,6 +3,10 @@
     var kendo = window.kendo,
         history = kendo.history,
         div = $("<div/>"),
+        meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> \
+                <meta name="apple-mobile-web-app-status-bar-style" content="black" /> \
+                <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
+        iconMeta = kendo.template('<link rel="apple-touch-icon" href="${icon}" />'),
         roleSelector = kendo.roleSelector;
 
     function extractView(html) {
@@ -106,6 +110,9 @@
         start: function(options) {
             var that = this, views;
 
+            that.options = options;
+
+            that._attachMeta();
             that.element = that.element ? $(that.element) : $(document.body);
 
             views = that.element.find(roleSelector("view"));
@@ -114,7 +121,7 @@
 
             that._view = that._createView(views.first());
 
-            history.start($.extend(options, { silent: true }));
+            history.start($.extend(options, {silent: true}));
 
             history.change(function(e) {
                 that.navigate(e.location);
@@ -183,6 +190,16 @@
                 $.get(url, function(html) {
                     callback(that._createRemoteView(url, html));
                 });
+            }
+        },
+
+        _attachMeta: function() {
+            var icon = this.options.icon;
+
+            $("head").prepend(meta);
+
+            if (icon) {
+                $("head").prepend(iconMeta({icon: icon}));
             }
         }
     });
