@@ -31,31 +31,47 @@
                 tooltip._show();
             }
 
+            function createPoint(options) {
+                dataPointMock = {
+                    value: 1,
+                    box: new Chart.Box2D(0, 0, 10, 10),
+                    options: {
+                        aboveAxis: true,
+                        color: RED
+                    },
+                    series: {
+                        name: "series",
+                        labels: {
+                            color: GREEN
+                        }
+                    },
+                    category: "category",
+                    dataItem: {
+                        field: "value"
+                    },
+                    tooltipAnchor: function() {
+                        return new Chart.Point2D();
+                    },
+                    owner: {
+                        formatPointValue: function(value, tooltipFormat) {
+                            return kendo.format(tooltipFormat, value);
+                        }
+                    },
+                    formatPointValue: function(format) {
+                        var point = this;
+
+                        return point.owner.formatPointValue(point.value, format);
+                    }
+                };
+
+                $.extend(dataPointMock, options);
+            }
+
             // ------------------------------------------------------------
             module("Tooltip", {
                 setup: function() {
                     createTooltip();
-                    dataPointMock = {
-                        value: 1,
-                        box: new Chart.Box2D(0, 0, 10, 10),
-                        options: {
-                            aboveAxis: true,
-                            color: RED
-                        },
-                        series: {
-                            name: "series",
-                            labels: {
-                                color: GREEN
-                            }
-                        },
-                        category: "category",
-                        dataItem: {
-                            field: "value"
-                        },
-                        tooltipAnchor: function() {
-                            return new Chart.Point2D();
-                        }
-                    };
+                    createPoint();
                 },
                 teardown: function() {
                     element.remove();
@@ -176,6 +192,12 @@
                 same([parseInt(tooltip.element.css("top"), 10),
                       parseInt(tooltip.element.css("left"), 10)],
                       [10, 10]);
+            });
+
+            test("applies format from the series", function() {
+                createPoint({ options: { tooltip: { format: "{0:C}" } }});
+                showNow(dataPointMock);
+                equals(element.text(), "$1.00");
             });
 
         </script>
