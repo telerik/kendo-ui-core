@@ -1308,13 +1308,13 @@
                     match = ua.match(agentRxs[agent]);
                     if (match) {
                         os = {};
-                        os.name = agent.toLowerCase();
+                        os.name = agent;
                         os[os.name] = true;
                         os.majorVersion = match[2];
                         os.minorVersion = match[3].replace("_", ".");
                         os.flatVersion = os.majorVersion + os.minorVersion.replace(".", "");
                         os.flatVersion = os.flatVersion + (new Array(4 - os.flatVersion.length).join("0")); // Pad with zeroes
-                        os.ios = (agent in { iphone:0, ipod:0, ipad:0 });
+                        os.ios = /^i(phone|pad|pod)$/i.test(agent);
 
                         break;
                     }
