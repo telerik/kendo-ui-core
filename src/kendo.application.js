@@ -18,6 +18,42 @@
         return div.find(roleSelector("view")).first();
     }
 
+    function hideAddressBar(element) {
+        var os = kendo.support.mobileOS,
+            android = os.name == "android",
+            lastWidth = 0;
+
+        if (android) {
+            $(window).scroll(function() {
+                element.height(window.innerHeight);
+            });
+        }
+
+        function hideBar() {
+            if (os.ios) {
+                var height = document.documentElement.clientHeight;
+                if (os.name == "iphone" || os.name == "ipod" && !window.navigator.standalone) height += 60;
+                element.height(height);
+            } else if (android) {
+                element.height(window.innerHeight + 56);
+            }
+
+            setTimeout(window.scrollTo, 500, 0, 1);
+        }
+
+        function onResize() {
+            var pageWidth = element[0].offsetWidth;
+            if (lastWidth == pageWidth) return;
+            lastWidth = pageWidth;
+            hideBar();
+        }
+
+        hideBar();
+        onResize();
+
+        $(window).resize(onResize);
+    }
+
     var View = kendo.Class.extend({
         init: function(element) {
             var that = this,
@@ -113,7 +149,10 @@
             that.options = options;
 
             that._attachMeta();
+
             that.element = that.element ? $(that.element) : $(document.body);
+
+            hideAddressBar(that.element);
 
             views = that.element.find(roleSelector("view"));
 
@@ -170,9 +209,9 @@
 
         _findView: function(url, callback) {
             var that = this,
-            view,
-            local = url.charAt(0) === "#",
-            element;
+                view,
+                local = url.charAt(0) === "#",
+                element;
 
             element = that.element.find("[data-kendo-url='" + url + "']");
 
