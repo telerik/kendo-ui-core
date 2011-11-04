@@ -28,7 +28,10 @@
               element.wrapInner("<div " + kendo.dataRole + '="content"></div>');
             }
 
-            that.content = element.find(roleSelector("content")).addClass("k-mobile-content");
+            that.content = element.find(roleSelector("content"))
+                                .addClass("k-mobile-content")
+                                .kendoScroller({useOnDesktop: true});
+
             that.element.prepend(that.header).append(that.footer);
         },
 
@@ -40,7 +43,6 @@
                 slidingDestination = that.content,
                 callback = function() {
                     view.element.hide();
-                    // that.content.kendoScroller();
                 },
                 myHeader = that.header,
                 myFooter = that.footer,
