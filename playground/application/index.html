@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html class="k-ios">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Kendo mobile application</title>
@@ -25,25 +25,27 @@
                 -webkit-tap-highlight-color: rgba(0,0,0,0);
             }
 
-            html {
+            html, body {
                 -webkit-text-size-adjust: none;
             }
 
             html, body {
                 height: 100%;
+                max-height: auto;
                 overflow: hidden;
                 background: silver;
             }
 
             body {
                 -webkit-transform: translatez(0);
+                -webkit-backface-visibility: hidden;
             }
 
             header, footer {
                 background: #EBEBEB;
-                padding: 10px 0;
                 text-indent: 30px;
                 width: 100%;
+                padding: 20px 0;
             }
 
             .k-mobile-view {
@@ -83,10 +85,12 @@
     <body>
         <article data-kendo-role="view" data-kendo-url="index.html">
 
-        <header data-kendo-role="header" style="text-align: center"> Settings: <a href="#about" data-kendo-role="button" style="float: right; margin-right: 10px;">About</a></header>
+        <header data-kendo-role="header" style="text-align: center">
+        <a href="#about" data-kendo-role="button" style=" margin-right: 10px;">About</a>
+        Settings:
+        </header>
 
         <div data-kendo-role="content">
-
             <ul data-kendo-role="listview" data-kendo-style="inset">
                 <li>Airplane mode <a href="#airplane-mode" data-kendo-role="button">On (dialog)</a></li>
                 <li>Wi-Fi <a href="wifis.html" data-kendo-role="button">Select ...</a></li>
