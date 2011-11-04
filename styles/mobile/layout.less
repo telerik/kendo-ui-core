@@ -998,7 +998,6 @@ body > .k-tabStrip,
 .k-listinsetgroup .k-list
 {
     overflow: hidden;
-    .border-radius(10px);
 }
 
 .k-listview .k-toggle
@@ -1047,6 +1046,7 @@ body > .k-tabStrip,
 .k-ios .k-listinsetgroup .k-list
 {
     border: 1px solid #999;
+    .border-radius(10px);
     .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
 }
 
@@ -1103,9 +1103,9 @@ body > .k-tabStrip,
 }
 
 .k-android .k-listinset,
-.k-android .k-listinsetgroup .k-list
+.k-android .k-listinsetgroup
 {
-    border: 1px solid #404040;
+    margin: 0;
 }
 
 .k-android .k-listview .k-list
@@ -1127,15 +1127,13 @@ body > .k-tabStrip,
     border-bottom: 0;
 }
 
-.k-android .k-listgroup > li
-{
-    color: #bebebe;
-    background: #191919;
-}
-
+.k-android .k-listgroup > li,
 .k-android .k-listinsetgroup > li
 {
     color: #bebebe;
+    background: #191919;
+    padding-top: .2em;
+    line-height: inherit;
 }
 
 .k-default-content
