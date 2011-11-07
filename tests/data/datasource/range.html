@@ -441,6 +441,30 @@
                 equal(dataSource.skip(), 0);
                 equal(dataSource.page(), 1);
             });
+
+            test("range does not reset the actual dataSource data when local transport is used", function() {
+                var dataSource = new DataSource({
+                    pageSize: 3,
+                    data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
+                });
+
+                dataSource.read();
+                dataSource.range(4, 3);
+
+                equal(dataSource.data().length, 8);
+                equal(dataSource.view().length, 3);
+            });
+
+            test("range set data and view when remote transport is used", function() {
+                var dataSource = remoteDataSource();
+
+                dataSource.read();
+                dataSource.range(4, 16);
+
+                equal(dataSource.data().length, 16);
+                equal(dataSource.view().length, 16);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
