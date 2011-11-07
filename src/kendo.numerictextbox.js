@@ -83,7 +83,10 @@
         HIDE = "k-hide-text",
         HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
+        INPUTWRAPPER = ".k-numeric-wrap",
         POINT = ".",
+        SELECTED = "k-state-selected",
+        STATEDISABLED = "k-state-disabled",
         NULL = null,
         proxy = $.proxy,
         decimals = {
@@ -196,14 +199,16 @@
 
             if (enable === false) {
                 wrapper
-                    .addClass(DISABLED)
+                    .addClass(STATEDISABLED)
+                    .children(INPUTWRAPPER)
                     .unbind(HOVEREVENTS);
 
                 text.attr(DISABLED, DISABLED);
                 element.attr(DISABLED, DISABLED);
             } else {
                 wrapper
-                    .removeClass(DISABLED)
+                    .removeClass(STATEDISABLED)
+                    .children(INPUTWRAPPER)
                     .bind(HOVEREVENTS, that._toggleHover);
 
                 text.removeAttr(DISABLED);
@@ -212,11 +217,13 @@
                 upArrow.bind(MOUSEDOWN, function(e) {
                     e.preventDefault();
                     that._spin(1);
+                    that._upArrow.addClass(SELECTED);
                 });
 
                 downArrow.bind(MOUSEDOWN, function(e) {
                     e.preventDefault();
                     that._spin(-1);
+                    that._downArrow.addClass(SELECTED);
                 });
             }
         },
@@ -279,6 +286,7 @@
                 if (!touch || kendo.eventTarget(e) != e.currentTarget || e.type === TOUCHEND) {
                     clearTimeout( that._spinning );
                 }
+                arrows.removeClass(SELECTED);
             });
 
             that._upArrow = arrows.eq(0);
@@ -518,7 +526,7 @@
             wrapper = element.parent();
 
             if (!wrapper.is("span.k-widget")) {
-                wrapper = element.hide().wrap('<span class="k-textbox-wrap k-state-default" />').parent();
+                wrapper = element.hide().wrap('<span class="k-numeric-wrap k-state-default" />').parent();
                 wrapper = wrapper.wrap("<span/>").parent();
             }
 
@@ -528,7 +536,7 @@
     });
 
     function buttonHtml(className, text) {
-        return '<span unselectable="on" class="k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span>'
+        return '<span unselectable="on" class="k-link"><span class="k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span></span>'
     }
 
     function caret(element, position) {
