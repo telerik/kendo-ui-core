@@ -332,6 +332,16 @@
                 equal(data[0].bar, "bar1");
                 equal(data[1].bar, undefined);
             });
+
+            test("data returns array if there is only one item", function() {
+                var reader = new XmlDataReader( { data: "/foo"} );
+
+                var result = reader.parse("<foo><bar/></foo>");
+                var data = reader.data(result);
+
+                ok($.isArray(data));
+                equal(data.length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
