@@ -1110,6 +1110,12 @@
                 data = that.reader.data(data);
             }
 
+            that._data = data;
+
+            if (that._set) {
+                that._set.data(data);
+            }
+
             var start = that._skip || 0,
                 end = start + data.length;
 
@@ -1125,12 +1131,6 @@
                 options = {},
                 result,
                 hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0;
-
-            that._data = data;
-
-            if (that._set) {
-                that._set.data(data);
-            }
 
             if (that.options.serverPaging !== true) {
                 options.skip = that._skip;
@@ -1185,6 +1185,12 @@
         data: function(value) {
             var that = this;
             if (value !== undefined) {
+                that._data = value;
+
+                if (that._set) {
+                    that._set.data(value);
+                }
+
                 that._process(value);
             } else {
                 return that._data;
