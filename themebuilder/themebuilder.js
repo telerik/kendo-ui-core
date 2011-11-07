@@ -5,6 +5,23 @@
         KENDOWINDOW = "kendoWindow"
         ui = kendo.ui,
         Widget = ui.Widget,
+        colorPicker = "k-colorpicker",
+        propertyEditors = {
+            "color": colorPicker,
+            "background-color": colorPicker,
+            "border-color": colorPicker,
+            "border-radius": "k-numerictextbox",
+            "box-shadow": colorPicker
+        },
+        processors = {
+            "box-shadow": function(value) {
+                if (value != "none") {
+                    return /#[0-9a-f]+/i.exec(value)[0];
+                } else {
+                    return "#000000";
+                }
+            }
+        },
         TextBox = ui.Widget.extend({
             init: function(options) {
                 var that = this;
@@ -150,6 +167,10 @@
                                              pad((+g).toString(16)) +
                                              pad((+b).toString(16));
                             });
+                        }
+
+                        if (processors[property]) {
+                            value = processors[property](value);
                         }
 
                         constant.value = value;
@@ -314,19 +335,6 @@
             },
             render: function() {
                 var that = this,
-                    colorPicker = "k-colorpicker",
-                    propertyEditors = {
-                        "color": colorPicker,
-                        "background-color": colorPicker,
-                        "border-color": colorPicker,
-                        "border-radius": "k-numerictextbox",
-                        "box-shadow": colorPicker
-                    },
-                    processors = {
-                        "box-shadow": function(value) {
-                            return /#[0-9a-f]+/i.exec(value)[0];
-                        }
-                    },
                     propertyGroupTemplate = kendo.template(
                         "<li>#= title #" +
                             "<div class='styling-options'>" +
