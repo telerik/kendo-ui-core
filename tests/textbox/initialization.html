@@ -36,7 +36,7 @@
 
                 ok(wrapper.hasClass("k-widget k-numerictextbox"));
 
-                ok(innerWrapper.eq(0).hasClass("k-textbox-wrap"));
+                ok(innerWrapper.eq(0).hasClass("k-numeric-wrap"));
                 equal(innerWrapper.length, 1);
             });
 
@@ -46,12 +46,14 @@
                     downArrow = textbox._downArrow;
 
                 ok(upArrow.parent().hasClass("k-select"));
-                ok(upArrow.hasClass("k-icon k-arrow-up"));
-                ok(downArrow.hasClass("k-icon k-arrow-down"));
-                equal(upArrow.attr("title"), textbox.options.upArrowText);
-                equal(downArrow.attr("title"), textbox.options.downArrowText);
-                equal(upArrow.html(), textbox.options.upArrowText);
-                equal(downArrow.html(), textbox.options.downArrowText);
+                ok(upArrow.hasClass("k-link"));
+                ok(downArrow.hasClass("k-link"));
+                ok(upArrow.children(":first").hasClass("k-icon k-arrow-up"));
+                ok(downArrow.children(":first").hasClass("k-icon k-arrow-down"));
+                equal(upArrow.children(":first").attr("title"), textbox.options.upArrowText);
+                equal(downArrow.children(":first").attr("title"), textbox.options.downArrowText);
+                equal(upArrow.children(":first").html(), textbox.options.upArrowText);
+                equal(downArrow.children(":first").html(), textbox.options.downArrowText);
                 ok(upArrow.data("events").mousedown);
                 ok(downArrow.data("events").mousedown);
             });
