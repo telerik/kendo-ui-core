@@ -9,7 +9,7 @@
         <title>Transition</title>
         <style>
             body {
-                width: 800px;
+                width: 500px;
                 margin: 20px auto;
             }
             #a-container, #b-container {
@@ -22,11 +22,13 @@
                 width: 100px;
                 height: 100px;
                 background: red;
+                position: absolute;
             }
 
             #b {
                 width: 100px;
                 height: 100px;
+                position: absolute;
                 background: blue;
             }
         </style>
@@ -48,21 +50,23 @@
             <dt>Animation type:</dt>
             <dd>
             <select id="animation-type">
+                <option>overlay:up</option>
                 <option>slide</option>
                 <option>zoom</option>
-                <option>overlay:up</option>
                 <option>fade</option>
             </select>
             </dd>
         </dl>
-        <label><input type="checkbox" id="reverse" />Reverse</label>
+        <label><input type="checkbox" id="reverse" checked />Reverse</label>
         <button id="apply">Apply</button>
 
         <script>
 
             $("#apply").click(function() {
-                $("#a").show();
-                $("#a").kendoAnimateTo($("#b"), { effects: $("#animation-type").val(), duration: 400, reverse: $("#reverse")[0].checked });
+                $("#b, #a").css({"top":0, "left":0});
+                $("#a").css("top");
+
+                $("#a").kendoAnimateTo($("#b"), { effects: $("#animation-type").val(), duration: 1000, reverse: $("#reverse")[0].checked });
             });
             $("#apply").click();
         </script>
