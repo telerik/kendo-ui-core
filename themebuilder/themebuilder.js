@@ -5,11 +5,37 @@
         KENDOWINDOW = "kendoWindow"
         ui = kendo.ui,
         Widget = ui.Widget,
-        ShadowInput = Widget.extend({
-            init: function(element, options) {
+        TextBox = ui.Widget.extend({
+            init: function(options) {
                 var that = this;
 
                 ui.Widget.fn.init.call(that, element, options);
+
+                that._wrapper();
+            },
+
+            _wrapper: function() {
+                var that = this,
+                    element = that.element,
+                    domElement = element[0],
+                    wrapper;
+
+                wrapper = element.parent();
+
+                if (!wrapper.is("div.k-widget")) {
+                    wrapper = element.wrap("<div />").parent();
+                }
+
+                wrapper[0].style.cssText = domElement.style.cssText;
+                element.css({
+                    width: "100%",
+                    height: "auto"
+                });
+
+                that._focused = that.element;
+                that.wrapper = wrapper
+                                  .addClass("k-widget k-textbox k-header")
+                                  .addClass(domElement.className);
             }
         }),
         ColorPicker = ui.ComboBox.extend({
@@ -136,8 +162,7 @@
 
         ThemeBuilder = kendo.Observable.extend({
             init: function(templateInfo, constants, constantsHierarchy) {
-                var that = this,
-                    themeColorsDataSource;
+                var that = this;
 
                 that.templateInfo = templateInfo;
 
@@ -174,13 +199,6 @@
                     .data("kendoThemeBuilder", that)
                     .wrap("<div id='k-tb-wrap' />");
 
-                themeColorsDataSource = new kendo.data.DataSource({
-                    data: $.map(("#c00000,#ff0000,#ffc000,#ffff00,#92d050,#00b050,#00b0f0,#0070c0,#002060,#7030a0," + 
-                                 "#ffffff,#e3e3e3,#c4c4c4,#a8a8a8,#8a8a8a,#6e6e6e,#525252,#363636,#1a1a1a,#000000").split(","), function(x) {
-                        return { text: x, value: x };
-                    })
-                });
-
                 function changeHandler(e) {
                     that._propertyChange({
                         name: this.element[0].id,
@@ -193,8 +211,6 @@
                         animation: false
                     })
                     .find("input.k-colorpicker").kendoColorPicker({
-                        autoBind: false,
-                        dataSource: themeColorsDataSource,
                         change: changeHandler
                     }).end()
                     .find("input.k-numerictextbox").kendoNumericTextBox({
@@ -247,7 +263,11 @@
                 });
             },
             updateMaxHeight: function() {
-                this.content.data(KENDOWINDOW).options.maxHeight = $(window).height() - 100;
+                var windowObject = this.content.data(KENDOWINDOW);
+
+                if (windowObject) {
+                    windowObject.options.maxHeight = $(window).height() - 100;
+                }
             },
             removeUpdateHeightHandler: function() {
                 $(window).unbind("resize.kendoThemeBuilder");
@@ -300,7 +320,12 @@
                         "background-color": colorPicker,
                         "border-color": colorPicker,
                         "border-radius": "k-numerictextbox",
-                        "box-shadow": "k-shadowinput"
+                        "box-shadow": colorPicker
+                    },
+                    processors = {
+                        "box-shadow": function(value) {
+                            return value;
+                        }
                     },
                     propertyGroupTemplate = kendo.template(
                         "<li>#= title #" +
@@ -310,7 +335,7 @@
                                     "if (c.readonly) continue; #" +
                                     "<label for='#= name #'>#= labels[name] || name #</label>" +
                                     "<input id='#= name #' class='#= editors[c.property] #' " +
-                                           "value='#= c.value #' />" +
+                                           "value='#= processors[c.property] ? processors[c.property](c.value) : c.value #' />" +
                                 "# } #" +
                             "</div>" +
                         "</li>"
@@ -333,7 +358,8 @@
                                     title: title,
                                     constants: matchedConstants,
                                     labels: section.labels,
-                                    editors: propertyEditors
+                                    editors: propertyEditors,
+                                    processors: processors
                                 }));
                             }).join("") +
                         "</ul>" +
@@ -343,9 +369,15 @@
 
     ColorPicker.fn.options = $.extend(kendo.ui.ComboBox.fn.options, {
         name: "ColorPicker",
+        autoBind: false,
         template: "<span style='background-color: ${ data.value }' "+
                         "class='k-icon k-color-preview' " +
-                        "title='${ data.text }'></span> "
+                        "title='${ data.text }'></span> ",
+        dataSource: new kendo.data.DataSource({
+            data: $.map("#c00000,#ff0000,#ffc000,#ffff00,#92d050,#00b050,#00b0f0,#0070c0,#002060,#7030a0,#ffffff,#e3e3e3,#c4c4c4,#a8a8a8,#8a8a8a,#6e6e6e,#525252,#363636,#1a1a1a,#000000".split(","), function(x) {
+                return { text: x, value: x };
+            })
+        })
     });
 
     kendo.ui.plugin(ColorPicker);
