@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>3b08f77c-d458-437a-a21e-188fbd45ad6e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>23f626ec-c027-4762-973e-ab5c7c04ebe0</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>9e2cf3ce-417a-496c-9ad8-f3eb2bb2659a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>9cd60ef0-5dc8-4dfe-9357-b0b6c8052b77</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -141,7 +141,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>4c561c85-c561-49c1-aa67-f1cabe1c417f</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f31b3ba4-e265-49e1-ad81-ef93f26cffc0</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -224,7 +224,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b1f33e1e-efdb-4707-9fe4-62c1b686897a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d126ae68-06ac-4368-9cef-d08fbdd5e221</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -307,7 +307,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d8108457-a213-46c0-b7cb-d6af45552978</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>fc7bfb42-5160-4e21-8ba0-95edd66f3c1f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -392,7 +392,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e31f41e9-3209-451f-b1c3-1b31996cb8f0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>93620c40-6fbc-4a41-908c-4a8d14de0913</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ExistsVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -477,7 +477,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>8716f6bf-4f37-4cb3-9851-7c97723c5dfc</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7811731f-cfc2-4a15-9b16-981012d53605</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -560,7 +560,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ee3e376d-4d17-4fae-b838-66fc4376ce94</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>46ee659a-99cd-47f8-8c0b-224c81bda128</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -639,12 +639,12 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify ExistsNot 'InceptionListItem'</d2p1:Description>
+      <d2p1:Description>Verify element 'InceptionListItem' 'is not' visible.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b34cea59-18d3-4280-958e-f629b06c7307</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:ExistsVerificationDescriptor">
+      <d2p1:Runtime_x0020_ID>f78c0503-734c-45bd-b86e-e3f6e2f510af</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
             <d6p1:KeyValueOfstringstring>
@@ -657,11 +657,11 @@
         <d2p1:EditorType />
         <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
           <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Key>verifyTarget</d5p1:Key>
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[3]/ul[1]/li[3]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[4]/div[1]/ul[1]/li[3]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
@@ -669,10 +669,10 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>tagname=li</Clause>
+                          <Clause>TextContent=Inception</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>TextContent=Inception</Clause>
+                          <Clause>tagname=li</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
@@ -687,15 +687,15 @@
               <Frame i:nil="true" />
               <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
               <IsIndependent>false</IsIndependent>
-              <Name>target</Name>
+              <Name>verifyTarget</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
+                <d2p1:BaseUrl />
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
                 <d2p1:FriendlyName>API8</d2p1:FriendlyName>
-                <d2p1:Path>/kendo/live/combobox/api.html</d2p1:Path>
+                <d2p1:Path>http://aggeorgiev/kendo/live/combobox/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
               </Page>
@@ -715,9 +715,9 @@
         <d2p1:CheckInterval>500</d2p1:CheckInterval>
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
-        <d2p1:ExistsNot>true</d2p1:ExistsNot>
+        <d2p1:IsVisible>false</d2p1:IsVisible>
       </d2p1:Step>
-      <d2p1:StepImageKey>FilterLoseFocusFilterxi5dkag2.4k1</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterLoseFocusFilteruojjmhjq.z1g</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -727,22 +727,34 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.2.1007.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.2.1007.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.2.1007.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.2.1007.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1007.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
   </CurrentReferences>
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <HasCodeBehind>false</HasCodeBehind>
+  <HtmlDescription i:nil="true" />
   <InheritParentDataSource>false</InheritParentDataSource>
+  <IsManual>false</IsManual>
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\ComboBox\API\FilterLoseFocusFilter.tstest</Path>
+  <Path>UIWidgets\ComboBox\API\FilterLoseFocusFilter.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\ComboBox\API\FilterLoseFocusFilter.resx</ResourceFilePath>
+  <ProfilerBenchmarkResultsFilePath i:nil="true" />
+  <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
+  <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+    <d2p1:KeyValueOfstringbase64Binary>
+      <d2p1:Key>ArtOfTest.WebAii.Design.Execution.Profiler.ProfilerResultsMetadata</d2p1:Key>
+      <d2p1:Value>AAEAAAD/////AQAAAAAAAAAMAgAAAGBBcnRPZlRlc3QuV2ViQWlpLkRlc2lnbiwgVmVyc2lvbj0yMDExLjIuMTAwNy4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTRmYzYyYmJjMzgyN2FiMWQMAwAAAFlBcnRPZlRlc3QuV2ViQWlpLCBWZXJzaW9uPTIwMTEuMi4xMDA3LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49NGZkNWY2NWJlMTIzNzc2YwwEAAAAaVRlbGVyaWsuVGVzdGluZ0ZyYW1ld29yay5JbnRlcm9wLCBWZXJzaW9uPTIwMTEuMi4xMDA3LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49OGNhMDBkM2UwZWJkNGI4YgUBAAAAQkFydE9mVGVzdC5XZWJBaWkuRGVzaWduLkV4ZWN1dGlvbi5Qcm9maWxlci5Qcm9maWxlclJlc3VsdHNNZXRhZGF0YQ4AAAAKX3Jlc3VsdHNJZAxfb3duZXJUZXN0SWQKX3N0YXJ0VGltZQpfdG90YWxUaW1lG19iQ29sbGVjdFByb2ZpbGVyU2FtcGxlRGF0YQpfc3RyU2VydmVyDF9pU2VydmVyUG9ydA9fc3RyRGVzY3JpcHRpb24KX3N0ckZvbGRlcgxfc3RyRmlsZVBhdGgMX2Jyb3dzZXJUeXBlD19icm93c2VyVmVyc2lvbhxfYkNsZWFyQnJvd3NlckNhY2hlQmVmb3JlUnVuF19iV2FybVVwU2VydmVyQmVmb3JlUnVuAwMAAAABAAEBAQQEAAALU3lzdGVtLkd1aWQLU3lzdGVtLkd1aWQNDAEIKkFydE9mVGVzdC5XZWJBaWkuQ29yZS5Ccm93c2VyRXhlY3V0aW9uVHlwZQMAAAApVGVsZXJpay5UZXN0aW5nRnJhbWV3b3JrLlVuaXZlcnNhbFZlcnNpb24EAAAAAQECAAAABPv///8LU3lzdGVtLkd1aWQLAAAAAl9hAl9iAl9jAl9kAl9lAl9mAl9nAl9oAl9pAl9qAl9rAAAAAAAAAAAAAAAIBwcCAgICAgICAgAAAAAAAAAAAAAAAAAAAAAB+v////v///9XiT08X6FtSobgl71LAphsAAAAAAAAAAAAAAAAAAAAAAAGBwAAAApBR0dFT1JHSUVWSh8AAAoGCAAAACdDOlxVc2Vyc1xhZ2dlb3JnaWV2XEFwcERhdGFcTG9jYWxcVGVtcFwKBff///8qQXJ0T2ZUZXN0LldlYkFpaS5Db3JlLkJyb3dzZXJFeGVjdXRpb25UeXBlAQAAAAd2YWx1ZV9fAAgDAAAAAQAAAAoAAAs=</d2p1:Value>
+    </d2p1:KeyValueOfstringbase64Binary>
+  </ProfilerConfigurations>
+  <ProfilerResultsDirectory>C:\Users\aggeorgiev\AppData\Local\Temp\</ProfilerResultsDirectory>
+  <ProfilerServerName i:nil="true" />
+  <ResourceFilePath>UIWidgets\ComboBox\API\FilterLoseFocusFilter.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
