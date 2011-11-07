@@ -39,6 +39,8 @@
                 that.data = function(value) {
                     var record, field, result = that.evaluate(value, data);
 
+                    result = isArray(result) ? result : [result];
+
                     if (that.model && model.fields) {
                         return map(result, function(value) {
                             record = {};
