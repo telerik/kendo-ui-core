@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TimePicker API</title>
+        <title>TimePicker Navigation</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -11,102 +11,101 @@
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
-        <h1 id="qunit-header">TimePicker API</h1>
+        <h1 id="qunit-header">TimePicker Navigation</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
 
+            QUnit.config.testTimeout = 500;
+
             var TimeView = kendo.TimeView,
+                keys = kendo.keys,
                 MIDNIGHT = new Date(0, 0, 0, 0, 0, 0),
                 div, input;
 
-            module("kendo.ui.TimePicker API", {
+            module("kendo.ui.TimePicker Navigation", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
                     input.parents(".k-widget").andSelf().remove();
+                    $(document).find(".k-list-container").remove();
                 }
             });
 
-            test("open TimeView", function() {
+            test("move should select first item", function() {
                 var tv = new TimeView({
-                    anchor: input,
                     min: MIDNIGHT,
                     max: MIDNIGHT,
                     interval: 30
                 });
 
                 tv.open();
+                tv.move({keyCode: keys.DOWN, preventDefault: $.noop});
 
-                ok(tv.popup.element.is(":visible"));
+                equal(tv.ul.find("li.k-state-selected").index(), 0);
             });
 
-            test("close TimeView", function() {
+            test("move should select last item", function() {
                 var tv = new TimeView({
-                    anchor: input,
                     min: MIDNIGHT,
                     max: MIDNIGHT,
                     interval: 30
                 });
 
                 tv.open();
-                tv.close();
+                tv.move({keyCode: keys.UP, preventDefault: $.noop});
 
-                ok(!tv.popup.element.is(":visible"));
+                equal(tv.ul.find("li.k-state-selected").index(), tv.ul.find("li").length - 1);
             });
 
-            test("select() method should select li", function() {
+            test("move should select next item", function() {
                 var tv = new TimeView({
                     min: MIDNIGHT,
                     max: MIDNIGHT,
                     interval: 30
                 });
 
-                tv.refresh();
+                tv.open();
+                tv.current(tv.ul[0].firstChild);
 
-                tv.select("10:00 AM");
+                tv.move({keyCode: keys.DOWN, preventDefault: $.noop});
 
-                equal(tv.ul.find("li.k-state-selected").length, 1);
-                equal(tv.ul.find("li.k-state-selected").html(), "10:00 AM");
+                equal(tv.ul.find("li.k-state-selected").index(), 1);
             });
 
-            test("click() select li and set date", function() {
-                tv = new TimeView({
-                    min: MIDNIGHT,
-                    max: MIDNIGHT,
-                    interval: 30
-                });
-
-                tv.refresh();
-
-                var li = tv.ul.find("li")
-                           .filter(function() {
-                               return $(this).text() == "2:00 PM";
-                           });
-
-                tv.click({currentTarget: li[0]});
-
-                equal(tv.ul.find("li.k-state-selected")[0], li[0]);
-            });
-
-            test("current() should persist current selected LI", function() {
+            test("move should select previous item", function() {
                 var tv = new TimeView({
                     min: MIDNIGHT,
                     max: MIDNIGHT,
                     interval: 30
                 });
 
-                tv.refresh();
+                tv.open();
+                tv.current(tv.ul.children().eq(1));
 
-                equal(tv.current(), undefined);
+                tv.move({keyCode: keys.UP, preventDefault: $.noop});
 
-                tv.current(tv.ul.find("li:first"));
+                equal(tv.ul.find("li.k-state-selected").index(), 0);
+            });
 
-                equal(tv.ul.find("li.k-state-selected").length, 1);
-                equal(tv.current().index(), tv.ul.find("li.k-state-selected").index());
+            asyncTest("move(ENTER) should call change", function() {
+                var tv = new TimeView({
+                    min: MIDNIGHT,
+                    max: MIDNIGHT,
+                    interval: 30,
+                    change: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                tv.open();
+                tv.current(tv.ul.children().eq(1));
+
+                tv.move({keyCode: keys.ENTER, preventDefault: $.noop});
             });
 
        </script>
