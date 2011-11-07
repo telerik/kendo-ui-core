@@ -172,23 +172,6 @@
       return options;
     }
 
-    function positionElement(element, direction, container) {
-        if (!direction) {
-            return;
-        }
-
-        var offset = -direction.modifier * (direction.vertical ? container.outerHeight() : container.outerWidth());
-
-        if (kendo.support.transitions) {
-            element.css(TRANSFORM, direction.transition + "(" + offset + PX + ")");
-        } else {
-            element.css(direction.property, offset + PX);
-        }
-
-        // Read a style to force Chrome to apply the change.
-        element.css(direction.property);
-    }
-
     function parseTransitionEffects(options) {
         var effects = options.effects,
             mirror;
@@ -585,20 +568,17 @@
 
             function complete() {
                 destination.attr("style", "");
+                element.attr("style", "");
                 options.completeCallback && options.completeCallback();
             }
 
             options.complete = $.browser.msie ? function() { setTimeout(complete) } : complete;
 
             if ("slide" in options.effects) {
-              positionElement(destination, kendo.directions[direction], container);
               element.kendoAnimate(options);
               destination.kendoAnimate(slideToSlideIn(options));
             } else {
-              movingElement = options.reverse ? element : destination,
-              staticElement = options.reverse ? destination : element;
-              positionElement(movingElement, kendo.directions[direction], container);
-              movingElement.kendoAnimate(options);
+              (options.reverse ? element : destination).kendoAnimate(options);
             }
         },
 
