@@ -16,7 +16,7 @@
             var that = this;
             element = $(element);
 
-            if (!element.is("div,.k-radiogroup")) {
+            if (!element.is("div,.km-radiogroup")) {
                 var selector = "input[name=" + element.attr("name") + "]";
                 element = element.add(element.siblings(selector)).add(element.siblings("label:has(" + selector + ")")).wrapAll("<div />").parent();
             }
@@ -48,7 +48,7 @@
             var that = this;
 
             if (enable) {
-                that.element.removeClass("k-state-disabled");
+                that.element.removeClass("km-state-disabled");
                 that.inputs
                     .removeAttr("disabled")
                     .bind("change", that._toggleProxy)
@@ -58,7 +58,7 @@
                     .unbind("change", that._toggleProxy)
                     .parent().unbind(MOUSEDOWN, that._triggerProxy)
                     .attr("disabled", "disabled");
-                that.element.addClass("k-state-disabled");
+                that.element.addClass("km-state-disabled");
             }
         },
 
@@ -84,11 +84,11 @@
 
         _trigger: function (e) {
             var that = this,
-                label = $(kendo.eventTarget(e)).closest(".k-button"),
+                label = $(kendo.eventTarget(e)).closest(".km-button"),
                 input = label.children("input[type=radio]");
 
-            this.element.find(".k-button.k-state-active").removeClass("k-state-active");
-            $(e.target).closest(".k-button").addClass("k-state-active");
+            this.element.find(".km-button.km-state-active").removeClass("km-state-active");
+            $(e.target).closest(".km-button").addClass("km-state-active");
 
             if (e.type == MOUSEDOWN) {
                 var selected = input.data("selected-index");
@@ -110,7 +110,7 @@
             var that = this;
 
             if (that.element.length)
-                that.element.addClass("k-radiogroup");
+                that.element.addClass("km-radiogroup");
 
             that.inputs = that.element.find("input[type=radio]");
 
@@ -127,13 +127,13 @@
                         label = input.wrap("<label>&nbsp;</label>").parent();
 
                     label
-                        .addClass("k-button")
-                        .wrapInner("<span class='k-text' />")
+                        .addClass("km-button")
+                        .wrapInner("<span class='km-text' />")
                         .find("img")
-                        .addClass("k-image")
+                        .addClass("km-image")
                         .prependTo(label)
                         .end()
-                        .find(".k-sprite")
+                        .find(".km-sprite")
                         .prependTo(label);
 
                     input
@@ -142,7 +142,7 @@
                         .appendTo(label);
                 });
             } else {
-                that.inputs = $("<input type='radio' data-kendo-role='radio-group-button' data-selected-index='0' />").appendTo(that.element).wrap("<label class='k-button'>&nbsp;</label>");
+                that.inputs = $("<input type='radio' data-kendo-role='radio-group-button' data-selected-index='0' />").appendTo(that.element).wrap("<label class='km-button'>&nbsp;</label>");
             }
 
         }

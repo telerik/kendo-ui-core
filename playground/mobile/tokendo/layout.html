@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="k-ios">
+<html class="km-ios">
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -24,103 +24,99 @@
     <script src="../../../src/kendo.mobile.application.js"></script>
 
     <style type="text/css">
-        .k-content
+        .km-content
         {
             background: silver;
         }
-        .k-contentIn
+        .km-contentIn
         {
             background: transparent;
         }
     </style>
 </head>
 <body>
-    <div class="k-slot">
-        <div class="k-showcase">
-            <div class="k-view">
-                <div class="k-header">
-                    <div class="k-toolbar">
-                        <button style="float: right"><span>About</span></button>
-                    </div>
-                </div>
+    <article class="km-view">
+        <header>
+            <div class="km-toolbar">
+                <button style="float: right"><span>About</span></button>
+            </div>
+        </header>
 
-                <div class="k-content">
-                    <div class="k-contentIn">
-                        <ul data-kendo-role="listview">
-                            <li>Airplane Mode <input type="checkbox" data-kendo-role="switch" /></li>
-                            <li>Hot Balloon Mode <input type="checkbox" data-kendo-role="switch" /></li>
+        <content>
+            <div class="km-contentIn">
+                <ul data-kendo-role="listview">
+                    <li>Airplane Mode <input type="checkbox" data-kendo-role="switch" /></li>
+                    <li>Hot Balloon Mode <input type="checkbox" data-kendo-role="switch" /></li>
+                </ul>
+
+                <ul data-kendo-role="listview" data-kendo-display="group">
+                    <li>Airplane Mode <input type="checkbox" data-kendo-role="switch" /></li>
+                    <li>Dirigible Mode <input type="checkbox" data-kendo-role="switch" /></li>
+                </ul>
+
+                <ul data-kendo-role="listview">
+                    <li>
+                        A
+                        <ul>
+                            <li>Alderaan<input type="checkbox" data-kendo-role="switch" /></li>
+                            <li>Alpha Centauri<input type="checkbox" data-kendo-role="switch" /></li>
                         </ul>
+                    </li>
+                    <li>
+                        B
+                        <ul>
+                            <li>Betelgeuse<input type="checkbox" data-kendo-role="switch" /></li>
+                            <li>Beta Centauri<input type="checkbox" data-kendo-role="switch" /></li>
+                        </ul>
+                    </li>
+                </ul>
 
-                        <ul data-kendo-role="listview" data-kendo-display="group">
-                            <li>Airplane Mode <input type="checkbox" data-kendo-role="switch" /></li>
+                <ul data-kendo-role="listview" data-kendo-display="group">
+                    <li>
+                        Choose a modus:
+                        <ul>
+                            <li>Hot Balloon Mode <input type="checkbox" data-kendo-role="switch" /></li>
                             <li>Dirigible Mode <input type="checkbox" data-kendo-role="switch" /></li>
                         </ul>
+                    </li>
+                </ul>
 
-                        <ul data-kendo-role="listview">
-                            <li>
-                                A
-                                <ul>
-                                    <li>Alderaan<input type="checkbox" data-kendo-role="switch" /></li>
-                                    <li>Alpha Centauri<input type="checkbox" data-kendo-role="switch" /></li>
-                                </ul>
-                            </li>
-                            <li>
-                                B
-                                <ul>
-                                    <li>Betelgeuse<input type="checkbox" data-kendo-role="switch" /></li>
-                                    <li>Beta Centauri<input type="checkbox" data-kendo-role="switch" /></li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <ul data-kendo-role="listview" data-kendo-display="group">
-                            <li>
-                                Choose a modus:
-                                <ul>
-                                    <li>Hot Balloon Mode <input type="checkbox" data-kendo-role="switch" /></li>
-                                    <li>Dirigible Mode <input type="checkbox" data-kendo-role="switch" /></li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        Show message: <input type="checkbox" id="toggle" />
-                        <input id="checky" type="checkbox" />
-                        <div id="radio">
-                            <label for="radio1">Test 1</label>
-                            <input id="radio1" type="radio" name="three" />
-                            <label>Test 2
-                                <input type="radio" name="three" />
-                            </label>
-                        </div>
-                        <label for="radioz">Test 1</label>
-                        <input id="radioz" type="radio" name="two" />
-                        <label>Test 2
-                            <input type="radio" name="two" />
-                        </label>
-                        <input type="radio" name="two" />
-                        <br><br>
-                        <button id="button">Select Random Radio</button>
-                    </div>
+                Show message: <input type="checkbox" id="toggle" />
+                <input id="checky" type="checkbox" />
+                <div id="radio">
+                    <label for="radio1">Test 1</label>
+                    <input id="radio1" type="radio" name="three" />
+                    <label>Test 2
+                        <input type="radio" name="three" />
+                    </label>
                 </div>
+                <label for="radioz">Test 1</label>
+                <input id="radioz" type="radio" name="two" />
+                <label>Test 2
+                    <input type="radio" name="two" />
+                </label>
+                <input type="radio" name="two" />
+                <br><br>
+                <button id="button">Select Random Radio</button>
             </div>
-        </div>
-    </div>
-    <footer>
-        <div class="k-tabstrip">
-            <button class="k-state-active k-button">
-                <span class="k-icon"></span><span class="k-text">Featured</span>
-            </button>
-            <button class="k-button">
-                <span class="k-icon"></span><span class="k-text">Genius</span><span class="k-message">3</span>
-            </button>
-            <button class="k-button">
-                <span class="k-icon"></span><span class="k-text">Top Charts</span>
-            </button>
-            <button class="k-button">
-                <span class="k-icon"></span><span class="k-text">Categories</span>
-            </button>
-        </div>
-    </footer>
+        </content>
+        <footer>
+            <ul class="km-tabstrip">
+                <li class="km-state-active k-button">
+                    <span class="km-icon"></span><span class="km-text">Featured</span>
+                </li>
+                <li class="km-button">
+                    <span class="km-icon"></span><span class="km-text">Genius</span><span class="km-message">3</span>
+                </li>
+                <li class="km-button">
+                    <span class="km-icon"></span><span class="km-text">Top Charts</span>
+                </li>
+                <li class="km-button">
+                    <span class="km-icon"></span><span class="km-text">Categories</span>
+                </li>
+            </ul>
+        </footer>
+    </article>
     <script>
         $(document)
             .bind("appinit", function (e, args) {
@@ -148,12 +144,12 @@
         $(document).ready(function () {
             var listviews = $("[data-kendo-role=listview]");
             listviews
-                    .addClass("k-listview")
+                    .addClass("km-listview")
                     .find("li:not(:has(ul))")
                     .parent("ul")
-                    .addClass("k-list");
+                    .addClass("km-list");
 
-            $("[data-kendo-display=group]").addClass("k-listgroup");
+            $("[data-kendo-display=group]").addClass("km-listgroup");
         });
 
     </script>

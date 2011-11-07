@@ -16,17 +16,17 @@
             grouped = options.type === "group";
             inset = options.style === "inset";
 
-            that.element.addClass("k-listview")
-                .toggleClass("k-list", !grouped)
-                .toggleClass("k-listinset", !grouped && inset)
-                .toggleClass("k-listgroup", grouped && !inset)
-                .toggleClass("k-listgroupinset", grouped && inset);
+            that.element.addClass("km-listview")
+                .toggleClass("km-list", !grouped)
+                .toggleClass("km-listinset", !grouped && inset)
+                .toggleClass("km-listgroup", grouped && !inset)
+                .toggleClass("km-listgroupinset", grouped && inset);
 
             if (grouped) {
                 that.element
                     .children()
                     .children("ul")
-                    .addClass("k-list");
+                    .addClass("km-list");
             }
 
             if (options.dataSource) {
