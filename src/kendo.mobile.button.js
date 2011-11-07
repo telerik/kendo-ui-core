@@ -10,7 +10,6 @@
         MOUSEUP = touch ? "touchend" : "mouseup",
         ACTIVE_STATE_CLASS = "k-state-active",
         CLICK = "click",
-        application = kendo.application,
         extend = $.extend,
         proxy = $.proxy;
 
@@ -78,14 +77,14 @@
             that.element.removeClass(ACTIVE_STATE_CLASS);
             that.trigger(CLICK);
 
-            if (application && href) {
-                application.navigate(href);
+            if (kendo.application && href) {
+                kendo.application.navigate(href);
             }
         },
 
         _click: function(e) {
             this.element.attr("href", this._href);
-            if (application) {
+            if (kendo.application) {
                 e.preventDefault();
             }
         },
