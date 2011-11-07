@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="k-ios">
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -16,13 +16,12 @@
     <script src="../../../src/jquery.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.fx.js"></script>
-    <script src="../../../src/kendo.scroller.js"></script>
+    <script src="../../../src/kendo.mobile.scroller.js"></script>
     <script src="../../../src/kendo.mobile.core.js"></script>
     <script src="../../../src/kendo.mobile.button.js"></script>
     <script src="../../../src/kendo.mobile.switch.js"></script>
     <script src="../../../src/kendo.mobile.radiogroup.js"></script>
     <script src="../../../src/kendo.mobile.application.js"></script>
-    <script src="../../../src/kendo.mobile.view.js"></script>
 
     <style type="text/css">
         .k-content
@@ -106,20 +105,22 @@
             </div>
         </div>
     </div>
-    <div class="k-tabStrip">
-        <button class="k-state-active">
-            <span class="k-icon"></span><span>Featured</span>
-        </button>
-        <button>
-            <span class="k-icon"></span><span>Genius</span><span class="k-message">3</span>
-        </button>
-        <button>
-            <span class="k-icon"></span><span>Top Charts</span>
-        </button>
-        <button>
-            <span class="k-icon"></span><span>Categories</span>
-        </button>
-    </div>
+    <footer>
+        <div class="k-tabstrip">
+            <button class="k-state-active k-button">
+                <span class="k-icon"></span><span class="k-text">Featured</span>
+            </button>
+            <button class="k-button">
+                <span class="k-icon"></span><span class="k-text">Genius</span><span class="k-message">3</span>
+            </button>
+            <button class="k-button">
+                <span class="k-icon"></span><span class="k-text">Top Charts</span>
+            </button>
+            <button class="k-button">
+                <span class="k-icon"></span><span class="k-text">Categories</span>
+            </button>
+        </div>
+    </footer>
     <script>
         $(document)
             .bind("appinit", function (e, args) {
