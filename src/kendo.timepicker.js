@@ -2,6 +2,8 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
+        keys = kendo.keys,
+        DIV = "<div/>",
         LI = "li",
         HOVER = "k-state-hover",
         MOUSEDOWN = "mousedown",
@@ -39,28 +41,14 @@
 
     TimeView.prototype = {
         click: function(e) {
-            var that = this,
-                li = $(e.currentTarget),
-                current = that._value,
-                value;
+            this.select($(e.currentTarget));
+        },
 
-            that.current(li);
-
-            value = kendo.parseDate(li.text(), that.options.format);
-
-            if (value) {
-                value = new Date(current.getFullYear(),
-                                 current.getMonth(),
-                                 current.getDate(),
-                                 value.getHours(),
-                                 value.getMinutes(),
-                                 value.getSeconds(),
-                                 value.getMilliseconds());
-            } else {
-                value = new Date(current);
+        _change: function (value) {
+            var change = this.options.change;
+            if (change) {
+                change(value);
             }
-
-            that.value(value);
         },
 
         current: function(candidate) {
@@ -79,6 +67,8 @@
                 }
 
                 that._current = candidate;
+
+                //call _change here
             } else {
                 return that._current;
             }
@@ -89,7 +79,44 @@
         },
 
         open: function() {
-            this.popup.open();
+            var that = this;
+
+            if (!that.ul[0].firstChild) {
+                that.refresh();
+            }
+
+            that.popup.open();
+        },
+
+        move: function(e) {
+            var that = this,
+                key = e.keyCode,
+                ul = that.ul[0],
+                current = that._current,
+                down = key === keys.DOWN,
+                pressed;
+
+            if (key === keys.UP || down) {
+                if (e.altKey) {
+                    that.toggle(down);
+                } else if (down) {
+                    that.select(current ? current[0].nextSibling : ul.firstChild);
+                    e.preventDefault();
+                } else {
+                    that.select(current ? current[0].previousSibling : ul.lastChild);
+                    e.preventDefault();
+                }
+                pressed = true;
+            } else if (key === keys.ENTER || key === keys.TAB) {
+                //that._change(current ? current.text() : "");
+                that._change(current.text());
+                pressed = true;
+            } else if (key === keys.ESC) {
+                that.close();
+                pressed = true;
+            }
+
+            return pressed;
         },
 
         refresh: function() {
@@ -127,20 +154,36 @@
             that.ul[0].innerHTML = html;
         },
 
-        scroll: function(li) {
+        scroll: function(item) {
+            if (!item) return;
 
+            var ul = this.ul[0],
+                itemOffsetTop = item.offsetTop,
+                itemOffsetHeight = item.offsetHeight,
+                ulScrollTop = ul.scrollTop,
+                ulOffsetHeight = ul.clientHeight,
+                bottomDistance = itemOffsetTop + itemOffsetHeight;
+
+            ul.scrollTop = ulScrollTop > itemOffsetTop
+                        ? itemOffsetTop
+                        : bottomDistance > (ulScrollTop + ulOffsetHeight)
+                        ? bottomDistance - ulOffsetHeight
+                        : ulScrollTop;
         },
 
-        value: function(value) {
+        select: function(li) {
             var that = this,
-                text = kendo.toString(value, that.options.format),
-                li;
+                current = that._current;
 
-            that._value = value;
-
-            li = $.grep(that.ul[0].childNodes, function(node) {
-                return (node.textContent || node.innerText) == text;
-            })[0];
+            if (typeof li === "string") {
+                if (!current || current.text() !== li) {
+                    li = $.grep(that.ul[0].childNodes, function(node) {
+                        return (node.textContent || node.innerText) == li;
+                    })[0];
+                } else {
+                    li = current;
+                }
+            }
 
             that.current(li);
         }
@@ -158,9 +201,61 @@
         return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
     }
 
-    //timepicker options
-    //min, max, value, interval, autoBind???,
-
     kendo.TimeView = TimeView;
+
+    var TimePicker = Widget.extend({
+        init: function(element, options) {
+            var that = this;
+
+            Widget.fn.init.call(that, element, options);
+
+            that._wrapper();
+            that._icon();
+
+            that.element.addClass("k-input");
+        },
+        options: {
+            name: "TimePicker",
+            min: TODAY,
+            max: TODAY,
+            value: null,
+            interval: 30
+        },
+        _icon: function() {
+            var that = this,
+                element = that.element,
+                icon;
+
+            icon = element.next("span.k-select");
+
+            if (!icon[0]) {
+                icon = $('<span class="k-select"><span class="k-icon k-icon-clock">select</span></span>').insertAfter(element);
+            }
+
+            that._icon = icon;
+        },
+        _wrapper: function() {
+            var that = this,
+                element = that.element,
+                wrapper;
+
+            wrapper = element.parents(".k-timepicker");
+
+            if (!wrapper[0]) {
+                wrapper = element.wrap(DIV).parent().addClass("k-picker-wrap k-state-default");
+                wrapper = wrapper.wrap(DIV).parent();
+            }
+
+            wrapper[0].style.cssText = element[0].style.cssText;
+            element.css({
+                width: "100%",
+                height: "auto"
+            });
+
+            that.wrapper = wrapper.addClass("k-widget k-timepicker k-header");
+        }
+    });
+
+    ui.plugin(TimePicker);
 
 })(jQuery);

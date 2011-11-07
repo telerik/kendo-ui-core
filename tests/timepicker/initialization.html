@@ -124,6 +124,36 @@
                 equal(tv.ul.find("li:last").html(), "11:50 AM");
             });
 
+            //TimePicker
+            test("_wrapper() wraps input element", function() {
+                input.css("width", "200");
+
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                ok(input.parent().hasClass("k-picker-wrap k-state-default"));
+                equal(timepicker.wrapper.attr("class"), "k-widget k-timepicker k-header");
+                equal(timepicker.wrapper.width(), 200);
+            });
+
+            test("init() should add k-input to the element", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                ok(timepicker.element.hasClass("k-input"));
+            });
+
+            test("_icon put create picker button", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker"),
+                    icon = timepicker.wrapper.find(".k-select");
+
+                ok(icon);
+                ok(icon.is("span"));
+                ok(icon.hasClass("k-select"));
+                ok(icon.children().is("span"));
+                ok(icon.children().hasClass("k-icon k-icon-clock"));
+                ok(icon.children().html());
+            });
+
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

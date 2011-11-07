@@ -349,15 +349,15 @@
             that._icon();
 
             that.input = element
-                            .addClass("k-input")
-                            .bind({
-                                keydown: proxy(that._keydown, that),
-                                focus: function(e) {
-                                    clearTimeout(that._bluring);
-                                    that.input.parent().addClass(FOCUSED);
-                                },
-                                blur: proxy(that._blur, that)
-                            });
+                        .addClass("k-input")
+                        .bind({
+                            keydown: proxy(that._keydown, that),
+                            focus: function(e) {
+                                clearTimeout(that._bluring);
+                                that.input.parent().addClass(FOCUSED);
+                            },
+                            blur: proxy(that._blur, that)
+                        });
 
 
             /**
