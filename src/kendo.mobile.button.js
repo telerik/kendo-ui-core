@@ -8,7 +8,9 @@
         os = support.mobileOS,
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         MOUSEUP = touch ? "touchend" : "mouseup",
+        ACTIVE_STATE_CLASS = "k-state-active",
         CLICK = "click",
+        application = kendo.application,
         extend = $.extend,
         proxy = $.proxy;
 
@@ -23,11 +25,10 @@
             that._wrap();
 
             that._clickProxy = proxy(that._click, that);
-
             that._pressProxy = proxy(that._press, that);
+            that._releaseProxy = proxy(that._release, that);
 
             that.enable(options.enable);
-
 
             // Hack to prevent the addressbar
             // flashing when clicking the buttons
@@ -53,12 +54,12 @@
                 that.element
                     .bind(CLICK, that._clickProxy)
                     .bind(MOUSEDOWN, that._pressProxy)
-                    .bind(MOUSEUP, that._pressProxy);
+                    .bind(MOUSEUP, that._releaseProxy);
             } else {
                 that.element
                     .unbind(CLICK, that._clickProxy)
                     .unbind(MOUSEDOWN, that._pressProxy)
-                    .unbind(MOUSEUP, that._pressProxy);
+                    .unbind(MOUSEUP, that._releaseProxy);
             }
         },
 
@@ -67,28 +68,25 @@
         },
 
         _press: function (e) {
-            var element = this.element;
-            element.toggleClass("k-state-active", e.type === MOUSEDOWN);
+            this.element.addClass(ACTIVE_STATE_CLASS).attr("href", "#!");
+        },
 
-            if (e.type === MOUSEDOWN) {
-                element.attr("href", "#!");
+        _release: function (e) {
+            var that = this,
+                href = that._href;
+
+            that.element.removeClass(ACTIVE_STATE_CLASS);
+            that.trigger(CLICK);
+
+            if (application && href) {
+                application.navigate(href);
             }
         },
 
         _click: function(e) {
-            var that = this, href = that._href;
-
-            that.trigger(CLICK);
-
-            if (kendo.application) {
-
-                if (href) {
-                    e.preventDefault();
-                    kendo.application.navigate(href);
-
-                    // restore href, to keep the status bar displaying the correct location
-                    that.element.attr("href", href);
-                }
+            this.element.attr("href", this._href);
+            if (application) {
+                e.preventDefault();
             }
         },
 

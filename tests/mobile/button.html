@@ -25,6 +25,10 @@
                 MOUSEDOWN = kendo.support.touch ? "touchstart" : "mousedown",
                 MOUSEUP = kendo.support.touch ? "touchend" : "mouseup";
 
+            function click(dom) {
+                dom[MOUSEUP]()
+            }
+
             test("applies css class", function() {
                 expect(1);
 
@@ -78,7 +82,7 @@
                     ok(true, "Should raise the click event");
                 });
 
-                dom.click();
+                click(dom);
             });
 
             test("should not raise click event when disabled", function() {
@@ -91,7 +95,7 @@
                     ok(false, "Should not raise the click event");
                 });
 
-                dom.click();
+                dom.mousedown();
             });
 
             test("should apply active state when pressed", function() {
@@ -137,7 +141,7 @@
                     ok(false, "Should not raise the click event");
                 });
 
-                dom.click();
+                click(dom);
             });
 
             test("should enable disabled button", function() {
@@ -155,7 +159,7 @@
 
                 button.enable();
 
-                dom.click();
+                click(dom);
             });
 
             test("calls application navigate if present", function() {
@@ -169,7 +173,7 @@
 
                 var button = new Button(dom);
 
-                dom.click();
+                click(dom);
 
                 equal(kendo.application.calls("navigate"), 1);
                 equal(kendo.application.args("navigate")[0], "foo");
