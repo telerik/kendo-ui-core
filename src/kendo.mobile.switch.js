@@ -10,8 +10,8 @@
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         MOUSEMOVE = touch ? "touchmove" : "mousemove",
         MOUSEUP = touch ? "touchend" : "mouseup",
-        handleSelector = ".k-toggle-handle",
-        bindSelectors = ".k-checkbox",
+        handleSelector = ".km-toggle-handle",
+        bindSelectors = ".km-checkbox",
         TRANSFORMSTYLE = support.transitions.prefix + "Transform",
         extend = $.extend,
         proxy = $.proxy,
@@ -25,7 +25,7 @@
                 duration: 0
             },
             meego: {
-                animator: ".k-toggle-tip",
+                animator: ".km-toggle-tip",
                 effects: "slideTo",
                 duration: 200
             }
@@ -121,7 +121,7 @@
             var that = this;
 
             if (enable) {
-                that.element.removeClass("k-state-disabled");
+                that.element.removeClass("km-state-disabled");
                 that.input.removeAttr("disabled");
                 that.element.delegate("input[type=checkbox]", "change", that._toggleProxy)
                             .delegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
@@ -131,7 +131,7 @@
                             .undelegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
                 that.element.filter(bindSelectors).unbind(MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
                 that.input.attr("disabled");
-                that.element.addClass("k-state-disabled");
+                that.element.addClass("km-state-disabled");
             }
         },
 
@@ -150,7 +150,7 @@
         },
 
         _trigger: function (e) {
-            this.handle.toggleClass("k-state-active", e.type == MOUSEDOWN);
+            this.handle.toggleClass("km-state-active", e.type == MOUSEDOWN);
         }
 
     });
@@ -192,8 +192,8 @@
 
         _prepare: function() {
             this.handle
-                .removeClass("k-toggle-on")
-                .removeClass("k-toggle-off");
+                .removeClass("km-toggle-on")
+                .removeClass("km-toggle-off");
         },
 
         _snap: function (e) {
@@ -206,7 +206,7 @@
                     .kendoStop(true, true)
                     .kendoAnimate(extend({
                         complete: function () {
-                            handle.addClass("k-toggle-" + (checked ? "on" : "off"));
+                            handle.addClass("km-toggle-" + (checked ? "on" : "off"));
                             that.input[0].checked = checked;
                             that.trigger(TOGGLE, { checked: checked });
                         }
@@ -220,7 +220,7 @@
             var that = this;
 
             if (that.element.is("label")) {
-                that.element.addClass("k-toggle");
+                that.element.addClass("km-toggle");
             }
 
             that.input = that.element.children("input[type=checkbox]");
@@ -230,12 +230,12 @@
                 that.input = $("<input type='checkbox' data-kendo-role='toggle' />").appendTo(that.element);
             }
 
-            that.handle = that.element.children(".k-toggle-handle");
+            that.handle = that.element.children(".km-toggle-handle");
 
             if (!that.handle.length) {
-                that.handle = $("<span class='k-toggle-handle k-toggle-" + (that.input[0].checked ? "on" : "off") + "' />")
+                that.handle = $("<span class='km-toggle-handle km-toggle-" + (that.input[0].checked ? "on" : "off") + "' />")
                                     .appendTo(that.element)
-                                    .append("<span class='k-toggle-tip' />");
+                                    .append("<span class='km-toggle-tip' />");
             }
             that.animator = "animator" in switchAnimation ? that.handle.find(switchAnimation.animator) : that.handle;
         }
@@ -273,7 +273,7 @@
         _toggle: function() {
             var that = this;
 
-            that.handle.toggleClass("k-checkbox-checked", that.input[0].checked);
+            that.handle.toggleClass("km-checkbox-checked", that.input[0].checked);
             that.trigger(TOGGLE, { checked: that.input[0].checked });
         },
 
@@ -281,7 +281,7 @@
             var that = this;
 
             if (that.element.is("label"))
-                that.element.addClass("k-checkbox");
+                that.element.addClass("km-checkbox");
 
             that.input = that.element.children("input[type=checkbox]");
             if (that.input.length)

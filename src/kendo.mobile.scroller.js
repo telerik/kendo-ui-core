@@ -79,7 +79,7 @@
             horizontal = property === "Width",
             scrollSizeName = "scroll" + property,
             element = scrollElement.parent(),
-            scrollbar = $('<div class="k-touch-scrollbar k-' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />'),
+            scrollbar = $('<div class="km-touch-scrollbar km-' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />'),
             name = horizontal ? "x" : "y",
             dip10,
             enabled,
@@ -349,7 +349,7 @@
 
             element
                 .css("overflow", "hidden")
-                .wrapInner('<div class="k-scroll-container"/>');
+                .wrapInner('<div class="km-scroll-container"/>');
 
             scrollElement = element.children().first();
 

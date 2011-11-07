@@ -59,17 +59,17 @@
             var that = this,
                 contentSelector = roleSelector("content");
 
-            that.element = element.data("kendoView", that).addClass("k-mobile-view");
+            that.element = element.data("kendoView", that).addClass("km-view");
 
-            that.header = element.find(roleSelector("header")).addClass("k-mobile-header");
-            that.footer = element.find(roleSelector("footer")).addClass("k-mobile-footer");
+            that.header = element.find(roleSelector("header")).addClass("km-header");
+            that.footer = element.find(roleSelector("footer")).addClass("km-footer");
 
             if (!element.has(contentSelector)[0]) {
               element.wrapInner("<div " + kendo.dataRole + '="content"></div>');
             }
 
             that.content = element.find(roleSelector("content"))
-                                .addClass("k-mobile-content")
+                                .addClass("km-content")
                                 .kendoScroller({useOnDesktop: true});
 
             that.element.prepend(that.header).append(that.footer);

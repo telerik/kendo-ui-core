@@ -102,27 +102,27 @@ body
 }
 
 body,
-.k-view,
-.k-slot,
-.k-content
+.km-view,
+.km-slot,
+.km-content
 {
     width: 100%;
     .box-orient(vertical);
 }
 
-.k-slot
+.km-slot
 {
     overflow: hidden;
 }
 
-.k-showcase
+.km-showcase
 {
     width: 100%;
     height: 100%;
     .box-flex(1);
 }
 
-.k-view
+.km-view
 {
     position: relative;
     width: 100%;
@@ -132,8 +132,8 @@ body,
     -webkit-transform: translate3d(0,0,0);
 }
 
-.k-header,
-.k-footer
+.km-header,
+.km-footer
 {
     display: block;
     display: ~"table-row\9";
@@ -141,24 +141,24 @@ body,
     height: ~"1px\9";
 }
 
-.k-header
+.km-header
 {
     padding: 0;
 }
 
-.k-footer
+.km-footer
 {
     background: #1a1a1a;
 }
 
-.k-slot,
-.k-content
+.km-slot,
+.km-content
 {
     overflow: hidden;
     display: ~"table-row\9";
 }
 
-.k-tabStrip
+.km-tabStrip
 {
     .box-align(start);
     .box-orient(horizontal);
@@ -169,25 +169,25 @@ body,
 }
 
 body,
-body > .k-tabStrip,
-.k-slot,
-.k-view,
-.k-header,
-.k-footer,
-.k-content,
-.k-showcase
+body > .km-tabStrip,
+.km-slot,
+.km-view,
+.km-header,
+.km-footer,
+.km-content,
+.km-showcase
 {
     .box(box);
 }
 
-.k-view
+.km-view
 {
     vertical-align: top;
 }
 
-.k-header,
-.k-footer,
-.k-tabContainer
+.km-header,
+.km-footer,
+.km-tabContainer
 {
     position: relative;
     z-index: 1;
@@ -197,34 +197,34 @@ body > .k-tabStrip,
 @media all and (-webkit-min-device-pixel-ratio:10000),
        not all and (-webkit-min-device-pixel-ratio:0)
 {
-  body, .k-view { display: table; }
-  body > .k-tabStrip, .k-slot, .k-header, .k-footer, .k-content { display: table-row; }
-  body > .k-tabStrip, .k-header, .k-footer { height: 1px; }
+  body, .km-view { display: table; }
+  body > .km-tabStrip, .km-slot, .km-header, .km-footer, .km-content { display: table-row; }
+  body > .km-tabStrip, .km-header, .km-footer { height: 1px; }
 }
 
-.k-slot,
-.k-view,
-.k-content
+.km-slot,
+.km-view,
+.km-content
 {
     .box-align(stretch);
     .box-flex(500);
     position: relative;
 }
 
-.k-android body,
-.k-android .k-view,
-.k-meego body,
-.k-meego .k-view
+.km-android body,
+.km-android .km-view,
+.km-meego body,
+.km-meego .km-view
 {
     .box-direction(reverse);
 }
 
-.k-view-title
+.km-view-title
 {
     display: none;
 }
 
-.k-ios .k-view-title
+.km-ios .km-view-title
 {
     position: absolute;
     display: block;
@@ -240,16 +240,16 @@ body > .k-tabStrip,
     text-shadow: 0 -1pt #777;
 }
 
-.k-android .k-showcase,
-.k-meego .k-showcase
+.km-android .km-showcase,
+.km-meego .km-showcase
 {
     .box-direction(normal);
 }
 
-.k-toolbar,
-.k-button,
-.k-radiogroup,
-.k-tabStrip
+.km-toolbar,
+.km-button,
+.km-radiogroup,
+.km-tabStrip
 {
     background-origin: border-box;
     position: relative;
@@ -267,47 +267,47 @@ body > .k-tabStrip,
     text-shadow: 0 -1pt #777;
 }
 
-.k-ios .k-button
+.km-ios .km-button
 {
     border-color: #5F6C81 #34517B #3E5B84;
     background-image: linearGradient(top, rgb(63,79,102), rgb(138,154,181) 6%, rgb(90,120,165) 50%, rgb(71,104,151) 50%, rgb(73,106,154));
 }
 
-.k-ios .k-button.k-state-active
+.km-ios .km-button.km-state-active
 {
     border-color: #40506C #376ECC #3E75CA;
     background-image: linearGradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
 }
 
-.k-button
+.km-button
 {
     cursor: pointer;
     outline: 0;
 }
 
-.k-ios,
-.k-ios .k-button
+.km-ios,
+.km-ios .km-button
 {
     font: normal .95em Helvetica Neue, sans-serif;
 }
 
-.k-ios .k-button.k-state-active
+.km-ios .km-button.km-state-active
 {
     background-color: #98a1ae;
 }
 
-.k-ios .k-button[data-kendo-ui=back]
+.km-ios .km-button[data-kendo-ui=back]
 {
     margin-left: 9px;
 }
 
-.k-ios .k-button[data-kendo-ui=back] *
+.km-ios .km-button[data-kendo-ui=back] *
 {
     position: relative;
     z-index: 1;
 }
 
-.k-ios .k-button[data-kendo-ui=back]:before {
+.km-ios .km-button[data-kendo-ui=back]:before {
     content: " ";
     background-image: linearGradient(left top, rgb(63,79,102), rgb(138,154,181) 6%, rgb(90,120,165) 50%, rgb(71,104,151) 50%, rgb(73,106,154));
     border-left: solid 1px #5F6C81;
@@ -324,24 +324,24 @@ body > .k-tabStrip,
     .box-sizing(border-box);
 }
 
-.k-ios :-moz-first-node~[data-kendo-ui=back]:before
+.km-ios :-moz-first-node~[data-kendo-ui=back]:before
 {
     left: -20px;
     top: -1.3px;
 }
 
-.k-ios .k-button[data-kendo-ui=back].k-state-active:before {
+.km-ios .km-button[data-kendo-ui=back].km-state-active:before {
     border-color: #376ECC #40506C;
     background-image: linearGradient(left top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
 }
 
-.k-ios .k-toggle
+.km-ios .km-toggle
 {
     -webkit-transform: translateZ(0);
 }
 
-.k-toggle,
-.k-checkbox
+.km-toggle,
+.km-checkbox
 {
     font-size: 1em;
     display: inline-block;
@@ -357,7 +357,7 @@ body > .k-tabStrip,
     .border-radius(4px);
 }
 
-.k-checkbox
+.km-checkbox
 {
     width: 20px;
     height: 20px;
@@ -365,7 +365,7 @@ body > .k-tabStrip,
     height: 1.2rem;
 }
 
-.k-checkbox-checked:after
+.km-checkbox-checked:after
 {
     content: "\a0";
     display: block;
@@ -373,7 +373,7 @@ body > .k-tabStrip,
     height: 100%;
 }
 
-.k-ios .k-checkbox
+.km-ios .km-checkbox
 {
     border: 3px solid #e5e5e5;
     background-color: #fff;
@@ -381,7 +381,7 @@ body > .k-tabStrip,
     .transition(~"all 100ms ease-out");
 }
 
-.k-ios .k-checkbox-checked
+.km-ios .km-checkbox-checked
 {
     border-color: #fff;
     background-color: #BB0000;
@@ -389,7 +389,7 @@ body > .k-tabStrip,
     .box-shadow(0 2px 3px #333);
 }
 
-.k-android .k-checkbox
+.km-android .km-checkbox
 {
     width: 2.2em;
     height: 2.2em;
@@ -401,18 +401,18 @@ body > .k-tabStrip,
     .box-shadow(0 0 1px 2px #808080);
 }
 
-.k-ios .k-checkbox-checked:after
+.km-ios .km-checkbox-checked:after
 {
     background: transparent url("images/ios-sprite.png") 2px -117px no-repeat;
 }
 
-.k-android .k-checkbox-checked:after
+.km-android .km-checkbox-checked:after
 {
     background: transparent url("images/android-sprite.png") -2px -38px no-repeat;
 }
 
-.k-toggle-tip,
-.k-toggle-handle
+.km-toggle-tip,
+.km-toggle-handle
 {
     top: 0;
     left: 0;
@@ -423,7 +423,7 @@ body > .k-tabStrip,
     position: absolute;
 }
 
-.k-toggle-tip
+.km-toggle-tip
 {
     z-index: 1;
     border: 1px solid #969696;
@@ -432,18 +432,18 @@ body > .k-tabStrip,
     .box-shadow(0 0 3px 0 rgba(0,0,0,.5));
 }
 
-.k-ios .k-toggle-on .k-toggle-tip
+.km-ios .km-toggle-on .km-toggle-tip
 {
     .box-shadow(-1px 0 2px 0 rgba(0,0,0,.2));
 }
 
-.k-ios .k-toggle-off .k-toggle-tip
+.km-ios .km-toggle-off .km-toggle-tip
 {
     .box-shadow(1px 0 2px 0 rgba(0,0,0,.2));
 }
 
-.k-toggle-handle:after,
-.k-toggle-handle:before
+.km-toggle-handle:after,
+.km-toggle-handle:before
 {
     position: absolute;
     font-size: 15px;
@@ -458,13 +458,13 @@ body > .k-tabStrip,
     .border-radius(4px);
 }
 
-.k-toggle-on:after,
-.k-toggle-off:before
+.km-toggle-on:after,
+.km-toggle-off:before
 {
     display: none;
 }
 
-.k-toggle-handle:after
+.km-toggle-handle:after
 {
     content: "off";
     left: 35px;
@@ -475,7 +475,7 @@ body > .k-tabStrip,
     border: 1px solid #999;
 }
 
-.k-toggle-handle:before
+.km-toggle-handle:before
 {
     content: "on";
     left: -60px;
@@ -487,13 +487,13 @@ body > .k-tabStrip,
     border: 1px solid #2c5fae;
 }
 
-.k-android .k-toggle
+.km-android .km-toggle
 {
     width: 3em;
     height: 34px;
 }
 
-.k-android .k-toggle-tip
+.km-android .km-toggle-tip
 {
     position: relative;
     background: none;
@@ -504,23 +504,23 @@ body > .k-tabStrip,
     text-align: center;
 }
 
-.k-android .k-toggle-tip:before
+.km-android .km-toggle-tip:before
 {
     text-transform: uppercase;
     width: 100%;
 }
 
-.k-android .k-toggle-on .k-toggle-tip:before
+.km-android .km-toggle-on .km-toggle-tip:before
 {
     content: "on";
 }
 
-.k-android .k-toggle-off .k-toggle-tip:before
+.km-android .km-toggle-off .km-toggle-tip:before
 {
     content: "off";
 }
 
-.k-android .k-toggle-handle
+.km-android .km-toggle-handle
 {
     position: relative;
     width: 100%;
@@ -528,8 +528,8 @@ body > .k-tabStrip,
     .transform(~"translate(0,0) !important");
 }
 
-.k-android .k-toggle-handle:after,
-.k-android .k-toggle-handle:before
+.km-android .km-toggle-handle:after,
+.km-android .km-toggle-handle:before
 {
     content: "\a0";
     width: 95%;
@@ -542,18 +542,18 @@ body > .k-tabStrip,
     bottom: 0;
 }
 
-.k-meego .k-toggle
+.km-meego .km-toggle
 {
     width: 3.8em;
 }
 
-.k-meego .k-toggle,
-.k-meego .k-toggle-tip
+.km-meego .km-toggle,
+.km-meego .km-toggle-tip
 {
     .border-radius(8px);
 }
 
-.k-meego .k-toggle-handle
+.km-meego .km-toggle-handle
 {
     width: 100%;
     height: 100%;
@@ -562,24 +562,24 @@ body > .k-tabStrip,
     .box-shadow(inset 0 2px 3px 0 #aaa);
 }
 
-.k-meego .k-toggle-on
+.km-meego .km-toggle-on
 {
     background: linearGradient(top, rgb(58, 150, 227), rgb(16, 128, 221));
     .box-shadow(inset 0 2px 3px 0 #4c7698);
 }
 
-.k-meego .k-state-active .k-toggle-tip
+.km-meego .km-state-active .km-toggle-tip
 {
     background: #d9d9d9;
 }
 
-.k-meego .k-toggle-handle:after,
-.k-meego .k-toggle-handle:before
+.km-meego .km-toggle-handle:after,
+.km-meego .km-toggle-handle:before
 {
     display: none;
 }
 
-.k-meego .k-toggle-tip
+.km-meego .km-toggle-tip
 {
     margin: .35em .4em;
     width: 1.4em;
@@ -590,20 +590,20 @@ body > .k-tabStrip,
     .box-shadow(0 2px 3px 0 #aaa);
 }
 
-.k-meego .k-toggle-on .k-toggle-tip
+.km-meego .km-toggle-on .km-toggle-tip
 {
     .box-shadow(0 2px 3px 0 #4c7698);
 }
 
-.k-android,
-.k-android .k-button,
-.k-android .k-toggle
+.km-android,
+.km-android .km-button,
+.km-android .km-toggle
 {
     font: normal 1em DroidSans, Helvetica, sans-serif;
 }
 
-.k-android .k-button,
-.k-android .k-toggle
+.km-android .km-button,
+.km-android .km-toggle
 {
     padding: .4em .7em;
     margin: .1em;
@@ -612,17 +612,17 @@ body > .k-tabStrip,
     .box-shadow(0 1px 2px #373737);
 }
 
-.k-android .k-tabStrip .k-button
+.km-android .km-tabStrip .km-button
 {
     height: auto;
     .box-shadow(none);
 }
 
-.k-android .k-toolbar,
-.k-android .k-button,
-.k-android .k-toggle,
-.k-android .k-radiogroup,
-.k-android .k-tabStrip
+.km-android .km-toolbar,
+.km-android .km-button,
+.km-android .km-toggle,
+.km-android .km-radiogroup,
+.km-android .km-tabStrip
 {
     color: #000;
     text-shadow: none;
@@ -632,29 +632,29 @@ body > .k-tabStrip,
     background-image: linearGradient(top, rgb(230, 230, 230), rgb(205, 205, 205));
 }
 
-.k-android .k-button.k-state-active
+.km-android .km-button.km-state-active
 {
     border-color: #feb84b #fb9d09 #f29c0a;
     background-color: #fe9d08;
     background-image: linearGradient(top, rgb(254, 157, 8), rgb(254, 161, 10) 50%, rgb(254, 164, 11));
 }
 
-.k-blackberry,
-.k-blackberry .k-button,
-.k-meego,
-.k-meego .k-button
+.km-blackberry,
+.km-blackberry .km-button,
+.km-meego,
+.km-meego .km-button
 {
     font: normal 1em Arial, Helvetica, sans-serif;
 }
 
-.k-blackberry .k-toolbar,
-.k-blackberry .k-button,
-.k-blackberry .k-radiogroup,
-.k-blackberry .k-tabStrip,
-.k-meego .k-toolbar,
-.k-meego .k-button,
-.k-meego .k-radiogroup,
-.k-meego .k-tabStrip
+.km-blackberry .km-toolbar,
+.km-blackberry .km-button,
+.km-blackberry .km-radiogroup,
+.km-blackberry .km-tabStrip,
+.km-meego .km-toolbar,
+.km-meego .km-button,
+.km-meego .km-radiogroup,
+.km-meego .km-tabStrip
 {
     font: normal 1em Arial, Helvetica, sans-serif;
     color: #333;
@@ -666,7 +666,7 @@ body > .k-tabStrip,
     background-image: linearGradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
 }
 
-.k-message
+.km-message
 {
     display: inline-block;
     color: #FFF;
@@ -689,26 +689,26 @@ body > .k-tabStrip,
     text-shadow: none;
 }
 
-.k-button::-moz-focus-inner
+.km-button::-moz-focus-inner
 {
     padding: 0;
     border: 0;
 }
 
-.k-message:-moz-first-node,
-:-moz-first-node~.k-message
+.km-message:-moz-first-node,
+:-moz-first-node~.km-message
 {
     right: 2px;
     top: -15px;
 }
 
-.k-blackberry .k-message
+.km-blackberry .km-message
 {
     -webkit-box-shadow: none;
 }
 
-.k-blackberry .k-button.k-state-active,
-.k-meego .k-button.k-state-active
+.km-blackberry .km-button.km-state-active,
+.km-meego .km-button.km-state-active
 {
     color: #FFF;
     border-color: #3f9fe5;
@@ -716,10 +716,10 @@ body > .k-tabStrip,
     background-image: linearGradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
 }
 
-.k-radiogroup,
-.k-android .k-radiogroup,
-.k-meego .k-radiogroup,
-.k-blackberry .k-radiogroup
+.km-radiogroup,
+.km-android .km-radiogroup,
+.km-meego .km-radiogroup,
+.km-blackberry .km-radiogroup
 {
     padding: 0;
     .border-radius(0);
@@ -730,34 +730,34 @@ body > .k-tabStrip,
     display: table;
 }
 
-.k-radiogroup > .k-button
+.km-radiogroup > .km-button
 {
     display: table-cell;
 }
 
-.k-radiogroup .k-button
+.km-radiogroup .km-button
 {
     margin: 0;
     border-width: 1px 0 1px 1px;
     .border-radius(0);
 }
 
-.k-radiogroup .k-button:first-child
+.km-radiogroup .km-button:first-child
 {
     .border-radius(5pt 0 0 5pt);
 }
 
-.k-radiogroup .k-button:last-child
+.km-radiogroup .km-button:last-child
 {
     border-right-width: 1px;
     .border-radius(0 5pt 5pt 0);
 }
 
-.k-ios .k-radiogroup
+.km-ios .km-radiogroup
 {
 }
 
-.k-ios .k-radiogroup .k-button
+.km-ios .km-radiogroup .km-button
 {
     font-size: 1.3em;
     font-weight: bold;
@@ -768,13 +768,13 @@ body > .k-tabStrip,
     .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
 }
 
-.k-ios .k-state-disabled .k-button
+.km-ios .km-state-disabled .km-button
 {
     color: #aaa;
     text-shadow: none;
 }
 
-.k-ios .k-radiogroup .k-state-hover
+.km-ios .km-radiogroup .km-state-hover
 {
     color: #fff;
     text-shadow: none;
@@ -782,7 +782,7 @@ body > .k-tabStrip,
     background-image: linearGradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
 }
 
-.k-ios .k-radiogroup .k-state-active
+.km-ios .km-radiogroup .km-state-active
 {
     color: #fff;
     text-shadow: none;
@@ -791,14 +791,14 @@ body > .k-tabStrip,
     .box-shadow(inset -1px 0 2px #103984);
 }
 
-.k-blackberry .k-radiogroup,
-.k-meego .k-radiogroup
+.km-blackberry .km-radiogroup,
+.km-meego .km-radiogroup
 {
     font-size: 1em;
 }
 
-.k-tabStrip,
-.k-toolbar
+.km-tabStrip,
+.km-toolbar
 {
     display: block;
     padding: .8em;
@@ -810,29 +810,29 @@ body > .k-tabStrip,
     .box-shadow(0 0 3px #333);
 }
 
-.k-tabStrip
+.km-tabStrip
 {
     text-align: center;
     word-spacing: -1em;
 }
 
-.k-tabContainer
+.km-tabContainer
 {
     .box-flex(1);
 }
 
-.k-tabStrip .k-button
+.km-tabStrip .km-button
 {
     word-spacing: normal;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-    .k-showcase { position: absolute; }
-    .k-tabContainer { display: table; word-spacing: normal; width: 100%; }
-    .k-radiogroup > .k-button { display: inline-block; }
+    .km-showcase { position: absolute; }
+    .km-tabContainer { display: table; word-spacing: normal; width: 100%; }
+    .km-radiogroup > .km-button { display: inline-block; }
 }
 
-.k-toolbar
+.km-toolbar
 {
     padding: .5em;
     .box-flex(1);
@@ -840,37 +840,37 @@ body > .k-tabStrip,
     position: relative;
 }
 
-.k-blackberry .k-toolbar,
-.k-meego .k-toolbar
+.km-blackberry .km-toolbar,
+.km-meego .km-toolbar
 {
     background-color: #181E17;
     background-image: linearGradient(top, rgba(43, 49, 45, 1), rgba(24, 30, 23, 0) 100%);
 }
 
-.k-ios .k-toolbar .k-button
+.km-ios .km-toolbar .km-button
 {
     background-color: #8891be;
 }
 
-.k-ios .k-toolbar .k-state-active
+.km-ios .km-toolbar .km-state-active
 {
     background-color: #a8b1de;
 }
 
-.k-android .k-toolbar
+.km-android .km-toolbar
 {
     background-color: #9b9b9b;
     background-image: linearGradient(top, rgb(155, 155, 155), rgb(131, 131, 131));
 }
 
-.k-ios .k-tabStrip
+.km-ios .km-tabStrip
 {
     padding: .2em 0;
     background-color: #222;
     background-image: linearGradient(top, rgba(46, 46, 46, 0.8), rgba(21, 21, 21, 0.5) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8));
 }
 
-.k-android .k-tabStrip
+.km-android .km-tabStrip
 {
     padding: 0;
     background-color: #222;
@@ -878,15 +878,15 @@ body > .k-tabStrip,
     background-image: linearGradient(top, rgb(39, 39, 39), rgb(14, 12, 15));
 }
 
-.k-blackberry .k-tabStrip,
-.k-meego .k-tabStrip
+.km-blackberry .km-tabStrip,
+.km-meego .km-tabStrip
 {
     padding: .2em;
     background-color: #333;
     background-image: linearGradient(top, rgba(188, 188, 188, 0.8), rgba(51, 51, 51, 0) 50%);
 }
 
-.k-tabStrip .k-button
+.km-tabStrip .km-button
 {
     font: bold 1em Helvetica, sans-serif;
     color: #a8a8a8;
@@ -898,7 +898,7 @@ body > .k-tabStrip,
     text-align: center;
 }
 
-.k-ios .k-tabStrip .k-button
+.km-ios .km-tabStrip .km-button
 {
     .border-radius(5pt);
     font-size: .6em;
@@ -908,18 +908,18 @@ body > .k-tabStrip,
     text-shadow: none;
 }
 
-.k-tabStrip .k-message
+.km-tabStrip .km-message
 {
     font-size: .8em;
     font-weight: normal;
 }
 
-.k-ios .k-tabStrip .k-message
+.km-ios .km-tabStrip .km-message
 {
     font-size: 1.1em;
 }
 
-.k-android .k-tabStrip .k-button
+.km-android .km-tabStrip .km-button
 {
     font-size: .85em;
     padding: .2em .4em;
@@ -929,89 +929,89 @@ body > .k-tabStrip,
     min-width: 5em;
 }
 
-.k-android .k-tabStrip .k-message,
-.k-blackberry .k-tabStrip .k-message,
-.k-meego .k-tabStrip .k-message
+.km-android .km-tabStrip .km-message,
+.km-blackberry .km-tabStrip .km-message,
+.km-meego .km-tabStrip .km-message
 {
     top: auto;
     bottom: -10px;
 }
 
-.k-blackberry .k-tabStrip .k-button,
-.k-meego .k-tabStrip .k-button
+.km-blackberry .km-tabStrip .km-button,
+.km-meego .km-tabStrip .km-button
 {
     .border-radius(5pt);
     padding: .1em;
     margin: 0 1%;
 }
 
-.k-ios .k-tabStrip .k-button.k-state-active
+.km-ios .km-tabStrip .km-button.km-state-active
 {
     color: #FFF;
     background: rgba(100, 100, 100, 0.5);
 }
 
-.k-android .k-tabStrip .k-button.k-state-active
+.km-android .km-tabStrip .km-button.km-state-active
 {
     color: #FFF;
     background: rgb(154, 154, 154);
     background-image: linearGradient(top, rgb(154, 154, 154), rgb(126, 126, 126));
 }
 
-.k-blackberry .k-tabStrip .k-text,
-.k-meego .k-tabStrip .k-text
+.km-blackberry .km-tabStrip .km-text,
+.km-meego .km-tabStrip .km-text
 {
     display: none;
 }
 
-.k-tabStrip .k-button:first-child
+.km-tabStrip .km-button:first-child
 {
     border-left: 0;
 }
 
-.k-tabStrip .k-button:last-child
+.km-tabStrip .km-button:last-child
 {
     border-right: 0;
 }
 
-.k-list
+.km-list
 {
     background: #fff;
 }
 
-.k-list,
-.k-listview
+.km-list,
+.km-listview
 {
     padding: 0;
     margin: 0;
     list-style-type: none;
 }
 
-.k-listinset,
-.k-listinsetgroup
+.km-listinset,
+.km-listinsetgroup
 {
     margin: 1em;
 }
 
-.k-listinset,
-.k-listinsetgroup .k-list
+.km-listinset,
+.km-listinsetgroup .km-list
 {
     overflow: hidden;
 }
 
-.k-listview .k-toggle
+.km-listview .km-toggle
 {
     float: right;
     vertical-align: middle;
 }
 
-.k-listview .k-list
+.km-listview .km-list
 {
     margin-top: 2px;
     text-indent: 0;
 }
 
-.k-list > li
+.km-list > li
 {
     margin: 0;
     display: block;
@@ -1023,8 +1023,8 @@ body > .k-tabStrip,
     text-shadow: none;
 }
 
-.k-listgroup > li,
-.k-listinsetgroup > li
+.km-listgroup > li,
+.km-listinsetgroup > li
 {
     display: block;
     font-weight: bold;
@@ -1032,7 +1032,7 @@ body > .k-tabStrip,
     text-indent: .8em;
 }
 
-.k-listinsetgroup > li
+.km-listinsetgroup > li
 {
     padding: 0;
     background: none;
@@ -1041,43 +1041,43 @@ body > .k-tabStrip,
     line-height: 1.65em;
 }
 
-.k-ios .k-listinset,
-.k-ios .k-listinsetgroup .k-list
+.km-ios .km-listinset,
+.km-ios .km-listinsetgroup .km-list
 {
     border: 1px solid #999;
     .border-radius(10px);
     .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
 }
 
-.k-ios .k-listinset > li:first-child,
-.k-ios .k-listinsetgroup .k-list > li:first-child
+.km-ios .km-listinset > li:first-child,
+.km-ios .km-listinsetgroup .km-list > li:first-child
 {
     .box-shadow(inset 0 1px 0 0 rgba(200,200,200,.4));
 }
 
-.k-ios .k-listview .k-list
+.km-ios .km-listview .km-list
 {
     border-top: 1px solid #78858e;
 }
 
-.k-ios .k-list > li
+.km-ios .km-list > li
 {
     color: #000;
     border-bottom: 1px solid #E9E9E9;
 }
 
-.k-list > li:last-child
+.km-list > li:last-child
 {
     border-bottom: 0;
 }
 
-.k-ios .k-listview .k-list
+.km-ios .km-listview .km-list
 {
     border-top: 1px solid #78858e;
 }
 
-.k-ios .k-listgroup > li,
-.k-ios .k-listinsetgroup > li
+.km-ios .km-listgroup > li,
+.km-ios .km-listinsetgroup > li
 {
     color: #FFF;
     text-shadow: 0 1px 1px rgba(100,100,100,.8);
@@ -1086,13 +1086,13 @@ body > .k-tabStrip,
     .box-shadow(0 -1px 0 #78858e);
 }
 
-.k-ios .k-listinsetgroup > li
+.km-ios .km-listinsetgroup > li
 {
     color: #444;
     text-shadow: 0 1px 1px rgba(255,255,255,.8);
 }
 
-.k-ios .k-list > li
+.km-ios .km-list > li
 {
     display: block;
     vertical-align: middle;
@@ -1101,18 +1101,18 @@ body > .k-tabStrip,
     font-weight: bold;
 }
 
-.k-android .k-listinset,
-.k-android .k-listinsetgroup
+.km-android .km-listinset,
+.km-android .km-listinsetgroup
 {
     margin: 0;
 }
 
-.k-android .k-listview .k-list
+.km-android .km-listview .km-list
 {
     border-top: 1px solid #333;
 }
 
-.k-android .k-list > li
+.km-android .km-list > li
 {
     color: #fff;
     font-size: 1.3em;
@@ -1121,13 +1121,13 @@ body > .k-tabStrip,
     border-bottom: 1px solid #404040;
 }
 
-.k-android .k-list > li:last-child
+.km-android .km-list > li:last-child
 {
     border-bottom: 0;
 }
 
-.k-android .k-listgroup > li,
-.k-android .k-listinsetgroup > li
+.km-android .km-listgroup > li,
+.km-android .km-listinsetgroup > li
 {
     color: #bebebe;
     background: #191919;
@@ -1135,32 +1135,32 @@ body > .k-tabStrip,
     line-height: inherit;
 }
 
-.k-default-content
+.km-default-content
 {
     padding: 1em;
 }
 
-.k-list,
-.k-contentIn,
-.k-slot
+.km-list,
+.km-contentIn,
+.km-slot
 {
     background: #fff;
 }
 
-.k-android .k-list
+.km-android .km-list
 {
     color: #fff;
 }
 
-.k-android .k-list .k-item
+.km-android .km-list .km-item
 {
     height: 56px;
 }
 
-.k-android .k-list,
-.k-android .k-slot,
-.k-android .k-contentIn,
-.k-android body
+.km-android .km-list,
+.km-android .km-slot,
+.km-android .km-contentIn,
+.km-android body
 {
     color: #fff;
     background: #000;
@@ -1172,16 +1172,16 @@ input[type=checkbox]
     display: none;
 }
 
-.k-list input[type=radio],
-.k-list input[type=checkbox]
+.km-list input[type=radio],
+.km-list input[type=checkbox]
 {
     width: 36px;
     height: 36px;
     margin-left: .4em;
 }
 
-.k-item label:before,
-.k-item label.k-item-checked:after
+.km-item label:before,
+.km-item label.km-item-checked:after
 {
     position: absolute;
     content: " ";
@@ -1193,7 +1193,7 @@ input[type=checkbox]
     margin-top: -18px;
 }
 
-.k-android .k-item label:before
+.km-android .km-item label:before
 {
     border: 1px solid #000;
     background-color: rgb(54, 54, 54);
@@ -1203,139 +1203,139 @@ input[type=checkbox]
     .box-shadow(0 0 1px 2px #808080);
 }
 
-.k-ios label.k-item-checked:after
+.km-ios label.km-item-checked:after
 {
     background: transparent url("images/ios-sprite.png") 0 -10px no-repeat;
 }
 
-.k-android label.k-item-checked:after
+.km-android label.km-item-checked:after
 {
     background: transparent url("images/android-sprite.png") 0 -36px no-repeat;
 }
 
-.k-tabStrip .k-button .k-icon
+.km-tabStrip .km-button .km-icon
 {
     display: block;
     width: 48px;
     height: 48px;
 }
 
-.k-ios .k-tabStrip .k-icon
+.km-ios .km-tabStrip .km-icon
 {
     width: 32px;
     height: 32px;
 }
 
-.k-blackberry .k-tabStrip .k-icon,
-.k-meego .k-tabStrip .k-icon
+.km-blackberry .km-tabStrip .km-icon,
+.km-meego .km-tabStrip .km-icon
 {
     width: 64px;
     height: 64px;
 }
 
-.k-tabStrip .k-button .k-icon
+.km-tabStrip .km-button .km-icon
 {
     margin: 0 auto;
 }
 
-.k-android .k-tabStrip .k-button .k-icon
+.km-android .km-tabStrip .km-button .km-icon
 {
     opacity: 0.5;
     background: transparent url('../examples/images/atabimg.png') no-repeat .1em 50%;
     background-size: cover;
 }
 
-.k-ios .k-tabStrip .k-button .k-icon
+.km-ios .km-tabStrip .km-button .km-icon
 {
     opacity: 1;
     background: transparent url('../examples/images/itabimg1.png') no-repeat 3px 50%;
     background-size: cover;
 }
 
-.k-blackberry .k-tabStrip .k-button .k-icon,
-.k-meego .k-tabStrip .k-button .k-icon
+.km-blackberry .km-tabStrip .km-button .km-icon,
+.km-meego .km-tabStrip .km-button .km-icon
 {
     opacity: 0.5;
     background: transparent url('../examples/images/atabimg.png') no-repeat .5em 50%;
 }
 
-.k-tabStrip .k-button.k-state-active .k-icon
+.km-tabStrip .km-button.km-state-active .km-icon
 {
     opacity: 1;
 }
 
-.k-ios .k-tabStrip .k-state-active .k-icon
+.km-ios .km-tabStrip .km-state-active .km-icon
 {
     background-image: url('../examples/images/itabimg.png');
 }
 
-.k-android .k-tabStrip .k-button:nth-child(1) .k-icon
+.km-android .km-tabStrip .km-button:nth-child(1) .km-icon
 {
     background-position: 1px 50%;
 }
 
-.k-android .k-tabStrip .k-button:nth-child(2) .k-icon
+.km-android .km-tabStrip .km-button:nth-child(2) .km-icon
 {
     background-position: -107px 50%;
 }
 
-.k-android .k-tabStrip .k-button:nth-child(3) .k-icon
+.km-android .km-tabStrip .km-button:nth-child(3) .km-icon
 {
     background-position: -216px 50%;
 }
 
-.k-android .k-tabStrip .k-button:nth-child(4) .k-icon
+.km-android .km-tabStrip .km-button:nth-child(4) .km-icon
 {
     background-position: -325px 50%;
 }
 
-.k-ios .k-tabStrip .k-button:nth-child(1) .k-icon
+.km-ios .km-tabStrip .km-button:nth-child(1) .km-icon
 {
     background-position: 3px 50%;
 }
 
-.k-ios .k-tabStrip .k-button:nth-child(2) .k-icon
+.km-ios .km-tabStrip .km-button:nth-child(2) .km-icon
 {
     background-position: -71px 50%;
 }
 
-.k-ios .k-tabStrip .k-button:nth-child(3) .k-icon
+.km-ios .km-tabStrip .km-button:nth-child(3) .km-icon
 {
     background-position: -146px 50%;
 }
 
-.k-ios .k-tabStrip .k-button:nth-child(4) .k-icon
+.km-ios .km-tabStrip .km-button:nth-child(4) .km-icon
 {
     background-position: -220px 50%;
 }
 
-.k-blackberry .k-tabStrip .k-button:nth-child(1) .k-icon,
-.k-meego .k-tabStrip .k-button:nth-child(1) .k-icon
+.km-blackberry .km-tabStrip .km-button:nth-child(1) .km-icon,
+.km-meego .km-tabStrip .km-button:nth-child(1) .km-icon
 {
     background-position: 6px 50%;
 }
 
-.k-blackberry .k-tabStrip .k-button:nth-child(2) .k-icon,
-.k-meego .k-tabStrip .k-button:nth-child(2) .k-icon
+.km-blackberry .km-tabStrip .km-button:nth-child(2) .km-icon,
+.km-meego .km-tabStrip .km-button:nth-child(2) .km-icon
 {
     background-position: -114px 50%;
 }
 
-.k-blackberry .k-tabStrip .k-button:nth-child(3) .k-icon,
-.k-meego .k-tabStrip .k-button:nth-child(3) .k-icon
+.km-blackberry .km-tabStrip .km-button:nth-child(3) .km-icon,
+.km-meego .km-tabStrip .km-button:nth-child(3) .km-icon
 {
     background-position: -234px 50%;
 }
 
-.k-blackberry .k-tabStrip .k-button:nth-child(4) .k-icon,
-.k-meego .k-tabStrip .k-button:nth-child(4) .k-icon
+.km-blackberry .km-tabStrip .km-button:nth-child(4) .km-icon,
+.km-meego .km-tabStrip .km-button:nth-child(4) .km-icon
 {
     background-position: -354px 50%;
 }
 
 /* Scroller */
 
-.k-touch-scrollbar
+.km-touch-scrollbar
 {
     position: absolute;
     visibility: hidden;
@@ -1356,21 +1356,21 @@ input[type=checkbox]
     border-radius: .4em;
 }
 
-.k-vertical-scrollbar
+.km-vertical-scrollbar
 {
     height: 100%;
     right: 1px;
     top: 0;
 }
 
-.k-horizontal-scrollbar
+.km-horizontal-scrollbar
 {
     width: 100%;
     left: 0;
     bottom: 1px;
 }
 
-.k-scroll-container
+.km-scroll-container
 {
     -moz-user-select: none;
     -webkit-user-select: none;

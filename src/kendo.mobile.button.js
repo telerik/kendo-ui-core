@@ -8,7 +8,7 @@
         os = support.mobileOS,
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         MOUSEUP = touch ? "touchend" : "mouseup",
-        ACTIVE_STATE_CLASS = "k-state-active",
+        ACTIVE_STATE_CLASS = "km-state-active",
         CLICK = "click",
         extend = $.extend,
         proxy = $.proxy;
@@ -94,16 +94,16 @@
                 element = that.element,
                 span;
 
-            span = element.addClass("k-button")
+            span = element.addClass("km-button")
                           .children("span");
 
             if (!span[0]) {
                 span = element.wrapInner("<span/>").children("span");
             }
 
-            span.addClass("k-text")
+            span.addClass("km-text")
                 .find("img")
-                .addClass("k-image");
+                .addClass("km-image");
         }
     });
 
