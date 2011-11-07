@@ -17,6 +17,10 @@
         <script src="../src/kendo.combobox.js"></script>
 
         <link rel="stylesheet" href="../tests/qunit/qunit/qunit.css" />
+
+        <style>
+            .k-widget { box-shadow: 1px 1px 1px #b4d455; }
+        </style>
     </head>
     <body>
         <h1 id="qunit-header">ThemeBuilder tests</h1>
@@ -98,6 +102,22 @@
                         });
 
                 equals(themeBuilder.element.find("div.k-colorpicker").length, 1)
+            });
+
+            test("value of box-shadow color picker gets processed to color", function() {
+
+                var constants = new LessConstants({
+                        "@foo-color": constant(".k-widget", "box-shadow")
+                    }),
+                    themeBuilder = new ThemeBuilder({ template: '' },
+                        constants, {
+                            "Foos": {
+                                constants: /^@/,
+                                labels: {}
+                            }
+                        });
+
+                equals(themeBuilder.constants.serialize(), "@foo-color: #b4d455;");
             });
 
             var colorPicker;

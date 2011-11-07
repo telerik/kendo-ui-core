@@ -324,7 +324,7 @@
                     },
                     processors = {
                         "box-shadow": function(value) {
-                            return value;
+                            return /#[0-9a-f]+/i.exec(value)[0];
                         }
                     },
                     propertyGroupTemplate = kendo.template(
