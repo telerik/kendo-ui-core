@@ -38,12 +38,13 @@
                 equal(Tabstrip.fn.options.name, "MobileTabstrip", "Name is properly set");
             });
 
-            test("applies css classes", function() {
-                var dom = $("<nav/>");
+            test("creates html structure", function() {
+                var dom = $("<nav><a>Test</a></nav>");
 
                 new Tabstrip(dom);
 
-                ok(dom.is(".km-tabstrip"), "Css class is applied");
+                ok(dom.find("a>.km-text")[0], "text span is created");
+                ok(dom.find("a>.km-icon")[0], "icon span is created");
             });
 
             /*
