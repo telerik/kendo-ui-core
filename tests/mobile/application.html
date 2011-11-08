@@ -283,6 +283,16 @@
                 setup('<div data-kendo-role="view" id="page1"><div data-kendo-role="content">Header</div></div>');
                 equal($("#page1").find("[data-kendo-role=content]").length, 1);
             });
+
+            test("uses fixed header and footer if id is identical", function() {
+            setup('<div data-kendo-role="view" id="page1">Page 1<div data-kendo-role="footer" id="footer-a" data-id="global">Footer a</div></div> \
+                   <div data-kendo-role="view" id="page2">Page 2<div data-kendo-role="footer" id="footer-b" data-id="global">Footer b</div></div>');
+
+                application.navigate("#page2");
+
+                equal(application.view.footer.text(), "Footer a", "fixed footer is visible");
+            });
+
         </script>
     </body>
 </html>
