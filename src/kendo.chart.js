@@ -5051,11 +5051,13 @@
         }
     }
 
-    function applyAxisDefaults(options) {
+    function applyAxisDefaults(options, themeOptions) {
+        var themeAxisDefaults = themeOptions ? themeOptions.axisDefaults : {};
         $.each(["category", "value", "x", "y"], function() {
             var axisName = this + "Axis";
             options[axisName] = deepExtend({},
                 options.axisDefaults,
+                themeAxisDefaults,
                 options[axisName]
             );
         });
