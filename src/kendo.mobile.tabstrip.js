@@ -20,7 +20,13 @@
             MobileWidget.fn.init.call(that, element, options);
 
             options = that.options;
-            that.element.addClass("km-tabstrip");
+            that.element.addClass("km-tabstrip").children("a")
+                    .wrapInner('<span class="km-text"/>')
+                    .addClass("km-button")
+                    .prepend('<span class="km-icon"/>').click(function() {
+                        $(this).toggleClass("km-state-active")
+                        return false;
+                    });
         },
 
         options: {
