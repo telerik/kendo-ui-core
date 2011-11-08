@@ -290,18 +290,18 @@ km-header, km-footer {
     background-color: #98a1ae;
 }
 
-.km-ios .km-button[data-kendo-ui=back]
+.km-ios .km-button[data-kendo-role=back]
 {
     margin-left: 9px;
 }
 
-.km-ios .km-button[data-kendo-ui=back] *
+.km-ios .km-button[data-kendo-role=back] *
 {
     position: relative;
     z-index: 1;
 }
 
-.km-ios .km-button[data-kendo-ui=back]:before {
+.km-ios .km-button[data-kendo-role=back]:before {
     content: " ";
     background-image: linearGradient(left top, rgb(63,79,102), rgb(138,154,181) 6%, rgb(90,120,165) 50%, rgb(71,104,151) 50%, rgb(73,106,154));
     border-left: solid 1px #5F6C81;
@@ -318,13 +318,13 @@ km-header, km-footer {
     .box-sizing(border-box);
 }
 
-.km-ios :-moz-first-node~[data-kendo-ui=back]:before
+.km-ios :-moz-first-node~[data-kendo-role=back]:before
 {
     left: -20px;
     top: -1.3px;
 }
 
-.km-ios .km-button[data-kendo-ui=back].km-state-active:before {
+.km-ios .km-button[data-kendo-role=back].km-state-active:before {
     border-color: #376ECC #40506C;
     background-image: linearGradient(left top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
 }
