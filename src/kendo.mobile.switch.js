@@ -68,6 +68,9 @@
         _start: function (e) {
             var that = this;
 
+            e.preventDefault();
+            e.stopPropagation();
+
             that.width = that.element.width();
             that.animator = extend({ animator: that.animator }, that.options).animator;
             that.constrain = that.width - that.animator.outerWidth(true);
@@ -87,9 +90,12 @@
             that.animator[0].style[TRANSFORMSTYLE] = "translate" + axis + "(" + (that.location - 20) + "px)"; // TODO: remove the 20 :)
         },
 
-        _stop: function () {
+        _stop: function (e) {
             var that = this,
                 snapPart = that.width / (that.options.snaps - 1);
+
+            e.preventDefault();
+            e.stopPropagation();
 
             that.trigger(SNAP, { snapTo: Math.round(that.location / snapPart) });
 

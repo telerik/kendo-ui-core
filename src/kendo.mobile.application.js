@@ -3,11 +3,14 @@
     var kendo = window.kendo,
         history = kendo.history,
         div = $("<div/>"),
+        os = kendo.support.mobileOS,
         meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> \
                 <meta name="apple-mobile-web-app-status-bar-style" content="black" /> \
                 <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
         iconMeta = kendo.template('<link rel="apple-touch-icon" href="${icon}" />'),
         roleSelector = kendo.roleSelector;
+
+    $(document.documentElement).addClass("km-" + (!os || (os && os.ios) ? "ios" : os.name));
 
     function extractView(html) {
         if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
@@ -19,8 +22,7 @@
     }
 
     function hideAddressBar(element) {
-        var os = kendo.support.mobileOS,
-            android = os.name == "android",
+        var android = os.name == "android",
             lastWidth = 0;
 
         if (android) {
@@ -158,7 +160,7 @@
 
             views.not(":first").hide();
 
-            that._view = that._createView(views.first());
+            that.view = that._createView(views.first());
 
             history.start($.extend(options, {silent: true}));
 
@@ -173,14 +175,18 @@
             that._findView(url, function(view) {
                 history.navigate(url, true);
 
-                that.trigger("viewHide", { view: that._view });
+                that.trigger("viewHide", { view: that.view });
 
-                view.replace(that._view);
+                view.replace(that.view);
 
-                that._view = view;
+                that.view = view;
 
                 that.trigger("viewShow", { view: view });
             });
+        },
+
+        scroller: function() {
+            return this.view.content.data("kendoScroller");
         },
 
         _createView: function(element) {
