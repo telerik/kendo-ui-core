@@ -163,7 +163,7 @@
 
                 $("#configurator .component").each(function() {
                     var checkbox = $("> .checkbox", this);
-                    if (resolver.resolved.indexOf($(this).data("id")) > -1) {
+                    if ($.inArray($(this).data("id"), resolver.resolved) > -1) {
                         if (!checkbox.hasClass("explicit")) {
                             checkbox.addClass("implicit");
                         }
