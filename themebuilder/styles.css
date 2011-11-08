@@ -1,12 +1,39 @@
+#k-tb-wrap .k-widget
+{
+    background: #3d3d3d;
+}
+
+#k-tb-wrap .k-window
+{
+    border: 0;
+    padding-top: 59px !important;
+}
+
+#k-tb-wrap .k-window-titlebar
+{
+    height: 59px;
+    margin-top: -59px !important;
+    border: 0;
+    padding: 0;
+    background: transparent url("header.png") no-repeat 50% 0;
+}
+
 #k-tb-wrap .k-window-actions,
 #kendo-themebuilder .styling-options
 {
     width: auto;
 }
 
+#k-tb-wrap .k-window-actions
+{
+    background: none;
+    top: 2px;
+}
+
 #kendo-themebuilder
 {
     text-align: left;
+    padding-top: 0;
     font: normal 12px/1.5 Tahoma,sans-serif;
 }
 
