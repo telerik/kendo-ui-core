@@ -5018,7 +5018,7 @@
             seriesType,
             seriesDefaults = options.seriesDefaults,
             baseSeriesDefaults = deepExtend({}, options.seriesDefaults),
-            themeSeriesDefaults = themeOptions ? themeOptions.seriesDefaults : {};
+            themeSeriesDefaults = themeOptions ? deepExtend({}, themeOptions.seriesDefaults) : {};
 
         delete baseSeriesDefaults.bar;
         delete baseSeriesDefaults.column;
@@ -5032,8 +5032,9 @@
 
             series[i] = deepExtend(
                 {},
-                baseSeriesDefaults,
+                themeSeriesDefaults,
                 themeSeriesDefaults[seriesType],
+                baseSeriesDefaults,
                 seriesDefaults[seriesType],
                 series[i]);
         }
@@ -5052,12 +5053,14 @@
     }
 
     function applyAxisDefaults(options, themeOptions) {
-        var themeAxisDefaults = themeOptions ? themeOptions.axisDefaults : {};
+        var themeAxisDefaults = themeOptions ? deepExtend({}, themeOptions.axisDefaults) : {};
+
         $.each(["category", "value", "x", "y"], function() {
             var axisName = this + "Axis";
             options[axisName] = deepExtend({},
-                options.axisDefaults,
                 themeAxisDefaults,
+                themeAxisDefaults[axisName],
+                options.axisDefaults,
                 options[axisName]
             );
         });
