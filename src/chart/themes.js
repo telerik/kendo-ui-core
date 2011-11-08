@@ -145,10 +145,6 @@
             },
             labels: {
                 color: "#232323"
-            },
-            majorGridLines: {
-                color: "#dfdfdf",
-                visible: true
             }
         },
         valueAxis: {
@@ -157,9 +153,12 @@
             },
             labels: {
                 color: "#232323"
-            },
+            }
+        },
+        axisDefaults: {
             majorGridLines: {
-                color: "#dfdfdf"
+                color: "red",
+                visible: true
             }
         },
         tooltip: {

@@ -272,7 +272,7 @@
                     ok(chart.options.yAxis.flag === true);
                 });
 
-                test("axisDefaults override theme", function() {
+                test("axisDefaults override theme base", function() {
                     Chart.themes.test = {
                         categoryAxis: {
                             flag: true
@@ -282,6 +282,25 @@
                     createChart({
                         theme: "test",
                         axisDefaults: {
+                            flag: false
+                        }
+                    });
+
+                    ok(chart.options.categoryAxis.flag === false);
+                });
+
+                test("axisDefaults override theme with specific type", function() {
+                    Chart.themes.test = {
+                        axisDefaults: {
+                            categoryAxis: {
+                                flag: true
+                            }
+                        }
+                    };
+
+                    createChart({
+                        theme: "test",
+                        categoryAxis: {
                             flag: false
                         }
                     });
@@ -612,6 +631,7 @@
                             flag: true,
                             seriesColors: ["#f00", "#cf0"],
                             seriesDefaults: {
+                                seriesDefaultsFlag: true,
                                 scatter: {
                                     flag: false
                                 }
@@ -662,6 +682,15 @@
                 });
 
                 test("applies theme seriesDefaults", function() {
+                    createChart({
+                        theme: "test",
+                        series: [{}, {}]
+                    });
+
+                    ok(chart.options.series[0].seriesDefaultsFlag);
+                });
+
+                test("applies theme seriesDefaults with specific type", function() {
                     createChart({
                         theme: "test",
                         seriesDefaults: {
