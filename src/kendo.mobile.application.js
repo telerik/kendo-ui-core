@@ -83,14 +83,12 @@
                 animationType = (back ? view : that).element.data("kendoTransition"),
                 slidingSource = view.content,
                 slidingDestination = that.content,
-                callback = function() {
-                    view.element.hide();
-                },
                 myHeader = that.header,
                 myFooter = that.footer,
                 myElement = that.element,
                 viewElement = view.element,
                 viewHeader = view.header,
+                callback = function() { viewElement.hide(); },
                 viewFooter = view.footer;
 
             myElement.css("display", "");
