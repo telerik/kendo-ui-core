@@ -87,49 +87,66 @@
     transition: @arguments;
 }
 
-html, body
-{
-    -ms-content-zooming: none;
-    height: 100%;
+* {
     margin: 0;
+    padding: 0;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+html, body {
+    -webkit-text-size-adjust: none;
+}
+
+html, body {
+    height: 100%;
+    max-height: auto;
     overflow: hidden;
+    -ms-content-zooming: none;
     -webkit-user-select: none;
 }
 
-body
-{
+body {
+    .transform(translatez(0));
     display: table\9;
 }
 
+km-header, km-footer {
+    background: #EBEBEB;
+    text-indent: 30px;
+    width: 100%;
+    padding: 20px 0;
+}
+
 body,
-.km-view,
-.km-slot,
-.km-content
+.km-view
 {
     width: 100%;
     .box-orient(vertical);
 }
 
-.km-slot
-{
+.km-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
-}
-
-.km-showcase
-{
-    width: 100%;
-    height: 100%;
-    .box-flex(1);
-}
-
-.km-view
-{
-    position: relative;
-    width: 100%;
-    height: 100%;
+    -webkit-transform: translatez(0);
     display: table\9;
-    overflow: hidden;
-    -webkit-transform: translate3d(0,0,0);
+}
+
+.km-content {
+    -webkit-box-flex: 1;
+    display: block;
+    overflow: auto;
+    overflow-y: auto;
+    overflow-x: visible;
+    position: relative;
+    background: silver;
+    display: ~"table-row\9";
 }
 
 .km-header,
@@ -151,13 +168,6 @@ body,
     background: #1a1a1a;
 }
 
-.km-slot,
-.km-content
-{
-    overflow: hidden;
-    display: ~"table-row\9";
-}
-
 .km-tabStrip
 {
     .box-align(start);
@@ -169,13 +179,7 @@ body,
 }
 
 body,
-body > .km-tabStrip,
-.km-slot,
-.km-view,
-.km-header,
-.km-footer,
-.km-content,
-.km-showcase
+.km-view
 {
     .box(box);
 }
@@ -202,7 +206,6 @@ body > .km-tabStrip,
   body > .km-tabStrip, .km-header, .km-footer { height: 1px; }
 }
 
-.km-slot,
 .km-view,
 .km-content
 {
@@ -211,9 +214,7 @@ body > .km-tabStrip,
     position: relative;
 }
 
-.km-android body,
 .km-android .km-view,
-.km-meego body,
 .km-meego .km-view
 {
     .box-direction(reverse);
@@ -240,8 +241,8 @@ body > .km-tabStrip,
     text-shadow: 0 -1pt #777;
 }
 
-.km-android .km-showcase,
-.km-meego .km-showcase
+.km-android .km-content,
+.km-meego .km-content
 {
     .box-direction(normal);
 }
@@ -1034,10 +1035,6 @@ body > .km-tabStrip,
 
 .km-listinsetgroup > li
 {
-    padding: 0;
-    background: none;
-    border: none;
-    .box-shadow(none);
     line-height: 1.65em;
 }
 
@@ -1089,6 +1086,10 @@ body > .km-tabStrip,
 .km-ios .km-listinsetgroup > li
 {
     color: #444;
+    padding: 0;
+    background: none;
+    border: none;
+    .box-shadow(none);
     text-shadow: 0 1px 1px rgba(255,255,255,.8);
 }
 

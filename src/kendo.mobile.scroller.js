@@ -152,7 +152,7 @@
 
         function wait(e) {
             init();
-            if (!enabled) {
+            if (!enabled || scrollElement.data("disabled")) {
                 return;
             }
 
@@ -207,6 +207,8 @@
             if (location.idx === idx && !dragCanceled) {
                 return location[name];
             }
+
+            return false;
         }
 
         function drag(e) {
@@ -229,7 +231,7 @@
                 .unbind(MOVEEVENT, start)
                 .unbind(MOVEEVENT, drag);
 
-            element.unbind(ENDEVENT, stop);
+            scrollElement.unbind(ENDEVENT, stop);
 
             if (dragged) {
                 dragged = false;
@@ -300,7 +302,7 @@
        }
 
        function gestureEnd() {
-           dragCanceled = true;
+           dragCanceled = false;
        }
 
        function init() {
@@ -333,7 +335,8 @@
 
     var Scroller = kendo.ui.MobileWidget.extend({
         init: function(element, options) {
-            var that = this, scrollElement;
+            var that = this, scrollElement,
+                transform = {x: 0, y: 0};
 
             Widget.fn.init.call(that, element, options);
 
@@ -352,8 +355,6 @@
                 .wrapInner('<div class="km-scroll-container"/>');
 
             scrollElement = element.children().first();
-
-            transform = {x: 0, y: 0};
 
             function updateTransform(property, value) {
                 value = round(value);
@@ -376,6 +377,14 @@
             name: "Scroller",
             selector: "[data-kendo-role=scroller]",
             useOnDesktop: true
+        },
+
+        disable: function () {
+            this.element.children(".km-scroll-container").data("disabled", true);
+        },
+
+        enable: function () {
+            this.element.children(".km-scroll-container").removeData("disabled");
         }
     });
 
