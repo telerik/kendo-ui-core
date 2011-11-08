@@ -3150,7 +3150,9 @@
                 distance: 35,
                 font: DEFAULT_FONT,
                 margin: getSpacing(0.5),
-                align: CIRCLE
+                align: CIRCLE,
+                zIndex: 1,
+                position: OUTSIDE_END
             },
             animation: {
                 type: PIE
@@ -3199,7 +3201,9 @@
                         margin: labels.margin,
                         padding: labels.padding,
                         color: labels.color,
-                        background: labels.background
+                        background: labels.background,
+                        zIndex: labels.zIndex,
+                        position: labels.position
                     });
 
                 segment.append(segment.label);
@@ -3222,26 +3226,41 @@
 
         reflowLabel: function() {
             var segment = this,
-                sector = segment.sector,
+                sector = segment.sector.clone(),
                 options = segment.options,
                 label = segment.label,
-                labelDistance = options.labels.distance,
+                labelsOptions = options.labels,
+                labelsDistance = labelsOptions.distance,
                 startAngle = segment.sector.startAngle % 90,
                 lp,
                 x1,
                 y1,
-                angle = sector.middle();
+                angle = sector.middle(),
+                labelWidth,
+                labelHeight;
 
             if (label) {
-                lp = sector.clone().expand(labelDistance).point(angle);
-                if (lp.x >= sector.c.x) {
-                    x1 = lp.x + label.box.width();
-                    label.orientation = RIGHT;
+                labelHeight = label.box.height();
+                labelWidth = label.box.width();
+                if (labelsOptions.position == "center") {
+                    sector.r = math.abs((sector.r - labelHeight) / 2) + labelHeight;
+                    lp = sector.point(angle);
+                    label.reflow(new Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
+                } else if (labelsOptions.position == "insideEnd") {
+                    sector.r = sector.r - labelHeight / 2;
+                    lp = sector.point(angle);
+                    label.reflow(new Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
                 } else {
-                    x1 = lp.x - label.box.width();
-                    label.orientation = LEFT;
+                    lp = sector.clone().expand(labelsDistance).point(angle);
+                    if (lp.x >= sector.c.x) {
+                        x1 = lp.x + labelWidth;
+                        label.orientation = RIGHT;
+                    } else {
+                        x1 = lp.x - labelWidth;
+                        label.orientation = LEFT;
+                    }
+                    label.reflow(new Box2D(x1, lp.y - labelHeight, lp.x, lp.y));
                 }
-                label.reflow(new Box2D(x1, lp.y - label.box.height(), lp.x, lp.y));
             }
         },
 
@@ -3499,10 +3518,12 @@
 
                 label = segment.label;
                 if (label) {
-                    if (label.orientation === RIGHT) {
-                        rightSideLabels.push(label);
-                    } else {
-                        leftSideLabels.push(label);
+                    if (label.options.position === OUTSIDE_END) {
+                        if (label.orientation === RIGHT) {
+                            rightSideLabels.push(label);
+                        } else {
+                            leftSideLabels.push(label);
+                        }
                     }
                 }
             }
@@ -3662,80 +3683,81 @@
 
                 if (label) {
                     points = [];
+                    if (label.options.position === OUTSIDE_END) {
+                        var box = label.box,
+                            centerPoint = sector.c,
+                            start = sector.point(angle),
+                            middle = new Point2D(box.x1, box.center().y),
+                            sr,
+                            end,
+                            crossing;
 
-                    var box = label.box,
-                        centerPoint = sector.c,
-                        start = sector.point(angle),
-                        middle = new Point2D(box.x1, box.center().y),
-                        sr,
-                        end,
-                        crossing;
+                        start = sector.clone().expand(connectors.padding).point(angle);
+                        points.push(start);
+                        if (label.orientation == RIGHT) {
+                            end = new Point2D(box.x1 - connectors.padding, box.center().y);
+                            crossing = intersection(centerPoint, start, middle, end);
+                            middle = new Point2D(end.x - space, end.y);
+                            crossing = crossing || middle;
+                            crossing.x = math.min(crossing.x, middle.x);
 
-                    start = sector.clone().expand(connectors.padding).point(angle);
-                    points.push(start);
-                    if (label.orientation == RIGHT) {
-                        end = new Point2D(box.x1 - connectors.padding, box.center().y);
-                        crossing = intersection(centerPoint, start, middle, end);
-                        middle = new Point2D(end.x - space, end.y);
-                        crossing = crossing || middle;
-                        crossing.x = math.min(crossing.x, middle.x);
-
-                        if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
-                            crossing.x < sector.c.x) {
-                            sr = sector.c.x + sector.r + space;
-                            if (segment.options.labels.align !== COLUMN) {
-                                if (sr < middle.x) {
-                                    points.push(new Point2D(sr, start.y));
+                            if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
+                                crossing.x < sector.c.x) {
+                                sr = sector.c.x + sector.r + space;
+                                if (segment.options.labels.align !== COLUMN) {
+                                    if (sr < middle.x) {
+                                        points.push(new Point2D(sr, start.y));
+                                    } else {
+                                        points.push(new Point2D(start.x + space * 2, start.y));
+                                    }
                                 } else {
-                                    points.push(new Point2D(start.x + space * 2, start.y));
-                                }
-                            } else {
-                                points.push(new Point2D(sr, start.y));
-                            }
-                            points.push(new Point2D(middle.x, end.y));
-                        } else {
-                            crossing.y = end.y;
-                            points.push(crossing);
-                        }
-                    } else {
-                        end = new Point2D(box.x2 + connectors.padding, box.center().y);
-                        crossing = intersection(centerPoint, start, middle, end);
-                        middle = new Point2D(end.x + space, end.y);
-                        crossing = crossing || middle;
-                        crossing.x = math.max(crossing.x, middle.x);
-
-                        if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
-                            crossing.x > sector.c.x) {
-                            sr = sector.c.x - sector.r - space;
-                            if (segment.options.labels.align !== COLUMN) {
-                                if (sr > middle.x) {
                                     points.push(new Point2D(sr, start.y));
-                                } else {
-                                    points.push(new Point2D(start.x - space * 2, start.y));
                                 }
+                                points.push(new Point2D(middle.x, end.y));
                             } else {
-                                points.push(new Point2D(sr, start.y));
+                                crossing.y = end.y;
+                                points.push(crossing);
                             }
-                            points.push(new Point2D(middle.x, end.y));
                         } else {
-                            crossing.y = end.y;
-                            points.push(crossing);
+                            end = new Point2D(box.x2 + connectors.padding, box.center().y);
+                            crossing = intersection(centerPoint, start, middle, end);
+                            middle = new Point2D(end.x + space, end.y);
+                            crossing = crossing || middle;
+                            crossing.x = math.max(crossing.x, middle.x);
+
+                            if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
+                                crossing.x > sector.c.x) {
+                                sr = sector.c.x - sector.r - space;
+                                if (segment.options.labels.align !== COLUMN) {
+                                    if (sr > middle.x) {
+                                        points.push(new Point2D(sr, start.y));
+                                    } else {
+                                        points.push(new Point2D(start.x - space * 2, start.y));
+                                    }
+                                } else {
+                                    points.push(new Point2D(sr, start.y));
+                                }
+                                points.push(new Point2D(middle.x, end.y));
+                            } else {
+                                crossing.y = end.y;
+                                points.push(crossing);
+                            }
                         }
+
+                        points.push(end);
+                        connectorLine = view.createPolyline(points, false, {
+                            id: uniqueId(),
+                            stroke: connectors.color,
+                            strokeWidth: connectors.width,
+                            animation: {
+                                type: FADEIN,
+                                delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
+                            }
+                        });
+                        lines.push(connectorLine);
+                        segment.registerId(connectorLine.options.id, seriesIx);
                     }
-
-                    points.push(end);
-                    connectorLine = view.createPolyline(points, false, {
-                        id: uniqueId(),
-                        stroke: connectors.color,
-                        strokeWidth: connectors.width,
-                        animation: {
-                            type: FADEIN,
-                            delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
-                        }
-                    });
-                    lines.push(connectorLine);
                     segment.registerId(label.options.id, seriesIx);
-                    segment.registerId(connectorLine.options.id, seriesIx);
                 }
 
                 segment.registerId(segment.options.id, seriesIx);

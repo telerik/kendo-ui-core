@@ -72,7 +72,23 @@
                         }
                     ],
                     categoryAxis: {
-                        field: "name"
+                        field: "name",
+                        minorGridLines: {
+                            visible: true
+                        }
+                    },
+                    valueAxis: {
+                        minorGridLines: {
+                            visible: true
+                        }
+                    },
+                    axisDefaults: {
+                        majorGridLines: {
+                            color: "red"
+                        },
+                        minorGridLines: {
+                            color: "red"
+                        }
                     },
                     seriesClick: function(e) {
                     },
