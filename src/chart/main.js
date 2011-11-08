@@ -1287,13 +1287,13 @@
             }
 
             offsetX = (targetBox.width() - box.width() + markerWidth) / 2;
-            if (options.position == TOP) {
+            if (options.position === TOP) {
                 offsetY = targetBox.y1 + margin.top;
-                box.y1 = targetBox.y1;
                 box.y2 = targetBox.y1 + box.height() + margin.top + margin.bottom;
+                box.y1 = targetBox.y1;
             } else {
                 offsetY = targetBox.y2 - box.height() - margin.bottom;
-                box.y1 = targetBox.y2 - box.height() - margin.top - margin.bottom + 5;
+                box.y1 = targetBox.y2 - box.height() - margin.top - margin.bottom;
                 box.y2 = targetBox.y2;
             }
 
