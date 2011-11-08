@@ -5,12 +5,13 @@
         KENDOWINDOW = "kendoWindow"
         ui = kendo.ui,
         Widget = ui.Widget,
-        colorPicker = "k-colorpicker",
+        colorPicker = "ktb-colorpicker",
+        numeric = "ktb-numeric",
         propertyEditors = {
             "color": colorPicker,
             "background-color": colorPicker,
             "border-color": colorPicker,
-            "border-radius": "k-numerictextbox",
+            "border-radius": numeric,
             "box-shadow": colorPicker
         },
         processors = {
@@ -231,10 +232,10 @@
                     .kendoPanelBar({
                         animation: false
                     })
-                    .find("input.k-colorpicker").kendoColorPicker({
+                    .find(".ktb-colorpicker").kendoColorPicker({
                         change: changeHandler
                     }).end()
-                    .find("input.k-numerictextbox").kendoNumericTextBox({
+                    .find(".ktb-numeric").kendoNumericTextBox({
                         min: 0,
                         max: 50,
                         step: 1,
