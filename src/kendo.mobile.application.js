@@ -22,10 +22,9 @@
     }
 
     function hideAddressBar(element) {
-        var android = os.name == "android",
-            lastWidth = 0;
+        var lastWidth = 0;
 
-        if (android) {
+        if (os.android) {
             $(window).scroll(function() {
                 element.height(window.innerHeight);
             });
@@ -34,9 +33,9 @@
         function hideBar() {
             if (os.ios) {
                 var height = document.documentElement.clientHeight;
-                if (os.name == "iphone" || os.name == "ipod" && !window.navigator.standalone) height += 60;
+                if (os.iphone || os.ipod && !window.navigator.standalone) height += 60;
                 element.height(height);
-            } else if (android) {
+            } else if (os.android) {
                 element.height(window.innerHeight + 56);
             }
 
