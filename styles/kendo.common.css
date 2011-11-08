@@ -2149,14 +2149,9 @@ span.k-numerictextbox
     background: transparent;
 }
 
-.k-numerictextbox .k-input /*alignment of arrows in WebKit*/
+.k-numerictextbox .k-input /* alignment of arrows in WebKit */
 {
     margin: 0;
-}
-
-.k-formatted-value
-{
-    
 }
 
 .k-numerictextbox .k-select 
@@ -2171,6 +2166,7 @@ span.k-numerictextbox
     height: 11px;
     line-height: 11px;
     border-width: 0;
+    padding: 0;
 }
 
 .k-numerictextbox .k-icon
