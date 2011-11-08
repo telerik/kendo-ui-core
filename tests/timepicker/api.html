@@ -60,6 +60,7 @@
 
             test("select() method should select li", function() {
                 var tv = new TimeView({
+                    format: "hh:mm tt",
                     min: MIDNIGHT,
                     max: MIDNIGHT,
                     interval: 30
@@ -77,7 +78,8 @@
                 tv = new TimeView({
                     min: MIDNIGHT,
                     max: MIDNIGHT,
-                    interval: 30
+                    interval: 30,
+                    change: $.noop
                 });
 
                 tv.refresh();
@@ -107,6 +109,77 @@
 
                 equal(tv.ul.find("li.k-state-selected").length, 1);
                 equal(tv.current().index(), tv.ul.find("li.k-state-selected").index());
+            });
+
+            test("toggle should toggel popup", function() {
+                var tv = new TimeView({
+                    min: MIDNIGHT,
+                    max: MIDNIGHT,
+                    interval: 30,
+                    format: "hh:mm tt"
+                });
+
+                tv.toggle();
+
+                ok(tv.popup.visible());
+                ok(tv.ul.children()[0]);
+            });
+
+            //timepicker
+            test("enable(false) should disable widget", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.enable(false);
+
+                ok(input.attr("disabled"), "disabled");
+                ok(timepicker._inputWrapper.hasClass("k-state-disabled"));
+                ok(!timepicker._inputWrapper.hasClass("k-state-default"));
+            });
+
+            test("enable(false) should unbind icon click", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.enable(false);
+
+                timepicker.wrapper.find(".k-select").click();
+
+                ok(!timepicker.timeView.popup.visible());
+            });
+
+            test("enable(true) should enable widget", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.enable(false);
+                timepicker.enable();
+
+                ok(!input.attr("disabled"));
+                ok(timepicker._inputWrapper.hasClass("k-state-default"));
+                ok(!timepicker._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable(true) should bind icon click", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.enable(true);
+
+                timepicker._arrow.click();
+
+                ok(timepicker.timeView.popup.visible());
+            });
+
+            test("open() should open timeview", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+                timepicker.open();
+
+                ok(timepicker.timeView.popup.visible());
+            });
+
+            test("close() should close timeview", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+                timepicker.open();
+                timepicker.close();
+
+                ok(!timepicker.timeView.popup.visible());
             });
 
        </script>
