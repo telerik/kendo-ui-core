@@ -118,28 +118,23 @@ km-header, km-footer {
     padding: 20px 0;
 }
 
-body,
 .km-view
 {
-    width: 100%;
-    .box-orient(vertical);
-}
-
-.km-view {
     position: absolute;
     top: 0;
     left: 0;
     display: -webkit-box;
-    -webkit-box-orient: vertical;
+    .box-orient(vertical);
     height: 100%;
     width: 100%;
     overflow: hidden;
     -webkit-transform: translatez(0);
     display: table\9;
+    .box-orient(vertical);
 }
 
 .km-content {
-    -webkit-box-flex: 1;
+    .box-flex(1);
     display: block;
     overflow: auto;
     overflow-y: auto;
@@ -168,7 +163,7 @@ body,
     background: #1a1a1a;
 }
 
-.km-tabStrip
+.km-tabstrip
 {
     .box-align(start);
     .box-orient(horizontal);
@@ -178,7 +173,6 @@ body,
     min-height: 50px;
 }
 
-body,
 .km-view
 {
     .box(box);
@@ -202,11 +196,10 @@ body,
        not all and (-webkit-min-device-pixel-ratio:0)
 {
   body, .km-view { display: table; }
-  body > .km-tabStrip, .km-slot, .km-header, .km-footer, .km-content { display: table-row; }
-  body > .km-tabStrip, .km-header, .km-footer { height: 1px; }
+  body > .km-tabstrip, .km-slot, .km-header, .km-footer, .km-content { display: table-row; }
+  body > .km-tabstrip, .km-header, .km-footer { height: 1px; }
 }
 
-.km-view,
 .km-content
 {
     .box-align(stretch);
@@ -250,7 +243,7 @@ body,
 .km-toolbar,
 .km-button,
 .km-radiogroup,
-.km-tabStrip
+.km-tabstrip
 {
     background-origin: border-box;
     position: relative;
@@ -613,7 +606,7 @@ body,
     .box-shadow(0 1px 2px #373737);
 }
 
-.km-android .km-tabStrip .km-button
+.km-android .km-tabstrip .km-button
 {
     height: auto;
     .box-shadow(none);
@@ -623,7 +616,7 @@ body,
 .km-android .km-button,
 .km-android .km-toggle,
 .km-android .km-radiogroup,
-.km-android .km-tabStrip
+.km-android .km-tabstrip
 {
     color: #000;
     text-shadow: none;
@@ -651,11 +644,11 @@ body,
 .km-blackberry .km-toolbar,
 .km-blackberry .km-button,
 .km-blackberry .km-radiogroup,
-.km-blackberry .km-tabStrip,
+.km-blackberry .km-tabstrip,
 .km-meego .km-toolbar,
 .km-meego .km-button,
 .km-meego .km-radiogroup,
-.km-meego .km-tabStrip
+.km-meego .km-tabstrip
 {
     font: normal 1em Arial, Helvetica, sans-serif;
     color: #333;
@@ -798,7 +791,7 @@ body,
     font-size: 1em;
 }
 
-.km-tabStrip,
+.km-tabstrip,
 .km-toolbar
 {
     display: block;
@@ -811,7 +804,7 @@ body,
     .box-shadow(0 0 3px #333);
 }
 
-.km-tabStrip
+.km-tabstrip
 {
     text-align: center;
     word-spacing: -1em;
@@ -822,7 +815,7 @@ body,
     .box-flex(1);
 }
 
-.km-tabStrip .km-button
+.km-tabstrip .km-button
 {
     word-spacing: normal;
 }
@@ -839,6 +832,7 @@ body,
     .box-flex(1);
     .border-radius(0);
     position: relative;
+    overflow: hidden;
 }
 
 .km-blackberry .km-toolbar,
@@ -864,14 +858,14 @@ body,
     background-image: linearGradient(top, rgb(155, 155, 155), rgb(131, 131, 131));
 }
 
-.km-ios .km-tabStrip
+.km-ios .km-tabstrip
 {
     padding: .2em 0;
     background-color: #222;
     background-image: linearGradient(top, rgba(46, 46, 46, 0.8), rgba(21, 21, 21, 0.5) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8));
 }
 
-.km-android .km-tabStrip
+.km-android .km-tabstrip
 {
     padding: 0;
     background-color: #222;
@@ -879,15 +873,15 @@ body,
     background-image: linearGradient(top, rgb(39, 39, 39), rgb(14, 12, 15));
 }
 
-.km-blackberry .km-tabStrip,
-.km-meego .km-tabStrip
+.km-blackberry .km-tabstrip,
+.km-meego .km-tabstrip
 {
     padding: .2em;
     background-color: #333;
     background-image: linearGradient(top, rgba(188, 188, 188, 0.8), rgba(51, 51, 51, 0) 50%);
 }
 
-.km-tabStrip .km-button
+.km-tabstrip .km-button
 {
     font: bold 1em Helvetica, sans-serif;
     color: #a8a8a8;
@@ -899,7 +893,7 @@ body,
     text-align: center;
 }
 
-.km-ios .km-tabStrip .km-button
+.km-ios .km-tabstrip .km-button
 {
     .border-radius(5pt);
     font-size: .6em;
@@ -909,18 +903,18 @@ body,
     text-shadow: none;
 }
 
-.km-tabStrip .km-message
+.km-tabstrip .km-message
 {
     font-size: .8em;
     font-weight: normal;
 }
 
-.km-ios .km-tabStrip .km-message
+.km-ios .km-tabstrip .km-message
 {
     font-size: 1.1em;
 }
 
-.km-android .km-tabStrip .km-button
+.km-android .km-tabstrip .km-button
 {
     font-size: .85em;
     padding: .2em .4em;
@@ -930,47 +924,47 @@ body,
     min-width: 5em;
 }
 
-.km-android .km-tabStrip .km-message,
-.km-blackberry .km-tabStrip .km-message,
-.km-meego .km-tabStrip .km-message
+.km-android .km-tabstrip .km-message,
+.km-blackberry .km-tabstrip .km-message,
+.km-meego .km-tabstrip .km-message
 {
     top: auto;
     bottom: -10px;
 }
 
-.km-blackberry .km-tabStrip .km-button,
-.km-meego .km-tabStrip .km-button
+.km-blackberry .km-tabstrip .km-button,
+.km-meego .km-tabstrip .km-button
 {
     .border-radius(5pt);
     padding: .1em;
     margin: 0 1%;
 }
 
-.km-ios .km-tabStrip .km-button.km-state-active
+.km-ios .km-tabstrip .km-button.km-state-active
 {
     color: #FFF;
     background: rgba(100, 100, 100, 0.5);
 }
 
-.km-android .km-tabStrip .km-button.km-state-active
+.km-android .km-tabstrip .km-button.km-state-active
 {
     color: #FFF;
     background: rgb(154, 154, 154);
     background-image: linearGradient(top, rgb(154, 154, 154), rgb(126, 126, 126));
 }
 
-.km-blackberry .km-tabStrip .km-text,
-.km-meego .km-tabStrip .km-text
+.km-blackberry .km-tabstrip .km-text,
+.km-meego .km-tabstrip .km-text
 {
     display: none;
 }
 
-.km-tabStrip .km-button:first-child
+.km-tabstrip .km-button:first-child
 {
     border-left: 0;
 }
 
-.km-tabStrip .km-button:last-child
+.km-tabstrip .km-button:last-child
 {
     border-right: 0;
 }
@@ -1214,122 +1208,122 @@ input[type=checkbox]
     background: transparent url("images/android-sprite.png") 0 -36px no-repeat;
 }
 
-.km-tabStrip .km-button .km-icon
+.km-tabstrip .km-button .km-icon
 {
     display: block;
     width: 48px;
     height: 48px;
 }
 
-.km-ios .km-tabStrip .km-icon
+.km-ios .km-tabstrip .km-icon
 {
     width: 32px;
     height: 32px;
 }
 
-.km-blackberry .km-tabStrip .km-icon,
-.km-meego .km-tabStrip .km-icon
+.km-blackberry .km-tabstrip .km-icon,
+.km-meego .km-tabstrip .km-icon
 {
     width: 64px;
     height: 64px;
 }
 
-.km-tabStrip .km-button .km-icon
+.km-tabstrip .km-button .km-icon
 {
     margin: 0 auto;
 }
 
-.km-android .km-tabStrip .km-button .km-icon
+.km-android .km-tabstrip .km-button .km-icon
 {
     opacity: 0.5;
     background: transparent url('../examples/images/atabimg.png') no-repeat .1em 50%;
     background-size: cover;
 }
 
-.km-ios .km-tabStrip .km-button .km-icon
+.km-ios .km-tabstrip .km-button .km-icon
 {
     opacity: 1;
     background: transparent url('../examples/images/itabimg1.png') no-repeat 3px 50%;
     background-size: cover;
 }
 
-.km-blackberry .km-tabStrip .km-button .km-icon,
-.km-meego .km-tabStrip .km-button .km-icon
+.km-blackberry .km-tabstrip .km-button .km-icon,
+.km-meego .km-tabstrip .km-button .km-icon
 {
     opacity: 0.5;
     background: transparent url('../examples/images/atabimg.png') no-repeat .5em 50%;
 }
 
-.km-tabStrip .km-button.km-state-active .km-icon
+.km-tabstrip .km-button.km-state-active .km-icon
 {
     opacity: 1;
 }
 
-.km-ios .km-tabStrip .km-state-active .km-icon
+.km-ios .km-tabstrip .km-state-active .km-icon
 {
     background-image: url('../examples/images/itabimg.png');
 }
 
-.km-android .km-tabStrip .km-button:nth-child(1) .km-icon
+.km-android .km-tabstrip .km-button:nth-child(1) .km-icon
 {
     background-position: 1px 50%;
 }
 
-.km-android .km-tabStrip .km-button:nth-child(2) .km-icon
+.km-android .km-tabstrip .km-button:nth-child(2) .km-icon
 {
     background-position: -107px 50%;
 }
 
-.km-android .km-tabStrip .km-button:nth-child(3) .km-icon
+.km-android .km-tabstrip .km-button:nth-child(3) .km-icon
 {
     background-position: -216px 50%;
 }
 
-.km-android .km-tabStrip .km-button:nth-child(4) .km-icon
+.km-android .km-tabstrip .km-button:nth-child(4) .km-icon
 {
     background-position: -325px 50%;
 }
 
-.km-ios .km-tabStrip .km-button:nth-child(1) .km-icon
+.km-ios .km-tabstrip .km-button:nth-child(1) .km-icon
 {
     background-position: 3px 50%;
 }
 
-.km-ios .km-tabStrip .km-button:nth-child(2) .km-icon
+.km-ios .km-tabstrip .km-button:nth-child(2) .km-icon
 {
     background-position: -71px 50%;
 }
 
-.km-ios .km-tabStrip .km-button:nth-child(3) .km-icon
+.km-ios .km-tabstrip .km-button:nth-child(3) .km-icon
 {
     background-position: -146px 50%;
 }
 
-.km-ios .km-tabStrip .km-button:nth-child(4) .km-icon
+.km-ios .km-tabstrip .km-button:nth-child(4) .km-icon
 {
     background-position: -220px 50%;
 }
 
-.km-blackberry .km-tabStrip .km-button:nth-child(1) .km-icon,
-.km-meego .km-tabStrip .km-button:nth-child(1) .km-icon
+.km-blackberry .km-tabstrip .km-button:nth-child(1) .km-icon,
+.km-meego .km-tabstrip .km-button:nth-child(1) .km-icon
 {
     background-position: 6px 50%;
 }
 
-.km-blackberry .km-tabStrip .km-button:nth-child(2) .km-icon,
-.km-meego .km-tabStrip .km-button:nth-child(2) .km-icon
+.km-blackberry .km-tabstrip .km-button:nth-child(2) .km-icon,
+.km-meego .km-tabstrip .km-button:nth-child(2) .km-icon
 {
     background-position: -114px 50%;
 }
 
-.km-blackberry .km-tabStrip .km-button:nth-child(3) .km-icon,
-.km-meego .km-tabStrip .km-button:nth-child(3) .km-icon
+.km-blackberry .km-tabstrip .km-button:nth-child(3) .km-icon,
+.km-meego .km-tabstrip .km-button:nth-child(3) .km-icon
 {
     background-position: -234px 50%;
 }
 
-.km-blackberry .km-tabStrip .km-button:nth-child(4) .km-icon,
-.km-meego .km-tabStrip .km-button:nth-child(4) .km-icon
+.km-blackberry .km-tabstrip .km-button:nth-child(4) .km-icon,
+.km-meego .km-tabstrip .km-button:nth-child(4) .km-icon
 {
     background-position: -354px 50%;
 }
