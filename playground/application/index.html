@@ -4,6 +4,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Kendo mobile application</title>
         <link rel="stylesheet/less" type="text/css" href="../../styles/mobile/layout.less" />
+
         <script src="../../styles/mobile/less.js"></script>
 
         <script src="../../src/jquery.js"></script>
@@ -16,64 +17,13 @@
         <script src="../../src/kendo.mobile.listview.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
-        <style type="text/css">
-            * {
-                margin: 0;
-                padding: 0;
-                -webkit-touch-callout: none;
-                -webkit-tap-highlight-color: rgba(0,0,0,0);
-            }
-
-            html, body {
-                -webkit-text-size-adjust: none;
-            }
-
-            html, body {
-                height: 100%;
-                max-height: auto;
-                overflow: hidden;
-                background: silver;
-            }
-
-            body {
-                -webkit-transform: translatez(0);
-            }
-
-            header, footer {
-                background: #EBEBEB;
-                text-indent: 30px;
-                width: 100%;
-                padding: 20px 0;
-            }
-
-            .km-view {
-                position: absolute;
-                top: 0;
-                left: 0;
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-                height: 100%;
-                width: 100%;
-                overflow: hidden;
-                -webkit-transform: translatez(0);
-            }
-
-            .km-content {
-                -webkit-box-flex: 1;
-                display: block;
-                overflow: auto;
-                overflow-y: auto;
-                overflow-x: visible;
-                position: relative;
-                background: silver;
-            }
-
-        </style>
-
         <script>
             kendo.application.bind("viewInit", function(e) {
                 var view = e.view;
                 view.element.find("#wifis").kendoMobileListView({style: "inset", dataSource: ["T2H2", "T3M1", "Get off my lawn!", "MVCTeamWiFi", "Elvis is alive"]});
+            });
+
+            $(function() {
             });
         </script>
     </head>
@@ -81,8 +31,10 @@
         <article data-kendo-role="view" data-kendo-url="index.html">
 
         <header data-kendo-role="header" style="text-align: center">
-        <a href="#about" data-kendo-role="button" style=" margin-right: 10px;">About</a>
-        Settings:
+        <div class="km-toolbar">
+        <span class="km-view-title">Settings:</span>
+        <a href="#about" data-kendo-role="button" style="float:right; margin-right: 10px;">About</a>
+        </div>
         </header>
 
         <div data-kendo-role="content">
@@ -92,7 +44,12 @@
             </ul>
         </div>
 
-        <footer data-kendo-role="footer"> Copyright &copy; Telerik 2011; </footer>
+        <footer data-kendo-role="footer" data-id="global">
+           <div class="km-tabstrip">
+                <a href="index.html" data-kendo-role="button">Index</a>
+                <a href="photos.html" data-kendo-role="button" id="photos-button">Photos</a>
+            </div>
+        </footer>
 
         </article>
 
