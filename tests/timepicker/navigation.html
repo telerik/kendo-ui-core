@@ -37,9 +37,11 @@
 
             test("move should select first item", function() {
                 var tv = new TimeView({
+                    anchor: input,
                     min: MIDNIGHT,
                     max: MIDNIGHT,
-                    interval: 30
+                    interval: 30,
+                    change: $.noop
                 });
 
                 tv.open();
@@ -50,9 +52,11 @@
 
             test("move should select last item", function() {
                 var tv = new TimeView({
+                    anchor: input,
                     min: MIDNIGHT,
                     max: MIDNIGHT,
-                    interval: 30
+                    interval: 30,
+                    change: $.noop
                 });
 
                 tv.open();
@@ -63,9 +67,11 @@
 
             test("move should select next item", function() {
                 var tv = new TimeView({
+                    anchor: input,
                     min: MIDNIGHT,
                     max: MIDNIGHT,
-                    interval: 30
+                    interval: 30,
+                    change: $.noop
                 });
 
                 tv.open();
@@ -78,9 +84,11 @@
 
             test("move should select previous item", function() {
                 var tv = new TimeView({
+                    anchor: input,
                     min: MIDNIGHT,
                     max: MIDNIGHT,
-                    interval: 30
+                    interval: 30,
+                    change: $.noop
                 });
 
                 tv.open();
@@ -91,21 +99,99 @@
                 equal(tv.ul.find("li.k-state-selected").index(), 0);
             });
 
-            asyncTest("move(ENTER) should call change", function() {
+            test("move should not raise error", function() {
                 var tv = new TimeView({
+                    anchor: input,
                     min: MIDNIGHT,
                     max: MIDNIGHT,
                     interval: 30,
-                    change: function() {
-                        ok(true);
+                    change: $.noop
+                });
+
+                tv.open();
+                tv.current(null);
+                tv.move({keyCode: keys.DOWN, preventDefault: $.noop});
+
+                ok(true);
+            });
+
+            asyncTest("move should call change handler", function() {
+                var tv = new TimeView({
+                    anchor: input,
+                    min: MIDNIGHT,
+                    max: MIDNIGHT,
+                    interval: 30,
+                    format: "hh:mm tt",
+                    change: function(value) {
+                        equal(value, "12:00 AM");
                         start();
                     }
                 });
 
                 tv.open();
+
                 tv.current(tv.ul.children().eq(1));
 
-                tv.move({keyCode: keys.ENTER, preventDefault: $.noop});
+                tv.move({keyCode: keys.UP, preventDefault: $.noop});
+            });
+
+            asyncTest("click item should call change handler", function() {
+                var tv = new TimeView({
+                    anchor: input,
+                    min: MIDNIGHT,
+                    max: MIDNIGHT,
+                    interval: 30,
+                    format: "hh:mm tt",
+                    change: function(value) {
+                        equal(value, "12:00 AM");
+                        start();
+                    }
+                });
+
+                tv.open();
+                tv.ul.children().eq(0).click();
+            });
+
+            test("click item should close popup", function() {
+                var tv = new TimeView({
+                    min: MIDNIGHT,
+                    anchor: input,
+                    max: MIDNIGHT,
+                    interval: 30,
+                    format: "hh:mm tt",
+                    change: $.noop
+                });
+
+                tv.open();
+                var li = tv.ul.children().eq(0);
+                tv.select(li);
+
+                li.click();
+
+                ok(!tv.popup.visible());
+            });
+
+            //timepicker
+            test("press down arrow should select next li and update value", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.open();
+                input.focus().trigger({ type: "keydown", keyCode: keys.DOWN});
+
+                ok(timepicker.timeView._current);
+                equal(timepicker.timeView._current.index(), 0);
+                equal(input.val(), "12:00 AM");
+            });
+
+            asyncTest("click arrow should call _click", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker._arrow.mousedown();
+
+                setTimeout(function() {
+                    equal(document.activeElement, input[0]);
+                    start();
+                }, 100);
             });
 
        </script>

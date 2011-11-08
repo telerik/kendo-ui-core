@@ -34,6 +34,7 @@
             test("TimeView creates popup", function() {
                 var tv = new TimeView({
                     anchor: input,
+                    format: "hh:mm tt",
                     min: MIDNIGHT,
                     max: MIDNIGHT
                 });
@@ -60,6 +61,7 @@
 
             test("TimeView wire required events of UL", function() {
                 var options = {
+                    format: "hh:mm tt",
                     clearBlurTimeout: function () { }
                 },
                 tv = new TimeView(options);
@@ -74,6 +76,7 @@
                 var tv = new TimeView({
                     min: MIDNIGHT,
                     max: MIDNIGHT,
+                    format: "hh:mm tt",
                     interval: 30
                 });
 
@@ -86,6 +89,7 @@
                 var tv = new TimeView({
                     min: MIDNIGHT,
                     max: MIDNIGHT,
+                    format: "hh:mm tt",
                     interval: 30
                 });
 
@@ -100,6 +104,7 @@
                 var tv = new TimeView({
                     min: new Date(10, 10, 10, 10, 0, 0),
                     max: new Date(10, 10, 10, 12, 0, 0),
+                    format: "hh:mm tt",
                     interval: 30
                 });
 
@@ -114,6 +119,7 @@
                 var tv = new TimeView({
                     min: new Date(10, 10, 10, 10, 10, 0),
                     max: new Date(10, 10, 10, 11, 50, 0),
+                    format: "hh:mm tt",
                     interval: 30
                 });
 
@@ -153,6 +159,33 @@
                 ok(icon.children().html());
             });
 
+            test("timeView is defined", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                ok(timepicker.timeView);
+            });
+
+            test("timeView should has correct options", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker"),
+                    timeView = timepicker.timeView;
+
+                equal(timeView.options.anchor, timepicker.wrapper);
+                equal(timeView.options.min, timepicker.options.min);
+                equal(timeView.options.max, timepicker.options.max);
+                equal(timeView.options.format, timepicker.options.format);
+                equal(timeView.options.interval, timepicker.options.interval);
+            });
+
+            asyncTest("timepicker wire icon click", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.close();
+                timepicker._arrow.click();
+                setTimeout(function() {
+                    ok(timepicker.timeView.popup.visible());
+                    start();
+                }, 200);
+            });
 
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
