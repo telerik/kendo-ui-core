@@ -24,7 +24,7 @@
     function switchWith(source, destination, animation) {
         if (source[0] && destination[0]) {
             if (source.data("id") && source.data("id") === destination.data("id")) {
-                destination.html(source.contents());
+                destination.html("").append(source.contents());
             } else if (animation) {
                 source.kendoAnimateTo(destination, animation);
             }
@@ -86,10 +86,10 @@
             that.element.prepend(that.header).append(that.footer);
         },
 
-        slidings: function(otherView, animation) {
+        slidings: function(otherView, parallax) {
             var that = this, slidings;
 
-            if (animation === "slide") {
+            if (parallax) {
                 slidings = that.content;
                 if (!otherView.header[0]) {
                     slidings = slidings.add(that.header);
@@ -109,6 +109,7 @@
             var that = this,
                 back = that.nextView === view,
                 animationType = (back ? view : that).element.data("kendoTransition"),
+                parallax = animationType === "slide",
                 callback = function() { view.element.hide(); };
 
             that.element.css("display", "");
@@ -121,9 +122,9 @@
               view.element.css("z-index", 0);
             }
 
-            headFoodEffects = animationType === "slide" ? {effects: "fade", reverse: back} : false;
+            headFoodEffects = parallax ? {effects: "fade", reverse: back} : false;
 
-            view.slidings(that, animationType).kendoAnimateTo(that.slidings(view, animationType), {effects: animationType, reverse: back, complete: callback});
+            view.slidings(that, parallax).kendoAnimateTo(that.slidings(view, parallax), {effects: animationType, reverse: back, complete: callback});
             switchWith(view.footer, that.footer, headFoodEffects);
             switchWith(view.header, that.header, headFoodEffects);
 
