@@ -137,7 +137,7 @@
                 var constants = this.constants, constant,
                     c, i,
                     property, value,
-                    prototype = $("<div style='border-style:solid;' />").appendTo(document.body);
+                    prototype = $("<div style='border-style:solid;' />").appendTo(window.parent.document.body);
 
                 for (constant in constants) {
                     constant = constants[constant];
@@ -200,7 +200,6 @@
 
                 that.content = $("#kendo-themebuilder")
                     .kendoWindow({
-                        title: "Kendo ThemeBuilder",
                         draggable: true,
                         resizable: true,
                         width: 300,
@@ -316,7 +315,7 @@
                 });
             },
             updateStyleSheet: function(cssText) {
-                var doc = document,
+                var doc = window.parent ? window.parent.document : document,
                     style = $("style[title='themebuilder']")[0];
 
                 if (style) {
@@ -326,7 +325,7 @@
                 style = doc.createElement("style");
                 style.setAttribute("title", "themebuilder");
 
-                $("head")[0].appendChild(style);
+                $("head", doc.documentElement)[0].appendChild(style);
 
                 if (style.styleSheet) {
                     style.styleSheet.cssText = cssText;

@@ -48,6 +48,7 @@ var scripts = [
     "kendo.dropdownlist.js",
     "kendo.combobox.js",
     "kendo.chart.js",
+    "kendo.numerictextbox.js",
     "kendo.grid.js",
     "kendo.menu.js",
     "kendo.panelbar.js",

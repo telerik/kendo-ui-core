@@ -10,6 +10,10 @@
             return path.split("/").slice(0,-1).join("/") + "/";
         })(),
 
+         // TODO: change these to their respective CDN versions during build
+        kendoAllLocation = applicationRoot + "../deploy/kendoUI/js/kendo.all.min.js",
+        kendoCommonCssLocation = applicationRoot + "../deploy/kendoUI/styles/kendo.common.min.css",
+
         // caution: the variable below is changed during builds. update build/themebuilder.js if you change its name!
         requiredFiles = ["less.js", "themebuilder.js", "colorengine.js", "template.js"];
 
@@ -209,16 +213,38 @@
             },
         };
 
-    window.lessLoaded = function(lessTemplate) {
-        new kendo.ThemeBuilder(lessTemplate, new kendo.LessConstants(constants), constantsHierarchy);
+    function createInterface() {
+        var iframe = $('<iframe />', { src: 'javascript:"<html></html>"', frameBorder: '0' })
+                        .css('display', '')
+                        .appendTo(document.body)[0];
+
+        var wnd = iframe.contentWindow || iframe;
+        var doc = wnd.document || iframe.contentDocument;
+
+        doc.open();
+        doc.write([
+            "<!DOCTYPE html><html><head>",
+             "<meta charset='utf-8' />",
+             "<link rel='stylesheet' href='" + kendoCommonCssLocation + "' />",
+             "<link rel='stylesheet' href='" + applicationRoot + "themebuilder.css' />",
+             "</head><body>",
+             "<script src='http://code.jquery.com/jquery-1.6.4.min.js'></script>",
+             "<script src='" + kendoAllLocation + "'></script>",
+             $.map(requiredFiles, function(scriptName) {
+                 return "<script src='" + applicationRoot + scriptName + "'></script>";
+             }).join(""),
+             "</body></html>"
+        ].join(""));
+
+        doc.close();
+
+        return wnd;
+    }
+
+    var iframe = createInterface();
+
+    iframe.lessLoaded = function(lessTemplate) {
+        new iframe.kendo.ThemeBuilder(lessTemplate, new iframe.kendo.LessConstants(constants), constantsHierarchy);
     };
-
-    $("<link rel='stylesheet' href='" + applicationRoot + "themebuilder.css' />").appendTo("head");
-
-    (function loadFileFromQueue() {
-        if (requiredFiles.length) {
-            getScript(applicationRoot + requiredFiles.shift(), loadFileFromQueue);
-        }
-    })();
 })();
 
