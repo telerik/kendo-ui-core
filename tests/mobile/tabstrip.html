@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <title>kendo.ui.MobileListView Tests</title>
+        <title>kendo.ui.MobileTabstrip Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -23,11 +23,25 @@
         <ul id="log"></ul>
 
         <script>
-            var Tabstrip = kendo.ui.MobileTabstrip;
+            var Tabstrip = kendo.ui.MobileTabstrip,
+                MOUSEDOWN = kendo.support.mousedown,
+                MOUSEUP = kendo.support.mouseup,
+                dom,
+                tabstrip;
+
+
+            function click(dom) {
+                dom.trigger(MOUSEDOWN);
+                dom.trigger(MOUSEUP);
+                dom.trigger("click");
+            }
 
             module("mobile tabstrip", {
                 setup: function() {
-
+                    kendo.application = {};
+                    stub(kendo.application, "navigate");
+                    dom = $('<nav><a href="foo">Test</a></nav>');
+                    tabstrip = new Tabstrip(dom);
                 },
                 teardown: function() {
 
@@ -39,14 +53,38 @@
             });
 
             test("creates html structure", function() {
-                var dom = $("<nav><a>Test</a></nav>");
-
-                new Tabstrip(dom);
-
                 ok(dom.find("a>.km-text")[0], "text span is created");
                 ok(dom.find("a>.km-icon")[0], "icon span is created");
             });
 
+            test("raises select event when clicked", function() {
+                expect(2);
+                var button = dom.find("a");
+
+                tabstrip.bind("select", function(e) {
+                    ok(true, "raises the select event");
+                    equal(e.item[0], button[0], "passes the clicked item in the event");
+                });
+
+                click(button);
+            });
+
+            test("calls application navigate if present", function() {
+                expect(2);
+
+                var button = dom.find("a");
+
+                click(button);
+
+                equal(kendo.application.calls("navigate"), 1);
+                equal(kendo.application.args("navigate")[0], "foo");
+            });
+
+            test("marks current button as active", function() {
+                var button = dom.find("a");
+                click(button);
+                ok(button.is(".km-state-active"));
+            });
             /*
 
             test("applies inset css classes", function() {
