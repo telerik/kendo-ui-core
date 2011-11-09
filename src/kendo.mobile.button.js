@@ -8,6 +8,7 @@
         os = support.mobileOS,
         MOUSEDOWN = support.mousedown,
         MOUSEUP = support.mouseup,
+        HREF = "href",
         ACTIVE_STATE_CLASS = "km-state-active",
         CLICK = "click",
         extend = $.extend,
@@ -72,15 +73,15 @@
         _release: function (e) {
             var that = this,
                 element = that.element,
-                href = element.attr("href");
+                href = element.attr(HREF);
 
             that.element.removeClass(ACTIVE_STATE_CLASS);
 
             that.trigger(CLICK);
 
             if (kendo.application && href) {
-                element.attr("href", "#!");
-                setTimeout(function() { element.attr("href", href) }, 0);
+                element.attr(HREF, "#!");
+                setTimeout(function() { element.attr(HREF, href) }, 0);
                 kendo.application.navigate(href);
                 e.preventDefault();
             }
