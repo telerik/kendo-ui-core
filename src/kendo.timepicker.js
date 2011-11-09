@@ -20,9 +20,10 @@
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
         proxy = $.proxy,
-        TODAY = new Date();
+        DATE = Date,
+        TODAY = new DATE();
 
-    TODAY = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate(), 0, 0, 0);
+    TODAY = new DATE(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate(), 0, 0, 0);
 
     var TimeView = function(options) {
         var that = this, list;
@@ -103,20 +104,16 @@
                     return;
                 } else if (down) {
                     current = current ? current[0].nextSibling : ul.firstChild;
-                    if (current) {
-                        that.select(current);
-                    }
-
-                    e.preventDefault();
                 } else {
                     current = current ? current[0].previousSibling : ul.lastChild;
-                    if (current) {
-                        that.select(current);
-                    }
-                    e.preventDefault();
+                }
+
+                if (current) {
+                    that.select(current);
                 }
 
                 that.options.change(that._current.text());
+                e.preventDefault();
 
             } else if (key === keys.ENTER || key === keys.TAB || key === keys.ESC) {
                 that.close();
@@ -134,7 +131,7 @@
                 msInterval = options.interval * MS_PER_MINUTE,
                 toString = kendo.toString,
                 template = that.template,
-                start = new Date(min),
+                start = new DATE(min),
                 length = MS_PER_DAY / msInterval,
                 idx = 0, length,
                 html = "";
@@ -149,7 +146,7 @@
                 }
 
                 if (msMax && getMilliseconds(start) > msMax) {
-                    start = new Date(max);
+                    start = new DATE(max);
                 }
 
                 html += template(toString(start, format));
@@ -204,7 +201,6 @@
             } else {
                 that.open();
             }
-
         },
 
         value: function(value) {
@@ -219,7 +215,7 @@
 
     function setTime(date, time) {
         var tzOffsetBefore = date.getTimezoneOffset(),
-        resultDATE = new Date(date.getTime() + time),
+        resultDATE = new DATE(date.getTime() + time),
         tzOffsetDiff = resultDATE.getTimezoneOffset() - tzOffsetBefore;
 
         date.setTime(resultDATE.getTime() + tzOffsetDiff * MS_PER_MINUTE);
@@ -352,9 +348,11 @@
             this.timeView.open();
         },
 
+        //refactor
         value: function(value) {
             var that = this,
-                options = that.options;
+                options = that.options,
+                text = value;
 
             if (value === undefined) {
                 return that._value;
@@ -366,7 +364,7 @@
                 value = null;
             }
 
-            that._update(value);
+            that._update(value && typeof text === "string" ? text : value);
             that._old = that._value;
         },
 
@@ -444,6 +442,7 @@
             }
         },
 
+        //refactor
         _update: function(value) {
             var that = this,
                 current = that._value,
@@ -460,7 +459,7 @@
                         current = TODAY;
                     }
 
-                    current = new Date(current.getFullYear(),
+                    current = new DATE(current.getFullYear(),
                                    current.getMonth(),
                                    current.getDate(),
                                    date.getHours(),
@@ -468,11 +467,11 @@
                                    date.getSeconds(),
                                    date.getMilliseconds());
 
-                    date = new Date(current);
+                    date = new DATE(current);
                 }
                 that._value = date;
             } else {
-                that._value = date = new Date(value);
+                that._value = date = new DATE(value);
             }
 
             text = kendo.toString(date, format);
