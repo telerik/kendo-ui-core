@@ -61,6 +61,7 @@
 
             test("TimeView wire required events of UL", function() {
                 var options = {
+                    anchor: input,
                     format: "hh:mm tt",
                     clearBlurTimeout: function () { }
                 },
@@ -70,64 +71,6 @@
                 ok(tv.ul.data("events").mousedown);
                 ok(tv.ul.data("events").mouseenter);
                 ok(tv.ul.data("events").mouseleave);
-            });
-
-            test("refresh() should render li items", function() {
-                var tv = new TimeView({
-                    min: MIDNIGHT,
-                    max: MIDNIGHT,
-                    format: "hh:mm tt",
-                    interval: 30
-                });
-
-                tv.refresh();
-
-                ok(tv.ul.find("li").length > 0);
-            });
-
-            test("refresh() should render all hours in a day", function() {
-                var tv = new TimeView({
-                    min: MIDNIGHT,
-                    max: MIDNIGHT,
-                    format: "hh:mm tt",
-                    interval: 30
-                });
-
-                tv.refresh();
-
-                equal(tv.ul.find("li").length, 48);
-                equal(tv.ul.find("li:first").html(), "12:00 AM");
-                equal(tv.ul.find("li:last").html(), "11:30 PM");
-            });
-
-            test("refresh() should render 5 hours only", function() {
-                var tv = new TimeView({
-                    min: new Date(10, 10, 10, 10, 0, 0),
-                    max: new Date(10, 10, 10, 12, 0, 0),
-                    format: "hh:mm tt",
-                    interval: 30
-                });
-
-                tv.refresh();
-
-                equal(tv.ul.find("li").length, 5);
-                equal(tv.ul.find("li:first").html(), "10:00 AM");
-                equal(tv.ul.find("li:last").html(), "12:00 PM");
-            });
-
-            test("refresh() should honor min and max", function() {
-                var tv = new TimeView({
-                    min: new Date(10, 10, 10, 10, 10, 0),
-                    max: new Date(10, 10, 10, 11, 50, 0),
-                    format: "hh:mm tt",
-                    interval: 30
-                });
-
-                tv.refresh();
-
-                equal(tv.ul.find("li").length, 5);
-                equal(tv.ul.find("li:first").html(), "10:10 AM");
-                equal(tv.ul.find("li:last").html(), "11:50 AM");
             });
 
             //TimePicker

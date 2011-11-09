@@ -13,11 +13,19 @@
         <link href="../styles/kendo.blueopal.css" rel="stylesheet" />
     </head>
     <body>
-        <input id="datepicker" style="width: 150px"/>
+        <input id="timepicker" style="width: 150px"/>
+        <input id="timepicker2" value="10:00" style="width: 150px"/>
+        <input id="timepicker3" style="width: 150px"/>
 
         <script>
             $(document).ready(function() {
-                $("#datepicker").kendoTimePicker();
+                $("#timepicker").kendoTimePicker();
+                $("#timepicker2").kendoTimePicker();
+                $("#timepicker3").kendoTimePicker({
+                    value: new Date(2000, 10, 10, 9, 0, 0),
+                    min: new Date(2000, 10, 10, 8, 0, 0),
+                    max: new Date(2000, 10, 10, 18, 0, 0)
+                });
             });
         </script>
     </body>
