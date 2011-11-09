@@ -1,5 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
+        support = kendo.support,
         extend = $.extend,
         mobile,
         DATA_ROLE = "data-kendo-role",
@@ -61,4 +62,12 @@
 
     kendo.ui.MobileWidget = MobileWidget;
     kendo.mobile = mobile;
+
+    if (support.touch) {
+        support.mousedown = "touchstart";
+        support.mouseup = "touchend";
+    } else {
+        support.mousedown = "mousedown";
+        support.mouseup = "mouseup";
+    }
 })(jQuery);
