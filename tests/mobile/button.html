@@ -22,8 +22,8 @@
         <script>
 
             var Button = kendo.ui.MobileButton,
-                MOUSEDOWN = kendo.support.touch ? "touchstart" : "mousedown",
-                MOUSEUP = kendo.support.touch ? "touchend" : "mouseup";
+                MOUSEDOWN = kendo.support.mousedown,
+                MOUSEUP = kendo.support.mouseup;
 
             function click(dom) {
                 dom[MOUSEUP]()
