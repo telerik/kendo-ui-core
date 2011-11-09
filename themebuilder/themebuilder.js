@@ -2,7 +2,7 @@
 
     var proxy = $.proxy,
         CHANGE = "change",
-        KENDOWINDOW = "kendoWindow"
+        KENDOWINDOW = "kendoWindow",
         ui = kendo.ui,
         Widget = ui.Widget,
         colorPicker = "ktb-colorpicker",
@@ -201,16 +201,8 @@
                 that.content = $("#kendo-themebuilder")
                     .kendoWindow({
                         draggable: true,
-                        resizable: true,
-                        width: 300,
-                        minWidth: 300,
-                        maxWidth: 300,
-                        minHeight: 160,
-                        maxHeight: $(window).height() - 100,
-                        close: that.removeUpdateHeightHandler
+                        width: 300
                     });
-
-                $(window).bind("resize.kendoThemeBuilder", $.proxy(that.updateMaxHeight, that));
 
                 that.element = that.content.closest(".k-window")
                     .css({
@@ -253,7 +245,7 @@
 
                 var that = this,
                     downloadWindowObject,
-                    windowWrapper
+                    windowWrapper,
                     downloadWindow = $("<div>" +
                         "<textarea class='k-content' rows='24' cols='80' readonly>Generating CSS...</textarea>" +
                     "</div>")
@@ -282,16 +274,6 @@
                 that._generateTheme(function(css) {
                     downloadWindow.find("textarea").val(css);
                 });
-            },
-            updateMaxHeight: function() {
-                var windowObject = this.content.data(KENDOWINDOW);
-
-                if (windowObject) {
-                    windowObject.options.maxHeight = $(window).height() - 100;
-                }
-            },
-            removeUpdateHeightHandler: function() {
-                $(window).unbind("resize.kendoThemeBuilder");
             },
             _generateTheme: function(callback) {
                 (new less.Parser()).parse(

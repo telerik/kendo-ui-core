@@ -68,10 +68,13 @@
                 infer: function() {
                     var icon = $("<div class='k-icon' />")
                             .css("display", "none")
-                            .appendTo(document.body);
-
-                    return icon.css("background-image")
+                            .appendTo(document.body),
+                        result = icon.css("background-image")
                             .replace(/url\(["']?(.*?)\/sprite\.png["']?\)$/i, "\"$1\"");
+
+                    icon.remove();
+
+                    return result;
                 }
             },
 
@@ -213,13 +216,12 @@
             },
         };
 
-    function createInterface() {
+    function createInterfaceFrame() {
         var iframe = $('<iframe />', { src: 'javascript:"<html></html>"', frameBorder: '0' })
                         .css('display', '')
-                        .appendTo(document.body)[0];
-
-        var wnd = iframe.contentWindow || iframe;
-        var doc = wnd.document || iframe.contentDocument;
+                        .appendTo(document.body)[0],
+            wnd = iframe.contentWindow || iframe,
+            doc = wnd.document || iframe.contentDocument;
 
         doc.open();
         doc.write([
