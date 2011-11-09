@@ -930,6 +930,12 @@
                     ok(view.definitions.globalClip);
                 });
 
+                test("clip path is fully expanded", function() {
+                    decorator.decorate(rect);
+                    var clipRect = view.definitions.globalClip.children[0];
+                    same([clipRect.points[2].x, clipRect.points[2].y], [600, 400]);
+                });
+
                 test("registers clip animation", function() {
                     decorator.decorate(rect);
                     ok(view.animations[0] instanceof Chart.ExpandAnimation);

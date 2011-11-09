@@ -4520,6 +4520,13 @@
             easing: LINEAR
         },
 
+        setup: function() {
+            var anim = this,
+                points = anim.element.points;
+
+            points[1].x = points[2].x = points[0].x;
+        },
+
         step: function(pos) {
             var anim = this,
                 options = anim.options,
@@ -6068,7 +6075,7 @@
                 if (!clipPath) {
                     clipPath = new SVGClipPath({ id: GLOBAL_CLIP });
                     clipRect = view.createRect(
-                        new Box2D(0, 0, 0, options.height), { id: uniqueId() });
+                        new Box2D(0, 0, options.width, options.height), { id: uniqueId() });
                     clipPath.children.push(clipRect);
                     definitions[GLOBAL_CLIP] = clipPath;
 

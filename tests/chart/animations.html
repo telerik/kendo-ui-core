@@ -51,6 +51,11 @@
                     }
                 });
 
+                test("setup shrinks rectangle", function() {
+                    anim.setup();
+                    same([rect.points[1].x, rect.points[2].x], [0, 0]);
+                });
+
                 asyncTest("expands rectangle right", function() {
                     anim.setup();
                     anim.play();
