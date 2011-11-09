@@ -117,9 +117,7 @@ function buildGeneratedSources() {
         skinTemplate = fs.readFileSync(path.join("styles", "black.less"), "utf8");
 
     skinTemplate = skinTemplate.replace(/@import.*;/gm, "") +
-        "\n#k-tb-wrap {\n" +
-        fs.readFileSync(path.join("styles", "template.less"), "utf8") +
-        "\n}";
+        fs.readFileSync(path.join("styles", "template.less"), "utf8");
 
     parser.parse(skinTemplate, function (e, tree) {
         var generatedCss = tree.toCSS(/* { compress: true } */);
