@@ -5,6 +5,7 @@
         ui = kendo.ui,
         Widget = ui.Widget,
         keys = kendo.keys,
+        CHANGE = "change",
         CLICK = (touch ? "touchend" : "click"),
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
@@ -19,8 +20,7 @@
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
         proxy = $.proxy,
-        TODAY = new Date(),
-        MIDNIGHT = new Date(0, 0, 0, 0, 0, 0);
+        TODAY = new Date();
 
     TODAY = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate(), 0, 0, 0);
 
@@ -32,7 +32,7 @@
         that.ul = $('<ul class="k-list k-reset"/>')
                     .css({ overflow: "auto", width: options.anchor.width() - 6, height: "200px" })
                     .bind(MOUSEDOWN, options.clearBlurTimeout)
-                    .delegate(LI, "click", proxy(that.click, that))
+                    .delegate(LI, "click", proxy(that._click, that))
                     .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                     .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
 
@@ -44,17 +44,13 @@
     }
 
     TimeView.prototype = {
-        click: function(e) {
+        _click: function(e) {
             var that = this,
                 li = $(e.currentTarget);
 
             that.select(li);
-            that._change(li.text());
+            that.options.change(li.text());
             that.close();
-        },
-
-        _change: function (value) {
-            this.options.change(value);
         },
 
         current: function(candidate) {
@@ -88,39 +84,43 @@
                 that.refresh();
             }
 
-            that.scroll(that._current);
             that.popup.open();
+            if (that._current) {
+                that.scroll(that._current[0]);
+            }
         },
 
-        move: function(e) {
+        _move: function(e) {
             var that = this,
                 key = e.keyCode,
                 ul = that.ul[0],
                 current = that._current,
-                down = key === keys.DOWN,
-                pressed;
+                down = key === keys.DOWN;
 
             if (key === keys.UP || down) {
                 if (e.altKey) {
                     that.toggle(down);
                     return;
                 } else if (down) {
-                    that.select(current ? current[0].nextSibling : ul.firstChild);
+                    current = current ? current[0].nextSibling : ul.firstChild;
+                    if (current) {
+                        that.select(current);
+                    }
+
                     e.preventDefault();
                 } else {
-                    that.select(current ? current[0].previousSibling : ul.lastChild);
+                    current = current ? current[0].previousSibling : ul.lastChild;
+                    if (current) {
+                        that.select(current);
+                    }
                     e.preventDefault();
                 }
 
-                that._change(that._current.text());
+                that.options.change(that._current.text());
 
-                pressed = true;
             } else if (key === keys.ENTER || key === keys.TAB || key === keys.ESC) {
                 that.close();
-                pressed = true;
             }
-
-            return pressed;
         },
 
         refresh: function() {
@@ -156,6 +156,8 @@
             }
 
             that.ul[0].innerHTML = html;
+
+            that.select(that._value);
         },
 
         scroll: function(item) {
@@ -179,15 +181,13 @@
             var that = this,
                 current = that._current;
 
-            if (!li) {
-                return;
-            }
-
             if (typeof li === "string") {
                 if (!current || current.text() !== li) {
                     li = $.grep(that.ul[0].childNodes, function(node) {
                         return (node.textContent || node.innerText) == li;
-                    })[0];
+                    });
+
+                    li = li[0] ? li : null;
                 } else {
                     li = current;
                 }
@@ -205,6 +205,15 @@
                 that.open();
             }
 
+        },
+
+        value: function(value) {
+            var that = this;
+
+            that._value = value;
+            if (that.ul[0].firstChild) {
+                that.select(value);
+            }
         }
     };
 
@@ -218,6 +227,24 @@
 
     function getMilliseconds(date) {
         return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
+    }
+
+    function inRange(value, min, max) {
+        if (!value) {
+            return true;
+        }
+
+        var msMin = getMilliseconds(min),
+            msMax = getMilliseconds(max),
+            msValue = getMilliseconds(value);
+
+        if (msMin == msMax) {
+            return true;
+        } else {
+            return msValue > msMin && msValue < msMax;
+        }
+
+        return true;
     }
 
     kendo.TimeView = TimeView;
@@ -240,12 +267,13 @@
                 format: options.format,
                 change: function(value) {
                     that.element.val(value);
-                }
+                },
+                clearBlurTimeout: proxy(that._clearBlurTimeout, that)
             }));
 
             that._icon();
 
-            that.element.addClass("k-input")
+            element.addClass("k-input")
                 .bind({
                     keydown: proxy(that._keydown, that),
                     focus: function(e) {
@@ -255,7 +283,28 @@
                     blur: proxy(that._blur, that)
                 });
 
+            /**
+            * Fires when the selected date is changed
+            * @name kendo.ui.DatePicker#change
+            * @event
+            * @param {Event} e
+            */
+            /**
+            * Fires when the calendar is opened
+            * @name kendo.ui.DatePicker#open
+            * @event
+            * @param {Event} e
+            */
+            /**
+            * Fires when the calendar is closed
+            * @name kendo.ui.DatePicker#close
+            * @event
+            * @param {Event} e
+            */
+            that.bind(CHANGE, options);
+
             that.enable(!element.is('[disabled]'));
+            that.value(options.value || element.val());
         },
         options: {
             name: "TimePicker",
@@ -291,12 +340,7 @@
                     .removeAttr(DISABLED);
 
                 arrow.bind(CLICK, proxy(that._click, that))
-                     .bind(MOUSEDOWN, function() {
-                         setTimeout(function() {
-                             clearTimeout(that._bluring);
-                             that.element.focus();
-                         });
-                     });
+                     .bind(MOUSEDOWN, proxy(that._clearBlurTimeout, that))
             }
         },
 
@@ -308,11 +352,29 @@
             this.timeView.open();
         },
 
+        value: function(value) {
+            var that = this,
+                options = that.options;
+
+            if (value === undefined) {
+                return that._value;
+            }
+
+            value = kendo.parseDate(value, options.format);
+
+            if (!inRange(value, options.min, options.max)) {
+                value = null;
+            }
+
+            that._update(value);
+            that._old = that._value;
+        },
+
         _blur: function() {
             var that = this;
 
             that._bluring = setTimeout(function() {
-                //that._change(that.element.val());
+                that._change(that.element.val());
                 if (!touch) {
                     that.close();
                 }
@@ -320,8 +382,31 @@
             }, 100);
         },
 
+        _clearBlurTimeout: function() {
+            var that = this;
+            setTimeout(function() {
+                clearTimeout(that._bluring);
+                that.element.focus();
+            });
+        },
+
         _click: function() {
             this.timeView.toggle();
+        },
+
+        _change: function(value) {
+            var that = this;
+
+            that._update(value);
+            value = that._value;
+
+            if (that._old != value) {
+                that._old = value;
+                that.trigger(CHANGE);
+
+                // trigger the DOM change event so any subscriber gets notified
+                that.element.trigger(CHANGE);
+            }
         },
 
         _icon: function() {
@@ -341,10 +426,15 @@
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
+                enter = key == keys.ENTER,
                 timeView = that.timeView;
 
-            if (timeView.popup.visible() || e.altKey || key == keys.ENTER) {
-                timeView.move(e);
+            if (timeView.popup.visible() || e.altKey || enter) {
+                timeView._move(e);
+            }
+
+            if (enter) {
+                that._change(that.element.val());
             }
         },
 
@@ -352,6 +442,43 @@
             if (!touch) {
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
             }
+        },
+
+        _update: function(value) {
+            var that = this,
+                current = that._value,
+                format = that.options.format,
+                date, text;
+
+            if (value === null) {
+                that._value = date = value;
+            } else if (typeof value === "string") {
+                date = kendo.parseDate(value, format);
+
+                if (date) {
+                    if (!current) {
+                        current = TODAY;
+                    }
+
+                    current = new Date(current.getFullYear(),
+                                   current.getMonth(),
+                                   current.getDate(),
+                                   date.getHours(),
+                                   date.getMinutes(),
+                                   date.getSeconds(),
+                                   date.getMilliseconds());
+
+                    date = new Date(current);
+                }
+                that._value = date;
+            } else {
+                that._value = date = new Date(value);
+            }
+
+            text = kendo.toString(date, format);
+
+            that.element.val(date ? text : value);
+            that.timeView.value(text);
         },
 
         _wrapper: function() {

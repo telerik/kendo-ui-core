@@ -35,7 +35,7 @@
                 }
             });
 
-            test("move should select first item", function() {
+            test("_move should select first item", function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -45,12 +45,12 @@
                 });
 
                 tv.open();
-                tv.move({keyCode: keys.DOWN, preventDefault: $.noop});
+                tv._move({keyCode: keys.DOWN, preventDefault: $.noop});
 
                 equal(tv.ul.find("li.k-state-selected").index(), 0);
             });
 
-            test("move should select last item", function() {
+            test("_move should select last item", function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -60,12 +60,12 @@
                 });
 
                 tv.open();
-                tv.move({keyCode: keys.UP, preventDefault: $.noop});
+                tv._move({keyCode: keys.UP, preventDefault: $.noop});
 
                 equal(tv.ul.find("li.k-state-selected").index(), tv.ul.find("li").length - 1);
             });
 
-            test("move should select next item", function() {
+            test("_move should select next item", function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -77,12 +77,12 @@
                 tv.open();
                 tv.current(tv.ul[0].firstChild);
 
-                tv.move({keyCode: keys.DOWN, preventDefault: $.noop});
+                tv._move({keyCode: keys.DOWN, preventDefault: $.noop});
 
                 equal(tv.ul.find("li.k-state-selected").index(), 1);
             });
 
-            test("move should select previous item", function() {
+            test("_move should select previous item", function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -94,12 +94,12 @@
                 tv.open();
                 tv.current(tv.ul.children().eq(1));
 
-                tv.move({keyCode: keys.UP, preventDefault: $.noop});
+                tv._move({keyCode: keys.UP, preventDefault: $.noop});
 
                 equal(tv.ul.find("li.k-state-selected").index(), 0);
             });
 
-            test("move should not raise error", function() {
+            test("_move should not raise error", function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -109,13 +109,13 @@
                 });
 
                 tv.open();
-                tv.current(null);
-                tv.move({keyCode: keys.DOWN, preventDefault: $.noop});
+                tv._current = $(tv.ul.children(":first"));
+                tv._move({keyCode: keys.UP, preventDefault: $.noop});
 
                 ok(true);
             });
 
-            asyncTest("move should call change handler", function() {
+            asyncTest("_move should call change handler", function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -132,7 +132,7 @@
 
                 tv.current(tv.ul.children().eq(1));
 
-                tv.move({keyCode: keys.UP, preventDefault: $.noop});
+                tv._move({keyCode: keys.UP, preventDefault: $.noop});
             });
 
             asyncTest("click item should call change handler", function() {
@@ -194,6 +194,82 @@
                 }, 100);
             });
 
+            asyncTest("tabbing out should update timeView", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.open();
+
+                input.focus().val("2:00 PM").blur();
+
+                setTimeout(function() {
+                    equal(timepicker.timeView.ul.find("li.k-state-selected").text(), "2:00 PM");
+                    start();
+                }, 200);
+
+            });
+
+            asyncTest("should clear selected item if no such time", function() {
+                var timepicker = input.kendoTimePicker({
+                    value: new Date(2000, 10, 10, 10, 0, 0)
+                }).data("kendoTimePicker");
+
+                timepicker.open();
+
+                ok(timepicker.timeView.ul.find("li.k-state-selected")[0]);
+
+                input.focus().val("2:33 PM").blur();
+
+                setTimeout(function() {
+                    ok(!timepicker.timeView.ul.find("li.k-state-selected")[0]);
+                    equal(timepicker.timeView._value, "2:33 PM");
+                    start();
+                }, 200);
+            });
+
+            asyncTest("do not clear input if not valid time", function() {
+                var timepicker = input.kendoTimePicker({
+                    value: new Date(2000, 10, 10, 10, 0, 0)
+                }).data("kendoTimePicker");
+
+                timepicker.open();
+
+                input.focus().val("invalid").blur();
+
+                setTimeout(function() {
+                    ok(!timepicker.timeView.ul.find("li.k-state-selected")[0]);
+                    equal(timepicker.timeView._value, null);
+                    equal(timepicker._value, null);
+                    equal(input.val(), "invalid");
+                    start();
+                }, 200);
+            });
+
+            test("Enter should update value of the timepicker", function() {
+                var date = new Date(2000, 10, 10),
+                    timepicker = input.kendoTimePicker({
+                        value: date
+                    }).data("kendoTimePicker");
+
+                input.val("12:22 PM").trigger({type: "keydown", keyCode: keys.ENTER});
+
+                date.setHours(12);
+                date.setMinutes(22);
+
+                equal(+timepicker.value(), +date);
+                equal(timepicker.timeView._value, "12:22 PM");
+            });
+
+            test("select time with enter clear selection", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.open();
+                input.trigger({type: "keydown", keyCode: keys.DOWN});
+                input.trigger({type: "keydown", keyCode: keys.ENTER});
+
+                timepicker.open();
+
+                ok(timepicker.timeView.current().hasClass("k-state-selected"));
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
