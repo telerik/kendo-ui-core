@@ -63,8 +63,8 @@
 
             that._modified = false;
 
-            that.data = data || {};
-            that.pristine = extend(true, {}, data);
+            that.data = data && !$.isEmptyObject(data) ? data : extend(true, {}, that.defaultItem);
+            that.pristine = extend(true, {}, that.data);
 
             if (that.id() === undefined) {
                 that._isNew = true;
@@ -174,7 +174,7 @@
 
     Model.define = function(options) {
         var model,
-            proto = extend({}, options),
+            proto = extend({}, { defaultItem: {} }, options),
             id = proto.id || "id",
             set,
             get;
@@ -201,6 +201,15 @@
             return id(this.data, value);
         }
 
+        for (var field in proto.fields) {
+            field = proto.fields[field];
+
+            var name = field.field || field,
+                type = field.type || "string";
+
+            proto.defaultItem[name] = defaultValues[type.toLowerCase()];
+        }
+
         model = Model.extend(proto);
         model.id = id;
 
@@ -209,6 +218,13 @@
         }
 
         return model;
+    }
+
+    var defaultValues = {
+        "string": "",
+        "number": 0,
+        "date": new Date(),
+        "boolean": false
     }
 
     var ModelSet = Observable.extend({
@@ -298,6 +314,8 @@
 
             that._models[model.id()] = model;
 
+            that.trigger(CHANGE);
+
             if (that.options.autoSync) {
                 that.sync();
             }
@@ -324,6 +342,8 @@
                 if (!model.isNew()) {
                     that._destroyed.push(model);
                 }
+
+                that.trigger(CHANGE);
 
                 if (that.options.autoSync) {
                     that.sync();
