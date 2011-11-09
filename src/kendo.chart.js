@@ -3189,22 +3189,15 @@
             }
 
             if (labels.visible) {
-                segment.label = new TextBox(labelText, {
+                segment.label = new TextBox(labelText, deepExtend({}, labels, {
                         id: uniqueId(),
                         align: CENTER,
                         vAlign: "",
                         animation: {
                             type: FADEIN,
                             delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
-                        },
-                        font: labels.font,
-                        margin: labels.margin,
-                        padding: labels.padding,
-                        color: labels.color,
-                        background: labels.background,
-                        zIndex: labels.zIndex,
-                        position: labels.position
-                    });
+                        }
+                    }));
 
                 segment.append(segment.label);
                 segment.registerId(segment.label.options.id);
