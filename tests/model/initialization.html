@@ -227,7 +227,7 @@
 
                 equal(model.get("foo"), "foo");
                 equal(model.data.foo, "foo");
-                equal(model.data.bar, undefined);
+                equal(model.data.bar, "");
             });
 
             test("zero is set as default value for numeric field", function() {
