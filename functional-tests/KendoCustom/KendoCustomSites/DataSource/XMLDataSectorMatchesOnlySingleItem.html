@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Binding to XML</title>
+        <link href="../../../../deploy/kendoUI/styles/kendo.common.min.css" rel="stylesheet"/>
+        <link href="../../../../deploy/kendoUI/styles/kendo.blueopal.min.css" rel="stylesheet"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <script src="../../../../deploy/kendoUI/js/kendo.all.min.js"></script>
+    </head>
+    
+    <body>
+        <div id="example" class="k-content">
+
+            <ul id="books"></ul>
+
+            <script id="template" type="text/x-kendo-template">
+                <li class="book">
+                    <a href="#= url #"><img src="../content/datasource/xml-data/#= cover #" /></a>
+                    <h3>#= title #</h3>
+                    by #= author #
+                </li>
+            </script>
+
+            <script>
+                $(document).ready(function () {
+                    function onChange() {
+                        $("#books").html(kendo.render(template, this.view()));
+                    }
+
+                    // create a template using the above definition
+                    var template = kendo.template($("#template").html());
+
+                    var dataSource = new kendo.data.DataSource({
+                        transport: {
+                            // specify the XML file to read. The same as read: { url: "books.xml" }
+                            read: "XMLDataSectorMatchesOnlySingleItem.xml"
+                        },
+                        schema: {
+                            // specify the the schema is XML
+                            type: "xml",
+                            // the XML element which represents a single data record
+                            data: "/books/book",
+                            // define the model - the object which will represent a single data record
+                            model: {
+                                // configure the fields of the object
+                                fields: {
+                                    // the "title" field is mapped to the text of the "title" XML element
+                                    title: "title/text()",
+                                    // the "author" field is mapped to the text of the "author" XML element
+                                    author: "author/text()",
+                                    // the "url" field is mapped to the text of the "url" XML element
+                                    url: "url/text()",
+                                    // the "cover" field is mapped to the "id" attribute of the "book" XML element
+                                    cover: "@cover"
+                                }
+                            }
+                        },
+                        change: onChange
+                    });
+
+                    dataSource.read();
+                });
+            </script>
+
+            <style scoped>
+                #books {
+                    list-style-type: none;
+                    float:left;
+                    width: 65%;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .book {
+                    float:left;
+                    width: 32%;
+                    height:240px;
+                    text-align: center;
+                    margin-bottom: 2em;
+                }
+
+                .book h3 {
+                    margin-bottom: 0;
+                }
+
+                .book a {
+                    display: inline-block;
+                    max-width: 128px;
+                    border: 1px solid #b6b6b6;
+                    box-shadow: 0 0 4px #ccf;
+                }
+
+                .book a:hover {
+                    box-shadow: 0 0 6px #99f;
+                }
+
+                .book img {
+                    vertical-align: middle;
+                    border: 0;
+                    max-width: 100%;
+                }
+
+                .configuration {
+                    width: 32%;
+                }
+
+            </style>
+
+            
+    </body>
+</html>
