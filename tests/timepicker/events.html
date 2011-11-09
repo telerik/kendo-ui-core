@@ -79,6 +79,19 @@
                 timepicker._change("10:00");
             });
 
+            asyncTest("click li raises change event", function() {
+                var timepicker = input.kendoTimePicker({
+                                            change: function() {
+                                                ok(true);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoTimePicker");
+
+                    timepicker.open();
+                    timepicker.timeView.ul.find("li:first").click();
+            });
+
             asyncTest("raise open event", function() {
                 var timepicker = input.kendoTimePicker({
                                             open: function() {
