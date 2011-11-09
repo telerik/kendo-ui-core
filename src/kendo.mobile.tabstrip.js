@@ -10,6 +10,7 @@
         MOUSEUP = support.mouseup,
         ACTIVE_STATE_CLASS = "km-state-active",
         SELECT = "select",
+        HREF = "href",
         BUTTON_SELECTOR = "a",
         extend = $.extend,
         proxy = $.proxy;
@@ -35,23 +36,24 @@
                             .addClass("km-button")
                             .prepend('<span class="km-icon"/>')
                             .bind(MOUSEUP, that._releaseProxy)
-                            .bind("click", that._clickProxy);
+                            .bind("click", that._clickProxy)
+                            .eq(options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
         },
 
         _release: function (e) {
             var that = this,
                 target = $(e.currentTarget),
                 oldItem = that.element.children("." + ACTIVE_STATE_CLASS),
-                href = target.attr("href");
+                href = target.attr(HREF);
 
-            that.trigger("select", {item: target});
+            that.trigger(SELECT, {item: target});
 
             target.addClass(ACTIVE_STATE_CLASS);
             oldItem.removeClass(ACTIVE_STATE_CLASS);
 
             if (kendo.application && href) {
-                target.attr("href", "#!");
-                setTimeout(function() { target.attr("href", href) }, 0);
+                target.attr(HREF, "#!");
+                setTimeout(function() { target.attr(HREF, href) }, 0);
                 kendo.application.navigate(href);
                 e.preventDefault();
             }
@@ -66,6 +68,7 @@
         options: {
             name: "MobileTabstrip",
             selector: "[data-kendo-role=tabstrip]",
+            selectedIndex: 0,
             enable: true
         }
     });
