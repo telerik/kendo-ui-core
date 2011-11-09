@@ -399,8 +399,8 @@ a.bigButton:hover
 
 #flowerWrap
 {
-    height: 49px;
-    background: #f2f2f2;
+    /*height: 49px;*/
+    background: 0 -1000px repeat-x url(sprite.png) #f2f2f2;
     box-shadow: inset 0px -2px 2px #DDD;
     border-bottom: 1px solid #DDD\9;
     box-sizing: border-box;
@@ -409,9 +409,9 @@ a.bigButton:hover
 
 #flowerWrap .flowers
 {
-    border-bottom:1px solid #dedede;
-    background:#ef652a no-repeat 50% 0 url(flowers.png);
-    height: 10px;
+    border-bottom: 1px solid #bc5021;
+    background: #ef652a;
+    height: 7px;
 }
 
 #flowerWrap img
@@ -458,14 +458,7 @@ a.bigButton
 .overview #flowerWrap .flowers
 {
     height: 100%;
-    background-position: 50% 3px;
-    border-bottom-color: #bc5021;
-}
-
-#topnavWrap
-{
-    margin-top: 7px;
-    margin-top: 8px\9;
+    background: #ef652a no-repeat 50% 3px url(flowers.png);
 }
 
 #topnavWrap .skinSelector,
@@ -480,7 +473,7 @@ a.bigButton
 {
     font-size: 12px;
     font-weight: normal;
-    margin-top: 4px;
+    margin-top: 13px;
     padding-right: 5px;
 }
 
@@ -489,23 +482,19 @@ a.bigButton
     list-style: none outside;
     margin: 0 0 0 8px;
     padding: 0;
-    width: 240px;
 }
 
 #topnav li
 {
     float:left;
-    width:33.33%;
 }
-
-*+html #topnav li:first-child{width:33.2%;}
 
 #topnav a
 {
     color: #000;
     display: block;
-    padding: 7px 0 7px 0;
-    font-size: 1.1em;
+    padding: 12px 18px;
+    font-size: 1.2em;
     border: 1px solid #dedede;
     border-right-width: 0;
     border-bottom-width: 0;
@@ -516,7 +505,10 @@ a.bigButton
 
 #topnav a:hover
 {
-    color: #ef652a;
+    /*color: #ef652a;*/
+    background: #fafafa;
+    padding-bottom: 11px;
+    border-bottom: 1px solid #ececec;
 }
 
 #topnav a.selected,
@@ -524,26 +516,19 @@ a.bigButton
 {
     position: relative;
     z-index: 1;
-    color: #ef652a;
-    background: #fff;
+    color: #fff;
+    background: #ef652a;
     cursor: default;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #FFF;
-}
-
-#topnav a.first
-{
-    -webkit-border-radius: 5px 0 0 0;
-    -moz-border-radius: 5px 0 0 0;
-    border-radius: 5px 0 0 0;
+    padding-bottom: 11px;
+    border-bottom: 1px solid #ef652a;
+    border-top-color: #ef652a;
+    margin-top: -1px;
+    padding-top:13px;
 }
 
 #topnav a.last
 {
     border-right-width: 1px;
-    -webkit-border-radius: 0 5px 0 0;
-    -moz-border-radius: 0 5px 0 0;
-    border-radius: 0 5px 0 0;
 }
 
 /*left navigation*/
@@ -1087,7 +1072,7 @@ pre.prettyprint
 
 #topnavWrap .skinSelector
 {
-    margin-right: 4px;
+    margin: 7px 4px 0 0;
     float: right;
     display: none;
     width: 200px;
