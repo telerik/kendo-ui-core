@@ -32,9 +32,7 @@
             that._clickProxy = proxy(that._click, that);
 
             that.element.find(BUTTON_SELECTOR)
-                            .wrapInner('<span class="km-text"/>')
-                            .addClass("km-button")
-                            .prepend('<span class="km-icon"/>')
+                            .each(that._buildButton)
                             .bind(MOUSEUP, that._releaseProxy)
                             .bind("click", that._clickProxy)
                             .eq(options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
@@ -62,6 +60,21 @@
         _click: function (e) {
             if (kendo.application) {
                 e.preventDefault();
+            }
+        },
+
+        _buildButton: function() {
+            var href = $(this),
+                icon = href.data("kendoIcon"),
+                iconSpan = $('<span class="km-icon"/>');
+
+
+            href.wrapInner('<span class="km-text"/>')
+                .addClass("km-button")
+                .prepend(iconSpan);
+
+            if (icon) {
+                iconSpan.addClass("km-tab-icon-" + icon);
             }
         },
 

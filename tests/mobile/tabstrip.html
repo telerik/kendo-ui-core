@@ -40,7 +40,7 @@
                 setup: function() {
                     kendo.application = {};
                     stub(kendo.application, "navigate");
-                    dom = $('<nav><a href="foo" id="foo">foo</a><a href="bar" id="bar">bar</a></nav>');
+                    dom = $('<nav><a href="foo" id="foo">foo</a><a href="bar" id="bar" data-kendo-icon="genius">bar</a></nav>');
                     tabstrip = new Tabstrip(dom);
                 },
                 teardown: function() {
@@ -93,7 +93,7 @@
                 ok(!button.is(".km-state-active"));
             });
 
-            test("marks first button as active by defaul", function() {
+            test("marks first button as active by default", function() {
                 ok(dom.find("#foo").is(".km-state-active"));
             });
 
@@ -102,48 +102,10 @@
                 tabstrip = new Tabstrip(dom, {selectedIndex: 1});
                 ok(dom.find("#bar").is(".km-state-active"));
             });
-            /*
 
-            test("applies inset css classes", function() {
-                var dom = $("<ul/>");
-
-                new ListView(dom, { style: "inset" });
-
-                ok(dom.is(".km-listview"), "Css class is applied");
-                ok(dom.is(".km-list"), "Css class is applied");
-                ok(dom.is(".km-listinset"), "Css class is applied");
+            test("applies icon class if data attribute provided", function() {
+                ok(dom.find("#bar span:first-child").is(".km-tab-icon-genius"), "bar tab has km-tab-icon-genius class");
             });
-
-            test("applies group css classes", function() {
-                var dom = $("<ul/>");
-
-                new ListView(dom, { type: "group" });
-
-                ok(dom.is(".km-listview"), "Css class is applied");
-                ok(dom.is(".km-listgroup"), "Css class is applied");
-                ok(!dom.is(".km-list"), "Css class is not applied");
-            });
-
-            test("applies group and inset css classes", function() {
-                var dom = $("<ul/>");
-
-                new ListView(dom, { type: "group", style: "inset" });
-
-                ok(dom.is(".km-listview"), "Css class is applied");
-                ok(dom.is(".km-listgroupinset"), "Css class not applied");
-                ok(!dom.is(".km-listgroup"), "Css class is not applied");
-                ok(!dom.is(".km-list"), "Css class is not applied");
-            });
-
-            test("applies css class to child lists when grouped", function() {
-                var dom = $("<ul><li><ul/></li></ul>");
-
-                new ListView(dom, { type: "group" });
-
-                ok(dom.find("ul").is(".km-list"), "Css class is applied");
-            });
-            */
-
         </script>
     </body>
 </html>
