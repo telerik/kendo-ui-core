@@ -232,7 +232,7 @@
             var name = field.field || field,
                 type = field.type || "default";
 
-            proto.defaultItem[name] = defaultValues[type.toLowerCase()];
+            proto.defaultItem[name] = field.defaultValue != undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
 
             field.converter = field.converter || converters[type];
         }
