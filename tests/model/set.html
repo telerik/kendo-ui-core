@@ -357,6 +357,18 @@
                 ok(!m.readOnly("bar"));
             });
 
+            test("changes returns false if value is same as default value", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", defaultValue: "bar"}
+                    }
+                }), m = new MyModel({ });
+
+                m.set("bar", "bar");
+
+                ok(!m._modified);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
