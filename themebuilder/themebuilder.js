@@ -2,7 +2,6 @@
 
     var proxy = $.proxy,
         CHANGE = "change",
-        KENDOWINDOW = "kendoWindow",
         ui = kendo.ui,
         Widget = ui.Widget,
         colorPicker = "ktb-colorpicker",
@@ -198,19 +197,14 @@
 
                 that.render();
 
-                that.content = $("#kendo-themebuilder")
-                    .kendoWindow({
-                        draggable: true,
-                        width: 300
-                    });
+                that.content = $("#kendo-themebuilder");
 
                 that.element = that.content.closest(".k-window")
                     .css({
                         top: 20,
                         left: $(window).width() - 320
                     })
-                    .data("kendoThemeBuilder", that)
-                    .wrap("<div id='k-tb-wrap' />");
+                    .data("kendoThemeBuilder", that);
 
                 function changeHandler(e) {
                     that._propertyChange({
@@ -233,19 +227,14 @@
                         change: changeHandler
                     }).end();
 
-                $(".k-list-container[id^='@']").appendTo("#k-tb-wrap");
-
                 $(".k-action-download").click(proxy(that.download, that));
-            },
-            open: function() {
-                this.content.data(KENDOWINDOW).open();
             },
             download: function(e) {
                 e.preventDefault();
 
                 var that = this,
                     downloadWindowObject,
-                    windowWrapper,
+                    // TODO: this should happen outside the frame
                     downloadWindow = $("<div>" +
                         "<textarea class='k-content' rows='24' cols='80' readonly>Generating CSS...</textarea>" +
                     "</div>")
@@ -257,25 +246,17 @@
                             title: "Your theme is ready!",
                             close: function() {
                                 downloadWindowObject.destroy();
-                                // TODO: this should be handled by the window
-                                $("#k-tb-wrap .k-overlay").remove();
                             }
                         });
 
-                downloadWindowObject = downloadWindow.data(KENDOWINDOW);
-
-                windowWrapper = downloadWindowObject.wrapper;
-
-                windowWrapper.prev(".k-overlay").appendTo("#k-tb-wrap");
-                windowWrapper.attr("id", "download-interface").appendTo("#k-tb-wrap");
-
-                downloadWindowObject.center().open();
+                downloadWindowObject = downloadWindow.data("kendoWindow").center().open();
 
                 that._generateTheme(function(css) {
                     downloadWindow.find("textarea").val(css);
                 });
             },
             _generateTheme: function(callback) {
+                console.log(this.constants.serialize());
                 (new less.Parser()).parse(
                     this.constants.serialize() + this.templateInfo.template,
                     function (err, tree) {

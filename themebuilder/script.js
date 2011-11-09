@@ -122,14 +122,16 @@
 
             "@disabled-text-color":             constant(".k-state-disabled", COLOR),
 
+            "@tooltip-background-color":        constant(".k-tooltip", BGCOLOR),
+            "@tooltip-border-color":            constant(".k-tooltip", BORDERCOLOR),
+            "@tooltip-text-color":              constant(".k-tooltip", COLOR),
+
             "@alt-background-color":            constant(".k-alt", BGCOLOR),
             "@input-background-color":          constant(".k-input", BGCOLOR),
             "@input-text-color":                constant(".k-input", COLOR),
             "@shadow-color":                    constant(".k-popup", "box-shadow"),
             "@shadow-inset-color":              constant(".k-autocomplete .k-input", "box-shadow"),
             "@link-text-color":                 constant(".k-link", COLOR),
-            "@tooltip-background-color":        constant(".k-tooltip", BGCOLOR),
-            "@tooltip-text-color":              constant(".k-tooltip", COLOR),
             "@border-radius":                   constant(".k-link", "border-radius"),
             "@loading-panel-color":             constant(".k-loading-color", BGCOLOR),
             "@splitbar-background-color":       constant(".k-splitbar", BGCOLOR)
@@ -201,39 +203,75 @@
                     "@disabled-text-color":           "Disabled text color"
                 }
             },
+            "Tooltips": {
+                constants: /^@tooltip/,
+                labels: {
+                    "@tooltip-background-color":  "Background",
+                    "@tooltip-border-color":      "Border color",
+                    "@tooltip-text-color":        "Text color",
+                }
+            },
             "Misc": {
-                constants: /^@(alt|shadow|tooltip|border|loading|splitbar)/,
+                constants: /^@(alt|shadow|border|loading|splitbar)/,
                 labels: {
                     "@border-radius":             "Border radius",
                     "@alt-background-color":      "Alternating color",
                     "@shadow-color":              "Shadow color",
                     "@shadow-inset-color":        "Inset shadow",
-                    "@tooltip-background-color":  "Tooltip background",
-                    "@tooltip-text-color":        "Tooltip text color",
                     "@loading-panel-color":       "Loading panel background",
                     "@splitbar-background-color": "Splitbar background"
                 }
             },
         };
 
-    function createInterfaceFrame() {
+    function createWindow() {
+        return $("<div id='ktb-wrap' />")
+                .css({
+                    paddingTop: 59,
+                    position: "absolute",
+                    width: 300,
+                    top: "4em",
+                    right: "4em",
+                    bottom: "4em",
+                    background: "url(" + applicationRoot + "header.png) no-repeat 50% 0 #3d3d3d",
+                    borderRadius: 5,
+                    boxShadow: "1px 1px 7px 1px #AAAAAA",
+                    zIndex: 100010
+                })
+                .appendTo(document.body);
+    }
+
+    function createInterfaceFrame(container) {
         var iframe = $('<iframe />', { src: 'javascript:"<html></html>"', frameBorder: '0' })
-                        .css('display', '')
-                        .appendTo(document.body)[0],
+                        .css({
+                            display: "",
+                            height: "98%",
+                            width: "96%",
+                            margin: "0 2% 2%"
+                        })
+                        .appendTo(container || document.body)[0],
             wnd = iframe.contentWindow || iframe,
             doc = wnd.document || iframe.contentDocument;
+
+        function stylesheet(url) {
+            return "<link rel='stylesheet' href='" + url + "' />";
+        }
+
+        function script(url) {
+             return "<script src='" + url + "'></script>";
+        }
 
         doc.open();
         doc.write([
             "<!DOCTYPE html><html><head>",
              "<meta charset='utf-8' />",
-             "<link rel='stylesheet' href='" + kendoCommonCssLocation + "' />",
-             "<link rel='stylesheet' href='" + applicationRoot + "themebuilder.css' />",
+             stylesheet(kendoCommonCssLocation),
+             stylesheet(applicationRoot + "themebuilder.css"),
              "</head><body>",
-             "<script src='http://code.jquery.com/jquery-1.6.4.min.js'></script>",
-             "<script src='" + kendoAllLocation + "'></script>",
+             script("http://code.jquery.com/jquery-1.6.4.min.js"),
+             script(kendoAllLocation),
              $.map(requiredFiles, function(scriptName) {
-                 return "<script src='" + applicationRoot + scriptName + "'></script>";
+                 return script(applicationRoot + scriptName);
              }).join(""),
              "</body></html>"
         ].join(""));
@@ -243,7 +281,7 @@
         return wnd;
     }
 
-    var iframe = createInterface();
+    var iframe = createInterfaceFrame(createWindow());
 
     iframe.lessLoaded = function(lessTemplate) {
         new iframe.kendo.ThemeBuilder(lessTemplate, new iframe.kendo.LessConstants(constants), constantsHierarchy);
