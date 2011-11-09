@@ -75,7 +75,7 @@
         "number": 0,
         "date": new Date(),
         "boolean": false,
-        "default": undefined
+        "default": ""
     }
 
     var Model = Observable.extend({
@@ -317,12 +317,11 @@
         add: function(model) {
             var that = this, data;
 
-            if (model instanceof Model) {
-                data = model.data;
-            } else {
-                data = model;
+            if (!(model instanceof Model)) {
                 model = new that.options.model(model);
             }
+
+            data = model.data;
 
             model.bind(CHANGE, function () {
                 that.trigger(MODELCHANGE, model);
