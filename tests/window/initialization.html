@@ -35,42 +35,6 @@
                 ok(dialog.wrapper.children().eq(0).is(".k-window-titlebar, .k-header"));
             });
 
-            test("if contentUrl is remote should not call ajaxRequest on refresh method", function() {
-                var dialog = createWindow(),
-                    hasRequestedData = false;
-
-                dialog.options.contentUrl = "http://";
-
-                $.mockjax(function () {
-                    hasRequestedData = true;
-                    return {};
-                });
-
-                dialog.refresh();
-
-                ok(!hasRequestedData);
-
-                $.mockjaxClear();
-            });
-
-            test("if contentUrl is local and relative should call ajaxRequest on refresh method", 1, function() {
-                var dialog = createWindow(),
-                    hasRequestedData = false;
-
-                dialog.options.contentUrl = "httpfoo";
-
-                $.mockjax(function () {
-                    hasRequestedData = true;
-                    return {};
-                });
-
-                dialog.refresh();
-
-                ok(hasRequestedData);
-
-                $.mockjaxClear();
-            });
-
             test("construction triggers open and activate events", 2, function() {
                 var dialog = createWindow({
                     "open": function () { ok(true); },
@@ -161,9 +125,9 @@
                 ok($(".k-overlay").is(":visible"));
             });
 
-            test("creating a window with a remote contentUrl creates iframe", function() {
+            test("creating a window with a remote `content` creates iframe", function() {
                 var dialog = createWindow({
-                        contentUrl: "http://google.com/",
+                        content: "http://google.com/",
                         title: "title"
                     }),
                     iframe = dialog.element.find("iframe");
@@ -173,17 +137,17 @@
                 equals(iframe.attr("src"), "http://google.com/");
             });
 
-            test("creating a window with a contentUrl on the same server does not create iframe", function() {
+            test("creating a window with a `content` on the same server does not create iframe", function() {
                 $.mockjax(function () { return {}; });
 
                 var dialog = createWindow({
-                    contentUrl: "foo"
+                    content: "foo"
                 });
 
                 equals(dialog.element.find("iframe").length, 0);
             });
 
-            test("creating a window without a contentUrl does not create iframe", function() {
+            test("creating a window without a `content` does not create iframe", function() {
                 var dialog = createWindow();
 
                 equals(dialog.element.find("iframe").length, 0);
