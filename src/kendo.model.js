@@ -38,7 +38,8 @@
 
         return true;
     }
-    converters = {
+
+    var converters = {
         "number": function(value) {
             return kendo.parseFloat(value);
         },
@@ -51,8 +52,32 @@
                 }
             }
             return kendo.parseDate(value);
+        },
+
+        "boolean": function(value) {
+            if (typeof value === "string") {
+                return value.toLowerCase() === "true";
+            }
+            return !!value;
+        },
+
+        "string": function(value) {
+            return value + "";
+        },
+
+        "default": function(value) {
+            return value;
         }
     };
+
+    var defaultValues = {
+        "string": "",
+        "number": 0,
+        "date": new Date(),
+        "boolean": false,
+        "default": undefined
+    }
+
     var Model = Observable.extend({
         init: function(data) {
             var that = this;
@@ -205,9 +230,11 @@
             field = proto.fields[field];
 
             var name = field.field || field,
-                type = field.type || "string";
+                type = field.type || "default";
 
             proto.defaultItem[name] = defaultValues[type.toLowerCase()];
+
+            field.converter = field.converter || converters[type];
         }
 
         model = Model.extend(proto);
@@ -218,13 +245,6 @@
         }
 
         return model;
-    }
-
-    var defaultValues = {
-        "string": "",
-        "number": 0,
-        "date": new Date(),
-        "boolean": false
     }
 
     var ModelSet = Observable.extend({
