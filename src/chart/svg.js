@@ -658,7 +658,7 @@
                 if (!clipPath) {
                     clipPath = new SVGClipPath({ id: GLOBAL_CLIP });
                     clipRect = view.createRect(
-                        new Box2D(0, 0, 0, options.height), { id: uniqueId() });
+                        new Box2D(0, 0, options.width, options.height), { id: uniqueId() });
                     clipPath.children.push(clipRect);
                     definitions[GLOBAL_CLIP] = clipPath;
 
