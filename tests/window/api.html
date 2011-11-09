@@ -92,6 +92,39 @@
                 ok(dialog.wrapper.prev("div").is(".k-overlay"));
             });
 
+            test("refresh() of non-local URLs does not request data", function() {
+                var dialog = createWindow(),
+                    hasRequestedData = false;
+
+                $.mockjax(function () {
+                    hasRequestedData = true;
+                    return {};
+                });
+
+                dialog.refresh("http://");
+
+                ok(!hasRequestedData);
+
+                $.mockjaxClear();
+            });
+
+            test("refresh() of local URLs requests data via AJAX", function() {
+                var dialog = createWindow(),
+                    hasRequestedData = false;
+
+                $.mockjax(function () {
+                    hasRequestedData = true;
+                    return {};
+                });
+
+                dialog.refresh("httpfoo");
+
+                ok(hasRequestedData);
+
+                $.mockjaxClear();
+            });
+
+
             test("refresh() with string uses it as a URL", function() {
                 var url = "foo",
                     dialog = createWindow({})
@@ -106,13 +139,13 @@
                 dialog.refresh(url);
             });
 
-            test("refresh() uses contentUrl if no url is provided", function() {
+            test("refresh() uses `content` if no url is provided", function() {
                 $.mockjax(function(settings) {
                     return {};
                 });
 
                 var url = "foo",
-                    dialog = createWindow({ contentUrl: url });
+                    dialog = createWindow({ content: url });
 
                 expect(1);
 
@@ -141,6 +174,28 @@
                     data: data
                 });
             });
+
+            test("refresh() uses `content` object combined with URL", function() {
+                $.mockjax(function(settings) {
+                    return {};
+                });
+
+                var url = "/bar",
+                    contentObject = { type: "POST" },
+                    dialog = createWindow({ content: contentObject });
+
+                expect(2);
+
+                $.mockjaxClear();
+                $.mockjax(function(settings) {
+                    equals(settings.url, url);
+                    equals(settings.type, contentObject.type);
+                    return {};
+                });
+
+                dialog.refresh(url);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>

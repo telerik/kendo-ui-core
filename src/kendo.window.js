@@ -69,14 +69,14 @@
      *  <button id="btnOpen">Open Window</button>
      * @exampleTitle
      * @example
-     *  //Initialize Window, center, and configure button click action-->
+     *  // Initialize Window, center, and configure button click action
      *  $(document).ready(function(){
      *      var window = $("#window").kendoWindow({
-     *      title: "Centered Window",
-     *      width: "200px",
-     *      height: "200px",
-     *      visible: false
-     *  }).data("kendoWindow");
+     *              title: "Centered Window",
+     *              width: "200px",
+     *              height: "200px",
+     *              visible: false
+     *          }).data("kendoWindow");
      *  });
      *
      *  $("#btnOpen").click(function(){
@@ -97,11 +97,11 @@
      *  <div id="window"></div>
      * @exampleTitle
      * @example
-     *  //Initialize and configure to load content async -->
+     *  // Initialize window and configure content loading
      *  $(document).ready(function(){
      *      $("#window").kendoWindow({
      *        title: "Async Window Content",
-     *        contentUrl: "html-content-snippet.html"
+     *        content: "html-content-snippet.html"
      *      });
      *  });
      */
@@ -157,7 +157,7 @@
          * @option {Boolean} [resizable] <true> Specifies whether the users may to resize the window.
          * @option {Integer} [minWidth] <50> The minimum width that may be achieved by resizing the window.
          * @option {Integer} [minHeight] <50> The minimum height that may be achieved by resizing the window.
-         * @option {String} [contentUrl] Specifies a URL that the window should load its content from. For remote URLs, a container iframe element is automatically created.
+         * @option {Object|String} [content] Specifies a URL or request options that the window should load its content from. For remote URLs, a container iframe element is automatically created.
          * @option {Array<String>} [actions] <"Close"> The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize", "Maximize".
          * @option {String} [title] The text in the window title bar.
          * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the widget.
@@ -337,8 +337,12 @@
 
             $(window).resize(proxy(that._onDocumentResize, that));
 
-            if (isLocalUrl(options.contentUrl)) {
-                that._ajaxRequest(options.contentUrl);
+            if (!$.isPlainObject(options.content)) {
+                options.content = { url: options.content };
+            }
+
+            if (isLocalUrl(options.content.url)) {
+                that._ajaxRequest(options.content);
             }
 
             if (wrapper.is(VISIBLE)) {
@@ -683,7 +687,7 @@
             }
 
             var that = this,
-                url = options.url = options.url || that.options.contentUrl;
+                url = options.url = options.url || that.options.content.url;
 
             if (isLocalUrl(url)) {
                 that._ajaxRequest(options);
@@ -715,7 +719,7 @@
 
                     that.trigger(REFRESH);
                 }, that)
-            }, options));
+            }, that.options.content, options));
         },
 
         /**
@@ -755,7 +759,7 @@
             "</div>"
         ),
         iframe: template(
-            "<iframe src='#= contentUrl #' title='#= title #' frameborder='0'" +
+            "<iframe src='#= content #' title='#= title #' frameborder='0'" +
                 " class='k-content-frame'>" +
                     "This page requires frames in order to show content" +
             "</iframe>"
@@ -770,7 +774,7 @@
             contentHtml.attr("style", "overflow:hidden;");
         }
 
-        if (options.contentUrl && !isLocalUrl(options.contentUrl)) {
+        if (options.content && !isLocalUrl(options.content)) {
             contentHtml.html(templates.iframe(options));
         }
 
