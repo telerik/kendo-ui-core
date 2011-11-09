@@ -33,19 +33,20 @@
                 },
                 dataSource: data,
                 seriesDefaults: {
-                    labels: {
-                        visible: true
-                    },
                     connectors: {
                         width: 4
-                    },
-                    overlay: null
+                    }
                 },
                 transitions: false,
                 series: [{
                     type: "pie",
                     name: "World",
                     padding: 50,
+                    labels: {
+                        visible: true,
+                        position: "center",
+                        background: ""
+                    },
                     data: [{
                           value: 2,
                           category: "Avg 2011"
@@ -920,27 +921,30 @@
 
         function change() {
             var chart = $("#container").data("kendoChart"),
-                align = $("#alignOn").prop("checked") ? "circle" : "column",
+                position = $('input[name=position]:checked').val(),
                 series = chart.options.series;
+
             for (var i = 0, length = chart.options.series.length; i < length; i++) {
-                series[i].labels.align = align;
+                series[i].labels.position = position;
             };
 
             chart.refresh();
         }
     </script>
-    <input type="button" onclick="clickMe()" value="GAS!" />
-
     <div id="container" style="width: 600px; height: 400px; margin-left: 100px;
         -webkit-transform: translateZ(0); float: left;"></div>
     <div>
-        <input id="alignOn" name="align"
-                type="radio" checked="checked" autocomplete="off" />
-        <label for="alignOn">ON</label>
+        <input id="positionCenter" name="position"
+                type="radio" checked="checked" autocomplete="off" value="center" />
+        <label for="positionCenter">center</label>
 
-        <input id="alignOff" name="align"
-               type="radio" value="OFF" autocomplete="off" />
-        <label for="alignOff">OFF</label>
+        <input id="alignInsideEnd" name="position"
+               type="radio" value="insideEnd" autocomplete="off" />
+        <label for="alignInsideEnd">insideEnd</label>
+
+        <input id="alignOutsideEnd" name="position"
+               type="radio" value="outsideEnd" autocomplete="off" />
+        <label for="alignOutsideEnd">outsideEnd</label>
 
         <input type="button" onclick="change()" value="apply!" />
     </div>

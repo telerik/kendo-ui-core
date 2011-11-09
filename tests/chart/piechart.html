@@ -56,11 +56,7 @@
                 function PlotAreaStub() { }
 
                 $.extend(PlotAreaStub.prototype, {
-                    options: {
-                        categoryAxis: {
-                            categories: ["A"]
-                        }
-                    }
+                    options: { }
                 });
 
                 // ------------------------------------------------------------
@@ -73,10 +69,6 @@
 
                 test("creates segments for pie chart data points", function() {
                     equal(pieChart.segments.length, values.data.length);
-                });
-
-                test("reports number of categories", function() {
-                    equal(categoriesCount(pieChart.options.series), values.data.length);
                 });
 
                 test("segments have set angle", function() {
@@ -313,9 +305,6 @@
                                     }
                                 ]
                             }],
-                            categoryAxis: {
-                                categories: ["Alpha", "Beta", "Charlie"]
-                            },
                             chartArea: {
                                 margin: 0
                             }
@@ -384,11 +373,7 @@
                 function PlotAreaStub() { }
 
                 $.extend(PlotAreaStub.prototype, {
-                    options: {
-                        categoryAxis: {
-                            categories: ["A"]
-                        }
-                    }
+                    options: { }
                 });
 
                 // ------------------------------------------------------------
@@ -452,7 +437,8 @@
                                     padding: PADDING,
                                     margin: MARGIN,
                                     distance: 20,
-                                    font: "labels-font"
+                                    font: "labels-font",
+                                    position: "center"
                                 }
                             } ]
                         });
@@ -498,6 +484,10 @@
 
                 test("applies font to data labels", function() {
                     equal(pieSegment.options.labels.font, "labels-font");
+                });
+
+                test("applies font to data labels", function() {
+                    equal(pieSegment.options.labels.position, "center");
                 });
 
                 // ------------------------------------------------------------
@@ -797,6 +787,81 @@
                             equal(this.points[1].y, this.points[2].y);
                         }
                     });
+                });
+
+                // ------------------------------------------------------------
+                module("Pie Chart / Labels / Positions", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupPieChart(plotArea, {
+                            series: [ {
+                                data: [ 40, 1, 140 ],
+                                labels: {
+                                    visible: true
+                                }
+                            } ]
+                        });
+                    }
+                });
+
+                test("center", function() {
+                    plotArea = new PlotAreaStub();
+                    setupPieChart(plotArea, {
+                        series: [ {
+                            data: [ 40, 1, 140 ],
+                            labels: {
+                                visible: true,
+                                position: "center"
+                            }
+                        } ]
+                    });
+
+                    var points = [];
+                    $.each(view.log.text, function() {
+                        var style = this.style;
+                        points.push([ style.x, style.y ]);
+                    });
+
+                    same(points, [
+                        [ 474.898, 193.63 ],
+                        [ 522.764, 270.99 ],
+                        [ 305.907, 388.934 ] ], TOLERANCE);
+                });
+
+                test("insideEnd", function() {
+                    plotArea = new PlotAreaStub();
+                    setupPieChart(plotArea, {
+                        series: [{
+                            data: [ 40, 1, 140 ],
+                            labels: {
+                                visible: true,
+                                position: "insideEnd"
+                            }
+                        }]
+                    });
+                    var points = [];
+                    $.each(view.log.text, function() {
+                        var style = this.style;
+                        points.push([ style.x, style.y ]);
+                    });
+
+                    same(points, [
+                        [ 541.44, 113.704 ],
+                        [ 625.353, 253.918 ],
+                        [ 237.988, 467.693 ] ], TOLERANCE);
+                });
+
+                test("outsideEnd", function() {
+                    var points = [];
+                    $.each(view.log.text, function() {
+                        var style = this.style;
+                        points.push([ style.x, style.y ]);
+                    });
+
+                    same(points, [
+                        [ 587.103, 82 ],
+                        [ 673.133, 248 ],
+                        [ 191.896, 502 ] ], TOLERANCE );
                 });
 
             })();
