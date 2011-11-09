@@ -179,6 +179,116 @@
                 ok(model.fields.foo.readonly);
             });
 
+            test("empty string default value is set for field of type string", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo", type: "string"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                equal(model.defaultItem["foo"], "");
+                equal(model.get("foo"), "");
+            });
+
+            test("empty string default value is set for field of type string where field name differs from the field", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "bar", type: "string"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                equal(model.defaultItem["bar"], "");
+                equal(model.get("bar"), "");
+            });
+
+            test("model data is synchronized with original data", function() {
+                var data = { id: 1, foo: "bar"};
+                var model = new (Model.define())(data);
+
+                model.set("foo", "foo");
+
+                equal(model.get("foo"), "foo");
+                equal(data.foo, "foo");
+            });
+
+            test("model data is synchronized with original data as empty object", function() {
+                var data = {};
+                var model = new (Model.define({ fields: { foo: "foo", bar: "bar" } }))(data);
+
+                model.set("foo", "foo");
+
+                equal(model.get("foo"), "foo");
+                equal(model.data.foo, "foo");
+                equal(model.data.bar, "");
+            });
+
+            test("zero is set as default value for numeric field", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo", type: "number"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.defaultItem["foo"] === 0);
+                ok(model.get("foo") === 0);
+            });
+
+            test("date is set as default value for date field", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo", type: "date"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.defaultItem["foo"].getDate() === new Date().getDate());
+                ok(model.get("foo").getDate() === new Date().getDate());
+            });
+
+            test("setting default value by type should be caseinsensitive", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo", type: "DATE"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.defaultItem["foo"].getDate() === new Date().getDate());
+                ok(model.get("foo").getDate() === new Date().getDate());
+            });
+
+            test("false is set as default value for boolean field", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo", type: "Boolean"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.defaultItem["foo"] === false);
+                ok(model.get("foo") === false);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

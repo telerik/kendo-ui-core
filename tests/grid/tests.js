@@ -42,5 +42,9 @@ tests.push(
     {
         page: "grid/deleting.html",
         title: "deleting"
+    },
+    {
+        page: "grid/inserting.html",
+        title: "inserting"
     }
 );

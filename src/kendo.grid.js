@@ -692,6 +692,10 @@
             }
         },
 
+        addRow: function() {
+            this.dataSource.add({});
+        },
+
         _groupable: function() {
             var that = this,
                 wrapper = that.wrapper,

@@ -96,6 +96,34 @@
 
                 ok(called);
             });
+
+            test("change is raised after new model is added to the set", function() {
+                var called = false;
+
+                setup();
+
+                dataSource.bind("change", function() {
+                    called = true;
+                });
+
+                dataSource.add({});
+
+                ok(called);
+            });
+
+            test("change is raised after model is deleted from the set", function() {
+                var called = false;
+
+                setup();
+
+                dataSource.bind("change", function() {
+                    called = true;
+                });
+
+                dataSource.remove(1);
+
+                ok(called);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
