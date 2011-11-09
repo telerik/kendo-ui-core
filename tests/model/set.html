@@ -165,6 +165,79 @@
                 equal(typeof m.get("bar"), "number");
             });
 
+            test("setting boolean as string is converted", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", type: "boolean" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", "TRUE");
+                ok(m.get("bar") === true);
+                equal(typeof m.get("bar"), "boolean");
+            });
+
+            test("setting boolean as false string is converted", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", type: "boolean" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", "false");
+                ok(m.get("bar") === false);
+                equal(typeof m.get("bar"), "boolean");
+            });
+
+            test("setting  boolean as number is converted", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", type: "boolean" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", 1);
+                ok(m.get("bar") === true);
+                equal(typeof m.get("bar"), "boolean");
+            });
+
+            test("setting  boolean as null is converted to false", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", type: "boolean" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", null);
+                ok(m.get("bar") === false);
+                equal(typeof m.get("bar"), "boolean");
+            });
+
+            test("setting boolean as invalid string value is converted to false", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", type: "boolean" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", "foo");
+                ok(m.get("bar") === false);
+                equal(typeof m.get("bar"), "boolean");
+            });
+
+            test("setting number as string is converted to string", function() {
+                var MyModel = kendo.data.Model.define({
+                    fields: {
+                        bar: { field: "bar", type: "string" }
+                    }
+                }), m = new MyModel();
+
+                m.set("bar", 42);
+                equal(m.get("bar"), "42");
+                equal(typeof m.get("bar"), "string");
+
+            });
+
             test("set float number as string is parsed as float", function() {
                 var MyModel = kendo.data.Model.define({
                     fields: {

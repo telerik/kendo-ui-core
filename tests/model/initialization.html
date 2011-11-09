@@ -227,7 +227,7 @@
 
                 equal(model.get("foo"), "foo");
                 equal(model.data.foo, "foo");
-                equal(model.data.bar, "");
+                equal(model.data.bar, undefined);
             });
 
             test("zero is set as default value for numeric field", function() {
@@ -260,7 +260,7 @@
                 ok(model.get("foo").getDate() === new Date().getDate());
             });
 
-            test("setting default value by type should be caseinsensitive", function() {
+            test("setting default value by type should be case insensitive", function() {
                 var MyModel = Model.define({
                     fields: {
                         foo: {
@@ -288,6 +288,34 @@
 
                 ok(model.defaultItem["foo"] === false);
                 ok(model.get("foo") === false);
+            });
+
+            test("type convert is assign to the field definition", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo", type: "number"
+                        }
+                    }
+                });
+
+                ok($.isFunction(MyModel.fields.foo.converter));
+            });
+
+            test("custom type converter is assign to the field definition", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "number",
+                                converter: function() {
+                                    return true;
+                                }
+                            }
+                        }
+                });
+
+                ok(MyModel.fields.foo.converter());
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
