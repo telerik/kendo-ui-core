@@ -290,6 +290,38 @@
                 ok(model.get("foo") === false);
             });
 
+            test("defaultValue sets field default value", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            defaultValue: "foo"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                equal(model.defaultItem["foo"], "foo");
+                equal(model.get("foo"), "foo");
+            });
+
+            test("defaultValue set to 0 is set", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            defaultValue: 0
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.defaultItem["foo"] === 0);
+                ok(model.get("foo") === 0);
+            });
+
             test("type convert is assign to the field definition", function() {
                 var MyModel = Model.define({
                     fields: {
