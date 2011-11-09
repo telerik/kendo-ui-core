@@ -368,6 +368,8 @@
             draggable: true,
             minWidth: 50,
             minHeight: 50,
+            maxWidth: Infinity,
+            maxHeight: Infinity,
             visible: true
         },
 
@@ -457,7 +459,7 @@
          * var content = wnd.content();
          *
          * // set the content
-         * wnd.content("<p>New content</p>");
+         * wnd.content("&lt;p&gt;New content&lt;/p&gt;");
          */
         content: function (html) {
             var content = this.wrapper.children(KWINDOWCONTENT);
@@ -575,38 +577,36 @@
         /**
          * Toggles the window between a maximized and restored state.
          */
-        toggleMaximization: function (e) {
-            if (e && $(e.target).closest(".k-window-action").length > 0) {
-                return;
-            }
-
-            this[this.options.isMaximized ? "restore" : "maximize"]();
+        toggleMaximization: function () {
+            return this[this.options.isMaximized ? "restore" : "maximize"]();
         },
 
         /**
          * Restores a maximized window to its previous size.
          */
         restore: function () {
-            var that = this;
+            var that = this,
+                options = that.options,
+                restorationSettings = that.restorationSettings;
 
-            if (!that.options.isMaximized) {
+            if (!options.isMaximized) {
                 return;
             }
 
             that.wrapper
                 .css({
                     position: "absolute",
-                    left: that.restorationSettings.left,
-                    top: that.restorationSettings.top,
-                    width: that.restorationSettings.width,
-                    height: that.restorationSettings.height
+                    left: restorationSettings.left,
+                    top: restorationSettings.top,
+                    width: restorationSettings.width,
+                    height: restorationSettings.height
                 })
                 .find(".k-resize-handle").show().end()
                 .find(".k-window-titlebar .k-restore").addClass("k-maximize").removeClass("k-restore");
 
             $("html, body").css(OVERFLOW, "");
 
-            that.options.isMaximized = false;
+            options.isMaximized = false;
 
             that.trigger(RESIZE);
 
@@ -616,7 +616,7 @@
         /**
          * Maximizes a window so that it fills the entire screen.
          */
-        maximize: function (e) {
+        maximize: function () {
             var that = this;
 
             if (that.options.isMaximized) {
@@ -647,19 +647,20 @@
         },
 
         _onDocumentResize: function () {
-            if (!this.options.isMaximized) {
+            var that = this,
+                wrapper = that.wrapper,
+                wnd = $(window);
+
+            if (!that.options.isMaximized) {
                 return;
             }
 
-            var wrapper = this.wrapper;
-
-            wrapper
-                .css({
-                    width: $(window).width(),
-                    height: $(window).height()
+            wrapper.css({
+                    width: wnd.width(),
+                    height: wnd.height()
                 });
 
-            this.trigger(RESIZE);
+            that.trigger(RESIZE);
         },
 
         /**
@@ -816,48 +817,37 @@
         drag: function (e) {
             var wnd = this.owner,
                 wrapper = wnd.wrapper,
+                options = wnd.options,
+                constrain = function(value, low, high) {
+                    return Math.max(Math.min(value, high), low);
+                },
                 resizeHandlers = {
                     "e": function () {
-                        var width = e.pageX - wnd.initialCursorPosition.left;
+                        var newWidth = e.pageX - wnd.initialCursorPosition.left;
 
-                        wrapper.width((width < wnd.options.minWidth ? wnd.options.minWidth
-                                    : (wnd.options.maxWidth && width > wnd.options.maxWidth) ? wnd.options.maxWidth
-                                    : width));
+                        wrapper.width(constrain(newWidth, options.minWidth, options.maxWidth));
                     },
                     "s": function () {
-                        var height = e.pageY - wnd.initialCursorPosition.top - wnd.elementPadding;
+                        var newHeight = e.pageY - wnd.initialCursorPosition.top - wnd.elementPadding;
 
-                        wrapper
-                            .height((height < wnd.options.minHeight ? wnd.options.minHeight
-                                : (wnd.options.maxHeight && height > wnd.options.maxHeight) ? wnd.options.maxHeight
-                                : height));
+                        wrapper.height(constrain(newHeight, options.minHeight, options.maxHeight));
                     },
                     "w": function () {
                         var windowRight = wnd.initialCursorPosition.left + wnd.initialSize.width,
-                            width = windowRight - e.pageX;
+                            newWidth = windowRight - e.pageX;
 
-                        /// TODO: use Math.min / Math.max to sort these out
                         wrapper.css({
-                            left: e.pageX (windowRight - wnd.options.minWidth) ? windowRight - wnd.options.minWidth
-                                : e.pageX < (windowRight - wnd.options.maxWidth) ? windowRight - wnd.options.maxWidth
-                                : e.pageX,
-                            width: (width < wnd.options.minWidth ? wnd.options.minWidth
-                                   : (wnd.options.maxWidth && width > wnd.options.maxWidth) ? wnd.options.maxWidth
-                                   : width)
+                            left: constrain(e.pageX, windowRight - options.minWidth, windowRight - options.maxWidth),
+                            width: constrain(newWidth, options.minWidth, options.maxWidth)
                         })
                     },
                     "n": function () {
                         var windowBottom = wnd.initialCursorPosition.top + wnd.initialSize.height,
-                            height = windowBottom - e.pageY;
+                            newHeight = windowBottom - e.pageY;
 
-                        /// TODO: use Math.min / Math.max to sort these out
                         wrapper.css({
-                            top: e.pageY > (windowBottom - wnd.options.minHeight) ? windowBottom - wnd.options.minHeight
-                               : e.pageY < (windowBottom - wnd.options.maxHeight) ? windowBottom - wnd.options.maxHeight
-                               : e.pageY,
-                            height: (height < wnd.options.minHeight ? wnd.options.minHeight
-                                  : (wnd.options.maxHeight && height > wnd.options.maxHeight) ? wnd.options.maxHeight
-                                  : height)
+                            top: constrain(e.pageY, windowBottom - options.minHeight, windowBottom - options.maxHeight),
+                            height: constrain(newHeight, options.minHeight, options.maxHeight)
                         });
                     }
                 };
