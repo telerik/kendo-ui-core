@@ -109,6 +109,7 @@
         Widget = kendo.ui.Widget,
         Draggable = kendo.ui.Draggable,
         fx = kendo.fx,
+        isPlainObject = $.isPlainObject,
         proxy = $.proxy,
         each = $.each,
         template = kendo.template,
@@ -663,33 +664,43 @@
 
         /**
          * Refreshes the window content from a remote url.
-         * @param {String} url The URL that the window should be refreshed from. If omitted, the window content is refreshed from the contentUrl that was supplied upon the window creation.
-         * @param {Object} data Data to be sent to the server.
+         * @param {Object|String} options Options for requesting data from the server. If omitted, the window uses the <code>content</code> property that was supplied when the window was created. Any options specified here are passed to the jQuery.ajax call.
+         * @param {String} options.url The server URL that will be requested.
+         * @param {Object} options.data A JSON object containing the data that will be passed to the server.
+         * @param {String} options.type The request method ("GET", "POST").
+         * @example
+         * var windowObject = $("#window").data("kendoWindow");
+         * windowObject.refresh("/feedbackForm");
+         * windowObject.refresh({
+         *     url: "/feedbackForm",
+         *     data: { userId: 42 }
+         * });
          */
-        refresh: function (url, data) {
-            var that = this;
+        refresh: function (options) {
+            if (!$.isPlainObject(options)) {
+                options = { url: options };
+            }
 
-            url = url || that.options.contentUrl;
+            var that = this,
+                url = options.url = options.url || that.options.contentUrl;
 
             if (isLocalUrl(url)) {
-                that._ajaxRequest(url, data);
+                that._ajaxRequest(options);
             }
 
             return that;
         },
 
-        _ajaxRequest: function (url, data) {
+        _ajaxRequest: function (options) {
             var that = this,
                 refreshIcon = that.wrapper.find(".k-window-titlebar .k-refresh"),
                 loadingIconTimeout = setTimeout(function () {
                     refreshIcon.addClass(LOADING);
                 }, 100);
 
-            $.ajax({
+            $.ajax($.extend({
                 type: "GET",
-                url: url,
                 dataType: "html",
-                data: data || {},
                 cache: false,
                 error: proxy(function (xhr, status) {
                     that.trigger(ERROR);
@@ -703,7 +714,7 @@
 
                     that.trigger(REFRESH);
                 }, that)
-            });
+            }, options));
         },
 
         /**

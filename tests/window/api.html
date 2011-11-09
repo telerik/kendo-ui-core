@@ -20,6 +20,7 @@
             module("api", {
                 teardown: function() {
                     $(".k-window,.k-overlay").remove();
+                    $.mockjaxClear();
                 }
             });
 
@@ -91,7 +92,40 @@
                 ok(dialog.wrapper.prev("div").is(".k-overlay"));
             });
 
-            test("refresh sends data to server", function() {
+            test("refresh() with string uses it as a URL", function() {
+                var url = "foo",
+                    dialog = createWindow({})
+
+                expect(1);
+
+                $.mockjax(function(settings) {
+                    equals(settings.url, url);
+                    return {};
+                });
+
+                dialog.refresh(url);
+            });
+
+            test("refresh() uses contentUrl if no url is provided", function() {
+                $.mockjax(function(settings) {
+                    return {};
+                });
+
+                var url = "foo",
+                    dialog = createWindow({ contentUrl: url });
+
+                expect(1);
+
+                $.mockjaxClear();
+                $.mockjax(function(settings) {
+                    equals(settings.url, url);
+                    return {};
+                });
+
+                dialog.refresh();
+            });
+
+            test("refresh() sends data to server", function() {
                 var dialog = createWindow({}),
                     data = { bar: "baz" };
 
@@ -102,9 +136,10 @@
                     return {};
                 });
 
-                dialog.refresh("foo", data);
-
-                $.mockjaxClear();
+                dialog.refresh({
+                    url: "foo",
+                    data: data
+                });
             });
         </script>
 
