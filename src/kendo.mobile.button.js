@@ -31,7 +31,6 @@
 
             // Hack to prevent the addressbar
             // flashing when clicking the buttons
-            that._href = that.element.attr("href");
 
             that.bind([
                 CLICK
@@ -51,14 +50,14 @@
 
             if (enable) {
                 that.element
-                    .bind(CLICK, that._clickProxy)
                     .bind(MOUSEDOWN, that._pressProxy)
-                    .bind(MOUSEUP, that._releaseProxy);
+                    .bind(MOUSEUP, that._releaseProxy)
+                    .bind(CLICK, that._clickProxy);
             } else {
                 that.element
-                    .unbind(CLICK, that._clickProxy)
                     .unbind(MOUSEDOWN, that._pressProxy)
-                    .unbind(MOUSEUP, that._releaseProxy);
+                    .unbind(MOUSEUP, that._releaseProxy)
+                    .unbind(CLICK, that._clickProxy);
             }
         },
 
@@ -67,23 +66,27 @@
         },
 
         _press: function (e) {
-            this.element.addClass(ACTIVE_STATE_CLASS).attr("href", "#!");
+            this.element.addClass(ACTIVE_STATE_CLASS);
         },
 
         _release: function (e) {
             var that = this,
-                href = that._href;
+                element = that.element,
+                href = element.attr("href");
 
             that.element.removeClass(ACTIVE_STATE_CLASS);
+
             that.trigger(CLICK);
 
             if (kendo.application && href) {
+                element.attr("href", "#!");
+                setTimeout(function() { element.attr("href", href) }, 0);
                 kendo.application.navigate(href);
+                e.preventDefault();
             }
         },
 
-        _click: function(e) {
-            this.element.attr("href", this._href);
+        _click: function (e) {
             if (kendo.application) {
                 e.preventDefault();
             }

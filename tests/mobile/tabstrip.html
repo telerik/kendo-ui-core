@@ -40,7 +40,7 @@
                 setup: function() {
                     kendo.application = {};
                     stub(kendo.application, "navigate");
-                    dom = $('<nav><a href="foo">Test</a></nav>');
+                    dom = $('<nav><a href="foo" id="foo">foo</a><a href="bar" id="bar">bar</a></nav>');
                     tabstrip = new Tabstrip(dom);
                 },
                 teardown: function() {
@@ -59,7 +59,7 @@
 
             test("raises select event when clicked", function() {
                 expect(2);
-                var button = dom.find("a");
+                var button = dom.find("#foo");
 
                 tabstrip.bind("select", function(e) {
                     ok(true, "raises the select event");
@@ -72,7 +72,7 @@
             test("calls application navigate if present", function() {
                 expect(2);
 
-                var button = dom.find("a");
+                var button = dom.find("#foo");
 
                 click(button);
 
@@ -84,6 +84,13 @@
                 var button = dom.find("a");
                 click(button);
                 ok(button.is(".km-state-active"));
+            });
+
+            test("removes previous button active state", function() {
+                var button = dom.find("#foo");
+                click(button);
+                click($("#bar", dom));
+                ok(!button.is(".km-state-active"));
             });
             /*
 
