@@ -2395,10 +2395,8 @@
             }
         },
 
-        formatPointValue: function(format) {
-            var point = this;
-
-            return point.owner.formatPointValue(point.value, format);
+        formatPointValue: function(value, tooltipFormat) {
+            return format(tooltipFormat, value);
         }
     });
 
@@ -2519,10 +2517,6 @@
             for (i = 0; i < childrenLength; i++) {
                 children[i].reflow(categorySlots[i]);
             }
-        },
-
-        formatPointValue: function(value, tooltipFormat) {
-            return format(tooltipFormat, value);
         }
     });
 
@@ -3323,6 +3317,12 @@
                 tooltipCenter = sector.point(sector.middle());
 
             return new Point2D(tooltipCenter.x - w, tooltipCenter.y - h);
+        },
+
+        formatPointValue: function(format) {
+            var point = this;
+
+            return point.owner.formatPointValue(point.value, format);
         }
     });
 
@@ -3790,10 +3790,8 @@
             return sqr(c.x - point.x) + sqr(c.y - point.y) < sqr(r);
         },
 
-        formatPointValue: function(format) {
-            var point = this;
-
-            return point.owner.formatPointValue(point.value, format);
+        formatPointValue: function(value, tooltipFormat) {
+            return format(tooltipFormat, value);
         }
     });
 
