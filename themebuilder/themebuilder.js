@@ -209,9 +209,7 @@
                 }
 
                 $("#stylable-elements")
-                    .kendoPanelBar({
-                        animation: false
-                    })
+                    .kendoPanelBar()
                     .find(".ktb-colorpicker").kendoColorPicker({
                         change: changeHandler
                     }).end()
@@ -219,6 +217,7 @@
                         min: 0,
                         max: 50,
                         step: 1,
+                        format: "#px",
                         change: changeHandler
                     }).end();
 
