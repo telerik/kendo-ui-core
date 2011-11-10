@@ -70,8 +70,10 @@
         var link = $(e.currentTarget),
         href = link.attr("href");
 
+        // Prevent iOS address bar progress display for in app navigation
         link.attr("href", "#!");
-        setTimeout(function() { link.attr("href", href) }, 0);
+        setTimeout(function() { link.attr("href", href) });
+
         kendo.application.navigate(href);
         e.preventDefault();
     }
@@ -197,7 +199,7 @@
         },
 
         setupAppLinks: function(element) {
-            var selector ="[data-kendo-type=app-button]";
+            var selector ="[data-kendo-role=button], [data-kendo-role=tab]";
             this.element
                 .delegate(selector, support.mouseup, appLinkMouseUp)
                 .delegate(selector, "click", appLinkClick);

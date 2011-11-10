@@ -162,23 +162,6 @@
 
                 click(dom);
             });
-
-            test("calls application navigate if present", function() {
-                expect(2);
-
-                kendo.application = {};
-
-                stub(kendo.application, "navigate");
-
-                var dom = $('<a href="foo">foo</a>');
-
-                var button = new Button(dom);
-
-                click(dom);
-
-                equal(kendo.application.calls("navigate"), 1);
-                equal(kendo.application.args("navigate")[0], "foo");
-            });
         </script>
     </body>
 </html>

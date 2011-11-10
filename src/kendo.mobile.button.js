@@ -8,10 +8,8 @@
         os = support.mobileOS,
         MOUSEDOWN = support.mousedown,
         MOUSEUP = support.mouseup,
-        HREF = "href",
         ACTIVE_STATE_CLASS = "km-state-active",
         CLICK = "click",
-        extend = $.extend,
         proxy = $.proxy;
 
     var MobileButton = MobileWidget.extend({
