@@ -64,17 +64,22 @@
         },
 
         _buildButton: function() {
-            var href = $(this),
-                icon = href.data("kendoIcon"),
+            var button = $(this),
+                icon = button.data("kendoIcon"),
+                image = button.find("img"),
                 iconSpan = $('<span class="km-icon"/>');
 
+            button.contents().not(image)
+                .wrapAll('<span class="km-text"/>')
+                .addClass("km-button");
 
-            href.wrapInner('<span class="km-text"/>')
-                .addClass("km-button")
-                .prepend(iconSpan);
-
-            if (icon) {
-                iconSpan.addClass("km-tab-icon-" + icon);
+            if (image[0]) {
+                image.addClass("km-image");
+            } else {
+                button.prepend(iconSpan);
+                if (icon) {
+                    iconSpan.addClass("km-tab-icon-" + icon);
+                }
             }
         },
 
