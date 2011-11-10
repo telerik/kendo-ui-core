@@ -40,7 +40,11 @@
                 setup: function() {
                     kendo.application = {};
                     stub(kendo.application, "navigate");
-                    dom = $('<nav><a href="foo" id="foo">foo</a><a href="bar" id="bar" data-kendo-icon="genius">bar</a></nav>');
+                    dom = $('<nav> \
+                            <a href="foo" id="foo">foo</a> \
+                            <a href="bar" id="bar" data-kendo-icon="genius">bar</a> \
+                            <a href="baz" id="baz"><img src="javascript:void(0)" />bar</a> \
+                        </nav>');
                     tabstrip = new Tabstrip(dom);
                 },
                 teardown: function() {
@@ -105,6 +109,11 @@
 
             test("applies icon class if data attribute provided", function() {
                 ok(dom.find("#bar span:first-child").is(".km-tab-icon-genius"), "bar tab has km-tab-icon-genius class");
+            });
+
+            test("applies image class on image if present", function() {
+                ok(dom.find("#baz img").is(".km-image"), "baz tab img has km-image class");
+                ok(!dom.find("#baz").find(".km-icon")[0], "baz does not create icon span");
             });
         </script>
     </body>
