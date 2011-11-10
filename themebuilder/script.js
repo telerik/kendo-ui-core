@@ -33,7 +33,7 @@
 
     // show error message on pages that we can not work with
     if (typeof jQuery == UNDEFINED || typeof kendo == UNDEFINED) {
-        var messageId = 'k-tb-message',
+        var messageId = 'ktb-message',
             styles = 'position:absolute;top:50%;margin-top:-1.6em;left:50%;margin-left:-16em;z-index:9999999;font:12px sans-serif;text-align:center;width:32em;padding:1em;border:1px solid #2a2a2a;background:#f2f2f2;color:#ef652a;-moz-box-shadow: 1px 1px 7px 1px #666;-webkit-box-shadow: 1px 1px 7px 1px #666;box-shadow: 1px 1px 7px 1px #666;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;';
 
         if (!doc.getElementById(messageId)) {
@@ -284,7 +284,14 @@
     var iframe = createInterfaceFrame(createWindow());
 
     iframe.lessLoaded = function(lessTemplate) {
-        new iframe.kendo.ThemeBuilder(lessTemplate, new iframe.kendo.LessConstants(constants), constantsHierarchy);
+        var kendo = iframe.kendo,
+            themeBuilder = new kendo.ThemeBuilder(
+                lessTemplate,
+                new kendo.LessConstants(constants),
+                constantsHierarchy
+            );
+
+        $("#ktb-wrap").data("kendoThemeBuilder", themeBuilder);
     };
 })();
 
