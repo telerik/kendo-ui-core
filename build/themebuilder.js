@@ -2,8 +2,8 @@ var kendoBuild = require("./kendo-build"),
     fs = require("fs"),
     less = require("./less-js/lib/less"),
     path = require("path"),
-    SOURCE_PATH = "themebuilder",
-    OUTPUT_PATH = path.join(SOURCE_PATH, "live");
+    SOURCE_PATH = path.join("themebuilder", "src"),
+    OUTPUT_PATH = path.join("themebuilder", "live");
 
 // themebuilder-specific
 function wrap(source) {
@@ -46,7 +46,7 @@ function createBootstrapper() {
     var source = fs.readFileSync(path.join(SOURCE_PATH, "script.js"), "utf8");
 
     // set the required resources to single concatenated script
-    source = replaceVariable(source, "requiredFiles", '["themebuilder-all.js"]');
+    source = replaceVariable(source, "requiredFiles", '["themebuilder.js"]');
 
     fs.writeFileSync(
         path.join(OUTPUT_PATH, "script.js"),
@@ -65,16 +65,24 @@ function mergeResources() {
         return path.join(SOURCE_PATH, x);
     });
 
-    // merge all resources into one
+    var themeBuilderStyles = [
+        "kendo.black.css",
+        "styles.css"
+    ].map(function(x) {
+        return path.join(SOURCE_PATH, x);
+    });
+
+
+    // merge resources into one
     fs.writeFileSync(
-        path.join(OUTPUT_PATH, "themebuilder-all.js"),
+        path.join(OUTPUT_PATH, "themebuilder.js"),
         kendoBuild.minifyJs(kendoBuild.merge(themeBuilderScripts)),
         "utf8"
     );
 
     fs.writeFileSync(
         path.join(OUTPUT_PATH, "themebuilder.css"),
-        fs.readFileSync(path.join(SOURCE_PATH, "themebuilder.css"), "utf8"),
+        kendoBuild.merge(themeBuilderStyles),
         "utf8"
     );
 
@@ -120,11 +128,7 @@ function buildGeneratedSources() {
         fs.readFileSync(path.join("styles", "template.less"), "utf8");
 
     parser.parse(skinTemplate, function (e, tree) {
-        var generatedCss = tree.toCSS(/* { compress: true } */);
-
-        generatedCss += fs.readFileSync(path.join(SOURCE_PATH, "styles.css"), "utf8");
-
-        fs.writeFileSync(path.join(SOURCE_PATH, "themebuilder.css"), generatedCss, "utf8");
+        fs.writeFileSync(path.join(SOURCE_PATH, "kendo.black.css"), tree.toCSS(), "utf8");
     });
 
     kendoBuild.copyDirSyncRecursive(path.join("styles", "Black"), path.join(SOURCE_PATH, "Black"));

@@ -11,11 +11,12 @@
         })(),
 
          // TODO: change these to their respective CDN versions during build
-        kendoAllLocation = applicationRoot + "../deploy/kendoUI/js/kendo.all.min.js",
-        kendoCommonCssLocation = applicationRoot + "../deploy/kendoUI/styles/kendo.common.min.css",
+        kendoAllLocation = applicationRoot + "../../deploy/kendoUI/js/kendo.all.min.js",
+        kendoCommonCssLocation = applicationRoot + "../../deploy/kendoUI/styles/kendo.common.min.css",
 
         // caution: the variable below is changed during builds. update build/themebuilder.js if you change its name!
-        requiredFiles = ["less.js", "themebuilder.js", "colorengine.js", "template.js"];
+        requiredJs = ["less.js", "themebuilder.js", "colorengine.js", "template.js"],
+        requiredCss = ["kendo.black.css", "styles.css"];
 
     // do not initialize twice, just reopen window
     if (typeof kendo != UNDEFINED && kendo.ThemeBuilder) {
@@ -266,11 +267,13 @@
             "<!DOCTYPE html><html><head>",
              "<meta charset='utf-8' />",
              stylesheet(kendoCommonCssLocation),
-             stylesheet(applicationRoot + "themebuilder.css"),
+             $.map(requiredCss, function(styleSheetName) {
+                 return stylesheet(applicationRoot + styleSheetName);
+             }).join(""),
              "</head><body>",
              script("http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"),
              script(kendoAllLocation),
-             $.map(requiredFiles, function(scriptName) {
+             $.map(requiredJs, function(scriptName) {
                  return script(applicationRoot + scriptName);
              }).join(""),
              "</body></html>"
