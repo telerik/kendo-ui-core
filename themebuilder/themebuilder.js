@@ -199,8 +199,6 @@
 
                 that.element = $("#kendo-themebuilder");
 
-                $((window.parent || window).document.getElementById("ktb-wrap")).data("kendoThemeBuilder", that);
-
                 function changeHandler(e) {
                     that._propertyChange({
                         name: this.element[0].id,
