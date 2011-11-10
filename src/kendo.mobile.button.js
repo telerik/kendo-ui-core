@@ -30,12 +30,7 @@
 
             that.enable(options.enable);
 
-            // Hack to prevent the addressbar
-            // flashing when clicking the buttons
-
-            that.bind([
-                CLICK
-            ], options);
+            that.bind([CLICK], options);
         },
 
         options: {
@@ -52,45 +47,27 @@
             if (enable) {
                 that.element
                     .bind(MOUSEDOWN, that._pressProxy)
-                    .bind(MOUSEUP, that._releaseProxy)
-                    .bind(CLICK, that._clickProxy);
+                    .bind(MOUSEUP, that._releaseProxy);
             } else {
                 that.element
                     .unbind(MOUSEDOWN, that._pressProxy)
-                    .unbind(MOUSEUP, that._releaseProxy)
-                    .unbind(CLICK, that._clickProxy);
+                    .unbind(MOUSEUP, that._releaseProxy);
             }
         },
 
-        disable: function () {
+        disable: function() {
             this.enable(false);
         },
 
-        _press: function (e) {
+        _press: function(e) {
             this.element.addClass(ACTIVE_STATE_CLASS);
         },
 
-        _release: function (e) {
-            var that = this,
-                element = that.element,
-                href = element.attr(HREF);
+        _release: function(e) {
+            var that = this;
 
             that.element.removeClass(ACTIVE_STATE_CLASS);
-
             that.trigger(CLICK);
-
-            if (kendo.application && href) {
-                element.attr(HREF, "#!");
-                setTimeout(function() { element.attr(HREF, href) }, 0);
-                kendo.application.navigate(href);
-                e.preventDefault();
-            }
-        },
-
-        _click: function (e) {
-            if (kendo.application) {
-                e.preventDefault();
-            }
         },
 
         _wrap: function() {
@@ -99,6 +76,7 @@
                 span;
 
             span = element.addClass("km-button")
+                          .attr("data-kendo-type", "app-button")
                           .children("span");
 
             if (!span[0]) {

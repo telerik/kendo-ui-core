@@ -2,8 +2,9 @@
 
     var kendo = window.kendo,
         history = kendo.history,
+        support = kendo.support,
+        os = support.mobileOS,
         div = $("<div/>"),
-        os = kendo.support.mobileOS,
         meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> \
                 <meta name="apple-mobile-web-app-status-bar-style" content="black" /> \
                 <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
@@ -63,6 +64,20 @@
         onResize();
 
         $(window).resize(onResize);
+    }
+
+    function appLinkMouseUp(e) {
+        var link = $(e.currentTarget),
+        href = link.attr("href");
+
+        link.attr("href", "#!");
+        setTimeout(function() { link.attr("href", href) }, 0);
+        kendo.application.navigate(href);
+        e.preventDefault();
+    }
+
+    function appLinkClick(e) {
+        e.preventDefault();
     }
 
     var View = kendo.Class.extend({
@@ -150,6 +165,7 @@
             that.element = that.element ? $(that.element) : $(document.body);
 
             hideAddressBar(that.element);
+            that.setupAppLinks();
 
             views = that.element.find(roleSelector("view"));
 
@@ -178,6 +194,13 @@
 
                 that.trigger("viewShow", { view: view });
             });
+        },
+
+        setupAppLinks: function(element) {
+            var selector ="[data-kendo-type=app-button]";
+            this.element
+                .delegate(selector, support.mouseup, appLinkMouseUp)
+                .delegate(selector, "click", appLinkClick);
         },
 
         scroller: function() {
