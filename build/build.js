@@ -77,8 +77,9 @@ function processScripts() {
     mkdir(JS);
     mkdir(SOURCEJS);
 
-    kendoScripts.deployScripts(SRC, SOURCEJS, false);
-    kendoScripts.deployScripts(SRC, JS, true);
+    var license = kendoBuild.readText("resources/licenses/comm.txt");
+    kendoScripts.deployScripts(SRC, SOURCEJS, license, false);
+    kendoScripts.deployScripts(SRC, JS, license, true);
 }
 
 function processStyles() {
