@@ -121,6 +121,16 @@
                 equals(ColorEngine.css2hex(colorIndicator.css("backgroundColor")), color);
             });
 
+            test("changing input value to friendly name converts it to hex", function() {
+                var color = "red",
+                    colorPickerControl = colorPicker.data("kendoColorPicker");
+
+                colorPickerControl.value(color);
+                colorPickerControl.trigger("change");
+
+                equals(colorPickerControl.value(), "#ff0000");
+            });
+
             test("preview bgcolor is changed upon init", function() {
                 colorPicker = $("<input value='#ff0000' />").appendTo(document.body).kendoColorPicker();
 
