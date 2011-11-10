@@ -16,6 +16,7 @@
         <input id="timepicker" style="width: 150px"/>
         <input id="timepicker2" value="10:00" style="width: 150px"/>
         <input id="timepicker3" style="width: 150px"/>
+        <input id="timepicker4" style="width: 150px"/>
 
         <script>
             $(document).ready(function() {
@@ -25,6 +26,11 @@
                     value: new Date(2000, 10, 10, 9, 0, 0),
                     min: new Date(2000, 10, 10, 8, 0, 0),
                     max: new Date(2000, 10, 10, 18, 0, 0)
+                });
+                $("#timepicker4").kendoTimePicker({
+                    min: new Date(2000, 10, 10, 10, 0, 0),
+                    max: new Date(2000, 10, 10, 14, 0, 0),
+                    interval: 60
                 });
             });
         </script>
