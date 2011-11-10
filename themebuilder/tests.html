@@ -17,10 +17,6 @@
         <script src="../src/kendo.combobox.js"></script>
 
         <link rel="stylesheet" href="../tests/qunit/qunit/qunit.css" />
-
-        <style>
-            .k-widget { box-shadow: 1px 1px 1px #b4d455; }
-        </style>
     </head>
     <body>
         <h1 id="qunit-header">ThemeBuilder tests</h1>
@@ -38,7 +34,7 @@
                 LessConstants = kendo.LessConstants;
 
             function cleanup() {
-                $("#k-tb-wrap, head style").remove();
+                $("#kendo-themebuilder, head style").remove();
             }
 
             module("themebuilder", {
@@ -47,22 +43,6 @@
 
             test("themebuilder object is available", function() {
                 ok(typeof ThemeBuilder == "function");
-            });
-
-            test("ThemeBuilder.open calls open method of window", function() {
-                var themeBuilder = new ThemeBuilder(),
-                    called = false,
-                    themeBuilderWindow = themeBuilder.content.data("kendoWindow"),
-                    oldOpen = themeBuilderWindow.open;
-
-                themeBuilderWindow.open = function() {
-                    called = true;
-                    oldOpen.apply(this, Array.prototype.slice.apply(arguments));
-                };
-
-                themeBuilder.open();
-
-                ok(called);
             });
 
             test("updateStyleSheet() adds CSS to document", function() {
@@ -109,15 +89,13 @@
                 var constants = new LessConstants({
                         "@foo-color": constant(".k-widget", "box-shadow")
                     }),
-                    themeBuilder = new ThemeBuilder({ template: '' },
-                        constants, {
-                            "Foos": {
-                                constants: /^@/,
-                                labels: {}
-                            }
-                        });
+                    themeBuilder = new ThemeBuilder({ template: '' });
 
-                equals(themeBuilder.constants.serialize(), "@foo-color: #b4d455;");
+                themeBuilder.updateStyleSheet(".k-widget { box-shadow: 1px 1px 1px #b4d455; }");
+
+                constants.infer();
+
+                equals(constants.serialize(), "@foo-color: #b4d455;");
             });
 
             var colorPicker;

@@ -19,7 +19,7 @@
 
     // do not initialize twice, just reopen window
     if (typeof kendo != UNDEFINED && kendo.ThemeBuilder) {
-        $("#k-tb-wrap > .k-window").data("kendoThemeBuilder").open();
+        $("#ktb-wrap").data("kendoThemeBuilder").open();
         return;
     }
 
