@@ -606,7 +606,8 @@
                     that.timer = setTimeout(handler, 1);
                 });
 
-                that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row)", {
+                //:visible is required, otherwise mouseenter will be triggerd twice when tr is deleted in Google Chrome
+                that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible", {
                     mouseenter: function(e) {
                         var tr = $(this), button;
 
@@ -615,9 +616,9 @@
                                 position: "absolute",
                                 visibility: "hidden"
                             })
-                            .click(function(e) {
+                            .click(function(ev) {
                                 that.deleteRow(tr);
-                                e.stopPropagation();
+                                ev.stopPropagation();
                             })
                             .appendTo(tr.find(">td:visible:first"));
 
@@ -627,7 +628,7 @@
                             left: $(document).scrollLeft() + tr.width() - button.outerWidth(true)
                         });
                     },
-                    mouseleave: function() {
+                    mouseleave: function(e) {
                         that.wrapper.find(".k-button:has(.k-delete)").remove();
                     }
                 });
