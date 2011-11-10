@@ -86,19 +86,6 @@
                 click(dom);
             });
 
-            test("should not raise click event when disabled", function() {
-                var dom = $("<button>foo</button>");
-
-                var button = new Button(dom);
-                button.disable();
-
-                button.bind("click", function() {
-                    ok(false, "Should not raise the click event");
-                });
-
-                dom.mousedown();
-            });
-
             test("should apply active state when pressed", function() {
                 expect(1);
 
@@ -118,49 +105,6 @@
                 dom.trigger(MOUSEDOWN);
                 dom.trigger(MOUSEUP);
                 ok(!dom.hasClass("km-state-active"), "Should not have active css class");
-            });
-
-            test("should not apply active state when disabled", function() {
-                expect(1);
-
-                var dom = $("<button>foo</button>");
-                var button = new Button(dom);
-
-                button.disable();
-
-                dom.trigger(MOUSEDOWN);
-
-                ok(!dom.hasClass("km-state-active"), "Should not have active css class");
-            });
-
-            test("disable from configuration options", function() {
-                var dom = $("<button>foo</button>");
-
-                var button = new Button(dom, { enable: false });
-
-                button.bind("click", function() {
-                    ok(false, "Should not raise the click event");
-                });
-
-                click(dom);
-            });
-
-            test("should enable disabled button", function() {
-                expect(1);
-
-                var dom = $("<button>foo</button>");
-
-                var button = new Button(dom);
-
-                button.disable();
-
-                button.bind("click", function() {
-                    ok(true, "Should raise the click event");
-                });
-
-                button.enable();
-
-                click(dom);
             });
         </script>
     </body>

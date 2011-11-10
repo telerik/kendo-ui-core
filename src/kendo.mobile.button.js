@@ -26,7 +26,9 @@
             that._pressProxy = proxy(that._press, that);
             that._releaseProxy = proxy(that._release, that);
 
-            that.enable(options.enable);
+            that.element
+                .bind(MOUSEDOWN, that._pressProxy)
+                .bind(MOUSEUP, that._releaseProxy);
 
             that.bind([CLICK], options);
         },
@@ -35,26 +37,6 @@
             name: "MobileButton",
             selector: "[data-kendo-role=button]",
             enable: true
-        },
-
-        enable: function(enable) {
-            var that = this;
-
-            enable = enable === undefined ? true: enable;
-
-            if (enable) {
-                that.element
-                    .bind(MOUSEDOWN, that._pressProxy)
-                    .bind(MOUSEUP, that._releaseProxy);
-            } else {
-                that.element
-                    .unbind(MOUSEDOWN, that._pressProxy)
-                    .unbind(MOUSEUP, that._releaseProxy);
-            }
-        },
-
-        disable: function() {
-            this.enable(false);
         },
 
         _press: function(e) {
