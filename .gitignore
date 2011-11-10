@@ -27,7 +27,7 @@ functional-tests/KendoCustom/**/Backup/
 functional-tests/KendoCustom/**/TestLists/
 app.js
 node_modules
-themebuilder/less.js
-themebuilder/template.js
-themebuilder/themebuilder.css
-themebuilder/Black/
+themebuilder/src/less.js
+themebuilder/src/template.js
+themebuilder/src/kendo.black.css
+themebuilder/src/Black/
