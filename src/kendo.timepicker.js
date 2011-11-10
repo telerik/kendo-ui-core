@@ -31,29 +31,20 @@
         that.options = options;
 
         that.ul = $('<ul class="k-list k-reset"/>')
-                    .css({ overflow: "auto", width: options.anchor.width() - 6, height: "200px" })
+                    .css({ overflow: "auto"})
                     .bind(MOUSEDOWN, options.clearBlurTimeout)
                     .delegate(LI, "click", proxy(that._click, that))
                     .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                     .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
 
-        list = $("<div class='k-list-container'/>").append(that.ul);
+        that.list = $("<div class='k-list-container'/>").append(that.ul);
 
-        that.popup = new ui.Popup(list, options);
+        that._popup();
 
         that.template = kendo.template('<li class="k-item" unselectable="on">#=data#</li>', { useWithBlock: false });
     }
 
     TimeView.prototype = {
-        _click: function(e) {
-            var that = this,
-                li = $(e.currentTarget);
-
-            that.select(li);
-            that.options.change(li.text());
-            that.close();
-        },
-
         current: function(candidate) {
             var that = this;
 
@@ -91,35 +82,6 @@
             }
         },
 
-        _move: function(e) {
-            var that = this,
-                key = e.keyCode,
-                ul = that.ul[0],
-                current = that._current,
-                down = key === keys.DOWN;
-
-            if (key === keys.UP || down) {
-                if (e.altKey) {
-                    that.toggle(down);
-                    return;
-                } else if (down) {
-                    current = current ? current[0].nextSibling : ul.firstChild;
-                } else {
-                    current = current ? current[0].previousSibling : ul.lastChild;
-                }
-
-                if (current) {
-                    that.select(current);
-                }
-
-                that.options.change(that._current.text());
-                e.preventDefault();
-
-            } else if (key === keys.ENTER || key === keys.TAB || key === keys.ESC) {
-                that.close();
-            }
-        },
-
         refresh: function() {
             var that = this,
                 options = that.options,
@@ -153,6 +115,8 @@
             }
 
             that.ul[0].innerHTML = html;
+
+            that._height(length);
 
             that.select(that._value);
         },
@@ -210,6 +174,88 @@
             if (that.ul[0].firstChild) {
                 that.select(value);
             }
+        },
+
+        _click: function(e) {
+            var that = this,
+                li = $(e.currentTarget);
+
+            that.select(li);
+            that.options.change(li.text(), true);
+            that.close();
+        },
+
+        _height: function(length) {
+            if (length) {
+                var that = this,
+                    ul = that.ul,
+                    list = that.list,
+                    parent = list.parent(".k-animation-container"),
+                    height = that.options.height;
+
+                if (that.popup.visible()) {
+                    list.height(ul[0].scrollHeight > height ? height : "auto");
+                    parent.height(height);
+                } else {
+                    list.show()
+                        .height(ul[0].scrollHeight > height ? height : "auto")
+                        .hide();
+
+                    if (parent[0]) {
+                        parent.show().height(height).hide();
+                    }
+                }
+            }
+        },
+
+        _popup: function() {
+            var that = this,
+                list = that.list,
+                options = that.options,
+                anchor = options.anchor,
+                width;
+
+            that.popup = new ui.Popup(list, {
+                anchor: anchor,
+                open: options.open,
+                close: options.close
+            });
+
+            width = anchor.outerWidth() - (list.outerWidth() - list.width());
+
+            list.css({
+                fontFamily: anchor.css("font-family"),
+                width: width
+            });
+        },
+
+        _move: function(e) {
+            var that = this,
+                key = e.keyCode,
+                ul = that.ul[0],
+                current = that._current,
+                down = key === keys.DOWN;
+
+            if (key === keys.UP || down) {
+                if (e.altKey) {
+                    that.toggle(down);
+                    return;
+                } else if (down) {
+                    current = current ? current[0].nextSibling : ul.firstChild;
+                } else {
+                    current = current ? current[0].previousSibling : ul.lastChild;
+                }
+
+                if (current) {
+                    that.select(current);
+                }
+
+                that.options.change(that._current.text());
+                e.preventDefault();
+
+            } else if (key === keys.ENTER || key === keys.TAB || key === keys.ESC) {
+                that.close();
+            }
         }
     };
 
@@ -261,8 +307,12 @@
             that.timeView = new TimeView($.extend({}, options, {
                 anchor: that.wrapper,
                 format: options.format,
-                change: function(value) {
-                    that.element.val(value);
+                change: function(value, trigger) {
+                    if (trigger) {
+                        that._change(value);
+                    } else {
+                        that.element.val(value);
+                    }
                 },
                 clearBlurTimeout: proxy(that._clearBlurTimeout, that)
             }));
@@ -307,7 +357,8 @@
             min: TODAY,
             max: TODAY,
             value: null,
-            interval: 30
+            interval: 30,
+            height: 200
         },
 
         enable: function(enable) {
