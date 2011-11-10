@@ -81,6 +81,8 @@
             _colorChange: function(e) {
                 var that = this;
 
+                that.value(ColorEngine.css2hex($("<div />").css("color", that.value()).css("color")));
+
                 that._updateColorPreview();
 
                 // trigger change event?
