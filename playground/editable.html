@@ -26,6 +26,7 @@
     <body>
         <div id="relatedGrid"></div>
         <div id="grid" ></div>
+        <button id="add">Add new</button>
         <script>
             var grid,
                 dataSource,
@@ -33,7 +34,7 @@
                 data = [];
 
             $(document).ready(function() {
-                for (var idx = 0; idx < 30; idx++) {
+                for (var idx = 0; idx < 5; idx++) {
                     data.push({foo: "foo " + idx, bar: "bar " + idx, id: idx, date: new Date()});
                 }
                 dataSource = new kendo.data.DataSource({
@@ -43,6 +44,7 @@
                         model: {
                             id: "id",
                             fields: {
+                                id: "id",
                                 foo: {
                                     field: "foo",
                                     readonly: true
@@ -59,7 +61,7 @@
                     dataSource: dataSource,
                     pageable: true,
                     editable: true,
-                    groupable: true,
+                    groupable: false,
                     scrollable: false,
                     columns: ["bar", "foo", "date"]
                 });
@@ -67,6 +69,10 @@
                 $("#relatedGrid").kendoGrid({
                     dataSource: dataSource,
                     pageable: true
+                });
+
+                $("#add").click(function() {
+                    $("#grid").data("kendoGrid").addRow();
                 });
 
             });

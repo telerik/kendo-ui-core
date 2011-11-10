@@ -73,14 +73,11 @@
             });
 
             test("addRow displays inserted item", function() {
-                var grid = setup(),
-                    changeWasCalled = false;
-
-                dataSource.bind("change", function() { changeWasCalled = true; });
+                var grid = setup();
 
                 grid.addRow();
 
-                ok(changeWasCalled);
+                ok(grid.table.find("tr>td:first").data("kendoEditable"));
             });
 
         </script>

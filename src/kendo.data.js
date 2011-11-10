@@ -986,7 +986,9 @@
                     sendAllFields: options.sendAllFields,
                     transport: that.transport,
                     change: function() {
-                        that.trigger(CHANGE);
+                        var data = that.data();
+                        that._total = that.reader.total(data);
+                        that._process(data);
                     },
                     modelChange: function(model) {
                         that.trigger(MODELCHANGE, model);
