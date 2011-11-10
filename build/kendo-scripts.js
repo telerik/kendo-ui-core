@@ -55,6 +55,16 @@ var deployScripts = [{
     inputs: allScripts.filter(function(scriptName) {
                 return scriptName.indexOf("chart") == -1;
             })
+}, {
+    output: "kendo.dataviz.js",
+    inputs: [
+        "kendo.core.js",
+        "kendo.data.odata.js",
+        "kendo.data.xml.js",
+        "kendo.model.js",
+        "kendo.data.js",
+        "kendo.chart.js"
+    ]
 }];
 
 function deploy(scriptsRoot, outputRoot, compress) {
