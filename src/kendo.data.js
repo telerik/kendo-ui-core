@@ -1040,6 +1040,10 @@
             return this._set.add(model);
         },
 
+        insert: function(index, model) {
+            return this._set.insert(index, model);
+        },
+
         read: function(data) {
             var that = this, params = that._params(data);
 
