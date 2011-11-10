@@ -234,8 +234,8 @@
                     right: "4em",
                     bottom: "4em",
                     background: "url(" + applicationRoot + "header.png) no-repeat 50% 0 #3d3d3d",
-                    borderRadius: 5,
-                    boxShadow: "1px 1px 7px 1px #AAAAAA",
+                    borderRadius: 7,
+                    boxShadow: "1px 1px 7px 1px #aaa",
                     zIndex: 100010
                 })
                 .appendTo(document.body);
@@ -268,7 +268,7 @@
              stylesheet(kendoCommonCssLocation),
              stylesheet(applicationRoot + "themebuilder.css"),
              "</head><body>",
-             script("http://code.jquery.com/jquery-1.6.4.min.js"),
+             script("http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"),
              script(kendoAllLocation),
              $.map(requiredFiles, function(scriptName) {
                  return script(applicationRoot + scriptName);
