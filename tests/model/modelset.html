@@ -80,6 +80,57 @@
                 equal(modelSet.add(model), model);
             });
 
+            test("insert adds the specified values to original data at specified position", function() {
+                var data = [ { id: 1} ];
+                setup( { data: data });
+
+                modelSet.insert(0, { foo: "bar" } );
+
+                equal(data.length, 2);
+                equal(data[0].foo, "bar");
+                equal(data[1].id, 1);
+            });
+
+            test("insert adds the specified values to original data at first position if no index is specified", function() {
+                var data = [ { id: 1} ];
+                setup( { data: data });
+
+                modelSet.insert({ foo: "bar" } );
+
+                equal(data.length, 2);
+                equal(data[0].foo, "bar");
+                equal(data[1].id, 1);
+            });
+
+            test("insert returns a new model istance", function() {
+                var model = modelSet.insert(0, { foo: "bar" } );
+
+                ok(model instanceof Model);
+            });
+
+            test("insert returns a new model istance with specified fields", function() {
+                var model = modelSet.insert(0, { foo: "bar" } );
+
+                equal(model.get("foo"), "bar");
+            });
+
+            test("insert accepts a model instance", function() {
+                var model = new MyModel({ foo: "bar" });
+
+                equal(modelSet.insert(0, model), model);
+            });
+
+            test("insert triggers change event", function() {
+                var called = false;
+
+                modelSet.bind("change", function() {
+                    called = true;
+                });
+
+                modelSet.insert({foo: "boo"});
+                ok(called);
+            });
+
             test("get after add returns the same model istance", function() {
                 var model = modelSet.add( { foo: "bar" } );
 

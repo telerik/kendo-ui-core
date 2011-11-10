@@ -6,6 +6,7 @@
         setter = kendo.setter,
         accessor = kendo.accessor,
         each = $.each,
+        isPlainObject = $.isPlainObject,
         CHANGE = "change",
         MODELCHANGE = "modelChange",
         Observable = kendo.Observable,
@@ -315,7 +316,17 @@
         },
 
         add: function(model) {
+            var that = this;
+
+            return that.insert(that._data.length, model);
+        },
+
+        insert: function(index, model) {
             var that = this, data;
+
+            if (model === undefined && isPlainObject(index)) {
+               model = index;
+            }
 
             if (!(model instanceof Model)) {
                 model = new that.options.model(model);
@@ -327,7 +338,7 @@
                 that.trigger(MODELCHANGE, model);
             });
 
-            that._data.push(data);
+            that._data.splice(index, 0, data);
 
             that._map();
 
