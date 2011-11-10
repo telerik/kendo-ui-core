@@ -311,7 +311,7 @@
                     if (trigger) {
                         that._change(value);
                     } else {
-                        that.element.val(value);
+                        element.val(value);
                     }
                 },
                 clearBlurTimeout: proxy(that._clearBlurTimeout, that)
@@ -399,7 +399,6 @@
             this.timeView.open();
         },
 
-        //refactor
         value: function(value) {
             var that = this,
                 options = that.options,
@@ -409,14 +408,13 @@
                 return that._value;
             }
 
-            value = kendo.parseDate(value, options.format);
+            value = that._parse(value);
 
             if (!inRange(value, options.min, options.max)) {
                 value = null;
             }
 
-            that._update(value && typeof text === "string" ? text : value);
-            that._old = that._value;
+            that._old = that._update(value);
         },
 
         _blur: function() {
@@ -446,8 +444,7 @@
         _change: function(value) {
             var that = this;
 
-            that._update(value);
-            value = that._value;
+            value = that._update(value);
 
             if (that._old != value) {
                 that._old = value;
@@ -487,48 +484,46 @@
             }
         },
 
+        _parse: function(value) {
+            var that = this,
+                current = that._value || TODAY;
+
+            if (value instanceof DATE) {
+                return value;
+            }
+
+            value = kendo.parseDate(value, that.options.format);
+
+            if (value) {
+                value = new DATE(current.getFullYear(),
+                                 current.getMonth(),
+                                 current.getDate(),
+                                 value.getHours(),
+                                 value.getMinutes(),
+                                 value.getSeconds(),
+                                 value.getMilliseconds());
+            }
+
+            return value;
+        },
+
         _toggleHover: function(e) {
             if (!touch) {
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
             }
         },
 
-        //refactor
         _update: function(value) {
             var that = this,
                 current = that._value,
-                format = that.options.format,
-                date, text;
+                date = that._parse(value),
+                text = kendo.toString(date, that.options.format);
 
-            if (value === null) {
-                that._value = date = value;
-            } else if (typeof value === "string") {
-                date = kendo.parseDate(value, format);
-
-                if (date) {
-                    if (!current) {
-                        current = TODAY;
-                    }
-
-                    current = new DATE(current.getFullYear(),
-                                   current.getMonth(),
-                                   current.getDate(),
-                                   date.getHours(),
-                                   date.getMinutes(),
-                                   date.getSeconds(),
-                                   date.getMilliseconds());
-
-                    date = new DATE(current);
-                }
-                that._value = date;
-            } else {
-                that._value = date = new DATE(value);
-            }
-
-            text = kendo.toString(date, format);
-
+            that._value = date;
             that.element.val(date ? text : value);
             that.timeView.value(text);
+
+            return date;
         },
 
         _wrapper: function() {
