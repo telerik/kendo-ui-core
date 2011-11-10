@@ -199,12 +199,7 @@
 
                 that.content = $("#kendo-themebuilder");
 
-                that.element = that.content.closest(".k-window")
-                    .css({
-                        top: 20,
-                        left: $(window).width() - 320
-                    })
-                    .data("kendoThemeBuilder", that);
+                that.element = $((window.parent || window).document.getElementById("ktb-wrap")).data("kendoThemeBuilder", that);
 
                 function changeHandler(e) {
                     that._propertyChange({
@@ -227,36 +222,23 @@
                         change: changeHandler
                     }).end();
 
-                $(".k-action-download").click(proxy(that.download, that));
+                $(".k-action-download").click(proxy(that.showDownload, that));
+                $(".k-action-back").click(proxy(that.hideDownload, that));
             },
-            download: function(e) {
+            showDownload: function(e) {
                 e.preventDefault();
 
-                var that = this,
-                    downloadWindowObject,
-                    // TODO: this should happen outside the frame
-                    downloadWindow = $("<div>" +
-                        "<textarea class='k-content' rows='24' cols='80' readonly>Generating CSS...</textarea>" +
-                    "</div>")
-                        .kendoWindow({
-                            modal: true,
-                            width: 600,
-                            height: 350,
-                            scrollable: false,
-                            title: "Your theme is ready!",
-                            close: function() {
-                                downloadWindowObject.destroy();
-                            }
-                        });
-
-                downloadWindowObject = downloadWindow.data("kendoWindow").center().open();
-
-                that._generateTheme(function(css) {
-                    downloadWindow.find("textarea").val(css);
+                this._generateTheme(function(css) {
+                    $("#download-overlay").slideDown()
+                        .find("textarea").val(css);
                 });
             },
+            hideDownload: function(e) {
+                e.preventDefault();
+
+                $("#download-overlay").slideUp();
+            },
             _generateTheme: function(callback) {
-                console.log(this.constants.serialize());
                 (new less.Parser()).parse(
                     this.constants.serialize() + this.templateInfo.template,
                     function (err, tree) {
@@ -278,7 +260,7 @@
                 });
             },
             updateStyleSheet: function(cssText) {
-                var doc = window.parent ? window.parent.document : document,
+                var doc = (window.parent || window).document,
                     style = $("style[title='themebuilder']")[0];
 
                 if (style) {
@@ -313,27 +295,35 @@
                     );
 
                 $("<div id='kendo-themebuilder'>" +
-                        "<button class='k-action-download k-button'>Download</button>" +
-                        "<ul id='stylable-elements'>" +
-                            $.map(that.constantsHierarchy || {}, function(section, title) {
-                                var matchedConstants = {},
-                                    constants = that.constants.constants;
+                        "<div id='download-overlay' class='ktb-view'>" +
+                            "<button class='k-action-back k-button'>Back</button>" +
+                            "<div class='code-wrap'>" +
+                                "<textarea></textarea>" +
+                            "</div>" +
+                        "</div>" +
+                        "<div id='advanced-mode' class='ktb-view'>" +
+                            "<button class='k-action-download k-button'>Get skin CSS...</button>" +
+                            "<ul id='stylable-elements'>" +
+                                $.map(that.constantsHierarchy || {}, function(section, title) {
+                                    var matchedConstants = {},
+                                        constants = that.constants.constants;
 
-                                for (var constant in constants) {
-                                    if (section.constants.test(constant)) {
-                                        matchedConstants[constant] = $.extend({}, constants[constant]);
+                                    for (var constant in constants) {
+                                        if (section.constants.test(constant)) {
+                                            matchedConstants[constant] = $.extend({}, constants[constant]);
+                                        }
                                     }
-                                }
 
-                                return propertyGroupTemplate($.extend(section, {
-                                    title: title,
-                                    constants: matchedConstants,
-                                    labels: section.labels,
-                                    editors: propertyEditors,
-                                    processors: processors
-                                }));
-                            }).join("") +
-                        "</ul>" +
+                                    return propertyGroupTemplate($.extend(section, {
+                                        title: title,
+                                        constants: matchedConstants,
+                                        labels: section.labels,
+                                        editors: propertyEditors,
+                                        processors: processors
+                                    }));
+                                }).join("") +
+                            "</ul>" +
+                        "</div>" +
                     "</div>").appendTo(document.body);
             }
         });
