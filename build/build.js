@@ -11,7 +11,7 @@ var fs = require("fs"),
 
     date = new Date(),
     STAT = fs.statSync("./"),
-    VERSION = process.argv[2] || generateVersion(),
+    VERSION = process.argv[2] || kendoBuild.generateVersion(),
     KENDOCDN = process.argv[3] || "http://cdn.kendostatic.com/" + VERSION,
     RELEASE = "release",
     DEPLOY = "deploy",
@@ -48,6 +48,7 @@ var scripts = [
     "kendo.dropdownlist.js",
     "kendo.combobox.js",
     "kendo.chart.js",
+    "kendo.numerictextbox.js",
     "kendo.grid.js",
     "kendo.menu.js",
     "kendo.panelbar.js",
@@ -58,14 +59,6 @@ var scripts = [
     "kendo.upload.js",
     "kendo.window.js"
 ];
-
-function generateVersion() {
-    var day = date.getDate();
-    if (day < 10) {
-        day = "0" + day;
-    }
-    return date.getFullYear() + ".2." + (date.getMonth() + 1) + "" + day;
-}
 
 function mkdir(newDir) {
     try {

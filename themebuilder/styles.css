@@ -1,0 +1,142 @@
+html, body {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+body
+{
+    font: normal 12px/1.5 Tahoma,sans-serif;
+}
+
+*::-moz-selection { background: #3a8600; color: #fff; }
+::selection { background: #3a8600; color: #fff; }
+
+#kendo-themebuilder .styling-options
+{
+    width: auto;
+}
+
+#kendo-themebuilder .styling-options
+{
+    padding: .4em;
+}
+
+#kendo-themebuilder label
+{
+    display: inline-block;
+    width: 56%;
+    padding-right: 4%;
+    text-align: right;
+    color: #afafaf;
+}
+
+#kendo-themebuilder #stylable-elements,
+#kendo-themebuilder .k-style-apply
+{
+    margin: .6em 0 0;
+}
+
+#kendo-themebuilder .k-color-preview,
+#kendo-themebuilder .k-colorpicker .k-arrow-down
+{
+    border: 1px solid #aaa;
+    background-image: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.k-color-preview
+{
+    background-image: none;
+    border-radius: 3px;
+    float: left;
+    margin: 1px 0 0 1px;
+}
+
+.k-list
+{
+    text-align: center;
+}
+
+.k-list .k-item
+{
+    width: 19px;
+    height: 19px;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+    padding: 1px;
+}
+
+.k-list .k-state-hover,
+.k-list .k-state-focused,
+.k-list .k-state-selected
+{
+    padding: 0;
+}
+
+#kendo-themebuilder div.k-colorpicker,
+#kendo-themebuilder .k-numerictextbox,
+#kendo-themebuilder .k-shadowinput
+{
+    width: 90px;
+    margin-bottom: 5px;
+}
+
+.k-colorpicker .k-select
+{
+    padding: 3px;
+}
+
+.k-colorpicker .k-arrow-down
+{
+    margin-top: -1px;
+}
+
+.k-colorpicker .k-input,
+.k-color-name,
+#download-overlay textarea
+{
+    font: 12px Consolas, Courier, monospace;
+}
+
+.ktb-content {
+    position: absolute;
+    overflow: auto;
+    top: 30px;
+    bottom: 0;
+    width: 100%;
+}
+
+#download-overlay
+{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #3d3d3d;
+}
+
+#download-overlay .ktb-content {
+    overflow: hidden;
+}
+
+#download-overlay textarea {
+    color: #fff;
+    background-color: #3d3d3d;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    outline: none;
+}
+

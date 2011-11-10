@@ -70,7 +70,7 @@ function copyDirSyncRecursive(sourceDir, newDirLocation, skipClean, filter) {
                 continue;
             }
 
-            fs.writeFileSync(destinationPath, fs.readFileSync(sourcePath));
+            copyFileSync(sourcePath, destinationPath);
         }
     }
 }
