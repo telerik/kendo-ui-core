@@ -694,7 +694,16 @@
         },
 
         addRow: function() {
-            this.dataSource.add({});
+            var that = this;
+            if ((that.editable && that.editable.end()) || !that.editable) {
+                var model = that.dataSource.insert({}),
+                    id = model.id(),
+                    cell = that.table.find("tr[data-id=" + id + "] > td:not(.k-group-cell,.k-hierarchy-cell)").first();
+
+                if (cell.length) {
+                    that._editCell(cell);
+                }
+            }
         },
 
         _groupable: function() {
