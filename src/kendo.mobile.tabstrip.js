@@ -6,13 +6,8 @@
         support = kendo.support,
         touch = support.touch,
         os = support.mobileOS,
-        MOUSEDOWN = support.mousedown,
-        MOUSEUP = support.mouseup,
         ACTIVE_STATE_CLASS = "km-state-active",
         SELECT = "select",
-        HREF = "href",
-        BUTTON_SELECTOR = "a",
-        extend = $.extend,
         proxy = $.proxy;
 
     var MobileTabstrip = MobileWidget.extend({
@@ -27,40 +22,23 @@
 
             that.element.addClass("km-tabstrip");
 
-
             that._releaseProxy = proxy(that._release, that);
-            that._clickProxy = proxy(that._click, that);
 
-            that.element.find(BUTTON_SELECTOR)
+            that.element.find("a")
                             .each(that._buildButton)
-                            .bind(MOUSEUP, that._releaseProxy)
-                            .bind("click", that._clickProxy)
+                            .bind(support.mouseup, that._releaseProxy)
                             .eq(options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
         },
 
         _release: function (e) {
             var that = this,
                 target = $(e.currentTarget),
-                oldItem = that.element.children("." + ACTIVE_STATE_CLASS),
-                href = target.attr(HREF);
+                oldItem = that.element.children("." + ACTIVE_STATE_CLASS);
 
             that.trigger(SELECT, {item: target});
 
             target.addClass(ACTIVE_STATE_CLASS);
             oldItem.removeClass(ACTIVE_STATE_CLASS);
-
-            if (kendo.application && href) {
-                target.attr(HREF, "#!");
-                setTimeout(function() { target.attr(HREF, href) }, 0);
-                kendo.application.navigate(href);
-                e.preventDefault();
-            }
-        },
-
-        _click: function (e) {
-            if (kendo.application) {
-                e.preventDefault();
-            }
         },
 
         _buildButton: function() {
@@ -69,9 +47,11 @@
                 image = button.find("img"),
                 iconSpan = $('<span class="km-icon"/>');
 
-            button.contents().not(image)
-                .wrapAll('<span class="km-text"/>')
-                .addClass("km-button");
+            button
+                .addClass("km-button")
+                .attr("data-kendo-role", "tab")
+                    .contents().not(image)
+                    .wrapAll('<span class="km-text"/>');
 
             if (image[0]) {
                 image.addClass("km-image");

@@ -73,17 +73,6 @@
                 click(button);
             });
 
-            test("calls application navigate if present", function() {
-                expect(2);
-
-                var button = dom.find("#foo");
-
-                click(button);
-
-                equal(kendo.application.calls("navigate"), 1);
-                equal(kendo.application.args("navigate")[0], "foo");
-            });
-
             test("marks current button as active", function() {
                 var button = dom.find("a");
                 click(button);
