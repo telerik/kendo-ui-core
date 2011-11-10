@@ -11,14 +11,34 @@
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.sortable.js"></script>
         <script src="../src/kendo.draganddrop.js"></script>
-        <script src="../src/kendo.groupable.js"></script>
-        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.filterable.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.data.odata.js"></script>
         <script src="../src/kendo.grid.js"></script>
 
         <link href="../styles/kendo.common.css" type="text/css" rel="stylesheet" />
         <link href="../styles/kendo.blueopal.css" type="text/css" rel="stylesheet" />
+        <style>
+            .k-grid-filter {
+                float: right;
+                margin: -.3em -.6em;
+                padding: 0.3em 0.2em;
+            }
+
+            .k-grid-filter:hover {
+                background: yellow;
+            }
+
+            .k-header .k-link {
+                padding: 0.3em 0.6em;
+            }
+
+            .k-filterable .k-link {
+                padding-right: 2.4em;
+            }
+
+        </style>
     </head>
     <body>
         <form>
@@ -33,6 +53,12 @@
         </form>
 
         <table id="table1" style="height: 400px">
+            <thead>
+                <tr>
+                    <th data-field="OrderID">Order ID</th>
+                    <th data-field="ShipCity">Ship City</th>
+                </th>
+            </thead>
         </table>
 
 
@@ -80,26 +106,21 @@
                     return false;
                 }).click();
 
-                return;
                 $("#table1").kendoGrid({
                     dataSource: {
                         type: "odata",
+                        change: function() {
+                            setTimeout(function() {
+                                $("th").kendoFilterable();
+                            }, 100);
+                        },
                         serverPaging: true,
                         serverSorting: true,
                         pageSize: 10,
                         transport: {
                             read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
                         }
-                    },
-                    columns: [{
-                            title: "Foo",
-                            template: "#=OrderID - 10248#"
-                        },
-                        "OrderID",
-                        "CustomerID",
-                        "ShipCity",
-                        "ShipCountry"
-                    ]
+                    }
                 });
             });
         </script>
