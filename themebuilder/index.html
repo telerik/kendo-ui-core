@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Kendo ThemeBuilder</title>
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: 12px/1.5 Tahoma,sans-serif;
+        }
+
+        a {
+            color: #5686aa;
+        }
+
+        h1 {
+            border-bottom: 1px solid #333;
+        }
+
+        #page {
+            width: 50em;
+            margin: 0 auto;
+            position: relative;
+            top: 25%;
+            padding: .5em 2em 3em;
+            border-radius: 10px;
+            box-shadow: 0 0 4px #000;
+        }
+
+        #instructions li {
+            margin-bottom: 1em;
+        }
+
+        #bookmarklet {
+            background-color: #4b7896;
+            border: 1px solid #233b4d;
+            border-radius: 6px;
+            box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.1) inset, 0 3px 8px rgba(255, 255, 255, 0.12) inset, 0 0 2px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            color: #fff;
+            padding: 6px 10px;
+            margin: 0 0 0 3px;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        #bookmarklet:hover {
+            background-color: #5686aa;
+        }
+    </style>
+</head>
+<body>
+    <div id="page">
+        <h1>Kendo ThemeBuilder</h1>
+
+        <p>Usage:</p>
+        <ol id="instructions">
+            <li>Drag the following link to your bookmarks toolbar: <a id="bookmarklet" href="javascript:(function(){var%20script=document.createElement('script');script.src='http://gyoshev.telerik.com:8080/kendo/themebuilder/script.js?'+(new%20Date().getTime());document.getElementsByTagName('body')[0].appendChild(script);})()">Kendo ThemeBuilder</a></li>
+            <li>Click the bookmark on the page that you want to style.<br />Don't have a page that uses Kendo yet? <a href="http://gyoshev.telerik.com:8080/kendo/live">Use it in the online demos</a>!</li>
+        </ol>
+    </div>
+</body>
+</html>
