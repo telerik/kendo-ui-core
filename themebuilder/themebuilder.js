@@ -197,9 +197,9 @@
 
                 that.render();
 
-                that.content = $("#kendo-themebuilder");
+                that.element = $("#kendo-themebuilder");
 
-                that.element = $((window.parent || window).document.getElementById("ktb-wrap")).data("kendoThemeBuilder", that);
+                $((window.parent || window).document.getElementById("ktb-wrap")).data("kendoThemeBuilder", that);
 
                 function changeHandler(e) {
                     that._propertyChange({
@@ -297,32 +297,34 @@
                 $("<div id='kendo-themebuilder'>" +
                         "<div id='download-overlay' class='ktb-view'>" +
                             "<button class='k-action-back k-button'>Back</button>" +
-                            "<div class='code-wrap'>" +
+                            "<div class='ktb-content'>" +
                                 "<textarea></textarea>" +
                             "</div>" +
                         "</div>" +
                         "<div id='advanced-mode' class='ktb-view'>" +
                             "<button class='k-action-download k-button'>Get skin CSS...</button>" +
-                            "<ul id='stylable-elements'>" +
-                                $.map(that.constantsHierarchy || {}, function(section, title) {
-                                    var matchedConstants = {},
-                                        constants = that.constants.constants;
+                            "<div class='ktb-content'>" +
+                                "<ul id='stylable-elements'>" +
+                                    $.map(that.constantsHierarchy || {}, function(section, title) {
+                                        var matchedConstants = {},
+                                            constants = that.constants.constants;
 
-                                    for (var constant in constants) {
-                                        if (section.constants.test(constant)) {
-                                            matchedConstants[constant] = $.extend({}, constants[constant]);
+                                        for (var constant in constants) {
+                                            if (section.constants.test(constant)) {
+                                                matchedConstants[constant] = $.extend({}, constants[constant]);
+                                            }
                                         }
-                                    }
 
-                                    return propertyGroupTemplate($.extend(section, {
-                                        title: title,
-                                        constants: matchedConstants,
-                                        labels: section.labels,
-                                        editors: propertyEditors,
-                                        processors: processors
-                                    }));
-                                }).join("") +
-                            "</ul>" +
+                                        return propertyGroupTemplate($.extend(section, {
+                                            title: title,
+                                            constants: matchedConstants,
+                                            labels: section.labels,
+                                            editors: propertyEditors,
+                                            processors: processors
+                                        }));
+                                    }).join("") +
+                                "</ul>" +
+                            "</div>" +
                         "</div>" +
                     "</div>").appendTo(document.body);
             }
