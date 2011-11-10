@@ -67,10 +67,10 @@ var deployScripts = [{
     ]
 }];
 
-function deploy(scriptsRoot, outputRoot, compress) {
+function deploy(scriptsRoot, outputRoot, header, compress) {
     deployScripts.forEach(function(script) {
         console.log("\t" + scriptOutName(script.output, compress));
-        mergeMultipartScript(script, scriptsRoot, outputRoot, compress);
+        mergeMultipartScript(script, scriptsRoot, outputRoot, header, compress);
     });
 
     allScripts.forEach(function(scriptName) {
@@ -81,18 +81,18 @@ function deploy(scriptsRoot, outputRoot, compress) {
         );
 
         var outName = scriptOutName(scriptName, compress);
-        kendoBuild.writeText(path.join(outputRoot, outName), content);
+        kendoBuild.writeText(path.join(outputRoot, outName), header + content);
     });
 }
 
 function mergeScripts(scriptsRoot) {
     multipartScripts.forEach(function(script) {
         console.log("\t" + script.output + ": " + script.inputs.length + " files");
-        mergeMultipartScript(script, scriptsRoot, scriptsRoot);
+        mergeMultipartScript(script, scriptsRoot, scriptsRoot, "", false);
     });
 }
 
-function mergeMultipartScript(script, srcDir, outDir, compress) {
+function mergeMultipartScript(script, srcDir, outDir, header, compress) {
     var result = "",
         outFile = script.output;
 
@@ -109,7 +109,7 @@ function mergeMultipartScript(script, srcDir, outDir, compress) {
 
     kendoBuild.writeText(
         path.join(outDir, outFile),
-        result
+        header + result
     );
 }
 
