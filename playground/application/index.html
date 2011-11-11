@@ -34,6 +34,18 @@
                 text-decoration: none;
                 background: white url('disclosure-indicator.jpg') right center no-repeat;
             }
+
+            [data-kendo-role="list-accessory"] {
+                float: right;
+            }
+
+            .km-detail {
+                display: inline-block;
+                background: transparent url("detail-disclosure.jpg") center center no-repeat;
+                width: 30px;
+                height: 30px;
+                overflow: hidden;
+            }
         </style>
     </head>
     <body>
@@ -41,14 +53,18 @@
 
         <header data-kendo-role="header" style="text-align: center">
         <div class="km-toolbar">
-        <span class="km-view-title">Settings:</span>
-        <a href="#about" data-kendo-role="button" style="float:right; margin-right: 10px;">About</a>
+            <span class="km-view-title">Settings:</span>
+            <a href="#about" data-kendo-role="button" style="float:right; margin-right: 10px;">About</a>
         </div>
         </header>
 
         <div data-kendo-role="content">
             <ul data-kendo-role="listview" data-kendo-style="inset">
-                <li>Airplane mode <a href="#airplane-mode" data-kendo-role="button">On (dialog)</a></li>
+                <li>Airplane mode
+                    <span data-kendo-role="list-accessory">
+                        <a href="#airplane-mode" data-kendo-role="button" data-kendo-style="detail"></a>
+                    </span>
+                </li>
                 <li><a href="wifis.html">Wi-Fi</a></li>
             </ul>
         </div>
