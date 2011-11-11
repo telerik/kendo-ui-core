@@ -35,6 +35,7 @@
 
         options: {
             name: "MobileButton",
+            style: "button",
             selector: "[data-kendo-role=button]",
             enable: true
         },
@@ -55,8 +56,7 @@
                 element = that.element,
                 span;
 
-            span = element.addClass("km-button")
-                          .attr("data-kendo-type", "app-button")
+            span = element.addClass("km-" + that.options.style)
                           .children("span");
 
             if (!span[0]) {

@@ -40,6 +40,16 @@
                 ok(button.element.hasClass("km-button"), "Should have specified CSS class");
             });
 
+            test("accepts custom css class through options", function() {
+                expect(1);
+
+                var dom = $('<button data-kendo-style="detail"/>');
+
+                var button = new Button(dom);
+
+                ok(button.element.hasClass("km-detail"), "Should have specified CSS class");
+            });
+
             test("wraps content in a span", function() {
                 expect(1);
 
