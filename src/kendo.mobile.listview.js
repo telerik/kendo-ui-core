@@ -12,6 +12,15 @@
         }
     }
 
+    function enhanceLinkItem() {
+        var that = $(this);
+
+        if (!that.parent().contents().not(that)[0]) {
+            that.addClass("km-listview-link")
+                .attr("data-kendo-role", "listview-link");
+        }
+    }
+
     var MobileListView = MobileWidget.extend({
         init: function(element, options) {
             var that = this,
@@ -28,19 +37,9 @@
                 .toggleClass("km-list", !grouped)
                 .toggleClass("km-listinset", !grouped && inset)
                 .toggleClass("km-listgroup", grouped && !inset)
-                .toggleClass("km-listgroupinset", grouped && inset);
-
-            that.element.delegate("li", support.mousedown + " " + support.mouseup, toggleItemActiveClass);
-
-            that.element.find("a:only-child").each(function() {
-                var that = $(this);
-
-                if (!that.parent().contents().not(that)[0]) {
-                    that
-                        .addClass("km-listview-link")
-                        .attr("data-kendo-role", "listview-link");
-                }
-            });
+                .toggleClass("km-listgroupinset", grouped && inset)
+                .delegate("li", support.mousedown + " " + support.mouseup, toggleItemActiveClass)
+                .find("a:only-child").each(enhanceLinkItem);
 
             if (grouped) {
                 that.element
