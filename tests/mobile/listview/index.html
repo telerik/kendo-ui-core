@@ -96,6 +96,33 @@
                 ok(dom.find("#foo").is(".km-listview-link"), "link item has correct CSS class");
                 ok(!dom.find("#bar").is(".km-listview-link"), "mixed item does not receive CSS class");
             });
+
+            test("toggles item as pressed on press/release", function() {
+                var dom = $('<ul> \
+                    <li><a id="foo" href="foo">Foo</a></li> \
+                </ul>'),
+                    foo = dom.find("#foo");
+
+                new ListView(dom);
+
+                foo.trigger(kendo.support.mousedown);
+                ok(foo.parent().is(".km-state-active"), "list item is marked as active");
+
+                foo.trigger(kendo.support.mouseup);
+                ok(!foo.parent().is(".km-state-active"), "list item is unmarked");
+            });
+
+            test("does not active pushed state for non-link items", function() {
+                var dom = $('<ul> \
+                    <li>Foo</li> \
+                </ul>'),
+                    item = dom.find("li");
+
+                new ListView(dom);
+
+                item.trigger(kendo.support.mousedown);
+                ok(!item.is(".km-state-active"), "list item is not marked as active");
+            });
         </script>
     </body>
 </html>
