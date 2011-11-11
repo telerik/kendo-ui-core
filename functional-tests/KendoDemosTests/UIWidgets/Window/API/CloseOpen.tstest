@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ac269b5c-f35d-47ca-ac71-67f264ff2670</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>58a0259c-f77d-4791-9b42-bbd59da09f6d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b6edb9ea-2c0f-4b55-854b-c5fd18f25a55</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>4ff8ae6c-087e-4f76-b851-7d2e0607c768</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -143,7 +143,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>4e366b27-2254-4fb5-afe6-0092e20e4b68</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d23da04b-ec34-45cb-9cfe-8be7a9b45300</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -226,7 +226,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d6f899af-a9cf-40d9-9593-be0817a49a4d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>184ff4a7-a8c3-40d0-b115-adcb02baf635</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -259,7 +259,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d4092aeb-907c-465d-b3b5-c6f1577cc095</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c4e6debe-42f3-4062-be05-1554ebb19c63</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -344,7 +344,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>9b154cb0-8dad-446c-96fb-39016d2c87b3</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a79454bb-4176-4844-aab5-08bd52831db2</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -427,7 +427,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>dc7250a9-1072-4587-b69a-8341905a0dbd</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6eede54d-e496-40ce-9a32-332797380019</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -512,7 +512,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>5cdeea8f-5c31-493f-b222-4d53f7d1c9ce</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>bdf4a6fb-f981-4a82-a2fc-93a5b4351c56</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -596,22 +596,34 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.2.1108.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.2.1108.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.2.1108.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.2.1108.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1108.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
   </CurrentReferences>
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <HasCodeBehind>false</HasCodeBehind>
+  <HtmlDescription i:nil="true" />
   <InheritParentDataSource>false</InheritParentDataSource>
+  <IsManual>false</IsManual>
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>KendoDemosTests\UIWidgets\Window\API\CloseOpen.tstest</Path>
+  <Path>UIWidgets\Window\API\CloseOpen.tstest</Path>
   <Priority>0</Priority>
-  <ResourceFilePath>KendoDemosTests\UIWidgets\Window\API\CloseOpen.resx</ResourceFilePath>
+  <ProfilerBenchmarkResultsFilePath i:nil="true" />
+  <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
+  <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+    <d2p1:KeyValueOfstringbase64Binary>
+      <d2p1:Key>ArtOfTest.WebAii.Design.Execution.Profiler.ProfilerResultsMetadata</d2p1:Key>
+      <d2p1:Value>AAEAAAD/////AQAAAAAAAAAMAgAAAGBBcnRPZlRlc3QuV2ViQWlpLkRlc2lnbiwgVmVyc2lvbj0yMDExLjIuMTEwOC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTRmYzYyYmJjMzgyN2FiMWQMAwAAAFlBcnRPZlRlc3QuV2ViQWlpLCBWZXJzaW9uPTIwMTEuMi4xMTA4LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49NGZkNWY2NWJlMTIzNzc2YwwEAAAAaVRlbGVyaWsuVGVzdGluZ0ZyYW1ld29yay5JbnRlcm9wLCBWZXJzaW9uPTIwMTEuMi4xMTA4LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49OGNhMDBkM2UwZWJkNGI4YgUBAAAAQkFydE9mVGVzdC5XZWJBaWkuRGVzaWduLkV4ZWN1dGlvbi5Qcm9maWxlci5Qcm9maWxlclJlc3VsdHNNZXRhZGF0YQ8AAAAKX3Jlc3VsdHNJZAxfb3duZXJUZXN0SWQKX3N0YXJ0VGltZQpfdG90YWxUaW1lG19iQ29sbGVjdFByb2ZpbGVyU2FtcGxlRGF0YQpfc3RyU2VydmVyDF9pU2VydmVyUG9ydA9fc3RyRGVzY3JpcHRpb24KX3N0ckZvbGRlcgxfc3RyRmlsZVBhdGgMX2Jyb3dzZXJUeXBlD19icm93c2VyVmVyc2lvbghfc2VydmVycxxfYkNsZWFyQnJvd3NlckNhY2hlQmVmb3JlUnVuF19iV2FybVVwU2VydmVyQmVmb3JlUnVuAwMAAAABAAEBAQQEAwAAC1N5c3RlbS5HdWlkC1N5c3RlbS5HdWlkDQwBCCpBcnRPZlRlc3QuV2ViQWlpLkNvcmUuQnJvd3NlckV4ZWN1dGlvblR5cGUDAAAAKVRlbGVyaWsuVGVzdGluZ0ZyYW1ld29yay5Vbml2ZXJzYWxWZXJzaW9uBAAAAMQBU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuTGlzdGAxW1tBcnRPZlRlc3QuV2ViQWlpLkRlc2lnbi5FeGVjdXRpb24uUHJvZmlsZXIuUHJvZmlsZXJTZXJ2ZXJJbmZvLCBBcnRPZlRlc3QuV2ViQWlpLkRlc2lnbiwgVmVyc2lvbj0yMDExLjIuMTEwOC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTRmYzYyYmJjMzgyN2FiMWRdXQEBAgAAAAT7////C1N5c3RlbS5HdWlkCwAAAAJfYQJfYgJfYwJfZAJfZQJfZgJfZwJfaAJfaQJfagJfawAAAAAAAAAAAAAACAcHAgICAgICAgIAAAAAAAAAAAAAAAAAAAAAAfr////7////NAdpY//PBU2ihKejTsb96QAAAAAAAAAAAAAAAAAAAAAABgcAAAAKQUdHRU9SR0lFVkofAAAKBggAAAAnQzpcVXNlcnNcYWdnZW9yZ2lldlxBcHBEYXRhXExvY2FsXFRlbXBcCgX3////KkFydE9mVGVzdC5XZWJBaWkuQ29yZS5Ccm93c2VyRXhlY3V0aW9uVHlwZQEAAAAHdmFsdWVfXwAIAwAAAAEAAAAKCQoAAAAAAAQKAAAAxAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDFbW0FydE9mVGVzdC5XZWJBaWkuRGVzaWduLkV4ZWN1dGlvbi5Qcm9maWxlci5Qcm9maWxlclNlcnZlckluZm8sIEFydE9mVGVzdC5XZWJBaWkuRGVzaWduLCBWZXJzaW9uPTIwMTEuMi4xMTA4LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49NGZjNjJiYmMzODI3YWIxZF1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAA/QXJ0T2ZUZXN0LldlYkFpaS5EZXNpZ24uRXhlY3V0aW9uLlByb2ZpbGVyLlByb2ZpbGVyU2VydmVySW5mb1tdAgAAAAgICQsAAAAAAAAAAAAAAAcLAAAAAAEAAAAAAAAABD1BcnRPZlRlc3QuV2ViQWlpLkRlc2lnbi5FeGVjdXRpb24uUHJvZmlsZXIuUHJvZmlsZXJTZXJ2ZXJJbmZvAgAAAAs=</d2p1:Value>
+    </d2p1:KeyValueOfstringbase64Binary>
+  </ProfilerConfigurations>
+  <ProfilerResultsDirectory>C:\Users\aggeorgiev\AppData\Local\Temp\</ProfilerResultsDirectory>
+  <ProfilerServerName i:nil="true" />
+  <ResourceFilePath>UIWidgets\Window\API\CloseOpen.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
