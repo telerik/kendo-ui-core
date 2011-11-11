@@ -23,6 +23,7 @@
         ACTIVEBORDER = "k-state-border",
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
+        ARIAOWNS = "aria-owns",
         extend = $.extend,
         proxy = $.proxy,
         Widget = ui.Widget;
@@ -33,7 +34,7 @@
 
     var Popup = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this, id;
 
             Widget.fn.init.call(that, element, options);
 
@@ -49,6 +50,12 @@
                 .addClass("k-popup k-group k-reset")
                 .css({ position : ABSOLUTE })
                 .appendTo($(options.appendTo));
+
+
+            id = $(options.anchor).attr("id");
+            if (id) {
+                that.element.attr(ARIAOWNS, id);
+            }
 
             that.wrapper = $();
 
@@ -70,16 +77,19 @@
                 complete: function() {
                     that.wrapper.hide();
 
-                    var location = that.wrapper.data(LOCATION);
+                    var location = that.wrapper.data(LOCATION),
+                        anchor = $(options.anchor),
+                        direction, dirClass;
+
                     if (location) {
                         that.wrapper.css(location);
                     }
 
                     if (options.anchor != BODY) {
-                        var direction = options.anchor.hasClass(ACTIVEBORDER + "-down") ? "down" : "up";
-                        var dirClass = ACTIVEBORDER + "-" + direction;
+                        direction = anchor.hasClass(ACTIVEBORDER + "-down") ? "down" : "up";
+                        dirClass = ACTIVEBORDER + "-" + direction;
 
-                        options.anchor
+                        anchor
                             .removeClass(dirClass)
                             .children(ACTIVECHILDREN)
                             .removeClass(ACTIVE)
@@ -131,7 +141,8 @@
                 element = that.element,
                 options = that.options,
                 direction = "down",
-                animation;
+                animation, wrapper,
+                anchor = $(options.anchor);
 
             if (!that.visible()) {
 
@@ -139,17 +150,17 @@
                     return;
                 }
 
-                that.wrapper = kendo.wrap(element)
-                                    .css({
-                                        overflow: HIDDEN,
-                                        display: "block",
-                                        position: ABSOLUTE
-                                    });
+                that.wrapper = wrapper = kendo.wrap(element)
+                                        .css({
+                                            overflow: HIDDEN,
+                                            display: "block",
+                                            position: ABSOLUTE
+                                        });
 
-                that.wrapper.css(POSITION);
+                wrapper.css(POSITION);
 
                 if (options.appendTo == BODY) {
-                    that.wrapper.css(TOP, "-10000px");
+                    wrapper.css(TOP, "-10000px");
                 }
 
                 animation = extend({}, options.animation.open);
@@ -167,7 +178,7 @@
 
                     element.addClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
 
-                    options.anchor
+                    anchor
                         .addClass(dirClass)
                         .children(ACTIVECHILDREN)
                         .addClass(ACTIVE)
@@ -224,6 +235,10 @@
                 anchor = $(options.anchor)[0],
                 toggleTarget = options.toggleTarget,
                 target = e.target;
+
+            if (that.element.find("#" + $(target).closest(".k-popup").attr(ARIAOWNS))[0]) {
+                return;
+            }
 
             if (!contains(container, target) && !contains(anchor, target) && !(toggleTarget && contains($(toggleTarget)[0], target))) {
                 that.close();

@@ -33,10 +33,13 @@
         <div style="margin:50px; background:yellow;width:500px; height:500px;">
             <div class="anchor"></div>
         </div>
-        <div class="popup">popup</div>
+        <div id="popup" class="popup">
+            <input id="input"/>
+        </div>
+        <div id="popup2" class="popup">popup<input/></div>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
-                $(".popup").kendoPopup( {
+                $("#popup").kendoPopup( {
                     toggleTarget: $("button"),
                     toggleEvent: "click",
                     origin: "top left",
@@ -44,6 +47,15 @@
                     anchor: ".anchor",
                     collision: "flip"
                 });
+
+                $("#popup2").kendoPopup({
+                    anchor: $("#input")
+                });
+
+                $("#input").focus(function() {
+                    $("#popup2").data("kendoPopup").open();
+                });
+
             });
         </script>
     </body>
