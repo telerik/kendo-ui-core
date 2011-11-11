@@ -17,6 +17,7 @@
         ROW_SELECTOR = "tbody>tr:not(.k-grouping-row):visible",
         CELL_SELECTOR =  ROW_SELECTOR + ">td:not(.k-group-cell)",
         FIRST_CELL_SELECTOR = CELL_SELECTOR + ":first",
+        EDIT = "edit",
         DETAILINIT = "detailInit",
         CHANGE = "change",
         MODELCHANGE = "modelChange",
@@ -510,7 +511,14 @@
                  * @event
                  * @param {Event} e
                  */
-                DETAILINIT
+                DETAILINIT,
+                /**
+                 * Fires when the grid enters edit mode.
+                 * @name kendo.ui.Grid#edit
+                 * @event
+                 * @param {Event} e
+                 */
+                EDIT
             ], that.options);
 
             that._thead();
@@ -536,7 +544,30 @@
             autoBind: true,
             scrollable: true,
             groupable: false,
-            dataSource: {}
+            dataSource: {} /*,
+            toolBar: { // or true|false
+                commands: [
+                    "create",
+                    submit: { //?
+                        text: "Submit the changes ASAP",
+                        type: "image"
+                    },
+                    "cancel" // should we have the cancel as the changes are not in the context of the grid and there is no way to reset deleted records
+                    custom: {
+                        type: "button",
+                        text: "MyCustomCommand",
+                        click: function() {
+                            doTheStuff();
+                        }
+                }],
+                template: "Show my custom template"
+            },
+            editable: { // or true|false
+                confirmDelete: "hu?", // false
+                create: false,
+                destroy: false,
+                update: false
+            } */
         },
 
         _element: function() {
@@ -581,18 +612,19 @@
             if (that.options.editable) {
 
                 that.wrapper.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell)", CLICK, function(e) {
+                    var td = $(this)
 
-                    if ($(this).closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
+                    if (td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
                         return;
                     }
 
                     if (that.editable) {
                         if (that.editable.end()) {
                             that._closeCell();
-                            that._editCell($(this));
+                            that._editCell(td);
                         }
                     } else {
-                        that._editCell($(this));
+                        that._editCell(td);
                     }
 
                 });
@@ -642,11 +674,14 @@
 
             if (!model.readOnly(column.field)) {
                 that._editContainer = cell;
+
                 that.editable = cell.addClass("k-edit-cell")
                     .kendoEditable({
                         fields: column.field,
                         model: model
                     }).data("kendoEditable");
+
+                that.trigger(EDIT, { container: cell, model: model });
             }
         },
 
