@@ -259,6 +259,19 @@ span.k-numeric-wrap.k-state-active,
 
 /* icons */
 
+.k-icon
+{
+    opacity:.8;
+}
+
+.k-icon:hover,
+.k-state-hover .k-icon,
+.k-state-selected .k-icon,
+.k-state-focused .k-icon
+{
+    opacity:1;
+}
+
 .k-icon,
 .k-tool-icon,
 .k-grouping-dropclue,
@@ -317,6 +330,7 @@ span.k-numeric-wrap.k-state-active,
 {
     background-color: @active-background-color;
     border-color: @active-border-color;
+    color: @active-text-color;
 }
 
 .k-state-selected,
@@ -377,6 +391,12 @@ span.k-numeric-wrap.k-state-active,
     border-color: @error-border-color;
     background-color: @error-background-color;
     color: @error-text-color;
+}
+
+.k-state-disabled
+{
+    filter:alpha(opacity=70);
+    opacity:.7;
 }
 
 .k-state-disabled,
