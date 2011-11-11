@@ -9,6 +9,7 @@
         </script>-->
          <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.model.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.data.odata.js"></script>
         <script src="../src/kendo.sortable.js"></script>
@@ -129,21 +130,29 @@
                     return false;
                 }).click();
 
-                $("#table1").kendoGrid({
-                    dataSource: {
-                        type: "odata",
-                        change: function() {
-                            setTimeout(function() {
-                                $("th").kendoFilterable();
-                            }, 100);
-                        },
-                        serverPaging: true,
-                        serverSorting: true,
-                        pageSize: 10,
-                        transport: {
-                            read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
+                var dataSource = new kendo.data.DataSource({
+                    type: "odata",
+                    serverPaging: true,
+                    serverSorting: true,
+                    pageSize: 10,
+                    transport: {
+                        read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
+                    },
+                    schema: {
+                        model: {
+                            fields: {
+                                ShipCity: { type: "string" }
+                            }
                         }
                     }
+                });
+
+                $("#table1").kendoGrid({
+                    dataSource: dataSource
+                });
+
+                $("th").kendoFilterable({
+                    dataSource:dataSource
                 });
             });
         </script>
