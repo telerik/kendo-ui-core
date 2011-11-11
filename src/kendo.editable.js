@@ -96,10 +96,8 @@
 
         _binderChange: function(e) {
             var that = this;
-            if (!that.validatable.validate()) {
+            if (!that.validatable.validate() || that.trigger(CHANGE, { values: e.values })) {
                 e.preventDefault();
-            } else {
-                that.trigger(CHANGE);
             }
         },
 

@@ -18,6 +18,7 @@
         CELL_SELECTOR =  ROW_SELECTOR + ">td:not(.k-group-cell)",
         FIRST_CELL_SELECTOR = CELL_SELECTOR + ":first",
         EDIT = "edit",
+        SAVE = "save",
         DETAILINIT = "detailInit",
         CHANGE = "change",
         MODELCHANGE = "modelChange",
@@ -518,7 +519,14 @@
                  * @event
                  * @param {Event} e
                  */
-                EDIT
+                EDIT,
+                /**
+                 * Fires before the grid item is changed.
+                 * @name kendo.ui.Grid#save
+                 * @event
+                 * @param {Event} e
+                 */
+                SAVE
             ], that.options);
 
             that._thead();
@@ -678,7 +686,12 @@
                 that.editable = cell.addClass("k-edit-cell")
                     .kendoEditable({
                         fields: column.field,
-                        model: model
+                        model: model,
+                        change: function(e) {
+                            if (that.trigger(SAVE, { values: e.values, container: cell, model: model } )) {
+                                e.preventDefault();
+                            }
+                        }
                     }).data("kendoEditable");
 
                 that.trigger(EDIT, { container: cell, model: model });
