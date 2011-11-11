@@ -86,7 +86,7 @@
                 ok(dom.find("ul").is(".km-list"), "Css class is applied");
             });
 
-            test("applies CSS class to items with links only", function() {
+            test("applies CSS class to link items", function() {
                 var dom = $('<ul> \
                     <li><a id="foo" href="foo">Foo</a></li> \
                     <li>Bar <a id="bar" href="bar">Bar</a></li> \
