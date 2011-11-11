@@ -1,8 +1,16 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        support = kendo.support,
         DataSource = kendo.data.DataSource,
         MobileWidget = ui.MobileWidget;
+
+
+    function toggleItemActiveClass(e) {
+        if ($(e.target).is("a")) {
+            $(e.currentTarget).toggleClass("km-state-active", e.type === support.mousedown);
+        }
+    }
 
     var MobileListView = MobileWidget.extend({
         init: function(element, options) {
@@ -22,8 +30,11 @@
                 .toggleClass("km-listgroup", grouped && !inset)
                 .toggleClass("km-listgroupinset", grouped && inset);
 
+            that.element.delegate("li", support.mousedown + " " + support.mouseup, toggleItemActiveClass);
+
             that.element.find("a:only-child").each(function() {
                 var that = $(this);
+
                 if (!that.parent().contents().not(that)[0]) {
                     that
                         .addClass("km-listview-link")
