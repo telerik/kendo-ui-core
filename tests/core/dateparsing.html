@@ -560,17 +560,9 @@
 
             test('parse MMMM yyyy date format', function () {
                 var dateFormat = "MMMM yyyy";
-                var result = parse("December 2000", dateFormat);
-                ok(isValidDate(2000, 12, 1, result));
+                var result = parse("January 2000", dateFormat);
+                ok(isValidDate(2000, 1, 1, result));
             });
-
-
-            //test('parse 123/22/2000 should return null', function () {
-            //    var dateFormat = "MM/dd/yyyy";
-//
- //               var result = parse("123/22/2000", dateFormat);
- //               equal(result, null);
- //           });
 
             test('parse should return null if only year is passed', function () {
                 var dateFormat = "M/dd/yyyy";
