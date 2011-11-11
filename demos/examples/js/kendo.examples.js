@@ -477,7 +477,8 @@ function initializeNavigation (normalizedUrl) {
             dataSource: [
                             { text: "Hakama", control: "Menu", value: "hakama" },
                             { text: "Blue Opal", control: "Menu", value: "blueopal" },
-                            { text: "Black", control: "Menu", value: "black" }
+                            { text: "Black", control: "Menu", value: "black" },
+                            { text: "Silver", control: "Menu", value: "silver" }
                         ],
             template: '<span class="thumbLink">\
                         <span class="thumb #= data.text.toLowerCase() #Thumb" style="background-image: url(#= initialRelativePath #styles/#= data.control #/thumbSprite.png)">\

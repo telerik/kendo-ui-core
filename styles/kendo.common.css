@@ -3019,7 +3019,7 @@ html .k-upload
     top: 0;
     right: 0;
     z-index: 1;
-    font: 500px monospace !important; /* critical for correct operation */
+    font: 200px monospace !important; /* critical for correct operation */
     filter: alpha(opacity=0);
     opacity: 0;
     margin: 0;
