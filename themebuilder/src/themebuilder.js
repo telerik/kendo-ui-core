@@ -79,15 +79,13 @@
             },
 
             _colorChange: function(e) {
-                var that = this;
+                var that = this,
+                    changeHandler = that.options.colorPickerChange;
 
-                that.value(ColorEngine.css2hex($("<div />").css("color", that.value()).css("color")));
+                that.value(ColorEngine.css2hex(that._updateColorPreview()));
 
-                that._updateColorPreview();
-
-                // trigger change event?
-                if (that.options.colorPickerChange) {
-                    that.options.colorPickerChange.call(that, {
+                if (changeHandler) {
+                    changeHandler.call(that, {
                         name: that.element.attr("id"),
                         value: that.element.val()
                     });
@@ -95,8 +93,7 @@
             },
 
             _updateColorPreview: function() {
-                $(this.wrapper).find(".k-arrow-down")
-                    .css("backgroundColor", this.value());
+                return $(this.wrapper).find(".k-arrow-down").css("backgroundColor", this.value()).css("backgroundColor");
             }
         }),
         hexValueRe = /^#([0-9a-f]{3}){1,2}$/i,
@@ -285,7 +282,7 @@
                                 "# for (var name in constants) {" +
                                     "var c = constants[name];" +
                                     "if (c.readonly) continue; #" +
-                                    "<label for='#= name #'>#= labels[name] || name #</label>" +
+                                    "<label for='#= name #'>#= section[name] || name #</label>" +
                                     "<input id='#= name #' class='#= editors[c.property] #' " +
                                            "value='#= processors[c.property] ? processors[c.property](c.value) : c.value #' />" +
                                 "# } #" +
@@ -297,7 +294,7 @@
                         "<div id='download-overlay' class='ktb-view'>" +
                             "<button class='k-action-back k-button'>Back</button>" +
                             "<div class='ktb-content'>" +
-                                "<textarea></textarea>" +
+                                "<textarea readonly></textarea>" +
                             "</div>" +
                         "</div>" +
                         "<div id='advanced-mode' class='ktb-view'>" +
@@ -308,19 +305,17 @@
                                         var matchedConstants = {},
                                             constants = that.constants.constants;
 
-                                        for (var constant in constants) {
-                                            if (section.constants.test(constant)) {
-                                                matchedConstants[constant] = $.extend({}, constants[constant]);
-                                            }
+                                        for (var constant in section) {
+                                            matchedConstants[constant] = $.extend({}, constants[constant]);
                                         }
 
-                                        return propertyGroupTemplate($.extend(section, {
+                                        return propertyGroupTemplate({
                                             title: title,
                                             constants: matchedConstants,
-                                            labels: section.labels,
+                                            section: section,
                                             editors: propertyEditors,
                                             processors: processors
-                                        }));
+                                        });
                                     }).join("") +
                                 "</ul>" +
                             "</div>" +
