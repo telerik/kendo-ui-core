@@ -76,9 +76,9 @@
             },
 
             "@texture-url": constant(".k-header", "background-image", [
-                "url('" + applicationRoot + "themes/Black/gradient.png')",
-                "url('" + applicationRoot + "themes/BlueOpal/gradient.png')",
-                "url('" + applicationRoot + "themes/Kendo/gradient.png')"
+                { text: "flat", value: "none" },
+                { text: "highlight", value: "url('" + applicationRoot + "textures/highlight.png')" },
+                { text: "glass", value: "url('" + applicationRoot + "textures/glass.png')" },
             ]),
 
             "@widget-background-color":         constant(".k-widget", BGCOLOR),
