@@ -497,7 +497,39 @@
             this.timeView.open();
         },
 
-        //min and max
+        /**
+        * Gets/Sets the min value of the timepicker.
+        * @param {Date|String} value The min time to set.
+        * @returns {Date} The min value of the timepicker.
+        * @example
+        * var timepicker = $("#timepicker").data("kendoTimePicker");
+        *
+        * // get the min value of the timepicker.
+        * var min = timepicker.min();
+        *
+        * // set the min value of the timepicker.
+        * timepicker.min(new Date(1900, 0, 1, 10, 0, 0));
+        */
+        min: function (value) {
+            return this._option("min", value);
+        },
+
+        /**
+        * Gets/Sets the max value of the timepicker.
+        * @param {Date|String} value The max time to set.
+        * @returns {Date} The max value of the timepicker.
+        * @example
+        * var timepicker = $("#timepicker").data("kendoTimePicker");
+        *
+        * // get the max value of the timepicker.
+        * var max = timepicker.max();
+        *
+        * // set the max value of the timepicker.
+        * timepicker.max(new Date(1900, 0, 1, 18, 0, 0));
+        */
+        max: function (value) {
+            return this._option("max", value);
+        },
 
         /**
         * Gets/Sets the value of the timepicker.
@@ -595,6 +627,27 @@
             if (enter) {
                 that._change(that.element.val());
             }
+        },
+
+        _option: function(option, value) {
+            var that = this,
+                options = that.options;
+
+            if (value === undefined) {
+                return options[option];
+            }
+
+            value = that._parse(value);
+
+            if (!value) {
+                return;
+            }
+
+            value = new DATE(value);
+
+            options[option] = value;
+            that.timeView.options[option] = value;
+            that.timeView.refresh();
         },
 
         _parse: function(value) {
