@@ -113,9 +113,7 @@
             });
 
             test("does not active pushed state for non-link items", function() {
-                var dom = $('<ul> \
-                    <li>Foo</li> \
-                </ul>'),
+                var dom = $('<ul><li>Foo</li></ul>'),
                     item = dom.find("li");
 
                 new ListView(dom);
