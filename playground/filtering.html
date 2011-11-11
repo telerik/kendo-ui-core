@@ -9,17 +9,40 @@
         </script>-->
          <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
-        <script src="../src/kendo.sortable.js"></script>
-        <script src="../src/kendo.draganddrop.js"></script>
-        <script src="../src/kendo.popup.js"></script>
-        <script src="../src/kendo.filterable.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.data.odata.js"></script>
+        <script src="../src/kendo.sortable.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
+        <script src="../src/kendo.filterable.js"></script>
         <script src="../src/kendo.grid.js"></script>
 
         <link href="../styles/kendo.common.css" type="text/css" rel="stylesheet" />
         <link href="../styles/kendo.blueopal.css" type="text/css" rel="stylesheet" />
         <style>
+            body {
+                font: 12px Arial;
+            }
+
+            .k-filter-menu
+            {
+                padding: .5em;
+            }
+
+            .k-filter-menu input,
+            .k-filter-menu .k-dropdown
+            {
+                display: block;
+            }
+
+            .k-filter-menu button
+            {
+                width: 50%;
+            }
+
             .k-grid-filter {
                 float: right;
                 margin: -.3em -.6em;
