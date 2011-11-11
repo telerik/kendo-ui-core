@@ -1038,7 +1038,7 @@
             hours += 12;
         }
 
-        if (day === null && year && month) {
+        if (day === null) {
             day = 1;
         }
 
