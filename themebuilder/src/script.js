@@ -9,6 +9,7 @@
 
             return path.split("/").slice(0,-1).join("/") + "/";
         })(),
+        bootStyles,
 
          // TODO: change these to their respective CDN versions during build
         kendoAllLocation = applicationRoot + "../../deploy/kendoUI/js/kendo.all.min.js",
@@ -24,29 +25,24 @@
         return;
     }
 
-    function getScript(url, callback) {
-        var script = doc.createElement("script");
-        script.onload = callback;
-        script.src = url;
+    if (!bootStyles) {
+        bootStyles = doc.createElement("link");
+        bootStyles.setAttribute("rel", "stylesheet");
+        bootStyles.setAttribute("href", applicationRoot + "bootstrap.css");
 
-        head.appendChild(script);
+        doc.getElementsByTagName("head")[0].appendChild(bootStyles);
     }
 
     // show error message on pages that we can not work with
     if (typeof jQuery == UNDEFINED || typeof kendo == UNDEFINED) {
-        var messageId = 'ktb-message',
-            styles = 'position:absolute;top:50%;margin-top:-1.6em;left:50%;margin-left:-16em;z-index:9999999;font:12px sans-serif;text-align:center;width:32em;padding:1em;border:1px solid #2a2a2a;background:#f2f2f2;color:#ef652a;-moz-box-shadow: 1px 1px 7px 1px #666;-webkit-box-shadow: 1px 1px 7px 1px #666;box-shadow: 1px 1px 7px 1px #666;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;';
+        var messageId = 'ktb-message';
 
         if (!doc.getElementById(messageId)) {
             var messageWrap = doc.createElement("div");
             messageWrap.id = messageId;
-            messageWrap.style.cssText = styles;
             messageWrap.innerHTML =
-                '<p style="margin:0;padding:0;">' +
-                'It seems there are no Kendo widgets on this page, so the Kendo themebuilder will be of no use. Please try running it elsewhere.' +
-                '</p>' +
-                '<p style="margin:1em 0 0;padding:0;">' +
-                '<button type="button" style="border:1px solid #aaa;background:#e3e3e3;color:#2e2e2e;cursor:pointer;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;" onclick="var msg = document.getElementById(\'' + messageId + '\');msg.parentNode.removeChild(msg);return false;">Close</button></p>';
+                '<p>It seems there are no Kendo widgets on this page, so the Kendo themebuilder will be of no use. Please try running it elsewhere.</p>' +
+                '<p><button type="button" onclick="var msg = document.getElementById(\'' + messageId + '\');msg.parentNode.removeChild(msg);return false;">Close</button></p>';
             doc.body.appendChild(messageWrap);
         }
 
@@ -226,31 +222,16 @@
         };
 
     function createWindow() {
-        return $("<div id='ktb-wrap' />")
-                .css({
-                    paddingTop: 59,
-                    position: "absolute",
-                    width: 300,
-                    top: "4em",
-                    right: "4em",
-                    bottom: "4em",
-                    background: "url(" + applicationRoot + "header.png) no-repeat 50% 0 #3d3d3d",
-                    borderRadius: 7,
-                    boxShadow: "1px 1px 7px 1px #aaa",
-                    zIndex: 100010
-                })
-                .appendTo(document.body);
+        return $("<div id='ktb-wrap' />").appendTo(document.body);
     }
 
     function createInterfaceFrame(container) {
-        var iframe = $('<iframe />', { src: 'javascript:"<html></html>"', frameBorder: '0' })
-                        .css({
-                            display: "",
-                            height: "98%",
-                            width: "96%",
-                            margin: "0 2% 2%"
-                        })
-                        .appendTo(container || document.body)[0],
+            var iframe = $('<iframe />', {
+                    id: "ktb-interface",
+                    src: 'javascript:"<html></html>"',
+                    frameBorder: '0'
+                }).appendTo(container || document.body)[0],
+
             wnd = iframe.contentWindow || iframe,
             doc = wnd.document || iframe.contentDocument;
 
