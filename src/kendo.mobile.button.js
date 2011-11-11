@@ -8,7 +8,6 @@
         os = support.mobileOS,
         MOUSEDOWN = support.mousedown,
         MOUSEUP = support.mouseup,
-        ACTIVE_STATE_CLASS = "km-state-active",
         CLICK = "click",
         proxy = $.proxy;
 
@@ -22,13 +21,9 @@
 
             that._wrap();
 
-            that._clickProxy = proxy(that._click, that);
-            that._pressProxy = proxy(that._press, that);
             that._releaseProxy = proxy(that._release, that);
 
-            that.element
-                .bind(MOUSEDOWN, that._pressProxy)
-                .bind(MOUSEUP, that._releaseProxy);
+            that.element.bind(MOUSEUP, that._releaseProxy);
 
             that.bind([CLICK], options);
         },
@@ -40,15 +35,8 @@
             enable: true
         },
 
-        _press: function(e) {
-            this.element.addClass(ACTIVE_STATE_CLASS);
-        },
-
         _release: function(e) {
-            var that = this;
-
-            that.element.removeClass(ACTIVE_STATE_CLASS);
-            that.trigger(CLICK);
+            this.trigger(CLICK);
         },
 
         _wrap: function() {
