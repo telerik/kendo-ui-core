@@ -85,13 +85,16 @@
                         target.value = value;
                     },
                     bindModel: function() {
-                        var value = target.value;
+                        var value = target.value,
+                            values = {};
 
                         if (setting.parse) {
                            value = setting.parse(value);
                         }
 
-                        if (!that.trigger(CHANGE)) {
+                        values[field] = value;
+
+                        if (!that.trigger(CHANGE, { values: values })) {
                             model.set(field, value);
                         }
                     }

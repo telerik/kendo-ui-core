@@ -375,7 +375,61 @@
 
                 ok(!called);
             });
-       </script>
+
+            test("save event is raised when item is updated", function() {
+                var args,
+                    grid = setup({
+                        save: function() {
+                           args = arguments[0];
+                        },
+                        dataSource: new DataSource({
+                            schema: {
+                                model: {
+                                    id: "foo",
+                                    fields: {
+                                        foo: { field: "foo" }
+                                    }
+                                }
+                            },
+                            data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                        })
+                    });
+
+                table.find("tr>td:first").click();
+                table.find("tr>td:first input").val("baz").change();
+
+                equal(args.model, dataSource.get("bar"));
+                equal(args.values.foo, "baz");
+                ok(args.container.length);
+            });
+
+            test("canceling save event does not change the model", function() {
+                var called = false,
+                    grid = setup({
+                        save: function(e) {
+                            e.preventDefault();
+                        },
+                        dataSource: new DataSource({
+                            schema: {
+                                model: {
+                                    id: "foo",
+                                    fields: {
+                                        foo: { field: "foo" }
+                                    }
+                                }
+                            },
+                            data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                        })
+                    });
+
+                table.find("tr>td:first").click();
+                table.find("tr>td:first input").val("baz").change();
+
+                equal(dataSource.get("bar").get("foo"), "bar");
+
+            });
+
+        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
