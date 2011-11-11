@@ -361,6 +361,49 @@
                 equal(timepicker.value(), null);
             });
 
+            test("min() should return min value of the timepicker", function() {
+                var date = new Date(2000, 10, 10, 18, 0, 0),
+                    timepicker = input.kendoTimePicker({
+                        min: date,
+                        max: new Date(2000, 10, 10, 10, 0, 0)
+                    }).data("kendoTimePicker");
+
+                equal(+timepicker.min(), +date);
+            });
+
+            test("min() should set options.min and refresh timeView", function() {
+                var date = new Date(2000, 10, 10, 18, 0, 0),
+                    timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.min(date);
+
+                equal(+timepicker.min(), +date);
+                equal(+timepicker.timeView.options.min, +date);
+                equal(timepicker.timeView.ul.find("li:first").text(), "6:00 PM");
+            });
+
+            test("max() should return max value of the timepicker", function() {
+                var date = new Date(2000, 10, 10, 18, 0, 0),
+                    timepicker = input.kendoTimePicker({
+                        min: new Date(2000, 10, 10, 10, 0, 0),
+                        max: date
+                    }).data("kendoTimePicker");
+
+                equal(+timepicker.max(), +date);
+            });
+
+            test("max() should set options.max and refresh timeView", function() {
+                var date = new Date(2000, 10, 10, 18, 0, 0),
+                    timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.max(date);
+
+                equal(+timepicker.max(), +date);
+                equal(+timepicker.timeView.options.max, +date);
+                equal(timepicker.timeView.ul.find("li:last").text(), "6:00 PM");
+            });
+
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
