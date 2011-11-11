@@ -52,6 +52,8 @@
                 that._template();
                 that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that.refresh, that));
                 that.dataSource.query();
+            } else {
+                that._style();
             }
         },
 
@@ -64,13 +66,46 @@
             } else {
                 that.template = kendo.template("<li>" + template + "</li>");
             }
+
+            that.groupTemplate = $.proxy(kendo.template("<li>${data.value}<ul>#= kendo.render(this.template, data.items)#</ul></li>"), that);
         },
 
         refresh: function() {
             var that = this,
-                view = that.dataSource.view();
+                dataSource = that.dataSource,
+                grouped,
+                view = dataSource.view();
 
-            that.element.html(kendo.render(that.template, view));
+            if (dataSource.group()[0]) {
+                that.options.type = "group";
+                that.element.html(kendo.render(that.groupTemplate, view));
+            } else {
+                that.element.html(kendo.render(that.template, view));
+            }
+
+            that._style();
+        },
+
+        _style: function() {
+            var that = this,
+                options = that.options,
+                grouped = options.type === "group",
+                inset = options.style === "inset";
+
+            that.element.addClass("km-listview")
+                .toggleClass("km-list", !grouped)
+                .toggleClass("km-listinset", !grouped && inset)
+                .toggleClass("km-listgroup", grouped && !inset)
+                .toggleClass("km-listgroupinset", grouped && inset)
+                .delegate("li", support.mousedown + " " + support.mouseup, toggleItemActiveClass)
+                .find("a:only-child").each(enhanceLinkItem);
+
+            if (grouped) {
+                that.element
+                    .children()
+                    .children("ul")
+                    .addClass("km-list");
+            }
         },
 
         options: {

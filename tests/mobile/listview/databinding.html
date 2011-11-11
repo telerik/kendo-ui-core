@@ -87,6 +87,44 @@
 
                 equal(dom.children().first().html(), "foo");
             });
+
+            var dom, dataSource, listView, subList;
+            module("grouped datasource", {
+                setup: function() {
+                    dom = $("<ul/>");
+                    var data = [{foo: "Foo", bar: "Bar"}, {foo: "Foo", bar: "Baz"}];
+
+                    dataSource = new kendo.data.DataSource({data: data, group: {field: "foo"}});
+                    listView = new ListView(dom, {dataSource: dataSource, template: "${data.bar}"});
+                    subList = dom.find("li>ul");
+                },
+                teardown: function() {
+
+                }
+            });
+
+            test("detects grouped datasource", function() {
+                equal(listView.options.type, "group");
+            });
+
+            test("styles root element correctly", function() {
+                ok(!dom.is(".km-list"));
+            });
+
+            test("Uses group values for headers", function() {
+                equal(dom.find("li").contents().eq(0).text(), "Foo");
+            });
+
+            test("creates sublists", function() {
+                equal(subList.length, 1, "sublist is created");
+                ok(subList.is(".km-list"), "sublist class is applied");
+            });
+
+            test("populates sublists with items", function() {
+                equal(subList.find("li").length, 2);
+                equal(subList.find("li").eq(0).text(), "Bar");
+                equal(subList.find("li").eq(1).text(), "Baz");
+            });
         </script>
     </body>
 </html>
