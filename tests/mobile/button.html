@@ -86,7 +86,7 @@
                 click(dom);
             });
 
-            test("should apply active state when pressed", function() {
+            test("applies active state when pressed", function() {
                 expect(1);
 
                 var dom = $("<button>foo</button>");
@@ -96,7 +96,7 @@
                 ok(dom.hasClass("km-state-active"), "Should have active css class");
             });
 
-            test("should remove active state when depressed", function() {
+            test("removes active state when depressed", function() {
                 expect(1);
 
                 var dom = $("<button>foo</button>");
