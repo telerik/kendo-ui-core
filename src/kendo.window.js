@@ -206,35 +206,20 @@
 
                 wrapper.css("padding-top", titleBar.outerHeight());
 
-                var minWidth = options.minWidth,
-                    maxWidth = options.maxWidth,
-                    minHeight = options.minHeight,
-                    maxHeight = options.maxHeight;
-
                 if (options.width) {
                     wrapper.width(options.width);
-                } else if (minWidth) {
-                    wrapper.width(minWidth);
                 }
 
                 if (options.height) {
                     wrapper.height(options.height);
                 }
 
-                var currentWidth = wrapper.outerWidth(),
-                    currentHeight = wrapper.outerHeight();
-
-                if (maxWidth && currentWidth > maxWidth) {
-                    wrapper.width(maxWidth);
-                }
-
-                if (minHeight && currentHeight < minHeight) {
-                    wrapper.height(minHeight);
-                }
-
-                if (maxHeight && currentHeight > maxHeight) {
-                    wrapper.height(maxHeight);
-                }
+                $.each(["minWidth","minHeight","maxWidth","maxHeight"], function(_, prop) {
+                    var value = options[prop];
+                    if (value && value != Infinity) {
+                        wrapper.css(prop, value);
+                    }
+                });
 
                 if (!options.visible) {
                     wrapper.hide();
