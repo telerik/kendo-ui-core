@@ -32,7 +32,12 @@
                 display: block;
                 color: inherit;
                 text-decoration: none;
-                background: white url('disclosure-indicator.jpg') right center no-repeat;
+                background: transparent url('disclosure-indicator.jpg') right center no-repeat;
+            }
+
+            li a.km-listview-link:active {
+                background-color: blue;
+                color: white;
             }
 
             [data-kendo-role="list-accessory"] {
