@@ -48,7 +48,7 @@
                 }, options);
                 dataSource = options.dataSource;
 
-                table.kendoGrid(options);
+                return table.kendoGrid(options).data("kendoGrid");
             }
 
             module("grid editing", {
@@ -327,6 +327,54 @@
                 equal(table.find("td.k-edit-cell").length, 1);
             });
 
+            test("edit event is raised when entering edit mode", function() {
+                var args,
+                    grid = setup({
+                        edit: function() {
+                            args = arguments[0];
+                        },
+                        dataSource: new DataSource({
+                            schema: {
+                                model: {
+                                    id: "foo",
+                                    fields: {
+                                        foo: "foo"
+                                    }
+                                }
+                            },
+                            data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                        })
+                    });
+
+                table.find("tr>td:first").click();
+
+                ok(args.container.find("input").length);
+                equal(args.model, grid.dataSource.get("bar"));
+            });
+
+            test("edit event is not raised for readonly columns", function() {
+                var called = false,
+                    grid = setup({
+                        edit: function() {
+                            called = true;
+                        },
+                        dataSource: new DataSource({
+                            schema: {
+                                model: {
+                                    id: "foo",
+                                    fields: {
+                                        foo: { field: "foo", readonly: true  }
+                                    }
+                                }
+                            },
+                            data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                        })
+                    });
+
+                table.find("tr>td:first").click();
+
+                ok(!called);
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
