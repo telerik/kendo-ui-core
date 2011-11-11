@@ -132,24 +132,26 @@ function buildGeneratedSources() {
     });
 
     kendoBuild.copyDirSyncRecursive(path.join("styles", "Black"), path.join(SOURCE_PATH, "Black"));
+
+    console.log("copying textures...");
+    kendoBuild.copyDirSyncRecursive(path.join("styles", "textures"), path.join(SOURCE_PATH, "textures"));
 }
 
-function copyThemes() {
-    var themesPath = path.join(OUTPUT_PATH, "themes");
+function copyTextures() {
+    var themesPath = path.join(OUTPUT_PATH, "textures");
     mkdir(themesPath);
-    require("./themes").build();
-    kendoBuild.copyDirSyncRecursive("styles", themesPath, false, /\.(?!less)[a-z]+$/i);
+    kendoBuild.copyDirSyncRecursive(path.join(SOURCE_PATH, "textures"), themesPath, false);
 }
 
 function build() {
-    kendoBuild.rmdirSyncRecursive(OUTPUT_PATH);
-    mkdir(OUTPUT_PATH);
     buildGeneratedSources();
     console.log("building distribution...");
+    kendoBuild.rmdirSyncRecursive(OUTPUT_PATH);
+    mkdir(OUTPUT_PATH);
     mergeResources();
     createBootstrapper();
     createIndexPage();
-    copyThemes();
+    copyTextures();
 }
 
 if (require.main === module) {
