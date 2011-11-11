@@ -9,8 +9,8 @@
                 <meta name="apple-mobile-web-app-status-bar-style" content="black" /> \
                 <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
         iconMeta = kendo.template('<link rel="apple-touch-icon" href="${icon}" />'),
+        linkRolesSelector = "button tab listview-link".replace(/(\S+)/g, "[data-kendo-role=$1],"),
         roleSelector = kendo.roleSelector;
-
     $(document.documentElement).addClass("km-" + (!os || (os && os.ios) ? "ios" : os.name));
 
     function extractView(html) {
@@ -199,10 +199,9 @@
         },
 
         setupAppLinks: function(element) {
-            var selector ="[data-kendo-role=button], [data-kendo-role=tab]";
             this.element
-                .delegate(selector, support.mouseup, appLinkMouseUp)
-                .delegate(selector, "click", appLinkClick);
+                .delegate(linkRolesSelector, support.mouseup, appLinkMouseUp)
+                .delegate(linkRolesSelector, "click", appLinkClick);
         },
 
         scroller: function() {

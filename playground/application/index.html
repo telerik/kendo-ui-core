@@ -27,6 +27,14 @@
             $(function() {
             });
         </script>
+        <style>
+            li a.km-listview-link {
+                display: block;
+                color: inherit;
+                text-decoration: none;
+                background: white url('disclosure-indicator.jpg') right center no-repeat;
+            }
+        </style>
     </head>
     <body>
         <article data-kendo-role="view" data-kendo-url="index.html">
@@ -41,7 +49,7 @@
         <div data-kendo-role="content">
             <ul data-kendo-role="listview" data-kendo-style="inset">
                 <li>Airplane mode <a href="#airplane-mode" data-kendo-role="button">On (dialog)</a></li>
-                <li>Wi-Fi <a href="wifis.html" data-kendo-role="button">Select ...</a></li>
+                <li><a href="wifis.html">Wi-Fi</a></li>
             </ul>
         </div>
 

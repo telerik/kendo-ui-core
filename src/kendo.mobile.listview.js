@@ -22,6 +22,15 @@
                 .toggleClass("km-listgroup", grouped && !inset)
                 .toggleClass("km-listgroupinset", grouped && inset);
 
+            that.element.find("a:only-child").each(function() {
+                var that = $(this);
+                if (!that.parent().contents().not(that)[0]) {
+                    that
+                        .addClass("km-listview-link")
+                        .attr("data-kendo-role", "listview-link");
+                }
+            });
+
             if (grouped) {
                 that.element
                     .children()

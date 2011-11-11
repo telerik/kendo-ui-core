@@ -86,6 +86,16 @@
                 ok(dom.find("ul").is(".km-list"), "Css class is applied");
             });
 
+            test("applies CSS class to items with links only", function() {
+                var dom = $('<ul> \
+                    <li><a id="foo" href="foo">Foo</a></li> \
+                    <li>Bar <a id="bar" href="bar">Bar</a></li> \
+                </ul>');
+
+                new ListView(dom);
+                ok(dom.find("#foo").is(".km-listview-link"), "link item has correct CSS class");
+                ok(!dom.find("#bar").is(".km-listview-link"), "mixed item does not receive CSS class");
+            });
         </script>
     </body>
 </html>
