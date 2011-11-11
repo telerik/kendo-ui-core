@@ -272,21 +272,16 @@
     }
 
     function inRange(value, min, max) {
-        if (!value) {
-            return true;
-        }
-
         var msMin = getMilliseconds(min),
             msMax = getMilliseconds(max),
-            msValue = getMilliseconds(value);
+            msValue;
 
-        if (msMin == msMax) {
+        if (!value || msMin == msMax) {
             return true;
-        } else {
-            return msValue > msMin && msValue < msMax;
         }
 
-        return true;
+        msValue = getMilliseconds(value);
+        return msValue > msMin && msValue < msMax;
     }
 
     kendo.TimeView = TimeView;
@@ -352,6 +347,7 @@
             that.enable(!element.is('[disabled]'));
             that.value(options.value || element.val());
         },
+
         options: {
             name: "TimePicker",
             min: TODAY,
@@ -368,7 +364,7 @@
                 wrapper = that._inputWrapper;
 
             arrow.unbind(CLICK)
-                .unbind(MOUSEDOWN);
+                 .unbind(MOUSEDOWN);
 
             if (enable === false) {
                 wrapper
