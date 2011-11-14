@@ -196,7 +196,7 @@
          * });
          * @option {Object} [title] The chart title configuration options.
          * @option {String} [title.text] The title of the chart.
-         * @option {String} [title.font] <"16px Arial,Helvetica,sans-serif"> The font style of the title.
+         * @option {String} [title.font] <"16px Arial,Helvetica,sans-serif"> The font of the title.
          * @option {String} [title.position] <"top"> The positions of the title.
          * <div class="details-list">
          *    <dl>
@@ -566,7 +566,7 @@
          * _example
          * //sets format of the labels
          * format: "{0:C}"
-         * @option {Object} [categoryAxis] The value axis configuration options.
+         * @option {Object} [categoryAxis] The category axis configuration options.
          * @option {Array} [categoryAxis.categories] Array of category names.
          * @option {String} [categoryAxis.field] The data field containing the category name.
          * @option {Number} [categoryAxis.axisCrossingValue] <0>
@@ -919,6 +919,7 @@
          * Each series type has a different set of options.
          * </p>
          * @option {String} [series.name] The series name visible in the legend.
+         * @option {Array} [series.data] Array of data points.
          * @option {String} [series.field] The data field containing the series value.
          * @option [series.type="bar"] The type of the series.
          * @option {Boolean} [series.type="bar".stacked] <false>
