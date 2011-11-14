@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Mobile Simulator</title>
+    <link rel="stylesheet" href="../../styles/kendo.common.css" />
+    <link rel="stylesheet" href="../../styles/kendo.black.css" />
+    <link rel="stylesheet" href="devices/ipad/styles.css" />
+
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.fx.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.popup.js"></script>
+    <script src="../../src/kendo.list.js"></script>
+    <script src="../../src/kendo.dropdownlist.js"></script>
+
+    <style type="text/css">
+        body
+        {
+            font: 12px/normal Arial, Helvetica, sans-serif;
+        }
+
+        #simulator
+        {
+            position: relative;
+        }
+
+        .device-container
+        {
+            -webkit-user-select: none;
+            -moz-user-select: -moz-none;
+            user-select: none;
+            position: relative;
+            float: right;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .device-skin
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            background-position: 0 0;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .configurator
+        {
+            border-radius: 5px;
+            display: inline-block;
+            width: 250px;
+        }
+
+        .configurator > span
+        {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 30px;
+        }
+
+        .k-button
+        {
+            margin-left: 10px;
+        }
+
+        .k-button > span
+        {
+            width: 24px;
+            height: 28px;
+            display: block;
+            background: transparent url("images/orientation.png") 0 2px no-repeat;
+        }
+
+        .horizontal > span
+        {
+            background-position: -24px 2px;
+        }
+
+        #address-bar
+        {
+            position: absolute;
+            background: none;
+            border: none;
+            outline: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            user-select: text;
+            vertical-align: middle;
+            font: 12px/16px Arial,Helvetica,sans-serif;
+        }
+
+    </style>
+</head>
+<body class="k-content">
+    <div class="device-container vertical">
+        <div class="device-skin"></div>
+        <input id="address-bar" type="text" onchange="frame.src = 'http://' + this.value.replace('http://', '')" />
+        <iframe id="simulator" src="../../playground/mobile/tokendo/layout.html" frameborder="0" width="100%" height="100%"></iframe>
+    </div>
+    <div class="configurator k-dropdown">
+        <input id="device-selector" style="float: right" /><span>Device:&nbsp;</span><br>
+        <span class="k-button horizontal" data-orientation="horizontal" style="float: right"><span></span></span><span class="k-button" data-orientation="vertical" style="float: right"><span></span></span><span>Orientation:&nbsp;</span>
+    </div>
+    <script type="text/javascript">
+        var mobiles = {
+            ipad: {
+                ua: "Mozilla/5.0(iPad; U; CPU OS 4_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8F191 Safari/6533.18.5"
+            },
+            iphone: {
+                ua: "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; xx-xx) AppleWebKit/532.9 (KHTML, like Gecko) Mobile/7D11"
+            },
+            nexuss: {
+                ua: "Mozilla/5.0 (Linux; U; Android 2.3.3; en-gb; Nexus S Build/GRI20) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+            },
+            a100: {
+                ua: "Mozilla/5.0 (Linux; U; Android 3.2; en-us; A100 Build/HTJ85B) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13"
+            },
+            n9: {
+                ua: "Mozilla/5.0 (MeeGo; NokiaN950-00/00) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13"
+            }
+        };
+
+        function detectOS(ua) {
+            var os = false, match = [],
+                agentRxs = {
+                    android: /(Android)\s+(\d+)\.(\d+(\.\d+)?)/,
+                    iphone: /(iPhone|iPod).*OS\s+(\d+)[\._]([\d\._]+)/,
+                    ipad: /(iPad).*OS\s+(\d+)[\._]([\d_]+)/,
+                    meego: /(MeeGo).+NokiaBrowser\/(\d+)\.([\d\._]+)/,
+                    webos: /(webOS)\/(\d+)\.(\d+(\.\d+)?)/,
+                    blackberry: /(BlackBerry|PlayBook).*?Version\/(\d+)\.(\d+(\.\d+)?)/
+                };
+            for (var agent in agentRxs) {
+                if (agentRxs.hasOwnProperty(agent)) {
+                    match = ua.match(agentRxs[agent]);
+                    if (match) {
+                        os = {};
+                        os.device = agent;
+                        os.name = /^i(phone|pad|pod)$/i.test(agent) ? "ios" : agent;
+                        os[os.name] = true;
+                        os.majorVersion = match[2];
+                        os.minorVersion = match[3].replace("_", ".");
+                        os.flatVersion = os.majorVersion + os.minorVersion.replace(".", "");
+                        os.flatVersion = os.flatVersion + (new Array(4 - os.flatVersion.length).join("0")); // Pad with zeroes
+
+                        break;
+                    }
+                }
+            }
+            return os;
+        }
+
+        function changeDevice(devicename) {
+            var deviceLink = $("link[href*='devices/']", document.getElementsByTagName("head")[0]),
+                url = "devices/" + devicename + "/styles.css", newLink;
+
+            if (!$.browser.msie) {
+                newLink = deviceLink
+                    .eq(0)
+                    .clone()
+                    .attr("href", url);
+            } else {
+                newLink = document.createStyleSheet(url);
+            }
+
+            deviceLink.after(newLink);
+            deviceLink.remove();
+
+            var os = frame.contentWindow.kendo.support.mobileOS = detectOS(mobiles[devicename].ua);
+            frame.contentWindow.document.documentElement.className = "km-" + (!os ? "ios" : os.name);
+            setTimeout( function () {
+                frame.onload();
+            }, 100 );
+
+            resizeContent();
+        }
+
+        function resizeContent() {
+            $(".device-container")[0].style.cssText = "";
+            setTimeout( function () {
+                var offset = $(".device-skin").css("padding-top");
+                $(".device-container")
+                        .css({
+                            paddingTop: offset != "0px" ? offset : false
+                        });
+            }, 500 );
+        }
+
+        $("#device-selector")
+                .change( function () {
+                    changeDevice(this.value);
+                })
+                .width("180px")
+                .kendoDropDownList([
+                    { text: "iPad", value: "ipad" },
+                    { text: "iPhone/iPod Touch", value: "iphone" },
+                    { text: "Google Nexus S (phone)", value: "nexuss" },
+                    { text: "Acer A100 (tablet)", value: "a100" }
+                ]);
+
+        var frame = $("#simulator")[0],
+            addressBar = $("#address-bar");
+
+        frame.onload = function () {
+            if (frame.src != addressBar.val())
+                addressBar.val(frame.src);
+
+            $(frame.contentWindow.document.documentElement).css({
+                fontSize: $(".device-skin").css("font-size")
+            });
+
+//            if (kendo.support.transitions.prefix == "Moz") { // FlexBox is broken in FF.
+//                var foreignDocument = $(frame.contentWindow.document),
+//                    kendoContent = foreignDocument.find(".km-content");
+//
+//                if (kendoContent.length) {
+//                    var head = foreignDocument.find("head")[0],
+//                        headerHeight = foreignDocument.find(".km-header").height(),
+//                        footerHeight = foreignDocument.find(".km-footer").height(),
+//                        wrapper = kendoContent.wrapAll("<div style='position: absolute; width: 100%; height: 100%; top: 0; left: 0;'></div>")
+//
+//                    $("<style type='text/css'>.km-content{ -moz-box-sizing: border-box; height: 100%; border: 1px solid transparent; border-width: " + headerHeight + "px 0 " + footerHeight + "px 0; margin: -" + headerHeight + "px 0 -" + footerHeight + "px 0; }</style>").appendTo(head);
+//                }
+//            }
+        };
+
+        $(document).delegate("[data-orientation]", "click", function () {
+            var button = $(this);
+
+            $(".device-container")
+                .removeClass("horizontal")
+                .removeClass("vertical")
+                .addClass(button.data("orientation"));
+
+            resizeContent();
+        });
+    </script>
+</body>
+</html>
