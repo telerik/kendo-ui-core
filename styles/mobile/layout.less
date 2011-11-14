@@ -252,15 +252,17 @@ body {
     background-image: linearGradient(top, rgb(63,79,102), rgb(138,154,181) 6%, rgb(90,120,165) 50%, rgb(71,104,151) 50%, rgb(73,106,154));
 }
 
-.km-ios .km-button:active
+.km-ios .km-button:active,
+.km-ios li.km-state-active
 {
     border-color: #40506C #376ECC #3E75CA;
     background-image: linearGradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
 }
 
-.km-ios li.km-state-active {
-    background-image: linearGradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
-    color: white !important;
+.km-ios li.km-state-active
+{
+    border: 0;
+    color: white;
 }
 
 .km-button
@@ -328,6 +330,7 @@ body {
 .km-checkbox
 {
     font-size: 1em;
+    font-size: 1rem;
     display: inline-block;
     padding: 1px;
     width: 6em;
@@ -376,8 +379,6 @@ body {
 
 .km-android .km-checkbox
 {
-    width: 2.2em;
-    height: 2.2em;
     border: 1px solid #000;
     background-color: rgb(54, 54, 54);
     background-image: linearGradient(top, rgb(54, 54, 54), rgb(43, 43, 43));
@@ -479,7 +480,9 @@ body {
 .km-android .km-toggle
 {
     width: 3em;
+    width: 3rem;
     height: 2.2em;
+    height: 2.2rem;
 }
 
 .km-android .km-toggle-tip
@@ -490,6 +493,7 @@ body {
     .box-shadow(none);
     width: 100%;
     line-height: 1.6em;
+    line-height: 1.6rem;
     text-align: center;
 }
 
@@ -592,15 +596,19 @@ body {
 .km-android .km-toggle
 {
     font: normal 1em DroidSans, Helvetica, sans-serif;
+    font-size: 1rem;
 }
 
 .km-android .km-button,
 .km-android .km-toggle
 {
     padding: .4em .7em;
+    padding: .4rem .7rem;
     margin: .1em;
+    margin: .1rem;
     .border-radius(2pt);
     line-height: 2em;
+    line-height: 2rem;
     .box-shadow(0 1px 2px #373737);
 }
 
@@ -934,13 +942,15 @@ body {
     margin: 0 1%;
 }
 
-.km-ios .km-tabstrip .km-button:active
+.km-ios .km-tabstrip .km-button:active,
+.km-ios .km-tabstrip .km-state-active
 {
     color: #FFF;
     background: rgba(100, 100, 100, 0.5);
 }
 
-.km-android .km-tabstrip .km-button:active
+.km-android .km-tabstrip .km-button:active,
+.km-android .km-tabstrip .km-state-active
 {
     color: #FFF;
     background: rgb(154, 154, 154);
