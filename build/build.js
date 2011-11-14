@@ -53,6 +53,7 @@ var scripts = [
     "kendo.menu.js",
     "kendo.panelbar.js",
     "kendo.tabstrip.js",
+    "kendo.timepicker.js",
     "kendo.treeview.js",
     "kendo.slider.js",
     "kendo.splitter.js",

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TimePicker Events</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.timepicker.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">TimePicker Events</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            QUnit.config.testTimeout = 500;
+
+            var TimeView = kendo.TimeView,
+                div, input;
+
+            function getToday() {
+                var today = new Date();
+
+                today = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+                return today;
+            }
+
+            module("kendo.ui.TimePicker Events", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            asyncTest("blur should call _change event", function() {
+                var timepicker = stub(input.kendoTimePicker().data("kendoTimePicker"), {
+                    _change: function() {},
+                    close: function() {}
+                });
+
+                input[0].focus();
+                input[0].blur();
+
+                setTimeout(function() {
+                    equal(timepicker.calls("_change"), 1);
+                    equal(timepicker.calls("close"), 1);
+                    ok(!!timepicker._bluring);
+                    start();
+                }, 250);
+            });
+
+            asyncTest("raise change event", function() {
+                var timepicker = input.kendoTimePicker({
+                                            change: function() {
+                                                ok(true);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoTimePicker");
+
+                timepicker._change("10:00");
+            });
+
+            asyncTest("raise DOM change event", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                input.bind("change", function() {
+                    ok(true);
+                    start();
+                });
+
+                timepicker._change("10:00");
+            });
+
+            asyncTest("do not raise change event if no changes", function() {
+                var timepicker = input.kendoTimePicker({
+                                            value: new Date(2000, 10, 10, 10, 0, 0),
+                                            change: function() {
+                                                ok(false);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoTimePicker");
+
+                input.focus().blur();
+
+                setTimeout(function() {
+                    start();
+                }, 300);
+            });
+
+            asyncTest("click li raises change event", function() {
+                var timepicker = input.kendoTimePicker({
+                                            change: function() {
+                                                ok(true);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoTimePicker");
+
+                    timepicker.open();
+                    timepicker.timeView.ul.find("li:first").click();
+            });
+
+            asyncTest("raise open event", function() {
+                var timepicker = input.kendoTimePicker({
+                                            open: function() {
+                                                ok(true);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoTimePicker");
+
+                timepicker._arrow.click();
+            });
+
+            asyncTest("raise close event", function() {
+                var timepicker = input.kendoTimePicker({
+                                            close: function() {
+                                                ok(true);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoTimePicker");
+
+                timepicker.open();
+                setTimeout(function() {
+                    timepicker._arrow.click();
+                }, 200);
+            });
+
+            asyncTest("raise close event document click", function() {
+                var timepicker = input.kendoTimePicker({
+                                            close: function() {
+                                                ok(true);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoTimePicker");
+
+                timepicker.open();
+
+                setTimeout(function() {
+                    $(document.documentElement).mousedown();
+                }, 200);
+            });
+
+
+       </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
