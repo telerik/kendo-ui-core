@@ -63,44 +63,44 @@
                 }
             });
 
-            test("deleteRow calls DataSource remove method", function() {
+            test("removeRow calls DataSource remove method", function() {
                 var grid = setup();
                 var removeMethod = stub(dataSource, "remove");
 
-                grid.deleteRow(table.find("tbody>tr:first"));
+                grid.removeRow(table.find("tbody>tr:first"));
 
                 ok(removeMethod.calls("remove"));
                 ok(removeMethod.args("remove", 0)[0] instanceof Model);
                 equal(removeMethod.args("remove", 0)[0].get("foo"), "bar");
             });
 
-            test("deleteRow with html element as argument calls DataSource remove method", function() {
+            test("removeRow with html element as argument calls DataSource remove method", function() {
                 var grid = setup();
 
                 var removeMethod = stub(dataSource, "remove");
 
-                grid.deleteRow(table.find("tbody>tr:first")[0]);
+                grid.removeRow(table.find("tbody>tr:first")[0]);
 
                 ok(removeMethod.calls("remove"));
                 ok(removeMethod.args("remove", 0)[0] instanceof Model);
                 equal(removeMethod.args("remove", 0)[0].get("foo"), "bar");
             });
 
-            test("deleteRow hides coresponding row from the grid", function() {
+            test("removeRow hides coresponding row from the grid", function() {
                 var grid = setup();
 
                 var tr = table.find("tbody>tr:first");
 
-                grid.deleteRow(tr);
+                grid.removeRow(tr);
 
                 ok(!tr.is(":visible"));
             });
 
-            test("deleteRow does not call DataSource remove method if not existing row", function() {
+            test("removeRow does not call DataSource remove method if not existing row", function() {
                 var grid = setup();
                 var removeMethod = stub(dataSource, "remove");
 
-                grid.deleteRow($("<tr />"));
+                grid.removeRow($("<tr />"));
 
                 ok(!removeMethod.calls("remove"));
             });
@@ -121,7 +121,7 @@
                 ok(!table.parent().find(".k-button>.k-delete").length);
             });
 
-            test("deleteRow raises remove event", function() {
+            test("removeRow raises remove event", function() {
                 var called = false,
                     grid = setup({
                         remove: function() {
@@ -129,7 +129,7 @@
                         }
                     });
 
-                grid.deleteRow(table.find("tbody>tr:first"));
+                grid.removeRow(table.find("tbody>tr:first"));
 
                 ok(called);
             });
@@ -142,12 +142,12 @@
                     }),
                     removeMethod = stub(dataSource, "remove");
 
-                grid.deleteRow(table.find("tbody>tr:first"));
+                grid.removeRow(table.find("tbody>tr:first"));
 
                 ok(!removeMethod.calls("remove"));
             });
 
-            test("deleteRow raises remove event passing the model and row element", function() {
+            test("removeRow raises remove event passing the model and row element", function() {
                 var args,
                     grid = setup({
                         remove: function() {
@@ -155,7 +155,7 @@
                         }
                     });
 
-                grid.deleteRow(table.find("tbody>tr:first"));
+                grid.removeRow(table.find("tbody>tr:first"));
 
                 ok(args.row.length);
                 ok(args.model instanceof Model);
