@@ -43,10 +43,11 @@
                     dom = $('<nav> \
                             <a href="foo" id="foo">foo</a> \
                             <a href="bar" id="bar" data-kendo-icon="genius">bar</a> \
-                            <a href="baz" id="baz"><img src="javascript:void(0)" />bar</a> \
+                            <a href="baz" id="baz"><img  />bar</a> \
                         </nav>');
                     tabstrip = new Tabstrip(dom);
                 },
+
                 teardown: function() {
 
                 }
@@ -63,7 +64,7 @@
 
             test("raises select event when clicked", function() {
                 expect(2);
-                var button = dom.find("#foo");
+                var button = dom.find("#bar");
 
                 tabstrip.bind("select", function(e) {
                     ok(true, "raises the select event");
@@ -73,8 +74,12 @@
                 click(button);
             });
 
+            test("marks first button as active by default", function() {
+                ok(dom.find("#foo").is(".km-state-active"));
+            });
+
             test("marks current button as active", function() {
-                var button = dom.find("a");
+                var button = dom.find("#bar").eq(0);
                 click(button);
                 ok(button.is(".km-state-active"));
             });
@@ -84,10 +89,6 @@
                 click(button);
                 click($("#bar", dom));
                 ok(!button.is(".km-state-active"));
-            });
-
-            test("marks first button as active by default", function() {
-                ok(dom.find("#foo").is(".km-state-active"));
             });
 
             test("allows user selection by index", function() {
@@ -103,6 +104,17 @@
             test("applies image class on image if present", function() {
                 ok(dom.find("#baz img").is(".km-image"), "baz tab img has km-image class");
                 ok(!dom.find("#baz").find(".km-icon")[0], "baz does not create icon span");
+            });
+
+            test("ignores repeated clicks on the same button", function() {
+                var button = dom.find("#foo");
+
+                tabstrip.bind("select", function() {
+                    ok(false, "select event is not called");
+                });
+
+                click(button);
+                ok(button.is(".km-state-active"), "button is active");
             });
         </script>
     </body>

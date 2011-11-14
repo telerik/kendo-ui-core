@@ -32,12 +32,16 @@
 
         _release: function (e) {
             var that = this,
-                target = $(e.currentTarget),
+                item = $(e.currentTarget),
                 oldItem = that.element.children("." + ACTIVE_STATE_CLASS);
 
-            that.trigger(SELECT, {item: target});
+            if (item[0] === oldItem[0]) {
+                return;
+            }
 
-            target.addClass(ACTIVE_STATE_CLASS);
+            that.trigger(SELECT, {item: item});
+
+            item.addClass(ACTIVE_STATE_CLASS);
             oldItem.removeClass(ACTIVE_STATE_CLASS);
         },
 
