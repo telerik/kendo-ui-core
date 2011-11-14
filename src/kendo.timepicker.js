@@ -164,7 +164,10 @@
                 html = "";
 
             if (msMin != msMax) {
-                length = Math.abs(msMin - msMax) / msInterval + 1
+                if (msMin > msMax) {
+                    msMax += MS_PER_DAY;
+                }
+                length = (msMax - msMin) / msInterval + 1;
             }
 
             for (; idx < length; idx++) {
@@ -346,7 +349,16 @@
         }
 
         msValue = getMilliseconds(value);
-        return msValue > msMin && msValue < msMax;
+
+        if (msMin > msValue) {
+            msValue += MS_PER_DAY;
+        }
+
+        if (msMax < msMin) {
+            msMax += MS_PER_DAY;
+        }
+
+        return msValue >= msMin && msValue <= msMax
     }
 
     kendo.TimeView = TimeView;
@@ -591,7 +603,7 @@
 
             value = that._update(value);
 
-            if (that._old != value) {
+            if (+that._old != +value) {
                 that._old = value;
                 that.trigger(CHANGE);
 

@@ -14,8 +14,7 @@
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.fx.js"></script>
         <script src="../../../src/kendo.popup.js"></script>
-        <script src="../../../src/kendo.calendar.js"></script>
-        <script src="../../../src/kendo.datepicker.js"></script>
+        <script src="../../../src/kendo.timepicker.js"></script>
         <!-- script -->
     </head>
     <body>
@@ -25,46 +24,48 @@
         <div class="description">Range selection</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <label for="start">Start date:</label>
-            <input id="start" value="10/10/2011" />
+            <label for="start">Start time:</label>
+            <input id="start" value="8:00 AM" />
 
-            <label for="end" style="margin-left:3em">End date:</label>
-            <input id="end" value="10/10/2012"/>
+            <label for="end" style="margin-left:3em">End time:</label>
+            <input id="end" value="8:30 AM"/>
             <script>
                 $(document).ready(function() {
                     function startChange() {
-                        var startDate = start.value();
+                        var startTime = start.value();
 
-                        if (startDate) {
-                            startDate.setDate(startDate.getDate() + 1);
-                            end.min(startDate);
+                        if (startTime) {
+                            startTime = new Date(startTime);
+
+                            end.max(startTime);
+
+                            startTime.setMinutes(startTime.getMinutes() + this.options.interval);
+
+                            end.min(startTime);
+                            end.value(startTime);
                         }
                     }
 
-                    function endChange() {
-                        var endDate = end.value();
-
-                        if (endDate) {
-                            endDate.setDate(endDate.getDate() - 1);
-                            start.max(endDate);
-                        }
-                    }
-
-                    var start = $("#start").kendoDatePicker({
+                    //init start timepicker
+                    var start = $("#start").kendoTimePicker({
                         change: startChange
-                    }).data("kendoDatePicker");
+                    }).data("kendoTimePicker");
 
-                    var end = $("#end").kendoDatePicker({
-                        change: endChange
-                    }).data("kendoDatePicker");
+                    //init end timepicker
+                    var end = $("#end").kendoTimePicker().data("kendoTimePicker");
 
-                    start.max(end.value());
-                    end.min(start.value());
+                    //define min/max range
+                    start.min("8:00 AM");
+                    start.max("6:00 PM");
+
+                    //define min/max range
+                    end.min("8:00 AM");
+                    end.max("7:30 AM");
                 });
             </script>
 
             <style scoped>
-                #example .k-datepicker {
+                #example .k-timepicker {
                     vertical-align: middle;
                 }
 
