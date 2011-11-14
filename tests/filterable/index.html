@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Filterable Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.filterable.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Filterable Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var DataSource = kendo.data.DataSource,
+                Filterable = kendo.ui.Filterable,
+                filter,
+                model,
+                dom,
+                dataSource;
+
+
+            module("kendo.ui.Filterable", {
+                setup: function() {
+                    dataSource = new DataSource({
+                        schema: {
+                            model: {
+                                fields: {
+                                    foo: {
+                                        type: "string"
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    dom = $("<th data-field=foo />");
+                },
+                teardown: function() {
+                }
+            });
+
+            test("initializes the name of the operator select from the field", function(){
+                filter = new Filterable(dom, {dataSource: dataSource});
+
+                equal(filter.menu.find("select").attr("name"), "foo[0].operator");
+            });
+
+            test("initializes the name of the value input from the field", function(){
+                filter = new Filterable(dom, {dataSource: dataSource});
+
+                equal(filter.menu.find("input").attr("name"), "foo[0].value");
+            });
+
+            test("initializes the name of the extra value input from the field", function(){
+                filter = new Filterable(dom, {dataSource: dataSource});
+
+                equal(filter.menu.find("input:eq(1)").attr("name"), "foo[1].value");
+            });
+
+            test("initializes the name of the logical operation select from the field", function(){
+                filter = new Filterable(dom, {dataSource: dataSource});
+
+                equal(filter.menu.find("select:eq(1)").attr("name"), "foo.logic");
+            });
+
+            test("initializes the name of the extra operator select", function(){
+                filter = new Filterable(dom, {dataSource: dataSource});
+
+                equal(filter.menu.find("select:eq(2)").attr("name"), "foo[1].operator");
+            });
+
+            test("display extra filtering options by default", function(){
+                filter = new Filterable(dom, {dataSource: dataSource});
+
+                equal(filter.menu.find("select").length, 3);
+            });
+
+            test("does not display extra filtering options if extra is set to false", function(){
+                filter = new Filterable(dom, {extra: false, dataSource: dataSource});
+
+                equal(filter.menu.find("select").length, 1);
+            });
+
+            test("can change the filtering messages", function(){
+                filter = new Filterable(dom, {
+                    messages: {
+                        info: "info"
+                    },
+                    dataSource: dataSource
+                });
+
+                equal(filter.menu.find("div:contains(info)").length, 1);
+            });
+
+            test("can change the operators", function(){
+                filter = new Filterable(dom, {
+                    operators: {
+                        string: {
+                            foo: "bar"
+                        }
+                    },
+                    dataSource: dataSource
+                });
+
+                equal(filter.menu.find("select option:first").val(), "foo");
+            });
+       </script>
+    </body>
+</html>

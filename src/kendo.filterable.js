@@ -4,35 +4,41 @@
         Widget = ui.Widget;
 
     var template =
-        '<div class="k-filter-menu k-group">'+
+        '<form class="k-filter-menu k-group">'+
             '<div class="k-filter-help-text">#=messages.info#</div>'+
-                '<select>'+
+                '<select name="#=field#[0].operator">'+
                     '#for(var op in operators){#'+
                         '<option value="#=op#">#=operators[op]#</option>'+
                     '#}#'+
                 '</select>'+
-                '<input class="k-input k-autocomplete" type="text"/>'+
+                '<input name="#=field#[0].value" class="k-input k-autocomplete" type="text"/>'+
                 '#if(extra){#'+
-                    '<select>'+
-                        '<option>And</option>'+
-                        '<option>Or</option>'+
+                    '<select name="#=field#.logic">'+
+                        '<option value="and">And</option>'+
+                        '<option value="or">Or</option>'+
                     '</select>'+
-                    '<select>'+
+                    '<select name="#=field#[1].operator">'+
                         '#for(var op in operators){#'+
                             '<option value="#=op#">#=operators[op]#</option>'+
                         '#}#'+
                     '</select>'+
-                    '<input class="k-input k-autocomplete" type="text"/>'+
+                    '<input name="#=field#[1].value" class="k-input k-autocomplete" type="text"/>'+
                 '#}#'+
-            '<button class="k-button">#=messages.filter#</button><button class="k-button">#=messages.cancel#</button>'+
-        '</div>';
+                '<button type="submit" class="k-button">#=messages.filter#</button>'+
+                '<button type="reset" class="k-button">#=messages.clear#</button>'+
+            '</div>'+
+        '</form>';
 
     var Filterable = Widget.extend({
         init: function(element, options) {
-            var that = this, link, type;
+            var that = this,
+                link,
+                type,
+                operators;
 
             Widget.fn.init.call(that, element, options);
 
+            operators = options.operators || {};
             element = that.element;
             options = that.options;
 
@@ -44,12 +50,17 @@
 
             that.dataSource = options.dataSource.bind("change", $.proxy(that.refresh, that));
 
-            console.log(that.dataSource.reader.model.fields);
+            field = element.data("field");
+
+            type = that.dataSource.reader.model.fields[field].type;
+
+            operators = operators[type] || options.operators[type];
 
             that.menu = $(kendo.template(template)({
+                field: field,
                 messages: options.messages,
                 extra: options.extra,
-                operators: options.operators[options.type]
+                operators: operators
             }));
 
             that.popup = new ui.Popup(that.menu,{
@@ -78,7 +89,7 @@
             messages: {
                 info: "Show rows with value that:",
                 filter: "Filter",
-                cancel: "Cancel"
+                clear: "Clear"
             }
         }
     });
