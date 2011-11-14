@@ -99,6 +99,7 @@ html, body {
 }
 
 html, body {
+    width: 100%;
     height: 100%;
     max-height: auto;
     overflow: hidden;
@@ -111,31 +112,25 @@ body {
     display: table\9;
 }
 
-km-header, km-footer {
-    background: #EBEBEB;
-    text-indent: 30px;
-    width: 100%;
-    padding: 20px 0;
-}
-
 .km-view
 {
-    position: absolute;
     top: 0;
     left: 0;
-    display: -webkit-box;
-    .box-orient(vertical);
+    .box(box);
     height: 100%;
     width: 100%;
-    overflow: hidden;
     -webkit-transform: translatez(0);
     display: table\9;
     .box-orient(vertical);
+    vertical-align: top;
 }
 
-.km-content {
+.km-content
+{
     .box-flex(1);
     display: block;
+    display: -moz-inline-stack;
+    width: 100%;
     overflow: auto;
     overflow-y: auto;
     overflow-x: visible;
@@ -148,9 +143,11 @@ km-header, km-footer {
 .km-footer
 {
     display: block;
+    display: -moz-box;
     display: ~"table-row\9";
-    min-height: ~"50px\9";
     height: ~"1px\9";
+    -moz-box-orient: vertical;
+    width: 100%;
 }
 
 .km-header
@@ -170,22 +167,10 @@ km-header, km-footer {
     -moz-box-pack: start;
     display: ~"table-row\9";
     padding: 0;
-    min-height: 50px;
-}
-
-.km-view
-{
-    .box(box);
-}
-
-.km-view
-{
-    vertical-align: top;
 }
 
 .km-header,
-.km-footer,
-.km-tabContainer
+.km-footer
 {
     position: relative;
     z-index: 1;
@@ -203,7 +188,6 @@ km-header, km-footer {
 .km-content
 {
     .box-align(stretch);
-    .box-flex(500);
     position: relative;
 }
 
@@ -346,10 +330,11 @@ km-header, km-footer {
     font-size: 1em;
     display: inline-block;
     padding: 1px;
-    width: 100px;
-    height: 28px;
+    width: 6em;
+    width: 6rem;
+    height: 1.75em;
     height: 1.75rem;
-    line-height: 32px;
+    line-height: 1.85em;
     line-height: 1.85rem;
     vertical-align: middle;
     position: relative;
@@ -359,8 +344,8 @@ km-header, km-footer {
 
 .km-checkbox
 {
-    width: 20px;
-    height: 20px;
+    width: 1.2em;
+    height: 1.2em;
     width: 1.2rem;
     height: 1.2rem;
 }
@@ -416,8 +401,9 @@ km-header, km-footer {
 {
     top: 0;
     left: 0;
-    width: 40px;
-    height: 28px;
+    width: 2em;
+    width: 2rem;
+    height: 1.75em;
     height: 1.75rem;
     display: block;
     position: absolute;
@@ -446,13 +432,14 @@ km-header, km-footer {
 .km-toggle-handle:before
 {
     position: absolute;
-    font-size: 15px;
+    font-size: 1em;
     font-size: 1rem;
     font-weight: bold;
     top: 0;
     display: inline-block;
     height: 100%;
-    width: 60px;
+    width: 4em;
+    width: 4rem;
     text-transform: uppercase;
     text-align: center;
     .border-radius(4px);
@@ -467,7 +454,8 @@ km-header, km-footer {
 .km-toggle-handle:after
 {
     content: "off";
-    left: 35px;
+    left: 1.6em;
+    left: 1.6rem;
     padding-left: 5px;
     color: #7f7f7f;
     background: linearGradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%, rgb(250, 250, 250) 50%, rgb(255, 255, 255));
@@ -478,7 +466,8 @@ km-header, km-footer {
 .km-toggle-handle:before
 {
     content: "on";
-    left: -60px;
+    left: -4em;
+    left: -4rem;
     padding-right: 5px;
     color: #fff;
     text-shadow: 0 -1px 0 #0e203e;
@@ -490,7 +479,7 @@ km-header, km-footer {
 .km-android .km-toggle
 {
     width: 3em;
-    height: 34px;
+    height: 2.2em;
 }
 
 .km-android .km-toggle-tip
@@ -545,6 +534,7 @@ km-header, km-footer {
 .km-meego .km-toggle
 {
     width: 3.8em;
+    width: 3.8rem;
 }
 
 .km-meego .km-toggle,
@@ -584,6 +574,8 @@ km-header, km-footer {
     margin: .35em .4em;
     width: 1.4em;
     height: 1.4em;
+    width: 1.4rem;
+    height: 1.4rem;
     background: #fff;
     border-color: #fff;
     .box-sizing(border-box);
@@ -676,8 +668,8 @@ km-header, km-footer {
     vertical-align: middle;
     overflow: hidden;
     text-align: center;
-    right: -9px;
-    top: -10px;
+    right: -.8em;
+    top: -1em;
     height: 1.6em;
     position: absolute;
     width: 1.6em;
@@ -698,8 +690,8 @@ km-header, km-footer {
 .km-message:-moz-first-node,
 :-moz-first-node~.km-message
 {
-    right: 2px;
-    top: -15px;
+    right: -.5em;
+    top: -1em;
 }
 
 .km-blackberry .km-message
@@ -751,10 +743,6 @@ km-header, km-footer {
 {
     border-right-width: 1px;
     .border-radius(0 5pt 5pt 0);
-}
-
-.km-ios .km-radiogroup
-{
 }
 
 .km-ios .km-radiogroup .km-button
@@ -1217,21 +1205,22 @@ input[type=checkbox]
 .km-tabstrip .km-button .km-icon
 {
     display: block;
-    width: 48px;
-    height: 48px;
+    width: 3rem;
+    height: 3rem;
+    background-size: auto 100%;
 }
 
 .km-ios .km-tabstrip .km-icon
 {
-    width: 32px;
-    height: 32px;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .km-blackberry .km-tabstrip .km-icon,
 .km-meego .km-tabstrip .km-icon
 {
-    width: 64px;
-    height: 64px;
+    width: 4rem;
+    height: 4rem;
 }
 
 .km-tabstrip .km-button .km-icon
@@ -1242,14 +1231,14 @@ input[type=checkbox]
 .km-android .km-tabstrip .km-button .km-icon
 {
     opacity: 0.5;
-    background: transparent url('images/atabimg.png') no-repeat .1em 50%;
+    background: transparent url('/kendo/styles/mobile/images/atabimg.png') no-repeat .1em 50%;
     background-size: cover;
 }
 
 .km-ios .km-tabstrip .km-button .km-icon
 {
     opacity: 1;
-    background: transparent url('images/itabimg1.png') no-repeat 3px 50%;
+    background: transparent url('/kendo/styles/mobile/images/itabimg1.png') no-repeat 3px 50%;
     background-size: cover;
 }
 
@@ -1257,7 +1246,7 @@ input[type=checkbox]
 .km-meego .km-tabstrip .km-button .km-icon
 {
     opacity: 0.5;
-    background: transparent url('images/atabimg.png') no-repeat .5em 50%;
+    background: transparent url('/kendo/styles/mobile/images/atabimg.png') no-repeat .5em 50%;
 }
 
 .km-tabstrip .km-button.km-state-active .km-icon
@@ -1267,7 +1256,7 @@ input[type=checkbox]
 
 .km-ios .km-tabstrip .km-state-active .km-icon
 {
-    background-image: url('images/itabimg.png');
+    background-image: url('/kendo/styles/mobile/images/itabimg.png');
 }
 
 .km-android .km-tabstrip .km-button:nth-child(1) .km-icon
@@ -1277,17 +1266,17 @@ input[type=checkbox]
 
 .km-android .km-tabstrip .km-button:nth-child(2) .km-icon
 {
-    background-position: -107px 50%;
+    background-position: 33% 50%;
 }
 
 .km-android .km-tabstrip .km-button:nth-child(3) .km-icon
 {
-    background-position: -216px 50%;
+    background-position: 67% 50%;
 }
 
 .km-android .km-tabstrip .km-button:nth-child(4) .km-icon
 {
-    background-position: -325px 50%;
+    background-position: 101% 50%;
 }
 
 .km-ios .km-tabstrip .km-button:nth-child(1) .km-icon
@@ -1297,17 +1286,17 @@ input[type=checkbox]
 
 .km-ios .km-tabstrip .km-button:nth-child(2) .km-icon
 {
-    background-position: -71px 50%;
+    background-position: 34% 50%;
 }
 
 .km-ios .km-tabstrip .km-button:nth-child(3) .km-icon
 {
-    background-position: -146px 50%;
+    background-position: 69% 50%;
 }
 
 .km-ios .km-tabstrip .km-button:nth-child(4) .km-icon
 {
-    background-position: -220px 50%;
+    background-position: 103.5% 50%;
 }
 
 .km-blackberry .km-tabstrip .km-button:nth-child(1) .km-icon,

@@ -11,7 +11,6 @@
         iconMeta = kendo.template('<link rel="apple-touch-icon" href="${icon}" />'),
         linkRolesSelector = "button tab listview-link".replace(/(\S+)/g, "[data-kendo-role=$1],"),
         roleSelector = kendo.roleSelector;
-    $(document.documentElement).addClass("km-" + (!os || (os && os.ios) ? "ios" : os.name));
 
     function extractView(html) {
         if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
@@ -155,6 +154,8 @@
         init: function(element, options) {
             kendo.Observable.fn.init.call(this, options);
             this.element = element;
+
+            $(document.documentElement).addClass("km-" + (!os ? "ios" : os.name));
         },
 
         start: function(options) {
