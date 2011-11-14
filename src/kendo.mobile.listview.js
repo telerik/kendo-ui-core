@@ -3,8 +3,11 @@
         ui = kendo.ui,
         support = kendo.support,
         DataSource = kendo.data.DataSource,
-        MobileWidget = ui.MobileWidget;
-
+        MobileWidget = ui.MobileWidget,
+        ITEM_SELECTOR = ".km-list > li",
+        proxy = $.proxy,
+        GROUP_TEMPLATE = kendo.template("<li>#= this.headerTemplate(data) #<ul>#= kendo.render(this.template, data.items)#</ul></li>"),
+        CLICK = "click";
 
     function toggleItemActiveClass(e) {
         if ($(e.target).is("a")) {
@@ -12,11 +15,11 @@
         }
     }
 
-    function enhanceLinkItem() {
-        var that = $(this);
+    function enhanceLinkItem(i, item) {
+        item = $(item);
 
-        if (!that.parent().contents().not(that)[0]) {
-            that.addClass("km-listview-link")
+        if (!item.parent().contents().not(item)[0]) {
+            item.addClass("km-listview-link")
                 .attr("data-kendo-role", "listview-link");
         }
     }
@@ -38,7 +41,8 @@
                 .toggleClass("km-listinset", !grouped && inset)
                 .toggleClass("km-listgroup", grouped && !inset)
                 .toggleClass("km-listgroupinset", grouped && inset)
-                .delegate("li", support.mousedown + " " + support.mouseup, toggleItemActiveClass)
+                .delegate(ITEM_SELECTOR, support.mousedown + " " + support.mouseup, toggleItemActiveClass)
+                .delegate(ITEM_SELECTOR, support.mouseup, proxy(that._click, that))
                 .find("a:only-child").each(enhanceLinkItem);
 
             if (grouped) {
@@ -55,6 +59,33 @@
             } else {
                 that._style();
             }
+
+            that.bind([CLICK], options);
+        },
+
+        options: {
+            name: "MobileListView",
+            selector: "[data-kendo-role=listview]",
+            type: "flat",
+            template: "${data}",
+            headerTemplate: "${value}",
+            style: ""
+        },
+
+        refresh: function() {
+            var that = this,
+                dataSource = that.dataSource,
+                grouped,
+                view = dataSource.view();
+
+            if (dataSource.group()[0]) {
+                that.options.type = "group";
+                that.element.html(kendo.render(that.groupTemplate, view));
+            } else {
+                that.element.html(kendo.render(that.template, view));
+            }
+
+            that._style();
         },
 
         _template: function() {
@@ -78,23 +109,13 @@
                 groupTemplateProxy.headerTemplate = kendo.template(headerTemplate);
             }
 
-            that.groupTemplate = $.proxy(kendo.template("<li>#= this.headerTemplate(data) #<ul>#= kendo.render(this.template, data.items)#</ul></li>"), groupTemplateProxy);
+            that.groupTemplate = $.proxy(GROUP_TEMPLATE, groupTemplateProxy);
         },
 
-        refresh: function() {
-            var that = this,
-                dataSource = that.dataSource,
-                grouped,
-                view = dataSource.view();
-
-            if (dataSource.group()[0]) {
-                that.options.type = "group";
-                that.element.html(kendo.render(that.groupTemplate, view));
-            } else {
-                that.element.html(kendo.render(that.template, view));
+        _click: function(e) {
+            if (this.trigger(CLICK, {target: e.target, currentTarget: e.currentTarget})) {
+                e.preventDefault();
             }
-
-            that._style();
         },
 
         _style: function() {
@@ -117,15 +138,6 @@
                     .children("ul")
                     .addClass("km-list");
             }
-        },
-
-        options: {
-            name: "MobileListView",
-            selector: "[data-kendo-role=listview]",
-            type: "flat",
-            template: "${data}",
-            headerTemplate: "${value}",
-            style: ""
         }
     });
 

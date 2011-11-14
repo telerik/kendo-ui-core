@@ -21,10 +21,11 @@
         <script>
             kendo.application.bind("viewInit", function(e) {
                 var view = e.view;
-                view.element.find("#wifis").kendoMobileListView({style: "inset", dataSource: ["T2H2", "T3M1", "Get off my lawn!", "MVCTeamWiFi", "Elvis is alive"]});
-            });
-
-            $(function() {
+                var template = '${data} <a data-kendo-role="button" data-kendo-style="detail">More</a>';
+                var ds = ["T2H2", "T3M1", "Get off my lawn!",
+                "MVCTeamWiFi", "Elvis is alive"];
+                view.element.find("#wifis").kendoMobileListView({style:
+                    "inset", template: template,  dataSource: ds});
             });
         </script>
         <style>
@@ -41,9 +42,11 @@
 
             .km-detail {
                 display: inline-block;
+                float: right;
                 background: transparent url("detail-disclosure.jpg") center center no-repeat;
                 width: 30px;
                 height: 30px;
+                text-indent: -10000px;
                 overflow: hidden;
             }
         </style>
