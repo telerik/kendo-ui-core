@@ -665,7 +665,7 @@
                                 visibility: "hidden"
                             })
                             .click(function(ev) {
-                                that.deleteRow(tr);
+                                that.removeRow(tr);
                                 ev.stopPropagation();
                             })
                             .appendTo(tr.find(">td:visible:first"));
@@ -739,7 +739,7 @@
             cell.empty().html(tmpl(dataItem));
         },
 
-        deleteRow: function(row) {
+        removeRow: function(row) {
             var that = this, model;
 
             row = $(row).hide();
