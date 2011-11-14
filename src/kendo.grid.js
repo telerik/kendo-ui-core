@@ -893,10 +893,6 @@
             if (isPlainObject(dataSource)) {
                 extend(dataSource, { table: that.table, fields: that.columns });
 
-                if (options.data) {
-                    dataSource.data = options.data;
-                }
-
                 pageable = options.pageable;
 
                 if (isPlainObject(pageable) && pageable.pageSize !== undefined) {
@@ -948,8 +944,9 @@
         _columns: function(columns) {
             var that = this,
                 table = that.table,
+                encoded,
                 cols = table.find("col"),
-                datasource = that.options.dataSource;
+                dataSource = that.options.dataSource;
 
             // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
             columns = columns.length ? columns : map(table.find("th"), function(th, idx) {
@@ -967,11 +964,11 @@
                 };
             });
 
-            var autoEncodeColumns = ($("tbody tr", that.table).length > 0 && !that.options.data && (!datasource || !datasource.transport)) ? false : true;
+            encoded = !(that.table.find("tbody tr").length > 0 && (!dataSource || !dataSource.transport));
 
             that.columns = map(columns, function(column) {
                 column = typeof column === STRING ? { field: column } : column;
-                return extend({ encoded: autoEncodeColumns }, column);
+                return extend({ encoded: encoded }, column);
             });
         },
 
