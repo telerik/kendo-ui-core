@@ -133,23 +133,14 @@
         _height: function(length) {
             if (length) {
                 var that = this,
-                    ul = that.ul,
                     list = that.list,
                     parent = list.parent(".k-animation-container"),
                     height = that.options.height;
 
-                if (that.popup.visible()) {
-                    list.height(ul[0].scrollHeight > height ? height : "auto");
-                    parent.height(height);
-                } else {
-                    list.show()
-                        .height(ul[0].scrollHeight > height ? height : "auto")
-                        .hide();
-
-                    if (parent[0]) {
-                        parent.show().height(height).hide();
-                    }
-                }
+                list.add(parent)
+                    .show()
+                    .height(that.ul[0].scrollHeight > height ? height : "auto")
+                    .hide();
             }
         },
 
