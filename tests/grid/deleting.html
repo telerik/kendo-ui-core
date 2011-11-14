@@ -120,6 +120,46 @@
 
                 ok(!table.parent().find(".k-button>.k-delete").length);
             });
+
+            test("deleteRow raises remove event", function() {
+                var called = false,
+                    grid = setup({
+                        remove: function() {
+                            called = true;
+                        }
+                    });
+
+                grid.deleteRow(table.find("tbody>tr:first"));
+
+                ok(called);
+            });
+
+            test("dataSource is not called if remove event is called", function() {
+                var grid = setup({
+                        remove: function(e) {
+                            e.preventDefault();
+                        }
+                    }),
+                    removeMethod = stub(dataSource, "remove");
+
+                grid.deleteRow(table.find("tbody>tr:first"));
+
+                ok(!removeMethod.calls("remove"));
+            });
+
+            test("deleteRow raises remove event passing the model and row element", function() {
+                var args,
+                    grid = setup({
+                        remove: function() {
+                           args = arguments[0];
+                        }
+                    });
+
+                grid.deleteRow(table.find("tbody>tr:first"));
+
+                ok(args.row.length);
+                ok(args.model instanceof Model);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
