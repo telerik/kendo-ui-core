@@ -36,7 +36,9 @@
         },
 
         _release: function(e) {
-            this.trigger(CLICK);
+            if (this.trigger(CLICK, {target: e.target})) {
+                e.preventDefault();
+            };
         },
 
         _wrap: function() {

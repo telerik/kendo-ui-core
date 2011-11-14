@@ -121,6 +121,41 @@
                 item.trigger(kendo.support.mousedown);
                 ok(!item.is(".km-state-active"), "list item is not marked as active");
             });
+
+            test("handles contents' click events", function() {
+                expect(2);
+
+                var dom = $('<ul><li><a href="#">Foo</a></li></ul>'),
+                    link = dom.find("li>a");
+
+                var listView = new ListView(dom);
+
+                listView.bind("click", function(e) {
+                    equal(e.target, link[0], "event passes the clicked dom element");
+                    equal(e.currentTarget, link.parent()[0], "event passes the current item");
+                });
+
+                link.trigger(kendo.support.mousedown);
+                link.trigger(kendo.support.mouseup);
+            });
+
+            test("Allows event cancelation", function() {
+                expect(1);
+                var dom = $('<ul><li><a href="#">Foo</a></li></ul>'),
+                    link = dom.find("li>a");
+
+                var listView = new ListView(dom);
+
+                listView.bind("click", function(e) {
+                    e.preventDefault();
+                });
+
+                dom.bind(kendo.support.mouseup, function(e) {
+                    ok(e.isDefaultPrevented());
+                });
+
+                link.trigger(kendo.support.mouseup);
+            });
         </script>
     </body>
 </html>

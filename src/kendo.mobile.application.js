@@ -67,14 +67,16 @@
 
     function appLinkMouseUp(e) {
         var link = $(e.currentTarget),
-        href = link.attr("href");
+            href = link.attr("href");
 
-        // Prevent iOS address bar progress display for in app navigation
-        link.attr("href", "#!");
-        setTimeout(function() { link.attr("href", href) });
+        if (!e.isDefaultPrevented()) {
+            // Prevent iOS address bar progress display for in app navigation
+            link.attr("href", "#!");
+            setTimeout(function() { link.attr("href", href) });
 
-        kendo.application.navigate(href);
-        e.preventDefault();
+            kendo.application.navigate(href);
+            e.preventDefault();
+        }
     }
 
     function appLinkClick(e) {
