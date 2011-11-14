@@ -4938,7 +4938,7 @@
 
     function deepExtend(destination) {
         var i = 1,
-          length = arguments.length;
+            length = arguments.length;
 
         for (i = 1; i < length; i++) {
             deepExtendOne(destination, arguments[i]);
@@ -4948,7 +4948,10 @@
     }
 
     function deepExtendOne(destination, source) {
-        var property, propValue, propType, destProp;
+        var property,
+            propValue,
+            propType,
+            destProp;
 
         for (property in source) {
             propValue = source[property];
