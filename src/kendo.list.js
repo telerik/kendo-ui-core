@@ -7,6 +7,7 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
+        keys = kendo.keys,
         ID = "id",
         LI = "li",
         CHANGE = "change",
@@ -399,7 +400,6 @@
         _move: function(e) {
             var that = this,
                 key = e.keyCode,
-                keys = kendo.keys,
                 ul = that.ul[0],
                 current = that._current,
                 down = key === keys.DOWN,

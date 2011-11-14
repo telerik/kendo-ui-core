@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TimePicker Initialization</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.timepicker.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">TimePicker Initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var TimeView = kendo.TimeView,
+                MIDNIGHT = new Date(0, 0, 0, 0, 0, 0),
+                div, input;
+
+            module("kendo.ui.TimePicker initialization", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            test("TimeView creates popup", function() {
+                var tv = new TimeView({
+                    anchor: input,
+                    format: "hh:mm tt",
+                    min: MIDNIGHT,
+                    max: MIDNIGHT
+                });
+
+                ok(tv.popup);
+                ok(tv.popup.element.is("div"));
+                ok(tv.popup.element.hasClass("k-list-container"));
+                ok(tv.popup.element.children(":first").is("ul"));
+                ok(tv.popup.element.children(":first").hasClass("k-list k-reset"));
+                equal(tv.popup.options.anchor, input);
+            });
+
+            test("TimeView create template function", function() {
+                var tv = new TimeView({
+                        format: "hh:mm tt",
+                        anchor: input,
+                        min: MIDNIGHT,
+                        max: MIDNIGHT
+                    }),
+                    date = new Date(2000, 10, 10, 10, 10, 0);
+
+                equal(tv.template(kendo.toString(date, "hh:mm tt")), '<li class="k-item" unselectable="on">' + kendo.toString(date, "hh:mm tt") + '</li>');
+            });
+
+            test("TimeView wire required events of UL", function() {
+                var options = {
+                    anchor: input,
+                    format: "hh:mm tt",
+                    clearBlurTimeout: function () { }
+                },
+                tv = new TimeView(options);
+
+                ok(tv.ul.data("events").click);
+                ok(tv.ul.data("events").mousedown);
+                ok(tv.ul.data("events").mouseenter);
+                ok(tv.ul.data("events").mouseleave);
+            });
+
+            //TimePicker
+            test("_wrapper() wraps input element", function() {
+                input.css("width", "200");
+
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                ok(input.parent().hasClass("k-picker-wrap k-state-default"));
+                equal(timepicker.wrapper.attr("class"), "k-widget k-timepicker k-header");
+                equal(timepicker.wrapper.width(), 200);
+            });
+
+            test("init() should add k-input to the element", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                ok(timepicker.element.hasClass("k-input"));
+            });
+
+            test("_icon put create picker button", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker"),
+                    icon = timepicker.wrapper.find(".k-select");
+
+                ok(icon);
+                ok(icon.is("span"));
+                ok(icon.hasClass("k-select"));
+                ok(icon.children().is("span"));
+                ok(icon.children().hasClass("k-icon k-icon-clock"));
+                ok(icon.children().html());
+            });
+
+            test("timeView is defined", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                ok(timepicker.timeView);
+            });
+
+            test("timeView should has correct options", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker"),
+                    timeView = timepicker.timeView;
+
+                equal(timeView.options.anchor, timepicker.wrapper);
+                equal(timeView.options.min, timepicker.options.min);
+                equal(timeView.options.max, timepicker.options.max);
+                equal(timeView.options.format, timepicker.options.format);
+                equal(timeView.options.interval, timepicker.options.interval);
+            });
+
+            asyncTest("timepicker wire icon click", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.close();
+                timepicker._arrow.click();
+                setTimeout(function() {
+                    ok(timepicker.timeView.popup.visible());
+                    start();
+                }, 200);
+            });
+
+       </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
