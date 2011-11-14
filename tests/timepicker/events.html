@@ -79,6 +79,23 @@
                 timepicker._change("10:00");
             });
 
+            asyncTest("do not raise change event if no changes", function() {
+                var timepicker = input.kendoTimePicker({
+                                            value: new Date(2000, 10, 10, 10, 0, 0),
+                                            change: function() {
+                                                ok(false);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoTimePicker");
+
+                input.focus().blur();
+
+                setTimeout(function() {
+                    start();
+                }, 300);
+            });
+
             asyncTest("click li raises change event", function() {
                 var timepicker = input.kendoTimePicker({
                                             change: function() {
