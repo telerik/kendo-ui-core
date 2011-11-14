@@ -88,19 +88,20 @@
                 equal(dom.children().first().html(), "foo");
             });
 
-            var dom, dataSource, listView, subList;
+            var dom, dataSource, listView, subList, data;
+
             module("grouped datasource", {
                 setup: function() {
+                    data = [{foo: "Foo", bar: "Bar"}, {foo: "Foo", bar: "Baz"}];
                     dom = $("<ul/>");
-                    var data = [{foo: "Foo", bar: "Bar"}, {foo: "Foo", bar: "Baz"}];
+
 
                     dataSource = new kendo.data.DataSource({data: data, group: {field: "foo"}});
-                    listView = new ListView(dom, {dataSource: dataSource, template: "${data.bar}"});
+                    listView = new ListView(dom, {dataSource: dataSource, template: "${bar}", headerTemplate: "<i>${value}</i>"});
                     subList = dom.find("li>ul");
                 },
-                teardown: function() {
 
-                }
+                teardown: function() { }
             });
 
             test("detects grouped datasource", function() {
@@ -111,7 +112,7 @@
                 ok(!dom.is(".km-list"));
             });
 
-            test("Uses group values for headers", function() {
+            test("uses group values for headers", function() {
                 equal(dom.find("li").contents().eq(0).text(), "Foo");
             });
 
@@ -124,6 +125,16 @@
                 equal(subList.find("li").length, 2);
                 equal(subList.find("li").eq(0).text(), "Bar");
                 equal(subList.find("li").eq(1).text(), "Baz");
+            });
+
+            test("accepts custom header template", function() {
+                ok(dom.find("li").eq(0).children(0).is("i"), "item has custom header");
+            });
+
+            test("accepts function as a custom header template", function() {
+                dom = $("<ul/>");
+                listView = new ListView(dom, {dataSource: dataSource, template: "${bar}", headerTemplate: function(data) { return "<i>" + data + "</i>" }});
+                ok(dom.find("li").eq(0).children(0).is("i"), "item has custom header");
             });
         </script>
     </body>
