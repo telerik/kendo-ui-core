@@ -934,10 +934,17 @@
 
         _sortable: function() {
             var that = this,
+                columns = that.columns,
                 sortable = that.options.sortable;
 
             if (sortable) {
-                that.thead.find("th").kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
+                that.thead
+                    .find("th:not(.k-hierarchy-cell)")
+                    .each(function(index) {
+                        if (columns[index].sortable !== false) {
+                            $(this).kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
+                        }
+                    })
             }
         },
 
@@ -951,6 +958,7 @@
             // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
             columns = columns.length ? columns : map(table.find("th"), function(th, idx) {
                 var th = $(th),
+                    sortable = th.data("sortable")
                     field = th.data("field");
 
                 if (!field) {
@@ -959,6 +967,7 @@
 
                 return {
                     field: field,
+                    sortable: sortable,
                     template: th.data("template"),
                     width: cols.eq(idx).css("width")
                 };
@@ -1205,6 +1214,7 @@
 
                 for (idx = 0, length = columns.length; idx < length; idx++) {
                     th = columns[idx];
+
                     html += "<th data-field='" + th.field + "'>" + (th.title || th.field) + "</th>";
                 }
 
