@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid Toolbar</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.pageable.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.groupable.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.validatable.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Grid Toolbar</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                table,
+                DataSource = kendo.data.DataSource,
+                Model = kendo.data.Model,
+                toolbar,
+                dataSource;
+
+            function setup(options) {
+                options = $.extend({}, {
+                editable: true,
+                dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "foo",
+                                fields: {
+                                    name: "name",
+                                    foo: "foo"
+                                }
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                    })
+                }, options);
+                dataSource = options.dataSource;
+
+                var grid = table.kendoGrid(options).data("kendoGrid");
+                toolbar = grid.wrapper.find(".k-toolbar");
+
+                return grid;
+            }
+
+            module("grid toolbar", {
+                setup: function() {
+                    table = document.createElement("table");
+                    document.body.appendChild(table);
+
+                    table = $(table);
+                },
+                teardown: function() {
+                    table.closest(".k-grid").remove();
+                }
+            });
+
+            test("div is appended before the table when toolbar is enabled", function() {
+                var grid = setup({ toolbar: true }),
+                    wrapper = grid.wrapper;
+
+                equal(wrapper.find(".k-toolbar").length, 1);
+
+                ok(wrapper.children().first().hasClass("k-toolbar"));
+            });
+
+            test("div is appended before the table when toolbar is enabled without scrolling", function() {
+                var grid = setup({ toolbar: true, scrollable: false }),
+                    wrapper = grid.wrapper;
+
+                equal(wrapper.find(".k-toolbar").length, 1);
+
+                ok(wrapper.children().first().hasClass("k-toolbar"));
+            });
+
+            test("toolbar template", function() {
+                setup({ toolbar: { template: "foo" } });
+
+                equal(toolbar.text(), "foo");
+            });
+
+            test("toolbar as kendo template", function() {
+                setup({ toolbar: { template: "#= 1+2 #" } });
+
+                equal(toolbar.text(), "3");
+            });
+
+            test("toolbar as kendo template grid is passed as parameter", function() {
+                setup({ toolbar: { template: "#= grid.wrapper[0].className #" } });
+
+                equal(toolbar.text(), "k-grid k-widget");
+            });
+
+            test("toolbar template as function", function() {
+                setup({
+                    toolbar: {
+                        template: function() {
+                            return "bar";
+                        }
+                } })
+
+                equal(toolbar.text(), "bar");
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

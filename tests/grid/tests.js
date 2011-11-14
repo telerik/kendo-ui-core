@@ -46,5 +46,9 @@ tests.push(
     {
         page: "grid/inserting.html",
         title: "inserting"
+    },
+    {
+        page: "grid/toolbar.html",
+        title: "toolbar"
     }
 );
