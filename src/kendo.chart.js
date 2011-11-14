@@ -4979,21 +4979,23 @@
             length = arguments.length,
             source,
             property,
-            propValue;
+            propValue,
+            propType;
 
         for (i = 1; i < length; i++) {
             source = arguments[i];
 
             for (property in source) {
                 propValue = source[property];
-                if (typeof propValue === OBJECT && propValue !== null && propValue.constructor !== Array) {
+                propType = typeof propValue;
+                if (propType === OBJECT && propValue !== null && propValue.constructor !== Array) {
                     if (typeof(destination[property]) === OBJECT) {
                         destination[property] = destination[property] || {};
                     } else {
                         destination[property] = {};
                     }
                     deepExtend(destination[property], propValue);
-                } else if (defined(propValue)) {
+                } else if (propType !== UNDEFINED) {
                     destination[property] = propValue;
                 }
             }
