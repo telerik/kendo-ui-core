@@ -349,7 +349,7 @@
                 value;
 
             for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
-                var currentSeries = series[seriesIdx];
+                currentSeries = series[seriesIdx];
                 if (currentSeries.field || (currentSeries.xField && currentSeries.yField)) {
                     currentSeries.data = [];
                     currentSeries.dataItems = [];
@@ -2038,7 +2038,6 @@
             var stack = this,
                 options = stack.options,
                 isVertical = options.isVertical,
-                isReversed = options.isReversed,
                 positionAxis = isVertical ? X : Y,
                 stackAxis = isVertical ? Y : X,
                 stackBase = targetBox[stackAxis + 2],
@@ -3003,8 +3002,7 @@
         },
 
         createPoint: function(value, series, seriesIx) {
-            var chart = this,
-                options = chart.options;
+            var chart = this;
 
             if (!defined(value.x) || !defined(value.y)) {
                 return null;
@@ -3034,11 +3032,8 @@
 
         reflow: function(targetBox) {
             var chart = this,
-                options = chart.options,
                 plotArea = chart.plotArea,
                 chartPoints = chart.points,
-                axisX = plotArea.axisX,
-                axisY = plotArea.axisY,
                 pointIx = 0,
                 point;
 
@@ -3199,14 +3194,12 @@
         },
 
         reflow: function(targetBox) {
-            var segment = this,
-                options = segment.options,
-                childBox;
+            var segment = this;
 
             segment.render();
 
             segment.box = targetBox;
-            childBox = targetBox.clone();
+            targetBox.clone();
 
             segment.reflowLabel();
         },
@@ -3218,10 +3211,8 @@
                 label = segment.label,
                 labelsOptions = options.labels,
                 labelsDistance = labelsOptions.distance,
-                startAngle = segment.sector.startAngle % 90,
                 lp,
                 x1,
-                y1,
                 angle = sector.middle(),
                 labelWidth,
                 labelHeight;
@@ -3254,7 +3245,6 @@
         getViewElements: function(view) {
             var segment = this,
                 sector = segment.sector,
-                segmentID = uniqueId(),
                 options = segment.options,
                 borderOptions = options.border || {},
                 border = borderOptions.width > 0 ? {
@@ -3365,12 +3355,9 @@
                 currentName,
                 currentSeries,
                 currentData,
-                currentColor,
-                totalAngle,
                 seriesIx,
                 angle,
                 data,
-                total,
                 anglePerValue,
                 value,
                 explode,
@@ -3417,24 +3404,12 @@
             chart.segments.push(segment);
         },
 
-        addValue: function(value, sector, fields) {
-            var chart = this,
-                segment;
-
-            segment = new PieSegment(value, sector, fields.series);
-            segment.options.id = uniqueId();
-            extend(segment, fields);
-            chart.append(segment);
-            chart.segments.push(segment);
-        },
-
         pointValue: function(point) {
             return defined(point.value) ? point.value : point;
         },
 
         pointData: function(series, index) {
             var chart = this,
-                dataItems = series.dataItems,
                 data = series.data[index];
 
             return {
@@ -3473,7 +3448,6 @@
         reflow: function(targetBox) {
             var chart = this,
                 options = chart.options,
-                padding = options.padding,
                 box = targetBox.clone(),
                 minWidth = math.min(box.width(), box.height()),
                 space = 5,
@@ -3607,7 +3581,6 @@
 
         reflowLabels: function(distances, labels) {
             var chart = this,
-                connectors = chart.options,
                 segments = chart.segments,
                 segment = segments[0],
                 sector = segment.sector,
@@ -3766,7 +3739,6 @@
             reverse = (reverse) ? -1 : 1;
 
             return function(a, b) {
-                var startAngle = a.parent.sector.startAngle;
                 a = (a.parent.sector.middle() + 270) % 360;
                 b = (b.parent.sector.middle() + 270) % 360;
                 return (a - b) * reverse;
@@ -3954,9 +3926,6 @@
         createScatterChart: function(series) {
             var plotArea = this,
                 options = plotArea.options,
-                firstSeries = series[0],
-                categoryAxis = options.categoryAxis,
-                categories = categoryAxis.categories,
                 // Override the original invertAxes
                 scatterChart = new ScatterChart(plotArea, { series: series }),
                 scatterChartRange = scatterChart.valueRange() || options.range;
@@ -3971,9 +3940,6 @@
         createScatterLineChart: function(series) {
             var plotArea = this,
                 options = plotArea.options,
-                firstSeries = series[0],
-                categoryAxis = options.categoryAxis,
-                categories = categoryAxis.categories,
                 // Override the original invertAxes
                 scatterLineChart = new ScatterLineChart(plotArea, { series: series }),
                 scatterLineChartRange = scatterLineChart.valueRange() || options.range;
@@ -4129,7 +4095,6 @@
                 secAxisPos = round(crossingSlot[isVertical ? "y1" : "x1"]),
                 lineStart = boundaries[0],
                 lineEnd = boundaries.pop(),
-                linePos,
                 majorTicks = axis.getMajorTickPositions(),
                 gridLines = [],
                 gridLine = function (pos, options) {
@@ -4297,8 +4262,7 @@
                 decorators = view.decorators,
                 i,
                 length = decorators.length,
-                currentDecorator,
-                j;
+                currentDecorator;
 
             for (i = 0; i < length; i++) {
                 currentDecorator = decorators[i];
@@ -4379,7 +4343,6 @@
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
-                box = element.options.box,
                 animation = element.options.animation;
 
             if (animation && view.options.transitions) {
@@ -4645,7 +4608,6 @@
 
         show: function(point) {
             var highlight = this,
-                chart = highlight.chart,
                 view = highlight.view,
                 viewElement = highlight.viewElement,
                 outline,
@@ -5007,14 +4969,11 @@
     function intersection(a1, a2, b1, b2) {
         var result,
             ua_t = (b2.x - b1.x) * (a1.y - b1.y) - (b2.y - b1.y) * (a1.x - b1.x),
-            ub_t = (a2.x - a1.x) * (a1.y - b1.y) - (a2.y - a1.y) * (a1.x - b1.x),
             u_b = (b2.y - b1.y) * (a2.x - a1.x) - (b2.x - b1.x) * (a2.y - a1.y),
-            ua,
-            ub;
+            ua;
 
         if (u_b != 0) {
             ua = (ua_t / u_b);
-            ub = (ub_t / u_b);
 
             result = new Point2D(
                 a1.x + ua * (a2.x - a1.x),
@@ -5066,7 +5025,6 @@
         var series = options.series,
             i,
             seriesLength = series.length,
-            currentSeries,
             colors = options.seriesColors || [];
 
         for (i = 0; i < seriesLength; i++) {
