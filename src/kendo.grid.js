@@ -33,7 +33,8 @@
         HEIGHT = "height",
         TABINDEX = "tabIndex",
         FUNCTION = "function",
-        STRING = "string";
+        STRING = "string",
+        DELETECONFIRM = "Are you sure you want to delete this record?";
 
     var VirtualScrollable =  Widget.extend({
         init: function(element, options) {
@@ -560,8 +561,8 @@
             autoBind: true,
             scrollable: true,
             groupable: false,
-            dataSource: {} /*,
-            toolBar: { // or true|false
+            dataSource: {}
+            /*toolBar: { // or true|false
                 commands: [
                     "create",
                     submit: { //?
@@ -577,13 +578,7 @@
                         }
                 }],
                 template: "Show my custom template"
-            },
-            editable: { // or true|false
-                confirmDelete: "hu?", // false
-                create: false,
-                destroy: false,
-                update: false
-            } */
+            }, */
         },
 
         _element: function() {
@@ -614,6 +609,7 @@
                 cell,
                 model,
                 column,
+                editable = that.options.editable,
                 handler = function () {
                     var target = document.activeElement,
                         cell = that._editContainer;
@@ -625,61 +621,64 @@
                     }
                 };
 
-            if (that.options.editable) {
+            if (editable) {
 
-                that.wrapper.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell)", CLICK, function(e) {
-                    var td = $(this)
+                if (editable.update !== false) {
+                    that.wrapper.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell)", CLICK, function(e) {
+                        var td = $(this)
 
-                    if (td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
-                        return;
-                    }
+                        if (td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
+                            return;
+                        }
 
-                    if (that.editable) {
-                        if (that.editable.end()) {
-                            that._closeCell();
+                        if (that.editable) {
+                            if (that.editable.end()) {
+                                that._closeCell();
+                                that._editCell(td);
+                            }
+                        } else {
                             that._editCell(td);
                         }
-                    } else {
-                        that._editCell(td);
-                    }
 
-                });
+                    });
 
-                that.wrapper.bind("focusin", function(e) {
-                    clearTimeout(that.timer);
-                    that.timer = null;
-                });
+                    that.wrapper.bind("focusin", function(e) {
+                        clearTimeout(that.timer);
+                        that.timer = null;
+                    });
+                    that.wrapper.bind("focusout", function(e) {
+                        that.timer = setTimeout(handler, 1);
+                    });
+                }
 
-                that.wrapper.bind("focusout", function(e) {
-                    that.timer = setTimeout(handler, 1);
-                });
+                if (editable.destroy !== false) {
+                    //:visible is required, otherwise mouseenter will be triggerd twice when tr is deleted in Google Chrome
+                    that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible", {
+                        mouseenter: function(e) {
+                            var tr = $(this), button;
 
-                //:visible is required, otherwise mouseenter will be triggerd twice when tr is deleted in Google Chrome
-                that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible", {
-                    mouseenter: function(e) {
-                        var tr = $(this), button;
+                            button = $('<a class="k-button k-button-icon"><span class="k-icon k-delete"></span></a>')
+                                .css({
+                                    position: "absolute",
+                                    visibility: "hidden"
+                                })
+                                .click(function(ev) {
+                                    that.removeRow(tr);
+                                    ev.stopPropagation();
+                                })
+                                .appendTo(tr.find(">td:visible:first"));
 
-                        button = $('<a class="k-button k-button-icon"><span class="k-icon k-delete"></span></a>')
-                            .css({
-                                position: "absolute",
-                                visibility: "hidden"
-                            })
-                            .click(function(ev) {
-                                that.removeRow(tr);
-                                ev.stopPropagation();
-                            })
-                            .appendTo(tr.find(">td:visible:first"));
-
-                        button.css({
-                            visibility: "visible",
-                            top: tr.position().top + ((tr.outerHeight() - button.outerHeight(true)) / 2),
-                            left: $(document).scrollLeft() + tr.width() - button.outerWidth(true)
-                        });
-                    },
-                    mouseleave: function(e) {
-                        that.wrapper.find(".k-button:has(.k-delete)").remove();
-                    }
-                });
+                            button.css({
+                                visibility: "visible",
+                                top: tr.position().top + ((tr.outerHeight() - button.outerHeight(true)) / 2),
+                                left: $(document).scrollLeft() + tr.width() - button.outerWidth(true)
+                            });
+                        },
+                        mouseleave: function(e) {
+                            that.wrapper.find(".k-button:has(.k-delete)").remove();
+                        }
+                    });
+                }
             }
         },
 
@@ -740,13 +739,30 @@
         },
 
         removeRow: function(row) {
-            var that = this, model;
+            var that = this,
+                model;
+
+            if (!that._confirmation()) {
+                return;
+            }
 
             row = $(row).hide();
             model = that._modelForContainer(row);
+
             if (model && !that.trigger(REMOVE, { row: row, model: model })) {
                 that.dataSource.remove(model);
             }
+        },
+
+        _showMessage: function(text) {
+            return confirm(text);
+        },
+
+        _confirmation: function() {
+            var that = this;
+                confirmation = that.options.editable === true ? DELETECONFIRM : that.options.editable.confirmation;
+
+            return confirmation !== false ? that._showMessage(confirmation) : true;
         },
 
         addRow: function() {

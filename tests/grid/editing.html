@@ -77,6 +77,13 @@
                 ok(!cell.find(":input").length);
             });
 
+            test("cell click does not enter edit mode if update is false", function() {
+                setup({ editable: { update: false } } );
+                var cell = table.find("td:first").click();
+
+                ok(!cell.find(":input").length);
+            });
+
             test("correct model is passed to the editable instance", function() {
                 setup();
                 var cell = table.find("td:first").click();
