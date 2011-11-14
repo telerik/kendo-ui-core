@@ -4938,28 +4938,31 @@
 
     function deepExtend(destination) {
         var i = 1,
-            length = arguments.length,
-            source,
-            property,
-            propValue,
-            propType;
+          length = arguments.length;
 
         for (i = 1; i < length; i++) {
-            source = arguments[i];
+            deepExtendOne(destination, arguments[i]);
+        }
 
-            for (property in source) {
-                propValue = source[property];
-                propType = typeof propValue;
-                if (propType === OBJECT && propValue !== null && propValue.constructor !== Array) {
-                    if (typeof(destination[property]) === OBJECT) {
-                        destination[property] = destination[property] || {};
-                    } else {
-                        destination[property] = {};
-                    }
-                    deepExtend(destination[property], propValue);
-                } else if (propType !== UNDEFINED) {
-                    destination[property] = propValue;
+        return destination;
+    }
+
+    function deepExtendOne(destination, source) {
+        var property, propValue, propType, destProp;
+
+        for (property in source) {
+            propValue = source[property];
+            propType = typeof propValue;
+            if (propType === OBJECT && propValue !== null && propValue.constructor !== Array) {
+                destProp = destination[property];
+                if (typeof (destProp) === OBJECT) {
+                    destination[property] = destProp || {};
+                } else {
+                    destination[property] = {};
                 }
+                deepExtendOne(destination[property], propValue);
+            } else if (propType !== UNDEFINED) {
+                destination[property] = propValue;
             }
         }
 
