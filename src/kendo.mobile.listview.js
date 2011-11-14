@@ -51,7 +51,7 @@
             if (options.dataSource) {
                 that._template();
                 that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that.refresh, that));
-                that.dataSource.query();
+                that.dataSource.fetch();
             } else {
                 that._style();
             }
@@ -59,7 +59,9 @@
 
         _template: function() {
             var that = this,
-                template = that.options.template;
+                groupTemplateProxy,
+                template = that.options.template,
+                headerTemplate = that.options.headerTemplate;
 
             if (typeof template === "function") {
                 that.template = $.proxy(kendo.template("<li>#=this.tmpl(data)#</li>"), { tmpl: template });
@@ -67,7 +69,16 @@
                 that.template = kendo.template("<li>" + template + "</li>");
             }
 
-            that.groupTemplate = $.proxy(kendo.template("<li>${data.value}<ul>#= kendo.render(this.template, data.items)#</ul></li>"), that);
+            groupTemplateProxy = { template: that.template }
+
+            if (typeof headerTemplate === "function") {
+                groupTemplateProxy.headerTemplate = kendo.template("#=this._headerTemplate(data)#");
+                groupTemplateProxy._headerTemplate = headerTemplate;
+            } else {
+                groupTemplateProxy.headerTemplate = kendo.template(headerTemplate);
+            }
+
+            that.groupTemplate = $.proxy(kendo.template("<li>#= this.headerTemplate(data) #<ul>#= kendo.render(this.template, data.items)#</ul></li>"), groupTemplateProxy);
         },
 
         refresh: function() {
@@ -113,6 +124,7 @@
             selector: "[data-kendo-role=listview]",
             type: "flat",
             template: "${data}",
+            headerTemplate: "${value}",
             style: ""
         }
     });
