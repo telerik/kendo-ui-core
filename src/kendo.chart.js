@@ -4918,7 +4918,7 @@
     }
 
     function getSpacing(value) {
-        var spacing = {};
+        var spacing = { top: 0, right: 0, bottom: 0, left: 0 };
 
         if (typeof(value) === "number") {
             spacing[TOP] = spacing[RIGHT] = spacing[BOTTOM] = spacing[LEFT] = value;
