@@ -11,6 +11,7 @@
         map = $.map,
         isArray = $.isArray,
         proxy = $.proxy,
+        isFunction = $.isFunction,
         math = Math,
         REQUESTSTART = "requestStart",
         ERROR = "error",
@@ -479,6 +480,8 @@
 
             that._groupable();
 
+            that._toolbar();
+
             that.bind([
                 /**
                  * Fires when the grid selection has changed.
@@ -562,15 +565,16 @@
             scrollable: true,
             groupable: false,
             dataSource: {}
-            /*toolBar: { // or true|false
+            /*toolbar: { // or true|false
                 commands: [
                     "create",
-                    submit: { //?
+                    {
+                        command: "submit",
                         text: "Submit the changes ASAP",
                         type: "image"
                     },
-                    "cancel" // should we have the cancel as the changes are not in the context of the grid and there is no way to reset deleted records
-                    custom: {
+                    "cancel", // should we have the cancel as the changes are not in the context of the grid and there is no way to reset deleted records
+                    {
                         type: "button",
                         text: "MyCustomCommand",
                         click: function() {
@@ -775,6 +779,23 @@
                 if (cell.length) {
                     that._editCell(cell);
                 }
+            }
+        },
+
+        _toolbar: function() {
+            var that = this,
+                wrapper = that.wrapper,
+                toolbar = that.options.toolbar,
+                template;
+
+            if (toolbar) {
+                template = toolbar.template;
+
+                template =  kendo.template(isFunction(template) ?  template() : template || "", { useWithBlock: false, paramName: "grid" });
+
+                $('<div class="k-toolbar" />')
+                    .html(template(that))
+                    .prependTo(wrapper);
             }
         },
 
