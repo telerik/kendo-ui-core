@@ -109,9 +109,35 @@
                         template: function() {
                             return "bar";
                         }
-                } })
+                } });
 
                 equal(toolbar.text(), "bar");
+            });
+
+            test("toolbar create command renders add button", function() {
+                setup({
+                    toolbar: {
+                        commands: ["create"]
+                    }
+                });
+
+                var button = toolbar.children().first();
+                ok(button.is("a"));
+                ok(button.hasClass("k-grid-add"));
+                equal(button.text(), "create");
+            });
+
+            test("toolbar create command from settings", function() {
+                setup({
+                    toolbar: {
+                        commands: [ { command: "create", text: "foo" }]
+                    }
+                });
+
+                var button = toolbar.children().first();
+                ok(button.is("a"));
+                ok(button.hasClass("k-grid-add"));
+                equal(button.text(), "foo");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

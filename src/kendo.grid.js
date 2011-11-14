@@ -212,6 +212,21 @@
         return new Array(count + 1).join('<td class="k-group-cell"></td>');
     }
 
+    var commandBuilder = {
+        create: function(options) {
+            return '<a href="#" class="k-button k-grid-add">' + (options.text || options) + '</a>';
+        },
+        cancel: function(options) {
+            return "a";
+        },
+        submit: function(options) {
+            return "a";
+        },
+        custom: function(options) {
+            return "a";
+        }
+    }
+
     /**
      *  @name kendo.ui.Grid.Description
      *
@@ -789,14 +804,35 @@
                 template;
 
             if (toolbar) {
-                template = toolbar.template;
-
-                template =  kendo.template(isFunction(template) ?  template() : template || "", { useWithBlock: false, paramName: "grid" });
-
                 $('<div class="k-toolbar" />')
-                    .html(template(that))
+                    .html(that._toolbarTmpl(toolbar))
                     .prependTo(wrapper);
             }
+        },
+
+        _toolbarTmpl: function(toolbar) {
+            var that = this,
+                commands = toolbar.commands || [],
+                template = isFunction(toolbar.template) ?  toolbar.template() : (toolbar.template || ""),
+                isCustom = template !== "",
+                idx,
+                length,
+                state = {},
+                command,
+                commandName;
+
+            for (idx = 0, length = commands.length; idx < length; idx++) {
+                command = commands[idx];
+                commandName = isPlainObject(command) ? command.command : command;
+
+                if (!isCustom) {
+                    template += "#=this." + commandName + "(options['" + commandName + "']) #";
+                }
+
+                state[commandName] = command;
+            }
+
+            return proxy(kendo.template(template), commandBuilder)({ options: state, grid: that });
         },
 
         _groupable: function() {
