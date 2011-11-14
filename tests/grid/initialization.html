@@ -8,6 +8,7 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.pageable.js"></script>
+        <script src="../../src/kendo.sortable.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -368,9 +369,40 @@
             test("initialization from rendered table should disable encoding", function() {
                 table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
                 var grid = new Grid(table, {scrollable: false});
-                
+
                 equal(grid.columns[0].encoded, false);
             });
+
+            test("sortable columns", function() {
+                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                var grid = new Grid(table, {
+                    sortable: true
+                });
+
+                ok(grid.thead.find("th").data("kendoSortable"), "Column is not sortable");
+            });
+
+            test("unsortable column from column settings", function() {
+                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                var grid = new Grid(table, {
+                    sortable: true,
+                    columns: [{
+                        sortable: false
+                    }]
+                });
+
+                equal(grid.thead.find("th").data("kendoSortable"), undefined, "Column is not sortable");
+            });
+
+            test("unsortable column from html attribute", function() {
+                table.innerHTML = "<thead><tr><th data-sortable=false data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                var grid = new Grid(table, {
+                    sortable: true
+                });
+
+                equal(grid.thead.find("th").data("kendoSortable"), undefined, "Column is not sortable");
+            });
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
