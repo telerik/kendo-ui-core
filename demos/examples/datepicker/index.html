@@ -39,13 +39,51 @@
             <div class="code-sample output">
                 <h4 class="code-title">Output:</h4>
                 <div class="prettyprint">
-                    <input id="datepicker" value="10/10/2011" />
+                    <input id="datepicker" value="10/10/2011" style="width:150px" />
+                </div>
+            </div>
+
+            <h3>Creating a month picker from <code>&lt;input /&gt;</code></h3>
+            <div class="code-sample">
+                <h4 class="code-title">Source:</h4>
+                <pre class="prettyprint">
+&lt;input id="monthpicker" value="10/1/2011"/&gt;
+
+&lt;script&gt;
+    $("#monthpicker").kendoDatePicker({
+        // defines the start view
+        start: "year",
+
+        // defines when the calendar should return date
+        depth: "year",
+
+        // display month and year in the input
+        format: "MMMM yyyy"
+    });
+&lt;/script&gt;
+</pre>
+            </div>
+            <div class="code-sample output">
+                <h4 class="code-title">Output:</h4>
+                <div class="prettyprint">
+                    <input id="monthpicker" value="November 2011" style="width:150px" />
                 </div>
             </div>
             <script>
                 $(document).ready(function() {
                     // create DatePicker from input HTML element
                     $("#datepicker").kendoDatePicker();
+
+                    $("#monthpicker").kendoDatePicker({
+                        // defines the start view
+                        start: "year",
+
+                        // defines when the calendar should return date
+                        depth: "year",
+
+                        // display month and year in the input
+                        format: "MMMM yyyy"
+                    });
                 });
             </script>
 

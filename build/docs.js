@@ -30,6 +30,7 @@ function build() {
         "src/kendo.splitter.js",
         "src/kendo.panelbar.js",
         "src/kendo.tabstrip.js",
+        "src/kendo.timepicker.js",
         "src/kendo.treeview.js",
         "src/kendo.window.js",
         "src/kendo.upload.js",

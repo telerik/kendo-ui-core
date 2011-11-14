@@ -189,10 +189,6 @@ var categories = {
                     url: "datepicker/index.html"
                 },
                 {
-                    text: "Month picker",
-                    url: "datepicker/monthpicker.html"
-                },
-                {
                     text: "Range selection",
                     url: "datepicker/rangeselection.html"
                 },
@@ -422,6 +418,28 @@ var categories = {
                 {
                     text: "API",
                     url: "tabstrip/api.html"
+                }
+            ]
+        },
+        {
+            text: "TimePicker",
+            spriteCssClass: "timepickerIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "timepicker/index.html"
+                },
+                {
+                    text: "Range selection",
+                    url: "timepicker/rangeselection.html"
+                },
+                {
+                    text: "Events",
+                    url: "timepicker/events.html"
+                },
+                {
+                    text: "API",
+                    url: "timepicker/api.html"
                 }
             ]
         },
