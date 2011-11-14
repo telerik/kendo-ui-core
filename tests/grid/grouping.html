@@ -35,12 +35,12 @@
             });
 
             test("groupable instanciate kendo.ui.Groupable", function() {
-                var grid = new Grid(table(), { data:[], groupable: true });
+                var grid = new Grid(table(), { dataSource:[], groupable: true });
                 ok(grid.groupable);
             });
 
             test("groupable creates .k-grouping-header", function() {
-                var grid = new Grid(table(), { data:[], groupable: true }),
+                var grid = new Grid(table(), { dataSource:[], groupable: true }),
                     gridElement = grid.wrapper;
 
                 var groupingHeader = gridElement.find("div.k-grouping-header");
@@ -49,7 +49,7 @@
 
             test("grouping row is created for every group", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo"}, {foo: "bar"}], groupable: true
+                    dataSource:[{foo: "foo"}, {foo: "bar"}], groupable: true
                 });
                 grid.dataSource.group({field: "foo"});
 
@@ -59,7 +59,7 @@
 
             test("first level grouping row colspans is columns + number of groups", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo"}, {foo: "bar"}], groupable: true
+                    dataSource:[{foo: "foo"}, {foo: "bar"}], groupable: true
                 });
                 grid.dataSource.group({field: "foo"});
 
@@ -69,7 +69,7 @@
 
             test("first level grouping row colspans is columns + number of groups and detailView if declared", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo"}, {foo: "bar"}],
+                    dataSource:[{foo: "foo"}, {foo: "bar"}],
                     groupable: true,
                     detailTemplate: "ddd"
                 });
@@ -82,7 +82,7 @@
             test("nesting groups created grouping row for every group", function() {
 
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true
                 });
                 grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
 
@@ -96,7 +96,7 @@
 
             test("nested groups creates group cells for nested grouping rows", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true
                 });
                 grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
 
@@ -106,7 +106,7 @@
 
             test("group cells are created for every data row", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true
                 });
                 grid.dataSource.group([{field: "foo"}]);
 
@@ -116,7 +116,7 @@
 
             test("grouping scrollable grid creates header group cells", function() {
                  var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
                     groupable: true,
                     scrollable: true
                 }),
@@ -131,7 +131,7 @@
 
             test("grouping non-scrollable grid creates header group cells", function() {
                  var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
                     groupable: true,
                     scrollable: false
                 }),
@@ -146,7 +146,7 @@
 
             test("ungroup remove header group cells", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true
                 }),
                 header = grid.thead;
                 grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
@@ -158,7 +158,7 @@
 
             test("ungroup all remove all header group cells", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}], groupable: true
                 }),
                 header = grid.thead;
                 grid.dataSource.group([{field: "foo"}, {field: "bar"}]);
@@ -170,7 +170,7 @@
 
             test("collapseGroup hides all grop data rows", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
                     groupable: true
                 });
 
@@ -185,7 +185,7 @@
 
             test("collapseGroup change button class to k-expand", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
                     groupable: true
                 }),
                 groupingRow;
@@ -199,7 +199,7 @@
 
             test("expandGroup change button class to k-collapse", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
                     groupable: true
                 }),
                 groupingRow;
@@ -214,7 +214,7 @@
 
             test("expandGroup shows all grop data rows", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
                     groupable: true
                 }),
                 groupingRow;
@@ -232,7 +232,7 @@
 
             test("expand parent group does not expand collapsed sub groups", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "foo", bar: "baz"}],
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "foo", bar: "baz"}],
                     groupable: true
                 }),
                 tbody,
@@ -254,7 +254,7 @@
 
             test("grouping non-groupable grid updates html", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "foo", bar: "baz"}],
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "foo", bar: "baz"}],
                     groupable: false
                 });
 
@@ -266,7 +266,7 @@
 
             test("ungrouping non-groupable grid updates html", function() {
                 var grid = new Grid(table(), {
-                    data:[{foo: "foo", bar: "bar"}, {foo: "foo", bar: "baz"}],
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "foo", bar: "baz"}],
                     groupable: false
                 });
 
