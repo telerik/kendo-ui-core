@@ -42,7 +42,7 @@
     * @exampleTitle ComboBox initialization
     * @example
     *   $(document).ready(function(){
-    *       $("#combobox").kendComboBox();
+    *       $("#combobox").kendoComboBox();
     *   });
     *
     * @section
