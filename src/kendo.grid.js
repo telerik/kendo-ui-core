@@ -19,6 +19,7 @@
         FIRST_CELL_SELECTOR = CELL_SELECTOR + ":first",
         EDIT = "edit",
         SAVE = "save",
+        REMOVE = "remove",
         DETAILINIT = "detailInit",
         CHANGE = "change",
         MODELCHANGE = "modelChange",
@@ -526,7 +527,14 @@
                  * @event
                  * @param {Event} e
                  */
-                SAVE
+                SAVE,
+                /**
+                 * Fires before the grid item is removed.
+                 * @name kendo.ui.Grid#remove
+                 * @event
+                 * @param {Event} e
+                 */
+                REMOVE
             ], that.options);
 
             that._thead();
@@ -736,7 +744,7 @@
 
             row = $(row).hide();
             model = that._modelForContainer(row);
-            if (model) {
+            if (model && !that.trigger(REMOVE, { row: row, model: model })) {
                 that.dataSource.remove(model);
             }
         },
