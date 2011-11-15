@@ -9,7 +9,7 @@ var fs = require("fs"),
     examples = require("./examples"),
     spawn = require('child_process').spawn,
 
-    date = new Date(),
+    startDate = new Date(),
     STAT = fs.statSync("./"),
     VERSION = process.argv[2] || kendoBuild.generateVersion(),
     KENDOCDN = process.argv[3] || "http://cdn.kendostatic.com/" + VERSION,
@@ -22,11 +22,23 @@ var fs = require("fs"),
     SOURCE = path.join(PATH, "source"),
     SOURCEJS = path.join(SOURCE, "js"),
     SOURCESTYLES = path.join(SOURCE, "styles"),
-    ONLINEEXAMPLES = path.join(DEPLOY, "onlineExamples"),
-    count = 0;
+    ONLINEEXAMPLES = path.join(DEPLOY, "onlineExamples");
 
 var cssRegExp = /\.css$/;
 
+var bundles = [{
+    name: "Commercial",
+    license: "commercial",
+    hasSource: true
+}, {
+    name: "Trial",
+    license: "commercial",
+    hasSource: false
+}, {
+    name: "OpenSource",
+    license: "os",
+    hasSource: true
+}];
 
 function mkdir(newDir) {
     try {
@@ -36,7 +48,7 @@ function mkdir(newDir) {
     }
 }
 
-function zip(name, filesPath) {
+function zip(name, filesPath, success) {
     // cross-platform development example
     var archive;
 
@@ -57,11 +69,9 @@ function zip(name, filesPath) {
 
         console.log("package " + name + " created.");
 
-        if (count === 1) {
-            console.log("Time elapsed: " + ((new Date() - date) / 1000) + " seconds");
+        if (success) {
+            success();
         }
-
-        count++;
     });
 }
 
@@ -73,12 +83,13 @@ function createDirectories() {
     mkdir(ONLINEEXAMPLES)
 }
 
-function processScripts() {
+function processScripts(license, copySource) {
     mkdir(JS);
     mkdir(SOURCEJS);
 
-    var license = kendoBuild.readText("resources/licenses/comm.txt");
-    kendoScripts.deployScripts(SRC, SOURCEJS, license, false);
+    if (copySource) {
+        kendoScripts.deployScripts(SRC, SOURCEJS, license, false);
+    }
     kendoScripts.deployScripts(SRC, JS, license, true);
 }
 
@@ -126,40 +137,67 @@ function buildExamples() {
     buildExamplesIndex();
 }
 
-console.log("build initiated.");
-createDirectories();
+function buildBundle(bundle, success) {
+    console.log("Building Web/DataViz " + bundle.name);
 
-console.log("merging multipart scripts...");
+    kendoBuild.rmdirSyncRecursive(DEPLOY);
+    createDirectories();
+
+    console.log("Processing scripts");
+    var license = kendoBuild.readText("resources/licenses/" + bundle.license + ".txt");
+    processScripts(bundle.license, bundle.hasSource);
+
+    console.log("Building themes");
+    themes.build();
+
+    console.log("Processing styles");
+    processStyles();
+
+    console.log("Copying cultures");
+    kendoBuild.copyDirSyncRecursive("src/cultures", path.join(JS, "cultures"));
+
+    console.log("Copying license");
+    var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");
+    fs.writeFileSync(PATH + "/Kendo\ Beta\ EULA.pdf", data);
+
+    data = fs.readFileSync("resources/licenses.txt");
+    fs.writeFileSync(PATH + "/licenses.txt", data);
+
+    console.log("Building examples");
+    buildExamples();
+
+    console.log("Packaging");
+    zip(path.join(RELEASE, "kendoui.web_dataviz." + VERSION + "." + bundle.name + ".zip"), PATH, success);
+}
+
+function buildAllBundles(success, bundleIx) {
+    bundleIx = bundleIx || 0;
+
+    if (bundleIx < bundles.length) {
+        buildBundle(bundles[bundleIx], function() {
+            buildAllBundles(success, ++bundleIx);
+        });
+    } else {
+        success();
+    }
+}
+
+function buildOnlineExamples(success) {
+    examples.build(PATH, ONLINEEXAMPLES, KENDOCDN);
+    zip(path.join(RELEASE, "OnlineExamples.zip"), ONLINEEXAMPLES, success);
+}
+
+console.log("Build starting at " + startDate);
+
+console.log("Merging multi-part scripts");
 kendoScripts.mergeScripts("src/");
 
-console.log("processing scripts...");
-processScripts();
+createDirectories();
 
-console.log("building themes...");
-themes.build();
+buildAllBundles(function() {
+    console.log("Building online examples");
+    buildOnlineExamples(function() {
+        console.log("Time elapsed: " + ((new Date() - startDate) / 1000) + " seconds");
+    });
+});
 
-console.log("processing styles...");
-processStyles();
-
-console.log("copying culture js files...");
-kendoBuild.copyDirSyncRecursive("src/cultures", path.join(JS, "cultures"));
-
-console.log("copying license agreement...");
-var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");
-fs.writeFileSync(PATH + "/Kendo\ Beta\ EULA.pdf", data);
-
-data = fs.readFileSync("resources/licenses.txt");
-fs.writeFileSync(PATH + "/licenses.txt", data);
-
-console.log("building examples...");
-buildExamples();
-
-console.log("building online examples...");
-examples.build(PATH, ONLINEEXAMPLES, KENDOCDN);
-
-//archives
-console.log("packaging distribution...");
-zip(path.join(RELEASE, "KendoUI_" + VERSION + ".zip"), PATH);
-
-console.log("packaging online examples...");
-zip(path.join(RELEASE, "OnlineExamples.zip"), ONLINEEXAMPLES);
