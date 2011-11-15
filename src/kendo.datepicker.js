@@ -338,8 +338,8 @@
             that.dateView = dateView = new DateView($.extend({}, options, {
                 anchor: that.wrapper,
                 change: function() {
-                    that._valid = true;
-                    that._change(dateView.calendar.value());
+                    // calendar is current scope
+                    that._change(this.value());
                     that.close();
                 },
                 clearBlurTimeout: proxy(that._clearBlurTimeout, that)
@@ -379,7 +379,6 @@
             */
             that.bind(CHANGE, options);
 
-            that._valid = true;
             that.enable(!element.is('[disabled]'));
             that.value(options.value || that.element.val());
         },
@@ -503,28 +502,13 @@
         * datepicker.value("10/10/2000"); //parse "10/10/2000" date and selects it in the calendar.
         */
         value: function(value) {
-            var that = this,
-                options = that.options,
-                format = options.format;
+            var that = this;
 
             if (value === undefined) {
                 return that._value;
             }
 
-            value = parse(value, format);
-
-            if (!isInRange(value, options.min, options.max)) {
-                value = null;
-            }
-
-            that._value = value;
-            that.dateView.value(value);
-
-            if (that._valid) {
-                that.element.val(kendo.toString(value, format));
-            }
-
-            that._valid = true;
+            that._old = that._update(value);
         },
 
         _toggleHover: function(e) {
@@ -559,20 +543,12 @@
         },
 
         _change: function(value) {
-            var that = this,
-                options = that.options;
+            var that = this;
 
-            value = parse(value, options.format);
+            value = that._update(value);
 
-            if (value && !isInRange(value, options.min, options.max)) {
-                value = null;
-            }
-
-            that._valid = value !== null;
-
-            if (+value != +that._value) {
-                that.value(value);
-
+            if (+that._old != +value) {
+                that._old = value;
                 that.trigger(CHANGE);
 
                 // trigger the DOM change event so any subscriber gets notified
@@ -632,6 +608,23 @@
 
             options[option] = new DATE(value);
             that.dateView[option](value);
+        },
+
+        _update: function(value) {
+            var that = this,
+                options = that.options,
+                format = options.format,
+                date = parse(value, format);
+
+            if (!isInRange(date, options.min, options.max)) {
+                date = null;
+            }
+
+            that._value = date;
+            that.dateView.value(date);
+            that.element.val(date ? kendo.toString(date, format) : value);
+
+            return date;
         },
 
         _wrapper: function() {
