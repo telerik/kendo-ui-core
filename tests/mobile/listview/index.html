@@ -131,8 +131,8 @@
                 var listView = new ListView(dom);
 
                 listView.bind("click", function(e) {
-                    equal(e.target, link[0], "event passes the clicked dom element");
-                    equal(e.currentTarget, link.parent()[0], "event passes the current item");
+                    equal(e.target[0], link[0], "event passes the clicked dom element");
+                    equal(e.item[0], link.parent()[0], "event passes the current item");
                 });
 
                 link.trigger(kendo.support.mousedown);

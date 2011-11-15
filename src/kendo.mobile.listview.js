@@ -124,7 +124,7 @@
         },
 
         _click: function(e) {
-            if (this.trigger(CLICK, {target: e.target, currentTarget: e.currentTarget})) {
+            if (this.trigger(CLICK, {target: $(e.target), item: $(e.currentTarget)})) {
                 e.preventDefault();
             }
         },
