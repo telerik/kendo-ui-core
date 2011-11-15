@@ -193,6 +193,10 @@ var categories = {
                     url: "datepicker/rangeselection.html"
                 },
                 {
+                    text: "Customizing templates",
+                    url: "datepicker/template.html"
+                },
+                {
                     text: "Events",
                     url: "datepicker/events.html"
                 },
