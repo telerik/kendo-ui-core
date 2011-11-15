@@ -421,20 +421,26 @@
         },
         lte: function(a, b) {
             return a + " <= " + b;
+        },
+        startswith: function(a, b) {
+            return a + ".lastIndexOf('" + b + "', 0) == 0";
+        },
+        endswith: function(a, b) {
+            var length = b.length;
+
+            return a + ".lastIndexOf('" + b + "') == " + a + ".length - " + length;
+        },
+        contains: function(a, b) {
+            return a + ".lastIndexOf('" + b + "', 0) >= 0"
         }
     };
 
-    extend(operators, {
-        "==": operators.eq,
-        equals: operators.eq,
-        equal: operators.eq,
-        isequalto: operators.eq,
-        equalto: operators.eq,
-        "!=": operators.neq,
-        isnotequalto: operators.neq,
-        notequals: operators.neq,
-        notequalto: operators.neq
-    });
+    operators["=="] = operators.equals = operators.isequalto = operators.equalto = operators.equal = operators.eq;
+    operators["!="] = operators.not = operators.ne = operators.notequals = operators.isnotequalto = operators.notequalto = operators.notequalsto = operators.notequal = operators.neq;
+    operators["<"] = operators.islessthan = operators.lessthan = operators.less = operators.lt;
+    operators["<="] = operators.islessthanorequalto = operators.lessthanequal = operators.le = operators.lte;
+    operators[">"] = operators.isgreaterthan = operators.greaterthan = operators.greater = operators.gt;
+    operators[">="] = operators.isgreaterthanorequalto = operators.greaterthanequal = operators.ge = operators.gte;
 
     function Query(data) {
         this.data = data || [];
