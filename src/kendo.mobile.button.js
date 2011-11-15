@@ -36,7 +36,7 @@
         },
 
         _release: function(e) {
-            if (this.trigger(CLICK, {target: e.target})) {
+            if (this.trigger(CLICK, {target: $(e.target)})) {
                 e.preventDefault();
             };
         },
