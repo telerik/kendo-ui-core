@@ -245,6 +245,19 @@
                 equals(constants.constants["@foo"].value, "10px");
             });
 
+            test("infer() of selector with tagName", function() {
+                var themeBuilder = new ThemeBuilder();
+                themeBuilder.updateStyleSheet(".foo:link { font-size: 20px; } .foo { font-size: 10px; }");
+
+                var constants = new LessConstants({
+                    "@foo": constant("a.foo", "font-size")
+                });
+
+                constants.infer();
+
+                equals(constants.constants["@foo"].value, "20px");
+            });
+
             test("update() updates value", function() {
                 var constants = new LessConstants({
                     "@foo": constant(".k-widget", "background-color")

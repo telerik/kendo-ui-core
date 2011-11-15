@@ -2,6 +2,7 @@
 
     var proxy = $.proxy,
         CHANGE = "change",
+        doc = (window.parent || window).document,
         ui = kendo.ui,
         Widget = ui.Widget,
         colorPicker = "ktb-colorpicker",
@@ -10,8 +11,9 @@
             "color": colorPicker,
             "background-color": colorPicker,
             "border-color": colorPicker,
+            "box-shadow": colorPicker,
             "border-radius": numeric,
-            "box-shadow": colorPicker
+            "background-image": "ktb-combo"
         },
         processors = {
             "box-shadow": function(value) {
@@ -135,7 +137,19 @@
                 var constants = this.constants, constant,
                     c, i,
                     property, value,
-                    prototype = $("<div style='border-style:solid;' />").appendTo(window.parent.document.body);
+                    cachedPrototype = $("<div style='border-style:solid;' />").appendTo(doc.body),
+                    prototype;
+
+                function getInferPrototype(target) {
+                    var className = /\.([a-z\-0-9]+)/i.exec(target)[1];
+                    if (target == className) {
+                        cachedPrototype[0].className = className;
+                        return cachedPrototype;
+                    } else {
+                        // create prototype for complex selector
+                        return $("<a href='' />").addClass(className).appendTo(doc.body);
+                    }
+                }
 
                 for (constant in constants) {
                     constant = constants[constant];
@@ -146,7 +160,7 @@
                     } else {
                         // TODO: make it work with complex selectors (targets) -- ".foo .bar"
                         //       see misc / inset shadow
-                        prototype[0].className = constant.target.substring(1);
+                        prototype = getInferPrototype(constant.target);
 
                         property = constant.property;
                         value = prototype.css(property);
@@ -173,10 +187,14 @@
                         }
 
                         constant.value = value;
+
+                        if (prototype[0] != cachedPrototype[0]) {
+                            prototype.remove();
+                        }
                     }
                 }
 
-                prototype.remove();
+                cachedPrototype.remove();
             }
         }),
 
@@ -256,8 +274,7 @@
                 });
             },
             updateStyleSheet: function(cssText) {
-                var doc = (window.parent || window).document,
-                    style = $("style[title='themebuilder']")[0];
+                var style = $("style[title='themebuilder']")[0];
 
                 if (style) {
                     style.parentNode.removeChild(style);
