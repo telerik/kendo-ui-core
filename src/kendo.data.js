@@ -394,17 +394,73 @@
     }
 
     map = function (array, callback) {
-        var length = array.length, result = new Array(length);
+        var idx, length = array.length, result = new Array(length);
 
-        for (var i = 0; i < length; i++) {
-            result[i] = callback(array[i], i, array);
+        for (idx = 0; idx < length; idx++) {
+            result[idx] = callback(array[idx], idx, array);
         }
 
         return result;
     }
 
+    var operators = {
+        eq: function(a, b) {
+            return a + " == " + b;
+        },
+        neq: function(a, b) {
+            return a + " != " + b;
+        },
+        gt: function(a, b) {
+            return a + " > " + b;
+        },
+        gte: function(a, b) {
+            return a + " >= " + b;
+        },
+        lt: function(a, b) {
+            return a + " < " + b;
+        },
+        lte: function(a, b) {
+            return a + " <= " + b;
+        }
+    };
+
+    extend(operators, {
+        "==": operators.eq,
+        equals: operators.eq,
+        equal: operators.eq,
+        isequalto: operators.eq,
+        equalto: operators.eq,
+        "!=": operators.neq,
+        isnotequalto: operators.neq,
+        notequals: operators.neq,
+        notequalto: operators.neq
+    });
+
     function Query(data) {
         this.data = data || [];
+    }
+
+    Query.expr = function(expression) {
+        var expressions = [],
+            logic = { and: " && ", or: " || " },
+            idx,
+            length,
+            filter,
+            filters = expression.filters;
+
+        for (idx = 0, length = filters.length; idx < length; idx++) {
+            filter = filters[idx];
+
+            if (filter.filters) {
+                filter = Query.expr(filter);
+            } else {
+                filter = operators[filter.operator.toLowerCase()](kendo.expr(filter.field), filter.value);
+            }
+
+            expressions.push(filter);
+        }
+
+        return "(" + expressions.join(logic[expression.logic]) + ")";
     }
 
     function expandSort(field, dir) {
