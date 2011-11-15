@@ -212,7 +212,7 @@
                     close: datepicker.close
                 });
 
-                datepicker.dateView.options.change();
+                $.proxy(datepicker.dateView.options.change, datepicker.dateView.calendar)();
 
                 equal(datepicker.calls("_change"), 1);
                 equal(datepicker.calls("close"), 1);
