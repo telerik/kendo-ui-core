@@ -155,6 +155,26 @@
 
                 equal(dom.find("li").data("id"), "bar");
             });
+
+            test("databound item passes the dataitem in the event when clicked", function() {
+                expect(1);
+                var model = {foo: "bar"},
+                    link,
+                    dataSource = {schema: {model: {id: "foo"}}, data: [model]};
+
+                dom = $("<ul/>");
+
+                listView = new ListView(dom, {dataSource: dataSource});
+
+                listView.bind("click", function(e) {
+                    equal(e.dataItem.data.foo, model.foo, "event passes the model as data item");
+                });
+
+                link = dom.find("li");
+
+                link.trigger(kendo.support.mousedown);
+                link.trigger(kendo.support.mouseup);
+            });
         </script>
     </body>
 </html>
