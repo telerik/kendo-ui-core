@@ -13,24 +13,6 @@
         <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
         <link rel="stylesheet" href="../styles/kendo.common.css" type="text/css" media="screen" charset="utf-8">
         <link rel="stylesheet" href="../styles/kendo.blueopal.css" type="text/css" media="screen" charset="utf-8">
-        <style type="text/css" media="screen">
-            .k-state-selected
-            {
-                background-color: red;
-            }
-
-            ul
-            {
-                padding: 0;
-                margin: 0;
-                border: 1px solid black;
-                width: 200px;
-            }
-            ul li
-            {
-                list-style:none;
-            }
-        </style>
     </head>
     <body>
         dataSource source: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}];
@@ -101,7 +83,19 @@
                     autoBind: false,
                     delay: 2000,
                     open: function() { console.log("open"); },
-                    close: function() { console.log("close"); }
+                    close: function() { console.log("close"); },
+                    animation: {
+                        open: {
+                            effects: "zoomIn",
+                            duration: 400,
+                            show: true
+                        },
+                        close: { // if close animation effects are defined, they will be used instead of open.reverse
+                            duration: 100,
+                            show: false,
+                            hide: true
+                        }
+                    }
                 });
                 $("#select").kendoDropDownList({
                     dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}]
