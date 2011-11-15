@@ -206,6 +206,17 @@
 
                 ok(addMethod.calls("addRow"));
             });
+
+            test("clicking save command button calls saveChanges", function() {
+                 var grid = setup({
+                    toolbar: [ "save" ]
+                }),
+                method = stub(grid, "saveChanges");
+
+                toolbar.find(".k-grid-save-changes").click();
+
+                ok(method.calls("saveChanges"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -23,6 +23,7 @@
         REMOVE = "remove",
         DETAILINIT = "detailInit",
         CHANGE = "change",
+        SAVECHANGES = "saveChanges",
         MODELCHANGE = "modelChange",
         DATABOUND = "dataBound",
         DETAILEXPAND = "detailExpand",
@@ -556,7 +557,14 @@
                  * @event
                  * @param {Event} e
                  */
-                REMOVE
+                REMOVE,
+                /**
+                 * Fires before the grid calls DataSource sync.
+                 * @name kendo.ui.Grid#saveChanges
+                 * @event
+                 * @param {Event} e
+                 */
+                SAVECHANGES
             ], that.options);
 
             that._thead();
@@ -769,6 +777,14 @@
             return confirmation !== false ? that._showMessage(confirmation) : true;
         },
 
+        saveChanges: function() {
+            var that = this;
+
+            if (((that.editable && that.editable.end()) || !that.editable) && !that.trigger(SAVECHANGES)) {
+                that.dataSource.sync();
+            }
+        },
+
         addRow: function() {
             var that = this;
             if ((that.editable && that.editable.end()) || !that.editable) {
@@ -796,7 +812,8 @@
                 $('<div class="k-toolbar" />')
                     .html(template({}))
                     .prependTo(wrapper)
-                    .delegate(".k-grid-add", CLICK, function(e) { e.preventDefault(); that.addRow(); });
+                    .delegate(".k-grid-add", CLICK, function(e) { e.preventDefault(); that.addRow(); })
+                    .delegate(".k-grid-save-changes", CLICK, function(e) { e.preventDefault(); that.saveChanges(); });
             }
         },
 
