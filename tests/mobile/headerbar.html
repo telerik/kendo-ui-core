@@ -28,9 +28,24 @@
             test("applies css class", function() {
                 var dom = $("<div/>");
 
-                var button = new HeaderBar(dom);
+                var bar = new HeaderBar(dom);
 
-                ok(button.element.hasClass("km-headerbar"), "has specified CSS class");
+                ok(bar.element.hasClass("km-headerbar"), "has specified CSS class");
+            });
+
+            test("moves items based on data-kendo-align attributes", function() {
+                var dom = $('<div><div data-kendo-align="left" id="foo"/><div data-kendo-align="right" id="bar" /></div>');
+
+                var bar = new HeaderBar(dom);
+
+                var leftContainer = dom.children(".km-leftitem")[0];
+                var rightContainer = dom.children(".km-rightitem")[0];
+
+                ok(leftContainer, "creates left container");
+                equal(dom.find("#foo").parent()[0], leftContainer, "moves left aligned item to the container");
+
+                ok(rightContainer, "creates right container");
+                equal(dom.find("#bar").parent()[0], rightContainer, "moves right aligned item to the container");
             });
         </script>
     </body>
