@@ -228,6 +228,26 @@
                     .find(".ktb-colorpicker").kendoColorPicker({
                         change: changeHandler
                     }).end()
+                    .find(".ktb-combo")
+                        .each(function() {
+                            var data = constants ? constants.constants[this.id].values : [];
+
+                            data.splice(0, 0, { text: "(unchanged)", value: this.value });
+
+                            data = $.map(data, function(x) {
+                                return { text: x.text, value: x.value.replace(/"|'/g, "") };
+                            });
+
+                            $(this).kendoComboBox({
+                                autoBind: true,
+                                template: "<span class='ktb-texture-preview k-header' style='background-image:${ data.value };' />",
+                                change: changeHandler,
+                                dataSource: new kendo.data.DataSource({
+                                    data: data
+                                })
+                            });
+                        })
+                    .end()
                     .find(".ktb-numeric").kendoNumericTextBox({
                         min: 0,
                         max: 50,
