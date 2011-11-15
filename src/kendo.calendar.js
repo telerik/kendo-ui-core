@@ -365,7 +365,7 @@
                     min: min,
                     max: max,
                     date: value
-                }, that[view])));
+                }, that[currentView.name])));
 
                 that._animate({
                     from: from,
@@ -553,10 +553,11 @@
                 element.append('<div class="k-footer"><a href="#" class="k-link k-nav-today"></a></div>');
             }
 
-            element.find(".k-nav-today")
-                   .html(template(that.options.footer)(today))
-                   .attr("title", kendo.toString(today, "D"))
-                   .bind(CLICK, proxy(that._today, that));
+            that._today = element
+                        .find(".k-nav-today")
+                        .html(template(that.options.footer)(today))
+                        .attr("title", kendo.toString(today, "D"))
+                        .bind(CLICK, proxy(that._todayClick, that));
         },
 
         _header: function() {
@@ -651,7 +652,7 @@
             }
         },
 
-        _today: function(e) {
+        _todayClick: function(e) {
             var that = this,
                 depth = views[that.options.depth],
                 today = new DATE();

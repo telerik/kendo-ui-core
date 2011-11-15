@@ -77,6 +77,7 @@
     Widget = ui.Widget,
     parse = kendo.parseDate,
     keys = kendo.keys,
+    template = kendo.template,
     DIV = "<div />",
     CLICK = (touch ? "touchend" : "click"),
     OPEN = "open",
@@ -114,6 +115,8 @@
         that.options = options = options || {};
         that.popup = new ui.Popup($(DIV).addClass("k-calendar-container").appendTo(body), options);
 
+        that._templates();
+
         that.value(options.value);
     };
 
@@ -134,15 +137,18 @@
                        .bind(MOUSEDOWN, options.clearBlurTimeout)
                        .show();
 
-                calendar.min(options.min);
-                calendar.max(options.max);
-
-                calendar.options.depth = options.depth;
-
                 calendar.unbind(CHANGE)
                         .unbind(NAVIGATE)
                         .bind(NAVIGATE, proxy(that._navigate, that))
                         .bind(CHANGE, options);
+
+                calendar.month = that.month;
+                calendar.options.depth = options.depth;
+
+                calendar._today.html(that.footer(new DATE()));
+
+                calendar.min(options.min);
+                calendar.max(options.max);
 
                 calendar.navigate(that._value, options.start);
                 that.value(that._value);
@@ -319,6 +325,21 @@
             if (calendar.element.data(DATEVIEW) === that) {
                 calendar[option](value);
             }
+        },
+
+        _templates: function() {
+            var that = this,
+                options = that.options,
+                month = options.month || {},
+                content = month.content,
+                empty = month.empty;
+
+            that.month = {
+                content: template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
+                empty: template("<td>" + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
+            };
+
+            that.footer = template(options.footer || '#= kendo.toString(data,"D") #', { useWithBlock: false });
         }
     };
 
