@@ -37,6 +37,7 @@
                 }
             });
 
+            //DateView
             test("DateView should re assign shared calendar", function() {
                 var options = {
                     anchor: $("<input/>"),
@@ -98,10 +99,45 @@
 
                 dv1._calendar();
 
-                equal(dv1.calls("_navigate"), 1);
+                equal(dv1.calls("_navigate"), 3);
             });
 
-            //DateView
+            test("DateView build templates", function() {
+                var dateView = new DateView();
+
+                ok(dateView.month);
+                ok(dateView.month.content);
+                ok(dateView.month.empty);
+            });
+
+            test("DateView build footer template", function() {
+                var dateView = new DateView();
+
+                ok(dateView.footer);
+            });
+
+            test("DateView sets the calendar.month templates", function() {
+                var dateView = new DateView({
+                    month: {
+                        content: "<div>#=data.value#</div>"
+                    }
+                });
+
+                dateView._calendar();
+
+                equal(dateView.calendar.month.content({}), dateView.month.content({}));
+            });
+
+            test("DateView change the footer using its footer template", function() {
+                var dateView = new DateView({
+                    footer: "template"
+                });
+
+                dateView._calendar();
+
+                equal(dateView.calendar._today.html(), "template");
+            });
+
             test("DateView should create shared calendar", function() {
                 var dateView = new DateView();
 

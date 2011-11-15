@@ -25,12 +25,25 @@
                 $("#timepicker3").kendoTimePicker({
                     value: new Date(2000, 10, 10, 9, 0, 0),
                     min: new Date(2000, 10, 10, 8, 0, 0),
-                    max: new Date(2000, 10, 10, 18, 0, 0)
+                    max: new Date(2000, 10, 10, 18, 0, 0),
+                    animation: false
                 });
                 $("#timepicker4").kendoTimePicker({
                     min: new Date(2000, 10, 10, 10, 0, 0),
                     max: new Date(2000, 10, 10, 14, 0, 0),
-                    interval: 60
+                    interval: 60,
+                    animation: {
+                        open: {
+                            effects: "zoomIn",
+                            duration: 400,
+                            show: true
+                        },
+                        close: { // if close animation effects are defined, they will be used instead of open.reverse
+                            duration: 100,
+                            show: false,
+                            hide: true
+                        }
+                    }
                 });
             });
         </script>
