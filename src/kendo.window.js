@@ -823,20 +823,20 @@
                     },
                     "w": function () {
                         var windowRight = wnd.initialCursorPosition.left + wnd.initialSize.width,
-                            newWidth = windowRight - e.pageX;
+                            newWidth = constrain(windowRight - e.pageX, options.minWidth, options.maxWidth);
 
                         wrapper.css({
-                            left: constrain(e.pageX, windowRight - options.minWidth, windowRight - options.maxWidth),
-                            width: constrain(newWidth, options.minWidth, options.maxWidth)
+                            left: windowRight - newWidth,
+                            width: newWidth
                         })
                     },
                     "n": function () {
                         var windowBottom = wnd.initialCursorPosition.top + wnd.initialSize.height,
-                            newHeight = windowBottom - e.pageY;
+                            newHeight = constrain(windowBottom - e.pageY, options.minHeight, options.maxHeight);
 
                         wrapper.css({
-                            top: constrain(e.pageY, windowBottom - options.minHeight, windowBottom - options.maxHeight),
-                            height: constrain(newHeight, options.minHeight, options.maxHeight)
+                            top: windowBottom - newHeight,
+                            height: newHeight
                         });
                     }
                 };
