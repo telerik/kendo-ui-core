@@ -32,6 +32,8 @@
     }
 
     function hideAddressBar(element) {
+        if (os.appMode) return;
+
         var lastWidth = 0;
 
         if (os.android) {
@@ -41,28 +43,26 @@
         }
 
         function hideBar() {
-            if (os.ios) {
-                var height = document.documentElement.clientHeight;
-                if (os.iphone || os.ipod && !window.navigator.standalone) height += 60;
-                element.height(height);
-            } else if (os.android) {
-                element.height(window.innerHeight + 56);
-            }
+            var pageWidth = element[0].offsetWidth,
+                compensation;
 
-            setTimeout(window.scrollTo, 500, 0, 1);
-        }
-
-        function onResize() {
-            var pageWidth = element[0].offsetWidth;
             if (lastWidth == pageWidth) return;
             lastWidth = pageWidth;
-            hideBar();
+
+            if (os.device == "iphone" || os.device == "ipod" || os.android) {
+                if (os.android) {
+                    compensation = 56;
+                } else {
+                    compensation = 60;
+                }
+
+                element.height(window.innerHeight + compensation);
+                setTimeout ( window.scrollTo, 0, 0, 1 );
+            }
         }
 
-        hideBar();
-        onResize();
-
-        $(window).resize(onResize);
+        $(window).load(hideBar);
+        $(window).resize(hideBar);
     }
 
     function appLinkMouseUp(e) {
@@ -128,6 +128,7 @@
                 back = that.nextView === view,
                 animationType = (back ? view : that).element.data("kendoTransition"),
                 parallax = animationType === "slide",
+                headFoodEffects = parallax ? {effects: "fade", reverse: back} : false,
                 callback = function() { view.element.hide(); };
 
             that.element.css("display", "");
@@ -139,8 +140,6 @@
               that.element.css("z-index", 1);
               view.element.css("z-index", 0);
             }
-
-            headFoodEffects = parallax ? {effects: "fade", reverse: back} : false;
 
             view.slidings(that, parallax).kendoAnimateTo(that.slidings(view, parallax), {effects: animationType, reverse: back, complete: callback});
             switchWith(view.footer, that.footer, headFoodEffects);
