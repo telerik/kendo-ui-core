@@ -13,24 +13,7 @@
         <script src="../src/kendo.combobox.js" type="text/javascript" charset="utf-8"></script>
         <link rel="stylesheet" href="../styles/kendo.common.css" type="text/css" media="screen" charset="utf-8">
         <link rel="stylesheet" href="../styles/kendo.blueopal.css" type="text/css" media="screen" charset="utf-8">
-        <style type="text/css" media="screen">
-            .k-state-selected
-            {
-                background-color: red;
-            }
 
-            ul
-            {
-                padding: 0;
-                margin: 0;
-                border: 1px solid black;
-                width: 200px;
-            }
-            ul li
-            {
-                list-style:none;
-            }
-        </style>
     </head>
     <body>
         dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}],
@@ -90,15 +73,14 @@
         </fieldset>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
-                 var remoteDataSource = new kendo.data.DataSource({
+                 var remoteDataSource = kendo.data.DataSource.create({
                     transport: {
                         read: {
                             url: "http://ws.geonames.org/searchJSON",
                             dataType: "jsonp",
                             cache: true
                         },
-                        cache: "inmemory",
-                        dialect: function() {
+                        parameterMap: function() {
                             return { name_startsWith: $("#searchCriteria").val() };
                         }
                     },
@@ -113,17 +95,42 @@
                     dataSource: [{text: "foo", value: 1}, {text:"<script>alert('hi');<\/script>bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}],
                     autoBind: false,
                     close: function() {console.log("closeD") },
-                    open: function() {console.log("open") }
+                    open: function() {console.log("open") },
+                    animation: false
                 });
                 $("#select").kendoComboBox({
                     dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}],
-                    filter: "startswith"
+                    filter: "startswith",
+                    animation: {
+                        open: {
+                            effects: "zoomIn",
+                            duration: 400,
+                            show: true
+                        },
+                        close: { // if close animation effects are defined, they will be used instead of open.reverse
+                            duration: 100,
+                            show: false,
+                            hide: true
+                        }
+                    }
                 });
                 $("#remote").kendoComboBox({
                     dataTextField: "name",
                     dataValueField: "countryName",
                     dataSource: remoteDataSource,
-                    autoBind: false
+                    autoBind: false,
+                    animation: {
+                        open: {
+                            effects: "slideIn:right",
+                            duration: 400,
+                            show: true
+                        },
+                        close: { // if close animation effects are defined, they will be used instead of open.reverse
+                            duration: 100,
+                            show: false,
+                            hide: true
+                        }
+                    }
                 });
 
                 $("#searchCriteria").bind("change", function() {

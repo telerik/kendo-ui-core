@@ -62,7 +62,19 @@
 
                 $("#autocomplete-suggest").kendoAutoComplete({
                     dataSource: ["foo", "bar", "baz"],
-                    suggest: true
+                    suggest: true,
+                    animation: {
+                        open: {
+                            effects: "zoomIn",
+                            duration: 400,
+                            show: true
+                        },
+                        close: { // if close animation effects are defined, they will be used instead of open.reverse
+                            duration: 100,
+                            show: false,
+                            hide: true
+                        }
+                    }
                 });
 
                 $("#autocomplete-separator").kendoAutoComplete({
