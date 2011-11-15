@@ -194,6 +194,167 @@
                     filters: [ { field: "foo", value: 10, operator: "notequalto" } ]
                 }), "(d.foo != 10)");
             });
+
+            test("notequal", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "notequal" } ]
+                }), "(d.foo != 10)");
+            });
+
+            test("ne", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "ne" } ]
+                }), "(d.foo != 10)");
+            });
+
+            test("not", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "not" } ]
+                }), "(d.foo != 10)");
+            });
+
+            test("<", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "<" } ]
+                }), "(d.foo < 10)");
+            });
+
+            test("islessthan", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "islessthan" } ]
+                }), "(d.foo < 10)");
+            });
+
+            test("lessthan", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "lessthan" } ]
+                }), "(d.foo < 10)");
+            });
+
+            test("less", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "less" } ]
+                }), "(d.foo < 10)");
+            });
+
+            test("<=", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "<=" } ]
+                }), "(d.foo <= 10)");
+            });
+
+            test("islessthanorequalto", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "islessthanorequalto" } ]
+                }), "(d.foo <= 10)");
+            });
+
+            test("lessthanequal", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "lessthanequal" } ]
+                }), "(d.foo <= 10)");
+            });
+
+            test("le", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "le" } ]
+                }), "(d.foo <= 10)");
+            });
+
+            test(">", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: ">" } ]
+                }), "(d.foo > 10)");
+            });
+
+            test("isgreaterthan", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "isgreaterthan"} ]
+                }), "(d.foo > 10)");
+            });
+
+            test("greaterthan", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "greaterthan"} ]
+                }), "(d.foo > 10)");
+            });
+
+            test("greater", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "greater"} ]
+                }), "(d.foo > 10)");
+            });
+
+            test(">=", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: ">=" } ]
+                }), "(d.foo >= 10)");
+            });
+
+            test("isgreaterthanorequalto", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "isgreaterthanorequalto"} ]
+                }), "(d.foo >= 10)");
+            });
+
+            test("greaterthanequal", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "greaterthanequal"} ]
+                }), "(d.foo >= 10)");
+            });
+
+            test("ge", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "ge" } ]
+                }), "(d.foo >= 10)");
+            });
+
+            test("startswith", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: "bar", operator: "startswith" } ]
+                }), "(d.foo.lastIndexOf('bar', 0) == 0)");
+            });
+
+            test("endswith", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: "bar", operator: "endswith" } ]
+                }), "(d.foo.lastIndexOf('bar') == d.foo.length - 3)");
+            });
+
+            test("contains", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: "bar", operator: "contains" } ]
+                }), "(d.foo.lastIndexOf('bar', 0) >= 0)");
+            });
+
+            test("contains with apostrophe", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: "'", operator: "contains" } ]
+                }), "(d.foo.lastIndexOf('\'', 0) >= 0)");
+            });
         </script>
     </body>
 </html>
