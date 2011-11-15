@@ -13,6 +13,7 @@ var fs = require("fs"),
     STAT = fs.statSync("./"),
     VERSION = process.argv[2] || kendoBuild.generateVersion(),
     KENDOCDN = process.argv[3] || "http://cdn.kendostatic.com/" + VERSION,
+    SRC = "src",
     RELEASE = "release",
     DEPLOY = "deploy",
     PATH = path.join(DEPLOY, "kendoUI"),
@@ -26,41 +27,6 @@ var fs = require("fs"),
 
 var cssRegExp = /\.css$/;
 
-var scripts = [
-    "kendo.core.js",
-    "kendo.fx.js",
-    "kendo.data.odata.js",
-    "kendo.data.xml.js",
-    "kendo.model.js",
-    "kendo.binder.js",
-    "kendo.data.js",
-    "kendo.draganddrop.js",
-    "kendo.groupable.js",
-    "kendo.resizable.js",
-    "kendo.sortable.js",
-    "kendo.selectable.js",
-    "kendo.scroller.js",
-    "kendo.pageable.js",
-    "kendo.popup.js",
-    "kendo.list.js",
-    "kendo.calendar.js",
-    "kendo.datepicker.js",
-    "kendo.autocomplete.js",
-    "kendo.dropdownlist.js",
-    "kendo.combobox.js",
-    "kendo.chart.js",
-    "kendo.numerictextbox.js",
-    "kendo.grid.js",
-    "kendo.menu.js",
-    "kendo.panelbar.js",
-    "kendo.tabstrip.js",
-    "kendo.timepicker.js",
-    "kendo.treeview.js",
-    "kendo.slider.js",
-    "kendo.splitter.js",
-    "kendo.upload.js",
-    "kendo.window.js"
-];
 
 function mkdir(newDir) {
     try {
@@ -111,28 +77,8 @@ function processScripts() {
     mkdir(JS);
     mkdir(SOURCEJS);
 
-    var all = "";
-
-    scripts.forEach(function(file, key) {
-        var data = fs.readFileSync(path.join("src", file), "utf8");
-
-        if (data.charCodeAt(0) == 0xfeff) {
-            data = data.substring(1);
-        }
-
-        fs.writeFileSync(path.join(SOURCEJS, file), data);
-
-        all += data;
-
-        data = kendoBuild.minifyJs(data);
-
-        fs.writeFileSync(path.join(JS, file.replace(".js", ".min.js")), data);
-
-    });
-
-    all = kendoBuild.minifyJs(all);
-
-    fs.writeFileSync(path.join(JS, "kendo.all.min.js"), all);
+    kendoScripts.deployScripts(SRC, SOURCEJS, false);
+    kendoScripts.deployScripts(SRC, JS, true);
 }
 
 function processStyles() {
