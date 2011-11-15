@@ -228,25 +228,26 @@
 
             for(idx = 0, length = filters.length; idx < length; idx ++) {
                 expr = filters[idx];
-                if(typeof expr.value === STRING && !expr.caseSensitive) {
-                     caseSensitive = function(value) {
-                        return value.toLowerCase();
-                     };
+                if (expr.logic) {
+                    desc = Filter.create(expr);
                 } else {
-                    caseSensitive = function(value) {
-                        return value;
-                    };
+                    if(typeof expr.value === STRING && !expr.caseSensitive) {
+                        caseSensitive = function(value) {
+                            return value.toLowerCase();
+                        };
+                    } else {
+                        caseSensitive = function(value) {
+                            return value;
+                        };
+                    }
+                    selector = Filter.selector(expr.field, caseSensitive);
+                    operator = Filter.operator(expr.operator);
+                    desc = operator(selector, caseSensitive(expr.value));
                 }
-                selector = Filter.selector(expr.field, caseSensitive);
-                operator = Filter.operator(expr.operator);
-                desc = operator(selector, caseSensitive(expr.value));
+
                 descriptors.push(desc);
             }
-            predicate = Filter[expression.logic](descriptors);
-
-            return function(data) {
-                return Filter.execute(predicate, data);
-            };
+            return Filter[expression.logic](descriptors);
         },
         selector: function(field, caseSensitive) {
             if (field) {
@@ -481,7 +482,7 @@
         },
         filter: function(expressions) {
             var predicate = Filter.create(expandFilter(expressions));
-            return new Query(predicate(this.data));
+            return new Query(Filter.execute(predicate, this.data));
         },
         group: function(descriptors, allData) {
             descriptors =  expandGroup(descriptors || []);
