@@ -94,21 +94,17 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-html, body {
+html, body
+{
+    width: 100%;
+    height: 100%;
+    -ms-content-zooming: none;
+    -webkit-user-select: none;
     -webkit-text-size-adjust: none;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
-    max-height: auto;
-    overflow: hidden;
-    -ms-content-zooming: none;
-    -webkit-user-select: none;
-}
-
-body {
-    .transform(translatez(0));
+body
+{
     display: table\9;
 }
 
@@ -174,7 +170,7 @@ body {
 {
     position: relative;
     z-index: 1;
-    -webkit-transform: translate3d(0,0,0);
+    -webkit-transform: translatez(0);
 }
 
 @media all and (-webkit-min-device-pixel-ratio:10000),
@@ -323,7 +319,7 @@ body {
 
 .km-ios .km-toggle
 {
-    -webkit-transform: translateZ(0);
+    -webkit-transform: translatez(0);
 }
 
 .km-toggle,
@@ -481,8 +477,8 @@ body {
 {
     width: 3em;
     width: 3rem;
-    height: 2.2em;
-    height: 2.2rem;
+    height: 2em;
+    height: 2rem;
 }
 
 .km-android .km-toggle-tip
@@ -492,9 +488,11 @@ body {
     border: none;
     .box-shadow(none);
     width: 100%;
-    line-height: 1.6em;
-    line-height: 1.6rem;
+    line-height: 1.1em;
+    line-height: 1.1rem;
     text-align: center;
+    font-size: 1.1em;
+    font-size: 1.1rem;
 }
 
 .km-android .km-toggle-tip:before
@@ -632,7 +630,8 @@ body {
     background-image: linearGradient(top, rgb(230, 230, 230), rgb(205, 205, 205));
 }
 
-.km-android .km-button:active
+.km-android .km-button:not([disabled]):active,
+.km-android .km-radiogroup .km-state-active
 {
     border-color: #feb84b #fb9d09 #f29c0a;
     background-color: #fe9d08;
@@ -689,6 +688,14 @@ body {
     text-shadow: none;
 }
 
+.km-android .km-button .km-message
+{
+    border-color: #fb9d09;
+    background-color: #000;
+    .border-radius(.4em);
+    background-image: none;
+}
+
 .km-button::-moz-focus-inner
 {
     padding: 0;
@@ -707,8 +714,10 @@ body {
     -webkit-box-shadow: none;
 }
 
-.km-blackberry .km-button:active,
-.km-meego .km-button:active
+.km-blackberry .km-button:not([disabled]):active,
+.km-blackberry .km-radiogroup .km-state-active,
+.km-meego .km-button:active .km-button:not([disabled]):active,
+.km-meego .km-radiogroup .km-state-active
 {
     color: #FFF;
     border-color: #3f9fe5;
@@ -764,7 +773,10 @@ body {
     .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
 }
 
-.km-ios .km-state-disabled .km-button
+.km-ios .km-state-disabled .km-button,
+.km-android .km-state-disabled .km-button,
+.km-blackberry .km-state-disabled .km-button,
+.km-meego .km-state-disabled .km-button
 {
     color: #aaa;
     text-shadow: none;
@@ -812,19 +824,13 @@ body {
     word-spacing: -1em;
 }
 
-.km-tabContainer
-{
-    .box-flex(1);
-}
-
 .km-tabstrip .km-button
 {
     word-spacing: normal;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-    .km-showcase { position: absolute; }
-    .km-tabContainer { display: table; word-spacing: normal; width: 100%; }
+    .km-tabstrip { display: table; word-spacing: normal; width: 100%; }
     .km-radiogroup > .km-button { display: inline-block; }
 }
 
@@ -869,6 +875,7 @@ body {
 
 .km-android .km-tabstrip
 {
+    display: table;
     padding: 0;
     background-color: #222;
     border-bottom: 2pt solid #7a7a7a;
@@ -918,8 +925,9 @@ body {
 
 .km-android .km-tabstrip .km-button
 {
-    font-size: .85em;
-    padding: .2em .4em;
+    display: table-cell;
+    font-size: .8em;
+    padding: .5em .4em .3em;
     .border-radius(0);
     border-right: 1pt solid #444;
     border-left: 1pt solid #000;
@@ -953,8 +961,19 @@ body {
 .km-android .km-tabstrip .km-state-active
 {
     color: #FFF;
+    border-color: transparent #444 transparent #000;
     background: rgb(154, 154, 154);
     background-image: linearGradient(top, rgb(154, 154, 154), rgb(126, 126, 126));
+}
+
+.km-android .km-tabstrip .km-text
+{
+    position: relative;
+}
+
+.km-android .km-message
+{
+    right: -2.2em;
 }
 
 .km-blackberry .km-tabstrip .km-text,
@@ -1215,22 +1234,22 @@ input[type=checkbox]
 .km-tabstrip .km-button .km-icon
 {
     display: block;
-    width: 3rem;
-    height: 3rem;
+    width: 2.8em;
+    height: 2.8em;
     background-size: auto 100%;
 }
 
 .km-ios .km-tabstrip .km-icon
 {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.5em;
+    height: 2.5em;
 }
 
 .km-blackberry .km-tabstrip .km-icon,
 .km-meego .km-tabstrip .km-icon
 {
-    width: 4rem;
-    height: 4rem;
+    width: 2.5em;
+    height: 2.5em;
 }
 
 .km-tabstrip .km-button .km-icon
@@ -1257,6 +1276,7 @@ input[type=checkbox]
 {
     opacity: 0.5;
     background: transparent url('/kendo/styles/mobile/images/atabimg.png') no-repeat .5em 50%;
+    background-size: auto 100%;
 }
 
 .km-tabstrip .km-button.km-state-active .km-icon
@@ -1312,25 +1332,25 @@ input[type=checkbox]
 .km-blackberry .km-tabstrip .km-button:nth-child(1) .km-icon,
 .km-meego .km-tabstrip .km-button:nth-child(1) .km-icon
 {
-    background-position: 6px 50%;
+    background-position: 2px 50%;
 }
 
 .km-blackberry .km-tabstrip .km-button:nth-child(2) .km-icon,
 .km-meego .km-tabstrip .km-button:nth-child(2) .km-icon
 {
-    background-position: -114px 50%;
+    background-position: 33.5% 50%;
 }
 
 .km-blackberry .km-tabstrip .km-button:nth-child(3) .km-icon,
 .km-meego .km-tabstrip .km-button:nth-child(3) .km-icon
 {
-    background-position: -234px 50%;
+    background-position: 67% 50%;
 }
 
 .km-blackberry .km-tabstrip .km-button:nth-child(4) .km-icon,
 .km-meego .km-tabstrip .km-button:nth-child(4) .km-icon
 {
-    background-position: -354px 50%;
+    background-position: 100.5% 50%;
 }
 
 /* Scroller */

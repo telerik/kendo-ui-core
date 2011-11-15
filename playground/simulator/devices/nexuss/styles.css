@@ -1,15 +1,17 @@
 .device-skin
 {
-    font-size: 10px; /* Sets the zoom level */
+    font-size: 12px; /* Sets the zoom level */
 }
 
 .device-container.vertical .device-skin
 {
+    padding-top: 3.16cm;
     background-image: url("images/vertical.png");
 }
 
 .device-container.horizontal .device-skin
 {
+    padding-top: 1.26cm;
     background-image: url("images/horizontal.png");
 }
 

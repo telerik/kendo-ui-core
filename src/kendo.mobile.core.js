@@ -52,11 +52,11 @@
                 }
             }
         }
-    }
+    };
 
     kendo.roleSelector = function(role) {
         return "[" + DATA_ROLE + "=" + role + "]";
-    }
+    };
 
     kendo.dataRole = DATA_ROLE;
 
