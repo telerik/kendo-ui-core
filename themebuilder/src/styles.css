@@ -49,12 +49,23 @@ body
     border-radius: 5px;
 }
 
-.k-color-preview
+.k-color-preview,
+.ktb-texture-preview
 {
-    background-image: none;
     border-radius: 3px;
     float: left;
     margin: 1px 0 0 1px;
+}
+
+.k-color-preview
+{
+    background-image: none;
+}
+
+.ktb-texture-preview
+{
+    width: 19px;
+    height: 19px;
 }
 
 .k-list
@@ -81,6 +92,7 @@ body
 
 #kendo-themebuilder div.k-colorpicker,
 #kendo-themebuilder .k-numerictextbox,
+#kendo-themebuilder .k-combobox,
 #kendo-themebuilder .k-shadowinput
 {
     width: 90px;
