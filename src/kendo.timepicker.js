@@ -288,7 +288,7 @@
             });
         },
 
-        _move: function(e) {
+        move: function(e) {
             var that = this,
                 key = e.keyCode,
                 ul = that.ul[0],
@@ -616,7 +616,7 @@
                 timeView = that.timeView;
 
             if (timeView.popup.visible() || e.altKey || enter) {
-                timeView._move(e);
+                timeView.move(e);
             }
 
             if (enter) {

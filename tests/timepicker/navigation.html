@@ -35,7 +35,7 @@
                 }
             });
 
-            test("_move should select first item", function() {
+            test("move should select first item", function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -45,12 +45,12 @@
                 });
 
                 tv.open();
-                tv._move({keyCode: keys.DOWN, preventDefault: $.noop});
+                tv.move({keyCode: keys.DOWN, preventDefault: $.noop});
 
                 equal(tv.ul.find("li.k-state-selected").index(), 0);
             });
 
-            test("_move should select last item", function() {
+            test("move should select last item", function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -60,12 +60,12 @@
                 });
 
                 tv.open();
-                tv._move({keyCode: keys.UP, preventDefault: $.noop});
+                tv.move({keyCode: keys.UP, preventDefault: $.noop});
 
                 equal(tv.ul.find("li.k-state-selected").index(), tv.ul.find("li").length - 1);
             });
 
-            test("_move should select next item", function() {
+            test("move should select next item", function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -77,12 +77,12 @@
                 tv.open();
                 tv.current(tv.ul[0].firstChild);
 
-                tv._move({keyCode: keys.DOWN, preventDefault: $.noop});
+                tv.move({keyCode: keys.DOWN, preventDefault: $.noop});
 
                 equal(tv.ul.find("li.k-state-selected").index(), 1);
             });
 
-            test("_move should select previous item", function() {
+            test("move should select previous item", function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -94,12 +94,12 @@
                 tv.open();
                 tv.current(tv.ul.children().eq(1));
 
-                tv._move({keyCode: keys.UP, preventDefault: $.noop});
+                tv.move({keyCode: keys.UP, preventDefault: $.noop});
 
                 equal(tv.ul.find("li.k-state-selected").index(), 0);
             });
 
-            test("_move should not raise error", function() {
+            test("move should not raise error", function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -110,12 +110,12 @@
 
                 tv.open();
                 tv._current = $(tv.ul.children(":first"));
-                tv._move({keyCode: keys.UP, preventDefault: $.noop});
+                tv.move({keyCode: keys.UP, preventDefault: $.noop});
 
                 ok(true);
             });
 
-            asyncTest("_move should call change handler", function() {
+            asyncTest("move should call change handler", function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -132,7 +132,7 @@
 
                 tv.current(tv.ul.children().eq(1));
 
-                tv._move({keyCode: keys.UP, preventDefault: $.noop});
+                tv.move({keyCode: keys.UP, preventDefault: $.noop});
             });
 
             asyncTest("click item should call change handler", function() {
