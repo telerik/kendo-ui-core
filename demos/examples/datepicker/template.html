@@ -13,7 +13,9 @@
         <script src="../../../src/jquery.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
         <script src="../../../src/kendo.calendar.js"></script>
+        <script src="../../../src/kendo.datepicker.js"></script>
         <!-- script -->
     </head>
     <body>
@@ -30,7 +32,7 @@
                 </p>
             </div>
 
-            <div id="calendar" style="width: 300px;"></div>
+            <input id="datepicker" />
 
             <script>
                 $(document).ready(function() {
@@ -43,7 +45,7 @@
                            +new Date(today.getFullYear(), today.getMonth() - 2, 22)
                         ];
 
-                    $("#calendar").kendoCalendar({
+                    $("#datepicker").kendoDatePicker({
                         value: today,
                         month: {
                             // template for dates in month view
@@ -54,14 +56,14 @@
                         },
                         footer: "Today - #=kendo.toString(data, 'd') #"
                     });
+
+                    $("#datepicker").data("kendoDatePicker")
+                                    .dateView.calendar.element
+                                    .width(300);
                 });
             </script>
 
             <style scoped>
-                #calendar {
-                    margin-top: 2em;
-                }
-
                 .birthday {
                     background: transparent url(../content/calendar/cake.png) no-repeat 0 50%;
                     display: inline-block;

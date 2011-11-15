@@ -53,6 +53,7 @@
         <input id="datepicker2" style="width: 150px"/>
         <input id="datepicker3" style="width: 150px"/>
         <input id="datepicker4" style="width: 150px"/>
+        <input id="datepicker5" style="width: 150px"/>
         <hr/>
         <div id="kendoCalendar"/>
 
@@ -72,6 +73,23 @@
                 $("#datepicker2").kendoDatePicker({value: new Date(), max: new Date()});
                 $("#datepicker3").kendoDatePicker({value: new Date(2004, 10, 10), max: new Date(2015, 11, 31), min: new Date(2003, 10, 10)});
                 $("#datepicker4").kendoDatePicker({value: today, min: today, max: today});
+                $("#datepicker5").kendoDatePicker({
+                    month: {
+                        content: '#=data.value#_'
+                    },
+                    animation: {
+                        open: {
+                            effects: "zoomIn",
+                            duration: 400,
+                            show: true
+                        },
+                        close: { // if close animation effects are defined, they will be used instead of open.reverse
+                            duration: 100,
+                            show: false,
+                            hide: true
+                        }
+                    }
+                });
             });
         </script>
     </body>
