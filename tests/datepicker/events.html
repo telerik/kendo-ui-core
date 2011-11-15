@@ -74,6 +74,25 @@
                 datepicker._change("10/10/2000");
             });
 
+            asyncTest("do not raise change event", function() {
+                var datepicker = input.kendoDatePicker({
+                                            change: function() {
+                                                ok(false);
+                                                start();
+                                            }
+                                       })
+                                      .data("kendoDatePicker");
+
+                datepicker.value(new Date(2000, 10, 10));
+
+                input.focus().blur();
+
+                setTimeout(function() {
+                    ok(true);
+                    start();
+                }, 350);
+            });
+
             asyncTest("raise open event", function() {
                 var datepicker = input.kendoDatePicker({
                                             open: function() {

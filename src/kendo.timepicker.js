@@ -288,7 +288,7 @@
             });
         },
 
-        _move: function(e) {
+        move: function(e) {
             var that = this,
                 key = e.keyCode,
                 ul = that.ul[0],
@@ -330,7 +330,7 @@
         return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
     }
 
-    function inRange(value, min, max) {
+    function isInRange(value, min, max) {
         var msMin = getMilliseconds(min),
             msMax = getMilliseconds(max),
             msValue;
@@ -548,18 +548,10 @@
         * timepicker.value("10:00 AM"); //parse "10:00 AM" time and selects it in the popup.
         */
         value: function(value) {
-            var that = this,
-                options = that.options,
-                text = value;
+            var that = this;
 
             if (value === undefined) {
                 return that._value;
-            }
-
-            value = that._parse(value);
-
-            if (!inRange(value, options.min, options.max)) {
-                value = null;
             }
 
             that._old = that._update(value);
@@ -624,7 +616,7 @@
                 timeView = that.timeView;
 
             if (timeView.popup.visible() || e.altKey || enter) {
-                timeView._move(e);
+                timeView.move(e);
             }
 
             if (enter) {
@@ -685,8 +677,13 @@
         _update: function(value) {
             var that = this,
                 current = that._value,
+                options = that.options,
                 date = that._parse(value),
-                text = kendo.toString(date, that.options.format);
+                text = kendo.toString(date, options.format);
+
+            if (!isInRange(date, options.min, options.max)) {
+                date = null;
+            }
 
             that._value = date;
             that.element.val(date ? text : value);

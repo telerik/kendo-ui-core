@@ -176,8 +176,8 @@
                     datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
                 datepicker.dateView.calendar.value(date);
-                datepicker._valid = false;
-                datepicker.dateView.options.change();
+
+                $.proxy(datepicker.dateView.options.change, datepicker.dateView.calendar)();
 
                 equal(+datepicker._value, +date);
                 equal(input.val(), "11/10/2000");
