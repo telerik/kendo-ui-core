@@ -162,4 +162,4 @@ console.log("packaging distribution...");
 zip(path.join(RELEASE, "KendoUI_" + VERSION + ".zip"), PATH);
 
 console.log("packaging online examples...");
-zip(path.join(RELEASE, "OnlineExamples_" + VERSION + ".zip"), ONLINEEXAMPLES);
+zip(path.join(RELEASE, "OnlineExamples.zip"), ONLINEEXAMPLES);
