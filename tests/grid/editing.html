@@ -436,6 +436,105 @@
 
             });
 
+            test("saveChanges calls datasource sync", function() {
+                var grid = setup({
+                    dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "foo"
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                    })
+                }),
+                syncMethod = stub(dataSource, "sync");
+
+                grid.saveChanges();
+
+                ok(syncMethod.calls("sync"));
+            });
+
+            test("saveChanges calls datasource sync", function() {
+                var grid = setup({
+                    dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "foo"
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                    })
+                }),
+                syncMethod = stub(dataSource, "sync");
+
+                grid.saveChanges();
+
+                ok(syncMethod.calls("sync"));
+            });
+
+            test("saveChanges does not call datasource sync if validation fails", function() {
+                var grid = setup({
+                    dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "foo",
+                                fields: { foo: { field: "foo", validation: { required: true }}}
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                    })
+                }),
+                syncMethod = stub(dataSource, "sync");
+
+                grid.addRow();
+
+                grid.saveChanges();
+
+                ok(!syncMethod.calls("sync"));
+            });
+
+            test("saveChanges triggers saveChanges event", function() {
+                var called = false,
+                    grid = setup({
+                        saveChanges: function() {
+                            called = true;
+                        },
+                        dataSource: new DataSource({
+                            schema: {
+                                model: {
+                                    id: "foo"
+                                }
+                            },
+                            data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                        })
+                    });
+
+                grid.saveChanges();
+
+                ok(called);
+            });
+
+            test("if saveChanges is canceled dataSource is not called", function() {
+                var grid = setup({
+                        saveChanges: function(e) {
+                            e.preventDefault();
+                        },
+                        dataSource: new DataSource({
+                            schema: {
+                                model: {
+                                    id: "foo"
+                                }
+                            },
+                            data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                        })
+                    }),
+                    method = stub(dataSource, "sync");
+
+                grid.saveChanges();
+
+                ok(!method.calls("sync"));
+
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
