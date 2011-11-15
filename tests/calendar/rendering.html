@@ -17,6 +17,8 @@
         <ol id="qunit-tests"></ol>
         <script>
 
+            QUnit.config.reorder = false;
+
             var calendar = kendo.calendar,
                 template = new kendo.ui.Calendar($("<div/>")).month,
                 div;
@@ -569,6 +571,21 @@
 
                 ok(cal.month.content.toString().indexOf("with") != -1);
             });
+
+            test("set options.month should be used as template", function() {
+                var cal = new kendo.ui.Calendar($("<div/>"), {month: {content: "#=value#" }}),
+                    oldView = kendo.calendar.views[0].content, options;
+
+                kendo.calendar.views[0].content = function(o) {
+                   options = o;
+                }
+                cal.navigate();
+
+                equal(options.content, cal.month.content);
+
+                kendo.calendar.views[0].content = oldView;
+            });
+
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
