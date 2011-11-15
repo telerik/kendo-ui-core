@@ -129,6 +129,7 @@
         CLOSE = "close",
         REFRESH = "refresh",
         RESIZE = "resize",
+        DRAGEND = "dragend",
         ERROR = "error",
         OVERFLOW = "overflow",
         isLocalUrl = kendo.isLocalUrl;
@@ -311,6 +312,13 @@
                  * @param {Event} e
                  */
                 RESIZE,
+                /**
+                 * Fires when the window has been moved by the user.
+                 * @name kendo.ui.Window#dragend
+                 * @event
+                 * @param {Event} e
+                 */
+                DRAGEND,
                 /**
                  * Fires when an AJAX request for content fails.
                  * @name kendo.ui.Window#error
@@ -924,6 +932,8 @@
 
             if (e.keyCode == 27) {
                 e.currentTarget.closest(KWINDOW).css(wnd.initialWindowPosition);
+            } else {
+                wnd.trigger(DRAGEND);
             }
 
             return false;
