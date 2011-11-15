@@ -161,6 +161,13 @@
             }
         },
 
+        reset: function() {
+            var that = this;
+
+            extend(that.data, that.pristine);
+            that._modified = false;
+        },
+
         _accept: function(data) {
             var that = this;
 
@@ -325,7 +332,8 @@
             var that = this, data;
 
             if (model === undefined && isPlainObject(index)) {
-               model = index;
+                model = index;
+                index = 0;
             }
 
             if (!(model instanceof Model)) {
@@ -519,6 +527,37 @@
             });
 
             return promises;
+        },
+
+        cancelChanges: function() {
+            var that = this,
+                destroyed = that._destroyed,
+                models = that._models,
+                model,
+                data = that._data,
+                idx,
+                length;
+
+            for (idx = 0, length = destroyed.length; idx < length; idx++) {
+                model = destroyed[idx];
+                model.reset();
+
+                data.push(model.data);
+            }
+
+            for (idx in models) {
+                model = models[idx];
+
+                if (model.isNew()) {
+                    data.splice(that._idMap[idx], 1);
+                } else if (model.hasChanges()) {
+                    model.reset();
+                }
+            }
+
+            that.data(data);
+
+            that.trigger(CHANGE);
         }
     });
 

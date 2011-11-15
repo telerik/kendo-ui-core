@@ -8,6 +8,10 @@ tests.push(
         title: "model init"
     },
     {
+        page: "model/reset.html",
+        title: "model reset"
+    },
+    {
         page: "model/modelset.html",
         title: "modelset"
     },

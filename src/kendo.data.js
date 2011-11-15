@@ -1044,6 +1044,10 @@
             return this._set.insert(index, model);
         },
 
+        cancelChanges : function() {
+            this._set.cancelChanges();
+        },
+
         read: function(data) {
             var that = this, params = that._params(data);
 

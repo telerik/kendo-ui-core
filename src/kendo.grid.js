@@ -777,6 +777,10 @@
             return confirmation !== false ? that._showMessage(confirmation) : true;
         },
 
+        cancelChanges: function() {
+            this.dataSource.cancelChanges();
+        },
+
         saveChanges: function() {
             var that = this;
 
@@ -813,6 +817,7 @@
                     .html(template({}))
                     .prependTo(wrapper)
                     .delegate(".k-grid-add", CLICK, function(e) { e.preventDefault(); that.addRow(); })
+                    .delegate(".k-grid-cancel-changes", CLICK, function(e) { e.preventDefault(); that.cancelChanges(); })
                     .delegate(".k-grid-save-changes", CLICK, function(e) { e.preventDefault(); that.saveChanges(); });
             }
         },
@@ -839,8 +844,6 @@
                     } else {
                         options = extend(true, options, defaultCommands[commandName]);
                     }
-
-                    console.log(options);
 
                     html += kendo.template(template)(options);
                 }
@@ -1216,7 +1219,7 @@
         _modelChange: function(model) {
             var that = this,
                 row = that.tbody.find("tr[data-id=" + model.id() +"]"),
-                changes = model.changes(),
+                changes = model.changes() || {},
                 cell,
                 column,
                 isAlt = row.hasClass("k-alt");
