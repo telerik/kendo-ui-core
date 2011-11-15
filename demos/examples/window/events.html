@@ -73,6 +73,10 @@
                         kendoConsole.log("event :: resize");
                     }
 
+                    function onDragEnd(e) {
+                        kendoConsole.log("event :: dragend");
+                    }
+
                     if (!window.data("kendoWindow")) {
                         window.kendoWindow({
                             width: "500px",
@@ -84,6 +88,7 @@
                             close: onClose,
                             deactivate: onDeactivate,
                             resize: onResize,
+                            dragend: onDragEnd,
                             refresh: onRefresh
                         });
                     }
