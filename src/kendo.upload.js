@@ -1246,6 +1246,7 @@
             tryParseJSON(xhr.responseText,
                 function(jsonResult) {
                     fileEntry.trigger("t:upload-success", [ jsonResult, xhr ]);
+                    fileEntry.trigger("t:progress", [ 100 ]);
                     module.cleanupFileEntry(fileEntry);
                 },
                 function() {
