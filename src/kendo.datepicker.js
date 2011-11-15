@@ -138,14 +138,13 @@
                 calendar.max(options.max);
 
                 calendar.options.depth = options.depth;
-                calendar.options.start = options.start;
-                calendar._index = views[options.start];
 
                 calendar.unbind(CHANGE)
                         .unbind(NAVIGATE)
                         .bind(NAVIGATE, proxy(that._navigate, that))
                         .bind(CHANGE, options);
 
+                calendar.navigate(that._value, options.start);
                 that.value(that._value);
             }
         },
