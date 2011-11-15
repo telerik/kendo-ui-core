@@ -630,6 +630,72 @@
                 equal(result[1], 1);
             });
 
+            test("filter with nested expression", function() {
+                var data = [100, 10, 1];
+
+                var result = new Query(data).filter( {
+                    logic: "or",
+                    filters: [
+                        {
+                            logic: "and",
+                            filters: [ { operator: "gt", value: 1 }, { operator: "lt", value: 100 } ]
+                        },
+                        {
+                            operator: "eq",
+                            value: 100
+                        }
+                    ]
+                }).toArray();
+
+                equal(result.length, 2);
+                equal(result[0], 100);
+                equal(result[1], 10);
+            });
+
+            test("filter with nested or expression", function() {
+                var data = [100, 10, 1];
+
+                var result = new Query(data).filter( {
+                    logic: "or",
+                    filters: [
+                        {
+                            logic: "and",
+                            filters: [ { operator: "gt", value: 1 }, { operator: "lt", value: 100 } ]
+                        },
+                        {
+                            operator: "eq",
+                            value: 100
+                        }
+                    ]
+                }).toArray();
+
+                equal(result.length, 2);
+                equal(result[0], 100);
+                equal(result[1], 10);
+            });
+
+            test("filter with nested and expression", function() {
+                var data = [100, 10, 1];
+
+                var result = new Query(data).filter( {
+                    logic: "and",
+                    filters: [
+                        {
+                            logic: "or",
+                            filters: [ { operator: "eq", value: 100 }, { operator: "eq", value: 10 } ]
+                        },
+                        {
+                            operator: "gt",
+                            value: 1
+                        }
+                    ]
+                }).toArray();
+
+                equal(result.length, 2);
+                equal(result[0], 100);
+                equal(result[1], 10);
+            });
+
             test("filter without specifying field fields array", function() {
                 var data = [100, 10, 1];
 
