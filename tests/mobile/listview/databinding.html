@@ -7,6 +7,7 @@
         <script src="../../qunit/qunit/qunit.js"></script>
         <script src="../../qunit-runner.js"></script>
         <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.model.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.mobile.core.js"></script>
         <script src="../../../src/kendo.mobile.listview.js"></script>
@@ -135,6 +136,24 @@
                 dom = $("<ul/>");
                 listView = new ListView(dom, {dataSource: dataSource, template: "${bar}", headerTemplate: function(data) { return "<i>" + data + "</i>" }});
                 ok(dom.find("li").eq(0).children(0).is("i"), "item has custom header");
+            });
+
+            test("data-id attribute is rendered for each row when model is defined", function() {
+                dom = $("<ul/>");
+                listView = new ListView(dom, {
+                    dataSource: {schema: {model: {id: "foo"}}, data: [{foo: "bar"}]}
+                });
+
+                equal(dom.find("li").data("id"), "bar");
+            });
+
+            test("data-id attribute is rendered for each row when model id is defined as a function", function() {
+                dom = $("<ul/>");
+                listView = new ListView(dom, {
+                    dataSource: {schema: {model: {id: function(data) { return data.foo }}}, data: [{foo: "bar"}]}
+                });
+
+                equal(dom.find("li").data("id"), "bar");
             });
         </script>
     </body>

@@ -7,6 +7,7 @@
         ITEM_SELECTOR = ".km-list > li",
         proxy = $.proxy,
         GROUP_TEMPLATE = kendo.template("<li>#= this.headerTemplate(data) #<ul>#= kendo.render(this.template, data.items)#</ul></li>"),
+        FUNCTION = "function",
         CLICK = "click";
 
     function toggleItemActiveClass(e) {
@@ -53,8 +54,8 @@
             }
 
             if (options.dataSource) {
-                that._template();
                 that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that.refresh, that));
+                that._template();
                 that.dataSource.fetch();
             } else {
                 that._style();
@@ -90,24 +91,34 @@
 
         _template: function() {
             var that = this,
-                groupTemplateProxy,
                 template = that.options.template,
-                headerTemplate = that.options.headerTemplate;
+                headerTemplate = that.options.headerTemplate,
+                model = that.dataSource.options.schema.model,
+                modelID = model && model.id,
+                dataIDAttribute = "",
+                templateProxy = {},
+                groupTemplateProxy = {};
 
-            if (typeof template === "function") {
-                that.template = $.proxy(kendo.template("<li>#=this.tmpl(data)#</li>"), { tmpl: template });
-            } else {
-                that.template = kendo.template("<li>" + template + "</li>");
+            if (typeof modelID === "string") {
+                dataIDAttribute = ' data-id="${' + modelID + '}"';
+            } else if (typeof modelID === FUNCTION) {
+                templateProxy.modelID = modelID;
+                dataIDAttribute = ' data-id="${this.modelID(data)}"';
             }
 
-            groupTemplateProxy = { template: that.template }
+            if (typeof template === FUNCTION) {
+                templateProxy.template = template;
+                template = "#=this.template(data)#";
+            }
 
-            if (typeof headerTemplate === "function") {
-                groupTemplateProxy.headerTemplate = kendo.template("#=this._headerTemplate(data)#");
+            groupTemplateProxy.template = that.template = $.proxy(kendo.template("<li" + dataIDAttribute + ">" + template + "</li>"), templateProxy);
+
+            if (typeof headerTemplate === FUNCTION) {
                 groupTemplateProxy._headerTemplate = headerTemplate;
-            } else {
-                groupTemplateProxy.headerTemplate = kendo.template(headerTemplate);
+                headerTemplate = "#=this._headerTemplate(data)#";
             }
+
+            groupTemplateProxy.headerTemplate = kendo.template(headerTemplate);
 
             that.groupTemplate = $.proxy(GROUP_TEMPLATE, groupTemplateProxy);
         },
