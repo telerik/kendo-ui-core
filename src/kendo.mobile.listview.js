@@ -124,7 +124,16 @@
         },
 
         _click: function(e) {
-            if (this.trigger(CLICK, {target: $(e.target), item: $(e.currentTarget)})) {
+            var that = this,
+                dataItem,
+                item = $(e.currentTarget),
+                id = item.data("id");
+
+            if (id) {
+                dataItem = that.dataSource.get(id);
+            }
+
+            if (that.trigger(CLICK, {target: $(e.target), item: item, dataItem: dataItem})) {
                 e.preventDefault();
             }
         },
