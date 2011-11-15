@@ -174,7 +174,7 @@
             that[that.popup.visible() ? CLOSE : OPEN]();
         },
 
-        navigate: function(e) {
+        move: function(e) {
             var that = this,
                 options = that.options,
                 min = options.min,
@@ -188,6 +188,20 @@
 
             if (key == keys.ESC) {
                 that.close();
+                return;
+            }
+
+            if (e.altKey) {
+                if (key == keys.DOWN) {
+                    that.open();
+                    prevent = true;
+                } else if (key == keys.UP) {
+                    that.close();
+                    prevent = true;
+                }
+            }
+
+            if (!that.popup.visible()) {
                 return;
             }
 
@@ -558,23 +572,12 @@
 
         _keydown: function(e) {
             var that = this,
-                key = e.keyCode,
                 dateView = that.dateView;
 
-            if (e.altKey) {
-                if (key == keys.DOWN) {
-                    that.open();
-                    e.preventDefault();
-                } else if (key == keys.UP) {
-                    that.close();
-                    e.preventDefault();
-                }
+            if (!dateView.popup.visible() && e.keyCode == keys.ENTER) {
+                that._change(that.element.val());
             } else {
-                if (dateView.popup.visible()) {
-                    dateView.navigate(e);
-                } else if (key == keys.ENTER) {
-                    that._change(e.currentTarget.value);
-                }
+                dateView.move(e);
             }
         },
 

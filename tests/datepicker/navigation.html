@@ -70,11 +70,11 @@
 
                 dv.open();
 
-                dv.navigate(upEvent);
-                dv.navigate(upEvent);
+                dv.move(upEvent);
+                dv.move(upEvent);
 
-                dv.navigate(downEvent);
-                dv.navigate(downEvent);
+                dv.move(downEvent);
+                dv.move(downEvent);
 
                 equal(+dv._current, +value);
             });
@@ -94,7 +94,8 @@
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
 
                 dv._calendar();
-                dv.navigate(event);
+                dv.popup.open();
+                dv.move(event);
 
                 equal(+dv._current, +date);
                 equal(dv.calendar._table.find(".k-state-focused").text(), date.getDate() + "");
@@ -107,7 +108,8 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
-                dv.navigate(event);
+                dv.popup.open();
+                dv.move(event);
 
                 equal(+dv._current, +date);
                 equal(dv.calendar._table.find(".k-state-focused").text(), date.getDate() + "");
@@ -128,7 +130,8 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
-                dv.navigate(event);
+                dv.popup.open();
+                dv.move(event);
 
                 equal(dv.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
 
@@ -143,7 +146,8 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
-                dv.navigate(event);
+                dv.popup.open();
+                dv.move(event);
 
                 equal(dv.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
             });
@@ -157,7 +161,8 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
-                dv.navigate(event);
+                dv.popup.open();
+                dv.move(event);
 
                 equal(dv.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
             });
@@ -171,7 +176,8 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
-                dv.navigate(event);
+                dv.popup.open();
+                dv.move(event);
 
                 equal(dv.calendar._table.find(".k-state-focused").text(), focusedDate.getDate() + "");
             });
@@ -184,11 +190,12 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigateUp();
 
                 focusedDate.setMonth(focusedDate.getMonth() + 1);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(dv.calendar._table.find(".k-state-focused").text(), "Dec");
             });
@@ -200,11 +207,12 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigateUp();
 
                 focusedDate.setMonth(focusedDate.getMonth() - 1);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), "Oct");
@@ -217,11 +225,12 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigateUp();
 
                 focusedDate.setMonth(focusedDate.getMonth() - 4);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), "Jul");
@@ -234,11 +243,12 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigateUp();
 
                 focusedDate.setMonth(focusedDate.getMonth() + 4);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 setTimeout(function() {
                     equal(+dv._current, +focusedDate);
@@ -255,11 +265,12 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigate(null, "decade");
 
                 focusedDate.setFullYear(focusedDate.getFullYear() + 1);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), "2001");
@@ -273,11 +284,12 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigate(null, "decade");
 
                 focusedDate.setFullYear(focusedDate.getFullYear() - 1);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), "1999");
@@ -297,11 +309,12 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigate(null, "decade");
 
                 focusedDate.setFullYear(focusedDate.getFullYear() - 4);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), "1996");
@@ -314,11 +327,12 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigate(null, "decade");
 
                 focusedDate.setFullYear(focusedDate.getFullYear() + 4);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), "2004");
@@ -332,11 +346,12 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigate(null, "century");
 
                 focusedDate.setFullYear(focusedDate.getFullYear() + 10);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), "2010 - 2019");
@@ -349,11 +364,12 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigate(null, "century");
 
                 focusedDate.setFullYear(focusedDate.getFullYear() - 10);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), "1990 - 1999");
@@ -366,11 +382,12 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigate(null, "century");
 
                 focusedDate.setFullYear(focusedDate.getFullYear() - 40);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), "1960 - 1969");
@@ -383,11 +400,12 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigate(null, "century");
 
                 focusedDate.setFullYear(focusedDate.getFullYear() + 40);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(+dv._current, +focusedDate);
                 equal(dv.calendar._table.find(".k-state-focused").text(), "2040 - 2049");
@@ -407,11 +425,12 @@
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 stub(dv.calendar, { navigateDown: dv.calendar.navigateDown });
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar.navigateUp();
 
                 dv.calendar._focus(dv._current);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(dv.calendar.calls("navigateDown"), 1);
             });
@@ -423,7 +442,8 @@
                 stub(dv.calendar, "navigateUp");
 
                 dv._calendar();
-                dv.navigate(event);
+                dv.popup.open();
+                dv.move(event);
 
                 equal(dv.calendar.calls("navigateUp"), 1);
             });
@@ -435,9 +455,10 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 dv.calendar._focus(selectedDate);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(+dv.calendar.value(), +selectedDate);
             });
@@ -450,7 +471,8 @@
                 stub(dv.calendar, "navigateToPast");
 
                 dv._calendar();
-                dv.navigate(event);
+                dv.popup.open();
+                dv.move(event);
 
                 equal(dv.calendar.calls("navigateToPast"), 1);
             });
@@ -463,7 +485,8 @@
                 stub(dv.calendar, "navigateToFuture");
 
                 dv._calendar();
-                dv.navigate(event);
+                dv.popup.open();
+                dv.move(event);
 
                 equal(dv.calendar.calls("navigateToFuture"), 1);
             });
@@ -474,7 +497,8 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
-                dv.navigate(event);
+                dv.popup.open();
+                dv.move(event);
 
                 var value = dv.calendar.element.find(".k-state-focused").children(":first").data("value");
 
@@ -487,7 +511,8 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
-                dv.navigate(event);
+                dv.popup.open();
+                dv.move(event);
 
                 var value = dv.calendar.element.find(".k-state-focused").children(":first").data("value");
 
@@ -500,9 +525,10 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
                 stub(dv.calendar, {navigateToPast: dv.calendar.navigateToPast});
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(dv.calendar.calls("navigateToPast"), 1);
             });
@@ -513,10 +539,11 @@
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
                 dv._calendar();
+                dv.popup.open();
 
                 stub(dv.calendar, {navigateToFuture: dv.calendar.navigateToFuture});
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(dv.calendar.calls("navigateToFuture"), 1);
             });
@@ -537,7 +564,7 @@
 
                 dv.calendar._focus(dv._current);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 ok(!dv.popup.visible());
             });
@@ -558,7 +585,7 @@
 
                 dv.calendar.navigate(new Date(2000, 10, 10), "year");
                 dv.calendar._focus(dv._current);
-                dv.navigate(event);
+                dv.move(event);
 
                 setTimeout(function() {
                     ok(dv.popup.visible());
@@ -580,12 +607,13 @@
                 focused = new Date(2000, 10, 11);
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
-                dv.open();
+                dv._calendar();
+                dv.popup.open();
 
                 stub(dv.calendar, {navigateDown: dv.calendar.navigateDown});
 
                 dv.calendar._focus(focused);
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(+dv.calendar.args("navigateDown")[0], +focused);
             });
@@ -602,14 +630,15 @@
                     });
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
-                dv.open();
+                dv._calendar();
+                dv.popup.open();
 
                 stub(dv.calendar, {navigateDown: dv.calendar.navigateDown});
 
                 dv.calendar.navigateUp();
                 dv.calendar._focus(dv._current);
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(dv.calendar.calls("navigateDown"), 1);
             });
@@ -626,28 +655,14 @@
                 });
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
-                dv.open();
+                dv._calendar();
+                dv.popup.open();
 
                 stub(dv.popup, "close");
 
-                dv.navigate(event);
+                dv.move(event);
 
                 equal(dv.popup.calls("close"), 1);
-            });
-
-            asyncTest("keydown triggered from datepicker should call navigate method", function() {
-                var datepicker = input.kendoDatePicker({value: new Date(2000, 10, 10)}).data("kendoDatePicker");
-
-                datepicker.dateView.calendar = div.kendoCalendar().data("kendoCalendar");
-                datepicker.open();
-
-                setTimeout(function() {
-                    stub(datepicker.dateView, "navigate");
-                    input.focus().trigger({ type:"keydown", keyCode: 40});
-
-                    equal(datepicker.dateView.calls("navigate"), 1);
-                    start();
-                }, 200);
             });
 
             asyncTest("keydown triggered from datepicker should call navigate method", function() {
@@ -657,11 +672,13 @@
                 datepicker.open();
 
                 setTimeout(function() {
-                    stub(datepicker.dateView.calendar, "_focus");
-                    input.focus().trigger({ type:"keydown", keyCode: 40});
+                    input.focus()
+                        .trigger({
+                            type:"keydown",
+                            keyCode: 40,
+                            preventDefault: function() { start(); }
+                        });
 
-                    equal(datepicker.dateView.calendar.calls("_focus"), 1);
-                    start();
                 }, 200);
             });
 
