@@ -165,7 +165,7 @@
         getter = kendo.getter,
         stringify = kendo.stringify,
         math = Math,
-        rgDate = /^\/Date\((.*?)\)\/$/;
+        dateRegExp = /^\/Date\((.*?)\)\/$/;
 
     var Comparer = {
         selector: function(field) {
@@ -212,7 +212,7 @@
     };
 
     var Filter = {
-        create: function(expressions) {
+        create: function(expression) {
             var idx,
                 length,
                 expr,
@@ -221,11 +221,13 @@
                 desc,
                 descriptors = [],
                 caseSensitive,
+                filters,
                 predicate;
 
-            expressions = expressions || [];
-            for(idx = 0, length = expressions.length; idx < length; idx ++) {
-                expr = expressions[idx];
+            filters = expression ? expression.filters : [];
+
+            for(idx = 0, length = filters.length; idx < length; idx ++) {
+                expr = filters[idx];
                 if(typeof expr.value === STRING && !expr.caseSensitive) {
                      caseSensitive = function(value) {
                         return value.toLowerCase();
@@ -240,7 +242,7 @@
                 desc = operator(selector, caseSensitive(expr.value));
                 descriptors.push(desc);
             }
-            predicate = Filter.combine(descriptors);
+            predicate = Filter[expression.logic](descriptors);
 
             return function(data) {
                 return Filter.execute(predicate, data);
@@ -255,7 +257,7 @@
                     return function(record) {
                         var value = accessor(record);
                         if (typeof value === "string") {
-                            var date = rgDate.exec(value);
+                            var date = dateRegExp.exec(value);
                             if (date) {
                                 value = new Date(parseInt(date[1]));
                             }
@@ -284,13 +286,26 @@
 
             return result;
         },
-        combine: function(descriptors) {
+        and: function(descriptors) {
             return function(record) {
                 var result = true,
                     idx = 0,
                     length = descriptors.length;
 
                 while (result && idx < length) {
+                    result = descriptors[idx ++](record);
+                }
+
+                return result;
+            };
+        },
+        or: function(descriptors) {
+            return function(record) {
+                var result = false,
+                    idx = 0,
+                    length = descriptors.length;
+
+                while (!result && idx < length) {
                     result = descriptors[idx ++](record);
                 }
 
@@ -377,20 +392,14 @@
         }
     }
 
-    if (Array.prototype.map !== undefined) {
-        map = function (array, callback) {
-            return array.map(callback);
-        }
-    } else {
-        map = function (array, callback) {
-            var length = array.length, result = new Array(length);
+    map = function (array, callback) {
+        var length = array.length, result = new Array(length);
 
-            for (var i = 0; i < length; i++) {
-                result[i] = callback(array[i], i, array);
-            }
-
-            return result;
+        for (var i = 0; i < length; i++) {
+            result[i] = callback(array[i], i, array);
         }
+
+        return result;
     }
 
     function Query(data) {
@@ -399,16 +408,22 @@
 
     function expandSort(field, dir) {
         if (field) {
-        var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
-            descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+            var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
+                descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
-        return grep(descriptors, function(d) { return !!d.dir; });
+            return grep(descriptors, function(d) { return !!d.dir; });
         }
     }
 
-    function expandFilter(expressions) {
-        if (expressions) {
-            return expressions = isArray(expressions) ? expressions : [expressions];
+    function expandFilter(expression) {
+        if (expression) {
+            if (isArray(expression) || !expression.logic) {
+                expression = {
+                    logic: "and",
+                    filters: isArray(expression) ? expression : [expression]
+                }
+            }
+            return expression;
         }
     }
 
