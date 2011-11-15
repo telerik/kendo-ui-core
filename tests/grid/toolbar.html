@@ -217,6 +217,17 @@
 
                 ok(method.calls("saveChanges"));
             });
+
+            test("clicking cancel command button calls cancelChanges", function() {
+                 var grid = setup({
+                    toolbar: [ "cancel" ]
+                }),
+                method = stub(grid, "cancelChanges");
+
+                toolbar.find(".k-grid-cancel-changes").click();
+
+                ok(method.calls("cancelChanges"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

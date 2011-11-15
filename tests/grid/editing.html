@@ -533,7 +533,24 @@
                 grid.saveChanges();
 
                 ok(!method.calls("sync"));
+            });
 
+            test("cancelChanges calls datasource cancelChanges", function() {
+                var grid = setup({
+                    dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "foo"
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                    })
+                }),
+                method = stub(dataSource, "cancelChanges");
+
+                grid.cancelChanges();
+
+                ok(method.calls("cancelChanges"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

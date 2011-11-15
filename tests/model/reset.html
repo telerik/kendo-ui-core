@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Model reset</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Model reset</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Model = kendo.data.Model,
+                MyModel;
+
+            module("kendo.data.Model reset", {
+                setup: function() {
+                    MyModel = Model.define({ id: "foo" });
+                },
+                teardown: function() {
+                }
+            });
+
+            test("reset restore the model initial values", function() {
+                var model = new MyModel({ foo: "bar" });
+                model.set("foo", "baz");
+
+                model.reset();
+
+                equal(model.get("foo"), "bar");
+                ok(!model.hasChanges());
+            });
+
+            test("reset restore the complex model initial values", function() {
+                var model = new MyModel({ id: 1, foo: { bar: "baz" } });
+                model.set("foo.bar", "moo");
+
+                model.reset();
+
+                equal(model.get("foo.bar"), "baz");
+                ok(!model.hasChanges());
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

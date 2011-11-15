@@ -241,6 +241,94 @@
 
                 ok(!wasCalled);
             });
+
+            test("cancelChanges restores deleted items", function() {
+                var data = [ { id: 1} ];
+
+                setup( { data: data });
+
+                modelSet.remove(modelSet.get(1));
+
+                modelSet.cancelChanges();
+
+                equal(data.length, 1);
+                ok(modelSet.get(1));
+            });
+
+            test("cancelChanges restores deleted items to its original state", function() {
+                var data = [ { id: 1, foo: "bar"} ],
+                    model;
+
+                setup( { data: data });
+
+                model = modelSet.get(1);
+
+                model.set("foo", "baz");
+
+                modelSet.remove(model);
+
+                modelSet.cancelChanges();
+
+                equal(modelSet.get(1).get("foo"), "bar");
+            });
+
+            test("cancelChanges removes inserted items", function() {
+                var data = [ { id: 1, foo: "bar"} ];
+
+                setup( { data: data });
+
+                modelSet.insert({ foo: "baz" });
+
+                modelSet.cancelChanges();
+
+                equal(data.length, 1);
+
+                ok(modelSet.get(1));
+            });
+
+            test("cancelChanges removes inserted items if there are also deleted items", function() {
+                var data = [ { id: 1, foo: "bar"}, { id: 2, foo: "foo"} ];
+
+                setup( { data: data });
+
+                modelSet.add({ foo: "baz" });
+
+                modelSet.remove(modelSet.get(1));
+
+                modelSet.cancelChanges();
+
+                equal(data.length, 2);
+
+                equal(modelSet.get(1).get("foo"), "bar");
+            });
+
+            test("cancelChanges restores modified items to the original state", function() {
+                var data = [ { id: 1, foo: "bar"} ];
+
+                setup( { data: data });
+
+                modelSet.get(1).set("foo", "baz");
+
+                modelSet.cancelChanges();
+
+                equal(data.length, 1);
+
+                equal(modelSet.get(1).get("foo"), "bar");
+            });
+
+            test("cancelChanges raises change event", function() {
+                var data = [ { id: 1, foo: "bar"} ],
+                    called = false;
+
+                setup( { data: data });
+
+                modelSet.bind("change", function() {
+                    called = true;
+                });
+
+                modelSet.cancelChanges();
+                ok(called);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
