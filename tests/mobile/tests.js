@@ -18,5 +18,9 @@ tests.push(
     {
         page: "mobile/listview/index.html",
         title: "listview"
+    },
+    {
+        page: "mobile/listview/databinding.html",
+        title: "listview"
     }
 );
