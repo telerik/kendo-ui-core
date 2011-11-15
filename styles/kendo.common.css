@@ -48,6 +48,7 @@
 .k-draghandle
 {
     font-size: 100%;
+    font-family: inherit;
     border-style: solid;
     border-width: 1px;
     -webkit-appearance: none;
@@ -202,12 +203,12 @@ html body .k-button-bare
 .k-state-hover .k-arrow-next { background-position: -16px -16px; }
 .k-state-hover .k-arrow-last { background-position: -16px -80px; }
 
-.k-arrow-up-small { background-position: 0 -128px; }
+.k-arrow-up-small { background-position: 0 -130px; }
 .k-arrow-down-small { background-position: 0 -160px; }
 
 .k-expand, .k-plus { background-position: 0 -192px; }
 .k-rtl .k-expand, .k-rtl .k-plus { background-position: 0 -208px; }
-.k-collapse, .k-minus { background-position: 0 -224px; }
+.k-collapse, .k-minus { background-position: 0 -226px; }
 .k-rtl .k-collapse, .k-rtl .k-minus { background-position: 0 -240px; }
 
 .k-edit { background-position: -32px 0; }
@@ -904,7 +905,7 @@ div.k-window-content
     overflow: hidden;
     border-style: solid;
     border-width: 0 0 1px 1px;
-    padding: .3em .6em;
+    padding: .5em .6em .4em .6em;
     font-weight: normal;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -913,10 +914,10 @@ div.k-window-content
 .k-grid-header .k-header .k-link
 {
     display: block;
-    height: 18px;
+    min-height: 18px;
     line-height: 18px; /* due to sorting icons*/
-    margin: -.3em -.6em;
-    padding: .3em 2.4em .3em .6em;
+    margin: -.5em -.6em -.4em -.6em;
+    padding: .5em 2.4em .4em .6em;
 }
 
 .k-grid-header .k-header .k-icon
@@ -933,7 +934,7 @@ div.k-window-content
 {
     border-style: solid;
     border-width: 0 0 0 1px;
-    padding: .25em .6em;
+    padding: .4em .6em;
     overflow: hidden;
     line-height: 1.6em;
     vertical-align: middle;
@@ -1021,7 +1022,7 @@ div.k-grid-header .k-header
     overflow: auto;
     border-style: solid;
     border-width: 1px 0 0;
-    padding: .2em .6em;
+    padding: .4em .6em;
     line-height: 1.8em;
 }
 
@@ -1209,7 +1210,7 @@ div.k-grid-header .k-header
 
 .k-grouping-row .k-icon
 {
-    margin: 0 4px;
+    margin: 0 4px 0 0;
 }
 
 .k-grouping-row p
@@ -1239,8 +1240,7 @@ div.k-grid-header .k-header
 .k-grouping-header,
 .k-grouping-dropclue
 {
-    height: 24px;
-    line-height: 24px;
+    line-height: 2;
 }
 
 .k-grouping-dropclue
@@ -1319,7 +1319,7 @@ div.k-grid-header .k-header
 .k-grid-toolbar
 {
     margin: 0;
-    padding: .25em;
+    padding: .2em .6em;
     cursor: default;
 }
 
@@ -1687,10 +1687,10 @@ div.k-datetimepicker .k-select+.k-select
 .k-selectbox .k-input
 {
     display: block;
-    min-height: 1.35em;
+    min-height: 1.2em;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0.166em 0 0.166em 3px;
+    padding: 0.15em 0 0.15em 3px;
 }
 
 .k-picker-wrap .k-select,
@@ -1723,9 +1723,9 @@ div.k-datetimepicker .k-select+.k-select
 .k-numeric-wrap .k-input,
 .k-combobox .k-input
 {
-    min-height: 1.35em;
-    line-height: 1.35em;
-    padding: 0.166em 0;
+    min-height: 1.3em;
+    line-height: 1.3em;
+    padding: 0.18em 0;
     text-indent: 4px;
     border: 0;
     margin: 0;
@@ -1735,8 +1735,8 @@ div.k-datetimepicker .k-select+.k-select
 .k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
-    min-height: 1.35em;
-    line-height: 1.35em;
+    min-height: 1.3em;
+    line-height: 1.3em;
     vertical-align: middle;
     padding: 3px 5px;
 }
@@ -1834,6 +1834,7 @@ div.k-datetimepicker .k-select+.k-select
 {
     position: absolute;
     top: .3em;
+    padding: .22em;
 }
 .k-calendar .k-nav-prev { left: 1%; }
 .k-calendar .k-nav-next { right: 1%; }
@@ -1843,7 +1844,7 @@ div.k-datetimepicker .k-select+.k-select
     float:left;
     border-spacing: 0;
     width: 100%;
-    height: 169px;
+    height: 166px;
     border-width: 0;
     margin: 0;
     table-layout: fixed;
@@ -1859,7 +1860,8 @@ div.k-datetimepicker .k-select+.k-select
 {
     display: inline-block;
     width: 75%;
-    margin: .4em 0;
+    margin: .3em 0;
+    padding: .28em 0;
 }
 
 .k-calendar .k-nav-fast .k-icon
@@ -1871,6 +1873,7 @@ div.k-datetimepicker .k-select+.k-select
 {
     border-bottom-style: solid;
     border-bottom-width: 1px;
+    padding: .4em .45em .4em .1em;
     font-weight: normal;
     cursor: default;
 }
@@ -1895,10 +1898,9 @@ div.k-datetimepicker .k-select+.k-select
     overflow: hidden;
 }
 
-.k-calendar th,
 .k-calendar .k-content .k-link
 {
-    padding: .25em .45em .3em .1em;
+    padding: .26em .45em .26em .1em;
 }
 
 .k-calendar .k-meta-view .k-link
@@ -1910,7 +1912,7 @@ div.k-datetimepicker .k-select+.k-select
 .k-calendar .k-footer
 {
     clear:both;
-    padding: .4em 0;
+    padding: .5em 0;
 }
 
 .k-calendar .k-nav-today:hover
