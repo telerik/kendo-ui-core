@@ -170,8 +170,15 @@ function copyTextFile(src, dest) {
     writeText(dest, readText(src));
 }
 
+var BOM = 0xfeff;
 function readText(fileName) {
-    return fs.readFileSync(fileName, "utf8");
+    var data = fs.readFileSync(fileName, "utf8");
+
+    if (data.charCodeAt(0) == 0xfeff) {
+        data = data.substring(1);
+    }
+
+    return data;
 }
 
 function writeText(fileName, text) {
