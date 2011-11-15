@@ -97,7 +97,6 @@
     */
     var kendo = window.kendo,
         ui = kendo.ui,
-        touch = kendo.support.touch,
         Widget = ui.Widget,
         parse = kendo.parseDate,
         template = kendo.template,
@@ -563,7 +562,7 @@
         _header: function() {
             var that = this,
             element = that.element,
-            eventName = touch ? "touchend" : CLICK,
+            eventName = kendo.support.touch ? "touchend" : CLICK,
             links;
 
             if (!element.find(".k-header")[0]) {

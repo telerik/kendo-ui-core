@@ -23,6 +23,9 @@
                 DatePicker = kendo.ui.DatePicker,
                 div, input;
 
+            QUnit.config.testTimeout = 500;
+            QUnit.config.reorder = false;
+
             module("kendo.ui.DatePicker initialization", {
                 setup: function() {
                     div = $("<div />").appendTo(document.body);
@@ -60,7 +63,6 @@
                 var calendar = dv1.calendar,
                     popup = dv2.popup;
 
-                //equal(+calendar._value, +options.value); //fails randomly
                 equal(+calendar.options.min, +options.min);
                 equal(+calendar.options.max, +options.max);
                 equal(calendar._events["change"][0], options.change);
@@ -69,6 +71,34 @@
                 equal(popup.options.anchor, dv2.options.anchor);
                 equal(popup._events["open"][0], dv2.options.open);
                 equal(popup._events["close"][0], dv2.options.close);
+            });
+
+            test("DateView should call calendar.navigate correctly", function() {
+                var dv1 = new DateView({
+                    anchor: $("<input/>"),
+                    value: new Date(),
+                    min: new Date(),
+                    max: new Date(),
+                    start: "month",
+                    depth: "month"
+                }),
+                dv2 = new DateView({
+                    anchor: $("<input/>"),
+                    value: new Date(),
+                    min: new Date(),
+                    max: new Date(),
+                    start: "year",
+                    depth: "year"
+                });
+
+                dv1._calendar();
+                dv2._calendar();
+
+                stub(dv1, "_navigate");
+
+                dv1._calendar();
+
+                equal(dv1.calls("_navigate"), 1);
             });
 
             //DateView
@@ -182,7 +212,7 @@
                     close: datepicker.close
                 });
 
-                datepicker.dateView.options.change();
+                $.proxy(datepicker.dateView.options.change, datepicker.dateView.calendar)();
 
                 equal(datepicker.calls("_change"), 1);
                 equal(datepicker.calls("close"), 1);
