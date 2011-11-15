@@ -212,18 +212,21 @@
         return new Array(count + 1).join('<td class="k-group-cell"></td>');
     }
 
-    var commandBuilder = {
-        create: function(options) {
-            return '<a href="#" class="k-button k-grid-add">' + (options.text || options) + '</a>';
+    var defaultCommands = {
+        create: {
+            text: "Add new record",
+            imgClass: "k-add",
+            className: "k-grid-add"
         },
-        cancel: function(options) {
-            return "a";
+        cancel: {
+            text: "Cancel changes",
+            imgClass: "k-cancel",
+            className: "k-grid-cancel-changes"
         },
-        submit: function(options) {
-            return "a";
-        },
-        custom: function(options) {
-            return "a";
+        save: {
+            text: "Save changes",
+            imgClass: "k-update",
+            className: "k-grid-save-changes"
         }
     }
 
@@ -580,24 +583,6 @@
             scrollable: true,
             groupable: false,
             dataSource: {}
-            /*toolbar: { // or true|false
-                commands: [
-                    "create",
-                    {
-                        command: "submit",
-                        text: "Submit the changes ASAP",
-                        type: "image"
-                    },
-                    "cancel", // should we have the cancel as the changes are not in the context of the grid and there is no way to reset deleted records
-                    {
-                        type: "button",
-                        text: "MyCustomCommand",
-                        click: function() {
-                            doTheStuff();
-                        }
-                }],
-                template: "Show my custom template"
-            }, */
         },
 
         _element: function() {
@@ -804,35 +789,46 @@
                 template;
 
             if (toolbar) {
+                toolbar = isFunction(toolbar) ? toolbar() : (typeof toolbar === STRING ? toolbar : that._toolbarTmpl(toolbar));
+
+                template = proxy(kendo.template(toolbar), that)
+
                 $('<div class="k-toolbar" />')
-                    .html(that._toolbarTmpl(toolbar))
-                    .prependTo(wrapper);
+                    .html(template({}))
+                    .prependTo(wrapper)
+                    .delegate(".k-grid-add", CLICK, function(e) { e.preventDefault(); that.addRow(); });
             }
         },
 
-        _toolbarTmpl: function(toolbar) {
+        _toolbarTmpl: function(commands) {
             var that = this,
-                commands = toolbar.commands || [],
-                template = isFunction(toolbar.template) ?  toolbar.template() : (toolbar.template || ""),
-                isCustom = template !== "",
                 idx,
                 length,
-                state = {},
-                command,
-                commandName;
+                html = "",
+                options,
+                commandName,
+                template,
+                command;
 
-            for (idx = 0, length = commands.length; idx < length; idx++) {
-                command = commands[idx];
-                commandName = isPlainObject(command) ? command.command : command;
+            if (isArray(commands)) {
+                for (idx = 0, length = commands.length; idx < length; idx++) {
+                    command = commands[idx];
+                    template = command.template || '<a class="k-button k-button-icontext #=className#" #=attr# href="##"><span class="k-icon #=imgClass#"></span>#=text#</a>';
+                    commandName = typeof command === STRING ? command : command.name;
+                    options = { className: "", text: commandName, imgClass: "", attr: "" };
 
-                if (!isCustom) {
-                    template += "#=this." + commandName + "(options['" + commandName + "']) #";
+                    if (isPlainObject(command)) {
+                        options = extend(true, options, defaultCommands[commandName], command);
+                    } else {
+                        options = extend(true, options, defaultCommands[commandName]);
+                    }
+
+                    console.log(options);
+
+                    html += kendo.template(template)(options);
                 }
-
-                state[commandName] = command;
             }
-
-            return proxy(kendo.template(template), commandBuilder)({ options: state, grid: that });
+            return html;
         },
 
         _groupable: function() {

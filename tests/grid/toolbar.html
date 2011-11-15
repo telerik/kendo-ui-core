@@ -86,58 +86,125 @@
             });
 
             test("toolbar template", function() {
-                setup({ toolbar: { template: "foo" } });
+                setup({ toolbar: "foo" });
 
                 equal(toolbar.text(), "foo");
             });
 
             test("toolbar as kendo template", function() {
-                setup({ toolbar: { template: "#= 1+2 #" } });
+                setup({ toolbar: "#= 1+2 #" });
 
                 equal(toolbar.text(), "3");
             });
 
             test("toolbar as kendo template grid is passed as parameter", function() {
-                setup({ toolbar: { template: "#= grid.wrapper[0].className #" } });
+                setup({ toolbar: "#= this.wrapper[0].className #" });
 
                 equal(toolbar.text(), "k-grid k-widget");
             });
 
             test("toolbar template as function", function() {
                 setup({
-                    toolbar: {
-                        template: function() {
-                            return "bar";
-                        }
-                } });
+                    toolbar: function() {
+                        return "bar";
+                    }
+                });
 
                 equal(toolbar.text(), "bar");
             });
 
             test("toolbar create command renders add button", function() {
                 setup({
-                    toolbar: {
-                        commands: ["create"]
-                    }
+                    toolbar: ["create"]
                 });
 
                 var button = toolbar.children().first();
                 ok(button.is("a"));
                 ok(button.hasClass("k-grid-add"));
-                equal(button.text(), "create");
+                equal(button.text(), "Add new record");
             });
 
             test("toolbar create command from settings", function() {
                 setup({
-                    toolbar: {
-                        commands: [ { command: "create", text: "foo" }]
-                    }
+                    toolbar: [ { name: "create", text: "foo" }]
                 });
 
                 var button = toolbar.children().first();
                 ok(button.is("a"));
                 ok(button.hasClass("k-grid-add"));
                 equal(button.text(), "foo");
+            });
+
+            test("toolbar create custom command from string", function() {
+                setup({
+                    toolbar: [ "foo" ]
+                });
+
+                var button = toolbar.children().first();
+                ok(button.is("a"));
+                equal(button.text(), "foo");
+            });
+
+            test("toolbar create custom command from setting", function() {
+                setup({
+                    toolbar: [ { text: "bar" } ]
+                });
+
+                var button = toolbar.children().first();
+                ok(button.is("a"));
+                equal(button.text(), "bar");
+            });
+
+            test("toolbar create custom command as template", function() {
+                setup({
+                    toolbar: [ { template: "bar" } ]
+                });
+
+                equal(toolbar.text(), "bar");
+            });
+
+            test("toolbar create custom command from settings name without text", function() {
+                setup({
+                    toolbar: [ { name: "bar" } ]
+                });
+
+                equal(toolbar.text(), "bar");
+            });
+
+            test("toolbar create custom command attributes are appended", function() {
+                setup({
+                    toolbar: [ { name: "bar", attr: 'id="foo"' } ]
+                });
+
+                equal(toolbar.text(), "bar");
+                equal(toolbar.children().first().attr("id"), "foo");
+            });
+
+            test("multiple builtin commands", function() {
+                setup({
+                    toolbar: [ { name: "create", text: "foo" }, "cancel" ]
+                });
+
+                var createButton = toolbar.children().first();
+                ok(createButton.is("a"));
+                ok(createButton.hasClass("k-grid-add"));
+                equal(createButton.text(), "foo");
+
+                var cancelButton = toolbar.children().eq(1);
+                ok(cancelButton.is("a"));
+                ok(cancelButton.hasClass("k-grid-cancel-changes"));
+                equal(cancelButton.text(), "Cancel changes");
+            });
+
+            test("clicking create command button calls addRow", function() {
+                 var grid = setup({
+                    toolbar: [ "create" ]
+                }),
+                addMethod = stub(grid, "addRow");
+
+                toolbar.find(".k-grid-add").click();
+
+                ok(addMethod.calls("addRow"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
