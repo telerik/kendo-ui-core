@@ -277,7 +277,8 @@
             that.popup = new ui.Popup(list, {
                 anchor: anchor,
                 open: options.open,
-                close: options.close
+                close: options.close,
+                animation: options.animation
             });
 
             width = anchor.outerWidth() - (list.outerWidth() - list.width());
