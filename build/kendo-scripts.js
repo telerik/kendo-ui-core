@@ -67,6 +67,9 @@ var deployScripts = [{
     ]
 }];
 
+var CULTURES_ROOT = "cultures";
+
+// Implementation =============================================================
 function deploy(scriptsRoot, outputRoot, header, compress) {
     deployScripts.forEach(function(script) {
         console.log("\t" + scriptOutName(script.output, compress));
@@ -82,6 +85,22 @@ function deploy(scriptsRoot, outputRoot, header, compress) {
 
         var outName = scriptOutName(scriptName, compress);
         kendoBuild.writeText(path.join(outputRoot, outName), header + content);
+    });
+
+    var culturesRoot = path.join(scriptsRoot, CULTURES_ROOT),
+        culturesDest = path.join(outputRoot, CULTURES_ROOT);
+
+    kendoBuild.copyDirSyncRecursive(culturesRoot, culturesDest);
+    kendoBuild.processFilesRecursive(culturesDest, /.*/, function(fileName) {
+        var content = kendoBuild.readText(fileName),
+            minified = content, //kendoBuild.minifyJs(content),
+            outName = scriptOutName(fileName, compress);
+
+        kendoBuild.writeText(fileName, minified);
+
+        if (outName !== fileName) {
+            fs.renameSync(fileName, outName);
+        }
     });
 }
 

@@ -130,9 +130,6 @@ function buildBundle(bundle, success) {
     success();
     return;
 
-    console.log("Copying cultures");
-    kendoBuild.copyDirSyncRecursive("src/cultures", path.join(DEPLOY_SCRIPTS, "cultures"));
-
     console.log("Copying license");
     var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");
     fs.writeFileSync(DEPLOY_ROOT + "/Kendo\ Beta\ EULA.pdf", data);
