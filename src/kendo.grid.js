@@ -813,7 +813,7 @@
 
                 template = proxy(kendo.template(toolbar), that)
 
-                $('<div class="k-toolbar" />')
+                $('<div class="k-toolbar k-grid-toolbar" />')
                     .html(template({}))
                     .prependTo(wrapper)
                     .delegate(".k-grid-add", CLICK, function(e) { e.preventDefault(); that.addRow(); })
