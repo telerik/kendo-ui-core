@@ -142,6 +142,7 @@
          * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
          * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
          * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
+         * @option {String} [optionLabel] Define the text of the default empty item.
          */
         init: function(element, options) {
             var that = this,
