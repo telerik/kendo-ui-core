@@ -16,6 +16,7 @@
         <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.tabstrip.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
+        <script src="../../src/kendo.mobile.headerbar.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script>
@@ -40,6 +41,18 @@
                 float: right;
             }
 
+            .km-rightitem {
+                float: right;
+            }
+
+            .km-leftitem {
+                float: left;
+            }
+
+            .km-title {
+                text-align: center;
+            }
+
             .km-detail {
                 display: inline-block;
                 float: right;
@@ -54,10 +67,12 @@
     <body>
         <article data-kendo-role="view" data-kendo-url="index.html">
 
-        <header data-kendo-role="header" style="text-align: center">
-        <div class="km-toolbar">
-            <span class="km-view-title">Settings:</span>
-            <a href="#about" data-kendo-role="button" style="float:right; margin-right: 10px;">About</a>
+        <header data-kendo-role="header">
+
+        <div data-kendo-role="headerbar">
+            <a href="#about" data-kendo-role="button" data-kendo-align="left">About</a>
+            <span data-kendo-role="view-title">Settings:</span>
+            <a href="#about" data-kendo-role="button" data-kendo-align="right">+</a>
         </div>
         </header>
 
@@ -83,7 +98,12 @@
 
         <article data-kendo-role="view" id="airplane-mode" data-kendo-transition="overlay:up">
 
-        <header data-kendo-role="header"><a href="index.html" data-kendo-role="button">Back</a> Airplane mode</header>
+        <header data-kendo-role="header">
+            <div data-kendo-role="headerbar">
+                <a href="index.html" data-kendo-role="button" data-kendo-align="left">Back</a>
+                <span data-kendo-role="view-title">Airplane mode</span>
+            </div>
+        </header>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a turpis turpis, cursus porta neque. Suspendisse facilisis vehicula ipsum sed aliquam. Mauris nibh mauris, rutrum sed congue at, accumsan consequat dui. Vivamus mollis, ante nec mollis dictum, arcu leo porta nunc, eu imperdiet nulla leo a risus. Suspendisse tincidunt vestibulum dictum. Etiam tincidunt risus sem, eu varius quam. Sed porttitor vestibulum sapien, non pretium velit cursus lobortis. Cras dapibus lacinia commodo.
 
@@ -105,7 +125,12 @@
 
         <article data-kendo-role="view" id="about" data-kendo-transition="zoom">
 
-        <header data-kendo-role="header">About <a href="index.html" data-kendo-role="button" style="float: right; margin-right: 10px">Back</a> </header>
+        <header data-kendo-role="header">
+            <div data-kendo-role="headerbar">
+                <a href="index.html" data-kendo-role="button" data-kendo-align="left">Back</a>
+                <span data-kendo-role="view-title">About:</span>
+            </div>
+        </header>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a turpis turpis, cursus porta neque. Suspendisse facilisis vehicula ipsum sed aliquam. Mauris nibh mauris, rutrum sed congue at, accumsan consequat dui. Vivamus mollis, ante nec mollis dictum, arcu leo porta nunc, eu imperdiet nulla leo a risus. Suspendisse tincidunt vestibulum dictum. Etiam tincidunt risus sem, eu varius quam. Sed porttitor vestibulum sapien, non pretium velit cursus lobortis. Cras dapibus lacinia commodo.</p>
 
