@@ -1,8 +1,6 @@
 (function($, undefined) {
-    var kendo = window.kendo,
-        ui = kendo.ui,
-        MobileWidget = ui.MobileWidget,
-        mobile = kendo.mobile;
+    var ui = window.kendo.ui,
+        MobileWidget = ui.MobileWidget;
 
     function createContainer(align, element) {
         var items = element.find("[data-kendo-align=" + align + "]");
