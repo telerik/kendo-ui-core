@@ -98,6 +98,23 @@
                 ok(cell.hasClass("k-edit-cell"));
             });
 
+            test("k-grid-edit-row is applied on edited cell tr", function() {
+                setup();
+                var cell = table.find("td:first").click();
+
+                ok(cell.parent().hasClass("k-grid-edit-row"));
+            });
+
+            test("k-grid-edit-row is removed from edited cell tr when closed", function() {
+                setup();
+
+                var cell = table.find("td:first").click();
+
+                table.data("kendoGrid")._closeCell();
+
+                ok(!cell.parent().hasClass("k-grid-edit-row"));
+            });
+
             test("clicking outside of the grid leaves edit mode", function() {
                 setup();
 
