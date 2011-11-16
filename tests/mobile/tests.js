@@ -21,6 +21,10 @@ tests.push(
     },
     {
         page: "mobile/listview/databinding.html",
-        title: "listview"
+        title: "listview databinding"
+    },
+    {
+        page: "mobile/headerbar.html",
+        title: "headerbar"
     }
 );
