@@ -373,7 +373,7 @@
             that.dateView = dateView = new DateView($.extend({}, options, {
                 anchor: that.wrapper,
                 change: function() {
-                    // calendar is current scope
+                    // calendar is the current scope
                     that._change(this.value());
                     that.close();
                 },
