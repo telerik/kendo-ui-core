@@ -1,17 +1,17 @@
 <!DOCTYPE dom>
 <html>
     <head>
-        <title>kendo.ui.MobileHeaderBar Tests</title>
+        <title>kendo.ui.MobileNavBar Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
-        <script src="../../src/kendo.mobile.headerbar.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
-        <h1 id="qunit-header">kendo.ui.MobileHeaderBar Tests</h1>
+        <h1 id="qunit-header">kendo.ui.MobileNavBar Tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -21,22 +21,22 @@
 
         <script>
 
-            var HeaderBar = kendo.ui.MobileHeaderBar,
+            var NavBar = kendo.ui.MobileNavBar,
                 MOUSEDOWN = kendo.support.mousedown,
                 MOUSEUP = kendo.support.mouseup;
 
             test("applies css class", function() {
                 var dom = $("<div/>");
 
-                var bar = new HeaderBar(dom);
+                var bar = new NavBar(dom);
 
-                ok(bar.element.hasClass("km-headerbar"), "has specified CSS class");
+                ok(bar.element.hasClass("km-navbar"), "has specified CSS class");
             });
 
             test("moves items based on data-kendo-align attributes", function() {
                 var dom = $('<div><div data-kendo-align="left" id="foo"/><div data-kendo-align="right" id="bar" /></div>');
 
-                var bar = new HeaderBar(dom);
+                var bar = new NavBar(dom);
 
                 var leftContainer = dom.children(".km-leftitem")[0];
                 var rightContainer = dom.children(".km-rightitem")[0];

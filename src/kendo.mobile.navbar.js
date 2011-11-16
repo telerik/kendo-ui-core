@@ -10,22 +10,22 @@
         }
     }
 
-    var MobileHeaderBar = MobileWidget.extend({
+    var MobileNavBar = MobileWidget.extend({
         init: function(element, options) {
             MobileWidget.fn.init.call(this, element, options);
             element = this.element;
 
-            element.addClass("km-headerbar").wrapInner($('<div class="km-title" />'));
+            element.addClass("km-navbar").wrapInner($('<div class="km-title" />'));
             createContainer("left", element);
             createContainer("right", element);
         },
 
         options: {
-            name: "MobileHeaderBar",
-            selector: "[data-kendo-role=headerbar]"
+            name: "MobileNavBar",
+            selector: "[data-kendo-role=navbar]"
         },
 
     });
 
-    ui.plugin(MobileHeaderBar);
+    ui.plugin(MobileNavBar);
 })(jQuery);
