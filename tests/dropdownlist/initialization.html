@@ -374,6 +374,17 @@
                equal(dropdownlist.list.height(), 50);
            });
 
+           test("optionLabel should create empty item", function() {
+               var data = [{text: 1, value: 1}, {text:2, value:2}],
+               dropdownlist = new DropDownList(input, {
+                   dataSource: data,
+                   optionLabel: "Select..."
+               });
+
+               equal(dropdownlist._data()[0].text, "Select...");
+               equal(dropdownlist._data()[0].value, "");
+           });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
