@@ -196,7 +196,23 @@
                         .css({
                             paddingTop: offset != "0px" ? offset : false
                         });
+                fixFF();
             }, 500 );
+        }
+
+        function fixFF() {
+            if (kendo.support.transitions.prefix == "Moz") { // FlexBox is broken in FF.
+                var foreignDocument = $(frame.contentWindow.document),
+                    kendoContent = foreignDocument.find(".km-content");
+
+                if (kendoContent.length) {
+                    var head = foreignDocument.find("head")/*,
+                        headerHeight = foreignDocument.find(".km-header").outerHeight(),
+                        footerHeight = foreignDocument.find(".km-footer").outerHeight()*/;
+
+                    $("<style type='text/css' id='ffFlexBoxFix'>.km-view{position:relative}</style>").appendTo(head); //TODO: Have to find a better way since this will break transitions.
+                }
+            }
         }
 
         $("#device-selector")
@@ -222,19 +238,7 @@
                 fontSize: $(".device-skin").css("font-size")
             });
 
-//            if (kendo.support.transitions.prefix == "Moz") { // FlexBox is broken in FF.
-//                var foreignDocument = $(frame.contentWindow.document),
-//                    kendoContent = foreignDocument.find(".km-content");
-//
-//                if (kendoContent.length) {
-//                    var head = foreignDocument.find("head")[0],
-//                        headerHeight = foreignDocument.find(".km-header").height(),
-//                        footerHeight = foreignDocument.find(".km-footer").height(),
-//                        wrapper = kendoContent.wrapAll("<div style='position: absolute; width: 100%; height: 100%; top: 0; left: 0;'></div>")
-//
-//                    $("<style type='text/css'>.km-content{ -moz-box-sizing: border-box; height: 100%; border: 1px solid transparent; border-width: " + headerHeight + "px 0 " + footerHeight + "px 0; margin: -" + headerHeight + "px 0 -" + footerHeight + "px 0; }</style>").appendTo(head);
-//                }
-//            }
+            fixFF();
         };
 
         $(document).delegate("[data-orientation]", "click", function () {

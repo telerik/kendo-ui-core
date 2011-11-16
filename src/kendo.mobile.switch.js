@@ -71,10 +71,12 @@
             e.preventDefault();
             e.stopPropagation();
 
+            that.initialLocation = getAxisLocation(e, that.element, that.axis);
             that.width = that.element.width();
+            that.halfWidth = $(that.options.handle).width() / 2;
             that.animator = extend({ animator: that.animator }, that.options).animator;
             that.constrain = that.width - that.animator.outerWidth(true);
-            that.location = limitValue(getAxisLocation(e, that.element, that.axis), 20, that.constrain + 20);
+            that.location = limitValue(that.initialLocation, that.halfWidth, that.constrain + that.halfWidth);
 
             $(document)
                 .bind(MOUSEMOVE, that._moveProxy)
@@ -86,18 +88,23 @@
                 axis = that.axis,
                 location = getAxisLocation(e, that.element, that.axis);
 
-            that.location = limitValue(location, 20, that.constrain + 20);
-            that.animator[0].style[TRANSFORMSTYLE] = "translate" + axis + "(" + (that.location - 20) + "px)"; // TODO: remove the 20 :)
+            that.location = limitValue(location, that.halfWidth, that.constrain + that.halfWidth);
+            that.animator[0].style[TRANSFORMSTYLE] = "translate" + axis + "(" + (that.location - that.halfWidth) + "px)"; // TODO: remove halfWidth
         },
 
         _stop: function (e) {
             var that = this,
-                snapPart = that.width / (that.options.snaps - 1);
+                snaps = that.options.snaps,
+                snapPart = that.width / (snaps - 1);
 
             e.preventDefault();
             e.stopPropagation();
 
-            that.trigger(SNAP, { snapTo: Math.round(that.location / snapPart) });
+            if (Math.abs(that.initialLocation - getAxisLocation(e, that.element, that.axis)) > 2) {
+                that.trigger(SNAP, { snapTo: Math.round(that.location / snapPart) });
+            } else if (snaps == 2) {
+                that.trigger(SNAP, { snapTo: !that.input[0].checked });
+            }
 
             $(document)
                 .unbind(MOUSEMOVE, that._moveProxy)
