@@ -46,7 +46,7 @@
     right: 4em;
     bottom: 4em;
     z-index: 100010;
-    background: url(header.png) no-repeat 50% 0 #3d3d3d;
+    background: url(sprite.png) no-repeat 50% -21px #3d3d3d;
 
     -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
@@ -55,6 +55,25 @@
     -moz-box-shadow: 1px 1px 7px 1px #aaa;
     -webkit-box-shadow: 1px 1px 7px 1px #aaa;
     box-shadow: 1px 1px 7px 1px #aaa;
+}
+
+#ktb-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: url(sprite.png) no-repeat 100% 0 transparent;
+    width: 19px;
+    height: 19px;
+    border: 1px solid transparent;
+
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#ktb-close:hover {
+    border-color: #000;
+    background-color: #3d3d3d;
 }
 
 #ktb-interface {

@@ -17,11 +17,13 @@
 
         // caution: the variable below is changed during builds. update build/themebuilder.js if you change its name!
         requiredJs = ["less.js", "themebuilder.js", "colorengine.js", "template.js"],
-        requiredCss = ["kendo.black.css", "styles.css"];
+        requiredCss = ["kendo.black.css", "styles.css?" +new Date() ];
 
     // do not initialize twice, just reopen window
-    if (typeof kendo != UNDEFINED && kendo.ThemeBuilder) {
-        $("#ktb-wrap").data("kendoThemeBuilder").open();
+    // TODO: move this to bookmarklet
+    var container = $("#ktb-wrap");
+    if (container.length > 0) {
+        container.slideDown("fast");
         return;
     }
 
@@ -200,7 +202,11 @@
         };
 
     function createWindow() {
-        return $("<div id='ktb-wrap' />").appendTo(document.body);
+        return $("<div id='ktb-wrap'><div id='ktb-close' /></div>")
+                    .find("#ktb-close").click(function() {
+                        $("#ktb-wrap").slideUp("fast");
+                    }).end()
+                .appendTo(document.body);
     }
 
     function createInterfaceFrame(container) {
@@ -253,7 +259,7 @@
                 constantsHierarchy
             );
 
-        $("#ktb-wrap").data("kendoThemeBuilder", themeBuilder);
+        container.data("kendoThemeBuilder", themeBuilder);
     };
 })();
 
