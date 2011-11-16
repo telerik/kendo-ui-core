@@ -685,7 +685,7 @@ div.k-window-content
     border-bottom-style: solid;
     border-bottom-width: 1px;
     padding: 0 1em;
-    line-height: 2.05em;
+    line-height: 2.34em;
     text-decoration: none;
     zoom: 1;
 }
@@ -713,13 +713,13 @@ div.k-window-content
 {
     border-bottom: 0;
     font-size: .95em;
-    line-height: 1.7em;
+    line-height: 2.2;
 }
 
 .k-panelbar .k-group .k-arrow-up,
 .k-panelbar .k-group .k-arrow-down
 {
-    top: 2px;
+    top: 4px;
 }
 
 .k-panelbar .k-group .k-group .k-link
@@ -753,18 +753,12 @@ div.k-window-content
     zoom: 1;
 }
 
-.k-menu .k-group .k-link
-{
-    padding-right: 2em;
-}
-
 .k-menu .k-item
 {
     position: relative;
     float: left;
     border-style: solid;
     border-width: 0 1px 0 0;
-    line-height: 16px;
     vertical-align: top;
     zoom: 1;
 }
@@ -803,7 +797,7 @@ div.k-window-content
 .k-menu .k-link
 {
     display: block;
-    padding: .25em .97em;
+    padding: .5em .9em;
 }
 
 .k-menu .k-group
@@ -821,6 +815,11 @@ div.k-window-content
     border-width: 0;
 }
 
+.k-menu .k-group .k-link
+{
+    padding: .28em 1.8em .38em .9em;
+}
+
 *+html .k-menu .k-group .k-link
 {
     width: 100%;
@@ -828,8 +827,7 @@ div.k-window-content
 
 .k-menu .k-arrow-down
 {
-    margin-left: 2px;
-    margin-right: -10px;
+    margin-right: -8px;
     vertical-align: top;
 }
 
@@ -837,7 +835,7 @@ div.k-window-content
 {
     position: absolute;
     top: 3px;
-    right: 0;
+    right: 2px;
 }
 
 .k-menu .k-animation-container,
