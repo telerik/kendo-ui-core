@@ -315,7 +315,7 @@
                 options = that.options,
                 suggest = options.suggest,
                 height = options.height,
-                data = that.dataSource.view(),
+                data = that._data(),
                 length = data.length;
 
             ul[0].innerHTML = kendo.render(that.template, data);
@@ -365,7 +365,7 @@
                 text,
                 value,
                 idx = that._highlight(li),
-                data = that.dataSource.view();
+                data = that._data();
 
             if (idx !== -1) {
                 that._selected = that._current.addClass(STATE_SELECTED);

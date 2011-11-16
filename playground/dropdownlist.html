@@ -82,6 +82,7 @@
                     dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}],
                     autoBind: false,
                     delay: 2000,
+                    optionLabel: "Select item...",
                     open: function() { console.log("open"); },
                     close: function() { console.log("close"); },
                     animation: {
@@ -98,7 +99,8 @@
                     }
                 });
                 $("#select").kendoDropDownList({
-                    dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}]
+                    dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}],
+                    optionLabel: "Select item..."
                 });
                 $("#remotedropdownlist").kendoDropDownList({
                     dataTextField: "name",

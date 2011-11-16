@@ -297,7 +297,7 @@
             var that = this,
                 value = that.value(),
                 options = that.options,
-                data = that.dataSource.view(),
+                data = that._data(),
                 length = data.length;
 
             that.ul[0].innerHTML = kendo.render(that.template, data);
@@ -368,7 +368,7 @@
                 idx,
                 text,
                 value,
-                data = that.dataSource.view(),
+                data = that._data(),
                 current = that._current;
 
             li = that._get(li);
@@ -441,6 +441,38 @@
 
         _accept: function(li) {
             this._focus(li);
+        },
+
+        _data: function() {
+            var that = this,
+                options = that.options,
+                optionLabel = options.optionLabel,
+                textField = options.dataTextField,
+                valueField = options.dataValueField,
+                data = that.dataSource.view(),
+                length = data.length,
+                first = optionLabel,
+                idx = 0;
+
+            if (optionLabel && length) {
+                if (textField) {
+                    first = {};
+                    first[textField] = optionLabel;
+
+                    if (valueField) {
+                        first[valueField] = "";
+                    }
+                }
+
+                first = [first];
+
+                for (; idx < length; idx++) {
+                    first.push(data[idx]);
+                }
+                data = first;
+            }
+
+            return data;
         },
 
         _keydown: function(e) {
