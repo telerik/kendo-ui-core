@@ -1,31 +1,16 @@
+// Imports ====================================================================
 var fs = require("fs"),
     sys = require("sys"),
     path = require("path"),
-    os = require("os"),
     themes = require("./themes"),
-    kendoBuild = require("./kendo-build"),
-    kendoScripts = require("./kendo-scripts"),
     cssmin = require("./lib/cssmin").cssmin,
-    examples = require("./examples"),
-    spawn = require('child_process').spawn,
+    kendoBuild = require("./kendo-build"),
+    kendoExamples = require("./examples"),
+    kendoScripts = require("./kendo-scripts"),
+    mkdir = kendoBuild.mkdir,
+    zip = kendoBuild.zip;
 
-    startDate = new Date(),
-    STAT = fs.statSync("./"),
-    VERSION = process.argv[2] || kendoBuild.generateVersion(),
-    KENDOCDN = process.argv[3] || "http://cdn.kendostatic.com/" + VERSION,
-    SRC = "src",
-    RELEASE = "release",
-    DEPLOY = "deploy",
-    PATH = path.join(DEPLOY, "kendoUI"),
-    JS = path.join(PATH, "js"),
-    STYLES = path.join(PATH, "styles"),
-    SOURCE = path.join(PATH, "source"),
-    SOURCEJS = path.join(SOURCE, "js"),
-    SOURCESTYLES = path.join(SOURCE, "styles"),
-    ONLINEEXAMPLES = path.join(DEPLOY, "onlineExamples");
-
-var cssRegExp = /\.css$/;
-
+// Configuration ==============================================================
 var bundles = [{
     name: "Commercial",
     license: "commercial",
@@ -40,57 +25,40 @@ var bundles = [{
     hasSource: true
 }];
 
-function mkdir(newDir) {
-    try {
-        fs.statSync(newDir)
-    } catch(e) {
-        fs.mkdirSync(newDir, STAT.mode);
-    }
+var VERSION = kendoBuild.generateVersion(),
+    CDN_URL = process.argv[2] || "http://cdn.kendostatic.com/" + VERSION,
+    SCRIPTS_ROOT = "src",
+    DROP_LOCATION = "release",
+    DEPLOY_ROOT = "deploy",
+    DEPLOY_SOURCE = "source",
+    DEPLOY_SCRIPTS = "js",
+    DEPLOY_STYLES = "styles",
+    DEPLOY_ONLINEEXAMPLES = "onlineExamples";
+
+// Implementation ==============================================================
+var cssRegExp = /\.css$/,
+    startDate = new Date();
+
+function initWorkspace() {
+    kendoBuild.rmdirSyncRecursive(DEPLOY_ROOT);
+
+    mkdir(DEPLOY_ROOT);
+    mkdir(DROP_LOCATION);
 }
 
-function zip(name, filesPath, success) {
-    // cross-platform development example
-    var archive;
+function deployScripts(root, license, copySource) {
+    var scriptsDest = path.join(root, DEPLOY_SCRIPTS),
+        sourceRoot = path.join(root, DEPLOY_SOURCE),
+        sourceDest = path.join(sourceRoot, DEPLOY_SCRIPTS);
 
-    if (os.type() == "Linux") {
-        archive = spawn("7z", [ "a", "-tzip", path.resolve(name), '*' ], { cwd: path.resolve(filesPath) });
-    } else {
-        archive = spawn("./build/lib/7z/7z", [ "a", "-tzip", name, path.join(filesPath, '*') ]);
-    }
-
-    archive.stderr.on('data', function (data) {
-        sys.print('stderr: ' + data);
-    });
-
-    archive.on('exit', function (code) {
-        if (code !== 0) {
-            console.log("zip errro: " + code);
-        }
-
-        console.log("package " + name + " created.");
-
-        if (success) {
-            success();
-        }
-    });
-}
-
-function createDirectories() {
-    mkdir(DEPLOY);
-    mkdir(RELEASE);
-    mkdir(PATH);
-    mkdir(SOURCE);
-    mkdir(ONLINEEXAMPLES)
-}
-
-function processScripts(license, copySource) {
-    mkdir(JS);
-    mkdir(SOURCEJS);
+    mkdir(scriptsDest);
+    kendoScripts.deployScripts(SCRIPTS_ROOT, scriptsDest, license, true);
 
     if (copySource) {
-        kendoScripts.deployScripts(SRC, SOURCEJS, license, false);
+        mkdir(sourceRoot);
+        mkdir(sourceDest);
+        kendoScripts.deployScripts(SCRIPTS_ROOT, sourceDest, license, false);
     }
-    kendoScripts.deployScripts(SRC, JS, license, true);
 }
 
 function processStyles() {
@@ -120,13 +88,13 @@ function buildExamplesIndex() {
 
     delete categories.overview;
 
-    fs.writeFileSync(PATH + "/examples/index.html", indexTemplate(categories));
+    fs.writeFileSync(DEPLOY_ROOT + "/examples/index.html", indexTemplate(categories));
 }
 
 function buildExamples() {
-    kendoBuild.copyDirSyncRecursive("demos/examples", path.join(PATH, "/examples"));
-    kendoBuild.copyTextFile("src/jquery.js", path.join(PATH, "/examples/js/jquery.js"));
-    kendoBuild.processFilesRecursive(PATH + "/examples", /\.html$/, function(name) {
+    kendoBuild.copyDirSyncRecursive("demos/examples", path.join(DEPLOY_ROOT, "/examples"));
+    kendoBuild.copyTextFile("src/jquery.js", path.join(DEPLOY_ROOT, "/examples/js/jquery.js"));
+    kendoBuild.processFilesRecursive(DEPLOY_ROOT + "/examples", /\.html$/, function(name) {
         var data = fs.readFileSync(name, "utf8");
         data = data.replace(/..\/..\/..\/styles/g, "../../source/styles");
         data = data.replace(/..\/..\/..\/src\/jquery.js/g, "../js/jquery.js");
@@ -138,36 +106,37 @@ function buildExamples() {
 }
 
 function buildBundle(bundle, success) {
-    console.log("Building Web/DataViz " + bundle.name);
+    var name = bundle.name,
+        root = path.join(DEPLOY_ROOT, name),
+        license = kendoBuild.readText("resources/licenses/" + bundle.license + ".txt");
 
-    kendoBuild.rmdirSyncRecursive(DEPLOY);
-    createDirectories();
+    console.log("Building Web/DataViz " + name);
+    mkdir(root);
 
-    console.log("Processing scripts");
-    var license = kendoBuild.readText("resources/licenses/" + bundle.license + ".txt");
-    processScripts(bundle.license, bundle.hasSource);
+    console.log("Deploying scripts");
+    deployScripts(root, bundle.license, bundle.hasSource);
 
-    console.log("Building themes");
-    themes.build();
+    success();
+    return;
 
     console.log("Processing styles");
     processStyles();
 
     console.log("Copying cultures");
-    kendoBuild.copyDirSyncRecursive("src/cultures", path.join(JS, "cultures"));
+    kendoBuild.copyDirSyncRecursive("src/cultures", path.join(DEPLOY_SCRIPTS, "cultures"));
 
     console.log("Copying license");
     var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");
-    fs.writeFileSync(PATH + "/Kendo\ Beta\ EULA.pdf", data);
+    fs.writeFileSync(DEPLOY_ROOT + "/Kendo\ Beta\ EULA.pdf", data);
 
     data = fs.readFileSync("resources/licenses.txt");
-    fs.writeFileSync(PATH + "/licenses.txt", data);
+    fs.writeFileSync(DEPLOY_ROOT + "/licenses.txt", data);
 
     console.log("Building examples");
     buildExamples();
 
     console.log("Packaging");
-    zip(path.join(RELEASE, "kendoui.web_dataviz." + VERSION + "." + bundle.name + ".zip"), PATH, success);
+    zip(path.join(DROP_LOCATION, "kendoui.web_dataviz." + VERSION + "." + name + ".zip"), DEPLOY_ROOT, success);
 }
 
 function buildAllBundles(success, bundleIx) {
@@ -183,16 +152,18 @@ function buildAllBundles(success, bundleIx) {
 }
 
 function buildOnlineExamples(success) {
-    examples.build(PATH, ONLINEEXAMPLES, KENDOCDN);
-    zip(path.join(RELEASE, "OnlineExamples.zip"), ONLINEEXAMPLES, success);
+    kendoExamples.build(DEPLOY_ROOT, ONLINEEXAMPLES, CDN_URL);
+    zip(path.join(DROP_LOCATION, "OnlineExamples.zip"), ONLINEEXAMPLES, success);
 }
 
 console.log("Build starting at " + startDate);
+initWorkspace();
 
 console.log("Merging multi-part scripts");
 kendoScripts.mergeScripts("src/");
 
-createDirectories();
+console.log("Building themes");
+themes.build();
 
 buildAllBundles(function() {
     console.log("Building online examples");

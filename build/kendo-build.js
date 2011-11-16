@@ -1,5 +1,7 @@
 var fs = require("fs"),
+    os = require("os"),
     parser = require("./lib/parse-js"),
+    spawn = require('child_process').spawn,
     uglify = require("./lib/process");
 
 function rmdirSyncRecursive(path) {
@@ -185,19 +187,57 @@ function writeText(fileName, text) {
     fs.writeFileSync(fileName, text, "utf8");
 }
 
-exports.merge = merge;
-exports.generateVersion = generateVersion;
-exports.rmdirSyncRecursive = rmdirSyncRecursive;
-exports.copyDirSyncRecursive = copyDirSyncRecursive;
-exports.minifyJs = function(source) {
+function minifyJs(source) {
     var ast = parser.parse(source);
     ast = uglify.ast_mangle(ast);
     ast = uglify.ast_squeeze(ast);
     return uglify.gen_code(ast);
-};
+}
+
+function zip(name, filesPath, success) {
+    var archive;
+
+    if (os.type() == "Linux") {
+        archive = spawn("7z", [ "a", "-tzip", path.resolve(name), '*' ], { cwd: path.resolve(filesPath) });
+    } else {
+        archive = spawn("./build/lib/7z/7z", [ "a", "-tzip", name, path.join(filesPath, '*') ]);
+    }
+
+    archive.stderr.on('data', function (data) {
+        sys.print('stderr: ' + data);
+    });
+
+    archive.on('exit', function (code) {
+        if (code !== 0) {
+            console.log("zip error: " + code);
+        } else {
+            console.log("Package created: " + name);
+
+            if (success) {
+                success();
+            }
+        }
+    });
+}
+
+function mkdir(newDir) {
+    try {
+        fs.statSync(newDir)
+    } catch(e) {
+        fs.mkdirSync(newDir, fs.statSync("./").mode);
+    }
+}
+
+// Exports ====================================================================
+exports.merge = merge;
+exports.generateVersion = generateVersion;
+exports.rmdirSyncRecursive = rmdirSyncRecursive;
+exports.copyDirSyncRecursive = copyDirSyncRecursive;
+exports.minifyJs = minifyJs;
+exports.mkdir = mkdir;
 exports.template = template;
 exports.processFilesRecursive = processFilesRecursive;
 exports.copyTextFile = copyTextFile;
 exports.readText = readText;
 exports.writeText = writeText;
-
+exports.zip = zip;
