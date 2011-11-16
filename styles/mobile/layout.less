@@ -105,11 +105,13 @@ html, body
 
 body
 {
+    .transform(translatez(0));
     display: table\9;
 }
 
 .km-view
 {
+    position: absolute;
     top: 0;
     left: 0;
     position: absolute;
@@ -177,9 +179,9 @@ body
 @media all and (-webkit-min-device-pixel-ratio:10000),
        not all and (-webkit-min-device-pixel-ratio:0)
 {
-  body, .km-view { display: table; }
-  body > .km-tabstrip, .km-slot, .km-header, .km-footer, .km-content { display: table-row; }
-  body > .km-tabstrip, .km-header, .km-footer { height: 1px; }
+  .km-view { display: table; }
+  .km-header, .km-footer, .km-content { display: table-row; }
+  .km-header, .km-footer { height: 1px; }
 }
 
 .km-content
@@ -319,11 +321,6 @@ body
     background-image: linearGradient(left top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
 }
 
-.km-ios .km-toggle
-{
-    -webkit-transform: translatez(0);
-}
-
 .km-toggle,
 .km-checkbox
 {
@@ -343,15 +340,23 @@ body
     .border-radius(4px);
 }
 
-.km-checkbox
+.km-ios .km-toggle
 {
-    width: 1.2em;
-    height: 1.2em;
-    width: 1.2rem;
-    height: 1.2rem;
+    -webkit-mask-box-image: ~"url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><rect fill=%22black%22 x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%224%22/></svg>')";
+    -webkit-transform: translatez(0);
 }
 
-.km-checkbox-checked:after
+.km-checkbox,
+.km-android .km-listview .km-toggle
+{
+    width: 1.8em;
+    height: 1.8em;
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.km-checkbox-checked:after,
+.km-android .km-listview .km-toggle-handle
 {
     content: "\a0";
     display: block;
@@ -375,14 +380,16 @@ body
     .box-shadow(0 2px 3px #333);
 }
 
-.km-android .km-checkbox
+.km-android .km-checkbox,
+.km-android .km-listview .km-toggle
 {
+    padding: 0;
     border: 1px solid #000;
     background-color: rgb(54, 54, 54);
     background-image: linearGradient(top, rgb(54, 54, 54), rgb(43, 43, 43));
     .border-radius(2px);
     .box-sizing(border-box);
-    .box-shadow(0 0 1px 2px #808080);
+    .box-shadow(0 0 1px 1px #808080);
 }
 
 .km-ios .km-checkbox-checked:after
@@ -390,9 +397,18 @@ body
     background: transparent url("images/ios-sprite.png") 2px -117px no-repeat;
 }
 
-.km-android .km-checkbox-checked:after
+.km-android .km-checkbox-checked:after,
+.km-android .km-listview .km-toggle-on
 {
-    background: transparent url("images/android-sprite.png") -2px -38px no-repeat;
+    background: transparent url("images/android-sprite.png") 0 8% no-repeat;
+    background-size: 100% auto;
+}
+
+.km-android .km-listview .km-toggle-handle:after,
+.km-android .km-listview .km-toggle-handle:before,
+.km-android .km-listview .km-toggle-tip
+{
+    display: none;
 }
 
 .km-toggle-tip,
@@ -448,6 +464,9 @@ body
 .km-toggle-off:before
 {
     display: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
 }
 
 .km-toggle-handle:after
@@ -539,6 +558,7 @@ body
 {
     width: 3.8em;
     width: 3.8rem;
+    -webkit-transform: translatez(0);
 }
 
 .km-meego .km-toggle,
@@ -562,7 +582,7 @@ body
     .box-shadow(inset 0 2px 3px 0 #4c7698);
 }
 
-.km-meego :active .km-toggle-tip
+.km-meego .km-toggle:active .km-toggle-tip
 {
     background: #d9d9d9;
 }
@@ -1023,8 +1043,13 @@ body
 
 .km-listview .km-toggle
 {
+    margin-top: 0;
     float: right;
-    vertical-align: middle;
+}
+
+.km-android .km-listview .km-toggle
+{
+    margin-top: .45em
 }
 
 .km-listview .km-list
@@ -1243,17 +1268,12 @@ input[type=checkbox]
     background-size: auto 100%;
 }
 
-.km-ios .km-tabstrip .km-icon
-{
-    width: 2.5em;
-    height: 2.5em;
-}
-
+.km-ios .km-tabstrip .km-icon,
 .km-blackberry .km-tabstrip .km-icon,
 .km-meego .km-tabstrip .km-icon
 {
-    width: 2.5em;
-    height: 2.5em;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .km-tabstrip .km-button .km-icon
