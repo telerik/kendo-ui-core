@@ -45,7 +45,7 @@
     var editors = {
         "number": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="text" style="width:100%"/>').attr(attr).appendTo(container);
+            $('<input type="text" style="width:100%"/>').attr(attr).appendTo(container).kendoNumericTextBox();
         },
         "date": function(container, options) {
             var attr = createAttributes(options);

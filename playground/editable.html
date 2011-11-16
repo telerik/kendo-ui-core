@@ -19,6 +19,7 @@
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
         <link href="../styles/kendo.common.css" rel="stylesheet"/>
         <link href="../styles/kendo.hakama.css" rel="stylesheet"/>
         <style>
@@ -68,7 +69,7 @@
                         model: {
                             id: "id",
                             fields: {
-                                id: "id",
+                                id: { field: "idx", type: "number" },
                                 foo: {
                                     field: "foo",
                                     readonly: true
@@ -88,7 +89,7 @@
                     groupable: false,
                     scrollable: false,
                     toolbar: ["create", "cancel", "save"],
-                    columns: ["bar", "foo", "date"]
+                    //columns: ["bar", "foo", "date"]
                 });
 
                 $("#relatedGrid").kendoGrid({
