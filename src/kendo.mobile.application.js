@@ -9,8 +9,13 @@
                 <meta name="apple-mobile-web-app-status-bar-style" content="black" /> \
                 <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
         iconMeta = kendo.template('<link rel="apple-touch-icon" href="${icon}" />'),
-        linkRolesSelector = "button tab listview-link".replace(/(\S+)/g, "[data-kendo-role=$1],"),
+        buttonRolesSelector = toRoleSelector("button listview-link"),
+        linkRolesSelector = toRoleSelector("tab"),
         roleSelector = kendo.roleSelector;
+
+    function toRoleSelector(string) {
+        return string.replace(/(\S+)/g, "[data-kendo-role=$1],")
+    }
 
     function extractView(html) {
         if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
@@ -133,7 +138,7 @@
 
             that.element.css("display", "");
 
-            if (back) {
+            if (back && !parallax) {
               that.element.css("z-index", 0);
               view.element.css("z-index", 1);
             } else {
@@ -202,8 +207,9 @@
 
         setupAppLinks: function(element) {
             this.element
-                .delegate(linkRolesSelector, support.mouseup, appLinkMouseUp)
-                .delegate(linkRolesSelector, "click", appLinkClick);
+                .delegate(linkRolesSelector, support.mousedown, appLinkMouseUp)
+                .delegate(buttonRolesSelector, support.mouseup, appLinkMouseUp)
+                .delegate(linkRolesSelector + buttonRolesSelector, "click", appLinkClick);
         },
 
         scroller: function() {

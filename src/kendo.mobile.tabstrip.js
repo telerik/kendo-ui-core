@@ -26,7 +26,7 @@
 
             that.element.find("a")
                             .each(that._buildButton)
-                            .bind(support.mouseup, that._releaseProxy)
+                            .bind(support.mousedown, that._releaseProxy)
                             .eq(options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
         },
 
