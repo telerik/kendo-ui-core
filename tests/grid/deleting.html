@@ -115,6 +115,14 @@
                 ok(table.parent().find(".k-button>.k-delete").length);
             });
 
+            test("delete button is not shown on edited row hover", function() {
+                setup();
+
+                var tr = table.find("tbody>tr:first").addClass("k-grid-edit-row").trigger("mouseenter");
+
+                ok(!table.parent().find(".k-button>.k-delete").length);
+            });
+
             test("delete button is not shown on data row hover if destory is false", function() {
                 setup({ editable: { destroy: false } }  );
 

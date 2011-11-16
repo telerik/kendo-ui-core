@@ -665,7 +665,7 @@
 
                 if (editable.destroy !== false) {
                     //:visible is required, otherwise mouseenter will be triggerd twice when tr is deleted in Google Chrome
-                    that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible", {
+                    that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row,.k-grid-edit-row):visible", {
                         mouseenter: function(e) {
                             var tr = $(this), button;
 
@@ -702,6 +702,8 @@
             if (!model.readOnly(column.field)) {
                 that._editContainer = cell;
 
+                that.wrapper.find(".k-button:has(.k-delete)").remove();
+
                 that.editable = cell.addClass("k-edit-cell")
                     .kendoEditable({
                         fields: column.field,
@@ -712,6 +714,8 @@
                             }
                         }
                     }).data("kendoEditable");
+
+                cell.parent().addClass("k-grid-edit-row");
 
                 that.trigger(EDIT, { container: cell, model: model });
             }
@@ -732,6 +736,8 @@
                 cell = that._editContainer.removeClass("k-edit-cell"),
                 id = cell.closest("tr").data("id"),
                 column = that.columns[that.cellIndex(cell)];
+
+            cell.parent().removeClass("k-grid-edit-row");
 
             that._displayCell(cell, column, that.dataSource.get(id).data);
             that._distroyEditable();
