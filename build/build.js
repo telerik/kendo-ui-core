@@ -28,6 +28,7 @@ var bundles = [{
 var VERSION = kendoBuild.generateVersion(),
     CDN_URL = process.argv[2] || "http://cdn.kendostatic.com/" + VERSION,
     SCRIPTS_ROOT = "src",
+    STYLES_ROOT = "styles",
     DROP_LOCATION = "release",
     DEPLOY_ROOT = "deploy",
     DEPLOY_SOURCE = "source",
@@ -36,8 +37,7 @@ var VERSION = kendoBuild.generateVersion(),
     DEPLOY_ONLINEEXAMPLES = "onlineExamples";
 
 // Implementation ==============================================================
-var cssRegExp = /\.css$/,
-    startDate = new Date();
+var startDate = new Date();
 
 function initWorkspace() {
     kendoBuild.rmdirSyncRecursive(DEPLOY_ROOT);
@@ -61,21 +61,29 @@ function deployScripts(root, license, copySource) {
     }
 }
 
-function processStyles() {
-    kendoBuild.copyDirSyncRecursive("styles", SOURCESTYLES, false, /\.(css|png|jpg|jpeg|gif)$/i);
-    kendoBuild.copyDirSyncRecursive("styles", STYLES, false, /\.(css|png|jpg|jpeg|gif)$/i);
+function deployStyles(root, copySource) {
+    var stylesDest = path.join(root, DEPLOY_STYLES),
+        sourceRoot = path.join(root, DEPLOY_SOURCE),
+        sourceDest = path.join(sourceRoot, DEPLOY_STYLES),
+        cssFilter = /\.css$/,
+        stylesFilter = /\.(css|png|jpg|jpeg|gif)$/i;
 
-    fs.readdirSync(STYLES).forEach(function(file) {
-        if (cssRegExp.test(file)) {
-            file = path.join(STYLES, file);
+    mkdir(stylesDest);
+    kendoBuild.copyDirSyncRecursive(STYLES_ROOT, stylesDest, false, stylesFilter);
+    kendoBuild.processFilesRecursive(stylesDest, cssFilter, function(fileName) {
+        var css = kendoBuild.readText(fileName),
+            minified = cssmin(css);
 
-            var data = fs.readFileSync(file, "utf8");
-            var minified = cssmin(data);
-
-            fs.writeFileSync(file, minified);
-            fs.renameSync(file, file.replace(".css", ".min.css"));
-        }
+        kendoBuild.writeText(fileName, minified);
+        fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
     });
+
+    if (copySource) {
+        mkdir(sourceRoot);
+        mkdir(sourceDest);
+
+        kendoBuild.copyDirSyncRecursive(STYLES_ROOT, sourceDest, false, stylesFilter);
+    }
 }
 
 function buildExamplesIndex() {
@@ -116,11 +124,11 @@ function buildBundle(bundle, success) {
     console.log("Deploying scripts");
     deployScripts(root, bundle.license, bundle.hasSource);
 
+    console.log("Deploying styles");
+    deployStyles(root, bundle.hasSource);
+
     success();
     return;
-
-    console.log("Processing styles");
-    processStyles();
 
     console.log("Copying cultures");
     kendoBuild.copyDirSyncRecursive("src/cultures", path.join(DEPLOY_SCRIPTS, "cultures"));
