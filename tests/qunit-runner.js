@@ -1,26 +1,28 @@
 ﻿/*
 // <copyright project "Salient.QualityControl" file="qunit.runner.js" company="Sky Sanders">
-// This source is a Public Domain Dedication. 
+// This source is a Public Domain Dedication.
 // http://salientqc.codeplex.com
 // Attribution is appreciated.
-// </copyright> 
+// </copyright>
 */
- 
+
 /* this file can safely be added to the tail of your qunit.js to simplify deployment */
- 
+
 (function (window) {
-    var runner = function (tests, sequential, done) {
+    var runner = function () {
+        this.started = false;
+    }
+
+    runner.prototype.start = function (tests, sequential, done) {
+        this.started = true;
         this.failures = 0;
         this.total = 0;
         this.currentIndex = 0;
         this.sequential = sequential;
         this.tests = tests;
         this.done = done || this.done;
-        var that = this;
-        $(document).ready(function () {
-            $(".runner-test-page-header").live("click", function () { $(this).next(".runner-test-page-frame").slideToggle(100); });
-            that.runPage();
-        });
+        $(".runner-test-page-header").live("click", function () { $(this).next(".runner-test-page-frame").slideToggle(100); });
+        this.runPage();
     }
 
     runner.prototype.nextPage = function () {
@@ -55,6 +57,10 @@
     }
 
     runner.prototype.pageProgress = function (frame, failures, total, testName, isDone) {
+        if (!this.started) {
+            return;
+        }
+
         $.grep(this.tests, $.proxy(function (test, index) {
             if (test.frame === frame) {
                 $(test.header).removeClass("passed").addClass(failures > 0 ? "failed" : "passed")
@@ -86,32 +92,46 @@
     runner.prototype.done = function (failures, total) {
     }
 
+    runner.prototype.begin = $.noop;
+    runner.prototype.doneDone = $.noop;
+    runner.prototype.testStart = $.noop;
+    runner.prototype.testDone = $.noop;
+
+    window.__qunit_runner = new runner();
+
     QUnit.run = function (tests, sequential, done) {
         /// <param name="tests" type="Array"></param>
         /// <param name="sequential" type="Boolean"></param>
         /// <param name="done" type="Function">Function(failures, total) will be called when all tests complete.</param>
-        if (window.__qunit_runner) {
-            throw new Error("One runner per page please.");
-        }
-        window.__qunit_runner = new runner(tests, sequential, done);
-    }
-
-
-    // runner test page hooks - if this page has a runner as parent
-    // then set up the metric callbacks
-    if (top.__qunit_runner) {
-        var runner = top.__qunit_runner;
-
-        QUnit.config.done.push(function (state) {
-            runner.pageProgress(window.frameElement, state.failed, state.total, "done", true);
-        });
-
-        QUnit.config.testStart.push(function (state) {
-            runner.pageProgress(window.frameElement, 0, 0, state.name + " started");
-        });
-
-        QUnit.config.testDone.push(function (state) {
-            runner.pageProgress(window.frameElement, state.failed, state.total, state.name);
+        $(document).ready(function () {
+            window.__qunit_runner.start(tests, sequential, done);
         });
     }
+
+    var runner = parent.__qunit_runner || window.__qunit_runner;
+
+    QUnit.config.autostart = false;
+
+    $(window).load(function() {
+        setTimeout(function() { QUnit.start(); }, 100);
+    });
+
+    QUnit.config.begin.push(function(state) {
+        runner.begin();
+    });
+
+    QUnit.config.done.push(function(state) {
+        runner.pageProgress(window.frameElement, state.failed, state.total, "done", true);
+        runner.doneDone(state);
+    });
+
+    QUnit.config.testStart.push(function(state) {
+        runner.pageProgress(window.frameElement, 0, 0, state.name + " started");
+        runner.testStart(state);
+    });
+
+    QUnit.config.testDone.push(function(state) {
+        runner.pageProgress(window.frameElement, state.failed, state.total, state.name);
+        runner.testDone(state);
+    });
 })(this);
