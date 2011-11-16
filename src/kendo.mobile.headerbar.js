@@ -6,22 +6,17 @@
 
     function createContainer(align, element) {
         var items = element.find("[data-kendo-align=" + align + "]");
+
         if (items[0]) {
-            container = $('<div class="km-' + align + 'item" />');
-            container.append(items);
-            return container;
-        } else {
-            return $();
+            return $('<div class="km-' + align + 'item" />').append(items);
         }
     }
 
     var MobileHeaderBar = MobileWidget.extend({
         init: function(element, options) {
-            var that = this, container;
+            MobileWidget.fn.init.call(this, element, options);
 
-            MobileWidget.fn.init.call(that, element, options);
-
-            that.element.addClass("km-headerbar")
+            this.element.addClass("km-headerbar")
                 .wrapInner($('<div class="km-title" />'))
                 .prepend(createContainer("left", element))
                 .append(createContainer("right", element));
