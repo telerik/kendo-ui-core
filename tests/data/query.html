@@ -305,20 +305,15 @@
 
             test("filter filters with operator as a function", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
-                var operatorFunctionWasCalled = false;
 
                 var result = new Query(data).filter( {
                     field: "field",
-                    operator: function(selector, value) {
-                        operatorFunctionWasCalled = true;
-                        return function(item) {
-                            return selector(item) === value;
-                        };
+                    operator: function(d, value) {
+                        return d === value;
                     },
                     value: 1
                 }).toArray();
 
-                ok(operatorFunctionWasCalled);
                 equal(result.length, 1);
                 equal(result[0].field, 1);
             });
@@ -722,17 +717,17 @@
                 equal(result[0].foo.bar, 1);
             });
 
-            test("filter on .net date literals", function () {
-                var data = [{ bar: "\/Date(850082400000)\/"},{ bar: "\/Date(850092400000)\/"}];
+            test("filter on dotnet date literals", function () {
+                var data = [{ bar: new Date(1996, 11, 9)},{ bar: new Date(1996, 11, 12)}];
 
                 var result = new Query(data).filter( {
                     operator: "eq",
                     field: "bar",
-                    value: new Date(1996, 11, 9)
+                    value: "/Date(850082400000)/"
                 }).toArray();
 
                 equal(result.length, 1);
-                equal(result[0].bar, "\/Date(850082400000)\/");
+                equal(result[0].bar.getTime(), 850082400000);
             });
 
             test("filter on nested nullable objects", function () {

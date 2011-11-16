@@ -164,8 +164,7 @@
         identity = function(o) { return o; },
         getter = kendo.getter,
         stringify = kendo.stringify,
-        math = Math,
-        dateRegExp = /^\/Date\((.*?)\)\/$/;
+        math = Math;
 
     var Comparer = {
         selector: function(field) {
@@ -211,188 +210,6 @@
         }
     };
 
-    var Filter = {
-        create: function(expression) {
-            var idx,
-                length,
-                expr,
-                selector,
-                operator,
-                desc,
-                descriptors = [],
-                caseSensitive,
-                filters,
-                predicate;
-
-            filters = expression ? expression.filters : [];
-
-            for(idx = 0, length = filters.length; idx < length; idx ++) {
-                expr = filters[idx];
-                if (expr.logic) {
-                    desc = Filter.create(expr);
-                } else {
-                    if(typeof expr.value === STRING && !expr.caseSensitive) {
-                        caseSensitive = function(value) {
-                            return value.toLowerCase();
-                        };
-                    } else {
-                        caseSensitive = function(value) {
-                            return value;
-                        };
-                    }
-                    selector = Filter.selector(expr.field, caseSensitive);
-                    operator = Filter.operator(expr.operator);
-                    desc = operator(selector, caseSensitive(expr.value));
-                }
-
-                descriptors.push(desc);
-            }
-            return Filter[expression.logic](descriptors);
-        },
-        selector: function(field, caseSensitive) {
-            if (field) {
-                if (isFunction(field)) {
-                    return field;
-                } else {
-                    var accessor = getter(field);
-                    return function(record) {
-                        var value = accessor(record);
-                        if (typeof value === "string") {
-                            var date = dateRegExp.exec(value);
-                            if (date) {
-                                value = new Date(parseInt(date[1]));
-                            }
-                        }
-                        return caseSensitive(value);
-                    };
-                }
-            }
-            return function(record) {
-                return caseSensitive(record);
-            };
-        },
-        execute: function(predicate, data) {
-            var idx,
-                length = data.length,
-                record,
-                result = [];
-
-            for(idx = 0; idx < length; idx ++) {
-                record = data[idx];
-
-                if (predicate(record)) {
-                    result.push(record);
-                }
-            }
-
-            return result;
-        },
-        and: function(descriptors) {
-            return function(record) {
-                var result = true,
-                    idx = 0,
-                    length = descriptors.length;
-
-                while (result && idx < length) {
-                    result = descriptors[idx ++](record);
-                }
-
-                return result;
-            };
-        },
-        or: function(descriptors) {
-            return function(record) {
-                var result = false,
-                    idx = 0,
-                    length = descriptors.length;
-
-                while (!result && idx < length) {
-                    result = descriptors[idx ++](record);
-                }
-
-                return result;
-            };
-        },
-        operator: function(operator) {
-            if (!operator) {
-                return Filter.eq;
-            }
-
-            if (isFunction(operator)) {
-                return operator;
-            }
-
-            operator = operator.toLowerCase();
-            var operatorStrings = Filter.operatorStrings;
-            for (var op in operatorStrings) {
-                if ($.inArray(operator, operatorStrings[op]) > -1) {
-                    operator = op;
-                    break;
-                }
-            }
-
-            return Filter[operator];
-        },
-        operatorStrings: {
-            "eq": ["eq", "==", "isequalto", "equals", "equalto", "equal"],
-            "neq": ["neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "not", "ne"],
-            "lt": ["lt", "<", "islessthan", "lessthan", "less"],
-            "lte": ["lte", "<=", "islessthanorequalto", "lessthanequal", "le"],
-            "gt": ["gt", ">", "isgreaterthan", "greaterthan", "greater"],
-            "gte": ["gte", ">=", "isgreaterthanorequalto", "greaterthanequal", "ge"],
-            "startswith": ["startswith"],
-            "endswith": ["endswith"],
-            "contains": ["contains", "substringof"]
-        },
-        eq: function(selector, value) {
-            return function(record){
-                var item = selector(record);
-                return item > value ? false : (value > item ? false : true);
-            };
-        },
-        neq: function(selector, value) {
-            return function(record){
-                return selector(record) != value;
-            };
-        },
-        lt: function(selector, value) {
-            return function(record){
-                return selector(record) < value;
-            };
-        },
-        lte: function(selector, value) {
-            return function(record){
-                return selector(record) <= value;
-            };
-        },
-        gt: function(selector, value) {
-            return function(record){
-                return selector(record) > value;
-            };
-        },
-        gte: function(selector, value) {
-            return function(record){
-                return selector(record) >= value;
-            };
-        },
-        startswith: function(selector, value) {
-            return function(record){
-                return selector(record).indexOf(value) == 0;
-            };
-        },
-        endswith: function(selector, value) {
-            return function(record){
-                var item = selector(record);
-                return item.lastIndexOf(value) == item.length - (value || "").length;
-            };
-        },
-        contains: function(selector, value) {
-            return function(record){
-                return selector(record).indexOf(value) > -1;
-            };
-        }
-    }
-
     map = function (array, callback) {
         var idx, length = array.length, result = new Array(length);
 
@@ -403,44 +220,69 @@
         return result;
     }
 
-    var operators = {
-        eq: function(a, b) {
-            return a + " == " + b;
-        },
-        neq: function(a, b) {
-            return a + " != " + b;
-        },
-        gt: function(a, b) {
-            return a + " > " + b;
-        },
-        gte: function(a, b) {
-            return a + " >= " + b;
-        },
-        lt: function(a, b) {
-            return a + " < " + b;
-        },
-        lte: function(a, b) {
-            return a + " <= " + b;
-        },
-        startswith: function(a, b) {
-            return a + ".lastIndexOf('" + b + "', 0) == 0";
-        },
-        endswith: function(a, b) {
-            var length = b.length;
+    var operators = (function(){
+        var dateRegExp = /^\/Date\((.*?)\)\/$/;
 
-            return a + ".lastIndexOf('" + b + "') == " + a + ".length - " + length;
-        },
-        contains: function(a, b) {
-            return a + ".lastIndexOf('" + b + "', 0) >= 0"
+        function operator(op, a, b) {
+            b = b != null ? b : {};
+
+            if (typeof b === "string") {
+                var date = dateRegExp.exec(b);
+                if (date) {
+                    b = new Date(+date[1]);
+                } else {
+                    b = "'" + b + "'";
+                }
+            }
+
+            if (b.getTime) {
+                //b is probably a Date
+                a += ".getTime()";
+                b = b.getTime();
+            }
+
+            return a + " " + op + " " + b;
         }
-    };
 
-    operators["=="] = operators.equals = operators.isequalto = operators.equalto = operators.equal = operators.eq;
-    operators["!="] = operators.not = operators.ne = operators.notequals = operators.isnotequalto = operators.notequalto = operators.notequalsto = operators.notequal = operators.neq;
-    operators["<"] = operators.islessthan = operators.lessthan = operators.less = operators.lt;
-    operators["<="] = operators.islessthanorequalto = operators.lessthanequal = operators.le = operators.lte;
-    operators[">"] = operators.isgreaterthan = operators.greaterthan = operators.greater = operators.gt;
-    operators[">="] = operators.isgreaterthanorequalto = operators.greaterthanequal = operators.ge = operators.gte;
+        var operators =  {
+            eq: function(a, b) {
+                return operator("==", a, b);
+            },
+            neq: function(a, b) {
+                return operator("!=", a, b);
+            },
+            gt: function(a, b) {
+                return operator(">", a, b);
+            },
+            gte: function(a, b) {
+                return operator(">=", a, b);
+            },
+            lt: function(a, b) {
+                return operator("<", a, b);
+            },
+            lte: function(a, b) {
+                return operator("<=", a, b);
+            },
+            startswith: function(a, b) {
+                return a + ".lastIndexOf('" + b + "', 0) == 0";
+            },
+            endswith: function(a, b) {
+                return a + ".lastIndexOf('" + b + "') == " + a + ".length - " + (b || "").length;
+            },
+            contains: function(a, b) {
+                return a + ".indexOf('" + b + "') >= 0"
+            }
+        };
+
+        operators["=="] = operators.equals = operators.isequalto = operators.equalto = operators.equal = operators.eq;
+        operators["!="] = operators.not = operators.ne = operators.notequals = operators.isnotequalto = operators.notequalto = operators.notequalsto = operators.notequal = operators.neq;
+        operators["<"] = operators.islessthan = operators.lessthan = operators.less = operators.lt;
+        operators["<="] = operators.islessthanorequalto = operators.lessthanequal = operators.le = operators.lte;
+        operators[">"] = operators.isgreaterthan = operators.greaterthan = operators.greater = operators.gt;
+        operators[">="] = operators.isgreaterthanorequalto = operators.greaterthanequal = operators.ge = operators.gte;
+        return operators;
+
+    })();
 
     function Query(data) {
         this.data = data || [];
@@ -452,21 +294,41 @@
             idx,
             length,
             filter,
+            expr,
+            fieldStorage = [],
+            operatorStorage = [],
+            field,
+            operator,
             filters = expression.filters;
 
         for (idx = 0, length = filters.length; idx < length; idx++) {
             filter = filters[idx];
+            field = filter.field;
+            operator = filter.operator;
 
             if (filter.filters) {
-                filter = Query.expr(filter);
+                expr = Query.expr(filter);
+                filter = expr.expression;
             } else {
-                filter = operators[filter.operator.toLowerCase()](kendo.expr(filter.field), filter.value);
+                if (typeof field === "function") {
+                    expr = "__f[" + fieldStorage.length +"](d)";
+                    fieldStorage.push(field);
+                } else {
+                    expr = kendo.expr(field);
+                }
+
+                if (typeof operator === "function") {
+                    filter = "__o[" + operatorStorage.length + "](" + expr + ", " + filter.value + ")";
+                    operatorStorage.push(operator);
+                } else {
+                    filter = operators[(operator || "eq").toLowerCase()](expr, filter.value);
+                }
             }
 
             expressions.push(filter);
         }
 
-        return "(" + expressions.join(logic[expression.logic]) + ")";
+        return  { expression: "(" + expressions.join(logic[expression.logic]) + ")", fields: fieldStorage, operators: operatorStorage };
     }
 
     function expandSort(field, dir) {
@@ -542,10 +404,41 @@
 
             return this;
         },
+
         filter: function(expressions) {
-            var predicate = Filter.create(expandFilter(expressions));
-            return new Query(Filter.execute(predicate, this.data));
+            var idx,
+                current,
+                length,
+                compiled,
+                predicate,
+                data = this.data,
+                fields,
+                operators,
+                result = [],
+                filter;
+
+            compiled = Query.expr(expandFilter(expressions));
+            fields = compiled.fields;
+            operators = compiled.operators;
+
+            predicate = filter = new Function("d, __f, __o", "return " + compiled.expression);
+
+            if (fields.length || operators.length) {
+                filter = function(d) {
+                    return predicate(d, fields, operators);
+                };
+            }
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                current = data[idx];
+
+                if (filter(current)) {
+                    result.push(current);
+                }
+            }
+            return new Query(result);
         },
+
         group: function(descriptors, allData) {
             descriptors =  expandGroup(descriptors || []);
             allData = allData || this.data;
@@ -1492,12 +1385,11 @@
         filter: function(val) {
             var that = this;
 
-            if(val !== undefined) {
-                that._query({ filter: val });
-                return;
+            if (val === undefined) {
+                return that._filter;
             }
 
-            return that._filter;
+            that._query({ filter: val });
         },
 
         /**
