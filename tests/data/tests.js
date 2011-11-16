@@ -20,6 +20,10 @@ tests.push(
         title: "datasource.query"
     },
     {
+        page: "data/query-expr.html",
+        title: "query filter compilation"
+    },
+    {
         page: "data/datasource/sync.html",
         title: "datasource.sync"
     },

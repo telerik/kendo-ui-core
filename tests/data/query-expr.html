@@ -20,13 +20,20 @@
             var Query = kendo.data.Query;
 
             function compile(expression) {
-                return Query.expr(expression);
+                return Query.expr(expression).expression;
             }
 
             test("and with one filter", function() {
                 equal(compile({
                     logic: "and",
                     filters: [ {value: 10, operator: "eq"}]
+                }), "(d == 10)");
+            });
+
+            test("default operator is eq", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ {value: 10}]
                 }), "(d == 10)");
             });
 
@@ -346,14 +353,120 @@
                 equal(compile({
                     logic: "and",
                     filters: [ { field: "foo", value: "bar", operator: "contains" } ]
-                }), "(d.foo.lastIndexOf('bar', 0) >= 0)");
+                }), "(d.foo.indexOf('bar') >= 0)");
             });
 
             test("contains with apostrophe", function() {
                 equal(compile({
                     logic: "and",
                     filters: [ { field: "foo", value: "'", operator: "contains" } ]
-                }), "(d.foo.lastIndexOf('\'', 0) >= 0)");
+                }), "(d.foo.indexOf('\'') >= 0)");
+            });
+
+            test("using function as field", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: $.noop, value: 0, operator: "eq" } ]
+                }), "(__f[0](d) == 0)");
+            });
+
+            test("using multiple fields as function", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: $.noop, value: 10, operator: "eq" }, {field: $.noop,  value: 10, operator: "eq" }]
+                }), "(__f[0](d) == 10 && __f[1](d) == 10)");
+            });
+
+            test("using function as operator", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { value: 0, operator: $.noop } ]
+                }), "(__o[0](d, 0))");
+            });
+
+            test("using function as operator and field", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: $.noop, value: 0, operator: $.noop } ]
+                }), "(__o[0](__f[0](d), 0))");
+            });
+
+            test("using multiple operators as function", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: $.noop, value: 10 }, { operator: $.noop, value: 10}]
+                }), "(__o[0](d, 10) && __o[1](d, 10))");
+            });
+
+            test("or with nested filters and operators as functions", function() {
+                equal(compile({
+                    logic: "or",
+                    filters: [
+                        {
+                            logic: "and",
+                            filters: [{ value: 10, operator: $.noop }, { value: 10, operator: "eq" }]
+                        },
+                        {
+                            logic: "or",
+                            filters: [{ value: 10, operator: "eq" }, { value: 10, operator: "eq" }]
+                        }
+                    ]
+                }), "((__o[0](d, 10) && d == 10) || (d == 10 || d == 10))");
+            });
+
+            test("date eq", function() {
+                var date = new Date(2011, 10, 1);
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "eq", value: date} ]
+                }), "(d.getTime() == " + date.getTime() + ")");
+            });
+
+            test("date neq", function() {
+                var date = new Date(2011, 10, 1);
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "neq", value: date} ]
+                }), "(d.getTime() != " + date.getTime() + ")");
+            });
+
+            test("date gt", function() {
+                var date = new Date(2011, 10, 1);
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "gt", value: date} ]
+                }), "(d.getTime() > " + date.getTime() + ")");
+            });
+
+            test("date gte", function() {
+                var date = new Date(2011, 10, 1);
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "gte", value: date} ]
+                }), "(d.getTime() >= " + date.getTime() + ")");
+            });
+
+            test("date lt", function() {
+                var date = new Date(2011, 10, 1);
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "lt", value: date} ]
+                }), "(d.getTime() < " + date.getTime() + ")");
+            });
+
+            test("date lte", function() {
+                var date = new Date(2011, 10, 1);
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "lte", value: date} ]
+                }), "(d.getTime() <= " + date.getTime() + ")");
+            });
+
+            test("string eq", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "neq", value: "foo"} ]
+                }), "(d != 'foo')");
             });
         </script>
     </body>

@@ -183,18 +183,6 @@
                 equal(dataSource._sort[0].dir, "asc");
             });
 
-            test("filter as object is expanded to array", function() {
-                var dataSource = new DataSource({
-                    data: [],
-                    filter: { field: "foo", value: "bar", operator: "eq" }
-                });
-
-                ok($.isArray(dataSource._filter));
-                equal(dataSource._filter[0].field, "foo");
-                equal(dataSource._filter[0].value, "bar");
-                equal(dataSource._filter[0].operator, "eq");
-            });
-
             test("changing value in model triggers modelChange of the datasource", function() {
                 var model,
                     dataSource = new DataSource({
