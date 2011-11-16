@@ -19,9 +19,33 @@
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
-        <link href="http://cdn.kendostatic.com/2011.3.1007/styles/kendo.common.min.css" rel="stylesheet"/>
-        <link href="http://cdn.kendostatic.com/2011.3.1007/styles/kendo.kendo.min.css" rel="stylesheet"/>
+        <link href="../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../styles/kendo.hakama.css" rel="stylesheet"/>
+        <style>
+            body {
+               font: 75% arial,helvetica,sans-serif;
+           }
+       </style>
+       <style type="text/css">
+           .k-invalid-msg
+           {
+               position: absolute;
+               display: block;
+           }
 
+           * html .k-invalid-msg { position: relative; }
+           *+html .k-invalid-msg { position: relative; }
+
+           .k-invalid-msg
+           {
+               position: absolute;
+               white-space: nowrap;
+               color: red;
+               padding: 17px 5px 3px;
+               background: transparent url('http://demos.telerik.com/aspnet-mvc/Content/Common/validation-error-message.png') no-repeat 0 0;
+           }
+
+       </style>
     </head>
     <body>
         <div id="relatedGrid"></div>

@@ -322,6 +322,39 @@
                 ok(model.get("foo") === 0);
             });
 
+            test("isNew and default id value", function() {
+                var MyModel = Model.define({
+                    id: "foo",
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            defaultValue: 0
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.isNew());
+            });
+
+            test("isNew and id as function", function() {
+                var MyModel = Model.define({
+                    id: function() {},
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            defaultValue: 0
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.isNew());
+            });
+
+
             test("type convert is assign to the field definition", function() {
                 var MyModel = Model.define({
                     fields: {

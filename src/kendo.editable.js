@@ -45,20 +45,20 @@
     var editors = {
         "number": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="text"/>').attr(attr).appendTo(container);
+            $('<input type="text" style="width:100%"/>').attr(attr).appendTo(container);
         },
         "date": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="text"/>').attr(attr).appendTo(container).kendoDatePicker();
-            $('<span data-kendo-for="' + options.field + '" class="k-invalid-msg" />').appendTo(container);
+            $('<input type="text" style="width:100%;"/>').attr(attr).appendTo(container).kendoDatePicker();
+            $('<span data-kendo-for="' + options.field + '" class="k-invalid-msg"/>').appendTo(container);
         },
         "string": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="text"/>').attr(attr).appendTo(container);
+            $('<input type="text" style="width:100%"/>').attr(attr).appendTo(container);
         },
         "boolean": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="checkbox"/>').attr(attr).appendTo(container);
+            $('<input type="checkbox" />').attr(attr).appendTo(container);
         }
     };
 
