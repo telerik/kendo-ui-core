@@ -385,6 +385,12 @@
                equal(dropdownlist._data()[0].value, "");
            });
 
+           test("should not set id to the popup if the input does not have", function() {
+               input.removeAttr("id");
+               dropdownlist = new DropDownList(input);
+               ok(!dropdownlist.list.attr("id"));
+           });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

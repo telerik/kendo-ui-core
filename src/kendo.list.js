@@ -29,7 +29,7 @@
          * @extends kendo.ui.Widget
          */
         init: function(element, options) {
-            var that = this;
+            var that = this, id;
 
             Widget.fn.init.call(that, element, options);
 
@@ -46,9 +46,12 @@
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
 
-            that.list = $("<div class='k-list-container'/>")
-                            .attr(ID, that.element.attr(ID) + "-list")
-                            .append(that.ul);
+            that.list = $("<div class='k-list-container'/>").append(that.ul);
+
+            id = that.element.attr(ID);
+            if (id) {
+                that.list.attr(ID, id + "-list")
+            }
 
             $(document.documentElement).bind("mousedown", proxy(that._mousedown, that));
         },
