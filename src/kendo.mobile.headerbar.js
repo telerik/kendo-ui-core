@@ -6,18 +6,18 @@
         var items = element.find("[data-kendo-align=" + align + "]");
 
         if (items[0]) {
-            return $('<div class="km-' + align + 'item" />').append(items);
+            element.prepend($('<div class="km-' + align + 'item" />').append(items));
         }
     }
 
     var MobileHeaderBar = MobileWidget.extend({
         init: function(element, options) {
             MobileWidget.fn.init.call(this, element, options);
+            element = this.element;
 
-            this.element.addClass("km-headerbar")
-                .wrapInner($('<div class="km-title" />'))
-                .prepend(createContainer("left", element))
-                .append(createContainer("right", element));
+            element.addClass("km-headerbar").wrapInner($('<div class="km-title" />'));
+            createContainer("left", element);
+            createContainer("right", element);
         },
 
         options: {
