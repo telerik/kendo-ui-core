@@ -4,6 +4,10 @@ tests.push(
         title: "application"
     },
     {
+        page: "mobile/tabstrip.html",
+        title: "tabstrip"
+    },
+    {
         page: "mobile/core.html",
         title: "mobile core"
     },
