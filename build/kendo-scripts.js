@@ -93,10 +93,10 @@ function deploy(scriptsRoot, outputRoot, header, compress) {
     kendoBuild.copyDirSyncRecursive(culturesRoot, culturesDest);
     kendoBuild.processFilesRecursive(culturesDest, /.*/, function(fileName) {
         var content = kendoBuild.readText(fileName),
-            minified = content, //kendoBuild.minifyJs(content),
+            output = compress ? kendoBuild.minifyJs(content) : content,
             outName = scriptOutName(fileName, compress);
 
-        kendoBuild.writeText(fileName, minified);
+        kendoBuild.writeText(fileName, header + output);
 
         if (outName !== fileName) {
             fs.renameSync(fileName, outName);
