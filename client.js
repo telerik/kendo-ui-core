@@ -1,5 +1,9 @@
+#!/usr/bin/env node
+
 var http       = require('http'),
     faye       = require('faye'),
+    colors     = require('colors'),
+    util       = require('util'),
     builder    = require('xmlbuilder'),
     paperboy   = require('paperboy');
 
@@ -8,19 +12,26 @@ var doc = builder.create();
 var root = doc.begin('testsuite');
 var agents = 0;
 
+url = process.argv[2] || 'tests/mobile/';
 
 client.subscribe('/connect', function(agent) {
-    console.log(agent, " connected");
+
+    util.puts(agent.green, " connected");
     agents ++;
 });
 
 client.subscribe("/testDone", function(state) {
-    console.log("test done", state);
+    var testName = (state.module ? state.module + " " : "").bold + state.name;
+    if (state.failed == 0) {
+        testName = testName.blue;
+    } else {
+        testName = testName.red;
+    }
+
+    util.puts(testName + ' (' + state.failed.toString().red + ', ' + state.passed.toString().green + ', ' + state.total.toString().grey + ')');
 });
 
 client.subscribe("/done", function(agent) {
-    console.log("done", agent);
-
     agents --;
 
     if(!agents) {
@@ -28,7 +39,7 @@ client.subscribe("/done", function(agent) {
     }
 });
 
-client.publish('/load', '/tests/mobile/');
+client.publish('/load', "/" + url);
 
 /*
 client.subscribe('/testDone', function(message) {

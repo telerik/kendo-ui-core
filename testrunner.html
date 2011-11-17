@@ -13,20 +13,12 @@
         </style>
 
         <script src="/faye.js"></script>
-        <script src="/src/jquery.js"></script>
+        <script src="src/jquery.js"></script>
         <script>
-            window.client = new Faye.Client('/faye');
+            window.client = new Faye.Client('/faye', {timeout: 600});
             client.subscribe('/load', function(path) {
                 $("iframe").attr("src", path);
-            });
-
-            $(function() {
-                $("iframe").load(function() {
-                    var doc = top.frames[0].window.document;
-                    var script = document.createElement("script");
-                    script.src = "/faye-reporter.js";
-                    doc.body.appendChild(script);
-                });
+                client.publish("/connect", navigator.userAgent);
             });
         </script>
     </head>

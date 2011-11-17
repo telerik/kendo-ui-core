@@ -1,24 +1,31 @@
+#!/usr/bin/env node
+
 var http       = require("http"),
     faye       = require("faye"),
-    paperboy   = require("paperboy"),
+    static     = require("node-static"),
     path       = require("path"),
     fs         = require("fs"),
     builder = require("xmlbuilder"),
     WEBROOT    = path.dirname(__filename),
     bayeux     = new faye.NodeAdapter({mount: "/faye", timeout: 100000});
 
-// Handle non-Bayeux requestsS
-var server = http.createServer(function(request, response) {
+var fileServer = new static.Server(WEBROOT);
 
-  var ip = request.connection.remoteAddress;
-  paperboy
-  .deliver(WEBROOT, request, response)
-  .otherwise(function(err) {
-    response.writeHead(404, {"Content-Type": "text/plain"});
-    response.end("Error 404: File not found");
-  });
+var server = http.createServer(function(request, response) {
+    request.addListener('end', function (argument) {
+        fileServer.serve(request, response);
+    });
 });
 
 bayeux.attach(server);
 
 server.listen(8080);
+
+function log(statCode, url, ip, err) {
+    var logStr = statCode + ' - ' + url + ' - ' + ip;
+
+    if (err) {
+        logStr += ' - ' + err;
+    }
+    console.log(logStr);
+}

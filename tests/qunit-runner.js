@@ -8,31 +8,32 @@
 
 /* this file can safely be added to the tail of your qunit.js to simplify deployment */
 
-(function (window) {
-    var runner = function () {
+(function(window) {
+    var runner = function() {
         this.started = false;
     }
 
-    runner.prototype.start = function (tests, sequential, done) {
+    runner.prototype.start = function(tests, sequential, done) {
         this.started = true;
         this.failures = 0;
         this.total = 0;
         this.currentIndex = 0;
         this.sequential = sequential;
         this.tests = tests;
-        this.done = done || this.done;
-        $(".runner-test-page-header").live("click", function () { $(this).next(".runner-test-page-frame").slideToggle(100); });
+        this.done = this.done || done;
+        $(".runner-test-page-header").live("click", function() { $(this).next(".runner-test-page-frame").slideToggle(100); });
         this.runPage();
     }
 
-    runner.prototype.nextPage = function () {
+    runner.prototype.nextPage = function() {
         if (this.currentIndex + 1 < this.tests.length) {
             this.currentIndex++;
             this.runPage();
         }
     }
 
-    runner.prototype.runPage = function () {
+    runner.prototype.runPage = function() {
+        console.log("running page");
         var progress = [(this.currentIndex + 1), ' of ', this.tests.length].join('');
 
         $("#qunit-runner-userAgent")
@@ -56,12 +57,15 @@
         }
     }
 
-    runner.prototype.pageProgress = function (frame, failures, total, testName, isDone) {
+    runner.prototype.pageProgress = function(frame, failures, total, testName, isDone) {
         if (!this.started) {
+            if (isDone) {
+                this.done(this.failures, this.total);
+            }
             return;
         }
 
-        $.grep(this.tests, $.proxy(function (test, index) {
+        $.grep(this.tests, $.proxy(function(test, index) {
             if (test.frame === frame) {
                 $(test.header).removeClass("passed").addClass(failures > 0 ? "failed" : "passed")
                             .html(test.title + " " + testName
@@ -76,7 +80,7 @@
                         $(test.header).next().remove();
 
                     // are all pages finished?
-                    if ($.grep(this.tests, function (test, index) { return !test.complete; }).length == 0) {
+                    if ($.grep(this.tests, function(test, index) { return !test.complete; }).length == 0) {
                         $("#qunit-banner").addClass(this.failures > 0 ? "qunit-fail" : "qunit-pass");
                         this.done(this.failures, this.total);
                     }
@@ -89,21 +93,25 @@
     }
 
     // if you need to be notified the runner is finished..
-    runner.prototype.done = function (failures, total) {
-    }
-
-    runner.prototype.begin = $.noop;
-    runner.prototype.doneDone = $.noop;
-    runner.prototype.testStart = $.noop;
+    runner.prototype.done = $.noop;
     runner.prototype.testDone = $.noop;
 
     window.__qunit_runner = new runner();
 
-    QUnit.run = function (tests, sequential, done) {
-        /// <param name="tests" type="Array"></param>
-        /// <param name="sequential" type="Boolean"></param>
-        /// <param name="done" type="Function">Function(failures, total) will be called when all tests complete.</param>
-        $(document).ready(function () {
+    var client = top.client;
+
+    if (client) {
+        window.__qunit_runner.done = function() {
+            client.publish("/done", navigator.userAgent);
+        }
+
+        window.__qunit_runner.testDone = function(state) {
+            client.publish("/testDone", state);
+        }
+    }
+
+    QUnit.run = function(tests, sequential, done) {
+        $(document).ready(function() {
             window.__qunit_runner.start(tests, sequential, done);
         });
     }
@@ -116,18 +124,12 @@
         setTimeout(function() { QUnit.start(); }, 100);
     });
 
-    QUnit.config.begin.push(function(state) {
-        runner.begin();
-    });
-
     QUnit.config.done.push(function(state) {
         runner.pageProgress(window.frameElement, state.failed, state.total, "done", true);
-        runner.doneDone(state);
     });
 
     QUnit.config.testStart.push(function(state) {
         runner.pageProgress(window.frameElement, 0, 0, state.name + " started");
-        runner.testStart(state);
     });
 
     QUnit.config.testDone.push(function(state) {
