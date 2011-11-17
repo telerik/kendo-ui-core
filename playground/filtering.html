@@ -2,12 +2,7 @@
 <html>
     <head>
         <title>grid</title>
-        <!--<script src="../src/jquery.js"></script>
-        <script src="../src/kendo.loader.js"></script>
-        <script>
-            kendo.loader.grid({ sortable: true, pageable: true, selectable: true });
-        </script>-->
-         <script src="../src/jquery.js"></script>
+        <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.model.js"></script>
         <script src="../src/kendo.data.js"></script>
@@ -76,7 +71,7 @@
             <button>Filter</button>
         </form>
 
-        <table id="table1" style="height: 400px">
+        <table id="table1">
             <thead>
                 <tr>
                     <th data-field="OrderID">Order ID</th>
@@ -123,21 +118,25 @@
             }
 
             $(document).ready(function() {
-
+/*
                 $("button").click(function(e) {
                     var array = $("form").serializeArray();
                     console.log(toObject(array));
                     return false;
                 }).click();
-
+*/
                 var dataSource = new kendo.data.DataSource({
                     type: "odata",
                     serverPaging: true,
                     serverSorting: true,
                     pageSize: 10,
-                    transport: {
-                        read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
-                    },
+                    data: [ {
+                        OrderID: 1,
+                        ShipCity: "Sofia"
+                        },{
+                        OrderID: 2,
+                        ShipCity: "Kazanlak"
+                    } ],
                     schema: {
                         model: {
                             fields: {
@@ -149,6 +148,7 @@
                 });
 
                 $("#table1").kendoGrid({
+                    scrollable: false,
                     dataSource: dataSource
                 });
 
