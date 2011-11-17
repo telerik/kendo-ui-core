@@ -209,6 +209,7 @@
         var model,
             proto = extend({}, { defaultItem: {} }, options),
             id = proto.id || "id",
+            defaultId,
             set,
             get;
 
@@ -220,20 +221,6 @@
             set = setter(id);
         }
 
-        id = function(data, value) {
-            var result;
-            if (value === undefined) {
-                result = get(data);
-                return result !== undefined ? result : data["__id"];
-            } else {
-                set(data, value);
-            }
-        }
-
-        proto.id = function(value) {
-            return id(this.data, value);
-        }
-
         for (var field in proto.fields) {
             field = proto.fields[field];
 
@@ -242,12 +229,26 @@
                 value = proto.defaultItem[name] = field.defaultValue != undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
 
             if (options.id === name) {
-                proto._defaultId = value;
+                defaultId = proto._defaultId = value;
             }
 
             proto.defaultItem[name] = value;
 
             field.converter = field.converter || converters[type];
+        }
+
+        id = function(data, value) {
+            var result;
+            if (value === undefined) {
+                result = get(data);
+                return result !== undefined && result !== defaultId ? result : data["__id"];
+            } else {
+                set(data, value);
+            }
+        }
+
+        proto.id = function(value) {
+            return id(this.data, value);
         }
 
         model = Model.extend(proto);

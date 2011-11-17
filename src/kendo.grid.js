@@ -1351,17 +1351,9 @@
                         type = typeof id;
 
                         rowTemplate += ' data-id="#=';
-
-                        if (type === STRING) {
-                            if (!settings.useWithBlock) {
-                                rowTemplate += paramName + ".";
-                            }
-                            rowTemplate += id;
-                        } else if (type === FUNCTION) {
-                            state.storage["tmpl" + state.count] = id;
-                            rowTemplate += 'this.tmpl' + state.count + "(" + paramName + ")";
-                            state.count++;
-                        }
+                        state.storage["tmpl" + state.count] = type === FUNCTION ? id : that.dataSource.reader.model.id;
+                        rowTemplate += 'this.tmpl' + state.count + "(" + paramName + ")";
+                        state.count++;
 
                         rowTemplate += '#"';
                     }

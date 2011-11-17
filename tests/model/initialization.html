@@ -77,6 +77,21 @@
                 ok(model.isNew());
             });
 
+            test("id function does not return default value for the id field", function() {
+                var MyModel = Model.define({
+                    id: "id",
+                    fields: {
+                        id: {
+                            field: "id",
+                            defaultValue: 0
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+                ok(model.id() !== 0);
+            });
+
             test("isNew returns true if no key is defined", function() {
                 var MyModel = Model.define({
                 });
