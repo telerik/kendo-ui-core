@@ -11,17 +11,21 @@ var fs = require("fs"),
     zip = kendoBuild.zip;
 
 // Configuration ==============================================================
+
 var bundles = [{
     name: "Commercial",
-    license: "commercial",
+    license: "src-commercial.txt",
+    eula: "EULA-Kendo.pdf",
     hasSource: true
 }, {
     name: "Trial",
-    license: "commercial",
+    license: "src-commercial.txt",
+    eula: "EULA-Kendo.pdf",
     hasSource: false
 }, {
     name: "OpenSource",
-    license: "os",
+    license: "src-os.txt",
+    eula: "EULA-Kendo.pdf",
     hasSource: true
 }];
 
@@ -29,6 +33,8 @@ var VERSION = kendoBuild.generateVersion(),
     CDN_URL = process.argv[2] || "http://cdn.kendostatic.com/" + VERSION,
     SCRIPTS_ROOT = "src",
     STYLES_ROOT = "styles",
+    LEGAL_ROOT = "resources/legal",
+    THIRD_PARTY_LICENSES = "licenses.txt",
     DROP_LOCATION = "release",
     DEPLOY_ROOT = "deploy",
     DEPLOY_SOURCE = "source",
@@ -86,6 +92,18 @@ function deployStyles(root, copySource) {
     }
 }
 
+function deployLicenses(root, bundle) {
+    kendoBuild.copyFileSync(
+        path.join(LEGAL_ROOT, bundle.eula),
+        path.join(root, bundle.eula)
+    );
+
+    kendoBuild.copyFileSync(
+        path.join(LEGAL_ROOT, THIRD_PARTY_LICENSES),
+        path.join(root, THIRD_PARTY_LICENSES)
+    );
+}
+
 function buildExamplesIndex() {
     var navigation = kendoBuild.readText("demos/examples/js/kendo.examples.nav.js");
     eval(navigation);
@@ -116,7 +134,7 @@ function buildExamples() {
 function buildBundle(bundle, success) {
     var name = bundle.name,
         root = path.join(DEPLOY_ROOT, name),
-        license = kendoBuild.readText("resources/licenses/" + bundle.license + ".txt");
+        license = kendoBuild.readText(path.join(LEGAL_ROOT, bundle.license));
 
     console.log("Building Web/DataViz " + name);
     mkdir(root);
@@ -127,15 +145,11 @@ function buildBundle(bundle, success) {
     console.log("Deploying styles");
     deployStyles(root, bundle.hasSource);
 
+    console.log("Deploying licenses");
+    deployLicenses(root, bundle);
+
     success();
     return;
-
-    console.log("Copying license");
-    var data = fs.readFileSync("resources/Kendo\ Beta\ EULA.pdf");
-    fs.writeFileSync(DEPLOY_ROOT + "/Kendo\ Beta\ EULA.pdf", data);
-
-    data = fs.readFileSync("resources/licenses.txt");
-    fs.writeFileSync(DEPLOY_ROOT + "/licenses.txt", data);
 
     console.log("Building examples");
     buildExamples();

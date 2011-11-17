@@ -176,7 +176,7 @@ var BOM = 0xfeff;
 function readText(fileName) {
     var data = fs.readFileSync(fileName, "utf8");
 
-    if (data.charCodeAt(0) == 0xfeff) {
+    if (data.charCodeAt(0) == BOM) {
         data = data.substring(1);
     }
 
@@ -229,15 +229,16 @@ function mkdir(newDir) {
 }
 
 // Exports ====================================================================
-exports.merge = merge;
-exports.generateVersion = generateVersion;
-exports.rmdirSyncRecursive = rmdirSyncRecursive;
 exports.copyDirSyncRecursive = copyDirSyncRecursive;
+exports.copyFileSync = copyFileSync;
+exports.copyTextFile = copyTextFile;
+exports.generateVersion = generateVersion;
+exports.merge = merge;
 exports.minifyJs = minifyJs;
 exports.mkdir = mkdir;
-exports.template = template;
 exports.processFilesRecursive = processFilesRecursive;
-exports.copyTextFile = copyTextFile;
 exports.readText = readText;
+exports.rmdirSyncRecursive = rmdirSyncRecursive;
+exports.template = template;
 exports.writeText = writeText;
 exports.zip = zip;
