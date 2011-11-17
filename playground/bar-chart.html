@@ -59,10 +59,20 @@
                     },
                     series: [
                         {
+                            tooltip: {
+                                border: {
+                                    color: "blue"
+                                }
+                            },
                             name: "Value A",
                             field: "a"
-                        },
-                        {
+                        }, {
+                            tooltip: {
+                                border: {
+                                    color: "red"
+                                },
+                                visible: true
+                            },
                             type: "line",
                             name: "Value B",
                             field: "b",
@@ -76,24 +86,6 @@
                         minorGridLines: {
                             visible: true
                         }
-                    },
-                    valueAxis: {
-                        minorGridLines: {
-                            visible: true
-                        }
-                    },
-                    axisDefaults: {
-                        majorGridLines: {
-                            color: "red"
-                        },
-                        minorGridLines: {
-                            color: "red"
-                        }
-                    },
-                    seriesClick: function(e) {
-                    },
-                    tooltip: {
-                        visible: true
                     },
                     transitions: true
                 });
