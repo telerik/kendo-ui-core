@@ -288,15 +288,15 @@
         this.data = data || [];
     }
 
-    Query.expr = function(expression) {
+    Query.filterExpr = function(expression) {
         var expressions = [],
             logic = { and: " && ", or: " || " },
             idx,
             length,
             filter,
             expr,
-            fieldStorage = [],
-            operatorStorage = [],
+            fieldFunctions = [],
+            operatorFunctions = [],
             field,
             operator,
             filters = expression.filters;
@@ -307,19 +307,31 @@
             operator = filter.operator;
 
             if (filter.filters) {
-                expr = Query.expr(filter);
-                filter = expr.expression;
+                expr = Query.filterExpr(filter);
+                //Nested function fields or operators - update their index e.g. __o[0] -> __o[1]
+                filter = expr.expression
+                             .replace(/__o\[(\d+)\]/g, function(match, index) {
+                                index = +index;
+                                return "__o[" + (operatorFunctions.length + index) + "]";
+                             })
+                             .replace(/__f\[(\d+)\]/g, function(match, index) {
+                                index = +index;
+                                return "__f[" + (fieldFunctions.length + index) + "]";
+                             });
+
+                operatorFunctions.push.apply(operatorFunctions, expr.operators);
+                fieldFunctions.push.apply(fieldFunctions, expr.fields);
             } else {
                 if (typeof field === "function") {
-                    expr = "__f[" + fieldStorage.length +"](d)";
-                    fieldStorage.push(field);
+                    expr = "__f[" + fieldFunctions.length +"](d)";
+                    fieldFunctions.push(field);
                 } else {
                     expr = kendo.expr(field);
                 }
 
                 if (typeof operator === "function") {
-                    filter = "__o[" + operatorStorage.length + "](" + expr + ", " + filter.value + ")";
-                    operatorStorage.push(operator);
+                    filter = "__o[" + operatorFunctions.length + "](" + expr + ", " + filter.value + ")";
+                    operatorFunctions.push(operator);
                 } else {
                     filter = operators[(operator || "eq").toLowerCase()](expr, filter.value);
                 }
@@ -328,7 +340,7 @@
             expressions.push(filter);
         }
 
-        return  { expression: "(" + expressions.join(logic[expression.logic]) + ")", fields: fieldStorage, operators: operatorStorage };
+        return  { expression: "(" + expressions.join(logic[expression.logic]) + ")", fields: fieldFunctions, operators: operatorFunctions };
     }
 
     function expandSort(field, dir) {
@@ -417,7 +429,7 @@
                 result = [],
                 filter;
 
-            compiled = Query.expr(expandFilter(expressions));
+            compiled = Query.filterExpr(expandFilter(expressions));
             fields = compiled.fields;
             operators = compiled.operators;
 

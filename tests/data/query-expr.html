@@ -20,7 +20,7 @@
             var Query = kendo.data.Query;
 
             function compile(expression) {
-                return Query.expr(expression).expression;
+                return Query.filterExpr(expression).expression;
             }
 
             test("and with one filter", function() {
@@ -404,14 +404,53 @@
                     filters: [
                         {
                             logic: "and",
-                            filters: [{ value: 10, operator: $.noop }, { value: 10, operator: "eq" }]
+                            filters: [{ value: 10, operator: $.noop }, { value: 10, operator: $.noop }]
                         },
                         {
                             logic: "or",
-                            filters: [{ value: 10, operator: "eq" }, { value: 10, operator: "eq" }]
+                            filters: [{ value: 10, operator: $.noop }, { value: 10, operator: "eq" }]
                         }
                     ]
-                }), "((__o[0](d, 10) && d == 10) || (d == 10 || d == 10))");
+                }), "((__o[0](d, 10) && __o[1](d, 10)) || (__o[2](d, 10) || d == 10))");
+            });
+
+            test("or with nested filters and fields as functions", function() {
+                equal(compile({
+                    logic: "or",
+                    filters: [
+                        {
+                            logic: "and",
+                            filters: [{ value: 10, field: $.noop, operator: $.noop }, {field: $.noop, value: 10, operator: $.noop }]
+                        },
+                        {
+                            logic: "or",
+                            filters: [{ value: 10, field: $.noop,  operator: $.noop }, { value: 10, operator: "eq" }]
+                        }
+                    ]
+                }), "((__o[0](__f[0](d), 10) && __o[1](__f[1](d), 10)) || (__o[2](__f[2](d), 10) || d == 10))");
+            });
+            test("deeply nested nested fields as functions", function() {
+                equal(compile({
+                    logic: "or",
+                    filters: [
+                        {
+                            logic: "and",
+                            filters: [ {
+                                logic: "or",
+                                filters: [ { value: 10, field: $.noop }, {field: $.noop, value: 10}]
+                            }, { field:$.noop, value : 10 }
+                            ]
+                        },
+                        {
+                            logic: "and",
+                            filters: [ {
+                                logic: "or",
+                                filters: [ { value: 10, field: $.noop }, {field: $.noop, value: 10}]
+                            }, { field:$.noop, value : 10 }
+]
+                        },
+                    ]
+                }), "(((__f[0](d) == 10 || __f[1](d) == 10) && __f[2](d) == 10) || ((__f[3](d) == 10 || __f[4](d) == 10) && __f[5](d) == 10))");
             });
 
             test("date eq", function() {
