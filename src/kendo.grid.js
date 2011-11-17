@@ -472,7 +472,7 @@
          *  &lt;/script&gt;
          *
          *  //grid intialization
-         *  &lt;script&gt;
+         *  &lt;script&gt;PO details informaiton
          *      $("#grid").kendoGrid({
          *          dataSource: dataSource,
          *          rowTemplate: kendo.template($("#rowTemplate").html()),
@@ -706,7 +706,7 @@
 
                 that.editable = cell.addClass("k-edit-cell")
                     .kendoEditable({
-                        fields: column.field,
+                        fields: { field: column.field, format: column.format },
                         model: model,
                         change: function(e) {
                             if (that.trigger(SAVE, { values: e.values, container: cell, model: model } )) {
@@ -1407,6 +1407,7 @@
                 template = column.template,
                 paramName = settings.paramName,
                 html = "",
+                format = column.format,
                 type = typeof template;
 
             if (type === FUNCTION) {
@@ -1418,11 +1419,20 @@
             } else {
                 html += column.encoded ? "${" : "#=";
 
+                if (format) {
+                    html += 'kendo.format(\"' + format + '\",';
+                }
+
                 if (!settings.useWithBlock) {
                     html += paramName + ".";
                 }
 
                 html += column.field;
+
+                if (format) {
+                    html += ")";
+                }
+
                 html += column.encoded ? "}" : "#";
             }
             return html;

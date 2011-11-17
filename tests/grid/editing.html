@@ -70,6 +70,21 @@
                 ok(cell.find(":input").length);
             });
 
+            test("editing cell passes column field to Editable", function() {
+                setup({ columns: ["foo", "name"] });
+                var cell = table.find("td:first").click();
+
+                equal(cell.data("kendoEditable").options.fields.field, "foo");
+            });
+
+            test("editing cell passes column settings to Editable", function() {
+                setup({ columns: [{ field: "foo", format: "bar" }, "name"] });
+                var cell = table.find("td:first").click();
+
+                equal(cell.data("kendoEditable").options.fields.field, "foo");
+                equal(cell.data("kendoEditable").options.fields.format, "bar");
+            });
+
             test("cell click does not enter edit mode if editable is false", function() {
                 setup({ editable: false } );
                 var cell = table.find("td:first").click();
