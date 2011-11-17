@@ -182,7 +182,7 @@
                     editable = setup({
                         fields: {
                             field: "foo",
-                            editor: function(field, model) {
+                            editor: function() {
                                 wasCalled = true;
                                 return $();
                             }
@@ -235,6 +235,111 @@
                 ok(args[0]);
             });
 
+            test("format is passed to editor", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo"
+                            }
+                        }
+                    }),
+                    format,
+                    model = new MyModel(),
+                     editable = setup({
+                         fields: {
+                            field: "foo",
+                            format: "bar",
+                            editor: function(container, options) {
+                                format = options.format;
+                            }
+                        },
+                        model: model
+                    });
+
+                equal(format, "bar");
+            });
+
+            test("format is passed to date type editor", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "date"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                         fields: {
+                            field: "foo",
+                            format: "bar"
+                        },
+                        model: model
+                    });
+
+                equal(div.find("input").data("kendoDatePicker").options.format, "bar");
+            });
+
+            test("default picker format is preserved if no field format is set", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "date"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                         fields: {
+                            field: "foo"
+                        },
+                        model: model
+                    });
+
+                equal(div.find("input").data("kendoDatePicker").options.format, "M/d/yyyy");
+            });
+
+            test("format is passed to number type editor", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "number"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                         fields: {
+                            field: "foo",
+                            format: "bar"
+                        },
+                        model: model
+                    });
+
+                equal(div.find("input").eq(1).data("kendoNumericTextBox").options.format, "bar");
+            });
+
+            test("default numeric format is preserved if no field format is set", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "number"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                         fields: {
+                            field: "foo"
+                        },
+                        model: model
+                    });
+
+                equal(div.find("input").eq(1).data("kendoNumericTextBox").options.format, "n");
+            });
         </script>
     </body>
 </html>
