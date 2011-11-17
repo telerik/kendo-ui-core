@@ -13,21 +13,27 @@ var fs = require("fs"),
 // Configuration ==============================================================
 
 var bundles = [{
-    name: "Commercial",
-    license: "src-commercial.txt",
+    name: "kendoui.web_dataviz",
+    license: "Commercial",
     eula: "EULA-Kendo.pdf",
     hasSource: true
 }, {
-    name: "Trial",
-    license: "src-commercial.txt",
+    name: "kendoui.web_dataviz",
+    license: "Trial",
     eula: "EULA-Kendo.pdf",
     hasSource: false
 }, {
-    name: "OpenSource",
-    license: "src-os.txt",
+    name: "kendoui.web_dataviz",
+    license: "OpenSource",
     eula: "EULA-Kendo.pdf",
     hasSource: true
 }];
+
+var sourceLicenses = {
+    "Commercial": "src-commercial.txt",
+    "Trial": "src-commercial.txt",
+    "OpenSource": "src-os.txt"
+};
 
 var VERSION = kendoBuild.generateVersion(),
     CDN_URL = process.argv[2] || "http://cdn.kendostatic.com/" + VERSION,
@@ -40,7 +46,8 @@ var VERSION = kendoBuild.generateVersion(),
     DEPLOY_SOURCE = "source",
     DEPLOY_SCRIPTS = "js",
     DEPLOY_STYLES = "styles",
-    DEPLOY_ONLINEEXAMPLES = "onlineExamples";
+    DEPLOY_ONLINEEXAMPLES = "onlineExamples",
+    ONLINE_EXAMPLES_PACKAGE = "OnlineExamples.zip";
 
 // Implementation ==============================================================
 var startDate = new Date();
@@ -104,7 +111,21 @@ function deployLicenses(root, bundle) {
     );
 }
 
-function buildExamplesIndex() {
+function deployExamples(root) {
+    kendoBuild.copyDirSyncRecursive("demos/examples", path.join(root, "/examples"));
+    kendoBuild.copyTextFile("src/jquery.js", path.join(root, "/examples/js/jquery.js"));
+    kendoBuild.processFilesRecursive(root + "/examples", /\.html$/, function(name) {
+        var data = fs.readFileSync(name, "utf8");
+        data = data.replace(/..\/..\/..\/styles/g, "../../source/styles");
+        data = data.replace(/..\/..\/..\/src\/jquery.js/g, "../js/jquery.js");
+        data = data.replace(/..\/..\/..\/src/g, "../../source/js");
+        fs.writeFileSync(name, data);
+    });
+
+    buildExamplesIndex(root);
+}
+
+function buildExamplesIndex(root) {
     var navigation = kendoBuild.readText("demos/examples/js/kendo.examples.nav.js");
     eval(navigation);
 
@@ -114,33 +135,23 @@ function buildExamplesIndex() {
 
     delete categories.overview;
 
-    fs.writeFileSync(DEPLOY_ROOT + "/examples/index.html", indexTemplate(categories));
-}
-
-function buildExamples() {
-    kendoBuild.copyDirSyncRecursive("demos/examples", path.join(DEPLOY_ROOT, "/examples"));
-    kendoBuild.copyTextFile("src/jquery.js", path.join(DEPLOY_ROOT, "/examples/js/jquery.js"));
-    kendoBuild.processFilesRecursive(DEPLOY_ROOT + "/examples", /\.html$/, function(name) {
-        var data = fs.readFileSync(name, "utf8");
-        data = data.replace(/..\/..\/..\/styles/g, "../../source/styles");
-        data = data.replace(/..\/..\/..\/src\/jquery.js/g, "../js/jquery.js");
-        data = data.replace(/..\/..\/..\/src/g, "../../source/js");
-        fs.writeFileSync(name, data);
-    });
-
-    buildExamplesIndex();
+    fs.writeFileSync(root + "/examples/index.html", indexTemplate(categories));
 }
 
 function buildBundle(bundle, success) {
     var name = bundle.name,
-        root = path.join(DEPLOY_ROOT, name),
-        license = kendoBuild.readText(path.join(LEGAL_ROOT, bundle.license));
+        license = bundle.license,
+        deployName = name + "." + VERSION + "." + license,
+        root = path.join(DEPLOY_ROOT, deployName),
+        srcLicenseFile = sourceLicenses[license],
+        srcLicense = kendoBuild.readText(path.join(LEGAL_ROOT, srcLicenseFile)),
+        packageName = path.join(DROP_LOCATION, deployName + ".zip");
 
-    console.log("Building Web/DataViz " + name);
+    console.log("Building " + deployName);
     mkdir(root);
 
     console.log("Deploying scripts");
-    deployScripts(root, license, bundle.hasSource);
+    deployScripts(root, srcLicense, bundle.hasSource);
 
     console.log("Deploying styles");
     deployStyles(root, bundle.hasSource);
@@ -148,14 +159,10 @@ function buildBundle(bundle, success) {
     console.log("Deploying licenses");
     deployLicenses(root, bundle);
 
-    success();
-    return;
+    console.log("Deploying examples");
+    deployExamples(root);
 
-    console.log("Building examples");
-    buildExamples();
-
-    console.log("Packaging");
-    zip(path.join(DROP_LOCATION, "kendoui.web_dataviz." + VERSION + "." + name + ".zip"), DEPLOY_ROOT, success);
+    zip(packageName, root, success);
 }
 
 function buildAllBundles(success, bundleIx) {
@@ -171,8 +178,8 @@ function buildAllBundles(success, bundleIx) {
 }
 
 function buildOnlineExamples(success) {
-    kendoExamples.build(DEPLOY_ROOT, ONLINEEXAMPLES, CDN_URL);
-    zip(path.join(DROP_LOCATION, "OnlineExamples.zip"), ONLINEEXAMPLES, success);
+    kendoExamples.build("", DEPLOY_ONLINEEXAMPLES, CDN_URL);
+    zip(path.join(DROP_LOCATION, ONLINE_EXAMPLES_PACKAGE), DEPLOY_ONLINEEXAMPLES, success);
 }
 
 console.log("Build starting at " + startDate);

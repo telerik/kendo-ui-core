@@ -1,5 +1,6 @@
 var fs = require("fs"),
     os = require("os"),
+    path = require("path"),
     parser = require("./lib/parse-js"),
     spawn = require('child_process').spawn,
     uglify = require("./lib/process");
