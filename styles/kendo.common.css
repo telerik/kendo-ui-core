@@ -68,10 +68,6 @@
     text-align: center;
     cursor: pointer;
     outline: 0;
-
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
 }
 
 *+html .k-button { overflow: visible; margin-right: 4px; }
@@ -307,10 +303,6 @@ html body .k-button-bare
     padding: .05em .15em;
     white-space: nowrap;
     cursor: default;
-
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
 }
 
 .k-drag-status
@@ -364,14 +356,10 @@ html body .k-button-bare
     width: 8px;
     border: 1px solid #8a8a8a;
     background-color: #858585;
-
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
-    .k-touch-scrollbar
+    body .k-touch-scrollbar
     {
         height: 12px;
         width: 12px;
@@ -389,10 +377,6 @@ div.k-window
     border-style: solid;
     border-width: 1px;
     padding-top: 2em;
-
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
 }
 
 .k-window-titlebar
@@ -406,13 +390,6 @@ div.k-window
     padding: .4em 0;
     font-size: 1.2em;
     white-space: nowrap;
-
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
 }
 
 .k-window-title
@@ -442,13 +419,6 @@ div.k-window-content
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-
-    -moz-border-radius-bottomleft: 4px;
-    -moz-border-radius-bottomright: 4px;
-    -webkit-border-bottom-left-radius: 4px;
-    -webkit-border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
 }
 
 .k-window-titlebar .k-window-actions
@@ -477,11 +447,6 @@ div.k-window-content
     border-style: solid;
     border-width: 1px;
     padding: 1px;
-
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-
     filter: alpha(opacity=100);
     opacity: 1;
 }
@@ -566,13 +531,6 @@ div.k-window-content
     margin: .1em .3em 0 0;
     padding: 0;
     vertical-align: top;
-
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
 }
 
 .k-tabstrip-items .k-tab-on-top,
@@ -595,13 +553,6 @@ div.k-window-content
     border-bottom-width: 0;
     padding: .3em .9em;
     outline: 0;
-}
-
-.k-tabstrip-items .k-state-hover .k-link
-{
-    -moz-border-radius: 5px 5px 0 0;
-    -webkit-border-radius: 5px 5px 0 0;
-    border-radius: 5px 5px 0 0;
 }
 
 .k-tabstrip-items .k-icon,
@@ -1108,10 +1059,6 @@ div.k-grid-header .k-header
     border-style: solid;
     border-width: 1px;
     padding: 0;
-
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
 }
 
 .k-pager span,
@@ -1179,10 +1126,6 @@ div.k-grid-header .k-header
     border-style: solid;
     border-width: 1px;
     padding: 3px;
-
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
 }
 
 .k-filter-options .k-filter-help-text,
@@ -1257,10 +1200,6 @@ div.k-grid-header .k-header
     margin: 0 3px;
     padding: .15em .15em .15em .4em;
     line-height: 1.5em;
-
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
 }
 
 .k-grouping-header .k-link
@@ -1480,10 +1419,6 @@ div.k-dropdown
 {
     position: relative;
     cursor: default;
-
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
 }
 
 .k-numeric-wrap
@@ -1515,9 +1450,6 @@ div.k-dropdown
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     padding: 2px;
     border: 1px solid transparent;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
 }
 
 .k-calendar-container.k-state-border-up,
@@ -1529,9 +1461,6 @@ div.k-dropdown
 {
     border-top: 0;
     padding-top: 3px;
-    -webkit-border-radius: 0 0 4px 4px;
-    -moz-border-radius: 0 0 4px 4px;
-    border-radius: 0 0 4px 4px;
 }
 
 .k-calendar-container.k-state-border-down,
@@ -1543,20 +1472,6 @@ div.k-dropdown
 {
     border-bottom: 0;
     padding-bottom: 3px;
-    -webkit-border-radius: 4px 4px 0 0;
-    -moz-border-radius: 4px 4px 0 0;
-    border-radius: 4px 4px 0 0;
-}
-
-.k-animation-container .k-calendar-container,
-.k-list-container.k-state-border-right
-{
-    -webkit-border-top-right-radius: 4px;
-    -webkit-border-bottom-right-radius: 4px;
-    -moz-border-radius-topright: 4px;
-    -moz-border-radius-bottomright: 4px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
 }
 
 .k-autocomplete,
@@ -1706,17 +1621,6 @@ div.k-datetimepicker .k-select+.k-select
 }
 
 .k-autocomplete .k-input,
-.k-dropdown-wrap .k-input,
-.k-picker-wrap .k-input,
-.k-numeric-wrap .k-input,
-.k-numeric-wrap .k-link
-{
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-}
-
-.k-autocomplete .k-input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
 .k-combobox .k-input
@@ -1739,17 +1643,7 @@ div.k-datetimepicker .k-select+.k-select
     padding: 3px 5px;
 }
 
-.k-dropdown-wrap .k-select,
-.k-picker-wrap .k-select,
-.k-numeric-wrap .k-select,
-.k-datetimepicker .k-select+.k-select
-{
-    -moz-border-radius: 0 4px 4px 0;
-    -webkit-border-radius: 0 4px 4px 0;
-    border-radius: 0 4px 4px 0;
-}
-
-.k-datetimepicker .k-select
+body .k-datetimepicker .k-select
 {
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
@@ -1787,9 +1681,6 @@ div.k-datetimepicker .k-select+.k-select
 .k-list .k-state-focused,
 .k-list .k-state-selected
 {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
     padding: 0 4px;
     border-width: 1px;
     border-style: solid;
@@ -1809,9 +1700,6 @@ div.k-datetimepicker .k-select+.k-select
 .k-calendar .k-link
 {
     text-decoration: none;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
 }
 
 .k-calendar .k-action-link
@@ -2055,10 +1943,6 @@ div.k-treeview
     border-style: solid;
     border-width: 1px;
     padding: 1px 3px 1px 2px;
-
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
 }
 
 .k-treeview .k-drop-hint
@@ -2136,10 +2020,6 @@ span.k-numerictextbox
     display: block;
     height: 16px;
     width: 16px;
-
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
 }
 
 .k-colorpicker .k-icon
@@ -2310,10 +2190,6 @@ span.k-numerictextbox
     border-width: 1px;
     margin: 0;
     vertical-align: middle;
-
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
 }
 
 .k-editor-button .k-state-disabled
@@ -2436,7 +2312,7 @@ div.k-slider
 
 .k-slider-vertical
 {
-    width: 22px;
+    width: 26px;
     height: 200px; /* default height */
 }
 
@@ -2444,7 +2320,7 @@ div.k-slider
 {
     display: inline-block;
     width: 200px; /* default width */
-    height: 22px;
+    height: 26px;
 }
 
 .k-slider-wrap
@@ -2458,21 +2334,17 @@ div.k-slider
 {
     position: absolute;
     top: 0;
-    width: 20px;
+    width: 24px;
     min-width: 0;
-    height: 20px;
+    height: 24px;
     margin: 0;
     padding: 0;
     outline: none;
-    
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
 }
 
 .k-slider .k-button .k-icon
 {
-    margin-top: 2px;
+    margin-top: 4px;
     vertical-align: top;
 }
 
@@ -2524,8 +2396,8 @@ div.k-slider
 {
     top: 50%;
     left: 0;
-    height: 6px;
-    margin-top: -3px;
+    height: 8px;
+    margin-top: -4px;
     background-repeat: repeat-x;
 }
 
@@ -2537,7 +2409,7 @@ div.k-slider
 
 .k-slider-horizontal .k-slider-buttons .k-slider-track
 {
-    left: 27px;
+    left: 34px;
 }
 
 .k-slider-vertical .k-slider-track,
@@ -2545,8 +2417,8 @@ div.k-slider
 {
     left: 50%;
     bottom: 0;
-    width: 6px;
-    margin-left: -3px;
+    width: 8px;
+    margin-left: -4px;
     background-repeat: repeat-y;
 }
 
@@ -2558,7 +2430,7 @@ div.k-slider
 
 .k-slider-vertical .k-slider-buttons .k-slider-track
 {
-    bottom: 27px;
+    bottom: 34px;
 }
 
 .k-draghandle
@@ -2571,29 +2443,25 @@ div.k-slider
     text-decoration: none;
     text-align: center;
     cursor: pointer;
-    
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
 }
 
 .k-slider-horizontal .k-draghandle
 {
-    top: -7px;
-    width: 7px;
-    height: 18px;
+    top: -5px;
+    width: 13px;
+    height: 14px;
 }
 
 .k-slider-vertical .k-draghandle
 {
-    left: -7px;
-    width: 18px;
-    height: 7px;
+    left: -5px;
+    width: 14px;
+    height: 13px;
 }
 
 .k-slider-buttons .k-slider-items
 {
-    margin-left: 27px;
+    margin-left: 34px;
 }
 
 .k-slider-horizontal .k-slider-items
@@ -2614,7 +2482,7 @@ div.k-slider
 .k-slider-vertical .k-slider-buttons .k-slider-items
 {
     margin: 0;
-    padding-top: 28px;
+    padding-top: 35px;
 }
 
 .k-slider .k-tick
@@ -2638,37 +2506,37 @@ div.k-slider
 /* fixes ticks position and removes spacing between them in IE7 */
 *+html .k-slider-vertical .k-tick { float: left; clear: left; width: 100%; }
 
-.k-slider-horizontal .k-tick { background-position: center -94px; }
-.k-slider-horizontal .k-slider-topleft .k-tick { background-position: center -124px; }
-.k-slider-horizontal .k-slider-bottomright .k-tick { background-position: center -154px; }
+.k-slider-horizontal .k-tick { background-position: center -92px; }
+.k-slider-horizontal .k-slider-topleft .k-tick { background-position: center -122px; }
+.k-slider-horizontal .k-slider-bottomright .k-tick { background-position: center -152px; }
 
-.k-slider-horizontal .k-tick-large { background-position: center -4px; }
-.k-slider-horizontal .k-slider-topleft .k-tick-large { background-position: center -34px; }
-.k-slider-horizontal .k-slider-bottomright .k-tick-large { background-position: center -64px; }
+.k-slider-horizontal .k-tick-large { background-position: center -2px; }
+.k-slider-horizontal .k-slider-topleft .k-tick-large { background-position: center -32px; }
+.k-slider-horizontal .k-slider-bottomright .k-tick-large { background-position: center -62px; }
 
-.k-slider-vertical .k-tick { background-position: -94px center; }
-.k-slider-vertical .k-slider-topleft .k-tick { background-position: -124px center; }
-.k-slider-vertical .k-slider-bottomright .k-tick { background-position: -154px center; }
+.k-slider-vertical .k-tick { background-position: -92px center; }
+.k-slider-vertical .k-slider-topleft .k-tick { background-position: -122px center; }
+.k-slider-vertical .k-slider-bottomright .k-tick { background-position: -152px center; }
 
-.k-slider-vertical .k-tick-large { background-position: -4px center; }
-.k-slider-vertical .k-slider-topleft .k-tick-large { background-position: -34px center; }
-.k-slider-vertical .k-slider-bottomright .k-tick-large { background-position: -64px center; }
+.k-slider-vertical .k-tick-large { background-position: -2px center; }
+.k-slider-vertical .k-slider-topleft .k-tick-large { background-position: -32px center; }
+.k-slider-vertical .k-slider-bottomright .k-tick-large { background-position: -62px center; }
 
-.k-slider-horizontal .k-first { background-position: 0 -4px; }
-.k-slider-horizontal .k-slider-topleft .k-first { background-position: 0 -34px; }
-.k-slider-horizontal .k-slider-bottomright .k-first { background-position: 0 -64px; }
+.k-slider-horizontal .k-first { background-position: 0 -2px; }
+.k-slider-horizontal .k-slider-topleft .k-first { background-position: 0 -32px; }
+.k-slider-horizontal .k-slider-bottomright .k-first { background-position: 0 -62px; }
 
-.k-slider-horizontal .k-last { background-position: 100% -4px; }
-.k-slider-horizontal .k-slider-topleft .k-last { background-position: 100% -34px; }
-.k-slider-horizontal .k-slider-bottomright .k-last { background-position: 100% -64px; }
+.k-slider-horizontal .k-last { background-position: 100% -2px; }
+.k-slider-horizontal .k-slider-topleft .k-last { background-position: 100% -32px; }
+.k-slider-horizontal .k-slider-bottomright .k-last { background-position: 100% -62px; }
 
-.k-slider-vertical .k-first { background-position: -4px 100%; }
-.k-slider-vertical .k-slider-topleft .k-first { background-position: -34px 100%; }
-.k-slider-vertical .k-slider-bottomright .k-first { background-position: -64px 100%; }
+.k-slider-vertical .k-first { background-position: -2px 100%; }
+.k-slider-vertical .k-slider-topleft .k-first { background-position: -32px 100%; }
+.k-slider-vertical .k-slider-bottomright .k-first { background-position: -62px 100%; }
 
-.k-slider-vertical .k-last { background-position: -4px 0; }
-.k-slider-vertical .k-slider-topleft .k-last { background-position: -34px 0; }
-.k-slider-vertical .k-slider-bottomright .k-last { background-position: -64px 0; }
+.k-slider-vertical .k-last { background-position: -2px 0; }
+.k-slider-vertical .k-slider-topleft .k-last { background-position: -32px 0; }
+.k-slider-vertical .k-slider-bottomright .k-last { background-position: -62px 0; }
 
 .k-slider-vertical .k-tick
 {
@@ -2684,6 +2552,8 @@ div.k-slider
 {
     position: absolute;
     white-space: nowrap;
+    font-size: .92em;
+    line-height: 1;
 }
 
 .k-slider-horizontal .k-label
@@ -2746,10 +2616,6 @@ div.k-slider
     border-width: 2px;
     padding: 4px 5px;
     background-repeat: repeat-x;
-
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
 
     min-width: 10px; /*slider tooltip only*/
     text-align: center; /*slider tooltip only*/
@@ -2964,14 +2830,6 @@ html .k-upload
     background: none;
 }
 
-.k-dropzone,
-.k-upload-files
-{
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-}
-
 .k-dropzone em,
 .k-upload-button
 {
@@ -3090,10 +2948,6 @@ html .k-upload
     border-style: solid;
     border-width: 1px;
     background-repeat: repeat-x;
-
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
 }
 
 .k-progress-status
@@ -3304,10 +3158,6 @@ html input.k-breadcrumbs-input
     background-position: 0 100px;
     background-repeat: repeat-x;
     cursor: pointer;
-
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
 }
 
 .k-tiles li.k-state-hover,
