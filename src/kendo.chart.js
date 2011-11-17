@@ -286,6 +286,7 @@
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
+                tooltipOptions,
                 point;
 
             if (!highlight || highlight.element === e.target) {
@@ -295,8 +296,8 @@
             point = chart._getPoint(e);
             if (point) {
                 chart._activePoint = point;
-
-                if (chart.options.tooltip.visible) {
+                tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
+                if (tooltipOptions.visible) {
                     tooltip.show(point);
                 }
 
@@ -312,6 +313,7 @@
                 highlight = chart._highlight,
                 coords = chart._eventCoordinates(e),
                 point = chart._activePoint,
+                tooltipOptions,
                 owner,
                 seriesPoint;
 
@@ -322,7 +324,8 @@
                     if (seriesPoint && seriesPoint != point) {
                         chart._activePoint = seriesPoint;
 
-                        if (tooltip.visible) {
+                        tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
+                        if (tooltipOptions.visible) {
                             tooltip.show(seriesPoint);
                         }
                         highlight.show(seriesPoint);
@@ -2422,15 +2425,13 @@
                 }
             }
 
-            var bar = new Bar(value, {
-                color: series.color,
-                opacity: series.opacity,
-                border: series.border,
-                isVertical: options.isVertical,
-                overlay: series.overlay,
-                labels: labelOptions,
-                isStacked: isStacked
-            });
+            var bar = new Bar(value,
+                deepExtend({}, {
+                    isVertical: options.isVertical,
+                    overlay: series.overlay,
+                    labels: labelOptions,
+                    isStacked: isStacked
+                }, series));
 
             var cluster = children[categoryIx];
             if (!cluster) {
@@ -3365,7 +3366,7 @@
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
-                dataItems = currentSeries.dataItems,
+                dataItems = currentSeries.dataItems;
                 data = currentSeries.data;
                 anglePerValue = 360 / chart.pointsTotal(data);
 
@@ -3385,7 +3386,8 @@
                         series: currentSeries,
                         seriesIx: seriesIx,
                         dataItem: dataItems ? dataItems[i] : currentData,
-                        explode: explode
+                        explode: explode,
+                        currentData: currentData
                     });
 
                     startAngle += angle;
@@ -4691,9 +4693,7 @@
                 anchor,
                 template,
                 content,
-                pointTooltipOptions,
-                tooltipFormat,
-                tooltipTemplate,
+                tooltipOptions,
                 top,
                 left;
 
@@ -4701,20 +4701,19 @@
                 return;
             }
             content = point.value.toString();
-            pointTooltipOptions = point.options.tooltip;
-            tooltipFormat = defined(pointTooltipOptions) ? pointTooltipOptions.format : options.format;
-            tooltipTemplate = defined(pointTooltipOptions) ? pointTooltipOptions.template : options.template;
 
-            if (tooltipTemplate) {
-                template = baseTemplate(options.template);
+            tooltipOptions = deepExtend({}, tooltip.options, point.options.tooltip);
+
+            if (tooltipOptions.template) {
+                template = baseTemplate(tooltipOptions.template);
                 content = template({
                     value: point.value,
                     category: point.category,
                     series: point.series,
                     dataItem: point.dataItem
                 });
-            } else if (tooltipFormat) {
-                content = point.formatPointValue(tooltipFormat);
+            } else if (tooltipOptions.format) {
+                content = point.formatPointValue(tooltipOptions.format);
             }
 
             element.html(content);
@@ -4729,10 +4728,11 @@
 
             tooltip.element
                 .css({
-                   backgroundColor: options.background,
-                   borderColor: options.border.color || point.options.color,
-                   color: options.color,
-                   opacity: options.opacity
+                   backgroundColor: tooltipOptions.background,
+                   borderColor: tooltipOptions.border.color || point.options.color,
+                   color: tooltipOptions.color,
+                   opacity: tooltipOptions.opacity,
+                   borderWidth: tooltipOptions.border.width
                 })
                 .stop(true, true)
                 .show()
@@ -6934,7 +6934,6 @@
                 color: WHITE
             },
             majorGridLines: {
-                color: "#58595b",
                 visible: true
             }
         },
@@ -6987,12 +6986,6 @@
             },
             labels: {
                 color: "#232323"
-            }
-        },
-        axisDefaults: {
-            majorGridLines: {
-                color: "red",
-                visible: true
             }
         },
         tooltip: {

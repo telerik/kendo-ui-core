@@ -12,193 +12,286 @@
         <script src="../../src/kendo.chart.js"></script>
         <script type="text/javascript">
             var Chart = kendo.ui.Chart,
-                tooltip,
-                element,
-                dataPointMock,
-                RED = "rgb(255,0,0)",
-                GREEN = "rgb(0,255,0)",
-                BLUE = "rgb(0,0,255)",
                 TOLERANCE = 1;
 
-            function createTooltip(options) {
-                tooltip = new Chart.Tooltip($("#chart"), options);
-                element = tooltip.element;
-                element.css({ width: "45px", height: "35px" });
-            }
+            (function() {
+                var tooltip,
+                    element,
+                    dataPointMock,
+                    RED = "rgb(255,0,0)",
+                    GREEN = "rgb(0,255,0)",
+                    BLUE = "rgb(0,0,255)";
 
-            function showNow(point) {
-                tooltip.point = point;
-                tooltip._show();
-            }
-
-            function createPoint(options) {
-                dataPointMock = {
-                    value: 1,
-                    box: new Chart.Box2D(0, 0, 10, 10),
-                    options: {
-                        aboveAxis: true,
-                        color: RED
-                    },
-                    series: {
-                        name: "series",
-                        labels: {
-                            color: GREEN
-                        }
-                    },
-                    category: "category",
-                    dataItem: {
-                        field: "value"
-                    },
-                    tooltipAnchor: function() {
-                        return new Chart.Point2D();
-                    },
-                    owner: {
-                        formatPointValue: function(value, tooltipFormat) {
-                            return kendo.format(tooltipFormat, value);
-                        }
-                    },
-                    formatPointValue: function(format) {
-                        var point = this;
-
-                        return point.owner.formatPointValue(point.value, format);
-                    }
-                };
-
-                $.extend(dataPointMock, options);
-            }
-
-            // ------------------------------------------------------------
-            module("Tooltip", {
-                setup: function() {
-                    createTooltip();
-                    createPoint();
-                },
-                teardown: function() {
-                    element.remove();
+                function createTooltip(options) {
+                    tooltip = new Chart.Tooltip($("#chart"), options);
+                    element = tooltip.element;
+                    element.css({ width: "45px", height: "35px" });
                 }
-            });
 
-            test("attaches to chart element", function() {
-                ok(element[0].parentNode === document.getElementById("chart"));
-            });
+                function showNow(point) {
+                    tooltip.point = point;
+                    tooltip._show();
+                }
 
-            test("renders div with display none attribute", function() {
-                ok(element.css("display"), "none");
-            });
+                function createPoint(options) {
+                    dataPointMock = {
+                        value: 1,
+                        box: new Chart.Box2D(0, 0, 10, 10),
+                        options: {
+                            aboveAxis: true,
+                            color: RED
+                        },
+                        series: {
+                            name: "series",
+                            labels: {
+                                color: GREEN
+                            }
+                        },
+                        category: "category",
+                        dataItem: {
+                            field: "value"
+                        },
+                        tooltipAnchor: function() {
+                            return new Chart.Point2D();
+                        },
+                        owner: {
+                            formatPointValue: function(value, tooltipFormat) {
+                                return kendo.format(tooltipFormat, value);
+                            }
+                        },
+                        formatPointValue: function(format) {
+                            var point = this;
 
-            test("sets font", function() {
-                createTooltip({ font: "16px Tahoma" });
-                equals(element.css("fontSize"), "16px");
-                equals(element.css("fontFamily"), "Tahoma");
-            });
+                            return point.owner.formatPointValue(point.value, format);
+                        }
+                    };
 
-            test("sets border width", function() {
-                createTooltip({ border: { width: 1 } });
-                equals(element.css("border-top-width"), "1px");
-            });
+                    $.extend(dataPointMock, options);
+                }
 
-            test("sets opacity", function() {
-                createTooltip({ opacity: 0.5 });
-                equals(element.css("opacity"), 0.5);
-            });
+                // ------------------------------------------------------------
+                module("Tooltip", {
+                    setup: function() {
+                        createTooltip();
+                        createPoint();
+                    },
+                    teardown: function() {
+                        element.remove();
+                    }
+                });
 
-            test("sets white-space: nowrap", function() {
-                createTooltip();
-                equals(element.css("white-space"), "nowrap");
-            });
+                test("attaches to chart element", function() {
+                    ok(element[0].parentNode === document.getElementById("chart"));
+                });
 
-            asyncTest("show displays tooltip for last point with a delay", function() {
-                tooltip.show({ /* Fake */ });
-                tooltip.show(dataPointMock);
+                test("renders div with display none attribute", function() {
+                    ok(element.css("display"), "none");
+                });
 
-                setTimeout(function() {
-                    equals(element.text(), "1");
-                    start();
-                }, 120);
-            });
+                test("sets font", function() {
+                    createTooltip({ font: "16px Tahoma" });
+                    equals(element.css("fontSize"), "16px");
+                    equals(element.css("fontFamily"), "Tahoma");
+                });
 
-            test("can override border color", function() {
-                createTooltip({ border: { color: RED } });
-                showNow(dataPointMock);
-                equals(element.css("border-top-color").replace(/\s/g, ''), RED);
-            });
+                test("sets border width", function() {
+                    createTooltip({ border: { width: 1 } });
+                    equals(element.css("border-top-width"), "1px");
+                });
 
-            test("sets border color to current point color", function() {
-                showNow(dataPointMock);
-                equals(element.css("border-top-color").replace(/\s/g, ''), RED);
-            });
+                test("sets opacity", function() {
+                    createTooltip({ opacity: 0.5 });
+                    equals(element.css("opacity"), 0.5);
+                });
 
-            test("sets div background", function() {
-                tooltip.options.background = BLUE;
-                showNow(dataPointMock);
-                equals(element.css("backgroundColor").replace(/\s/g, ''), BLUE);
-            });
+                test("sets white-space: nowrap", function() {
+                    createTooltip();
+                    equals(element.css("white-space"), "nowrap");
+                });
 
-            test("sets text color", function() {
-                createTooltip({ color: GREEN });
-                showNow(dataPointMock);
-                equals(element.css("color").replace(/\s/g, ''), GREEN);
-            });
+                asyncTest("show displays tooltip for last point with a delay", function() {
+                    tooltip.show({ /* Fake */ });
+                    tooltip.show(dataPointMock);
 
-            test("applies format", function() {
-                createTooltip({ format: "{0}%" });
-                showNow(dataPointMock);
-                equals(element.text(), "1%");
-            });
+                    setTimeout(function() {
+                        equals(element.text(), "1");
+                        start();
+                    }, 120);
+                });
 
-            test("renders template", function() {
-                createTooltip({ template: "${value}%" });
-                showNow(dataPointMock);
-                equals(element.text(), "1%");
-            });
+                test("can override border color", function() {
+                    createTooltip({ border: { color: RED } });
+                    showNow(dataPointMock);
+                    equals(element.css("border-top-color").replace(/\s/g, ''), RED);
+                });
 
-            test("renders compiled template", function() {
-                createTooltip({ template: kendo.template("${value}%") });
-                showNow(dataPointMock);
-                equals(element.text(), "1%");
-            });
+                test("sets border color to current point color", function() {
+                    showNow(dataPointMock);
+                    equals(element.css("border-top-color").replace(/\s/g, ''), RED);
+                });
 
-            test("renders template when format is set", function() {
-                createTooltip({ format: "{0} percent", template: "${value}%" });
-                showNow(dataPointMock);
-                equals(element.text(), "1%");
-            });
+                test("sets div background", function() {
+                    tooltip.options.background = BLUE;
+                    showNow(dataPointMock);
+                    equals(element.css("backgroundColor").replace(/\s/g, ''), BLUE);
+                });
 
-            test("template context has category", function() {
-                createTooltip({ template: "${category}" });
-                showNow(dataPointMock);
-                equals(element.text(), "category");
-            });
+                test("sets text color", function() {
+                    createTooltip({ color: GREEN });
+                    showNow(dataPointMock);
+                    equals(element.css("color").replace(/\s/g, ''), GREEN);
+                });
 
-            test("template context has series", function() {
-                createTooltip({ template: "${series.name}" });
-                showNow(dataPointMock);
-                equals(element.text(), "series");
-            });
+                test("applies format", function() {
+                    createTooltip({ format: "{0}%" });
+                    showNow(dataPointMock);
+                    equals(element.text(), "1%");
+                });
 
-            test("template context has dataItem", function() {
-                createTooltip({ template: "${dataItem.field}" });
-                showNow(dataPointMock);
-                equals(element.text(), "value");
-            });
+                test("renders template", function() {
+                    createTooltip({ template: "${value}%" });
+                    showNow(dataPointMock);
+                    equals(element.text(), "1%");
+                });
 
-            test("positions tooltip on anchor", function() {
-                dataPointMock.tooltipAnchor = function() { return new Chart.Point2D(10, 10) };
-                tooltip.options.animation.duration = 0;
-                tooltip.options.offsetX = 0;
-                tooltip.options.offsetY = 0;
-                showNow(dataPointMock);
+                test("renders compiled template", function() {
+                    createTooltip({ template: kendo.template("${value}%") });
+                    showNow(dataPointMock);
+                    equals(element.text(), "1%");
+                });
 
-                same([parseInt(tooltip.element.css("top"), 10),
-                      parseInt(tooltip.element.css("left"), 10)],
-                      [10, 10]);
-            });
+                test("renders template when format is set", function() {
+                    createTooltip({ format: "{0} percent", template: "${value}%" });
+                    showNow(dataPointMock);
+                    equals(element.text(), "1%");
+                });
 
-            test("applies format from the series", function() {
-                createPoint({ options: { tooltip: { format: "{0:C}" } }});
-                showNow(dataPointMock);
-                equals(element.text(), "$1.00");
-            });
+                test("template context has category", function() {
+                    createTooltip({ template: "${category}" });
+                    showNow(dataPointMock);
+                    equals(element.text(), "category");
+                });
+
+                test("template context has series", function() {
+                    createTooltip({ template: "${series.name}" });
+                    showNow(dataPointMock);
+                    equals(element.text(), "series");
+                });
+
+                test("template context has dataItem", function() {
+                    createTooltip({ template: "${dataItem.field}" });
+                    showNow(dataPointMock);
+                    equals(element.text(), "value");
+                });
+
+                test("positions tooltip on anchor", function() {
+                    dataPointMock.tooltipAnchor = function() { return new Chart.Point2D(10, 10) };
+                    tooltip.options.animation.duration = 0;
+                    tooltip.options.offsetX = 0;
+                    tooltip.options.offsetY = 0;
+                    showNow(dataPointMock);
+
+                    same([parseInt(tooltip.element.css("top"), 10),
+                          parseInt(tooltip.element.css("left"), 10)],
+                          [10, 10]);
+                });
+
+                test("applies format from the series", function() {
+                    createPoint({ options: { tooltip: { format: "{0:C}" } }});
+                    showNow(dataPointMock);
+                    equals(element.text(), "$1.00");
+                });
+
+            })();
+
+
+            (function() {
+                var tooltip,
+                    element,
+                    dataPointMock,
+                    RED = "rgb(255,0,0)";
+
+                function createTooltip() {
+                    tooltip = new Chart.Tooltip($("#chart"), {
+                        background: "black",
+                        border: {
+                            width: 5,
+                            color: "red"
+                        },
+                        visible: false
+                    });
+
+                    element = tooltip.element;
+                    element.css({ width: "45px", height: "35px" });
+                }
+
+                function showNow(point) {
+                    tooltip.point = point;
+                    tooltip._show();
+                }
+
+                function createSeriesPoint(options) {
+                    dataPointMock = {
+                        value: 1,
+                        box: new Chart.Box2D(0, 0, 10, 10),
+                        options: {
+                            aboveAxis: true,
+                            color: RED,
+                            tooltip: {
+                                border: {
+                                    color: "blue",
+                                    width: 2
+                                },
+                                visible: true,
+                                color: "red",
+                                background: "green",
+                                opacity: 1
+                            }
+                        },
+                        category: "category",
+                        dataItem: {
+                            field: "value"
+                        },
+                        tooltipAnchor: function() {
+                            return new Chart.Point2D();
+                        },
+                        owner: {
+                            formatPointValue: function(value, tooltipFormat) {
+                                return kendo.format(tooltipFormat, value);
+                            }
+                        },
+                        formatPointValue: function(format) {
+                            var point = this;
+
+                            return point.owner.formatPointValue(point.value, format);
+                        }
+                    };
+
+                    $.extend(dataPointMock, options);
+                }
+
+                // ------------------------------------------------------------
+                module("Tooltip / Series", {
+                    setup: function() {
+                        createTooltip();
+                        createSeriesPoint();
+                    },
+                    teardown: function() {
+                        element.remove();
+                    }
+                });
+
+                test("sets border width", function() {
+                    showNow(dataPointMock);
+                    equals(element.css("border-top-width"), "2px");
+                });
+
+                test("sets opacity", function() {
+                    showNow(dataPointMock);
+                    equals(element.css("opacity"), 1);
+                });
+
+            })();
 
         </script>
 
@@ -214,3 +307,4 @@
 
     </body>
 </html>
+
