@@ -40,11 +40,10 @@
 
 #ktb-wrap {
     padding-top: 59px;
-    position: absolute;
+    position: fixed;
     width: 300px;
     top: 4em;
     right: 4em;
-    bottom: 4em;
     z-index: 100010;
     background: url(sprite.png) no-repeat 50% -21px #3d3d3d;
 

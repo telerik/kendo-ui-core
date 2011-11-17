@@ -9,48 +9,16 @@
 
             return path.split("/").slice(0,-1).join("/") + "/";
         })(),
-        bootStyles,
 
          // TODO: change these to their respective CDN versions during build
         kendoAllLocation = applicationRoot + "../../deploy/kendoUI/js/kendo.all.min.js",
         kendoCommonCssLocation = applicationRoot + "../../deploy/kendoUI/styles/kendo.common.min.css",
 
-        // caution: the variable below is changed during builds. update build/themebuilder.js if you change its name!
+        // caution: the variables below is changed during builds. update build/themebuilder.js if you change its name!
         requiredJs = ["less.js", "themebuilder.js", "colorengine.js", "template.js"],
         requiredCss = ["kendo.black.css", "styles.css?" +new Date() ];
 
-    // do not initialize twice, just reopen window
-    // TODO: move this to bookmarklet
-    var container = $("#ktb-wrap");
-    if (container.length > 0) {
-        container.slideDown("fast");
-        return;
-    }
-
-    if (!bootStyles) {
-        bootStyles = doc.createElement("link");
-        bootStyles.setAttribute("rel", "stylesheet");
-        bootStyles.setAttribute("href", applicationRoot + "bootstrap.css");
-
-        doc.getElementsByTagName("head")[0].appendChild(bootStyles);
-    }
-
-    // show error message on pages that we can not work with
-    if (typeof jQuery == UNDEFINED || typeof kendo == UNDEFINED) {
-        var messageId = 'ktb-message';
-
-        if (!doc.getElementById(messageId)) {
-            var messageWrap = doc.createElement("div");
-            messageWrap.id = messageId;
-            messageWrap.innerHTML =
-                '<p>It seems there are no Kendo widgets on this page, so the Kendo themebuilder will be of no use. Please try running it elsewhere.</p>' +
-                '<p><button type="button" onclick="var msg = document.getElementById(\'' + messageId + '\');msg.parentNode.removeChild(msg);return false;">Close</button></p>';
-            doc.body.appendChild(messageWrap);
-        }
-
-        return;
-    }
-
+    // TODO: move theme definitions to different files
     var constant = function(target, property, values){
             return {
                 target: target,
@@ -201,65 +169,123 @@
             },
         };
 
-    function createWindow() {
-        return $("<div id='ktb-wrap'><div id='ktb-close' /></div>")
-                    .find("#ktb-close").click(function() {
-                        $("#ktb-wrap").slideUp("fast");
-                    }).end()
-                .appendTo(document.body);
-    }
+    var ThemeBuilderInterface = function() {
+            var that = this,
+                bootStyles = that.bootStyles;
 
-    function createInterfaceFrame(container) {
-            var iframe = $('<iframe />', {
+            bootStyles = doc.createElement("link");
+            bootStyles.setAttribute("rel", "stylesheet");
+            bootStyles.setAttribute("href", applicationRoot + "bootstrap.css");
+
+            doc.getElementsByTagName("head")[0].appendChild(bootStyles);
+
+            if (typeof jQuery == UNDEFINED || typeof kendo == UNDEFINED) {
+                that._initError();
+                return;
+            }
+
+            that.container = that._createWindow();
+
+            that.container.fadeIn("fast");
+
+            that._createInterfaceFrame();
+
+            that.iframe.lessLoaded = function(lessTemplate) {
+                var kendo = that.iframe.kendo,
+                    themeBuilder = new kendo.ThemeBuilder(
+                        lessTemplate,
+                        new kendo.LessConstants(constants),
+                        constantsHierarchy
+                    );
+
+                that.iframe.onload = that.open();
+            };
+        };
+
+    ThemeBuilderInterface.prototype = {
+        open: function() {
+            if (typeof jQuery == UNDEFINED || typeof kendo == UNDEFINED) {
+                this._initError();
+                return;
+            }
+
+            jQuery(this.container).fadeIn("fast").animate({ height: 300 }, "fast");
+        },
+
+        close: function() {
+            jQuery(this.container).animate({ height: 0 }, "fast").fadeOut("fast");
+        },
+
+        _createWindow: function () {
+            return jQuery("<div id='ktb-wrap'><div id='ktb-close' /></div>")
+                        .css({
+                            display: "none",
+                            height: 0
+                        })
+                        .find("#ktb-close").click(jQuery.proxy(this.close, this)).end()
+                    .appendTo(doc.body);
+        },
+
+        _createInterfaceFrame: function () {
+            var iframe = jQuery('<iframe />', {
                     id: "ktb-interface",
                     src: 'javascript:"<html></html>"',
                     frameBorder: '0'
-                }).appendTo(container || document.body)[0],
+                }).appendTo(this.container || document.body)[0],
+                wnd = iframe.contentWindow || iframe,
+                doc = wnd.document || iframe.contentDocument;
 
-            wnd = iframe.contentWindow || iframe,
-            doc = wnd.document || iframe.contentDocument;
+            function stylesheet(url) {
+                return "<link rel='stylesheet' href='" + url + "' />";
+            }
 
-        function stylesheet(url) {
-            return "<link rel='stylesheet' href='" + url + "' />";
+            function script(url) {
+                 return "<script src='" + url + "'></script>";
+            }
+
+            doc.open();
+            doc.write([
+                "<!DOCTYPE html><html><head>",
+                 "<meta charset='utf-8' />",
+                 stylesheet(kendoCommonCssLocation),
+                 jQuery.map(requiredCss, function(styleSheetName) {
+                     return stylesheet(applicationRoot + styleSheetName);
+                 }).join(""),
+                 "</head><body>",
+                 script("http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"),
+                 script(kendoAllLocation),
+                 jQuery.map(requiredJs, function(scriptName) {
+                     return script(applicationRoot + scriptName);
+                 }).join(""),
+                 "</body></html>"
+            ].join(""));
+
+            doc.close();
+
+            this.iframe = wnd;
+        },
+
+        // Shows error message on pages that we can not work with
+        _initError: function() {
+            var messageId = "ktb-message",
+                messageWrap;
+
+            if (!doc.getElementById(messageId)) {
+                messageWrap = doc.createElement("div");
+                messageWrap.id = messageId;
+                messageWrap.innerHTML =
+                    "<p>It seems there are no Kendo widgets on this page, so the Kendo themebuilder will be of no use. Please try running it elsewhere.</p>" +
+                    "<p><button type='button' onclick='" +
+                        "var msg = document.getElementById(\"" + messageId + "\");" +
+                        "msg.parentNode.removeChild(msg);" +
+                        "return false;'>Close</button>" +
+                    "</p>";
+
+                doc.body.appendChild(messageWrap);
+            }
         }
-
-        function script(url) {
-             return "<script src='" + url + "'></script>";
-        }
-
-        doc.open();
-        doc.write([
-            "<!DOCTYPE html><html><head>",
-             "<meta charset='utf-8' />",
-             stylesheet(kendoCommonCssLocation),
-             $.map(requiredCss, function(styleSheetName) {
-                 return stylesheet(applicationRoot + styleSheetName);
-             }).join(""),
-             "</head><body>",
-             script("http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"),
-             script(kendoAllLocation),
-             $.map(requiredJs, function(scriptName) {
-                 return script(applicationRoot + scriptName);
-             }).join(""),
-             "</body></html>"
-        ].join(""));
-
-        doc.close();
-
-        return wnd;
-    }
-
-    var iframe = createInterfaceFrame(createWindow());
-
-    iframe.lessLoaded = function(lessTemplate) {
-        var kendo = iframe.kendo,
-            themeBuilder = new kendo.ThemeBuilder(
-                lessTemplate,
-                new kendo.LessConstants(constants),
-                constantsHierarchy
-            );
-
-        container.data("kendoThemeBuilder", themeBuilder);
     };
+
+    window.kendoThemeBuilder = new ThemeBuilderInterface();
 })();
 
