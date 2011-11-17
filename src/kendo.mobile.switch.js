@@ -33,6 +33,11 @@
         };
     switchAnimation = os.name in switchAnimation ? switchAnimation[os.name] : switchAnimation.all;
 
+    function preventDefault(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
     function limitValue(value, minLimit, maxLimit) {
         return Math.max( minLimit, Math.min( maxLimit, value));
     }
@@ -70,15 +75,17 @@
             var that = this,
                 handle = $(that.options.handle);
 
-            e.preventDefault();
-            e.stopPropagation();
+            preventDefault(e);
 
-            that.initialLocation = getAxisLocation(e, that.element, that.axis);
-            that.width = that.element.outerWidth();
-            that.halfWidth = handle.outerWidth() / 2;
-            that.animators = extend({ animators: that.animators }, that.options).animators;
+            extend(that, {
+                initial: getAxisLocation(e, that.element, that.axis),
+                width: that.element.outerWidth(),
+                halfWidth: handle.outerWidth() / 2,
+                animators: extend({ animators: that.animators }, that.options).animators
+            });
+
             that.constrain = that.width - handle.outerWidth(true);
-            that.location = limitValue(that.initialLocation, that.halfWidth, that.constrain + that.halfWidth);
+            that.location = limitValue(that.initial, that.halfWidth, that.constrain + that.halfWidth);
 
             $(document)
                 .bind(MOUSEMOVE, that._moveProxy)
@@ -99,10 +106,9 @@
                 snaps = that.options.snaps,
                 snapPart = that.width / (snaps - 1);
 
-            e.preventDefault();
-            e.stopPropagation();
+            preventDefault(e);
 
-            if (Math.abs(that.initialLocation - getAxisLocation(e, that.element, that.axis)) > 2) {
+            if (Math.abs(that.initial - getAxisLocation(e, that.element, that.axis)) > 2) {
                 that.trigger(SNAP, { snapTo: Math.round(that.location / snapPart) });
             } else if (snaps == 2) {
                 that.trigger(SNAP, { snapTo: !that.input[0].checked });
@@ -135,6 +141,7 @@
             enable = typeof enable === "boolean" ? enable : true;
             var that = this;
 
+            that.options.enable = enable;
             if (enable) {
                 that.element.removeClass("km-state-disabled");
                 that.input.removeAttr("disabled");
@@ -155,10 +162,11 @@
         },
 
         toggle: function(toggle) {
-            var input = this.input,
+            var that = this,
+                input = that.input,
                 checked = input[0].checked;
 
-            if (toggle != checked && !this.handle.data("animating") && !input.attr("disabled")) {
+            if (toggle != checked && !this.handle.data("animating") && that.options.enable) {
                 input[0].checked = typeof(toggle) === "boolean" ? toggle : !checked;
                 input.trigger("change");
             }
@@ -201,8 +209,10 @@
         _toggle: function() {
             var that = this;
 
-            that._prepare();
-            that._snap({ snapTo: that.input[0].checked })
+            if (that.options.enable) {
+                that._prepare();
+                that._snap({ snapTo: that.input[0].checked })
+            }
         },
 
         _prepare: function() {
@@ -222,9 +232,11 @@
                 that.animators
                     .kendoStop(true, true)
                     .kendoAnimate(extend({
-                        complete: function () {
-                            that.input[0].checked = checked;
-                            that.trigger(TOGGLE, { checked: checked });
+                        complete: function (element) {
+                            if (element.hasClass(handleSelector.substr(1))) {
+                                that.input[0].checked = checked;
+                                that.trigger(TOGGLE, { checked: checked });
+                            }
                         }
                     }, switchAnimation, {
                         offset: e.snapTo * (that.element.outerWidth() - that.handle.outerWidth(true)) + "px,0"
@@ -233,29 +245,32 @@
         },
 
         _wrap: function() {
-            var that = this;
+            var that = this,
+                input = that.element.children("input[type=checkbox]"),
+                handle = that.element.children(handleSelector);
 
             if (that.element.is("label")) {
                 that.element.addClass("km-switch");
             }
 
-            that.input = that.element.children("input[type=checkbox]");
-            if (that.input.length) {
-                that.input.data("kendo-role", "switch");
+            if (input.length) {
+                input.data("kendo-role", "switch");
             } else {
-                that.input = $("<input type='checkbox' data-kendo-role='switch' />").appendTo(that.element);
+                input = $("<input type='checkbox' data-kendo-role='switch' />").appendTo(that.element);
             }
 
-            that.handle = that.element.children(".km-switch-handle");
 
-            if (!that.handle.length) {
-                that.handle = $("<span class='km-switch-container'><span class='km-switch-handle' /></span>")
+            if (!handle.length) {
+                handle = $("<span class='km-switch-container'><span class='km-switch-handle' /></span>")
                                     .appendTo(that.element)
                                     .children(handleSelector);
             }
 
-            that.wrapper = that.handle.parent().before("<span class='km-switch-wrapper'><span class='km-switch-background'></span></span>");
-            that.animators = "animators" in switchAnimation ? that.element.find(switchAnimation.animators) : that.handle;
+            that.wrapper = handle.parent().before("<span class='km-switch-wrapper'><span class='km-switch-background'></span></span>");
+            that.animators = "animators" in switchAnimation ? that.element.find(switchAnimation.animators) : handle;
+
+            that.input = input;
+            that.handle = handle;
         }
 
     });
@@ -291,22 +306,25 @@
         _toggle: function() {
             var that = this;
 
-            that.handle.toggleClass("km-checkbox-checked", that.input[0].checked);
-            that.trigger(TOGGLE, { checked: that.input[0].checked });
+            if (that.options.enable) {
+                that.handle.toggleClass("km-checkbox-checked", that.input[0].checked);
+                that.trigger(TOGGLE, { checked: that.input[0].checked });
+            }
         },
 
         _wrap: function() {
-            var that = this;
+            var that = this,
+                input = that.element.children("input[type=checkbox]");
 
             if (that.element.is("label"))
                 that.element.addClass("km-checkbox");
 
-            that.input = that.element.children("input[type=checkbox]");
-            if (that.input.length)
-                that.input.data("kendo-role", "checkbox");
+            if (input.length)
+                input.data("kendo-role", "checkbox");
             else
-                that.input = $("<input type='checkbox' data-kendo-role='checkbox' />").appendTo(that.element);
+                input = $("<input type='checkbox' data-kendo-role='checkbox' />").appendTo(that.element);
 
+            that.input = input;
             that.handle = that.element;
         }
 

@@ -1411,7 +1411,7 @@
             }
 
             if (options.completeCallback) {
-                options.completeCallback(); // call the external complete callback
+                options.completeCallback(element); // call the external complete callback with the element
             }
 
             element.dequeue();
@@ -1425,7 +1425,7 @@
             destination.show();
 
             if (options.completeCallback) {
-                options.completeCallback(); // call the external complete callback
+                options.completeCallback(element); // call the external complete callback with the element
             }
 
             return element;
@@ -1475,9 +1475,14 @@
     }
 
     function animate(element, options, duration, reverse, complete) {
-        return element.queue(function () {
-            fx.promise(element, prepareAnimationOptions(options, duration, reverse, complete));
+        element.each(function (idx, el) { // fire separate queues on every element to separate the callback elements
+            el = $(el);
+            el.queue(function () {
+                fx.promise(el, prepareAnimationOptions(options, duration, reverse, complete));
+            });
         });
+
+        return element;
     }
 
     function animateTo(element, destination, options, duration, reverse, complete) {

@@ -26,7 +26,6 @@
                 MOUSEDOWN = kendo.support.touch ? "touchstart" : "mousedown",
                 MOUSEUP = kendo.support.touch ? "touchend" : "mouseup";
 
-            console.log(kendo.support.touch);
             /* ToggleButton */
 
             test("ToggleButton can be initialized from input type='checkbox'", function() {
@@ -36,7 +35,7 @@
 
                 var togglebutton = new ToggleButton(dom);
 
-                ok(togglebutton.element.hasClass("km-toggle"), "Should have specified CSS class");
+                ok(togglebutton.element.hasClass("km-switch"), "Should have specified CSS class");
             });
 
             test("ToggleButton can be initialized from label only", function() {
@@ -46,7 +45,7 @@
 
                 var togglebutton = new ToggleButton(dom);
 
-                ok(togglebutton.element.hasClass("km-toggle"), "Should have specified CSS class");
+                ok(togglebutton.element.hasClass("km-switch"), "Should have specified CSS class");
             });
 
             test("ToggleButton reuses existing label", function() {
@@ -57,16 +56,16 @@
 
                 var togglebutton = new ToggleButton(dom);
 
-                ok(label.hasClass("km-toggle"), "Should reuse existing label around the checkbox");
+                ok(label.hasClass("km-switch"), "Should reuse existing label around the checkbox");
             });
 
-            test("ToggleButton creates a toggle handle and tip", function() {
+            test("ToggleButton creates a toggle handle, container, wrapper and background", function() {
                 expect(1);
 
                 var dom = $("<input type='checkbox'/>");
                 var togglebutton = new ToggleButton(dom);
 
-                ok((dom.parent().find(".km-toggle-handle").length && dom.parent().find(".km-toggle-tip").length), "Should create a handle and a tip");
+                ok((dom.parent().find(".km-switch-handle,.km-switch-container,.km-switch-wrapper,.km-switch-background").length == 4), "Should create a handle and a tip");
             });
 
             test("ToggleButton raises toggle event when changed", function() {
@@ -77,7 +76,7 @@
                 var togglebutton = new ToggleButton(dom);
 
                 togglebutton.bind("toggle", function() {
-                    ok(true, "Should raise the click event");
+                    ok(true, "Should raise the toggle event");
                 });
 
                 dom.change();
@@ -154,6 +153,8 @@
                 togglebutton.bind("toggle", function() {
                     ok(true, "Should raise the toggle event");
                 });
+
+                togglebutton.toggle();
 
                 togglebutton.enable();
 

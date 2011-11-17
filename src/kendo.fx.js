@@ -452,7 +452,7 @@
             }
 
             if (options.completeCallback) {
-                options.completeCallback(); // call the external complete callback
+                options.completeCallback(element); // call the external complete callback with the element
             }
         });
     };
