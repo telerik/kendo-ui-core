@@ -509,3 +509,98 @@ span.k-numeric-wrap.k-state-active,
 {
     .box-shadow(inset 0 0 1px 1px @shadow-inset-color);
 }
+
+/* Border radius */
+
+.k-button,
+.k-drag-clue,
+.k-touch-scrollbar,
+.k-window,
+.k-window-action,
+.k-tabstrip-items .k-item,
+.k-pager .k-state-active,
+.k-pager .k-state-hover,
+.k-grid .k-filter-options,
+.k-grouping-header .k-group-indicator,
+.k-autocomplete,
+.k-dropdown-wrap,
+.k-picker-wrap,
+.k-numeric-wrap,
+.k-list-container,
+.k-calendar-container,
+.k-calendar td,
+.k-calendar .k-link,
+.k-treeview .k-state-hover,
+.k-treeview .k-state-selected,
+.k-editor-button .k-state-hover,
+.k-editor-button .k-state-active,
+.k-tooltip,
+.k-tile
+{
+    .border-radius(@main-border-radius);
+}
+
+.k-calendar-container.k-state-border-up,
+.k-list-container.k-state-border-up,
+.k-autocomplete.k-state-border-up,
+.k-dropdown-wrap.k-state-border-up,
+.k-picker-wrap.k-state-border-up,
+.k-numeric-wrap.k-state-border-up
+{
+    .border-radius(0 0 @main-border-radius @main-border-radius);
+}
+
+.k-window-titlebar,
+.k-panelbar .k-tabstrip-items .k-item,
+.k-tabstrip-items .k-link,
+.k-calendar-container.k-state-border-down,
+.k-list-container.k-state-border-down,
+.k-autocomplete.k-state-border-down,
+.k-dropdown-wrap.k-state-border-down,
+.k-picker-wrap.k-state-border-down,
+.k-numeric-wrap.k-state-border-down
+{
+    .border-radius(@main-border-radius @main-border-radius 0 0);
+}
+
+.k-dropdown-wrap .k-select,
+.k-picker-wrap .k-select,
+.k-numeric-wrap .k-select,
+.k-datetimepicker .k-select+.k-select,
+.k-animation-container .k-calendar-container,
+.k-list-container.k-state-border-right
+{
+    .border-radius(0 @main-border-radius @main-border-radius 0);
+}
+
+.k-autocomplete .k-input,
+.k-dropdown-wrap .k-input,
+.k-picker-wrap .k-input,
+.k-numeric-wrap .k-input,
+.k-numeric-wrap .k-link,
+.k-colorpicker .k-selected-color,
+.k-progress,
+.k-progress-status
+{
+    .border-radius(@inner-border-radius);
+}
+
+.k-list .k-state-hover,
+.k-list .k-state-focused,
+.k-list .k-state-selected,
+.k-dropzone,
+.k-upload-files
+{
+    .border-radius(@list-border-radius);
+}
+
+.k-slider .k-button,
+.k-grid .k-slider .k-button
+{
+    .border-radius(@slider-border-radius);
+}
+
+.k-draghandle
+{
+    .border-radius(@draghandle-border-radius);
+}
