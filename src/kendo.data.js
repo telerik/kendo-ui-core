@@ -223,13 +223,18 @@
     var operators = (function(){
         var dateRegExp = /^\/Date\((.*?)\)\/$/;
 
-        function operator(op, a, b) {
+        function operator(op, a, b, ignore) {
+            var date;
+
             b = b != null ? b : {};
 
             if (typeof b === "string") {
-                var date = dateRegExp.exec(b);
+                date = dateRegExp.exec(b);
                 if (date) {
                     b = new Date(+date[1]);
+                } else if (ignore) {
+                    b = "'" + b.toLowerCase() + "'";
+                    a = a + ".toLowerCase()";
                 } else {
                     b = "'" + b + "'";
                 }
@@ -245,31 +250,49 @@
         }
 
         var operators =  {
-            eq: function(a, b) {
-                return operator("==", a, b);
+            eq: function(a, b, ignore) {
+                return operator("==", a, b, ignore);
             },
-            neq: function(a, b) {
-                return operator("!=", a, b);
+            neq: function(a, b, ignore) {
+                return operator("!=", a, b, ignore);
             },
-            gt: function(a, b) {
-                return operator(">", a, b);
+            gt: function(a, b, ignore) {
+                return operator(">", a, b, ignore);
             },
-            gte: function(a, b) {
-                return operator(">=", a, b);
+            gte: function(a, b, ignore) {
+                return operator(">=", a, b, ignore);
             },
-            lt: function(a, b) {
-                return operator("<", a, b);
+            lt: function(a, b, ignore) {
+                return operator("<", a, b, ignore);
             },
-            lte: function(a, b) {
-                return operator("<=", a, b);
+            lte: function(a, b, ignore) {
+                return operator("<=", a, b, ignore);
             },
-            startswith: function(a, b) {
+            startswith: function(a, b, ignore) {
+                if (ignore) {
+                    a = a + ".toLowerCase()";
+                    if (b) {
+                        b = b.toLowerCase();
+                    }
+                }
                 return a + ".lastIndexOf('" + b + "', 0) == 0";
             },
-            endswith: function(a, b) {
+            endswith: function(a, b, ignore) {
+                if (ignore) {
+                    a = a + ".toLowerCase()";
+                    if (b) {
+                        b = b.toLowerCase();
+                    }
+                }
                 return a + ".lastIndexOf('" + b + "') == " + a + ".length - " + (b || "").length;
             },
-            contains: function(a, b) {
+            contains: function(a, b, ignore) {
+                if (ignore) {
+                    a = a + ".toLowerCase()";
+                    if (b) {
+                        b = b.toLowerCase();
+                    }
+                }
                 return a + ".indexOf('" + b + "') >= 0"
             }
         };
@@ -333,7 +356,7 @@
                     filter = "__o[" + operatorFunctions.length + "](" + expr + ", " + filter.value + ")";
                     operatorFunctions.push(operator);
                 } else {
-                    filter = operators[(operator || "eq").toLowerCase()](expr, filter.value);
+                    filter = operators[(operator || "eq").toLowerCase()](expr, filter.value, filter.ignoreCase !== undefined? filter.ignoreCase : true);
                 }
             }
 
@@ -343,7 +366,7 @@
         return  { expression: "(" + expressions.join(logic[expression.logic]) + ")", fields: fieldFunctions, operators: operatorFunctions };
     }
 
-    function expandSort(field, dir) {
+    function normalizeSort(field, dir) {
         if (field) {
             var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
                 descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
@@ -352,7 +375,7 @@
         }
     }
 
-    function expandFilter(expression) {
+    function normalizeFilter(expression) {
         if (expression) {
             if (isArray(expression) || !expression.logic) {
                 expression = {
@@ -364,11 +387,11 @@
         }
     }
 
-    function expandAggregates(expressions) {
+    function normalizeAggregate(expressions) {
         return expressions = isArray(expressions) ? expressions : [expressions];
     }
 
-    function expandGroup(field, dir) {
+    function normalizeGroup(field, dir) {
        var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
            descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
@@ -403,7 +426,7 @@
         sort: function(field, dir) {
             var idx,
                 length,
-                descriptors = expandSort(field, dir),
+                descriptors = normalizeSort(field, dir),
                 comparers = [];
 
             if (descriptors.length) {
@@ -429,7 +452,7 @@
                 result = [],
                 filter;
 
-            compiled = Query.filterExpr(expandFilter(expressions));
+            compiled = Query.filterExpr(normalizeFilter(expressions));
             fields = compiled.fields;
             operators = compiled.operators;
 
@@ -452,7 +475,7 @@
         },
 
         group: function(descriptors, allData) {
-            descriptors =  expandGroup(descriptors || []);
+            descriptors =  normalizeGroup(descriptors || []);
             allData = allData || this.data;
 
             var that = this,
@@ -576,7 +599,7 @@
         var query = new Query(data),
             options = options || {},
             group = options.group,
-            sort = expandSort(options.sort || []).concat(expandGroup(group || [])),
+            sort = normalizeSort(options.sort || []).concat(normalizeGroup(group || [])),
             total,
             filter = options.filter,
             skip = options.skip,
@@ -931,9 +954,9 @@
                 _view: [],
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
-                _sort: expandSort(options.sort),
-                _filter: expandFilter(options.filter),
-                _group: expandGroup(options.group),
+                _sort: normalizeSort(options.sort),
+                _filter: normalizeFilter(options.filter),
+                _group: normalizeGroup(options.group),
                 _aggregate: options.aggregate
             });
 
@@ -1249,18 +1272,18 @@
                 }
 
                 if (options.sort) {
-                    that._sort = options.sort = expandSort(options.sort);
+                    that._sort = options.sort = normalizeSort(options.sort);
                 }
 
                 if (options.filter) {
-                    that._filter = options.filter = expandFilter(options.filter);
+                    that._filter = options.filter = normalizeFilter(options.filter);
                 }
 
                 if (options.group) {
-                    that._group = options.group = expandGroup(options.group);
+                    that._group = options.group = normalizeGroup(options.group);
                 }
                 if (options.aggregate) {
-                    that._aggregate = options.aggregate = expandAggregates(options.aggregate);
+                    that._aggregate = options.aggregate = normalizeAggregate(options.aggregate);
                 }
             }
 

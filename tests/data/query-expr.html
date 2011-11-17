@@ -339,28 +339,28 @@
                 equal(compile({
                     logic: "and",
                     filters: [ { field: "foo", value: "bar", operator: "startswith" } ]
-                }), "(d.foo.lastIndexOf('bar', 0) == 0)");
+                }), "(d.foo.toLowerCase().lastIndexOf('bar', 0) == 0)");
             });
 
             test("endswith", function() {
                 equal(compile({
                     logic: "and",
                     filters: [ { field: "foo", value: "bar", operator: "endswith" } ]
-                }), "(d.foo.lastIndexOf('bar') == d.foo.length - 3)");
+                }), "(d.foo.toLowerCase().lastIndexOf('bar') == d.foo.toLowerCase().length - 3)");
             });
 
             test("contains", function() {
                 equal(compile({
                     logic: "and",
                     filters: [ { field: "foo", value: "bar", operator: "contains" } ]
-                }), "(d.foo.indexOf('bar') >= 0)");
+                }), "(d.foo.toLowerCase().indexOf('bar') >= 0)");
             });
 
             test("contains with apostrophe", function() {
                 equal(compile({
                     logic: "and",
                     filters: [ { field: "foo", value: "'", operator: "contains" } ]
-                }), "(d.foo.indexOf('\'') >= 0)");
+                }), "(d.foo.toLowerCase().indexOf('\'') >= 0)");
             });
 
             test("using function as field", function() {
@@ -501,11 +501,25 @@
                 }), "(d.getTime() <= " + date.getTime() + ")");
             });
 
-            test("string eq", function() {
+            test("string neq", function() {
                 equal(compile({
                     logic: "and",
                     filters: [ { operator: "neq", value: "foo"} ]
-                }), "(d != 'foo')");
+                }), "(d.toLowerCase() != 'foo')");
+            });
+
+            test("string filtering is case insensitive by default", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "neq", value: "Foo"} ]
+                }), "(d.toLowerCase() != 'foo')");
+            });
+
+            test("string filtering is case sensitive", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { ignoreCase: false, operator: "neq", value: "Foo"} ]
+                }), "(d != 'Foo')");
             });
         </script>
     </body>
