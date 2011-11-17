@@ -157,7 +157,7 @@
                     if (constant.infer) {
                         // computed constant
                         constant.value = constant.infer();
-                    } else {
+                    } else if (!(constant.readonly && constant.value)) {
                         // TODO: make it work with complex selectors (targets) -- ".foo .bar"
                         //       see misc / inset shadow
                         prototype = getInferPrototype(constant.target);
@@ -217,9 +217,15 @@
                 that.element = $("#kendo-themebuilder");
 
                 function changeHandler(e) {
+                    var value = this.value();
+
+                    if (/^\d+$/.test(value) && this.element.is(".ktb-numeric")) {
+                        value = value + "px";
+                    }
+
                     that._propertyChange({
                         name: this.element[0].id,
-                        value: this.value()
+                        value: value
                     });
                 }
 

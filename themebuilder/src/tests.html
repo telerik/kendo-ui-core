@@ -245,6 +245,22 @@
                 equals(constants.constants["@foo"].value, "10px");
             });
 
+            test("infer() of readonly constants with value", function() {
+                var themeBuilder = new ThemeBuilder();
+                themeBuilder.updateStyleSheet(".bar { font-size: 20px; }");
+
+                var constants = new LessConstants({
+                    "@foo": {
+                        readonly: true,
+                        value: "10px"
+                    }
+                });
+
+                constants.infer();
+
+                equals(constants.constants["@foo"].value, "10px");
+            });
+
             test("infer() of selector with tagName", function() {
                 var themeBuilder = new ThemeBuilder();
                 themeBuilder.updateStyleSheet(".foo:link { font-size: 20px; } .foo { font-size: 10px; }");
