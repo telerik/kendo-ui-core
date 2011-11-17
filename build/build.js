@@ -178,8 +178,9 @@ function buildAllBundles(success, bundleIx) {
 }
 
 function buildOnlineExamples(success) {
-    kendoExamples.build("", DEPLOY_ONLINEEXAMPLES, CDN_URL);
-    zip(path.join(DROP_LOCATION, ONLINE_EXAMPLES_PACKAGE), DEPLOY_ONLINEEXAMPLES, success);
+    var onlinExamplesRoot = path.join(DEPLOY_ROOT, DEPLOY_ONLINEEXAMPLES);
+    kendoExamples.build("", onlinExamplesRoot, CDN_URL);
+    zip(path.join(DROP_LOCATION, ONLINE_EXAMPLES_PACKAGE), onlinExamplesRoot, success);
 }
 
 console.log("Build starting at " + startDate);
