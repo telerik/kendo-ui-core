@@ -321,33 +321,68 @@ body
     background-image: linearGradient(left top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
 }
 
-.km-toggle,
+.km-switch,
 .km-checkbox
 {
+    font-family: HelveticaNeue, Arial, sans-serif;
     font-size: 1em;
     font-size: 1rem;
     display: inline-block;
-    padding: 1px;
     width: 6em;
     width: 6rem;
     height: 1.75em;
     height: 1.75rem;
-    line-height: 1.85em;
-    line-height: 1.85rem;
-    vertical-align: middle;
+    line-height: 1.9em;
+    line-height: 1.9rem;
+    padding: 1px;
     position: relative;
     overflow: hidden;
-    .border-radius(4px);
 }
 
-.km-ios .km-toggle
+.km-ios .km-switch
 {
-    -webkit-mask-box-image: ~"url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><rect fill=%22black%22 x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%224%22/></svg>')";
+    /*-webkit-mask-box-image: ~"url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><rect fill=%22black%22 x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%224%22/></svg>')";*/
     -webkit-transform: translatez(0);
 }
 
+.km-switch-wrapper
+{
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.km-switch-background
+{
+    display: block;
+    margin: 0 1px 1px -5em;
+    height: 100%;
+    width: 200%;
+    background:
+        linearGradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%, rgb(250, 250, 250) 50%, rgb(255, 255, 255)) 6em 0 no-repeat,
+        linearGradient(top, rgb(50, 120, 239), rgb(54, 128, 248) 50%, rgb(79, 146, 243) 50%, rgb(115, 171, 252)) 0 0 no-repeat;
+}
+
+.km-switch-container
+{
+    top: 0;
+    left: 0;
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: transparent;
+    border: 1px solid #999;
+    .border-radius(4px);
+    .box-sizing(border-box);
+    .box-shadow(inset 0 2px 2px 0 rgba(0,0,0,.3));
+}
+
 .km-checkbox,
-.km-android .km-listview .km-toggle
+.km-android .km-listview .km-switch
 {
     width: 1.8em;
     height: 1.8em;
@@ -356,7 +391,7 @@ body
 }
 
 .km-checkbox-checked:after,
-.km-android .km-listview .km-toggle-handle
+.km-android .km-listview .km-switch-handle
 {
     content: "\a0";
     display: block;
@@ -381,7 +416,7 @@ body
 }
 
 .km-android .km-checkbox,
-.km-android .km-listview .km-toggle
+.km-android .km-listview .km-switch
 {
     padding: 0;
     border: 1px solid #000;
@@ -398,21 +433,20 @@ body
 }
 
 .km-android .km-checkbox-checked:after,
-.km-android .km-listview .km-toggle-on
+.km-android .km-listview .km-switch-on
 {
     background: transparent url("images/android-sprite.png") 0 8% no-repeat;
     background-size: 100% auto;
 }
 
-.km-android .km-listview .km-toggle-handle:after,
-.km-android .km-listview .km-toggle-handle:before,
-.km-android .km-listview .km-toggle-tip
+.km-android .km-listview .km-switch-handle:after,
+.km-android .km-listview .km-switch-handle:before,
+.km-android .km-listview .km-switch-tip
 {
     display: none;
 }
 
-.km-toggle-tip,
-.km-toggle-handle
+.km-switch-handle
 {
     top: 0;
     left: 0;
@@ -420,81 +454,45 @@ body
     width: 2rem;
     height: 1.75em;
     height: 1.75rem;
-    display: block;
-    position: absolute;
-}
-
-.km-toggle-tip
-{
-    z-index: 1;
+    display: inline-block;
+    margin: -1px 0 0 -1px;
     border: 1px solid #969696;
     background: linearGradient(top, rgb(255, 255, 255), rgb(215, 215, 215) 5%, rgb(255, 255, 255));
     .border-radius(4px);
     .box-shadow(0 0 3px 0 rgba(0,0,0,.5));
 }
 
-.km-ios .km-toggle-on .km-toggle-tip
+.km-switch-handle:after,
+.km-switch-handle:before
 {
-    .box-shadow(-1px 0 2px 0 rgba(0,0,0,.2));
-}
-
-.km-ios .km-toggle-off .km-toggle-tip
-{
-    .box-shadow(1px 0 2px 0 rgba(0,0,0,.2));
-}
-
-.km-toggle-handle:after,
-.km-toggle-handle:before
-{
-    position: absolute;
     font-size: 1em;
     font-size: 1rem;
     font-weight: bold;
-    top: 0;
     display: inline-block;
     height: 100%;
     width: 4em;
     width: 4rem;
     text-transform: uppercase;
     text-align: center;
-    .border-radius(4px);
+    position: absolute;
 }
 
-.km-toggle-on:after,
-.km-toggle-off:before
+.km-switch-handle:after
 {
-    display: none;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-box;
-}
-
-.km-toggle-handle:after
-{
+    left: 2em;
     content: "off";
-    left: 1.6em;
-    left: 1.6rem;
-    padding-left: 5px;
     color: #7f7f7f;
-    background: linearGradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%, rgb(250, 250, 250) 50%, rgb(255, 255, 255));
-    .box-shadow(~"inset 0 2px 2px #a4a4a4");
-    border: 1px solid #999;
 }
 
-.km-toggle-handle:before
+.km-switch-handle:before
 {
-    content: "on";
     left: -4em;
-    left: -4rem;
-    padding-right: 5px;
+    content: "on";
     color: #fff;
     text-shadow: 0 -1px 0 #0e203e;
-    background: linearGradient(top, rgb(50, 120, 239), rgb(54, 128, 248) 50%, rgb(79, 146, 243) 50%, rgb(115, 171, 252));
-    .box-shadow(~"inset 0 2px 2px #0b3a8b");
-    border: 1px solid #2c5fae;
 }
 
-.km-android .km-toggle
+.km-android .km-switch
 {
     width: 3em;
     width: 3rem;
@@ -502,7 +500,7 @@ body
     height: 2rem;
 }
 
-.km-android .km-toggle-tip
+.km-android .km-switch-tip
 {
     position: relative;
     background: none;
@@ -516,23 +514,23 @@ body
     font-size: 1.1rem;
 }
 
-.km-android .km-toggle-tip:before
+.km-android .km-switch-tip:before
 {
     text-transform: uppercase;
     width: 100%;
 }
 
-.km-android .km-toggle-on .km-toggle-tip:before
+.km-android .km-switch-on .km-switch-tip:before
 {
     content: "on";
 }
 
-.km-android .km-toggle-off .km-toggle-tip:before
+.km-android .km-switch-off .km-switch-tip:before
 {
     content: "off";
 }
 
-.km-android .km-toggle-handle
+.km-android .km-switch-handle
 {
     position: relative;
     width: 100%;
@@ -540,8 +538,8 @@ body
     .transform(~"translate(0,0) !important");
 }
 
-.km-android .km-toggle-handle:after,
-.km-android .km-toggle-handle:before
+.km-android .km-switch-handle:after,
+.km-android .km-switch-handle:before
 {
     content: "\a0";
     width: 95%;
@@ -554,20 +552,20 @@ body
     bottom: 0;
 }
 
-.km-meego .km-toggle
+.km-meego .km-switch
 {
     width: 3.8em;
     width: 3.8rem;
     -webkit-transform: translatez(0);
 }
 
-.km-meego .km-toggle,
-.km-meego .km-toggle-tip
+.km-meego .km-switch,
+.km-meego .km-switch-tip
 {
     .border-radius(8px);
 }
 
-.km-meego .km-toggle-handle
+.km-meego .km-switch-handle
 {
     width: 100%;
     height: 100%;
@@ -576,24 +574,24 @@ body
     .box-shadow(inset 0 2px 3px 0 #aaa);
 }
 
-.km-meego .km-toggle-on
+.km-meego .km-switch-on
 {
     background: linearGradient(top, rgb(58, 150, 227), rgb(16, 128, 221));
     .box-shadow(inset 0 2px 3px 0 #4c7698);
 }
 
-.km-meego .km-toggle:active .km-toggle-tip
+.km-meego .km-switch:active .km-switch-tip
 {
     background: #d9d9d9;
 }
 
-.km-meego .km-toggle-handle:after,
-.km-meego .km-toggle-handle:before
+.km-meego .km-switch-handle:after,
+.km-meego .km-switch-handle:before
 {
     display: none;
 }
 
-.km-meego .km-toggle-tip
+.km-meego .km-switch-tip
 {
     margin: .35em .4em;
     width: 1.4em;
@@ -606,21 +604,21 @@ body
     .box-shadow(0 2px 3px 0 #aaa);
 }
 
-.km-meego .km-toggle-on .km-toggle-tip
+.km-meego .km-switch-on .km-switch-tip
 {
     .box-shadow(0 2px 3px 0 #4c7698);
 }
 
 .km-android,
 .km-android .km-button,
-.km-android .km-toggle
+.km-android .km-switch
 {
     font: normal 1em DroidSans, Helvetica, sans-serif;
     font-size: 1rem;
 }
 
 .km-android .km-button,
-.km-android .km-toggle
+.km-android .km-switch
 {
     padding: .4em .7em;
     padding: .4rem .7rem;
@@ -640,7 +638,7 @@ body
 
 .km-android .km-toolbar,
 .km-android .km-button,
-.km-android .km-toggle,
+.km-android .km-switch,
 .km-android .km-radiogroup,
 .km-android .km-tabstrip
 {
@@ -1041,13 +1039,13 @@ body
     overflow: hidden;
 }
 
-.km-listview .km-toggle
+.km-listview .km-switch
 {
     margin-top: 0;
     float: right;
 }
 
-.km-android .km-listview .km-toggle
+.km-android .km-listview .km-switch
 {
     margin-top: .45em
 }
