@@ -554,7 +554,7 @@
                     field: "field",
                     operator: "eq",
                     value: "A",
-                    caseSensitive: true
+                    ignoreCase: false
                 }).toArray();
 
                 equal(result.length, 1);
@@ -568,7 +568,7 @@
                     field: "field",
                     operator: "contains",
                     value: "B",
-                    caseSensitive: true
+                    ignoreCase: false
                 }).toArray();
 
                 equal(result.length, 1);
