@@ -69,7 +69,7 @@
                         model: {
                             id: "id",
                             fields: {
-                                id: { field: "idx", type: "number" },
+                                id: { field: "idx", type: "number", validation: { required: true } },
                                 foo: {
                                     field: "foo",
                                     readonly: true
