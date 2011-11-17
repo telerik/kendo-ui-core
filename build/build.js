@@ -186,7 +186,7 @@ console.log("Build starting at " + startDate);
 initWorkspace();
 
 console.log("Merging multi-part scripts");
-kendoScripts.mergeScripts("src/");
+kendoScripts.mergeScripts(SCRIPTS_ROOT);
 
 console.log("Building themes");
 themes.build();
