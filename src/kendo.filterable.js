@@ -56,24 +56,38 @@
 
             operators = operators[type] || options.operators[type];
 
-            that.menu = $(kendo.template(template)({
+            that.form = $(kendo.template(template)({
                 field: field,
                 messages: options.messages,
                 extra: options.extra,
                 operators: operators
             }));
 
-            that.popup = new ui.Popup(that.menu,{
+            that.popup = new ui.Popup(that.form,{
                 anchor: link,
                 toggleTarget: link
             });
 
-            that.menu
+            that.form
+                .bind({
+                    submit: $.proxy(that._submit, that),
+                    reset: $.proxy(that._reset, that)
+                })
                 .find("select")
                 .kendoDropDownList();
         },
 
         refresh: function() {
+        },
+
+        _submit: function(e) {
+            e.preventDefault();
+            this.popup.close();
+        },
+
+        _reset: function(e) {
+            e.preventDefault();
+            this.popup.close();
         },
 
         options: {
