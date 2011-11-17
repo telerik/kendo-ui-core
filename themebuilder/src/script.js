@@ -54,7 +54,6 @@
             "@widget-background-color":         constant(".k-widget", BGCOLOR),
             "@widget-border-color":             constant(".k-widget", BORDERCOLOR),
             "@widget-text-color":               constant(".k-widget", COLOR),
-            "@widget-border-radius":            constant(".k-widget", "border-radius"),
 
             "@header-background-color":         constant(".k-header", BGCOLOR),
             "@header-text-color":               constant(".k-header", COLOR),
@@ -94,6 +93,18 @@
             "@tooltip-border-color":            constant(".k-tooltip", BORDERCOLOR),
             "@tooltip-text-color":              constant(".k-tooltip", COLOR),
 
+            "@main-border-radius":              constant(".k-widget", "border-radius"),
+            "@list-border-radius": {
+                readonly: true,
+                value: "~`Math.max(parseInt('@{main-border-radius}', 10) - 1, 0) + 'px'`"
+            },
+            "@inner-border-radius": {
+                readonly: true,
+                value: "~`Math.max(parseInt('@{main-border-radius}', 10) - 2, 0) + 'px'`"
+            },
+            "@slider-border-radius":            { readonly: true, value: "13px" },
+            "@draghandle-border-radius":        { readonly: true, value: "7px" },
+
             "@alt-background-color":            constant(".k-alt", BGCOLOR),
             "@input-background-color":          constant(".k-input", BGCOLOR),
             "@input-text-color":                constant(".k-input", COLOR),
@@ -107,8 +118,7 @@
             "Widgets": {
                 "@widget-background-color":  "Background",
                 "@widget-border-color":      "Border color",
-                "@widget-text-color":        "Text color",
-                "@widget-border-radius":     "Border radius"
+                "@widget-text-color":        "Text color"
             },
             "Headers and links": {
                 "@header-background-color":  "Header background",
@@ -161,6 +171,7 @@
                 "@tooltip-text-color":        "Text color",
             },
             "Misc": {
+                "@main-border-radius":        "Border radius",
                 "@alt-background-color":      "Alternating color",
                 "@shadow-color":              "Shadow color",
                 "@shadow-inset-color":        "Inset shadow",
