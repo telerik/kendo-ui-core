@@ -67,7 +67,9 @@ var deployScripts = [{
     ]
 }];
 
-var CULTURES_ROOT = "cultures";
+var CULTURES_ROOT = "cultures",
+    deployCache = { },
+    mergeCache = { };
 
 // Implementation =============================================================
 function deploy(scriptsRoot, outputRoot, header, compress) {
@@ -77,21 +79,25 @@ function deploy(scriptsRoot, outputRoot, header, compress) {
     });
 
     allScripts.forEach(function(scriptName) {
-        var content = kendoBuild.minifyJs(
-            kendoBuild.readText(
-                path.join(scriptsRoot, scriptName)
-            )
-        );
+        var cacheKey = scriptsRoot + compress + scriptName,
+            output = deployCache[cacheKey],
+            outName = scriptOutName(scriptName, compress);
 
-        var outName = scriptOutName(scriptName, compress);
-        kendoBuild.writeText(path.join(outputRoot, outName), header + content);
+        if (!output) {
+            var content = kendoBuild.readText(path.join(scriptsRoot, scriptName));
+            output = compress ? kendoBuild.minifyJs(content) : content;
+
+            deployCache[cacheKey] = output;
+        }
+
+        kendoBuild.writeText(path.join(outputRoot, outName), header + output);
     });
 
     var culturesRoot = path.join(scriptsRoot, CULTURES_ROOT),
         culturesDest = path.join(outputRoot, CULTURES_ROOT);
 
     kendoBuild.copyDirSyncRecursive(culturesRoot, culturesDest);
-    kendoBuild.processFilesRecursive(culturesDest, /.*/, function(fileName) {
+    kendoBuild.processFilesRecursive(culturesDest, /\.js$/, function(fileName) {
         var content = kendoBuild.readText(fileName),
             output = compress ? kendoBuild.minifyJs(content) : content,
             outName = scriptOutName(fileName, compress);
@@ -112,18 +118,24 @@ function mergeScripts(scriptsRoot) {
 }
 
 function mergeMultipartScript(script, srcDir, outDir, header, compress) {
-    var result = "",
-        outFile = script.output;
+    var outFile = script.output,
+        cacheKey = srcDir + compress + outFile,
+        result = mergeCache[cacheKey];
 
-    script.inputs.forEach(function(module) {
-        result += kendoBuild.readText(
-            path.join(srcDir, module)
-        );
-    });
+    if (!result) {
+        script.inputs.forEach(function(module) {
 
-    if (compress) {
-        outFile = outFile.replace(".js", ".min.js");
-        result = kendoBuild.minifyJs(result);
+            result += kendoBuild.readText(
+                path.join(srcDir, module)
+            );
+        });
+
+        if (compress) {
+            outFile = outFile.replace(".js", ".min.js");
+            result = kendoBuild.minifyJs(result);
+        }
+
+        mergeCache[cacheKey] = result;
     }
 
     kendoBuild.writeText(
