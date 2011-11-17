@@ -122,7 +122,7 @@ function buildBundle(bundle, success) {
     mkdir(root);
 
     console.log("Deploying scripts");
-    deployScripts(root, bundle.license, bundle.hasSource);
+    deployScripts(root, license, bundle.hasSource);
 
     console.log("Deploying styles");
     deployStyles(root, bundle.hasSource);

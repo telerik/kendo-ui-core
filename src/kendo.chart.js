@@ -1,4 +1,4 @@
-undefined(function ($, undefined) {
+(function ($, undefined) {
 
     // Imports ================================================================
     var doc = document,
