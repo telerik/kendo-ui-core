@@ -120,11 +120,10 @@ function mergeScripts(scriptsRoot) {
 function mergeMultipartScript(script, srcDir, outDir, header, compress) {
     var outFile = script.output,
         cacheKey = srcDir + compress + outFile,
-        result = mergeCache[cacheKey];
+        result = mergeCache[cacheKey] || "";
 
     if (!result) {
         script.inputs.forEach(function(module) {
-
             result += kendoBuild.readText(
                 path.join(srcDir, module)
             );
