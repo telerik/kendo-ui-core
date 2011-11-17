@@ -4731,7 +4731,8 @@
                    backgroundColor: tooltipOptions.background,
                    borderColor: tooltipOptions.border.color || point.options.color,
                    color: tooltipOptions.color,
-                   opacity: tooltipOptions.opacity
+                   opacity: tooltipOptions.opacity,
+                   borderWidth: tooltipOptions.border.width
                 })
                 .stop(true, true)
                 .show()
