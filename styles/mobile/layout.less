@@ -339,7 +339,8 @@ body
     overflow: hidden;
 }
 
-.km-ios .km-switch
+.km-ios .km-switch,
+.km-meego .km-switch
 {
     /*-webkit-mask-box-image: ~"url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><rect fill=%22black%22 x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%224%22/></svg>')";*/
     -webkit-transform: translatez(0);
@@ -440,8 +441,7 @@ body
 }
 
 .km-android .km-listview .km-switch-handle:after,
-.km-android .km-listview .km-switch-handle:before,
-.km-android .km-listview .km-switch-tip
+.km-android .km-listview .km-switch-handle:before
 {
     display: none;
 }
@@ -498,89 +498,110 @@ body
     width: 3rem;
     height: 2em;
     height: 2rem;
-}
-
-.km-android .km-switch-tip
-{
-    position: relative;
-    background: none;
-    border: none;
-    .box-shadow(none);
-    width: 100%;
-    line-height: 1.1em;
-    line-height: 1.1rem;
-    text-align: center;
-    font-size: 1.1em;
-    font-size: 1.1rem;
-}
-
-.km-android .km-switch-tip:before
-{
-    text-transform: uppercase;
-    width: 100%;
-}
-
-.km-android .km-switch-on .km-switch-tip:before
-{
-    content: "on";
-}
-
-.km-android .km-switch-off .km-switch-tip:before
-{
-    content: "off";
+    border: 1px solid transparent;
 }
 
 .km-android .km-switch-handle
 {
     position: relative;
+    background: none;
+    border: none;
+    .box-shadow(none);
+    line-height: 1.1em;
+    line-height: 1.1rem;
+    text-align: center;
+    font-size: 1.1em;
+    font-size: 1.1rem;
+    position: relative;
     width: 100%;
     height: 100%;
+    margin: 0;
     .transform(~"translate(0,0) !important");
+    .transition(~"none !important");
 }
 
-.km-android .km-switch-handle:after,
+.km-android .km-switch-handle:after
+{
+    height: 1.1em;
+    text-transform: uppercase;
+    width: 100%;
+    left: 0;
+    font-weight: normal;
+    color: #000;
+    .box-sizing(border-box);
+}
+
+.km-android .km-switch-on:after
+{
+    content: "on";
+}
+
+.km-android .km-switch-off:after
+{
+    content: "off";
+}
+
+.km-android .km-switch-wrapper
+{
+    display: none;
+}
+
+.km-android .km-switch-container
+{
+    position: relative;
+    border: none;
+    background: none;
+    .border-radius(0);
+    .box-shadow(none);
+}
+
 .km-android .km-switch-handle:before
 {
     content: "\a0";
-    width: 95%;
     padding: 0;
-    margin: auto;
-    height: 5px;
     left: 0;
-    position: absolute;
-    top: auto;
-    bottom: 0;
+    height: 5px;
+    position: relative;
+    width: 80%;
+    margin: 1.5em auto;
+    .border-radius(3px);
+    .box-shadow(inset 1px 1px 1px #999);
+    background: #bbb;
+}
+
+.km-android .km-switch-on:before
+{
+    background: #87DE13;
 }
 
 .km-meego .km-switch
 {
-    width: 3.8em;
-    width: 3.8rem;
-    -webkit-transform: translatez(0);
+    width: 4em;
+    width: 4rem;
+    padding: 0;
 }
 
 .km-meego .km-switch,
-.km-meego .km-switch-tip
+.km-meego .km-switch-wrapper,
+.km-meego .km-switch-container
 {
-    .border-radius(8px);
+    .border-radius(12px);
 }
 
-.km-meego .km-switch-handle
+.km-meego .km-switch-container
 {
-    width: 100%;
-    height: 100%;
-    background: #d2d2d2;
-    .border-radius(10px);
-    .box-shadow(inset 0 2px 3px 0 #aaa);
+    border: 0;
+    .box-shadow(0 0 2px 0 #999 inset);
 }
 
-.km-meego .km-switch-on
+.km-meego .km-switch-background
 {
-    background: linearGradient(top, rgb(58, 150, 227), rgb(16, 128, 221));
-    .box-shadow(inset 0 2px 3px 0 #4c7698);
+    margin-left: -3em;
+    background: linearGradient(top, rgba(0,0,0,0), rgba(255,255,222,.2) 10%, rgba(0,0,0,0)),
+                linearGradient(left, rgb(25, 133, 222), rgb(25, 133, 222) 45%, rgb(210, 210, 210) 55%, rgb(210, 210, 210));
 }
 
-.km-meego .km-switch:active .km-switch-tip
+.km-meego .km-switch:active .km-switch-handle
 {
     background: #d9d9d9;
 }
@@ -591,9 +612,14 @@ body
     display: none;
 }
 
-.km-meego .km-switch-tip
+.km-meego .km-switch-handle
 {
-    margin: .35em .4em;
+    width: 100%;
+    height: 100%;
+    background: #d2d2d2;
+    .border-radius(10px);
+//    .box-shadow(inset 0 2px 3px 0 #aaa);
+    margin: 0.18em 0.2em;
     width: 1.4em;
     height: 1.4em;
     width: 1.4rem;
@@ -604,7 +630,7 @@ body
     .box-shadow(0 2px 3px 0 #aaa);
 }
 
-.km-meego .km-switch-on .km-switch-tip
+.km-meego .km-switch-on .km-switch-handle
 {
     .box-shadow(0 2px 3px 0 #4c7698);
 }
@@ -651,6 +677,7 @@ body
 }
 
 .km-android .km-button:not([disabled]):active,
+.km-android .km-switch:not([disabled]):active,
 .km-android .km-radiogroup .km-state-active
 {
     border-color: #feb84b #fb9d09 #f29c0a;
