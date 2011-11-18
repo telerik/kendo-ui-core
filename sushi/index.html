@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html class="k-ios">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Kendo Sushi</title>
+        <link rel="stylesheet/less" type="text/css" href="../styles/mobile/layout.less" />
+        <script src="../styles/mobile/less.js"></script>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.model.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.history.js"></script>
+        <script src="../src/kendo.mobile.core.js"></script>
+        <script src="../src/kendo.mobile.button.js"></script>
+        <script src="../src/kendo.mobile.tabstrip.js"></script>
+        <script src="../src/kendo.mobile.listview.js"></script>
+        <script src="../src/kendo.mobile.navbar.js"></script>
+        <script src="../src/kendo.mobile.scroller.js"></script>
+        <script src="../src/kendo.mobile.application.js"></script>
+        <style>
+            .added {
+                float: right;
+                color: green;
+            }
+
+            #featured li {
+                height: 7rem;
+            }
+
+            #featured img {
+                float: left;
+                margin-right: 1rem;
+            }
+
+            #featured h2 {
+                font-size: 1.0rem;
+            }
+
+            #featured a {
+                float: right;
+                margin-top: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div data-kendo-role="view">
+            <header data-kendo-role="header">
+                <div data-kendo-role="navbar">
+                    <span data-kendo-role="view-title">Kendo Sushi!</span>
+                </div>
+            </header>
+
+            <div data-kendo-role="content">
+                <ul id="featured">
+                </ul>
+            </div>
+
+            <footer data-kendo-role="footer">
+                <div data-kendo-role="tabstrip">
+                    <a href="index.html">Home</a>
+                    <a href="#menu">Our menu</a>
+                    <a href="account.html">Account</a>
+                    <a href="#cart">Cart</a>
+                </div>
+            </footer>
+        </div>
+
+        <script id="menuTemplate" type="text/x-kendo-template">
+            # if (cart.indexOf(id) == -1) { #
+            <a data-kendo-role="button" data-kendo-name="add" href="\\#">Add to cart</a>
+            # } else { #
+            <span class="added">Item added</span>
+            # } #
+            <img src="images/${image}" />
+            <span class="price">&euro; ${price}</span>
+            <h2>${name}</h2>
+        </script>
+
+        <script>
+            window.cart = [];
+            var ds = new kendo.data.DataSource({
+                schema: { model: {id: "id"} },
+                transport: { read: { url: "featured.js", dataType: "json" } },
+            });
+
+            $("#featured").kendoMobileListView({dataSource: ds, template: $("#menuTemplate").text()});
+
+            var listView = $("#featured").data("kendoMobileListView");
+
+            listView.bind("click", function(e) {
+                if (e.buttonName === "add") {
+                    cart.push(e.dataItem.id);
+                    listView.refresh();
+                }
+            });
+
+            console.log(listView);
+        </script>
+    </body>
+</html>
