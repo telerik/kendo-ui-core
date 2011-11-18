@@ -125,6 +125,7 @@
             animation: {
                 open: {
                     effects: "slideIn:down",
+                    transition: !/chrome/i.test(navigator.userAgent),
                     duration: 200,
                     show: true
                 },
