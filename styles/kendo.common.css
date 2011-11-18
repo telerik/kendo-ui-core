@@ -43,6 +43,7 @@
 
 .k-widget,
 .k-input[type="text"],
+.k-input[type="number"],
 .k-picker-wrap .k-input,
 .k-button,
 .k-draghandle
@@ -186,9 +187,13 @@ html body .k-button-bare
 *+html .k-icon, *+html .k-sprite { text-indent: 0; }
 
 .k-arrow-up { background-position: 0 0; }
+.k-numerictextbox .k-arrow-up  { background-position: 0 -2px; }
 .k-arrow-down { background-position: 0 -32px; }
+.k-numerictextbox .k-arrow-down { background-position: 0 -35px; }
 .k-state-hover .k-arrow-up { background-position: -16px 0; }
+.k-numerictextbox .k-state-hover .k-arrow-up  { background-position: -16px -2px; }
 .k-state-hover .k-arrow-down { background-position: -16px -32px; }
+.k-numerictextbox .k-state-hover  .k-arrow-down { background-position: -16px -35px; }
 
 .k-arrow-first { background-position: 0 -112px; }
 .k-arrow-prev { background-position: 0 -48px; }
@@ -1613,11 +1618,6 @@ div.k-datetimepicker .k-select+.k-select
     right: 0;
 }
 
-.k-numeric-wrap .k-icon
-{
-    height: 11px;
-}
-
 .k-autocomplete .k-input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
@@ -1979,8 +1979,8 @@ span.k-numerictextbox
 
 .k-numerictextbox .k-select 
 {
-    padding-top:1px;
-    padding-bottom:1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
 
 .k-numerictextbox .k-link
@@ -1994,6 +1994,7 @@ span.k-numerictextbox
 
 .k-numerictextbox .k-icon
 {
+    height: 11px;
     vertical-align: top;
 }
 
