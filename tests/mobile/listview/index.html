@@ -156,6 +156,20 @@
 
                 link.trigger(kendo.support.mouseup);
             });
+
+            test("passes button name if a button is clicked", function() {
+                var dom = $('<ul><li><a href="#" data-kendo-name="foo">Foo</a></li></ul>'),
+                    link = dom.find("li>a");
+
+                var listView = new ListView(dom);
+
+                listView.bind("click", function(e) {
+                    equal(e.buttonName, "foo", "event passes the clicked button name");
+                });
+
+                link.trigger(kendo.support.mousedown);
+                link.trigger(kendo.support.mouseup);
+            });
         </script>
     </body>
 </html>

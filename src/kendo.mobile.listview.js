@@ -86,6 +86,8 @@
                 that.element.html(kendo.render(that.template, view));
             }
 
+            kendo.mobile.enhance(that.element);
+
             that._style();
         },
 
@@ -127,13 +129,15 @@
             var that = this,
                 dataItem,
                 item = $(e.currentTarget),
+                target = $(e.target),
+                buttonName = target.closest("[data-kendo-name]", item).data("kendoName"),
                 id = item.data("id");
 
             if (id) {
-                dataItem = that.dataSource.get(id);
+                dataItem = that.dataSource.get(id).data;
             }
 
-            if (that.trigger(CLICK, {target: $(e.target), item: item, dataItem: dataItem})) {
+            if (that.trigger(CLICK, {target: target, item: item, dataItem: dataItem, buttonName: buttonName})) {
                 e.preventDefault();
             }
         },
