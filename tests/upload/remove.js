@@ -66,6 +66,41 @@
         simulateRemoveClick();
     });
 
+    test("remove field is fileNames", 1, function() {
+        uploadInstance = createUpload();
+
+        simulateUpload();
+
+        $.mockjax(function(s) {
+            same(s.data["fileNames"], [ "first.txt" ]);
+            return {
+                url: "/removeAction",
+                responseTime: 0,
+                responseText: ""
+            };
+        });
+
+        simulateRemoveClick();
+    });
+
+    test("remove field can be changed", 1, function() {
+        uploadInstance = createUpload();
+        uploadInstance.options.async.removeField = "fileNames[]";
+
+        simulateUpload();
+
+        $.mockjax(function(s) {
+            same(s.data["fileNames[]"], [ "first.txt" ]);
+            return {
+                url: "/removeAction",
+                responseTime: 0,
+                responseText: ""
+            };
+        });
+
+        simulateRemoveClick();
+    });
+
     test("cancelling remove aborts remove operation", function() {
         uploadInstance = createUpload({ remove:
             function(e) {
