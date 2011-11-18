@@ -2447,14 +2447,14 @@ div.k-slider
 
 .k-slider-horizontal .k-draghandle
 {
-    top: -5px;
+    top: -4px;
     width: 13px;
     height: 14px;
 }
 
 .k-slider-vertical .k-draghandle
 {
-    left: -5px;
+    left: -4px;
     width: 14px;
     height: 13px;
 }
