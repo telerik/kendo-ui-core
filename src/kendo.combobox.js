@@ -213,7 +213,7 @@
                 }
             });
 
-            that.previous = that.value();
+            that._old = that.value();
 
             if (options.autoBind) {
                 that._select();
@@ -508,7 +508,7 @@
                     that.text(value);
                 }
 
-                that.previous = that._accessor();
+                that._old = that._accessor();
             } else {
                 return that._accessor();
             }
@@ -516,14 +516,14 @@
 
         _accept: function(li) {
             var that = this,
-                previous;
+                old;
 
             if (li) {
                 setTimeout( function () { that._focus(li); }, 0);
             } else {
-                previous = that.previous;
+                old = that._old;
                 that.value(that.text());
-                that.previous = previous;
+                that._old = old;
                 that._change();
             }
         },
@@ -666,7 +666,7 @@
                         that.select(that.options.index);
                     }
 
-                    that.previous = that.value();
+                    that._old = that.value();
                     dataSource.unbind(CHANGE, handler);
                 };
 

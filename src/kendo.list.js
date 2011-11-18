@@ -108,13 +108,13 @@
             var that = this,
                 value = that.value();
 
-            if (value !== that.previous) {
+            if (value !== that._old) {
                 that.trigger(CHANGE);
 
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
 
-                that.previous = value;
+                that._old = value;
             }
         },
 

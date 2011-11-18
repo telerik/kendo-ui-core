@@ -42,7 +42,7 @@
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
                 equal(dropdownlist.value(), 2);
                 equal(dropdownlist.text(), 2);
-                equal(dropdownlist.previous, 2);
+                equal(dropdownlist._old, 2);
            });
 
            test("value method should select first if no such value", function() {
@@ -54,7 +54,7 @@
                 ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
                 equal(dropdownlist.value(), "1");
                 equal(dropdownlist.text(), "foo");
-                equal(dropdownlist.previous, 1);
+                equal(dropdownlist._old, 1);
            });
 
             test("value method should select item with 0 value", function() {
@@ -65,7 +65,7 @@
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
                 equal(dropdownlist.value(), "0");
                 equal(dropdownlist.text(), 2);
-                equal(dropdownlist.previous, 0);
+                equal(dropdownlist._old, 0);
            });
 
            test("value(value) should call _accessor", function() {
@@ -75,7 +75,7 @@
 
                 dropdownlist.value(2);
 
-                equal(dropdownlist.calls("_accessor"), 2); //call select and set previous value
+                equal(dropdownlist.calls("_accessor"), 2); //call select and set _old value
             });
 
             test("value() should call _accessor", function() {
@@ -98,7 +98,7 @@
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
                 equal(dropdownlist.value(), "2");
                 equal(dropdownlist.text(), "2");
-                equal(dropdownlist.previous, 1);
+                equal(dropdownlist._old, 1);
             });
 
             test("select item with index -1 should not select anything", function() {
