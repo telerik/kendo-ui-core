@@ -375,7 +375,7 @@
                 value = that._value(data);
 
                 that.input[0].value = text;
-                that.element[0].value = value !== undefined ? value : text;
+                that._accessor(value != undefined ? value : text, idx);
             }
         },
 
@@ -455,7 +455,6 @@
 
                 if (!that._selected) {
                     that._custom(text);
-                    that.element.val(text);
                 }
 
                 input.value = text;
@@ -506,14 +505,12 @@
                 } else {
                     that.current(null);
                     that._custom(value);
-
-                    element.val(value);
                     that.text(value);
                 }
 
-                that.previous = element.val();
+                that.previous = that._accessor();
             } else {
-                return element.val();
+                return that._accessor();
             }
         },
 
@@ -549,6 +546,9 @@
                     element.append(custom);
                 }
                 custom.text(value);
+                custom[0].selected = true;
+            } else {
+                element.val(value);
             }
         },
 

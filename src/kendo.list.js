@@ -284,6 +284,28 @@
             this.popup.close();
         },
 
+        _accessor: function(value, idx) {
+            var element = this.element[0],
+                isSelect = element.nodeName == SELECT,
+                option;
+
+            if (value === undefined) {
+                if (isSelect) {
+                    option = element.options[element.selectedIndex];
+                    value = option.value || option.text;
+                } else {
+                    value = element.value;
+                }
+                return value;
+            } else {
+                if (isSelect) {
+                    element.selectedIndex = idx;
+                } else {
+                    element.value = value;
+                }
+            }
+        },
+
         _hideBusy: function () {
             var that = this;
             clearTimeout(that._busy);
@@ -429,9 +451,10 @@
         _options: function(data) {
             var that = this,
                 element = that.element,
+                selectedIndex = element[0].selectedIndex,
                 value = that.value(),
                 length = data.length,
-                options = [],
+                options = "",
                 option,
                 dataItem,
                 dataText,
@@ -444,7 +467,7 @@
                 dataText = that._text(dataItem);
                 dataValue = that._value(dataItem);
 
-                if (dataValue !== undefined) {
+                if (dataValue || dataValue === 0) {
                     option += ' value="' + dataValue + '"';
                 }
 
@@ -455,11 +478,11 @@
                 }
 
                 option += "</option>";
-                options.push(option);
+                options += option;
             }
 
-            element.html(options.join(""));
-            element.val(value);
+            element.html(options);
+            element[0].selectedIndex = selectedIndex;
         }
     });
 

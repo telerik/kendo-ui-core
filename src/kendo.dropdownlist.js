@@ -317,7 +317,6 @@
             that.previous = that.value();
 
             if (that._open) {
-                //that._open = false;
                 that.toggle(length);
             }
 
@@ -366,11 +365,12 @@
         */
         select: function(li) {
             var that = this,
-                idx,
-                text,
-                value,
+                element = that.element[0],
+                current = that._current,
                 data = that._data(),
-                current = that._current;
+                value,
+                text,
+                idx;
 
             li = that._get(li);
 
@@ -386,7 +386,7 @@
                     value = that._value(data);
 
                     that.text(text);
-                    that.element[0].value = value != undefined ? value : text;
+                    that._accessor(value != undefined ? value : text, idx);
                     that.current(li.addClass(SELECTED));
                 }
             }
@@ -434,9 +434,9 @@
                 idx = that._index(value);
 
                 that.select(idx > -1 ? idx : 0);
-                that.previous = element.val();
+                that.previous = that._accessor();
             } else {
-                return element.val();
+                return that._accessor();
             }
         },
 
