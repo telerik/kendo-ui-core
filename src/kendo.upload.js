@@ -75,7 +75,7 @@
      * @exampleTitle
      * 1. Create a simple HTML input of type "file" (no HTML form is required*)
      * @example
-     * <input name="files" id="files" type="file" />
+     * <input name="files[]" id="files" type="file" />
      *
      * @exampleTitle
      * 2. Initialize Upload and configure async upload end-points
@@ -85,6 +85,7 @@
      *     async: {
      *         saveUrl: "saveHandler.php",
      *         removeUrl: "removeHandler.php",
+     *         removeField: "fileNames[]",
      *         autoUpload: true
      *     }
      * });
@@ -191,6 +192,13 @@
          *     <dd>
          *         The HTTP verb to be used by the remove action.
          *         The default value is "DELETE".
+         *     </dd>
+         *     <dt>
+         *         removeField: (String)
+         *     </dt>
+         *     <dd>
+         *         The name of the form field submitted to the Remove URL.
+         *         The default value is fileNames.
          *     </dd>
          *     <dt>
          *         autoUpload: (Boolean)
@@ -792,8 +800,11 @@
         },
 
         _submitRemove: function(fileNames, data, onSuccess, onError) {
-            var params = $.extend(data, getAntiForgeryTokens());
-            params["fileNames"] = fileNames;
+            var upload = this,
+                removeField = upload.options.async.removeField || "fileNames",
+                params = $.extend(data, getAntiForgeryTokens());
+
+            params[removeField] = fileNames;
 
             $.ajax({
                   type: this.options.async.removeVerb,
