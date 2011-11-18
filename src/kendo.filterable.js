@@ -148,7 +148,7 @@
                 filter = filters[idx];
 
                 if (filter.value != "") {
-                    filter.value = field.converter(filter.value);
+                    filter.value = field.parse(filter.value);
                     result.filters.push(filter);
                 }
             }
