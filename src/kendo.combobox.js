@@ -123,6 +123,7 @@
         ATTRIBUTE = "disabled",
         CHANGE = "change",
         DISABLED = "k-state-disabled",
+        FOCUSED = "k-state-focused",
         SELECT = "select",
         STATE_SELECTED = "k-state-selected",
         HOVER = "k-state-hover",
@@ -198,7 +199,7 @@
             that.input.bind({
                 keydown: proxy(that._keydown, that),
                 focus: function() {
-                    that.input.parent().addClass("k-state-focused");
+                    that.input.parent().addClass(FOCUSED);
                 },
                 blur: function() {
                     that._bluring = setTimeout(function() {
@@ -208,7 +209,7 @@
 
                         clearTimeout(that._typing);
                         that._blur();
-                        that.input.parent().removeClass("k-state-focused");
+                        that.input.parent().removeClass(FOCUSED);
                     }, 100);
                 }
             });
@@ -593,7 +594,7 @@
 
             li = that._get(li);
 
-            if (li[0] && !li.hasClass("k-state-focused")) {
+            if (li[0] && !li.hasClass(FOCUSED)) {
                 that.current(li);
             }
 
