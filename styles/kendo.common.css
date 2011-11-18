@@ -2646,14 +2646,14 @@ div.k-slider
 .k-callout-n
 {
 	top: -7px;
-	left: 50%;
+	left: 49%;
 	margin-left: -5px;
 	background-position: -98px -181px;
 }
 
 .k-callout-w
 {
-	top: 50%;
+	top: 49%;
 	left: -7px;
 	margin-top: -5px;
 	background-position: -101px -226px;
@@ -2662,7 +2662,7 @@ div.k-slider
 .k-callout-s
 {
 	top: 100%;
-	left: 50%;
+	left: 49%;
 	margin-top: 2px;
 	margin-left: -5px;
 	background-position: -98px -213px;
@@ -2670,7 +2670,7 @@ div.k-slider
 
 .k-callout-e
 {
-	top: 50%;
+	top: 49%;
 	left: 100%;
 	margin-top: -5px;
 	margin-left: 2px;
