@@ -62,24 +62,24 @@ function splitScriptRegion(exampleHTML, base) {
         baseScripts = removeDuplicateResources(item, baseScripts);
     });
 
-    currentPageScripts = currentPageScripts.replace(scriptStripper1, '"js');
+    currentPageScripts = currentPageScripts.replace(scriptStripper1, '"shared/js');
     currentPageScripts = currentPageScripts.replace(scriptStripper2, rebaser);
-    baseScripts = baseScripts.replace(scriptStripper1, '"js');
+    baseScripts = baseScripts.replace(scriptStripper1, '"shared/js');
     baseScripts = baseScripts.replace(scriptStripper2, rebaser);
 
     allScripts = currentPageScripts + baseScripts;
 
-    allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/people\.js"><\/script>/g, "");
-    allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/kendo\.console\.js"><\/script>/g, "");
+    allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)shared\/js\/people\.js"><\/script>/g, "");
+    allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)shared\/js\/kendo\.console\.js"><\/script>/g, "");
 
     if (KENDOCDN) {
-        allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/people\.min\.js"><\/script>/g, "");
-        allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/kendo\.console\.min\.js"><\/script>/g, "");
+        allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)shared\/js\/people\.min\.js"><\/script>/g, "");
+        allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)shared\/js\/kendo\.console\.min\.js"><\/script>/g, "");
 
-        allScripts = allScripts.replace(/<script src="([..\/]*)js\/jquery\.min\.js"><\/script>/g, "");
-        allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)js\/kendo.(?!examples)(\w)+(\.\w+)*(\.min)*.js"><\/script>/g, "");
-        allScripts = allScripts.replace(/([..\/]*)js\/prettify\.min\.js/g, KENDOCDN + "/js/prettify.min.js");
-        allScripts = allScripts.replace(/([..\/]*)js\/kendo\.examples\.min\.js/g, KENDOCDN + "/js/kendo.examples.min.js");
+        allScripts = allScripts.replace(/<script src="([..\/]*)shared\/js\/jquery\.min\.js"><\/script>/g, "");
+        allScripts = allScripts.replace(/[\r\n]+\s+<script src="([..\/]*)shared\/js\/kendo.(?!examples)(\w)+(\.\w+)*(\.min)*.js"><\/script>/g, "");
+        allScripts = allScripts.replace(/([..\/]*)shared\/js\/prettify\.min\.js/g, KENDOCDN + "/js/prettify.min.js");
+        allScripts = allScripts.replace(/([..\/]*)shared\/js\/kendo\.examples\.min\.js/g, KENDOCDN + "/js/kendo.examples.min.js");
 
         allScripts = spaces + '<script src="' + KENDOCDN + '/js/kendo.all.min.js"></script>' + allScripts;
         allScripts = '<script src="' + jQueryCDN + '"></script>\r\n' + allScripts;
@@ -99,6 +99,8 @@ function splitCSSRegion(exampleHTML, base) {
 
     if (!currentPageCSS)
         return false;
+
+    baseCSS = baseCSS.replace(/href="(.*?)styles/g, 'href="shared/styles');
 
     currentPageCSS.trim().split(rowSeparator).forEach(function(item) {
         baseCSS = removeDuplicateResources(item, baseCSS);
@@ -272,7 +274,7 @@ function fixNewLines(text) {
 
 function processExample(file) {
     var exampleHTML = fs.readFileSync(file, "utf8"),
-        base = file === outputPath + "/index.html" ? "" : "../",
+        base = file === outputPath + "/index.html" ? "" : "../../",
         scriptRegion = splitScriptRegion(exampleHTML, base),
         cssRegion = splitCSSRegion(exampleHTML, base),
         component = componentFromFilename(file);
@@ -382,23 +384,23 @@ function build(origin, destination, kendoCDN) {
 
     console.log("copying resources...");
     kendoBuild.copyDirSyncRecursive(examplesLocation, outputPath);
-    kendoBuild.copyDirSyncRecursive(originJS, outputPath + "/js");
-    kendoBuild.copyDirSyncRecursive(originStyles, outputPath + "/styles", true, /\.(css|png|jpg|jpeg|gif)$/i);
+    kendoBuild.copyDirSyncRecursive(originJS, outputPath + "/shared/js");
+    kendoBuild.copyDirSyncRecursive(originStyles, outputPath + "/shared/styles", true, /\.(css|png|jpg|jpeg|gif)$/i);
     fs.unlinkSync(outputPath + "/template.html");
 
     if (!kendoCDN) {
-        fs.writeFileSync(outputPath + "/js/jquery.js", fs.readFileSync("src/jquery.js", "utf8"), "utf8");
+        fs.writeFileSync(outputPath + "/shared/js/jquery.js", fs.readFileSync("src/jquery.js", "utf8"), "utf8");
     } else {
         fs.writeFileSync(outputPath + "/web.config", fs.readFileSync("web.config", "utf8"), "utf8");
     }
 
     copyResources(
-        examplesLocation + "/styles/",
-        outputPath + "/styles/",
+        examplesLocation + "/shared/styles/",
+        outputPath + "/shared/styles/",
         function(data, file) {
             if (kendoCDN) {
                 console.log("minifiying " + file + "...");
-                fs.unlinkSync(outputPath + "/styles/" + file);
+                fs.unlinkSync(outputPath + "/shared/styles/" + file);
 
                 data = cssmin(data);
             }
@@ -406,14 +408,14 @@ function build(origin, destination, kendoCDN) {
             return data;
         }, /\.css$/);
 
-    var exampleScripts = ["kendo.examples.nav.js", "kendo.console.js", "people.js"];
+    var exampleScripts = ["kendo.console.js", "people.js"];
     copyResources(
-        examplesLocation + "/js/",
-        outputPath + "/js/",
+        examplesLocation + "/shared/js/",
+        outputPath + "/shared/js/",
         function(data, file) {
             if (file === "kendo.examples.js") {
                 exampleScripts.forEach(function(script) {
-                    data += ";" + kendoBuild.readText(examplesLocation + "/js/" + script);
+                    data += ";" + kendoBuild.readText(examplesLocation + "/shared/js/" + script);
                 });
             }
 
