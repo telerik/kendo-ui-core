@@ -31,7 +31,7 @@ $(document).ready(function() {
                 url: "@Url.Action("UpdateProducts", "Home")",
                 type: "POST"
             },
-            dialect: function(data, type) {
+            parameterMap: function(data, type) {
                 if (type == "update") {
                     var products = {};
 
