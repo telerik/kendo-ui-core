@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a5fc0158-6b44-422b-b037-b2bff1152758</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>62ac4259-4eb3-4490-b82d-40375b21fbdf</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>3e100908-5478-4f4e-93ce-14fffaa79bd5</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b84bc479-0108-42f7-b9c4-36058a43c1af</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -143,7 +143,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e96812a1-df59-4f5d-9a9c-5326d03f3493</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6e73bacf-5e11-4890-a8a0-3ed74cff9785</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -219,11 +219,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for textbox 'StartText' content 'Contains' '10:30 AM'.</d2p1:Description>
+      <d2p1:Description>Wait for textbox 'StartText' content 'Contains' '10:00 AM'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>187fecce-d07e-4174-9a1c-376d72d8913b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c7a902df-fd84-40ae-985e-0cdfbb89cdde</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -296,7 +296,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <CompareType>Contains</CompareType>
-        <ExpectedValue>10:30 AM</ExpectedValue>
+        <ExpectedValue>10:00 AM</ExpectedValue>
       </d2p1:Step>
       <d2p1:StepImageKey>PickTimeRangegldinkxa.bxw</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -309,7 +309,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>8ea67475-b741-4fe0-b9d0-4b5852b1fba6</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>314bb384-de35-4fb4-b4ce-60cf8f550b70</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -394,7 +394,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>07fda6d7-939d-4ae1-8d21-f5794a5b1d0e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a7a214de-2a26-4daa-bf58-8347ae501a17</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -470,11 +470,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for textbox 'StartText' content 'Contains' '10:30 AM'.</d2p1:Description>
+      <d2p1:Description>Wait for textbox 'StartText' content 'Contains' '10:00 AM'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>9d7247ce-02e5-4955-8320-16f435b8db78</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>fbf59624-f0d4-45e8-ba43-91e27c64c779</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -547,7 +547,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <CompareType>Contains</CompareType>
-        <ExpectedValue>10:30 AM</ExpectedValue>
+        <ExpectedValue>10:00 AM</ExpectedValue>
       </d2p1:Step>
       <d2p1:StepImageKey>PickTimeRangeszrrwxna.gfi</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -556,11 +556,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for textbox 'EndText' content 'Contains' '10:30 AM'.</d2p1:Description>
+      <d2p1:Description>Wait for textbox 'EndText' content 'Contains' '9:30 AM'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>5a580cc7-eb91-4307-bbb7-87d8ce65f19e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d586145d-8b6d-4cc3-90d3-1a619b11eaf9</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -633,7 +633,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <CompareType>Contains</CompareType>
-        <ExpectedValue>10:30 AM</ExpectedValue>
+        <ExpectedValue>9:30 AM</ExpectedValue>
       </d2p1:Step>
       <d2p1:StepImageKey>PickTimeRange5brfjhor.jdh</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -651,7 +651,9 @@
     <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.2.1108.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1108.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
   </CurrentReferences>
-  <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+    <d2p1:string>..\..\bin\Debug\KendoDemosTests.dll</d2p1:string>
+  </DeploymentItems>
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <HasCodeBehind>false</HasCodeBehind>
   <HtmlDescription />
@@ -680,12 +682,21 @@
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly />
-  <TestAssemblyPath />
+  <TestAssembly>KendoDemosTests.dll</TestAssembly>
+  <TestAssemblyPath>bin\Debug\</TestAssemblyPath>
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
   <UniqueId>5d2abf9b-1fb4-4265-a961-a1a03cc37bb6</UniqueId>
-  <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+    <d2p1:KeyValueOfstringstring>
+      <d2p1:Key>Timeout</d2p1:Key>
+      <d2p1:Value>0</d2p1:Value>
+    </d2p1:KeyValueOfstringstring>
+    <d2p1:KeyValueOfstringstring>
+      <d2p1:Key>ExecId</d2p1:Key>
+      <d2p1:Value>00000000-0000-0000-0000-000000000000</d2p1:Value>
+    </d2p1:KeyValueOfstringstring>
+  </VSProperties>
   <WpfAppPath i:nil="true" />
 </WebAiiTest>

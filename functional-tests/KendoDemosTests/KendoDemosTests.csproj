@@ -63,14 +63,26 @@
     <Compile Include="UIWidgets\AutoComplete\API\FindStartingWith.tstest.cs">
       <DependentUpon>FindStartingWith.tstest</DependentUpon>
     </Compile>
-    <Compile Include="UIWidgets\Chart\ChartEventsEvents.tstest.cs">
-      <DependentUpon>ChartEventsEvents.tstest</DependentUpon>
+    <Compile Include="UIWidgets\AutoComplete\BasicUsage\SelectOptionKeyboard.tstest.cs">
+      <DependentUpon>SelectOptionKeyboard.tstest</DependentUpon>
+    </Compile>
+    <Compile Include="UIWidgets\DatePicker\PickRange.tstest.cs">
+      <DependentUpon>PickRange.tstest</DependentUpon>
     </Compile>
     <Compile Include="UIWidgets\DropDown\API\DisableEnable.tstest.cs">
       <DependentUpon>DisableEnable.tstest</DependentUpon>
     </Compile>
     <Compile Include="UIWidgets\DropDown\API\OpenClose.tstest.cs">
       <DependentUpon>OpenClose.tstest</DependentUpon>
+    </Compile>
+    <Compile Include="UIWidgets\DropDown\BindingToRemoteData.tstest.cs">
+      <DependentUpon>BindingToRemoteData.tstest</DependentUpon>
+    </Compile>
+    <Compile Include="UIWidgets\DropDown\ChangeValueKeyboard.tstest.cs">
+      <DependentUpon>ChangeValueKeyboard.tstest</DependentUpon>
+    </Compile>
+    <Compile Include="UIWidgets\DropDown\CustomizingTemplates.tstest.cs">
+      <DependentUpon>CustomizingTemplates.tstest</DependentUpon>
     </Compile>
     <Compile Include="UIWidgets\Menu\API\Append.tstest.cs">
       <DependentUpon>Append.tstest</DependentUpon>
@@ -80,17 +92,61 @@
     </Compile>
     <None Include="Framework\DataSource\LocalDataOperationsIdDescending.tstest" />
     <None Include="Framework\DataSource\SharedDataSourceYearDescending.tstest" />
+    <None Include="Framework\DataSource\XMLBinding.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Framework\DragAndDrop\DragAndDropEvents.tstest" />
     <None Include="Framework\Templates\BasicUsage.tstest" />
+    <None Include="Framework\Validation\ValidateAmount.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Framework\Validation\ValidateEmail.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Framework\Validation\ValidateForm.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Framework\Validation\ValidateMovieCombo.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Framework\Validation\ValidateNameString.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Framework\Validation\ValidatePhone.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Settings.aiis" />
+    <None Include="UIWidgets\AutoComplete\API\FillValueKeyboard.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\AutoComplete\API\FindStartingWith.tstest" />
     <None Include="UIWidgets\AutoComplete\API\SetValue.tstest" />
     <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest" />
+    <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOptionKeyboard.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest" />
     <None Include="UIWidgets\AutoComplete\Events\AutoCompleteEvents.tstest" />
+    <None Include="UIWidgets\Calendar\CalendarAPINavigate.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Calendar\CalendarAPISetValue.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Calendar\CalendarEvents.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\Chart\BasicUsage.tstest" />
-    <None Include="UIWidgets\Chart\ChartEventsEvents.tstest" />
+    <None Include="UIWidgets\Chart\ChartEvents.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Chart\PieShowLabelsHover.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\ComboBox\API\EnableDisable.tstest" />
+    <None Include="UIWidgets\ComboBox\API\FilterContains.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\ComboBox\API\FilterEquals.tstest" />
     <None Include="UIWidgets\ComboBox\API\FilterEqualsNoResult.tstest" />
     <None Include="UIWidgets\ComboBox\API\FilterLoseFocusFilter.tstest" />
@@ -103,19 +159,74 @@
     <None Include="UIWidgets\ComboBox\BasicUsage\ChangeValueKeyboardSelect.tstest" />
     <None Include="UIWidgets\ComboBox\BasicUsage\RevertToBlank.tstest" />
     <None Include="UIWidgets\ComboBox\Events\ComboBoxEvents.tstest" />
+    <None Include="UIWidgets\DatePicker\DataPickerAPIOpenClose.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\DatePicker\DataPickerEventsChange.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\DatePicker\DataPickerEventsOpenClose.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\DatePicker\DatePickerAPIDisableEnable.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\DatePicker\DatePickerAPISetMaxDate.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\DatePicker\PickRange.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\DatePicker\SelectDate.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\DatePicker\SelectMonth.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\DropDown\API\DisableEnable.tstest" />
     <None Include="UIWidgets\DropDown\API\OpenClose.tstest" />
     <None Include="UIWidgets\DropDown\API\SelectByIndex.tstest" />
     <None Include="UIWidgets\DropDown\API\SelectByValue.tstest" />
     <None Include="UIWidgets\DropDown\API\SelectItemStartingWith.tstest" />
     <None Include="UIWidgets\DropDown\BindingToRemoteData.tstest" />
+    <None Include="UIWidgets\DropDown\ChangeValueKeyboard.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\DropDown\CustomizingTemplates.tstest" />
-    <None Include="UIWidgets\DropDown\Events.tstest" />
+    <None Include="UIWidgets\DropDown\DropDownEvents.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\Grid\API\ClearSelectedRow.tstest" />
     <None Include="UIWidgets\Grid\API\CollapseExpandGroup.tstest" />
     <None Include="UIWidgets\Grid\BasicUsage\GroupByAge.tstest" />
     <None Include="UIWidgets\Grid\BasicUsage\SortByFirstName.tstest" />
-    <None Include="UIWidgets\Grid\Events\Events.tstest" />
+    <None Include="UIWidgets\Grid\Details\ChangeTabCollapseExpand.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Details\ExpandManyChangeDetailTabs.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Details\PageMainGridPageDetails.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Events\GridEvents.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Hierarchy\CollapseExpandGridNode.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Hierarchy\PageGridExpandNode.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Hierarchy\PageInHierarchyGrid.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Hierarchy\SortGridCollapseNode.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Hierarchy\SortInHierarchyGrid.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\Grid\Selection\SelectMultipleCells.tstest" />
     <None Include="UIWidgets\Grid\Selection\SelectMultipleRows.tstest" />
     <None Include="UIWidgets\Grid\Selection\SelectRowSingle.tstest" />
@@ -126,7 +237,33 @@
     <None Include="UIWidgets\Menu\API\Remove.tstest" />
     <None Include="UIWidgets\Menu\BasicUsage\NotClosedOnClick.tstest" />
     <None Include="UIWidgets\Menu\BasicUsage\OpenClose.tstest" />
-    <None Include="UIWidgets\Menu\Events\Events.tstest" />
+    <None Include="UIWidgets\Menu\Events\AssertMenuOpenedOnHover.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Menu\Events\MenuEvents.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\NumericAPI.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\NumericEvents.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\NumericGlobalization.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\SetBlankValue.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\SetCurrency.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\SetNumericValue.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\SetPercentage.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\PanelBar\AjaxLoading\SwitchexpandedPanel.tstest" />
     <None Include="UIWidgets\PanelBar\API\Append.tstest" />
     <None Include="UIWidgets\PanelBar\API\EnableDisable.tstest" />
@@ -137,6 +274,9 @@
     <None Include="UIWidgets\PanelBar\BasicUsage\ExpandCollapse.tstest" />
     <None Include="UIWidgets\PanelBar\BasicUsage\ExpandTwoLevels.tstest" />
     <None Include="UIWidgets\PanelBar\Events\Events.tstest" />
+    <None Include="UIWidgets\PanelBar\Events\PanelBarEvents.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\Slider\API\DoubleSliderEnabledisable.tstest" />
     <None Include="UIWidgets\Slider\API\DoubleSliderSetValue.tstest" />
     <None Include="UIWidgets\Slider\API\SingleSliderEnableDisable.tstest" />
@@ -145,16 +285,40 @@
     <None Include="UIWidgets\Slider\Events\ChangeValueDoubleSlider.tstest" />
     <None Include="UIWidgets\Slider\Events\ChangeValueButtonsSingleSlider.tstest" />
     <None Include="UIWidgets\Splitter\ResizaAllPanels.tstest" />
+    <None Include="UIWidgets\Splitter\ResizePanels.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\TabStrip\API\Append.tstest" />
     <None Include="UIWidgets\TabStrip\API\EnableDisable.tstest" />
     <None Include="UIWidgets\TabStrip\API\RemoveTab.tstest" />
     <None Include="UIWidgets\TabStrip\Events\SwitchTabs.tstest" />
     <None Include="UIWidgets\TabStrip\API\InsertBeforeInsertAfter.tstest" />
+    <None Include="UIWidgets\TimePicker\PickTimeRange.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\TimePicker\SelectTime.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\TimePicker\TimePickerAPIEnableDisable.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\TimePicker\TimePickerAPIOpenClose.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\TimePicker\TimePickerAPISetValue.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\TimePicker\TimePickerEvents.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\TreeView\API\AppendNode.tstest" />
     <None Include="UIWidgets\TreeView\API\CollapseAllNodes.tstest" />
     <None Include="UIWidgets\TreeView\API\EnableDisable.tstest" />
     <None Include="UIWidgets\TreeView\API\ExpandAllNodes.tstest" />
     <None Include="UIWidgets\TreeView\API\Remove.tstest" />
+    <None Include="UIWidgets\TreeView\DragAndDrop\DragAndDropBetweenTrees.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\TreeView\Events\DragAndDropInvalid.tstest" />
     <None Include="UIWidgets\TreeView\Events\DragAndDropValid.tstest" />
     <None Include="UIWidgets\TreeView\Events\ExpandCollapseSelect.tstest" />
@@ -205,11 +369,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\Grid\Events\Events.resx">
-      <DependentUpon>Events.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="UIWidgets\Menu\BasicUsage\OpenClose.resx">
       <DependentUpon>OpenClose.tstest</DependentUpon>
     </None>
@@ -217,11 +376,6 @@
   <ItemGroup>
     <None Include="UIWidgets\Menu\BasicUsage\NotClosedOnClick.resx">
       <DependentUpon>NotClosedOnClick.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UIWidgets\Menu\Events\Events.resx">
-      <DependentUpon>Events.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -440,11 +594,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UIWidgets\DropDown\Events.resx">
-      <DependentUpon>Events.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="UIWidgets\DropDown\CustomizingTemplates.resx">
       <DependentUpon>CustomizingTemplates.tstest</DependentUpon>
     </None>
@@ -457,11 +606,6 @@
   <ItemGroup>
     <None Include="UIWidgets\Chart\BasicUsage.resx">
       <DependentUpon>BasicUsage.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UIWidgets\Chart\ChartEventsEvents.resx">
-      <DependentUpon>ChartEventsEvents.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -485,57 +629,215 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Framework\DataSource\LocalDataOperationsIdDescending.resx">
+    <None Include="Framework\DataSource\LocalDataOperationsIdDescending.resx">
       <DependentUpon>LocalDataOperationsIdDescending.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Framework\DataSource\SharedDataSourceYearDescending.resx">
+    </None>
+    <None Include="Framework\DataSource\SharedDataSourceYearDescending.resx">
       <DependentUpon>SharedDataSourceYearDescending.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Framework\DragAndDrop\DragAndDropEvents.resx">
+    </None>
+    <None Include="Framework\DragAndDrop\DragAndDropEvents.resx">
       <DependentUpon>DragAndDropEvents.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Framework\Templates\BasicUsage.resx">
+    </None>
+    <None Include="Framework\Templates\BasicUsage.resx">
       <DependentUpon>BasicUsage.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\ComboBox\API\EnableDisable.resx">
+    </None>
+    <None Include="UIWidgets\ComboBox\API\EnableDisable.resx">
       <DependentUpon>EnableDisable.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\ComboBox\API\FilterEquals.resx">
+    </None>
+    <None Include="UIWidgets\ComboBox\API\FilterEquals.resx">
       <DependentUpon>FilterEquals.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\ComboBox\API\FilterEqualsNoResult.resx">
+    </None>
+    <None Include="UIWidgets\ComboBox\API\FilterEqualsNoResult.resx">
       <DependentUpon>FilterEqualsNoResult.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\ComboBox\API\FilterLoseFocusFilter.resx">
+    </None>
+    <None Include="UIWidgets\ComboBox\API\FilterLoseFocusFilter.resx">
       <DependentUpon>FilterLoseFocusFilter.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\ComboBox\API\FilterNone.resx">
+    </None>
+    <None Include="UIWidgets\ComboBox\API\FilterNone.resx">
       <DependentUpon>FilterNone.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\ComboBox\API\FilterStartsWith.resx">
+    </None>
+    <None Include="UIWidgets\ComboBox\API\FilterStartsWith.resx">
       <DependentUpon>FilterStartsWith.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\ComboBox\API\OpenClose.resx">
+    </None>
+    <None Include="UIWidgets\ComboBox\API\OpenClose.resx">
       <DependentUpon>OpenClose.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\ComboBox\API\SelectByIndex.resx">
+    </None>
+    <None Include="UIWidgets\ComboBox\API\SelectByIndex.resx">
       <DependentUpon>SelectByIndex.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\ComboBox\API\SelectByValue.resx">
+    </None>
+    <None Include="UIWidgets\ComboBox\API\SelectByValue.resx">
       <DependentUpon>SelectByValue.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\ComboBox\BasicUsage\RevertToBlank.resx">
+    </None>
+    <None Include="UIWidgets\ComboBox\BasicUsage\RevertToBlank.resx">
       <DependentUpon>RevertToBlank.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\Grid\API\ClearSelectedRow.resx">
+    </None>
+    <None Include="UIWidgets\Grid\API\ClearSelectedRow.resx">
       <DependentUpon>ClearSelectedRow.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\Grid\API\CollapseExpandGroup.resx">
+    </None>
+    <None Include="UIWidgets\Grid\API\CollapseExpandGroup.resx">
       <DependentUpon>CollapseExpandGroup.tstest</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIWidgets\Grid\BasicUsage\SortByFirstName.resx">
+    </None>
+    <None Include="UIWidgets\Grid\BasicUsage\SortByFirstName.resx">
       <DependentUpon>SortByFirstName.tstest</DependentUpon>
-    </EmbeddedResource>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Framework\DataSource\XMLBinding.resx">
+      <DependentUpon>XMLBinding.tstest</DependentUpon>
+    </None>
+    <None Include="Framework\Validation\ValidateAmount.resx">
+      <DependentUpon>ValidateAmount.tstest</DependentUpon>
+    </None>
+    <None Include="Framework\Validation\ValidateEmail.resx">
+      <DependentUpon>ValidateEmail.tstest</DependentUpon>
+    </None>
+    <None Include="Framework\Validation\ValidateForm.resx">
+      <DependentUpon>ValidateForm.tstest</DependentUpon>
+    </None>
+    <None Include="Framework\Validation\ValidateMovieCombo.resx">
+      <DependentUpon>ValidateMovieCombo.tstest</DependentUpon>
+    </None>
+    <None Include="Framework\Validation\ValidateNameString.resx">
+      <DependentUpon>ValidateNameString.tstest</DependentUpon>
+    </None>
+    <None Include="Framework\Validation\ValidatePhone.resx">
+      <DependentUpon>ValidatePhone.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\AutoComplete\API\FillValueKeyboard.resx">
+      <DependentUpon>FillValueKeyboard.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOptionKeyboard.resx">
+      <DependentUpon>SelectOptionKeyboard.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Calendar\CalendarAPINavigate.resx">
+      <DependentUpon>CalendarAPINavigate.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Calendar\CalendarAPISetValue.resx">
+      <DependentUpon>CalendarAPISetValue.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Calendar\CalendarEvents.resx">
+      <DependentUpon>CalendarEvents.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Chart\ChartEvents.resx">
+      <DependentUpon>ChartEvents.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Chart\PieShowLabelsHover.resx">
+      <DependentUpon>PieShowLabelsHover.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\ComboBox\API\FilterContains.resx">
+      <DependentUpon>FilterContains.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\DatePicker\DataPickerAPIOpenClose.resx">
+      <DependentUpon>DataPickerAPIOpenClose.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\DatePicker\DataPickerEventsChange.resx">
+      <DependentUpon>DataPickerEventsChange.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\DatePicker\DataPickerEventsOpenClose.resx">
+      <DependentUpon>DataPickerEventsOpenClose.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\DatePicker\DatePickerAPIDisableEnable.resx">
+      <DependentUpon>DatePickerAPIDisableEnable.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\DatePicker\DatePickerAPISetMaxDate.resx">
+      <DependentUpon>DatePickerAPISetMaxDate.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\DatePicker\PickRange.resx">
+      <DependentUpon>PickRange.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\DatePicker\SelectDate.resx">
+      <DependentUpon>SelectDate.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\DatePicker\SelectMonth.resx">
+      <DependentUpon>SelectMonth.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\DropDown\ChangeValueKeyboard.resx">
+      <DependentUpon>ChangeValueKeyboard.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\DropDown\DropDownEvents.resx">
+      <DependentUpon>DropDownEvents.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Details\ChangeTabCollapseExpand.resx">
+      <DependentUpon>ChangeTabCollapseExpand.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Details\ExpandManyChangeDetailTabs.resx">
+      <DependentUpon>ExpandManyChangeDetailTabs.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Details\PageMainGridPageDetails.resx">
+      <DependentUpon>PageMainGridPageDetails.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Events\GridEvents.resx">
+      <DependentUpon>GridEvents.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Hierarchy\CollapseExpandGridNode.resx">
+      <DependentUpon>CollapseExpandGridNode.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Hierarchy\PageGridExpandNode.resx">
+      <DependentUpon>PageGridExpandNode.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Hierarchy\PageInHierarchyGrid.resx">
+      <DependentUpon>PageInHierarchyGrid.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Hierarchy\SortGridCollapseNode.resx">
+      <DependentUpon>SortGridCollapseNode.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Hierarchy\SortInHierarchyGrid.resx">
+      <DependentUpon>SortInHierarchyGrid.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Menu\Events\AssertMenuOpenedOnHover.resx">
+      <DependentUpon>AssertMenuOpenedOnHover.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Menu\Events\MenuEvents.resx">
+      <DependentUpon>MenuEvents.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\NumericAPI.resx">
+      <DependentUpon>NumericAPI.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\NumericEvents.resx">
+      <DependentUpon>NumericEvents.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\NumericGlobalization.resx">
+      <DependentUpon>NumericGlobalization.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\SetBlankValue.resx">
+      <DependentUpon>SetBlankValue.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\SetCurrency.resx">
+      <DependentUpon>SetCurrency.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\SetNumericValue.resx">
+      <DependentUpon>SetNumericValue.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\NumericTextBox\SetPercentage.resx">
+      <DependentUpon>SetPercentage.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\PanelBar\Events\PanelBarEvents.resx">
+      <DependentUpon>PanelBarEvents.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Splitter\ResizePanels.resx">
+      <DependentUpon>ResizePanels.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\TimePicker\PickTimeRange.resx">
+      <DependentUpon>PickTimeRange.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\TimePicker\SelectTime.resx">
+      <DependentUpon>SelectTime.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\TimePicker\TimePickerAPIEnableDisable.resx">
+      <DependentUpon>TimePickerAPIEnableDisable.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\TimePicker\TimePickerAPIOpenClose.resx">
+      <DependentUpon>TimePickerAPIOpenClose.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\TimePicker\TimePickerAPISetValue.resx">
+      <DependentUpon>TimePickerAPISetValue.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\TimePicker\TimePickerEvents.resx">
+      <DependentUpon>TimePickerEvents.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\TreeView\DragAndDrop\DragAndDropBetweenTrees.resx">
+      <DependentUpon>DragAndDropBetweenTrees.tstest</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

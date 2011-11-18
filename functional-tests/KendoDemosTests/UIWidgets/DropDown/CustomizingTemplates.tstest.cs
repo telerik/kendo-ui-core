@@ -14,6 +14,7 @@ using ArtOfTest.WebAii.Silverlight;
 using ArtOfTest.WebAii.Silverlight.UI;
 using Telerik.WebAii.Controls.Html;
 using Telerik.WebAii.Controls.Xaml;
+using Telerik.WebAii.Controls.Xaml.Wpf;
 
 namespace KendoDemosTests
 {
@@ -42,9 +43,9 @@ namespace KendoDemosTests
     //        ActiveBrowser.NavigateTo(Data["url"]);
     // }
     //
+        
 
-
-    public class ChartEvents : BaseWebAiiTest
+    public class CustomizingTemplates : BaseWebAiiTest
     {
         #region [ Dynamic Pages Reference ]
 
@@ -68,16 +69,39 @@ namespace KendoDemosTests
         }
 
         #endregion
+        public string displayText;
+        public string displayTextNew;
 
-        [CodedStep(@"Desktop command: LeftClick on K7ae62376398e87c8PathTag")]
-        public void Events_CodedStep()
+        [CodedStep(@"@\@\Wait for '250' msec.")]
+        public void CustomizingTemplates_CodedStep()
         {
 
-            // Desktop command: LeftClick on K7ae62376398e87c8PathTag
-            HtmlControl K7ae62376398e87c8PathTag = Pages.Events7.firstLinePathTag;
-            K7ae62376398e87c8PathTag.Wait.ForExists(10000);
-            K7ae62376398e87c8PathTag.ScrollToVisible(ArtOfTest.WebAii.Core.ScrollToVisibleType.ElementTopAtWindowTop);
-            K7ae62376398e87c8PathTag.MouseClick(ArtOfTest.WebAii.Core.MouseClickType.LeftClick, 0, 0, ArtOfTest.Common.OffsetReference.AbsoluteCenter);
+
+
+            // Wait for '250' msec.
+            System.Threading.Thread.Sleep(250);
+
+            displayText = Pages.BindingToRemoteData.ListItem.BaseElement.InnerText;
+            //MessageBox.Show(displayText, displayTextNew);
+
+
+
+
+
+        }
+
+        [CodedStep(@"@\Wait for '250' msec.")]
+        public void CustomizingTemplates_CodedStep1()
+        {
+
+
+            // Wait for '250' msec.
+            System.Threading.Thread.Sleep(250);
+            displayTextNew = Pages.BindingToRemoteData.ListItem.BaseElement.InnerText;
+            Pages.BindingToRemoteData.ListItem.BaseElement.Refresh();
+            Assert.AreNotEqual(displayText, displayTextNew);
+
+
 
         }
         
