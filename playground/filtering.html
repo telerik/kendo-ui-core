@@ -60,71 +60,17 @@
         </style>
     </head>
     <body>
-        <form>
-            <div>
-                <input type="number" value="1" name="OrderID[0].foo.bar" />
-                <input type="number" value="2" name="OrderID[1].foo.bar" />
-                <input type="number" value="3" name="OrderID[2][foo][bar]" />
-                <input type="number" value="3" name="firstName" />
-            </div>
-
-            <button>Filter</button>
-        </form>
-
-        <table id="table1">
+        <table id="table1" style="height:200px">
             <thead>
                 <tr>
-                    <th data-field="OrderID">Order ID</th>
                     <th data-field="ShipCity">Ship City</th>
+                    <th data-field="OrderID">Order ID</th>
                 </th>
             </thead>
         </table>
 
-
         <script>
-            function toObject(array) {
-                var o = {};
-
-                for (var idx = 0; idx < array.length; idx++) {
-                    var members = array[idx].name.split(/[\.\[\]]+/);
-
-                    members = $.grep(members, function(value) { return value });
-
-                    var value = array[idx].value;
-                    var intermediate = o;
-                    var parent = o;
-
-                    for (var member = 0; member < members.length - 1; member++) {
-                        var name = members[member];
-
-                        if (!isNaN(name)) {
-                            var prev = members[member-1];
-
-                            if (!$.isArray(parent[prev])) {
-                                intermediate = parent[prev] = [];
-                            }
-                        }
-
-                        parent = intermediate;
-
-                        intermediate = intermediate[name] = intermediate[name] || {};
-                    }
-
-                    intermediate[members[member]] = value;
-
-                }
-
-                return o;
-            }
-
             $(document).ready(function() {
-/*
-                $("button").click(function(e) {
-                    var array = $("form").serializeArray();
-                    console.log(toObject(array));
-                    return false;
-                }).click();
-*/
                 var dataSource = new kendo.data.DataSource({
                     type: "odata",
                     serverPaging: true,
@@ -132,10 +78,13 @@
                     pageSize: 10,
                     data: [ {
                         OrderID: 1,
-                        ShipCity: "Sofia"
+                        ShipCity: "foo"
                         },{
                         OrderID: 2,
-                        ShipCity: "Kazanlak"
+                        ShipCity: "bar"
+                    },{
+                        OrderID: 3,
+                        ShipCity: "boo"
                     } ],
                     schema: {
                         model: {
