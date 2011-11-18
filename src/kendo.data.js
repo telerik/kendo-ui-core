@@ -376,8 +376,8 @@
     }
 
     function normalizeFilter(expression) {
-        if (expression) {
-            if (isArray(expression) || !expression.logic) {
+        if (expression && !isEmptyObject(expression)) {
+            if (isArray(expression) || !expression.filters) {
                 expression = {
                     logic: "and",
                     filters: isArray(expression) ? expression : [expression]
@@ -452,7 +452,13 @@
                 result = [],
                 filter;
 
-            compiled = Query.filterExpr(normalizeFilter(expressions));
+            expressions = normalizeFilter(expressions);
+
+            if (!expressions || expressions.filters.length === 0) {
+                return this;
+            }
+
+            compiled = Query.filterExpr(expressions);
             fields = compiled.fields;
             operators = compiled.operators;
 

@@ -272,6 +272,22 @@
                 equal(result[2].name, "foo");
             });
 
+            test("filter with empty expression", function() {
+                var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
+
+                var result = new Query(data).filter(null).toArray();
+
+                equal(result.length, 3);
+            });
+
+            test("filter with empty filters", function() {
+                var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
+
+                var result = new Query(data).filter({ filters:[] }).toArray();
+
+                equal(result.length, 3);
+            });
+
             test("filter filters on numbers", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
 
