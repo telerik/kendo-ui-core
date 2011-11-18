@@ -141,7 +141,7 @@
                 ok(!changeWasCalled);
             });
 
-            test("set converts value to defined type", function() {
+            test("set parse value to defined type", function() {
                 var MyModel = kendo.data.Model.define({
                     fields: {
                         bar: { field: "bar", type: "number" }
@@ -286,14 +286,14 @@
             });
 
 
-            test("set with custom converter", function() {
+            test("set with custom parse", function() {
                 var wasCalled = false,
                 MyModel = kendo.data.Model.define({
                     fields: {
                         bar: {
                             field: "bar",
                             type: "string",
-                            converter: function(value) { wasCalled = true; }
+                            parse: function(value) { wasCalled = true; }
                         }
                     }
                 }), m = new MyModel();
@@ -302,13 +302,13 @@
                 ok(wasCalled);
             });
 
-            test("set with custom converter without type set", function() {
+            test("set with custom parse without type set", function() {
                 var wasCalled = false,
                 MyModel = kendo.data.Model.define({
                     fields: {
                         bar: {
                             field: "bar",
-                            converter: function(value) { wasCalled = true; }
+                            parse: function(value) { wasCalled = true; }
                         }
                     }
                 }), m = new MyModel();

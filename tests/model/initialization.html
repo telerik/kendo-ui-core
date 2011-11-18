@@ -379,7 +379,7 @@
                     }
                 });
 
-                ok($.isFunction(MyModel.fields.foo.converter));
+                ok($.isFunction(MyModel.fields.foo.parse));
             });
 
             test("custom type converter is assign to the field definition", function() {
@@ -388,14 +388,14 @@
                             foo: {
                                 field: "foo",
                                 type: "number",
-                                converter: function() {
+                                parse: function() {
                                     return true;
                                 }
                             }
                         }
                 });
 
-                ok(MyModel.fields.foo.converter());
+                ok(MyModel.fields.foo.parse());
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

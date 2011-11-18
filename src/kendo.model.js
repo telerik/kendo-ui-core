@@ -40,7 +40,7 @@
         return true;
     }
 
-    var converters = {
+    var parsers = {
         "number": function(value) {
             return kendo.parseFloat(value);
         },
@@ -108,19 +108,19 @@
             return this._accessor(field).get(this.data);
         },
 
-        _convert: function(field, value) {
+        _parse: function(field, value) {
             var that = this,
-                converter;
+                parse;
 
             field = (that.fields || {})[field];
             if (field) {
-                converter = field.converter;
-                if (!converter && field.type) {
-                    converter = converters[field.type.toLowerCase()];
+                parse = field.parse;
+                if (!parse && field.type) {
+                    parse = parsers[field.type.toLowerCase()];
                 }
             }
 
-            return converter ? converter(value) : value;
+            return parse ? parse(value) : value;
         },
 
         readOnly: function(field) {
@@ -148,7 +148,7 @@
 
                 accessor = that._accessor(field);
 
-                value = that._convert(field, values[field]);
+                value = that._parse(field, values[field]);
 
                 if (!equal(value, accessor.get(that.data))) {
                     accessor.set(that.data, value);
@@ -234,7 +234,7 @@
 
             proto.defaultItem[name] = value;
 
-            field.converter = field.converter || converters[type];
+            field.parse = field.parse || parsers[type];
         }
 
         id = function(data, value) {
