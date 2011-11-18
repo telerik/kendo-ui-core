@@ -190,7 +190,7 @@
                     keydown: proxy(that._keydown, that),
                     paste: proxy(that._search, that),
                     focus: function () {
-                        that.previous = that.value();
+                        that._old = that.value();
                         that.wrapper.addClass("k-state-focused");
                     },
                     blur: function () {
@@ -431,7 +431,7 @@
             clearTimeout(that._typing);
 
             that._typing = setTimeout(function () {
-                if (that.previous !== that.value()) {
+                if (that._old !== that.value()) {
                     that.search();
                 }
             }, that.options.delay);

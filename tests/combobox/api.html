@@ -41,7 +41,7 @@
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
                 equal(combobox.value(), "2");
                 equal(combobox.text(), "2");
-                equal(combobox.previous, "2");
+                equal(combobox._old, "2");
             });
 
             test("value method should select first if no such value", function() {
@@ -54,7 +54,7 @@
                 ok(!combobox._current);
                 equal(combobox.value(), "");
                 equal(combobox.text(), "");
-                equal(combobox.previous, "");
+                equal(combobox._old, "");
             });
 
             test("should select jquery object", function() {
@@ -80,7 +80,7 @@
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
                 equal(combobox.value(), "0");
                 equal(combobox.text(), 2);
-                equal(combobox.previous, 0);
+                equal(combobox._old, 0);
             });
 
             test("select item with index -1 should not select anything", function() {
@@ -159,7 +159,7 @@
                 combobox.value("custom value");
 
                 equal(select.val(), "custom value");
-                equal(combobox.previous, "custom value");
+                equal(combobox._old, "custom value");
             });
 
             test("text method should select item if exists", function() {
@@ -169,7 +169,7 @@
                 ok(combobox.ul.children().eq(0).hasClass(SELECTED));
                 equal(combobox.value(), "1");
                 equal(combobox.text(), "foo");
-                equal(combobox.previous, "");
+                equal(combobox._old, "");
             });
 
             test("text should set custom value", function() {
@@ -183,7 +183,7 @@
                 ok(!combobox._selected);
                 equal(combobox.value(), "custom");
                 equal(combobox.text(), "custom");
-                equal(combobox.previous, "");
+                equal(combobox._old, "");
             });
 
             test('enable(false) should disable combobox', function() {

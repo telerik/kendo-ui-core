@@ -75,7 +75,7 @@
                     }
                 });
                 combobox.value("bar");
-                combobox.previous = "foo";
+                combobox._old = "foo";
                 combobox._change();
                 ok(changeWasCalled);
             });
@@ -90,7 +90,7 @@
                 });
 
                 combobox.value("bar");
-                combobox.previous = "foo";
+                combobox._old = "foo";
                 combobox._change();
                 ok(changeWasCalled);
             });
@@ -118,18 +118,18 @@
                 });
 
 
-                combobox.previous = "foo";
+                combobox._old = "foo";
                 combobox.value("foo");
                 combobox._change();
                 ok(!changeWasCalled);
             });
 
-            test("previous is initialzed on refresh", function() {
+            test("_old is initialzed on refresh", function() {
                 var combobox = new ComboBox(input, {autoBind: false} );
 
                 input.val("foo");
                 combobox._select();
-                equal(combobox.previous, "foo");
+                equal(combobox._old, "foo");
             });
 
             test("select does not raise the change event", function() {
@@ -219,7 +219,7 @@
 
                 setTimeout(function() {
                     ok(changeWasCalled);
-                    equal(combobox.previous, "foo");
+                    equal(combobox._old, "foo");
                     equal(combobox.value(), "foo");
                     start();
                 }, 200);
@@ -245,7 +245,7 @@
                 setTimeout(function() {
                     ok(origCalled);
                     equal(combobox.value(), "custom value");
-                    equal(combobox.previous, "custom value");
+                    equal(combobox._old, "custom value");
                     start();
                 }, 200);
             });
@@ -260,7 +260,7 @@
                     dataSource: [{text: "foo"}, {text: "bar"}]
                 });
 
-                combobox.previous = "test";
+                combobox._old = "test";
                 combobox.input.focus().val("").press(kendo.keys.BACKSPACE).blur();
 
                 setTimeout(function() {
@@ -280,7 +280,7 @@
                     dataSource: [{text: "foo"}, {text: "bar"}]
                 });
 
-                combobox.previous = "";
+                combobox._old = "";
                 combobox._current = null;
                 combobox.input.focus().val("test").press(kendo.keys.ENTER);
 

@@ -314,7 +314,7 @@
                 that.select(options.index);
             }
 
-            that.previous = that.value();
+            that._old = that.value();
 
             if (that._open) {
                 that.toggle(length);
@@ -434,7 +434,7 @@
                 idx = that._index(value);
 
                 that.select(idx > -1 ? idx : 0);
-                that.previous = that._accessor();
+                that._old = that._accessor();
             } else {
                 return that._accessor();
             }
