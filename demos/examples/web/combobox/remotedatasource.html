@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Binding to remote data</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.hakama.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.data.odata.js"></script>
+        <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.combobox.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Binding to remote data</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+            Select a title from Netflix:
+            <input id="titles"/>
+
+            <script>
+                $(document).ready(function() {
+                    $("#titles").kendoComboBox({
+                        index: 0,
+                        dataTextField: "Name",
+                        dataValueField: "Id",
+                        filter: "contains",
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            serverPaging: true,
+                            pageSize: 20,
+                            transport: {
+                                read: "http://odata.netflix.com/Catalog/Titles"
+                            }
+                        }
+                    });
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
