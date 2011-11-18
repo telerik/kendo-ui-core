@@ -98,6 +98,7 @@
             that._isHorizontal = options.orientation == "horizontal";
             that._position = that._isHorizontal ? "left" : "bottom";
             that._size = that._isHorizontal ? "width" : "height";
+            that._outerSize = that._isHorizontal ? "outerWidth" : "outerHeight";
 
             options.tooltip.format = options.tooltip.enabled ? options.tooltip.format || "{0}" : "{0}";
 
@@ -773,7 +774,7 @@
                 index = math.ceil(selectionValue / options.smallStep),
                 selection = that._pixelSteps[index],
                 selectionDiv = that._trackDiv.find(".k-slider-selection"),
-                halfDragHanndle = parseInt(dragHandle[that._size]() / 2, 10) + 1;
+                halfDragHanndle = parseInt(dragHandle[that._outerSize]() / 2, 10) + 1;
 
             selectionDiv[that._size](selection);
             dragHandle.css(that._position, selection - halfDragHanndle);
@@ -791,7 +792,7 @@
         that.owner = owner;
         that.options = options;
         that.dragHandle = dragHandle;
-        that.dragHandleSize = dragHandle[owner._size]();
+        that.dragHandleSize = dragHandle[owner._outerSize]();
         that.type = type;
 
         that.draggable = new Draggable(dragHandle, {
@@ -955,10 +956,10 @@
             }
 
             if (owner._isHorizontal) {
-                positionLeft -= parseInt((that.tooltipDiv.outerWidth() - that.dragHandle[owner._size]()) / 2) + 1;
+                positionLeft -= parseInt((that.tooltipDiv.outerWidth() - that.dragHandle[owner._outerSize]()) / 2) + 1;
                 positionTop -= that.tooltipDiv.outerHeight() + callout.height() + margin;
             } else {
-                positionTop -= parseInt((that.tooltipDiv.outerHeight() - that.dragHandle[owner._size]()) / 2) + 1;
+                positionTop -= parseInt((that.tooltipDiv.outerHeight() - that.dragHandle[owner._outerSize]()) / 2) + 1;
                 positionLeft -= that.tooltipDiv.outerWidth() + callout.width() + margin;
             }
 
@@ -1284,7 +1285,7 @@
                 selectionEndIndex = math.ceil(selectionEndValue / options.smallStep),
                 selectionStart = that._pixelSteps[selectionStartIndex],
                 selectionEnd = that._pixelSteps[selectionEndIndex],
-                halfHandle = parseInt(dragHandles.eq(0)[that._size]() / 2, 10) + 1;
+                halfHandle = parseInt(dragHandles.eq(0)[that._outerSize]() / 2, 10) + 1;
 
             dragHandles.eq(0).css(that._position, selectionStart - halfHandle)
                        .end()
