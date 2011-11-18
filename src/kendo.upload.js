@@ -427,7 +427,8 @@
             multiple: true,
             showFileList: true,
             async: {
-                removeVerb: "POST"
+                removeVerb: "POST",
+                autoUpload: true
             },
             localization: {
                 "select": "Select...",
