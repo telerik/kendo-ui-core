@@ -20,15 +20,11 @@
                 handle: handleSelector,
                 animators: ".km-switch-handle,.km-switch-background",
                 effects: "slideTo",
-                duration: 200
+                duration: 150
             },
             android: {
                 effects: {},
                 duration: 0
-            },
-            meego: {
-                effects: "slideTo",
-                duration: 200
             }
         };
     switchAnimation = os.name in switchAnimation ? switchAnimation[os.name] : switchAnimation.all;
@@ -46,6 +42,54 @@
         return kendo.touchLocation(e)[axis] - element.offset()[axis == "x" ? "left" : "top"]
     }
 
+    function Axis(element, owner) {
+        var initial, width, halfWidth, constrain, location, handle, animators,
+            options = owner.options,
+            axis = options.axis;
+
+        element.bind(MOUSEDOWN, start);
+
+        function start(e) {
+            preventDefault(e);
+
+            initial = getAxisLocation(e, element, axis);
+            width = element.outerWidth();
+            handle = element.find(options.handle);
+            halfWidth = handle.outerWidth() / 2;
+            constrain = width - handle.outerWidth(true);
+            animators = extend({ animators: "animators" in switchAnimation ? element.find(switchAnimation.animators) : handle }, options).animators;
+            location = limitValue(initial, halfWidth, constrain + halfWidth);
+
+            $(document)
+                .bind(MOUSEMOVE, move)
+                .bind(MOUSEUP + " mouseout", stop); // Stop if leaving the simulator/screen
+        }
+
+        function move(e) {
+            var loc = getAxisLocation(e, element, axis);
+
+            location = limitValue(loc, halfWidth, constrain + halfWidth);
+            animators.css(TRANSFORMSTYLE, "translate" + axis + "(" + (location - halfWidth) + "px)"); // TODO: remove halfWidth
+        }
+
+        function stop(e) {
+            var snaps = options.snaps,
+                snapPart = width / (snaps - 1);
+
+            preventDefault(e);
+
+            if (Math.abs(initial - getAxisLocation(e, element, axis)) > 2) {
+                owner.trigger(SNAP, { snapTo: Math.round(location / snapPart) });
+            } else if (snaps == 2) {
+                owner.trigger(SNAP, { snapTo: !owner.input[0].checked });
+            }
+
+            $(document)
+                .unbind(MOUSEMOVE, move)
+                .unbind(MOUSEUP + " mouseout", stop);
+        }
+    }
+
     var SlidingHelper = ui.MobileWidget.extend({
         init: function (element, options) {
             var that = this;
@@ -54,70 +98,16 @@
 
             if (!that.options.handle) return;
 
-            that.axis = that.options.axis;
+            Axis(element, that);
 
-            that._startProxy = proxy(that._start, that);
-            that._moveProxy = proxy(that._move, that);
-            that._stopProxy = proxy(that._stop, that);
-
-            element
-                .bind(MOUSEDOWN, that._startProxy)
-                .bind(MOUSEDOWN, proxy(that._prepare, that));
             that.bind([ SNAP ], options);
         },
 
         options: {
             axis: "x",
             snaps: 2
-        },
-
-        _start: function (e) {
-            var that = this,
-                handle = $(that.options.handle);
-
-            preventDefault(e);
-
-            extend(that, {
-                initial: getAxisLocation(e, that.element, that.axis),
-                width: that.element.outerWidth(),
-                halfWidth: handle.outerWidth() / 2,
-                animators: extend({ animators: that.animators }, that.options).animators
-            });
-
-            that.constrain = that.width - handle.outerWidth(true);
-            that.location = limitValue(that.initial, that.halfWidth, that.constrain + that.halfWidth);
-
-            $(document)
-                .bind(MOUSEMOVE, that._moveProxy)
-                .bind(MOUSEUP, that._stopProxy);
-        },
-
-        _move: function (e) {
-            var that = this,
-                axis = that.axis,
-                location = getAxisLocation(e, that.element, that.axis);
-
-            that.location = limitValue(location, that.halfWidth, that.constrain + that.halfWidth);
-            that.animators.css(TRANSFORMSTYLE, "translate" + axis + "(" + (that.location - that.halfWidth) + "px)"); // TODO: remove halfWidth
-        },
-
-        _stop: function (e) {
-            var that = this,
-                snaps = that.options.snaps,
-                snapPart = that.width / (snaps - 1);
-
-            preventDefault(e);
-
-            if (Math.abs(that.initial - getAxisLocation(e, that.element, that.axis)) > 2) {
-                that.trigger(SNAP, { snapTo: Math.round(that.location / snapPart) });
-            } else if (snaps == 2) {
-                that.trigger(SNAP, { snapTo: !that.input[0].checked });
-            }
-
-            $(document)
-                .unbind(MOUSEMOVE, that._moveProxy)
-                .unbind(MOUSEUP, that._stopProxy);
         }
+
     });
 
     var Toggle = SlidingHelper.extend({
@@ -189,11 +179,8 @@
 
             Toggle.fn.init.call(that, element, extend(options, { handle: handleSelector }));
 
-            element = that.element;
-            options = that.options;
-
             that._wrap();
-            that.enable(options.enable);
+            that.enable(that.options.enable);
 
             that.bind(SNAP, proxy(that._snap, that));
         },
@@ -210,15 +197,8 @@
             var that = this;
 
             if (that.options.enable) {
-                that._prepare();
                 that._snap({ snapTo: that.input[0].checked })
             }
-        },
-
-        _prepare: function() {
-            this.handle
-                .removeClass("km-switch-on")
-                .removeClass("km-switch-off");
         },
 
         _snap: function (e) {
@@ -226,10 +206,14 @@
                 handle = that.handle,
                 checked = (e.snapTo == 1);
 
-            handle.addClass("km-switch-" + (checked ? "on" : "off"));
+            handle
+                .removeClass("km-switch-on")
+                .removeClass("km-switch-off")
+                .addClass("km-switch-" + (checked ? "on" : "off"));
 
             if (!handle.data("animating")) {
                 that.animators
+                    .filter(":visible")
                     .kendoStop(true, true)
                     .kendoAnimate(extend({
                         complete: function (element) {
