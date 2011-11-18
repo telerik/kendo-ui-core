@@ -125,36 +125,6 @@ var categories = {
             ]
         },
         {
-            text: "Chart",
-            spriteCssClass: "chartIcon",
-            items: [
-                {
-                    text: "Basic usage",
-                    url: "chart/index.html"
-                },
-                {
-                    text: "Pie Chart",
-                    url: "chart/pie-chart.html"
-                },
-                {
-                    text: "Binding to local data",
-                    url: "chart/local-data.html"
-                },
-                {
-                    text: "Binding to remote data",
-                    url: "chart/remote-data.html"
-                },
-                {
-                    text: "Events",
-                    url: "chart/events.html"
-                },
-                {
-                    text: "API",
-                    url: "chart/api.html"
-                }
-            ]
-        },
-        {
             text: "ComboBox",
             spriteCssClass: "comboBoxIcon",
             items: [
@@ -529,17 +499,5 @@ var categories = {
                 }
             ]
         }
-    ],
-    themebuilder: {
-        text: "ThemeBuilder",
-        item: {
-            url: "themebuilder/index.html"
-        }
-    },
-    overview: {
-        text: "Overview",
-        item: {
-            url: "index.html"
-        }
-    }
+    ]
 };
