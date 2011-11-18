@@ -1600,10 +1600,8 @@ div.k-datetimepicker .k-select+.k-select
 .k-selectbox .k-input
 {
     display: block;
-    min-height: 1.2em;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0.15em 0 0.15em 3px;
 }
 
 .k-picker-wrap .k-select,
@@ -1623,10 +1621,11 @@ div.k-datetimepicker .k-select+.k-select
 .k-autocomplete .k-input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
-.k-combobox .k-input
+.k-dropdown-wrap .k-input,
+.k-selectbox .k-input
 {
-    min-height: 1.3em;
-    line-height: 1.3em;
+    min-height: 1.31em;
+    line-height: 1.31em;
     padding: 0.18em 0;
     text-indent: 4px;
     border: 0;
