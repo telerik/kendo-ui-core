@@ -810,6 +810,7 @@
             var that = this,
                 owner = that.owner,
                 options = that.options;
+
             if (!options.enabled) {
                 e.preventDefault();
                 return false;
@@ -1163,7 +1164,7 @@
                 .unbind(KEY_DOWN)
                 .bind(KEY_DOWN, false);
 
-            that.enabled = false;
+            that.options.enabled = false;
         },
 
         _keydown: function (e, handle) {
