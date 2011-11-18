@@ -167,7 +167,7 @@
                 listView = new ListView(dom, {dataSource: dataSource});
 
                 listView.bind("click", function(e) {
-                    equal(e.dataItem.data.foo, model.foo, "event passes the model as data item");
+                    equal(e.dataItem.foo, model.foo, "event passes the model as data item");
                 });
 
                 link = dom.find("li");
