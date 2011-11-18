@@ -41,7 +41,7 @@
     <article data-kendo-role="view">
         <header data-kendo-role="header">
             <div class="km-toolbar">
-                <button style="float: right"><span>About</span></button>
+                <button style="float: right">About</button>
             </div>
         </header>
 
@@ -50,6 +50,7 @@
                 <li>Albania<input type="checkbox" data-kendo-role="switch" /></li>
                 <li>Australia<input type="checkbox" data-kendo-role="switch" /></li>
             </ul>
+            <span class="km-slider" style="float: right"></span>
             <ul data-kendo-role="listview" data-kendo-style="inset">
                 <li>Albania</li>
                 <li>Australia</li>
@@ -133,7 +134,8 @@
             button = $("#button, header button").kendoMobileButton({ click: onClick }).data("kendoMobileButton"),
             radio = $("#radio").kendoMobileRadioGroup({ enable: false }).data("kendoMobileRadioGroup"),
             radiogroup = $("#radioz").kendoMobileRadioGroup({ toggle: onToggle }).data("kendoMobileRadioGroup"),
-            tabStrip = $("#tabstrip").data("kendoMobileTabstrip");
+            tabStrip = $("#tabstrip").kendoMobileTabstrip().data("kendoMobileTabstrip"),
+            slider = $(".km-slider").kendoMobileSlider().data("kendoMobileSlider");
 
         $(document).ready(function () {
             var listviews = $("[data-kendo-role=listview]");

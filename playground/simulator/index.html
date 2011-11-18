@@ -180,7 +180,7 @@
             deviceLink.remove();
 
             var os = frame.contentWindow.kendo.support.mobileOS = detectOS(mobiles[devicename].ua);
-            frame.contentWindow.document.documentElement.className = "km-" + (!os ? "ios" : os.name);
+            foreignDocument.documentElement.className = "km-" + (!os ? "ios" : os.name);
             setTimeout( function () {
                 frame.onload();
             }, 150 );
@@ -201,17 +201,21 @@
         }
 
         function fixFF() {
+            var doc = $(foreignDocument);
+
             if (kendo.support.transitions.prefix == "Moz") { // FlexBox is broken in FF.
-                var foreignDocument = $(frame.contentWindow.document),
-                    kendoContent = foreignDocument.find(".km-content");
+                var kendoContent = doc.find(".km-content");
 
                 if (kendoContent.length) {
-                    var head = foreignDocument.find("head")/*,
+                    var head = doc.find("head")/*,
                         headerHeight = foreignDocument.find(".km-header").outerHeight(),
                         footerHeight = foreignDocument.find(".km-footer").outerHeight()*/;
 
                     $("<style type='text/css' id='ffFlexBoxFix'>.km-view{position:relative}</style>").appendTo(head); //TODO: Have to find a better way since this will break transitions.
                 }
+            }
+            if (kendo.support.transitions.prefix == "webkit") {
+                doc.add(foreignDocument.body).css("-webkit-text-size-adjust", "auto");
             }
         }
 
@@ -228,13 +232,14 @@
                 ]);
 
         var frame = $("#simulator")[0],
-            addressBar = $("#address-bar");
+            addressBar = $("#address-bar"),
+            foreignDocument = frame.contentWindow.document;
 
         frame.onload = function () {
             if (frame.src != addressBar.val())
                 addressBar.val(frame.src);
 
-            $(frame.contentWindow.document.documentElement).css({
+            $(foreignDocument.documentElement).css({
                 fontSize: $(".device-skin").css("font-size")
             });
 

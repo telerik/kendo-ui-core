@@ -17,8 +17,8 @@
         proxy = $.proxy,
         switchAnimation = {
             all: {
-                handle: handleSelector,
-                animators: ".km-switch-handle,.km-switch-background",
+                manimator: ".km-switch-background",
+                animator: handleSelector,
                 effects: "slideTo",
                 duration: 150
             },
@@ -38,55 +38,57 @@
         return Math.max( minLimit, Math.min( maxLimit, value));
     }
 
-    function getAxisLocation(e, element, axis) {
-        return kendo.touchLocation(e)[axis] - element.offset()[axis == "x" ? "left" : "top"]
-    }
-
     function Axis(element, owner) {
-        var initial, width, halfWidth, constrain, location, handle, animators,
+        var initial, width, halfWidth, constrain, location, handle, animator, manimator, margin,
             options = owner.options,
-            axis = options.axis;
+            axis = options.axis,
+            axisProperty = axis == "x" ? "left" : "top";
 
         element.bind(MOUSEDOWN, start);
+
+        function getAxisLocation(e, element) {
+            return kendo.touchLocation(e)[axis] - element.offset()[axisProperty];
+        }
 
         function start(e) {
             preventDefault(e);
 
-            initial = getAxisLocation(e, element, axis);
+            initial = getAxisLocation(e, element);
             width = element.outerWidth();
             handle = element.find(options.handle);
             halfWidth = handle.outerWidth() / 2;
             constrain = width - handle.outerWidth(true);
-            animators = extend({ animators: "animators" in switchAnimation ? element.find(switchAnimation.animators) : handle }, options).animators;
+            animator = element.find(extend({ animator: "animator" in switchAnimation ? switchAnimation.animator : options.handle }, options).animator);
+            manimator = element.find(extend({ manimator: switchAnimation.manimator }, options).manimator);
             location = limitValue(initial, halfWidth, constrain + halfWidth);
+            margin = manimator.data("margin");
 
             $(document)
                 .bind(MOUSEMOVE, move)
-                .bind(MOUSEUP + " mouseout", stop); // Stop if leaving the simulator/screen
+                .bind(MOUSEUP + " mouseleave", stop); // Stop if leaving the simulator/screen
         }
 
         function move(e) {
-            var loc = getAxisLocation(e, element, axis);
-
-            location = limitValue(loc, halfWidth, constrain + halfWidth);
-            animators.css(TRANSFORMSTYLE, "translate" + axis + "(" + (location - halfWidth) + "px)"); // TODO: remove halfWidth
+            location = limitValue(getAxisLocation(e, element), halfWidth, constrain + halfWidth);
+            animator.css(TRANSFORMSTYLE, "translate" + axis + "(" + (location - halfWidth) + "px)"); // TODO: remove halfWidth
+            manimator.css("margin-" + axisProperty, margin + location - halfWidth);
         }
 
         function stop(e) {
-            var snaps = options.snaps,
-                snapPart = width / (snaps - 1);
+            var max = options.max,
+                snapPart = width / (max - 1);
 
             preventDefault(e);
 
-            if (Math.abs(initial - getAxisLocation(e, element, axis)) > 2) {
+            if (Math.abs(initial - getAxisLocation(e, element)) > 2) {
                 owner.trigger(SNAP, { snapTo: Math.round(location / snapPart) });
-            } else if (snaps == 2) {
+            } else if (max == 2) {
                 owner.trigger(SNAP, { snapTo: !owner.input[0].checked });
             }
 
             $(document)
                 .unbind(MOUSEMOVE, move)
-                .unbind(MOUSEUP + " mouseout", stop);
+                .unbind(MOUSEUP + " mouseleave", stop);
         }
     }
 
@@ -98,14 +100,14 @@
 
             if (!that.options.handle) return;
 
-            Axis(element, that);
+            Axis(that.element, that);
 
             that.bind([ SNAP ], options);
         },
 
         options: {
             axis: "x",
-            snaps: 2
+            max: 2
         }
 
     });
@@ -156,7 +158,7 @@
                 input = that.input,
                 checked = input[0].checked;
 
-            if (toggle != checked && !this.handle.data("animating") && that.options.enable) {
+            if (toggle != checked && !that.handle.data("animating") && that.options.enable) {
                 input[0].checked = typeof(toggle) === "boolean" ? toggle : !checked;
                 input.trigger("change");
             }
@@ -187,10 +189,9 @@
 
         options: {
             name: "MobileSwitch",
-            enable: true
-        },
-
-        refresh: function() {
+            enable: true,
+            manimator: ".km-switch-background",
+            animator: handleSelector
         },
 
         _toggle: function() {
@@ -204,7 +205,7 @@
         _snap: function (e) {
             var that = this,
                 handle = that.handle,
-                checked = (e.snapTo == 1);
+                checked = (e.snapTo == 1), distance;
 
             handle
                 .removeClass("km-switch-on")
@@ -212,18 +213,20 @@
                 .addClass("km-switch-" + (checked ? "on" : "off"));
 
             if (!handle.data("animating")) {
-                that.animators
-                    .filter(":visible")
+                distance = e.snapTo * (that.element.outerWidth() - that.handle.outerWidth(true));
+
+                that.marginator
+                    .kendoStop(true, true)
+                    .kendoAnimate({ effects: "slideMargin", offset: distance, axis: "left", duration: 150 });
+                that.animator
                     .kendoStop(true, true)
                     .kendoAnimate(extend({
-                        complete: function (element) {
-                            if (element.hasClass(handleSelector.substr(1))) {
-                                that.input[0].checked = checked;
-                                that.trigger(TOGGLE, { checked: checked });
-                            }
+                        complete: function () {
+                            that.input[0].checked = checked;
+                            that.trigger(TOGGLE, { checked: checked });
                         }
                     }, switchAnimation, {
-                        offset: e.snapTo * (that.element.outerWidth() - that.handle.outerWidth(true)) + "px,0"
+                        offset: distance + "px,0"
                     }));
             }
         },
@@ -250,8 +253,9 @@
                                     .children(handleSelector);
             }
 
-            that.wrapper = handle.parent().before("<span class='km-switch-wrapper'><span class='km-switch-background'></span></span>");
-            that.animators = "animators" in switchAnimation ? that.element.find(switchAnimation.animators) : handle;
+            that.marginator = handle.parent().before("<span class='km-switch-wrapper'><span class='km-switch-background'></span></span>").find(switchAnimation.manimator);
+            that.animator = "animator" in switchAnimation ? that.element.find(switchAnimation.animator) : handle;
+            that.marginator.data("margin", parseInt(that.marginator.css("margin-left"), 10));
 
             that.input = input;
             that.handle = handle;
@@ -272,19 +276,13 @@
 
             Toggle.fn.init.call(that, element, options);
 
-            element = that.element;
-            options = that.options;
-
             that._wrap();
-            that.enable(options.enable);
+            that.enable(that.options.enable);
         },
 
         options: {
             name: "MobileCheckBox",
             enable: true
-        },
-
-        refresh: function() {
         },
 
         _toggle: function() {
@@ -315,4 +313,50 @@
     });
 
     ui.plugin(MobileCheckBox);
+
+    var MobileSlider = SlidingHelper.extend({
+        init: function(element, options) {
+            var that = this;
+
+            SlidingHelper.fn.init.call(that, element, extend(options, { handle: handleSelector }));
+
+            that._wrap();
+        },
+
+        options: {
+            name: "MobileSlider",
+            enable: true,
+            max: 100,
+            manimator: ".km-slider-background",
+            animator: ".km-slider-handle"
+        },
+
+        _wrap: function() {
+            var that = this, handle,
+                element = that.element;
+
+            if (that.element.is("span"))
+                that.element.addClass("km-slider");
+
+            if (!element.data("kendo-role"))
+                element.data("kendo-role", "slider");
+            else
+                $("<span data-kendo-role='slider' class='km-slider'><span class='km-slider-handle'></span></span>").appendTo(that.element);
+
+            handle = element.find(".km-slider-handle");
+
+            if (!handle.length) {
+                handle = $("<span class='km-slider-container'><span class='km-slider-handle' /></span>")
+                                    .appendTo(element)
+                                    .children(".km-slider-handle");
+            }
+
+            var marginator = handle.parent().before("<span class='km-slider-wrapper'><span class='km-slider-background'></span></span>").find(that.options.manimator);
+            marginator.data("margin", parseInt(marginator.css("margin-left"), 10));
+            that.handle = handle;
+        }
+
+    });
+
+    ui.plugin(MobileSlider);
 })(jQuery);
