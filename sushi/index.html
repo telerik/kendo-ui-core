@@ -20,8 +20,8 @@
         <script src="../src/kendo.mobile.application.js"></script>
         <style>
             .added {
-                float: right;
                 color: green;
+                font-size: .8rem;
             }
 
             #featured li {
@@ -35,6 +35,7 @@
 
             #featured h2 {
                 font-size: 1.0rem;
+                margin: 0;
             }
 
             #featured a {
@@ -67,14 +68,13 @@
         </div>
 
         <script id="menuTemplate" type="text/x-kendo-template">
-            # if (cart.indexOf(id) == -1) { #
             <a data-kendo-role="button" data-kendo-name="add" href="\\#">Add to cart</a>
-            # } else { #
-            <span class="added">Item added</span>
-            # } #
             <img src="images/${image}" />
             <span class="price">&euro; ${price}</span>
             <h2>${name}</h2>
+            # if (cart.indexOf(id) >= 0) { #
+                <span class="added">Item added in your cart</span>
+            # } #
         </script>
 
         <script>
@@ -94,8 +94,6 @@
                     listView.refresh();
                 }
             });
-
-            console.log(listView);
         </script>
     </body>
 </html>
