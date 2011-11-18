@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Events</title>
+        <!-- css -->
+        <link href="../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../styles/kendo.hakama.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../js/kendo.console.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.chart.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Events</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    This example shows how to attach events to a kendoChart and
+                    how they are fired and triggered.
+                </p>
+            </div>
+            <div style="margin-right: 220px;">
+                <div id="chart" style="width:550px; height:450px;margin: 0 auto;"></div>
+            </div>
+            <script>
+                function createChart() {
+                    $("#chart").kendoChart({
+                        theme: $(document).data("kendoSkin") || "hakama",
+                        title: {
+                            text: "Internet Users"
+                        },
+                        legend: {
+                            position: "bottom"
+                        },
+                        seriesDefaults: {
+                            type: "bar",
+                            labels: {
+                                visible: true,
+                                position: "insideEnd",
+                                format: "{0}%"
+                            }
+                        },
+                        series: [{
+                            name: "World",
+                            data: [15.7, 16.7, 20, 23.5, 26.6]
+                        }, {
+                            name: "United States",
+                            data: [67.96, 68.93, 75, 74, 78]
+                        }],
+                        valueAxis: {
+                            labels: {
+                                format: "{0}%"
+                            }
+                        },
+                        categoryAxis: {
+                            categories: [2005, 2006, 2007, 2008, 2009]
+                        },
+                        seriesClick: onSeriesClick
+                    });
+                }
+
+                function onSeriesClick(e) {
+                    kendoConsole.log(kendo.format("Series click :: {0} ({1}): {2}%", e.series.name, e.category, e.value));
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        createChart();
+
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                    }, 400);
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        createChart();
+                    });
+                });
+            </script>
+        </div>
+        <div class="console"></div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>

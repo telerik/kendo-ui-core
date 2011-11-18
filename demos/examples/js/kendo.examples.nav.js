@@ -530,6 +530,12 @@ var categories = {
             ]
         }
     ],
+    themebuilder: {
+        text: "ThemeBuilder",
+        item: {
+            url: "themebuilder/index.html"
+        }
+    },
     overview: {
         text: "Overview",
         item: {
