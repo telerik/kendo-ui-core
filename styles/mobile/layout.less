@@ -233,7 +233,9 @@ body
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     display: inline-block;
     padding: .4em .7em;
+    padding: .4rem .7rem;
     margin: .1em;
+    margin: .1rem;
     color: #FFF;
     overflow: visible;
     .border-radius(5pt);
@@ -273,7 +275,8 @@ body
 .km-ios,
 .km-ios .km-button
 {
-    font: normal .95em Helvetica Neue, sans-serif;
+    font: normal .95em HelveticaNeue, sans-serif;
+    font-size: .95rem;
 }
 
 .km-ios .km-button:active
@@ -1398,6 +1401,33 @@ input[type=checkbox]
 .km-meego .km-tabstrip .km-button:nth-child(4) .km-icon
 {
     background-position: 100.5% 50%;
+}
+
+/* Slider */
+
+.km-slider
+{
+    margin: .5em auto;
+    display: block;
+    overflow: visible;
+    width: 10em;
+    height: .5em;
+    background: linearGradient(top, #ddd, #aaa);
+    border: 1px solid #999;
+    .border-radius(5px);
+}
+
+.km-slider-handle
+{
+    display: block;
+    position: absolute;
+    width: 1.25em;
+    height: 1.25em;
+    margin: -.5em 0 0 -.5em;
+    background: linearGradient(top, #eee, #ccc);
+    border: 1px solid #bbb;
+    .border-radius(1em);
+    .box-shadow(1px 1px 1px rgba(100,100,100,.5));
 }
 
 /* Scroller */
