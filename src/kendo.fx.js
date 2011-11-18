@@ -470,8 +470,10 @@
 
     extend(kendo.fx, {
         animate: function (elements, properties, options) {
+            var useTransition = options.transition !== false;
+            delete options.transition;
 
-            if (transitions && "transition" in fx) {
+            if (transitions && "transition" in fx && useTransition) {
                 fx.transition(elements, properties, options);
             } else {
                 each(transformProps, function(idx, value) { // remove transforms to avoid IE and older browsers confusion
@@ -589,8 +591,8 @@
                     container.attr("style", "position:relative");
                     outerContainer.attr("style", "position:relative");
                     options.completeCallback && options.completeCallback();
-                });
-            }
+                }, 0);
+            };
 
             if (animatingContainer) {
                 container.kendoAnimate(options);
@@ -654,7 +656,11 @@
                     !element.data(ORIGIN) && element.data(ORIGIN, animationProperty(element, direction.transition));
                 }
 
-                extender[direction.transition] = reverse ? (element.data(ORIGIN) || 0) + PX : offset + "%";
+                if (transitions && options.transition !== false) {
+                    extender[direction.transition] = reverse ? (element.data(ORIGIN) || 0) + PX : offset + "%";
+                } else {
+                    extender[direction.property] = reverse ? (element.data(ORIGIN) || 0) + PX : offset + "%";
+                }
 
                 return extend(extender, options.properties);
             }
@@ -665,7 +671,7 @@
                     offset = direction.modifier * options.offset,
                     extender = {}, reverse = options.reverse;
 
-                if (transitions) {
+                if (transitions && options.transition !== false) {
                     element.css(TRANSFORM, direction.transition + "(" + (!reverse ? offset : 0) + "px)");
                     extender[direction.transition] = reverse ? offset + PX : 0;
                 } else {
@@ -683,7 +689,7 @@
                     offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()),
                     extender = {}, reverse = options.reverse;
 
-                if (transitions) {
+                if (transitions && options.transition !== false) {
                     element.css(TRANSFORM, direction.transition + "(" + (!reverse ? offset : 0) + "px)");
                     extender[direction.transition] = reverse ? offset + PX : 0;
                 } else {
