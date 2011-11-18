@@ -351,7 +351,8 @@ body
     -webkit-transform: translatez(0);
 }
 
-.km-switch-wrapper
+.km-switch-wrapper,
+.km-slider-wrapper
 {
     display: block;
     height: 100%;
@@ -360,7 +361,8 @@ body
     border-radius: 3px;
 }
 
-.km-switch-background
+.km-switch-background,
+.km-slider-background
 {
     display: block;
     margin: 0 1px 1px -5em;
@@ -463,7 +465,7 @@ body
     margin: -1px 0 0 -1px;
     border: 1px solid #969696;
     background: linearGradient(top, rgb(255, 255, 255), rgb(215, 215, 215) 5%, rgb(255, 255, 255));
-    .border-radius(4px);
+    .border-radius(5px);
     .box-shadow(0 0 3px 0 rgba(0,0,0,.5));
 }
 
@@ -1411,27 +1413,54 @@ input[type=checkbox]
 
 .km-slider
 {
-    margin: .5em;
-    display: block;
-    overflow: visible;
+    margin: 1em;
     width: 10em;
-    height: .5em;
-    background: linearGradient(top, #ddd, #aaa);
-    border: 1px solid #999;
+    height: .6em;
+    line-height: .6em;
+    position: relative;
+    padding: 0.5em 0.7em;
+    display: inline-block;
+    -webkit-transform: translatez(0);
+}
+
+.km-slider-container
+{
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
     .border-radius(5px);
 }
 
 .km-slider-handle
 {
-    display: block;
-    position: absolute;
+    top: 0;
+    left: 0;
     width: 1.25em;
     height: 1.25em;
-    margin: -.5em 0 0;
-    background: linearGradient(top, #eee, #ccc);
-    border: 1px solid #bbb;
+    display: block;
+    position: absolute;
     .border-radius(1em);
-    .box-shadow(1px 1px 1px rgba(100,100,100,.5));
+    border: 1px solid #eee;
+    .box-shadow(0 1px 1px rgba(0,0,0,.5));
+    background: linearGradient(top, #ccc, #fff);
+}
+
+.km-slider-wrapper
+{
+    .border-radius(5px);
+}
+
+.km-slider-background
+{
+    width: 24em;
+    margin-left: -12em;
+    background: linearGradient(top, rgba(0,0,0,.5), rgba(0,0,0,0) 15%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4)) 0 0 no-repeat,
+                linearGradient(top, rgb(219,219,219), rgb(255,255,255)) 12em 0 no-repeat,
+                linearGradient(top, rgb(42,93,178), rgb(109,169,247)) 0 0 no-repeat;
 }
 
 /* Scroller */

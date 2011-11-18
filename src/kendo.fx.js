@@ -649,6 +649,16 @@
                 return extend(extender, options.properties);
             }
         },
+        slideMargin: {
+            setup: function(element, options) {
+                var offset = options.offset,
+                    extender = {}, reverse = options.reverse,
+                    margin = (element.data("margin") || 0);
+
+                extender["margin-" + options.axis] = !reverse ? margin + offset : margin;
+                return extend(extender, options.properties);
+            }
+        },
         slideTo: {
             setup: function(element, options) {
                 var offset = (options.offset+"").split(","),
