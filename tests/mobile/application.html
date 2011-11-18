@@ -21,8 +21,6 @@
         <ol id="qunit-tests"></ol>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
-
-
         <script>
             var application;
 
@@ -291,6 +289,16 @@
                 application.navigate("#page2");
 
                 equal(application.view.footer.text(), "Footer a", "fixed footer is visible");
+            });
+
+            test("passes url params to the view show event", function() {
+                setup('<div data-kendo-role="view" id="page1">Page 1</div><div id="page2" data-kendo-role="view"></div>');
+                application.bind("viewShow", function(e) {
+                    equal(e.view.element.attr("id"), "page2");
+                    equal(e.params.foo, "bar");
+                });
+
+                application.navigate("#page2?foo=bar");
             });
 
         </script>

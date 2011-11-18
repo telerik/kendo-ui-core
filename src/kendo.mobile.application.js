@@ -36,6 +36,19 @@
         }
     }
 
+    function parseQueryString(string) {
+        var parts = (string.split('?')[1] || "").split(/&|=/),
+            length = parts.length,
+            idx = 0,
+            params = {};
+
+        for (; idx < length; idx += 2) {
+            params[parts[idx]] = parts[idx + 1];
+        }
+
+        return params;
+    }
+
     function hideAddressBar(element) {
         if (os.appMode) return;
 
@@ -201,7 +214,7 @@
 
                 that.view = view;
 
-                that.trigger("viewShow", { view: view });
+                that.trigger("viewShow", { view: view, params: parseQueryString(url) });
             });
         },
 
