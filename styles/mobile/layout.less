@@ -239,25 +239,28 @@ body
     color: #FFF;
     overflow: visible;
     .border-radius(5pt);
-    border: 1px solid #576B92;
-    border-top-color: #40495B;
+    border: 1px solid #394d68;
+    border-color: #2f3740 #394d68 #375073;
     background-color: #BBB;
     background-image: linearGradient(top, rgb(189,197,211), rgb(177,187,206) 6%, rgb(135,155,183) 50%, rgb(128,149,175) 50%, rgb(112,132,161));
-    text-shadow: 0 -1pt #777;
+    text-shadow: 0 -1pt #465971;
     text-decoration: none;
 }
 
 .km-ios .km-button
 {
-    border-color: #5F6C81 #34517B #3E5B84;
-    background-image: linearGradient(top, rgb(63,79,102), rgb(138,154,181) 6%, rgb(90,120,165) 50%, rgb(71,104,151) 50%, rgb(73,106,154));
+    border-color: #2f3740 #394d68 #375073;
+    background: linearGradient(top, rgba(50,50,50,.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,.5)),
+                linearGradient(top, rgb(138,161,191), rgb(88,119,162) 50%, rgb(71,105,153) 50%, rgb(74,108,155));
+    .box-shadow(0 1px 1px #ccc);
 }
 
 .km-ios .km-button:active,
 .km-ios li.km-state-active
 {
-    border-color: #40506C #376ECC #3E75CA;
-    background-image: linearGradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
+    border-color: #2a2e37 #26334e #1d2f51;
+    background: linearGradient(top, rgba(50,50,50,.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,.5)),
+                linearGradient(top, rgb(121,132,162), rgb(58,78,120) 50%, rgb(37,60,106) 50%, rgb(39,63,109));
 }
 
 .km-ios li.km-state-active
@@ -275,8 +278,8 @@ body
 .km-ios,
 .km-ios .km-button
 {
-    font: normal .95em HelveticaNeue, sans-serif;
-    font-size: .95rem;
+    font: bold .9em HelveticaNeue, sans-serif;
+    font-size: .9rem;
 }
 
 .km-ios .km-button:active
@@ -876,6 +879,7 @@ body
 .km-tabstrip .km-button
 {
     word-spacing: normal;
+    .box-shadow(none);
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -1407,7 +1411,7 @@ input[type=checkbox]
 
 .km-slider
 {
-    margin: .5em auto;
+    margin: .5em;
     display: block;
     overflow: visible;
     width: 10em;
@@ -1423,7 +1427,7 @@ input[type=checkbox]
     position: absolute;
     width: 1.25em;
     height: 1.25em;
-    margin: -.5em 0 0 -.5em;
+    margin: -.5em 0 0;
     background: linearGradient(top, #eee, #ccc);
     border: 1px solid #bbb;
     .border-radius(1em);
