@@ -11,14 +11,13 @@
 
     <body>
         <div style="width:60%">
-            <input name="files" id="files" type="file" />
+            <input name="files[]" id="files" type="file" />
         </div>
         <script>
             $(document).ready(function() {
                 $("#files").kendoUpload({
                     async: {
                         saveUrl: "save.php",
-                        saveField: "files[]",
                         removeUrl: "remove.php",
                         removeField: "fileNames[]",
                         autoUpload: true
