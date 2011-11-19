@@ -116,6 +116,11 @@
                 equal(t({ foo: 1 }), "1");
             });
 
+            test("allows nesting escaped } in {}", function() {
+                var t = template.compile("${'{\\}'}");
+                equal(t({}), "{}");
+            });
+
             test("template defined in a script block", function() {
                 var t = template.compile($("#encoded").text());
                 equal($.trim(t({ foo: 1 })), "<strong>1</strong>");
