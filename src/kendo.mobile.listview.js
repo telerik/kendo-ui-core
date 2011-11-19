@@ -32,9 +32,10 @@
             MobileWidget.fn.init.call(that, element, options);
 
             options = that.options;
-                that.element
-                    .delegate(ITEM_SELECTOR, support.mousedown + " " + support.mouseup, toggleItemActiveClass)
-                    .delegate(ITEM_SELECTOR, support.mouseup, proxy(that._click, that))
+
+            that.element
+                .delegate(ITEM_SELECTOR, support.mousedown + " " + support.mouseup, toggleItemActiveClass)
+                .delegate(ITEM_SELECTOR, support.mouseup, proxy(that._click, that));
 
             if (options.dataSource) {
                 that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that.refresh, that));
