@@ -11,8 +11,9 @@
         CLICK = "click";
 
     function toggleItemActiveClass(e) {
-        if ($(e.target).is("a")) {
-            $(e.currentTarget).toggleClass("km-state-active", e.type === support.mousedown);
+        var item = $(e.currentTarget);
+        if ($(e.target).closest("a[data-kendo-role=listview-link]", item)[0]) {
+            item.toggleClass("km-state-active", e.type === support.mousedown);
         }
     }
 

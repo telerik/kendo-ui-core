@@ -122,6 +122,16 @@
                 ok(!item.is(".km-state-active"), "list item is not marked as active");
             });
 
+            test("does not activate pushed state for buttons", function() {
+                var dom = $('<ul><li>Foo <a data-kendo-role="button" href="#">Foo</a></li></ul>'),
+                item = dom.find("li");
+
+                new ListView(dom);
+
+                item.find("[data-kendo-role=button]").trigger(kendo.support.mousedown);
+                ok(!item.is(".km-state-active"), "list item is not marked as active");
+            });
+
             test("handles contents' click events", function() {
                 expect(2);
 
