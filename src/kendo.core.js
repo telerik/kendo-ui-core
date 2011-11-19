@@ -245,7 +245,9 @@
             functionBody += "o=";
 
             parts = template
+                .replace(/\\}/g, "__CURLY__")
                 .replace(encodeRegExp, "#=e($1)#")
+                .replace(/__CURLY__/g, "}")
                 .replace(/\\#/g, "__SHARP__")
                 .split("#");
 
