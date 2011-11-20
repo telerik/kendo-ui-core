@@ -256,12 +256,14 @@
         _findView: function(url, callback) {
             var that = this,
                 view,
-                local = url.charAt(0) === "#",
+                firstChar = url.charAt(0),
+                local = firstChar === "#",
+                remote = firstChar === "/",
                 element;
 
             element = that.element.find("[data-kendo-url='" + url + "']");
 
-            if (!element[0]) {
+            if (!element[0] && !remote) {
                 element = that.element.find(local ? url : "#" + url);
             }
 
