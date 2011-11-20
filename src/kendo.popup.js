@@ -23,7 +23,6 @@
         ACTIVEBORDER = "k-state-border",
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
-        ARIAOWNS = "aria-owns",
         extend = $.extend,
         proxy = $.proxy,
         Widget = ui.Widget;
@@ -34,7 +33,7 @@
 
     var Popup = Widget.extend({
         init: function(element, options) {
-            var that = this, id;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 
@@ -51,11 +50,6 @@
                 .css({ position : ABSOLUTE })
                 .appendTo($(options.appendTo));
 
-
-            id = $(options.anchor).attr("id");
-            if (id) {
-                that.element.attr(ARIAOWNS, id);
-            }
 
             that.wrapper = $();
 
@@ -235,9 +229,11 @@
                 options = that.options,
                 anchor = $(options.anchor)[0],
                 toggleTarget = options.toggleTarget,
-                target = e.target;
+                target = e.target,
+                popup = $(target).closest(".k-popup")[0];
 
-            if (that.element.find("#" + $(target).closest(".k-popup").attr(ARIAOWNS))[0]) {
+
+            if (popup && popup !== that.element[0] ){
                 return;
             }
 
