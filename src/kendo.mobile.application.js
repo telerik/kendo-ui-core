@@ -195,11 +195,11 @@
 
             that.view = that._createView(views.first());
 
-            history.start($.extend(options, {silent: true}));
-
             history.change(function(e) {
                 that.navigate(e.location);
             });
+
+            history.start(options);
         },
 
         navigate: function(url) {
@@ -261,15 +261,15 @@
 
             element = that.element.find("[data-kendo-url='" + url + "']");
 
-            if (!element[0] && local) {
-                element = that.element.find(url);
+            if (!element[0]) {
+                element = that.element.find(local ? url : "#" + url);
             }
 
             view = element.data("kendoView");
 
             if (view) {
                 callback(view);
-            } else if (local) {
+            } else if (element[0]) {
                 callback(that._createView(element));
             } else {
                 $.get(url, function(html) {
