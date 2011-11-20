@@ -572,8 +572,6 @@
                 options.completeCallback && options.completeCallback();
             }
 
-            options.complete = $.browser.msie ? function() { setTimeout(callback) } : callback;
-
             options.complete = $.browser.msie ? function() { setTimeout(complete) } : complete;
 
             if ("slide" in options.effects) {
