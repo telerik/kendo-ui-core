@@ -117,7 +117,7 @@
 
             that.content = element.find(roleSelector("content"))
                                 .addClass("km-content")
-                                .kendoScroller({useOnDesktop: true});
+                                .kendoScroller({useOnDesktop: false});
 
             that.element.prepend(that.header).append(that.footer);
         },
