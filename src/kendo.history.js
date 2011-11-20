@@ -18,7 +18,6 @@
 
             that._pushStateRequested = !!options.pushState;
             that._pushState = that._pushStateRequested && that._pushStateSupported();
-            that.current = this._currentLocation();
             that.root = options.root || "/";
             that._interval = 0;
 
@@ -29,7 +28,10 @@
 
             that._listenToLocationChange();
             if (!options.silent) {
+                that.current = that.root;
                 that._checkUrl();
+            } else {
+                that.current = that._currentLocation();
             }
         },
 

@@ -28,7 +28,7 @@
                 win,
                 loc,
                 pushStateSupported = window.history.pushState,
-                root = location.pathname.replace("index.html", "sandbox/");
+                root = location.pathname.replace(/\/(index\.html)?$/, "/sandbox/");
 
             module("History", {
                 setup: function() {
