@@ -38,14 +38,18 @@
                 margin: 0;
             }
 
-            #featured a {
+            #featured a.km-button {
                 float: right;
                 margin-top: 1rem;
+            }
+
+            #featured a.details-link {
+                display: block;
             }
         </style>
     </head>
     <body>
-        <div data-kendo-role="view">
+        <div data-kendo-role="view" data-kendo-url="/" data-kendo-animation="slide">
             <header data-kendo-role="header">
                 <div data-kendo-role="navbar">
                     <span data-kendo-role="view-title">Kendo Sushi!</span>
@@ -57,7 +61,7 @@
                 </ul>
             </div>
 
-            <footer data-kendo-role="footer">
+            <footer data-kendo-role="footer" data-id="default">
                 <div data-kendo-role="tabstrip">
                     <a href="index.html">Home</a>
                     <a href="#menu">Our menu</a>
@@ -67,14 +71,43 @@
             </footer>
         </div>
 
+        <div data-kendo-role="view" id="details" data-kendo-transition="slide">
+            <header data-kendo-role="header">
+                <div data-kendo-role="navbar">
+                    <span data-kendo-role="view-title">Item</span>
+                </div>
+            </header>
+
+            <div data-kendo-role="content">
+            </div>
+
+            <footer data-kendo-role="footer" data-id="default">
+            </footer>
+        </div>
+
         <script id="menuTemplate" type="text/x-kendo-template">
+
             <a data-kendo-role="button" data-kendo-name="add" href="\\#">Add to cart</a>
+
+            <a class="details-link" data-kendo-role="listview-link" href="\#details?id=${id}">
+                <img src="images/${image}" />
+                <span class="price">&euro; ${price}</span>
+                <h2>${name}</h2>
+                # if (cart.indexOf(id) >= 0) { #
+                    <span class="added">Item added in your cart</span>
+                # } #
+            </a>
+        </script>
+
+        <script id="detailTemplate" type="text/x-kendo-template">
             <img src="images/${image}" />
             <span class="price">&euro; ${price}</span>
             <h2>${name}</h2>
+            <p>${description}</p>
             # if (cart.indexOf(id) >= 0) { #
                 <span class="added">Item added in your cart</span>
             # } #
+            <a data-kendo-role="button" href="\\#">Add to cart</a>
         </script>
 
         <script>
@@ -84,6 +117,10 @@
                 transport: { read: { url: "featured.js", dataType: "json" } },
             });
 
+            ds.read();
+
+            var itemDetailsTemplate = kendo.template($("#detailTemplate").text());
+
             $("#featured").kendoMobileListView({dataSource: ds, template: $("#menuTemplate").text()});
 
             var listView = $("#featured").data("kendoMobileListView");
@@ -92,6 +129,15 @@
                 if (e.buttonName === "add") {
                     cart.push(e.dataItem.id);
                     listView.refresh();
+                }
+            });
+
+            kendo.application.bind("viewShow", function(e) {
+                var view = e.view, item;
+
+                if (view.element.attr("id") === "details") {
+                    item = ds.get(e.params.id).data;
+                    view.content.html(itemDetailsTemplate(item));
                 }
             });
         </script>
