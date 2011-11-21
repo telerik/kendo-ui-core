@@ -10,6 +10,7 @@
         <script src="../../src/kendo.slider.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
         <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/kendo.blueopal.css" rel="stylesheet"/>
     </head>
     <body>
 
@@ -65,14 +66,14 @@
                 equal(slider.value(), 0);
             });
 
-            test("value should set slider position selectionDiv", function () {
+            test("value should update slider selectionDiv", function () {
                 var slider = newSlider();
 
                 var selectionDiv = slider.wrapper.find(".k-slider-selection");
 
                 slider.value(10);
 
-                equal(selectionDiv.width(), 144);
+                equal(selectionDiv.width(), 130);
             });
 
             test("value should be in range", function() {
@@ -108,7 +109,7 @@
             });
 
             test("value should set value to the input", function() {
-                var slider = newSlider({ val: 1 });
+                var slider = newSlider({ value: 1 });
 
                 var value = 2;
 
@@ -123,7 +124,7 @@
                 slider.disable();
 
                 slider.wrapper.is("[disabled]");
-                ok(!slider.enabled);
+                ok(!slider.options.enabled);
             });
 
             test("enable method should enable slider", function () {
@@ -152,7 +153,7 @@
             });
 
             test("refresh method should not select minimum when slider increase his value from -1 to 0", function () {
-                var slider = newSlider({ showButtons: true, min: -5, val: -1 });
+                var slider = newSlider({ showButtons: true, min: -5, value: -1 });
 
                 slider.value(0)
 
@@ -167,7 +168,7 @@
                     ok(false);
                 };
 
-                var slider = newSlider({ "change": change, val: 0 }),
+                var slider = newSlider({ "change": change, value: 0 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown", keyCode: downArrow });
@@ -289,7 +290,7 @@
                 rangeSlider.disable();
 
                 rangeSlider.wrapper.is(":disabled");
-                ok(!rangeSlider.enabled);
+                ok(!rangeSlider.options.enabled);
             });
 
             test("enable method should enable range slider", function () {
@@ -298,7 +299,7 @@
                 rangeSlider.enable();
 
                 ok(!rangeSlider.wrapper.attr("disabled"));
-                ok(rangeSlider.enabled);
+                ok(rangeSlider.options.enabled);
             });
 
             test("disable method should add state disabled to the range slider", function () {

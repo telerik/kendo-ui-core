@@ -394,7 +394,7 @@
                 element = that.element,
                 options = that.options;
 
-            element.val(options.val);
+            element.val(options.value);
 
             element.wrap(createWrapper(options, element, that._isHorizontal)).hide();
 
@@ -500,7 +500,7 @@
          * @option {Object} [tooltip] Confituration of the slider tooltip.
          * @option {Boolean} [tooltip.enabled] Can be used to enable/disable the tooltip.
          * @option {String} [tooltip.format] Can be used to formatting of the text of the tooltip. Note that the applied format will also influence the appearance of the slider tick labels.
-         * @option {Number} [val] <0> The value of the slider.
+         * @option {Number} [value] <0> The value of the slider.
          * @option {String} [orientation] <"horizontal"> The orientation of the slider. Available options are "horizontal" and "vertical".
          * @option {String} [tickPlacement] <"both"> the location of the tick marks in the widget. Available options are:
          *     <dl>
@@ -542,14 +542,14 @@
         init: function(element, options) {
             options = options || {};
             var that = this,
-                value = options.val;
+                value = options.value;
             value = (isNaN(value)) ?
                     parseValue($(element).val()) || 0 :
                     value;
-            options.val = round(value);
+            options.value = round(value);
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
-            that._setValueInRange(options.val);
+            that._setValueInRange(options.value);
             var dragHandle = that.wrapper.find(DRAG_HANDLE);
 
             new Slider.Selection(dragHandle, that, options);
@@ -558,7 +558,7 @@
 
         options: {
             name: "Slider",
-            val: 0,
+            value: 0,
             showButtons: true,
             increaseButtonTitle: "Increase",
             decreaseButtonTitle: "Decrease"
@@ -606,10 +606,10 @@
             });
 
             var move = proxy(function (e, sign) {
-                var index = math.ceil(options.val / options.smallStep) - options.min;
+                var index = math.ceil(options.value / options.smallStep) - options.min;
 
                 if (index >= that._values.length - 1 || index <= 0) {
-                    this._setValueInRange(options.val + (sign * options.smallStep));
+                    this._setValueInRange(options.value + (sign * options.smallStep));
                 } else {
                     this._setValueInRange(this._values[index + (sign * 1)]);
                 }
@@ -704,7 +704,7 @@
             that.value(val);
 
             if (change) {
-                that.trigger(CHANGE, { value: that.options.val });
+                that.trigger(CHANGE, { value: that.options.value });
             }
         },
 
@@ -723,20 +723,20 @@
 
             val = round(val);
             if (isNaN(val)) {
-                return options.val;
+                return options.value;
             }
 
             if (val >= options.min && val <= options.max) {
-                if (options.val != val) {
+                if (options.value != val) {
                     that.element.attr("value", formatValue(val));
-                    options.val = val;
+                    options.value = val;
                     that.refresh();
                 }
             }
         },
 
         refresh: function () {
-            this.trigger(MOVE_SELECTION, { value: this.options.val });
+            this.trigger(MOVE_SELECTION, { value: this.options.value });
         },
 
         _clearTimer: function (e) {
@@ -748,7 +748,7 @@
             var that = this;
 
             if (e.keyCode in that._keyMap) {
-                that._setValueInRange(that._keyMap[e.keyCode](that.options.val));
+                that._setValueInRange(that._keyMap[e.keyCode](that.options.value));
                 e.preventDefault();
             }
         },
@@ -780,11 +780,11 @@
             dragHandle.css(that._position, selection - halfDragHanndle);
         }
 
-        moveSelection(options.val);
+        moveSelection(options.value);
 
         that.bind([CHANGE, SLIDE, MOVE_SELECTION], function (e) {
-                                                       moveSelection(parseFloat(e.value, 10));
-                                                   });
+            moveSelection(parseFloat(e.value, 10));
+        });
     };
 
     Slider.Drag = function (dragHandle, type, owner, options) {
@@ -828,7 +828,7 @@
                 that.selectionEnd = options.selectionEnd;
                 owner._setZIndex(that.type);
             } else {
-                that.oldVal = that.val = options.val;
+                that.oldVal = that.val = options.value;
             }
 
             if (options.tooltip.enabled) {
@@ -954,12 +954,11 @@
                 positionTop = dragHandleOffset.top;
                 positionLeft = dragHandleOffset.left;
             }
-
             if (owner._isHorizontal) {
-                positionLeft -= parseInt((that.tooltipDiv.outerWidth() - that.dragHandle[owner._outerSize]()) / 2) + 1;
+                positionLeft -= parseInt((that.tooltipDiv.outerWidth() - that.dragHandle[owner._outerSize]()) / 2);
                 positionTop -= that.tooltipDiv.outerHeight() + callout.height() + margin;
             } else {
-                positionTop -= parseInt((that.tooltipDiv.outerHeight() - that.dragHandle[owner._outerSize]()) / 2) + 1;
+                positionTop -= parseInt((that.tooltipDiv.outerHeight() - that.dragHandle[owner._outerSize]()) / 2);
                 positionLeft -= that.tooltipDiv.outerWidth() + callout.width() + margin;
             }
 

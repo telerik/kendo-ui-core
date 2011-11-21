@@ -10,6 +10,7 @@
         <script src="../../src/kendo.slider.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
         <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/kendo.blueopal.css" rel="stylesheet"/>
     </head>
     <body>
 
@@ -35,7 +36,7 @@
             test('slider should decrease value with a small step when down and left arrow keyboard is clicked', function () {
                 var downArrow = "40", // down arrow
                     leftArrow = "37", // left arrow
-                    slider = newSlider({ val: 5, smallStep: 2 }),
+                    slider = newSlider({ value: 5, smallStep: 2 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown",
@@ -66,7 +67,7 @@
             test('slider should increase value with a small step when down and left arrow keyboard is clicked', function () {
                 var upArrow = "38"; // up arrow
                     rightArrow = "39", // right arrow
-                    slider = newSlider({ val: 5, smallStep: 2 }),
+                    slider = newSlider({ value: 5, smallStep: 2 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown",
@@ -96,7 +97,7 @@
 
             test('slider should increase value with a large step when page up keyboard is clicked', function () {
                 var end = "33", // page up
-                    slider = newSlider({ val: 5, largeStep: 3 }),
+                    slider = newSlider({ value: 5, largeStep: 3 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown",
@@ -114,7 +115,7 @@
 
             test('slider should decrease value with a large step when page down keyboard is clicked', function () {
                 var home = "34", // page down
-                    slider = newSlider({ val: 5, largeStep: 3 }),
+                    slider = newSlider({ value: 5, largeStep: 3 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown",
@@ -132,7 +133,7 @@
 
             test('slider should increase value to maximum value when end keyboard is clicked', function () {
                 var end = "35", // end
-                    slider = newSlider({ val: 5 }),
+                    slider = newSlider({ value: 5 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown",
@@ -150,7 +151,7 @@
 
             test('slider should increase value to minimum value when home keyboard is clicked', function () {
                 var home = "36", // home
-                    slider = newSlider({ val: 5 }),
+                    slider = newSlider({ value: 5 }),
                     dragHandle = slider.wrapper.find(".k-draghandle");
 
                 dragHandle.trigger({ type: "keydown",
@@ -167,7 +168,7 @@
             });
 
             test('getValueFromPosition with small step 3 and mouse position 100 should return max value', function () {
-                var slider = newSlider({ val: 0, smallStep: 3, style: "width: 156px;" }),
+                var slider = newSlider({ value: 0, smallStep: 3, style: "width: 156px;" }),
                     mousePosition = 100,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
@@ -175,18 +176,18 @@
                 equal(value, 10);
             });
 
-            test('getValueFromPosition with small step 2 and mouse position 94 should return 9', function () {
-                var slider = newSlider({ val: 0, smallStep: 2, style: "width: 156px;" }),
-                    mousePosition = 89,
+            test('getValueFromPosition with small step 2 and mouse position 79 should return 8', function () {
+                var slider = newSlider({ value: 0, smallStep: 2, style: "width: 156px;" }),
+                    mousePosition = 79,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
 
                 equal(value, 8);
             });
 
-            test('getValueFromPosition with small step 3 and mouse position 90 should return 10', function () {
-                var slider = newSlider({ val: 0, smallStep: 3, style: "width: 156px;" }),
-                    mousePosition = 90,
+            test('getValueFromPosition with small step 3 and mouse position 80 should return 9', function () {
+                var slider = newSlider({ value: 0, smallStep: 3, style: "width: 156px;" }),
+                    mousePosition = 80,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
 
@@ -194,7 +195,7 @@
             });
 
             test('getValueFromPosition with small step 2 and mouse position 60 should return 3', function () {
-                var slider = newSlider({ val: 0, smallStep: 2, style: "width: 156px;" }),
+                var slider = newSlider({ value: 0, smallStep: 2, style: "width: 156px;" }),
                     mousePosition = 60,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
@@ -203,7 +204,7 @@
             });
 
             test('getValueFromPosition with small step 2 and mouse position 95 should return 10', function () {
-                var slider = newSlider({ val: 0, smallStep: 2, style: "width: 156px;" }),
+                var slider = newSlider({ value: 0, smallStep: 2, style: "width: 156px;" }),
                     mousePosition = 95,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
@@ -211,9 +212,9 @@
                 equal(value, 10);
             });
 
-            test('getValueFromPosition with small step 2 and mouse position 10 should return 1', function () {
-                var slider = newSlider({ val: 0, smallStep: 2, style: "width: 156px;" }),
-                    mousePosition = 10,
+            test('getValueFromPosition with small step 2 and mouse position 9 should return 0', function () {
+                var slider = newSlider({ value: 0, smallStep: 2, style: "width: 156px;" }),
+                    mousePosition = 9,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
 
@@ -221,7 +222,7 @@
             });
 
             test('getValueFromPosition with small step 0.1 mouse position 40 should return 0.4', function () {
-                var slider = newSlider({ val: 0, smallStep: 0.1, max: 1, style: "width: 156px;" }),
+                var slider = newSlider({ value: 0, smallStep: 0.1, max: 1, style: "width: 156px;" }),
                     mousePosition = 40,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
@@ -230,7 +231,7 @@
             });
 
             test('getValueFromPosition with small step 0.1 mouse position 30 should return 0.3', function () {
-                var slider = newSlider({ val: 0, smallStep: 0.1, max: 1, style: "width: 156px;" }),
+                var slider = newSlider({ value: 0, smallStep: 0.1, max: 1, style: "width: 156px;" }),
                     mousePosition = 30,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
@@ -238,9 +239,9 @@
                 equal(value, 0.3);
             });
 
-            test('getValueFromPosition with small step 0.1 mouse position 50 should return 0.5', function () {
-                var slider = newSlider({ val: 0, smallStep: 0.1, max: 1, style: "width: 156px;" }),
-                    mousePosition = 50,
+            test('getValueFromPosition with small step 0.1 mouse position 49 should return 0.5', function () {
+                var slider = newSlider({ value: 0, smallStep: 0.1, max: 1, style: "width: 156px;" }),
+                    mousePosition = 49,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
 
