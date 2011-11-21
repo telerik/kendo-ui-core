@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.window Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link href="../../styles/kendo.common.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script>
+            var Window = kendo.ui.Window;
+
+            module("events", {
+                teardown: function() {
+                    $(".k-window,.k-overlay").remove();
+                    $.mockjaxClear();
+                }
+            });
+
+            function createWindow(options) {
+                return $("<div />").appendTo(document.body).kendoWindow(options).data("kendoWindow");
+            }
+
+            test("clicking on window brings it in front of other windows", function() {
+                var firstWindow = createWindow(),
+                    secondWindow = createWindow();
+
+                firstWindow.element.trigger("mousedown");
+
+                equal(+firstWindow.wrapper.css("zIndex"), +secondWindow.wrapper.css("zIndex") + 2);
+            });
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Window Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
+

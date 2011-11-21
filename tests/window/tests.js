@@ -6,5 +6,9 @@ tests.push(
     {
         page: "window/api.html",
         title: "window api"
+    },
+    {
+        page: "window/events.html",
+        title: "window events"
     }
 );
