@@ -167,21 +167,24 @@
             startLocation = coordinate - scrollOffset;
             updateLastLocation(coordinate);
 
+            console.log("wait");
             $(document)
                 .unbind(MOVEEVENT, start)
                 .bind(MOVEEVENT, start);
-        }
-
-        function start(e) {
-            var location = getTouchLocation(e);
-
-            if (!location || abs(lastLocation - location) <= dip10) {
-                return;
-            }
 
             scrollElement
                 .unbind(support.mouseup, stop) // Make sure previous event is removed
                 .bind(support.mouseup, stop);
+        }
+
+        function start(e) {
+            var location = getTouchLocation(e);
+            console.log("start");
+
+
+            if (!location || abs(lastLocation - location) <= dip10) {
+                return;
+            }
 
             changeDirection(location);
 
@@ -198,8 +201,10 @@
         }
 
         function getTouchLocation(event) {
-            event.preventDefault();
-            event.stopPropagation();
+            if (dragged) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
 
             var location = touchLocation(event);
             if (location.idx === idx && !dragCanceled) {
