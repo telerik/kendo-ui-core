@@ -161,19 +161,25 @@
                 kendoHistory.navigate("/new-location");
             });
 
-            test("allows setting of root", function() {
-                if (!pushStateSupported) {
-                    return;
-                }
-                kendoHistory.start({root: root + "/subdir/", pushState: true});
-                kendoHistory.navigate('/new-location');
-                url(initial + "subdir/new-location");
-            });
-
             test("strips hash from passed urls", function() {
                 startWithHash();
                 kendoHistory.navigate('#/new-location');
                 equal(kendoHistory.current, '/new-location');
+            });
+
+            test("accepts event handlers passed as options", function() {
+                expect(1);
+
+                kendoHistory.start({root: root, change: function(e) { equal("/new-location", e.location); }});
+
+                kendoHistory.navigate("/new-location");
+            });
+
+            test("triggers ready with the initial location", function() {
+                expect(1);
+
+                win.location.hash = "/initial-location";
+                kendoHistory.start({root: root, ready: function(e) { equal("/initial-location", e.location); }});
             });
 
             asyncTest("listens for outside url changes (hashChange)", function() {
