@@ -67,6 +67,10 @@ var deployScripts = [{
     ]
 }];
 
+var thirdPartyScripts = [
+    "jquery.min.js"
+];
+
 var CULTURES_ROOT = "cultures",
     deployCache = { },
     mergeCache = { };
@@ -91,6 +95,13 @@ function deploy(scriptsRoot, outputRoot, header, compress) {
         }
 
         kendoBuild.writeText(path.join(outputRoot, outName), header + output);
+    });
+
+    thirdPartyScripts.forEach(function(scriptName) {
+        kendoBuild.copyFileSync(
+            path.join(scriptsRoot, scriptName),
+            path.join(outputRoot, scriptName)
+        );
     });
 
     var culturesRoot = path.join(scriptsRoot, CULTURES_ROOT),
