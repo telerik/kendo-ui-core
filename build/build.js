@@ -69,7 +69,7 @@ function deployScripts(root, license, copySource) {
     }
 }
 
-function deployStyles(root, copySource) {
+function deployStyles(root, license, copySource) {
     var stylesDest = path.join(root, DEPLOY_STYLES),
         sourceRoot = path.join(root, DEPLOY_SOURCE),
         sourceDest = path.join(sourceRoot, DEPLOY_STYLES),
@@ -80,7 +80,7 @@ function deployStyles(root, copySource) {
     kendoBuild.copyDirSyncRecursive(STYLES_ROOT, stylesDest, false, stylesFilter);
     kendoBuild.processFilesRecursive(stylesDest, cssFilter, function(fileName) {
         var css = kendoBuild.readText(fileName),
-            minified = cssmin(css);
+            minified = license + cssmin(css);
 
         kendoBuild.writeText(fileName, minified);
         fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
@@ -91,6 +91,11 @@ function deployStyles(root, copySource) {
         mkdir(sourceDest);
 
         kendoBuild.copyDirSyncRecursive(STYLES_ROOT, sourceDest, false, stylesFilter);
+        kendoBuild.processFilesRecursive(sourceDest, cssFilter, function(fileName) {
+            var css = license + kendoBuild.readText(fileName);
+
+            kendoBuild.writeText(fileName, css);
+        });
     }
 }
 
@@ -149,7 +154,7 @@ function buildBundle(bundle, success) {
     deployScripts(root, srcLicense, bundle.hasSource);
 
     console.log("Deploying styles");
-    deployStyles(root, bundle.hasSource);
+    deployStyles(root, srcLicense, bundle.hasSource);
 
     console.log("Deploying licenses");
     deployLicenses(root, bundle);
