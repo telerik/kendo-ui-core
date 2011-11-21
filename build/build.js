@@ -29,17 +29,12 @@ var bundles = [{
     hasSource: true
 }];
 
-var sourceLicenses = {
-    "commercial": "src-commercial.txt",
-    "trial": "src-commercial.txt",
-    "open-source": "src-os.txt"
-};
-
 var VERSION = kendoBuild.generateVersion(),
     CDN_URL = process.argv[2] || "http://cdn.kendostatic.com/" + VERSION,
     SCRIPTS_ROOT = "src",
     STYLES_ROOT = "styles",
     LEGAL_ROOT = "resources/legal",
+    SRC_LICENSE = "src-license.txt",
     THIRD_PARTY_LICENSES = "licenses.txt",
     DROP_LOCATION = "release",
     DEPLOY_ROOT = "deploy",
@@ -143,8 +138,8 @@ function buildBundle(bundle, success) {
         license = bundle.license,
         deployName = name + "." + VERSION + "." + license,
         root = path.join(DEPLOY_ROOT, deployName),
-        srcLicenseFile = sourceLicenses[license],
-        srcLicense = kendoBuild.readText(path.join(LEGAL_ROOT, srcLicenseFile)),
+        srcLicenseTemplate = kendoBuild.readText(path.join(LEGAL_ROOT, SRC_LICENSE)),
+        srcLicense = kendoBuild.template(srcLicenseTemplate)({ version: VERSION, year: startDate.getFullYear() }),
         packageName = path.join(DROP_LOCATION, deployName + ".zip");
 
     console.log("Building " + deployName);
