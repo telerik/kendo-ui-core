@@ -167,7 +167,6 @@
             startLocation = coordinate - scrollOffset;
             updateLastLocation(coordinate);
 
-            console.log("wait");
             $(document)
                 .unbind(MOVEEVENT, start)
                 .bind(MOVEEVENT, start);
@@ -178,9 +177,7 @@
         }
 
         function start(e) {
-            var location = getTouchLocation(e);
-            console.log("start");
-
+            var location = getTouchLocation(e, true);
 
             if (!location || abs(lastLocation - location) <= dip10) {
                 return;
@@ -200,8 +197,8 @@
 
         }
 
-        function getTouchLocation(event) {
-            if (dragged) {
+        function getTouchLocation(event, prevent) {
+            if (prevent) {
                 event.preventDefault();
                 event.stopPropagation();
             }
@@ -228,7 +225,7 @@
                 return;
             }
 
-            var location = getTouchLocation(e);
+            var location = getTouchLocation(e, dragged);
 
             $(document)
                 .unbind(MOVEEVENT, start)
