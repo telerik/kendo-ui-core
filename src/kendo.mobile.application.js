@@ -165,7 +165,7 @@
         },
 
         start: function(options) {
-            var that = this, views;
+            var that = this, views, rootView, historyEvents;
 
             that.options = options || {};
 
@@ -174,19 +174,26 @@
             that.element = that.element ? $(that.element) : $(document.body);
 
             hideAddressBar(that.element);
+
             that.setupAppLinks();
 
             views = that.element.find(roleSelector("view"));
+            views.first().attr("data-kendo-url", "/");
 
-            views.not(":first").hide();
+            historyEvents = {
+                change: function(e) {
+                    that.navigate(e.string);
+                },
 
-            that.view = that._createView(views.first());
+                ready: function(e) {
+                    that._findView(e.string, function(view) {
+                        views.not(view.element).hide();
+                        that._setCurrentView(view);
+                    });
+                }
+            }
 
-            history.change(function(e) {
-                that.navigate(e.location);
-            });
-
-            history.start(options);
+            history.start($.extend(options, historyEvents));
         },
 
         navigate: function(url) {
@@ -198,10 +205,7 @@
                 that.trigger("viewHide", { view: that.view });
 
                 view.replace(that.view);
-
-                that.view = view;
-
-                that.trigger("viewShow", { view: view, params: parseQueryString(url) });
+                that._setCurrentView(view);
             });
         },
 
@@ -214,6 +218,14 @@
 
         scroller: function() {
             return this.view.content.data("kendoScroller");
+        },
+
+        _setCurrentView: function(view) {
+            var that = this, params = history.url().params;
+            that.view = view;
+            console.log(that.view);
+            view.params = params;
+            that.trigger("viewShow", {view: view, params: params});
         },
 
         _createView: function(element) {
