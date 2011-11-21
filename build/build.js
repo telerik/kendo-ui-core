@@ -7,7 +7,12 @@ var fs = require("fs"),
     kendoBuild = require("./kendo-build"),
     kendoExamples = require("./examples"),
     kendoScripts = require("./kendo-scripts"),
+    copyDir = kendoBuild.copyDirSyncRecursive,
+    processFiles = kendoBuild.processFilesRecursive,
     mkdir = kendoBuild.mkdir,
+    readText = kendoBuild.readText,
+    template = kendoBuild.template,
+    writeText = kendoBuild.writeText,
     zip = kendoBuild.zip;
 
 // Configuration ==============================================================
@@ -88,12 +93,12 @@ function deployStyles(root, license, copySource) {
         stylesFilter = /\.(css|png|jpg|jpeg|gif)$/i;
 
     mkdir(stylesDest);
-    kendoBuild.copyDirSyncRecursive(STYLES_ROOT, stylesDest, false, stylesFilter);
-    kendoBuild.processFilesRecursive(stylesDest, cssFilter, function(fileName) {
-        var css = kendoBuild.readText(fileName),
+    copyDir(STYLES_ROOT, stylesDest, false, stylesFilter);
+    processFiles(stylesDest, cssFilter, function(fileName) {
+        var css = readText(fileName),
             minified = license + cssmin(css);
 
-        kendoBuild.writeText(fileName, minified);
+        writeText(fileName, minified);
         fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
     });
 
@@ -101,11 +106,11 @@ function deployStyles(root, license, copySource) {
         mkdir(sourceRoot);
         mkdir(sourceDest);
 
-        kendoBuild.copyDirSyncRecursive(STYLES_ROOT, sourceDest, false, stylesFilter);
-        kendoBuild.processFilesRecursive(sourceDest, cssFilter, function(fileName) {
-            var css = license + kendoBuild.readText(fileName);
+        copyDir(STYLES_ROOT, sourceDest, false, stylesFilter);
+        processFiles(sourceDest, cssFilter, function(fileName) {
+            var css = license + readText(fileName);
 
-            kendoBuild.writeText(fileName, css);
+            writeText(fileName, css);
         });
     }
 }
@@ -133,7 +138,7 @@ function deployExamples(root, bundle) {
     }
 
     kendoBuild.mkdir(examplesRoot);
-    kendoBuild.copyDirSyncRecursive(
+    copyDir(
         path.join(DEMOS_ROOT, SHARED_ROOT),
         path.join(examplesRoot, SHARED_ROOT)
     );
@@ -142,15 +147,15 @@ function deployExamples(root, bundle) {
         var suiteSrc = path.join(DEMOS_ROOT, suite),
             suiteDest = path.join(examplesRoot, suite);
 
-        kendoBuild.copyDirSyncRecursive(suiteSrc, suiteDest);
-        kendoBuild.processFilesRecursive(suiteDest, /\.html$/, function(name) {
-            var data = kendoBuild.readText(name);
+        copyDir(suiteSrc, suiteDest);
+        processFiles(suiteDest, /\.html$/, function(name) {
+            var data = readText(name);
 
             data = data.replace(/(\.\.\/)+styles\/(.*?)\.css/g, stylesPath);
             data = data.replace(/(\.\.\/)+src\/(.*?)\.js/g, scriptsPath);
             data = data.replace(/min\.min/g, "min");
 
-            kendoBuild.writeText(name, data);
+            writeText(name, data);
         });
 
         buildSuiteIndex(suiteDest);
@@ -160,29 +165,29 @@ function deployExamples(root, bundle) {
 }
 
 function buildSuiteIndex(suiteRoot) {
-    var navigation = kendoBuild.readText(
+    var navigation = readText(
         path.join(suiteRoot, "js", EXAMPLES_NAVIGATION)
     );
 
-    var indexTemplate = kendoBuild.template(
-        kendoBuild.readText(SUITE_INDEX)
+    var indexTemplate = template(
+        readText(SUITE_INDEX)
     );
 
     eval(navigation);
     delete categories.overview;
 
-    kendoBuild.writeText(
+    writeText(
         path.join(suiteRoot, INDEX),
         indexTemplate(categories)
     );
 }
 
 function buildBundleIndex(root, bundle) {
-    var indexTemplate = kendoBuild.template(
-        kendoBuild.readText(BUNDLE_INDEX)
+    var indexTemplate = template(
+        readText(BUNDLE_INDEX)
     );
 
-    kendoBuild.writeText(
+    writeText(
         path.join(root, DEPLOY_EXAMPLES, INDEX),
         indexTemplate(bundle)
     );
@@ -193,8 +198,8 @@ function buildBundle(bundle, success) {
         license = bundle.license,
         deployName = name + "." + VERSION + "." + license,
         root = path.join(DEPLOY_ROOT, deployName),
-        srcLicenseTemplate = kendoBuild.readText(path.join(LEGAL_ROOT, SRC_LICENSE)),
-        srcLicense = kendoBuild.template(srcLicenseTemplate)({ version: VERSION, year: startDate.getFullYear() }),
+        srcLicenseTemplate = readText(path.join(LEGAL_ROOT, SRC_LICENSE)),
+        srcLicense = template(srcLicenseTemplate)({ version: VERSION, year: startDate.getFullYear() }),
         packageName = path.join(DROP_LOCATION, deployName + ".zip");
 
     console.log("Building " + deployName);
