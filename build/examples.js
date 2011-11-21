@@ -1,6 +1,7 @@
 /* requries */
 var fs = require("fs"),
     sys = require("sys"),
+    path = require("path"),
     docs = require("./docs"),
     themes = require("./themes"),
     kendoBuild = require("./kendo-build"),
@@ -269,15 +270,15 @@ function importComponentHelp(exampleHTML, component) {
 }
 
 function fixNewLines(text) {
-    return text.replace(/\s+$/mg, "").replace(/\n/mg, "\r\n")
+    return text.replace(/\s+$/mg, "").replace(/\n/mg, "\r\n");
 }
 
-function processExample(file) {
-    var exampleHTML = fs.readFileSync(file, "utf8"),
-        base = file === outputPath + "/index.html" ? "" : "../../",
+function processExample(fileName) {
+    var exampleHTML = kendoBuild.readText(fileName),
+        base = fileName === outputPath + "/index.html" ? "" : "../../",
         scriptRegion = splitScriptRegion(exampleHTML, base),
         cssRegion = splitCSSRegion(exampleHTML, base),
-        component = componentFromFilename(file);
+        component = componentFromFilename(fileName);
 
     exampleHTML = baseRegions.meta.exec(exampleHTML, baseRegions.meta.html);
 
@@ -299,22 +300,7 @@ function processExample(file) {
 
     exampleHTML = importComponentHelp(exampleHTML, component);
 
-    fs.writeFileSync(file, exampleHTML, "utf8");
-}
-
-function processExamplesDirectory(dir) {
-    var children = fs.readdirSync(dir);
-
-    for (var i = 0; i < children.length; i++) {
-        var name = dir + "/" + children[i];
-        var stat = fs.statSync(name);
-
-        if (!stat.isFile()) {
-            processExamplesDirectory(name);
-        } else if (/\.html$/.test(name)) {
-            processExample(name);
-        }
-    }
+    kendoBuild.writeText(fileName, exampleHTML);
 }
 
 function copyResources(source, destination, processCallback, filterRegExp) {
@@ -389,7 +375,7 @@ function build(origin, destination, kendoCDN) {
     fs.unlinkSync(outputPath + "/template.html");
 
     if (!kendoCDN) {
-        fs.writeFileSync(outputPath + "/shared/js/jquery.js", fs.readFileSync("src/jquery.js", "utf8"), "utf8");
+        fs.writeFileSync(outputPath + "/shared/js/jquery.min.js", fs.readFileSync("src/jquery.min.js", "utf8"), "utf8");
     } else {
         fs.writeFileSync(outputPath + "/web.config", fs.readFileSync("web.config", "utf8"), "utf8");
     }
@@ -433,10 +419,13 @@ function build(origin, destination, kendoCDN) {
     docs.build();
 
     console.log("processing examples...");
-    processExamplesDirectory(outputPath);
+    kendoBuild.processFilesRecursive(outputPath, /\.html$/, processExample);
 
-    var index = fs.readFileSync(examplesLocation + "/index.html", "utf8");
-    fs.writeFileSync(outputPath + "/index.html", index.replace(isLive, ""), "utf8");
+    var index = kendoBuild.readText(path.join(examplesLocation, "index.html"));
+    kendoBuild.writeText(
+        path.join(outputPath, "index.html"),
+        index.replace(isLive, "")
+    );
 };
 
 if (require.main === module) {
