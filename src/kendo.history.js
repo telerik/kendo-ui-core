@@ -21,18 +21,14 @@
             that.root = options.root || "/";
             that._interval = 0;
 
-
+            this.bind(["change", "ready"], options);
             if (that._normalizeUrl()) {
                 return true;
             }
 
+            that.current = that._currentLocation();
             that._listenToLocationChange();
-            if (!options.silent) {
-                that.current = that.root;
-                that._checkUrl();
-            } else {
-                that.current = that._currentLocation();
-            }
+            that.trigger("ready", { location: that.current });
         },
 
         stop: function() {
