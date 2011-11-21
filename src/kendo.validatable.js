@@ -34,7 +34,65 @@
             return false;
         };
 
-    var Validatable = Widget.extend( {
+    /**
+     *  @name kendo.ui.Validatable.Description
+     *
+     *  @section
+     *  <p>
+     *     Validatable component offers an easy way to do client-side form validation.
+     *     Built around the HTML5 form validation attributes it supports variety of built-in validation rules, but also provides a convenient way for setting custom rules handling.
+     *  </p>
+     *  @exampleTitle <b>Validatable</b> initialization to validate input elements inside a container
+     *  @example
+     *  <div id="myform">
+     *   <input type="text" name="firstName" required />
+     *   <input type="text" name="lastName" required />
+     *   <button id="save" type="button">Save</button>
+     *  </div>
+     *
+     *  <script>
+     *   $(document).ready(function(){
+     *       var validatable = $("#myform").kendoValidatable().data("kendoValidatable");
+     *       $("#save").click(function() {
+     *          if (validatable.validate()) {
+     *              save();
+     *          }
+     *       });
+     *   });
+     *   </script>
+     */
+    var Validatable = Widget.extend(/** @lends kendo.ui.Validatable.prototype */{ /**
+         * @constructs
+         * @extends kendo.ui.Widget
+         * @param {DomElement} element DOM element
+         * @param {Object} options Configuration options.
+         * @option {Object} [rules] Set of validation rules. Those rules will extend the built-in ones.
+         * _example
+         * $("#myform").kendoValidatable({
+         *      rules: {
+         *          custom: function(input) {
+         *              return input.is("[name=firstname]") && input.val() === "Tom"; // Only Tom will be a valid value for FirstName input
+         *          }
+         *      }
+         * });
+         * @option {Object} [messages] Set of messages (either strings or functions) which will be shown when given validation rule fails.
+         *  By setting already existing key the appropriate built-in message will be overridden.
+         * _example
+         * $("#myform").kendoValidatable({
+         *      rules: {
+         *          custom: function(input) {
+         *             //...
+         *          }
+         *      },
+         *      messages: {
+         *          custom: "Please enter valid value for my custom rule",// defines message for the 'custom' validation rule
+         *          required: "My custom required message", // overrides the built-in message for required rule
+         *          email: function(input) { // overrides the built-in email rule message with a custom function which return the actual message
+         *              return getMessage(input);
+         *          }
+         *      }
+         * });
+         */
         init: function(element, options) {
             var that = this;
 
@@ -147,6 +205,10 @@
             }
         },
 
+        /**
+         * Validates the input element(s) against the declared validation rules.
+         * @returns {Boolean} If all rules are passed successfully.
+         */
         validate: function() {
             var that = this,
                 inputs,
@@ -219,6 +281,10 @@
             return { valid: true };
         },
 
+        /**
+         * Get the error messages if any.
+         * @returns {Array} Messages for the failed validation rules.
+         */
         errors: function() {
             var results = [],
                 errors = this._errors,
