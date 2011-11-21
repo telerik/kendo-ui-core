@@ -167,7 +167,7 @@
                 link.trigger(kendo.support.mouseup);
             });
 
-            test("passes button name if a button is clicked", function() {
+            test("passes button if a button is clicked", function() {
                 var dom = $('<ul><li><a href="#" data-kendo-name="foo">Foo</a></li></ul>'),
                     link = dom.find("li>a");
 
@@ -175,6 +175,7 @@
 
                 listView.bind("click", function(e) {
                     equal(e.buttonName, "foo", "event passes the clicked button name");
+                    equal(e.button, dom.find('[data-kendo-name=foo]').data("kendoMobileButton"), "event passes the clicked button name");
                 });
 
                 link.trigger(kendo.support.mousedown);
