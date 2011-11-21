@@ -92,7 +92,7 @@
             that.data = data && !$.isEmptyObject(data) ? data : extend(true, {}, that.defaultItem);
             that.pristine = extend(true, {}, that.data);
 
-            if (that.id() === undefined || that.id() === that._defaultId) {
+            if (that.id() === undefined || that.id() === that.defaultId) {
                 that._isNew = true;
                 that.data["__id"] = kendo.guid();
             }
@@ -226,7 +226,11 @@
 
             var name = field.field || field,
                 type = field.type || "default",
-                value = proto.defaultItem[name] = field.defaultValue != undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
+                value = null;
+
+            if (!field.useNull) {
+                value = proto.defaultItem[name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
+            }
 
             if (options.id === name) {
                 defaultId = proto._defaultId = value;
@@ -241,7 +245,7 @@
             var result;
             if (value === undefined) {
                 result = get(data);
-                return result !== undefined && result !== defaultId ? result : data["__id"];
+                return result !== undefined && result !== null && result !== defaultId ? result : data["__id"];
             } else {
                 set(data, value);
             }

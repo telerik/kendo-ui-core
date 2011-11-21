@@ -69,7 +69,7 @@
                         model: {
                             id: "id",
                             fields: {
-                                id: { field: "id", type: "number" },
+                                id: { field: "id", type: "number", useNull: true, defaultValue: 0 },
                                 foo: {
                                     field: "foo",
                                     readonly: true
