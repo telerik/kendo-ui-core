@@ -1,0 +1,37 @@
+html, body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #a2441c;
+}
+
+a:hover {
+    color: #ef652a;
+}
+
+html {
+    font: 75% arial,helvetica,sans-serif;
+    background: #333;
+}
+
+#page {
+    background: #fff;
+    width: 56em;
+    margin: 0 auto;
+    box-shadow: 0 0 6px #aaa;
+    border: solid #666;
+    border-width: 0 1px;
+    padding: 1em 3em;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 2em;
+}
+
+li {
+    padding: .2em 0;
+}
+

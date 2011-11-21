@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+    <title>Kendo UI Examples</title>
+    <link rel="stylesheet" href="../shared/styles/suite.css" />
+</head>
+<body>
+    <div id="page">
+    # for (var categoryName in data) { #
+        <h1>#= categoryName[0].toUpperCase() + categoryName.substring(1) #</h1>
+
+        <ul>
+        # for (var i = 0, children = data[categoryName]; i < children.length; i++) { #
+            <li>
+                <h2>#= children[i].text #</h2>
+                <ul>
+                # for (var k = 0, items = children[i].items; k < items.length; k++) { #
+                    <li><a href='#= items[k].url #'>#= items[k].text #</a></li>
+                # } #
+                </ul>
+
+            </li>
+        # } #
+        </ul>
+    # } #
+    </div>
+</body>
+</html>
