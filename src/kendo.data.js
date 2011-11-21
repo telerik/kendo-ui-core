@@ -1288,8 +1288,14 @@
          * If data is not available or remote operations are enabled data is requested through the transport,
          * otherwise operations are executed over the available data.
          */
-        fetch: function() {
-            this._query();
+        fetch: function(callback) {
+            var that = this;
+
+            if (callback && isFunction(callback)) {
+                that.one(CHANGE, callback);
+            }
+
+            that._query();
         },
 
         _query: function(options) {
