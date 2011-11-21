@@ -277,6 +277,7 @@
     <None Include="UIWidgets\PanelBar\Events\PanelBarEvents.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="UIWidgets\Slider\API\DoubleSliderDisableMove.tstest" />
     <None Include="UIWidgets\Slider\API\DoubleSliderEnabledisable.tstest" />
     <None Include="UIWidgets\Slider\API\DoubleSliderSetValue.tstest" />
     <None Include="UIWidgets\Slider\API\SingleSliderEnableDisable.tstest" />
@@ -284,7 +285,6 @@
     <None Include="UIWidgets\Slider\BasicUsage\ChangeValueDragAndDropSingleSlider.tstest" />
     <None Include="UIWidgets\Slider\Events\ChangeValueDoubleSlider.tstest" />
     <None Include="UIWidgets\Slider\Events\ChangeValueButtonsSingleSlider.tstest" />
-    <None Include="UIWidgets\Splitter\ResizaAllPanels.tstest" />
     <None Include="UIWidgets\Splitter\ResizePanels.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -486,11 +486,6 @@
   <ItemGroup>
     <None Include="UIWidgets\Slider\API\DoubleSliderEnabledisable.resx">
       <DependentUpon>DoubleSliderEnabledisable.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UIWidgets\Splitter\ResizaAllPanels.resx">
-      <DependentUpon>ResizaAllPanels.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -837,6 +832,11 @@
     </None>
     <None Include="UIWidgets\TreeView\DragAndDrop\DragAndDropBetweenTrees.resx">
       <DependentUpon>DragAndDropBetweenTrees.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UIWidgets\Slider\API\DoubleSliderDisableMove.resx">
+      <DependentUpon>DoubleSliderDisableMove.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
