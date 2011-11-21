@@ -1,12 +1,12 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        mobile = kendo.mobile,
         support = kendo.support,
         touch = support.touch,
         os = support.mobileOS,
         TOGGLE = "toggle",
-        SNAP = "snap",
+        CHANGE = "change",
+        SLIDE = "slide",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         MOUSEMOVE = touch ? "touchmove" : "mousemove",
         MOUSEUP = touch ? "touchend" : "mouseup",
@@ -15,6 +15,10 @@
         TRANSFORMSTYLE = support.transitions.css + "transform",
         extend = $.extend,
         proxy = $.proxy,
+        slideAnimation = {
+            manimator: ".km-slider-background",
+            animator: ".km-slider-handle"
+        },
         switchAnimation = {
             all: {
                 manimator: ".km-switch-background",
@@ -39,12 +43,24 @@
     }
 
     function Axis(element, owner) {
-        var initial, width, halfWidth, constrain, location, handle, animator, manimator, margin,
+        var initial, width, halfWidth, constrain, location, lastValue,
+            handle, animator, manimator, origin, snapPart,
             options = owner.options,
+            max = options.max,
             axis = options.axis,
             axisProperty = axis == "x" ? "left" : "top";
 
         element.bind(MOUSEDOWN, start);
+
+        function setPosition(e, location) {
+            location = limitValue(location, halfWidth, constrain + halfWidth);
+
+            var position = location - halfWidth;
+            animator.css(TRANSFORMSTYLE, "translate" + axis + "(" + position + "px)"); // TODO: remove halfWidth
+            manimator.css("margin-" + axisProperty, origin + position);
+
+            return Math.round(position / snapPart);
+        }
 
         function getAxisLocation(e, element) {
             return kendo.touchLocation(e)[axis] - element.offset()[axisProperty];
@@ -57,11 +73,16 @@
             width = element.outerWidth();
             handle = element.find(options.handle);
             halfWidth = handle.outerWidth() / 2;
+            snapPart = (width - halfWidth*2) / (max - 1);
             constrain = width - handle.outerWidth(true);
             animator = element.find(extend({ animator: "animator" in switchAnimation ? switchAnimation.animator : options.handle }, options).animator);
             manimator = element.find(extend({ manimator: switchAnimation.manimator }, options).manimator);
             location = limitValue(initial, halfWidth, constrain + halfWidth);
-            margin = manimator.data("margin");
+            origin = manimator.data("origin");
+            if (!origin && origin !== 0) {
+                origin = parseInt(manimator.css("margin-left"), 10);
+                manimator.data("origin", origin);
+            }
 
             $(document)
                 .bind(MOUSEMOVE, move)
@@ -69,21 +90,19 @@
         }
 
         function move(e) {
-            location = limitValue(getAxisLocation(e, element), halfWidth, constrain + halfWidth);
-            animator.css(TRANSFORMSTYLE, "translate" + axis + "(" + (location - halfWidth) + "px)"); // TODO: remove halfWidth
-            manimator.css("margin-" + axisProperty, margin + location - halfWidth);
+            var value = setPosition(e, getAxisLocation(e, element));
+            if (value != lastValue)
+                owner.trigger(SLIDE, { value: value });
+            lastValue = value;
         }
 
         function stop(e) {
-            var max = options.max,
-                snapPart = width / (max - 1);
-
             preventDefault(e);
 
-            if (Math.abs(initial - getAxisLocation(e, element)) > 2) {
-                owner.trigger(SNAP, { snapTo: Math.round(location / snapPart) });
-            } else if (max == 2) {
-                owner.trigger(SNAP, { snapTo: !owner.input[0].checked });
+            if (max == 2 && Math.abs(initial - getAxisLocation(e, element)) <= 2) {
+                owner.trigger(CHANGE, { value: !owner.input[0].checked });
+            } else {
+                owner.trigger(CHANGE, { value: setPosition(e, getAxisLocation(e, element)) });
             }
 
             $(document)
@@ -102,7 +121,7 @@
 
             Axis(that.element, that);
 
-            that.bind([ SNAP ], options);
+            that.bind([ CHANGE, SLIDE ], options);
         },
 
         options: {
@@ -184,7 +203,7 @@
             that._wrap();
             that.enable(that.options.enable);
 
-            that.bind(SNAP, proxy(that._snap, that));
+            that.bind(CHANGE, proxy(that._snap, that));
         },
 
         options: {
@@ -198,14 +217,14 @@
             var that = this;
 
             if (that.options.enable) {
-                that._snap({ snapTo: that.input[0].checked })
+                that._snap({ value: that.input[0].checked })
             }
         },
 
         _snap: function (e) {
             var that = this,
                 handle = that.handle,
-                checked = (e.snapTo == 1), distance;
+                checked = (e.value == 1), distance;
 
             handle
                 .removeClass("km-switch-on")
@@ -213,11 +232,12 @@
                 .addClass("km-switch-" + (checked ? "on" : "off"));
 
             if (!handle.data("animating")) {
-                distance = e.snapTo * (that.element.outerWidth() - that.handle.outerWidth(true));
+                distance = e.value * (that.element.outerWidth() - that.handle.outerWidth(true));
 
-                that.marginator
+                that.mAnimator
                     .kendoStop(true, true)
-                    .kendoAnimate({ effects: "slideMargin", offset: distance, axis: "left", duration: 150 });
+                    .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !e.value, axis: "left", duration: 150 });
+
                 that.animator
                     .kendoStop(true, true)
                     .kendoAnimate(extend({
@@ -253,9 +273,11 @@
                                     .children(handleSelector);
             }
 
-            that.marginator = handle.parent().before("<span class='km-switch-wrapper'><span class='km-switch-background'></span></span>").find(switchAnimation.manimator);
+            handle.parent().before("<span class='km-switch-wrapper'><span class='km-switch-background'></span></span>");
+
             that.animator = "animator" in switchAnimation ? that.element.find(switchAnimation.animator) : handle;
-            that.marginator.data("margin", parseInt(that.marginator.css("margin-left"), 10));
+
+            that.mAnimator = that.element.find(switchAnimation.manimator);
 
             that.input = input;
             that.handle = handle;
@@ -318,21 +340,20 @@
         init: function(element, options) {
             var that = this;
 
-            SlidingHelper.fn.init.call(that, element, extend(options, { handle: handleSelector }));
+            SlidingHelper.fn.init.call(that, element, extend(options, slideAnimation, { handle: slideAnimation.animator }));
 
             that._wrap();
+            that.bind([ CHANGE, SLIDE ], that.options);
         },
 
         options: {
             name: "MobileSlider",
             enable: true,
-            max: 100,
-            manimator: ".km-slider-background",
-            animator: ".km-slider-handle"
+            max: 100
         },
 
         _wrap: function() {
-            var that = this, handle,
+            var that = this, handle, marginElement,
                 element = that.element;
 
             if (that.element.is("span"))
@@ -343,16 +364,19 @@
             else
                 $("<span data-kendo-role='slider' class='km-slider'><span class='km-slider-handle'></span></span>").appendTo(that.element);
 
-            handle = element.find(".km-slider-handle");
+            handle = element.find(slideAnimation.animator);
 
             if (!handle.length) {
                 handle = $("<span class='km-slider-container'><span class='km-slider-handle' /></span>")
                                     .appendTo(element)
-                                    .children(".km-slider-handle");
+                                    .children(slideAnimation.animator);
             }
 
-            var marginator = handle.parent().before("<span class='km-slider-wrapper'><span class='km-slider-background'></span></span>").find(that.options.manimator);
-            marginator.data("margin", parseInt(marginator.css("margin-left"), 10));
+            handle.parent().before("<span class='km-slider-wrapper'><span class='km-slider-background'></span></span>");
+
+            marginElement = that.element.find(slideAnimation.manimator);
+            marginElement.data("margin", parseInt(marginElement.css("margin-left"), 10));
+
             that.handle = handle;
         }
 

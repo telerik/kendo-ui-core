@@ -649,10 +649,13 @@
         },
         slideMargin: {
             setup: function(element, options) {
-                var offset = options.offset,
-                    extender = {}, reverse = options.reverse,
-                    margin = (element.data("margin") || 0);
+                var origin = element.data(ORIGIN),
+                    offset = options.offset, margin,
+                    extender = {}, reverse = options.reverse;
 
+                !reverse && !origin && origin !== 0 && element.data(ORIGIN, parseInt(element.css("margin-left"), 10));
+
+                margin = (element.data(ORIGIN) || 0);
                 extender["margin-" + options.axis] = !reverse ? margin + offset : margin;
                 return extend(extender, options.properties);
             }

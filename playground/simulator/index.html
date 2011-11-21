@@ -16,9 +16,17 @@
     <script src="../../src/kendo.dropdownlist.js"></script>
 
     <style type="text/css">
+        html {
+            min-height: 100%;
+        }
+
         body
         {
+            min-height: 100%;
             font: 12px/normal Arial, Helvetica, sans-serif;
+            background: url("images/flowertop.png") 0 0 no-repeat,
+                        url("images/flowerbottom.png") 100% 100% no-repeat,
+                        url("images/background.png");
         }
 
         #simulator
@@ -32,7 +40,7 @@
             -moz-user-select: -moz-none;
             user-select: none;
             position: relative;
-            float: right;
+            float: left;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
@@ -54,31 +62,72 @@
             box-sizing: border-box;
         }
 
+        .selector
+        {
+            width: 170px;
+            margin-bottom: 20px;
+        }
+
         .configurator
         {
+            text-align: left;
             border-radius: 5px;
             display: inline-block;
-            width: 250px;
+            vertical-align: middle;
+            margin-right: 20px;
+            width: 220px;
+        }
+
+        .configurator > *
+        {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 16px;
         }
 
         .configurator > span
         {
             display: inline-block;
             vertical-align: middle;
-            line-height: 30px;
+            line-height: 28px;
         }
 
-        .k-button
+        .configurator .k-button
         {
             margin-left: 10px;
+            float: right;
+        }
+
+        .description
+        {
+            text-align: left;
+            margin: 20px;
+            font-size: 12px;
+        }
+
+        .description .device
+        {
+            margin: 30px 0 10px 40px;
+            font-size: 14px;
+        }
+
+        .description .model
+        {
+            display: block;
+            font-size: 24px;
         }
 
         .k-button > span
         {
             width: 24px;
-            height: 28px;
+            height: 26px;
             display: block;
             background: transparent url("images/orientation.png") 0 2px no-repeat;
+        }
+
+        .horizontal
+        {
+            clear: both;
         }
 
         .horizontal > span
@@ -101,17 +150,78 @@
             font: 12px/16px Arial,Helvetica,sans-serif;
         }
 
+        .header
+        {
+            top: 30px;
+            left: auto;
+            right: 30px;
+            bottom: 30px;
+            width: 260px;
+            text-align: right;
+            position: absolute;
+            z-index: 1;
+            box-shadow: 0 1px 2px rgba(0,0,0,.6);
+            background: -moz-linear-gradient(top, rgba(200,200,200,.1), rgba(0,0,0,.25) 20%);
+            background: -webkit-linear-gradient(top, rgba(200,200,200,.1), rgba(0,0,0,.25) 20%);
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+        }
+
+        .header:before
+        {
+            content: "\a0";
+            display: inline-block;
+            height: 120px;
+            width: 100%;
+            vertical-align: middle;
+            background: url("images/kendomobile.png") 50% 18px no-repeat;
+        }
+
+        .header:after
+        {
+            content: "\a0";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 40px;
+            top: 0;
+            -webkit-border-radius: 8px 8px 0 0;
+            -moz-border-radius: 8px 8px 0 0;
+            border-radius: 8px 8px 0 0;
+            background: -moz-radial-gradient(50% 0, farthest-corner, rgba(255,255,255,.1), rgba(255,255,255,.1) 75%, transparent 77%);
+            background: -webkit-radial-gradient(50% 0, farthest-corner, rgba(255,255,255,.1), rgba(255,255,255,.1) 75%, transparent 77%);
+            opacity: .3;
+        }
+
+        .header hr
+        {
+            border: 0;
+            border-bottom: 1px solid #bbb;
+            opacity: .3;
+            margin: 20px 10px;
+        }
     </style>
 </head>
 <body class="k-content">
+    <div class="header">
+        <div class="configurator">
+            <input id="device-selector" class="selector" style="float: right" /><span>Device:&nbsp;</span><br>
+            <span class="k-button horizontal" data-orientation="horizontal"><span></span></span><span class="k-button" data-orientation="vertical"><span></span></span><span>Orientation:&nbsp;</span>
+        </div>
+        <hr />
+        <div class="description">
+            <div class="device">
+                Apple
+                <span class="model">iPad 2</span>
+            </div>
+            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
+        </div>
+    </div>
     <div class="device-container vertical">
         <div class="device-skin"></div>
         <input id="address-bar" type="text" onchange="frame.src = 'http://' + this.value.replace('http://', '')" />
         <iframe id="simulator" src="../../playground/mobile/tokendo/layout.html" frameborder="0" width="100%" height="100%"></iframe>
-    </div>
-    <div class="configurator k-dropdown">
-        <input id="device-selector" style="float: right" /><span>Device:&nbsp;</span><br>
-        <span class="k-button horizontal" data-orientation="horizontal" style="float: right"><span></span></span><span class="k-button" data-orientation="vertical" style="float: right"><span></span></span><span>Orientation:&nbsp;</span>
     </div>
     <script type="text/javascript">
         var mobiles = {
@@ -163,8 +273,9 @@
             return os;
         }
 
-        function changeDevice(devicename) {
-            var deviceLink = $("link[href*='devices/']", document.getElementsByTagName("head")[0]),
+        function changeDevice() {
+            var devicename = deviceSelector.value(),
+                deviceLink = $("link[href*='devices/']", document.getElementsByTagName("head")[0]),
                 url = "devices/" + devicename + "/styles.css", newLink;
 
             if (!$.browser.msie) {
@@ -181,9 +292,11 @@
 
             var os = frame.contentWindow.kendo.support.mobileOS = detectOS(mobiles[devicename].ua);
             foreignDocument.documentElement.className = "km-" + (!os ? "ios" : os.name);
-            setTimeout( function () {
-                frame.onload();
-            }, 150 );
+//            setTimeout( function () {
+//                frame.onload();
+                var matches = deviceSelector.text().match(/(^\w+)\s(.*)/m);
+                $(".description .device").html(matches[1] + "<span class='model'>" + matches[2] + "</span>")
+//            }, 150 );
 
             resizeContent();
         }
@@ -201,12 +314,12 @@
         }
 
         function fixFF() {
-            var doc = $(foreignDocument);
+            var doc = $(foreignDocument.documentElement);
 
             if (kendo.support.transitions.prefix == "Moz") { // FlexBox is broken in FF.
-                var kendoContent = doc.find(".km-content");
+                var kendoView = doc.find(".km-view");
 
-                if (kendoContent.length) {
+                if (kendoView.length) {
                     var head = doc.find("head")/*,
                         headerHeight = foreignDocument.find(".km-header").outerHeight(),
                         footerHeight = foreignDocument.find(".km-footer").outerHeight()*/;
@@ -219,23 +332,24 @@
             }
         }
 
-        $("#device-selector")
-                .change( function () {
-                    changeDevice(this.value);
-                })
-                .width("180px")
-                .kendoDropDownList([
-                    { text: "iPad", value: "ipad" },
-                    { text: "iPhone/iPod Touch", value: "iphone" },
-                    { text: "Google Nexus S (phone)", value: "nexuss" },
-                    { text: "Acer A100 (tablet)", value: "a100" }
-                ]);
+        var deviceSelector = $("#device-selector")
+                                    .val("ipad")
+                                    .change( function () {
+                                        frame.contentWindow.location.reload();
+                                    })
+                                    .kendoDropDownList([
+                                        { text: "Apple iPad 2", value: "ipad" },
+                                        { text: "Apple iPhone 4", value: "iphone" },
+                                        { text: "Google Nexus S", value: "nexuss" },
+                                        { text: "Acer Iconia Tab A100", value: "a100" }
+                                    ]).data("kendoDropDownList");
 
         var frame = $("#simulator")[0],
             addressBar = $("#address-bar"),
-            foreignDocument = frame.contentWindow.document;
+            foreignDocument;
 
         frame.onload = function () {
+            foreignDocument = frame.contentWindow.document;
             if (frame.src != addressBar.val())
                 addressBar.val(frame.src);
 
@@ -244,6 +358,7 @@
             });
 
             fixFF();
+            changeDevice();
         };
 
         $(document).delegate("[data-orientation]", "click", function () {
