@@ -1086,11 +1086,15 @@
         },
 
         cleanupFrame: function(frame) {
-            var form = frame.data("form");
+            var form = frame.data("form"),
+                module = this;
+
             frame.data("file").data("frame", null);
 
             setTimeout(function () {
                 form.remove();
+
+                module.stopFrameSubmit(frame);
                 frame.remove();
             }, 1);
         }
