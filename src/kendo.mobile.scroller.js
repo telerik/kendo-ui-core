@@ -19,9 +19,7 @@
         VISIBLE = "visible",
         TRANSFORM = support.transitions.css + "transform",
         TRANSFORMSTYLE = support.transitions.prefix + "Transform",
-        STARTEVENT = touch ? "touchstart" : "mousedown",
         MOVEEVENT = touch ? "touchmove" : "mousemove",
-        ENDEVENT = touch ? "touchend" : "mouseup",
         FRAMERATE = 1000 / 30,
         ACCELERATION = 20,
         VELOCITY = 0.5,
@@ -172,10 +170,6 @@
             $(document)
                 .unbind(MOVEEVENT, start)
                 .bind(MOVEEVENT, start);
-
-            scrollElement
-                .unbind(ENDEVENT, stop) // Make sure previous event is removed
-                .bind(ENDEVENT, stop);
         }
 
         function start(e) {
@@ -184,6 +178,10 @@
             if (!location || abs(lastLocation - location) <= dip10) {
                 return;
             }
+
+            scrollElement
+                .unbind(support.mouseup, stop) // Make sure previous event is removed
+                .bind(support.mouseup, stop);
 
             changeDirection(location);
 
@@ -231,7 +229,7 @@
                 .unbind(MOVEEVENT, start)
                 .unbind(MOVEEVENT, drag);
 
-            scrollElement.unbind(ENDEVENT, stop);
+            scrollElement.unbind(support.mouseup, stop);
 
             if (dragged) {
                 dragged = false;
@@ -312,7 +310,7 @@
            boxSize = element[boxSizeName]();
            scroll = scrollSize - boxSize;
            enabled = scroll > 0;
-           zoomLevel = kendo.support.zoomLevel();
+           zoomLevel = support.zoomLevel();
            dip10 = 5 * zoomLevel;
            minLimit = boxSize * BOUNCE_LIMIT;
            maxLimit = scroll + minLimit;
@@ -330,7 +328,7 @@
        element
            .bind("gesturestart", gestureStart)
            .bind("gestureend", gestureEnd)
-           .bind(STARTEVENT, wait);
+           .bind(support.mousedown, wait);
     }
 
     var Scroller = kendo.ui.MobileWidget.extend({
