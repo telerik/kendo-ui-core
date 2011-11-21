@@ -13,26 +13,26 @@ var fs = require("fs"),
 // Configuration ==============================================================
 
 var bundles = [{
-    name: "kendoui.web_dataviz",
-    license: "Commercial",
+    name: "kendoui.web-dataviz",
+    license: "commercial",
     eula: "EULA-Kendo.pdf",
     hasSource: true
 }, {
-    name: "kendoui.web_dataviz",
-    license: "Trial",
+    name: "kendoui.web-dataviz",
+    license: "trial",
     eula: "EULA-Kendo.pdf",
     hasSource: false
 }, {
-    name: "kendoui.web_dataviz",
-    license: "OpenSource",
+    name: "kendoui.web-dataviz",
+    license: "open-source",
     eula: "EULA-Kendo.pdf",
     hasSource: true
 }];
 
 var sourceLicenses = {
-    "Commercial": "src-commercial.txt",
-    "Trial": "src-commercial.txt",
-    "OpenSource": "src-os.txt"
+    "commercial": "src-commercial.txt",
+    "trial": "src-commercial.txt",
+    "open-source": "src-os.txt"
 };
 
 var VERSION = kendoBuild.generateVersion(),
@@ -46,8 +46,8 @@ var VERSION = kendoBuild.generateVersion(),
     DEPLOY_SOURCE = "source",
     DEPLOY_SCRIPTS = "js",
     DEPLOY_STYLES = "styles",
-    DEPLOY_ONLINEEXAMPLES = "onlineExamples",
-    ONLINE_EXAMPLES_PACKAGE = "OnlineExamples.zip";
+    DEPLOY_ONLINEEXAMPLES = "online-examples",
+    ONLINE_EXAMPLES_PACKAGE = "kendoui-online-examples.zip";
 
 // Implementation ==============================================================
 var startDate = new Date();
