@@ -14,19 +14,19 @@ var fs = require("fs"),
 
 var bundles = [{
     name: "kendoui.web-dataviz",
-    includes: ["web", "dataviz"],
+    suites: ["web", "dataviz"],
     license: "commercial",
     eula: "EULA-Kendo.pdf",
     hasSource: true
 }, {
     name: "kendoui.web-dataviz",
-    includes: ["web", "dataviz"],
+    suites: ["web", "dataviz"],
     license: "trial",
     eula: "EULA-Kendo.pdf",
     hasSource: false
 }, {
     name: "kendoui.web-dataviz",
-    includes: ["web", "dataviz"],
+    suites: ["web", "dataviz"],
     license: "open-source",
     eula: "EULA-Kendo.pdf",
     hasSource: true
@@ -34,13 +34,16 @@ var bundles = [{
 
 var VERSION = kendoBuild.generateVersion(),
     CDN_URL = process.argv[2] || "http://cdn.kendostatic.com/" + VERSION,
+    INDEX = "index.html",
     SCRIPTS_ROOT = "src",
     STYLES_ROOT = "styles",
     DEMOS_ROOT = path.join("demos", "examples"),
-    EXAMPLES_INDEX = path.join("build", "templates", "simple-index.html"),
+    TEMPLATES_ROOT = path.join("build", "templates"),
+    SUITE_INDEX = path.join(TEMPLATES_ROOT, "suite-index.html"),
+    BUNDLE_INDEX = path.join(TEMPLATES_ROOT, "bundle-index.html"),
     EXAMPLES_NAVIGATION = "kendo.examples.nav.js",
     SHARED_ROOT = "shared",
-    LEGAL_ROOT = "resources/legal",
+    LEGAL_ROOT = path.join("resources", "legal"),
     SRC_LICENSE = "src-license.txt",
     THIRD_PARTY_LICENSES = "licenses.txt",
     DROP_LOCATION = "release",
@@ -135,7 +138,7 @@ function deployExamples(root, bundle) {
         path.join(examplesRoot, SHARED_ROOT)
     );
 
-    bundle.includes.forEach(function(suite) {
+    bundle.suites.forEach(function(suite) {
         var suiteSrc = path.join(DEMOS_ROOT, suite),
             suiteDest = path.join(examplesRoot, suite);
 
@@ -150,25 +153,38 @@ function deployExamples(root, bundle) {
             kendoBuild.writeText(name, data);
         });
 
-        buildExamplesIndex(suiteDest);
+        buildSuiteIndex(suiteDest);
     });
+
+    buildBundleIndex(root, bundle);
 }
 
-function buildExamplesIndex(suiteRoot) {
+function buildSuiteIndex(suiteRoot) {
     var navigation = kendoBuild.readText(
         path.join(suiteRoot, "js", EXAMPLES_NAVIGATION)
     );
 
     var indexTemplate = kendoBuild.template(
-        kendoBuild.readText(EXAMPLES_INDEX)
+        kendoBuild.readText(SUITE_INDEX)
     );
 
     eval(navigation);
     delete categories.overview;
 
     kendoBuild.writeText(
-        path.join(suiteRoot, "index.html"),
+        path.join(suiteRoot, INDEX),
         indexTemplate(categories)
+    );
+}
+
+function buildBundleIndex(root, bundle) {
+    var indexTemplate = kendoBuild.template(
+        kendoBuild.readText(BUNDLE_INDEX)
+    );
+
+    kendoBuild.writeText(
+        path.join(root, DEPLOY_EXAMPLES, INDEX),
+        indexTemplate(bundle)
     );
 }
 
