@@ -13,6 +13,9 @@
         <script src="../src/kendo.popup.js"></script>
         <script src="../src/kendo.list.js"></script>
         <script src="../src/kendo.dropdownlist.js"></script>
+        <script src="../src/kendo.calendar.js"></script>
+        <script src="../src/kendo.datepicker.js"></script>
+        <script src="../src/kendo.numerictextbox.js"></script>
         <script src="../src/kendo.filtermenu.js"></script>
         <script src="../src/kendo.grid.js"></script>
 
@@ -65,6 +68,7 @@
                 <tr>
                     <th data-field="ShipCity">Ship City</th>
                     <th data-field="OrderID">Order ID</th>
+                    <th data-field="OrderDate">Order Date</th>
                 </th>
             </thead>
         </table>
@@ -83,19 +87,23 @@
                     },
                     data: [ {
                         OrderID: 1,
-                        ShipCity: "foo"
+                        ShipCity: "foo",
+                        OrderDate: new Date(2011, 1, 1)
                         },{
                         OrderID: 2,
-                        ShipCity: "bar"
+                        ShipCity: "bar",
+                        OrderDate: new Date(2010, 1, 1)
                     },{
                         OrderID: 3,
-                        ShipCity: "boo"
+                        ShipCity: "boo",
+                        OrderDate: new Date(2009, 1, 1)
                     } ],
                     schema: {
                         model: {
                             fields: {
                                 ShipCity: { type: "string" },
                                 OrderID: { type: "number" },
+                                OrderDate: { type: "date" }
                             }
                         }
                     }

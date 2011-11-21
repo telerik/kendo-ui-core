@@ -7,6 +7,9 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
         <script src="../../src/kendo.dropdownlist.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.filtermenu.js"></script>
@@ -43,6 +46,9 @@
                                     },
                                     bar: {
                                         type: "number"
+                                    },
+                                    baz: {
+                                        type: "date"
                                     }
                                 }
                             }
@@ -320,7 +326,7 @@
                 equal(filterMenu.form.find("[name='filters[0].operator']").val(), "neq");
             });
 
-            test("populates the operator from the datasource", function() {
+            test("applies active state", function() {
                 dataSource.filter( { field: "foo", value: "1", operator: "neq" });
 
                 var filterMenu = new FilterMenu(dom, {
@@ -328,6 +334,34 @@
                 });
 
                 ok(filterMenu.link.hasClass("k-state-active"));
+            });
+
+            test("removes active state", function() {
+                dataSource.filter( { field: "foo", value: "1", operator: "neq" });
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                dataSource.filter(null);
+                ok(!filterMenu.link.hasClass("k-state-active"));
+            });
+            test("creates numerictextbox for number fields", function() {
+                var filterMenu = new FilterMenu(
+                    dom.attr("data-field", "bar"), {
+                        dataSource: dataSource
+                    });
+
+                ok(filterMenu.form.find("[name='filters[0].value']").data("kendoNumericTextBox"));
+            });
+
+            test("creates datepicker for date fields", function() {
+                var filterMenu = new FilterMenu(
+                    dom.attr("data-field", "baz"), {
+                        dataSource: dataSource
+                    });
+
+                ok(filterMenu.form.find("[name='filters[0].value']").data("kendoDatePicker"));
             });
        </script>
     </body>

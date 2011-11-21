@@ -14,7 +14,7 @@
                         '<option value="#=op#">#=operators[op]#</option>'+
                     '#}#'+
                 '</select>'+
-                '<input name="filters[0].value" class="k-input k-autocomplete" type="text"/>'+
+                '<input name="filters[0].value" class="k-input k-autocomplete" type="text" data-type="#=type#"/>'+
                 '#if(extra){#'+
                     '<select name="logic">'+
                         '<option value="and">And</option>'+
@@ -25,7 +25,7 @@
                             '<option value="#=op#">#=operators[op]#</option>'+
                         '#}#'+
                     '</select>'+
-                    '<input name="filters[1].value" class="k-input k-autocomplete" type="text"/>'+
+                    '<input name="filters[1].value" class="k-input k-autocomplete" type="text" data-type="#=type#"/>'+
                 '#}#'+
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
@@ -109,7 +109,8 @@
                 field: that.field,
                 messages: options.messages,
                 extra: options.extra,
-                operators: operators
+                operators: operators,
+                type: type
             }));
 
             that.popup = new ui.Popup(that.form,{
@@ -123,7 +124,13 @@
                     reset: $.proxy(that._reset, that)
                 })
                 .find("select")
-                .kendoDropDownList();
+                .kendoDropDownList()
+                .end()
+                .find("[data-type=number]")
+                .kendoNumericTextBox()
+                .end()
+                .find("[data-type=date]")
+                .kendoDatePicker();
 
             that.refresh();
         },
