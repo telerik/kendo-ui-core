@@ -110,9 +110,8 @@
 
                 #chart {
                     width: 430px;
-                    height: 278px;
+                    height: 280px;
                     margin-top: 25px;
-                    padding-left: 1px;
                     border-style: solid;
                     border-width: 1px;
                 }
@@ -163,7 +162,7 @@
                     $("#grid").kendoGrid({
                         dataSource: sharedDataSource,
                         autoBind: false,
-                        scrollable: false,
+                        height: "280px",
                         sortable: {
                             allowUnsort: false
                         },
