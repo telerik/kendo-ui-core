@@ -8,7 +8,6 @@
         hashChangeSupported = ("onhashchange" in window) && !oldIE,
         document            = window.document;
 
-
     var History = kendo.Observable.extend({
 
         start: function(options) {
@@ -28,13 +27,13 @@
 
             that.current = that._currentLocation();
             that._listenToLocationChange();
-            that.trigger("ready", { location: that.current });
+            that.trigger("ready", this.url());
         },
 
         stop: function() {
             $(window).unbind(".kendo");
             this.unbind("change");
-            this.current = "/";
+            this.unbind("ready");
             clearInterval(this._interval);
         },
 
@@ -138,8 +137,23 @@
             }
 
             if (!silent) {
-                that.trigger("change", { location: that.current });
+                that.trigger("change", that.url());
             }
+        },
+
+        url: function() {
+            var parts = this.current.split('?'),
+                url = {location: parts[0], params: {}},
+                paramParts = (parts[1] || "").split(/&|=/),
+                length = paramParts.length,
+                idx = 0,
+                params = {};
+
+            for (; idx < length; idx += 2) {
+                url.params[paramParts[idx]] = paramParts[idx + 1];
+            }
+
+            return url;
         }
     });
 

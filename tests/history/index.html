@@ -193,6 +193,18 @@
 
                 win.location.hash = "/outside-location";
             });
+
+            test("passes parameters if any present", function() {
+                expect(2);
+                startWithHash();
+
+                kendoHistory.change(function(e) {
+                    equal(e.location, "/new-location");
+                    equal(e.params.foo, "bar");
+                });
+
+                kendoHistory.navigate("/new-location?foo=bar");
+            });
         </script>
     </body>
 </html>
