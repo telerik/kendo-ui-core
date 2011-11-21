@@ -143,7 +143,7 @@
 
         url: function() {
             var parts = this.current.split('?'),
-                url = {location: parts[0], params: {}},
+                url = {location: parts[0], params: {}, string: this.current},
                 paramParts = (parts[1] || "").split(/&|=/),
                 length = paramParts.length,
                 idx = 0,

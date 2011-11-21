@@ -49,7 +49,7 @@
         </style>
     </head>
     <body>
-        <div data-kendo-role="view" data-kendo-url="/" data-kendo-animation="slide">
+        <div data-kendo-role="view" id="index" data-kendo-url="/" data-kendo-animation="slide">
             <header data-kendo-role="header">
                 <div data-kendo-role="navbar">
                     <span data-kendo-role="view-title">Kendo Sushi!</span>
@@ -63,7 +63,7 @@
 
             <footer data-kendo-role="footer" data-id="default">
                 <div data-kendo-role="tabstrip">
-                    <a href="index.html">Home</a>
+                    <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
                     <a href="account.html">Account</a>
                     <a href="#cart">Cart</a>
@@ -82,6 +82,12 @@
             </div>
 
             <footer data-kendo-role="footer" data-id="default">
+                <div data-kendo-role="tabstrip">
+                    <a href="#index">Home</a>
+                    <a href="#menu">Our menu</a>
+                    <a href="account.html">Account</a>
+                    <a href="#cart">Cart</a>
+                </div>
             </footer>
         </div>
 
@@ -93,9 +99,7 @@
                 <img src="images/${image}" />
                 <span class="price">&euro; ${price}</span>
                 <h2>${name}</h2>
-                # if (cart.indexOf(id) >= 0) { #
-                    <span class="added">Item added in your cart</span>
-                # } #
+                <span class="added"#= cart.indexOf(id) === -1 ? 'style="display: none"' : "" #>Item added in your cart</span>
             </a>
         </script>
 
@@ -104,9 +108,7 @@
             <span class="price">&euro; ${price}</span>
             <h2>${name}</h2>
             <p>${description}</p>
-            # if (cart.indexOf(id) >= 0) { #
-                <span class="added">Item added in your cart</span>
-            # } #
+            <span class="added"#= cart.indexOf(id) === -1 ? 'style="display: none"' : "" #>Item added in your cart</span>
             <a data-kendo-role="button" href="\\#">Add to cart</a>
         </script>
 
@@ -117,27 +119,34 @@
                 transport: { read: { url: "featured.js", dataType: "json" } },
             });
 
-            ds.read();
-
             var itemDetailsTemplate = kendo.template($("#detailTemplate").text());
 
-            $("#featured").kendoMobileListView({dataSource: ds, template: $("#menuTemplate").text()});
+            kendo.application.bind("viewInit", function(e) {
+                var id = e.view.element.attr("id");
 
-            var listView = $("#featured").data("kendoMobileListView");
+                if (id === "index") {
+                    $("#featured").kendoMobileListView({dataSource: ds, template: $("#menuTemplate").text()});
 
-            listView.bind("click", function(e) {
-                if (e.buttonName === "add") {
-                    cart.push(e.dataItem.id);
-                    listView.refresh();
+                    var listView = $("#featured").data("kendoMobileListView");
+
+                    listView.bind("click", function(e) {
+                        if (e.buttonName === "add") {
+                            cart.push(e.dataItem.id);
+                            e.button.element.parent().find(".added").show();
+                            e.preventDefault();
+                        }
+                    });
                 }
             });
 
             kendo.application.bind("viewShow", function(e) {
-                var view = e.view, item;
+                var view = e.view, viewID = view.element.attr("id"), item;
 
-                if (view.element.attr("id") === "details") {
-                    item = ds.get(e.params.id).data;
-                    view.content.html(itemDetailsTemplate(item));
+                if (viewID === "details") {
+                    ds.fetch(function() {
+                        item = ds.get(e.params.id).data;
+                        view.content.html(itemDetailsTemplate(item));
+                    });
                 }
             });
         </script>
