@@ -773,6 +773,24 @@
                 equal(view.length, 1);
                 equal(view[0].foo, "1");
             });
+
+            test("fetch calls supplied callback only once on multiple fetches", function() {
+                var view,
+                    called = 0,
+                    dataSource = new DataSource({
+                        data: [{foo: 1, bar: "1"}]
+                    });
+
+                dataSource.fetch(function() {
+                    called++;
+                    view = dataSource.view();
+                });
+
+                dataSource.fetch();
+
+                ok(view);
+                equal(called, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -57,12 +57,13 @@
             this._events = {};
         },
 
-        bind: function(eventName, handlers) {
+        bind: function(eventName, handlers, one) {
             var that = this,
                 idx,
                 eventNames = $.isArray(eventName) ? eventName : [eventName],
                 length,
                 handler,
+                original,
                 events;
 
             for (idx = 0, length = eventNames.length; idx < length; idx++) {
@@ -71,6 +72,13 @@
                 handler = isFunction(handlers) ? handlers : handlers[eventName];
 
                 if (handler) {
+                    if (one) {
+                        original = handler;
+                        handler = function() {
+                            that.unbind(eventName, handler);
+                            original.call(that, arguments);
+                        }
+                    }
                     events = that._events[eventName] || [];
                     events.push(handler);
                     that._events[eventName] = events;
@@ -78,6 +86,10 @@
             }
 
             return that;
+        },
+
+        one: function(eventName, handlers) {
+            this.bind(eventName, handlers, true);
         },
 
         trigger: function(eventName, parameter) {

@@ -162,6 +162,7 @@
                 ok(observable._events.foo[0] === $.noop);
                 ok(observable._events.bar[0] === $.noop);
             });
+
             test("bind to array of events skips missing handlers", function() {
                 var observable = new Observable();
 
@@ -169,6 +170,62 @@
 
                 ok(observable._events.foo[0] === $.noop);
                 ok(typeof observable._events.bar === "undefined");
+            });
+
+            test("one binds to a event", function() {
+                var observable = new Observable(),
+                    called = 0;
+
+                observable.one("foo", function() {
+                    called++;
+                });
+
+                observable.trigger("foo");
+
+                equal(called, 1);
+            });
+
+            test("handler attached with one is called only once on multiple triggers", function() {
+                var observable = new Observable(),
+                    called = 0;
+
+                observable.one("foo", function() {
+                    called++;
+                });
+
+                observable.trigger("foo");
+                observable.trigger("foo");
+
+                equal(called, 1);
+            });
+
+            test("one binds to array of events with same event handler", function() {
+                var observable = new Observable(),
+                    called = 0;
+
+                observable.one(["foo", "bar"], function() {
+                    called++;
+                });
+
+                observable.trigger("foo");
+                observable.trigger("foo");
+
+                observable.trigger("bar");
+                observable.trigger("bar");
+
+                equal(called, 2);
+            });
+
+            test("this in trigger is the observable when attached through one", function() {
+                var observable = new Observable(), that;
+
+                observable.one("foo", function() {
+                    that = this;
+                });
+
+                observable.trigger("foo");
+
+                ok(that === observable);
             });
         </script>
     </body>
