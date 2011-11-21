@@ -113,6 +113,7 @@
         proxy = $.proxy,
         each = $.each,
         template = kendo.template,
+        body,
         templates,
         // classNames
         KWINDOW = ".k-window",
@@ -121,7 +122,9 @@
         KOVERLAY = ".k-overlay",
         LOADING = "k-loading",
         KHOVERSTATE = "k-state-hover",
+        // constants
         VISIBLE = ":visible",
+        CURSOR = "cursor",
         // events
         OPEN = "open",
         ACTIVATE = "activate",
@@ -171,6 +174,8 @@
                 windowActions = ".k-window-titlebar .k-window-action",
                 titleBar, offset,
                 isVisible = false;
+
+            body = document.body;
 
             Widget.fn.init.call(that, element, options);
             options = that.options;
@@ -242,13 +247,16 @@
             }
 
             wrapper.toggleClass("k-rtl", that.wrapper.closest(".k-rtl").length)
-                   .appendTo(document.body);
+                   .appendTo(body);
+
+            that.toFront();
 
             if (options.modal) {
                 that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
             }
 
             wrapper
+                .bind("mousedown", proxy(that.toFront, that))
                 .delegate(windowActions, "mouseenter", function () { $(this).addClass(KHOVERSTATE); })
                 .delegate(windowActions, "mouseleave", function () { $(this).removeClass(KHOVERSTATE); })
                 .delegate(windowActions, "click", proxy(that._windowActionHandler, that));
@@ -509,6 +517,8 @@
                         }
                     });
                 }
+
+                that.toFront();
             }
 
             if (that.options.isMaximized) {
@@ -567,6 +577,37 @@
             if (that.options.isMaximized) {
                 $("html, body").css(OVERFLOW, "");
             }
+
+            return that;
+        },
+
+        /**
+         * Brings the window on top of other windows.
+         */
+        toFront: function () {
+            var that = this,
+                wrapper = that.wrapper,
+                currentWindow = wrapper[0],
+                zIndex = +wrapper.css("zIndex");
+
+            $(KWINDOW).each(function(i, element) {
+                var windowObject = $(element),
+                    zIndexNew = windowObject.css("zIndex"),
+                    contentElement = windowObject.find(".k-window-content");
+
+                if (!isNaN(zIndexNew)) {
+                    zIndex = Math.max(+zIndexNew, zIndex);
+                }
+
+                // Add overlay to windows with iframes and lower z-index to prevent
+                // trapping of events when resizing / dragging
+                if (element != currentWindow && contentElement.find("> .k-content-frame").length > 0) {
+                    contentElement.append(templates.overlay);
+                }
+            });
+
+            wrapper.css("zIndex", zIndex + 2)
+            that.element.find("> .k-overlay").remove();
 
             return that;
         },
@@ -738,7 +779,7 @@
     });
 
     templates = {
-        wrapper: template("<div class='k-widget k-window'></div>"),
+        wrapper: template("<div class='k-widget k-window' />"),
         titlebar: template(
             "<div class='k-window-titlebar k-header'>&nbsp;" +
                 "<span class='k-window-title'>#= title #</span>" +
@@ -751,6 +792,7 @@
                 "</div>" +
             "</div>"
         ),
+        overlay: "<div class='k-overlay' />",
         iframe: template(
             "<iframe src='#= content #' title='#= title #' frameborder='0'" +
                 " class='k-content-frame'>" +
@@ -774,7 +816,7 @@
         $(templates.wrapper(options))
             .append(templates.titlebar(options))
             .append(contentHtml)
-            .appendTo(document.body);
+            .appendTo(body);
     }
 
     function WindowResizing(wnd) {
@@ -805,11 +847,11 @@
                 height: wnd.wrapper.height()
             };
 
-            $("<div class='k-overlay' />").appendTo(wnd.wrapper);
+            wrapper
+                .append(templates.overlay)
+                .find(".k-resize-handle").not(e.currentTarget).hide();
 
-            wrapper.find(".k-resize-handle").not(e.currentTarget).hide();
-
-            $(document.body).css("cursor", e.currentTarget.css("cursor"));
+            $(body).css(CURSOR, e.currentTarget.css(CURSOR));
         },
         drag: function (e) {
             var wnd = this.owner,
@@ -863,7 +905,7 @@
                 .find(KOVERLAY).remove().end()
                 .find(".k-resize-handle").not(e.currentTarget).show();
 
-            $(document.body).css("cursor", "");
+            $(body).css(CURSOR, "");
 
             if (e.keyCode == 27) {
                 wrapper.css(wnd.initialCursorPosition)
@@ -906,11 +948,11 @@
                 wnd.minLeftPosition =  20 - $element.outerWidth(); // at least 20px remain visible
             }
 
-            $(".k-resize-handle", wnd.wrapper).hide();
+            wnd.wrapper
+                .append(templates.overlay)
+                .find(".k-resize-handle").hide();
 
-            $("<div class='k-overlay' />").appendTo(wnd.wrapper);
-
-            $(document.body).css("cursor", e.currentTarget.css("cursor"));
+            $(body).css(CURSOR, e.currentTarget.css(CURSOR));
         },
         drag: function (e) {
             var wnd = this.owner,
@@ -928,7 +970,7 @@
                 .find(".k-resize-handle").show().end()
                 .find(KOVERLAY).remove();
 
-            $(document.body).css("cursor", "");
+            $(body).css(CURSOR, "");
 
             if (e.keyCode == 27) {
                 e.currentTarget.closest(KWINDOW).css(wnd.initialWindowPosition);

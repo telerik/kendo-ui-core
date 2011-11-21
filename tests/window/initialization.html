@@ -175,6 +175,13 @@
                 ok(overlappingDialog.wrapper.prev("div").is(".k-overlay"));
                 same(dialog.wrapper.next("div")[0], overlappingDialog.wrapper.prev("div")[0]);
             });
+
+            test("creating a second dialog with a content frame overlays the first one", function() {
+                var firstWindow = createWindow({ content: "http://www.telerik.com" }),
+                    secondWindow = createWindow();
+
+                ok(firstWindow.element.find("> .k-overlay").length);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>

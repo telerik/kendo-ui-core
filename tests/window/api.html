@@ -196,6 +196,68 @@
                 dialog.refresh(url);
             });
 
+            function wrapper(windowObject) {
+                return windowObject.element.closest(".k-window");
+            }
+
+            test("toFront() raises window z-index above other windows", function() {
+                var firstWindow = createWindow(),
+                    secondWindow = createWindow();
+
+                firstWindow.toFront();
+
+                equal(+wrapper(firstWindow).css("zIndex"), +wrapper(secondWindow).css("zIndex") + 2);
+            });
+
+            test("toFront() raises window z-index above other windows with different z-index", function() {
+                var firstWindow = createWindow(),
+                    secondWindow = createWindow();
+
+                wrapper(secondWindow).css("zIndex", 10012);
+
+                firstWindow.toFront();
+
+                equal(+wrapper(firstWindow).css("zIndex"), +wrapper(secondWindow).css("zIndex") + 2);
+            });
+
+            test("toFront() overlays iframes of windows with lower z-index", function() {
+                var firstWindow = createWindow(),
+                    secondWindow = createWindow({
+                        content: "http://google.com/"
+                    });
+
+                firstWindow.toFront();
+
+                ok(secondWindow.element.find("> .k-overlay").length);
+            });
+
+            test("toFront() removes overlay on foremost window", function() {
+                var firstWindow = createWindow({
+                        content: "http://www.telerik.com/"
+                    }),
+                    secondWindow = createWindow({
+                        content: "http://google.com/"
+                    });
+
+                firstWindow.toFront();
+
+                ok(!firstWindow.element.find("> .k-overlay").length);
+            });
+
+            test("open() calls toFront()", function() {
+                expect(1);
+
+                var firstWindow = createWindow(),
+                    secondWindow = createWindow();
+
+                firstWindow.close();
+
+                firstWindow.toFront = function() {
+                    ok(true);
+                };
+
+                firstWindow.open();
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
