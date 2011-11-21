@@ -31,9 +31,27 @@
         {
             background: silver;
         }
+
         .km-android .km-content
         {
             background: #000;
+        }
+
+        .sliderValue
+        {
+            float: right;
+            width: 10em;
+            width: 10rem;
+            height: 40px;
+            border-radius: 5px;
+            font-size: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #000;
+            background: #fff;
+            border: 1px solid #999;
+            clear: both;
+            margin-right: 22px;
         }
     </style>
 </head>
@@ -51,6 +69,7 @@
                 <li>Australia<input type="checkbox" data-kendo-role="switch" /></li>
             </ul>
             <span class="km-slider" style="float: right"></span>
+            <div class="sliderValue">0</div>
             <ul data-kendo-role="listview" data-kendo-style="inset">
                 <li>Albania</li>
                 <li>Australia</li>
@@ -124,18 +143,22 @@
 //            console.log(e);
         }
 
+        function onSlide(e) {
+            $(".sliderValue").text(e.value);
+        }
+
         function onClick(e) {
             toggle.toggle();
             radiogroup.select(Math.round(Math.random()*2));
         }
 
         var toggle = $("#toggle,[data-kendo-role=switch]").kendoMobileSwitch({ toggle: onToggle }).data("kendoMobileSwitch"),
-            checky = $("#checky").kendoMobileCheckBox().data("kendoMobileCheckBox"),
+//            checky = $("#checky").kendoMobileCheckBox().data("kendoMobileCheckBox"),
             button = $("#button, header button").kendoMobileButton({ click: onClick }).data("kendoMobileButton"),
             radio = $("#radio").kendoMobileRadioGroup({ enable: false }).data("kendoMobileRadioGroup"),
             radiogroup = $("#radioz").kendoMobileRadioGroup({ toggle: onToggle }).data("kendoMobileRadioGroup"),
             tabStrip = $("#tabstrip").kendoMobileTabstrip().data("kendoMobileTabstrip"),
-            slider = $(".km-slider").kendoMobileSlider().data("kendoMobileSlider");
+            slider = $(".km-slider").kendoMobileSlider({ slide: onSlide, change: onSlide }).data("kendoMobileSlider");
 
         $(document).ready(function () {
             var listviews = $("[data-kendo-role=listview]");
