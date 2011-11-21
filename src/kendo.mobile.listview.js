@@ -115,14 +115,15 @@
                 dataItem,
                 item = $(e.currentTarget),
                 target = $(e.target),
-                buttonName = target.closest("[data-kendo-name]", item).data("kendoName"),
+                button = target.closest("[data-kendo-name]", item),
+                buttonName = button.data("kendoName"),
                 id = item.data("id");
 
             if (id) {
                 dataItem = that.dataSource.get(id).data;
             }
 
-            if (that.trigger(CLICK, {target: target, item: item, dataItem: dataItem, buttonName: buttonName})) {
+            if (that.trigger(CLICK, {target: target, item: item, dataItem: dataItem, buttonName: buttonName, button: button.data("kendoMobileButton")})) {
                 e.preventDefault();
             }
         },
