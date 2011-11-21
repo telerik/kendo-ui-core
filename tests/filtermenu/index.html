@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>kendo.ui.Filterable Tests</title>
+        <title>kendo.ui.FilterMenu Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -9,13 +9,13 @@
         <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.dropdownlist.js"></script>
         <script src="../../src/kendo.popup.js"></script>
-        <script src="../../src/kendo.filterable.js"></script>
+        <script src="../../src/kendo.filtermenu.js"></script>
         <script src="../../src/kendo.model.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
-        <h1 id="qunit-header">kendo.ui.Filterable Tests</h1>
+        <h1 id="qunit-header">kendo.ui.FilterMenu Tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -25,14 +25,14 @@
 
         <script>
             var DataSource = kendo.data.DataSource,
-                Filterable = kendo.ui.Filterable,
-                filter,
+                FilterMenu = kendo.ui.FilterMenu,
+                filterMenu,
                 model,
                 dom,
                 dataSource;
 
 
-            module("kendo.ui.Filterable", {
+            module("kendo.ui.FilterMenu", {
                 setup: function() {
                     dataSource = new DataSource({
                         schema: {
@@ -56,78 +56,78 @@
             });
 
             test("initializes the name of the operator select from the field", function(){
-                filter = new Filterable(dom, {dataSource: dataSource});
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                equal(filter.form.find("select").attr("name"), "filters[0].operator");
+                equal(filterMenu.form.find("select").attr("name"), "filters[0].operator");
             });
 
             test("initializes the name of the value input from the field", function(){
-                filter = new Filterable(dom, {dataSource: dataSource});
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                equal(filter.form.find("input[name='filters[0].value']").length, 1);
+                equal(filterMenu.form.find("input[name='filters[0].value']").length, 1);
             });
 
             test("initializes the name of the extra value input from the field", function(){
-                filter = new Filterable(dom, {dataSource: dataSource});
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                equal(filter.form.find("input[name='filters[1].value']").length, 1);
+                equal(filterMenu.form.find("input[name='filters[1].value']").length, 1);
             });
 
             test("initializes the name of the logical operation select from the field", function(){
-                filter = new Filterable(dom, {dataSource: dataSource});
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                equal(filter.form.find("select:eq(1)").attr("name"), "logic");
+                equal(filterMenu.form.find("select:eq(1)").attr("name"), "logic");
             });
 
             test("initializes a hidden whose value is the field name", function(){
-                filter = new Filterable(dom, {dataSource: dataSource});
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                var hidden = filter.form.find("input[type=hidden]").eq(0);
+                var hidden = filterMenu.form.find("input[type=hidden]").eq(0);
 
                 equal(hidden.attr("name"), "filters[0].field");
                 equal(hidden.val(), "foo");
             });
 
             test("initializes a hidden whose value is the field name when showing extra details", function(){
-                filter = new Filterable(dom, {dataSource: dataSource});
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                var hidden = filter.form.find("input[type=hidden]").eq(1);
+                var hidden = filterMenu.form.find("input[type=hidden]").eq(1);
 
                 equal(hidden.attr("name"), "filters[1].field");
                 equal(hidden.val(), "foo");
             });
 
             test("initializes the name of the extra operator select", function(){
-                filter = new Filterable(dom, {dataSource: dataSource});
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                equal(filter.form.find("select:eq(2)").attr("name"), "filters[1].operator");
+                equal(filterMenu.form.find("select:eq(2)").attr("name"), "filters[1].operator");
             });
 
             test("display extra filtering options by default", function(){
-                filter = new Filterable(dom, {dataSource: dataSource});
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                equal(filter.form.find("select").length, 3);
+                equal(filterMenu.form.find("select").length, 3);
             });
 
             test("does not display extra filtering options if extra is set to false", function(){
-                filter = new Filterable(dom, {extra: false, dataSource: dataSource});
+                filterMenu = new FilterMenu(dom, {extra: false, dataSource: dataSource});
 
-                equal(filter.form.find("select").length, 1);
+                equal(filterMenu.form.find("select").length, 1);
             });
 
             test("can change the filtering messages", function(){
-                filter = new Filterable(dom, {
+                filterMenu = new FilterMenu(dom, {
                     messages: {
                         info: "info"
                     },
                     dataSource: dataSource
                 });
 
-                ok(filter.form.find("div:contains(info)").length);
+                ok(filterMenu.form.find("div:contains(info)").length);
             });
 
             test("can change the operators", function(){
-                filter = new Filterable(dom, {
+                filterMenu = new FilterMenu(dom, {
                     operators: {
                         string: {
                             foo: "bar"
@@ -136,42 +136,42 @@
                     dataSource: dataSource
                 });
 
-                equal(filter.form.find("select option:first").val(), "foo");
+                equal(filterMenu.form.find("select option:first").val(), "foo");
             });
 
-            test("submitting the form sets the filter of the datasource", function() {
-                filter = new Filterable(dom, {
+            test("submitting the form sets the filterMenu of the datasource", function() {
+                filterMenu = new FilterMenu(dom, {
                     dataSource: dataSource
                 });
 
 
-                filter.form.find("input[name='filters[0].value']").val("bar");
-                filter.form.submit();
+                filterMenu.form.find("input[name='filters[0].value']").val("bar");
+                filterMenu.form.submit();
 
                 equal(dataSource.filter().filters[0].value, "bar");
                 equal(dataSource.filter().filters[0].field, "foo");
                 equal(dataSource.filter().filters[0].operator, "eq");
             });
 
-            test("submitting the form does not send the extra filter if it is empty", function() {
-                filter = new Filterable(dom, {
+            test("submitting the form does not send the extra filterMenu if it is empty", function() {
+                filterMenu = new FilterMenu(dom, {
                     dataSource: dataSource
                 });
 
-                filter.form.find("input[name='filters[0].value']").val("bar");
-                filter.form.submit();
+                filterMenu.form.find("input[name='filters[0].value']").val("bar");
+                filterMenu.form.submit();
 
                 equal(dataSource.filter().filters.length, 1);
             });
 
-            test("parses filter value according to field type", function() {
+            test("parses filterMenu value according to field type", function() {
                 dom = $("<th data-field=bar />");
 
-                filter = new Filterable(dom, {
+                filterMenu = new FilterMenu(dom, {
                     dataSource: dataSource
                 });
 
-                filter.filter({
+                filterMenu.filter({
                     filters:[
                         { value: "1", field: "bar"}
                     ]
@@ -181,17 +181,17 @@
             });
 
             test("filtering twice", function() {
-                filter = new Filterable(dom, {
+                filterMenu = new FilterMenu(dom, {
                     dataSource: dataSource
                 });
 
-                filter.filter({
+                filterMenu.filter({
                     filters:[
                         { value: "1", field: "foo"}
                     ]
                 });
 
-                filter.filter({
+                filterMenu.filter({
                     filters:[
                         { value: "2", field: "foo"}
                     ]
@@ -202,11 +202,11 @@
             });
 
             test("filtering by two expressions", function() {
-                filter = new Filterable(dom, {
+                filterMenu = new FilterMenu(dom, {
                     dataSource: dataSource
                 });
 
-                filter.filter({
+                filterMenu.filter({
                     filters:[
                         { value: "1", field: "foo"},
                         { value: "2", field: "foo"}
@@ -219,15 +219,15 @@
             });
 
             test("or filtering", function() {
-                filter = new Filterable(dom, {
+                filterMenu = new FilterMenu(dom, {
                     dataSource: dataSource
                 });
 
-                filter.form.find("input[name='filters[0].value']").val("foo");
-                filter.form.find("input[name='filters[1].value']").val("bar");
-                filter.form.find("select[name='logic']").val("or");
+                filterMenu.form.find("input[name='filters[0].value']").val("foo");
+                filterMenu.form.find("input[name='filters[1].value']").val("bar");
+                filterMenu.form.find("select[name='logic']").val("or");
 
-                filter.form.submit();
+                filterMenu.form.submit();
 
                 equal(dataSource.filter().filters.length, 2);
                 equal(dataSource.filter().logic, "or");
@@ -236,7 +236,7 @@
             });
 
             test("filtering by multiple fields", function() {
-                var filter1 = new Filterable(dom, {
+                var filter1 = new FilterMenu(dom, {
                     dataSource: dataSource
                 });
 
@@ -248,7 +248,7 @@
 
                 dom = $("<th data-field=bar />");
 
-                var filter2 = new Filterable(dom, {
+                var filter2 = new FilterMenu(dom, {
                     dataSource: dataSource
                 });
 
@@ -263,22 +263,72 @@
                 equal(dataSource.filter().filters[1].field, "bar");
             });
 
-            test("resetting the form clears the filter", function() {
-                var filter = new Filterable(dom, {
+            test("resetting the form clears the filterMenu", function() {
+                var filterMenu = new FilterMenu(dom, {
                     dataSource: dataSource
                 });
 
-                filter.filter({
+                filterMenu.filter({
                     filters:[
                         { value: "1", field: "foo"}
                     ]
                 });
 
-                filter.form.trigger("reset");
+                filterMenu.form.trigger("reset");
 
                 equal(dataSource.filter(), null);
             });
 
+            test("populates the first field value from the datasource", function() {
+                dataSource.filter( { field: "foo", value: "1" });
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                equal(filterMenu.form.find("[name='filters[0].value']").val(), "1");
+            });
+
+            test("populates the second field value from the datasource", function() {
+                dataSource.filter( { logic: "or", filters: [{ field: "foo", value: "1" }, { field: "foo", value: "2" }]});
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                equal(filterMenu.form.find("[name='filters[0].value']").val(), "1");
+                equal(filterMenu.form.find("[name='filters[1].value']").val(), "2");
+            });
+
+            test("populates the logic value from the datasource", function() {
+                dataSource.filter( { logic: "or", filters: [{ field: "foo", value: "1" }, { field: "foo", value: "2" }]});
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                equal(filterMenu.form.find("[name='logic']").val(), "or");
+            });
+
+            test("populates the operator from the datasource", function() {
+                dataSource.filter( { field: "foo", value: "1", operator: "neq" });
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                equal(filterMenu.form.find("[name='filters[0].operator']").val(), "neq");
+            });
+
+            test("populates the operator from the datasource", function() {
+                dataSource.filter( { field: "foo", value: "1", operator: "neq" });
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                ok(filterMenu.link.hasClass("k-state-active"));
+            });
        </script>
     </body>
 </html>

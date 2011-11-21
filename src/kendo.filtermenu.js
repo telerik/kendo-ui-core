@@ -77,10 +77,9 @@
         return result;
     }
 
-    var Filterable = Widget.extend({
+    var FilterMenu = Widget.extend({
         init: function(element, options) {
             var that = this,
-                link,
                 type,
                 operators;
 
@@ -90,10 +89,10 @@
             element = that.element;
             options = that.options;
 
-            link = element.addClass("k-filterable").find("k-grid-filter");
+            that.link = element.addClass("k-filterable").find("k-grid-filter");
 
-            if (!link[0]) {
-                link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
+            if (!that.link[0]) {
+                that.link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
             }
 
             that.dataSource = options.dataSource.bind("change", $.proxy(that.refresh, that));
@@ -114,8 +113,8 @@
             }));
 
             that.popup = new ui.Popup(that.form,{
-                anchor: link,
-                toggleTarget: link
+                anchor: that.link,
+                toggleTarget: that.link
             });
 
             that.form
@@ -125,12 +124,38 @@
                 })
                 .find("select")
                 .kendoDropDownList();
+
+            that.refresh();
         },
 
         refresh: function() {
+            var that = this,
+                form = that.form,
+                expression = that.dataSource.filter() || { filters: [], logic: "and" },
+                filters = expression.filters,
+                filter,
+                idx,
+                length,
+                current = 0;
+
+            for (idx = 0, length = filters.length; idx < length; idx++) {
+                filter = filters[idx];
+                if (filter.field == that.field) {
+                    form.find("[name='filters[" + current + "].value']").val(filter.value);
+                    form.find("[name='filters[" + current + "].operator']").val(filter.operator);
+                    current++;
+                }
+            }
+
+            if (current > 0) {
+                form.find("[name=logic]").val(expression.logic);
+                that.link.addClass("k-state-active");
+            } else {
+                that.link.removeClass("k-state-active");
+            }
         },
 
-        _normalize: function(expression) {
+        _merge: function(expression) {
             var that = this,
                 logic = expression.logic || "and",
                 filters = expression.filters,
@@ -157,9 +182,7 @@
         },
 
         filter: function(expression) {
-            expression = this._normalize(expression);
-
-            this.dataSource.filter(expression);
+            this.dataSource.filter(this._merge(expression));
         },
 
         clear: function() {
@@ -191,7 +214,7 @@
         },
 
         options: {
-            name: "Filterable",
+            name: "FilterMenu",
             extra: true,
             type: "string",
             operators: {
@@ -219,5 +242,5 @@
         }
     });
 
-    ui.plugin(Filterable);
+    ui.plugin(FilterMenu);
 })(jQuery)
