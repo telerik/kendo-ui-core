@@ -37,6 +37,8 @@ var VERSION = kendoBuild.generateVersion(),
     SCRIPTS_ROOT = "src",
     STYLES_ROOT = "styles",
     DEMOS_ROOT = path.join("demos", "examples"),
+    EXAMPLES_INDEX = path.join("build", "templates", "simple-index.html"),
+    EXAMPLES_NAVIGATION = "kendo.examples.nav.js",
     SHARED_ROOT = "shared",
     LEGAL_ROOT = "resources/legal",
     SRC_LICENSE = "src-license.txt",
@@ -147,22 +149,27 @@ function deployExamples(root, bundle) {
 
             kendoBuild.writeText(name, data);
         });
-    });
 
-    //buildExamplesIndex(root, bundle);
+        buildExamplesIndex(suiteDest);
+    });
 }
 
-function buildExamplesIndex(root) {
-    var navigation = kendoBuild.readText("demos/examples/shared/js/kendo.examples.nav.js");
-    eval(navigation);
-
-    var indexTemplate = kendoBuild.template(
-        kendoBuild.readText("build/templates/simple-index.html")
+function buildExamplesIndex(suiteRoot) {
+    var navigation = kendoBuild.readText(
+        path.join(suiteRoot, "js", EXAMPLES_NAVIGATION)
     );
 
+    var indexTemplate = kendoBuild.template(
+        kendoBuild.readText(EXAMPLES_INDEX)
+    );
+
+    eval(navigation);
     delete categories.overview;
 
-    fs.writeFileSync(root + "/examples/index.html", indexTemplate(categories));
+    kendoBuild.writeText(
+        path.join(suiteRoot, "index.html"),
+        indexTemplate(categories)
+    );
 }
 
 function buildBundle(bundle, success) {
