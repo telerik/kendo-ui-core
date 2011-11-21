@@ -340,15 +340,11 @@
 
             Widget.fn.init.call(that, element, options);
 
-            if (support.hasNativeScrolling || (!support.mobileOS && !that.options.useOnDesktop)) {
+            if ((!support.mobileOS && !that.options.useOnDesktop)) {
                 that.element.bind("scroll", function() {
                     that.trigger("scroll", {x: that.element.scrollLeft(), y: that.element.scrollTop()});
                 });
 
-                if (support.hasNativeScrolling) {
-                    that.element.css({"-webkit-overflow-scrolling": "touch", overflow: "scroll"});
-
-                }
                 return;
             }
 
