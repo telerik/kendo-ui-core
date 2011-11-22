@@ -238,7 +238,7 @@
         tabs.filter(":not([class*=k-state])")
             .children("a:focus")
             .parent()
-            .addClass(ACTIVESTATE);
+            .addClass(ACTIVESTATE + " " + TABONTOP);
 
         tabs.each(function() {
             var item = $(this);
@@ -579,6 +579,8 @@
                     .filter(function () { return (this.nodeType == 3 && !trim(this.nodeValue)); })
                     .remove();
             }
+
+            tabs.eq(activeItem).addClass(TABONTOP);
 
             that.contentElements = that.element.children("div");
 
