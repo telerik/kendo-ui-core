@@ -32,6 +32,16 @@
             '</div>'+
         '</form>';
 
+    function value(dom, value) {
+        var widget = dom.data("kendoDropDownList");
+
+        if (widget) {
+            widget.value(value);
+        } else {
+            dom.val(value);
+        }
+    }
+
     function toObject(array) {
         var result = {},
             idx,
@@ -148,14 +158,14 @@
             for (idx = 0, length = filters.length; idx < length; idx++) {
                 filter = filters[idx];
                 if (filter.field == that.field) {
-                    form.find("[name='filters[" + current + "].value']").val(filter.value);
-                    form.find("[name='filters[" + current + "].operator']").val(filter.operator);
+                    value(form.find("[name='filters[" + current + "].value']"), filter.value);
+                    value(form.find("[name='filters[" + current + "].operator']"), filter.operator);
                     current++;
                 }
             }
 
             if (current > 0) {
-                form.find("[name=logic]").val(expression.logic);
+                value(form.find("[name=logic]"), expression.logic);
                 that.link.addClass("k-state-active");
             } else {
                 that.link.removeClass("k-state-active");

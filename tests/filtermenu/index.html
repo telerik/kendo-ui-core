@@ -363,6 +363,18 @@
 
                 ok(filterMenu.form.find("[name='filters[0].value']").data("kendoDatePicker"));
             });
+
+            test("updates dropdownlists", function() {
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                dataSource.filter( { logic: "or", filters: [{ field: "foo", value: "1", operator: "neq" }, { field: "foo", value: "2", operator: "neq" }]});
+
+                equal(filterMenu.form.find("[name='filters[0].operator']").data("kendoDropDownList").current().text(), "Is not equal to");
+                equal(filterMenu.form.find("[name='filters[1].operator']").data("kendoDropDownList").current().text(), "Is not equal to");
+                equal(filterMenu.form.find("[name=logic]").data("kendoDropDownList").current().text(), "Or");
+            });
        </script>
     </body>
 </html>
