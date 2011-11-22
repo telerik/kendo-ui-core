@@ -69,6 +69,7 @@
     text-align: center;
     cursor: pointer;
     outline: 0;
+    text-decoration: none;
 }
 
 *+html .k-button { overflow: visible; margin-right: 4px; }
@@ -549,6 +550,11 @@ div.k-window-content
 .k-tabstrip-items .k-tab-on-top
 {
     z-index: 1;
+}
+
+.k-tabstrip-items .k-state-hover
+{
+    z-index: 2;
 }
 
 .k-tabstrip-items .k-link,
@@ -1639,7 +1645,7 @@ div.k-datetimepicker .k-select+.k-select
     min-height: 1.3em;
     line-height: 1.3em;
     vertical-align: middle;
-    padding: 3px 5px;
+    padding: 3px 4px;
 }
 
 body .k-datetimepicker .k-select
