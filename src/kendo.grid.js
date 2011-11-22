@@ -1019,6 +1019,7 @@
                     keydown: function(e) {
                         var key = e.keyCode,
                             current = that.current(),
+                            shiftKey = e.shiftKey,
                             dataSource = that.dataSource,
                             pageable = that.options.pageable,
                             canHandle = !$(e.target).is(":button,a,:input,a>.t-icon"),
@@ -1046,32 +1047,19 @@
                             handled = true;
                         } else if (that.options.editable) {
                             if (keys.ENTER == key) {
-                                if (that.editable) {
-                                    if ($.contains(that._editContainer[0], document.activeElement)) {
-                                        document.activeElement.blur();
-                                    }
-
-                                    var isEdited = current.hasClass("k-edit-cell");
-                                    if (that.editable.end()) {
-                                        that._closeCell();
-                                        that.element.focus();
-
-                                        if (!isEdited) {
-                                            that._editCell(current);
-                                        }
-                                    } else {
-                                        that.current(that._editContainer);
-                                        that._editContainer.find(":input:visible:first").focus();
-                                    }
-                                } else {
-                                    that._editCell(current);
-                                }
+                                that._handleEditing(current);
                                 handled = true;
                             } else if (keys.TAB == key) {
-                                that.current(current.next());
-                                that._editCell(that.current());
+                                var cell = shiftKey ? current.prevAll(":not(.k-group-cell, .k-hierarchy-cell):visible:first") : current.nextAll(":visible:first");
+                                if (!cell.length) {
+                                    cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row,.k-detail-row):visible")
+                                        .children(shiftKey ? ":not(.k-group-cell,.k-hierarchy-cell):visible:last" : ":not(.k-group-cell,.k-hierarchy-cell):visible:first");
+                                }
 
-                                handled = true;
+                                if (cell.length) {
+                                    that._handleEditing(current, cell);
+                                    handled = true;
+                                }
                             }
                         }
 
@@ -1082,6 +1070,34 @@
                 });
 
                 wrapper.delegate(selector, $.browser.msie ? CLICK : "mousedown", clickCallback);
+            }
+        },
+
+        _handleEditing: function(current, next) {
+            var that = this,
+                isEdited = current.hasClass("k-edit-cell");
+
+            if (that.editable) {
+                if ($.contains(that._editContainer[0], document.activeElement)) {
+                    document.activeElement.blur();
+                }
+
+                if (that.editable.end()) {
+                    that._closeCell();
+                } else {
+                    that.current(that._editContainer);
+                    that._editContainer.find(":input:visible:first").focus();
+                    return;
+                }
+            }
+
+            if (next) {
+                that.current(next);
+            }
+
+            that.element.focus();
+            if ((!isEdited && !next) || next) {
+                that._editCell(that.current());
             }
         },
 

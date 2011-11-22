@@ -40,6 +40,7 @@
                             model: {
                                 id: "id",
                                 fields: {
+                                    id: { field: "id", readonly: true },
                                     name: "name",
                                     foo: { field: "foo", validation: { required: true } }
                                 }
@@ -145,6 +146,61 @@
                 table.find("tr>td>input:first").press(kendo.keys.SPACEBAR);
 
                 ok(!grid.current().hasClass("k-state-selected"));
+            });
+
+            test("pressing tab key edit next cell", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.TAB);
+
+                ok(table.find("tr>td").eq(1).hasClass("k-edit-cell"));
+            });
+
+            test("pressing tab key on edited cell exits edit mode", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER).press(kendo.keys.TAB);
+
+                ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr>td").eq(1).hasClass("k-edit-cell"));
+            });
+
+            test("pressing tab key on edited cell does not exits edit mode if validation fails", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER);
+                table.find("tr>td>input:first").val("").press(kendo.keys.TAB);
+
+                ok(table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr>td>input:first")[0] === document.activeElement);
+            });
+
+            test("pressing tab when current is at the end of the row focus first cell on next row", function() {
+                var grid = setup();
+
+                grid.current(table.find("tr:first>td:last"));
+                grid.element.focus().press(kendo.keys.TAB);
+
+                ok(table.find("tr:nth(1)>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr:nth(1)>td>input:first")[0] === document.activeElement);
+            });
+
+            test("pressing shift and tab key edit previous cell", function() {
+                var grid = setup();
+
+                grid.current(table.find("tr>td").eq(1));
+                grid.element.focus().press(kendo.keys.TAB, false, true);
+
+                ok(table.find("tr>td").eq(0).hasClass("k-edit-cell"));
+            });
+
+            test("pressing shift and tab when current is at the begining of the row focus last cell on previous row", function() {
+                var grid = setup();
+
+                grid.current(table.find("tr:nth(1)>td:first"));
+                grid.element.focus().press(kendo.keys.TAB, false, true);
+
+                ok(table.find("tr:nth(0)>td:last").hasClass("k-state-focused"));
             });
 
         </script>
