@@ -61,6 +61,43 @@ var VERSION = kendoBuild.generateVersion(),
 
 // Implementation ==============================================================
 var startDate = new Date();
+var scripts = [
+    "kendo.core.js",
+    "kendo.fx.js",
+    "kendo.data.odata.js",
+    "kendo.data.xml.js",
+    "kendo.model.js",
+    "kendo.binder.js",
+    "kendo.validatable.js",
+    "kendo.data.js",
+    "kendo.draganddrop.js",
+    "kendo.groupable.js",
+    "kendo.resizable.js",
+    "kendo.sortable.js",
+    "kendo.selectable.js",
+    "kendo.scroller.js",
+    "kendo.pageable.js",
+    "kendo.editable.js",
+    "kendo.popup.js",
+    "kendo.list.js",
+    "kendo.calendar.js",
+    "kendo.datepicker.js",
+    "kendo.autocomplete.js",
+    "kendo.dropdownlist.js",
+    "kendo.combobox.js",
+    "kendo.chart.js",
+    "kendo.numerictextbox.js",
+    "kendo.grid.js",
+    "kendo.menu.js",
+    "kendo.panelbar.js",
+    "kendo.tabstrip.js",
+    "kendo.timepicker.js",
+    "kendo.treeview.js",
+    "kendo.slider.js",
+    "kendo.splitter.js",
+    "kendo.upload.js",
+    "kendo.window.js"
+];
 
 function initWorkspace() {
     kendoBuild.rmdirSyncRecursive(DEPLOY_ROOT);

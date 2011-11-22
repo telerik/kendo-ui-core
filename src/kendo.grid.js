@@ -1153,6 +1153,9 @@
                     height -= $(".k-grouping-header").outerHeight();
                 }
 
+                if(options.toolbar) {
+                    height -= $(".k-grid-toolbar").outerHeight();
+                }
                 that.content.height(height);
 
                 var scrollables = header.find(">.k-grid-header-wrap"); // add footer when implemented
