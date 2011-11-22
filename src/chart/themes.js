@@ -121,7 +121,7 @@
         }
     });
 
-    themes.hakama = deepExtend({}, baseTheme, {
+    themes["default"] = deepExtend({}, baseTheme, {
         title: {
             color: "#8e8e8e"
         },
@@ -210,7 +210,7 @@
 
     // Exports ================================================================
     Chart.themes = themes;
-    Chart.prototype.options.theme = "hakama";
+    Chart.prototype.options.theme = "default";
 
 })(jQuery);
 
