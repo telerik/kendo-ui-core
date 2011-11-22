@@ -1,6 +1,13 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        DROPDOWNLIST = "kendoDropDownList",
+        NUMERICTEXTBOX = "kendoNumericTextBox",
+        DATEPICKER = "kendoDatePicker",
+        proxy = $.proxy,
+        POPUP = "kendoPopup",
+        EQ = "Is equal to",
+        NEQ = "Is not equal to",
         Widget = ui.Widget;
 
     var template =
@@ -33,7 +40,7 @@
         '</form>';
 
     function value(dom, value) {
-        var widget = dom.data("kendoDropDownList") || dom.data("kendoNumericTextBox") || dom.data("kendoDatePicker");
+        var widget = dom.data(DROPDOWNLIST) || dom.data(NUMERICTEXTBOX) || dom.data(DATEPICKER);
 
         if (widget) {
             widget.value(value);
@@ -91,6 +98,7 @@
         init: function(element, options) {
             var that = this,
                 type,
+                link,
                 operators;
 
             Widget.fn.init.call(that, element, options);
@@ -99,15 +107,15 @@
             element = that.element;
             options = that.options;
 
-            that.link = element.addClass("k-filterable").find("k-grid-filter");
+            link = element.addClass("k-filterable").find("k-grid-filter");
 
-            if (!that.link[0]) {
-                that.link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
+            if (!link[0]) {
+                link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
             }
 
-            that.link.click($.proxy(that._click, that));
+            link.click(proxy(that._click, that));
 
-            that.dataSource = options.dataSource.bind("change", $.proxy(that.refresh, that));
+            that.dataSource = options.dataSource.bind("change", proxy(that.refresh, that));
 
             that.field = element.data("field");
 
@@ -125,24 +133,26 @@
                 type: type
             }));
 
-            that.popup = that.form.kendoPopup({
-                anchor: that.link,
-                open: $.proxy(that._open, that)
-            }).data("kendoPopup");
+            that.popup = that.form[POPUP]({
+                anchor: link,
+                open: proxy(that._open, that)
+            }).data(POPUP);
+
+            that.link = link;
 
             that.form
                 .bind({
-                    submit: $.proxy(that._submit, that),
-                    reset: $.proxy(that._reset, that)
+                    submit: proxy(that._submit, that),
+                    reset: proxy(that._reset, that)
                 })
                 .find("select")
-                .kendoDropDownList()
+                [DROPDOWNLIST]()
                 .end()
                 .find("[data-type=number]")
-                .kendoNumericTextBox()
+                [NUMERICTEXTBOX]()
                 .end()
                 .find("[data-type=date]")
-                .kendoDatePicker();
+                [DATEPICKER]();
 
             that.refresh();
         },
@@ -179,7 +189,7 @@
                 logic = expression.logic || "and",
                 filters = expression.filters,
                 filter,
-                result = this.dataSource.filter() || { filters:[], logic: logic },
+                result = that.dataSource.filter() || { filters:[], logic: logic },
                 idx,
                 field = that.model.fields[that.field],
                 length;
@@ -220,11 +230,13 @@
         },
 
         _submit: function(e) {
+            var that = this;
+
             e.preventDefault();
 
-            this.filter(toObject(this.form.serializeArray()));
+            that.filter(toObject(that.form.serializeArray()));
 
-            this.popup.close();
+            that.popup.close();
         },
 
         _reset: function(e) {
@@ -239,7 +251,7 @@
 
         _open: function() {
             $(".k-filter-menu").not(this.form).each(function() {
-                $(this).data("kendoPopup").close();
+                $(this).data(POPUP).close();
             });
         },
 
@@ -249,23 +261,23 @@
             type: "string",
             operators: {
                 string: {
-                    eq: "Is equal to",
-                    neq: "Is not equal to",
+                    eq: EQ,
+                    neq: NEQ,
                     startswith: "Starts with",
                     contains: "Contains",
                     endswith: "Ends with"
                 },
                 number: {
-                    eq: "Is equal to",
-                    neq: "Is not equal to",
+                    eq: EQ,
+                    neq: NEQ,
                     gte: "Is greater than or equal to",
                     gt: "Is greater than",
                     lte: "Is less than or equal to",
                     lt: "Is less than"
                 },
                 date: {
-                    eq: "Is equal to",
-                    neq: "Is not equal to",
+                    eq: EQ,
+                    neq: NEQ,
                     gte: "Is after or equal to",
                     gt: "Is after",
                     lte: "Is before or equal to",
