@@ -104,7 +104,7 @@ function mergeResourceRegion(exampleSource, regionType, deployConfig, depth) {
         result = result.replace(SHARED_SCRIPTS_MARKER, deployConfig.sharedScripts(pathInfo));
         result = result.replace(SHARED_STYLES_MARKER, deployConfig.sharedStyles(pathInfo));
 
-        result = result.replace(/.*?examples-offline.*/g, "");
+        result = result.replace(/.*?(examples-offline\.css|console\.js|people\.js|prettify\.js).*/g, "");
 
         if (deployConfig.useMinified) {
             result = result.replace(/(.*?)\.(css|js)/g, "$1.min.$2");
