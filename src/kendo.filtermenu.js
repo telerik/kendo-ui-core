@@ -262,6 +262,14 @@
                     gt: "Is greater than",
                     lte: "Is less than or equal to",
                     lt: "Is less than"
+                },
+                date: {
+                    eq: "Is equal to",
+                    neq: "Is not equal to",
+                    gte: "Is after or equal to",
+                    gt: "Is after",
+                    lte: "Is before or equal to",
+                    lt: "Is before"
                 }
             },
             messages: {
@@ -273,4 +281,4 @@
     });
 
     ui.plugin(FilterMenu);
-})(jQuery)
+})(jQuery);
