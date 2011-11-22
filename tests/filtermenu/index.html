@@ -58,6 +58,8 @@
                     dom = $("<th data-field=foo />");
                 },
                 teardown: function() {
+                    dataSource.unbind("change");
+                    $(".k-filter-menu").remove();
                 }
             });
 
@@ -374,6 +376,43 @@
                 equal(filterMenu.form.find("[name='filters[0].operator']").data("kendoDropDownList").current().text(), "Is not equal to");
                 equal(filterMenu.form.find("[name='filters[1].operator']").data("kendoDropDownList").current().text(), "Is not equal to");
                 equal(filterMenu.form.find("[name=logic]").data("kendoDropDownList").current().text(), "Or");
+            });
+
+            test("updates numerictextboxes", function() {
+                var filterMenu = new FilterMenu(dom.attr("data-field", "bar"), {
+                    dataSource: dataSource
+                });
+
+                dataSource.filter({ field: "bar", value: 1 });
+                equal(filterMenu.form.find("[name='filters[0].value']").data("kendoNumericTextBox")._text.val(), "1.00");
+            });
+
+            test("updates datepickers", function() {
+                var filterMenu = new FilterMenu(dom.attr("data-field", "baz"), {
+                    dataSource: dataSource
+                });
+
+                var date = new Date(2011, 1, 1);
+                dataSource.filter({ field: "baz", value:date });
+                equal(filterMenu.form.find("[name='filters[0].value']").data("kendoDatePicker").value().getTime(), date.getTime());
+            });
+
+            test("closes sibling filtering menus", function() {
+                var dom1 = $("<div data-field=foo />").appendTo(document.body);
+                var dom2 = $("<div data-field=bar />").appendTo(document.body);
+
+                var filterMenu1 = new FilterMenu(dom1, {
+                    dataSource: dataSource
+                });
+
+                var filterMenu2 = new FilterMenu(dom2, {
+                    dataSource: dataSource
+                });
+
+                filterMenu1.link.click();
+                filterMenu2.link.click();
+
+                ok(!filterMenu1.popup.visible());
             });
        </script>
     </body>
