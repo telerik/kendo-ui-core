@@ -109,7 +109,7 @@
             callback = function() { previous.element.hide(); },
             animationType;
 
-        that.back = view.nextView === previous;
+        that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(history.url().params);
 
         animationType = (that.back ? previous : view).element.data("kendoTransition");
 
