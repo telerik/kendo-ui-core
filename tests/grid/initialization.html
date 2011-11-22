@@ -6,9 +6,17 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.model.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.sortable.js"></script>
+        <script src="../../src/kendo.filtermenu.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -410,6 +418,99 @@
                 equal(grid.thead.find("th").data("kendoSortable"), undefined, "Column is not sortable");
             });
 
+            test("filterable columns", function() {
+                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                var grid = new Grid(table, {
+                    filterable: true,
+                    dataSource: {
+                        schema: {
+                            model: {
+                                fields: {
+                                    col1: {}
+                                }
+                            }
+                        }
+                    },
+                });
+
+                ok(grid.thead.find("th").data("kendoFilterMenu"));
+            });
+
+            test("unfilterable column from column settings", function() {
+                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                var grid = new Grid(table, {
+                    filterable: true,
+                    columns: [{filterable: false}],
+                    dataSource: {
+                        schema: {
+                            model: {
+                                fields: {
+                                    col1: {}
+                                }
+                            }
+                        }
+                    },
+                });
+
+                equal(grid.thead.find("th").data("kendoFilterMenu"), undefined, "Column is not filterable");
+            });
+
+            test("unfilterable column from html attribute", function() {
+                table.innerHTML = "<thead><tr><th data-filterable=false data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                var grid = new Grid(table, {
+                    filterable: true,
+                    dataSource: {
+                        schema: {
+                            model: {
+                                fields: {
+                                    col1: {}
+                                }
+                            }
+                        }
+                    },
+                });
+
+                equal(grid.thead.find("th").data("kendoFilterMenu"), undefined, "Column is not filterable");
+            });
+
+            test("filterable options are initialized", function() {
+                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                var grid = new Grid(table, {
+                    filterable: {
+                        extra: false
+                    },
+                    dataSource: {
+                        schema: {
+                            model: {
+                                fields: {
+                                    col1: {}
+                                }
+                            }
+                        }
+                    },
+                });
+
+                equal(grid.thead.find("th").data("kendoFilterMenu").options.extra, false);
+            });
+
+            test("filterable options are initialized from column settings", function() {
+                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                var grid = new Grid(table, {
+                    filterable: true,
+                    columns: [{ filterable: { extra: false }}],
+                    dataSource: {
+                        schema: {
+                            model: {
+                                fields: {
+                                    col1: {}
+                                }
+                            }
+                        }
+                    },
+                });
+
+                equal(grid.thead.find("th").data("kendoFilterMenu").options.extra, false);
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
