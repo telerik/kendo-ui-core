@@ -33,7 +33,7 @@
         '</form>';
 
     function value(dom, value) {
-        var widget = dom.data("kendoDropDownList");
+        var widget = dom.data("kendoDropDownList") || dom.data("kendoNumericTextBox") || dom.data("kendoDatePicker");
 
         if (widget) {
             widget.value(value);
@@ -105,6 +105,8 @@
                 that.link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
             }
 
+            that.link.click($.proxy(that._click, that));
+
             that.dataSource = options.dataSource.bind("change", $.proxy(that.refresh, that));
 
             that.field = element.data("field");
@@ -123,10 +125,10 @@
                 type: type
             }));
 
-            that.popup = new ui.Popup(that.form,{
+            that.popup = that.form.kendoPopup({
                 anchor: that.link,
-                toggleTarget: that.link
-            });
+                open: $.proxy(that._open, that)
+            }).data("kendoPopup");
 
             that.form
                 .bind({
@@ -228,6 +230,17 @@
         _reset: function(e) {
             this.clear();
             this.popup.close();
+        },
+
+        _click: function(e) {
+            e.preventDefault();
+            this.popup.toggle();
+        },
+
+        _open: function() {
+            $(".k-filter-menu").not(this.form).each(function() {
+                $(this).data("kendoPopup").close();
+            });
         },
 
         options: {
