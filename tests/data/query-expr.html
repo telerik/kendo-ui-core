@@ -37,6 +37,20 @@
                 }), "(d == 10)");
             });
 
+            test("undefined value",  function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ {value: undefined}]
+                }), "(d == undefined)");
+            });
+
+            test("null value",  function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ {value: null}]
+                }), "(d == null)");
+            });
+
             test("or with one filter", function() {
                 equal(compile({
                     logic: "or",

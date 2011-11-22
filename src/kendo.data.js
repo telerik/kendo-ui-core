@@ -224,26 +224,24 @@
         var dateRegExp = /^\/Date\((.*?)\)\/$/;
 
         function operator(op, a, b, ignore) {
-            var date;
-
-            b = b != null ? b : {};
-
-            if (typeof b === "string") {
-                date = dateRegExp.exec(b);
-                if (date) {
-                    b = new Date(+date[1]);
-                } else if (ignore) {
-                    b = "'" + b.toLowerCase() + "'";
-                    a = a + ".toLowerCase()";
-                } else {
-                    b = "'" + b + "'";
+            if (b != undefined) {
+                if (typeof b === "string") {
+                    var date = dateRegExp.exec(b);
+                    if (date) {
+                        b = new Date(+date[1]);
+                    } else if (ignore) {
+                        b = "'" + b.toLowerCase() + "'";
+                        a = a + ".toLowerCase()";
+                    } else {
+                        b = "'" + b + "'";
+                    }
                 }
-            }
 
-            if (b.getTime) {
-                //b is probably a Date
-                a += ".getTime()";
-                b = b.getTime();
+                if (b.getTime) {
+                    //b looks like a Date
+                    a += ".getTime()";
+                    b = b.getTime();
+                }
             }
 
             return a + " " + op + " " + b;
