@@ -26,17 +26,6 @@
         return div.find(roleSelector("view")).first();
     }
 
-    function switchWith(source, destination, animation) {
-        if (source[0] && destination[0]) {
-            if (source.data("id") && source.data("id") === destination.data("id")) {
-                // Resolves iPad iOS 4 specific footer flicker
-                destination.html("").append(source.contents().clone(true));
-            } else if(animation) {
-                source.kendoAnimateTo(destination, animation);
-            }
-        }
-    }
-
     function hideAddressBar(element) {
         if (os.appMode) {
             return;
@@ -112,54 +101,72 @@
                                 .kendoScroller({useOnDesktop: true});
 
             that.element.prepend(that.header).append(that.footer);
-        },
-
-        slidings: function(otherView, parallax) {
-            var that = this, slidings;
-
-            if (parallax) {
-                slidings = that.content;
-                if (!otherView.header[0]) {
-                    slidings = slidings.add(that.header);
-                }
-
-                if (!otherView.footer[0]) {
-                    slidings = slidings.add(that.footer);
-                }
-            } else {
-                slidings = that.element;
-            }
-
-            return slidings;
-        },
-
-        replace: function(view) {
-            var that = this,
-                back = that.nextView === view,
-                animationType = (back ? view : that).element.data("kendoTransition"),
-                parallax = animationType === "slide",
-                headFoodEffects = parallax ? {effects: "fade", reverse: back} : false,
-                callback = function() { view.element.hide(); };
-
-            that.element.css("display", "");
-
-            if (back && !parallax) {
-              that.element.css("z-index", 0);
-              view.element.css("z-index", 1);
-            } else {
-              that.element.css("z-index", 1);
-              view.element.css("z-index", 0);
-            }
-
-            view.slidings(that, parallax).kendoAnimateTo(that.slidings(view, parallax), {effects: animationType, reverse: back, complete: callback});
-            switchWith(view.footer, that.footer, headFoodEffects);
-            switchWith(view.header, that.header, headFoodEffects);
-
-            if (!back) {
-                view.nextView = that;
-            }
         }
     });
+
+    function ViewSwitcher(previous, view) {
+        var that = this,
+            callback = function() { previous.element.hide(); },
+            animationType;
+
+        that.back = view.nextView === previous;
+
+        animationType = (that.back ? previous : view).element.data("kendoTransition");
+
+        that.parallax = animationType === "slide";
+
+        view.element.css("display", "");
+
+        if (that.back && !that.parallax) {
+            view.element.css("z-index", 0);
+            previous.element.css("z-index", 1);
+        } else {
+            view.element.css("z-index", 1);
+            previous.element.css("z-index", 0);
+        }
+
+        that.contents(previous, view).kendoAnimateTo(that.contents(view, previous), {effects: animationType, reverse: that.back, complete: callback});
+        that.switchWith(previous.footer, view.footer);
+        that.switchWith(previous.header, view.header);
+
+        if (!that.back) {
+            previous.nextView = view;
+        }
+    }
+
+    ViewSwitcher.replace = function(previous, view) {
+        new ViewSwitcher(previous, view);
+    }
+
+    ViewSwitcher.prototype = {
+        contents: function(source, destination) {
+            if (this.parallax) {
+                contents = source.content;
+                if (!destination.header[0]) {
+                    contents = contents.add(source.header);
+                }
+
+                if (!destination.footer[0]) {
+                    contents = contents.add(source.footer);
+                }
+            } else {
+                contents = source.element;
+            }
+
+            return contents;
+        },
+
+        switchWith: function(source, destination) {
+            if (source[0] && destination[0]) {
+                if (source.data("id") && source.data("id") === destination.data("id")) {
+                    // cloning (instead of appending) Resolves iPad iOS 4 specific footer flicker
+                    destination.html("").append(source.contents().clone(true));
+                } else if(this.parallax) {
+                    source.kendoAnimateTo(destination, {effects: "fade", reverse: this.back});
+                }
+            }
+        }
+    }
 
     var Application = kendo.Observable.extend({
         init: function(element, options) {
@@ -209,7 +216,7 @@
 
                 that.trigger("viewHide", { view: that.view });
 
-                view.replace(that.view);
+                ViewSwitcher.replace(that.view, view);
                 that._setCurrentView(view);
             });
         },
