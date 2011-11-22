@@ -31,14 +31,16 @@
             if (source.data("id") && source.data("id") === destination.data("id")) {
                 // Resolves iPad iOS 4 specific footer flicker
                 destination.html("").append(source.contents().clone(true));
-            } else if (animation) {
+            } else if(animation) {
                 source.kendoAnimateTo(destination, animation);
             }
         }
     }
 
     function hideAddressBar(element) {
-        if (os.appMode) return;
+        if (os.appMode) {
+            return;
+        }
 
         var lastWidth = 0;
 
@@ -52,7 +54,9 @@
             var pageWidth = element[0].offsetWidth,
                 compensation;
 
-            if (lastWidth == pageWidth) return;
+            if (lastWidth === pageWidth) {
+                return;
+            }
             lastWidth = pageWidth;
 
             if (os.device == "iphone" || os.device == "ipod" || os.android) {
@@ -63,7 +67,7 @@
                 }
 
                 element.height(window.innerHeight + compensation);
-                setTimeout ( window.scrollTo, 0, 0, 1 );
+                setTimeout(window.scrollTo, 0, 0, 1);
             }
         }
 
