@@ -231,7 +231,7 @@
             delay: 200,
             dataTextField: "text",
             dataValueField: "value",
-            minLength: 1,
+            minLength: 0, //1,
             height: 200,
             highlightFirst: true,
             filter: "none",
@@ -298,14 +298,16 @@
             var that = this,
                 selected = that._selected;
 
-            if (!that.ul[0].firstChild || (that._filtered && selected)) {
-                that._open = true;
-                that._filtered = false;
-                that._select();
-            } else {
-                that.popup.open();
-                if (selected) {
-                    that._scroll(selected[0]);
+            if (!that.popup.visible()) {
+                if (!that.ul[0].firstChild || (that._filtered && selected)) {
+                    that._open = true;
+                    that._filtered = false;
+                    that._select();
+                } else {
+                    that.popup.open();
+                    if (selected) {
+                        that._scroll(selected[0]);
+                    }
                 }
             }
         },
@@ -320,7 +322,8 @@
                 length = data.length;
 
             ul[0].innerHTML = kendo.render(that.template, data);
-            that._height(length);
+            that.list.height(200);
+            //that._height(length);
 
             if (that.element.is(SELECT)) {
                 that._options(data);
@@ -398,9 +401,7 @@
 
             clearTimeout(that._typing);
 
-            if (!length) {
-                that.close();
-            } else if (length >= options.minLength) {
+            if (length >= options.minLength) {
                 if (filter === "none") {
                     that._filter(word);
                 } else {
@@ -477,7 +478,7 @@
             var that = this;
             clearTimeout(that._bluring);
             that.input[0].focus();
-            setTimeout( function () { that._toggle(toggle); }, 0); // Fixes an annoying flickering issue in iOS.
+            setTimeout( function () { that._toggle(toggle); }); // Fixes an annoying flickering issue in iOS.
         },
 
         /**
@@ -529,13 +530,6 @@
             }
         },
 
-        _clear: function() {
-            var that = this;
-            if (!that.text()) {
-                that.current(null);
-            }
-        },
-
         _custom: function(value) {
             var that = this,
                 element = that.element,
@@ -561,7 +555,12 @@
                 predicate = function (dataItem) {
                     var text = that._text(dataItem);
                     if (text !== undefined) {
-                        return (text + "").toLowerCase().indexOf(word) === 0;
+                        text = text + "";
+                        if (text !== "" && word === "") {
+                            return false;
+                        }
+
+                        return text.toLowerCase().indexOf(word) === 0;
                     }
                 };
 
@@ -584,21 +583,26 @@
         },
 
         _highlight: function(li) {
-            var that = this;
+            var that = this, idx;
 
             if (li == undefined) {
                 return -1;
             }
 
-            that.current(null);
-
             li = that._get(li);
+            idx = List.inArray(li[0], that.ul[0]);
 
-            if (li[0] && !li.hasClass(FOCUSED)) {
-                that.current(li);
+            if (idx == -1) {
+                if (that.options.highlightFirst && !that.text()) {
+                    li = $(that.ul[0].firstChild);
+                } else {
+                    li = null;
+                }
             }
 
-            return List.inArray(li[0], that.ul[0]);
+            that.current(li);
+
+            return idx;
         },
 
         _input: function() {
@@ -636,11 +640,9 @@
 
             if (kendo.keys.TAB === e.keyCode) {
                 that.text(that.input.val());
-            } else if (!that._move(e)) {
-                that._search();
+            } else if (!that._move(e) && !e.altKey && !e.shiftKey) {
+               that._search();
             }
-
-            setTimeout(proxy(that._clear, that));
         },
 
         _search: function() {

@@ -19,6 +19,10 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+
+            QUnit.config.reorder = false;
+            QUnit.config.timeOut = 500;
+
             var ComboBox = kendo.ui.ComboBox,
             data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
             SELECTED = "k-state-selected",
@@ -32,6 +36,28 @@
                 teardown: function() {
                     input.append($("ul")).parent(".k-widget").remove();
                 }
+            });
+
+            test("open() method should open popup {autobind: true}", function() {
+                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                combobox.open();
+
+                ok(combobox.popup.visible());
+            });
+
+            asyncTest("open() method should bind and open popup {autobind: false}", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
+                    autoBind: false
+                });
+
+                combobox.open();
+
+                setTimeout(function() {
+                    ok(combobox.popup.visible());
+                    start();
+                }, 200);
             });
 
             test("value method should select item if exists", function() {
