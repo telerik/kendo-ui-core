@@ -161,7 +161,7 @@
          * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {String} [theme] Sets Chart theme. Available themes: hakama, blueOpal, black.
+         * @option {String} [theme] Sets Chart theme. Available themes: default, blueOpal, black.
          * @option {Object} [dataSource] DataSource configuration or instance.
          * _example
          * $("#chart").kendoChart({
