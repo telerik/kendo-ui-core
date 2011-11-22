@@ -111,11 +111,8 @@
 
                 $("#table1").kendoGrid({
                     scrollable: false,
-                    dataSource: dataSource
-                });
-
-                $("th").kendoFilterMenu({
-                    dataSource:dataSource
+                    dataSource: dataSource,
+                    filterable: true
                 });
             });
         </script>

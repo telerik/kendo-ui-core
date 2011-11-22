@@ -1264,6 +1264,22 @@
             }
         },
 
+        _filterable: function() {
+            var that = this,
+                columns = that.columns,
+                filterable = that.options.filterable;
+
+            if (filterable) {
+                that.thead
+                    .find("th:not(.k-hierarchy-cell)")
+                    .each(function(index) {
+                        if (columns[index].filterable !== false) {
+                            $(this).kendoFilterMenu(extend(true, {}, filterable, columns[index].filterable, { dataSource: that.dataSource }));
+                        }
+                    })
+            }
+        },
+
         _sortable: function() {
             var that = this,
                 columns = that.columns,
@@ -1291,6 +1307,7 @@
             columns = columns.length ? columns : map(table.find("th"), function(th, idx) {
                 var th = $(th),
                     sortable = th.data("sortable")
+                    filterable = th.data("filterable")
                     field = th.data("field");
 
                 if (!field) {
@@ -1300,6 +1317,7 @@
                 return {
                     field: field,
                     sortable: sortable,
+                    filterable: filterable,
                     template: th.data("template"),
                     width: cols.eq(idx).css("width")
                 };
@@ -1576,6 +1594,8 @@
             that.thead = thead;
 
             that._sortable();
+
+            that._filterable();
 
             that._scrollable();
 
