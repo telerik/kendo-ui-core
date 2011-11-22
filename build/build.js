@@ -16,7 +16,6 @@ var fs = require("fs"),
     zip = kendoBuild.zip;
 
 // Configuration ==============================================================
-
 var bundles = [{
     name: "kendoui.web-dataviz",
     suites: ["web", "dataviz"],
@@ -248,7 +247,7 @@ console.log("Build starting at " + startDate);
 initWorkspace();
 
 console.log("Merging multi-part scripts");
-kendoScripts.mergeScripts(SCRIPTS_ROOT);
+kendoScripts.mergeScripts();
 
 console.log("Building themes");
 themes.build();
