@@ -89,12 +89,16 @@
                     sortable: true,
                     groupable: false,
                     scrollable: false,
+                    navigatable: true,
+                    selectable: "cell",
                     toolbar: ["create", "cancel", "save"],
                     columns: ["bar", "foo", "date", { command: "destroy", title: "Foo" } ]
                 });
 
                 $("#relatedGrid").kendoGrid({
                     dataSource: dataSource,
+                    navigatable: true,
+                    selectable: "cell",
                     pageable: true
                 });
 

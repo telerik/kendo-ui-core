@@ -46,12 +46,12 @@
         "number": function(container, options) {
             var attr = createAttributes(options);
             $('<input type="text" style="width:100%"/>').attr(attr).appendTo(container).kendoNumericTextBox({ format: options.format });
-            $('<span data-kendo-for="' + options.field + '" class="k-invalid-msg"/>').appendTo(container);
+            $('<span data-kendo-for="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
         "date": function(container, options) {
             var attr = createAttributes(options);
             $('<input type="text" style="width:100%;"/>').attr(attr).appendTo(container).kendoDatePicker({ format: options.format });
-            $('<span data-kendo-for="' + options.field + '" class="k-invalid-msg"/>').appendTo(container);
+            $('<span data-kendo-for="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
         "string": function(container, options) {
             var attr = createAttributes(options);
