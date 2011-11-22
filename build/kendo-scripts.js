@@ -5,14 +5,22 @@ var fs = require("fs"),
     kendoBuild = require("./kendo-build.js");
 
 // Configuration ==============================================================
+var SCRIPTS = "src/",
+    EXAMPLES_SCRIPTS = "demos/examples/shared/js/";
+
 var multipartScripts = [{
-    output:   "kendo.chart.js",
-    inputs: [ "chart/main.js",
-              "chart/svg.js",
-              "chart/vml.js",
-              "chart/themes.js"
-    ]
-}];
+    output:   SCRIPTS + "kendo.chart.js",
+    inputs: [ SCRIPTS + "chart/main.js",
+              SCRIPTS + "chart/svg.js",
+              SCRIPTS + "chart/vml.js",
+              SCRIPTS + "chart/themes.js"]
+    }, {
+    output:   EXAMPLES_SCRIPTS + "kendo.examples.js",
+    inputs: [ EXAMPLES_SCRIPTS + "examples.js",
+              EXAMPLES_SCRIPTS + "console.js",
+              EXAMPLES_SCRIPTS + "people.js"
+    ]}
+];
 
 var allScripts = [
     "kendo.core.js",
@@ -121,10 +129,10 @@ function deploy(scriptsRoot, outputRoot, header, compress) {
     });
 }
 
-function mergeScripts(scriptsRoot) {
+function mergeScripts() {
     multipartScripts.forEach(function(script) {
         console.log("\t" + script.output + ": " + script.inputs.length + " files");
-        mergeMultipartScript(script, scriptsRoot, scriptsRoot, "", false);
+        mergeMultipartScript(script, "", "", "", false);
     });
 }
 
@@ -164,5 +172,5 @@ if (require.main !== module) {
     exports.deployScripts = deploy;
 } else {
     console.log("merging multipart scripts...");
-    mergeScripts("./src/");
+    mergeScripts();
 }
