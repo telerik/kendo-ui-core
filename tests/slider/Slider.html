@@ -272,6 +272,12 @@
                 equal(slider.options.max, 5);
             });
 
+            test("slider should have default input value", function () {
+                var slider = newSlider({}, $("<input />"));
+
+                equal(slider.element.val(), 0);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Slider Tests</h1>

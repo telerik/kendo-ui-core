@@ -296,6 +296,14 @@
                 equal(rangeSlider.options.max, 5);
             });
 
+            test("rangeSlider should set default value to the inputs", function () {
+                var rangeSlider = newRangeSlider({}, $("<div><input /><input /></div>")),
+                    inputs = rangeSlider.element.find("input");
+
+                equal(inputs.eq(0).val(), 0);
+                equal(inputs.eq(1).val(), 10);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.RangeSlider Tests</h1>

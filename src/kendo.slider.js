@@ -398,9 +398,15 @@
         _createHtml: function() {
             var that = this,
                 element = that.element,
-                options = that.options;
+                options = that.options,
+                inputs = element.find("input");
 
-            element.val(options.value);
+            if (inputs.length == 2) {
+                inputs.eq(0).val(options.selectionStart);
+                inputs.eq(1).val(options.selectionEnd);
+            } else {
+                element.val(options.value);
+            }
 
             element.wrap(createWrapper(options, element, that._isHorizontal)).hide();
 
@@ -560,6 +566,7 @@
 
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
+
             that._setValueInRange(options.value);
             dragHandle = that.wrapper.find(DRAG_HANDLE);
 
