@@ -228,7 +228,6 @@
         _setCurrentView: function(view) {
             var that = this, params = history.url().params;
             that.view = view;
-            console.log(that.view);
             view.params = params;
             that.trigger("viewShow", {view: view, params: params});
         },
