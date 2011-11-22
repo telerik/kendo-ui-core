@@ -21,7 +21,7 @@
 
             module("Slider/Slider", {
                 setup: function () {
-                    input = $("<input value='1' />").appendTo(document.body);
+                    input = $("<input value='1' />");
                     isDefaultPrevent = false;
                 },
                 teardown: function() {
@@ -29,8 +29,8 @@
                 }
             });
 
-            function newSlider(options) {
-                return new Slider(input, options);
+            function newSlider(options, newInput) {
+                return new Slider((newInput || input).appendTo(document.body)[0], options);
             }
 
             test('slider should decrease value with a small step when down and left arrow keyboard is clicked', function () {
@@ -252,6 +252,24 @@
                 var slider = newSlider();
 
                 equal(slider.value(), 1);
+            });
+
+            test("slider should get step from the input", function () {
+                var slider = newSlider({}, $("<input step='2' />"));
+
+                equal(slider.options.smallStep, 2);
+            });
+
+            test("slider should get min from the input", function () {
+                var slider = newSlider({}, $("<input min='4' />"));
+
+                equal(slider.options.min, 4);
+            });
+
+            test("slider should get max from the input", function () {
+                var slider = newSlider({}, $("<input max='5' />"));
+
+                equal(slider.options.max, 5);
             });
 
         </script>

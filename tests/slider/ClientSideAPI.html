@@ -20,7 +20,7 @@
 
             module("Slider/ClientSideAPI", {
                 setup: function () {
-                    input = $("<input />").appendTo(document.body);
+                    input = $("<input />").appendTo(document.body)[0];
                 },
                 teardown: function() {
                     $(".k-slider").remove();

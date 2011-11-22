@@ -14,20 +14,20 @@
      *      <li><strong>RangeSlider</strong>, which present two thumbs for defining a range of values</li>
      *  </ol>
      *  <h4>Slider</h4>
-     * @exampleTitle Create simple HTML input element (type="range" is optional)
+     * @exampleTitle Create simple HTML input element
      * @example
-     *  <input id="slider" type="range" />
+     *  <input id="slider" />
      * @exampleTitle Initialize the Slider using a jQuery selector
      * @example
      *  $("#slider").kendoSlider();
      *
      * @section
      *  <h4>RangeSlider</h4>
-     * @exampleTitle Create two simple HTML input elements in a div (type="range" is optional)
+     * @exampleTitle Create two simple HTML input elements in a div
      * @example
      *  <div id="rangeSlider">
-     *      <input type="range" />
-     *      <input type="range" />
+     *      <input />
+     *      <input />
      *  </div>
      *
      * @exampleTitle Initialize the RangeSlider using a jQuery selector targeting the div
@@ -68,6 +68,7 @@
         Draggable = kendo.ui.Draggable,
         keys = kendo.keys,
         extend = $.extend,
+        parse = kendo.parseFloat,
         proxy = $.proxy,
         math = Math,
         touch = kendo.support.touch,
@@ -92,6 +93,7 @@
             var that = this;
 
             Widget.fn.init.call(that, element, options);
+
             options = that.options;
 
             that._distance = options.max - options.min;
@@ -274,16 +276,19 @@
             var that = this,
                 options = that.options,
                 trackDivSize = parseFloat(that._trackDiv.css(that._size)) + 1,
-                pixelStep = trackDivSize / that._distance;
+                pixelStep = trackDivSize / that._distance,
+                itemWidth,
+                pixelWidths,
+                i;
 
             if ((that._distance / options.smallStep) - math.floor(that._distance / options.smallStep) > 0) {
                 trackDivSize -= ((that._distance % options.smallStep) * pixelStep);
             }
 
-            var itemWidth = trackDivSize / itemsCount,
-                pixelWidths = [];
+            itemWidth = trackDivSize / itemsCount;
+            pixelWidths = [];
 
-            for (var i = 0; i < itemsCount - 1; i++) {
+            for (i = 0; i < itemsCount - 1; i++) {
                 pixelWidths[i] = itemWidth;
             }
 
@@ -325,8 +330,9 @@
                 options = that.options,
                 val = options.min,
                 selection = 0,
-                itemsCount = pixelWidths.length;
-                i = 1;
+                itemsCount = pixelWidths.length,
+                i = 1,
+                lastItem;
 
             pixelWidths.splice(0, 0, pixelWidths.pop() * 2);
             pixelWidths.splice(itemsCount, 1, pixelWidths.pop() * 2);
@@ -346,7 +352,7 @@
                 i++;
             }
 
-            var lastItem = options.max % options.smallStep == 0 ? itemsCount - 1 : itemsCount;
+            lastItem = options.max % options.smallStep == 0 ? itemsCount - 1 : itemsCount;
 
             that._pixelSteps[lastItem] = that._maxSelection;
             that._values[lastItem] = options.max;
@@ -477,14 +483,14 @@
         return (value + "").replace(".", kendo.cultures.current.numberFormat["."]);
     }
 
-    function parseValue(value) {
-        return (value + "").replace(kendo.cultures.current.numberFormat["."], ".");
-    }
-
     function round(value) {
         value = parseFloat(value, 10);
         var power = math.pow(10, PRECISION || 0);
         return math.round(value * power) / power;
+    }
+
+    function parseAttr(element, name) {
+        return parse(element.getAttribute(name)) || undefined;
     }
 
     var Slider = SliderBase.extend(/** @lends kendo.ui.Slider.prototype */{
@@ -495,11 +501,11 @@
          * @param {Object} options Configuration options.
          * @option {Boolean} [enabled] <true> Can be used to enable/disable the slider.
          * @option {Number} [min] <0> The minimum value of the slider.
-         * @option {Number} [max] <20> The maximum value of the slider.
+         * @option {Number} [max] <10> The maximum value of the slider.
          * @option {Boolean} [showButtons] <true> Can be used to show or hide the slider increase and decrease buttons. The buttons are used to increase or decrease the value. They are not available in the RangeSlider.
          * @option {Object} [tooltip] Confituration of the slider tooltip.
-         * @option {Boolean} [tooltip.enabled] Can be used to enable/disable the tooltip.
-         * @option {String} [tooltip.format] Can be used to formatting of the text of the tooltip. Note that the applied format will also influence the appearance of the slider tick labels.
+         * @option {Boolean} [tooltip.enabled] <true> Can be used to enable/disable the tooltip.
+         * @option {String} [tooltip.format] <"{0}"> Can be used to formatting of the text of the tooltip. Note that the applied format will also influence the appearance of the slider tick labels.
          * @option {Number} [value] <0> The value of the slider.
          * @option {String} [orientation] <"horizontal"> The orientation of the slider. Available options are "horizontal" and "vertical".
          * @option {String} [tickPlacement] <"both"> the location of the tick marks in the widget. Available options are:
@@ -536,21 +542,26 @@
          *         </li>
          *     </ul>
          * @option {Number} [largeStep] <5> The delta with which the value will change when the user presses the Page Up or Page Down key (the drag handle must be focused). Note that the allied largeStep will also set large tick for every large step.
-         * @option {String} [increaseButtonTitle] <Increase> The title of the increase button of the slider.
-         * @option {String} [decreaseButtonTitle] <Decrease> The title of the decrease button of the slider.
+         * @option {String} [increaseButtonTitle] <"Increase"> The title of the increase button of the slider.
+         * @option {String} [decreaseButtonTitle] <"Decrease"> The title of the decrease button of the slider.
          */
         init: function(element, options) {
-            options = options || {};
             var that = this,
-                value = options.value;
-            value = (isNaN(value)) ?
-                    parseValue($(element).val()) || 0 :
-                    value;
-            options.value = round(value);
+                dragHandle;
+
+            element.type = "text";
+
+            options = extend({}, {
+                value: parseAttr(element, "value"),
+                min: parseAttr(element, "min"),
+                max: parseAttr(element, "max"),
+                smallStep: parseAttr(element, "step")
+            }, options);
+
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
             that._setValueInRange(options.value);
-            var dragHandle = that.wrapper.find(DRAG_HANDLE);
+            dragHandle = that.wrapper.find(DRAG_HANDLE);
 
             new Slider.Selection(dragHandle, that, options);
             that._drag = new Slider.Drag(dragHandle, "", that, options);
@@ -574,14 +585,16 @@
          */
         enable: function () {
             var that = this,
-                options = that.options;
+                options = that.options,
+                clickHandler,
+                move;
 
             that.wrapper
                 .removeAttr(DISABLED)
                 .removeClass(STATE_DISABLED)
                 .addClass(STATE_DEFAULT);
 
-            var clickHandler = function (e) {
+            clickHandler = function (e) {
                 if ($(e.target).hasClass("k-draghandle")) {
                     $(e.target).addClass(STATE_ACTIVE);
                     return;
@@ -605,13 +618,13 @@
                 $(e.target).removeClass(STATE_ACTIVE);
             });
 
-            var move = proxy(function (e, sign) {
+            move = proxy(function (e, sign) {
                 var index = math.ceil(options.value / options.smallStep) - options.min;
 
                 if (index >= that._values.length - 1 || index <= 0) {
-                    this._setValueInRange(options.value + (sign * options.smallStep));
+                    that._setValueInRange(options.value + (sign * options.smallStep));
                 } else {
-                    this._setValueInRange(this._values[index + (sign * 1)]);
+                    that._setValueInRange(that._values[index + (sign * 1)]);
                 }
             }, that);
 
@@ -643,11 +656,13 @@
                     .bind(MOUSE_DOWN, proxy(function (e) {
                         mouseDownHandler(e, 1);
                     }, that))
+                    .click(false)
                     .end()
                     .eq(1)
                     .bind(MOUSE_DOWN, proxy(function (e) {
                         mouseDownHandler(e, -1);
-                    }, that));
+                    }, that))
+                    .click(false);
             }
 
             that.wrapper
@@ -800,6 +815,8 @@
             drag: proxy(that.drag, that),
             dragend: proxy(that.dragend, that)
         });
+
+        dragHandle.click(false);
     };
 
     Slider.Drag.prototype = {
@@ -997,10 +1014,10 @@
          * @param {Object} options Configuration options.
          * @option {Boolean} [enabled] <true> Can be used to enable/disable the rangeSlider.
          * @option {Number} [min] <0> The minimum value of the rangeSlider.
-         * @option {Number} [max] <20> The maximum value of the rangeSlider.
+         * @option {Number} [max] <10> The maximum value of the rangeSlider.
          * @option {Object} [tooltip] Confituration of the Rangelider tooltip.
-         * @option {Boolean} [tooltip.enabled] Can be used to enable/disable the tooltip.
-         * @option {String} [tooltip.format] Can be used to formatting of the text of the tooltip. Note that the applied format will also influence the appearance of the rangeSlider tick labels.
+         * @option {Boolean} [tooltip.enabled] <true> Can be used to enable/disable the tooltip.
+         * @option {String} [tooltip.format] <"{0}"> Can be used to formatting of the text of the tooltip. Note that the applied format will also influence the appearance of the rangeSlider tick labels.
          * @option {Number} [selectionStart] <0> The selection start value of the rangeSlider.
          * @option {Number} [selectionEnd] <10> The selection end value of the rangeSlider.
          * @option {String} [orientation] <"horizontal"> The orientation of the rangeSlider. Available options are "horizontal" and "vertical".
@@ -1041,14 +1058,25 @@
          */
         init: function(element, options) {
             var that = this,
-                inputs = $(element).find("input");
-            options = options || {};
-            options.selectionStart = isNaN(options.selectionStart) ?
-                            round(parseValue(inputs.eq(0).val())) || undefined :
-                            round(options.selectionStart);
-            options.selectionEnd = isNaN(options.selectionEnd) ?
-                            round(parseValue(inputs.eq(1).val())) || undefined :
-                            round(options.selectionEnd);
+                inputs = $(element).find("input"),
+                firstInput = inputs.eq(0)[0],
+                secondInput = inputs.eq(1)[0];
+
+            firstInput.type = "text";
+            secondInput.type = "text";
+
+            options = extend({}, {
+                selectionStart: parseAttr(firstInput, "value"),
+                min: parseAttr(firstInput, "min"),
+                max: parseAttr(firstInput, "max"),
+                smallStep: parseAttr(firstInput, "step")
+            }, {
+                selectionEnd: parseAttr(secondInput, "value"),
+                min: parseAttr(secondInput, "min"),
+                max: parseAttr(secondInput, "max"),
+                smallStep: parseAttr(secondInput, "step")
+            }, options);
+
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
             that._setValueInRange(options.selectionStart, options.selectionEnd);
@@ -1076,14 +1104,15 @@
          */
         enable: function () {
             var that = this,
-                options = that.options;
+                options = that.options,
+                clickHandler;
 
             that.wrapper
                 .removeAttr(DISABLED)
                 .removeClass(STATE_DISABLED)
                 .addClass(STATE_DEFAULT);
 
-            var clickHandler = function (e) {
+            clickHandler = function (e) {
                 if ($(e.target).hasClass("k-draghandle")) {
                     $(e.target).addClass(STATE_ACTIVE);
                     return;
@@ -1133,7 +1162,7 @@
                     }, that)
                 );
 
-            that.enabled = true;
+            that.options.enabled = true;
         },
 
         /**
@@ -1308,8 +1337,8 @@
         moveSelection(that.values());
 
         that.bind([ CHANGE, SLIDE, MOVE_SELECTION ], function (e) {
-                                                         moveSelection(e.values);
-                                                     });
+            moveSelection(e.values);
+        });
     };
 
     kendo.ui.plugin(RangeSlider);

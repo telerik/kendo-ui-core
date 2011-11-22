@@ -20,16 +20,15 @@
 
             module("Slider/Rendering", {
                 setup: function () {
-                    input = $("<input />").appendTo(document.body);
+                    input = $("<input />");
                 },
                 teardown: function() {
                     input.closest(".k-slider").remove();
                 }
-
             });
 
             function newSlider(options) {
-                return new Slider(input, options);
+                return new Slider(input.appendTo(document.body)[0], options);
             }
 
             test("horizontal slider should apply max value", function () {
