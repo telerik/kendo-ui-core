@@ -71,7 +71,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c74f68fa-0cd8-494a-8f4f-f0f953454f7d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2319b96c-8c06-4f64-8183-d3f6590dc0c9</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -106,7 +106,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ecb082b8-c656-45b7-8a85-67dd6078c2c2</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a3afda6b-6df6-487c-a331-3f4bd91238f9</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -189,7 +189,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>cc502c8a-9415-4439-9ebc-3638868d2526</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>864ab57b-8a55-42ce-b05e-9d9e7d0f9fa0</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DragDropActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -299,10 +299,15 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6a114320-8169-40a5-a9df-f167ab7bc000</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>fb7f6672-89af-418a-84cd-003ea45d3842</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ExistsVerificationDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -377,14 +382,47 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify input 'Text' value 'Exact' '0'.</d2p1:Description>
+      <d2p1:Description>Wait for '1500' msec.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>cdd9aa6b-9759-4486-bd57-d1fe06bdff1a</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="InputValueVerificationDescriptor">
+      <d2p1:Runtime_x0020_ID>7c2e812d-0a2e-4594-8db7-5957eccc8793</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <WaitTime>1500</WaitTime>
+      </d2p1:Step>
+      <d2p1:StepImageKey>DoubleSliderDisableMoveurghu5z5.ot3</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Verify input 'Text' value 'Exact' '0'.</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>6</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>e0c049eb-20bf-46a6-9975-5a301d25c23e</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="InputValueVerificationDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
@@ -480,14 +518,14 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>uiwidgets\slider\api\DoubleSliderDisableMove.tstest</Path>
+  <Path>UIWidgets\Slider\API\DoubleSliderDisableMove.tstest</Path>
   <Priority>0</Priority>
   <ProfilerBenchmarkResultsFilePath i:nil="true" />
   <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
   <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{00000000-0000-0000-0000-000000000000}.tsprofconfig</ProfilerConfigurationFilePath>
   <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
   <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <ProfilerResultsDirectory i:nil="true" />
+  <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\1\</ProfilerResultsDirectory>
   <ProfilerServerName i:nil="true" />
   <ResourceFilePath>uiwidgets\slider\api\DoubleSliderDisableMove.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
