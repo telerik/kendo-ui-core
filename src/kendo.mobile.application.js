@@ -29,7 +29,8 @@
     function switchWith(source, destination, animation) {
         if (source[0] && destination[0]) {
             if (source.data("id") && source.data("id") === destination.data("id")) {
-                destination.html("").append(source.contents());
+                // Resolves iPad iOS 4 specific footer flicker
+                destination.html("").append(source.contents().clone(true));
             } else if (animation) {
                 source.kendoAnimateTo(destination, animation);
             }
