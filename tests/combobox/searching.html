@@ -54,6 +54,32 @@
                 ok(combobox.ul.children().eq(1).hasClass("k-state-focused"));
             });
 
+            test("open popup on search and any items", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.text("b");
+                combobox.search("b");
+
+                ok(combobox.popup.visible());
+            });
+
+            asyncTest("open popup with all items if empty input", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data,
+                    filter: "startswith"
+                });
+
+                combobox.text("b");
+                combobox.search("");
+
+                setTimeout(function() {
+                    ok(combobox.popup.element.css("display") !== "none");
+                    start();
+                }, 300);
+            });
+
             test("search focus item if text number", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: [{text: "Foo", value: 1}, {text:10, value:2}]
@@ -334,6 +360,93 @@
 
                 setTimeout(function() {
                     ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
+                    start();
+                }, 500);
+            });
+
+            asyncTest("no filter and highlightFirst should always focus first item", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.input.val("f");
+                combobox.search("");
+
+                setTimeout(function() {
+                    ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
+                    start();
+                }, 500);
+            });
+
+            asyncTest("no filter and highlightFirst should always focus first item", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.search("");
+
+                setTimeout(function() {
+                    ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
+                    start();
+                }, 500);
+            });
+
+            asyncTest("no filter and highlightFirst=false should not focus first item", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data,
+                    highlightFirst: false
+                });
+
+                combobox.search("");
+
+                setTimeout(function() {
+                    ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
+                    start();
+                }, 500);
+            });
+
+            asyncTest("no filter should focus first item", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.open();
+                combobox.current(combobox.ul.children("li").eq(1));
+
+                combobox.input.val("Ice");
+                combobox.search("Ice");
+
+                setTimeout(function() {
+                    ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
+                    start();
+                }, 500);
+            });
+
+            asyncTest("startswith filter and highlightFirst should always focus first item", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data,
+                    filter: "startswith"
+                });
+
+                combobox.search("");
+
+                setTimeout(function() {
+                    ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
+                    start();
+                }, 500);
+            });
+
+            asyncTest("startswith filter and highlightFirst=false should not focus first item", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: data,
+                    highlightFirst: false,
+                    filter: "startswith"
+                });
+
+                combobox.search("");
+
+                setTimeout(function() {
+                    ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
                     start();
                 }, 500);
             });
