@@ -18,7 +18,8 @@ var multipartScripts = [{
     output:   EXAMPLES_SCRIPTS + "kendo.examples.js",
     inputs: [ EXAMPLES_SCRIPTS + "examples.js",
               EXAMPLES_SCRIPTS + "console.js",
-              EXAMPLES_SCRIPTS + "people.js"
+              EXAMPLES_SCRIPTS + "people.js",
+              EXAMPLES_SCRIPTS + "prettify.js"
     ]}
 ];
 
