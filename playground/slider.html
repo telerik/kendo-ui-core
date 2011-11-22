@@ -10,7 +10,7 @@
         <link type="text/css" href="../styles/kendo.blueopal.css" rel="stylesheet"/>
     </head>
     <body>
-        <input id="slider" style="margin: 40px;">
+        <input id="slider" style="margin: 40px;" value="5">
         <br />
         <div id="rangeslider" style="margin: 40px;">
             <input />
@@ -18,9 +18,9 @@
         </div>
         <script type="text/javascript">
             $(document).ready(function() {
-            $("#slider").kendoSlider({value: 10});
+            $("#slider").kendoSlider();
 
-            $("#rangeslider").kendoRangeSlider({selectionStart: 1, selectionEnd: 5});
+            $("#rangeslider").kendoRangeSlider();
             });
         </script>
     </body>

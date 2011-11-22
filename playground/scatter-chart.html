@@ -50,10 +50,22 @@
                             missingValues: "",
                             xField: "xValue",
                             yField: "yValue"
+                        }, {
+                            labels: {
+                                visible: true
+                            },
+                            type: "scatter",
+                            name: "Plot 1",
+                            missingValues: "",
+                            data: [[1,1], [1,2]],
+                            tooltip: {
+                                format: "{0}kur{1}"
+                            }
                         }
                     ],
                     tooltip: {
-                        visible: true
+                        visible: true,
+                        format: "{0}-----------{1}"
                     }
                 });
             });

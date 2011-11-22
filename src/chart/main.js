@@ -2944,7 +2944,13 @@
         },
 
         options: {
-            series: []
+            series: [],
+            tooltip: {
+                format: "{0}, {1}"
+            },
+            labels: {
+                format: "{0}, {1}"
+            }
         },
 
         render: function() {
@@ -3018,10 +3024,10 @@
                         opacity: series.opacity
                     },
                     tooltip: {
-                        format: "{0}, {1}"
+                        format: chart.options.tooltip.format
                     },
                     labels: {
-                        format: "{0}, {1}"
+                        format: chart.options.labels.format
                     }
                 }, series)
             );
@@ -4723,7 +4729,7 @@
             left = round(anchor.x) + "px";
 
             if (!tooltip.visible) {
-                tooltip.element.css({top: top, left: left});
+                tooltip.element.css({ top: top, left: left });
             }
 
             tooltip.element
@@ -5021,6 +5027,7 @@
                 {},
                 themeSeriesDefaults,
                 themeSeriesDefaults[seriesType],
+                { tooltip: options.tooltip },
                 baseSeriesDefaults,
                 seriesDefaults[seriesType],
                 series[i]);

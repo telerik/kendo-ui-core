@@ -332,6 +332,35 @@
                     equal(chart.options.series[0].type, "line");
                 });
 
+                test("tooltip is set", function() {
+                    createChart({
+                        seriesDefaults: {
+                            tooltip: {
+                                flag: true
+                            }
+                        },
+                        series: [{ }]
+                    });
+
+                    ok(chart.options.series[0].tooltip.flag);
+                });
+
+                test("tooltip override tooltip options", function() {
+                    createChart({
+                        seriesDefaults: {
+                            tooltip: {
+                                flag: true
+                            }
+                        },
+                        series: [{ }],
+                        tooltip: {
+                            flag: false
+                        }
+                    });
+
+                    ok(chart.options.series[0].tooltip.flag);
+                });
+
                 test("series colors are set", function() {
                     createChart({
                         seriesColors: ["#fff", "#f00"],
@@ -484,6 +513,118 @@
 
                     ok(typeof(chart.options.series[0].line) === "undefined");
                 });
+
+                test("pie series defaults are applied", function() {
+                    createChart({
+                        seriesDefaults: {
+                            pie: {
+                                width: 2
+                            }
+                        },
+                        series: [{ type: "pie" }]
+                    });
+
+                    equal(chart.options.series[0].width, 2);
+                });
+
+                test("pie series defaults are not applied to other series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            pie: {
+                                width: 1
+                            }
+                        },
+                        series: [{ type: "bar" }]
+                    });
+
+                    notEqual(chart.options.series[0].width, 1);
+                });
+
+                test("pie series defaults are not copied in series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            pie: { }
+                        },
+                        series: [{ type: "pie" }]
+                    });
+
+                    ok(typeof(chart.options.series[0].pie) === "undefined");
+                });
+
+                test("scatter series defaults are applied", function() {
+                    createChart({
+                        seriesDefaults: {
+                            scatter: {
+                                width: 2
+                            }
+                        },
+                        series: [{ type: "scatter" }]
+                    });
+
+                    equal(chart.options.series[0].width, 2);
+                });
+
+                test("scatter series defaults are not applied to other series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            scatter: {
+                                width: 1
+                            }
+                        },
+                        series: [{ type: "bar" }]
+                    });
+
+                    notEqual(chart.options.series[0].width, 1);
+                });
+
+                test("scatter series defaults are not copied in series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            scatter: { }
+                        },
+                        series: [{ type: "scatter" }]
+                    });
+
+                    ok(typeof(chart.options.series[0].scatter) === "undefined");
+                });
+
+                test("scatterLine series defaults are applied", function() {
+                    createChart({
+                        seriesDefaults: {
+                            scatterLine: {
+                                width: 2
+                            }
+                        },
+                        series: [{ type: "scatterLine" }]
+                    });
+
+                    equal(chart.options.series[0].width, 2);
+                });
+
+                test("scatterLine series defaults are not applied to other series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            scatterLine: {
+                                width: 1
+                            }
+                        },
+                        series: [{ type: "bar" }]
+                    });
+
+                    notEqual(chart.options.series[0].width, 1);
+                });
+
+                test("scatterLine series defaults are not copied in series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            scatterLine: { }
+                        },
+                        series: [{ type: "scatterLine" }]
+                    });
+
+                    ok(typeof(chart.options.series[0].scatterLine) === "undefined");
+                });
+
 
                 // ------------------------------------------------------------
                 module("Title", {
