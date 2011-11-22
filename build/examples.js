@@ -108,6 +108,8 @@ function splitCSSRegion(exampleHTML, base) {
     });
 
     currentPageCSS = currentPageCSS.replace(cssStripper, rebasedHref);
+    currentPageCSS = currentPageCSS.replace(/.*?examples-offline.*/g, "");
+
     baseCSS = baseCSS.replace(cssStripper, rebasedHref);
 
     allCSS = currentPageCSS + baseCSS;
