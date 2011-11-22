@@ -29,6 +29,7 @@
         ABORT_ID = "abortId",
         OVERFLOW = "overflow",
         TRANSLATE = "translate",
+        STYLE = "style",
         TRANSITION = cssPrefix + "transition",
         TRANSFORM = cssPrefix + "transform";
 
@@ -559,16 +560,20 @@
 
         animateTo: function(element, destination, options) {
             var direction,
-                container = element.parent(),
-                options = parseTransitionEffects(options);
+                options = parseTransitionEffects(options),
+                commonParent = element.parents().filter(destination.parents()).first(),
+                originalOverflow = commonParent.css(OVERFLOW);
+
+            commonParent.css(OVERFLOW, "hidden");
 
             $.each(options.effects, function(name, definition) {
                 direction = direction || definition.direction;
             });
 
             function complete() {
-                destination.attr("style", "");
-                element.attr("style", "");
+                destination.attr(STYLE, "");
+                element.attr(STYLE, "");
+                commonParent.css(OVERFLOW, originalOverflow);
                 options.completeCallback && options.completeCallback();
             }
 
