@@ -27,6 +27,7 @@ functional-tests/KendoCustom/**/Backup/
 functional-tests/KendoCustom/**/TestLists/
 functional-tests/KendoDemosTests/Profiler Configurations/
 functional-tests/**/Profiler Configurations/
+functional-tests/**/**/Profiler Configurations/
 app.js
 node_modules
 themebuilder/src/less.js
