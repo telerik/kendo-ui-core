@@ -155,6 +155,12 @@ function deployExamples(root, bundle) {
             data = data.replace(/(\.\.\/)+src\/(.*?)\.js/g, scriptsPath);
             data = data.replace(/min\.min/g, "min");
 
+            // Add back button
+            data = data.replace(/(<!-- description -->)/, '<a href="../">Back</a>');
+
+            // Remove marker comments
+            data = data.replace(/\s*<!--\s*\w+\s*-->\s*$/gm, '');
+
             writeText(name, data);
         });
 
