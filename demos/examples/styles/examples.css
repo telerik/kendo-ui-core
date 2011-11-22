@@ -1005,6 +1005,9 @@ pre.prettyprint
     line-height: 22px;
     text-align: center;
     background-repeat: repeat-x;
+    -moz-border-radius: 0;
+    -wekbit-border-radius: 0;
+    border-radius: 0;
 }
 
 #codeStrip .k-state-default .k-link
