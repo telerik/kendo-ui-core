@@ -893,9 +893,9 @@
 
                 if (that.options.navigatable) {
                     that.wrapper.keydown(function(e) {
-                        if (e.keyCode === keys.SPACEBAR) {
+                        var current = that.current();
+                        if (e.keyCode === keys.SPACEBAR && !current.hasClass("k-edit-cell")) {
                             e.preventDefault();
-                            var current = that.current();
                             current = cell ? current : current.parent();
 
                             if(multi) {
@@ -1021,28 +1021,58 @@
                             current = that.current(),
                             dataSource = that.dataSource,
                             pageable = that.options.pageable,
+                            canHandle = !$(e.target).is(":button,a,:input,a>.t-icon"),
                             handled = false;
 
-                        if (keys.UP === key) {
+                        if (canHandle && keys.UP === key) {
                             currentProxy(current ? current.parent().prevAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
                             handled = true;
-                        } else if (keys.DOWN === key) {
+                        } else if (canHandle && keys.DOWN === key) {
                             currentProxy(current ? current.parent().nextAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
                             handled = true;
-                        } else if (keys.LEFT === key) {
+                        } else if (canHandle && keys.LEFT === key) {
                             currentProxy(current ? current.prev(":not(.k-group-cell)") : table.find(FIRST_CELL_SELECTOR));
                             handled = true;
-                        } else if (keys.RIGHT === key) {
+                        } else if (canHandle && keys.RIGHT === key) {
                             currentProxy(current ? current.next() : table.find(FIRST_CELL_SELECTOR));
                             handled = true;
-                        } else if (pageable && keys.PAGEDOWN == key) {
+                        } else if (canHandle && pageable && keys.PAGEDOWN == key) {
                             that._current = null;
                             dataSource.page(dataSource.page() + 1);
                             handled = true;
-                        } else if (pageable && keys.PAGEUP == key) {
+                        } else if (canHandle && pageable && keys.PAGEUP == key) {
                             that._current = null;
                             dataSource.page(dataSource.page() - 1);
                             handled = true;
+                        } else if (that.options.editable) {
+                            if (keys.ENTER == key) {
+                                if (that.editable) {
+                                    if ($.contains(that._editContainer[0], document.activeElement)) {
+                                        document.activeElement.blur();
+                                    }
+
+                                    var isEdited = current.hasClass("k-edit-cell");
+                                    if (that.editable.end()) {
+                                        that._closeCell();
+                                        that.element.focus();
+
+                                        if (!isEdited) {
+                                            that._editCell(current);
+                                        }
+                                    } else {
+                                        that.current(that._editContainer);
+                                        that._editContainer.find(":input:visible:first").focus();
+                                    }
+                                } else {
+                                    that._editCell(current);
+                                }
+                                handled = true;
+                            } else if (keys.TAB == key) {
+                                that.current(current.next());
+                                that._editCell(that.current());
+
+                                handled = true;
+                            }
                         }
 
                         if(handled) {

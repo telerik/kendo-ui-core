@@ -50,5 +50,9 @@ tests.push(
     {
         page: "grid/toolbar.html",
         title: "toolbar"
+    },
+    {
+        page: "grid/editingnavigation.html",
+        title: "editing navigation"
     }
 );
