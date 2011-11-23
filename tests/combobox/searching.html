@@ -19,6 +19,8 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+            QUnit.config.testTimeout = 1000;
+
             var ComboBox = kendo.ui.ComboBox,
                 data = [{text: "Foo", value: 1}, {text:"Bar", value:2}, {text:"Baz", value:3}],
                 input;
@@ -204,7 +206,7 @@
                 combobox.options.filter = "startswith";
                 combobox.text("b");
                 combobox.search("b");
-                combobox.ul.children().eq(1).click();
+                combobox._focus(combobox.ul.children().eq(1));
 
                 setTimeout(function() {
                     equal(combobox.ul.children().length, 2);
@@ -222,7 +224,8 @@
                 combobox.options.filter = "startswith";
                 combobox.text("b");
                 combobox.search("b");
-                combobox.ul.children().eq(1).click();
+                combobox._focus(combobox.ul.children().eq(1));
+                combobox._accepted = true;
 
                 setTimeout(function() {
                     combobox.open();

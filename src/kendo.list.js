@@ -137,13 +137,15 @@
             if (length) {
                 var that = this,
                     list = that.list,
-                    parent = list.parent(".k-animation-container"),
+                    visible = that.popup.visible(),
                     height = that.options.height;
 
-                list.add(parent)
-                    .show()
-                    .height(that.ul[0].scrollHeight > height ? height : "auto")
-                    .hide();
+                list = list.add(list.parent(".k-animation-container")).show()
+                           .height(that.ul[0].scrollHeight > height ? height : "auto");
+
+                if (!visible) {
+                    list.hide();
+                }
             }
         },
 

@@ -26,6 +26,8 @@
                 keys = kendo.keys,
                 input;
 
+            QUnit.config.testTimeout = 500;
+
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             }
@@ -207,15 +209,13 @@
             test("press TAB should call text()", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
-
                 combobox.input.focus().val("item");
 
                 stub(combobox, {text: combobox.text});
 
                 combobox.input.press(keys.TAB);
 
-                equal(combobox.calls("text"), 1);
-                equal(combobox.args("text")[0], "item");
+                ok(combobox.calls("text") > 0);
             });
 
             asyncTest("press esc should close popup when no change in selection", function() {
@@ -285,11 +285,13 @@
             });
 
             asyncTest("empty input should clear focused item", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
+                var combobox = input.kendoComboBox({
+                                    dataSource: data,
+                                    highlightFirst: false
+                                }).data("kendoComboBox");
 
-                combobox.dataSource.read();
+                combobox.dataSource.query();
                 combobox.select(combobox.ul.children(":last"));
-                combobox.current(combobox.ul.children(":first"));
                 combobox.input.val("").focus().press(keys.BACKSPACE);
 
                 setTimeout(function() {
@@ -297,7 +299,7 @@
                     ok(!combobox.ul.find(".k-state-selected")[0]);
                     ok(!combobox.ul.find(".k-state-focused")[0]);
                     start();
-                });
+                }, 200);
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
