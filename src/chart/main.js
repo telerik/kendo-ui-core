@@ -103,6 +103,7 @@
             options = deepExtend({}, chart.options, options);
             theme = options.theme;
             themeOptions = theme ? Chart.themes[theme] || Chart.themes[theme.toLowerCase()] : {};
+
             applyAxisDefaults(options, themeOptions);
             applySeriesDefaults(options, themeOptions);
 

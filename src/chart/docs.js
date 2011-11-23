@@ -902,6 +902,58 @@
          *         </dd>
          *    </dl>
          * </div>
+         * @option {Object} [seriesDefaults.tooltip] The data point tooltip configuration options.
+         * @option {String} [seriesDefaults.tooltip.format] The tooltip format.
+         * _example
+         * //sets format of the tooltip
+         * format: "{0:C}"
+         * @option {String|Function} [seriesDefaults.tooltip.template] The tooltip template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
+         *     <li><strong>dataItem</strong> -
+         *         the original data item (when binding to dataSource)
+         *     </li>
+         * </ul>
+         * _example
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      seriesDefaults: {
+         *          tooltip: {
+         *              visible: true,
+         *              template: "${category} - ${value}"
+         *          }
+         *      },
+         *      series: [
+         *          {
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125]
+         *          }
+         *      ],
+         *      categoryAxis: {
+         *          categories: [2000, 2001, 2002, 2003]
+         *      }
+         * });
+         * @option {String} [seriesDefaults.tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
+         * @option {String} [seriesDefaults.tooltip.color]
+         * The text color of the tooltip. The default is the same as the series labels color.
+         * @option {String} [seriesDefaults.tooltip.background]
+         * The background color of the tooltip. The default is determined from the series color.
+         * @option {Number|Object} [seriesDefaults.tooltip.padding] The padding of the tooltip.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // right and bottom padding are left at their default values
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [seriesDefaults.tooltip.border] The border configuration options.
+         * @option {Number} [seriesDefaults.tooltip.border.width] <0> The width of the border.
+         * @option {String} [seriesDefaults.tooltip.border.color] <"black"> The color of the border.
          * @option {Object} [seriesDefaults.bar]
          * The default options for all bar series. For more details see the series options.
          * @option {Object} [seriesDefaults.column] The column configuration options.
@@ -1118,6 +1170,58 @@
          *    </dl>
          * </div>
          * @option {String} [series.type="bar".overlay] <"glass"> The effects overlay.
+         * @option {Object} [series.type="bar".tooltip] The data point tooltip configuration options.
+         * @option {String} [series.type="bar".tooltip.format] The tooltip format.
+         * _example
+         * //sets format of the tooltip
+         * format: "{0:C}"
+         * @option {String|Function} [series.type="bar".tooltip.template] The tooltip template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
+         *     <li><strong>dataItem</strong> -
+         *         the original data item (when binding to dataSource)
+         *     </li>
+         * </ul>
+         * _example
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              type: "bar",
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125]
+         *          },
+         *          tooltip: {
+         *              visible: true,
+         *              template: "${category} - ${value}"
+         *          }
+         *      ],
+         *      categoryAxis: {
+         *          categories: [2000, 2001, 2002, 2003]
+         *      }
+         * });
+         * @option {String} [series.type="bar".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
+         * @option {String} [series.type="bar".tooltip.color]
+         * The text color of the tooltip. The default is the same as the series labels color.
+         * @option {String} [series.type="bar".tooltip.background]
+         * The background color of the tooltip. The default is determined from the series color.
+         * @option {Number|Object} [series.type="bar".tooltip.padding] The padding of the tooltip.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // right and bottom padding are left at their default values
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [series.type="bar".tooltip.border] The border configuration options.
+         * @option {Number} [series.type="bar".tooltip.border.width] <0> The width of the border.
+         * @option {String} [series.type="bar".tooltip.border.color] <"black"> The color of the border.
+         *
          * @option [series.type="column"] The type of the series.
          * @option {Boolean} [series.type="column".stacked] <false>
          * A value indicating if the series should be stacked.
@@ -1316,6 +1420,58 @@
          *    </dl>
          * </div>
          * @option {String} [series.type="column".overlay] <"glass"> The effects overlay.
+         * @option {Object} [series.type="column".tooltip] The data point tooltip configuration options.
+         * @option {String} [series.type="column".tooltip.format] The tooltip format.
+         * _example
+         * //sets format of the tooltip
+         * format: "{0:C}"
+         * @option {String|Function} [series.type="column".tooltip.template] The tooltip template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
+         *     <li><strong>dataItem</strong> -
+         *         the original data item (when binding to dataSource)
+         *     </li>
+         * </ul>
+         * _example
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              type: "column",
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125],
+         *              tooltip: {
+         *                  visible: true,
+         *                  template: "${category} - ${value}"
+         *              }
+         *          }
+         *      ],
+         *      categoryAxis: {
+         *          categories: [2000, 2001, 2002, 2003]
+         *      }
+         * });
+         * @option {String} [series.type="column".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
+         * @option {String} [series.type="column".tooltip.color]
+         * The text color of the tooltip. The default is the same as the series labels color.
+         * @option {String} [series.type="column".tooltip.background]
+         * The background color of the tooltip. The default is determined from the series color.
+         * @option {Number|Object} [series.type="column".tooltip.padding] The padding of the tooltip.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // right and bottom padding are left at their default values
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [series.type="column".tooltip.border] The border configuration options.
+         * @option {Number} [series.type="column".tooltip.border.width] <0> The width of the border.
+         * @option {String} [series.type="column".tooltip.border.color] <"black"> The color of the border.
+         *
          * @option [series.type="line"] The type of the series.
          * @option {Boolean} [series.type="line".stacked] <false>
          * A value indicating if the series should be stacked.
@@ -1382,7 +1538,7 @@
          * @option {String} [series.type="line".markers.background]
          * The background color of the current series markers.
          * @option {String} [series.type="line".labels.position] <"above">
-         * Defines the position of the bar labels.
+         * Defines the position of the line labels.
          * <div class="details-list">
          *    <dl>
          *         <dt>
@@ -1513,6 +1669,57 @@
          * _example
          * //sets format of the labels
          * format: "{0:C}"
+         * @option {Object} [series.type="line".tooltip] The data point tooltip configuration options.
+         * @option {String} [series.type="line".tooltip.format] The tooltip format.
+         * _example
+         * //sets format of the tooltip
+         * format: "{0:C}"
+         * @option {String|Function} [series.type="line".tooltip.template] The tooltip template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
+         *     <li><strong>dataItem</strong> -
+         *         the original data item (when binding to dataSource)
+         *     </li>
+         * </ul>
+         * _example
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              type: "line",
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125],
+         *              tooltip: {
+         *                  visible: true,
+         *                  template: "${category} - ${value}"
+         *              }
+         *          }
+         *      ],
+         *      categoryAxis: {
+         *          categories: [2000, 2001, 2002, 2003]
+         *      }
+         * });
+         * @option {String} [series.type="line".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
+         * @option {String} [series.type="line".tooltip.color]
+         * The text color of the tooltip. The default is the same as the series labels color.
+         * @option {String} [series.type="line".tooltip.background]
+         * The background color of the tooltip. The default is determined from the series color.
+         * @option {Number|Object} [series.type="line".tooltip.padding] The padding of the tooltip.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // right and bottom padding are left at their default values
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [series.type="line".tooltip.border] The border configuration options.
+         * @option {Number} [series.type="line".tooltip.border.width] <0> The width of the border.
+         * @option {String} [series.type="line".tooltip.border.color] <"black"> The color of the border.
          *
          * @option [series.type="pie"] The type of the series.
          * @option {Array} [series.type="pie".data] Array of data items (optional).
@@ -1772,6 +1979,55 @@
          * @option {Number} [series.type="pie".connectors.padding] <4>
          * The padding between the connector line and the label, and connector line and pie chart.
          * @option {number} [series.type="pie".startAngle] <90> The start angle of the first pie segment.
+         * @option {Object} [series.type="pie".tooltip] The data point tooltip configuration options.
+         * @option {String} [series.type="pie".tooltip.format] The tooltip format.
+         * _example
+         * //sets format of the tooltip
+         * format: "{0:C}"
+         * @option {String|Function} [series.type="pie".tooltip.template] The tooltip template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
+         *     <li><strong>dataItem</strong> -
+         *         the original data item (when binding to dataSource)
+         *     </li>
+         * </ul>
+         * _example
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              type: "pie",
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125],
+         *              tooltip: {
+         *                  visible: true,
+         *                  template: "${category} - ${value}"
+         *              }
+         *          }
+         *      ]
+         * });
+         * @option {String} [series.type="pie".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
+         * @option {String} [series.type="pie".tooltip.color]
+         * The text color of the tooltip. The default is the same as the series labels color.
+         * @option {String} [series.type="pie".tooltip.background]
+         * The background color of the tooltip. The default is determined from the series color.
+         * @option {Number|Object} [series.type="pie".tooltip.padding] The padding of the tooltip.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // right and bottom padding are left at their default values
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [series.type="pie".tooltip.border] The border configuration options.
+         * @option {Number} [series.type="pie".tooltip.border.width] <0> The width of the border.
+         * @option {String} [series.type="pie".tooltip.border.color] <"black"> The color of the border.
+         *
          * @option {Object} [chartArea] The chart area configuration options.
          * This is the entire visible area of the chart.
          * @option {String} [chartArea.background] <"white"> The background color of the chart area.
