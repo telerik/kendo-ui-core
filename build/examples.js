@@ -168,6 +168,7 @@ function importComponentHelp(exampleSource, component) {
         "panelbar": "kendo.ui.PanelBar",
         "rangeslider": "kendo.ui.RangeSlider",
         "tabstrip": "kendo.ui.TabStrip",
+        "timepicker": "kendo.ui.TimePicker",
         "templates": "kendo.Template",
         "treeview": "kendo.ui.TreeView"
     };
