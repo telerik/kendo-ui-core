@@ -338,6 +338,9 @@
             if (that._old != value) {
                 that._old = value;
                 that.trigger(CHANGE);
+
+                // trigger the DOM change event so any subscriber gets notified
+                that.element.trigger(CHANGE);
             }
         },
 
