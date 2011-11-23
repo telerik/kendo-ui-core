@@ -117,6 +117,23 @@
                equal(textbox.options.step, 10);
             });
 
+            asyncTest("form reset support", function() {
+                input.attr("value", "123");
+
+                var form = $("<form/>").appendTo(document).append(input),
+                    textbox = new NumericTextBox(input);
+
+                textbox.value("1");
+
+                form[0].reset();
+
+                setTimeout(function() {
+                    equal(textbox.element.val(), "123");
+                    equal(textbox._text.val(), "123.00");
+                    start();
+                }, 200);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
