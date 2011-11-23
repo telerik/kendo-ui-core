@@ -8,6 +8,7 @@
 
 /* main gradient */
 
+.k-button,
 .k-header,
 .k-grid-header,
 .k-toolbar,
@@ -23,7 +24,8 @@
 .k-autocomplete.k-state-hover,
 .k-dropdown-wrap.k-state-hover,
 .k-picker-wrap.k-state-hover,
-.k-numeric-wrap.k-state-hover
+.k-numeric-wrap.k-state-hover,
+.k-draghandle
 {
     background-repeat: repeat-x;
     background-position: 0 center;
@@ -61,11 +63,9 @@
 {
     display: inline-block;
     margin: 0;
-    padding: 0 6px 1px;
-    background-repeat: repeat-x;
-    background-position: 0 center;
+    padding: 0 7px 1px;
     font-family: inherit;
-    line-height: 1.5;
+    line-height: 1.9;
     text-align: center;
     cursor: pointer;
     outline: 0;
@@ -883,6 +883,11 @@ div.k-window-content
 .k-grid-header .k-header .k-icon
 {
     position: static;
+}
+
+.k-grid-header .k-link>.k-icon
+{
+    vertical-align: text-top;
 }
 
 .k-grid .k-state-hover
@@ -2407,12 +2412,6 @@ div.k-slider
     background-repeat: repeat-x;
 }
 
-.k-slider-horizontal .k-slider-track
-{
-    border-style: solid;
-    border-width: 0 1px;
-}
-
 .k-slider-horizontal .k-slider-buttons .k-slider-track
 {
     left: 34px;
@@ -2426,12 +2425,6 @@ div.k-slider
     width: 8px;
     margin-left: -4px;
     background-repeat: repeat-y;
-}
-
-.k-slider-vertical .k-slider-track
-{
-    border-style: solid;
-    border-width: 1px 0;
 }
 
 .k-slider-vertical .k-slider-buttons .k-slider-track
