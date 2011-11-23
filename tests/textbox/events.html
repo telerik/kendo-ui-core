@@ -77,6 +77,18 @@
                 textbox._change("22");
             });
 
+            asyncTest("raise change on enter", function() {
+                var textbox = new NumericTextBox(input);
+
+                input.bind("change", function() {
+                    ok(true);
+                    equal(textbox.value(), 22);
+                    start();
+                });
+
+                input.focus().val("22").trigger({type:"keydown", keyCode: 13});
+            });
+
             test("click arrow should focus input", function() {
                 var textbox = new NumericTextBox(input);
 
