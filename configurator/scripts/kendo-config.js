@@ -292,7 +292,7 @@ window.kendoConfig = [
         id: "validator",
         name: "Validator",
         category: "Widgets",
-        description: "",
+        description: "The Validator offers an easy way to do client-side form validation.",
         source: "kendo.validator.min.js",
         depends: [ "core" ]
     }, {
