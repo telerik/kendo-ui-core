@@ -371,8 +371,13 @@ function build(deployConfig) {
 
     console.log("copying resources...");
     kendoBuild.copyDirSyncRecursive(examplesLocation, outputPath);
+
     fs.unlinkSync(outputPath + "/template.html");
-    fs.writeFileSync(outputPath + "/web.config", fs.readFileSync("web.config", "utf8"), "utf8");
+
+    kendoBuild.writeText(
+        path.join(outputPath, "web.config"),
+        kendoBuild.readText(path.join(examplesLocation, "web.config"))
+    );
 
     docs.build();
 
