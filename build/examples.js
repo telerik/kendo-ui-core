@@ -36,7 +36,7 @@ var VERSION = kendoBuild.generateVersion(),
     DEBUG = false,
     jQueryCDN = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js",
 
-    rowSeparator = /[\r\n]+\s+/,
+    rowSeparator = /[\r\n]+/,
     isLive = /<script[^>]*?>\s*var\slive\s*=\s*false;*\s*<\/script>\s+/im,
     baseRegions = {},
     regionRegex = {
@@ -82,27 +82,23 @@ function removeDuplicateResources(resource, target) {
 
 function mergeResourceRegion(exampleSource, regionType, deployConfig, depth) {
     var result,
-        baseResources = baseRegions[regionType].html,
+        pathInfo = { depth: depth, parentFolder: parentFolder },
+        baseResources = resolveResources(baseRegions[regionType].html, deployConfig, pathInfo),
+        baseResourcesLines = baseResources.split(rowSeparator),
         resourceMatch = regionRegex[regionType].exec(exampleSource),
-        exampleResources = resourceMatch ? resourceMatch[1].trimLeft() : "",
-        pathInfo = { depth: depth, parentFolder: parentFolder };
+        exampleResources;
 
-    if (exampleResources) {
-        exampleResources.trim().split(rowSeparator).forEach(function(item) {
-            baseResources = removeDuplicateResources(item, baseResources);
+    if (resourceMatch) {
+        exampleResources = resolveResources(resourceMatch[1].trimLeft(), deployConfig, pathInfo);
+        exampleResources.split(rowSeparator).forEach(function(line) {
+            baseResourcesLines = baseResourcesLines.filter(function(baseLine) {
+                return baseLine.trim() !== line.trim();
+            });
         });
 
+        baseResources = baseResourcesLines.join("\r\n");
+
         result = exampleResources + baseResources;
-
-        result = result.replace(/[\.\/]+shared\/js(.*?)\"/g, "SHARED_SCRIPTS$1\"");
-        result = result.replace(/[\.\/]+shared\/styles(.*?)\"/g, "SHARED_STYLES$1\"");
-        result = result.replace(/[\.\/]+src(.*?)\"/g, "SOURCE_SCRIPTS$1\"");
-        result = result.replace(/[\.\/]+styles(.*?)\"/g, "SOURCE_STYLES$1\"");
-
-        result = result.replace(SOURCE_SCRIPTS_MARKER, deployConfig.scripts(pathInfo));
-        result = result.replace(SOURCE_STYLES_MARKER, deployConfig.styles(pathInfo));
-        result = result.replace(SHARED_SCRIPTS_MARKER, deployConfig.sharedScripts(pathInfo));
-        result = result.replace(SHARED_STYLES_MARKER, deployConfig.sharedStyles(pathInfo));
 
         result = result.replace(/.*?(examples-offline\.css|console\.js|people\.js|prettify\.js).*/g, "");
 
@@ -113,6 +109,26 @@ function mergeResourceRegion(exampleSource, regionType, deployConfig, depth) {
     }
 
     return result;
+}
+
+function resolveResources(text, deployConfig, pathInfo) {
+    text = replaceReference(text, "shared/js", SHARED_SCRIPTS_MARKER.source);
+    text = replaceReference(text, "shared/styles", SHARED_STYLES_MARKER.source);
+    text = replaceReference(text, "src", SOURCE_SCRIPTS_MARKER.source);
+    text = replaceReference(text, "styles", SOURCE_STYLES_MARKER.source);
+
+    text = text.replace(SOURCE_SCRIPTS_MARKER, deployConfig.scripts(pathInfo));
+    text = text.replace(SOURCE_STYLES_MARKER, deployConfig.styles(pathInfo));
+    text = text.replace(SHARED_SCRIPTS_MARKER, deployConfig.sharedScripts(pathInfo));
+    text = text.replace(SHARED_STYLES_MARKER, deployConfig.sharedStyles(pathInfo));
+
+    return text;
+}
+
+function replaceReference(text, path, newPath) {
+    var regex = new RegExp("[\.\/]+" + path.replace(/\//g, "\\/") + "(.*?)\"", "g");
+
+    return text.replace(regex, newPath + "$1\"");
 }
 
 function updateBaseLocation(html, base) {
