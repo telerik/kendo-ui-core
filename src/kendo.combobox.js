@@ -298,16 +298,19 @@
             var that = this,
                 selected = that._selected;
 
-            if (!that.popup.visible()) {
-                if (!that.ul[0].firstChild || (that._filtered && selected)) {
-                    that._open = true;
-                    that._filtered = false;
-                    that._select();
-                } else {
-                    that.popup.open();
-                    if (selected) {
-                        that._scroll(selected[0]);
-                    }
+            if (that.popup.visible()) {
+                return;
+            }
+
+            if (!that.ul[0].firstChild || (that._filtered && that._accepted)) {
+                that._open = true;
+                that._accepted = false;
+                that._filtered = false;
+                that._select();
+            } else {
+                that.popup.open();
+                if (selected) {
+                    that._scroll(selected[0]);
                 }
             }
         },
@@ -405,6 +408,7 @@
                 if (filter === "none") {
                     that._filter(word);
                 } else {
+                    that._accepted = false;
                     that._open = that._filtered = true;
                     that.dataSource.filter( {field: options.dataTextField, operator: filter, value: word } );
                 }
@@ -521,8 +525,12 @@
                 old;
 
             if (li) {
-                setTimeout( function () { that._focus(li); }, 0);
+                that._accepted = true;
+                setTimeout( function () { that._focus(li); });
             } else {
+                //why!!!
+                //if we call that.text(that.text()); and then set the element.value to the text ???
+                //then change
                 old = that._old;
                 that.value(that.text());
                 that._old = old;
@@ -640,7 +648,7 @@
 
             if (kendo.keys.TAB === e.keyCode) {
                 that.text(that.input.val());
-            } else if (!that._move(e) && !e.altKey && !e.shiftKey) {
+            } else if (!that._move(e) && !e.altKey && !e.ctrlKey) {
                that._search();
             }
         },
