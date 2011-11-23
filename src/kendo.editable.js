@@ -7,7 +7,7 @@
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
         Binder = kendo.data.ModelViewBinder,
-        Validatable = ui.Validatable,
+        Validator = ui.Validator,
         CHANGE = "change",
         DATATYPE = "data-kendo-type";
 
@@ -107,7 +107,7 @@
         },
 
         distroy: function() {
-            this.element.removeData("kendoValidatable")
+            this.element.removeData("kendoValidator")
                 .removeData("kendoEditable");
         },
 
@@ -142,7 +142,7 @@
 
             new Binder(container, that.options.model, { change: $.proxy(that._binderChange, that) });
 
-            that.validatable = container.kendoValidatable({ rules: rules }).data("kendoValidatable");
+            that.validatable = container.kendoValidator({ rules: rules }).data("kendoValidator");
 
             container.find(":input:visible:first").focus();
         }

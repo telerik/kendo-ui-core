@@ -5,28 +5,28 @@
         <!-- meta -->
         <title>Basic usage</title>
         <!-- css -->
-        <link href="../styles/examples.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.hakama.css" rel="stylesheet"/>
+        <link href="../../shared/styles/examples.css" rel="stylesheet"/>
+        <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
         <!-- css -->
         <!-- script -->
-        <script src="../../../src/jquery.js"></script>
-        <script src="../../../src/kendo.core.js"></script>
-        <script src="../../../src/kendo.validatable.js"></script>
-        <script src="../../../src/kendo.model.js"></script>
-        <script src="../../../src/kendo.data.js"></script>
-        <script src="../../../src/kendo.pageable.js"></script>
-        <script src="../../../src/kendo.sortable.js"></script>
-        <script src="../../../src/kendo.draganddrop.js"></script>
-        <script src="../../../src/kendo.groupable.js"></script>
-        <script src="../../../src/kendo.grid.js"></script>
-        <script src="../../../src/kendo.binder.js"></script>
-        <script src="../../../src/kendo.editable.js"></script>
-        <script src="../../../src/kendo.popup.js"></script>
-        <script src="../../../src/kendo.calendar.js"></script>
-        <script src="../../../src/kendo.datepicker.js"></script>
-        <script src="../../../src/kendo.numerictextbox.js"></script>
-        <script src="../js/people.js"></script>
+        <script src="../../../../src/jquery.min.js"></script>
+        <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.validator.js"></script>
+        <script src="../../../../src/kendo.model.js"></script>
+        <script src="../../../../src/kendo.data.js"></script>
+        <script src="../../../../src/kendo.pageable.js"></script>
+        <script src="../../../../src/kendo.sortable.js"></script>
+        <script src="../../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../../src/kendo.groupable.js"></script>
+        <script src="../../../../src/kendo.grid.js"></script>
+        <script src="../../../../src/kendo.binder.js"></script>
+        <script src="../../../../src/kendo.editable.js"></script>
+        <script src="../../../../src/kendo.popup.js"></script>
+        <script src="../../../../src/kendo.calendar.js"></script>
+        <script src="../../../../src/kendo.datepicker.js"></script>
+        <script src="../../../../src/kendo.numerictextbox.js"></script>
         <!-- script -->
     </head>
     <body>
@@ -40,7 +40,7 @@
 
             <script>
                 $(document).ready(function () {
-                    var crudServiceBaseUrl = "../Service",
+                    var crudServiceBaseUrl = "../../Service",
                         dataSource = new kendo.data.DataSource({
                             transport: {
                                 read: crudServiceBaseUrl + "/Products",
