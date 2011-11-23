@@ -75,7 +75,7 @@
                     }
                 });
                 combobox.value("bar");
-                combobox.previous = "foo";
+                combobox._old = "foo";
                 combobox._change();
                 ok(changeWasCalled);
             });
@@ -90,7 +90,7 @@
                 });
 
                 combobox.value("bar");
-                combobox.previous = "foo";
+                combobox._old = "foo";
                 combobox._change();
                 ok(changeWasCalled);
             });
@@ -118,18 +118,18 @@
                 });
 
 
-                combobox.previous = "foo";
+                combobox._old = "foo";
                 combobox.value("foo");
                 combobox._change();
                 ok(!changeWasCalled);
             });
 
-            test("previous is initialzed on refresh", function() {
+            test("_old is initialzed on refresh", function() {
                 var combobox = new ComboBox(input, {autoBind: false} );
 
                 input.val("foo");
                 combobox._select();
-                equal(combobox.previous, "foo");
+                equal(combobox._old, "foo");
             });
 
             test("select does not raise the change event", function() {
@@ -155,6 +155,7 @@
                 });
 
                 combobox.input.focus();
+                combobox.open();
 
                 combobox.ul.children().eq(1).click();
             });
@@ -183,6 +184,7 @@
                 });
 
                 combobox.input.focus();
+                combobox.open();
                 combobox.input.press(kendo.keys.DOWN);
                 combobox.input.press(kendo.keys.TAB);
                 combobox.input.blur();
@@ -200,6 +202,7 @@
                 });
 
                 combobox.input.focus();
+                combobox.open();
 
                 combobox.ul.children().eq(1).click();
             });
@@ -219,7 +222,7 @@
 
                 setTimeout(function() {
                     ok(changeWasCalled);
-                    equal(combobox.previous, "foo");
+                    equal(combobox._old, "foo");
                     equal(combobox.value(), "foo");
                     start();
                 }, 200);
@@ -245,7 +248,7 @@
                 setTimeout(function() {
                     ok(origCalled);
                     equal(combobox.value(), "custom value");
-                    equal(combobox.previous, "custom value");
+                    equal(combobox._old, "custom value");
                     start();
                 }, 200);
             });
@@ -260,7 +263,7 @@
                     dataSource: [{text: "foo"}, {text: "bar"}]
                 });
 
-                combobox.previous = "test";
+                combobox._old = "test";
                 combobox.input.focus().val("").press(kendo.keys.BACKSPACE).blur();
 
                 setTimeout(function() {
@@ -280,7 +283,7 @@
                     dataSource: [{text: "foo"}, {text: "bar"}]
                 });
 
-                combobox.previous = "";
+                combobox._old = "";
                 combobox._current = null;
                 combobox.input.focus().val("test").press(kendo.keys.ENTER);
 
@@ -292,7 +295,7 @@
                 }, 200);
             });
 
-            asyncTest("open event when click arrow", function() {
+            asyncTest("open event when click _arrow", function() {
                 input.kendoComboBox({
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     open: function() {
@@ -301,7 +304,7 @@
                     }
                 });
 
-                input.data("kendoComboBox").arrow.click();
+                input.data("kendoComboBox")._arrow.click();
             });
 
             asyncTest("open event should be cancellable", function() {
@@ -314,7 +317,7 @@
 
                 var combobox = input.data("kendoComboBox");
 
-                combobox.arrow.click();
+                combobox._arrow.click();
 
                 setTimeout(function() {
                     ok(!combobox.popup.visible());
@@ -334,7 +337,7 @@
 
                 var combobox = input.data("kendoComboBox");
 
-                combobox.arrow.click();
+                combobox._arrow.click();
 
                 setTimeout(function() {
                     equal(index, 1);
@@ -342,7 +345,7 @@
                 }, 200);
             });
 
-            asyncTest("open event when ALT + down arrow", function() {
+            asyncTest("open event when ALT + down _arrow", function() {
                 input.kendoComboBox({
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     open: function() {
@@ -356,7 +359,7 @@
                 combobox.input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN, altKey: true } );
             });
 
-            asyncTest("close event when click arrow", function() {
+            asyncTest("close event when click _arrow", function() {
                 input.kendoComboBox({
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     close: function() {
@@ -367,7 +370,7 @@
 
                 var combobox = input.data("kendoComboBox");
                 combobox.open();
-                combobox.arrow.click();
+                combobox._arrow.click();
             });
 
             asyncTest("close event should be cancellable", function() {
@@ -381,7 +384,7 @@
                 var combobox = input.data("kendoComboBox");
 
                 combobox.open();
-                combobox.arrow.click();
+                combobox._arrow.click();
 
                 setTimeout(function() {
                     ok(combobox.popup.visible());
@@ -398,7 +401,7 @@
                 });
 
                 var combobox = input.data("kendoComboBox");
-                combobox.arrow.click();
+                combobox._arrow.click();
 
                 setTimeout(function() {
                     ok(!called);
@@ -406,7 +409,7 @@
                 }, 200);
             });
 
-            asyncTest("close event when ALT + up arrow", function() {
+            asyncTest("close event when ALT + up _arrow", function() {
                 input.kendoComboBox({
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     close: function() {

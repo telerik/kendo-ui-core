@@ -96,11 +96,18 @@
     *
     */
     var kendo = window.kendo,
+        touch = kendo.support.touch,
         ui = kendo.ui,
         DataSource = kendo.data.DataSource,
         List = ui.List,
         CHANGE = "change",
+        DEFAULT = "k-state-default",
+        DISABLED = "disabled",
+        FOCUSED = "k-state-focused",
         SELECTED = "k-state-selected",
+        STATEDISABLED = "k-state-disabled",
+        HOVER = "k-state-hover",
+        HOVEREVENTS = "mouseenter mouseleave",
         caretPosition = List.caret,
         selectText = List.selectText,
         proxy = $.proxy;
@@ -153,6 +160,8 @@
 
             List.fn.init.call(that, element, options);
 
+            element = that.element;
+
             that._wrapper();
 
             that._accessors();
@@ -181,25 +190,27 @@
                 CHANGE
             ], that.options);
 
-            that.element[0].type = "text";
+            element[0].type = "text";
 
-            that.element
+            element
                 .attr("autocomplete", "off")
                 .addClass("k-input")
                 .bind({
                     keydown: proxy(that._keydown, that),
                     paste: proxy(that._search, that),
                     focus: function () {
-                        that.previous = that.value();
-                        that.wrapper.addClass("k-state-focused");
+                        that._old = that.value();
+                        that.wrapper.addClass(FOCUSED);
                     },
                     blur: function () {
                         that._bluring = setTimeout(function () {
                             that._blur();
-                            that.wrapper.removeClass("k-state-focused");
+                            that.wrapper.removeClass(FOCUSED);
                         }, 100);
                     }
                 });
+
+            that.enable(!element.is('[disabled]'));
 
             that._popup();
         },
@@ -211,6 +222,41 @@
             delay: 200,
             height: 200,
             filter: "startswith"
+        },
+
+        /**
+        * Enable/Disable the autocomplete widget.
+        * @param {Boolean} enable The argument, which defines whether to enable/disable the autocomplete.
+        * @example
+        * var autocomplete = $("autocomplete").data("kendoAutoComplete");
+        *
+        * // disables the autocomplete
+        * autocomplete.enable(false);
+        *
+        * // enables the autocomplete
+        * autocomplete.enable(true);
+        */
+        enable: function(enable) {
+            var that = this,
+                element = that.element,
+                wrapper = that.wrapper;
+
+            if (enable === false) {
+                wrapper
+                    .removeClass(DEFAULT)
+                    .addClass(STATEDISABLED)
+                    .unbind(HOVEREVENTS);
+
+                element.attr(DISABLED, DISABLED);
+            } else {
+                wrapper
+                    .removeClass(STATEDISABLED)
+                    .addClass(DEFAULT)
+                    .bind(HOVEREVENTS, that._toggleHover);
+
+                element
+                    .removeAttr(DISABLED);
+            }
         },
 
         /**
@@ -238,7 +284,10 @@
                 that.current($(ul.firstChild));
             }
 
-            that.popup[length ? "open" : "close"]();
+            if (that._open) {
+                that._open = false;
+                that.popup[length ? "open" : "close"]();
+            }
         },
 
         /**
@@ -307,6 +356,7 @@
             if (!length) {
                 that.popup.close();
             } else if (length >= that.options.minLength) {
+                that._open = true;
                 that.dataSource.filter({ field: options.dataTextField, operator: options.filter, value: word });
             }
         },
@@ -431,10 +481,16 @@
             clearTimeout(that._typing);
 
             that._typing = setTimeout(function () {
-                if (that.previous !== that.value()) {
+                if (that._old !== that.value()) {
                     that.search();
                 }
             }, that.options.delay);
+        },
+
+        _toggleHover: function(e) {
+            if (!touch) {
+                $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
+            }
         },
 
         _wrapper: function () {

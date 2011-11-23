@@ -26,6 +26,9 @@
                 keys = kendo.keys,
                 input;
 
+            QUnit.config.testTimeout = 800;
+            QUnit.config.reorder = false;
+
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             }
@@ -47,6 +50,37 @@
                         input.remove();
                     }
                 }
+            });
+
+            asyncTest("click _arrow should input", function() {
+                var focusWasCalled, combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.input.bind("focus", function(){
+                    ok(true);
+                    start();
+                });
+
+                combobox._arrow.click();
+            });
+
+            asyncTest("empty input should clear focused item", function() {
+                var combobox = input.kendoComboBox({
+                                    dataSource: data,
+                                    highlightFirst: false
+                                }).data("kendoComboBox");
+
+                combobox.dataSource.query();
+                combobox.select(combobox.ul.children(":last"));
+                combobox.input.val("").focus().press(keys.BACKSPACE);
+
+                setTimeout(function() {
+                    ok(!combobox._current);
+                    ok(!combobox.ul.find(".k-state-selected")[0]);
+                    ok(!combobox.ul.find(".k-state-focused")[0]);
+                    start();
+                }, 200);
             });
 
             test("select item depending on the options.index", function() {
@@ -122,7 +156,7 @@
                 combobox.dataSource.read();
                 combobox.select(1);
 
-                combobox.arrow.click();
+                combobox._arrow.click();
 
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
             });
@@ -134,12 +168,12 @@
                 combobox.select(1);
                 combobox.select(0);
 
-                combobox.arrow.click();
+                combobox._arrow.click();
 
                 equal(combobox.ul.children("." + SELECTED).length, 1);
             });
 
-            test("press down arrow should focus next item and update text and value", function() {
+            test("press down _arrow should focus next item and update text and value", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
                 combobox.dataSource.read();
@@ -152,7 +186,7 @@
 
             });
 
-            test("press down arrow when last item is selected should not do anything", function() {
+            test("press down _arrow when last item is selected should not do anything", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
                 combobox.dataSource.read();
@@ -164,7 +198,7 @@
                 equal(combobox.value(), data[1].value);
             });
 
-            test("press up arrow should focus prev item and update text and value", function() {
+            test("press up _arrow should focus prev item and update text and value", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
                 combobox.dataSource.read();
@@ -178,7 +212,7 @@
 
             });
 
-            test("press up arrow when first item is selected should not do anything", function() {
+            test("press up _arrow when first item is selected should not do anything", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
                 combobox.dataSource.read();
@@ -207,15 +241,13 @@
             test("press TAB should call text()", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
-
                 combobox.input.focus().val("item");
 
                 stub(combobox, {text: combobox.text});
 
                 combobox.input.press(keys.TAB);
 
-                equal(combobox.calls("text"), 1);
-                equal(combobox.args("text")[0], "item");
+                ok(combobox.calls("text") > 0);
             });
 
             asyncTest("press esc should close popup when no change in selection", function() {
@@ -236,6 +268,8 @@
                 var blurWasCalled, combobox = new ComboBox(input, {
                     dataSource: data
                 });
+
+                combobox.open();
 
                 combobox._blur = function(li) {
                     ok(true);
@@ -269,35 +303,6 @@
                 combobox.open();
 
                 combobox.input.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.UP});
-            });
-
-            asyncTest("click arrow should input", function() {
-                var focusWasCalled, combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
-                combobox.input.bind("focus", function(){
-                    ok(true);
-                    start();
-                });
-
-                combobox.arrow.click();
-            });
-
-            asyncTest("empty input should clear focused item", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
-                combobox.dataSource.read();
-                combobox.select(combobox.ul.children(":last"));
-                combobox.current(combobox.ul.children(":first"));
-                combobox.input.val("").focus().press(keys.BACKSPACE);
-
-                setTimeout(function() {
-                    ok(!combobox._current);
-                    ok(!combobox.ul.find(".k-state-selected")[0]);
-                    ok(!combobox.ul.find(".k-state-focused")[0]);
-                    start();
-                });
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

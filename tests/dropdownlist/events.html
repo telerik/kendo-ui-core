@@ -73,7 +73,7 @@
                     }
                 });
                 dropdownlist.value("bar");
-                dropdownlist.previous = "foo";
+                dropdownlist._old = "foo";
                 dropdownlist._change();
                 ok(changeWasCalled);
             });
@@ -88,7 +88,7 @@
                 });
 
                 dropdownlist.value("bar");
-                dropdownlist.previous = "foo";
+                dropdownlist._old = "foo";
                 dropdownlist._change();
                 ok(changeWasCalled);
             });
@@ -116,19 +116,19 @@
                 });
 
 
-                dropdownlist.previous = "foo";
+                dropdownlist._old = "foo";
                 dropdownlist.value("foo");
                 dropdownlist._change();
                 ok(!changeWasCalled);
             });
 
-            test("previous is initialzed on refresh", function() {
+            test("_old is initialzed on refresh", function() {
                 var dropdownlist = new DropDownList(input, {
                 });
 
                 input.val("foo");
                 dropdownlist.refresh();
-                equal(dropdownlist.previous, "foo");
+                equal(dropdownlist._old, "foo");
             });
 
             test("select does not raise the change event", function() {

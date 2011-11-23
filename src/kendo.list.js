@@ -29,7 +29,7 @@
          * @extends kendo.ui.Widget
          */
         init: function(element, options) {
-            var that = this;
+            var that = this, id;
 
             Widget.fn.init.call(that, element, options);
 
@@ -46,9 +46,12 @@
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
 
-            that.list = $("<div class='k-list-container'/>")
-                            .attr(ID, that.element.attr(ID) + "-list")
-                            .append(that.ul);
+            that.list = $("<div class='k-list-container'/>").append(that.ul);
+
+            id = that.element.attr(ID);
+            if (id) {
+                that.list.attr(ID, id + "-list")
+            }
 
             $(document.documentElement).bind("mousedown", proxy(that._mousedown, that));
         },
@@ -105,13 +108,13 @@
             var that = this,
                 value = that.value();
 
-            if (value !== that.previous) {
+            if (value !== that._old) {
                 that.trigger(CHANGE);
 
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
 
-                that.previous = value;
+                that._old = value;
             }
         },
 
@@ -134,13 +137,15 @@
             if (length) {
                 var that = this,
                     list = that.list,
-                    parent = list.parent(".k-animation-container"),
+                    visible = that.popup.visible(),
                     height = that.options.height;
 
-                list.add(parent)
-                    .show()
-                    .height(that.ul[0].scrollHeight > height ? height : "auto")
-                    .hide();
+                list = list.add(list.parent(".k-animation-container")).show()
+                           .height(that.ul[0].scrollHeight > height ? height : "auto");
+
+                if (!visible) {
+                    list.hide();
+                }
             }
         },
 
@@ -154,7 +159,8 @@
             that.popup = new ui.Popup(list, {
                 anchor: wrapper,
                 open: options.open,
-                close: options.close
+                close: options.close,
+                animation: options.animation
             });
 
             width = wrapper.outerWidth() - (list.outerWidth() - list.width());
@@ -163,60 +169,6 @@
                 fontFamily: wrapper.css("font-family"),
                 width: width
             });
-        },
-
-        _index: function(value) {
-            var that = this,
-                idx,
-                length,
-                data = that.dataSource.view(),
-                valueFromData;
-
-            for (idx = 0, length = data.length; idx < length; idx++) {
-                valueFromData = that._value(data[idx]);
-
-                if (valueFromData === undefined) {
-                    valueFromData = that._text(data[idx]);
-                }
-
-                if (valueFromData == value) {
-                    return idx;
-                }
-            }
-
-            return -1;
-        },
-
-        _get: function(li) {
-            var that = this,
-                idx,
-                data = that.dataSource.view(),
-                length;
-
-            if (typeof li === "function") {
-                for (idx = 0, length = data.length; idx < length; idx++) {
-                    if (li(data[idx])) {
-                        li = idx;
-                        break;
-                    }
-                }
-            }
-
-            idx = -1;
-
-            if (typeof li === "number") {
-                if (li < 0) {
-                    return $();
-                }
-
-                li = $(that.ul[0].childNodes[li]);
-            }
-
-            if (li && li.nodeType) {
-                li = $(li);
-            }
-
-            return li;
         },
 
         _toggleHover: function(e) {
@@ -334,10 +286,32 @@
             this.popup.close();
         },
 
+        _accessor: function(value, idx) {
+            var element = this.element[0],
+                isSelect = element.nodeName == SELECT,
+                option;
+
+            if (value === undefined) {
+                if (isSelect) {
+                    option = element.options[element.selectedIndex];
+                    value = option.value || option.text;
+                } else {
+                    value = element.value;
+                }
+                return value;
+            } else {
+                if (isSelect) {
+                    element.selectedIndex = idx;
+                } else {
+                    element.value = value;
+                }
+            }
+        },
+
         _hideBusy: function () {
             var that = this;
             clearTimeout(that._busy);
-            that.arrow.removeClass(LOADING);
+            that._arrow.removeClass(LOADING);
         },
 
         _showBusy: function () {
@@ -348,8 +322,12 @@
             }
 
             that._busy = setTimeout(function () {
-                that.arrow.addClass(LOADING);
+                that._arrow.addClass(LOADING);
             }, 100);
+        },
+
+        _data: function() {
+            return this.dataSource.view();
         },
 
         _dataSource: function() {
@@ -388,6 +366,60 @@
             that.enable(options.enable);
         },
 
+        _index: function(value) {
+            var that = this,
+                idx,
+                length,
+                data = that._data(),
+                valueFromData;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                valueFromData = that._value(data[idx]);
+
+                if (valueFromData === undefined) {
+                    valueFromData = that._text(data[idx]);
+                }
+
+                if (valueFromData == value) {
+                    return idx;
+                }
+            }
+
+            return -1;
+        },
+
+        _get: function(li) {
+            var that = this,
+                idx,
+                data = that._data(),
+                length;
+
+            if (typeof li === "function") {
+                for (idx = 0, length = data.length; idx < length; idx++) {
+                    if (li(data[idx])) {
+                        li = idx;
+                        break;
+                    }
+                }
+            }
+
+            idx = -1;
+
+            if (typeof li === "number") {
+                if (li < 0) {
+                    return $();
+                }
+
+                li = $(that.ul[0].childNodes[li]);
+            }
+
+            if (li && li.nodeType) {
+                li = $(li);
+            }
+
+            return li;
+        },
+
         _move: function(e) {
             var that = this,
                 key = e.keyCode,
@@ -421,9 +453,10 @@
         _options: function(data) {
             var that = this,
                 element = that.element,
+                selectedIndex = element[0].selectedIndex,
                 value = that.value(),
                 length = data.length,
-                options = [],
+                options = "",
                 option,
                 dataItem,
                 dataText,
@@ -436,7 +469,7 @@
                 dataText = that._text(dataItem);
                 dataValue = that._value(dataItem);
 
-                if (dataValue !== undefined) {
+                if (dataValue || dataValue === 0) {
                     option += ' value="' + dataValue + '"';
                 }
 
@@ -447,11 +480,23 @@
                 }
 
                 option += "</option>";
-                options.push(option);
+                options += option;
             }
 
-            element.html(options.join(""));
-            element.val(value);
+            element.html(options);
+            element[0].selectedIndex = selectedIndex;
+        },
+
+        _reset: function() {
+            var that = this,
+                element = that.element;
+
+            element.closest("form")
+                   .bind("reset", function() {
+                       setTimeout(function() {
+                            that.value(element[0].value);
+                       });
+                   });
         }
     });
 
