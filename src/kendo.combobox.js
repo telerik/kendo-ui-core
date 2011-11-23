@@ -162,8 +162,10 @@
 
             options = that.options;
             element = that.element.focus(function() {
-                that.input.focus();
-            });
+                        that.input.focus();
+                      });
+
+            that._reset();
 
             that._wrapper();
 

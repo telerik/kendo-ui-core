@@ -59,6 +59,18 @@
                 equal(autocomplete.dataSource.data().length, 2);
             });
 
+            test("do not open on dataSource.query", function() {
+                var data = [1, 2], autocomplete = new AutoComplete(input, {
+                    dataSource: {
+                        data: data
+                    }
+                });
+
+                autocomplete.dataSource.fetch();
+
+                ok(!autocomplete.popup.visible());
+            });
+
             test("rendering honers dataTextField", function() {
                 var data = [{text: 1}, {text: 2}], autocomplete = new AutoComplete(input, {
                     dataSource: data,

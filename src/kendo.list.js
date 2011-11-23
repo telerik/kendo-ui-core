@@ -485,6 +485,18 @@
 
             element.html(options);
             element[0].selectedIndex = selectedIndex;
+        },
+
+        _reset: function() {
+            var that = this,
+                element = that.element;
+
+            element.closest("form")
+                   .bind("reset", function() {
+                       setTimeout(function() {
+                            that.value(element[0].value);
+                       });
+                   });
         }
     });
 
