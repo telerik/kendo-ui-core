@@ -1,7 +1,6 @@
 (function($, window) {
     var Application,
         extend = $.extend,
-        live = window.live,
         local = location.protocol == "file:",
         pushState = "pushState" in history,
         currentHtml = "",
@@ -44,22 +43,37 @@
             skin: /kendo\.\w+(\.min)?\.css/i
         };
 
-    window.selectCategory = function(element) {
+    selectCategory = function(element) {
         $("#topnav .selected").removeClass("selected");
         $(element).addClass("selected");
 
-        window.panelBar = $("#nav").empty().kendoPanelBar({
-            animation: { open: { effects: 'fadeIn expandVertical' } },
-            expandMode: "single",
-            dataSource: categories[element.id]
-        }).data("kendoPanelBar");
+        var navWrap = $("#navWrap").empty();
 
-        if (live === false)
-            $("#navmainWrap").toggleClass("singleColumn", $(element).attr("href") == "overview/index.html");
+        function navigationSection(dataSource) {
+            return $("<ul class='nav' />")
+                .kendoPanelBar({
+                    animation: { open: { effects: 'fadeIn expandVertical' } },
+                    expandMode: "single",
+                    dataSource: dataSource
+                });
+        }
 
-        if (!referenceUrl)
+        if ($.isPlainObject(categories)) {
+            for (var i in categories) {
+                navWrap.append("<h3>" + i + "</h3>")
+                    .append(navigationSection(categories[i]));
+            }
+        } else {
+            navWrap.append(navigationSection(categories));
+        }
+
+        if (!referenceUrl) {
             referenceUrl = $("#referenceUrl")[0].href;
-        $("#nav li a").each(function() {
+        }
+
+        console.log(referenceUrl);
+
+        $("#navWrap li a").each(function() {
             var match = $(this).attr("href").match(regexes.nav);
             $(this).attr("href", referenceUrl + (match ? match[1] : ""));
         });
@@ -84,7 +98,7 @@
         fetch: function(href) {
             href = href.toLowerCase();
 
-            $("#nav li a").each(function() {
+            $("#navWrap li a").each(function() {
                 var currentHref = $(this).attr("href");
                 if (currentHref && currentHref.toLowerCase() === href) {
                     Application.fetchExample(href);
@@ -123,7 +137,7 @@
                     exampleBody.empty().html(Application.body(html));
                 } else {
                     exampleName.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
-                        var sprite = $("#nav > .k-state-highlighted > .k-link > .k-sprite"), iconElement = "";
+                        var sprite = $("#navWrap > ul > .k-state-highlighted > .k-link > .k-sprite"), iconElement = "";
                         if (sprite.length) {
                             var currentControl = sprite[0].className.match(/\s(\w+Icon)/i)[1];
                             iconElement = '<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>';
@@ -171,7 +185,7 @@
             var exampleName = $("#exampleTitle");
 
             if (title != "Overview") {
-                var sprite = $("#nav > .k-state-highlighted > .k-link > .k-sprite"), iconElement = "";
+                var sprite = $("#navWrap > ul > .k-state-highlighted > .k-link > .k-sprite"), iconElement = "";
                 if (sprite.length) {
                     var currentControl = sprite[0].className.match(/\s(\w+Icon)/i)[1];
                     iconElement = '<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>'
@@ -305,22 +319,15 @@
 
             $("#exampleWrap").show();
 
-            if (live === false)
-                $("#topnav li a").live("click", function(e) {
-                    e.preventDefault();
-
-                    selectCategory(e.target);
-                });
-
             if (pushState && !local) {
-                $("#nav li a")
+                $("#navWrap li a")
                     .live("click", function(e) {
                         e.preventDefault();
 
                         if (!location.href.match($(this).attr("href"))) {
                             var element = $(this);
 
-                            $("#nav").find(".chosen").removeClass("chosen");
+                            $("#navWrap").find(".chosen").removeClass("chosen");
                             element.addClass("chosen");
 
                             Application.load(element.attr("href"));
@@ -405,91 +412,94 @@
 
     $(Application.init);
 
-})(jQuery, window);
-
-function getInitialStylePath() {
-    var result = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/i);
-    return result ? result[1] : document.getElementsByTagName("head")[0].innerHTML.match(/href=\W(.*?)styles\/kendo\.common/)[1];
-}
-
-function locatePage(url) {
-    var category = "",
-        iterate = function(item) {
-        var result = true;
-
-        $.each(item, function (idx, value) {
-            if ($.isPlainObject(value) && "url" in value && value.url === url) {
-                result = false;
-                return result;
-            }
-
-            if ($.isPlainObject(value) || $.isArray(value)) {
-                result = iterate(value);
-
-                category = idx;
-                return result;
-            }
-        });
-        return result;
-    };
-
-    iterate(categories);
-
-    return category;
-}
-
-function preventFOUC () {
-    $("#exampleWrap").hide();
-}
-
-function getNormalizedUrl() {
-    var href = location.href.toLowerCase(),
-        reference = $("#referenceUrl")[0].href.toLowerCase();
-
-    return href == reference ?
-               reference.replace("/index.html", "/") :
-               href.substr(-1) == "/" ?
-                   href + "index.html" :
-                   href;
-}
-
-function initializeNavigation (normalizedUrl) {
-    var matchedUrl = normalizedUrl.match(/([^\/]+\/[^\/\?]+)(\?.*)?$/);
-
-    if (matchedUrl) {
-        var url = matchedUrl[1].toLowerCase(),
-            page = locatePage(url);
-
-        $("#navmainWrap").toggleClass("singleColumn", page == "overview");
-
-        selectCategory($("#topnav #" + page)[0]);
-
-        var link = $("#nav .k-link[href*='" + url + "']")
-            .addClass("k-state-selected").addClass("chosen");
-
-        panelBar.expand(link.parent().parents(".k-item"), false);
+    function getInitialStylePath() {
+        var result = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/i);
+        return result ? result[1] : document.getElementsByTagName("head")[0].innerHTML.match(/href=\W(.*?)styles\/kendo\.common/)[1];
     }
 
-    $(document).ready( function () {
-        var skinSelector = $("#skinSelector");
+    function locatePage(url) {
+        var category = "",
+            iterate = function(item) {
+            var result = true;
 
-        skinSelector.kendoDropDownList({
-            dataSource: [
-                            { text: "Default", control: "Menu", value: "default" },
-                            { text: "Blue Opal", control: "Menu", value: "blueopal" },
-                            { text: "Black", control: "Menu", value: "black" },
-                            { text: "Silver", control: "Menu", value: "silver" }
-                        ],
-            template: '<span class="thumbLink">\
-                        <span class="thumb #= data.text.toLowerCase() #Thumb" style="background-image: url(#= initialRelativePath #styles/#= data.control #/thumbSprite.png)">\
-                        <span class="gloss"></span></span><span class="skinTitle">#= data.text #</span></span>'
-        });
+            $.each(item, function (idx, value) {
+                if ($.isPlainObject(value) && "url" in value && value.url === url) {
+                    result = false;
+                    return result;
+                }
 
-        if (kendoSkin) {
-            skinSelector.data("kendoDropDownList").value(kendoSkin);
+                if ($.isPlainObject(value) || $.isArray(value)) {
+                    result = iterate(value);
+
+                    category = idx;
+                    return result;
+                }
+            });
+            return result;
+        };
+
+        iterate(categories);
+
+        return category;
+    }
+
+    function preventFOUC() {
+        $("#exampleWrap").hide();
+    }
+
+    function getNormalizedUrl() {
+        var href = location.href.toLowerCase(),
+            reference = $("#referenceUrl")[0].href.toLowerCase();
+
+        return href == reference ?
+                   reference.replace("/index.html", "/") :
+                   href.substr(-1) == "/" ?
+                       href + "index.html" :
+                       href;
+    }
+
+    function initializeNavigation() {
+        window.normalizedUrl = getNormalizedUrl();
+
+        var matchedUrl = normalizedUrl.match(/([^\/]+\/[^\/\?]+)(\?.*)?$/);
+
+        if (matchedUrl) {
+            var url = matchedUrl[1].toLowerCase(),
+                page = locatePage(url);
+
+            $("#navmainWrap").toggleClass("singleColumn", page == "overview");
+
+            selectCategory($("#topnav #" + page)[0]);
+
+            var link = $("#navWrap .k-link[href*='" + url + "']")
+                .addClass("k-state-selected").addClass("chosen");
+
+            link.closest(".k-panelbar").data("kendoPanelBar").expand(link.parent().parents(".k-item"), false);
         }
 
-        $(".skinSelector.k-widget").show();
-    });
-}
+        $(document).ready( function () {
+            var skinSelector = $("#skinSelector");
 
+            skinSelector.kendoDropDownList({
+                dataSource: [
+                    { text: "Default", control: "Menu", value: "default" },
+                    { text: "Blue Opal", control: "Menu", value: "blueopal" },
+                    { text: "Black", control: "Menu", value: "black" },
+                    { text: "Silver", control: "Menu", value: "silver" }
+                ],
+                template: '<span class="thumbLink">\
+                            <span class="thumb #= data.text.toLowerCase() #Thumb" style="background-image: url(#= initialRelativePath #styles/#= data.control #/thumbSprite.png)">\
+                            <span class="gloss"></span></span><span class="skinTitle">#= data.text #</span></span>'
+            });
+
+            if (kendoSkin) {
+                skinSelector.data("kendoDropDownList").value(kendoSkin);
+            }
+
+            $(".skinSelector.k-widget").show();
+        });
+    }
+
+    window.initializeNavigation = initializeNavigation;
+    window.preventFOUC = preventFOUC;
+})(jQuery, window);
