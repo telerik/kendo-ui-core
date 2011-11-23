@@ -78,7 +78,8 @@ var deployScripts = [{
 }];
 
 var thirdPartyScripts = [
-    "jquery.min.js"
+    "jquery.min.js",
+    "jquery.tmpl.min.js"
 ];
 
 var CULTURES_ROOT = "cultures",
