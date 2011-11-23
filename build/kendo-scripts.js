@@ -39,6 +39,7 @@ var allScripts = [
     "kendo.selectable.js",
     "kendo.scroller.js",
     "kendo.pager.js",
+    "kendo.editable.js",
     "kendo.popup.js",
     "kendo.list.js",
     "kendo.calendar.js",
