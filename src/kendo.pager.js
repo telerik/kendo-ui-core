@@ -3,7 +3,7 @@
         Widget = kendo.ui.Widget,
         proxy = $.proxy;
 
-    var Pageable = Widget.extend( {
+    var Pager = Widget.extend( {
         init: function(element, options) {
             var that = this;
 
@@ -20,7 +20,7 @@
         },
 
         options: {
-            name: "Pageable",
+            name: "Pager",
             selectTemplate: '<li><span class="k-state-active">#= text #</span></li>',
             linkTemplate: '<li><a href="\\#" class="k-link" data-page="#= idx #">#= text #</a></li>',
             buttonCount: 10
@@ -82,5 +82,5 @@
         }
     });
 
-    kendo.ui.plugin(Pageable);
+    kendo.ui.plugin(Pager);
 })(jQuery);
