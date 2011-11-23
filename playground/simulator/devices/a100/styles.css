@@ -11,22 +11,24 @@
 
 .device-container.horizontal .device-skin
 {
-    padding-top: 2cm;
+    padding-top: 2.3cm;
     background-image: url("images/horizontal.png");
 }
 
 .device-container.vertical
 {
-    height: 19.5cm;
-    width: 11.6cm;
-    padding: 3.46cm 1.14cm 2.78cm 1.42cm;
+    height: 1000px;
+    width: 850px;
+    padding: 3.42cm 6.58cm 10.1cm 6.74cm;
+    bottom: -150px;
 }
 
 .device-container.horizontal
 {
-    width: 19.5cm;
-    height: 11.6cm;
-    padding: 2.74cm 2.08cm 2.14cm 1.85cm;
+    height: 800px;
+    padding: 3.04cm 10.4cm 11.3cm 10.56cm;
+    width: 1360px;
+    bottom: -150px;
 }
 
 #address-bar
@@ -37,14 +39,14 @@
 
 .device-container.vertical #address-bar
 {
-    left: 175px;
+    left: 380px;
     top: 105px;
     width: 130px;
 }
 
 .device-container.horizontal #address-bar
 {
-    left: 194px;
-    top: 78px;
-    width: 372px;
+    left: 520px;
+    top: 90px;
+    width: 352px;
 }
