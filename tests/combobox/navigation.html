@@ -27,6 +27,7 @@
                 input;
 
             QUnit.config.testTimeout = 500;
+            QUnit.config.reorder = false;
 
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
@@ -49,6 +50,37 @@
                         input.remove();
                     }
                 }
+            });
+
+            asyncTest("click arrow should input", function() {
+                var focusWasCalled, combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+
+                combobox.input.bind("focus", function(){
+                    ok(true);
+                    start();
+                });
+
+                combobox.arrow.click();
+            });
+
+            asyncTest("empty input should clear focused item", function() {
+                var combobox = input.kendoComboBox({
+                                    dataSource: data,
+                                    highlightFirst: false
+                                }).data("kendoComboBox");
+
+                combobox.dataSource.query();
+                combobox.select(combobox.ul.children(":last"));
+                combobox.input.val("").focus().press(keys.BACKSPACE);
+
+                setTimeout(function() {
+                    ok(!combobox._current);
+                    ok(!combobox.ul.find(".k-state-selected")[0]);
+                    ok(!combobox.ul.find(".k-state-focused")[0]);
+                    start();
+                }, 200);
             });
 
             test("select item depending on the options.index", function() {
@@ -237,6 +269,8 @@
                     dataSource: data
                 });
 
+                combobox.open();
+
                 combobox._blur = function(li) {
                     ok(true);
                     start();
@@ -269,37 +303,6 @@
                 combobox.open();
 
                 combobox.input.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.UP});
-            });
-
-            asyncTest("click arrow should input", function() {
-                var focusWasCalled, combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
-                combobox.input.bind("focus", function(){
-                    ok(true);
-                    start();
-                });
-
-                combobox.arrow.click();
-            });
-
-            asyncTest("empty input should clear focused item", function() {
-                var combobox = input.kendoComboBox({
-                                    dataSource: data,
-                                    highlightFirst: false
-                                }).data("kendoComboBox");
-
-                combobox.dataSource.query();
-                combobox.select(combobox.ul.children(":last"));
-                combobox.input.val("").focus().press(keys.BACKSPACE);
-
-                setTimeout(function() {
-                    ok(!combobox._current);
-                    ok(!combobox.ul.find(".k-state-selected")[0]);
-                    ok(!combobox.ul.find(".k-state-focused")[0]);
-                    start();
-                }, 200);
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
