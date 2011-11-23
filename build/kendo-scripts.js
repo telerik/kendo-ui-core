@@ -30,6 +30,7 @@ var allScripts = [
     "kendo.data.xml.js",
     "kendo.model.js",
     "kendo.data.js",
+    "kendo.validator.js",
     "kendo.draganddrop.js",
     "kendo.groupable.js",
     "kendo.resizable.js",
