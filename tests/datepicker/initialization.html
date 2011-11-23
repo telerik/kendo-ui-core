@@ -163,7 +163,7 @@
                 dv1._calendar();
                 dv1.calendar.navigate(date, "month");
 
-                equal(dv1.calendar._table.find(".k-state-focused").children().data("value"), "2000/10/10");
+                equal(dv1.calendar._table.find(".k-state-focused").children().attr("data-kendo-value"), "2000/10/10");
                 equal(+dv1._current, +dv1.calendar._current);
             });
 

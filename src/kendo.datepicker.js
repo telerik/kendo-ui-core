@@ -303,7 +303,7 @@
                 calendar = that.calendar,
                 currentValue = calendar._current,
                 cell = calendar._table.find("." + FOCUSED),
-                value = cell.children(":" + FIRST).data("value").split("/");
+                value = cell.children(":" + FIRST).attr(kendo.attr("value")).split("/");
 
             //Safari cannot create corretly date from "1/1/2090"
             value = new DATE(value[0], value[1], value[2]);
@@ -337,7 +337,7 @@
                 empty = month.empty;
 
             that.month = {
-                content: template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
+                content: template('<td#=data.cssClass#><a class="k-link" href="\\#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
                 empty: template("<td>" + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
             };
 

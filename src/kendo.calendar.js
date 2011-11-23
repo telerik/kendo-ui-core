@@ -102,17 +102,17 @@
         template = kendo.template,
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
-        cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         emptyCellTemplate = template("<td>&nbsp;</td>", { useWithBlock: false }),
-        CLICK = kendo.support.touch ? "touchend" : "click",
         MIN = "min",
         LEFT = "left",
         SLIDE = "slide",
         MONTH = "month",
         CENTURY = "century",
+        CLICK = "click",
         CHANGE = "change",
         NAVIGATE = "navigate",
         VALUE = "value",
+        cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" ' + kendo.attr(VALUE) + '="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         HOVER = "k-state-hover",
         DISABLED = "k-state-disabled",
         OTHERMONTH = "k-other-month",
@@ -515,7 +515,7 @@
                 options = that.options,
                 currentValue = that._current,
                 link = $(e.currentTarget.firstChild),
-                value = link.data(VALUE).split("/");
+                value = link.attr(kendo.attr(VALUE)).split("/");
 
             //Safari cannot create corretly date from "1/1/2090"
             value = new DATE(value[0], value[1], value[2]);
@@ -563,6 +563,7 @@
         _header: function() {
             var that = this,
             element = that.element,
+            eventName = kendo.support.touch ? "touchend" : CLICK,
             links;
 
             if (!element.find(".k-header")[0]) {
@@ -577,15 +578,15 @@
                            .hover(mouseenter, mouseleave)
                            .click(false);
 
-            that._title = links.eq(1).bind(CLICK, proxy(that.navigateUp, that));
-            that[PREVARROW] = links.eq(0).bind(CLICK, proxy(that.navigateToPast, that));
-            that[NEXTARROW] = links.eq(2).bind(CLICK, proxy(that.navigateToFuture, that));
+            that._title = links.eq(1).bind(eventName, proxy(that.navigateUp, that));
+            that[PREVARROW] = links.eq(0).bind(eventName, proxy(that.navigateToPast, that));
+            that[NEXTARROW] = links.eq(2).bind(eventName, proxy(that.navigateToFuture, that));
         },
 
         _cellByDate: function(value) {
             return this._table.find("td:not(." + OTHERMONTH + ")")
                        .filter(function() {
-                           return $(this.firstChild).data(VALUE) === value;
+                           return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
                        });
         },
 
@@ -593,7 +594,7 @@
             this._table.find("td:not(." + OTHERMONTH + ")")
                 .removeClass(className)
                 .filter(function() {
-                   return $(this.firstChild).data(VALUE) === value;
+                   return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
                 })
                 .addClass(className);
         },
@@ -675,7 +676,7 @@
                 empty = month.empty;
 
             that.month = {
-                content: template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
+                content: template('<td#=data.cssClass#><a class="k-link" href="\\#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
                 empty: template("<td>" + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
             };
         }
@@ -1061,8 +1062,7 @@
 
     function validate(options) {
         var start = views[options.start],
-            depth = views[options.depth],
-            format = options.format;
+            depth = views[options.depth];
 
         if (isNaN(start)) {
             start = 0;
@@ -1073,13 +1073,7 @@
             options.depth = MONTH;
         }
 
-        format = format || kendo.culture().calendar.patterns.d;
-
-        if (format.slice(0,3) === "{0:") {
-            format = format.slice(3, format.length - 1);
-        }
-
-        options.format = format;
+        options.format = options.format || kendo.culture().calendar.patterns.d;
     }
 
     calendar.restrictValue = restrictValue;

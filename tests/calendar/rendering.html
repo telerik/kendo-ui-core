@@ -269,7 +269,7 @@
                     content: template.content
                 }));
 
-                equal(div.find("tbody").find("a:first").attr("data-value"), value);
+                equal(div.find("tbody").find("a:first").attr("data-kendo-value"), value);
             });
 
             test("month view should render k-other-month style", function() {
@@ -319,7 +319,7 @@
 
                 var cell = div.find("tbody").find("tr:first").find(".k-other-month:last").next();
 
-                equal(cell.children().data("value"), "2011/8/1");
+                equal(cell.children().attr("data-kendo-value"), "2011/8/1");
             });
 
             test("month view renders k-today if today is in the current view", function() {
@@ -405,7 +405,7 @@
                     max: today
                 }));
 
-                equal(div.find("tbody").find("a").attr("data-value"), value);
+                equal(div.find("tbody").find("a").attr("data-kendo-value"), value);
             });
 
             test("decade title renders decade range title", function() {
@@ -452,7 +452,7 @@
                     max: today
                 }));
 
-                equal(div.find("tbody").find("td > a").attr("data-value"), value);
+                equal(div.find("tbody").find("td > a").attr("data-kendo-value"), value);
             });
 
             test("decade renders k-other-month to the first and last cell of the view", function() {
@@ -529,7 +529,7 @@
                     max: today
                 }));
 
-                equal(div.find("tbody").find("a").attr("data-value"), value);
+                equal(div.find("tbody").find("a").attr("data-kendo-value"), value);
             });
 
             test("century renders k-other-month to the first and last cell of the view", function() {
