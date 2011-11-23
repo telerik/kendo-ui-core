@@ -1615,7 +1615,7 @@
             }
 
             if (!tr.children().length) {
-                if (that._hasDetails()) {
+                if (that._hasDetails() && columns.length) {
                     html += '<th class="k-hierarchy-cell">&nbsp;</th>';
                 }
 
