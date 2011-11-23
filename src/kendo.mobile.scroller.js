@@ -24,9 +24,12 @@
         ACCELERATION = 20,
         VELOCITY = 0.5,
         BOUNCE_STOP = 100,
-        BOUNCE_DECELERATION = 0.1,
         SCROLLBAR_OPACITY = 0.7,
-        INITIAL_FRICTION = 0.96;
+        BOUNCE_FRICTION = 0.4,
+        BOUNCE_DECELERATION = 3,
+        BOUNCE_PARALLAX = 0.5,
+        BOUNCE_SNAP = 0.7,
+        FRICTION = 0.96;
 
         if (support.hasHW3D) {
             to3DProperty = function(value) {
@@ -92,7 +95,6 @@
             directionChange,
             scrollOffset,
             boxSize,
-            friction,
             lastLocation,
             startLocation,
             idx,
@@ -131,14 +133,14 @@
             var transformedLocation = -scrollOffset;
 
             if (transformedLocation > maxLimit) {
-                transformedLocation = maxLimit + (transformedLocation - maxLimit) * 0.5;
+                transformedLocation = maxLimit + (transformedLocation - maxLimit) * BOUNCE_PARALLAX;
             } else if (transformedLocation < minLimit) {
-                transformedLocation *= 0.5;
+                transformedLocation *= BOUNCE_PARALLAX;
             }
 
-            // scrollOffset = -transformedLocation;
+            scrollOffset = -transformedLocation;
 
-            updateCallback(name, -transformedLocation);
+            updateCallback(name, scrollOffset);
 
             if (offset > maxLimit) {
                 limit = offset - maxLimit;
@@ -179,6 +181,7 @@
 
             $(document)
                 .unbind(MOVEEVENT, start)
+                .unbind(MOVEEVENT, drag)
                 .bind(MOVEEVENT, start);
 
             scrollElement
@@ -222,7 +225,7 @@
         }
 
         function drag(e) {
-            var location = getTouchLocation(e);
+            var location = getTouchLocation(e, true);
 
             if (location) {
                 changeDirection(location);
@@ -246,8 +249,7 @@
             if (dragged) {
                 dragged = false;
                 bounceLocation = location;
-                friction = INITIAL_FRICTION;
-                decelerationVelocity = - (lastLocation - location) / ((+new Date() - directionChange) / ACCELERATION);
+                decelerationVelocity = abs((lastLocation - location) / ((+new Date() - directionChange) / ACCELERATION));
                 winding = true;
                 queueNextStep();
             } else {
@@ -261,33 +263,43 @@
        }
 
        function stepKineticAnimation() {
-           var animationIterator = round((+new Date() - lastCall) / FRAMERATE - 1), constraint, velocity;
+           var animationIterator = round((+new Date() - lastCall) / FRAMERATE - 1),
+               offBounds = false,
+               negativeVelocity;
 
            if (!winding) {
                return;
            }
 
            while (animationIterator-- >= 0) {
-               constraint = 0;
-               velocity = decelerationVelocity * friction;
-
+               offBounds = false;
                if (-scrollOffset < minLimit) {
-                   constraint = scrollOffset;
+                   offBounds = true;
+                   negativeVelocity = -scrollOffset * BOUNCE_SNAP;
                } else if (-scrollOffset > maxLimit) {
-                   constraint = maxLimit + scrollOffset;
+                   offBounds = true;
+                   negativeVelocity = -(-scrollOffset - maxLimit) * BOUNCE_SNAP;
                }
 
-               if (constraint) {
-                   friction -= limitValue((BOUNCE_STOP - abs(constraint)) / BOUNCE_STOP, 0, 0.9);
-                   velocity -= constraint * BOUNCE_DECELERATION;
+               if (offBounds) {
+                   if (decelerationVelocity < 0) {
+                       decelerationVelocity = negativeVelocity;
+                       if (abs(decelerationVelocity) < VELOCITY) {
+                           endKineticAnimation();
+                           return;
+                       }
+                   } else {
+                       decelerationVelocity *= BOUNCE_FRICTION;
+                       decelerationVelocity -= BOUNCE_DECELERATION;
+                   }
+               } else {
+                   decelerationVelocity *= FRICTION;
                }
 
-               decelerationVelocity = velocity;
-               friction = limitValue(friction, 0, 1);
-               bounceLocation += decelerationVelocity;
+               bounceLocation -= direction * decelerationVelocity;
                updateScrollOffset(bounceLocation);
 
-               if (endKineticAnimation()) {
+               if (!offBounds && endKineticAnimation()) {
                    return;
                }
            }
@@ -334,7 +346,6 @@
            direction = 0;
            directionChange =+ new Date();
            scrollOffset = 0;
-           friction = INITIAL_FRICTION;
        }
 
        element
