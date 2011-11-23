@@ -500,7 +500,7 @@
                 dv.popup.open();
                 dv.move(event);
 
-                var value = dv.calendar.element.find(".k-state-focused").children(":first").data("value");
+                var value = dv.calendar.element.find(".k-state-focused").children(":first").attr("data-kendo-value");
 
                 equal(value, "2000/10/1");
             });
@@ -514,7 +514,7 @@
                 dv.popup.open();
                 dv.move(event);
 
-                var value = dv.calendar.element.find(".k-state-focused").children(":first").data("value");
+                var value = dv.calendar.element.find(".k-state-focused").children(":first").attr("data-kendo-value");
 
                 equal(value, "2000/10/30");
             });
