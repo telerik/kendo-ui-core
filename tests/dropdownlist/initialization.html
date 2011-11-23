@@ -391,6 +391,25 @@
                ok(!dropdownlist.list.attr("id"));
            });
 
+           asyncTest("form reset support", function() {
+                input.attr("value", "1");
+
+                var form = $("<form/>").appendTo(document).append(input),
+                    combobox = new DropDownList(input, {
+                         dataSource: [{text: 1, value: 1}, {text:2, value:2}]
+                    });
+
+                combobox.select(1);
+
+                form[0].reset();
+
+                setTimeout(function() {
+                    equal(combobox.element.val(), "1");
+                    equal(combobox.span.text(), "1");
+                    start();
+                }, 200);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

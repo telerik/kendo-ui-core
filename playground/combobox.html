@@ -71,6 +71,14 @@
             <input  id="shared2" />
             <input  id="shared3" />
         </fieldset>
+        <fieldset>
+            <legend> Form reset suppoty </legend>
+            <form>
+                <input id="formCombo" type="text" value="12312">
+                <input type="reset" value="Reset!">
+            </form>
+
+        </fieldset>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                  var remoteDataSource = kendo.data.DataSource.create({
@@ -187,6 +195,8 @@
                     autoBind: false,
                     dataSource: sharedDataSource
                 });
+
+                $("#formCombo").kendoComboBox([{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}]);
             });
 
             function filterTypeChanged() {

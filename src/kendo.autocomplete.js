@@ -238,7 +238,10 @@
                 that.current($(ul.firstChild));
             }
 
-            that.popup[length ? "open" : "close"]();
+            if (that._open) {
+                that._open = false;
+                that.popup[length ? "open" : "close"]();
+            }
         },
 
         /**
@@ -307,6 +310,7 @@
             if (!length) {
                 that.popup.close();
             } else if (length >= that.options.minLength) {
+                that._open = true;
                 that.dataSource.filter({ field: options.dataTextField, operator: options.filter, value: word });
             }
         },

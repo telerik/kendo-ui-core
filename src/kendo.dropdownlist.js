@@ -156,6 +156,8 @@
                 that.wrapper.focus();
             });
 
+            that._reset();
+
             that._word = "";
 
             that._wrapper();
