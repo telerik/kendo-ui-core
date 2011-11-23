@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Build your own Kendo</title>
+        <script src="//code.jquery.com/jquery-1.6.4.min.js" type="text/javascript"></script>
+        <script src="//cdn.kendostatic.com/2011.3.1007/js/kendo.core.min.js" type="text/javascript"></script>
+        <script src="scripts/script-resolver.js" type="text/javascript"></script>
+        <script src="scripts/kendo-config.js" type="text/javascript"></script>
+        <link href="styles/configurator.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div id="configurator"></div>
+        <div id="infoPanel"></div>
+        <div id="scriptList">
+            <pre></pre>
+        </div>
+
+        <script id="categoryTemplate" type="text/x-kendo-tmpl">
+            <h2>#= data #</h2>
+            <ul class="category" data-id="#= data #">
+                #= renderComponents(data) #
+            </ul>
+        </script>
+
+        <script id="componentTemplate" type="text/x-kendo-tmpl">
+            <li class="component" data-id="#= id #">
+                <span class="checkbox"></span>
+                <span class="name">#= name #</span>
+                # if (data.features) { #
+                    <ul class="features">
+                        #= renderFeatures(data) #
+                    </ul>
+                # } #
+                <span class="description">#= data.description || "" #</span>
+            </li>
+        </script>
+
+        <script id="featureTemplate" type="text/x-kendo-tmpl">
+            <li class="feature" data-id="#= id #">
+                <span class="checkbox"></span>
+                <span class="name">#= name #</span>
+                <span class="description">#= data.description || "" #</span>
+            </li>
+        </script>
+
+        <script id="infoTemplate" type="text/x-kendo-tmpl">
+            <dl>
+                <dt>Combined script size:</dt>
+                <dd>#= formatBytes(size) # (#= formatBytes(compressedSize) # compressed)</dd>
+            </dl>
+            <a href="#= getUrl #">Download</a>
+        </script>
+
+        <script id="scriptTemplate" type="text/x-kendo-tmpl">&lt;script type="text/javascript" src="#= data #"&gt;&lt;script&gt;</script>
+
+        <script type="text/javascript">
+            var INFO_SERVICE = "http://tsonev/kendo-download/info.ashx",
+                GET_SERVICE = "http://tsonev/kendo-download/get.ashx",
+                VERSION = "2011.2.1007",
+                CDN_URL = "http://cdn.kendostatic.com/" + VERSION + "/js/";
+
+            var resolver,
+                categoryTemplate,
+                componentTemplate,
+                featureTemplate,
+                infoTemplate,
+                scriptTemplate,
+                showAdvanced = false;
+
+            $(document).ready(function() {
+                resolver = new ScriptResolver(kendoConfig);
+                categoryTemplate = template("categoryTemplate");
+                componentTemplate = template("componentTemplate");
+                featureTemplate = template("featureTemplate");
+                infoTemplate = template("infoTemplate");
+                scriptTemplate = template("scriptTemplate");
+
+                renderCategories();
+
+                $(".component > .name, .component > .checkbox").click(function(e) {
+                    var component = $(this).parent();
+                        checkbox = component.children(".checkbox");
+
+                    if (checkbox.hasClass("explicit")) {
+                        component.find(".checkbox").removeClass("explicit");
+                    } else {
+                        checkbox.addClass("explicit");
+                    }
+
+                    updateDependencies();
+                    updateInfo();
+                });
+
+                $(".feature > .name, .feature > .checkbox").click(function(e) {
+                    var feature = $(this).parent(),
+                        component = feature.parents(".component"),
+                        checkbox = feature.children(".checkbox");
+
+                    checkbox.toggleClass("explicit");
+                    if (checkbox.hasClass("explicit")) {
+                        component.children(".checkbox").addClass("explicit");
+                    }
+
+                    updateDependencies();
+                    updateInfo();
+                });
+            });
+
+            function renderCategories() {
+                var categories = {};
+                $.each(kendoConfig, function(i, component) {
+                    categories[component.category] = true;
+                });
+
+                for (var category in categories) {
+                    $("#configurator").append(categoryTemplate(category));
+                }
+            }
+
+            function renderComponents(category) {
+                var result = "",
+                    visible;
+                $.each(kendoConfig, function(i, component) {
+                    visible = !component.hidden &&
+                        (!component.advanced ||
+                            (showAdvanced && component.advanced)
+                        );
+
+                    if (visible && component.category === category) {
+                        result += componentTemplate(component);
+                    }
+                });
+
+                return result;
+            }
+
+            function renderFeatures(component) {
+                var result = "";
+                $.each(component.features, function(i, feature) {
+                    result += featureTemplate(feature);
+                });
+
+                return result;
+            }
+
+            function updateDependencies() {
+                $("#configurator .checkbox").removeClass("implicit");
+
+                resolver.reset();
+
+                $("#configurator .component").each(function() {
+                    var component = $(this);
+                    if (required(component)) {
+                        var features = $.map(component.find(".feature"), function(feature) {
+                            if (required(feature)) {
+                                return $(feature).data("id");
+                            }
+                        });
+
+                        resolver.addComponent(component.data("id"), features);
+                    }
+                });
+
+                $("#configurator .component").each(function() {
+                    var checkbox = $("> .checkbox", this);
+                    if ($.inArray($(this).data("id"), resolver.resolved) > -1) {
+                        if (!checkbox.hasClass("explicit")) {
+                            checkbox.addClass("implicit");
+                        }
+                    }
+                });
+
+                var scriptList = "";
+                for (var i = 0; i < resolver.scripts.length; i++) {
+                    scriptList += scriptTemplate(resolver.scripts[i]) + "\r\n";
+                }
+                $("#scriptList pre").html(scriptList);
+            }
+
+            function updateInfo() {
+                var scripts = $.map(resolver.scripts, function(script) {
+                    return script.match(/kendo\.(.*)\.min\.js/)[1];
+                });
+
+                var params = {
+                    c: scripts,
+                    v: VERSION,
+                    min: "1"
+                };
+
+                $.ajax({
+                    type: "GET",
+                    url: INFO_SERVICE,
+                    data: params,
+                    traditional: true,
+                    success: function(data) {
+                        data.getUrl = GET_SERVICE + "?" + $.param(params, true);
+                        $("#infoPanel").html(infoTemplate(data));
+                    }
+                });
+            }
+
+            function required(element) {
+                return $(element).find(".implicit, .explicit").length > 0;
+            }
+
+            function template(id) {
+                return kendo.template($("#" + id).html())
+            }
+
+            function capitalize(word) {
+                return word.charAt(0).toUpperCase() + word.slice(1);
+            }
+
+            function formatBytes(value) {
+                return kendo.format("{0:N0} kB", value / 1024);
+            }
+        </script>
+    </body>
+</html>
