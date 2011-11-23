@@ -70,6 +70,13 @@
                 ok(cell.find(":input").length);
             });
 
+            test("clicking delete command cell does not switch to edit mode", function() {
+                setup({ columns: [{ command: "destroy" }] });
+                var cell = table.find("td:last").click();
+
+                ok(!cell.hasClass("k-edit-cell"));
+            });
+
             test("editing cell passes column field to Editable", function() {
                 setup({ columns: ["foo", "name"] });
                 var cell = table.find("td:first").click();
