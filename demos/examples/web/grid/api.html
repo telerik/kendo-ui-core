@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>API</title>
+        <!-- css -->
+        <link href="../../shared/styles/examples.css" rel="stylesheet"/>
+        <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../../src/jquery.min.js"></script>
+        <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.data.js"></script>
+        <script src="../../../../src/kendo.pageable.js"></script>
+        <script src="../../../../src/kendo.selectable.js"></script>
+        <script src="../../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../../src/kendo.groupable.js"></script>
+        <script src="../../../../src/kendo.grid.js"></script>
+        <script src="../../shared/js/people.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">API</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+
+            <div class="configuration" style="width:200px">
+                <span class="configHead">Configuration</span>
+                <span class="configTitle">API Functions</span>
+                <ul class="options">
+                    <li>
+                        <input type="number" value="0" id="selectRow"/>
+                        <button class="selectRow k-button">Select row</button>
+                    </li>
+                    <li>
+                        <button class="clearSelection k-button">Clear selected rows</button>
+                    </li>
+                    <li>
+                        <input type="number" value="0" id="groupRow"/>
+                        <button class="toggleGroup k-button">Collapse/Expand group</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="grid" style="width:500px;"></div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            data: createRandomData(20),
+                            pageSize: 5,
+                            group: {
+                                field: "Age",
+                                dir: "asc"
+                            }
+                        },
+                        selectable: "multiple row",
+                        pageable: true,
+                        scrollable: false,
+                        groupable: true,
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Age"
+                            }
+                        ]
+                    });
+
+                    $(".clearSelection").click(function() {
+                        $("#grid").data("kendoGrid").clearSelection();
+                    });
+
+                    var selectRow = function(e) {
+                        if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var grid = $("#grid").data("kendoGrid"),
+                                    rowIndex = $("#selectRow").val(),
+                                    row = grid.tbody.find(">tr:not(.k-grouping-row)").eq(rowIndex);
+
+                                grid.select(row);
+                            }
+                        },
+                        toggleGroup = function(e) {
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                var grid = $("#grid").data("kendoGrid"),
+                                    rowIndex = $("#groupRow").val(),
+                                    row = grid.tbody.find(">tr.k-grouping-row").eq(rowIndex);
+
+                                if(row.has(".k-collapse").length) {
+                                    grid.collapseGroup(row);
+                                } else {
+                                    grid.expandGroup(row);
+                                }
+                            }
+                        };
+
+
+                    $(".selectRow").click(selectRow);
+                    $("#selectRow").keypress(selectRow);
+
+                    $(".toggleGroup").click(toggleGroup);
+                    $("#groupRow").keypress(toggleGroup);
+                });
+            </script>
+
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+

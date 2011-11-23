@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Basic usage</title>
+        <!-- css -->
+        <link href="../../shared/styles/examples.css" rel="stylesheet"/>
+        <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../../src/jquery.min.js"></script>
+        <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.upload.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <!-- description -->
+        <div id="example" class="k-content">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    The Upload can be used as a drop-in replacement
+                    for file input elements.
+                </p>
+                <p>
+                    This "synchronous" mode does not require
+                    special handling on the server.
+                </p>
+                <p>
+                    <strong>Note:</strong>
+                    Form submit action is not configured in this demo.
+                </p>
+            </div>
+            <form method="post" style="width:60%">
+                <div>
+                    <input name="files" id="files" type="file" />
+                    <p>
+                        <button type="button" class="k-button k-state-disabled"
+                            disabled="disabled">Submit</button>
+                    </p>
+                </div>
+            </form>
+            <script>
+                $(document).ready(function() {
+                    $("#files").kendoUpload();
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
