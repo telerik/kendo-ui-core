@@ -277,21 +277,11 @@ span.k-numeric-wrap.k-state-active,
 .k-grouping-dropclue,
 .k-drop-hint,
 .k-callout,
-/*.k-splitbar-vertical,
-.k-ghost-splitbar-vertical,*/
 .k-progress,
 .k-progress-status
 {
     background-image: url('@{image-folder}/sprite.png');
 }
-
-/*.k-slider-vertical .k-slider-track,
-.k-slider-vertical .k-slider-selection,
-.k-splitbar-horizontal,
-.k-ghost-splitbar-horizontal
-{
-    background-image: url('@{image-folder}/sprite-vertical.png');
-}*/
 
 .k-loading
 {
@@ -337,7 +327,9 @@ span.k-numeric-wrap.k-state-active,
 .k-list>.k-state-selected,
 .k-list>.k-state-focused,
 .k-panelbar .k-state-selected,
-.k-button:active
+.k-button:active,
+.k-ghost-splitbar-vertical,
+.k-ghost-splitbar-horizontal
 {
     color: @selected-text-color;
     background-color: @selected-background-color;
@@ -351,6 +343,8 @@ span.k-numeric-wrap.k-state-active,
 
 .k-state-hover,
 .k-state-hover:hover,
+.k-splitbar-horizontal-hover:hover,
+.k-splitbar-vertical-hover:hover,
 .k-list>.k-state-hover,
 .k-state-focused,
 .k-marquee
@@ -448,6 +442,12 @@ span.k-numeric-wrap.k-state-active,
     background-color: @splitbar-background-color;
 }
 
+.k-restricted-size-vertical,
+.k-restricted-size-horizontal
+{
+    background-color: @error-text-color;
+}
+
 /* Upload */
 
 .k-progress-status
@@ -484,17 +484,14 @@ span.k-numeric-wrap.k-state-active,
 .k-grid .k-filter-options,
 .k-time-popup,
 .k-datepicker-calendar,
-.k-autocomplete:hover,
 .k-autocomplete.k-state-focused,
 .k-dropdown-wrap.k-state-focused,
-.k-dropdown-wrap.k-state-hover,
 .k-dropdown-wrap.k-state-active,
 .k-picker-wrap.k-state-focused,
-.k-picker-wrap.k-state-hover,
 .k-picker-wrap.k-state-active,
 .k-imagebrowser .k-image
 {
-    .box-shadow(2px 2px 2px 0 @shadow-color);
+    .box-shadow(0 2px 2px 0 @shadow-color);
 }
 
 .k-window
@@ -534,7 +531,9 @@ span.k-numeric-wrap.k-state-active,
 .k-editor-button .k-state-hover,
 .k-editor-button .k-state-active,
 .k-tooltip,
-.k-tile
+.k-tile,
+.k-slider-track,
+.k-slider-selection
 {
     .border-radius(@main-border-radius);
 }
