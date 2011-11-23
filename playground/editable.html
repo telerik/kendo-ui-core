@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>editable</title>
-        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
@@ -14,14 +14,14 @@
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.validatable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
         <link href="../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../styles/kendo.hakama.css" rel="stylesheet"/>
+        <link href="../styles/kendo.blueopal.css" rel="stylesheet"/>
         <style>
             body {
                font: 75% arial,helvetica,sans-serif;
@@ -87,19 +87,24 @@
                     pageable: true,
                     editable: true,
                     sortable: true,
-                    groupable: false,
+                    groupable: true,
                     scrollable: false,
                     navigatable: true,
                     selectable: "cell",
+                    detailTemplate: "detail template",
                     toolbar: ["create", "cancel", "save"],
-                    columns: ["id", "bar", "foo"]/*, { field: "date", format: "{0:dd/MM/yyyy\\}"}]*/
+                    columns: ["id", "bar", "foo", { command: { name: "destroy", text: "delete"}, title: "delete" }]
                 });
 
                 $("#relatedGrid").kendoGrid({
                     dataSource: dataSource,
                     navigatable: true,
                     selectable: "cell",
-                    pageable: true
+                    scrollable: false,
+                    groupable: true,
+                    detailTemplate: "template",
+                    pageable: true,
+                    columns: ["id", "bar", "foo", { command: { name: "destroy", text: "delete"}, title: "delete" }]
                 });
 
                 $("#add").click(function() {
