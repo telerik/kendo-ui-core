@@ -58,22 +58,37 @@
                 });
         }
 
-        if ($.isPlainObject(categories)) {
-            for (var i in categories) {
-                navWrap.append("<h3>" + i + "</h3>")
-                    .append(navigationSection(categories[i]));
+        var categoriesLength = 0;
+
+        for (var i in categories) {
+            if (categories.hasOwnProperty(i)) {
+                categoriesLength++;
             }
-        } else {
-            navWrap.append(navigationSection(categories));
+        }
+
+        for (var i in categories) {
+            if (categoriesLength > 1) {
+                navWrap.append("<h3>" + i + "</h3>")
+            }
+
+            navWrap.append(navigationSection(categories[i]));
         }
 
         if (!referenceUrl) {
             referenceUrl = $("#referenceUrl")[0].href;
+
+            var loc = window.location.href.toLowerCase();
+
+            if (loc.indexOf("/web/") >= 0) {
+                referenceUrl += "web/";
+            } else if (loc.indexOf("/dataviz/") >= 0) {
+                referenceUrl += "dataviz/";
+            }
         }
 
         $("#navWrap li a").each(function() {
             var match = $(this).attr("href").match(regexes.nav);
-            $(this).attr("href", referenceUrl + "web/" + (match ? match[1] : ""));
+            $(this).attr("href", referenceUrl + (match ? match[1] : ""));
         });
     };
 
@@ -360,8 +375,18 @@
                         visible = extender.is(":visible");
 
                     if ($.trim(extender.text())) {
-                        extender.kendoStop(true).kendoAnimate(!visible ? docsAnimation.show : docsAnimation.hide, visible, function() { $(this).css("height", ""); });
-                        $(".detailExpanded,.detailCollapsed", this).toggleClass("detailExpanded", !visible).toggleClass("detailCollapsed", visible);
+                        extender
+                            .kendoStop(true)
+                            .kendoAnimate(
+                                !visible ? docsAnimation.show : docsAnimation.hide,
+                                visible,
+                                function() { $(this).css("height", ""); }
+                            );
+
+                        $(".detailExpanded,.detailCollapsed", this)
+                            .toggleClass("detailExpanded", !visible)
+                            .toggleClass("detailCollapsed", visible);
+
                         element.toggleClass("detailHandleExpanded", !visible);
                     }
                 });
@@ -459,6 +484,10 @@
 
     function initializeNavigation() {
         var url = window.normalizedUrl = getNormalizedUrl(), link;
+
+        if (typeof categories == "undefined") {
+            return;
+        }
 
         url = url.match(regexes.nav);
 
