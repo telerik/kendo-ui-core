@@ -8,9 +8,9 @@
     function bindSelect(select, model) {
         select = $(select);
 
-        var text = select.attr("data-text-field"),
-            value = select.attr("data-value-field"),
-            source = select.attr("data-source");
+        var text = select.attr(kendo.attr("text-field")),
+            value = select.attr(kendo.attr("value-field")),
+            source = select.attr(kendo.attr("source"));
 
         if (model[source]) {
             source = model[source].call(model);
@@ -68,7 +68,8 @@
                 model = that.model,
                 options = that.options,
                 element = $(target),
-                field = element.attr("data-field") || element.attr("name"),
+                field = element.attr(kendo.attr("field")) || element.attr("name"),
+                field = $(target).attr(kendo.attr("field")) || $(target).attr("name"),
                 setting = options[field] || {};
 
             if (field) {

@@ -1663,6 +1663,10 @@
         },
         support: support,
         animate: animate,
+        ns: "kendo-",
+        attr: function(value) {
+            return "data-" + kendo.ns + value;
+        },
         wrap: wrap,
         size: size,
         getOffset: getOffset,
