@@ -82,6 +82,7 @@
                 color: #787878;
                 text-shadow: 1px 1px white;
                 font-size: 0.8rem;
+                display: block;
             }
 
             #details .km-content {
@@ -247,7 +248,7 @@
             <aside>
                 <img src="images/${image}" />
                 <span class="price">&euro; ${price}</span>
-                <a data-kendo-role="button" href="\\#">Add to cart</a>
+                <a data-kendo-role="button" href="\\#" id="add-to-cart">Add to cart</a>
             </aside>
             <h2>${name}</h2>
             <p>${description}</p>
@@ -289,7 +290,15 @@
                         item = ds.get(e.params.id).data;
                         view.content.html(itemDetailsTemplate(item));
                         kendo.mobile.enhance(view.content);
+
+                        view.content.find("#add-to-cart").data("kendoMobileButton").bind("click", function() {
+                            cart.push(item.id);
+                            view.content.find(".added").show();
+                            ds.refresh();
+                        });
                     });
+                } else if (viewID === "index") {
+                    view.content.find("#featured").data("kendoMobileListView").refresh();
                 }
             });
         </script>
