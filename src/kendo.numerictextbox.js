@@ -105,7 +105,7 @@
          * @option {Number} [max] <null> Specifies the biggest value, which user can enter.
          * @option {Number} [decimals] <null> Specifies the number precision. If not set precision defined by current culture is used.
          * @option {String} [format] <n> Specifies the format of the number. Any valid number format is allowed.
-         * @option {String} [empty] <Enter value> Specifies the text displayed when the input is empty.
+         * @option {String} [placeholder] <Enter value> Specifies the text displayed when the input is empty.
          * @option {String} [upArrowText] <Increase value> Specifies the title of the up arrow.
          * @option {String} [downArrowText] <Decrease value> Specifies the title of the down arrow.
          */
@@ -167,7 +167,6 @@
             value: NULL,
             step: 1,
             format: "n",
-            empty: "Enter value",
             upArrowText: "Increase value",
             downArrowText: "Decrease value"
         },
@@ -517,7 +516,7 @@
             }
 
             that._value = value = that._adjust(value);
-            that._text.val(isNotNull ? kendo.toString(value, format) : options.empty);
+            that._text.val(isNotNull ? kendo.toString(value, format) : options.placeholder);
             that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "");
         },
 
