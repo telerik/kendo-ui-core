@@ -83,11 +83,11 @@ function removeDuplicateResources(resource, target) {
     return target.replace(rex, "");
 }
 
-function mergeResourceRegion(fileName, exampleSource, regionType, deployConfig, depth) {
+function mergeResourceRegion(info, exampleSource, regionType, deployConfig) {
     var result,
         pathInfo = {
-            depth: depth,
-            suiteName: exampleInfo(fileName).suite,
+            depth: info.depth,
+            suiteName: info.suite,
             parentFolder: parentFolder
         },
         baseResources = resolveResources(baseRegions[regionType].html, deployConfig, pathInfo),
@@ -149,8 +149,8 @@ function updateBaseLocation(html, base) {
     });
 }
 
-function exampleInfo(fileName) {
-    var parts = fileName.substring(outputPath.length + 1).split("/"),
+function exampleInfo(fileName, rootPath) {
+    var parts = fileName.substring(rootPath.length + 1).split("/"),
         suite = parts[0],
         component = parts[1];
 
@@ -159,15 +159,15 @@ function exampleInfo(fileName) {
         component = "";
     }
 
-    console.log(fileName, suite, component);
-
     return {
+        fileName: fileName,
         suite: suite,
+        depth: exampleDepth(fileName, rootPath),
         component: component
     };
 }
 
-function importComponentHelp(exampleHTML, component) {
+function importComponentHelp(exampleSource, component) {
     var helpFiles = {
         "animation": "kendo.Animation",
         "autocomplete": "kendo.ui.AutoComplete",
@@ -276,16 +276,16 @@ function importComponentHelp(exampleHTML, component) {
     // could be improved if example has appropriate markers, or better yet, if loaded through AJAX (and not importing at all)
     if (description) {
         description = fixNewLines(description);
-        exampleHTML = exampleHTML.replace(regionRegex.description, "<!-- description -->" + description + "<!-- description -->");
+        exampleSource = exampleSource.replace(regionRegex.description, "<!-- description -->" + description + "<!-- description -->");
     }
 
     tabs = fixNewLines(tabs);
     data = fixNewLines(data);
 
-    exampleHTML = exampleHTML.replace(regionRegex.helpTabs, "<!-- help-tabs -->" + tabs + "<!-- help-tabs -->");
-    exampleHTML = exampleHTML.replace(regionRegex.helpData, "<!-- help-data -->" + data + "<!-- help-data -->");
+    exampleSource = exampleSource.replace(regionRegex.helpTabs, "<!-- help-tabs -->" + tabs + "<!-- help-tabs -->");
+    exampleSource = exampleSource.replace(regionRegex.helpData, "<!-- help-data -->" + data + "<!-- help-data -->");
 
-    return exampleHTML;
+    return exampleSource;
 }
 
 function fixNewLines(text) {
@@ -300,37 +300,37 @@ function exampleDepth(fileName, root) {
 }
 
 function processExample(fileName, deployConfig) {
-    var exampleHTML = kendoBuild.readText(fileName),
-        depth = exampleDepth(fileName, deployConfig.root),
+    var info = exampleInfo(fileName, deployConfig.root),
+        depth = info.depth,
+        component = info.component,
+        exampleSource = kendoBuild.readText(fileName),
         base = fileName === outputPath + "/index.html" ? "" : parentFolder(depth) + "/",
-        scriptRegion = mergeResourceRegion(fileName, exampleHTML, "script", deployConfig, depth),
-        cssRegion = mergeResourceRegion(fileName, exampleHTML, "css", deployConfig, depth),
-        component = exampleInfo(fileName).component;
+        scriptRegion = mergeResourceRegion(info, exampleSource, "script", deployConfig),
+        cssRegion = mergeResourceRegion(info, exampleSource, "css", deployConfig);
 
-    exampleHTML = baseRegions.meta.exec(exampleHTML, baseRegions.meta.html);
+    exampleSource = baseRegions.meta.exec(exampleSource, baseRegions.meta.html);
 
-    exampleHTML = baseRegions.script.exec(exampleHTML, scriptRegion);
+    exampleSource = baseRegions.script.exec(exampleSource, scriptRegion);
 
-    exampleHTML = baseRegions.css.exec(exampleHTML, cssRegion);
+    exampleSource = baseRegions.css.exec(exampleSource, cssRegion);
 
-    exampleHTML = baseRegions.nav.exec(exampleHTML, updateBaseLocation(baseRegions.nav.html, base));
+    exampleSource = baseRegions.nav.exec(exampleSource, updateBaseLocation(baseRegions.nav.html, base));
 
-    var description = regionRegex.description.exec(exampleHTML);
-    exampleHTML = exampleHTML.replace(regionRegex.description, '');
+    var description = regionRegex.description.exec(exampleSource);
+    exampleSource = exampleSource.replace(regionRegex.description, '');
 
     if (description) {
-        exampleHTML = baseRegions.tools.exec(exampleHTML, baseRegions.tools.html.replace(regionRegex.description, description[0]));
+        exampleSource = baseRegions.tools.exec(exampleSource, baseRegions.tools.html.replace(regionRegex.description, description[0]));
     } else {
         // overview has no description
-        exampleHTML = baseRegions.tools.exec(exampleHTML);
+        exampleSource = baseRegions.tools.exec(exampleSource);
     }
 
     if (component) {
-        console.log("importings ", component);
-        exampleHTML = importComponentHelp(exampleHTML, component);
+        exampleSource = importComponentHelp(exampleSource, component);
     }
 
-    kendoBuild.writeText(fileName, exampleHTML);
+    kendoBuild.writeText(fileName, exampleSource);
 }
 
 function copyResources(source, destination, processCallback, filterRegExp) {
