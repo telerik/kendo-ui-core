@@ -329,10 +329,10 @@
                 equal(typeof m.get("bar"), "object");
             });
 
-            test("setting value of field marked as readonly is ignored", function() {
+            test("setting value of field marked as editable=false is ignored", function() {
                 var MyModel = kendo.data.Model.define({
                     fields: {
-                        bar: { field: "bar", readonly: true }
+                        bar: { field: "bar", editable: false }
                     }
                 }), m = new MyModel({ bar: "foo" });
 
@@ -341,20 +341,20 @@
                 ok(!m._modified);
             });
 
-            test("readOnly returns true for field marked as readonly", function() {
+            test("editable returns false for field marked as editable=false", function() {
                 var MyModel = kendo.data.Model.define({
                     fields: {
-                        bar: { field: "bar", readonly: true }
+                        bar: { field: "bar", editable: false }
                     }
                 }), m = new MyModel({ bar: "foo" });
 
-                ok(m.readOnly("bar"));
+                ok(!m.editable("bar"));
             });
 
-            test("readOnly returns false when no fields definition", function() {
+            test("editable returns true when no fields definition", function() {
                 var MyModel = kendo.data.Model.define(),
                     m = new MyModel({ bar: "foo" });
-                ok(!m.readOnly("bar"));
+                ok(m.editable("bar"));
             });
 
             test("changes returns false if value is same as default value", function() {

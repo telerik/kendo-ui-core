@@ -71,7 +71,7 @@
                                 model: {
                                     id: "ProductID",
                                     fields: {
-                                        ProductID: { field: "ProductID", readonly: true, useNull: true },
+                                        ProductID: { field: "ProductID", readonly: true, nullable: true },
                                         ProductName: { field: "ProductName", validation: { required: true } },
                                         UnitPrice: { field: "UnitPrice", type: "number", validation: { required: true, min: 1} },
                                         Discontinued: { field: "Discontinued", type: "boolean" },
@@ -86,7 +86,7 @@
                         pageable: true,
                         height: 400,
                         toolbar: ["create", "save", "cancel"],
-                        columns: ["ProductName", { field: "UnitPrice", format: "{0:c\\}" }, "UnitsInStock", "Discontinued"],
+                        columns: ["ProductName", { field: "UnitPrice", format: "{0:c\\}" }, "UnitsInStock", "Discontinued", { command: "destroy" }],
                         editable: true
                     });
                 });

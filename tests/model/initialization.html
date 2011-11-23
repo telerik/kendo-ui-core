@@ -179,19 +179,19 @@
                 ok($.isFunction(model.fields.foo.validation.bar));
             });
 
-            test("field can be set as readonly", function() {
+            test("field can be set as editable false", function() {
                 var MyModel = Model.define({
                     fields: {
                         foo: {
                             field: "foo",
-                            readonly: true
+                            editable: false
                         }
                     }
                 });
 
                 var model = new MyModel();
 
-                ok(model.fields.foo.readonly);
+                ok(!model.fields.foo.editable);
             });
 
             test("empty string default value is set for field of type string", function() {
