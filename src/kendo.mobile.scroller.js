@@ -25,7 +25,7 @@
         VELOCITY = 0.5,
         BOUNCE_STOP = 100,
         SCROLLBAR_OPACITY = 0.7,
-        BOUNCE_FRICTION = 0.4,
+        BOUNCE_FRICTION = 0.8,
         BOUNCE_DECELERATION = 3,
         BOUNCE_PARALLAX = 0.5,
         BOUNCE_SNAP = 0.7,
