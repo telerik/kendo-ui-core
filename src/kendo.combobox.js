@@ -203,12 +203,11 @@
                 },
                 blur: function() {
                     that._bluring = setTimeout(function() {
-                        if (!that._current) {
-                            that.text(that.text());
-                        }
-
                         clearTimeout(that._typing);
+
+                        that.text(that.text());
                         that._blur();
+
                         that.input.parent().removeClass(FOCUSED);
                     }, 100);
                 }
@@ -231,7 +230,7 @@
             delay: 200,
             dataTextField: "text",
             dataValueField: "value",
-            minLength: 0, //1,
+            minLength: 0,
             height: 200,
             highlightFirst: true,
             filter: "none",
@@ -241,6 +240,12 @@
         current: function(li) {
             var that = this,
                 current = that._current;
+
+            if (li === undefined) {
+                return current;
+            }
+
+            that._selected = null;
 
             if (current) {
                 current.removeClass(STATE_SELECTED);
@@ -325,8 +330,7 @@
                 length = data.length;
 
             ul[0].innerHTML = kendo.render(that.template, data);
-            that.list.height(200);
-            //that._height(length);
+            that._height(length);
 
             if (that.element.is(SELECT)) {
                 that._options(data);
