@@ -635,7 +635,7 @@
 
                     if (cell && !$.contains(cell[0], target) && cell[0] !== target && !$(target).closest(".k-animation-container").length) {
                         if (that.editable.end()) {
-                            that._closeCell();
+                            that.closeCell();
                         }
                     }
                 };
@@ -652,11 +652,11 @@
 
                         if (that.editable) {
                             if (that.editable.end()) {
-                                that._closeCell();
-                                that._editCell(td);
+                                that.closeCell();
+                                that.editCell(td);
                             }
                         } else {
-                            that._editCell(td);
+                            that.editCell(td);
                         }
 
                     });
@@ -679,7 +679,7 @@
             }
         },
 
-        _editCell: function(cell) {
+        editCell: function(cell) {
             var that = this,
                 column = that.columns[that.cellIndex(cell)],
                 model = that._modelForContainer(cell);
@@ -714,7 +714,7 @@
             }
         },
 
-        _closeCell: function() {
+        closeCell: function() {
             var that = this,
                 cell = that._editContainer.removeClass("k-edit-cell"),
                 id = cell.closest("tr").data("id"),
@@ -786,7 +786,7 @@
                     cell = that.table.find("tr[data-id=" + id + "] > td:not(.k-group-cell,.k-hierarchy-cell)").first();
 
                 if (cell.length) {
-                    that._editCell(cell);
+                    that.editCell(cell);
                 }
             }
         },
@@ -1062,7 +1062,7 @@
                                     handled = true;
                                 }
                             } else if (keys.ESC == key && current.hasClass("k-edit-cell")) {
-                                that._closeCell();
+                                that.closeCell();
                                 that.element.focus();
                             }
                         }
@@ -1087,7 +1087,7 @@
                 }
 
                 if (that.editable.end()) {
-                    that._closeCell();
+                    that.closeCell();
                 } else {
                     that.current(that._editContainer);
                     that._editContainer.find(":input:visible:first").focus();
@@ -1101,7 +1101,7 @@
 
             that.element.focus();
             if ((!isEdited && !next) || next) {
-                that._editCell(that.current());
+                that.editCell(that.current());
             }
         },
 

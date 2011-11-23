@@ -132,7 +132,7 @@
 
                 var cell = table.find("td:first").click();
 
-                table.data("kendoGrid")._closeCell();
+                table.data("kendoGrid").closeCell();
 
                 ok(!cell.parent().hasClass("k-grid-edit-row"));
             });
@@ -142,7 +142,7 @@
 
                 var cell = table.find("td:first").click();
 
-                table.data("kendoGrid")._closeCell();
+                table.data("kendoGrid").closeCell();
 
                 ok(!cell.hasClass("k-edit-cell"));
             });
@@ -152,7 +152,7 @@
 
                 var cell = table.find("td:first").click();
 
-                 table.data("kendoGrid")._closeCell();
+                 table.data("kendoGrid").closeCell();
 
                 equal(cell.html(), "bar");
             });
@@ -289,7 +289,7 @@
                 setup();
 
                 table.find("tr>td:first").click();
-                table.data("kendoGrid")._closeCell();
+                table.data("kendoGrid").closeCell();
 
                 ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
                 ok(!table.find("tr>td:first").data("kendoEditable"));
