@@ -23,7 +23,6 @@
         FRAMERATE = 1000 / 30,
         ACCELERATION = 20,
         VELOCITY = 0.5,
-        BOUNCE_LIMIT = 0,
         BOUNCE_STOP = 100,
         BOUNCE_DECELERATION = 0.1,
         SCROLLBAR_OPACITY = 0.7,
@@ -127,7 +126,19 @@
                 size,
                 limit = 0;
 
-            scrollOffset = -offset / zoomLevel;
+            scrollOffset = -(startLocation - location) / zoomLevel;
+
+            var transformedLocation = -scrollOffset;
+
+            if (transformedLocation > maxLimit) {
+                transformedLocation = maxLimit + (transformedLocation - maxLimit) * 0.5;
+            } else if (transformedLocation < minLimit) {
+                transformedLocation *= 0.5;
+            }
+
+            // scrollOffset = -transformedLocation;
+
+            updateCallback(name, -transformedLocation);
 
             if (offset > maxLimit) {
                 limit = offset - maxLimit;
@@ -145,7 +156,6 @@
                 .css(TRANSFORM, to3DProperty(horizontal ? offsetValue + "px,0" : "0," + offsetValue + PX))
                 .css(cssProperty, size + PX);
 
-            updateCallback(name, scrollOffset);
         }
 
         function wait(e) {
@@ -260,10 +270,9 @@
            while (animationIterator-- >= 0) {
                constraint = 0;
                velocity = decelerationVelocity * friction;
-               bounceLocation += decelerationVelocity;
 
                if (-scrollOffset < minLimit) {
-                   constraint = minLimit + scrollOffset;
+                   constraint = scrollOffset;
                } else if (-scrollOffset > maxLimit) {
                    constraint = maxLimit + scrollOffset;
                }
@@ -275,6 +284,7 @@
 
                decelerationVelocity = velocity;
                friction = limitValue(friction, 0, 1);
+               bounceLocation += decelerationVelocity;
                updateScrollOffset(bounceLocation);
 
                if (endKineticAnimation()) {
@@ -314,7 +324,7 @@
            enabled = scroll > 0;
            zoomLevel = support.zoomLevel();
            dip10 = 5 * zoomLevel;
-           minLimit = boxSize * BOUNCE_LIMIT;
+           minLimit = 0;
            maxLimit = scroll + minLimit;
            minStop = - BOUNCE_STOP;
            maxStop = scroll + BOUNCE_STOP;
