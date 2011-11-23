@@ -13,7 +13,7 @@
         <!-- script -->
         <script src="../../../../src/jquery.min.js"></script>
         <script src="../../../../src/kendo.core.js"></script>
-        <script src="../../../../src/kendo.validatable.js"></script>
+        <script src="../../../../src/kendo.validator.js"></script>
         <!-- script -->
     </head>
     <body>
@@ -42,7 +42,7 @@
                      </li>
                                        <li>
                         <label for="email">Email *</label>
-                        <input type="email" id="email" name="Email" placeholder="e.g. ryan@example.net"  required />
+                        <input type="email" id="email" name="Email" placeholder="e.g. myname@example.net"  required />
                     </li>
                     <li>
                         <label for="tel">Phone *</label>
@@ -79,7 +79,7 @@
                         separator: ", "
                     });
 
-                    var validator = $("fieldset").kendoValidatable().data("kendoValidatable"),
+                    var validator = $("fieldset").kendoValidator().data("kendoValidator"),
                         status = $(".status");
 
                     $("button").click(function() {

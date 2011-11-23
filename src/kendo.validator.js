@@ -35,14 +35,14 @@
         };
 
     /**
-     *  @name kendo.ui.Validatable.Description
+     *  @name kendo.ui.Validator.Description
      *
      *  @section
      *  <p>
-     *     Validatable component offers an easy way to do client-side form validation.
+     *     Validator offers an easy way to do client-side form validation.
      *     Built around the HTML5 form validation attributes it supports variety of built-in validation rules, but also provides a convenient way for setting custom rules handling.
      *  </p>
-     *  @exampleTitle <b>Validatable</b> initialization to validate input elements inside a container
+     *  @exampleTitle <b>Validator</b> initialization to validate input elements inside a container
      *  @example
      *  <div id="myform">
      *   <input type="text" name="firstName" required />
@@ -52,7 +52,7 @@
      *
      *  <script>
      *   $(document).ready(function(){
-     *       var validatable = $("#myform").kendoValidatable().data("kendoValidatable");
+     *       var validatable = $("#myform").kendoValidator().data("kendoValidator");
      *       $("#save").click(function() {
      *          if (validatable.validate()) {
      *              save();
@@ -61,14 +61,14 @@
      *   });
      *   </script>
      */
-    var Validatable = Widget.extend(/** @lends kendo.ui.Validatable.prototype */{ /**
+    var Validator = Widget.extend(/** @lends kendo.ui.Validator.prototype */{ /**
          * @constructs
          * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {Object} [rules] Set of validation rules. Those rules will extend the built-in ones.
          * _example
-         * $("#myform").kendoValidatable({
+         * $("#myform").kendoValidator({
          *      rules: {
          *          custom: function(input) {
          *              return input.is("[name=firstname]") && input.val() === "Tom"; // Only Tom will be a valid value for FirstName input
@@ -78,7 +78,7 @@
          * @option {Object} [messages] Set of messages (either strings or functions) which will be shown when given validation rule fails.
          *  By setting already existing key the appropriate built-in message will be overridden.
          * _example
-         * $("#myform").kendoValidatable({
+         * $("#myform").kendoValidator({
          *      rules: {
          *          custom: function(input) {
          *             //...
@@ -109,7 +109,7 @@
         },
 
         options: {
-            name: "Validatable",
+            name: "Validator",
             errorTemplate: "<span>${message}</span>",
             messages: {
                 required: "{0} is required",
@@ -297,5 +297,5 @@
         }
     });
 
-    kendo.ui.plugin(Validatable);
+    kendo.ui.plugin(Validator);
 })(jQuery);

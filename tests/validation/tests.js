@@ -1,6 +1,6 @@
 tests.push(
     {
-        page: "validation/validatable.html",
-        title: "validation"
+        page: "validation/validator.html",
+        title: "validator"
     }
 );
