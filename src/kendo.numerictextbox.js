@@ -122,7 +122,14 @@
                               keydown: proxy(that._keydown, that),
                               paste: proxy(that._paste, that),
                               blur: proxy(that._focusout, that)
-                          });
+                          })
+                          .closest("form")
+                          .bind("reset", function() {
+                               setTimeout(function() {
+                                    that.value(element[0].value);
+                               });
+                          })
+                          .end();
 
             that._wrapper();
             that._arrows();
