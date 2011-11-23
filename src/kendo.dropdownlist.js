@@ -118,9 +118,11 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Select = ui.Select,
+        ATTRIBUTE = "disabled",
         CHANGE = "change",
         SELECT = "select",
         FOCUSED = "k-state-focused",
+        DEFAULT = "k-state-default",
         DISABLED = "k-state-disabled",
         SELECTED = "k-state-selected",
         HOVER = "k-state-hover",
@@ -226,21 +228,29 @@
         */
         enable: function(enable) {
             var that = this,
-                wrapper = that.wrapper,
                 element = that.element,
-                ATTRIBUTE = "disabled";
+                wrapper = that.wrapper,
+                dropDownWrapper = that._inputWrapper;
 
             if (enable === false) {
-                wrapper
-                    .addClass(DISABLED)
-                    .unbind()
-                    .children(INPUTWRAPPER)
-                    .unbind(HOVEREVENTS);
                 element.attr(ATTRIBUTE, ATTRIBUTE);
+
+                wrapper.unbind();
+
+                dropDownWrapper
+                    .removeClass(DEFAULT)
+                    .addClass(DISABLED)
+                    .unbind(HOVEREVENTS)
+
             } else {
                 element.removeAttr(ATTRIBUTE, ATTRIBUTE);
-                wrapper
+
+                dropDownWrapper
+                    .addClass(DEFAULT)
                     .removeClass(DISABLED)
+                    .bind(HOVEREVENTS, that._toggleHover);
+
+                wrapper
                     .bind({
                         keydown: proxy(that._keydown, that),
                         keypress: proxy(that._keypress, that),
@@ -257,9 +267,7 @@
                                 that.span.parent().removeClass(FOCUSED);
                             }, 100);
                         }
-                    })
-                    .children(INPUTWRAPPER)
-                    .bind(HOVEREVENTS, that._toggleHover);
+                    });
             }
         },
 
@@ -529,9 +537,10 @@
 
                 span = wrapper.find(SELECTOR);
             }
-            that.span = span;
 
-            that.arrow = wrapper.find(".k-icon");
+            that.span = span;
+            that._arrow = wrapper.find(".k-icon");
+            that._inputWrapper = $(wrapper[0].firstChild)
         },
 
         _wrapper: function() {

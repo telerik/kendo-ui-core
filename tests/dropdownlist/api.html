@@ -192,7 +192,7 @@
 
                 dropdownlist.enable(false);
 
-                ok(dropdownlist.wrapper.hasClass('k-state-disabled'));
+                ok(dropdownlist._inputWrapper.hasClass('k-state-disabled'));
                 ok(dropdownlist.element.attr("disabled"));
             });
 
@@ -219,7 +219,7 @@
 
                 dropdownlist.enable();
 
-                ok(!dropdownlist.wrapper.hasClass('k-state-disabled'));
+                ok(!dropdownlist._inputWrapper.hasClass('k-state-disabled'));
                 ok(!dropdownlist.element.attr("disabled"));
             });
 
