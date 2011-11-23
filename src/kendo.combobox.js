@@ -276,7 +276,7 @@
                 input = that.input,
                 element = that.element,
                 wrapper = that._inputWrapper,
-                arrow = that._arrow;
+                arrow = that._arrow.parent();
 
             if (enable === false) {
                 wrapper
