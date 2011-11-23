@@ -295,7 +295,7 @@
                 ok(!table.find("tr>td:first").data("kendoEditable"));
             });
 
-            test("click on cell of a readonly field does not enter edit mode", function() {
+            test("click on cell of a editable=false field does not enter edit mode", function() {
                 setup({
                     dataSource: new DataSource({
                         schema: {
@@ -303,7 +303,7 @@
                                 id: "foo",
                                 fields: {
                                     name: "name",
-                                    foo: { field: "foo", readonly: true }
+                                    foo: { field: "foo", editable: false }
                                 }
                             }
                         },
@@ -398,7 +398,7 @@
                 equal(args.model, grid.dataSource.get("bar"));
             });
 
-            test("edit event is not raised for readonly columns", function() {
+            test("edit event is not raised for editable=false columns", function() {
                 var called = false,
                     grid = setup({
                         edit: function() {
@@ -409,7 +409,7 @@
                                 model: {
                                     id: "foo",
                                     fields: {
-                                        foo: { field: "foo", readonly: true  }
+                                        foo: { field: "foo", editable: false  }
                                     }
                                 }
                             },

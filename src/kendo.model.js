@@ -123,9 +123,9 @@
             return parse ? parse(value) : value;
         },
 
-        readOnly: function(field) {
+        editable: function(field) {
             field = (this.fields || {})[field];
-            return field ? !!field.readonly : false;
+            return field ? field.editable !== false : true;
         },
 
         set: function(fields, value) {
@@ -142,7 +142,7 @@
             }
 
             for (field in values) {
-                if(that.readOnly(field)) {
+                if(!that.editable(field)) {
                     continue;
                 }
 
@@ -228,7 +228,7 @@
                 type = field.type || "default",
                 value = null;
 
-            if (!field.useNull) {
+            if (!field.nullable) {
                 value = proto.defaultItem[name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
             }
 

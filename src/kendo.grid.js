@@ -683,7 +683,7 @@
                 column = that.columns[that.cellIndex(cell)],
                 model = that._modelForContainer(cell);
 
-            if (!model.readOnly(column.field)) {
+            if (model.editable(column.field)) {
                 that._editContainer = cell;
 
                 that.editable = cell.addClass("k-edit-cell")
