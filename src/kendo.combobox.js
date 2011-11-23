@@ -122,12 +122,16 @@
         CLICK = "click",
         ATTRIBUTE = "disabled",
         CHANGE = "change",
+        DEFAULT = "k-state-default",
         DISABLED = "k-state-disabled",
+        FOCUSED = "k-state-focused",
         SELECT = "select",
         STATE_SELECTED = "k-state-selected",
+        STATE_FILTER = "filter",
+        STATE_ACCEPT = "accept",
         HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
-        INPUTWRAPPER = ".k-dropdown-wrap",
+        NULL = null,
         proxy = $.proxy;
 
     var ComboBox = Select.extend(/** @lends kendo.ui.ComboBox.prototype */{
@@ -158,8 +162,10 @@
 
             options = that.options;
             element = that.element.focus(function() {
-                that.input.focus();
-            });
+                        that.input.focus();
+                      });
+
+            that._reset();
 
             that._wrapper();
 
@@ -198,22 +204,21 @@
             that.input.bind({
                 keydown: proxy(that._keydown, that),
                 focus: function() {
-                    that.input.parent().addClass("k-state-focused");
+                    that.input.parent().addClass(FOCUSED);
                 },
                 blur: function() {
                     that._bluring = setTimeout(function() {
-                        if (!that._current) {
-                            that.text(that.text());
-                        }
-
                         clearTimeout(that._typing);
+
+                        that.text(that.text());
                         that._blur();
-                        that.input.parent().removeClass("k-state-focused");
+
+                        that.input.parent().removeClass(FOCUSED);
                     }, 100);
                 }
             });
 
-            that.previous = that.value();
+            that._old = that.value();
 
             if (options.autoBind) {
                 that._select();
@@ -230,7 +235,7 @@
             delay: 200,
             dataTextField: "text",
             dataValueField: "value",
-            minLength: 1,
+            minLength: 0,
             height: 200,
             highlightFirst: true,
             filter: "none",
@@ -240,6 +245,12 @@
         current: function(li) {
             var that = this,
                 current = that._current;
+
+            if (li === undefined) {
+                return current;
+            }
+
+            that._selected = NULL;
 
             if (current) {
                 current.removeClass(STATE_SELECTED);
@@ -262,29 +273,27 @@
         */
         enable: function(enable) {
             var that = this,
-                element = that.element,
-                wrapper = that.wrapper,
                 input = that.input,
-                arrowWrapper = that.arrow.parent();
+                element = that.element,
+                wrapper = that._inputWrapper,
+                arrow = that._arrow;
 
             if (enable === false) {
                 wrapper
+                    .removeClass(DEFAULT)
                     .addClass(DISABLED)
-                    .children(INPUTWRAPPER)
                     .unbind(HOVEREVENTS);
 
-                input.attr(ATTRIBUTE, ATTRIBUTE);
-                element.attr(ATTRIBUTE, ATTRIBUTE);
-                arrowWrapper.unbind(CLICK);
+                input.add(element).attr(ATTRIBUTE, ATTRIBUTE);
+                arrow.unbind(CLICK);
             } else {
                 wrapper
                     .removeClass(DISABLED)
-                    .children(INPUTWRAPPER)
+                    .addClass(DEFAULT)
                     .bind(HOVEREVENTS, that._toggleHover);
 
-                input.removeAttr(ATTRIBUTE);
-                element.removeAttr(ATTRIBUTE);
-                arrowWrapper.bind(CLICK, function() { that.toggle() });
+                input.add(element).removeAttr(ATTRIBUTE);
+                arrow.bind(CLICK, function() { that.toggle() });
             }
         },
 
@@ -297,9 +306,13 @@
             var that = this,
                 selected = that._selected;
 
-            if (!that.ul[0].firstChild || (that._filtered && selected)) {
+            if (that.popup.visible()) {
+                return;
+            }
+
+            if (!that.ul[0].firstChild || that._state === STATE_ACCEPT) {
                 that._open = true;
-                that._filtered = false;
+                that._state = "";
                 that._select();
             } else {
                 that.popup.open();
@@ -315,7 +328,7 @@
                 options = that.options,
                 suggest = options.suggest,
                 height = options.height,
-                data = that.dataSource.view(),
+                data = that._data(),
                 length = data.length;
 
             ul[0].innerHTML = kendo.render(that.template, data);
@@ -365,7 +378,7 @@
                 text,
                 value,
                 idx = that._highlight(li),
-                data = that.dataSource.view();
+                data = that._data();
 
             if (idx !== -1) {
                 that._selected = that._current.addClass(STATE_SELECTED);
@@ -374,8 +387,8 @@
                 text = that._text(data);
                 value = that._value(data);
 
-                that.input[0].value = text;
-                that.element[0].value = value !== undefined ? value : text;
+                that._prev = that.input[0].value = text;
+                that._accessor(value != undefined ? value : text, idx);
             }
         },
 
@@ -397,14 +410,17 @@
 
             clearTimeout(that._typing);
 
-            if (!length) {
-                that.close();
-            } else if (length >= options.minLength) {
+            if (length >= options.minLength) {
                 if (filter === "none") {
                     that._filter(word);
                 } else {
-                    that._open = that._filtered = true;
-                    that.dataSource.filter( {field: options.dataTextField, operator: filter, value: word } );
+                    that._open = true;
+                    that._state = STATE_FILTER,
+                    that.dataSource.filter( {
+                        field: options.dataTextField,
+                        operator: filter,
+                        value: word
+                    });
                 }
             }
         },
@@ -455,7 +471,6 @@
 
                 if (!that._selected) {
                     that._custom(text);
-                    that.element.val(text);
                 }
 
                 input.value = text;
@@ -477,7 +492,7 @@
             var that = this;
             clearTimeout(that._bluring);
             that.input[0].focus();
-            setTimeout( function () { that._toggle(toggle); }, 0); // Fixes an annoying flickering issue in iOS.
+            setTimeout( function () { that._toggle(toggle); }); // Fixes an annoying flickering issue in iOS.
         },
 
         /**
@@ -504,37 +519,30 @@
                 if (idx > -1) {
                     that.select(idx);
                 } else {
-                    that.current(null);
+                    that.current(NULL);
                     that._custom(value);
-
-                    element.val(value);
                     that.text(value);
                 }
 
-                that.previous = element.val();
+                that._old = that._accessor();
             } else {
-                return element.val();
+                return that._accessor();
             }
         },
 
         _accept: function(li) {
-            var that = this,
-                previous;
-
-            if (li) {
-                setTimeout( function () { that._focus(li); }, 0);
-            } else {
-                previous = that.previous;
-                that.value(that.text());
-                that.previous = previous;
-                that._change();
-            }
-        },
-
-        _clear: function() {
             var that = this;
-            if (!that.text()) {
-                that.current(null);
+
+            if (li && that.popup.visible()) {
+
+                if (that._state === STATE_FILTER) {
+                    that._state = STATE_ACCEPT;
+                }
+
+                setTimeout( function () { that._focus(li); });
+            } else {
+                that.text(that.text());
+                that._change();
             }
         },
 
@@ -549,6 +557,9 @@
                     element.append(custom);
                 }
                 custom.text(value);
+                custom[0].selected = true;
+            } else {
+                element.val(value);
             }
         },
 
@@ -560,7 +571,12 @@
                 predicate = function (dataItem) {
                     var text = that._text(dataItem);
                     if (text !== undefined) {
-                        return (text + "").toLowerCase().indexOf(word) === 0;
+                        text = text + "";
+                        if (text !== "" && word === "") {
+                            return false;
+                        }
+
+                        return text.toLowerCase().indexOf(word) === 0;
                     }
                 };
 
@@ -583,21 +599,26 @@
         },
 
         _highlight: function(li) {
-            var that = this;
+            var that = this, idx;
 
             if (li == undefined) {
                 return -1;
             }
 
-            that.current(null);
-
             li = that._get(li);
+            idx = List.inArray(li[0], that.ul[0]);
 
-            if (li[0] && !li.hasClass("k-state-focused")) {
-                that.current(li);
+            if (idx == -1) {
+                if (that.options.highlightFirst && !that.text()) {
+                    li = $(that.ul[0].firstChild);
+                } else {
+                    li = NULL;
+                }
             }
 
-            return List.inArray(li[0], that.ul[0]);
+            that.current(li);
+
+            return idx;
         },
 
         _input: function() {
@@ -626,8 +647,8 @@
                  .show();
 
             that._focused = that.input = input;
-
-            that.arrow = wrapper.find(".k-icon");
+            that._arrow = wrapper.find(".k-icon");
+            that._inputWrapper = $(wrapper[0].firstChild)
         },
 
         _keydown: function(e) {
@@ -635,11 +656,14 @@
 
             if (kendo.keys.TAB === e.keyCode) {
                 that.text(that.input.val());
-            } else if (!that._move(e)) {
-                that._search();
-            }
 
-            setTimeout(proxy(that._clear, that));
+                if (that._state === STATE_FILTER && that._selected) {
+                    that._state = STATE_ACCEPT;
+                }
+
+            } else if (!that._move(e)) {
+               that._search();
+            }
         },
 
         _search: function() {
@@ -648,8 +672,8 @@
 
             that._typing = setTimeout(function() {
                 var value = that.text();
-                if (that._prevText !== value) {
-                    that._prevText = value;
+                if (that._prev !== value) {
+                    that._prev = value;
                     that.search(value);
                 }
             }, that.options.delay);
@@ -666,7 +690,7 @@
                         that.select(that.options.index);
                     }
 
-                    that.previous = that.value();
+                    that._old = that.value();
                     dataSource.unbind(CHANGE, handler);
                 };
 

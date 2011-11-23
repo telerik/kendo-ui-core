@@ -56,7 +56,7 @@
                     }
                 });
 
-                autocomplete.previous = "foo";
+                autocomplete._old = "foo";
                 autocomplete.value("bar");
                 autocomplete._change();
                 ok(changeWasCalled);
@@ -80,18 +80,18 @@
                     }
                 });
 
-                autocomplete.previous = "foo";
+                autocomplete._old = "foo";
                 autocomplete.value("foo");
                 autocomplete._change();
                 ok(!changeWasCalled);
             });
 
-            test("previous is initialzed on focus", function() {
+            test("_old is initialzed on focus", function() {
                 var autocomplete = new AutoComplete(input, {
                 });
 
                 input.val("foo").focus();
-                equal(autocomplete.previous, "foo");
+                equal(autocomplete._old, "foo");
             });
 
             test("select does not raise the change event", function() {

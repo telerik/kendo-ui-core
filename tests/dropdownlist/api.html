@@ -42,7 +42,7 @@
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
                 equal(dropdownlist.value(), 2);
                 equal(dropdownlist.text(), 2);
-                equal(dropdownlist.previous, 2);
+                equal(dropdownlist._old, 2);
            });
 
            test("value method should select first if no such value", function() {
@@ -54,7 +54,7 @@
                 ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
                 equal(dropdownlist.value(), "1");
                 equal(dropdownlist.text(), "foo");
-                equal(dropdownlist.previous, 1);
+                equal(dropdownlist._old, 1);
            });
 
             test("value method should select item with 0 value", function() {
@@ -65,8 +65,28 @@
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
                 equal(dropdownlist.value(), "0");
                 equal(dropdownlist.text(), 2);
-                equal(dropdownlist.previous, 0);
+                equal(dropdownlist._old, 0);
            });
+
+           test("value(value) should call _accessor", function() {
+                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                stub(dropdownlist, "_accessor");
+
+                dropdownlist.value(2);
+
+                equal(dropdownlist.calls("_accessor"), 2); //call select and set _old value
+            });
+
+            test("value() should call _accessor", function() {
+                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                stub(dropdownlist, "_accessor");
+
+                dropdownlist.value();
+
+                equal(dropdownlist.calls("_accessor"), 1);
+            });
 
            test("select should select item by predicate", function() {
                 var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
@@ -78,7 +98,7 @@
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
                 equal(dropdownlist.value(), "2");
                 equal(dropdownlist.text(), "2");
-                equal(dropdownlist.previous, 1);
+                equal(dropdownlist._old, 1);
             });
 
             test("select item with index -1 should not select anything", function() {
@@ -90,6 +110,16 @@
 
                 equal(dropdownlist.value(), "1");
                 equal(dropdownlist.text(), "foo");
+            });
+
+            test("select should call _accessor", function() {
+                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                stub(dropdownlist, "_accessor");
+
+                dropdownlist.select(1);
+
+                equal(dropdownlist.calls("_accessor"), 1);
             });
 
             asyncTest("open should open popup", function () {
@@ -162,7 +192,7 @@
 
                 dropdownlist.enable(false);
 
-                ok(dropdownlist.wrapper.hasClass('k-state-disabled'));
+                ok(dropdownlist._inputWrapper.hasClass('k-state-disabled'));
                 ok(dropdownlist.element.attr("disabled"));
             });
 
@@ -189,8 +219,40 @@
 
                 dropdownlist.enable();
 
-                ok(!dropdownlist.wrapper.hasClass('k-state-disabled'));
+                ok(!dropdownlist._inputWrapper.hasClass('k-state-disabled'));
                 ok(!dropdownlist.element.attr("disabled"));
+            });
+
+            test("_accessor should return value of the INPUT", function() {
+                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                equal(dropdownlist.value(), input.val());
+            });
+
+            test("_accessor should set value of the INPUT", function() {
+                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                dropdownlist.value(2);
+
+                equal(dropdownlist.value(), input.val());
+                equal(dropdownlist.current().index(), 1);
+            });
+
+            test("_accessor should return value of the SELECT", function() {
+                var select = $("<select><option>Chai</option><option selected='selected'>Bar</option></select>");
+                var dropdownlist = new DropDownList(select);
+
+                equal(dropdownlist.value(), "Bar");
+                equal(select[0].selectedIndex, 1);
+            });
+
+            test("_accessor should set value of the SELECT", function() {
+                var select = $("<select><option>Chai</option><option>Bar</option></select>");
+                var dropdownlist = new DropDownList(select);
+
+                dropdownlist.value("Bar");
+
+                equal(select[0].selectedIndex, 1);
             });
 
       </script>

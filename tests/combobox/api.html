@@ -19,6 +19,10 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+
+            QUnit.config.reorder = false;
+            QUnit.config.timeOut = 500;
+
             var ComboBox = kendo.ui.ComboBox,
             data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
             SELECTED = "k-state-selected",
@@ -34,6 +38,28 @@
                 }
             });
 
+            test("open() method should open popup {autobind: true}", function() {
+                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+
+                combobox.open();
+
+                ok(combobox.popup.visible());
+            });
+
+            asyncTest("open() method should bind and open popup {autobind: false}", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
+                    autoBind: false
+                });
+
+                combobox.open();
+
+                setTimeout(function() {
+                    ok(combobox.popup.visible());
+                    start();
+                }, 200);
+            });
+
             test("value method should select item if exists", function() {
                 var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
                 combobox.value("2");
@@ -41,7 +67,7 @@
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
                 equal(combobox.value(), "2");
                 equal(combobox.text(), "2");
-                equal(combobox.previous, "2");
+                equal(combobox._old, "2");
             });
 
             test("value method should select first if no such value", function() {
@@ -54,7 +80,7 @@
                 ok(!combobox._current);
                 equal(combobox.value(), "");
                 equal(combobox.text(), "");
-                equal(combobox.previous, "");
+                equal(combobox._old, "");
             });
 
             test("should select jquery object", function() {
@@ -80,7 +106,7 @@
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
                 equal(combobox.value(), "0");
                 equal(combobox.text(), 2);
-                equal(combobox.previous, 0);
+                equal(combobox._old, 0);
             });
 
             test("select item with index -1 should not select anything", function() {
@@ -159,7 +185,7 @@
                 combobox.value("custom value");
 
                 equal(select.val(), "custom value");
-                equal(combobox.previous, "custom value");
+                equal(combobox._old, "custom value");
             });
 
             test("text method should select item if exists", function() {
@@ -169,7 +195,7 @@
                 ok(combobox.ul.children().eq(0).hasClass(SELECTED));
                 equal(combobox.value(), "1");
                 equal(combobox.text(), "foo");
-                equal(combobox.previous, "");
+                equal(combobox._old, "");
             });
 
             test("text should set custom value", function() {
@@ -183,7 +209,7 @@
                 ok(!combobox._selected);
                 equal(combobox.value(), "custom");
                 equal(combobox.text(), "custom");
-                equal(combobox.previous, "");
+                equal(combobox._old, "");
             });
 
             test('enable(false) should disable combobox', function() {
@@ -191,7 +217,7 @@
 
                 combobox.enable(false);
 
-                ok(combobox.wrapper.hasClass('k-state-disabled'));
+                ok(combobox._inputWrapper.hasClass('k-state-disabled'));
                 ok(combobox.input.attr("disabled"));
                 ok(combobox.element.attr("disabled"));
             });
@@ -205,7 +231,7 @@
 
                 combobox.enable(false);
 
-                combobox.arrow.click();
+                combobox._arrow.click();
 
                 ok(!called);
 
@@ -220,7 +246,7 @@
 
                 combobox.enable();
 
-                ok(!combobox.wrapper.hasClass('k-state-disabled'));
+                ok(!combobox._inputWrapper.hasClass('k-state-disabled'));
                 ok(!combobox.element.attr("disabled"));
                 ok(!combobox.input.attr("disabled"));
             });

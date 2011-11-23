@@ -284,7 +284,7 @@
            test("disabled input rendered with wrapper.k-state-disabled", function() {
                input.attr("disabled", "disabled").kendoDropDownList();
 
-               var wrapper = input.data("kendoDropDownList").wrapper;
+               var wrapper = input.data("kendoDropDownList")._inputWrapper;
 
                ok(wrapper.hasClass("k-state-disabled"));
            });
@@ -373,6 +373,42 @@
 
                equal(dropdownlist.list.height(), 50);
            });
+
+           test("optionLabel should create empty item", function() {
+               var data = [{text: 1, value: 1}, {text:2, value:2}],
+               dropdownlist = new DropDownList(input, {
+                   dataSource: data,
+                   optionLabel: "Select..."
+               });
+
+               equal(dropdownlist._data()[0].text, "Select...");
+               equal(dropdownlist._data()[0].value, "");
+           });
+
+           test("should not set id to the popup if the input does not have", function() {
+               input.removeAttr("id");
+               dropdownlist = new DropDownList(input);
+               ok(!dropdownlist.list.attr("id"));
+           });
+
+           asyncTest("form reset support", function() {
+                input.attr("value", "1");
+
+                var form = $("<form/>").appendTo(document).append(input),
+                    combobox = new DropDownList(input, {
+                         dataSource: [{text: 1, value: 1}, {text:2, value:2}]
+                    });
+
+                combobox.select(1);
+
+                form[0].reset();
+
+                setTimeout(function() {
+                    equal(combobox.element.val(), "1");
+                    equal(combobox.span.text(), "1");
+                    start();
+                }, 200);
+            });
 
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
