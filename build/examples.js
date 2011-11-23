@@ -20,15 +20,18 @@ var VERSION = kendoBuild.generateVersion(),
     STAGING_SHARED_ROOT = "#= parentFolder(depth) #/shared",
     STAGING_SHARED_SCRIPTS = template(STAGING_SHARED_ROOT + "/js"),
     STAGING_SHARED_STYLES = template(STAGING_SHARED_ROOT + "/styles"),
+    STAGING_SUITE_SCRIPTS = template("#= parentFolder(depth - 1) #/js"),
     LIVE_SCRIPTS = template(CDN_URL + "/js"),
     LIVE_STYLES = template(CDN_URL + "/styles"),
     LIVE_SHARED_ROOT = CDN_URL + "/shared",
     LIVE_SHARED_SCRIPTS = template(LIVE_SHARED_ROOT + "/js"),
     LIVE_SHARED_STYLES = template(LIVE_SHARED_ROOT + "/styles"),
+    LIVE_SUITE_SCRIPTS = template(CDN_URL + "/#= suiteName #/js"),
     SOURCE_SCRIPTS_MARKER = /SOURCE_SCRIPTS/g,
     SOURCE_STYLES_MARKER = /SOURCE_STYLES/g,
     SHARED_SCRIPTS_MARKER = /SHARED_SCRIPTS/g,
     SHARED_STYLES_MARKER = /SHARED_STYLES/g,
+    SUITE_SCRIPTS_MARKER = /SUITE_SCRIPTS/g,
 
     examplesLocation = "demos/examples",
     outputPath = "live",
@@ -36,7 +39,7 @@ var VERSION = kendoBuild.generateVersion(),
     DEBUG = false,
     jQueryCDN = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js",
 
-    rowSeparator = /[\r\n]+\s+/,
+    rowSeparator = /[\r\n]+/,
     isLive = /<script[^>]*?>\s*var\slive\s*=\s*false;*\s*<\/script>\s+/im,
     baseRegions = {},
     regionRegex = {
@@ -68,41 +71,29 @@ function getRegionRegex(regionName) {
     return new RegExp("\\s*<!--\\s*" + regionName + "\\s*-->(([\\r\\n]|.)*?)<!--\\s*" + regionName + "\\s*-->", "im");
 }
 
-function removeDuplicateResources(resource, target) {
-    var tag = resource
-        .replace(/(\.\.\/)+/g, "[\.\/]*")
-        .replace(/\//g, "\\/")
-        .replace(/\./g, "\\.")
-        .replace(/\s+/g, "\\s*");
-
-    var rex = new RegExp("[\\r\\n]+\\s+" + tag, "i");
-
-    return target.replace(rex, "");
-}
-
-function mergeResourceRegion(exampleSource, regionType, deployConfig, depth) {
+function mergeResourceRegion(info, exampleSource, regionType, deployConfig) {
     var result,
-        baseResources = baseRegions[regionType].html,
+        pathInfo = {
+            depth: info.depth,
+            suiteName: info.suite,
+            parentFolder: parentFolder
+        },
+        baseResources = resolveResources(baseRegions[regionType].html, deployConfig, pathInfo),
+        baseResourcesLines = baseResources.split(rowSeparator),
         resourceMatch = regionRegex[regionType].exec(exampleSource),
-        exampleResources = resourceMatch ? resourceMatch[1].trimLeft() : "",
-        pathInfo = { depth: depth, parentFolder: parentFolder };
+        exampleResources;
 
-    if (exampleResources) {
-        exampleResources.trim().split(rowSeparator).forEach(function(item) {
-            baseResources = removeDuplicateResources(item, baseResources);
+    if (resourceMatch) {
+        exampleResources = resolveResources(resourceMatch[1].trimLeft(), deployConfig, pathInfo);
+        exampleResources.split(rowSeparator).forEach(function(line) {
+            baseResourcesLines = baseResourcesLines.filter(function(baseLine) {
+                return baseLine.trim() !== line.trim();
+            });
         });
 
+        baseResources = baseResourcesLines.join("\r\n");
+
         result = exampleResources + baseResources;
-
-        result = result.replace(/[\.\/]+shared\/js(.*?)\"/g, "SHARED_SCRIPTS$1\"");
-        result = result.replace(/[\.\/]+shared\/styles(.*?)\"/g, "SHARED_STYLES$1\"");
-        result = result.replace(/[\.\/]+src(.*?)\"/g, "SOURCE_SCRIPTS$1\"");
-        result = result.replace(/[\.\/]+styles(.*?)\"/g, "SOURCE_STYLES$1\"");
-
-        result = result.replace(SOURCE_SCRIPTS_MARKER, deployConfig.scripts(pathInfo));
-        result = result.replace(SOURCE_STYLES_MARKER, deployConfig.styles(pathInfo));
-        result = result.replace(SHARED_SCRIPTS_MARKER, deployConfig.sharedScripts(pathInfo));
-        result = result.replace(SHARED_STYLES_MARKER, deployConfig.sharedStyles(pathInfo));
 
         result = result.replace(/.*?(examples-offline\.css|console\.js|people\.js|prettify\.js).*/g, "");
 
@@ -115,6 +106,28 @@ function mergeResourceRegion(exampleSource, regionType, deployConfig, depth) {
     return result;
 }
 
+function resolveResources(text, deployConfig, pathInfo) {
+    text = replaceReference(text, "/shared/js", SHARED_SCRIPTS_MARKER.source);
+    text = replaceReference(text, "/shared/styles", SHARED_STYLES_MARKER.source);
+    text = replaceReference(text, "/js", SUITE_SCRIPTS_MARKER.source);
+    text = replaceReference(text, "/src", SOURCE_SCRIPTS_MARKER.source);
+    text = replaceReference(text, "/styles", SOURCE_STYLES_MARKER.source);
+
+    text = text.replace(SOURCE_SCRIPTS_MARKER, deployConfig.scripts(pathInfo));
+    text = text.replace(SOURCE_STYLES_MARKER, deployConfig.styles(pathInfo));
+    text = text.replace(SHARED_SCRIPTS_MARKER, deployConfig.sharedScripts(pathInfo));
+    text = text.replace(SHARED_STYLES_MARKER, deployConfig.sharedStyles(pathInfo));
+    text = text.replace(SUITE_SCRIPTS_MARKER, deployConfig.suiteScripts(pathInfo));
+
+    return text;
+}
+
+function replaceReference(text, path, newPath) {
+    var regex = new RegExp("[\.\/]+" + path.replace(/\//g, "\\/") + "(.*?)\"", "g");
+
+    return text.replace(regex, newPath + "$1\"");
+}
+
 function updateBaseLocation(html, base) {
     return html.replace(/href="([^"]*)"/g, function(match, url) {
         if (url.indexOf("http://") > -1) {
@@ -124,25 +137,25 @@ function updateBaseLocation(html, base) {
     });
 }
 
-function componentFromFilename(file) {
-    var parts = file.substring(outputPath.length).split("/"),
-        candidate = parts[0] || parts[1];
+function exampleInfo(fileName, rootPath) {
+    var parts = fileName.substring(rootPath.length + 1).split("/"),
+        suite = parts[0],
+        component = parts[1];
 
-    var exceptions = [
-        "animation",
-        "integration",
-        "overview"
-    ];
-
-    if (parts.length > 2 && exceptions.indexOf(candidate) == -1) {
-        return candidate;
+    if (component == "overview" || component == "integration" ||
+        suite == "mobile" || suite == "themebuilder") {
+        component = "";
     }
+
+    return {
+        fileName: fileName,
+        suite: suite,
+        depth: exampleDepth(fileName, rootPath),
+        component: component
+    };
 }
 
-function importComponentHelp(exampleHTML, component) {
-    if (!component)
-        return exampleHTML;
-
+function importComponentHelp(exampleSource, component) {
     var helpFiles = {
         "animation": "kendo.Animation",
         "autocomplete": "kendo.ui.AutoComplete",
@@ -155,6 +168,7 @@ function importComponentHelp(exampleHTML, component) {
         "panelbar": "kendo.ui.PanelBar",
         "rangeslider": "kendo.ui.RangeSlider",
         "tabstrip": "kendo.ui.TabStrip",
+        "timepicker": "kendo.ui.TimePicker",
         "templates": "kendo.Template",
         "treeview": "kendo.ui.TreeView"
     };
@@ -251,16 +265,16 @@ function importComponentHelp(exampleHTML, component) {
     // could be improved if example has appropriate markers, or better yet, if loaded through AJAX (and not importing at all)
     if (description) {
         description = fixNewLines(description);
-        exampleHTML = exampleHTML.replace(regionRegex.description, "<!-- description -->" + description + "<!-- description -->");
+        exampleSource = exampleSource.replace(regionRegex.description, "<!-- description -->" + description + "<!-- description -->");
     }
 
     tabs = fixNewLines(tabs);
     data = fixNewLines(data);
 
-    exampleHTML = exampleHTML.replace(regionRegex.helpTabs, "<!-- help-tabs -->" + tabs + "<!-- help-tabs -->");
-    exampleHTML = exampleHTML.replace(regionRegex.helpData, "<!-- help-data -->" + data + "<!-- help-data -->");
+    exampleSource = exampleSource.replace(regionRegex.helpTabs, "<!-- help-tabs -->" + tabs + "<!-- help-tabs -->");
+    exampleSource = exampleSource.replace(regionRegex.helpData, "<!-- help-data -->" + data + "<!-- help-data -->");
 
-    return exampleHTML;
+    return exampleSource;
 }
 
 function fixNewLines(text) {
@@ -275,34 +289,37 @@ function exampleDepth(fileName, root) {
 }
 
 function processExample(fileName, deployConfig) {
-    var exampleHTML = kendoBuild.readText(fileName),
-        depth = exampleDepth(fileName, deployConfig.root),
-        base = fileName === outputPath + "/index.html" ? "" : "../../",
-        scriptRegion = mergeResourceRegion(exampleHTML, "script", deployConfig, depth),
-        cssRegion = mergeResourceRegion(exampleHTML, "css", deployConfig, depth),
-        component = componentFromFilename(fileName);
+    var info = exampleInfo(fileName, deployConfig.root),
+        depth = info.depth,
+        component = info.component,
+        exampleSource = kendoBuild.readText(fileName),
+        base = fileName === outputPath + "/index.html" ? "" : parentFolder(depth) + "/",
+        scriptRegion = mergeResourceRegion(info, exampleSource, "script", deployConfig),
+        cssRegion = mergeResourceRegion(info, exampleSource, "css", deployConfig);
 
-    exampleHTML = baseRegions.meta.exec(exampleHTML, baseRegions.meta.html);
+    exampleSource = baseRegions.meta.exec(exampleSource, baseRegions.meta.html);
 
-    exampleHTML = baseRegions.script.exec(exampleHTML, scriptRegion);
+    exampleSource = baseRegions.script.exec(exampleSource, scriptRegion);
 
-    exampleHTML = baseRegions.css.exec(exampleHTML, cssRegion);
+    exampleSource = baseRegions.css.exec(exampleSource, cssRegion);
 
-    exampleHTML = baseRegions.nav.exec(exampleHTML, updateBaseLocation(baseRegions.nav.html, base));
+    exampleSource = baseRegions.nav.exec(exampleSource, updateBaseLocation(baseRegions.nav.html, base));
 
-    var description = regionRegex.description.exec(exampleHTML);
-    exampleHTML = exampleHTML.replace(regionRegex.description, '');
+    var description = regionRegex.description.exec(exampleSource);
+    exampleSource = exampleSource.replace(regionRegex.description, '');
 
     if (description) {
-        exampleHTML = baseRegions.tools.exec(exampleHTML, baseRegions.tools.html.replace(regionRegex.description, description[0]));
+        exampleSource = baseRegions.tools.exec(exampleSource, baseRegions.tools.html.replace(regionRegex.description, description[0]));
     } else {
         // overview has no description
-        exampleHTML = baseRegions.tools.exec(exampleHTML);
+        exampleSource = baseRegions.tools.exec(exampleSource);
     }
 
-    exampleHTML = importComponentHelp(exampleHTML, component);
+    if (component) {
+        exampleSource = importComponentHelp(exampleSource, component);
+    }
 
-    kendoBuild.writeText(fileName, exampleHTML);
+    kendoBuild.writeText(fileName, exampleSource);
 }
 
 function copyResources(source, destination, processCallback, filterRegExp) {
@@ -363,8 +380,13 @@ function build(deployConfig) {
 
     console.log("copying resources...");
     kendoBuild.copyDirSyncRecursive(examplesLocation, outputPath);
+
     fs.unlinkSync(outputPath + "/template.html");
-    fs.writeFileSync(outputPath + "/web.config", fs.readFileSync("web.config", "utf8"), "utf8");
+
+    kendoBuild.writeText(
+        path.join(outputPath, "web.config"),
+        kendoBuild.readText(path.join(examplesLocation, "web.config"))
+    );
 
     docs.build();
 
@@ -381,6 +403,7 @@ function buildStaging() {
         styles: STAGING_STYLES,
         sharedScripts: STAGING_SHARED_SCRIPTS,
         sharedStyles: STAGING_SHARED_STYLES,
+        suiteScripts: STAGING_SUITE_SCRIPTS,
         useMinified: false
     });
 }
@@ -392,6 +415,7 @@ function buildLive(deployRoot) {
         styles: LIVE_STYLES,
         sharedScripts: LIVE_SHARED_SCRIPTS,
         sharedStyles: LIVE_SHARED_STYLES,
+        suiteScripts: LIVE_SUITE_SCRIPTS,
         useMinified: true
     });
 }

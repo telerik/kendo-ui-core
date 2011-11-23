@@ -28,7 +28,7 @@ html
 }
 
 .skinSelector .k-arrow-down,
-#nav .k-sprite,
+#navWrap .k-sprite,
 #codeStrip .k-link,
 .configuration .configHead,
 .configuration .infoHead,
@@ -47,7 +47,7 @@ html
     background-color: transparent;
 }
 
-.k-widget, #nav ul
+.k-widget, #navWrap ul
 {
     outline: none;
     -webkit-touch-callout: none;
@@ -533,33 +533,33 @@ a.bigButton
 
 /*left navigation*/
 
-#nav
+#navWrap .k-panelbar
 {
     padding-top: 22px;
 }
 
-#nav,
-#nav .k-group,
-#nav .k-item
+#navWrap .k-panelbar,
+#navWrap .k-group,
+#navWrap .k-item
 {
     border: 0;
     background: none;
     overflow: hidden;
 }
 
-#nav .k-group
+#navWrap .k-group
 {
     padding-top: 5px;
 }
 
-#nav .k-item
+#navWrap .k-item
 {
     padding-bottom: 2px;
     padding-left: 8px;
     padding-right: 8px;
 }
 
-#nav .k-link
+#navWrap .k-link
 {
     font: 16px bold Arial, Helvetica, sans-serif;
     color: #2175bd;
@@ -570,16 +570,16 @@ a.bigButton
     padding: 1px 1px 1px 11px;
 }
 
-#nav li li .k-link
+#navWrap li li .k-link
 {
     font-size: 12px;
     line-height: 18px;
     padding: 1px 1px 1px 21px;
 }
 
-#nav .k-state-selected,
-#nav .k-state-highlighted>.k-link,
-#nav .chosen
+#navWrap .k-state-selected,
+#navWrap .k-state-highlighted>.k-link,
+#navWrap .chosen
 {
     color: #2e2e2e;
     border: 1px solid #d0d0d0;
@@ -598,9 +598,9 @@ a.bigButton
     text-shadow: 0 1px 1px #FFF;
 }
 
-#nav li li .k-state-selected,
-#nav li li .k-state-highlighted>.k-link,
-#nav li li .chosen
+#navWrap li li .k-state-selected,
+#navWrap li li .k-state-highlighted>.k-link,
+#navWrap li li .chosen
 {
     text-shadow: none;
     border: 0;
@@ -608,13 +608,13 @@ a.bigButton
     filter: none;
 }
 
-#nav .k-icon
+#navWrap .k-icon
 {
     display: none;
 }
 
-#nav .k-image,
-#nav .k-sprite
+#navWrap .k-image,
+#navWrap .k-sprite
 {
     margin-top: 10px;
 }
