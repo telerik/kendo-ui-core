@@ -617,31 +617,6 @@
                 ok(anchor.children().hasClass("k-state-active"));
             });
 
-            test("apply aria-owns if anchor has id", function() {
-                div.kendoPopup({
-                    anchor: $("<input id='test1' />")
-                });
-
-                equal(div.attr("aria-owns"), "test1");
-            });
-
-            test("if clicked element has anchor in the popup, do not close parent", function() {
-                var popup = div.kendoPopup({
-                    anchor: anchor
-                }).data("kendoPopup");
-
-                div.append("<input id='test1'/>");
-
-                popup.open();
-                stub(popup, "close");
-
-                popup._mousedown({
-                    target: $("<div class='k-popup' aria-owns='test1'>popup</div>")
-                });
-
-                equal(popup.calls("close"), 0);
-            });
-
         </script>
     </body>
 </html>
