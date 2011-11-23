@@ -1167,36 +1167,6 @@
     }
 })();
 
-    function throttle(delay, callback) {
-        var timeoutId,
-            lastCall = 0,
-            omitEnding = arguments[2] || false;
-
-        return function () {
-            var that = this,
-                timeSpan = +new Date() - lastCall,
-                args = arguments;
-
-            function execute() {
-                lastCall = +new Date();
-                callback.apply(that, args);
-            }
-
-            function clear() {
-                clearTimeout(timeoutId);
-                timeoutId = undefined;
-            }
-
-            timeoutId && clear();
-
-            if (timeSpan > delay) {
-                execute();
-            } else if (!omitEnding) {
-                timeoutId = setTimeout(execute, delay - timeSpan);
-            }
-        };
-    }
-
     function wrap(element) {
         var browser = $.browser;
 
@@ -1696,7 +1666,6 @@
         },
         support: support,
         animate: animate,
-        throttle: throttle,
         wrap: wrap,
         size: size,
         getOffset: getOffset,
