@@ -68,10 +68,10 @@
 
                 var links = ul.find("a");
                 equal(ul.find(".k-state-active").data("page"), undefined);
-                equal(links.eq(0).data("page"), "2");
-                equal(links.eq(1).data("page"), "3");
-                equal(links.eq(2).data("page"), "4");
-                equal(links.eq(3).data("page"), "5");
+                equal(links.eq(0).attr("data-kendo-page"), "2");
+                equal(links.eq(1).attr("data-kendo-page"), "3");
+                equal(links.eq(2).attr("data-kendo-page"), "4");
+                equal(links.eq(3).attr("data-kendo-page"), "5");
             });
 
             test("clear page number buttons on multiple datasource rebinds", function(){
@@ -143,7 +143,7 @@
 
                 dataSource.read();
                 equal(ul.find("a").add(ul.find(".k-state-active")).length, 4);
-                equal(ul.find("a:last").data("page"), "4");
+                equal(ul.find("a:last").attr("data-kendo-page"), "4");
             });
 
             test("show less button should be shown if page buttons are more than the threshold", function(){
@@ -151,7 +151,7 @@
 
                 dataSource.read();
                 equal(ul.find("a").add(ul.find(".k-state-active")).length, 3);
-                equal(ul.find("a:first").data("page"), "3");
+                equal(ul.find("a:first").attr("data-kendo-page"), "3");
             });
 
             test("clicking more button pages to next pages group", function() {

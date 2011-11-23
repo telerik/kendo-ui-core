@@ -21,8 +21,8 @@
 
         options: {
             name: "Pager",
-            selectTemplate: '<li><span class="k-state-active">#= text #</span></li>',
-            linkTemplate: '<li><a href="\\#" class="k-link" data-page="#= idx #">#= text #</a></li>',
+            selectTemplate: '<li><span class="k-state-active">#=text#</span></li>',
+            linkTemplate: '<li><a href="\\#" class="k-link" ' + kendo.attr("page") + '="#=idx#">#=text#</a></li>',
             buttonCount: 10
         },
 
@@ -61,7 +61,7 @@
         },
 
         _click: function(e) {
-            var page = $(e.currentTarget).data("page");
+            var page = $(e.currentTarget).attr(kendo.attr("page"));
             e.preventDefault();
 
             this.dataSource.page(page);
