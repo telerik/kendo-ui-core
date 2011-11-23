@@ -32,7 +32,7 @@ function build() {
         "src/kendo.tabstrip.js",
         "src/kendo.timepicker.js",
         "src/kendo.treeview.js",
-        "src/kendo.validatable.js",
+        "src/kendo.validator.js",
         "src/kendo.window.js",
         "src/kendo.upload.js",
         "src/chart/docs.js",
