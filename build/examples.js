@@ -71,18 +71,6 @@ function getRegionRegex(regionName) {
     return new RegExp("\\s*<!--\\s*" + regionName + "\\s*-->(([\\r\\n]|.)*?)<!--\\s*" + regionName + "\\s*-->", "im");
 }
 
-function removeDuplicateResources(resource, target) {
-    var tag = resource
-        .replace(/(\.\.\/)+/g, "[\.\/]*")
-        .replace(/\//g, "\\/")
-        .replace(/\./g, "\\.")
-        .replace(/\s+/g, "\\s*");
-
-    var rex = new RegExp("[\\r\\n]+\\s+" + tag, "i");
-
-    return target.replace(rex, "");
-}
-
 function mergeResourceRegion(info, exampleSource, regionType, deployConfig) {
     var result,
         pathInfo = {
