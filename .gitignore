@@ -36,3 +36,4 @@ themebuilder/src/kendo.black.css
 themebuilder/src/Black/
 themebuilder/src/textures/
 functional-tests/KendoDemosTests/bin
+demos/examples/shared/js/kendo.examples.js
