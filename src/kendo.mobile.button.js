@@ -30,7 +30,7 @@
 
         options: {
             name: "MobileButton",
-            style: "button",
+            style: "",
             selector: "[data-kendo-role=button]",
             enable: true
         },
@@ -43,11 +43,16 @@
 
         _wrap: function() {
             var that = this,
+                style = that.options.style,
                 element = that.element,
                 span;
 
-            span = element.addClass("km-" + that.options.style)
+            span = element.addClass("km-button")
                           .children("span");
+
+            if (style) {
+                element.addClass("km-" + style);
+            }
 
             if (!span[0]) {
                 span = element.wrapInner("<span/>").children("span");

@@ -41,8 +41,8 @@
 
             that.trigger(SELECT, {item: item});
 
+            that.element.children().removeClass(ACTIVE_STATE_CLASS);
             item.addClass(ACTIVE_STATE_CLASS);
-            oldItem.removeClass(ACTIVE_STATE_CLASS);
         },
 
         _buildButton: function() {
