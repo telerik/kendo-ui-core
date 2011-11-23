@@ -1691,7 +1691,8 @@
             HOME: 36,
             SPACEBAR: 32,
             PAGEUP: 33,
-            PAGEDOWN: 34
+            PAGEDOWN: 34,
+            F12: 123
         },
         support: support,
         animate: animate,
