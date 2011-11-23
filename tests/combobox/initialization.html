@@ -291,7 +291,7 @@
 
                var combobox = input.data("kendoComboBox");
 
-               ok(combobox.wrapper.hasClass("k-state-disabled"));
+               ok(combobox._inputWrapper.hasClass("k-state-disabled"));
                ok(combobox.input.prop("disabled"));
            });
 

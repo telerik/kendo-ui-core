@@ -122,6 +122,7 @@
         CLICK = "click",
         ATTRIBUTE = "disabled",
         CHANGE = "change",
+        DEFAULT = "k-state-default",
         DISABLED = "k-state-disabled",
         FOCUSED = "k-state-focused",
         SELECT = "select",
@@ -130,7 +131,6 @@
         STATE_ACCEPT = "accept",
         HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
-        INPUTWRAPPER = ".k-dropdown-wrap",
         NULL = null,
         proxy = $.proxy;
 
@@ -273,29 +273,27 @@
         */
         enable: function(enable) {
             var that = this,
-                element = that.element,
-                wrapper = that.wrapper,
                 input = that.input,
-                arrowWrapper = that.arrow.parent();
+                element = that.element,
+                wrapper = that._inputWrapper,
+                arrow = that._arrow;
 
             if (enable === false) {
                 wrapper
+                    .removeClass(DEFAULT)
                     .addClass(DISABLED)
-                    .children(INPUTWRAPPER)
                     .unbind(HOVEREVENTS);
 
-                input.attr(ATTRIBUTE, ATTRIBUTE);
-                element.attr(ATTRIBUTE, ATTRIBUTE);
-                arrowWrapper.unbind(CLICK);
+                input.add(element).attr(ATTRIBUTE, ATTRIBUTE);
+                arrow.unbind(CLICK);
             } else {
                 wrapper
                     .removeClass(DISABLED)
-                    .children(INPUTWRAPPER)
+                    .addClass(DEFAULT)
                     .bind(HOVEREVENTS, that._toggleHover);
 
-                input.removeAttr(ATTRIBUTE);
-                element.removeAttr(ATTRIBUTE);
-                arrowWrapper.bind(CLICK, function() { that.toggle() });
+                input.add(element).removeAttr(ATTRIBUTE);
+                arrow.bind(CLICK, function() { that.toggle() });
             }
         },
 
@@ -649,8 +647,8 @@
                  .show();
 
             that._focused = that.input = input;
-
-            that.arrow = wrapper.find(".k-icon");
+            that._arrow = wrapper.find(".k-icon");
+            that._inputWrapper = $(wrapper[0].firstChild)
         },
 
         _keydown: function(e) {

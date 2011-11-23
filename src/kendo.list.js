@@ -311,7 +311,7 @@
         _hideBusy: function () {
             var that = this;
             clearTimeout(that._busy);
-            that.arrow.removeClass(LOADING);
+            that._arrow.removeClass(LOADING);
         },
 
         _showBusy: function () {
@@ -322,7 +322,7 @@
             }
 
             that._busy = setTimeout(function () {
-                that.arrow.addClass(LOADING);
+                that._arrow.addClass(LOADING);
             }, 100);
         },
 

@@ -217,7 +217,7 @@
 
                 combobox.enable(false);
 
-                ok(combobox.wrapper.hasClass('k-state-disabled'));
+                ok(combobox._inputWrapper.hasClass('k-state-disabled'));
                 ok(combobox.input.attr("disabled"));
                 ok(combobox.element.attr("disabled"));
             });
@@ -231,7 +231,7 @@
 
                 combobox.enable(false);
 
-                combobox.arrow.click();
+                combobox._arrow.click();
 
                 ok(!called);
 
@@ -246,7 +246,7 @@
 
                 combobox.enable();
 
-                ok(!combobox.wrapper.hasClass('k-state-disabled'));
+                ok(!combobox._inputWrapper.hasClass('k-state-disabled'));
                 ok(!combobox.element.attr("disabled"));
                 ok(!combobox.input.attr("disabled"));
             });

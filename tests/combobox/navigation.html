@@ -26,7 +26,7 @@
                 keys = kendo.keys,
                 input;
 
-            QUnit.config.testTimeout = 500;
+            QUnit.config.testTimeout = 800;
             QUnit.config.reorder = false;
 
             $.fn.press = function(key) {
@@ -52,7 +52,7 @@
                 }
             });
 
-            asyncTest("click arrow should input", function() {
+            asyncTest("click _arrow should input", function() {
                 var focusWasCalled, combobox = new ComboBox(input, {
                     dataSource: data
                 });
@@ -62,7 +62,7 @@
                     start();
                 });
 
-                combobox.arrow.click();
+                combobox._arrow.click();
             });
 
             asyncTest("empty input should clear focused item", function() {
@@ -156,7 +156,7 @@
                 combobox.dataSource.read();
                 combobox.select(1);
 
-                combobox.arrow.click();
+                combobox._arrow.click();
 
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
             });
@@ -168,12 +168,12 @@
                 combobox.select(1);
                 combobox.select(0);
 
-                combobox.arrow.click();
+                combobox._arrow.click();
 
                 equal(combobox.ul.children("." + SELECTED).length, 1);
             });
 
-            test("press down arrow should focus next item and update text and value", function() {
+            test("press down _arrow should focus next item and update text and value", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
                 combobox.dataSource.read();
@@ -186,7 +186,7 @@
 
             });
 
-            test("press down arrow when last item is selected should not do anything", function() {
+            test("press down _arrow when last item is selected should not do anything", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
                 combobox.dataSource.read();
@@ -198,7 +198,7 @@
                 equal(combobox.value(), data[1].value);
             });
 
-            test("press up arrow should focus prev item and update text and value", function() {
+            test("press up _arrow should focus prev item and update text and value", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
                 combobox.dataSource.read();
@@ -212,7 +212,7 @@
 
             });
 
-            test("press up arrow when first item is selected should not do anything", function() {
+            test("press up _arrow when first item is selected should not do anything", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
                 combobox.dataSource.read();
