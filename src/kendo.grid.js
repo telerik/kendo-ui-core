@@ -1046,7 +1046,7 @@
                             dataSource.page(dataSource.page() - 1);
                             handled = true;
                         } else if (that.options.editable) {
-                            if (keys.ENTER == key) {
+                            if (keys.ENTER == key || keys.F12 == key) {
                                 that._handleEditing(current);
                                 handled = true;
                             } else if (keys.TAB == key) {
@@ -1060,6 +1060,9 @@
                                     that._handleEditing(current, cell);
                                     handled = true;
                                 }
+                            } else if (keys.ESC == key && current.hasClass("k-edit-cell")) {
+                                that._closeCell();
+                                that.element.focus();
                             }
                         }
 

@@ -203,6 +203,15 @@
                 ok(table.find("tr:nth(0)>td:last").hasClass("k-state-focused"));
             });
 
+            test("pressing escape key on edited cell exits edit mode", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER).press(kendo.keys.ESC);
+
+                ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr>td:first").hasClass("k-state-focused"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
