@@ -287,20 +287,21 @@ body
     background-color: #98a1ae;
 }
 
-.km-ios .km-button[data-kendo-style=back]
+.km-ios .km-back
 {
     margin-left: 9px;
 }
 
-.km-ios .km-button[data-kendo-style=back] *
+.km-ios .km-back *
 {
     position: relative;
     z-index: 1;
 }
 
-.km-ios .km-button[data-kendo-style=back]:before {
+.km-ios .km-back:before
+{
     content: " ";
-    background-image: linearGradient(left top, rgb(63,79,102), rgb(138,154,181) 6%, rgb(90,120,165) 50%, rgb(71,104,151) 50%, rgb(73,106,154));
+    background-image: linearGradient(left top, rgb(138,161,191), rgb(88,119,162) 50%, rgb(71,105,153) 50%, rgb(74,108,155));
     border-left: solid 1px #5F6C81;
     border-bottom: solid 1px #34517B;
     width: 21px;
@@ -315,15 +316,15 @@ body
     .box-sizing(border-box);
 }
 
-.km-ios :-moz-first-node~[data-kendo-style=back]:before
+.km-ios :-moz-first-node~.km-back:before
 {
     left: -20px;
     top: -1.3px;
 }
 
-.km-ios .km-button[data-kendo-style=back]:active:before {
+.km-ios .km-back:active:before {
     border-color: #376ECC #40506C;
-    background-image: linearGradient(left top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
+    background-image: linearGradient(left top, rgb(121,132,162), rgb(58,78,120) 50%, rgb(37,60,106) 50%, rgb(39,63,109));
 }
 
 .km-switch,

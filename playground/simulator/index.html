@@ -110,8 +110,10 @@
         .description .device
         {
             margin: 10px 0;
-            padding: 0 0 0 50px;
+            padding: 0 0 0 40px;
             font-size: 14px;
+            background: url("images/ipad.png") no-repeat;
+            background-size: auto 100%;
         }
 
         .description .model
@@ -212,11 +214,6 @@
             opacity: .3;
             margin: 20px 10px;
         }
-
-        .device
-        {
-            background: url("images/ipad.png") no-repeat;
-        }
     </style>
 </head>
 <body class="k-content">
@@ -311,7 +308,9 @@
             os = frame.contentWindow.kendo.support.mobileOS = detectOS(mobiles[devicename].ua);
             foreignDocument.documentElement.className = "km-" + (!os ? "ios" : os.name);
             matches = deviceSelector.text().match(/(^\w+)\s(.*)/m);
-            $(".description .device").html(matches[1] + "<span class='model'>" + matches[2] + "</span>");
+            $(".description .device")
+                    .html(matches[1] + "<span class='model'>" + matches[2] + "</span>")
+                    .css("background-image", "url('images/" + devicename + ".png')");
 
             resizeContent();
         }
