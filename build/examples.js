@@ -97,6 +97,10 @@ function mergeResourceRegion(info, exampleSource, regionType, deployConfig) {
 
         result = result.replace(/.*?(examples-offline\.css|console\.js|people\.js|prettify\.js).*/g, "");
 
+        if (!info.hasNavigation) {
+            result = result.replace(/.*?examples\.nav\.js.*/g, "");
+        }
+
         if (deployConfig.useMinified) {
             result = result.replace(/(.*?)\.(css|js)/g, "$1.min.$2");
             result = result.replace(/min\.min/g, "min");
@@ -140,18 +144,24 @@ function updateBaseLocation(html, base) {
 function exampleInfo(fileName, rootPath) {
     var parts = fileName.substring(rootPath.length + 1).split("/"),
         suite = parts[0],
-        component = parts[1];
+        component = parts[1],
+        hasNavigation = true;
 
-    if (component == "overview" || component == "integration" ||
-        suite == "mobile" || suite == "themebuilder") {
+    if (component == "overview" || component == "integration") {
         component = "";
+    }
+
+    if (suite == "mobile" || suite == "themebuilder") {
+        component = "";
+        hasNavigation = false;
     }
 
     return {
         fileName: fileName,
         suite: suite,
         depth: exampleDepth(fileName, rootPath),
-        component: component
+        component: component,
+        hasNavigation: hasNavigation
     };
 }
 
@@ -304,6 +314,10 @@ function processExample(fileName, deployConfig) {
     exampleSource = baseRegions.css.exec(exampleSource, cssRegion);
 
     exampleSource = baseRegions.nav.exec(exampleSource, updateBaseLocation(baseRegions.nav.html, base));
+
+    if (!info.hasNavigation) {
+        exampleSource = exampleSource.replace(/\s+hasNavigation/g, "");
+    }
 
     var description = regionRegex.description.exec(exampleSource);
     exampleSource = exampleSource.replace(regionRegex.description, '');
