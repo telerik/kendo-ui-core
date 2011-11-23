@@ -1,11 +1,25 @@
 window.kendoConfig = [
     // Framework --------------------------------------------------
     {
+        id: "binder",
+        name: "Binder",
+        category: "Framework",
+        source: "kendo.binder.min.js",
+        depends: [ "core", "model" ],
+        hidden: true
+    }, {
         id: "core",
         name: "Core",
         category: "Framework",
         description: "The core of the Kendo framework.",
         source: "kendo.core.min.js"
+    }, {
+        id: "editable",
+        name: "Editable",
+        category: "Framework",
+        source: "kendo.editable.min.js",
+        depends: [ "datepicker", "numerictextbox", "validator", "binder" ],
+        hidden: true
     }, {
         id: "fx",
         name: "Effects",
@@ -62,6 +76,13 @@ window.kendoConfig = [
         description: "Drag & drop functionality for any DOM element.",
         depends: [ "core" ]
     }, {
+        id: "filteringmenu",
+        name: "Filtering Menu",
+        category: "Framework",
+        source: "kendo.filteringmenu.min.js",
+        depends: [ "datepicker", "numerictextbox", "dropdownlist" ],
+        advanced: true
+    }, {
         id: "groupable",
         name: "Groupable",
         category: "Framework",
@@ -97,10 +118,10 @@ window.kendoConfig = [
         source: "kendo.scroller.min.js",
         depends: [ "core" ]
     }, {
-        id: "pageable",
-        name: "Pageable",
+        id: "pager",
+        name: "Pager",
         category: "Framework",
-        source: "kendo.pageable.min.js",
+        source: "kendo.pager.min.js",
         depends: [ "data" ],
         advanced: true
     }, {
@@ -172,6 +193,16 @@ window.kendoConfig = [
         source: "kendo.grid.min.js",
         depends: [ "data" ],
         features: [{
+                id: "grid-editing",
+                name: "Editing",
+                description: "Enables editing",
+                depends: [ "editable" ]
+            }, {
+                id: "grid-filtering",
+                name: "Filtering",
+                description: "Enables filtering",
+                depends: [ "filteringmenu" ]
+            }, {
                 id: "grid-grouping",
                 name: "Grouping",
                 description: "Enables grouping",
@@ -180,7 +211,7 @@ window.kendoConfig = [
                 id: "grid-paging",
                 name: "Paging",
                 description: "Enables paging",
-                depends: [ "pageable" ]
+                depends: [ "pager" ]
             }, {
                 id: "grid-selection",
                 name: "Selection",
@@ -191,7 +222,7 @@ window.kendoConfig = [
                 name: "Sorting",
                 description: "Enables sorting",
                 depends: [ "sortable" ]
-        }]
+            }]
     }, {
         id: "menu",
         name: "Menu",
@@ -199,6 +230,13 @@ window.kendoConfig = [
         description: "The Menu widget displays hierarchical data as a multi-level menu.",
         source: "kendo.menu.min.js",
         depends: [ "popup" ]
+    }, {
+        id: "numerictextbox",
+        name: "NumericTextBox",
+        category: "Widgets",
+        description: "The NumericTextBox widget can convert an input element into a numeric, percentage or currency textbox.",
+        source: "kendo.numerictextbox.min.js",
+        depends: [ "core" ]
     }, {
         id: "panelbar",
         name: "PanelBar",
@@ -228,6 +266,13 @@ window.kendoConfig = [
         source: "kendo.tabstrip.min.js",
         depends: [ "core" ]
     }, {
+        id: "timepicker",
+        name: "TimePicker",
+        category: "Widgets",
+        description: "The TimePicker widget allows to the end user to select a value from a list of predefined values or to type a new value.",
+        source: "kendo.timepicker.min.js",
+        depends: [ "popup" ]
+    }, {
         id: "treeview",
         name: "TreeView",
         category: "Widgets",
@@ -242,6 +287,13 @@ window.kendoConfig = [
         description: "The Upload widget uses progressive enhancement to deliver the best possible" +
                      "uploading experience to users.",
         source: "kendo.upload.min.js",
+        depends: [ "core" ]
+    }, {
+        id: "validator",
+        name: "Validator",
+        category: "Widgets",
+        description: "",
+        source: "kendo.validator.min.js",
         depends: [ "core" ]
     }, {
         id: "window",
