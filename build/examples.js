@@ -20,15 +20,18 @@ var VERSION = kendoBuild.generateVersion(),
     STAGING_SHARED_ROOT = "#= parentFolder(depth) #/shared",
     STAGING_SHARED_SCRIPTS = template(STAGING_SHARED_ROOT + "/js"),
     STAGING_SHARED_STYLES = template(STAGING_SHARED_ROOT + "/styles"),
+    STAGING_SUITE_SCRIPTS = template("#= parentFolder(depth - 1) #/js"),
     LIVE_SCRIPTS = template(CDN_URL + "/js"),
     LIVE_STYLES = template(CDN_URL + "/styles"),
     LIVE_SHARED_ROOT = CDN_URL + "/shared",
     LIVE_SHARED_SCRIPTS = template(LIVE_SHARED_ROOT + "/js"),
     LIVE_SHARED_STYLES = template(LIVE_SHARED_ROOT + "/styles"),
+    LIVE_SUITE_SCRIPTS = template(CDN_URL + "/#= suiteName #/js"),
     SOURCE_SCRIPTS_MARKER = /SOURCE_SCRIPTS/g,
     SOURCE_STYLES_MARKER = /SOURCE_STYLES/g,
     SHARED_SCRIPTS_MARKER = /SHARED_SCRIPTS/g,
     SHARED_STYLES_MARKER = /SHARED_STYLES/g,
+    SUITE_SCRIPTS_MARKER = /SUITE_SCRIPTS/g,
 
     examplesLocation = "demos/examples",
     outputPath = "live",
@@ -80,9 +83,13 @@ function removeDuplicateResources(resource, target) {
     return target.replace(rex, "");
 }
 
-function mergeResourceRegion(exampleSource, regionType, deployConfig, depth) {
+function mergeResourceRegion(fileName, exampleSource, regionType, deployConfig, depth) {
     var result,
-        pathInfo = { depth: depth, parentFolder: parentFolder },
+        pathInfo = {
+            depth: depth,
+            suiteName: exampleInfo(fileName).suite,
+            parentFolder: parentFolder
+        },
         baseResources = resolveResources(baseRegions[regionType].html, deployConfig, pathInfo),
         baseResourcesLines = baseResources.split(rowSeparator),
         resourceMatch = regionRegex[regionType].exec(exampleSource),
@@ -112,15 +119,17 @@ function mergeResourceRegion(exampleSource, regionType, deployConfig, depth) {
 }
 
 function resolveResources(text, deployConfig, pathInfo) {
-    text = replaceReference(text, "shared/js", SHARED_SCRIPTS_MARKER.source);
-    text = replaceReference(text, "shared/styles", SHARED_STYLES_MARKER.source);
-    text = replaceReference(text, "src", SOURCE_SCRIPTS_MARKER.source);
-    text = replaceReference(text, "styles", SOURCE_STYLES_MARKER.source);
+    text = replaceReference(text, "/shared/js", SHARED_SCRIPTS_MARKER.source);
+    text = replaceReference(text, "/shared/styles", SHARED_STYLES_MARKER.source);
+    text = replaceReference(text, "/js", SUITE_SCRIPTS_MARKER.source);
+    text = replaceReference(text, "/src", SOURCE_SCRIPTS_MARKER.source);
+    text = replaceReference(text, "/styles", SOURCE_STYLES_MARKER.source);
 
     text = text.replace(SOURCE_SCRIPTS_MARKER, deployConfig.scripts(pathInfo));
     text = text.replace(SOURCE_STYLES_MARKER, deployConfig.styles(pathInfo));
     text = text.replace(SHARED_SCRIPTS_MARKER, deployConfig.sharedScripts(pathInfo));
     text = text.replace(SHARED_STYLES_MARKER, deployConfig.sharedStyles(pathInfo));
+    text = text.replace(SUITE_SCRIPTS_MARKER, deployConfig.suiteScripts(pathInfo));
 
     return text;
 }
@@ -140,33 +149,25 @@ function updateBaseLocation(html, base) {
     });
 }
 
-function componentFromFilename(file) {
-    var parts = file.substring(outputPath.length).split("/"),
-        candidate = parts[2];
+function exampleInfo(fileName) {
+    var parts = fileName.substring(outputPath.length + 1).split("/"),
+        suite = parts[0],
+        component = parts[1];
 
-    if (candidate == "overview") {
-        return;
+    if (component == "overview" || component == "integration" ||
+        suite == "mobile" || suite == "themebuilder") {
+        component = "";
     }
 
-    // until other dataviz components appear, all are consider charts
-    if (parts[1] == "dataviz") {
-        candidate = "chart";
-    }
+    console.log(fileName, suite, component);
 
-    var exceptions = [
-        "animation",
-        "integration"
-    ];
-
-    if (parts.length > 3 && exceptions.indexOf(candidate) == -1) {
-        return candidate;
-    }
+    return {
+        suite: suite,
+        component: component
+    };
 }
 
 function importComponentHelp(exampleHTML, component) {
-    if (!component)
-        return exampleHTML;
-
     var helpFiles = {
         "animation": "kendo.Animation",
         "autocomplete": "kendo.ui.AutoComplete",
@@ -302,9 +303,9 @@ function processExample(fileName, deployConfig) {
     var exampleHTML = kendoBuild.readText(fileName),
         depth = exampleDepth(fileName, deployConfig.root),
         base = fileName === outputPath + "/index.html" ? "" : parentFolder(depth) + "/",
-        scriptRegion = mergeResourceRegion(exampleHTML, "script", deployConfig, depth),
-        cssRegion = mergeResourceRegion(exampleHTML, "css", deployConfig, depth),
-        component = componentFromFilename(fileName);
+        scriptRegion = mergeResourceRegion(fileName, exampleHTML, "script", deployConfig, depth),
+        cssRegion = mergeResourceRegion(fileName, exampleHTML, "css", deployConfig, depth),
+        component = exampleInfo(fileName).component;
 
     exampleHTML = baseRegions.meta.exec(exampleHTML, baseRegions.meta.html);
 
@@ -324,7 +325,10 @@ function processExample(fileName, deployConfig) {
         exampleHTML = baseRegions.tools.exec(exampleHTML);
     }
 
-    exampleHTML = importComponentHelp(exampleHTML, component);
+    if (component) {
+        console.log("importings ", component);
+        exampleHTML = importComponentHelp(exampleHTML, component);
+    }
 
     kendoBuild.writeText(fileName, exampleHTML);
 }
@@ -410,6 +414,7 @@ function buildStaging() {
         styles: STAGING_STYLES,
         sharedScripts: STAGING_SHARED_SCRIPTS,
         sharedStyles: STAGING_SHARED_STYLES,
+        suiteScripts: STAGING_SUITE_SCRIPTS,
         useMinified: false
     });
 }
@@ -421,6 +426,7 @@ function buildLive(deployRoot) {
         styles: LIVE_STYLES,
         sharedScripts: LIVE_SHARED_SCRIPTS,
         sharedStyles: LIVE_SHARED_STYLES,
+        suiteScripts: LIVE_SUITE_SCRIPTS,
         useMinified: true
     });
 }
