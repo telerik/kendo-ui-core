@@ -225,7 +225,7 @@
                 combobox.text("b");
                 combobox.search("b");
                 combobox._focus(combobox.ul.children().eq(1));
-                combobox._accepted = true;
+                combobox._state = "accept";
 
                 setTimeout(function() {
                     combobox.open();
@@ -242,6 +242,7 @@
                 });
 
                 combobox.options.filter = "startswith";
+                combobox.open();
                 combobox.text("b");
                 combobox.search("b");
                 combobox.ul.children().eq(1).click();
@@ -341,7 +342,7 @@
 
                 combobox.search = function() { called = true; };
 
-                combobox._prevText = "test";
+                combobox._prev = "test";
                 combobox.input.val("test");
                 combobox.input.pressKeyDown(kendo.keys.HOME);
 

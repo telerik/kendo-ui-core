@@ -126,9 +126,12 @@
         FOCUSED = "k-state-focused",
         SELECT = "select",
         STATE_SELECTED = "k-state-selected",
+        STATE_FILTER = "filter",
+        STATE_ACCEPT = "accept",
         HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
         INPUTWRAPPER = ".k-dropdown-wrap",
+        NULL = null,
         proxy = $.proxy;
 
     var ComboBox = Select.extend(/** @lends kendo.ui.ComboBox.prototype */{
@@ -245,7 +248,7 @@
                 return current;
             }
 
-            that._selected = null;
+            that._selected = NULL;
 
             if (current) {
                 current.removeClass(STATE_SELECTED);
@@ -307,10 +310,9 @@
                 return;
             }
 
-            if (!that.ul[0].firstChild || (that._filtered && that._accepted)) {
+            if (!that.ul[0].firstChild || that._state === STATE_ACCEPT) {
                 that._open = true;
-                that._accepted = false;
-                that._filtered = false;
+                that._state = "";
                 that._select();
             } else {
                 that.popup.open();
@@ -385,7 +387,7 @@
                 text = that._text(data);
                 value = that._value(data);
 
-                that.input[0].value = text;
+                that._prev = that.input[0].value = text;
                 that._accessor(value != undefined ? value : text, idx);
             }
         },
@@ -412,9 +414,13 @@
                 if (filter === "none") {
                     that._filter(word);
                 } else {
-                    that._accepted = false;
-                    that._open = that._filtered = true;
-                    that.dataSource.filter( {field: options.dataTextField, operator: filter, value: word } );
+                    that._open = true;
+                    that._state = STATE_FILTER,
+                    that.dataSource.filter( {
+                        field: options.dataTextField,
+                        operator: filter,
+                        value: word
+                    });
                 }
             }
         },
@@ -513,7 +519,7 @@
                 if (idx > -1) {
                     that.select(idx);
                 } else {
-                    that.current(null);
+                    that.current(NULL);
                     that._custom(value);
                     that.text(value);
                 }
@@ -525,19 +531,17 @@
         },
 
         _accept: function(li) {
-            var that = this,
-                old;
+            var that = this;
 
-            if (li) {
-                that._accepted = true;
+            if (li && that.popup.visible()) {
+
+                if (that._state === STATE_FILTER) {
+                    that._state = STATE_ACCEPT;
+                }
+
                 setTimeout( function () { that._focus(li); });
             } else {
-                //why!!!
-                //if we call that.text(that.text()); and then set the element.value to the text ???
-                //then change
-                old = that._old;
-                that.value(that.text());
-                that._old = old;
+                that.text(that.text());
                 that._change();
             }
         },
@@ -608,7 +612,7 @@
                 if (that.options.highlightFirst && !that.text()) {
                     li = $(that.ul[0].firstChild);
                 } else {
-                    li = null;
+                    li = NULL;
                 }
             }
 
@@ -652,7 +656,12 @@
 
             if (kendo.keys.TAB === e.keyCode) {
                 that.text(that.input.val());
-            } else if (!that._move(e) && !e.altKey && !e.ctrlKey) {
+
+                if (that._state === STATE_FILTER && that._selected) {
+                    that._state = STATE_ACCEPT;
+                }
+
+            } else if (!that._move(e)) {
                that._search();
             }
         },
@@ -663,8 +672,8 @@
 
             that._typing = setTimeout(function() {
                 var value = that.text();
-                if (that._prevText !== value) {
-                    that._prevText = value;
+                if (that._prev !== value) {
+                    that._prev = value;
                     that.search(value);
                 }
             }, that.options.delay);
