@@ -107,46 +107,6 @@
                 ok(!removeMethod.calls("remove"));
             });
 
-            test("delete button is shown on data row hover", function() {
-                setup();
-
-                var tr = table.find("tbody>tr:first").trigger("mouseenter");
-
-                ok(table.parent().find(".k-button>.k-delete").length);
-            });
-
-            test("delete button is not shown on edited row hover", function() {
-                setup();
-
-                var tr = table.find("tbody>tr:first").addClass("k-grid-edit-row").trigger("mouseenter");
-
-                ok(!table.parent().find(".k-button>.k-delete").length);
-            });
-
-            test("delete button is not shown on data row hover if destory is false", function() {
-                setup({ editable: { destroy: false } }  );
-
-                var tr = table.find("tbody>tr:first").trigger("mouseenter");
-
-                ok(!table.parent().find(".k-button>.k-delete").length);
-            });
-
-            test("delete button is not shown on data row hover if editable is false", function() {
-                setup({ editable: false }  );
-
-                var tr = table.find("tbody>tr:first").trigger("mouseenter");
-
-                ok(!table.parent().find(".k-button>.k-delete").length);
-            });
-
-            test("delete button is removed on data row mouseleave", function() {
-                setup();
-
-                var tr = table.find("tbody>tr:first").trigger("mouseenter").trigger("mouseleave");
-
-                ok(!table.parent().find(".k-button>.k-delete").length);
-            });
-
             test("removeRow raises remove event", function() {
                 var called = false,
                     grid = setup({
@@ -259,6 +219,43 @@
                 grid.removeRow(table.find("tbody>tr:first"));
 
                 ok(removeMethod.calls("remove"));
+            });
+
+            test("delete column is rendered if set", function() {
+                var grid = setup( { editable: true, columns: [ { command: "destroy" }] });
+
+                ok(grid.table.find("tr:first > td:last").has("a.k-grid-delete").length);
+            });
+
+            test("delete column is not rendered if not added to the column array", function() {
+                var grid = setup( { editable: true });
+
+                ok(!grid.table.find("tr:first > td:last").has("a.k-grid-delete").length);
+            });
+
+            test("clicking on the delete column button calls removeRow", function() {
+                var grid = setup( { editable: true, columns: [ { command: "destroy" }]  }),
+                    removeMethod = stub(grid, "removeRow");
+
+                grid.table.find("tr:first > td:last").find("a.k-grid-delete").click();
+
+                ok(removeMethod.calls("removeRow"));
+            });
+
+            test("no text is rendered in the header for delete command if no title is set", function() {
+                var grid = setup( { editable: true, columns: [ { command: "destroy" }] }),
+                    cell = grid.thead.find("th:last") ;
+
+                equal(cell.text(), "");
+                ok(!cell.data("field"));
+            });
+
+            test("title is rendered in the header for delete command if set", function() {
+                var grid = setup( { editable: true, columns: [ { command: "destroy", title: "foo" }] }),
+                    cell = grid.thead.find("th:last") ;
+
+                equal(cell.text(), "foo");
+                ok(!cell.data("field"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

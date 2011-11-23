@@ -36,7 +36,8 @@
         TABINDEX = "tabIndex",
         FUNCTION = "function",
         STRING = "string",
-        DELETECONFIRM = "Are you sure you want to delete this record?";
+        DELETECONFIRM = "Are you sure you want to delete this record?",
+        COMMANDBUTTONTEMP = '<a class="k-button k-button-icontext #=className#" #=attr# href="##"><span class="k-icon #=imgClass#"></span>#=text#</a>';
 
     var VirtualScrollable =  Widget.extend({
         init: function(element, options) {
@@ -228,6 +229,11 @@
             text: "Save changes",
             imgClass: "k-update",
             className: "k-grid-save-changes"
+        },
+        destroy: {
+            text: "Delete",
+            imgClass: "k-delete",
+            className: "k-grid-delete"
         }
     }
 
@@ -636,7 +642,7 @@
             if (editable) {
 
                 if (editable.update !== false) {
-                    that.wrapper.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell)", CLICK, function(e) {
+                    that.wrapper.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell,:has(a.k-grid-delete))", CLICK, function(e) {
                         var td = $(this)
 
                         if (td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
@@ -664,33 +670,11 @@
                 }
 
                 if (editable.destroy !== false) {
-                    //:visible is required, otherwise mouseenter will be triggerd twice when tr is deleted in Google Chrome
-                    that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row,.k-grid-edit-row):visible", {
-                        mouseenter: function(e) {
-                            var tr = $(this), button;
-
-                            button = $('<a class="k-button k-button-icon"><span class="k-icon k-delete"></span></a>')
-                                .css({
-                                    position: "absolute",
-                                    visibility: "hidden"
-                                })
-                                .click(function(ev) {
-                                    that.removeRow(tr);
-                                    ev.stopPropagation();
-                                })
-                                .appendTo(tr.find(">td:visible:first"));
-
-                            button.css({
-                                visibility: "visible",
-                                top: tr.position().top + ((tr.outerHeight() - button.outerHeight(true)) / 2),
-                                left: $(document).scrollLeft() + tr.width() - button.outerWidth(true)
-                            });
-                        },
-                        mouseleave: function(e) {
-                            that.wrapper.find(".k-button:has(.k-delete)").remove();
-                        }
+                    that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row,.k-grid-edit-row):visible a.k-grid-delete", "click", function(e) {
+                        e.preventDefault();
+                        that.removeRow($(this).closest("tr"));
                     });
-                }
+               }
             }
         },
 
@@ -701,8 +685,6 @@
 
             if (!model.readOnly(column.field)) {
                 that._editContainer = cell;
-
-                that.wrapper.find(".k-button:has(.k-delete)").remove();
 
                 that.editable = cell.addClass("k-edit-cell")
                     .kendoEditable({
@@ -840,21 +822,25 @@
 
             if (isArray(commands)) {
                 for (idx = 0, length = commands.length; idx < length; idx++) {
-                    command = commands[idx];
-                    template = command.template || '<a class="k-button k-button-icontext #=className#" #=attr# href="##"><span class="k-icon #=imgClass#"></span>#=text#</a>';
-                    commandName = typeof command === STRING ? command : command.name;
-                    options = { className: "", text: commandName, imgClass: "", attr: "" };
-
-                    if (isPlainObject(command)) {
-                        options = extend(true, options, defaultCommands[commandName], command);
-                    } else {
-                        options = extend(true, options, defaultCommands[commandName]);
-                    }
-
-                    html += kendo.template(template)(options);
+                    html += that._createButton(commands[idx]);
                 }
             }
             return html;
+        },
+
+        _createButton: function(command) {
+            var that = this,
+                template = command.template || COMMANDBUTTONTEMP,
+                commandName = typeof command === STRING ? command : command.name,
+                options = { className: "", text: commandName, imgClass: "", attr: "" };
+
+            if (isPlainObject(command)) {
+                options = extend(true, options, defaultCommands[commandName], command);
+            } else {
+                options = extend(true, options, defaultCommands[commandName]);
+            }
+
+            return kendo.template(template)(options);
         },
 
         _groupable: function() {
@@ -1221,6 +1207,7 @@
         _error: function() {
             this._progress(false);
         },
+
         _requestStart: function() {
             this._progress(true);
         },
@@ -1286,13 +1273,15 @@
         _sortable: function() {
             var that = this,
                 columns = that.columns,
+                column,
                 sortable = that.options.sortable;
 
             if (sortable) {
                 that.thead
                     .find("th:not(.k-hierarchy-cell)")
                     .each(function(index) {
-                        if (columns[index].sortable !== false) {
+                        column = columns[index];
+                        if (column.sortable !== false && !column.command) {
                             $(this).kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
                         }
                     })
@@ -1396,7 +1385,6 @@
                     type = typeof template;
 
                     rowTemplate += "<td>";
-
                     rowTemplate += that._cellTmpl(column, state);
 
                     rowTemplate += "</td>";
@@ -1422,6 +1410,10 @@
                 html = "",
                 format = column.format,
                 type = typeof template;
+
+            if (column.command) {
+                return that._createButton(column.command);
+            }
 
             if (type === FUNCTION) {
                 state.storage["tmpl" + state.count] = template;
@@ -1580,7 +1572,11 @@
                 for (idx = 0, length = columns.length; idx < length; idx++) {
                     th = columns[idx];
 
-                    html += "<th data-field='" + th.field + "'>" + (th.title || th.field) + "</th>";
+                    if (!th.command) {
+                        html += "<th data-field='" + th.field + "'>" + (th.title || th.field || "") + "</th>";
+                    } else {
+                        html += "<th>" + (th.title || "") + "</th>";
+                    }
                 }
 
                 tr.html(html);

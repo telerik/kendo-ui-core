@@ -86,10 +86,11 @@
                     dataSource: dataSource,
                     pageable: true,
                     editable: true,
+                    sortable: true,
                     groupable: false,
                     scrollable: false,
                     toolbar: ["create", "cancel", "save"],
-                    //columns: ["bar", "foo", "date"]
+                    columns: ["bar", "foo", "date", { command: "destroy", title: "Foo" } ]
                 });
 
                 $("#relatedGrid").kendoGrid({
