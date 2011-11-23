@@ -82,6 +82,10 @@
         e.preventDefault();
     }
 
+    function getOrientationClass() {
+        return Math.abs(window.orientation) / 90 ? "km-horizontal" : "km-vertical";
+    }
+
     var View = kendo.Class.extend({
         init: function(element) {
             var that = this,
@@ -136,7 +140,7 @@
 
     ViewSwitcher.replace = function(previous, view) {
         new ViewSwitcher(previous, view);
-    }
+    };
 
     ViewSwitcher.prototype = {
         contents: function(source, destination) {
@@ -166,14 +170,20 @@
                 }
             }
         }
-    }
+    };
 
     var Application = kendo.Observable.extend({
         init: function(element, options) {
             kendo.Observable.fn.init.call(this, options);
             this.element = element;
 
-            $(document.documentElement).addClass("km-" + (!os ? "ios" : os.name));
+            $(document.documentElement).addClass("km-" + (!os ? "ios" : os.name) + " " + getOrientationClass());
+
+            $(document).bind("orientationchange", function(e) {
+                $(document.documentElement)
+                    .removeClass("km-horizontal km-vertical")
+                    .addClass(getOrientationClass());
+            });
         },
 
         start: function(options) {
@@ -203,7 +213,7 @@
                         that._setCurrentView(view);
                     });
                 }
-            }
+            };
 
             history.start($.extend(options, historyEvents));
         },

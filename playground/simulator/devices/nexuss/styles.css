@@ -5,28 +5,30 @@
 
 .device-container.vertical .device-skin
 {
-    padding-top: 3.16cm;
+    padding-top: 2.74cm;
     background-image: url("images/vertical.png");
 }
 
 .device-container.horizontal .device-skin
 {
-    padding-top: 1.26cm;
+    padding-top: 1.22cm;
     background-image: url("images/horizontal.png");
 }
 
 .device-container.vertical
 {
-    height: 17.25cm;
-    width: 8.7cm;
-    padding: 4.45cm 0.69cm 2.63cm 0.85cm;
+    bottom: -150px;
+    width: 864px;
+    height: 800px;
+    padding: 3.88cm 8.24cm 8.46cm 8.3cm;
 }
 
 .device-container.horizontal
 {
-    width: 17.25cm;
-    height: 8.7cm;
-    padding: 2.53cm 2.62cm 0.84cm 2.6cm;
+    bottom: -150px;
+    width: 1115px;
+    height: 704px;
+    padding: 2.34cm 9.68cm 11.78cm 9.68cm;
 }
 
 #address-bar
@@ -36,14 +38,14 @@
 
 .device-container.vertical #address-bar
 {
-    left: 68px;
-    top: 134px;
-    width: 177px;
+    left: 346px;
+    top: 116px;
+    width: 154px;
 }
 
 .device-container.horizontal #address-bar
 {
-    left: 132px;
-    top: 62px;
-    width: 361px;
+    left: 396px;
+    top: 57px;
+    width: 303px;
 }
