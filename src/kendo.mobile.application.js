@@ -160,7 +160,7 @@
             if (source[0] && destination[0]) {
                 if (source.data("id") && source.data("id") === destination.data("id")) {
                     // cloning (instead of appending) Resolves iPad iOS 4 specific footer flicker
-                    destination.html("").append(source.contents().clone(true));
+                    destination.html("").append(source.contents());
                 } else if(this.parallax) {
                     source.kendoAnimateTo(destination, {effects: "fade", reverse: this.back});
                 }

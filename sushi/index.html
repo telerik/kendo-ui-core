@@ -28,9 +28,11 @@
                 height: 7rem;
             }
 
-            #featured img {
+            img {
                 float: left;
                 margin-right: 1rem;
+                -webkit-border-radius: 8px;
+                -webkit-box-shadow: 0 2px 2px #999;
             }
 
             #featured h2 {
@@ -40,7 +42,7 @@
 
             #featured a.km-button {
                 float: right;
-                margin-top: 1rem;
+                margin-top: 2rem;
             }
 
             #featured a.details-link {
@@ -72,6 +74,51 @@
                 background-position: 100% 50%;
             }
 
+            .price {
+                color: #787878;
+                text-shadow: 1px 1px white;
+                font-size: 0.8rem;
+            }
+
+            #details .km-content {
+                background: #ebebeb;
+                padding: 1rem;
+                -webkit-box-sizing: border-box;
+            }
+
+            #details .km-content p {
+                margin-top: 1rem;
+                font-size: .9rem;
+                line-height: 1.2rem;
+                font-weight: normal;
+                text-shadow: 1px 1px white;
+            }
+
+            #details .km-content aside {
+                float: left;
+                margin-right: 1rem;
+            }
+
+            #details img {
+                width: 150px;
+                height: 150px;
+                margin-bottom: 1rem;
+            }
+
+            #details .km-content aside .km-button {
+                margin-left: 2rem;
+            }
+
+            #details .km-content aside .price {
+                display: block;
+                margin-bottom: 1rem;
+                margin-left: 4rem;
+            }
+
+            .details-link {
+                color: black;
+                text-decoration: none;
+            }
         </style>
     </head>
     <body>
@@ -91,7 +138,70 @@
                 <div data-kendo-role="tabstrip">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
-                    <a href="account.html">Account</a>
+                    <a href="#account">Account</a>
+                    <a href="#cart">Cart</a>
+                </div>
+            </footer>
+        </div>
+
+        <div data-kendo-role="view" id="account">
+            <header data-kendo-role="header">
+                <div data-kendo-role="navbar">
+                    <span data-kendo-role="view-title">Work in progress!</span>
+                </div>
+            </header>
+
+            <div data-kendo-role="content">
+                Work in progress ...
+            </div>
+
+            <footer data-kendo-role="footer" data-id="default">
+                <div data-kendo-role="tabstrip">
+                    <a href="#index">Home</a>
+                    <a href="#menu">Our menu</a>
+                    <a href="#account">Account</a>
+                    <a href="#cart">Cart</a>
+                </div>
+            </footer>
+        </div>
+
+        <div data-kendo-role="view" id="menu">
+            <header data-kendo-role="header">
+                <div data-kendo-role="navbar">
+                    <span data-kendo-role="view-title">Work in progress!</span>
+                </div>
+            </header>
+
+            <div data-kendo-role="content">
+                Work in progress ...
+            </div>
+
+            <footer data-kendo-role="footer" data-id="default">
+                <div data-kendo-role="tabstrip">
+                    <a href="#index">Home</a>
+                    <a href="#menu">Our menu</a>
+                    <a href="#account">Account</a>
+                    <a href="#cart">Cart</a>
+                </div>
+            </footer>
+        </div>
+
+        <div data-kendo-role="view" id="cart">
+            <header data-kendo-role="header">
+                <div data-kendo-role="navbar">
+                    <span data-kendo-role="view-title">Work in progress!</span>
+                </div>
+            </header>
+
+            <div data-kendo-role="content">
+                Work in progress ...
+            </div>
+
+            <footer data-kendo-role="footer" data-id="default">
+                <div data-kendo-role="tabstrip">
+                    <a href="#index">Home</a>
+                    <a href="#menu">Our menu</a>
+                    <a href="#account">Account</a>
                     <a href="#cart">Cart</a>
                 </div>
             </footer>
@@ -100,6 +210,7 @@
         <div data-kendo-role="view" id="details" data-kendo-transition="slide">
             <header data-kendo-role="header">
                 <div data-kendo-role="navbar">
+                    <a href="#index" data-kendo-role="button" data-kendo-style="back" data-kendo-align="left">Back</a>
                     <span data-kendo-role="view-title">Item</span>
                 </div>
             </header>
@@ -111,7 +222,7 @@
                 <div data-kendo-role="tabstrip">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
-                    <a href="account.html">Account</a>
+                    <a href="#account">Account</a>
                     <a href="#cart">Cart</a>
                 </div>
             </footer>
@@ -123,19 +234,21 @@
 
             <a class="details-link" data-kendo-role="listview-link" href="\#details?id=${id}">
                 <img src="images/${image}" />
-                <span class="price">&euro; ${price}</span>
                 <h2>${name}</h2>
+                <span class="price">&euro; ${price}</span>
                 <span class="added"#= cart.indexOf(id) === -1 ? 'style="display: none"' : "" #>Item added in your cart</span>
             </a>
         </script>
 
         <script id="detailTemplate" type="text/x-kendo-template">
-            <img src="images/${image}" />
-            <span class="price">&euro; ${price}</span>
+            <aside>
+                <img src="images/${image}" />
+                <span class="price">&euro; ${price}</span>
+                <a data-kendo-role="button" href="\\#">Add to cart</a>
+            </aside>
             <h2>${name}</h2>
             <p>${description}</p>
             <span class="added"#= cart.indexOf(id) === -1 ? 'style="display: none"' : "" #>Item added in your cart</span>
-            <a data-kendo-role="button" href="\\#">Add to cart</a>
         </script>
 
         <script>
@@ -172,6 +285,7 @@
                     ds.fetch(function() {
                         item = ds.get(e.params.id).data;
                         view.content.html(itemDetailsTemplate(item));
+                        kendo.mobile.enhance(view.content);
                     });
                 }
             });
