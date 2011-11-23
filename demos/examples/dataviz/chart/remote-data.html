@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Binding to remote data</title>
+        <!-- css -->
+        <link href="../../shared/styles/examples.css" rel="stylesheet"/>
+        <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../../src/jquery.min.js"></script>
+        <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.data.js"></script>
+        <script src="../../../../src/kendo.chart.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Binding to remote data</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    <strong>Note:</strong>
+                    Security restrictions in Chrome prevent this
+                    example from working when the page is
+                    loaded from the file system (via file:// protocol).
+                </p>
+            </div>
+            <div style="margin-right: 220px;">
+                <div id="chart" style="width:500px; height:450px;margin: 0 auto;"></div>
+            </div>
+            <script>
+                function createChart() {
+                    $("#chart").kendoChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "spain-electricity.json",
+                                    dataType: "json"
+                                }
+                            },
+                            sort: {
+                                field: "year",
+                                dir: "asc"
+                            }
+                        },
+                        title: {
+                            text: "Spain electricity production (GWh)"
+                        },
+                        legend: {
+                            position: "top"
+                        },
+                        seriesDefaults: {
+                            type: "column"
+                        },
+                        series:
+                        [{
+                            field: "nuclear",
+                            name: "Nuclear"
+                        },{
+                            field: "hydro",
+                            name: "Hydro"
+                        },{
+                            field: "wind",
+                            name: "Wind"
+                        }],
+                        categoryAxis: {
+                            field: "year",
+                            labels: {
+                                rotation: -90
+                            }
+                        },
+                        valueAxis: {
+                            labels: {
+                                format: "{0:N0}"
+                            },
+                            majorUnit: 10000
+                        },
+                        tooltip: {
+                            visible: true,
+                            format: "{0:N0}"
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        createChart();
+
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                    }, 400);
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        createChart();
+                    });
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+

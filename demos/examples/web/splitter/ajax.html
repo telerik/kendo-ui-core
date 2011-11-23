@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Loading content with AJAX</title>
+        <!-- css -->
+        <link href="../../shared/styles/examples.css" rel="stylesheet"/>
+        <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../../src/jquery.min.js"></script>
+        <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.fx.js"></script>
+        <script src="../../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../../src/kendo.resizable.js"></script>
+        <script src="../../../../src/kendo.splitter.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <!-- description -->
+        <div id="example" class="k-content">
+            <div id="splitter">
+                <div></div>
+                <div></div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#splitter").kendoSplitter({
+                        panes: [
+                            { contentUrl: 'ajax/ajaxContent1.html' },
+                            { contentUrl: 'ajax/ajaxContent2.html' }
+                        ]
+                    });
+                });
+            </script>
+
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+

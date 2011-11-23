@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Pie Chart</title>
+        <!-- css -->
+        <link href="../../shared/styles/examples.css" rel="stylesheet"/>
+        <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../../src/jquery.min.js"></script>
+        <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.data.js"></script>
+        <script src="../../../../src/kendo.chart.js"></script>
+        <script src="../../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../../src/kendo.slider.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Pie Chart</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+            <div class="configuration" style="width:170px;">
+                <span class="configHead">Configuration</span>
+                <span class="configTitle">Pie Chart</span>
+                <ul class="options">
+                    <li>
+                        <input id="labels" type="checkbox" autocomplete="off" />
+                        <label for="labels">Show labels</label>
+                    </li>
+                    <li>
+                        <input id="alignCircle" name="alignType"
+                               type="radio" value="circle" checked="checked"
+                               disabled="disabled" autocomplete="off" />
+                        <label for="alignCircle">- aligned in circle</label>
+                    </li>
+                    <li>
+                        <input id="alignColumn" name="alignType"
+                               type="radio" value="column"
+                               disabled="disabled" autocomplete="off" />
+                        <label for="alignColumn">- aligned in columns</label>
+                    </li>
+                    <li>
+                        <label for="startAngle">Start angle</label>
+                        <input id="startAngle" style="width: 160px;" />
+                    </li>
+                    <li>
+                        <label for="padding">Padding</label>
+                        <input id="padding" style="width: 160px;" />
+                    </li>
+                </ul>
+            </div>
+            <div style="margin-right:210px;">
+                <div id="chart" style="width:500px; height:400px;margin: 0 auto;"></div>
+            </div>
+            <script>
+                var data = [
+                    {
+                        "source": "Hydro",
+                        "percentage": 22
+                    },
+                    {
+                        "source": "Solar",
+                        "percentage": 2
+                    },
+                    {
+                        "source": "Nuclear",
+                        "percentage": 49
+                    },
+                    {
+                        "source": "Wind",
+                        "percentage": 27
+                    }
+                ];
+
+                function createChart() {
+                    $("#chart").kendoChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        title: {
+                            text: "Break-up of Spain Electricity Production for 2008"
+                        },
+                        legend: {
+                            position: "bottom"
+                        },
+                        dataSource: {
+                            data: data
+                        },
+                        series: [{
+                            type: "pie",
+                            field: "percentage",
+                            categoryField: "source",
+                            startAngle: 160
+                        }],
+                        tooltip: {
+                            visible: true,
+                            template: "${ category } - ${ value }%"
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        createChart();
+                        setupConfigurator();
+
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                    }, 400);
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        createChart();
+                        resetConfigurator();
+                    });
+                });
+
+                function setupConfigurator() {
+                    $("#startAngle").kendoSlider({
+                        showButtons: false,
+                        max: 360,
+                        val: 160,
+                        slide: function(e) {
+                            $("#startAngle").val(e.value);
+                            setTimeout(refresh);
+                        },
+                        change: refresh
+                    });
+
+                    $("#padding").kendoSlider({
+                        showButtons: false,
+                        min: 30,
+                        max: 100,
+                        val: 60,
+                        tickPlacement: "none",
+                        slide: function(e) {
+                            $("#padding").val(e.value);
+                            setTimeout(refresh);
+                        },
+                        change: refresh
+                    });
+
+                    resetConfigurator();
+
+                    $(".configuration").live("change", refresh);
+                }
+
+                function resetConfigurator() {
+                    $("#labels").prop("checked", false);
+                    $("#startAngle").data("kendoSlider").value(160);
+                    $("#padding").data("kendoSlider").value(60);
+                }
+
+                function refresh() {
+                    var chart = $("#chart").data("kendoChart"),
+                        pieSeries = chart.options.series[0],
+                        labels = $("#labels").prop("checked"),
+                        alignInputs = $("input[name='alignType']"),
+                        alignLabels = alignInputs.filter(":checked").val(),
+                        startAngle = parseInt($("#startAngle").val(), 10),
+                        padding = parseInt($("#padding").val(), 10);
+
+                    chart.options.transitions = false;
+                    pieSeries.labels.visible = labels;
+                    pieSeries.labels.align = alignLabels;
+                    pieSeries.startAngle = startAngle;
+                    pieSeries.padding = padding;
+
+                    alignInputs.attr("disabled", !labels);
+
+                    chart.refresh();
+                }
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
