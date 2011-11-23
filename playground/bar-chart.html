@@ -46,6 +46,7 @@
 
             $(document).ready(function() {
                 $("#container").kendoChart({
+                    theme: "silver",
                     title: {
                         text: "Teh chart",
                         position: "top"
@@ -53,7 +54,8 @@
                     dataSource: data,
                     seriesDefaults: {
                         labels: {
-                            visible: true
+                            visible: true,
+                            position: "insideEnd"
                         },
                         overlay: null
                     },
