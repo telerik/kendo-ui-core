@@ -1,70 +1,4 @@
 var categories = {
-    framework: [
-        {
-            text: "DataSource",
-            spriteCssClass: "dataSourceIcon",
-            items: [
-                {
-                    text: "Basic usage",
-                    url: "datasource/index.html"
-                },
-                {
-                    text: "Binding to remote data",
-                    url: "datasource/remote-data.html"
-                },
-                {
-                    text: "Binding to XML",
-                    url: "datasource/xml-data.html"
-                },
-                {
-                    text: "Remote data operations",
-                    url: "datasource/remote-operations.html"
-                },
-                {
-                    text: "Local data operations",
-                    url: "datasource/local-operations.html"
-                }
-            ]
-        },
-        {
-            text: "Templates",
-            spriteCssClass: "templatesIcon",
-            items: [
-                {
-                    text: "Basic usage",
-                    url: "templates/index.html"
-                },
-                {
-                    text: "Expressions",
-                    url: "templates/expressions.html"
-                }
-            ]
-        },
-        {
-            text: "Drag & Drop",
-            spriteCssClass: "dragdropIcon",
-            items: [
-                {
-                    text: "Basic usage",
-                    url: "dragdrop/index.html"
-                },
-                {
-                    text: "Events",
-                    url: "dragdrop/events.html"
-                }
-            ]
-        },
-        {
-            text: "Validation",
-            spriteCssClass: "validationIcon",
-            items: [
-                {
-                    text: "Basic usage",
-                    url: "validatable/index.html"
-                }
-            ]
-        }
-    ],
     widgets: [
         {
             text: "Overview",
@@ -480,6 +414,72 @@ var categories = {
                 {
                     text: "API",
                     url: "window/api.html"
+                }
+            ]
+        }
+    ],
+    framework: [
+        {
+            text: "DataSource",
+            spriteCssClass: "dataSourceIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "datasource/index.html"
+                },
+                {
+                    text: "Binding to remote data",
+                    url: "datasource/remote-data.html"
+                },
+                {
+                    text: "Binding to XML",
+                    url: "datasource/xml-data.html"
+                },
+                {
+                    text: "Remote data operations",
+                    url: "datasource/remote-operations.html"
+                },
+                {
+                    text: "Local data operations",
+                    url: "datasource/local-operations.html"
+                }
+            ]
+        },
+        {
+            text: "Templates",
+            spriteCssClass: "templatesIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "templates/index.html"
+                },
+                {
+                    text: "Expressions",
+                    url: "templates/expressions.html"
+                }
+            ]
+        },
+        {
+            text: "Drag & Drop",
+            spriteCssClass: "dragdropIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "dragdrop/index.html"
+                },
+                {
+                    text: "Events",
+                    url: "dragdrop/events.html"
+                }
+            ]
+        },
+        {
+            text: "Validation",
+            spriteCssClass: "validationIcon",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "validatable/index.html"
                 }
             ]
         }
