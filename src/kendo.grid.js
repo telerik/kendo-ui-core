@@ -15,8 +15,9 @@
         math = Math,
         REQUESTSTART = "requestStart",
         ERROR = "error",
-        ROW_SELECTOR = "tbody>tr:not(.k-grouping-row):visible",
-        CELL_SELECTOR =  ROW_SELECTOR + ">td:not(.k-group-cell)",
+        ROW_SELECTOR = "tbody>tr:not(.k-grouping-row,.k-detail-row):visible",
+        DATA_CELL = ":not(.k-group-cell,.k-hierarchy-cell):visible",
+        CELL_SELECTOR =  ROW_SELECTOR + ">td" + DATA_CELL,
         FIRST_CELL_SELECTOR = CELL_SELECTOR + ":first",
         EDIT = "edit",
         SAVE = "save",
@@ -683,7 +684,7 @@
                 column = that.columns[that.cellIndex(cell)],
                 model = that._modelForContainer(cell);
 
-            if (model.editable(column.field)) {
+            if (model.editable(column.field) && !cell.has("a.k-grid-delete").length) {
                 that._editContainer = cell;
 
                 that.editable = cell.addClass("k-edit-cell")
@@ -1026,16 +1027,16 @@
                             handled = false;
 
                         if (canHandle && keys.UP === key) {
-                            currentProxy(current ? current.parent().prevAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
+                            currentProxy(current ? current.parent().prevAll(ROW_SELECTOR).last().children(":eq(" + current.index() + "),:eq(0)").last() : table.find(FIRST_CELL_SELECTOR));
                             handled = true;
                         } else if (canHandle && keys.DOWN === key) {
-                            currentProxy(current ? current.parent().nextAll(ROW_SELECTOR).first().children().eq(current.index()) : table.find(FIRST_CELL_SELECTOR));
+                            currentProxy(current ? current.parent().nextAll(ROW_SELECTOR).first().children(":eq(" + current.index() + "),:eq(0)").last() : table.find(FIRST_CELL_SELECTOR));
                             handled = true;
                         } else if (canHandle && keys.LEFT === key) {
-                            currentProxy(current ? current.prev(":not(.k-group-cell)") : table.find(FIRST_CELL_SELECTOR));
+                            currentProxy(current ? current.prevAll(DATA_CELL + ":first") : table.find(FIRST_CELL_SELECTOR));
                             handled = true;
                         } else if (canHandle && keys.RIGHT === key) {
-                            currentProxy(current ? current.next() : table.find(FIRST_CELL_SELECTOR));
+                            currentProxy(current ? current.nextAll(":visible:first") : table.find(FIRST_CELL_SELECTOR));
                             handled = true;
                         } else if (canHandle && pageable && keys.PAGEDOWN == key) {
                             that._current = null;
@@ -1050,10 +1051,10 @@
                                 that._handleEditing(current);
                                 handled = true;
                             } else if (keys.TAB == key) {
-                                var cell = shiftKey ? current.prevAll(":not(.k-group-cell, .k-hierarchy-cell):visible:first") : current.nextAll(":visible:first");
+                                var cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
                                 if (!cell.length) {
                                     cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row,.k-detail-row):visible")
-                                        .children(shiftKey ? ":not(.k-group-cell,.k-hierarchy-cell):visible:last" : ":not(.k-group-cell,.k-hierarchy-cell):visible:first");
+                                        .children(DATA_CELL + (shiftKey ? ":last" : ":first"));
                                 }
 
                                 if (cell.length) {
