@@ -22,6 +22,7 @@
         <script src="SOURCE_SCRIPTS/kendo.list.js"></script>
         <script src="SOURCE_SCRIPTS/kendo.dropdownlist.js"></script>
         <script src="SOURCE_SCRIPTS/kendo.tabstrip.js"></script>
+        <script src="SUITE_SCRIPTS/kendo.examples.nav.js"></script>
         <script src="SHARED_SCRIPTS/kendo.examples.js"></script>
         <!-- script -->
         <title>Overview</title>
@@ -35,9 +36,6 @@
             <div class="floatWrap centerWrap">
                 <h1><a id="logo" href="http://www.kendoui.com">Kendo</a></h1>
                 <a id="referenceUrl" href=""></a>
-                <script>
-                    var normalizedUrl = getNormalizedUrl();
-                </script>
                 <ul>
                     <li><a href="http://www.kendoui.com/kendo-ui">UI Framework</a></li>
                     <li><a href="http://www.kendoui.com/kendo-ui-mobile">Mobile</a></li>
@@ -72,9 +70,7 @@
 
                 <div id="main">
                     <h1 id="exampleTitle" class="k-content"></h1>
-                    <script>
-                        initializeNavigation(normalizedUrl);
-                    </script>
+                    <script>initializeNavigation()</script>
                     <div id="exampleWrap">
                         <script>preventFOUC()</script>
                         <!-- nav -->
