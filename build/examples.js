@@ -126,15 +126,23 @@ function updateBaseLocation(html, base) {
 
 function componentFromFilename(file) {
     var parts = file.substring(outputPath.length).split("/"),
-        candidate = parts[0] || parts[1];
+        candidate = parts[2];
+
+    if (candidate == "overview") {
+        return;
+    }
+
+    // until other dataviz components appear, all are consider charts
+    if (parts[1] == "dataviz") {
+        candidate = "chart";
+    }
 
     var exceptions = [
         "animation",
-        "integration",
-        "overview"
+        "integration"
     ];
 
-    if (parts.length > 2 && exceptions.indexOf(candidate) == -1) {
+    if (parts.length > 3 && exceptions.indexOf(candidate) == -1) {
         return candidate;
     }
 }
