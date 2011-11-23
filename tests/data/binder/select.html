@@ -57,7 +57,7 @@
             test("binding by data attribute", function() {
                 var model = { foo: "bar" }, binder = new Binder(select, model);
 
-                select.attr("data-field", "foo");
+                select.attr("data-kendo-field", "foo");
                 select.append("<option selected>foo</option>");
                 select.trigger("change");
 
@@ -66,10 +66,10 @@
 
             test("binding select to inline data source", function() {
                 var model = { categoryId: 2 }, binder = new Binder(select.empty().attr({
-                    "data-field": "categoryId",
-                    "data-text-field": "name",
-                    "data-value-field": "id",
-                    "data-source": "[{'name':'Category 1', 'id': 1},{ 'name': 'Category 2', 'id': 2}]"
+                    "data-kendo-field": "categoryId",
+                    "data-kendo-text-field": "name",
+                    "data-kendo-value-field": "id",
+                    "data-kendo-source": "[{'name':'Category 1', 'id': 1},{ 'name': 'Category 2', 'id': 2}]"
                 }), model);
 
                 equal(select.find("option").length, 2);
@@ -80,10 +80,10 @@
 
             test("binding select to global data source", function() {
                 var model = { categoryId: 2 }, binder = new Binder(select.empty().attr({
-                    "data-field": "categoryId",
-                    "data-text-field": "name",
-                    "data-value-field": "id",
-                    "data-source": "categories"
+                    "data-kendo-field": "categoryId",
+                    "data-kendo-text-field": "name",
+                    "data-kendo-value-field": "id",
+                    "data-kendo-source": "categories"
                 }), model);
 
                 equal(select.find("option").length, 2);
@@ -98,10 +98,10 @@
                 });
                 var model = new MyModel( { categoryId: 2 }),
                     binder = new Binder(select.empty().attr({
-                        "data-field": "categoryId",
-                        "data-text-field": "name",
-                        "data-value-field": "id",
-                        "data-source": "foo"
+                        "data-kendo-field": "categoryId",
+                        "data-kendo-text-field": "name",
+                        "data-kendo-value-field": "id",
+                        "data-kendo-source": "foo"
                     }), model);
 
                 equal(select.find("option").length, 2);

@@ -58,7 +58,7 @@
             test("binding by data attribute", function() {
                 var model = { foo: "bar" }, binder = new Binder(textbox, model);
 
-                textbox.attr("data-field", "foo");
+                textbox.attr("data-kendo-field", "foo");
                 textbox.val("foo");
                 textbox.trigger("change");
 
