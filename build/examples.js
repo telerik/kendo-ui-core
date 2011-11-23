@@ -285,7 +285,7 @@ function exampleDepth(fileName, root) {
 function processExample(fileName, deployConfig) {
     var exampleHTML = kendoBuild.readText(fileName),
         depth = exampleDepth(fileName, deployConfig.root),
-        base = fileName === outputPath + "/index.html" ? "" : "../../",
+        base = fileName === outputPath + "/index.html" ? "" : parentFolder(depth) + "/",
         scriptRegion = mergeResourceRegion(exampleHTML, "script", deployConfig, depth),
         cssRegion = mergeResourceRegion(exampleHTML, "css", deployConfig, depth),
         component = componentFromFilename(fileName);
