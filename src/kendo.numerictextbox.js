@@ -408,6 +408,8 @@
                 that._step(-1);
             } else if (key == keys.UP) {
                 that._step(1);
+            } else if (key == keys.ENTER) {
+                that._change(that.element.val());
             }
 
             if (that._prevent(key) && !e.ctrlKey) {
