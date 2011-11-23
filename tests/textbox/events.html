@@ -65,6 +65,18 @@
                 textbox._change("22");
             });
 
+            asyncTest("raise DOM change", function() {
+                var textbox = new NumericTextBox(input);
+
+                input.bind("change", function() {
+                    ok(true);
+                    equal(textbox.value(), 22);
+                    start();
+                });
+
+                textbox._change("22");
+            });
+
             test("click arrow should focus input", function() {
                 var textbox = new NumericTextBox(input);
 
