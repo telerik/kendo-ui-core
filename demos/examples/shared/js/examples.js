@@ -43,7 +43,7 @@
             skin: /kendo\.\w+(\.min)?\.css/i
         };
 
-    selectCategory = function(element) {
+    function selectCategory(element) {
         $("#topnav .selected").removeClass("selected");
         $(element).addClass("selected");
 
@@ -71,22 +71,21 @@
             referenceUrl = $("#referenceUrl")[0].href;
         }
 
-        console.log(referenceUrl);
-
         $("#navWrap li a").each(function() {
             var match = $(this).attr("href").match(regexes.nav);
-            $(this).attr("href", referenceUrl + (match ? match[1] : ""));
+            $(this).attr("href", referenceUrl + "web/" + (match ? match[1] : ""));
         });
     };
 
     Application = {
         load: function(href) {
-            $.each($(document).find(".k-window-content"), function(index, window) {
-                window = $(window).data("kendoWindow");
-                if (window) {
-                    window.close();
-                }
-            });
+            $(document).find(".k-window-content")
+                .each(function(index, kendoWindow) {
+                    kendoWindow = $(kendoWindow).data("kendoWindow");
+                    if (kendoWindow) {
+                        kendoWindow.close();
+                    }
+                });
 
             Application.fetch(href);
 
@@ -111,8 +110,9 @@
             var result = regexes.title.exec(currentHtml),
                 title = result ? $.trim(result[1]) : "";
 
-            if (title)
+            if (title) {
                 document.title = title;
+            }
 
             return title;
         },
@@ -392,7 +392,6 @@
 
             $(document).data("kendoSkin", kendoSkin);
         }
-
     };
 
     initialFolder = location.href.match(/\//g).length;
@@ -413,8 +412,8 @@
     $(Application.init);
 
     function getInitialStylePath() {
-        var result = document.getElementsByTagName("head")[0].innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)kendo\.common/i);
-        return result ? result[1] : document.getElementsByTagName("head")[0].innerHTML.match(/href=\W(.*?)styles\/kendo\.common/)[1];
+        var head = document.getElementsByTagName("head")[0];
+        return head.innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)examples\.css/i)[1];
     }
 
     function locatePage(url) {
@@ -459,22 +458,23 @@
     }
 
     function initializeNavigation() {
-        window.normalizedUrl = getNormalizedUrl();
+        var url = window.normalizedUrl = getNormalizedUrl(), link;
 
-        var matchedUrl = normalizedUrl.match(/([^\/]+\/[^\/\?]+)(\?.*)?$/);
+        url = url.match(regexes.nav);
 
-        if (matchedUrl) {
-            var url = matchedUrl[1].toLowerCase(),
-                page = locatePage(url);
+        if (url) {
+            url = url[1].toLowerCase();
+            page = locatePage(url);
 
             $("#navmainWrap").toggleClass("singleColumn", page == "overview");
 
             selectCategory($("#topnav #" + page)[0]);
 
-            var link = $("#navWrap .k-link[href*='" + url + "']")
-                .addClass("k-state-selected").addClass("chosen");
+            link = $("#navWrap .k-link[href*='" + url + "']")
+                .addClass("k-state-selected chosen");
 
-            link.closest(".k-panelbar").data("kendoPanelBar").expand(link.parent().parents(".k-item"), false);
+            link.closest(".k-panelbar").data("kendoPanelBar")
+                .expand(link.parent().parents(".k-item"), false);
         }
 
         $(document).ready( function () {
@@ -487,9 +487,10 @@
                     { text: "Black", control: "Menu", value: "black" },
                     { text: "Silver", control: "Menu", value: "silver" }
                 ],
-                template: '<span class="thumbLink">\
-                            <span class="thumb #= data.text.toLowerCase() #Thumb" style="background-image: url(#= initialRelativePath #styles/#= data.control #/thumbSprite.png)">\
-                            <span class="gloss"></span></span><span class="skinTitle">#= data.text #</span></span>'
+                template: '<span class="thumbLink">' +
+                    '<span class="thumb #= data.text.toLowerCase() #Thumb" ' +
+                        'style="background-image: url(#= initialRelativePath #shared/styles/#= data.control #/thumbSprite.png)">' +
+                    '<span class="gloss"></span></span><span class="skinTitle">#= data.text #</span></span>'
             });
 
             if (kendoSkin) {
