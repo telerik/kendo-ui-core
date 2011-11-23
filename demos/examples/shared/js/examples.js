@@ -390,7 +390,7 @@
 
     initialFolder = location.href.match(/\//g).length;
     initialRelativePath = getInitialStylePath();
-    kendoSkin = "hakama";
+    kendoSkin = "default";
 
     try {
         if (sessionStorage && sessionStorage.length) {
@@ -475,7 +475,7 @@ function initializeNavigation (normalizedUrl) {
 
         skinSelector.kendoDropDownList({
             dataSource: [
-                            { text: "Hakama", control: "Menu", value: "hakama" },
+                            { text: "Default", control: "Menu", value: "default" },
                             { text: "Blue Opal", control: "Menu", value: "blueopal" },
                             { text: "Black", control: "Menu", value: "black" },
                             { text: "Silver", control: "Menu", value: "silver" }
