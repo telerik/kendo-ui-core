@@ -60,6 +60,10 @@ tests.push(
         title: "binder textbox binding"
     },
     {
+        page: "data/binder/checkbox.html",
+        title: "binder checkbox binding"
+    },
+    {
         page: "data/binder/textarea.html",
         title: "binder textarea binding"
     },

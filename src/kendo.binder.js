@@ -67,13 +67,15 @@
             var that = this,
                 model = that.model,
                 options = that.options,
-                field = $(target).attr("data-field") || $(target).attr("name"),
+                element = $(target),
+                field = element.attr("data-field") || element.attr("name"),
                 setting = options[field] || {};
 
             if (field) {
                 return {
                     bindView: function() {
                         var value = model.get(field);
+
                         if (setting.format) {
                             value = setting.format(value);
                         }
@@ -82,10 +84,14 @@
                             bindSelect(target, model);
                         }
 
-                        $(target).val(value);
+                        if (element.is(":checkbox")) {
+                            element.attr("checked", value === true);
+                        } else {
+                            element.val(value);
+                        }
                     },
                     bindModel: function() {
-                        var value = target.value,
+                        var value = element.is(":checkbox") ? element.is(":checked") : target.value,
                             values = {};
 
                         if (setting.parse) {
