@@ -13,9 +13,11 @@ var fs = require("fs"),
 var VERSION = kendoBuild.generateVersion(),
     CDN_URL = process.argv[2] || "http://cdn.kendostatic.com/" + VERSION,
 
+    SOURCE_ROOT = "src",
     STAGING_ROOT = "live",
     STAGING_SOURCE = "#= parentFolder(depth + 1) #",
-    STAGING_SCRIPTS = template(STAGING_SOURCE + "/src"),
+    STAGING_SCRIPTS_ROOT = "js-deploy",
+    STAGING_SCRIPTS = template("#= parentFolder(depth) #/" + STAGING_SCRIPTS_ROOT),
     STAGING_STYLES = template(STAGING_SOURCE + "/styles"),
     STAGING_SHARED_ROOT = "#= parentFolder(depth) #/shared",
     STAGING_SHARED_SCRIPTS = template(STAGING_SHARED_ROOT + "/js"),
@@ -424,11 +426,6 @@ function build(deployConfig) {
 };
 
 function buildStaging() {
-    themes.build();
-
-    console.log("merging multipart scripts...");
-    kendoScripts.mergeScripts("src/");
-
     build({
         root: STAGING_ROOT,
         scripts: STAGING_SCRIPTS,
@@ -439,6 +436,18 @@ function buildStaging() {
         themeBuilderRoot: STAGING_THEMEBUILDER_ROOT,
         useMinified: false
     });
+
+    console.log("Building themes");
+    themes.build();
+
+    console.log("Merging multipart scripts");
+    kendoScripts.mergeScripts(SOURCE_ROOT);
+
+    var jsRoot = path.join(STAGING_ROOT, STAGING_SCRIPTS_ROOT);
+    kendoBuild.mkdir(jsRoot);
+
+    console.log("Building deploy scripts");
+    kendoScripts.deployScripts(SOURCE_ROOT, jsRoot);
 }
 
 function buildLive(deployRoot) {
