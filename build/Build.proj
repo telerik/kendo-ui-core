@@ -14,23 +14,13 @@
             <Output TaskParameter="Suffix" PropertyName="DateSuffixDots" />
         </GenerateVersionDependentSuffix>
 
-        <Exec Command='"$(SolutionRoot)\build\NodeBuild.bat" "$(SolutionRoot)" "$(DateSuffixDots)" "$(CDNRoot)$(DateSuffixDots)"'/>
-
-        <CallTarget Targets="CopyToOutputLocation" />
+        <Exec Command='"$(SolutionRoot)\build\NodeBuild.bat" "$(SolutionRoot)"'/>
 
         <BuildStep  TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
             Id="$(StepId)"
             Status="Succeeded" />
 
         <OnError ExecuteTargets="MarkBuildStepAsFailed" />
-    </Target>
-
-    <Target Name="CopyToOutputLocation">
-        <ItemGroup>
-            <Resources Include="$(SolutionRoot)\release\**" />
-        </ItemGroup>
-
-        <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\$(DirPath)" />
     </Target>
 
     <Target Name="MarkBuildStepAsFailed">

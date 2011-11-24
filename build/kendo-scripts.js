@@ -144,7 +144,7 @@ function mergeScripts() {
 }
 
 function mergeMultipartScript(script, srcDir, outDir, header, compress) {
-    var outFile = script.output,
+    var outFile = scriptOutName(script.output, compress),
         cacheKey = srcDir + compress + outFile,
         result = mergeCache[cacheKey] || "";
 
@@ -156,7 +156,6 @@ function mergeMultipartScript(script, srcDir, outDir, header, compress) {
         });
 
         if (compress) {
-            outFile = outFile.replace(".js", ".min.js");
             result = kendoBuild.minifyJs(result);
         }
 
