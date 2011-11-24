@@ -425,11 +425,12 @@
         POINT = ".",
         COMMA = ",",
         SHARP = "#",
-        ZERO = "0";
+        ZERO = "0",
+        EN = "en-US";
 
     //cultures
     kendo.cultures = {"en-US" : {
-        name: "en-US",
+        name: EN,
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
@@ -492,7 +493,7 @@
     kendo.culture = function(cultureName) {
         if (cultureName !== undefined) {
             var cultures = kendo.cultures,
-                culture = cultures[cultureName] || cultures["en-US"];
+                culture = cultures[cultureName] || cultures[EN];
 
             culture.calendar = culture.calendars.standard;
             cultures.current = culture;
@@ -502,7 +503,7 @@
     };
 
     //set current culture to en-US.
-    kendo.culture("en-US");
+    kendo.culture(EN);
 
     function pad(number) {
         return number < 10 ? "0" + number : number;
