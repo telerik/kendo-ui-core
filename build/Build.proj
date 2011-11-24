@@ -16,21 +16,11 @@
 
         <Exec Command='"$(SolutionRoot)\build\NodeBuild.bat" "$(SolutionRoot)"'/>
 
-        <CallTarget Targets="CopyToOutputLocation" />
-
         <BuildStep  TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
             Id="$(StepId)"
             Status="Succeeded" />
 
         <OnError ExecuteTargets="MarkBuildStepAsFailed" />
-    </Target>
-
-    <Target Name="CopyToOutputLocation">
-        <ItemGroup>
-            <Resources Include="$(SolutionRoot)\release\**" />
-        </ItemGroup>
-
-        <Copy SourceFiles="@(Resources)" DestinationFolder="$(DropLocation)\$(DirPath)" />
     </Target>
 
     <Target Name="MarkBuildStepAsFailed">

@@ -445,8 +445,7 @@ function buildLive(deployRoot) {
 }
 
 if (require.main === module) {
-    buildLive("deploy/online-examples");
-    //buildStaging();
+    buildStaging();
 } else {
     exports.buildLive = buildLive;
 }
