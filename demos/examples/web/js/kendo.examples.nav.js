@@ -474,12 +474,12 @@ var categories = {
             ]
         },
         {
-            text: "Validation",
-            spriteCssClass: "validationIcon",
+            text: "Validator",
+            spriteCssClass: "validatorIcon",
             items: [
                 {
                     text: "Basic usage",
-                    url: "validatable/index.html"
+                    url: "validator/index.html"
                 }
             ]
         }
