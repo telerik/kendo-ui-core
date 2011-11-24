@@ -76,12 +76,7 @@ function getRegionRegex(regionName) {
 
 function formatRegion(exampleInfo, regionType, deployConfig) {
     var result,
-        pathInfo = {
-            depth: exampleInfo.depth,
-            suiteName: exampleInfo.suite,
-            parentFolder: parentFolder
-        },
-        baseResources = resolveResources(baseRegions[regionType].html, deployConfig, pathInfo);
+        baseResources = resolveResources(baseRegions[regionType].html, deployConfig, exampleInfo);
 
         result = baseResources.replace(/.*?(examples-offline\.css|console\.js|people\.js|prettify\.js).*/g, "");
 
@@ -89,15 +84,16 @@ function formatRegion(exampleInfo, regionType, deployConfig) {
             result = result.replace(/.*?examples\.nav\.js.*/g, "");
         }
 
-        if (deployConfig.useMinified) {
-            result = result.replace(/(.*?)\.(css|js)/g, "$1.min.$2");
-            result = result.replace(/min\.min/g, "min");
-        }
-
     return result;
 }
 
-function resolveResources(text, deployConfig, pathInfo) {
+function resolveResources(text, deployConfig, exampleInfo) {
+    var pathInfo = {
+            depth: exampleInfo.depth,
+            suiteName: exampleInfo.suite,
+            parentFolder: parentFolder
+    };
+
     text = replaceReference(text, "/shared/js", SHARED_SCRIPTS_MARKER.source);
     text = replaceReference(text, "/shared/styles", SHARED_STYLES_MARKER.source);
     text = replaceReference(text, "/js", SUITE_SCRIPTS_MARKER.source);
@@ -109,6 +105,11 @@ function resolveResources(text, deployConfig, pathInfo) {
     text = text.replace(SHARED_SCRIPTS_MARKER, deployConfig.sharedScripts(pathInfo));
     text = text.replace(SHARED_STYLES_MARKER, deployConfig.sharedStyles(pathInfo));
     text = text.replace(SUITE_SCRIPTS_MARKER, deployConfig.suiteScripts(pathInfo));
+
+    if (deployConfig.useMinified) {
+        text = text.replace(/(.*?)\.(css|js)/g, "$1.min.$2");
+        text = text.replace(/min\.min/g, "min");
+    }
 
     return text;
 }
@@ -293,15 +294,17 @@ function processExample(fileName, deployConfig) {
         isLandingPage = fileName === outputPath + "/index.html",
         base = isLandingPage ? "" : parentFolder(depth) + "/",
         scriptRegion = formatRegion(info, "script", deployConfig),
+        cssRegion;
+
+    if (isLandingPage) {
+        cssRegion = regionRegex.css.exec(exampleSource)[1];
+        cssRegion = resolveResources(cssRegion, deployConfig, info);
+        exampleSource = exampleSource.replace(regionRegex.css, cssRegion);
+    } else {
         cssRegion = formatRegion(info, "css", deployConfig);
-
-    exampleSource = baseRegions.css.exec(exampleSource, cssRegion);
-
-    if (!isLandingPage) {
         exampleSource = baseRegions.meta.exec(exampleSource, baseRegions.meta.html);
-
+        exampleSource = baseRegions.css.exec(exampleSource, cssRegion);
         exampleSource = baseRegions.script.exec(exampleSource, scriptRegion);
-
         exampleSource = baseRegions.nav.exec(exampleSource, updateBaseLocation(baseRegions.nav.html, base));
 
         if (!info.hasNavigation) {
