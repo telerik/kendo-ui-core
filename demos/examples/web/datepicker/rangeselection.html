@@ -37,6 +37,7 @@
                         var startDate = start.value();
 
                         if (startDate) {
+                            startDate = new Date(startDate);
                             startDate.setDate(startDate.getDate() + 1);
                             end.min(startDate);
                         }
@@ -46,6 +47,7 @@
                         var endDate = end.value();
 
                         if (endDate) {
+                            endDate = new Date(endDate);
                             endDate.setDate(endDate.getDate() - 1);
                             start.max(endDate);
                         }
