@@ -49,6 +49,18 @@
                 ok(model.fields.foo);
             });
 
+            test("define assigns field type", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: { type: "string" }
+                    }
+                });
+
+                var model = new MyModel();
+
+                equal(model.fields.foo.type, "string");
+            });
+
             test("define if key is assign model is not new", function() {
                 var MyModel = Model.define({
                     id: "id"
@@ -63,6 +75,21 @@
                 });
                 var model = new MyModel();
                 ok(model.isNew());
+            });
+
+            test("id function does not return default value for the id field", function() {
+                var MyModel = Model.define({
+                    id: "id",
+                    fields: {
+                        id: {
+                            field: "id",
+                            defaultValue: 0
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+                ok(model.id() !== 0);
             });
 
             test("isNew returns true if no key is defined", function() {
@@ -114,6 +141,261 @@
                     id;
                 id = MyModel.id(data);
                 equal(id, 1);
+            });
+
+            test("define assigns field validation rules", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            validation: {
+                                required: true
+                           }
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok($.isPlainObject(model.fields.foo.validation));
+                ok(model.fields.foo.validation.required);
+            });
+
+            test("define accepts custom validation rules", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            validation: {
+                                bar: $.noop
+                           }
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.fields.foo.validation.bar);
+                ok($.isFunction(model.fields.foo.validation.bar));
+            });
+
+            test("field can be set as editable false", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            editable: false
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(!model.fields.foo.editable);
+            });
+
+            test("empty string default value is set for field of type string", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo", type: "string"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                equal(model.defaultItem["foo"], "");
+                equal(model.get("foo"), "");
+            });
+
+            test("empty string default value is set for field of type string where field name differs from the field", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "bar", type: "string"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                equal(model.defaultItem["bar"], "");
+                equal(model.get("bar"), "");
+            });
+
+            test("model data is synchronized with original data", function() {
+                var data = { id: 1, foo: "bar"};
+                var model = new (Model.define())(data);
+
+                model.set("foo", "foo");
+
+                equal(model.get("foo"), "foo");
+                equal(data.foo, "foo");
+            });
+
+            test("model data is synchronized with original data as empty object", function() {
+                var data = {};
+                var model = new (Model.define({ fields: { foo: "foo", bar: "bar" } }))(data);
+
+                model.set("foo", "foo");
+
+                equal(model.get("foo"), "foo");
+                equal(model.data.foo, "foo");
+                equal(model.data.bar, "");
+            });
+
+            test("zero is set as default value for numeric field", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo", type: "number"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.defaultItem["foo"] === 0);
+                ok(model.get("foo") === 0);
+            });
+
+            test("date is set as default value for date field", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo", type: "date"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.defaultItem["foo"].getDate() === new Date().getDate());
+                ok(model.get("foo").getDate() === new Date().getDate());
+            });
+
+            test("setting default value by type should be case insensitive", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo", type: "DATE"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.defaultItem["foo"].getDate() === new Date().getDate());
+                ok(model.get("foo").getDate() === new Date().getDate());
+            });
+
+            test("false is set as default value for boolean field", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo", type: "Boolean"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.defaultItem["foo"] === false);
+                ok(model.get("foo") === false);
+            });
+
+            test("defaultValue sets field default value", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            defaultValue: "foo"
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                equal(model.defaultItem["foo"], "foo");
+                equal(model.get("foo"), "foo");
+            });
+
+            test("defaultValue set to 0 is set", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            defaultValue: 0
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.defaultItem["foo"] === 0);
+                ok(model.get("foo") === 0);
+            });
+
+            test("isNew and default id value", function() {
+                var MyModel = Model.define({
+                    id: "foo",
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            defaultValue: 0
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.isNew());
+            });
+
+            test("isNew and id as function", function() {
+                var MyModel = Model.define({
+                    id: function() {},
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            defaultValue: 0
+                        }
+                    }
+                });
+
+                var model = new MyModel();
+
+                ok(model.isNew());
+            });
+
+
+            test("type convert is assign to the field definition", function() {
+                var MyModel = Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo", type: "number"
+                        }
+                    }
+                });
+
+                ok($.isFunction(MyModel.fields.foo.parse));
+            });
+
+            test("custom type converter is assign to the field definition", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "number",
+                                parse: function() {
+                                    return true;
+                                }
+                            }
+                        }
+                });
+
+                ok(MyModel.fields.foo.parse());
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

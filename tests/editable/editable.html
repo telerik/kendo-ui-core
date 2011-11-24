@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Editable Tests</title>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js" ></script>
+        <script src="../../src/kendo.numerictextbox.js" ></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Editable Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Editable = kendo.ui.Editable,
+                Model = kendo.data.Model,
+                div,
+                defaultModel = new Model.define({ fields: { foo: "foo" } });
+
+            module("kendo.ui.Editable", {
+                setup: function() {
+                    div = $("<div />");
+                },
+                teardown: function() {
+                }
+            });
+
+            function setup(options, createModel) {
+                return new Editable(div, options);
+            }
+
+            test("kendoEditable is attached to the target element", function() {
+                var element = div.kendoEditable();
+
+                ok(element.data("kendoEditable") instanceof Editable);
+            });
+
+            test("renders input element for field", function() {
+                var editable = setup({ fields: "foo", model: defaultModel });
+
+                equal(editable.element.find(":input").length, 1);
+            });
+
+            test("input name is same as field", function() {
+                var editable = setup({ fields: "foo", model: defaultModel });
+
+                equal(editable.element.find(":input[name=foo]").length, 1);
+            });
+
+            test("no inputs are rendered when no fields are specifed", function() {
+                var editable = setup({ });
+
+                ok(!editable.element.find(":input").length);
+            });
+
+            test("input is rendered for every field", function() {
+                var editable = setup({ fields: ["foo", "bar"], model: new Model.define({ fields: { foo: "foo", bar: "bar" } }) }),
+                    elements = editable.element.find(":input");
+
+                equal(elements.length, 2);
+                equal(elements.eq(0).attr("name"), "foo");
+                equal(elements.eq(1).attr("name"), "bar");
+            });
+
+            test("input value is bound to the value from model", function() {
+                var MyModel = Model.define({ fields: { foo: "foo" } }),
+                    model = new MyModel({ foo: "bar" }),
+                    editable = setup({ fields: "foo", model: model });
+
+                equal(editable.element.find("input[name=foo]").val(), "bar");
+            });
+
+            test("container is cleared", function() {
+                div.append($("<span/>"));
+
+                var  editable = setup({ fields: "foo", model: defaultModel });
+
+                equal(div.children().length, 1);
+                equal(div.find(":input").length, 1);
+            });
+
+            test("input[type=text] is created for field with type set to number", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "number"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({ fields: "foo", model: model });
+
+                equal(div.find(":input[type=text][name=foo]").length, 1);
+            });
+
+            test("input[type=text] is created for field without type set", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({ fields: "foo", model: model });
+
+                equal(div.find(":input[type=text]").length, 1);
+            });
+
+            test("input[type=text] is created for field with type set to string", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "string"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({ fields: "foo", model: model });
+
+                equal(div.find(":input[type=text]").length, 1);
+            });
+
+            test("input[type=text] is created for field which type does not have editor defined", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "bar"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({ fields: "foo", model: model });
+
+                equal(div.find(":input[type=text]").length, 1);
+            });
+
+            test("input[type=checkbox] is created for field of type boolean", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "boolean"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({ fields: "foo", model: model });
+
+                equal(div.find(":input[type=checkbox]").length, 1);
+            });
+
+            test("custom editor is used if set", function() {
+                var wasCalled = false,
+                MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "string"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                        fields: {
+                            field: "foo",
+                            editor: function() {
+                                wasCalled = true;
+                                return $();
+                            }
+                        },
+                        model: model
+                    });
+
+                ok(wasCalled);
+            });
+
+            test("input[type=text] is created for field with type set to date", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "date"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({ fields: "foo", model: model });
+
+                equal(div.find(":input[type=text]").length, 1);
+            });
+
+            test("container and options are passed to the custom editor", function() {
+                var args,
+                MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "string"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                        fields: {
+                            field: "foo",
+                            editor: function() {
+                                args = arguments;
+                            }
+                        },
+                        model: model
+                    });
+
+                equal(args.length, 2);
+                equal(args[1].field, "foo");
+                equal(args[1].model, model);
+                ok(args[0]);
+            });
+
+            test("format is passed to editor", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo"
+                            }
+                        }
+                    }),
+                    format,
+                    model = new MyModel(),
+                     editable = setup({
+                         fields: {
+                            field: "foo",
+                            format: "bar",
+                            editor: function(container, options) {
+                                format = options.format;
+                            }
+                        },
+                        model: model
+                    });
+
+                equal(format, "bar");
+            });
+
+            test("format is passed to date type editor", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "date"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                         fields: {
+                            field: "foo",
+                            format: "bar"
+                        },
+                        model: model
+                    });
+
+                equal(div.find("input").data("kendoDatePicker").options.format, "bar");
+            });
+
+            test("default picker format is preserved if no field format is set", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "date"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                         fields: {
+                            field: "foo"
+                        },
+                        model: model
+                    });
+
+                equal(div.find("input").data("kendoDatePicker").options.format, "M/d/yyyy");
+            });
+
+            test("format is passed to number type editor", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "number"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                         fields: {
+                            field: "foo",
+                            format: "bar"
+                        },
+                        model: model
+                    });
+
+                equal(div.find("input").eq(1).data("kendoNumericTextBox").options.format, "bar");
+            });
+
+            test("default numeric format is preserved if no field format is set", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "number"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                         fields: {
+                            field: "foo"
+                        },
+                        model: model
+                    });
+
+                equal(div.find("input").eq(1).data("kendoNumericTextBox").options.format, "n");
+            });
+        </script>
+    </body>
+</html>

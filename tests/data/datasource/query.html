@@ -416,10 +416,10 @@
                 });
 
                 dataSource.query( { filter: [{ field: "age", operator: ">=", value: 1 },{ field: "age", operator: "<", value: 3 }] });
-                equal(dataSource.filter().length, 2);
-                equal(dataSource.filter()[1].field, "age");
-                equal(dataSource.filter()[1].operator, "<");
-                equal(dataSource.filter()[1].value, 3);
+                equal(dataSource.filter().filters.length, 2);
+                equal(dataSource.filter().filters[1].field, "age");
+                equal(dataSource.filter().filters[1].operator, "<");
+                equal(dataSource.filter().filters[1].value, 3);
             });
 
             test("query sets filter", function() {
@@ -428,10 +428,10 @@
                 });
 
                 dataSource.query({ filter: { field: "age", operator: "==", value: 2 } });
-                ok($.isArray(dataSource.filter()));
-                equal(dataSource.filter()[0].field, "age");
-                equal(dataSource.filter()[0].operator, "==");
-                equal(dataSource.filter()[0].value, 2);
+                ok($.isArray(dataSource.filter().filters));
+                equal(dataSource.filter().filters[0].field, "age");
+                equal(dataSource.filter().filters[0].operator, "==");
+                equal(dataSource.filter().filters[0].value, 2);
             });
 
             test("query removes filter expression from the state if not passed", function() {
@@ -753,9 +753,9 @@
                 equal(dataSource.pageSize(), 5);
                 equal(dataSource.sort()[0].field, "foo");
                 equal(dataSource.sort()[0].dir, "asc");
-                equal(dataSource.filter()[0].field, "bar");
-                equal(dataSource.filter()[0].operator, "eq");
-                equal(dataSource.filter()[0].value, "1");
+                equal(dataSource.filter().filters[0].field, "bar");
+                equal(dataSource.filter().filters[0].operator, "eq");
+                equal(dataSource.filter().filters[0].value, "1");
                 equal(dataSource.group()[0].field, "foo");
                 equal(dataSource.aggregate()[0].field, "bar");
             });

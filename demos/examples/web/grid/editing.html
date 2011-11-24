@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Basic usage</title>
+        <!-- css -->
+        <link href="../../shared/styles/examples.css" rel="stylesheet"/>
+        <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../../src/jquery.min.js"></script>
+        <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.validator.js"></script>
+        <script src="../../../../src/kendo.model.js"></script>
+        <script src="../../../../src/kendo.data.js"></script>
+        <script src="../../../../src/kendo.pageable.js"></script>
+        <script src="../../../../src/kendo.sortable.js"></script>
+        <script src="../../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../../src/kendo.groupable.js"></script>
+        <script src="../../../../src/kendo.grid.js"></script>
+        <script src="../../../../src/kendo.binder.js"></script>
+        <script src="../../../../src/kendo.editable.js"></script>
+        <script src="../../../../src/kendo.popup.js"></script>
+        <script src="../../../../src/kendo.calendar.js"></script>
+        <script src="../../../../src/kendo.datepicker.js"></script>
+        <script src="../../../../src/kendo.numerictextbox.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Basic usage</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    var crudServiceBaseUrl = "../../Service",
+                        dataSource = new kendo.data.DataSource({
+                            transport: {
+                                read: crudServiceBaseUrl + "/Products",
+                                update: {
+                                    url: crudServiceBaseUrl + "/Products/Update",
+                                    type: "POST",
+                                    contentType: 'application/json; charset=utf-8'
+                                },
+                                destroy: {
+                                    url: crudServiceBaseUrl + "/Products/Destroy",
+                                    type: "POST",
+                                    contentType: 'application/json; charset=utf-8'
+                                },
+                                create: {
+                                    url: crudServiceBaseUrl + "/Products/Create",
+                                    type: "POST",
+                                    contentType: 'application/json; charset=utf-8'
+                                },
+                                parameterMap: function(options, operation) {
+                                    if (operation !== "read" && options.models) {
+                                        return kendo.stringify(options.models);
+                                    }
+                                }
+                            },
+                            batch: true,
+                            pageSize: 30,
+                            schema: {
+                                model: {
+                                    id: "ProductID",
+                                    fields: {
+                                        ProductID: { field: "ProductID", readonly: true, nullable: true },
+                                        ProductName: { field: "ProductName", validation: { required: true } },
+                                        UnitPrice: { field: "UnitPrice", type: "number", validation: { required: true, min: 1} },
+                                        Discontinued: { field: "Discontinued", type: "boolean" },
+                                        UnitsInStock: { field: "UnitsInStock", type: "number", validation: { min: 0, required: true } }
+                                    }
+                                }
+                            }
+                        });
+
+                    $("#grid").kendoGrid({
+                        dataSource: dataSource,
+                        pageable: true,
+                        height: 400,
+                        toolbar: ["create", "save", "cancel"],
+                        columns: ["ProductName", { field: "UnitPrice", format: "{0:c\\}" }, "UnitsInStock", "Discontinued", { command: "destroy" }],
+                        editable: true
+                    });
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
+

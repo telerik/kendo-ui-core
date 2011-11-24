@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.FilterMenu Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.filtermenu.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.FilterMenu Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var DataSource = kendo.data.DataSource,
+                FilterMenu = kendo.ui.FilterMenu,
+                filterMenu,
+                model,
+                dom,
+                dataSource;
+
+
+            module("kendo.ui.FilterMenu", {
+                setup: function() {
+                    dataSource = new DataSource({
+                        schema: {
+                            model: {
+                                fields: {
+                                    foo: {
+                                        type: "string"
+                                    },
+                                    bar: {
+                                        type: "number"
+                                    },
+                                    baz: {
+                                        type: "date"
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    dom = $("<th data-field=foo />");
+                },
+                teardown: function() {
+                    dataSource.unbind("change");
+                    $(".k-filter-menu").remove();
+                }
+            });
+
+            test("initializes the name of the operator select from the field", function(){
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                equal(filterMenu.form.find("select").attr("name"), "filters[0].operator");
+            });
+
+            test("initializes the name of the value input from the field", function(){
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                equal(filterMenu.form.find("input[name='filters[0].value']").length, 1);
+            });
+
+            test("initializes the name of the extra value input from the field", function(){
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                equal(filterMenu.form.find("input[name='filters[1].value']").length, 1);
+            });
+
+            test("initializes the name of the logical operation select from the field", function(){
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                equal(filterMenu.form.find("select:eq(1)").attr("name"), "logic");
+            });
+
+            test("initializes a hidden whose value is the field name", function(){
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                var hidden = filterMenu.form.find("input[type=hidden]").eq(0);
+
+                equal(hidden.attr("name"), "filters[0].field");
+                equal(hidden.val(), "foo");
+            });
+
+            test("initializes a hidden whose value is the field name when showing extra details", function(){
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                var hidden = filterMenu.form.find("input[type=hidden]").eq(1);
+
+                equal(hidden.attr("name"), "filters[1].field");
+                equal(hidden.val(), "foo");
+            });
+
+            test("initializes the name of the extra operator select", function(){
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                equal(filterMenu.form.find("select:eq(2)").attr("name"), "filters[1].operator");
+            });
+
+            test("display extra filtering options by default", function(){
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
+
+                equal(filterMenu.form.find("select").length, 3);
+            });
+
+            test("does not display extra filtering options if extra is set to false", function(){
+                filterMenu = new FilterMenu(dom, {extra: false, dataSource: dataSource});
+
+                equal(filterMenu.form.find("select").length, 1);
+            });
+
+            test("can change the filtering messages", function(){
+                filterMenu = new FilterMenu(dom, {
+                    messages: {
+                        info: "info"
+                    },
+                    dataSource: dataSource
+                });
+
+                ok(filterMenu.form.find("div:contains(info)").length);
+            });
+
+            test("can change the operators", function(){
+                filterMenu = new FilterMenu(dom, {
+                    operators: {
+                        string: {
+                            foo: "bar"
+                        }
+                    },
+                    dataSource: dataSource
+                });
+
+                equal(filterMenu.form.find("select option:first").val(), "foo");
+            });
+
+            test("submitting the form sets the filterMenu of the datasource", function() {
+                filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+
+                filterMenu.form.find("input[name='filters[0].value']").val("bar");
+                filterMenu.form.submit();
+
+                equal(dataSource.filter().filters[0].value, "bar");
+                equal(dataSource.filter().filters[0].field, "foo");
+                equal(dataSource.filter().filters[0].operator, "eq");
+            });
+
+            test("submitting the form does not send the extra filterMenu if it is empty", function() {
+                filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filterMenu.form.find("input[name='filters[0].value']").val("bar");
+                filterMenu.form.submit();
+
+                equal(dataSource.filter().filters.length, 1);
+            });
+
+            test("parses filterMenu value according to field type", function() {
+                dom = $("<th data-field=bar />");
+
+                filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filterMenu.filter({
+                    filters:[
+                        { value: "1", field: "bar"}
+                    ]
+                });
+
+                strictEqual(dataSource.filter().filters[0].value, 1);
+            });
+
+            test("filtering twice", function() {
+                filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filterMenu.filter({
+                    filters:[
+                        { value: "1", field: "foo"}
+                    ]
+                });
+
+                filterMenu.filter({
+                    filters:[
+                        { value: "2", field: "foo"}
+                    ]
+                });
+
+                equal(dataSource.filter().filters.length, 1);
+                equal(dataSource.filter().filters[0].value, "2");
+            });
+
+            test("filtering by two expressions", function() {
+                filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filterMenu.filter({
+                    filters:[
+                        { value: "1", field: "foo"},
+                        { value: "2", field: "foo"}
+                    ]
+                });
+
+                equal(dataSource.filter().filters.length, 2);
+                equal(dataSource.filter().filters[0].value, "1");
+                equal(dataSource.filter().filters[1].value, "2");
+            });
+
+            test("or filtering", function() {
+                filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filterMenu.form.find("input[name='filters[0].value']").val("foo");
+                filterMenu.form.find("input[name='filters[1].value']").val("bar");
+                filterMenu.form.find("select[name='logic']").val("or");
+
+                filterMenu.form.submit();
+
+                equal(dataSource.filter().filters.length, 2);
+                equal(dataSource.filter().logic, "or");
+                equal(dataSource.filter().filters[0].value, "foo");
+                equal(dataSource.filter().filters[1].value, "bar");
+            });
+
+            test("filtering by multiple fields", function() {
+                var filter1 = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filter1.filter({
+                    filters:[
+                        { value: "1", field: "foo"}
+                    ]
+                });
+
+                dom = $("<th data-field=bar />");
+
+                var filter2 = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filter2.filter({
+                    filters:[
+                        { value: "1", field: "bar"}
+                    ]
+                });
+
+                equal(dataSource.filter().filters.length, 2);
+                equal(dataSource.filter().filters[0].field, "foo");
+                equal(dataSource.filter().filters[1].field, "bar");
+            });
+
+            test("resetting the form clears the filterMenu", function() {
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filterMenu.filter({
+                    filters:[
+                        { value: "1", field: "foo"}
+                    ]
+                });
+
+                filterMenu.form.trigger("reset");
+
+                equal(dataSource.filter(), null);
+            });
+
+            test("populates the first field value from the datasource", function() {
+                dataSource.filter( { field: "foo", value: "1" });
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                equal(filterMenu.form.find("[name='filters[0].value']").val(), "1");
+            });
+
+            test("populates the second field value from the datasource", function() {
+                dataSource.filter( { logic: "or", filters: [{ field: "foo", value: "1" }, { field: "foo", value: "2" }]});
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                equal(filterMenu.form.find("[name='filters[0].value']").val(), "1");
+                equal(filterMenu.form.find("[name='filters[1].value']").val(), "2");
+            });
+
+            test("populates the logic value from the datasource", function() {
+                dataSource.filter( { logic: "or", filters: [{ field: "foo", value: "1" }, { field: "foo", value: "2" }]});
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                equal(filterMenu.form.find("[name='logic']").val(), "or");
+            });
+
+            test("populates the operator from the datasource", function() {
+                dataSource.filter( { field: "foo", value: "1", operator: "neq" });
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                equal(filterMenu.form.find("[name='filters[0].operator']").val(), "neq");
+            });
+
+            test("applies active state", function() {
+                dataSource.filter( { field: "foo", value: "1", operator: "neq" });
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                ok(filterMenu.link.hasClass("k-state-active"));
+            });
+
+            test("removes active state", function() {
+                dataSource.filter( { field: "foo", value: "1", operator: "neq" });
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                dataSource.filter(null);
+                ok(!filterMenu.link.hasClass("k-state-active"));
+            });
+            test("creates numerictextbox for number fields", function() {
+                var filterMenu = new FilterMenu(
+                    dom.attr("data-field", "bar"), {
+                        dataSource: dataSource
+                    });
+
+                ok(filterMenu.form.find("[name='filters[0].value']").data("kendoNumericTextBox"));
+            });
+
+            test("creates datepicker for date fields", function() {
+                var filterMenu = new FilterMenu(
+                    dom.attr("data-field", "baz"), {
+                        dataSource: dataSource
+                    });
+
+                ok(filterMenu.form.find("[name='filters[0].value']").data("kendoDatePicker"));
+            });
+
+            test("updates dropdownlists", function() {
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                dataSource.filter( { logic: "or", filters: [{ field: "foo", value: "1", operator: "neq" }, { field: "foo", value: "2", operator: "neq" }]});
+
+                equal(filterMenu.form.find("[name='filters[0].operator']").data("kendoDropDownList").current().text(), "Is not equal to");
+                equal(filterMenu.form.find("[name='filters[1].operator']").data("kendoDropDownList").current().text(), "Is not equal to");
+                equal(filterMenu.form.find("[name=logic]").data("kendoDropDownList").current().text(), "Or");
+            });
+
+            test("updates numerictextboxes", function() {
+                var filterMenu = new FilterMenu(dom.attr("data-field", "bar"), {
+                    dataSource: dataSource
+                });
+
+                dataSource.filter({ field: "bar", value: 1 });
+                equal(filterMenu.form.find("[name='filters[0].value']").data("kendoNumericTextBox")._text.val(), "1.00");
+            });
+
+            test("updates datepickers", function() {
+                var filterMenu = new FilterMenu(dom.attr("data-field", "baz"), {
+                    dataSource: dataSource
+                });
+
+                var date = new Date(2011, 1, 1);
+                dataSource.filter({ field: "baz", value:date });
+                equal(filterMenu.form.find("[name='filters[0].value']").data("kendoDatePicker").value().getTime(), date.getTime());
+            });
+
+            test("closes sibling filtering menus", function() {
+                var dom1 = $("<div data-field=foo />").appendTo(document.body);
+                var dom2 = $("<div data-field=bar />").appendTo(document.body);
+
+                var filterMenu1 = new FilterMenu(dom1, {
+                    dataSource: dataSource
+                });
+
+                var filterMenu2 = new FilterMenu(dom2, {
+                    dataSource: dataSource
+                });
+
+                filterMenu1.link.click();
+                filterMenu2.link.click();
+
+                ok(!filterMenu1.popup.visible());
+            });
+       </script>
+    </body>
+</html>

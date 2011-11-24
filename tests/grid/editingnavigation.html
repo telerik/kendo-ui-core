@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid Editing navigation</title>
+        <script src="../../src/jquery.min.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.pageable.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.selectable.js"></script>
+        <script src="../../src/kendo.groupable.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Grid Editing navigation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                table,
+                DataSource = kendo.data.DataSource,
+                Model = kendo.data.Model,
+                dataSource;
+
+            function setup(options) {
+                options = $.extend({}, {
+                editable: true,
+                navigatable: true,
+                dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "id",
+                                fields: {
+                                    id: { field: "id", readonly: true },
+                                    name: "name",
+                                    foo: { field: "foo", validation: { required: true } }
+                                }
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom", id: 0 }, { foo: "baz", name: "jerry", id: 1 }]
+                    })
+                }, options);
+                dataSource = options.dataSource;
+
+                return table.kendoGrid(options).data("kendoGrid");
+            }
+
+            $.fn.press = function(key, ctrl, shift) {
+                return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift } );
+            }
+
+            module("grid editing navigation", {
+                setup: function() {
+                    table = document.createElement("table");
+                    document.body.appendChild(table);
+
+                    table = $(table);
+                },
+                teardown: function() {
+                    table.closest(".k-grid").remove();
+                }
+            });
+
+            test("pressing enter key edit the cell", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER);
+
+                ok(table.find("tr>td:first").hasClass("k-edit-cell"));
+            });
+
+            test("pressing enter key on command column does not edit the cell", function() {
+                var grid = setup({ columns: [{ command: "destroy" }, "id"]} );
+
+                grid.element.focus().press(kendo.keys.ENTER);
+
+                ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr>td:first").hasClass("k-state-focused"));
+            });
+
+            test("pressing enter key on edited cell exits edit mode", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER).press(kendo.keys.ENTER);
+
+                ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
+            });
+
+            test("pressing enter key on edited cell restores current", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER).press(kendo.keys.ENTER);
+
+                ok(table.find("tr>td:first")[0] === grid.current()[0]);
+                ok(table.find("tr>td:first").hasClass("k-state-focused"));
+            });
+
+            test("pressing enter key on edited cell does not exits edit mode if validation fails", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER);
+                table.find("tr>td>input:first").val("").press(kendo.keys.ENTER);
+
+                ok(table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr>td>input:first")[0] === document.activeElement);
+            });
+
+            test("pressing navigation key action is skipped if cell is edited", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER);
+                table.find("tr>td>input:first").press(kendo.keys.RIGHT);
+
+                ok(table.find("tr>td:first")[0] === grid.current()[0]);
+            });
+
+            test("pressing enter on cell when another is edited", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER);
+                grid.current(table.find("tr>td").eq(1));
+                table.find("tr>td").eq(1).press(kendo.keys.ENTER);
+
+                ok(table.find("tr>td")[1] === grid.current()[0]);
+                ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr>td").eq(1).hasClass("k-edit-cell"));
+            });
+
+            test("pressing enter on cell when another is edited and validation fails", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER);
+                table.find("tr>td>input:first").val("");
+                grid.current(table.find("tr>td").eq(1));
+                table.find("tr>td").eq(1).press(kendo.keys.ENTER);
+
+                ok(table.find("tr>td")[0] === grid.current()[0]);
+                ok(table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(!table.find("tr>td").eq(1).hasClass("k-edit-cell"));
+            });
+
+            test("pressing space key inside grid editor does not change selection", function() {
+                var grid = setup({ selectable: "cell" });
+
+                grid.element.focus().press(kendo.keys.ENTER);
+                table.find("tr>td>input:first").press(kendo.keys.SPACEBAR);
+
+                ok(!grid.current().hasClass("k-state-selected"));
+            });
+
+            test("pressing tab key edit next cell", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.TAB);
+
+                ok(table.find("tr>td").eq(1).hasClass("k-edit-cell"));
+            });
+
+            test("pressing tab key on edited cell exits edit mode", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER).press(kendo.keys.TAB);
+
+                ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr>td").eq(1).hasClass("k-edit-cell"));
+            });
+
+            test("pressing tab key on edited cell does not exits edit mode if validation fails", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER);
+                table.find("tr>td>input:first").val("").press(kendo.keys.TAB);
+
+                ok(table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr>td>input:first")[0] === document.activeElement);
+            });
+
+            test("pressing tab when current is at the end of the row focus first cell on next row", function() {
+                var grid = setup();
+
+                grid.current(table.find("tr:first>td:last"));
+                grid.element.focus().press(kendo.keys.TAB);
+
+                ok(table.find("tr:nth(1)>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr:nth(1)>td>input:first")[0] === document.activeElement);
+            });
+
+            test("pressing shift and tab key edit previous cell", function() {
+                var grid = setup();
+
+                grid.current(table.find("tr>td").eq(1));
+                grid.element.focus().press(kendo.keys.TAB, false, true);
+
+                ok(table.find("tr>td").eq(0).hasClass("k-edit-cell"));
+            });
+
+            test("pressing shift and tab when current is at the begining of the row focus last cell on previous row", function() {
+                var grid = setup();
+
+                grid.current(table.find("tr:nth(1)>td:first"));
+                grid.element.focus().press(kendo.keys.TAB, false, true);
+
+                ok(table.find("tr:nth(0)>td:last")[0] === grid.current()[0]);
+            });
+
+            test("pressing escape key on edited cell exits edit mode", function() {
+                var grid = setup();
+
+                grid.element.focus().press(kendo.keys.ENTER).press(kendo.keys.ESC);
+
+                ok(!table.find("tr>td:first").hasClass("k-edit-cell"));
+                ok(table.find("tr>td:first").hasClass("k-state-focused"));
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

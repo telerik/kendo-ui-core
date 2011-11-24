@@ -97,6 +97,28 @@
 
                 equal(textbox.val(), "f");
             });
+
+            test("bindModel triggers change event", function() {
+                var wasCalled = false;
+                var binder = new Binder(textbox.attr("name", "foo"), {}, { change: function() { wasCalled = true; } });
+
+                var mapping = binder._map(textbox[0]);
+
+                textbox.val("foo");
+                mapping.bindModel();
+
+                ok(wasCalled);
+            });
+
+            test("change event is called only once", function() {
+                var timesCalled = 0;
+                var binder = new Binder(textbox.attr("name", "foo").wrap("<div />").parent(), { foo: "bar" }, { change: function() { timesCalled++; } });
+
+                textbox.trigger("change");
+
+                equal(timesCalled, 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

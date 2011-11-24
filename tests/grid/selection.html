@@ -386,6 +386,41 @@
 
                 ok(!table.find("tbody tr:first").hasClass("k-state-selected"));
             });
+
+            test("k-hierarchy-cell is not highlighted when grid is focused", function() {
+                var grid = setup({ detailTemplate: "template" });
+                grid.element.focus();
+
+                ok(!table.find("tbody tr:eq(0)").find("td:first").hasClass("k-state-focused"));
+                ok(table.find("tbody tr:eq(0)").find("td:nth(1)").hasClass("k-state-focused"));
+            });
+
+
+            test("k-hierarchy-cell is not highlighted on left arrow press", function() {
+                var grid = setup({ detailTemplate: "template" });
+                grid.element.focus().press(kendo.keys.LEFT);
+
+                ok(!table.find("tbody tr:eq(0)").find("td:first").hasClass("k-state-focused"));
+                ok(table.find("tbody tr:eq(0)").find("td:nth(1)").hasClass("k-state-focused"));
+            });
+
+            test("detail row is skipped when down arrow is pressed", function() {
+                var grid = setup({ detailTemplate: "template" });
+                grid.expandRow(table.find("tbody tr:first"));
+                grid.element.focus().press(kendo.keys.DOWN);
+
+                ok(table.find("tbody tr:not(.k-detail-row):eq(1)").find("td:nth(1)").hasClass("k-state-focused"));
+            });
+
+            test("detail row is skipepd when up arrow is pressed", function() {
+                var grid = setup({ detailTemplate: "template" });
+                grid.expandRow(table.find("tbody tr:first"));
+                grid.current(table.find("tbody tr:not(.k-detail-row):eq(1)").find("td:not(.k-hierarchy-cell):first"));
+                grid.element.focus().press(kendo.keys.UP);
+
+                ok(table.find("tbody tr:eq(0)").find("td:nth(1)").hasClass("k-state-focused"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

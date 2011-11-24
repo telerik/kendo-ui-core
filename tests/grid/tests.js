@@ -34,5 +34,25 @@ tests.push(
     {
         page: "grid/detailview.html",
         title: "detail view"
+    },
+    {
+        page: "grid/editing.html",
+        title: "editing"
+    },
+    {
+        page: "grid/deleting.html",
+        title: "deleting"
+    },
+    {
+        page: "grid/inserting.html",
+        title: "inserting"
+    },
+    {
+        page: "grid/toolbar.html",
+        title: "toolbar"
+    },
+    {
+        page: "grid/editingnavigation.html",
+        title: "editing navigation"
     }
 );

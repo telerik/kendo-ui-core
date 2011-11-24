@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Filtering performance</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="benchmark.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <p>Running benchmark ... </p>
+        <script>
+            var STRING = "string";
+            getter = kendo.getter;
+
+            var dateRegExp = /^\/Date\((.*?)\)\/$/;
+            var Filter = {
+                create: function(expression) {
+                    var idx,
+                    length,
+                    expr,
+                    selector,
+                    operator,
+                    desc,
+                    descriptors = [],
+                    caseSensitive,
+                    filters,
+                    predicate;
+
+                    filters = expression ? expression.filters : [];
+
+                    for(idx = 0, length = filters.length; idx < length; idx ++) {
+                        expr = filters[idx];
+                        if (expr.logic) {
+                            desc = Filter.create(expr);
+                            } else {
+                            if(typeof expr.value === STRING && !expr.caseSensitive) {
+                                caseSensitive = function(value) {
+                                    return value.toLowerCase();
+                                };
+                                } else {
+                                caseSensitive = function(value) {
+                                    return value;
+                                };
+                            }
+                            selector = Filter.selector(expr.field, caseSensitive);
+                            operator = Filter.operator(expr.operator);
+                            desc = operator(selector, caseSensitive(expr.value));
+                        }
+
+                        descriptors.push(desc);
+                    }
+                    return Filter[expression.logic](descriptors);
+                },
+                selector: function(field, caseSensitive) {
+                    if (field) {
+                        if ($.isFunction(field)) {
+                            return field;
+                            } else {
+                            var accessor = getter(field);
+                            return function(record) {
+                                var value = accessor(record);
+                                if (typeof value === "string") {
+                                    var date = dateRegExp.exec(value);
+                                    if (date) {
+                                        value = new Date(parseInt(date[1]));
+                                    }
+                                }
+                                return caseSensitive(value);
+                            };
+                        }
+                    }
+                    return function(record) {
+                        return caseSensitive(record);
+                    };
+                },
+                execute: function(predicate, data) {
+                    var idx,
+                    length = data.length,
+                    record,
+                    result = [];
+
+                    for(idx = 0; idx < length; idx ++) {
+                        record = data[idx];
+
+                        if (predicate(record)) {
+                            result.push(record);
+                        }
+                    }
+
+                    return result;
+                },
+                and: function(descriptors) {
+                    return function(record) {
+                        var result = true,
+                        idx = 0,
+                        length = descriptors.length;
+
+                        while (result && idx < length) {
+                            result = descriptors[idx ++](record);
+                        }
+
+                        return result;
+                    };
+                },
+                or: function(descriptors) {
+                    return function(record) {
+                        var result = false,
+                        idx = 0,
+                        length = descriptors.length;
+
+                        while (!result && idx < length) {
+                            result = descriptors[idx ++](record);
+                        }
+
+                        return result;
+                    };
+                },
+                operator: function(operator) {
+                    if (!operator) {
+                        return Filter.eq;
+                    }
+
+                    if ($.isFunction(operator)) {
+                        return operator;
+                    }
+
+                    operator = operator.toLowerCase();
+                    var operatorStrings = Filter.operatorStrings;
+                    for (var op in operatorStrings) {
+                        if ($.inArray(operator, operatorStrings[op]) > -1) {
+                            operator = op;
+                            break;
+                        }
+                    }
+
+                    return Filter[operator];
+                },
+                operatorStrings: {
+                    "eq": ["eq", "==", "isequalto", "equals", "equalto", "equal"],
+                    "neq": ["neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "not", "ne"],
+                    "lt": ["lt", "<", "islessthan", "lessthan", "less"],
+                    "lte": ["lte", "<=", "islessthanorequalto", "lessthanequal", "le"],
+                    "gt": ["gt", ">", "isgreaterthan", "greaterthan", "greater"],
+                    "gte": ["gte", ">=", "isgreaterthanorequalto", "greaterthanequal", "ge"],
+                    "startswith": ["startswith"],
+                    "endswith": ["endswith"],
+                    "contains": ["contains", "substringof"]
+                },
+                eq: function(selector, value) {
+                    return function(record){
+                        var item = selector(record);
+                        return item > value ? false : (value > item ? false : true);
+                    };
+                },
+                neq: function(selector, value) {
+                    return function(record){
+                        return selector(record) != value;
+                    };
+                },
+                lt: function(selector, value) {
+                    return function(record){
+                        return selector(record) < value;
+                    };
+                },
+                lte: function(selector, value) {
+                    return function(record){
+                        return selector(record) <= value;
+                    };
+                },
+                gt: function(selector, value) {
+                    return function(record){
+                        return selector(record) > value;
+                    };
+                },
+                gte: function(selector, value) {
+                    return function(record){
+                        return selector(record) >= value;
+                    };
+                },
+                startswith: function(selector, value) {
+                    return function(record){
+                        return selector(record).indexOf(value) == 0;
+                    };
+                },
+                endswith: function(selector, value) {
+                    return function(record){
+                        var item = selector(record);
+                        return item.lastIndexOf(value) == item.length - (value || "").length;
+                    };
+                },
+                contains: function(selector, value) {
+                    return function(record){
+                        return selector(record).indexOf(value) > -1;
+                    };
+                }
+            };
+
+            var suite = new Benchmark.Suite;
+
+            var data = [ { foo: "foo"}, {foo: "bar" }];
+
+            var expression = { logic: "and",
+                filters:[ { field: "foo", value: "bar", operator: "startswith" }, { field:"foo", value:"baz", operator: "startswith"}]};
+
+            suite.add("Old Filtering", function() {
+                var predicate = Filter.create(expression);
+
+                Filter.execute(predicate, data);
+            })
+            .add("New Filtering", function() {
+                new kendo.data.Query(data).filter(expression);
+            })
+            .on("complete", function() {
+                var message = "User agent: " + navigator.userAgent;
+                message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
+                    var results = $.makeArray(this);
+                    results.sort(function(a, b) { return b.hz - a.hz });
+                    $.each(results, function(index) {
+                        message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                    });
+                    message += "</table>";
+                $("p:first").html(message);
+            })
+            .run(true);
+    </script>
+</body>
+    </html>
