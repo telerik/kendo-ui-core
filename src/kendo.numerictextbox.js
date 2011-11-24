@@ -110,63 +110,68 @@
          * @option {String} [upArrowText] <Increase value> Specifies the title of the up arrow.
          * @option {String} [downArrowText] <Decrease value> Specifies the title of the down arrow.
          */
-        init: function(element, options) {
-            var that = this,
-                isStep = options && options[step] !== undefined,
-                min, max, step, value;
+         init: function(element, options) {
+             var that = this,
+             isStep = options && options[step] !== undefined,
+             min, max, step, value, format;
 
-            Widget.fn.init.call(that, element, options);
+             Widget.fn.init.call(that, element, options);
 
-            options = that.options;
-            element = that.element.addClass(INPUT)
-                          .bind({
-                              keydown: proxy(that._keydown, that),
-                              paste: proxy(that._paste, that),
-                              blur: proxy(that._focusout, that)
-                          });
+             options = that.options;
+             element = that.element.addClass(INPUT)
+                           .bind({
+                               keydown: proxy(that._keydown, that),
+                               paste: proxy(that._paste, that),
+                               blur: proxy(that._focusout, that)
+                           });
 
-            element.closest("form")
-                   .bind("reset", function() {
-                      setTimeout(function() {
-                          that.value(element[0].value);
-                      });
-                   });
+             element.closest("form")
+                    .bind("reset", function() {
+                        setTimeout(function() {
+                            that.value(element[0].value);
+                        });
+                    });
 
-            that._wrapper();
-            that._arrows();
-            that._input();
+             that._wrapper();
+             that._arrows();
+             that._input();
 
-            /**
-            * Fires when the value is changed
-            * @name kendo.ui.NumericTextBox#change
-            * @event
-            * @param {Event} e
-            */
-            that.bind(CHANGE, options);
+             /**
+             * Fires when the value is changed
+             * @name kendo.ui.NumericTextBox#change
+             * @event
+             * @param {Event} e
+             */
+             that.bind(CHANGE, options);
 
-            that._text.focus(proxy(that._click, that));
+             that._text.focus(proxy(that._click, that));
 
-            min = parse(element.attr("min"));
-            max = parse(element.attr("max"));
-            step = parse(element.attr("step"));
+             min = parse(element.attr("min"));
+             max = parse(element.attr("max"));
+             step = parse(element.attr("step"));
 
-            if (options.min === NULL && min !== NULL) {
-                options.min = min;
-            }
+             if (options.min === NULL && min !== NULL) {
+                 options.min = min;
+             }
 
-            if (options.max === NULL && max !== NULL) {
-                options.max = max;
-            }
+             if (options.max === NULL && max !== NULL) {
+                 options.max = max;
+             }
 
-            if (!isStep && step !== NULL) {
-                options.step = step;
-            }
+             if (!isStep && step !== NULL) {
+                 options.step = step;
+             }
 
-            value = options.value;
-            that.value(value !== NULL ? value : element.val());
+             format = options.format;
+             if (format.slice(0,3) === "{0:") {
+                 options.format = format.slice(3, format.length - 1);
+             }
 
-            that.enable(!element.is('[disabled]'));
-        },
+             value = options.value;
+             that.value(value !== NULL ? value : element.val());
+
+             that.enable(!element.is('[disabled]'));
+         },
 
         options: {
             name: "NumericTextBox",

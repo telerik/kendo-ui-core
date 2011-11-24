@@ -117,6 +117,14 @@
                equal(textbox.options.step, 10);
             });
 
+            test("strip format", function() {
+                var textbox = new NumericTextBox($("<input type='number' step='10' />"), {
+                    format: "{0:c}"
+                });
+
+                equal(textbox.options.format, "c");
+            });
+
             asyncTest("form reset support", function() {
                 input.attr("value", "123");
 
