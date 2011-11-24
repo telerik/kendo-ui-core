@@ -34,8 +34,8 @@
         </GenerateVersionDependentSuffix>
 
         <UploadResources
-            SourcePath="%(BundleScripts)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
-            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)%(BundleScripts.DestinationPath)" Compress="True" />
+            SourcePath="%(CDNTargets)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)%(CDNTargets.DestinationPath)" Compress="True" />
 
         <UploadResources
             SourcePath="$(ExamplesScripts)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
