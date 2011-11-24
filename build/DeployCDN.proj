@@ -34,7 +34,7 @@
         </GenerateVersionDependentSuffix>
 
         <UploadResources
-            SourcePath="%(CDNTargets)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+            SourcePath="%(CDNTargets.Identity)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
             BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)%(CDNTargets.DestinationPath)" Compress="True" />
 
         <UploadResources
