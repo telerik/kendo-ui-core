@@ -13,6 +13,7 @@
         <!-- script -->
         <script src="../../../../src/jquery.min.js"></script>
         <script src="../../../../src/kendo.core.js"></script>
+		<script src="../../../../src/kendo.fx.js"></script>
         <script src="../../../../src/kendo.popup.js"></script>
         <script src="../../../../src/kendo.data.js"></script>
         <script src="../../../../src/kendo.list.js"></script>
@@ -26,85 +27,79 @@
         <div class="description">Basic usage</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <h3>Creating a ComboBox from <code>&lt;input /&gt;</code></h3>
-            <div class="code-sample">
-                <h4 class="code-title">Source:</h4>
-                <pre class="prettyprint">
-&lt;input id="input" value="1" /&gt;
+		<div id="tshirt-view" class="k-header">
+			<h2>Customize your Kendo T-shirt</h2>
+			<img id="tshirt" src="../content/combobox/tShirt.png" />
+            <div id="options">
+			<h3>T-shirt Fabric</h3>
+            <input id="input" value="1"/>
 
-&lt;script&gt;
-    $("#input").kendoComboBox([
-        { text: "Item 1", value: "1" },
-        { text: "Item 2", value: "2" },
-        { text: "Item 3", value: "3" }
-    ]);
-&lt;/script&gt;
-</pre>
-            </div>
-            <div class="code-sample output">
-                <h4 class="code-title">Output:</h4>
-                <div class="prettyprint">
-                    <input id="input" value="1"/>
-                </div>
-            </div>
+            <h3>T-shirt Size</h3>
+            <select id="select">
+				<option>X-Small</option>
+				<option>Small</option>
+				<option>Medium</option>
+				<option>Large</option>
+				<option>X-Large</option>
+				<option>2X-Large</option>
+			</select>
 
-            <h3>Creating a ComboBox from <code>&lt;select /&gt;</code></h3>
-            <div class="code-sample">
-                <h4 class="code-title">Source:</h4>
-                <pre class="prettyprint">
-&lt;select id="select"&gt;
-    &lt;option&gt;Item 1&lt;/option&gt;
-    &lt;option&gt;Item 2&lt;/option&gt;
-    &lt;option&gt;Item 3&lt;/option&gt;
-&lt;/select&gt;
-
-&lt;script&gt;
-    $("#select").kendoComboBox();
-&lt;/script&gt;
-</pre>
-            </div>
-            <div class="code-sample output">
-                <h4 class="code-title">Output:</h4>
-                <div class="prettyprint">
-                    <select id="select">
-                        <option>Item 1</option>
-                        <option>Item 2</option>
-                        <option>Item 3</option>
-                    </select>
-                </div>
-            </div>
+			<button class="k-button" id="get">Customize</button>
+			</div>
+        </div>
+		<style scoped>
+			#example h2 {
+				font-weight: normal;
+			}
+			#tshirt-view {
+				border-radius: 10px 10px 10px 10px;
+				border-style: solid;
+				border-width: 1px;
+				overflow: hidden;
+				width: 500px;
+				margin: 0 auto;
+				padding: 20px 20px 0 20px;
+				background-position: 0 -255px;
+			}
+			#tshirt {
+				float: left;
+				margin: 30px 40px 30px 20px;
+			}
+			#options {
+				padding: 30px;
+			}
+			#options h3 {
+				font-size: 1em;
+				font-weight: bold;
+				margin: 25px 0 8px 0;
+			}
+			#get {
+				margin-top: 25px;
+			}
+		</style>
 
             <script>
                 $(document).ready(function() {
                     // create ComboBox from input HTML element
                     $("#input").kendoComboBox([
-                        { text: "Item 1", value: "1" },
-                        { text: "Item 2", value: "2" },
-                        { text: "Item 3", value: "3" }
+                        { text: "Cotton", value: "1" },
+                        { text: "Polyester", value: "2" },
+                        { text: "Cotton/Polyester", value: "3" },
+						{ text: "Rib Knit", value: "4" }
                     ]);
 
                     // create ComboBox from select HTML element
                     $("#select").kendoComboBox();
+					
+					var input = $("#input").data("kendoComboBox");
+					var select = $("#select").data("kendoComboBox");
+
+
+					$("#get").click(function() {
+                        alert('Thank you! Your Choice is:\n\nFabric ID: '+input.value()+' and Size: '+select.value());
+                    });
                 });
             </script>
-
-            <style scoped>
-                #example h3 {
-                    clear: both;
-                }
-
-                #example .code-sample {
-                    width: 60%;
-                    float:left;
-                    margin-bottom: 20px;
-                }
-
-                #example .output {
-                    width: 24%;
-                    margin-left: 4%;
-                    float:left;
-                }
-            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
