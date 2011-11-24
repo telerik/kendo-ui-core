@@ -1475,7 +1475,7 @@
                 html += column.encoded ? "${" : "#=";
 
                 if (format) {
-                    html += 'kendo.format(\"' + format + '\",';
+                    html += 'kendo.format(\"' + format.replace("}","\\}") + '\",';
                 }
 
                 if (!settings.useWithBlock) {
