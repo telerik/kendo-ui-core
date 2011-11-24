@@ -244,7 +244,7 @@
            });
 
            test("dataAccessors are get from data attributes", function() {
-               var select = $('<select data-text-field="name" data-value-field="id"></select>');
+               var select = $('<select data-kendo-text-field="name" data-kendo-value-field="id"></select>');
                dropdownlist = new DropDownList(select);
 
                equal(dropdownlist.options.dataTextField, "name");
