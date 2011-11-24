@@ -7,10 +7,14 @@
     height: 7rem;
 }
 
-.item-list img {
+.item-list img,
+#details img
+{
     border-radius: 8px;
-    width: 75px;
-    height: 75px;
+    -webkit-box-shadow: 0 2px 3px #333;
+    box-shadow: 0 2px 3px #333;
+    width: 4.2em;
+    height: 4.2em;
     float: left;
     margin-right: 1rem;
 }
@@ -82,8 +86,8 @@
 }
 
 #details img {
-    width: 150px;
-    height: 150px;
+    width: 8.4em;
+    height: 8.4em;
     margin-bottom: 1rem;
 }
 
