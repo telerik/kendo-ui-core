@@ -18,8 +18,6 @@
         requiredJs = ["scripts/less.js", "scripts/themebuilder.js", "scripts/colorengine.js", "scripts/template.js"],
         requiredCss = ["styles/kendo.black.css", "styles/styles.css"];
 
-        console.log(applicationRoot);
-
     // TODO: move theme definitions to different files
     var constant = function(target, property, values){
             return {

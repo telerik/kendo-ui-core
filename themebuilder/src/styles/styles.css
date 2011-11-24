@@ -147,7 +147,8 @@ body
 
 .ktb-content {
     position: absolute;
-    overflow: auto;
+    overflow: scroll;
+    overflow-x: hidden;
     top: 30px;
     bottom: 0;
     width: 100%;
