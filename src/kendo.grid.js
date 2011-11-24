@@ -995,6 +995,7 @@
                 table = that.table.addClass(FOCUSABLE),
                 currentProxy = proxy(that.current, that),
                 selector = "." + FOCUSABLE + " " + CELL_SELECTOR,
+                browser = $.browser,
                 clickCallback = function(e) {
                     currentProxy($(e.currentTarget));
                     if(e.type == CLICK) {
@@ -1063,7 +1064,11 @@
                                 }
                             } else if (keys.ESC == key && current.hasClass("k-edit-cell")) {
                                 that.closeCell();
-                                that.element.focus();
+                                if (browser.msie && parseInt(browser.version) < 9) {
+                                    document.body.focus();
+                                }
+                                wrapper.focus();
+                                handled = true;
                             }
                         }
 
@@ -1073,7 +1078,7 @@
                     }
                 });
 
-                wrapper.delegate(selector, $.browser.msie ? CLICK : "mousedown", clickCallback);
+                wrapper.delegate(selector, browser.msie ? CLICK : "mousedown", clickCallback);
             }
         },
 
@@ -1099,7 +1104,7 @@
                 that.current(next);
             }
 
-            that.element.focus();
+            that.wrapper.focus();
             if ((!isEdited && !next) || next) {
                 that.editCell(that.current());
             }
@@ -1233,6 +1238,7 @@
         _dataSource: function() {
             var that = this,
                 options = that.options,
+                pageable,
                 dataSource = options.dataSource;
 
             dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
