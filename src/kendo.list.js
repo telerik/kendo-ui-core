@@ -82,8 +82,8 @@
                 element = that.element,
                 options = that.options,
                 getter = kendo.getter,
-                textField = element.attr("data-text-field"),
-                valueField = element.attr("data-value-field");
+                textField = element.attr(kendo.attr("text-field")),
+                valueField = element.attr(kendo.attr("value-field"));
 
             if (textField) {
                 options.dataTextField = textField;
