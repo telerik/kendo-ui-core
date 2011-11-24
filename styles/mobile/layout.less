@@ -129,9 +129,6 @@ body
     display: block;
     display: -moz-inline-stack;
     width: 100%;
-    overflow: auto;
-    overflow-y: auto;
-    overflow-x: visible;
     position: relative;
     background: silver;
     display: ~"table-row\9";
@@ -301,28 +298,30 @@ body
 {
     content: " ";
     background-image: linearGradient(left top, rgb(138,161,191), rgb(88,119,162) 50%, rgb(71,105,153) 50%, rgb(74,108,155));
-    border-left: solid 1px #5F6C81;
-    border-bottom: solid 1px #34517B;
-    width: 21px;
-    height: 21px;
+    border-left: solid 1px #2f3740;
+    border-bottom: solid 1px #394d68;
+    width: 1.8em;
+    height: 1.7em;
     display: block;
-    -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000000), color-stop(0.5,#000000), color-stop(0.5, transparent), to(transparent));
+    -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000000), color-stop(0.4,#000000), color-stop(0.5, transparent), to(transparent));
     position: absolute;
-    left: -9px;
-    top: 3px;
-    .border-radius(4px 15px 4px 4px);
+    left: -.6em;
+    top: .19em;
+    .border-radius(.5em 0 .5em .3em);
     .transform(rotate(45deg));
     .box-sizing(border-box);
+    .box-shadow(-1px 1px 1px #ccc);
 }
 
 .km-ios :-moz-first-node~.km-back:before
 {
     left: -20px;
     top: -1.3px;
+    .border-radius(.5em 2em .5em .3em);
 }
 
 .km-ios .km-back:active:before {
-    border-color: #376ECC #40506C;
+    border-color: #2a2e37 #26334e #1d2f51;
     background-image: linearGradient(left top, rgb(121,132,162), rgb(58,78,120) 50%, rgb(37,60,106) 50%, rgb(39,63,109));
 }
 
@@ -1417,7 +1416,7 @@ input[type=checkbox]
     height: .6em;
     line-height: .6em;
     position: relative;
-    padding: 0.5em 0.7em;
+    padding: .5em .7em;
     display: inline-block;
     -webkit-transform: translatez(0);
 }
@@ -1460,6 +1459,37 @@ input[type=checkbox]
     background: linearGradient(top, rgba(0,0,0,.5), rgba(0,0,0,0) 15%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4)) 0 0 no-repeat,
                 linearGradient(top, rgb(219,219,219), rgb(255,255,255)) 12em 0 no-repeat,
                 linearGradient(top, rgb(42,93,178), rgb(109,169,247)) 0 0 no-repeat;
+}
+
+.km-android .km-slider
+{
+    margin: 1.5em;
+    height: 1.2em;
+    line-height: 1.2em;
+    padding: .36em;
+}
+
+.km-android .km-slider-wrapper,
+.km-android .km-slider-container
+{
+    .border-radius(6px);
+}
+
+.km-android .km-slider-handle
+{
+    width: .86em;
+    height: 1.7em;
+    border-color: #3c3d3c;
+    background: linearGradient(top, #f2f2f2, #d0d0d0 20%, #8d8d8d 80%, #d1d1d1);
+    .border-radius(5px);
+    .box-shadow(0 0 10px rgba(0,0,0,.5));
+}
+
+.km-android .km-slider-background
+{
+    background: linearGradient(top, #9b9c9b, #5b5e5b 80%, #6f716f) 12em 0 no-repeat,
+                linearGradient(top, #ffd300, #ffb700 80%, #ffc600) 0 0 no-repeat;
+
 }
 
 /* Scroller */
