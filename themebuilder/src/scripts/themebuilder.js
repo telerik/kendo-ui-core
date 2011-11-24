@@ -146,13 +146,39 @@
                     prototype;
 
                 function getInferPrototype(target) {
-                    var className = /\.([a-z\-0-9]+)/i.exec(target)[1];
-                    if (target == "." + className) {
-                        cachedPrototype[0].className = className;
+                    target = $.trim(target);
+
+                    var className = /^\.([a-z\-0-9]+)$/i.exec(target),
+                        nestLevels, root, current, parentElement,
+                        i, components, tag;
+
+                    // most common scenario: one className
+                    if (className) {
+                        cachedPrototype[0].className = className[1];
                         return cachedPrototype;
                     } else {
-                        // create prototype for complex selector
-                        return $("<a href='#' />").addClass(className).appendTo(doc.body);
+                        // complex selector (multiple classNames / nested elements - parse selector
+                        nestLevels = target.split(/\s+/);
+
+                        for (i = 0; i < nestLevels.length; i++) {
+                            components = /^([a-z]*)((\.[a-z\-0-9]+)*)/i.exec(nestLevels[i]);
+                            tag = components[1];
+
+                            parentElement = current;
+                            current = $("<" + (tag || "div") + " />").addClass(components[2].replace(/\./g, ""));
+
+                            if (tag == "a") {
+                                current.attr("href", "#");
+                            }
+
+                            if (!root) {
+                                root = current;
+                            } else {
+                                parentElement.append(current);
+                            }
+                        }
+
+                        return root.appendTo(doc.body);
                     }
                 }
 
@@ -163,12 +189,11 @@
                         // computed constant
                         constant.value = constant.infer();
                     } else if (!(constant.readonly && constant.value)) {
-                        // TODO: make it work with complex selectors (targets) -- ".foo .bar"
-                        //       see misc / inset shadow
+                        // editable constant with no pre-set value
                         prototype = getInferPrototype(constant.target);
 
                         property = constant.property;
-                        value = prototype.css(property);
+                        value = prototype.add(prototype.find("*:last")).last().css(property);
 
                         if (!value && property == "border-color") {
                             value = prototype.css("border-top-color");
