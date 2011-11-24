@@ -123,6 +123,11 @@
         navigate: function(to, silent) {
             var that = this;
 
+            if (to === ':back') {
+                history.back();
+                return;
+            }
+
             to = to.replace(hashStrip, '');
 
             if (that.current === to || that.current === decodeURIComponent(to)) {
