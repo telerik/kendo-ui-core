@@ -5,8 +5,8 @@
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
-        <script src="../../src/kendo.core.js"></script>
         <script src="globalize/globalize.js"></script>
+        <script src="../../src/kendo.core.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -19,32 +19,45 @@
         <ul id="log"></ul>
 
         <script type="text/javascript">
-            var culture = kendo.culture;
+            var culture = kendo.culture, called;
+
+            Globalize.findClosestCulture = function() {
+                called = true;
+                return Globalize.cultures.default;
+            };
+
+            module("Globalize integration", {
+                setup: function() {
+                    called = false;
+                }
+            });
 
             test("kendo.toString should use Globalize.format", function() {
-                var origin = Globalize.format,
-                    isCalled = false;
+                var result = kendo.toString(10.10, "c");
 
-                Globalize.format = function() { isCalled = true; };
-
-                kendo.toString(10.10, "c");
-
-                Globalize.format = origin;
-
-                ok(isCalled);
+                ok(called);
+                equal(result, "$10.10");
             });
 
             test("kendo.format should use Globalize.format", function() {
-                var origin = Globalize.format,
-                    isCalled = false;
+                var result = kendo.format("{0:c}", 10.10);
 
-                Globalize.format = function() { isCalled = true; };
+                ok(called);
+                equal(result, "$10.10");
+            });
 
-                kendo.format("{0:c}", 10.10);
+            test("kendo.parseDate should use Globalize.parseDate", function() {
+                var result = kendo.parseDate("10/10/2000");
 
-                Globalize.format = origin;
+                ok(called);
+                equal(result.getFullYear(), "2000");
+            });
 
-                ok(isCalled);
+            test("kendo.parseFloat should use Globalize.parseFloat", function() {
+                var result = kendo.parseFloat("1.1");
+
+                ok(called);
+                equal(result, 1.1);
             });
         </script>
     </body>

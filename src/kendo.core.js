@@ -19,7 +19,8 @@
         NUMBER = "number",
         OBJECT = "object",
         NULL = "null",
-        BOOLEAN = "boolean";
+        BOOLEAN = "boolean",
+        globalize = window.Globalize;
 
     function Class() {}
 
@@ -853,11 +854,6 @@
     }
 
     function toString(value, fmt) {
-        var globalize = window.Globalize;
-        if (globalize) {
-            return globalize.format(value, fmt);
-        }
-
         if (fmt) {
             if (value instanceof Date) {
                 return formatDate(value, fmt);
@@ -867,6 +863,10 @@
         }
 
         return value !== undefined ? value : "";
+    }
+
+    if (globalize) {
+        toString = proxy(globalize.format, globalize);
     }
 
     kendo.format = function(fmt) {
@@ -1066,12 +1066,7 @@
 
         var idx = 0,
             date = null,
-            globalize = window.Globalize,
             length, property, patterns;
-
-        if (globalize) {
-            return globalize.parseDate(value, formats, culture);
-        }
 
         if (!culture) {
             culture = kendo.culture();
@@ -1123,11 +1118,6 @@
            return value;
         }
 
-        var globalize = window.Globalize;
-        if (globalize) {
-            return globalize.parseFloat(value, culture);
-        }
-
         value = value.toString();
         culture = kendo.cultures[culture] || kendo.cultures.current;
 
@@ -1165,6 +1155,11 @@
         }
 
         return value;
+    }
+
+    if (globalize) {
+        kendo.parseDate = proxy(globalize.parseDate, globalize);
+        kendo.parseFloat = proxy(globalize.parseFloat, globalize);
     }
 })();
 
