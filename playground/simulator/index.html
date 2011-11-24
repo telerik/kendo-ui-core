@@ -248,7 +248,7 @@
         <div class="device-container vertical">
             <div class="device-skin"></div>
             <input id="address-bar" type="text" onchange="frame.src = 'http://' + this.value.replace('http://', '')" />
-            <iframe id="simulator" src="../../playground/mobile/tokendo/layout.html" frameborder="0" width="100%" height="100%"></iframe>
+            <iframe id="simulator" src="../../sushi" frameborder="0" width="100%" height="100%"></iframe>
         </div>
     </div>
     <script type="text/javascript">
@@ -351,17 +351,17 @@
         function fixFF() {
             var doc = $(foreignDocument.documentElement);
 
-            if (kendo.support.transitions.prefix == "Moz") { // FlexBox is broken in FF.
-                var kendoView = doc.find(".km-view");
-
-                if (kendoView.length) {
-                    var head = doc.find("head")/*,
-                        headerHeight = foreignDocument.find(".km-header").outerHeight(),
-                        footerHeight = foreignDocument.find(".km-footer").outerHeight()*/;
-
-                    $("<style type='text/css' id='ffFlexBoxFix'>.km-view{position:relative}</style>").appendTo(head); //TODO: Have to find a better way since this will break transitions.
-                }
-            }
+//            if (kendo.support.transitions.prefix == "Moz") { // FlexBox is broken in FF.
+//                var kendoView = doc.find(".km-view");
+//
+//                if (kendoView.length) {
+//                    var head = doc.find("head")/*,
+//                        headerHeight = foreignDocument.find(".km-header").outerHeight(),
+//                        footerHeight = foreignDocument.find(".km-footer").outerHeight()*/;
+//
+//                    $("<style type='text/css' id='ffFlexBoxFix'>.km-view{position:relative}</style>").appendTo(head); //TODO: Have to find a better way since this will break transitions.
+//                }
+//            }
             if (kendo.support.transitions.prefix == "webkit") {
                 doc.add(foreignDocument.body).css("-webkit-text-size-adjust", "auto");
             }

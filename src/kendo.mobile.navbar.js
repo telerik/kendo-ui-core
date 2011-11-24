@@ -15,7 +15,7 @@
             MobileWidget.fn.init.call(this, element, options);
             element = this.element;
 
-            element.addClass("km-navbar").wrapInner($('<div class="km-title" />'));
+            element.addClass("km-navbar").wrapInner($('<div class="km-view-title" />'));
             createContainer("left", element);
             createContainer("right", element);
         },
@@ -23,7 +23,7 @@
         options: {
             name: "MobileNavBar",
             selector: "[data-kendo-role=navbar]"
-        },
+        }
 
     });
 
