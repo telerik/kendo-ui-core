@@ -1066,7 +1066,8 @@
 
     function validate(options) {
         var start = views[options.start],
-            depth = views[options.depth];
+            depth = views[options.depth],
+            format = options.format;
 
         if (isNaN(start)) {
             start = 0;
@@ -1077,7 +1078,13 @@
             options.depth = MONTH;
         }
 
-        options.format = options.format || kendo.culture().calendar.patterns.d;
+        format = format || kendo.culture().calendar.patterns.d;
+
+        if (format.slice(0,3) === "{0:") {
+            format = format.slice(3, format.length - 1);
+        }
+
+        options.format = format;
     }
 
     calendar.restrictValue = restrictValue;
