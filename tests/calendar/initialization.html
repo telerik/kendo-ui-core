@@ -29,6 +29,11 @@
                 }
             });
 
+            test("if format is {0: format} should strip it", function() {
+                var cal = new Calendar(div, {format: "{0:MM/dd/yyyy}"});
+                equal(cal.options.format, "MM/dd/yyyy");
+            });
+
             test("if start is not correct should set MONTH view", function() {
                 var cal = new Calendar(div, {start: "not real view"});
 
