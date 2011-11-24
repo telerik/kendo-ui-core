@@ -110,11 +110,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/menu/index.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/web/menu/index.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>eb13494f-c288-4182-b8f2-84d8d38a4521</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2625e941-2bf2-4a22-a51d-9fa0553bd3bf</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -136,7 +136,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/menu/index.html</d2p1:NavigateURL>
+        <d2p1:NavigateURL>/web/menu/index.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>NotClosedOnClickpbsg4wkl.nr5</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -149,7 +149,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>98c269c7-916c-48ba-ac2c-b1a3753c3166</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>894ee6c5-78cb-4f8d-9432-6bd73c004d41</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -239,7 +239,7 @@
       <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d4f3da05-ea13-405f-a8a5-0a3881f7ab45</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f9db50b5-c18f-4a76-8941-8b3ccc6d6a82</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:InvokeEventActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -322,7 +322,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>NotClosedOnClick_CodedStep</d2p1:Id>
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7fd048b3-c617-4feb-8684-b9d4a65075cd</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6cc05b60-ddb2-474c-9b3c-30888fd4bc0d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -359,7 +359,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>cc128a9d-225f-40cf-93be-9da06d84aca1</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>564fcd9b-7eef-4a7f-9fe4-ef129e72e8da</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -442,7 +442,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>2fa16e82-2a48-4ca5-9e96-a3135911e078</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>4bda96cd-f38b-405a-b607-736905a02e67</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -475,7 +475,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c5a564ef-68fc-45c4-be58-0d7686420697</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>46d209a9-7811-41a6-85df-07534854a4a7</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -558,7 +558,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>NotClosedOnClick_CodedStep1</d2p1:Id>
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c29d34c4-9425-4ff6-be16-3a35174f0ae8</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a38cb0ad-c850-4159-954a-d6892a57b5d9</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -608,12 +608,21 @@
   </DeploymentItems>
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <HasCodeBehind>true</HasCodeBehind>
+  <HtmlDescription i:nil="true" />
   <InheritParentDataSource>false</InheritParentDataSource>
+  <IsManual>false</IsManual>
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
   <Path>UIWidgets\Menu\BasicUsage\NotClosedOnClick.tstest</Path>
   <Priority>0</Priority>
+  <ProfilerBenchmarkResultsFilePath i:nil="true" />
+  <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
+  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{bd48866d-9675-4d9b-b4c7-beb25c61629d}.tsprofconfig</ProfilerConfigurationFilePath>
+  <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
+  <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\</ProfilerResultsDirectory>
+  <ProfilerServerName i:nil="true" />
   <ResourceFilePath>UIWidgets\Menu\BasicUsage\NotClosedOnClick.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />

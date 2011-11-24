@@ -110,11 +110,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/dropdownlist/api.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/web/dropdownlist/api.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7f928584-0a0b-4a45-a973-6bbeadfded9e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0b4c1428-6e13-4373-9cc4-8fe5f75bff8c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -136,7 +136,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/dropdownlist/api.html</d2p1:NavigateURL>
+        <d2p1:NavigateURL>/web/dropdownlist/api.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>DisableEnablecha40byh.kep</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -149,7 +149,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>24e60fbe-984c-403a-89f9-dbfa7a0fa18c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a1f5a3a9-9b36-456c-a3d6-b084d9e4f3eb</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -232,7 +232,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f0a16ba9-1a24-4219-b51e-eb47082297b1</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>921bd437-faea-4df9-9ba9-de4264358866</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -317,7 +317,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>DisableEnable_CodedStep</d2p1:Id>
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>bdeaabbb-bda5-4cd0-9d78-ead0ec31958e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0b029d3e-5cdd-4583-8b26-2ef67e6b9081</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -357,7 +357,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>128cc7ef-4dcd-49fc-b8cd-511b16e773c4</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f479d803-ded4-4b99-b677-67c9ad6c648f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -440,7 +440,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6837cfcd-1939-4908-8906-9f85a999aebd</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>cff9d5ff-b258-4b3f-89ff-5f857b705941</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -525,7 +525,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>DisableEnable_CodedStep1</d2p1:Id>
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>681b3bbe-c169-4373-b269-8ee5ad1884c1</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>9f8804ed-d667-4419-ae06-8339c91297fb</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -578,12 +578,21 @@
   </DeploymentItems>
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <HasCodeBehind>true</HasCodeBehind>
+  <HtmlDescription i:nil="true" />
   <InheritParentDataSource>false</InheritParentDataSource>
+  <IsManual>false</IsManual>
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
   <Path>UIWidgets\DropDown\API\DisableEnable.tstest</Path>
   <Priority>0</Priority>
+  <ProfilerBenchmarkResultsFilePath i:nil="true" />
+  <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
+  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{a3874593-bd34-4bb1-acaf-f9ef4828af82}.tsprofconfig</ProfilerConfigurationFilePath>
+  <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
+  <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\</ProfilerResultsDirectory>
+  <ProfilerServerName i:nil="true" />
   <ResourceFilePath>UIWidgets\DropDown\API\DisableEnable.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />

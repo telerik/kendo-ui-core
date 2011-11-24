@@ -19,11 +19,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/numerictextbox/api.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/web/numerictextbox/api.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>71c7aa8d-22c3-4769-8d04-3c8f74dd7930</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>87326371-ff9c-478a-b5da-7f76b41a483f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -45,7 +45,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/numerictextbox/api.html</d2p1:NavigateURL>
+        <d2p1:NavigateURL>/web/numerictextbox/api.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>NumericAPI5uqq2o4b.t5i</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a3b0c903-1abf-4f42-a63e-08ebd8b0b11a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a31e234c-b704-4e93-bc10-570d273eaf1f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -141,7 +141,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>2ee1981e-0a55-4b4d-a44e-d04a806b9dab</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>e0294f10-7e8b-42f9-ba85-5526fc45688a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -230,7 +230,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>199efd29-b191-4550-ad4e-3ee8b7c07e95</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>35ebed69-2a12-4fab-a879-8d2da1b2871d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -313,7 +313,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6a80f711-e125-45a2-b257-ed050dcdec8e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2ed58c2c-592d-4e60-80fe-a6742803ece9</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -402,7 +402,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c80b4263-297b-4505-8e65-8bdb372ee38b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b626fe4c-59ea-4165-8d52-e1fad21aa0b6</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -485,7 +485,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>9b431ec2-4cd4-4534-860e-a1e766246b33</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a94f4be0-7666-475b-ab9d-8c45e3fd4c41</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputValueVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">

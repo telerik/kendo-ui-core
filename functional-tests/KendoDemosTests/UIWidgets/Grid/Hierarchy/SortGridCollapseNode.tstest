@@ -19,11 +19,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/grid/hierarchy.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/web/grid/hierarchy.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b77f7a33-85a6-49d2-bb4f-146745858e6c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>27383bd9-5c5b-4a41-8db5-5b9e701f2dc3</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -45,7 +45,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/grid/hierarchy.html</d2p1:NavigateURL>
+        <d2p1:NavigateURL>/web/grid/hierarchy.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>SortGridCollapseNodegyxvsdjr.nbs</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>1c69f2f2-f7cf-47b3-a2d8-727359a9c53e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3c8bc791-1482-4bba-845c-c50e04d2230f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -91,7 +91,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7b8a63fd-51e4-42a2-8cc8-8cb163ba0aff</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>bd2552bd-dedf-4d45-aa74-f5a7bfdccc7d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -176,7 +176,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>03952c77-35ea-4d9f-b242-e8f151a136a9</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7e7618bd-537c-491b-90ec-4847d174a88b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -209,7 +209,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>4d8bfb70-6252-4734-a351-8c2a019904dc</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>61645907-f1de-4ec0-bd02-d7d6a5f4d776</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -292,7 +292,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>2b7810e6-7f72-47ac-b13b-e72a70386f05</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d3baeee4-5658-4046-a893-862b6b4b4590</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -325,7 +325,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c73cbb70-dddf-4e3e-b8eb-0a9c2fa57d3d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d70e9f67-8d52-4588-a80b-c72d4b4b4fd8</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -410,7 +410,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6a02e0fb-8b20-4e71-abdb-6a9b2cbcc934</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>5659f0c4-1cd9-4aea-ac58-73d2ec622b68</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -497,7 +497,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>3c6bc908-4e91-4b37-9b41-b87933af2132</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>05829a66-fbe3-433d-8215-efd868639470</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -530,7 +530,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>10</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ee1e1d53-5296-4874-a272-a958a02ead8e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>700b416d-105e-465d-9fec-ba9e81f6724e</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -615,7 +615,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>11</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>1ddf3154-35a1-4f46-9338-0a7221d540fe</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>37d05318-27b2-402e-a6f2-b106d4aaafda</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -704,7 +704,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>12</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a52869f9-1cf8-4db8-b292-66b2e1d3f542</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>ed2fa124-d1a7-4a16-9218-e8c02be7ec88</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -807,6 +807,8 @@
   <Priority>0</Priority>
   <ProfilerBenchmarkResultsFilePath i:nil="true" />
   <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
+  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{186148c5-2d83-494c-882c-49f78960c22f}.tsprofconfig</ProfilerConfigurationFilePath>
+  <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
   <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringbase64Binary>
       <d2p1:Key>ArtOfTest.WebAii.Design.Execution.Profiler.ProfilerResultsMetadata</d2p1:Key>

@@ -65,11 +65,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/autocomplete/api.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/web/autocomplete/api.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>3ef798b9-e170-46ee-9b45-529e1e3f47c3</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a16670ff-ab7c-4121-b74a-b166d30cd624</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -91,7 +91,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/autocomplete/api.html</d2p1:NavigateURL>
+        <d2p1:NavigateURL>/web/autocomplete/api.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>FindStartingWithexa5zygf.ljv</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -104,7 +104,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f28e975e-c031-4484-b9f6-b2785cd476ce</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>af8468e5-d7ba-4c21-98a4-b013dc41a7d2</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -197,7 +197,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>91ba3083-cae6-4c0d-876c-fefe7b83595a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>73f915cf-70c8-4e1a-88d5-7b7f7857615d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -280,7 +280,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>FindStartingWith_CodedStep1</d2p1:Id>
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>faad9394-1044-4d8e-bf4d-6cfe6ac467bf</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>4fa0dfce-7739-4a89-904e-a4bc33e6086f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -323,7 +323,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6e2b9912-4508-4987-b9c9-77e36511ee47</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>cb70888b-7df2-42bb-8832-d459863d0035</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -406,7 +406,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7720d859-8e01-430a-93ec-20442e649005</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>160e7a42-2c7d-4b80-8c54-ffba4af2f0cd</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -500,12 +500,21 @@
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <HasCodeBehind>true</HasCodeBehind>
+  <HtmlDescription i:nil="true" />
   <InheritParentDataSource>false</InheritParentDataSource>
+  <IsManual>false</IsManual>
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
   <Path>UIWidgets\AutoComplete\API\FindStartingWith.tstest</Path>
   <Priority>0</Priority>
+  <ProfilerBenchmarkResultsFilePath i:nil="true" />
+  <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
+  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{3089b474-ce3d-4592-a140-be4c83154723}.tsprofconfig</ProfilerConfigurationFilePath>
+  <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
+  <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\</ProfilerResultsDirectory>
+  <ProfilerServerName i:nil="true" />
   <ResourceFilePath>UIWidgets\AutoComplete\API\FindStartingWith.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
