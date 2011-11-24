@@ -21,13 +21,16 @@ var VERSION = kendoBuild.generateVersion(),
     STAGING_SHARED_SCRIPTS = template(STAGING_SHARED_ROOT + "/js"),
     STAGING_SHARED_STYLES = template(STAGING_SHARED_ROOT + "/styles"),
     STAGING_SUITE_SCRIPTS = template("#= parentFolder(depth - 1) #/js"),
+    STAGING_THEMEBUILDER_ROOT = "/kendo/themebuilder/src",
     LIVE_SCRIPTS = template(CDN_URL + "/js"),
     LIVE_STYLES = template(CDN_URL + "/styles"),
     LIVE_SHARED_ROOT = CDN_URL + "/shared",
     LIVE_SHARED_SCRIPTS = template(LIVE_SHARED_ROOT + "/js"),
     LIVE_SHARED_STYLES = template(LIVE_SHARED_ROOT + "/styles"),
     LIVE_SUITE_SCRIPTS = template(CDN_URL + "/#= suiteName #/js"),
+    LIVE_THEMEBUILDER_ROOT = "http://themebuilder.kendoui.com",
     SOURCE_SCRIPTS_MARKER = /SOURCE_SCRIPTS/g,
+    THEMEBUILDER_ROOT_MARKER = /THEMEBUILDER_DEPLOY_ROOT/g,
     SOURCE_STYLES_MARKER = /SOURCE_STYLES/g,
     SHARED_SCRIPTS_MARKER = /SHARED_SCRIPTS/g,
     SHARED_STYLES_MARKER = /SHARED_STYLES/g,
@@ -319,6 +322,8 @@ function processExample(fileName, deployConfig) {
         exampleSource = exampleSource.replace(/\s+hasNavigation/g, "");
     }
 
+    exampleSource = exampleSource.replace(THEMEBUILDER_ROOT_MARKER, deployConfig.themeBuilderRoot);
+
     var description = regionRegex.description.exec(exampleSource);
     exampleSource = exampleSource.replace(regionRegex.description, '');
 
@@ -418,6 +423,7 @@ function buildStaging() {
         sharedScripts: STAGING_SHARED_SCRIPTS,
         sharedStyles: STAGING_SHARED_STYLES,
         suiteScripts: STAGING_SUITE_SCRIPTS,
+        themeBuilderRoot: STAGING_THEMEBUILDER_ROOT,
         useMinified: false
     });
 }
@@ -430,6 +436,7 @@ function buildLive(deployRoot) {
         sharedScripts: LIVE_SHARED_SCRIPTS,
         sharedStyles: LIVE_SHARED_STYLES,
         suiteScripts: LIVE_SUITE_SCRIPTS,
+        themeBuilderRoot: LIVE_THEMEBUILDER_ROOT,
         useMinified: true
     });
 }

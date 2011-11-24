@@ -17,8 +17,8 @@
         },
         processors = {
             "box-shadow": function(value) {
-                if (value != "none") {
-                    return /#[0-9a-f]+/i.exec(value)[0];
+                if (value && value != "none") {
+                    return value.replace(/\s/g, "").replace(/\d+px/g,"");
                 } else {
                     return "#000000";
                 }

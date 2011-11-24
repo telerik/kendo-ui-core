@@ -52,6 +52,26 @@
         <div class="description">This demo intends to simplify the theming workflow by showing all kendo components on the same page.</div>
         <!-- description -->
         <div id="example" class="k-content">
+            <p>
+                Select a theme to modify <input class="themeChooser" /> and start the
+                <a id="bookmarklet" href="">Kendo ThemeBuilder</a><br />
+                Want to use the ThemeBuilder on your own website? Drag the button to your bookmarks bar!
+            </p>
+
+            <script>
+                $("#bookmarklet").attr("href", "javascript:(function(){" +
+                        "var ktb=window.kendoThemeBuilder,s,d=document;" +
+                        "if(typeof ktb!='undefined'){" +
+                            "ktb.open();" +
+                            "return" +
+                        "}else{" +
+                            "s=d.createElement('script');" +
+                            "s.src='THEMEBUILDER_DEPLOY_ROOT/bootstrap.js?'+(+new Date());" +
+                            "d.getElementsByTagName('body')[0].appendChild(s);" +
+                        "}" +
+                    "})()".replace(/\s+/g, "%20"));
+            </script>
+
             <div class="column">
                 <h3>Menu</h3>
                 <ul id="menu">
