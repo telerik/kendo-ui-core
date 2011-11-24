@@ -438,7 +438,7 @@
 
     function getInitialStylePath() {
         var head = document.getElementsByTagName("head")[0];
-        return head.innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)examples(\.min)?\.css/i)[1];
+        return head.innerHTML.match(/href=\W(.*)examples(\.min)?\.css/i)[1];
     }
 
     function locatePage(url) {
@@ -518,7 +518,7 @@
                 ],
                 template: '<span class="thumbLink">' +
                     '<span class="thumb #= data.text.toLowerCase() #Thumb" ' +
-                        'style="background-image: url(#= initialRelativePath #shared/styles/#= data.control #/thumbSprite.png)">' +
+                        'style="background-image: url(#= initialRelativePath ##= data.control #/thumbSprite.png)">' +
                     '<span class="gloss"></span></span><span class="skinTitle">#= data.text #</span></span>'
             });
 
