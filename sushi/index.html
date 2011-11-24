@@ -63,15 +63,16 @@
             </footer>
         </div>
 
-        <div data-kendo-role="view" id="account">
+        <div data-kendo-role="view" id="cart">
             <header data-kendo-role="header">
                 <div data-kendo-role="navbar">
-                    <span data-kendo-role="view-title">Work in progress!</span>
+                    <span data-kendo-role="view-title">Cart</span>
                 </div>
             </header>
 
             <div data-kendo-role="content">
-                Work in progress
+                <h2 id="total"></h2>
+                <ul id="cartList" class="item-list" data-kendo-style="inset"></ul>
             </div>
 
             <footer data-kendo-role="footer" data-id="default">
@@ -83,7 +84,8 @@
                 </div>
             </footer>
         </div>
-        <div data-kendo-role="view" id="cart">
+
+        <div data-kendo-role="view" id="account">
             <header data-kendo-role="header">
                 <div data-kendo-role="navbar">
                     <span data-kendo-role="view-title">Work in progress!</span>
@@ -91,7 +93,7 @@
             </header>
 
             <div data-kendo-role="content">
-                Work in progress ...
+                Work in progress
             </div>
 
             <footer data-kendo-role="footer" data-id="default">
@@ -132,7 +134,17 @@
                 <img src="images/${image}" />
                 <h2>${name}</h2>
                 <span class="price">&euro; ${price}</span>
-                <span class="added"#= cart.indexOf(id) === -1 ? 'style="display: none"' : "" #>Item added in your cart</span>
+                <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added in your cart</span>
+            </a>
+        </script>
+
+        <script id="cartItemTemplate" type="text/x-kendo-template">
+            <a data-kendo-role="button" data-kendo-name="remove" href="\\#">Remove</a>
+
+            <a class="details-link" data-kendo-role="listview-link" href="\#details?id=${id}">
+                <img src="images/${image}" />
+                <h2>${name}</h2>
+                <span class="price">&euro; ${price}</span>
             </a>
         </script>
 
@@ -144,14 +156,13 @@
             </aside>
             <h2>${name}</h2>
             <p>${description}</p>
-            <span class="added"#= cart.indexOf(id) === -1 ? 'style="display: none"' : "" #>Item added in your cart</span>
+            <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added in your cart</span>
         </script>
 
         <script>
-            window.cart = [];
             var schema = { model: {id: "id"} };
 
-            var ds = new kendo.data.DataSource({
+            var ds = kendo.data.DataSource.create({
                 schema: schema,
                 transport: { read: { url: "menu.js", dataType: "json" } },
                 group: "category",
@@ -160,7 +171,15 @@
                 }
             });
 
-            var featured = new kendo.data.DataSource({ schema: schema, filter: {field: "featured", operator: "eq", value: true} });
+            var cartDataSource = kendo.data.DataSource.create({schema: schema, aggregate: [{ field: "price", aggregate: "sum" }]});
+
+            cartDataSource.bind("change", function() {
+                if (cartDataSource.aggregates().price) {
+                    $("#total").html(cartDataSource.aggregates().price.sum + " &euro;");
+                }
+            });
+
+            var featured = kendo.data.DataSource.create({ schema: schema, filter: {field: "featured", operator: "eq", value: true} });
 
             ds.bind("change", function() {
                 featured.data(ds.data());
@@ -172,8 +191,15 @@
 
             function addToCartFromList(e) {
                 if (e.buttonName === "add") {
-                    cart.push(e.dataItem.id);
+                    cartDataSource.add(e.dataItem);
                     e.button.element.parent().find(".added").show();
+                    e.preventDefault();
+                }
+            }
+
+            function removeItemFromList(e) {
+                if (e.buttonName === "remove") {
+                    cartDataSource.remove(e.dataItem.id);
                     e.preventDefault();
                 }
             }
@@ -189,6 +215,11 @@
                     $("#menuList")
                         .kendoMobileListView({dataSource: ds, template: $("#menuTemplate").text()})
                         .data("kendoMobileListView").bind("click", addToCartFromList);
+                } else if (id === "cart") {
+                    $("#cartList").kendoMobileListView({
+                        dataSource: cartDataSource,
+                        template: $("#cartItemTemplate").text()
+                    }).data("kendoMobileListView").bind("click", removeItemFromList);
                 }
             });
 
@@ -203,7 +234,7 @@
 
                         view.content.find("#add-to-cart").data("kendoMobileButton").bind("click", function(e) {
                             e.preventDefault();
-                            cart.push(item.id);
+                            cartDataSource.add(item);
                             view.content.find(".added").show();
                         });
                     });
