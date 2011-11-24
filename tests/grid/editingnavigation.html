@@ -209,7 +209,7 @@
                 grid.current(table.find("tr:nth(1)>td:first"));
                 grid.element.focus().press(kendo.keys.TAB, false, true);
 
-                ok(table.find("tr:nth(0)>td:last").hasClass("k-state-focused"));
+                ok(table.find("tr:nth(0)>td:last")[0] === grid.current()[0]);
             });
 
             test("pressing escape key on edited cell exits edit mode", function() {
