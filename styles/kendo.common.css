@@ -237,6 +237,8 @@ html body .k-button-bare
 .k-insert-bottom { background-position: -96px -64px; }
 .k-drop-hint { background-position: 0 -326px; }
 
+.k-warning { background-position: -96px -240px; }
+
 .k-image
 {
     border: 0;
@@ -760,6 +762,7 @@ div.k-window-content
 {
     display: block;
     padding: .5em .9em;
+    line-height: 1.34;
 }
 
 .k-menu .k-group
@@ -2650,12 +2653,22 @@ div.k-slider
 	background-position: -98px -181px;
 }
 
+.k-tooltip-validation .k-callout-n
+{
+    background-position: -114px -181px;
+}
+
 .k-callout-w
 {
 	top: 49%;
 	left: -7px;
 	margin-top: -5px;
 	background-position: -101px -226px;
+}
+
+.k-tooltip-validation .k-callout-w
+{
+    background-position: -117px -226px;
 }
 
 .k-callout-s
@@ -2667,6 +2680,11 @@ div.k-slider
 	background-position: -98px -213px;
 }
 
+.k-tooltip-validation .k-callout-s
+{
+    background-position: -114px -213px;
+}
+
 .k-callout-e
 {
 	top: 49%;
@@ -2674,6 +2692,11 @@ div.k-slider
 	margin-top: -5px;
 	margin-left: 2px;
 	background-position: -101px -194px;
+}
+
+.k-tooltip-validation .k-callout-e
+{
+    background-position: -117px -194px;
 }
 
 /* Splitter */
