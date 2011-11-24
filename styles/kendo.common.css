@@ -1197,8 +1197,7 @@ div.k-grid-header .k-header
     border-bottom-width: 1px;
 }
 
-.k-grouping-header,
-.k-grouping-dropclue
+.k-grouping-header
 {
     line-height: 2;
 }
@@ -1207,6 +1206,7 @@ div.k-grid-header .k-header
 {
     position: absolute;
     width: 6px;
+    height: 25px;
     background-repeat: no-repeat;
     background-position: -101px -148px;
 }
