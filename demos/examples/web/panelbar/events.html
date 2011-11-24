@@ -84,24 +84,24 @@
         <script>
             function onSelect(e) {
                 kendoConsole.log("Selected: " + $(e.item).find("> .k-link").text());
-            };
+            }
 
             function onExpand(e) {
                 kendoConsole.log("Expanded: " + $(e.item).find("> .k-link").text());
-            };
+            }
 
             function onCollapse(e) {
                 kendoConsole.log("Collapsed: " + $(e.item).find("> .k-link").text());
-            };
+            }
 
             function onContentLoad(e) {
                 kendoConsole.log("Content loaded in <b>"+ $(e.item).find("> .k-link").text() +
                                  "</b> and starts with <b>" + $(e.contentElement).text().substr(0, 20) + "...</b>");
-            };
+            }
 
             function onError(e) {
                 kendoConsole.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
-            };
+            }
 
             $("#panelbar").kendoPanelBar({
                 select: onSelect,

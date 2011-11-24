@@ -425,8 +425,8 @@
 
             content = element.find("li" + ACTIVECLASS + " > ." + CONTENT);
 
-            if (content.length > 0 && content.is(EMPTY)) {
-                that.expand(content.parent());
+            if (content.length > 0) {
+                that.expand(content.parent(), false);
             }
         },
         options: {
