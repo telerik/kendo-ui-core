@@ -66,7 +66,7 @@
 
     function appLinkMouseUp(e) {
         var link = $(e.currentTarget),
-            href = link.attr("href");
+            href = link.attr("href") || "javascript:;"; // Don't navigate or report errors if href is not set.
 
         if (!e.isDefaultPrevented()) {
             // Prevent iOS address bar progress display for in app navigation
