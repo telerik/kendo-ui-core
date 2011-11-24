@@ -591,6 +591,48 @@
 
                 ok(method.calls("cancelChanges"));
             });
+
+            test("dirty flag is shown for modified cell after edit", function() {
+                var grid = setup({
+                    dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "foo",
+                                fields: {
+                                    foo: "foo"
+                                }
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                    })
+                }),
+                cell = table.find("tr:first > td:first");
+
+                cell.click();
+                cell.find("input").val("baz").change();
+                grid.closeCell();
+                ok(cell.find("span.k-dirty").length);
+            });
+
+            test("dirty flag is shown for modified cell", function() {
+                var grid = setup({
+                    dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "foo",
+                                fields: {
+                                    foo: "foo"
+                                }
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                    })
+                });
+
+                dataSource.get("bar").set("name", "moo");
+
+                ok(table.find("tr:first > td").eq(1).find("span.k-dirty").length);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
