@@ -153,14 +153,20 @@
 
             var ds = new kendo.data.DataSource({
                 schema: schema,
-                transport: { read: { url: "featured.js", dataType: "json" } }
+                transport: { read: { url: "menu.js", dataType: "json" } },
+                group: "category",
+                error: function() {
+                    console.log(arguments);
+                }
             });
 
-            var menuDs = new kendo.data.DataSource({
-                schema: schema,
-                transport: { read: { url: "menu.js", dataType: "json" } },
-                group: { field: "category" }
+            var featured = new kendo.data.DataSource({ schema: schema, filter: {field: "featured", operator: "eq", value: true} });
+
+            ds.bind("change", function() {
+                featured.data(ds.data());
             });
+
+            ds.fetch();
 
             var itemDetailsTemplate = kendo.template($("#detailTemplate").text());
 
@@ -177,11 +183,11 @@
 
                 if (id === "index") {
                     $("#featured")
-                        .kendoMobileListView({dataSource: ds, template: $("#menuTemplate").text()})
+                        .kendoMobileListView({dataSource: featured, template: $("#menuTemplate").text()})
                         .data("kendoMobileListView").bind("click", addToCartFromList);
                 } else if (id === "menu") {
                     $("#menuList")
-                        .kendoMobileListView({dataSource: menuDs, template: $("#menuTemplate").text()})
+                        .kendoMobileListView({dataSource: ds, template: $("#menuTemplate").text()})
                         .data("kendoMobileListView").bind("click", addToCartFromList);
                 }
             });
@@ -190,19 +196,19 @@
                 var view = e.view, viewID = view.element.attr("id"), item;
 
                 if (viewID === "details") {
-                    menuDs.fetch(function() {
-                        item = menuDs.get(e.params.id).data;
+                    ds.fetch(function() {
+                        item = ds.get(e.params.id).data;
                         view.content.html(itemDetailsTemplate(item));
                         kendo.mobile.enhance(view.content);
 
-                        view.content.find("#add-to-cart").data("kendoMobileButton").bind("click", function() {
+                        view.content.find("#add-to-cart").data("kendoMobileButton").bind("click", function(e) {
+                            e.preventDefault();
                             cart.push(item.id);
                             view.content.find(".added").show();
-                            ds.refresh();
                         });
                     });
-                } else if (viewID === "index") {
-                    view.content.find("#featured").data("kendoMobileListView").refresh();
+                } else if (viewID === "index" || viewID === "menu") {
+                    view.content.find(".item-list").data("kendoMobileListView").refresh();
                 }
             });
         </script>

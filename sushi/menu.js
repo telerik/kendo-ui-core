@@ -5,7 +5,8 @@
          "price": 12.00,
          "image": "tuna-poki-maki.jpg",
          "category": "Cold starters",
-         "description": "Salad with, raw fish, octopus, seaweed, avocado and cucumber with wafu dressing"
+         "description": "Salad with, raw fish, octopus, seaweed, avocado and cucumber with wafu dressing",
+         "featured": true
     },
     {
         "id": 2,
@@ -21,7 +22,8 @@
          "price": 10.00,
          "image": "tuna-poki-maki.jpg",
          "category": "Cold starters",
-         "description": "Green salad with tataki tuna"
+         "description": "Green salad with tataki tuna",
+         "featured": true
     },
     {
         "id": 4,
@@ -29,7 +31,8 @@
          "price": 10.00,
          "image": "tuna-poki-maki.jpg",
          "category": "Warm starters",
-         "description": "Chicken brochettes with yakitori sauce 3 pieces"
+         "description": "Chicken brochettes with yakitori sauce 3 pieces",
+         "featured": true
     },
     {
         "id": 5,
@@ -37,7 +40,8 @@
          "price": 4.00,
          "image": "tuna-poki-maki.jpg",
          "category": "Warm starters",
-         "description": "Boiled soy beans with salt"
+         "description": "Boiled soy beans with salt",
+         "featured": true
     },
     {
         "id": 6,
@@ -77,7 +81,8 @@
          "price": 6.00,
          "image": "tuna-poki-maki.jpg",
          "category": "Hosomaki",
-         "description": "Tuna roll with wasabi 6 pieces"
+         "description": "Tuna roll with wasabi 6 pieces",
+         "featured": true
     },
     {
         "id": 11,
