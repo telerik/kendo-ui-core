@@ -1088,6 +1088,7 @@
             for (; idx < length; idx++) {
                 formats[idx] = patterns[formatsSequence[idx]];
             }
+            formats[idx + 1] = "ddd MMM dd yyyy hh:mm:ss";
 
             idx = 0;
         }
