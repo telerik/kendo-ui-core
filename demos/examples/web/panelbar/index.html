@@ -23,38 +23,100 @@
         <!-- description -->
         <!-- description -->
         <div id="example" class="k-content">
-            <ul id="panelbar">
+			<div id="organizer">
+				<ul id="panelbar">
                 <li>
-                    First Item
-                    <ul>
-                        <li>Sub Item 1</li>
-                        <li>
-                            Sub Item 2
-                            <ul>
-                                <li>Sub Item 1</li>
-                                <li>Sub Item 2</li>
-                                <li>Sub Item 3</li>
-                                <li>Sub Item 4</li>
-                            </ul>
-                        </li>
-                        <li>Sub Item 3</li>
-                        <li>Sub Item 4</li>
-                    </ul>
-                </li>
-                <li disabled="disabled">
-                    Disabled Item
-                </li>
-                <li>
-                    Templated Item
-                    <div class="k-content" style="padding: 10px;">
-                        This is a <br />simple template item.<br /><br />
-                        <button class="k-button">With a button</button>
+                    My Teammates
+					<div class="k-content" style="padding: 10px;">
+						<div class="teamMate">
+							<img src="../content/panelbar/andrew.jpg" alt="Andrew Fuller">
+							<h2>Andrew Fuller</h2>
+							<p>Team Lead</p>
+						</div>
+						<div class="teamMate">
+							<img src="../content/panelbar/nancy.jpg" alt="Nancy Leverling">
+							<h2>Nancy Leverling</h2>
+							<p>Sales Associate</p>
+						</div>
+						<div class="teamMate">
+							<img src="../content/panelbar/robert.jpg" alt="Robert King">
+							<h2>Robert King</h2>
+							<p>Business System Analyst</p>
+						</div>
                     </div>
                 </li>
+                <li>
+                    Projects
+					<ul>
+                        <li>New Business Plan</li>
+                        <li>
+                            Sales Forecasts
+                            <ul>
+                                <li>Q1 Forecast</li>
+                                <li>Q2 Forecast</li>
+                                <li>Q3 Forecast</li>
+                                <li>Q4 Forecast</li>
+                            </ul>
+                        </li>
+                        <li>Sales Reports</li>
+                    </ul>
+                    
+                </li>
+				<li>
+					Programs
+					<ul>
+                        <li>Monday</li>
+						<li>Tuesday</li>
+						<li>Wednesday</li>
+						<li>Thursday</li>
+						<li>Friday</li>
+                    </ul>
+				</li>
+				<li disabled="disabled">
+                    Communication
+                </li>
             </ul>
+				<div id="bottom"></div>
+			</div>
+			<style scoped>
+				#organizer {
+					width: 300px;
+					margin: 0 auto;
+					padding: 47px 0 0 0;
+					background: url('../content/panelbar/orgHead.png') transparent no-repeat 0 0;
+				}
+				#bottom {
+					width: 300px;
+					height: 90px;
+					background: url('../content/panelbar/orgFoot.png') transparent no-repeat 0 0;
+				}
+				.teamMate:after {
+					content: ".";
+					display: block;
+					height: 0;
+					line-height: 0;
+					clear: both;
+					visibility: hidden;
+				}
+				.teamMate h2 {
+					font-size: 1.4em;
+					font-weight: normal;
+					padding-top: 20px;
+				}
+				.teamMate p {
+					margin: 5px 0;
+				}
+				.teamMate img {
+					float: left;
+					margin: 5px 15px 5px 5px;
+					border: 1px solid #ccc;
+				}
+			</style>
             <script>
                 $(document).ready(function() {
-                    $("#panelbar").kendoPanelBar().css({ width: 310 });
+                    $("#panelbar").kendoPanelBar({
+						expandMode: "single"
+					});
                 });
             </script>
         </div>
