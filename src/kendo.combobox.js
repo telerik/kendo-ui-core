@@ -204,7 +204,7 @@
             that.input.bind({
                 keydown: proxy(that._keydown, that),
                 focus: function() {
-                    that.input.parent().addClass(FOCUSED);
+                    that._inputWrapper.addClass(FOCUSED);
                 },
                 blur: function() {
                     that._bluring = setTimeout(function() {
@@ -213,7 +213,7 @@
                         that.text(that.text());
                         that._blur();
 
-                        that.input.parent().removeClass(FOCUSED);
+                        that._inputWrapper.removeClass(FOCUSED);
                     }, 100);
                 }
             });

@@ -81,9 +81,10 @@
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         MOUSEUP = touch ? "touchmove " + TOUCHEND : "mouseup mouseleave",
         HIDE = "k-hide-text",
+        DEFAULT = "k-state-default",
+        FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
-        INPUTWRAPPER = ".k-numeric-wrap",
         POINT = ".",
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
@@ -122,14 +123,14 @@
                               keydown: proxy(that._keydown, that),
                               paste: proxy(that._paste, that),
                               blur: proxy(that._focusout, that)
-                          })
-                          .closest("form")
-                          .bind("reset", function() {
-                               setTimeout(function() {
-                                    that.value(element[0].value);
-                               });
-                          })
-                          .end();
+                          });
+
+            element.closest("form")
+                   .bind("reset", function() {
+                      setTimeout(function() {
+                          that.value(element[0].value);
+                      });
+                   });
 
             that._wrapper();
             that._arrows();
@@ -194,7 +195,7 @@
             var that = this,
                 text = that._text,
                 element = that.element;
-                wrapper = that.wrapper,
+                wrapper = that._inputWrapper,
                 upArrow = that._upArrow,
                 downArrow = that._downArrow;
 
@@ -205,20 +206,18 @@
 
             if (enable === false) {
                 wrapper
+                    .removeClass(DEFAULT)
                     .addClass(STATEDISABLED)
-                    .children(INPUTWRAPPER)
                     .unbind(HOVEREVENTS);
 
-                text.attr(DISABLED, DISABLED);
-                element.attr(DISABLED, DISABLED);
+                text.add(element).attr(DISABLED, DISABLED);
             } else {
                 wrapper
+                    .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
-                    .children(INPUTWRAPPER)
                     .bind(HOVEREVENTS, that._toggleHover);
 
-                text.removeAttr(DISABLED);
-                element.removeAttr(DISABLED);
+                text.add(element).removeAttr(DISABLED);
 
                 upArrow.bind(MOUSEDOWN, function(e) {
                     e.preventDefault();
@@ -355,11 +354,13 @@
             clearTimeout(that._bluring);
             that._toggleText(false);
             that.element.focus();
+            that._inputWrapper.addClass(FOCUSED);
         },
 
         _focusout: function() {
             var that = this;
             that._bluring = setTimeout(function() {
+                that._inputWrapper.removeClass(FOCUSED);
                 that._blur();
             }, 100);
         },
@@ -543,6 +544,7 @@
 
             wrapper[0].style.cssText = element[0].style.cssText;
             that.wrapper = wrapper.addClass("k-widget k-numerictextbox").show();
+            that._inputWrapper = $(wrapper[0].firstChild);
         }
     });
 
