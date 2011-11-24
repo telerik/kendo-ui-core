@@ -90,7 +90,7 @@
         },
 
         one: function(eventName, handlers) {
-            this.bind(eventName, handlers, true);
+            return this.bind(eventName, handlers, true);
         },
 
         trigger: function(eventName, parameter) {

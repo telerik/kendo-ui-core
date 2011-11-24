@@ -581,10 +581,7 @@
                 };
 
             if (!that.ul[0].firstChild) {
-                dataSource.bind(CHANGE, function search() {
-                    that.search(word);
-                    dataSource.unbind(CHANGE, search);
-                }).fetch();
+                dataSource.one(CHANGE, function () { that.search(word); }).fetch();
                 return;
             }
 
@@ -680,23 +677,19 @@
         },
 
         _select: function() {
-            var that = this,
-                dataSource = that.dataSource,
-                handler = function () {
-                    var value = that.value();
-                    if (value) {
-                        that.value(value);
-                    } else {
-                        that.select(that.options.index);
-                    }
+            var that = this;
 
-                    that._old = that.value();
-                    dataSource.unbind(CHANGE, handler);
-                };
+            that.dataSource.one(CHANGE, function() {
+                var value = that.value();
+                if (value) {
+                    that.value(value);
+                } else {
+                    that.select(that.options.index);
+                }
 
-            dataSource.bind(CHANGE, handler).query();
+                that._old = that.value();
+            }).query();
         },
-
 
         _wrapper: function() {
             var that = this,
