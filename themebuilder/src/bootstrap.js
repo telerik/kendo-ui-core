@@ -11,12 +11,14 @@
         })(),
 
          // TODO: change these to their respective CDN versions during build
-        kendoAllLocation = applicationRoot + "../../deploy/kendoUI/js/kendo.all.min.js",
-        kendoCommonCssLocation = applicationRoot + "../../deploy/kendoUI/styles/kendo.common.min.css",
+        kendoAllLocation = applicationRoot + "../../deploy/kendoui.web-dataviz.commercial/js/kendo.all.min.js",
+        kendoCommonCssLocation = applicationRoot + "../../deploy/kendoui.web-dataviz.commercial/styles/kendo.common.min.css",
 
-        // caution: the variables below is changed during builds. update build/themebuilder.js if you change its name!
-        requiredJs = ["less.js", "themebuilder.js", "colorengine.js", "template.js"],
-        requiredCss = ["kendo.black.css", "styles.css?" +new Date() ];
+        // caution: the variables below is changed during builds. update build/themebuilder.js if you change them!
+        requiredJs = ["scripts/less.js", "scripts/themebuilder.js", "scripts/colorengine.js", "scripts/template.js"],
+        requiredCss = ["styles/kendo.black.css", "styles/styles.css"];
+
+        console.log(applicationRoot);
 
     // TODO: move theme definitions to different files
     var constant = function(target, property, values){
@@ -47,8 +49,8 @@
 
             "@texture-url": constant(".k-header", "background-image", [
                 { text: "flat", value: "none" },
-                { text: "highlight", value: "url('" + applicationRoot + "textures/highlight.png')" },
-                { text: "glass", value: "url('" + applicationRoot + "textures/glass.png')" },
+                { text: "highlight", value: "url('" + applicationRoot + "styles/textures/highlight.png')" },
+                { text: "glass", value: "url('" + applicationRoot + "styles/textures/glass.png')" },
             ]),
 
             "@widget-background-color":         constant(".k-widget", BGCOLOR),
@@ -186,7 +188,7 @@
 
             bootStyles = doc.createElement("link");
             bootStyles.setAttribute("rel", "stylesheet");
-            bootStyles.setAttribute("href", applicationRoot + "bootstrap.css");
+            bootStyles.setAttribute("href", applicationRoot + "styles/bootstrap.css");
 
             doc.getElementsByTagName("head")[0].appendChild(bootStyles);
 
