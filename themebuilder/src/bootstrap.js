@@ -93,7 +93,7 @@
             "@tooltip-border-color":            constant(".k-tooltip", BORDERCOLOR),
             "@tooltip-text-color":              constant(".k-tooltip", COLOR),
 
-            "@main-border-radius":              constant(".k-widget", "border-radius"),
+            "@main-border-radius":              constant(".k-button", "border-radius"),
             "@list-border-radius": {
                 readonly: true,
                 value: "~`Math.max(parseInt('@{main-border-radius}', 10) - 1, 0) + 'px'`"
