@@ -28,7 +28,7 @@
 
             module("kendo.ui.Groupable", {
                 setup: function() {
-                    div = $("<div><div class='container'></div><table><thead><th data-field='field1'></th><th data-field='field2'></th></thead></table></div>").appendTo(document.body);
+                    div = $("<div><div class='container'></div><table><thead><th data-kendo-field='field1'></th><th data-kendo-field='field2'></th></thead></table></div>").appendTo(document.body);
                 },
                 teardown: function() {
                     div.remove();
@@ -205,7 +205,7 @@
 
                 indicator.find(".k-link").click();
 
-                equal(groupContainer.find(".k-group-indicator:first").data("dir"), "desc");
+                equal(groupContainer.find(".k-group-indicator:first").attr("data-kendo-dir"), "desc");
             });
 
             test("sort desc group indicator change to asc", function() {
@@ -216,7 +216,7 @@
 
                 indicator.find(".k-link").click();
 
-                equal(groupContainer.find(".k-group-indicator:first").data("dir"), "asc");
+                equal(groupContainer.find(".k-group-indicator:first").attr("data-kendo-dir"), "asc");
             });
 
             test("sorting calls dataSource group", function() {
@@ -246,8 +246,8 @@
 
                 indicator = groupContainer.find(".k-group-indicator");
                 equal(indicator.length, 1);
-                equal(indicator.data("field"), "field1");
-                equal(indicator.data("dir"), "desc");
+                equal(indicator.attr("data-kendo-field"), "field1");
+                equal(indicator.attr("data-kendo-dir"), "desc");
             });
 
 
