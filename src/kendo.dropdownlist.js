@@ -255,7 +255,7 @@
                         keydown: proxy(that._keydown, that),
                         keypress: proxy(that._keypress, that),
                         focusin: function() {
-                            that.span.parent().addClass(FOCUSED);
+                            that._inputWrapper.addClass(FOCUSED);
                             clearTimeout(that._bluring);
                         },
                         click: function() {
@@ -264,7 +264,7 @@
                         focusout: function(e) {
                             that._bluring = setTimeout(function() {
                                 that._blur();
-                                that.span.parent().removeClass(FOCUSED);
+                                that._inputWrapper.removeClass(FOCUSED);
                             }, 100);
                         }
                     });
