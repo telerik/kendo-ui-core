@@ -53,13 +53,12 @@
         <!-- description -->
         <div id="example" class="k-content">
             <p>
-                Select a theme to modify <input class="themeChooser" /> and start the
-                <a id="bookmarklet" href="">Kendo ThemeBuilder</a><br />
+                Select a theme to modify <input class="themeChooser" /> and start the <a id="bookmarklet" href="">Kendo ThemeBuilder</a><br />
                 Want to use the ThemeBuilder on your own website? Drag the button to your bookmarks bar!
             </p>
 
             <script>
-                $("#bookmarklet").attr("href", "javascript:(function(){" +
+                $("#bookmarklet").attr("href", ("javascript:(function(){" +
                         "var ktb=window.kendoThemeBuilder,s,d=document;" +
                         "if(typeof ktb!='undefined'){" +
                             "ktb.open();" +
@@ -69,7 +68,7 @@
                             "s.src='THEMEBUILDER_DEPLOY_ROOT/bootstrap.js?'+(+new Date());" +
                             "d.getElementsByTagName('body')[0].appendChild(s);" +
                         "}" +
-                    "})()".replace(/\s+/g, "%20"));
+                    "})()").replace(/\s+/g, "%20"));
             </script>
 
             <div class="column">
