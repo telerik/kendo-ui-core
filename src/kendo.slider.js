@@ -334,8 +334,8 @@
                 i = 1,
                 lastItem;
 
-            pixelWidths.splice(0, 0, pixelWidths.pop() * 2);
-            pixelWidths.splice(itemsCount, 1, pixelWidths.pop() * 2);
+            pixelWidths.splice(0, 0, pixelWidths[itemsCount - 2] * 2);
+            pixelWidths.splice(itemsCount -1, 1, pixelWidths.pop() * 2);
 
             that._pixelSteps = [selection];
             that._values = [val];
@@ -345,7 +345,7 @@
             }
 
             while (i < itemsCount) {
-                selection += (pixelWidths[i - 1] + pixelWidths [i]) / 2;
+                selection += (pixelWidths[i - 1] + pixelWidths[i]) / 2;
                 that._pixelSteps[i] = selection;
                 that._values[i] = val += options.smallStep;
 
@@ -794,9 +794,9 @@
         function moveSelection (val) {
             var selectionValue = val - options.min,
                 index = math.ceil(selectionValue / options.smallStep),
-                selection = that._pixelSteps[index],
+                selection = parseInt(that._pixelSteps[index]),
                 selectionDiv = that._trackDiv.find(".k-slider-selection"),
-                halfDragHanndle = parseInt(dragHandle[that._outerSize]() / 2, 10) + 1;
+                halfDragHanndle = parseInt(dragHandle[that._outerSize]() / 2, 10);
 
             selectionDiv[that._size](selection);
             dragHandle.css(that._position, selection - halfDragHanndle);
@@ -1320,7 +1320,7 @@
                 selectionEndIndex = math.ceil(selectionEndValue / options.smallStep),
                 selectionStart = that._pixelSteps[selectionStartIndex],
                 selectionEnd = that._pixelSteps[selectionEndIndex],
-                halfHandle = parseInt(dragHandles.eq(0)[that._outerSize]() / 2, 10) + 1;
+                halfHandle = parseInt(dragHandles.eq(0)[that._outerSize]() / 2, 10);
 
             dragHandles.eq(0).css(that._position, selectionStart - halfHandle)
                        .end()
