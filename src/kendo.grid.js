@@ -262,8 +262,8 @@
      *  <table id="grid">
      *   <thead>
      *       <tr>
-     *           <th data-field="title">Title<th>
-     *           <th data-field="year">Year<th>
+     *           <th data-kendo-field="title">Title<th>
+     *           <th data-kendo-field="year">Year<th>
      *       </tr>
      *   </thead>
      *   <tbody>
@@ -618,7 +618,7 @@
         },
 
         _modelForContainer: function(container) {
-            var id = (container.is("tr") ? container : container.closest("tr")).data("id");
+            var id = (container.is("tr") ? container : container.closest("tr")).attr(kendo.attr("id"));
 
             return this.dataSource.get(id);
         },
@@ -717,7 +717,7 @@
         closeCell: function() {
             var that = this,
                 cell = that._editContainer.removeClass("k-edit-cell"),
-                id = cell.closest("tr").data("id"),
+                id = cell.closest("tr").attr(kendo.attr("id")),
                 column = that.columns[that.cellIndex(cell)],
                 model = that.dataSource.get(id);
 
@@ -788,7 +788,7 @@
             if ((that.editable && that.editable.end()) || !that.editable) {
                 var model = that.dataSource.insert({}),
                     id = model.id(),
-                    cell = that.table.find("tr[data-id=" + id + "] > td:not(.k-group-cell,.k-hierarchy-cell)").first();
+                    cell = that.table.find("tr[" + kendo.attr("id") + "=" + id + "] > td:not(.k-group-cell,.k-hierarchy-cell)").first();
 
                 if (cell.length) {
                     that.editCell(cell);
@@ -1275,7 +1275,7 @@
 
         _modelChange: function(model) {
             var that = this,
-                row = that.tbody.find("tr[data-id=" + model.id() +"]"),
+                row = that.tbody.find("tr[" + kendo.attr("id") + "=" + model.id() +"]"),
                 changes = model.changes() || {},
                 cell,
                 column,
@@ -1357,12 +1357,12 @@
                 cols = table.find("col"),
                 dataSource = that.options.dataSource;
 
-            // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
+            // using HTML5 data attributes as a configuration option e.g. <th data-kendo-field="foo">Foo</foo>
             columns = columns.length ? columns : map(table.find("th"), function(th, idx) {
                 var th = $(th),
-                    sortable = th.data("sortable")
-                    filterable = th.data("filterable")
-                    field = th.data("field");
+                    sortable = th.attr(kendo.attr("sortable"))
+                    filterable = th.attr(kendo.attr("filterable"))
+                    field = th.attr(kendo.attr("field"));
 
                 if (!field) {
                    field = th.text().replace(/\s|[^A-z0-9]/g, "");
@@ -1370,9 +1370,9 @@
 
                 return {
                     field: field,
-                    sortable: sortable,
-                    filterable: filterable,
-                    template: th.data("template"),
+                    sortable: sortable !== "false",
+                    filterable: filterable !== "false",
+                    template: th.attr(kendo.attr("template")),
                     width: cols.eq(idx).css("width")
                 };
             });
@@ -1422,7 +1422,7 @@
                         // render the id as data-id attribute
                         type = typeof id;
 
-                        rowTemplate += ' data-id="#=';
+                        rowTemplate += ' ' + kendo.attr("id") + '="#=';
                         state.storage["tmpl" + state.count] = type === FUNCTION ? id : that.dataSource.reader.model.id;
                         rowTemplate += 'this.tmpl' + state.count + "(" + paramName + ")";
                         state.count++;
@@ -1635,7 +1635,7 @@
                     th = columns[idx];
 
                     if (!th.command) {
-                        html += "<th data-field='" + th.field + "'>" + (th.title || th.field || "") + "</th>";
+                        html += "<th " + kendo.attr("field") + "='" + th.field + "'>" + (th.title || th.field) + "</th>";
                     } else {
                         html += "<th>" + (th.title || "") + "</th>";
                     }
