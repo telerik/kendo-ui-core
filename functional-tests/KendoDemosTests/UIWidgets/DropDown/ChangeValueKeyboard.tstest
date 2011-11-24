@@ -19,11 +19,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/dropdownlist/remotedatasource.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/web/dropdownlist/remotedatasource.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e8c5f2b9-ca41-4f1d-af02-36557509b284</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a9393227-f953-4f05-a7f3-aab01723b876</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -45,7 +45,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/dropdownlist/remotedatasource.html</d2p1:NavigateURL>
+        <d2p1:NavigateURL>/web/dropdownlist/remotedatasource.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>ChangeValueKeyboard4bsbbob0.xz4</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>fd6979c6-76b4-4d01-b0c2-92171e25c4d0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>73a1daa5-fc85-4bc7-ac59-a534df093a83</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -91,7 +91,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>ChangeValueKeyboard_CodedStep</d2p1:Id>
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>392c5ba6-f052-432b-9672-97b413db3be1</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c46c09c3-451e-4c61-9c5e-03f367e19ab0</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -135,7 +135,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d96c3359-f67a-4ad5-9224-9d49cc46e0fb</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>33bbadb6-819f-4554-a207-52fed8c3ef50</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -220,7 +220,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>5b770564-5d15-493e-95a9-8a4a76e3b29d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>51a34606-61e8-4188-bdce-6fdb585b9f4b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopKeyboardActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -309,7 +309,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>43546bac-15c3-4a28-964a-cc7f6e27c69f</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>fdd08a10-e94d-4477-9ff7-d1fb636e281e</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -342,7 +342,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>66af683c-a9a2-4181-b9cb-364a3e5f1c1d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>bd9eb593-e333-4314-8df7-a44502a22cc5</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopKeyboardActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -431,7 +431,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d73b1193-12dd-4033-abe0-e82b21c72666</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a2b948cd-b4bc-4ea2-94ad-0c4dd19c83cb</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -464,7 +464,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a09ff3ee-aaa2-43e1-b5c6-bd6788f2a765</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1d73cef2-0f68-4629-9089-e67977e41b3f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopKeyboardActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -553,7 +553,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>10</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>882a051f-1d2a-4203-bce6-84bb2cfcda9a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>9dda41a8-974b-4c90-83fa-59be0c4aa3c6</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -586,7 +586,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>11</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7a2af5e5-7cac-44a3-92ec-5f56f9bffab8</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>67d009c7-01ab-4140-9a68-58f02193f370</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopKeyboardActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -675,7 +675,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>ChangeValueKeyboard_CodedStep1</d2p1:Id>
       <d2p1:Order>12</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d670751e-d707-427e-82e5-1350b0f01c6b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7e432f4b-56af-446d-b229-1d487f390120</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">

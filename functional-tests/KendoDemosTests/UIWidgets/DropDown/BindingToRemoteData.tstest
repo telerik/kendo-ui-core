@@ -348,11 +348,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/dropdownlist/remotedatasource.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/web/dropdownlist/remotedatasource.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>653a9437-91c8-43e1-a417-2b330a465ae3</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d8cda771-438d-4b9e-b22a-e8dd8c1ed3f5</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -374,7 +374,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/dropdownlist/remotedatasource.html</d2p1:NavigateURL>
+        <d2p1:NavigateURL>/web/dropdownlist/remotedatasource.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>BindingToRemoteDatalndwxucp.33c</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -387,7 +387,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>38887148-f2fd-45f4-bef3-076d388ad16d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3db7adee-9b09-49d7-8bad-73ab987dc836</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -420,7 +420,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>BindingToRemoteData_CodedStep</d2p1:Id>
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>00821cd6-3a1d-4fc4-aff3-2de0bc34b534</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>fe807306-ddcc-451b-9cef-ef4cdd4e3463</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -461,7 +461,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6e694093-ae28-4b83-95e0-913d268793d8</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>416d18e5-194d-4b9d-8f18-8bb5942473ed</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -546,7 +546,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>4a712c6d-b2a9-46e5-bbc6-2073a8750e93</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>e524a43c-f79e-46cb-8e0e-72e01f98ebb9</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -631,7 +631,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>BindingToRemoteData_CodedStep1</d2p1:Id>
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>4fac84c8-d873-4fef-b08e-d609b65672d0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2b542ed7-00df-4d4d-bb97-9939f3c2d7cc</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
