@@ -126,6 +126,7 @@
 
             element.addClass(FOCUSABLE)
                   .delegate("." + FOCUSABLE + FOCUSSELECTOR, "mousedown", function(e) {
+                      debugger;
                       that.current($(e.currentTarget));
                   });
        },

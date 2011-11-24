@@ -21,7 +21,7 @@
                         '<option value="#=op#">#=operators[op]#</option>'+
                     '#}#'+
                 '</select>'+
-                '<input name="filters[0].value" class="k-widget k-input k-autocomplete" type="text" data-type="#=type#"/>'+
+                '<input name="filters[0].value" class="k-widget k-input k-autocomplete" type="text" data-#=ns#type="#=type#"/>'+
                 '#if(extra){#'+
                     '<select name="logic" class="k-filter-and">'+
                         '<option value="and">And</option>'+
@@ -32,7 +32,7 @@
                             '<option value="#=op#">#=operators[op]#</option>'+
                         '#}#'+
                     '</select>'+
-                    '<input name="filters[1].value" class="k-widget k-input k-autocomplete" type="text" data-type="#=type#"/>'+
+                    '<input name="filters[1].value" class="k-widget k-input k-autocomplete" type="text" data-#=ns#type="#=type#"/>'+
                 '#}#'+
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
@@ -127,6 +127,7 @@
 
             that.form = $(kendo.template(template)({
                 field: that.field,
+                ns: kendo.ns,
                 messages: options.messages,
                 extra: options.extra,
                 operators: operators,
@@ -148,10 +149,10 @@
                 .find("select")
                 [DROPDOWNLIST]()
                 .end()
-                .find("[data-type=number]")
+                .find("[" + kendo.attr("type") + "=number]")
                 [NUMERICTEXTBOX]()
                 .end()
-                .find("[data-type=date]")
+                .find("[" + kendo.attr("type") + "=date]")
                 [DATEPICKER]();
 
             that.refresh();

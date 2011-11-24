@@ -55,7 +55,7 @@
                         }
                     });
 
-                    dom = $("<th data-field=foo />");
+                    dom = $("<th data-kendo-field=foo />");
                 },
                 teardown: function() {
                     dataSource.unbind("change");
@@ -173,7 +173,7 @@
             });
 
             test("parses filterMenu value according to field type", function() {
-                dom = $("<th data-field=bar />");
+                dom = $("<th data-kendo-field=bar />");
 
                 filterMenu = new FilterMenu(dom, {
                     dataSource: dataSource
@@ -254,7 +254,7 @@
                     ]
                 });
 
-                dom = $("<th data-field=bar />");
+                dom = $("<th data-kendo-field=bar />");
 
                 var filter2 = new FilterMenu(dom, {
                     dataSource: dataSource
@@ -350,7 +350,7 @@
             });
             test("creates numerictextbox for number fields", function() {
                 var filterMenu = new FilterMenu(
-                    dom.attr("data-field", "bar"), {
+                    dom.attr("data-kendo-field", "bar"), {
                         dataSource: dataSource
                     });
 
@@ -359,7 +359,7 @@
 
             test("creates datepicker for date fields", function() {
                 var filterMenu = new FilterMenu(
-                    dom.attr("data-field", "baz"), {
+                    dom.attr("data-kendo-field", "baz"), {
                         dataSource: dataSource
                     });
 
@@ -379,7 +379,7 @@
             });
 
             test("updates numerictextboxes", function() {
-                var filterMenu = new FilterMenu(dom.attr("data-field", "bar"), {
+                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "bar"), {
                     dataSource: dataSource
                 });
 
@@ -388,7 +388,7 @@
             });
 
             test("updates datepickers", function() {
-                var filterMenu = new FilterMenu(dom.attr("data-field", "baz"), {
+                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "baz"), {
                     dataSource: dataSource
                 });
 
@@ -398,8 +398,8 @@
             });
 
             test("closes sibling filtering menus", function() {
-                var dom1 = $("<div data-field=foo />").appendTo(document.body);
-                var dom2 = $("<div data-field=bar />").appendTo(document.body);
+                var dom1 = $("<div data-kendo-field=foo />").appendTo(document.body);
+                var dom2 = $("<div data-kendo-field=bar />").appendTo(document.body);
 
                 var filterMenu1 = new FilterMenu(dom1, {
                     dataSource: dataSource
