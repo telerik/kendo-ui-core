@@ -69,7 +69,7 @@
 
             test("focusing grid element focus first cell", function() {
                 var grid = setup();
-                grid.element.focus();
+                grid.wrapper.focus();
                 ok(grid.element.find(">tbody>tr>td").first().is(".k-state-focused"));
             });
 
@@ -83,7 +83,7 @@
 
             test("focused state is maintained after refocus", function() {
                 var grid = setup();
-                table.focus().blur().focus();
+                grid.wrapper.focus().blur().focus();
 
                 ok(table.find(">tbody>tr>td").first().is(".k-state-focused"));
             });
@@ -97,14 +97,14 @@
 
             test("down arrow moves focus on the next row same cell", function() {
                 var grid = setup();
-                grid.element.focus().press(kendo.keys.DOWN);
+                grid.wrapper.focus().press(kendo.keys.DOWN);
                 ok(table.find("tbody tr:eq(1)").find("td").hasClass("k-state-focused"));
                 equal(table.find(".k-state-focused").length, 1);
             });
 
             test("right arrow moves focus on the next cell on the same row", function() {
                 var grid = setup();
-                grid.element.focus().press(kendo.keys.RIGHT);
+                grid.wrapper.focus().press(kendo.keys.RIGHT);
                 ok(table.find("tbody tr:eq(0)").find("td:eq(1)").hasClass("k-state-focused"));
             });
 
@@ -165,7 +165,7 @@
             test("space key select the focused cell", function() {
                 var grid = setup({ selectable: "cell" });
 
-                grid.element.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
+                grid.wrapper.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
 
                 ok(table.find("tbody tr:eq(1)").find("td").first().hasClass("k-state-selected"));
             });
@@ -173,7 +173,7 @@
             test("space key select the multiple focused cells if multiple selection is enabled", function() {
                 var grid = setup({ selectable: "multipleCell" });
 
-                grid.element.focus()
+                grid.wrapper.focus()
                             .press(kendo.keys.DOWN)
                             .press(kendo.keys.SPACEBAR)
                             .press(kendo.keys.RIGHT)
@@ -186,7 +186,7 @@
             test("space key select single cells if multiple selection is enabled but ctrl is not active", function() {
                 var grid = setup({ selectable: "multipleCell" });
 
-                grid.element.focus()
+                grid.wrapper.focus()
                             .press(kendo.keys.DOWN)
                             .press(kendo.keys.SPACEBAR)
                             .press(kendo.keys.RIGHT)
@@ -226,8 +226,8 @@
             test("last selected cell on blur is highlighted on focus", function() {
                 var grid = setup();
 
-                grid.element.focus().press(kendo.keys.DOWN);
-                grid.element.trigger("focusout").trigger("focus");
+                grid.wrapper.focus().press(kendo.keys.DOWN);
+                grid.wrapper.trigger("focusout").trigger("focus");
 
                 var row = table.find("tbody tr").eq(1);
                 ok(row.find("td").first().hasClass("k-state-focused"));
@@ -237,7 +237,7 @@
                 var grid = setup();
                 grid.dataSource.group({field: "foo"});
 
-                grid.element.focus();
+                grid.wrapper.focus();
 
                 var row = table.find("tbody tr:not(.k-grouping-row)").first();
                 ok(row.find("td:not(.k-group-cell)").first().hasClass("k-state-focused"));
@@ -258,7 +258,7 @@
                 var grid = setup();
                 grid.dataSource.group({field: "foo"});
 
-                grid.element.focus().press(kendo.keys.DOWN);
+                grid.wrapper.focus().press(kendo.keys.DOWN);
 
                 var row = table.find("tbody tr:not(.k-grouping-row)").eq(1);
                 ok(!row.find("td").eq(0).hasClass("k-state-focused"));
@@ -269,7 +269,7 @@
                 var grid = setup();
                 grid.dataSource.group({field: "foo"});
 
-                grid.element.focus()
+                grid.wrapper.focus()
                     .press(kendo.keys.DOWN)
                     .press(kendo.keys.DOWN)
                     .press(kendo.keys.UP);
@@ -282,9 +282,9 @@
             test("focus after grid refresh selects first cell", function() {
                 var grid = setup();
 
-                grid.element.focus().trigger("focusout");
+                grid.wrapper.focus().trigger("focusout");
                 grid.refresh();
-                grid.element.focus();
+                grid.wrapper.focus();
 
                 var row = table.find("tbody tr").eq(0);
                 ok(row.find("td:first").hasClass("k-state-focused"));
@@ -380,7 +380,7 @@
                         selectable: "multiple"
                     });
 
-                grid.element.focus()
+                grid.wrapper.focus()
                     .press(kendo.keys.SPACEBAR)
                     .press(kendo.keys.SPACEBAR, true);
 
@@ -389,7 +389,7 @@
 
             test("k-hierarchy-cell is not highlighted when grid is focused", function() {
                 var grid = setup({ detailTemplate: "template" });
-                grid.element.focus();
+                grid.wrapper.focus();
 
                 ok(!table.find("tbody tr:eq(0)").find("td:first").hasClass("k-state-focused"));
                 ok(table.find("tbody tr:eq(0)").find("td:nth(1)").hasClass("k-state-focused"));
@@ -407,7 +407,7 @@
             test("detail row is skipped when down arrow is pressed", function() {
                 var grid = setup({ detailTemplate: "template" });
                 grid.expandRow(table.find("tbody tr:first"));
-                grid.element.focus().press(kendo.keys.DOWN);
+                grid.wrapper.focus().press(kendo.keys.DOWN);
 
                 ok(table.find("tbody tr:not(.k-detail-row):eq(1)").find("td:nth(1)").hasClass("k-state-focused"));
             });
