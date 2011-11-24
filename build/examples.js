@@ -74,33 +74,18 @@ function getRegionRegex(regionName) {
     return new RegExp("\\s*<!--\\s*" + regionName + "\\s*-->(([\\r\\n]|.)*?)<!--\\s*" + regionName + "\\s*-->", "im");
 }
 
-function mergeResourceRegion(info, exampleSource, regionType, deployConfig) {
+function formatRegion(exampleInfo, regionType, deployConfig) {
     var result,
         pathInfo = {
-            depth: info.depth,
-            suiteName: info.suite,
+            depth: exampleInfo.depth,
+            suiteName: exampleInfo.suite,
             parentFolder: parentFolder
         },
-        baseResources = resolveResources(baseRegions[regionType].html, deployConfig, pathInfo),
-        baseResourcesLines = baseResources.split(rowSeparator),
-        resourceMatch = regionRegex[regionType].exec(exampleSource),
-        exampleResources;
+        baseResources = resolveResources(baseRegions[regionType].html, deployConfig, pathInfo);
 
-    if (resourceMatch) {
-        exampleResources = resolveResources(resourceMatch[1].trimLeft(), deployConfig, pathInfo);
-        exampleResources.split(rowSeparator).forEach(function(line) {
-            baseResourcesLines = baseResourcesLines.filter(function(baseLine) {
-                return baseLine.trim() !== line.trim();
-            });
-        });
+        result = baseResources.replace(/.*?(examples-offline\.css|console\.js|people\.js|prettify\.js).*/g, "");
 
-        baseResources = baseResourcesLines.join("\r\n");
-
-        result = exampleResources + baseResources;
-
-        result = result.replace(/.*?(examples-offline\.css|console\.js|people\.js|prettify\.js).*/g, "");
-
-        if (!info.hasNavigation) {
+        if (!exampleInfo.hasNavigation) {
             result = result.replace(/.*?examples\.nav\.js.*/g, "");
         }
 
@@ -108,7 +93,6 @@ function mergeResourceRegion(info, exampleSource, regionType, deployConfig) {
             result = result.replace(/(.*?)\.(css|js)/g, "$1.min.$2");
             result = result.replace(/min\.min/g, "min");
         }
-    }
 
     return result;
 }
@@ -307,8 +291,8 @@ function processExample(fileName, deployConfig) {
         component = info.component,
         exampleSource = kendoBuild.readText(fileName),
         base = fileName === outputPath + "/index.html" ? "" : parentFolder(depth) + "/",
-        scriptRegion = mergeResourceRegion(info, exampleSource, "script", deployConfig),
-        cssRegion = mergeResourceRegion(info, exampleSource, "css", deployConfig);
+        scriptRegion = formatRegion(info, "script", deployConfig),
+        cssRegion = formatRegion(info, "css", deployConfig);
 
     exampleSource = baseRegions.meta.exec(exampleSource, baseRegions.meta.html);
 
