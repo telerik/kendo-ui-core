@@ -9,6 +9,7 @@
     <PropertyGroup>
         <BundleRoot>$(ResourcesRoot)\kendoui.web-dataviz.open-source</BundleRoot>
         <BundleScripts>$(BundleRoot)\js</BundleScripts>
+        <BundleStyles>$(BundleRoot)\styles</BundleStyles>
         <ExamplesRoot>$(ResourcesRoot)\online-examples</ExamplesRoot>
         <ExamplesScripts>$(ExamplesRoot)\shared\js</ExamplesScripts>
         <ExamplesStyles>$(ExamplesRoot)\shared\styles</ExamplesStyles>
@@ -26,6 +27,10 @@
         <UploadResources
             SourcePath="$(BundleScripts)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
             BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/js" Compress="True" />
+
+        <UploadResources
+            SourcePath="$(BundleStyles)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/styles" Compress="True" />
 
         <UploadResources
             SourcePath="$(ExamplesScripts)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
