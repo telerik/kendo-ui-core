@@ -215,7 +215,7 @@
                 return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
             },
             contentUrl: function(item) {
-                return item.contentUrl ? " data-content-url=\"" + item.contentUrl + "\"" : "";
+                return item.contentUrl ? kendo.attr("content-url") + '="' + item.contentUrl + '"' : "";
             }
         };
 
