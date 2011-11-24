@@ -64,5 +64,19 @@
         }
     });
 
+    var BackButton = MobileButton.extend({
+        options: {
+            name: "MobileBackButton",
+            style: "back",
+            selector: "[data-kendo-role=back-button]"
+        },
+
+        init: function(element, options) {
+            MobileButton.fn.init.call(this, element, options);
+            this.element.attr("href", ":back");
+        }
+    });
+
     ui.plugin(MobileButton);
+    ui.plugin(BackButton);
 })(jQuery);

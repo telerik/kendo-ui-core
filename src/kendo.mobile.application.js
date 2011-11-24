@@ -14,7 +14,7 @@
         roleSelector = kendo.roleSelector;
 
     function toRoleSelector(string) {
-        return string.replace(/(\S+)/g, "[data-kendo-role=$1],")
+        return string.replace(/(\S+)/g, "[data-kendo-role*=$1],")
     }
 
     function extractView(html) {
@@ -73,7 +73,7 @@
             link.attr("href", "#!");
             setTimeout(function() { link.attr("href", href) });
 
-            kendo.application.navigate(href);
+            history.navigate(href);
             e.preventDefault();
         }
     }
