@@ -27,8 +27,8 @@ var VERSION = kendoBuild.generateVersion(),
     LIVE_SHARED_ROOT = CDN_URL + "/examples/shared",
     LIVE_SHARED_SCRIPTS = template(LIVE_SHARED_ROOT + "/js"),
     LIVE_SHARED_STYLES = template(LIVE_SHARED_ROOT + "/styles"),
-    LIVE_SUITE_SCRIPTS = template(CDN_URL + "/#= suiteName #/js"),
     LIVE_THEMEBUILDER_ROOT = "http://themebuilder.kendoui.com",
+    LIVE_SUITE_SCRIPTS = template(CDN_URL + "/examples/#= suiteName #/js"),
     SOURCE_SCRIPTS_MARKER = /SOURCE_SCRIPTS/g,
     THEMEBUILDER_ROOT_MARKER = /THEMEBUILDER_DEPLOY_ROOT/g,
     SOURCE_STYLES_MARKER = /SOURCE_STYLES/g,
@@ -409,7 +409,7 @@ function build(deployConfig) {
             fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
         });
 
-        kendoBuild.processFilesRecursive(path.join(outputPath, "shared"), /\.js$/, function(fileName) {
+        kendoBuild.processFilesRecursive(path.join(outputPath), /\.js$/, function(fileName) {
             var content = kendoBuild.readText(fileName),
                 output = kendoBuild.minifyJs(content);
 

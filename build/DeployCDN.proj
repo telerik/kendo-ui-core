@@ -15,6 +15,15 @@
         <ExamplesStyles>$(ExamplesRoot)\shared\styles</ExamplesStyles>
     </PropertyGroup>
 
+    <ItemGroup>
+        <CDNTargets Include="$(BundleRoot)\js">
+            <DestinationPath>/js</DestinationPath>
+        </CDNTargets>
+        <CDNTargets Include="$(BundleRoot)\styles">
+            <DestinationPath>/styles</DestinationPath>
+        </CDNTargets>
+    </ItemGroup>
+
     <Target Name="DeployCDN">
         <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Name="DeployCDNStep" Message="Deploying CDN resources">
             <Output TaskParameter="Id" PropertyName="StepId" />
@@ -25,12 +34,8 @@
         </GenerateVersionDependentSuffix>
 
         <UploadResources
-            SourcePath="$(BundleScripts)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
-            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/js" Compress="True" />
-
-        <UploadResources
-            SourcePath="$(BundleStyles)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
-            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/styles" Compress="True" />
+            SourcePath="%(BundleScripts)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)%(BundleScripts.DestinationPath)" Compress="True" />
 
         <UploadResources
             SourcePath="$(ExamplesScripts)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
