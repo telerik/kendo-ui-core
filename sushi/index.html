@@ -5,6 +5,7 @@
         <title>Kendo Sushi</title>
         <link rel="stylesheet/less" type="text/css" href="../styles/mobile/layout.less" />
         <script src="../styles/mobile/less.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" />
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.model.js"></script>
@@ -28,8 +29,28 @@
             </header>
 
             <div data-kendo-role="content">
-                <ul id="featured">
-                </ul>
+                <ul id="featured" class="item-list"></ul>
+            </div>
+
+            <footer data-kendo-role="footer" data-id="default">
+                <div data-kendo-role="tabstrip">
+                    <a href="#index">Home</a>
+                    <a href="#menu">Our menu</a>
+                    <a href="#account">Account</a>
+                    <a href="#cart">Cart</a>
+                </div>
+            </footer>
+        </div>
+
+        <div data-kendo-role="view" id="menu">
+            <header data-kendo-role="header">
+                <div data-kendo-role="navbar">
+                    <span data-kendo-role="view-title">Menu</span>
+                </div>
+            </header>
+
+            <div data-kendo-role="content">
+                <ul id="menuList" class="item-list"></ul>
             </div>
 
             <footer data-kendo-role="footer" data-id="default">
@@ -50,7 +71,7 @@
             </header>
 
             <div data-kendo-role="content">
-                Work in progress ...
+                Work in progress
             </div>
 
             <footer data-kendo-role="footer" data-id="default">
@@ -62,28 +83,6 @@
                 </div>
             </footer>
         </div>
-
-        <div data-kendo-role="view" id="menu">
-            <header data-kendo-role="header">
-                <div data-kendo-role="navbar">
-                    <span data-kendo-role="view-title">Work in progress!</span>
-                </div>
-            </header>
-
-            <div data-kendo-role="content">
-                Work in progress ...
-            </div>
-
-            <footer data-kendo-role="footer" data-id="default">
-                <div data-kendo-role="tabstrip">
-                    <a href="#index">Home</a>
-                    <a href="#menu">Our menu</a>
-                    <a href="#account">Account</a>
-                    <a href="#cart">Cart</a>
-                </div>
-            </footer>
-        </div>
-
         <div data-kendo-role="view" id="cart">
             <header data-kendo-role="header">
                 <div data-kendo-role="navbar">
@@ -108,7 +107,7 @@
         <div data-kendo-role="view" id="details" data-kendo-transition="slide">
             <header data-kendo-role="header">
                 <div data-kendo-role="navbar">
-                    <a href="#index" data-kendo-role="button" data-kendo-style="back" data-kendo-align="left">Back</a>
+                    <a data-kendo-role="back-button" data-kendo-align="left">Back</a>
                     <span data-kendo-role="view-title">Item</span>
                 </div>
             </header>
@@ -127,7 +126,6 @@
         </div>
 
         <script id="menuTemplate" type="text/x-kendo-template">
-
             <a data-kendo-role="button" data-kendo-name="add" href="\\#">Add to cart</a>
 
             <a class="details-link" data-kendo-role="listview-link" href="\#details?id=${id}">
@@ -151,28 +149,40 @@
 
         <script>
             window.cart = [];
+            var schema = { model: {id: "id"} };
+
             var ds = new kendo.data.DataSource({
-                schema: { model: {id: "id"} },
-                transport: { read: { url: "featured.js", dataType: "json" } },
+                schema: schema,
+                transport: { read: { url: "featured.js", dataType: "json" } }
+            });
+
+            var menuDs = new kendo.data.DataSource({
+                schema: schema,
+                transport: { read: { url: "menu.js", dataType: "json" } },
+                group: { field: "category" }
             });
 
             var itemDetailsTemplate = kendo.template($("#detailTemplate").text());
+
+            function addToCartFromList(e) {
+                if (e.buttonName === "add") {
+                    cart.push(e.dataItem.id);
+                    e.button.element.parent().find(".added").show();
+                    e.preventDefault();
+                }
+            }
 
             kendo.application.bind("viewInit", function(e) {
                 var id = e.view.element.attr("id");
 
                 if (id === "index") {
-                    $("#featured").kendoMobileListView({dataSource: ds, template: $("#menuTemplate").text()});
-
-                    var listView = $("#featured").data("kendoMobileListView");
-
-                    listView.bind("click", function(e) {
-                        if (e.buttonName === "add") {
-                            cart.push(e.dataItem.id);
-                            e.button.element.parent().find(".added").show();
-                            e.preventDefault();
-                        }
-                    });
+                    $("#featured")
+                        .kendoMobileListView({dataSource: ds, template: $("#menuTemplate").text()})
+                        .data("kendoMobileListView").bind("click", addToCartFromList);
+                } else if (id === "menu") {
+                    $("#menuList")
+                        .kendoMobileListView({dataSource: menuDs, template: $("#menuTemplate").text()})
+                        .data("kendoMobileListView").bind("click", addToCartFromList);
                 }
             });
 
@@ -180,8 +190,8 @@
                 var view = e.view, viewID = view.element.attr("id"), item;
 
                 if (viewID === "details") {
-                    ds.fetch(function() {
-                        item = ds.get(e.params.id).data;
+                    menuDs.fetch(function() {
+                        item = menuDs.get(e.params.id).data;
                         view.content.html(itemDetailsTemplate(item));
                         kendo.mobile.enhance(view.content);
 
