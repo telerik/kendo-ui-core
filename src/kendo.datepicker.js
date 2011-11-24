@@ -86,8 +86,10 @@
     NAVIGATE = "navigate",
     DATEVIEW = "dateView",
     DISABLED = "disabled",
+    DEFAULT = "k-state-default",
     FOCUSED = "k-state-focused",
     SELECTED = "k-state-selected",
+    STATEDISABLED = "k-state-disabled",
     HOVER = "k-state-hover",
     HOVEREVENTS = "mouseenter mouseleave",
     MOUSEDOWN = (touch ? "touchstart" : "mousedown"),
@@ -388,7 +390,7 @@
                             keydown: proxy(that._keydown, that),
                             focus: function(e) {
                                 clearTimeout(that._bluring);
-                                that.input.parent().addClass(FOCUSED);
+                                that._inputWrapper.addClass(FOCUSED);
                             },
                             blur: proxy(that._blur, that)
                         });
@@ -442,7 +444,7 @@
         enable: function(enable) {
             var that = this,
                 icon = that._icon,
-                wrapper = that.wrapper.children(".k-picker-wrap"),
+                wrapper = that._inputWrapper,
                 element = that.element;
 
             icon.unbind(CLICK)
@@ -450,13 +452,15 @@
 
             if (enable === false) {
                 wrapper
-                    .addClass(DISABLED)
+                    .removeClass(DEFAULT)
+                    .addClass(STATEDISABLED)
                     .unbind(HOVEREVENTS);
 
                 element.attr(DISABLED, DISABLED);
             } else {
                 wrapper
-                    .removeClass(DISABLED)
+                    .addClass(DEFAULT)
+                    .removeClass(STATEDISABLED)
                     .bind(HOVEREVENTS, that._toggleHover);
 
                 element
@@ -560,7 +564,7 @@
                 if (!touch) {
                     that.close();
                 }
-                that.input.parent().removeClass(FOCUSED);
+                that._inputWrapper.removeClass(FOCUSED);
             }, 100);
         },
 
@@ -670,6 +674,7 @@
             });
 
             that.wrapper = wrapper.addClass("k-widget k-datepicker k-header");
+            that._inputWrapper = $(wrapper[0].firstChild);
         }
     });
 
