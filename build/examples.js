@@ -290,36 +290,39 @@ function processExample(fileName, deployConfig) {
         depth = info.depth,
         component = info.component,
         exampleSource = kendoBuild.readText(fileName),
-        base = fileName === outputPath + "/index.html" ? "" : parentFolder(depth) + "/",
+        isLandingPage = fileName === outputPath + "/index.html",
+        base = isLandingPage ? "" : parentFolder(depth) + "/",
         scriptRegion = formatRegion(info, "script", deployConfig),
         cssRegion = formatRegion(info, "css", deployConfig);
 
-    exampleSource = baseRegions.meta.exec(exampleSource, baseRegions.meta.html);
-
-    exampleSource = baseRegions.script.exec(exampleSource, scriptRegion);
-
     exampleSource = baseRegions.css.exec(exampleSource, cssRegion);
 
-    exampleSource = baseRegions.nav.exec(exampleSource, updateBaseLocation(baseRegions.nav.html, base));
+    if (!isLandingPage) {
+        exampleSource = baseRegions.meta.exec(exampleSource, baseRegions.meta.html);
 
-    if (!info.hasNavigation) {
-        exampleSource = exampleSource.replace(/\s+hasNavigation/g, "");
-    }
+        exampleSource = baseRegions.script.exec(exampleSource, scriptRegion);
 
-    exampleSource = exampleSource.replace(THEMEBUILDER_ROOT_MARKER, deployConfig.themeBuilderRoot);
+        exampleSource = baseRegions.nav.exec(exampleSource, updateBaseLocation(baseRegions.nav.html, base));
 
-    var description = regionRegex.description.exec(exampleSource);
-    exampleSource = exampleSource.replace(regionRegex.description, '');
+        if (!info.hasNavigation) {
+            exampleSource = exampleSource.replace(/\s+hasNavigation/g, "");
+        }
 
-    if (description) {
-        exampleSource = baseRegions.tools.exec(exampleSource, baseRegions.tools.html.replace(regionRegex.description, description[0]));
-    } else {
-        // overview has no description
-        exampleSource = baseRegions.tools.exec(exampleSource);
-    }
+        exampleSource = exampleSource.replace(THEMEBUILDER_ROOT_MARKER, deployConfig.themeBuilderRoot);
 
-    if (component) {
-        exampleSource = importComponentHelp(exampleSource, component);
+        var description = regionRegex.description.exec(exampleSource);
+        exampleSource = exampleSource.replace(regionRegex.description, '');
+
+        if (description) {
+            exampleSource = baseRegions.tools.exec(exampleSource, baseRegions.tools.html.replace(regionRegex.description, description[0]));
+        } else {
+            // overview has no description
+            exampleSource = baseRegions.tools.exec(exampleSource);
+        }
+
+        if (component) {
+            exampleSource = importComponentHelp(exampleSource, component);
+        }
     }
 
     kendoBuild.writeText(fileName, exampleSource);
