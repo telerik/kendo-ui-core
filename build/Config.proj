@@ -3,14 +3,14 @@
 	<PropertyGroup>
 		<!--Change for every major (quarterly) release -->
 		<Year>2011</Year>
-		<Release>2</Release>
+		<Release>3</Release>
 		<!-- Leave empty if this is a major release -->
 		<ServicePack></ServicePack>
 
 		<!-- CDN Resources configuration -->
 		<CDNAccessKeyId>AKIAJSDTTSFPVFUMHBGA</CDNAccessKeyId>
 		<CDNSecretAccessKey>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</CDNSecretAccessKey>
-		<CDNBucketName>kendo-static</CDNBucketName>
+		<CDNBucketName>testtelerik</CDNBucketName>
 		<CDNRoot>http://cdn.kendostatic.com/</CDNRoot>
 	</PropertyGroup>
 </Project>
