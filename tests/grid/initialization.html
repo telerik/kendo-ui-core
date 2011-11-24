@@ -99,10 +99,10 @@
             });
 
             test("column format is applied", function() {
-                var grid = new Grid(table, { dataSource: [ {foo: "foo"}, {foo: "bar"}], columns: [{ field: "foo", format: "bar" }] });
+                var grid = new Grid(table, { dataSource: [ {foo: "foo"}, {foo: "bar"}], columns: [{ field: "foo", format: "{0} bar" }] });
 
-                equal(grid.table.find("tr:first>td").text(), "bar");
-                equal(grid.table.find("tr:nth(1)>td").text(), "bar");
+                equal(grid.table.find("tr:first>td").text(), "foo bar");
+                equal(grid.table.find("tr:nth(1)>td").text(), "bar bar");
             });
 
             test("tbody is created if not present", function() {
