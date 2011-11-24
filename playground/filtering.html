@@ -23,43 +23,8 @@
         <link href="../styles/kendo.blueopal.css" type="text/css" rel="stylesheet" />
         <style>
             body {
-                font: 12px Arial;
+                font: 12px sans-serif;
             }
-
-            .k-filter-menu
-            {
-                padding: .5em;
-            }
-
-            .k-filter-menu input,
-            .k-filter-menu .k-dropdown
-            {
-                display: block;
-            }
-
-            .k-filter-menu button
-            {
-                width: 50%;
-            }
-
-            .k-grid-filter {
-                float: right;
-                margin: -.3em -.6em;
-                padding: 0.3em 0.2em;
-            }
-
-            .k-grid-filter:hover {
-                background: yellow;
-            }
-
-            .k-header .k-link {
-                padding: 0.3em 0.6em;
-            }
-
-            .k-filterable .k-link {
-                padding-right: 2.4em;
-            }
-
         </style>
     </head>
     <body>
@@ -111,6 +76,7 @@
 
                 $("#table1").kendoGrid({
                     scrollable: false,
+                    sortable: true,
                     dataSource: dataSource,
                     filterable: true
                 });
