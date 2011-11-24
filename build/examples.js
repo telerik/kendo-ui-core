@@ -13,9 +13,11 @@ var fs = require("fs"),
 var VERSION = kendoBuild.generateVersion(),
     CDN_URL = process.argv[2] || "http://cdn.kendostatic.com/" + VERSION,
 
+    SOURCE_ROOT = "src",
     STAGING_ROOT = "live",
     STAGING_SOURCE = "#= parentFolder(depth + 1) #",
-    STAGING_SCRIPTS = template(STAGING_SOURCE + "/src"),
+    STAGING_SCRIPTS_ROOT = "js-deploy",
+    STAGING_SCRIPTS = template("#= parentFolder(depth) #/" + STAGING_SCRIPTS_ROOT),
     STAGING_STYLES = template(STAGING_SOURCE + "/styles"),
     STAGING_SHARED_ROOT = "#= parentFolder(depth) #/shared",
     STAGING_SHARED_SCRIPTS = template(STAGING_SHARED_ROOT + "/js"),
@@ -24,11 +26,11 @@ var VERSION = kendoBuild.generateVersion(),
     STAGING_THEMEBUILDER_ROOT = "/kendo/themebuilder/src",
     LIVE_SCRIPTS = template(CDN_URL + "/js"),
     LIVE_STYLES = template(CDN_URL + "/styles"),
-    LIVE_SHARED_ROOT = CDN_URL + "/shared",
+    LIVE_SHARED_ROOT = CDN_URL + "/examples/shared",
     LIVE_SHARED_SCRIPTS = template(LIVE_SHARED_ROOT + "/js"),
     LIVE_SHARED_STYLES = template(LIVE_SHARED_ROOT + "/styles"),
-    LIVE_SUITE_SCRIPTS = template(CDN_URL + "/#= suiteName #/js"),
     LIVE_THEMEBUILDER_ROOT = "http://themebuilder.kendoui.com",
+    LIVE_SUITE_SCRIPTS = template(CDN_URL + "/examples/#= suiteName #/js"),
     SOURCE_SCRIPTS_MARKER = /SOURCE_SCRIPTS/g,
     THEMEBUILDER_ROOT_MARKER = /THEMEBUILDER_DEPLOY_ROOT/g,
     SOURCE_STYLES_MARKER = /SOURCE_STYLES/g,
@@ -63,57 +65,41 @@ var VERSION = kendoBuild.generateVersion(),
 function parentFolder(depth) {
     var result = [];
 
-    for (var i = 0; i < depth; i++) {
-        result.push("..");
-    }
+    if (depth == 0) {
+        return ".";
+    } else {
+        for (var i = 0; i < depth; i++) {
+            result.push("..");
+        }
 
-    return result.join("/");
+        return result.join("/");
+    }
 }
 
 function getRegionRegex(regionName) {
     return new RegExp("\\s*<!--\\s*" + regionName + "\\s*-->(([\\r\\n]|.)*?)<!--\\s*" + regionName + "\\s*-->", "im");
 }
 
-function mergeResourceRegion(info, exampleSource, regionType, deployConfig) {
+function formatRegion(exampleInfo, regionType, deployConfig) {
     var result,
-        pathInfo = {
-            depth: info.depth,
-            suiteName: info.suite,
-            parentFolder: parentFolder
-        },
-        baseResources = resolveResources(baseRegions[regionType].html, deployConfig, pathInfo),
-        baseResourcesLines = baseResources.split(rowSeparator),
-        resourceMatch = regionRegex[regionType].exec(exampleSource),
-        exampleResources;
+        baseResources = resolveResources(baseRegions[regionType].html, deployConfig, exampleInfo);
 
-    if (resourceMatch) {
-        exampleResources = resolveResources(resourceMatch[1].trimLeft(), deployConfig, pathInfo);
-        exampleResources.split(rowSeparator).forEach(function(line) {
-            baseResourcesLines = baseResourcesLines.filter(function(baseLine) {
-                return baseLine.trim() !== line.trim();
-            });
-        });
+        result = baseResources.replace(/.*?(examples-offline\.css|console\.js|people\.js|prettify\.js).*/g, "");
 
-        baseResources = baseResourcesLines.join("\r\n");
-
-        result = exampleResources + baseResources;
-
-        result = result.replace(/.*?(examples-offline\.css|console\.js|people\.js|prettify\.js).*/g, "");
-
-        if (!info.hasNavigation) {
+        if (!exampleInfo.hasNavigation) {
             result = result.replace(/.*?examples\.nav\.js.*/g, "");
         }
-
-        if (deployConfig.useMinified) {
-            result = result.replace(/(.*?)\.(css|js)/g, "$1.min.$2");
-            result = result.replace(/min\.min/g, "min");
-        }
-    }
 
     return result;
 }
 
-function resolveResources(text, deployConfig, pathInfo) {
+function resolveResources(text, deployConfig, exampleInfo) {
+    var pathInfo = {
+            depth: exampleInfo.depth,
+            suiteName: exampleInfo.suite,
+            parentFolder: parentFolder
+    };
+
     text = replaceReference(text, "/shared/js", SHARED_SCRIPTS_MARKER.source);
     text = replaceReference(text, "/shared/styles", SHARED_STYLES_MARKER.source);
     text = replaceReference(text, "/js", SUITE_SCRIPTS_MARKER.source);
@@ -125,6 +111,11 @@ function resolveResources(text, deployConfig, pathInfo) {
     text = text.replace(SHARED_SCRIPTS_MARKER, deployConfig.sharedScripts(pathInfo));
     text = text.replace(SHARED_STYLES_MARKER, deployConfig.sharedStyles(pathInfo));
     text = text.replace(SUITE_SCRIPTS_MARKER, deployConfig.suiteScripts(pathInfo));
+
+    if (deployConfig.useMinified) {
+        text = text.replace(/(.*?)\.(css|js)/g, "$1.min.$2");
+        text = text.replace(/min\.min/g, "min");
+    }
 
     return text;
 }
@@ -306,36 +297,41 @@ function processExample(fileName, deployConfig) {
         depth = info.depth,
         component = info.component,
         exampleSource = kendoBuild.readText(fileName),
-        base = fileName === outputPath + "/index.html" ? "" : parentFolder(depth) + "/",
-        scriptRegion = mergeResourceRegion(info, exampleSource, "script", deployConfig),
-        cssRegion = mergeResourceRegion(info, exampleSource, "css", deployConfig);
+        isLandingPage = fileName === outputPath + "/index.html",
+        base = isLandingPage ? "" : parentFolder(depth) + "/",
+        scriptRegion = formatRegion(info, "script", deployConfig),
+        cssRegion;
 
-    exampleSource = baseRegions.meta.exec(exampleSource, baseRegions.meta.html);
-
-    exampleSource = baseRegions.script.exec(exampleSource, scriptRegion);
-
-    exampleSource = baseRegions.css.exec(exampleSource, cssRegion);
-
-    exampleSource = baseRegions.nav.exec(exampleSource, updateBaseLocation(baseRegions.nav.html, base));
-
-    if (!info.hasNavigation) {
-        exampleSource = exampleSource.replace(/\s+hasNavigation/g, "");
-    }
-
-    exampleSource = exampleSource.replace(THEMEBUILDER_ROOT_MARKER, deployConfig.themeBuilderRoot);
-
-    var description = regionRegex.description.exec(exampleSource);
-    exampleSource = exampleSource.replace(regionRegex.description, '');
-
-    if (description) {
-        exampleSource = baseRegions.tools.exec(exampleSource, baseRegions.tools.html.replace(regionRegex.description, description[0]));
+    if (isLandingPage) {
+        cssRegion = regionRegex.css.exec(exampleSource)[1];
+        cssRegion = resolveResources(cssRegion, deployConfig, info);
+        exampleSource = exampleSource.replace(regionRegex.css, cssRegion);
     } else {
-        // overview has no description
-        exampleSource = baseRegions.tools.exec(exampleSource);
-    }
+        cssRegion = formatRegion(info, "css", deployConfig);
+        exampleSource = baseRegions.meta.exec(exampleSource, baseRegions.meta.html);
+        exampleSource = baseRegions.css.exec(exampleSource, cssRegion);
+        exampleSource = baseRegions.script.exec(exampleSource, scriptRegion);
+        exampleSource = baseRegions.nav.exec(exampleSource, updateBaseLocation(baseRegions.nav.html, base));
 
-    if (component) {
-        exampleSource = importComponentHelp(exampleSource, component);
+        if (!info.hasNavigation) {
+            exampleSource = exampleSource.replace(/\s+hasNavigation/g, "");
+        }
+
+        exampleSource = exampleSource.replace(THEMEBUILDER_ROOT_MARKER, deployConfig.themeBuilderRoot);
+
+        var description = regionRegex.description.exec(exampleSource);
+        exampleSource = exampleSource.replace(regionRegex.description, '');
+
+        if (description) {
+            exampleSource = baseRegions.tools.exec(exampleSource, baseRegions.tools.html.replace(regionRegex.description, description[0]));
+        } else {
+            // overview has no description
+            exampleSource = baseRegions.tools.exec(exampleSource);
+        }
+
+        if (component) {
+            exampleSource = importComponentHelp(exampleSource, component);
+        }
     }
 
     kendoBuild.writeText(fileName, exampleSource);
@@ -392,13 +388,27 @@ function build(deployConfig) {
         };
     });
 
-    themes.build();
-
-    console.log("merging multipart scripts...");
-    kendoScripts.mergeScripts("src/");
-
     console.log("copying resources...");
     kendoBuild.copyDirSyncRecursive(examplesLocation, outputPath);
+
+    if (deployConfig.useMinified) {
+        kendoBuild.processFilesRecursive(path.join(outputPath, "shared"), /\.css$/, function(fileName) {
+            var css = kendoBuild.readText(fileName),
+                minified = cssmin(css);
+
+            kendoBuild.writeText(fileName, minified);
+            fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
+        });
+
+        kendoBuild.processFilesRecursive(path.join(outputPath), /\.js$/, function(fileName) {
+            var content = kendoBuild.readText(fileName),
+                output = kendoBuild.minifyJs(content);
+
+            kendoBuild.writeText(fileName, output);
+
+            fs.renameSync(fileName, fileName.replace(".js", ".min.js"));
+        });
+    }
 
     fs.unlinkSync(outputPath + "/template.html");
 
@@ -426,6 +436,18 @@ function buildStaging() {
         themeBuilderRoot: STAGING_THEMEBUILDER_ROOT,
         useMinified: false
     });
+
+    console.log("Building themes");
+    themes.build();
+
+    console.log("Merging multipart scripts");
+    kendoScripts.mergeScripts(SOURCE_ROOT);
+
+    var jsRoot = path.join(STAGING_ROOT, STAGING_SCRIPTS_ROOT);
+    kendoBuild.mkdir(jsRoot);
+
+    console.log("Building deploy scripts");
+    kendoScripts.deployScripts(SOURCE_ROOT, jsRoot);
 }
 
 function buildLive(deployRoot) {

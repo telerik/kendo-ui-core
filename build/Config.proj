@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<!--Change for every major (quarterly) release -->
 		<Year>2011</Year>
-		<Release>2</Release>
+		<Release>3</Release>
 		<!-- Leave empty if this is a major release -->
 		<ServicePack></ServicePack>
 
