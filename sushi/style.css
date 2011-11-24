@@ -3,31 +3,29 @@
     font-size: .8rem;
 }
 
-#featured li {
+.item-list .km-list > li {
     height: 7rem;
 }
 
-#featured img {
+.item-list img {
     border-radius: 8px;
     width: 75px;
     height: 75px;
     float: left;
     margin-right: 1rem;
-    -webkit-border-radius: 8px;
-    -webkit-box-shadow: 0 2px 2px #999;
 }
 
-#featured h2 {
+.item-list h2 {
     font-size: 1.0rem;
     margin: 0;
 }
 
-#featured a.km-button {
+.item-list a.km-button {
     float: right;
     margin-top: 2rem;
 }
 
-#featured a.details-link {
+.item-list a.details-link {
     display: block;
     text-decoration: none;
 }
