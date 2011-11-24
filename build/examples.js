@@ -63,11 +63,15 @@ var VERSION = kendoBuild.generateVersion(),
 function parentFolder(depth) {
     var result = [];
 
-    for (var i = 0; i < depth; i++) {
-        result.push("..");
-    }
+    if (depth == 0) {
+        return ".";
+    } else {
+        for (var i = 0; i < depth; i++) {
+            result.push("..");
+        }
 
-    return result.join("/");
+        return result.join("/");
+    }
 }
 
 function getRegionRegex(regionName) {
