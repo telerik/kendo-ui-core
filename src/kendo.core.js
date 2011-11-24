@@ -19,7 +19,8 @@
         NUMBER = "number",
         OBJECT = "object",
         NULL = "null",
-        BOOLEAN = "boolean";
+        BOOLEAN = "boolean",
+        globalize = window.Globalize;
 
     function Class() {}
 
@@ -424,11 +425,12 @@
         POINT = ".",
         COMMA = ",",
         SHARP = "#",
-        ZERO = "0";
+        ZERO = "0",
+        EN = "en-US";
 
     //cultures
     kendo.cultures = {"en-US" : {
-        name: "en-US",
+        name: EN,
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
@@ -491,7 +493,7 @@
     kendo.culture = function(cultureName) {
         if (cultureName !== undefined) {
             var cultures = kendo.cultures,
-                culture = cultures[cultureName] || cultures["en-US"];
+                culture = cultures[cultureName] || cultures[EN];
 
             culture.calendar = culture.calendars.standard;
             cultures.current = culture;
@@ -501,7 +503,7 @@
     };
 
     //set current culture to en-US.
-    kendo.culture("en-US");
+    kendo.culture(EN);
 
     function pad(number) {
         return number < 10 ? "0" + number : number;
@@ -853,11 +855,6 @@
     }
 
     function toString(value, fmt) {
-        var globalize = window.Globalize;
-        if (globalize) {
-            return globalize.format(value, fmt);
-        }
-
         if (fmt) {
             if (value instanceof Date) {
                 return formatDate(value, fmt);
@@ -867,6 +864,10 @@
         }
 
         return value !== undefined ? value : "";
+    }
+
+    if (globalize) {
+        toString = proxy(globalize.format, globalize);
     }
 
     kendo.format = function(fmt) {
@@ -1066,12 +1067,7 @@
 
         var idx = 0,
             date = null,
-            globalize = window.Globalize,
             length, property, patterns;
-
-        if (globalize) {
-            return globalize.parseDate(value, formats, culture);
-        }
 
         if (!culture) {
             culture = kendo.culture();
@@ -1088,6 +1084,7 @@
             for (; idx < length; idx++) {
                 formats[idx] = patterns[formatsSequence[idx]];
             }
+            formats[idx + 1] = "ddd MMM dd yyyy hh:mm:ss";
 
             idx = 0;
         }
@@ -1120,11 +1117,6 @@
 
         if (typeof value === NUMBER) {
            return value;
-        }
-
-        var globalize = window.Globalize;
-        if (globalize) {
-            return globalize.parseFloat(value, culture);
         }
 
         value = value.toString();
@@ -1164,6 +1156,11 @@
         }
 
         return value;
+    }
+
+    if (globalize) {
+        kendo.parseDate = proxy(globalize.parseDate, globalize);
+        kendo.parseFloat = proxy(globalize.parseFloat, globalize);
     }
 })();
 
