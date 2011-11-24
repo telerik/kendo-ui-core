@@ -408,6 +408,15 @@ function build(deployConfig) {
             kendoBuild.writeText(fileName, minified);
             fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
         });
+
+        kendoBuild.processFilesRecursive(path.join(outputPath, "shared"), /\.js$/, function(fileName) {
+            var content = kendoBuild.readText(fileName),
+                output = kendoBuild.minifyJs(content);
+
+            kendoBuild.writeText(fileName, output);
+
+            fs.renameSync(fileName, fileName.replace(".js", ".min.js"));
+        });
     }
 
     fs.unlinkSync(outputPath + "/template.html");
@@ -452,8 +461,8 @@ function buildLive(deployRoot) {
 }
 
 if (require.main === module) {
-    //buildLive("deploy/online-examples");
-    buildStaging();
+    buildLive("deploy/online-examples");
+    //buildStaging();
 } else {
     exports.buildLive = buildLive;
 }
