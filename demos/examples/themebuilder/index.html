@@ -216,11 +216,6 @@
                 .column .k-timepicker {
                     width: 150px;
                 }
-
-                #window {
-                    width: 300px;
-                    height: 100px;
-                }
             </style>
 
             <script>
@@ -286,7 +281,9 @@
                     $("#splitter").kendoSplitter();
 
                     $("#window").kendoWindow({
-                        title: "Sample title"
+                        title: "Sample title",
+                        width: 300,
+                        height: 100
                     });
 
                     $("#grid").kendoGrid({
