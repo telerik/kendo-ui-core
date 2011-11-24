@@ -403,7 +403,7 @@
                 firstLevel = item.hasClass(TTREEVIEW),
                 group = {
                     firstLevel: firstLevel,
-                    expanded: firstLevel || item.data("expanded") === true
+                    expanded: firstLevel || item.attr(kendo.attr("expanded")) === "true"
                 },
                 groupElement = item.find("> ul");
 
@@ -424,7 +424,7 @@
             nodes.each(function(i, node) {
                 node = $(node);
 
-                nodeData = { index: i, expanded: node.data("expanded") === true };
+                nodeData = { index: i, expanded: node.attr(kendo.attr("expanded")) === "true" };
 
                 updateNodeHtml(node);
 
