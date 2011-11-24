@@ -1,7 +1,9 @@
 (function ($, undefined) {
     var kendo = window.kendo,
+        Observable = kendo.Observable,
         data = kendo.data,
-        Model = data.Model;
+        Model = data.Model,
+        CHANGE = "change";
 
     function bindSelect(select, model) {
         select = $(select);
@@ -25,17 +27,25 @@
         }
     }
 
-    var ModelViewBinder = kendo.Class.extend({
+    var ModelViewBinder = Observable.extend({
         init: function(element, model, options) {
             var that = this;
 
             that.element = $(element);
             that.options = options || {};
+
+            Observable.fn.init.call(that);
+
             that.model = model instanceof Model ? model : new (Model.define())(model);
 
-            that.element.find("input,select")
-                .add(that.element)
-                .bind("change", $.proxy(that._change, that))
+            that.bind([CHANGE], that.options);
+
+            var elements = that.element.find("input,select,textarea");
+            if (!elements.length) {
+                elements = that.element;
+            }
+
+            elements.bind(CHANGE, $.proxy(that._change, that))
                 .each(function() {
                     var mapping = that._map(this);
                     if (mapping) {
@@ -72,15 +82,21 @@
                             bindSelect(target, model);
                         }
 
-                        target.value = value;
+                        $(target).val(value);
                     },
                     bindModel: function() {
-                        var value = target.value;
+                        var value = target.value,
+                            values = {};
 
                         if (setting.parse) {
                            value = setting.parse(value);
                         }
-                        model.set(field, value);
+
+                        values[field] = value;
+
+                        if (!that.trigger(CHANGE, { values: values })) {
+                            model.set(field, value);
+                        }
                     }
                 }
             }

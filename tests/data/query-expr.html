@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Query filter compilation tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Query = kendo.data.Query;
+
+            function compile(expression) {
+                return Query.filterExpr(expression).expression;
+            }
+
+            test("and with one filter", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ {value: 10, operator: "eq"}]
+                }), "(d == 10)");
+            });
+
+            test("default operator is eq", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ {value: 10}]
+                }), "(d == 10)");
+            });
+
+            test("undefined value",  function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ {value: undefined}]
+                }), "(d == undefined)");
+            });
+
+            test("null value",  function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ {value: null}]
+                }), "(d == null)");
+            });
+
+            test("or with one filter", function() {
+                equal(compile({
+                    logic: "or",
+                    filters: [ {value: 10, operator: "eq"}]
+                }), "(d == 10)");
+            });
+
+            test("and with two filters", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { value: 10, operator: "eq" }, { value: 10, operator: "eq" }]
+                }), "(d == 10 && d == 10)");
+            });
+
+            test("or with two filters", function() {
+                equal(compile({
+                    logic: "or",
+                    filters: [ { value: 10, operator: "eq" }, { value: 10, operator: "eq" }]
+                }), "(d == 10 || d == 10)");
+            });
+
+            test("or with nested filters", function() {
+                equal(compile({
+                    logic: "or",
+                    filters: [
+                        {
+                            logic: "and",
+                            filters: [{ value: 10, operator: "eq" }, { value: 10, operator: "eq" }]
+                        },
+                        {
+                            logic: "or",
+                            filters: [{ value: 10, operator: "eq" }, { value: 10, operator: "eq" }]
+                        }
+                    ]
+                }), "((d == 10 && d == 10) || (d == 10 || d == 10))");
+            });
+
+            test("and with nested filters", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [
+                        {
+                            logic: "and",
+                            filters: [{ value: 10, operator: "eq" }, { value: 10, operator: "eq" }]
+                        },
+                        {
+                            logic: "or",
+                            filters: [{ value: 10, operator: "eq" }, { value: 10, operator: "eq" }]
+                        }
+                    ]
+                }), "((d == 10 && d == 10) && (d == 10 || d == 10))");
+            });
+
+            test("uses field name", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "eq" } ]
+                }), "(d.foo == 10)");
+            });
+
+            test("gt", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "gt" } ]
+                }), "(d.foo > 10)");
+            });
+
+            test("gte", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "gte" } ]
+                }), "(d.foo >= 10)");
+            });
+
+            test("lt", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "lt" } ]
+                }), "(d.foo < 10)");
+            });
+
+            test("lte", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "lte" } ]
+                }), "(d.foo <= 10)");
+            });
+
+            test("==", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "==" } ]
+                }), "(d.foo == 10)");
+            });
+
+            test("equals", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "equals" } ]
+                }), "(d.foo == 10)");
+            });
+
+            test("equal", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "equal" } ]
+                }), "(d.foo == 10)");
+            });
+
+            test("isequalto", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "isequalto" } ]
+                }), "(d.foo == 10)");
+            });
+
+            test("equalto", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "equalto" } ]
+                }), "(d.foo == 10)");
+            });
+
+            test("operator ignores case", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "isEqualTo" } ]
+                }), "(d.foo == 10)");
+            });
+
+            test("neq", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "neq" } ]
+                }), "(d.foo != 10)");
+            });
+
+            test("!=", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "!=" } ]
+                }), "(d.foo != 10)");
+            });
+
+            test("isnotequalto", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "isnotequalto" } ]
+                }), "(d.foo != 10)");
+            });
+
+            test("notequals", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "notequals" } ]
+                }), "(d.foo != 10)");
+            });
+
+            test("notequalto", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "notequalto" } ]
+                }), "(d.foo != 10)");
+            });
+
+            test("notequal", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "notequal" } ]
+                }), "(d.foo != 10)");
+            });
+
+            test("ne", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "ne" } ]
+                }), "(d.foo != 10)");
+            });
+
+            test("not", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "not" } ]
+                }), "(d.foo != 10)");
+            });
+
+            test("<", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "<" } ]
+                }), "(d.foo < 10)");
+            });
+
+            test("islessthan", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "islessthan" } ]
+                }), "(d.foo < 10)");
+            });
+
+            test("lessthan", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "lessthan" } ]
+                }), "(d.foo < 10)");
+            });
+
+            test("less", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "less" } ]
+                }), "(d.foo < 10)");
+            });
+
+            test("<=", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "<=" } ]
+                }), "(d.foo <= 10)");
+            });
+
+            test("islessthanorequalto", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "islessthanorequalto" } ]
+                }), "(d.foo <= 10)");
+            });
+
+            test("lessthanequal", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "lessthanequal" } ]
+                }), "(d.foo <= 10)");
+            });
+
+            test("le", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "le" } ]
+                }), "(d.foo <= 10)");
+            });
+
+            test(">", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: ">" } ]
+                }), "(d.foo > 10)");
+            });
+
+            test("isgreaterthan", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "isgreaterthan"} ]
+                }), "(d.foo > 10)");
+            });
+
+            test("greaterthan", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "greaterthan"} ]
+                }), "(d.foo > 10)");
+            });
+
+            test("greater", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "greater"} ]
+                }), "(d.foo > 10)");
+            });
+
+            test(">=", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: ">=" } ]
+                }), "(d.foo >= 10)");
+            });
+
+            test("isgreaterthanorequalto", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "isgreaterthanorequalto"} ]
+                }), "(d.foo >= 10)");
+            });
+
+            test("greaterthanequal", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "greaterthanequal"} ]
+                }), "(d.foo >= 10)");
+            });
+
+            test("ge", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: 10, operator: "ge" } ]
+                }), "(d.foo >= 10)");
+            });
+
+            test("startswith", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: "bar", operator: "startswith" } ]
+                }), "(d.foo.toLowerCase().lastIndexOf('bar', 0) == 0)");
+            });
+
+            test("endswith", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: "bar", operator: "endswith" } ]
+                }), "(d.foo.toLowerCase().lastIndexOf('bar') == d.foo.toLowerCase().length - 3)");
+            });
+
+            test("contains", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: "bar", operator: "contains" } ]
+                }), "(d.foo.toLowerCase().indexOf('bar') >= 0)");
+            });
+
+            test("contains with apostrophe", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: "foo", value: "'", operator: "contains" } ]
+                }), "(d.foo.toLowerCase().indexOf('\'') >= 0)");
+            });
+
+            test("using function as field", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: $.noop, value: 0, operator: "eq" } ]
+                }), "(__f[0](d) == 0)");
+            });
+
+            test("using multiple fields as function", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: $.noop, value: 10, operator: "eq" }, {field: $.noop,  value: 10, operator: "eq" }]
+                }), "(__f[0](d) == 10 && __f[1](d) == 10)");
+            });
+
+            test("using function as operator", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { value: 0, operator: $.noop } ]
+                }), "(__o[0](d, 0))");
+            });
+
+            test("using function as operator and field", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { field: $.noop, value: 0, operator: $.noop } ]
+                }), "(__o[0](__f[0](d), 0))");
+            });
+
+            test("using multiple operators as function", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: $.noop, value: 10 }, { operator: $.noop, value: 10}]
+                }), "(__o[0](d, 10) && __o[1](d, 10))");
+            });
+
+            test("or with nested filters and operators as functions", function() {
+                equal(compile({
+                    logic: "or",
+                    filters: [
+                        {
+                            logic: "and",
+                            filters: [{ value: 10, operator: $.noop }, { value: 10, operator: $.noop }]
+                        },
+                        {
+                            logic: "or",
+                            filters: [{ value: 10, operator: $.noop }, { value: 10, operator: "eq" }]
+                        }
+                    ]
+                }), "((__o[0](d, 10) && __o[1](d, 10)) || (__o[2](d, 10) || d == 10))");
+            });
+
+            test("or with nested filters and fields as functions", function() {
+                equal(compile({
+                    logic: "or",
+                    filters: [
+                        {
+                            logic: "and",
+                            filters: [{ value: 10, field: $.noop, operator: $.noop }, {field: $.noop, value: 10, operator: $.noop }]
+                        },
+                        {
+                            logic: "or",
+                            filters: [{ value: 10, field: $.noop,  operator: $.noop }, { value: 10, operator: "eq" }]
+                        }
+                    ]
+                }), "((__o[0](__f[0](d), 10) && __o[1](__f[1](d), 10)) || (__o[2](__f[2](d), 10) || d == 10))");
+            });
+            test("deeply nested nested fields as functions", function() {
+                equal(compile({
+                    logic: "or",
+                    filters: [
+                        {
+                            logic: "and",
+                            filters: [ {
+                                logic: "or",
+                                filters: [ { value: 10, field: $.noop }, {field: $.noop, value: 10}]
+                            }, { field:$.noop, value : 10 }
+                            ]
+                        },
+                        {
+                            logic: "and",
+                            filters: [ {
+                                logic: "or",
+                                filters: [ { value: 10, field: $.noop }, {field: $.noop, value: 10}]
+                            }, { field:$.noop, value : 10 }
+]
+                        },
+                    ]
+                }), "(((__f[0](d) == 10 || __f[1](d) == 10) && __f[2](d) == 10) || ((__f[3](d) == 10 || __f[4](d) == 10) && __f[5](d) == 10))");
+            });
+
+            test("date eq", function() {
+                var date = new Date(2011, 10, 1);
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "eq", value: date} ]
+                }), "(d.getTime() == " + date.getTime() + ")");
+            });
+
+            test("date neq", function() {
+                var date = new Date(2011, 10, 1);
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "neq", value: date} ]
+                }), "(d.getTime() != " + date.getTime() + ")");
+            });
+
+            test("date gt", function() {
+                var date = new Date(2011, 10, 1);
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "gt", value: date} ]
+                }), "(d.getTime() > " + date.getTime() + ")");
+            });
+
+            test("date gte", function() {
+                var date = new Date(2011, 10, 1);
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "gte", value: date} ]
+                }), "(d.getTime() >= " + date.getTime() + ")");
+            });
+
+            test("date lt", function() {
+                var date = new Date(2011, 10, 1);
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "lt", value: date} ]
+                }), "(d.getTime() < " + date.getTime() + ")");
+            });
+
+            test("date lte", function() {
+                var date = new Date(2011, 10, 1);
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "lte", value: date} ]
+                }), "(d.getTime() <= " + date.getTime() + ")");
+            });
+
+            test("string neq", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "neq", value: "foo"} ]
+                }), "(d.toLowerCase() != 'foo')");
+            });
+
+            test("string filtering is case insensitive by default", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { operator: "neq", value: "Foo"} ]
+                }), "(d.toLowerCase() != 'foo')");
+            });
+
+            test("string filtering is case sensitive", function() {
+                equal(compile({
+                    logic: "and",
+                    filters: [ { ignoreCase: false, operator: "neq", value: "Foo"} ]
+                }), "(d != 'Foo')");
+            });
+        </script>
+    </body>
+</html>

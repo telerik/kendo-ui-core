@@ -118,7 +118,8 @@
                 max: "{0} should be smaller than {1}",
                 step: "{0} is not valid",
                 email: "{0} is not valid email",
-                url: "{0} is not valid URL"
+                url: "{0} is not valid URL",
+                date: "{0} is not valid date"
             },
             rules: {
                 required: function(input) {
@@ -265,7 +266,7 @@
 
             customMessage = $.isFunction(customMessage) ? customMessage(input) : customMessage;
 
-            return kendo.format(input.attr("validationMessage") || input.attr("title") || customMessage || "", fieldName, input.attr(ruleKey));
+            return kendo.format(input.data("kendo-" + ruleKey + "-msg") || input.attr("validationMessage") || input.attr("title") || customMessage || "", fieldName, input.attr(ruleKey));
         },
 
         _checkValidity: function(input) {

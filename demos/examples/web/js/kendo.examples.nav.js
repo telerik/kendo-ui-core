@@ -157,6 +157,10 @@ var categories = {
                     url: "grid/remote-data.html"
                 },
                 {
+                    text: "Editing",
+                    url: "grid/editing.html"
+                },
+                {
                     text: "Virtualization of local data",
                     url: "grid/virtualization-local-data.html"
                 },

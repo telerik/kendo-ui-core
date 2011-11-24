@@ -155,6 +155,7 @@
         UPDATE = "update",
         DESTROY = "destroy",
         CHANGE = "change",
+        MODELCHANGE = "modelChange",
         MULTIPLE = "multiple",
         SINGLE = "single",
         ERROR = "error",
@@ -163,8 +164,7 @@
         identity = function(o) { return o; },
         getter = kendo.getter,
         stringify = kendo.stringify,
-        math = Math,
-        rgDate = /^\/Date\((.*?)\)\/$/;
+        math = Math;
 
     var Comparer = {
         selector: function(field) {
@@ -210,212 +210,186 @@
         }
     };
 
-    var Filter = {
-        create: function(expressions) {
-            var idx,
-                length,
-                expr,
-                selector,
-                operator,
-                desc,
-                descriptors = [],
-                caseSensitive,
-                predicate;
+    map = function (array, callback) {
+        var idx, length = array.length, result = new Array(length);
 
-            expressions = expressions || [];
-            for(idx = 0, length = expressions.length; idx < length; idx ++) {
-                expr = expressions[idx];
-                if(typeof expr.value === STRING && !expr.caseSensitive) {
-                     caseSensitive = function(value) {
-                        return value.toLowerCase();
-                     };
-                } else {
-                    caseSensitive = function(value) {
-                        return value;
-                    };
-                }
-                selector = Filter.selector(expr.field, caseSensitive);
-                operator = Filter.operator(expr.operator);
-                desc = operator(selector, caseSensitive(expr.value));
-                descriptors.push(desc);
-            }
-            predicate = Filter.combine(descriptors);
-
-            return function(data) {
-                return Filter.execute(predicate, data);
-            };
-        },
-        selector: function(field, caseSensitive) {
-            if (field) {
-                if (isFunction(field)) {
-                    return field;
-                } else {
-                    var accessor = getter(field);
-                    return function(record) {
-                        var value = accessor(record);
-                        if (typeof value === "string") {
-                            var date = rgDate.exec(value);
-                            if (date) {
-                                value = new Date(parseInt(date[1]));
-                            }
-                        }
-                        return caseSensitive(value);
-                    };
-                }
-            }
-            return function(record) {
-                return caseSensitive(record);
-            };
-        },
-        execute: function(predicate, data) {
-            var idx,
-                length = data.length,
-                record,
-                result = [];
-
-            for(idx = 0; idx < length; idx ++) {
-                record = data[idx];
-
-                if (predicate(record)) {
-                    result.push(record);
-                }
-            }
-
-            return result;
-        },
-        combine: function(descriptors) {
-            return function(record) {
-                var result = true,
-                    idx = 0,
-                    length = descriptors.length;
-
-                while (result && idx < length) {
-                    result = descriptors[idx ++](record);
-                }
-
-                return result;
-            };
-        },
-        operator: function(operator) {
-            if (!operator) {
-                return Filter.eq;
-            }
-
-            if (isFunction(operator)) {
-                return operator;
-            }
-
-            operator = operator.toLowerCase();
-            operatorStrings = Filter.operatorStrings;
-            for (var op in operatorStrings) {
-                if ($.inArray(operator, operatorStrings[op]) > -1) {
-                    operator = op;
-                    break;
-                }
-            }
-
-            return Filter[operator];
-        },
-        operatorStrings: {
-            "eq": ["eq", "==", "isequalto", "equals", "equalto", "equal"],
-            "neq": ["neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "not", "ne"],
-            "lt": ["lt", "<", "islessthan", "lessthan", "less"],
-            "lte": ["lte", "<=", "islessthanorequalto", "lessthanequal", "le"],
-            "gt": ["gt", ">", "isgreaterthan", "greaterthan", "greater"],
-            "gte": ["gte", ">=", "isgreaterthanorequalto", "greaterthanequal", "ge"],
-            "startswith": ["startswith"],
-            "endswith": ["endswith"],
-            "contains": ["contains", "substringof"]
-        },
-        eq: function(selector, value) {
-            return function(record){
-                var item = selector(record);
-                return item > value ? false : (value > item ? false : true);
-            };
-        },
-        neq: function(selector, value) {
-            return function(record){
-                return selector(record) != value;
-            };
-        },
-        lt: function(selector, value) {
-            return function(record){
-                return selector(record) < value;
-            };
-        },
-        lte: function(selector, value) {
-            return function(record){
-                return selector(record) <= value;
-            };
-        },
-        gt: function(selector, value) {
-            return function(record){
-                return selector(record) > value;
-            };
-        },
-        gte: function(selector, value) {
-            return function(record){
-                return selector(record) >= value;
-            };
-        },
-        startswith: function(selector, value) {
-            return function(record){
-                return selector(record).indexOf(value) == 0;
-            };
-        },
-        endswith: function(selector, value) {
-            return function(record){
-                var item = selector(record);
-                return item.lastIndexOf(value) == item.length - (value || "").length;
-            };
-        },
-        contains: function(selector, value) {
-            return function(record){
-                return selector(record).indexOf(value) > -1;
-            };
+        for (idx = 0; idx < length; idx++) {
+            result[idx] = callback(array[idx], idx, array);
         }
+
+        return result;
     }
 
-    if (Array.prototype.map !== undefined) {
-        map = function (array, callback) {
-            return array.map(callback);
-        }
-    } else {
-        map = function (array, callback) {
-            var length = array.length, result = new Array(length);
+    var operators = (function(){
+        var dateRegExp = /^\/Date\((.*?)\)\/$/;
 
-            for (var i = 0; i < length; i++) {
-                result[i] = callback(array[i], i, array);
+        function operator(op, a, b, ignore) {
+            if (b != undefined) {
+                if (typeof b === "string") {
+                    var date = dateRegExp.exec(b);
+                    if (date) {
+                        b = new Date(+date[1]);
+                    } else if (ignore) {
+                        b = "'" + b.toLowerCase() + "'";
+                        a = a + ".toLowerCase()";
+                    } else {
+                        b = "'" + b + "'";
+                    }
+                }
+
+                if (b.getTime) {
+                    //b looks like a Date
+                    a += ".getTime()";
+                    b = b.getTime();
+                }
             }
 
-            return result;
+            return a + " " + op + " " + b;
         }
-    }
+
+        var operators =  {
+            eq: function(a, b, ignore) {
+                return operator("==", a, b, ignore);
+            },
+            neq: function(a, b, ignore) {
+                return operator("!=", a, b, ignore);
+            },
+            gt: function(a, b, ignore) {
+                return operator(">", a, b, ignore);
+            },
+            gte: function(a, b, ignore) {
+                return operator(">=", a, b, ignore);
+            },
+            lt: function(a, b, ignore) {
+                return operator("<", a, b, ignore);
+            },
+            lte: function(a, b, ignore) {
+                return operator("<=", a, b, ignore);
+            },
+            startswith: function(a, b, ignore) {
+                if (ignore) {
+                    a = a + ".toLowerCase()";
+                    if (b) {
+                        b = b.toLowerCase();
+                    }
+                }
+                return a + ".lastIndexOf('" + b + "', 0) == 0";
+            },
+            endswith: function(a, b, ignore) {
+                if (ignore) {
+                    a = a + ".toLowerCase()";
+                    if (b) {
+                        b = b.toLowerCase();
+                    }
+                }
+                return a + ".lastIndexOf('" + b + "') == " + a + ".length - " + (b || "").length;
+            },
+            contains: function(a, b, ignore) {
+                if (ignore) {
+                    a = a + ".toLowerCase()";
+                    if (b) {
+                        b = b.toLowerCase();
+                    }
+                }
+                return a + ".indexOf('" + b + "') >= 0"
+            }
+        };
+
+        operators["=="] = operators.equals = operators.isequalto = operators.equalto = operators.equal = operators.eq;
+        operators["!="] = operators.not = operators.ne = operators.notequals = operators.isnotequalto = operators.notequalto = operators.notequalsto = operators.notequal = operators.neq;
+        operators["<"] = operators.islessthan = operators.lessthan = operators.less = operators.lt;
+        operators["<="] = operators.islessthanorequalto = operators.lessthanequal = operators.le = operators.lte;
+        operators[">"] = operators.isgreaterthan = operators.greaterthan = operators.greater = operators.gt;
+        operators[">="] = operators.isgreaterthanorequalto = operators.greaterthanequal = operators.ge = operators.gte;
+        return operators;
+
+    })();
 
     function Query(data) {
         this.data = data || [];
     }
 
-    function expandSort(field, dir) {
+    Query.filterExpr = function(expression) {
+        var expressions = [],
+            logic = { and: " && ", or: " || " },
+            idx,
+            length,
+            filter,
+            expr,
+            fieldFunctions = [],
+            operatorFunctions = [],
+            field,
+            operator,
+            filters = expression.filters;
+
+        for (idx = 0, length = filters.length; idx < length; idx++) {
+            filter = filters[idx];
+            field = filter.field;
+            operator = filter.operator;
+
+            if (filter.filters) {
+                expr = Query.filterExpr(filter);
+                //Nested function fields or operators - update their index e.g. __o[0] -> __o[1]
+                filter = expr.expression
+                             .replace(/__o\[(\d+)\]/g, function(match, index) {
+                                index = +index;
+                                return "__o[" + (operatorFunctions.length + index) + "]";
+                             })
+                             .replace(/__f\[(\d+)\]/g, function(match, index) {
+                                index = +index;
+                                return "__f[" + (fieldFunctions.length + index) + "]";
+                             });
+
+                operatorFunctions.push.apply(operatorFunctions, expr.operators);
+                fieldFunctions.push.apply(fieldFunctions, expr.fields);
+            } else {
+                if (typeof field === "function") {
+                    expr = "__f[" + fieldFunctions.length +"](d)";
+                    fieldFunctions.push(field);
+                } else {
+                    expr = kendo.expr(field);
+                }
+
+                if (typeof operator === "function") {
+                    filter = "__o[" + operatorFunctions.length + "](" + expr + ", " + filter.value + ")";
+                    operatorFunctions.push(operator);
+                } else {
+                    filter = operators[(operator || "eq").toLowerCase()](expr, filter.value, filter.ignoreCase !== undefined? filter.ignoreCase : true);
+                }
+            }
+
+            expressions.push(filter);
+        }
+
+        return  { expression: "(" + expressions.join(logic[expression.logic]) + ")", fields: fieldFunctions, operators: operatorFunctions };
+    }
+
+    function normalizeSort(field, dir) {
         if (field) {
-        var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
-            descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+            var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
+                descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
-        return grep(descriptors, function(d) { return !!d.dir; });
+            return grep(descriptors, function(d) { return !!d.dir; });
         }
     }
 
-    function expandFilter(expressions) {
-        if (expressions) {
-            return expressions = isArray(expressions) ? expressions : [expressions];
+    function normalizeFilter(expression) {
+        if (expression && !isEmptyObject(expression)) {
+            if (isArray(expression) || !expression.filters) {
+                expression = {
+                    logic: "and",
+                    filters: isArray(expression) ? expression : [expression]
+                }
+            }
+            return expression;
         }
     }
 
-    function expandAggregates(expressions) {
+    function normalizeAggregate(expressions) {
         return expressions = isArray(expressions) ? expressions : [expressions];
     }
 
-    function expandGroup(field, dir) {
+    function normalizeGroup(field, dir) {
        var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
            descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
@@ -450,7 +424,7 @@
         sort: function(field, dir) {
             var idx,
                 length,
-                descriptors = expandSort(field, dir),
+                descriptors = normalizeSort(field, dir),
                 comparers = [];
 
             if (descriptors.length) {
@@ -463,12 +437,49 @@
 
             return this;
         },
+
         filter: function(expressions) {
-            var predicate = Filter.create(expandFilter(expressions));
-            return new Query(predicate(this.data));
+            var idx,
+                current,
+                length,
+                compiled,
+                predicate,
+                data = this.data,
+                fields,
+                operators,
+                result = [],
+                filter;
+
+            expressions = normalizeFilter(expressions);
+
+            if (!expressions || expressions.filters.length === 0) {
+                return this;
+            }
+
+            compiled = Query.filterExpr(expressions);
+            fields = compiled.fields;
+            operators = compiled.operators;
+
+            predicate = filter = new Function("d, __f, __o", "return " + compiled.expression);
+
+            if (fields.length || operators.length) {
+                filter = function(d) {
+                    return predicate(d, fields, operators);
+                };
+            }
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                current = data[idx];
+
+                if (filter(current)) {
+                    result.push(current);
+                }
+            }
+            return new Query(result);
         },
+
         group: function(descriptors, allData) {
-            descriptors =  expandGroup(descriptors || []);
+            descriptors =  normalizeGroup(descriptors || []);
             allData = allData || this.data;
 
             var that = this,
@@ -592,7 +603,7 @@
         var query = new Query(data),
             options = options || {},
             group = options.group,
-            sort = expandSort(options.sort || []).concat(expandGroup(group || [])),
+            sort = normalizeSort(options.sort || []).concat(normalizeGroup(group || [])),
             total,
             filter = options.filter,
             skip = options.skip,
@@ -947,9 +958,9 @@
                 _view: [],
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
-                _sort: expandSort(options.sort),
-                _filter: expandFilter(options.filter),
-                _group: expandGroup(options.group),
+                _sort: normalizeSort(options.sort),
+                _filter: normalizeFilter(options.filter),
+                _group: normalizeGroup(options.group),
                 _aggregate: options.aggregate
             });
 
@@ -985,7 +996,12 @@
                     sendAllFields: options.sendAllFields,
                     transport: that.transport,
                     change: function() {
-                        that.trigger(CHANGE);
+                        var data = that.data();
+                        that._total = that.reader.total(data);
+                        that._process(data);
+                    },
+                    modelChange: function(model) {
+                        that.trigger(MODELCHANGE, model);
                     }
                 });
             }
@@ -1007,7 +1023,7 @@
                          * @event
                          */
                         CHANGE,
-                        CREATE, DESTROY, UPDATE, REQUESTSTART], options);
+                        CREATE, DESTROY, UPDATE, REQUESTSTART, MODELCHANGE], options);
         },
 
         options: {
@@ -1032,6 +1048,14 @@
 
         add: function(model) {
             return this._set.add(model);
+        },
+
+        insert: function(index, model) {
+            return this._set.insert(index, model);
+        },
+
+        cancelChanges : function() {
+            this._set.cancelChanges();
         },
 
         read: function(data) {
@@ -1252,18 +1276,18 @@
                 }
 
                 if (options.sort) {
-                    that._sort = options.sort = expandSort(options.sort);
+                    that._sort = options.sort = normalizeSort(options.sort);
                 }
 
                 if (options.filter) {
-                    that._filter = options.filter = expandFilter(options.filter);
+                    that._filter = options.filter = normalizeFilter(options.filter);
                 }
 
                 if (options.group) {
-                    that._group = options.group = expandGroup(options.group);
+                    that._group = options.group = normalizeGroup(options.group);
                 }
                 if (options.aggregate) {
-                    that._aggregate = options.aggregate = expandAggregates(options.aggregate);
+                    that._aggregate = options.aggregate = normalizeAggregate(options.aggregate);
                 }
             }
 
@@ -1400,12 +1424,11 @@
         filter: function(val) {
             var that = this;
 
-            if(val !== undefined) {
-                that._query({ filter: val });
-                return;
+            if (val === undefined) {
+                return that._filter;
             }
 
-            return that._filter;
+            that._query({ filter: val });
         },
 
         /**

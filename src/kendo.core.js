@@ -1691,7 +1691,8 @@
             HOME: 36,
             SPACEBAR: 32,
             PAGEUP: 33,
-            PAGEDOWN: 34
+            PAGEDOWN: 34,
+            F12: 123
         },
         support: support,
         animate: animate,
@@ -1725,7 +1726,7 @@
             return url && !localUrlRe.test(url);
         },
         /** @ignore */
-        getter: function(expression, safe) {
+        expr: function(expression, safe) {
             expression = expression || "";
 
             if (expression && expression.charAt(0) !== "[") {
@@ -1733,10 +1734,16 @@
             }
 
             if (safe) {
-                return new Function("d", "return " + wrapExpression(expression.split(".")));
+                expression =  wrapExpression(expression.split("."));
+            } else {
+                expression = "d" + expression;
             }
 
-            return new Function("d", "return d" + expression);
+            return expression;
+        },
+        /** @ignore */
+        getter: function(expression, safe) {
+            return new Function("d", "return " + kendo.expr(expression, safe));
         },
         /** @ignore */
         setter: function(expression) {

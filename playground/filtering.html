@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>grid</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.model.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.data.odata.js"></script>
+        <script src="../src/kendo.sortable.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
+        <script src="../src/kendo.calendar.js"></script>
+        <script src="../src/kendo.datepicker.js"></script>
+        <script src="../src/kendo.numerictextbox.js"></script>
+        <script src="../src/kendo.filtermenu.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+
+        <link href="../styles/kendo.common.css" type="text/css" rel="stylesheet" />
+        <link href="../styles/kendo.blueopal.css" type="text/css" rel="stylesheet" />
+        <style>
+            body {
+                font: 12px Arial;
+            }
+
+            .k-filter-menu
+            {
+                padding: .5em;
+            }
+
+            .k-filter-menu input,
+            .k-filter-menu .k-dropdown
+            {
+                display: block;
+            }
+
+            .k-filter-menu button
+            {
+                width: 50%;
+            }
+
+            .k-grid-filter {
+                float: right;
+                margin: -.3em -.6em;
+                padding: 0.3em 0.2em;
+            }
+
+            .k-grid-filter:hover {
+                background: yellow;
+            }
+
+            .k-header .k-link {
+                padding: 0.3em 0.6em;
+            }
+
+            .k-filterable .k-link {
+                padding-right: 2.4em;
+            }
+
+        </style>
+    </head>
+    <body>
+        <table id="table1" style="height:200px">
+            <thead>
+                <tr>
+                    <th data-field="ShipCity">Ship City</th>
+                    <th data-field="OrderID">Order ID</th>
+                    <th data-field="OrderDate">Order Date</th>
+                </th>
+            </thead>
+        </table>
+
+        <script>
+            $(document).ready(function() {
+                var dataSource = new kendo.data.DataSource({
+                    type: "odata",
+                    serverPaging: true,
+                    serverSorting: true,
+                    pageSize: 10,
+                    filter: {
+                        field: "ShipCity",
+                        operator: "neq",
+                        value: "boo"
+                    },
+                    data: [ {
+                        OrderID: 1,
+                        ShipCity: "foo",
+                        OrderDate: new Date(2011, 1, 1)
+                        },{
+                        OrderID: 2,
+                        ShipCity: "bar",
+                        OrderDate: new Date(2010, 1, 1)
+                    },{
+                        OrderID: 3,
+                        ShipCity: "boo",
+                        OrderDate: new Date(2009, 1, 1)
+                    } ],
+                    schema: {
+                        model: {
+                            fields: {
+                                ShipCity: { type: "string" },
+                                OrderID: { type: "number" },
+                                OrderDate: { type: "date" }
+                            }
+                        }
+                    }
+                });
+
+                $("#table1").kendoGrid({
+                    scrollable: false,
+                    dataSource: dataSource,
+                    filterable: true
+                });
+            });
+        </script>
+
+    </body>
+</html>

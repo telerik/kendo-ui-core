@@ -6,6 +6,7 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.model.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
@@ -46,6 +47,70 @@
                 equal(grid.dataItem(rows.first()).foo, 1);
                 equal(grid.dataItem(rows.eq(1)).foo, 2);
             });
+
+            test("grid row is refreshed on modelChange", function() {
+                 var grid = new Grid($("<table><tbody/></table>")[0], {
+                    dataSource: {
+                        data: [ { id: 1, foo: "foo" }, { id: 2, foo: "bar" }],
+                        schema: {
+                            model: {
+                                id: "id",
+                                fields: {
+                                    foo: "foo"
+                                }
+                            }
+                        }
+                } });
+
+                grid.dataSource.get(1).set("foo", "baz");
+
+                var row = grid.tbody.find("tr:first");
+
+                equal(row.find("td").eq(1).text(), "baz");
+            });
+
+            test("grid alt row is refreshed on modelChange", function() {
+                 var grid = new Grid($("<table><tbody/></table>")[0], {
+                    dataSource: {
+                        data: [ { id: 1, foo: "foo" }, { id: 2, foo: "bar" }],
+                        schema: {
+                            model: {
+                                id: "id",
+                                fields: {
+                                    foo: "foo"
+                                }
+                            }
+                        }
+                } });
+
+                grid.dataSource.get(2).set("foo", "baz");
+
+                var row = grid.tbody.find("tr:nth(1)");
+
+                equal(row.find("td").eq(1).text(), "baz");
+                ok(row.hasClass("k-alt"));
+            });
+
+            test("dataItem return data for given row if model is changed", function() {
+                var grid = new Grid($("<table><tbody/></table>")[0], {
+                    dataSource: {
+                        data: [ { id: 1, foo: "foo" }, { id: 2, foo: "bar" } ],
+                        schema: {
+                            model: {
+                                id: "id",
+                                fields: {
+                                    foo: "foo"
+                                }
+                            }
+                        }
+                } });
+
+                grid.dataSource.get(1).set("foo", "baz");
+
+                var rows = grid.tbody.find("tr");
+                equal(grid.dataItem(rows.first()).foo, "baz");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
