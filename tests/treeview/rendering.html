@@ -46,7 +46,7 @@
             });
 
             test("collapsed groups", function() {
-                var element = treeviewFromHtml("<ul><li data-expanded='false'>item<ul><li>subitem</li></ul></li></ul>");
+                var element = treeviewFromHtml("<ul><li data-kendo-expanded='false'>item<ul><li>subitem</li></ul></li></ul>");
 
                 equals(element.find("ul:last").css("display"), "none");
             });
@@ -82,7 +82,7 @@
             });
 
             test("creates toggle buttons", function() {
-                var element = treeviewFromHtml("<ul><li data-expanded='true'>foo<ul><li>bar</li></ul></li></ul>"),
+                var element = treeviewFromHtml("<ul><li data-kendo-expanded='true'>foo<ul><li>bar</li></ul></li></ul>"),
                     wrapper = element.find("div:first");
 
                 equals(wrapper.find("span.k-icon.k-minus").length, 1);
@@ -103,7 +103,7 @@
             });
 
             test("renders lines class for first level", function() {
-                var html = TreeView.renderGroup({ 
+                var html = TreeView.renderGroup({
                     items: [],
                     group: {
                         firstLevel: true,
@@ -126,7 +126,7 @@
             });
 
             test("renders items, if any", function() {
-                var html = TreeView.renderGroup({ 
+                var html = TreeView.renderGroup({
                     items: [
                         { text: "foo" }
                     ],
@@ -284,7 +284,7 @@
                         ]
                     }
                 }));
-                
+
                 equal($item.find(".k-group").css("display"), "none");
             });
 
