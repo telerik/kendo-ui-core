@@ -382,11 +382,6 @@ function build(deployConfig) {
         };
     });
 
-    themes.build();
-
-    console.log("merging multipart scripts...");
-    kendoScripts.mergeScripts("src/");
-
     console.log("copying resources...");
     kendoBuild.copyDirSyncRecursive(examplesLocation, outputPath);
 
@@ -425,6 +420,11 @@ function build(deployConfig) {
 };
 
 function buildStaging() {
+    themes.build();
+
+    console.log("merging multipart scripts...");
+    kendoScripts.mergeScripts("src/");
+
     build({
         root: STAGING_ROOT,
         scripts: STAGING_SCRIPTS,
