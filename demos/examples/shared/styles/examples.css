@@ -643,6 +643,9 @@ a.bigButton
 .integrationIcon { background-position: -50px -320px; }
 .calendarIcon { background-position: -50px -380px; }
 .datepickerIcon { background-position: -50px -410px; }
+.numerictextboxIcon { background-position: -50px -440px; }
+.timepickerIcon { background-position: -50px -470px; }
+.validatorIcon { background-position: -50px -500px; }
 
 /*example content*/
 
