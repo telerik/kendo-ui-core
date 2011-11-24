@@ -18,7 +18,7 @@
         processors = {
             "box-shadow": function(value) {
                 if (value && value != "none") {
-                    return value.replace(/\s/g, "").replace(/\d+px/g,"");
+                    return value.replace(/\d+px/g,"").replace(/\s/g, "");
                 } else {
                     return "#000000";
                 }
@@ -82,9 +82,14 @@
 
             _colorChange: function(e) {
                 var that = this,
-                    changeHandler = that.options.colorPickerChange;
+                    changeHandler = that.options.colorPickerChange,
+                    value = that._updateColorPreview();
 
-                that.value(ColorEngine.css2hex(that._updateColorPreview()));
+                if (value == "transparent") {
+                    this.value("#000000");
+                }
+
+                that.value(ColorEngine.css2hex(value));
 
                 if (changeHandler) {
                     changeHandler.call(that, {
@@ -142,12 +147,12 @@
 
                 function getInferPrototype(target) {
                     var className = /\.([a-z\-0-9]+)/i.exec(target)[1];
-                    if (target == className) {
+                    if (target == "." + className) {
                         cachedPrototype[0].className = className;
                         return cachedPrototype;
                     } else {
                         // create prototype for complex selector
-                        return $("<a href='' />").addClass(className).appendTo(doc.body);
+                        return $("<a href='#' />").addClass(className).appendTo(doc.body);
                     }
                 }
 

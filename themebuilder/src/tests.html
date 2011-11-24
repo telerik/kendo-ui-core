@@ -130,6 +130,17 @@
                 equals(colorPickerControl.value(), "#ff0000");
             });
 
+            test("clearing the input restores previous value", function() {
+                var colorPickerControl = colorPicker.data("kendoColorPicker");
+
+                colorPickerControl.value("#ff1ff1");
+                colorPickerControl.trigger("change");
+                colorPickerControl.value("");
+                colorPickerControl.trigger("change");
+
+                equals(colorPickerControl.value(), "#000000");
+            });
+
             test("preview bgcolor is changed upon init", function() {
                 colorPicker = $("<input value='#ff0000' />").appendTo(document.body).kendoColorPicker();
 
