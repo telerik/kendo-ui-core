@@ -82,7 +82,7 @@
                             bindSelect(target, model);
                         }
 
-                        target.value = value;
+                        $(target).val(value);
                     },
                     bindModel: function() {
                         var value = target.value,

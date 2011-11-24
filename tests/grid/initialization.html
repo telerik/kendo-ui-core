@@ -382,14 +382,14 @@
             });
 
             test("initialization from rendered table should disable encoding", function() {
-                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                $(table).html("<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
                 var grid = new Grid(table, {scrollable: false});
 
                 equal(grid.columns[0].encoded, false);
             });
 
             test("sortable columns", function() {
-                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                $(table).html("<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
                 var grid = new Grid(table, {
                     sortable: true
                 });
@@ -398,7 +398,7 @@
             });
 
             test("unsortable column from column settings", function() {
-                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                $(table).html("<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
                 var grid = new Grid(table, {
                     sortable: true,
                     columns: [{
@@ -410,7 +410,7 @@
             });
 
             test("unsortable column from html attribute", function() {
-                table.innerHTML = "<thead><tr><th data-sortable=false data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                $(table).html("<thead><tr><th data-sortable=false data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
                 var grid = new Grid(table, {
                     sortable: true
                 });
@@ -419,7 +419,7 @@
             });
 
             test("filterable columns", function() {
-                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                $(table).html("<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
                 var grid = new Grid(table, {
                     filterable: true,
                     dataSource: {
@@ -437,7 +437,7 @@
             });
 
             test("unfilterable column from column settings", function() {
-                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                $(table).html("<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
                 var grid = new Grid(table, {
                     filterable: true,
                     columns: [{filterable: false}],
@@ -456,7 +456,7 @@
             });
 
             test("unfilterable column from html attribute", function() {
-                table.innerHTML = "<thead><tr><th data-filterable=false data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                $(table).html("<thead><tr><th data-filterable=false data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
                 var grid = new Grid(table, {
                     filterable: true,
                     dataSource: {
@@ -474,7 +474,7 @@
             });
 
             test("filterable options are initialized", function() {
-                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                $(table).html("<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
                 var grid = new Grid(table, {
                     filterable: {
                         extra: false
@@ -494,7 +494,7 @@
             });
 
             test("filterable options are initialized from column settings", function() {
-                table.innerHTML = "<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>";
+                $(table).html("<thead><tr><th data-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
                 var grid = new Grid(table, {
                     filterable: true,
                     columns: [{ filterable: { extra: false }}],
