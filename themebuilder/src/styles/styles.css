@@ -11,8 +11,37 @@ body
     font: normal 12px/1.5 Tahoma,sans-serif;
 }
 
-*::-moz-selection { background: #3a8600; color: #fff; }
-::selection { background: #3a8600; color: #fff; }
+::-webkit-scrollbar {
+    width: 10px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+    height: 0;
+    display: block;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #3b3b3b;
+    -webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+    height: 50px;
+    background-color: #666;
+    -webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    width: 50px;
+    background-color: #666;
+    -webkit-border-radius: 3px;
+}
+
+*::-moz-selection { background: #1179e5; color: #fff; }
+::selection { background: #1179e5; color: #fff; }
 
 #kendo-themebuilder .styling-options
 {
