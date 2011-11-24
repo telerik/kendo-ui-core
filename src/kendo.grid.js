@@ -718,11 +718,16 @@
             var that = this,
                 cell = that._editContainer.removeClass("k-edit-cell"),
                 id = cell.closest("tr").data("id"),
-                column = that.columns[that.cellIndex(cell)];
+                column = that.columns[that.cellIndex(cell)],
+                model = that.dataSource.get(id);
 
             cell.parent().removeClass("k-grid-edit-row");
 
-            that._displayCell(cell, column, that.dataSource.get(id).data);
+            that._displayCell(cell, column, model.data);
+
+            if (column.field in (model.changes() || {})) {
+                $('<span class="k-dirty"/>').prependTo(cell);
+            }
             that._distroyEditable();
         },
 
@@ -1283,6 +1288,7 @@
 
                     if (column.field in changes) {
                         that._displayCell(cell, column, model.data);
+                        $('<span class="k-dirty"/>').prependTo(cell);
                     }
                 });
             } else {
