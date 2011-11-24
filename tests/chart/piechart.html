@@ -131,6 +131,10 @@
                     equal(typeof firstSegment.dataItem, "object");
                 });
 
+                test("sets segment dataItem", function() {
+                    equal(firstSegment.percentage, 0.333, TOLERANCE);
+                });
+
                 test("sets segment explode", function() {
                     ok(firstSegment.explode == true);
                 });

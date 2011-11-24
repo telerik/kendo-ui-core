@@ -3181,7 +3181,8 @@
                     dataItem: segment.dataItem,
                     category: segment.category,
                     value: segment.value,
-                    series: segment.series
+                    series: segment.series,
+                    percentage: segment.percentage
                 });
             }
 
@@ -3369,13 +3370,15 @@
                 anglePerValue,
                 value,
                 explode,
+                total,
                 i;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
                 dataItems = currentSeries.dataItems;
                 data = currentSeries.data;
-                anglePerValue = 360 / chart.pointsTotal(data);
+                total = chart.pointsTotal(data)
+                anglePerValue = 360 / total;
 
                 for (i = 0; i < data.length; i++) {
                     currentData = chart.pointData(currentSeries, i);
@@ -3392,7 +3395,8 @@
                         categoryIx: i,
                         series: currentSeries,
                         seriesIx: seriesIx,
-                        dataItem: dataItems ? dataItems[i] : currentData,
+                        dataItem: dataItems ? dataItems[i] : { value: currentData },
+                        percentage: value / total,
                         explode: explode,
                         currentData: currentData
                     });
