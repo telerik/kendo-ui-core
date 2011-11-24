@@ -195,6 +195,32 @@
                 equals(constants.serialize(), "@foo: #f11f11;\n@bar: #b4d455;");
             });
 
+            test("infer() infers nested className selectors", function() {
+                var themeBuilder = new ThemeBuilder();
+                themeBuilder.updateStyleSheet(".k-widget { font-size: 8px; }\n.k-widget .k-input { font-size: 10px; }");
+
+                var constants = new LessConstants({
+                    "@foo": constant(".k-widget .k-input", "font-size")
+                });
+
+                constants.infer();
+
+                equals(constants.constants["@foo"].value, "10px");
+            });
+
+            test("infer() infers nested tagName selectors", function() {
+                var themeBuilder = new ThemeBuilder();
+                themeBuilder.updateStyleSheet("dl { font-size: 8px; }\ndl dt { font-size: 10px; }");
+
+                var constants = new LessConstants({
+                    "@foo": constant("dl dt", "font-size")
+                });
+
+                constants.infer();
+
+                equals(constants.constants["@foo"].value, "10px");
+            });
+
             test("infer() infers basic property value", function() {
                 var themeBuilder = new ThemeBuilder();
                 themeBuilder.updateStyleSheet(".k-widget { font-size: 9px; }");
