@@ -141,7 +141,7 @@
             infer: function() {
                 var constants = this.constants, constant,
                     c, i,
-                    property, value,
+                    property, value, target,
                     cachedPrototype = $("<div style='border-style:solid;' />").appendTo(doc.body),
                     prototype;
 
@@ -193,14 +193,17 @@
                         prototype = getInferPrototype(constant.target);
 
                         property = constant.property;
-                        value = prototype.add(prototype.find("*:last")).last().css(property);
+                        target = prototype.add(prototype.find("*:last")).last();
 
-                        if (!value && property == "border-color") {
-                            value = prototype.css("border-top-color");
-                        }
-
-                        if (!value && property == "border-radius") {
-                            value = "0";
+                        if (property == "border-color") {
+                            value = target.css("border-top-color");
+                        } else if (property == "border-radius") {
+                            value = target.css("-moz-border-radius-topleft") ||
+                                    target.css("-webkit-border-top-left-radius") ||
+                                    target.css("border-top-left-radius") ||
+                                    "0px";
+                        } else {
+                            value = target.css(property);
                         }
 
                         if (rgbValuesRe.test(value)) {

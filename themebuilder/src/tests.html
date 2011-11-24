@@ -265,6 +265,19 @@
                 equals(constants.constants["@bar"].value, "#f00f00");
             });
 
+            test("infer() of border-radius", function() {
+                var themeBuilder = new ThemeBuilder();
+                themeBuilder.updateStyleSheet(".k-widget { border-radius: 3px; }");
+
+                var constants = new LessConstants({
+                    "@foo": constant(".k-widget", "border-radius")
+                });
+
+                constants.infer();
+
+                equals(constants.constants["@foo"].value, "3px");
+            });
+
             test("infer() of computed constants", function() {
                 var themeBuilder = new ThemeBuilder();
                 themeBuilder.updateStyleSheet(".bar { font-size: 20px; }");
