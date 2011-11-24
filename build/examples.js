@@ -24,7 +24,7 @@ var VERSION = kendoBuild.generateVersion(),
     STAGING_THEMEBUILDER_ROOT = "/kendo/themebuilder/src",
     LIVE_SCRIPTS = template(CDN_URL + "/js"),
     LIVE_STYLES = template(CDN_URL + "/styles"),
-    LIVE_SHARED_ROOT = CDN_URL + "/shared",
+    LIVE_SHARED_ROOT = CDN_URL + "/examples/shared",
     LIVE_SHARED_SCRIPTS = template(LIVE_SHARED_ROOT + "/js"),
     LIVE_SHARED_STYLES = template(LIVE_SHARED_ROOT + "/styles"),
     LIVE_SUITE_SCRIPTS = template(CDN_URL + "/#= suiteName #/js"),
@@ -400,6 +400,16 @@ function build(deployConfig) {
     console.log("copying resources...");
     kendoBuild.copyDirSyncRecursive(examplesLocation, outputPath);
 
+    if (deployConfig.useMinified) {
+        kendoBuild.processFilesRecursive(path.join(outputPath, "shared"), /\.css$/, function(fileName) {
+            var css = kendoBuild.readText(fileName),
+                minified = cssmin(css);
+
+            kendoBuild.writeText(fileName, minified);
+            fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
+        });
+    }
+
     fs.unlinkSync(outputPath + "/template.html");
 
     kendoBuild.writeText(
@@ -442,6 +452,7 @@ function buildLive(deployRoot) {
 }
 
 if (require.main === module) {
+    //buildLive("deploy/online-examples");
     buildStaging();
 } else {
     exports.buildLive = buildLive;
