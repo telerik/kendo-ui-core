@@ -12,6 +12,9 @@
         <ExamplesRoot>$(ResourcesRoot)\online-examples</ExamplesRoot>
         <ExamplesScripts>$(ExamplesRoot)\shared\js</ExamplesScripts>
         <ExamplesStyles>$(ExamplesRoot)\shared\styles</ExamplesStyles>
+
+        <CDNScripts>$(DateSuffixDots)/js</CDNScripts>
+        <CDNExamplesShared>$(DateSuffixDots)/examples/shared</CDNExamplesShared>
     </PropertyGroup>
 
     <Target Name="DeployCDN">
@@ -25,15 +28,15 @@
 
         <UploadResources
             SourcePath="$(BundleScripts)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
-            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/js" Compress="True" />
+            BucketName="$(CDNBucketName)" DestinationPath="$(CDNScripts)" Compress="True" />
 
         <UploadResources
             SourcePath="$(ExamplesScripts)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
-            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/shared/js" Compress="True" />
+            BucketName="$(CDNBucketName)" DestinationPath="$(CDNExamplesShared)/js" Compress="True" />
 
         <UploadResources
             SourcePath="$(ExamplesStyles)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
-            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/shared/styles" Compress="True" />
+            BucketName="$(CDNBucketName)" DestinationPath="$(CDNExamplesShared)/styles" Compress="True" />
 
         <BuildStep  TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
             Id="$(StepId)"
