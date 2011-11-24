@@ -438,7 +438,7 @@
 
     function getInitialStylePath() {
         var head = document.getElementsByTagName("head")[0];
-        return head.innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)examples\.css/i)[1];
+        return head.innerHTML.match(/href=\W([\.\/]*)([\w\/]*?)examples(\.min)?\.css/i)[1];
     }
 
     function locatePage(url) {
