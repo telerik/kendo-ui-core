@@ -7,10 +7,11 @@
     <UsingTask TaskName="UploadResources" AssemblyFile="MSBuildTasks\ResourceUploader.MSBuildTasks.dll" />
 
     <PropertyGroup>
-        <ExamplesRoot>$(ResourcesRoot)\onlineExamples</ExamplesRoot>
-        <ExamplesScripts>$(ExamplesRoot)\js</ExamplesScripts>
-        <ExamplesStyles>$(ExamplesRoot)\styles</ExamplesStyles>
-        <ExamplesContent>$(ExamplesRoot)\content</ExamplesContent>
+        <BundleRoot>$(ResourcesRoot)\kendoui.web-dataviz.open-source</BundleRoot>
+        <BundleScripts>$(BundleRoot)\js</BundleScripts>
+        <ExamplesRoot>$(ResourcesRoot)\online-examples</ExamplesRoot>
+        <ExamplesScripts>$(ExamplesRoot)\shared\js</ExamplesScripts>
+        <ExamplesStyles>$(ExamplesRoot)\shared\styles</ExamplesStyles>
     </PropertyGroup>
 
     <Target Name="DeployCDN">
@@ -23,16 +24,16 @@
         </GenerateVersionDependentSuffix>
 
         <UploadResources
-            SourcePath="$(ExamplesScripts)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+            SourcePath="$(BundleScripts)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
             BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/js" Compress="True" />
 
         <UploadResources
-            SourcePath="$(ExamplesStyles)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
-            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/styles" Compress="True" />
+            SourcePath="$(ExamplesScripts)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/shared/js" Compress="True" />
 
         <UploadResources
-            SourcePath="$(ExamplesContent)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
-            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/content" Compress="True" />
+            SourcePath="$(ExamplesStyles)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
+            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)/shared/styles" Compress="True" />
 
         <BuildStep  TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
             Id="$(StepId)"

@@ -37,7 +37,6 @@ var bundles = [{
 }];
 
 var VERSION = kendoBuild.generateVersion(),
-    CDN_URL = process.argv[2] || "http://cdn.kendostatic.com/" + VERSION,
     INDEX = "index.html",
     SCRIPTS_ROOT = "src",
     STYLES_ROOT = "styles",
