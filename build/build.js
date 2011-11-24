@@ -202,7 +202,7 @@ function buildBundle(bundle, success) {
     var name = bundle.name,
         license = bundle.license,
         deployName = name + "." + VERSION + "." + license,
-        root = path.join(DEPLOY_ROOT, deployName),
+        root = path.join(DEPLOY_ROOT, name + "." + license),
         srcLicenseTemplate = readText(path.join(LEGAL_ROOT, SRC_LICENSE)),
         srcLicense = template(srcLicenseTemplate)({ version: VERSION, year: startDate.getFullYear() }),
         packageName = path.join(DROP_LOCATION, deployName + ".zip");
