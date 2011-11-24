@@ -104,12 +104,12 @@
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
         cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         emptyCellTemplate = template("<td>&nbsp;</td>", { useWithBlock: false }),
+        CLICK = kendo.support.touch ? "touchend" : "click",
         MIN = "min",
         LEFT = "left",
         SLIDE = "slide",
         MONTH = "month",
         CENTURY = "century",
-        CLICK = "click",
         CHANGE = "change",
         NAVIGATE = "navigate",
         VALUE = "value",
@@ -563,7 +563,6 @@
         _header: function() {
             var that = this,
             element = that.element,
-            eventName = kendo.support.touch ? "touchend" : CLICK,
             links;
 
             if (!element.find(".k-header")[0]) {
@@ -578,9 +577,9 @@
                            .hover(mouseenter, mouseleave)
                            .click(false);
 
-            that._title = links.eq(1).bind(eventName, proxy(that.navigateUp, that));
-            that[PREVARROW] = links.eq(0).bind(eventName, proxy(that.navigateToPast, that));
-            that[NEXTARROW] = links.eq(2).bind(eventName, proxy(that.navigateToFuture, that));
+            that._title = links.eq(1).bind(CLICK, proxy(that.navigateUp, that));
+            that[PREVARROW] = links.eq(0).bind(CLICK, proxy(that.navigateToPast, that));
+            that[NEXTARROW] = links.eq(2).bind(CLICK, proxy(that.navigateToFuture, that));
         },
 
         _cellByDate: function(value) {
