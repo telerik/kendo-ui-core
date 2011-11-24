@@ -21,9 +21,9 @@
                         '<option value="#=op#">#=operators[op]#</option>'+
                     '#}#'+
                 '</select>'+
-                '<input name="filters[0].value" class="k-input k-autocomplete" type="text" data-type="#=type#"/>'+
+                '<input name="filters[0].value" class="k-widget k-input k-autocomplete" type="text" data-type="#=type#"/>'+
                 '#if(extra){#'+
-                    '<select name="logic">'+
+                    '<select name="logic" class="k-filter-and">'+
                         '<option value="and">And</option>'+
                         '<option value="or">Or</option>'+
                     '</select>'+
@@ -32,7 +32,7 @@
                             '<option value="#=op#">#=operators[op]#</option>'+
                         '#}#'+
                     '</select>'+
-                    '<input name="filters[1].value" class="k-input k-autocomplete" type="text" data-type="#=type#"/>'+
+                    '<input name="filters[1].value" class="k-widget k-input k-autocomplete" type="text" data-type="#=type#"/>'+
                 '#}#'+
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+

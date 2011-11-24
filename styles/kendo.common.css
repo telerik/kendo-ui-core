@@ -880,7 +880,12 @@ div.k-window-content
     min-height: 18px;
     line-height: 18px; /* due to sorting icons*/
     margin: -.5em -.6em -.4em -.6em;
-    padding: .5em 2.4em .4em .6em;
+    padding: .5em .6em .4em .6em;
+}
+
+.k-grid-header .k-filterable .k-link
+{
+    padding-right: 2.4em;
 }
 
 .k-grid-header .k-header .k-icon
@@ -1120,12 +1125,9 @@ div.k-grid-header .k-header
 
 .k-grid-filter
 {
-    position: relative;
-    display: inline-block;
     float: right;
-    height: 18px;
-    margin: -1.8em -.6em -.3em 3px;
-    padding: .3em .2em;
+    margin: -.5em -.6em -.4em;
+    padding: 0.54em 0.2em;
 }
 
 .k-grid-filter .k-icon
@@ -1138,32 +1140,35 @@ div.k-grid-header .k-header
     position: absolute;
 }
 
-.k-grid .k-filter-options
+.k-filter-menu
 {
-    position: absolute;
-    width: 148px;
-    border-style: solid;
-    border-width: 1px;
-    padding: 3px;
+    padding: .5em;
 }
 
-.k-filter-options .k-filter-help-text,
-.k-filter-options select,
-.k-filter-options input,
-.k-filter-options .k-button,
-.k-filter-options .k-datepicker
+.k-filter-menu .k-widget
 {
     display: block;
-    margin-bottom: 4px;
 }
 
-.k-filter-options select { width: 148px; }
-.k-filter-options input { width: 142px; }
-.k-filter-options .k-datepicker { width: 100%; }
-
-.k-filter-options .k-filter-button
+.k-filter-help-text,
+.k-filter-menu .k-widget
 {
-    margin-bottom: 0;
+    margin: .3em 0 0;
+}
+
+.k-filter-menu .k-autocomplete
+{
+    margin-bottom: .5em;
+}
+
+.k-filter-menu .k-filter-and
+{
+    width: 6em;
+}
+
+.k-filter-menu .k-button
+{
+    width:50%;
 }
 
 /* Grid :: grouping */
