@@ -105,7 +105,7 @@
                 equal(grid.tbody.find("td").text(), "foobar");
             });
 
-            test("data-id attribute is rendered for each row when model is defined", function() {
+            test("data-kendo-id attribute is rendered for each row when model is defined", function() {
                 var grid = new Grid($("<div/>"), {
                     dataSource: {
                         schema: {
@@ -119,10 +119,10 @@
                     }
                 });
 
-                equal(grid.tbody.find("tr").data("id"), "bar");
+                equal(grid.tbody.find("tr").attr("data-kendo-id"), "bar");
             });
 
-            test("data-id attribute is rendered for each row when model id is function", function() {
+            test("data-kendo-id attribute is rendered for each row when model id is function", function() {
                 var grid = new Grid($("<div/>"), {
                     dataSource: {
                         schema: {
@@ -138,10 +138,10 @@
                     }
                 });
 
-                equal(grid.tbody.find("tr").data("id"), "bar");
+                equal(grid.tbody.find("tr").attr("data-kendo-id"), "bar");
             });
 
-            test("data-id attribute is rendered for each row when model id is string and a column has a function template", function() {
+            test("data-kendo-id attribute is rendered for each row when model id is string and a column has a function template", function() {
                 var grid = new Grid($("<div/>"), {
                     dataSource: {
                         schema: {
@@ -159,9 +159,10 @@
                     }]
                 });
 
-                equal(grid.tbody.find("tr").data("id"), "bar");
+                equal(grid.tbody.find("tr").attr("data-kendo-id"), "bar");
             });
-            test("data-id attribute is not rendered if model is not set", function() {
+
+            test("data-kendo-id attribute is not rendered if model is not set", function() {
                 var grid = new Grid($("<div/>"), {
                     dataSource: {
                         data: [ {
@@ -174,7 +175,7 @@
                     }]
                 });
 
-                ok(grid.rowTemplate.toString().indexOf("data-id") === -1);
+                ok(grid.rowTemplate.toString().indexOf("data-kendo-id") === -1);
             });
 
             </script>

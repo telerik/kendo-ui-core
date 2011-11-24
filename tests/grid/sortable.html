@@ -86,7 +86,7 @@
                 ok(ths.eq(1).data("kendoSortable") instanceof kendo.ui.Sortable);
             });
 
-            test("generating headers sets data-field attr when sorting is enabled", function() {
+            test("generating headers sets data-kendo-field attr when sorting is enabled", function() {
                 var element = $("<table />"),
                     grid = new Grid(element, {
                     data: [],
@@ -97,8 +97,8 @@
                     sortable: true
                 });
                 var ths = grid.wrapper.find("th");
-                ok(ths.eq(0).data("field") === "foo");
-                ok(ths.eq(1).data("field") === "bar");
+                ok(ths.eq(0).attr("data-kendo-field") === "foo");
+                ok(ths.eq(1).attr("data-kendo-field") === "bar");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

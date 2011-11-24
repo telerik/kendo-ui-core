@@ -117,7 +117,7 @@
 
             that.dataSource = options.dataSource.bind("change", proxy(that.refresh, that));
 
-            that.field = element.data("field");
+            that.field = element.attr(kendo.attr("field"));
 
             that.model = that.dataSource.reader.model;
 
