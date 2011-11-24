@@ -57,20 +57,6 @@
                 ok(called);
             });
 
-            test("clicking item raises event", function() {
-                var ul = setup({
-                        change: function() {
-                            item = listView.selected();
-                        }
-                    }),
-                    item,
-                    listView = ul.data("kendoListView");
-
-                dataSource.read();
-                ul.children().first().mousedown().mouseup();
-                ok(item);
-            });
-
             test("focusing grid element focus first item ", function() {
                 var listView = setup();
                 listView.focus();
