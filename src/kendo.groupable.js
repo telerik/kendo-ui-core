@@ -3,7 +3,7 @@
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
         CONTAINER_EMPTY_TEXT = "Drag a column header and drop it here to group by that column",
-        indicatorTmpl = kendo.template('<div class="k-group-indicator" data-field="${data.field}" data-dir="${data.dir || "asc"}">' +
+        indicatorTmpl = kendo.template('<div class="k-group-indicator" data-#=data.ns#field="${data.field}" data-#=data.ns#dir="${data.dir || "asc"}">' +
                 '<a href="\\#" class="k-link">' +
                     '<span class="k-icon k-arrow-${(data.dir || "asc") == "asc" ? "up" : "down"}-small">(sorted ${(data.dir || "asc") == "asc" ? "ascending": "descending"})</span>' +
                     '${data.field}' +
@@ -14,7 +14,7 @@
              '</div>',  { useWithBlock:false }),
         hint = function(target) {
             return $('<div class="k-header k-drag-clue" />')
-                .html(target.data("field"))
+                .html(target.attr(kendo.attr("field")))
                 .prepend('<span class="k-icon k-drag-status k-denied" />');
         },
         dropCue = $('<div class="k-grouping-dropclue"/>');
@@ -66,7 +66,7 @@
                 })
                 .delegate(".k-link", "click", function(e) {
                     var current = $(this).parent(),
-                        newIndicator = that.buildIndicator(current.data("field"), current.data("dir") == "asc" ? "desc" : "asc");
+                        newIndicator = that.buildIndicator(current.attr(kendo.attr("field")), current.attr(kendo.attr("dir")) == "asc" ? "desc" : "asc");
 
                     current.before(newIndicator).remove();
                     that._change();
@@ -82,7 +82,7 @@
                 },
                 dragstart: function(e) {
                     var element, marginRight, left,
-                        field = e.currentTarget.data("field");
+                        field = e.currentTarget.attr(kendo.attr("field"));
 
                     if(that.indicator(field)) {
                         e.preventDefault();
@@ -125,11 +125,11 @@
             var indicators = $(".k-group-indicator", this.groupContainer);
             return $.grep(indicators, function (item)
                 {
-                    return $(item).data("field") === field;
+                    return $(item).attr(kendo.attr("field")) === field;
                 })[0];
         },
         buildIndicator: function(field, dir) {
-            return indicatorTmpl({ field: field, dir: dir });
+            return indicatorTmpl({ field: field, dir: dir, ns: kendo.ns });
         },
         descriptors: function() {
             var indicators = $(".k-group-indicator", this.groupContainer);
@@ -137,8 +137,8 @@
                 item = $(item);
 
                 return {
-                    field: item.data("field"),
-                    dir: item.data("dir")
+                    field: item.attr(kendo.attr("field")),
+                    dir: item.attr(kendo.attr("dir"))
                 };
             });
         },
@@ -199,7 +199,7 @@
         },
         _dragEnd: function(draggable, event) {
             var that = this,
-                field = event.currentTarget.data("field"),
+                field = event.currentTarget.attr(kendo.attr("field")),
                 sourceIndicator = that.indicator(field),
                 dropCuePositions = that._dropCuePositions,
                 lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
