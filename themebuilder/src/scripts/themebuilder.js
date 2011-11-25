@@ -271,7 +271,7 @@
                         .each(function() {
                             var data = constants ? constants.constants[this.id].values : [];
 
-                            data.splice(0, 0, { text: "(unchanged)", value: this.value });
+                            data.splice(0, 0, { text: "unchanged", value: this.value });
 
                             data = $.map(data, function(x) {
                                 return { text: x.text, value: x.value.replace(/"|'/g, "") };
