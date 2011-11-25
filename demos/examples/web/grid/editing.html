@@ -71,11 +71,11 @@
                                 model: {
                                     id: "ProductID",
                                     fields: {
-                                        ProductID: { field: "ProductID", readonly: true, nullable: true },
-                                        ProductName: { field: "ProductName", validation: { required: true } },
-                                        UnitPrice: { field: "UnitPrice", type: "number", validation: { required: true, min: 1} },
-                                        Discontinued: { field: "Discontinued", type: "boolean" },
-                                        UnitsInStock: { field: "UnitsInStock", type: "number", validation: { min: 0, required: true } }
+                                        ProductID: {  editable: false, nullable: true },
+                                        ProductName: { validation: { required: true } },
+                                        UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                                        Discontinued: { type: "boolean" },
+                                        UnitsInStock: { type: "number", validation: { min: 0, required: true } }
                                     }
                                 }
                             }
