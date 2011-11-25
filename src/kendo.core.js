@@ -1592,6 +1592,16 @@
         });
     }
 
+    if (support.touch) {
+        support.mousedown = "touchstart";
+        support.mouseup = "touchend";
+        support.mousemove = "touchmove";
+    } else {
+        support.mousemove = "mousemove";
+        support.mousedown = "mousedown";
+        support.mouseup = "mouseup";
+    }
+
     var wrapExpression = function(members) {
         var result = "d",
             index,

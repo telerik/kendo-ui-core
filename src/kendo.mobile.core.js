@@ -62,12 +62,4 @@
 
     kendo.ui.MobileWidget = MobileWidget;
     kendo.mobile = mobile;
-
-    if (support.touch) {
-        support.mousedown = "touchstart";
-        support.mouseup = "touchend";
-    } else {
-        support.mousedown = "mousedown";
-        support.mouseup = "mouseup";
-    }
 })(jQuery);
