@@ -153,7 +153,6 @@
                     dataSource: dataSource
                 });
 
-
                 filterMenu.form.find("input[name='filters[0].value']").val("bar");
                 filterMenu.form.submit();
 
@@ -269,6 +268,39 @@
 
                 equal(dataSource.filter().filters.length, 2);
                 equal(dataSource.filter().filters[0].field, "foo");
+                equal(dataSource.filter().filters[1].field, "bar");
+                equal(dataSource.filter().logic, "and");
+            });
+
+            test("filtering multiple fields and different logic", function() {
+                var filter1 = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filter1.filter({
+                    logic: "or",
+                    filters:[
+                        { value: "1", field: "foo"},
+                        { value: "1", field: "foo"}
+                    ]
+                });
+
+                dom = $("<th data-kendo-field=bar />");
+
+                var filter2 = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filter2.filter({
+                    filters:[
+                        { value: "1", field: "bar"}
+                    ]
+                });
+
+                equal(dataSource.filter().filters.length, 2);
+                equal(dataSource.filter().logic, "and");
+                equal(dataSource.filter().filters[0].logic, "or", "foo");
+                equal(dataSource.filter().filters[0].filters.length, 2);
                 equal(dataSource.filter().filters[1].field, "bar");
             });
 
@@ -415,6 +447,7 @@
 
                 ok(!filterMenu1.popup.visible());
             });
+
        </script>
     </body>
 </html>
