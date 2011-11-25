@@ -89,6 +89,11 @@
 
             "@disabled-text-color":             constant(".k-state-disabled", COLOR),
 
+            // TODO: fix these
+            "@validation-background-color":     constant(".k-tooltip-validation", BGCOLOR),
+            "@validation-border-color":         constant(".k-tooltip-validation", BORDERCOLOR),
+            "@validation-text-color":           constant(".k-tooltip-validation", COLOR),
+
             "@tooltip-background-color":        constant(".k-tooltip", BGCOLOR),
             "@tooltip-border-color":            constant(".k-tooltip", BORDERCOLOR),
             "@tooltip-text-color":              constant(".k-tooltip", COLOR),
@@ -166,18 +171,23 @@
                 "@disabled-text-color":           "Disabled text color"
             },
             "Tooltips": {
-                "@tooltip-background-color":  "Background",
-                "@tooltip-border-color":      "Border color",
-                "@tooltip-text-color":        "Text color",
+                "@tooltip-background-color":      "Background",
+                "@tooltip-border-color":          "Border color",
+                "@tooltip-text-color":            "Text color",
+            },
+            "Validation": {
+                "@validation-background-color":   "Background",
+                "@validation-border-color":       "Border color",
+                "@validation-text-color":         "Text color",
             },
             "Misc": {
-                "@main-border-radius":        "Border radius",
-                "@alt-background-color":      "Alternating color",
-                "@shadow-color":              "Shadow color",
-                "@shadow-inset-color":        "Inset shadow",
-                "@loading-panel-color":       "Loading panel background",
-                "@splitbar-background-color": "Splitbar background"
-            },
+                "@main-border-radius":            "Border radius",
+                "@alt-background-color":          "Alternating color",
+                "@shadow-color":                  "Shadow color",
+                "@shadow-inset-color":            "Inset shadow",
+                "@loading-panel-color":           "Loading panel background",
+                "@splitbar-background-color":     "Splitbar background"
+            }
         };
 
     var ThemeBuilderInterface = function() {
