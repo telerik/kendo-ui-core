@@ -311,6 +311,36 @@
 
                 equal(grid.tbody.find("tr>td:first").attr("colspan"), 3);
             });
+
+            test("text in grouping row uses column title", function() {
+                var dataSource = new DataSource({
+                    data: [{foo: "foo", bar: "bar"}, {foo: "foo1", bar: "baz"}],
+                    group: [{field: "foo"}]
+                }),
+                grid = new Grid(table(), { dataSource: dataSource, columns: [{field: "foo", title: "bar"}, "bar"] });
+
+                equal(grid.tbody.find("tr>td:first").text(), "bar: foo");
+            });
+
+            test("text in grouping row uses column field if no title set", function() {
+                var dataSource = new DataSource({
+                    data: [{foo: "foo", bar: "bar"}, {foo: "foo1", bar: "baz"}],
+                    group: [{field: "foo"}]
+                }),
+                grid = new Grid(table(), { dataSource: dataSource });
+
+                equal(grid.tbody.find("tr>td:first").text(), "foo: foo");
+            });
+
+            test("column format is applied on grouping row", function() {
+                var dataSource = new DataSource({
+                    data: [{foo: "foo", bar: "bar"}, {foo: "foo1", bar: "baz"}],
+                    group: [{field: "foo"}]
+                }),
+                grid = new Grid(table(), { dataSource: dataSource, columns: [{field: "foo", format: "{0}_bar"}, "bar"] });
+
+                equal(grid.tbody.find("tr>td:first").text(), "foo: foo_bar");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

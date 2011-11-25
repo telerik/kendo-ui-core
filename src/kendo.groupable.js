@@ -3,10 +3,10 @@
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
         CONTAINER_EMPTY_TEXT = "Drag a column header and drop it here to group by that column",
-        indicatorTmpl = kendo.template('<div class="k-group-indicator" data-#=data.ns#field="${data.field}" data-#=data.ns#dir="${data.dir || "asc"}">' +
+        indicatorTmpl = kendo.template('<div class="k-group-indicator" data-#=data.ns#field="${data.field}" data-#=data.ns#title="${data.title}" data-#=data.ns#dir="${data.dir || "asc"}">' +
                 '<a href="\\#" class="k-link">' +
                     '<span class="k-icon k-arrow-${(data.dir || "asc") == "asc" ? "up" : "down"}-small">(sorted ${(data.dir || "asc") == "asc" ? "ascending": "descending"})</span>' +
-                    '${data.field}' +
+                    '${data.title ? data.title: data.field}' +
                 '</a>' +
                 '<a class="k-button k-button-icon k-button-bare">' +
                     '<span class="k-icon k-group-delete"></span>' +
@@ -14,7 +14,7 @@
              '</div>',  { useWithBlock:false }),
         hint = function(target) {
             return $('<div class="k-header k-drag-clue" />')
-                .html(target.attr(kendo.attr("field")))
+                .html(target.attr(kendo.attr("field")) || target.attr(kendo.attr("field")))
                 .prepend('<span class="k-icon k-drag-status k-denied" />');
         },
         dropCue = $('<div class="k-grouping-dropclue"/>');
@@ -66,7 +66,7 @@
                 })
                 .delegate(".k-link", "click", function(e) {
                     var current = $(this).parent(),
-                        newIndicator = that.buildIndicator(current.attr(kendo.attr("field")), current.attr(kendo.attr("dir")) == "asc" ? "desc" : "asc");
+                        newIndicator = that.buildIndicator(current.attr(kendo.attr("field")), current.attr(kendo.attr("title")), current.attr(kendo.attr("dir")) == "asc" ? "desc" : "asc");
 
                     current.before(newIndicator).remove();
                     that._change();
@@ -110,7 +110,7 @@
                 that.dataSource.bind("change", function() {
                     groupContainer.empty().append(
                         $.map(this.group() || [], function(item) {
-                            return that.buildIndicator(item.field, item.dir);
+                            return that.buildIndicator(item.field, that.element.find(that.options.filter).filter("[" + kendo.attr("field") + "=" + item.field + "]").attr(kendo.attr("title")), item.dir);
                         }).join("")
                     );
                     that._invalidateGroupContainer();
@@ -128,8 +128,8 @@
                     return $(item).attr(kendo.attr("field")) === field;
                 })[0];
         },
-        buildIndicator: function(field, dir) {
-            return indicatorTmpl({ field: field, dir: dir, ns: kendo.ns });
+        buildIndicator: function(field, title, dir) {
+            return indicatorTmpl({ field: field, dir: dir, title: title, ns: kendo.ns });
         },
         descriptors: function() {
             var indicators = $(".k-group-indicator", this.groupContainer);
@@ -200,6 +200,7 @@
         _dragEnd: function(draggable, event) {
             var that = this,
                 field = event.currentTarget.attr(kendo.attr("field")),
+                title = event.currentTarget.attr(kendo.attr("title")),
                 sourceIndicator = that.indicator(field),
                 dropCuePositions = that._dropCuePositions,
                 lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
@@ -210,15 +211,15 @@
                     position = that._dropCuePosition(dropCue.offset().left + parseInt(lastCuePosition.element.css("marginLeft")) + parseInt(lastCuePosition.element.css("marginRight")));
                     if(that._canDrop($(sourceIndicator), position.element, position.left)) {
                         if(position.before) {
-                            position.element.before(sourceIndicator || that.buildIndicator(field));
+                            position.element.before(sourceIndicator || that.buildIndicator(field, title));
                         } else {
-                            position.element.after(sourceIndicator || that.buildIndicator(field));
+                            position.element.after(sourceIndicator || that.buildIndicator(field, title));
                         }
 
                         that._change();
                     }
                 } else {
-                    that.groupContainer.append(that.buildIndicator(field));
+                    that.groupContainer.append(that.buildIndicator(field, title));
                     that._change();
                 }
             } else {
