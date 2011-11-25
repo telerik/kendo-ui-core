@@ -1271,6 +1271,7 @@
          * @property {Boolean}
          */
         support.hasHW3D = "WebKitCSSMatrix" in window && "m11" in new WebKitCSSMatrix();
+        support.hasNativeScrolling = typeof document.documentElement.style.webkitOverflowScrolling == "string";
 
         each([ "Moz", "webkit", "O", "ms" ], function () {
             var prefix = this.toString();
@@ -1307,13 +1308,14 @@
                     match = ua.match(agentRxs[agent]);
                     if (match) {
                         os = {};
-                        os.name = agent.toLowerCase();
+                        os.device = agent;
+                        os.name = /^i(phone|pad|pod)$/i.test(agent) ? "ios" : agent;
                         os[os.name] = true;
                         os.majorVersion = match[2];
                         os.minorVersion = match[3].replace("_", ".");
                         os.flatVersion = os.majorVersion + os.minorVersion.replace(".", "");
                         os.flatVersion = os.flatVersion + (new Array(4 - os.flatVersion.length).join("0")); // Pad with zeroes
-                        os.ios = (agent in { iphone:0, ipod:0, ipad:0 });
+                        os.appMode = window.navigator.standalone || typeof window._nativeReady !== "undefined";
 
                         break;
                     }
@@ -1409,7 +1411,7 @@
             }
 
             if (options.completeCallback) {
-                options.completeCallback(); // call the external complete callback
+                options.completeCallback(element); // call the external complete callback with the element
             }
 
             element.dequeue();
@@ -1417,14 +1419,13 @@
 
         transitionPromise: function(element, destination, options) {
             var container = kendo.wrap(element);
-            kendo.wrap(container).css({overflow: "hidden"});
             container.append(destination);
 
             element.hide();
             destination.show();
 
             if (options.completeCallback) {
-                options.completeCallback(); // call the external complete callback
+                options.completeCallback(element); // call the external complete callback with the element
             }
 
             return element;
@@ -1474,9 +1475,14 @@
     }
 
     function animate(element, options, duration, reverse, complete) {
-        return element.queue(function () {
-            fx.promise(element, prepareAnimationOptions(options, duration, reverse, complete));
+        element.each(function (idx, el) { // fire separate queues on every element to separate the callback elements
+            el = $(el);
+            el.queue(function () {
+                fx.promise(el, prepareAnimationOptions(options, duration, reverse, complete));
+            });
         });
+
+        return element;
     }
 
     function animateTo(element, destination, options, duration, reverse, complete) {
@@ -1584,6 +1590,16 @@
                 return this.bind(value, callback)
             }
         });
+    }
+
+    if (support.touch) {
+        support.mousedown = "touchstart";
+        support.mouseup = "touchend";
+        support.mousemove = "touchmove";
+    } else {
+        support.mousemove = "mousemove";
+        support.mousedown = "mousedown";
+        support.mouseup = "mouseup";
     }
 
     var wrapExpression = function(members) {

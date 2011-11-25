@@ -21,9 +21,19 @@
 
         <script>
 
-            var ToggleButton = kendo.ui.MobileSwitch;
-            var CheckBox = kendo.ui.MobileCheckBox;
+            var ToggleButton = kendo.ui.MobileSwitch,
+                CheckBox = kendo.ui.MobileCheckBox,
+                MOUSEDOWN = kendo.support.mousedown,
+                MOUSEUP = kendo.support.mouseup;
 
+            QUnit.config.reorder = false;
+
+            var mouseDownEvent;
+            if (kendo.support.touch) {
+                mouseDownEvent = new $.Event(null, {type: MOUSEDOWN, changedTouches: [{identifier: 1, pageX: 100, pageY: 100}] });
+            } else {
+                mouseDownEvent = MOUSEDOWN;
+            }
             /* ToggleButton */
 
             test("ToggleButton can be initialized from input type='checkbox'", function() {
@@ -33,7 +43,7 @@
 
                 var togglebutton = new ToggleButton(dom);
 
-                ok(togglebutton.element.hasClass("k-toggle"), "Should have specified CSS class");
+                ok(togglebutton.element.hasClass("km-switch"), "Should have specified CSS class");
             });
 
             test("ToggleButton can be initialized from label only", function() {
@@ -43,7 +53,7 @@
 
                 var togglebutton = new ToggleButton(dom);
 
-                ok(togglebutton.element.hasClass("k-toggle"), "Should have specified CSS class");
+                ok(togglebutton.element.hasClass("km-switch"), "Should have specified CSS class");
             });
 
             test("ToggleButton reuses existing label", function() {
@@ -54,16 +64,16 @@
 
                 var togglebutton = new ToggleButton(dom);
 
-                ok(label.hasClass("k-toggle"), "Should reuse existing label around the checkbox");
+                ok(label.hasClass("km-switch"), "Should reuse existing label around the checkbox");
             });
 
-            test("ToggleButton creates a toggle handle and tip", function() {
+            test("ToggleButton creates a toggle handle, container, wrapper and background", function() {
                 expect(1);
 
                 var dom = $("<input type='checkbox'/>");
                 var togglebutton = new ToggleButton(dom);
 
-                ok((dom.parent().find(".k-toggle-handle").length && dom.parent().find(".k-toggle-tip").length), "Should create a handle and a tip");
+                ok((dom.parent().find(".km-switch-handle,.km-switch-container,.km-switch-wrapper,.km-switch-background").length == 4), "Should create a handle and a tip");
             });
 
             test("ToggleButton raises toggle event when changed", function() {
@@ -74,7 +84,7 @@
                 var togglebutton = new ToggleButton(dom);
 
                 togglebutton.bind("toggle", function() {
-                    ok(true, "Should raise the click event");
+                    ok(true, "Should raise the toggle event");
                 });
 
                 dom.change();
@@ -93,14 +103,14 @@
                 dom.change();
             });
 
-            test("ToggleButton should apply active state when pressed", function() {
+            test("ToggleButton applies active state when pressed", function() {
                 expect(1);
 
                 var dom = $("<input type='checkbox'/>");
                 var togglebutton = new ToggleButton(dom);
 
-                togglebutton.handle.mousedown();
-                ok(togglebutton.handle.hasClass("k-state-active"), "Should have active css class");
+                togglebutton.handle.trigger(mouseDownEvent);
+                ok(togglebutton.handle.hasClass("km-state-active"), "has active css class");
             });
 
             test("ToggleButton should remove active state when depressed", function() {
@@ -109,9 +119,9 @@
                 var dom = $("<input type='checkbox'/>");
                 var togglebutton = new ToggleButton(dom);
 
-                togglebutton.handle.mousedown();
-                togglebutton.handle.mouseup();
-                ok(!togglebutton.handle.hasClass("k-state-active"), "Should not have active css class");
+                togglebutton.handle.trigger(mouseDownEvent);
+                togglebutton.handle.trigger(MOUSEUP);
+                ok(!togglebutton.handle.hasClass("km-state-active"), "Should not have active css class");
             });
 
             test("ToggleButton should not apply active state when disabled", function() {
@@ -122,9 +132,9 @@
 
                 togglebutton.disable();
 
-                togglebutton.handle.mousedown();
+                togglebutton.handle.trigger(mouseDownEvent);
 
-                ok(!togglebutton.handle.hasClass("k-state-active"), "Should not have active css class");
+                ok(!togglebutton.handle.hasClass("km-state-active"), "Should not have active css class");
             });
 
             test("ToggleButton disable from configuration options", function() {
@@ -152,6 +162,8 @@
                     ok(true, "Should raise the toggle event");
                 });
 
+                togglebutton.toggle();
+
                 togglebutton.enable();
 
                 togglebutton.toggle();
@@ -167,7 +179,7 @@
 
                 var checkbox = new CheckBox(dom);
 
-                ok(checkbox.element.hasClass("k-checkbox"), "Should have specified CSS class");
+                ok(checkbox.element.hasClass("km-checkbox"), "Should have specified CSS class");
             });
 
             test("CheckBox can be initialized from label only", function() {
@@ -177,7 +189,7 @@
 
                 var checkbox = new CheckBox(dom);
 
-                ok(checkbox.element.hasClass("k-checkbox"), "Should have specified CSS class");
+                ok(checkbox.element.hasClass("km-checkbox"), "Should have specified CSS class");
             });
 
             test("CheckBox reuses existing label", function() {
@@ -188,7 +200,7 @@
 
                 var checkbox = new CheckBox(dom);
 
-                ok(label.hasClass("k-checkbox"), "Should reuse existing label around the checkbox");
+                ok(label.hasClass("km-checkbox"), "Should reuse existing label around the checkbox");
             });
 
             test("CheckBox raises toggle event when changed", function() {
@@ -224,8 +236,8 @@
                 var dom = $("<input type='checkbox'/>");
                 var checkbox = new CheckBox(dom);
 
-                checkbox.handle.mousedown();
-                ok(checkbox.handle.hasClass("k-state-active"), "Should have active css class");
+                checkbox.handle.trigger(MOUSEDOWN);
+                ok(checkbox.handle.hasClass("km-state-active"), "Should have active css class");
             });
 
             test("CheckBox should remove active state when depressed", function() {
@@ -234,9 +246,9 @@
                 var dom = $("<input type='checkbox'/>");
                 var checkbox = new CheckBox(dom);
 
-                checkbox.handle.mousedown();
-                checkbox.handle.mouseup();
-                ok(!checkbox.handle.hasClass("k-state-active"), "Should not have active css class");
+                checkbox.handle.trigger(mouseDownEvent);
+                checkbox.handle.trigger(MOUSEUP);
+                ok(!checkbox.handle.hasClass("km-state-active"), "Should not have active css class");
             });
 
             test("CheckBox should not apply active state when disabled", function() {
@@ -247,9 +259,9 @@
 
                 checkbox.disable();
 
-                checkbox.handle.mousedown();
+                checkbox.handle.trigger(mouseDownEvent);
 
-                ok(!checkbox.handle.hasClass("k-state-active"), "Should not have active css class");
+                ok(!checkbox.handle.hasClass("km-state-active"), "Should not have active css class");
             });
 
             test("CheckBox disable from configuration options", function() {

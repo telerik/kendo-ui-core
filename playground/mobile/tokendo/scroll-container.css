@@ -1,4 +1,4 @@
-.touch-scrollbar
+.km-touch-scrollbar
 {
     position: absolute;
     visibility: hidden;
@@ -19,31 +19,24 @@
     border-radius: .4em;
 }
 
-.vertical-scrollbar
+.km-vertical-scrollbar
 {
     height: 100%;
     right: 1px;
     top: 0;
 }
 
-.horizontal-scrollbar
+.km-horizontal-scrollbar
 {
     width: 100%;
     left: 0;
     bottom: 1px;
 }
 
-.k-scroll-container
+.km-scroll-container
 {
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
-/*
-    background: #FFF;
-    -webkit-transform: translate3d(0,0,0);
-    -webkit-perspective: 1000;
-    -webkit-box-shadow: 0 0 1em #000;
-    box-shadow: 0 0 1em #000;
-*/
 }
 

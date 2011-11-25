@@ -6,10 +6,9 @@
         support = kendo.support,
         touch = support.touch,
         os = support.mobileOS,
-        MOUSEDOWN = touch ? "touchstart" : "mousedown",
-        MOUSEUP = touch ? "touchend" : "mouseup",
+        MOUSEDOWN = support.mousedown,
+        MOUSEUP = support.mouseup,
         CLICK = "click",
-        extend = $.extend,
         proxy = $.proxy;
 
     var MobileButton = MobileWidget.extend({
@@ -22,69 +21,62 @@
 
             that._wrap();
 
-            that._clickProxy = proxy(that._click, that);
+            that._releaseProxy = proxy(that._release, that);
 
-            that._pressProxy = proxy(that._press, that);
+            that.element.bind(MOUSEUP, that._releaseProxy);
 
-            that.enable(options.enable);
-
-            that.bind([
-                CLICK
-            ], options);
+            that.bind([CLICK], options);
         },
 
         options: {
             name: "MobileButton",
+            style: "",
+            selector: kendo.roleSelector("button"),
             enable: true
         },
 
-        enable: function(enable) {
-            var that = this;
-
-            enable = enable === undefined ? true: enable;
-
-            if (enable) {
-                that.element
-                    .bind(CLICK, that._clickProxy)
-                    .bind(MOUSEDOWN, that._pressProxy)
-                    .bind(MOUSEUP, that._pressProxy);
-            } else {
-                that.element
-                    .unbind(CLICK, that._clickProxy)
-                    .unbind(MOUSEDOWN, that._pressProxy)
-                    .unbind(MOUSEUP, that._pressProxy);
+        _release: function(e) {
+            if (this.trigger(CLICK, {target: $(e.target)})) {
+                e.preventDefault();
             }
-        },
-
-        disable: function () {
-            this.enable(false);
-        },
-
-        _press: function (e) {
-            this.element.toggleClass("k-state-active", e.type === MOUSEDOWN);
-        },
-
-        _click: function(e) {
-            this.trigger(CLICK);
         },
 
         _wrap: function() {
             var that = this,
+                style = that.options.style,
                 element = that.element,
                 span;
 
-            span = element.addClass("k-button")
+            span = element.addClass("km-button")
                           .children("span");
+
+            if (style) {
+                element.addClass("km-" + style);
+            }
 
             if (!span[0]) {
                 span = element.wrapInner("<span/>").children("span");
             }
 
-            span.addClass("k-text")
+            span.addClass("km-text")
                 .find("img")
-                .addClass("k-image");
+                .addClass("km-image");
+        }
+    });
+
+    var BackButton = MobileButton.extend({
+        options: {
+            name: "MobileBackButton",
+            style: "back",
+            selector: kendo.roleSelector("back-button"),
+        },
+
+        init: function(element, options) {
+            MobileButton.fn.init.call(this, element, options);
+            this.element.attr("href", ":back");
         }
     });
 
     ui.plugin(MobileButton);
+    ui.plugin(BackButton);
 })(jQuery);

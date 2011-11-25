@@ -1,150 +1,307 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>kendo.mobile.Application Tests</title>
+        <title>kendo.application tests</title>
         <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
-        <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.scroller.js"></script>
-        <script src="../../src/kendo.mobile.application.js"></script>
-        <script src="../../src/kendo.mobile.view.js"></script>
-        <script src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
-        <h1 id="qunit-header">kendo.mobile.Application Tests</h1>
+        <h1 id="qunit-header">kendo.application Tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
-
         <script>
-            module("kendo.mobile globals", {
+            var application;
+
+            QUnit.config.testTimeout = 500;
+            QUnit.config.reorder = false;
+
+            module("kendo.Application", {
                 setup: function() {
+                    kendo.ns = "kendo-";
+                    location.hash = '';
                     $.mockjaxSettings.responseTime = 0;
                     $.mockjaxSettings.contentType = "text/html";
-                    $.mockjax({
-                        url: "foo",
-                        responseText: "mockjax response"
-                    });
                 },
+
                 teardown: function() {
                     $.mockjaxClear();
-                    $("meta,.k-view").remove();
+                    kendo.history.stop();
                 }
             });
 
-            test("init() sets application icon meta tag", function() {
-                kendo.mobile.init({
-                    icon: "application.png"
+            function setup(html) {
+                $("#qunit-fixture").html(html);
+                application = new kendo.Application($("#qunit-fixture"));
+                application.start();
+            }
+
+            test("switches to local view", function() {
+                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+                application.navigate("#page2");
+                ok(!$("#page1").is(":visible"), "First page is hidden");
+                ok($("#page2").is(":visible"), "Second page is visible");
+            });
+
+            asyncTest("switches to remote view", function() {
+                expect(3);
+
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<body><div data-kendo-role="view" id="page2">Page 2</div></body>'
                 });
 
-                var iconLinkTag = $("link[rel=apple-touch-icon]");
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
 
-                equals(iconLinkTag.length, 1);
-                equals(iconLinkTag.attr("href"), "application.png");
-            });
-
-            test("init() sets viewport meta tag", function() {
-                kendo.mobile.init({});
-
-                var viewportTag = $("meta[name=viewport]");
-
-                equals(viewportTag.length, 1);
-                equals(viewportTag.attr("content"), "initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width");
-            });
-
-            asyncTest("switchView() adds view to page", function() {
-                kendo.mobile.switchView("foo", function() {
-                    equals($('.k-view').length, 1);
+                application.bind("viewShow", function() {
                     start();
+                    ok(!$("#page1").is(":visible"), "First page is hidden");
+                    ok($("#page2").is(":visible"), "Second page is present");
+                    equal($("#qunit-fixture").has("#page2").length, 1, "Remote view is inserted in the application DOM element");
                 });
+
+                application.navigate("page2.html");
             });
 
-            asyncTest("switchView() loads remote partial content", function() {
-                kendo.mobile.switchView("foo", function() {
-                    equals($('.k-view').text(), "mockjax response");
-                    start();
-                });
-            });
+            asyncTest("reuses an already loaded remote page", function() {
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
 
-            asyncTest("switchView() does not add the same view twice", function() {
-                kendo.mobile.switchView("foo", function() {
-                    kendo.mobile.switchView("foo", function() {
-                        equals($('.k-view').length, 1);
-                        start();
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                });
+
+                application.navigate("page2.html");
+
+                application.bind("viewShow", function() {
+                    application.unbind("viewShow");
+
+                    application.navigate("#page1");
+
+                    $.mockjaxClear();
+
+                    $.mockjax({
+                        url: "page2.html",
+                        response: function() {
+                            start();
+                            ok(false, "Does not make second ajax request");
+                        }
                     });
+
+                    application.bind("viewShow", function() {
+                        start();
+                        ok($("#page2").is(":visible"), "Second page is present");
+                    });
+
+                    application.navigate("page2.html");
                 });
             });
 
-            test("isFullPage() returns false for arbitrary content", function() {
-                ok(!kendo.mobile.isFullPage("<a href='#'>foo</a>"));
+            asyncTest("switches to partial remote view", function() {
+                expect(2);
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                });
+
+                application.bind("viewShow", function() {
+                    start();
+                    ok(!$("#page1").is(":visible"), "First page is hidden");
+                    ok($("#page2").is(":visible"), "Second page is present");
+                });
+
+                application.navigate("page2.html");
             });
 
-            test("isFullPage() returns true for content that starts with doctype", function() {
-                ok(kendo.mobile.isFullPage("<!DOCTYPE html><html><head></head><body></body></html>"));
-            });
-
-            test("encodeScripts() encodes script tag", function() {
-                var encoded = kendo.mobile.encodeScripts("<script>alert(1)<\/script>");
-
-                equals(encoded, "<kendo:script>alert(1)</kendo:script>");
-            });
-
-            test("encodeScripts() encodes multiple script tags", function() {
-                var encoded = kendo.mobile.encodeScripts("<script>alert(1)<\/script><script>alert(1)<\/script>");
-
-                equals(encoded, "<kendo:script>alert(1)</kendo:script><kendo:script>alert(1)</kendo:script>");
-            });
-
-            test("encodeScripts() encodes script tag with src", function() {
-                var encoded = kendo.mobile.encodeScripts("<script src='foo.js'><\/script>");
-
-                equals(encoded, "<kendo:script src='foo.js'></kendo:script>");
-            });
-
-            test("decodeScripts() decodes script tag", function() {
-                var initialScript = "<script>alert(1)<\/script>",
-                    encoded = kendo.mobile.encodeScripts(initialScript);
-
-                equals(kendo.mobile.decodeScripts(encoded), initialScript);
-            });
-
-            asyncTest("switchView() loads pages with newlines in them", function() {
-                $.mockjaxClear();
+            asyncTest("deals with various newline characters when loading remote view", function() {
+                expect(1);
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
 
                 $.mockjax({
-                    url: "foo",
-                    responseText: "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n"
-                                + "<div class='k-view'></div>\n\u000a</body>\n</html>"
+                    url: "page2.html",
+                    responseText: '<html><head></head><body><div id="page2" data-kendo-role="view">View\n\u000a\u000a\u000d\u2028\u2029</div></body>\r\n</html>'
                 });
 
-                kendo.mobile.switchView("foo", function() {
-                    ok($(".k-view").length >= 1);
+                application.bind("viewShow", function() {
                     start();
+                    ok($("#page2").is(":visible"), "Second page is loaded");
                 });
+
+                application.navigate("page2.html");
             });
 
-            asyncTest("switchPage() loads multiple views", function() {
-                $.mockjaxClear();
+            test("raises viewInit for the local view", function() {
+                expect(1);
+
+                $("#qunit-fixture").html('<div data-kendo-role="view" id="page1">Page 1</div>');
+                application = new kendo.Application($("#qunit-fixture"));
+                application.bind("viewInit", function(e) {
+                    equal(e.view.element[0], $("#page1")[0], "Event is raised");
+                });
+
+                application.start();
+            });
+
+            test("raises viewInit when switching to a local view", function() {
+                expect(1);
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+
+                application.bind("viewInit", function(e) {
+                    equal(e.view.element[0], $("#page2")[0], "Event is raised");
+                });
+
+                application.navigate("#page2");
+            });
+
+            test("raises viewHide when switching to a local view", function() {
+                expect(1);
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+
+                application.bind("viewHide", function(e) {
+                    equal(e.view.element[0], $("#page1")[0], "Event is raised");
+                });
+
+                application.navigate("#page2");
+            });
+
+            asyncTest("raises viewInit when switching to a remote view", function() {
+                expect(1);
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
 
                 $.mockjax({
-                    url: "foo",
-                    responseText: "<!doctype html>"
-                                + "<html><body>"
-                                + "<div class='k-view'>1</div><div class='k-view'>2</div>"
-                                + "</body></html>"
+                    url: "page2.html",
+                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
                 });
 
-                kendo.mobile.switchView("foo", function() {
-                    equals($(".k-view").length, 2);
+                application.bind("viewInit", function(e) {
                     start();
+                    equal(e.view.element[0], $("#page2")[0], "Event is raised");
                 });
+
+                application.navigate("page2.html");
             });
+
+            test("does not raise viewInit for already initialized local view", function() {
+                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+
+                application.navigate("#page2");
+
+                application.bind("viewInit", function(e) {
+                    ok(false, "Does not raise event");
+                });
+
+                application.navigate("#page1");
+            });
+
+            asyncTest("does not raise viewInit for already initialized remote view", function() {
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                });
+
+                application.bind("viewShow", function() {
+                    start();
+
+                    application.unbind("viewShow");
+
+                    application.navigate("#page1");
+
+                    application.bind("viewInit", function(e) {
+                        ok(false, "Does not raise event");
+                    });
+
+                    application.navigate("page2.html");
+                });
+
+                application.navigate("page2.html");
+            });
+
+            test("calls enhance when a view is changed", function() {
+                expect(1);
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+
+                kendo.mobile = {};
+
+                stub(kendo.mobile, "enhance");
+
+                application.navigate("#page2");
+
+                equal(kendo.mobile.calls("enhance"), 1, "Calls kendo.mobile.enhance");
+            });
+
+            test("calls enhance when started", function() {
+                expect(1);
+
+                kendo.mobile = {};
+
+                stub(kendo.mobile, "enhance");
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+
+                equal(kendo.mobile.calls("enhance"), 1, "Calls kendo.mobile.enhance");
+            });
+
+            asyncTest("does not raise error when trying to change to remote view starting with slash", function() {
+                expect(1);
+
+                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+
+                $.mockjax({
+                    url: "/page2",
+                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                });
+
+                application.bind("viewInit", function(e) {
+                    start();
+                    equal(e.view.element[0], $("#page2")[0], "Event is raised");
+                });
+
+                application.navigate("/page2");
+            });
+
+            test("uses content container if present", function() {
+                setup('<div data-kendo-role="view" id="page1"><div data-kendo-role="content">Header</div></div>');
+                equal($("#page1").find("[data-kendo-role=content]").length, 1);
+            });
+
+            test("uses fixed header and footer if id is identical", function() {
+            setup('<div data-kendo-role="view" id="page1">Page 1<div data-kendo-role="footer" id="footer-a" data-id="global">Footer a</div></div> \
+                   <div data-kendo-role="view" id="page2">Page 2<div data-kendo-role="footer" id="footer-b" data-id="global">Footer b</div></div>');
+
+                application.navigate("#page2");
+
+                equal(application.view.footer.text(), "Footer a", "fixed footer is visible");
+            });
+
+            test("passes url params to the view show event", function() {
+                setup('<div data-kendo-role="view" id="page1">Page 1</div><div id="page2" data-kendo-role="view"></div>');
+                application.bind("viewShow", function(e) {
+                    equal(e.view.element.attr("id"), "page2");
+                    equal(e.params.foo, "bar");
+                });
+
+                application.navigate("#page2?foo=bar");
+            });
+
         </script>
     </body>
 </html>
-

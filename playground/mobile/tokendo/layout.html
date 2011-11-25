@@ -5,94 +5,141 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta content="minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
     
+    <!-- Weinre Proxy, configure to your machine if you have it. -->
+    <!--<script src="http://bundev.telerik.com:8080/target/target-script-min.js"></script>-->
     <link rel="apple-touch-icon" href="images/kendo.png" />
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <link rel="stylesheet/less" type="text/css" href="layout.less">
-    <link rel="stylesheet" href="scroll-container.css" />
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/layout.less">
 
-    <script src="../examples/less.js"></script>
+    <script src="../../../styles/mobile/less.js"></script>
     <script src="../../../src/jquery.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.fx.js"></script>
-    <script src="../../../src/kendo.scroller.js"></script>
+    <script src="../../../src/kendo.history.js"></script>
     <script src="../../../src/kendo.mobile.core.js"></script>
     <script src="../../../src/kendo.mobile.button.js"></script>
     <script src="../../../src/kendo.mobile.switch.js"></script>
+    <script src="../../../src/kendo.mobile.scroller.js"></script>
+    <script src="../../../src/kendo.mobile.radiogroup.js"></script>
+    <script src="../../../src/kendo.mobile.navbar.js"></script>
+    <script src="../../../src/kendo.mobile.tabstrip.js"></script>
+    <script src="../../../src/kendo.mobile.listview.js"></script>
     <script src="../../../src/kendo.mobile.application.js"></script>
-    <script src="../../../src/kendo.mobile.view.js"></script>
 
     <style type="text/css">
-        .k-content
+        .km-content
         {
             background: silver;
         }
-        .k-contentIn
+
+        .km-android .km-content
         {
-            padding: 20px;
-            background: transparent;
+            background: #000;
+        }
+
+        .sliderValue
+        {
+            float: right;
+            width: 10em;
+            width: 10rem;
+            height: 40px;
+            border-radius: 5px;
+            font-size: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #000;
+            background: #fff;
+            border: 1px solid #999;
+            margin: .2em .4em 0 .2em;
+            clear: both;
+        }
+
+        .km-android .sliderValue
+        {
+            color: #fff;
+            background: #000;
+            border-color: #555;
         }
     </style>
 </head>
 <body>
-    <div class="k-slot">
-        <div class="k-showcase">
-            <div class="k-view">
-                <div class="k-header">
-                    <div class="k-toolbar">
-                        <button style="float: right"><span>About</span></button>
-                    </div>
-                </div>
-
-                <div class="k-content">
-                    <div class="k-contentIn">
-                        <div class="k-buttonStrip">
-                            <button class="active">
-                                <span>Button 1</span>
-                            </button>
-                            <button>
-                                <span>Button 2</span><span class="msg">3</span>
-                            </button>
-                            <button>
-                                <span>Button 3</span>
-                            </button>
-                        </div>
-                        <br>
-                        Show message: <input type="checkbox" id="toggle" />
-                        <input id="checky" type="checkbox" />
-                        <br><br>
-                        <button id="button">Init Button</button>
-
-                        <input type="checkbox" />
-                        <input type="radio" />
-
-                        <input type="checkbox" name="one" />
-                        <input type="checkbox" name="one" />
-                        <input type="checkbox" name="one" />
-
-                        <input type="radio" name="two" />
-                        <input type="radio" name="two" />
-                        <input type="radio" name="two" />
-                    </div>
-                </div>
+    <article data-kendo-role="view">
+        <header data-kendo-role="header">
+            <div data-kendo-role="navbar">
+                <span data-kendo-role="view-title">Layout</span>
+                <button data-kendo-role="button" data-kendo-align="right">About</button>
             </div>
-        </div>
-    </div>
-    <div class="k-tabStrip">
-        <button class="k-state-active">
-            <span class="k-icon"></span><span>Featured</span>
-        </button>
-        <button>
-            <span class="k-icon"></span><span>Genius</span><span class="k-message">3</span>
-        </button>
-        <button>
-            <span class="k-icon"></span><span>Top Charts</span>
-        </button>
-        <button>
-            <span class="k-icon"></span><span>Categories</span>
-        </button>
-    </div>
+        </header>
+
+        <content data-kendo-role="content">
+            <ul data-kendo-role="listview">
+                <li>Albania<input type="checkbox" data-kendo-role="switch" /></li>
+                <li>Australia<input type="checkbox" data-kendo-role="switch" /></li>
+            </ul>
+            <div class="sliderValue">0</div>
+            <span class="km-slider" style="float: right; clear: both;"></span>
+            <ul data-kendo-role="listview" data-kendo-style="inset">
+                <li>Albania</li>
+                <li>Australia</li>
+            </ul>
+            <ul data-kendo-role="listview" data-kendo-type="group">
+                <li>A
+                    <ul>
+                        <li>Albania<input type="checkbox" data-kendo-role="switch" /></li>
+                        <li>Australia<input type="checkbox" data-kendo-role="switch" /></li>
+                    </ul>
+                </li>
+                <li>B
+                    <ul>
+                        <li>Bangladesh</li>
+                        <li>Bulgaria</li>
+                    </ul>
+                </li>
+            </ul>
+            <ul data-kendo-role="listview" data-kendo-type="group" data-kendo-style="inset">
+                <li>A
+                    <ul>
+                        <li>Albania<input type="checkbox" data-kendo-role="switch" /></li>
+                        <li>Australia</li>
+                    </ul>
+                </li>
+                <li>B
+                    <ul>
+                        <li>Bangladesh</li>
+                        <li>Bulgaria</li>
+                    </ul>
+                </li>
+            </ul>
+
+            Show message: <input type="checkbox" id="toggle" />
+            <input id="checky" type="checkbox" />
+            <div id="radio">
+                <label for="radio1">Test 1</label>
+                <input id="radio1" type="radio" name="three" />
+                <label>Test 2
+                    <input type="radio" name="three" />
+                </label>
+            </div>
+            <label for="radioz">Test 1</label>
+            <input id="radioz" type="radio" name="two" />
+            <label>Test 2
+                <input type="radio" name="two" />
+            </label>
+            <input type="radio" name="two" />
+            <br><br>
+            <button id="button">Select Random Radio</button>
+        </content>
+        <footer data-kendo-role="footer">
+            <div data-kendo-role="tabstrip">
+                <a href="#">Featured</a>
+                <a href="#">Genius<span class="km-message">3</span></a>
+                <a href="#">Top Charts</a>
+                <a href="#">Categories</a>
+            </div>
+        </footer>
+    </article>
     <script>
         $(document)
             .bind("appinit", function (e, args) {
@@ -102,9 +149,43 @@
     //                console.log("viewinit", args);
             });
 
-        var toggle = $("#toggle").kendoMobileToggleButton().data("kendoMobileToggleButton");
-        var checky = $("#checky").kendoMobileCheckBox().data("kendoMobileCheckBox");
-        var button = $("#button").kendoMobileButton().data("kendoMobileButton");
+        function onToggle(e) {
+//            console.log(e);
+        }
+
+        function onSlide(e) {
+            $(".sliderValue").text(e.value);
+        }
+
+        function onClick(e) {
+            toggle.toggle();
+            radiogroup.select(Math.round(Math.random()*2));
+        }
+
+        var toggle = $("#toggle,[data-kendo-role=switch]").kendoMobileSwitch({ toggle: onToggle }).data("kendoMobileSwitch"),
+//            checky = $("#checky").kendoMobileCheckBox().data("kendoMobileCheckBox"),
+//            button = $("#button, header button").kendoMobileButton({ click: onClick }).data("kendoMobileButton"),
+            radio = $("#radio").kendoMobileRadioGroup({ enable: false }).data("kendoMobileRadioGroup"),
+            radiogroup = $("#radioz").kendoMobileRadioGroup({ toggle: onToggle }).data("kendoMobileRadioGroup"),
+//            tabStrip = $("#tabstrip").kendoMobileTabstrip().data("kendoMobileTabstrip"),
+            slider = $(".km-slider").kendoMobileSlider({ slide: onSlide, change: onSlide }).data("kendoMobileSlider");
+
+        $(document).ready(function () {
+            var listviews = $("[data-kendo-role=listview]");
+            listviews
+                    .addClass("km-listview")
+                    .find("li:not(:has(ul))")
+                    .parent("ul")
+                    .addClass("km-list");
+
+            $("[data-kendo-style=inset]:not([data-kendo-type=group])").addClass("km-listinset");
+            $("[data-kendo-type=group]:not([data-kendo-style=inset])").addClass("km-listgroup");
+            $("[data-kendo-type=group][data-kendo-style=inset]").addClass("km-listinsetgroup");
+        });
+
+        kendo.application.bind("viewShow", function(e) {
+            kendo.mobile.enhance(e.view.content);
+        });
 
     </script>
 </body>

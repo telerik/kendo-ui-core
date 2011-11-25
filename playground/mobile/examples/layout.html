@@ -29,7 +29,7 @@
                 var target = kendo.eventTarget(e);
 
                 $(target)
-                    .parents(".buttonStrip, .tabStrip, .toolbar")
+                    .parents(".radiogroup, .tabStrip, .toolbar")
                     .find(".active")
                     .removeClass("active");
 
@@ -69,7 +69,7 @@
         </div>
         <div class="content">
             <div class="contentInternal">
-                <div class="buttonStrip">
+                <div class="radiogroup">
                     <button class="button active">
                         <span class="txt">Button 1</span>
                     </button>

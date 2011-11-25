@@ -1,0 +1,113 @@
+.added {
+    color: green;
+    font-size: .8rem;
+}
+
+.item-list .km-list > li {
+    height: 7rem;
+}
+
+.item-list img,
+#details img
+{
+    border-radius: 8px;
+    -webkit-box-shadow: 0 2px 3px #333;
+    box-shadow: 0 2px 3px #333;
+    width: 4.2em;
+    height: 4.2em;
+    float: left;
+    margin-right: 1rem;
+}
+
+.item-list h2 {
+    font-size: 1.0rem;
+    margin: 0;
+}
+
+.item-list a.km-button {
+    float: right;
+    margin-top: 2rem;
+}
+
+.item-list a.details-link {
+    display: block;
+    text-decoration: none;
+}
+
+.km-ios .km-tabstrip .km-button .km-icon {
+    background-image: url('images/tabstrip.png');
+    background-size: auto 100%;
+}
+
+.km-ios .km-tabstrip .km-button:nth-child(1) .km-icon
+{
+    background-position: 0 50%;
+}
+
+.km-ios .km-tabstrip .km-button:nth-child(2) .km-icon
+{
+    background-position: 32% 50%;
+}
+
+.km-ios .km-tabstrip .km-button:nth-child(3) .km-icon
+{
+    background-position: 66% 50%;
+}
+
+.km-ios .km-tabstrip .km-button:nth-child(4) .km-icon
+{
+    background-position: 99% 50%;
+}
+
+.price {
+    color: #787878;
+    text-shadow: 1px 1px white;
+    font-size: 0.8rem;
+    display: block;
+}
+
+#details .km-content {
+    background: #ebebeb;
+    padding: 1rem;
+    -webkit-box-sizing: border-box;
+}
+
+#details .km-content p {
+    margin-top: 1rem;
+    font-size: .9rem;
+    line-height: 1.2rem;
+    font-weight: normal;
+    text-shadow: 1px 1px white;
+}
+
+#details .km-content aside {
+    float: left;
+    margin-right: 1rem;
+}
+
+#details img {
+    width: 8.4em;
+    height: 8.4em;
+    margin-bottom: 1rem;
+}
+
+#details .km-content aside .km-button {
+    margin-left: 2rem;
+}
+
+#details .km-content aside .price {
+    display: block;
+    margin-bottom: 1rem;
+    margin-left: 4rem;
+}
+
+.details-link {
+    color: black;
+}
+
+#checkout {
+    margin: 1rem;
+    display: block;
+    text-align: center;
+    font-size: 2rem;
+}

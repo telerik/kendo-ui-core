@@ -1,0 +1,180 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>kendo.ui.MobileListView DataBinding Tests</title>
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.model.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.mobile.core.js"></script>
+        <script src="../../../src/kendo.mobile.listview.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.MobileListView DataBinding Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var ListView = kendo.ui.MobileListView;
+
+            module("mobile listview", {
+                setup: function() {
+
+                },
+                teardown: function() {
+
+                }
+            });
+
+            test("binds to flat datasource", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: [1, 2]
+                });
+
+                equal(dom.children().length, 2);
+            });
+
+            test("default template expects string as data item", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: [1, 2]
+                });
+
+                equal(dom.children().first().text(), "1");
+            });
+
+            test("uses custom template", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: [ { text: "foo" } ],
+                    template: "#= text #"
+                });
+
+                equal(dom.children().first().text(), "foo");
+            });
+
+            test("default template escapes html entities", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: ["<i>"]
+                });
+
+                equal(dom.children().first().html(), "&lt;i&gt;");
+            });
+
+            test("custom template as function", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: [ { text: "foo" }],
+                    template: function(data) {
+                        return data.text;
+                    }
+                });
+
+                equal(dom.children().first().html(), "foo");
+            });
+
+            var dom, dataSource, listView, subList, data;
+
+            module("grouped datasource", {
+                setup: function() {
+                    data = [{foo: "Foo", bar: "Bar"}, {foo: "Foo", bar: "Baz"}];
+                    dom = $("<ul/>");
+
+
+                    dataSource = new kendo.data.DataSource({data: data, group: {field: "foo"}});
+                    listView = new ListView(dom, {dataSource: dataSource, template: "${bar}", headerTemplate: "<i>${value}</i>"});
+                    subList = dom.find("li>ul");
+                },
+
+                teardown: function() { }
+            });
+
+            test("detects grouped datasource", function() {
+                equal(listView.options.type, "group");
+            });
+
+            test("styles root element correctly", function() {
+                ok(!dom.is(".km-list"));
+            });
+
+            test("uses group values for headers", function() {
+                equal(dom.find("li").contents().eq(0).text(), "Foo");
+            });
+
+            test("creates sublists", function() {
+                equal(subList.length, 1, "sublist is created");
+                ok(subList.is(".km-list"), "sublist class is applied");
+            });
+
+            test("populates sublists with items", function() {
+                equal(subList.find("li").length, 2);
+                equal(subList.find("li").eq(0).text(), "Bar");
+                equal(subList.find("li").eq(1).text(), "Baz");
+            });
+
+            test("accepts custom header template", function() {
+                ok(dom.find("li").eq(0).children(0).is("i"), "item has custom header");
+            });
+
+            test("accepts function as a custom header template", function() {
+                dom = $("<ul/>");
+                listView = new ListView(dom, {dataSource: dataSource, template: "${bar}", headerTemplate: function(data) { return "<i>" + data + "</i>" }});
+                ok(dom.find("li").eq(0).children(0).is("i"), "item has custom header");
+            });
+
+            test("data-id attribute is rendered for each row when model is defined", function() {
+                dom = $("<ul/>");
+                listView = new ListView(dom, {
+                    dataSource: {schema: {model: {id: "foo"}}, data: [{foo: "bar"}]}
+                });
+
+                equal(dom.find("li").data("id"), "bar");
+            });
+
+            test("data-id attribute is rendered for each row when model id is defined as a function", function() {
+                dom = $("<ul/>");
+                listView = new ListView(dom, {
+                    dataSource: {schema: {model: {id: function(data) { return data.foo }}}, data: [{foo: "bar"}]}
+                });
+
+                equal(dom.find("li").data("id"), "bar");
+            });
+
+            test("databound item passes the dataitem in the event when clicked", function() {
+                expect(1);
+                var model = {foo: "bar"},
+                    link,
+                    dataSource = {schema: {model: {id: "foo"}}, data: [model]};
+
+                dom = $("<ul/>");
+
+                listView = new ListView(dom, {dataSource: dataSource});
+
+                listView.bind("click", function(e) {
+                    equal(e.dataItem.foo, model.foo, "event passes the model as data item");
+                });
+
+                link = dom.find("li");
+
+                link.trigger(kendo.support.mousedown);
+                link.trigger(kendo.support.mouseup);
+            });
+        </script>
+    </body>
+</html>

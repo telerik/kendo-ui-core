@@ -8,7 +8,6 @@
         hashChangeSupported = ("onhashchange" in window) && !oldIE,
         document            = window.document;
 
-
     var History = kendo.Observable.extend({
 
         start: function(options) {
@@ -18,25 +17,23 @@
 
             that._pushStateRequested = !!options.pushState;
             that._pushState = that._pushStateRequested && that._pushStateSupported();
-            that.current = this._currentLocation();
             that.root = options.root || "/";
             that._interval = 0;
 
-
+            this.bind(["change", "ready"], options);
             if (that._normalizeUrl()) {
                 return true;
             }
 
+            that.current = that._currentLocation();
             that._listenToLocationChange();
-            if (!options.silent) {
-                that._checkUrl();
-            }
+            that.trigger("ready", this.url());
         },
 
         stop: function() {
             $(window).unbind(".kendo");
             this.unbind("change");
-            this.current = "/";
+            this.unbind("ready");
             clearInterval(this._interval);
         },
 
@@ -126,6 +123,11 @@
         navigate: function(to, silent) {
             var that = this;
 
+            if (to === ':back') {
+                history.back();
+                return;
+            }
+
             to = to.replace(hashStrip, '');
 
             if (that.current === to || that.current === decodeURIComponent(to)) {
@@ -140,8 +142,23 @@
             }
 
             if (!silent) {
-                that.trigger("change", { location: that.current });
+                that.trigger("change", that.url());
             }
+        },
+
+        url: function() {
+            var parts = this.current.split('?'),
+                url = {location: parts[0], params: {}, string: this.current},
+                paramParts = (parts[1] || "").split(/&|=/),
+                length = paramParts.length,
+                idx = 0,
+                params = {};
+
+            for (; idx < length; idx += 2) {
+                url.params[paramParts[idx]] = paramParts[idx + 1];
+            }
+
+            return url;
         }
     });
 

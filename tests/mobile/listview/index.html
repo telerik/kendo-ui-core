@@ -1,0 +1,187 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>kendo.ui.MobileListView Tests</title>
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.mobile.core.js"></script>
+        <script src="../../../src/kendo.mobile.listview.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.MobileListView Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var ListView = kendo.ui.MobileListView;
+
+            module("mobile listview", {
+                setup: function() {
+                    kendo.ns = "kendo-";
+                },
+                teardown: function() {
+
+                }
+            });
+
+            test("name is MobileListView", function() {
+                equal(ListView.fn.options.name, "MobileListView", "Name is properly set");
+            });
+
+            test("applies css classes", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom);
+
+                ok(dom.is(".km-listview"), "Css class is applied");
+                ok(dom.is(".km-list"), "Css class is applied");
+                ok(!dom.is(".km-listgroup"), "Css class is not applied");
+            });
+
+            test("applies inset css classes", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, { style: "inset" });
+
+                ok(dom.is(".km-listview"), "Css class is applied");
+                ok(dom.is(".km-list"), "Css class is applied");
+                ok(dom.is(".km-listinset"), "Css class is applied");
+            });
+
+            test("applies group css classes", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, { type: "group" });
+
+                ok(dom.is(".km-listview"), "Css class is applied");
+                ok(dom.is(".km-listgroup"), "Css class is applied");
+                ok(!dom.is(".km-list"), "Css class is not applied");
+            });
+
+            test("applies group and inset css classes", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, { type: "group", style: "inset" });
+
+                ok(dom.is(".km-listview"), "Css class is applied");
+                ok(dom.is(".km-listgroupinset"), "Css class not applied");
+                ok(!dom.is(".km-listgroup"), "Css class is not applied");
+                ok(!dom.is(".km-list"), "Css class is not applied");
+            });
+
+            test("applies css class to child lists when grouped", function() {
+                var dom = $("<ul><li><ul/></li></ul>");
+
+                new ListView(dom, { type: "group" });
+
+                ok(dom.find("ul").is(".km-list"), "Css class is applied");
+            });
+
+            test("applies CSS class to link items", function() {
+                var dom = $('<ul> \
+                    <li><a id="foo" href="foo">Foo</a></li> \
+                    <li>Bar <a id="bar" href="bar">Bar</a></li> \
+                </ul>');
+
+                new ListView(dom);
+                ok(dom.find("#foo").is(".km-listview-link"), "link item has correct CSS class");
+                ok(!dom.find("#bar").is(".km-listview-link"), "mixed item does not receive CSS class");
+            });
+
+            test("toggles item as pressed on press/release", function() {
+                var dom = $('<ul> \
+                    <li><a id="foo" href="foo">Foo</a></li> \
+                </ul>'),
+                    foo = dom.find("#foo");
+
+                new ListView(dom);
+
+                foo.trigger(kendo.support.mousedown);
+                ok(foo.parent().is(".km-state-active"), "list item is marked as active");
+
+                foo.trigger(kendo.support.mouseup);
+                ok(!foo.parent().is(".km-state-active"), "list item is unmarked");
+            });
+
+            test("does not activate pushed state for non-link items", function() {
+                var dom = $('<ul><li>Foo</li></ul>'),
+                    item = dom.find("li");
+
+                new ListView(dom);
+
+                item.trigger(kendo.support.mousedown);
+                ok(!item.is(".km-state-active"), "list item is not marked as active");
+            });
+
+            test("does not activate pushed state for buttons", function() {
+                var dom = $('<ul><li>Foo <a data-kendo-role="button" href="#">Foo</a></li></ul>'),
+                item = dom.find("li");
+
+                new ListView(dom);
+
+                item.find("[data-kendo-role=button]").trigger(kendo.support.mousedown);
+                ok(!item.is(".km-state-active"), "list item is not marked as active");
+            });
+
+            test("handles contents' click events", function() {
+                expect(2);
+
+                var dom = $('<ul><li><a href="#">Foo</a></li></ul>'),
+                    link = dom.find("li>a");
+
+                var listView = new ListView(dom);
+
+                listView.bind("click", function(e) {
+                    equal(e.target[0], link[0], "event passes the clicked dom element");
+                    equal(e.item[0], link.parent()[0], "event passes the current item");
+                });
+
+                link.trigger(kendo.support.mousedown);
+                link.trigger(kendo.support.mouseup);
+            });
+
+            test("Allows event cancelation", function() {
+                expect(1);
+                var dom = $('<ul><li><a href="#">Foo</a></li></ul>'),
+                    link = dom.find("li>a");
+
+                var listView = new ListView(dom);
+
+                listView.bind("click", function(e) {
+                    e.preventDefault();
+                });
+
+                dom.bind(kendo.support.mouseup, function(e) {
+                    ok(e.isDefaultPrevented());
+                });
+
+                link.trigger(kendo.support.mouseup);
+            });
+
+            test("passes button if a button is clicked", function() {
+                var dom = $('<ul><li><a href="#" data-kendo-name="foo">Foo</a></li></ul>'),
+                    link = dom.find("li>a");
+
+                var listView = new ListView(dom);
+
+                listView.bind("click", function(e) {
+                    equal(e.buttonName, "foo", "event passes the clicked button name");
+                    equal(e.button, dom.find('[data-kendo-name=foo]').data("kendoMobileButton"), "event passes the clicked button name");
+                });
+
+                link.trigger(kendo.support.mousedown);
+                link.trigger(kendo.support.mouseup);
+            });
+        </script>
+    </body>
+</html>
+

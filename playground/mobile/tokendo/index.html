@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>ToKenDo</title> 
+    <title>ToKenDo</title>
 
     <!-- Weinre Proxy, configure to your machine if you have it. -->
     <!--<script src="http://bundev.telerik.com:8080/target/target-script-min.js"></script>-->
-     
+
     <link rel="stylesheet/less" type="text/css" href="layout.less" />
     <link rel="stylesheet" href="scroll-container.css" />
     <link rel="stylesheet" href="tokendo.css" />
@@ -17,12 +17,25 @@
     <script src="../../../src/kendo.fx.js"></script>
     <script src="../../../src/kendo.data.js"></script>
     <script src="../../../src/kendo.scroller.js"></script>
-    <script src="../../../src/kendo.mobile.list.js"></script>
-    <script src="../../../src/kendo.mobile.view.js"></script>
-    <script src="../../../src/kendo.mobile.application.js"></script>
-
+    <script src="../../../src/kendo.mobile.core.js"></script>
+    <script src="../../../src/kendo.history.js"></script>
+    <script src="../../../src/kendo.application.js"></script>
+    <script src="../../../src/kendo.mobile.button.js"></script>
 </head>
-<body>
+<body class="k-ios">
+    <div data-kendo-role="view" id="index">
+        <header data-kendo-role="header">
+        <div class="k-toolbar">
+            <a data-kendo-role="button" href="#about">about</a>
+        </div>
+        </header>
+
+        <div data-kendo-role="content">
+            <div id="todo-items">
+            </div>
+        </div>
+    </div>
+
     <script type="text/html" id="item_tmpl">
         <ul class="k-list">
           # for (var i = 0; i < data.length; i++) {
@@ -31,50 +44,14 @@
                 <label for="isdone_#= i #" #= (item.done ? " class='k-item-checked'" : "") #>
                     <input type="checkbox" id="isdone_#= i #" #= (item.done ? " checked='checked'" : "") # />
                     <span>#= item.title #</span>
-                    <a href="\\#" class="more-details">&nbsp;</a>
+                    <a href="edit.html" class="more-details" data-kendo-role="button">&nbsp;</a>
                 </label>
             </li>
         # } #
         </ul>
     </script>
-    <div class="k-slot">
-        <div class="k-showcase">
-            <div class="k-view">
-                <div class="k-header">
-                    <div class="k-toolbar">
-                        <button style="float: right"><span>About</span></button>
-                    </div>
-                </div>
 
-                <div class="k-content">
-                    <div class="k-contentIn"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="k-tabStrip">
-        <button class="k-state-active">
-            <span class="k-icon"></span><span>Featured</span>
-        </button>
-        <button>
-            <span class="k-icon"></span><span>Genius</span><span class="k-message">3</span>
-        </button>
-        <button>
-            <span class="k-icon"></span><span>Top Charts</span>
-        </button>
-        <button>
-            <span class="k-icon"></span><span>Categories</span>
-        </button>
-    </div>
     <script>
-        $(document)
-            .bind("appinit", function (e, args) {
-//                console.log("appinit", args);
-            })
-            .bind("viewinit", function (e, args) {
-//                console.log("viewinit", args);
-            });
-
         $('label').live('click', function(e) {
             var element = $(this);
             element.toggleClass('k-item-checked', document.getElementById(element.attr('for')).checked);
@@ -104,13 +81,8 @@
         dataSource.bind("change", function() {
             var data = dataSource.view();
             var template = kendo.template(document.getElementById("item_tmpl").innerHTML);
-
-            $(".k-contentIn").html(template({ data: data }))
-                .delegate('.more-details', 'click', function(e) {
-                    e.preventDefault();
-                    var todoItemId = $(this).index();
-                    kendo.mobile.switchView("edit.html");
-                });
+            $("#todo-items").html(template({ data: data }))
+            kendo.mobile.enhance($("#todo-items"));
         });
 
         dataSource.read();
