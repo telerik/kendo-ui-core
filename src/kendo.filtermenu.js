@@ -39,6 +39,15 @@
             '</div>'+
         '</form>';
 
+    function trim(expression, field) {
+        if (expression.filters) {
+            expression.filters = $.grep(expression.filters, function(filter) {
+                trim(filter, field);
+                return filter.field != field;
+            });
+        }
+    }
+
     function value(dom, value) {
         var widget = dom.data(DROPDOWNLIST) || dom.data(NUMERICTEXTBOX) || dom.data(DATEPICKER);
 
@@ -190,21 +199,39 @@
                 logic = expression.logic || "and",
                 filters = expression.filters,
                 filter,
-                result = that.dataSource.filter() || { filters:[], logic: logic },
+                result = that.dataSource.filter() || { filters:[], logic: "and" },
                 idx,
                 field = that.model.fields[that.field],
                 length;
 
-            result.filters = $.grep(result.filters, function(filter) {
-                return filter.field != that.field;
+            trim(result, that.field);
+
+            filters = $.grep(filters, function(filter) {
+                return filter.value != "";
             });
 
             for (idx = 0, length = filters.length; idx < length; idx++) {
                 filter = filters[idx];
+                filter.value = field.parse(filter.value);
+            }
 
-                if (filter.value != "") {
-                    filter.value = field.parse(filter.value);
-                    result.filters.push(filter);
+            if (filters.length) {
+                if (result.filters.length) {
+                    expression.filters = filters;
+
+                    if (result.logic !== "and") {
+                        result.filters = [ { logic: result.logic, filters: result.filters }];
+                        result.logic = "and";
+                    }
+
+                    if (filters.length > 1) {
+                        result.filters.push(expression);
+                    } else {
+                        result.filters.push(filters[0]);
+                    }
+                } else {
+                    result.filters = filters;
+                    result.logic = logic;
                 }
             }
 
