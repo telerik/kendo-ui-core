@@ -482,6 +482,7 @@
 
             that._typing = setTimeout(function () {
                 if (that._old !== that.value()) {
+                    that._old = that.value();
                     that.search();
                 }
             }, that.options.delay);
