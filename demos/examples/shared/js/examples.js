@@ -94,13 +94,15 @@
 
     Application = {
         load: function(href) {
-            $(document).find(".k-window-content")
-                .each(function(index, kendoWindow) {
-                    kendoWindow = $(kendoWindow).data("kendoWindow");
-                    if (kendoWindow) {
-                        kendoWindow.close();
-                    }
-                });
+            $(document)
+                .trigger("kendo:pageUnload")
+                .find(".k-window-content")
+                    .each(function(index, kendoWindow) {
+                        kendoWindow = $(kendoWindow).data("kendoWindow");
+                        if (kendoWindow) {
+                            kendoWindow.close();
+                        }
+                    });
 
             Application.fetch(href);
 
@@ -273,8 +275,10 @@
 
                 skinLink.eq(0).before(newLink);
                 skinLink.remove();
-                if (exampleElement.length)
+
+                if (exampleElement.length) {
                     exampleElement[0].style.cssText = exampleElement[0].style.cssText;
+                }
 
                 $(document).data("kendoSkin", skinName).trigger("kendo:skinChange");
                 $(document.documentElement).removeClass("k-" + oldSkinName).addClass("k-" + skinName);
@@ -289,16 +293,18 @@
                             animated.kendoStop().kendoAnimate(animation.show);
                         }, 100);
                     }}));
-                } else
+                } else {
                     changeSkin();
+                }
 
                 $("#exampleWrap").show();
             };
 
-            if ($("#exampleWrap").length)
+            if ($("#exampleWrap").length) {
                 Application.preloadStylesheet(url, fadeSkin);
-            else
+            } else {
                 changeSkin();
+            }
         },
 
         helpTabs: function (html) {
@@ -366,8 +372,9 @@
                     var element = $(this),
                         extender = element.next();
 
-                    if ($.trim(extender.text()))
+                    if ($.trim(extender.text())) {
                         element.toggleClass("detailHover", e.type == "mouseenter");
+                    }
                 })
                 .live("click", function (e) {
                     var element = $(this),
@@ -495,8 +502,6 @@
             url = url[1].toLowerCase();
             page = locatePage(url);
 
-            $("#navmainWrap").toggleClass("singleColumn", page == "overview");
-
             selectCategory($("#topnav #" + page)[0]);
 
             link = $("#navWrap .k-link[href*='" + url + "']")
@@ -530,6 +535,7 @@
         });
     }
 
+    window.Application = Application;
     window.initializeNavigation = initializeNavigation;
     window.preventFOUC = preventFOUC;
 })(jQuery, window);
