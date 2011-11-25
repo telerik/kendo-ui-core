@@ -264,8 +264,8 @@
      *  <table id="grid">
      *   <thead>
      *       <tr>
-     *           <th data-kendo-field="title">Title<th>
-     *           <th data-kendo-field="year">Year<th>
+     *           <th data-field="title">Title<th>
+     *           <th datao-field="year">Year<th>
      *       </tr>
      *   </thead>
      *   <tbody>
@@ -1359,7 +1359,7 @@
                 cols = table.find("col"),
                 dataSource = that.options.dataSource;
 
-            // using HTML5 data attributes as a configuration option e.g. <th data-kendo-field="foo">Foo</foo>
+            // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
             columns = columns.length ? columns : map(table.find("th"), function(th, idx) {
                 var th = $(th),
                     sortable = th.attr(kendo.attr("sortable"))

@@ -1821,7 +1821,7 @@
         Widget: Widget,
         /**
          * Helper method for writing new widgets.
-         * Exposes a jQuery plug-in that will handle the widget creation and attach its client-side object in the appropriate data-kendo* attribute.
+         * Exposes a jQuery plug-in that will handle the widget creation and attach its client-side object in the appropriate data-* attribute.
          * Also triggers the init event, when the widget has been created.
          * @name kendo.ui.plugin
          * @function
