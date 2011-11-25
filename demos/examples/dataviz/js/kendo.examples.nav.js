@@ -16,10 +16,6 @@ var categories = {
             spriteCssClass: "chartIcon",
             items: [
                 {
-                    text: "Overview",
-                    url: "chart/overview.html"
-                },
-                {
                     text: "Basic usage",
                     url: "chart/index.html"
                 },
