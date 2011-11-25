@@ -2635,8 +2635,13 @@ div.k-slider
 
 span.k-tooltip
 {
-    position:static;
+    position: static;
     display: inline-block;
+}
+
+.k-invalid-msg
+{
+    display: none;
 }
 
 .k-callout
