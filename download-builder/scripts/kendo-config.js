@@ -123,13 +123,6 @@
             depends: [ "core" ],
             advanced: true
         }, {
-            id: "scroller",
-            name: "Scroller",
-            category: categories.framework,
-            description: "Enables scrolling on mobile devices.",
-            source: "kendo.scroller.min.js",
-            depends: [ "core" ]
-        }, {
             id: "pager",
             name: "Pager",
             category: categories.framework,
