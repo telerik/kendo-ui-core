@@ -100,7 +100,7 @@
 
             $(document.documentElement).bind(MOUSEDOWN, proxy(that._mousedown, that));
 
-            $(window).bind("resize", function() {
+            $(window).bind("resize scroll", function() {
                 that.close();
             });
 
