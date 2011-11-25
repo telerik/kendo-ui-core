@@ -2717,6 +2717,12 @@ span.k-tooltip
     background-position: -117px -194px;
 }
 
+.k-tooltip-validation .k-warning
+{
+    vertical-align: text-top;
+    margin-right: 3px;
+}
+
 /* Splitter */
 
 .k-splitter
