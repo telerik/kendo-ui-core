@@ -21,19 +21,19 @@
         <script src="../src/kendo.mobile.application.js"></script>
     </head>
     <body>
-        <div data-kendo-role="view" id="index" data-kendo-url="/" data-kendo-animation="slide">
-            <header data-kendo-role="header">
-                <div data-kendo-role="navbar">
-                    <span data-kendo-role="view-title">Kendo Sushi!</span>
+        <div data-role="view" id="index" data-url="/" data-animation="slide">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title">Kendo Sushi!</span>
                 </div>
             </header>
 
-            <div data-kendo-role="content">
+            <div data-role="content">
                 <ul id="featured" class="item-list"></ul>
             </div>
 
-            <footer data-kendo-role="footer" data-id="default">
-                <div data-kendo-role="tabstrip">
+            <footer data-role="footer" data-id="default">
+                <div data-role="tabstrip">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
                     <a href="#account">Account</a>
@@ -42,19 +42,19 @@
             </footer>
         </div>
 
-        <div data-kendo-role="view" id="menu">
-            <header data-kendo-role="header">
-                <div data-kendo-role="navbar">
-                    <span data-kendo-role="view-title">Menu</span>
+        <div data-role="view" id="menu">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title">Menu</span>
                 </div>
             </header>
 
-            <div data-kendo-role="content">
+            <div data-role="content">
                 <ul id="menuList" class="item-list"></ul>
             </div>
 
-            <footer data-kendo-role="footer" data-id="default">
-                <div data-kendo-role="tabstrip">
+            <footer data-role="footer" data-id="default">
+                <div data-role="tabstrip">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
                     <a href="#account">Account</a>
@@ -63,21 +63,21 @@
             </footer>
         </div>
 
-        <div data-kendo-role="view" id="cart">
-            <header data-kendo-role="header">
-                <div data-kendo-role="navbar">
-                    <span data-kendo-role="view-title">Cart</span>
+        <div data-role="view" id="cart">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title">Cart</span>
                 </div>
             </header>
 
-            <div data-kendo-role="content">
+            <div data-role="content">
                 <h2 id="total"></h2>
-                <a id="checkout" href="#done" data-kendo-role="button">Checkout</a>
-                <ul id="cartList" class="item-list" data-kendo-style="inset"></ul>
+                <a id="checkout" href="#done" data-role="button">Checkout</a>
+                <ul id="cartList" class="item-list" data-style="inset"></ul>
             </div>
 
-            <footer data-kendo-role="footer" data-id="default">
-                <div data-kendo-role="tabstrip">
+            <footer data-role="footer" data-id="default">
+                <div data-role="tabstrip">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
                     <a href="#account">Account</a>
@@ -86,26 +86,26 @@
             </footer>
         </div>
 
-        <div data-kendo-role="view" id="done" data-kendo-transition="zoom">
-            <div data-kendo-role="content">
+        <div data-role="view" id="done" data-transition="zoom">
+            <div data-role="content">
                 Thanks for shopping! Your sushi is on the way.
-                <a href="#index" data-kendo-role="button">Done</a>
+                <a href="#index" data-role="button">Done</a>
             </div>
         </div>
 
-        <div data-kendo-role="view" id="account">
-            <header data-kendo-role="header">
-                <div data-kendo-role="navbar">
-                    <span data-kendo-role="view-title">Work in progress!</span>
+        <div data-role="view" id="account">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title">Work in progress!</span>
                 </div>
             </header>
 
-            <div data-kendo-role="content">
+            <div data-role="content">
                 Work in progress
             </div>
 
-            <footer data-kendo-role="footer" data-id="default">
-                <div data-kendo-role="tabstrip">
+            <footer data-role="footer" data-id="default">
+                <div data-role="tabstrip">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
                     <a href="#account">Account</a>
@@ -114,19 +114,19 @@
             </footer>
         </div>
 
-        <div data-kendo-role="view" id="details" data-kendo-transition="slide">
-            <header data-kendo-role="header">
-                <div data-kendo-role="navbar">
-                    <a data-kendo-role="back-button" data-kendo-align="left">Back</a>
-                    <span data-kendo-role="view-title">Item</span>
+        <div data-role="view" id="details" data-transition="slide">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a data-role="back-button" data-align="left">Back</a>
+                    <span data-role="view-title">Item</span>
                 </div>
             </header>
 
-            <div data-kendo-role="content">
+            <div data-role="content">
             </div>
 
-            <footer data-kendo-role="footer" data-id="default">
-                <div data-kendo-role="tabstrip">
+            <footer data-role="footer" data-id="default">
+                <div data-role="tabstrip">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
                     <a href="#account">Account</a>
@@ -136,9 +136,9 @@
         </div>
 
         <script id="menuTemplate" type="text/x-kendo-template">
-            <a data-kendo-role="button" data-kendo-name="add" href="\\#">Add to cart</a>
+            <a data-role="button" data-name="add" href="\\#">Add to cart</a>
 
-            <a class="details-link" data-kendo-role="listview-link" href="\#details?id=${id}">
+            <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
                 <img src="images/${image}" />
                 <h2>${name}</h2>
                 <span class="price">&euro; ${price}</span>
@@ -147,9 +147,9 @@
         </script>
 
         <script id="cartItemTemplate" type="text/x-kendo-template">
-            <a data-kendo-role="button" data-kendo-name="remove" href="\\#">Remove</a>
+            <a data-role="button" data-name="remove" href="\\#">Remove</a>
 
-            <a class="details-link" data-kendo-role="listview-link" href="\#details?id=${id}">
+            <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
                 <img src="images/${image}" />
                 <h2>${name}</h2>
                 <span class="price">&euro; ${price}</span>
@@ -160,7 +160,7 @@
             <aside>
                 <img src="images/${image}" />
                 <span class="price">&euro; ${price}</span>
-                <a data-kendo-role="button" href="\\#" id="add-to-cart">Add to cart</a>
+                <a data-role="button" href="\\#" id="add-to-cart">Add to cart</a>
             </aside>
             <h2>${name}</h2>
             <p>${description}</p>
