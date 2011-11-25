@@ -2633,6 +2633,12 @@ div.k-slider
     opacity: .9;
 }
 
+span.k-tooltip
+{
+    position:static;
+    display: inline-block;
+}
+
 .k-callout
 {
     position: absolute;
