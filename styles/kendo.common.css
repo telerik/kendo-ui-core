@@ -2560,13 +2560,13 @@ div.k-slider
     position: absolute;
     white-space: nowrap;
     font-size: .92em;
-    line-height: 1;
 }
 
 .k-slider-horizontal .k-label
 {
     left: 0;
     width: 100%;
+    line-height: 1;
 }
 
 .k-slider-horizontal .k-first .k-label
