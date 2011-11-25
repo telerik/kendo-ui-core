@@ -14,7 +14,7 @@
             Widget.fn.init.call(that, element, options);
 
             for (option in that.options) {
-                value = that.element.data("kendo-" + option.toLowerCase());
+                value = that.element.data(kendo.ns + option.toLowerCase());
 
                 if (value !== undefined) {
                     that.options[option] = value;
