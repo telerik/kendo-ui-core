@@ -1,6 +1,6 @@
 The following open source libraries are used in Kendo UI
 
------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 jQuery JavaScript library
 
 Copyright (c) 2011 John Resig, http://jquery.com/
@@ -24,4 +24,4 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt
+https://raw.github.com/jquery/jquery/master/MIT-LICENSE.txt
