@@ -200,32 +200,32 @@
             features: [{
                     id: "grid-editing",
                     name: "Editing",
-                    description: "",
+                    description: "Support for record editing",
                     depends: [ "editable" ]
                 }, {
                     id: "grid-filtering",
                     name: "Filtering",
-                    description: "",
+                    description: "Support for record filtering",
                     depends: [ "filteringmenu" ]
                 }, {
                     id: "grid-grouping",
                     name: "Grouping",
-                    description: "",
+                    description: "Support for grid grouping",
                     depends: [ "groupable" ]
                 }, {
                     id: "grid-paging",
                     name: "Paging",
-                    description: "",
+                    description: "Suppot for grid paging",
                     depends: [ "pager" ]
                 }, {
                     id: "grid-selection",
                     name: "Selection",
-                    description: "",
+                    description: "Support for row selection",
                     depends: [ "selectable" ]
                 }, {
                     id: "grid-sorting",
                     name: "Sorting",
-                    description: "",
+                    description: "Support for grid sorting",
                     depends: [ "sortable" ]
                 }]
         }, {
