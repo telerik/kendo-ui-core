@@ -280,6 +280,14 @@
                 equal(result.length, 3);
             });
 
+            test("filter with apostrophe", function() {
+                var data = [{ name: "f'oo" } ];
+
+                var result = new Query(data).filter({field: "name", value: "f'oo"}).toArray();
+
+                equal(result.length, 1);
+            });
+
             test("filter with empty filters", function() {
                 var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
 

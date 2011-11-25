@@ -221,12 +221,16 @@
     }
 
     var operators = (function(){
-        var dateRegExp = /^\/Date\((.*?)\)\/$/;
+        var dateRegExp = /^\/Date\((.*?)\)\/$/,
+            quoteRegExp = /'/g;
 
         function operator(op, a, b, ignore) {
+            var date;
+
             if (b != undefined) {
                 if (typeof b === "string") {
-                    var date = dateRegExp.exec(b);
+                    b = b.replace(quoteRegExp, "\\'");
+                    date = dateRegExp.exec(b);
                     if (date) {
                         b = new Date(+date[1]);
                     } else if (ignore) {
