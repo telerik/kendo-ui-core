@@ -10,6 +10,7 @@
         keys = kendo.keys,
         ID = "id",
         LI = "li",
+        CLICK = kendo.support.touch ? "touchend" : "click",
         CHANGE = "change",
         CHARACTER = "character",
         FOCUSED = "k-state-focused",
@@ -42,7 +43,7 @@
                                 clearTimeout(that._bluring);
                             }, 0);
                         })
-                        .delegate(LI, "click", proxy(that._click, that))
+                        .delegate(LI, CLICK, proxy(that._click, that))
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
 
