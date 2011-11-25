@@ -1,4 +1,4 @@
-﻿(function ($, undefined) {
+(function ($, undefined) {
     /**
      * @name kendo.ui.Slider.Description
      * @section

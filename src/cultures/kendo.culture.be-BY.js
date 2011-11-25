@@ -1,4 +1,4 @@
-(function( window, undefined ) {
+﻿(function( window, undefined ) {
     kendo.cultures["be-BY"] = {
         name: "be-BY",
         numberFormat: {

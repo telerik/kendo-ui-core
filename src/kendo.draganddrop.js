@@ -1,4 +1,4 @@
-﻿(function ($, undefined) {
+(function ($, undefined) {
     var kendo = window.kendo,
         document = window.document,
         Widget = kendo.ui.Widget,
