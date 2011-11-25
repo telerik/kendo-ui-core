@@ -38,19 +38,19 @@
         <!-- description -->
         <div id="example" class="k-content">
             <div id="product-view" class="k-header">
-                <div>
+                <div class="right">
                     <label for="culture">cultures:</label>
                     <input id="culture" value="en-US" />
                 </div>
                 <h2>Product promotion:</h2>
                 <ul>
                     <li>
-                    <label for="startDate">Discount startDate date:</label>
+                    <label for="startDate">Discount start date:</label>
                     <input id="startDate" />
                     <input id="startTime" value="12:00 AM" />
                     </li>
                     <li>
-                    <label for="endDate">Discount endDate date:</label>
+                    <label for="endDate">Discount end date:</label>
                     <input id="endDate" />
                     <input id="endTime" value="12:00 AM" />
                     </li>
@@ -79,6 +79,11 @@
                     background-position: 0 -255px;
                 }
 
+                .right
+                {
+                    float:right;
+                }
+
                 ul
                 {
                     width: 100%;
@@ -94,7 +99,6 @@
                 }
 
             </style>
-
 
             <script>
                 $(document).ready(function() {
