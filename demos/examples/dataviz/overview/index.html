@@ -5,18 +5,16 @@
         <!-- meta -->
         <title></title>
         <!-- css -->
-        <link href="../styles/examples.css" rel="stylesheet"/>
-        <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../../styles/kendo.default.css" rel="stylesheet"/>
+        <link href="../../styles/examples.css" rel="stylesheet"/>
+        <link href="../../../../shared/styles/examples-offline.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
         <!-- css -->
         <!-- script -->
-        <script src="../../../src/jquery.min.js"></script>
-        <script src="../../../src/kendo.core.js"></script>
-        <script src="../../../src/kendo.data.js"></script>
-        <script src="../../../src/kendo.popup.js"></script>
-        <script src="../../../src/kendo.list.js"></script>
-        <script src="../../../src/kendo.dropdownlist.js"></script>
+        <script src="../../../../src/jquery.min.js"></script>
+        <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.data.js"></script>
+        <script src="../../../../src/kendo.chart.js"></script>
         <!-- script -->
     </head>
     <body>
@@ -26,25 +24,45 @@
         <div class="description">DataViz landing page description</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <div id="chartSlider" style="width:550px; height:350px; margin: 0 auto;"></div>
+            <div id="chartSlider" style="width:600px; height:250px; margin: 0 auto;"></div>
             <script>
                     var chartSeries = [
                         [{
                             type: "column",
-                            data: [1, 3, 4, 1]
+                            name: "2007",
+                            data: [45, 80, 120, 73, 35, 67]
                         }, {
                             type: "column",
-                            data: [1, 3, 4, 1]
+                            name: "2008",
+                            data: [47, 63, 140, 89, 54, 77]
+                        }, {
+                            type: "column",
+                            name: "2009",
+                            data: [15, 30, 92, 65, 21, 88]
+                        }, {
+                            type: "column",
+                            name: "2010",
+                            data: [21, 17, 63, 85, 54, 43]
                         }], [{
                             type: "line",
-                            data: [1, 2, 3, 4]
+                            name: "2007",
+                            data: [10, 34, 45, 21, 12, 25, 10, 34, 45, 21, 12, 25]
                         }, {
                             type: "line",
-                            data: [2, 3, 4, 5]
+                            name: "2008",
+                            data: [32, 42, 60, 50, 45, 40, 32, 42, 60, 50, 45, 40]
+                        }, {
+                            type: "line",
+                            name: "2009",
+                            data: [42, 50, 50, 65, 60, 70, 42, 50, 50, 65, 60, 70]
                         }], [{
                             type: "pie",
-                            data: [1, 2, 3, 4],
-                            padding: 50
+                            data: [187, 64, 51, 24],
+                            padding: 30,
+                            startAngle: 60,
+                            labels: {
+                                visible: true
+                            }
                         }] ],
                         seriesIndex = 0,
                         interval;
@@ -58,11 +76,13 @@
                             legend: {
                                 visible: false
                             },
-                            series: $.extend({}, chartSeries[seriesIndex++ % chartSeries.length]),
+                            series: $.extend({}, chartSeries[2 % chartSeries.length]),
                             categoryAxis: {
-                                categories: ["", "", "", ""]
-                            },
-                            axisDefaults: {
+                                categories: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                                labels: {
+                                    rotation: -90,
+                                    font: "10px Arial"
+                                },
                                 majorGridLines: {
                                     visible: false
                                 }
@@ -73,18 +93,18 @@
                 $(document).ready(function() {
                     nextChart();
 
-                    if (interval) {
-                        clearInterval(interval);
-                    }
+                    //if (interval) {
+                    //    clearInterval(interval);
+                    //}
 
-                    interval = setInterval(nextChart, 3000);
+                    //interval = setInterval(nextChart, 3000);
 
                     $(document).bind("kendo:skinChange", function(e) {
-                        nextChart();
+                        //nextChart();
                     });
 
                     $(document).bind("kendo:pageUnload", function(e) {
-                        clearInterval(interval);
+                        //clearInterval(interval);
                     });
                 });
             </script>
