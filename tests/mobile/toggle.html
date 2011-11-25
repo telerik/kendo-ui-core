@@ -23,9 +23,17 @@
 
             var ToggleButton = kendo.ui.MobileSwitch,
                 CheckBox = kendo.ui.MobileCheckBox,
-                MOUSEDOWN = kendo.support.touch ? "touchstart" : "mousedown",
-                MOUSEUP = kendo.support.touch ? "touchend" : "mouseup";
+                MOUSEDOWN = kendo.support.mousedown,
+                MOUSEUP = kendo.support.mouseup;
 
+            QUnit.config.reorder = false;
+
+            var mouseDownEvent;
+            if (kendo.support.touch) {
+                mouseDownEvent = new $.Event(null, {type: MOUSEDOWN, changedTouches: [{identifier: 1, pageX: 100, pageY: 100}] });
+            } else {
+                mouseDownEvent = MOUSEDOWN;
+            }
             /* ToggleButton */
 
             test("ToggleButton can be initialized from input type='checkbox'", function() {
@@ -95,14 +103,14 @@
                 dom.change();
             });
 
-            test("ToggleButton should apply active state when pressed", function() {
+            test("ToggleButton applies active state when pressed", function() {
                 expect(1);
 
                 var dom = $("<input type='checkbox'/>");
                 var togglebutton = new ToggleButton(dom);
 
-                togglebutton.handle.trigger(MOUSEDOWN);
-                ok(togglebutton.handle.hasClass("km-state-active"), "Should have active css class");
+                togglebutton.handle.trigger(mouseDownEvent);
+                ok(togglebutton.handle.hasClass("km-state-active"), "has active css class");
             });
 
             test("ToggleButton should remove active state when depressed", function() {
@@ -111,7 +119,7 @@
                 var dom = $("<input type='checkbox'/>");
                 var togglebutton = new ToggleButton(dom);
 
-                togglebutton.handle.trigger(MOUSEDOWN);
+                togglebutton.handle.trigger(mouseDownEvent);
                 togglebutton.handle.trigger(MOUSEUP);
                 ok(!togglebutton.handle.hasClass("km-state-active"), "Should not have active css class");
             });
@@ -124,7 +132,7 @@
 
                 togglebutton.disable();
 
-                togglebutton.handle.trigger(MOUSEDOWN);
+                togglebutton.handle.trigger(mouseDownEvent);
 
                 ok(!togglebutton.handle.hasClass("km-state-active"), "Should not have active css class");
             });
@@ -238,7 +246,7 @@
                 var dom = $("<input type='checkbox'/>");
                 var checkbox = new CheckBox(dom);
 
-                checkbox.handle.trigger(MOUSEDOWN);
+                checkbox.handle.trigger(mouseDownEvent);
                 checkbox.handle.trigger(MOUSEUP);
                 ok(!checkbox.handle.hasClass("km-state-active"), "Should not have active css class");
             });
@@ -251,7 +259,7 @@
 
                 checkbox.disable();
 
-                checkbox.handle.trigger(MOUSEDOWN);
+                checkbox.handle.trigger(mouseDownEvent);
 
                 ok(!checkbox.handle.hasClass("km-state-active"), "Should not have active css class");
             });
