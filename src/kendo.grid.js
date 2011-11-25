@@ -38,7 +38,9 @@
         FUNCTION = "function",
         STRING = "string",
         DELETECONFIRM = "Are you sure you want to delete this record?",
-        COMMANDBUTTONTEMP = '<a class="k-button k-button-icontext #=className#" #=attr# href="##"><span class="k-icon #=imgClass#"></span>#=text#</a>';
+        formatRegExp = /\}/ig,
+        templateHashRegExp = /#/ig,
+        COMMANDBUTTONTEMP = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="k-icon #=imgClass#"></span>#=text#</a>';
 
     var VirtualScrollable =  Widget.extend({
         init: function(element, options) {
@@ -803,7 +805,7 @@
                 template;
 
             if (toolbar) {
-                toolbar = isFunction(toolbar) ? toolbar() : (typeof toolbar === STRING ? toolbar : that._toolbarTmpl(toolbar));
+                toolbar = isFunction(toolbar) ? toolbar() : (typeof toolbar === STRING ? toolbar : that._toolbarTmpl(toolbar).replace(templateHashRegExp, "\\#"));
 
                 template = proxy(kendo.template(toolbar), that)
 
@@ -1474,7 +1476,7 @@
                 type = typeof template;
 
             if (column.command) {
-                return that._createButton(column.command);
+                return that._createButton(column.command).replace(templateHashRegExp, "\\#");
             }
 
             if (type === FUNCTION) {
@@ -1487,7 +1489,7 @@
                 html += column.encoded ? "${" : "#=";
 
                 if (format) {
-                    html += 'kendo.format(\"' + format.replace("}","\\}") + '\",';
+                    html += 'kendo.format(\"' + format.replace(formatRegExp,"\\}") + '\",';
                 }
 
                 if (!settings.useWithBlock) {
