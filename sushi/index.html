@@ -72,6 +72,7 @@
 
             <div data-kendo-role="content">
                 <h2 id="total"></h2>
+                <a id="checkout" href="#done" data-kendo-role="button">Checkout</a>
                 <ul id="cartList" class="item-list" data-kendo-style="inset"></ul>
             </div>
 
@@ -83,6 +84,13 @@
                     <a href="#cart">Cart</a>
                 </div>
             </footer>
+        </div>
+
+        <div data-kendo-role="view" id="done" data-kendo-transition="zoom">
+            <div data-kendo-role="content">
+                Thanks for shopping! Your sushi is on the way.
+                <a href="#index" data-kendo-role="button">Done</a>
+            </div>
         </div>
 
         <div data-kendo-role="view" id="account">
@@ -176,6 +184,8 @@
             cartDataSource.bind("change", function() {
                 if (cartDataSource.aggregates().price) {
                     $("#total").html(cartDataSource.aggregates().price.sum + " &euro;");
+                } else {
+                    $("#total").html(0 + " &euro;");
                 }
             });
 
@@ -220,6 +230,10 @@
                         dataSource: cartDataSource,
                         template: $("#cartItemTemplate").text()
                     }).data("kendoMobileListView").bind("click", removeItemFromList);
+
+                    $("#checkout").data("kendoMobileButton").bind("click", function() {
+                        cartDataSource.data([]);
+                    });
                 }
             });
 
