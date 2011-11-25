@@ -1663,7 +1663,7 @@
         },
         support: support,
         animate: animate,
-        ns: "kendo-",
+        ns: "",
         attr: function(value) {
             return "data-" + kendo.ns + value;
         },

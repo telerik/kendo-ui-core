@@ -17,6 +17,8 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+            kendo.ns = "kendo-";
+
             var Binder = kendo.data.ModelViewBinder, textarea;
 
             module("kendo.data.ModelViewBinder", {
@@ -47,27 +49,27 @@
             test("binding child elements", function() {
                 var model = { foo: "bar" }, binder = new Binder(textarea.wrap("<div />").parent(), model);
 
-                textarea.attr("name", "foo");
+                    textarea.attr("name", "foo");
 
-                textarea.val("foo");
-                textarea.trigger("change");
+                    textarea.val("foo");
+                    textarea.trigger("change");
 
-                equal(binder.model.changes().foo, "foo");
-            });
+                    equal(binder.model.changes().foo, "foo");
+                });
 
-            test("binding by data attribute", function() {
-                var model = { foo: "bar" }, binder = new Binder(textarea, model);
+                test("binding by data attribute", function() {
+                    var model = { foo: "bar" }, binder = new Binder(textarea, model);
 
-                textarea.attr("data-kendo-field", "foo");
-                textarea.val("foo");
-                textarea.trigger("change");
+                    textarea.attr("data-kendo-field", "foo");
+                    textarea.val("foo");
+                    textarea.trigger("change");
 
-                equal(binder.model.changes().foo, "foo");
-            });
+                    equal(binder.model.changes().foo, "foo");
+                });
 
-        </script>
-        <div id="qunit-fixture">test markup, will be hidden</div>
-        <ul id="log"></ul>
-    </body>
-</html>
+            </script>
+            <div id="qunit-fixture">test markup, will be hidden</div>
+            <ul id="log"></ul>
+        </body>
+    </html>
 
