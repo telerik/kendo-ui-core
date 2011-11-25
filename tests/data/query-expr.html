@@ -529,6 +529,12 @@
                 }), "(d.toLowerCase() != 'foo')");
             });
 
+            test("apostrophe in strings is escaped", function() {
+                equal(compile({
+                    filters: [ { operator: "eq", value: "f'oo"} ]
+                }), "(d.toLowerCase() == 'f\\'oo')");
+            });
+
             test("string filtering is case sensitive", function() {
                 equal(compile({
                     logic: "and",
