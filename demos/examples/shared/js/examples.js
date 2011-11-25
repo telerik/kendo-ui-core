@@ -1,7 +1,8 @@
 (function($, window) {
     var Application,
         extend = $.extend,
-        local = location.protocol == "file:",
+        DETAILHANDLE = ".detailHandle",
+        runningLocally = location.protocol == "file:",
         pushState = "pushState" in history,
         currentHtml = "",
         docsAnimation = {
@@ -38,7 +39,7 @@
             helpTabs: /<!--\s*help-tabs\s*-->(([\r\n]|.)*?)<!--\s*help-tabs\s*-->/im,
             tools: /\s*<!-- tools -->(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig,
             exceptTools: /\s*<!-- \w+ -->(([\u000a\u000d\u2028\u2029]|.)*?)<!-- \w+ -->/ig,
-            nav: /([^\/]+\/[^\/\?]+)(\?.*)?$/,
+            nav: /([^\/]+\/[^\/\?\#]+)((\?|\#).*)?$/,
             title: /<title>(.*?)<\/title>/i,
             skin: /kendo\.\w+(\.min)?\.css/i
         };
@@ -140,7 +141,7 @@
 
                 var exampleBody = $("#exampleWrap"),
                     exampleName = $("#exampleTitle"),
-                    tools = $("#codeStrip, .skinSelector.k-widget"),
+                    tools = $("#codeStrip, #examplesThemeChooser"),
                     title = Application.fetchTitle(),
                     toolsVisible = tools.is(":visible");
 
@@ -168,8 +169,9 @@
                             codeStrip._updateClasses();
                             prettyPrint();
 
-                            if (!toolsVisible)
+                            if (!toolsVisible) {
                                 tools.kendoStop(true).kendoAnimate(animation.show);
+                            }
 
                             exampleName.kendoStop(true).kendoAnimate(animation.show);
                         }, 100);
@@ -210,7 +212,7 @@
 
                 exampleName.empty().html(iconElement + title);
 
-                $("#codeStrip, .skinSelector.k-widget").show();
+                $("#codeStrip,#examplesThemeChooser").show();
 
                 $(".description").empty().html($.trim(Application.description(html)));
             } else {
@@ -231,8 +233,9 @@
 
                     Application.populateTools(currentHtml, href);
                 });
-            } else
+            } else {
                 $(".description").empty().html($.trim(Application.description(currentHtml)));
+            }
         },
 
         preloadStylesheet: function (file, callback) {
@@ -268,7 +271,7 @@
                     .attr("href", url);
             }
 
-            var changeSkin = function () {
+            function changeSkin() {
                 if ($.browser.msie) {
                     newLink = document.createStyleSheet(url);
                 }
@@ -282,26 +285,25 @@
 
                 $(document).data("kendoSkin", skinName).trigger("kendo:skinChange");
                 $(document.documentElement).removeClass("k-" + oldSkinName).addClass("k-" + skinName);
-            };
-
-            var fadeSkin = function() {
-                if (animate) {
-                    var animated = exampleElement.add(exampleTitle);
-                    animated.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
-                        changeSkin();
-                        setTimeout(function() {
-                            animated.kendoStop().kendoAnimate(animation.show);
-                        }, 100);
-                    }}));
-                } else {
-                    changeSkin();
-                }
-
-                $("#exampleWrap").show();
-            };
+            }
 
             if ($("#exampleWrap").length) {
-                Application.preloadStylesheet(url, fadeSkin);
+                // fade skin
+                Application.preloadStylesheet(url, function () {
+                    if (animate) {
+                        var animated = exampleElement.add(exampleTitle);
+                        animated.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
+                            changeSkin();
+                            setTimeout(function() {
+                                animated.kendoStop().kendoAnimate(animation.show);
+                            }, 100);
+                        }}));
+                    } else {
+                        changeSkin();
+                    }
+
+                    $("#exampleWrap").show();
+                });
             } else {
                 changeSkin();
             }
@@ -336,13 +338,11 @@
 
             codeStrip = $("#codeStrip").data("kendoTabStrip");
 
-            var skinSelector = $("#skinSelector");
-
             $("#exampleWrap").show();
 
-            if (pushState && !local) {
-                $("#navWrap li a")
-                    .live("click", function(e) {
+            if (pushState && !runningLocally) {
+                $(document)
+                    .on("click", "#navWrap li a", function(e) {
                         e.preventDefault();
 
                         if (!location.href.match($(this).attr("href"))) {
@@ -367,8 +367,8 @@
                 } catch (err) {}
             }
 
-            $(".detailHandle")
-                .live("mouseenter mouseleave", function(e) {
+            $(document)
+                .on("mouseenter mouseleave", DETAILHANDLE, function(e) {
                     var element = $(this),
                         extender = element.next();
 
@@ -376,7 +376,7 @@
                         element.toggleClass("detailHover", e.type == "mouseenter");
                     }
                 })
-                .live("click", function (e) {
+                .on("click", DETAILHANDLE, function (e) {
                     var element = $(this),
                         extender = element.next(),
                         visible = extender.is(":visible");
@@ -403,24 +403,15 @@
             $("#viewCode").click(function(e) {
                 e.preventDefault();
 
-                if (pushState)
+                if (pushState) {
                     Application.fetchCode(currentHtml);
-                else
+                } else {
                     $.get(location.href, function(html) {
                         Application.fetchCode(html);
                     }, "html");
-            });
-
-            skinSelector.bind("change", function(e) {
-                var newSkin = skinSelector.val().toLowerCase();
-
-                Application.fetchSkin(newSkin, true);
-
-                try {
-                    sessionStorage.setItem("kendoSkin", newSkin);
-                } catch(err) {
                 }
             });
+
 
             $(document).data("kendoSkin", kendoSkin);
         }
@@ -438,8 +429,7 @@
                 Application.fetchSkin(kendoSkin);
             }
         }
-    } catch(err) {
-    }
+    } catch(err) {}
 
     $(Application.init);
 
@@ -474,10 +464,6 @@
         return category;
     }
 
-    function preventFOUC() {
-        $("#exampleWrap").hide();
-    }
-
     function getNormalizedUrl() {
         var href = location.href.toLowerCase(),
             reference = $("#referenceUrl")[0].href.toLowerCase();
@@ -492,50 +478,60 @@
     function initializeNavigation() {
         var url = window.normalizedUrl = getNormalizedUrl(), link;
 
-        if (typeof categories == "undefined") {
-            return;
-        }
+        if (typeof categories != "undefined") {
+            url = url.match(regexes.nav);
 
-        url = url.match(regexes.nav);
+            if (url) {
+                url = url[1].toLowerCase();
+                page = locatePage(url);
 
-        if (url) {
-            url = url[1].toLowerCase();
-            page = locatePage(url);
+                selectCategory($("#topnav #" + page)[0]);
 
-            selectCategory($("#topnav #" + page)[0]);
+                link = $("#navWrap .k-link[href*='" + url + "']")
+                    .addClass("k-state-selected chosen");
 
-            link = $("#navWrap .k-link[href*='" + url + "']")
-                .addClass("k-state-selected chosen");
-
-            link.closest(".k-panelbar").data("kendoPanelBar")
-                .expand(link.parent().parents(".k-item"), false);
+                link.closest(".k-panelbar").data("kendoPanelBar")
+                    .expand(link.parent().parents(".k-item"), false);
+            }
         }
 
         $(document).ready( function () {
-            var skinSelector = $("#skinSelector");
-
-            skinSelector.kendoDropDownList({
-                dataSource: [
-                    { text: "Default", control: "Menu", value: "default" },
-                    { text: "Blue Opal", control: "Menu", value: "blueopal" },
-                    { text: "Black", control: "Menu", value: "black" },
-                    { text: "Silver", control: "Menu", value: "silver" }
-                ],
-                template: '<span class="thumbLink">' +
-                    '<span class="thumb #= data.text.toLowerCase() #Thumb" ' +
-                        'style="background-image: url(#= initialRelativePath ##= data.control #/thumbSprite.png)">' +
-                    '<span class="gloss"></span></span><span class="skinTitle">#= data.text #</span></span>'
+            var themes = new kendo.data.DataSource({
+                data: [
+                    { text: "Default", value: "default" },
+                    { text: "Blue Opal", value: "blueopal" },
+                    { text: "Black", value: "black" },
+                    { text: "Silver", value: "silver" }
+                ]
             });
 
-            if (kendoSkin) {
-                skinSelector.data("kendoDropDownList").value(kendoSkin);
-            }
+            $(".themeChooser").val(kendoSkin).kendoDropDownList({
+                dataSource: themes,
 
-            $(".skinSelector.k-widget").show();
+                template: '<span class="thumbLink">' +
+                    '<span class="thumb #= data.text.toLowerCase() #Thumb" ' +
+                        'style="background-image: url(#= initialRelativePath #Menu/thumbSprite.png)">' +
+                        '<span class="gloss"></span></span><span class="skinTitle">#= data.text #</span></span>',
+
+                change: function(e) {
+                    var theme = (this.value() || "default").toLowerCase();
+
+                    Application.fetchSkin(theme, true);
+
+                    try {
+                        sessionStorage.setItem("kendoSkin", theme);
+                    } catch(err) {}
+                }
+            });
+
+            $("#examplesThemeChooser").show();
         });
     }
 
     window.Application = Application;
     window.initializeNavigation = initializeNavigation;
-    window.preventFOUC = preventFOUC;
+    window.preventFOUC = function() {
+        $("#exampleWrap").hide();
+    };
+
 })(jQuery, window);

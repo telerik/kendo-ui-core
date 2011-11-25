@@ -27,7 +27,7 @@ html
     font:75% arial,helvetica,sans-serif;
 }
 
-.skinSelector .k-arrow-down,
+#examplesThemeChooser .k-arrow-down,
 #navWrap .k-sprite,
 #codeStrip .k-link,
 .configuration .configHead,
@@ -465,27 +465,16 @@ a.bigButton
     background: #ef652a no-repeat 50% 3px url(flowers.png);
 }
 
-#topnavWrap .skinSelector,
-#topnavWrap h4
-{
-    float: right;
-    margin: 0;
-    padding: 0;
-}
-
-#topnavWrap h4
-{
-    font-size: 12px;
-    font-weight: normal;
-    margin-top: 13px;
-    padding-right: 5px;
-}
-
 #topnav
 {
     list-style: none outside;
+    vertical-align: top;
     margin: 0 0 0 8px;
     padding: 0;
+    vertical-align: top;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
 }
 
 #topnav li
@@ -1078,22 +1067,40 @@ pre.prettyprint
     padding: 20px;
 }
 
-/* skin selector */
+/* theme chooser */
 
-#topnavWrap .skinSelector
+#examplesThemeChooser
 {
-    margin: 7px 4px 0 0;
     float: right;
+    margin: 7px 0 0;
+    padding: 0;
     display: none;
+    vertical-align: top;
+}
+
+#examplesThemeChooser label
+{
+    padding-right: 2px;
+}
+
+#examplesThemeChooser label,
+#examplesThemeChooser .k-widget
+{
+    vertical-align: middle;
+}
+
+#examplesThemeChooser .themeChooser
+{
+    margin: 0 4px 0 0;
     width: 200px;
     font: 12px Arial, Helvetica, sans-serif;
 }
 
-div.skinSelector .k-dropdown-wrap.k-state-default,
-div.skinSelector .k-dropdown-wrap.k-state-hover,
-div.skinSelector .k-dropdown-wrap.k-state-hover:hover,
-div.skinSelector .k-dropdown-wrap.k-state-active,
-div.skinSelector .k-dropdown-wrap.k-state-focused
+#examplesThemeChooser .k-state-default,
+#examplesThemeChooser .k-state-hover,
+#examplesThemeChooser .k-state-hover:hover,
+#examplesThemeChooser .k-state-active,
+#examplesThemeChooser .k-state-focused
 {
     color: #333;
     background: #FFF;
@@ -1103,21 +1110,21 @@ div.skinSelector .k-dropdown-wrap.k-state-focused
     border-radius: 5px;
 }
 
-.skinSelector .k-dropdown-wrap.k-state-focused,
-.skinSelector .k-dropdown-wrap.k-state-hover,
-.skinSelector .k-dropdown-wrap.k-state-active
+#examplesThemeChooser .k-state-focused,
+#examplesThemeChooser .k-state-hover,
+#examplesThemeChooser .k-state-active
 {
     -moz-box-shadow: 2px 2px 2px 0 #aaa;
     -webkit-box-shadow: 2px 2px 2px 0 #aaa;
     box-shadow: 2px 2px 2px 0 #aaa;
 }
 
-#topnavWrap .skinSelector .k-input
+#examplesThemeChooser .k-input
 {
     color:#333;
 }
 
-.skinSelector .k-dropdown-wrap .k-arrow-down
+#examplesThemeChooser .k-arrow-down
 {
     background-position: 100% -693px;
 }
