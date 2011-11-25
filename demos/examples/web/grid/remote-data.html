@@ -13,10 +13,18 @@
         <!-- script -->
         <script src="../../../../src/jquery.min.js"></script>
         <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.model.js"></script>
         <script src="../../../../src/kendo.data.odata.js"></script>
         <script src="../../../../src/kendo.data.js"></script>
         <script src="../../../../src/kendo.pager.js"></script>
         <script src="../../../../src/kendo.sortable.js"></script>
+        <script src="../../../../src/kendo.popup.js"></script>
+        <script src="../../../../src/kendo.list.js"></script>
+        <script src="../../../../src/kendo.dropdownlist.js"></script>
+        <script src="../../../../src/kendo.calendar.js"></script>
+        <script src="../../../../src/kendo.datepicker.js"></script>
+        <script src="../../../../src/kendo.numerictextbox.js"></script>
+        <script src="../../../../src/kendo.filtermenu.js"></script>
         <script src="../../../../src/kendo.grid.js"></script>
         <!-- script -->
     </head>
@@ -37,12 +45,24 @@
                             transport: {
                                 read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
                             },
+                            schema: {
+                                model: {
+                                    fields: {
+                                        OrderID: { type: "number" },
+                                        CustomerID: { type: "string" },
+                                        Freight: { type: "number" },
+                                        ShipName: { type: "string" },
+                                        ShipCity: { type: "string" }
+                                    }
+                                }
+                            },
                             pageSize: 10,
                             serverPaging: true,
                             serverSorting: true
                         },
                         height: 250,
                         scrollable: true,
+                        filterable: true,
                         sortable: true,
                         pageable: true,
                         columns: ["OrderID", "CustomerID", "Freight", "ShipName", "ShipCity"]
