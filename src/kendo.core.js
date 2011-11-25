@@ -496,7 +496,41 @@
      /**
      * @name kendo.Globalization.Description
      *
-     * @section kendo.culture
+     * @section Globalization is the process of designing and developing an
+     * application that works in multiple cultures. The culture defines specific information
+     * for the number formats, week and month names, date and time formats and etc.
+     *
+     * @section Kendo exposes <strong><em>culture(cultureName)</em></strong> method which allows to select the culture
+     * script coresponding to the "culture name". kendo.culture() method uses the passed culture name
+     * to select culture from the culture scripts that you have included and then sets the current culture.
+     * If there is no such culture, the default one is used.
+     *
+     * <h3>Define current culture settings</h3>
+     *
+     * @exampleTitle Include culture scripts and select culture
+     * @example
+     *
+     * <script src="jquery.js" />
+     * <script src="kendo.all.min.js" />
+     * <script src="kendo.culture.en-GB.js" />
+     * <script type="text/javascript">
+     *    //set current culture to the "en-GB" culture script.
+     *    kendo.culture("en-GB");
+     * </script>
+     *
+     * @exampleTitle Get current culture
+     * @example
+     * var cultureInfo = kendo.culture();
+     *
+     * @section
+     * <p> Widgets that depend on current culture are:
+     *    <ul>
+     *        <li> Calendar </li>
+     *        <li> DatePicker </li>
+     *        <li> TimePicker </li>
+     *        <li> NumericTextBox </li>
+     *    </ul>
+     * </p>
      */
     kendo.culture = function(cultureName) {
         if (cultureName !== undefined) {
