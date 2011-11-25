@@ -247,8 +247,8 @@
 
                 indicator = groupContainer.find(".k-group-indicator");
                 equal(indicator.length, 1);
-                equal(indicator.attr("data-kendo-field"), "field1");
-                equal(indicator.attr("data-kendo-dir"), "desc");
+                equal(indicator.attr(kendo.attr("field")), "field1");
+                equal(indicator.attr(kendo.attr("dir")), "desc");
             });
 
             test("data-title is set for group indicator", function() {
@@ -256,7 +256,7 @@
                     groupable = new Groupable(div, { groupContainer:  groupContainer }),
                     indicator = groupContainer.append(groupable.buildIndicator("field", "field title")).find(".k-group-indicator:first");
 
-                equal(groupContainer.find(".k-group-indicator:first").data("title"), "field title");
+                equal(groupContainer.find(".k-group-indicator:first").attr(kendo.attr("title")), "field title");
             });
 
         </script>
