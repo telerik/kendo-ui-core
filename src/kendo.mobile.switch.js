@@ -209,6 +209,7 @@
         options: {
             name: "MobileSwitch",
             enable: true,
+            selector: kendo.roleSelector("switch"),
             manimator: ".km-switch-background",
             animator: handleSelector
         },
