@@ -176,9 +176,9 @@
                 equal(value, 10);
             });
 
-            test('getValueFromPosition with small step 2 and mouse position 79 should return 8', function () {
+            test('getValueFromPosition with small step 2 and mouse position 78 should return 8', function () {
                 var slider = newSlider({ value: 0, smallStep: 2, style: "width: 156px;" }),
-                    mousePosition = 79,
+                    mousePosition = 78,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
 
@@ -221,9 +221,9 @@
                 equal(value, 0);
             });
 
-            test('getValueFromPosition with small step 0.1 mouse position 40 should return 0.4', function () {
+            test('getValueFromPosition with small step 0.1 mouse position 39 should return 0.4', function () {
                 var slider = newSlider({ value: 0, smallStep: 0.1, max: 1, style: "width: 156px;" }),
-                    mousePosition = 40,
+                    mousePosition = 39,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
 
@@ -239,9 +239,9 @@
                 equal(value, 0.3);
             });
 
-            test('getValueFromPosition with small step 0.1 mouse position 49 should return 0.5', function () {
+            test('getValueFromPosition with small step 0.1 mouse position 48 should return 0.5', function () {
                 var slider = newSlider({ value: 0, smallStep: 0.1, max: 1, style: "width: 156px;" }),
-                    mousePosition = 49,
+                    mousePosition = 48,
                     dragableArea = { startPoint: 0, endPoint: slider._maxSelection },
                     value = slider._getValueFromPosition(mousePosition, dragableArea);
 
