@@ -105,7 +105,7 @@ function generateVersion() {
         day = "0" + day;
     }
 
-    return date.getFullYear() + ".2." + (date.getMonth() + 1) + "" + day;
+    return date.getFullYear() + ".3." + (date.getMonth() + 1) + "" + day;
 }
 
 function template(template) {
