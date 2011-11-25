@@ -12,8 +12,6 @@
     </head>
     <body>
         <input id="slider" style="margin: 40px;" value="5">
-        <input id="slider1" style="margin: 40px;" value="5">
-        <input id="slider2" style="margin: 40px; width: 221px;" value="5">
         <input id="slider3" style="margin: 40px; width: 221px" value="5">
         <input id="slider4" style="margin: 40px; width: 230px;" value="5">
         <input id="slider5" style="margin: 40px; width: 221px" value="5">
@@ -24,14 +22,12 @@
         </div>
         <script type="text/javascript">
             $(document).ready(function() {
-                var slider = $("#slider").kendoSlider({ showButtons: true, largeStep: 1, orientation: "vertical" });
-                var slider = $("#slider1").kendoSlider({ showButtons: false, largeStep: 1  });
-                var slider = $("#slider2").kendoSlider({ showButtons: true, largeStep: 1  });
-                var slider = $("#slider3").kendoSlider({ showButtons: false, largeStep: 1  });
-                var slider = $("#slider4").kendoSlider({ showButtons: true, largeStep: 1  });
-                var slider = $("#slider5").kendoSlider({ showButtons: true, largeStep: 1, max: 30  });
+                var slider = $("#slider").kendoSlider({ showButtons: true, orientation: "vertical" });
+                var slider = $("#slider3").kendoSlider({ showButtons: true, largeStep: 1, min: -10  });
+                var slider = $("#slider4").kendoSlider({ showButtons: true, smallStep: 3  });
+                var slider = $("#slider5").kendoSlider({ showButtons: true, min: -20, max: 20  });
 
-                $("#rangeslider").kendoRangeSlider();
+                $("#rangeslider").kendoRangeSlider({ min: -20 });
             });
         </script>
 
