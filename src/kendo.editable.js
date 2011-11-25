@@ -142,7 +142,9 @@
 
             new Binder(container, that.options.model, { change: $.proxy(that._binderChange, that) });
 
-            that.validatable = container.kendoValidator({ rules: rules }).data("kendoValidator");
+            that.validatable = container.kendoValidator({
+                editorTemplate: '<div class="k-widget k-tooltip k-tooltip-validation"><span class="k-icon k-warning"> </span>' +
+                                '${message}<div class="k-callout k-callout-w"></div></div>', rules: rules }).data("kendoValidator");
 
             container.find(":input:visible:first").focus();
         }
