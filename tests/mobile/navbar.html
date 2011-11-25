@@ -24,12 +24,15 @@
             var NavBar = kendo.ui.MobileNavBar,
                 MOUSEDOWN = kendo.support.mousedown,
                 MOUSEUP = kendo.support.mouseup;
+            module("Navbar", {
+                setup: function() {
+                    kendo.ns = "kendo-";
+                }
+            });
 
             test("applies css class", function() {
                 var dom = $("<div/>");
-
                 var bar = new NavBar(dom);
-
                 ok(bar.element.hasClass("km-navbar"), "has specified CSS class");
             });
 
