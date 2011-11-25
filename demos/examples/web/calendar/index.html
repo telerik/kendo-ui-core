@@ -24,46 +24,26 @@
         <div class="description">Basic usage</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <h3>Creating a Calendar from scratch</code></h3>
-            <div class="code-sample">
-                <h4 class="code-title">Source:</h4>
-                <pre class="prettyprint">
-&lt;div id="calendar"&gt;&lt;/div&gt;
-
-&lt;script&gt;
-    $("#calendar").kendoCalendar();
-&lt;/script&gt;
-</pre>
-            </div>
-            <div class="code-sample output">
-                <h4 class="code-title">Output:</h4>
-                <div class="prettyprint">
-                    <div id="calendar"></div>
-                </div>
-            </div>
+            <div id="background">
+				<div id="calendar"></div>
+			</div>
             <script>
                 $(document).ready(function() {
                     // create Calendar from div HTML element
                     $("#calendar").kendoCalendar();
                 });
             </script>
-
             <style scoped>
-                #example h3 {
-                    clear: both;
+                background {
+                    width: 254px;
+					height: 250px;
+					margin: 30px auto;
+					padding: 69px 0 0 11px;
+					background: url('../content/calendar/calendar.png') transparent no-repeat 0 0;
                 }
-
-                #example .code-sample {
-                    width: 60%;
-                    float:left;
-                    margin-bottom: 20px;
-                }
-
-                #example .output {
-                    width: 24%;
-                    margin-left: 4%;
-                    float:left;
-                }
+				#calendar {
+					width: 241px;
+				}
             </style>
         </div>
         <!-- tools -->
