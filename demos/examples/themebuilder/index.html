@@ -162,6 +162,9 @@
                 <button class="k-button">A button</button>
                 <button class="k-button">Another one</button>
 
+                <h3>Upload</h3>
+                <input id="upload" type="file" />
+
                 <h3>Slider</h3>
                 <input id="slider" type="number" min="0" max="10" value="5" />
 
@@ -189,9 +192,6 @@
 
                 <h3>Window</h3>
                 <div id="window">Sample content</div>
-
-                <h3>Upload</h3>
-                <input id="upload" type="file" />
             </div>
 
             <style scoped>
@@ -280,11 +280,17 @@
 
                     $("#splitter").kendoSplitter();
 
-                    $("#window").kendoWindow({
-                        title: "Sample title",
-                        width: 300,
-                        height: 100
-                    });
+                    var windowContent = $("#window"),
+                        windowTitle = windowContent.prev("h3");
+
+                    windowContent
+                        .kendoWindow({
+                            title: "Sample title",
+                            width: 300,
+                            height: 100
+                        });
+
+                    windowTitle.css("paddingBottom", "+=130");
 
                     $("#grid").kendoGrid({
                         dataSource: sharedDataSource,
