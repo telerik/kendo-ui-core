@@ -214,9 +214,8 @@ body
     display: block;
     text-align: center;
     color: #fff;
-    font-size: 1.5em;
+    font-size: 1.7em;
     font-weight: bold;
-    line-height: 1.5em;
     text-shadow: 0 -1pt #777;
     float: left;
     width: 100%;
@@ -901,7 +900,7 @@ body
 .km-toolbar,
 .km-navbar
 {
-    padding: .5em;
+    padding: 0 .5em;
     .box-flex(1);
     .border-radius(0);
     position: relative;
@@ -914,24 +913,26 @@ body
     overflow: visible;
 }
 
+.km-toolbar .km-button,
+.km-navbar .km-leftitem,
+.km-navbar .km-rightitem,
+.km-navbar .km-view-title
+{
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
 .km-blackberry .km-toolbar,
-.km-meego .km-toolbar
+.km-meego .km-toolbar,
+.km-blackberry .km-navbar,
+.km-meego .km-navbar,
 {
     background-color: #181E17;
     background-image: linearGradient(top, rgba(43, 49, 45, 1), rgba(24, 30, 23, 0) 100%);
 }
 
-.km-ios .km-toolbar .km-button
-{
-    background-color: #8891be;
-}
-
-.km-ios .km-toolbar .km-state-active
-{
-    background-color: #a8b1de;
-}
-
-.km-android .km-toolbar
+.km-android .km-toolbar,
+.km-android .km-navbar
 {
     background-color: #9b9b9b;
     background-image: linearGradient(top, rgb(155, 155, 155), rgb(131, 131, 131));
@@ -1577,5 +1578,4 @@ input[type=checkbox]
 .km-rightitem ~ .km-view-title
 {
     position: absolute;
-    height: 100%;
 }
