@@ -230,7 +230,7 @@
                 return;
             }
 
-            jQuery(this.container).fadeIn("fast").animate({ height: 300 }, "fast");
+            jQuery(this.container).fadeIn("fast").animate({ height: 480 }, "fast");
         },
 
         close: function() {
