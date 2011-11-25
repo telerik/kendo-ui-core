@@ -8,8 +8,7 @@
         inArray = $.inArray,
         Binder = kendo.data.ModelViewBinder,
         Validator = ui.Validator,
-        CHANGE = "change",
-        DATATYPE = "data-kendo-type";
+        CHANGE = "change";
 
     var specialRules = ["url", "email", "number", "date", "boolean"];
 
@@ -18,6 +17,7 @@
             type = field.type,
             validation = field.validation,
             ruleName,
+            DATATYPE = kendo.attr("type"),
             rule,
             attr = {
                 name: options.field
@@ -32,7 +32,7 @@
                 attr[ruleName] = isPlainObject(rule) ? rule.value || ruleName : rule;
             }
 
-            attr["data-kendo-" + ruleName + "-msg"] = rule.message;
+            attr[kendo.attr(ruleName + "-msg")] = rule.message;
         }
 
         if (inArray(type, specialRules) >= 0) {
@@ -45,17 +45,17 @@
     var editors = {
         "number": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="text" style="width:100%"/>').attr(attr).appendTo(container).kendoNumericTextBox({ format: options.format });
-            $('<span data-kendo-for="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
+            $('<input type="text" class="k-input"/>').attr(attr).appendTo(container).kendoNumericTextBox({ format: options.format });
+            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
         "date": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="text" style="width:100%;"/>').attr(attr).appendTo(container).kendoDatePicker({ format: options.format });
-            $('<span data-kendo-for="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
+            $('<input type="text" class="k-input"/>').attr(attr).appendTo(container).kendoDatePicker({ format: options.format });
+            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
         "string": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="text" style="width:100%"/>').attr(attr).appendTo(container);
+            $('<input type="text" class="k-input"/>').attr(attr).appendTo(container);
         },
         "boolean": function(container, options) {
             var attr = createAttributes(options);
