@@ -1546,6 +1546,11 @@ div.k-dropdown
     outline: 0;
 }
 
+.k-dropdown
+{
+    outline: 0;
+}
+
 .k-dropdown .k-input,
 .k-selectbox .k-input
 {
@@ -1628,13 +1633,10 @@ div.k-datetimepicker .k-select+.k-select
     text-overflow: ellipsis;
 }
 
-.k-picker-wrap .k-select,
-.k-numeric-wrap .k-select,
-.k-dropdown-wrap .k-select
+.k-picker-wrap .k-icon,
+.k-dropdown-wrap .k-icon
 {
-    position: absolute;
-    top: 0;
-    right: 0;
+    height: 18px;
 }
 
 .k-autocomplete .k-input,

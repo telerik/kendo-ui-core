@@ -28,7 +28,7 @@
                 win,
                 loc,
                 pushStateSupported = window.history.pushState,
-                root = location.pathname.replace("index.html", "sandbox/");
+                root = location.pathname.replace(/\/(index\.html)?$/, "/sandbox/");
 
             module("History", {
                 setup: function() {
@@ -161,19 +161,25 @@
                 kendoHistory.navigate("/new-location");
             });
 
-            test("allows setting of root", function() {
-                if (!pushStateSupported) {
-                    return;
-                }
-                kendoHistory.start({root: root + "/subdir/", pushState: true});
-                kendoHistory.navigate('/new-location');
-                url(initial + "subdir/new-location");
-            });
-
             test("strips hash from passed urls", function() {
                 startWithHash();
                 kendoHistory.navigate('#/new-location');
                 equal(kendoHistory.current, '/new-location');
+            });
+
+            test("accepts event handlers passed as options", function() {
+                expect(1);
+
+                kendoHistory.start({root: root, change: function(e) { equal("/new-location", e.location); }});
+
+                kendoHistory.navigate("/new-location");
+            });
+
+            test("triggers ready with the initial location", function() {
+                expect(1);
+
+                win.location.hash = "/initial-location";
+                kendoHistory.start({root: root, ready: function(e) { equal("/initial-location", e.location); }});
             });
 
             asyncTest("listens for outside url changes (hashChange)", function() {
@@ -186,6 +192,25 @@
                 });
 
                 win.location.hash = "/outside-location";
+            });
+
+            test("passes parameters if any present", function() {
+                expect(2);
+                startWithHash();
+
+                kendoHistory.change(function(e) {
+                    equal(e.location, "/new-location");
+                    equal(e.params.foo, "bar");
+                });
+
+                kendoHistory.navigate("/new-location?foo=bar");
+            });
+
+            test("supports :back pseudo url for going back", function() {
+                startWithHash();
+                kendoHistory.navigate("/new-location");
+                kendoHistory.navigate(":back");
+                url(initial + "#/new-location");
             });
         </script>
     </body>

@@ -1,0 +1,52 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <title>kendo.ui.MobileNavBar Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.MobileNavBar Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+
+            var NavBar = kendo.ui.MobileNavBar,
+                MOUSEDOWN = kendo.support.mousedown,
+                MOUSEUP = kendo.support.mouseup;
+
+            test("applies css class", function() {
+                var dom = $("<div/>");
+
+                var bar = new NavBar(dom);
+
+                ok(bar.element.hasClass("km-navbar"), "has specified CSS class");
+            });
+
+            test("moves items based on data-kendo-align attributes", function() {
+                var dom = $('<div><div data-kendo-align="left" id="foo"/><div data-kendo-align="right" id="bar" /></div>');
+
+                var bar = new NavBar(dom);
+
+                var leftContainer = dom.children(".km-leftitem")[0];
+                var rightContainer = dom.children(".km-rightitem")[0];
+
+                ok(leftContainer, "creates left container");
+                equal(dom.find("#foo").parent()[0], leftContainer, "moves left aligned item to the container");
+
+                ok(rightContainer, "creates right container");
+                equal(dom.find("#bar").parent()[0], rightContainer, "moves right aligned item to the container");
+            });
+        </script>
+    </body>
+</html>

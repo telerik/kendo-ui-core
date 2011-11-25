@@ -21,7 +21,14 @@
 
         <script>
 
-            var Button = kendo.ui.MobileButton;
+            var Button = kendo.ui.MobileButton,
+                MOUSEDOWN = kendo.support.mousedown,
+                MOUSEUP = kendo.support.mouseup;
+
+            function click(dom) {
+                dom.trigger(MOUSEDOWN)
+                dom.trigger(MOUSEUP)
+            }
 
             test("applies css class", function() {
                 expect(1);
@@ -30,7 +37,17 @@
 
                 var button = new Button(dom);
 
-                ok(button.element.hasClass("k-button"), "Should have specified CSS class");
+                ok(button.element.hasClass("km-button"), "has specified CSS class");
+            });
+
+            test("accepts custom css class through options", function() {
+                expect(1);
+
+                var dom = $('<button data-kendo-style="detail"/>');
+
+                var button = new Button(dom);
+
+                ok(button.element.hasClass("km-detail"), "has specified CSS class");
             });
 
             test("wraps content in a span", function() {
@@ -40,7 +57,7 @@
 
                 var button = new Button(dom);
 
-                ok(button.element.children().first().is("span.k-text"), "Should wrap contents");
+                ok(button.element.children().first().is("span.km-text"), "Should wrap contents");
             });
 
             test("reuses existing span", function() {
@@ -51,7 +68,7 @@
 
                 var button = new Button(dom);
 
-                ok(span.hasClass("k-text"), "Should wrap contents");
+                ok(span.hasClass("km-text"), "Should wrap contents");
             });
 
             test("adds css class to children img elements", function() {
@@ -62,7 +79,7 @@
 
                 var button = new Button(dom);
 
-                ok(img.hasClass("k-image"), "Should set css class to img");
+                ok(img.hasClass("km-image"), "Should set css class to img");
             });
 
             test("raises click event when clicked", function() {
@@ -76,97 +93,7 @@
                     ok(true, "Should raise the click event");
                 });
 
-                dom.click();
-            });
-
-            test("should not raise click event when disabled", function() {
-                var dom = $("<button>foo</button>");
-
-                var button = new Button(dom);
-                button.disable();
-
-                button.bind("click", function() {
-                    ok(false, "Should not raise the click event");
-                });
-
-                dom.click();
-            });
-
-            test("should apply active state when pressed", function() {
-                expect(1);
-
-                var dom = $("<button>foo</button>");
-                var button = new Button(dom);
-
-                dom.mousedown();
-                ok(dom.hasClass("k-state-active"), "Should have active css class");
-            });
-
-            test("should remove active state when depressed", function() {
-                expect(1);
-
-                var dom = $("<button>foo</button>");
-                var button = new Button(dom);
-
-                dom.mousedown();
-                dom.mouseup();
-                ok(!dom.hasClass("k-state-active"), "Should not have active css class");
-            });
-
-            test("should not apply active state when disabled", function() {
-                expect(1);
-
-                var dom = $("<button>foo</button>");
-                var button = new Button(dom);
-
-                button.disable();
-
-                dom.mousedown();
-
-                ok(!dom.hasClass("k-state-active"), "Should not have active css class");
-            });
-
-            test("should not apply active state when disabled", function() {
-                expect(1);
-
-                var dom = $("<button>foo</button>");
-                var button = new Button(dom);
-
-                button.disable();
-
-                dom.mousedown();
-
-                ok(!dom.hasClass("k-state-active"), "Should not have active css class");
-            });
-
-            test("disable from configuration options", function() {
-                var dom = $("<button>foo</button>");
-
-                var button = new Button(dom, { enable: false });
-
-                button.bind("click", function() {
-                    ok(false, "Should not raise the click event");
-                });
-
-                dom.click();
-            });
-
-            test("should enable disabled button", function() {
-                expect(1);
-
-                var dom = $("<button>foo</button>");
-
-                var button = new Button(dom);
-
-                button.disable();
-
-                button.bind("click", function() {
-                    ok(true, "Should raise the click event");
-                });
-
-                button.enable();
-
-                dom.click();
+                click(dom);
             });
         </script>
     </body>

@@ -29,6 +29,7 @@
         ABORT_ID = "abortId",
         OVERFLOW = "overflow",
         TRANSLATE = "translate",
+        STYLE = "style",
         TRANSITION = cssPrefix + "transition",
         TRANSFORM = cssPrefix + "transform";
 
@@ -81,7 +82,7 @@
         }
     });
 
-    kendo.toggleClass = function (element, classes, options, add) {
+    kendo.toggleClass = function(element, classes, options, add) {
         if (classes) {
             classes = classes.split(" ");
 
@@ -133,7 +134,7 @@
         return effects;
     };
 
-    function parseInteger( value ) {
+    function parseInteger(value) {
         return parseInt(value, 10);
     }
 
@@ -159,38 +160,23 @@
                         styles[value] = style[value.replace(/\-(\w)/g, function (strMatch, g1) { return g1.toUpperCase() })];
                     });
                 }
+        } else {
+            styles = document.defaultView.getComputedStyle(element, "");
         }
 
         return styles;
     }
 
-    function wrapForAnimation(element, options) {
-        options = options || {};
-        return kendo.wrap(element).css($.extend({position: "relative"}, options));
-    }
-
-    function positionElement(element, direction) {
-        if (!direction) {
-            return;
-        }
-
-        var offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth());
-
-        if (kendo.support.transitions) {
-            element.css(TRANSFORM, direction.transition + "(" + offset + PX + ")");
-        } else {
-            element.css(direction.property, offset + PX);
-        }
-
-        // Read a style to force Chrome to apply the change.
-        element.css(direction.property);
+    function slideToSlideIn(options) {
+      options.effects.slideIn = options.effects.slide;
+      delete options.effects.slide;
+      return options;
     }
 
     function parseTransitionEffects(options) {
-        var options,
-            effects = options.effects,
+        var effects = options.effects,
             mirror;
-            ;
+
         if (effects === "zoom") {
             effects = "zoomIn fadeIn";
         }
@@ -207,7 +193,7 @@
             effects = "slideIn:" + RegExp.$1;
         }
 
-        mirror = options.reverse && ((typeof effects === "string" && /^slide:/.test(effects)) || (typeof effects === "object" && "slide" in effects));
+        mirror = options.reverse && /^(slide:)/.test(effects);
 
         if (mirror) {
             delete options.reverse;
@@ -220,14 +206,14 @@
 
     if (transitions) {
 
-        function keys (obj) {
+        function keys(obj) {
             var acc = [];
             for (var propertyName in obj)
                 acc.push(propertyName);
             return acc;
         }
 
-        function removeTransitionStyles (element) {
+        function removeTransitionStyles(element) {
             element.css(TRANSITION, NONE);
 
             if (!browser.safari) {
@@ -235,7 +221,7 @@
             }
         }
 
-        function activateTask (currentTransition) {
+        function activateTask(currentTransition) {
             var element = currentTransition.object;
 
             if (!currentTransition) return;
@@ -243,8 +229,8 @@
             element.css(currentTransition.setup);
             element.css(TRANSITION);
 
-            setTimeout(function () {
-                element.data(ABORT_ID, setTimeout(function () {
+            setTimeout(function() {
+                element.data(ABORT_ID, setTimeout(function() {
 
                     removeTransitionStyles(element);
                     element.dequeue();
@@ -336,14 +322,16 @@
 
     function animationProperty(element, property) {
         if (transitions) {
-            var transform = element.css(TRANSFORM),
-                match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
+            var transform = element.css(TRANSFORM);
+            if (transform == "none") return property == "scale" ? 1 : 0;
+
+            var match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
                 computed = 0;
 
             if (match)
                 computed = parseInteger(match[1]);
             else {
-                match = transform.match(matrix3dRegExp) || [0, 0, 0];
+                match = transform.match(matrix3dRegExp) || [0, 0, 0, 0];
 
                 if (translateXRegExp.test(property)) {
                     computed = parseInteger(match[2]);
@@ -375,37 +363,37 @@
             // create a promise for each effect
             promise = $.Deferred(function(deferred) {
                 if (size(effects)) {
-                    var opts = extend( {}, options, { complete: deferred.resolve } );
+                    var opts = extend({}, options, { complete: deferred.resolve });
 
                     each(effects, function(effectName, settings) {
                         var effect = kendo.fx[effectName];
 
                         if (effect) {
-                            opts = extend( true, opts, settings );
+                            opts = extend(true, opts, settings);
 
-                            each( methods, function (idx) {
+                            each(methods, function (idx) {
                                 if (effect[idx])
-                                    methods[idx].push( effect[idx] );
+                                    methods[idx].push(effect[idx]);
                             });
 
-                            each( props, function (idx) {
+                            each(props, function(idx) {
                                 if (effect[idx])
-                                    $.merge( props[idx], effect[idx] );
+                                    $.merge(props[idx], effect[idx]);
                             });
 
                             if (effect["css"])
-                                css = extend( css, effect.css );
+                                css = extend(css, effect.css);
                         }
                     });
 
                     if (methods.setup.length) {
-                        each ($.unique(props.keep), function (idx, value) {
+                        each ($.unique(props.keep), function(idx, value) {
                             if (!element.data(value))
                                 element.data(value, element.css(value));
                         });
 
                         if (options.show) {
-                            css = extend( css, { display: element.data("olddisplay") || "block" } ); // Add show to the set
+                            css = extend(css, { display: element.data("olddisplay") || "block" }); // Add show to the set
                         }
 
                         if (css.transform) {
@@ -416,11 +404,11 @@
                         element.css(css);
                         element.css("overflow"); // Nudge Chrome
 
-                        each (methods.setup, function () { properties = extend( properties, this(element, opts)) });
+                        each (methods.setup, function() { properties = extend(properties, this(element, opts)) });
 
                         if (kendo.fx["animate"]) {
                             options.init();
-                            kendo.fx.animate ( element, properties, opts);
+                            kendo.fx.animate(element, properties, opts);
                         }
 
                         return;
@@ -448,22 +436,24 @@
             }
 
             if (size(effects)) {
-                var restore = function () {
+                var restore = function() {
                     each ($.unique(props.restore), function(idx, value) {
                         element.css(value, element.data(value));
                     });
                 };
 
-                if ($.browser.msie)
+                if ($.browser.msie) {
                     setTimeout(restore, 0); // Again jQuery callback in IE.
-                else
+                }
+                else {
                     restore();
+                }
 
-                each( methods.teardown, function () { this(element, options.reverse); } ); // call the internal completion callbacks
+                each(methods.teardown, function() { this(element, options.reverse); }); // call the internal completion callbacks
             }
 
             if (options.completeCallback) {
-                options.completeCallback(); // call the external complete callback
+                options.completeCallback(element); // call the external complete callback with the element
             }
         });
     };
@@ -474,7 +464,7 @@
     };
 
     extend(kendo.fx, {
-        animate: function (elements, properties, options) {
+        animate: function(elements, properties, options) {
             var useTransition = options.transition !== false;
             delete options.transition;
 
@@ -485,7 +475,7 @@
                     var params,
                         currentValue = properties ? properties[value]+ " " : null; // We need to match
 
-                    elements.each(function () {
+                    elements.each(function() {
                         if (currentValue) {
                             var element = $(this),
                                 single = properties;
@@ -565,50 +555,41 @@
                         }
                     });
                 });
-
             }
         },
 
         animateTo: function(element, destination, options) {
             var direction,
-                callback,
-                container = wrapForAnimation(element),
                 options = parseTransitionEffects(options),
-                animatingContainer = "slide" in options.effects,
-                outerContainer = wrapForAnimation(container, {overflow: "hidden"}),
-                transitions = kendo.support.transitions;
+                commonParent = element.parents().filter(destination.parents()).first(),
+                originalOverflow = commonParent.css(OVERFLOW);
 
-
-            destination.show();
-            container.append(destination);
+            commonParent.css(OVERFLOW, "hidden");
 
             $.each(options.effects, function(name, definition) {
                 direction = direction || definition.direction;
             });
 
-            positionElement(destination, kendo.directions[direction]);
-            destination.css({position: "absolute", "left": 0, "top": 0});
+            function complete() {
+                destination.attr(STYLE, "");
+                element.attr(STYLE, "");
+                commonParent.css(OVERFLOW, originalOverflow);
+                options.completeCallback && options.completeCallback();
+            }
 
-            options.complete = function() {
-                setTimeout(function() {
-                    element.hide();
-                    destination.attr("style", "");
-                    container.attr("style", "position:relative");
-                    outerContainer.attr("style", "position:relative");
-                    options.completeCallback && options.completeCallback();
-                }, 0);
-            };
+            options.complete = $.browser.msie ? function() { setTimeout(complete) } : complete;
 
-            if (animatingContainer) {
-                container.kendoAnimate(options);
+            if ("slide" in options.effects) {
+              element.kendoAnimate(options);
+              destination.kendoAnimate(slideToSlideIn(options));
             } else {
-                destination.kendoAnimate(options);
+              (options.reverse ? element : destination).kendoAnimate(options);
             }
         },
 
         fadeOut: {
             css: {
-                opacity: function () {
+                opacity: function() {
                     var element = $(this);
                     return element.data("reverse") && !this.style.opacity ? 0 : undefined;
                 }
@@ -619,7 +600,7 @@
         },
         fadeIn: {
             css: {
-                opacity: function () {
+                opacity: function() {
                     var element = $(this);
                     return !element.data("reverse") && !this.style.opacity ? 0 : undefined;
                 }
@@ -630,7 +611,7 @@
         },
         zoomIn: {
             css: {
-                transform: function () {
+                transform: function() {
                     var element = $(this);
                     return !element.data("reverse") && transitions ? "scale(.01)" : undefined;
                 }
@@ -641,7 +622,7 @@
         },
         zoomOut: {
             css: {
-                transform: function () {
+                transform: function() {
                     var element = $(this);
                     return element.data("reverse") && transitions ? "scale(.01)" : undefined;
                 }
@@ -657,33 +638,45 @@
                     divisor = options.divisor || 1;
 
                 if (!reverse) {
-                    offset = (direction.modifier * 100 / divisor);
-                    !element.data(ORIGIN) && element.data(ORIGIN, animationProperty(element, direction.transition));
+                    var origin = element.data(ORIGIN);
+                    offset = (direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()) / divisor);
+                    !origin && origin !== 0  && element.data(ORIGIN, animationProperty(element, direction.transition));
                 }
 
                 if (transitions && options.transition !== false) {
-                    extender[direction.transition] = reverse ? (element.data(ORIGIN) || 0) + PX : offset + "%";
+                    extender[direction.transition] = reverse ? (element.data(ORIGIN) || 0) : offset + PX;
                 } else {
-                    extender[direction.property] = reverse ? (element.data(ORIGIN) || 0) + PX : offset + "%";
+                    extender[direction.property] = reverse ? (element.data(ORIGIN) || 0) : offset + PX;
                 }
 
                 return extend(extender, options.properties);
             }
         },
+        slideMargin: {
+            setup: function(element, options) {
+                var origin = element.data(ORIGIN),
+                    offset = options.offset, margin,
+                    extender = {}, reverse = options.reverse;
+
+                !reverse && !origin && origin !== 0 && element.data(ORIGIN, parseInt(element.css("margin-left"), 10));
+
+                margin = (element.data(ORIGIN) || 0);
+                extender["margin-" + options.axis] = !reverse ? margin + offset : margin;
+                return extend(extender, options.properties);
+            }
+        },
         slideTo: {
             setup: function(element, options) {
-                var direction = kendo.directions[options.direction],
-                    offset = direction.modifier * options.offset,
+                var offset = (options.offset+"").split(","),
                     extender = {}, reverse = options.reverse;
 
                 if (transitions && options.transition !== false) {
-                    element.css(TRANSFORM, direction.transition + "(" + (!reverse ? offset : 0) + "px)");
-                    extender[direction.transition] = reverse ? offset + PX : 0;
+                    extender["translate"] = !reverse ? offset + PX : 0;
                 } else {
-                    !reverse && element.css(direction.property, offset + PX);
-                    extender[direction.property] = reverse ? offset + PX : 0;
+                    extender["left"] = !reverse ? offset[0] : 0;
+                    extender["top"] = !reverse ? offset[1] : 0;
                 }
-                element.css(direction.property);
+                element.css("left");
 
                 return extend(extender, options.properties);
             }
@@ -710,7 +703,7 @@
             keep: [ OVERFLOW ],
             css: { overflow: HIDDEN },
             restore: [ OVERFLOW ],
-            setup: function (element, options) {
+            setup: function(element, options) {
                 var reverse = options.reverse,
                     setHeight = element[0].style.height,
                     oldHeight = element.data(HEIGHT),
@@ -724,10 +717,10 @@
 
                 return extend({ height: (reverse ? 0 : height) + PX }, options.properties);
             },
-            teardown: function (element) {
+            teardown: function(element) {
                 var height = element.data(HEIGHT);
                 if (height == AUTO || height === BLANK) {
-                    setTimeout( function () { element.css(HEIGHT, AUTO).css(HEIGHT); }, 0 ); // jQuery animate complete callback in IE is called before the last animation step!
+                    setTimeout(function() { element.css(HEIGHT, AUTO).css(HEIGHT); }, 0); // jQuery animate complete callback in IE is called before the last animation step!
                 }
             }
         },

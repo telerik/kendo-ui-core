@@ -1,290 +1,321 @@
-(function($, undefined){
-    var extend = $.extend,
-        each = $.each,
-        mobile = kendo.mobile = kendo.mobile || {},
-        os = kendo.support.mobileOS,
-        touch = kendo.support.touch,
-        pointers = kendo.support.pointers,
-        transitions = kendo.support.transitions,
-        titleRegExp = /<title[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/title>/ig,
-        bodyRegExp = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/ig,
-        buttonSelector = "[data-kendo-ui=button],button,input[type=submit],input[type=reset],input[type=button],input[type=image]";
+(function($, undefined) {
 
-    $(document.documentElement).addClass("k-" + (!os || (os && os.ios) ? "ios" : os.name));
+    var kendo = window.kendo,
+        history = kendo.history,
+        support = kendo.support,
+        attr = kendo.attr,
+        os = support.mobileOS,
+        div = $("<div/>"),
+        meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> \
+                <meta name="apple-mobile-web-app-status-bar-style" content="black" /> \
+                <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
+        iconMeta = kendo.template('<link rel="apple-touch-icon" href="${icon}" />'),
+        buttonRolesSelector = toRoleSelector("button listview-link"),
+        linkRolesSelector = toRoleSelector("tab"),
+        roleSelector = kendo.roleSelector;
 
-    if (touch)
-        $(document.documentElement).bind("touchstart", function () { return false; });
-
-    if (pointers) {
-        each(["touchstart", "touchend", "touchmove", "touchcancel", "gesturestart", "gestureend"], function(m, value) {
-            $.fn[value] = function(callback) {
-                return this.bind(value, callback)
-            }
-        });
-
-        function createTouchEvent(e) {
-            e.changedTouches = e.getPointerList();
-
-            each(e.changedTouches, function(idx, value) {
-                value.identifier = value.pointerId;
-                value.pageX = value.clientX;
-                value.pageY = value.clientY;
-            });
-
-            e.touches = e.changedTouches;
-
-            return e;
-        }
-
-        document.documentElement.addEventListener("MSPointerDown", function(e) {
-            if (e.pointerType == 2) {
-                $(e.target).trigger("touchstart", createTouchEvent(e));
-            }
-        }, false);
-        document.documentElement.addEventListener("MSPointerMove", function(e) {
-            if (e.pointerType == 2) {
-                $(e.target).trigger("touchmove", createTouchEvent(e));
-            }
-        }, false);
-        document.documentElement.addEventListener("MSPointerUp", function(e) {
-            if (e.pointerType == 2) {
-                $(e.target).trigger("touchend", createTouchEvent(e));
-            }
-        }, false);
+    function toRoleSelector(string) {
+        return string.replace(/(\S+)/g, "[" + attr("role") + "*=$1],")
     }
 
-    $(document).bind("resize, orientationchange", function() {
-       window.scrollTo(0, 0);
-    });
-
-    $(document).ready(function () {
-        if (os) {
-            if (!os.ios && !os.blackberry)
-                if ($.browser.msie || $.browser.opera) {
-                    var layout = $(".k-view");
-                    $(".k-footer").prependTo(layout);
-                    $(".k-header").appendTo(layout);
-                }
+    function extractView(html) {
+        if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
+            html = RegExp.$1;
         }
 
-        mobile.initForm($(".k-tabStrip"));
-        application.run();
+        div[0].innerHTML = html;
+        return div.find(roleSelector("view")).first();
+    }
 
-        var view = $(".k-view:first");
-        if (!view.length)
-            view = $("<div class='k-view'/>").appendTo(application.root);
+    function hideAddressBar(element) {
+        if (os.appMode) {
+            return;
+        }
 
-        application
-            .addView(view.kendoView({ title: document.title }).data("kendoView"))
-            .show();
+        var lastWidth = 0;
 
-        $(document).trigger("appinit", { app: application, mobileOS: os });
-    });
-
-    extend(mobile, {
-        init: function(options) {
-            var html = [ "<meta name='apple-mobile-web-app-capable' content='yes' /><meta name='apple-mobile-web-app-status-bar-style' content='black' />" +
-                         "<meta content=\"initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width\" name=\"viewport\" />" ];
-
-            options = extend({}, options);
-
-            if (options.icon) {
-                html.push("<link rel='apple-touch-icon' href='");
-                html.push(options.icon);
-                html.push("' />");
-            }
-
-            $(html.join("")).prependTo("head");
-        },
-
-        isFullPage: function(content) {
-            return /^\s*<!doctype[^>]*>/i.test(content);
-        },
-
-        encodeScripts: function(content) {
-            return content.replace(/<script([^>]*)>/gi, "<kendo:script$1>")
-                          .replace(/<\/script>/gi, "</kendo:script>");
-        },
-
-        decodeScripts: function(content) {
-            return content.replace(/<kendo:script([^>]*)>/gi, "<script$1>")
-                          .replace(/<\/kendo:script>/gi, "<\/script>");
-        },
-
-        initForm: function(element, previousView) {
-            var buttons = element.find(buttonSelector);
-
-            buttons
-                .addClass("k-button")
-                .find("span:not(.k-message,.k-icon)")
-                .addClass("k-text");
-
-            if (!$(".k-tabStrip > .k-tabContainer").length)
-                $(".k-tabStrip").contents().wrapAll("<div class='k-tabContainer'>");
-
-            element.delegate(buttonSelector, touch ? "touchend" : "mouseup", function (e) {
-                e.preventDefault();
-                var target = $(kendo.eventTarget(e));
-
-                if (target.data("kendo-ui") == "back" && previousView) {
-                    kendo.mobile.goToView(previousView, true);
-                    return;
-                }
-
-                target
-                    .parents(".k-buttonStrip, .k-tabStrip, .k-toolbar")
-                    .find(".k-state-active")
-                    .removeClass("k-state-active");
-
-                target
-                    .closest(".k-button")
-                    .addClass("k-state-active");
+        if (os.android) {
+            $(window).scroll(function() {
+                element.height(window.innerHeight);
             });
-        },
+        }
 
-        goToView: function(view, callback) {
-            var back = false;
+        function hideBar() {
+            var pageWidth = element[0].offsetWidth,
+                compensation;
 
-            if (typeof callback === "boolean")
-                back = callback;
-
-            view.show(application.root);
-            if (!back) {
-                view.element.css(transitions.css + "box-ordinal-group", ++application.depth + "");
-            }
-
-            var width = application.root[0].style.width,
-                halfWidth = (100 / application.depth) + "%";
-
-            $(document.body)
-                .width((100 * application.depth) + "%");
-
-            $(".k-tabContainer")
-                .width(halfWidth)
-                .css(transitions.css + "box-flex", "0");
-
-            view.element
-                .add(view.element.siblings(".k-view"))
-                .css({ width: halfWidth });
-
-            back && application.depth--;
-
-            $(application.root)
-                .kendoAnimate(extend({ reverse: back, complete: function () {
-                                                                } },
-                                                                view.options.animation));
-
-            if ($.isFunction(callback)) {
-                callback();
-            }
-        },
-
-        switchView: function(view, initCallback) {
-            var loadedView = $(".k-view").filter(function() {
-                return $(this).data("url") == view;
-            });
-
-            if (loadedView.length > 0) {
-                kendo.mobile.goToView(loadedView.data("kendoView"), initCallback);
+            if (lastWidth === pageWidth) {
                 return;
             }
+            lastWidth = pageWidth;
 
-            $.ajax({
-                url: view,
-                cache: false,
-                dataType: "html",
-                success: function(content) {
-                    var viewPage,
-                        matches = titleRegExp.exec(content);
-
-                    if (mobile.isFullPage(content)) {
-                        var contentMatches = bodyRegExp.exec(content);
-                        viewPage = $(contentMatches ? contentMatches[1] : content).appendTo(application.root);
-                    } else { // partial content was served
-                        viewPage = $("<div class='k-view' />").appendTo(application.root);
-                        viewPage[0].innerHTML = content;
-                    }
-
-                    viewPage.data("url", view);
-
-                    var currentView = viewPage.kendoView({ previousView: application.currentView, title: matches ? matches[1] : "" }).data("kendoView");
-                    application.addView(currentView);
-                    kendo.mobile.goToView(currentView, initCallback);
+            if (os.device == "iphone" || os.device == "ipod" || os.android) {
+                if (os.android) {
+                    compensation = 56;
+                } else {
+                    compensation = 60;
                 }
-            });
+
+                element.height(window.innerHeight + compensation);
+                setTimeout(window.scrollTo, 0, 0, 1);
+            }
+        }
+
+        $(window).load(hideBar);
+        $(window).resize(hideBar);
+    }
+
+    function appLinkMouseUp(e) {
+        var link = $(e.currentTarget),
+            href = link.attr("href") || "javascript:;"; // Don't navigate or report errors if href is not set.
+
+        if (!e.isDefaultPrevented()) {
+            // Prevent iOS address bar progress display for in app navigation
+            link.attr("href", "#!");
+            setTimeout(function() { link.attr("href", href) });
+
+            history.navigate(href);
+            e.preventDefault();
+        }
+    }
+
+    function appLinkClick(e) {
+        e.preventDefault();
+    }
+
+    function getOrientationClass() {
+        return Math.abs(window.orientation) / 90 ? "km-horizontal" : "km-vertical";
+    }
+
+    var View = kendo.Class.extend({
+        init: function(element) {
+            var that = this,
+                contentSelector = roleSelector("content");
+
+            that.element = element.data("kendoView", that).addClass("km-view");
+
+            that.header = element.find(roleSelector("header")).addClass("km-header");
+            that.footer = element.find(roleSelector("footer")).addClass("km-footer");
+
+            if (!element.has(contentSelector)[0]) {
+              element.wrapInner("<div " + kendo.attr("role") + '="content"></div>');
+            }
+
+            that.content = element.find(roleSelector("content"))
+                                .addClass("km-content")
+                                .kendoScroller({useOnDesktop: true});
+
+            that.element.prepend(that.header).append(that.footer);
         }
     });
 
-    function Application(options) {
-        extend(this.options, options);
-        this.views = [];
+    function ViewSwitcher(previous, view) {
+        var that = this,
+            callback = function() { previous.element.hide(); },
+            animationType;
+
+        that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(history.url().params);
+
+        animationType = (that.back ? previous : view).element.data(kendo.ns +"transition");
+
+        that.parallax = animationType === "slide";
+
+        view.element.css("display", "");
+
+        if (that.back && !that.parallax) {
+            view.element.css("z-index", 0);
+            previous.element.css("z-index", 1);
+        } else {
+            view.element.css("z-index", 1);
+            previous.element.css("z-index", 0);
+        }
+
+        that.contents(previous, view).kendoAnimateTo(that.contents(view, previous), {effects: animationType, reverse: that.back, complete: callback});
+        that.switchWith(previous.footer, view.footer);
+        that.switchWith(previous.header, view.header);
+
+        if (!that.back) {
+            previous.nextView = view;
+        }
     }
 
-    Application.prototype = {
-        options: {
-            
-        },
+    ViewSwitcher.replace = function(previous, view) {
+        new ViewSwitcher(previous, view);
+    };
 
-        run: function(callback) {
-            var that = this;
-
-            that.root = $(".k-showcase");
-            if (!that.root.length)
-                that.root = $("<div class='k-slot'><div class='k-showcase'/></div>").appendTo(document.body).find(".k-showcase");
-
-            if (callback)
-                callback(that);
-
-            that.depth = 1;
-
-            window.scrollTo(0, 1);
-
-            return that;
-        },
-
-        addView: function(view) {
-            this.views.push(view);
-
-            return this;
-        },
-
-        removeView: function(view) {
-            var that = this;
-
-            if ("element" in view)
-                view = view.element;
-            else
-                view = $(view);
-
-            each(that.views, function(idx, value) {
-                if (value.element == view) {
-                    kendo.mobile.goToView(value.options.previousView, true);
-                    
-                    value.element.remove();
-                    delete that.views[idx];
-                    return false;
+    ViewSwitcher.prototype = {
+        contents: function(source, destination) {
+            if (this.parallax) {
+                contents = source.content;
+                if (!destination.header[0]) {
+                    contents = contents.add(source.header);
                 }
-            });
 
-            return that;
+                if (!destination.footer[0]) {
+                    contents = contents.add(source.footer);
+                }
+            } else {
+                contents = source.element;
+            }
+
+            return contents;
         },
 
-        show: function(viewIndex, options) {
-            var that = this;
-
-            that.currentView && that.currentView.hide();
-
-            var view = that.views[viewIndex || 0];
-            view.show(that.root);
-
-            that.currentView = view;
-
-            return that;
+        switchWith: function(source, destination) {
+            if (source[0] && destination[0]) {
+                if (source.data("id") && source.data("id") === destination.data("id")) {
+                    // cloning (instead of appending) Resolves iPad iOS 4 specific footer flicker
+                    destination.html("").append(source.contents());
+                } else if(this.parallax) {
+                    source.kendoAnimateTo(destination, {effects: "fade", reverse: this.back});
+                }
+            }
         }
     };
 
-    // temporary, the class will be removed
-    window.application = new Application();
-    mobile.init();
+    var Application = kendo.Observable.extend({
+        init: function(element, options) {
+            kendo.Observable.fn.init.call(this, options);
+            this.element = element;
 
+            $(document.documentElement).addClass("km-" + (!os ? "ios" : os.name) + " " + getOrientationClass());
+
+            $(document).bind("orientationchange", function(e) {
+                $(document.documentElement)
+                    .removeClass("km-horizontal km-vertical")
+                    .addClass(getOrientationClass());
+            });
+        },
+
+        start: function(options) {
+            var that = this, views, rootView, historyEvents;
+
+            that.options = options || {};
+
+            that._attachMeta();
+
+            that.element = that.element ? $(that.element) : $(document.body);
+
+            hideAddressBar(that.element);
+
+            that.setupAppLinks();
+
+            views = that.element.find(roleSelector("view"));
+            views.first().attr(attr("url"), "/");
+
+            historyEvents = {
+                change: function(e) {
+                    that.navigate(e.string);
+                },
+
+                ready: function(e) {
+                    that._findView(e.string, function(view) {
+                        views.not(view.element).hide();
+                        that._setCurrentView(view);
+                    });
+                }
+            };
+
+            history.start($.extend(options, historyEvents));
+        },
+
+        navigate: function(url) {
+            var that = this;
+
+            that._findView(url, function(view) {
+                history.navigate(url, true);
+
+                that.trigger("viewHide", { view: that.view });
+
+                ViewSwitcher.replace(that.view, view);
+                that._setCurrentView(view);
+            });
+        },
+
+        setupAppLinks: function(element) {
+            this.element
+                .delegate(linkRolesSelector, support.mousedown, appLinkMouseUp)
+                .delegate(buttonRolesSelector, support.mouseup, appLinkMouseUp)
+                .delegate(linkRolesSelector + buttonRolesSelector, "click", appLinkClick);
+        },
+
+        scroller: function() {
+            return this.view.content.data("kendoScroller");
+        },
+
+        _setCurrentView: function(view) {
+            var that = this, params = history.url().params;
+            that.view = view;
+            view.params = params;
+            that.trigger("viewShow", {view: view, params: params});
+        },
+
+        _createView: function(element) {
+            var view = new View(element);
+
+            if (kendo.mobile) {
+                kendo.mobile.enhance(view.element);
+            }
+
+            this.trigger("viewInit", { view: view });
+
+            return view;
+        },
+
+        _createRemoteView: function(url, html) {
+            var that = this, element;
+
+            element = extractView(html);
+
+            element.hide().attr(attr("url"), url);
+
+            that.element.append(element);
+
+            return that._createView(element);
+        },
+
+        _findView: function(url, callback) {
+            var that = this,
+                view,
+                firstChar = url.charAt(0),
+                local = firstChar === "#",
+                remote = firstChar === "/",
+                element;
+
+            element = that.element.find("[" + attr("url") + "='" + url + "']");
+
+            if (!element[0] && !remote) {
+                element = that.element.find(local ? url : "#" + url);
+            }
+
+            view = element.data("kendoView");
+
+            if (view) {
+                callback(view);
+            } else if (element[0]) {
+                callback(that._createView(element));
+            } else {
+                $.get(url, function(html) {
+                    callback(that._createRemoteView(url, html));
+                });
+            }
+        },
+
+        _attachMeta: function() {
+            var icon = this.options.icon;
+
+            $("head").prepend(meta);
+
+            if (icon) {
+                $("head").prepend(iconMeta({icon: icon}));
+            }
+        }
+    });
+
+    kendo.application = new Application;
+    kendo.Application = Application;
+
+    $(function() {
+        kendo.application.start({});
+    });
 })(jQuery);

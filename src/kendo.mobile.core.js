@@ -1,5 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
+        support = kendo.support,
         extend = $.extend,
         mobile,
         Widget = kendo.ui.Widget;
@@ -50,7 +51,11 @@
                 }
             }
         }
-    }
+    };
+
+    kendo.roleSelector = function(role) {
+        return "[" + kendo.attr("role") + "=" + role + "]";
+    };
 
     kendo.ui.MobileWidget = MobileWidget;
     kendo.mobile = mobile;

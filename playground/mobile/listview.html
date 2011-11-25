@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html class="km-ios">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta content="minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
+
+        <title>Listview</title>
+        <link rel="stylesheet/less" type="text/css" href="../../styles/mobile/layout.less" />
+
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="../../styles/mobile/less.js"></script>
+        <style>
+            body
+            {
+                background: white url('ios-linen-light-gray.png');
+                padding: 0;
+                margin: 0;
+            }
+
+            html, body {
+                position: static;
+                height: 300% !important;
+            }
+
+            li a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            li a:only-child {
+                display: block;
+                background: white url('disclosure-indicator.jpg') right center no-repeat;
+            }
+
+            li span + a {
+                float: right;
+                background: white url('detail-disclosure.jpg') center center no-repeat;
+                width: 30px;
+                height: 30px;
+                margin-right: 10px;
+                text-indent: -10000px;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>Plain-style list view</h3>
+
+        <ul data-kendo-role="listview" class="km-listview km-list">
+            <li>Albania</li>
+            <li>Australia</li>
+        </ul>
+
+        <h3>Inset-style list view</h3>
+        <ul data-kendo-role="listview" data-kendo-style="inset" class="km-listview km-list km-listinset">
+            <li>Albania</li>
+            <li><a href="#">Australia</a></li>
+            <li><span>Australia</span><a href="#">More</a></li>
+        </ul>
+        <h3>Plain-style list view with groups</h3>
+        <ul data-kendo-role="listview" data-kendo-type="group" class="km-listview km-listgroup">
+            <li>A
+                <ul class="km-list">
+                    <li>Albania</li>
+                    <li>Australia</li>
+                </ul>
+            </li>
+            <li>B
+                <ul class="km-list">
+                    <li><a href="#">Bangladesh</a></li>
+                    <li>Bulgaria</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>Inset-style list view with groups</h3>
+        <ul data-kendo-role="listview" data-kendo-type="group" data-kendo-style="inset" class="km-listview km-listinsetgroup">
+            <li>A
+                <ul class="km-list">
+                    <li>Albania</li>
+                    <li>Australia</li>
+                </ul>
+            </li>
+            <li>B
+                <ul class="km-list">
+                    <li><a href="#">Bangladesh</a></li>
+                    <li><a href="#">Bulgaria</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul data-kendo-role="listview" class="km-listview km-list">
+            <li><a href="http://google.com">Albania</a></li>
+            <li><a href="http://apple.com">Australia</a></li>
+        </ul>
+
+    </body>
+</html>

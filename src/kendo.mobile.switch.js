@@ -1,24 +1,141 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        mobile = kendo.mobile,
         support = kendo.support,
         touch = support.touch,
         os = support.mobileOS,
         TOGGLE = "toggle",
-        MOUSEDOWN = touch ? "touchstart" : "mousedown",
-        MOUSEUP = touch ? "touchend" : "mouseup",
-        handleSelector = ".k-toggle-handle",
-        bindSelectors = ".k-checkbox",
+        CHANGE = "change",
+        SLIDE = "slide",
+        MOUSEDOWN = support.mousedown,
+        MOUSEUP = support.mouseup,
+        MOUSEMOVE = support.mousemove,
+        handleSelector = ".km-switch-handle",
+        bindSelectors = ".km-checkbox",
+        TRANSFORMSTYLE = support.transitions.css + "transform",
         extend = $.extend,
-        proxy = $.proxy;
+        proxy = $.proxy,
+        slideAnimation = {
+            manimator: ".km-slider-background",
+            animator: ".km-slider-handle"
+        },
+        switchAnimation = {
+            all: {
+                manimator: ".km-switch-background",
+                animator: handleSelector,
+                effects: "slideTo",
+                duration: 150
+            },
+            android: {
+                effects: {},
+                duration: 0
+            }
+        };
+    switchAnimation = os.name in switchAnimation ? switchAnimation[os.name] : switchAnimation.all;
 
-    var Toggle = ui.MobileWidget.extend({
+    function preventDefault(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function limitValue(value, minLimit, maxLimit) {
+        return Math.max( minLimit, Math.min( maxLimit, value));
+    }
+
+    function Axis(element, owner) {
+        var initial, width, halfWidth, constrain, location, lastValue,
+            handle, animator, manimator, origin, snapPart,
+            options = owner.options,
+            max = options.max,
+            axis = options.axis,
+            axisProperty = axis == "x" ? "left" : "top";
+
+        element.bind(MOUSEDOWN, start);
+
+        function setPosition(e, location) {
+            location = limitValue(location, halfWidth, constrain + halfWidth);
+
+            var position = location - halfWidth;
+            animator.css(TRANSFORMSTYLE, "translate" + axis + "(" + position + "px)"); // TODO: remove halfWidth
+            manimator.css("margin-" + axisProperty, origin + position);
+
+            return Math.round(position / snapPart);
+        }
+
+        function getAxisLocation(e, element) {
+            return kendo.touchLocation(e)[axis] - element.offset()[axisProperty];
+        }
+
+        function start(e) {
+            preventDefault(e);
+
+            initial = getAxisLocation(e, element);
+            width = element.outerWidth();
+            handle = element.find(options.handle);
+            halfWidth = handle.outerWidth() / 2;
+            snapPart = (width - halfWidth*2) / (max - 1);
+            constrain = width - handle.outerWidth(true);
+            animator = element.find(extend({ animator: "animator" in switchAnimation ? switchAnimation.animator : options.handle }, options).animator);
+            manimator = element.find(extend({ manimator: switchAnimation.manimator }, options).manimator);
+            location = limitValue(initial, halfWidth, constrain + halfWidth);
+            origin = manimator.data("origin");
+            if (!origin && origin !== 0) {
+                origin = parseInt(manimator.css("margin-left"), 10);
+                manimator.data("origin", origin);
+            }
+
+            $(document)
+                .bind(MOUSEMOVE, move)
+                .bind(MOUSEUP + " mouseleave", stop); // Stop if leaving the simulator/screen
+        }
+
+        function move(e) {
+            var value = setPosition(e, getAxisLocation(e, element));
+            if (value != lastValue)
+                owner.trigger(SLIDE, { value: value });
+            lastValue = value;
+        }
+
+        function stop(e) {
+            preventDefault(e);
+
+            if (max == 2 && Math.abs(initial - getAxisLocation(e, element)) <= 2) {
+                owner.trigger(CHANGE, { value: !owner.input[0].checked });
+            } else {
+                owner.trigger(CHANGE, { value: setPosition(e, getAxisLocation(e, element)) });
+            }
+
+            $(document)
+                .unbind(MOUSEMOVE, move)
+                .unbind(MOUSEUP + " mouseleave", stop);
+        }
+    }
+
+    var SlidingHelper = ui.MobileWidget.extend({
         init: function (element, options) {
             var that = this;
-            element = $(element);
 
             ui.MobileWidget.fn.init.call(that, element, options);
+
+            if (!that.options.handle) return;
+
+            Axis(that.element, that);
+
+            that.bind([ CHANGE, SLIDE ], options);
+        },
+
+        options: {
+            axis: "x",
+            max: 2
+        }
+
+    });
+
+    var Toggle = SlidingHelper.extend({
+        init: function (element, options) {
+            var that = this;
+
+            SlidingHelper.fn.init.call(that, element, options);
 
             element = that.element;
             options = that.options;
@@ -33,10 +150,11 @@
 
         enable: function(enable) {
             enable = typeof enable === "boolean" ? enable : true;
-
             var that = this;
 
+            that.options.enable = enable;
             if (enable) {
+                that.element.removeClass("km-state-disabled");
                 that.input.removeAttr("disabled");
                 that.element.delegate("input[type=checkbox]", "change", that._toggleProxy)
                             .delegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
@@ -46,6 +164,7 @@
                             .undelegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
                 that.element.filter(bindSelectors).unbind(MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
                 that.input.attr("disabled");
+                that.element.addClass("km-state-disabled");
             }
         },
 
@@ -54,17 +173,18 @@
         },
 
         toggle: function(toggle) {
-            var input = this.input,
+            var that = this,
+                input = that.input,
                 checked = input[0].checked;
 
-            if (toggle != checked && !this.handle.data("animating") && !input.attr("disabled")) {
+            if (toggle != checked && !that.handle.data("animating") && that.options.enable) {
                 input[0].checked = typeof(toggle) === "boolean" ? toggle : !checked;
                 input.trigger("change");
             }
         },
 
         _trigger: function (e) {
-            this.handle.toggleClass("k-state-active", e.type == MOUSEDOWN);
+            this.handle.toggleClass("km-state-active", e.type == MOUSEDOWN);
         }
 
     });
@@ -78,86 +198,89 @@
                 element = element.wrap("<label />").parent();
             }
 
-            Toggle.fn.init.call(that, element, options);
+            Toggle.fn.init.call(that, element, extend(options, { handle: handleSelector }));
 
-            element = that.element;
-            options = that.options;
+            that._wrap();
+            that.enable(that.options.enable);
 
-            that._wrapper();
-            that.enable(options.enable);
-
-            that.animation = {
-                all: {
-                    effects: "slideTo:right",
-                    duration: 200,
-                    offset: 60
-                },
-                android: {
-                    effects: {},
-                    duration: 0
-                },
-                meego: {
-                    animator: ".k-toggle-tip",
-                    effects: "slideTo:right",
-                    duration: 200,
-                    offset: 30
-                }
-            };
+            that.bind(CHANGE, proxy(that._snap, that));
         },
 
         options: {
             name: "MobileSwitch",
-            enabled: true
+            enable: true,
+            manimator: ".km-switch-background",
+            animator: handleSelector
         },
 
-        refresh: function() {
-        },
-
-        _toggle: function(e) {
-            var that = this,
-                extra = os.name in that.animation ? that.animation[os.name] : that.animation.all,
-                handle = that.handle,
-                animator = "animator" in extra ? handle.children(extra["animator"]) : handle,
-                back = that.input[0].checked;
-
-            if (!handle.data("animating")) {
-                handle
-                    .removeClass("k-toggle-on")
-                    .removeClass("k-toggle-off");
-
-                animator
-                    .kendoStop(true, true)
-                    .kendoAnimate(extend({
-                        reverse: back,
-                        complete: function () {
-                            handle.addClass("k-toggle-" + (back ? "on" : "off"));
-                            that.trigger(TOGGLE, { checked: that.input[0].checked });
-                        }
-                    }, that.animation, extra ));
-            }
-        },
-
-        _wrapper: function() {
+        _toggle: function() {
             var that = this;
 
+            if (that.options.enable) {
+                that._snap({ value: that.input[0].checked })
+            }
+        },
+
+        _snap: function (e) {
+            var that = this,
+                handle = that.handle,
+                checked = (e.value == 1), distance;
+
+            handle
+                .removeClass("km-switch-on")
+                .removeClass("km-switch-off")
+                .addClass("km-switch-" + (checked ? "on" : "off"));
+
+            if (!handle.data("animating")) {
+                distance = e.value * (that.element.outerWidth() - that.handle.outerWidth(true));
+
+                that.mAnimator
+                    .kendoStop(true, true)
+                    .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !e.value, axis: "left", duration: 150 });
+
+                that.animator
+                    .kendoStop(true, true)
+                    .kendoAnimate(extend({
+                        complete: function () {
+                            that.input[0].checked = checked;
+                            that.trigger(TOGGLE, { checked: checked });
+                        }
+                    }, switchAnimation, {
+                        offset: distance + "px,0"
+                    }));
+            }
+        },
+
+        _wrap: function() {
+            var that = this,
+                input = that.element.children("input[type=checkbox]"),
+                handle = that.element.children(handleSelector);
+
             if (that.element.is("label")) {
-                that.element.addClass("k-toggle");
+                that.element.addClass("km-switch");
             }
 
-            that.input = that.element.children("input[type=checkbox]");
-            if (that.input.length) {
-                that.input.data("kendo-role", "toggle");
+            if (input.length) {
+                input.data("kendo-role", "switch");
             } else {
-                that.input = $("<input type='checkbox' data-kendo-role='toggle' />").appendTo(that.element);
+                input = $("<input type='checkbox' " + kendo.attr("role") +  "='switch' />").appendTo(that.element);
             }
 
-            that.handle = that.element.children(".k-toggle-handle");
 
-            if (!that.handle.length) {
-                that.handle = $("<span class='k-toggle-handle k-toggle-" + (that.input[0].checked ? "on" : "off") + "' />")
+            if (!handle.length) {
+                handle = $("<span class='km-switch-container'><span class='km-switch-handle' /></span>")
                                     .appendTo(that.element)
-                                    .append("<span class='k-toggle-tip' />");
+                                    .children(handleSelector);
             }
+
+            handle.parent().before("<span class='km-switch-wrapper'><span class='km-switch-background'></span></span>");
+
+            that.animator = "animator" in switchAnimation ? that.element.find(switchAnimation.animator) : handle;
+
+            that.mAnimator = that.element.find(switchAnimation.manimator);
+
+            that.input = input;
+            that.handle = handle;
         }
 
     });
@@ -175,44 +298,89 @@
 
             Toggle.fn.init.call(that, element, options);
 
-            element = that.element;
-            options = that.options;
-
-            that._wrapper();
-            that.enable(options.enable);
+            that._wrap();
+            that.enable(that.options.enable);
         },
 
         options: {
             name: "MobileCheckBox",
-            enabled: true
-        },
-
-        refresh: function() {
+            enable: true
         },
 
         _toggle: function() {
             var that = this;
 
-            that.handle.toggleClass("k-checkbox-checked", that.input[0].checked);
-            that.trigger(TOGGLE, { checked: that.input[0].checked });
+            if (that.options.enable) {
+                that.handle.toggleClass("km-checkbox-checked", that.input[0].checked);
+                that.trigger(TOGGLE, { checked: that.input[0].checked });
+            }
         },
 
-        _wrapper: function() {
-            var that = this;
+        _wrap: function() {
+            var that = this,
+                input = that.element.children("input[type=checkbox]");
 
             if (that.element.is("label"))
-                that.element.addClass("k-checkbox");
+                that.element.addClass("km-checkbox");
 
-            that.input = that.element.children("input[type=checkbox]");
-            if (that.input.length)
-                that.input.data("kendo-role", "checkbox");
+            if (input.length)
+                input.data("kendo-role", "checkbox");
             else
-                that.input = $("<input type='checkbox' data-kendo-role='checkbox' />").appendTo(that.element);
+                input = $("<input type='checkbox' " + kendo.attr("role") + "='checkbox' />").appendTo(that.element);
 
+            that.input = input;
             that.handle = that.element;
         }
 
     });
 
     ui.plugin(MobileCheckBox);
+
+    var MobileSlider = SlidingHelper.extend({
+        init: function(element, options) {
+            var that = this;
+
+            SlidingHelper.fn.init.call(that, element, extend(options, slideAnimation, { handle: slideAnimation.animator }));
+
+            that._wrap();
+            that.bind([ CHANGE, SLIDE ], that.options);
+        },
+
+        options: {
+            name: "MobileSlider",
+            enable: true,
+            max: 100
+        },
+
+        _wrap: function() {
+            var that = this, handle, marginElement,
+                element = that.element;
+
+            if (that.element.is("span"))
+                that.element.addClass("km-slider");
+
+            if (!element.data("kendo-role"))
+                element.data("kendo-role", "slider");
+            else
+                $("<span " + kendo.attr("role") + "='slider' class='km-slider'><span class='km-slider-handle'></span></span>").appendTo(that.element);
+
+            handle = element.find(slideAnimation.animator);
+
+            if (!handle.length) {
+                handle = $("<span class='km-slider-container'><span class='km-slider-handle' /></span>")
+                                    .appendTo(element)
+                                    .children(slideAnimation.animator);
+            }
+
+            handle.parent().before("<span class='km-slider-wrapper'><span class='km-slider-background'></span></span>");
+
+            marginElement = that.element.find(slideAnimation.manimator);
+            marginElement.data("margin", parseInt(marginElement.css("margin-left"), 10));
+
+            that.handle = handle;
+        }
+
+    });
+
+    ui.plugin(MobileSlider);
 })(jQuery);

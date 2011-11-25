@@ -72,7 +72,7 @@ html, body
 
 .toolbar,
 .button,
-.buttonStrip,
+.radiogroup,
 .tabStrip
 {
     background-origin: border-box;
@@ -130,7 +130,7 @@ html, body
 
 .android .toolbar,
 .android .button,
-.android .buttonStrip,
+.android .radiogroup,
 .android .tabStrip
 {
     color: #000;
@@ -157,11 +157,11 @@ html, body
 
 .blackberry .toolbar,
 .blackberry .button,
-.blackberry .buttonStrip,
+.blackberry .radiogroup,
 .blackberry .tabStrip,
 .meego .toolbar,
 .meego .button,
-.meego .buttonStrip,
+.meego .radiogroup,
 .meego .tabStrip
 {
     font: normal 1em Arial, Helvetica, sans-serif;
@@ -227,10 +227,10 @@ html, body
     background-image: linearGradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
 }
 
-.buttonStrip,
-.android .buttonStrip,
-.meego .buttonStrip,
-.blackberry .buttonStrip
+.radiogroup,
+.android .radiogroup,
+.meego .radiogroup,
+.blackberry .radiogroup
 {
     padding: 0;
     -moz-border-radius: 0;
@@ -244,12 +244,12 @@ html, body
     display: table;
 }
 
-.buttonStrip > .button
+.radiogroup > .button
 {
     display: table-cell;
 }
 
-.buttonStrip .button
+.radiogroup .button
 {
     margin: 0;
     border-width: 1px 0 1px 1px;
@@ -258,14 +258,14 @@ html, body
     border-radius: 0;
 }
 
-.buttonStrip .button:first-child
+.radiogroup .button:first-child
 {
     -moz-border-radius: 5pt 0 0 5pt;
     -webkit-border-radius: 5pt 0 0 5pt;
     border-radius: 5pt 0 0 5pt;
 }
 
-.buttonStrip .button:last-child
+.radiogroup .button:last-child
 {
     border-right-width: 1px;
     -moz-border-radius: 0 5pt 5pt 0;
@@ -273,7 +273,7 @@ html, body
     border-radius: 0 5pt 5pt 0;
 }
 
-.ios .buttonStrip .button
+.ios .radiogroup .button
 {
     font-weight: bold;
     color: #929292;
@@ -282,7 +282,7 @@ html, body
     background-image: linearGradient(top, rgb(251,251,251), rgb(225,225,225) 50%, rgb(200,200,200));
 }
 
-.ios .buttonStrip .button:hover
+.ios .radiogroup .button:hover
 {
     color: #fff;
     text-shadow: none;
@@ -290,7 +290,7 @@ html, body
     background-image: linearGradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
 }
 
-.ios .buttonStrip .button.active
+.ios .radiogroup .button.active
 {
     color: #fff;
     text-shadow: none;
@@ -300,8 +300,8 @@ html, body
     -webkit-box-shadow: inset -1px 0 2px #103984;
 }
 
-.blackberry .buttonStrip,
-.meego .buttonStrip
+.blackberry .radiogroup,
+.meego .radiogroup
 {
     font-size: 1em;
 }
@@ -345,7 +345,7 @@ html, body
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .tabStrip { display: table; word-spacing: normal; }
-    .buttonStrip > .button { display: inline-block; }
+    .radiogroup > .button { display: inline-block; }
 
 }
 
