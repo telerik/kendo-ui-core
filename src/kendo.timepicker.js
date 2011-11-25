@@ -98,7 +98,7 @@
         that.ul = $('<ul class="k-list k-reset"/>')
                     .css({ overflow: "auto"})
                     .bind(MOUSEDOWN, options.clearBlurTimeout)
-                    .delegate(LI, "click", proxy(that._click, that))
+                    .delegate(LI, CLICK, proxy(that._click, that))
                     .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                     .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
 
@@ -375,7 +375,7 @@
             element = that.element;
             options = that.options;
 
-            options.format = options.format || kendo.culture().calendar.patterns["t"];
+            options.format = options.format || kendo.culture().calendar.patterns.t;
 
             that._wrapper();
 

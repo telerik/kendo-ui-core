@@ -174,6 +174,7 @@ function importComponentHelp(exampleSource, component) {
         "tabstrip": "kendo.ui.TabStrip",
         "timepicker": "kendo.ui.TimePicker",
         "templates": "kendo.Template",
+        "globalization": "kendo.Globalization",
         "treeview": "kendo.ui.TreeView"
     };
 
