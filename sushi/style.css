@@ -117,3 +117,9 @@
     text-align: center;
     font-size: 2rem;
 }
+
+.list-item-data {
+    float: right;
+    font-weight: normal;
+    color: rgb(146,	163, 189);
+}
