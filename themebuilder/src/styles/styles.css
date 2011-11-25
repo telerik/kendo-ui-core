@@ -71,17 +71,19 @@ body
 #kendo-themebuilder .k-color-preview,
 #kendo-themebuilder .k-colorpicker .k-arrow-down
 {
-    border: 1px solid #aaa;
+    border: 0;
     background-image: none;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
 }
 
 .k-color-preview,
 .ktb-texture-preview
 {
-    border-radius: 3px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
     float: left;
     margin: 1px 0 0 1px;
 }
