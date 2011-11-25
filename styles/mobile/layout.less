@@ -105,8 +105,13 @@ html, body
 
 body
 {
-    .transform(translatez(0));
     display: table\9;
+}
+
+.km-ios body,
+.km-meego body
+{
+    .transform(translatez(0));
 }
 
 .km-view
@@ -117,10 +122,15 @@ body
     .box(box);
     height: 100%;
     width: 100%;
-    -webkit-transform: translatez(0);
     display: table\9;
     .box-orient(vertical);
     vertical-align: top;
+}
+
+.km-ios .km-view,
+.km-meego .km-view
+{
+    -webkit-transform: translatez(0);
 }
 
 :-moz-any(.km-view)
@@ -135,7 +145,6 @@ body
     display: -moz-box;
     width: auto;
     position: relative;
-    background: silver;
     display: ~"table-row\9";
 }
 
@@ -661,8 +670,8 @@ body
 .km-android .km-button,
 .km-android .km-switch
 {
-    padding: .4em .7em;
-    padding: .4rem .7rem;
+    padding: .2em .4em;
+    padding: .2rem .4rem;
     margin: .1em;
     margin: .1rem;
     .border-radius(2pt);
@@ -1122,6 +1131,11 @@ body
     .box-sizing(border-box);
     padding: .6em .6em .6em .8em;
     text-shadow: none;
+}
+
+.km-ios .km-list > li,
+.km-meego .km-list > li
+{
     -webkit-transform: translatez(0);
 }
 
@@ -1160,8 +1174,13 @@ body
 
 .km-ios .km-list > li
 {
-    color: #000;
     border-bottom: 1px solid #E9E9E9;
+}
+
+.km-ios .km-list > li,
+.km-ios .km-list a:not(.km-button)
+{
+    color: #000;
 }
 
 .km-list > li:last-child
@@ -1224,6 +1243,12 @@ body
     border-bottom: 1px solid #404040;
 }
 
+.km-android .km-list > li,
+.km-android .km-list a:not(.km-button)
+{
+    color: #fff;
+}
+
 .km-android .km-list > li:last-child
 {
     border-bottom: 0;
@@ -1244,8 +1269,7 @@ body
 }
 
 .km-list,
-.km-contentIn,
-.km-slot
+.km-content
 {
     background: #fff;
 }
@@ -1261,8 +1285,7 @@ body
 }
 
 .km-android .km-list,
-.km-android .km-slot,
-.km-android .km-contentIn,
+.km-android .km-content,
 .km-android body
 {
     color: #fff;
@@ -1442,6 +1465,11 @@ input[type=checkbox]
     position: relative;
     padding: .5em .7em;
     display: inline-block;
+}
+
+.km-ios .km-slider,
+.km-meego .km-slider
+{
     -webkit-transform: translatez(0);
 }
 
@@ -1558,11 +1586,12 @@ input[type=checkbox]
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
-    -webkit-transform: translatez(0);
 }
 
-:-moz-any(.km-scroll-container)
+.km-ios .km-scroll-container,
+.km-meego .km-scroll-container
 {
+    -webkit-transform: translatez(0);
 }
 
 /* Navbar */

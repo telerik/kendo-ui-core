@@ -56,7 +56,7 @@
                     compensation = 60;
                 }
 
-                element.height(window.innerHeight + compensation);
+                element.height((os.android ? window.innerHeight : document.documentElement.clientHeight) + compensation); // Fix for missing horizontal tab strip in iOS (needs more though).
                 setTimeout(window.scrollTo, 0, 0, 1);
             }
         }
@@ -145,6 +145,8 @@
 
     ViewSwitcher.prototype = {
         contents: function(source, destination) {
+            var contents;
+
             if (this.parallax) {
                 contents = source.content;
                 if (!destination.header[0]) {
