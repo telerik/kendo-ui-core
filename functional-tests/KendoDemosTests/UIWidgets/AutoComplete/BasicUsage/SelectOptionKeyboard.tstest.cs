@@ -77,5 +77,15 @@ namespace KendoDemosTests
         //{
             
         //}
+    
+        //[CodedStep(@"Keyboard (KeyPress) - Down (1 times) on 'InputText'")]
+        //public void SelectOptionKeyboard_CodedStep()
+        //{
+            //ActiveBrowser.ContentWindow.SetFocus();
+            //Pages.BasicUsage.InputText.ScrollToVisible();
+            //ActiveBrowser.Manager.Desktop.KeyBoard.KeyPress(ArtOfTest.WebAii.Win32.KeyBoard.KeysFromString("Down"), 150, 1);
+            //ActiveBrowser.WaitUntilReady();
+            
+        //}
     }
 }

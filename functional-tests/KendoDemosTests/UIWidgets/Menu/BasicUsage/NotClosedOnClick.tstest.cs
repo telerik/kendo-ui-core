@@ -69,26 +69,26 @@ namespace KendoDemosTests
 
         #endregion
 
-        [CodedStep(@"Wait for Exists 'ViewCodeLink'")]
-        public void NotClosedOnClick_CodedStep()
-        {
+        //[CodedStep(@"Wait for Exists 'ViewCodeLink'")]
+        //public void NotClosedOnClick_CodedStep()
+        //{
 
-            // Wait for Exists 'ViewCodeLink'
-            Pages.BasicUsage2.SubItem4Span0.Wait.ForExists(10000);
+            //// Wait for Exists 'ViewCodeLink'
+            //Pages.BasicUsage2.SubItem4Span0.Wait.ForExists(10000);
 
-        }
+        //}
 
-        [CodedStep(@"@\Wait for Exists 'ViewCodeLink'")]
-        public void NotClosedOnClick_CodedStep1()
-        {
-
-
-            // Wait for Exists 'ViewCodeLink'
-            Pages.BasicUsage2.SubItem4Span0.Wait.ForExists(10000);
+        //[CodedStep(@"@\Wait for Exists 'ViewCodeLink'")]
+        //public void NotClosedOnClick_CodedStep1()
+        //{
 
 
+            //// Wait for Exists 'ViewCodeLink'
+            //Pages.BasicUsage2.SubItem4Span0.Wait.ForExists(10000);
 
-        }
+
+
+        //}
 
 
 
