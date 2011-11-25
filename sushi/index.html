@@ -17,6 +17,7 @@
         <script src="../src/kendo.mobile.tabstrip.js"></script>
         <script src="../src/kendo.mobile.listview.js"></script>
         <script src="../src/kendo.mobile.navbar.js"></script>
+        <script src="../src/kendo.mobile.switch.js"></script>
         <script src="../src/kendo.mobile.scroller.js"></script>
         <script src="../src/kendo.mobile.application.js"></script>
     </head>
@@ -89,19 +90,33 @@
         <div data-role="view" id="done" data-transition="zoom">
             <div data-role="content">
                 Thanks for shopping! Your sushi is on the way.
-                <a href="#index" data-role="button">Done</a>
+                <a href="#cart" data-role="button">Done</a>
             </div>
         </div>
 
         <div data-role="view" id="account">
             <header data-role="header">
                 <div data-role="navbar">
-                    <span data-role="view-title">Work in progress!</span>
+                    <span data-role="view-title">My account</span>
                 </div>
             </header>
 
             <div data-role="content">
-                Work in progress
+                <ul data-role="listview" data-style="inset" data-type="group">
+                    <li>
+                        <ul>
+                            <li>Username    <span class="list-item-data">kendoSushi</span></li>
+                            <li>Email       <span class="list-item-data">kendo@telerik.com</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        Notifications
+                        <ul>
+                            <li>New products <input type="checkbox" data-role="switch" /></li>
+                            <li>Exclusive promotions       <input type="checkbox" data-role="switch" checked="checked" /></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
 
             <footer data-role="footer" data-id="default">
