@@ -103,7 +103,7 @@
         },
 
         end: function() {
-            return this.validatable.validate();
+            return this.binder.bindModel();
         },
 
         distroy: function() {
@@ -140,7 +140,7 @@
                 that.editor(field, modelField);
             }
 
-            new Binder(container, that.options.model, { change: $.proxy(that._binderChange, that) });
+            that.binder = new Binder(container, that.options.model, { change: $.proxy(that._binderChange, that) });
 
             that.validatable = container.kendoValidator({
                 errorTemplate: '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +

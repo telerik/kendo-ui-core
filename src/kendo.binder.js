@@ -54,6 +54,21 @@
                 });
         },
 
+        bindModel: function() {
+            var that = this,
+                valid = true;
+
+            that.element.find("input,select,textarea")
+                .each(function() {
+                    var mapping = that._map(this);
+                    if (mapping) {
+                        return valid = mapping.bindModel();
+                    }
+                });
+
+            return valid;
+        },
+
         _change: function(e) {
             var that = this,
                 mapping = that._map(e.target);
@@ -103,7 +118,10 @@
 
                         if (!that.trigger(CHANGE, { values: values })) {
                             model.set(field, value);
+                            return true;
                         }
+
+                        return false;
                     }
                 }
             }
