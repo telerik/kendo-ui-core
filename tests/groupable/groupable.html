@@ -145,7 +145,7 @@
                     groupable = new Groupable(div, { groupContainer:  groupContainer });
 
                groupContainer.append(groupable.buildIndicator("field1"));
-               groupContainer.append(groupable.buildIndicator("field2", "desc"));
+               groupContainer.append(groupable.buildIndicator("field2", "title", "desc"));
 
                var descriptors = groupable.descriptors();
 
@@ -213,7 +213,7 @@
                 var groupContainer = $(".container"),
                     groupWasCalled = false,
                     groupable = new Groupable(div, { groupContainer:  groupContainer }),
-                    indicator = groupContainer.append(groupable.buildIndicator("", "desc")).find(".k-group-indicator:first");
+                    indicator = groupContainer.append(groupable.buildIndicator("", "", "desc")).find(".k-group-indicator:first");
 
                 indicator.find(".k-link").click();
 
@@ -251,6 +251,13 @@
                 equal(indicator.attr("data-kendo-dir"), "desc");
             });
 
+            test("data-title is set for group indicator", function() {
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer }),
+                    indicator = groupContainer.append(groupable.buildIndicator("field", "field title")).find(".k-group-indicator:first");
+
+                equal(groupContainer.find(".k-group-indicator:first").data("title"), "field title");
+            });
 
         </script>
     </body>

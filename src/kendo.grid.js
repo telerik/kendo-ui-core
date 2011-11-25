@@ -862,7 +862,7 @@
                 }
 
                 that.groupable = new Groupable(wrapper, {
-                    filter: "th:not(.k-group-cell)",
+                    filter: "th:not(.k-group-cell)[" + kendo.attr("field") + "]",
                     groupContainer: "div.k-grouping-header",
                     dataSource: that.dataSource
                 });
@@ -1637,7 +1637,11 @@
                     th = columns[idx];
 
                     if (!th.command) {
-                        html += "<th " + kendo.attr("field") + "='" + th.field + "'>" + (th.title || th.field) + "</th>";
+                        html += "<th " + kendo.attr("field") + "='" + th.field + "' ";
+                        if (th.title) {
+                            html += kendo.attr("title") + "='" + th.title + "'";
+                        }
+                        html += ">" + (th.title || th.field || "") + "</th>";
                     } else {
                         html += "<th>" + (th.title || "") + "</th>";
                     }
@@ -1736,13 +1740,16 @@
                 html = "",
                 idx,
                 length,
+                field = group.field,
+                column = $.grep(that.columns, function(column) { return column.field == field; })[0] || { },
+                value = column.format ? kendo.format(column.format, group.value) : group.value,
                 groupItems = group.items;
 
             html +=  '<tr class="k-grouping-row">' + groupCells(level) +
                       '<td colspan="' + colspan + '">' +
                         '<p class="k-reset">' +
                          '<a class="k-icon k-collapse" href="#"></a>' +
-                         group.field + ': ' + group.value +'</p></td></tr>';
+                         (column.title || field) + ': ' + value +'</p></td></tr>';
 
             if(group.hasSubgroups) {
                 for(idx = 0, length = groupItems.length; idx < length; idx++) {
