@@ -272,7 +272,24 @@
                 equal(dataSource.filter().logic, "and");
             });
 
-            test("filtering multiple fields and different logic", function() {
+             test("data source is not hit if no filters are specified", function() {
+                var called = false;
+                dataSource.bind("change", function() {
+                    called = true;
+                });
+
+                var filter1 = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filter1.filter({
+                    filters:[]
+                });
+
+                ok(!called);
+            });
+
+           test("filtering multiple fields and different logic", function() {
                 var filter1 = new FilterMenu(dom, {
                     dataSource: dataSource
                 });

@@ -239,7 +239,11 @@
         },
 
         filter: function(expression) {
-            this.dataSource.filter(this._merge(expression));
+            expression = this._merge(expression);
+
+            if (expression.filters.length) {
+                this.dataSource.filter(expression);
+            }
         },
 
         clear: function() {
