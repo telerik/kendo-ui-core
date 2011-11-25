@@ -44,22 +44,24 @@
             <div id="flowerWrap">
                 <div class="flowers"></div>
 
-                <div id="topnavWrap" class="floatWrap centerWrap">
-                    <select id="skinSelector" class="skinSelector"></select>
-                    <h4>Skin </h4>
-                    <ul id="topnav" class="floatWrap">
+                <div id="topnavWrap" class="centerWrap">
+                    <ul id="topnav">
                         <li><a id="web" class="first" href="web/overview/index.html">Web</a></li>
                         <li><a id="mobile" href="mobile/index.html">Mobile</a></li>
                         <li><a id="dataviz" href="dataviz/overview/index.html">DataViz</a></li>
                         <li><a id="themebuilder" class="last" href="themebuilder/index.html">ThemeBuilder</a></li>
                     </ul>
+
+                    <div id="examplesThemeChooser">
+                        <label for="skinSelector">Skin</label>
+                        <input id="skinSelector" class="themeChooser" />
+                    </div>
                 </div> <!-- / topnavWrap -->
             </div>
 
             <div id="navmainWrap" class="floatWrap centerWrap hasNavigation">
 
-                <div id="navWrap">
-                </div> <!-- / navWrap -->
+                <div id="navWrap"></div>
 
                 <div id="main">
                     <h1 id="exampleTitle" class="k-content"></h1>
