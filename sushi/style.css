@@ -1,10 +1,13 @@
-.added {
+.added
+{
     color: green;
     font-size: .8rem;
 }
 
-.item-list .km-list > li {
-    height: 7rem;
+.item-list.km-list > li
+{
+    overflow: hidden;
+    line-height: 1em;
 }
 
 .item-list img,
@@ -13,8 +16,8 @@
     border-radius: 8px;
     -webkit-box-shadow: 0 2px 3px #333;
     box-shadow: 0 2px 3px #333;
-    width: 4.2em;
-    height: 4.2em;
+    width: 4rem;
+    height: 4rem;
     float: left;
     margin-right: 1rem;
 }
@@ -22,11 +25,11 @@
 .item-list h2 {
     font-size: 1.0rem;
     margin: 0;
+    display: inline-block;
 }
 
 .item-list a.km-button {
     float: right;
-    margin-top: 2rem;
 }
 
 .item-list a.details-link {
@@ -67,7 +70,6 @@
 }
 
 #details .km-content {
-    background: #ebebeb;
     padding: 1rem;
     -webkit-box-sizing: border-box;
 }
@@ -102,7 +104,11 @@
 }
 
 .details-link {
-    color: black;
+    color: #000;
+}
+
+.km-android .details-link {
+    color: #fff;
 }
 
 #checkout {
