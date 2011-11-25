@@ -486,6 +486,15 @@ var categories = {
                     url: "validator/index.html"
                 }
             ]
+        },
+        {
+            text: "Globalization",
+            items: [
+                {
+                    text: "Basic usage",
+                    url: "globalization/index.html"
+                }
+            ]
         }
     ],
     integration: [

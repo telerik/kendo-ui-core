@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Globalization</title>
+        <!-- css -->
+        <link href="../../shared/styles/examples.css" rel="stylesheet"/>
+        <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../../src/jquery.min.js"></script>
+        <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.data.js"></script>
+        <script src="../../../../src/kendo.fx.js"></script>
+        <script src="../../../../src/kendo.popup.js"></script>
+        <script src="../../../../src/kendo.calendar.js"></script>
+        <script src="../../../../src/kendo.datepicker.js"></script>
+        <script src="../../../../src/kendo.timepicker.js"></script>
+        <script src="../../../../src/kendo.list.js"></script>
+        <script src="../../../../src/kendo.dropdownlist.js"></script>
+        <script src="../../../../src/kendo.numerictextbox.js"></script>
+        <!-- script -->
+
+        <script src="cultures/kendo.culture.en-US.js"></script>
+        <script src="cultures/kendo.culture.en-GB.js"></script>
+        <script src="cultures/kendo.culture.de-DE.js"></script>
+        <script src="cultures/kendo.culture.fr-FR.js"></script>
+        <script src="cultures/kendo.culture.bg-BG.js"></script>
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <div class="description">Globalization</div>
+        <!-- description -->
+        <div id="example" class="k-content">
+            <div id="product-view" class="k-header">
+                <div class="right">
+                    <label for="culture">cultures:</label>
+                    <input id="culture" value="en-US" />
+                </div>
+                <h2>Product promotion:</h2>
+                <ul>
+                    <li>
+                    <label for="startDate">Discount start date:</label>
+                    <input id="startDate" />
+                    <input id="startTime" value="12:00 AM" />
+                    </li>
+                    <li>
+                    <label for="endDate">Discount end date:</label>
+                    <input id="endDate" />
+                    <input id="endTime" value="12:00 AM" />
+                    </li>
+                    <li>
+                    <label for="initial">Initial price:</label>
+                    <input id="initial" value="10" min="1"/>
+                    </li>
+                    <li>
+                    <label for="discount">Discount:</label>
+                    <input id="discount" value="0.05" min="0" max="0.5" step="0.01"/>
+                    </li>
+                </ul>
+            </div>
+
+            <style scoped>
+                #example h2 {
+                    font-weight: normal;
+                }
+                #product-view {
+                    border-radius: 10px 10px 10px 10px;
+                    border-style: solid;
+                    border-width: 1px;
+                    overflow: hidden;
+                    width: 500px;
+                    padding: 20px 20px 0 20px;
+                    background-position: 0 -255px;
+                }
+
+                .right
+                {
+                    float:right;
+                }
+
+                ul
+                {
+                    width: 100%;
+                    float:left;
+                    margin:0;
+                    padding: 10px;
+                }
+
+                ul li
+                {
+                    list-style:none;
+                    padding:5px 10px;
+                }
+
+            </style>
+
+            <script>
+                $(document).ready(function() {
+                    function startDateChange() {
+                        var date = startDate.value();
+
+                        if (date) {
+                            date = new Date(date);
+                            date.setDate(date.getDate() + 1);
+                            endDate.min(date);
+                        }
+                    }
+
+                    function endDateChange() {
+                        var date = endDate.value();
+
+                        if (date) {
+                            date = new Date(date);
+                            date.setDate(date.getDate() - 1);
+                            startDate.max(date);
+                        }
+                    }
+
+                    function cultureChange() {
+                        kendo.culture(this.value());
+
+                        var dateFormat = kendo.culture().calendar.patterns.d;
+                        var timeFormat = kendo.culture().calendar.patterns.t;
+
+                        //update format, re-render hours and set value again
+                        startTime.options.format = startTime.timeView.options.format = timeFormat;
+                        startTime.timeView.refresh();
+                        startTime.value(startTime.value());
+
+                        //update format, re-render hours and set value again
+                        endTime.options.format = endTime.timeView.options.format = timeFormat;
+                        endTime.timeView.refresh();
+                        endTime.value(endTime.value());
+
+                        //update format and set value again
+                        startDate.options.format = startDate.dateView.options.format = dateFormat;
+                        startDate.value(startDate.value());
+
+                        //update format and set value again
+                        endDate.options.format = endDate.dateView.options.format = dateFormat;
+                        endDate.value(endDate.value());
+
+                        // clear associated DateView in order to re-render calendar.
+                        startDate.dateView.calendar.element.removeData("dateView");
+
+                        //set values in order to apply new format
+                        initial.value(initial.value());
+                        discount.value(discount.value());
+                    }
+
+                    var startDate = $("#startDate").kendoDatePicker({ change: startDateChange }).data("kendoDatePicker"),
+                    endDate = $("#endDate").kendoDatePicker({ change: endDateChange }).data("kendoDatePicker"),
+                    startTime = $("#startTime").kendoTimePicker().data("kendoTimePicker"),
+                    endTime = $("#endTime").kendoTimePicker().data("kendoTimePicker"),
+                    initial = $("#initial").kendoNumericTextBox({ format: "c" }).data("kendoNumericTextBox"),
+                    discount = $("#discount").kendoNumericTextBox({ format: "p" }).data("kendoNumericTextBox"),
+                    today = new Date();
+
+                    startDate.value(today);
+                    endDate.min(today)
+
+                    today.setDate(today.getDate() + 1);
+                    endDate.value(today);
+                    startDate.max(today);
+
+                    $("#culture").kendoDropDownList({
+                        change: cultureChange,
+                        dataSource: [{text: "bg-BG"},
+                        {text: "de-DE"},
+                        {text: "en-US"},
+                        {text: "en-GB"}]
+                    });
+                });
+            </script>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
