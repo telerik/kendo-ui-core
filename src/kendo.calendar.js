@@ -112,7 +112,7 @@
         CHANGE = "change",
         NAVIGATE = "navigate",
         VALUE = "value",
-        cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" ' + kendo.attr(VALUE) + '="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
+        cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         HOVER = "k-state-hover",
         DISABLED = "k-state-disabled",
         OTHERMONTH = "k-other-month",
@@ -769,6 +769,7 @@
 
                         return {
                             date: date,
+                            ns: kendo.ns,
                             title: kendo.toString(date, "D"),
                             value: date.getDate(),
                             dateString: toDateString(date),
@@ -830,6 +831,7 @@
                     build: function(date) {
                         return {
                             value: namesAbbr[date.getMonth()],
+                            ns: kendo.ns,
                             dateString: toDateString(date),
                             cssClass: ""
                         };
@@ -889,6 +891,7 @@
                     build: function(date, idx) {
                         return {
                             value: date.getFullYear(),
+                            ns: kendo.ns,
                             dateString: toDateString(date),
                             cssClass: idx == 0 || idx == 11 ? OTHERMONTHCLASS : ""
                         };
@@ -944,6 +947,7 @@
                         var year = date.getFullYear();
                         return {
                             value: year + " - " + (year + 9),
+                            ns: kendo.ns,
                             dateString: toDateString(date),
                             cssClass: idx == 0 || idx == 11 ? OTHERMONTHCLASS : ""
                         };

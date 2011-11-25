@@ -20,15 +20,15 @@
         <script>
             module("kendo attr", {
                 setup: function() {
-
                 }
             });
 
-            test("default ns is kendo-", function() {
-                equal(kendo.ns, "kendo-");
+            test("default ns is empty", function() {
+                equal(kendo.ns, "");
             });
 
             test("attr returns a data attribute", function() {
+                kendo.ns = "kendo-";
                 equal(kendo.attr("role"), "data-kendo-role");
             });
 

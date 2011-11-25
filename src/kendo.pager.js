@@ -1,7 +1,17 @@
 (function($, undefined) {
     var kendo = window.kendo,
-        Widget = kendo.ui.Widget,
+        ui = kendo.ui,
+        Widget = ui.Widget,
         proxy = $.proxy;
+
+    function button(template, idx, text, numeric) {
+        return template( {
+            idx: idx,
+            text: text,
+            ns: kendo.ns,
+            numeric: numeric
+        });
+    }
 
     var Pager = Widget.extend( {
         init: function(element, options) {
@@ -22,7 +32,7 @@
         options: {
             name: "Pager",
             selectTemplate: '<li><span class="k-state-active">#=text#</span></li>',
-            linkTemplate: '<li><a href="\\#" class="k-link" ' + kendo.attr("page") + '="#=idx#">#=text#</a></li>',
+            linkTemplate: '<li><a href="\\#" class="k-link" data-#=ns#page="#=idx#">#=text#</a></li>',
             buttonCount: 10
         },
 
@@ -35,6 +45,7 @@
                 reminder,
                 page = that.page(),
                 totalPages = that.totalPages(),
+                linkTemplate = that.linkTemplate,
                 buttonCount = that.options.buttonCount;
 
             if (page > buttonCount) {
@@ -46,15 +57,15 @@
             end = Math.min((start + buttonCount) - 1, totalPages);
 
             if(start > 1) {
-                html += that.linkTemplate({idx: (start - 1), text: "...", isNum: false });
+                html += button(linkTemplate, start - 1, "...", false);
             }
 
             for(idx = start; idx <= end; idx++) {
-                html += (idx == page) ? that.selectTemplate({ text: idx }) : that.linkTemplate( { idx: idx, text: idx, isNum: true});
+                html += button(idx == page ? that.selectTemplate : linkTemplate, idx, idx, true);
             }
 
             if(end < totalPages) {
-                html += that.linkTemplate({idx: idx, text: "...", isNum: false });
+                html += button(linkTemplate, idx, "...", false);
             }
 
             that.list.empty().append(html);
@@ -82,5 +93,5 @@
         }
     });
 
-    kendo.ui.plugin(Pager);
+    ui.plugin(Pager);
 })(jQuery);
