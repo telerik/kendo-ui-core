@@ -61,7 +61,7 @@
             pie: {
                 highlight: {
                     opacity: 0.6,
-                    color: "#393939",
+                    color: "#3b3b3b",
                     border: {
                         width: 0.5,
                         opacity: 0.9,
@@ -74,48 +74,45 @@
             },
             line: {
                 markers: {
-                    background: "#393939"
+                    background: "#3b3b3b"
                 }
             },
             scatter: {
                 markers: {
-                    background: "#393939"
+                    background: "#3b3b3b"
                 }
             },
             scatterLine: {
                 markers: {
-                    background: "#393939"
+                    background: "#3b3b3b"
                 }
             }
         },
         chartArea: {
-            background: "#393939"
+            background: "#3b3b3b"
         },
         seriesColors: ["#0081da", "#3aafff", "#99c900", "#ffeb3d", "#b20753", "#ff4195"],
         categoryAxis: {
-            line: {
-                color: "#808184"
-            },
-            labels: {
-                color: WHITE
-            },
             majorGridLines: {
                 visible: true
             }
         },
-        valueAxis: {
+        axisDefaults: {
             line: {
-                color: "#808184"
+                color: "#8e8e8e"
             },
             labels: {
                 color: WHITE
             },
             majorGridLines: {
-                color: "#58595b"
+                color: "#545454"
+            },
+            minorGridLines: {
+                color: "#454545"
             }
         },
         tooltip: {
-            background: "#393939",
+            background: "#3b3b3b",
             color: WHITE,
             opacity: 0.8
         }
@@ -137,21 +134,24 @@
                 opacity: 0.5
             }
         },
-        seriesColors: ["#ff5400", "#ff8b24", "#ffc066", "#9da600", "#688900", "#3e6100"],
+        seriesColors: ["#ff6800", "#ff8d00", "#ffb53c", "#a0a700", "#678900", "#396000"],
         categoryAxis: {
-            line: {
-                color: "#8e8e8e"
-            },
-            labels: {
-                color: "#232323"
+            majorGridLines: {
+                visible: true
             }
         },
-        valueAxis: {
+        axisDefaults: {
             line: {
                 color: "#8e8e8e"
             },
             labels: {
                 color: "#232323"
+            },
+            minorGridLines: {
+                color: "#f0f0f0"
+            },
+            majorGridLines: {
+                color: "#dfdfdf"
             }
         },
         tooltip: {
@@ -179,18 +179,11 @@
         },
         seriesColors: ["#0069a5", "#0098ee", "#7bd2f6", "#ffb800", "#ff8517", "#e34a00"],
         categoryAxis: {
-            line: {
-                color: "#9aabb2"
-            },
-            labels: {
-                color: "#293135"
-            },
             majorGridLines: {
-                color: "#c4d0d5",
                 visible: true
             }
         },
-        valueAxis: {
+        axisDefaults: {
             line: {
                 color: "#9aabb2"
             },
@@ -199,6 +192,9 @@
             },
             majorGridLines: {
                 color: "#c4d0d5"
+            },
+            minorGridLines: {
+                color: "#edf1f2"
             }
         },
         tooltip: {
@@ -229,6 +225,9 @@
                 }
             }
         },
+        chartArea: {
+            background: "#f4f4f4"
+        },
         seriesColors: ["#007bc3", "#76b800", "#ffae00", "#ef4c00", "#a419b7", "#430B62"],
         categoryAxis: {
             majorGridLines: {
@@ -237,13 +236,16 @@
         },
         axisDefaults: {
             line: {
-                color: "#A6B1C0"
+                color: "#a6b1c0"
             },
             labels: {
                 color: "#4e5968"
             },
             majorGridLines: {
                 color: "#dcdcdf"
+            },
+            minorGridLines: {
+                color: "#eeeeef"
             }
         },
         tooltip: {

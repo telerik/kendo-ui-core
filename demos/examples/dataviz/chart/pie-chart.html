@@ -94,8 +94,7 @@
                         series: [{
                             type: "pie",
                             field: "percentage",
-                            categoryField: "source",
-                            startAngle: 160
+                            categoryField: "source"
                         }],
                         tooltip: {
                             visible: true,
@@ -123,7 +122,7 @@
                     $("#startAngle").kendoSlider({
                         showButtons: false,
                         max: 360,
-                        val: 160,
+                        value: 160,
                         slide: function(e) {
                             $("#startAngle").val(e.value);
                             setTimeout(refresh);
@@ -135,7 +134,7 @@
                         showButtons: false,
                         min: 30,
                         max: 100,
-                        val: 60,
+                        value: 60,
                         tickPlacement: "none",
                         slide: function(e) {
                             $("#padding").val(e.value);
