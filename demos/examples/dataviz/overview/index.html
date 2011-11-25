@@ -26,7 +26,68 @@
         <div class="description">DataViz landing page description</div>
         <!-- description -->
         <div id="example" class="k-content">
-            DataViz landing page
+            <div id="chartSlider" style="width:550px; height:350px; margin: 0 auto;"></div>
+            <script>
+                    var chartSeries = [
+                        [{
+                            type: "column",
+                            data: [1, 3, 4, 1]
+                        }, {
+                            type: "column",
+                            data: [1, 3, 4, 1]
+                        }], [{
+                            type: "line",
+                            data: [1, 2, 3, 4]
+                        }, {
+                            type: "line",
+                            data: [2, 3, 4, 5]
+                        }], [{
+                            type: "pie",
+                            data: [1, 2, 3, 4],
+                            padding: 50
+                        }] ],
+                        seriesIndex = 0,
+                        interval;
+
+                function nextChart() {
+                    var chart = $("#chartSlider").kendoChart({
+                            theme: $(document).data("kendoSkin") || "default",
+                            title: {
+                                visible: false
+                            },
+                            legend: {
+                                visible: false
+                            },
+                            series: $.extend({}, chartSeries[seriesIndex++ % chartSeries.length]),
+                            categoryAxis: {
+                                categories: ["", "", "", ""]
+                            },
+                            axisDefaults: {
+                                majorGridLines: {
+                                    visible: false
+                                }
+                            }
+                    });
+                }
+
+                $(document).ready(function() {
+                    nextChart();
+
+                    if (interval) {
+                        clearInterval(interval);
+                    }
+
+                    interval = setInterval(nextChart, 3000);
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        nextChart();
+                    });
+
+                    $(document).bind("kendo:pageUnload", function(e) {
+                        clearInterval(interval);
+                    });
+                });
+            </script>
         </div>
         <!-- tools -->
         <!-- tools -->
