@@ -448,11 +448,16 @@
             }
 
             if (size(effects)) {
-                setTimeout( function () {
-                    each ( $.unique(props.restore), function (idx, value) {
+                var restore = function () {
+                    each ($.unique(props.restore), function(idx, value) {
                         element.css(value, element.data(value));
                     });
-                }, 0); // Again jQuery callback in IE.
+                };
+
+                if ($.browser.msie)
+                    setTimeout(restore, 0); // Again jQuery callback in IE.
+                else
+                    restore();
 
                 each( methods.teardown, function () { this(element, options.reverse); } ); // call the internal completion callbacks
             }
