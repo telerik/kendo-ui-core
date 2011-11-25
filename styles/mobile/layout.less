@@ -214,7 +214,8 @@ body
     display: block;
     text-align: center;
     color: #fff;
-    font-size: 1.7em;
+    font-size: 1.5em;
+    line-height: 1.5em;
     font-weight: bold;
     text-shadow: 0 -1pt #777;
     float: left;
@@ -877,7 +878,7 @@ body
     border-width: 0;
     .box-sizing(border-box);
     .border-radius(0);
-    .box-shadow(0 0 3px #333);
+    .box-shadow(0 0 0 1px #333);
 }
 
 .km-tabstrip
@@ -913,13 +914,18 @@ body
     overflow: visible;
 }
 
-.km-toolbar .km-button,
-.km-navbar .km-leftitem,
-.km-navbar .km-rightitem,
 .km-navbar .km-view-title
 {
-    margin-top: .5em;
-    margin-bottom: .5em;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.km-toolbar .km-button,
+.km-navbar .km-leftitem,
+.km-navbar .km-rightitem
+{
+    margin-top: .6rem;
+    margin-bottom: .6rem;
 }
 
 .km-blackberry .km-toolbar,
