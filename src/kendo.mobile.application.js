@@ -252,11 +252,11 @@
         _createView: function(element) {
             var view = new View(element);
 
-            this.trigger("viewInit", { view: view });
-
             if (kendo.mobile) {
                 kendo.mobile.enhance(view.element);
             }
+
+            this.trigger("viewInit", { view: view });
 
             return view;
         },

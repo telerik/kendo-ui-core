@@ -104,3 +104,10 @@
 .details-link {
     color: black;
 }
+
+#checkout {
+    margin: 1rem;
+    display: block;
+    text-align: center;
+    font-size: 2rem;
+}
