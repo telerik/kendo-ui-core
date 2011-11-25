@@ -3,7 +3,6 @@
         support = kendo.support,
         extend = $.extend,
         mobile,
-        DATA_ROLE = "data-kendo-role",
         Widget = kendo.ui.Widget;
 
     var MobileWidget = Widget.extend({
@@ -55,10 +54,8 @@
     };
 
     kendo.roleSelector = function(role) {
-        return "[" + DATA_ROLE + "=" + role + "]";
+        return "[" + kendo.attr("role") + "=" + role + "]";
     };
-
-    kendo.dataRole = DATA_ROLE;
 
     kendo.ui.MobileWidget = MobileWidget;
     kendo.mobile = mobile;

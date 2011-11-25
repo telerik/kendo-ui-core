@@ -12,7 +12,7 @@
 
     function toggleItemActiveClass(e) {
         var item = $(e.currentTarget);
-        if ($(e.target).closest("a[data-kendo-role=listview-link]", item)[0]) {
+        if ($(e.target).closest("a" + kendo.roleSelector("listview-link"), item)[0]) {
             item.toggleClass("km-state-active", e.type === support.mousedown);
         }
     }
@@ -22,7 +22,7 @@
 
         if (!item.parent().contents().not(item)[0]) {
             item.addClass("km-listview-link")
-                .attr("data-kendo-role", "listview-link");
+                .attr(kendo.attr("role"), "listview-link");
         }
     }
 
@@ -51,7 +51,7 @@
 
         options: {
             name: "MobileListView",
-            selector: "[data-kendo-role=listview]",
+            selector: kendo.roleSelector("listview"),
             type: "flat",
             template: "${data}",
             headerTemplate: "${value}",
@@ -115,8 +115,8 @@
                 dataItem,
                 item = $(e.currentTarget),
                 target = $(e.target),
-                button = target.closest("[data-kendo-name]", item),
-                buttonName = button.data("kendoName"),
+                button = target.closest("[" + kendo.attr("name") + "]", item),
+                buttonName = button.data(kendo.ns + "name"),
                 id = item.data("id");
 
             if (id) {

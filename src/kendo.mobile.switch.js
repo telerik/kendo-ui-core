@@ -263,7 +263,7 @@
             if (input.length) {
                 input.data("kendo-role", "switch");
             } else {
-                input = $("<input type='checkbox' data-kendo-role='switch' />").appendTo(that.element);
+                input = $("<input type='checkbox' " + kendo.attr("role") +  "='switch' />").appendTo(that.element);
             }
 
 
@@ -326,7 +326,7 @@
             if (input.length)
                 input.data("kendo-role", "checkbox");
             else
-                input = $("<input type='checkbox' data-kendo-role='checkbox' />").appendTo(that.element);
+                input = $("<input type='checkbox' " + kendo.attr("role") + "='checkbox' />").appendTo(that.element);
 
             that.input = input;
             that.handle = that.element;
@@ -362,7 +362,7 @@
             if (!element.data("kendo-role"))
                 element.data("kendo-role", "slider");
             else
-                $("<span data-kendo-role='slider' class='km-slider'><span class='km-slider-handle'></span></span>").appendTo(that.element);
+                $("<span " + kendo.attr("role") + "='slider' class='km-slider'><span class='km-slider-handle'></span></span>").appendTo(that.element);
 
             handle = element.find(slideAnimation.animator);
 

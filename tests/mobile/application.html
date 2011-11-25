@@ -29,6 +29,7 @@
 
             module("kendo.Application", {
                 setup: function() {
+                    kendo.ns = "kendo-";
                     location.hash = '';
                     $.mockjaxSettings.responseTime = 0;
                     $.mockjaxSettings.contentType = "text/html";
