@@ -134,7 +134,7 @@
                 opacity: 0.5
             }
         },
-        seriesColors: ["#ff6800", "#ff8d00", "#ffb53c", "#a0a700", "#678900", "#396000"],
+        seriesColors: ["#ff6800", "#a0a700", "#ff8d00", "#678900", "#ffb53c", "#396000"],
         categoryAxis: {
             majorGridLines: {
                 visible: true
