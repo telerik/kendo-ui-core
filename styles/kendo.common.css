@@ -1633,12 +1633,6 @@ div.k-datetimepicker .k-select+.k-select
     text-overflow: ellipsis;
 }
 
-.k-picker-wrap .k-icon,
-.k-dropdown-wrap .k-icon
-{
-    height: 18px;
-}
-
 .k-autocomplete .k-input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
