@@ -142,7 +142,7 @@
                         .appendTo(label);
                 });
             } else {
-                that.inputs = $("<input type='radio' data-kendo-role='radio-group-button' data-selected-index='0' />").appendTo(that.element).wrap("<label class='km-button'>&nbsp;</label>");
+                that.inputs = $("<input type='radio' " + kendo.attr("role") + "='radio-group-button' data-selected-index='0' />").appendTo(that.element).wrap("<label class='km-button'>&nbsp;</label>");
             }
 
         }

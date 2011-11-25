@@ -31,7 +31,7 @@
         options: {
             name: "MobileButton",
             style: "",
-            selector: "[data-kendo-role=button]",
+            selector: kendo.roleSelector("button"),
             enable: true
         },
 
@@ -68,7 +68,7 @@
         options: {
             name: "MobileBackButton",
             style: "back",
-            selector: "[data-kendo-role=back-button]"
+            selector: kendo.roleSelector("back-button"),
         },
 
         init: function(element, options) {

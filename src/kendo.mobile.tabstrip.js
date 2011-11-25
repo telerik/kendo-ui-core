@@ -53,7 +53,7 @@
 
             button
                 .addClass("km-button")
-                .attr("data-kendo-role", "tab")
+                .attr(kendo.attr("role"), "tab")
                     .contents().not(image)
                     .wrapAll('<span class="km-text"/>');
 
@@ -69,7 +69,7 @@
 
         options: {
             name: "MobileTabstrip",
-            selector: "[data-kendo-role=tabstrip]",
+            selector: kendo.roleSelector("tabstrip"),
             selectedIndex: 0,
             enable: true
         }

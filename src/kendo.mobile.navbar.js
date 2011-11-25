@@ -3,7 +3,7 @@
         MobileWidget = ui.MobileWidget;
 
     function createContainer(align, element) {
-        var items = element.find("[data-kendo-align=" + align + "]");
+        var items = element.find("[" + kendo.attr("align") + "=" + align + "]");
 
         if (items[0]) {
             element.prepend($('<div class="km-' + align + 'item" />').append(items));
@@ -22,7 +22,7 @@
 
         options: {
             name: "MobileNavBar",
-            selector: "[data-kendo-role=navbar]"
+            selector: kendo.roleSelector("navbar")
         }
 
     });

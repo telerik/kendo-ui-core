@@ -3,6 +3,7 @@
     var kendo = window.kendo,
         history = kendo.history,
         support = kendo.support,
+        attr = kendo.attr,
         os = support.mobileOS,
         div = $("<div/>"),
         meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> \
@@ -14,7 +15,7 @@
         roleSelector = kendo.roleSelector;
 
     function toRoleSelector(string) {
-        return string.replace(/(\S+)/g, "[data-kendo-role*=$1],")
+        return string.replace(/(\S+)/g, "[" + attr("role") + "*=$1],")
     }
 
     function extractView(html) {
@@ -97,7 +98,7 @@
             that.footer = element.find(roleSelector("footer")).addClass("km-footer");
 
             if (!element.has(contentSelector)[0]) {
-              element.wrapInner("<div " + kendo.dataRole + '="content"></div>');
+              element.wrapInner("<div " + kendo.attr("role") + '="content"></div>');
             }
 
             that.content = element.find(roleSelector("content"))
@@ -115,7 +116,7 @@
 
         that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(history.url().params);
 
-        animationType = (that.back ? previous : view).element.data("kendoTransition");
+        animationType = (that.back ? previous : view).element.data(kendo.ns +"transition");
 
         that.parallax = animationType === "slide";
 
@@ -200,7 +201,7 @@
             that.setupAppLinks();
 
             views = that.element.find(roleSelector("view"));
-            views.first().attr("data-kendo-url", "/");
+            views.first().attr(attr("url"), "/");
 
             historyEvents = {
                 change: function(e) {
@@ -266,7 +267,7 @@
 
             element = extractView(html);
 
-            element.hide().attr("data-kendo-url", url);
+            element.hide().attr(attr("url"), url);
 
             that.element.append(element);
 
@@ -281,7 +282,7 @@
                 remote = firstChar === "/",
                 element;
 
-            element = that.element.find("[data-kendo-url='" + url + "']");
+            element = that.element.find("[" + attr("url") + "='" + url + "']");
 
             if (!element[0] && !remote) {
                 element = that.element.find(local ? url : "#" + url);

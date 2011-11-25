@@ -396,7 +396,7 @@
 
         options: {
             name: "Scroller",
-            selector: "[data-kendo-role=scroller]",
+            selector: kendo.roleSelector("scroller"),
             useOnDesktop: true
         },
 
