@@ -12,6 +12,59 @@
             startswith: "startswith"
         };
 
+    function toOdataFilter(filter) {
+        var result = [],
+            logic = filter.logic || "and",
+            idx,
+            length,
+            field,
+            format,
+            operator,
+            value,
+            filters = filter.filters;
+
+        for (idx = 0, length = filters.length; idx < length; idx++) {
+            filter = filters[idx];
+            field = filter.field;
+            value = filter.value;
+            operator = filter.operator;
+
+            if (filter.filters) {
+                filter = toOdataFilter(filter);
+            } else {
+                field = field.replace(/\./g, "/"),
+
+                filter = odataFilters[operator];
+
+                if (filter && value !== undefined) {
+                    format = typeof value === "string" ? "'{1}'" : "{1}";
+
+                    if (filter.length > 3) {
+                        if (filter !== "substringof") {
+                            format = "{0}({2}," + format + ")";
+                        } else {
+                            format = "{0}(" + format + ",{2})";
+                        }
+                    } else {
+                        format = "{2} {0} " + format;
+                    }
+
+                    filter = kendo.format(format, filter, value, field);
+                }
+            }
+
+            result.push(filter);
+        }
+
+        filter = result.join(" " + logic + " ");
+
+        if (result.length > 1) {
+            filter = "(" + filter + ")";
+        }
+
+        return filter;
+    }
+
     $.extend(true, kendo.data, {
         schemas: {
             odata: {
@@ -53,27 +106,9 @@
                     }
 
                     if (data.filter) {
-                        result.push("$filter=" + $.map(data.filter, function(filter) {
-                            var value = filter.value,
-                                field = filter.field.replace(/\./g, "/"),
-                                format = typeof value === "string" ? "'{1}'" : "{1}";
-
-                            filter = odataFilters[filter.operator];
-
-                            if (filter && value !== undefined) {
-                                if (filter.length > 3) {
-                                    if (filter !== "substringof") {
-                                        format = "{0}({2}," + format + ")";
-                                    } else {
-                                        format = "{0}(" + format + ",{2})";
-                                    }
-                                } else {
-                                    format = "{2} {0} " + format;
-                                }
-                                return kendo.format(format, filter, value, field);
-                            }
-                        }).join(" and "));
+                        result.push("$filter=" + toOdataFilter(data.filter));
                     }
+
                     return result.join("&");
                 }
             }

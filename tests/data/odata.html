@@ -7,7 +7,6 @@
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.odata.js"></script>
-        <script src="../../src/kendo.data.xml.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -102,7 +101,7 @@
             });
 
             test("parameterMap adds $filter if filter is specified", function() {
-                ok(parameterMap({ filter: [ {field: "Name", operator: "startswith", value: "bar"} ]}).indexOf("&$filter=startswith(Name,'bar')") > -1 );
+                ok(parameterMap({ filter: { filters:[ {field: "Name", operator: "startswith", value: "bar"} ]} }).indexOf("&$filter=startswith(Name,'bar')") > -1 );
             });
 
             test("parameterMap does not add $filter if filter is not specified", function() {
@@ -110,31 +109,63 @@
             });
 
             test("$filter and endswith operator", function() {
-                ok(parameterMap({ filter: [ {field: "Name", operator: "endswith", value: "bar"} ]}).indexOf("&$filter=endswith(Name,'bar')") > -1 );
+                ok(parameterMap({ filter: {filters:[ {field: "Name", operator: "endswith", value: "bar"} ]}}).indexOf("&$filter=endswith(Name,'bar')") > -1 );
             });
 
             test("$filter and contains operator uses substringof", function() {
-                ok(parameterMap({ filter: [ {field: "Name", operator: "contains", value: "bar"} ]}).indexOf("&$filter=substringof('bar',Name)") > -1 );
+                ok(parameterMap({ filter: { filters: [ {field: "Name", operator: "contains", value: "bar"} ]}}).indexOf("&$filter=substringof('bar',Name)") > -1 );
             });
 
             test("$filter and neq operator", function() {
-                ok(parameterMap({ filter: [ {field: "Name", operator: "neq", value: "bar"} ]}).indexOf("&$filter=Name ne 'bar'") > -1 );
+                ok(parameterMap({ filter: { filters: [ {field: "Name", operator: "neq", value: "bar"} ]} }).indexOf("&$filter=Name ne 'bar'") > -1 );
             });
 
             test("$filter with nested field", function() {
-                ok(parameterMap({ filter: [ {field: "foo.bar", operator: "neq", value: "bar"} ]}).indexOf("&$filter=foo/bar ne 'bar'") > -1 );
+                ok(parameterMap({ filter: { filters: [ {field: "foo.bar", operator: "neq", value: "bar"} ]} }).indexOf("&$filter=foo/bar ne 'bar'") > -1 );
             });
 
             test("$filter does not quote apostrophe when numberic value is specifed", function() {
-                ok(parameterMap({ filter: [ {field: "ID", operator: "neq", value: 10} ]}).indexOf("&$filter=ID ne 10") > -1 );
+                ok(parameterMap({ filter: { filters: [ {field: "ID", operator: "neq", value: 10} ]} }).indexOf("&$filter=ID ne 10") > -1 );
             });
 
             test("$filter and null value", function() {
-                ok(parameterMap({ filter: [ {field: "ID", operator: "neq", value: null} ]}).indexOf("&$filter=ID ne null") > -1 );
+                ok(parameterMap({ filter: { filters: [ {field: "ID", operator: "neq", value: null} ]} }).indexOf("&$filter=ID ne null") > -1 );
             });
 
-            test("multipler filter expressions", function() {
-                ok(parameterMap({ filter: [ {field: "ID", operator: "neq", value: null},{field: "ID", operator: "neq", value: null} ]}).indexOf("&$filter=ID ne null and ID ne null") > -1 );
+            test("$filter or", function() {
+                var filter = parameterMap({ filter: { logic: "or", filters: [ {field: "ID", operator: "neq", value: 1}, {field: "ID", operator: "eq", value: 1} ]} });
+                ok(filter.indexOf("&$filter=(ID ne 1 or ID eq 1)") > -1 );
+            });
+
+            test("$filter and", function() {
+                ok(parameterMap({ filter: { filters: [ {field: "ID", operator: "neq", value: null}, {field: "ID", operator: "neq", value: null} ]} }).indexOf("&$filter=(ID ne null and ID ne null)") > -1 );
+            });
+
+            test("$filter and nested expressions", function() {
+                var filter = parameterMap({
+                    filter: {
+                        logic:"and",
+                        filters: [ {
+                            logic: "or",
+                            filters: [{
+                                    field: "ID",
+                                    operator: "neq",
+                                    value: 1
+                                }, {
+                                    field: "ID",
+                                    operator: "neq",
+                                    value: 2
+                                }]
+                            }, {
+                                field: "ID",
+                                operator:"eq",
+                                value: 3
+                            }
+                        ]
+                    }
+                });
+
+                ok(filter.indexOf("&$filter=((ID ne 1 or ID ne 2) and ID eq 3)") > -1 );
             });
         </script>
     </body>
