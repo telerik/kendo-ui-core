@@ -256,8 +256,6 @@
                         var initialPosition = dialog.position(),
                             scrollContainer = jQuery(window);
 
-                        console.log ();
-
                         start = {
                             left: e.pageX - initialPosition.left + scrollContainer.scrollLeft(),
                             top: e.pageY - initialPosition.top + scrollContainer.scrollTop()
