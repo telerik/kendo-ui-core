@@ -61,14 +61,31 @@
                 </ul>
             </div>
 
-            <div>
-                <input id="slider" />
-            </div>
+            <div id="climateCtrl">
 
-            <div id="rangeslider" style="margin-top: 40px;">
-                <input />
-                <input />
-            </div>
+				<input id="slider" class="temperature" />
+
+				<div id="rangeslider" class="humidity">
+					<input />
+					<input />
+				</div>
+
+			</div>
+
+			<style scoped>
+				#climateCtrl {
+					display: inline-block;
+					width: 245px;
+					height: 167px;
+					margin: 20px;
+					padding: 102px 0 0 156px;
+					background: url('../content/slider/climateController.png') transparent no-repeat 0 0;
+				}
+				.humidity {
+					margin: 67px 0 0 15px;
+					width: 170px;
+				}
+			</style>
 
             <script>
                 $(document).ready(function() {
