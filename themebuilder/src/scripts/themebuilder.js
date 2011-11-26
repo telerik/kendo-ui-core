@@ -165,7 +165,7 @@
                             tag = components[1];
 
                             parentElement = current;
-                            current = $("<" + (tag || "div") + " />").addClass(components[2].replace(/\./g, ""));
+                            current = $("<" + (tag || "div") + " />").addClass(components[2].replace(/\./g, " "));
 
                             if (tag == "a") {
                                 current.attr("href", "#");
