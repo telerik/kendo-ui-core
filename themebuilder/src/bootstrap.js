@@ -11,8 +11,9 @@
         })(),
 
          // TODO: change these to their respective CDN versions during build
-        kendoAllLocation = applicationRoot + "../../deploy/kendoui.web-dataviz.commercial/js/kendo.all.min.js",
-        kendoCommonCssLocation = applicationRoot + "../../deploy/kendoui.web-dataviz.commercial/styles/kendo.common.min.css",
+        KENDO_ALL_LOCATION = applicationRoot + "../../deploy/kendoui.web-dataviz.commercial/js/kendo.all.min.js",
+        KENDO_COMMON_CSS_LOCATION = applicationRoot + "../../deploy/kendoui.web-dataviz.commercial/styles/kendo.common.min.css",
+        JQUERY_LOCATION = applicationRoot + "../../deploy/kendoui.web-dataviz.commercial/js/jquery.min.js",
 
         // caution: the variables below is changed during builds. update build/themebuilder.js if you change them!
         requiredJs = ["scripts/less.js", "scripts/themebuilder.js", "scripts/colorengine.js", "scripts/template.js"],
@@ -268,13 +269,13 @@
             doc.write([
                 "<!DOCTYPE html><html><head>",
                  "<meta charset='utf-8' />",
-                 stylesheet(kendoCommonCssLocation),
+                 stylesheet(KENDO_COMMON_CSS_LOCATION),
                  jQuery.map(requiredCss, function(styleSheetName) {
                      return stylesheet(applicationRoot + styleSheetName);
                  }).join(""),
                  "</head><body>",
-                 script("http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"),
-                 script(kendoAllLocation),
+                 script(JQUERY_LOCATION),
+                 script(KENDO_ALL_LOCATION),
                  jQuery.map(requiredJs, function(scriptName) {
                      return script(applicationRoot + scriptName);
                  }).join(""),
