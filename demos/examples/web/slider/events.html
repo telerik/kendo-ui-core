@@ -25,12 +25,29 @@
         <div class="description">Events</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <input id="slider" />
-            <br />
-            <div id="rangeslider" style="margin-top: 40px;">
-                <input />
-                <input />
-            </div>
+			<div id="climateCtrl">
+
+				<input id="slider" class="temperature" />
+
+				<div id="rangeslider" class="humidity">
+					<input />
+					<input />
+				</div>
+
+			</div>
+			<style scoped>
+				#climateCtrl {
+					width: 245px;
+					height: 167px;
+					margin: 30px auto;
+					padding: 102px 0 0 156px;
+					background: url('../content/slider/climateController.png') transparent no-repeat 0 0;
+				}
+				.humidity {
+					margin: 67px 0 0 15px;
+					width: 170px;
+				}
+			</style>
             <script>
                 function sliderOnSlide(e) {
                     kendoConsole.log("Change :: new value is: " + e.value);
@@ -51,12 +68,22 @@
                 $(document).ready(function() {
                     $("#slider").kendoSlider({
                         change: sliderOnChange,
-                        slide: sliderOnSlide
+                        slide: sliderOnSlide,
+						min: 0,
+						max: 30,
+						smallStep: 1,
+						largeStep: 10,
+						value: 18
                     });
 
                     $("#rangeslider").kendoRangeSlider({
                         change: rangeSliderOnChange,
-                        slide: rangeSliderOnSlide
+                        slide: rangeSliderOnSlide,
+						min: 0,
+						max: 10,
+						smallStep: 1,
+						largeStep: 2,
+						tickPlacement: "both"
                     });
                 });
             </script>
