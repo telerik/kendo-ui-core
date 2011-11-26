@@ -30,6 +30,11 @@
                 dom.trigger(MOUSEUP)
             }
 
+            module("mobile button", {
+                setup: function() { kendo.ns = "kendo-"; }
+            });
+
+
             test("applies css class", function() {
                 expect(1);
 
