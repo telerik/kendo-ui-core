@@ -238,23 +238,29 @@
         },
 
         _createWindow: function () {
-            var dialog = jQuery("<div id='ktb-wrap'><div id='ktb-close' /></div>")
-                        .css({
-                            display: "none",
-                            height: 0
-                        })
-                        .find("#ktb-close").click(jQuery.proxy(this.close, this)).end()
+            var that = this,
+                dialog = jQuery("<div id='ktb-wrap'><div id='ktb-close' /></div>")
+                    .css({
+                        display: "none",
+                        height: 0
+                    })
+                    .find("#ktb-close")
+                        .click(jQuery.proxy(that.close, that))
+                    .end()
                     .appendTo(doc.body),
                 start;
 
             if (kendo.ui && kendo.ui.Draggable) {
-                this.draggable = dialog.kendoDraggable({
+                that.draggable = dialog.kendoDraggable({
                     dragstart: function(e) {
-                        var initialPosition = dialog.position();
+                        var initialPosition = dialog.position(),
+                            scrollContainer = jQuery(window);
+
+                        console.log ();
 
                         start = {
-                            left: e.pageX - initialPosition.left,
-                            top: e.pageY - initialPosition.top
+                            left: e.pageX - initialPosition.left + scrollContainer.scrollLeft(),
+                            top: e.pageY - initialPosition.top + scrollContainer.scrollTop()
                         };
 
                         dialog.append("<div id='ktb-overlay'></div>");
@@ -267,8 +273,6 @@
                     },
                     dragend: function(e) {
                         dialog.find("#ktb-overlay").remove();
-
-                        return false;
                     }
                 });
             }
