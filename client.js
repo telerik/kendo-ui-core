@@ -29,6 +29,9 @@ client.subscribe("/testDone", function(state) {
     }
 
     util.puts(testName + ' (' + state.failed.toString().red + ', ' + state.passed.toString().green + ', ' + state.total.toString().grey + ')');
+    for (var i = 0; i < state.failures.length; i ++) {
+        util.puts((" -- " + state.failures[i]).red);
+    }
 });
 
 client.subscribe("/done", function(agent) {
