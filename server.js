@@ -9,7 +9,7 @@ var http       = require("http"),
     WEBROOT    = path.dirname(__filename),
     bayeux     = new faye.NodeAdapter({mount: "/faye", timeout: 100000});
 
-var fileServer = new static.Server(WEBROOT);
+var fileServer = new static.Server(WEBROOT, {cache: false});
 
 var server = http.createServer(function(request, response) {
     request.addListener('end', function (argument) {

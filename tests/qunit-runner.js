@@ -33,7 +33,6 @@
     }
 
     runner.prototype.runPage = function() {
-        console.log("running page");
         var progress = [(this.currentIndex + 1), ' of ', this.tests.length].join('');
 
         $("#qunit-runner-userAgent")
@@ -132,8 +131,13 @@
         runner.pageProgress(window.frameElement, 0, 0, state.name + " started");
     });
 
+    var knownFails = $();
+
     QUnit.config.testDone.push(function(state) {
         runner.pageProgress(window.frameElement, state.failed, state.total, state.name);
+        var newFails = $('li.fail li.fail').not(knownFails);
+        state.failures = $.map(newFails.contents(), function(err) { return $(err).text() });
         runner.testDone(state);
+        knownFails = knownFails.add(newFails);
     });
 })(this);
