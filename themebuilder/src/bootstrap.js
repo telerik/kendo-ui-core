@@ -112,7 +112,7 @@
 
             "@alt-background-color":            constant(".k-alt", BGCOLOR),
             "@input-background-color":          constant(".k-input", BGCOLOR),
-            "@input-text-color":                constant(".k-input", COLOR),
+            "@input-text-color":                constant(".k-autocomplete .k-input", COLOR),
             "@shadow-color":                    constant(".k-popup", "box-shadow"),
             "@shadow-inset-color":              constant(".k-autocomplete .k-input", "box-shadow"),
             "@link-text-color":                 constant("a.k-link", COLOR),
@@ -143,13 +143,14 @@
                 "@content-background-color": "Content area color"
             },
             "Inputs, pickers, and select boxes": {
-                "@select-background-color":       "Background",
+                "@input-background-color":        "Input background",
+
+                "@select-background-color":       "Picker background",
                 "@select-border-color":           "Border color",
                 "@select-group-background-color": "Popup background",
-                "@select-hover-background-color": "Item hover state",
+                "@select-hover-background-color": "Popup item hover state",
 
-                "@input-background-color":        "Input background",
-                "@input-text-color":              "Input text color"
+                "@input-text-color":              "Text color"
             },
             "Widget states": {
                 "@hover-background-color":        "Hover background",
