@@ -90,7 +90,6 @@
 
             "@disabled-text-color":             constant(".k-state-disabled", COLOR),
 
-            // TODO: fix these
             "@validation-background-color":     constant(".k-tooltip-validation", BGCOLOR),
             "@validation-border-color":         constant(".k-tooltip-validation", BORDERCOLOR),
             "@validation-text-color":           constant(".k-tooltip-validation", COLOR),
@@ -239,13 +238,42 @@
         },
 
         _createWindow: function () {
-            return jQuery("<div id='ktb-wrap'><div id='ktb-close' /></div>")
+            var dialog = jQuery("<div id='ktb-wrap'><div id='ktb-close' /></div>")
                         .css({
                             display: "none",
                             height: 0
                         })
                         .find("#ktb-close").click(jQuery.proxy(this.close, this)).end()
-                    .appendTo(doc.body);
+                    .appendTo(doc.body),
+                start;
+
+            if (kendo.ui && kendo.ui.Draggable) {
+                this.draggable = dialog.kendoDraggable({
+                    dragstart: function(e) {
+                        var initialPosition = dialog.position();
+
+                        start = {
+                            left: e.pageX - initialPosition.left,
+                            top: e.pageY - initialPosition.top
+                        };
+
+                        dialog.append("<div id='ktb-overlay'></div>");
+                    },
+                    drag: function(e) {
+                        dialog.css({
+                            left: e.pageX - start.left,
+                            top: e.pageY - start.top
+                        });
+                    },
+                    dragend: function(e) {
+                        dialog.find("#ktb-overlay").remove();
+
+                        return false;
+                    }
+                });
+            }
+
+            return dialog;
         },
 
         _createInterfaceFrame: function () {
