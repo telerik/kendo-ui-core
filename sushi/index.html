@@ -35,7 +35,7 @@
             </div>
 
             <footer data-role="footer" data-id="default">
-                <div data-role="tabstrip">
+                <div data-role="tabstrip" data-selected-index="0">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
                     <a href="#account">Account</a>
@@ -56,7 +56,42 @@
             </div>
 
             <footer data-role="footer" data-id="default">
-                <div data-role="tabstrip">
+                <div data-role="tabstrip" data-selected-index="1">
+                    <a href="#index">Home</a>
+                    <a href="#menu">Our menu</a>
+                    <a href="#account">Account</a>
+                    <a href="#cart">Cart</a>
+                </div>
+            </footer>
+        </div>
+
+        <div data-role="view" id="account">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title">My account</span>
+                </div>
+            </header>
+
+            <div data-role="content">
+                <ul data-role="listview" data-style="inset" data-type="group">
+                    <li>
+                        <ul>
+                            <li>Username    <span class="list-item-data">kendoSushi</span></li>
+                            <li>Email       <span class="list-item-data">sushi@kendoui.com</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        Notifications
+                        <ul>
+                            <li>New products <input type="checkbox" data-role="switch" /></li>
+                            <li>Exclusive promos       <input type="checkbox" data-role="switch" checked="checked" /></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <footer data-role="footer" data-id="default">
+                <div data-role="tabstrip" data-selected-index="2">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
                     <a href="#account">Account</a>
@@ -79,7 +114,7 @@
             </div>
 
             <footer data-role="footer" data-id="default">
-                <div data-role="tabstrip">
+                <div data-role="tabstrip" data-selected-index="3">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
                     <a href="#account">Account</a>
@@ -95,41 +130,6 @@
             </div>
         </div>
 
-        <div data-role="view" id="account">
-            <header data-role="header">
-                <div data-role="navbar">
-                    <span data-role="view-title">My account</span>
-                </div>
-            </header>
-
-            <div data-role="content">
-                <ul data-role="listview" data-style="inset" data-type="group">
-                    <li>
-                        <ul>
-                            <li>Username    <span class="list-item-data">kendoSushi</span></li>
-                            <li>Email       <span
-                                    class="list-item-data">sushi@kendoui.com</span></li>
-                        </ul>
-                    </li>
-                    <li>
-                        Notifications
-                        <ul>
-                            <li>New products <input type="checkbox" data-role="switch" /></li>
-                            <li>Exclusive promos       <input type="checkbox" data-role="switch" checked="checked" /></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <footer data-role="footer" data-id="default">
-                <div data-role="tabstrip">
-                    <a href="#index">Home</a>
-                    <a href="#menu">Our menu</a>
-                    <a href="#account">Account</a>
-                    <a href="#cart">Cart</a>
-                </div>
-            </footer>
-        </div>
 
         <div data-role="view" id="details" data-transition="slide">
             <header data-role="header">
