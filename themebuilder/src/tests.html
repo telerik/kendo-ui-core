@@ -208,6 +208,19 @@
                 equals(constants.constants["@foo"].value, "10px");
             });
 
+            test("infer() selectors with multiple classNames", function() {
+                var themeBuilder = new ThemeBuilder();
+                themeBuilder.updateStyleSheet(".foo { font-size: 8px; }\n.foo.bar { font-size: 10px; }");
+
+                var constants = new LessConstants({
+                    "@foo": constant(".foo.bar", "font-size")
+                });
+
+                constants.infer();
+
+                equals(constants.constants["@foo"].value, "10px");
+            });
+
             test("infer() infers nested tagName selectors", function() {
                 var themeBuilder = new ThemeBuilder();
                 themeBuilder.updateStyleSheet("dl { font-size: 8px; }\ndl dt { font-size: 10px; }");

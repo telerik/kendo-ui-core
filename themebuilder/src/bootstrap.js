@@ -67,10 +67,10 @@
 
             "@content-background-color":        constant(".k-content", BGCOLOR),
 
-            "@select-background-color":         constant(".k-group", BGCOLOR),
-            "@select-border-color":             constant(".k-group", BORDERCOLOR),
-            "@select-group-background-color":   constant(".k-group", BGCOLOR),
-            "@select-hover-background-color":   constant(".k-group", BGCOLOR),
+            "@select-background-color":         constant(".k-widget .k-picker-wrap", BGCOLOR),
+            "@select-border-color":             constant(".k-picker-wrap.k-state-hover", BORDERCOLOR),
+            "@select-hover-background-color":   constant(".k-picker-wrap.k-state-hover", BGCOLOR),
+            "@select-group-background-color":   constant(".k-list-container", BGCOLOR),
 
             "@hover-background-color":          constant(".k-state-hover", BGCOLOR),
             "@hover-border-color":              constant(".k-state-hover", BORDERCOLOR),
