@@ -35,7 +35,7 @@
 
             module("mobile core", {
                 setup: function() {
-
+                    kendo.ns = "kendo-";
                 },
                 teardown: function() {
 
@@ -64,16 +64,8 @@
                 equal(widget.options.bar, "baz");
             });
 
-            test("case sensitive options are read from lowercase data attributes", function() {
-                var dom = $('<div data-kendo-casesensitive="bar" />');
-
-                var widget = new MyMobileWidget(dom);
-
-                equal(widget.options.caseSensitive, "bar");
-            });
-
-            test("case sensitive options are read from case sensitive data attributes", function() {
-                var dom = $('<div data-kendo-caseSensitive="bar" />');
+            test("camel-cased options are read from dashed data attributes", function() {
+                var dom = $('<div data-kendo-case-sensitive="bar" />');
 
                 var widget = new MyMobileWidget(dom);
 
