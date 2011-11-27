@@ -295,15 +295,17 @@
                         change: changeHandler
                     }).end();
 
-                $(".k-action-download").click(proxy(that.showDownload, that));
-                $(".k-action-back").click(proxy(that.hideDownload, that));
+                $(".ktb-action-get-css,.ktb-action-get-less").click(proxy(that.showSource, that));
+                $(".ktb-action-back").click(proxy(that.hideDownload, that));
             },
-            showDownload: function(e) {
+            showSource: function(e) {
                 e.preventDefault();
 
-                this._generateTheme(function(css) {
+                var less = $(e.target).hasClass("ktb-action-get-less");
+
+                this._generateTheme(function(constants, css) {
                     $("#download-overlay").slideDown()
-                        .find("textarea").val(css);
+                        .find("textarea").val(less ? constants : css);
                 });
             },
             hideDownload: function(e) {
@@ -312,14 +314,15 @@
                 $("#download-overlay").slideUp();
             },
             _generateTheme: function(callback) {
+                var constants = this.constants.serialize();
                 (new less.Parser()).parse(
-                    this.constants.serialize() + this.templateInfo.template,
+                    constants + this.templateInfo.template,
                     function (err, tree) {
                         if (err && console) {
                             return console.error(err);
                         }
 
-                        callback(tree.toCSS());
+                        callback(constants, tree.toCSS());
                     }
                 );
             },
@@ -328,7 +331,7 @@
 
                 that.constants.update(e.name, e.value);
 
-                that._generateTheme(function(css) {
+                that._generateTheme(function(constants, css) {
                     that.updateStyleSheet(css);
                 });
             },
@@ -368,13 +371,14 @@
 
                 $("<div id='kendo-themebuilder'>" +
                         "<div id='download-overlay' class='ktb-view'>" +
-                            "<button class='k-action-back k-button'>Back</button>" +
+                            "<button class='ktb-action-back k-button'>Back</button>" +
                             "<div class='ktb-content'>" +
                                 "<textarea readonly></textarea>" +
                             "</div>" +
                         "</div>" +
                         "<div id='advanced-mode' class='ktb-view'>" +
-                            "<button class='k-action-download k-button'>Get skin CSS...</button>" +
+                            "<button class='ktb-action-get-css k-button'>Get CSS...</button>" +
+                            "<button class='ktb-action-get-less k-button'>Get LESS...</button>" +
                             "<div class='ktb-content'>" +
                                 "<ul id='stylable-elements'>" +
                                     $.map(that.constantsHierarchy || {}, function(section, title) {
