@@ -147,6 +147,11 @@ body
     font: 12px Consolas, Courier, monospace;
 }
 
+.ktb-view > .k-button
+{
+    margin-right: .6em;
+}
+
 .ktb-content {
     position: absolute;
     overflow: scroll;
