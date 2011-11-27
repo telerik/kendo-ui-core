@@ -232,14 +232,13 @@
         }),
 
         ThemeBuilder = kendo.Observable.extend({
-            init: function(templateInfo, constants, constantsHierarchy) {
+            init: function(templateInfo) {
                 var that = this;
 
-                that.templateInfo = templateInfo;
+                templateInfo = that.templateInfo = templateInfo || {};
 
-                that.constants = constants;
-
-                that.constantsHierarchy = constantsHierarchy;
+                var constants = that.constants = templateInfo.constants,
+                    constantsHierarchy = that.constantsHierarchy = templateInfo.constantsHierarchy;
 
                 if (constants) {
                     constants.infer();
