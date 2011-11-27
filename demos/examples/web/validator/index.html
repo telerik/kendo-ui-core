@@ -8,7 +8,7 @@
         <link href="../../shared/styles/examples.css" rel="stylesheet"/>
         <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
         <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../../../styles/kendo.kendo.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
         <!-- css -->
         <!-- script -->
         <script src="../../../../src/jquery.min.js"></script>
@@ -27,41 +27,91 @@
         <div class="description">Basic usage</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <fieldset>
-                <legend>Ticket form:</legend>
-                <ul>
-                    <li>
-                        <label for="fullname">Your Name *</label>
-                        <input type="text" id="fullname" name="fullname" placeholder="Full name" required validationMessage="Please enter {0}!" />
-                    </li>
-                    <li>
-                        <label for="search">Movie *</label>
-                        <input type="search" id="search" name="search" required validationMessage="Please select movie"/>
-                        <span class="k-widget k-tooltip-validation k-invalid-msg" data-for="search"><span class="k-icon k-warning"></span></span>
-                    </li>
-                    <li>
-                        <label for="amount">Amount</label>
-                        <input name="Amount" type="number" min="1" max="10" value="1" required />
-                        <span class="k-widget k-tooltip-validation k-invalid-msg" data-for="amount"><span class="k-icon k-warning"></span></span>
-                     </li>
-                                       <li>
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="Email" placeholder="e.g. myname@example.net"  required />
-                    </li>
-                    <li>
-                        <label for="tel">Phone *</label>
-                        <input type="tel" id="tel" name="tel" pattern="\d{10}" placeholder="Please enter a ten digit phone number" required
-                         validationMessage="Please enter a ten digit phone number"/>
-                     </li>
-                     <li>
-                        Accept terms and condition of service *<input type="checkbox" name="Accept" required />
-                     </li>
-                </ul>
-            </fieldset>
+			<div id="tickets">
+					<h3>Book Tickets</h3>
+					<ul>
+						<li>
+							<label for="fullname" class="required">Your Name</label>
+							<input type="text" id="fullname" name="fullname" placeholder="Full name" required validationMessage="Please enter {0}!" />
+						</li>
+						<li>
+							<label for="search" class="required">Movie</label>
+							<input type="search" id="search" name="search" required validationMessage="Please select movie"/>
+							<span class="k-widget k-tooltip-validation k-invalid-msg" data-for="search"><span class="k-icon k-warning"></span></span>
+						</li>
+						<li>
+							<label for="amount">Amount</label>
+							<div class="k-widget k-autocomplete k-header k-state-default">
+							<input name="Amount" type="number" min="1" max="10" value="1" required class="k-input" style="width: 100%; height: auto;" /></div>
+							<span class="k-widget k-tooltip-validation k-invalid-msg" data-for="amount"><span class="k-icon k-warning"></span></span>
+						 </li>
+										   <li>
+							<label for="email" class="required">Email</label>
+							<input type="email" id="email" name="Email" placeholder="e.g. myname@example.net"  required />
+						</li>
+						<li>
+							<label for="tel" class="required">Phone</label>
+							<input type="tel" id="tel" name="tel" pattern="\d{10}" placeholder="Please enter a ten digit phone number" required
+							 validationMessage="Please enter a ten digit phone number"/>
+						 </li>
+						 <li  class="accept">
+							<input type="checkbox" name="Accept" required /> I accept the terms and condition of service
+						 </li>
 
-            <button class="k-button" type="submit">Submit</button>
+						 <li  class="accept">
+							<button class="k-button" type="submit">Submit</button>
+						 </li>
+						 <li class="status">
+						 </li>
+					</ul>
+			</div>
 
-            <h3 class="status"></h3>
+            <style scoped>
+				#tickets {
+					width: 510px;
+					height: 323px;
+					margin: 30px auto;
+					padding: 10px 20px 20px 170px;
+					background: url('../content/validator/ticketsOnline.png') transparent no-repeat 0 0;
+				}
+
+				#tickets h3 {
+					font-weight: normal;
+					font-size: 1.4em;
+					border-bottom: 1px solid #ccc;
+				}
+
+				#tickets ul {
+                    list-style-type: none;
+					margin: 0;
+					padding: 0;
+                }
+                #tickets li {
+                    margin: 10px 0 0 0;
+                }
+
+				label {
+					display: inline-block;
+					width: 90px;
+					text-align: right;
+				}
+
+				.required {
+					font-weight: bold;
+				}
+
+				.accept, .status {
+					padding-left: 90px;
+				}
+
+				.valid {
+                    color: green;
+                }
+
+                .invalid {
+                    color: red;
+                }
+            </style>
 
             <script>
                 $(document).ready(function() {
@@ -83,7 +133,7 @@
                         separator: ", "
                     });
 
-                    var validator = $("fieldset").kendoValidator().data("kendoValidator"),
+                    var validator = $("#tickets").kendoValidator().data("kendoValidator"),
                         status = $(".status");
 
                     $("button").click(function() {
@@ -95,32 +145,6 @@
                     });
                 });
             </script>
-
-            <style>
-                input:invalid, input:-moz-ui-valid {
-                    box-shadow: none;
-                }
-
-                .valid {
-                    color: green;
-                    font-weight: bold;
-                }
-
-                .invalid {
-                    color: red;
-                }
-
-                fieldset ul {
-                    list-style-type: none;
-                }
-                fieldset li {
-                    margin: 3px;
-                }
-                fieldset label {
-                    display: inline-block;
-                    width: 75px;
-                }
-            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
