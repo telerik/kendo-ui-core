@@ -141,8 +141,8 @@ body
 .km-content
 {
     .box-flex(1);
+    .box-align(stretch);
     display: block;
-    display: -moz-box;
     width: auto;
     position: relative;
     display: ~"table-row\9";
@@ -151,6 +151,7 @@ body
 :-moz-any(.km-content)
 {
     width: 0;
+    display: -moz-box;
     -moz-box-orient: vertical;
 }
 
@@ -200,16 +201,16 @@ body
   .km-header, .km-footer { height: 1px; }
 }
 
-.km-content
-{
-    .box-align(stretch);
-    position: relative;
-}
-
 .km-android .km-view,
 .km-meego .km-view
 {
     .box-direction(reverse);
+}
+
+.km-android .km-view > *,
+.km-meego .km-view > *
+{
+    .box-direction(normal);
 }
 
 .km-view-title
@@ -229,12 +230,6 @@ body
     text-shadow: 0 -1pt #777;
     float: left;
     width: 100%;
-}
-
-.km-android .km-content,
-.km-meego .km-content
-{
-    .box-direction(normal);
 }
 
 .km-toolbar,
@@ -365,7 +360,6 @@ body
 .km-ios .km-switch,
 .km-meego .km-switch
 {
-    /*-webkit-mask-box-image: ~"url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><rect fill=%22black%22 x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%224%22/></svg>')";*/
     -webkit-transform: translatez(0);
 }
 
@@ -674,10 +668,11 @@ body
     padding: .2rem .4rem;
     margin: .1em;
     margin: .1rem;
-    .border-radius(2pt);
+    .border-radius(.15em);
     line-height: 2em;
     line-height: 2rem;
     .box-shadow(0 1px 2px #373737);
+    /*-webkit-mask-image: ~"url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><rect fill=%22black%22 x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%222%22/></svg>')";*/
 }
 
 .km-android .km-tabstrip .km-button
@@ -918,6 +913,12 @@ body
     display: block;
 }
 
+.km-android .km-toolbar,
+.km-android .km-navbar
+{
+    padding: 0 .3em;
+}
+
 :-moz-any(.km-toolbar,.km-navbar)
 {
     overflow: visible;
@@ -935,6 +936,14 @@ body
 {
     margin-top: .6rem;
     margin-bottom: .6rem;
+}
+
+.km-android .km-toolbar .km-button,
+.km-android .km-navbar .km-leftitem,
+.km-android .km-navbar .km-rightitem
+{
+    margin-top: .4rem;
+    margin-bottom: .4rem;
 }
 
 .km-blackberry .km-toolbar,
@@ -1349,8 +1358,8 @@ input[type=checkbox]
 
 .km-android .km-tabstrip .km-icon
 {
-    width: 2.8rem;
-    height: 2.8rem;
+    width: 2.2rem;
+    height: 2.2rem;
 }
 
 .km-tabstrip .km-button .km-icon

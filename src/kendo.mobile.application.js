@@ -42,7 +42,7 @@
 
         function hideBar() {
             var pageWidth = element[0].offsetWidth,
-                compensation;
+                compensation, content, item;
 
             if (lastWidth === pageWidth) {
                 return;
@@ -56,8 +56,14 @@
                     compensation = 60;
                 }
 
-                element.height((os.android ? window.innerHeight : document.documentElement.clientHeight) + compensation); // Fix for missing horizontal tab strip in iOS (needs more though).
-                setTimeout(window.scrollTo, 0, 0, 1);
+                element.height($(window).height() + compensation);
+                item = $("<span/>").appendTo(element.find(".km-view:visible .km-content"));
+
+                setTimeout(function () {
+                    window.scrollTo(0,1);
+
+                    item.remove(); // Mobile Safari doesn't resize the flex box accordingly.
+                }, 0);
             }
         }
 
@@ -111,7 +117,7 @@
 
     function ViewSwitcher(previous, view) {
         var that = this,
-            callback = function() { previous.element.hide(); },
+            callback = function() { previous.element.hide(); window.scrollTo(0,1); },
             animationType;
 
         that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(history.url().params);
@@ -180,12 +186,12 @@
             kendo.Observable.fn.init.call(this, options);
             this.element = element;
 
-            $(document.documentElement).addClass("km-" + (!os ? "ios" : os.name) + " " + getOrientationClass());
+            var doc = $(document.documentElement);
+            doc.addClass("km-" + (!os ? "ios" : os.name) + " " + getOrientationClass());
 
             $(document).bind("orientationchange", function(e) {
-                $(document.documentElement)
-                    .removeClass("km-horizontal km-vertical")
-                    .addClass(getOrientationClass());
+                doc.removeClass("km-horizontal km-vertical")
+                   .addClass(getOrientationClass());
             });
         },
 

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html class="k-ios">
+<html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Kendo Sushi</title>
@@ -75,6 +75,7 @@
             <div data-role="content">
                 <ul data-role="listview" data-style="inset" data-type="group">
                     <li>
+                        Account
                         <ul>
                             <li>Username    <span class="list-item-data">kendoSushi</span></li>
                             <li>Email       <span class="list-item-data">sushi@kendoui.com</span></li>
@@ -206,7 +207,7 @@
                 }
             });
 
-            var featured = kendo.data.DataSource.create({ schema: schema, filter: {field: "featured", operator: "eq", value: true} });
+            var featured = kendo.data.DataSource.create({ schema: schema, filter: { field: "featured", operator: "eq", value: true } });
 
             ds.bind("change", function() {
                 featured.data(ds.data());

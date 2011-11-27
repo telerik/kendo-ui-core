@@ -90,7 +90,8 @@
          "price": 6.00,
          "image": "tuna-poki-maki.jpg",
          "category": "Hosomaki",
-         "description": "Salmon roll with wasabi 6 pieces"
+         "description": "Salmon roll with wasabi 6 pieces",
+         "featured": true
     }
 ]
 

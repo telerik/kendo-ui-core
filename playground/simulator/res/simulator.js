@@ -86,10 +86,10 @@ function resizeContent() {
     $(".device-container")[0].style.cssText = "";
     setTimeout( function () {
         var offset = $(".device-skin").css("padding-top");
-        $(".device-container")
-                .css({
-                    paddingTop: offset != "0px" ? offset : false
-                });
+        if (offset != "0px") {
+            $(".device-container").animate({ paddingTop: "+" + offset });
+        }
+
         fixFF();
     }, 500 );
 }
