@@ -15,19 +15,15 @@ function wrap(source) {
     return "(function(window, undefined){\r\n" + source + "\r\n})(window);"
 }
 
-function lessToJson(lessTemplate) {
-    var template = fs.readFileSync(lessTemplate, "utf8")
+function lessToJsonString(lessTemplate) {
+    var template = kendoBuild.readText(lessTemplate)
             .replace(/\\/g, '\\\\')
             .replace(/"/g, '\\"')
             .replace(/'/g, "\\'")
             .replace(/\r\n/g, "\\n")
-            .replace(/(\n|\r)/g, "\\n"),
-        outputTemplate = kendoBuild.template("lessLoaded({ version: '#= version #', template: '#= template #' })");
+            .replace(/(\n|\r)/g, "\\n");
 
-    return outputTemplate({
-            version: kendoBuild.generateVersion(),
-            template: template
-        });
+    return "'" + template + "'";
 }
 
 function replaceVariable(source, name, value) {
@@ -104,9 +100,14 @@ function buildGeneratedSources() {
 
     console.log("\tconverting template.less to JSON...");
 
+    var lessJsonString = lessToJsonString(path.join(KENDO_STYLES, "template.less")),
+        templateInfoSource = kendoBuild.readText(path.join(SOURCE_SCRIPTS, "constants.js"));
+
+    templateInfoSource = replaceVariable(templateInfoSource, "lessTemplate", lessJsonString);
+
     kendoBuild.writeText(
         path.join(SOURCE_SCRIPTS, "template.js"),
-        lessToJson(path.join(KENDO_STYLES, "template.less"))
+        templateInfoSource
     );
 
 
