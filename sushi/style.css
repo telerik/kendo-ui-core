@@ -37,27 +37,28 @@
     text-decoration: none;
 }
 
-.km-ios .km-tabstrip .km-button .km-icon {
+.km-view .km-tabstrip .km-button .km-icon
+{
     background-image: url('images/tabstrip.png');
     background-size: auto 100%;
 }
 
-.km-ios .km-tabstrip .km-button:nth-child(1) .km-icon
+.km-view .km-tabstrip .km-button:nth-child(1) .km-icon
 {
     background-position: 0 50%;
 }
 
-.km-ios .km-tabstrip .km-button:nth-child(2) .km-icon
+.km-view .km-tabstrip .km-button:nth-child(2) .km-icon
 {
     background-position: 32% 50%;
 }
 
-.km-ios .km-tabstrip .km-button:nth-child(3) .km-icon
+.km-view .km-tabstrip .km-button:nth-child(3) .km-icon
 {
     background-position: 66% 50%;
 }
 
-.km-ios .km-tabstrip .km-button:nth-child(4) .km-icon
+.km-view .km-tabstrip .km-button:nth-child(4) .km-icon
 {
     background-position: 99% 50%;
 }

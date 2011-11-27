@@ -571,8 +571,10 @@
             });
 
             function complete() {
-                destination.attr(STYLE, "");
-                element.attr(STYLE, "");
+                destination.css(TRANSITION, NONE);
+                destination.css(TRANSFORM, NONE);
+                element.css(TRANSITION, NONE);
+                element.css(TRANSFORM, NONE); // Removing the whole style attribute breaks Android.
                 commonParent.css(OVERFLOW, originalOverflow);
                 options.completeCallback && options.completeCallback();
             }
