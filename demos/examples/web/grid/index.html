@@ -29,16 +29,29 @@
         <div class="description">Basic usage</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <div id="grid"></div>
+            <div id="clientsDb">
 
-            <script>
+				<div id="grid"></div>
+
+			</div>
+
+			<style scoped>
+				#clientsDb {
+					width: 692px;
+					height: 393px;
+					margin: 30px auto;
+					padding: 51px 4px 0 4px;
+					background: url('../content/grid/clientsDb.png') no-repeat 0 0;
+				}
+			</style>
+			<script>
                 $(document).ready(function() {
                     $("#grid").kendoGrid({
                         dataSource: {
                             data: createRandomData(50),
                             pageSize: 10
                         },
-                        height: 250,
+                        height: 370,
                         groupable: true,
                         scrollable: true,
                         sortable: true,
