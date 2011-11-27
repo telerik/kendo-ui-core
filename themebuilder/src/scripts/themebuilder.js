@@ -24,39 +24,6 @@
                 }
             }
         },
-        TextBox = ui.Widget.extend({
-            init: function(options) {
-                var that = this;
-
-                ui.Widget.fn.init.call(that, element, options);
-
-                that._wrapper();
-            },
-
-            _wrapper: function() {
-                var that = this,
-                    element = that.element,
-                    domElement = element[0],
-                    wrapper;
-
-                wrapper = element.parent();
-
-                if (!wrapper.is("div.k-widget")) {
-                    wrapper = element.wrap("<div />").parent();
-                }
-
-                wrapper[0].style.cssText = domElement.style.cssText;
-                element.css({
-                    width: "100%",
-                    height: "auto"
-                });
-
-                that._focused = that.element;
-                that.wrapper = wrapper
-                                  .addClass("k-widget k-textbox k-header")
-                                  .addClass(domElement.className);
-            }
-        }),
         ColorPicker = ui.ComboBox.extend({
             init: function(element, options) {
                 var that = this;
