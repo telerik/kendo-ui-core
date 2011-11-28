@@ -39,8 +39,7 @@ html
 .console div,
 #telerik,
 #introText dt,
-#footer .icon,
-.itemsOutline li
+#footer .icon
 {
     background-image: url("sprite.png");
     background-repeat: no-repeat;
@@ -163,7 +162,7 @@ html
 #header h1
 {
     float:left;
-    width:170px;
+    width:133px;
 }
 
 #logo
@@ -182,8 +181,15 @@ html
 
 #header ul
 {
-    margin-top: 3px;
     float: right;
+    margin-top: 3px;
+}
+
+#navi-top
+{
+    float: none;
+    margin-top: 0;
+    line-height: 34px;
 }
 
 #header li,
@@ -200,7 +206,12 @@ a.bigButton
     text-decoration:none;
     color:#2e2e2e;
     font-size:17px;
-    line-height:2.1;
+    line-height: 2.1;
+}
+
+.overview #navi li a
+{
+    font-size:20px;
 }
 
 #header li a:hover,
@@ -256,7 +267,7 @@ a.bigButton:hover
 .overview #header h1
 {
     margin-top: -15px;
-    width: 250px;
+    width: 209px;
     height: 72px;
 }
 *+html .overview #header h1 { margin-top: 12px; }
@@ -289,6 +300,7 @@ a.bigButton:hover
 #navi ul
 {
     float: right;
+    margin-top: 3px;
     vertical-align: top;
 }
 
@@ -319,7 +331,7 @@ a.bigButton:hover
 #navi li
 {
     vertical-align: top;
-    margin-left: 25px;
+    margin-left: 35px;
 }
 
 #navi li a
@@ -337,20 +349,9 @@ a.bigButton:hover
     margin-right: 31px;
 }
 
-#navi-top a
-{
-    opacity: 0.7;
-}
-
-#navi a#download
-{
-    border-top: 1px solid #999;
-}
-
 #navi a:hover,
 #navi-top a:hover
 {
-    opacity: 1;
     color: #e34f26;
 }
 
@@ -359,7 +360,7 @@ a.bigButton:hover
     position: relative;
 }
 
-#navi .active a
+#header .active a
 {
     color: #e34f26;
 }
@@ -387,10 +388,10 @@ a.bigButton:hover
 
 .overview li a#download
 {
-    margin-top: 1px;
-    font-size: 17px;
+    margin-top: 2px;
+    border-top: 1px solid #999;
+    font-size: 18px;
     line-height: 18px;
-    top: 68px;
 }
 
 #navi-back
@@ -746,6 +747,11 @@ a.bigButton
     background-position:0 -940px;
 }
 
+#footer .gplus
+{
+    background-position:-48px -940px;
+}
+
 #telerik
 {
     float:right;
@@ -766,7 +772,7 @@ a.bigButton
 {
     float:left;
     clear:left;
-    margin:.8em 0 0;
+    margin:.6em 0 0;
     font-size:.9em;
 }
 
@@ -1572,8 +1578,8 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 .itemsOutline
 {
     display: block;
-    margin:1em 0 0;
-    padding:0 0 60px;
+    margin: 0;
+    padding: 0;
 }
 
 .itemsOutline,
@@ -1584,60 +1590,84 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 
 .itemsOutline li
 {
-    margin: 0;
-    padding: 0 0 0 65px;
+    margin: 0 0 0 56px;
+    padding: 0;
     display: inline-block;
-    width: 25%;
-    font-size: 14px;
-    background-position: -162px -194px;
+    width: 260px;
 }
 *+html .itemsOutline li { display: inline; zoom: 1; }
 
-.itemsOutline .widgets
+.itemsOutline li:first-child
 {
-    background-position: -162px -314px;
+    margin-left: 0;
 }
 
-.itemsOutline .integration
+.itemsOutline h2
 {
-    background-position: -162px -434px;
+    font-size: 18px;
 }
 
-.itemsOutline strong
+.itemsOutline h2>a
+{
+    text-decoration: none;
+    color: #000;
+}
+
+.itemsOutline h2 strong
 {
     display: block;
-    font-size: 18px;
+    font-size: 10px;
     font-weight: normal;
-    line-height: 1.8em;
+    color: #555;
 }
 
-.itemsOutline a
+.itemsOutline li>a
 {
     color: #2175BD;
     display: block;
-    margin-top: 15px;
+    margin-top: 1em;
+    padding-top:117px;
     text-decoration: none;
-    position: absolute;
+    text-align: right;
+    background-repeat: no-repeat;
 }
 
-#aeroviewr
+.itemsOutline .web-box>a
+{
+    background-image: url(demos-web.png);
+    background-position: 0 10px;
+}
+
+.itemsOutline .mobile-box>a
+{
+    background-image: url(demos-mobile.png);
+}
+
+.itemsOutline .dataviz-box>a
+{
+    background-image: url(demos-dataviz.png);
+    background-position: 0 3px;
+}
+
+.aeroviewr-box
 {
     border: 1px solid #e6e6e6;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
+    margin-top: 3em;
     padding: 40px 50px 0;
     background: #f2f2f2;
 }
 
-#aeroviewr h2,
-#aeroviewr p,
-#aeroviewr #launch-button
+.aeroviewr-box h2,
+.aeroviewr-box p,
+.aeroviewr-box .launch-button
 {
     margin-left: 266px;
 }
 
-#launch-image
+.launch-image
 {
     float: left;
     margin-right: 44px;
@@ -1645,7 +1675,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     top: -10px;
 }
 
-#launch-button
+.launch-button
 {
     display:block;
     width:104px;
@@ -1662,7 +1692,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     text-decoration:none;
 }
 
-*>#launch-button
+*>.launch-button
 {
     background:#333 no-repeat url(bg-glossy.png);
 }
