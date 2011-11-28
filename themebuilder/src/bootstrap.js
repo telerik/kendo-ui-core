@@ -9,15 +9,15 @@
 
             return path.split("/").slice(0,-1).join("/") + "/";
         })(),
-
-         // TODO: change these to their respective CDN versions during build
-        KENDO_ALL_LOCATION = applicationRoot + "../../deploy/kendoui.web-dataviz.commercial/js/kendo.all.min.js",
-        KENDO_COMMON_CSS_LOCATION = applicationRoot + "../../deploy/kendoui.web-dataviz.commercial/styles/kendo.common.min.css",
-        JQUERY_LOCATION = applicationRoot + "../../deploy/kendoui.web-dataviz.commercial/js/jquery.min.js",
-
-        // caution: the variables below is changed during builds. update build/themebuilder.js if you change them!
+        FAST = "fast",
+        // caution: variables below are generated during builds. update build/themebuilder.js if you change them!
+        KENDO_LOCATION = applicationRoot + "../../deploy/kendoui.web-dataviz.commercial/",
+        JQUERY_LOCATION = KENDO_LOCATION + "js/jquery.min.js",
         requiredJs = ["scripts/less.js", "scripts/themebuilder.js", "scripts/colorengine.js", "scripts/template.js"],
-        requiredCss = ["styles/kendo.black.css", "styles/styles.css"];
+        requiredCss = ["styles/kendo.black.css", "styles/styles.css"],
+        // </generated variables>
+        KENDO_COMMON_CSS_LOCATION = KENDO_LOCATION + "styles/kendo.common.min.css",
+        KENDO_ALL_LOCATION = KENDO_LOCATION + "js/kendo.all.min.js";
 
     function ThemeBuilderInterface() {
         var that = this,
@@ -36,7 +36,7 @@
 
         that.container = that._createWindow();
 
-        that.container.fadeIn("fast");
+        that.container.fadeIn(FAST);
 
         that._createInterfaceFrame();
 
@@ -52,11 +52,11 @@
                 return;
             }
 
-            jQuery(this.container).fadeIn("fast").animate({ height: 480 }, "fast");
+            jQuery(this.container).fadeIn(FAST).animate({ height: 480 }, FAST);
         },
 
         close: function() {
-            jQuery(this.container).animate({ height: 0 }, "fast").fadeOut("fast");
+            jQuery(this.container).animate({ height: 0 }, FAST).fadeOut(FAST);
         },
 
         _createWindow: function () {
@@ -107,7 +107,8 @@
                     frameBorder: '0'
                 }).appendTo(this.container || document.body)[0],
                 wnd = iframe.contentWindow || iframe,
-                doc = wnd.document || iframe.contentDocument;
+                doc = wnd.document || iframe.contentDocument,
+                map = jQuery.map;
 
             function stylesheet(url) {
                 return "<link rel='stylesheet' href='" + url + "' />";
@@ -119,16 +120,15 @@
 
             doc.open();
             doc.write([
-                "<!DOCTYPE html><html><head>",
-                 "<meta charset='utf-8' />",
+                "<!DOCTYPE html><html><head><meta charset='utf-8' />",
                  stylesheet(KENDO_COMMON_CSS_LOCATION),
-                 jQuery.map(requiredCss, function(styleSheetName) {
+                 map(requiredCss, function(styleSheetName) {
                      return stylesheet(applicationRoot + styleSheetName);
                  }).join(""),
                  "</head><body>",
                  script(JQUERY_LOCATION),
                  script(KENDO_ALL_LOCATION),
-                 jQuery.map(requiredJs, function(scriptName) {
+                 map(requiredJs, function(scriptName) {
                      return script(applicationRoot + scriptName);
                  }).join(""),
                  "</body></html>"
