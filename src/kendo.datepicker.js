@@ -4,7 +4,7 @@
     *
     * @section
     *   <p>
-    *       The DatePicker widget allows to the end user to select a date from a graphical calendar.
+    *       The DatePicker widget allows the end user to select a date from a calendar or by direct input.
     *       It supports custom templates for "month" view, configurable options for min and max date,
     *       start view and the depth of the navigation.
     *   </p>
