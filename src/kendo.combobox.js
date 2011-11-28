@@ -627,7 +627,7 @@
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<div class="k-dropdown-wrap k-state-default"><input class="k-input" type="text" autocomplete="off"/><span class="k-select"><span class="k-icon k-arrow-down">select</span></span></div>')
+                wrapper.append('<span class="k-dropdown-wrap k-state-default"><input class="k-input" type="text" autocomplete="off"/><span class="k-select"><span class="k-icon k-arrow-down">select</span></span></span>')
                        .append(that.element);
 
                 input = wrapper.find(SELECTOR);
@@ -697,8 +697,8 @@
 
             wrapper = element.parent();
 
-            if (!wrapper.is("div.k-widget")) {
-                wrapper = element.hide().wrap("<div />").parent();
+            if (!wrapper.is("span.k-widget")) {
+                wrapper = element.hide().wrap("<span />").parent();
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
