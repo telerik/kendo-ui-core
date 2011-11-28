@@ -57,14 +57,14 @@
                 equal(options.test, 1);
            });
 
-           test("wraps element if no wrapper div and hide element", function() {
-               input.wrap("<div class='test'/>");
+           test("wraps element if no wrapper span and hide element", function() {
+               input.wrap("<span class='test'/>");
                input.kendoDropDownList();
 
                var wrapper = input.data("kendoDropDownList").wrapper;
 
-               ok(wrapper.parent().is("div.test"));
-               ok(wrapper.is("div.k-widget"));
+               ok(wrapper.parent().is("span.test"));
+               ok(wrapper.is("span.k-widget"));
                ok(wrapper.hasClass("k-widget k-dropdown k-header"));
                ok(!input.is(":visible"));
            });
@@ -86,12 +86,12 @@
                ok(span.hasClass("k-input"));
            });
 
-           test("text span should wrapped with div", function(){
+           test("text span should wrapped with span", function(){
                input.kendoDropDownList();
 
                var dropDownWrapper = input.data("kendoDropDownList").span.parent();
 
-               ok(dropDownWrapper.is("div"));
+               ok(dropDownWrapper.is("span"));
                ok(dropDownWrapper.hasClass("k-dropdown-wrap k-state-default"));
            });
 
