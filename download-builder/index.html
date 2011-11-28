@@ -181,22 +181,26 @@
                     return script.match(/kendo\.(.*)\.min\.js/)[1];
                 });
 
-                var params = {
-                    c: scripts,
-                    v: VERSION,
-                    min: "1"
-                };
+                if (scripts.length > 0) {
+                    var params = {
+                        c: scripts,
+                        v: VERSION,
+                        min: "1"
+                    };
 
-                $.ajax({
-                    type: "GET",
-                    url: INFO_SERVICE,
-                    data: params,
-                    traditional: true,
-                    success: function(data) {
-                        data.getUrl = GET_SERVICE + "?" + $.param(params, true);
-                        $("#infoPanel").html(infoTemplate(data));
-                    }
-                });
+                    $.ajax({
+                        type: "GET",
+                        url: INFO_SERVICE,
+                        data: params,
+                        traditional: true,
+                        success: function(data) {
+                            data.getUrl = GET_SERVICE + "?" + $.param(params, true);
+                            $("#infoPanel").html(infoTemplate(data));
+                        }
+                    });
+                } else {
+                    $("#infoPanel").empty();
+                }
             }
 
             function required(element) {

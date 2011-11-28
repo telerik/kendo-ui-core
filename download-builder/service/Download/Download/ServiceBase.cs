@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Web;
 using System.Text.RegularExpressions;
+using System;
 
 namespace Download
 {
@@ -9,6 +10,7 @@ namespace Download
         const string COMPONENTS_KEY = "c";
         const string VERSION_KEY = "v";
         const string MIN_KEY = "min";
+        const double CACHE_DAYS = 0.5;
         readonly Regex CommentRegex = new Regex("/\\*(?:.|[\\n\\r])*?\\*/", RegexOptions.Compiled);
 
         public bool IsReusable
@@ -52,9 +54,23 @@ namespace Download
             }
 
             ProcessScripts(combinedScript, minified, context.Response);
+            SetCachePolicy(context.Response);
         }
 
         protected abstract void ProcessScripts(string combinedScript, bool minified, HttpResponse response);
+
+        protected virtual void SetCachePolicy(HttpResponse response)
+        {
+            HttpCachePolicy cache = response.Cache;
+            cache.SetCacheability(HttpCacheability.Public);
+            cache.VaryByParams[COMPONENTS_KEY] = true;
+            cache.VaryByParams[VERSION_KEY] = true;
+            cache.VaryByParams[MIN_KEY] = true;
+            cache.SetOmitVaryStar(true);
+            cache.SetExpires(DateTime.Now.AddDays(CACHE_DAYS));
+            cache.SetMaxAge(TimeSpan.FromDays(CACHE_DAYS));
+            cache.SetValidUntilExpires(true);
+        }
 
         private string MapPath(string path)
         {
