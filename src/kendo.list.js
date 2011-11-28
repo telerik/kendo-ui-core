@@ -441,6 +441,11 @@
                 }
                 pressed = true;
             } else if (key === keys.ENTER || key === keys.TAB) {
+
+                if (that.popup.visible()) {
+                    e.preventDefault();
+                }
+
                 that._accept(current);
                 pressed = true;
             } else if (key === keys.ESC) {
