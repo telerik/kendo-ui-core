@@ -80,19 +80,19 @@ namespace KendoDemosTests
 
         //}
 
-        [CodedStep(@"@\Verify element 'ProductsText' 'is' visible.")]
-        public void FindStartingWith_CodedStep1()
-        {
+        //[CodedStep(@"@\Verify element 'ProductsText' 'is' visible.")]
+        //public void FindStartingWith_CodedStep1()
+        //{
 
 
-            // Verify element 'ProductsText' 'is' visible.
-            HtmlControl ProductsText = Pages.API7.TheShawshankListItem;
-            ProductsText.Wait.ForExists(10000);
-            Assert.IsTrue(ProductsText.IsVisible());
+            //// Verify element 'ProductsText' 'is' visible.
+            //HtmlControl ProductsText = Pages.API7.TheShawshankListItem;
+            //ProductsText.Wait.ForExists(10000);
+            //Assert.IsTrue(ProductsText.IsVisible());
 
 
 
-        }
+        //}
         
         // Add your test methods here...
     }
