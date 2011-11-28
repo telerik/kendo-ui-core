@@ -4,9 +4,8 @@
     *
     * @section
     *   <p>
-    *       The TimePicker widget allows to the end user to select a value from a list of predefined values or
-    *       to type a new value. It supports configurable options for the format, min and max time
-    *       and the interval between predefined values in the list.
+    *       The TimePicker widget allows the end user to select a value from a list of predefined values or to type a new value.
+    *       It supports configurable options for the format, min and max time and the interval between predefined values in the list.
     *   </p>
     *
     *   <h3>Getting Started</h3>
