@@ -73,14 +73,15 @@
 
 .price
 {
+    color: #fff;
     font-size: 2rem;
-    color: #ccc;
     text-shadow: 0 -1px 1px #333;
     line-height: normal;
 }
 
 .item-list .price
 {
+    color: #ccc;
     display: block;
     font-size: 1.4rem;
     float: right;
@@ -144,6 +145,12 @@
     float: right;
     font-weight: normal;
     color: rgb(146,	163, 189);
+}
+
+.km-empty h2,
+.km-empty #checkout
+{
+    display: none;
 }
 
 #cartList:empty:before

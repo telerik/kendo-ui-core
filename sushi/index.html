@@ -199,11 +199,15 @@
             var cartDataSource = kendo.data.DataSource.create({schema: schema, aggregate: [{ field: "price", aggregate: "sum" }]});
 
             cartDataSource.bind("change", function() {
-                if (cartDataSource.aggregates().price) {
-                    $("#total").html(cartDataSource.aggregates().price.sum + " &euro;");
-                } else {
+                var emptyCart = cartDataSource.aggregates().price === undefined;
+
+                if (emptyCart) {
                     $("#total").html(0 + " &euro;");
+                } else {
+                    $("#total").html(cartDataSource.aggregates().price.sum + " &euro;");
                 }
+
+                $("#cart .km-content").toggleClass("km-empty", emptyCart);
             });
 
             var featured = kendo.data.DataSource.create({ schema: schema, filter: { field: "featured", operator: "eq", value: true } });
