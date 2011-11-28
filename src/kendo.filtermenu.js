@@ -188,6 +188,7 @@
                 form = that.form,
                 expression = that.dataSource.filter() || { filters: [], logic: "and" },
                 filters = expression.filters,
+                field = that.model.fields[that.field],
                 filter,
                 idx,
                 length,
@@ -196,7 +197,7 @@
             for (idx = 0, length = filters.length; idx < length; idx++) {
                 filter = filters[idx];
                 if (filter.field == that.field) {
-                    value(form.find("[name='filters[" + current + "].value']"), filter.value);
+                    value(form.find("[name='filters[" + current + "].value']"), field.parse(filter.value));
                     value(form.find("[name='filters[" + current + "].operator']"), filter.operator);
                     current++;
                 }

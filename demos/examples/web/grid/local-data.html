@@ -13,9 +13,18 @@
         <!-- script -->
         <script src="../../../../src/jquery.min.js"></script>
         <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.fx.js"></script>
+        <script src="../../../../src/kendo.model.js"></script>
         <script src="../../../../src/kendo.data.js"></script>
         <script src="../../../../src/kendo.pager.js"></script>
         <script src="../../../../src/kendo.sortable.js"></script>
+        <script src="../../../../src/kendo.popup.js"></script>
+        <script src="../../../../src/kendo.list.js"></script>
+        <script src="../../../../src/kendo.dropdownlist.js"></script>
+        <script src="../../../../src/kendo.calendar.js"></script>
+        <script src="../../../../src/kendo.datepicker.js"></script>
+        <script src="../../../../src/kendo.numerictextbox.js"></script>
+        <script src="../../../../src/kendo.filtermenu.js"></script>
         <script src="../../../../src/kendo.grid.js"></script>
         <script src="../../shared/js/people.js"></script>
         <!-- script -->
@@ -34,11 +43,24 @@
                     $("#grid").kendoGrid({
                         dataSource: {
                             data: createRandomData(50),
+                            schema: {
+                                model: {
+                                    fields: {
+                                        FirstName: { type: "string" },
+                                        LastName: { type: "string" },
+                                        City: { type: "string" },
+                                        Title: { type: "string" },
+                                        BirthDate: { type: "date" },
+                                        Age: { type: "number" }
+                                    }
+                                }
+                            },
                             pageSize: 10
                         },
                         height: 250,
                         scrollable: true,
                         sortable: true,
+                        filterable: true,
                         pageable: true,
                         columns: [
                             {
@@ -58,7 +80,7 @@
                             {
                                 field: "BirthDate",
                                 title: "Birth Date",
-                                template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
+                                template: '#= kendo.toString(BirthDate,"MM/dd/yyyy") #'
                             },
                             {
                                 field: "Age"

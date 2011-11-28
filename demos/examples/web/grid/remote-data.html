@@ -13,6 +13,7 @@
         <!-- script -->
         <script src="../../../../src/jquery.min.js"></script>
         <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.fx.js"></script>
         <script src="../../../../src/kendo.model.js"></script>
         <script src="../../../../src/kendo.data.odata.js"></script>
         <script src="../../../../src/kendo.data.js"></script>
@@ -36,8 +37,14 @@
         <!-- description -->
         <div id="example" class="k-content">
             <div id="grid"></div>
-
             <script>
+                var dateRegExp = /^\/Date\((.*?)\)\/$/;
+
+                function toDate(value) {
+                    var date = dateRegExp.exec(value);
+                    return new Date(parseInt(date[1]));
+                }
+
                 $(document).ready(function() {
                     $("#grid").kendoGrid({
                         dataSource: {
@@ -49,23 +56,33 @@
                                 model: {
                                     fields: {
                                         OrderID: { type: "number" },
-                                        CustomerID: { type: "string" },
                                         Freight: { type: "number" },
                                         ShipName: { type: "string" },
+                                        OrderDate: { type: "date" },
                                         ShipCity: { type: "string" }
                                     }
                                 }
                             },
                             pageSize: 10,
                             serverPaging: true,
+                            serverFiltering: true,
                             serverSorting: true
                         },
                         height: 250,
-                        scrollable: true,
                         filterable: true,
                         sortable: true,
                         pageable: true,
-                        columns: ["OrderID", "CustomerID", "Freight", "ShipName", "ShipCity"]
+                        columns: [{
+                                field:"OrderID",
+                                filterable: false
+                            },
+                            "Freight", {
+                                field: "OrderDate",
+                                template: '#= kendo.toString(toDate(OrderDate), "MM/dd/yyyy")#'
+                            },
+                            "ShipName",
+                            "ShipCity"
+                        ]
                     });
                 });
             </script>
