@@ -24,7 +24,7 @@
          "image": "seaweed-salad.jpg",
          "category": "Cold starters",
          "description": "A nice seaweed salad.",
-         "featured": false
+         "featured": true
 	},
 	{
         "id": 4,
@@ -33,7 +33,7 @@
          "image": "edamame.jpg",
          "category": "Warm Starters",
          "description": "Boiled soy beans with salt ",
-         "featured": false
+         "featured": true
 	},
 	{
         "id": 5,
@@ -51,7 +51,7 @@
          "image": "maguro.jpg",
          "category": "Sashimi",
          "description": "Tuna pieces.",
-         "featured": false
+         "featured": true
 	},
 	{
         "id": 7,
@@ -78,7 +78,7 @@
          "image": "tekka-maki.jpg",
          "category": "Hosomaki",
          "description": "Tuna roll with wasabi. - 6 pieces",
-         "featured": false
+         "featured": true
 	},
 	{
         "id": 10,
@@ -96,7 +96,7 @@
          "image": "california-rolls.jpg",
          "category": "Traditionall Rolls",
          "description": "Crab sticks, avocado and cucumber. - 8 pieces",
-         "featured": false
+         "featured": true
 	},
 	{
         "id": 12,
@@ -114,7 +114,7 @@
          "image": "spicytuna-rolls.jpg",
          "category": "Traditionall Rolls",
          "description": "Spicy tuna, spring onion and avocado. - 6 pieces",
-         "featured": false
+         "featured": true
 	},
 	{
         "id": 14,
@@ -141,7 +141,7 @@
          "image": "salmon-teriyaki.jpg",
          "category": "Hot Dishes",
          "description": "Sautéed salmon with teriyaki sauce.",
-         "featured": false
+         "featured": true
 	},
 	{
         "id": 17,
@@ -168,6 +168,6 @@
          "image": "yaki-udon.jpg",
          "category": "Hot Dishes",
          "description": "Udon noddles with chicken, king prawns and vegetables.",
-         "featured": false
+         "featured": true
 	}
 ]
