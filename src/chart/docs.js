@@ -5,11 +5,8 @@
      *
      * @section
      * <p>
-     * The Chart widget uses modern browser technologies to render high-quality
-     * data visualizations in the browser. Rather than generating images
-     * on a server, Chart graphics are rendered in the browser using
-     * SVG (scalable vector graphics), with a fallback to
-     * VML (vector markup language) for older browsers.
+     * The Chart widget uses modern browser technologies to render high-quality data visualizations.
+     * All graphics are rendered on the client using SVG with a fallback to VML for legacy browsers.
      * </p>
      *
      * <p>
@@ -20,6 +17,8 @@
      *     <li>Column</li>
      *     <li>Line</li>
      *     <li>Pie</li>
+     *     <li>Scatter</li>
+     *     <li>Scatter Line</li>
      * </ul>
      *
      * <p>
@@ -56,8 +55,9 @@
      *    });
      * @section
      * <p>
-     * The basic configuration requires series data (Y-axis values) and
-     * categories (X-axis values). A chart title can also optionally be defined.
+     * The minimal configuration requires series data points and a list of categories.
+     * </p>
+     * <p>
      * The default chart type is column (vertical bars).
      * </p>
      *
@@ -66,9 +66,9 @@
      * </h3>
      * <p>
      * A chart can be bound to both local and remote data.
-     * Rather than directly specifying an Array of values in the Chart configuration,
-     * the Chart DataSource property is used to bind to an Array or to
-     * a remote data service with the Kendo DataSource component.
+     * <p>
+     * </p>
+     * The Chart DataSource is used to bind to an Array objects or to a remote data service.
      * </p>
      * @exampleTitle
      * Binding a line chart to local JavaScript object array
@@ -144,15 +144,11 @@
      *
      * @section
      * <h3>
-     * Configuring the Chart
+     * Next Steps
      * </h3>
      * <p>
-     * The Kendo UI Chart is highly configurable. With simple configuration settings,
-     * you can format and display series labels, position the chart legend,
-     * format and display tooltips, and change the chart type.
-     * </p>
-     * <p>
-     * Refer to the Chart demos and configuration API for a complete reference.
+     * Explore the Chart demos for a quick overview of the major features.
+     * Detailed reference is available in the Configuration, Methods and Events tabs.
      * </p>
      */
     var ChartDocs = /** @lends kendo.ui.Chart.prototype */ {
@@ -1486,7 +1482,7 @@
          * @option {Object} [series.type="line".labels] Configures the series data labels.
          * @option {String} [series.type="line".labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
-         * @option {String} [series.type="line".labels.missingValues] <"gap">
+         * @option {String} [series.type="line".missingValues] <"gap">
          * Configures the behavior for handling missing values in line series.
          * <div class="details-list">
          *    <dl>
@@ -1727,6 +1723,10 @@
          * @option {String} [series.type="line".tooltip.border.color] <"black"> The color of the border.
          *
          * @option [series.type="pie"] The type of the series.
+         * @option {String} [series.type="pie".categoryField]
+         * The data field containing the sector category name.
+         * @option {String} [series.type="pie".colorField]
+         * The data field containing the sector color.
          * @option {Array} [series.type="pie".data] Array of data items (optional).
          * The pie chart can be bound to an array of numbers or an array of objects
          * with the following fields:
@@ -1774,6 +1774,8 @@
          *      name: "Sales in Percent"
          *  }]
          *  // ...
+         * @option {String} [series.type="pie".explodeField]
+         * The data field containing a boolean value that indicates if the sector is exploded.
          * @option {Number} [series.type="pie".padding] <60> The padding around the pie chart (equal on all sides).
          * @option {Number} [series.type="pie".opacity] <1> The series opacity.
          * @option {Object} [series.type="pie".labels] Configures the series data labels.
@@ -2034,116 +2036,19 @@
          * @option {String} [series.type="pie".tooltip.border.color] <"black"> The color of the border.
          *
          * @option [series.type="scatter"] The type of the series.
-         * @option {String} [series.type="scatter".name] The series name.
          * @option {String} [series.type="scatter".color] The series base color.
+         * @option {Array} [series.type="scatter".data] Array of data items (optional).
+         * The scatter chart can be bound to an array of arrays with two numbers (X and Y).
+         *  _example
+         *  // ...
+         *  series:[{
+         *      type: "scatter",
+         *      data:[[1, 1], [1, 2]],
+         *      name: "Points"
+         *  }]
+         *  // ...
          * @option {Number} [series.type="scatter".opacity] <1> The series opacity.
          * @option {Object} [series.type="scatter".labels] Configures the series data labels.
-         * @option {String} [series.type="scatter".labels.font] <"12px Arial,Helvetica,sans-serif">
-         * The font style of the labels.
-         * @option {String} [series.type="scatter".labels.missingValues] <"gap">
-         * Configures the behavior for handling missing values in scatter series.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              "interpolate"
-         *         </dt>
-         *         <dd>
-         *              The value is interpolated from neighboring points.
-         *         </dd>
-         *         <dt>
-         *              "zero"
-         *         </dt>
-         *         <dd>
-         *              The value is assumed to be zero.
-         *         </dd>
-         *         <dt>
-         *              "gap"
-         *         </dt>
-         *         <dd>
-         *              The line stops before the missing point and continues after it.
-         *         </dd>
-         *    </dl>
-         * </div>
-         * @option {Object} [series.type="scatter".markers] Configures the scatter markers.
-         * @option {String} [series.type="scatter".markers.type] <"square">
-         * Configures the markers shape type.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              "square"
-         *         </dt>
-         *         <dd>
-         *              The marker shape is square.
-         *         </dd>
-         *         <dt>
-         *              "triagle"
-         *         </dt>
-         *         <dd>
-         *              The marker shape is triagle.
-         *         </dd>
-         *         <dt>
-         *              "circle"
-         *         </dt>
-         *         <dd>
-         *              The marker shape is circle.
-         *         </dd>
-         *    </dl>
-         * </div>
-         * @option {Number} [series.type="scatter".markers.size] <6> The marker size.
-         * @option {Boolean} [series.type="scatter".markers.visible] <true> The markers visibility.
-         * @option {Object} [series.type="scatter".markers.border] The border of the markers.
-         * @option {Number} [series.type="scatter".markers.border.width] <0> The width of the border.
-         * @option {String} [series.type="scatter".markers.border.color] <"black"> The color of the border.
-         * @option {String} [series.type="scatter".markers.background]
-         * The background color of the current series markers.
-         * @option {String} [series.type="scatter".labels.position] <"above">
-         * Defines the position of the scatter labels.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              "above"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the top of the scatter chart marker.
-         *         </dd>
-         *         <dt>
-         *              "right"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the right of the scatter chart marker.
-         *         </dd>
-         *         <dt>
-         *              "below"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the bottom of the scatter chart marker.
-         *         </dd>
-         *         <dt>
-         *              "left"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the left of the scatter chart marker.
-         *         </dd>
-         *    </dl>
-         * </div>
-         * @option {Boolean} [series.type="scatter".labels.visible] <false> The visibility of the labels.
-         * @option {Number|Object} [series.type="scatter".labels.margin] <{ left: 5, right: 5}>
-         * The margin of the labels.
-         * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
-         *
-         * // sets the top and bottom margin to 1px
-         * // margin left and right are with 5px (by default)
-         * margin: { top: 1, bottom: 1 }
-         * @option {Number|Object} [series.type="scatter".labels.padding] <0> The padding of the labels.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // padding right and bottom are with 0px (by default)
-         * padding: { top: 1, left: 1 }
          * @option {Object} [series.type="scatter".labels.border] The border of the labels.
          * @option {Number} [series.type="scatter".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="scatter".labels.border.color] <"black"> The color of the border.
@@ -2194,6 +2099,59 @@
          *         </dd>
          *    </dl>
          * </div>
+         * @option {String} [series.type="scatter".labels.font] <"12px Arial,Helvetica,sans-serif">
+         * The font style of the labels.
+         * @option {String} [series.type="scatter".labels.format] The format of the labels.
+         * _example
+         * //sets format of the labels
+         * format: "{0:C}"
+         * @option {Number|Object} [series.type="scatter".labels.margin] <{ left: 5, right: 5}>
+         * The margin of the labels.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and bottom margin to 1px
+         * // margin left and right are with 5px (by default)
+         * margin: { top: 1, bottom: 1 }
+         * @option {Number|Object} [series.type="scatter".labels.padding] <0> The padding of the labels.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 0px (by default)
+         * padding: { top: 1, left: 1 }
+         * @option {String} [series.type="scatter".labels.position] <"above">
+         * Defines the position of the scatter labels.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              "above"
+         *         </dt>
+         *         <dd>
+         *              The label is positioned at the top of the scatter chart marker.
+         *         </dd>
+         *         <dt>
+         *              "right"
+         *         </dt>
+         *         <dd>
+         *              The label is positioned at the right of the scatter chart marker.
+         *         </dd>
+         *         <dt>
+         *              "below"
+         *         </dt>
+         *         <dd>
+         *              The label is positioned at the bottom of the scatter chart marker.
+         *         </dd>
+         *         <dt>
+         *              "left"
+         *         </dt>
+         *         <dd>
+         *              The label is positioned at the left of the scatter chart marker.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String/Function} [series.type="scatter".labels.template] The label template.
          * Template variables:
          * <ul>
@@ -2222,15 +2180,85 @@
          *          }
          *      ]
          * });
-         * @option {String} [series.type="scatter".labels.format] The format of the labels.
-         * _example
-         * //sets format of the labels
-         * format: "{0:C}"
+         * @option {Boolean} [series.type="scatter".labels.visible] <false> The visibility of the labels.
+         * @option {Object} [series.type="scatter".markers] Configures the scatter markers.
+         * @option {String} [series.type="scatter".markers.type] <"square">
+         * Configures the markers shape type.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              "square"
+         *         </dt>
+         *         <dd>
+         *              The marker shape is square.
+         *         </dd>
+         *         <dt>
+         *              "triagle"
+         *         </dt>
+         *         <dd>
+         *              The marker shape is triagle.
+         *         </dd>
+         *         <dt>
+         *              "circle"
+         *         </dt>
+         *         <dd>
+         *              The marker shape is circle.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {Number} [series.type="scatter".markers.size] <6> The marker size.
+         * @option {Boolean} [series.type="scatter".markers.visible] <true> The markers visibility.
+         * @option {Object} [series.type="scatter".markers.border] The border of the markers.
+         * @option {Number} [series.type="scatter".markers.border.width] <0> The width of the border.
+         * @option {String} [series.type="scatter".markers.border.color] <"black"> The color of the border.
+         * @option {String} [series.type="scatter".markers.background]
+         * The background color of the current series markers.
+         * @option {String} [series.type="scatter".missingValues] <"gap">
+         * Configures the behavior for handling missing values in scatter series.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              "interpolate"
+         *         </dt>
+         *         <dd>
+         *              The value is interpolated from neighboring points.
+         *         </dd>
+         *         <dt>
+         *              "zero"
+         *         </dt>
+         *         <dd>
+         *              The value is assumed to be zero.
+         *         </dd>
+         *         <dt>
+         *              "gap"
+         *         </dt>
+         *         <dd>
+         *              The line stops before the missing point and continues after it.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {String} [series.type="scatter".name] The series name.
          * @option {Object} [series.type="scatter".tooltip] The data point tooltip configuration options.
+         * @option {String} [series.type="scatter".tooltip.background]
+         * The background color of the tooltip. The default is determined from the series color.
+         * @option {Object} [series.type="scatter".tooltip.border] The border configuration options.
+         * @option {Number} [series.type="scatter".tooltip.border.width] <0> The width of the border.
+         * @option {String} [series.type="scatter".tooltip.border.color] <"black"> The color of the border.
+         * @option {String} [series.type="scatter".tooltip.color]
+         * The text color of the tooltip. The default is the same as the series labels color.
+         * @option {String} [series.type="scatter".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
          * @option {String} [series.type="scatter".tooltip.format] The tooltip format.
          * _example
          * //sets format of the tooltip
          * format: "{0:C}"
+         * @option {Number|Object} [series.type="scatter".tooltip.padding] The padding of the tooltip.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // right and bottom padding are left at their default values
+         * padding: { top: 1, left: 1 }
          * @option {String|Function} [series.type="scatter".tooltip.template] The tooltip template.
          * Template variables:
          * <ul>
@@ -2259,135 +2287,21 @@
          *          }
          *      ]
          * });
-         * @option {String} [series.type="scatter".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
-         * @option {String} [series.type="scatter".tooltip.color]
-         * The text color of the tooltip. The default is the same as the series labels color.
-         * @option {String} [series.type="scatter".tooltip.background]
-         * The background color of the tooltip. The default is determined from the series color.
-         * @option {Number|Object} [series.type="scatter".tooltip.padding] The padding of the tooltip.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // right and bottom padding are left at their default values
-         * padding: { top: 1, left: 1 }
-         * @option {Object} [series.type="scatter".tooltip.border] The border configuration options.
-         * @option {Number} [series.type="scatter".tooltip.border.width] <0> The width of the border.
-         * @option {String} [series.type="scatter".tooltip.border.color] <"black"> The color of the border.
          *
          * @option [series.type="scatterLine"] The type of the series.
-         * @option {String} [series.type="scatterLine".name] The series name.
          * @option {String} [series.type="scatterLine".color] The series base color.
-         * @option {Number} [series.type="scatterLine".width] <1> The line width of the scatter line chart.
+         * @option {Array} [series.type="scatterLine".data] Array of data items (optional).
+         * The scatter chart can be bound to an array of arrays with two numbers (X and Y).
+         *  _example
+         *  // ...
+         *  series:[{
+         *      type: "scatterLine",
+         *      data:[[1, 1], [1, 2]],
+         *      name: "Points"
+         *  }]
+         *  // ...
          * @option {Number} [series.type="scatterLine".opacity] <1> The series opacity.
          * @option {Object} [series.type="scatterLine".labels] Configures the series data labels.
-         * @option {String} [series.type="scatterLine".labels.font] <"12px Arial,Helvetica,sans-serif">
-         * The font style of the labels.
-         * @option {String} [series.type="scatterLine".labels.missingValues] <"gap">
-         * Configures the behavior for handling missing values in scatterLine series.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              "interpolate"
-         *         </dt>
-         *         <dd>
-         *              The value is interpolated from neighboring points.
-         *         </dd>
-         *         <dt>
-         *              "zero"
-         *         </dt>
-         *         <dd>
-         *              The value is assumed to be zero.
-         *         </dd>
-         *         <dt>
-         *              "gap"
-         *         </dt>
-         *         <dd>
-         *              The line stops before the missing point and continues after it.
-         *         </dd>
-         *    </dl>
-         * </div>
-         * @option {Object} [series.type="scatterLine".markers] Configures the scatterLine markers.
-         * @option {String} [series.type="scatterLine".markers.type] <"square">
-         * Configures the markers shape type.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              "square"
-         *         </dt>
-         *         <dd>
-         *              The marker shape is square.
-         *         </dd>
-         *         <dt>
-         *              "triagle"
-         *         </dt>
-         *         <dd>
-         *              The marker shape is triagle.
-         *         </dd>
-         *         <dt>
-         *              "circle"
-         *         </dt>
-         *         <dd>
-         *              The marker shape is circle.
-         *         </dd>
-         *    </dl>
-         * </div>
-         * @option {Number} [series.type="scatterLine".markers.size] <6> The marker size.
-         * @option {Boolean} [series.type="scatterLine".markers.visible] <true> The markers visibility.
-         * @option {Object} [series.type="scatterLine".markers.border] The border of the markers.
-         * @option {Number} [series.type="scatterLine".markers.border.width] <0> The width of the border.
-         * @option {String} [series.type="scatterLine".markers.border.color] <"black"> The color of the border.
-         * @option {String} [series.type="scatterLine".markers.background]
-         * The background color of the current series markers.
-         * @option {String} [series.type="scatterLine".labels.position] <"above">
-         * Defines the position of the scatterLine labels.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              "above"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the top of the scatterLine chart marker.
-         *         </dd>
-         *         <dt>
-         *              "right"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the right of the scatterLine chart marker.
-         *         </dd>
-         *         <dt>
-         *              "below"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the bottom of the scatterLine chart marker.
-         *         </dd>
-         *         <dt>
-         *              "left"
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the left of the scatterLine chart marker.
-         *         </dd>
-         *    </dl>
-         * </div>
-         * @option {Boolean} [series.type="scatterLine".labels.visible] <false> The visibility of the labels.
-         * @option {Number|Object} [series.type="scatterLine".labels.margin] <{ left: 5, right: 5}>
-         * The margin of the labels.
-         * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
-         *
-         * // sets the top and bottom margin to 1px
-         * // margin left and right are with 5px (by default)
-         * margin: { top: 1, bottom: 1 }
-         * @option {Number|Object} [series.type="scatterLine".labels.padding] <0> The padding of the labels.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // padding right and bottom are with 0px (by default)
-         * padding: { top: 1, left: 1 }
          * @option {Object} [series.type="scatterLine".labels.border] The border of the labels.
          * @option {Number} [series.type="scatterLine".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="scatterLine".labels.border.color] <"black"> The color of the border.
@@ -2438,6 +2352,59 @@
          *         </dd>
          *    </dl>
          * </div>
+         * @option {String} [series.type="scatterLine".labels.font] <"12px Arial,Helvetica,sans-serif">
+         * The font style of the labels.
+         * @option {String} [series.type="scatterLine".labels.format] The format of the labels.
+         * _example
+         * //sets format of the labels
+         * format: "{0:C}"
+         * @option {Number|Object} [series.type="scatterLine".labels.margin] <{ left: 5, right: 5}>
+         * The margin of the labels.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and bottom margin to 1px
+         * // margin left and right are with 5px (by default)
+         * margin: { top: 1, bottom: 1 }
+         * @option {Number|Object} [series.type="scatterLine".labels.padding] <0> The padding of the labels.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 0px (by default)
+         * padding: { top: 1, left: 1 }
+         * @option {String} [series.type="scatterLine".labels.position] <"above">
+         * Defines the position of the scatter labels.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              "above"
+         *         </dt>
+         *         <dd>
+         *              The label is positioned at the top of the scatter chart marker.
+         *         </dd>
+         *         <dt>
+         *              "right"
+         *         </dt>
+         *         <dd>
+         *              The label is positioned at the right of the scatter chart marker.
+         *         </dd>
+         *         <dt>
+         *              "below"
+         *         </dt>
+         *         <dd>
+         *              The label is positioned at the bottom of the scatter chart marker.
+         *         </dd>
+         *         <dt>
+         *              "left"
+         *         </dt>
+         *         <dd>
+         *              The label is positioned at the left of the scatter chart marker.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String/Function} [series.type="scatterLine".labels.template] The label template.
          * Template variables:
          * <ul>
@@ -2466,15 +2433,85 @@
          *          }
          *      ]
          * });
-         * @option {String} [series.type="scatterLine".labels.format] The format of the labels.
-         * _example
-         * //sets format of the labels
-         * format: "{0:C}"
+         * @option {Boolean} [series.type="scatterLine".labels.visible] <false> The visibility of the labels.
+         * @option {Object} [series.type="scatterLine".markers] Configures the scatter markers.
+         * @option {String} [series.type="scatterLine".markers.type] <"square">
+         * Configures the markers shape type.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              "square"
+         *         </dt>
+         *         <dd>
+         *              The marker shape is square.
+         *         </dd>
+         *         <dt>
+         *              "triagle"
+         *         </dt>
+         *         <dd>
+         *              The marker shape is triagle.
+         *         </dd>
+         *         <dt>
+         *              "circle"
+         *         </dt>
+         *         <dd>
+         *              The marker shape is circle.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {Number} [series.type="scatterLine".markers.size] <6> The marker size.
+         * @option {Boolean} [series.type="scatterLine".markers.visible] <true> The markers visibility.
+         * @option {Object} [series.type="scatterLine".markers.border] The border of the markers.
+         * @option {Number} [series.type="scatterLine".markers.border.width] <0> The width of the border.
+         * @option {String} [series.type="scatterLine".markers.border.color] <"black"> The color of the border.
+         * @option {String} [series.type="scatterLine".markers.background]
+         * The background color of the current series markers.
+         * @option {String} [series.type="scatterLine".missingValues] <"gap">
+         * Configures the behavior for handling missing values in scatter series.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              "interpolate"
+         *         </dt>
+         *         <dd>
+         *              The value is interpolated from neighboring points.
+         *         </dd>
+         *         <dt>
+         *              "zero"
+         *         </dt>
+         *         <dd>
+         *              The value is assumed to be zero.
+         *         </dd>
+         *         <dt>
+         *              "gap"
+         *         </dt>
+         *         <dd>
+         *              The line stops before the missing point and continues after it.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {String} [series.type="scatterLine".name] The series name.
          * @option {Object} [series.type="scatterLine".tooltip] The data point tooltip configuration options.
+         * @option {String} [series.type="scatterLine".tooltip.background]
+         * The background color of the tooltip. The default is determined from the series color.
+         * @option {Object} [series.type="scatterLine".tooltip.border] The border configuration options.
+         * @option {Number} [series.type="scatterLine".tooltip.border.width] <0> The width of the border.
+         * @option {String} [series.type="scatterLine".tooltip.border.color] <"black"> The color of the border.
+         * @option {String} [series.type="scatterLine".tooltip.color]
+         * The text color of the tooltip. The default is the same as the series labels color.
+         * @option {String} [series.type="scatterLine".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
          * @option {String} [series.type="scatterLine".tooltip.format] The tooltip format.
          * _example
          * //sets format of the tooltip
          * format: "{0:C}"
+         * @option {Number|Object} [series.type="scatterLine".tooltip.padding] The padding of the tooltip.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // right and bottom padding are left at their default values
+         * padding: { top: 1, left: 1 }
          * @option {String|Function} [series.type="scatterLine".tooltip.template] The tooltip template.
          * Template variables:
          * <ul>
@@ -2503,23 +2540,8 @@
          *          }
          *      ]
          * });
-         * @option {String} [series.type="scatterLine".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
-         * @option {String} [series.type="scatterLine".tooltip.color]
-         * The text color of the tooltip. The default is the same as the series labels color.
-         * @option {String} [series.type="scatterLine".tooltip.background]
-         * The background color of the tooltip. The default is determined from the series color.
-         * @option {Number|Object} [series.type="scatterLine".tooltip.padding] The padding of the tooltip.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
          *
-         * // sets the top and left padding to 1px
-         * // right and bottom padding are left at their default values
-         * padding: { top: 1, left: 1 }
-         * @option {Object} [series.type="scatterLine".tooltip.border] The border configuration options.
-         * @option {Number} [series.type="scatterLine".tooltip.border.width] <0> The width of the border.
-         * @option {String} [series.type="scatterLine".tooltip.border.color] <"black"> The color of the border.
-         *
+         * @option {Number} [series.type="scatterLine".width] <1> The line width of the scatter line chart.
          * @option {Object} [chartArea] The chart area configuration options.
          * This is the entire visible area of the chart.
          * @option {String} [chartArea.background] <"white"> The background color of the chart area.
