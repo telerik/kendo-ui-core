@@ -3,10 +3,10 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title></title>
+        <title>Chart Gallery</title>
         <!-- css -->
-        <link href="../../styles/examples.css" rel="stylesheet"/>
-        <link href="../../../../shared/styles/examples-offline.css" rel="stylesheet"/>
+        <link href="../../shared/styles/examples.css" rel="stylesheet"/>
+        <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
         <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
         <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
         <!-- css -->
@@ -64,7 +64,24 @@
                                 visible: true
                             }
                         }] ],
-                        seriesIndex = 0,
+                        chartCategoryAxis = [
+                            {
+                                categories: ["January", "February", "March", "April", "May", "June"],
+                                majorGridLines: {
+                                    visible: false
+                                }
+                            }, {
+                                categories: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                                labels: {
+                                    rotation: -90,
+                                    font: "10px Arial"
+                                },
+                                majorGridLines: {
+                                    visible: false
+                                }
+                            }, {}
+                        ],
+                        chartIndex = 0,
                         interval;
 
                 function nextChart() {
@@ -76,35 +93,27 @@
                             legend: {
                                 visible: false
                             },
-                            series: $.extend({}, chartSeries[2 % chartSeries.length]),
-                            categoryAxis: {
-                                categories: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                                labels: {
-                                    rotation: -90,
-                                    font: "10px Arial"
-                                },
-                                majorGridLines: {
-                                    visible: false
-                                }
-                            }
+                            series: $.extend({}, chartSeries[chartIndex % chartSeries.length]),
+                            categoryAxis: chartCategoryAxis[chartIndex % chartCategoryAxis.length]
                     });
+                    chartIndex++;
                 }
 
                 $(document).ready(function() {
                     nextChart();
 
-                    //if (interval) {
-                    //    clearInterval(interval);
-                    //}
+                    if (interval) {
+                        clearInterval(interval);
+                    }
 
-                    //interval = setInterval(nextChart, 3000);
+                    interval = setInterval(nextChart, 3000);
 
                     $(document).bind("kendo:skinChange", function(e) {
-                        //nextChart();
+                        nextChart();
                     });
 
                     $(document).bind("kendo:pageUnload", function(e) {
-                        //clearInterval(interval);
+                        clearInterval(interval);
                     });
                 });
             </script>
