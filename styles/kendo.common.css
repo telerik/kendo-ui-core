@@ -2,9 +2,9 @@
 
 .k-reset { margin:0;padding:0;border:0;outline:0;text-decoration:none;font-size:100%;list-style:none;}
 
-.k-floatwrap:after,.k-slider-items:after{content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
-.k-floatwrap,.k-slider-items{display:inline-block;}
-.k-floatwrap,.k-slider-items{display:block;}
+.k-floatwrap:after,.k-slider-items:after,.k-grid-toolbar:after{content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
+.k-floatwrap,.k-slider-items,.k-grid-toolbar{display:inline-block;}
+.k-floatwrap,.k-slider-items,.k-grid-toolbar{display:block;}
 
 /* main gradient */
 
@@ -1998,7 +1998,7 @@ span.k-numerictextbox
     margin: 0;
 }
 
-.k-numerictextbox .k-select 
+.k-numerictextbox .k-select
 {
     padding-top: 1px;
     padding-bottom: 1px;
@@ -2628,7 +2628,7 @@ div.k-slider
 
     min-width: 10px; /*slider tooltip only*/
     text-align: center; /*slider tooltip only*/
-    
+
     filter: alpha(opacity=90);
     opacity: .9;
 }
@@ -2976,7 +2976,7 @@ html .k-upload
     min-width: 120px;
     max-width: 200px;
     vertical-align: middle;
-    
+
     overflow: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
