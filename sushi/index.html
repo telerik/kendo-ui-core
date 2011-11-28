@@ -264,7 +264,7 @@
                 if (viewID === "details") {
                     ds.fetch(function() {
                         item = ds.get(e.params.id).data;
-                        view.content.html(itemDetailsTemplate(item));
+                        view.content.data("kendoScroller").scrollElement.html(itemDetailsTemplate(item));
                         kendo.mobile.enhance(view.content);
 
                         view.content.find("#add-to-cart").data("kendoMobileButton").bind("click", function(e) {

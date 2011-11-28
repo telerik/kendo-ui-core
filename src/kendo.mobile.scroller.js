@@ -376,6 +376,7 @@
                 .wrapInner('<div class="km-scroll-container"/>');
 
             scrollElement = element.children().first();
+            that.scrollElement = scrollElement;
 
             function updateTransform(property, value) {
                 value = round(value);
