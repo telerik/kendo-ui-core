@@ -82,7 +82,7 @@
         DRAG_HANDLE = ".k-draghandle",
         TRACK_SELECTOR = ".k-slider-track",
         TICK_SELECTOR = ".k-tick",
-        STATE_ACTIVE = "k-state-active",
+        STATE_SELECTED = "k-state-selected",
         STATE_DEFAULT = "k-state-default",
         STATE_DISABLED = "k-state-disabled",
         PRECISION = 3,
@@ -603,7 +603,7 @@
 
             clickHandler = function (e) {
                 if ($(e.target).hasClass("k-draghandle")) {
-                    $(e.target).addClass(STATE_ACTIVE);
+                    $(e.target).addClass(STATE_SELECTED);
                     return;
                 }
 
@@ -622,7 +622,7 @@
                 .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
 
             that.wrapper.find(DRAG_HANDLE).bind(MOUSE_UP, function (e) {
-                $(e.target).removeClass(STATE_ACTIVE);
+                $(e.target).removeClass(STATE_SELECTED);
             });
 
             move = proxy(function (e, sign) {
@@ -842,7 +842,7 @@
             }
 
             owner.element.unbind(MOUSE_OVER);
-            that.dragHandle.addClass(STATE_ACTIVE);
+            that.dragHandle.addClass(STATE_SELECTED);
 
             that.dragableArea = owner._getDragableArea();
             that.step = math.max(options.smallStep * (owner._maxSelection / owner._distance), 0);
@@ -947,7 +947,7 @@
                 that.tooltipDiv.remove();
             }
 
-            that.dragHandle.removeClass(STATE_ACTIVE);
+            that.dragHandle.removeClass(STATE_SELECTED);
             owner.element.bind(MOUSE_OVER);
 
             return false;
@@ -1126,7 +1126,7 @@
 
             clickHandler = function (e) {
                 if ($(e.target).hasClass("k-draghandle")) {
-                    $(e.target).addClass(STATE_ACTIVE);
+                    $(e.target).addClass(STATE_SELECTED);
                     return;
                 }
 
@@ -1158,7 +1158,7 @@
                 .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
 
             that.wrapper.find(DRAG_HANDLE).bind(MOUSE_UP, function (e) {
-                $(e.target).removeClass(STATE_ACTIVE);
+                $(e.target).removeClass(STATE_SELECTED);
             });
 
             that.wrapper.find(DRAG_HANDLE)
