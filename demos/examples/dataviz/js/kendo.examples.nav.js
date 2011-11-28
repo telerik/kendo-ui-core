@@ -78,11 +78,17 @@ var categories = {
             spriteCssClass: "chartIcon",
             items: [
                 {
-                    text: "Scatter chart",
+                    text: "Basic usage",
                     url: "scatter-charts/index.html"
                 }, {
                     text: "Scatter line chart",
                     url: "scatter-charts/scatter-line.html"
+                }, {
+                    text: "Binding to remote data",
+                    url: "scatter-charts/remote-data.html"
+                }, {
+                    text: "Binding to local data",
+                    url: "scatter-charts/local-data.html"
                 }
             ]
         }
