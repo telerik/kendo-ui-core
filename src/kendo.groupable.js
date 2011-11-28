@@ -14,7 +14,7 @@
              '</div>',  { useWithBlock:false }),
         hint = function(target) {
             return $('<div class="k-header k-drag-clue" />')
-                .html(target.attr(kendo.attr("field")) || target.attr(kendo.attr("field")))
+                .html(target.attr(kendo.attr("title")) || target.attr(kendo.attr("field")))
                 .prepend('<span class="k-icon k-drag-status k-denied" />');
         },
         dropCue = $('<div class="k-grouping-dropclue"/>');
