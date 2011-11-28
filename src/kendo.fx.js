@@ -560,10 +560,10 @@
 
         animateTo: function(element, destination, options) {
             var direction,
-                options = parseTransitionEffects(options),
                 commonParent = element.parents().filter(destination.parents()).first(),
                 originalOverflow = commonParent.css(OVERFLOW);
 
+            options = parseTransitionEffects(options);
             commonParent.css(OVERFLOW, "hidden");
 
             $.each(options.effects, function(name, definition) {
@@ -571,10 +571,8 @@
             });
 
             function complete() {
-                destination.css(TRANSITION, NONE);
-                destination.css(TRANSFORM, NONE);
-                element.css(TRANSITION, NONE);
-                element.css(TRANSFORM, NONE); // Removing the whole style attribute breaks Android.
+                destination[0].style.cssText = "";
+                element[0].style.cssText = ""; // Removing the whole style attribute breaks Android.
                 commonParent.css(OVERFLOW, originalOverflow);
                 options.completeCallback && options.completeCallback();
             }
