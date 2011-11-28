@@ -152,7 +152,8 @@
      *  var inlineData = { firstName: "John", lastName: "Doe" };
      *  $("#inline").html(inlineTemplate(inlineData));
      *
-     *  Output:
+     * @exampleTitle Output:
+     * @example
      *  Hello, John Doe!
      *
      * @exampleTitle Encoding HTML
@@ -162,7 +163,8 @@
      * var encodingData = { html: "<strong>lorem ipsum</strong>" };
      * $("#encoding").html(encodingTemplate(encodingData));
      *
-     *  Output:
+     * @exampleTitle Output:
+     * @example
      *  HTML tags are encoded like this - <strong>lorem ipsum</strong>
      */
 
