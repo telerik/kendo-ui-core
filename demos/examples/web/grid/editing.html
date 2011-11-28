@@ -40,28 +40,28 @@
 
             <script>
                 $(document).ready(function () {
-                    var crudServiceBaseUrl = "../../Service",
+                    var crudServiceBaseUrl = "http://konstantinov/kendo/demos/examples/Service",
                         dataSource = new kendo.data.DataSource({
                             transport: {
-                                read: crudServiceBaseUrl + "/Products",
+                                read:  {
+                                    url: crudServiceBaseUrl + "/Products",
+                                    dataType: "jsonp"
+                                },
                                 update: {
                                     url: crudServiceBaseUrl + "/Products/Update",
-                                    type: "POST",
-                                    contentType: 'application/json; charset=utf-8'
+                                    dataType: "jsonp"
                                 },
                                 destroy: {
                                     url: crudServiceBaseUrl + "/Products/Destroy",
-                                    type: "POST",
-                                    contentType: 'application/json; charset=utf-8'
+                                    dataType: "jsonp"
                                 },
                                 create: {
                                     url: crudServiceBaseUrl + "/Products/Create",
-                                    type: "POST",
-                                    contentType: 'application/json; charset=utf-8'
+                                    dataType: "jsonp"
                                 },
                                 parameterMap: function(options, operation) {
                                     if (operation !== "read" && options.models) {
-                                        return kendo.stringify(options.models);
+                                        return {models: kendo.stringify(options.models)};
                                     }
                                 }
                             },
@@ -71,7 +71,7 @@
                                 model: {
                                     id: "ProductID",
                                     fields: {
-                                        ProductID: {  editable: false, nullable: true },
+                                        ProductID: { editable: false, nullable: true },
                                         ProductName: { validation: { required: true } },
                                         UnitPrice: { type: "number", validation: { required: true, min: 1} },
                                         Discontinued: { type: "boolean" },

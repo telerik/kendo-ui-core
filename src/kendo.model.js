@@ -221,12 +221,12 @@
             set = setter(id);
         }
 
-        for (var field in proto.fields) {
-            field = proto.fields[field];
-
-            var name = field.field || field,
+        for (var name in proto.fields) {
+            var field = proto.fields[name],
                 type = field.type || "default",
                 value = null;
+
+            name = field.field || name;
 
             if (!field.nullable) {
                 value = proto.defaultItem[name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
