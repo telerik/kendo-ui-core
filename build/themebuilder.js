@@ -1,5 +1,4 @@
 var kendoBuild = require("./kendo-build"),
-    fs = require("fs"),
     less = require("./less-js/lib/less"),
     path = require("path"),
     KENDO_STYLES = "styles",
@@ -10,7 +9,6 @@ var kendoBuild = require("./kendo-build"),
     DEPLOY_STYLES = path.join(DEPLOY_PATH, "styles"),
     DEPLOY_SCRIPTS = path.join(DEPLOY_PATH, "scripts");
 
-// themebuilder-specific
 function wrap(source) {
     return "(function(window, undefined){\r\n" + source + "\r\n})(window);"
 }
@@ -24,58 +22,6 @@ function lessToJsonString(lessTemplate) {
             .replace(/(\n|\r)/g, "\\n");
 
     return "'" + template + "'";
-}
-
-function replaceVariable(source, name, value) {
-    var variableAssignments = new RegExp(name + "\\s*=\\s*.*(,|;)\\s*$", "gim");
-
-    return source.replace(variableAssignments, name + "=" + value + "$1");
-}
-
-function createIndexPage() {
-}
-
-function createBootstrapper() {
-    var source = kendoBuild.readText(path.join(SOURCE_PATH, "bootstrap.js"));
-
-    // set the required resources to single concatenated script
-    source = replaceVariable(source, "requiredFiles", '["scripts/themebuilder.js"]');
-
-    kendoBuild.writeText(path.join(DEPLOY_PATH, "bootstrap.js"), kendoBuild.minifyJs(source));
-}
-
-function mergeResources() {
-    var themeBuilderScripts = [
-        "less.js",
-        "themebuilder.js",
-        "colorengine.js",
-        "template.js"
-    ].map(function(x) {
-        return path.join(SOURCE_SCRIPTS, x);
-    });
-
-    var themeBuilderStyles = [
-        "kendo.black.css",
-        "styles.css"
-    ].map(function(x) {
-        return path.join(SOURCE_STYLES, x);
-    });
-
-
-    // merge resources into one
-    fs.writeFileSync(
-        path.join(DEPLOY_SCRIPTS, "themebuilder.js"),
-        kendoBuild.minifyJs(kendoBuild.merge(themeBuilderScripts)),
-        "utf8"
-    );
-
-    fs.writeFileSync(
-        path.join(DEPLOY_STYLES, "themebuilder.css"),
-        kendoBuild.merge(themeBuilderStyles),
-        "utf8"
-    );
-
-    kendoBuild.copyDirSyncRecursive(path.join(SOURCE_STYLES, "Black"), path.join(DEPLOY_STYLES, "Black"));
 }
 
 function buildGeneratedSources() {
@@ -114,10 +60,10 @@ function buildGeneratedSources() {
     console.log("\tgenerating themebuilder css...");
 
     var parser = new(less.Parser)({}),
-        skinTemplate = fs.readFileSync(path.join(KENDO_STYLES, "black.less"), "utf8");
+        skinTemplate = kendoBuild.readText(path.join(KENDO_STYLES, "black.less"));
 
     skinTemplate = skinTemplate.replace(/@import.*;/gm, "") +
-        fs.readFileSync(path.join(KENDO_STYLES, "template.less"), "utf8");
+        kendoBuild.readText(path.join(KENDO_STYLES, "template.less"));
 
     parser.parse(skinTemplate, function (e, tree) {
         kendoBuild.writeText(path.join(SOURCE_STYLES, "kendo.black.css"), tree.toCSS());
@@ -127,6 +73,59 @@ function buildGeneratedSources() {
 
     console.log("\tcopying textures...");
     kendoBuild.copyDirSyncRecursive(path.join(KENDO_STYLES, "textures"), path.join(SOURCE_STYLES, "textures"));
+}
+
+function replaceVariable(source, name, value) {
+    var variableAssignments = new RegExp(name + "\\s*=\\s*.*(,|;)\\s*$", "gim");
+
+    return source.replace(variableAssignments, name + "=" + value + "$1");
+}
+
+function processBootstrapper() {
+    var source = kendoBuild.readText(path.join(SOURCE_PATH, "bootstrap.js"));
+
+    // set the required resources to single concatenated script
+    source = replaceVariable(source, "requiredJs", '["scripts/themebuilder.js"]');
+    source = replaceVariable(source, "requiredCss", '["styles/themebuilder.css"]');
+    source = replaceVariable(source, "JQUERY_LOCATION", '"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"');
+    source = replaceVariable(source, "KENDO_LOCATION", '"http://cdn.kendostatic.com/2011.3.1130/"');
+
+    kendoBuild.writeText(path.join(DEPLOY_PATH, "bootstrap.js"), kendoBuild.minifyJs(source));
+}
+
+function mergeResources() {
+    var themeBuilderScripts = [
+        "less.js",
+        "themebuilder.js",
+        "colorengine.js",
+        "template.js"
+    ].map(function(x) {
+        return path.join(SOURCE_SCRIPTS, x);
+    });
+
+    var themeBuilderStyles = [
+        "kendo.black.css",
+        "styles.css"
+    ].map(function(x) {
+        return path.join(SOURCE_STYLES, x);
+    });
+
+
+    // merge resources into one
+    kendoBuild.writeText(
+        path.join(DEPLOY_SCRIPTS, "themebuilder.js"),
+        kendoBuild.minifyJs(kendoBuild.merge(themeBuilderScripts))
+    );
+
+    kendoBuild.writeText(
+        path.join(DEPLOY_STYLES, "themebuilder.css"),
+        kendoBuild.merge(themeBuilderStyles)
+    );
+
+    kendoBuild.copyDirSyncRecursive(path.join(SOURCE_STYLES, "Black"), path.join(DEPLOY_STYLES, "Black"));
+
+    kendoBuild.copyFileSync(path.join(SOURCE_STYLES, "bootstrap.css"), path.join(DEPLOY_STYLES, "bootstrap.css"));
+    kendoBuild.copyFileSync(path.join(SOURCE_STYLES, "sprite.png"), path.join(DEPLOY_STYLES, "sprite.png"));
 }
 
 function copyTextures() {
@@ -145,8 +144,7 @@ function build() {
     kendoBuild.mkdir(DEPLOY_SCRIPTS);
     kendoBuild.mkdir(DEPLOY_STYLES);
     mergeResources();
-    createBootstrapper();
-    createIndexPage();
+    processBootstrapper();
     copyTextures();
 }
 
