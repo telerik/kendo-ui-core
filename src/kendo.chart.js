@@ -4721,7 +4721,8 @@
                     value: point.value,
                     category: point.category,
                     series: point.series,
-                    dataItem: point.dataItem
+                    dataItem: point.dataItem,
+                    percentage: point.percentage
                 });
             } else if (tooltipOptions.format) {
                 content = point.formatPointValue(tooltipOptions.format);
