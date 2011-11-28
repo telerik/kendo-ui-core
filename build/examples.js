@@ -145,6 +145,10 @@ function exampleInfo(fileName, rootPath) {
         component = "";
     }
 
+    if (suite == "dataviz") {
+        component = "chart";
+    }
+
     if (suite == "mobile" || suite == "themebuilder") {
         component = "";
         hasNavigation = false;
