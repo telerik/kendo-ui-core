@@ -1,4 +1,4 @@
-/* 
+/*
 * Kendo UI v#= version # (http://kendoui.com)
 * Copyright #= year # Telerik AD. All rights reserved.
 *
