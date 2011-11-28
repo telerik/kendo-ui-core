@@ -177,6 +177,10 @@ var categories = {
                     url: "grid/detailtemplate.html"
                 },
                 {
+                    text: "Toolbar template",
+                    url: "grid/toolbar-template.html"
+                },
+                {
                     text: "Sorting",
                     url: "grid/sorting.html"
                 },

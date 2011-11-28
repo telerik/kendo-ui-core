@@ -805,7 +805,7 @@
                 template;
 
             if (toolbar) {
-                toolbar = isFunction(toolbar) ? toolbar() : (typeof toolbar === STRING ? toolbar : that._toolbarTmpl(toolbar).replace(templateHashRegExp, "\\#"));
+                toolbar = isFunction(toolbar) ? toolbar({}) : (typeof toolbar === STRING ? toolbar : that._toolbarTmpl(toolbar).replace(templateHashRegExp, "\\#"));
 
                 template = proxy(kendo.template(toolbar), that)
 
