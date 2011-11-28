@@ -35,6 +35,9 @@ var categories = {
                 }, {
                     text: "Binding to remote data",
                     url: "bar-charts/remote-data.html"
+                }, {
+                    text: "Binding to local data",
+                    url: "bar-charts/local-data.html"
                 }
             ]
         }, {
