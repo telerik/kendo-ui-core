@@ -16,10 +16,10 @@ var categories = {
             items: [
                 {
                     text: "Events",
-                    url: "chart/events.html"
+                    url: "api/events.html"
                 }, {
                     text: "API",
-                    url: "chart/api.html"
+                    url: "api/api.html"
                 }
             ]
         }, {
