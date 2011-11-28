@@ -50,6 +50,9 @@
                                     },
                                     baz: {
                                         type: "date"
+                                    },
+                                    boo: {
+                                        type: "boolean"
                                     }
                                 }
                             }
@@ -465,6 +468,60 @@
                 ok(!filterMenu1.popup.visible());
             });
 
+            test("boolean filter template", function() {
+                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "boo"), {
+                    dataSource: dataSource
+                });
+
+                equal(filterMenu.form.find("[name='filters[0].value']").length, 2)
+                equal(filterMenu.form.find("[name='filters[0].value']").attr("type"), "radio")
+            });
+
+            test("boolean filtering true values", function() {
+                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "boo"), {
+                    dataSource: dataSource
+                });
+
+                filterMenu.form.find("[name='filters[0].value']").first().attr("checked", "checked");
+                filterMenu.form.submit();
+
+                equal(dataSource.filter().filters[0].field, "boo");
+                equal(dataSource.filter().filters[0].operator, "eq");
+                equal(dataSource.filter().filters[0].value, true);
+            });
+
+            test("boolean filtering false values", function() {
+                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "boo"), {
+                    dataSource: dataSource
+                });
+
+                filterMenu.form.find("[name='filters[0].value']").last().attr("checked", "checked");
+                filterMenu.form.submit();
+
+                equal(dataSource.filter().filters[0].field, "boo");
+                equal(dataSource.filter().filters[0].operator, "eq");
+                equal(dataSource.filter().filters[0].value, false);
+            });
+
+            test("updates boolean true radio button", function() {
+                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "boo"), {
+                    dataSource: dataSource
+                });
+
+                dataSource.filter( { field: "boo", operator: "eq", value: true});
+
+                ok(filterMenu.form.find("[name='filters[0].value']:first").is(":checked"));
+            });
+
+            test("updates boolean false radio button", function() {
+                var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "boo"), {
+                    dataSource: dataSource
+                });
+
+                dataSource.filter( { field: "boo", operator: "eq", value: false });
+
+                ok(filterMenu.form.find("[name='filters[0].value']:last").is(":checked"));
+            });
        </script>
     </body>
 </html>
