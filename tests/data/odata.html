@@ -167,6 +167,12 @@
 
                 ok(filter.indexOf("&$filter=((ID ne 1 or ID ne 2) and ID eq 3)") > -1 );
             });
+
+            test("$filter date encoding", function() {
+                var filter = parameterMap({ filter: { filters: [ { field: "foo", operator: "eq", value: new Date(2011, 1, 1) }] } });
+
+                ok(filter.indexOf("&$filter=foo eq datetime'2011-02-01T12:00:00'") > -1 );
+            });
         </script>
     </body>
 </html>
