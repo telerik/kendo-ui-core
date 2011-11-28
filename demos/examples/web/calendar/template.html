@@ -24,24 +24,25 @@
         <div class="description">Customizing templates</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <div class="configuration">
-                <span class="infoHead">Information</span>
-                <p>
-                    Apply special style for the birthdays.
-                </p>
+            <div id="special-days">
+                <div id="calendar" style="width: 300px;"></div>
             </div>
-
-            <div id="calendar" style="width: 300px;"></div>
 
             <script>
                 $(document).ready(function() {
                     var today = new Date(),
                         birthdays = [
-                           +new Date(today.getFullYear(), today.getMonth(), 11),
+                           +new Date(today.getFullYear(), today.getMonth(), 8),
+                           +new Date(today.getFullYear(), today.getMonth(), 12),
+                           +new Date(today.getFullYear(), today.getMonth(), 24),
                            +new Date(today.getFullYear(), today.getMonth() + 1, 6),
+                           +new Date(today.getFullYear(), today.getMonth() + 1, 7),
+                           +new Date(today.getFullYear(), today.getMonth() + 1, 25),
                            +new Date(today.getFullYear(), today.getMonth() + 1, 27),
                            +new Date(today.getFullYear(), today.getMonth() - 1, 3),
-                           +new Date(today.getFullYear(), today.getMonth() - 2, 22)
+                           +new Date(today.getFullYear(), today.getMonth() - 1, 5),
+                           +new Date(today.getFullYear(), today.getMonth() - 2, 22),
+                           +new Date(today.getFullYear(), today.getMonth() - 2, 27)
                         ];
 
                     $("#calendar").kendoCalendar({
@@ -49,7 +50,15 @@
                         month: {
                             // template for dates in month view
                             content: '# if ($.inArray(+data.date, [' + birthdays + ']) != -1) { #' +
-                                         '<div class="birthday"></div>' +
+                                        '<div class="' +
+                                           '# if (data.value < 10) { #' +
+                                               "exhibition" +
+                                           '# } else if ( data.value < 20 ) { #' +
+                                               "party" +
+                                           '# } else { #' +
+                                               "cocktail" +
+                                           '# } #' +
+                                        '"></div>' +
                                      '# } #' +
                                      '#= data.value #'
                         },
@@ -59,18 +68,53 @@
             </script>
 
             <style scoped>
-                #calendar {
-                    margin-top: 2em;
+                #special-days {
+                    height: 160px;
+                    width: 482px;
+                    margin: 30px auto;
+                    padding: 110px 0 0 30px;
+                    background: url('../content/calendar/specialDays.png') transparent no-repeat 0 0;
                 }
 
-                .birthday {
-                    background: transparent url(../content/calendar/cake.png) no-repeat 0 50%;
+                #calendar {
+                    margin-top: -86px;
+                    margin-left: -9px;
+                    border-radius: 3px 3px 3px 3px;
+                    border-style: solid;
+                    border-width: 1px;
+                }
+
+                .k-header {
+                    border-radius: 3px 3px 0 0;
+                }
+
+                .exhibition {
+                    background: transparent url(../content/calendar/exhibition.png) no-repeat 0 50%;
                     display: inline-block;
                     width: 16px;
                     height: 16px;
                     vertical-align: middle;
                     margin-right: 3px;
                 }
+
+                .party {
+                    background: transparent url(../content/calendar/party.png) no-repeat 0 50%;
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    vertical-align: middle;
+                    margin-right: 3px;
+                }
+
+                .cocktail {
+                    background: transparent url(../content/calendar/cocktail.png) no-repeat 0 50%;
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    vertical-align: middle;
+                    margin-right: 3px;
+                }
+
             </style>
         </div>
         <!-- tools -->
