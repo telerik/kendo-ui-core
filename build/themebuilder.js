@@ -7,7 +7,8 @@ var kendoBuild = require("./kendo-build"),
     SOURCE_SCRIPTS = path.join(SOURCE_PATH, "scripts"),
     DEPLOY_PATH = path.join("themebuilder", "live"),
     DEPLOY_STYLES = path.join(DEPLOY_PATH, "styles"),
-    DEPLOY_SCRIPTS = path.join(DEPLOY_PATH, "scripts");
+    DEPLOY_SCRIPTS = path.join(DEPLOY_PATH, "scripts"),
+    KENDO_CDN = process.argv[2] || "http://cdn.kendostatic.com/2011.3.1130/";
 
 function wrap(source) {
     return "(function(window, undefined){\r\n" + source + "\r\n})(window);"
@@ -88,7 +89,7 @@ function processBootstrapper() {
     source = replaceVariable(source, "requiredJs", '["scripts/themebuilder.js"]');
     source = replaceVariable(source, "requiredCss", '["styles/themebuilder.css"]');
     source = replaceVariable(source, "JQUERY_LOCATION", '"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"');
-    source = replaceVariable(source, "KENDO_LOCATION", '"http://cdn.kendostatic.com/2011.3.1130/"');
+    source = replaceVariable(source, "KENDO_LOCATION", '"' + KENDO_CDN + '"');
 
     kendoBuild.writeText(path.join(DEPLOY_PATH, "bootstrap.js"), kendoBuild.minifyJs(source));
 }
