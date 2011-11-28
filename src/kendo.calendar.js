@@ -4,7 +4,7 @@
     *
     * @section
     *   <p>
-    *       The Calendar widget allows to the end user to select a date from a graphical calendar.
+    *       The Calendar widget renders a graphical calendar that supports navigation and selection.
     *       It supports custom templates for "month" view, configurable options for min and max date,
     *       start view and the depth of the navigation.
     *   </p>
