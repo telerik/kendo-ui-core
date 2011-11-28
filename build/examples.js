@@ -40,12 +40,7 @@ var VERSION = kendoBuild.generateVersion(),
 
     examplesLocation = "demos/examples",
     outputPath = "live",
-    KENDOCDN,
-    DEBUG = false,
-    jQueryCDN = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js",
 
-    rowSeparator = /[\r\n]+/,
-    isLive = /<script[^>]*?>\s*var\slive\s*=\s*false;*\s*<\/script>\s+/im,
     baseRegions = {},
     regionRegex = {
         description: getRegionRegex("description"),
@@ -57,9 +52,7 @@ var VERSION = kendoBuild.generateVersion(),
         properties: getRegionRegex("properties"),
         methods: getRegionRegex("methods"),
         events: getRegionRegex("events")
-    },
-    spaces = "        ",
-    newRow = "\r\n";
+    };
 
 // Implementation ==============================================================
 function parentFolder(depth) {
@@ -340,27 +333,6 @@ function processExample(fileName, deployConfig) {
     }
 
     kendoBuild.writeText(fileName, exampleSource);
-}
-
-function copyResources(source, destination, processCallback, filterRegExp) {
-    processCallback = processCallback || function(data) { return data; };
-
-    fs.readdirSync(source)
-        .forEach(function(file) {
-            if (file.match(filterRegExp) && fs.statSync(source + file).isFile()) {
-                var data = fs.readFileSync(source + file, "utf8");
-
-                data = processCallback(data, file);
-
-                if (data) {
-                    if (KENDOCDN) {
-                        file = file.replace(/\.(css|js)$/, ".min.$1");
-                    }
-
-                    fs.writeFileSync(destination + file, data, "utf8");
-                }
-            }
-        });
 }
 
 function build(deployConfig) {
