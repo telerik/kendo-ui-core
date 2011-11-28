@@ -47,3 +47,24 @@
     top: 78px;
     width: 268px;
 }
+
+#navigate-back
+{
+    width: 20px;
+    height: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(0,0,0,.2);
+    background: rgba(255,255,255,.5);
+}
+
+#navigate-back.vertical
+{
+    top: 85px;
+    left: 319px;
+}
+
+.device-container.horizontal #navigate-back
+{
+    top: 79px;
+    left: 322px;
+}

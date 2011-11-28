@@ -50,3 +50,30 @@
     top: 90px;
     width: 352px;
 }
+
+.device-container #navigate-back
+{
+    background: rgba(255,255,255,.3);
+    top: auto;
+}
+
+.device-container #navigate-back:hover
+{
+    background: rgba(255,255,255,.1);
+}
+
+.device-container.vertical #navigate-back
+{
+    bottom: 360px;
+    left: 260px;
+    width: 32px;
+    height: 22px;
+}
+
+.device-container.horizontal #navigate-back
+{
+    bottom: 400px;
+    left: 403px;
+    width: 31px;
+    height: 24px;
+}
