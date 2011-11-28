@@ -1,6 +1,6 @@
 tests.push(
     {
-        page: "configurator/scriptresolver.html",
+        page: "download-builder/scriptresolver.html",
         title: "Script Resolver"
     }
 );
