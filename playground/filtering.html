@@ -34,6 +34,7 @@
                     <th data-field="ShipCity">Ship City</th>
                     <th data-field="OrderID">Order ID</th>
                     <th data-field="OrderDate">Order Date</th>
+                    <th data-field="Bar">Boolean</th>
                 </th>
             </thead>
         </table>
@@ -53,22 +54,26 @@
                     data: [ {
                         OrderID: 1,
                         ShipCity: "foo",
-                        OrderDate: new Date(2011, 1, 1)
+                        OrderDate: new Date(2011, 1, 1),
+                        Bar: true
                         },{
                         OrderID: 2,
                         ShipCity: "bar",
-                        OrderDate: new Date(2010, 1, 1)
+                        OrderDate: new Date(2010, 1, 1),
+                        Bar: false
                     },{
                         OrderID: 3,
                         ShipCity: "boo",
-                        OrderDate: new Date(2009, 1, 1)
+                        OrderDate: new Date(2009, 1, 1),
+                        Bar: true
                     } ],
                     schema: {
                         model: {
                             fields: {
                                 ShipCity: { type: "string" },
                                 OrderID: { type: "number" },
-                                OrderDate: { type: "date" }
+                                OrderDate: { type: "date" },
+                                Bar: { type: "boolean" }
                             }
                         }
                     }
