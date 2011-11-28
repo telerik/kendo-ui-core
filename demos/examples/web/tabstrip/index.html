@@ -134,7 +134,14 @@
 
             <script>
                 $(document).ready(function() {
-                    $("#tabstrip").kendoTabStrip();
+                    $("#tabstrip").kendoTabStrip({
+						animation:	{
+							open: {
+								effects: "fadeIn"
+							}
+						}
+					
+					});
                 });
             </script>
         </div>

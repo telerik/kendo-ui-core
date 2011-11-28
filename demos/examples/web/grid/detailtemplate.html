@@ -104,7 +104,11 @@
                 function detailInit(e) {
                     var detailRow = e.detailRow;
 
-                    detailRow.find(".tabstrip").kendoTabStrip();
+                    detailRow.find(".tabstrip").kendoTabStrip({
+						animation: {
+							open: { effects: "fadeIn" }
+						}
+					});
 
                     detailRow.find(".orders").kendoGrid({
                         dataSource: {
