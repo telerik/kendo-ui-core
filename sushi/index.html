@@ -155,7 +155,7 @@
 
         <script id="menuTemplate" type="text/x-kendo-template">
             <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
-                <img src="images/${image}" />
+                <img src="images/75/${image}" />
                 <span class="price">&euro; ${price}</span>
                 <h2>${name}</h2>
                 <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added in your cart</span>
@@ -167,7 +167,7 @@
             <a data-role="button" data-name="remove" href="\\#">Remove</a>
 
             <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
-                <img src="images/${image}" />
+                <img src="images/75/${image}" />
                 <h2>${name}</h2>
                 <span class="price">&euro; ${price}</span>
             </a>
@@ -175,7 +175,7 @@
 
         <script id="detailTemplate" type="text/x-kendo-template">
             <aside>
-                <img src="images/${image}" />
+                <img src="images/200/${image}" />
                 <span class="price">&euro; ${price}</span>
                 <a data-role="button" href="\\#" id="add-to-cart">Add to cart</a>
             </aside>
