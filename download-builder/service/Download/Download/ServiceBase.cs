@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Web;
+using System.Text.RegularExpressions;
 
 namespace Download
 {
@@ -8,6 +9,7 @@ namespace Download
         const string COMPONENTS_KEY = "c";
         const string VERSION_KEY = "v";
         const string MIN_KEY = "min";
+        readonly Regex CommentRegex = new Regex("/\\*(?:.|[\\n\\r])*?\\*/", RegexOptions.Compiled);
 
         public bool IsReusable
         {
@@ -28,6 +30,8 @@ namespace Download
             var suffix = (minified ? ".min" : "") + ".js";
 
             var combinedScript = "";
+            string scriptContent;
+            var index = 0;
             foreach (var name in components)
             {
                 if (!string.IsNullOrWhiteSpace(name))
@@ -35,7 +39,14 @@ namespace Download
                     var fullName = Path.Combine(jsRoot, "kendo." + name + suffix);
                     if (Path.GetDirectoryName(fullName) == jsRoot)
                     {
-                        combinedScript += System.IO.File.ReadAllText(fullName);
+                        scriptContent = System.IO.File.ReadAllText(fullName);
+                        if (index++ > 0)
+                        {
+                            // Strip license from all files, except the first
+                            scriptContent = CommentRegex.Replace(scriptContent, "");
+                        }
+
+                        combinedScript += scriptContent + ";";
                     }
                 }
             }
