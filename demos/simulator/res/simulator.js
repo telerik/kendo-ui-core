@@ -97,7 +97,7 @@ function resizeContent() {
 function fixFF() {
     var doc = $(foreignDocument.documentElement);
 
-//            if (kendo.support.transitions.prefix == "Moz") { // FlexBox is broken in FF.
+//            if (kendo.support.transitions.prefix == "Moz") { // FlexBox is VERY broken in FF.
 //                var kendoView = doc.find(".km-view");
 //
 //                if (kendoView.length) {
@@ -105,7 +105,7 @@ function fixFF() {
 //                        headerHeight = foreignDocument.find(".km-header").outerHeight(),
 //                        footerHeight = foreignDocument.find(".km-footer").outerHeight()*/;
 //
-//                    $("<style type='text/css' id='ffFlexBoxFix'>.km-view{position:relative}</style>").appendTo(head); //TODO: Have to find a better way since this will break transitions.
+//                    $("<style type='text/css' id='ffFlexBoxFix'>.km-view{position:relative}</style>").appendTo(head); .
 //                }
 //            }
     if (kendo.support.transitions.prefix == "webkit") {
@@ -147,29 +147,33 @@ frame.onload = function () {
     changeDevice();
 };
 
-$(document).delegate("[data-orientation]", "click", function () {
-    var button = $(this),
-        currentOrientation = button.data("orientation");
+$(document)
+        .delegate("[data-orientation]", "click", function () {
+            var button = $(this),
+                currentOrientation = button.data("orientation");
 
-    if (!$(".device-container").hasClass(button.data("orientation"))) {
-        $(".content").kendoStop(true, true).kendoAnimate("slide:left", function () {
+            if (!$(".device-container").hasClass(button.data("orientation"))) {
+                $(".content").kendoStop(true, true).kendoAnimate("slide:left", function () {
 
-            $(".device-container")
-                .removeClass("horizontal vertical")
-                .addClass(currentOrientation);
+                    $(".device-container")
+                        .removeClass("horizontal vertical")
+                        .addClass(currentOrientation);
 
-            frame.contentWindow.orientation = currentOrientation == "horizontal" ? 90 : 0;
-            $(foreignDocument.documentElement)
-                .removeClass("km-horizontal km-vertical")
-                .addClass("km-" + currentOrientation);
+                    frame.contentWindow.orientation = currentOrientation == "horizontal" ? 90 : 0;
+                    $(foreignDocument.documentElement)
+                        .removeClass("km-horizontal km-vertical")
+                        .addClass("km-" + currentOrientation);
 
-            $(".device-container")[0].style.cssText = "";
+                    $(".device-container")[0].style.cssText = "";
 
-            setTimeout( function () {
-                $(".content").kendoStop(true, true).kendoAnimate("slide:left", true, function () {
-                    resizeContent();
+                    setTimeout( function () {
+                        $(".content").kendoStop(true, true).kendoAnimate("slide:left", true, function () {
+                            resizeContent();
+                        });
+                    }, 100);
                 });
-            }, 100);
+            }
+        })
+        .delegate("#navigate-back", "click", function () {
+            frame.contentWindow.history.back()
         });
-    }
-});

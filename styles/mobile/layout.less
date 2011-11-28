@@ -106,12 +106,14 @@ html, body
 body
 {
     display: table\9;
+    background: #000;
 }
 
 .km-ios body,
 .km-meego body
 {
     .transform(translatez(0));
+    background: #fff;
 }
 
 .km-view
@@ -331,10 +333,10 @@ body
 
 .km-ios :-moz-first-node.km-back:before
 {
-    left: -.6em;
-    top: .2em;
-    height: 1.8em;
-    .border-radius(.5em 2em .5em .3em);
+    border-radius: 0.5em 1em 0.5em 0.3em;
+    height: 1.7em;
+    left: -0.6em;
+    top: 0.16em;
 }
 
 .km-ios .km-back:active:before {
@@ -1217,7 +1219,7 @@ body
 
 .km-ios .km-listgroupinset > li
 {
-    color: #444;
+    color: #373e50;
     padding: 0;
     background: none;
     border: none;

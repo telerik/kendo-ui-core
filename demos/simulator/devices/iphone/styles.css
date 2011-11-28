@@ -49,3 +49,29 @@
     top: 50px;
     width: 200px;
 }
+
+.device-container #navigate-back
+{
+    top: auto;
+}
+
+.device-container #navigate-back:hover
+{
+    background: rgba(255,255,255,.3);
+}
+
+.device-container.vertical #navigate-back
+{
+    bottom: 315px;
+    left: 412px;
+    width: 25px;
+    height: 25px;
+}
+
+.device-container.horizontal #navigate-back
+{
+    bottom: 406px;
+    left: 214px;
+    width: 19px;
+    height: 19px;
+}

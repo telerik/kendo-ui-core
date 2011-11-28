@@ -15,6 +15,25 @@ body
 #simulator
 {
     position: relative;
+    border: 0;
+}
+
+#navigate-back
+{
+    position: absolute;
+    border: 1px solid rgba(0,0,0,.2);
+    top: 85px;
+    left: 319px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border-radius: 15px;
+    background: rgba(255,255,255,.5);
+}
+
+#navigate-back:hover
+{
+    background: rgba(255,255,255,.8);
 }
 
 .device-container
