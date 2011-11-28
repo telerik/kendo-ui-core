@@ -24,7 +24,7 @@ var categories = {
             ]
         }, {
             text: "Bar Charts",
-            spriteCssClass: "chartIcon",
+            spriteCssClass: "chartBarIcon",
             items: [
                 {
                     text: "Basic usage",
@@ -42,7 +42,7 @@ var categories = {
             ]
         }, {
             text: "Line Chart",
-            spriteCssClass: "chartIcon",
+            spriteCssClass: "chartLineIcon",
             items: [
                 {
                     text: "Basic usage",
@@ -57,7 +57,7 @@ var categories = {
             ]
         }, {
             text: "Pie Chart",
-            spriteCssClass: "chartIcon",
+            spriteCssClass: "chartPieIcon",
             items: [
                 {
                     text: "Basic usage",
@@ -75,7 +75,7 @@ var categories = {
             ]
         }, {
             text: "Scatter Charts",
-            spriteCssClass: "chartIcon",
+            spriteCssClass: "chartScatterIcon",
             items: [
                 {
                     text: "Basic usage",
