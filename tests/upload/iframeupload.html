@@ -32,7 +32,7 @@
             }
 
             function triggerIframeLoad(iframeIndex) {
-                $("iframe.#uploadInstance_" + iframeIndex)
+                $("iframe[id^='uploadInstance_']").eq(iframeIndex)
                             .trigger("load");
             }
 
@@ -88,6 +88,7 @@
                 _supportsFormData = Upload.prototype._supportsFormData;
                 Upload.prototype._supportsFormData = function() { return false; };
                 Upload.prototype._alert = function() { };
+                Upload._frameId = 0;
             }
 
             function moduleTeardown() {

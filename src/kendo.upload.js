@@ -882,6 +882,8 @@
             .bind("t:abort", $.proxy(this.onAbort, this));
     };
 
+    Upload._frameId = 0;
+
     iframeUploadModule.prototype = /** @ignore */ {
         onSelect: function(e) {
             var upload = this.upload,
@@ -908,7 +910,7 @@
 
             sourceInput.attr("name", name);
 
-            var iframe = this.createFrame(upload.name + "_" + this.iframes.length);
+            var iframe = this.createFrame(upload.name + "_" + Upload._frameId++);
             this.registerFrame(iframe);
 
             var form = this.createForm(upload.options.async.saveUrl, iframe.attr("name"))
