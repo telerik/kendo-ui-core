@@ -86,30 +86,30 @@ function deployScripts(root, license, copySource) {
 function deployStyles(root, license, copySource) {
     var stylesDest = path.join(root, DEPLOY_STYLES),
         sourceRoot = path.join(root, DEPLOY_SOURCE),
-        sourceDest = path.join(sourceRoot, DEPLOY_STYLES),
-        cssFilter = /\.css$/,
-        stylesFilter = /\.(css|png|jpg|jpeg|gif)$/i;
+        sourceDest = path.join(sourceRoot, DEPLOY_STYLES);
 
     mkdir(stylesDest);
-    copyDir(STYLES_ROOT, stylesDest, false, stylesFilter);
-    processFiles(stylesDest, cssFilter, function(fileName) {
+    copyDir(STYLES_ROOT, stylesDest, false, /\.(css|png|jpg|jpeg|gif)$/i);
+    processFiles(stylesDest, /\.css$/, function(fileName) {
         var css = readText(fileName),
             minified = license + cssmin(css);
 
         writeText(fileName, minified);
         fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
     });
+    kendoBuild.rmdirSyncRecursive(path.join(stylesDest, "mobile"));
 
     if (copySource) {
         mkdir(sourceRoot);
         mkdir(sourceDest);
 
-        copyDir(STYLES_ROOT, sourceDest, false, stylesFilter);
-        processFiles(sourceDest, cssFilter, function(fileName) {
+        copyDir(STYLES_ROOT, sourceDest, false, /\.(less|css|png|jpg|jpeg|gif)$/i);
+        processFiles(sourceDest, /\.(less|css)$/, function(fileName) {
             var css = license + readText(fileName);
 
             writeText(fileName, css);
         });
+        kendoBuild.rmdirSyncRecursive(path.join(sourceDest, "mobile"));
     }
 }
 
