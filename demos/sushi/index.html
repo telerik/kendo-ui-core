@@ -156,7 +156,7 @@
         <script id="menuTemplate" type="text/x-kendo-template">
             <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
                 <img src="images/75/${image}" />
-                <span class="price">&euro; ${kendo.toString(price, "c")}</span>
+                <span class="price"> ${kendo.toString(price, "c")}</span>
                 <h2>${name}</h2>
                 <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added in your cart</span>
             </a>
@@ -169,7 +169,7 @@
             <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
                 <img src="images/75/${image}" />
                 <h2>${name}</h2>
-                <span class="price">&euro; ${kendo.toString(price, "c")}</span>
+                <span class="price">${kendo.toString(price, "c")}</span>
             </a>
         </script>
 
@@ -191,9 +191,7 @@
                 schema: schema,
                 transport: { read: { url: "menu.js", dataType: "json" } },
                 group: "category",
-                error: function() {
-                    console.log(arguments);
-                }
+                error: function() { console.log(arguments); }
             });
 
             var cartDataSource = kendo.data.DataSource.create({schema: schema, aggregate: [{ field: "price", aggregate: "sum" }]});
@@ -264,7 +262,6 @@
                 if (viewID === "details") {
                     ds.fetch(function() {
                         item = ds.get(e.params.id).data;
-                        console.log(view.content.data("kendoScroller"));
                         view.content.data("kendoScroller").scrollElement.html(itemDetailsTemplate(item));
                         kendo.mobile.enhance(view.content);
 
