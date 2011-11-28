@@ -106,7 +106,7 @@ function deploy(scriptsRoot, outputRoot, header, compress) {
             var content = kendoBuild.readText(path.join(scriptsRoot, scriptName));
             output = compress ? kendoBuild.minifyJs(content) : content;
 
-            deployCache[cacheKey] = output;
+            deployCache[cacheKey] = kendoBuild.stripBOM(output);
         }
 
         kendoBuild.writeText(path.join(outputRoot, outName), header + output);
@@ -128,7 +128,10 @@ function deploy(scriptsRoot, outputRoot, header, compress) {
             output = compress ? kendoBuild.minifyJs(content) : content,
             outName = scriptOutName(fileName, compress);
 
-        kendoBuild.writeText(fileName, header + output);
+        // Cultures are UTF-8 with BOM
+        output = kendoBuild.addBOM(header + output);
+
+        kendoBuild.writeText(fileName, output);
 
         if (outName !== fileName) {
             fs.renameSync(fileName, outName);
@@ -146,13 +149,20 @@ function mergeScripts() {
 function mergeMultipartScript(script, srcDir, outDir, header, compress) {
     var outFile = scriptOutName(script.output, compress),
         cacheKey = srcDir + compress + outFile,
-        result = mergeCache[cacheKey] || "";
+        result = mergeCache[cacheKey] || "",
+        moduleText;
 
     if (!result) {
-        script.inputs.forEach(function(module) {
-            result += kendoBuild.readText(
+        script.inputs.forEach(function(module, index) {
+            moduleText = kendoBuild.readText(
                 path.join(srcDir, module)
             );
+
+            if (index > 0) {
+                moduleText = kendoBuild.stripBOM(moduleText);
+            }
+
+            result += moduleText;
         });
 
         if (compress) {
