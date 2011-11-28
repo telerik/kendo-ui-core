@@ -1410,10 +1410,10 @@ html body .k-grid tbody .k-button-icon
 
 /* ComboBox & DropDownList */
 
-div.k-datepicker,
+span.k-datepicker,
 span.k-numerictextbox,
-div.k-combobox,
-div.k-dropdown
+span.k-combobox,
+span.k-dropdown
 {
     background: none;
 }
@@ -1593,12 +1593,12 @@ div.k-dropdown
     padding: 0 2px;
 }
 
-div.k-datetimepicker .k-select
+span.k-datetimepicker .k-select
 {
     right: 21px;
 }
 
-div.k-datetimepicker .k-select+.k-select
+span.k-datetimepicker .k-select+.k-select
 {
     right: 0;
 }
@@ -1842,9 +1842,9 @@ body .k-datetimepicker .k-select
     width: 13em;
 }
 
-div.k-timepicker,
-div.k-datetimepicker,
-div.k-datepicker
+span.k-timepicker,
+span.k-datetimepicker,
+span.k-datepicker
 {
     background-color: transparent; /* due to k-widget */
 }
