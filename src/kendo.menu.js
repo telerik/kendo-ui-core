@@ -88,6 +88,7 @@
         TIMER = "timer",
         FIRST = "k-first",
         IMAGE = "k-image",
+        EMPTY = ":empty",
         SELECT = "select",
         ZINDEX = "zIndex",
         MOUSEENTER = "mouseenter",
@@ -284,6 +285,18 @@
             Widget.fn.init.call(that, element, options);
 
             options = that.options;
+
+            if (that.element.is(EMPTY)) {
+                that.element.append($(Menu.renderGroup({
+                    items: options.dataSource,
+                    group: {
+                        firstLevel: true,
+                        horizontal: that.element.hasClass(MENU + "-horizontal"),
+                        expanded: true
+                    },
+                    menu: {}
+                })).children());
+            }
 
             that._updateClasses();
 

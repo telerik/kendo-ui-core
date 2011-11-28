@@ -35,10 +35,30 @@
     <link type="text/css" href="../styles/kendo.default.css" rel="stylesheet"/>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#Menu").kendoMenu();
             $("#Menu1").kendoMenu({ animation: { open: { effects: { zoomIn: {}, fadeIn: {} } } } });
             $("#Menu2").kendoMenu({ orientation: 'vertical' }).css({ width: '200px' });
             $("#Menu3").kendoMenu();
+            $("#Menu4").kendoMenu({
+                dataSource: [
+                    {
+                        text: "Beep",
+                        items: [
+                            {
+                                text: "Weep"
+                            },
+                            {
+                                text: "Creep"
+                            }
+                        ]
+                    },
+                    {
+                        text: "Meep"
+                    },
+                    {
+                        text: "Sheep"
+                    }
+                ]
+            });
         });
     </script>
 </head>
@@ -390,5 +410,6 @@
         </ul>
     </li>
 </ul>
+<ul id="Menu4"></ul>
 </body>
 </html>

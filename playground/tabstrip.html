@@ -18,6 +18,22 @@
             $("#TabStrip2").kendoTabStrip({ animation: { open: { effects: { fadeIn: {} } } } });
             $("#TabStrip3").kendoTabStrip({ contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html' ] });
             $("#TabStrip4").kendoTabStrip();
+            $("#TabStrip5").kendoTabStrip({
+                dataSource: [
+                    {
+                        text: "Beep",
+                        content: "deep sheep"
+                    },
+                    {
+                        text: "Meep",
+                        content: "deep sheep 2"
+                    },
+                    {
+                        text: "Sheep",
+                        content: "deep sheep 3"
+                    }
+                ]
+            });
         });
     </script>
 </head>
@@ -305,6 +321,6 @@
         </ul>
     </div>
 </div>
-
+<ul id="TabStrip5"></ul>
 </body>
 </html>

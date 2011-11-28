@@ -328,6 +328,10 @@
 
             that._updateClasses();
 
+            if (that.tabGroup.is(EMPTY)) {
+                options.dataSource && that.append(options.dataSource);
+            }
+
             if (that.options.contentUrls) {
                 element.find(".k-tabstrip-items > .k-item")
                     .each(function(index, item) {
