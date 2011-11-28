@@ -165,3 +165,9 @@
 {
     display: none;
 }
+
+#total {
+    text-align: center;
+    padding: 1rem;
+    font-size: 5rem;
+}
