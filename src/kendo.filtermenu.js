@@ -10,8 +10,22 @@
         NEQ = "Is not equal to",
         Widget = ui.Widget;
 
-    var template =
-        '<form class="k-filter-menu k-group">'+
+    var booleanTemplate =
+            '<div>' +
+                '<input type="hidden" name="filters[0].field" value="#=field#"/>' +
+                '<input type="hidden" name="filters[0].operator" value="eq"/>' +
+                '<div class="k-filter-help-text">#=messages.info#</div>'+
+                '<label>#=messages.isTrue#'+
+                    '<input type="radio" name="filters[0].value" value="true"/>' +
+                '</label>' +
+                '<label>#=messages.isFalse#'+
+                    '<input type="radio" name="filters[0].value" value="false"/>' +
+                '</label>' +
+                '<button type="submit" class="k-button">#=messages.filter#</button>'+
+                '<button type="reset" class="k-button">#=messages.clear#</button>'+
+            '</div>';
+
+    var defaultTemplate =
             '<div>' +
                 '<input type="hidden" name="filters[0].field" value="#=field#"/>' +
                 '<input type="hidden" name="filters[1].field" value="#=field#"/>' +
@@ -36,13 +50,12 @@
                 '#}#'+
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
-            '</div>'+
-        '</form>';
+            '</div>';
 
-    function trim(expression, field) {
+    function removeFiltersForField(expression, field) {
         if (expression.filters) {
             expression.filters = $.grep(expression.filters, function(filter) {
-                trim(filter, field);
+                removeFiltersForField(filter, field);
                 return filter.field != field;
             });
         }
@@ -53,6 +66,8 @@
 
         if (widget) {
             widget.value(value);
+        } else if (dom.is(":radio")) {
+            dom.filter("[value=" + value + "]").attr("checked", "checked");
         } else {
             dom.val(value);
         }
@@ -134,7 +149,8 @@
 
             operators = operators[type] || options.operators[type];
 
-            that.form = $(kendo.template(template)({
+            that.form = $('<form class="k-filter-menu k-group"/>');
+            that.form.html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
                 field: that.field,
                 ns: kendo.ns,
                 messages: options.messages,
@@ -204,7 +220,7 @@
                 field = that.model.fields[that.field],
                 length;
 
-            trim(result, that.field);
+            removeFiltersForField(result, that.field);
 
             filters = $.grep(filters, function(filter) {
                 return filter.value != "";
@@ -319,6 +335,8 @@
             },
             messages: {
                 info: "Show rows with value that:",
+                isTrue: "is true",
+                isFalse: "is false",
                 filter: "Filter",
                 clear: "Clear"
             }
