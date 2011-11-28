@@ -91,7 +91,7 @@ function deployStyles(root, license, copySource) {
     mkdir(stylesDest);
     copyDir(STYLES_ROOT, stylesDest, false, /\.(css|png|jpg|jpeg|gif)$/i);
     processFiles(stylesDest, /\.css$/, function(fileName) {
-        var css = readText(fileName),
+        var css = kendoBuild.stripBOM(readText(fileName)),
             minified = license + cssmin(css);
 
         writeText(fileName, minified);
@@ -105,7 +105,7 @@ function deployStyles(root, license, copySource) {
 
         copyDir(STYLES_ROOT, sourceDest, false, /\.(less|css|png|jpg|jpeg|gif)$/i);
         processFiles(sourceDest, /\.(less|css)$/, function(fileName) {
-            var css = license + readText(fileName);
+            var css = license + kendoBuild.stripBOM(readText(fileName));
 
             writeText(fileName, css);
         });
