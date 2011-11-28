@@ -5,6 +5,7 @@
         runningLocally = location.protocol == "file:",
         pushState = "pushState" in history,
         currentHtml = "",
+        category = "",
         docsAnimation = {
             show: {
                 effects: "expandVertical fadeIn",
@@ -44,9 +45,8 @@
             skin: /kendo\.\w+(\.min)?\.css/i
         };
 
-    function selectCategory(element) {
-        $("#topnav .selected").removeClass("selected");
-        $(element).addClass("selected");
+    function selectCategory() {
+        var loc = window.location.href.toLowerCase();
 
         var navWrap = $("#navWrap").empty();
 
@@ -78,12 +78,8 @@
         if (!referenceUrl) {
             referenceUrl = $("#referenceUrl")[0].href;
 
-            var loc = window.location.href.toLowerCase();
-
-            if (loc.indexOf("/web/") >= 0) {
-                referenceUrl += "web/";
-            } else if (loc.indexOf("/dataviz/") >= 0) {
-                referenceUrl += "dataviz/";
+            if (category == "web" || category == "dataviz") {
+                referenceUrl += category + "/";
             }
         }
 
@@ -438,32 +434,6 @@
         return head.innerHTML.match(/href=\W(.*)examples(\.min)?\.css/i)[1];
     }
 
-    function locatePage(url) {
-        var category = "",
-            iterate = function(item) {
-            var result = true;
-
-            $.each(item, function (idx, value) {
-                if ($.isPlainObject(value) && "url" in value && value.url === url) {
-                    result = false;
-                    return result;
-                }
-
-                if ($.isPlainObject(value) || $.isArray(value)) {
-                    result = iterate(value);
-
-                    category = idx;
-                    return result;
-                }
-            });
-            return result;
-        };
-
-        iterate(categories);
-
-        return category;
-    }
-
     function getNormalizedUrl() {
         var href = location.href.toLowerCase(),
             reference = $("#referenceUrl")[0].href.toLowerCase();
@@ -478,14 +448,26 @@
     function initializeNavigation() {
         var url = window.normalizedUrl = getNormalizedUrl(), link;
 
+        if (/\/web\//i.test(url)) {
+            category = "web";
+        } else if (/\/dataviz\//i.test(url)) {
+            category = "dataviz";
+        } else if (/\/mobile\//i.test(url)) {
+            category = "mobile";
+        } else if (/\/themebuilder\//i.test(url)) {
+            category = "themebuilder";
+        }
+
+        $("#topnav .selected").removeClass("selected");
+        $("#topnav #" + category).addClass("selected");
+
         if (typeof categories != "undefined") {
             url = url.match(regexes.nav);
 
             if (url) {
                 url = url[1].toLowerCase();
-                page = locatePage(url);
 
-                selectCategory($("#topnav #" + page)[0]);
+                selectCategory();
 
                 link = $("#navWrap .k-link[href*='" + url + "']")
                     .addClass("k-state-selected chosen");
