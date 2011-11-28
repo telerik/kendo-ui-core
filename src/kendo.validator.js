@@ -171,7 +171,7 @@
                 },
                 date: function(input) {
                     if (input.filter("[type^=date],[" + kendo.attr("type") + "=date]").length && input.val() !== "") {
-                        return kendo.parseDate(input.val()) !== null;
+                        return kendo.parseDate(input.val(), input.attr(kendo.attr("format"))) !== null;
                     }
                     return true;
                 }

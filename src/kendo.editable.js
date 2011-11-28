@@ -50,6 +50,8 @@
         },
         "date": function(container, options) {
             var attr = createAttributes(options);
+            attr[kendo.attr("format")] = options.format;
+
             $('<input type="text"/>').attr(attr).appendTo(container).kendoDatePicker({ format: options.format });
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
@@ -118,7 +120,8 @@
                 fields = that.options.fields || [],
                 container = that.element.empty(),
                 model = that.options.model || {},
-                rules = {};
+                rules = {},
+                settings = {};
 
             if (!$.isArray(fields)) {
                 fields = [fields];
@@ -129,6 +132,7 @@
                     isObject = isPlainObject(field),
                     fieldName = isObject ? field.field : field,
                     modelField = (model.fields || {})[fieldName],
+                    type = modelField ? modelField.type : null,
                     validation = modelField ? (modelField.validation || {}) : {};
 
                 for (var rule in validation) {
@@ -137,10 +141,18 @@
                     }
                 }
 
+                if (isObject && field.format && type == "date") {
+                    settings[fieldName] = {
+                        format: function(value) { return kendo.format(field.format, value); },
+                        parse: function(value) { return kendo.parseDate(value, field.format); }
+                    };
+                }
+
                 that.editor(field, modelField);
             }
 
-            that.binder = new Binder(container, that.options.model, { change: $.proxy(that._binderChange, that) });
+            settings[CHANGE] = $.proxy(that._binderChange, that);
+            that.binder = new Binder(container, that.options.model, settings);
 
             that.validatable = container.kendoValidator({
                 errorTemplate: '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +

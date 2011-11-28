@@ -84,7 +84,6 @@
                 options = that.options,
                 element = $(target),
                 field = element.attr(kendo.attr("field")) || element.attr("name"),
-                field = $(target).attr(kendo.attr("field")) || $(target).attr("name"),
                 setting = options[field] || {};
 
             if (field) {

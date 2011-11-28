@@ -70,10 +70,10 @@
                     groupable: true,
                     scrollable: false,
                     navigatable: true,
-                    selectable: "cell",
+                    selectable: false,
                     //detailTemplate: "detail template",
                     toolbar: ["create", "cancel", "save"],
-                    columns: ["id", "bar", "foo", { command: { name: "destroy", text: "delete"}, title: "delete" }]
+                    columns: [{field: "date", format: "{0:dd/MM/yyyy}"}, { field: "id", format: "{0:c}" }, "bar", "foo", { command: { name: "destroy", text: "delete"}, title: "delete" }]
                 });
 
                 $("#relatedGrid").kendoGrid({
