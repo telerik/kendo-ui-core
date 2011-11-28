@@ -18,6 +18,7 @@
             idx,
             length,
             field,
+            type,
             format,
             operator,
             value,
@@ -37,7 +38,14 @@
                 filter = odataFilters[operator];
 
                 if (filter && value !== undefined) {
-                    format = typeof value === "string" ? "'{1}'" : "{1}";
+                    type = $.type(value);
+                    if (type === "string") {
+                        format = "'{1}'";
+                    } else if (type === "date") {
+                        format = "datetime'{1:yyyy-MM-ddThh:mm:ss}'";
+                    } else {
+                        format = "{1}";
+                    }
 
                     if (filter.length > 3) {
                         if (filter !== "substringof") {
@@ -50,6 +58,7 @@
                     }
 
                     filter = kendo.format(format, filter, value, field);
+                    console.log(filter);
                 }
             }
 
