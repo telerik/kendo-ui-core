@@ -88,10 +88,10 @@
             description: "Drag & drop functionality for any DOM element.",
             depends: [ "core" ]
         }, {
-            id: "filteringmenu",
+            id: "filtermenu",
             name: "Filtering Menu",
             category: categories.framework,
-            source: "kendo.filteringmenu.min.js",
+            source: "kendo.filtermenu.min.js",
             depends: [ "datepicker", "numerictextbox", "dropdownlist" ],
             advanced: true
         }, {
@@ -206,7 +206,7 @@
                     id: "grid-filtering",
                     name: "Filtering",
                     description: "Support for record filtering",
-                    depends: [ "filteringmenu" ]
+                    depends: [ "filtermenu" ]
                 }, {
                     id: "grid-grouping",
                     name: "Grouping",
