@@ -502,8 +502,8 @@
 
             wrapper = element.parent();
 
-            if (!wrapper.is("div.k-widget")) {
-                wrapper = element.wrap("<div />").parent();
+            if (!wrapper.is("span.k-widget")) {
+                wrapper = element.wrap("<span />").parent();
             }
 
             wrapper[0].style.cssText = DOMelement.style.cssText;
