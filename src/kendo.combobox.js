@@ -4,9 +4,8 @@
     *
     * @section
     *   <p>
-    *       The ComboBox widget displays flat data as a list of values and allows the selection of
-    *       a single value from the list or the input of a new value. It is a richer version of the
-    *       standard HTML select, providing support for local and remote data binding, item templates,
+    *       The ComboBox widget allows the selection from pre-defined values or entering a new value.
+    *       It is a richer version of the standard HTML select, providing support for local and remote data binding, item templates,
     *       and configurable options for controlling the list behavior.
     *   </p>
     *   If you do not want to allow user input, use the <a href="../dropdownlist/index.html" title="Kendo UI DropDownList">Kendo UI DropDownList</a>.
