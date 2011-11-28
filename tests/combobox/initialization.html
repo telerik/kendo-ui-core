@@ -57,15 +57,15 @@
                 equal(options.test, 1);
            });
 
-           test("wraps element if no wrapper div.k-widget and hide element", function() {
-               input.wrap("<div class='test'/>");
+           test("wraps element if no wrapper span.k-widget and hide element", function() {
+               input.wrap("<span class='test'/>");
 
                input.kendoComboBox();
 
                var wrapper = input.data("kendoComboBox").wrapper;
 
-               ok(wrapper.is("div"));
-               ok(wrapper.parent().is("div.test"));
+               ok(wrapper.is("span"));
+               ok(wrapper.parent().is("span.test"));
                ok(wrapper.hasClass("k-widget k-combobox k-header"));
                ok(!input.is(":visible"));
 
@@ -81,12 +81,12 @@
                ok(text.hasClass("k-input"));
            });
 
-           test("text input should wrapped with div", function(){
+           test("text input should wrapped with span", function(){
                input.kendoComboBox();
 
                var comboWrapper = input.data("kendoComboBox").input.parent();
 
-               ok(comboWrapper.is("div"));
+               ok(comboWrapper.is("span"));
                ok(comboWrapper.hasClass("k-dropdown-wrap k-state-default"));
            });
 

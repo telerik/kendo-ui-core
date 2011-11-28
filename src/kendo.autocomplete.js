@@ -467,6 +467,11 @@
                 }
                 e.preventDefault();
             } else if (key === keys.ENTER || key === keys.TAB) {
+
+                if (that.popup.visible()) {
+                    e.preventDefault();
+                }
+
                 that._accept(current);
             } else if (key === keys.ESC) {
                 that.close();
@@ -502,8 +507,8 @@
 
             wrapper = element.parent();
 
-            if (!wrapper.is("div.k-widget")) {
-                wrapper = element.wrap("<div />").parent();
+            if (!wrapper.is("span.k-widget")) {
+                wrapper = element.wrap("<span />").parent();
             }
 
             wrapper[0].style.cssText = DOMelement.style.cssText;
