@@ -232,10 +232,6 @@ var categories = {
                     url: "numerictextbox/index.html"
                 },
                 {
-                    text: "Globalization",
-                    url: "numerictextbox/globalization.html"
-                },
-                {
                     text: "Events",
                     url: "numerictextbox/events.html"
                 },
