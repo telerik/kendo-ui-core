@@ -156,7 +156,7 @@
         <script id="menuTemplate" type="text/x-kendo-template">
             <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
                 <img src="images/75/${image}" />
-                <span class="price">&euro; ${price}</span>
+                <span class="price">&euro; ${kendo.toString(price, "c")}</span>
                 <h2>${name}</h2>
                 <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added in your cart</span>
             </a>
@@ -169,14 +169,14 @@
             <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
                 <img src="images/75/${image}" />
                 <h2>${name}</h2>
-                <span class="price">&euro; ${price}</span>
+                <span class="price">&euro; ${kendo.toString(price, "c")}</span>
             </a>
         </script>
 
         <script id="detailTemplate" type="text/x-kendo-template">
             <aside>
                 <img src="images/200/${image}" />
-                <span class="price">&euro; ${price}</span>
+                <span class="price">${kendo.toString(price, "c")}</span>
                 <a data-role="button" href="\\#" id="add-to-cart">Add to cart</a>
             </aside>
             <h2>${name}</h2>
@@ -202,9 +202,9 @@
                 var emptyCart = cartDataSource.aggregates().price === undefined;
 
                 if (emptyCart) {
-                    $("#total").html(0 + " &euro;");
+                    $("#total").html(kendo.toString(0, "c"));
                 } else {
-                    $("#total").html(cartDataSource.aggregates().price.sum + " &euro;");
+                    $("#total").html(kendo.toString(cartDataSource.aggregates().price.sum, "c"));
                 }
 
                 $("#cart .km-content").toggleClass("km-empty", emptyCart);
@@ -264,6 +264,7 @@
                 if (viewID === "details") {
                     ds.fetch(function() {
                         item = ds.get(e.params.id).data;
+                        console.log(view.content.data("kendoScroller"));
                         view.content.data("kendoScroller").scrollElement.html(itemDetailsTemplate(item));
                         kendo.mobile.enhance(view.content);
 
