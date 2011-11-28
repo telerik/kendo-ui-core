@@ -531,7 +531,7 @@
             span = wrapper.find(SELECTOR);
 
             if (!span[0]) {
-                wrapper.append('<div class="k-dropdown-wrap k-state-default"><span class="k-input">&nbsp;</span><span class="k-select"><span class="k-icon k-arrow-down">select</span></span></div>')
+                wrapper.append('<span class="k-dropdown-wrap k-state-default"><span class="k-input">&nbsp;</span><span class="k-select"><span class="k-icon k-arrow-down">select</span></span></span>')
                        .append(that.element);
 
                 span = wrapper.find(SELECTOR);
@@ -551,8 +551,8 @@
 
             wrapper = element.parent();
 
-            if (!wrapper.is("div.k-widget")) {
-                wrapper = element.wrap("<div />").parent();
+            if (!wrapper.is("span.k-widget")) {
+                wrapper = element.wrap("<span />").parent();
             }
 
             if (!wrapper.attr(TABINDEX)) {
