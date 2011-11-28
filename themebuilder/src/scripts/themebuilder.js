@@ -18,7 +18,7 @@
         processors = {
             "box-shadow": function(value) {
                 if (value && value != "none") {
-                    return value.replace(/\d+px/g,"").replace(/\s/g, "");
+                    return value.replace(/((\d+(px|em))|inset)/g,"").replace(/\s/g, "");
                 } else {
                     return "#000000";
                 }
