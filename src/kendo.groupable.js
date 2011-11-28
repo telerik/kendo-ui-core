@@ -19,6 +19,10 @@
         },
         dropCue = $('<div class="k-grouping-dropclue"/>');
 
+    function dropCueOffsetTop(element) {
+        return $(element).children(".k-grid-toolbar").outerHeight() + 3;
+    }
+
     var Groupable = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -34,7 +38,7 @@
                     group: group,
                     dragenter: function(e) {
                         e.draggable.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
-                        dropCue.css({top:3, left: 0}).appendTo(groupContainer);
+                        dropCue.css({top: dropCueOffsetTop(that.element), left: 0}).appendTo(groupContainer);
                     },
 
                     dragleave: function(e) {
@@ -55,7 +59,7 @@
                             left = element.position().left - marginLeft;
 
                         intializePositions();
-                        dropCue.css({top:3, left: left}).appendTo(groupContainer);
+                        dropCue.css({top: dropCueOffsetTop(that.element), left: left}).appendTo(groupContainer);
                         this.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
                     },
                     drag: proxy(that._drag, that)
@@ -98,7 +102,7 @@
                         left = 0;
                     }
 
-                    dropCue.css({top:3, left: left}).appendTo(groupContainer);
+                    dropCue.css({top: dropCueOffsetTop(that.element), left: left}).appendTo(groupContainer);
                     this.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
                 },
                 drag: proxy(that._drag, that)
