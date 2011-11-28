@@ -195,7 +195,7 @@
 
             totalHeight = dataSource.total() * itemHeight + addScrollBarHeight;
 
-            for (idx = 0; idx < math.round(totalHeight / maxHeight); idx++) {
+            for (idx = 0; idx < math.floor(totalHeight / maxHeight); idx++) {
                 html += '<div style="width:1px;height:' + maxHeight + 'px"></div>';
             }
 
