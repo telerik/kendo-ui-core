@@ -407,6 +407,10 @@
 
         enable: function () {
             this.element.children(".km-scroll-container").removeData("disabled");
+        },
+
+        scrollIntoView: function() {
+            this.scrollElement.trigger("scrollIntoView"); // TODO
         }
     });
 

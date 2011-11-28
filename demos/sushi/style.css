@@ -82,8 +82,9 @@
 .item-list .price
 {
     display: block;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     float: right;
+    font-weight: bold;
 }
 
 #details .km-content
@@ -158,4 +159,9 @@
     padding: 2rem;
     line-height: 3.5rem;
     color: #888;
+}
+
+.km-android .km-back
+{
+    display: none;
 }

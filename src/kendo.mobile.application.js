@@ -13,6 +13,7 @@
         buttonRolesSelector = toRoleSelector("button listview-link"),
         linkRolesSelector = toRoleSelector("tab"),
         initialHeight = {},
+        TRANSFORM = support.transitions.css + "transform",
         roleSelector = kendo.roleSelector;
 
     function toRoleSelector(string) {
@@ -195,6 +196,8 @@
             $(document).bind("orientationchange", function(e) {
                 doc.removeClass("km-horizontal km-vertical")
                    .addClass(getOrientationClass());
+
+                $(".km-scroll-container:visible").css(TRANSFORM, "none"); // Reset the visible scrollbar, TODO: make a scrollIntoView scroller method.
             });
         },
 

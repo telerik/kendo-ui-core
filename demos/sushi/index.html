@@ -229,6 +229,7 @@
             function removeItemFromList(e) {
                 if (e.buttonName === "remove") {
                     cartDataSource.remove(e.dataItem.id);
+                    $(".km-scroll-container:visible").css(kendo.support.transitions.css + "transform", "none");
                     e.preventDefault();
                 }
             }
