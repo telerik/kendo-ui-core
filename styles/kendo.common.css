@@ -1,5 +1,7 @@
 ﻿/* Kendo base CSS */
 
+.fake{color:red;}
+
 .k-reset { margin:0;padding:0;border:0;outline:0;text-decoration:none;font-size:100%;list-style:none;}
 
 .k-floatwrap:after,.k-slider-items:after,.k-grid-toolbar:after{content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
@@ -46,6 +48,7 @@
 .k-widget,
 .k-input[type="text"],
 .k-input[type="number"],
+.k-textbox,
 .k-picker-wrap .k-input,
 .k-button,
 .k-draghandle
@@ -74,11 +77,6 @@
 
 *+html .k-button { overflow: visible; margin-right: 4px; }
 *+html a.k-button { line-height: 1.6; padding-left: 7px; padding-right: 7px;/*+1*/ }
-
-.k-button-icontext
-{
-    line-height: 1.453;
-}
 
 button.k-button::-moz-focus-inner,
 input.k-button::-moz-focus-inner
@@ -119,7 +117,7 @@ body .k-button-icon
 .k-button-icontext .k-icon
 {
     margin: 0 3px 0 -3px;
-    vertical-align: top;
+    vertical-align: text-top;
 }
 *+html .k-button-icontext .k-icon { margin-right: 4px; }
 
@@ -308,7 +306,7 @@ html body .k-button-bare
     border-style: solid;
     border-width: 1px;
     font-size: .9em;
-    padding: .05em .15em;
+    padding: .2em .4em;
     white-space: nowrap;
     cursor: default;
 }
@@ -1445,6 +1443,8 @@ div.k-dropdown
     cursor: default;
 }
 
+.k-dropdown-wrap,
+.k-picker-wrap,
 .k-numeric-wrap
 {
     display: block;
@@ -1984,6 +1984,11 @@ div.k-treeview
     padding: 0.25em 0;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     outline: 0;
+}
+
+.k-textbox
+{
+    padding: .4em .2em;
 }
 
 /* NumericTextBox */
@@ -2637,6 +2642,8 @@ span.k-tooltip
 {
     position: static;
     display: inline-block;
+    border-width: 1px;
+    padding: 2px 5px 1px 6px;
 }
 
 .k-invalid-msg

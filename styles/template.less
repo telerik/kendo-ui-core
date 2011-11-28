@@ -84,6 +84,7 @@
 
 .k-widget,
 .k-input,
+.k-textbox,
 .k-group,
 .k-content,
 .k-header,
@@ -194,13 +195,15 @@ span.k-numeric-wrap.k-state-active,
     border-color: @widget-border-color;
 }
 
-.k-input
+.k-input,
+.k-textbox
 {
     background-color: @input-background-color;
 }
 
 .k-widget,
 .k-input,
+.k-textbox,
 .k-popup,
 .k-content
 {
@@ -330,7 +333,8 @@ span.k-numeric-wrap.k-state-active,
 .k-panelbar .k-state-selected,
 .k-button:active,
 .k-ghost-splitbar-vertical,
-.k-ghost-splitbar-horizontal
+.k-ghost-splitbar-horizontal,
+.k-draghandle.k-state-selected:hover
 {
     color: @selected-text-color;
     background-color: @selected-background-color;
@@ -518,6 +522,7 @@ span.k-numeric-wrap.k-state-active,
 /* Border radius */
 
 .k-button,
+.k-textbox,
 .k-drag-clue,
 .k-touch-scrollbar,
 .k-window,
