@@ -228,7 +228,7 @@
             var date;
 
             if (b != undefined) {
-                if (typeof b === "string") {
+                if (typeof b === STRING) {
                     b = b.replace(quoteRegExp, "\\'");
                     date = dateRegExp.exec(b);
                     if (date) {
@@ -251,7 +251,7 @@
             return a + " " + op + " " + b;
         }
 
-        var operators =  {
+        return {
             eq: function(a, b, ignore) {
                 return operator("==", a, b, ignore);
             },
@@ -298,20 +298,13 @@
                 return a + ".indexOf('" + b + "') >= 0"
             }
         };
-
-        operators["=="] = operators.equals = operators.isequalto = operators.equalto = operators.equal = operators.eq;
-        operators["!="] = operators.not = operators.ne = operators.notequals = operators.isnotequalto = operators.notequalto = operators.notequalsto = operators.notequal = operators.neq;
-        operators["<"] = operators.islessthan = operators.lessthan = operators.less = operators.lt;
-        operators["<="] = operators.islessthanorequalto = operators.lessthanequal = operators.le = operators.lte;
-        operators[">"] = operators.isgreaterthan = operators.greaterthan = operators.greater = operators.gt;
-        operators[">="] = operators.isgreaterthanorequalto = operators.greaterthanequal = operators.ge = operators.gte;
-        return operators;
-
     })();
 
     function Query(data) {
         this.data = data || [];
     }
+
+    Query.normalizeFilter = normalizeFilter;
 
     Query.filterExpr = function(expression) {
         var expressions = [],
@@ -377,6 +370,57 @@
         }
     }
 
+    var operatorMap = {
+        "==": "eq",
+        equals: "eq",
+        isequalto: "eq",
+        equalto: "eq",
+        equal: "eq",
+        "!=": "neq",
+        ne: "neq",
+        notequals: "neq",
+        isnotequalto: "neq",
+        notequalto: "neq",
+        notequal: "neq",
+        "<": "lt",
+        islessthan: "lt",
+        lessthan: "lt",
+        less: "lt",
+        "<=": "lte",
+        le: "lte",
+        islessthanorequalto: "lte",
+        lessthanequal: "lte",
+        ">": "gt",
+        isgreaterthan: "gt",
+        greaterthan: "gt",
+        greater: "gt",
+        ">=": "gte",
+        isgreaterthanorequalto: "gte",
+        greaterthanequal: "gte",
+        ge: "gte"
+    }
+
+    function normalizeOperator(expression) {
+        var idx,
+            length,
+            filter,
+            operator,
+            filters = expression.filters;
+
+        if (filters) {
+            for (idx = 0, length = filters.length; idx < length; idx++) {
+                filter = filters[idx];
+                operator = filter.operator;
+
+                if (operator && typeof operator === STRING) {
+                    filter.operator = operatorMap[operator.toLowerCase()] || operator;
+                }
+
+                normalizeOperator(filter);
+            }
+        }
+    }
+
     function normalizeFilter(expression) {
         if (expression && !isEmptyObject(expression)) {
             if (isArray(expression) || !expression.filters) {
@@ -385,6 +429,9 @@
                     filters: isArray(expression) ? expression : [expression]
                 }
             }
+
+            normalizeOperator(expression);
+
             return expression;
         }
     }
@@ -1410,7 +1457,7 @@
          * <i>Supported filter operators/aliases are</i>:
          * <ul>
          * <li><strong>Equal To</strong>: "eq", "==", "isequalto", "equals", "equalto", "equal"</li>
-         * <li><strong>Not Equal To</strong>: "neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "not", "ne"</li>
+         * <li><strong>Not Equal To</strong>: "neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "ne"</li>
          * <li><strong>Less Then</strong>: "lt", "<", "islessthan", "lessthan", "less"</li>
          * <li><strong>Less Then or Equal To</strong>: "lte", "<=", "islessthanorequalto", "lessthanequal", "le"</li>
          * <li><strong>Greater Then</strong>: "gt", ">", "isgreaterthan", "greaterthan", "greater"</li>
