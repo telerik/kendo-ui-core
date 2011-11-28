@@ -56,7 +56,7 @@ body
 #kendo-themebuilder label
 {
     display: inline-block;
-    width: 56%;
+    width: 50%;
     padding-right: 4%;
     text-align: right;
     color: #afafaf;
@@ -126,7 +126,7 @@ body
 #kendo-themebuilder .k-combobox,
 #kendo-themebuilder .k-shadowinput
 {
-    width: 90px;
+    width: 100px;
     margin-bottom: 5px;
 }
 
