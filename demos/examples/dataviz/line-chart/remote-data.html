@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Basic usage</title>
+        <title>Binding to remote data</title>
         <!-- css -->
         <link href="../../shared/styles/examples.css" rel="stylesheet"/>
         <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
@@ -21,41 +21,72 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Basic usage</div>
+        <div class="description">Binding to remote data</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <div id="chart" style="width:650px; height:450px;margin: 0 auto;"></div>
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    <strong>Note:</strong>
+                    Security restrictions in Chrome prevent this
+                    example from working when the page is
+                    loaded from the file system (via file:// protocol).
+                </p>
+            </div>
+            <div style="margin-right: 220px;">
+                <div id="chart" style="width:500px; height:450px;margin: 0 auto;"></div>
+            </div>
             <script>
                 function createChart() {
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin") || "default",
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "../js/spain-electricity.json",
+                                    dataType: "json"
+                                }
+                            },
+                            sort: {
+                                field: "year",
+                                dir: "asc"
+                            }
+                        },
                         title: {
-                            text: "Internet Users"
+                            text: "Spain electricity production (GWh)"
                         },
                         legend: {
-                            position: "bottom"
+                            position: "top"
                         },
                         seriesDefaults: {
                             type: "line"
                         },
-                        series: [{
-                            name: "World",
-                            data: [15.7, 16.7, 20, 23.5, 26.6]
+                        series:
+                        [{
+                            field: "nuclear",
+                            name: "Nuclear"
                         }, {
-                            name: "United States",
-                            data: [67.96, 68.93, 75, 74, 78]
+                            field: "hydro",
+                            name: "Hydro"
+                        }, {
+                            field: "wind",
+                            name: "Wind"
                         }],
-                        valueAxis: {
+                        categoryAxis: {
+                            field: "year",
                             labels: {
-                                format: "{0}%"
+                                rotation: -90
                             }
                         },
-                        categoryAxis: {
-                            categories: [2005, 2006, 2007, 2008, 2009]
+                        valueAxis: {
+                            labels: {
+                                format: "{0:N0}"
+                            },
+                            majorUnit: 10000
                         },
                         tooltip: {
                             visible: true,
-                            format: "{0}%"
+                            format: "{0:N0}"
                         }
                     });
                 }

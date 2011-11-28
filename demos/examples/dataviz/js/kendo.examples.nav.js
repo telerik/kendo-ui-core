@@ -27,10 +27,10 @@ var categories = {
             spriteCssClass: "chartIcon",
             items: [
                 {
-                    text: "Basic usage bar chart",
+                    text: "Basic usage",
                     url: "bar-charts/index.html"
                 }, {
-                    text: "Basic usage column chart",
+                    text: "Column chart",
                     url: "bar-charts/column.html"
                 }, {
                     text: "Binding to remote data",
@@ -48,6 +48,9 @@ var categories = {
                     text: "Basic usage",
                     url: "line-chart/index.html"
                 }, {
+                    text: "Binding to remote data",
+                    url: "line-chart/remote-data.html"
+                }, {
                     text: "Binding to local data",
                     url: "line-chart/local-data.html"
                 }
@@ -57,8 +60,17 @@ var categories = {
             spriteCssClass: "chartIcon",
             items: [
                 {
-                    text: "Pie Chart",
+                    text: "Basic usage",
                     url: "pie-chart/index.html"
+                }, {
+                    text: "Pie labels",
+                    url: "pie-chart/pie-labels.html"
+                }, {
+                    text: "Binding to remote data",
+                    url: "pie-chart/remote-data.html"
+                }, {
+                    text: "Binding to local data",
+                    url: "pie-chart/local-data.html"
                 }
             ]
         }, {

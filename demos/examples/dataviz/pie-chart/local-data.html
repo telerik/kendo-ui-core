@@ -3,7 +3,7 @@
     <head>
         <!-- meta -->
         <!-- meta -->
-        <title>Basic usage</title>
+        <title>Binding to local data</title>
         <!-- css -->
         <link href="../../shared/styles/examples.css" rel="stylesheet"/>
         <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
@@ -20,13 +20,33 @@
         <!-- nav -->
         <!-- nav -->
         <!-- description -->
-        <div class="description">Basic usage</div>
+        <div class="description">Binding to local data</div>
         <!-- description -->
         <div id="example" class="k-content">
             <div style="margin-right:210px;">
                 <div id="chart" style="width:500px; height:400px;margin: 0 auto;"></div>
             </div>
             <script>
+                var data = [
+                    {
+                        "source": "Hydro",
+                        "percentage": 22,
+                        "explode": true
+                    },
+                    {
+                        "source": "Solar",
+                        "percentage": 2
+                    },
+                    {
+                        "source": "Nuclear",
+                        "percentage": 49
+                    },
+                    {
+                        "source": "Wind",
+                        "percentage": 27
+                    }
+                ];
+
                 function createChart() {
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin") || "default",
@@ -36,28 +56,19 @@
                         legend: {
                             position: "bottom"
                         },
-                        seriesDefaults: {
-                            labels: {
-                                visible: true,
-                                format: "{0}%"
-                            }
+                        dataSource: {
+                            data: data
                         },
                         series: [{
                             type: "pie",
-                            data: [ {
-                                category: "Hydro",
-                                value: 22
-                            }, {
-                                category: "Solar",
-                                value: 2
-                            }, {
-                                category: "Nuclear",
-                                value: 49
-                            }, {
-                                category: "Wind",
-                                value: 27
-                            } ]
-                        }]
+                            field: "percentage",
+                            categoryField: "source",
+                            explodeField: "explode"
+                        }],
+                        tooltip: {
+                            visible: true,
+                            template: "${ category } - ${ value }%"
+                        }
                     });
                 }
 
