@@ -131,7 +131,7 @@
          "price": 12.00,
          "image": "chicken-teriyaki.jpg",
          "category": "Hot Dishes",
-         "description": "Sautéed chicken with teiyaki sauce.",
+         "description": "Sauted chicken with teiyaki sauce.",
          "featured": false
 	},
 	{
@@ -140,7 +140,7 @@
          "price": 13.50,
          "image": "salmon-teriyaki.jpg",
          "category": "Hot Dishes",
-         "description": "Sautéed salmon with teriyaki sauce.",
+         "description": "Sauted salmon with teriyaki sauce.",
          "featured": true
 	},
 	{
