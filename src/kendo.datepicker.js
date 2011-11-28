@@ -79,6 +79,7 @@
     keys = kendo.keys,
     template = kendo.template,
     DIV = "<div />",
+    SPAN = "<span />",
     CLICK = (touch ? "touchend" : "click"),
     OPEN = "open",
     CLOSE = "close",
@@ -663,8 +664,8 @@
             wrapper = element.parents(".k-datepicker");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap(DIV).parent().addClass("k-picker-wrap k-state-default");
-                wrapper = wrapper.wrap(DIV).parent();
+                wrapper = element.wrap(SPAN).parent().addClass("k-picker-wrap k-state-default");
+                wrapper = wrapper.wrap(SPAN).parent();
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
