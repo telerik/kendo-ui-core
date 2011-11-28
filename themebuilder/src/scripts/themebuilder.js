@@ -52,11 +52,15 @@
                     changeHandler = that.options.colorPickerChange,
                     value = that._updateColorPreview();
 
-                if (value == "transparent") {
-                    this.value("#000000");
+                if (rgbValuesRe.test(value)) {
+                    value = toHex(value);
                 }
 
-                that.value(ColorEngine.css2hex(value));
+                if (!value) {
+                    value = "transparent";
+                }
+
+                that.value(value);
 
                 if (changeHandler) {
                     changeHandler.call(that, {
@@ -72,6 +76,14 @@
         }),
         hexValueRe = /^#([0-9a-f]{3}){1,2}$/i,
         rgbValuesRe = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/gi,
+        toHex = function(value) {
+            return value.replace(rgbValuesRe, function(match, r, g, b) {
+                function pad(x) { return x.length == 1 ? "0" + x : x }
+                return "#" + pad((+r).toString(16)) +
+                             pad((+g).toString(16)) +
+                             pad((+b).toString(16));
+            });
+        },
         LessConstants = kendo.Observable.extend({
             // TODO: can this be converted to an array-like object?
             init: function(constants) {
@@ -174,12 +186,7 @@
                         }
 
                         if (rgbValuesRe.test(value)) {
-                            value = value.replace(rgbValuesRe, function(match, r, g, b) {
-                                function pad(x) { return x.length == 1 ? "0" + x : x }
-                                return "#" + pad((+r).toString(16)) +
-                                             pad((+g).toString(16)) +
-                                             pad((+b).toString(16));
-                            });
+                            value = toHex(value);
                         }
 
                         if (processors[property]) {

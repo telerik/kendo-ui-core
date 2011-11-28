@@ -155,7 +155,11 @@
                 colorPickerControl.value("");
                 colorPickerControl.trigger("change");
 
-                equals(colorPickerControl.value(), "#000000");
+                var litmus = $("<div />").appendTo(document.body);
+
+                equals(colorPickerControl.value(), litmus.css("backgroundColor"));
+
+                litmus.remove();
             });
 
             test("preview bgcolor is changed upon init", function() {
@@ -177,6 +181,14 @@
                 colorPicker.data("kendoColorPicker").trigger("change");
 
                 equals(called, 1);
+            });
+
+            test("accepts rgba values", function() {
+                var called = 0;
+
+                colorPicker = $("<input value='rgba(0,0,0,.25)' />").appendTo(document.body).kendoColorPicker();
+
+                equals(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-input").val()), "rgba(0,0,0,.25)");
             });
 
             var constant = function(target, property, values) {
@@ -504,15 +516,27 @@
             /* css2hex */
 
             test("Convert CSS RGB Black to HEX", function() {
-                var hex = ColorEngine.css2hex("RGB(0, 0, 0)");
+                var hex = ColorEngine.css2hex("rgb(0, 0, 0)");
 
                 equals(hex, "#000000");
             });
 
             test("Convert CSS RGB White to HEX", function() {
-                var hex = ColorEngine.css2hex("RGB(255, 255, 255)");
+                var hex = ColorEngine.css2hex("rgb(255, 255, 255)");
 
                 equals(hex, "#ffffff");
+            });
+
+            test("Does not convert rgba to hex", function() {
+                var hex = ColorEngine.css2hex("rgba(255,255,255,.25)");
+
+                equals(hex, "rgba(255,255,255,.25)");
+            });
+
+            test("Returns black on empty value", function() {
+                var hex = ColorEngine.css2hex("");
+
+                equals(hex, "#000000");
             });
 
             /* shorthex2hex */

@@ -6,7 +6,7 @@
     }
 
     $.extend(ColorEngine, {
-        _CssRgb: /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(,\s*(\d+)\s*)?\)/i,
+        _CssRgb: /rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i,
         _CssHex: /^#(([0-9a-f]{3})|([0-9a-f]{6}))$/i,
 
         isHex: function(testee) {
@@ -39,11 +39,10 @@
         },
 
         rgb2hex: function(rgb) {
-            var result = ['#'];
-
-            var red = rgb.red.toString(16),
-                    green = rgb.green.toString(16),
-                    blue = rgb.blue.toString(16);
+            var result = ['#'],
+                red = rgb.red.toString(16),
+                green = rgb.green.toString(16),
+                blue = rgb.blue.toString(16);
 
             if (red.length < 2) result[result.length] = "0";
             result[result.length] = red;
@@ -61,16 +60,26 @@
             if (ColorEngine.isHex(cssColor)) {
                 return ColorEngine.hex2rgb(cssColor);
             } else if (ColorEngine.isCssRgb(cssColor)) {
-                var tmp = ColorEngine._CssRgb.exec(cssColor);
-                return {
-                    red: parseInt(tmp[1], 10),
-                    green: parseInt(tmp[2], 10),
-                    blue: parseInt(tmp[3], 10)
-                };
+                var tmp = ColorEngine._CssRgb.exec(cssColor),
+                    result = {
+                        red: parseInt(tmp[1], 10),
+                        green: parseInt(tmp[2], 10),
+                        blue: parseInt(tmp[3], 10)
+                    };
+
+                if (tmp[5]) {
+                    result.alpha = parseFloat(tmp[5]);
+                }
+
+                return result;
             }
         },
 
         css2hex: function(cssColor) {
+            if (cssColor == "" || /rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d*(\.\d+)?)\s*\)/i.test(cssColor)) {
+                return cssColor || "#000000";
+            }
+
             return ColorEngine.rgb2hex(ColorEngine.css2rgb(cssColor));
         },
 
