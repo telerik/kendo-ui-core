@@ -426,7 +426,7 @@ a.bigButton:hover
 
 .learnBlock
 {
-    margin: 33px 56px 0 0;
+    margin: 54px 56px 0 0;
     float: right;
     line-height: 1.692em;
     font-size: 13px;
@@ -626,6 +626,10 @@ a.bigButton
 .comboBoxIcon { background-position: 0 -230px; }
 .dropDownListIcon { background-position: 0 -260px; }
 .chartIcon { background-position: 0 -290px; }
+.chartBarIcon { background-position: -20px -290px; }
+.chartLineIcon { background-position: -20px -350px; }
+.chartPieIcon { background-position: -20px -380px; }
+.chartScatterIcon { background-position: -20px -410px; }
 .gridIcon { background-position: 0 -320px; }
 .menuIcon { background-position: 0 -350px; }
 .panelBarIcon { background-position: 0 -380px; }
@@ -644,6 +648,7 @@ a.bigButton
 .numerictextboxIcon { background-position: -50px -440px; }
 .timepickerIcon { background-position: -50px -470px; }
 .validatorIcon { background-position: -50px -500px; }
+.globalizationIcon { background-position: -50px -530px; }
 
 /*example content*/
 
