@@ -73,14 +73,16 @@
 
     function appLinkMouseUp(e) {
         var link = $(e.currentTarget),
-            href = link.attr("href") || "javascript:;"; // Don't navigate or report errors if href is not set.
+            href = link.attr("href");
 
         if (!e.isDefaultPrevented()) {
             // Prevent iOS address bar progress display for in app navigation
-            link.attr("href", "#!");
-            setTimeout(function() { link.attr("href", href) });
+            if (href) {
+                link.attr("href", "#!");
+                setTimeout(function() { link.attr("href", href) });
+                history.navigate(href);
+            }
 
-            history.navigate(href);
             e.preventDefault();
         }
     }
