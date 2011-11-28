@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KendoCRUDService.Models;
+using KendoCRUDService.Common;
+using System.Web.Script.Serialization;
 
 namespace KendoCRUDService.Controllers
 {
@@ -11,37 +13,38 @@ namespace KendoCRUDService.Controllers
     {
         public ActionResult Index()
         {
-            return Json(ProductRepository.All(), JsonRequestBehavior.AllowGet);
-        }        
-
-        [HttpPost]
-        public JsonResult Update(IEnumerable<ProductModel> models)
+            return this.Jsonp(ProductRepository.All());
+        }                       
+        
+        public JsonResult Update()
         {
-            if (ModelState.IsValid)
+            var models = this.DeserializeObject<IEnumerable<ProductModel>>("models");
+            if (models != null)
             {
                 ProductRepository.Update(models);
             }
-            return Json(models);
+            return this.Jsonp(models);
         }
-
-        [HttpPost]
-        public ActionResult Destroy(IEnumerable<ProductModel> product)
+        
+        public ActionResult Destroy()
         {
-            if (ModelState.IsValid)
+            var products = this.DeserializeObject<IEnumerable<ProductModel>>("models");
+
+            if (products != null)
             {
-                ProductRepository.Delete(product);
+                ProductRepository.Delete(products);
             }
-            return Json(product);
+            return this.Jsonp(products);
         }
-
-        [HttpPost]
-        public ActionResult Create(IEnumerable<ProductModel> product)
+        
+        public ActionResult Create()
         {
-            if (ModelState.IsValid)
+            var products = this.DeserializeObject<IEnumerable<ProductModel>>("models");
+            if (products != null)
             {
-                ProductRepository.Insert(product);
+                ProductRepository.Insert(products);
             }
-            return Json(product);
+            return this.Jsonp(products);
         }
     }
 }
