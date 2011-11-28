@@ -1841,7 +1841,7 @@
                 i;
 
             for (i = 0; i < count; i++) {
-                content = options.categories[i];
+                content = defined(options.categories[i]) ? options.categories[i] : "";
 
                 if (labelOptions.template) {
                     labelTemplate = baseTemplate(labelOptions.template);
