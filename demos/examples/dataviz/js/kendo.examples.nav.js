@@ -15,11 +15,11 @@ var categories = {
             spriteCssClass: "chartIcon",
             items: [
                 {
+                    text: "Methods",
+                    url: "api/methods.html"
+                }, {
                     text: "Events",
                     url: "api/events.html"
-                }, {
-                    text: "API",
-                    url: "api/api.html"
                 }
             ]
         }, {
