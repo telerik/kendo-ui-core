@@ -1,3 +1,5 @@
+*.dll
+!**/References/*.dll
 *.gpState
 *.pdb
 *.suo
