@@ -42,7 +42,7 @@
                     if (type === "string") {
                         format = "'{1}'";
                     } else if (type === "date") {
-                        format = "datetime'{1:yyyy-MM-ddThh:mm:ss}'";
+                        format = "datetime'{1:yyyy-MM-ddTHH:mm:ss}'";
                     } else {
                         format = "{1}";
                     }
@@ -58,7 +58,6 @@
                     }
 
                     filter = kendo.format(format, filter, value, field);
-                    console.log(filter);
                 }
             }
 
