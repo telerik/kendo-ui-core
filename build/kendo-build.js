@@ -173,19 +173,25 @@ function copyTextFile(src, dest) {
     writeText(dest, readText(src));
 }
 
-var BOM = 0xfeff;
 function readText(fileName) {
-    var data = fs.readFileSync(fileName, "utf8");
-
-    if (data.charCodeAt(0) == BOM) {
-        data = data.substring(1);
-    }
-
-    return data;
+    return fs.readFileSync(fileName, "utf8");
 }
 
 function writeText(fileName, text) {
     fs.writeFileSync(fileName, text, "utf8");
+}
+
+var BOM = 0xfeff;
+function stripBOM(text) {
+    return hasBOM(text) ? text.substring(1) : text;
+}
+
+function addBOM(text) {
+    return hasBOM(text) ? text : String.fromCharCode(BOM) + text;
+}
+
+function hasBOM(text) {
+    return text.charCodeAt(0) == BOM;
 }
 
 function minifyJs(source) {
@@ -230,16 +236,19 @@ function mkdir(newDir) {
 }
 
 // Exports ====================================================================
+exports.addBOM = addBOM;
 exports.copyDirSyncRecursive = copyDirSyncRecursive;
 exports.copyFileSync = copyFileSync;
 exports.copyTextFile = copyTextFile;
 exports.generateVersion = generateVersion;
+exports.hasBOM = hasBOM;
 exports.merge = merge;
 exports.minifyJs = minifyJs;
 exports.mkdir = mkdir;
 exports.processFilesRecursive = processFilesRecursive;
 exports.readText = readText;
 exports.rmdirSyncRecursive = rmdirSyncRecursive;
+exports.stripBOM = stripBOM;
 exports.template = template;
 exports.writeText = writeText;
 exports.zip = zip;
