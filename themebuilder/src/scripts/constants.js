@@ -1,5 +1,6 @@
 (function(){
-    var constant = function(target, property, values){
+    var context = window.parent,
+        constant = function(target, property, values){
             return {
                 target: target,
                 property: property,
@@ -22,7 +23,7 @@
                 infer: function() {
                     var icon = $("<div class='k-icon' />")
                             .css("display", "none")
-                            .appendTo(document.body),
+                            .appendTo(context.document.body),
                         result = icon.css("background-image")
                             .replace(/url\(["']?(.*?)\/sprite\.png["']?\)$/i, "\"$1\"");
 
@@ -177,11 +178,13 @@
             }
         };
 
-    new kendo.ThemeBuilder({
+    window.themeBuilder = new kendo.ThemeBuilder({
         template: lessTemplate,
         constants: new kendo.LessConstants(constants),
         constantsHierarchy: constantsHierarchy
     });
 
-    window.parent.kendoThemeBuilder.open();
+    if (typeof context.kendoThemeBuilder != "undefined") {
+        context.kendoThemeBuilder.open();
+    }
 })();

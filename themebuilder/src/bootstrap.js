@@ -39,6 +39,10 @@
         that.container.fadeIn("fast");
 
         that._createInterfaceFrame();
+
+        if (that.iframe.themeBuilder) {
+            that.open();
+        }
     }
 
     ThemeBuilderInterface.prototype = {
