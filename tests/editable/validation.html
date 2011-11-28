@@ -164,6 +164,22 @@
                 equal(input.data("kendo-type"), "date");
             });
 
+            test("for field of type date format attrr is rendered", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "date"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = new Editable(div, { fields: [{ field: "foo", format: "format" }], model: model }),
+                    input = div.find(":input");
+
+                equal(input.attr(kendo.attr("format")), "format");
+            });
+
             test("for field of type boolean data-kendo-type=boolean attr is rendered", function() {
                 var MyModel = Model.define({
                         fields: {
