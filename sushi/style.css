@@ -2,6 +2,7 @@
 {
     color: green;
     font-size: .8rem;
+    display: block;
 }
 
 .item-list.km-list > li
@@ -13,26 +14,33 @@
 .item-list img,
 #details img
 {
-    border-radius: 8px;
-    -webkit-box-shadow: 0 2px 3px #333;
-    box-shadow: 0 2px 3px #333;
     width: 4rem;
     height: 4rem;
     float: left;
     margin-right: 1rem;
+    -webkit-box-shadow: 0 2px 3px #333;
+    box-shadow: 0 2px 3px #333;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
 }
 
-.item-list h2 {
-    font-size: 1.0rem;
+.item-list h2
+{
     margin: 0;
     display: inline-block;
+    font-size: 1.4rem;
+    margin-top: 1.4rem;
 }
 
-.item-list a.km-button {
-    float: right;
+.item-list a.km-button
+{
+    position: absolute;
+    right: .6rem;
+    bottom: .6rem;
 }
 
-.item-list a.details-link {
+.item-list a.details-link
+{
     display: block;
     text-decoration: none;
 }
@@ -63,19 +71,29 @@
     background-position: 99% 50%;
 }
 
-.price {
-    color: #787878;
-    text-shadow: 1px 1px white;
-    font-size: 0.8rem;
-    display: block;
+.price
+{
+    font-size: 2rem;
+    color: #ccc;
+    text-shadow: 0 -1px 1px #333;
+    line-height: normal;
 }
 
-#details .km-content {
+.item-list .price
+{
+    display: block;
+    font-size: 1.4rem;
+    float: right;
+}
+
+#details .km-content
+{
     padding: 1rem;
     -webkit-box-sizing: border-box;
 }
 
-#details .km-content p {
+#details .km-content p
+{
     margin-top: 1rem;
     font-size: .9rem;
     line-height: 1.2rem;
@@ -83,44 +101,55 @@
     text-shadow: 1px 1px white;
 }
 
-#details .km-content aside {
-    float: left;
-    margin-right: 1rem;
+#details .km-content aside
+{
+    display: block;
+    overflow: hidden;
 }
 
-#details img {
+#details img
+{
     width: 8.4em;
     height: 8.4em;
+    margin-right: 2rem;
     margin-bottom: 1rem;
 }
 
-#details .km-content aside .km-button {
-    margin-left: 2rem;
-}
-
-#details .km-content aside .price {
+#details .km-content aside .price
+{
     display: block;
     margin-bottom: 1rem;
-    margin-left: 4rem;
 }
 
-.details-link {
+.details-link
+{
     color: #000;
 }
 
-.km-android .details-link {
+.km-android .details-link
+{
     color: #fff;
 }
 
-#checkout {
+#checkout
+{
     margin: 1rem;
     display: block;
     text-align: center;
     font-size: 2rem;
 }
 
-.list-item-data {
+.list-item-data
+{
     float: right;
     font-weight: normal;
     color: rgb(146,	163, 189);
+}
+
+#cartList:empty:before
+{
+    content: "Your cart is empty.";
+    padding: 2rem;
+    line-height: 3.5rem;
+    color: #888;
 }

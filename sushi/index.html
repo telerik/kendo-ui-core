@@ -154,14 +154,13 @@
         </div>
 
         <script id="menuTemplate" type="text/x-kendo-template">
-            <a data-role="button" data-name="add" href="\\#">Add to cart</a>
-
             <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
                 <img src="images/${image}" />
-                <h2>${name}</h2>
                 <span class="price">&euro; ${price}</span>
+                <h2>${name}</h2>
                 <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added in your cart</span>
             </a>
+            <a data-role="button" data-name="add" href="\\#">Add</a>
         </script>
 
         <script id="cartItemTemplate" type="text/x-kendo-template">
