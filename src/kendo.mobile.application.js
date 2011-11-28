@@ -136,7 +136,7 @@
             previous.element.css("z-index", 0);
         }
 
-        if (that.back)
+        if (that.back && os.android)
             window.scrollBy(0,56);
 
         that.contents(previous, view).kendoAnimateTo(that.contents(view, previous), {effects: animationType, reverse: that.back, complete: callback});
