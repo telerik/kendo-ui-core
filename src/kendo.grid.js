@@ -1677,7 +1677,7 @@
                 cols = map(that.columns, function(column) {
                     width = column.width;
                     if (width && parseInt(width) != 0) {
-                        return kendo.format('<col style="width:{0}"/>', width);
+                        return kendo.format('<col style="width:{0}"/>', typeof width === STRING? width : width + "px");
                     }
 
                     return "<col />";
