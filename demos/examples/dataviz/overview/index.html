@@ -57,11 +57,11 @@
                             data: [42, 50, 50, 65, 60, 70, 42, 50, 50, 65, 60, 70]
                         }], [{
                             type: "pie",
-                            data: [187, 64, 51, 24],
+                            data: [{ value: 64, explode: true }, { value: 187 }, { value: 51 }, { value: 24 }],
                             padding: 30,
-                            startAngle: 60,
                             labels: {
-                                visible: true
+                                visible: true,
+                                template: "#= kendo.format('{0:P}', percentage) #"
                             }
                         }] ],
                         chartCategoryAxis = [
