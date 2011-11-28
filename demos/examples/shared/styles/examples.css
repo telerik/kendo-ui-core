@@ -527,9 +527,12 @@ a.bigButton
 
 /*left navigation*/
 
-#navWrap .k-panelbar
+#navWrap h3
 {
-    padding-top: 22px;
+    font-size: 1.333em;
+    font-weight: normal;
+    padding: .25em 0;
+    margin: 1.4375em 0 0;
 }
 
 #navWrap .k-panelbar,
@@ -549,8 +552,13 @@ a.bigButton
 #navWrap .k-item
 {
     padding-bottom: 2px;
-    padding-left: 8px;
+    padding-left: 0;
     padding-right: 8px;
+}
+
+#navWrap .k-item .k-item
+{
+    padding-left: 12px;
 }
 
 #navWrap .k-link
