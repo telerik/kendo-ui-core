@@ -100,6 +100,20 @@
                 equals(constants.serialize(), "@foo-color: #b4d455;");
             });
 
+            test("value of box-shadow color picker with inset shadow", function() {
+
+                var constants = new LessConstants({
+                        "@foo-color": constant(".k-widget", "box-shadow")
+                    }),
+                    themeBuilder = new ThemeBuilder({ template: '' });
+
+                themeBuilder.updateStyleSheet(".k-widget { box-shadow: inset 1px 1px 1px #b4d455; }");
+
+                constants.infer();
+
+                equals(constants.serialize(), "@foo-color: #b4d455;");
+            });
+
             var colorPicker;
 
             module("ColorPicker", {
