@@ -20,7 +20,7 @@
             var Query = kendo.data.Query;
 
             function compile(expression) {
-                return Query.filterExpr(expression).expression;
+                return Query.filterExpr(Query.normalizeFilter(expression)).expression;
             }
 
             test("and with one filter", function() {
@@ -227,13 +227,6 @@
                 equal(compile({
                     logic: "and",
                     filters: [ { field: "foo", value: 10, operator: "ne" } ]
-                }), "(d.foo != 10)");
-            });
-
-            test("not", function() {
-                equal(compile({
-                    logic: "and",
-                    filters: [ { field: "foo", value: 10, operator: "not" } ]
                 }), "(d.foo != 10)");
             });
 

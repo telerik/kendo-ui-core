@@ -350,6 +350,15 @@
                 equal(view[0].bar, "baz");
             });
 
+            test("filter operators are normalized", function() {
+                var dataSource = new DataSource({
+                    data: [{ id:1 }, { id: 2 }]
+                });
+
+                dataSource.filter( { field: "id", operator: "==", value: 1 });
+                equal(dataSource.filter().filters[0].operator, "eq");
+            });
+
             test("query should update the total if filtering is enabled", function() {
                 var dataSource = new DataSource({
                     data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }]
@@ -418,7 +427,7 @@
                 dataSource.query( { filter: [{ field: "age", operator: ">=", value: 1 },{ field: "age", operator: "<", value: 3 }] });
                 equal(dataSource.filter().filters.length, 2);
                 equal(dataSource.filter().filters[1].field, "age");
-                equal(dataSource.filter().filters[1].operator, "<");
+                equal(dataSource.filter().filters[1].operator, "lt");
                 equal(dataSource.filter().filters[1].value, 3);
             });
 
@@ -430,7 +439,7 @@
                 dataSource.query({ filter: { field: "age", operator: "==", value: 2 } });
                 ok($.isArray(dataSource.filter().filters));
                 equal(dataSource.filter().filters[0].field, "age");
-                equal(dataSource.filter().filters[0].operator, "==");
+                equal(dataSource.filter().filters[0].operator, "eq");
                 equal(dataSource.filter().filters[0].value, 2);
             });
 
