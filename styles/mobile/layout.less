@@ -882,7 +882,6 @@ body
     border-width: 0;
     .box-sizing(border-box);
     .border-radius(0);
-    .box-shadow(0 0 0 1px #333);
 }
 
 .km-tabstrip
@@ -911,6 +910,7 @@ body
     position: relative;
     overflow: hidden;
     display: block;
+    border-width: 0 0 1px 0;
 }
 
 .km-android .km-toolbar,
@@ -1277,8 +1277,13 @@ body
     padding: 1em;
 }
 
-.km-list,
 .km-content
+{
+    background: #ccc;
+}
+
+.km-list,
+.km-content.km-listed
 {
     background: #fff;
 }
@@ -1622,4 +1627,5 @@ input[type=checkbox]
 .km-rightitem ~ .km-view-title
 {
     position: absolute;
+    left: 0;
 }

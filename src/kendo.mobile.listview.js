@@ -147,6 +147,8 @@
                     .children("ul")
                     .addClass("km-list");
             }
+
+            that.element.parents(".km-content").toggleClass("km-listed", !inset); // iOS has white background when the list is not inset.
         }
     });
 
