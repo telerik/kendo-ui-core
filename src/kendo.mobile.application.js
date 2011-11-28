@@ -12,6 +12,7 @@
         iconMeta = kendo.template('<link rel="apple-touch-icon" href="${icon}" />'),
         buttonRolesSelector = toRoleSelector("button listview-link"),
         linkRolesSelector = toRoleSelector("tab"),
+        initialHeight = {},
         roleSelector = kendo.roleSelector;
 
     function toRoleSelector(string) {
@@ -27,12 +28,36 @@
         return div.find(roleSelector("view")).first();
     }
 
+    function hideBar(element) {
+        var compensation = 0, newHeight,
+            orientation = window.orientation + "";
+        element = $(this);
+
+        if (!initialHeight[orientation])
+            initialHeight[orientation] = $(window).height();
+
+        if (os.device == "iphone" || os.device == "ipod" || os.android) {
+            if (os.android) {
+                compensation = 56;
+            } else {
+                compensation = 60;
+            }
+
+            newHeight = initialHeight[orientation] + compensation;
+            if (newHeight != element.height()) {
+                element.height(newHeight);
+
+                setTimeout(function () {
+                    window.scrollTo(0,1);
+                }, 0);
+            }
+        }
+    }
+
     function hideAddressBar(element) {
         if (os.appMode) {
             return;
         }
-
-        var lastWidth = 0;
 
         if (os.android) {
             $(window).scroll(function() {
@@ -40,35 +65,8 @@
             });
         }
 
-        function hideBar() {
-            var pageWidth = element[0].offsetWidth,
-                compensation, content, item;
-
-            if (lastWidth === pageWidth) {
-                return;
-            }
-            lastWidth = pageWidth;
-
-            if (os.device == "iphone" || os.device == "ipod" || os.android) {
-                if (os.android) {
-                    compensation = 56;
-                } else {
-                    compensation = 60;
-                }
-
-                element.height($(window).height() + compensation);
-                item = $("<span/>").appendTo(element.find(".km-view:visible .km-content"));
-
-                setTimeout(function () {
-                    window.scrollTo(0,1);
-
-                    item.remove(); // Mobile Safari doesn't resize the flex box accordingly.
-                }, 0);
-            }
-        }
-
-        $(window).load(hideBar);
-        $(window).resize(hideBar);
+        $(window).load($.proxy(hideBar, element));
+        $(window).bind("orientationchange", $.proxy(hideBar, element));
     }
 
     function appLinkMouseUp(e) {
@@ -119,7 +117,7 @@
 
     function ViewSwitcher(previous, view) {
         var that = this,
-            callback = function() { previous.element.hide(); window.scrollTo(0,1); },
+            callback = function() { previous.element.hide(); },
             animationType;
 
         that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(history.url().params);
@@ -137,6 +135,9 @@
             view.element.css("z-index", 1);
             previous.element.css("z-index", 0);
         }
+
+        if (that.back)
+            window.scrollBy(0,56);
 
         that.contents(previous, view).kendoAnimateTo(that.contents(view, previous), {effects: animationType, reverse: that.back, complete: callback});
         that.switchWith(previous.footer, view.footer);

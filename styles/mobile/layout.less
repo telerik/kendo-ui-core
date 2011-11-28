@@ -130,6 +130,7 @@ body
 .km-ios .km-view,
 .km-meego .km-view
 {
+    overflow: hidden;
     -webkit-transform: translatez(0);
 }
 
@@ -144,6 +145,7 @@ body
     .box-align(stretch);
     display: block;
     width: auto;
+    overflow: hidden;
     position: relative;
     display: ~"table-row\9";
 }
@@ -1240,6 +1242,12 @@ body
     margin: 0;
 }
 
+.km-android .km-listinset > li,
+.km-android .km-listgroupinset > li
+{
+    margin-top: 0;
+}
+
 .km-android .km-listview .km-list
 {
     border-top: 1px solid #333;
@@ -1279,15 +1287,15 @@ body
     padding: 1em;
 }
 
+.km-list,
 .km-content
 {
-    background: #c4ccd5 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAABCAYAAAASC7TOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABRJREFUeNpi/P//PwMW4AAiAAIMAFIpAz/zYoI+AAAAAElFTkSuQmCC);
+    background: #fff;
 }
 
-.km-list,
-.km-content.km-listed
+.km-ios .km-insetcontent
 {
-    background: #fff;
+    background: #c4ccd5 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAABCAYAAAASC7TOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABRJREFUeNpi/P//PwMW4AAiAAIMAFIpAz/zYoI+AAAAAElFTkSuQmCC);
 }
 
 .km-android .km-list
