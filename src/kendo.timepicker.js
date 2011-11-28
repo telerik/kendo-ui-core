@@ -75,6 +75,7 @@
         DISABLED = "disabled",
         LI = "li",
         DIV = "<div/>",
+        SPAN = "<span/>",
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
@@ -700,8 +701,8 @@
             wrapper = element.parents(".k-timepicker");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap(DIV).parent().addClass("k-picker-wrap k-state-default");
-                wrapper = wrapper.wrap(DIV).parent();
+                wrapper = element.wrap(SPAN).parent().addClass("k-picker-wrap k-state-default");
+                wrapper = wrapper.wrap(SPAN).parent();
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
