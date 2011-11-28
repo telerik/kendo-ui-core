@@ -24,7 +24,7 @@
         <div class="description">Scatter</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <div id="chart" style="width:650px; height:450px;margin: 0 auto; background: url('http://www.webinzicht.nl/hersenspinsels/media/downloads/wallpaper/cool-blue-water.jpg')"></div>
+            <div id="chart" style="width:650px; height:450px;margin: 0 auto;"></div>
             <script>
                 function createChart() {
                     $("#chart").kendoChart({
@@ -33,7 +33,7 @@
                             position: "bottom"
                         },
                         seriesDefaults: {
-                            type: "scatter"
+                            type: "scatterLine"
                         },
                         series: [{
                             name: "World",
@@ -41,10 +41,7 @@
                         }, {
                             name: "United States",
                             data: scatterPoints(200)
-                        }],
-                        chartArea: {
-                            background: ""
-                        }
+                        }]
                     });
                 }
 
