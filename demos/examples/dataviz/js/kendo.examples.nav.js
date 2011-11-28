@@ -17,8 +17,7 @@ var categories = {
                 {
                     text: "Events",
                     url: "chart/events.html"
-                },
-                {
+                }, {
                     text: "API",
                     url: "chart/api.html"
                 }
@@ -28,12 +27,14 @@ var categories = {
             spriteCssClass: "chartIcon",
             items: [
                 {
-                    text: "Basic usage",
-                    url: "chart/index.html"
-                },
-                {
+                    text: "Basic usage bar chart",
+                    url: "bar-charts/index.html"
+                }, {
+                    text: "Basic usage column chart",
+                    url: "bar-charts/column.html"
+                }, {
                     text: "Binding to remote data",
-                    url: "chart/remote-data.html"
+                    url: "bar-charts/remote-data.html"
                 }
             ]
         }, {
@@ -41,8 +42,11 @@ var categories = {
             spriteCssClass: "chartIcon",
             items: [
                 {
+                    text: "Basic usage",
+                    url: "line-chart/index.html"
+                }, {
                     text: "Binding to local data",
-                    url: "chart/local-data.html"
+                    url: "line-chart/local-data.html"
                 }
             ]
         }, {
@@ -51,7 +55,7 @@ var categories = {
             items: [
                 {
                     text: "Pie Chart",
-                    url: "chart/pie-chart.html"
+                    url: "pie-chart/index.html"
                 }
             ]
         }, {
@@ -60,14 +64,12 @@ var categories = {
             items: [
                 {
                     text: "Scatter chart",
-                    url: "chart/scatter.html"
+                    url: "scatter-charts/index.html"
                 }, {
                     text: "Scatter line chart",
-                    url: "chart/scatter.html"
+                    url: "scatter-charts/scatter-line.html"
                 }
             ]
         }
     ]
 };
-
-
