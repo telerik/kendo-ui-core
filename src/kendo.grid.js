@@ -882,9 +882,12 @@
          * grid.addRow();
          */
         addRow: function() {
-            var that = this;
+            var that = this,
+                dataSource = that.dataSource;
+
             if ((that.editable && that.editable.end()) || !that.editable) {
-                var model = that.dataSource.insert({}),
+                var index = dataSource.indexOf((dataSource.view() || [])[0]) || 0,
+                    model = dataSource.insert(index, {}),
                     id = model.id(),
                     cell = that.table.find("tr[" + kendo.attr("id") + "=" + id + "] > td:not(.k-group-cell,.k-hierarchy-cell)").first();
 

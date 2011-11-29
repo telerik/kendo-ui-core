@@ -87,7 +87,12 @@
                         pageable: true,
                         height: 400,
                         toolbar: ["create", "save", "cancel"],
-                        columns: ["ProductName", { field: "UnitPrice", format: "{0:c}" }, "UnitsInStock", "Discontinued", { command: "destroy" }],
+                        columns: [
+                            "ProductName",
+                            { field: "UnitPrice", format: "{0:c}", width: "150px" },
+                            { field: "UnitsInStock", width: "150px" },
+                            { field: "Discontinued", width: "100px" },
+                            { command: "destroy", width: "100px" }],
                         editable: true
                     });
                 });
