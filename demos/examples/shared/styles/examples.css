@@ -24,7 +24,7 @@ body,
 html
 {
     overflow-y:scroll;
-    font:75%/1.5 arial,helvetica,sans-serif;
+    font:75% arial,helvetica,sans-serif;
 }
 
 #examplesThemeChooser .k-arrow-down,
