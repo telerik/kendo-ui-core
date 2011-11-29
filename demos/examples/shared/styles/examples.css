@@ -303,7 +303,7 @@ a.bigButton:hover,
 #navi ul
 {
     float: right;
-    margin-top: 3px;
+    margin-top: 4px;
     vertical-align: top;
 }
 
@@ -376,7 +376,7 @@ a.bigButton:hover,
     left: 50%;
     margin: 0 0 0 -7px;
     position: absolute;
-    top: 70px;
+    top: 69px;
     width: 0;
 }
 
@@ -391,7 +391,6 @@ a.bigButton:hover,
 
 .overview li a#download
 {
-    margin-top: 2px;
     border-top: 1px solid #999;
     font-size: 18px;
     line-height: 18px;
