@@ -258,13 +258,15 @@
         },
 
         _eventCoordinates: function(e) {
-            var chart = this,
-                chartOffset = chart.element.offset(),
+            var element = this.element,
+                offset = element.offset(),
+                paddingLeft = parseInt(element.css("paddingLeft"), 10),
+                paddingTop = parseInt(element.css("paddingTop"), 10),
                 win = $(window);
 
             return({
-                x: e.clientX - chartOffset.left + win.scrollLeft(),
-                y: e.clientY - chartOffset.top + win.scrollTop()
+                x: e.clientX - offset.left - paddingLeft + win.scrollLeft(),
+                y: e.clientY - offset.top - paddingTop + win.scrollTop()
             });
         },
 
