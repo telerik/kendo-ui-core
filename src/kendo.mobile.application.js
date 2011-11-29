@@ -76,12 +76,15 @@
         $(window).bind("orientationchange", $.proxy(hideBar, element));
     }
 
+    function isInternal(link) {
+        return link.data(kendo.ns + "rel") != "external";
+    }
+
     function appLinkMouseUp(e) {
         var link = $(e.currentTarget),
-            internal = link.data(kendo.ns + "rel") != "external",
             href = link.attr("href");
 
-        if (!e.isDefaultPrevented() && internal) {
+        if (!e.isDefaultPrevented() && isInternal(link)) {
             // Prevent iOS address bar progress display for in app navigation
             if (href) {
                 link.attr("href", "#!");
@@ -94,7 +97,7 @@
     }
 
     function appLinkClick(e) {
-        if($(e.currentTarget).data(kendo.ns + "rel") !== "external") {
+        if(isInternal($(e.currentTarget))) {
             e.preventDefault();
         }
     }
