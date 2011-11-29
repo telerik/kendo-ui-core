@@ -11,7 +11,7 @@
         <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
         <!-- css -->
         <!-- script -->
-        <script src="../../../../src/jquery.js"></script>
+        <script src="../../../../src/jquery.min.js"></script>
         <script src="../../../../src/kendo.core.js"></script>
         <script src="../../../../src/kendo.fx.js"></script>
         <script src="../../../../src/kendo.panelbar.js"></script>
@@ -23,31 +23,31 @@
         <!-- description -->
         <!-- description -->
         <div id="example" class="k-content">
-			<div id="organizer">
-				<ul id="panelbar">
+            <div id="organizer">
+                <ul id="panelbar">
                 <li class="k-state-active">
                     <span class="k-link k-state-selected">My Teammates</span>
-					<div style="padding: 10px;">
-						<div class="teamMate">
-							<img src="../content/panelbar/andrew.jpg" alt="Andrew Fuller">
-							<h2>Andrew Fuller</h2>
-							<p>Team Lead</p>
-						</div>
-						<div class="teamMate">
-							<img src="../content/panelbar/nancy.jpg" alt="Nancy Leverling">
-							<h2>Nancy Leverling</h2>
-							<p>Sales Associate</p>
-						</div>
-						<div class="teamMate">
-							<img src="../content/panelbar/robert.jpg" alt="Robert King">
-							<h2>Robert King</h2>
-							<p>Business System Analyst</p>
-						</div>
+                    <div style="padding: 10px;">
+                        <div class="teamMate">
+                            <img src="../content/panelbar/andrew.jpg" alt="Andrew Fuller">
+                            <h2>Andrew Fuller</h2>
+                            <p>Team Lead</p>
+                        </div>
+                        <div class="teamMate">
+                            <img src="../content/panelbar/nancy.jpg" alt="Nancy Leverling">
+                            <h2>Nancy Leverling</h2>
+                            <p>Sales Associate</p>
+                        </div>
+                        <div class="teamMate">
+                            <img src="../content/panelbar/robert.jpg" alt="Robert King">
+                            <h2>Robert King</h2>
+                            <p>Business System Analyst</p>
+                        </div>
                     </div>
                 </li>
                 <li>
                     Projects
-					<ul>
+                    <ul>
                         <li>New Business Plan</li>
                         <li>
                             Sales Forecasts
@@ -60,63 +60,63 @@
                         </li>
                         <li>Sales Reports</li>
                     </ul>
-                    
+
                 </li>
-				<li>
-					Programs
-					<ul>
+                <li>
+                    Programs
+                    <ul>
                         <li>Monday</li>
-						<li>Tuesday</li>
-						<li>Wednesday</li>
-						<li>Thursday</li>
-						<li>Friday</li>
+                        <li>Tuesday</li>
+                        <li>Wednesday</li>
+                        <li>Thursday</li>
+                        <li>Friday</li>
                     </ul>
-				</li>
-				<li disabled="disabled">
+                </li>
+                <li disabled="disabled">
                     Communication
                 </li>
             </ul>
-				<div id="bottom"></div>
-			</div>
-			<style scoped>
-				#organizer {
-					width: 300px;
-					margin: 0 auto;
-					padding: 47px 0 0 0;
-					background: url('../content/panelbar/orgHead.png') transparent no-repeat 0 0;
-				}
-				#bottom {
-					width: 300px;
-					height: 90px;
-					background: url('../content/panelbar/orgFoot.png') transparent no-repeat 0 0;
-				}
-				.teamMate:after {
-					content: ".";
-					display: block;
-					height: 0;
-					line-height: 0;
-					clear: both;
-					visibility: hidden;
-				}
-				.teamMate h2 {
-					font-size: 1.4em;
-					font-weight: normal;
-					padding-top: 20px;
-				}
-				.teamMate p {
-					margin: 5px 0;
-				}
-				.teamMate img {
-					float: left;
-					margin: 5px 15px 5px 5px;
-					border: 1px solid #ccc;
-				}
-			</style>
+                <div id="bottom"></div>
+            </div>
+            <style scoped>
+                #organizer {
+                    width: 300px;
+                    margin: 0 auto;
+                    padding: 47px 0 0 0;
+                    background: url('../content/panelbar/orgHead.png') transparent no-repeat 0 0;
+                }
+                #bottom {
+                    width: 300px;
+                    height: 90px;
+                    background: url('../content/panelbar/orgFoot.png') transparent no-repeat 0 0;
+                }
+                .teamMate:after {
+                    content: ".";
+                    display: block;
+                    height: 0;
+                    line-height: 0;
+                    clear: both;
+                    visibility: hidden;
+                }
+                .teamMate h2 {
+                    font-size: 1.4em;
+                    font-weight: normal;
+                    padding-top: 20px;
+                }
+                .teamMate p {
+                    margin: 5px 0;
+                }
+                .teamMate img {
+                    float: left;
+                    margin: 5px 15px 5px 5px;
+                    border: 1px solid #ccc;
+                }
+            </style>
             <script>
                 $(document).ready(function() {
                     $("#panelbar").kendoPanelBar({
-						expandMode: "single"
-					});
+                        expandMode: "single"
+                    });
                 });
             </script>
         </div>
