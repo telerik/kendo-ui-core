@@ -16,7 +16,7 @@ var categories = {
             items: [
                 {
                     text: "Methods",
-                    url: "api/methods.html"
+                    url: "api/index.html"
                 }, {
                     text: "Events",
                     url: "api/events.html"
