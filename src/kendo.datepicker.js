@@ -385,16 +385,20 @@
 
             that._icon();
 
-            that.input = element
-                        .addClass("k-input")
-                        .bind({
-                            keydown: proxy(that._keydown, that),
-                            focus: function(e) {
-                                clearTimeout(that._bluring);
-                                that._inputWrapper.addClass(FOCUSED);
-                            },
-                            blur: proxy(that._blur, that)
-                        });
+            element
+                .addClass("k-input")
+                .bind({
+                    keydown: proxy(that._keydown, that),
+                    focus: function(e) {
+                        clearTimeout(that._bluring);
+                        that._inputWrapper.addClass(FOCUSED);
+                    },
+                    blur: proxy(that._blur, that)
+                })
+                .closest("form")
+                .bind("reset", function() {
+                    that.value(element[0].defaultValue);
+                });
 
 
             /**
