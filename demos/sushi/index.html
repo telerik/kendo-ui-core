@@ -3,6 +3,9 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Kendo Sushi</title>
+
+        <!-- Weinre Proxy, configure to your machine if you have it. -->
+        <!--<script src="http://bundev.telerik.com:8080/target/target-script-min.js"></script>-->
         <link rel="stylesheet" href="css/kendo.mobile.css" />
         <link rel="stylesheet" href="css/style.css" />
         <script src="../../src/jquery.js"></script>
@@ -28,7 +31,7 @@
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title">Kendo Sushi</span>
-                    <a data-align="right" href="about.html" data-role="button">About</a>
+                    <a class="about-button" data-align="right" href="about.html" data-role="button">About</a>
                 </div>
             </header>
 
@@ -50,6 +53,7 @@
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title">Menu</span>
+                    <a class="about-button" data-align="right" href="about.html" data-role="button">About</a>
                 </div>
             </header>
 
@@ -71,6 +75,7 @@
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title">My account</span>
+                    <a class="about-button" data-align="right" href="about.html" data-role="button">About</a>
                 </div>
             </header>
 
@@ -79,15 +84,15 @@
                     <li>
                         Account
                         <ul>
-                            <li>Username    <span class="list-item-data">kendoSushi</span></li>
-                            <li>Email       <span class="list-item-data">sushi@kendoui.com</span></li>
+                            <li>Username<span class="list-item-data">kendoSushi</span></li>
+                            <li>Email<span class="list-item-data">sushi@kendoui.com</span></li>
                         </ul>
                     </li>
                     <li>
                         Notifications
                         <ul>
-                            <li>New products <input type="checkbox" data-role="switch" /></li>
-                            <li>Exclusive promos       <input type="checkbox" data-role="switch" checked="checked" /></li>
+                            <li>New products<input type="checkbox" data-role="switch" /></li>
+                            <li>Exclusive promos<input type="checkbox" data-role="switch" checked="checked" /></li>
                         </ul>
                     </li>
                 </ul>
@@ -107,13 +112,14 @@
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title">Cart</span>
+                    <a class="about-button" data-align="right" href="about.html" data-role="button">About</a>
                 </div>
             </header>
 
             <div data-role="content">
                 <h2 id="total"></h2>
                 <img src="images/sad.png" id="empty-icon">
-                <a id="checkout" href="#done" data-role="button">Checkout</a>
+                <a id="checkout" class="red-button" href="#done" data-role="button">Checkout</a>
                 <ul id="cartList" class="item-list" data-style="inset"></ul>
             </div>
 
@@ -161,17 +167,16 @@
         </div>
 
         <script id="menuTemplate" type="text/x-kendo-template">
-            <a data-role="button" data-name="add" href="\\#">Order</a>
+            <a data-role="button" data-name="add" href="\\#">${kendo.toString(price, "c")}</a>
             <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
                 <img src="images/75/${image}" />
                 <h2>${name}</h2>
-                <span class="price"> ${kendo.toString(price, "c")}</span>
-                <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added in your cart</span>
+                <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added to cart</span>
             </a>
         </script>
 
         <script id="cartItemTemplate" type="text/x-kendo-template">
-            <a data-role="button" data-name="remove" href="\\#">Cancel</a>
+            <a class="red-button" data-role="button" data-name="remove" href="\\#">&nbsp;&\\#x2716;&nbsp;</a>
             <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
                 <img src="images/75/${image}" />
                 <h2>${name}</h2>
@@ -187,7 +192,7 @@
             </aside>
             <h2>${name}</h2>
             <p>${description}</p>
-            <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added in your cart</span>
+            <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added to cart</span>
         </script>
 
         <script>
