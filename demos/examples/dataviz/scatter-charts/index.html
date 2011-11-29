@@ -13,7 +13,6 @@
         <!-- script -->
         <script src="../../../../src/jquery.min.js"></script>
         <script src="../../../../src/kendo.core.js"></script>
-        <script src="../../../../src/kendo.data.js"></script>
         <script src="../../../../src/kendo.chart.js"></script>
         <!-- script -->
     </head>
@@ -38,14 +37,30 @@
                             type: "scatter"
                         },
                         series: [{
-                            name: "World",
-                            data: scatterPoints(180)
+                            name: "Pentium",
+                            data: [[105, 100], [120, 102], [160, 118], [1000, 137]]
                         }, {
-                            name: "United States",
-                            data: scatterPoints(200)
+                            name: "Core 2 Duo",
+                            data: [[185, 134], [217, 143], [305, 163], [530, 177], [1000, 190]]
+                        }, {
+                            name: "Athlon 64",
+                            data: [[150, 118], [170, 125], [205, 138], [290, 143], [800, 147]]
                         }],
                         xAxis: {
-                            max: 1000
+                            max: 1000,
+                            labels: {
+                                format: "{0}$"
+                            }
+                        },
+                        yAxis: {
+                            min: 80,
+                            labels: {
+                                format: "{0}%"
+                            }
+                        },
+                        tooltip: {
+                            visible: true,
+                            template: "#= series.name #"
                         }
                     });
                 }
@@ -62,24 +77,6 @@
                         createChart();
                     });
                 });
-
-                function scatterPoints(spread) {
-                    var COUNT = 100,
-                        START = 0,
-                        RANGE = 1000,
-                        STEP = RANGE / COUNT,
-                        points = [],
-                        i;
-
-                    for (i = START; i < COUNT; i++) {
-                        points.push([
-                            i * STEP,
-                            Math.random() * spread - i + Math.pow(i, 1.2)
-                        ]);
-                    }
-
-                    return points;
-                }
             </script>
         </div>
         <!-- tools -->
