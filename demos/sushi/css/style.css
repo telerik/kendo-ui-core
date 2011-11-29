@@ -6,6 +6,7 @@ html
 .added
 {
     color: green;
+    font-size: .8em;
     font-size: .8rem;
     display: block;
 }
@@ -20,9 +21,12 @@ html
 .item-list img,
 #details img
 {
+    width: 4em;
+    height: 4em;
     width: 4rem;
     height: 4rem;
     float: left;
+    margin-right: 1em;
     margin-right: 1rem;
     -webkit-box-shadow: 0 2px 3px #333;
     box-shadow: 0 2px 3px #333;
@@ -34,6 +38,8 @@ html
 {
     margin: 0;
     display: inline-block;
+    font-size: 1.1em;
+    margin-top: 1.4em;
     font-size: 1.1rem;
     margin-top: 1.4rem;
 }
@@ -51,13 +57,16 @@ html
 .item-list a.km-button
 {
     position: absolute;
+    right: .6em;
     right: .6rem;
     top: 50%;
+    margin-top: -1em;
     margin-top: -1rem;
 }
 
 .km-android .item-list a.km-button
 {
+    margin-top: -1.35em;
     margin-top: -1.35rem;
 }
 
@@ -96,6 +105,7 @@ html
 .price
 {
     color: #4F576F;
+    font-size: 2em;
     font-size: 2rem;
     line-height: normal;
 }
@@ -105,20 +115,26 @@ html
     color: #777;
     display: block;
     font-weight: normal;
+    font-size: .8em;
     font-size: .8rem;
+    line-height: 1em
     line-height: 1rem
 }
 
 #details .km-content
 {
+    padding: 1em;
     padding: 1rem;
     -webkit-box-sizing: border-box;
 }
 
 #details .km-content p
 {
+    margin-top: 1em;
     margin-top: 1rem;
+    font-size: .9em;
     font-size: .9rem;
+    line-height: 1.2em;
     line-height: 1.2rem;
     font-weight: normal;
     text-shadow: 1px 1px white;
@@ -134,13 +150,16 @@ html
 {
     width: 8.4em;
     height: 8.4em;
+    margin-right: 2em;
     margin-right: 2rem;
+    margin-bottom: 1em;
     margin-bottom: 1rem;
 }
 
 #details .km-content aside .price
 {
     display: block;
+    margin-bottom: 1em;
     margin-bottom: 1rem;
 }
 
@@ -156,9 +175,11 @@ html
 
 #checkout
 {
+    margin: 1em;
     margin: 1rem;
     display: block;
     text-align: center;
+    font-size: 2em;
     font-size: 2rem;
 }
 
@@ -178,7 +199,9 @@ html
 #cartList:empty:before
 {
     content: "Your cart is empty.";
+    padding: 2em;
     padding: 2rem;
+    line-height: 3.5em;
     line-height: 3.5rem;
     color: #888;
 }
@@ -191,7 +214,9 @@ html
 #total
 {
     text-align: center;
+    padding: .5em 1em 0;
     padding: .5rem 1rem 0;
+    font-size: 4em;
     font-size: 4rem;
 }
 
@@ -267,8 +292,10 @@ html
 
 #done-button
 {
+    margin: 1em;
     margin: 1rem;
     display: block;
     text-align: center;
+    font-size: 1.1em;
     font-size: 1.1rem;
 }
