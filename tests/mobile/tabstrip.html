@@ -42,7 +42,7 @@
                     stub(kendo.application, "navigate");
                     dom = $('<nav> \
                             <a href="foo" id="foo">foo</a> \
-                            <a href="bar" id="bar" data-kendo-icon="genius">bar</a> \
+                            <a href="#bar" id="bar" data-icon="genius">bar</a> \
                             <a href="baz" id="baz"><img  />bar</a> \
                         </nav>');
                     tabstrip = new Tabstrip(dom);
@@ -115,6 +115,17 @@
 
                 click(button);
                 ok(button.is(".km-state-active"), "button is active");
+            });
+
+            test("switches to the button with the given url", function() {
+                tabstrip.switchTo("bar");
+                ok(dom.find("#bar").is(".km-state-active"), "button is active");
+                ok(!dom.find("#foo").is(".km-state-active"), "previous button is not active");
+            });
+
+            test("switches to the button with the anchor url", function() {
+                tabstrip.switchTo("#bar");
+                ok(dom.find("#bar").is(".km-state-active"), "button is active");
             });
         </script>
     </body>

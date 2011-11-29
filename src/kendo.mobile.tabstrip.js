@@ -30,24 +30,34 @@
                             .eq(options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
         },
 
+        switchTo: function(url) {
+            this._setActiveItem(this.element.find('a[href$="' + url + '"]'));
+        },
+
+        currentItem: function() {
+            return this.element.children("." + ACTIVE_STATE_CLASS);
+        },
+
         _release: function (e) {
             var that = this,
-                item = $(e.currentTarget),
-                oldItem = that.element.children("." + ACTIVE_STATE_CLASS);
+                item = $(e.currentTarget);
 
-            if (item[0] === oldItem[0]) {
+            if (item[0] === that.currentItem()[0]) {
                 return;
             }
 
             that.trigger(SELECT, {item: item});
+            that._setActiveItem(item);
+        },
 
-            that.element.children().removeClass(ACTIVE_STATE_CLASS);
+        _setActiveItem: function (item) {
+            this.currentItem().removeClass(ACTIVE_STATE_CLASS);
             item.addClass(ACTIVE_STATE_CLASS);
         },
 
         _buildButton: function() {
             var button = $(this),
-                icon = button.data("kendoIcon"),
+                icon = button.data(kendo.ns + "icon"),
                 image = button.find("img"),
                 iconSpan = $('<span class="km-icon"/>');
 
