@@ -47,7 +47,7 @@
 
 .km-view .km-tabstrip .km-button .km-icon
 {
-    background-image: url('images/tabstrip.png');
+    background-image: url('../images/tabstrip.png');
     background-size: auto 100%;
 }
 
