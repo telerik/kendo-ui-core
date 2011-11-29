@@ -1381,10 +1381,18 @@ html body .k-grid tbody .k-button-icon
     width: 96%;
 }
 
+html .k-edit-cell .k-tooltip
+{
+    width: auto;
+    max-width: 300px;
+}
+
 .k-edit-cell input[type="checkbox"]
 {
     margin-left: .6em;
 }
+
+.k-grid-delete
 
 /* Grid :: resizing */
 
