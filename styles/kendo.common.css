@@ -1392,9 +1392,10 @@ html .k-edit-cell .k-tooltip
     margin-left: .6em;
 }
 
-.k-grid-delete
+.k-grid tbody td>.k-grid-delete
 {
-    
+    margin-top: -.2em;
+    margin-bottom: -.2em;
 }
 
 /* Grid :: resizing */
