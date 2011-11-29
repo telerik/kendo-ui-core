@@ -28,7 +28,7 @@
                 <span class="configTitle">Pie Chart</span>
                 <ul class="options">
                     <li>
-                        <input id="labels" checked="true" type="checkbox" autocomplete="off" />
+                        <input id="labels" checked="checked" type="checkbox" autocomplete="off" />
                         <label for="labels">Show labels</label>
                     </li>
                     <li>
@@ -91,7 +91,6 @@
                 $(document).ready(function() {
                     setTimeout(function() {
                         createChart();
-                        setupConfigurator();
 
                         // Initialize the chart with a delay to make sure
                         // the initial animation is visible
@@ -100,11 +99,9 @@
                     $(document).bind("kendo:skinChange", function(e) {
                         createChart();
                     });
-                });
 
-                function setupConfigurator() {
                     $(".configuration").live("change", refresh);
-                }
+                });
 
                 function refresh() {
                     var chart = $("#chart").data("kendoChart"),
