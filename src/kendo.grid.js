@@ -1154,6 +1154,7 @@
                             dataSource.page(dataSource.page() - 1);
                             handled = true;
                         } else if (that.options.editable) {
+                            current = current ? current : table.find(FIRST_CELL_SELECTOR);
                             if (keys.ENTER == key || keys.F12 == key) {
                                 that._handleEditing(current);
                                 handled = true;
