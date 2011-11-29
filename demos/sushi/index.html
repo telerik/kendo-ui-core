@@ -112,6 +112,7 @@
 
             <div data-role="content">
                 <h2 id="total"></h2>
+                <img src="images/sad.png" id="empty-icon">
                 <a id="checkout" href="#done" data-role="button">Checkout</a>
                 <ul id="cartList" class="item-list" data-style="inset"></ul>
             </div>
@@ -127,9 +128,12 @@
         </div>
 
         <div data-role="view" id="done" data-transition="zoom">
-            <div data-role="content">
-                Thanks for shopping! Your sushi is on the way.
-                <a href="#cart" data-role="button">Done</a>
+            <header data-role="header"> <div data-role="navbar"> <span data-role="view-title">Done!</span> </div>
+            </header><div data-role="content" class="km-insetcontent">
+                <img src="images/happy.png" id="done-icon">
+                <h2>Thanks for shopping! </h2>
+                <h3>Your sushi is on the way.</h3>
+                <a id="done-button" href="#cart" data-role="button">Done</a>
             </div>
         </div>
 
