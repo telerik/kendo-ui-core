@@ -40,8 +40,8 @@
                 <div data-role="tabstrip" data-selected-index="0">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
-                    <a href="#account">Account</a>
                     <a href="#cart">Cart</a>
+                    <a href="#account">Account</a>
                 </div>
             </footer>
         </div>
@@ -62,8 +62,33 @@
                 <div data-role="tabstrip" data-selected-index="1">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
-                    <a href="#account">Account</a>
                     <a href="#cart">Cart</a>
+                    <a href="#account">Account</a>
+                </div>
+            </footer>
+        </div>
+
+        <div data-role="view" id="cart">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title">Cart</span>
+                    <a class="about-button" data-align="right" href="about.html" data-role="button">About</a>
+                </div>
+            </header>
+
+            <div data-role="content">
+                <h2 id="total"></h2>
+                <img src="images/sad.png" id="empty-icon">
+                <a id="checkout" class="red-button" href="#done" data-role="button">Checkout</a>
+                <ul id="cartList" class="item-list" data-style="inset"></ul>
+            </div>
+
+            <footer data-role="footer" data-id="default">
+                <div data-role="tabstrip" data-selected-index="2">
+                    <a href="#index">Home</a>
+                    <a href="#menu">Our menu</a>
+                    <a href="#cart">Cart</a>
+                    <a href="#account">Account</a>
                 </div>
             </footer>
         </div>
@@ -96,39 +121,15 @@
             </div>
 
             <footer data-role="footer" data-id="default">
-                <div data-role="tabstrip" data-selected-index="2">
-                    <a href="#index">Home</a>
-                    <a href="#menu">Our menu</a>
-                    <a href="#account">Account</a>
-                    <a href="#cart">Cart</a>
-                </div>
-            </footer>
-        </div>
-
-        <div data-role="view" id="cart">
-            <header data-role="header">
-                <div data-role="navbar">
-                    <span data-role="view-title">Cart</span>
-                    <a class="about-button" data-align="right" href="about.html" data-role="button">About</a>
-                </div>
-            </header>
-
-            <div data-role="content">
-                <h2 id="total"></h2>
-                <img src="images/sad.png" id="empty-icon">
-                <a id="checkout" class="red-button" href="#done" data-role="button">Checkout</a>
-                <ul id="cartList" class="item-list" data-style="inset"></ul>
-            </div>
-
-            <footer data-role="footer" data-id="default">
                 <div data-role="tabstrip" data-selected-index="3">
                     <a href="#index">Home</a>
                     <a href="#menu">Our menu</a>
-                    <a href="#account">Account</a>
                     <a href="#cart">Cart</a>
+                    <a href="#account">Account</a>
                 </div>
             </footer>
         </div>
+
 
         <div data-role="view" id="done" data-transition="zoom">
             <header data-role="header"> <div data-role="navbar"> <span data-role="view-title">Done!</span> </div>
