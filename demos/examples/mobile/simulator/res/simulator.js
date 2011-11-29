@@ -74,7 +74,6 @@ function changeDevice() {
     setTimeout(function () {
         deviceLink.remove();
         setTimeout( function () {
-            $(".description").kendoStop().kendoAnimate("fadeOut", true);
             $(".content").kendoStop(true, true).kendoAnimate("slide:down", true, function () {
                 resizeContent();
             });
@@ -97,17 +96,6 @@ function resizeContent() {
 function fixFF() {
     var doc = $(foreignDocument.documentElement);
 
-//            if (kendo.support.transitions.prefix == "Moz") { // FlexBox is VERY broken in FF.
-//                var kendoView = doc.find(".km-view");
-//
-//                if (kendoView.length) {
-//                    var head = doc.find("head")/*,
-//                        headerHeight = foreignDocument.find(".km-header").outerHeight(),
-//                        footerHeight = foreignDocument.find(".km-footer").outerHeight()*/;
-//
-//                    $("<style type='text/css' id='ffFlexBoxFix'>.km-view{position:relative}</style>").appendTo(head); .
-//                }
-//            }
     if (kendo.support.transitions.prefix == "webkit") {
         doc.add(foreignDocument.body).css("-webkit-text-size-adjust", "auto");
     }
@@ -120,9 +108,8 @@ function fixFF() {
 var deviceSelector = $("#device-selector")
                             .val("ipad")
                             .change( function () {
-                                $(".description").kendoStop().kendoAnimate("fadeOut");
                                 $(".content").kendoStop(true, true).kendoAnimate("slide:down", function () {
-                                    frame.contentWindow.location.reload();
+                                    frame.contentWindow.location.href = frame.contentWindow.location.href.replace(/#.*$/, ""); // Remove the anchor or the browser will try to scroll to it!
                                 });
                             })
                             .kendoDropDownList([
