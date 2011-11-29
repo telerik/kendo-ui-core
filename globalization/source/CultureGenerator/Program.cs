@@ -77,7 +77,7 @@ options:
             if (!string.IsNullOrEmpty(cultureInfo.Name))
             {
                 var filePath = String.Format(@"{0}\{1}.{2}.js", outputPath, filePrefix, cultureInfo.Name);
-                File.WriteAllText(filePath, cultureInfo.Format(culturePattern), Encoding.Unicode);
+                File.WriteAllText(filePath, cultureInfo.Format(culturePattern), Encoding.UTF8);
                 Console.WriteLine(filePath);
             }
         }
