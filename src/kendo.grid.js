@@ -2,7 +2,7 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         DataSource = kendo.data.DataSource,
-        Groupable = kendo.ui.Groupable,
+        Groupable = ui.Groupable,
         tbodySupportsInnerHtml = kendo.support.tbodyInnerHtml,
         Widget = ui.Widget,
         keys = kendo.keys,
@@ -963,7 +963,7 @@
             var that = this,
                 current = that._current;
 
-            if(element !== undefined && element.length) {
+            if (element !== undefined && element.length) {
                 if (!current || current[0] !== element[0]) {
                     element.addClass(FOCUSED);
                     if (current) {
@@ -972,9 +972,9 @@
                     that._current = element;
                     that._scrollTo(element.parent()[0]);
                 }
-            } else {
-                return that._current;
             }
+
+            return that._current;
         },
 
         _scrollTo: function(element) {
@@ -1120,11 +1120,11 @@
         _wrapper: function() {
             var that = this,
                 table = that.table,
-                height = that.options.height || table.css(HEIGHT),
+                height = that.options.height,
                 wrapper = that.element;
 
             if (!wrapper.is("div")) {
-               wrapper = wrapper.wrap("<div />").parent();
+               wrapper = wrapper.wrap("<div/>").parent();
             }
 
             that.wrapper = wrapper.addClass("k-grid k-widget")
@@ -1132,7 +1132,7 @@
 
             table.removeAttr(TABINDEX);
 
-            if (height && height !== "0px") {
+            if (height) {
                 that.wrapper.css(HEIGHT, height);
                 table.css(HEIGHT, "auto");
             }
@@ -1146,7 +1146,7 @@
             tbody = table.find(">tbody");
 
             if (!tbody.length) {
-                tbody = $("<tbody />").appendTo(table);
+                tbody = $("<tbody/>").appendTo(table);
             }
 
             that.tbody = tbody;
