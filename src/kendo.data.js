@@ -1383,8 +1383,12 @@
                 that.trigger(REQUESTSTART);
                 result = process(that._data, options);
 
-                if (result.total !== undefined && !that.options.serverFiltering) {
-                    that._total = result.total;
+                if (!that.options.serverFiltering) {
+                    if (result.total !== undefined) {
+                        that._total = result.total;
+                    } else {
+                        that._total = that.reader.total(that._data);
+                    }
                 }
 
                 that._view = result.data;
