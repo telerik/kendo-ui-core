@@ -43,7 +43,7 @@
                         dataSource: {
                             transport: {
                                 read: {
-                                    url: "../js/spain-electricity.json",
+                                    url: "../js/price-performance.json",
                                     dataType: "json"
                                 }
                             },
@@ -52,40 +52,31 @@
                                 dir: "asc"
                             }
                         },
-                        title: {
-                            text: "Spain electricity production (GWh)"
-                        },
                         legend: {
-                            position: "top"
+                            visible: false
                         },
                         seriesDefaults: {
-                            type: "column"
+                            type: "scatter"
                         },
                         series: [{
-                            field: "nuclear",
-                            name: "Nuclear"
-                        }, {
-                            field: "hydro",
-                            name: "Hydro"
-                        }, {
-                            field: "wind",
-                            name: "Wind"
+                            xField: "price",
+                            yField: "performance"
                         }],
-                        categoryAxis: {
-                            field: "year",
+                        xAxis: {
+                            max: 1000,
                             labels: {
-                                rotation: -90
+                                format: "${0}"
                             }
                         },
-                        valueAxis: {
+                        yAxis: {
+                            min: 80,
                             labels: {
-                                format: "{0:N0}"
-                            },
-                            majorUnit: 10000
+                                format: "{0}%"
+                            }
                         },
                         tooltip: {
                             visible: true,
-                            format: "{0:N0}"
+                            template: "#= '<b>$' + value.x + ' / ' + dataItem.family + ' ' + dataItem.model + ': ' + value.y + '%</b>' #"
                         }
                     });
                 }
