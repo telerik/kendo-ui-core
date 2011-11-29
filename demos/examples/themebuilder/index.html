@@ -93,8 +93,8 @@
                             <li>Sub Item 4</li>
                         </ul>
                     </li>
-                    <li disabled="disabled">Disabled Item</li>
-                    <li>Templated Item
+                    <li disabled="disabled">Disabled</li>
+                    <li>Template
                         <ul>
                             <li>
                                 <div class="k-content" style="padding: 10px;">
@@ -115,14 +115,10 @@
                         <li class="k-state-active">First Tab</li>
                         <li>Second Tab</li>
                         <li>Third Tab</li>
-                        <li>Fourth Tab</li>
-                        <li>Fifth Tab</li>
                     </ul>
                     <div><p>TabStrip sample content, first tab</p></div>
                     <div><p>TabStrip sample content, second tab</p></div>
                     <div><p>TabStrip sample content, third tab</p></div>
-                    <div><p>TabStrip sample content, fourth tab</p></div>
-                    <div><p>TabStrip sample content, fifth tab</p></div>
                 </div>
 
                 <h3>PanelBar</h3>
@@ -143,15 +139,9 @@
                     </li>
                     <li>Item 3</li>
                 </ul>
-
-                <h3>Splitter</h3>
-                <div id="splitter">
-                    <div>Left pane</div>
-                    <div>Right pane</div>
-                </div>
             </div>
 
-            <div class="column">
+            <div class="column" id="middle-column">
                 <h3>Pickers</h3>
                 <input id="autocomplete" />
                 <input id="dropdownlist" />
@@ -162,18 +152,8 @@
 
                 <input id="numerictextbox" type="number" min="0" max="10" value="5" />
 
-                <h3>Button</h3>
-                <button class="k-button">A button</button>
-                <button class="k-button">Another one</button>
-
-                <h3>Upload</h3>
-                <input id="upload" type="file" />
-
                 <h3>Slider</h3>
                 <input id="slider" type="number" min="0" max="10" value="5" />
-
-                <h3>Calendar</h3>
-                <div id="calendar"></div>
 
                 <h3>TreeView</h3>
                 <ul id="treeview">
@@ -198,16 +178,38 @@
                 <div id="window">Sample content</div>
             </div>
 
+            <div class="column">
+                <h3>Button</h3>
+                <button class="k-button">A button</button>
+                <button class="k-button">Another one</button>
+
+                <h3>Upload</h3>
+                <input id="upload" type="file" />
+
+                <h3>Calendar</h3>
+                <div id="calendar"></div>
+
+                <h3>Splitter</h3>
+                <div id="splitter">
+                    <div>Left pane</div>
+                    <div>Right pane</div>
+                </div>
+            </div>
+
             <style scoped>
+                #example {
+                    padding-top: 30px;
+                }
+
                 h3 {
                     font: normal 16px/1.5 Arial,sans-serif;
-                    margin: 44px 0 13px;
+                    margin: 34px 0 13px;
                 }
 
                 #instructions-box {
                     border-left: 5px solid rgba(0,0,0,.5);
                     padding-left: 1em;
-                    margin-left: 3%;
+                    margin-left: 2%;
                 }
 
                 #instructions-list li {
@@ -215,8 +217,8 @@
                 }
 
                 .column {
-                    width: 44%;
-                    padding: 0 3%;
+                    width: 29%;
+                    padding: 0 2%;
                     margin: 0;
                     float: left;
                 }
@@ -229,6 +231,10 @@
                 .column .k-datepicker,
                 .column .k-timepicker {
                     width: 150px;
+                }
+
+                #middle-column {
+                    width: 20%;
                 }
             </style>
 
@@ -254,6 +260,18 @@
                         sort: {
                             field: "year",
                             dir: "asc"
+                        },
+                        schema: {
+                            model: {
+                                fields: {
+                                    year: {
+                                        type: "number"
+                                    },
+                                    value: {
+                                        type: "string"
+                                    }
+                                }
+                            }
                         }
                     });
 
@@ -288,11 +306,13 @@
 
                     $("#calendar").kendoCalendar();
 
-                    $("#treeview").kendoTreeView();
+                    var treeview = $("#treeview").height(140).kendoTreeView().data("kendoTreeView");
+
+                    treeview.select(treeview.findByText("Item 1.2"));
 
                     $("#panelbar").kendoPanelBar();
 
-                    $("#splitter").kendoSplitter();
+                    $("#splitter").height(200).kendoSplitter();
 
                     var windowContent = $("#window"),
                         windowTitle = windowContent.prev("h3");
@@ -300,7 +320,7 @@
                     windowContent
                         .kendoWindow({
                             title: "Sample title",
-                            width: 300,
+                            width: 140,
                             height: 100
                         });
 
@@ -310,6 +330,8 @@
                         dataSource: sharedDataSource,
                         autoBind: false,
                         scrollable: false,
+                        selectable: true,
+                        filterable: true,
                         sortable: {
                             allowUnsort: false
                         },
