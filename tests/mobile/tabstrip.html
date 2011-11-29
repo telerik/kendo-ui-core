@@ -127,6 +127,11 @@
                 tabstrip.switchTo("#bar");
                 ok(dom.find("#bar").is(".km-state-active"), "button is active");
             });
+
+            test("does not deselect current button if non-existent url", function() {
+                tabstrip.switchTo("#none");
+                ok(dom.find("#foo").is(".km-state-active"), "button is active");
+            });
         </script>
     </body>
 </html>
