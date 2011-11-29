@@ -125,12 +125,30 @@
                                 .kendoScroller({useOnDesktop: true});
 
             that.element.prepend(that.header).append(that.footer);
+        },
+
+        onHide: function() {
+            this.element.hide();
+        },
+
+        onShow: function (argument) {
+            var tabstrip = this.element.find(kendo.roleSelector("tabstrip")).data("kendoMobileTabstrip");
+
+            // At the moment of switching, the href of the link is set to "#!"
+            if (tabstrip) {
+                setTimeout(function() {
+                    tabstrip.switchTo(history.url().string);
+                })
+            }
         }
     });
 
     function ViewSwitcher(previous, view) {
         var that = this,
-            callback = function() { previous.element.hide(); },
+            callback = function() {
+                previous.onHide();
+                view.onShow();
+            },
             animationType;
 
         that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(history.url().params);
@@ -153,9 +171,9 @@
             hideAddressBarOnBack();
         }
 
-        that.contents(previous, view).kendoAnimateTo(that.contents(view, previous), {effects: animationType, reverse: that.back, complete: callback});
         that.switchWith(previous.footer, view.footer);
         that.switchWith(previous.header, view.header);
+        that.contents(previous, view).kendoAnimateTo(that.contents(view, previous), {effects: animationType, reverse: that.back, complete: callback});
 
         if (!that.back) {
             previous.nextView = view;
