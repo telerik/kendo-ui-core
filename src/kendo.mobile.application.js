@@ -225,7 +225,7 @@
 
             hideAddressBar(that.element);
 
-            that.setupAppLinks();
+            that._setupAppLinks();
 
             views = that.element.find(roleSelector("view"));
             views.first().attr(attr("url"), "/");
@@ -259,15 +259,15 @@
             });
         },
 
-        setupAppLinks: function(element) {
+        scroller: function() {
+            return this.view.content.data("kendoScroller");
+        },
+
+        _setupAppLinks: function(element) {
             this.element
                 .delegate(linkRolesSelector, support.mousedown, appLinkMouseUp)
                 .delegate(buttonRolesSelector, support.mouseup, appLinkMouseUp)
                 .delegate(linkRolesSelector + buttonRolesSelector, "click", appLinkClick);
-        },
-
-        scroller: function() {
-            return this.view.content.data("kendoScroller");
         },
 
         _setCurrentView: function(view) {
