@@ -480,11 +480,11 @@
         $(document).ready( function () {
             var themes = new kendo.data.DataSource({
                 data: [
-                    { text: "Default", value: "default" },
-                    { text: "Blue Opal", value: "blueopal" },
                     { text: "Black", value: "black" },
-                    { text: "Silver", value: "silver" },
-                    { text: "Metro", value: "metro" }
+                    { text: "Blue Opal", value: "blueopal" },
+                    { text: "Default", value: "default" },
+                    { text: "Metro", value: "metro" },
+                    { text: "Silver", value: "silver" }
                 ]
             });
 
