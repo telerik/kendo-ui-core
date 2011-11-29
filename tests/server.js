@@ -6,7 +6,7 @@ var http       = require("http"),
     path       = require("path"),
     fs         = require("fs"),
     builder = require("xmlbuilder"),
-    WEBROOT    = path.dirname(__filename),
+    WEBROOT    = path.join(path.dirname(__filename), ".."),
     bayeux     = new faye.NodeAdapter({mount: "/faye", timeout: 100000});
 
 var fileServer = new static.Server(WEBROOT, {cache: false});
