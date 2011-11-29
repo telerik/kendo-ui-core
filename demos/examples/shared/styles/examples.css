@@ -1761,9 +1761,22 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 }
 
 #example .chart-wrapper {
+    position: relative;
     width: 650px;
     height: 546px;
     background: url("chart-wrapper.png");
     margin: 30px auto;
 }
 
+.chart-wrapper #playButton {
+    position: absolute;
+    right: 15px;
+    bottom: 56px;
+}
+
+.chart-wrapper #fpsCount {
+    position: absolute;
+    left: 15px;
+    bottom: 60px;
+    white-space: nowrap;
+}
