@@ -7,7 +7,7 @@ var http       = require('http'),
     builder    = require('xmlbuilder'),
     paperboy   = require('paperboy');
 
-var client = new faye.Client('http://localhost:8080/faye');
+var client = new faye.Client('http://localhost:8888/faye');
 var doc = builder.create();
 var root = doc.begin('testsuite');
 var agents = 0;

@@ -19,7 +19,7 @@ var server = http.createServer(function(request, response) {
 
 bayeux.attach(server);
 
-server.listen(8080);
+server.listen(8888);
 
 function log(statCode, url, ip, err) {
     var logStr = statCode + ' - ' + url + ' - ' + ip;
