@@ -37,6 +37,23 @@
                 }
             });
 
+            asyncTest("keydown triggered from datepicker should call navigate method", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.dateView.calendar = div.kendoCalendar().data("kendoCalendar");
+                datepicker.open();
+
+                setTimeout(function() {
+                    input.focus()
+                        .trigger({
+                            type:"keydown",
+                            keyCode: 40,
+                            preventDefault: function() { start(); }
+                        });
+
+                }, 200);
+            });
+
             test("click enter should raise change event if dateview is closed", function() {
                 var input = $("<input />"),
                 datepicker = input.kendoDatePicker().data("kendoDatePicker");
@@ -664,23 +681,6 @@
                 dv.move(event);
 
                 equal(dv.popup.calls("close"), 1);
-            });
-
-            asyncTest("keydown triggered from datepicker should call navigate method", function() {
-                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
-
-                datepicker.dateView.calendar = div.kendoCalendar().data("kendoCalendar");
-                datepicker.open();
-
-                setTimeout(function() {
-                    input.focus()
-                        .trigger({
-                            type:"keydown",
-                            keyCode: 40,
-                            preventDefault: function() { start(); }
-                        });
-
-                }, 200);
             });
 
             asyncTest("type invalide date does not clear input", function() {

@@ -259,6 +259,21 @@
                 equal(timepicker.timeView._value, "12:22 PM");
             });
 
+            asyncTest("press enter should call preventDefault when popup is visible", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.open();
+
+                timepicker.element.focus().trigger({
+                    type: "keydown",
+                    keyCode: keys.ENTER,
+                    preventDefault: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+            });
+
             test("select time with enter clear selection", function() {
                 var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
