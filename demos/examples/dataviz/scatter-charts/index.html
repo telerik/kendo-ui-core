@@ -30,26 +30,61 @@
                 function createChart() {
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin") || "default",
+                        title: {
+                            text: "Price-Performance Ratio"
+                        },
                         legend: {
-                            position: "bottom"
+                            visible: false
                         },
                         seriesDefaults: {
-                            type: "scatter"
+                            type: "scatter",
+                            labels: {
+                                visible: true,
+                                template: "#= series.name #",
+                                position: "right"
+                            }
                         },
                         series: [{
-                            name: "Pentium",
-                            data: [[105, 100], [120, 102], [160, 118], [1000, 137]]
+                            name: "Pentium D 915",
+                            data: [[120, 102]]
                         }, {
-                            name: "Core 2 Duo",
-                            data: [[185, 134], [217, 143], [305, 163], [530, 177], [1000, 190]]
+                            name: "Pentium D 950",
+                            data: [[160, 118]]
                         }, {
-                            name: "Athlon 64",
-                            data: [[150, 118], [170, 125], [205, 138], [290, 143], [800, 147]]
+                            name: "Pentium XE 965",
+                            data: [[1000, 137]],
+                            labels: {
+                                position: "left"
+                            }
+                        }, {
+                            name: "Athlon 64 X2 4200+",
+                            data: [[170, 125]]
+                        }, {
+                            name: "Athlon 64 X2 4600+",
+                            data: [[205, 138]]
+                        }, {
+                            name: "Athlon 64 FX-62",
+                            data: [[800, 147]]
+                        }, {
+                            name: "Core 2 Duo E6400",
+                            data: [[170, 130]]
+                        }, {
+                            name: "Core 2 Duo E6600",
+                            data: [[305, 163]]
+                        }, {
+                            name: "Core 2 Duo E6700",
+                            data: [[530, 177]]
+                        }, {
+                            name: "Core 2 Duo Extreme X6800",
+                            data: [[1000, 190]],
+                            labels: {
+                                position: "left"
+                            }
                         }],
                         xAxis: {
                             max: 1000,
                             labels: {
-                                format: "{0}$"
+                                format: "${0}"
                             }
                         },
                         yAxis: {

@@ -13,7 +13,6 @@
         <!-- script -->
         <script src="../../../../src/jquery.min.js"></script>
         <script src="../../../../src/kendo.core.js"></script>
-        <script src="../../../../src/kendo.data.js"></script>
         <script src="../../../../src/kendo.chart.js"></script>
         <!-- script -->
     </head>
@@ -31,19 +30,41 @@
                 function createChart() {
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin") || "default",
+                        title: {
+                            text: "Charge current vs. charge time"
+                        },
                         legend: {
-                            position: "bottom"
+                            visible: true
                         },
                         seriesDefaults: {
                             type: "scatterLine"
                         },
                         series: [{
-                            name: "World",
-                            data: scatterPoints(180)
+                            name: "0.8C",
+                            data: [[10, 10], [15, 20], [20, 25], [32, 40], [43, 50], [55, 60], [60, 70], [70, 80], [90, 100]]
                         }, {
-                            name: "United States",
-                            data: scatterPoints(200)
-                        }]
+                            name: "1.6C",
+                            data: [[10, 40], [17, 50], [18, 70], [35, 90], [47, 95], [60, 100]]
+                        }, {
+                            name: "3.1C",
+                            data: [[10, 70], [13, 90], [25, 100]]
+                        }],
+                        xAxis: {
+                            labels: {
+                                format: "{0}m"
+                            },
+                            max: 90
+                        },
+                        yAxis: {
+                            max: 100,
+                            labels: {
+                                format: "{0}%"
+                            }
+                        },
+                        tooltip: {
+                            visible: true,
+                            format: "{0}% in {1} minutes"
+                        }
                     });
                 }
 
@@ -59,24 +80,6 @@
                         createChart();
                     });
                 });
-
-                function scatterPoints(spread) {
-                    var COUNT = 100,
-                        START = 0,
-                        RANGE = 1000,
-                        STEP = RANGE / COUNT,
-                        points = [],
-                        i;
-
-                    for (i = START; i < COUNT; i++) {
-                        points.push([
-                            i * STEP,
-                            Math.random() * spread - i + Math.pow(i, 1.2)
-                        ]);
-                    }
-
-                    return points;
-                }
             </script>
         </div>
         <!-- tools -->
