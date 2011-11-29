@@ -81,7 +81,7 @@ if ($.browser.webkit || $.browser.mozilla) {
                     $(".content").kendoStop(true, true).kendoAnimate("slide:down", true, function () {
                         resizeContent();
                     });
-                }, 400);
+                }, 500);
             }, 0);
         }
 
@@ -91,19 +91,16 @@ if ($.browser.webkit || $.browser.mozilla) {
             if (offset != "0px") {
                 $(".device-container").animate({ paddingTop: "+" + offset });
             }
-            fixFF();
         }
 
-        function fixFF() {
+        function fixAdjust() {
             var doc = $(foreignDocument.documentElement);
 
             if (kendo.support.transitions.prefix == "webkit") {
                 doc.add(foreignDocument.body).css("-webkit-text-size-adjust", "auto");
             }
 
-            $(foreignDocument.documentElement).css({
-                fontSize: $(".device-skin").css("font-size")
-            }).css("font-size");
+            changeFontSize();
         }
 
         var deviceSelector = $("#device-selector")
@@ -112,8 +109,8 @@ if ($.browser.webkit || $.browser.mozilla) {
                                         $(".content").kendoStop(true, true).kendoAnimate("slide:down", function () {
                                             frame.contentWindow.location.href = frame.contentWindow.location.href.replace(/#.*$/, ""); // Remove the anchor or the browser will try to scroll to it!
                                             setTimeout(function () {
-                                                fixFF();
-                                            }, 300);
+                                                fixAdjust();
+                                            }, 200);
                                         });
                                     })
                                     .kendoDropDownList([
@@ -127,13 +124,14 @@ if ($.browser.webkit || $.browser.mozilla) {
             addressBar = $("#address-bar"),
             foreignDocument;
 
-        setTimeout( function () { // Be faster in Chrome
-            $(frame.contentWindow.document).ready( function () {
-                $(frame.contentWindow.document.documentElement).css({
-                    fontSize: $(".device-skin").css("font-size")
-                });
-            });
-        }, 300);
+        function changeFontSize() {
+            console.log($(frame.contentWindow.document.documentElement).css({
+                fontSize: $(".device-skin").css("font-size")
+            }).css("font-size"));
+        }
+
+        $(window).bind("DOMFrameContentLoaded", function () { setTimeout(changeFontSize, 300); } );
+        $(frame.contentWindow).bind("DOMContentLoaded", changeFontSize);
 
         frame.onload = function () {
             frame.contentWindow.orientation = $(".device-container").hasClass("horizontal") ? 90 : 0;
@@ -142,13 +140,15 @@ if ($.browser.webkit || $.browser.mozilla) {
             if (frame.src != addressBar.val())
                 addressBar.val(frame.src);
 
-            $(frame).bind("mouseleave", function (e) {
+            $(frame).unbind("mouseleave").bind("mouseleave", function (e) {
                 var event = foreignDocument.createEvent("MouseEvents");
                 event.initMouseEvent("mouseup", true, true, frame.contentWindow, 1, e.screenX, e.screenY, e.clientX, e.clientY, false, false, false, false, 0, null);
-                $(foreignDocument).find(".km-scroll-container:visible")[0].dispatchEvent(event);
+
+                var scroller = $(foreignDocument).find(".km-scroll-container:visible");
+                if (scroller.length)
+                    $(foreignDocument).find(".km-scroll-container:visible")[0].dispatchEvent(event);
             });
 
-            fixFF();
             changeDevice();
         };
 
@@ -174,6 +174,7 @@ if ($.browser.webkit || $.browser.mozilla) {
                             setTimeout( function () {
                                 $(".content").kendoStop(true, true).kendoAnimate("slide:left", true, function () {
                                     resizeContent();
+                                    fixAdjust();
                                 });
                             }, 100);
                         });
