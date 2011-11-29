@@ -673,7 +673,7 @@
                 }
 
                 if (editable.destroy !== false) {
-                    that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row,.k-grid-edit-row):visible a.k-grid-delete", "click", function(e) {
+                    that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-delete", "click", function(e) {
                         e.preventDefault();
                         that.removeRow($(this).closest("tr"));
                     });

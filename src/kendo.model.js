@@ -8,6 +8,7 @@
         each = $.each,
         isPlainObject = $.isPlainObject,
         CHANGE = "change",
+        ERROR = "error",
         MODELCHANGE = "modelChange",
         Observable = kendo.Observable,
         dateRegExp = /^\/Date\((.*?)\)\/$/;
@@ -279,7 +280,7 @@
 
             Observable.fn.init.call(that);
 
-            that.bind([CHANGE, MODELCHANGE], options);
+            that.bind([CHANGE, MODELCHANGE, ERROR], options);
         },
 
         options: {
@@ -500,7 +501,10 @@
                                 type: type
                             });
                         },
-                        error: deferred.reject
+                        error: function(response) {
+                            deferred.reject(response);
+                            that.trigger(ERROR, response);
+                        }
                     }, data)
                 );
             }).promise();
