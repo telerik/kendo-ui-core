@@ -982,13 +982,9 @@
             if (owner._isHorizontal) {
                 positionLeft -= parseInt((that.tooltipDiv.outerWidth() - that.dragHandle[owner._outerSize]()) / 2);
                 positionTop -= that.tooltipDiv.outerHeight() + callout.height() + margin;
-                padding = parseFloat(that.tooltipDiv.css("padding-left"));
-                that.tooltipDiv.css("padding-left", that.tooltipDiv.outerWidth() % 2 == 0 ? padding + 1 : padding);
             } else {
                 positionTop -= parseInt((that.tooltipDiv.outerHeight() - that.dragHandle[owner._outerSize]()) / 2);
                 positionLeft -= that.tooltipDiv.outerWidth() + callout.width() + margin;
-                padding = parseFloat(that.tooltipDiv.css("padding-top"));
-                that.tooltipDiv.css("padding-top", that.tooltipDiv.outerHeight() % 2 == 0 ? padding + 1 : padding);
             }
 
             that.tooltipDiv.css({ top: positionTop, left: positionLeft });
