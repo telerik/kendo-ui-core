@@ -863,6 +863,16 @@ pre.prettyprint
     color: #000;
 }
 
+.absConf .configuration
+{
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    height: auto;
+    margin: 0;
+    z-index: 2;
+}
+
 .configuration-horizontal
 {
     -webkit-border-radius: 5px 5px 0 0;
@@ -1760,6 +1770,11 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     height: 546px;
     background: url("chart-wrapper.png");
     margin: 30px auto;
+}
+
+#example.absConf .chart-wrapper
+{
+    margin-left: 0;
 }
 
 .chart-wrapper #playButton {
