@@ -243,3 +243,46 @@ body:after
              url("../devices/a100/images/vertical.png");
     display: none;
 }
+
+.old-browser .content
+{
+    top: 0;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.old-browser .content:before
+{
+    content: "\a0";
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+}
+
+.old-browser .centered
+{
+    color: #000;
+    font-size: 18px;
+    display: inline-block;
+    text-align: left;
+    text-shadow: 0 1px 0 rgba(255,255,255,.3);
+}
+
+.old-browser .centered span
+{
+    font-size: 24px;
+}
+
+.old-browser strong
+{
+    font-size: 40px;
+    line-height: 36px;
+    display: block;
+}
+
+.old-browser .centered strong span
+{
+    font-size: 30px;
+}

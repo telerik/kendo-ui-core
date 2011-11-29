@@ -11,7 +11,7 @@
     <script src="../../../../src/kendo.core.js"></script>
     <script>
         if (kendo.support.mobileOS)
-            top.location.href = "http://demos.kendoui.com/sushi";
+            top.location.href = "/sushi";
     </script>
     <script src="../../../../src/kendo.fx.js"></script>
     <script src="../../../../src/kendo.data.js"></script>
@@ -21,6 +21,9 @@
 
 </head>
 <body class="k-content">
+    <script>
+        $(document.body).hide();
+    </script>
     <div class="header">
         <div class="configurator">
             <input id="device-selector" class="selector" style="float: right" /><span>Device:&nbsp;</span><br>
@@ -40,10 +43,13 @@
             <div class="device-skin"></div>
             <input id="address-bar" type="text" onchange="frame.src = 'http://' + this.value.replace('http://', '')" />
             <button id="navigate-back"></button>
-            <iframe id="simulator" src="../../../sushi" width="100%" height="100%"></iframe>
+            <iframe id="simulator" src="/sushi" width="100%" height="100%"></iframe>
         </div>
     </div>
     <div class="fake3d"></div>
     <script src="res/simulator.js"></script>
+    <script>
+        $(document.body).show();
+    </script>
 </body>
 </html>
