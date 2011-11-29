@@ -277,8 +277,16 @@
             handle.parent().before("<span class='km-switch-wrapper'><span class='km-switch-background'></span></span>");
 
             that.animator = "animator" in switchAnimation ? that.element.find(switchAnimation.animator) : handle;
-
             that.mAnimator = that.element.find(switchAnimation.manimator);
+
+            var checked = input[0].checked;
+            handle.addClass("km-switch-" + (checked ? "on" : "off"));
+            if (checked) {
+                that.animator.css(TRANSFORMSTYLE, "translate(" + (that.element.outerWidth() - handle.outerWidth(true)) + "px,0)");
+                that.mAnimator
+                    .data("origin", parseInt(that.mAnimator.css("margin-left"), 10))
+                    .css("margin-left", 0);
+            }
 
             that.input = input;
             that.handle = handle;
