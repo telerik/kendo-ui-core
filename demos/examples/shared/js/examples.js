@@ -506,6 +506,11 @@
             }).data("kendoDropDownList");
 
             themeChooser.list.width(279).append("<a href='" + $("#themebuilder").attr("href") + "' id='launch-themebuilder'>Launch ThemeBuilder</a>");
+            $("#launch-themebuilder").parent().mousedown(function(e) {
+                setTimeout(function() {
+                    clearTimeout(themeChooser._bluring);
+                }, 0);
+            });
 
             themeChooser.popup.options = $.extend(themeChooser.popup.options, {
                 origin: "bottom right",
