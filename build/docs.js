@@ -5,10 +5,10 @@ function build() {
 
     jsdoctoolkit.run([
         // output directory
-        "-d=docs",
+        "-d=" + (process.argv[3] || "docs"),
 
         // template
-        "-t=build/node-jsdoc-toolkit/template",
+        "-t=build/node-jsdoc-toolkit/" + (process.argv[2] || "template"),
 
         // constants
         "-D=\"copyright:2011\"",
