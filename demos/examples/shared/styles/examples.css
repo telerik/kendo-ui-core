@@ -24,7 +24,7 @@ body,
 html
 {
     overflow-y:scroll;
-    font:75% arial,helvetica,sans-serif;
+    font:75%/1.5 arial,helvetica,sans-serif;
 }
 
 #examplesThemeChooser .k-arrow-down,
@@ -201,7 +201,8 @@ a.bigButton
 }
 
 #header li a,
-a.bigButton
+a.bigButton,
+.demos-button
 {
     text-decoration:none;
     color:#2e2e2e;
@@ -221,7 +222,8 @@ a.bigButton
 }
 
 li a#download,
-a.bigButton
+a.bigButton,
+.demos-button
 {
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
@@ -249,7 +251,8 @@ a.bigButton
 }
 
 li a#download:hover,
-a.bigButton:hover
+a.bigButton:hover,
+.demos-button:hover
 {
     background:rgb(106,106,106); /* Old browsers */
     background:-moz-linear-gradient(top, rgba(106,106,106,1) 0%, rgba(87,87,87,1) 50%, rgba(68,68,68,1) 100%); /* FF3.6+ */
@@ -527,12 +530,22 @@ a.bigButton
 
 /*left navigation*/
 
+#navWrap
+{
+    padding: 1.6875em 0 0;
+}
+
 #navWrap h3
 {
     font-size: 1.333em;
     font-weight: normal;
-    padding: .25em 0;
-    margin: 1.4375em 0 0;
+    padding:  0 0 .25em;
+    margin: 0;
+}
+
+#navWrap .k-panelbar
+{
+    margin-bottom: 1.6875em;
 }
 
 #navWrap .k-panelbar,

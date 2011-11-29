@@ -1,5 +1,5 @@
 var categories = {
-    widgets: [
+    "UI Widgets": [
         {
             text: "Overview",
             spriteCssClass: "overviewIcon",
@@ -422,7 +422,7 @@ var categories = {
             ]
         }
     ],
-    framework: [
+    "Framework": [
         {
             text: "DataSource",
             spriteCssClass: "dataSourceIcon",
@@ -495,9 +495,7 @@ var categories = {
                     url: "globalization/index.html"
                 }
             ]
-        }
-    ],
-    integration: [
+        },
         {
             text: "Integration",
             spriteCssClass: "integrationIcon",
