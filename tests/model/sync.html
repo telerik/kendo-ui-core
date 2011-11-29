@@ -353,6 +353,26 @@
                 equal(models[0].id, 1);
                 equal(models[1].id, 2);
             });
+            test("error event is triggers if sync request fails", function() {
+                var transport = stub({},  {
+                    create: function(options) {
+                        options.error();
+                    }
+                }),
+                args;
+
+                setup({ data: [ { id: 1 }, { id: 2 }],
+                    error: function() {
+                        args = arguments;
+                    },
+                    transport: transport }
+                );
+
+                modelSet.add({});
+                modelSet.sync();
+
+                ok(args);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

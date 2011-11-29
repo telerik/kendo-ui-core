@@ -1057,6 +1057,9 @@
                     },
                     modelChange: function(model) {
                         that.trigger(MODELCHANGE, model);
+                    },
+                    error: function(response) {
+                        that.trigger(ERROR, response);
                     }
                 });
             }
