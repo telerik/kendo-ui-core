@@ -38,11 +38,27 @@ html
     margin-top: 1.4rem;
 }
 
+#cartList h2
+{
+    margin-top: 1.1rem;
+}
+
+#cartList .km-button
+{
+    font-weight: bold;
+}
+
 .item-list a.km-button
 {
     position: absolute;
     right: .6rem;
-    top: .6rem;
+    top: 50%;
+    margin-top: -1rem;
+}
+
+.km-android .item-list a.km-button
+{
+    margin-top: -1.35rem;
 }
 
 .item-list a.details-link
@@ -59,7 +75,7 @@ html
 
 .km-view .km-tabstrip .km-button:nth-child(1) .km-icon
 {
-    background-position: 0 50%;
+    background-position: -1% 50%;
 }
 
 .km-view .km-tabstrip .km-button:nth-child(2) .km-icon
@@ -74,7 +90,7 @@ html
 
 .km-view .km-tabstrip .km-button:nth-child(4) .km-icon
 {
-    background-position: 99% 50%;
+    background-position: 100% 50%;
 }
 
 .price
@@ -84,14 +100,13 @@ html
     line-height: normal;
 }
 
-.item-list .price
+#cart .price
 {
+    color: #777;
     display: block;
-    font-size: 1.4rem;
-    float: right;
-    font-weight: bold;
-    margin-top: 2.8rem;
-    line-height: 1.2rem
+    font-weight: normal;
+    font-size: .8rem;
+    line-height: 1rem
 }
 
 #details .km-content
@@ -188,8 +203,16 @@ html
     text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
 
-.km-ios #checkout {
-  border-color: #2f3740 #394d68 #375073;
+.about-button,
+#menu .item-list .km-button,
+#index .item-list .km-button
+{
+    width: 3.4em;
+    text-align: center;
+}
+
+.km-ios .red-button {
+  border-color: #B11C1A #B11C1A #910000;
   background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(50,50,50,0.5)), color-stop(0.05, rgba(0,0,0,0)), color-stop(0.98, rgba(0,0,0,0)), color-stop(1, rgba(64,94,135,0.5))),
                     -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0,#D98487), color-stop(0.5,#D4595C), color-stop(0.5,#B11C1A), color-stop(1,#B31B1D));
   background-image: -moz-linear-gradient(top, rgba(50,50,50,0.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,0.5)),
@@ -200,12 +223,12 @@ html
                     -o-linear-gradient(top,#D98487,#D4595C 50%,#B11C1A 50%,#B31B1D);
   background-image: linear-gradient(top, rgba(50,50,50,0.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,0.5)),
                     linear-gradient(top,#D98487,#D4595C 50%,#B11C1A 50%,#B31B1D);
-  box-shadow: 0 1px 1px #cccccc;
-  -webkit-box-shadow: 0 1px 1px #cccccc;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.4);
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.4);
 }
 
-.km-ios #checkout:active {
-  border-color: #2a2e37 #26334e #1d2f51;
+.km-ios .red-button:active {
+  border-color: #910000 #910000 #710000;
   background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(50,50,50,0.5)), color-stop(0.05, rgba(0,0,0,0)), color-stop(0.98, rgba(0,0,0,0)), color-stop(1, rgba(64,94,135,0.5))),
                     -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0,#B96467), color-stop(0.5,#B4393C), color-stop(0.5,#910000), color-stop(1,#B31B1D));
   background-image: -moz-linear-gradient(top, rgba(50,50,50,0.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,0.5)),
