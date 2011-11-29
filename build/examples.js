@@ -12,18 +12,20 @@ var fs = require("fs"),
 // Configuration ==============================================================
 var VERSION = kendoBuild.generateVersion(),
     CDN_URL = process.argv[2] || "http://cdn.kendostatic.com/" + VERSION,
+    JQUERY_CDN_URL = "http://code.jquery.com/jquery-1.7.1.min.js",
 
     SOURCE_ROOT = "src",
     STAGING_ROOT = "live",
-    STAGING_SOURCE = "#= parentFolder(depth + 1) #",
     STAGING_SCRIPTS_ROOT = "js-deploy",
-    STAGING_SCRIPTS = template("#= parentFolder(depth) #/" + STAGING_SCRIPTS_ROOT),
-    STAGING_STYLES = template(STAGING_SOURCE + "/styles"),
+    STAGING_SCRIPTS_ROOT_TMPL = "#= parentFolder(depth) #/" + STAGING_SCRIPTS_ROOT,
+    STAGING_SCRIPTS = template(STAGING_SCRIPTS_ROOT_TMPL),
+    STAGING_STYLES = template("#= parentFolder(depth + 1) #" + "/styles"),
     STAGING_SHARED_ROOT = "#= parentFolder(depth) #/shared",
     STAGING_SHARED_SCRIPTS = template(STAGING_SHARED_ROOT + "/js"),
     STAGING_SHARED_STYLES = template(STAGING_SHARED_ROOT + "/styles"),
     STAGING_SUITE_SCRIPTS = template("#= parentFolder(depth - 1) #/js"),
     STAGING_THEMEBUILDER_ROOT = "/kendo/themebuilder/src",
+    STAGING_JQUERY_SCRIPT = template(STAGING_SCRIPTS_ROOT_TMPL + "/jquery.min.js")
     LIVE_SCRIPTS = template(CDN_URL + "/js"),
     LIVE_STYLES = template(CDN_URL + "/styles"),
     LIVE_SHARED_ROOT = CDN_URL + "/examples/shared",
@@ -31,12 +33,14 @@ var VERSION = kendoBuild.generateVersion(),
     LIVE_SHARED_STYLES = template(LIVE_SHARED_ROOT + "/styles"),
     LIVE_THEMEBUILDER_ROOT = "http://themebuilder.kendoui.com",
     LIVE_SUITE_SCRIPTS = template(CDN_URL + "/examples/#= suiteName #/js"),
+    LIVE_JQUERY_SCRIPT = template(JQUERY_CDN_URL),
     SOURCE_SCRIPTS_MARKER = /SOURCE_SCRIPTS/g,
     THEMEBUILDER_ROOT_MARKER = /THEMEBUILDER_DEPLOY_ROOT/g,
     SOURCE_STYLES_MARKER = /SOURCE_STYLES/g,
     SHARED_SCRIPTS_MARKER = /SHARED_SCRIPTS/g,
     SHARED_STYLES_MARKER = /SHARED_STYLES/g,
     SUITE_SCRIPTS_MARKER = /SUITE_SCRIPTS/g,
+    JQUERY_SCRIPT_MARKER = /JQUERY_SCRIPT/g,
 
     examplesLocation = "demos/examples",
     outputPath = "live",
@@ -104,6 +108,7 @@ function resolveResources(text, deployConfig, exampleInfo) {
     text = text.replace(SHARED_SCRIPTS_MARKER, deployConfig.sharedScripts(pathInfo));
     text = text.replace(SHARED_STYLES_MARKER, deployConfig.sharedStyles(pathInfo));
     text = text.replace(SUITE_SCRIPTS_MARKER, deployConfig.suiteScripts(pathInfo));
+    text = text.replace(JQUERY_SCRIPT_MARKER, deployConfig.jQueryScript(pathInfo));
 
     if (deployConfig.useMinified) {
         text = text.replace(/(.*?)\.(css|js)/g, "$1.min.$2");
@@ -410,6 +415,7 @@ function buildStaging() {
         sharedScripts: STAGING_SHARED_SCRIPTS,
         sharedStyles: STAGING_SHARED_STYLES,
         suiteScripts: STAGING_SUITE_SCRIPTS,
+        jQueryScript: STAGING_JQUERY_SCRIPT,
         themeBuilderRoot: STAGING_THEMEBUILDER_ROOT,
         useMinified: false
     });
@@ -435,6 +441,7 @@ function buildLive(deployRoot) {
         sharedScripts: LIVE_SHARED_SCRIPTS,
         sharedStyles: LIVE_SHARED_STYLES,
         suiteScripts: LIVE_SUITE_SCRIPTS,
+        jQueryScript: LIVE_JQUERY_SCRIPT,
         themeBuilderRoot: LIVE_THEMEBUILDER_ROOT,
         useMinified: true
     });
