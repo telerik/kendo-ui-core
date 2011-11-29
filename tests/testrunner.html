@@ -13,7 +13,7 @@
         </style>
 
         <script src="/faye.js"></script>
-        <script src="src/jquery.js"></script>
+        <script src="../src/jquery.js"></script>
         <script>
             window.client = new Faye.Client('/faye', {timeout: 600});
             client.subscribe('/load', function(path) {
