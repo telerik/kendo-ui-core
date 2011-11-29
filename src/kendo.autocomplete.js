@@ -2,7 +2,7 @@
     /**
     * @name kendo.ui.AutoComplete.Description
     *
-    * @sectionThe AutoComplete widget provides suggestions depending on the typed text. It also allows multiple value entries.
+    * @section The AutoComplete widget provides suggestions depending on the typed text. It also allows multiple value entries.
     * The suggestions shown by the AutoComplete widget can come from a local Array or from a remote data service.
     *
     * <h3>Getting Started</h3>
