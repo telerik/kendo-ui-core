@@ -522,6 +522,37 @@
 
                 ok(filterMenu.form.find("[name='filters[0].value']:last").is(":checked"));
             });
+
+            test("filtering without specified model defaults to string type", function() {
+                dataSource = new kendo.data.DataSource( { data: [ { foo : "foo" }, { foo: "bar"} ] });
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filterMenu.form.find("[name='filters[0].value']").val("foo");
+                filterMenu.form.submit();
+
+                equal(dataSource.view().length, 1);
+            });
+
+            test("filtering without specified field defaults to string type", function() {
+                dataSource = new kendo.data.DataSource( {
+                    data: [ { foo : "foo" }, { foo: "bar"} ],
+                    schema: {
+                        model: {}
+                    }
+                });
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filterMenu.form.find("[name='filters[0].value']").val("foo");
+                filterMenu.form.submit();
+
+                equal(dataSource.view().length, 1);
+            });
        </script>
     </body>
 </html>
