@@ -51,6 +51,9 @@
         },
 
         _setActiveItem: function (item) {
+            if (!item[0]) {
+                return;
+            }
             this.currentItem().removeClass(ACTIVE_STATE_CLASS);
             item.addClass(ACTIVE_STATE_CLASS);
         },
