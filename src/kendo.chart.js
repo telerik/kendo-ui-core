@@ -7102,6 +7102,46 @@
         }
     });
 
+    themes.metro = deepExtend({}, baseTheme, {
+        title: {
+            color: "#777777"
+        },
+        legend: {
+            labels: {
+                color: "#777777"
+            }
+        },
+        seriesDefaults: {
+            labels: {
+                color: "#000000"
+            }
+        },
+        seriesColors: ["#25a0da", "#309b46", "#8ebc00", "#ff6900", "#e61e26", "#d8e404", "#16aba9", "#7e51a1", "#313131", "#ed1691"],
+        categoryAxis: {
+            majorGridLines: {
+                visible: true
+            }
+        },
+        axisDefaults: {
+            line: {
+                color: "#c7c7c7"
+            },
+            labels: {
+                color: "#777777"
+            },
+            minorGridLines: {
+                color: "#c7c7c7"
+            },
+            majorGridLines: {
+                color: "#c7c7c7"
+            }
+        },
+        tooltip: {
+            background: WHITE,
+            color: BLACK
+        }
+    });
+
     // Exports ================================================================
     Chart.themes = themes;
     Chart.prototype.options.theme = "default";
