@@ -1176,8 +1176,9 @@ pre.prettyprint
 #skinSelector-list
 {
     margin-top: 2px;
-    padding: 3px 0 1px;
+    padding: 3px 0 0;
     color: #2175bd;
+    height: auto !important;
     background: #F3F3F3;
     border-color: #dedede;
     -webkit-border-radius: 5px;
@@ -1215,6 +1216,7 @@ pre.prettyprint
 
 #skinSelector-list #launch-themebuilder
 {
+    margin-top: 6px;
     display: block;
     height: 54px;
     background: transparent url(launch-themebuilder.png) no-repeat 0 0;
