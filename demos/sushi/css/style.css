@@ -32,6 +32,8 @@ html
     box-shadow: 0 2px 3px #333;
     -webkit-border-radius: 8px;
     border-radius: 8px;
+    margin-bottom: 3px;
+    margin-left: 2px;
 }
 
 .item-list h2
@@ -74,6 +76,7 @@ html
 {
     display: block;
     text-decoration: none;
+    overflow: hidden;
 }
 
 .km-view .km-tabstrip .km-button .km-icon
@@ -267,7 +270,7 @@ html
 }
 
 #done-icon, #empty-icon {
-    margin: 64px auto 20px auto;
+    margin: 20px auto;
     display: block;
     width: 128px;
 }
