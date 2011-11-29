@@ -39,10 +39,10 @@
         <div id="example" class="k-content">
             <div id="product-view" class="k-header">
                 <div class="right">
-                    <label for="culture">cultures:</label>
+                    <label for="culture">Choose culture:</label>
                     <input id="culture" value="en-US" />
                 </div>
-                <h2>Product promotion:</h2>
+                <h2>Product promotion</h2>
                 <ul id="fieldlist">
                     <li>
                     <label for="startDate">Discount start date:</label>
@@ -67,7 +67,9 @@
 
             <style scoped>
                 #example h2 {
+					padding: 5px 0;
                     font-weight: normal;
+					border-bottom: 1px solid #999;
                 }
                 #product-view {
                     border-radius: 10px 10px 10px 10px;
@@ -76,6 +78,7 @@
                     overflow: hidden;
                     width: 500px;
                     padding: 20px 20px 0 20px;
+					margin: 30px auto;
                     background-position: 0 -255px;
                 }
 
@@ -89,14 +92,19 @@
                     width: 100%;
                     float:left;
                     margin:0;
-                    padding: 10px;
+                    padding: 10px 0 30px 0;
                 }
 
                 #fieldlist li
                 {
                     list-style:none;
-                    padding:5px 10px;
+                    padding:5px 0;
                 }
+				#fieldlist label {
+					display: inline-block;
+					width: 120px;
+					text-align: right;
+				}
 
             </style>
 
