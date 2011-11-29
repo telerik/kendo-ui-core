@@ -377,10 +377,52 @@
          *          pageSize: 1
          *      }
          *  });
+         * @option {Function} [detailTemplate] Template to be used for rendering the detail rows in the grid.
+         * @option {Object} [sortable] Defines whether grid columns are sortable.
+         * @option {String} [sortable.mode] <"single"> Defines sorting mode. Possible values:
+         *    <dl>
+         *         <dt>
+         *              "single"
+         *         </dt>
+         *         <dd>
+         *             Defines that only once column can be sorted at a time.
+         *         </dd>
+         *         <dt>
+         *              "multiple"
+         *         </dt>
+         *         <dd>
+         *              Defines that multiple columns can be sorted at a time.
+         *         </dd>
+         *    </dl>
+         *
+         * @option {Boolean} [sortable.allowUnsort] <false>  Defines whether column can have unsorted state.
          * @option {Array} [columns] A collection of column objects or collection of strings that represents the name of the fields.
          * @option {String} [columns.field] The field that will displayed in the column.
          * @option {String} [columns.title] The title that will displayed in the column header.
+         * @option {String} [columns.format] The format that will be applied on the column cells.
+         * _example
+         *  $(".k-grid").kendoGrid({
+         *      dataSource: {
+         *          data: createRandomData(50),
+         *          pageSize: 10
+         *      },
+         *      columns: [
+         *          {
+         *              field: "BirthDate",
+         *              title: "Birth Date",
+         *              format: "{0:dd/MMMM/yyyy}"
+         *         }
+         *      ]
+         *   });
+         * @option {Boolean} [columns.filterable] <true> Specifies whether given column is filterable.
+         * @option {Boolean} [columns.sortable] <true> Specifies whether given column is sortable.
+         * @option {Function} [columns.editor] The editor will be used when column is edited.
+         * @option {Object} [columns.editor.container] The container in which the editor must be added.
+         * @option {Object} [columns.editor.options] Additional options.
+         * @option {String} [columns.editor.options.field] The field for the editor.
+         * @option {Object} [columns.editor.options.model] The model for the editor.
          * @option {String} [columns.width] The width of the column.
+         * @option {String} [columns.command] Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".
          * @option {String} [columns.template] The template for column's cells.
          * _example
          *  $(".k-grid").kendoGrid({
@@ -530,6 +572,8 @@
                  * @name kendo.ui.Grid#detailExpand
                  * @event
                  * @param {Event} e
+                 * @param {Object} e.masterRow The jQuery element representing master row.
+                 * @param {Object} e.detailRow The jQuery element representing detail row.
                  */
                 DETAILEXPAND,
                 /**
@@ -537,6 +581,8 @@
                  * @name kendo.ui.Grid#detailCollapse
                  * @event
                  * @param {Event} e
+                 * @param {Object} e.masterRow The jQuery element representing master row.
+                 * @param {Object} e.detailRow The jQuery element representing detail row.
                  */
                 DETAILCOLLAPSE,
                 /**
@@ -544,6 +590,10 @@
                  * @name kendo.ui.Grid#detailInit
                  * @event
                  * @param {Event} e
+                 * @param {Object} e.masterRow The jQuery element representing master row.
+                 * @param {Object} e.detailRow The jQuery element representing detail row.
+                 * @param {Object} e.detailCell The jQuery element representing detail cell.
+                 * @param {Object} e.data The data for the master row.
                  */
                 DETAILINIT,
                 /**
@@ -551,6 +601,8 @@
                  * @name kendo.ui.Grid#edit
                  * @event
                  * @param {Event} e
+                 * @param {Object} e.container The jQuery element to be edited.
+                 * @param {Object} e.model The model to be edited.
                  */
                 EDIT,
                 /**
@@ -558,6 +610,9 @@
                  * @name kendo.ui.Grid#save
                  * @event
                  * @param {Event} e
+                 * @param {Object} e.values The values entered by the user.
+                 * @param {Object} e.container The jQuery element which is in edit mode.
+                 * @param {Object} e.model The edited model.
                  */
                 SAVE,
                 /**
@@ -565,6 +620,8 @@
                  * @name kendo.ui.Grid#remove
                  * @event
                  * @param {Event} e
+                 * @param {Object} e.row The row element to be deleted.
+                 * @param {Object} e.model The model which to be deleted.
                  */
                 REMOVE,
                 /**
@@ -615,6 +672,10 @@
             that._wrapper();
         },
 
+        /**
+         * Returns the index of the cell in the grid item skipping group and hierarchy cells.
+         * @param {Selector|DOMElement} cell Target cell.
+         */
         cellIndex: function(td) {
             return $(td).parent().find('td:not(.k-group-cell,.k-hierarchy-cell)').index(td);
         },
@@ -681,6 +742,13 @@
             }
         },
 
+        /**
+         * Puts the specified table cell in edit mode. It requires a jQuery object representing the cell. The editCell method triggers edit event.
+         * @param {Selector} cell Cell to be edited.
+         * @example
+         * // edit first table cell
+         * grid.editCell(grid.tbody.find(">tr>td:first"));
+         */
         editCell: function(cell) {
             var that = this,
                 column = that.columns[that.cellIndex(cell)],
@@ -716,6 +784,11 @@
             }
         },
 
+        /**
+         * Closes current edited cell.
+         * @example
+         * grid.closeCell();
+         */
         closeCell: function() {
             var that = this,
                 cell = that._editContainer.removeClass("k-edit-cell"),
@@ -746,6 +819,14 @@
             cell.empty().html(tmpl(dataItem));
         },
 
+        /**
+         * Removes the specified row from the grid. The removeRow method triggers remove event.
+         * @param {Selector|DOMElement} row Row to be removed.
+         * @example
+         * // remove first table row
+         * grid.removeRow(grid.tbody.find(">tr:first"));
+         *
+         */
         removeRow: function(row) {
             var that = this,
                 model;
@@ -773,10 +854,20 @@
             return confirmation !== false ? that._showMessage(confirmation) : true;
         },
 
+        /**
+         * Cancels any pending changes during. Deleted rows are restored. Inserted rows are removed. Updated rows are restored to their original values.
+         * @example
+         * grid.cancelChanges();
+         */
         cancelChanges: function() {
             this.dataSource.cancelChanges();
         },
 
+        /**
+         * Calls DataSource sync to submit any pending changes if state is valid. The saveChanges method triggers saveChanges event.
+         * @example
+         * grid.saveChanges();
+         */
         saveChanges: function() {
             var that = this;
 
@@ -785,6 +876,11 @@
             }
         },
 
+        /**
+         * Adds a new empty table row in edit mode. The addRow method triggers edit event.
+         * @example
+         * grid.addRow();
+         */
         addRow: function() {
             var that = this;
             if ((that.editable && that.editable.end()) || !that.editable) {
@@ -1593,14 +1689,35 @@
             });
         },
 
+        /**
+         * Returns the data item to which a given table row (tr DOM element) is bound.
+         * @param {Selector|DOMElement} tr Target row.
+         * @example
+         * // returns the data item for first row
+         * grid.dataItem(grid.tbody.find(">tr:first"));
+         */
         dataItem: function(tr) {
             return this._data[this.tbody.find('> tr:not(.k-grouping-row,.k-detail-row)').index($(tr))]
         },
 
+        /**
+         * Expands specified master row.
+         * @param {Selector|DOMElement} row Target master row to expand.
+         * @example
+         * // expands first master row
+         * grid.expandRow(grid.tbody.find(">tr.k-master-row:first"));
+         */
         expandRow: function(tr) {
             $(tr).find('> td .k-plus, > td .k-expand').click();
         },
 
+        /**
+         * Collapses specified master row.
+         * @param {Selector|DOMElement} row Target master row to collapse.
+         * @example
+         * // collapses first master row
+         * grid.collapseRow(grid.tbody.find(">tr.k-master-row:first"));
+         */
         collapseRow: function(tr) {
             $(tr).find('> td .k-minus, > td .k-plus').click();
         },
