@@ -1296,27 +1296,6 @@ div.k-grid-header .k-header
     border-bottom-width: 0;
 }
 
-.k-grid-edit-row .text-box,
-.k-grid-edit-row .k-numerictextbox,
-.k-grid-edit-row .k-datepicker
-{
-    width: 5em;
-    max-width: 90%;
-    min-width: 90%; /* IE8 calculates width: 90% wrong, so we have to trick it */
-    margin: -.4em -.3em -.15em;
-    vertical-align: middle;
-}
-
-.k-grid-edit-row .k-dropdown,
-.k-grid-edit-row .k-combobox
-{
-    width: 5em;
-    max-width: 90%;
-    min-width: 90%; /* IE8 calculates width: 90% wrong, so we have to trick it */
-    margin: -.1em -.3em -.45em;
-    line-height: normal;
-}
-
 .k-edit-form-container
 {
     position: relative;
@@ -1381,6 +1360,30 @@ html body .k-grid tbody .k-button-icon
 .k-grid .k-detail-cell
 {
     overflow: visible;
+}
+
+.k-grid .k-edit-cell
+{
+    padding: 0 .3em;
+}
+
+.k-edit-cell .k-textbox,
+.k-edit-cell .k-widget
+{
+    width: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+*+html .k-edit-cell .k-textbox,
+*+html .k-edit-cell .k-widget
+{
+    width: 96%;
+}
+
+.k-edit-cell input[type="checkbox"]
+{
+    margin-left: .6em;
 }
 
 /* Grid :: resizing */
