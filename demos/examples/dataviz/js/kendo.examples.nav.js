@@ -36,6 +36,9 @@ var categories = {
                     text: "Column chart",
                     url: "bar-charts/column.html"
                 }, {
+                    text: "Stacked bar chart",
+                    url: "bar-charts/stacked-bar.html"
+                }, {
                     text: "Binding to remote data",
                     url: "bar-charts/remote-data.html"
                 }, {
