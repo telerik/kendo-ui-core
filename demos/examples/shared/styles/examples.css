@@ -1675,7 +1675,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     background-position: 0 3px;
 }
 
-.aeroviewr-box
+.feature
 {
     border: 1px solid #e6e6e6;
     -moz-border-radius: 10px;
@@ -1686,14 +1686,14 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     background: #f2f2f2;
 }
 
-.aeroviewr-box h2,
-.aeroviewr-box p,
-.aeroviewr-box .launch-button
+.feature h2,
+.feature p,
+.feature .launch-button
 {
     margin-left: 266px;
 }
 
-#example .aeroviewr-box h2
+#example .feature h2
 {
     margin-top: 0;
 }
@@ -1710,7 +1710,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     display:block;
     width:104px;
     height:32px;
-    margin:1.2em 0 0;
+    margin:1.2em 0 2em;
     background:#333;
     -moz-border-radius:4px;
     -wekbit-border-radius:4px;
