@@ -154,7 +154,7 @@ function deployExamples(root, bundle) {
             data = data.replace(/min\.min/g, "min");
 
             // Add back button
-            data = data.replace(/(<!-- description -->)/, '<a href="../">Back</a>');
+            data = data.replace(/(<!-- description -->)/, '<a href="../index.html">Back</a>');
 
             // Remove marker comments
             data = data.replace(/\s*<!--\s*\w+\s*-->\s*$/gm, '');
