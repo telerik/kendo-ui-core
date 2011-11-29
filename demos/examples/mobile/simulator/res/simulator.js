@@ -77,20 +77,17 @@ function changeDevice() {
             $(".content").kendoStop(true, true).kendoAnimate("slide:down", true, function () {
                 resizeContent();
             });
-        }, 200);
+        }, 400);
     }, 0);
 }
 
 function resizeContent() {
     $(".device-container")[0].style.cssText = "";
-    setTimeout( function () {
-        var offset = $(".device-skin").css("padding-top");
-        if (offset != "0px") {
-            $(".device-container").animate({ paddingTop: "+" + offset });
-        }
-
-        fixFF();
-    }, 500 );
+    var offset = $(".device-skin").css("padding-top");
+    if (offset != "0px") {
+        $(".device-container").animate({ paddingTop: "+" + offset });
+    }
+    fixFF();
 }
 
 function fixFF() {
@@ -102,7 +99,7 @@ function fixFF() {
 
     $(foreignDocument.documentElement).css({
         fontSize: $(".device-skin").css("font-size")
-    });
+    }).css("font-size");
 }
 
 var deviceSelector = $("#device-selector")
@@ -110,6 +107,9 @@ var deviceSelector = $("#device-selector")
                             .change( function () {
                                 $(".content").kendoStop(true, true).kendoAnimate("slide:down", function () {
                                     frame.contentWindow.location.href = frame.contentWindow.location.href.replace(/#.*$/, ""); // Remove the anchor or the browser will try to scroll to it!
+                                    setTimeout(function () {
+                                        fixFF();
+                                    }, 300);
                                 });
                             })
                             .kendoDropDownList([
@@ -122,6 +122,14 @@ var deviceSelector = $("#device-selector")
 var frame = $("#simulator")[0],
     addressBar = $("#address-bar"),
     foreignDocument;
+
+setTimeout( function () { // Be faster in Chrome
+    $(frame.contentWindow.document).ready( function () {
+        $(frame.contentWindow.document.documentElement).css({
+            fontSize: $(".device-skin").css("font-size")
+        });
+    });
+}, 300);
 
 frame.onload = function () {
     frame.contentWindow.orientation = $(".device-container").hasClass("horizontal") ? 90 : 0;
