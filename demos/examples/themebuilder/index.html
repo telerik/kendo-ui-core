@@ -52,10 +52,14 @@
         <div class="description">This demo intends to simplify the theming workflow by showing all kendo components on the same page.</div>
         <!-- description -->
         <div id="example" class="k-content">
-            <p>
-                Select a theme to modify <input class="themeChooser" /> and start the <a class="k-button" id="bookmarklet" href="">Kendo ThemeBuilder</a><br />
-                Want to use the ThemeBuilder on your own website? Drag the button to your bookmarks bar!
-            </p>
+            <div id="instructions-box">
+                <h3>Instructions</h3>
+                <ol id="instructions-list">
+                    <li>Select a theme to modify <input class="themeChooser" /></li>
+                    <li>Start the <a class="k-button" id="bookmarklet" href="">Kendo ThemeBuilder</a></li>
+                    <li>Use the ThemeBuilder as a <strong>bookmarklet</strong> on your own pages! (Drag the button to your bookmarks bar)</li>
+                </ol>
+            </div>
 
             <script>
                 $("#bookmarklet").attr("href", ("javascript:(function(){" +
@@ -198,6 +202,16 @@
                 h3 {
                     font: normal 16px/1.5 Arial,sans-serif;
                     margin: 44px 0 13px;
+                }
+
+                #instructions-box {
+                    border-left: 5px solid rgba(0,0,0,.5);
+                    padding-left: 1em;
+                    margin-left: 3%;
+                }
+
+                #instructions-list li {
+                    padding: .4em 0;
                 }
 
                 .column {
