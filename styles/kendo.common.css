@@ -60,6 +60,11 @@
     -webkit-appearance: none;
 }
 
+.k-widget
+{
+    line-height: normal;
+}
+
 /* button */
 
 .k-button
@@ -1152,19 +1157,21 @@ div.k-grid-header .k-header
     margin: .3em 0 0;
 }
 
-.k-filter-menu .k-autocomplete
-{
-    margin-bottom: .5em;
-}
-
 .k-filter-menu .k-filter-and
 {
     width: 6em;
+    margin: .6em 0 0;
 }
 
 .k-filter-menu .k-button
 {
-    width:50%;
+    width:48%;
+    margin: .6em 4% 0 0;
+}
+
+.k-filter-menu .k-button+.k-button
+{
+    margin-right: 0;
 }
 
 /* Grid :: grouping */
@@ -1434,17 +1441,24 @@ span.k-dropdown
 .k-autocomplete,
 .k-combobox,
 .k-datepicker,
+.k-timepicker,
+.k-datetimepicker,
 .k-numerictextbox,
 .k-dropdown,
 .k-selectbox
 {
     position: relative;
     display: inline-block;
-    width: 150px;
+    width: 12.4em;
     overflow: visible;
     border-width: 0;
     white-space: nowrap;
     vertical-align: middle;
+}
+
+.k-datetimepicker
+{
+    width: 15em;
 }
 
 .k-autocomplete,
@@ -1840,20 +1854,6 @@ body .k-datetimepicker .k-select
 }
 
 /* Date/Time Pickers */
-
-.k-timepicker,
-.k-datetimepicker,
-.k-datepicker
-{
-    width: 8.5em;
-    border: 0;
-    white-space: nowrap;
-}
-
-.k-datetimepicker
-{
-    width: 13em;
-}
 
 span.k-timepicker,
 span.k-datetimepicker,
