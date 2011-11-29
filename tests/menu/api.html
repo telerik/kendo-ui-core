@@ -14,7 +14,7 @@
         <link type="text/css" href="../../styles/kendo.common.css" rel="stylesheet"/>
         <script type="text/javascript">
 
-            var isRaised, isOpenRaised, isCloseRaised, isSelectRaised;
+            var isRaised, isOpenRaised, isCloseRaised, isSelectRaised, selected;
 
              function getRootItem(index) {
                  return $('#Menu1').find('> .k-item').eq(index)
@@ -34,6 +34,7 @@
              }
 
              function Select() {
+                 selected++;
                  isSelectRaised = true;
              }
 
@@ -174,15 +175,17 @@
             ok(isCalled);
         });
 
-        test('click method should call stopPropagation method always', function() {
+        test('click method should set handled flag and select event is only fired once', function() {
             var item = getRootItem(3);
             var isCalled = false;
 
-            var e = { stopPropagation: function () { isCalled = true; }, preventDefault: function () { } };
+            var e = { stopPropagation: function () {}, preventDefault: function () {} };
 
+            selected = 0;
             menu._click(e, item);
 
-            ok(isCalled);
+            ok(e.handled);
+            ok(selected == 1);
         });
 
         test('hovering root item opens it and raises open event', function() {
