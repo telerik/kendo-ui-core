@@ -10,7 +10,7 @@ var categories = {
                     url: "overview/index.html"
                 }, {
                     text: "High performance",
-                    url: "high-performance/index.html"
+                    url: "overview/high-performance.html"
                 }
             ]
         }, {
