@@ -1104,7 +1104,7 @@
                 browser = $.browser,
                 clickCallback = function(e) {
                     currentProxy($(e.currentTarget));
-                    if(e.type == CLICK) {
+                    if(e.type == CLICK && !$(e.target).is(":button,a,:input,a>.k-icon,textarea")) {
                         wrapper.focus();
                     }
                 };
