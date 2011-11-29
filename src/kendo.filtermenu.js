@@ -121,8 +121,10 @@
     var FilterMenu = Widget.extend({
         init: function(element, options) {
             var that = this,
-                type,
+                type = "string",
                 link,
+                field,
+                getter,
                 operators;
 
             Widget.fn.init.call(that, element, options);
@@ -145,7 +147,18 @@
 
             that.model = that.dataSource.reader.model;
 
-            type = that.model.fields[that.field].type;
+            that._parse = function(value) {
+                 return value + "";
+            }
+
+            if (that.model && that.model.fields) {
+                field = that.model.fields[that.field];
+
+                if (field) {
+                    type = field.type;
+                    that._parse = proxy(field.parse, field);
+                }
+            }
 
             operators = operators[type] || options.operators[type];
 
@@ -188,7 +201,6 @@
                 form = that.form,
                 expression = that.dataSource.filter() || { filters: [], logic: "and" },
                 filters = expression.filters,
-                field = that.model.fields[that.field],
                 filter,
                 idx,
                 length,
@@ -197,7 +209,7 @@
             for (idx = 0, length = filters.length; idx < length; idx++) {
                 filter = filters[idx];
                 if (filter.field == that.field) {
-                    value(form.find("[name='filters[" + current + "].value']"), field.parse(filter.value));
+                    value(form.find("[name='filters[" + current + "].value']"), that._parse(filter.value));
                     value(form.find("[name='filters[" + current + "].operator']"), filter.operator);
                     current++;
                 }
@@ -218,7 +230,6 @@
                 filter,
                 result = that.dataSource.filter() || { filters:[], logic: "and" },
                 idx,
-                field = that.model.fields[that.field],
                 length;
 
             removeFiltersForField(result, that.field);
@@ -229,7 +240,7 @@
 
             for (idx = 0, length = filters.length; idx < length; idx++) {
                 filter = filters[idx];
-                filter.value = field.parse(filter.value);
+                filter.value = that._parse(filter.value);
             }
 
             if (filters.length) {
