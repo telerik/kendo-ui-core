@@ -476,9 +476,12 @@ a.bigButton
     padding: 0;
     vertical-align: top;
     display: inline-block;
-    *display: inline;
-    zoom: 1;
 }
+
+*+html #topnav { float:left; }
+
+*+html #flowerWrap { display:inline-block; }
+*+html #flowerWrap { display:block; }
 
 #topnav li
 {
