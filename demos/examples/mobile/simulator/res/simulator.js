@@ -66,7 +66,9 @@ if ($.browser.webkit || $.browser.mozilla) {
 
             head.append(newLink);
 
-            os = frame.contentWindow.kendo.support.mobileOS = detectOS(mobiles[devicename].ua);
+            if (frame.contentWindow.kendo)
+                os = frame.contentWindow.kendo.support.mobileOS = detectOS(mobiles[devicename].ua);
+
             foreignDocument.documentElement.className = "km-" + (!os ? "ios" : os.name);
             matches = deviceSelector.text().match(/(^\w+)\s(.*)/m);
             $(".description .device")
