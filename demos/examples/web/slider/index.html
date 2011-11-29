@@ -24,64 +24,65 @@
         <div class="description">First Look</div>
         <!-- description -->
         <div id="example" class="k-content">
-			<div id="wrapper">
-				<input id="slider" class="balSlider" />
-				<div id="equalizer">
-					<input class="eqSlider" value="10" />
-					<input class="eqSlider" value="5" />
-					<input class="eqSlider" value="0" />
-					<input class="eqSlider" value="10" />
-					<input class="eqSlider" value="15" />
-				</div>
-			</div>
-			<style scoped>
-				#wrapper {
-					width: 300px;
-					height: 255px;
-					padding: 45px 0 0 0;
-					margin: 0 auto;
-					background: url('../content/slider/eqBack.png') no-repeat 0 0;
-					text-align: center;
-				}
+            <div id="wrapper">
+                <input id="slider" class="balSlider" />
+                <div id="equalizer">
+                    <input class="eqSlider" value="10" />
+                    <input class="eqSlider" value="5" />
+                    <input class="eqSlider" value="0" />
+                    <input class="eqSlider" value="10" />
+                    <input class="eqSlider" value="15" />
+                </div>
+            </div>
 
-				#equalizer {
-					margin-top: 75px;
-					padding-right: 15px;
-				}
-				.balSlider {
-					width: 240px;
-				}
-				#slider .k-slider-selection {
-					display: none;
-				}
-				.eqSlider {
-					display: inline-block;
-					margin: 0 12px;
-					height: 122px;
-				}
-			</style>
             <script>
                 $(document).ready(function() {
                     var slider = $("#slider").kendoSlider({
-						increaseButtonTitle: "Right",
-						decreaseButtonTitle: "Left",
-						max: +10,
-						min: -10,
-						smallStep: 2,
-						largeStep: 1
-					}).data("kendoSlider");
+                        increaseButtonTitle: "Right",
+                        decreaseButtonTitle: "Left",
+                        min: -10,
+                        max: 10,
+                        smallStep: 2,
+                        largeStep: 1
+                    }).data("kendoSlider");
 
-					slider.wrapper.find(".k-slider-selection").hide();
+                    slider.wrapper.find(".k-slider-selection").hide();
                     $(".eqSlider").kendoSlider({
-						orientation: "vertical",
-						max: +20,
-						min: -20,
-						smallStep: 1,
-						largeStep: 20,
-						showButtons: false
-					});
+                        orientation: "vertical",
+                        min: -20,
+                        max: 20,
+                        smallStep: 1,
+                        largeStep: 20,
+                        showButtons: false
+                    });
                 });
             </script>
+
+            <style>
+                #wrapper {
+                    width: 300px;
+                    height: 255px;
+                    padding: 45px 0 0 0;
+                    margin: 0 auto;
+                    background: url('../content/slider/eqBack.png') no-repeat 0 0;
+                    text-align: center;
+                }
+                #equalizer {
+                    margin-top: 75px;
+                    padding-right: 15px;
+                }
+                .balSlider {
+                    width: 240px;
+                }
+                #slider .k-slider-selection {
+                    display: none;
+                }
+                .eqSlider {
+                    display: inline-block;
+                    margin: 0 12px;
+                    height: 122px;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->

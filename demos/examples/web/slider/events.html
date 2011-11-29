@@ -25,29 +25,15 @@
         <div class="description">Events</div>
         <!-- description -->
         <div id="example" class="k-content">
-			<div id="climateCtrl">
+            <div id="climateCtrl">
+                <input id="slider" class="temperature" />
 
-				<input id="slider" class="temperature" />
+                <div id="rangeslider" class="humidity">
+                    <input />
+                    <input />
+                </div>
+            </div>
 
-				<div id="rangeslider" class="humidity">
-					<input />
-					<input />
-				</div>
-
-			</div>
-			<style scoped>
-				#climateCtrl {
-					width: 245px;
-					height: 167px;
-					margin: 30px auto;
-					padding: 102px 0 0 156px;
-					background: url('../content/slider/climateController.png') transparent no-repeat 0 0;
-				}
-				.humidity {
-					margin: 67px 0 0 15px;
-					width: 170px;
-				}
-			</style>
             <script>
                 function sliderOnSlide(e) {
                     kendoConsole.log("Change :: new value is: " + e.value);
@@ -69,24 +55,38 @@
                     $("#slider").kendoSlider({
                         change: sliderOnChange,
                         slide: sliderOnSlide,
-						min: 0,
-						max: 30,
-						smallStep: 1,
-						largeStep: 10,
-						value: 18
+                        min: 0,
+                        max: 30,
+                        smallStep: 1,
+                        largeStep: 10,
+                        value: 18
                     });
 
                     $("#rangeslider").kendoRangeSlider({
                         change: rangeSliderOnChange,
                         slide: rangeSliderOnSlide,
-						min: 0,
-						max: 10,
-						smallStep: 1,
-						largeStep: 2,
-						tickPlacement: "both"
+                        min: 0,
+                        max: 10,
+                        smallStep: 1,
+                        largeStep: 2,
+                        tickPlacement: "both"
                     });
                 });
             </script>
+
+            <style>
+                #climateCtrl {
+                    width: 245px;
+                    height: 167px;
+                    margin: 30px auto;
+                    padding: 102px 0 0 156px;
+                    background: url('../content/slider/climateController.png') transparent no-repeat 0 0;
+                }
+                .humidity {
+                    margin: 67px 0 0 15px;
+                    width: 170px;
+                }
+            </style>
         </div>
         <div class="console"></div>
         <!-- tools -->

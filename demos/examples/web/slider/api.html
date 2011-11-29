@@ -53,39 +53,19 @@
                         <button class="k-button" id="getRangeSliderValue">Get value</button>
                     </li>
                     <li>
-                        <button class="k-button" id="enableRangeSlider">Enable</button>
-                    </li>
-                    <li>
-                        <button class="k-button" id="disableRangeSlider">Disable</button>
+                        <button class="k-button" id="enableRangeSlider">Enable</button> or <button class="k-button" id="disableRangeSlider">Disable</button>
                     </li>
                 </ul>
             </div>
 
             <div id="climateCtrl">
+                <input id="slider" class="temperature" />
 
-				<input id="slider" class="temperature" />
-
-				<div id="rangeslider" class="humidity">
-					<input />
-					<input />
-				</div>
-
-			</div>
-
-			<style scoped>
-				#climateCtrl {
-					display: inline-block;
-					width: 245px;
-					height: 167px;
-					margin: 20px;
-					padding: 102px 0 0 156px;
-					background: url('../content/slider/climateController.png') transparent no-repeat 0 0;
-				}
-				.humidity {
-					margin: 67px 0 0 15px;
-					width: 170px;
-				}
-			</style>
+                <div id="rangeslider" class="humidity">
+                    <input />
+                    <input />
+                </div>
+            </div>
 
             <script>
                 $(document).ready(function() {
@@ -168,6 +148,21 @@
                     });
                 });
             </script>
+
+            <style>
+                #climateCtrl {
+                    display: inline-block;
+                    width: 245px;
+                    height: 167px;
+                    margin: 20px;
+                    padding: 102px 0 0 156px;
+                    background: url('../content/slider/climateController.png') transparent no-repeat 0 0;
+                }
+                .humidity {
+                    margin: 67px 0 0 15px;
+                    width: 170px;
+                }
+            </style>
         </div>
         <!-- tools -->
         <!-- tools -->
