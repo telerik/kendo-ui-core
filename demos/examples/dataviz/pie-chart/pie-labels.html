@@ -28,19 +28,17 @@
                 <span class="configTitle">Pie Chart</span>
                 <ul class="options">
                     <li>
-                        <input id="labels" type="checkbox" autocomplete="off" />
+                        <input id="labels" checked="true" type="checkbox" autocomplete="off" />
                         <label for="labels">Show labels</label>
                     </li>
                     <li>
-                        <input id="alignCircle" name="alignType"
-                               type="radio" value="circle" checked="checked"
-                               disabled="disabled" autocomplete="off" />
+                        <input id="alignCircle" name="alignType" type="radio"
+                               value="circle" checked="checked" autocomplete="off" />
                         <label for="alignCircle">- aligned in circle</label>
                     </li>
                     <li>
-                        <input id="alignColumn" name="alignType"
-                               type="radio" value="column"
-                               disabled="disabled" autocomplete="off" />
+                        <input id="alignColumn" name="alignType" type="radio"
+                               value="column" autocomplete="off" />
                         <label for="alignColumn">- aligned in columns</label>
                     </li>
                 </ul>
@@ -105,8 +103,6 @@
                 });
 
                 function setupConfigurator() {
-                    $("#labels").prop("checked", true);
-
                     $(".configuration").live("change", refresh);
                 }
 
