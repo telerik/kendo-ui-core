@@ -1754,13 +1754,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     background:0 36px no-repeat url("browsers.png");
 }
 
-#example .k-chart {
-    width: 550px;
-    height: 420px;
-    padding: 25px 50px;
-}
-
-#example .chart-wrapper {
+.chart-wrapper {
     position: relative;
     width: 650px;
     height: 546px;
@@ -1779,4 +1773,10 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     left: 15px;
     bottom: 60px;
     white-space: nowrap;
+}
+
+.chart-wrapper .k-chart {
+    width: 550px;
+    height: 420px;
+    padding: 25px 50px;
 }
