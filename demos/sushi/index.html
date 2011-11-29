@@ -3,9 +3,6 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Kendo Sushi</title>
-
-        <!-- Weinre Proxy, configure to your machine if you have it. -->
-        <!--<script src="http://bundev.telerik.com:8080/target/target-script-min.js"></script>-->
         <link rel="stylesheet" href="css/kendo.mobile.css" />
         <link rel="stylesheet" href="css/style.css" />
         <script src="../../src/jquery.js"></script>
@@ -24,6 +21,9 @@
         <script src="../../src/kendo.mobile.application.js"></script>
     </head>
     <body>
+        <script type="text/javascript">
+            $(document.body).hide();
+        </script>
         <div data-role="view" id="index" data-url="/" data-animation="slide">
             <header data-role="header">
                 <div data-role="navbar">
@@ -129,7 +129,8 @@
 
         <div data-role="view" id="done" data-transition="zoom">
             <header data-role="header"> <div data-role="navbar"> <span data-role="view-title">Done!</span> </div>
-            </header><div data-role="content" class="km-insetcontent">
+            </header>
+            <div data-role="content" class="km-insetcontent">
                 <img src="images/happy.png" id="done-icon">
                 <h2>Thanks for shopping! </h2>
                 <h3>Your sushi is on the way.</h3>
@@ -160,18 +161,17 @@
         </div>
 
         <script id="menuTemplate" type="text/x-kendo-template">
+            <a data-role="button" data-name="add" href="\\#">Order</a>
             <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
                 <img src="images/75/${image}" />
-                <span class="price"> ${kendo.toString(price, "c")}</span>
                 <h2>${name}</h2>
+                <span class="price"> ${kendo.toString(price, "c")}</span>
                 <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added in your cart</span>
             </a>
-            <a data-role="button" data-name="add" href="\\#">Add</a>
         </script>
 
         <script id="cartItemTemplate" type="text/x-kendo-template">
-            <a data-role="button" data-name="remove" href="\\#">Remove</a>
-
+            <a data-role="button" data-name="remove" href="\\#">Cancel</a>
             <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
                 <img src="images/75/${image}" />
                 <h2>${name}</h2>
@@ -183,7 +183,7 @@
             <aside>
                 <img src="images/200/${image}" />
                 <span class="price">${kendo.toString(price, "c")}</span>
-                <a data-role="button" href="\\#" id="add-to-cart">Add to cart</a>
+                <a data-role="button" href="\\#" id="add-to-cart">Order</a>
             </aside>
             <h2>${name}</h2>
             <p>${description}</p>
@@ -258,7 +258,7 @@
                     }).data("kendoMobileListView").bind("click", removeItemFromList);
 
                     $("#checkout").data("kendoMobileButton").bind("click", function() {
-                        cartDataSource.data([]);
+                        setTimeout(function () { cartDataSource.data([]) }, 400);
                     });
                 }
             });
@@ -281,6 +281,8 @@
                 } else if (viewID === "index" || viewID === "menu") {
                     view.content.find(".item-list").data("kendoMobileListView").refresh();
                 }
+
+                $(document.body).show();
             });
         </script>
     </body>
