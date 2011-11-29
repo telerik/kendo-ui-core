@@ -125,9 +125,9 @@ if ($.browser.webkit || $.browser.mozilla) {
             foreignDocument;
 
         function changeFontSize() {
-            console.log($(frame.contentWindow.document.documentElement).css({
+            $(frame.contentWindow.document.documentElement).css({
                 fontSize: $(".device-skin").css("font-size")
-            }).css("font-size"));
+            }).css("font-size");
         }
 
         $(window).bind("DOMFrameContentLoaded", function () { setTimeout(changeFontSize, 300); } );
