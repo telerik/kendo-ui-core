@@ -141,9 +141,9 @@
                     title = Application.fetchTitle(),
                     toolsVisible = tools.is(":visible");
 
-                if (title == "Overview" && toolsVisible)
-                    tools.hide();
-                else {
+                if (title == "Overview" && toolsVisible) {
+                    tools.toggle(category != "mobile" && category != "themebuilder");
+                } else {
                     Application.fetchDescription();
                 }
 
@@ -208,7 +208,7 @@
 
                 exampleName.empty().html(iconElement + title);
 
-                $("#codeStrip,#examplesThemeChooser").show();
+                $("#codeStrip,#examplesThemeChooser").toggle(category != "mobile" && category != "themebuilder");
 
                 $(".description").empty().html($.trim(Application.description(html)));
             } else {
@@ -505,8 +505,6 @@
                     } catch(err) {}
                 }
             });
-
-            $("#examplesThemeChooser").show();
         });
     }
 
