@@ -669,7 +669,6 @@
 
         _click: function (e) {
             var that = this, openHandle;
-            e.stopPropagation();
 
             var element = $(e.currentTarget);
 
@@ -678,7 +677,10 @@
                 return;
             }
 
-            that.trigger(SELECT, { item: element[0] });
+            if (!e.handled) // We shouldn't stop propagation.
+                that.trigger(SELECT, { item: element[0] });
+
+            e.handled = true;
 
             if (!element.parent().hasClass(MENU) || (!that.options.openOnClick && !touch)) {
                 return;
