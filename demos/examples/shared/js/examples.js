@@ -483,7 +483,8 @@
                     { text: "Default", value: "default" },
                     { text: "Blue Opal", value: "blueopal" },
                     { text: "Black", value: "black" },
-                    { text: "Silver", value: "silver" }
+                    { text: "Silver", value: "silver" },
+                    { text: "Metro", value: "metro" }
                 ]
             });
 
