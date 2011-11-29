@@ -282,7 +282,7 @@
             var checked = input[0].checked;
             handle.addClass("km-switch-" + (checked ? "on" : "off"));
             if (checked) {
-                that.animator.css(TRANSFORMSTYLE, "translate(" + (that.element.outerWidth() - handle.outerWidth(true)) + "px,0)");
+                that.animator.css(TRANSFORMSTYLE, "translate(" + (that.element.outerWidth() - handle.outerWidth()) + "px,0)");
                 that.mAnimator
                     .data("origin", parseInt(that.mAnimator.css("margin-left"), 10))
                     .css("margin-left", 0);
