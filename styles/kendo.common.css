@@ -997,8 +997,6 @@ div.k-grid-header .k-header
     line-height: 1.8em;
 }
 
-.k-grid-pager:first-child,
-.k-grouping-header+.k-grid-pager,
 .k-grid-toolbar:first-child,
 .k-grouping-header+.k-grid-toolbar
 {
