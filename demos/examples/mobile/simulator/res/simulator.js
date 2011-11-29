@@ -142,6 +142,12 @@ if ($.browser.webkit || $.browser.mozilla) {
             if (frame.src != addressBar.val())
                 addressBar.val(frame.src);
 
+            $(frame).bind("mouseleave", function (e) {
+                var event = foreignDocument.createEvent("MouseEvents");
+                event.initMouseEvent("mouseup", true, true, frame.contentWindow, 1, e.screenX, e.screenY, e.clientX, e.clientY, false, false, false, false, 0, null);
+                $(foreignDocument).find(".km-scroll-container:visible")[0].dispatchEvent(event);
+            });
+
             fixFF();
             changeDevice();
         };
