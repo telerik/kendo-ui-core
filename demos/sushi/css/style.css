@@ -171,3 +171,35 @@
     padding: 1rem;
     font-size: 5rem;
 }
+
+#done-icon, #empty-icon {
+    margin: 64px auto 20px auto;
+    display: block;
+    width: 128px;
+}
+
+#empty-icon {
+    display: none;
+}
+
+.km-empty #empty-icon {
+    display: block;
+}
+
+#done h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#done h3, #checkout h3 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#done-button
+{
+    margin: 1rem;
+    display: block;
+    text-align: center;
+    font-size: 1.1rem;
+}
