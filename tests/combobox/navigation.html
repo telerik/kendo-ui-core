@@ -52,6 +52,31 @@
                 }
             });
 
+            asyncTest("pressing alt + down should open popup", function() {
+                var blurWasCalled, combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+                combobox.popup.bind("open", function(){
+                    ok(true);
+                    start();
+                });
+
+                combobox.input.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.DOWN});
+            });
+
+            asyncTest("pressing alt + up should close popup", function() {
+                var blurWasCalled, combobox = new ComboBox(input, {
+                    dataSource: data
+                });
+                combobox.popup.bind("close", function(){
+                    ok(true);
+                    start();
+                });
+                combobox.open();
+
+                combobox.input.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.UP});
+            });
+
             asyncTest("click _arrow should input", function() {
                 var focusWasCalled, combobox = new ComboBox(input, {
                     dataSource: data
@@ -238,6 +263,22 @@
                 combobox.input.focus().press(keys.ENTER);
             });
 
+            asyncTest("press enter should call preventDefault when popup is visible", function() {
+                var combobox = input.kendoComboBox(data).data("kendoComboBox");
+
+                combobox.popup.open();
+
+                combobox.select(0);
+                combobox.input.focus().trigger({
+                    type: "keydown",
+                    keyCode: keys.ENTER,
+                    preventDefault: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+            });
+
             test("press TAB should call text()", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
 
@@ -280,30 +321,7 @@
                 combobox.input.focus().press(kendo.keys.ENTER);
             });
 
-            asyncTest("pressing alt + down should open popup", function() {
-                var blurWasCalled, combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-                combobox.popup.bind("open", function(){
-                    ok(true);
-                    start();
-                });
 
-                combobox.input.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.DOWN});
-            });
-
-            asyncTest("pressing alt + up should close popup", function() {
-                var blurWasCalled, combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-                combobox.popup.bind("close", function(){
-                    ok(true);
-                    start();
-                });
-                combobox.open();
-
-                combobox.input.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.UP});
-            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

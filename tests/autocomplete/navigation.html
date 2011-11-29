@@ -22,6 +22,8 @@
             var AutoComplete = kendo.ui.AutoComplete,
                 input;
 
+            QUnit.config.testTimeout = 800;
+
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             }
@@ -153,6 +155,24 @@
                 input.press(kendo.keys.ENTER);
 
                 ok(!autocomplete.ul.is(":visible"));
+            });
+
+            asyncTest("press enter should call preventDefault when popup is visible", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["baz", "bar"]
+                });
+
+                autocomplete.popup.open();
+
+                autocomplete.select(0);
+                autocomplete.element.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.ENTER,
+                    preventDefault: function() {
+                        ok(true);
+                        start();
+                    }
+                });
             });
 
             test("pressing enter closes updates the value of the autocomplete", function() {

@@ -314,6 +314,7 @@
                 e.preventDefault();
 
             } else if (key === keys.ENTER || key === keys.TAB || key === keys.ESC) {
+                e.preventDefault();
                 that.close();
             }
         }
