@@ -461,6 +461,7 @@
                     }
 
                     that.trigger(CHANGE);
+                    that._map();
                 });
         },
 
