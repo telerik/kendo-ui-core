@@ -6908,7 +6908,7 @@
             pie: {
                 highlight: {
                     opacity: 0.6,
-                    color: "#3b3b3b",
+                    color: "#3d3d3d",
                     border: {
                         width: 0.5,
                         opacity: 0.9,
@@ -6921,22 +6921,22 @@
             },
             line: {
                 markers: {
-                    background: "#3b3b3b"
+                    background: "#3d3d3d"
                 }
             },
             scatter: {
                 markers: {
-                    background: "#3b3b3b"
+                    background: "#3d3d3d"
                 }
             },
             scatterLine: {
                 markers: {
-                    background: "#3b3b3b"
+                    background: "#3d3d3d"
                 }
             }
         },
         chartArea: {
-            background: "#3b3b3b"
+            background: "#3d3d3d"
         },
         seriesColors: ["#0081da", "#3aafff", "#99c900", "#ffeb3d", "#b20753", "#ff4195"],
         categoryAxis: {
@@ -6959,7 +6959,7 @@
             }
         },
         tooltip: {
-            background: "#3b3b3b",
+            background: "#3d3d3d",
             color: WHITE,
             opacity: 0.8
         }
@@ -7073,7 +7073,7 @@
             }
         },
         chartArea: {
-            background: "#f4f4f4"
+            background: "#eaeaec"
         },
         seriesColors: ["#007bc3", "#76b800", "#ffae00", "#ef4c00", "#a419b7", "#430B62"],
         categoryAxis: {
