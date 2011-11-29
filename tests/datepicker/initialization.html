@@ -197,7 +197,6 @@
 
                 ok(input.parent().hasClass("k-picker-wrap k-state-default"));
                 equal(datepicker.wrapper.attr("class"), "k-widget k-datepicker k-header");
-                equal(datepicker.wrapper.width(), 200);
             });
 
             test("_input should add k-input to the element", function() {
@@ -262,6 +261,24 @@
                 datepicker._icon.click();
                 setTimeout(function() {
                     ok(datepicker.dateView.popup.visible());
+                    start();
+                }, 200);
+            });
+
+            asyncTest("form reset support", function() {
+                input.attr("value", "12/12/2000");
+
+                var form = $("<form/>").appendTo(document).append(input),
+                    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.open();
+                datepicker.value("12/12/2010");
+
+                form[0].reset();
+
+                setTimeout(function() {
+                    equal(datepicker.element.val(), "12/12/2000");
+                    equal(datepicker.dateView.calendar.value().getFullYear(), "2000");
                     start();
                 }, 200);
             });

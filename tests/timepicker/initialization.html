@@ -79,7 +79,6 @@
 
                 ok(input.parent().hasClass("k-picker-wrap k-state-default"));
                 equal(timepicker.wrapper.attr("class"), "k-widget k-timepicker k-header");
-                equal(timepicker.wrapper.width(), 200);
             });
 
             test("init() should add k-input to the element", function() {
@@ -124,6 +123,25 @@
                 timepicker._arrow.click();
                 setTimeout(function() {
                     ok(timepicker.timeView.popup.visible());
+                    start();
+                }, 200);
+            });
+
+            asyncTest("form reset support", function() {
+                input.attr("value", "12:00 AM");
+
+                var form = $("<form/>").appendTo(document).append(input),
+                    timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.open();
+
+                timepicker.value("2:30 PM");
+
+                form[0].reset();
+
+                setTimeout(function() {
+                    equal(timepicker.element.val(), "12:00 AM");
+                    equal(timepicker.timeView.current().text(), "12:00 AM");
                     start();
                 }, 200);
             });

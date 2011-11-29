@@ -349,16 +349,6 @@
                ok(dropdownlist.ul.hasClass("k-list"));
            });
 
-           test("resize UL depending on the element width", function() {
-               input.width(200);
-               var data = [{text: 1, value: 1}, {text:2, value:2}],
-               dropdownlist = new DropDownList(input, {
-                   dataSource: data
-               });
-
-               equal(dropdownlist.list.width(), 200);
-           });
-
            test("set height if items height is bigger than options.height", function() {
                var dataSource = new kendo.data.DataSource.create([{text: 1, value: 1}, {text:2, value:2}]);
                dataSource.read();
