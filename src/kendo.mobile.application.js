@@ -72,9 +72,10 @@
 
     function appLinkMouseUp(e) {
         var link = $(e.currentTarget),
+            internal = link.data(kendo.ns + "rel") != "external",
             href = link.attr("href");
 
-        if (!e.isDefaultPrevented()) {
+        if (!e.isDefaultPrevented() && internal) {
             // Prevent iOS address bar progress display for in app navigation
             if (href) {
                 link.attr("href", "#!");
@@ -87,7 +88,9 @@
     }
 
     function appLinkClick(e) {
-        e.preventDefault();
+        if($(e.currentTarget).data(kendo.ns + "rel") !== "external") {
+            e.preventDefault();
+        }
     }
 
     function getOrientationClass() {
