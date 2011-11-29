@@ -1176,7 +1176,7 @@ pre.prettyprint
 #skinSelector-list
 {
     margin-top: 2px;
-    padding-bottom: 3px;
+    padding: 3px 0 1px;
     color: #2175bd;
     background: #F3F3F3;
     border-color: #dedede;
@@ -1211,6 +1211,15 @@ pre.prettyprint
     font-size: 11px;
     color: #555;
     text-align: center;
+}
+
+#skinSelector-list #launch-themebuilder
+{
+    display: block;
+    height: 54px;
+    background: transparent url(launch-themebuilder.png) no-repeat 0 0;
+    overflow: hidden;
+    text-indent: -999em;
 }
 
 #skinSelector-list .k-state-hover .thumbLink
