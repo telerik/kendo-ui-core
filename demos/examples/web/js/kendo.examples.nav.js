@@ -489,6 +489,7 @@ var categories = {
         },
         {
             text: "Globalization",
+            spriteCssClass: "globalizationIcon",
             items: [
                 {
                     text: "Basic usage",
