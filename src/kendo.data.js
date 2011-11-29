@@ -1154,6 +1154,10 @@
             });
         },
 
+        indexOf: function(dataItem) {
+            return this._set.indexOf(dataItem);
+        },
+
         _params: function(data) {
             var that = this;
 

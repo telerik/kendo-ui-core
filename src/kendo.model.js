@@ -289,6 +289,14 @@
             autoSync: false
         },
 
+        indexOf: function(dataItem) {
+            var that = this,
+                model = that.options.model,
+                id = model.id(dataItem);
+
+            return that._idMap[id];
+        },
+
         _map: function() {
             var that = this,
                 idx,
