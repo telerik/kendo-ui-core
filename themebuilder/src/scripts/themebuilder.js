@@ -346,6 +346,7 @@
                 $("<div id='kendo-themebuilder'>" +
                         "<div id='download-overlay' class='ktb-view'>" +
                             "<button class='ktb-action-back k-button'>Back</button>" +
+                            "<a href='http://www.kendoui.com/documentation/themebuilder.aspx' id='docs-link' target='_blank'>What should I do with this?</a>" +
                             "<div class='ktb-content'>" +
                                 "<textarea readonly></textarea>" +
                             "</div>" +

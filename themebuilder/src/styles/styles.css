@@ -6,8 +6,7 @@ html, body {
     overflow: hidden;
 }
 
-body
-{
+body {
     font: normal 12px/1.5 Tahoma,sans-serif;
 }
 
@@ -43,18 +42,15 @@ body
 *::-moz-selection { background: #1179e5; color: #fff; }
 ::selection { background: #1179e5; color: #fff; }
 
-#kendo-themebuilder .styling-options
-{
+#kendo-themebuilder .styling-options {
     width: auto;
 }
 
-#kendo-themebuilder .styling-options
-{
+#kendo-themebuilder .styling-options {
     padding: .4em;
 }
 
-#kendo-themebuilder label
-{
+#kendo-themebuilder label {
     display: inline-block;
     width: 50%;
     padding-right: 4%;
@@ -63,14 +59,12 @@ body
 }
 
 #kendo-themebuilder #stylable-elements,
-#kendo-themebuilder .k-style-apply
-{
+#kendo-themebuilder .k-style-apply {
     margin: .6em 0 0;
 }
 
 #kendo-themebuilder .k-color-preview,
-#kendo-themebuilder .k-colorpicker .k-arrow-down
-{
+#kendo-themebuilder .k-colorpicker .k-arrow-down {
     border: 0;
     background-image: none;
     -webkit-border-radius: 8px;
@@ -79,8 +73,7 @@ body
 }
 
 .k-color-preview,
-.ktb-texture-preview
-{
+.ktb-texture-preview {
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
@@ -88,24 +81,20 @@ body
     margin: 1px 0 0 1px;
 }
 
-.k-color-preview
-{
+.k-color-preview {
     background-image: none;
 }
 
-.ktb-texture-preview
-{
+.ktb-texture-preview {
     width: 19px;
     height: 19px;
 }
 
-.k-list
-{
+.k-list {
     text-align: center;
 }
 
-.k-list .k-item
-{
+.k-list .k-item {
     width: 19px;
     height: 19px;
     overflow: hidden;
@@ -116,39 +105,33 @@ body
 
 .k-list .k-state-hover,
 .k-list .k-state-focused,
-.k-list .k-state-selected
-{
+.k-list .k-state-selected {
     padding: 0;
 }
 
 #kendo-themebuilder div.k-colorpicker,
 #kendo-themebuilder .k-numerictextbox,
 #kendo-themebuilder .k-combobox,
-#kendo-themebuilder .k-shadowinput
-{
+#kendo-themebuilder .k-shadowinput {
     width: 100px;
     margin-bottom: 5px;
 }
 
-.k-colorpicker .k-select
-{
+.k-colorpicker .k-select {
     padding: 3px;
 }
 
-.k-colorpicker .k-arrow-down
-{
+.k-colorpicker .k-arrow-down {
     margin-top: -1px;
 }
 
 .k-colorpicker .k-input,
 .k-color-name,
-#download-overlay textarea
-{
+#download-overlay textarea {
     font: 12px Consolas, Courier, monospace;
 }
 
-.ktb-view > .k-button
-{
+.ktb-view > .k-button {
     margin-right: .6em;
 }
 
@@ -161,8 +144,7 @@ body
     width: 100%;
 }
 
-#download-overlay
-{
+#download-overlay {
     display: none;
     position: absolute;
     top: 0;
@@ -187,5 +169,14 @@ body
     height: 100%;
     resize: none;
     outline: none;
+}
+
+#docs-link {
+    color: #19a3ee;
+    float: right;
+}
+
+#docs-link:hover {
+    color: #39c3fe;
 }
 
