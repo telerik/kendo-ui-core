@@ -1113,6 +1113,9 @@
             this._set.cancelChanges();
         },
 
+        /**
+         * Populate the DataSource using the assign transport instance.
+         */
         read: function(data) {
             var that = this, params = that._params(data);
 
