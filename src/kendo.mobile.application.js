@@ -55,6 +55,12 @@
         }
     }
 
+    function hideAddressBarOnBack() {
+        if (os.android) {
+            window.scrollBy(0,56);
+        }
+    }
+
     function hideAddressBar(element) {
         if (os.appMode) {
             return;
@@ -140,8 +146,9 @@
             previous.element.css("z-index", 0);
         }
 
-        if (that.back && os.android)
-            window.scrollBy(0,56);
+        if (that.back) {
+            hideAddressBarOnBack();
+        }
 
         that.contents(previous, view).kendoAnimateTo(that.contents(view, previous), {effects: animationType, reverse: that.back, complete: callback});
         that.switchWith(previous.footer, view.footer);
