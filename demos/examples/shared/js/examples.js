@@ -488,14 +488,12 @@
                 ]
             });
 
-            $(".themeChooser").val(kendoSkin).kendoDropDownList({
+            var themeChooser = $(".themeChooser").val(kendoSkin).kendoDropDownList({
                 dataSource: themes,
-
                 template: '<span class="thumbLink">' +
                     '<span class="thumb #= data.text.toLowerCase() #Thumb" ' +
                         'style="background-image: url(#= initialRelativePath #Menu/thumbSprite.png)">' +
                         '<span class="gloss"></span></span><span class="skinTitle">#= data.text #</span></span>',
-
                 change: function(e) {
                     var theme = (this.value() || "default").toLowerCase();
 
@@ -505,6 +503,13 @@
                         sessionStorage.setItem("kendoSkin", theme);
                     } catch(err) {}
                 }
+            }).data("kendoDropDownList");
+
+            themeChooser.list.width(279).append("<a href='" + $("#themebuilder").attr("href") + "' id='launch-themebuilder'>Launch ThemeBuilder</a>");
+
+            themeChooser.popup.options = $.extend(themeChooser.popup.options, {
+                origin: "bottom right",
+                position: "top right"
             });
         });
     }
