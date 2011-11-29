@@ -7065,7 +7065,7 @@
         seriesDefaults: {
             labels: {
                 color: "#293135",
-                background: WHITE,
+                background: "#eaeaec",
                 opacity: 0.5
             },
             pie: {

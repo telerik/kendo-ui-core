@@ -25,7 +25,7 @@
         <!-- description -->
         <div id="example" class="k-content">
             <div class="chart-wrapper">
-                <div id="chart"></div>
+                <div id="chart" style="background: center no-repeat url('../../shared/styles/world-map.png');"></div>
             </div>
             <script>
                 function createChart() {
@@ -36,6 +36,9 @@
                         },
                         legend: {
                             position: "bottom"
+                        },
+                        chartArea: {
+                            background: ""
                         },
                         seriesDefaults: {
                             type: "bar"
