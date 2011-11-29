@@ -1093,22 +1093,43 @@
             batch: false
         },
 
+        /**
+         * Retrieves a Model instance by given id.
+         * @param {Number} id of the model to be retrieved
+         * @returns {Object} Model instance if found
+         */
         get: function(id) {
             return this._set.get(id);
         },
 
+        /**
+         * Synchronizes changes through the transport.
+         */
         sync: function() {
             this._set.sync();
         },
 
+        /**
+         * Adds a new Model instance to the DataSource
+         * @param {Object} Either a Model instance or object from which the Model will be created
+         * @returns {Object} The Model instance which has been added
+         */
         add: function(model) {
             return this._set.add(model);
         },
 
+        /**
+         * Inserts a new Model instance to the DataSource.
+         * @param {Object} Either a Model instance or object from which the Model will be created
+         * @returns {Object} The Model instance which has been inserted
+         */
         insert: function(index, model) {
             return this._set.insert(index, model);
         },
 
+        /**
+         * Cancel the changes made to the DataSource after the last sync.
+         */
         cancelChanges : function() {
             this._set.cancelChanges();
         },
@@ -1164,6 +1185,10 @@
             }
         },
 
+        /**
+         * Removes a Model instance from the DataSource.
+         * @param {Object} Model instance to be removed
+         */
         remove: function(model) {
             this._set.remove(model);
         },
