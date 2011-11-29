@@ -12,6 +12,17 @@ body
     overflow: hidden;
 }
 
+.fake3d {
+    position: absolute;
+    background: none;
+    border: 0;
+    width: 1px;
+    height: 1px;
+    bottom: 100%;
+    right: 100%;
+    -webkit-transform: translatez(0);
+}
+
 #simulator
 {
     position: relative;
@@ -63,6 +74,11 @@ body
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+.device
+{
+    height: 40px;
 }
 
 .selector
