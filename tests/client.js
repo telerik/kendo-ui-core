@@ -15,43 +15,16 @@ var agents = 0;
 url = process.argv[2] || 'tests/mobile/';
 
 client.subscribe('/connect', function(agent) {
-    // util.puts(agent.green, " connected");
     agents ++;
 });
-
-/*
-client.subscribe("/testDone", function(state) {
-    var testName = (state.module ? state.module + " " : "").bold + state.name;
-    if (state.failed == 0) {
-        testName = testName.blue;
-    } else {
-        testName = testName.red;
-    }
-
-    // util.puts(testName + ' (' + state.failed.toString().red + ', ' + state.passed.toString().green + ', ' + state.total.toString().grey + ')');
-    if (state.failures.length == 0) {
-        process.stdout.write(".".green)
-    } else {
-        process.stdout.write("x".red)
-        for (var i = 0; i < state.failures.length; i ++) {
-            util.puts((" -- " + state.failures[i]).red);
-        }
-    }
-});
-
-client.subscribe("/done", function(agent) {
-    agents --;
-
-    if(!agents) {
-        process.exit();
-    }
-});
-*/
 
 client.publish('/load', "/" + url);
 
 client.subscribe('/testDone', function(message) {
-  var testCase = root.ele('testcase').att('name', message.name).att('classname', "Chrome");
+  var testCase = root.ele('testcase')
+    .att('name', message.name)
+    .att('time', message.duration)
+    .att('classname', "Chrome");
 
   if (message.failed > 0) {
     testCase.ele('failure').txt(message.failures.join("\n"));
