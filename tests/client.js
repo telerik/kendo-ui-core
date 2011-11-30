@@ -51,7 +51,7 @@ client.subscribe("/done", function(agent) {
 client.publish('/load', "/" + url);
 
 client.subscribe('/testDone', function(message) {
-  var testCase = root.ele('testcase').att('name', message.name);// .att('classname', message.agent);
+  var testCase = root.ele('testcase').att('name', message.name).att('classname', "Chrome");
 
   if (message.failed > 0) {
     testCase.ele('failure').txt(message.failures.join("\n"));
