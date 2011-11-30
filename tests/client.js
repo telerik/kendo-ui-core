@@ -26,8 +26,12 @@ client.subscribe('/testDone', function(message) {
     .att('time', message.duration)
     .att('classname', "Chrome");
 
+
   if (message.failed > 0) {
+    process.stderr.write("F");
     testCase.ele('failure').txt(message.failures.join("\n"));
+  } else {
+    process.stderr.write(".");
   }
 });
 
@@ -44,7 +48,7 @@ client.subscribe('/done', function(message) {
         .att('errors', 0)
         .att('failures', failures);
 
-        console.log(doc.toString({pretty: true}));
+        process.stdout.write(doc.toString({pretty: true}));
         process.exit();
     }
 });
