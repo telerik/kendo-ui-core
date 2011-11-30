@@ -72,10 +72,10 @@ namespace KendoDemosTests
         
         // Add your test methods here...
     
-        [CodedStep(@"New Coded Step")]
-        public void PickRange_CodedStep()
-        {
+        //[CodedStep(@"New Coded Step")]
+        //public void PickRange_CodedStep()
+        //{
             
-        }
+        //}
     }
 }
