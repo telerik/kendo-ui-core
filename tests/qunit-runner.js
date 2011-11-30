@@ -116,6 +116,8 @@
     }
 
     var runner = parent.__qunit_runner || window.__qunit_runner;
+    var knownFails = $();
+    var startDate = 0;
 
     QUnit.config.autostart = false;
 
@@ -128,15 +130,16 @@
     });
 
     QUnit.config.testStart.push(function(state) {
+        startDate = +new Date();
         runner.pageProgress(window.frameElement, 0, 0, state.name + " started");
     });
 
-    var knownFails = $();
 
     QUnit.config.testDone.push(function(state) {
         runner.pageProgress(window.frameElement, state.failed, state.total, state.name);
         var newFails = $('li.fail li.fail').not(knownFails);
         state.failures = $.map(newFails.contents(), function(err) { return $(err).text() });
+        state.duration = (+new Date()) - startDate;
         runner.testDone(state);
         knownFails = knownFails.add(newFails);
     });
