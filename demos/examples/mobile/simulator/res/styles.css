@@ -27,6 +27,7 @@ body
 {
     position: relative;
     border: 0;
+    background: #fff;
 }
 
 #navigate-back
