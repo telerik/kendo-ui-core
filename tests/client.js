@@ -15,11 +15,11 @@ var agents = 0;
 url = process.argv[2] || 'tests/mobile/';
 
 client.subscribe('/connect', function(agent) {
-
-    util.puts(agent.green, " connected");
+    // util.puts(agent.green, " connected");
     agents ++;
 });
 
+/*
 client.subscribe("/testDone", function(state) {
     var testName = (state.module ? state.module + " " : "").bold + state.name;
     if (state.failed == 0) {
@@ -28,9 +28,14 @@ client.subscribe("/testDone", function(state) {
         testName = testName.red;
     }
 
-    util.puts(testName + ' (' + state.failed.toString().red + ', ' + state.passed.toString().green + ', ' + state.total.toString().grey + ')');
-    for (var i = 0; i < state.failures.length; i ++) {
-        util.puts((" -- " + state.failures[i]).red);
+    // util.puts(testName + ' (' + state.failed.toString().red + ', ' + state.passed.toString().green + ', ' + state.total.toString().grey + ')');
+    if (state.failures.length == 0) {
+        process.stdout.write(".".green)
+    } else {
+        process.stdout.write("x".red)
+        for (var i = 0; i < state.failures.length; i ++) {
+            util.puts((" -- " + state.failures[i]).red);
+        }
     }
 });
 
@@ -41,15 +46,15 @@ client.subscribe("/done", function(agent) {
         process.exit();
     }
 });
+*/
 
 client.publish('/load', "/" + url);
 
-/*
 client.subscribe('/testDone', function(message) {
-  var testCase = root.ele('testcase').att('name', message.name).att('classname', message.agent);
+  var testCase = root.ele('testcase').att('name', message.name);// .att('classname', message.agent);
 
   if (message.failed > 0) {
-    testCase.ele('failure');
+    testCase.ele('failure').txt(message.failures.join("\n"));
   }
 });
 
@@ -57,18 +62,16 @@ var clientsReported = 0, clientsTotal = 2, failures = 0, total = 0;
 
 
 client.subscribe('/done', function(message) {
+    agents --;
+    failures += message.failures;
+    total += message.total;
 
-  clientsReported ++;
-  failures += message.failures;
-  total += message.total;
+    if (!agents) {
+        root.att('tests', total)
+        .att('errors', 0)
+        .att('failures', failures);
 
-  if (clientsReported == clientsTotal) {
-    root.att('tests', total)
-      .att('errors', 0)
-      .att('failures', failures);
-
-    console.log(doc.toString({pretty: true}));
-    process.exit();
-  }
+        console.log(doc.toString({pretty: true}));
+        process.exit();
+    }
 });
-*/
