@@ -138,7 +138,7 @@
         runner.pageProgress(window.frameElement, state.failed, state.total, state.name);
         var newFails = $('li.fail li.fail').not(knownFails);
         state.failures = $.map(newFails.contents(), function(err) { return $(err).text() });
-        state.duration = (+new Date()) - startDate) / 1000;
+        state.duration = ((+new Date()) - startDate) / 1000;
         runner.testDone(state);
         knownFails = knownFails.add(newFails);
     });
