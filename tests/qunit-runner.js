@@ -100,8 +100,8 @@
     var client = top.client;
 
     if (client) {
-        window.__qunit_runner.done = function() {
-            client.publish("/done", navigator.userAgent);
+        window.__qunit_runner.done = function(failures, total) {
+            client.publish("/done", {failures: failures, total: total});
         }
 
         window.__qunit_runner.testDone = function(state) {
