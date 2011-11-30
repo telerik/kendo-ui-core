@@ -13,60 +13,17 @@
     <d2p1:TSQL />
   </DataInfo>
   <Description />
-  <IndependentDescriptors>
-    <ElementDescriptor>
-      <DomStateKey />
-      <FindExpression i:type="HtmlFindExpressionElement">
-        <BackupSearchClause>/html[1]/body[1]/div[4]/div[1]</BackupSearchClause>
-        <FindExpressions xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-          <d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-            <d5p1:key>Html</d5p1:key>
-            <d5p1:value i:type="HtmlFindExpression">
-              <ChainStops xmlns:d8p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-              <Clauses>
-                <HtmlFindClause>
-                  <Clause>TagIndex=div:101</Clause>
-                </HtmlFindClause>
-              </Clauses>
-              <Constraints />
-            </d5p1:value>
-          </d5p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-        </FindExpressions>
-        <Name>Div</Name>
-        <NodeKind>4</NodeKind>
-        <TechnologyType>Html</TechnologyType>
-      </FindExpression>
-      <FindInfo i:nil="true" />
-      <Frame i:nil="true" />
-      <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv</HtmlControlType>
-      <IsIndependent>true</IsIndependent>
-      <Name>$$Independent$$</Name>
-      <Page xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0" i:type="d4p1:PageUri">
-        <d4p1:AlwaysUseTitleInCompare>false</d4p1:AlwaysUseTitleInCompare>
-        <d4p1:BaseUrl>http://aggeorgiev</d4p1:BaseUrl>
-        <d4p1:CompareMode>FullPath</d4p1:CompareMode>
-        <d4p1:EquivalentUrls xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d4p1:Fragment />
-        <d4p1:FriendlyName>API14</d4p1:FriendlyName>
-        <d4p1:Path>/kendo/live/web/timepicker/api.html</d4p1:Path>
-        <d4p1:Query />
-        <d4p1:Title>API</d4p1:Title>
-      </Page>
-      <Region i:nil="true" />
-      <TechnologyType>Html</TechnologyType>
-      <Version>200</Version>
-    </ElementDescriptor>
-  </IndependentDescriptors>
-  <Name>TimePickerAPIOpenClose</Name>
+  <IndependentDescriptors />
+  <Name>Globalization</Name>
   <Steps xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/web/timepicker/api.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : 'http://aggeorgiev/kendo/live/web/globalization/index.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>01379e40-b0de-4edb-973c-80d00406dbc8</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>5f7e4f77-927a-47c6-b349-b887d7aab96e</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -87,21 +44,21 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/web/timepicker/api.html</d2p1:NavigateURL>
+        <d2p1:BaseUrl />
+        <d2p1:NavigateURL>http://aggeorgiev/kendo/live/web/globalization/index.html</d2p1:NavigateURL>
       </d2p1:Step>
-      <d2p1:StepImageKey>TimePickerValueOpenCloseozqybt41.ayt</d2p1:StepImageKey>
+      <d2p1:StepImageKey>Globalization4bua2min.n1h</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'OpenButtonTag'</d2p1:Description>
+      <d2p1:Description>Click 'EnUSSpan'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>5ac4d23d-ee00-47eb-981d-9604202d741d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b02ec078-7402-473e-8dc2-44587979e67f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -119,7 +76,7 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[2]/ul[1]/li[4]/button[1]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]/span[1]/span[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
@@ -127,23 +84,23 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>id=open</Clause>
+                          <Clause>TextContent=en-US</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagname=button</Clause>
+                          <Clause>tagname=span</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>OpenButtonTag</Name>
+                <Name>EnUSSpan</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
               <FindInfo i:nil="true" />
               <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlButton</HtmlControlType>
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
               <IsIndependent>false</IsIndependent>
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
@@ -152,10 +109,10 @@
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API13</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/timepicker/api.html</d2p1:Path>
+                <d2p1:FriendlyName>Globalization</d2p1:FriendlyName>
+                <d2p1:Path>http://aggeorgiev/kendo/live/web/globalization/index.html</d2p1:Path>
                 <d2p1:Query />
-                <d2p1:Title>API</d2p1:Title>
+                <d2p1:Title>Globalization</d2p1:Title>
               </Page>
               <Region i:nil="true" />
               <TechnologyType>Html</TechnologyType>
@@ -173,98 +130,18 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>TimePickerValueOpenClose4cgugjqg.it1</d2p1:StepImageKey>
+      <d2p1:StepImageKey>Globalizationsxuw0gbm.mmm</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for element 'x330AMListItem' 'is' visible.</d2p1:Description>
+      <d2p1:Description>Click 'BgBGListItem'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f5803507-f427-4e88-9ad4-e414963e8979</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>verifyTarget</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[4]/div[1]/ul[1]/li[8]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops />
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>tagname=li</Clause>
-                        </HtmlFindClause>
-                        <HtmlFindClause>
-                          <Clause>TextContent=3:30 AM</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>x330AMListItem</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>verifyTarget</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>API14</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/timepicker/api.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>API</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Wait</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <d2p1:CheckInterval>500</d2p1:CheckInterval>
-        <d2p1:DataBindVariableName i:nil="true" />
-        <d2p1:Timeout>10000</d2p1:Timeout>
-        <d2p1:IsVisible>true</d2p1:IsVisible>
-      </d2p1:Step>
-      <d2p1:StepImageKey>TimePickerAPIOpenCloseiu3kg4vx.pzp</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'CloseButtonTag'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>db865d39-1725-4d09-83e6-ccef6ac073b9</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>5f3bffba-dfc6-4506-94a1-88a4ee7564d1</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -282,7 +159,7 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[2]/ul[1]/li[4]/button[2]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[9]/div[1]/ul[1]/li[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
@@ -290,23 +167,23 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>id=close</Clause>
+                          <Clause>TextContent=bg-BG</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagname=button</Clause>
+                          <Clause>tagname=li</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>CloseButtonTag</Name>
+                <Name>BgBGListItem</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
               <FindInfo i:nil="true" />
               <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlButton</HtmlControlType>
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
               <IsIndependent>false</IsIndependent>
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
@@ -315,10 +192,10 @@
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API13</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/timepicker/api.html</d2p1:Path>
+                <d2p1:FriendlyName>Globalization</d2p1:FriendlyName>
+                <d2p1:Path>http://aggeorgiev/kendo/live/web/globalization/index.html</d2p1:Path>
                 <d2p1:Query />
-                <d2p1:Title>API</d2p1:Title>
+                <d2p1:Title>Globalization</d2p1:Title>
               </Page>
               <Region i:nil="true" />
               <TechnologyType>Html</TechnologyType>
@@ -336,67 +213,74 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>TimePickerValueOpenCloseybcz43xj.2lb</d2p1:StepImageKey>
+      <d2p1:StepImageKey>Globalizationqxbjlw54.yut</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for element 'x330AMListItem' 'is not' visible.</d2p1:Description>
+      <d2p1:Description>Wait for input 'Text' value 'Exact' '10,00 лв.'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>512be606-d9c4-4754-bd08-382f78ec7268</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
+      <d2p1:Order>4</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>3f41002c-d1b4-4b52-a7e9-e609e6ae994f</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="InputValueVerificationDescriptor">
         <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
         </d2p1:Constraints>
         <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         <d2p1:EditorType />
         <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
           <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>verifyTarget</d5p1:Key>
+            <d5p1:Key>TargetKey1</d5p1:Key>
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[4]/div[1]/ul[1]/li[8]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[3]/span[1]/span[1]/input[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
                     <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops />
+                      <ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </ChainStops>
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>tagname=li</Clause>
+                          <Clause>id=fieldlist</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>TextContent=3:30 AM</Clause>
+                          <Clause>tagIndex=input:4</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>x330AMListItem</Name>
+                <Name>Text</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
               <FindInfo i:nil="true" />
               <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputText</HtmlControlType>
               <IsIndependent>false</IsIndependent>
-              <Name>verifyTarget</Name>
+              <Name>TargetKey1</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
                 <d2p1:BaseUrl />
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API14</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/timepicker/api.html</d2p1:Path>
+                <d2p1:FriendlyName>Globalization</d2p1:FriendlyName>
+                <d2p1:Path>http://aggeorgiev/kendo/live/web/globalization/index.html</d2p1:Path>
                 <d2p1:Query />
-                <d2p1:Title>API</d2p1:Title>
+                <d2p1:Title>Globalization</d2p1:Title>
               </Page>
               <Region i:nil="true" />
               <TechnologyType>Html</TechnologyType>
@@ -414,26 +298,103 @@
         <d2p1:CheckInterval>500</d2p1:CheckInterval>
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
-        <d2p1:IsVisible>false</d2p1:IsVisible>
+        <CompareType>Exact</CompareType>
+        <ExpectedValue>10,00 лв.</ExpectedValue>
       </d2p1:Step>
-      <d2p1:StepImageKey>TimePickerAPIOpenClosesq1t15ak.u2a</d2p1:StepImageKey>
+      <d2p1:StepImageKey>Globalizationj4eieyea.utu</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for textbox 'EndTimeText' content 'Contains' '00:00 ч.'.</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>5</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>70c1282d-f141-4e96-abaf-15da563048c3</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>TargetKey1</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[2]/span[2]/span[1]/input[1]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>id=endTime</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>tagname=input</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>EndTimeText</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputText</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>TargetKey1</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl />
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>Globalization</d2p1:FriendlyName>
+                <d2p1:Path>http://aggeorgiev/kendo/live/web/globalization/index.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Globalization</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Wait</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:CheckInterval>500</d2p1:CheckInterval>
+        <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:Timeout>10000</d2p1:Timeout>
+        <CompareType>Contains</CompareType>
+        <ExpectedValue>00:00 ч.</ExpectedValue>
+      </d2p1:Step>
+      <d2p1:StepImageKey>Globalizationlm2ig0hh.u43</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
   </Steps>
   <Version>200</Version>
   <BrowserType>NotSet</BrowserType>
-  <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:string>System</d2p1:string>
-    <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.2.1117.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.2.1117.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.2.1117.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.2.1117.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1117.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</d2p1:string>
-    <d2p1:string>System.Windows.Forms</d2p1:string>
-  </CurrentReferences>
+  <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <HasCodeBehind>false</HasCodeBehind>
@@ -443,21 +404,16 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\TimePicker\TimePickerAPIOpenClose.tstest</Path>
+  <Path>Framework\Globalizaiton\Globalization.tstest</Path>
   <Priority>0</Priority>
   <ProfilerBenchmarkResultsFilePath i:nil="true" />
   <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
-  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{4769f8eb-738f-4b85-82b6-9433e54f56b6}.tsprofconfig</ProfilerConfigurationFilePath>
+  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{47176032-7534-48f7-97ae-c4fc14062504}.tsprofconfig</ProfilerConfigurationFilePath>
   <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
-  <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringbase64Binary>
-      <d2p1:Key>ArtOfTest.WebAii.Design.Execution.Profiler.ProfilerResultsMetadata</d2p1:Key>
-      <d2p1:Value>AAEAAAD/////AQAAAAAAAAAMAgAAAGBBcnRPZlRlc3QuV2ViQWlpLkRlc2lnbiwgVmVyc2lvbj0yMDExLjIuMTEwOC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTRmYzYyYmJjMzgyN2FiMWQMAwAAAFlBcnRPZlRlc3QuV2ViQWlpLCBWZXJzaW9uPTIwMTEuMi4xMTA4LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49NGZkNWY2NWJlMTIzNzc2YwwEAAAAaVRlbGVyaWsuVGVzdGluZ0ZyYW1ld29yay5JbnRlcm9wLCBWZXJzaW9uPTIwMTEuMi4xMTA4LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49OGNhMDBkM2UwZWJkNGI4YgUBAAAAQkFydE9mVGVzdC5XZWJBaWkuRGVzaWduLkV4ZWN1dGlvbi5Qcm9maWxlci5Qcm9maWxlclJlc3VsdHNNZXRhZGF0YQ8AAAAKX3Jlc3VsdHNJZAxfb3duZXJUZXN0SWQKX3N0YXJ0VGltZQpfdG90YWxUaW1lG19iQ29sbGVjdFByb2ZpbGVyU2FtcGxlRGF0YQpfc3RyU2VydmVyDF9pU2VydmVyUG9ydA9fc3RyRGVzY3JpcHRpb24KX3N0ckZvbGRlcgxfc3RyRmlsZVBhdGgMX2Jyb3dzZXJUeXBlD19icm93c2VyVmVyc2lvbghfc2VydmVycxxfYkNsZWFyQnJvd3NlckNhY2hlQmVmb3JlUnVuF19iV2FybVVwU2VydmVyQmVmb3JlUnVuAwMAAAABAAEBAQQEAwAAC1N5c3RlbS5HdWlkC1N5c3RlbS5HdWlkDQwBCCpBcnRPZlRlc3QuV2ViQWlpLkNvcmUuQnJvd3NlckV4ZWN1dGlvblR5cGUDAAAAKVRlbGVyaWsuVGVzdGluZ0ZyYW1ld29yay5Vbml2ZXJzYWxWZXJzaW9uBAAAAMQBU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuTGlzdGAxW1tBcnRPZlRlc3QuV2ViQWlpLkRlc2lnbi5FeGVjdXRpb24uUHJvZmlsZXIuUHJvZmlsZXJTZXJ2ZXJJbmZvLCBBcnRPZlRlc3QuV2ViQWlpLkRlc2lnbiwgVmVyc2lvbj0yMDExLjIuMTEwOC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTRmYzYyYmJjMzgyN2FiMWRdXQEBAgAAAAT7////C1N5c3RlbS5HdWlkCwAAAAJfYQJfYgJfYwJfZAJfZQJfZgJfZwJfaAJfaQJfagJfawAAAAAAAAAAAAAACAcHAgICAgICAgIAAAAAAAAAAAAAAAAAAAAAAfr////7////6/hpR49zhUuCtpQz5U9WtgAAAAAAAAAAAAAAAAAAAAAABgcAAAAKQUdHRU9SR0lFVkofAAAKBggAAAAnQzpcVXNlcnNcYWdnZW9yZ2lldlxBcHBEYXRhXExvY2FsXFRlbXBcCgX3////KkFydE9mVGVzdC5XZWJBaWkuQ29yZS5Ccm93c2VyRXhlY3V0aW9uVHlwZQEAAAAHdmFsdWVfXwAIAwAAAAEAAAAKCQoAAAAAAAQKAAAAxAFTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDFbW0FydE9mVGVzdC5XZWJBaWkuRGVzaWduLkV4ZWN1dGlvbi5Qcm9maWxlci5Qcm9maWxlclNlcnZlckluZm8sIEFydE9mVGVzdC5XZWJBaWkuRGVzaWduLCBWZXJzaW9uPTIwMTEuMi4xMTA4LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49NGZjNjJiYmMzODI3YWIxZF1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAA/QXJ0T2ZUZXN0LldlYkFpaS5EZXNpZ24uRXhlY3V0aW9uLlByb2ZpbGVyLlByb2ZpbGVyU2VydmVySW5mb1tdAgAAAAgICQsAAAAAAAAAAAAAAAcLAAAAAAEAAAAAAAAABD1BcnRPZlRlc3QuV2ViQWlpLkRlc2lnbi5FeGVjdXRpb24uUHJvZmlsZXIuUHJvZmlsZXJTZXJ2ZXJJbmZvAgAAAAs=</d2p1:Value>
-    </d2p1:KeyValueOfstringbase64Binary>
-  </ProfilerConfigurations>
-  <ProfilerResultsDirectory>C:\Users\aggeorgiev\AppData\Local\Temp\</ProfilerResultsDirectory>
+  <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\</ProfilerResultsDirectory>
   <ProfilerServerName i:nil="true" />
-  <ResourceFilePath>UIWidgets\TimePicker\TimePickerAPIOpenClose.resx</ResourceFilePath>
+  <ResourceFilePath>Framework\Globalizaiton\Globalization.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
@@ -465,12 +421,12 @@
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly>KendoDemosTests.dll</TestAssembly>
-  <TestAssemblyPath>bin\Debug\</TestAssemblyPath>
+  <TestAssembly />
+  <TestAssemblyPath />
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>4769f8eb-738f-4b85-82b6-9433e54f56b6</UniqueId>
+  <UniqueId>47176032-7534-48f7-97ae-c4fc14062504</UniqueId>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <WpfAppPath i:nil="true" />
 </WebAiiTest>
