@@ -42,7 +42,7 @@ var doc = builder.create();
 var root = doc.begin('testsuite');
 var agents = 0;
 
-url = process.argv[2] || 'tests/mobile/';
+url = process.argv[2] || 'tests/';
 
 client.subscribe('/testDone', function(message) {
   var testCase = root.ele('testcase')
