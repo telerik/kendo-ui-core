@@ -34,7 +34,6 @@ var client = bayeux.getClient(), chrome;
 var agents = 0, failures = 0, total = 0;
 
 client.subscribe("/ready", function(agent) {
-    console.log(agent, "connected");
     agents ++;
     client.publish('/load', "/" + url);
 });
