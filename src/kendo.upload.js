@@ -1444,10 +1444,17 @@
     }
 
     function getAntiForgeryTokens() {
-        var tokens = { };
+        var tokens = { },
+            csrf_token = $("meta[name=csrf-token]").attr("content"),
+            csrf_param = $("meta[name=csrf-param]").attr("content");
+
         $("input[name^='__RequestVerificationToken']").each(function() {
             tokens[this.name] = this.value;
         });
+
+        if (csrf_param !== undefined && csrf_token !== undefined) {
+          tokens[csrf_param] = csrf_token;
+        }
 
         return tokens;
     }

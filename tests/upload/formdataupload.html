@@ -469,6 +469,18 @@
                     $("input[name='__RequestVerificationToken']").remove();
                 });
 
+                test("Rails CSRF token is sent to the server", function() {
+                    $("head").append('<meta content="authenticity_token" name="csrf-param" />');
+                    $("head").append('<meta content="42" name="csrf-token" />');
+
+                    uploadInstance = createUpload();
+                    simulateFileSelect();
+
+                    equal(lastFormData["authenticity_token"], 42);
+
+                    $("meta[name='csrf-param'], meta[name='csrf-token']").remove();
+                });
+
                 test("Anti-Forgery Token with AppPath sent to the server", function() {
                     $(document.body).append("<input type='hidden' name='__RequestVerificationToken_test' value='42' />");
 

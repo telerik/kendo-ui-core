@@ -86,6 +86,21 @@
         $("input[name='__RequestVerificationToken']").remove();
     });
 
+    test("Rails CSRF token is sent to remove action", 1, function() {
+        $("head").append('<meta content="authenticity_token" name="csrf-param" />');
+        $("head").append('<meta content="42" name="csrf-token" />');
+
+        $.mockjax(function(settings) {
+            equal(settings.data["authenticity_token"], 42);
+        });
+
+        simulateUpload();
+        simulateRemoveClick();
+
+        $("meta[name='csrf-param'], meta[name='csrf-token']").remove();
+    });
+
+
     asyncTest("clicking remove should remove file entry upon success", function() {
         simulateUpload();
         simulateRemove();
