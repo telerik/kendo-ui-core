@@ -654,7 +654,7 @@
         var query = new Query(data),
             options = options || {},
             group = options.group,
-            sort = normalizeSort(options.sort || []).concat(normalizeGroup(group || [])),
+            sort = normalizeGroup(group || []).concat(normalizeSort(options.sort || [])),
             total,
             filter = options.filter,
             skip = options.skip,
