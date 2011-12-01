@@ -576,7 +576,7 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\Grid\ToolbarTemplate\ToolbarTemplate.tstest</Path>
+  <Path>uiwidgets\grid\toolbartemplate\ToolbarTemplate.tstest</Path>
   <Priority>0</Priority>
   <ProfilerBenchmarkResultsFilePath i:nil="true" />
   <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
@@ -593,8 +593,8 @@
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly />
-  <TestAssemblyPath />
+  <TestAssembly>KendoDemosTests.dll</TestAssembly>
+  <TestAssemblyPath>bin\Debug\</TestAssemblyPath>
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>

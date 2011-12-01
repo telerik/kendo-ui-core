@@ -59,12 +59,12 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Framework\Globalizaiton\Globalization.tstest.cs">
+      <DependentUpon>Globalization.tstest</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIWidgets\AutoComplete\API\FindStartingWith.tstest.cs">
       <DependentUpon>FindStartingWith.tstest</DependentUpon>
-    </Compile>
-    <Compile Include="UIWidgets\AutoComplete\BasicUsage\SelectOptionKeyboard.tstest.cs">
-      <DependentUpon>SelectOptionKeyboard.tstest</DependentUpon>
     </Compile>
     <Compile Include="UIWidgets\DatePicker\PickRange.tstest.cs">
       <DependentUpon>PickRange.tstest</DependentUpon>
@@ -96,6 +96,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Framework\DragAndDrop\DragAndDropEvents.tstest" />
+    <None Include="Framework\Globalizaiton\Globalization.tstest" />
     <None Include="Framework\Templates\BasicUsage.tstest" />
     <None Include="Framework\Validation\ValidateAmount.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -116,15 +117,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Settings.aiis" />
-    <None Include="UIWidgets\AutoComplete\API\FillValueKeyboard.tstest">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="UIWidgets\AutoComplete\API\FindStartingWith.tstest" />
     <None Include="UIWidgets\AutoComplete\API\SetValue.tstest" />
     <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest" />
-    <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOptionKeyboard.tstest">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest" />
     <None Include="UIWidgets\AutoComplete\Events\AutoCompleteEvents.tstest" />
     <None Include="UIWidgets\Calendar\CalendarAPINavigate.tstest">
@@ -200,6 +195,17 @@
     <None Include="UIWidgets\Grid\API\CollapseExpandGroup.tstest" />
     <None Include="UIWidgets\Grid\BasicUsage\GroupByAge.tstest" />
     <None Include="UIWidgets\Grid\BasicUsage\SortByFirstName.tstest" />
+    <None Include="UIWidgets\Grid\BindToLocalData\AgeNotEqualTo.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\BindToLocalData\FilterBirthDateGreaterThanOrEqualTo.tstest" />
+    <None Include="UIWidgets\Grid\BindToLocalData\FilterFirstNameIsEqualTo.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\BindToRemoteData\FilterCityIs.tstest" />
+    <None Include="UIWidgets\Grid\BindToRemoteData\FilterFreightLessThan.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\Grid\Details\ChangeTabCollapseExpand.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -207,6 +213,22 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="UIWidgets\Grid\Details\PageMainGridPageDetails.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Editing\AddNewRecordPageBack.tstest" />
+    <None Include="UIWidgets\Grid\Editing\AddRecordCancel.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Editing\AddRecordLoseFocusSave.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Editing\DeleteRecord.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Editing\EditLoseFocusCancel.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\Editing\EditSave.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="UIWidgets\Grid\Events\GridEvents.tstest">
@@ -230,6 +252,7 @@
     <None Include="UIWidgets\Grid\Selection\SelectMultipleCells.tstest" />
     <None Include="UIWidgets\Grid\Selection\SelectMultipleRows.tstest" />
     <None Include="UIWidgets\Grid\Selection\SelectRowSingle.tstest" />
+    <None Include="UIWidgets\Grid\ToolbarTemplate\ToolbarTemplate.tstest" />
     <None Include="UIWidgets\Menu\API\After.tstest" />
     <None Include="UIWidgets\Menu\API\Append.tstest" />
     <None Include="UIWidgets\Menu\API\Before.tstest" />
@@ -247,9 +270,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="UIWidgets\NumericTextBox\NumericEvents.tstest">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="UIWidgets\NumericTextBox\NumericGlobalization.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="UIWidgets\NumericTextBox\SetBlankValue.tstest">
@@ -698,12 +718,6 @@
     <None Include="Framework\Validation\ValidatePhone.resx">
       <DependentUpon>ValidatePhone.tstest</DependentUpon>
     </None>
-    <None Include="UIWidgets\AutoComplete\API\FillValueKeyboard.resx">
-      <DependentUpon>FillValueKeyboard.tstest</DependentUpon>
-    </None>
-    <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOptionKeyboard.resx">
-      <DependentUpon>SelectOptionKeyboard.tstest</DependentUpon>
-    </None>
     <None Include="UIWidgets\Calendar\CalendarAPINavigate.resx">
       <DependentUpon>CalendarAPINavigate.tstest</DependentUpon>
     </None>
@@ -791,9 +805,6 @@
     <None Include="UIWidgets\NumericTextBox\NumericEvents.resx">
       <DependentUpon>NumericEvents.tstest</DependentUpon>
     </None>
-    <None Include="UIWidgets\NumericTextBox\NumericGlobalization.resx">
-      <DependentUpon>NumericGlobalization.tstest</DependentUpon>
-    </None>
     <None Include="UIWidgets\NumericTextBox\SetBlankValue.resx">
       <DependentUpon>SetBlankValue.tstest</DependentUpon>
     </None>
@@ -837,6 +848,47 @@
   <ItemGroup>
     <None Include="UIWidgets\Slider\API\DoubleSliderDisableMove.resx">
       <DependentUpon>DoubleSliderDisableMove.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Framework\Globalizaiton\Globalization.resx">
+      <DependentUpon>Globalization.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\BindToLocalData\AgeNotEqualTo.resx">
+      <DependentUpon>AgeNotEqualTo.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\BindToLocalData\FilterBirthDateGreaterThanOrEqualTo.resx">
+      <DependentUpon>FilterBirthDateGreaterThanOrEqualTo.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\BindToLocalData\FilterFirstNameIsEqualTo.resx">
+      <DependentUpon>FilterFirstNameIsEqualTo.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\BindToRemoteData\FilterCityIs.resx">
+      <DependentUpon>FilterCityIs.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\BindToRemoteData\FilterFreightLessThan.resx">
+      <DependentUpon>FilterFreightLessThan.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Editing\AddNewRecordPageBack.resx">
+      <DependentUpon>AddNewRecordPageBack.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Editing\AddRecordCancel.resx">
+      <DependentUpon>AddRecordCancel.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Editing\AddRecordLoseFocusSave.resx">
+      <DependentUpon>AddRecordLoseFocusSave.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Editing\DeleteRecord.resx">
+      <DependentUpon>DeleteRecord.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Editing\EditLoseFocusCancel.resx">
+      <DependentUpon>EditLoseFocusCancel.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\Editing\EditSave.resx">
+      <DependentUpon>EditSave.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\ToolbarTemplate\ToolbarTemplate.resx">
+      <DependentUpon>ToolbarTemplate.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

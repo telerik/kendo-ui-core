@@ -3,14 +3,14 @@
   <TestList name="Menu" id="12f6555a-1249-463d-af7b-3fd1fe799939" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
     <TestLinks>
       <TestLink id="ae40b38e-ceab-4483-9c78-9dd0b4ba89fc" name="MenuEvents" storage="uiwidgets\menu\events\menuevents.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="bd48866d-9675-4d9b-b4c7-beb25c61629d" name="NotClosedOnClick" storage="uiwidgets\menu\basicusage\notclosedonclick.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="c5579771-d30c-4147-9b72-fbac1b2912d2" name="AssertMenuOpenedOnHover" storage="uiwidgets\menu\events\assertmenuopenedonhover.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="8e745bff-cf97-4e91-bf74-1b898a169892" name="Remove" storage="uiwidgets\menu\api\remove.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="e030defd-3463-4e18-80ff-8a8460999714" name="DisableEnable" storage="uiwidgets\menu\api\disableenable.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="071dc329-c46f-4cc2-b443-47d48192af77" name="Append" storage="uiwidgets\menu\api\append.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="ed9bef03-09c4-4e66-9a48-17bf224eb2f8" name="Before" storage="uiwidgets\menu\api\before.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="69b9d95b-97f1-44f4-afe2-ab90a9dc4653" name="After" storage="uiwidgets\menu\api\after.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="d6c744bc-3f9e-4c0f-b3cd-494c7b0b21af" name="OpenClose" storage="uiwidgets\menu\basicusage\openclose.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="bd48866d-9675-4d9b-b4c7-beb25c61629d" name="NotClosedOnClick" storage="uiwidgets\menu\basicusage\notclosedonclick.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="e030defd-3463-4e18-80ff-8a8460999714" name="DisableEnable" storage="uiwidgets\menu\api\disableenable.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
     </TestLinks>
   </TestList>
   <TestList name="Window" id="1f98a53c-211f-4a2a-ad34-a612e529146c" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
@@ -169,7 +169,7 @@
       <TestLink id="4bddc3ca-737f-40d5-9e42-3c710659c77a" name="SingleSliderEnableDisable" storage="uiwidgets\slider\api\singlesliderenabledisable.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="2acecfe1-08b1-4676-8142-45fb3fa8616d" name="ChangeValueButtonsSingleSlider" storage="uiwidgets\slider\events\changevaluebuttonssingleslider.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="e5a15c8f-0892-4840-aea6-79ad18355fc9" name="SingleSliderSetValue" storage="uiwidgets\slider\api\singleslidersetvalue.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="356e78f8-6f37-4cb1-a684-635844d6afb0" name="DoubleSliderEnableDisable" storage="uiwidgets\slider\api\doublesliderenabledisable.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="356e78f8-6f37-4cb1-a684-635844d6afb0" name="DoubleSliderEnabledisable" storage="uiwidgets\slider\api\doublesliderenabledisable.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="25296494-74c6-4d4f-b062-fea6270a7ae1" name="ChangeValueDragAndDropSingleSlider" storage="uiwidgets\slider\basicusage\changevaluedraganddropsingleslider.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
     </TestLinks>
   </TestList>
