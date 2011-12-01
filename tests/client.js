@@ -4,8 +4,7 @@ var http       = require('http'),
     faye       = require('faye'),
     colors     = require('colors'),
     util       = require('util'),
-    builder    = require('xmlbuilder'),
-    paperboy   = require('paperboy');
+    builder    = require('xmlbuilder');
 
 var client = new faye.Client('http://localhost:8888/faye');
 var doc = builder.create();
