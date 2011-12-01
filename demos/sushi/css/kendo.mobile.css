@@ -376,10 +376,10 @@ body {
   -webkit-box-shadow: 0 0 1px 1px #808080;
 }
 .km-ios .km-checkbox-checked:after {
-  background: transparent url("../../../styles/mobile/images/ios-sprite.png") 2px -117px no-repeat;
+  background: transparent url("images/ios-sprite.png") 2px -117px no-repeat;
 }
 .km-android .km-checkbox-checked:after, .km-android .km-listview .km-switch-on {
-  background: transparent url("../../../styles/mobile/images/android-sprite.png") 0 8% no-repeat;
+  background: transparent url("images/android-sprite.png") 0 8% no-repeat;
   background-size: 100% auto;
 }
 .km-android .km-listview .km-switch-handle:after, .km-android .km-listview .km-switch-handle:before {
@@ -1190,24 +1190,24 @@ input[type=radio], input[type=checkbox] {
 }
 .km-android .km-tabstrip .km-button .km-icon {
   opacity: 0.5;
-  background: transparent url('../../../styles/mobile/images/atabimg.png') no-repeat 0.1em 50%;
+  background: transparent url('images/atabimg.png') no-repeat 0.1em 50%;
   background-size: cover;
 }
 .km-ios .km-tabstrip .km-button .km-icon {
   opacity: 1;
-  background: transparent url('../../../styles/mobile/images/itabimg1.png') no-repeat 3px 50%;
+  background: transparent url('images/itabimg1.png') no-repeat 3px 50%;
   background-size: cover;
 }
 .km-blackberry .km-tabstrip .km-button .km-icon, .km-meego .km-tabstrip .km-button .km-icon {
   opacity: 0.5;
-  background: transparent url('../../../styles/mobile/images/atabimg.png') no-repeat 0.5em 50%;
+  background: transparent url('images/atabimg.png') no-repeat 0.5em 50%;
   background-size: auto 100%;
 }
 .km-tabstrip .km-button.km-state-active .km-icon {
   opacity: 1;
 }
 .km-ios .km-tabstrip .km-state-active .km-icon {
-  background-image: url('../../../styles/mobile/images/itabimg.png');
+  background-image: url('images/itabimg.png');
 }
 .km-android .km-tabstrip .km-button:nth-child(1) .km-icon {
   background-position: -1% 50%;
