@@ -53,10 +53,10 @@ client.subscribe('/testDone', function(message) {
 
 
   if (message.failed > 0) {
-    process.stderr.write("F");
+    // process.stderr.write("F");
     testCase.ele('failure').txt(message.failures.join("\n"));
   } else {
-    process.stderr.write(".");
+    // process.stderr.write(".");
   }
 });
 
