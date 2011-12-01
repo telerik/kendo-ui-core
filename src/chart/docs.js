@@ -411,7 +411,7 @@
          * Value at which the first perpendicular axis crosses this axis.
          * @option {Number} [valueAxis.min] <0> The minimum value of the axis.
          * @option {Number} [valueAxis.max] <1> The maximum value of the axis.
-         * @option {Number} [valueAxis.majorUnits] The interval between major divisions.
+         * @option {Number} [valueAxis.majorUnit] The interval between major divisions.
          * @option {Number} [valueAxis.minorTickSize] <3> The axis minor tick size.
          * @option {String} [valueAxis.minorTickType] <none> The minor tick type.
          * <div class="details-list">
