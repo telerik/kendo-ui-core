@@ -15,6 +15,7 @@ var http       = require("http"),
 
 
 var WEBROOT    = path.join(path.dirname(__filename), ".."),
+    PORT       = 8880,
     bayeux     = new faye.NodeAdapter({mount: "/faye", timeout: 100000});
 
 var fileServer = new static.Server(WEBROOT, {cache: false});
@@ -27,7 +28,7 @@ var server = http.createServer(function(request, response) {
 
 bayeux.attach(server);
 
-server.listen(8888);
+server.listen(PORT);
 
 var client = bayeux.getClient(), chrome;
 var agents = 0, failures = 0, total = 0;
@@ -80,5 +81,5 @@ var browserPaths = {
     'Linux': "google-chrome"
 }
 
-chrome = spawn(browserPaths[os.type()], ['http://localhost:8888/tests/testrunner.html']);
+chrome = spawn(browserPaths[os.type()], ['http://localhost:' + PORT + '/tests/testrunner.html']);
 
