@@ -18,8 +18,9 @@
             window.client = new Faye.Client('/faye', {timeout: 600});
             client.subscribe('/load', function(path) {
                 $("iframe").attr("src", path);
-                client.publish("/connect", navigator.userAgent);
             });
+
+            client.publish('/ready', navigator.userAgent);
         </script>
     </head>
     <body>
