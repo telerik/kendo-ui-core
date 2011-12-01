@@ -10,7 +10,7 @@
 var fs = require('fs');
 var path = require('path');
 var kendoBuild = require("../../kendo-build");
-var Script = process.binding('evals').Script;
+var Script = require('vm').Script;
 
 // define a few globals to be compatible with jsrun.jar
 global.arguments = global.internal_args || process.argv.slice(2);
