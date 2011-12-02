@@ -42,13 +42,13 @@ var doc = builder.create();
 var root = doc.begin('testsuite');
 var agents = 0;
 
-url = process.argv[2] || 'tests/';
+url = process.argv[2] || 'tests/mobile/';
 
 client.subscribe('/testDone', function(message) {
   var testCase = root.ele('testcase')
     .att('name', message.name)
     .att('time', message.duration)
-    .att('classname', "Chrome");
+    .att('classname', "chrome." + message.suite);
 
 
   if (message.failed > 0) {
