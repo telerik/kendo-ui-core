@@ -66,6 +66,7 @@
 
         $.grep(this.tests, $.proxy(function(test, index) {
             if (test.frame === frame) {
+                this.currentTestTitle = test.title;
                 $(test.header).removeClass("passed").addClass(failures > 0 ? "failed" : "passed")
                             .html(test.title + " " + testName
                             + (total == 0 ? "" : "  " + failures + " failed, " + total + " total"));
@@ -105,6 +106,7 @@
         }
 
         window.__qunit_runner.testDone = function(state) {
+            console.log(state);
             client.publish("/testDone", state);
         }
     }
@@ -137,9 +139,15 @@
     QUnit.config.testDone.push(function(state) {
         runner.pageProgress(window.frameElement, state.failed, state.total, state.name);
         var newFails = $('li.fail li.fail').not(knownFails);
-        state.failures = $.map(newFails.contents(), function(err) { return $(err).text() });
-        state.duration = ((+new Date()) - startDate) / 1000;
+
+        $.extend(state, {
+            failures: $.map(newFails.contents(), function(err) { return $(err).text() }),
+            duration: ((+new Date()) - startDate) / 1000,
+            suite: runner.currentTestTitle
+        })
+
         runner.testDone(state);
+
         knownFails = knownFails.add(newFails);
     });
 })(this);
