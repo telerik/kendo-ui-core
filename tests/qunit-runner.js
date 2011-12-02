@@ -1,36 +1,38 @@
 ﻿/*
 // <copyright project "Salient.QualityControl" file="qunit.runner.js" company="Sky Sanders">
-// This source is a Public Domain Dedication. 
+// This source is a Public Domain Dedication.
 // http://salientqc.codeplex.com
 // Attribution is appreciated.
-// </copyright> 
+// </copyright>
 */
- 
+
 /* this file can safely be added to the tail of your qunit.js to simplify deployment */
- 
-(function (window) {
-    var runner = function (tests, sequential, done) {
+
+(function(window) {
+    var runner = function() {
+        this.started = false;
+    }
+
+    runner.prototype.start = function(tests, sequential, done) {
+        this.started = true;
         this.failures = 0;
         this.total = 0;
         this.currentIndex = 0;
         this.sequential = sequential;
         this.tests = tests;
-        this.done = done || this.done;
-        var that = this;
-        $(document).ready(function () {
-            $(".runner-test-page-header").live("click", function () { $(this).next(".runner-test-page-frame").slideToggle(100); });
-            that.runPage();
-        });
+        this.done = this.done || done;
+        $(".runner-test-page-header").live("click", function() { $(this).next(".runner-test-page-frame").slideToggle(100); });
+        this.runPage();
     }
 
-    runner.prototype.nextPage = function () {
+    runner.prototype.nextPage = function() {
         if (this.currentIndex + 1 < this.tests.length) {
             this.currentIndex++;
             this.runPage();
         }
     }
 
-    runner.prototype.runPage = function () {
+    runner.prototype.runPage = function() {
         var progress = [(this.currentIndex + 1), ' of ', this.tests.length].join('');
 
         $("#qunit-runner-userAgent")
@@ -54,9 +56,17 @@
         }
     }
 
-    runner.prototype.pageProgress = function (frame, failures, total, testName, isDone) {
-        $.grep(this.tests, $.proxy(function (test, index) {
+    runner.prototype.pageProgress = function(frame, failures, total, testName, isDone) {
+        if (!this.started) {
+            if (isDone) {
+                this.done(this.failures, this.total);
+            }
+            return;
+        }
+
+        $.grep(this.tests, $.proxy(function(test, index) {
             if (test.frame === frame) {
+                this.currentTestTitle = test.title;
                 $(test.header).removeClass("passed").addClass(failures > 0 ? "failed" : "passed")
                             .html(test.title + " " + testName
                             + (total == 0 ? "" : "  " + failures + " failed, " + total + " total"));
@@ -70,7 +80,7 @@
                         $(test.header).next().remove();
 
                     // are all pages finished?
-                    if ($.grep(this.tests, function (test, index) { return !test.complete; }).length == 0) {
+                    if ($.grep(this.tests, function(test, index) { return !test.complete; }).length == 0) {
                         $("#qunit-banner").addClass(this.failures > 0 ? "qunit-fail" : "qunit-pass");
                         this.done(this.failures, this.total);
                     }
@@ -83,35 +93,61 @@
     }
 
     // if you need to be notified the runner is finished..
-    runner.prototype.done = function (failures, total) {
-    }
+    runner.prototype.done = $.noop;
+    runner.prototype.testDone = $.noop;
 
-    QUnit.run = function (tests, sequential, done) {
-        /// <param name="tests" type="Array"></param>
-        /// <param name="sequential" type="Boolean"></param>
-        /// <param name="done" type="Function">Function(failures, total) will be called when all tests complete.</param>
-        if (window.__qunit_runner) {
-            throw new Error("One runner per page please.");
+    window.__qunit_runner = new runner();
+
+    var client = top.client;
+
+    if (client) {
+        window.__qunit_runner.done = function(failures, total) {
+            client.publish("/done", {failures: failures, total: total});
         }
-        window.__qunit_runner = new runner(tests, sequential, done);
+
+        window.__qunit_runner.testDone = function(state) {
+            console.log(state);
+            client.publish("/testDone", state);
+        }
     }
 
-
-    // runner test page hooks - if this page has a runner as parent
-    // then set up the metric callbacks
-    if (top.__qunit_runner) {
-        var runner = top.__qunit_runner;
-
-        QUnit.config.done.push(function (state) {
-            runner.pageProgress(window.frameElement, state.failed, state.total, "done", true);
-        });
-
-        QUnit.config.testStart.push(function (state) {
-            runner.pageProgress(window.frameElement, 0, 0, state.name + " started");
-        });
-
-        QUnit.config.testDone.push(function (state) {
-            runner.pageProgress(window.frameElement, state.failed, state.total, state.name);
+    QUnit.run = function(tests, sequential, done) {
+        $(document).ready(function() {
+            window.__qunit_runner.start(tests, sequential, done);
         });
     }
+
+    var runner = parent.__qunit_runner || window.__qunit_runner;
+    var knownFails = $();
+    var startDate = 0;
+
+    QUnit.config.autostart = false;
+
+    $(window).load(function() {
+        setTimeout(function() { QUnit.start(); }, 100);
+    });
+
+    QUnit.config.done.push(function(state) {
+        runner.pageProgress(window.frameElement, state.failed, state.total, "done", true);
+    });
+
+    QUnit.config.testStart.push(function(state) {
+        startDate = +new Date();
+        runner.pageProgress(window.frameElement, 0, 0, state.name + " started");
+    });
+
+    QUnit.config.testDone.push(function(state) {
+        runner.pageProgress(window.frameElement, state.failed, state.total, state.name);
+        var newFails = $('li.fail li.fail').not(knownFails);
+
+        $.extend(state, {
+            failures: $.map(newFails.contents(), function(err) { return $(err).text() }),
+            duration: ((+new Date()) - startDate) / 1000,
+            suite: runner.currentTestTitle
+        })
+
+        runner.testDone(state);
+
+        knownFails = knownFails.add(newFails);
+    });
 })(this);
