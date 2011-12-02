@@ -4,63 +4,95 @@
         <title>MVVM</title>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
-        <script src="../src/kendo.model.js"></script>
-        <script src="../src/kendo.binder.js"></script>
-        <script src="../src/kendo.data.js"></script>
-        <script src="../src/kendo.popup.js"></script>
-        <script src="../src/kendo.autocomplete.js"></script>
-        <script src="../src/kendo.dropdownlist.js"></script>
+        <script>
+            kendo.observe = function(viewModel) {
+                var observable = new kendo.Observable();
 
-        <link rel="stylesheet" href="../styles/kendo.common.css" type="text/css" media="screen" charset="utf-8">
-        <link rel="stylesheet" href="../styles/kendo.vista.css" type="text/css" media="screen" charset="utf-8">
+                for (var field in viewModel) {
+                    observable[field] = viewModel[field];
+
+                    if ($.isArray(viewModel[field])) {
+                        (function(field) {
+                            viewModel[field].pop = function() {
+                                [].pop.call(this);
+                                observable.trigger("change",{
+                                    field: field,
+                                    value: this
+                                });
+                            }
+                        })(field);
+                    }
+                }
+
+                return observable;
+            }
+
+
+            function bindSelect(select, source) {
+                var valueField = select.attr("data-value-field");
+                var textField = select.attr("data-text-field");
+
+                select.empty();
+
+                for (var i = 0; i < source.length; i++) {
+                    var text = source[i][textField];
+                    var value = source[i][valueField];
+                    var option = kendo.format('<option value="{0}">{1}</option>', value, text);
+
+                    select.append(option);
+                }
+            }
+
+            kendo.bind = function(dom, viewModel) {
+                dom.find("*").each(function() {
+                    dom = $(this);
+                    if (dom.is("select")) {
+                        var select = dom;
+                        var source = select.attr("data-source");
+
+                        bindSelect(select, viewModel[source]);
+
+                        viewModel.bind("change", function(e) {
+                            if (e.field === source) {
+                                bindSelect(select, e.value);
+                            }
+                        });
+                    } else if (dom.is("button")) {
+                        var button = dom;
+
+                        var click = button.attr("data-click");
+
+                        button.click(function(e) {
+                            e.preventDefault();
+                            return viewModel[click].call(viewModel, e);
+                        });
+                    }
+                });
+            }
+
+        </script>
     </head>
     <body>
         <form>
-            <input name="name" />
-            <select data-text-field="name" data-field="category" data-value-field="id" data-source="categories"></select>
+            <select style="width: 200px"
+                    multiple
+                    data-text-field="name"
+                    data-value-field="id"
+                    data-source="products">
+            </select>
+
+            <button data-click="removeProduct">Remove a product</button>
         </form>
 
         <script>
-            var data = [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" } ];
-
-            var Product = kendo.data.Model.define({
-                categories: function() {
-                    return data;
+            var viewModel = kendo.observe({
+                products: [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" } ],
+                removeProduct: function(e) {
+                    this.products.pop();
                 }
             });
 
-            var product = new Product( {
-                category: 2,
-                name: "Chai"
-            }).bind("change", function() {
-                console.log("changed: ", this.changes());
-            });
-
-            new kendo.data.ModelViewBinder($("form"), product);
-            $("[name=name]").kendoAutoComplete({change: function() {
-                    console.log("changed from ", this.previous, " to ", this.value());
-            },dataSource: ["foo", "bar"] });
-
-            $("select").kendoDropDownList();
-
-            var Transport = kendo.data.RemoteTransport.extend({
-                read: function(options) {
-                    options.success(data);
-                }
-            });
-
-            var dataSource = new kendo.data.DataSource({
-                model: kendo.data.Model.define(),
-                transport: new Transport({
-                    update: {
-                        type: "POST",
-                        url: "update.php"
-                    }
-                })
-            });
-
-            dataSource.read();
-
+            kendo.bind($("form"), viewModel);
         </script>
     </body>
 </html>
