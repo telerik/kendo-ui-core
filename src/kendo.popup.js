@@ -289,14 +289,14 @@
                 zoomLevel = kendo.support.zoomLevel(),
                 zIndex = 10002;
 
-            //calculate z-index
-            anchor.parents().andSelf().each(function () {
-                var zIndex = $(this).css("zIndex");
-                if (!isNaN(zIndex)) {
-                    zIndex = Number(zIndex) + 1;
-                    return false;
+            var siblingContainer = anchor.parents().filter(wrapper.siblings());
+
+            if (siblingContainer[0]) {
+                var parentZIndex = Number($(siblingContainer).css("zIndex"));
+                if (parentZIndex) {
+                    zIndex = parentZIndex + 1;
                 }
-            });
+            }
 
             wrapper.css("zIndex", zIndex);
 
