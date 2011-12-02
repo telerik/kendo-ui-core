@@ -617,6 +617,14 @@
                 ok(anchor.children().hasClass("k-state-active"));
             });
 
+            test("updates zIndex based on anchor container property", function() {
+                anchor.wrap('<div style="z-index:2; position: relative;" />');
+                var popup = new Popup(div, { anchor: anchor });
+
+                popup.open();
+                equal(div.parent().css("zIndex"), "3");
+            });
+
         </script>
     </body>
 </html>
