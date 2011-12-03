@@ -4,6 +4,12 @@
         <title>MVVM</title>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
+        <style>
+            table, td, th {
+                border: 1px solid black;
+               border-collapse: collapse;
+            }
+        </style>
         <script>
             kendo.observe = function(viewModel) {
                 var observable = new kendo.Observable();
@@ -27,7 +33,6 @@
                 return observable;
             }
 
-
             function bindSelect(select, source) {
                 var valueField = select.attr("data-value-field");
                 var textField = select.attr("data-text-field");
@@ -43,12 +48,38 @@
                 }
             }
 
+            function bindTable(table, template, source) {
+                template = kendo.template($("#" + template).html());
+
+                var tbody = table.find("tbody");
+                if (!tbody[0]) {
+                    tbody = table.append("<tbody/>").find("tbody");
+                }
+
+                tbody.html(kendo.render(template, source));
+            }
+
             kendo.bind = function(dom, viewModel) {
                 dom.find("*").each(function() {
                     dom = $(this);
-                    if (dom.is("select")) {
+                    var source = dom.attr("data-source");
+                    var display = dom.attr("data-display");
+
+                    if (dom.is("table")) {
+                        var table = dom;
+                        var template = table.attr("data-template");
+
+                        bindTable(table, template, viewModel[source]);
+
+                        viewModel.bind("change", function(e) {
+                            if (e.field === source) {
+                                bindTable(table, template, viewModel[source]);
+                            }
+                            table.css("display", viewModel[display]());
+                        });
+
+                    } else if (dom.is("select")) {
                         var select = dom;
-                        var source = select.attr("data-source");
 
                         bindSelect(select, viewModel[source]);
 
@@ -56,6 +87,7 @@
                             if (e.field === source) {
                                 bindSelect(select, e.value);
                             }
+                            select.css("display", viewModel[display]());
                         });
                     } else if (dom.is("button")) {
                         var button = dom;
@@ -69,23 +101,56 @@
                     }
                 });
             }
-
         </script>
     </head>
     <body>
         <form>
-            <select style="width: 200px"
+            <button data-click="removeProduct">Remove a product</button>
+
+            <fieldset>
+                <legend> &lt;select multiple&gt;</legend>
+                <select style="width: 200px"
                     multiple
                     data-text-field="name"
+                    data-display="displayProducts"
                     data-value-field="id"
                     data-source="products">
-            </select>
+                </select>
+            </fieldset>
 
-            <button data-click="removeProduct">Remove a product</button>
+            <fieldset>
+                <legend>&lt;table&gt;</legend>
+                <script type="text/x-kendo-tmpl" id="row-tmpl">
+                    <tr>
+                        <td>
+                            ${name}
+                        </td>
+                        <td>
+                            ${id}
+                        </td>
+                    </tr>
+                </script>
+
+                <table data-source="products" data-template="row-tmpl" data-display="displayProducts">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>ID</th>
+                        </tr>
+                    </thead>
+                </table>
+            </fieldset>
         </form>
 
         <script>
             var viewModel = kendo.observe({
+                displayProducts: function() {
+                    if (this.products.length) {
+                        return "";
+                    } else {
+                        return "none";
+                    }
+                },
                 products: [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" } ],
                 removeProduct: function(e) {
                     this.products.pop();
