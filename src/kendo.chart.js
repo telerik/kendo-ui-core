@@ -4836,7 +4836,7 @@
         return size;
     }
 
-    measureText.cache = [];
+    measureText.cache = {};
     measureText.baselineMarker =
         $("<div style='display: inline-block; vertical-align: baseline;" +
                   "width: " + BASELINE_MARKER_SIZE + "px; height: " + BASELINE_MARKER_SIZE + "px;" +
