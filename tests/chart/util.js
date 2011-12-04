@@ -90,6 +90,7 @@ function mapPoints(points) {
     return $.map(points, function(p) { return [[p.x, p.y]] });
 }
 
+// Primed cache for measureText - used to avoid browser rendering differences
 kendo.ui.Chart.measureText.cache = {
     "Afont12px Arial,Helvetica,sans-serifundefined": {
         "width": 7,
