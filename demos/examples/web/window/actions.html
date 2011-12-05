@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- meta -->
+        <!-- meta -->
+        <title>Customizing actions</title>
+        <!-- css -->
+        <link href="../../shared/styles/examples.css" rel="stylesheet"/>
+        <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
+        <!-- css -->
+        <!-- script -->
+        <script src="../../../../src/jquery.min.js"></script>
+        <script src="../../../../src/kendo.core.js"></script>
+        <script src="../../../../src/kendo.fx.js"></script>
+        <script src="../../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../../src/kendo.resizable.js"></script>
+        <script src="../../../../src/kendo.window.js"></script>
+        <!-- script -->
+    </head>
+    <body>
+        <!-- nav -->
+        <!-- nav -->
+        <!-- description -->
+        <!-- description -->
+        <div id="example" class="k-content">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    This example shows the different actions that are available in the window widget,
+                    as well as how to add custom actions.
+                </p>
+            </div>
+
+            <div id="window">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Integer felis libero, lobortis ac rutrum quis, varius a velit.
+                    Donec lacus erat, cursus sed porta quis, adipiscing et ligula.
+                    Duis volutpat, sem pharetra accumsan pharetra, mi ligula cursus felis,
+                    ac aliquet leo diam eget risus. Integer facilisis, justo cursus venenatis vehicula,
+                    massa nisl tempor sem, in ullamcorper neque mauris in orci.
+                    Proin sagittis elementum odio, eu vestibulum arcu rhoncus eu.
+                    Pellentesque lorem arcu, tempus at dapibus nec, tincidunt a ante.
+                    Cras eget arcu id augue sollicitudin fermentum.
+                    Quisque ullamcorper ultrices ante, ut mollis neque tincidunt nec.
+                    Aenean sollicitudin lobortis nibh, vitae sagittis justo placerat et.
+                    Fusce laoreet consequat arcu, quis placerat massa lacinia vel.
+                    Etiam fringilla purus ac ipsum euismod nec aliquet lorem aliquet.
+                    Aliquam a nunc ac lorem lobortis pulvinar.
+                    Integer eleifend lobortis risus vel commodo.
+                    Integer nisl turpis, facilisis a porttitor nec, tempus ac enim.
+                    Proin pulvinar vestibulum ligula id mattis. Integer posuere faucibus accumsan.
+                </p>
+            </div>
+
+            <span id="undo" style="display:none" class="k-group">Click here to open the window.</span>
+
+            <script>
+                $(document).ready(function() {
+                    var window = $("#window"),
+                        undo = $("#undo");
+
+                    undo.bind("click", function() {
+                        window.data("kendoWindow").open();
+                        undo.hide();
+                    });
+
+                    if (!window.data("kendoWindow")) {
+                        window.kendoWindow({
+                            width: "500px",
+                            actions: ["Custom", "Minimize", "Maximize", "Close"],
+                            title: "Kendo Window",
+                            close: function() {
+                                undo.show();
+                            }
+                        });
+                    }
+                });
+            </script>
+
+            <style scoped="scoped">
+                #undo {
+                    text-align: center;
+                    position: absolute;
+                    white-space: nowrap;
+                    border-width: 1px;
+                    border-style: solid;
+                    padding: 2em;
+                    cursor: pointer;
+                }
+            </style>
+        </div>
+        <!-- tools -->
+        <!-- tools -->
+    </body>
+</html>
+
