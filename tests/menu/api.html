@@ -168,7 +168,7 @@
             var isCalled = false;
             menu.options.openOnClick = true;
 
-            var e = { currentTarget: item, preventDefault: function () { isCalled = true; }, stopPropagation: function () { } };
+            var e = { target: item, preventDefault: function () { isCalled = true; }, stopPropagation: function () { } };
 
             menu._click(e, item);
 

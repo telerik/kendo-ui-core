@@ -84,7 +84,7 @@
         LINK = "k-link",
         LAST = "k-last",
         CLOSE = "close",
-        CLICK = "click",
+        CLICK = touch ? "touchend" : "click",
         TIMER = "timer",
         FIRST = "k-first",
         IMAGE = "k-image",
@@ -306,13 +306,17 @@
 
             that.nextItemZIndex = 100;
 
-            element.delegate(disabledSelector, CLICK, false);
-
-            element.delegate(itemSelector, MOUSEENTER, proxy(that._mouseenter, that))
-                   .delegate(itemSelector, MOUSELEAVE, proxy(that._mouseleave, that))
+            element.delegate(disabledSelector, CLICK, false)
                    .delegate(itemSelector, CLICK, proxy(that._click , that));
 
-            element.delegate(linkSelector, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover);
+            if (!touch) {
+                element.delegate(itemSelector, MOUSEENTER, proxy(that._mouseenter, that))
+                       .delegate(itemSelector, MOUSELEAVE, proxy(that._mouseleave, that))
+                       .delegate(linkSelector, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover);
+            } else {
+                options.openOnClick = true;
+                element.delegate(linkSelector, "touchstart touchend", that._toggleHover);
+            }
 
             $(document).click(proxy( that._documentClick, that ));
             that.clicked = false;
@@ -609,10 +613,10 @@
         },
 
         _toggleHover: function(e) {
-            var target = $(e.currentTarget);
+            var target = $(kendo.eventTarget(e)).closest(".k-item");
 
             if (!target.parents("li." + DISABLEDSTATE).length) {
-                target.toggleClass("k-state-hover", e.type == MOUSEENTER);
+                target.toggleClass("k-state-hover", e.type == MOUSEENTER || e.type == "touchstart");
             }
         },
 
@@ -670,7 +674,7 @@
         _click: function (e) {
             var that = this, openHandle;
 
-            var element = $(e.currentTarget);
+            var element = $(kendo.eventTarget(e)).closest(".k-item");
 
             if (element.hasClass(DISABLEDSTATE)) {
                 e.preventDefault();
@@ -682,7 +686,7 @@
 
             e.handled = true;
 
-            if (!element.parent().hasClass(MENU) || (!that.options.openOnClick && !touch)) {
+            if ((!element.parent().hasClass(MENU) && !touch) || (!that.options.openOnClick && !touch)) {
                 return;
             }
 
