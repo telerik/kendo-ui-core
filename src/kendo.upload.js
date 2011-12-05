@@ -5,8 +5,8 @@
      * @section
      * <p>
      * The Upload widget uses progressive enhancement to deliver the best possible
-     * uploading experience to users without requiring any extra developer effort.
-     * Upload is packed with features, including:
+     * uploading experience to users without requiring extra developer effort.
+     * Features highlights:
      * </p>
      *
      * <ul>
@@ -113,23 +113,6 @@
      *         Any other response to signify error.
      *     </li>
      * </ul>
-     *
-     * <h3>
-     * Configuring Upload behavior
-     * </h3>
-     * <p>
-     * Upload enables most behaviors by default, providing the richest experience possible
-     * depending on browser capabilities. Behaviors can be easily configured, though,
-     * using simple configuration properties. Refer to the Upload demo Configuration
-     * tab for more information on available properties.
-     * </p>
-     * @exampleTitle
-     * Disable Upload default behaviors
-     * @example
-     * $("#upload").kendoUpload({
-     *     multiple: false,
-     *     showFileList: false
-     * });
      */
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
