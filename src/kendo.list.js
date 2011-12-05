@@ -288,14 +288,16 @@
         },
 
         _accessor: function(value, idx) {
-            var element = this.element[0],
-                isSelect = element.nodeName == SELECT,
+            var element = this.element,
+                isSelect = element.is(SELECT),
                 option;
+
+            element = element[0];
 
             if (value === undefined) {
                 if (isSelect) {
                     option = element.options[element.selectedIndex];
-                    value = option.value || option.text;
+                    value = option ? (option.value || option.text) : "";
                 } else {
                     value = element.value;
                 }
