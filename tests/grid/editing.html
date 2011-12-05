@@ -85,11 +85,19 @@
             });
 
             test("editing cell passes column settings to Editable", function() {
-                setup({ columns: [{ field: "foo", format: "bar" }, "name"] });
+                setup({ columns: [{ field: "foo", format: "bar", editor: function(){} }, "name"] });
                 var cell = table.find("td:first").click();
 
                 equal(cell.data("kendoEditable").options.fields.field, "foo");
                 equal(cell.data("kendoEditable").options.fields.format, "bar");
+                ok(cell.data("kendoEditable").options.fields.editor);
+            });
+
+            test("column editor is not pass to the Editable if not set", function() {
+                setup({ columns: [{ field: "foo"}, "name"] });
+                var cell = table.find("td:first").click();
+
+                ok(!cell.data("kendoEditable").options.fields.editor);
             });
 
             test("cell click does not enter edit mode if editable is false", function() {
