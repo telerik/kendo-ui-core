@@ -126,12 +126,12 @@
                 test("xAxis options are applied to X Axis", function() {
                     createChart({
                         xAxis: {
-                            categories: ["Alpha", "Beta", "Charlie"]
-                        }
+                            flag: true
+                        },
+                        series: [{ type: "scatter", data:[[1,1], [2,2]] }]
                     });
 
-                    same(plotArea.axisX.options.categories,
-                         chart.options.xAxis.categories);
+                    ok(plotArea.axisX.options.flag);
                 });
 
                 // ------------------------------------------------------------
@@ -142,12 +142,12 @@
                 test("yAxis options are applied to Y Axis", function() {
                     createChart({
                         yAxis: {
-                            min: 100
-                        }
+                            flag: true
+                        },
+                        series: [{ type: "scatter", data:[[1,1], [2,2]] }]
                     });
 
-                    same(plotArea.axisY.options.min,
-                         chart.options.yAxis.min);
+                    ok(plotArea.axisY.options.flag);
                 });
 
                 // ------------------------------------------------------------
