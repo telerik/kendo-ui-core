@@ -118,7 +118,8 @@
         ui = kendo.ui,
         List = ui.List,
         Select = ui.Select,
-        CLICK = "click",
+        touch = kendo.support.touch,
+        CLICK = touch ? "touchend" : "click",
         ATTRIBUTE = "disabled",
         CHANGE = "change",
         DEFAULT = "k-state-default",
@@ -206,14 +207,15 @@
                     that._inputWrapper.addClass(FOCUSED);
                 },
                 blur: function() {
-                    that._bluring = setTimeout(function() {
-                        clearTimeout(that._typing);
+                    if (!touch) // Blur is fired prematurely on mobile and causes closure. TODO: Find a better way to do this.
+                        that._bluring = setTimeout(function() {
+                            clearTimeout(that._typing);
 
-                        that.text(that.text());
-                        that._blur();
+                            that.text(that.text());
+                            that._blur();
 
-                        that._inputWrapper.removeClass(FOCUSED);
-                    }, 100);
+                            that._inputWrapper.removeClass(FOCUSED);
+                        }, 100);
                 }
             });
 
@@ -401,8 +403,8 @@
         * combobox.search("In");
         */
         search: function(word) {
+            word = word || this.text();
             var that = this,
-                word = word || that.text(),
                 length = word.length,
                 options = that.options,
                 filter = options.filter;
@@ -414,7 +416,7 @@
                     that._filter(word);
                 } else {
                     that._open = true;
-                    that._state = STATE_FILTER,
+                    that._state = STATE_FILTER;
                     that.dataSource.filter( {
                         field: options.dataTextField,
                         operator: filter,
@@ -489,9 +491,11 @@
         */
         toggle: function(toggle) {
             var that = this;
+
             clearTimeout(that._bluring);
             that.input[0].focus();
-            setTimeout( function () { that._toggle(toggle); }); // Fixes an annoying flickering issue in iOS.
+
+            that._toggle(toggle);
         },
 
         /**

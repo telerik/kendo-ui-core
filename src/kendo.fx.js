@@ -13,7 +13,6 @@
         matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\w\.\-]+),\s*([\d\w\.\-]+),\s*([\d\w\.\-]+)/,
         cssParamsRegExp = /^(-?[\d\.\-]+)?[\w\s]*,?\s*(-?[\d\.\-]+)?[\w\s]*/i,
         translateXRegExp = /translatex?$/i,
-        transformNon3D = { rotate: "", scale: "", translate: "" },
         transformProps = ["perspective", "rotate", "rotateX", "rotateY", "rotateZ", "rotate3d", "scale", "scaleX", "scaleY", "scaleZ", "scale3d", "skew", "skewX", "skewY", "translate", "translateX", "translateY", "translateZ", "translate3d", "matrix", "matrix3d"],
         cssPrefix = transitions.css,
         round = Math.round,
@@ -21,7 +20,6 @@
         PX = "px",
         NONE = "none",
         AUTO = "auto",
-        WIDTH = "width",
         SCALE = "scale",
         HEIGHT = "height",
         HIDDEN = "hidden",
@@ -29,7 +27,6 @@
         ABORT_ID = "abortId",
         OVERFLOW = "overflow",
         TRANSLATE = "translate",
-        STYLE = "style",
         TRANSITION = cssPrefix + "transition",
         TRANSFORM = cssPrefix + "transform";
 
@@ -227,19 +224,20 @@
             if (!currentTransition) return;
 
             element.css(currentTransition.setup);
+
+            // Test if removing the timeout will improve the performance without glitches.
+//            setTimeout(function() {
+            element.data(ABORT_ID, setTimeout(function() {
+
+                removeTransitionStyles(element);
+                element.dequeue();
+                currentTransition.complete.call(element);
+
+            }, currentTransition.duration));
+
+            element.css(currentTransition.CSS);
             element.css(TRANSITION);
-
-            setTimeout(function() {
-                element.data(ABORT_ID, setTimeout(function() {
-
-                    removeTransitionStyles(element);
-                    element.dequeue();
-                    currentTransition.complete.call(element);
-
-                }, currentTransition.duration));
-
-                element.css(currentTransition.CSS);
-            }, 0);
+//            }, 0);
         }
 
         extend(kendo.fx, {
@@ -690,11 +688,12 @@
                 if (transitions && options.transition !== false) {
                     element.css(TRANSFORM, direction.transition + "(" + (!reverse ? offset : 0) + "px)");
                     extender[direction.transition] = reverse ? offset + PX : 0;
+                    element.css(TRANSFORM);
                 } else {
                     !reverse && element.css(direction.property, offset + PX);
                     extender[direction.property] = reverse ? offset + PX : 0;
+                    element.css(direction.property); // Read a style to force Chrome to apply the change.
                 }
-                element.css(direction.property); // Read a style to force Chrome to apply the change.
 
                 return extend(extender, options.properties);
             }
