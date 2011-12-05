@@ -43,7 +43,7 @@
      * </p>
      *
      * <h3>
-     * Configuring for synchronous upload
+     * Synchronous upload configuration
      * </h3>
      * @exampleTitle 1. Create a simple HTML form and input element of type "file"
      * @example
@@ -70,7 +70,7 @@
      * </p>
      *
      * <h3>
-     * Configure for async upload
+     * Async upload configuration
      * </h3>
      * @exampleTitle
      * 1. Create a simple HTML input of type "file" (no HTML form is required*)
