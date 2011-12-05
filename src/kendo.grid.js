@@ -759,7 +759,7 @@
 
                 that.editable = cell.addClass("k-edit-cell")
                     .kendoEditable({
-                        fields: { field: column.field, format: column.format },
+                        fields: { field: column.field, format: column.format, editor: column.editor },
                         model: model,
                         change: function(e) {
                             if (that.trigger(SAVE, { values: e.values, container: cell, model: model } )) {
