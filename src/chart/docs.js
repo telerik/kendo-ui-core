@@ -2716,6 +2716,7 @@
          * @option {String} [tooltip.border.color] <"black"> The color of the border.
          * @option {Boolean} [transitions] <true>
          * A value indicating if transition animations should be played.
+         * @option {Object} [axisDefaults] Default options for all chart axes.
          */
         init: function() {
             /**
