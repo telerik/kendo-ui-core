@@ -32,7 +32,7 @@
      *  </p>
      *  <ul>
      *      <li>Minimum height/width</li>
-     *      <li>Available user Window actions (close/refresh/maximize)</li>
+     *      <li>Available user Window actions (close/refresh/maximize/minimize)</li>
      *      <li>Window title</li>
      *      <li>Draggable and Resizable behaviors</li>
      *  </ul>
@@ -45,13 +45,14 @@
      *      height: "300px",
      *      title: "Modal Window",
      *      modal: true,
-     *      actions: ["Refresh", "Maximize", "Close"]
+     *      actions: ["Refresh", "Maximize", "Minimize", "Close"]
      *  });
      * @section
      *  <p>
      *      The order of the values in the actions array determines the order in which the action buttons
      *      will be rendered in the Window title bar. The maximize action serves both as a button for expanding
-     *      the Window to fill the screen and as a button to restore the Window to the previous size.
+     *      the Window to fill the screen and as a button to restore the Window to the previous size. The minimize
+     *      action collapses the window to its title.
      *  </p>
      *  <h3>Positioning and Opening the Window</h3>
      *  <p>
@@ -162,7 +163,7 @@
          * @option {Integer} [minWidth] <50> The minimum width that may be achieved by resizing the window.
          * @option {Integer} [minHeight] <50> The minimum height that may be achieved by resizing the window.
          * @option {Object|String} [content] Specifies a URL or request options that the window should load its content from. For remote URLs, a container iframe element is automatically created.
-         * @option {Array<String>} [actions] <"Close"> The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize", "Maximize".
+         * @option {Array<String>} [actions] <["Close"]> The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize", "Maximize".
          * @option {String} [title] The text in the window title bar.
          * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the widget.
          * @option {Animation} [animation.open] The animation that will be used when the window opens.
@@ -403,6 +404,7 @@
             each({
                 "k-close": that.close,
                 "k-maximize": that.maximize,
+                "k-minimize": that.minimize,
                 "k-restore": that.restore,
                 "k-refresh": that.refresh
             }, function (commandName, handler) {
@@ -622,26 +624,26 @@
         },
 
         /**
-         * Restores a maximized window to its previous size.
+         * Restores a maximized / minimized window to its previous size.
          */
         restore: function () {
             var that = this,
                 options = that.options,
-                restorationSettings = that.restorationSettings;
+                restoreOptions = that.restoreOptions;
 
-            if (!options.isMaximized) {
+            if (!options.isMaximized && !options.isMinimized) {
                 return;
             }
 
             that.wrapper
                 .css({
                     position: "absolute",
-                    left: restorationSettings.left,
-                    top: restorationSettings.top,
-                    width: restorationSettings.width,
-                    height: restorationSettings.height
+                    left: restoreOptions.left,
+                    top: restoreOptions.top,
+                    width: restoreOptions.width,
+                    height: restoreOptions.height
                 })
-                .find(".k-resize-handle").show().end()
+                .find(".k-window-content,.k-resize-handle").show().end()
                 .find(".k-window-titlebar .k-restore").addClass("k-maximize").removeClass("k-restore");
 
             $("html, body").css(OVERFLOW, "");
@@ -657,17 +659,20 @@
          * Maximizes a window so that it fills the entire screen.
          */
         maximize: function () {
-            var that = this;
+            var that = this,
+                wrapper = that.wrapper,
+                options = that.options,
+                position;
 
-            if (that.options.isMaximized) {
+            if (options.isMaximized) {
                 return;
             }
 
-            var wrapper = that.wrapper;
+            position = wrapper.position();
 
-            that.restorationSettings = {
-                left: wrapper.position().left,
-                top: wrapper.position().top,
+            that.restoreOptions = {
+                left: position.left,
+                top: position.top,
                 width: wrapper.width(),
                 height: wrapper.height()
             };
@@ -679,9 +684,41 @@
 
             $("html, body").css(OVERFLOW, "hidden");
 
-            that.options.isMaximized = true;
+            options.isMaximized = true;
 
             that._onDocumentResize();
+
+            return that;
+        },
+
+        /**
+         * Minimizes a window to its title bar.
+         */
+        minimize: function () {
+            var that = this,
+                wrapper = that.wrapper,
+                position,
+                options = that.options;
+
+            if (options.isMinimized) {
+                return;
+            }
+
+            position = wrapper.position();
+
+            that.restoreOptions = {
+                left: position.left,
+                top: position.top,
+                width: wrapper.width(),
+                height: wrapper.height()
+            };
+
+            wrapper
+                .css("minHeight", 0)
+                .find(".k-window-content,.k-resize-handle").hide().end()
+                .find(".k-window-titlebar .k-minimize").addClass("k-restore").removeClass("k-minimize");
+
+            options.isMinimized = true;
 
             return that;
         },
