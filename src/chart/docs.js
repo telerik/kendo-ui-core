@@ -2761,7 +2761,13 @@
         refresh: function() { },
 
         /**
-         * Returns the SVG representation of the current chart. The browser does not need to support SVG.
+         * Returns the SVG representation of the current chart.
+         * The returned string is a self-contained SVG document
+         * that can be used as is or converted to other formats
+         * using tools like <a href="http://inkscape.org/">Inkscape</a> and
+         * <a href="http://www.imagemagick.org/">ImageMagick</a>.
+         * Both programs provide command-line interface
+         * suitable for backend processing.
          * @example
          * var chart = $("#chart").data("kendoChart");
          * var svgText = chart.svg();
