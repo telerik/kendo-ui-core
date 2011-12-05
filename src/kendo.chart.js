@@ -3996,14 +3996,12 @@
                         orientation: invertAxes ? VERTICAL : HORIZONTAL,
                         axisCrossingValue: invertAxes ? categoriesCount : 0
                     },
-                    options.categoryAxis,
-                    invertAxes ? options.yAxis : options.xAxis)
+                    options.categoryAxis)
                 ),
                 valueAxis = new NumericAxis(seriesMin, seriesMax, deepExtend({
                         orientation: invertAxes ? HORIZONTAL : VERTICAL
                     },
-                    options.valueAxis,
-                    invertAxes ? options.xAxis : options.yAxis)
+                    options.valueAxis)
                 );
 
             plotArea.axisX = invertAxes ? valueAxis : categoryAxis;
