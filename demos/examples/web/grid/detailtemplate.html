@@ -67,7 +67,7 @@
                         dataSource: {
                             type: "odata",
                             transport: {
-                                read: "http://services.odata.org/Northwind/Northwind.svc/Employees"
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Employees"
                             },
                             pageSize: 5,
                             serverPaging: true,
@@ -107,16 +107,16 @@
                     var detailRow = e.detailRow;
 
                     detailRow.find(".tabstrip").kendoTabStrip({
-						animation: {
-							open: { effects: "fadeIn" }
-						}
-					});
+                        animation: {
+                            open: { effects: "fadeIn" }
+                        }
+                    });
 
                     detailRow.find(".orders").kendoGrid({
                         dataSource: {
                             type: "odata",
                             transport: {
-                                read: "http://services.odata.org/Northwind/Northwind.svc/Orders"
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
                             },
                             serverPaging: true,
                             serverSorting: true,
