@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f021097d-269c-46e2-8a93-b934b8ecd3b4</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>ee287359-2213-46eb-aad8-71f2d6a03635</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>12e8a58a-fc15-4fc4-9af0-64c1f4ca786f</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0b902dbd-f38d-4e20-8de0-c320b31dbd3e</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -143,7 +143,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>0074ad9a-a671-474f-a965-560630612a6f</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0d200028-07ea-42f5-9efe-246ba0a3b86e</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -223,7 +223,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>bf531a5b-7a52-4911-83e2-c1e9503851f4</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0b237070-fc03-4b5a-9de7-cc79c2f6921a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -303,7 +303,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>2453195c-0aba-4a31-a0c2-ac07ce2e04cb</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f57b919f-af32-4fdb-9b1d-ae0c310a4820</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -336,7 +336,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>2809dcff-f2ee-4221-ae20-19c2c0e5d507</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>fb713e5e-351b-49b8-9cc9-ba75c05026bb</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:InvokeEventActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -416,7 +416,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b2087b4e-abcf-4762-8d11-da7ba5eb8e4d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2b691ca5-b706-4a7d-b179-e067bcd4c001</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopKeyboardActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -500,7 +500,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>2163e34f-26ab-4425-b29f-1c19654549f6</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>db68156e-f5df-44ff-8a22-2864880b3a88</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -590,7 +590,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>0fabbc19-905b-4f04-a434-b96dee602bcf</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b8d97cae-107b-4981-b75c-adf99b20cf33</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:InvokeEventActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -670,7 +670,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>10</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b3e376e5-f4ac-461e-aed7-4eb12330ff44</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c8354675-2ae4-4c90-ba3f-a7edf64b17ff</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -750,7 +750,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>11</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d00034f1-7305-4a10-ab26-778b4100840f</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>db739417-d7cb-4bcd-bef5-6998e3ee42fa</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -833,7 +833,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>12</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>54903053-319d-4f1c-b6e9-4a8cdfa7f3a4</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>68fa53c3-d62c-4a87-9c59-294ddc312a5b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -866,7 +866,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>13</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d3cd8786-06c3-4b77-ab8b-d0f44d6a63b1</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a8eb97f2-c1b5-48ca-ac53-048ccae42e2c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -945,11 +945,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for 'TextContent' 'Contains' '40.4200' on 'x404200TableCell'</d2p1:Description>
+      <d2p1:Description>Wait for 'TextContent' 'Contains' '40.42' on 'x404200TableCell'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>14</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>0507a65c-26bd-41c3-85a9-6d040fc33021</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a7ac6be6-2d63-4c80-b560-4c4e7f4ec8d7</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -975,10 +975,10 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TextContent=40.4200</Clause>
+                          <Clause>tagname=td</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagname=td</Clause>
+                          <Clause>TextContent=40.42</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
@@ -1022,7 +1022,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:CompareType>Contains</d2p1:CompareType>
-        <d2p1:ExpectedString>40.4200</d2p1:ExpectedString>
+        <d2p1:ExpectedString>40.42</d2p1:ExpectedString>
         <d2p1:SegmentType>TextContent</d2p1:SegmentType>
       </d2p1:Step>
       <d2p1:StepImageKey>FilterFreightLessThandq5mnk0d.uf3</d2p1:StepImageKey>
@@ -1032,11 +1032,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for 'TextContent' 'Contains' '38.6400' on 'x386400TableCell'</d2p1:Description>
+      <d2p1:Description>Wait for 'TextContent' 'Contains' '38.64' on 'x386400TableCell'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>15</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ada98f2d-c687-4fcb-857f-71c1b4368888</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d8fb8f3d-3b59-4552-870e-2e1d94224964</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -1062,10 +1062,10 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TextContent=38.6400</Clause>
+                          <Clause>tagname=td</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagname=td</Clause>
+                          <Clause>TextContent=38.64</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
@@ -1109,7 +1109,7 @@
         <d2p1:DataBindVariableName i:nil="true" />
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:CompareType>Contains</d2p1:CompareType>
-        <d2p1:ExpectedString>38.6400</d2p1:ExpectedString>
+        <d2p1:ExpectedString>38.64</d2p1:ExpectedString>
         <d2p1:SegmentType>TextContent</d2p1:SegmentType>
       </d2p1:Step>
       <d2p1:StepImageKey>FilterFreightLessThanyzsrks5k.anp</d2p1:StepImageKey>
