@@ -32,7 +32,6 @@
             <p> Choose a ticket class: <select id="ticket" style="vertical-align: middle" data-bind="options: tickets,
                 optionsCaption: 'Choose...',
                 optionsText: 'name',
-                optionsValue: 'price',
                 value: chosenTicket"></select>
             </p>
             <p data-bind="template: 'ticketTemplate'"></p>
@@ -40,7 +39,7 @@
             <script id="ticketTemplate" type="text/x-jquery-tmpl">
                 {{if chosenTicket}}
                 You have chosen <b>${ chosenTicket().name }</b>
-                ($${ chosenTicket() })
+                ($${ chosenTicket().price })
                 <button data-bind="click: resetTicket">Clear</button>
                 {{/if}}
             </script>
@@ -58,7 +57,7 @@
 
                     ko.applyBindings(viewModel);
 
-                    $("#ticket").kendoDropDownList();
+                    $("#ticket").kendoDropDownList().trigger("change");
                 });
             </script>
         </div>
