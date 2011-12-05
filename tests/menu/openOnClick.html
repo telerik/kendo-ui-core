@@ -168,7 +168,7 @@
             var opend = false;
             menu.open = function() { opend = true };
             var element = $("li:first", menu.element)[0];
-            menu._click({ currentTarget: element, preventDefault: function () { }, stopPropagation: function () { } }, element);
+            menu._click({ target: element, preventDefault: function () { }, stopPropagation: function () { } }, element);
             ok(opend);
             ok(menu.clicked);
         });
