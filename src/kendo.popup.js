@@ -16,13 +16,14 @@
         LOCATION = "location",
         POSITION = "position",
         VISIBLE = "visible",
-        OFFSET = "offset",
         FITTED = "fitted",
         EFFECTS = "effects",
         ACTIVE = "k-state-active",
         ACTIVEBORDER = "k-state-border",
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
+        cssPrefix = kendo.support.transitions.css,
+        TRANSFORM = cssPrefix + "transform",
         extend = $.extend,
         proxy = $.proxy,
         Widget = ui.Widget;
@@ -63,7 +64,7 @@
 
             extend(options.animation.open, {
                 complete: function() {
-                    that.wrapper.css({ overflow: VISIBLE }).css("overflow");
+                    that.wrapper.css({ overflow: VISIBLE }); // Forcing refresh causes flickering in mobile.
                 }
             });
 
@@ -100,9 +101,11 @@
 
             $(document.documentElement).bind(MOUSEDOWN, proxy(that._mousedown, that));
 
-            $(window).bind("resize scroll", function() {
-                that.close();
-            });
+            if (!touch) { //  On mobile device this closes the popup if keyboard is shown :)
+                $(window).bind("resize scroll", function() {
+                    that.close();
+                });
+            }
 
             if (options.toggleTarget) {
                 $(options.toggleTarget).bind(options.toggleEvent, proxy(that.toggle, that));
@@ -151,6 +154,10 @@
                                             display: "block",
                                             position: ABSOLUTE
                                         });
+
+                if (kendo.support.mobileOS.android) {
+                    wrapper.add(anchor).css(TRANSFORM, "translatez(0)"); // Android is VERY slow otherwise. Should be tested in other droids as well since it may cause blur.
+                }
 
                 wrapper.css(POSITION);
 
@@ -229,9 +236,8 @@
                 options = that.options,
                 anchor = $(options.anchor)[0],
                 toggleTarget = options.toggleTarget,
-                target = e.target,
+                target = kendo.eventTarget(e),
                 popup = $(target).closest(".k-popup")[0];
-
 
             if (popup && popup !== that.element[0] ){
                 return;
