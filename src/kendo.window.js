@@ -256,7 +256,6 @@
             }
 
             wrapper
-                .bind("mousedown", proxy(that.toFront, that))
                 .delegate(windowActions, "mouseenter", function () { $(this).addClass(KHOVERSTATE); })
                 .delegate(windowActions, "mouseleave", function () { $(this).removeClass(KHOVERSTATE); })
                 .delegate(windowActions, "click", proxy(that._windowActionHandler, that));
@@ -274,6 +273,9 @@
             if (options.draggable) {
                 that.dragging = new WindowDragging(that);
             }
+
+            wrapper.add(wrapper.find(".k-resize-handle,.k-window-titlebar"))
+                .bind("mousedown", proxy(that.toFront, that));
 
             that.bind([
                 /**
