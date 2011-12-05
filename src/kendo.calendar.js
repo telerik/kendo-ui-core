@@ -860,7 +860,7 @@
                         month -= 12;
                     }
 
-                    if (date.getMonth() != month) {
+                    if (month > 0 && date.getMonth() != month) {
                         date.setDate(0);
                     }
                 }

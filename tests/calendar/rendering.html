@@ -95,6 +95,15 @@
                 equal(+modified, +date);
             });
 
+            test("year.setDate should work correctly when date is Jan and value is -1 ", function() {
+                var date = new Date(2011, 11, 5),
+                    modified = new Date(2012, 0, 5);
+
+                calendar.views[1].setDate(modified, -1);
+
+                equal(+modified, +date);
+            });
+
             test("year.setDate updates even the second param is date", function() {
                 var value = new Date(2011, 7, 31, 10, 10, 33, 111),
                     origin = new Date(2010, 7, 22, 20, 11, 44, 666);
