@@ -137,8 +137,8 @@
                 },
                 min: function(input) {
                     if (input.filter(NUMBERINPUTSELECTOR + ",[" + kendo.attr("type") + "=number]").filter("[min]").length && input.val() !== "") {
-                        var min = parseInt(input.attr("min"), 10) || 0,
-                            val = parseInt(input.val(), 10);
+                        var min = parseFloat(input.attr("min")) || 0,
+                            val = parseFloat(input.val());
 
                         return min <= val;
                     }
@@ -146,8 +146,8 @@
                 },
                 max: function(input) {
                     if (input.filter(NUMBERINPUTSELECTOR + ",[" + kendo.attr("type") + "=number]").filter("[max]").length && input.val() !== "") {
-                        var max = parseInt(input.attr("max"), 10) || 0,
-                            val = parseInt(input.val(), 10);
+                        var max = parseFloat(input.attr("max")) || 0,
+                            val = parseFloat(input.val());
 
                         return max >= val;
                     }
@@ -155,11 +155,11 @@
                 },
                 step: function(input) {
                     if (input.filter(NUMBERINPUTSELECTOR + ",[" + kendo.attr("type") + "=number]").filter("[step]").length && input.val() !== "") {
-                        var min = parseInt(input.attr("min"), 10) || 0,
-                            step = parseInt(input.attr("step"), 10) || 0,
-                            val = parseInt(input.val(), 10);
+                        var min = parseFloat(input.attr("min")) || 0,
+                            step = parseFloat(input.attr("step")) || 0,
+                            val = parseFloat(input.val());
 
-                        return (val-min)%step === 0;
+                        return (((val-min)*10)%(step*10)) / 100 === 0;
                     }
                     return true;
                 },

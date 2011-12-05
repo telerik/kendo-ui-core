@@ -318,6 +318,20 @@
                 ok(!validator.validate());
             });
 
+            test("validate returns false if input with type=number value does not match min attribute decimal", function() {
+                var input = $('<input type="number" value="10" min="10.10" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input with type=number value does match min attribute decimal", function() {
+                var input = $('<input type="number" value="10.10" min="10.10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
             test("validate returns true if input with type=number value does match min attribute", function() {
                 var input = $('<input type="number" value="11" min="10" />'),
                     validator = setup(input);
@@ -353,6 +367,20 @@
                 ok(!validator.validate());
             });
 
+            test("validate returns true if input with type=text and data-kendo-type=number value match max attribute decimal value", function() {
+                var input = $('<input type="text" value="10.10" max="10.20" data-kendo-type="number" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input with type=text and data-kendo-type=number value does not match max attribute decimal value", function() {
+                var input = $('<input type="text" value="10.20" max="10" data-kendo-type="number" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
             test("validate returns false if input with type=number value does not match max attribute", function() {
                 var input = $('<input type="number" value="11" max="10" />'),
                     validator = setup(input);
@@ -369,6 +397,13 @@
 
             test("validate returns true if input with type=number value does match max attribute", function() {
                 var input = $('<input type="number" value="9" max="10" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns true if input with type=text and data-kendo-type=number value does match step attribute and have min set with decimal step", function() {
+                var input = $('<input type="text" value="18.1" step="0.1" min="5" data-kendo-type="number" />'),
                     validator = setup(input);
 
                 ok(validator.validate());
