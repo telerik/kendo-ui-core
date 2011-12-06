@@ -159,6 +159,73 @@
 
                 viewmodel.foo.unshift({});
             });
+
+            test("splicing array items raises the change event with remove action", function() {
+                expect(1);
+
+                var viewmodel = new ViewModel({ foo: [{}] });
+
+                viewmodel.foo.bind("change", function(e) {
+                    equal(e.action, "remove");
+                });
+
+                viewmodel.foo.splice(0);
+            });
+
+            test("splicing array items raises the change event and provides index", function() {
+                expect(1);
+
+                var viewmodel = new ViewModel({ foo: [{}] });
+
+                viewmodel.foo.bind("change", function(e) {
+                    equal(e.index, 0);
+                });
+
+                viewmodel.foo.splice(0);
+            });
+
+            test("splicing array items raises the change event and provides the removed items", function() {
+                expect(1);
+
+                var viewmodel = new ViewModel({ foo: [{}] });
+
+                viewmodel.foo.bind("change", function(e) {
+                    equal(e.items.length, 1);
+                });
+
+                viewmodel.foo.splice(0);
+            });
+
+            test("splicing array items returns the removed items", function() {
+                var viewmodel = new ViewModel({ foo: [{}] });
+
+                equal(viewmodel.foo.splice(0).length, 1);
+            });
+
+            test("splicing array items raises the change event with add action", function() {
+                expect(1);
+
+                var viewmodel = new ViewModel({ foo: [] });
+
+                viewmodel.foo.bind("change", function(e) {
+                    equal(e.action, "add");
+                });
+
+                viewmodel.foo.splice(0, 1, {});
+            });
+
+            test("splicing array items raises the change event and sends the index and inserted items", function() {
+                expect(2);
+
+                var viewmodel = new ViewModel({ foo: [] });
+
+                viewmodel.foo.bind("change", function(e) {
+                    equal(e.index, 0);
+                    equal(e.items.length, 1);
+                });
+
+                viewmodel.foo.splice(0, 1, {});
+            });
        </script>
     </head>
 </html>
