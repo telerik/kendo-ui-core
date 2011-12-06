@@ -133,8 +133,7 @@
                 var localData = [{text: "Foo", value: 1}, {text:"Bar"}],
                     combobox = input.kendoComboBox(localData).data("kendoComboBox");
 
-                combobox.dataSource.fetch();
-                combobox.ul.children().eq(1).click();
+                combobox.select(1);
 
                 setTimeout(function() {
                     equal(combobox.text(), data[1].text);
