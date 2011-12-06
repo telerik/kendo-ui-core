@@ -950,6 +950,7 @@
          * @option {Object} [seriesDefaults.tooltip.border] The border configuration options.
          * @option {Number} [seriesDefaults.tooltip.border.width] <0> The width of the border.
          * @option {String} [seriesDefaults.tooltip.border.color] <"black"> The color of the border.
+         * @option {Boolean} [seriesDefaults.tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          * @option {Object} [seriesDefaults.bar]
          * The default options for all bar series. For more details see the series options.
          * @option {Object} [seriesDefaults.column] The column configuration options.
@@ -1221,7 +1222,7 @@
          * @option {Object} [series.type="bar".tooltip.border] The border configuration options.
          * @option {Number} [series.type="bar".tooltip.border.width] <0> The width of the border.
          * @option {String} [series.type="bar".tooltip.border.color] <"black"> The color of the border.
-         *
+         * @option {Boolean} [series.type="bar".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          * @option [series.type="column"] The type of the series.
          * @option {Boolean} [series.type="column".stacked] <false>
          * A value indicating if the series should be stacked.
@@ -1471,6 +1472,7 @@
          * @option {Object} [series.type="column".tooltip.border] The border configuration options.
          * @option {Number} [series.type="column".tooltip.border.width] <0> The width of the border.
          * @option {String} [series.type="column".tooltip.border.color] <"black"> The color of the border.
+         * @option {Boolean} [series.type="column".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          *
          * @option [series.type="line"] The type of the series.
          * @option {Boolean} [series.type="line".stacked] <false>
@@ -1721,6 +1723,7 @@
          * @option {Object} [series.type="line".tooltip.border] The border configuration options.
          * @option {Number} [series.type="line".tooltip.border.width] <0> The width of the border.
          * @option {String} [series.type="line".tooltip.border.color] <"black"> The color of the border.
+         * @option {Boolean} [series.type="line".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          *
          * @option [series.type="pie"] The type of the series.
          * @option {String} [series.type="pie".categoryField]
@@ -2034,6 +2037,7 @@
          * @option {Object} [series.type="pie".tooltip.border] The border configuration options.
          * @option {Number} [series.type="pie".tooltip.border.width] <0> The width of the border.
          * @option {String} [series.type="pie".tooltip.border.color] <"black"> The color of the border.
+         * @option {Boolean} [series.type="pie".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          *
          * @option [series.type="scatter"] The type of the series.
          * @option {String} [series.type="scatter".color] The series base color.
@@ -2287,6 +2291,7 @@
          *          }
          *      ]
          * });
+         * @option {Boolean} [series.type="scatter".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          *
          * @option [series.type="scatterLine"] The type of the series.
          * @option {String} [series.type="scatterLine".color] The series base color.
@@ -2540,6 +2545,7 @@
          *          }
          *      ]
          * });
+         * @option {Boolean} [series.type="scatterLine".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          *
          * @option {Number} [series.type="scatterLine".width] <1> The line width of the scatter line chart.
          * @option {Object} [chartArea] The chart area configuration options.
@@ -2714,6 +2720,7 @@
          * @option {Object} [tooltip.border] The border configuration options.
          * @option {Number} [tooltip.border.width] <0> The width of the border.
          * @option {String} [tooltip.border.color] <"black"> The color of the border.
+         * @option {Boolean} [tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          * @option {Boolean} [transitions] <true>
          * A value indicating if transition animations should be played.
          * @option {Object} [axisDefaults] Default options for all chart axes.
