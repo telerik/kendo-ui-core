@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ViewModel tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ViewModel Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+        <script>
+            var ViewModel = kendo.ViewModel;
+
+            test("is observable ", function() {
+                ok(new ViewModel() instanceof kendo.Observable);
+            });
+
+            test("set changes the value of the field", function() {
+                var viewModel = new ViewModel({ foo: "bar" });
+
+                viewModel.set("foo", "foo");
+
+                equal(viewModel.foo, "foo");
+            });
+
+            test("copies all fields of the source object", function() {
+                var viewModel = new ViewModel({ foo: "bar" });
+
+                equal(viewModel.foo, "bar");
+            });
+
+            test("nested objects are view models as well", function() {
+                var viewModel = new ViewModel({ foo: { bar: "baz" } });
+
+                ok(viewModel.foo instanceof ViewModel);
+            });
+
+            test("set triggers the change event", function() {
+                expect(1);
+
+                var viewModel = new ViewModel({ foo: "bar" });
+
+                viewModel.bind("change", function() {
+                    ok(true, "change is raised");
+                });
+
+                viewModel.set("foo", "baz");
+            });
+
+            test("change event arguments provide the name of the field", function() {
+                expect(1);
+
+                var viewModel = new ViewModel({ foo: "bar" });
+
+                viewModel.bind("change", function(e) {
+                    equal(e.field, "foo");
+                });
+
+                viewModel.set("foo", "baz");
+            });
+
+            test("nested arrays are extended", function() {
+                var viewModel = new ViewModel({ foo: [{}] });
+
+                equal(typeof viewModel.foo.bind, "function");
+            });
+
+            test("pushing items to array raises the change event", function() {
+                expect(1);
+
+                var viewModel = new ViewModel({ foo: [{}] });
+
+                viewModel.foo.bind("change", function() {
+                    ok(true, "change is raised");
+                });
+
+                viewModel.foo.push({});
+            });
+
+            test("pushing items to array raises the change event", function() {
+                expect(1);
+
+                var viewmodel = new ViewModel({ foo: [{}] });
+
+                viewmodel.foo.bind("change", function() {
+                    ok(true, "change is raised");
+                });
+
+                viewmodel.foo.push({});
+            });
+
+            test("pushing items to array raises the change event and sets the action to add", function() {
+                expect(1);
+
+                var viewmodel = new ViewModel({ foo: [{}] });
+
+                viewmodel.foo.bind("change", function(e) {
+                    equal(e.action, "add");
+                });
+
+                viewmodel.foo.push({});
+            });
+
+            test("pushing items to array raises the change event and sets the index", function() {
+                expect(1);
+
+                var viewmodel = new ViewModel({ foo: [{}] });
+
+                viewmodel.foo.bind("change", function(e) {
+                    equal(e.index, 1)
+                });
+
+                viewmodel.foo.push({});
+            });
+
+            test("pushing items to array raises the change event and provides the added items", function() {
+                expect(1);
+
+                var viewmodel = new ViewModel({ foo: [{}] });
+
+                viewmodel.foo.bind("change", function(e) {
+                    equal(e.items.length, 1)
+                });
+
+                viewmodel.foo.push({});
+            });
+
+            test("this in the change event is the array itself", function() {
+                expect(1);
+
+                var viewmodel = new ViewModel({ foo: [] });
+
+                viewmodel.foo.bind("change", function() {
+                    strictEqual(this, viewmodel.foo);
+                });
+
+                viewmodel.foo.push({});
+            });
+
+            test("unshifting items to array raises the change event", function() {
+                expect(3);
+
+                var viewmodel = new ViewModel({ foo: [] });
+
+                viewmodel.foo.bind("change", function(e) {
+                    equal(e.action, "add");
+                    equal(e.index, 0);
+                    equal(e.items.length, 1);
+                });
+
+                viewmodel.foo.unshift({});
+            });
+       </script>
+    </head>
+</html>

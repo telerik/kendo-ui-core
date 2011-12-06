@@ -3,7 +3,74 @@
         Observable = kendo.Observable,
         data = kendo.data,
         Model = data.Model,
+        push = [].push,
+        unshift = [].unshift,
         CHANGE = "change";
+
+    function extendArray(array) {
+        return $.extend(array, new Observable(), {
+            unshift: function() {
+                var index = this.length,
+                    items = arguments,
+                    result;
+
+                result = unshift.apply(this, items);
+
+                this.trigger(CHANGE, {
+                    action: "add",
+                    index: 0,
+                    items: items
+                });
+
+                return result;
+            },
+            push: function() {
+                var index = this.length,
+                    items = arguments,
+                    result;
+
+                result = push.apply(this, items);
+
+                this.trigger(CHANGE, {
+                    action: "add",
+                    index: index,
+                    items: items
+                });
+
+                return result;
+            }
+        });
+    }
+
+    var ViewModel = Observable.extend( {
+        init: function(data) {
+            var that = this,
+                field,
+                member;
+
+            Observable.fn.init.call(that);
+
+            for (field in data) {
+                member = data[field];
+
+                if ($.isPlainObject(member)) {
+                    member = new ViewModel(member);
+                } else if ($.isArray(member)) {
+                    member = extendArray(member);
+                }
+
+                that[field] = member;
+            }
+        },
+
+        set: function(field, value) {
+            this[field] = value;
+
+            this.trigger(CHANGE, {
+                field: field
+            });
+        }
+    });
 
     function bindSelect(select, model) {
         select = $(select);
@@ -128,4 +195,6 @@
     });
 
     data.ModelViewBinder = ModelViewBinder;
+
+    kendo.ViewModel = ViewModel;
 })(jQuery);
