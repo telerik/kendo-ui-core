@@ -74,6 +74,10 @@
                     if ($.grep(this.tests, function (test, index) { return !test.complete; }).length == 0) {
                         $("#qunit-banner").addClass(this.failures > 0 ? "qunit-fail" : "qunit-pass");
                         this.done(this.failures, this.total);
+
+                        if (top.client) {
+                            top.client.publish("/done", {failures: failures, total: total});
+                        }
                     }
                     else if (this.sequential) {
                         this.nextPage();
@@ -105,10 +109,6 @@
 
         QUnit.config.done.push(function (state) {
             runner.pageProgress(window.frameElement, state.failed, state.total, "done", true);
-
-            if (top.client) {
-                top.client.publish("/done", {failures: state.failed, total: state.total});
-            }
         });
 
         QUnit.config.testStart.push(function (state) {
