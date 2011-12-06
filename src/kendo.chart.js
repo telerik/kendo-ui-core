@@ -1500,6 +1500,29 @@
 
                 label.reflow(labelBox);
             }
+        },
+
+        renderPlotBands: function(view) {
+            var axis = this,
+                options = axis.options,
+                plotBands = options.plotBands || [],
+                isVertical = options.orientation === VERTICAL,
+                result = [],
+                plotArea = axis.parent,
+                slotX,
+                slotY;
+
+            if (plotBands.length) {
+                result = map(plotBands, function(item) {
+                    slotX = isVertical ? plotArea.axisX.getSlot(-Number.MAX_VALUE, Number.MAX_VALUE) : plotArea.axisX.getSlot(item.from, item.to);
+                    slotY = isVertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.getSlot(-Number.MAX_VALUE, Number.MAX_VALUE);
+                    return view.createRect(
+                            new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
+                            { fill: item.color, opacity: item.opacity, zIndex: -1 });
+                });
+            }
+
+            return result;
         }
     });
 
@@ -1654,29 +1677,6 @@
             }
 
             return childElements;
-        },
-
-        renderPlotBands: function(view) {
-            var axis = this,
-                options = axis.options,
-                plotBands = options.plotBands || [],
-                isVertical = options.orientation === VERTICAL,
-                result = [],
-                plotArea = axis.parent,
-                slotX,
-                slotY;
-
-            if (plotBands.length) {
-                result = map(plotBands, function(item) {
-                    slotX = isVertical ? plotArea.axisX.box : plotArea.axisX.getSlot(item.from, item.to);
-                    slotY = isVertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.box;
-                    return view.createRect(
-                            new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
-                            { fill: item.color, opacity: item.opacity, zIndex: -1 });
-                });
-            }
-
-            return result;
         },
 
         autoMajorUnit: function (min, max) {
@@ -1948,6 +1948,7 @@
                 }
 
                 append(childElements, axis.renderTicks(view));
+                append(childElements, axis.renderPlotBands(view));
             }
 
             return childElements;
@@ -1985,17 +1986,25 @@
             return axis.getTickPositions(axis.options.categories.length * 2);
         },
 
-        getSlot: function(categoryIx) {
+        getSlot: function(from, to) {
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
                 children = axis.children,
+                childrenCount = math.max(1, children.length),
+                from = math.max(0, from),
+                to = math.min(childrenCount, to),
                 box = axis.box,
                 size = isVertical ? box.height() : box.width(),
                 startPos = isVertical ? box.y1 : box.x1,
-                step = size / math.max(1, children.length),
-                p1 = startPos + (categoryIx * step),
-                p2 = p1 + step;
+                step = size / childrenCount,
+                p1 = startPos + (from * step),
+                p2 = p1 + step,
+                length = to - from;
+
+            if (length > 0) {
+                p2 = p1 + (length * step);
+            }
 
             return isVertical ?
                    new Box2D(box.x2, p1, box.x2, p2) :
