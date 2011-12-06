@@ -77,7 +77,9 @@
                 combobox.search("");
 
                 setTimeout(function() {
-                    ok(combobox.popup.element.css("display") !== "none");
+                    combobox._state = "accept";
+                    combobox.open();
+                    equal(combobox.ul.find("li").length, data.length);
                     start();
                 }, 300);
             });
