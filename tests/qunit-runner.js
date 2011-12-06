@@ -112,6 +112,7 @@
         });
 
         QUnit.config.testStart.push(function (state) {
+            startDate = +new Date();
             runner.pageProgress(window.frameElement, 0, 0, state.name + " started");
         });
 
