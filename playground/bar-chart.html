@@ -41,6 +41,12 @@
                     b: 30,
                     c: 20,
                     d: 30
+                }, {
+                    name: "Kuru Muru",
+                    a: 20,
+                    b: 30,
+                    c: 20,
+                    d: 30
                 }
             ];
 
@@ -70,24 +76,22 @@
                     ],
                     categoryAxis: {
                         field: "name",
-                        kur: "a"
-                    },
-                    transitions: true,
-                    valueAxis: {
+                        kur: "a",
                         plotBands: [{
-                            from: 25,
-                            to: 10,
+                            from: 0,
+                            to: 2,
                             color: "white"
-                        },{
-                            from: 10,
-                            to: -10,
+                        }, {
+                            from: 2,
+                            to: 4,
                             color: "green"
-                        },{
-                            from: -10,
-                            to: -30,
+                        }, {
+                            from: 4,
+                            to: 6,
                             color: "red"
                         }]
-                    }
+                    },
+                    transitions: true
                 });
             });
 
