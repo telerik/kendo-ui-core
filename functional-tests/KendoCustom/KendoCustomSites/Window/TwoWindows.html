@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Loading content with AJAX</title>
+        <link href="../../../../deploy/kendoui.web-dataviz.commercial/styles/kendo.common.min.css" rel="stylesheet"/>
+        <link href="../../../../deploy/kendoui.web-dataviz.commercial/styles/kendo.blueopal.min.css" rel="stylesheet"/>
+        <script src="../../../../deploy/kendoui.web-dataviz.commercial/js/jquery.min.js"></script>
+        <script src="../../../../deploy/kendoui.web-dataviz.commercial/js/kendo.all.min.js"></script>
+    </head>
+    
+    <body>
+        <div id="example" class="k-content">
+            
+
+
+            <!-- Window HTML -->
+            <div id="window1">foo</div>
+            <div id="window2">bar</div>
+            <p id="zindex1">zindex1</p>
+            <p id="zindex2">zindex2</p>
+            <p id="P1">z-index</p>
+            
+
+            <script>
+                $(document).ready(function () {
+                    function compareIndices() {
+                        //var ZIndex1 = $("#window1").css("z-index");
+                        var ZIndex1 = $("div.k-widget:first").css("z-index");
+                        var ZIndex2 = $("div.k-widget:last").css("z-index");
+                        $("#zindex1").html(ZIndex1);
+                        $("#zindex2").html(ZIndex2);
+
+                        if (ZIndex1 < ZIndex2) {
+                            $("#P1").html("foo is BACK")
+                        }
+                        else {
+                            $("#P1").html("foo is FRONT")
+                        }
+                    }
+
+                    $("#window1").kendoWindow();
+                    $("#window2").kendoWindow().closest(".k-window").css({
+                        top: "+30px",
+                        left: "+30px"
+                    });
+
+                    compareIndices();
+
+                    $(".k-window,.k-window-titlebar,.k-resize-handle").on("click", compareIndices);
+                    $(".k-resize-handle, .k-resize-w").on("click", compareIndices);
+                    
+                });
+
+                
+                  
+            </script>
+
+               
+        </div>
+
+        
+     
+        
+    </body>
+</html>
