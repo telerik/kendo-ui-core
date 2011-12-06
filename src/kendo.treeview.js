@@ -878,6 +878,8 @@
                             statusClass = "k-insert-bottom";
                         }
                     }
+                } else if (dropTarget[0] != that.dropHint[0]) {
+                    statusClass = "k-denied";
                 }
             }
 
