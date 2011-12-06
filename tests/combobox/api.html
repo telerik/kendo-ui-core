@@ -46,7 +46,7 @@
                 ok(combobox.popup.visible());
             });
 
-            asyncTest("open() method should bind and open popup {autobind: false}", function() {
+           test("open() method should bind and open popup {autobind: false}", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
                     autoBind: false
@@ -54,10 +54,7 @@
 
                 combobox.open();
 
-                setTimeout(function() {
-                    ok(combobox.popup.visible());
-                    start();
-                }, 200);
+                ok(combobox.popup.visible());
             });
 
             test("value method should select item if exists", function() {
