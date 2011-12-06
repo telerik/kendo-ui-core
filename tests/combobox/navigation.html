@@ -129,7 +129,7 @@
                 }, 300);
             });
 
-            test("value should be set to item.text if no item.value", function() {
+            asyncTest("value should be set to item.text if no item.value", function() {
                 var localData = [{text: "Foo", value: 1}, {text:"Bar"}],
                     combobox = input.kendoComboBox(localData).data("kendoComboBox");
 
@@ -247,6 +247,20 @@
                 ok(combobox.ul.children().eq(0).hasClass(SELECTED));
                 equal(combobox.text(), data[0].text);
                 equal(combobox.value(), data[0].value);
+            });
+
+            asyncTest("press enter should close popup when no change in selection", function() {
+                var combobox = input.kendoComboBox(data).data("kendoComboBox");
+
+                combobox.popup.bind("close", function(){
+                    ok(true);
+                    start();
+                });
+
+                combobox.popup.open();
+
+                combobox.select(0);
+                combobox.input.focus().press(keys.ENTER);
             });
 
             asyncTest("press enter should call preventDefault when popup is visible", function() {
