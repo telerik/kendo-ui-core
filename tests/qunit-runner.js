@@ -76,7 +76,7 @@
                         this.done(this.failures, this.total);
 
                         if (top.client) {
-                            top.client.publish("/done", {failures: failures, total: total});
+                            top.client.publish("/done", {failures: this.failures, total: total});
                         }
                     }
                     else if (this.sequential) {
