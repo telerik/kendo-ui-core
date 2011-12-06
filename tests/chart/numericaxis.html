@@ -25,7 +25,7 @@
             Chart.Text.fn.options.font = "16px Verdana, sans-serif";
 
             function moduleSetup() {
-                numericAxis = new kendo.ui.Chart.NumericAxis(0, 1);
+                numericAxis = new Chart.NumericAxis(0, 1);
                 view = new ViewStub();
             }
 
@@ -842,6 +842,93 @@
                     same([slot.x1, slot.x2], [16.5, 795]);
                 });
 
+            })();
+
+
+            (function() {
+                var plotArea,
+                    plotBands,
+                    lineSeriesData = [{
+                        name: "Value A",
+                        type: "line",
+                        data: [100, 200, 300]
+                    }],
+                    barSeriesData =  [{
+                        name: "Value A",
+                        type: "bar",
+                        data: [100, 20, 30]
+                    }];
+
+                function createPlotArea(series, chartOptions) {
+                    plotArea = new Chart.PlotArea({
+                        series: series,
+                        valueAxis: {
+                            plotBands: [{
+                                from: 0.2,
+                                to: 0.3,
+                                color: "red",
+                                opacity: 0.5
+                            }]
+                        },
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    });
+
+                    view = new ViewStub();
+
+                    plotArea.reflow(chartBox);
+                    plotArea.getViewElements(view);
+                    plotBands = view.log.rect[0];
+                }
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Plot Bands / Horizontal", {
+                    setup: function() {
+                        createPlotArea(lineSeriesData);
+                    }
+                });
+
+                test("renders box", function() {
+                    same([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                         [ 39, 572.516, 800, 572.677 ], TOLERANCE);
+                });
+
+                test("renders color", function() {
+                    equal(plotBands.style.fill, "red");
+                });
+
+                test("renders opacity", function() {
+                    equal(plotBands.style.opacity, 0.5);
+                });
+
+                test("renders z index", function() {
+                    equal(plotBands.style.zIndex, -1);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Plot Bands / Vertical", {
+                    setup: function() {
+                        createPlotArea(barSeriesData);
+                    }
+                });
+
+                test("renders box", function() {
+                    same([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                         [ 21.275, 0, 21.9125, 573 ], TOLERANCE);
+                });
+
+                test("renders color", function() {
+                    equal(plotBands.style.fill, "red");
+                });
+
+                test("renders opacity", function() {
+                    equal(plotBands.style.opacity, 0.5);
+                });
+
+                test("renders z index", function() {
+                    equal(plotBands.style.zIndex, -1);
+                });
             })();
         </script>
 
