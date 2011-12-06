@@ -4,26 +4,13 @@
         data = kendo.data,
         Model = data.Model,
         push = [].push,
+        splice = [].splice,
+        slice = [].slice,
         unshift = [].unshift,
         CHANGE = "change";
 
     function extendArray(array) {
         return $.extend(array, new Observable(), {
-            unshift: function() {
-                var index = this.length,
-                    items = arguments,
-                    result;
-
-                result = unshift.apply(this, items);
-
-                this.trigger(CHANGE, {
-                    action: "add",
-                    index: 0,
-                    items: items
-                });
-
-                return result;
-            },
             push: function() {
                 var index = this.length,
                     items = arguments,
@@ -34,6 +21,43 @@
                 this.trigger(CHANGE, {
                     action: "add",
                     index: index,
+                    items: items
+                });
+
+                return result;
+            },
+
+            splice: function(index, howMany, element) {
+                var result = splice.apply(this, arguments);
+
+                if (result.length) {
+                    this.trigger(CHANGE, {
+                        action: "remove",
+                        index: index,
+                        items: result
+                    });
+                }
+
+                if (element) {
+                    this.trigger(CHANGE, {
+                        action: "add",
+                        index: index,
+                        items: slice.call(arguments, 2)
+                    });
+                }
+                return result;
+            },
+
+            unshift: function() {
+                var index = this.length,
+                    items = arguments,
+                    result;
+
+                result = unshift.apply(this, items);
+
+                this.trigger(CHANGE, {
+                    action: "add",
+                    index: 0,
                     items: items
                 });
 
