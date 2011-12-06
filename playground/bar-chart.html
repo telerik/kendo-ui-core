@@ -72,7 +72,22 @@
                         field: "name",
                         kur: "a"
                     },
-                    transitions: true
+                    transitions: true,
+                    valueAxis: {
+                        plotBands: [{
+                            from: 25,
+                            to: 10,
+                            color: "white"
+                        },{
+                            from: 10,
+                            to: -10,
+                            color: "green"
+                        },{
+                            from: -10,
+                            to: -30,
+                            color: "red"
+                        }]
+                    }
                 });
             });
 
