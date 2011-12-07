@@ -465,6 +465,57 @@
                 equal(dataSource.view().length, 16);
             });
 
+            test("range from sorted local data is with the correct order", function() {
+                var dataSource = new DataSource({
+                    pageSize: 3,
+                    data: [{ foo: 6 },{ foo: 1 },{ foo: 5 },{ foo: 3 },{ foo: 2 },{ foo: 4 },{ foo: 7 }]
+                });
+
+                dataSource.sort({ field: "foo", dir: "asc" });
+                dataSource.range(1,3);
+                var view = dataSource.view();
+                equal(view.length, 3);
+                equal(view[0].foo, 2);
+                equal(view[1].foo, 3);
+                equal(view[2].foo, 4);
+            });
+
+            test("initial order is preserved after unsorting a range with local data", function() {
+                var dataSource = new DataSource({
+                    pageSize: 3,
+                    data: [{ foo: 6 },{ foo: 1 },{ foo: 5 },{ foo: 3 },{ foo: 2 },{ foo: 4 },{ foo: 7 }]
+                });
+
+                dataSource.sort({ field: "foo", dir: "asc" });
+                dataSource.range(1,3);
+
+                dataSource.sort({ field: "foo" });
+                dataSource.range(1,3);
+
+                var view = dataSource.view();
+                equal(view.length, 3);
+                equal(view[0].foo, 1);
+                equal(view[1].foo, 5);
+                equal(view[2].foo, 3);
+            });
+
+            test("range from filtered local data is with the correct", function() {
+                var dataSource = new DataSource({
+                    pageSize: 3,
+                    data: [{ foo: 6 },{ foo: 1 },{ foo: 5 },{ foo: 3 },{ foo: 2 },{ foo: 4 },{ foo: 7 }]
+                });
+
+                dataSource.filter({ field: "foo", operator: "gt", value: 3});
+
+                dataSource.range(1,3);
+
+                var view = dataSource.view();
+                equal(view.length, 3);
+                equal(view[0].foo, 5);
+                equal(view[1].foo, 4);
+                equal(view[2].foo, 7);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

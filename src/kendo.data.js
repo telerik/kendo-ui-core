@@ -1612,11 +1612,14 @@
                 that._take = take;
 
                 var paging = that.options.serverPaging;
+                var sorting = that.options.serverSorting;
                 try {
                     that.options.serverPaging = true;
+                    that.options.serverSorting = true;
                     that._process(data);
                 } finally {
                     that.options.serverPaging = paging;
+                    that.options.serverSorting = sorting;
                 }
 
                 return;
@@ -1651,6 +1654,11 @@
                 takeIdx,
                 startIndex,
                 endIndex,
+                rangeData,
+                rangeEnd,
+                processed,
+                options = that.options,
+                remote = options.serverSorting || options.serverPaging || options.serverFiltering || options.serverGrouping || options.serverAggregates;
                 length;
 
             for (skipIdx = 0, length = ranges.length; skipIdx < length; skipIdx++) {
@@ -1660,17 +1668,30 @@
 
                     for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
                         range = ranges[takeIdx];
+
                         if (range.data.length && start + count >= range.start && count + count <= range.end) {
+                            rangeData = range.data;
+                            rangeEnd = range.end;
+
+                            if (!remote) {
+                                processed = process(range.data, { sort: that.sort(), filter: that.filter() });
+                                rangeData = processed.data;
+
+                                if (processed.total !== undefined) {
+                                    rangeEnd = processed.total;
+                                }
+                            }
+
                             startIndex = 0;
                             if (start + count > range.start) {
                                 startIndex = (start + count) - range.start;
                             }
-                            endIndex = range.data.length;
-                            if (range.end > end) {
-                                endIndex = endIndex - (range.end - end);
+                            endIndex = rangeData.length;
+                            if (rangeEnd > end) {
+                                endIndex = endIndex - (rangeEnd - end);
                             }
                             count += endIndex - startIndex;
-                            data = data.concat(range.data.slice(startIndex, endIndex));
+                            data = data.concat(rangeData.slice(startIndex, endIndex));
 
                             if (end <= range.end && count == end - start) {
                                 return data;
