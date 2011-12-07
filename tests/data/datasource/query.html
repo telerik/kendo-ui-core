@@ -800,6 +800,31 @@
                 ok(view);
                 equal(called, 1);
             });
+
+            test("paging with custom schema", function() {
+                var dataSource = new DataSource({
+                    transport:  {
+                        read: function(options) {
+                            return options.success({ d: [ { foo: 1 }, { bar: 2 }] });
+                        }
+                    },
+                    schema: {
+                        data: function(result) {
+                            return result.d;
+                        },
+                        total: function(data) {
+                            return data.d.length;
+                        }
+                    },
+                    pageSize: 1
+                });
+
+                dataSource.read();
+                dataSource.page(1);
+
+                equal(dataSource.view().length, 1);
+                equal(dataSource.view()[0].foo, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -362,6 +362,17 @@
                 equal(dataSource.data()[4], 10);
             });
 
+            test("pristine data is not change if data is modified", function() {
+                var data =  [1,2,3,4,5],
+                    dataSource = new DataSource({
+                        data: data
+                    });
+                dataSource.read();
+
+                data[0] = 6;
+                equal(dataSource.data()[0], 6);
+                equal(dataSource._pristine[0], 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

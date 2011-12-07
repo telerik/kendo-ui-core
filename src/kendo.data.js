@@ -1210,6 +1210,8 @@
                 result,
                 hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0;
 
+            that._pristine = isPlainObject(data) ? $.extend(true, {}, data) : data.slice(0);
+
             data = that.reader.parse(data);
 
             that._total = that.reader.total(data);
@@ -1391,7 +1393,7 @@
                     if (result.total !== undefined) {
                         that._total = result.total;
                     } else {
-                        that._total = that.reader.total(that._data);
+                        that._total = that.reader.total(that._pristine);
                     }
                 }
 
