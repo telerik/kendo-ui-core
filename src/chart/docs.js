@@ -562,6 +562,41 @@
          * _example
          * //sets format of the labels
          * format: "{0:C}"
+         * @option {Array} [valueAxis.plotBands] The plot bands of value axis.
+         * The plot band fields:
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              from
+         *         </dt>
+         *         <dd>
+         *              The start position of the plot band in axis units.
+         *         </dd>
+         *         <dt>
+         *              to
+         *         </dt>
+         *         <dd>
+         *              The end position of the plot band in axis units.
+         *         </dd>
+         *         <dt>
+         *              color
+         *         </dt>
+         *         <dd>
+         *              The color of the plot band.
+         *         </dd>
+         *    </dl>
+         * </div>
+         *  _example
+         *  // ...
+         *  valueAxis: {
+         *      plotBands: [{
+         *          from: 0.2,
+         *          to: 0.4,
+         *          color: "green"
+         *      }]
+         *  }
+         *  // ...
+         *
          * @option {Object} [categoryAxis] The category axis configuration options.
          * @option {Array} [categoryAxis.categories] Array of category names.
          * @option {String} [categoryAxis.field] The data field containing the category name.
@@ -718,6 +753,41 @@
          * _example
          * //sets format of the labels
          * format: "{0:C}"
+         * @option {Array} [categoryAxis.plotBands] The plot bands of category axis.
+         * The plot band fields:
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              from
+         *         </dt>
+         *         <dd>
+         *              The start position of the plot band.
+         *         </dd>
+         *         <dt>
+         *              to
+         *         </dt>
+         *         <dd>
+         *              The end position of the plot band.
+         *         </dd>
+         *         <dt>
+         *              color
+         *         </dt>
+         *         <dd>
+         *              The color of the plot band.
+         *         </dd>
+         *    </dl>
+         * </div>
+         *  _example
+         *  // ...
+         *  categoryAxis: {
+         *      plotBands: [{
+         *          from: 0,
+         *          to: 1,
+         *          color: "green"
+         *      }]
+         *  }
+         *  // ...
+         *
          * @option {Object} [seriesDefaults] Default values for each series.
          * @option {Boolean} [seriesDefaults.stacked] <false>
          * A value indicating if the series should be stacked.
@@ -2254,7 +2324,7 @@
          * @option {String} [series.type="scatter".tooltip.format] The tooltip format.
          * _example
          * //sets format of the tooltip
-         * format: "{0:C}"
+         * format: "{0:C}--{0:C}"
          * @option {Number|Object} [series.type="scatter".tooltip.padding] The padding of the tooltip.
          * _example
          * // sets the top, right, bottom and left padding to 3px.
@@ -2362,7 +2432,7 @@
          * @option {String} [series.type="scatterLine".labels.format] The format of the labels.
          * _example
          * //sets format of the labels
-         * format: "{0:C}"
+         * format: "{0:C}--{0:C}"
          * @option {Number|Object} [series.type="scatterLine".labels.margin] <{ left: 5, right: 5}>
          * The margin of the labels.
          * _example
