@@ -29,7 +29,6 @@
 
             module("kendo.Application", {
                 setup: function() {
-                    kendo.ns = "kendo-";
                     location.hash = '';
                     $.mockjaxSettings.responseTime = 0;
                     $.mockjaxSettings.contentType = "text/html";
@@ -48,7 +47,7 @@
             }
 
             test("switches to local view", function() {
-                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+                setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
                 application.navigate("#page2");
                 ok(!$("#page1").is(":visible"), "First page is hidden");
                 ok($("#page2").is(":visible"), "Second page is visible");
@@ -59,10 +58,10 @@
 
                 $.mockjax({
                     url: "page2.html",
-                    responseText: '<body><div data-kendo-role="view" id="page2">Page 2</div></body>'
+                    responseText: '<body><div data-role="view" id="page2">Page 2</div></body>'
                 });
 
-                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+                setup('<div data-role="view" id="page1">Page 1</div>');
 
                 application.bind("viewShow", function() {
                     start();
@@ -75,11 +74,11 @@
             });
 
             asyncTest("reuses an already loaded remote page", function() {
-                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+                setup('<div data-role="view" id="page1">Page 1</div>');
 
                 $.mockjax({
                     url: "page2.html",
-                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                    responseText: '<div data-role="view" id="page2">Page 2</div>'
                 });
 
                 application.navigate("page2.html");
@@ -111,10 +110,10 @@
             asyncTest("switches to partial remote view", function() {
                 expect(2);
 
-                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+                setup('<div data-role="view" id="page1">Page 1</div>');
                 $.mockjax({
                     url: "page2.html",
-                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                    responseText: '<div data-role="view" id="page2">Page 2</div>'
                 });
 
                 application.bind("viewShow", function() {
@@ -128,11 +127,11 @@
 
             asyncTest("deals with various newline characters when loading remote view", function() {
                 expect(1);
-                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+                setup('<div data-role="view" id="page1">Page 1</div>');
 
                 $.mockjax({
                     url: "page2.html",
-                    responseText: '<html><head></head><body><div id="page2" data-kendo-role="view">View\n\u000a\u000a\u000d\u2028\u2029</div></body>\r\n</html>'
+                    responseText: '<html><head></head><body><div id="page2" data-role="view">View\n\u000a\u000a\u000d\u2028\u2029</div></body>\r\n</html>'
                 });
 
                 application.bind("viewShow", function() {
@@ -146,7 +145,7 @@
             test("raises viewInit for the local view", function() {
                 expect(1);
 
-                $("#qunit-fixture").html('<div data-kendo-role="view" id="page1">Page 1</div>');
+                $("#qunit-fixture").html('<div data-role="view" id="page1">Page 1</div>');
                 application = new kendo.Application($("#qunit-fixture"));
                 application.bind("viewInit", function(e) {
                     equal(e.view.element[0], $("#page1")[0], "Event is raised");
@@ -158,7 +157,7 @@
             test("raises viewInit when switching to a local view", function() {
                 expect(1);
 
-                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+                setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
 
                 application.bind("viewInit", function(e) {
                     equal(e.view.element[0], $("#page2")[0], "Event is raised");
@@ -170,7 +169,7 @@
             test("raises viewHide when switching to a local view", function() {
                 expect(1);
 
-                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+                setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
 
                 application.bind("viewHide", function(e) {
                     equal(e.view.element[0], $("#page1")[0], "Event is raised");
@@ -182,11 +181,11 @@
             asyncTest("raises viewInit when switching to a remote view", function() {
                 expect(1);
 
-                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+                setup('<div data-role="view" id="page1">Page 1</div>');
 
                 $.mockjax({
                     url: "page2.html",
-                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                    responseText: '<div data-role="view" id="page2">Page 2</div>'
                 });
 
                 application.bind("viewInit", function(e) {
@@ -198,7 +197,7 @@
             });
 
             test("does not raise viewInit for already initialized local view", function() {
-                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+                setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
 
                 application.navigate("#page2");
 
@@ -210,11 +209,11 @@
             });
 
             asyncTest("does not raise viewInit for already initialized remote view", function() {
-                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+                setup('<div data-role="view" id="page1">Page 1</div>');
 
                 $.mockjax({
                     url: "page2.html",
-                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                    responseText: '<div data-role="view" id="page2">Page 2</div>'
                 });
 
                 application.bind("viewShow", function() {
@@ -237,7 +236,7 @@
             test("calls enhance when a view is changed", function() {
                 expect(1);
 
-                setup('<div data-kendo-role="view" id="page1">Page 1</div><div data-kendo-role="view" id="page2">Page 2</div>');
+                setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
 
                 kendo.mobile = {};
 
@@ -255,7 +254,7 @@
 
                 stub(kendo.mobile, "enhance");
 
-                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+                setup('<div data-role="view" id="page1">Page 1</div>');
 
                 equal(kendo.mobile.calls("enhance"), 1, "Calls kendo.mobile.enhance");
             });
@@ -263,11 +262,11 @@
             asyncTest("does not raise error when trying to change to remote view starting with slash", function() {
                 expect(1);
 
-                setup('<div data-kendo-role="view" id="page1">Page 1</div>');
+                setup('<div data-role="view" id="page1">Page 1</div>');
 
                 $.mockjax({
                     url: "/page2",
-                    responseText: '<div data-kendo-role="view" id="page2">Page 2</div>'
+                    responseText: '<div data-role="view" id="page2">Page 2</div>'
                 });
 
                 application.bind("viewInit", function(e) {
@@ -279,21 +278,20 @@
             });
 
             test("uses content container if present", function() {
-                setup('<div data-kendo-role="view" id="page1"><div data-kendo-role="content">Header</div></div>');
-                equal($("#page1").find("[data-kendo-role=content]").length, 1);
+                setup('<div data-role="view" id="page1"><div data-role="content">Header</div></div>');
+                equal($("#page1").find("[data-role=content]").length, 1);
             });
 
-            test("uses fixed header and footer if id is identical", function() {
-            setup('<div data-kendo-role="view" id="page1">Page 1<div data-kendo-role="footer" id="footer-a" data-id="global">Footer a</div></div> \
-                   <div data-kendo-role="view" id="page2">Page 2<div data-kendo-role="footer" id="footer-b" data-id="global">Footer b</div></div>');
-
-                application.navigate("#page2");
+            test("uses layout header and footer if specified", function() {
+            setup('<div data-layout="foo" data-role="view" id="page1">Page 1</div> \
+                    <div data-role="layout" data-id="foo"><div data-role="footer">Footer a</div></div> \
+                 ');
 
                 equal(application.view.footer.text(), "Footer a", "fixed footer is visible");
             });
 
             test("passes url params to the view show event", function() {
-                setup('<div data-kendo-role="view" id="page1">Page 1</div><div id="page2" data-kendo-role="view"></div>');
+                setup('<div data-role="view" id="page1">Page 1</div><div id="page2" data-role="view"></div>');
                 application.bind("viewShow", function(e) {
                     equal(e.view.element.attr("id"), "page2");
                     equal(e.params.foo, "bar");
