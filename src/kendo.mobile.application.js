@@ -109,13 +109,13 @@
     var View = kendo.Class.extend({
         init: function(element) {
             var that = this,
+                layout,
                 contentSelector = roleSelector("content");
 
             that.element = element.data("kendoView", that).addClass("km-view");
 
             that.header = element.find(roleSelector("header")).addClass("km-header");
             that.footer = element.find(roleSelector("footer")).addClass("km-footer");
-
             if (!element.has(contentSelector)[0]) {
               element.wrapInner("<div " + kendo.attr("role") + '="content"></div>');
             }
@@ -124,30 +124,37 @@
                                 .addClass("km-content")
                                 .kendoScroller({useOnDesktop: true});
 
-            that.element.prepend(that.header).append(that.footer);
-        },
 
-        onHide: function() {
-            this.element.hide();
-        },
+            if (that.element.data("layout")) {
+                layout = $('[data-id="' + that.element.data("layout") + '"]').data("kendoMobileLayout");
+                if(!that.header[0]) {
+                    that.header = layout.header;
+                }
 
-        onShow: function (argument) {
-            var tabstrip = this.element.find(kendo.roleSelector("tabstrip")).data("kendoMobileTabstrip");
-
-            // At the moment of switching, the href of the link is set to "#!"
-            if (tabstrip) {
-                setTimeout(function() {
-                    tabstrip.switchTo(history.url().string);
-                })
+                if(!that.footer[0]) {
+                    that.footer = layout.footer;
+                }
             }
+
+        },
+
+        onShowStart: function () {
+            var that = this;
+            that.element.css("display", "");
+
+            that.element.find(kendo.roleSelector("header") + ", " + kendo.roleSelector("footer")).remove();
+
+            that.header.detach().parent().prepend(that.header.clone(true));
+            that.footer.detach().parent().prepend(that.footer.clone(true));
+
+            that.element.prepend(that.header).append(that.footer);
         }
     });
 
     function ViewSwitcher(previous, view) {
         var that = this,
             callback = function() {
-                previous.onHide();
-                view.onShow();
+                previous.element.hide();
             },
             animationType;
 
@@ -157,7 +164,7 @@
 
         that.parallax = animationType === "slide";
 
-        view.element.css("display", "");
+        view.onShowStart();
 
         if (that.back && !that.parallax) {
             view.element.css("z-index", 0);
@@ -205,13 +212,8 @@
         },
 
         switchWith: function(source, destination) {
-            if (source[0] && destination[0]) {
-                if (source.data("id") && source.data("id") === destination.data("id")) {
-                    // cloning (instead of appending) Resolves iPad iOS 4 specific footer flicker
-                    destination.html("").append(source.contents());
-                } else if(this.parallax) {
-                    source.kendoAnimateTo(destination, {effects: "fade"});
-                }
+            if (source[0] && destination[0] && source[0] != destination[0] && this.parallax) {
+                source.kendoAnimateTo(destination, {effects: "fade"});
             }
         }
     };
@@ -257,6 +259,7 @@
                     that._findView(e.string, function(view) {
                         views.not(view.element).hide();
                         that._setCurrentView(view);
+                        view.onShowStart();
                     });
                 }
             };
@@ -292,7 +295,19 @@
             var that = this, params = history.url().params;
             that.view = view;
             view.params = params;
+            that._updateNavigationControls();
             that.trigger("viewShow", {view: view, params: params});
+        },
+
+        _updateNavigationControls: function function_name (argument) {
+            var tabstrip = this.element.find(kendo.roleSelector("tabstrip")).data("kendoMobileTabstrip");
+
+            // At the moment of switching, the href of the link is set to "#!"
+            if (tabstrip) {
+                setTimeout(function() {
+                    tabstrip.switchTo(history.url().string);
+                })
+            }
         },
 
         _createView: function(element) {
@@ -302,7 +317,7 @@
                 kendo.mobile.enhance(view.element);
             }
 
-            this.trigger("viewInit", { view: view });
+            this.trigger("viewInit", {view: view});
 
             return view;
         },
@@ -363,4 +378,23 @@
     $(function() {
         kendo.application.start({});
     });
+
+    var MobileLayout = kendo.ui.MobileWidget.extend({
+        init: function(element, options) {
+            var that = this;
+
+            kendo.ui.MobileWidget.fn.init.call(that, element, options);
+
+            that.element.hide();
+            that.header = that.element.find(kendo.roleSelector("header")).addClass("km-header");
+            that.footer = that.element.find(kendo.roleSelector("footer")).addClass("km-footer");
+        },
+
+        options: {
+            name: "MobileLayout",
+            selector: kendo.roleSelector("layout")
+        }
+    });
+
+    kendo.ui.plugin(MobileLayout);
 })(jQuery);
