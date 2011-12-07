@@ -264,18 +264,18 @@
      *  <table id="grid">
      *   <thead>
      *       <tr>
-     *           <th data-field="title">Title<th>
-     *           <th datao-field="year">Year<th>
+     *           <th data-field="title">Title</th>
+     *           <th datao-field="year">Year</th>
      *       </tr>
      *   </thead>
      *   <tbody>
      *       <tr>
-     *           <td>Star Wars: A New Hope<td>
-     *           <td>1977<td>
+     *           <td>Star Wars: A New Hope</td>
+     *           <td>1977</td>
      *       </tr>
      *       <tr>
-     *           <td>Star Wars: The Empire Strikes Back<td>
-     *           <td>1980<td>
+     *           <td>Star Wars: The Empire Strikes Back</td>
+     *           <td>1980</td>
      *       </tr>
      *   </tbody>
      *  </table>
