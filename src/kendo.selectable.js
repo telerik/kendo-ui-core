@@ -80,20 +80,25 @@
                 ctrlKey = event.ctrlKey,
                 shiftKey = event.shiftKey,
                 single = !that.options.multiple;
+
             that._downTarget = $(event.currentTarget);
             that._shiftPressed = shiftKey;
+
             DOCUMENT
                 .unbind(MOUSEUP, that._upDelegate) // more cancel friendly
                 .bind(MOUSEUP, that._upDelegate);
+
             that._originalPosition = {
                 x: event.pageX,
                 y: event.pageY
             };
 
-            if(!single) {
+            if(!single && $(event.target).is(":not(:input)")) {
                 DOCUMENT
                     .unbind(MOUSEMOVE, that._moveDelegate)
-                    .bind(MOUSEMOVE, that._moveDelegate);
+                    .bind(MOUSEMOVE, that._moveDelegate)
+                    .unbind(SELECTSTART, false)
+                    .bind(SELECTSTART, false);
             }
 
             if (!single) {
@@ -142,9 +147,6 @@
                     height: pos.bottom - pos.top
                 });
 
-            DOCUMENT
-                .unbind(SELECTSTART, false)
-                .bind(SELECTSTART, false);
 
             that.element.find(that.options.filter).each(function () {
                 selectee = $(this);
@@ -177,9 +179,12 @@
             var that = this,
                 options = that.options,
                 single = !options.multiple;
+
             DOCUMENT
+                .unbind(SELECTSTART, false)
                 .unbind(MOUSEMOVE, that._moveDelegate)
                 .unbind(MOUSEUP, that._upDelegate);
+
             if (!single) {
                 that._marquee.remove();
             }
