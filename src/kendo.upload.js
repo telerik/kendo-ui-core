@@ -139,6 +139,65 @@
          * See the <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>
          * help topic for more details.
          * </p>
+         * @option {Object} [localization]
+         * Sets the strings rendered by the Upload.
+         * <dl>
+         *     <dt>
+         *         select: (String)
+         *     </dt>
+         *     <dd>
+         *         The "Select..." button text.
+         *     </dd>
+         *     <dt>
+         *         cancel: (String)
+         *     </dt>
+         *     <dd>
+         *         The Cancel button text.
+         *     </dd>
+         *     <dt>
+         *         retry: (String)
+         *     </dt>
+         *     <dd>
+         *         The Retry button text.
+         *     </dd>
+         *     <dt>
+         *         remove: (String)
+         *     </dt>
+         *     <dd>
+         *         The Remove button text.
+         *     </dd>
+         *     <dt>
+         *         uploadSelectedFiles: (String)
+         *     </dt>
+         *     <dd>
+         *         The "Upload files" button text.
+         *     </dd>
+         *     <dt>
+         *         dropFilesHere: (String)
+         *     </dt>
+         *     <dd>
+         *         The drop zone hint.
+         *         The default value is "drop files here to upload".
+         *     </dd>
+         *     <dt>
+         *         statusUploading: (String)
+         *     </dt>
+         *     <dd>
+         *         The status message for files that are being uploaded.
+         *     </dd>
+         *     <dt>
+         *         statusUploaded: (String)
+         *     </dt>
+         *     <dd>
+         *         The status message for uploaded files.
+         *     </dd>
+         *     <dt>
+         *         statusFailed: (String)
+         *     </dt>
+         *     <dd>
+         *         The status message for failed uploads.
+         *     </dd>
+         * </dl>
          */
         init: function(element, options) {
             var that = this;
