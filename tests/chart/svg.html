@@ -208,21 +208,21 @@
                 test("renders svg tag with default size", function() {
                     equal(view.render(),
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                        "width='600px' height='400px' style='position: relative;'></svg>");
+                        "width='600px' height='400px' style='position: relative; display: block;'></svg>");
                 });
 
                 test("renders children", function() {
                     view.children.push(contentElementStub);
                     equal(view.render(),
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                        "width='600px' height='400px' style='position: relative;'>Content</svg>");
+                        "width='600px' height='400px' style='position: relative; display: block;'>Content</svg>");
                 });
 
                 test("renders definitions", function() {
                     view.definitions.test = contentElementStub;
                     equal(view.render(),
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                        "width='600px' height='400px' style='position: relative;'>" +
+                        "width='600px' height='400px' style='position: relative; display: block;'>" +
                         "<defs>Content</defs></svg>");
                 });
 

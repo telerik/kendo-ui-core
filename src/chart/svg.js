@@ -63,7 +63,7 @@
                 view.template = SVGView.template = template(
                     "<svg xmlns='" + SVG_NS + "' version='1.1' " +
                     "width='#= d.options.width #px' height='#= d.options.height #px' " +
-                    "style='position: relative;'>" +
+                    "style='position: relative; display: block;'>" +
                     "#= d.renderDefinitions() #" +
                     "#= d.renderContent() #</svg>"
                 );
