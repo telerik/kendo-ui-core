@@ -1,6 +1,7 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        MobileWidget = ui.MobileWidget,
         support = kendo.support,
         touch = support.touch,
         os = support.mobileOS,
@@ -111,27 +112,7 @@
         }
     }
 
-    var SlidingHelper = ui.MobileWidget.extend({
-        init: function (element, options) {
-            var that = this;
-
-            ui.MobileWidget.fn.init.call(that, element, options);
-
-            if (!that.options.handle) return;
-
-            Axis(that.element, that);
-
-            that.bind([ CHANGE, SLIDE ], options);
-        },
-
-        options: {
-            axis: "x",
-            max: 2
-        }
-
-    });
-
-    var MobileSwitch = SlidingHelper.extend({
+    var MobileSwitch = MobileWidget.extend({
         init: function(element, options) {
             var that = this;
             element = $(element);
@@ -142,22 +123,26 @@
 
             options = extend(options, {handle: handleSelector});
 
-            SlidingHelper.fn.init.call(that, element, options);
+            MobileWidget.fn.init.call(that, element, options);
 
             element = that.element;
             options = that.options;
+
+            Axis(element, that);
 
             that._toggleProxy = proxy(that._toggle, that);
             that._triggerProxy = proxy(that._trigger, that);
 
             that.bind([
+                CHANGE,
+                SLIDE,
                 TOGGLE
             ], options);
 
-            that._wrap();
-            that.enable(that.options.enable);
-
             that.bind(CHANGE, proxy(that._snap, that));
+
+            that._wrap();
+            that.enable(options.enable);
         },
 
         options: {
@@ -165,7 +150,9 @@
             enable: true,
             selector: kendo.roleSelector("switch"),
             manimator: ".km-switch-background",
-            animator: handleSelector
+            animator: handleSelector,
+            axis: "x",
+            max: 2
         },
 
         enable: function(enable) {
