@@ -34,3 +34,11 @@ test("cancelling select event prevents file selection", function() {
     simulateFileSelect()
     equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 0);
 });
+
+test("cancelling select event clears active input", function() {
+    uploadInstance = createUpload({ "select" : (function(e) { e.preventDefault(); }) });
+
+    simulateFileSelect()
+    equal($("#uploadInstance").val(), "");
+});
+
