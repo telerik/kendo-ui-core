@@ -130,6 +130,7 @@
             that.header = element.find(roleSelector("header")).addClass("km-header");
             that.footer = element.find(roleSelector("footer")).addClass("km-footer");
             that.elements = that.header.add(that.footer);
+            kendo.mobile.enhance(element);
             element.detach();
         },
 
