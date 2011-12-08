@@ -408,6 +408,10 @@ var categories = {
                     url: "window/index.html"
                 },
                 {
+                    text: "Customizing actions",
+                    url: "window/actions.html"
+                },
+                {
                     text: "Loading content with AJAX",
                     url: "window/ajax.html"
                 },

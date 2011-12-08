@@ -32,7 +32,7 @@
      *  </p>
      *  <ul>
      *      <li>Minimum height/width</li>
-     *      <li>Available user Window actions (close/refresh/maximize)</li>
+     *      <li>Available user Window actions (close/refresh/maximize/minimize)</li>
      *      <li>Window title</li>
      *      <li>Draggable and Resizable behaviors</li>
      *  </ul>
@@ -45,13 +45,14 @@
      *      height: "300px",
      *      title: "Modal Window",
      *      modal: true,
-     *      actions: ["Refresh", "Maximize", "Close"]
+     *      actions: ["Refresh", "Maximize", "Minimize", "Close"]
      *  });
      * @section
      *  <p>
      *      The order of the values in the actions array determines the order in which the action buttons
      *      will be rendered in the Window title bar. The maximize action serves both as a button for expanding
-     *      the Window to fill the screen and as a button to restore the Window to the previous size.
+     *      the Window to fill the screen and as a button to restore the Window to the previous size. The minimize
+     *      action collapses the window to its title.
      *  </p>
      *  <h3>Positioning and Opening the Window</h3>
      *  <p>
@@ -111,6 +112,7 @@
         fx = kendo.fx,
         isPlainObject = $.isPlainObject,
         proxy = $.proxy,
+        extend = $.extend,
         each = $.each,
         template = kendo.template,
         body,
@@ -135,6 +137,7 @@
         DRAGEND = "dragend",
         ERROR = "error",
         OVERFLOW = "overflow",
+        MINIMIZE_MAXIMIZE = ".k-window-actions .k-minimize,.k-window-actions .k-maximize",
         isLocalUrl = kendo.isLocalUrl;
 
     function windowObject(element) {
@@ -148,6 +151,31 @@
         });
     }
 
+    function sizingAction(actionId, callback) {
+        return function() {
+            var that = this,
+                wrapper = that.wrapper,
+                options = that.options;
+
+            if (options.isMaximized || options.isMinimized) {
+                return;
+            }
+
+            that.restoreOptions = {
+                width: wrapper.width(),
+                height: wrapper.height()
+            };
+
+            wrapper
+                .find(".k-resize-handle").hide().end()
+                .find(MINIMIZE_MAXIMIZE).parent().hide()
+                    .eq(0).before(templates.action({ name: "Restore" }));
+
+            callback.call(that);
+
+            return that;
+        };
+    }
 
     var Window = Widget.extend(/** @lends kendo.ui.Window.prototype */ {
         /**
@@ -162,7 +190,7 @@
          * @option {Integer} [minWidth] <50> The minimum width that may be achieved by resizing the window.
          * @option {Integer} [minHeight] <50> The minimum height that may be achieved by resizing the window.
          * @option {Object|String} [content] Specifies a URL or request options that the window should load its content from. For remote URLs, a container iframe element is automatically created.
-         * @option {Array<String>} [actions] <"Close"> The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize", "Maximize".
+         * @option {Array<String>} [actions] <["Close"]> The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize", "Maximize".
          * @option {String} [title] The text in the window title bar.
          * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the widget.
          * @option {Animation} [animation.open] The animation that will be used when the window opens.
@@ -403,6 +431,7 @@
             each({
                 "k-close": that.close,
                 "k-maximize": that.maximize,
+                "k-minimize": that.minimize,
                 "k-restore": that.restore,
                 "k-refresh": that.refresh
             }, function (commandName, handler) {
@@ -622,31 +651,32 @@
         },
 
         /**
-         * Restores a maximized window to its previous size.
+         * Restores a maximized / minimized window to its previous size.
          */
         restore: function () {
             var that = this,
                 options = that.options,
-                restorationSettings = that.restorationSettings;
+                restoreOptions = that.restoreOptions;
 
-            if (!options.isMaximized) {
+            if (!options.isMaximized && !options.isMinimized) {
                 return;
             }
 
             that.wrapper
                 .css({
                     position: "absolute",
-                    left: restorationSettings.left,
-                    top: restorationSettings.top,
-                    width: restorationSettings.width,
-                    height: restorationSettings.height
+                    left: restoreOptions.left,
+                    top: restoreOptions.top,
+                    width: restoreOptions.width,
+                    height: restoreOptions.height
                 })
-                .find(".k-resize-handle").show().end()
-                .find(".k-window-titlebar .k-restore").addClass("k-maximize").removeClass("k-restore");
+                .find(".k-window-content,.k-resize-handle").show().end()
+                .find(".k-window-titlebar .k-restore").parent().remove().end().end()
+                .find(MINIMIZE_MAXIMIZE).parent().show();
 
             $("html, body").css(OVERFLOW, "");
 
-            options.isMaximized = false;
+            options.isMaximized = options.isMinimized = false;
 
             that.trigger(RESIZE);
 
@@ -656,35 +686,41 @@
         /**
          * Maximizes a window so that it fills the entire screen.
          */
-        maximize: function () {
-            var that = this;
+        maximize: sizingAction("maximize", function() {
+            var that = this,
+                wrapper = that.wrapper,
+                position = wrapper.position();
 
-            if (that.options.isMaximized) {
-                return;
-            }
+            extend(that.restoreOptions, {
+                left: position.left,
+                top: position.top
+            });
 
-            var wrapper = that.wrapper;
-
-            that.restorationSettings = {
-                left: wrapper.position().left,
-                top: wrapper.position().top,
-                width: wrapper.width(),
-                height: wrapper.height()
-            };
-
-            wrapper
-                .css({ left: 0, top: 0, position: "fixed" })
-                .find(".k-resize-handle").hide().end()
-                .find(".k-window-titlebar .k-maximize").addClass("k-restore").removeClass("k-maximize");
+            wrapper.css({
+                    left: 0,
+                    top: 0,
+                    position: "fixed"
+                });
 
             $("html, body").css(OVERFLOW, "hidden");
 
             that.options.isMaximized = true;
 
             that._onDocumentResize();
+        }),
 
-            return that;
-        },
+        /**
+         * Minimizes a window to its title bar.
+         */
+        minimize: sizingAction("minimize", function() {
+            this.wrapper.css({
+                    height: "",
+                    minHeight: 0
+                })
+                .find(".k-window-content").hide();
+
+            this.options.isMinimized = true;
+        }),
 
         _onDocumentResize: function () {
             var that = this,
@@ -739,7 +775,7 @@
                     refreshIcon.addClass(LOADING);
                 }, 100);
 
-            $.ajax($.extend({
+            $.ajax(extend({
                 type: "GET",
                 dataType: "html",
                 cache: false,
@@ -782,14 +818,17 @@
 
     templates = {
         wrapper: template("<div class='k-widget k-window' />"),
+        action: template(
+            "<a href='\\#' class='k-window-action k-link'>" +
+                "<span class='k-icon k-#= name.toLowerCase() #'>#= name #</span>" +
+            "</a>"
+        ),
         titlebar: template(
             "<div class='k-window-titlebar k-header'>&nbsp;" +
                 "<span class='k-window-title'>#= title #</span>" +
                 "<div class='k-window-actions k-header'>" +
                 "# for (var i = 0; i < actions.length; i++) { #" +
-                    "<a href='\\#' class='k-window-action k-link'>" +
-                        "<span class='k-icon k-#= actions[i].toLowerCase() #'>#= actions[i] #</span>" +
-                    "</a>" +
+                    "#= action({ name: actions[i] }) #" +
                 "# } #" +
                 "</div>" +
             "</div>"
@@ -816,7 +855,7 @@
         }
 
         $(templates.wrapper(options))
-            .append(templates.titlebar(options))
+            .append(templates.titlebar(extend(templates, options)))
             .append(contentHtml)
             .appendTo(body);
     }
