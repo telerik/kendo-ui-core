@@ -112,6 +112,7 @@
         fx = kendo.fx,
         isPlainObject = $.isPlainObject,
         proxy = $.proxy,
+        extend = $.extend,
         each = $.each,
         template = kendo.template,
         body,
@@ -136,6 +137,7 @@
         DRAGEND = "dragend",
         ERROR = "error",
         OVERFLOW = "overflow",
+        MINIMIZE_MAXIMIZE = ".k-window-actions .k-minimize,.k-window-actions .k-maximize",
         isLocalUrl = kendo.isLocalUrl;
 
     function windowObject(element) {
@@ -149,6 +151,31 @@
         });
     }
 
+    function sizingAction(actionId, callback) {
+        return function() {
+            var that = this,
+                wrapper = that.wrapper,
+                options = that.options;
+
+            if (options.isMaximized || options.isMinimized) {
+                return;
+            }
+
+            that.restoreOptions = {
+                width: wrapper.width(),
+                height: wrapper.height()
+            };
+
+            wrapper
+                .find(".k-resize-handle").hide().end()
+                .find(MINIMIZE_MAXIMIZE).parent().hide()
+                    .eq(0).before(templates.action({ name: "Restore" }));
+
+            callback.call(that);
+
+            return that;
+        };
+    }
 
     var Window = Widget.extend(/** @lends kendo.ui.Window.prototype */ {
         /**
@@ -644,11 +671,12 @@
                     height: restoreOptions.height
                 })
                 .find(".k-window-content,.k-resize-handle").show().end()
-                .find(".k-window-titlebar .k-restore").addClass("k-maximize").removeClass("k-restore");
+                .find(".k-window-titlebar .k-restore").parent().remove().end().end()
+                .find(MINIMIZE_MAXIMIZE).parent().show();
 
             $("html, body").css(OVERFLOW, "");
 
-            options.isMaximized = false;
+            options.isMaximized = options.isMinimized = false;
 
             that.trigger(RESIZE);
 
@@ -658,70 +686,41 @@
         /**
          * Maximizes a window so that it fills the entire screen.
          */
-        maximize: function () {
+        maximize: sizingAction("maximize", function() {
             var that = this,
                 wrapper = that.wrapper,
-                options = that.options,
-                position;
+                position = wrapper.position();
 
-            if (options.isMaximized) {
-                return;
-            }
-
-            position = wrapper.position();
-
-            that.restoreOptions = {
+            extend(that.restoreOptions, {
                 left: position.left,
-                top: position.top,
-                width: wrapper.width(),
-                height: wrapper.height()
-            };
+                top: position.top
+            });
 
-            wrapper
-                .css({ left: 0, top: 0, position: "fixed" })
-                .find(".k-resize-handle").hide().end()
-                .find(".k-window-titlebar .k-maximize").addClass("k-restore").removeClass("k-maximize");
+            wrapper.css({
+                    left: 0,
+                    top: 0,
+                    position: "fixed"
+                });
 
             $("html, body").css(OVERFLOW, "hidden");
 
-            options.isMaximized = true;
+            that.options.isMaximized = true;
 
             that._onDocumentResize();
-
-            return that;
-        },
+        }),
 
         /**
          * Minimizes a window to its title bar.
          */
-        minimize: function () {
-            var that = this,
-                wrapper = that.wrapper,
-                position,
-                options = that.options;
+        minimize: sizingAction("minimize", function() {
+            this.wrapper.css({
+                    height: "",
+                    minHeight: 0
+                })
+                .find(".k-window-content").hide();
 
-            if (options.isMinimized) {
-                return;
-            }
-
-            position = wrapper.position();
-
-            that.restoreOptions = {
-                left: position.left,
-                top: position.top,
-                width: wrapper.width(),
-                height: wrapper.height()
-            };
-
-            wrapper
-                .css("minHeight", 0)
-                .find(".k-window-content,.k-resize-handle").hide().end()
-                .find(".k-window-titlebar .k-minimize").addClass("k-restore").removeClass("k-minimize");
-
-            options.isMinimized = true;
-
-            return that;
-        },
+            this.options.isMinimized = true;
+        }),
 
         _onDocumentResize: function () {
             var that = this,
@@ -776,7 +775,7 @@
                     refreshIcon.addClass(LOADING);
                 }, 100);
 
-            $.ajax($.extend({
+            $.ajax(extend({
                 type: "GET",
                 dataType: "html",
                 cache: false,
@@ -819,14 +818,17 @@
 
     templates = {
         wrapper: template("<div class='k-widget k-window' />"),
+        action: template(
+            "<a href='\\#' class='k-window-action k-link'>" +
+                "<span class='k-icon k-#= name.toLowerCase() #'>#= name #</span>" +
+            "</a>"
+        ),
         titlebar: template(
             "<div class='k-window-titlebar k-header'>&nbsp;" +
                 "<span class='k-window-title'>#= title #</span>" +
                 "<div class='k-window-actions k-header'>" +
                 "# for (var i = 0; i < actions.length; i++) { #" +
-                    "<a href='\\#' class='k-window-action k-link'>" +
-                        "<span class='k-icon k-#= actions[i].toLowerCase() #'>#= actions[i] #</span>" +
-                    "</a>" +
+                    "#= action({ name: actions[i] }) #" +
                 "# } #" +
                 "</div>" +
             "</div>"
@@ -853,7 +855,7 @@
         }
 
         $(templates.wrapper(options))
-            .append(templates.titlebar(options))
+            .append(templates.titlebar(extend(templates, options)))
             .append(contentHtml)
             .appendTo(body);
     }
