@@ -1,4 +1,4 @@
-(function($, undefined) {
+Erisfunction($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
         support = kendo.support,

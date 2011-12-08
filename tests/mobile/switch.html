@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.MobileSwitch Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="../../src/kendo.mobile.switch.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.MobileSwitch Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+
+            var Switch = kendo.ui.MobileSwitch,
+                MOUSEDOWN = kendo.support.mousedown,
+                MOUSEUP = kendo.support.mouseup,
+                dom;
+
+            QUnit.config.reorder = false;
+
+            var mouseDownEvent;
+            if (kendo.support.touch) {
+                mouseDownEvent = new $.Event(null, {type: MOUSEDOWN, changedTouches: [{identifier: 1, pageX: 100, pageY: 100}] });
+            } else {
+                mouseDownEvent = MOUSEDOWN;
+            }
+
+            module("switch", {
+                setup: function() {
+                    dom = $("<input type='checkbox'/>");
+                }
+            });
+
+            test("Switch can be initialized from input type='checkbox'", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                ok(theSwitch.element.hasClass("km-switch"), "Should have specified CSS class");
+            });
+
+            test("Switch can be initialized from label only", function() {
+                expect(1);
+
+                dom = $("<label />");
+
+                var theSwitch = new Switch(dom);
+
+                ok(theSwitch.element.hasClass("km-switch"), "Should have specified CSS class");
+            });
+
+            test("Switch reuses existing label", function() {
+                expect(1);
+
+                dom = $("<label><input type='checkbox'/></label>");
+                var label = dom.filter("label");
+
+                var theSwitch = new Switch(dom);
+
+                ok(label.hasClass("km-switch"), "Should reuse existing label around the checkbox");
+            });
+
+            test("Switch creates a toggle handle, container, wrapper and background", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                ok((dom.parent().find(".km-switch-handle,.km-switch-container,.km-switch-wrapper,.km-switch-background").length == 4), "Should create a handle and a tip");
+            });
+
+            test("Switch raises toggle event when changed", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                theSwitch.bind("toggle", function() {
+                    ok(true, "Should raise the toggle event");
+                });
+
+                dom.change();
+            });
+
+            test("Switch does not raise toggle event when disabled", function() {
+                var theSwitch = new Switch(dom);
+                theSwitch.disable();
+
+                theSwitch.bind("toggle", function() {
+                    ok(false, "Should not raise the change event");
+                });
+
+                dom.change();
+            });
+
+            test("Switch applies active state when pressed", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                theSwitch.handle.trigger(mouseDownEvent);
+                ok(theSwitch.handle.hasClass("km-state-active"), "has active css class");
+            });
+
+            test("Switch removes active state when depressed", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                theSwitch.handle.trigger(mouseDownEvent);
+                theSwitch.handle.trigger(MOUSEUP);
+                ok(!theSwitch.handle.hasClass("km-state-active"), "Does not have active css class");
+            });
+
+            test("Switch does not apply active state when disabled", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                theSwitch.disable();
+
+                theSwitch.handle.trigger(mouseDownEvent);
+
+                ok(!theSwitch.handle.hasClass("km-state-active"), "Does not have active css class");
+            });
+
+            test("Switch can be disabled from configuration options", function() {
+                var theSwitch = new Switch(dom, {enable: false});
+
+                theSwitch.bind("toggle", function() {
+                    ok(false, "Does not raise the toggle event");
+                });
+
+                theSwitch.toggle();
+            });
+
+            test("Enable method enables disabled switch", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                theSwitch.enable(false);
+
+                theSwitch.bind("toggle", function() {
+                    ok(true, "Should raise the toggle event");
+                });
+
+                theSwitch.toggle();
+
+                theSwitch.enable();
+
+                theSwitch.toggle();
+            });
+        </script>
+    </body>
+</html>
