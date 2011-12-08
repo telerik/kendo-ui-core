@@ -48,8 +48,11 @@
                 $(".k-file:last", uploadInstance.wrapper).data("frame", null);
             }
 
-            function simulateUploadWithResponse(response) {
+            function simulateUploadWithResponse(response, postSelectCallback) {
                 simulateFileSelect();
+                if (postSelectCallback) {
+                    postSelectCallback();
+                }
                 simulateIframeResponse(0, response);
             }
 
