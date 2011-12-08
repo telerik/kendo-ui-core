@@ -650,7 +650,7 @@
 
         _removeFileEntry: function(fileEntry) {
             var fileList = fileEntry.closest(".k-upload-files");
-            if ($(".k-file", fileList).length == 1) {
+            if ($(".k-file > .k-icon:not(.k-fail)", fileList).length == 1) {
                 fileList.remove();
                 this._hideUploadButton();
             } else {
