@@ -1,6 +1,6 @@
 (function($, undefined) {
-
     var kendo = window.kendo,
+        ui = kendo.ui,
         history = kendo.history,
         support = kendo.support,
         attr = kendo.attr,
@@ -14,6 +14,9 @@
         linkRolesSelector = toRoleSelector("tab"),
         initialHeight = {},
         TRANSFORM = support.transitions.css + "transform",
+        View = ui.MobileView,
+        ViewSwitcher = ui.MobileViewSwitcher,
+        Layout = ui.MobileLayout,
         roleSelector = kendo.roleSelector;
 
     function toRoleSelector(string) {
@@ -52,12 +55,6 @@
                     window.scrollTo(0, 1);
                 }, 0);
             }
-        }
-    }
-
-    function hideAddressBarOnBack() {
-        if (os.android) {
-            window.scrollBy(0,56);
         }
     }
 
@@ -106,116 +103,6 @@
         return Math.abs(window.orientation) / 90 ? "km-horizontal" : "km-vertical";
     }
 
-    var View = kendo.Class.extend({
-        init: function(element) {
-            var that = this,
-                contentSelector = roleSelector("content");
-
-            that.element = element.data("kendoView", that).addClass("km-view");
-
-            that.header = element.find(roleSelector("header")).addClass("km-header");
-            that.footer = element.find(roleSelector("footer")).addClass("km-footer");
-
-            if (!element.has(contentSelector)[0]) {
-              element.wrapInner("<div " + kendo.attr("role") + '="content"></div>');
-            }
-
-            that.content = element.find(roleSelector("content"))
-                                .addClass("km-content")
-                                .kendoScroller({useOnDesktop: true});
-
-            that.element.prepend(that.header).append(that.footer);
-        },
-
-        onHide: function() {
-            this.element.hide();
-        },
-
-        onShow: function (argument) {
-            var tabstrip = this.element.find(kendo.roleSelector("tabstrip")).data("kendoMobileTabstrip");
-
-            // At the moment of switching, the href of the link is set to "#!"
-            if (tabstrip) {
-                setTimeout(function() {
-                    tabstrip.switchTo(history.url().string);
-                })
-            }
-        }
-    });
-
-    function ViewSwitcher(previous, view) {
-        var that = this,
-            callback = function() {
-                previous.onHide();
-                view.onShow();
-            },
-            animationType;
-
-        that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(history.url().params);
-
-        animationType = (that.back ? previous : view).element.data(kendo.ns +"transition");
-
-        that.parallax = animationType === "slide";
-
-        view.element.css("display", "");
-
-        if (that.back && !that.parallax) {
-            view.element.css("z-index", 0);
-            previous.element.css("z-index", 1);
-        } else {
-            view.element.css("z-index", 1);
-            previous.element.css("z-index", 0);
-        }
-
-        if (that.back) {
-            hideAddressBarOnBack();
-        }
-
-        that.switchWith(previous.footer, view.footer);
-        that.switchWith(previous.header, view.header);
-        that.contents(previous, view).kendoAnimateTo(that.contents(view, previous), {effects: animationType, reverse: that.back, complete: callback});
-
-        if (!that.back) {
-            previous.nextView = view;
-        }
-    }
-
-    ViewSwitcher.replace = function(previous, view) {
-        new ViewSwitcher(previous, view);
-    };
-
-    ViewSwitcher.prototype = {
-        contents: function(source, destination) {
-            var contents;
-
-            if (this.parallax) {
-                contents = source.content;
-                if (!destination.header[0]) {
-                    contents = contents.add(source.header);
-                }
-
-                if (!destination.footer[0]) {
-                    contents = contents.add(source.footer);
-                }
-            } else {
-                contents = source.element;
-            }
-
-            return contents;
-        },
-
-        switchWith: function(source, destination) {
-            if (source[0] && destination[0]) {
-                if (source.data("id") && source.data("id") === destination.data("id")) {
-                    // cloning (instead of appending) Resolves iPad iOS 4 specific footer flicker
-                    destination.html("").append(source.contents());
-                } else if(this.parallax) {
-                    source.kendoAnimateTo(destination, {effects: "fade"});
-                }
-            }
-        }
-    };
-
     var Application = kendo.Observable.extend({
         init: function(element, options) {
             kendo.Observable.fn.init.call(this, options);
@@ -233,35 +120,18 @@
         },
 
         start: function(options) {
-            var that = this, views, rootView, historyEvents;
+            var that = this;
 
             that.options = options || {};
-
-            that._attachMeta();
 
             that.element = that.element ? $(that.element) : $(document.body);
 
             hideAddressBar(that.element);
 
+            that._attachMeta();
             that._setupAppLinks();
-
-            views = that.element.find(roleSelector("view"));
-            views.first().attr(attr("url"), "/");
-
-            historyEvents = {
-                change: function(e) {
-                    that.navigate(e.string);
-                },
-
-                ready: function(e) {
-                    that._findView(e.string, function(view) {
-                        views.not(view.element).hide();
-                        that._setCurrentView(view);
-                    });
-                }
-            };
-
-            history.start($.extend(options, historyEvents));
+            that._setupLayouts();
+            that._startHistory();
         },
 
         navigate: function(url) {
@@ -281,28 +151,77 @@
             return this.view.content.data("kendoScroller");
         },
 
-        _setupAppLinks: function(element) {
+        _setupAppLinks: function() {
             this.element
                 .delegate(linkRolesSelector, support.mousedown, appLinkMouseUp)
                 .delegate(buttonRolesSelector, support.mouseup, appLinkMouseUp)
                 .delegate(linkRolesSelector + buttonRolesSelector, "click", appLinkClick);
         },
 
+        _setupLayouts: function () {
+            var that = this;
+            that.layouts = {};
+            that.element.find(kendo.roleSelector("layout")).each(function() {
+                var layout = $(this);
+                that.layouts[layout.data("id")] = new Layout(layout);
+            });
+        },
+
+        _startHistory: function() {
+            var that = this, views, historyEvents;
+
+            views = that.element.find(roleSelector("view"));
+            views.first().attr(attr("url"), "/");
+
+            historyEvents = {
+                change: function(e) {
+                    that.navigate(e.string);
+                },
+
+                ready: function(e) {
+                    that._findView(e.string, function(view) {
+                        views.not(view.element).hide();
+                        view.onShowStart();
+                        that._setCurrentView(view);
+                    });
+                }
+            };
+
+            history.start($.extend(that.options, historyEvents));
+        },
+
         _setCurrentView: function(view) {
             var that = this, params = history.url().params;
             that.view = view;
             view.params = params;
+            that._updateNavigationControls();
             that.trigger("viewShow", {view: view, params: params});
         },
 
+        _updateNavigationControls: function function_name (argument) {
+            var tabstrip = this.element.find(kendo.roleSelector("tabstrip")).data("kendoMobileTabstrip");
+
+            // At the moment of switching, the href of the link is set to "#!"
+            if (tabstrip) {
+                setTimeout(function() {
+                    tabstrip.switchTo(history.url().string);
+                })
+            }
+        },
+
         _createView: function(element) {
-            var view = new View(element);
+            var that = this,
+                layout;
+            if (layout = element.data("layout")) {
+                layout = that.layouts[layout];
+            }
+            var view = new View(element, {layout: layout});
 
             if (kendo.mobile) {
                 kendo.mobile.enhance(view.element);
             }
 
-            this.trigger("viewInit", { view: view });
+            that.trigger("viewInit", {view: view});
 
             return view;
         },
