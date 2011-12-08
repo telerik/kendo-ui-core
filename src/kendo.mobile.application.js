@@ -181,8 +181,8 @@
                 ready: function(e) {
                     that._findView(e.string, function(view) {
                         views.not(view.element).hide();
-                        that._setCurrentView(view);
                         view.onShowStart();
+                        that._setCurrentView(view);
                     });
                 }
             };
