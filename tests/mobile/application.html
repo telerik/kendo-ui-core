@@ -7,6 +7,7 @@
         <script src="../../src/kendo.mobile.core.js"></script>
         <script src="../../src/kendo.history.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../jquery.mockjax.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
@@ -282,12 +283,29 @@
                 equal($("#page1").find("[data-role=content]").length, 1);
             });
 
-            test("uses layout header and footer if specified", function() {
+            test("uses layout header if specified", function() {
             setup('<div data-layout="foo" data-role="view" id="page1">Page 1</div> \
-                    <div data-role="layout" data-id="foo"><div data-role="footer">Footer a</div></div> \
+                    <div data-role="layout" data-id="foo"><div data-role="header">header</div></div> \
                  ');
 
-                equal(application.view.footer.text(), "Footer a", "fixed footer is visible");
+                equal(application.element.find(".km-header").text(), "header", "Layout header is present");
+            });
+
+            test("uses layout footer if specified", function() {
+            setup('<div data-layout="foo" data-role="view" id="page1">Page 1</div> \
+                    <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
+                 ');
+
+                equal(application.element.find(".km-footer").text(), "footer", "Layout footer is present");
+            });
+
+            test("allows layout header/footer overriding", function() {
+            setup('<div data-layout="foo" data-role="view" id="page1">Page 1<div data-role="header">custom header</div><div data-role="footer">custom footer</div></div> \
+                    <div data-role="layout" data-id="foo"><div data-role="header">header</div><div data-role="footer">footer</div></div> \
+                 ');
+
+                equal(application.element.find(".km-header").text(), "custom header", "Custom header is present");
+                equal(application.element.find(".km-footer").text(), "custom footer", "Custom footer is present");
             });
 
             test("passes url params to the view show event", function() {
