@@ -66,35 +66,33 @@
         });
     }
 
-    var ViewModel = Observable.extend( {
-        init: function(data) {
-            var that = this,
-                field,
-                member;
+    function extendObject(object) {
+        var field, member;
 
-            Observable.fn.init.call(that);
+        for (field in object) {
+            member = object[field];
 
-            for (field in data) {
-                member = data[field];
-
-                if ($.isPlainObject(member)) {
-                    member = new ViewModel(member);
-                } else if ($.isArray(member)) {
-                    member = extendArray(member);
-                }
-
-                that[field] = member;
+            if ($.isPlainObject(member)) {
+                object[field] = extendObject(member);
+            } else if ($.isArray(member)) {
+                object[field] = extendArray(member);
             }
-        },
+        }
 
-        set: function(field, value) {
+        object._events = {};
+        object.bind = Observable.fn.bind;
+        object.trigger = Observable.fn.trigger;
+
+        object.set = function(field, value) {
             this[field] = value;
 
             this.trigger(CHANGE, {
                 field: field
             });
         }
-    });
+
+        return object;
+    }
 
     function bindSelect(select, model) {
         select = $(select);
@@ -220,5 +218,7 @@
 
     data.ModelViewBinder = ModelViewBinder;
 
-    kendo.ViewModel = ViewModel;
+    kendo.observable = function(object) {
+        return extendObject(object);
+    };
 })(jQuery);
