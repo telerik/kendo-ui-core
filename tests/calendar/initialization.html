@@ -193,6 +193,33 @@
                 ok(!links.eq(2).hasClass("k-state-hover"));
             });
 
+            test("today link should have k-nav-today", function() {
+                var cal = new Calendar(div);
+
+                stub(cal, "navigate");
+
+                cal._today.click();
+
+                ok(div.find(".k-footer").find(".k-link").hasClass("k-nav-today"));
+                ok(!div.find(".k-footer").find(".k-link").hasClass("k-state-disabled"));
+                equal(cal.calls("navigate"), 1);
+            });
+
+            test("today link should not have k-nav-today", function() {
+                var today = new Date(),
+                    cal = new Calendar(div, {
+                        min: new Date(today.getFullYear(), today.getMonth() + 1, today.getDate())
+                    });
+
+                stub(cal, "_todayClick");
+
+                cal._today.click();
+
+                ok(!div.find(".k-footer").find(".k-link").hasClass("k-nav-today"));
+                ok(div.find(".k-footer").find(".k-link").hasClass("k-state-disabled"));
+                equal(cal.calls("_todayClick"), 0);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
