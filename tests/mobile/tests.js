@@ -16,8 +16,8 @@ tests.push(
         title: "mobile button"
     },
     {
-        page: "mobile/toggle.html",
-        title: "mobile toggle button"
+        page: "mobile/switch.html",
+        title: "mobile switch"
     },
     {
         page: "mobile/listview/index.html",
