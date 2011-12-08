@@ -43,6 +43,17 @@
         equal($(".k-upload-selected", uploadInstance.wrapper).length, 0);
     });
 
+    test("removing last queued file should remove upload button ignoring failed uploads", function() {
+        simulateUploadWithResponse(errorResponse, function() {
+            $(".k-upload-selected").click();
+        });
+
+        simulateFileSelect();
+        simulateRemove();
+
+        equal($(".k-upload-selected", uploadInstance.wrapper).length, 0);
+    });
+
     test("removing non-last file should not remove upload button", function() {
         uploadInstance._module.onIframeLoad = function() { };
         simulateFileSelect();
