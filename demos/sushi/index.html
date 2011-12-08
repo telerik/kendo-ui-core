@@ -18,13 +18,26 @@
         <script src="../../src/kendo.mobile.navbar.js"></script>
         <script src="../../src/kendo.mobile.switch.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
     </head>
     <body>
         <script type="text/javascript">
             $(document.body).hide();
         </script>
-        <div data-role="view" id="index" data-url="/" data-animation="slide">
+
+        <div data-role="layout" data-id="default">
+            <footer data-role="footer" data-id="default">
+                <div data-role="tabstrip">
+                    <a href="#index">Home</a>
+                    <a href="#menu">Our menu</a>
+                    <a href="#cart">Cart</a>
+                    <a href="#account">Account</a>
+                </div>
+            </footer>
+        </div>
+
+        <div data-role="view" id="index" data-url="/" data-animation="slide" data-layout="default">
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title">Kendo Sushi</span>
@@ -35,18 +48,9 @@
             <div data-role="content">
                 <ul id="featured" class="item-list"></ul>
             </div>
-
-            <footer data-role="footer" data-id="default">
-                <div data-role="tabstrip" data-selected-index="0">
-                    <a href="#index">Home</a>
-                    <a href="#menu">Our menu</a>
-                    <a href="#cart">Cart</a>
-                    <a href="#account">Account</a>
-                </div>
-            </footer>
         </div>
 
-        <div data-role="view" id="menu">
+        <div data-role="view" id="menu" data-layout="default">
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title">Menu</span>
@@ -57,18 +61,9 @@
             <div data-role="content">
                 <ul id="menuList" class="item-list"></ul>
             </div>
-
-            <footer data-role="footer" data-id="default">
-                <div data-role="tabstrip" data-selected-index="1">
-                    <a href="#index">Home</a>
-                    <a href="#menu">Our menu</a>
-                    <a href="#cart">Cart</a>
-                    <a href="#account">Account</a>
-                </div>
-            </footer>
         </div>
 
-        <div data-role="view" id="cart">
+        <div data-role="view" id="cart" data-layout="default">
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title">Cart</span>
@@ -82,18 +77,9 @@
                 <a id="checkout" class="red-button" href="#done" data-role="button">Checkout</a>
                 <ul id="cartList" class="item-list" data-style="inset"></ul>
             </div>
-
-            <footer data-role="footer" data-id="default">
-                <div data-role="tabstrip" data-selected-index="2">
-                    <a href="#index">Home</a>
-                    <a href="#menu">Our menu</a>
-                    <a href="#cart">Cart</a>
-                    <a href="#account">Account</a>
-                </div>
-            </footer>
         </div>
 
-        <div data-role="view" id="account">
+        <div data-role="view" id="account" data-layout="default">
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title">My account</span>
@@ -119,17 +105,7 @@
                     </li>
                 </ul>
             </div>
-
-            <footer data-role="footer" data-id="default">
-                <div data-role="tabstrip" data-selected-index="3">
-                    <a href="#index">Home</a>
-                    <a href="#menu">Our menu</a>
-                    <a href="#cart">Cart</a>
-                    <a href="#account">Account</a>
-                </div>
-            </footer>
         </div>
-
 
         <div data-role="view" id="done" data-transition="zoom">
             <header data-role="header"> <div data-role="navbar"> <span data-role="view-title">Done!</span> </div>
@@ -142,8 +118,7 @@
             </div>
         </div>
 
-
-        <div data-role="view" id="details" data-transition="slide">
+        <div data-role="view" id="details" data-transition="slide" data-layout="default">
             <header data-role="header">
                 <div data-role="navbar">
                     <a data-role="back-button" data-align="left">Back</a>
@@ -153,15 +128,6 @@
 
             <div data-role="content">
             </div>
-
-            <footer data-role="footer" data-id="default">
-                <div data-role="tabstrip">
-                    <a href="#index">Home</a>
-                    <a href="#menu">Our menu</a>
-                    <a href="#account">Account</a>
-                    <a href="#cart">Cart</a>
-                </div>
-            </footer>
         </div>
 
         <script id="menuTemplate" type="text/x-kendo-template">
