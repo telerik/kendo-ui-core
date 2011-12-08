@@ -99,6 +99,10 @@
                     .bind(MOUSEMOVE, that._moveDelegate)
                     .unbind(SELECTSTART, false)
                     .bind(SELECTSTART, false);
+
+                if (!kendo.support.touch) {
+                    event.preventDefault();
+                }
             }
 
             if (!single) {
@@ -146,7 +150,6 @@
                     width: pos.right - pos.left,
                     height: pos.bottom - pos.top
                 });
-
 
             that.element.find(that.options.filter).each(function () {
                 selectee = $(this);
