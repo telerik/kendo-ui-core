@@ -92,7 +92,7 @@
 
             test("Switch does not raise toggle event when disabled", function() {
                 var theSwitch = new Switch(dom);
-                theSwitch.disable();
+                theSwitch.enable(false);
 
                 theSwitch.bind("toggle", function() {
                     ok(false, "Should not raise the change event");
@@ -125,7 +125,7 @@
 
                 var theSwitch = new Switch(dom);
 
-                theSwitch.disable();
+                theSwitch.enable(false);
 
                 theSwitch.handle.trigger(mouseDownEvent);
 

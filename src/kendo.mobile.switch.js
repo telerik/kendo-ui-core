@@ -1,4 +1,4 @@
-Erisfunction($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
         support = kendo.support,
@@ -131,9 +131,16 @@ Erisfunction($, undefined) {
 
     });
 
-    var Toggle = SlidingHelper.extend({
-        init: function (element, options) {
+    var MobileSwitch = SlidingHelper.extend({
+        init: function(element, options) {
             var that = this;
+            element = $(element);
+
+            if (element.is("input[type=checkbox]")) {
+                element = element.wrap("<label />").parent();
+            }
+
+            options = extend(options, {handle: handleSelector});
 
             SlidingHelper.fn.init.call(that, element, options);
 
@@ -146,6 +153,19 @@ Erisfunction($, undefined) {
             that.bind([
                 TOGGLE
             ], options);
+
+            that._wrap();
+            that.enable(that.options.enable);
+
+            that.bind(CHANGE, proxy(that._snap, that));
+        },
+
+        options: {
+            name: "MobileSwitch",
+            enable: true,
+            selector: kendo.roleSelector("switch"),
+            manimator: ".km-switch-background",
+            animator: handleSelector
         },
 
         enable: function(enable) {
@@ -168,10 +188,6 @@ Erisfunction($, undefined) {
             }
         },
 
-        disable: function() {
-            this.enable(false);
-        },
-
         toggle: function(toggle) {
             var that = this,
                 input = that.input,
@@ -185,33 +201,6 @@ Erisfunction($, undefined) {
 
         _trigger: function (e) {
             this.handle.toggleClass("km-state-active", e.type == MOUSEDOWN);
-        }
-
-    });
-
-    var MobileSwitch = Toggle.extend({
-        init: function(element, options) {
-            var that = this;
-            element = $(element);
-
-            if (element.is("input[type=checkbox]")) {
-                element = element.wrap("<label />").parent();
-            }
-
-            Toggle.fn.init.call(that, element, extend(options, { handle: handleSelector }));
-
-            that._wrap();
-            that.enable(that.options.enable);
-
-            that.bind(CHANGE, proxy(that._snap, that));
-        },
-
-        options: {
-            name: "MobileSwitch",
-            enable: true,
-            selector: kendo.roleSelector("switch"),
-            manimator: ".km-switch-background",
-            animator: handleSelector
         },
 
         _toggle: function() {
@@ -296,100 +285,4 @@ Erisfunction($, undefined) {
 
     ui.plugin(MobileSwitch);
 
-    var MobileCheckBox = Toggle.extend({
-        init: function(element, options) {
-            var that = this;
-            element = $(element);
-
-            if (element.is("input[type=checkbox]")) {
-                element = element.wrap("<label />").parent();
-            }
-
-            Toggle.fn.init.call(that, element, options);
-
-            that._wrap();
-            that.enable(that.options.enable);
-        },
-
-        options: {
-            name: "MobileCheckBox",
-            enable: true
-        },
-
-        _toggle: function() {
-            var that = this;
-
-            if (that.options.enable) {
-                that.handle.toggleClass("km-checkbox-checked", that.input[0].checked);
-                that.trigger(TOGGLE, { checked: that.input[0].checked });
-            }
-        },
-
-        _wrap: function() {
-            var that = this,
-                input = that.element.children("input[type=checkbox]");
-
-            if (that.element.is("label"))
-                that.element.addClass("km-checkbox");
-
-            if (input.length)
-                input.data("kendo-role", "checkbox");
-            else
-                input = $("<input type='checkbox' " + kendo.attr("role") + "='checkbox' />").appendTo(that.element);
-
-            that.input = input;
-            that.handle = that.element;
-        }
-
-    });
-
-    ui.plugin(MobileCheckBox);
-
-    var MobileSlider = SlidingHelper.extend({
-        init: function(element, options) {
-            var that = this;
-
-            SlidingHelper.fn.init.call(that, element, extend(options, slideAnimation, { handle: slideAnimation.animator }));
-
-            that._wrap();
-            that.bind([ CHANGE, SLIDE ], that.options);
-        },
-
-        options: {
-            name: "MobileSlider",
-            enable: true,
-            max: 100
-        },
-
-        _wrap: function() {
-            var that = this, handle, marginElement,
-                element = that.element;
-
-            if (that.element.is("span"))
-                that.element.addClass("km-slider");
-
-            if (!element.data("kendo-role"))
-                element.data("kendo-role", "slider");
-            else
-                $("<span " + kendo.attr("role") + "='slider' class='km-slider'><span class='km-slider-handle'></span></span>").appendTo(that.element);
-
-            handle = element.find(slideAnimation.animator);
-
-            if (!handle.length) {
-                handle = $("<span class='km-slider-container'><span class='km-slider-handle' /></span>")
-                                    .appendTo(element)
-                                    .children(slideAnimation.animator);
-            }
-
-            handle.parent().before("<span class='km-slider-wrapper'><span class='km-slider-background'></span></span>");
-
-            marginElement = that.element.find(slideAnimation.manimator);
-            marginElement.data("margin", parseInt(marginElement.css("margin-left"), 10));
-
-            that.handle = handle;
-        }
-
-    });
-
-    ui.plugin(MobileSlider);
 })(jQuery);
