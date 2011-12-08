@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.bind tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.bind Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+        <script>
+            test("text binding", function() {
+                var dom = $('<span data-text="foo"/>');
+
+                kendo.bind(dom, { foo: "foo" });
+                equal(dom.text(), "foo");
+            });
+
+            test("html binding", function() {
+                var dom = $('<span data-html="foo"/>');
+
+                kendo.bind(dom, { foo: "foo" });
+                equal(dom.html(), "foo");
+            });
+
+            test("title binding", function() {
+                var dom = $('<span data-title="foo"/>');
+
+                kendo.bind(dom, { foo: "foo" });
+                equal(dom.attr("title"), "foo");
+            });
+
+            test("alt binding", function() {
+                var dom = $('<img data-alt="foo"/>');
+
+                kendo.bind(dom, { foo: "foo" });
+                equal(dom.attr("alt"), "foo");
+            });
+
+            test("src binding", function() {
+                var dom = $('<img data-src="foo"/>');
+
+                kendo.bind(dom, { foo: "http://www.example.com" });
+                equal(dom.attr("src"), "http://www.example.com");
+            });
+
+            test("href binding", function() {
+                var dom = $('<a data-href="foo"/>');
+
+                kendo.bind(dom, { foo: "foo" });
+                equal(dom.attr("href"), "foo");
+            });
+
+            test("binding immediate children", function() {
+                var dom = $('<span><img data-alt="foo"/></span>');
+
+                kendo.bind(dom, { foo: "foo" });
+                equal(dom.find("img").attr("alt"), "foo");
+            });
+
+            test("binding arbitrary children", function() {
+                var dom = $('<span><span><img data-alt="foo"/></span></span>');
+
+                kendo.bind(dom, { foo: "foo" });
+                equal(dom.find("img").attr("alt"), "foo");
+            });
+        </script>
+    </head>
+</html>
