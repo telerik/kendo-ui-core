@@ -17,7 +17,7 @@
         <ol id="qunit-tests"></ol>
         <script>
 
-            var Calendar = kendo.ui.Calendar;
+            var Calendar = kendo.ui.Calendar, div;
 
             module("kendo.ui.Calendar API", {
                 setup: function() {
@@ -609,6 +609,36 @@
                 cal._navigate("_prevArrow", -1);
 
                 equal(+cal.args("navigate")[0], +(new Date(2099, 10, 30)));
+            });
+
+            test("today link should be disabled when min() with bigger then today", function() {
+                var today = new Date(),
+                    min = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate()),
+                    cal = new Calendar(div);
+
+                cal.min(min);
+
+                stub(cal, "navigate");
+                cal._today.click();
+
+                ok(!div.find(".k-footer").find(".k-link").hasClass("k-nav-today"));
+                ok(div.find(".k-footer").find(".k-link").hasClass("k-state-disabled"));
+                equal(cal.calls("navigate"), 0);
+            });
+
+            test("today link should be disabled when max() with less then today", function() {
+                var today = new Date(),
+                    max = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate()),
+                    cal = new Calendar(div);
+
+                cal.max(max);
+
+                stub(cal, "navigate");
+                cal._today.click();
+
+                ok(!div.find(".k-footer").find(".k-link").hasClass("k-nav-today"));
+                ok(div.find(".k-footer").find(".k-link").hasClass("k-state-disabled"));
+                equal(cal.calls("navigate"), 0);
             });
 
         </script>

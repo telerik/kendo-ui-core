@@ -117,6 +117,7 @@
         DISABLED = "k-state-disabled",
         OTHERMONTH = "k-other-month",
         OTHERMONTHCLASS = ' class="' + OTHERMONTH + '"',
+        TODAY = "k-nav-today",
         CELLSELECTOR = "td:has(.k-link)",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
@@ -162,9 +163,7 @@
 
             that._header();
 
-            if (options.footer) {
-                that._footer();
-            }
+            that._footer();
 
             element
                 .delegate(CELLSELECTOR, MOUSEENTER, mouseenter)
@@ -510,6 +509,22 @@
             }
         },
 
+        _cellByDate: function(value) {
+            return this._table.find("td:not(." + OTHERMONTH + ")")
+                       .filter(function() {
+                           return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
+                       });
+        },
+
+        _class: function(className, value) {
+            this._table.find("td:not(." + OTHERMONTH + ")")
+                .removeClass(className)
+                .filter(function() {
+                   return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
+                })
+                .addClass(className);
+        },
+
         _click: function(e) {
             var that = this,
                 options = that.options,
@@ -547,17 +562,18 @@
         _footer: function() {
             var that = this,
                 element = that.element,
-                today = new DATE();
+                today = new DATE(),
+                link;
 
             if (!element.find(".k-footer")[0]) {
                 element.append('<div class="k-footer"><a href="#" class="k-link k-nav-today"></a></div>');
             }
 
-            that._today = element
-                        .find(".k-nav-today")
-                        .html(template(that.options.footer)(today))
-                        .attr("title", kendo.toString(today, "D"))
-                        .bind(CLICK, proxy(that._todayClick, that));
+            that._today = element.find("." + TODAY)
+                                 .html(template(that.options.footer)(today))
+                                 .attr("title", kendo.toString(today, "D"));
+
+            that._toggle();
         },
 
         _header: function() {
@@ -580,22 +596,6 @@
             that._title = links.eq(1).bind(CLICK, proxy(that.navigateUp, that));
             that[PREVARROW] = links.eq(0).bind(CLICK, proxy(that.navigateToPast, that));
             that[NEXTARROW] = links.eq(2).bind(CLICK, proxy(that.navigateToFuture, that));
-        },
-
-        _cellByDate: function(value) {
-            return this._table.find("td:not(." + OTHERMONTH + ")")
-                       .filter(function() {
-                           return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
-                       });
-        },
-
-        _class: function(className, value) {
-            this._table.find("td:not(." + OTHERMONTH + ")")
-                .removeClass(className)
-                .filter(function() {
-                   return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
-                })
-                .addClass(className);
         },
 
         _navigate: function(arrow, modifier) {
@@ -648,6 +648,25 @@
                 that.value(null);
             } else if (navigate) {
                 that.navigate();
+            }
+
+            that._toggle();
+        },
+
+        _toggle: function() {
+            var that = this,
+                options = that.options,
+                link = that._today.unbind(CLICK),
+                allow = isInRange(new DATE(), options.min, options.max);
+
+            if (allow) {
+                link.addClass(TODAY)
+                    .removeClass(DISABLED)
+                    .bind(CLICK, proxy(that._todayClick, that));
+            } else {
+                link.removeClass(TODAY)
+                    .addClass(DISABLED)
+                    .bind(CLICK, prevent);
             }
         },
 
@@ -1061,6 +1080,10 @@
 
     function mouseleave() {
         $(this).removeClass(HOVER);
+    }
+
+    function prevent (e) {
+        e.preventDefault();
     }
 
     function validate(options) {
