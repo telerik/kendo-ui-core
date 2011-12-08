@@ -32,6 +32,7 @@
                 duration: 0
             }
         };
+
     switchAnimation = os.name in switchAnimation ? switchAnimation[os.name] : switchAnimation.all;
 
     function preventDefault(e) {
@@ -43,13 +44,9 @@
         return Math.max( minLimit, Math.min( maxLimit, value));
     }
 
-    function Axis(element, owner) {
+    function Axis(element, options) {
         var initial, width, halfWidth, constrain, location, lastValue,
-            handle, animator, manimator, origin, snapPart,
-            options = owner.options,
-            max = options.max,
-            axis = options.axis,
-            axisProperty = axis == "x" ? "left" : "top";
+            handle, animator, manimator, origin, snapPart;
 
         element.bind(MOUSEDOWN, start);
 
@@ -57,14 +54,14 @@
             location = limitValue(location, halfWidth, constrain + halfWidth);
 
             var position = location - halfWidth;
-            animator.css(TRANSFORMSTYLE, "translate" + axis + "(" + position + "px)"); // TODO: remove halfWidth
-            manimator.css("margin-" + axisProperty, origin + position);
+            animator.css(TRANSFORMSTYLE, "translatex(" + position + "px)"); // TODO: remove halfWidth
+            manimator.css("margin-left", origin + position);
 
             return Math.round(position / snapPart);
         }
 
         function getAxisLocation(e, element) {
-            return kendo.touchLocation(e)[axis] - element.offset()[axisProperty];
+            return kendo.touchLocation(e).x - element.offset().left;
         }
 
         function start(e) {
@@ -74,12 +71,13 @@
             width = element.outerWidth();
             handle = element.find(options.handle);
             halfWidth = handle.outerWidth() / 2;
-            snapPart = (width - halfWidth*2) / (max - 1);
+            snapPart = (width - halfWidth * 2);
             constrain = width - handle.outerWidth(true);
             animator = element.find(extend({ animator: "animator" in switchAnimation ? switchAnimation.animator : options.handle }, options).animator);
             manimator = element.find(extend({ manimator: switchAnimation.manimator }, options).manimator);
             location = limitValue(initial, halfWidth, constrain + halfWidth);
             origin = manimator.data("origin");
+
             if (!origin && origin !== 0) {
                 origin = parseInt(manimator.css("margin-left"), 10);
                 manimator.data("origin", origin);
@@ -92,18 +90,21 @@
 
         function move(e) {
             var value = setPosition(e, getAxisLocation(e, element));
-            if (value != lastValue)
-                owner.trigger(SLIDE, { value: value });
+
+            if (value != lastValue) {
+                options.slide({value: value});
+            }
+
             lastValue = value;
         }
 
         function stop(e) {
             preventDefault(e);
 
-            if (max == 2 && Math.abs(initial - getAxisLocation(e, element)) <= 2) {
-                owner.trigger(CHANGE, { value: !owner.input[0].checked });
+            if (Math.abs(initial - getAxisLocation(e, element)) <= 2) {
+                options.change({ value: !options.input.checked });
             } else {
-                owner.trigger(CHANGE, { value: setPosition(e, getAxisLocation(e, element)) });
+                options.change({ value: setPosition(e, getAxisLocation(e, element)) });
             }
 
             $(document)
@@ -128,20 +129,24 @@
             element = that.element;
             options = that.options;
 
-            Axis(element, that);
+            that._wrap();
+
+            Axis(element, extend({}, options, {
+                slide: function(options) {
+                    that.trigger(SLIDE, options);
+                },
+                change: proxy(that._snap, that),
+                input: that.input[0]
+            }));
 
             that._toggleProxy = proxy(that._toggle, that);
             that._triggerProxy = proxy(that._trigger, that);
 
             that.bind([
-                CHANGE,
                 SLIDE,
                 TOGGLE
             ], options);
 
-            that.bind(CHANGE, proxy(that._snap, that));
-
-            that._wrap();
             that.enable(options.enable);
         },
 
@@ -150,9 +155,7 @@
             enable: true,
             selector: kendo.roleSelector("switch"),
             manimator: ".km-switch-background",
-            animator: handleSelector,
-            axis: "x",
-            max: 2
+            animator: handleSelector
         },
 
         enable: function(enable) {
