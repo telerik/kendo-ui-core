@@ -3307,16 +3307,18 @@
                 })
             }
 
-            elements.push(view.createSector(sector, deepExtend({
-                id: options.id,
-                fill: options.color,
-                overlay: overlay,
-                fillOpacity: options.opacity,
-                strokeOpacity: options.opacity,
-                animation: deepExtend(options.animation, {
-                    delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
-                })
-            }, border)));
+            if (segment.value !== 0) {
+                elements.push(view.createSector(sector, deepExtend({
+                    id: options.id,
+                    fill: options.color,
+                    overlay: overlay,
+                    fillOpacity: options.opacity,
+                    strokeOpacity: options.opacity,
+                    animation: deepExtend(options.animation, {
+                        delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
+                    })
+                }, border)));
+            }
 
             append(elements,
                 ChartElement.fn.getViewElements.call(segment, view)
@@ -3329,18 +3331,23 @@
             var segment = this,
                 highlight = segment.options.highlight || {},
                 border = highlight.border || {},
-                outlineId = segment.options.id + OUTLINE_SUFFIX;
+                outlineId = segment.options.id + OUTLINE_SUFFIX,
+                element;
 
             segment.registerId(outlineId);
             options = deepExtend({}, options, { id: outlineId });
 
-            return view.createSector(segment.sector, deepExtend({}, options, {
-                fill: highlight.color,
-                fillOpacity: highlight.opacity,
-                strokeOpacity: border.opacity,
-                strokeWidth: border.width,
-                stroke: border.color
-            }));
+            if (segment.value !== 0) {
+                element = view.createSector(segment.sector, deepExtend({}, options, {
+                    fill: highlight.color,
+                    fillOpacity: highlight.opacity,
+                    strokeOpacity: border.opacity,
+                    strokeWidth: border.width,
+                    stroke: border.color
+                }));
+            }
+
+            return element;
         },
 
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
@@ -3418,7 +3425,7 @@
                 for (i = 0; i < data.length; i++) {
                     currentData = chart.pointData(currentSeries, i);
                     value = currentData.value;
-                    angle = value * anglePerValue;
+                    angle = round(value * anglePerValue, DEFAULT_PRECISION);
                     currentName = currentData.category;
                     explode = data.length != 1 && !!currentData.explode;
                     currentSeries.color = currentData.color ?
@@ -3697,7 +3704,7 @@
 
                 if (label) {
                     points = [];
-                    if (label.options.position === OUTSIDE_END) {
+                    if (label.options.position === OUTSIDE_END && segment.value !== 0) {
                         var box = label.box,
                             centerPoint = sector.c,
                             start = sector.point(angle),
