@@ -94,6 +94,58 @@
         return object;
     }
 
+    var innerText = (function() {
+        var a = document.createElement("a");
+
+        if (a.textContent !== undefined) {
+            return "textContent";
+        }
+
+        return "innerText";
+    })();
+
+    var bindings = {
+        text: function(element, value) {
+            element[innerText] = value;
+        },
+        html: function(element, value) {
+            element.innerHTML = value;
+        }
+    };
+
+    $.each("title alt src href".split(" "), function(index, attr) {
+        bindings[attr] = function(element, value) {
+            element.setAttribute(attr, value);
+        }
+    });
+
+    function bindElement(element, object) {
+        for (binding in bindings) {
+            attribute = element.getAttribute("data-" + binding);
+
+            if (attribute) {
+                bindings[binding](element, object[attribute]);
+            }
+        }
+    }
+
+    function bindChildren(element, object) {
+        var idx, length, children = element.getElementsByTagName("*");
+
+        for (idx = 0, length = children.length; idx < length; idx++ ) {
+            bindElement(children[idx], object);
+        }
+    }
+
+    function bind(dom, object) {
+        var idx, length;
+
+        for (idx = 0, length = dom.length; idx < length; idx++ ) {
+            bindElement(dom[idx], object);
+            bindChildren(dom[idx], object);
+        }
+    }
+
     function bindSelect(select, model) {
         select = $(select);
 
@@ -217,6 +269,14 @@
     });
 
     data.ModelViewBinder = ModelViewBinder;
+
+    kendo.bind = function(dom, object) {
+        if (object.bind === undefined) {
+            object = extendObject(object);
+        }
+
+        bind(dom, object);
+    }
 
     kendo.observable = function(object) {
         return extendObject(object);
