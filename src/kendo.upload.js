@@ -596,11 +596,14 @@
         },
 
         _onInputChange: function(e) {
-            var input = $(e.target),
-                prevented = this.trigger(SELECT, { files: inputFiles(input) });
+            var upload = this,
+                input = $(e.target),
+                prevented = upload.trigger(SELECT, { files: inputFiles(input) });
 
             if (!prevented) {
                 input.trigger("t:select");
+            } else {
+                upload._addInput(input.clone().val(""));
             }
         },
 
