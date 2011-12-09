@@ -128,6 +128,36 @@
 
                 dom.trigger("click");
             });
+
+            test("select binding", function() {
+                var dom = $('<select data-source="foo"/>');
+
+                kendo.bind(dom, {
+                    foo: [1, 2]
+                });
+
+                equal(dom.find("option").length, 2);
+                equal(dom.find("option").first().text(), "1");
+                equal(dom.find("option").last().text(), "2");
+            });
+
+            test("select binding with template", function() {
+                var dom = $('<select data-source="foo" data-template="select-template" />');
+
+                kendo.bind(dom, {
+                    foo: [ {
+                        id: 1,
+                        name: "foo"
+                    }]
+                });
+
+                equal(dom.find("option").text(), "foo");
+                equal(dom.find("option").val(), "1");
+            });
+        </script>
+
+        <script id="select-template" type="text/x-kendo-template">
+            <option value="${id}">${name}</option>
         </script>
     </head>
 </html>
