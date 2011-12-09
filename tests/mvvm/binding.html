@@ -34,6 +34,13 @@
                 equal(dom.html(), "foo");
             });
 
+            test("value binding", function() {
+                var dom = $('<input data-value="foo"/>');
+
+                kendo.bind(dom, { foo: "foo" });
+                equal(dom.val(), "foo");
+            });
+
             test("title binding", function() {
                 var dom = $('<span data-title="foo"/>');
 

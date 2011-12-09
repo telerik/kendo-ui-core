@@ -110,6 +110,9 @@
         },
         html: function(element, value) {
             element.innerHTML = value;
+        },
+        value: function(element, value) {
+            element.value = value;
         }
     };
 
