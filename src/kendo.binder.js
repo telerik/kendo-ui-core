@@ -73,9 +73,16 @@
             member = object[field];
 
             if ($.isPlainObject(member)) {
-                object[field] = extendObject(member);
+                extendObject(member);
             } else if ($.isArray(member)) {
-                object[field] = extendArray(member);
+                extendArray(member);
+
+                (function(field) {
+                    member.bind(CHANGE, function(e) {
+                        e.field = field;
+                        object.trigger(CHANGE, e);
+                    });
+                })(field);
             }
         }
 
