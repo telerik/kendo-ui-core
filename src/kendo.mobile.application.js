@@ -105,8 +105,11 @@
 
     var Application = kendo.Observable.extend({
         init: function(element, options) {
-            kendo.Observable.fn.init.call(this, options);
-            this.element = element;
+            var that = this;
+
+            that.options = options || {};
+            kendo.Observable.fn.init.call(that, that.options);
+            that.element = element ? $(element) : $(document.body);
 
             var doc = $(document.documentElement);
             doc.addClass("km-" + (!os ? "ios" : os.name) + " " + getOrientationClass());
@@ -117,21 +120,14 @@
 
                 $(".km-scroll-container:visible").css(TRANSFORM, "none"); // Reset the visible scrollbar, TODO: make a scrollIntoView scroller method.
             });
-        },
 
-        start: function(options) {
-            var that = this;
-
-            that.options = options || {};
-
-            that.element = that.element ? $(that.element) : $(document.body);
-
-            hideAddressBar(that.element);
-
-            that._attachMeta();
-            that._setupAppLinks();
-            that._setupLayouts();
-            that._startHistory();
+            $(function(){
+                hideAddressBar(that.element);
+                that._attachMeta();
+                that._setupAppLinks();
+                that._setupLayouts();
+                that._startHistory();
+            });
         },
 
         navigate: function(url) {
@@ -199,7 +195,6 @@
         },
 
         _updateNavigationControls: function(argument) {
-            console.log("updating");
             var that = this;
             var tabstrip = that.element.find(roleSelector("tabstrip")).data("kendoMobileTabstrip");
 
@@ -285,10 +280,5 @@
         }
     });
 
-    kendo.application = new Application;
     kendo.Application = Application;
-
-    $(function() {
-        kendo.application.start({});
-    });
 })(jQuery);
