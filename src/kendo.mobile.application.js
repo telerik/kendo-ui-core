@@ -198,14 +198,22 @@
             that.trigger("viewShow", {view: view, params: params});
         },
 
-        _updateNavigationControls: function function_name (argument) {
-            var tabstrip = this.element.find(kendo.roleSelector("tabstrip")).data("kendoMobileTabstrip");
+        _updateNavigationControls: function(argument) {
+            console.log("updating");
+            var that = this;
+            var tabstrip = that.element.find(roleSelector("tabstrip")).data("kendoMobileTabstrip");
 
             // At the moment of switching, the href of the link is set to "#!"
             if (tabstrip) {
                 setTimeout(function() {
                     tabstrip.switchTo(history.url().string);
                 })
+            }
+
+            var navbar = that.element.find(roleSelector("navbar")).data("kendoMobileNavBar");
+
+            if (navbar) {
+                navbar.title(that.view.title);
             }
         },
 
@@ -215,6 +223,7 @@
             if (layout = element.data("layout")) {
                 layout = that.layouts[layout];
             }
+
             var view = new View(element, {layout: layout});
 
             if (kendo.mobile) {
