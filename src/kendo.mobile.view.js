@@ -31,10 +31,12 @@
                                 .addClass("km-content")
                                 .kendoScroller({useOnDesktop: true});
 
+            that.title = element.data(kendo.ns + "title");
+
             if (that.layout) {
                 that.layout.setup(that);
             } else {
-                this.element.prepend(that.header).append(that.footer);
+                that.element.prepend(that.header).append(that.footer);
             }
         },
 

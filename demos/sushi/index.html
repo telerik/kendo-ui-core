@@ -22,11 +22,14 @@
         <script src="../../src/kendo.mobile.application.js"></script>
     </head>
     <body>
-        <script type="text/javascript">
-            $(document.body).hide();
-        </script>
-
         <div data-role="layout" data-id="default">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a class="about-button" data-align="right" href="about.html" data-role="button">About</a>
+                </div>
+            </header>
+
             <footer data-role="footer" data-id="default">
                 <div data-role="tabstrip">
                     <a href="#index">Home</a>
@@ -37,40 +40,19 @@
             </footer>
         </div>
 
-        <div data-role="view" id="index" data-url="/" data-animation="slide" data-layout="default">
-            <header data-role="header">
-                <div data-role="navbar">
-                    <span data-role="view-title">Kendo Sushi</span>
-                    <a class="about-button" data-align="right" href="about.html" data-role="button">About</a>
-                </div>
-            </header>
-
+        <div data-title="Kendo sushi" data-role="view" id="index" data-url="/" data-layout="default">
             <div data-role="content">
                 <ul id="featured" class="item-list"></ul>
             </div>
         </div>
 
-        <div data-role="view" id="menu" data-layout="default">
-            <header data-role="header">
-                <div data-role="navbar">
-                    <span data-role="view-title">Menu</span>
-                    <a class="about-button" data-align="right" href="about.html" data-role="button">About</a>
-                </div>
-            </header>
-
+        <div data-role="view" id="menu" data-layout="default" data-title="Menu" data>
             <div data-role="content">
                 <ul id="menuList" class="item-list"></ul>
             </div>
         </div>
 
-        <div data-role="view" id="cart" data-layout="default">
-            <header data-role="header">
-                <div data-role="navbar">
-                    <span data-role="view-title">Cart</span>
-                    <a class="about-button" data-align="right" href="about.html" data-role="button">About</a>
-                </div>
-            </header>
-
+        <div data-role="view" id="cart" data-layout="default" data-title="Cart">
             <div data-role="content">
                 <h2 id="total"></h2>
                 <img src="images/sad.png" id="empty-icon">
@@ -79,14 +61,7 @@
             </div>
         </div>
 
-        <div data-role="view" id="account" data-layout="default">
-            <header data-role="header">
-                <div data-role="navbar">
-                    <span data-role="view-title">My account</span>
-                    <a class="about-button" data-align="right" href="about.html" data-role="button">About</a>
-                </div>
-            </header>
-
+        <div data-role="view" id="account" data-layout="default" data-title="My Account">
             <div data-role="content">
                 <ul data-role="listview" data-style="inset" data-type="group">
                     <li>
@@ -209,7 +184,9 @@
                 }
             }
 
-            kendo.application.bind("viewInit", function(e) {
+            var app = new kendo.Application($(document.body));
+
+            app.bind("viewInit", function(e) {
                 var id = e.view.element.attr("id");
 
                 if (id === "index") {
@@ -232,7 +209,7 @@
                 }
             });
 
-            kendo.application.bind("viewShow", function(e) {
+            app.bind("viewShow", function(e) {
                 var view = e.view, viewID = view.element.attr("id"), item;
 
                 if (viewID === "details") {
@@ -250,8 +227,6 @@
                 } else if (viewID === "index" || viewID === "menu") {
                     view.content.find(".item-list").data("kendoMobileListView").refresh();
                 }
-
-                $(document.body).show();
             });
         </script>
     </body>

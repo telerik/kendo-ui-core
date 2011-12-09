@@ -105,8 +105,11 @@
 
     var Application = kendo.Observable.extend({
         init: function(element, options) {
-            kendo.Observable.fn.init.call(this, options);
-            this.element = element;
+            var that = this;
+
+            that.options = options || {};
+            kendo.Observable.fn.init.call(that, that.options);
+            that.element = element ? $(element) : $(document.body);
 
             var doc = $(document.documentElement);
             doc.addClass("km-" + (!os ? "ios" : os.name) + " " + getOrientationClass());
@@ -117,21 +120,14 @@
 
                 $(".km-scroll-container:visible").css(TRANSFORM, "none"); // Reset the visible scrollbar, TODO: make a scrollIntoView scroller method.
             });
-        },
 
-        start: function(options) {
-            var that = this;
-
-            that.options = options || {};
-
-            that.element = that.element ? $(that.element) : $(document.body);
-
-            hideAddressBar(that.element);
-
-            that._attachMeta();
-            that._setupAppLinks();
-            that._setupLayouts();
-            that._startHistory();
+            $(function(){
+                hideAddressBar(that.element);
+                that._attachMeta();
+                that._setupAppLinks();
+                that._setupLayouts();
+                that._startHistory();
+            });
         },
 
         navigate: function(url) {
@@ -198,14 +194,21 @@
             that.trigger("viewShow", {view: view, params: params});
         },
 
-        _updateNavigationControls: function function_name (argument) {
-            var tabstrip = this.element.find(kendo.roleSelector("tabstrip")).data("kendoMobileTabstrip");
+        _updateNavigationControls: function(argument) {
+            var that = this;
+            var tabstrip = that.element.find(roleSelector("tabstrip")).data("kendoMobileTabstrip");
 
             // At the moment of switching, the href of the link is set to "#!"
             if (tabstrip) {
                 setTimeout(function() {
                     tabstrip.switchTo(history.url().string);
                 })
+            }
+
+            var navbar = that.element.find(roleSelector("navbar")).data("kendoMobileNavBar");
+
+            if (navbar) {
+                navbar.title(that.view.title);
             }
         },
 
@@ -215,6 +218,7 @@
             if (layout = element.data("layout")) {
                 layout = that.layouts[layout];
             }
+
             var view = new View(element, {layout: layout});
 
             if (kendo.mobile) {
@@ -276,10 +280,5 @@
         }
     });
 
-    kendo.application = new Application;
     kendo.Application = Application;
-
-    $(function() {
-        kendo.application.start({});
-    });
 })(jQuery);

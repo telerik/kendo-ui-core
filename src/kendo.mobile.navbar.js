@@ -1,5 +1,6 @@
 (function($, undefined) {
     var ui = window.kendo.ui,
+        roleSelector = kendo.roleSelector,
         MobileWidget = ui.MobileWidget;
 
     function createContainer(align, element) {
@@ -22,9 +23,12 @@
 
         options: {
             name: "MobileNavBar",
-            selector: kendo.roleSelector("navbar")
-        }
+            selector: roleSelector("navbar")
+        },
 
+        title: function(value) {
+            this.element.find(roleSelector("view-title")).text(value);
+        }
     });
 
     ui.plugin(MobileNavBar);

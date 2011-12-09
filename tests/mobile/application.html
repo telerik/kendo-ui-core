@@ -8,6 +8,7 @@
         <script src="../../src/kendo.history.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../jquery.mockjax.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
@@ -28,6 +29,7 @@
             QUnit.config.testTimeout = 500;
             QUnit.config.reorder = false;
 
+            var enhance = kendo.mobile.enhance;
             module("kendo.Application", {
                 setup: function() {
                     location.hash = '';
@@ -36,6 +38,7 @@
                 },
 
                 teardown: function() {
+                    kendo.mobile.enhance = enhance;
                     $.mockjaxClear();
                     kendo.history.stop();
                 }
@@ -44,7 +47,6 @@
             function setup(html) {
                 $("#qunit-fixture").html(html);
                 application = new kendo.Application($("#qunit-fixture"));
-                application.start();
             }
 
             test("switches to local view", function() {
@@ -143,18 +145,6 @@
                 application.navigate("page2.html");
             });
 
-            test("raises viewInit for the local view", function() {
-                expect(1);
-
-                $("#qunit-fixture").html('<div data-role="view" id="page1">Page 1</div>');
-                application = new kendo.Application($("#qunit-fixture"));
-                application.bind("viewInit", function(e) {
-                    equal(e.view.element[0], $("#page1")[0], "Event is raised");
-                });
-
-                application.start();
-            });
-
             test("raises viewInit when switching to a local view", function() {
                 expect(1);
 
@@ -239,8 +229,6 @@
 
                 setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
 
-                kendo.mobile = {};
-
                 stub(kendo.mobile, "enhance");
 
                 application.navigate("#page2");
@@ -250,8 +238,6 @@
 
             test("calls enhance when started", function() {
                 expect(1);
-
-                kendo.mobile = {};
 
                 stub(kendo.mobile, "enhance");
 
@@ -306,6 +292,14 @@
 
                 equal(application.element.find(".km-header").text(), "custom header", "Custom header is present");
                 equal(application.element.find(".km-footer").text(), "custom footer", "Custom footer is present");
+            });
+
+            test("Applies view title attribute contents to layout view title", function() {
+                setup('<div data-layout="foo" data-role="view" data-title="foo" id="page1">Page 1</div> \
+                       <div data-role="layout" data-id="foo"><div data-role="header"><div data-role="navbar"><span id="view-title" data-role="view-title"></span></div></div></div> \
+                 ');
+
+                equal(application.element.find("#view-title").text(), "foo", "view title applies view title attribute");
             });
 
             test("passes url params to the view show event", function() {
