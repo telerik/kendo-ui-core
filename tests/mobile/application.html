@@ -47,7 +47,6 @@
             function setup(html) {
                 $("#qunit-fixture").html(html);
                 application = new kendo.Application($("#qunit-fixture"));
-                application.start();
             }
 
             test("switches to local view", function() {
@@ -144,18 +143,6 @@
                 });
 
                 application.navigate("page2.html");
-            });
-
-            test("raises viewInit for the local view", function() {
-                expect(1);
-
-                $("#qunit-fixture").html('<div data-role="view" id="page1">Page 1</div>');
-                application = new kendo.Application($("#qunit-fixture"));
-                application.bind("viewInit", function(e) {
-                    equal(e.view.element[0], $("#page1")[0], "Event is raised");
-                });
-
-                application.start();
             });
 
             test("raises viewInit when switching to a local view", function() {
