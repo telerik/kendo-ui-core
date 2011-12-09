@@ -87,20 +87,15 @@
 
     // Chart ==================================================================
     var Chart = Widget.extend({
-        init: function(element, options) {
+        init: function(element, userOptions) {
             var chart = this,
+                options,
                 themeOptions,
                 theme;
 
             Widget.fn.init.call(chart, element);
+            options = deepExtend({}, chart.options, userOptions);
 
-            if (options && options.dataSource) {
-                chart.dataSource = DataSource
-                    .create(options.dataSource)
-                    .bind(CHANGE, proxy(chart._onDataChanged, chart));
-            }
-
-            options = deepExtend({}, chart.options, options);
             theme = options.theme;
             themeOptions = theme ? Chart.themes[theme] || Chart.themes[theme.toLowerCase()] : {};
 
@@ -118,7 +113,17 @@
 
             $(element).addClass("k-chart");
 
-            chart._refresh();
+            if (userOptions && userOptions.dataSource) {
+                chart.dataSource = DataSource
+                    .create(userOptions.dataSource)
+                    .bind(CHANGE, proxy(chart._onDataChanged, chart));
+
+                if (options.autoBind) {
+                    chart.dataSource.fetch();
+                }
+            }
+
+            chart._redraw();
             chart._attachEvents();
         },
 
@@ -167,13 +172,8 @@
             applySeriesDefaults(chart.options);
             applyAxisDefaults(chart.options);
 
-            chart._refresh();
-        },
-
-        _refresh: function() {
-            var chart = this;
-            if (chart.options.dataSource && chart.options.autoBind) {
-                chart.dataSource.query();
+            if (chart.dataSource) {
+                chart.dataSource.read();
             } else {
                 chart._redraw();
             }
