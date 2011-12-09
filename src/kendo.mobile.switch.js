@@ -44,74 +44,88 @@
         return Math.max( minLimit, Math.min( maxLimit, value));
     }
 
-    function Axis(element, options) {
-        var initial, width, halfWidth, constrain, location, lastValue,
-            handle, animator, manimator, origin, snapPart;
+    var Axis = kendo.Class.extend({
+        init: function (element, options) {
+            var that = this;
 
-        element.bind(MOUSEDOWN, start);
+            that.element = element;
+            that.options = options;
+            that.width = element.outerWidth();
+            that.handle = element.find(options.handle);
+            that.halfWidth = that.handle.outerWidth() / 2;
+            that.snapPart = (that.width - that.halfWidth * 2);
+            that.constrain = that.width - that.handle.outerWidth(true);
+            that.animator = element.find(extend({ animator: "animator" in switchAnimation ? switchAnimation.animator : options.handle }, options).animator);
+            that.manimator = element.find(extend({ manimator: switchAnimation.manimator }, options).manimator);
+            that.moveProxy = $.proxy(that.move, that);
+            that.stopProxy = $.proxy(that.stop, that);
 
-        function setPosition(e, location) {
-            location = limitValue(location, halfWidth, constrain + halfWidth);
+            element.bind(MOUSEDOWN, $.proxy(that.start, that));
+        },
 
-            var position = location - halfWidth;
-            animator.css(TRANSFORMSTYLE, "translatex(" + position + "px)"); // TODO: remove halfWidth
-            manimator.css("margin-left", origin + position);
+        getAxisLocation: function(e) {
+            return kendo.touchLocation(e).x - this.element.offset().left;
+        },
 
-            return Math.round(position / snapPart);
-        }
+        move: function(e) {
+            var that = this;
+            var value = that.setPosition(e);
 
-        function getAxisLocation(e, element) {
-            return kendo.touchLocation(e).x - element.offset().left;
-        }
+            if (value != that.lastValue) {
+                that.options.slide({value: value});
+            }
 
-        function start(e) {
+            that.lastValue = value;
+        },
+
+        start: function(e) {
             preventDefault(e);
 
-            initial = getAxisLocation(e, element);
-            width = element.outerWidth();
-            handle = element.find(options.handle);
-            halfWidth = handle.outerWidth() / 2;
-            snapPart = (width - halfWidth * 2);
-            constrain = width - handle.outerWidth(true);
-            animator = element.find(extend({ animator: "animator" in switchAnimation ? switchAnimation.animator : options.handle }, options).animator);
-            manimator = element.find(extend({ manimator: switchAnimation.manimator }, options).manimator);
-            location = limitValue(initial, halfWidth, constrain + halfWidth);
-            origin = manimator.data("origin");
+            var that = this;
 
-            if (!origin && origin !== 0) {
-                origin = parseInt(manimator.css("margin-left"), 10);
-                manimator.data("origin", origin);
+            that.initial = that.getAxisLocation(e);
+            that.location = limitValue(that.initial, that.halfWidth, that.constrain + that.halfWidth);
+            that.origin = that.manimator.data("origin");
+
+            if (!that.origin && that.origin !== 0) {
+               that.origin = parseInt(that.manimator.css("margin-left"), 10);
+               that.manimator.data("origin", that.origin);
             }
 
             $(document)
-                .bind(MOUSEMOVE, move)
-                .bind(MOUSEUP + " mouseleave", stop); // Stop if leaving the simulator/screen
-        }
+                .bind(MOUSEMOVE, that.moveProxy)
+                .bind(MOUSEUP + " mouseleave", that.stopProxy); // Stop if leaving the simulator/screen
+        },
 
-        function move(e) {
-            var value = setPosition(e, getAxisLocation(e, element));
-
-            if (value != lastValue) {
-                options.slide({value: value});
-            }
-
-            lastValue = value;
-        }
-
-        function stop(e) {
+        stop: function(e) {
             preventDefault(e);
 
-            if (Math.abs(initial - getAxisLocation(e, element)) <= 2) {
+            var that = this,
+                options = that.options;
+
+            if (Math.abs(that.initial - that.getAxisLocation(e)) <= 2) {
                 options.change({ value: !options.input.checked });
             } else {
-                options.change({ value: setPosition(e, getAxisLocation(e, element)) });
+                options.change({ value: that.setPosition(e) });
             }
 
             $(document)
-                .unbind(MOUSEMOVE, move)
-                .unbind(MOUSEUP + " mouseleave", stop);
+                .unbind(MOUSEMOVE, that.moveProxy)
+                .unbind(MOUSEUP + " mouseleave", that.stopProxy);
+        },
+
+        setPosition: function(e) {
+            var that = this;
+            that.location = limitValue(that.getAxisLocation(e), that.halfWidth, that.constrain + that.halfWidth);
+
+            var position = that.location - that.halfWidth;
+
+            that.animator.css(TRANSFORMSTYLE, "translatex(" + position + "px)"); // TODO: remove halfWidth
+            that.manimator.css("margin-left", that.origin + position);
+
+            return Math.round(position / that.snapPart);
         }
-    }
+    });
 
     var MobileSwitch = MobileWidget.extend({
         init: function(element, options) {
@@ -131,7 +145,8 @@
 
             that._wrap();
 
-            Axis(element, extend({}, options, {
+
+            new Axis(element, extend({}, options, {
                 slide: function(options) {
                     that.trigger(SLIDE, options);
                 },
