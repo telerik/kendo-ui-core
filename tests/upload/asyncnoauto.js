@@ -54,6 +54,17 @@
         equal($(".k-upload-selected", uploadInstance.wrapper).length, 0);
     });
 
+    test("file list should remain if contains failed uploads", function() {
+        simulateUploadWithResponse(errorResponse, function() {
+            $(".k-upload-selected").click();
+        });
+
+        simulateFileSelect();
+        simulateRemove();
+
+        equal($(".k-upload-files", uploadInstance.wrapper).length, 1);
+    });
+
     test("removing non-last file should not remove upload button", function() {
         uploadInstance._module.onIframeLoad = function() { };
         simulateFileSelect();
