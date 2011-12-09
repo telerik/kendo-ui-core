@@ -226,6 +226,7 @@
         compile: function(template, options) {
             var settings = extend({}, this, options),
                 paramName = settings.paramName,
+                argumentName = paramName.match(argumentNameRegExp)[0],
                 useWithBlock = settings.useWithBlock,
                 functionBody = "var o,e=kendo.htmlEncode;",
                 encodeRegExp = /\${([^}]*)}/g,
@@ -265,7 +266,7 @@
             functionBody = functionBody.replace(/__SHARP__/g, "#");
 
             try {
-                return new Function(paramName, functionBody);
+                return new Function(argumentName, functionBody);
             } catch(e) {
                 throw new Error(kendo.format("Invalid template:'{0}' Generated code:'{1}'", template, functionBody));
             }
