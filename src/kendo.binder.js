@@ -119,6 +119,11 @@
         }
     });
 
+    $.each("click change".split(" "), function(index, eventName) {
+        bindings[eventName] = function(element, value) {
+            $(element).bind(eventName, value);
+        }
+    });
 
     function observe(element, object, field, binding) {
         object.bind("change", function(e) {
