@@ -119,12 +119,27 @@
         }
     });
 
-    function bindElement(element, object) {
-        for (binding in bindings) {
-            attribute = element.getAttribute("data-" + binding);
 
-            if (attribute) {
-                bindings[binding](element, object[attribute]);
+    function observe(element, object, field, binding) {
+        object.bind("change", function(e) {
+            if (e.field === field) {
+                binding(element, object[field]);
+            }
+        });
+    }
+
+    function bindElement(element, object) {
+        var field;
+
+        for (binding in kendo.bindings) {
+            field = element.getAttribute("data-" + binding);
+
+            if (field) {
+                binding = kendo.bindings[binding];
+
+                binding(element, object[field]);
+
+                observe(element, object, field, binding);
             }
         }
     }
@@ -269,6 +284,8 @@
     });
 
     data.ModelViewBinder = ModelViewBinder;
+
+    kendo.bindings = bindings;
 
     kendo.bind = function(dom, object) {
         if (object.bind === undefined) {
