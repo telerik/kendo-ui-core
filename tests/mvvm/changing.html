@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.bind observer tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.bind observer Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+        <script>
+            module("mvvm observing", {
+                setup: function() {
+                },
+                teardown: function() {
+                }
+            });
+
+            test("changing a view model field reflects UI", function() {
+                var viewModel = kendo.observable( {
+                    foo: "foo"
+                });
+
+                var dom = $('<span data-text="foo"/>');
+                kendo.bind(dom, viewModel);
+                viewModel.set("foo", "bar");
+                equal(dom.text(), "bar");
+            });
+
+            test("change handler is attached only once", function() {
+                var viewModel = kendo.observable( {
+                    foo: "foo"
+                });
+
+                var dom = $('<span data-text="foo"/>');
+
+                stub(viewModel, {
+                    bind: function() {
+                        kendo.Observable.fn.bind.apply(viewModel, arguments);
+                    }
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("foo", "bar");
+
+                equal(viewModel.calls("bind"), 1);
+            });
+
+            test("changing a view model field from a view model function bound to UI reflects UI", function() {
+                var viewModel = kendo.observable( {
+                    foo: "foo",
+                    bar: function() {
+                        this.set("foo", "baz");
+                    }
+                });
+
+                var dom = $('<div><span data-text="foo"/><button data-click="bar"></button></div>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("button").trigger("click");
+
+                equal(dom.find("span").text(), "baz");
+            });
+
+            test("removing item from view model array reflects UI", function() {
+                var viewModel = kendo.observable( {
+                    foo: ["foo", "bar", "baz"],
+                    bar: "boo" // needed to test closure value assignment
+                });
+
+                var dom = $('<select data-source="foo"/>');
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.foo.splice(1, 1);
+
+                equal(dom.find("option").length, 2);
+                equal(dom.find("option").first().text(), "foo");
+                equal(dom.find("option").last().text(), "baz");
+            });
+        </script>
+    </head>
+</html>
