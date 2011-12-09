@@ -185,6 +185,13 @@
          }
      }
 
+    var argumentNameRegExp = /^\w+/,
+        encodeRegExp = /\${([^}]*)}/g,
+        escapedCurlyRegExp = /\\}/g,
+        curlyRegExp = /__CURLY__/g,
+        escapedSharpRegExp = /\\#/g,
+        sharpRegExp = /__SHARP__/g;
+
     /**
      * @name kendo.Template
      * @namespace
@@ -229,7 +236,6 @@
                 argumentName = paramName.match(argumentNameRegExp)[0],
                 useWithBlock = settings.useWithBlock,
                 functionBody = "var o,e=kendo.htmlEncode;",
-                encodeRegExp = /\${([^}]*)}/g,
                 parts,
                 part,
                 idx;
@@ -249,10 +255,10 @@
             functionBody += "o=";
 
             parts = template
-                .replace(/\\}/g, "__CURLY__")
+                .replace(escapedCurlyRegExp, "__CURLY__")
                 .replace(encodeRegExp, "#=e($1)#")
-                .replace(/__CURLY__/g, "}")
-                .replace(/\\#/g, "__SHARP__")
+                .replace(curlyRegExp, "}")
+                .replace(escapedSharpRegExp, "__SHARP__")
                 .split("#");
 
             for (idx = 0; idx < parts.length; idx ++) {
@@ -263,7 +269,7 @@
 
             functionBody += "return o;";
 
-            functionBody = functionBody.replace(/__SHARP__/g, "#");
+            functionBody = functionBody.replace(sharpRegExp, "#");
 
             try {
                 return new Function(argumentName, functionBody);
