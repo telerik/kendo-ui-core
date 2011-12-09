@@ -94,9 +94,19 @@
             });
 
             test("can specify custom settings", function() {
-                var t = template.compile("#= foo.bar #", { paramName: "foo" });
+                var t = template.compile("#= foo.bar #", {paramName: "foo"});
 
                 equal(t({ bar: "baz" }), "baz");
+            });
+
+            test("allows for member usage as a context", function() {
+                var t = template.compile("#= bar #", {paramName: "data.foo"});
+                equal(t({foo: {bar: "baz"}}), "baz");
+            });
+
+            test("allows for array accessor as a context", function() {
+                var t = template.compile("#= bar #", {paramName: "data['foo']"});
+                equal(t({foo: {bar: "baz"}}), "baz");
             });
 
             test("can execute code", function() {
@@ -149,6 +159,7 @@
             test("template throws error on invalid template", function() {
                 raises(function() { template.compile('<a href="#">link</a>') }, /Invalid template/, "Template does not raise proper error");
             });
+
         </script>
         <script id="encoded" type="text/x-jquery-template">
             <strong>${foo}</strong>
