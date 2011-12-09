@@ -76,9 +76,9 @@
         equal($(".k-file", uploadInstance.wrapper).length, 1);
     });
 
-    test("files are removed when the original form is reset", function() {
+    test("file list is removed when the original form is reset", function() {
         simulateFileSelect();
         $("#parentForm").trigger("reset");
 
-        equal($(".k-file", uploadInstance.wrapper).length, 0);
+        equal($(".k-upload-files", uploadInstance.wrapper).length, 0);
     });

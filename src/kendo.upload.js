@@ -843,7 +843,7 @@
         },
 
         _onParentFormReset: function() {
-            $(".k-file", this.wrapper).trigger("t:remove");
+            $(".k-upload-files", this.wrapper).remove();
         },
 
         _supportsFormData: function() {
