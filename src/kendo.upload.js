@@ -649,12 +649,18 @@
         },
 
         _removeFileEntry: function(fileEntry) {
-            var fileList = fileEntry.closest(".k-upload-files");
-            if ($(".k-file > .k-icon:not(.k-fail)", fileList).length == 1) {
-                fileList.remove();
+            var fileList = fileEntry.closest(".k-upload-files"),
+                allFiles;
+
+            fileEntry.remove();
+            allFiles = $(".k-file", fileList);
+
+            if (allFiles.find("> .k-fail").length === allFiles.length) {
                 this._hideUploadButton();
-            } else {
-                fileEntry.remove();
+            }
+
+            if (allFiles.length == 0) {
+                fileList.remove();
             }
         },
 
