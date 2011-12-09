@@ -12,6 +12,7 @@
         isArray = $.isArray,
         proxy = $.proxy,
         isFunction = $.isFunction,
+        isEmptyObject = $.isEmptyObject,
         math = Math,
         REQUESTSTART = "requestStart",
         ERROR = "error",
@@ -1447,6 +1448,49 @@
             }
         },
 
+        _footer: function() {
+            var that = this,
+                aggregates = that.dataSource.aggregates(),
+                html = "",
+                footerTemplate = that.footerTemplate,
+                options = that.options;
+
+            if (footerTemplate) {
+                html = $(that._wrapFooter(footerTemplate(aggregates || {})));
+
+                if (that.footer) {
+                    var tmp = html;
+
+                    that.footer.replaceWith(tmp);
+                    that.footer = tmp;
+                } else {
+                    if (options.scrollable) {
+                        that.footer = options.pageable ? html.insertBefore(that.wrapper.children("div.k-grid-pager")) : html.appendTo(that.wrapper);
+                    } else {
+                        that.footer = html.insertBefore(that.tbody);
+                    }
+                }
+            }
+        },
+
+        _wrapFooter: function(footerRow) {
+            var that = this,
+                html = "",
+                columns = that.columns,
+                idx,
+                length,
+                groups = that.dataSource.group().length,
+                column;
+
+            if (that.options.scrollable) {
+                html = $('<div class="k-grid-footer"><table cellspacing="0"><tbody>' + footerRow + '</tbody></table></div>');
+                that._appendCols(html.find("table"));
+                return html;
+            }
+
+            return '<tfoot>' + footerRow + '</tfoot>';
+        },
+
         _filterable: function() {
             var that = this,
                 columns = that.columns,
@@ -1646,6 +1690,85 @@
             if (that._hasDetails()) {
                 that.detailTemplate = that._detailTmpl(options.detailTemplate || "");
             }
+
+            if (!isEmptyObject(that.dataSource.aggregate()) ||
+                $.grep(that.columns, function(column) { return column.footerTemplate }).length) {
+
+                that.footerTemplate = that._footerTmpl();
+            }
+        },
+
+        _footerTmpl: function() {
+            var that = this,
+                settings = extend({}, kendo.Template, that.options.templateSettings),
+                paramName = settings.paramName,
+                html = "",
+                idx,
+                length,
+                columns = that.columns,
+                template,
+                type,
+                storage = {},
+                count = 0,
+                scope = {},
+                dataSource = that.dataSource,
+                aggregates = dataSource.aggregate(),
+                groups = dataSource.group().length,
+                fieldsMap = {},
+                column;
+
+            if (!isEmptyObject(aggregates)) {
+                if (isArray(aggregates)) {
+                    for (idx = 0, length = aggregates.length; idx < length; idx++) {
+                        fieldsMap[aggregates[idx].field] = true;
+                    }
+                } else {
+                    fieldsMap[aggregates.field] = true;
+                }
+            }
+
+            html += '<tr class="k-footer-template">';
+
+            if (groups > 0) {
+                html += groupCells(groups);
+            }
+
+            if (that._hasDetails()) {
+                html += '<td class="k-hierarchy-cell">&nbsp;</td>';
+            }
+
+            for (idx = 0, length = that.columns.length; idx < length; idx++) {
+                column = columns[idx];
+                template = column.footerTemplate;
+                type = typeof template;
+
+                html += "<td>";
+
+                if (template) {
+                    if (type !== FUNCTION) {
+                        scope = fieldsMap[column.field] ? extend({}, settings, { paramName: paramName + "." + column.field }) : {};
+                        template = kendo.template(template, scope);
+                    }
+
+                    storage["tmpl" + count] = template;
+                    html += "#=this.tmpl" + count + "(" + paramName + ")#";
+                    count ++;
+                } else {
+                    html += "&nbsp;";
+                }
+
+                html += "</td>";
+            }
+
+            html += '</tr>';
+
+            html = kendo.template(html, settings);
+
+            if (count > 0) {
+                return proxy(html, storage);
+            }
+
+            return html;
         },
 
         _detailTmpl: function(template) {
@@ -1659,11 +1782,11 @@
                 columns = that.columns.length,
                 type = typeof template;
 
-                html += '<tr class="k-detail-row">';
-                if (groups > 0) {
-                    html += groupCells(groups);
-                }
-                html += '<td class="k-hierarchy-cell"></td><td class="k-detail-cell"' + (columns ? ' colspan="' + columns + '"' : '') + ">";
+            html += '<tr class="k-detail-row">';
+            if (groups > 0) {
+                html += groupCells(groups);
+            }
+            html += '<td class="k-hierarchy-cell"></td><td class="k-detail-cell"' + (columns ? ' colspan="' + columns + '"' : '') + ">";
 
             if (type === FUNCTION) {
                 templateFunctionStorage["tmpl" + templateFunctionCount] = template;
@@ -1820,8 +1943,13 @@
         },
 
         _updateCols: function() {
+            var that = this;
+
+            that._appendCols(that.thead.parent().add(that.table));
+        },
+
+        _appendCols: function(table) {
             var that = this,
-                table = that.thead.parent().add(that.table),
                 colgroup = table.find("colgroup"),
                 width,
                 cols = map(that.columns, function(column) {
@@ -1846,7 +1974,6 @@
 
             table.prepend(colgroup);
         },
-
         _autoColumns: function(schema) {
             if (schema) {
                 var that = this,
@@ -2047,6 +2174,9 @@
                 that.table[0].replaceChild(tbody, that.tbody[0]);
                 that.tbody = $(tbody);
             }
+
+            that._footer();
+
             that.trigger(DATABOUND);
        }
    });

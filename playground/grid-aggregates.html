@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>editable</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.groupable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.model.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
+        <link href="../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <style>
+            body {
+               font: 75% arial,helvetica,sans-serif;
+           }
+       </style>
+   </head>
+    <body>
+        <div id="grid" ></div>
+        <script>
+            var grid,
+                dataSource,
+                data = [];
+
+            $(document).ready(function() {
+                for (var idx = 0; idx < 20; idx++) {
+                    data.push({foo: "foo " + idx, bar: "bar " + idx, id: idx, date: new Date()});
+                }
+
+                dataSource = new kendo.data.DataSource({
+                    data: data,
+                    pageSize: 10,
+                    aggregate: [ { field: "id", aggregate: "sum"}, { field: "foo", aggregate:"count"},{ field: "bar", aggregate:"count" }]
+                });
+
+
+                $("#grid").kendoGrid({
+                    dataSource: dataSource,
+                    navigatable: true,
+                    selectable: "cell",
+                    detailTemplate: " chur",
+                    groupable: true,
+                    pageable: true,
+                    sortable: true,
+                    //scrollable: false,
+                    columns: [ { field:"id", footerTemplate: "sum: #=sum#"}, { field: "bar", footerTemplate: "custom text count: #=count#" }, { field: "foo", footerTemplate: "count: #=count#"}]
+                });
+
+            });
+
+        </script>
+    </body>
+</html>
