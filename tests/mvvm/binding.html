@@ -18,6 +18,8 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
         <script>
+            QUnit.config.testTimeout = 100;
+
             test("text binding", function() {
                 var dom = $('<span data-text="foo"/>');
 
@@ -72,6 +74,36 @@
 
                 kendo.bind(dom, { foo: "foo" });
                 equal(dom.find("img").attr("alt"), "foo");
+            });
+
+            asyncTest("click binding", function() {
+                expect(1);
+
+                var dom = $('<span data-click="foo"/>');
+
+                kendo.bind(dom, {
+                    foo: function() {
+                        start();
+                        ok(true, "click is raised");
+                    }
+                });
+
+                dom.trigger("click");
+            });
+
+            asyncTest("change binding", function() {
+                expect(1);
+
+                var dom = $('<span data-change="foo"/>');
+
+                kendo.bind(dom, {
+                    foo: function() {
+                        start();
+                        ok(true, "change is raised");
+                    }
+                });
+
+                dom.trigger("change");
             });
         </script>
     </head>
