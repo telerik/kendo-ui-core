@@ -72,6 +72,23 @@
 
                 equal(dom.find("span").text(), "baz");
             });
+
+            test("removing item from view model array reflects UI", function() {
+                var viewModel = kendo.observable( {
+                    foo: ["foo", "bar", "baz"],
+                    bar: "boo" // needed to test closure value assignment
+                });
+
+                var dom = $('<select data-source="foo"/>');
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.foo.splice(1, 1);
+
+                equal(dom.find("option").length, 2);
+                equal(dom.find("option").first().text(), "foo");
+                equal(dom.find("option").last().text(), "baz");
+            });
         </script>
     </head>
 </html>
