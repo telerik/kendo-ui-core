@@ -132,6 +132,24 @@
                 equals(dragStartTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
             });
 
+            test("dragstart can be prevented", function () {
+                var treeview = createTreeView({
+                        dragAndDrop: true,
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "bar" }
+                            ] },
+                            { text: "baz" }
+                        ],
+                        dragstart: function(e) { e.preventDefault(); }
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                moveNode(treeviewObject, "bar", "baz");
+
+                equal(treeviewObject.text(treeviewObject.findByText("bar").parent().closest(".k-item")), "foo");
+            });
+
             test("moving node triggers drag", function () {
                 var dragTriggered,
                     treeview = createTreeView({

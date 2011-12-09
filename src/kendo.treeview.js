@@ -816,7 +816,7 @@
                 sourceNode = that.sourceNode = e.currentTarget.closest(NODE);
 
             if (treeview.trigger(DRAGSTART, { sourceNode: sourceNode[0] })) {
-                return false;
+                e.preventDefault();
             }
 
             that.dropHint = $("<div class='k-drop-hint' />")
