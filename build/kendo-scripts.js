@@ -1,6 +1,5 @@
 // Imports ====================================================================
 var fs = require("fs"),
-    sys = require("sys"),
     path = require("path"),
     kendoBuild = require("./kendo-build.js");
 
