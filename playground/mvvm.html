@@ -4,6 +4,7 @@
         <title>MVVM</title>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.binder.js"></script>
         <script src="../src/kendo.model.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.grid.js"></script>
@@ -15,158 +16,6 @@
                border-collapse: collapse;
             }
         </style>
-        <script>
-            kendo.observe = function(viewModel) {
-                var observable = new kendo.Observable();
-
-                for (var field in viewModel) {
-                    observable[field] = viewModel[field];
-
-                    if ($.isArray(viewModel[field])) {
-                        (function(field) {
-                            viewModel[field].pop = function() {
-                                [].pop.call(this);
-                                observable.trigger("change",{
-                                    field: field,
-                                    value: this
-                                });
-                            }
-                            viewModel[field].push = function() {
-                                [].push.apply(this, arguments);
-
-                                observable.trigger("change",{
-                                    field: field,
-                                    value: this
-                                });
-                            }
-
-                            viewModel[field].splice = function() {
-                                [].splice.apply(this, arguments);
-
-                                observable.trigger("change",{
-                                    field: field,
-                                    value: this
-                                });
-                            }
-                            viewModel[field].__observable = observable;
-                        })(field);
-                    }
-                }
-
-                observable.set = function(field, value) {
-                    this[field] = value;
-                    this.trigger("change", {
-                        field: field,
-                        value: value
-                    });
-                }
-
-                return observable;
-            }
-
-            function bindSelect(select, value, source) {
-                var valueField = select.attr("data-value-field");
-                var textField = select.attr("data-text-field");
-
-                select.empty();
-
-                for (var i = 0; i < source.length; i++) {
-                    var text = source[i][textField];
-                    var value = source[i][valueField];
-                    var option = kendo.format('<option value="{0}">{1}</option>', value, text);
-
-                    select.append(option);
-                }
-
-                select.val(value);
-            }
-
-            function bindTable(table, template, source) {
-                template = kendo.template($("#" + template).html());
-
-                var tbody = table.find("tbody");
-                if (!tbody[0]) {
-                    tbody = table.append("<tbody/>").find("tbody");
-                }
-
-                tbody.html(kendo.render(template, source));
-            }
-
-            kendo.bind = function(dom, viewModel) {
-                dom.find("*").each(function() {
-                    dom = $(this);
-                    var source = dom.attr("data-source");
-                    var display = dom.attr("data-display");
-
-                    if (dom.is("table")) {
-                        if (source) {
-                            var table = dom;
-                            var template = table.attr("data-template");
-
-                            bindTable(table, template, viewModel[source]);
-
-                            viewModel.bind("change", function(e) {
-                                if (e.field === source) {
-                                    bindTable(table, template, viewModel[source]);
-                                }
-                                table.css("display", viewModel[display]());
-                            });
-                        }
-                    } else if (dom.is("select")) {
-                        var select = dom;
-                        var value = select.attr("data-value");
-
-                        bindSelect(select, viewModel[value], viewModel[source]);
-
-                        select.change(function() {
-                            viewModel.set(value, this.value);
-                        });
-
-                        viewModel.bind("change", function(e) {
-                            if (e.field === source) {
-                                console.log(e.value);
-                                bindSelect(select, viewModel[value], e.value);
-                            } else if (e.field == value) {
-                                select.val(e.value);
-                            }
-                            select.css("display", viewModel[display]());
-                        });
-                    } else if (dom.is("button")) {
-                        var button = dom;
-
-                        var click = button.attr("data-click");
-
-                        button.click(function(e) {
-                            e.preventDefault();
-                            return viewModel[click].call(viewModel, e);
-                        });
-                    } else if (dom.is("span")) {
-                        var span = dom;
-                        var html = span.attr("data-html");
-
-                        span.html(viewModel[html]);
-
-                        viewModel.bind("change", function(e) {
-                            if (e.field == html) {
-                                span.html(e.value);
-                            }
-                        });
-                    }
-                });
-            }
-
-            var ObservableDataSource = kendo.data.DataSource.extend( {
-                init: function(options) {
-                    var that = this;
-
-                    kendo.data.DataSource.fn.init.call(this, options);
-
-                    options.data.__observable.bind("change", function(e) {
-                        that.data(e.value);
-                    });
-                }
-            });
-        </script>
     </head>
     <body>
         <form>
@@ -181,52 +30,18 @@
                 <select style="width: 200px"
                     multiple
                     data-value="selectedProduct"
-                    data-text-field="name"
-                    data-display="displayProducts"
-                    data-value-field="id"
+                    data-template="row-tmpl"
                     data-source="products">
                 </select>
-            </fieldset>
-
-            <fieldset>
-                <legend>&lt;table&gt;</legend>
                 <script type="text/x-kendo-tmpl" id="row-tmpl">
-                    <tr>
-                        <td>
-                            ${name}
-                        </td>
-                        <td>
-                            ${id}
-                        </td>
-                    </tr>
+                    <option value="${id}">${name}</option>
                 </script>
-
-                <table data-source="products" data-template="row-tmpl" data-display="displayProducts">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>ID</th>
-                        </tr>
-                    </thead>
-                </table>
-
             </fieldset>
-            <fieldset>
-                <legend>Kendo Grid</legend>
-                <table id="grid">
-                </table>
-            </fieldset>
+
         </form>
 
         <script>
-            var viewModel = kendo.observe({
-                displayProducts: function() {
-                    if (this.products.length) {
-                        return "";
-                    } else {
-                        return "none";
-                    }
-                },
+            var viewModel = kendo.observable({
                 products: [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" } ],
                 selectedProduct: 2,
                 selectFirst: function() {
@@ -234,28 +49,15 @@
                 },
                 addProduct: function() {
                     this.products.push({ id: 3, name: "Coffee" });
+                    return false;
                 },
                 removeProduct: function(e) {
-                    this.products.pop();
+                    this.products.splice(this.products.length-1, 1);
+                    return false;
                 }
             });
 
             kendo.bind($("form"), viewModel);
-            $("#grid").kendoGrid( {
-                editable: {
-                    update: false,
-                    confirmation: false
-                },
-                dataSource: new ObservableDataSource({
-                    data: viewModel.products,
-                    schema: {
-                        model: {
-                            id: "id"
-                        }
-                    }
-                }),
-                columns:[ "id", "name", { command: "destroy" }]
-            });
         </script>
     </body>
 </html>
