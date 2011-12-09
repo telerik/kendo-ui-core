@@ -104,6 +104,22 @@
         return "innerText";
     })();
 
+    function templateFor(element) {
+        var templateId = element.getAttribute("data-template"),
+            template = "<option>${data}</option>",
+            templateElement;
+
+        if (templateId) {
+            templateElement = document.getElementById(templateId);
+
+            if (templateElement) {
+                template = templateElement[innerText];
+            }
+        }
+
+        return template;
+    }
+
     var bindings = {
         text: function(element, value) {
             element[innerText] = value;
@@ -113,6 +129,11 @@
         },
         value: function(element, value) {
             element.value = value;
+        },
+        source: function(element, value) {
+            var template = templateFor(element);
+
+            element.innerHTML = kendo.render(kendo.template(template), value);
         }
     };
 
