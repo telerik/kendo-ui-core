@@ -73,9 +73,16 @@
             member = object[field];
 
             if ($.isPlainObject(member)) {
-                object[field] = extendObject(member);
+                extendObject(member);
             } else if ($.isArray(member)) {
-                object[field] = extendArray(member);
+                extendArray(member);
+
+                (function(field) {
+                    member.bind(CHANGE, function(e) {
+                        e.field = field;
+                        object.trigger(CHANGE, e);
+                    });
+                })(field);
             }
         }
 
@@ -104,12 +111,36 @@
         return "innerText";
     })();
 
+    function templateFor(element) {
+        var templateId = element.getAttribute("data-template"),
+            template = "<option>${data}</option>",
+            templateElement;
+
+        if (templateId) {
+            templateElement = document.getElementById(templateId);
+
+            if (templateElement) {
+                template = templateElement[innerText];
+            }
+        }
+
+        return template;
+    }
+
     var bindings = {
         text: function(element, value) {
             element[innerText] = value;
         },
         html: function(element, value) {
             element.innerHTML = value;
+        },
+        value: function(element, value) {
+            element.value = value;
+        },
+        source: function(element, value) {
+            var template = templateFor(element);
+
+            element.innerHTML = kendo.render(kendo.template(template), value);
         }
     };
 
@@ -119,12 +150,32 @@
         }
     });
 
-    function bindElement(element, object) {
-        for (binding in bindings) {
-            attribute = element.getAttribute("data-" + binding);
+    $.each("click change".split(" "), function(index, eventName) {
+        bindings[eventName] = function(element, value) {
+            $(element).bind(eventName, $.proxy(value, this));
+        }
+    });
 
-            if (attribute) {
-                bindings[binding](element, object[attribute]);
+    function observe(element, object, field, binding) {
+        object.bind("change", function(e) {
+            if (e.field === field) {
+                binding(element, object[field]);
+            }
+        });
+    }
+
+    function bindElement(element, object) {
+        var field;
+
+        for (binding in kendo.bindings) {
+            field = element.getAttribute("data-" + binding);
+
+            if (field) {
+                binding = $.proxy(kendo.bindings[binding], object);
+
+                binding(element, object[field]);
+
+                observe(element, object, field, binding);
             }
         }
     }
@@ -269,6 +320,8 @@
     });
 
     data.ModelViewBinder = ModelViewBinder;
+
+    kendo.bindings = bindings;
 
     kendo.bind = function(dom, object) {
         if (object.bind === undefined) {

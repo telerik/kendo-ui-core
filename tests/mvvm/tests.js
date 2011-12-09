@@ -4,4 +4,7 @@ tests.push( {
 }, {
     page: "mvvm/binding.html",
     title: "mvvm binding"
+}, {
+    page: "mvvm/changing.html",
+    title: "mvvm change tracking"
 });

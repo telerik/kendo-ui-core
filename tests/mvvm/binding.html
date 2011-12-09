@@ -18,6 +18,8 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
         <script>
+            QUnit.config.testTimeout = 100;
+
             test("text binding", function() {
                 var dom = $('<span data-text="foo"/>');
 
@@ -30,6 +32,13 @@
 
                 kendo.bind(dom, { foo: "foo" });
                 equal(dom.html(), "foo");
+            });
+
+            test("value binding", function() {
+                var dom = $('<input data-value="foo"/>');
+
+                kendo.bind(dom, { foo: "foo" });
+                equal(dom.val(), "foo");
             });
 
             test("title binding", function() {
@@ -73,6 +82,82 @@
                 kendo.bind(dom, { foo: "foo" });
                 equal(dom.find("img").attr("alt"), "foo");
             });
+
+            asyncTest("click binding", function() {
+                expect(1);
+
+                var dom = $('<span data-click="foo"/>');
+
+                kendo.bind(dom, {
+                    foo: function() {
+                        start();
+                        ok(true, "click is raised");
+                    }
+                });
+
+                dom.trigger("click");
+            });
+
+            asyncTest("change binding", function() {
+                expect(1);
+
+                var dom = $('<span data-change="foo"/>');
+
+                kendo.bind(dom, {
+                    foo: function() {
+                        start();
+                        ok(true, "change is raised");
+                    }
+                });
+
+                dom.trigger("change");
+            });
+
+            asyncTest("the context of the event handler is the viewmodel", function() {
+                expect(1);
+
+                var dom = $('<span data-click="foo"/>');
+                var viewModel = kendo.observable( {
+                    foo: function() {
+                        start();
+                        strictEqual(this, viewModel);
+                    }
+                });
+
+                kendo.bind(dom, viewModel);
+
+                dom.trigger("click");
+            });
+
+            test("select binding", function() {
+                var dom = $('<select data-source="foo"/>');
+
+                kendo.bind(dom, {
+                    foo: [1, 2]
+                });
+
+                equal(dom.find("option").length, 2);
+                equal(dom.find("option").first().text(), "1");
+                equal(dom.find("option").last().text(), "2");
+            });
+
+            test("select binding with template", function() {
+                var dom = $('<select data-source="foo" data-template="select-template" />');
+
+                kendo.bind(dom, {
+                    foo: [ {
+                        id: 1,
+                        name: "foo"
+                    }]
+                });
+
+                equal(dom.find("option").text(), "foo");
+                equal(dom.find("option").val(), "1");
+            });
+        </script>
+
+        <script id="select-template" type="text/x-kendo-template">
+            <option value="${id}">${name}</option>
         </script>
     </head>
 </html>
