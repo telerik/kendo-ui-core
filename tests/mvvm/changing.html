@@ -55,6 +55,23 @@
 
                 equal(viewModel.calls("bind"), 1);
             });
+
+            test("changing a view model field from a view model function bound to UI reflects UI", function() {
+                var viewModel = kendo.observable( {
+                    foo: "foo",
+                    bar: function() {
+                        this.set("foo", "baz");
+                    }
+                });
+
+                var dom = $('<div><span data-text="foo"/><button data-click="bar"></button></div>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("button").trigger("click");
+
+                equal(dom.find("span").text(), "baz");
+            });
         </script>
     </head>
 </html>

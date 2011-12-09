@@ -105,6 +105,22 @@
 
                 dom.trigger("change");
             });
+
+            asyncTest("the context of the event handler is the viewmodel", function() {
+                expect(1);
+
+                var dom = $('<span data-click="foo"/>');
+                var viewModel = kendo.observable( {
+                    foo: function() {
+                        start();
+                        strictEqual(this, viewModel);
+                    }
+                });
+
+                kendo.bind(dom, viewModel);
+
+                dom.trigger("click");
+            });
         </script>
     </head>
 </html>

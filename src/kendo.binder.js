@@ -121,7 +121,7 @@
 
     $.each("click change".split(" "), function(index, eventName) {
         bindings[eventName] = function(element, value) {
-            $(element).bind(eventName, value);
+            $(element).bind(eventName, $.proxy(value, this));
         }
     });
 
@@ -140,7 +140,7 @@
             field = element.getAttribute("data-" + binding);
 
             if (field) {
-                binding = kendo.bindings[binding];
+                binding = $.proxy(kendo.bindings[binding], object);
 
                 binding(element, object[field]);
 
