@@ -50,6 +50,14 @@
                 ok(rightContainer, "creates right container");
                 equal(dom.find("#bar").parent()[0], rightContainer, "moves right aligned item to the container");
             });
+
+            test("sets title to element with view-title data attribute", function() {
+                var dom = $('<div><span data-kendo-role="view-title"></span></div>');
+                var bar = new NavBar(dom);
+                bar.title("foo");
+                equal(dom.find("[data-kendo-role=view-title]").text(), "foo");
+            });
+
         </script>
     </body>
 </html>
