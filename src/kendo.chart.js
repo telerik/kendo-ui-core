@@ -4708,6 +4708,10 @@
             options = tooltip.options;
 
             tooltip.chartElement = chartElement;
+            tooltip.chartPadding = {
+                top: parseInt(chartElement.css("paddingTop"), 10),
+                left: parseInt(chartElement.css("paddingLeft"), 10)
+            };
 
             tooltip.template = Tooltip.template;
             if (!tooltip.template) {
@@ -4747,6 +4751,7 @@
                 point = tooltip.point,
                 element = tooltip.element,
                 options = tooltip.options,
+                chartPadding = tooltip.chartPadding,
                 anchor,
                 template,
                 content,
@@ -4777,8 +4782,8 @@
             element.html(content);
 
             anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
-            top = round(anchor.y) + "px";
-            left = round(anchor.x) + "px";
+            top = round(anchor.y + chartPadding.top) + "px";
+            left = round(anchor.x + chartPadding.left) + "px";
 
             if (!tooltip.visible) {
                 tooltip.element.css({ top: top, left: left });
