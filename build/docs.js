@@ -1,9 +1,12 @@
+var fs = require("fs"),
+    path = require("path");
+
 function build() {
     var jsdoctoolkit = require("./node-jsdoc-toolkit/app/nodemodule").jsdoctoolkit;
 
     console.log("building documentation...");
 
-    jsdoctoolkit.run([
+    var params = [
         // output directory
         "-d=" + (process.argv[3] || "docs"),
 
@@ -12,32 +15,17 @@ function build() {
 
         // constants
         "-D=\"copyright:2011\"",
-        "-D=\"title:Kendo UI Documentation\"",
+        "-D=\"title:Kendo UI Documentation\""
+    ]
 
-        // source files
-        "src/kendo.core.js",
-        "src/kendo.data.js",
-        "src/kendo.draganddrop.js",
-        "src/kendo.list.js",
-        "src/kendo.autocomplete.js",
-        "src/kendo.dropdownlist.js",
-        "src/kendo.combobox.js",
-        "src/kendo.calendar.js",
-        "src/kendo.datepicker.js",
-        "src/kendo.menu.js",
-        "src/kendo.numerictextbox.js",
-        "src/kendo.slider.js",
-        "src/kendo.splitter.js",
-        "src/kendo.panelbar.js",
-        "src/kendo.tabstrip.js",
-        "src/kendo.timepicker.js",
-        "src/kendo.treeview.js",
-        "src/kendo.validator.js",
-        "src/kendo.window.js",
-        "src/kendo.upload.js",
-        "src/chart/docs.js",
-        "src/kendo.grid.js"
-    ]);
+    var sourceFiles = fs.readdirSync("src").filter(function(file) { return file.indexOf(".js") > -1 && file.indexOf("jquery") === -1 } );
+    for (var i = 0; i < sourceFiles.length; i++) {
+        params.push(path.join("src", sourceFiles[i]));
+    }
+
+    params.push("src/chart/docs.js");
+
+    jsdoctoolkit.run(params);
 }
 
 if (require.main === module) {
