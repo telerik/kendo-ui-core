@@ -185,15 +185,38 @@
                 });
 
                 test("positions tooltip on anchor", function() {
-                    dataPointMock.tooltipAnchor = function() { return new Chart.Point2D(10, 10) };
+                    dataPointMock.tooltipAnchor = function() { return new Chart.Point2D(10, 20) };
                     tooltip.options.animation.duration = 0;
                     tooltip.options.offsetX = 0;
                     tooltip.options.offsetY = 0;
                     showNow(dataPointMock);
 
-                    same([parseInt(tooltip.element.css("top"), 10),
-                          parseInt(tooltip.element.css("left"), 10)],
-                          [10, 10]);
+                    same([parseInt(tooltip.element.css("left"), 10),
+                          parseInt(tooltip.element.css("top"), 10)],
+                          [10, 20]);
+                });
+
+                test("positions accounts for chart padding", function() {
+                    $("#chart").css({
+                        "padding-left": "10px",
+                        "padding-top": "20px"
+                    });
+
+                    createTooltip();
+                    createPoint();
+
+                    dataPointMock.tooltipAnchor = function() { return new Chart.Point2D(10, 20) };
+                    tooltip.options.animation.duration = 0;
+                    showNow(dataPointMock);
+
+                    same([parseInt(tooltip.element.css("left"), 10),
+                          parseInt(tooltip.element.css("top"), 10)],
+                          [20, 40]);
+
+                    $("#chart").css({
+                        "padding-left": "0px",
+                        "padding-top": "0px"
+                    });
                 });
 
                 test("applies format from the series", function() {
