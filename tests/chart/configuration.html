@@ -706,9 +706,23 @@
                     equal(chart._model.options.width, 200);
                 });
 
+                test("picks width from container on redraw", function() {
+                    $("#container").width("200px");
+                    chart.redraw();
+
+                    equal(chart._model.options.width, 200);
+                });
+
                 test("picks height from container on refresh", function() {
                     $("#container").height("200px");
                     chart.refresh();
+
+                    equal(chart._model.options.height, 200);
+                });
+
+                test("picks height from container on redraw", function() {
+                    $("#container").height("200px");
+                    chart.redraw();
 
                     equal(chart._model.options.height, 200);
                 });
@@ -950,6 +964,75 @@
                     createChart({ theme: "test" });
 
                     ok($("#container").hasClass("k-chart"));
+                });
+
+                // ------------------------------------------------------------
+                module("Refresh / Redraw", {
+                    setup: function() {
+                        createChart({series: [{}]});
+                    }
+                });
+
+                test("refresh applies axis defaults", function() {
+                    $.extend(chart.options, {
+                        axisDefaults: {
+                            flag: true
+                        }
+                    });
+
+                    chart.refresh();
+
+                    ok(chart.options.categoryAxis.flag === true);
+                });
+
+                test("redraw applies axis defaults", function() {
+                    $.extend(chart.options, {
+                        axisDefaults: {
+                            flag: true
+                        }
+                    });
+
+                    chart.redraw();
+
+                    ok(chart.options.categoryAxis.flag === true);
+                });
+
+                test("refresh applies series defaults", function() {
+                    $.extend(chart.options, {
+                        seriesDefaults: {
+                            labels: { visible: true }
+                        }
+                    });
+
+                    chart.refresh();
+
+                    equal(chart.options.series[0].labels.visible, true);
+                });
+
+                test("redraw applies series defaults", function() {
+                    $.extend(chart.options, {
+                        seriesDefaults: {
+                            labels: { visible: true }
+                        }
+                    });
+
+                    chart.redraw();
+
+                    equal(chart.options.series[0].labels.visible, true);
+                });
+
+                test("refresh replaces markup", function() {
+                    chart.element.empty();
+                    chart.refresh();
+
+                    ok(chart.element.children().length > 0);
+                });
+
+                test("redraw replaces markup", function() {
+                    chart.element.empty();
+                    chart.redraw();
+
+                    ok(chart.element.children().length > 0);
                 });
             })();
         </script>

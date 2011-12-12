@@ -107,6 +107,25 @@
                     );
                 });
 
+                test("redraw does not invoke read", function() {
+                    createChart({
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }],
+                        series: [{
+                            field: "sales"
+                        }]
+                    });
+
+                    stubMethod(kendo.data.DataSource, "read",
+                        function() { ok(false); },
+                        function() {
+                            chart.redraw();
+                        }
+                    );
+                });
+
                 asyncTest("data binding is not performed when autoBind is false", function() {
                     createChart({
                         dataSource: [{
