@@ -5,7 +5,13 @@
         mobile,
         Widget = kendo.ui.Widget;
 
-    var MobileWidget = Widget.extend({
+    var MobileWidget = Widget.extend(/** @lends kendo.ui.MobileWidget.prototype */{
+        /**
+         * Initializes mobile widget. Sets `element` and `options` properties.
+         * @constructs
+         * @class Represents a mobile UI widget. Base class for all Kendo mobile widgets.
+         * @extends kendo.ui.Widget
+         */
         init: function(element, options) {
             var that = this,
                 option,
