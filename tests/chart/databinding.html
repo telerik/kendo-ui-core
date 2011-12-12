@@ -11,6 +11,7 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
         <script type="text/javascript">
 
             var Chart = kendo.ui.Chart;
@@ -69,6 +70,60 @@
                             start();
                         }
                     });
+                });
+
+                test("initial binding is done using fetch", 1, function() {
+                    stubMethod(kendo.data.DataSource, "fetch", function() {
+                        ok(true);
+                    }, function() {
+                        createChart({
+                            dataSource: [{
+                                period: "Jan",
+                                sales: 100
+                            }],
+                            series: [{
+                                field: "sales"
+                            }]
+                        });
+                    });
+                });
+
+                test("refresh is done using read", 1, function() {
+                    createChart({
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }],
+                        series: [{
+                            field: "sales"
+                        }]
+                    });
+
+                    stubMethod(kendo.data.DataSource, "read",
+                        function() { ok(true); },
+                        function() {
+                            chart.refresh();
+                        }
+                    );
+                });
+
+                test("redraw does not invoke read", function() {
+                    createChart({
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }],
+                        series: [{
+                            field: "sales"
+                        }]
+                    });
+
+                    stubMethod(kendo.data.DataSource, "read",
+                        function() { ok(false); },
+                        function() {
+                            chart.redraw();
+                        }
+                    );
                 });
 
                 asyncTest("data binding is not performed when autoBind is false", function() {
