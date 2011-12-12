@@ -118,6 +118,15 @@
                 equal($(".k-file", uploadInstance.wrapper).length, 0);
             });
 
+            test("files in select event arguments are wrapped", 1, function() {
+                uploadInstance = createUpload({ "select" : (function(e) {
+                        equals(e.files[0].rawFile.name, "first.txt");
+                    })
+                });
+
+                simulateDrop([ { name: "first.txt", size: 1 } ]);
+            });
+
             test("dropping anything that is not a file is ignored", function () {
                 simulateDrop([]);
 
