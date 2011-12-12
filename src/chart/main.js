@@ -99,8 +99,7 @@
             theme = options.theme;
             themeOptions = theme ? Chart.themes[theme] || Chart.themes[theme.toLowerCase()] : {};
 
-            applyAxisDefaults(options, themeOptions);
-            applySeriesDefaults(options, themeOptions);
+            applyDefaults(options, themeOptions);
 
             chart.options = deepExtend({}, themeOptions, options);
 
@@ -169,14 +168,21 @@
         refresh: function() {
             var chart = this;
 
-            applySeriesDefaults(chart.options);
-            applyAxisDefaults(chart.options);
+            applyDefaults(chart.options);
 
             if (chart.dataSource) {
                 chart.dataSource.read();
             } else {
                 chart._redraw();
             }
+        },
+
+        redraw: function() {
+            var chart = this;
+
+            applyDefaults(chart.options);
+
+            chart._redraw();
         },
 
         _redraw: function() {
@@ -5103,6 +5109,11 @@
                 options[axisName]
             );
         });
+    }
+
+    function applyDefaults(options, themeOptions) {
+        applyAxisDefaults(options, themeOptions);
+        applySeriesDefaults(options, themeOptions);
     }
 
     function incrementSlot(slots, index, value) {
