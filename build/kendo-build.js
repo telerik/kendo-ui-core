@@ -1,4 +1,5 @@
 var fs = require("fs"),
+    sys = require("sys"),
     os = require("os"),
     path = require("path"),
     parser = require("./lib/parse-js"),
@@ -202,9 +203,10 @@ function minifyJs(source) {
 }
 
 function zip(name, filesPath, success) {
-    var archive;
+    var archive,
+        osName = os.type();
 
-    if (os.type() == "Linux") {
+    if (osName == "Linux" || osName == "Darwin") {
         archive = spawn("7z", [ "a", "-tzip", path.resolve(name), '*' ], { cwd: path.resolve(filesPath) });
     } else {
         archive = spawn("./build/lib/7z/7z", [ "a", "-tzip", name, path.join(filesPath, '*') ]);
