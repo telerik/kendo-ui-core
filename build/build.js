@@ -37,6 +37,7 @@ var bundles = [{
 }];
 
 var VERSION = kendoBuild.generateVersion(),
+    LATEST = "latest",
     INDEX = "index.html",
     SCRIPTS_ROOT = "src",
     STYLES_ROOT = "styles",
@@ -204,7 +205,8 @@ function buildBundle(bundle, success) {
         root = path.join(DEPLOY_ROOT, name + "." + license),
         srcLicenseTemplate = readText(path.join(LEGAL_ROOT, SRC_LICENSE)),
         srcLicense = template(srcLicenseTemplate)({ version: VERSION, year: startDate.getFullYear() }),
-        packageName = path.join(DROP_LOCATION, deployName + ".zip");
+        packageName = path.join(DROP_LOCATION, deployName + ".zip"),
+        packageNameLatest = packageName.replace(VERSION, LATEST);
 
     console.log("Building " + deployName);
     mkdir(root);
@@ -222,6 +224,7 @@ function buildBundle(bundle, success) {
     deployExamples(root, bundle);
 
     zip(packageName, root, success);
+    kendoBuild.copyFileSync(packageName, packageNameLatest);
 }
 
 function buildAllBundles(success, bundleIx) {
