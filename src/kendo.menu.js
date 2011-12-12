@@ -97,6 +97,8 @@
         SLIDEINRIGHT = "slideIn:right",
         DEFAULTSTATE = "k-state-default",
         DISABLEDSTATE = "k-state-disabled",
+        groupSelector = ".k-group",
+        allItemsSelector = ".k-item",
         disabledSelector = ".k-item.k-state-disabled",
         itemSelector = ".k-item:not(.k-state-disabled)",
         linkSelector = ".k-item:not(.k-state-disabled) > .k-link",
@@ -276,6 +278,7 @@
          * @option {Animation} [animation.close] The animation that will be used when closing sub menus.
          * @option {String} [orientation] <"horizontal"> Root menu orientation.
          * @option {Boolean} [openOnClick] <false> Specifies that the root sub menus will be opened on item click.
+         * @option {Boolean} [closeOnClick] <true> Specifies that sub menus should close after item selection (provided they won't navigate).
          * @option {Number} [hoverDelay] <100> Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving.
          */
         init: function(element, options) {
@@ -363,6 +366,7 @@
             },
             orientation: "horizontal",
             openOnClick: false,
+            closeOnClick: true,
             hoverDelay: 100
         },
 
@@ -514,12 +518,12 @@
             element = $(element);
 
             var that = this,
-                parent = element.parentsUntil(that.element, ".k-item"),
+                parent = element.parentsUntil(that.element, allItemsSelector),
                 group = element.parent("ul");
 
             element.remove();
 
-            if (group && !group.children(".k-item").length) {
+            if (group && !group.children(allItemsSelector).length) {
                 var container = group.parent(".k-animation-container");
                 container.length ? container.remove() : group.remove();
             }
@@ -613,7 +617,7 @@
         },
 
         _toggleHover: function(e) {
-            var target = $(kendo.eventTarget(e)).closest(".k-item");
+            var target = $(kendo.eventTarget(e)).closest(allItemsSelector);
 
             if (!target.parents("li." + DISABLEDSTATE).length) {
                 target.toggleClass("k-state-hover", e.type == MOUSEENTER || e.type == "touchstart");
@@ -640,7 +644,7 @@
         _mouseenter: function (e) {
             var that = this,
                 element = $(e.currentTarget),
-                hasChildren = (element.children(".k-animation-container").length || element.children(".k-group").length);
+                hasChildren = (element.children(".k-animation-container").length || element.children(groupSelector).length);
 
             if (!that.options.openOnClick || that.clicked) {
                 if (!contains(e.currentTarget, e.relatedTarget) && hasChildren) {
@@ -662,7 +666,7 @@
         _mouseleave: function (e) {
             var that = this,
                 element = $(e.currentTarget),
-                hasChildren = (element.children(".k-animation-container").length || element.children(".k-group").length);
+                hasChildren = (element.children(".k-animation-container").length || element.children(groupSelector).length);
 
             if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                 if (that.trigger(CLOSE, { item: element[0] }) === false) {
@@ -672,9 +676,11 @@
         },
 
         _click: function (e) {
-            var that = this, openHandle;
-
-            var element = $(kendo.eventTarget(e)).closest(".k-item");
+            var that = this, openHandle,
+                target = $(kendo.eventTarget(e)),
+                link = target.closest("." + LINK),
+                href = link.attr("href"),
+                element = target.closest(allItemsSelector);
 
             if (element.hasClass(DISABLEDSTATE)) {
                 e.preventDefault();
@@ -686,7 +692,10 @@
 
             e.handled = true;
 
-            if ((!element.parent().hasClass(MENU) && !touch) || (!that.options.openOnClick && !touch)) {
+            if (that.options.closeOnClick && !(href && href.length > 0) && !element.children(groupSelector + ",.k-animation-container").length)
+                that.close(link.parentsUntil(that.element, allItemsSelector));
+
+            if ((!element.parent().hasClass(MENU) || !that.options.openOnClick) && !touch) {
                 return;
             }
 
