@@ -615,7 +615,7 @@
             stopEvent(e);
 
             if (droppedFiles.length > 0) {
-                var prevented = that.trigger(SELECT, { files: droppedFiles });
+                var prevented = that.trigger(SELECT, { files: getAllFileInfo(droppedFiles) });
                 if (!prevented) {
                     $(".k-dropzone", that.wrapper).trigger("t:select", [ droppedFiles ]);
                 }
