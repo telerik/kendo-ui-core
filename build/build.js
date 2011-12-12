@@ -223,8 +223,13 @@ function buildBundle(bundle, success) {
     console.log("Deploying examples");
     deployExamples(root, bundle);
 
-    zip(packageName, root, success);
-    kendoBuild.copyFileSync(packageName, packageNameLatest);
+    zip(packageName, root, function() {
+        kendoBuild.copyFileSync(packageName, packageNameLatest);
+
+        if (success) {
+            success();
+        }
+    });
 }
 
 function buildAllBundles(success, bundleIx) {
