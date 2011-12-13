@@ -55,17 +55,24 @@
             return kendo.touchLocation(e).x - this.element.offset().left;
         },
 
+        //move the handler
+        //a) get new location
+        //b) position  handler on new location
+        //c) raise slide event ???
         move: function(e) {
             var that = this;
-            var value = that.setPosition(e);
 
-            if (value != that.lastValue) {
-                that.options.slide({value: value});
-            }
+            that.location = limitValue(that.getAxisLocation(e), that.halfWidth, that.constrain + that.halfWidth);
 
-            that.lastValue = value;
+            var position = that.location - that.halfWidth;
+
+            that.position(position);
         },
 
+        //get handler
+        //a) position handler on the mouse position
+        //b) save this initial position ???
+        //c) wire the mouse move event
         start: function(e) {
             preventDefault(e);
 
@@ -86,16 +93,29 @@
                 .bind(MOUSEUP + " mouseleave", that.stopProxy); // Stop if leaving the simulator/screen
         },
 
+        //release handler
+        //a) stop moving the handler
+        //b) get current location
+        //c) check if the current location is bigger/less than half or it is (0 or 1).
+        //d) animate depending on c)
         stop: function(e) {
             preventDefault(e);
 
             var that = this,
-                options = that.options;
+                options = that.options,
+                location = that.getAxisLocation(e);
 
-            if (Math.abs(that.initial - that.getAxisLocation(e)) <= 2) { //if handler is moved less then 2 px then toggle!
+            //change is actually like the change always return 0 or 1
+
+            if (Math.abs(that.initial - location) <= 2) { //if handler is moved less then 2 px then toggle!
                 options.change({ value: !options.input.checked }); //Math.round(position / that.snapPart); === options.input.checked
             } else {
-                options.change({ value: that.setPosition(e) });
+                //location should not be cached...
+                var position = that.location - that.halfWidth;
+
+                that.position(position);
+
+                options.change({ value: Math.round(position / that.snapPart) });
             }
             //value should be 0 || 1
 
@@ -104,20 +124,6 @@
             $(document)
                 .unbind(MOUSEMOVE, that.moveProxy)
                 .unbind(MOUSEUP + " mouseleave", that.stopProxy);
-        },
-
-        setPosition: function(e) {
-            var that = this;
-
-            //location should not be cached...
-            that.location = limitValue(that.getAxisLocation(e), that.halfWidth, that.constrain + that.halfWidth);
-
-            var position = that.location - that.halfWidth;
-
-            that.animator.css(TRANSFORMSTYLE, "translatex(" + position + "px)"); // TODO: remove halfWidth
-            that.manimator.css("margin-left", that.origin + position);
-
-            return Math.round(position / that.snapPart);
         },
 
         position: function(position) { //number
@@ -149,6 +155,7 @@
 
             new Axis(element, extend({}, options, {
                 slide: function(options) {
+                    //triggers 0 or 1
                     that.trigger(SLIDE, options);
                 },
                 change: proxy(that._snap, that),
@@ -217,7 +224,7 @@
             }
         },
 
-        _snap: function (e) {
+        _snap: function (e) { //snap expects true or false (checked and etc);
             var that = this,
                 handle = that.handle,
                 checked = (e.value == 1), distance;
