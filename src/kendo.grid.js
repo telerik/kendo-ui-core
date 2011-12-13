@@ -441,6 +441,35 @@
          *         }
          *      ]
          *   });
+         * @option {Array} [toolbar] This is a list of commands for which the corresponding buttons will be rendered.
+         * The supported built-in commands are: "create", "cancel", "save", "destroy".
+         * _example
+         *  $(".k-grid").kendoGrid({
+         *      dataSource: {
+         *          data: createRandomData(50),
+         *          pageSize: 10
+         *      },
+         *      columns: [
+         *          {
+         *              field: "Name"
+         *          },
+         *          {
+         *              field: "BirthDate",
+         *              title: "Birth Date",
+         *              template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
+         *         }
+         *      ]
+         *      toolbar: ["create", "save", "cancel"],
+         *      editable: true
+         *   });
+         * @option {String} [toolbar.name] The name of the command. One of the predefined or a custom.
+         * @option {String} [toolbar.text] The text of the command that will be set on the button.
+         * @option {String} [toolbar.template] The template for the command button.
+         *
+         * @option {Object} [editable] Indicates whether editing is enabled/disabled.
+         * @option {Boolean} [editable.update] Indicates whether item should be switched to edit mode on click.
+         * @option {Boolean} [editable.destroy] Indicates whether item should be deleted when click on delete button.
+         * @option {Boolean} [editable.confirmation] Defines the text that will be used in confirmation box when delete an item.
          * @option {Boolean} [pageable] <false> Indicates whether paging is enabled/disabled.
          * @option {Boolean} [groupable] <false> Indicates whether grouping is enabled/disabled.
          * @option {Boolean} [navigatable] <false> Indicates whether keyboard navigation is enabled/disabled.
