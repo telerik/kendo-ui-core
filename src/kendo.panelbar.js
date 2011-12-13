@@ -577,20 +577,20 @@
          * panelBar.append(
          *     [{
          *         text: "Item 1",
-         *         url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
+         *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
          *     },
          *     {
          *         text: "Item 2",
-         *         content: "text"                             // Content for the content element
+         *         content: "text"                              // Content for the content element
          *     },
          *     {
          *         text: "Item 3",
-         *         contentUrl: "partialContent.html"           // From where to load the item content
+         *         contentUrl: "partialContent.html"            // From where to load the item content
          *     },
          *     {
-         *         text: "Item 4"
-         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
-         *         items: [{                                   // Sub item collection.
+         *         text: "Item 4",
+         *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
+         *         items: [{                                    // Sub item collection.
          *              text: "Sub Item 1"
          *         },
          *         {
@@ -598,8 +598,8 @@
          *         }]
          *     },
          *     {
-         *         text: "Item 5"
-         *         spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
+         *         text: "Item 5",
+         *         spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
@@ -632,20 +632,20 @@
          * panelBar.insertBefore(
          *     [{
          *         text: "Item 1",
-         *         url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
+         *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
          *     },
          *     {
          *         text: "Item 2",
-         *         content: "text"                             // Content for the content element
+         *         content: "text"                              // Content for the content element
          *     },
          *     {
          *         text: "Item 3",
-         *         contentUrl: "partialContent.html"           // From where to load the item content
+         *         contentUrl: "partialContent.html"            // From where to load the item content
          *     },
          *     {
-         *         text: "Item 4"
-         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
-         *         items: [{                                   // Sub item collection.
+         *         text: "Item 4",
+         *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
+         *         items: [{                                    // Sub item collection.
          *              text: "Sub Item 1"
          *         },
          *         {
@@ -653,8 +653,8 @@
          *         }]
          *     },
          *     {
-         *         text: "Item 5"
-         *         spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
+         *         text: "Item 5",
+         *         spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
@@ -686,20 +686,20 @@
          * panelBar.insertAfter(
          *     [{
          *         text: "Item 1",
-         *         url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
+         *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
          *     },
          *     {
          *         text: "Item 2",
-         *         content: "text"                             // Content for the content element
+         *         content: "text"                              // Content for the content element
          *     },
          *     {
          *         text: "Item 3",
-         *         contentUrl: "partialContent.html"           // From where to load the item content
+         *         contentUrl: "partialContent.html"            // From where to load the item content
          *     },
          *     {
-         *         text: "Item 4"
-         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
-         *         items: [{                                   // Sub item collection.
+         *         text: "Item 4",
+         *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
+         *         items: [{                                    // Sub item collection.
          *              text: "Sub Item 1"
          *         },
          *         {
@@ -707,8 +707,8 @@
          *         }]
          *     },
          *     {
-         *         text: "Item 5"
-         *         spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
+         *         text: "Item 5",
+         *         spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
