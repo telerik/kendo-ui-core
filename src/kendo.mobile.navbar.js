@@ -61,7 +61,7 @@
         * @extends kendo.ui.MobileWidget
         * @param {DomElement} element DOM element
         */
-        init: function(element) {
+        init: function(element, options) {
             MobileWidget.fn.init.call(this, element, options);
             element = this.element;
 
