@@ -378,26 +378,41 @@
                 return ("" + value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
             }
 
-            if (description) {
-                description = description.comment;
-
+            // custom output for descriptions -- enables titled code examples and multiple text sections
+            function outputDescription(description) {
+                var hasTitle = false;
                 for (var i in description.tags) {
                     var tag = description.tags[i];
 
                     switch (tag.title) {
                         case "exampleTitle":
+                            hasTitle = true;
                             output += '<div class="code-sample"><h4 class="code-title">' + tag.desc + '</h4>';
                         break;
 
                         case "example":
+                            if (!hasTitle) {
+                                output += '<div class="code-sample"><h4 class="code-title">Example</h4>';
+                            }
+
                             output += '<pre class="code prettyprint"><code>' + htmlEncode(tag.desc) + '</code></pre></div>';
+                            hasTitle = false;
+                        break;
+
+                        case "param":
+                            // params are separately outputted
                         break;
 
                         case "section":
+                        default:
                             output += (/<[^>]+>/g.test(tag.desc) ? tag.desc : "<p>" + tag.desc + "</p>");
                         break;
                     }
                 }
+            }
+
+            if (description) {
+                outputDescription(description.comment);
             }
         !}
         </div>
@@ -610,23 +625,7 @@
                                 <if test="member.type">: <span class="type">{+new Link().toSymbol(member.type)+}</span></if>
                             </div>
                             <div class="detailBody">
-                                <div class="desc">
-                                    {+resolveLinks(member.desc)+}
-
-                                    <if test="member.srcFile != data.srcFile">
-                                        <br />
-                                        <i>Defined in: </i> {+new Link().toSrc(member.srcFile)+}.
-                                    </if>
-                                </div>
-
-                                <if test="member.example && member.example.length">
-                                    <for each="example" in="member.example">
-                                        <div class="code-sample">
-                                            <h4 class="code-title">Example</h4>
-                                            <pre class="code prettyprint lang-js"><code>{+example+}</code></pre>
-                                        </div>
-                                    </for>
-                                </if>
+                                {! outputDescription(member.comment); !}
 
                                 <if test="member.params.length">
                                 <div class="details-list">
@@ -695,23 +694,7 @@
                         <a name="{+ member.name +}"><code>{+member.name+}</code></a>
                     </div>
                     <div class="detailBody">
-                        <div class="desc">
-                            {+resolveLinks(member.desc)+}
-
-                            <if test="member.srcFile != data.srcFile">
-                                <br />
-                                <i>Defined in: </i> {+new Link().toSrc(member.srcFile)+}.
-                            </if>
-                        </div>
-
-                        <if test="member.example && member.example.length">
-                            <for each="example" in="member.example">
-                                <div class="code-sample">
-                                    <h4 class="code-title">Example</h4>
-                                    <pre class="code prettyprint lang-js"><code>{+example+}</code></pre>
-                                </div>
-                            </for>
-                        </if>
+                        {! outputDescription(member.comment); !}
 
                         <if test="member.params.length > 1">
                             <div class="details-list">
