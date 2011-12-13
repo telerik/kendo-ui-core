@@ -741,6 +741,7 @@
                 } else if (icon.hasClass("k-cancel")) {
                     that.trigger(CANCEL, eventArgs);
                     fileEntry.trigger("t:cancel");
+                    this._checkAllComplete();
                 } else if (icon.hasClass("k-retry")) {
                     fileEntry.trigger("t:retry");
                 }
