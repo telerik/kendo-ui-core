@@ -44,7 +44,6 @@
      *      built-in support for asynchronously loading content from URLs. These URLs should return
      *      HTML fragments that can be loaded in the PanelBar item content area.
      *  </p>
-     *  <br/>
      *  <p>
      *      When PanelBar loads content with Ajax, it is cached so that subsequent
      *      expand/collapse actions do not re-trigger the Ajax request.
@@ -100,15 +99,14 @@
      *  <p>
      *      The PanelBar API provides several methods for dynamically adding or removing
      *      Items. To add items, provide the new item as a JSON object along with a reference
-     *      item that will be used to determine the placement in the hierarchy.
+     *      item that will be used to determine the placement in the hierarchy. The reference
+     *      item is optional when appending.
      *  </p>
-     *  <br/>
      *  <p>
      *      A reference item is simply a target PanelBar Item HTML element that already exists
      *      in the PanelBar. Any valid jQuery selector can be used to obtain a reference to the
      *      target item. For examples, see the PanelBar API demos.
      *  </p>
-     *  </br>
      *  <p>
      *      Removing an item only requires a reference to the target element that should be removed.
      *  </p>
@@ -337,7 +335,7 @@
          * @option {Object} [animation] A collection of <b>Animation</b> objects, used to change default animations. A value of false will disable all animations in the widget.
          * @option {Animation} [animation.open] The animation that will be used when expanding items.
          * @option {Animation} [animation.close] The animation that will be used when collapsing items.
-         * @option {String} [expandMode] <multiple> Specifies if PanelBar should collapse the already expanded item when expanding next item
+         * @option {String} [expandMode] <multiple> Specifies if PanelBar should collapse the already expanded item when expanding next item (mode: "single").
          */
         init: function(element, options) {
             element = $(element);
@@ -449,7 +447,7 @@
         /**
          * Expands the specified PanelBar item/s
          * @param {Selector} element Target item selector.
-         * @param {Boolean} useAnimation Use this parameter to temporary disable the animation.
+         * @param {Boolean} useAnimation Use this parameter to temporary disable the animation. Optional.
          * @example
          * panelBar.expand("#Item1");
          */
@@ -488,7 +486,7 @@
         /**
          * Collapses the specified PanelBar item/s
          * @param {Selector} element Target item selector.
-         * @param {Boolean} useAnimation Use this parameter to temporary disable the animation.
+         * @param {Boolean} useAnimation Use this parameter to temporary disable the animation. Optional.
          * @example
          * panelBar.collapse("#Item1");
          */
@@ -555,7 +553,7 @@
         },
 
         /**
-         * Enables/disables a PanelBar item
+         * Enables/disables PanelBar item/s
          * @param {Selector} element Target element
          * @param {Boolean} enable Desired state
          */
@@ -564,7 +562,7 @@
         },
 
         /**
-         * Disables a PanelBar item
+         * Disables PanelBar item/s
          * @param {Selector} element Target element
          */
         disable: function (element) {
@@ -579,11 +577,29 @@
          * panelBar.append(
          *     [{
          *         text: "Item 1",
-         *         content: "text"
+         *         url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
          *     },
          *     {
          *         text: "Item 2",
-         *         contentUrl: "partialContent.html"
+         *         content: "text"                             // Content for the content element
+         *     },
+         *     {
+         *         text: "Item 3",
+         *         contentUrl: "partialContent.html"           // From where to load the item content
+         *     },
+         *     {
+         *         text: "Item 4"
+         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
+         *         items: [{                                   // Sub item collection.
+         *              text: "Sub Item 1"
+         *         },
+         *         {
+         *              text: "Sub Item 2"
+         *         }]
+         *     },
+         *     {
+         *         text: "Item 5"
+         *         spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
@@ -616,11 +632,29 @@
          * panelBar.insertBefore(
          *     [{
          *         text: "Item 1",
-         *         content: "text"
+         *         url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
          *     },
          *     {
          *         text: "Item 2",
-         *         contentUrl: "partialContent.html"
+         *         content: "text"                             // Content for the content element
+         *     },
+         *     {
+         *         text: "Item 3",
+         *         contentUrl: "partialContent.html"           // From where to load the item content
+         *     },
+         *     {
+         *         text: "Item 4"
+         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
+         *         items: [{                                   // Sub item collection.
+         *              text: "Sub Item 1"
+         *         },
+         *         {
+         *              text: "Sub Item 2"
+         *         }]
+         *     },
+         *     {
+         *         text: "Item 5"
+         *         spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
@@ -652,11 +686,29 @@
          * panelBar.insertAfter(
          *     [{
          *         text: "Item 1",
-         *         content: "text"
+         *         url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
          *     },
          *     {
          *         text: "Item 2",
-         *         contentUrl: "partialContent.html"
+         *         content: "text"                             // Content for the content element
+         *     },
+         *     {
+         *         text: "Item 3",
+         *         contentUrl: "partialContent.html"           // From where to load the item content
+         *     },
+         *     {
+         *         text: "Item 4"
+         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
+         *         items: [{                                   // Sub item collection.
+         *              text: "Sub Item 1"
+         *         },
+         *         {
+         *              text: "Sub Item 2"
+         *         }]
+         *     },
+         *     {
+         *         text: "Item 5"
+         *         spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
@@ -708,7 +760,7 @@
         },
 
         /**
-         * Reloads a PanelBar content from ajax request
+         * Reloads PanelBar content with ajax request
          * @param {Selector} element Target element
          */
         reload: function (element) {
