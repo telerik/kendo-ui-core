@@ -2,8 +2,8 @@
     /**
     * @name kendo.ui.MobileNavBar.Description
     *
-    * @section Put the MobileNavBar widget inside a mobile view or layout header element to display an application navigation bar.
-    * The MobileNavBar usually shows the current view title in the center, and optionally some additional left and right aligned elements (back button, settings button, etc.).
+    * @section MobileNavBar widget is iused inside a mobile view or layout header element to display an application navigation bar.
+    * The MobileNavBar can show the current view title in the center, and optionally some additional left and right aligned elements (back button, settings button, etc.).
     *
     * <h3>Getting Started</h3>
     * The Kendo MobileApplication will automatically initialize the MobileNavBar for every element with <code>role</code> data attribute set to <code>navbar</code> present in the views/layouts markup.

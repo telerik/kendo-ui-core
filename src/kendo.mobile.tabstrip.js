@@ -1,4 +1,42 @@
 (function($, undefined) {
+    /**
+    * @name kendo.ui.MobileTabstrip.Description
+    * @section MobileTabstrip widget is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons.
+    * The looks of the MobileTabstrip vary depending on the user mobile device and operating system.
+    *
+    * <h3>Getting Started</h3>
+    * The Kendo MobileApplication will automatically initialize the MobileTabstrip for every element with <code>role</code> data attribute set to <code>tabstrip</code> present in the views/layouts markup.
+    * Alternatively, it can be initialized using a jQuery selector. The tabstrip element should contain several <code>a</code> elements, which are styled as tabs.
+    * If a Kendo MobileApplication is present, the tabs will be enhanced to navigate within the application views.
+    * @exampleTitle Initialize Kendo Tabstrip based on role data attribute
+    * @example
+    * <div data-role="tabstrip">
+    *   <a href="#index">Home</a>
+    *   <a href="#featured">Featured</a>
+    * </div>
+    *
+    * @exampleTitle Initialize Kendo MobileTabstrip using a jQuery selector
+    * @example
+    * var tabstrip = $("#tabstrip").kendoMobileTabStrip();
+    * @section
+    * <h3>Setting tab icon</h3>
+    * A tab icon can be set in two ways - either by adding an <code>img</code> element inside the <code>a</code> element, or by setting an <code>icon</code> data attribute to the <code>a</code> element.
+    * Kendo MobileTabstrip comes out of the box with several ready to use icons:
+    * <ul>
+    *   <li>TODO</li>
+    * </ul>
+    *
+    * Additional icons may be added by defining the respective css tab class.
+    * @exampleTitle defining custom tabstrip icon
+    * @example
+    * .km-tab-icon-custom {
+    *   background-image: ...
+    * }
+    *
+    * <div data-role="tabstrip">
+    *   <a href="#index" data-icon="custom">Home</a>
+    * </div>
+    */
     var kendo = window.kendo,
         ui = kendo.ui,
         MobileWidget = ui.MobileWidget,
@@ -10,7 +48,14 @@
         SELECT = "select",
         proxy = $.proxy;
 
-    var MobileTabstrip = MobileWidget.extend({
+    var MobileTabstrip = MobileWidget.extend(/** @lends kendo.ui.MobileTabstrip.prototype */{
+        /**
+        * @constructs
+        * @extends kendo.ui.MobileWidget
+        * @param {DomElement} element DOM element
+        * @param {Object} options Configuration options.
+        * @option {Number} [selectedIndex] The index of the initially selected tab.
+        */
         init: function(element, options) {
             var that = this;
 
@@ -38,7 +83,7 @@
             return this.element.children("." + ACTIVE_STATE_CLASS);
         },
 
-        _release: function (e) {
+        _release: function(e) {
             var that = this,
                 item = $(e.currentTarget);
 
@@ -50,7 +95,7 @@
             that._setActiveItem(item);
         },
 
-        _setActiveItem: function (item) {
+        _setActiveItem: function(item) {
             if (!item[0]) {
                 return;
             }
