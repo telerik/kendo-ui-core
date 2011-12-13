@@ -387,12 +387,12 @@
          * menu.append(
          *     [{
          *         text: "Item 1",
-         *         url: "http://www.kendoui.com" // Link URL if navigation is needed, optional.
+         *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
          *     },
          *     {
-         *         text: "Item 2"
-         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
-         *         items: [{
+         *         text: "Item 2",
+         *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
+         *         items: [{                                    // Sub item collection
          *              text: "Sub Item 1"
          *         },
          *         {
@@ -400,8 +400,8 @@
          *         }]
          *     },
          *     {
-         *         text: "Item 3"
-         *         spriteCssClass: "imageClass3" // Item image sprite CSS class, optional.
+         *         text: "Item 3",
+         *         spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
@@ -428,12 +428,12 @@
          * menu.insertBefore(
          *     [{
          *         text: "Item 1",
-         *         url: "http://www.kendoui.com" // Link URL if navigation is needed, optional.
+         *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
          *     },
          *     {
-         *         text: "Item 2"
-         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
-         *         items: [{
+         *         text: "Item 2",
+         *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
+         *         items: [{                                    // Sub item collection
          *              text: "Sub Item 1"
          *         },
          *         {
@@ -441,8 +441,8 @@
          *         }]
          *     },
          *     {
-         *         text: "Item 3"
-         *         spriteCssClass: "imageClass3" // Item image sprite CSS class, optional.
+         *         text: "Item 3",
+         *         spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
@@ -468,12 +468,12 @@
          * menu.insertAfter(
          *     [{
          *         text: "Item 1",
-         *         url: "http://www.kendoui.com" // Link URL if navigation is needed, optional.
+         *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
          *     },
          *     {
-         *         text: "Item 2"
-         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
-         *         items: [{
+         *         text: "Item 2",
+         *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
+         *         items: [{                                    // Sub item collection
          *              text: "Sub Item 1"
          *         },
          *         {
@@ -481,8 +481,8 @@
          *         }]
          *     },
          *     {
-         *         text: "Item 3"
-         *         spriteCssClass: "imageClass3" // Item image sprite CSS class, optional.
+         *         text: "Item 3",
+         *         spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
