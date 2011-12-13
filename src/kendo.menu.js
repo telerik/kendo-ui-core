@@ -386,10 +386,22 @@
          * @example
          * menu.append(
          *     [{
-         *         text: "Item 1"
+         *         text: "Item 1",
+         *         url: "http://www.kendoui.com" // Link URL if navigation is needed, optional.
          *     },
          *     {
          *         text: "Item 2"
+         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
+         *         items: [{
+         *              text: "Sub Item 1"
+         *         },
+         *         {
+         *              text: "Sub Item 2"
+         *         }]
+         *     },
+         *     {
+         *         text: "Item 3"
+         *         spriteCssClass: "imageClass3" // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
@@ -415,10 +427,22 @@
          * @example
          * menu.insertBefore(
          *     [{
-         *         text: "Item 1"
+         *         text: "Item 1",
+         *         url: "http://www.kendoui.com" // Link URL if navigation is needed, optional.
          *     },
          *     {
          *         text: "Item 2"
+         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
+         *         items: [{
+         *              text: "Sub Item 1"
+         *         },
+         *         {
+         *              text: "Sub Item 2"
+         *         }]
+         *     },
+         *     {
+         *         text: "Item 3"
+         *         spriteCssClass: "imageClass3" // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
@@ -443,10 +467,22 @@
          * @example
          * menu.insertAfter(
          *     [{
-         *         text: "Item 1"
+         *         text: "Item 1",
+         *         url: "http://www.kendoui.com" // Link URL if navigation is needed, optional.
          *     },
          *     {
          *         text: "Item 2"
+         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
+         *         items: [{
+         *              text: "Sub Item 1"
+         *         },
+         *         {
+         *              text: "Sub Item 2"
+         *         }]
+         *     },
+         *     {
+         *         text: "Item 3"
+         *         spriteCssClass: "imageClass3" // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
