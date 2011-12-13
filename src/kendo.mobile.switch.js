@@ -16,24 +16,12 @@
         TRANSFORMSTYLE = support.transitions.css + "transform",
         extend = $.extend,
         proxy = $.proxy,
-        slideAnimation = {
-            manimator: ".km-slider-background",
-            animator: ".km-slider-handle"
-        },
         switchAnimation = {
-            all: {
-                manimator: ".km-switch-background",
-                animator: handleSelector,
-                effects: "slideTo",
-                duration: 150
-            },
-            android: {
-                effects: {},
-                duration: 0
-            }
+            manimator: ".km-switch-background",
+            animator: handleSelector,
+            effects: "slideTo",
+            duration: 150
         };
-
-    switchAnimation = os.name in switchAnimation ? switchAnimation[os.name] : switchAnimation.all;
 
     function preventDefault(e) {
         e.preventDefault();
@@ -55,8 +43,8 @@
             that.halfWidth = that.handle.outerWidth() / 2;
             that.snapPart = (that.width - that.halfWidth * 2);
             that.constrain = that.width - that.handle.outerWidth(true);
-            that.animator = element.find(extend({ animator: "animator" in switchAnimation ? switchAnimation.animator : options.handle }, options).animator);
-            that.manimator = element.find(extend({ manimator: switchAnimation.manimator }, options).manimator);
+            that.animator = element.find(switchAnimation.animator);
+            that.manimator = element.find(switchAnimation.manimator);
             that.moveProxy = $.proxy(that.move, that);
             that.stopProxy = $.proxy(that.stop, that);
 
@@ -87,12 +75,13 @@
             that.location = limitValue(that.initial, that.halfWidth, that.constrain + that.halfWidth);
             that.origin = that.manimator.data("origin");
 
-            if (!that.origin && that.origin !== 0) {
+
+            if (!that.origin && that.origin !== 0) { //check for undefined
                that.origin = parseInt(that.manimator.css("margin-left"), 10);
                that.manimator.data("origin", that.origin);
             }
 
-            $(document)
+            $(document) //cache it
                 .bind(MOUSEMOVE, that.moveProxy)
                 .bind(MOUSEUP + " mouseleave", that.stopProxy); // Stop if leaving the simulator/screen
         },
@@ -103,11 +92,14 @@
             var that = this,
                 options = that.options;
 
-            if (Math.abs(that.initial - that.getAxisLocation(e)) <= 2) {
-                options.change({ value: !options.input.checked });
+            if (Math.abs(that.initial - that.getAxisLocation(e)) <= 2) { //if handler is moved less then 2 px then toggle!
+                options.change({ value: !options.input.checked }); //Math.round(position / that.snapPart); === options.input.checked
             } else {
                 options.change({ value: that.setPosition(e) });
             }
+            //value should be 0 || 1
+
+            //always pass the initial-location().... in the change desides what to do...
 
             $(document)
                 .unbind(MOUSEMOVE, that.moveProxy)
@@ -116,6 +108,8 @@
 
         setPosition: function(e) {
             var that = this;
+
+            //location should not be cached...
             that.location = limitValue(that.getAxisLocation(e), that.halfWidth, that.constrain + that.halfWidth);
 
             var position = that.location - that.halfWidth;
@@ -124,6 +118,13 @@
             that.manimator.css("margin-left", that.origin + position);
 
             return Math.round(position / that.snapPart);
+        },
+
+        position: function(position) { //number
+            var that = this;
+
+            that.animator.css(TRANSFORMSTYLE, "translatex(" + position + "px)"); // TODO: remove halfWidth
+            that.manimator.css("margin-left", that.origin + position);
         }
     });
 
@@ -270,7 +271,7 @@
 
             handle.parent().before("<span class='km-switch-wrapper'><span class='km-switch-background'></span></span>");
 
-            that.animator = "animator" in switchAnimation ? that.element.find(switchAnimation.animator) : handle;
+            that.animator = that.element.find(switchAnimation.animator);
             that.mAnimator = that.element.find(switchAnimation.manimator);
 
             var checked = input[0].checked;
