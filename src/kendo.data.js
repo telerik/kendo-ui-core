@@ -992,13 +992,50 @@
          *          }
          *      }
          *  });
+         * @option {String} [schema.type] Specify the type of schema { xml|json|odata }
          * @option {Function} [schema.parse] Executed before deserialized data is read.
          *  Appropriate for preprocessing of the raw data.
          *
          * @option {Function} [schema.data] Should return the deserialized data.
          * @option {Function} [schema.total] Should return the total number of records.
-         * @option {Function} [schema.group] Used instead of data function if remote grouping operation is executed.
+         * @option {Function} [schema.aggregates] Should return the calculated aggregates.
+         * @option {Function} [schema.groups] Used instead of data function if remote grouping operation is executed.
          *  Returns the deserialized data.
+         * @option {Object} [schema.model] Describes the Model
+         * _example
+         *    var dataSource = new kendo.data.DataSource({
+         *        //..
+         *         schema: {
+         *             model: {
+         *                 id: "ProductID",
+         *                 fields: {
+         *                      ProductID: {
+         *                         //this field will not be editable (default value is true)
+         *                         editable: false,
+         *                         // a defaultValue will not be assigned (default value is false)
+         *                         nullable: true
+         *                      },
+         *                      ProductName: {
+         *                          validation: { //set validation rules
+         *                              required: true
+         *                          }
+         *                      },
+         *                      UnitPrice: {
+         *                        //data type of the field {Number|String|Boolean|Date} default is String
+         *                        type: "number",
+         *                        // used when new model is created
+         *                        defaultValue: 42,
+         *                        validation: {
+         *                            required: true,
+         *                            min: 1
+         *                        }
+         *                    }
+         *                }
+         *            }
+         *        }
+         *    })
+         * @option {Number|String} [schema.model.id] The field use to identify an unique Model instance
+         * @option {Object} [schema.model.fields] Describes the model fields and their properties
          **/
         init: function(options) {
             var that = this, id, model, transport;
@@ -1098,7 +1135,7 @@
 
         /**
          * Retrieves a Model instance by given id.
-         * @param {Number} id of the model to be retrieved
+         * @param {Number} id The id of the model to be retrieved
          * @returns {Object} Model instance if found
          */
         get: function(id) {
@@ -1114,7 +1151,7 @@
 
         /**
          * Adds a new Model instance to the DataSource
-         * @param {Object} Either a Model instance or object from which the Model will be created
+         * @param  {Object} model Either a Model instance or raw object from which the Model will be created
          * @returns {Object} The Model instance which has been added
          */
         add: function(model) {
@@ -1123,7 +1160,8 @@
 
         /**
          * Inserts a new Model instance to the DataSource.
-         * @param {Object} Either a Model instance or object from which the Model will be created
+         * @param {Number} index Index at which the Model will be inserted
+         * @param {Object} model Either a Model instance or raw object from which the Model will be created
          * @returns {Object} The Model instance which has been inserted
          */
         insert: function(index, model) {
@@ -1193,8 +1231,8 @@
         },
 
         /**
-         * Removes a Model instance from the DataSource.
-         * @param {Object} Model instance to be removed
+         * Remove given Model instance from the DataSource.
+         * @param {Object} model Model instance to be removed
          */
         remove: function(model) {
             this._set.remove(model);
@@ -1287,7 +1325,7 @@
 
         /**
          * Returns the raw data record at the specified index
-         * @param {Number} The zero-based index of the data record
+         * @param {Number} index The zero-based index of the data record
          * @returns {Object}
          */
         at: function(index) {
