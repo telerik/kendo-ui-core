@@ -143,12 +143,12 @@
         * @extends kendo.ui.List
         * @param {DomElement} element DOM element
         * @param {Object} options Configuration options.
-        * @option {Object | kendo.data.DataSource } [dataSource] The set of data that the AutoComplete will be bound to.  
+        * @option {Object | kendo.data.DataSource } [dataSource] The set of data that the AutoComplete will be bound to.
 	*  Either a local JavaScript object, or an instance of the Kendo UI DataSource.
-        * _example 
+        * _example
 	* var items = [ { Name: "Item 1" }, { Name: "Item 2"} ];
-	* $("#autoComplete").kendoAutoComplete({ dataSource: items });        
- 	* //	  
+	* $("#autoComplete").kendoAutoComplete({ dataSource: items });
+ 	* //
 	* // or
  	* //
 	* $("#autocomplete").kendoAutoComplete({
@@ -163,7 +163,7 @@
 	* // disable the autocomplete when it is created (enabled by default)
 	* $("#autoComplete").kendoAutoComplete({
 	*     enable: false
-	* });	
+	* });
         * @option {Boolean} [suggest] <false> Controls whether the AutoComplete should automatically auto-type the rest of text.
 	* _example
 	* // turn on auto-typing (off by default)
@@ -186,9 +186,9 @@
 	* @option {String} [dataTextField] <null> Sets the field of the data item that provides the text content of the list items.
 	* _example
 	* var items = [ { ID: 1, Name: "Item 1" }, { ID: 2, Name: "Item 2"} ];
-	* $("#autoComplete").kendoAutoComplete({ 
+	* $("#autoComplete").kendoAutoComplete({
 	*     dataSource: items,
-	*     dataTextField: "Name" 
+	*     dataTextField: "Name"
 	* });
 	* @option {String} [filter] <"startswith"> Defines the type of filtration. This value is handled by the remote data source.
 	* _example
@@ -270,7 +270,7 @@
 	    *     }
 	    * });
 	    * @example
-	    * var autoComplete = $("#autoComplete").data("kendoAutoComplete"); 
+	    * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
 	    * $("#autoComplete").data("kendoAutoComplete").bind("change", function(e) {
 	    *     // handle event
 	    * });
