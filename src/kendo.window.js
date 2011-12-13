@@ -763,6 +763,11 @@
 
             if (isLocalUrl(url)) {
                 that._ajaxRequest(options);
+            } else {
+                var iframe = $(that.element).find(".k-content-frame")[0];
+                if (iframe) {
+                    iframe.src = url || iframe.src;
+                }
             }
 
             return that;
