@@ -59,14 +59,12 @@
      *  <p>
      *      The TabStrip API provides several methods for dynamically adding or removing Tabs. To add tabs,
      *      provide the new item as a JSON object along with a reference item that will be used to determine
-     *      the placement in the TabStrip.
+     *      the placement in the TabStrip. The append method doesn't need a reference item.
      *  <p>
-     *  <br/>
      *  <p>
      *      A reference item is simply a target Tab HTML element that already exists in the TabStrip. Any valid
      *      jQuery selector can be used to obtain a reference to the target item. For examples, see the <a href="../tabstrip/api.html" title="TabStrip  API demos">TabStrip  API demos</a>.
      *  </p>
-     *  <br/>
      *  <p>
      *      Removing an item only requires a reference to the target element that should be removed.
      *  </p>
@@ -321,7 +319,7 @@
                  * @event
                  * @param {Event} e
                  * @param {Element} e.item The selected item
-                 * @param {Element} e.item The loaded content element
+                 * @param {Element} e.contentElement The loaded content element
                  */
                 CONTENTLOAD
             ], that.options);
@@ -365,7 +363,7 @@
 
         /**
          * Selects the specified TabStrip tab/s. If called without arguments - returns the selected tab.
-         * @param {Selector} element Target item selector.
+         * @param {Selector} element Target tab selector.
          * @example
          * tabStrip.select("#Item1");
          */
@@ -385,7 +383,7 @@
         },
 
         /**
-         * Enables/disables a TabStrip tab
+         * Enables/disables TabStrip tab/s
          * @param {Selector} element Target element
          * @param {Boolean} enable Desired state
          */
@@ -394,8 +392,8 @@
         },
 
         /**
-         * Disables a TabStrip tab
-         * @param {Selector} element Target element
+         * Disables TabStrip tab/s
+         * @param {Selector} element Target tab element
          */
         disable: function (element) {
             this._toggleDisabled(element, false);
@@ -403,8 +401,8 @@
 
 
         /**
-         * Reloads a TabStrip tab from ajax request
-         * @param {Selector} element Target element
+         * Reloads TabStrip tab/s with ajax request
+         * @param {Selector} element Target tab element
          */
         reload: function (element) {
             var that = this;
@@ -426,11 +424,23 @@
          * tabStrip.append(
          *     [{
          *         text: "Item 1",
-         *         content: "text"
+         *         url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
          *     },
          *     {
          *         text: "Item 2",
-         *         contentUrl: "partialContent.html"
+         *         content: "text"                             // Content for the content element
+         *     },
+         *     {
+         *         text: "Item 3",
+         *         contentUrl: "partialContent.html"           // From where to load the item content
+         *     },
+         *     {
+         *         text: "Item 4",
+         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
+         *     },
+         *     {
+         *         text: "Item 5",
+         *         spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
          *     }]
          * );
          */
@@ -455,11 +465,23 @@
          * tabStrip.insertBefore(
          *     [{
          *         text: "Item 1",
-         *         content: "text"
+         *         url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
          *     },
          *     {
          *         text: "Item 2",
-         *         contentUrl: "partialContent.html"
+         *         content: "text"                             // Content for the content element
+         *     },
+         *     {
+         *         text: "Item 3",
+         *         contentUrl: "partialContent.html"           // From where to load the item content
+         *     },
+         *     {
+         *         text: "Item 4",
+         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
+         *     },
+         *     {
+         *         text: "Item 5",
+         *         spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
@@ -486,11 +508,23 @@
          * tabStrip.insertAfter(
          *     [{
          *         text: "Item 1",
-         *         content: "text"
+         *         url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
          *     },
          *     {
          *         text: "Item 2",
-         *         contentUrl: "partialContent.html"
+         *         content: "text"                             // Content for the content element
+         *     },
+         *     {
+         *         text: "Item 3",
+         *         contentUrl: "partialContent.html"           // From where to load the item content
+         *     },
+         *     {
+         *         text: "Item 4",
+         *         imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
+         *     },
+         *     {
+         *         text: "Item 5",
+         *         spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
          * );
@@ -775,6 +809,10 @@
             return true;
         },
 
+        /**
+         * Returns the contentElement of a an item by its index.
+         * @param {int} itemIndex Target tab index
+         */
         contentElement: function (itemIndex) {
             if (isNaN(itemIndex - 0)) return;
 
