@@ -548,6 +548,7 @@
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
+            element[0].style.width = "";
             that.wrapper = wrapper.addClass("k-widget k-numerictextbox").show();
             that._inputWrapper = $(wrapper[0].firstChild);
         }
