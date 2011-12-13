@@ -200,14 +200,35 @@
 	  * $("#calendar").kendoCalendar({
 	  *     depth: "year"
 	  * });
-	  * @option {Object} [month] Specifies the template to use when in month view
-	  * _example
-	  * $("#calendar").kendoCalendar({
-   	  *      month: {
-    	  *         content: // custom template goes here 
-    	  *      }
-    	  * });
-          */ 
+        * @option {Function} [footer] <> Template to be used for rendering the footer. If false, the footer will not be rendered.
+         * _example
+         *
+         *  //calendar intialization
+         *  &lt;script&gt;
+         *      $("#calendar").kendoCalendar({
+         *          footer: kendo.template("Today - #=kendo.toString(data, 'd') #")
+         *      });
+         *  &lt;/script&gt;
+         * @option {Object} [month] <> Templates for the cells rendered in the "month" view.
+         * @option {Function} [month.content] <> Template to be used for rendering the cells in the "month" view, which are in range.
+         * _example
+         *  //template
+         *  &lt;script id="cellTemplate" type="text/x-kendo-tmpl"&gt;
+         *      &lt;div class="${ data.value < 10 ? exhibition : party }"&gt;
+         *      &lt;/div&gt;
+         *      ${ data.value }
+         *  &lt;/script&gt;
+         *
+         *  //calendar intialization
+         *  &lt;script&gt;
+         *      $("#calendar").kendoCalendar({
+         *          month: {
+         *             content:  kendo.template($("#cellTemplate").html()),
+         *          }
+         *      });
+         *  &lt;/script&gt;
+         * @option {Function} [month.empty] <> Template to be used for rendering the cells in the "month" view, which are not in the min/max range.
+         */
         init: function(element, options) {
             var that = this, value;
 
