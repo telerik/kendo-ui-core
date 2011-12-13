@@ -685,6 +685,7 @@
 
         /**
          * Maximizes a window so that it fills the entire screen.
+         * @function
          */
         maximize: sizingAction("maximize", function() {
             var that = this,
@@ -711,6 +712,7 @@
 
         /**
          * Minimizes a window to its title bar.
+         * @function
          */
         minimize: sizingAction("minimize", function() {
             this.wrapper.css({
