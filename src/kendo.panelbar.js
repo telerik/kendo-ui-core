@@ -411,7 +411,7 @@
                  * @event
                  * @param {Event} e
                  * @param {Element} e.item The selected item
-                 * @param {Element} e.item The loaded content element
+                 * @param {Element} e.contentElement The loaded content element
                  */
                 CONTENTLOAD
             ], that.options);
@@ -705,6 +705,20 @@
                 updateArrow(parent);
                 updateFirstLast(parent);
             }
+        },
+
+        /**
+         * Reloads a PanelBar content from ajax request
+         * @param {Selector} element Target element
+         */
+        reload: function (element) {
+            var that = this;
+
+            $(element).each(function () {
+                var item = $(this);
+
+                that._ajaxRequest(item, item.children("." + CONTENT), !item.is(VISIBLE));
+            });
         },
 
         _insert: function (item, referenceItem, parent) {
