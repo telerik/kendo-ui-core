@@ -207,6 +207,26 @@
     * $("#autoComplete").kendoAutoComplete({
     *     separator: ", "
 	* });
+        * @option {Function} [template] Template to be used for rendering the items in the list.
+        * _example
+        *  //template
+        * &lt;script id="template" type="text/x-kendo-tmpl"&gt;
+        *       # if (data.BoxArt.SmallUrl) { #
+        *           &lt;img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" /&gt;Title:${ data.Name }, Year: ${ data.Name }
+        *       # } else { #
+        *           &lt;img alt="${ data.Name }" /&gt;Title:${ data.Name }, Year: ${ data.Name }
+        *       # } #
+        *  &lt;/script&gt;
+        *
+        *  //autocomplete intialization
+        *  &lt;script&gt;
+        *      $("#autocomplete").kendoAutoComplete({
+        *          dataSource: dataSource,
+        *          dataTextField: "Name",
+        *          dataValueField: "Id",
+        *          template: kendo.template($("#template").html())
+        *      });
+        *  &lt;/script&gt;
         */
         init: function (element, options) {
             var that = this;
