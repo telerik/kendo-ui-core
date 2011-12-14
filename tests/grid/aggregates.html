@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid aggregates</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.groupable.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Grid aggregates</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                DataSource = kendo.data.DataSource;
+
+            function table() {
+                return document.body.appendChild(document.createElement("table"));
+            }
+
+             module("kendo.ui.Grid aggregates", {
+                setup: function() {
+                },
+                teardown: function() {
+                    $("div.k-grid").remove();
+                }
+            });
+
+            test("footer row is added to the grid if data source aggregates are set", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1},{foo: 2},{foo: 3}],
+                        aggregate: { field: "foo", aggregate: "count" }
+                    }
+                }),
+                footer = grid.wrapper.children("div.k-grid-footer");
+                ok(footer.length);
+            });
+
+            test("footer row is not added to the grid if data source aggregates are not set", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1},{foo: 2},{foo: 3}]
+                    }
+                });
+                ok(!grid.wrapper.children("div.k-grid-footer").length);
+            });
+
+            test("single footer row is rendered on multiple datasource rebind", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1},{foo: 2},{foo: 3}]
+                    },
+                    columns: [ { field: "foo", footerTemplate: "baz" } ]
+                });
+                grid.dataSource.read();
+                grid.dataSource.read();
+                equal(grid.wrapper.children("div.k-grid-footer").length, 1);
+            });
+
+            test("single footer row is rendered on multiple datasource rebind with no scrolling", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1},{foo: 2},{foo: 3}]
+                    },
+                    scrollable: false,
+                    columns: [ { field: "foo", footerTemplate: "baz" } ]
+                });
+                grid.dataSource.read();
+                grid.dataSource.read();
+                equal(grid.table.find("tfoot>tr.k-footer-template").length, 1);
+            });
+
+            test("footer row is added before the pager if datasource aggregates are set and paging is enabled", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1},{foo: 2},{foo: 3}],
+                        aggregate: { field: "foo", aggregate: "count" }
+                    },
+                    pageable: true
+                }),
+                footer = grid.wrapper.children("div.k-grid-footer");
+                ok(footer.length);
+                ok(footer.next(".k-grid-pager").length);
+            });
+
+            test("footer row is rendered in the tfoot if no scrolling is enabled", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1},{foo: 2},{foo: 3}],
+                        aggregate: { field: "foo", aggregate: "count" }
+                    },
+                    scrollable: false
+                })
+
+                ok(grid.table.find("tfoot>tr.k-footer-template").length);
+            });
+
+            test("footer cell is rendered for each column", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2}],
+                        aggregate: { field: "foo", aggregate: "count" }
+                    }
+                }),
+                footer = grid.wrapper.children("div.k-grid-footer");
+
+                equal(footer.find("tr.k-footer-template").find("td").length, 2);
+            });
+
+            test("column footer template are rendered", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2}]
+                    },
+                    columns: [ { field: "foo", footerTemplate: "bar" },"bar" ]
+                }),
+                footer = grid.wrapper.children("div.k-grid-footer"),
+                footerCells = footer.find("tr.k-footer-template").find("td");
+
+                equal(footerCells.first().text(), "bar");
+                equal(footerCells.last().html(), "&nbsp;");
+            });
+
+            test("column footer template are rendered no scrolling", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2}]
+                    },
+                    scrollable: false,
+                    columns: [ { field: "foo", footerTemplate: "bar" },"bar" ]
+                }),
+                footerCells = grid.table.find("tr.k-footer-template").find("td");
+
+                equal(footerCells.length, 2);
+                equal(footerCells.first().text(), "bar");
+                equal(footerCells.last().html(), "&nbsp;");
+            });
+
+            test("column footer template as function are rendered", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2}]
+                    },
+                    columns: [ { field: "foo", footerTemplate: function() { return "bar" } },"bar" ]
+                }),
+                footer = grid.wrapper.children("div.k-grid-footer"),
+                footerCells = footer.find("tr.k-footer-template").find("td");
+
+                equal(footerCells.first().text(), "bar");
+                equal(footerCells.last().html(), "&nbsp;");
+            });
+
+            test("column footer template with aggregate expression", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2}],
+                        aggregate: { field: "foo", aggregate: "count" }
+                    },
+                    columns: [ { field: "foo", footerTemplate: "count:#=count#" },"bar" ]
+                }),
+                footer = grid.wrapper.children("div.k-grid-footer"),
+                footerCells = footer.find("tr.k-footer-template").find("td");
+
+                equal(footerCells.first().text(), "count:1");
+                equal(footerCells.last().html(), "&nbsp;");
+            });
+
+            test("column footer template with both aggregate expression and column template", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2}],
+                        aggregate: { field: "foo", aggregate: "count" }
+                    },
+                    columns: [ { field: "foo", footerTemplate: "count:#=count#" }, { field: "bar", footerTemplate: "baz" } ]
+                }),
+                footer = grid.wrapper.children("div.k-grid-footer"),
+                footerCells = footer.find("tr.k-footer-template").find("td");
+
+                equal(footerCells.first().text(), "count:1");
+                equal(footerCells.last().text(), "baz");
+            });
+
+            test("column width is set to the footer cell", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2}]
+                    },
+                    columns: [ { field: "foo", footerTemplate: "foo", width: "100px" } ]
+                }),
+                footer = grid.wrapper.children("div.k-grid-footer"),
+                col  = footer.find("colgroup").find("col").first();
+
+                equal(col.width(), "100");
+            });
+
+            test("group cell is added to footer row when grid is groupped", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2} ]
+                    },
+                    columns: [ { field: "foo", footerTemplate: "foo", width: "100px" } , "bar" ]
+                });
+                grid.dataSource.group("foo");
+                var footer = grid.wrapper.children("div.k-grid-footer"),
+                cells = footer.find("tr.k-footer-template").find("td");
+
+                equal(cells.length, 3);
+                ok(cells.first().hasClass("k-group-cell"));
+            });
+
+            test("group cell is added to footer row when grid is initially groupped", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2} ],
+                        group: { field: "foo" }
+                    },
+                    columns: [ { field: "foo", footerTemplate: "foo", width: "100px" } , "bar" ]
+                }),
+                footer = grid.wrapper.children("div.k-grid-footer"),
+                cells = footer.find("tr.k-footer-template").find("td");
+
+                equal(cells.length, 3);
+                ok(cells.first().hasClass("k-group-cell"));
+            });
+
+            test("group cell is added to footer row when grid is initially groupped no scrolling", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2} ],
+                        group: { field: "foo" }
+                    },
+                    scrollable: false,
+                    columns: [ { field: "foo", footerTemplate: "foo", width: "100px" } , "bar" ]
+                }),
+                cells = grid.table.find("tr.k-footer-template").find("td");
+
+                equal(cells.length, 3);
+                ok(cells.first().hasClass("k-group-cell"));
+            });
+
+            test("hierarchy cell is added to footer row when grid has detail template no scrolling", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2} ]
+                    },
+                    scrollable: false,
+                    columns: [ { field: "foo", footerTemplate: "foo", width: "100px" } , "bar" ],
+                    detailTemplate: " bar"
+                }),
+                cells = grid.table.find("tr.k-footer-template").find("td");
+
+                equal(cells.length, 3);
+                ok(cells.first().hasClass("k-hierarchy-cell"));
+            });
+
+            test("hierarchy cell is added to footer row when grid has detail template", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2} ]
+                    },
+                    columns: [ { field: "foo", footerTemplate: "foo", width: "100px" } , "bar" ],
+                    detailTemplate: " bar"
+                }),
+                cells = grid.wrapper.find("tr.k-footer-template").find("td");
+
+                equal(cells.length, 3);
+                ok(cells.first().hasClass("k-hierarchy-cell"));
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

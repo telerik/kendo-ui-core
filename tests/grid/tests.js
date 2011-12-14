@@ -28,6 +28,10 @@ tests.push(
         title: "grid grouping"
     },
     {
+        page: "grid/aggregates.html",
+        title: "grid aggregates"
+    },
+    {
         page: "grid/virtualscrolling.html",
         title: "virtual scrolling"
     },
