@@ -1,14 +1,18 @@
 (function($, undefined) {
     /**
     * @name kendo.ui.MobileTabstrip.Description
-    * @section MobileTabstrip widget is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons.
+    * @section The MobileTabstrip widget is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons.
     * The looks of the MobileTabstrip vary depending on the user mobile device and operating system.
     *
     * <h3>Getting Started</h3>
     * The Kendo MobileApplication will automatically initialize the MobileTabstrip for every element with <code>role</code> data attribute set to <code>tabstrip</code> present in the views/layouts markup.
-    * Alternatively, it can be initialized using a jQuery selector. The tabstrip element should contain several <code>a</code> elements, which are styled as tabs.
-    * If a Kendo MobileApplication is present, the tabs will be enhanced to navigate within the application views.
-    * @exampleTitle Initialize Kendo Tabstrip based on role data attribute
+    * Alternatively, it can be initialized using a jQuery selector. The tabstrip element should contain several <code>a</code> elements.
+    *
+    * <h3>Kendo MobileApplication integration</h3>
+    * If a Kendo MobileApplication is initialized, the tabs of the tabstrip will automatically navigate within the application's views.
+    * When the application navigates between views, it updates the tabstrip's currently selected tab, based on the current view URL.
+    *
+    * @exampleTitle Initialize Kendo MobileTabstrip based on role data attribute.
     * @example
     * <div data-role="tabstrip">
     *   <a href="#index">Home</a>
@@ -19,15 +23,16 @@
     * @example
     * var tabstrip = $("#tabstrip").kendoMobileTabStrip();
     * @section
-    * <h3>Setting tab icon</h3>
+    * <h3>Tab icons</h3>
     * A tab icon can be set in two ways - either by adding an <code>img</code> element inside the <code>a</code> element, or by setting an <code>icon</code> data attribute to the <code>a</code> element.
     * Kendo MobileTabstrip comes out of the box with several ready to use icons:
+    *
     * <ul>
     *   <li>TODO</li>
     * </ul>
     *
-    * Additional icons may be added by defining the respective css tab class.
-    * @exampleTitle defining custom tabstrip icon
+    * Additional icons may be added by defining the respective CSS tab class. If the <code>icon</code> data attribute is set to <code>custom</code>, the tab will receive <code>km-tab-icon-custom</code> CSS class.
+    * @exampleTitle Define custom tabstrip icon.
     * @example
     * .km-tab-icon-custom {
     *   background-image: ...
@@ -52,9 +57,9 @@
         /**
         * @constructs
         * @extends kendo.ui.MobileWidget
-        * @param {DomElement} element DOM element
+        * @param {DomElement} element DOM element.
         * @param {Object} options Configuration options.
-        * @option {Number} [selectedIndex] The index of the initially selected tab.
+        * @option {Number} [selectedIndex] <0> The index of the initially selected tab.
         */
         init: function(element, options) {
             var that = this;
@@ -75,10 +80,27 @@
                             .eq(options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
         },
 
+        /**
+        * Set the MobileTabstrip active item to the tab with the specified url.
+        * @param {String} url The url of the tab.
+        *
+        * @example
+        * <div data-role="tabstrip" id="tabstrip"> <a href="#foo">Foo</a> </div>
+        *
+        * <script>
+        *     $(function() {
+        *         $("#tabstrip").data("kendoMobileTabstrip").switchTo("#foo");
+        *     });
+        * </script>
+        */
         switchTo: function(url) {
             this._setActiveItem(this.element.find('a[href$="' + url + '"]'));
         },
 
+        /**
+        * Get the currently selected tab element.
+        * @returns {jQueryObject} the currenlty selected tab element.
+        */
         currentItem: function() {
             return this.element.children("." + ACTIVE_STATE_CLASS);
         },
