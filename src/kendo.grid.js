@@ -1914,6 +1914,11 @@
                         if (th.title) {
                             html += kendo.attr("title") + "='" + th.title + "'";
                         }
+
+                        if (th.aggregates) {
+                            html += kendo.attr("aggregates") + "='" + th.aggregates + "'";
+                        }
+
                         html += ">" + (th.title || th.field || "") + "</th>";
                     } else {
                         html += "<th>" + (th.title || "") + "</th>";
