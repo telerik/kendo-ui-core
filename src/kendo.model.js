@@ -290,6 +290,9 @@
         },
 
         indexOf: function(dataItem) {
+            if (!dataItem) {
+                return;
+            }
             var that = this,
                 model = that.options.model,
                 id = model.id(dataItem);

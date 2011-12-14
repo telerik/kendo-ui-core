@@ -329,6 +329,30 @@
                 modelSet.cancelChanges();
                 ok(called);
             });
+
+            test("indexOf returns the index of dataItem", function() {
+                var data = [ { id: 1, foo: "bar"},{ id: 2, foo: "bar2"} ];
+
+                setup( { data: data });
+
+                equal(modelSet.indexOf(data[1]), 1);
+            });
+
+            test("indexOf returns undefined if item does not exists", function() {
+                var data = [ { id: 1, foo: "bar"},{ id: 2, foo: "bar2"} ];
+
+                setup( { data: data });
+
+                ok(!modelSet.indexOf({ id: 3 }));
+            });
+
+            test("indexOf returns undefined if null pass as dataItem", function() {
+                var data = [ { id: 1, foo: "bar"},{ id: 2, foo: "bar2"} ];
+
+                setup( { data: data });
+
+                equal(modelSet.indexOf(undefined), undefined);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
