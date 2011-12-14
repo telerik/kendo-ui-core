@@ -32,108 +32,6 @@
         return Math.max( minLimit, Math.min( maxLimit, value));
     }
 
-    var Axis = kendo.Class.extend({
-        init: function (element, options) {
-            var that = this;
-
-            that.element = element;
-            that.options = options;
-            that.width = element.outerWidth();
-            that.handle = element.find(options.handle);
-            that.halfWidth = that.handle.outerWidth() / 2;
-            that.snapPart = (that.width - that.halfWidth * 2);
-            that.constrain = that.width - that.handle.outerWidth(true);
-            that.animator = element.find(switchAnimation.animator);
-            that.manimator = element.find(switchAnimation.manimator);
-            that.moveProxy = $.proxy(that.move, that);
-            that.stopProxy = $.proxy(that.stop, that);
-
-            element.bind(MOUSEDOWN, $.proxy(that.start, that));
-        },
-
-        getAxisLocation: function(e) {
-            return kendo.touchLocation(e).x - this.element.offset().left;
-        },
-
-        //move the handler
-        //a) get new location
-        //b) position  handler on new location
-        //c) raise slide event ???
-        move: function(e) {
-            var that = this;
-
-            that.location = limitValue(that.getAxisLocation(e), that.halfWidth, that.constrain + that.halfWidth);
-
-            var position = that.location - that.halfWidth;
-
-            that.position(position);
-        },
-
-        //get handler
-        //a) position handler on the mouse position
-        //b) save this initial position ???
-        //c) wire the mouse move event
-        start: function(e) {
-            preventDefault(e);
-
-            var that = this;
-
-            that.initial = that.getAxisLocation(e);
-            that.location = limitValue(that.initial, that.halfWidth, that.constrain + that.halfWidth);
-            that.origin = that.manimator.data("origin");
-
-
-            if (!that.origin && that.origin !== 0) { //check for undefined
-               that.origin = parseInt(that.manimator.css("margin-left"), 10);
-               that.manimator.data("origin", that.origin);
-            }
-
-            $(document) //cache it
-                .bind(MOUSEMOVE, that.moveProxy)
-                .bind(MOUSEUP + " mouseleave", that.stopProxy); // Stop if leaving the simulator/screen
-        },
-
-        //release handler
-        //a) stop moving the handler
-        //b) get current location
-        //c) check if the current location is bigger/less than half or it is (0 or 1).
-        //d) animate depending on c)
-        stop: function(e) {
-            preventDefault(e);
-
-            var that = this,
-                options = that.options,
-                location = that.getAxisLocation(e);
-
-            //change is actually like the change always return 0 or 1
-
-            if (Math.abs(that.initial - location) <= 2) { //if handler is moved less then 2 px then toggle!
-                options.change({ value: !options.input.checked }); //Math.round(position / that.snapPart); === options.input.checked
-            } else {
-                //location should not be cached...
-                var position = that.location - that.halfWidth;
-
-                that.position(position);
-
-                options.change({ value: Math.round(position / that.snapPart) });
-            }
-            //value should be 0 || 1
-
-            //always pass the initial-location().... in the change desides what to do...
-
-            $(document)
-                .unbind(MOUSEMOVE, that.moveProxy)
-                .unbind(MOUSEUP + " mouseleave", that.stopProxy);
-        },
-
-        position: function(position) { //number
-            var that = this;
-
-            that.animator.css(TRANSFORMSTYLE, "translatex(" + position + "px)"); // TODO: remove halfWidth
-            that.manimator.css("margin-left", that.origin + position);
-        }
-    });
-
     var MobileSwitch = MobileWidget.extend({
         init: function(element, options) {
             var that = this;
@@ -152,21 +50,22 @@
 
             that._wrap();
 
-
-            new Axis(element, extend({}, options, {
-                slide: function(options) {
-                    //triggers 0 or 1
-                    that.trigger(SLIDE, options);
-                },
-                change: proxy(that._snap, that),
-                input: that.input[0]
-            }));
-
+            that.width = element.outerWidth();
+            that.handle = element.find(options.handle);
+            that.halfWidth = that.handle.outerWidth() / 2;
+            that.snapPart = (that.width - that.halfWidth * 2);
+            that.constrain = that.width - that.handle.outerWidth(true);
+            that.animator = element.find(switchAnimation.animator);
+            that.manimator = element.find(switchAnimation.manimator);
+            that._moveProxy = $.proxy(that._move, that);
+            that._stopProxy = $.proxy(that._stop, that);
             that._toggleProxy = proxy(that._toggle, that);
             that._triggerProxy = proxy(that._trigger, that);
 
+            element.bind(MOUSEDOWN, $.proxy(that._start, that));
+
             that.bind([
-                SLIDE,
+                SLIDE, //these events are not triggered
                 TOGGLE
             ], options);
 
@@ -212,6 +111,85 @@
             }
         },
 
+        _getAxisLocation: function(e) {
+            return kendo.touchLocation(e).x - this.element.offset().left;
+        },
+
+        //move the handler
+        //a) get new location
+        //b) position  handler on new location
+        //c) raise slide event ???
+        _move: function(e) {
+            var that = this;
+
+            that.location = limitValue(that._getAxisLocation(e), that.halfWidth, that.constrain + that.halfWidth);
+
+            var position = that.location - that.halfWidth;
+
+            that._position(position);
+        },
+
+        //get handler
+        //a) position handler on the mouse position
+        //b) save this initial position ???
+        //c) wire the mouse move event
+        _start: function(e) {
+            preventDefault(e);
+
+            var that = this;
+
+            that.initial = that._getAxisLocation(e);
+            that.location = limitValue(that.initial, that.halfWidth, that.constrain + that.halfWidth);
+            that.origin = that.manimator.data("origin");
+
+            if (!that.origin && that.origin !== 0) { //check for undefined
+               that.origin = parseInt(that.manimator.css("margin-left"), 10);
+               that.manimator.data("origin", that.origin);
+            }
+
+            $(document) //cache it
+                .bind(MOUSEMOVE, that._moveProxy)
+                .bind(MOUSEUP + " mouseleave", that._stopProxy); // Stop if leaving the simulator/screen
+        },
+
+        //release handler
+        //a) stop moving the handler
+        //b) get current location
+        //c) check if the current location is bigger/less than half or it is (0 or 1).
+        //d) animate depending on c)
+        _stop: function(e) {
+            preventDefault(e);
+
+            var that = this,
+                location = that._getAxisLocation(e);
+
+            //change is actually like the change always return 0 or 1
+            if (Math.abs(that.initial - location) <= 2) { //if handler is moved less then 2 px then toggle!
+                that._snap(!that.input[0].checked); //Math.round(position / that.snapPart); === options.input.checked
+            } else {
+                //location should not be cached...
+                var position = that.location - that.halfWidth;
+
+                //that.position(position);
+
+                that._snap(Math.round(position / that.snapPart));
+            }
+            //value should be 0 || 1
+
+            //always pass the initial-location().... in the change desides what to do...
+
+            $(document)
+                .unbind(MOUSEMOVE, that._moveProxy)
+                .unbind(MOUSEUP + " mouseleave", that._stopProxy);
+        },
+
+        _position: function(position) { //number
+            var that = this;
+
+            that.animator.css(TRANSFORMSTYLE, "translatex(" + position + "px)"); // TODO: remove halfWidth
+            that.manimator.css("margin-left", that.origin + position);
+        },
+
         _trigger: function (e) {
             this.handle.toggleClass("km-state-active", e.type == MOUSEDOWN);
         },
@@ -224,10 +202,10 @@
             }
         },
 
-        _snap: function (e) { //snap expects true or false (checked and etc);
+        _snap: function (value) { //snap expects true or false (checked and etc);
             var that = this,
                 handle = that.handle,
-                checked = (e.value == 1), distance;
+                checked = (value == 1), distance;
 
             handle
                 .removeClass("km-switch-on")
@@ -235,11 +213,11 @@
                 .addClass("km-switch-" + (checked ? "on" : "off"));
 
             if (!handle.data("animating")) {
-                distance = e.value * (that.element.outerWidth() - that.handle.outerWidth(true));
+                distance = value * (that.element.outerWidth() - that.handle.outerWidth(true));
 
                 that.mAnimator
                     .kendoStop(true, true)
-                    .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !e.value, axis: "left", duration: 150 });
+                    .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !value, axis: "left", duration: 150 });
 
                 that.animator
                     .kendoStop(true, true)
