@@ -26,7 +26,113 @@
         }
     }
 
-    var MobileListView = MobileWidget.extend({
+    /**
+    * @name kendo.ui.MobileListView.Description
+    * @section The Kendo MobileListView widget is used to display flat or grouped list of items.
+    * <p>It can be either used in unbound mode by enhancing an HTML <code>ul</code> element, or bound to a kendo.data.DataSource instance.</p>
+    *
+    * <h3>Getting Started</h3>
+    * <p>The Kendo MobileApplication will automatically initialize the MobileListView for every <code>ul</code> element with <code>role</code> data attribute set to <code>listview</code> present in the views markup.
+    * Alternatively, it can be initialized using a jQuery selector. The listview element can contain one or more <code>li</code> elements.</p>
+    * @exampleTitle Initialize Kendo MobileListView based on role data attribute.
+    * @example
+    * <ul data-role="listview">
+    *   <li>Foo</li>
+    *   <li>Bar</li>
+    * </ul>
+    *
+    * @exampleTitle Initialize Kendo MobileListView using a jQuery selector
+    * @example
+    * <ul id="listView"></ul>
+    * <script>
+    * var listView = $("#listView").kendoMobileListView();
+    * </script>
+    *
+    * @section
+    * <h3>Inset MobileListView</h3>
+    * <p>In iOS, the MobileListView appearance can be changed to <strong>inset</strong>, to achieve an effect similar to iOS grouped tableviews, where the list items are padded from the container, and have rounded corners.
+    * This can be accomplished by setting the <code>style</code> data attribute to <code>inset</code>. <strong>Note:</strong> This setting won't affect the appearance of the MobileListView on Android devices.</p>
+    *
+    * @exampleTitle Create Inset MobileListView
+    * @example
+    * <ul data-role="listview" data-style="inset">
+    *   <li>Foo</li>
+    *   <li>Bar</li>
+    * </ul>
+    *
+    * @section
+    * <h3>Grouped MobileListView</h3>
+    * <p>The MobileListView can display items in groups, with optional headers. This can be achieved by nesting unordered list in items, and setting the <code>type</code> data attribute to <code>group</code>.</p>
+    * @exampleTitle Create grouped MobileListView
+    * @example
+    * <ul data-role="listview" data-type="group">
+    *     <li>
+    *         Foo
+    *         <ul>
+    *             <li>Bar</li>
+    *             <li>Baz</li>
+    *         </ul>
+    *     </li>
+    *     <li>
+    *         Bar
+    *         <ul>
+    *             <li>Bar</li>
+    *             <li>Qux</li>
+    *         </ul>
+    *     </li>
+    * </ul>
+    *
+    * @section
+    * <h3>Binding to Data</h3>
+    *
+    * <p>
+    * The MobileListView can be bound to both local JavaScript arrays and remote data via the
+    * Kendo DataSource component. Local JavaScript arrays are appropriate for limited value
+    * options, while remote data binding is better for larger data sets.
+    * </p>
+    *
+    * @exampleTitle Bind MobileListView to a local data source.
+    * @example
+    * $(document).ready(function() {
+    *     $("#listview").kendoMobileListView({
+    *         dataSource: kendo.data.DataSource.create(["foo", "bar", "baz"])
+    *      });
+    * });
+    *
+    * @section
+    * <h3>Customizing Item Templates</h3>
+    * <p>
+    *     MobileListView leverages Kendo UI high-performance Templates to give you complete control
+    *     over item rendering. For a complete overview of Kendo UI Template capabilities and syntax,
+    *     please review the <a href="../templates/index.html" title="Kendo UI Template">Kendo UI Template</a> demos and documentation.
+    * </p>
+    * @exampleTitle Basic item template customization
+    * @example
+    * <!-- HTML -->
+    * <ul id="listview"></ul>
+    *
+    * <!-- MobileListView initialization -->
+    * <script type="text/javascript">
+    *     $(document).ready(function() {
+    *         $("#listview").kendoMobileListView({
+    *             template : "<strong>${data.foo}</strong>",
+    *             dataSource: kendo.data.DataSource.create([{foo: "bar"}, {foo: "baz"}])
+    *         });
+    *     });
+    * </script>
+    */
+    var MobileListView = MobileWidget.extend(/** @lends kendo.ui.MobileListView.prototype */{
+        /**
+        * @constructs
+        * @extends kendo.ui.MobileWidget
+        * @param {DomElement} element DOM element.
+        * @param {Object} options Configuration options.
+        * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the MobileListView will be bound to.
+        * @option {String} [type] The type of the control. Can be either <code>flat</code> (default) or <code>group</code>. Determined automatically in databound mode.
+        * @option {String} [style] The style of the control. Can be either empty string(""), or <code>inset</code>.
+        * @option {String} [template] <${data}> The item template.
+        * @option {String} [headerTemplate] <${value}> The header item template (applies for grouped mode).
+        */
         init: function(element, options) {
             var that = this;
 
@@ -39,14 +145,58 @@
                 .delegate(ITEM_SELECTOR, support.mouseup, proxy(that._click, that));
 
             if (options.dataSource) {
-                that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that.refresh, that));
+                that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that._refresh, that));
                 that._template();
                 that.dataSource.fetch();
             } else {
                 that._style();
             }
 
-            that.bind([CLICK], options);
+            that.bind([
+            /**
+             * Fires when item is clicked
+             * @name kendo.ui.MobileListView#click
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.item The selected list item
+             * @param {jQueryObject} e.target The clicked DOM element
+             * @param {Object} e.dataItem The corresponding dataItem associated with the item (available in databound mode only).
+             * @param {String} e.buttonName The name of the clicked Kendo MobileButton. Specified by setting the <code>name</code> data attribute of the button widget.
+             * @param {kendo.ui.MobileButton} e.button The clicked Kendo MobileButton
+             *
+             * @exampleTitle Handling button clicks
+             * @example
+             * <ul data-role="listview" id="foo">
+             *     <li><a data-role="button" data-name="bar">Bar button</a> | <a data-role="button" data-name="baz">Baz button</a></li>
+             * </ul>
+             *
+             * <script>
+             *  $("#foo").data("kendoMobileListView").bind("click", function(e) {
+             *      console.log(e.buttonName); // "foo" or "bar"
+             *      console.log(e.button); // Kendo MobileButton instance
+             *  }
+             * </script>
+             *
+             * @exampleTitle Making dataItem available in events
+             * @example
+             * <ul id="foo"></ul>
+             *
+             * <script>
+             *  // for the dataItem to be present in the click event, The datasource must have schema definition, specifying the model id field.
+             *  $("#foo").kendoMobileListView({
+             *     dataSource: new kendo.data.DataSource({
+             *          data:   [{id: 1, title: "foo"}, {id: 2, title: "bar"}],
+             *          schema: {model: {id: "id"}}
+             *     }),
+             *
+             *     click: function(e) {
+             *          console.log(e.dataItem.title);
+             *     }
+             *  });
+             * </script>
+             */
+            CLICK
+            ], options);
         },
 
         options: {
@@ -58,7 +208,7 @@
             style: ""
         },
 
-        refresh: function() {
+        _refresh: function() {
             var that = this,
                 dataSource = that.dataSource,
                 grouped,
