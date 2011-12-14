@@ -57,7 +57,6 @@
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER = "mouseover",
         NONE = "none",
-        NUM_AXIS_PADDING = 1.05,
         OBJECT = "object",
         ON_MINOR_TICKS = "onMinorTicks",
         OUTSIDE = "outside",
@@ -1583,14 +1582,20 @@
                 autoMax = axis.autoAxisMax(seriesMin, seriesMax),
                 autoMajorUnit = axis.autoMajorUnit(autoMin, autoMax),
                 autoOptions = {
-                    min: autoMin,
-                    max: autoMax,
                     majorUnit: autoMajorUnit
                 },
                 userSetLimits;
 
-            autoOptions.min = floor(autoMin * NUM_AXIS_PADDING, autoMajorUnit);
-            autoOptions.max = ceil(autoMax * NUM_AXIS_PADDING, autoMajorUnit);
+            if (autoMin < 0) {
+                autoMin -= autoMajorUnit;
+            }
+
+            if (autoMax > 0) {
+                autoMax += autoMajorUnit;
+            }
+
+            autoOptions.min = floor(autoMin, autoMajorUnit);
+            autoOptions.max = ceil(autoMax, autoMajorUnit);
 
             if (options) {
                 userSetLimits = defined(options.min) || defined(options.max);
