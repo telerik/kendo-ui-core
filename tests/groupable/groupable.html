@@ -259,6 +259,54 @@
                 equal(groupContainer.find(".k-group-indicator:first").attr(kendo.attr("title")), "field title");
             });
 
+            test("data-aggregates is set for group indicator", function() {
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer }),
+                    indicator = groupContainer.append(groupable.buildIndicator("field", "field title", "desc", ["count", "sum"])).find(".k-group-indicator:first"),
+                    attr = groupContainer.find(".k-group-indicator:first").attr(kendo.attr("aggregates")).split(',');
+
+                equal(attr.length, 2);
+                equal(attr[0], "count");
+                equal(attr[1], "sum");
+            });
+
+            test("no data-aggregates is rendered for group indicator if aggregates are not set", function() {
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer }),
+                    indicator = groupContainer.append(groupable.buildIndicator("field", "field title", "desc")).find(".k-group-indicator:first"),
+                    attr = groupContainer.find(".k-group-indicator:first").attr(kendo.attr("aggregates"));
+
+                ok(!attr);
+            });
+
+            test("group descriptors has aggregates assign", function() {
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer });
+
+               groupContainer.append(groupable.buildIndicator("field", "field title", "desc", ["count", "sum"]));
+
+               var descriptors = groupable.descriptors(),
+                    aggregates = descriptors[0].aggregates;
+
+               equal(descriptors.length, 1);
+               equal(aggregates.length, 2);
+               equal(aggregates[0].field, "field");
+               equal(aggregates[0].aggregate, "count");
+               equal(aggregates[1].field, "field");
+               equal(aggregates[1].aggregate, "sum");
+           });
+
+           test("group descriptor aggregates is empty array if not set", function() {
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer });
+
+               groupContainer.append(groupable.buildIndicator("field", "field title", "desc"));
+
+               var descriptors = groupable.descriptors();
+
+               equal(descriptors.length, 1);
+               ok(!descriptors[0].aggregates.length);
+           });
         </script>
     </body>
 </html>
