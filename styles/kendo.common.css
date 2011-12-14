@@ -80,8 +80,22 @@
     text-decoration: none;
 }
 
+a.k-button
+{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+/* Override the important default line-height in Firefox 4+ */
+:-moz-any(input[type="submit"], input[type="button"], input[type="reset"]) {
+    padding-bottom: 0.37em;
+    padding-top: 0.37em;
+}
+
 *+html .k-button { overflow: visible; margin-right: 4px; }
 *+html a.k-button { line-height: 1.6; padding-left: 7px; padding-right: 7px;/*+1*/ }
+*+html .k-button-expand { margin-left: 0; margin-right: 0; }
 
 button.k-button::-moz-focus-inner,
 input.k-button::-moz-focus-inner
@@ -90,18 +104,15 @@ input.k-button::-moz-focus-inner
     border: 0;
 }
 
-.k-button-expand
-{
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-}
-
 a.k-button-expand
 {
     display: block;
 }
 
-button.k-button-expand
+button.k-button-expand,
+input[type="submit"].k-button-expand,
+input[type="button"].k-button-expand,
+input[type="reset"].k-button-expand
 {
     width: 100%;
 }
