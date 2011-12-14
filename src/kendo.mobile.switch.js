@@ -50,11 +50,12 @@
 
             that._wrap();
 
+            //refactor
             that.width = element.outerWidth();
             that.handle = element.find(options.handle);
             that.halfWidth = that.handle.outerWidth() / 2;
             that.snapPart = (that.width - that.halfWidth * 2);
-            that.constrain = that.width - that.handle.outerWidth(true);
+            that.constrain = that.width - that.handle.outerWidth(true) + that.halfWidth;
             that.animator = element.find(switchAnimation.animator);
             that.manimator = element.find(switchAnimation.manimator);
             that._moveProxy = $.proxy(that._move, that);
@@ -115,31 +116,22 @@
             return kendo.touchLocation(e).x - this.element.offset().left;
         },
 
-        //move the handler
-        //a) get new location
-        //b) position  handler on new location
-        //c) raise slide event ???
         _move: function(e) {
-            var that = this;
+            var that = this,
+                location = limitValue(that._getAxisLocation(e), that.halfWidth, that.constrain),
+                position = location - that.halfWidth;
 
-            that.location = limitValue(that._getAxisLocation(e), that.halfWidth, that.constrain + that.halfWidth);
-
-            var position = that.location - that.halfWidth;
-
-            that._position(position);
+            that.animator.css(TRANSFORMSTYLE, "translatex(" + position + "px)"); // TODO: remove halfWidth
+            that.manimator.css("margin-left", that.origin + position);
         },
 
-        //get handler
-        //a) position handler on the mouse position
-        //b) save this initial position ???
-        //c) wire the mouse move event
         _start: function(e) {
             preventDefault(e);
 
             var that = this;
 
-            that.initial = that._getAxisLocation(e);
-            that.location = limitValue(that.initial, that.halfWidth, that.constrain + that.halfWidth);
+            that._initial = that._getAxisLocation(e);
+
             that.origin = that.manimator.data("origin");
 
             if (!that.origin && that.origin !== 0) { //check for undefined
@@ -152,42 +144,24 @@
                 .bind(MOUSEUP + " mouseleave", that._stopProxy); // Stop if leaving the simulator/screen
         },
 
-        //release handler
-        //a) stop moving the handler
-        //b) get current location
-        //c) check if the current location is bigger/less than half or it is (0 or 1).
-        //d) animate depending on c)
         _stop: function(e) {
             preventDefault(e);
 
             var that = this,
-                location = that._getAxisLocation(e);
+                location = that._getAxisLocation(e),
+                value;
 
-            //change is actually like the change always return 0 or 1
-            if (Math.abs(that.initial - location) <= 2) { //if handler is moved less then 2 px then toggle!
-                that._snap(!that.input[0].checked); //Math.round(position / that.snapPart); === options.input.checked
+            if (Math.abs(that._initial - location) <= 2) {
+                value = !that.input[0].checked;
             } else {
-                //location should not be cached...
-                var position = that.location - that.halfWidth;
-
-                //that.position(position);
-
-                that._snap(Math.round(position / that.snapPart));
+                value = location > (that.width / 2);
             }
-            //value should be 0 || 1
 
-            //always pass the initial-location().... in the change desides what to do...
+            that._snap(value);
 
             $(document)
                 .unbind(MOUSEMOVE, that._moveProxy)
                 .unbind(MOUSEUP + " mouseleave", that._stopProxy);
-        },
-
-        _position: function(position) { //number
-            var that = this;
-
-            that.animator.css(TRANSFORMSTYLE, "translatex(" + position + "px)"); // TODO: remove halfWidth
-            that.manimator.css("margin-left", that.origin + position);
         },
 
         _trigger: function (e) {
@@ -198,7 +172,7 @@
             var that = this;
 
             if (that.options.enable) {
-                that._snap({ value: that.input[0].checked })
+                that._snap(that.input[0].checked)
             }
         },
 
