@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // Imports ====================================================================
 var fs = require("fs"),
     sys = require("sys"),
