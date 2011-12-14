@@ -360,6 +360,23 @@
                 ok($.isArray(data));
                 equal(data.length, 1);
             });
+
+            test("model fields attrbiutes are preserved", function() {
+                var reader = new XmlDataReader({
+                    model: {
+                        fields: {
+                            bar: { field: "bar/text()", type: "string" }
+                        }
+                    },
+                    data: "/root/foo"
+                });
+
+                var result = reader.parse('<root><foo><bar>bar1</bar></foo><foo></foo></root>');
+                var data = reader.data(result);
+
+                equal(reader.model.fields["bar"].type, "string");
+                equal(typeof reader.model.fields["bar"].field, "function");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
