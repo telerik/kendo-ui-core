@@ -283,6 +283,11 @@
                     equals(numericAxis.options.max, 70);
                 });
 
+                test("Automatic minimum is rounded to auto major unit", function() {
+                    numericAxis = new NumericAxis(99, 101);
+                    equals(numericAxis.options.min, 98);
+                });
+
                 test("Maximum is set to 1 when min = max = 0", function() {
                     numericAxis = new NumericAxis(0, 3, { min: 0, max: 0 });
                     equals(numericAxis.options.max, 1);
