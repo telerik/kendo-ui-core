@@ -163,13 +163,45 @@
         *       # } #
         *  &lt;/script&gt;
         *
-        *  //combobox intialization
+        *  //combobox initialization
         *  &lt;script&gt;
         *      $("#combobox").kendoComboBox({
         *          dataSource: dataSource,
         *          dataTextField: "Name",
         *          dataValueField: "Id",
         *          template: kendo.template($("#template").html())
+        *      });
+        *  &lt;/script&gt;
+        * @option {Object} [animation] <> Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
+        * @option {Function} [animation.open] <> Animation to be used for opening of the popup.
+        * _example
+        *  //combobox initialization
+        *  &lt;script&gt;
+        *      $("#combobox").kendoComboBox({
+        *          dataSource: dataSource,
+        *          animation: {
+        *             open: {
+        *                 effects: "fadeIn",
+        *                 duration: 300,
+        *                 show: true
+        *             }
+        *          }
+        *      });
+        *  &lt;/script&gt;
+        * @option {Function} [animation.close] <> Animation to be used for closing of the popup.
+        * _example
+        *  //combobox initialization
+        *  &lt;script&gt;
+        *      $("#combobox").kendoComboBox({
+        *          dataSource: dataSource,
+        *          animation: {
+        *             close: {
+        *                 effects: "fadeOut",
+        *                 duration: 300,
+        *                 hide: true
+        *                 show: false
+        *             }
+        *          }
         *      });
         *  &lt;/script&gt;
         */

@@ -367,6 +367,36 @@
          * @option {Date} [max] <00:00> Specifies the end value in the popup list.
          * @option {String} [format] <h:mm tt> Specifies the format, which is used to parse value set with value() method.
          * @option {Number} [interval] <30> Specifies the interval, between values in the popup list, in minutes.
+         * @option {Object} [animation] <> Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
+         * @option {Function} [animation.open] <> Animation to be used for opening of the popup.
+         * _example
+         *  //timepicker initialization
+         *  &lt;script&gt;
+         *      $("#timepicker").kendoTimePicker({
+         *          animation: {
+         *             open: {
+         *                 effects: "fadeIn",
+         *                 duration: 300,
+         *                 show: true
+         *             }
+         *          }
+         *      });
+         *  &lt;/script&gt;
+         * @option {Function} [animation.close] <> Animation to be used for closing of the popup.
+         * _example
+         *  //timepicker initialization
+         *  &lt;script&gt;
+         *      $("#timepicker").kendoTimePicker({
+         *          animation: {
+         *             close: {
+         *                 effects: "fadeOut",
+         *                 duration: 300,
+         *                 hide: true
+         *                 show: false
+         *             }
+         *          }
+         *      });
+         *  &lt;/script&gt;
          */
         init: function(element, options) {
             var that = this;
