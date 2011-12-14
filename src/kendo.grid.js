@@ -2020,13 +2020,20 @@
                 field = group.field,
                 column = $.grep(that.columns, function(column) { return column.field == field; })[0] || { },
                 value = column.format ? kendo.format(column.format, group.value) : group.value,
+                template = column.groupHeaderTemplate,
+                text =  (column.title || field) + ': ' + value,
+                data = extend({}, { field: group.field, value: group.value }, group.aggregates[group.field]),
                 groupItems = group.items;
+
+            if (template) {
+                text  = typeof template === FUNCTION ? template(data) : kendo.template(template)(data);
+            }
 
             html +=  '<tr class="k-grouping-row">' + groupCells(level) +
                       '<td colspan="' + colspan + '">' +
                         '<p class="k-reset">' +
-                         '<a class="k-icon k-collapse" href="#"></a>' +
-                         (column.title || field) + ': ' + value +'</p></td></tr>';
+                         '<a class="k-icon k-collapse" href="#"></a>' + text
+                          +'</p></td></tr>';
 
             if(group.hasSubgroups) {
                 for(idx = 0, length = groupItems.length; idx < length; idx++) {

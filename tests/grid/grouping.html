@@ -341,6 +341,45 @@
 
                 equal(grid.tbody.find("tr>td:first").text(), "foo: foo_bar");
             });
+
+            test("text in grouping row uses column groupHeaderTemplate if set", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [{foo: "foo", bar: "bar"}, {foo: "foo1", bar: "baz"}],
+                        group: "foo"
+                    },
+                    columns: [ { field: "foo", groupHeaderTemplate: "baz" } ]
+                });
+
+                equal(grid.tbody.find("tr>td:first").text(), "baz");
+            });
+
+            test("groupHeaderTemplate as function", function() {
+                var args,
+                    grid = new Grid(table(), {
+                    dataSource: {
+                        data: [{foo: "foo", bar: "bar"}],
+                        group: "foo"
+                    },
+                    columns: [ { field: "foo", groupHeaderTemplate: function() { args = arguments[0]; return "baz" }  } ]
+                });
+
+                equal(grid.tbody.find("tr>td:first").text(), "baz");
+                equal(args.field, "foo");
+                equal(args.value, "foo");
+            });
+
+            test("groupHeaderTemplate using aggregates", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [{foo: "1", bar: "bar"}, {foo: "foo1", bar: "baz"}],
+                        group: { field: "foo", aggregates: [ { field: "foo", aggregate: "count" } ]}
+                    },
+                    columns: [ { field: "foo", groupHeaderTemplate: "#=field# : #=value# count: #=count#"  } ]
+                });
+
+                equal(grid.tbody.find("tr>td:first").text(), "foo : 1 count: 1");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
