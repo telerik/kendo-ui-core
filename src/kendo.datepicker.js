@@ -360,6 +360,63 @@
          * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to parse value set with value() method.
          * @option {String} [start] <month> Specifies the start view.
          * @option {String} [depth] Specifies the navigation depth.
+         * @option {Function} [footer] <> Template to be used for rendering the footer of the calendar.
+         * _example
+         *  //datepicker initialization
+         *  &lt;script&gt;
+         *      $("#datepicker").kendoDatePicker({
+         *          footer: kendo.template("Today - #=kendo.toString(data, 'd') #")
+         *      });
+         *  &lt;/script&gt;
+         * @option {Object} [month] <> Templates for the cells rendered in the calendar "month" view.
+         * @option {Function} [month.content] <> Template to be used for rendering the cells in the calendar "month" view, which are in range.
+         * _example
+         *  //template
+         *  &lt;script id="cellTemplate" type="text/x-kendo-tmpl"&gt;
+         *      &lt;div class="${ data.value < 10 ? exhibition : party }"&gt;
+         *      &lt;/div&gt;
+         *      ${ data.value }
+         *  &lt;/script&gt;
+         *
+         *  //datepicker initialization
+         *  &lt;script&gt;
+         *      $("#datepicker").kendoDatePicker({
+         *          month: {
+         *             content:  kendo.template($("#cellTemplate").html()),
+         *          }
+         *      });
+         *  &lt;/script&gt;
+         * @option {Function} [month.empty] <> Template to be used for rendering the cells in the calendar "month" view, which are not in the min/max range.
+         * @option {Object} [animation] <> Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
+         * @option {Function} [animation.open] <> Animation to be used for opening of the popup.
+         * _example
+         *  //datepicker initialization
+         *  &lt;script&gt;
+         *      $("#datepicker").kendoDatePicker({
+         *          animation: {
+         *             open: {
+         *                 effects: "fadeIn",
+         *                 duration: 300,
+         *                 show: true
+         *             }
+         *          }
+         *      });
+         *  &lt;/script&gt;
+         * @option {Function} [animation.close] <> Animation to be used for closing of the popup.
+         * _example
+         *  //datepicker initialization
+         *  &lt;script&gt;
+         *      $("#datepicker").kendoDatePicker({
+         *          animation: {
+         *             close: {
+         *                 effects: "fadeOut",
+         *                 duration: 300,
+         *                 show: false,
+         *                 hide: true
+         *             }
+         *          }
+         *      });
+         *  &lt;/script&gt;
          */
         init: function(element, options) {
             var that = this,
