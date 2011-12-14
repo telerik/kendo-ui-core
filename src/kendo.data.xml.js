@@ -4,6 +4,7 @@
         isPlainObject = $.isPlainObject,
         map = $.map,
         each = $.each,
+        extend = $.extend,
         getter = kendo.getter,
         Class = kendo.Class;
 
@@ -19,9 +20,11 @@
                     if (model.fields) {
                         each(model.fields, function(field, value) {
                             if (isPlainObject(value) && value.field) {
-                                value = value.field;
+                                value = extend(value, { field: that.getter(value.field) });
+                            } else {
+                                value = { field: that.getter(value) };
                             }
-                            model.fields[field] = that.getter(value);
+                            model.fields[field] = value;
                         });
                     }
                     model = kendo.data.Model.define(model);
@@ -48,7 +51,7 @@
                         return map(result, function(value) {
                             record = {};
                             for (field in model.fields) {
-                                record[field] = model.fields[field](value);
+                                record[field] = model.fields[field].field(value);
                             }
                             return record;
                         });
