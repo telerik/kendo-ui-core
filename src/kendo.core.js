@@ -177,8 +177,13 @@
                  .replace(/\t/g, "\\t")
                  + "'";
          } else {
-             if (part.charAt(0) === "=") {
-                 return "+(" + part.substring(1) + ")+";
+             var first = part.charAt(0),
+                 rest = part.substring(1);
+
+             if (first === "=") {
+                 return "+(" + rest + ")+";
+             } else if (first === ":") {
+                 return "+e(" + rest + ")+";
              } else {
                  return ";" + part + ";o+=";
              }
