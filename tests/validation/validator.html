@@ -801,6 +801,16 @@
 
                 ok(validator.validate());
             });
+
+            test("validate input elements with array index names on multiple validation calls", function() {
+                container.append("<input type='text' name='test[]' />");
+                var called = false,
+                    validator = setup(container, { rules: { custom: function(input) { called = true } } });
+
+                validator.validate();
+                validator.validate();
+                ok(called);
+            });
         </script>
     </body>
 </html>

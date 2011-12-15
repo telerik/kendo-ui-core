@@ -239,7 +239,7 @@
                 result = that._checkValidity(input),
                 valid = result.valid,
                 className = "." + INVALIDMSG,
-                fieldName = input.attr(NAME),
+                fieldName = (input.attr(NAME) || "").replace(/(\[|\])/g, "\\$1"),
                 DATAFOR = kendo.attr("for"),
                 lbl = that.element.find(className + "[" + DATAFOR +"=" + fieldName + "]").add(input.next(className)).hide(),
                 messageText;
