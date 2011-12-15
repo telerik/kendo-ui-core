@@ -10,60 +10,67 @@
         CHANGE = "change";
 
     function extendArray(array) {
-        return $.extend(array, new Observable(), {
-            push: function() {
-                var index = this.length,
-                    items = arguments,
-                    result;
+        var idx, length;
 
-                result = push.apply(this, items);
+        for (idx = 0, length = array.length; idx < length; idx++) {
+            array[idx] = extendObject(array[idx]);
+        }
 
+        array._events = {};
+        array.bind = Observable.fn.bind;
+        array.trigger = Observable.fn.trigger;
+        array.push = function() {
+            var index = this.length,
+                items = arguments,
+                result;
+
+            result = push.apply(this, items);
+
+            this.trigger(CHANGE, {
+                action: "add",
+                index: index,
+                items: items
+            });
+
+            return result;
+        };
+
+        array.splice = function(index, howMany, element) {
+            var result = splice.apply(this, arguments);
+
+            if (result.length) {
+                this.trigger(CHANGE, {
+                    action: "remove",
+                    index: index,
+                    items: result
+                });
+            }
+
+            if (element) {
                 this.trigger(CHANGE, {
                     action: "add",
                     index: index,
-                    items: items
+                    items: slice.call(arguments, 2)
                 });
-
-                return result;
-            },
-
-            splice: function(index, howMany, element) {
-                var result = splice.apply(this, arguments);
-
-                if (result.length) {
-                    this.trigger(CHANGE, {
-                        action: "remove",
-                        index: index,
-                        items: result
-                    });
-                }
-
-                if (element) {
-                    this.trigger(CHANGE, {
-                        action: "add",
-                        index: index,
-                        items: slice.call(arguments, 2)
-                    });
-                }
-                return result;
-            },
-
-            unshift: function() {
-                var index = this.length,
-                    items = arguments,
-                    result;
-
-                result = unshift.apply(this, items);
-
-                this.trigger(CHANGE, {
-                    action: "add",
-                    index: 0,
-                    items: items
-                });
-
-                return result;
             }
-        });
+            return result;
+        };
+
+        array.unshift = function() {
+            var index = this.length,
+                items = arguments,
+                result;
+
+            result = unshift.apply(this, items);
+
+            this.trigger(CHANGE, {
+                action: "add",
+                index: 0,
+                items: items
+            });
+
+            return result;
+        };
     }
 
     function extendObject(object) {
@@ -153,6 +160,7 @@
         },
         source: function(element, object, field, e) {
             var template = kendo.template(templateFor(element)),
+                child,
                 children,
                 idx,
                 length;
@@ -181,6 +189,12 @@
                 }
             } else {
                 $(element).html(kendo.render(template, object[field]));
+
+                children = element.children;
+
+                for (idx = 0, length = children.length; idx < length; idx ++) {
+                    bindElement(children[idx], object[field][idx]);
+                }
             }
         }
     };
@@ -206,7 +220,7 @@
     }
 
     function bindElement(element, object) {
-        var field;
+        var field, binding;
 
         for (binding in kendo.bindings) {
             field = element.getAttribute("data-" + binding);
@@ -233,8 +247,8 @@
         var idx, length;
 
         for (idx = 0, length = dom.length; idx < length; idx++ ) {
-            bindElement(dom[idx], object);
             bindChildren(dom[idx], object);
+            bindElement(dom[idx], object);
         }
     }
 
