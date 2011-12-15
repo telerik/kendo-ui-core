@@ -190,6 +190,8 @@
          * @option {Integer} [minWidth] <50> The minimum width that may be achieved by resizing the window.
          * @option {Integer} [minHeight] <50> The minimum height that may be achieved by resizing the window.
          * @option {Object|String} [content] Specifies a URL or request options that the window should load its content from. For remote URLs, a container iframe element is automatically created.
+         * @option {Boolean} [iframe] Explicitly states whether content iframe should be created.
+         * @option {Boolean} [resizable] <true> Specifies whether the users may to resize the window.
          * @option {Array<String>} [actions] <["Close"]> The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize", "Maximize".
          * @option {String} [title] The text in the window title bar.
          * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the widget.
@@ -211,6 +213,14 @@
 
             if (options.animation === false) {
                 options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
+            }
+
+            if (!$.isPlainObject(options.content)) {
+                options.content = { url: options.content };
+            }
+
+            if (typeof options.iframe == "undefined") {
+                options.iframe = options.content.url && !isLocalUrl(options.content.url);
             }
 
             if (!element.parent().is("body")) {
@@ -368,11 +378,7 @@
 
             $(window).resize(proxy(that._onDocumentResize, that));
 
-            if (!$.isPlainObject(options.content)) {
-                options.content = { url: options.content };
-            }
-
-            if (isLocalUrl(options.content.url)) {
+            if (!options.iframe && options.content.url) {
                 that._ajaxRequest(options.content);
             }
 
@@ -763,7 +769,7 @@
             var that = this,
                 url = options.url = options.url || that.options.content.url;
 
-            if (isLocalUrl(url)) {
+            if (!that.options.iframe) {
                 that._ajaxRequest(options);
             } else {
                 var iframe = $(that.element).find(".k-content-frame")[0];
@@ -841,8 +847,8 @@
             "</div>"
         ),
         overlay: "<div class='k-overlay' />",
-        iframe: template(
-            "<iframe src='#= content #' title='#= title #' frameborder='0'" +
+        contentFrame: template(
+            "<iframe src='#= content.url #' title='#= title #' frameborder='0'" +
                 " class='k-content-frame'>" +
                     "This page requires frames in order to show content" +
             "</iframe>"
@@ -853,12 +859,12 @@
     function createWindow(element, options) {
         var contentHtml = $(element);
 
-        if (typeof (options.scrollable) != "undefined" && options.scrollable === false) {
+        if (options.scrollable === false) {
             contentHtml.attr("style", "overflow:hidden;");
         }
 
-        if (options.content && !isLocalUrl(options.content)) {
-            contentHtml.html(templates.iframe(options));
+        if (options.iframe) {
+            contentHtml.html(templates.contentFrame(options));
         }
 
         $(templates.wrapper(options))
