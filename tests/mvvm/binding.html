@@ -275,10 +275,24 @@
                 kendo.bind(dom, viewModel);
                 equal(dom.find("li").length, viewModel.foo.length);
             });
+
+            test("binding child elements of template to data item", function() {
+                var dom = $('<ol data-source="foo" data-template="ol-template"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: [{ name: "foo"}]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("li").text(), viewModel.foo[0].name);
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
             <option value="${id}">${name}</option>
+        </script>
+        <script id="ol-template" type="text/x-kendo-template">
+            <li data-text="name"></li>
         </script>
     </head>
 </html>
