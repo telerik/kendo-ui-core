@@ -21,23 +21,39 @@
         <form>
             <button data-click="removeProduct">Remove a product</button>
             <button data-click="addProduct">Add a product</button>
-            <button data-click="selectFirst">Select the first</button>
+            <button data-click="selectFirst">Select "Food"</button>
 
             <div>Selected product is: <span data-html="selectedProduct"></span></div>
 
             <fieldset>
-                <legend> &lt;select multiple&gt;</legend>
+                <legend>&lt;select multiple&gt;</legend>
                 <select style="width: 200px"
                     multiple
                     data-value="selectedProduct"
-                    data-template="row-tmpl"
+                    data-template="option-tmpl"
                     data-source="products">
                 </select>
-                <script type="text/x-kendo-tmpl" id="row-tmpl">
+                <script type="text/x-kendo-tmpl" id="option-tmpl">
                     <option value="${id}">${name}</option>
                 </script>
             </fieldset>
-
+            <fieldset>
+                <legend>&lt;table&gt;</legend>
+                <table data-source="products" data-template="tr-tmpl">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product ID</th>
+                        </tr>
+                    </thead>
+                </table>
+                <script type="text/x-kendo-tmpl" id="tr-tmpl">
+                    <tr>
+                        <td>${name}</td>
+                        <td>${id}</td>
+                    </tr>
+                </script>
+            </fieldset>
         </form>
 
         <script>

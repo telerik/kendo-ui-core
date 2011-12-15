@@ -220,6 +220,28 @@
                 equal(dom.find("option")[0], firstOption);
                 equal(dom.find("option")[1], lastOption);
             });
+
+            test("bind array to table appends table rows to the table body", function() {
+                var dom = $('<table data-source="foo"><thead><tr><th></th></tr></thead></table>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("tbody > tr").length, viewModel.foo.length);
+            });
+
+            test("bind array to table keeps thead", function() {
+                var dom = $('<table data-source="foo"><thead><tr><th></th></tr></thead></table>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("thead > tr").length, 1);
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
