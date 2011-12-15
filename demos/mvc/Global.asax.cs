@@ -17,11 +17,16 @@ namespace Kendo
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                "Web",
+                "web/{section}/{example}.html",
+                new { controller = "Web", action = "Index", section = "overview", example = "index.html" }
             );
 
+            routes.MapRoute(
+                "Default",
+                "{controller}/{action}/{id}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
         }
 
         protected void Application_Start()
