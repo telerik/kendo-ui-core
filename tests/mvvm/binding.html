@@ -166,10 +166,133 @@
                 equal(dom.find("option").text(), "foo");
                 equal(dom.find("option").val(), "1");
             });
+
+            test("pushing items to array creates new option elements without destroying the existing ones", function() {
+                var dom = $('<select data-source="foo"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2]
+                });
+
+                kendo.bind(dom, viewModel);
+
+                var option = dom.find("option")[0];
+
+                viewModel.foo.push(3, 4);
+
+                equal(dom.find("option").length, viewModel.foo.length);
+                equal(dom.find("option").eq(2).text(), "3");
+                equal(dom.find("option").eq(3).text(), "4");
+                equal(dom.find("option")[0], option);
+            });
+
+            test("pushing items to empty array creates new option elements", function() {
+                var dom = $('<select data-source="foo"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: []
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.foo.push(3, 4);
+
+                equal(dom.find("option").length, viewModel.foo.length);
+                equal(dom.find("option").eq(0).text(), "3");
+                equal(dom.find("option").eq(1).text(), "4");
+            });
+
+            test("splicing items from array removes option elements without destroying the existing ones", function() {
+                var dom = $('<select data-source="foo"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2, 3, 4]
+                });
+
+                kendo.bind(dom, viewModel);
+
+                var firstOption = dom.find("option")[0];
+                var lastOption = dom.find("option")[3];
+
+                viewModel.foo.splice(1, 2);
+
+                equal(dom.find("option").length, viewModel.foo.length);
+                equal(dom.find("option")[0], firstOption);
+                equal(dom.find("option")[1], lastOption);
+            });
+
+            test("bind array to table appends table rows to the table body", function() {
+                var dom = $('<table data-source="foo"><thead><tr><th></th></tr></thead></table>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("tbody > tr").length, viewModel.foo.length);
+            });
+
+            test("bind array to table keeps thead", function() {
+                var dom = $('<table data-source="foo"><thead><tr><th></th></tr></thead></table>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("thead > tr").length, 1);
+            });
+
+            test("bind array to element which does not have specific predefined template", function() {
+                var dom = $('<div data-source="foo"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.text(), "12");
+            });
+
+            test("bind array to unordered list creats list item elements", function() {
+                var dom = $('<ul data-source="foo"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("li").length, viewModel.foo.length);
+            });
+
+            test("bind array to ordered list creats list item elements", function() {
+                var dom = $('<ol data-source="foo"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("li").length, viewModel.foo.length);
+            });
+
+            test("binding child elements of template to data item", function() {
+                var dom = $('<ol data-source="foo" data-template="ol-template"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: [{ name: "foo"}]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("li").text(), viewModel.foo[0].name);
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
             <option value="${id}">${name}</option>
+        </script>
+        <script id="ol-template" type="text/x-kendo-template">
+            <li data-text="name"></li>
         </script>
     </head>
 </html>

@@ -10,60 +10,67 @@
         CHANGE = "change";
 
     function extendArray(array) {
-        return $.extend(array, new Observable(), {
-            push: function() {
-                var index = this.length,
-                    items = arguments,
-                    result;
+        var idx, length;
 
-                result = push.apply(this, items);
+        for (idx = 0, length = array.length; idx < length; idx++) {
+            array[idx] = extendObject(array[idx]);
+        }
 
+        array._events = {};
+        array.bind = Observable.fn.bind;
+        array.trigger = Observable.fn.trigger;
+        array.push = function() {
+            var index = this.length,
+                items = arguments,
+                result;
+
+            result = push.apply(this, items);
+
+            this.trigger(CHANGE, {
+                action: "add",
+                index: index,
+                items: items
+            });
+
+            return result;
+        };
+
+        array.splice = function(index, howMany, element) {
+            var result = splice.apply(this, arguments);
+
+            if (result.length) {
+                this.trigger(CHANGE, {
+                    action: "remove",
+                    index: index,
+                    items: result
+                });
+            }
+
+            if (element) {
                 this.trigger(CHANGE, {
                     action: "add",
                     index: index,
-                    items: items
+                    items: slice.call(arguments, 2)
                 });
-
-                return result;
-            },
-
-            splice: function(index, howMany, element) {
-                var result = splice.apply(this, arguments);
-
-                if (result.length) {
-                    this.trigger(CHANGE, {
-                        action: "remove",
-                        index: index,
-                        items: result
-                    });
-                }
-
-                if (element) {
-                    this.trigger(CHANGE, {
-                        action: "add",
-                        index: index,
-                        items: slice.call(arguments, 2)
-                    });
-                }
-                return result;
-            },
-
-            unshift: function() {
-                var index = this.length,
-                    items = arguments,
-                    result;
-
-                result = unshift.apply(this, items);
-
-                this.trigger(CHANGE, {
-                    action: "add",
-                    index: 0,
-                    items: items
-                });
-
-                return result;
             }
-        });
+            return result;
+        };
+
+        array.unshift = function() {
+            var index = this.length,
+                items = arguments,
+                result;
+
+            result = unshift.apply(this, items);
+
+            this.trigger(CHANGE, {
+                action: "add",
+                index: 0,
+                items: items
+            });
+
+            return result;
+        };
     }
 
     function extendObject(object) {
@@ -114,16 +121,23 @@
         return "innerText";
     })();
 
+    var templates = {
+        select: "<option>${data}</option>",
+        table: "<tr><td>${data}</td></tr>",
+        ul: "<li>${data}</li>",
+        ol: "<li>${data}</li>"
+    };
+
     function templateFor(element) {
         var templateId = element.getAttribute("data-template"),
-            template = "<option>${data}</option>",
+            template = templates[element.nodeName.toLowerCase()] || "${data}",
             templateElement;
 
         if (templateId) {
             templateElement = document.getElementById(templateId);
 
             if (templateElement) {
-                template = templateElement[innerText];
+                template = $(templateElement).html();
             }
         }
 
@@ -144,10 +158,44 @@
                 object.set(field, element.value, element);
             });
         },
-        source: function(element, object, field) {
-            var template = templateFor(element);
+        source: function(element, object, field, e) {
+            var template = kendo.template(templateFor(element)),
+                child,
+                children,
+                idx,
+                length;
 
-            element.innerHTML = kendo.render(kendo.template(template), object[field]);
+            if (element.nodeName.toLowerCase() === "table") {
+                if (!element.tBodies[0]) {
+                    element.appendChild(document.createElement("tbody"))
+                }
+                element = element.tBodies[0];
+            }
+
+            if (e) {
+                if (e.action === "add") {
+                    if (element.children.length < 1) {
+                        $(element).html(kendo.render(template, object[field]));
+                    } else {
+                        $(element.children[e.index - 1])
+                              .after(kendo.render(template, e.items));
+                    }
+                } else if (e.action === "remove") {
+                    children = $.makeArray(element.children).splice(e.index, e.items.length);
+
+                    for (idx = 0, length = children.length; idx < length; idx ++) {
+                        element.removeChild(children[idx]);
+                    }
+                }
+            } else {
+                $(element).html(kendo.render(template, object[field]));
+
+                children = element.children;
+
+                for (idx = 0, length = children.length; idx < length; idx ++) {
+                    bindElement(children[idx], object[field][idx]);
+                }
+            }
         }
     };
 
@@ -166,13 +214,13 @@
     function observe(element, object, field, binding) {
         object.bind("change", function(e) {
             if (e.field === field && e.initiator !== element) {
-                binding(element, object, field);
+                binding(element, object, field, e);
             }
         });
     }
 
     function bindElement(element, object) {
-        var field;
+        var field, binding;
 
         for (binding in kendo.bindings) {
             field = element.getAttribute("data-" + binding);
@@ -199,8 +247,8 @@
         var idx, length;
 
         for (idx = 0, length = dom.length; idx < length; idx++ ) {
-            bindElement(dom[idx], object);
             bindChildren(dom[idx], object);
+            bindElement(dom[idx], object);
         }
     }
 
