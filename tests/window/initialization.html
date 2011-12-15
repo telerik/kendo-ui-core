@@ -18,8 +18,15 @@
             var Window = kendo.ui.Window;
 
             module("initialization", {
+                setup: function() {
+                    $.mockjax({
+                        url: /foo|telerik\.com/i,
+                        responseText: "foo bar baz",
+                    });
+                },
                 teardown: function() {
                     $(".k-window,.k-overlay").remove();
+                    $.mockjaxClear();
                 }
             });
 
@@ -127,19 +134,17 @@
 
             test("creating a window with a remote `content` creates iframe", function() {
                 var dialog = createWindow({
-                        content: "http://google.com/",
+                        content: "http://www.telerik.com/",
                         title: "title"
                     }),
                     iframe = dialog.element.find("iframe");
 
                 equals(iframe.length, 1);
                 equals(iframe.attr("title"), "title");
-                equals(iframe.attr("src"), "http://google.com/");
+                equals(iframe.attr("src"), "http://www.telerik.com/");
             });
 
             test("creating a window with a `content` on the same server does not create iframe", function() {
-                $.mockjax(function () { return {}; });
-
                 var dialog = createWindow({
                     content: "foo"
                 });
@@ -181,6 +186,21 @@
                     secondWindow = createWindow();
 
                 ok(firstWindow.element.find("> .k-overlay").length);
+            });
+
+            test("specifying iframe=true creates iframe for local URL", function() {
+                var dialog = createWindow({ iframe: true, content: "foo" }),
+                    iframe = dialog.element.find("iframe");
+
+                ok(iframe.length, 1);
+                equals(iframe.attr("src"), "foo");
+            });
+
+            test("specifying iframe=false does not create iframe for remote URL", function() {
+                var dialog = createWindow({ iframe: false, content: "http://www.telerik.com/" }),
+                    iframe = dialog.element.find("iframe");
+
+                equal(iframe.length, 0);
             });
         </script>
 

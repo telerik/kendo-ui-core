@@ -92,22 +92,6 @@
                 ok(dialog.wrapper.prev("div").is(".k-overlay"));
             });
 
-            test("refresh() of non-local URLs does not request data", function() {
-                var dialog = createWindow(),
-                    hasRequestedData = false;
-
-                $.mockjax(function () {
-                    hasRequestedData = true;
-                    return {};
-                });
-
-                dialog.refresh("http://");
-
-                ok(!hasRequestedData);
-
-                $.mockjaxClear();
-            });
-
             test("refresh() of local URLs requests data via AJAX", function() {
                 var dialog = createWindow(),
                     hasRequestedData = false;
