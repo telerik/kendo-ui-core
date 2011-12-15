@@ -144,10 +144,30 @@
                 object.set(field, element.value, element);
             });
         },
-        source: function(element, object, field) {
-            var template = templateFor(element);
+        source: function(element, object, field, e) {
+            var template = kendo.template(templateFor(element)),
+                children,
+                idx,
+                length;
 
-            element.innerHTML = kendo.render(kendo.template(template), object[field]);
+            if (e) {
+                if (e.action === "add") {
+                    if (element.children.length < 1) {
+                        element.innerHTML = kendo.render(template, object[field]);
+                    } else {
+                        $(element.children[e.index - 1])
+                              .after(kendo.render(template, e.items));
+                    }
+                } else if (e.action === "remove") {
+                    children = splice.call(element.children, e.index, e.items.length);
+
+                    for (idx = 0, length = children.length; idx < length; idx ++) {
+                        element.removeChild(children[idx]);
+                    }
+                }
+            } else {
+                element.innerHTML = kendo.render(template, object[field]);
+            }
         }
     };
 
@@ -166,7 +186,7 @@
     function observe(element, object, field, binding) {
         object.bind("change", function(e) {
             if (e.field === field && e.initiator !== element) {
-                binding(element, object, field);
+                binding(element, object, field, e);
             }
         });
     }
