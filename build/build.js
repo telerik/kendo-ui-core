@@ -22,19 +22,19 @@ var bundles = [{
     name: "kendoui.web-dataviz",
     suites: ["web", "dataviz"],
     license: "commercial",
-    eula: "EULA-Kendo.pdf",
+    eula: "eula",
     hasSource: true
 }, {
     name: "kendoui.web-dataviz",
     suites: ["web", "dataviz"],
     license: "trial",
-    eula: "EULA-Kendo.pdf",
+    eula: "eula",
     hasSource: false
 }, {
     name: "kendoui.web-dataviz",
     suites: ["web", "dataviz"],
     license: "open-source",
-    eula: "EULA-Kendo.pdf",
+    eula: "eula",
     hasSource: true
 }];
 
@@ -51,13 +51,15 @@ var VERSION = kendoBuild.generateVersion(),
     SHARED_ROOT = "shared",
     LEGAL_ROOT = path.join("resources", "legal"),
     SRC_LICENSE = "src-license.txt",
-    THIRD_PARTY_LICENSES = "licenses.txt",
+    THIRD_PARTY_ROOT = "third-party",
     DROP_LOCATION = "release",
     DEPLOY_ROOT = "deploy",
     DEPLOY_SOURCE = "source",
     DEPLOY_SCRIPTS = "js",
     DEPLOY_STYLES = "styles",
     DEPLOY_EXAMPLES = "examples",
+    DEPLOY_LEGAL_ROOT = "LicenseAgreements",
+    DEPLOY_THIRD_PARTY_ROOT = "ThirdParty",
     DEPLOY_ONLINEEXAMPLES = "online-examples",
     ONLINE_EXAMPLES_PACKAGE = "kendoui-online-examples.zip";
 
@@ -117,14 +119,20 @@ function deployStyles(root, license, copySource) {
 }
 
 function deployLicenses(root, bundle) {
-    kendoBuild.copyFileSync(
+    var deployLegalRoot = path.join(root, DEPLOY_LEGAL_ROOT),
+        deployThirdPartyRoot = path.join(root, DEPLOY_LEGAL_ROOT, DEPLOY_THIRD_PARTY_ROOT);
+
+    kendoBuild.mkdir(deployLegalRoot);
+    kendoBuild.mkdir(deployThirdPartyRoot);
+
+    copyDir(
         path.join(LEGAL_ROOT, bundle.eula),
-        path.join(root, bundle.eula)
+        deployLegalRoot
     );
 
-    kendoBuild.copyFileSync(
-        path.join(LEGAL_ROOT, THIRD_PARTY_LICENSES),
-        path.join(root, THIRD_PARTY_LICENSES)
+    copyDir(
+        path.join(LEGAL_ROOT, THIRD_PARTY_ROOT),
+        deployThirdPartyRoot
     );
 }
 
