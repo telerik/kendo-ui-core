@@ -111,8 +111,18 @@
                 equal(t({ foo: "<" }), "&lt;");
             });
 
+            test("using #: escapes html entities", function() {
+                var t = template.compile("#:foo#");
+                equal(t({ foo: "<" }), "&lt;");
+            });
+
             test("using ${} and non-string arguments", function() {
                 var t = template.compile("${foo}");
+                equal(t({ foo: 1 }), "1");
+            });
+
+            test("using #: and non-string arguments", function() {
+                var t = template.compile("#:foo#");
                 equal(t({ foo: 1 }), "1");
             });
 
