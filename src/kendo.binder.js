@@ -114,16 +114,21 @@
         return "innerText";
     })();
 
+    var templates = {
+        select: "<option>${data}</option>",
+        table: "<tr><td>${data}</td></tr>"
+    };
+
     function templateFor(element) {
         var templateId = element.getAttribute("data-template"),
-            template = "<option>${data}</option>",
+            template = templates[element.nodeName.toLowerCase()] || "${data}",
             templateElement;
 
         if (templateId) {
             templateElement = document.getElementById(templateId);
 
             if (templateElement) {
-                template = templateElement[innerText];
+                template = $(templateElement).html();
             }
         }
 
@@ -150,23 +155,30 @@
                 idx,
                 length;
 
+            if (element.nodeName.toLowerCase() === "table") {
+                if (!element.tBodies[0]) {
+                    element.appendChild(document.createElement("tbody"))
+                }
+                element = element.tBodies[0];
+            }
+
             if (e) {
                 if (e.action === "add") {
                     if (element.children.length < 1) {
-                        element.innerHTML = kendo.render(template, object[field]);
+                        $(element).html(kendo.render(template, object[field]));
                     } else {
                         $(element.children[e.index - 1])
                               .after(kendo.render(template, e.items));
                     }
                 } else if (e.action === "remove") {
-                    children = splice.call(element.children, e.index, e.items.length);
+                    children = $.makeArray(element.children).splice(e.index, e.items.length);
 
                     for (idx = 0, length = children.length; idx < length; idx ++) {
                         element.removeChild(children[idx]);
                     }
                 }
             } else {
-                element.innerHTML = kendo.render(template, object[field]);
+                $(element).html(kendo.render(template, object[field]));
             }
         }
     };
