@@ -46,6 +46,7 @@
                 selectedProduct: 2,
                 selectFirst: function() {
                     this.set("selectedProduct", 1);
+                    return false;
                 },
                 addProduct: function() {
                     this.products.push({ id: 3, name: "Coffee" });
