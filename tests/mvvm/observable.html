@@ -83,143 +83,148 @@
             test("pushing items to array raises the change event", function() {
                 expect(1);
 
-                var viewmodel = kendo.observable({ foo: [{}] });
+                var viewModel = kendo.observable({ foo: [{}] });
 
-                viewmodel.foo.bind("change", function() {
+                viewModel.foo.bind("change", function() {
                     ok(true, "change is raised");
                 });
 
-                viewmodel.foo.push({});
+                viewModel.foo.push({});
             });
 
             test("pushing items to array raises the change event and sets the action to add", function() {
                 expect(1);
 
-                var viewmodel = kendo.observable({ foo: [{}] });
+                var viewModel = kendo.observable({ foo: [{}] });
 
-                viewmodel.foo.bind("change", function(e) {
+                viewModel.foo.bind("change", function(e) {
                     equal(e.action, "add");
                 });
 
-                viewmodel.foo.push({});
+                viewModel.foo.push({});
             });
 
             test("pushing items to array raises the change event and sets the index", function() {
                 expect(1);
 
-                var viewmodel = kendo.observable({ foo: [{}] });
+                var viewModel = kendo.observable({ foo: [{}] });
 
-                viewmodel.foo.bind("change", function(e) {
+                viewModel.foo.bind("change", function(e) {
                     equal(e.index, 1)
                 });
 
-                viewmodel.foo.push({});
+                viewModel.foo.push({});
             });
 
             test("pushing items to array raises the change event and provides the added items", function() {
                 expect(1);
 
-                var viewmodel = kendo.observable({ foo: [{}] });
+                var viewModel = kendo.observable({ foo: [{}] });
 
-                viewmodel.foo.bind("change", function(e) {
+                viewModel.foo.bind("change", function(e) {
                     equal(e.items.length, 1)
                 });
 
-                viewmodel.foo.push({});
+                viewModel.foo.push({});
             });
 
             test("this in the change event is the array itself", function() {
                 expect(1);
 
-                var viewmodel = kendo.observable({ foo: [] });
+                var viewModel = kendo.observable({ foo: [] });
 
-                viewmodel.foo.bind("change", function() {
-                    strictEqual(this, viewmodel.foo);
+                viewModel.foo.bind("change", function() {
+                    strictEqual(this, viewModel.foo);
                 });
 
-                viewmodel.foo.push({});
+                viewModel.foo.push({});
             });
 
             test("unshifting items to array raises the change event", function() {
                 expect(3);
 
-                var viewmodel = kendo.observable({ foo: [] });
+                var viewModel = kendo.observable({ foo: [] });
 
-                viewmodel.foo.bind("change", function(e) {
+                viewModel.foo.bind("change", function(e) {
                     equal(e.action, "add");
                     equal(e.index, 0);
                     equal(e.items.length, 1);
                 });
 
-                viewmodel.foo.unshift({});
+                viewModel.foo.unshift({});
             });
 
             test("splicing array items raises the change event with remove action", function() {
                 expect(1);
 
-                var viewmodel = kendo.observable({ foo: [{}] });
+                var viewModel = kendo.observable({ foo: [{}] });
 
-                viewmodel.foo.bind("change", function(e) {
+                viewModel.foo.bind("change", function(e) {
                     equal(e.action, "remove");
                 });
 
-                viewmodel.foo.splice(0);
+                viewModel.foo.splice(0);
             });
 
             test("splicing array items raises the change event and provides index", function() {
                 expect(1);
 
-                var viewmodel = kendo.observable({ foo: [{}] });
+                var viewModel = kendo.observable({ foo: [{}] });
 
-                viewmodel.foo.bind("change", function(e) {
+                viewModel.foo.bind("change", function(e) {
                     equal(e.index, 0);
                 });
 
-                viewmodel.foo.splice(0);
+                viewModel.foo.splice(0);
             });
 
             test("splicing array items raises the change event and provides the removed items", function() {
                 expect(1);
 
-                var viewmodel = kendo.observable({ foo: [{}] });
+                var viewModel = kendo.observable({ foo: [{}] });
 
-                viewmodel.foo.bind("change", function(e) {
+                viewModel.foo.bind("change", function(e) {
                     equal(e.items.length, 1);
                 });
 
-                viewmodel.foo.splice(0);
+                viewModel.foo.splice(0);
             });
 
             test("splicing array items returns the removed items", function() {
-                var viewmodel = kendo.observable({ foo: [{}] });
+                var viewModel = kendo.observable({ foo: [{}] });
 
-                equal(viewmodel.foo.splice(0).length, 1);
+                equal(viewModel.foo.splice(0).length, 1);
             });
 
             test("splicing array items raises the change event with add action", function() {
                 expect(1);
 
-                var viewmodel = kendo.observable({ foo: [] });
+                var viewModel = kendo.observable({ foo: [] });
 
-                viewmodel.foo.bind("change", function(e) {
+                viewModel.foo.bind("change", function(e) {
                     equal(e.action, "add");
                 });
 
-                viewmodel.foo.splice(0, 1, {});
+                viewModel.foo.splice(0, 1, {});
             });
 
             test("splicing array items raises the change event and sends the index and inserted items", function() {
                 expect(2);
 
-                var viewmodel = kendo.observable({ foo: [] });
+                var viewModel = kendo.observable({ foo: [] });
 
-                viewmodel.foo.bind("change", function(e) {
+                viewModel.foo.bind("change", function(e) {
                     equal(e.index, 0);
                     equal(e.items.length, 1);
                 });
 
-                viewmodel.foo.splice(0, 1, {});
+                viewModel.foo.splice(0, 1, {});
             });
-       </script>
+
+            test("observable array items are observable", function() {
+                var viewModel = kendo.observable({ foo: [ {} ] });
+                ok(viewModel.foo[0].bind);
+            });
+        </script>
     </head>
 </html>
