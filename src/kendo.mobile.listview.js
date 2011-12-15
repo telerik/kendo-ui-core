@@ -32,16 +32,16 @@
     * <p>It can be either used in unbound mode by enhancing an HTML <code>ul</code> element, or bound to a kendo.data.DataSource instance.</p>
     *
     * <h3>Getting Started</h3>
-    * <p>The Kendo MobileApplication will automatically initialize the MobileListView for every <code>ul</code> element with <code>role</code> data attribute set to <code>listview</code> present in the views markup.
-    * Alternatively, it can be initialized using a jQuery selector. The listview element can contain one or more <code>li</code> elements.</p>
-    * @exampleTitle Initialize Kendo MobileListView based on role data attribute.
+    * <p>The Kendo MobileApplication automatically initializes the MobileListView for every <code>ul</code> element with <code>role</code> data attribute set to <code>listview</code> present in the views' markup.
+    * Alternatively, it can be initialized using a jQuery selector. The MobileListView element can contain one or more <code>li</code> elements.</p>
+    * @exampleTitle Initialize Kendo MobileListView using a role data attribute.
     * @example
     * <ul data-role="listview">
     *   <li>Foo</li>
     *   <li>Bar</li>
     * </ul>
     *
-    * @exampleTitle Initialize Kendo MobileListView using a jQuery selector
+    * @exampleTitle Initialize Kendo MobileListView using a jQuery selector.
     * @example
     * <ul id="listView"></ul>
     * <script>
@@ -50,7 +50,7 @@
     *
     * @section
     * <h3>Inset MobileListView</h3>
-    * <p>In iOS, the MobileListView appearance can be changed to <strong>inset</strong>, to achieve an effect similar to iOS grouped tableviews, where the list items are padded from the container, and have rounded corners.
+    * <p>In iOS, the MobileListView appearance can be changed to <strong>inset</strong>, to achieve an effect similar to iOS grouped table views, where the list items are padded from the container, and have rounded corners.
     * This can be accomplished by setting the <code>style</code> data attribute to <code>inset</code>. <strong>Note:</strong> This setting won't affect the appearance of the MobileListView on Android devices.</p>
     *
     * @exampleTitle Create Inset MobileListView
@@ -108,10 +108,8 @@
     * </p>
     * @exampleTitle Basic item template customization
     * @example
-    * <!-- HTML -->
     * <ul id="listview"></ul>
     *
-    * <!-- MobileListView initialization -->
     * <script type="text/javascript">
     *     $(document).ready(function() {
     *         $("#listview").kendoMobileListView({
