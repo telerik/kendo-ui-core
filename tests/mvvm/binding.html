@@ -242,6 +242,39 @@
                 kendo.bind(dom, viewModel);
                 equal(dom.find("thead > tr").length, 1);
             });
+
+            test("bind array to element which does not have specific predefined template", function() {
+                var dom = $('<div data-source="foo"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.text(), "12");
+            });
+
+            test("bind array to unordered list creats list item elements", function() {
+                var dom = $('<ul data-source="foo"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("li").length, viewModel.foo.length);
+            });
+
+            test("bind array to ordered list creats list item elements", function() {
+                var dom = $('<ol data-source="foo"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("li").length, viewModel.foo.length);
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
