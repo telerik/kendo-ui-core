@@ -90,11 +90,14 @@
         object.bind = Observable.fn.bind;
         object.trigger = Observable.fn.trigger;
 
-        object.set = function(field, value) {
+        object.set = function(field, value, initiator) {
+            var current = this[field];
+
             this[field] = value;
 
             this.trigger(CHANGE, {
-                field: field
+                field: field,
+                initiator: initiator
             });
         }
 
@@ -128,38 +131,42 @@
     }
 
     var bindings = {
-        text: function(element, value) {
-            element[innerText] = value;
+        text: function(element, object, field) {
+            element[innerText] = object[field];
         },
-        html: function(element, value) {
-            element.innerHTML = value;
+        html: function(element, object, field) {
+            element.innerHTML = object[field];
         },
-        value: function(element, value) {
-            element.value = value;
+        value: function(element, object, field) {
+            element.value = object[field];
+
+            $(element).change(function() {
+                object.set(field, element.value, element);
+            });
         },
-        source: function(element, value) {
+        source: function(element, object, field) {
             var template = templateFor(element);
 
-            element.innerHTML = kendo.render(kendo.template(template), value);
+            element.innerHTML = kendo.render(kendo.template(template), object[field]);
         }
     };
 
     $.each("title alt src href".split(" "), function(index, attr) {
-        bindings[attr] = function(element, value) {
-            element.setAttribute(attr, value);
+        bindings[attr] = function(element, object, field) {
+            element.setAttribute(attr, object[field]);
         }
     });
 
     $.each("click change".split(" "), function(index, eventName) {
-        bindings[eventName] = function(element, value) {
-            $(element).bind(eventName, $.proxy(value, this));
+        bindings[eventName] = function(element, object, field) {
+            $(element).bind(eventName, $.proxy(object[field], this));
         }
     });
 
     function observe(element, object, field, binding) {
         object.bind("change", function(e) {
-            if (e.field === field) {
-                binding(element, object[field]);
+            if (e.field === field && e.initiator !== element) {
+                binding(element, object, field);
             }
         });
     }
@@ -173,7 +180,7 @@
             if (field) {
                 binding = $.proxy(kendo.bindings[binding], object);
 
-                binding(element, object[field]);
+                binding(element, object, field);
 
                 observe(element, object, field, binding);
             }
@@ -181,9 +188,9 @@
     }
 
     function bindChildren(element, object) {
-        var idx, length, children = element.getElementsByTagName("*");
+        var idx, children = element.getElementsByTagName("*");
 
-        for (idx = 0, length = children.length; idx < length; idx++ ) {
+        for (idx = 0; idx < children.length; idx++ ) { // length is not cached intentionally - children is a live NodeList
             bindElement(children[idx], object);
         }
     }

@@ -18,10 +18,14 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
         <script>
+            var valueBinding;
+
             module("mvvm observing", {
                 setup: function() {
+                    valueBinding = kendo.bindings.value;
                 },
                 teardown: function() {
+                    kendo.bindings.value = valueBinding;
                 }
             });
 
@@ -88,6 +92,43 @@
                 equal(dom.find("option").length, 2);
                 equal(dom.find("option").first().text(), "foo");
                 equal(dom.find("option").last().text(), "baz");
+            });
+
+            test("change event notifies value liseteners", function() {
+                var viewModel = kendo.observable( {
+                    foo: ["foo", "bar", "baz"],
+                    bar: "bar"
+                });
+
+                var dom = $('<div><select data-source="foo" data-value="bar"/><span data-text="bar"/></div>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("option:first").attr("selected", "selected");
+                dom.find("select").trigger("change");
+                equal(dom.find("span").text(), "foo");
+            });
+
+            test("change event does not update the value", function() {
+                var viewModel = kendo.observable( {
+                    foo: ["foo", "bar", "baz"],
+                    bar: "bar"
+                });
+
+                stub(kendo.bindings, {
+                    value: function() {
+                        valueBinding.apply(kendo.bindings, arguments);
+                    }
+                });
+
+                var dom = $('<select data-source="foo" data-value="bar"/>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("option:first").attr("selected", "selected");
+                dom.trigger("change");
+
+                equal(kendo.bindings.calls("value"), 1);
             });
         </script>
     </head>

@@ -141,6 +141,18 @@
                 equal(dom.find("option").last().text(), "2");
             });
 
+            test("binding which adds nodes to the dom tree", function() {
+                var dom = $('<div><select data-source="foo"/><span data-text="bar"/></div>');
+
+                kendo.bind(dom, {
+                    foo: [1, 2],
+                    bar: "bar"
+                });
+
+                equal(dom.find("option").length, 2);
+                equal(dom.find("span").text(), "bar");
+            });
+
             test("select binding with template", function() {
                 var dom = $('<select data-source="foo" data-template="select-template" />');
 
