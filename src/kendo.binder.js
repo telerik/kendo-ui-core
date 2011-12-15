@@ -116,7 +116,9 @@
 
     var templates = {
         select: "<option>${data}</option>",
-        table: "<tr><td>${data}</td></tr>"
+        table: "<tr><td>${data}</td></tr>",
+        ul: "<li>${data}</li>",
+        ol: "<li>${data}</li>"
     };
 
     function templateFor(element) {
