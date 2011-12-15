@@ -28,7 +28,7 @@ namespace Kendo.Controllers
                 { "shared/styles", "demos/examples/shared/styles" }
             };
 
-        public ContentResult StaticContent(string path)
+        public ActionResult StaticContent(string path)
         {
             var mimeType = MimeTypes[Path.GetExtension(path)];
 
@@ -42,7 +42,7 @@ namespace Kendo.Controllers
                 throw new HttpException(404, "File Not Found");
             }
 
-            return Content(IOFile.ReadAllText(path), mimeType);
+            return File(IOFile.ReadAllBytes(path), mimeType);
         }
     }
 }

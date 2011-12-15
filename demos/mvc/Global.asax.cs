@@ -24,7 +24,7 @@ namespace Kendo
 
             routes.MapRoute(
                 "Static",
-                "{assetGroup}/{assetType}/{file}",
+                "{assetGroup}/{assetType}/{*file}",
                 new { controller = "Static", action = "Resource" },
                 new { assetGroup = "(src|shared)",
                       assetType = "(js|styles)" }
