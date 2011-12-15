@@ -42,7 +42,7 @@
 
                 dataSource = new kendo.data.DataSource({
                     data: data,
-                    pageSize: 10,
+                    pageSize: 5,
                     //group: { field: "foo", aggregates: [ { field: "foo", aggregate: "count"} ] },
                     aggregate: [ { field: "id", aggregate: "sum"}, { field: "foo", aggregate:"count"},{ field: "bar", aggregate:"count" }]
                 });
@@ -56,8 +56,11 @@
                     groupable: true,
                     pageable: true,
                     sortable: true,
-                    //scrollable: false,
-                    columns: [ { field:"id", footerTemplate: "sum: #=sum#"}, { field: "bar", footerTemplate: "custom text count: #=count#" }, { field: "foo", aggregates: "count",  groupHeaderTemplate: "#=field# : #=value# (Count: #=count#)", footerTemplate: "count: #=count#"}]
+                    columns: [
+                        { field:"id", footerTemplate: "sum: #=sum#"},
+                        { field: "bar", footerTemplate: "custom text count: #=count#", groupFooterTemplate: "pechurka" },
+                        { field: "foo", aggregates: "count",  groupHeaderTemplate: "#=field# : #=value# (Count: #=count#)", footerTemplate: "count: #=count#", groupFooterTemplate: "count: #=count#"}
+                    ]
                 });
 
             });

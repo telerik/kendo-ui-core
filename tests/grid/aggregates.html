@@ -295,6 +295,55 @@
                 equal(aggregates[1], "sum");
                 ok(ths.eq(1).attr("data-kendo-aggregates") === undefined);
             });
+
+            test("group footer row is rendered if column footer template is set", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2} ],
+                        group: "foo"
+                    },
+                    columns: [ { field: "foo", groupFooterTemplate: "foo", width: "100px" } , "bar" ],
+                });
+
+                ok(grid.table.find("tr.k-group-footer").length);
+            });
+
+            test("group footer row is not rendered if there is no groupFooter template set", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2} ],
+                        group: "foo"
+                    },
+                    columns: [ { field: "foo", width: "100px" } , "bar" ],
+                });
+
+                ok(!grid.table.find("tr.k-group-footer").length);
+            });
+
+            test("column group footer template is rendered if set", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2} ],
+                        group: "foo"
+                    },
+                    columns: [ { field: "foo", groupFooterTemplate: "foo", width: "100px" } , "bar" ],
+                }),
+                groupFooter = grid.table.find("tr.k-group-footer");
+                equal(groupFooter.find("td").eq(1).text(), "foo");
+            });
+
+            test("column group footer template with aggregate is rendered if set", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ {foo: 1, bar: 2} ],
+                        group: { field: "foo", aggregates: [{ field: "foo", aggregate: "count" }]}
+                    },
+                    columns: [ { field: "foo", groupFooterTemplate: "#=count#", width: "100px" } , "bar" ],
+                }),
+                groupFooter = grid.table.find("tr.k-group-footer");
+
+                equal(groupFooter.find("td").eq(1).text(), 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

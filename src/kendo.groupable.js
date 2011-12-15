@@ -3,7 +3,7 @@
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
         CONTAINER_EMPTY_TEXT = "Drag a column header and drop it here to group by that column",
-        indicatorTmpl = kendo.template('<div class="k-group-indicator" data-#=data.ns#field="${data.field}" data-#=data.ns#title="${data.title}" data-#=data.ns#dir="${data.dir || "asc"}" data-#=data.ns#aggregates="${data.aggregates}">' +
+        indicatorTmpl = kendo.template('<div class="k-group-indicator" data-#=data.ns#field="${data.field}" data-#=data.ns#title="${data.title}" data-#=data.ns#dir="${data.dir || "asc"}">' +
                 '<a href="\\#" class="k-link">' +
                     '<span class="k-icon k-arrow-${(data.dir || "asc") == "asc" ? "up" : "down"}-small">(sorted ${(data.dir || "asc") == "asc" ? "ascending": "descending"})</span>' +
                     '${data.title ? data.title: data.field}' +
@@ -115,7 +115,7 @@
                     groupContainer.empty().append(
                         $.map(this.group() || [], function(item) {
                             var element = that.element.find(that.options.filter).filter("[" + kendo.attr("field") + "=" + item.field + "]");
-                            return that.buildIndicator(item.field, element.attr(kendo.attr("title")), item.dir, element.attr(kendo.attr("aggregates")));
+                            return that.buildIndicator(item.field, element.attr(kendo.attr("title")), item.dir);
                         }).join("")
                     );
                     that._invalidateGroupContainer();
@@ -133,11 +133,12 @@
                     return $(item).attr(kendo.attr("field")) === field;
                 })[0];
         },
-        buildIndicator: function(field, title, dir, aggregates) {
-            return indicatorTmpl({ field: field, dir: dir, title: title, aggregates: aggregates || "", ns: kendo.ns });
+        buildIndicator: function(field, title, dir) {
+            return indicatorTmpl({ field: field, dir: dir, title: title, ns: kendo.ns });
         },
         descriptors: function() {
-            var indicators = $(".k-group-indicator", this.groupContainer),
+            var that = this,
+                indicators = $(".k-group-indicator", that.groupContainer),
                 aggregates,
                 names,
                 field,
@@ -145,18 +146,24 @@
                 length,
                 result;
 
-            return $.map(indicators, function(item) {
-                item = $(item);
-                aggregates = item.attr(kendo.attr("aggregates"));
-                field = item.attr(kendo.attr("field"));
+            aggregates = that.element.find(that.options.filter).map(function() {
+                var cell = $(this),
+                    aggregate = cell.attr(kendo.attr("aggregates"));
+                    member = cell.attr(kendo.attr("field"));
 
-                if (aggregates && aggregates !== "") {
-                    names = aggregates.split(",");
-                    aggregates = [];
+                if (aggregate && aggregate !== "") {
+                    names = aggregate.split(",");
+                    aggregate = [];
                     for (idx = 0, length = names.length; idx < length; idx++) {
-                        aggregates.push({ field: field, aggregate: names[idx] });
+                        aggregate.push({ field: member, aggregate: names[idx] });
                     }
                 }
+                return aggregate;
+            }).toArray();
+
+            return $.map(indicators, function(item) {
+                item = $(item);
+                field = item.attr(kendo.attr("field"));
 
                 return {
                     field: field,
@@ -224,7 +231,6 @@
             var that = this,
                 field = event.currentTarget.attr(kendo.attr("field")),
                 title = event.currentTarget.attr(kendo.attr("title")),
-                aggregates = event.currentTarget.attr(kendo.attr("aggregates")),
                 sourceIndicator = that.indicator(field),
                 dropCuePositions = that._dropCuePositions,
                 lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
@@ -235,15 +241,15 @@
                     position = that._dropCuePosition(dropCue.offset().left + parseInt(lastCuePosition.element.css("marginLeft")) + parseInt(lastCuePosition.element.css("marginRight")));
                     if(that._canDrop($(sourceIndicator), position.element, position.left)) {
                         if(position.before) {
-                            position.element.before(sourceIndicator || that.buildIndicator(field, title, "asc", aggregates));
+                            position.element.before(sourceIndicator || that.buildIndicator(field, title));
                         } else {
-                            position.element.after(sourceIndicator || that.buildIndicator(field, title, "asc", aggregates));
+                            position.element.after(sourceIndicator || that.buildIndicator(field, title));
                         }
 
                         that._change();
                     }
                 } else {
-                    that.groupContainer.append(that.buildIndicator(field, title, "asc", aggregates));
+                    that.groupContainer.append(that.buildIndicator(field, title));
                     that._change();
                 }
             } else {
