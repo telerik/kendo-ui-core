@@ -1683,7 +1683,10 @@
 
         _templates: function() {
             var that = this,
-                options = that.options;
+                options = that.options,
+                dataSource = that.dataSource,
+                groups = dataSource.group(),
+                aggregates = dataSource.aggregate();
 
             that.rowTemplate = that._tmpl(options.rowTemplate);
             that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, true);
@@ -1692,14 +1695,18 @@
                 that.detailTemplate = that._detailTmpl(options.detailTemplate || "");
             }
 
-            if (!isEmptyObject(that.dataSource.aggregate()) ||
+            if (!isEmptyObject(aggregates) ||
                 $.grep(that.columns, function(column) { return column.footerTemplate }).length) {
 
-                that.footerTemplate = that._footerTmpl();
+                that.footerTemplate = that._footerTmpl(aggregates, "footerTemplate", "k-footer-template");
+            }
+            if (groups.length && $.grep(that.columns, function(column) { return column.groupFooterTemplate }).length) {
+                aggregates = $.map(groups, function(g) { return g.aggregates });
+                that.groupFooterTemplate = that._footerTmpl(aggregates, "groupFooterTemplate", "k-group-footer");
             }
         },
 
-        _footerTmpl: function() {
+        _footerTmpl: function(aggregates, templateName, rowClass) {
             var that = this,
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 paramName = settings.paramName,
@@ -1713,7 +1720,6 @@
                 count = 0,
                 scope = {},
                 dataSource = that.dataSource,
-                aggregates = dataSource.aggregate(),
                 groups = dataSource.group().length,
                 fieldsMap = {},
                 column;
@@ -1728,7 +1734,7 @@
                 }
             }
 
-            html += '<tr class="k-footer-template">';
+            html += '<tr class="' + rowClass + '">';
 
             if (groups > 0) {
                 html += groupCells(groups);
@@ -1740,7 +1746,7 @@
 
             for (idx = 0, length = that.columns.length; idx < length; idx++) {
                 column = columns[idx];
-                template = column.footerTemplate;
+                template = column[templateName];
                 type = typeof template;
 
                 html += "<td>";
@@ -2049,6 +2055,9 @@
                 html += that._rowsHtml(groupItems);
             }
 
+            if (that.groupFooterTemplate) {
+                html += that.groupFooterTemplate(group.aggregates);
+            }
             return html;
         },
 
