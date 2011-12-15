@@ -18,8 +18,16 @@ namespace Kendo
 
             routes.MapRoute(
                 "Web",
-                "web/{section}/{example}.html",
+                "web/{section}/{example}",
                 new { controller = "Web", action = "Index", section = "overview", example = "index.html" }
+            );
+
+            routes.MapRoute(
+                "Static",
+                "{assetGroup}/{assetType}/{file}",
+                new { controller = "Static", action = "Resource" },
+                new { assetGroup = "(src|shared)",
+                      assetType = "(js|styles)" }
             );
 
             routes.MapRoute(
