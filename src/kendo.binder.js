@@ -169,24 +169,19 @@
         },
         template: function(element, object) {
             if (!element.getAttribute("data-source")) {
-                var template = kendo.template(templateFor(element)),
-                    children = element.children,
-                    idx,
-                    length;
+                var template = kendo.template(templateFor(element));
 
                 $(element).html(template(object));
-
-                for (idx = 0, length = children.length; idx < length; idx ++) {
-                    bindElement(children[idx], object);
-                }
             }
         },
         source: function(element, object, field, e) {
             var template = kendo.template(templateFor(element)),
                 child,
                 children,
-                idx,
+                idx = 0,
                 length;
+
+            object = get(object, field);
 
             if (element.nodeName.toLowerCase() === "table") {
                 if (!element.tBodies[0]) {
@@ -198,7 +193,7 @@
             if (e) {
                 if (e.action === "add") {
                     if (element.children.length < 1) {
-                        $(element).html(kendo.render(template, get(object, field)));
+                        $(element).html(kendo.render(template, object));
                     } else {
                         $(element.children[e.index - 1])
                               .after(kendo.render(template, e.items));
@@ -206,17 +201,17 @@
                 } else if (e.action === "remove") {
                     children = $.makeArray(element.children).splice(e.index, e.items.length);
 
-                    for (idx = 0, length = children.length; idx < length; idx ++) {
+                    for (length = children.length; idx < length; idx ++) {
                         element.removeChild(children[idx]);
                     }
                 }
             } else {
-                $(element).html(kendo.render(template, get(object, field)));
+                $(element).html(kendo.render(template, object));
 
-                children = element.children;
-
-                for (idx = 0, length = children.length; idx < length; idx ++) {
-                    bindElement(children[idx], get(object, field)[idx], true);
+                for (element = element.firstChild; element; element = element.nextSibling) {
+                    if (element.nodeType === 1) {
+                        bindElement(element, object[idx++]);
+                    }
                 }
             }
         }
@@ -242,7 +237,7 @@
         });
     }
 
-    function bindElement(element, object, recursive) {
+    function bindElement(element, object) {
         var field, binding;
 
         for (binding in kendo.bindings) {
@@ -259,10 +254,10 @@
             }
         }
 
-        if (recursive && !element.getAttribute("data-source")) {
+        if (!element.getAttribute("data-source")) {
             for (element = element.firstChild; element; element = element.nextSibling) {
                 if (element.nodeType === 1) {
-                    bindElement(element, object, true);
+                    bindElement(element, object);
                 }
             }
         }
@@ -272,7 +267,7 @@
         var idx, length;
 
         for (idx = 0, length = dom.length; idx < length; idx++ ) {
-            bindElement(dom[idx], object, true);
+            bindElement(dom[idx], object);
         }
     }
 
