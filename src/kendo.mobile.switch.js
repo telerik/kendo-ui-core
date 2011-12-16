@@ -32,13 +32,17 @@
 
             MobileWidget.fn.init.call(that, element, options);
 
-            that._wrap();
+            that._wrapper();
+            that._background();
+            that._handle();
 
-            element = that.element.bind(MOUSEDOWN, proxy(that._start, that));
+            that._check(); //rename
+
+            element = that.element.data(kendo.attr("role"), "switch");
             options = that.options;
 
-            //refactor
-            that.width = element.outerWidth();
+            //constants
+            that.width = that.wrapper.outerWidth();
             that.halfWidth = that.handle.outerWidth() / 2;
             that.constrain = that.width - that.handle.outerWidth(true) + that.halfWidth;
 
@@ -65,28 +69,34 @@
         //refactor
         enable: function(enable) {
             enable = typeof enable === "boolean" ? enable : true;
-            var that = this;
+            var that = this,
+                element = that.element,
+                wrapper = that.wrapper;
 
             that.options.enable = enable;
             if (enable) {
-                that.element.removeClass("km-state-disabled");
-                that.input.removeAttr("disabled");
-                that.element.delegate("input[type=checkbox]", "change", that._toggleProxy)
-                            .delegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
-                that.element.filter(bindSelectors).bind(MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
+                element.removeAttr("disabled");
+
+                wrapper.removeClass("km-state-disabled");
+                wrapper.delegate("input[type=checkbox]", "change", that._toggleProxy)
+                       .delegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
+
+                wrapper.filter(bindSelectors).bind(MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
             } else {
-                that.element.undelegate("input[type=checkbox]", "change", that._toggleProxy)
-                            .undelegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
-                that.element.filter(bindSelectors).unbind(MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
-                that.input.attr("disabled");
-                that.element.addClass("km-state-disabled");
+                wrapper.addClass("km-state-disabled");
+                wrapper.undelegate("input[type=checkbox]", "change", that._toggleProxy)
+                       .undelegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
+
+                wrapper.filter(bindSelectors).unbind(MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
+
+                element.attr("disabled");
             }
         },
 
         //refactor
         toggle: function(toggle) {
             var that = this,
-                input = that.input,
+                input = that.element,
                 checked = input[0].checked;
 
             if (toggle != checked && !that.handle.data("animating") && that.options.enable) {
@@ -96,7 +106,7 @@
         },
 
         _getAxisLocation: function(e) {
-            return kendo.touchLocation(e).x - this.element.offset().left;
+            return kendo.touchLocation(e).x - this.wrapper.offset().left;
         },
 
         _move: function(e) {
@@ -104,8 +114,8 @@
                 location = limitValue(that._getAxisLocation(e), that.halfWidth, that.constrain),
                 position = location - that.halfWidth;
 
-            that.animator.css(TRANSFORMSTYLE, "translatex(" + position + "px)"); // TODO: remove halfWidth
-            that.mAnimator.css("margin-left", that.origin + position);
+            that.handle.css(TRANSFORMSTYLE, "translatex(" + position + "px)"); // TODO: remove halfWidth
+            that.background.css("margin-left", that.origin + position);
         },
 
         _start: function(e) {
@@ -116,11 +126,11 @@
             that._initial = that._getAxisLocation(e);
 
             //why we need origin?
-            that.origin = that.mAnimator.data("origin");
+            that.origin = that.background.data("origin");
 
             if (!that.origin && that.origin !== 0) { //check for undefined
-               that.origin = parseInt(that.mAnimator.css("margin-left"), 10);
-               that.mAnimator.data("origin", that.origin);
+               that.origin = parseInt(that.background.css("margin-left"), 10);
+               that.background.data("origin", that.origin);
             }
 
             $(document) //cache it
@@ -137,7 +147,7 @@
 
             //consider better way!
             if (Math.abs(that._initial - location) <= 2) {
-                value = !that.input[0].checked;
+                value = !that.element[0].checked;
             } else {
                 value = location > (that.width / 2);
             }
@@ -158,12 +168,11 @@
             var that = this;
 
             if (that.options.enable) {
-                that._snap(that.input[0].checked)
+                that._snap(that.element[0].checked)
             }
         },
 
         //refactor and rename ?
-        //
         _snap: function (value) { //snap expects true or false (checked and etc);
             var that = this,
                 handle = that.handle,
@@ -175,74 +184,65 @@
                 .addClass("km-switch-" + (checked ? "on" : "off"));
 
             if (!handle.data("animating")) {
-                distance = value * (that.element.outerWidth() - that.handle.outerWidth(true)); //this maybe is the snap part... cache it!
+                distance = value * (that.wrapper.outerWidth() - that.handle.outerWidth(true)); //this maybe is the snap part... cache it!
 
-                that.mAnimator
+                that.background
                     .kendoStop(true, true)
                     .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !value, axis: "left", duration: 150 });
 
-                that.animator
+                that.handle
                     .kendoStop(true, true)
                     .kendoAnimate(extend({
                         effects: "slideTo",
                         duration: 150,
                         offset: distance + "px,0",
                         complete: function () {
-                            that.input[0].checked = checked;
+                            that.element.checked = checked;
                             that.trigger(TOGGLE, { checked: checked }); //should remove it ??!??!
                         }
                     }));
             }
         },
 
-        //refactor _wrap. split this method
-        _wrap: function() {
+        _background: function() {
+            var that = this;
+
+            that.background = $("<span class='km-switch-wrapper'><span class='km-switch-background'></span></span>")
+                                .appendTo(that.wrapper)
+                                .children(".km-switch-background");
+        },
+
+        _handle: function() {
+            var that = this;
+
+            that.handle = $("<span class='km-switch-container'><span class='km-switch-handle' /></span>")
+                            .appendTo(that.wrapper)
+                            .children(handleSelector);//reconsider children() part
+        },
+
+        _wrapper: function() {
+            var that = this;
+
+                that.wrapper = that.element.wrap("<label />")
+                                    .parent()
+                                    .addClass("km-switch")
+                                    .bind(MOUSEDOWN, proxy(that._start, that));
+        },
+
+        _check: function() {
             var that = this,
                 element = that.element,
-                input,
-                handle;
+                checked = element[0].checked,
+                wrapper = that.wrapper,
+                background = that.background,
+                handle = that.handle.addClass("km-switch-" + (checked ? "on" : "off"));
 
-            if (element.is("input[type=checkbox]")) {
-                that.element = element = element.wrap("<label />").parent();
-            }
-
-            input = element.children("input[type=checkbox]");
-            handle = element.children(handleSelector);
-
-            if (element.is("label")) {
-                element.addClass("km-switch");
-            }
-
-            if (input.length) {
-                //use kendo.attr("role") ?? maybe I should use attr not data
-                input.data("kendo-role", "switch");
-            } else {
-                input = $("<input type='checkbox' " + kendo.attr("role") +  "='switch' />").appendTo(element);
-            }
-
-
-            if (!handle.length) {
-                handle = $("<span class='km-switch-container'><span class='km-switch-handle' /></span>")
-                                    .appendTo(that.element)
-                                    .children(handleSelector);
-            }
-
-            handle.parent().before("<span class='km-switch-wrapper'><span class='km-switch-background'></span></span>");
-
-            that.animator = handle;
-            that.mAnimator = that.element.find(".km-switch-background");
-
-            var checked = input[0].checked;
-            handle.addClass("km-switch-" + (checked ? "on" : "off"));
             if (checked) {
-                that.animator.css(TRANSFORMSTYLE, "translate(" + (that.element.outerWidth() - handle.outerWidth()) + "px,0)");
-                that.mAnimator
-                    .data("origin", parseInt(that.mAnimator.css("margin-left"), 10))
+                handle.css(TRANSFORMSTYLE, "translate(" + (wrapper.outerWidth() - handle.outerWidth()) + "px,0)");
+                background
+                    .data("origin", parseInt(background.css("margin-left"), 10))
                     .css("margin-left", 0);
             }
-
-            that.input = input;
-            that.handle = handle;
         }
     });
 
