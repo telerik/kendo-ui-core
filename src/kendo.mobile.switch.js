@@ -41,7 +41,7 @@
             element = that.element.data(kendo.attr("role"), "switch");
             options = that.options;
 
-            //constants (refactor)
+            //constants
             handleWidth = that.handle.outerWidth(true);
             that.halfWidth = that.handle.outerWidth() / 2;
             that.width = that.wrapper.outerWidth();
@@ -74,32 +74,35 @@
                 checked = toggle;
             }
 
-            that.background.css(MARGINLEFT, checked ? 0 : that.origin);
+            that._position(checked * that.snapPart, checked ? 0 : that.origin);
+
             that.handle
                 .toggleClass(SWITCHON, checked)
-                .toggleClass(SWITCHOFF, !checked)
-                .css(TRANSFORMSTYLE, "translate(" + checked * that.snapPart + "px,0)");
+                .toggleClass(SWITCHOFF, !checked);
         },
 
-        _getAxisLocation: function(e) {
+        _location: function(e) {
             return kendo.touchLocation(e).x - this.wrapper.offset().left;
         },
 
         _move: function(e) {
             var that = this,
-                location = limitValue(that._getAxisLocation(e), that.halfWidth, that.constrain),
+                location = limitValue(that._location(e), that.halfWidth, that.constrain),
                 position = location - that.halfWidth;
 
-            //create _position(handlePos, background-pos);
+            that._position(position, that.origin + position);
+        },
 
+        _position: function(position, margin) {
+            var that = this;
             that.handle.css(TRANSFORMSTYLE, "translatex(" + position + "px)");
-            that.background.css(MARGINLEFT, that.origin + position);
+            that.background.css(MARGINLEFT, margin);
         },
 
         _start: function(e) {
             var that = this;
 
-            that._initial = that._getAxisLocation(e);
+            that._initial = that._location(e);
 
             DOCUMENT
                 .bind(MOUSEMOVE, that._moveProxy)
@@ -110,7 +113,7 @@
 
         _stop: function(e) {
             var that = this,
-                location = that._getAxisLocation(e),
+                location = that._location(e),
                 check;
 
             if (Math.abs(that._initial - location) <= 2) {
