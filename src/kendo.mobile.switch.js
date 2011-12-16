@@ -11,8 +11,6 @@
         MOUSEDOWN = support.mousedown,
         MOUSEUP = support.mouseup,
         MOUSEMOVE = support.mousemove,
-        handleSelector = ".km-switch-handle",
-        bindSelectors = ".km-checkbox",
         TRANSFORMSTYLE = support.transitions.css + "transform",
         extend = $.extend,
         proxy = $.proxy;
@@ -49,48 +47,15 @@
             //proxies
             that._moveProxy = proxy(that._move, that);
             that._stopProxy = proxy(that._stop, that);
-            that._toggleProxy = proxy(that._toggle, that);
-            that._triggerProxy = proxy(that._trigger, that);
 
             that.bind([
                 CHANGE
             ], options);
-
-            //check the input.is("[disabled]")
-            that.enable(options.enable);
         },
 
         options: {
             name: "MobileSwitch",
-            enable: true,
             selector: kendo.roleSelector("switch")
-        },
-
-        //refactor
-        enable: function(enable) {
-            enable = typeof enable === "boolean" ? enable : true;
-            var that = this,
-                element = that.element,
-                wrapper = that.wrapper;
-
-            that.options.enable = enable;
-            if (enable) {
-                element.removeAttr("disabled");
-
-                wrapper.removeClass("km-state-disabled");
-                wrapper.delegate("input[type=checkbox]", "change", that._toggleProxy)
-                       .delegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
-
-                wrapper.filter(bindSelectors).bind(MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
-            } else {
-                wrapper.addClass("km-state-disabled");
-                wrapper.undelegate("input[type=checkbox]", "change", that._toggleProxy)
-                       .undelegate(handleSelector, MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
-
-                wrapper.filter(bindSelectors).unbind(MOUSEDOWN + " " + MOUSEUP, that._triggerProxy);
-
-                element.attr("disabled");
-            }
         },
 
         //refactor
@@ -99,7 +64,7 @@
                 input = that.element,
                 checked = input[0].checked;
 
-            if (toggle != checked && !that.handle.data("animating") && that.options.enable) {
+            if (toggle != checked && !that.handle.data("animating")) {
                 input[0].checked = typeof(toggle) === "boolean" ? toggle : !checked;
                 input.trigger("change");
             }
@@ -114,7 +79,7 @@
                 location = limitValue(that._getAxisLocation(e), that.halfWidth, that.constrain),
                 position = location - that.halfWidth;
 
-            that.handle.css(TRANSFORMSTYLE, "translatex(" + position + "px)"); // TODO: remove halfWidth
+            that.handle.css(TRANSFORMSTYLE, "translatex(" + position + "px)");
             that.background.css("margin-left", that.origin + position);
         },
 
@@ -125,7 +90,6 @@
 
             that._initial = that._getAxisLocation(e);
 
-            //why we need origin?
             that.origin = that.background.data("origin");
 
             if (!that.origin && that.origin !== 0) { //check for undefined
@@ -161,15 +125,6 @@
 
         _trigger: function (e) {
             this.handle.toggleClass("km-state-active", e.type == MOUSEDOWN);
-        },
-
-        //what is the diff between _toggle() and toggle()
-        _toggle: function() {
-            var that = this;
-
-            if (that.options.enable) {
-                that._snap(that.element[0].checked)
-            }
         },
 
         //refactor and rename ?
@@ -217,7 +172,8 @@
 
             that.handle = $("<span class='km-switch-container'><span class='km-switch-handle' /></span>")
                             .appendTo(that.wrapper)
-                            .children(handleSelector);//reconsider children() part
+                            .children(".km-switch-handle")
+                            .bind(MOUSEDOWN + " " + MOUSEUP, proxy(that._trigger, that));
         },
 
         _wrapper: function() {

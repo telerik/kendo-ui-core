@@ -86,17 +86,6 @@
                 dom.change();
             });
 
-            test("Switch does not raise toggle event when disabled", function() {
-                var theSwitch = new Switch(dom);
-                theSwitch.enable(false);
-
-                theSwitch.bind("toggle", function() {
-                    ok(false, "Should not raise the change event");
-                });
-
-                dom.change();
-            });
-
             test("Switch applies active state when pressed", function() {
                 expect(1);
 
@@ -116,16 +105,14 @@
                 ok(!theSwitch.handle.hasClass("km-state-active"), "Does not have active css class");
             });
 
-            test("Switch does not apply active state when disabled", function() {
+            test("Switch does apply active state", function() {
                 expect(1);
 
                 var theSwitch = new Switch(dom);
 
-                theSwitch.enable(false);
-
                 theSwitch.handle.trigger(mouseDownEvent);
 
-                ok(!theSwitch.handle.hasClass("km-state-active"), "Does not have active css class");
+                ok(theSwitch.handle.hasClass("km-state-active"), "Does not have active css class");
             });
 
             test("Switch can be disabled from configuration options", function() {
@@ -134,24 +121,6 @@
                 theSwitch.bind("toggle", function() {
                     ok(false, "Does not raise the toggle event");
                 });
-
-                theSwitch.toggle();
-            });
-
-            test("Enable method enables disabled switch", function() {
-                expect(1);
-
-                var theSwitch = new Switch(dom);
-
-                theSwitch.enable(false);
-
-                theSwitch.bind("toggle", function() {
-                    ok(true, "Should raise the toggle event");
-                });
-
-                theSwitch.toggle();
-
-                theSwitch.enable();
 
                 theSwitch.toggle();
             });
