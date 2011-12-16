@@ -297,6 +297,14 @@
                 kendo.bind(dom, viewModel);
                 equal(dom.find("li").text(), viewModel.foo[0]);
             });
+
+            test("template binding without source", function() {
+                var dom = $('<div data-template="div-template"/>');
+
+                kendo.bind(dom, { foo: "foo" });
+
+                equal($.trim(dom.text()), "Hello, foofoo");
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
@@ -307,6 +315,9 @@
         </script>
         <script id="ul-template" type="text/x-kendo-template">
             <li data-text="this"></li>
+        </script>
+        <script id="div-template" type="text/x-kendo-template">
+            Hello, ${foo}<span data-text="foo"></span>
         </script>
     </head>
 </html>
