@@ -7,6 +7,7 @@
         splice = [].splice,
         slice = [].slice,
         unshift = [].unshift,
+        bound = {},
         CHANGE = "change";
 
     function extendArray(array) {
@@ -35,7 +36,7 @@
             return result;
         };
 
-        array.splice = function(index, howMany, element) {
+        array.splice = function(index, howMany, item) {
             var result = splice.apply(this, arguments);
 
             if (result.length) {
@@ -46,7 +47,7 @@
                 });
             }
 
-            if (element) {
+            if (item) {
                 this.trigger(CHANGE, {
                     action: "add",
                     index: index,
@@ -160,11 +161,11 @@
             element.innerHTML = get(object, field);
         },
         value: function(element, object, field) {
-            element.value = get(object, field);
-
-            $(element).change(function() {
-                object.set(field, element.value, element);
-            });
+            element = $(element);
+            element.val(get(object, field))
+                   .change(function() {
+                        object.set(field, element.val(), this);
+                   });
         },
         template: function(element, object) {
             if (!element.getAttribute("data-source")) {
@@ -215,7 +216,7 @@
                 children = element.children;
 
                 for (idx = 0, length = children.length; idx < length; idx ++) {
-                    bindElement(children[idx], get(object, field)[idx]);
+                    bindElement(children[idx], get(object, field)[idx], true);
                 }
             }
         }
@@ -241,7 +242,7 @@
         });
     }
 
-    function bindElement(element, object) {
+    function bindElement(element, object, recursive) {
         var field, binding;
 
         for (binding in kendo.bindings) {
@@ -257,13 +258,13 @@
                 }
             }
         }
-    }
 
-    function bindChildren(element, object) {
-        var idx, children = element.getElementsByTagName("*");
-
-        for (idx = 0; idx < children.length; idx++ ) { // length is not cached intentionally - children is a live NodeList
-            bindElement(children[idx], object);
+        if (recursive && !element.getAttribute("data-source")) {
+            for (element = element.firstChild; element; element = element.nextSibling) {
+                if (element.nodeType === 1) {
+                    bindElement(element, object, true);
+                }
+            }
         }
     }
 
@@ -271,8 +272,7 @@
         var idx, length;
 
         for (idx = 0, length = dom.length; idx < length; idx++ ) {
-            bindChildren(dom[idx], object);
-            bindElement(dom[idx], object);
+            bindElement(dom[idx], object, true);
         }
     }
 

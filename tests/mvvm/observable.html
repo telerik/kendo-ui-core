@@ -163,7 +163,7 @@
                     equal(e.action, "remove");
                 });
 
-                viewModel.foo.splice(0);
+                viewModel.foo.splice(0, 1);
             });
 
             test("splicing array items raises the change event and provides index", function() {
@@ -175,7 +175,7 @@
                     equal(e.index, 0);
                 });
 
-                viewModel.foo.splice(0);
+                viewModel.foo.splice(0, 1);
             });
 
             test("splicing array items raises the change event and provides the removed items", function() {
@@ -187,13 +187,13 @@
                     equal(e.items.length, 1);
                 });
 
-                viewModel.foo.splice(0);
+                viewModel.foo.splice(0, 1);
             });
 
             test("splicing array items returns the removed items", function() {
                 var viewModel = kendo.observable({ foo: [{}] });
 
-                equal(viewModel.foo.splice(0).length, 1);
+                equal(viewModel.foo.splice(0, 1).length, 1);
             });
 
             test("splicing array items raises the change event with add action", function() {
