@@ -103,7 +103,58 @@
         return Math.abs(window.orientation) / 90 ? "km-horizontal" : "km-vertical";
     }
 
-    var Application = kendo.Observable.extend({
+    /**
+     * @section The Kendo Mobile Application allows for building native-looking web based mobile applications.
+     *
+     *
+     * <h3>Getting Started</h3>
+     * The simplest mobile application consists of a single MobileView. // TODO
+     *
+     * @exampleTitle Hello World mobile application
+     * @example
+     * <body>
+     *    <div data-role="view">
+     *      <div data-role="header">Header</div>
+     *      Hello world!
+     *      <div data-role="footer">Footer</div>
+     *    </div>
+     *
+     *    <script>
+     *    var app = new kendo.mobile.Application(document.body);
+     *    </script>
+     * </body>
+     *
+     * @section
+     * <h3>View Structure</h3>
+     * The Mobile Application consists of one or more views, linked with navigational widgets (MobileButton, TabStrip, etc.).
+     * A view is defined by setting an element <code>role</code> data attribute to <code>view</code>.
+     * @exampleTitle Define MobileView
+     * @example
+     * <div data-role="view">Foo</div>
+     *
+     * @section
+     * <h3>Headers and Footers</h3>
+     * <p>By default, the MobileView contents are stretched to fit the Application element (the <code>body</code> element by default). Additionally, the MobileView can contain header and footer elements.
+     * To mark header and footer elements, add a <code>role</code> data attribute with <code>header</code> and <code>footer</code> value, respectively.
+     *
+     * @exampleTitle MobileView with Header and Footer.
+     * @example
+     * <div data-role="view">
+     *   <div data-role="header">Header</div>
+     *   Hello world!
+     *   <div data-role="footer">Footer</div>
+     * </div>
+     *
+     * @section Due to the OS UI design conventions, The header and footer switch positions when an Android device is detected,
+     * as usually the footer hosts a MobileTabstrip widget, which is located at the bottom of the screen on iOS, and at the top of the screen in Android applications.
+     */
+    var Application = kendo.Observable.extend(/** @lends kendo.ui.Mobi.prototype */{
+        /**
+        * @constructs
+        * @extends kendo.Observable
+        * @param {DomElement} element DOM element.
+        * @param {Object} options Configuration options.
+        */
         init: function(element, options) {
             var that = this;
 
@@ -280,5 +331,5 @@
         }
     });
 
-    kendo.Application = Application;
+    kendo.mobile.Application = Application;
 })(jQuery);
