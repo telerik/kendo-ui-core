@@ -144,15 +144,23 @@
         return template;
     }
 
+    function get(object, field) {
+        if (field === "this") {
+            return object;
+        }
+
+        return object[field];
+    }
+
     var bindings = {
         text: function(element, object, field) {
-            element[innerText] = object[field];
+            element[innerText] = get(object, field);
         },
         html: function(element, object, field) {
-            element.innerHTML = object[field];
+            element.innerHTML = get(object, field);
         },
         value: function(element, object, field) {
-            element.value = object[field];
+            element.value = get(object, field);
 
             $(element).change(function() {
                 object.set(field, element.value, element);
@@ -175,7 +183,7 @@
             if (e) {
                 if (e.action === "add") {
                     if (element.children.length < 1) {
-                        $(element).html(kendo.render(template, object[field]));
+                        $(element).html(kendo.render(template, get(object, field)));
                     } else {
                         $(element.children[e.index - 1])
                               .after(kendo.render(template, e.items));
@@ -188,12 +196,12 @@
                     }
                 }
             } else {
-                $(element).html(kendo.render(template, object[field]));
+                $(element).html(kendo.render(template, get(object, field)));
 
                 children = element.children;
 
                 for (idx = 0, length = children.length; idx < length; idx ++) {
-                    bindElement(children[idx], object[field][idx]);
+                    bindElement(children[idx], get(object, field)[idx]);
                 }
             }
         }
@@ -201,13 +209,13 @@
 
     $.each("title alt src href".split(" "), function(index, attr) {
         bindings[attr] = function(element, object, field) {
-            element.setAttribute(attr, object[field]);
+            element.setAttribute(attr, get(object, field));
         }
     });
 
     $.each("click change".split(" "), function(index, eventName) {
         bindings[eventName] = function(element, object, field) {
-            $(element).bind(eventName, $.proxy(object[field], this));
+            $(element).bind(eventName, $.proxy(get(object, field), this));
         }
     });
 
@@ -230,7 +238,9 @@
 
                 binding(element, object, field);
 
-                observe(element, object, field, binding);
+                if (field !== "this") {
+                    observe(element, object, field, binding);
+                }
             }
         }
     }

@@ -286,6 +286,17 @@
                 kendo.bind(dom, viewModel);
                 equal(dom.find("li").text(), viewModel.foo[0].name);
             });
+
+            test("binding child elements of template to data item of primitive type", function() {
+                var dom = $('<ul data-source="foo" data-template="ul-template"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1]
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("li").text(), viewModel.foo[0]);
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
@@ -293,6 +304,9 @@
         </script>
         <script id="ol-template" type="text/x-kendo-template">
             <li data-text="name"></li>
+        </script>
+        <script id="ul-template" type="text/x-kendo-template">
+            <li data-text="this"></li>
         </script>
     </head>
 </html>

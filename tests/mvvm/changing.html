@@ -130,6 +130,23 @@
 
                 equal(kendo.bindings.calls("value"), 1);
             });
+
+            test("tracking changes of observable items in array", function() {
+                var viewModel = kendo.observable( {
+                    foo: [{ name: "foo" }]
+                });
+
+                var dom = $('<ul data-source="foo" data-template="array-tmpl"/>');
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.foo[0].set("name", "bar");
+
+                equal(dom.find("li").text(), "bar");
+            });
+        </script>
+        <script id="array-tmpl" type="text/x-kendo-tmpl">
+            <li data-text="name"></li>
         </script>
     </head>
 </html>
