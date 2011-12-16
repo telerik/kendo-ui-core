@@ -277,7 +277,7 @@
             });
 
             test("binding child elements of template to data item", function() {
-                var dom = $('<ol data-source="foo" data-template="ol-template"/>');
+                var dom = $('<div><ol data-source="foo" data-template="ol-template"/></div>');
 
                 var viewModel = kendo.observable( {
                     foo: [{ name: "foo"}]

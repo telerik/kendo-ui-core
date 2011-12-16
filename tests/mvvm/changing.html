@@ -125,7 +125,7 @@
 
                 kendo.bind(dom, viewModel);
 
-                dom.find("option:first").attr("selected", "selected");
+                dom.find("select").val("foo");
                 dom.trigger("change");
 
                 equal(kendo.bindings.calls("value"), 1);
@@ -144,6 +144,7 @@
 
                 equal(dom.find("li").text(), "bar");
             });
+
         </script>
         <script id="array-tmpl" type="text/x-kendo-tmpl">
             <li data-text="name"></li>
