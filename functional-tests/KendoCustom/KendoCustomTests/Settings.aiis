@@ -16,8 +16,8 @@
             <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1209.0" IsLocked="False" AttributeName="href" SearchType="Attribute" />
             <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1209.0" IsLocked="False" AttributeName="value" SearchType="Attribute" />
             <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1209.0" IsLocked="False" AttributeName="alt" SearchType="Attribute" />
-            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1209.0" IsLocked="True" SearchType="TextContent" />
             <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1209.0" IsLocked="True" SearchType="TagIndex" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1209.0" IsLocked="True" SearchType="TextContent" />
           </List>
         </Item>
       </IdentificationsPerTag>
