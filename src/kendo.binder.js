@@ -166,6 +166,20 @@
                 object.set(field, element.value, element);
             });
         },
+        template: function(element, object) {
+            if (!element.getAttribute("data-source")) {
+                var template = kendo.template(templateFor(element)),
+                    children = element.children,
+                    idx,
+                    length;
+
+                $(element).html(template(object));
+
+                for (idx = 0, length = children.length; idx < length; idx ++) {
+                    bindElement(children[idx], object);
+                }
+            }
+        },
         source: function(element, object, field, e) {
             var template = kendo.template(templateFor(element)),
                 child,
