@@ -288,6 +288,34 @@
                 ok(!input.next("span:visible").length);
             });
 
+            test("message element is hidden if input with $ in the name change its state from invalid to valid ", function() {
+                var input = $('<input name="foo$bar" type="text" required validationMessage="invalid" />');
+                container.append(input);
+                var validator = setup(container);
+
+                validator.validate();
+
+                input.val("someValue");
+
+                validator.validate();
+
+                ok(!input.next("span:visible").length);
+            });
+
+            test("message element is hidden if input with special charecters in the name change its state from invalid to valid ", function() {
+                var input = $('<input name="#f_o:o.b-a+r" type="text" required validationMessage="invalid" />');
+                container.append(input);
+                var validator = setup(container);
+
+                validator.validate();
+
+                input.val("someValue");
+
+                validator.validate();
+
+                ok(!input.next("span:visible").length);
+            });
+
             test("individualErrors template overrides the default template", function() {
                 var input = $('<input type="text" required validationMessage="invalid"/>'),
                 validator = setup(input, {
