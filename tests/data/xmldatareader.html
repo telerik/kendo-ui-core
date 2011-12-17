@@ -377,6 +377,27 @@
                 equal(reader.model.fields["bar"].type, "string");
                 equal(typeof reader.model.fields["bar"].field, "function");
             });
+
+            test("parse converts field values to the specifed type", function() {
+                var reader = new XmlDataReader({
+                    model: {
+                        fields: {
+                            bar: { field: "bar/text()", type: "number" },
+                            baz: { field: "baz/text()" }
+                        }
+                    },
+                    data: "/root/foo"
+                });
+
+                var result = reader.parse('<root><foo><bar>1</bar><baz>1</baz></foo><foo><bar></bar><baz></baz></foo></root>');
+                result = reader.data(result);
+
+                equal(result.length, 2);
+                strictEqual(result[0].bar, 1);
+                strictEqual(result[0].baz, "1");
+                strictEqual(result[1].bar, null);
+                strictEqual(result[1].baz, undefined);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
