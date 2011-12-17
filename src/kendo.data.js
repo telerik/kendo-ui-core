@@ -850,7 +850,7 @@
 
     var DataReader = Class.extend({
         init: function(schema) {
-            var that = this, member, get;
+            var that = this, member, get, model;
 
             schema = schema || {};
 
@@ -861,7 +861,38 @@
             }
 
             if (isPlainObject(that.model)) {
-                that.model = Model.define(that.model);
+                that.model = model = Model.define(that.model);
+
+                var dataFunction = that.data,
+                    getters = {};
+
+                if (model.fields) {
+                    each(model.fields, function(field, value) {
+                        if (isPlainObject(value) && value.field) {
+                            getters[value.field] = getter(value.field);
+                        } else {
+                            getters[field] = getter(field);
+                        }
+                    });
+                }
+
+                that.data = function(data) {
+                    var record,
+                        getter,
+                        modelInstance = new that.model();
+
+                    data = dataFunction(data);
+                    if (!isEmptyObject(getters)) {
+                       return map(data, function(value) {
+                         record = value;
+                         for (getter in getters) {
+                             record[getter] = modelInstance._parse(getter, getters[getter](value));
+                         }
+                         return record;
+                       });
+                   }
+                   return data;
+                }
             }
         },
         parse: identity,
