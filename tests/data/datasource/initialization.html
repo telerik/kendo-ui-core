@@ -87,6 +87,21 @@
                 equal(dataSource.data()[1].bar, "bar2");
             });
 
+            test("infer from html table converts values if field types are specified", function() {
+                var table = $("<table><tr><td>1</td><td>bar1</td></tr><tr><td>2</td><td>bar2</td></tr></table>"),
+                    dataSource = DataSource.create({
+                        table: table,
+                        fields: [ { field: "foo", type: "number" }, { field: "bar" } ]
+                    });
+
+                dataSource.read();
+                equal(dataSource.data().length, 2);
+                strictEqual(dataSource.data()[0].foo, 1);
+                equal(dataSource.data()[0].bar, "bar1");
+                strictEqual(dataSource.data()[1].foo, 2);
+                equal(dataSource.data()[1].bar, "bar2");
+            });
+
             test("infer from html table skips th", function() {
                 var table = $("<table><tr><th>foo</th></tr></table>"),
                     dataSource = DataSource.create({
