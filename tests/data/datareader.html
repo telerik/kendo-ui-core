@@ -74,6 +74,69 @@
 
                 ok(new reader.model instanceof kendo.data.Model);
             });
+
+            test("converts field values to the specifed type", function() {
+                var reader = new DataReader({
+                    model: {
+                        fields: {
+                            bar: { type: "number" },
+                            baz: "baz"
+                        }
+                    }
+                });
+
+                var result = reader.parse([{ bar: "1", baz: "baz1"}, { bar: "", baz: "baz2"}, { bar: "0", baz: "baz3"}]);
+                result = reader.data(result);
+
+                equal(result.length, 3);
+                strictEqual(result[0].bar, 1);
+                strictEqual(result[0].baz, "baz1");
+                strictEqual(result[1].bar, null);
+                strictEqual(result[1].baz, "baz2");
+                strictEqual(result[2].bar, 0);
+                strictEqual(result[2].baz, "baz3");
+            });
+
+            test("fields not in the model are persisted", function() {
+                var reader = new DataReader({
+                    model: {
+                        fields: {
+                            bar: { type: "number" }
+                        }
+                    }
+                });
+
+                var result = reader.parse([{ bar: "1", baz: "baz1"}, { bar: "", baz: "baz2"}, { bar: "0", baz: "baz3"}]);
+                result = reader.data(result);
+
+                equal(result.length, 3);
+                strictEqual(result[0].bar, 1);
+                strictEqual(result[0].baz, "baz1");
+                strictEqual(result[1].bar, null);
+                strictEqual(result[1].baz, "baz2");
+                strictEqual(result[2].bar, 0);
+                strictEqual(result[2].baz, "baz3");
+            });
+
+            test("custom data function is called when model is defined", function() {
+                var called = false,
+                    reader = new DataReader({
+                        model: {
+                            fields: {
+                                bar: { type: "number" },
+                                baz: "baz"
+                            }
+                        },
+                        data: function() {
+                            called = true;
+                            return [];
+                        }
+                    });
+
+                var result = reader.parse([{ bar: "1", baz: "baz1"}, { bar: "", baz: "baz2"}, { bar: "0", baz: "baz3"}]);
+                result = reader.data(result);
+                ok(called);
+            });
         </script>
     </body>
 </html>
