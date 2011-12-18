@@ -1863,7 +1863,11 @@
             data = dataSource.data,
             fields = dataSource.fields,
             table = dataSource.table,
-            select = dataSource.select;
+            select = dataSource.select,
+            idx,
+            length,
+            model = {},
+            field;
 
         if (!data && fields && !dataSource.transport) {
             if (table) {
@@ -1873,12 +1877,15 @@
             }
         }
 
-        if (fields && (!dataSource.schema || !dataSource.schema.model)) {
-            var model = {};
-            for (var idx = 0, length = fields.length; idx < length; idx++) {
-                model[fields[idx].field] = fields[idx];
+        if (Model && fields && (!dataSource.schema || !dataSource.schema.model)) {
+            for (idx = 0, length = fields.length; idx < length; idx++) {
+                field = fields[idx];
+                model[field.field] = field;
             }
-            dataSource.schema = extend(true, dataSource.schema, { model:  { fields: model } });
+
+            if (!isEmptyObject(model)) {
+                dataSource.schema = extend(true, dataSource.schema, { model:  { fields: model } });
+            }
         }
 
         dataSource.data = data;
