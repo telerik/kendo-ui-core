@@ -1865,12 +1865,20 @@
             table = dataSource.table,
             select = dataSource.select;
 
-        if(!data && fields && !dataSource.transport){
+        if (!data && fields && !dataSource.transport) {
             if (table) {
                 data = inferTable(table, fields);
             } else if (select) {
                 data = inferSelect(select, fields);
             }
+        }
+
+        if (fields && (!dataSource.schema || !dataSource.schema.model)) {
+            var model = {};
+            for (var idx = 0, length = fields.length; idx < length; idx++) {
+                model[fields[idx].field] = fields[idx];
+            }
+            dataSource.schema = extend(true, dataSource.schema, { model:  { fields: model } });
         }
 
         dataSource.data = data;
