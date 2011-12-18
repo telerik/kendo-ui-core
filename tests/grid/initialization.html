@@ -92,6 +92,14 @@
                 equal(grid.columns[1].field, "bar");
             });
 
+            test("header data attributes - data-kendo-type", function() {
+                var grid = new Grid($('<table><th data-kendo-field="foo" data-kendo-type="number"></th><th data-kendo-field="bar"></th></table>')[0], { dataSource: [] });
+
+                equal(grid.columns.length, 2);
+                equal(grid.columns[0].type, "number");
+                equal(grid.columns[1].type, undefined);
+            });
+
             test("header data attributes - data-kendo-template", function() {
                 var grid = new Grid($('<table><th data-kendo-field="foo" data-kendo-template="bar"></th></table>')[0], { dataSource: [] });
 

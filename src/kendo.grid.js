@@ -1536,8 +1536,9 @@
             // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
             columns = columns.length ? columns : map(table.find("th"), function(th, idx) {
                 var th = $(th),
-                    sortable = th.attr(kendo.attr("sortable"))
-                    filterable = th.attr(kendo.attr("filterable"))
+                    sortable = th.attr(kendo.attr("sortable")),
+                    filterable = th.attr(kendo.attr("filterable")),
+                    type = th.attr(kendo.attr("type")),
                     field = th.attr(kendo.attr("field"));
 
                 if (!field) {
@@ -1546,6 +1547,7 @@
 
                 return {
                     field: field,
+                    type: type,
                     sortable: sortable !== "false",
                     filterable: filterable !== "false",
                     template: th.attr(kendo.attr("template")),
