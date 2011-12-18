@@ -417,7 +417,32 @@
          *   });
          * @option {Boolean} [columns.filterable] <true> Specifies whether given column is filterable.
          * @option {Boolean} [columns.sortable] <true> Specifies whether given column is sortable.
-         * @option {Function} [columns.editor] The editor will be used when column is edited.
+         * @option {Function} [columns.editor] Provides a way to specify custom editor for this column.
+         * _example
+         * $(".k-grid").kendoGrid({
+         *      dataSource: {
+         *          data: createRandomData(50)
+         *      },
+         *      editable: true,
+         *      columns: [
+         *          {
+         *              field: "Name",
+         *              editor: function(container, options) {
+         *                  // create a KendoUI AutoComplete widget as column editor
+         *                   $('&lt;input name="' + options.field + '"/&gt;')
+         *                       .appendTo(container)
+         *                       .kendoAutoComplete({
+         *                           dataTextField: "ProductName",
+         *                           dataSource: {
+         *                               transport: {
+         *                                 //...
+         *                               }
+         *                           }
+         *                       });
+         *              }
+         *          }
+         *      ]
+         *   });
          * @option {Object} [columns.editor.container] The container in which the editor must be added.
          * @option {Object} [columns.editor.options] Additional options.
          * @option {String} [columns.editor.options.field] The field for the editor.
