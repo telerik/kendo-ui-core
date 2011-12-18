@@ -61,6 +61,45 @@
                 ok(dataSource.data() === data);
             });
 
+            test("model is created during dataSource initialization from field definition", function() {
+                var dataSource = DataSource.create({
+                    data: data,
+                    fields: [ { field: "foo", type: "number" }, { field: "bar", type: "boolean" }]
+                });
+                var fields = dataSource.options.schema.model.fields;
+                equal(fields["foo"].field, "foo");
+                equal(fields["foo"].type, "number");
+                equal(fields["bar"].type, "boolean");
+                equal(fields["bar"].field, "bar");
+            });
+
+            test("model is created during dataSource initialization from field definition", function() {
+                var dataSource = DataSource.create({
+                    data: data,
+                    schema: { data: "foo" },
+                    fields: [ { field: "foo", type: "number" }, { field: "bar", type: "boolean" }]
+                });
+                var schema = dataSource.options.schema;
+                equal(schema.data, "foo");
+                equal(schema.model.fields["foo"].field, "foo");
+                equal(schema.model.fields["foo"].type, "number");
+                equal(schema.model.fields["bar"].type, "boolean");
+                equal(schema.model.fields["bar"].field, "bar");
+            });
+
+            test("model is not overridden durring dataSource initialization", function() {
+                var dataSource = DataSource.create({
+                    data: data,
+                    schema: { model: { fields: { baz: "baz" } } },
+                    fields: [ { field: "foo", type: "number" }, { field: "bar", type: "boolean" }]
+                });
+
+                var fields = dataSource.options.schema.model.fields;
+                equal(fields["foo"], undefined);
+                equal(fields["bar"], undefined);
+                ok(fields["baz"]);
+            });
+
             test("page is set to 1 if pageSize is defined but no page", function() {
                 var dataSource = new DataSource({ pageSize: 10 });
                 equal(dataSource.page(), 1);

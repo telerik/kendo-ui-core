@@ -850,7 +850,7 @@
 
     var DataReader = Class.extend({
         init: function(schema) {
-            var that = this, member, get;
+            var that = this, member, get, model;
 
             schema = schema || {};
 
@@ -861,7 +861,38 @@
             }
 
             if (isPlainObject(that.model)) {
-                that.model = Model.define(that.model);
+                that.model = model = Model.define(that.model);
+
+                var dataFunction = that.data,
+                    getters = {};
+
+                if (model.fields) {
+                    each(model.fields, function(field, value) {
+                        if (isPlainObject(value) && value.field) {
+                            getters[value.field] = getter(value.field);
+                        } else {
+                            getters[field] = getter(field);
+                        }
+                    });
+                }
+
+                that.data = function(data) {
+                    var record,
+                        getter,
+                        modelInstance = new that.model();
+
+                    data = dataFunction(data);
+                    if (!isEmptyObject(getters)) {
+                       return map(data, function(value) {
+                         record = value;
+                         for (getter in getters) {
+                             record[getter] = modelInstance._parse(getter, getters[getter](value));
+                         }
+                         return record;
+                       });
+                   }
+                   return data;
+                }
             }
         },
         parse: identity,
@@ -1832,13 +1863,28 @@
             data = dataSource.data,
             fields = dataSource.fields,
             table = dataSource.table,
-            select = dataSource.select;
+            select = dataSource.select,
+            idx,
+            length,
+            model = {},
+            field;
 
-        if(!data && fields && !dataSource.transport){
+        if (!data && fields && !dataSource.transport) {
             if (table) {
                 data = inferTable(table, fields);
             } else if (select) {
                 data = inferSelect(select, fields);
+            }
+        }
+
+        if (Model && fields && (!dataSource.schema || !dataSource.schema.model)) {
+            for (idx = 0, length = fields.length; idx < length; idx++) {
+                field = fields[idx];
+                model[field.field] = field;
+            }
+
+            if (!isEmptyObject(model)) {
+                dataSource.schema = extend(true, dataSource.schema, { model:  { fields: model } });
             }
         }
 

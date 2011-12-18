@@ -43,15 +43,18 @@
             if (data) {
                 data = that.xpathToMember(data);
                 that.data = function(value) {
-                    var record, field, result = that.evaluate(value, data);
+                    var record, field, result = that.evaluate(value, data),
+                        modelInstance;
 
                     result = isArray(result) ? result : [result];
 
                     if (that.model && model.fields) {
+                        modelInstance = new that.model();
+
                         return map(result, function(value) {
                             record = {};
                             for (field in model.fields) {
-                                record[field] = model.fields[field].field(value);
+                                record[field] = modelInstance._parse(field, model.fields[field].field(value));
                             }
                             return record;
                         });
