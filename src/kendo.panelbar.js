@@ -33,7 +33,7 @@
      *  list of items defined in HTML.
      * </p>
      *
-     * @exampleTitle Initialize the PanelBar using a jQuery selector
+     * @exampleTitle Initialize the PanelBar via a jQuery ID selector
      * @example
      * var panelBar = $("#panelBar").kendoPanelBar();
      *
@@ -58,7 +58,7 @@
      *  A PanelBar widget will preserve the content defined within an item.
      * </p>
      *
-     * @exampleTitle Initialize the PanelBar using a jQuery selector
+     * @exampleTitle Initialize the PanelBar via a jQuery ID selector
      * @example
      * var panelBar = $("#panelbar").kendoPanelBar();
      *
@@ -607,9 +607,13 @@
         },
 
         /**
-         * Enables/disables PanelBar item/s
-         * @param {Selector} element Target element
-         * @param {Boolean} enable Desired state
+         * Enables (true) or disables (false) an item(s) of the PanelBar.
+         * @param {Selector} element The target element(s) to be enabled (true) or disabled (false).
+         * @param {Boolean} enable The desired state - enabled (true) or disabled (false) - of the target element(s).
+         * @example
+         * var panelBar = $("#panelBar").kendoPanelBar().data("kendoPanelBar");
+         * var item = panelBar.select();
+         * panelBar.enable(item, false);
          */
         enable: function (element, state) {
             this._toggleDisabled(element, state !== false);
