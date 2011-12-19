@@ -621,6 +621,14 @@
             return this;
         },
 
+        /**
+         * Disables an item(s) of the PanelBar.
+         * @param {Selector} element The target element(s) to be disabled.
+         * @example
+         * var panelBar = $("#panelBar").kendoPanelBar().data("kendoPanelBar");
+         * var item = panelBar.select();
+         * panelBar.disable(item);
+         */
         disable: function (element) {
             this._toggleDisabled(element, false);
 
