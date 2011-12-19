@@ -228,9 +228,12 @@
      *
      * <h3>View Parameters</h3>
      *
+     * <p>Navigational widgets can pass additional URL parameters when showing views. The parameters are defined in the same way as the standard query string. </p>
      * <p>
      *
-     * </p>
+     * @exampleTitle Button to view with additional URL parameter
+     * @example
+     * <a data-role="button" href="#foo?bar=baz">Link to FOO view with bar parameter set to baz</a>
      */
     var Application = kendo.Observable.extend(/** @lends kendo.mobile.Application.prototype */{
         /**
