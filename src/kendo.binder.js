@@ -101,12 +101,14 @@
         object.set = function(field, value, initiator) {
             var current = this[field];
 
-            this[field] = value;
+            if (current != value) {
+                this[field] = value;
 
-            this.trigger(CHANGE, {
-                field: field,
-                initiator: initiator
-            });
+                this.trigger(CHANGE, {
+                    field: field,
+                    initiator: initiator
+                });
+            }
         }
 
         return object;

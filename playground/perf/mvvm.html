@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVVM binding</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="benchmark.js"></script>
+        <script src="http://knockoutjs.com/js/knockout-1.2.1.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="log">Running benchmark ... </div>
+        <div id="kendo-div" data-text="foo"></div>
+        <div id="kendo-div" data-bind="text: foo"></div>
+        <script>
+            var viewModel = kendo.observable({
+                foo: "foo"
+            });
+
+            var knockout = {
+                foo: ko.observable("foo")
+            };
+
+            $(document).ready(function() {
+                var suite = new Benchmark.Suite;
+
+                kendo.bind($("#kendo-div"), viewModel);
+                ko.applyBindings(knockout);
+
+                suite.add("kendo binding element text", function() {
+                    viewModel.set("foo", "bar");
+                })
+                .add("knockout binding element text", function() {
+                    knockout.foo("bar");
+                })
+                .on("complete", function() {
+                    var message = "<div>User agent: " + navigator.userAgent;
+                    message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
+                        var results = $.makeArray(this);
+                        results.sort(function(a, b) { return b.hz - a.hz });
+                        $.each(results, function(index) {
+                            message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                        });
+                        message += "</table></div>";
+
+                    $("#log").html(message);
+                })
+                .run(true);
+            });
+        </script>
+    </body>
+</html>
