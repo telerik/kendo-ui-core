@@ -3,32 +3,62 @@
      * @name kendo.ui.PanelBar.Description
      *
      * @section
-     *  <p>
-     *      The PanelBar widget displays hierarchical data as a multi-level expandable panel
-     *      bar. PanelBar structure can be defined statically in HTML or configured dynamically
-     *      with the PanelBar API. Content for PanelBar items can also be easily loaded with
-     *      Ajax simply by specifying the content URL.
-     *  </p>
-     *  <h3>Getting Started</h3>
+     * <p>
+     *  The PanelBar widget displays hierarchical data as a multi-level,
+     *  expandable panel bar. Its structure can be defined in HTML or
+     *  configured dynamically through its API. The content for PanelBar
+     *  items can also be loaded via AJAX by specifying a content URL.
+     * </p>
+     * <h3>Getting Started</h3>
+     * <p>
+     *  A PanelBar widget can utilize a list of items defined in HTML to
+     *  define its structure and content.
+     * </p>
      *
-     *
-     * @exampleTitle Create a simple HTML hierarchical list of items
+     * @exampleTitle Create a list of items in HTML
      * @example
-     *  <ul id="panelbar">
-     *      <li>Item 1
-     *          <ul>
-     *              <li>Sub Item 1</li>
-     *              <li>Sub Item 2</li>
-     *          </ul>
-     *      <li>
-     *      <li>Item 2</li>
-     *      <li>Item with Content
-     *          <div>This is some PanelBar Item content</div>
-     *      </li>
-     *  </ul>
+     * <ul id="panelBar">
+     *  <li>Item 1
+     *   <ul>
+     *    <li>Sub Item 1</li>
+     *    <li>Sub Item 2</li>
+     *   </ul>
+     *  <li>
+     *  <li>Item 2</li>
+     * </ul>
      *
+     * @section
+     * <p>
+     *  A PanelBar widget may be created by targeting the root element of the
+     *  list of items defined in HTML.
+     * </p>
      *
-     * @exampleTitle Initialize Kendo PanelBar using jQuery selector
+     * @exampleTitle Initialize the PanelBar using a jQuery selector
+     * @example
+     * var panelBar = $("#panelBar").kendoPanelBar();
+     *
+     * @section
+     * <p>
+     *  Items in a PanelBar can optionally define in-line HTML content. To
+     *  add content, place the HTML inside of a div. Text content
+     *  outside of the div will be used as the Item's PanelBar text.
+     * </p>
+     *
+     * @exampleTitle Create a list of items in HTML with nested content
+     * @example
+     * <ul id="panelBar">
+     *  <li>Item with no content</li>
+     *  <li>Item with content
+     *   <div>This is nested content of a PanelBar item.</div>
+     *  </li>
+     * </ul>
+     *
+     * @section
+     * <p>
+     *  A PanelBar widget will preserve the content defined within an item.
+     * </p>
+     *
+     * @exampleTitle Initialize the PanelBar using a jQuery selector
      * @example
      * var panelBar = $("#panelbar").kendoPanelBar();
      *
@@ -50,92 +80,94 @@
      * });
      *
      * @section
-     *  <p>
-     *      Items in a PanelBar can optionally define in-line HTML content. To add content,
-     *      simply place the HTML inside of a div. Text content outside of the div will be used as
-     *      the Item's PanelBar text.
-     *  </p>
-     *  <h3>Loading Content with Ajax</h3>
-     *  <p>
-     *      While any valid technique for loading Ajax content can be used, PanelBar provides
-     *      built-in support for asynchronously loading content from URLs. These URLs should return
-     *      HTML fragments that can be loaded in the PanelBar item content area.
-     *  </p>
-     *  <p>
-     *      When PanelBar loads content with Ajax, it is cached so that subsequent
-     *      expand/collapse actions do not re-trigger the Ajax request.
-     *  </p>
+     * <h3>Loading Content with AJAX</h3>
+     * <p>
+     *  While any valid technique for loading AJAX content can be used,
+     *  the PanelBar provides built-in support for asynchronously loading
+     *  content from URLs. These URLs should return HTML fragments that can
+     *  be loaded in the PanelBar item content area.
+     * </p>
      *
-     * @exampleTitle Loading PanelBar content asynchronously
+     * @exampleTitle Create a list of items with a target for dynamic content
      * @example
-     *  <!-- HTML structure -->
-     *  <ul id="panelbar">
-     *      <li>Item 1
-     *          <ul>
-     *              <li>Sub Item 1</li>
-     *          </ul>
-     *      </li>
-     *      <li>Item 2</li>
-     *      <li>
-     *          Item with Dynamic Content
-     *          <div></div>
-     *      </li>
-     *  </ul>
+     * <ul id="panelbar">
+     *  <li>Item 1
+     *   <ul>
+     *    <li>Sub Item 1</li>
+     *   </ul>
+     *  </li>
+     *  <li>Item 2</li>
+     *  <li>
+     *   Item with Dynamic Content
+     *   <div></div>
+     *  </li>
+     * </ul>
      *
-     * @exampleTitle
+     * @exampleTitle Load PanelBar item content asynchronously via AJAX
      * @example
-     *  //JavaScript initialization and configuration
-     *  $(document).ready(function(){
-     *      $("#panelbar").kendoPanelBar({
-     *          contentUrls:[
-     *            null,
-     *            null,
-     *            "html-content-snippet.html"
-     *          ]
-     *      });
+     * // initialization and configuration
+     * $(document).ready(function(){
+     *  $("#panelbar").kendoPanelBar({
+     *   contentUrls:[
+     *    null,
+     *    null,
+     *    "html-content-snippet.html"
+     *   ]
      *  });
+     * });
      *
      * @section
-     *  <h3>Customizing PanelBar Animations</h3>
-     *  <p>
-     *      By default, the PanelBar uses a slide animation to expand and reveal sub-items as
-     *      the mouse hovers. Animations can be easily customized using configuration properties,
-     *      changing the expand and collapse animation style. A PanelBar can also be configured to
-     *      only allow one panel to remain expanded at a time.
-     *  </p>
+     * <p>
+     *  When the PanelBar loads remote content via AJAX, the server response
+     *  is cached in-memory so that subsequent expand/collapse actions do not
+     *  trigger subsequent AJAX requests.
+     * </p>
+     * <h3>Customizing PanelBar Animations</h3>
+     * <p>
+     *  By default, a PanelBar uses animations to expand and reveal sub-items
+     *  when an item header is clicked. These animations can be modified
+     *  using configuration properties, changing the open and close animation
+     *  style. A PanelBar can also be configured to only allow one panel to
+     *  remain open at a time.
+     * </p>
+     *
      * @exampleTitle Changing PanelBar animation and expandMode behavior
      * @example
-     *  $("#panelbar").kendoPanelBar({
-     *      animation: {
-     *          expand : {effects: fadeIn}
-     *      },
-     *      expandMode: "single"
-     *  });
+     * $("#panelbar").kendoPanelBar({
+     *  animation: {
+     *   open : {effects: fadeIn}
+     *  },
+     *  expandMode: "single"
+     * });
+     *
      * @section
-     *  <h3>Dynamically configuring PanelBar items</h3>
-     *  <p>
-     *      The PanelBar API provides several methods for dynamically adding or removing
-     *      Items. To add items, provide the new item as a JSON object along with a reference
-     *      item that will be used to determine the placement in the hierarchy. The reference
-     *      item is optional when appending.
-     *  </p>
-     *  <p>
-     *      A reference item is simply a target PanelBar Item HTML element that already exists
-     *      in the PanelBar. Any valid jQuery selector can be used to obtain a reference to the
-     *      target item. For examples, see the PanelBar API demos.
-     *  </p>
-     *  <p>
-     *      Removing an item only requires a reference to the target element that should be removed.
-     *  </p>
+     * <h3>Dynamically configuring PanelBar items</h3>
+     * <p>
+     *  The PanelBar API provides several methods for dynamically adding or
+     *  removing Items. To add items, provide the new item as a JSON object
+     *  along with a reference item that will be used to determine the
+     *  placement in the hierarchy. The reference item is optional when
+     *  appending.
+     * </p>
+     * <p>
+     *  A reference item is simply a target PanelBar Item HTML element that
+     *  already exists in the PanelBar. Any valid jQuery selector can be used
+     *  to obtain a reference to the target item. For examples, see the
+     *  PanelBar API demos.
+     * </p>
+     * <p>
+     *  Removing an item only requires a reference to the target element that
+     *  should be removed.
+     * </p>
      *
      * @exampleTitle Dynamically add a new root PanelBar item
      * @example
-     *  var pb = $("#panelbar").kendoPanelBar().data("kendoPanelBar");
+     * var pb = $("#panelbar").kendoPanelBar().data("kendoPanelBar");
      *
-     *  pb.insertAfter(
-     *      { text: "New PanelBar Item" },
-     *      pb.element.children("li:last")
-     *  );
+     * pb.insertAfter(
+     *  { text: "New PanelBar Item" },
+     *  pb.element.children("li:last")
+     * );
      *
      */
     var kendo = window.kendo,
@@ -412,7 +444,7 @@
                  */
                 SELECT,
                 /**
-                 * Fires when ajax request results in an error.
+                 * Fires when AJAX request results in an error.
                  * @name kendo.ui.PanelBar#error
                  * @event
                  * @param {Event} e
@@ -421,7 +453,7 @@
                  */
                 ERROR,
                 /**
-                 * Fires when content is fetched from an ajax request.
+                 * Fires when content is fetched from an AJAX request.
                  * @name kendo.ui.PanelBar#contentLoad
                  * @event
                  * @param {Event} e
