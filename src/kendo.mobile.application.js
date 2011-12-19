@@ -229,7 +229,7 @@
      * <h3>View Parameters</h3>
      *
      * <p>Navigational widgets can pass additional URL parameters when showing views. The parameters are defined in the same way as the standard query string. </p>
-     * <p>
+     * <p>The passed parameters will be available in the viewShow Application event.
      *
      * @exampleTitle Button to view with additional URL parameter
      * @example
