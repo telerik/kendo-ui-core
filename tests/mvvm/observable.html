@@ -35,7 +35,7 @@
             test("nested objects are view models as well", function() {
                 var viewModel = kendo.observable({ foo: { bar: "baz" } });
 
-                ok("bind" in viewModel.foo);
+                ok(viewModel.foo.observable);
             });
 
             test("set triggers the change event", function() {
@@ -43,7 +43,7 @@
 
                 var viewModel = kendo.observable({ foo: "bar" });
 
-                viewModel.bind("change", function() {
+                viewModel.observable().bind("change", function() {
                     ok(true, "change is raised");
                 });
 
@@ -55,7 +55,7 @@
 
                 var viewModel = kendo.observable({ foo: "bar" });
 
-                viewModel.bind("change", function(e) {
+                viewModel.observable().bind("change", function(e) {
                     equal(e.field, "foo");
                 });
 
@@ -65,7 +65,7 @@
             test("nested arrays are extended", function() {
                 var viewModel = kendo.observable({ foo: [{}] });
 
-                equal(typeof viewModel.foo.bind, "function");
+                equal(typeof viewModel.foo.observable, "function");
             });
 
             test("pushing items to array raises the change event", function() {
@@ -73,7 +73,7 @@
 
                 var viewModel = kendo.observable({ foo: [{}] });
 
-                viewModel.foo.bind("change", function() {
+                viewModel.foo.observable().bind("change", function() {
                     ok(true, "change is raised");
                 });
 
@@ -85,7 +85,7 @@
 
                 var viewModel = kendo.observable({ foo: [{}] });
 
-                viewModel.foo.bind("change", function() {
+                viewModel.foo.observable().bind("change", function() {
                     ok(true, "change is raised");
                 });
 
@@ -97,7 +97,7 @@
 
                 var viewModel = kendo.observable({ foo: [{}] });
 
-                viewModel.foo.bind("change", function(e) {
+                viewModel.foo.observable().bind("change", function(e) {
                     equal(e.action, "add");
                 });
 
@@ -109,7 +109,7 @@
 
                 var viewModel = kendo.observable({ foo: [{}] });
 
-                viewModel.foo.bind("change", function(e) {
+                viewModel.foo.observable().bind("change", function(e) {
                     equal(e.index, 1)
                 });
 
@@ -121,20 +121,8 @@
 
                 var viewModel = kendo.observable({ foo: [{}] });
 
-                viewModel.foo.bind("change", function(e) {
+                viewModel.foo.observable().bind("change", function(e) {
                     equal(e.items.length, 1)
-                });
-
-                viewModel.foo.push({});
-            });
-
-            test("this in the change event is the array itself", function() {
-                expect(1);
-
-                var viewModel = kendo.observable({ foo: [] });
-
-                viewModel.foo.bind("change", function() {
-                    strictEqual(this, viewModel.foo);
                 });
 
                 viewModel.foo.push({});
@@ -145,7 +133,7 @@
 
                 var viewModel = kendo.observable({ foo: [] });
 
-                viewModel.foo.bind("change", function(e) {
+                viewModel.foo.observable().bind("change", function(e) {
                     equal(e.action, "add");
                     equal(e.index, 0);
                     equal(e.items.length, 1);
@@ -159,7 +147,7 @@
 
                 var viewModel = kendo.observable({ foo: [{}] });
 
-                viewModel.foo.bind("change", function(e) {
+                viewModel.foo.observable().bind("change", function(e) {
                     equal(e.action, "remove");
                 });
 
@@ -171,7 +159,7 @@
 
                 var viewModel = kendo.observable({ foo: [{}] });
 
-                viewModel.foo.bind("change", function(e) {
+                viewModel.foo.observable().bind("change", function(e) {
                     equal(e.index, 0);
                 });
 
@@ -183,7 +171,7 @@
 
                 var viewModel = kendo.observable({ foo: [{}] });
 
-                viewModel.foo.bind("change", function(e) {
+                viewModel.foo.observable().bind("change", function(e) {
                     equal(e.items.length, 1);
                 });
 
@@ -201,7 +189,7 @@
 
                 var viewModel = kendo.observable({ foo: [] });
 
-                viewModel.foo.bind("change", function(e) {
+                viewModel.foo.observable().bind("change", function(e) {
                     equal(e.action, "add");
                 });
 
@@ -213,7 +201,7 @@
 
                 var viewModel = kendo.observable({ foo: [] });
 
-                viewModel.foo.bind("change", function(e) {
+                viewModel.foo.observable().bind("change", function(e) {
                     equal(e.index, 0);
                     equal(e.items.length, 1);
                 });
@@ -223,7 +211,7 @@
 
             test("observable array items are observable", function() {
                 var viewModel = kendo.observable({ foo: [ {} ] });
-                ok(viewModel.foo[0].bind);
+                ok(viewModel.foo[0].observable);
             });
         </script>
     </head>

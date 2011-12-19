@@ -11,15 +11,16 @@
         CHANGE = "change";
 
     function extendArray(array) {
-        var idx, length;
+        var idx, length, observable = new Observable;
 
         for (idx = 0, length = array.length; idx < length; idx++) {
             array[idx] = extendObject(array[idx]);
         }
 
-        array._events = {};
-        array.bind = Observable.fn.bind;
-        array.trigger = Observable.fn.trigger;
+        array.observable = function() {
+            return observable;
+        }
+
         array.push = function() {
             var index = this.length,
                 items = arguments,
@@ -27,7 +28,7 @@
 
             result = push.apply(this, items);
 
-            this.trigger(CHANGE, {
+            observable.trigger(CHANGE, {
                 action: "add",
                 index: index,
                 items: items
@@ -40,7 +41,7 @@
             var result = splice.apply(this, arguments);
 
             if (result.length) {
-                this.trigger(CHANGE, {
+                observable.trigger(CHANGE, {
                     action: "remove",
                     index: index,
                     items: result
@@ -48,7 +49,7 @@
             }
 
             if (item) {
-                this.trigger(CHANGE, {
+                observable.trigger(CHANGE, {
                     action: "add",
                     index: index,
                     items: slice.call(arguments, 2)
@@ -64,7 +65,7 @@
 
             result = unshift.apply(this, items);
 
-            this.trigger(CHANGE, {
+            observable.trigger(CHANGE, {
                 action: "add",
                 index: 0,
                 items: items
@@ -75,7 +76,11 @@
     }
 
     function extendObject(object) {
-        var field, member;
+        var field, member, observable = new Observable;
+
+        object.observable = function() {
+            return observable;
+        };
 
         for (field in object) {
             member = object[field];
@@ -84,26 +89,22 @@
                 extendObject(member);
 
                 (function(field) {
-                    member.bind(CHANGE, function(e) {
+                    member.observable().bind(CHANGE, function(e) {
                         e.field = field;
-                        object.trigger(CHANGE, e);
+                        observable.trigger(CHANGE, e);
                     });
                 })(field);
             } else if ($.isArray(member)) {
                 extendArray(member);
 
                 (function(field) {
-                    member.bind(CHANGE, function(e) {
+                    member.observable().bind(CHANGE, function(e) {
                         e.field = field;
-                        object.trigger(CHANGE, e);
+                        observable.trigger(CHANGE, e);
                     });
                 })(field);
             }
         }
-
-        object._events = {};
-        object.bind = Observable.fn.bind;
-        object.trigger = Observable.fn.trigger;
 
         object.set = function(field, value, initiator) {
             var current = this[field];
@@ -111,7 +112,7 @@
             if (current != value) {
                 this[field] = value;
 
-                this.trigger(CHANGE, {
+                observable.trigger(CHANGE, {
                     field: field,
                     initiator: initiator
                 });
@@ -180,7 +181,7 @@
         },
         style: function(element, object, style) {
             element.style.cssText = style.replace(cssRegExp, function(match, css, field) {
-                object.bind("change", function(e) {
+                object.observable().bind("change", function(e) {
                     if (e.field === field && e.initiator !== element) {
                         $(element).css(css, get(object, field));
                     }
@@ -275,7 +276,7 @@
     });
 
     function observe(element, object, field, binding) {
-        object.bind("change", function(e) {
+        object.observable().bind(CHANGE, function(e) {
             if (field.indexOf(e.field) == 0 && e.initiator !== element) {
                 binding(element, object, field, e);
             }
@@ -443,7 +444,7 @@
     kendo.bindings = bindings;
 
     kendo.bind = function(dom, object) {
-        if (object.bind === undefined) {
+        if (object.observable === undefined) {
             object = extendObject(object);
         }
 
