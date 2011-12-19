@@ -70,7 +70,16 @@
         return Math.max( minLimit, Math.min( maxLimit, value));
     }
 
-    var MobileSwitch = MobileWidget.extend({
+    var MobileSwitch = MobileWidget.extend(/** @lends kendo.ui.MobileSwitch.prototype */{
+        /**
+        * @constructs
+        * @extends kendo.ui.MobileWidget
+        * @param {DomElement} element DOM element.
+        * @param {Object} options Configuration options.
+        * @option {Boolean} [checked] <false> The checked state of the widget.
+        * @option {String} [onLabel] <ON> The text of the checked state.
+        * @option {String} [offLabel] <ON> The text of the unchecked state.
+        */
         init: function(element, options) {
             var that = this, width, checked, handleWidth;
 
@@ -89,11 +98,27 @@
             that.snapPart = width - handleWidth;
             that.constrain = width - that.halfWidth;
 
-            //proxies
             that._moveProxy = proxy(that._move, that);
             that._stopProxy = proxy(that._stop, that);
 
             that.bind([
+                /**
+                * Fires when the state of the widget changes
+                * @name kendo.ui.MobileSwitch#change
+                * @event
+                * @param {Event} e
+                * @param {Object} e.checked The checked state of the widget.
+                *
+                * @exampleTitle Handling change event
+                * @example
+                * <input type="checkbox" id="switch" data-role="switch" />
+                *
+                * <script>
+                *  $("#switch").data("kendoMobileSwitch").bind("change", function(e) {
+                *      //handle change event
+                *  }
+                * </script>
+                */
                 CHANGE
             ], options);
 
@@ -112,6 +137,16 @@
             offLabel: "OFF"
         },
 
+        /**
+        * Change the state of the widget. Calling the method without params will toggel the checked state of the widget.
+        * @param {Boolean} checked The checked state
+        * @example
+        * &lt;input data-role="switch" id="foo" /&gt;
+        *
+        * &lt;script&gt;
+        *   $("#foo").data("kendoMobileSwitch").toggle(true);
+        * &lt;/script&gt;
+        */
         toggle: function(checked) {
             var that = this,
                 element = that.element[0];
