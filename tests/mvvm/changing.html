@@ -154,11 +154,47 @@
                 var dom = $('<div data-style="display:${foo};text-decoration:${bar}"/>');
 
                 kendo.bind(dom, viewModel);
+
                 viewModel.set("foo", "inline");
                 viewModel.set("bar", "overline");
 
                 equal(dom.css("display"), "inline");
                 equal(dom.css("text-decoration"), "overline");
+            });
+
+            test("tracking changes of complex fields", function() {
+                var dom = $('<div data-title="bar" data-text="foo.bar"/>');
+
+                var viewModel = kendo.observable({
+                    foo: {
+                        bar: "bar"
+                    },
+                    bar: "boo"
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.foo.set("bar", "baz");
+
+                equal(dom.text(), "baz");
+                //check that parent field is not changed
+                equal(dom.attr("title"), "boo");
+            });
+
+            test("tracking changes of parent complex fields", function() {
+                var dom = $('<div data-title="bar" data-text="foo.bar"/>');
+
+                var viewModel = kendo.observable({
+                    foo: {
+                        bar: "bar"
+                    }
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("foo", { bar: "baz" });
+
+                equal(dom.text(), "baz");
             });
         </script>
         <script id="array-tmpl" type="text/x-kendo-tmpl">

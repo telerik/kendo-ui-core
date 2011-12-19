@@ -23,12 +23,11 @@
             <button data-click="addProduct">Add a product</button>
             <button data-click="selectFirst">Select "Food"</button>
 
-            <div>Selected product is: <span data-html="selectedProduct"></span></div>
+            <div>Selected product is: <span data-html="selectedProduct.name"></span></div>
 
             <fieldset>
                 <legend>&lt;select multiple&gt;</legend>
                 <select style="width: 200px"
-                    multiple
                     data-value="selectedProduct"
                     data-template="option-tmpl"
                     data-source="products">
@@ -59,9 +58,9 @@
         <script>
             var viewModel = kendo.observable({
                 products: [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" } ],
-                selectedProduct: 2,
+                selectedProduct: {},
                 selectFirst: function() {
-                    this.set("selectedProduct", 1);
+                    this.set("selectedProduct", this.products[0]);
                     return false;
                 },
                 addProduct: function() {
@@ -73,6 +72,8 @@
                     return false;
                 }
             });
+
+            viewModel.set("selectedProduct", viewModel.products[1]);
 
             kendo.bind($("form"), viewModel);
         </script>

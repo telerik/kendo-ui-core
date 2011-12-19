@@ -82,6 +82,13 @@
 
             if ($.isPlainObject(member)) {
                 extendObject(member);
+
+                (function(field) {
+                    member.bind(CHANGE, function(e) {
+                        e.field = field;
+                        object.trigger(CHANGE, e);
+                    });
+                })(field);
             } else if ($.isArray(member)) {
                 extendArray(member);
 
@@ -164,13 +171,6 @@
         html: function(element, object, field) {
             element.innerHTML = get(object, field);
         },
-        value: function(element, object, field) {
-            element = $(element);
-            element.val(get(object, field))
-                   .change(function() {
-                        object.set(field, element.val(), this);
-                   });
-        },
         template: function(element, object) {
             if (!element.getAttribute("data-source")) {
                 var template = kendo.template(templateFor(element));
@@ -225,11 +225,32 @@
 
                 for (element = element.firstChild; element; element = element.nextSibling) {
                     if (element.nodeType === 1) {
-                        bindElement(element, object[idx++]);
+                        bindElement(element, object[idx]);
+                        $.data(element, "value", object[idx++]);
                     }
                 }
             }
-        }
+        },
+
+        value: function(element, object, field) {
+            if (element.nodeName.toLowerCase() === "select") {
+                var value = get(object, field);
+
+                $(element)
+                .change(function() {
+                    object.set(field, $.data(this.options[this.selectedIndex], "value"), this);
+                })
+                .find("option").filter(function() {
+                    return $.data(this, "value") === value;
+                })
+                .attr("selected", "selected");
+            } else {
+                $(element).val(get(object, field))
+                       .change(function() {
+                            object.set(field, this.value, this);
+                       });
+            }
+        },
     };
 
     $.each("title alt src href".split(" "), function(index, attr) {
@@ -246,7 +267,7 @@
 
     function observe(element, object, field, binding) {
         object.bind("change", function(e) {
-            if (e.field === field && e.initiator !== element) {
+            if (field.indexOf(e.field) == 0 && e.initiator !== element) {
                 binding(element, object, field, e);
             }
         });
