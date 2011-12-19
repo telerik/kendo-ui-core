@@ -1,4 +1,50 @@
 (function($, undefined) {
+    /**
+    * @name kendo.ui.MobileSwitch.Description
+    *
+    * @section MobileSwitch widget is used inside a mobile view to display two exclusive choises.
+    * The MobileSwitch shows the value that is currently selected. Users slides the control to reveal the second value.
+    * The MobileSwitch can only be created from <code>input</code> type <code>checkbox</code>.
+    *
+    * <h3>Getting Started</h3>
+    * The Kendo MobileApplication will automatically initialize the MobileSwitch for every element with <code>role</code> data attribute set to <code>swtich</code> present in the views/layouts markup.
+    * Alternatively, it can be initialized using a jQuery selector.
+    * @exampleTitle Initialize Kendo MobileSwitch based on role data attribute
+    * @example
+    * <input type="checkbox" data-role="switch" />
+    *
+    * @exampleTitle Initialize Kendo MobileSwitch using a jQuery selector
+    * @example
+    * <input type="checkbox" id="switch" />
+    * <script>
+    * var switchWidget = $("#switch").kendoMobileSwitch();
+    * </script>
+    * @section <h3>Define checked state of the MobileSwitch</h3>
+    *
+    * Selected state of the widget depends on the <code>checked</code> attribute of the <code>input</code> element.
+    *
+    * @exampleTitle Initialize Kendo MobileSwitch from checked <code>input</code>
+    * @example
+    * <input type="checkbox" id="switch" checked="checked" />
+    * <script>
+    * var switchWidget = $("#switch").kendoMobileSwitch();
+    * </script>
+    *
+    * @exampleTitle Initialize Kendo MobileSwitch using options
+    * @example
+    * <input type="checkbox" id="switch" />
+    * <script>
+    * var switchWidget = $("#switch").kendoMobileSwitch({ checked: true });
+    * </script>
+    *
+    * @section <h3>Setting text of the labels</h3>
+    *
+    * @exampleTitle Initialize Kendo MobileSwitch with custom text
+    * <input type="checkbox" id="switch" />
+    * <script>
+    * var switchWidget = $("#switch").kendoMobileSwitch({ onLabel: "YES", offLabel: "NO" });
+    * </script>
+    */
     var kendo = window.kendo,
         ui = kendo.ui,
         MobileWidget = ui.MobileWidget,
