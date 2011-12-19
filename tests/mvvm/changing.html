@@ -41,23 +41,27 @@
             });
 
             test("change handler is attached only once", function() {
+                var calls = 0;
+
                 var viewModel = kendo.observable( {
                     foo: "foo"
                 });
 
                 var dom = $('<span data-text="foo"/>');
 
-                stub(viewModel, {
-                    bind: function() {
-                        kendo.Observable.fn.bind.apply(viewModel, arguments);
-                    }
-                });
+                var observable = viewModel.observable();
+
+                observable.bind = function() {
+                    console.log(this);
+                    calls ++;
+                    kendo.Observable.fn.bind.apply(this, arguments);
+                }
 
                 kendo.bind(dom, viewModel);
 
                 viewModel.set("foo", "bar");
 
-                equal(viewModel.calls("bind"), 1);
+                equal(calls, 1);
             });
 
             test("changing a view model field from a view model function bound to UI reflects UI", function() {
