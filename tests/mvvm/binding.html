@@ -330,6 +330,20 @@
                 equal(dom.css("display"), "none");
                 equal(dom.css("text-decoration"), "underline");
             });
+
+            test("binding select value to object", function() {
+                var dom = $('<select data-source="items" data-value="selectedItem"/>');
+
+                var viewModel = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" } ],
+                    selectedItem: {}
+                });
+
+                viewModel.set("selectedItem", viewModel.items[1]);
+
+                kendo.bind(dom, viewModel);
+                ok(dom.find("option").last().is(":selected"));
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
