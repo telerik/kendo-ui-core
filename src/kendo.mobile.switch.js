@@ -62,8 +62,8 @@
         options: {
             name: "MobileSwitch",
             selector: kendo.roleSelector("switch"),
-            onLabel: "on",
-            offLabel: "off",
+            onLabel: "ON",
+            offLabel: "OFF",
         },
 
         toggle: function(checked) {

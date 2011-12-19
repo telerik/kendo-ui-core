@@ -418,15 +418,15 @@ body {
   text-align: center;
   position: absolute;
 }
-.km-switch-handle:after {
-  left: 2em;
-  content: "off";
+.km-switch-label-off {
+  left: 3em;
   color: #7f7f7f;
+  position: absolute;
 }
-.km-switch-handle:before {
-  left: -4em;
-  content: "on";
+.km-switch-label-on {
+  left: -2.8em;
   color: #fff;
+  position: absolute;
   text-shadow: 0 -1px 0 #0e203e;
 }
 .km-android .km-switch {
