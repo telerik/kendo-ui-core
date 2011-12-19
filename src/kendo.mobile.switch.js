@@ -64,15 +64,15 @@
             selector: kendo.roleSelector("switch")
         },
 
-        //toggle() without params does not work
-        toggle: function(toggle) {
-            var that = this,
-                element = that.element,
-                checked = !element[0].checked;
+        toggle: function(checked) {
+            var that = this
+                element = that.element[0];
 
-            if (toggle !== undefined) {
-                checked = toggle;
+            if (checked === undefined) {
+                checked = !element.checked;
             }
+
+            element.checked = checked;
 
             that._position(checked * that.snapPart, checked ? 0 : that.origin);
 

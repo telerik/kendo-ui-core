@@ -74,16 +74,16 @@
                 equal(dom.parent().find(".km-switch-background").length, 1);
             });
 
-            test("Switch raises toggle event when changed", function() {
-                //expect(1);
+            test("Switch raises change event when changed", function() {
+                expect(1);
 
                 var theSwitch = new Switch(dom);
 
-                theSwitch.bind("toggle", function() {
-                    //ok(true, "Should raise the toggle event");
+                theSwitch.bind("change", function() {
+                    ok(true);
                 });
 
-                dom.change();
+                theSwitch._toggle(true);
             });
 
             test("Switch applies active state when pressed", function() {
@@ -115,14 +115,42 @@
                 ok(theSwitch.handle.hasClass("km-state-active"), "Does not have active css class");
             });
 
-            test("Switch can be disabled from configuration options", function() {
-                var theSwitch = new Switch(dom, {enable: false});
+            test("Switch toggles to checked when toggle(true)", function() {
+                var theSwitch = new Switch(dom);
 
-                theSwitch.bind("toggle", function() {
-                    ok(false, "Does not raise the toggle event");
-                });
+                theSwitch.toggle(true);
+
+                ok(theSwitch.handle.hasClass("km-switch-on"));
+                ok(theSwitch.element[0].checked);
+            });
+
+            test("Switch toggles to checked when toggle(true)", function() {
+                var theSwitch = new Switch(dom);
+
+                theSwitch.toggle(true);
+
+                theSwitch.toggle(false);
+
+                ok(!theSwitch.handle.hasClass("km-switch-on"));
+                ok(!theSwitch.element[0].checked);
+            });
+
+            test("Switch toggles to checked when toggle()", function() {
+                var theSwitch = new Switch(dom);
 
                 theSwitch.toggle();
+
+                ok(theSwitch.handle.hasClass("km-switch-on"));
+                ok(theSwitch.element[0].checked);
+            });
+
+            test("Switch toggles to checked when toggle()", function() {
+                var theSwitch = new Switch(dom);
+
+                theSwitch.toggle(true);
+                theSwitch.toggle();
+
+                ok(!theSwitch.handle.hasClass("km-switch-on"));
             });
         </script>
     </body>
