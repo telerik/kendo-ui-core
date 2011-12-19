@@ -57,6 +57,20 @@
                 equal(dom.parent().find(".km-switch-handle").length, 1);
             });
 
+            test("Switch creates on/off labels", function() {
+
+                var theSwitch = new Switch(dom);
+
+                equal(theSwitch.handle.children().length, 2);
+                //on label
+                ok(theSwitch.handle.children().eq(0).hasClass("km-switch-label-on"));
+                ok(theSwitch.handle.children().eq(0).html(), "on");
+
+                //off label
+                ok(theSwitch.handle.children().eq(1).hasClass("km-switch-label-off"));
+                ok(theSwitch.handle.children().eq(1).html(), "off");
+            });
+
             test("Switch creates a container", function() {
                 expect(1);
 
