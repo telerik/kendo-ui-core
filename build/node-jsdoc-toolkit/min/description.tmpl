@@ -1,0 +1,6 @@
+{!
+    var description = data.properties.filter(function(x) { return x._name == "Description"; })[0];
+    if (description) {
+        output += outputDescription(description.comment);
+    }
+!}

@@ -31,8 +31,10 @@ SUITES.forEach(function(suite) {
                 kendoBuild.copyFileSync(fileName, outputFile);
 
                 var content = kendoBuild.readText(outputFile);
-                content = content.replace(/(.|\n)+<body>((.|\n)+)<\/body>(.|\n)+/m, "$2");
-                content = content.replace("../content", "../../content/" + suite);
+                content = content
+                    .replace(/(.|\n)+<body>((.|\n)+)<\/body>(.|\n)+/m, "$2")
+                    .replace("../content", "../../content/" + suite)
+                    .replace(/\s*<!--\s*\w+\s*-->\s*$/gm, "");
 
                 kendoBuild.writeText(outputFile, content);
             } catch (e) {
