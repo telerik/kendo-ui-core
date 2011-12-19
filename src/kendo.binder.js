@@ -251,6 +251,15 @@
                        });
             }
         },
+        click: function(element, object, field) {
+            var callback = get(object, field);
+
+            $(element).click(function(e) {
+                e.preventDefault();
+
+                callback.call(object, e);
+            });
+        }
     };
 
     $.each("title alt src href".split(" "), function(index, attr) {
@@ -259,9 +268,9 @@
         }
     });
 
-    $.each("click change".split(" "), function(index, eventName) {
+    $.each("change".split(" "), function(index, eventName) {
         bindings[eventName] = function(element, object, field) {
-            $(element).bind(eventName, $.proxy(get(object, field), this));
+            $(element).bind(eventName, $.proxy(get(object, field), object));
         }
     });
 
