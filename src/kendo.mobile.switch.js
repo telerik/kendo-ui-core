@@ -30,7 +30,7 @@
 
     var MobileSwitch = MobileWidget.extend({
         init: function(element, options) {
-            var that = this, handleWidth, checked;
+            var that = this, width, checked, handleWidth;
 
             MobileWidget.fn.init.call(that, element, options);
 
@@ -38,15 +38,14 @@
             that._background();
             that._handle();
 
-            element = that.element.data(kendo.attr("role"), "switch");
             options = that.options;
+            element = that.element.data(kendo.attr("role"), "switch");
 
-            //constants
             handleWidth = that.handle.outerWidth(true);
-            that.halfWidth = that.handle.outerWidth() / 2;
-            that.width = that.wrapper.outerWidth();
-            that.snapPart = that.width - handleWidth;
-            that.constrain = that.width - handleWidth + that.halfWidth;
+            that.halfWidth = handleWidth / 2;
+            that.width = width = that.wrapper.outerWidth();
+            that.snapPart = width - handleWidth;
+            that.constrain = width - that.halfWidth;
 
             //proxies
             that._moveProxy = proxy(that._move, that);
@@ -86,6 +85,10 @@
             that.handle
                 .toggleClass(SWITCHON, checked)
                 .toggleClass(SWITCHOFF, !checked);
+        },
+
+        _active: function (e) {
+            this.handle.toggleClass("km-state-active", e.type == MOUSEDOWN);
         },
 
         _location: function(e) {
@@ -138,10 +141,6 @@
             prevent(e);
         },
 
-        _trigger: function (e) {
-            this.handle.toggleClass("km-state-active", e.type == MOUSEDOWN);
-        },
-
         _toggle: function (checked) {
             var that = this,
                 handle = that.handle,
@@ -165,7 +164,7 @@
                         duration: 150,
                         offset: distance + "px,0",
                         complete: function () {
-                            that.element.checked = checked;
+                            that.element[0].checked = checked;
                             that.trigger(CHANGE, { checked: checked });
                         }
                     }));
@@ -192,7 +191,7 @@
             that.handle = $("<span class='km-switch-container'><span class='km-switch-handle' /></span>")
                             .appendTo(that.wrapper)
                             .children(".km-switch-handle")
-                            .bind(MOUSEDOWN + " " + MOUSEUP, proxy(that._trigger, that));
+                            .bind(MOUSEDOWN + " " + MOUSEUP, proxy(that._active, that));
 
             that.handle.append('<span class="km-switch-label-on">' + options.onLabel + '</span><span class="km-switch-label-off">' + options.offLabel + '</span>');
         },
