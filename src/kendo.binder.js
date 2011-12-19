@@ -153,6 +153,8 @@
         return kendo.getter(field)(object);
     }
 
+    var cssRegExp = /([^:]+):\s*\${([^}]*)};?/g;
+
     var bindings = {
         text: function(element, object, field) {
             element[innerText] = get(object, field);
@@ -173,6 +175,17 @@
 
                 $(element).html(template(object));
             }
+        },
+        style: function(element, object, style) {
+            element.style.cssText = style.replace(cssRegExp, function(match, css, field) {
+                object.bind("change", function(e) {
+                    if (e.field === field && e.initiator !== element) {
+                        $(element).css(css, get(object, field));
+                    }
+                });
+
+                return css + ":" + get(object, field) + ";";
+            });
         },
         source: function(element, object, field, e) {
             var template = kendo.template(templateFor(element)),
@@ -238,17 +251,17 @@
     }
 
     function bindElement(element, object) {
-        var field, binding;
+        var field, key, binding;
 
-        for (binding in kendo.bindings) {
-            field = element.getAttribute("data-" + binding);
+        for (key in kendo.bindings) {
+            field = element.getAttribute("data-" + key);
 
             if (field) {
-                binding = $.proxy(kendo.bindings[binding], object);
+                binding = $.proxy(kendo.bindings[key], object);
 
                 binding(element, object, field);
 
-                if (field !== "this") {
+                if (field !== "this" && key !== "style") {
                     observe(element, object, field, binding);
                 }
             }
