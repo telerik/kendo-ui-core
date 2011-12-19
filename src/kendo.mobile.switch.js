@@ -61,7 +61,9 @@
 
         options: {
             name: "MobileSwitch",
-            selector: kendo.roleSelector("switch")
+            selector: kendo.roleSelector("switch"),
+            onLabel: "on",
+            offLabel: "off",
         },
 
         toggle: function(checked) {
@@ -179,12 +181,15 @@
         },
 
         _handle: function() {
-            var that = this;
+            var that = this,
+                options = that.options;
 
             that.handle = $("<span class='km-switch-container'><span class='km-switch-handle' /></span>")
                             .appendTo(that.wrapper)
                             .children(".km-switch-handle")
                             .bind(MOUSEDOWN + " " + MOUSEUP, proxy(that._trigger, that));
+
+            that.handle.append('<span class="km-switch-label-on">' + options.onLabel + '</span><span class="km-switch-label-off">' + options.offLabel + '</span>');
         },
 
         _wrapper: function() {
