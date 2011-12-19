@@ -140,18 +140,91 @@
         * @extends kendo.ui.Select
         * @param {DomElement} element DOM element
         * @param {Object} options Configuration options.
-        * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the ComboBox will be bound to.
-        * @option {Boolean} [enable] <true> Controls whether the ComboBox should be initially enabled.
-        * @option {Number} [index] <-1> Defines the initial selected item.
-        * @option {Boolean} [autoBind] <true> Controls whether to bind the widget on initialization.
+        * @option {Object | kendo.data.DataSource} [dataSource] A local JavaScript object or instance of DataSource or the data that the ComboBox will be bound to.
+		* _example
+		* var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+		* $("#comboBox").kendoComboBox({
+	    *     dataSource: items
+		* });
+		* //
+		* // or
+		* //
+		* $("#comboBox").kendoComboBox({
+		*     dataSource: new kendo.data.DataSource({
+		*         transport: {
+		*	      read: {
+		*	          url: "Get/Items" // url to remote data source
+		*	      }
+	    *         }         
+		*     });
+		* });
+		* @option {Boolean} [enable] <true> Controls whether the ComboBox should be initially enabled.
+	    * _example
+		* $("#comboBox").kendoComboBox({
+		*     enable: false
+		* });
+		* //
+		* // to set this after initialization, use the API method
+		* //
+		* // get a reference to the ComboBox widget
+		* var comboBox = $("#comboBox").data("kendoComboBox");
+		* comboBox.enable(false); 
+		* @option {Number} [index] <-1> Defines the initial selected item.
+	    * _example
+		* var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+		* $("#comboBox").kendoComboBox({
+    	*     dataSource: items,
+		*     index: 1 // 0 based from the start of the collection of objects. this selects "Item 2".
+		* });
+		* @option {Boolean} [autoBind] <true> Controls whether to bind the widget to the DataSource on initialization.
+		* _example
+		* $("#comboBox").kendoComboBox({
+		*     autoBind: false
+		* });
         * @option {Boolean} [highlightFirst] <true> Controls whether the first item will be automatically highlighted.
+		* _example
+		* $("#comboBox").kendoComboBox({
+		*     highLightFirst: true
+		* });
         * @option {Boolean} [suggest] <false> Controls whether the ComboBox should automatically auto-type the rest of text.
+		* _example
+		* $("#comboBox").kendoComboBox({
+		*     suggest: false
+		* });
         * @option {Number} [delay] <200> Specifies the delay in ms after which the ComboBox will start filtering dataSource.
-        * @option {Number} [minLength] <1> Specifies the minimum characters that should be typed before the ComboBox activates
-        * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
-        * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
-        * @option {String} [filter] <"none"> Defines the type of filtration. If "none" the ComboBox will not filter the items.
-        * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
+        * _example
+		* $("#comboBox").kendoComboBox({
+		*     delay: 500
+		* });
+		* @option {Number} [minLength] <1> Specifies the minimum characters that should be typed before the ComboBox activates
+        * _example
+		* $("#comboBox").kendoComboBox({
+		*     minLength: 3
+		* });
+		* @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
+        * _example
+		* var items = [{ Name: "Item 1", ID: "1" }, { Name: "Item 2", ID: "2" }];
+		* $("#comboBox").kendoComboBox({
+		*     dataTextField: "Name",
+		*     dataValueField: "ID"
+		* });
+		* @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
+        * _example
+		* var items = [{ Name: "Item 1", ID: "1" }, { Name: "Item 2", ID: "2" }];
+		* $("#comboBox").kendoComboBox({
+		*     dataTextField: "Name",
+		*     dataValueField: "ID"
+		* }); 
+		* @option {String} [filter] <"none"> Defines the type of filtration. If "none" the ComboBox will not filter the items.
+        * _example
+		* $("#comboBox").kendoComboBox({
+		*     filter: "Item"
+		* });
+		* @option {Number} [height] <200> Define the height of the drop-down list in pixels.
+		* _example
+		* $("#comboBox").kendoComboBox({
+		*     height: 500
+		* });
         * @option {Function} [template] Template to be used for rendering the items in the list.
         * _example
         *  //template
@@ -237,18 +310,60 @@
                 * @name kendo.ui.ComboBox#open
                 * @event
                 * @param {Event} e
+				* @example
+				* $("#comboBox").kendoComboBox({
+				*     open: function(e) {
+				*	      // handle event
+				*	  }
+				* });
+				* @exampleTitle To set after initialization
+				* @example
+				* // get a reference to instance of the Kendo UI ComboBox
+				* var combobox = $("#comboBox").data("kendoComboBox");
+				* // bind to the open event
+				* combobox.bind("open", function(e) {
+				*     // handle event
+				* });	
                 */
                 /**
                 * Fires when the drop-down list is closed
                 * @name kendo.ui.ComboBox#close
                 * @event
                 * @param {Event} e
+				* @example
+				* $("#comboBox").kendoComboBox({
+				*     close: function(e) {
+				*	      // handle event
+				*	  }
+				* });
+				* @exampleTitle To set after initialization
+				* @example
+				* // get a reference to instance of the Kendo UI ComboBox
+				* var combobox = $("#comboBox").data("kendoComboBox");
+				* // bind to the close event
+				* combobox.bind("close", function(e) {
+				*     // handle event
+				* });
                 */
                 /**
                 * Fires when the value has been changed.
                 * @name kendo.ui.ComboBox#change
                 * @event
                 * @param {Event} e
+				* @example
+				* $("#comboBox").kendoComboBox({
+				*     change: function(e) {
+				*	      // handle event
+				*	  }
+				* });
+				* @exampleTitle To set after initialization
+				* @example
+				* // get a reference to instance of the Kendo UI ComboBox
+				* var combobox = $("#comboBox").data("kendoComboBox");
+				* // bind to the change event
+				* combobox.bind("change", function(e) {
+				*     // handle event
+				* });
                 */
                 CHANGE
             ], options);
@@ -320,12 +435,19 @@
         * @name kendo.ui.ComboBox#close
         * @function
         * @example
+		* // get a reference to instance of the Kendo UI ComboBox
+		* var combobox = $("#comboBox").data("kendoComboBox");
         * combobox.close();
         */
 
         /**
         * Enables/disables the combobox widget
         * @param {Boolean} enable Desired state
+		* @example
+		* // get a reference to instance of the Kendo UI ComboBox
+		* var combobox = $("#comboBox").data("kendoComboBox");
+		* // disables the combobox
+		* combobox.enable(false);
         */
         enable: function(enable) {
             var that = this,
@@ -356,6 +478,8 @@
         /**
         * Opens the drop-down list.
         * @example
+		* // get a reference to instance of the Kendo UI ComboBox
+		* var combobox = $("#comboBox").data("kendoComboBox");
         * combobox.open();
         */
         open: function() {
