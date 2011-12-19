@@ -61,20 +61,16 @@
                 selectedProduct: {},
                 selectFirst: function() {
                     this.set("selectedProduct", this.products[0]);
-                    return false;
                 },
                 addProduct: function() {
                     this.products.push({ id: 3, name: "Coffee" });
-                    return false;
                 },
                 removeProduct: function(e) {
                     this.products.splice(this.products.length-1, 1);
-                    return false;
                 }
             });
 
             viewModel.set("selectedProduct", viewModel.products[1]);
-
             kendo.bind($("form"), viewModel);
         </script>
     </body>
