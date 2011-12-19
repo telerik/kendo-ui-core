@@ -150,7 +150,7 @@
             return object;
         }
 
-        return object[field];
+        return kendo.getter(field)(object);
     }
 
     var bindings = {
