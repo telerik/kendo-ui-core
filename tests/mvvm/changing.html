@@ -145,6 +145,21 @@
                 equal(dom.find("li").text(), "bar");
             });
 
+            test("tracking changes of fields bound to style", function() {
+                var viewModel = kendo.observable( {
+                    foo: "none",
+                    bar: "underline"
+                });
+
+                var dom = $('<div data-style="display:${foo};text-decoration:${bar}"/>');
+
+                kendo.bind(dom, viewModel);
+                viewModel.set("foo", "inline");
+                viewModel.set("bar", "overline");
+
+                equal(dom.css("display"), "inline");
+                equal(dom.css("text-decoration"), "overline");
+            });
         </script>
         <script id="array-tmpl" type="text/x-kendo-tmpl">
             <li data-text="name"></li>

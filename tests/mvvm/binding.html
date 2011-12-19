@@ -321,6 +321,15 @@
 
                 equal(dom.text(), "baz");
             });
+
+            test("binding the style attribute", function() {
+                var dom = $('<div data-style="display:${foo};text-decoration:${bar};"/>');
+
+                kendo.bind(dom, { foo: "none", bar: "underline" });
+
+                equal(dom.css("display"), "none");
+                equal(dom.css("text-decoration"), "underline");
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
