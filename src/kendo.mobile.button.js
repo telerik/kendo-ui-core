@@ -10,8 +10,35 @@
         MOUSEUP = support.mouseup,
         CLICK = "click",
         proxy = $.proxy;
+    /**
+    * @name kendo.ui.MobileButton.Description
+    * @section The MobileButton widget navigates between mobile Application views when pressed.
+    *
+    * <h3>Getting Started</h3>
+    * The Kendo MobileApplication will automatically initialize a MobileButton for every element with <code>role</code> data attribute set to <code>button</code> present in the views/layouts markup.
+    * Alternatively, it can be initialized using a jQuery selector. The button element may be either <code>A</code> or <code>BUTTON</code> element.
+    *
+    * @exampleTitle Initialize Kendo MobileButton based on role data attribute.
+    * @example
+    * <a href="#foo" data-role="button">Foo</a>
+    *
+    * @exampleTitle Initialize Kendo MobileButton using a jQuery selector
+    * @example
+    * var button = $("#button").kendoMobileButton();
+    *
+    * @section
+    *
+    * <h3>Customizing MobileButton appearance</h3>
+    * // TODO
+    */
 
-    var MobileButton = MobileWidget.extend({
+    var MobileButton = MobileWidget.extend(/** @lends kendo.ui.MobileButton.prototype */{
+        /**
+        * @constructs
+        * @extends kendo.ui.MobileWidget
+        * @param {DomElement} element DOM element.
+        * @param {Object} options Configuration options.
+        */
         init: function(element, options) {
             var that = this;
 
@@ -25,14 +52,22 @@
 
             that.element.bind(MOUSEUP, that._releaseProxy);
 
-            that.bind([CLICK], options);
+            that.bind([
+                /**
+                 * Fires when button is clicked
+                 * @name kendo.ui.MobileButton#click
+                 * @event
+                 * @param {Event} e
+                 * @param {jQueryObject} e.target The clicked DOM element
+                 */
+              CLICK
+            ], options);
         },
 
         options: {
             name: "MobileButton",
             style: "",
-            selector: kendo.roleSelector("button"),
-            enable: true
+            selector: kendo.roleSelector("button")
         },
 
         _release: function(e) {
