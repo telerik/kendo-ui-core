@@ -305,6 +305,22 @@
 
                 equal($.trim(dom.text()), "Hello, foofoo");
             });
+
+            test("binding to nested field", function() {
+                var dom = $('<div data-text="foo.bar"/>');
+
+                kendo.bind(dom, { foo: { bar: "baz" } });
+
+                equal(dom.text(), "baz");
+            });
+
+            test("binding to array item", function() {
+                var dom = $('<div data-text="foo[0]"/>');
+
+                kendo.bind(dom, { foo: ["baz"] });
+
+                equal(dom.text(), "baz");
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
