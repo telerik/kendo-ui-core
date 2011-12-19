@@ -423,6 +423,7 @@
          * @option {String} [columns.editor.options.field] The field for the editor.
          * @option {Object} [columns.editor.options.model] The model for the editor.
          * @option {String} [columns.width] The width of the column.
+         * @option {Boolean} [columns.encoded] <true> Specified whether the column content is escaped. Disable encoding if the data contains HTML markup.
          * @option {String} [columns.command] Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".
          * @option {String} [columns.template] The template for column's cells.
          * _example
