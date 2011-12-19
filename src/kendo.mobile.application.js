@@ -1,6 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
-        ui = kendo.ui,
+        mobile = kendo.mobile,
         history = kendo.history,
         support = kendo.support,
         attr = kendo.attr,
@@ -14,9 +14,11 @@
         linkRolesSelector = toRoleSelector("tab"),
         initialHeight = {},
         TRANSFORM = support.transitions.css + "transform",
-        View = ui.MobileView,
-        ViewSwitcher = ui.MobileViewSwitcher,
-        Layout = ui.MobileLayout,
+        View = mobile.View,
+        ViewSwitcher = mobile.ViewSwitcher,
+        Layout = mobile.Layout,
+        VIEW_INIT = "viewInit",
+        VIEW_SHOW = "viewShow",
         roleSelector = kendo.roleSelector;
 
     function toRoleSelector(string) {
@@ -107,9 +109,8 @@
      * @name kendo.mobile.Application.Description
      * @section The Kendo Mobile Application allows for building native-looking web based mobile applications.
      *
-     *
      * <h3>Getting Started</h3>
-     * The simplest mobile application consists of a single MobileView. // TODO
+     * The simplest mobile application consists of a single mobile View. // TODO
      *
      * @exampleTitle Hello World mobile application
      * @example
@@ -129,16 +130,16 @@
      * <h3>View Structure</h3>
      * The Mobile Application consists of one or more views, linked with navigational widgets (MobileButton, TabStrip, etc.).
      * A view is defined by setting an element <code>role</code> data attribute to <code>view</code>.
-     * @exampleTitle Define MobileView
+     * @exampleTitle Define mobile View
      * @example
      * <div data-role="view">Foo</div>
      *
      * @section
      * <h3>Headers and Footers</h3>
-     * <p>By default, the MobileView contents stretch to fit the Application element (the <code>body</code> element by default). Additionally, the MobileView can contain header and footer elements.
+     * <p>By default, the mobile View contents stretch to fit the Application element (the <code>body</code> element by default). Additionally, the mobile View can contain header and footer elements.
      * To mark header and footer elements, add a <code>role</code> data attribute with <code>header</code> and <code>footer</code> value, respectively. Multiple views can be defined in a single page.
      *
-     * @exampleTitle MobileView with Header and Footer
+     * @exampleTitle Mobile View with Header and Footer
      * @example
      * <div data-role="view">
      *   <div data-role="header">Header</div>
@@ -234,18 +235,43 @@
             kendo.Observable.fn.init.call(that, that.options);
             that.element = element ? $(element) : $(document.body);
 
-            var doc = $(document.documentElement);
-            doc.addClass("km-" + (!os ? "ios" : os.name) + " " + getOrientationClass());
 
-            $(document).bind("orientationchange", function(e) {
-                doc.removeClass("km-horizontal km-vertical")
-                   .addClass(getOrientationClass());
-
-                $(".km-scroll-container:visible").css(TRANSFORM, "none"); // Reset the visible scrollbar, TODO: make a scrollIntoView scroller method.
-            });
+            that.bind([
+            /**
+             * Fires the first time when view is displayed.
+             * @name kendo.mobile.Application#viewInit
+             * @event
+             * @param {Event} e
+             * @param {kendo.mobile.View} e.view The displayed view.
+             */
+              VIEW_INIT,
+            /**
+             * Fires when a view is displayed.
+             * @name kendo.mobile.Application#viewShow
+             * @event
+             * @param {Event} e
+             * @param {kendo.mobile.View} e.view The displayed view.
+             * @param {Object} e.params The URL params passed.
+             *
+             * @exampleTitle Display view with URL parameters
+             * @example
+             * <div id="foo" data-role="view"><a href="#bar?baz=qux">Go to bar</a></div>
+             * <div id="bar" data-role="view">Bar</div>
+             *
+             * <script>
+             *      // ...
+             *      application.bind("viewShow", function(e) {
+             *          console.log(e.view); // kendo.mobile.View instance
+             *          console.log(e.params); // {"baz": "qux"}
+             *      });
+             * </script>
+             */
+              VIEW_SHOW
+            ], that.options);
 
             $(function(){
                 hideAddressBar(that.element);
+                that._attachOrientationChange();
                 that._attachMeta();
                 that._setupAppLinks();
                 that._setupLayouts();
@@ -314,7 +340,7 @@
             that.view = view;
             view.params = params;
             that._updateNavigationControls();
-            that.trigger("viewShow", {view: view, params: params});
+            that.trigger(VIEW_SHOW, {view: view, params: params});
         },
 
         _updateNavigationControls: function(argument) {
@@ -348,7 +374,7 @@
                 kendo.mobile.enhance(view.element);
             }
 
-            that.trigger("viewInit", {view: view});
+            that.trigger(VIEW_INIT, {view: view});
 
             return view;
         },
@@ -390,6 +416,20 @@
                     callback(that._createRemoteView(url, html));
                 });
             }
+        },
+
+        _attachOrientationChange: function() {
+            var that = this, element = that.element;
+            element.addClass("km-" + (!os ? "ios" : os.name) + " " + getOrientationClass());
+
+            $(document).bind("orientationchange", function(e) {
+                element.removeClass("km-horizontal km-vertical")
+                    .addClass(getOrientationClass());
+
+                // Reset the visible scrollbar,
+                // TODO: make a scrollIntoView scroller method.
+                $(".km-scroll-container:visible").css(TRANSFORM, "none");
+            });
         },
 
         _attachMeta: function() {
