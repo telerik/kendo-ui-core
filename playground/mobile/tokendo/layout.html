@@ -26,6 +26,7 @@
     <script src="../../../src/kendo.mobile.navbar.js"></script>
     <script src="../../../src/kendo.mobile.tabstrip.js"></script>
     <script src="../../../src/kendo.mobile.listview.js"></script>
+    <script src="../../../src/kendo.mobile.view.js"></script>
     <script src="../../../src/kendo.mobile.application.js"></script>
 
     <style type="text/css">
@@ -65,30 +66,30 @@
     </style>
 </head>
 <body>
-    <article data-kendo-role="view">
-        <header data-kendo-role="header">
-            <div data-kendo-role="navbar">
-                <span data-kendo-role="view-title">Layout</span>
-                <button data-kendo-role="button" data-kendo-align="right">About</button>
+    <article data-role="view">
+        <header data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title">Layout</span>
+                <button data-role="button" data-align="right">About</button>
             </div>
         </header>
 
-        <content data-kendo-role="content">
-            <ul data-kendo-role="listview">
-                <li>Albania<input type="checkbox" data-kendo-role="switch" /></li>
-                <li>Australia<input type="checkbox" data-kendo-role="switch" /></li>
+        <content data-role="content">
+            <ul data-role="listview">
+                <li>Albania<input type="checkbox" data-role="switch" /></li>
+                <li>Australia<input type="checkbox" data-role="switch" /></li>
             </ul>
             <div class="sliderValue">0</div>
             <span class="km-slider" style="float: right; clear: both;"></span>
-            <ul data-kendo-role="listview" data-kendo-style="inset">
+            <ul data-role="listview" data-style="inset">
                 <li>Albania</li>
                 <li>Australia</li>
             </ul>
-            <ul data-kendo-role="listview" data-kendo-type="group">
+            <ul data-role="listview" data-type="group">
                 <li>A
                     <ul>
-                        <li>Albania<input type="checkbox" data-kendo-role="switch" /></li>
-                        <li>Australia<input type="checkbox" data-kendo-role="switch" /></li>
+                        <li>Albania<input type="checkbox" data-role="switch" /></li>
+                        <li>Australia<input type="checkbox" data-role="switch" /></li>
                     </ul>
                 </li>
                 <li>B
@@ -98,10 +99,10 @@
                     </ul>
                 </li>
             </ul>
-            <ul data-kendo-role="listview" data-kendo-type="group" data-kendo-style="inset">
+            <ul data-role="listview" data-type="group" data-style="inset">
                 <li>A
                     <ul>
-                        <li>Albania<input type="checkbox" data-kendo-role="switch" /></li>
+                        <li>Albania<input type="checkbox" data-role="switch" /></li>
                         <li>Australia</li>
                     </ul>
                 </li>
@@ -128,11 +129,9 @@
                 <input type="radio" name="two" />
             </label>
             <input type="radio" name="two" />
-            <br><br>
-            <button id="button">Select Random Radio</button>
         </content>
-        <footer data-kendo-role="footer">
-            <div data-kendo-role="tabstrip">
+        <footer data-role="footer">
+            <div data-role="tabstrip">
                 <a href="#">Featured</a>
                 <a href="#">Genius<span class="km-message">3</span></a>
                 <a href="#">Top Charts</a>
@@ -141,13 +140,13 @@
         </footer>
     </article>
     <script>
-        $(document)
-            .bind("appinit", function (e, args) {
-    //                console.log("appinit", args);
-            })
-            .bind("viewinit", function (e, args) {
-    //                console.log("viewinit", args);
-            });
+//        $(document)
+//            .bind("appinit", function (e, args) {
+//    //                console.log("appinit", args);
+//            })
+//            .bind("viewinit", function (e, args) {
+//    //                console.log("viewinit", args);
+//            });
 
         function onToggle(e) {
 //            console.log(e);
@@ -162,30 +161,11 @@
             radiogroup.select(Math.round(Math.random()*2));
         }
 
-        var toggle = $("#toggle,[data-kendo-role=switch]").kendoMobileSwitch({ toggle: onToggle }).data("kendoMobileSwitch"),
-//            checky = $("#checky").kendoMobileCheckBox().data("kendoMobileCheckBox"),
-//            button = $("#button, header button").kendoMobileButton({ click: onClick }).data("kendoMobileButton"),
-            radio = $("#radio").kendoMobileRadioGroup({ enable: false }).data("kendoMobileRadioGroup"),
+        var radio = $("#radio").kendoMobileRadioGroup({ enable: false }).data("kendoMobileRadioGroup"),
             radiogroup = $("#radioz").kendoMobileRadioGroup({ toggle: onToggle }).data("kendoMobileRadioGroup"),
-//            tabStrip = $("#tabstrip").kendoMobileTabstrip().data("kendoMobileTabstrip"),
             slider = $(".km-slider").kendoMobileSlider({ slide: onSlide, change: onSlide }).data("kendoMobileSlider");
 
-        $(document).ready(function () {
-            var listviews = $("[data-kendo-role=listview]");
-            listviews
-                    .addClass("km-listview")
-                    .find("li:not(:has(ul))")
-                    .parent("ul")
-                    .addClass("km-list");
-
-            $("[data-kendo-style=inset]:not([data-kendo-type=group])").addClass("km-listinset");
-            $("[data-kendo-type=group]:not([data-kendo-style=inset])").addClass("km-listgroup");
-            $("[data-kendo-type=group][data-kendo-style=inset]").addClass("km-listinsetgroup");
-        });
-
-        kendo.application.bind("viewShow", function(e) {
-            kendo.mobile.enhance(e.view.content);
-        });
+        var app = new kendo.Application($(document.body));
 
     </script>
 </body>
