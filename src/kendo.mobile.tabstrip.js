@@ -68,7 +68,16 @@
 
             options = that.options;
 
-            that.bind([SELECT], options);
+            that.bind([
+            /**
+             * Fires when tab is selected.
+             * @name kendo.ui.MobileTabstrip#select
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.item The selected tab
+             */
+              SELECT
+            ], options);
 
             that.element.addClass("km-tabstrip");
 

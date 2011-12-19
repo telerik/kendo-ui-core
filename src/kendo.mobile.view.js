@@ -1,6 +1,7 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        mobile = kendo.mobile,
         os = kendo.support.mobileOS,
         attr = kendo.attr,
         Class = kendo.Class,
@@ -168,7 +169,7 @@
         }
     });
 
-    ui.MobileLayout = Layout;
-    ui.MobileView = View;
-    ui.MobileViewSwitcher = ViewSwitcher;
+    mobile.Layout = Layout;
+    mobile.View = View;
+    mobile.ViewSwitcher = ViewSwitcher;
 })(jQuery);
