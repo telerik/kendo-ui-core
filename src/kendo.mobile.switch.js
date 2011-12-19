@@ -30,7 +30,7 @@
 
     var MobileSwitch = MobileWidget.extend({
         init: function(element, options) {
-            var that = this, handleWidth;
+            var that = this, handleWidth, checked;
 
             MobileWidget.fn.init.call(that, element, options);
 
@@ -56,7 +56,12 @@
                 CHANGE
             ], options);
 
-            that.toggle(element[0].checked);
+            checked = options.checked;
+            if (checked === undefined) {
+                checked = element[0].checked;
+            }
+
+            that.toggle(checked);
         },
 
         options: {

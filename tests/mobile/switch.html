@@ -129,6 +129,15 @@
                 ok(theSwitch.handle.hasClass("km-state-active"), "Does not have active css class");
             });
 
+            test("Switch check the input depending on the checked option", function() {
+                var theSwitch = new Switch(dom, {
+                    checked: true
+                });
+
+                ok(theSwitch.handle.hasClass("km-switch-on"));
+                ok(theSwitch.element[0].checked);
+            });
+
             test("Switch toggles to checked when toggle(true)", function() {
                 var theSwitch = new Switch(dom);
 
