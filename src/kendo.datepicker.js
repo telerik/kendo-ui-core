@@ -562,30 +562,31 @@
         },
 
         _blur: function() {
-            var that = this;
+            var that = this,
+                element = that.element,
+                wrapper = that._inputWrapper;
 
-            if (touch) {
-                that._change(that.element.val());
-            }
-
-            that._bluring = setTimeout(function() {
-                if (!touch) {
-                    that._change(that.element.val());
+            if (!touch) {
+                that._bluring = setTimeout(function() {
                     that.close();
-                }
-                that._inputWrapper.removeClass(FOCUSED);
-            }, 100);
+                    that._change(element.val());
+                    wrapper.removeClass(FOCUSED);
+                }, 100);
+            } else {
+                that._change(element.val());
+                wrapper.removeClass(FOCUSED);
+            }
         },
 
         _clearBlurTimeout: function() {
             var that = this;
 
-            setTimeout(function() {
-                clearTimeout(that._bluring);
-                if (!touch) {
+            if (!touch) {
+                setTimeout(function() {
+                    clearTimeout(that._bluring);
                     that.element.focus();
-                }
-            });
+                });
+            }
         },
 
         _click: function() {
