@@ -30,6 +30,36 @@
     <script src="../../../src/kendo.mobile.application.js"></script>
 
     <style type="text/css">
+        .km-ios .pink
+        {
+            background-color: #f9f;
+        }
+
+        .km-ios .pink:active
+        {
+            background-color: #c6c;
+        }
+
+        .km-ios .green
+        {
+            background-color: #3c3;
+        }
+
+        .km-ios .green:active
+        {
+            background-color: #090;
+        }
+
+        .km-ios .fuchsia
+        {
+            background-color: fuchsia;
+        }
+
+        .km-ios .fuchsia:active
+        {
+            background-color: #c0c;
+        }
+
         .km-content
         {
             background: silver;
@@ -70,7 +100,10 @@
         <header data-role="header">
             <div data-role="navbar">
                 <span data-role="view-title">Layout</span>
-                <button data-role="button" data-align="right">About</button>
+                <button data-role="button" data-align="right" class="pink">Pink</button>
+                <button data-role="button" data-align="right" class="green">Green</button>
+                <button data-role="button" data-align="right" class="fuchsia">Fuchsia</button>
+                <button data-role="button" data-align="right">HAbout</button>
             </div>
         </header>
 
@@ -162,10 +195,18 @@
         }
 
         var radio = $("#radio").kendoMobileRadioGroup({ enable: false }).data("kendoMobileRadioGroup"),
-            radiogroup = $("#radioz").kendoMobileRadioGroup({ toggle: onToggle }).data("kendoMobileRadioGroup"),
-            slider = $(".km-slider").kendoMobileSlider({ slide: onSlide, change: onSlide }).data("kendoMobileSlider");
+            radiogroup = $("#radioz").kendoMobileRadioGroup({ toggle: onToggle }).data("kendoMobileRadioGroup");
+//            slider = $(".km-slider").kendoMobileSlider({ slide: onSlide, change: onSlide }).data("kendoMobileSlider");
 
-        var app = new kendo.Application($(document.body));
+        var app = new kendo.mobile.Application($(document.body));
+
+        $(function () {
+            $(".km-navbar .km-button").each(function () {
+                $(this).data("kendoMobileButton").bind("click", function (e) {
+                    $(".km-navbar").css("background-color", this.element.css("background-color"));
+                });
+            });
+        });
 
     </script>
 </body>
