@@ -33,7 +33,7 @@ SUITES.forEach(function(suite) {
                 var content = kendoBuild.readText(outputFile);
                 content = content
                     .replace(/(.|\n)+<body>((.|\n)+)<\/body>(.|\n)+/m, "$2")
-                    .replace("../content", "../../content/" + suite)
+                    .replace("../content", "../../content/" + suite.toLowerCase())
                     .replace(/\s*<!--\s*\w+\s*-->\s*$/gm, "");
 
                 kendoBuild.writeText(outputFile, content);
