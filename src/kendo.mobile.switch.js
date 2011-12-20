@@ -2,8 +2,8 @@
     /**
     * @name kendo.ui.MobileSwitch.Description
     *
-    * @section MobileSwitch widget is used inside a mobile view to display two exclusive choises.
-    * The MobileSwitch shows the value that is currently selected. Users slides the control to reveal the second value.
+    * @section MobileSwitch widget is used inside a mobile view to display two exclusive choices.
+    * The MobileSwitch shows the currently selected value. User slides the control to reveal the second value.
     * The MobileSwitch can be created from <code>input</code> of type <code>checkbox</code>.
     *
     * <h3>Getting Started</h3>
@@ -19,9 +19,9 @@
     * <script>
     * var switchWidget = $("#switch").kendoMobileSwitch();
     * </script>
-    * @section <h3>Define the checked state of the MobileSwitch</h3>
+    * @section <h3>Checking/Unchecking the MobileSwitch</h3>
     *
-    * Checked state of the MobileSwitch depends on <code>checked</code> property of the options or on the <code>checked</code> attribute of the <code>input</code>.
+    * Checked state of the MobileSwitch depends on <code>checked</code> property of the constructor options or on the <code>checked</code> attribute of the <code>input</code>.
     *
     * @exampleTitle Initialize Kendo MobileSwitch from checked <code>input</code>
     * @example
@@ -30,16 +30,17 @@
     * var switchWidget = $("#switch").kendoMobileSwitch();
     * </script>
     *
-    * @exampleTitle Initialize Kendo MobileSwitch using options
+    * @exampleTitle Initialize checked MobileSwitch using a jQuery selector
     * @example
     * <input type="checkbox" id="switch" />
     * <script>
     * var switchWidget = $("#switch").kendoMobileSwitch({ checked: true });
     * </script>
     *
-    * @section <h3>Specifing the test of the labels</h3>
+    * @section <h3>Specifying the Text of the Labels</h3>
     *
-    * @exampleTitle Initialize Kendo MobileSwitch using custom text
+    * @exampleTitle Customize Kendo MobileSwitch on/off labels
+    * @example
     * <input type="checkbox" id="switch" />
     * <script>
     * var switchWidget = $("#switch").kendoMobileSwitch({ onLabel: "YES", offLabel: "NO" });
@@ -77,8 +78,8 @@
         * @param {DomElement} element DOM element.
         * @param {Object} options Configuration options.
         * @option {Boolean} [checked] <false> The checked state of the widget.
-        * @option {String} [onLabel] <ON> The checked text.
-        * @option {String} [offLabel] <OFF> The unchecked text.
+        * @option {String} [onLabel] <ON> The on label.
+        * @option {String} [offLabel] <OFF> The off label.
         */
         init: function(element, options) {
             var that = this, width, checked, handleWidth;
@@ -91,6 +92,7 @@
 
             options = that.options;
             element = that.element.data(kendo.attr("role"), "switch");
+            element[0].type = "checkbox";
 
             handleWidth = that.handle.outerWidth(true);
             that.halfWidth = handleWidth / 2;
@@ -109,7 +111,7 @@
                 * @param {Event} e
                 * @param {Object} e.checked The checked state of the widget.
                 *
-                * @exampleTitle Handling change event
+                * @exampleTitle Handle change event
                 * @example
                 * <input type="checkbox" id="switch" data-role="switch" />
                 *
@@ -138,8 +140,8 @@
         },
 
         /**
-        * Change the checked state of the widget. Calling the method without params will toggle the state.
-        * @param {Boolean} check The check state
+        * Toggle the checked state of the widget.
+        * @param {Boolean} check The checked state
         * @example
         * &lt;input data-role="switch" id="foo" /&gt;
         *
@@ -274,12 +276,16 @@
         },
 
         _wrapper: function() {
-            var that = this;
+            var that = this,
+                element = that.element,
+                wrapper = element.parent("label");
 
-                that.wrapper = that.element.wrap("<label />")
-                                    .parent()
-                                    .addClass("km-switch")
-                                    .bind(MOUSEDOWN, proxy(that._start, that));
+            if (!wrapper[0]) {
+                wrapper = element.wrap("<label />").parent();
+            }
+
+            that.wrapper = wrapper.addClass("km-switch")
+                                  .bind(MOUSEDOWN, proxy(that._start, that));
         }
     });
 
