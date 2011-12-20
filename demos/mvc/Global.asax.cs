@@ -29,6 +29,12 @@ namespace Kendo
             );
 
             routes.MapRoute(
+                "Index",
+                "web/{section}",
+                new { controller = "Web", action = "Index", section = "overview", example = "index" }
+            );
+
+            routes.MapRoute(
                 "Static",
                 "{assetGroup}/{assetType}/{*file}",
                 new { controller = "Static", action = "Resource" },

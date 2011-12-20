@@ -10,35 +10,116 @@
     <script src="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "js", file = scriptName })"></script>
     }
     <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
+    <script src="@Url.Content("~/content/web/js/nav.js")"></script>
     <script src="@Url.Content("~/content/shared/js/prettify.js")"></script>
 </head>
 <body>
+    <!-- nav -->
+        <div id="exceptFooterWrap">
+        <div id="exceptFooter">
 
-    <a id="referenceUrl" href="../../"></a>
+            <div id="header">
+            <div class="floatWrap centerWrap">
+                <h1><a id="logo" href="http://www.kendoui.com">Kendo</a></h1>
+                <a id="referenceUrl" href="@Url.Content("~")"></a>
+                <ul>
+                    <li style="margin-left: 0;"><a accesskey="1" title="Link to home page" href="http://www.kendoui.com/web">Web</a></li>
+                    <li><a href="http://www.kendoui.com/dataviz">DataViz</a></li>
+                    <li><a href="http://www.kendoui.com/mobile">Mobile</a></li>
+                    <li class="active">
+                        <a href="http://demos.kendoui.com">Demos</a>
+                        <em class="shadow"></em>
+                        <em></em></li>
+                    <li><a id="download" onclick="_gaq.push(['_trackPageview','/download-button']);" href="http://www.kendoui.com/get-kendo-ui">Get Kendo UI</a></li>
+                </ul>
+            </div>
+            </div> <!-- / header -->
 
-    @RenderBody()
+            <div id="flowerWrap">
+                <div class="flowers"></div>
 
-    <div id="codeStrip">
-        <ul>
-            <li class="k-state-active">Description</li>
-            <li>View Code</li>
+                <div id="topnavWrap" class="centerWrap">
+                    <ul id="topnav">
+                        <li><a id="web" class="first" href="web/overview/index.html">Web</a></li>
+                        <li><a id="dataviz" href="dataviz/overview/index.html">DataViz</a></li>
+                        <li><a id="mobile" href="mobile/index.html">Mobile</a></li>
+                        <li><a id="themebuilder" class="last" href="themebuilder/index.html">ThemeBuilder</a></li>
+                    </ul>
 
-            @if (ViewBag.HasConfiguration) {
-                <li>Configuration</li>
-            }
+                    <div id="examplesThemeChooser">
+                        <label for="skinSelector">Theme</label>
+                        <input id="skinSelector" class="themeChooser" />
+                    </div>
+                </div> <!-- / topnavWrap -->
+            </div>
 
-            @if (ViewBag.HasMethods) {
-                <li>Methods</li>
-            }
+            <div id="navmainWrap" class="floatWrap centerWrap hasNavigation">
+                <div id="navWrap"></div>
 
-            @if (ViewBag.HasEvents) {
-                <li>Events</li>
-            }
-        </ul>
-        <div>
-            @Html.Raw(ViewBag.Description)
+                <div id="main">
+                    <h1 id="exampleTitle" class="k-content"></h1>
+                    <script>initializeNavigation();</script>
+                    <div id="exampleWrap">
+                        <script>preventFOUC()</script>
+                        <!-- nav -->
+                        <div id="example" class="k-content">
+                        @RenderBody()
+                        </div> <!-- / example -->
+                        <!-- tools -->
+                    </div> <!-- / exampleWrap -->
+
+                    <div id="codeStrip">
+                        <ul>
+                            <li class="k-state-active">Description</li>
+                            <li>View Code</li>
+
+                            @if (ViewBag.HasConfiguration) {
+                                <li>Configuration</li>
+                            }
+
+                            @if (ViewBag.HasMethods) {
+                                <li>Methods</li>
+                            }
+
+                            @if (ViewBag.HasEvents) {
+                                <li>Events</li>
+                            }
+                        </ul>
+                        <div>
+                            @Html.Raw(ViewBag.Description)
+                        </div>
+                    </div>
+                </div> <!-- / main -->
+
+            </div> <!-- / navmainWrap -->
+
+        </div> <!-- / exceptFooter -->
+        </div> <!-- / exceptFooterWrap -->
+
+        <div id="footer">
+        <div class="floatWrap centerWrap">
+            <ul>
+                <li><a href="http://www.kendoui.com">Home</a></li>
+                <li><a href="http://www.kendoui.com/web">Web</a></li>
+                <li><a href="http://www.kendoui.com/dataviz">DataViz</a></li>
+                <li><a href="http://www.kendoui.com/mobile">Mobile</a></li>
+                <li><a href="http://demos.kendoui.com/">Demos</a></li>
+                <li><a href="http://www.kendoui.com/blogs">Blogs</a></li>
+                <li><a href="http://www.kendoui.com/forums">Forums</a></li>
+                <li><a href="http://www.kendoui.com/get-help">Support &amp; Resources</a></li>
+                <li><a href="http://www.kendoui.com/roadmap.aspx">Roadmap</a></li>
+                <li><a href="http://www.kendoui.com/about">About</a></li>
+                <li><a href="http://www.kendoui.com/get-kendo-ui">Get Kendo UI</a></li>
+                <li><a href="http://twitter.com/#!/KendoUI" class="icon tw" title="Follow us on Twitter">Follow us on Twitter</a></li>
+                <li><a href="http://www.facebook.com/KendoUI" class="icon fb" title="Become a fan on Facebook">Become a fan on Facebook</a></li>
+                <li><a href="https://plus.google.com/117798269023828336983/posts" class="icon gplus" title="Follow us on Google+">Follow us on Google+</a></li>
+                <li><a href="http://www.kendoui.com/blogs/blogs.rss" class="icon rss" title="Subscribe to our RSS feed">Subscribe to our RSS feed</a></li>
+            </ul>
+            <p id="telerik"><a href="http://www.telerik.com/">Kendo UI is powered by Telerik</a></p>
+            <p id="copy">Copyright &copy; 2011 Telerik Inc. All rights reserved.</p>
         </div>
-    </div>
+        </div> <!-- / footer -->
+        <!-- tools -->
 
     <script>
         $("#codeStrip").kendoTabStrip({
@@ -53,8 +134,7 @@
             }
         });
 
-        initializeNavigation();
-        preventFOUC();
+        setTimeout(function(){ prettyPrint(); }, 100);
     </script>
 </body>
 </html>
