@@ -275,12 +275,16 @@
         },
 
         _wrapper: function() {
-            var that = this;
+            var that = this,
+                element = that.element,
+                wrapper = element.parent("label");
 
-                that.wrapper = that.element.wrap("<label />")
-                                    .parent()
-                                    .addClass("km-switch")
-                                    .bind(MOUSEDOWN, proxy(that._start, that));
+            if (!wrapper[0]) {
+                wrapper = element.wrap("<label />").parent();
+            }
+
+            that.wrapper = wrapper.addClass("km-switch")
+                                  .bind(MOUSEDOWN, proxy(that._start, that));
         }
     });
 
