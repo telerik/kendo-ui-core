@@ -4,19 +4,36 @@
     <title>@ViewBag.Title</title>
     <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.common.css" })" rel="stylesheet" type="text/css" />
     <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.default.css" })" rel="stylesheet" type="text/css" />
-    @* <link href="@Url.RouteUrl("Static", new { assetGroup = "shared", assetType = "styles", file = "examples.css" })" rel="stylesheet" type="text/css" /> *@
+    <link href="@Url.RouteUrl("Static", new { assetGroup = "shared", assetType = "styles", file = "examples.css" })" rel="stylesheet" type="text/css" />
     @foreach (var scriptName in Kendo.Models.ScriptGroups.All)
     {
     <script src="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "js", file = scriptName })"></script>
     }
+    <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
+    <script src="@Url.Content("~/content/shared/js/prettify.js")"></script>
 </head>
 <body>
+
+    <a id="referenceUrl" href="../../"></a>
+
     @RenderBody()
 
     <div id="codeStrip">
         <ul>
             <li class="k-state-active">Description</li>
             <li>View Code</li>
+
+            @if (ViewBag.HasConfiguration) {
+                <li>Configuration</li>
+            }
+
+            @if (ViewBag.HasMethods) {
+                <li>Methods</li>
+            }
+
+            @if (ViewBag.HasEvents) {
+                <li>Events</li>
+            }
         </ul>
         <div>
             @Html.Raw(ViewBag.Description)
@@ -25,8 +42,19 @@
 
     <script>
         $("#codeStrip").kendoTabStrip({
-            contentUrls: [null, "@Url.RouteUrl("Source", new { section = ViewBag.Section, example = ViewBag.Example })"]
+            contentUrls: [null,
+            "@Url.RouteUrl("Source", new { section = ViewBag.Section, example = ViewBag.Example })",
+            "@Url.Content(string.Format("~/content/docs/kendo.ui.{0}.configuration.html", ViewBag.Section))",
+            "@Url.Content(string.Format("~/content/docs/kendo.ui.{0}.methods.html", ViewBag.Section))",
+            "@Url.Content(string.Format("~/content/docs/kendo.ui.{0}.events.html", ViewBag.Section))"
+            ],
+            contentLoad: function() {
+                prettyPrint();
+            }
         });
+
+        initializeNavigation();
+        preventFOUC();
     </script>
 </body>
 </html>
