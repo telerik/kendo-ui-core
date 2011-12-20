@@ -4,14 +4,26 @@
     <title>@ViewBag.Title</title>
     <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.common.css" })" rel="stylesheet" type="text/css" />
     <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.default.css" })" rel="stylesheet" type="text/css" />
-    <link href="@Url.RouteUrl("Static", new { assetGroup = "shared", assetType = "styles", file = "examples.css" })" rel="stylesheet" type="text/css" />
+    @* <link href="@Url.RouteUrl("Static", new { assetGroup = "shared", assetType = "styles", file = "examples.css" })" rel="stylesheet" type="text/css" /> *@
     @foreach (var scriptName in Kendo.Models.ScriptGroups.All)
     {
     <script src="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "js", file = scriptName })"></script>
     }
 </head>
-
 <body>
     @RenderBody()
+
+    <div id="codeStrip">
+        <ul>
+            <li class="k-state-active">Description</li>
+        </ul>
+        <div>
+            @Html.Raw(ViewBag.Description)
+        </div>
+    </div>
+
+    <script>
+        $("#codeStrip").kendoTabStrip();
+    </script>
 </body>
 </html>
