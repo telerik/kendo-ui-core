@@ -17,15 +17,15 @@ namespace Kendo
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Web",
-                "web/{section}/{example}",
-                new { controller = "Web", action = "Index", section = "overview", example = "index.html" }
+                "Source",
+                "web/{section}/{example}.src.html",
+                new { controller = "Web", action = "Source" }
             );
 
             routes.MapRoute(
-                "Source",
+                "Web",
                 "web/{section}/{example}.html",
-                new { controller = "Source", action = "Index" }
+                new { controller = "Web", action = "Index", section = "overview", example = "index" }
             );
 
             routes.MapRoute(
