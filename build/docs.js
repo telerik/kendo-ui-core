@@ -10,7 +10,7 @@ function build() {
 
     var params = [
         // output directory
-        "-d=" + (process.argv[3] || "docs"),
+        "-d=" + (process.argv[3] || "demos/mvc/content/docs"),
 
         // template
         "-t=build/node-jsdoc-toolkit/" + (process.argv[2] || "template"),
