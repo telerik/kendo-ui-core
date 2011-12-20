@@ -10,13 +10,13 @@ var fs = require("fs"),
     mkdir = kendoBuild.mkdir;
 
 // Configuration ==============================================================
-var SUITES = ["web"],
+var SUITES = ["Web"],
     EXAMPLES_ROOT = path.join("demos", "examples"),
     MVC_ROOT = path.join("demos", "mvc", "Views");
 
 // Implementation ==============================================================
 SUITES.forEach(function(suite) {
-    var suiteRoot = path.join(EXAMPLES_ROOT, suite);
+    var suiteRoot = path.join(EXAMPLES_ROOT, suite.toLowerCase());
 
     processFiles(
         suiteRoot,
@@ -38,7 +38,7 @@ SUITES.forEach(function(suite) {
 
                 kendoBuild.writeText(outputFile, content);
             } catch (e) {
-                console.log("Trouble converting ", fileName);
+                console.log("Trouble converting ", fileName, "to ", outputFile);
             }
         }
     );
