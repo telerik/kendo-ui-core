@@ -49,6 +49,16 @@
                 ok(theSwitch.wrapper.hasClass("km-switch"), "Should have specified CSS class");
             });
 
+            test("Switch change the input type to checkbox", function() {
+                expect(1);
+
+                dom[0].type = "text";
+
+                var theSwitch = new Switch(dom);
+
+                equal(dom[0].type, "checkbox");
+            });
+
             test("Switch does not wraps the input twice", function() {
                 expect(1);
                 dom.wrap("<label />");
