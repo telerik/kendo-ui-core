@@ -10,7 +10,6 @@
     <script src="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "js", file = scriptName })"></script>
     }
     <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
-    <script src="@Url.Content("~/content/web/js/nav.js")"></script>
     <script src="@Url.Content("~/content/shared/js/prettify.js")"></script>
 </head>
 <body>
@@ -54,7 +53,30 @@
             </div>
 
             <div id="navmainWrap" class="floatWrap centerWrap hasNavigation">
-                <div id="navWrap"></div>
+                <div id="navWrap">
+                    @foreach (string category in ViewBag.Navigation.Keys)
+                    {
+                        <h3>@category</h3>
+                        <ul class="nav">
+                        @foreach (NavigationWidget widget in ViewBag.Navigation[category])
+                        {
+                            <li>
+                                <span class="k-link k-header">
+                                    <span class="k-sprite @widget.SpriteCssClass"></span>
+                                    @widget.Text
+                                </span>
+                                <ul>
+                                    @foreach (NavigationExample example in widget.Items) {
+                                        <li>
+                                            <a class="k-link" href="@(Url.Content("~/web/") + example.Url)">@example.Text</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        </ul>
+                    }
+                </div>
 
                 <div id="main">
                     <h1 id="exampleTitle" class="k-content"></h1>
@@ -132,6 +154,11 @@
             contentLoad: function() {
                 prettyPrint();
             }
+        });
+
+        $(".nav").kendoPanelBar({
+            animation: { open: { effects: 'fadeIn expandVertical' } },
+            expandMode: "single"
         });
 
         setTimeout(function(){ prettyPrint(); }, 100);

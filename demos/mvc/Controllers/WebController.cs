@@ -36,12 +36,13 @@ namespace Kendo.Controllers
 }
 =======
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using HtmlAgilityPack;
-using Fizzler.Systems.HtmlAgilityPack;
+using System.Web.Script.Serialization;
+using Kendo.Models;
 using IOFile = System.IO.File;
 
 namespace Kendo.Controllers
@@ -59,6 +60,9 @@ namespace Kendo.Controllers
             ViewBag.HasConfiguration = IsDocumented(section, "configuration");
             ViewBag.HasMethods = IsDocumented(section, "methods");
             ViewBag.HasEvents = IsDocumented(section, "events");
+            
+            var jss = new JavaScriptSerializer();
+            ViewBag.Navigation = jss.Deserialize<IDictionary<string, NavigationWidget[]>>(IOFile.ReadAllText(Server.MapPath("~/App_Data/web.nav.json")));
 
             return View(section + "/" + example);
         }
