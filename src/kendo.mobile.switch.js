@@ -3,11 +3,7 @@
         ui = kendo.ui,
         MobileWidget = ui.MobileWidget,
         support = kendo.support,
-        touch = support.touch,
-        os = support.mobileOS,
-        TOGGLE = "toggle",
         CHANGE = "change",
-        SLIDE = "slide",
         SWITCHON = "km-switch-on",
         SWITCHOFF = "km-switch-off",
         MARGINLEFT = "margin-left",
@@ -67,11 +63,11 @@
             name: "MobileSwitch",
             selector: kendo.roleSelector("switch"),
             onLabel: "ON",
-            offLabel: "OFF",
+            offLabel: "OFF"
         },
 
         toggle: function(checked) {
-            var that = this
+            var that = this,
                 element = that.element[0];
 
             if (checked === undefined) {
