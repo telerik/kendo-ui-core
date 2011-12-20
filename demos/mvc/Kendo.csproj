@@ -87,10 +87,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\NavigationExample.cs" />
+    <Compile Include="Models\NavigationWidget.cs" />
     <Compile Include="Models\ScriptGroups.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App_Data\web.nav.json" />
     <Content Include="content\shared\js\console.js" />
     <Content Include="content\shared\js\examples.js" />
     <Content Include="content\shared\js\people.js" />
@@ -250,7 +253,6 @@
     <Content Include="Views\Shared\SourceLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\web\" />
   </ItemGroup>
   <ItemGroup>
