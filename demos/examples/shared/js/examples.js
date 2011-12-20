@@ -8,12 +8,12 @@
         category = "",
         docsAnimation = {
             show: {
-                effects: "expandVertical fadeIn",
+                effects: "expand:vertical fadeIn",
                 duration: 300,
                 show: true
             },
             hide: {
-                effects: "expandVertical fadeIn",
+                effects: "expand:vertical fadeIn",
                 duration: 300,
                 reverse: true,
                 hide: true
@@ -53,7 +53,7 @@
         function navigationSection(dataSource) {
             return $("<ul class='nav' />")
                 .kendoPanelBar({
-                    animation: { open: { effects: 'fadeIn expandVertical' } },
+                    animation: { open: { effects: 'fadeIn expand:vertical' } },
                     expandMode: "single",
                     dataSource: dataSource
                 });

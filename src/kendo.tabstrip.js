@@ -348,7 +348,7 @@
             name: "TabStrip",
             animation: {
                 open: {
-                    effects: "expandVertical fadeIn",
+                    effects: "expand:vertical fadeIn",
                     duration: 200,
                     show: true
                 },

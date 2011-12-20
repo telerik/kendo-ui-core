@@ -2,12 +2,12 @@
 
     var animation = {
             show: {
-                effects: "expandVertical fadeIn",
+                effects: "expand:vertical fadeIn",
                 duration: 300,
                 show: true
             },
             hide: {
-                effects: "expandVertical fadeIn",
+                effects: "expand:vertical fadeIn",
                 duration: 300,
                 reverse: true,
                 hide: true
