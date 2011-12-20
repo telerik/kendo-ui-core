@@ -49,6 +49,15 @@
                 ok(theSwitch.wrapper.hasClass("km-switch"), "Should have specified CSS class");
             });
 
+            test("Switch does not wraps the input twice", function() {
+                expect(1);
+                dom.wrap("<label />");
+
+                var theSwitch = new Switch(dom);
+
+                equal(dom.parents("label").length, 1);
+            });
+
             test("Switch creates a toggle handle", function() {
                 expect(1);
 
