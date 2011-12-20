@@ -903,14 +903,108 @@
          * @constructs
          * @extends kendo.Observable
          * @param {Object} options Configuration options.
-         * @option {Array} [data] The data in the DataSource.
-         * @option {Boolean} [serverPaging] <false> Determines if paging of the data should be handled on the server.
-         * @option {Boolean} [serverSorting] <false> Determines if sorting of the data should be handled on the server.
+         * @option {Array} [data] Specifies the local JavaScript object to use for the data source.
+		 * _example
+		 * // bind the datasource to a local JavaScript array
+		 * var orders = [ { orderId: 10248, customerName: "Paul Smith" }, { orderId: 10249, customerName: "Jane Jones" }];
+		 * var dataSource = new kendo.data.DataSource({
+		 *      data: orders
+		 * });
+         * @option {Boolean} [serverPaging] <false> Determines if paging of the data should be handled on the server.  
+		 * <p><b>serverPaging</b> must be used in conjunction with the <b>pageSize</b> configuration setting. The following options to the server as part of the query string by default: 
+		 * <ul>
+		 * <li><b>take</b>: contains the number of records to retreive</li>
+		 * <li><b>skip</b>: how many records from the front of the dataset to begin reading</li>
+		 * <li><b>page</b>: the index of the current page of data</li>
+		 * <li><b>pageSize</b>: the number of records per page</li>
+		 * </ul></p>
+		 * <p>It is possible to modify these parameters by using the <b>parameterMap</b> function found on the <b>transport</b> object (see <b>transport</b> in Configuration).</p>
+         * _example
+		 * var dataSource = new kendo.data.DataSource({
+		 *     transport: {
+		 *         read: "orders.json"
+		 *     },
+		 *     serverPaging: true,
+		 *     pageSize: 5 // 5 records per page  
+		 * });
+		 * @option {Boolean} [serverSorting] <false> Determines if sorting of the data should be handled on the server.
+		 * <p>The <b>serverSorting</b> must be used in conjunction with the <b>sort</b> configuration.  By default, a sort object is sent to the server with the query string in the following form:</p>
+		 * <ul>
+		 * <li>sort[0][field]: orderId</li>
+		 * <li>sort[0][dir]: asc</li>
+		 * </ul>
+		 * <p>It is possible to modify these parameters by using the <b>parameterMap</b> function found on the <b>transport</b> object (see <b>transport</b> in Configuration).</p>
+		 *_example
+		 * var dataSource = new kendo.data.DataSource({
+		 *     transport: {
+		 *         read: "orders.json"
+		 *     },
+		 *     serverSorting: true,
+		 *     sort: { field: "orderId", dir: "asc" }
+		 * });
          * @option {Boolean} [serverGrouping] <false> Determines if grouping of the data should be handled on the server.
+		 * <p>The <b>serverGrouping</b> must be used in conjunction with the <b>group</b> configuration.  By default, a group object is sent to the server with the query string in the following form:</p>
+		 * <ul>
+		 * <li>group[0][field]: orderId</li>
+		 * <li>group[0][dir]: desc</li>
+		 * </ul>
+		 * <p>It is possible to modify these parameters by using the <b>parameterMap</b> function found on the <b>transport</b> object (see <b>transport</b> in Configuration).</p>
+		 * _example
+		 * var dataSource = new kendo.data.DataSource({
+		 *     transport: {
+		 *         read: "orders.json"
+		 *     },     
+		 *     serverGrouping: true,
+		 *     sort: { field: "orderId", dir: "asc" } // group by orderId descending
+		 * });
          * @option {Boolean} [serverFiltering] <false> Determines if filtering of the data should be handled on the server.
+		 * <p>The <b>serverFiltering</b> must be used in conjunction with the <b>filter</b> configuration.  By default, a filter object is sent to the server with the query string in the following form:</p>
+		 * <ul>
+		 * <li>filter[logic]: and</li>
+		 * <li>filter[filters][0][field]: orderId</li>
+		 * <li>filter[filters][0][operator]: desc</li>
+		 * <li>filter[filters][0][value]: 10248</li>
+		 * </ul>
+		 * <p>Possible values for <b>operator</b> include:</p>
+		 * <ul>
+         * <li><strong>Equal To</strong>: "eq", "==", "isequalto", "equals", "equalto", "equal"</li>
+         * <li><strong>Not Equal To</strong>: "neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "ne"</li>
+         * <li><strong>Less Then</strong>: "lt", "<", "islessthan", "lessthan", "less"</li>
+         * <li><strong>Less Then or Equal To</strong>: "lte", "<=", "islessthanorequalto", "lessthanequal", "le"</li>
+         * <li><strong>Greater Then</strong>: "gt", ">", "isgreaterthan", "greaterthan", "greater"</li>
+         * <li><strong>Greater Then or Equal To</strong>: "gte", ">=", "isgreaterthanorequalto", "greaterthanequal", "ge"</li>
+         * <li><strong>Starts With</strong>: "startswith"</li>
+         * <li><strong>Ends With</strong>: "endswith"</li>
+         * <li><strong>Contains</strong>: "contains", "substringof"</li>
+         * </ul>
+		 * <p>It is possible to modify these parameters by using the <b>parameterMap</b> function found on the <b>transport</b> object (see <b>transport</b> in Configuration).</p>
+		 * _example
+		 * var dataSource = new kendo.data.DataSource({
+		 *     transport: {
+		 *         read: "orders.json"
+		 *     },
+		 *     serverFiltering: true,
+		 *     filter: { field: "orderId", operator: "eq", value: 10248 } // return only data where orderId equals 10248
+		 * });
          * @option {Boolean} [serverAggregates] <false> Determines if aggregates should be calculated on the server.
+		 * _example
+		 * var dataSource = new kendo.data.DataSource({
+		 *     transport: {
+		 *         read: "orders.json"
+		 *     },
+		 *     serverAggregates: true,
+		 *     aggregate: { field: "orderId", operator: "eq", value: 10248 } // return only data where orderId equals 10248
+		 * });
          * @option {Number} [pageSize] <undefined> Sets the number of records which contains a given page of data.
+		 * _example
+		 * var dataSource = new kendo.data.DataSource({
+		 *     pageSize: 5 // 5 records per page of data
+		 * });
          * @option {Number} [page] <undefined> Sets the index of the displayed page of data.
+		 * _example
+		 * var dataSource = new kendo.data.DataSource({
+		 *     page: 2 // displays the second page of data in the bound widget
+		 * });
          * @option {Array|Object} [sort] <undefined> Sets initial sort order
          * _example
          * // sorts data ascending by orderId field
@@ -919,7 +1013,7 @@
          * // sorts data ascending by orderId field and then descending by shipmentDate
          * sort: [ { field: "orderId", dir: "asc" }, { field: "shipmentDate", dir: "desc" } ]
          *
-         * @option {Array|Object} [filter] <undefined> Sets initial filter
+         * @option {Array | Object} [filter] <undefined> Sets initial filter
          * _example
          * // returns only data where orderId is equal to 10248
          * filter: { field: "orderId", operator: "eq", value: 10248 }
@@ -928,7 +1022,7 @@
          * filter: [ { field: "orderId", operator: "eq", value: 10248 },
          *           { field: "customerName", operator: "startswith", value: "Paul" } ]
          *
-         * @option {Array|Object} [group] <undefined> Sets initial grouping
+         * @option {Array | Object} [group] <undefined> Sets initial grouping
          * _example
          * // groups data by orderId field
          * group: { field: "orderId" }
@@ -936,7 +1030,7 @@
          * // groups data by orderId and customerName fields
          * group: [ { field: "orderId", dir: "desc" }, { field: "customerName", dir: "asc" } ]
          *
-         * @option {Array|Object} [aggregate] <undefined> Sets fields on which initial aggregates should be calculated
+         * @option {Array | Object} [aggregate] <undefined> Sets fields on which initial aggregates should be calculated
          * _example
          * // calculates total sum of unitPrice field's values.
          * [{ field: "unitPrice", aggregate: "sum" }]
@@ -944,7 +1038,7 @@
          * @option {Object} [transport] Sets the object responsible for loading and saving of data.
          *  This can be a remote or local/in-memory data.
          *
-         * @option {Object|String} [transport.read] Options for remote read data operation or the URL of the remote service
+         * @option {Object | String} [transport.read] Options for remote read data operation, or the URL of the remote service
          * _example
          * // settings various options for remote data transport
          * var dataSource = new kendo.data.DataSource({
@@ -976,9 +1070,50 @@
          *
          * @option {String} [transport.read.url] The remote service URL
          * @option {String} [transport.read.dataType] The type of data that you're expecting back from the server
-         * @option {Object|Function} [transport.read.data] Additional data to be send to the server
-         *
-         * @option {Function} [transport.parameterMap] Convert the request parameters from dataSource format to remote service specific format.
+         * @option {Object | Function} [transport.read.data] Additional data to be sent to the server
+         * 
+		 * @option {Object | String} [transport.create.url] The remote url to call when creating a new record
+		 * @option {String} [transport.create.dataType] The type of data that you're expecting back from the server
+		 * @options {Object | Function} [transport.create.data] Additional data to be sent to the server
+		 * _example
+		 * var dataSource = new kendo.data.DataSource({
+		 *     transport: {
+		 *         read: "orders.json",
+		 *         create: {
+		 *             url: "orders/create.json"
+		 *         }
+		 *     }
+		 * });
+		 *
+		 * @option {Object | String} [transport.create] Options for remote create data operation, or the URL of the remote service
+		 * _example
+		 * var dataSource = new kendo.data.DataSource({
+		 *     transport: {
+		 *         read: "orders.json",
+		 *         update: {
+		 *             url: "orders/update.json",
+		 *             data: {
+		 *                 orderId: $("#input").val() // sends the value of the input as the orderId
+		 *             }
+		 *         }
+		 *     }
+		 * });
+		 * @option {Object | String} [transport.update.url] The remote url to call when updating a record
+		 * @option {String} [transport.update.dataType] The type of data that you're expecting back from the server
+		 * @options {Object | Function} [transport.update.data] Additional data to be sent to the server
+		 *
+		 * @option {Object | String} [transport.update] Options for remote update operation, or the URL of the remote service
+		 * _example
+		 * var dataSource = new kendo.data.DataSource({
+		 *     transport: {
+		 *         read: "orders.json",
+		 *         destroy: {
+		 *             url: "orders/create.json",
+		 *         }
+		 *     }
+		 * });
+		 * @option {Object | String} [transport.destroy] Options for the remote delete data operation, or the URL of the remote service
+		 * @option {Function} [transport.parameterMap] Convert the request parameters from dataSource format to remote service specific format.
          * _example
          *  var dataSource = new kendo.data.DataSource({
          *      transport: {
@@ -992,6 +1127,9 @@
          *        }
          *      }
          *  });
+		 * @option {Object | String} [transport.destroy.url] The remote url to call when creating a new record
+		 * @option {String} [transport.destroy.dataType] The type of data that you're expecting back from the server
+		 * @options {Object | Function} [transport.destroy.data] Additional data to be sent to the server
          *
          * @option {Object} [schema] Set the object responsible for describing the raw data format
          * _example
@@ -1000,6 +1138,9 @@
          *        read: "Catalog/Titles",
          *      },
          *      schema: {
+		 *          aggregates: function(data) {
+		 *               // returns aggregates
+		 *          },
          *          data: function(data) {
          *              return data.result;
          *          },
@@ -1008,16 +1149,16 @@
          *          },
          *          parse: function(data) {
          *              return data;
-         *          }
+         *          },
+		 *          type: "jsonp"
          *      }
          *  });
-         * @option {String} [schema.type] Specify the type of schema { xml|json|odata }
+         * @option {String} [schema.type] Specify the type of schema { xml | json | odata }
          * @option {Function} [schema.parse] Executed before deserialized data is read.
          *  Appropriate for preprocessing of the raw data.
-         *
-         * @option {Function} [schema.data] Should return the deserialized data.
-         * @option {Function} [schema.total] Should return the total number of records.
-         * @option {Function} [schema.aggregates] Should return the calculated aggregates.
+         * @option {Function} [schema.data] Returns the deserialized data.
+         * @option {Function} [schema.total] Returns the total number of records.
+         * @option {Function} [schema.aggregates] Returns the calculated aggregates.
          * @option {Function} [schema.groups] Used instead of data function if remote grouping operation is executed.
          *  Returns the deserialized data.
          * @option {Object} [schema.model] Describes the Model
@@ -1053,7 +1194,7 @@
          *            }
          *        }
          *    })
-         * @option {Number|String} [schema.model.id] The field use to identify an unique Model instance
+         * @option {Number | String} [schema.model.id] The field use to identify an unique Model instance
          * @option {Object} [schema.model.fields] Describes the model fields and their properties
          **/
         init: function(options) {
