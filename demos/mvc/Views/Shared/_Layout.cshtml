@@ -16,6 +16,7 @@
     <div id="codeStrip">
         <ul>
             <li class="k-state-active">Description</li>
+            <li>View Code</li>
         </ul>
         <div>
             @Html.Raw(ViewBag.Description)
@@ -23,7 +24,9 @@
     </div>
 
     <script>
-        $("#codeStrip").kendoTabStrip();
+        $("#codeStrip").kendoTabStrip({
+            contentUrls: [null, "@Url.RouteUrl("Source", new { section = ViewBag.Section, example = ViewBag.Example })"]
+        });
     </script>
 </body>
 </html>
