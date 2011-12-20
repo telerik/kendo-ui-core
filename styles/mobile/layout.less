@@ -87,6 +87,12 @@
     transition: @arguments;
 }
 
+.user-select() {
+    -moz-user-select: @arguments;
+    -webkit-user-select: @arguments;
+    user-select: @arguments;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -223,7 +229,8 @@ body
     display: none;
 }
 
-.km-ios .km-view-title
+.km-ios .km-view-title,
+.km-ios .km-dialog-title
 {
     position: relative;
     display: block;
@@ -1647,4 +1654,67 @@ input[type=checkbox]
 {
     position: absolute;
     left: 0;
+}
+
+/* Dialog */
+
+.km-dialog
+{
+    position: absolute;
+    left: 420px;
+    top: 240px;
+    min-width: 19em;
+    max-width: 25em;
+    overflow: hidden;
+    .border-radius(1em);
+    background: rgba(10,25,65,.8);
+    border: 2px solid rgba(255,255,255,.8);
+    .box-shadow(3px 3px 5px #111);
+}
+
+.km-ios .km-dialog-title
+{
+    position: static;
+    float: none;
+    height: 2.6em;
+    margin-top: -2.6em;
+    font-size: 1.22em;
+    line-height: 3em;
+    text-shadow: 0 -1px #333;
+    .border-radius(1em);
+    background: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0) 60%);
+}
+
+.km-dialog:before
+{
+    content: "\a0";
+    display: block;
+    overflow: visible;
+    width: 100%;
+    height: 3em;
+    opacity: .2;
+    background: ~"url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><defs><clipPath id=%22clip%22><rect x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%2210%22 ry=%2210%22/></clipPath></defs><ellipse fill=%22white%22 cx=%2250%%22 cy=%220%22 rx=%2280%%22 ry=%2260%%22 clip-path=%22url(%23clip)%22/></svg>')";
+}
+
+.km-ios .km-dialog-content
+{
+    color: #fff;
+    font-weight: normal;
+    min-height: 2em;
+    text-align: center;
+    text-shadow: 0 -1px #333;
+}
+
+.km-dialog .km-button
+{
+    display: block;
+    margin: .4em;
+    font-size: 1.3em;
+    text-align: center;
+    padding: .44em;
+    .user-select(none);
+    .border-radius(4px);
+    background: linear-gradient(center top , #ADB0BF, #6A718B 50%, #434E6C 50%, #59637E);
+    border: 1px solid #000;
+    .box-shadow(0 1px 0 rgba(255,255,255,.2));
 }
