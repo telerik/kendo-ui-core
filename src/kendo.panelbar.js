@@ -4,14 +4,15 @@
      *
      * @section
      * <p>
-     *  The PanelBar widget displays hierarchical data as a multi-level,
-     *  expandable panel bar. Its structure can be defined in HTML or
-     *  configured dynamically through its API. The content for PanelBar
-     *  items can also be loaded via AJAX by specifying a content URL.
+     *  The <b>PanelBar</b> displays hierarchical data as a multi-level,
+     *  expandable widget that's useful for constained areas of a page. Its
+     *  structure can be defined in HTML or configured dynamically through
+     *  its API. The content for items can also be loaded via AJAX by
+     *  specifying a content URL.
      * </p>
      * <h3>Getting Started</h3>
      * <p>
-     *  A PanelBar widget can utilize a list of items defined in HTML to
+     *  A <b>PanelBar</b> will utilize a list of items defined in HTML to
      *  define its structure and content.
      * </p>
      *
@@ -29,19 +30,20 @@
      *
      * @section
      * <p>
-     *  A PanelBar widget may be created by targeting the root element of the
+     *  A <b>PanelBar</b> can be created by targeting the root element of the
      *  list of items defined in HTML.
      * </p>
-     *
-     * @exampleTitle Initialize the PanelBar via a jQuery ID selector
+     * 
+     * @exampleTitle Initialize the <b>PanelBar</b> via a jQuery ID selector
      * @example
      * var panelBar = $("#panelBar").kendoPanelBar();
      *
      * @section
      * <p>
-     *  Items in a PanelBar can optionally define in-line HTML content. To
-     *  add content, place the HTML inside of a div. Text content
-     *  outside of the div will be used as the Item's PanelBar text.
+     *  Items in a <b>PanelBar</b> can defined with in-line HTML content. To
+     *  add content, place the HTML inside of a <b>div</b> element. Text
+     *  content outside of the <b>div</b> element will be used as the text
+     *  for the item.
      * </p>
      *
      * @exampleTitle Create a list of items in HTML with nested content
@@ -55,7 +57,7 @@
      *
      * @section
      * <p>
-     *  A PanelBar widget will preserve the content defined within an item.
+     *  A <b>PanelBar</b> will preserve the content defined within an item.
      * </p>
      *
      * @exampleTitle Initialize the PanelBar via a jQuery ID selector
@@ -83,14 +85,14 @@
      * <h3>Loading Content with AJAX</h3>
      * <p>
      *  While any valid technique for loading AJAX content can be used,
-     *  the PanelBar provides built-in support for asynchronously loading
-     *  content from URLs. These URLs should return HTML fragments that can
-     *  be loaded in the PanelBar item content area.
+     *  the <b>PanelBar</b> provides built-in support for asynchronously
+     *  loading content from URLs. These URLs should return HTML fragments
+     *  that can be loaded in the <b>PanelBar</b> item content area.
      * </p>
      *
      * @exampleTitle Create a list of items with a target for dynamic content
      * @example
-     * <ul id="panelbar">
+     * <ul id="panelBar">
      *  <li>Item 1
      *   <ul>
      *    <li>Sub Item 1</li>
@@ -107,7 +109,7 @@
      * @example
      * // initialization and configuration
      * $(document).ready(function(){
-     *  $("#panelbar").kendoPanelBar({
+     *  $("#panelBar").kendoPanelBar({
      *   contentUrls:[
      *    null,
      *    null,
@@ -118,24 +120,24 @@
      *
      * @section
      * <p>
-     *  When the PanelBar loads remote content via AJAX, the server response
-     *  is cached in-memory so that subsequent expand/collapse actions do not
-     *  trigger subsequent AJAX requests.
+     *  When the <b>PanelBar</b> loads remote content via AJAX, the server
+     *  response is cached in-memory so that subsequent expand/collapse
+     *  actions do not trigger subsequent AJAX requests.
      * </p>
      * <h3>Customizing PanelBar Animations</h3>
      * <p>
-     *  By default, a PanelBar uses animations to expand and reveal sub-items
-     *  when an item header is clicked. These animations can be modified
-     *  using configuration properties, changing the open and close animation
-     *  style. A PanelBar can also be configured to only allow one panel to
-     *  remain open at a time.
+     *  By default, a <b>PanelBar</b> uses animations to expand and reveal
+     *  sub-items when an item header is clicked. These animations can be
+     *  modified using configuration properties, changing the open and close
+     *  animation style. A <b>PanelBar</b> can also be configured to only
+     *  allow one panel to remain open at a time.
      * </p>
      *
      * @exampleTitle Changing PanelBar animation and expandMode behavior
      * @example
-     * $("#panelbar").kendoPanelBar({
+     * $("#panelBar").kendoPanelBar({
      *  animation: {
-     *   open : {effects: fadeIn}
+     *   open : { effects: "fadeIn" }
      *  },
      *  expandMode: "single"
      * });
@@ -143,14 +145,14 @@
      * @section
      * <h3>Dynamically configuring PanelBar items</h3>
      * <p>
-     *  The PanelBar API provides several methods for dynamically adding or
-     *  removing Items. To add items, provide the new item as a JSON object
-     *  along with a reference item that will be used to determine the
-     *  placement in the hierarchy. The reference item is optional when
-     *  appending.
+     *  The <b>PanelBar</b> API provides several methods for dynamically
+     *  adding or removing Items. To add items, provide the new item as a
+     *  JSON object along with a reference item that will be used to
+     *  determine the placement in the hierarchy. The reference item is
+     *  optional when appending.
      * </p>
      * <p>
-     *  A reference item is simply a target PanelBar Item HTML element that
+     *  A reference item is a target <b>PanelBar</b> item HTML element that
      *  already exists in the PanelBar. Any valid jQuery selector can be used
      *  to obtain a reference to the target item. For examples, see the
      *  PanelBar API demos.
@@ -162,13 +164,12 @@
      *
      * @exampleTitle Dynamically add a new root PanelBar item
      * @example
-     * var pb = $("#panelbar").kendoPanelBar().data("kendoPanelBar");
+     * var panelBar = $("#panelBar").kendoPanelBar().data("kendoPanelBar");
      *
-     * pb.insertAfter(
+     * panelBar.insertAfter(
      *  { text: "New PanelBar Item" },
-     *  pb.element.children("li:last")
+     *  panelBar.element.children("li:last")
      * );
-     *
      */
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -381,10 +382,77 @@
          * @class PanelBar UI widget
          * @param {Selector} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Object} [animation] A collection of <b>Animation</b> objects, used to change default animations. A value of false will disable all animations in the widget.
-         * @option {Animation} [animation.expand] The animation that will be used when expanding items.
-         * @option {Animation} [animation.collapse] The animation that will be used when collapsing items.
-         * @option {String} [expandMode] <multiple> Specifies if PanelBar should collapse the already expanded item when expanding next item (mode: "single").
+         * @option {Object} [animation] A collection of visual animations
+         * used when items are expanded or collapsed through user
+         * interaction. Setting this option to <b>false</b> will disable all
+         * animations.
+           * _example
+           * $("#panelBar").kendoPanelBar({
+           *  animation: {
+           *   close: {
+           *    duration: 200,
+           *    hide: true,
+           *    show: false
+           *   }
+           *   open: {
+           *    duration: 200,
+           *    effects: "expandVertical",
+           *    show: true
+           *   }
+           *  }
+           * });
+         * @option {Object} [animation.open] The animation that will be
+         * used when expanding items.
+           * _example
+           * $("#panelBar").kendoPanelBar({
+           *  animation: {
+           *   open: {
+           *    duration: 200,
+           *    effects: "expandVertical",
+           *    show: true
+           *   }
+           *  }
+           * });
+         * @option {Number} [animation.open.duration] <200> The number of
+         * milliseconds used for the animation when an item is expanded.
+           * _example
+           * $("#panelBar").kendoPanelBar({
+           *  animation: {
+           *   open: {
+           *    duration: 1000
+           *   }
+           *  }
+           * });
+         * @option {String} [animation.open.effects] <"expandVertical"> A
+         * whitespace-delimited string of animation effects that are utilized
+         * when an item is expanded. Options include "expandVertical" and
+         * "fadeIn".
+         * @option {Boolean} [animation.open.hide]
+         * @option {Boolean} [animation.open.show] <true>
+         * @option {Object} [animation.close] The animation that will be
+         * used when collapsing items.
+         * @option {Number} [animation.close.duration] <200> The number of
+         * milliseconds used for the animation when an item is collapsed.
+           * _example
+           * $("#panelBar").kendoPanelBar({
+           *  animation: {
+           *   close: {
+           *    duration: 1000
+           *   }
+           *  }
+           * });
+         * @option {String} [animation.close.effects] A
+         * whitespace-delimited string of animation effects that are utilized
+         * when an item is expanded. Options include "fadeOut".
+         * @option {Boolean} [animation.close.hide] <true>
+         * @option {Boolean} [animation.close.show] <false>
+         * @option {String} [expandMode] <"multiple"> Specifies if
+         * <b>PanelBar</b> should collapse the already expanded item when
+         * expanding next item (mode: "single").
+           * _example
+           * $("#panelBar").kendoPanelBar({
+           *  expandMode: "single"
+           * });
          */
         init: function(element, options) {
             element = $(element);
@@ -637,26 +705,26 @@
 
         /**
          * Appends a PanelBar item in the specified referenceItem
-         * @param {Selector} item Target item, specified as a JSON object. You can pass item text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
+         * @param {Selector} item Target item, specified as the JSON representation of an object. You can pass item text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
          * @param {Item} referenceItem A reference item to append the new item in
          * @example
          * panelBar.append(
-         *     [{
-         *         text: "Item 1",
-         *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
-         *     },
-         *     {
-         *         text: "Item 2",
-         *         content: "text"                              // Content for the content element
-         *     },
-         *     {
-         *         text: "Item 3",
-         *         contentUrl: "partialContent.html"            // From where to load the item content
-         *     },
-         *     {
-         *         text: "Item 4",
-         *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
-         *         items: [{                                    // Sub item collection.
+         *  [{
+         *   text: "Item 1",
+         *   url: "http://www.kendoui.com/"                // Link URL if navigation is needed, optional.
+         *   },
+         *   {
+         *    text: "Item 2",
+         *    content: "text"                              // Content for the content element
+         *   },
+         *   {
+         *    text: "Item 3",
+         *    contentUrl: "partialContent.html"            // From where to load the item content
+         *   },
+         *   {
+         *    text: "Item 4",
+         *    imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
+         *    items: [{                                    // Sub item collection.
          *              text: "Sub Item 1"
          *         },
          *         {
