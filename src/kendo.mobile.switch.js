@@ -4,7 +4,7 @@
     *
     * @section MobileSwitch widget is used inside a mobile view to display two exclusive choises.
     * The MobileSwitch shows the value that is currently selected. Users slides the control to reveal the second value.
-    * The MobileSwitch can only be created from <code>input</code> type <code>checkbox</code>.
+    * The MobileSwitch can be created from <code>input</code> of type <code>checkbox</code>.
     *
     * <h3>Getting Started</h3>
     * The Kendo MobileApplication will automatically initialize the MobileSwitch for every element with <code>role</code> data attribute set to <code>swtich</code> present in the views/layouts markup.
@@ -19,9 +19,9 @@
     * <script>
     * var switchWidget = $("#switch").kendoMobileSwitch();
     * </script>
-    * @section <h3>Define checked state of the MobileSwitch</h3>
+    * @section <h3>Define the checked state of the MobileSwitch</h3>
     *
-    * Selected state of the widget depends on the <code>checked</code> attribute of the <code>input</code> element.
+    * Checked state of the MobileSwitch depends on <code>checked</code> property of the options or on the <code>checked</code> attribute of the <code>input</code>.
     *
     * @exampleTitle Initialize Kendo MobileSwitch from checked <code>input</code>
     * @example
@@ -37,9 +37,9 @@
     * var switchWidget = $("#switch").kendoMobileSwitch({ checked: true });
     * </script>
     *
-    * @section <h3>Setting text of the labels</h3>
+    * @section <h3>Specifing the test of the labels</h3>
     *
-    * @exampleTitle Initialize Kendo MobileSwitch with custom text
+    * @exampleTitle Initialize Kendo MobileSwitch using custom text
     * <input type="checkbox" id="switch" />
     * <script>
     * var switchWidget = $("#switch").kendoMobileSwitch({ onLabel: "YES", offLabel: "NO" });
@@ -77,8 +77,8 @@
         * @param {DomElement} element DOM element.
         * @param {Object} options Configuration options.
         * @option {Boolean} [checked] <false> The checked state of the widget.
-        * @option {String} [onLabel] <ON> The text of the checked state.
-        * @option {String} [offLabel] <ON> The text of the unchecked state.
+        * @option {String} [onLabel] <ON> The checked text.
+        * @option {String} [offLabel] <OFF> The unchecked text.
         */
         init: function(element, options) {
             var that = this, width, checked, handleWidth;
@@ -138,8 +138,8 @@
         },
 
         /**
-        * Change the state of the widget. Calling the method without params will toggel the checked state of the widget.
-        * @param {Boolean} checked The checked state
+        * Change the checked state of the widget. Calling the method without params will toggle the state.
+        * @param {Boolean} check The check state
         * @example
         * &lt;input data-role="switch" id="foo" /&gt;
         *
@@ -147,21 +147,21 @@
         *   $("#foo").data("kendoMobileSwitch").toggle(true);
         * &lt;/script&gt;
         */
-        toggle: function(checked) {
+        toggle: function(check) {
             var that = this,
                 element = that.element[0];
 
-            if (checked === undefined) {
-                checked = !element.checked;
+            if (check === undefined) {
+                check = !element.checked;
             }
 
-            element.checked = checked;
+            element.checked = check;
 
-            that._position(checked * that.snapPart, checked ? 0 : that.origin);
+            that._position(check * that.snapPart, check ? 0 : that.origin);
 
             that.handle
-                .toggleClass(SWITCHON, checked)
-                .toggleClass(SWITCHOFF, !checked);
+                .toggleClass(SWITCHON, check)
+                .toggleClass(SWITCHOFF, !check);
         },
 
         _active: function (e) {
@@ -236,7 +236,7 @@
 
                 handle
                     .kendoStop(true, true)
-                    .kendoAnimate(extend({
+                    .kendoAnimate({
                         effects: "slideTo",
                         duration: 150,
                         offset: distance + "px,0",
@@ -244,7 +244,7 @@
                             that.element[0].checked = checked;
                             that.trigger(CHANGE, { checked: checked });
                         }
-                    }));
+                    });
             }
         },
 
