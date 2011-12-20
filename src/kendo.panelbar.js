@@ -431,6 +431,16 @@
          * @option {Boolean} [animation.open.show] <true>
          * @option {Object} [animation.close] The animation that will be
          * used when collapsing items.
+           * _example
+           * $("#panelBar").kendoPanelBar({
+           *  animation: {
+           *   close: {
+           *    duration: 200,
+           *    hide: true,
+           *    show: false
+           *   }
+           *  }
+           * });
          * @option {Number} [animation.close.duration] <200> The number of
          * milliseconds used for the animation when an item is collapsed.
            * _example
@@ -446,9 +456,13 @@
          * when an item is expanded. Options include "fadeOut".
          * @option {Boolean} [animation.close.hide] <true>
          * @option {Boolean} [animation.close.show] <false>
-         * @option {String} [expandMode] <"multiple"> Specifies if
-         * <b>PanelBar</b> should collapse the already expanded item when
-         * expanding next item (mode: "single").
+         * @option {String} [expandMode] <"multiple"> Specifies how the
+         * <b>PanelBar</b> will display items when expanded. When a value of
+         * "single" is specified, only one item will be expanded at a time.
+         * That is, when an item is expanded, the <b>PanelBar</b> will
+         * collapse the most recently expanded item. When a value of
+         * "multiple" is specified, the expansion of one item will not
+         * collapse any other iterms.
            * _example
            * $("#panelBar").kendoPanelBar({
            *  expandMode: "single"
