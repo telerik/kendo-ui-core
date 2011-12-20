@@ -9,38 +9,21 @@ function publish(symbolSet) {
     var classes = symbols.filter(isaClass).sort(makeSortby("alias"));
     var templatesDir = JSDOC.opt.t;
     var outDir = JSDOC.opt.d;
-    var descTemplate = new JSDOC.JsPlate(templatesDir + "description.tmpl");
-    var confTemplate = new JSDOC.JsPlate(templatesDir + "configuration.tmpl");
-    var methodsTemplate = new JSDOC.JsPlate(templatesDir + "methods.tmpl");
-    var eventsTemplate = new JSDOC.JsPlate(templatesDir + "events.tmpl");
+    var allSections = ["description", "configuration", "methods", "events"];
 
     classes.forEach(function(c) {
         c.events = c.getEvents();   // 1 order matters
         c.methods = c.getMethods(); // 2
 
-        IO.saveFile(
-            outDir,
-            c.alias + ".description.html",
-            descTemplate.process(c)
-        );
+        allSections.forEach(function(section) {
+            var template = new JSDOC.JsPlate(templatesDir + section + ".tmpl");
 
-        IO.saveFile(
-            outDir,
-            c.alias + ".configuration.html",
-            confTemplate.process(c)
-        );
-
-        IO.saveFile(
-            outDir,
-            c.alias + ".methods.html",
-            methodsTemplate.process(c)
-        );
-
-        IO.saveFile(
-            outDir,
-            c.alias + ".events.html",
-            eventsTemplate.process(c)
-        );
+            IO.saveFile(
+                outDir,
+                c.alias.toLowerCase() + "." + section + ".html",
+                template.process(c)
+            );
+        });
     });
 }
 
