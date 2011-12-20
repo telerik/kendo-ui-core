@@ -564,9 +564,13 @@
         _blur: function() {
             var that = this;
 
-            that._bluring = setTimeout(function() {
+            if (touch) {
                 that._change(that.element.val());
+            }
+
+            that._bluring = setTimeout(function() {
                 if (!touch) {
+                    that._change(that.element.val());
                     that.close();
                 }
                 that._inputWrapper.removeClass(FOCUSED);
@@ -578,7 +582,9 @@
 
             setTimeout(function() {
                 clearTimeout(that._bluring);
-                that.element.focus();
+                if (!touch) {
+                    that.element.focus();
+                }
             });
         },
 
