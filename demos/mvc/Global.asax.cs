@@ -14,32 +14,47 @@ namespace Kendo
 
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            var suiteConstraint = new { suite = "(web|dataviz|mobile)" };
 
             routes.MapRoute(
                 "Source",
-                "web/{section}/{example}.src.html",
-                new { controller = "Web", action = "Source" }
+                "{suite}/{section}/{example}.src.html",
+                new { controller = "Suite", action = "Source" },
+                suiteConstraint 
             );
 
             routes.MapRoute(
-                "Web",
-                "web/{section}/{example}.html",
-                new { controller = "Web", action = "Index", section = "overview", example = "index" }
+                "Suite",
+                "{suite}/{section}/{example}.html",
+                new { controller = "Suite", action = "Index", section = "overview", example = "index" },
+                suiteConstraint
             );
 
             routes.MapRoute(
-                "Index",
-                "web/{section}",
-                new { controller = "Web", action = "Index", section = "overview", example = "index" }
+                "SectionIndex",
+                "{suite}/{section}",
+                new { controller = "Suite", action = "SectionIndex", section = "overview" },
+                suiteConstraint
             );
 
             routes.MapRoute(
                 "Static",
                 "{assetGroup}/{assetType}/{*file}",
                 new { controller = "Static", action = "Resource" },
-                new { assetGroup = "(src|shared)",
+                new { assetGroup = "(src)",
                       assetType = "(js|styles)" }
+            );
+
+            routes.MapRoute(
+                "ThemeBuilder",
+                "themebuilder/index.html",
+                new { controller = "ThemeBuilder", action = "Index" }
+            );
+
+            routes.MapRoute(
+                "ThemeBuilderIndex",
+                "themebuilder",
+                new { controller = "ThemeBuilder", action = "ThemeBuilderIndex" }
             );
 
             routes.MapRoute(

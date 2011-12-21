@@ -10,7 +10,7 @@ var fs = require("fs"),
     mkdir = kendoBuild.mkdir;
 
 // Configuration ==============================================================
-var SUITES = ["Web"],
+var SUITES = ["Web", "DataViz"],
     EXAMPLES_ROOT = path.join("demos", "examples"),
     MVC_ROOT = path.join("demos", "mvc", "Views");
 
@@ -33,6 +33,7 @@ SUITES.forEach(function(suite) {
                 var content = kendoBuild.readText(outputFile);
                 content = content
                     .replace(/(.|\n)+<body>((.|\n)+)<\/body>(.|\n)+/m, "$2")
+                    .replace(/<div class="description">((.|\n)+?)<\/div>/m, "")
                     .replace("../content", "../../content/" + suite.toLowerCase())
                     .replace(/\s*<!--\s*\w+\s*-->\s*$/gm, "");
 

@@ -39,9 +39,9 @@
 
                 <div id="topnavWrap" class="centerWrap">
                     <ul id="topnav">
-                        <li><a id="web" class="first @(ViewBag.Suite == "web" ? "selected" : "")" href="web/overview/index.html">Web</a></li>
-                        <li><a id="dataviz" class="@(ViewBag.Suite == "dataviz" ? "selected" : "")" href="dataviz/overview/index.html">DataViz</a></li>
-                        <li><a id="mobile" class="@(ViewBag.Suite == "mobile" ? "selected" : "")" href="mobile/index.html">Mobile</a></li>
+                        <li>@Html.SuiteLink("Web", "first")</li>
+                        <li>@Html.SuiteLink("DataViz")</li>
+                        <li>@Html.SuiteLink("Mobile")</li>
                         <li><a id="themebuilder" class="last @(ViewBag.Suite == "themebuilder" ? "selected" : "")" href="themebuilder/index.html">ThemeBuilder</a></li>
                     </ul>
 
@@ -68,7 +68,8 @@
                                 <ul>
                                     @foreach (NavigationExample example in widget.Items) {
                                         <li>
-                                            <a class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")" href="@(Url.Content("~/web/") + example.Url)">@example.Text</a>
+                                            <a class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")"
+                                               href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
                                         </li>
                                     }
                                 </ul>
