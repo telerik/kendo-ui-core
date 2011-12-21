@@ -9,15 +9,12 @@
         <span class="exampleIcon @ViewBag.CurrentWidget.SpriteCssClass"></span>
         @ViewBag.CurrentExample.Text
     </h1>
-    <script>initializeNavigation();</script>
     <div id="exampleWrap">
         <script>preventFOUC()</script>
-        <!-- nav -->
         <div id="example" class="k-content">
         @RenderBody()
-        </div> <!-- / example -->
-        <!-- tools -->
-    </div> <!-- / exampleWrap -->
+        </div>
+    </div>
 
     <div id="codeStrip">
         <ul>
@@ -41,7 +38,7 @@
             @RenderSection("Description", false)
         </div>
     </div>
-</div> <!-- / main -->
+</div>
 
 <script>
     $("#codeStrip").kendoTabStrip({

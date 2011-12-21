@@ -12,6 +12,7 @@ namespace Kendo.Controllers
         public ActionResult Index()
         {
             ViewBag.Suite = "themebuilder";
+            ViewBag.DeployRoot = "http://themebuilder.kendoui.com";
 
             return View();
         }
