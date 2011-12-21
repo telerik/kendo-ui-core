@@ -37,3 +37,5 @@ themebuilder/src/styles/Black/
 themebuilder/src/styles/textures/
 demos/mvc/bin/Kendo.dll.mdb
 demos/mvc/bin/Kendo.pdb
+demos/mvc/Views/web/
+demos/mvc/content/web/

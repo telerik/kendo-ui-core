@@ -251,6 +251,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\SourceLayout.cshtml" />
+    <Content Include="Views\Shared\ExampleLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\web\" />
