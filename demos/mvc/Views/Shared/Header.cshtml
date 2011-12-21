@@ -1,0 +1,40 @@
+<div id="exceptFooterWrap">
+    <div id="exceptFooter">
+        <div id="header">
+            <div class="floatWrap centerWrap">
+                <h1><a id="logo" href="http://www.kendoui.com">Kendo</a></h1>
+                <a id="referenceUrl" href="@Url.Content("~")"></a>
+                <ul>
+                    <li style="margin-left: 0;"><a accesskey="1" title="Link to home page" href="http://www.kendoui.com/web">Web</a></li>
+                    <li><a href="http://www.kendoui.com/dataviz">DataViz</a></li>
+                    <li><a href="http://www.kendoui.com/mobile">Mobile</a></li>
+                    <li class="active">
+                        <a href="http://demos.kendoui.com">Demos</a>
+                        <em class="shadow"></em>
+                        <em></em></li>
+                    <li><a id="download" onclick="_gaq.push(['_trackPageview','/download-button']);" href="http://www.kendoui.com/get-kendo-ui">Get Kendo UI</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="flowerWrap">
+            <div class="flowers"></div>
+
+            <div id="topnavWrap" class="centerWrap">
+                <ul id="topnav">
+                    <li>@Html.SuiteLink("Web", "first")</li>
+                    <li>@Html.SuiteLink("DataViz")</li>
+                    <li>@Html.SuiteLink("Mobile")</li>
+                    <li><a id="themebuilder" 
+                           class="last @(ViewBag.Suite == "themebuilder" ? "selected" : "")"
+                           href="@Url.Action("Index", "ThemeBuilder")">ThemeBuilder
+                        </a>
+                    </li>
+                </ul>
+
+                <div id="examplesThemeChooser">
+                    <label for="skinSelector">Theme</label>
+                    <input id="skinSelector" class="themeChooser" />
+                </div>
+            </div>
+        </div>

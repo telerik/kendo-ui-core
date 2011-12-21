@@ -256,6 +256,8 @@
     <Content Include="Views\Shared\SourceLayout.cshtml" />
     <Content Include="Views\Shared\ExampleLayout.cshtml" />
     <Content Include="Views\ThemeBuilder\Index.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DataViz\" />
