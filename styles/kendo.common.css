@@ -2761,7 +2761,7 @@ span.k-tooltip
     height: 300px;
 }
 
-.k-pane > .k-splitter:first-child
+.k-pane > .k-splitter
 {
     border-width: 0;
     overflow: hidden;
