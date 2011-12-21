@@ -934,6 +934,131 @@
                 test("renders z index", function() {
                     equal(plotBands.style.zIndex, -1);
                 });
+
+            })();
+
+
+            (function() {
+                var plotArea,
+                    title,
+                    titleBox,
+                    lineSeriesData = [{
+                        name: "Value A",
+                        type: "line",
+                        data: [100]
+                    }],
+                    barSeriesData =  [{
+                        name: "Value A",
+                        type: "bar",
+                        data: [100]
+                    }];
+
+                function createPlotArea(series, plotOptions) {
+                    plotArea = new Chart.PlotArea($.extend({}, {
+                        series: series,
+                        valueAxis: {
+                            title: {
+                                text: "text",
+                                color: "red",
+                                opacity: 0.33,
+                                position: "center"
+                            }
+                        },
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    }, plotOptions));
+
+                    view = new ViewStub();
+
+                    plotArea.reflow(chartBox);
+                    plotArea.getViewElements(view);
+                }
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Title / Horizontal", {
+                    setup: function() {
+                        createPlotArea(barSeriesData);
+                        titleBox = plotArea.axisX.title.box;
+                        title = view.log.text[8];
+                    }
+                });
+
+                test("applied position center", function() {
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 391, 582, 424, 600 ], TOLERANCE);
+                });
+
+                test("applied position left", function() {
+                    createPlotArea(barSeriesData, { valueAxis: { title: { position: "left" }}});
+                    titleBox = plotArea.axisX.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 15, 582, 15, 600 ], TOLERANCE);
+                });
+
+                test("applied position right", function() {
+                    createPlotArea(barSeriesData, { valueAxis: { title: { position: "right" }}});
+                    titleBox = plotArea.axisX.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 800, 582, 800, 600 ], TOLERANCE);
+                });
+
+                test("renders color", function() {
+                    equal(title.style.color, "red");
+                });
+
+                test("renders opacity", function() {
+                    equal(title.style.opacity, 0.33);
+                });
+
+                test("renders zIndex", function() {
+                    equal(title.style.zIndex, 1);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Title / Vertical", {
+                    setup: function() {
+                        createPlotArea(lineSeriesData);
+                        titleBox = plotArea.axisY.title.box;
+                        title = view.log.text[7];
+                    }
+                });
+
+                test("applied position center", function() {
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 0, 278.25, 18, 311.25 ], TOLERANCE);
+                });
+
+                test("applied position bottom", function() {
+                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "bottom" }}});
+                    titleBox = plotArea.axisY.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 0, 573, 18, 573 ], TOLERANCE);
+                });
+
+                test("applied position top", function() {
+                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "top" }}});
+                    titleBox = plotArea.axisY.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 0, 0, 18, 0 ], TOLERANCE);
+                });
+
+                test("renders color", function() {
+                    equal(title.style.color, "red");
+                });
+
+                test("renders opacity", function() {
+                    equal(title.style.opacity, 0.33);
+                });
+
+                test("renders zIndex", function() {
+                    equal(title.style.zIndex, 1);
+                });
+
             })();
         </script>
 
