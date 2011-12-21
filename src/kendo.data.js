@@ -963,10 +963,10 @@
 	 * <li>filter[logic]: and</li>
 	 * <li>filter[filters][0][field]: orderId</li>
 	 * <li>filter[filters][0][operator]: desc</li>
-		 * <li>filter[filters][0][value]: 10248</li>
-		 * </ul>
-		 * <p>Possible values for <b>operator</b> include:</p>
-		 * <ul>
+	 * <li>filter[filters][0][value]: 10248</li>
+	 * </ul>
+	 * <p>Possible values for <b>operator</b> include:</p>
+	 * <ul>
          * <li><strong>Equal To</strong>: "eq", "==", "isequalto", "equals", "equalto", "equal"</li>
          * <li><strong>Not Equal To</strong>: "neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "ne"</li>
          * <li><strong>Less Then</strong>: "lt", "<", "islessthan", "lessthan", "less"</li>
@@ -1270,13 +1270,35 @@
                          * Fires when an error occurs during data retrieval.
                          * @name kendo.data.DataSource#error
                          * @event
+		  	 * @example
+			 * var dataSource = new kendo.data.DataSource({
+			 *     error: function(e) {
+			 *         // handle event
+			 *     }
+			 * });
+			 * @exampleTitle To set after initialization
+			 * @example
+			 * dataSource.bind("error", function(e) {
+			 *     // handle event
+			 * });
                          */
                         ERROR,
                         /**
                          * Fires when data is changed
                          * @name kendo.data.DataSource#change
                          * @event
-                         */
+	 		 * @example
+                         * var dataSource = new kendo.data.DataSource({
+			 *     change: function(e) {
+			 *         // handle event
+			 *     }
+			 * });
+			 * @exampleTitle To set after initialization
+			 * @example
+			 * dataSource.bind("change", function(e) {
+			 *     // handle event
+			 * });
+			 */
                         CHANGE,
                         CREATE, DESTROY, UPDATE, REQUESTSTART, MODELCHANGE], options);
         },
@@ -1297,13 +1319,20 @@
          * Retrieves a Model instance by given id.
          * @param {Number} id The id of the model to be retrieved
          * @returns {Object} Model instance if found
-         */
+	 * @example
+	 * var order = dataSource.get(1); // retrieves the "order" model item with an id of 1
+	 */
         get: function(id) {
             return this._set.get(id);
         },
 
         /**
-         * Synchronizes changes through the transport.
+         * Synchronizes changes through the transport. Any pending CRUD operations will be sent to the server.
+	 * <p>If the DataSource is in <b>batch</b> mode, only one call will be made for each type of operation.
+	 * Otherwise, the DataSource will send one command per pending item change per change type.
+	 * @example
+	 * // we have deleted 2 items and updated 1. If not in batch mode, this will send three commands to the server
+	 * dataSource.sync();
          */
         sync: function() {
             this._set.sync();
@@ -1313,6 +1342,18 @@
          * Adds a new Model instance to the DataSource
          * @param  {Object} model Either a Model instance or raw object from which the Model will be created
          * @returns {Object} The Model instance which has been added
+	 * @example
+	 * var model = kendo.data.Model.extend({
+	 *     id: "orderId",
+	 *     fields: {
+	 *         name: "customerName",
+	 *         description: "orderDescription",
+         *         address: "customerAddress"
+	 *     }
+	 * });
+	 * // add a new model item to the data source.  If a model has not been declared as above, a new
+	 * // model instance will be created for you.
+	 * dataSource.add({ name: "John Smith", description: "Product Description", address: "123 1st Street" });
          */
         add: function(model) {
             return this._set.add(model);
@@ -1322,22 +1363,45 @@
          * Inserts a new Model instance to the DataSource.
          * @param {Number} index Index at which the Model will be inserted
          * @param {Object} model Either a Model instance or raw object from which the Model will be created
-         * @returns {Object} The Model instance which has been inserted
+         * @example
+	 * var model = kendo.data.Model.extend({
+	 *     id: "orderId",
+	 *     fields: {
+	 *         name: "customerName",
+	 *         description: "orderDescription",
+         *         address: "customerAddress"
+	 *     }
+	 * });
+	 * // insert a new model item at the very front of the collection
+	 * dataSource.insert(0, { name: "John Smith", description: "Product Description", address: "123 1st Street" });
+	 * @returns {Object} The Model instance which has been inserted
          */
         insert: function(index, model) {
             return this._set.insert(index, model);
         },
 
         /**
-         * Cancel the changes made to the DataSource after the last sync.
+         * Cancel the changes made to the DataSource after the last sync. Any changes currently existing in the model
+	 * will be discarded.
+	 * @example
+	 * // we have updated 2 items and deleted 1. All of those changes will be discarded.
+	 * dataSource.cancelChanges();
          */
         cancelChanges : function() {
             this._set.cancelChanges();
         },
 
         /**
-         * Populate the DataSource using the assign transport instance.
-         */
+	 * Read the data into the DataSource using the transport read definition
+         * @example
+	 * var dataSource = new kendo.data.DataSource({
+	 *     transport: {
+	 *         read: "orders.json";
+         *     }
+	 * });
+	 * // the datasource will not contain any data until a read is called
+	 * dataSource.read();   
+	 */
         read: function(data) {
             var that = this, params = that._params(data);
 
@@ -1393,6 +1457,11 @@
         /**
          * Remove given Model instance from the DataSource.
          * @param {Object} model Model instance to be removed
+	 * @example
+	 * // get the model item with an id of 1 from the DataSource
+	 * var itemToRemove = dataSource.get(1);
+	 * // remove the item from the DataSource
+	 * dataSource.remove(itemToRemove);
          */
         remove: function(model) {
             this._set.remove(model);
@@ -1487,15 +1556,20 @@
          * Returns the raw data record at the specified index
          * @param {Number} index The zero-based index of the data record
          * @returns {Object}
+	 * @example
+	 * // returns the 4th item in the collection
+	 * var order = dataSource.at(3);
          */
         at: function(index) {
             return this._data[index];
         },
 
         /**
-         * Get data return from the transport
+         * Get data returned from the transport
          * @returns {Array} Array of items
-         */
+         * @example
+	 * var data = dataSource.data();
+	 */
         data: function(value) {
             var that = this;
             if (value !== undefined) {
@@ -1513,12 +1587,20 @@
 
         /**
          * Returns a view of the data with operation such as in-memory sorting, paring, grouping and filtering are applied.
-         * To ensure that data is available this method should be use from within change event of the dataSource.
-         * @example
-         * dataSource.bind("change", function() {
-         *   renderView(dataSource.view());
-         * });
+         * To ensure that data is available this method should be use from within change event of the dataSource.      
          * @returns {Array} Array of items
+	 * @example
+         * var dataSource = new kendo.data.DataSource({
+	 *     transport: {
+	 *         read: "orders.json"
+ 	 *     }
+ 	 *     change: function(e) {
+	 *        // create a template instance
+	 *        var template = kendo.template($("#template").html());
+         *        // render a view by passing the data to a template  
+	 *        kendo.render(template, dataSource.view());         
+	 *     }
+	 * });
          */
         view: function() {
             return this._view;
@@ -1526,8 +1608,8 @@
 
         /**
          * Executes a query over the data. Available operations are paging, sorting, filtering, grouping.
-         * If data is not available or remote operations are enabled data is requested through the transport,
-         * otherwise operations are executed over the available data.
+         * If data is not available or remote operations are enabled, data is requested through the transport.
+         * Otherwise operations are executed over the available data.
          * @param {Object} [options] Contains the settings for the operations. Note: If setting for previous operation is omitted, this operation is not applied to the resulting view
          * @example
          *
@@ -1605,6 +1687,8 @@
          * Fetches data using the current filter/sort/group/paging information.
          * If data is not available or remote operations are enabled data is requested through the transport,
          * otherwise operations are executed over the available data.
+	 * @example
+	 * dataSource.fetch();
          */
         fetch: function(callback) {
             var that = this;
@@ -1654,7 +1738,7 @@
          * Get current pageSize or request a page with specified number of records.
          * @param {Number} [val] <undefined> The of number of records to be retrieved.
          * @example
-         * dataSource.pageSiza(25);
+         * dataSource.pageSize(25);
          * @returns {Number} Current page size
          */
         pageSize: function(val) {
@@ -1745,7 +1829,9 @@
 
         /**
          * Get the total number of records
-         */
+         * @example
+	 * var total = dataSource.total();
+	 */
         total: function() {
             return this._total;
         },
@@ -1771,6 +1857,8 @@
         /**
          * Get result of aggregates calculation
          * @returns {Array} Aggregates result
+	 * @example
+	 * var aggr = dataSource.aggregates();
          */
         aggregates: function() {
             return this._aggregateResult;
@@ -1779,7 +1867,9 @@
         /**
          * Get the number of available pages.
          * @returns {Number} Number of available pages.
-         */
+         * @example
+	 * var pages = dataSource.totalPages();
+	 */
         totalPages: function() {
             var that = this,
                 pageSize = that.pageSize() || that.total();
