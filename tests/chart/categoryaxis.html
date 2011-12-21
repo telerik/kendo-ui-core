@@ -449,6 +449,128 @@
                     equal(plotBands.style.zIndex, -1);
                 });
             })();
+
+
+            (function() {
+                var plotArea,
+                    title,
+                    titleBox,
+                    lineSeriesData = [{
+                        name: "Value A",
+                        type: "line",
+                        data: [100]
+                    }],
+                    barSeriesData =  [{
+                        name: "Value A",
+                        type: "bar",
+                        data: [100]
+                    }];
+
+                function createPlotArea(series, plotOptions) {
+                    plotArea = new Chart.PlotArea($.extend({}, {
+                        series: series,
+                        categoryAxis: {
+                            categories: ["A"],
+                            title: {
+                                text: "text",
+                                color: "red",
+                                opacity: 0.33,
+                                position: "center"
+                            }
+                        }
+                    }, plotOptions));
+
+                    view = new ViewStub();
+
+                    plotArea.reflow(chartBox);
+                    plotArea.getViewElements(view);
+                }
+
+                // ------------------------------------------------------------
+                module("Category Axis / Title / Horizontal", {
+                    setup: function() {
+                        createPlotArea(lineSeriesData);
+                        titleBox = plotArea.axisX.title.box;
+                        title = view.log.text[8];
+                    }
+                });
+
+                test("applied position center", function() {
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 403, 582, 436, 600 ], TOLERANCE);
+                });
+
+                test("applied position left", function() {
+                    createPlotArea(barSeriesData, { valueAxis: { title: { position: "left" }}});
+                    titleBox = plotArea.axisX.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 33, 582, 33, 600 ], TOLERANCE);
+                });
+
+                test("applied position right", function() {
+                    createPlotArea(barSeriesData, { valueAxis: { title: { position: "right" }}});
+                    titleBox = plotArea.axisX.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 800, 582, 800, 600 ], TOLERANCE);
+                });
+
+                test("renders color", function() {
+                    equal(title.style.color, "red");
+                });
+
+                test("renders opacity", function() {
+                    equal(title.style.opacity, 0.33);
+                });
+
+                test("renders zIndex", function() {
+                    equal(title.style.zIndex, 1);
+                });
+
+                // ------------------------------------------------------------
+                module("Category Axis / Title / Vertical", {
+                    setup: function() {
+                        createPlotArea(barSeriesData);
+                        titleBox = plotArea.axisY.title.box;
+                        title = view.log.text[1];
+                    }
+                });
+
+                test("applied position center", function() {
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 0, 270, 18, 303 ], TOLERANCE);
+                });
+
+                test("applied position bottom", function() {
+                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "bottom" }}});
+                    titleBox = plotArea.axisY.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 0, 555, 18, 555 ], TOLERANCE);
+                });
+
+                test("applied position top", function() {
+                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "top" }}});
+                    titleBox = plotArea.axisY.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 0, 0, 18, 0 ], TOLERANCE);
+                });
+
+                test("renders color", function() {
+                    equal(title.style.color, "red");
+                });
+
+                test("renders opacity", function() {
+                    equal(title.style.opacity, 0.33);
+                });
+
+                test("renders zIndex", function() {
+                    equal(title.style.zIndex, 1);
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
