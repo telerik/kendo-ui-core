@@ -1,24 +1,27 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using HtmlAgilityPack;
-using Fizzler.Systems.HtmlAgilityPack;
-using IOFile = System.IO.File;
 
 namespace Kendo.Controllers
 {
     public class SourceController : BaseController
     {
         //
-        // GET: /Web/
+        // GET: /suite/section/example.src.html
 
-        public ActionResult Index(string section, string example)
+        public ActionResult Index(string suite, string section, string example)
         {
-            return Content(RenderView(section + "/" + example, "SourceLayout"), "text/plain");
+            var source = RenderView(
+                string.Format("~/Views/{0}/{1}/{2}.cshtml", suite, section, example),
+                "SourceLayout"
+            );
+
+            return Content(source, "text/plain");
         }
 
-        public string RenderView(string viewName, string template)
+        private string RenderView(string viewName, string template)
         {
             using (var writer = new StringWriter())
             {
@@ -26,7 +29,7 @@ namespace Kendo.Controllers
                 var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, writer);
                 viewResult.View.Render(viewContext, writer);
 
-                return writer.GetStringBuilder().ToString();
+                return "<pre id='code' class='prettyprint'>" + HttpUtility.HtmlEncode(writer.GetStringBuilder().ToString()) + "</pre>";
             }
         }
     }
