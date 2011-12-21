@@ -37,9 +37,7 @@ namespace Kendo.Controllers
 =======
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Kendo.Models;
@@ -105,23 +103,6 @@ namespace Kendo.Controllers
                         }
                     }
                 }
-            }
-        }
-
-        public ActionResult Source(string section, string example)
-        {
-            return Content(RenderView(section + "/" + example, "SourceLayout"), "text/plain");
-        }
-
-        public string RenderView(string viewName, string template)
-        {
-            using (var writer = new StringWriter())
-            {
-                var viewResult = ViewEngines.Engines.FindView(ControllerContext, viewName, template);
-                var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, writer);
-                viewResult.View.Render(viewContext, writer);
-
-                return "<pre id='code' class='prettyprint'>" + HttpUtility.HtmlEncode(writer.GetStringBuilder().ToString()) + "</pre>";
             }
         }
 
