@@ -2,10 +2,7 @@
     var Application,
         extend = $.extend,
         DETAILHANDLE = ".detailHandle",
-        runningLocally = location.protocol == "file:",
         pushState = "pushState" in history,
-        currentHtml = "",
-        category = "",
         docsAnimation = {
             show: {
                 effects: "expand:vertical fadeIn",
@@ -31,17 +28,8 @@
             }
         },
         initialFolder = 0,
-        codeStrip = false,
         referenceUrl = "",
-        regexes = {
-            helpData: /<!--\s*help-data\s*-->(([\r\n]|.)*?)<!--\s*help-data\s*-->/im,
-            helpTabs: /<!--\s*help-tabs\s*-->(([\r\n]|.)*?)<!--\s*help-tabs\s*-->/im,
-            tools: /\s*<!-- tools -->(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig,
-            exceptTools: /\s*<!-- \w+ -->(([\u000a\u000d\u2028\u2029]|.)*?)<!-- \w+ -->/ig,
-            nav: /([^\/]+\/[^\/\?\#]+)((\?|\#).*)?$/,
-            title: /<title>(.*?)<\/title>/i,
-            skin: /kendo\.\w+(\.min)?\.css/i
-        };
+        skinRegex = /kendo\.\w+(\.min)?\.css/i;
 
     Application = {
         load: function(href) {
@@ -63,67 +51,20 @@
         },
 
         fetch: function(href) {
-            href = href.toLowerCase();
+            var exampleWrap = $("#exampleWrap"),
+                mainWrap = $("#main");
 
-            $("#navWrap li a").each(function() {
-                var currentHref = $(this).attr("href");
-                if (currentHref && currentHref.toLowerCase() === href) {
-                    Application.fetchExample(href);
-                    $("#viewDescription").trigger("click");
-                }
-            });
-        },
-
-        fetchTitle: function () {
-            var result = regexes.title.exec(currentHtml),
-                title = result ? $.trim(result[1]) : "";
-
-            if (title) {
-                document.title = title;
-            }
-
-            return title;
-        },
-
-        fetchExample: function (href) {
             $.get(href, function(html) {
-                currentHtml = html;
-
-                var exampleWrap = $("#exampleWrap"),
-                    mainWrap = $("#main"),
-                    tools = $("#codeStrip, #examplesThemeChooser"),
-                    title = Application.fetchTitle(),
-                    toolsVisible = tools.is(":visible");
-
-                if (title == "Overview" && toolsVisible) {
-                    tools.toggle(category != "mobile" && category != "themebuilder");
-                }
-
-                if (title == "Overview") {
+                exampleWrap.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                     mainWrap.replaceWith(html);
-                } else {
-                    exampleWrap.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
-                        mainWrap.replaceWith(html);
-                        setTimeout(function() {
-                            $("#exampleWrap")
-                                .css("visibility", "visible")
-                                .kendoStop(true)
-                                .kendoAnimate(animation.show);
-                        }, 100);
-                    }}));
-                }
+                    setTimeout(function() {
+                        $("#exampleWrap")
+                            .css("visibility", "visible")
+                            .kendoStop(true)
+                            .kendoAnimate(animation.show);
+                    }, 100);
+                }}));
             }, "html");
-        },
-
-        populateTools: function(html, href) {
-            var title = Application.fetchTitle();
-            var exampleName = $("#exampleTitle");
-
-            if (title != "Overview") {
-            } else {
-                Application.fetchExample(href);
-            }
-            prettyPrint();
         },
 
         preloadStylesheet: function (file, callback) {
@@ -147,7 +88,7 @@
                 commonLink = kendoLinks.filter("[href*='kendo.common']"),
                 skinLink = kendoLinks.filter(":not([href*='kendo.common'])"),
                 currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
-                url = currentFolder + commonLink.attr("href").replace(regexes.skin, "kendo." + skinName + "$1.css"),
+                url = currentFolder + commonLink.attr("href").replace(skinRegex, "kendo." + skinName + "$1.css"),
                 exampleTitle = $("#exampleTitle"),
                 oldSkinName = $(document).data("kendoSkin"),
                 exampleElement = $("#example"), newLink;
@@ -197,25 +138,10 @@
             }
         },
 
-        helpTabs: function (html) {
-            var result = regexes.helpTabs.exec(html);
-
-            return result ? result[1] : "";
-        },
-
-        helpData: function (html) {
-            var result = regexes.helpData.exec(html);
-
-            return result ? result[1] : "";
-        },
-
         init: function() {
-
-            codeStrip = $("#codeStrip").data("kendoTabStrip");
-
             $("#exampleWrap").css("visibility", "visible");
 
-            if (pushState && !runningLocally) {
+            if (pushState) {
                 $(document)
                     .on("click", "#navWrap li a", function(e) {
                         e.preventDefault();
@@ -223,7 +149,7 @@
                         if (!location.href.match($(this).attr("href"))) {
                             var element = $(this);
 
-                            $("#navWrap").find(".chosen").removeClass("chosen");
+                            $("#navWrap .chosen").removeClass("chosen");
                             element.addClass("chosen");
 
                             Application.load(element.attr("href"));
@@ -298,20 +224,7 @@
         return head.innerHTML.match(/href=\W(.*)examples(\.min)?\.css/i)[1];
     }
 
-    function getNormalizedUrl() {
-        var href = location.href.toLowerCase(),
-            reference = $("#referenceUrl")[0].href.toLowerCase();
-
-        return href == reference ?
-                   reference.replace("/index.html", "/") :
-                   href.substr(-1) == "/" ?
-                       href + "index.html" :
-                       href;
-    }
-
     function initializeNavigation() {
-        var url = window.normalizedUrl = getNormalizedUrl(), link;
-
         $(document).ready( function () {
             var themes = new kendo.data.DataSource({
                 data: [

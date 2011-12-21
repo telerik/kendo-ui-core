@@ -82,6 +82,7 @@ namespace Kendo.Controllers
                         {
                             ViewBag.CurrentWidget = widget;
                             ViewBag.CurrentExample = example;
+                            ViewBag.Title = example.Text;
 
                             return;
                         }
