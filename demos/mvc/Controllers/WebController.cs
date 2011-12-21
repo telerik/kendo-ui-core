@@ -65,7 +65,29 @@ namespace Kendo.Controllers
             var jss = new JavaScriptSerializer();
             ViewBag.Navigation = jss.Deserialize<IDictionary<string, NavigationWidget[]>>(IOFile.ReadAllText(Server.MapPath("~/App_Data/web.nav.json")));
 
+            FindCurrentExample();
+
             return View(section + "/" + example);
+        }
+
+        protected void FindCurrentExample()
+        {
+            foreach (string category in ViewBag.Navigation.Keys)
+            {
+                foreach (NavigationWidget widget in ViewBag.Navigation[category])
+                {
+                    foreach (NavigationExample example in widget.Items)
+                    {
+                        if (Request.Path.EndsWith(example.Url))
+                        {
+                            ViewBag.CurrentWidget = widget;
+                            ViewBag.CurrentExample = example;
+
+                            return;
+                        }
+                    }
+                }
+            }
         }
 
         public ActionResult Source(string section, string example)

@@ -34,8 +34,6 @@
         codeStrip = false,
         referenceUrl = "",
         regexes = {
-            description: /<div[^>]*description[^>]*>(([\r\n]|.)*?)<\/\w+>\s*?<!-- description -->/im,
-            body: /<div id="example([Wrap]*)"[^>]*?>\s*<script[^>]*?>[^>]*script>(([\r\n]|.)*?)<!-- tools -->/im,
             helpData: /<!--\s*help-data\s*-->(([\r\n]|.)*?)<!--\s*help-data\s*-->/im,
             helpTabs: /<!--\s*help-tabs\s*-->(([\r\n]|.)*?)<!--\s*help-tabs\s*-->/im,
             tools: /\s*<!-- tools -->(([\u000a\u000d\u2028\u2029]|.)*?)<!-- tools -->/ig,
@@ -91,64 +89,30 @@
             $.get(href, function(html) {
                 currentHtml = html;
 
-                var exampleBody = $("#exampleWrap"),
-                    exampleName = $("#exampleTitle"),
+                var exampleWrap = $("#exampleWrap"),
+                    mainWrap = $("#main"),
                     tools = $("#codeStrip, #examplesThemeChooser"),
                     title = Application.fetchTitle(),
                     toolsVisible = tools.is(":visible");
 
                 if (title == "Overview" && toolsVisible) {
                     tools.toggle(category != "mobile" && category != "themebuilder");
-                } else {
-                    Application.fetchDescription();
                 }
 
                 if (title == "Overview") {
-                    exampleBody.empty().html(Application.body(html));
+                    mainWrap.replaceWith(html);
                 } else {
-                    exampleName.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
-                        var sprite = $("#navWrap > ul > .k-state-highlighted > .k-link > .k-sprite"), iconElement = "";
-                        if (sprite.length) {
-                            var currentControl = sprite[0].className.match(/\s(\w+Icon)/i)[1];
-                            iconElement = '<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>';
-                        }
-                        $("#exampleTitle").empty().html(iconElement + title);
-
+                    exampleWrap.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
+                        mainWrap.replaceWith(html);
                         setTimeout(function() {
-                            var newTabs = $($.trim(Application.helpTabs(html)));
-                            $(".codeTab").nextAll().remove().end().after(newTabs);
-                            $(".codeContainer").nextAll().remove().end().after($($.trim(Application.helpData(html))));
-                            codeStrip._updateClasses();
-                            prettyPrint();
-
-                            if (!toolsVisible) {
-                                tools.kendoStop(true).kendoAnimate(animation.show);
-                            }
-
-                            exampleName.kendoStop(true).kendoAnimate(animation.show);
-                        }, 100);
-                    }}));
-
-                    exampleBody.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
-                        exampleBody.empty().html(Application.body(html));
-                        setTimeout(function() {
-                            exampleBody.kendoStop(true).kendoAnimate(animation.show);
+                            $("#exampleWrap")
+                                .css("visibility", "visible")
+                                .kendoStop(true)
+                                .kendoAnimate(animation.show);
                         }, 100);
                     }}));
                 }
             }, "html");
-        },
-
-        fetchCode: function(html, callback) {
-            html = html.replace(regexes.tools, ""); // Remove tools first to strip description
-            html = html.replace(regexes.exceptTools, "");
-
-            $("#code").empty().text(html);
-
-            prettyPrint();
-
-            if (callback)
-                callback();
         },
 
         populateTools: function(html, href) {
@@ -156,38 +120,10 @@
             var exampleName = $("#exampleTitle");
 
             if (title != "Overview") {
-                var sprite = $("#navWrap > ul > .k-state-highlighted > .k-link > .k-sprite"), iconElement = "";
-                if (sprite.length) {
-                    var currentControl = sprite[0].className.match(/\s(\w+Icon)/i)[1];
-                    iconElement = '<span class="exampleIcon '+ currentControl.charAt(0).toLowerCase() + currentControl.substr(1) +'"></span>'
-                }
-
-                exampleName.empty().html(iconElement + title);
-
-                $("#codeStrip,#examplesThemeChooser").toggle(category != "mobile" && category != "themebuilder");
-
-                $(".description").empty().html($.trim(Application.description(html)));
             } else {
                 Application.fetchExample(href);
             }
             prettyPrint();
-        },
-
-        fetchDescription: function(href) {
-            if (href) {
-                $.get(href, function(html) {
-                    currentHtml = html;
-
-                    Application.populateTools(currentHtml, href);
-                }, "html")
-                .error(function() {
-                    currentHtml = "<!doctype html>\n<html>\n" + $("html").html() + "\n</html>";
-
-                    Application.populateTools(currentHtml, href);
-                });
-            } else {
-                $(".description").empty().html($.trim(Application.description(currentHtml)));
-            }
         },
 
         preloadStylesheet: function (file, callback) {
@@ -273,24 +209,11 @@
             return result ? result[1] : "";
         },
 
-        description: function(html) {
-            var result = regexes.description.exec(html);
-
-            return result ? result[1] : "";
-        },
-
-        body: function(html) {
-            var match = regexes.body.exec(html),
-                hasBody = match[0].substr(16, 4) != "Wrap";
-
-            return (match[1] != "") ? match[2] : (hasBody ? "" : "<div id=\"exampleWrap\">") + match[0].replace("<!-- tools -->", "") + (hasBody ? "" : "</div>");
-        },
-
         init: function() {
 
             codeStrip = $("#codeStrip").data("kendoTabStrip");
 
-            $("#exampleWrap").show();
+            $("#exampleWrap").css("visibility", "visible");
 
             if (pushState && !runningLocally) {
                 $(document)
@@ -349,21 +272,6 @@
                         element.toggleClass("detailHandleExpanded", !visible);
                     }
                 });
-
-            Application.fetchDescription(normalizedUrl);
-
-            $("#viewCode").click(function(e) {
-                e.preventDefault();
-
-                if (pushState) {
-                    Application.fetchCode(currentHtml);
-                } else {
-                    $.get(location.href, function(html) {
-                        Application.fetchCode(html);
-                    }, "html");
-                }
-            });
-
 
             $(document).data("kendoSkin", kendoSkin);
         }
@@ -449,7 +357,7 @@
     window.Application = Application;
     window.initializeNavigation = initializeNavigation;
     window.preventFOUC = function() {
-        $("#exampleWrap").hide();
+        $("#exampleWrap").css("visibility", "hidden");
     };
 
 })(jQuery, window);
