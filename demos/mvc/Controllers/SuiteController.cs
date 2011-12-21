@@ -47,27 +47,44 @@ using IOFile = System.IO.File;
 
 namespace Kendo.Controllers
 {
-    public class WebController : BaseController
+    public class SuiteController : BaseController
     {
+        private static readonly JavaScriptSerializer Serializer = new JavaScriptSerializer();
+
         //
         // GET: /Web/
-
-        public ActionResult Index(string section, string example)
+        public ActionResult Index(string suite, string section, string example)
         {
-            ViewBag.Suite = "web";
+            ViewBag.Suite = suite;
             ViewBag.Section = section;
             ViewBag.Example = example;
             ViewBag.Description = LoadDescription(section);
             ViewBag.HasConfiguration = IsDocumented(section, "configuration");
             ViewBag.HasMethods = IsDocumented(section, "methods");
             ViewBag.HasEvents = IsDocumented(section, "events");
-            
-            var jss = new JavaScriptSerializer();
-            ViewBag.Navigation = jss.Deserialize<IDictionary<string, NavigationWidget[]>>(IOFile.ReadAllText(Server.MapPath("~/App_Data/web.nav.json")));
 
+            LoadNavigation(suite);
             FindCurrentExample();
 
-            return View(section + "/" + example);
+            return View(
+                string.Format("~/Views/{0}/{1}/{2}.cshtml", suite, section, example)
+            );
+        }
+
+        public ActionResult SectionIndex(string suite, string section)
+        {
+            return RedirectPermanent(Url.Action("Index", new { suite = suite, section = section, example = "index" }));
+        }
+
+        protected void LoadNavigation(string suite)
+        {
+            var navigationJson = IOFile.ReadAllText(
+                Server.MapPath(
+                    string.Format("~/App_Data/{0}.nav.json", suite)
+                )
+            );
+
+            ViewBag.Navigation = Serializer.Deserialize<IDictionary<string, NavigationWidget[]>>(navigationJson);
         }
 
         protected void FindCurrentExample()

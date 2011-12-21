@@ -80,10 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ThemeBuilderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StaticController.cs" />
     <Compile Include="Controllers\SourceController.cs" />
-    <Compile Include="Controllers\WebController.cs" />
+    <Compile Include="Controllers\SuiteController.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -93,6 +95,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App_Data\dataviz.nav.json" />
     <None Include="App_Data\web.nav.json" />
     <Content Include="content\shared\js\console.js" />
     <Content Include="content\shared\js\examples.js" />
@@ -252,8 +255,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\SourceLayout.cshtml" />
     <Content Include="Views\Shared\ExampleLayout.cshtml" />
+    <Content Include="Views\ThemeBuilder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\DataViz\" />
     <Folder Include="Views\web\" />
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@ namespace Kendo.Controllers
     public class StaticController : BaseController
     {
         //
-        // GET: /Source/
+        // GET: /src/(js|styles)/file
 
         public ActionResult Resource(string assetGroup, string assetType, string file)
         {
