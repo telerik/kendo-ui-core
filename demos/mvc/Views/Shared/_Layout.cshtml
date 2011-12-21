@@ -39,10 +39,10 @@
 
                 <div id="topnavWrap" class="centerWrap">
                     <ul id="topnav">
-                        <li><a id="web" class="first" href="web/overview/index.html">Web</a></li>
-                        <li><a id="dataviz" href="dataviz/overview/index.html">DataViz</a></li>
-                        <li><a id="mobile" href="mobile/index.html">Mobile</a></li>
-                        <li><a id="themebuilder" class="last" href="themebuilder/index.html">ThemeBuilder</a></li>
+                        <li><a id="web" class="first @(ViewBag.Suite == "web" ? "selected" : "")" href="web/overview/index.html">Web</a></li>
+                        <li><a id="dataviz" class="@(ViewBag.Suite == "dataviz" ? "selected" : "")" href="dataviz/overview/index.html">DataViz</a></li>
+                        <li><a id="mobile" class="@(ViewBag.Suite == "mobile" ? "selected" : "")" href="mobile/index.html">Mobile</a></li>
+                        <li><a id="themebuilder" class="last @(ViewBag.Suite == "themebuilder" ? "selected" : "")" href="themebuilder/index.html">ThemeBuilder</a></li>
                     </ul>
 
                     <div id="examplesThemeChooser">
@@ -60,7 +60,7 @@
                         <ul class="nav">
                         @foreach (NavigationWidget widget in ViewBag.Navigation[category])
                         {
-                            <li>
+                            <li class="@(ViewBag.Section == widget.Name ? "k-state-active k-state-highlighted" : "")">
                                 <span class="k-link k-header">
                                     <span class="k-sprite @widget.SpriteCssClass"></span>
                                     @widget.Text
@@ -68,7 +68,7 @@
                                 <ul>
                                     @foreach (NavigationExample example in widget.Items) {
                                         <li>
-                                            <a class="k-link" href="@(Url.Content("~/web/") + example.Url)">@example.Text</a>
+                                            <a class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")" href="@(Url.Content("~/web/") + example.Url)">@example.Text</a>
                                         </li>
                                     }
                                 </ul>

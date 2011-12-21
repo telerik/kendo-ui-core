@@ -45,50 +45,6 @@
             skin: /kendo\.\w+(\.min)?\.css/i
         };
 
-    function selectCategory() {
-        var loc = window.location.href.toLowerCase();
-
-        var navWrap = $("#navWrap").empty();
-
-        function navigationSection(dataSource) {
-            return $("<ul class='nav' />")
-                .kendoPanelBar({
-                    animation: { expand: { effects: 'fadeIn expand:vertical' } },
-                    expandMode: "single",
-                    dataSource: dataSource
-                });
-        }
-
-        var categoriesLength = 0;
-
-        for (var i in categories) {
-            if (categories.hasOwnProperty(i)) {
-                categoriesLength++;
-            }
-        }
-
-        for (var i in categories) {
-            if (categoriesLength > 1) {
-                navWrap.append("<h3>" + i + "</h3>")
-            }
-
-            navWrap.append(navigationSection(categories[i]));
-        }
-
-        if (!referenceUrl) {
-            referenceUrl = $("#referenceUrl")[0].href;
-
-            if (category == "web" || category == "dataviz") {
-                referenceUrl += category + "/";
-            }
-        }
-
-        $("#navWrap li a").each(function() {
-            var match = $(this).attr("href").match(regexes.nav);
-            $(this).attr("href", referenceUrl + (match ? match[1] : ""));
-        });
-    };
-
     Application = {
         load: function(href) {
             $(document)
@@ -447,35 +403,6 @@
 
     function initializeNavigation() {
         var url = window.normalizedUrl = getNormalizedUrl(), link;
-
-        if (/\/web\//i.test(url)) {
-            category = "web";
-        } else if (/\/dataviz\//i.test(url)) {
-            category = "dataviz";
-        } else if (/\/mobile\//i.test(url)) {
-            category = "mobile";
-        } else if (/\/themebuilder\//i.test(url)) {
-            category = "themebuilder";
-        }
-
-        $("#topnav .selected").removeClass("selected");
-        $("#topnav #" + category).addClass("selected");
-
-        if (typeof categories != "undefined") {
-            url = url.match(regexes.nav);
-
-            if (url) {
-                url = url[1].toLowerCase();
-
-                selectCategory();
-
-                link = $("#navWrap .k-link[href*='" + url + "']")
-                    .addClass("k-state-selected chosen");
-
-                link.closest(".k-panelbar").data("kendoPanelBar")
-                    .expand(link.parent().parents(".k-item"), false);
-            }
-        }
 
         $(document).ready( function () {
             var themes = new kendo.data.DataSource({

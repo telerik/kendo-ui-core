@@ -1,6 +1,7 @@
 {   "UI Widgets": [
         {
             "text": "Overview",
+            "name": "overview",
             "spriteCssClass": "overviewIcon",
             "expanded": true,
             "items": [
@@ -12,6 +13,7 @@
         },
         {
             "text": "AutoComplete",
+            "name": "autocomplete",
             "spriteCssClass": "autocompleteIcon",
             "items": [
                 {
@@ -38,6 +40,7 @@
         },
         {
             "text": "Calendar",
+            "name": "calendar",
             "spriteCssClass": "calendarIcon",
             "items": [
                 {
@@ -60,6 +63,7 @@
         },
         {
             "text": "ComboBox",
+            "name": "combobox",
             "spriteCssClass": "comboBoxIcon",
             "items": [
                 {
@@ -86,6 +90,7 @@
         },
         {
             "text": "DatePicker",
+            "name": "datepicker",
             "spriteCssClass": "datepickerIcon",
             "items": [
                 {
@@ -112,6 +117,7 @@
         },
         {
             "text": "DropDownList",
+            "name": "dropdownlist",
             "spriteCssClass": "dropDownListIcon",
             "items": [
                 {
@@ -138,6 +144,7 @@
         },
         {
             "text": "Grid",
+            "name": "grid",
             "spriteCssClass": "gridIcon",
             "items": [
                 {
@@ -204,6 +211,7 @@
         },
         {
             "text": "Menu",
+            "name": "menu",
             "spriteCssClass": "menuIcon",
             "items": [
                 {
@@ -226,6 +234,7 @@
         },
         {
             "text": "NumericTextBox",
+            "name": "numerictextbox",
             "spriteCssClass": "numerictextboxIcon",
             "items": [
                 {
@@ -244,6 +253,7 @@
         },
         {
             "text": "PanelBar",
+            "name": "panelbar",
             "spriteCssClass": "panelBarIcon",
             "items": [
                 {
@@ -270,6 +280,7 @@
         },
         {
             "text": "Slider",
+            "name": "slider",
             "spriteCssClass": "sliderIcon",
             "items": [
                 {
@@ -288,6 +299,7 @@
         },
         {
             "text": "Splitter",
+            "name": "splitter",
             "spriteCssClass": "splitterIcon",
             "items": [
                 {
@@ -310,6 +322,7 @@
         },
         {
             "text": "TabStrip",
+            "name": "tabstrip",
             "spriteCssClass": "tabStripIcon",
             "items": [
                 {
@@ -336,6 +349,7 @@
         },
         {
             "text": "TimePicker",
+            "name": "timepicker",
             "spriteCssClass": "timepickerIcon",
             "items": [
                 {
@@ -358,6 +372,7 @@
         },
         {
             "text": "TreeView",
+            "name": "treeview",
             "spriteCssClass": "treeViewIcon",
             "items": [
                 {
@@ -380,6 +395,7 @@
         },
         {
             "text": "Upload",
+            "name": "upload",
             "spriteCssClass": "uploadIcon",
             "items": [
                 {
@@ -402,6 +418,7 @@
         },
         {
             "text": "Window",
+            "name": "window",
             "spriteCssClass": "windowIcon",
             "items": [
                 {
@@ -430,6 +447,7 @@
     "Framework": [
         {
             "text": "DataSource",
+            "name": "datasource",
             "spriteCssClass": "dataSourceIcon",
             "items": [
                 {
@@ -456,6 +474,7 @@
         },
         {
             "text": "Templates",
+            "name": "templates",
             "spriteCssClass": "templatesIcon",
             "items": [
                 {
@@ -470,6 +489,7 @@
         },
         {
             "text": "Drag & Drop",
+            "name": "dragdrop",
             "spriteCssClass": "dragdropIcon",
             "items": [
                 {
@@ -484,6 +504,7 @@
         },
         {
             "text": "Validator",
+            "name": "validator",
             "spriteCssClass": "validatorIcon",
             "items": [
                 {
@@ -504,6 +525,7 @@
         },
         {
             "text": "Integration",
+            "name": "integration",
             "spriteCssClass": "integrationIcon",
             "items": [
                 {

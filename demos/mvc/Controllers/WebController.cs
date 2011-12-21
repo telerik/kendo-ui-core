@@ -54,6 +54,7 @@ namespace Kendo.Controllers
 
         public ActionResult Index(string section, string example)
         {
+            ViewBag.Suite = "web";
             ViewBag.Section = section;
             ViewBag.Example = example;
             ViewBag.Description = LoadDescription(section);
