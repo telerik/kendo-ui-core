@@ -54,7 +54,7 @@
             var exampleWrap = $("#exampleWrap"),
                 mainWrap = $("#main");
 
-            $.get(href, function(html) {
+            $.get(href, { partial: 1 }, function(html) {
                 exampleWrap.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                     mainWrap.replaceWith(html);
                     setTimeout(function() {
