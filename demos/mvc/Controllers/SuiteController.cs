@@ -56,10 +56,10 @@ namespace Kendo.Controllers
             ViewBag.Suite = suite;
             ViewBag.Section = section;
             ViewBag.Example = example;
-            ViewBag.Description = LoadDescription(section);
-            ViewBag.HasConfiguration = IsDocumented(section, "configuration");
-            ViewBag.HasMethods = IsDocumented(section, "methods");
-            ViewBag.HasEvents = IsDocumented(section, "events");
+            ViewBag.Description = LoadDescription(suite, section);
+            ViewBag.ConfigurationDocPath = DocPath(suite, section, "configuration");
+            ViewBag.MethodsDocPath = DocPath(suite, section, "methods");
+            ViewBag.EventsDocPath = DocPath(suite, section, "events");
 
             LoadNavigation(suite);
             FindCurrentExample();
@@ -106,20 +106,38 @@ namespace Kendo.Controllers
             }
         }
 
-        private bool IsDocumented(string section, string topic){
-            return IOFile.Exists(Server.MapPath(string.Format("~/content/docs/kendo.ui.{0}.{1}.html", section, topic)));
-        }
-
-        protected string LoadDescription(string section) {
-            var path = Server.MapPath(string.Format(
-                "~/content/docs/kendo.ui.{0}.description.html", section)
-            );
-
-            if (IOFile.Exists(path)) {
-                return IOFile.ReadAllText(path);
+        protected string LoadDescription(string suite, string section) {
+            var path = DocPath(suite, section, "description");
+            var description = "";
+            
+            if (path != null) {
+                description = IOFile.ReadAllText(Server.MapPath(path));
             }
 
-            return "";
+            return description;
+        }
+
+        private string DocPath(string suite, string section, string topic)
+        {
+            var component = section;
+
+            if (suite == "dataviz")
+            {
+                component = "chart";
+            }
+
+            var path = string.Format(
+                "~/content/docs/kendo.ui.{0}.{1}.html", component, topic
+            );
+
+            if (IOFile.Exists(Server.MapPath(path)))
+            {
+                return path;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

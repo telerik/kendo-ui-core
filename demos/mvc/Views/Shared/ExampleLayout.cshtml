@@ -21,15 +21,18 @@
             <li class="k-state-active">Description</li>
             <li>View Code</li>
 
-            @if (ViewBag.HasConfiguration) {
+            @if (ViewBag.ConfigurationDocPath != null)
+            {
                 <li>Configuration</li>
             }
 
-            @if (ViewBag.HasMethods) {
+            @if (ViewBag.MethodsDocPath != null)
+            {
                 <li>Methods</li>
             }
 
-            @if (ViewBag.HasEvents) {
+            @if (ViewBag.EventsDocPath != null)
+            {
                 <li>Events</li>
             }
         </ul>
@@ -44,9 +47,9 @@
     $("#codeStrip").kendoTabStrip({
         contentUrls: [null,
         "@Url.RouteUrl("Source", new { section = ViewBag.Section, example = ViewBag.Example })",
-        "@Url.Content(string.Format("~/content/docs/kendo.ui.{0}.configuration.html", ViewBag.Section))",
-        "@Url.Content(string.Format("~/content/docs/kendo.ui.{0}.methods.html", ViewBag.Section))",
-        "@Url.Content(string.Format("~/content/docs/kendo.ui.{0}.events.html", ViewBag.Section))"
+        "@Url.ContentOrEmpty((string) ViewBag.ConfigurationDocPath)",
+        "@Url.ContentOrEmpty((string) ViewBag.MethodsDocPath)",
+        "@Url.ContentOrEmpty((string) ViewBag.EventsDocPath)"
         ],
         contentLoad: function() {
             prettyPrint();

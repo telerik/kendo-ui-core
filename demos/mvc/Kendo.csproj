@@ -85,6 +85,7 @@
     <Compile Include="Controllers\StaticController.cs" />
     <Compile Include="Controllers\SourceController.cs" />
     <Compile Include="Controllers\SuiteController.cs" />
+    <Compile Include="Extensions\UrlExtensions.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
