@@ -74,13 +74,9 @@
             $("head").append(element);
 
             setTimeout(function () {
-                if (callback)
-                    callback();
-
+                callback();
                 element.remove();
             }, 100);
-
-            return element;
         },
 
         fetchSkin: function(skinName, animate) {
