@@ -1,5 +1,5 @@
 @{
-    if (!Request.IsAjaxRequest()) {
+    if (!Request.Params.AllKeys.Contains("partial")) {
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 }
