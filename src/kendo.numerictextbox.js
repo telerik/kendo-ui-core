@@ -199,7 +199,7 @@
         enable: function(enable) {
             var that = this,
                 text = that._text,
-                element = that.element;
+                element = that.element,
                 wrapper = that._inputWrapper,
                 upArrow = that._upArrow,
                 downArrow = that._downArrow;
