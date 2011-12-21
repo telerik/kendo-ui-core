@@ -54,6 +54,8 @@
         LINE = "line",
         LINE_MARKER_SIZE = 8,
         LINEAR = "linear",
+        MAX_VALUE = Number.MAX_VALUE,
+        MIN_VALUE = -Number.MAX_VALUE,
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER = "mouseover",
         NONE = "none",
@@ -1173,6 +1175,7 @@
                 markerSize = legend.markerSize(),
                 group = view.createGroup({ zIndex: options.zIndex }),
                 border = options.border || {},
+                padding,
                 markerBox,
                 labelBox,
                 color,
@@ -1186,7 +1189,7 @@
                 color = items[i].color;
                 label = children[i];
                 markerBox = new Box2D();
-                    box = label.box;
+                box = label.box;
 
                 labelBox = labelBox ? labelBox.wrap(box) : box.clone();
 
@@ -1205,7 +1208,7 @@
             }
 
             if (children.length > 0) {
-                var padding = getSpacing(options.padding);
+                padding = getSpacing(options.padding);
                 padding.left += markerSize * 2;
                 labelBox.pad(padding);
                 group.children.unshift(view.createRect(labelBox, {
@@ -1228,11 +1231,13 @@
                 offsetX,
                 offsetY,
                 margin = getSpacing(options.margin),
-                markerSpace = legend.markerSize() * 2;
+                markerSpace = legend.markerSize() * 2,
+                label,
+                i;
 
             // Position labels below each other
-            for (var i = 1; i < childrenCount; i++) {
-                var label = legend.children[i];
+            for (i = 1; i < childrenCount; i++) {
+                label = legend.children[i];
                 label.box.alignTo(legend.children[i - 1].box, BOTTOM);
                 labelBox.wrap(label.box);
             }
@@ -1456,20 +1461,88 @@
             return tickSize;
         },
 
-        arrangeLabels: function(maxLabelWidth, maxLabelHeight, positions) {
+        renderPlotBands: function(view) {
             var axis = this,
                 options = axis.options,
+                plotBands = options.plotBands || [],
+                isVertical = options.orientation === VERTICAL,
+                result = [],
+                plotArea = axis.parent,
+                slotX,
+                slotY;
+
+            if (plotBands.length) {
+                result = map(plotBands, function(item) {
+                    item.from = item.from || MIN_VALUE;
+                    item.to = item.to || MAX_VALUE;
+                    slotX = isVertical ? plotArea.axisX.getAxisLineBox()  : plotArea.axisX.getSlot(item.from, item.to);
+                    slotY = isVertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.getAxisLineBox();
+                    return view.createRect(
+                            new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
+                            { fill: item.color, opacity: item.opacity, zIndex: -1 });
+                });
+            }
+
+            return result;
+        },
+
+        reflowAxis: function(box, position) {
+            var axis = this,
+                options = axis.options,
+                isVertical = options.orientation === VERTICAL,
+                labels = axis.labels,
+                count = labels.length,
+                space = axis.getActualTickSize() + options.margin,
+                maxLabelHeight = 0,
+                maxLabelWidth = 0,
+                title = axis.title,
+                label,
+                i;
+
+            for (i = 0; i < count; i++) {
+                label = labels[i];
+                maxLabelHeight = math.max(maxLabelHeight, label.box.height());
+                maxLabelWidth = math.max(maxLabelWidth, label.box.width());
+            }
+
+            if (title) {
+                if (isVertical) {
+                    maxLabelWidth += title.box.width()
+                } else {
+                    maxLabelHeight += title.box.height();
+                }
+            }
+
+            if (isVertical) {
+                axis.box = new Box2D(
+                    box.x1, box.y1,
+                    box.x1 + maxLabelWidth + space, box.y2
+                );
+            } else {
+                axis.box = new Box2D(
+                    box.x1, box.y1,
+                    box.x2, box.y1 + maxLabelHeight + space
+                );
+            }
+
+            axis.arrangeTitle(title, isVertical, axis.box);
+            axis.arrangeLabels(maxLabelWidth, maxLabelHeight, position);
+        },
+
+        arrangeLabels: function(maxLabelWidth, maxLabelHeight, position) {
+            var axis = this,
+                options = axis.options,
+                labels = axis.labels,
                 isVertical = axis.options.orientation === VERTICAL,
-                children = axis.children,
                 tickPositions = axis.getMajorTickPositions(),
                 tickSize = axis.getActualTickSize(),
                 labelBox,
                 labelY,
                 i;
 
-            for (i = 0; i < children.length; i++) {
-                var label = children[i],
-                    tickIx = isVertical ? (children.length - 1 - i) : i,
+            for (i = 0; i < labels.length; i++) {
+                var label = labels[i],
+                    tickIx = isVertical ? (labels.length - 1 - i) : i,
                     labelSize = isVertical ? label.box.height() : label.box.width(),
                     labelPos = tickPositions[tickIx] - (labelSize / 2),
                     firstTickPosition,
@@ -1478,7 +1551,7 @@
                     labelX;
 
                 if (isVertical) {
-                    if (positions == ON_MINOR_TICKS) {
+                    if (position == ON_MINOR_TICKS) {
                         firstTickPosition = tickPositions[i];
                         nextTickPosition = tickPositions[i + 1];
 
@@ -1490,7 +1563,7 @@
                     labelBox = new Box2D(labelX - label.box.width(), labelPos,
                                          labelX, labelPos)
                 } else {
-                    if (positions == ON_MINOR_TICKS) {
+                    if (position == ON_MINOR_TICKS) {
                         firstTickPosition = tickPositions[i];
                         nextTickPosition = tickPositions[i + 1];
                     } else {
@@ -1507,27 +1580,29 @@
             }
         },
 
-        renderPlotBands: function(view) {
-            var axis = this,
-                options = axis.options,
-                plotBands = options.plotBands || [],
-                isVertical = options.orientation === VERTICAL,
-                result = [],
-                plotArea = axis.parent,
-                slotX,
-                slotY;
-
-            if (plotBands.length) {
-                result = map(plotBands, function(item) {
-                    slotX = isVertical ? plotArea.axisX.getSlot(-Number.MAX_VALUE, Number.MAX_VALUE) : plotArea.axisX.getSlot(item.from, item.to);
-                    slotY = isVertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.getSlot(-Number.MAX_VALUE, Number.MAX_VALUE);
-                    return view.createRect(
-                            new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
-                            { fill: item.color, opacity: item.opacity, zIndex: -1 });
-                });
+        arrangeTitle: function(title, isVertical, box) {
+            if (title) {
+                if (isVertical) {
+                    title.options.align = LEFT;
+                    if (title.options.position === TOP) {
+                        title.options.vAlign = TOP;
+                    } else if (title.options.position === BOTTOM) {
+                        title.options.vAlign = BOTTOM;
+                    } else {
+                        title.options.vAlign = CENTER;
+                    }
+                } else {
+                    if (title.options.position === LEFT) {
+                        title.options.align = LEFT;
+                    } else if (title.options.position === RIGHT) {
+                        title.options.align = RIGHT;
+                    } else {
+                        title.options.align = CENTER;
+                    }
+                    title.options.vAlign = BOTTOM;
+                }
+                title.reflow(box);
             }
-
-            return result;
         }
     });
 
@@ -1536,7 +1611,6 @@
             var axis = this,
                 defaultOptions = axis.initDefaults(seriesMin, seriesMax, options),
                 labelTemplate,
-                text,
                 i;
 
             Axis.fn.init.call(axis, defaultOptions);
@@ -1544,23 +1618,38 @@
 
             var majorDivisions = axis.getDivisions(options.majorUnit),
                 currentValue = options.min,
-                align = options.orientation === VERTICAL ? RIGHT : CENTER,
+                isVertical = options.orientation === VERTICAL,
+                align = isVertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex
                 }),
-                labelText;
+                labelText,
+                titleOptions = deepExtend({}, {
+                    rotation: isVertical ? -90 : 0,
+                    text: "",
+                    zIndex: 1
+                }, options.title),
+                label,
+                title;
 
+            axis.labels = [];
             for (i = 0; i < majorDivisions; i++) {
                 if (labelOptions.template) {
                     labelTemplate = baseTemplate(labelOptions.template);
                     labelText = labelTemplate({ value: currentValue });
                 }
 
-                text = new TextBox(labelText || currentValue, labelOptions);
-
-                axis.append(text);
+                label = new TextBox(labelText || currentValue, labelOptions);
+                axis.append(label);
+                axis.labels.push(label);
 
                 currentValue = round(currentValue + options.majorUnit, DEFAULT_PRECISION);
+            }
+
+            if (options.title) {
+                title = new TextBox(titleOptions.text, titleOptions);
+                axis.append(title);
+                axis.title = title;
             }
         },
 
@@ -1624,36 +1713,7 @@
         },
 
         reflow: function(targetBox) {
-            var axis = this,
-                options = axis.options,
-                isVertical = options.orientation === VERTICAL,
-                children = axis.children,
-                space = axis.getActualTickSize() + options.margin,
-                maxLabelWidth = 0,
-                maxLabelHeight = 0,
-                count = children.length,
-                label,
-                i;
-
-            for (i = 0; i < count; i++) {
-                label = children[i];
-                maxLabelWidth = math.max(maxLabelWidth, label.box.width());
-                maxLabelHeight = math.max(maxLabelHeight, label.box.height());
-            }
-
-            if (isVertical) {
-                axis.box = new Box2D(
-                    targetBox.x1, targetBox.y1,
-                    targetBox.x1 + maxLabelWidth + space, targetBox.y2
-                );
-            } else {
-                axis.box = new Box2D(
-                    targetBox.x1, targetBox.y1,
-                    targetBox.x2, targetBox.y1 + maxLabelHeight + space
-                );
-            }
-
-            axis.arrangeLabels(maxLabelWidth, maxLabelHeight);
+            this.reflowAxis(targetBox);
         },
 
         getViewElements: function(view) {
@@ -1666,11 +1726,11 @@
 
             if (options.line.width > 0) {
                 lineOptions = {
-                        strokeWidth: options.line.width,
-                        stroke: options.line.color,
-                        dashType: options.line.dashType,
-                        zIndex: options.zIndex
-                    };
+                    strokeWidth: options.line.width,
+                    stroke: options.line.color,
+                    dashType: options.line.dashType,
+                    zIndex: options.zIndex
+                };
                 if (isVertical) {
                     childElements.push(view.createLine(
                         axis.box.x2, tickPositions[0],
@@ -1868,15 +1928,24 @@
             Axis.fn.init.call(axis, options);
 
             var options = axis.options,
-                align = options.orientation === VERTICAL ? RIGHT : CENTER,
+                isVertical = options.orientation === VERTICAL,
+                align = isVertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels,
                     { align: align, zIndex: options.zIndex }
                 ),
                 labelTemplate,
                 count = options.categories.length,
                 content,
-                i;
+                i,
+                titleOptions = deepExtend({}, {
+                    rotation: isVertical ? -90 : 0,
+                    text: "",
+                    zIndex: 1
+                }, options.title),
+                label,
+                title;
 
+            axis.labels = [];
             for (i = 0; i < count; i++) {
                 content = defined(options.categories[i]) ? options.categories[i] : "";
 
@@ -1885,7 +1954,15 @@
                     content = labelTemplate({ value: content });
                 }
 
-                axis.append(new TextBox(content, labelOptions));
+                label = new TextBox(content, labelOptions);
+                axis.append(label);
+                axis.labels.push(label);
+            }
+
+            if (options.title) {
+                title = new TextBox(titleOptions.text, titleOptions);
+                axis.append(title);
+                axis.title = title;
             }
         },
 
@@ -1901,35 +1978,7 @@
         },
 
         reflow: function(targetBox) {
-            var axis = this,
-                options = axis.options,
-                isVertical = options.orientation === VERTICAL,
-                children = axis.children,
-                space = axis.getActualTickSize() + options.margin,
-                maxLabelHeight = 0,
-                maxLabelWidth = 0,
-                label,
-                i;
-
-            for (i = 0; i < children.length; i++) {
-                label = children[i];
-                maxLabelHeight = math.max(maxLabelHeight, label.box.height());
-                maxLabelWidth = math.max(maxLabelWidth, label.box.width());
-            }
-
-            if (isVertical) {
-                axis.box = new Box2D(
-                    targetBox.x1, targetBox.y1,
-                    targetBox.x1 + maxLabelWidth + space, targetBox.y2
-                );
-            } else {
-                axis.box = new Box2D(
-                    targetBox.x1, targetBox.y1,
-                    targetBox.x2, targetBox.y1 + maxLabelHeight + space
-                );
-            }
-
-            axis.arrangeLabels(maxLabelWidth, maxLabelHeight, ON_MINOR_TICKS);
+            this.reflowAxis(targetBox, ON_MINOR_TICKS);
         },
 
         getViewElements: function(view) {
@@ -2001,8 +2050,7 @@
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                children = axis.children,
-                childrenCount = math.max(1, children.length),
+                childrenCount = math.max(1, axis.labels.length),
                 from = math.max(0, from),
                 to = math.min(childrenCount, to),
                 box = axis.box,
@@ -2310,8 +2358,8 @@
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
-            chart._seriesMin = Number.MAX_VALUE;
-            chart._seriesMax = - Number.MAX_VALUE;
+            chart._seriesMin = MAX_VALUE;
+            chart._seriesMax = MIN_VALUE;
 
             chart.points = [];
             chart.categoryPoints = [];
@@ -2864,7 +2912,7 @@
                 axis = isVertical ? X : Y,
                 pos = isVertical ? x : y,
                 points = chart.seriesPoints[seriesIx],
-                nearestPointDistance = Number.MAX_VALUE,
+                nearestPointDistance = MAX_VALUE,
                 pointsLength = points.length,
                 currentPoint,
                 pointBox,
@@ -2982,8 +3030,8 @@
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
-            chart._seriesMin = [Number.MAX_VALUE, Number.MAX_VALUE];
-            chart._seriesMax = [-Number.MAX_VALUE, -Number.MAX_VALUE];
+            chart._seriesMin = [MAX_VALUE, MAX_VALUE];
+            chart._seriesMax = [MIN_VALUE, MIN_VALUE];
             chart.points = [];
             chart.seriesPoints = [];
 
@@ -4972,8 +5020,8 @@
     }
 
     function sparseArrayLimits(arr) {
-        var min = Number.MAX_VALUE,
-            max = - Number.MAX_VALUE;
+        var min = MAX_VALUE,
+            max = MIN_VALUE;
         for (var i = 0, length = arr.length; i < length; i++) {
             var n = arr[i];
             if (defined(n)) {
