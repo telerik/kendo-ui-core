@@ -29,7 +29,7 @@ namespace Kendo.Controllers
                 var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, writer);
                 viewResult.View.Render(viewContext, writer);
 
-                return "<pre id='code' class='prettyprint'>" + HttpUtility.HtmlEncode(writer.GetStringBuilder().ToString()) + "</pre>";
+                return "<pre id='code' class='codeContainer prettyprint'>" + HttpUtility.HtmlEncode(writer.GetStringBuilder().ToString()) + "</pre>";
             }
         }
     }

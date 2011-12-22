@@ -10,6 +10,7 @@
     <script src="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "js", file = scriptName })"></script>
     }
     <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
+    <script src="@Url.Content("~/content/shared/js/console.js")"></script>
     <script src="@Url.Content("~/content/shared/js/prettify.js")"></script>
 </head>
 <body>
@@ -32,7 +33,8 @@
                             @widget.Text
                         </span>
                         <ul>
-                            @foreach (NavigationExample example in widget.Items) {
+                            @foreach (NavigationExample example in widget.Items)
+                            {
                                 <li>
                                     <a class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")"
                                         href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>

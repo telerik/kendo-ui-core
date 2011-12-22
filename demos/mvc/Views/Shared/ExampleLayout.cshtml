@@ -16,6 +16,8 @@
         </div>
     </div>
 
+    @if (ViewBag.ShowCodeStrip == true)
+    {
     <div id="codeStrip">
         <ul>
             <li class="k-state-active">Description</li>
@@ -36,11 +38,12 @@
                 <li>Events</li>
             }
         </ul>
-        <div>
+        <div class="description">
             @Html.Raw(ViewBag.Description)
             @RenderSection("Description", false)
         </div>
     </div>
+    }
 </div>
 
 <script>
