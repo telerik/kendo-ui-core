@@ -19,10 +19,6 @@
     </head>
     <body>
         <form>
-            <button data-click="removeProduct">Remove a product</button>
-            <button data-click="addProduct">Add a product</button>
-            <button data-click="selectFirst">Select "Food"</button>
-
             <div data-template="div-template"></div>
 
             <fieldset>
@@ -37,10 +33,9 @@
                     <option value="${id}">${name}</option>
                 </script>
                 <script type="text/x-kendo-tmpl" id="div-template">
-                    # if (selectedProduct["foo"]) {
-                        "option strict"
+                    # if (get("selectedProduct")) {
                     #
-                        Selected product is #= selectedProduct.name #
+                        Selected product is #= get("selectedProduct.name") #
                     # } else { #
                         No selected product
                     # } #
@@ -49,30 +44,6 @@
         </form>
 
         <script>
-            var template = $("#div-template").html();
-            var parts = kendo.Template.scan(template);
-            var keywords = {};
-
-            $.each("if else with for while switch case do".split(" "), function() {
-                keywords[this] = true;
-            });
-
-            var identifiers = [];
-            for (var i = 1; i < parts.length; i+=2) {
-                var match = parts[i].match(/([$A-Za-z_][.\[\]'"0-9A-Za-z_]*)/g);
-                if (match) {
-                    identifiers.push.apply(identifiers, match);
-                }
-            }
-
-            console.log(identifiers);
-
-            identifiers = $.grep(identifiers, function(identifier) {
-                return !keywords[identifier];
-            });
-
-            console.log(identifiers);
-
             var viewModel = kendo.observable({
                 products: [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" } ],
                 selectedProduct: null,
