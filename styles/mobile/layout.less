@@ -106,7 +106,7 @@ html, body
     height: 100%;
     -ms-content-zooming: none;
     -webkit-user-select: none;
-    -webkit-text-size-adjust: none;
+    //-webkit-text-size-adjust: none;
 }
 
 body
@@ -265,22 +265,21 @@ body
     border-color: #2f3740 #394d68 #375073;
     background-color: #7185a2;
     background-image: linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.45) 6%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.15) 50%, rgba(100,100,100,0));
-    text-shadow: 0 -1pt #465971;
+    text-shadow: 0 -1px rgba(0,0,0,.3);
     text-decoration: none;
 }
 
 .km-ios .km-button
 {
-    border-color: #2f3740 #394d68 #375073;
-    background: linear-gradient(top, rgba(0,0,0,.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
+    border-color: rgba(0,0,0,.5) rgba(0,0,0,.3) rgba(0,0,0,.3);
+    background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
                 linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
     background-color: #496b9a;
-    .box-shadow(0 1px 1px #ccc);
+    .box-shadow(0 1px 1px rgba(255,255,255,.5));
 }
 
 .km-ios .km-button:active
 {
-    border-color: #2a2e37 #26334e #1d2f51;
     background-color: #263e6c;
 }
 
@@ -305,10 +304,10 @@ body
 
 .km-ios .km-back
 {
-    margin-left: 9px;
+    margin-left: 11px;
 }
 
-.km-ios .km-back *
+.km-ios .km-back .km-text
 {
     position: relative;
     z-index: 1;
@@ -316,34 +315,37 @@ body
 
 .km-ios .km-back:before
 {
-    content: " ";
-    background-image: linear-gradient(left top, rgb(138,161,191), rgb(88,119,162) 50%, rgb(71,105,153) 50%, rgb(74,108,155));
-    border-left: solid 1px #2f3740;
-    border-bottom: solid 1px #394d68;
-    width: 1.8em;
-    height: 1.8em;
+    margin-bottom: 2px;
+    content: "\a0";
+    background: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 90%, rgba(70,70,70,.5)),
+                linear-gradient(left top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
+    background-color: inherit;
+    -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000000), color-stop(0.50,#000000), color-stop(0.50, transparent), to(transparent));
+    border-left: solid 1px rgba(0,0,0,.5);
+    border-bottom: solid 1px #aaa;
+    width: 1.6em;
+    height: 1.66em;
+    width: 1.45rem;
+    height: 1.5rem;
     display: block;
-    -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000000), color-stop(0.4,#000000), color-stop(0.5, transparent), to(transparent));
     position: absolute;
-    left: -.6em;
-    top: .2em;
-    .border-radius(.5em 0 .5em .3em);
+    overflow: hidden;
+    left: -.76em;
+    left: -.68rem;
+    top: 0.32em;
+    top: 0.3rem;
     .transform(rotate(45deg));
     .box-sizing(border-box);
-    .box-shadow(-1px 1px 1px #ccc);
+    .border-radius(.2em 0 .2em .4em);
 }
 
 .km-ios :-moz-first-node.km-back:before
 {
-    border-radius: 0.5em 1em 0.5em 0.3em;
-    height: 1.7em;
+    border-radius: 0 1em 0 0.4em;
     left: -0.6em;
-    top: 0.16em;
-}
-
-.km-ios .km-back:active:before {
-    border-color: #2a2e37 #26334e #1d2f51;
-    background-image: linear-gradient(left top, rgb(121,132,162), rgb(58,78,120) 50%, rgb(37,60,106) 50%, rgb(39,63,109));
+    top: 0.3em;
+    width: 1.4rem;
+    height: 1.5rem;
 }
 
 .km-switch,
@@ -389,7 +391,8 @@ body
     width: 200%;
     background:
         linear-gradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%, rgb(250, 250, 250) 50%, rgb(255, 255, 255)) 6em 0 no-repeat,
-        linear-gradient(top, rgb(50, 120, 239), rgb(54, 128, 248) 50%, rgb(79, 146, 243) 50%, rgb(115, 171, 252)) 0 0 no-repeat;
+        linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat;
+    background-color: #3074e7;
 }
 
 .km-switch-container
@@ -515,7 +518,7 @@ body
     left: -2.8em;
     color: #fff;
     position: absolute;
-    text-shadow: 0 -1px 0 #0e203e;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.5);
 }
 
 .km-android .km-switch
@@ -738,7 +741,7 @@ body
     background-image: linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
 }
 
-.km-message
+.km-badge
 {
     display: inline-block;
     color: #FFF;
@@ -754,14 +757,14 @@ body
     position: absolute;
     width: 1.6em;
     .border-radius(2em);
-    background-color: #BB0000;
-    background-image: linear-gradient(top, rgba(241, 150, 155, 1), rgba(230, 70, 78, .5) 50%, rgba(222, 11, 21, .5) 50%, rgba(183, 0, 0, 0));
-    .box-shadow(0 2px 3px #333);
+    background-color: #bc0404;
+    background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     z-index: 1;
     text-shadow: none;
+    .box-shadow(0 3px 3px #000);
 }
 
-.km-android .km-button .km-message
+.km-android .km-button .km-badge
 {
     border-color: #fb9d09;
     background-color: #000;
@@ -775,14 +778,14 @@ body
     border: 0;
 }
 
-.km-message:-moz-first-node,
-:-moz-first-node~.km-message
+.km-badge:-moz-first-node,
+:-moz-first-node~.km-badge
 {
     right: -.5em;
     top: -1em;
 }
 
-.km-blackberry .km-message
+.km-blackberry .km-badge
 {
     -webkit-box-shadow: none;
 }
@@ -855,21 +858,14 @@ body
     text-shadow: none;
 }
 
-.km-ios .km-radiogroup .km-state-hover
-{
-    color: #fff;
-    text-shadow: none;
-    border-color: #40506C #376ECC #3E75CA;
-    background-image: linear-gradient(top, rgb(64,80,108), rgb(141,174,237) 6%, rgb(66,132,229) 50%, rgb(45,120,228) 50%, rgb(45,119,224));
-}
-
 .km-ios .km-radiogroup .km-state-active
 {
     color: #fff;
     text-shadow: none;
-    border-color: #103984 #225199 #225199;
-    background-image: linear-gradient(top, rgb(40,86,178), rgb(62,128,238) 50%, rgb(73,137,244) 50%, rgb(111, 161, 234));
-    .box-shadow(inset -1px 0 2px #103984);
+    border-color: rgba(0,0,0,.4) rgba(0,0,0,.4) rgba(0,0,0,.1);
+    background-color: #3D7EEB;
+    background-image: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 50%, rgba(255,255,255,.05) 50%, rgba(255,255,255,.25));
+    .box-shadow(inset -1px 0 2px rgba(0,0,0,.6));
 }
 
 .km-blackberry .km-radiogroup,
@@ -1020,13 +1016,13 @@ body
     text-shadow: none;
 }
 
-.km-tabstrip .km-message
+.km-tabstrip .km-badge
 {
     font-size: .8em;
     font-weight: normal;
 }
 
-.km-ios .km-tabstrip .km-message
+.km-ios .km-tabstrip .km-badge
 {
     font-size: 1.1em;
 }
@@ -1042,9 +1038,9 @@ body
     min-width: 5em;
 }
 
-.km-android .km-tabstrip .km-message,
-.km-blackberry .km-tabstrip .km-message,
-.km-meego .km-tabstrip .km-message
+.km-android .km-tabstrip .km-badge,
+.km-blackberry .km-tabstrip .km-badge,
+.km-meego .km-tabstrip .km-badge
 {
     top: auto;
     bottom: -10px;
@@ -1079,7 +1075,7 @@ body
     position: relative;
 }
 
-.km-android .km-message
+.km-android .km-badge
 {
     right: -2.2em;
 }
@@ -1220,8 +1216,8 @@ body
 {
     color: #FFF;
     text-shadow: 0 1px 1px rgba(100,100,100,.8);
-    border-top: 1px solid #c5cfd6;
-    background: linear-gradient(top, rgb(136, 152, 165), rgb(172, 184, 196));
+    border-top: 1px solid rgba(255,255,255,.5);
+    background-color: #8d9daa;
     .box-shadow(0 -1px 0 #78858e);
 }
 
