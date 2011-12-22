@@ -22,6 +22,7 @@
     * @exampleTitle Initialize Kendo MobileTabstrip using a jQuery selector
     * @example
     * var tabstrip = $("#tabstrip").kendoMobileTabStrip();
+    *
     * @section
     * <h3>Tab icons</h3>
     * A tab icon can be set in two ways - either by adding an <code>img</code> element inside the <code>a</code> element, or by setting an <code>icon</code> data attribute to the <code>a</code> element.
