@@ -234,13 +234,13 @@
 
                 that.background
                     .kendoStop(true, true)
-                    .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !checked, axis: "left", duration: 150 });
+                    .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !checked, axis: "left", duration: 200 });
 
                 handle
                     .kendoStop(true, true)
                     .kendoAnimate({
                         effects: "slideTo",
-                        duration: 150,
+                        duration: 200,
                         offset: distance + "px,0",
                         complete: function () {
                             that.element[0].checked = checked;
