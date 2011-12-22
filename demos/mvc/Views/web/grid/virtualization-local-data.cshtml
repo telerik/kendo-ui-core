@@ -1,0 +1,20 @@
+
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            data: createRandomData(100000),
+                            pageSize: 50
+                        },
+                        height: 280,
+                        scrollable: {
+                            virtual: true
+                        },
+                        columns: [ "Id", "FirstName", "LastName", "City", "Title" ]
+                    });
+                });
+            </script>
+        </div>

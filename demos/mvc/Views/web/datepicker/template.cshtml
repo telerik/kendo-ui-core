@@ -1,0 +1,51 @@
+
+        <div id="example" class="k-content">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    Apply special style for the birthdays.
+                </p>
+            </div>
+
+            <input id="datepicker" />
+
+            <script>
+                $(document).ready(function() {
+                    var today = new Date(),
+                        birthdays = [
+                           +new Date(today.getFullYear(), today.getMonth(), 11),
+                           +new Date(today.getFullYear(), today.getMonth() + 1, 6),
+                           +new Date(today.getFullYear(), today.getMonth() + 1, 27),
+                           +new Date(today.getFullYear(), today.getMonth() - 1, 3),
+                           +new Date(today.getFullYear(), today.getMonth() - 2, 22)
+                        ];
+
+                    $("#datepicker").kendoDatePicker({
+                        value: today,
+                        month: {
+                            // template for dates in month view
+                            content: '# if ($.inArray(+data.date, [' + birthdays + ']) != -1) { #' +
+                                         '<div class="birthday"></div>' +
+                                     '# } #' +
+                                     '#= data.value #'
+                        },
+                        footer: "Today - #=kendo.toString(data, 'd') #"
+                    });
+
+                    $("#datepicker").data("kendoDatePicker")
+                                    .dateView.calendar.element
+                                    .width(300);
+                });
+            </script>
+
+            <style scoped>
+                .birthday {
+                    background: transparent url(../../content/web/calendar/cake.png) no-repeat 0 50%;
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    vertical-align: middle;
+                    margin-right: 3px;
+                }
+            </style>
+        </div>

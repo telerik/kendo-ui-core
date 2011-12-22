@@ -35,8 +35,4 @@ themebuilder/src/scripts/template.js
 themebuilder/src/styles/kendo.black.css
 themebuilder/src/styles/Black/
 themebuilder/src/styles/textures/
-demos/mvc/bin/Kendo.dll.mdb
-demos/mvc/bin/Kendo.pdb
-demos/mvc/Views/web/
-demos/mvc/Views/dataviz/
-demos/mvc/content/web/
+demos/mvc/bin/Kendo.*

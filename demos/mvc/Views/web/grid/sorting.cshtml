@@ -1,0 +1,66 @@
+
+        <div id="example" class="k-content">
+
+            <h3>Grid with single column sorting enabled</h3>
+            <div id="singleSort" style="width:600px;"></div>
+
+            <h3>Grid with multiple column sorting enabled</h3>
+            <div id="multipleSort" style="width:600px;"></div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#singleSort").kendoGrid({
+                        dataSource: {
+                            data: createRandomData(20),
+                            pageSize: 5
+                        },
+                        sortable: {
+                            mode: "single",
+                            allowUnsort: false
+                        },
+                        pageable: true,
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Age",
+                                title: "Age"
+                            }
+                        ]
+                    });
+
+                    $("#multipleSort").kendoGrid({
+                        dataSource: {
+                            data: createRandomData(20),
+                            pageSize: 5
+                        },
+                        sortable: {
+                            mode: "multiple",
+                            allowUnsort: true
+                        },
+                        pageable: true,
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Age"
+                            }
+                        ]
+                    });
+                });
+            </script>
+        </div>

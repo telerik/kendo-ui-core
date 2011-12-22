@@ -1,0 +1,47 @@
+
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <script>
+                function onChange(arg) {
+                    var selected = $.map(this.select(), function(item) {
+                        return $(item).text();
+                    });
+
+                    kendoConsole.log("Selected: " + selected.length + " item(s), [" + selected.join(", ") + "]");
+                }
+
+                function onDataBound(arg) {
+                    kendoConsole.log("Grid data bound");
+                }
+
+                $(document).ready(function() {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            data: createRandomData(50),
+                            pageSize: 5
+                        },
+                        change: onChange,
+                        dataBound: onDataBound,
+                        selectable: "multiple cell",
+                        pageable: true,
+                        sortable: true,
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Age"
+                            }
+                        ]
+                    });
+                });
+            </script>
+        </div>
+        <div class="console"></div>

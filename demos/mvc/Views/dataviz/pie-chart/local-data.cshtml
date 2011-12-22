@@ -1,0 +1,65 @@
+
+        <div id="example" class="k-content">
+            <div class="chart-wrapper">
+                <div id="chart"></div>
+            </div>
+            <script>
+                var data = [
+                    {
+                        "source": "Hydro",
+                        "percentage": 22,
+                        "explode": true
+                    },
+                    {
+                        "source": "Solar",
+                        "percentage": 2
+                    },
+                    {
+                        "source": "Nuclear",
+                        "percentage": 49
+                    },
+                    {
+                        "source": "Wind",
+                        "percentage": 27
+                    }
+                ];
+
+                function createChart() {
+                    $("#chart").kendoChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        title: {
+                            text: "Break-up of Spain Electricity Production for 2008"
+                        },
+                        legend: {
+                            position: "bottom"
+                        },
+                        dataSource: {
+                            data: data
+                        },
+                        series: [{
+                            type: "pie",
+                            field: "percentage",
+                            categoryField: "source",
+                            explodeField: "explode"
+                        }],
+                        tooltip: {
+                            visible: true,
+                            template: "${ category } - ${ value }%"
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        createChart();
+
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                    }, 400);
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        createChart();
+                    });
+                });
+            </script>
+        </div>

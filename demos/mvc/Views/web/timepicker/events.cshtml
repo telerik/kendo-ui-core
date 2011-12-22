@@ -1,0 +1,26 @@
+
+        <div id="example" class="k-content">
+            <input id="timepicker"/>
+            <script>
+                $(document).ready(function() {
+                    function onOpen() {
+                        kendoConsole.log("Open");
+                    }
+
+                    function onClose() {
+                        kendoConsole.log("Close");
+                    }
+
+                    function onChange() {
+                        kendoConsole.log("Change :: " + kendo.toString(this.value(), 't'));
+                    }
+
+                    $("#timepicker").kendoTimePicker({
+                        change: onChange,
+                        close: onClose,
+                        open: onOpen
+                    });
+                });
+            </script>
+        </div>
+        <div class="console"></div>

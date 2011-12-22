@@ -35,7 +35,7 @@ SUITES.forEach(function(suite) {
                 content = content
                     .replace(/(.|\n)+<body>((.|\n)+)<\/body>(.|\n)+/m, "$2")
                     .replace(/<div class="description">((.|\n)+?)<\/div>/m, "")
-                    .replace("../content", "../../content/" + suite)
+                    .replace(/\.\.\/content/g, "../../content/" + suite)
                     .replace(/\s*<!--\s*\w+\s*-->\s*$/gm, "");
 
                 kendoBuild.writeText(outputFile, content);

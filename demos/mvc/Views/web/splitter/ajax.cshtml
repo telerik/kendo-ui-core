@@ -1,0 +1,19 @@
+
+        <div id="example" class="k-content">
+            <div id="splitter">
+                <div></div>
+                <div></div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#splitter").kendoSplitter({
+                        panes: [
+                            { contentUrl: 'ajax/ajaxContent1.html' },
+                            { contentUrl: 'ajax/ajaxContent2.html' }
+                        ]
+                    });
+                });
+            </script>
+
+        </div>
