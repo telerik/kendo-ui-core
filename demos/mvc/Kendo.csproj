@@ -90,6 +90,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\LowercasePathProvider.cs" />
     <Compile Include="Models\NavigationExample.cs" />
     <Compile Include="Models\NavigationWidget.cs" />
     <Compile Include="Models\ScriptGroups.cs" />
@@ -252,20 +253,20 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\SourceLayout.cshtml" />
-    <Content Include="Views\Shared\ExampleLayout.cshtml" />
-    <Content Include="Views\ThemeBuilder\Index.cshtml" />
-    <Content Include="Views\Shared\Header.cshtml" />
-    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\shared\error.cshtml" />
+    <Content Include="Views\shared\_layout.cshtml" />
+    <Content Include="Views\shared\sourcelayout.cshtml" />
+    <Content Include="Views\shared\examplelayout.cshtml" />
+    <Content Include="Views\themebuilder\index.cshtml" />
+    <Content Include="Views\shared\header.cshtml" />
+    <Content Include="Views\shared\footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\DataViz\" />
+    <Folder Include="Views\dataviz\" />
     <Folder Include="Views\web\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="content\web\16x16\Thumbs.db" />
