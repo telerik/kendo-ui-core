@@ -1,5 +1,14 @@
 
         <div id="example" class="k-content">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    <strong>Note:</strong>
+                    Security restrictions in Chrome prevent this
+                    example from working when the page is
+                    loaded from the file system (via file:// protocol).
+                </p>
+            </div>
             <ul id="panelbar">
                 <li class="k-state-active">
                     First Ajax Item
@@ -25,7 +34,7 @@
         </div>
         <script>
             $(document).ready(function() {
-                $("#panelbar").kendoPanelBar({
+                $("#panelbar").css({ marginRight: "220px" }).kendoPanelBar({
                     expandMode: "single",
                     contentUrls: [
                         '../../content/web/panelbar/ajax/ajaxContent1.html',

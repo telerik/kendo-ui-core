@@ -44,7 +44,7 @@
                 });
 
                 function detailInit(e) {
-                    $("<div/>").kendoGrid({
+                    $("<div/>").appendTo(e.detailCell).kendoGrid({
                         dataSource: {
                             type: "odata",
                             transport: {
@@ -60,7 +60,7 @@
                         sortable: true,
                         pageable: true,
                         columns: [ "OrderID", "ShipCountry", "ShipAddress", "ShipName" ]
-                    }).appendTo(e.detailCell);
+                    });
                 }
             </script>
         </div>
