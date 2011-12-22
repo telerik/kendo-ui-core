@@ -140,7 +140,7 @@
                     foo: [{ name: "foo" }]
                 });
 
-                var dom = $('<ul data-source="foo" data-template="array-tmpl"/>');
+                var dom = $('<ul data-source="foo" data-template="array-template"/>');
 
                 kendo.bind(dom, viewModel);
 
@@ -200,9 +200,47 @@
 
                 equal(dom.text(), "baz");
             });
+
+            test("tracking changes in templates", function() {
+                var dom = $('<div data-template="simple-field-template" />');
+
+                var viewModel = { foo: "foo" };
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("foo", "bar");
+
+                equal($.trim(dom.text()), "bar");
+            });
+
+            test("dependencies are reavaluated", function() {
+                var dom = $('<div data-template="if-else-template" />');
+
+                var viewModel = { foo: "foo", bar: "bar" };
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("foo", "baz");
+
+                viewModel.set("bar", "boo");
+
+                equal($.trim(dom.text()), "boo");
+            });
         </script>
-        <script id="array-tmpl" type="text/x-kendo-tmpl">
+
+        <script id="array-template" type="text/x-kendo-template">
             <li data-text="name"></li>
+        </script>
+
+        <script id="simple-field-template" type="text/x-kendo-template">
+            #= get("foo") #
+        </script>
+        <script id="if-else-template" type="text/x-kendo-template">
+            # if (get("foo") == "foo") { #
+                #: get("foo") #
+            # } else { #
+                #: get("bar") #
+            # } #
         </script>
     </head>
 </html>

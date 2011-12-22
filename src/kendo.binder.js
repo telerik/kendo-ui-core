@@ -106,6 +106,12 @@
             }
         }
 
+        object.get = function(field) {
+            observable.trigger("access", { field : field });
+
+            return get(this, field);
+        }
+
         object.set = function(field, value, initiator) {
             var current = this[field];
 
@@ -174,9 +180,23 @@
         },
         template: function(element, object) {
             if (!element.getAttribute("data-source")) {
+                var dependencies = {};
+
+                var access = function(e) {
+                    dependencies[e.field] = true;
+                }
+
+                object.observable().bind("access", access);
+
                 var template = kendo.template(templateFor(element));
 
                 $(element).html(template(object));
+
+                object.observable().unbind("access", access);
+
+                for (var dependency in dependencies) {
+                    observe(element, object, dependency, arguments.callee);
+                }
             }
         },
         style: function(element, object, style) {

@@ -23,7 +23,7 @@
             <button data-click="addProduct">Add a product</button>
             <button data-click="selectFirst">Select "Food"</button>
 
-            <div>Selected product is: <span data-html="selectedProduct.name"></span></div>
+            <div data-template="div-template"></div>
 
             <fieldset>
                 <legend>&lt;select multiple&gt;</legend>
@@ -32,33 +32,50 @@
                     data-template="option-tmpl"
                     data-source="products">
                 </select>
+
                 <script type="text/x-kendo-tmpl" id="option-tmpl">
                     <option value="${id}">${name}</option>
                 </script>
-            </fieldset>
-            <fieldset>
-                <legend>&lt;table&gt;</legend>
-                <table data-source="products" data-template="tr-tmpl">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Product ID</th>
-                        </tr>
-                    </thead>
-                </table>
-                <script type="text/x-kendo-tmpl" id="tr-tmpl">
-                    <tr>
-                        <td>${name}</td>
-                        <td>${id}</td>
-                    </tr>
+                <script type="text/x-kendo-tmpl" id="div-template">
+                    # if (selectedProduct["foo"]) {
+                        "option strict"
+                    #
+                        Selected product is #= selectedProduct.name #
+                    # } else { #
+                        No selected product
+                    # } #
                 </script>
             </fieldset>
         </form>
 
         <script>
+            var template = $("#div-template").html();
+            var parts = kendo.Template.scan(template);
+            var keywords = {};
+
+            $.each("if else with for while switch case do".split(" "), function() {
+                keywords[this] = true;
+            });
+
+            var identifiers = [];
+            for (var i = 1; i < parts.length; i+=2) {
+                var match = parts[i].match(/([$A-Za-z_][.\[\]'"0-9A-Za-z_]*)/g);
+                if (match) {
+                    identifiers.push.apply(identifiers, match);
+                }
+            }
+
+            console.log(identifiers);
+
+            identifiers = $.grep(identifiers, function(identifier) {
+                return !keywords[identifier];
+            });
+
+            console.log(identifiers);
+
             var viewModel = kendo.observable({
                 products: [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" } ],
-                selectedProduct: {},
+                selectedProduct: null,
                 selectFirst: function() {
                     this.set("selectedProduct", this.products[0]);
                 },
@@ -70,7 +87,6 @@
                 }
             });
 
-            viewModel.set("selectedProduct", viewModel.products[1]);
             kendo.bind($("form"), viewModel);
         </script>
     </body>

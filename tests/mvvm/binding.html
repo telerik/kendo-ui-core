@@ -344,11 +344,27 @@
                 kendo.bind(dom, viewModel);
                 ok(dom.find("option").last().is(":selected"));
             });
+
+            test("binding to getter", function() {
+                var dom = $('<div data-template="get-template"/>');
+
+                var viewModel = {
+                    foo: "foo"
+                };
+
+                kendo.bind(dom, viewModel);
+                equal($.trim(dom.text()), "foo")
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
             <option value="${id}">${name}</option>
         </script>
+
+        <script id="get-template" type="text/x-kendo-template">
+            #= get("foo") #
+        </script>
+
         <script id="ol-template" type="text/x-kendo-template">
             <li data-text="name"></li>
         </script>
