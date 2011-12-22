@@ -12,7 +12,8 @@ var fs = require("fs"),
 // Configuration ==============================================================
 var SUITES = ["web", "dataviz"],
     EXAMPLES_ROOT = path.join("demos", "examples"),
-    MVC_ROOT = path.join("demos", "mvc", "Views");
+    VIEWS_ROOT = path.join("demos", "mvc", "Views"),
+    CONTENT_ROOT = path.join("demos", "mvc", "content");
 
 // Implementation ==============================================================
 SUITES.forEach(function(suite) {
@@ -23,7 +24,7 @@ SUITES.forEach(function(suite) {
         /.html$/,
         function (fileName) {
             var outputFile = fileName
-                .replace(EXAMPLES_ROOT, MVC_ROOT)
+                .replace(EXAMPLES_ROOT, VIEWS_ROOT)
                 .replace(".html", ".cshtml");
 
             try {
@@ -40,6 +41,23 @@ SUITES.forEach(function(suite) {
                 kendoBuild.writeText(outputFile, content);
             } catch (e) {
                 console.log("Trouble converting ", fileName, "to ", outputFile);
+            }
+        }
+    );
+
+    processFiles(
+        suiteRoot,
+        /\.(?!html$)/,
+        function (fileName) {
+            var outputFile = fileName
+                    .replace("content/", "")
+                    .replace(EXAMPLES_ROOT, CONTENT_ROOT);
+
+            try {
+                mkdir(path.dirname(outputFile));
+                kendoBuild.copyFileSync(fileName, outputFile);
+            } catch (e) {
+                console.log("Trouble copying ", fileName, "to ", outputFile);
             }
         }
     );
