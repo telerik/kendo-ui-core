@@ -43,12 +43,13 @@ var VERSION = kendoBuild.generateVersion(),
     INDEX = "index.html",
     SCRIPTS_ROOT = "src",
     STYLES_ROOT = "styles",
-    DEMOS_ROOT = path.join("demos", "examples"),
+    DEMOS_ROOT = path.join("demos", "mvc"),
     TEMPLATES_ROOT = path.join("build", "templates"),
     SUITE_INDEX = path.join(TEMPLATES_ROOT, "suite-index.html"),
     BUNDLE_INDEX = path.join(TEMPLATES_ROOT, "bundle-index.html"),
-    EXAMPLES_NAVIGATION = "kendo.examples.nav.js",
-    SHARED_ROOT = "shared",
+    EXAMPLE_TEMPLATE = path.join(TEMPLATES_ROOT, "example.html"),
+    CONTENT_ROOT = "content",
+    VIEWS_ROOT = "Views",
     LEGAL_ROOT = path.join("resources", "legal"),
     SRC_LICENSE = "src-license.txt",
     THIRD_PARTY_ROOT = "third-party",
@@ -138,8 +139,13 @@ function deployLicenses(root, bundle) {
 
 function deployExamples(root, bundle) {
     var examplesRoot = path.join(root, DEPLOY_EXAMPLES),
+        viewsRoot = path.join(DEMOS_ROOT, VIEWS_ROOT),
         stylesPath = "../../../styles/$2.min.css",
-        scriptsPath = "../../../js/$2.min.js";
+        scriptsPath = "../../../js/$2.min.js",
+        exampleTemplate = template(readText(EXAMPLE_TEMPLATE)),
+        suiteIndexTemplate = template(readText(SUITE_INDEX)),
+        bundleIndexTemplate = template(readText(BUNDLE_INDEX)),
+        bundleIndex = bundleIndexTemplate(bundle);
 
     if (bundle.hasSource) {
         stylesPath = "../../../source/styles/$2.css";
@@ -147,65 +153,42 @@ function deployExamples(root, bundle) {
     }
 
     kendoBuild.mkdir(examplesRoot);
+
+    writeText(path.join(examplesRoot, INDEX), bundleIndex)
+
     copyDir(
-        path.join(DEMOS_ROOT, SHARED_ROOT),
-        path.join(examplesRoot, SHARED_ROOT)
+        path.join(DEMOS_ROOT, CONTENT_ROOT),
+        path.join(examplesRoot, CONTENT_ROOT)
     );
 
     bundle.suites.forEach(function(suite) {
-        var suiteSrc = path.join(DEMOS_ROOT, suite),
-            suiteDest = path.join(examplesRoot, suite);
+        var navigationFile = path.join(DEMOS_ROOT, "App_Data", suite + ".nav.json"),
+            navigationData = readText(navigationFile),
+            navigation = JSON.parse(navigationData),
+            suiteDest = path.join(examplesRoot, suite),
+            suiteIndex = suiteIndexTemplate(navigation);
 
-        copyDir(suiteSrc, suiteDest);
-        processFiles(suiteDest, /\.html$/, function(name) {
-            var data = readText(name);
+        kendoBuild.mkdir(suiteDest);
+        writeText(path.join(suiteDest, INDEX), suiteIndex)
 
-            data = data.replace(/(\.\.\/)+styles\/(.*?)\.css/g, stylesPath);
-            data = data.replace(/(\.\.\/)+src\/(.*?)\.js/g, scriptsPath);
-            data = data.replace(/min\.min/g, "min");
+        for (var category in navigation) {
+            for (var widgetIx = 0, widgets = navigation[category]; widgetIx < widgets.length; widgetIx++) {
+                for (var exampleIx = 0, examples = widgets[widgetIx].items; exampleIx < examples.length; exampleIx++) {
+                    var example = examples[exampleIx],
+                    viewName = example.url.replace("html", "cshtml"),
+                    fileName = path.join(viewsRoot, suite, viewName),
+                    outputName = path.join(suiteDest, example.url),
+                    params = {
+                        body: readText(fileName),
+                        title: example.text
+                    };
 
-            // Add back button
-            data = data.replace(/(<!-- description -->)/, '<a href="../index.html">Back</a>');
-
-            // Remove marker comments
-            data = data.replace(/\s*<!--\s*\w+\s*-->\s*$/gm, '');
-
-            writeText(name, data);
-        });
-
-        buildSuiteIndex(suiteDest);
+                    kendoBuild.mkdir(path.dirname(outputName));
+                    writeText(outputName, exampleTemplate(params));
+                }
+            }
+        }
     });
-
-    buildBundleIndex(root, bundle);
-}
-
-function buildSuiteIndex(suiteRoot) {
-    var navigation = readText(
-        path.join(suiteRoot, "js", EXAMPLES_NAVIGATION)
-    );
-
-    var indexTemplate = template(
-        readText(SUITE_INDEX)
-    );
-
-    eval(navigation);
-    delete categories.overview;
-
-    writeText(
-        path.join(suiteRoot, INDEX),
-        indexTemplate(categories)
-    );
-}
-
-function buildBundleIndex(root, bundle) {
-    var indexTemplate = template(
-        readText(BUNDLE_INDEX)
-    );
-
-    writeText(
-        path.join(root, DEPLOY_EXAMPLES, INDEX),
-        indexTemplate(bundle)
-    );
 }
 
 function buildBundle(bundle, success) {
@@ -255,6 +238,8 @@ function buildAllBundles(success, bundleIx) {
 }
 
 function buildOnlineExamples(success) {
+    return;
+
     var onlineExamplesRoot = path.join(DEPLOY_ROOT, DEPLOY_ONLINEEXAMPLES),
         packageName = path.join(DROP_LOCATION, ONLINE_EXAMPLES_PACKAGE);
 
