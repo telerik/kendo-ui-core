@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-black" />
     <meta content="minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
     
     <!-- Weinre Proxy, configure to your machine if you have it. -->
@@ -35,7 +35,8 @@
             background-color: #f9f;
         }
 
-        .km-ios .pink:active
+        .km-ios .pink:active,
+        .km-ios .pink .km-state-active
         {
             background-color: #c6c;
         }
@@ -45,7 +46,8 @@
             background-color: #3c3;
         }
 
-        .km-ios .green:active
+        .km-ios .green:active,
+        .km-ios .green .km-state-active
         {
             background-color: #090;
         }
@@ -55,11 +57,19 @@
             background-color: fuchsia;
         }
 
-        .km-ios .fuchsia:active
+        .km-ios .fuchsia:active,
+        .km-ios .fuchsia .km-state-active
         {
             background-color: #c0c;
         }
 
+        .km-ios .km-radiogroup,
+        .km-ios .km-radiogroup:active
+        {
+            background-color: transparent;
+        }
+
+/*
         .km-content
         {
             background: silver;
@@ -68,6 +78,11 @@
         .km-android .km-content
         {
             background: #000;
+        }
+
+*/
+        body {
+            background: #fff;
         }
 
         .sliderValue
@@ -99,18 +114,19 @@
     <article data-role="view">
         <header data-role="header">
             <div data-role="navbar">
+                <a data-role="back-button" data-align="left" class="pink">Pink</a>
                 <span data-role="view-title">Layout</span>
-                <button data-role="button" data-align="right" class="pink">Pink</button>
-                <button data-role="button" data-align="right" class="green">Green</button>
-                <button data-role="button" data-align="right" class="fuchsia">Fuchsia</button>
-                <button data-role="button" data-align="right">HAbout</button>
+                <a data-role="button" data-align="right" class="pink">Pink</a>
+                <a data-role="button" data-align="right" class="green">Green</a>
+                <a data-role="button" data-align="right" class="fuchsia">Fuchsia</a>
+                <a data-role="button" data-align="right">HAbout</a>
             </div>
         </header>
 
         <content data-role="content">
             <ul data-role="listview">
                 <li>Albania<input type="checkbox" data-role="switch" /></li>
-                <li>Australia<input type="checkbox" data-role="switch" /></li>
+                <li>Australia<input type="checkbox" data-role="switch" checked="checked" autocomplete="off" /></li>
             </ul>
             <div class="sliderValue">0</div>
             <span class="km-slider" style="float: right; clear: both;"></span>
@@ -166,7 +182,7 @@
         <footer data-role="footer">
             <div data-role="tabstrip">
                 <a href="#">Featured</a>
-                <a href="#">Genius<span class="km-message">3</span></a>
+                <a href="#">Genius<span class="km-badge">3</span></a>
                 <a href="#">Top Charts</a>
                 <a href="#">Categories</a>
             </div>
@@ -194,16 +210,29 @@
             radiogroup.select(Math.round(Math.random()*2));
         }
 
-        var radio = $("#radio").kendoMobileRadioGroup({ enable: false }).data("kendoMobileRadioGroup"),
+        var radio = $("#radio").kendoMobileRadioGroup().data("kendoMobileRadioGroup"),
             radiogroup = $("#radioz").kendoMobileRadioGroup({ toggle: onToggle }).data("kendoMobileRadioGroup");
 //            slider = $(".km-slider").kendoMobileSlider({ slide: onSlide, change: onSlide }).data("kendoMobileSlider");
 
         var app = new kendo.mobile.Application($(document.body));
 
         $(function () {
-            $(".km-navbar .km-button").each(function () {
+            var color = "";
+
+            $(".km-navbar .km-button:not(.km-back)").each(function () {
+
+                $(this).bind("touchstart mousedown", function (e) {
+                    console.log(e.currentTarget);
+                    color = $(e.currentTarget).css("background-color");
+                });
+
                 $(this).data("kendoMobileButton").bind("click", function (e) {
-                    $(".km-navbar").css("background-color", this.element.css("background-color"));
+                    if ($.browser.mozilla)
+                        color = this.element.css("background-color");
+
+                    $(".km-navbar, .km-ios .km-listgroup > li, .km-switch-background, .km-badge").css("background-color", color);
+                    $(".km-insetcontent").css("background-color", color.replace(")", ",.3)").replace("rgb(", "rgba("));
+                    $(".km-radiogroup").removeClass("pink green fuchsia").addClass(this.element[0].className.match(/pink|green|fuchsia|/)[0]);
                 });
             });
         });
