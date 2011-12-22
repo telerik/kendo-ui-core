@@ -1227,11 +1227,12 @@
             var shadow = element.css(kendo.support.transitions.css + "box-shadow") || element.css("box-shadow"),
                 radius = shadow ? shadow.match(boxShadowRegExp) || [ 0, 0, 0, 0, 0 ] : [ 0, 0, 0, 0, 0 ],
                 blur = math.max((+radius[3]), +(radius[4] || 0)),
+                left = (-radius[1]) + blur,
                 right = (+radius[1]) + blur,
                 bottom = (+radius[2]) + blur;
 
             if (browser.opera) { // Box shadow can't be retrieved in Opera
-                right = bottom = 5;
+                left = right = bottom = 5;
             }
 
             element.wrap(
@@ -1240,6 +1241,8 @@
                          .css({
                              width: element.outerWidth(),
                              height: element.outerHeight(),
+                             marginLeft: -left,
+                             paddingLeft: left,
                              paddingRight: right,
                              paddingBottom: bottom
                          }));

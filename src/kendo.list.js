@@ -155,6 +155,9 @@
                 list = that.list,
                 options = that.options,
                 wrapper = that.wrapper,
+                computedWidth = window.getComputedStyle ?
+                                    parseFloat(window.getComputedStyle(wrapper[0], null).getPropertyValue("width")) :
+                                    wrapper.outerWidth(),
                 width;
 
             that.popup = new ui.Popup(list, {
@@ -164,7 +167,7 @@
                 animation: options.animation
             });
 
-            width = wrapper.outerWidth() - (list.outerWidth() - list.width());
+            width = computedWidth - (list.outerWidth() - list.width());
 
             list.css({
                 fontFamily: wrapper.css("font-family"),
