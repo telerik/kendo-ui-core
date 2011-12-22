@@ -1,11 +1,11 @@
 (function($, undefined) {
     var kendo = window.kendo,
+        ui = kendo.ui,
         support = kendo.support,
         extend = $.extend,
-        mobile,
-        Widget = kendo.ui.Widget;
+        mobile;
 
-    var MobileWidget = Widget.extend(/** @lends kendo.ui.MobileWidget.prototype */{
+    var Widget = ui.Widget.extend(/** @lends kendo.mobile.Widget.prototype */{
         /**
          * Initializes mobile widget. Sets `element` and `options` properties.
          * @constructs
@@ -17,7 +17,7 @@
                 option,
                 value;
 
-            Widget.fn.init.call(that, element, options);
+            ui.Widget.fn.init.call(that, element, options);
 
             for (option in that.options) {
                 value = that.element.data(kendo.ns + option);
@@ -43,26 +43,32 @@
         }
     });
 
-    mobile = {
+    /**
+     * @name kendo.mobile
+     * @namespace This object contains all code introduced by the Kendo mobile suite, plus helper functions that are used across all mobile widgets.
+     */
+
+    extend(kendo.mobile, {
         enhance: function(element) {
-            var widget;
+            var widget, ui = mobile.ui;
 
             element = $(element);
 
-            for (widget in kendo.ui) {
-                widget = kendo.ui[widget];
+            for (widget in ui) {
+                widget = ui[widget];
 
                 if (widget.prototype.enhance) {
                     widget.prototype.enhance(element);
                 }
             }
+        },
+
+        ui: {
+            plugin: function(widget) {
+                kendo.ui.plugin(widget, kendo.mobile.ui, "Mobile");
+            },
+
+            Widget: Widget
         }
-    };
-
-    kendo.roleSelector = function(role) {
-        return "[" + kendo.attr("role") + "=" + role + "]";
-    };
-
-    kendo.ui.MobileWidget = MobileWidget;
-    kendo.mobile = mobile;
+    });
 })(jQuery);
