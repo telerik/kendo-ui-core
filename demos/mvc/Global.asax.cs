@@ -28,7 +28,7 @@ namespace Kendo
             routes.MapRoute(
                 "Suite",
                 "{suite}/{section}/{example}.html",
-                new { controller = "Suite", action = "Index", section = "overview", example = "index" },
+                new { controller = "Suite", action = "Index" },
                 suiteConstraint
             );
 
