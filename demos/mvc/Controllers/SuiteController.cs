@@ -63,7 +63,14 @@ namespace Kendo.Controllers
             ViewBag.EventsDocPath = DocPath(suite, section, "events");
 
             LoadNavigation(suite);
+
             FindCurrentExample();
+
+            if (suite == "mobile") {
+                ViewBag.scripts = Kendo.Models.ScriptGroups.Mobile;
+            } else {
+                ViewBag.scripts = Kendo.Models.ScriptGroups.All;
+            }
 
             return View(
                 string.Format("~/Views/{0}/{1}/{2}.cshtml", suite, section, example)
@@ -110,7 +117,7 @@ namespace Kendo.Controllers
         protected string LoadDescription(string suite, string section) {
             var path = DocPath(suite, section, "description");
             var description = "";
-            
+
             if (path != null) {
                 description = IOFile.ReadAllText(Server.MapPath(path));
             }
