@@ -741,27 +741,107 @@ body
     background-image: linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
 }
 
-.km-badge
+.km-badge,
+.km-detail
 {
-    display: inline-block;
     color: #FFF;
-    border: .2em solid #FFF;
+    text-decoration: none;
+    display: inline-block;
+    border: .3em solid #FFF;
     font-size: .7em;
     line-height: 1.6em;
     vertical-align: middle;
     overflow: hidden;
     text-align: center;
-    right: -.8em;
-    top: -1em;
-    height: 1.6em;
     position: absolute;
-    width: 1.6em;
-    .border-radius(2em);
-    background-color: #bc0404;
-    background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     z-index: 1;
+    top: -1em;
+    right: -.8em;
+    width: 1.6em;
+    height: 1.6em;
     text-shadow: none;
+    .border-radius(1.2em);
+    background-color: #bc0404;
+    background-clip: padding-box;
+    background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     .box-shadow(0 3px 3px #000);
+}
+
+.km-detail
+{
+    position: relative;
+    float: right;
+    right: 0;
+    top: 0;
+    line-height: 1.4em;
+    border: .2em solid #FFF;
+    border-width: .15rem;
+    .box-shadow(0 1px 3px rgba(0,0,0,.5));
+    background-color: #1F6DD8;
+}
+
+.km-detail:after,
+.km-detail:before
+{
+    width: .3em;
+    height: .3em;
+    width: .4rem;
+    height: .4rem;
+    content: "\a0";
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.km-detaildisclose:after
+{
+    margin-left: -.2em;
+    margin-left: -.2rem;
+    border: .2em solid #FFF;
+    border-width: .24rem .24rem 0 0;
+    .transform(rotate(45deg));
+}
+.km-detaildisclose:before { display: none; }
+
+.km-rowinsert
+{
+    background-color: #24870D;
+}
+
+.km-rowdelete
+{
+    background-color: #B01B1A;
+}
+
+.km-rowdelete:after,
+.km-rowinsert:after,
+.km-rowinsert:before,
+.km-contactadd:after,
+.km-contactadd:before
+{
+    width: .6em;
+    height: .1em;
+    width: .7rem;
+    height: .2rem;
+    background: #FFF;
+    margin-left: -.18em;
+    margin-left: -.28rem;
+}
+
+.km-rowdelete:after
+{
+    margin-left: -.28em;
+    margin-left: -.38rem;
+}
+
+.km-rowinsert:after,
+.km-contactadd:after
+{
+    width: .1em;
+    height: .6em;
+    width: .2rem;
+    height: .7rem;
+    margin-left: -.34em;
+    margin-left: -.44rem;
 }
 
 .km-android .km-button .km-badge
