@@ -293,6 +293,19 @@
                 equals(rootNode.find(".k-group").children().length, 1);
             });
 
+            test("append() of array of items", function() {
+                var treeview = createTreeView({}),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                var appendedNodes = treeviewObject.append([
+                        { text: "foo" },
+                        { text: "bar" }
+                    ]);
+
+                equals(treeview.find(".k-group").length, 1);
+                equals(treeview.find(".k-group").children().length, 2);
+            });
+
             test("insertBefore(nodeData, element) inserts new node before element", function() {
                 var treeview = createTreeView({
                         dataSource: [
@@ -368,6 +381,23 @@
 
                 equals(items.length, 1);
                 equals(items.find(".k-group").length, 0);
+            });
+
+            test("remove('.k-item') removes all items, but not root list", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                treeviewObject.remove(".k-item");
+
+                equals(treeview.find(".k-item").length, 0);
+                ok(treeview.find("> .k-group").length);
+                ok(!treeview.hasClass("k-item"));
             });
         </script>
 
