@@ -1,0 +1,39 @@
+
+        <div id="example" class="k-content">
+            <input id="input"/>
+            <script>
+                $(document).ready(function() {
+                    function onOpen() {
+                        if ("kendoConsole" in window) {
+                            kendoConsole.log("event: open");
+                        }
+                    }
+
+                    function onClose() {
+                        if ("kendoConsole" in window) {
+                            kendoConsole.log("event: close");
+                        }
+                    }
+
+                    function onChange() {
+                        if ("kendoConsole" in window) {
+                            kendoConsole.log("event: change");
+                        }
+                    }
+
+                    var data = [
+                        { text: "Item 1", value:"1" },
+                        { text: "Item 2", value:"2" },
+                        { text: "Item 3", value:"3" }
+                    ];
+
+                    $("#input").kendoComboBox({
+                        dataSource: data,
+                        change: onChange,
+                        close: onClose,
+                        open: onOpen
+                    });
+                });
+            </script>
+        </div>
+        <div class="console"></div>

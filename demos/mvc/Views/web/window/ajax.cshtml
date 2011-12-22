@@ -1,0 +1,53 @@
+
+        <div id="example" class="k-content">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    This example shows how to load the content of the window using Ajax.
+                </p>
+            </div>
+
+
+            <!-- Window HTML -->
+            <div id="window"></div>
+
+            <!-- open button -->
+            <span id="undo" style="display:none" class="k-group">Click here to open the window.</span>
+
+            <script>
+                $(document).ready(function() {
+                    var window = $("#window"),
+                        undo = $("#undo")
+                                .bind("click", function() {
+                                    window.data("kendoWindow").open();
+                                    undo.hide();
+                                });
+
+                    var onClose = function() {
+                        undo.show();
+                    }
+
+                    if (!window.data("kendoWindow")) {
+                        window.kendoWindow({
+                            width: "500px",
+                            title: "Kendo Window",
+                            content: "ajax/ajaxContent.html",
+                            close: onClose
+                        });
+                    }
+
+                });
+            </script>
+
+            <style scoped="scoped">
+                #undo {
+                    text-align: center;
+                    position: absolute;
+                    white-space: nowrap;
+                    border-width: 1px;
+                    border-style: solid;
+                    padding: 2em;
+                    cursor: pointer;
+                }
+            </style>
+        </div>

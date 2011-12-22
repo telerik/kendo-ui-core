@@ -1,0 +1,39 @@
+
+        <div id="example" class="k-content">
+            <ul id="panelbar">
+                <li class="k-state-active">
+                    First Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Second Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Third Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Fourth Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Fifth Ajax Item
+                    <div></div>
+                </li>
+            </ul>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $("#panelbar").kendoPanelBar({
+                    expandMode: "single",
+                    contentUrls: [
+                        'ajax/ajaxContent1.html',
+                        'ajax/ajaxContent2.html',
+                        'ajax/ajaxContent3.html',
+                        'ajax/ajaxContent4.html',
+                        'ajax/ajaxContent5.html'
+                    ]
+                });
+            });
+        </script>

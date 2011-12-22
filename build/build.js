@@ -238,13 +238,11 @@ function buildAllBundles(success, bundleIx) {
 }
 
 function buildOnlineExamples(success) {
-    return;
-
     var onlineExamplesRoot = path.join(DEPLOY_ROOT, DEPLOY_ONLINEEXAMPLES),
         packageName = path.join(DROP_LOCATION, ONLINE_EXAMPLES_PACKAGE);
 
-    kendoExamples.buildLive(onlineExamplesRoot);
-    zip(packageName, onlineExamplesRoot, success);
+    // XBuild
+    // zip(packageName, onlineExamplesRoot, success);
 }
 
 console.log("Build starting at " + startDate);

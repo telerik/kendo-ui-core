@@ -1,0 +1,178 @@
+
+        <div id="example" class="k-content">
+            <div id="overview-wrap">
+                <div id="chartSlider"></div>
+
+                <p>Kendo Charts use modern browser technologies to render high-quality data visualizations in the browser. Rather than generating images on a server, Chart graphics are rendered in the browser using <abbr title="Scalable Vector Graphics">SVG</abbr>, with a fallback to <abbr title="Vector Markup Language">VML</abbr> for older browsers.</p>
+
+                <ul id="chart-types">
+                    <li>
+                        <img src="../../content/dataviz/overview/bar.png" alt="Bar charts" />
+                        <h3><a href="../bar-charts/index.html">Bar Charts</a></h3>
+                        <p>Shows value changes over time or compares values</p>
+                    </li>
+                    <li>
+                        <img src="../../content/dataviz/overview/line.png" alt="Line chart" />
+                        <h3><a href="../line-chart/index.html">Line Chart</a></h3>
+                        <p>Shows trends in data over regular intervals</p>
+                    </li>
+                    <li>
+                        <img src="../../content/dataviz/overview/pie.png" alt="Pie chart" />
+                        <h3><a href="../pie-chart/index.html">Pie Chart</a></h3>
+                        <p>Shows size of items with respect to the total</p>
+                    </li>
+                    <li>
+                        <img src="../../content/dataviz/overview/scatter.png" alt="Scatter charts" />
+                        <h3><a href="../scatter-charts/index.html">Scatter Charts</a></h3>
+                        <p>Shows two dimensional points or lines</p>
+                    </li>
+                </ul>
+            </div>
+
+            <style scoped>
+                #overview-wrap {
+                    width: 690px;
+                    margin: 30px auto 0 auto;
+                    padding: 35px 0 0;
+                    background: transparent url(../../content/dataviz/overview/overlay.png) no-repeat 50% 0;
+                }
+
+                #chartSlider {
+                    width: 600px;
+                    height: 250px;
+                    margin: 0 auto;
+                }
+
+                #overview-wrap p {
+                    padding: 30px 20px;
+                }
+
+                #chart-types {
+                    overflow: hidden;
+                    list-style-type: none;
+                    margin: 40px 0 0 0;
+                    padding: 0 0 0 10%;
+                }
+
+                #chart-types li {
+                    width: 45%;
+                    float: left;
+                    padding-bottom: 46px;
+                }
+
+                #chart-types h3,
+                #chart-types a {
+                    color: #19a3ee;
+                    text-decoration: none;
+                    font-weight: normal;
+                }
+
+                #chart-types a:hover {
+                    text-decoration: underline;
+                }
+
+                #chart-types p {
+                    padding: 0;
+                }
+
+                #chart-types img {
+                    float: left;
+                    width: 100px;
+                    height: 100px;
+                    margin-right: 19px;
+                }
+            </style>
+
+            <script>
+                var chartSeries = [
+                    [{
+                        type: "column",
+                        name: "2007",
+                        data: [45, 80, 120, 73, 35, 67]
+                    }, {
+                        type: "column",
+                        name: "2008",
+                        data: [47, 63, 140, 89, 54, 77]
+                    }, {
+                        type: "column",
+                        name: "2009",
+                        data: [15, 30, 92, 65, 21, 88]
+                    }, {
+                        type: "column",
+                        name: "2010",
+                        data: [21, 17, 63, 85, 54, 43]
+                    }], [{
+                        type: "line",
+                        name: "2007",
+                        data: [10, 34, 45, 21, 12, 25, 10, 34, 45, 21, 12, 25]
+                    }, {
+                        type: "line",
+                        name: "2008",
+                        data: [32, 42, 60, 50, 45, 40, 32, 42, 60, 50, 45, 40]
+                    }, {
+                        type: "line",
+                        name: "2009",
+                        data: [42, 50, 50, 65, 60, 70, 42, 50, 50, 65, 60, 70]
+                    }], [{
+                        type: "pie",
+                        data: [{ value: 64, explode: true }, { value: 187 }, { value: 51 }, { value: 24 }],
+                        padding: 30,
+                        labels: {
+                            visible: true,
+                            template: "#= kendo.format('{0:P}', percentage) #"
+                        }
+                    }] ],
+                    chartCategoryAxis = [
+                        {
+                            categories: ["January", "February", "March", "April", "May", "June"],
+                            majorGridLines: {
+                                visible: false
+                            }
+                        }, {
+                            categories: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                            labels: {
+                                rotation: -90,
+                                font: "10px Arial"
+                            },
+                            majorGridLines: {
+                                visible: false
+                            }
+                        }, {}
+                    ],
+                    chartIndex = 0,
+                    interval;
+
+                function nextChart() {
+                    var chart = $("#chartSlider").kendoChart({
+                            theme: $(document).data("kendoSkin") || "default",
+                            title: {
+                                visible: false
+                            },
+                            legend: {
+                                visible: false
+                            },
+                            series: $.extend({}, chartSeries[chartIndex % chartSeries.length]),
+                            categoryAxis: chartCategoryAxis[chartIndex % chartCategoryAxis.length]
+                    });
+                    chartIndex++;
+                }
+
+                $(document).ready(function() {
+                    nextChart();
+
+                    if (interval) {
+                        clearInterval(interval);
+                    }
+
+                    interval = setInterval(nextChart, 3000);
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        nextChart();
+                    });
+
+                    $(document).bind("kendo:pageUnload", function(e) {
+                        clearInterval(interval);
+                    });
+                });
+            </script>
+        </div>

@@ -1,0 +1,20 @@
+
+        <div id="example" class="k-content">
+            <div id="calendar"></div>
+
+            <script>
+                function onChange() {
+                    kendoConsole.log("Change :: " + kendo.toString(this.value(), 'd'));
+                }
+
+                function onNavigate() {
+                    kendoConsole.log("Navigate");
+                }
+
+                $("#calendar").kendoCalendar({
+                    change: onChange,
+                    navigate: onNavigate
+                });
+            </script>
+        </div>
+        <div class="console"></div>

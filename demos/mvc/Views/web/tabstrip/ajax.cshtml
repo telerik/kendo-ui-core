@@ -1,0 +1,35 @@
+
+        <div id="example" class="k-content">
+            <div id="tabstrip">
+                <ul>
+                    <li class="k-state-active">
+                        First Ajax Tab
+                    </li>
+                    <li>
+                        Second Ajax Tab
+                    </li>
+                    <li>
+                        Third Ajax Tab
+                    </li>
+                    <li>
+                        Fourth Ajax Tab
+                    </li>
+                    <li>
+                        Fifth Ajax Tab
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $("#tabstrip").kendoTabStrip({
+                    contentUrls: [
+                        'ajax/ajaxContent1.html',
+                        'ajax/ajaxContent2.html',
+                        'ajax/ajaxContent3.html',
+                        'ajax/ajaxContent4.html',
+                        'ajax/ajaxContent5.html'
+                    ]
+                });
+            });
+        </script>

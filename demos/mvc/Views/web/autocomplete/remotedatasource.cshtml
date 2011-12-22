@@ -1,0 +1,27 @@
+
+        <div id="example" class="k-content">
+            <label for="titles">Search Netflix for a movie title (minimum 3 characters):</label>
+            <input id="titles"/>
+
+            <script>
+                $("#titles").kendoAutoComplete({
+                    minLength: 3,
+                    dataTextField: "Name",
+                    dataSource: {
+                        type: "odata",
+                        serverFiltering: true,
+                        serverPaging: true,
+                        pageSize: 20,
+                        transport: {
+                            read: "http://odata.netflix.com/Catalog/Titles"
+                        }
+                    }
+                });
+            </script>
+
+            <style scoped>
+                .k-autocomplete {
+                    vertical-align: middle;
+                }
+            </style>
+        </div>

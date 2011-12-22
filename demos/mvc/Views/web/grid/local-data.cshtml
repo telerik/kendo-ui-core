@@ -1,0 +1,56 @@
+
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            data: createRandomData(50),
+                            schema: {
+                                model: {
+                                    fields: {
+                                        FirstName: { type: "string" },
+                                        LastName: { type: "string" },
+                                        City: { type: "string" },
+                                        Title: { type: "string" },
+                                        BirthDate: { type: "date" },
+                                        Age: { type: "number" }
+                                    }
+                                }
+                            },
+                            pageSize: 10
+                        },
+                        height: 250,
+                        scrollable: true,
+                        sortable: true,
+                        filterable: true,
+                        pageable: true,
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "City"
+                            },
+                            {
+                                field: "Title"
+                            },
+                            {
+                                field: "BirthDate",
+                                title: "Birth Date",
+                                template: '#= kendo.toString(BirthDate,"MM/dd/yyyy") #'
+                            },
+                            {
+                                field: "Age"
+                            }
+                        ]
+                    });
+                });
+            </script>
+        </div>

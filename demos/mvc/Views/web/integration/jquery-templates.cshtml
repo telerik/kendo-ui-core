@@ -1,0 +1,85 @@
+
+        <div id="example" class="k-content">
+            <script src="./jquery.tmpl.js"></script>
+            <select id="netflixDropDown" style="width:500px"></select>
+
+            <table id="netflixTable">
+                <thead>
+                    <tr>
+                        <th>
+                            Cover
+                        </th>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Rating
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <style scoped="scoped">
+
+            .k-grid
+            {
+                margin-top:1.6em;
+            }
+
+            </style>
+
+            <script id="dropDownTemplate" type="text/x-jquery-tmpl">
+                <img src="${ BoxArt.SmallUrl }" alt="${ Name }" /> ${ Name }
+            </script>
+            <script id="rowTemplate" type="text/x-jquery-tmpl">
+                <tr>
+                    <td>
+                        <img src="${ BoxArt.SmallUrl }" alt="${ Name }" />
+                    </td>
+                    <td>
+                        ${ Name }
+                    </td>
+                    <td>
+                        ${ AverageRating }
+                    </td>
+                </tr>
+            </script>
+            <script>
+                $(document).ready(function() {
+                    var dataSource = new kendo.data.DataSource({
+                        type: "odata",
+                        serverFiltering: true,
+                        filter: [{
+                            field: "Name",
+                            operator: "contains",
+                            value: "Star Wars"
+                            },{
+                            field: "BoxArt.SmallUrl",
+                            operator: "neq",
+                            value: null
+                        }],
+                        transport: {
+                            read: "http://odata.netflix.com/Catalog/Titles"
+                        }
+                    });
+
+                    $("#netflixTable").kendoGrid({
+                        dataSource: dataSource,
+                        rowTemplate: $.template($("#rowTemplate")),
+                        height: 200
+                    });
+
+                    $("#netflixDropDown").kendoDropDownList({
+                        dataTextField: "Name",
+                        dataValueField: "Id",
+                        template: $.template($("#dropDownTemplate")),
+                        dataSource: dataSource
+                    });
+                });
+            </script>
+        </div>

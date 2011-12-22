@@ -1,0 +1,66 @@
+
+        <div id="example" class="k-content">
+            <div id="climateCtrl">
+                <input id="slider" class="temperature" />
+
+                <div id="rangeslider" class="humidity">
+                    <input />
+                    <input />
+                </div>
+            </div>
+
+            <script>
+                function sliderOnSlide(e) {
+                    kendoConsole.log("Slide :: new slide value is: " + e.value);
+                }
+
+                function sliderOnChange(e) {
+                    kendoConsole.log("Change :: new value is: " + e.value);
+                }
+
+                function rangeSliderOnSlide(e) {
+                    kendoConsole.log("Slide :: new slide value are: " + e.values.toString().replace(",", " - "));
+                }
+
+                function rangeSliderOnChange(e) {
+                    kendoConsole.log("Change :: new values are: " + e.values.toString().replace(",", " - "));
+                }
+
+                $(document).ready(function() {
+                    $("#slider").kendoSlider({
+                        change: sliderOnChange,
+                        slide: sliderOnSlide,
+                        min: 0,
+                        max: 30,
+                        smallStep: 1,
+                        largeStep: 10,
+                        value: 18
+                    });
+
+                    $("#rangeslider").kendoRangeSlider({
+                        change: rangeSliderOnChange,
+                        slide: rangeSliderOnSlide,
+                        min: 0,
+                        max: 10,
+                        smallStep: 1,
+                        largeStep: 2,
+                        tickPlacement: "both"
+                    });
+                });
+            </script>
+
+            <style>
+                #climateCtrl {
+                    width: 245px;
+                    height: 167px;
+                    margin: 30px auto;
+                    padding: 102px 0 0 156px;
+                    background: url('../../content/web/slider/climateController.png') transparent no-repeat 0 0;
+                }
+                .humidity {
+                    margin: 67px 0 0 15px;
+                    width: 170px;
+                }
+            </style>
+        </div>
+        <div class="console"></div>

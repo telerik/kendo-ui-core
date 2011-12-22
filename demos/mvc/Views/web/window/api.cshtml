@@ -1,0 +1,46 @@
+
+        <div id="example" class="k-content" style="min-height: 245px">
+            <div class="configuration" style="z-index:10000">
+                <span class="configHead">Configuration</span>
+                <span class="configTitle">API Functions</span>
+                <ul class="options">
+                    <li>
+                         <button id="open" class="k-button">Open</button> / <button id="close" class="k-button">Close</button>
+                    </li>
+                    <li>
+                        <button id="refresh" class="k-button">Refresh</button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Window HTML -->
+            <div id="window"></div>
+
+            <!-- open button -->
+            <span id="undo" style="display:none" class="k-group">Click here to open the window.</span>
+
+            <script>
+                $(document).ready(function() {
+                    var window = $("#window");
+
+                    $("#open").click( function (e) {
+                        window.data("kendoWindow").open();
+                    });
+
+                    $("#close").click( function (e) {
+                        window.data("kendoWindow").close();
+                    });
+
+                    $("#refresh").click( function (e) {
+                        window.data("kendoWindow").refresh();
+                    });
+
+                    window.kendoWindow({
+                        width: "500px",
+                        title: "Kendo Window",
+                        actions: ["Refresh", "Maximize", "Close"],
+                        content: 'ajax/ajaxContent.html'
+                    });
+                });
+            </script>
+        </div>
