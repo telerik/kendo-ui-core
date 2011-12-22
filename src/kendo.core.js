@@ -1721,6 +1721,7 @@
         },
         fx: fx,
         data: {},
+        mobile: {},
         keys: {
             BACKSPACE: 8,
             TAB: 9,
@@ -1816,6 +1817,10 @@
             }
 
             return id;
+        },
+
+        roleSelector: function(role) {
+            return "[" + kendo.attr("role") + "=" + role + "]";
         }
     });
 
@@ -1844,6 +1849,8 @@
          * @name kendo.ui.plugin
          * @function
          * @param {kendo.ui.Widget} widget The widget function.
+         * @param {Object} register <kendo.ui> The object where the reference to the widget is recorded.
+         * @param {Object} prefix <""> The plugin function prefix, e.g. "Mobile" will register "kendoMobileFoo".
          * @example
          * function TextBox(element, options);
          * kendo.ui.plugin(TextBox);
@@ -1853,13 +1860,15 @@
          * // get the TextBox object and call the value API method
          * $("input").data("kendoTextBox").value();
          */
-        plugin: function(widget) {
-            // expose it in the kendo.ui namespace
+        plugin: function(widget, register, prefix) {
             var name = widget.fn.options.name;
 
-            kendo.ui[name] = widget;
+            register = register || kendo.ui;
+            prefix = prefix || "";
 
-            name = "kendo" + name;
+            register[name] = widget;
+
+            name = "kendo" + prefix + name;
             // expose a jQuery plugin
             $.fn[name] = function(options) {
                 $(this).each(function() {
