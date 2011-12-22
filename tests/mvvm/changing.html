@@ -226,6 +226,22 @@
 
                 equal($.trim(dom.text()), "boo");
             });
+
+            test("does not attach more than one change handler when monitoring for dependency changes", function() {
+                var dom = $('<div data-template="counting-template" />');
+
+                var viewModel = { foo: "foo" };
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("foo", "baz");
+
+                templateEvaluationCounter = 0;
+
+                viewModel.set("foo", "boo");
+
+                equal(templateEvaluationCounter, 1);
+            });
         </script>
 
         <script id="array-template" type="text/x-kendo-template">
@@ -235,6 +251,16 @@
         <script id="simple-field-template" type="text/x-kendo-template">
             #= get("foo") #
         </script>
+
+        <script>
+            var templateEvaluationCounter = 0;
+        </script>
+
+        <script id="counting-template" type="text/x-kendo-template">
+            # templateEvaluationCounter ++; #
+            #= get("foo") #
+        </script>
+
         <script id="if-else-template" type="text/x-kendo-template">
             # if (get("foo") == "foo") { #
                 #: get("foo") #
