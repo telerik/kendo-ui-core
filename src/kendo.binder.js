@@ -266,10 +266,11 @@
                 })
                 .attr("selected", "selected");
             } else {
-                $(element).val(get(object, field))
-                       .change(function() {
-                            object.set(field, this.value, this);
-                       });
+                $(element)
+                    .val(get(object, field))
+                    .change(function() {
+                        object.set(field, this.value, this);
+                    });
             }
         },
         click: function(element, object, field) {
@@ -296,11 +297,19 @@
     });
 
     function observe(element, object, field, binding) {
-        object.observable().bind(CHANGE, function(e) {
-            if (field.indexOf(e.field) == 0 && e.initiator !== element) {
-                binding(element, object, field, e);
-            }
-        });
+        var dependencies = $.data(element, "dependencies") || [];
+
+        if ($.inArray(field, dependencies) < 0) {
+            dependencies.push(field);
+
+            $.data(element, "dependencies", dependencies);
+
+            object.observable().bind(CHANGE, function(e) {
+                if (field.indexOf(e.field) == 0 && e.initiator !== element) {
+                    binding(element, object, field, e);
+                }
+            });
+        }
     }
 
     function bindElement(element, object) {
