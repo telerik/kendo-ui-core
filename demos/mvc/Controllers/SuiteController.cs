@@ -53,6 +53,7 @@ namespace Kendo.Controllers
         // GET: /Web/
         public ActionResult Index(string suite, string section, string example)
         {
+            ViewBag.ShowCodeStrip = true;
             ViewBag.Suite = suite;
             ViewBag.Section = section;
             ViewBag.Example = example;

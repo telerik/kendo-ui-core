@@ -515,6 +515,7 @@
         },
         {
             "text": "Globalization",
+			"name": "globalization",
             "spriteCssClass": "globalizationIcon",
             "items": [
                 {

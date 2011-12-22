@@ -7,6 +7,7 @@
     <link href="styles/kendo.default.css" rel="stylesheet" />
 </head>
 <body>
+    @{ WriteTo(new StringWriter(), RenderSection("Description", false)); }    
     @RenderBody()
 </body>
 </html>
