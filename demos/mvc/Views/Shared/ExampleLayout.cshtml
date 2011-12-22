@@ -46,7 +46,7 @@
 <script>
     $("#codeStrip").kendoTabStrip({
         contentUrls: [null,
-        "@Url.RouteUrl("Source", new { section = ViewBag.Section, example = ViewBag.Example })",
+        "@Url.RouteUrl("Source", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })",
         "@Url.ContentOrEmpty((string) ViewBag.ConfigurationDocPath)",
         "@Url.ContentOrEmpty((string) ViewBag.MethodsDocPath)",
         "@Url.ContentOrEmpty((string) ViewBag.EventsDocPath)"
