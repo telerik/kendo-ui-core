@@ -88,6 +88,23 @@
      *     ]
      * });
      *
+     * @exampleTitle Initialize Kendo PanelBar using JSON data object
+     * @example
+     * $("#panelbar").kendoPanelBar({
+     *     dataSource: [
+     *         {
+     *             text: "Item 1",
+     *             items: [
+     *                 { text: "Sub Item 1" },
+     *                 { text: "Sub Item 2" }
+     *             ]
+     *         },
+     *         {
+     *             text: "Item 2"
+     *         }
+     *     ]
+     * });
+     * 
      * @section
      * <h3>Loading Content with AJAX</h3>
      * <p>
