@@ -99,6 +99,10 @@
             toggleButton = wrapper.find(">.k-icon"),
             innerWrapper = wrapper.find(">.k-in");
 
+        if (node.hasClass("k-treeview")) {
+            return;
+        }
+
         if (!wrapper.length) {
             wrapper = $("<div />").prependTo(node);
         }
@@ -128,6 +132,10 @@
     function updateNodeClasses(node, groupData, nodeData) {
         var wrapper = node.find(">div"),
             subGroup = node.find(">ul")
+
+        if (node.hasClass("k-treeview")) {
+            return;
+        }
 
         if (!nodeData) {
             nodeData = {
@@ -626,18 +634,31 @@
         _insertNode: function(nodeData, index, parentNode, group, insertCallback) {
             var that = this,
                 updatedGroupLength = group.children().length + 1,
-                fromNodeData = $.isPlainObject(nodeData),
+                isArrayData = $.isArray(nodeData),
+                fromNodeData = isArrayData || $.isPlainObject(nodeData),
                 groupData = {
                     firstLevel: parentNode.hasClass(TTREEVIEW),
                     expanded: true,
                     length: updatedGroupLength
-                }, node;
+                }, node, i, nodeHtml = "";
 
             if (fromNodeData) {
-                node = $(TreeView.renderItem({
-                    group: groupData,
-                    item: extend(nodeData, { index: index })
-                }));
+                if (isArrayData) {
+                    for (i = 0; i < nodeData.length; i++) {
+                        nodeHtml += TreeView.renderItem({
+                            group: groupData,
+                            item: extend(nodeData[i], { index: index + i })
+                        });
+                    }
+
+                } else {
+                    nodeHtml = TreeView.renderItem({
+                        group: groupData,
+                        item: extend(nodeData, { index: index })
+                    });
+                }
+
+                node = $(nodeHtml);
             } else {
                 node = $(nodeData);
 
@@ -727,6 +748,8 @@
          *
          * // moves the node with id="secondNode" as a last child of the node with id="firstItem"
          * treeview.append(document.getElementById("secondNode"), document.getElementById("firstItem"));
+         * // appends several new nodes to the root of the tree
+         * treeview.append([ { text: "one" }, { text: "bar" }]);
          */
         append: function (nodeData, parentNode) {
             parentNode = parentNode || this.element;
