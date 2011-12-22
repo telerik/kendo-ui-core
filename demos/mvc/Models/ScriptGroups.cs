@@ -45,5 +45,31 @@ namespace Kendo.Models
             "kendo.upload.js",
             "kendo.window.js"
         };
+
+        public static readonly IList<string> Mobile = new string[]
+        {
+            "jquery.js",
+            "kendo.core.js",
+            "kendo.fx.js",
+            "kendo.data.odata.js",
+            "kendo.data.xml.js",
+            "kendo.model.js",
+            "kendo.data.js",
+            "kendo.selectable.js",
+            "kendo.list.js",
+            "kendo.dropdownlist.js",
+            "kendo.tabstrip.js",
+            "kendo.panelbar.js",
+            "kendo.popup.js",
+            "kendo.mobile.core.js",
+            "kendo.mobile.application.js",
+            "kendo.mobile.button.js",
+            "kendo.mobile.listview.js",
+            "kendo.mobile.navbar.js",
+            "kendo.mobile.scroller.js",
+            "kendo.mobile.switch.js",
+            "kendo.mobile.tabstrip.js",
+            "kendo.mobile.view.js"
+        };
     }
 }

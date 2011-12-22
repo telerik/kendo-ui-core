@@ -1,0 +1,41 @@
+{
+    "Framework": [
+        {
+            "text": "Overview",
+            "name": "overview",
+            "spriteCssClass": "overviewIcon",
+            "expanded": true,
+            "items": [
+                {
+                    "text": "First look",
+                    "url": "overview/index.html"
+                }
+            ]
+        },
+        {
+            "text": "Application",
+            "name": "application",
+            "spriteCssClass": "dataSourceIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "application/index.html"
+                }
+            ]
+        }
+    ],
+
+    "UI Widgets": [
+        {
+            "text": "Button",
+            "name": "button",
+            "spriteCssClass": "dataSourceIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "button/index.html"
+                }
+            ]
+        }
+   ]
+}
