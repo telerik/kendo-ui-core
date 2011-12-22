@@ -62,6 +62,14 @@
                 viewModel.set("foo", "baz");
             });
 
+            test("setting nested fields", function() {
+                var viewModel = kendo.observable({ foo: { bar: "bar" } });
+
+                viewModel.set("foo.bar", "baz");
+
+                equal(viewModel.foo.bar, "baz");
+            });
+
             test("nested arrays are extended", function() {
                 var viewModel = kendo.observable({ foo: [{}] });
 
@@ -212,6 +220,32 @@
             test("observable array items are observable", function() {
                 var viewModel = kendo.observable({ foo: [ {} ] });
                 ok(viewModel.foo[0].observable);
+            });
+
+            test("getting field raises get event", function() {
+                expect(1);
+
+                var viewModel = kendo.observable({ foo: "bar" });
+
+                viewModel.observable().bind("get", function(e) {
+                    start();
+                    equal(e.field, "foo");
+                });
+
+                viewModel.get("foo");
+            });
+
+            test("getting nested field raises get event of parent", function() {
+                expect(1);
+
+                var viewModel = kendo.observable({ foo: { bar: "bar" } });
+
+                viewModel.observable().bind("get", function(e) {
+                    start();
+                    equal(e.field, "foo.bar");
+                });
+
+                viewModel.foo.get("bar");
             });
         </script>
     </head>

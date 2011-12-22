@@ -52,7 +52,6 @@
                 var observable = viewModel.observable();
 
                 observable.bind = function() {
-                    console.log(this);
                     calls ++;
                     kendo.Observable.fn.bind.apply(this, arguments);
                 }
@@ -242,6 +241,70 @@
 
                 equal(templateEvaluationCounter, 1);
             });
+
+            test("tracking changes when direct access and set are used", function() {
+                var dom = $('<div data-template="nested-field-template" />');
+
+                var viewModel = {
+                    foo: {
+                        bar: "bar"
+                    }
+                };
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.foo.set("bar", "baz");
+
+                equal($.trim(dom.text()), "baz");
+            });
+
+            test("tracking changes when single set is used", function() {
+                var dom = $('<div data-template="nested-field-template" />');
+
+                var viewModel = {
+                    foo: {
+                        bar: "bar"
+                    }
+                };
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("foo.bar", "boo");
+
+                equal($.trim(dom.text()), "boo");
+            });
+
+            test("tracking changes when direct access and set are used (multiple get template)", function() {
+                var dom = $('<div data-template="nested-field-template-multiple-gets" />');
+
+                var viewModel = {
+                    foo: {
+                        bar: "bar"
+                    }
+                };
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.foo.set("bar", "baz");
+
+                equal($.trim(dom.text()), "baz");
+            });
+
+            test("tracking changes when single set is used (multiple get template)", function() {
+                var dom = $('<div data-template="nested-field-template-multiple-gets" />');
+
+                var viewModel = {
+                    foo: {
+                        bar: "bar"
+                    }
+                };
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("foo.bar", "boo");
+
+                equal($.trim(dom.text()), "boo");
+            });
         </script>
 
         <script id="array-template" type="text/x-kendo-template">
@@ -250,6 +313,14 @@
 
         <script id="simple-field-template" type="text/x-kendo-template">
             #= get("foo") #
+        </script>
+
+        <script id="nested-field-template" type="text/x-kendo-template">
+            #= get("foo.bar") #
+        </script>
+
+        <script id="nested-field-template-multiple-gets" type="text/x-kendo-template">
+            #= get("foo").get("bar") #
         </script>
 
         <script>

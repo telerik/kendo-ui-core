@@ -90,8 +90,12 @@
 
                 (function(field) {
                     member.observable().bind(CHANGE, function(e) {
-                        e.field = field;
+                        e.field = field + "." + e.field;
                         observable.trigger(CHANGE, e);
+                    });
+                    member.observable().bind("get", function(e) {
+                        e.field = field + "." + e.field;
+                        observable.trigger("get", e);
                     });
                 })(field);
             } else if ($.isArray(member)) {
@@ -107,7 +111,7 @@
         }
 
         object.get = function(field) {
-            observable.trigger("access", { field : field });
+            observable.trigger("get", { field : field });
 
             return get(this, field);
         }
@@ -116,7 +120,7 @@
             var current = this[field];
 
             if (current != value) {
-                this[field] = value;
+                set(this, field, value);
 
                 observable.trigger(CHANGE, {
                     field: field,
@@ -161,6 +165,10 @@
         return template;
     }
 
+    function set(object, field, value) {
+        return kendo.setter(field)(object, value);
+    }
+
     function get(object, field) {
         if (field === "this") {
             return object;
@@ -186,13 +194,13 @@
                     dependencies[e.field] = true;
                 }
 
-                object.observable().bind("access", access);
+                object.observable().bind("get", access);
 
                 var template = kendo.template(templateFor(element));
 
                 $(element).html(template(object));
 
-                object.observable().unbind("access", access);
+                object.observable().unbind("get", access);
 
                 for (var dependency in dependencies) {
                     observe(element, object, dependency, arguments.callee);
