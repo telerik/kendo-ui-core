@@ -1,3 +1,8 @@
+/**
+ * @fileOverview Provides a PanelBar implementation which can be used to
+ * display a hierarchical data as a multi-level, expandable panel bar.
+ */
+
 (function ($, undefined) {
     /**
      * @name kendo.ui.PanelBar.Description
@@ -6,20 +11,21 @@
      * <p>
      *  The <b>PanelBar</b> displays hierarchical data as a multi-level,
      *  expandable widget that's useful for constained areas of a page. Its
-     *  structure can be defined in HTML or configured dynamically through
+     *  structure may be defined in HTML or configured dynamically through
      *  its API. The content for items can also be loaded via AJAX by
      *  specifying a content URL.
      * </p>
      * <h3>Getting Started</h3>
      * <p>
-     *  A <b>PanelBar</b> will utilize a list of items defined in HTML to
-     *  define its structure and content.
+     *  A <b>PanelBar</b> will utilize an HTML list to define its structure
+     *  and content.
      * </p>
-     *
-     * @exampleTitle Create a list of items in HTML
+     * 
+     * @exampleTitle Create a list of items
      * @example
      * <ul id="panelBar">
-     *  <li>Item 1
+     *  <li>
+     *   Item 1
      *   <ul>
      *    <li>Sub Item 1</li>
      *    <li>Sub Item 2</li>
@@ -30,20 +36,21 @@
      *
      * @section
      * <p>
-     *  A <b>PanelBar</b> can be created by targeting the root element of the
-     *  list of items defined in HTML.
+     *  A <b>PanelBar</b> can be created by targeting the root element of a
+     *  HTML list.
      * </p>
      * 
-     * @exampleTitle Initialize the <b>PanelBar</b> via a jQuery ID selector
+     * @exampleTitle Initialize the PanelBar via a jQuery ID selector
      * @example
-     * var panelBar = $("#panelBar").kendoPanelBar();
+     * $(document).ready(function() {
+     *  $("#panelBar").kendoPanelBar();
+     * });
      *
      * @section
      * <p>
-     *  Items in a <b>PanelBar</b> can defined with in-line HTML content. To
-     *  add content, place the HTML inside of a <b>div</b> element. Text
-     *  content outside of the <b>div</b> element will be used as the text
-     *  for the item.
+     *  <b>PanelBar</b> items may contain nested content (including markup)
+     *  within a <b>div</b> element. Text content located outside nested
+     *  content will be used as the title of the item.
      * </p>
      *
      * @exampleTitle Create a list of items in HTML with nested content
@@ -108,14 +115,12 @@
      * @exampleTitle Load PanelBar item content asynchronously via AJAX
      * @example
      * // initialization and configuration
-     * $(document).ready(function(){
-     *  $("#panelBar").kendoPanelBar({
-     *   contentUrls:[
-     *    null,
-     *    null,
-     *    "html-content-snippet.html"
-     *   ]
-     *  });
+     * $("#panelBar").kendoPanelBar({
+     *  contentUrls:[
+     *   null,
+     *   null,
+     *   "html-content-snippet.html"
+     *  ]
      * });
      *
      * @section
@@ -143,19 +148,18 @@
      * });
      *
      * @section
-     * <h3>Dynamically configuring PanelBar items</h3>
+     * <h3>Dynamically Configuring PanelBar Items</h3>
      * <p>
      *  The <b>PanelBar</b> API provides several methods for dynamically
      *  adding or removing Items. To add items, provide the new item as a
      *  JSON object along with a reference item that will be used to
-     *  determine the placement in the hierarchy. The reference item is
+     *  determine its placement in the items hierarchy. The reference item is
      *  optional when appending.
      * </p>
      * <p>
      *  A reference item is a target <b>PanelBar</b> item HTML element that
      *  already exists in the PanelBar. Any valid jQuery selector can be used
-     *  to obtain a reference to the target item. For examples, see the
-     *  PanelBar API demos.
+     *  to obtain a reference to the target item.
      * </p>
      * <p>
      *  Removing an item only requires a reference to the target element that
@@ -170,6 +174,16 @@
      *  { text: "New PanelBar Item" },
      *  panelBar.element.children("li:last")
      * );
+     *
+     * @section
+     * <h3>Accessing an Existing PanelBar</h3>
+     * To access an existing instance of a <b>PanelBar</b>, use the jQuery
+     * data API. Once a reference to the <b>PanelBar</b> is established, you
+     * can use the API to control the widget.
+     *
+     * @exampleTitle Access an existing PanelBar instance
+     * @example
+     * var panelBar = $("#panelBar").data("kendoPanelBar");
      */
     var kendo = window.kendo,
         ui = kendo.ui,
