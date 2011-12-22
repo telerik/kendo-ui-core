@@ -137,16 +137,77 @@
          * @extends kendo.ui.Select
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the DropDownList will be bound to.
-         * @option {Boolean} [enable] <true> Controls whether the DropDownList should be initially enabled.
-         * @option {Number} [index] <0> Defines the initial selected item.
+         * @option {kendo.data.DataSource | Object} [dataSource] Instance of DataSource or the data that the DropDownList will be bound to.
+         * _example
+	 * // bind to local data
+	 * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     dataSource: items,
+	 *     dataTextField: "Title",
+	 *     dataValueField: "Id"
+	 * });    
+	 * //
+	 * // or
+	 * //
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     dataSource: {
+	 *         transport: {
+	 *             read: "titles.json"
+	 *         }
+	 *     },
+	 *     dataTextField: "Title",
+	 *     dataValueField: "Id"
+	 * });
+	 * @option {Boolean} [enable] <true> Controls whether the DropDownList should be initially enabled.
+         * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     enabled: false // dropdown list will not be enabled
+	 * });
+	 * //
+	 * // To set after initialization, use the enable API method
+	 * //
+	 * // get a reference to the dropdown list
+	 * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+	 * // disable the dropdown
+	 * dropdownlist.enable(false);
+	 * @option {Number} [index] <0> Defines the initial selected item.
+	 * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     index: 1 // selects the second item in the dropdown list
+	 * });
          * @option {Boolean} [autoBind] <true> Controls whether to bind the widget on initialization.
-         * @option {Number} [delay] <500> Specifies the delay in ms before the search text typed by the end user is cleared.
-         * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
+         * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     autoBind: false
+	 * });
+	 * @option {Number} [delay] <500> Specifies the delay in ms before the search text typed by the end user is cleared.
+	 * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
+	 * _example
+	 * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     dataSource: items,
+	 *     dataTextField: "Title",
+	 *     dataValueField: "Id"
+	 * }); 
          * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
-         * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
+         * _example
+	 * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     dataSource: items,
+	 *     dataTextField: "Title",
+	 *     dataValueField: "Id"
+	 * });
+	 * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
+	 * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     height: 400
+	 * });
          * @option {String} [optionLabel] Define the text of the default empty item.
-         * @option {Function} [template] Template to be used for rendering the items in the list.
+         * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     optionLabel: "Select An Option"
+	 * });
+	 * @option {Function} [template] Template to be used for rendering the items in the list.
          * _example
          *  //template
          * &lt;script id="template" type="text/x-kendo-tmpl"&gt;
@@ -233,19 +294,61 @@
                 * @name kendo.ui.DropDownList#open
                 * @event
                 * @param {Event} e
+		* @example
+		* $("#dropdownlist").kendoDropDownList({
+		*     open: function(e) {
+		*         // handle event
+	 	*     }
+		* });
+		* @exampleTitle To set after initialization
+		* @example
+		* // get a reference to the dropdown list
+		* var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+		* // bind to the open event
+		* dropdownlist.bind("open", function(e) {
+		*     // handle event
+		* });
                 */
                 /**
                 * Fires when the drop-down list is closed
                 * @name kendo.ui.DropDownList#close
                 * @event
                 * @param {Event} e
-                */
+                * @example
+		* $("#dropdownlist").kendoDropDownList({
+		*     close: function(e) {
+		*         // handle event
+	 	*     }
+		* });
+		* @exampleTitle To set after initialization
+		* @example
+		* // get a reference to the dropdown list
+		* var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+		* // bind to the close event
+		* dropdownlist.bind("close", function(e) {
+		*     // handle event
+		* });
+		*/
                 /**
                 * Fires when the value has been changed.
                 * @name kendo.ui.DropDownList#change
                 * @event
                 * @param {Event} e
-                */
+                * @example
+		* $("#dropdownlist").kendoDropDownList({
+		*     change: function(e) {
+		*         // handle event
+	 	*     }
+		* });
+		* @exampleTitle To set after initialization
+		* @example
+		* // get a reference to the dropdown list
+		* var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+		* // bind to the change event
+		* dropdownlist.bind("change", function(e) {
+		*     // handle event
+		* });
+		*/
                 CHANGE
             ], options);
 
@@ -278,6 +381,11 @@
         /**
         * Enables/disables the dropdownlist widget
         * @param {Boolean} enable Desired state
+	* @example
+	* // get a reference to the dropdown list
+	* var dropdownlist = $("#dropdownlist").kendoDropDownList({
+	* // disable the dropdown list
+	* dropdownlist.enable(false);    
         */
         enable: function(enable) {
             var that = this,
