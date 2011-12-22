@@ -10,13 +10,13 @@ var fs = require("fs"),
     mkdir = kendoBuild.mkdir;
 
 // Configuration ==============================================================
-var SUITES = ["Web", "DataViz"],
+var SUITES = ["web", "dataviz"],
     EXAMPLES_ROOT = path.join("demos", "examples"),
     MVC_ROOT = path.join("demos", "mvc", "Views");
 
 // Implementation ==============================================================
 SUITES.forEach(function(suite) {
-    var suiteRoot = path.join(EXAMPLES_ROOT, suite.toLowerCase());
+    var suiteRoot = path.join(EXAMPLES_ROOT, suite);
 
     processFiles(
         suiteRoot,
@@ -34,7 +34,7 @@ SUITES.forEach(function(suite) {
                 content = content
                     .replace(/(.|\n)+<body>((.|\n)+)<\/body>(.|\n)+/m, "$2")
                     .replace(/<div class="description">((.|\n)+?)<\/div>/m, "")
-                    .replace("../content", "../../content/" + suite.toLowerCase())
+                    .replace("../content", "../../content/" + suite)
                     .replace(/\s*<!--\s*\w+\s*-->\s*$/gm, "");
 
                 kendoBuild.writeText(outputFile, content);
