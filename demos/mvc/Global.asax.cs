@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Kendo.Infrastructure;
 
 namespace Kendo
 {
@@ -70,6 +72,8 @@ namespace Kendo
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            HostingEnvironment.RegisterVirtualPathProvider(new LowercasePathProvider());
         }
     }
 }
