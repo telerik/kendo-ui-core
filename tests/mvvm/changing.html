@@ -40,29 +40,6 @@
                 equal(dom.text(), "bar");
             });
 
-            test("change handler is attached only once", function() {
-                var calls = 0;
-
-                var viewModel = kendo.observable( {
-                    foo: "foo"
-                });
-
-                var dom = $('<span data-text="foo"/>');
-
-                var observable = viewModel.observable();
-
-                observable.bind = function() {
-                    calls ++;
-                    kendo.Observable.fn.bind.apply(this, arguments);
-                }
-
-                kendo.bind(dom, viewModel);
-
-                viewModel.set("foo", "bar");
-
-                equal(calls, 1);
-            });
-
             test("changing a view model field from a view model function bound to UI reflects UI", function() {
                 var viewModel = kendo.observable( {
                     foo: "foo",
@@ -304,6 +281,24 @@
                 viewModel.set("foo.bar", "boo");
 
                 equal($.trim(dom.text()), "boo");
+            });
+
+            test("tracking changes in dependent fields", function() {
+                var dom = $('<div data-text="computed" />');
+
+                var viewModel = {
+                    foo: "foo",
+                    bar: "bar",
+                    computed: function() {
+                        return this.get("foo") + this.get("bar");
+                    }
+                };
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("foo", "boo");
+
+                equal($.trim(dom.text()), "boobar");
             });
         </script>
 

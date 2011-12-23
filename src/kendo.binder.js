@@ -169,42 +169,36 @@
         return kendo.setter(field)(object, value);
     }
 
-    function get(object, field) {
+    function get(object, field, call) {
+        var result;
+
         if (field === "this") {
-            return object;
+            result = object;
+        } else {
+            result = kendo.getter(field)(object);
+
+            if (call && typeof result === "function") {
+                result = result.call(object);
+            }
         }
 
-        return kendo.getter(field)(object);
+        return result;
     }
 
     var cssRegExp = /([^:]+):\s*\${([^}]*)};?/g;
 
     var bindings = {
         text: function(element, object, field) {
-            element[innerText] = get(object, field);
+            element[innerText] = get(object, field, true);
         },
         html: function(element, object, field) {
-            element.innerHTML = get(object, field);
+            element.innerHTML = get(object, field, true);
         },
-        template: function(element, object) {
+        template: function(element, object, field) {
             if (!element.getAttribute("data-source")) {
-                var dependencies = {};
-
-                var access = function(e) {
-                    dependencies[e.field] = true;
-                }
-
-                object.observable().bind("get", access);
-
                 var template = kendo.template(templateFor(element));
 
                 $(element).html(template(object));
-
-                object.observable().unbind("get", access);
-
-                for (var dependency in dependencies) {
-                    observe(element, object, dependency, arguments.callee);
-                }
             }
         },
         style: function(element, object, style) {
@@ -263,7 +257,7 @@
 
         value: function(element, object, field) {
             if (element.nodeName.toLowerCase() === "select") {
-                var value = get(object, field);
+                var value = get(object, field, true);
 
                 $(element)
                 .change(function() {
@@ -304,19 +298,54 @@
         }
     });
 
-    function observe(element, object, field, binding) {
-        var dependencies = $.data(element, "dependencies") || [];
+    function applyBinding(element, object, field, binding, e) {
+        var dependency, dependencies = {}, access;
 
-        if ($.inArray(field, dependencies) < 0) {
-            dependencies.push(field);
+        dependencies[field] = true;
 
-            $.data(element, "dependencies", dependencies);
+        access = function(e) {
+            dependencies[e.field] = true;
+        }
 
-            object.observable().bind(CHANGE, function(e) {
-                if (field.indexOf(e.field) == 0 && e.initiator !== element) {
-                    binding(element, object, field, e);
-                }
+        if (field !== "this") {
+            object.observable().bind("get", access);
+
+            binding(element, object, field, e);
+
+            object.observable().unbind("get", access);
+
+            observe(element, object, dependencies, function(e) {
+                applyBinding(element, object, field, binding, e);
             });
+        } else {
+            binding(element, object, field, e);
+        }
+    }
+
+    function makeObserver(element, refresh) {
+        return function(e) {
+            var dependency, dependencies = $.data(element, "dependencies");
+
+            if (e.initiator !== element) {
+                for (dependency in dependencies) {
+                    if (dependency.indexOf(e.field) === 0) {
+                        refresh(e);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    function observe(element, object, dependencies, binding) {
+        $.extend(dependencies, $.data(element, "dependencies"));
+
+        $.data(element, "dependencies", dependencies);
+
+        if (!$.data(element, "observer")) {
+            var observer = makeObserver(element, binding);
+            $.data(element, "observer", observer);
+            object.observable().bind(CHANGE, observer);
         }
     }
 
@@ -329,11 +358,7 @@
             if (field) {
                 binding = $.proxy(kendo.bindings[key], object);
 
-                binding(element, object, field);
-
-                if (field !== "this" && key !== "style") {
-                    observe(element, object, field, binding);
-                }
+                applyBinding(element, object, field, binding);
             }
         }
 
