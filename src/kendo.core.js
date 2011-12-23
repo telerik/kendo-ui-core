@@ -1702,6 +1702,10 @@
                         mask = $("<div class='k-loading-mask'><span class='k-loading-text'>Loading...</span><div class='k-loading-image'/><div class='k-loading-color'/></div>")
                             .width("100%").height("100%")
                             .prependTo(container);
+                        var scrTop = container.scrollTop();
+                        if (scrTop > 0) {
+                            mask.css("top", scrTop);
+                        }
                     }
                 } else if (mask) {
                     mask.remove();
