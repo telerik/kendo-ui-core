@@ -355,6 +355,20 @@
                 kendo.bind(dom, viewModel);
                 equal($.trim(dom.text()), "foo")
             });
+
+            test("binding to function", function() {
+                var dom = $('<div data-text="foo"/>');
+
+                var viewModel = {
+                    bar: "bar",
+                    foo: function() {
+                        return this.get("bar");
+                    }
+                };
+
+                kendo.bind(dom, viewModel);
+                equal($.trim(dom.text()), "bar")
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
