@@ -298,56 +298,55 @@
         }
     });
 
-    function applyBinding(element, object, field, binding, e) {
-        var dependency, dependencies = {}, access;
+    var Binding = kendo.Class.extend( {
+        init: function(element, object, field, binding) {
+            var that = this;
 
-        dependencies[field] = true;
+            that.observers = {};
+            that.element = element;
+            that.observable = object;
+            that.field = field;
+            that.binding = binding;
 
-        access = function(e) {
-            dependencies[e.field] = true;
-        }
+            if (field !== "this") {
+                that.observe(field);
+            }
 
-        if (field !== "this") {
-            object.observable().bind("get", access);
+            that.apply();
+        },
 
-            binding(element, object, field, e);
+        observe: function(field) {
+            var that = this;
 
-            object.observable().unbind("get", access);
-
-            observe(element, object, dependencies, function(e) {
-                applyBinding(element, object, field, binding, e);
-            });
-        } else {
-            binding(element, object, field, e);
-        }
-    }
-
-    function makeObserver(element, refresh) {
-        return function(e) {
-            var dependency, dependencies = $.data(element, "dependencies");
-
-            if (e.initiator !== element) {
-                for (dependency in dependencies) {
-                    if (dependency.indexOf(e.field) === 0) {
-                        refresh(e);
-                        break;
+            if (that.observers[field] === undefined) {
+                that.observers[field] = function(e) {
+                    if (field.indexOf(e.field) === 0) {
+                        that.apply(e);
                     }
                 }
+                that.observable.observable().bind(CHANGE, that.observers[field]);
+            }
+        },
+
+        apply: function(e) {
+            var that = this, access;
+
+            access = function(e) {
+                that.observe(e.field);
+            }
+
+            if (that.field !== "this") {
+                that.observable.observable().bind("get", access);
+
+                that.binding(that.element, that.observable, that.field, e);
+
+                that.observable.observable().unbind("get", access);
+
+            } else {
+                that.binding(that.element, that.observable, that.field, e);
             }
         }
-    }
-
-    function observe(element, object, dependencies, binding) {
-        $.extend(dependencies, $.data(element, "dependencies"));
-
-        $.data(element, "dependencies", dependencies);
-
-        if (!$.data(element, "observer")) {
-            var observer = makeObserver(element, binding);
-            $.data(element, "observer", observer);
-            object.observable().bind(CHANGE, observer);
-        }
-    }
+    });
 
     function bindElement(element, object) {
         var field, key, binding;
@@ -358,7 +357,7 @@
             if (field) {
                 binding = $.proxy(kendo.bindings[key], object);
 
-                applyBinding(element, object, field, binding);
+                new Binding(element, object, field, binding);
             }
         }
 
