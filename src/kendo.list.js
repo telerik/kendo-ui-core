@@ -43,11 +43,12 @@
                                 clearTimeout(that._bluring);
                             }, 0);
                         })
-                        .delegate(LI, CLICK, proxy(that._click, that))
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
 
             that.list = $("<div class='k-list-container'/>").append(that.ul);
+
+            that.list.delegate(LI, CLICK, proxy(that._click, that));
 
             id = that.element.attr(ID);
             if (id) {

@@ -20,6 +20,7 @@
         <ol id="qunit-tests"></ol>
         <script>
             var DropDownList = kendo.ui.DropDownList,
+                CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
             $.fn.press = function(key) {
@@ -102,7 +103,7 @@
                     }
                 });
 
-                dropdownlist.wrapper.focus().click();
+                dropdownlist.wrapper.focus().trigger(CLICK);
                 dropdownlist._change();
                 ok(!changeWasCalled);
             });
@@ -154,7 +155,7 @@
 
                 dropdownlist.wrapper.focus();
 
-                dropdownlist.ul.children().eq(1).click();
+                dropdownlist.ul.children().eq(1).trigger(CLICK);
                 ok(changeWasCalled);
             });
 
@@ -200,7 +201,7 @@
 
                 dropdownlist.wrapper.focus();
 
-                dropdownlist.ul.children().eq(1).click();
+                dropdownlist.ul.children().eq(1).trigger(CLICK);
                 ok(origCalled);
             });
 
@@ -213,7 +214,7 @@
                     }
                 });
 
-                input.data("kendoDropDownList").wrapper.click();
+                input.data("kendoDropDownList").wrapper.trigger(CLICK);
             });
 
             asyncTest("open event should be cancellable", function() {
@@ -226,7 +227,7 @@
 
                 var dropdownlist = input.data("kendoDropDownList");
 
-                dropdownlist.wrapper.click();
+                dropdownlist.wrapper.trigger(CLICK);
 
                 setTimeout(function() {
                     ok(!dropdownlist.popup.visible());
@@ -257,7 +258,7 @@
 
                 var dropdownlist = input.data("kendoDropDownList");
                 dropdownlist.open();
-                dropdownlist.wrapper.click();
+                dropdownlist.wrapper.trigger(CLICK);
             });
 
             asyncTest("close event should be cancellable", function() {
@@ -271,7 +272,7 @@
                 var dropdownlist = input.data("kendoDropDownList");
 
                 dropdownlist.open();
-                dropdownlist.wrapper.click();
+                dropdownlist.wrapper.trigger(CLICK);
 
                 setTimeout(function() {
                     ok(dropdownlist.popup.visible());
@@ -305,7 +306,7 @@
                 var ddl = input.data("kendoDropDownList");
                 ddl.open();
 
-                ddl.ul.children().eq(0).click();
+                ddl.ul.children().eq(0).trigger(CLICK);
             });
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>

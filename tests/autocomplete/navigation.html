@@ -20,13 +20,14 @@
         <ol id="qunit-tests"></ol>
         <script>
             var AutoComplete = kendo.ui.AutoComplete,
+                CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
             QUnit.config.testTimeout = 800;
 
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
-            }
+            };
 
             module("kendo.ui.AutoComplete navigation", {
                 setup: function() {
@@ -87,7 +88,7 @@
                 ok(!autocomplete.ul.children().first().is(".k-state-focused"));
             });
 
-            test("clicking an item focuses the input", function() {
+            asyncTest("clicking an item focuses the input", function() {
                 var wasFocused = false, autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -98,12 +99,15 @@
 
                 input.val("ba");
                 autocomplete.search();
-                autocomplete.ul.children().first().click();
+                autocomplete.ul.children().first().trigger(CLICK);
 
-                ok(wasFocused);
+                setTimeout( function () {
+                    ok(wasFocused);
+                    start();
+                }, 0);
             });
 
-            test("pressing enter focuses the input", function() {
+            asyncTest("pressing enter focuses the input", function() {
                 var wasFocused = false, autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -117,19 +121,26 @@
 
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.ENTER);
-                ok(wasFocused);
+
+                setTimeout( function () {
+                    ok(wasFocused);
+                    start();
+                }, 0);
             });
 
-            test("clicking an item applies selected style", function() {
+            asyncTest("clicking an item applies selected style", function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
 
                 input.val("ba");
                 autocomplete.search();
-                autocomplete.ul.children().first().click();
+                autocomplete.ul.children().eq(0).trigger(CLICK);
 
-                ok(autocomplete.ul.children().first().is(".k-state-selected"));
+                setTimeout( function () {
+                    ok(autocomplete.ul.children().eq(0).is(".k-state-selected"));
+                    start();
+                }, 0);
             });
 
             test("changing the current popup item does not update the input value", function() {
@@ -144,7 +155,7 @@
                 equal(input.val(), "b");
             });
 
-            test("pressing enter closes the dropdown", function() {
+            asyncTest("pressing enter closes the dropdown", function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -154,7 +165,10 @@
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.ENTER);
 
-                ok(!autocomplete.ul.is(":visible"));
+                setTimeout( function () {
+                    ok(!autocomplete.ul.is(":visible"));
+                    start();
+                }, 0);
             });
 
             asyncTest("press enter should call preventDefault when popup is visible", function() {
@@ -175,7 +189,7 @@
                 });
             });
 
-            test("pressing enter closes updates the value of the autocomplete", function() {
+            asyncTest("pressing enter closes updates the value of the autocomplete", function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -185,10 +199,13 @@
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.ENTER);
 
-                equal(input.val(), "baz");
+                setTimeout( function () {
+                    equal(input.val(), "baz");
+                    start();
+                }, 0);
             });
 
-            test("pressing tab closes updates the value of the autocomplete", function() {
+            asyncTest("pressing tab closes updates the value of the autocomplete", function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -198,7 +215,10 @@
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.TAB);
 
-                equal(input.val(), "baz");
+                setTimeout( function () {
+                    equal(input.val(), "baz");
+                    start();
+                }, 0);
             });
 
             test("select applies selected style", function() {
@@ -283,7 +303,7 @@
                 ok(!autocomplete.ul.is(":visible"));
             });
 
-            test("clicking item more than once", function() {
+            asyncTest("clicking item more than once", function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"],
                     separator: ", "
@@ -291,8 +311,12 @@
 
                 input.val("b");
                 autocomplete.search();
-                autocomplete.ul.children().first().click().click();
-                equal(input.val(), "baz, ");
+                autocomplete.ul.children().first().trigger(CLICK).trigger(CLICK);
+
+                setTimeout( function () {
+                    equal(input.val(), "baz, ");
+                    start();
+                }, 0);
             });
 
             test("pressing the down arrows when the popup is not visible does not change value", function() {

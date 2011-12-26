@@ -290,17 +290,19 @@
                ok(wrapper.hasClass("k-state-disabled"));
            });
 
-            test("pointer over widget should add hover state", function() {
-                var data = [{text: 1, value: 1}, {text:2, value:2}],
-                    dropdownlist = new DropDownList(input, {
-                         dataSource: data
-                    });
+            if (!kendo.support.touch) {
+                test("pointer over widget should add hover state", function() {
+                    var data = [{text: 1, value: 1}, {text:2, value:2}],
+                        dropdownlist = new DropDownList(input, {
+                             dataSource: data
+                        });
 
-                var wrap = dropdownlist.wrapper.children(".k-dropdown-wrap");
-                wrap.mouseenter();
+                    var wrap = dropdownlist.wrapper.children(".k-dropdown-wrap");
+                    wrap.mouseenter();
 
-                ok(wrap.hasClass("k-state-hover"));
-            });
+                    ok(wrap.hasClass("k-state-hover"));
+                });
+            }
 
             test("leaving widget should remove hover state", function() {
                 var data = [{text: 1, value: 1}, {text:2, value:2}],
