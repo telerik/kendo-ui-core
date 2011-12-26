@@ -1,23 +1,23 @@
 (function($, undefined) {
     /**
-    * @name kendo.ui.MobileNavBar.Description
+    * @name kendo.mobile.ui.NavBar.Description
     *
-    * @section MobileNavBar widget is iused inside a mobile view or layout header element to display an application navigation bar.
-    * The MobileNavBar can show the current view title in the center, and optionally some additional left and right aligned elements (back button, settings button, etc.).
+    * @section mobile NavBar widget is iused inside a mobile view or layout header element to display an application navigation bar.
+    * The mobile NavBar can show the current view title in the center, and optionally some additional left and right aligned elements (back button, settings button, etc.).
     *
     * <h3>Getting Started</h3>
-    * The Kendo MobileApplication will automatically initialize the MobileNavBar for every element with <code>role</code> data attribute set to <code>navbar</code> present in the views/layouts markup.
+    * The Kendo mobile Application will automatically initialize the mobile NavBar for every element with <code>role</code> data attribute set to <code>navbar</code> present in the views/layouts markup.
     * Alternatively, it can be initialized using a jQuery selector.
-    * @exampleTitle Initialize Kendo MobileNavBar based on role data attribute
+    * @exampleTitle Initialize Kendo mobile NavBar based on role data attribute
     * @example
     * <div data-role="navbar">My View Title</div>
     *
-    * @exampleTitle Initialize Kendo MobileNavBar using a jQuery selector
+    * @exampleTitle Initialize Kendo mobile NavBar using a jQuery selector
     * @example
     * var navbar = $("#navbar").kendoMobileNavBar();
     * @section <h3>Aligning widgets inside the navbar</h3>
     *
-    * After initialization, the MobileNavBar positions elements based on the specified <code>align</code> data attribute (either <code>left</code> or <code>right</code>). By default, elements without any align are centered.
+    * After initialization, the mobile NavBar positions elements based on the specified <code>align</code> data attribute (either <code>left</code> or <code>right</code>). By default, elements without any align are centered.
     *
     * @exampleTitle Use the <code>align</code> data attribute to specify the elements position inside the navbar
     * @example
@@ -28,8 +28,8 @@
     * </div>
     *
     * @section <h3>Automatically update navbar title based on current view's title</h3>
-    * If an element with <code>role</code> data attribute set to <code>view-title</code> is present inside the MobileNavBar, the Kendo MobileApplication instance will update its text when changing views to on the current view's title.  The view title is specified by setting the <code>title</code> data attribute of the view element. This feature is particularly useful if the MobileNavBar is inside a layout.
-    * @exampleTitle Use the <code>view-title</code> data attribute to auto-update the MobileNavBar title
+    * If an element with <code>role</code> data attribute set to <code>view-title</code> is present inside the mobile NavBar, the Kendo mobile Application instance will update its text when changing views to on the current view's title.  The view title is specified by setting the <code>title</code> data attribute of the view element. This feature is particularly useful if the mobile NavBar is inside a layout.
+    * @exampleTitle Use the <code>view-title</code> data attribute to auto-update the mobile NavBar title
     * @example
     * <div data-role="layout" data-id="foo">
     *   <div data-role="header">
@@ -42,9 +42,9 @@
     * <div data-role="view" data-layout="foo" data-title="bar"> ... </div>
     * <div data-role="view" data-layout="foo" data-title="baz"> ... </div>
     */
-    var ui = window.kendo.ui,
+    var ui = window.kendo.mobile.ui,
         roleSelector = kendo.roleSelector,
-        MobileWidget = ui.MobileWidget;
+        Widget = ui.Widget;
 
     function createContainer(align, element) {
 
@@ -55,14 +55,14 @@
         }
     }
 
-    var MobileNavBar = MobileWidget.extend(/** @lends kendo.ui.MobileNavBar.prototype */{
+    var NavBar = Widget.extend(/** @lends kendo.mobile.ui.NavBar.prototype */{
         /**
         * @constructs
-        * @extends kendo.ui.MobileWidget
+        * @extends kendo.mobile.ui.Widget
         * @param {DomElement} element DOM element
         */
         init: function(element, options) {
-            MobileWidget.fn.init.call(this, element, options);
+            Widget.fn.init.call(this, element, options);
             element = this.element;
 
             element.addClass("km-navbar").wrapInner($('<div class="km-view-title" />'));
@@ -71,7 +71,7 @@
         },
 
         options: {
-            name: "MobileNavBar",
+            name: "NavBar",
             selector: roleSelector("navbar")
         },
 
@@ -92,5 +92,5 @@
         }
     });
 
-    ui.plugin(MobileNavBar);
+    ui.plugin(NavBar);
 })(jQuery);
