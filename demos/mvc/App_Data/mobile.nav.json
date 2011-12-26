@@ -40,6 +40,17 @@
                     "url": "navbar/layout.html"
                 }
             ]
+        },
+        {
+            "text": "Tabstrip",
+            "name": "tabstrip",
+            "spriteCssClass": "dataSourceIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "tabstrip/index.html"
+                }
+            ]
         }
      ]
 }
