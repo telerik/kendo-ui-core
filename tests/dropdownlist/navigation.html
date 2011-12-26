@@ -23,11 +23,12 @@
                 data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
                 SELECTED = "k-state-selected",
                 keys = kendo.keys,
+                CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
-            }
+            };
 
             module("kendo.ui.DropDownList selection", {
                 setup: function() {
@@ -59,7 +60,7 @@
             test("click first li should update text and value", function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
                 dropdownlist.dataSource.read();
-                dropdownlist.ul.children().eq(1).click();
+                dropdownlist.ul.children().eq(1).trigger(CLICK);
 
                 equal(dropdownlist.text(), data[1].text);
                 equal(dropdownlist.value(), data[1].value);
@@ -70,7 +71,7 @@
                     dropdownlist = input.kendoDropDownList(localData).data("kendoDropDownList");
 
                 dropdownlist.dataSource.read();
-                dropdownlist.ul.children().eq(1).click();
+                dropdownlist.ul.children().eq(1).trigger(CLICK);
 
                 equal(dropdownlist.text(), data[1].text);
                 equal(dropdownlist.value(), data[1].text);
@@ -95,7 +96,7 @@
                 });
 
                 dropdownlist.popup.open();
-                dropdownlist.ul.children().eq(1).click();
+                dropdownlist.ul.children().eq(1).trigger(CLICK);
             });
 
             test("select should select li by index", function() {
@@ -114,7 +115,7 @@
                 dropdownlist.dataSource.read();
                 dropdownlist.select(1);
 
-                dropdownlist.wrapper.click();
+                dropdownlist.wrapper.trigger(CLICK);
 
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
             });
@@ -126,7 +127,7 @@
                 dropdownlist.select(1);
                 dropdownlist.select(0);
 
-                dropdownlist.wrapper.click();
+                dropdownlist.wrapper.trigger(CLICK);
 
                 equal(dropdownlist.ul.children("." + SELECTED).length, 1);
             });
