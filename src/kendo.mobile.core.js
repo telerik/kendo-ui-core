@@ -5,7 +5,7 @@
         extend = $.extend,
         mobile;
 
-    var Widget = ui.Widget.extend(/** @lends kendo.mobile.Widget.prototype */{
+    var Widget = ui.Widget.extend(/** @lends kendo.mobile.ui.Widget.prototype */{
         /**
          * Initializes mobile widget. Sets `element` and `options` properties.
          * @constructs
@@ -38,7 +38,7 @@
 
             if (selector) {
                 element.find(selector)
-                       .add(element.filter(selector))["kendo" + options.name]();
+                       .add(element.filter(selector))["kendoMobile" + options.name]();
             }
         }
     });
@@ -50,7 +50,7 @@
 
     extend(kendo.mobile, {
         enhance: function(element) {
-            var widget, ui = mobile.ui;
+            var widget, ui = kendo.mobile.ui;
 
             element = $(element);
 
@@ -63,6 +63,10 @@
             }
         },
 
+        /**
+         * @name kendo.mobile.ui
+         * @namespace Contains all classes for the Kendo Mobile UI widgets.
+         */
         ui: {
             plugin: function(widget) {
                 kendo.ui.plugin(widget, kendo.mobile.ui, "Mobile");

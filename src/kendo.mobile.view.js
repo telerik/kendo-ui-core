@@ -1,6 +1,5 @@
 (function($, undefined) {
     var kendo = window.kendo,
-        ui = kendo.ui,
         mobile = kendo.mobile,
         os = kendo.support.mobileOS,
         attr = kendo.attr,
@@ -30,7 +29,7 @@
 
             that.content = element.find(roleSelector("content"))
                                 .addClass("km-content")
-                                .kendoScroller({useOnDesktop: true});
+                                .kendoMobileScroller({useOnDesktop: true});
 
             that.title = element.data(kendo.ns + "title");
 
