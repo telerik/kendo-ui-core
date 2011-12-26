@@ -52,7 +52,14 @@
 
         fetch: function(href) {
             var exampleWrap = $("#exampleWrap"),
+                currentHref = this.href,
                 mainWrap = $("#main");
+
+            if (href === currentHref) {
+                return;
+            }
+
+            this.href = href;
 
             $.get(href, { partial: 1 }, function(html) {
                 exampleWrap.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
@@ -158,6 +165,8 @@
                         Application.fetch(state.href.toLowerCase());
                     }
                 });
+
+                Application.href = location.href;
 
                 try {
                     history.replaceState({ href: location.href }, null, location.href);
