@@ -129,13 +129,20 @@ namespace Kendo.Controllers
         {
             var component = section;
 
-            if (suite == "dataviz")
-            {
-                component = "chart";
+            switch(suite) {
+                case "dataviz":
+                    component = "ui.chart";
+                    break;
+                case "mobile":
+                    component = "mobile.ui." + component;
+                    break;
+                case "web":
+                    component = "ui." + component;
+                    break;
             }
 
             var path = string.Format(
-                "~/content/docs/kendo.ui.{0}.{1}.html", component, topic
+                "~/content/docs/kendo.{0}.{1}.html", component, topic
             );
 
             if (IOFile.Exists(Server.MapPath(path)))
