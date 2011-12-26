@@ -7,41 +7,113 @@
         splice = [].splice,
         slice = [].slice,
         unshift = [].unshift,
-        bound = {},
+        toString = {}.toString,
+        GET = "get",
         CHANGE = "change";
 
-    function extendArray(array) {
-        var idx, length, observable = new Observable;
+    var ObservableObject = Observable.extend({
+        init: function(value) {
+            var that = this,
+                member,
+                field,
+                type;
 
-        for (idx = 0, length = array.length; idx < length; idx++) {
-            array[idx] = extendObject(array[idx]);
+            Observable.fn.init.call(this);
+
+            for (field in value) {
+                member = value[field];
+                type = toString.call(member);
+
+                if (type === "[object Object]") {
+                    member = new ObservableObject(member);
+
+                    (function(field) {
+                        member.bind(GET, function(e) {
+                            e.field = field + "." + e.field;
+                            that.trigger(GET, e);
+                        });
+
+                        member.bind(CHANGE, function(e) {
+                            e.field = field + "." + e.field;
+                            that.trigger(CHANGE, e);
+                        });
+                    })(field);
+                } else if (type === "[object Array]") {
+                    member = new ObservableArray(member);
+
+                    (function(field) {
+                        member.bind(CHANGE, function(e) {
+                            e.field = field;
+                            that.trigger(CHANGE, e);
+                        });
+                    })(field);
+                }
+
+                that[field] = member;
+            }
+        },
+
+        get: function(field) {
+            this.trigger(GET, { field: field });
+
+            return get(this, field);
+        },
+
+        set: function(field, value, initiator) {
+            var current = this[field];
+
+            if (current != value) {
+                set(this, field, value);
+
+                this.trigger(CHANGE, {
+                    field: field,
+                    initiator: initiator
+                });
+            }
         }
+    });
 
-        array.observable = function() {
-            return observable;
-        }
+    var ObservableArray = Observable.extend({
+        init: function(array) {
+            var that = this,
+                member,
+                idx;
 
-        array.push = function() {
+            Observable.fn.init.call(that);
+
+            that.length = array.length;
+
+            for (idx = 0; idx < that.length; idx++) {
+                member = array[idx];
+
+                if ($.isPlainObject(member)) {
+                    member = new ObservableObject(member);
+                }
+
+                that[idx] = member;
+            }
+        },
+        push: function() {
             var index = this.length,
                 items = arguments,
                 result;
 
             result = push.apply(this, items);
 
-            observable.trigger(CHANGE, {
+            this.trigger(CHANGE, {
                 action: "add",
                 index: index,
                 items: items
             });
 
             return result;
-        };
+        },
 
-        array.splice = function(index, howMany, item) {
+        splice: function(index, howMany, item) {
             var result = splice.apply(this, arguments);
 
             if (result.length) {
-                observable.trigger(CHANGE, {
+                this.trigger(CHANGE, {
                     action: "remove",
                     index: index,
                     items: result
@@ -49,88 +121,30 @@
             }
 
             if (item) {
-                observable.trigger(CHANGE, {
+                this.trigger(CHANGE, {
                     action: "add",
                     index: index,
                     items: slice.call(arguments, 2)
                 });
             }
             return result;
-        };
-
-        array.unshift = function() {
+        },
+        unshift: function() {
             var index = this.length,
                 items = arguments,
                 result;
 
             result = unshift.apply(this, items);
 
-            observable.trigger(CHANGE, {
+            this.trigger(CHANGE, {
                 action: "add",
                 index: 0,
                 items: items
             });
 
             return result;
-        };
-    }
-
-    function extendObject(object) {
-        var field, member, observable = new Observable;
-
-        object.observable = function() {
-            return observable;
-        };
-
-        for (field in object) {
-            member = object[field];
-
-            if ($.isPlainObject(member)) {
-                extendObject(member);
-
-                (function(field) {
-                    member.observable().bind(CHANGE, function(e) {
-                        e.field = field + "." + e.field;
-                        observable.trigger(CHANGE, e);
-                    });
-                    member.observable().bind("get", function(e) {
-                        e.field = field + "." + e.field;
-                        observable.trigger("get", e);
-                    });
-                })(field);
-            } else if ($.isArray(member)) {
-                extendArray(member);
-
-                (function(field) {
-                    member.observable().bind(CHANGE, function(e) {
-                        e.field = field;
-                        observable.trigger(CHANGE, e);
-                    });
-                })(field);
-            }
         }
-
-        object.get = function(field) {
-            observable.trigger("get", { field : field });
-
-            return get(this, field);
-        }
-
-        object.set = function(field, value, initiator) {
-            var current = this[field];
-
-            if (current != value) {
-                set(this, field, value);
-
-                observable.trigger(CHANGE, {
-                    field: field,
-                    initiator: initiator
-                });
-            }
-        }
-
-        return object;
-    }
+    });
 
     var innerText = (function() {
         var a = document.createElement("a");
@@ -203,7 +217,7 @@
         },
         style: function(element, object, style) {
             element.style.cssText = style.replace(cssRegExp, function(match, css, field) {
-                object.observable().bind("change", function(e) {
+                object.bind("change", function(e) {
                     if (e.field === field && e.initiator !== element) {
                         $(element).css(css, get(object, field));
                     }
@@ -298,56 +312,55 @@
         }
     });
 
-    function applyBinding(element, object, field, binding, e) {
-        var dependency, dependencies = {}, access;
+    var Binding = kendo.Class.extend( {
+        init: function(element, object, field, binding) {
+            var that = this;
 
-        dependencies[field] = true;
+            that.observers = {};
+            that.element = element;
+            that.observable = object;
+            that.field = field;
+            that.bind = binding;
 
-        access = function(e) {
-            dependencies[e.field] = true;
-        }
+            if (field !== "this") {
+                that.observe(field);
+            }
 
-        if (field !== "this") {
-            object.observable().bind("get", access);
+            that.apply();
+        },
 
-            binding(element, object, field, e);
+        observe: function(field) {
+            var that = this;
 
-            object.observable().unbind("get", access);
-
-            observe(element, object, dependencies, function(e) {
-                applyBinding(element, object, field, binding, e);
-            });
-        } else {
-            binding(element, object, field, e);
-        }
-    }
-
-    function makeObserver(element, refresh) {
-        return function(e) {
-            var dependency, dependencies = $.data(element, "dependencies");
-
-            if (e.initiator !== element) {
-                for (dependency in dependencies) {
-                    if (dependency.indexOf(e.field) === 0) {
-                        refresh(e);
-                        break;
+            if (that.observers[field] === undefined) {
+                that.observers[field] = function(e) {
+                    if (field.indexOf(e.field) === 0) {
+                        that.apply(e);
                     }
                 }
+                that.observable.bind(CHANGE, that.observers[field]);
+            }
+        },
+
+        apply: function(e) {
+            var that = this, access;
+
+            access = function(e) {
+                that.observe(e.field);
+            }
+
+            if (that.field !== "this") {
+                that.observable.bind("get", access);
+
+                that.bind(that.element, that.observable, that.field, e);
+
+                that.observable.unbind("get", access);
+
+            } else {
+                that.bind(that.element, that.observable, that.field, e);
             }
         }
-    }
-
-    function observe(element, object, dependencies, binding) {
-        $.extend(dependencies, $.data(element, "dependencies"));
-
-        $.data(element, "dependencies", dependencies);
-
-        if (!$.data(element, "observer")) {
-            var observer = makeObserver(element, binding);
-            $.data(element, "observer", observer);
-            object.observable().bind(CHANGE, observer);
-        }
-    }
+    });
 
     function bindElement(element, object) {
         var field, key, binding;
@@ -358,7 +371,7 @@
             if (field) {
                 binding = $.proxy(kendo.bindings[key], object);
 
-                applyBinding(element, object, field, binding);
+                new Binding(element, object, field, binding);
             }
         }
 
@@ -505,15 +518,18 @@
 
     kendo.bindings = bindings;
 
-    kendo.bind = function(dom, object) {
-        if (object.observable === undefined) {
-            object = extendObject(object);
-        }
+    kendo.ObservableObject = ObservableObject;
+    kendo.ObservableArray = ObservableArray;
 
-        bind(dom, object);
+    kendo.bind = function(dom, object) {
+        bind(dom, kendo.observable(object));
     }
 
     kendo.observable = function(object) {
-        return extendObject(object);
+        if (!(object instanceof ObservableObject)) {
+            object = new ObservableObject(object);
+        }
+
+        return object;
     };
 })(jQuery);
