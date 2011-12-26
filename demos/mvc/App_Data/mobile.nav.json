@@ -1,17 +1,5 @@
 {
-    "Framework": [
-        {
-            "text": "Overview",
-            "name": "overview",
-            "spriteCssClass": "overviewIcon",
-            "expanded": true,
-            "items": [
-                {
-                    "text": "First look",
-                    "url": "overview/index.html"
-                }
-            ]
-        },
+    "Mobile Framework": [
         {
             "text": "Application",
             "name": "application",
@@ -22,10 +10,7 @@
                     "url": "application/index.html"
                 }
             ]
-        }
-    ],
-
-    "UI Widgets": [
+        },
         {
             "text": "Button",
             "name": "button",
@@ -34,8 +19,12 @@
                 {
                     "text": "Basic usage",
                     "url": "button/index.html"
+                },
+                {
+                    "text": "Events",
+                    "url": "button/events.html"
                 }
             ]
         }
-   ]
+     ]
 }
