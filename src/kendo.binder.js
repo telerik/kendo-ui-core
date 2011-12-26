@@ -7,39 +7,44 @@
         splice = [].splice,
         slice = [].slice,
         unshift = [].unshift,
-        bound = {},
+        toString = {}.toString,
+        GET = "get",
         CHANGE = "change";
 
     var ObservableObject = Observable.extend({
         init: function(value) {
-            var that = this, member, field;
+            var that = this,
+                member,
+                field,
+                type;
 
             Observable.fn.init.call(this);
 
             for (field in value) {
                 member = value[field];
+                type = toString.call(member);
 
-                if ($.isPlainObject(member)) {
+                if (type === "[object Object]") {
                     member = new ObservableObject(member);
 
                     (function(field) {
-                        member.bind("get", function(e) {
+                        member.bind(GET, function(e) {
                             e.field = field + "." + e.field;
-                            that.trigger("get", e);
+                            that.trigger(GET, e);
                         });
 
-                        member.bind("change", function(e) {
+                        member.bind(CHANGE, function(e) {
                             e.field = field + "." + e.field;
-                            that.trigger("change", e);
+                            that.trigger(CHANGE, e);
                         });
                     })(field);
-                } else if ($.isArray(member)) {
+                } else if (type === "[object Array]") {
                     member = new ObservableArray(member);
 
                     (function(field) {
-                        member.bind("change", function(e) {
+                        member.bind(CHANGE, function(e) {
                             e.field = field;
-                            that.trigger("change", e);
+                            that.trigger(CHANGE, e);
                         });
                     })(field);
                 }
@@ -49,7 +54,7 @@
         },
 
         get: function(field) {
-            this.trigger("get", { field: field });
+            this.trigger(GET, { field: field });
 
             return get(this, field);
         },
@@ -315,7 +320,7 @@
             that.element = element;
             that.observable = object;
             that.field = field;
-            that.binding = binding;
+            that.bind = binding;
 
             if (field !== "this") {
                 that.observe(field);
@@ -347,12 +352,12 @@
             if (that.field !== "this") {
                 that.observable.bind("get", access);
 
-                that.binding(that.element, that.observable, that.field, e);
+                that.bind(that.element, that.observable, that.field, e);
 
                 that.observable.unbind("get", access);
 
             } else {
-                that.binding(that.element, that.observable, that.field, e);
+                that.bind(that.element, that.observable, that.field, e);
             }
         }
     });
