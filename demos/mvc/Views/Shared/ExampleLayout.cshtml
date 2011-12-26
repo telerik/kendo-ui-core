@@ -12,7 +12,14 @@
     <div id="exampleWrap">
         <script>preventFOUC()</script>
         <div id="example" class="k-content">
-        @RenderBody()
+        @if (ViewBag.suite == "mobile") {
+            <div id="mobile-application-container">
+            @RenderBody()
+            </div>
+            @RenderSection("ExampleFooter", false)
+        } else {
+            @RenderBody()
+        }
         </div>
     </div>
 
@@ -62,4 +69,9 @@
     setTimeout(function(){ prettyPrint(); }, 100);
 
     document.title = "@ViewBag.Title";
+
+    if (kendo.mobile) {
+        window.kendoMobileApplication = new kendo.mobile.Application($("#mobile-application-container"));
+        applyCurrentMobileOS();
+    }
 </script>
