@@ -25,6 +25,17 @@
                     "url": "button/events.html"
                 }
             ]
+        },
+        {
+            "text": "NavBar",
+            "name": "navbar",
+            "spriteCssClass": "dataSourceIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "navbar/index.html"
+                }
+            ]
         }
      ]
 }
