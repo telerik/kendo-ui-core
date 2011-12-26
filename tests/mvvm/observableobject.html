@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ObservableObject tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ObservableObject Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+        <script>
+            test("set changes the value of the field", function() {
+                var viewModel = kendo.observable({ foo: "bar" });
+
+                viewModel.set("foo", "foo");
+
+                equal(viewModel.foo, "foo");
+            });
+
+            test("copies all fields of the source object", function() {
+                var viewModel = kendo.observable({ foo: "bar" });
+
+                equal(viewModel.foo, "bar");
+            });
+
+            test("nested objects are observable as well", function() {
+                var viewModel = kendo.observable({ foo: { bar: "baz" } });
+
+                ok(viewModel.foo.get);
+            });
+
+            test("set triggers the change event", function() {
+                expect(1);
+
+                var viewModel = kendo.observable({ foo: "bar" });
+
+                viewModel.bind("change", function() {
+                    ok(true, "change is raised");
+                });
+
+                viewModel.set("foo", "baz");
+            });
+
+            test("change event arguments provide the name of the field", function() {
+                expect(1);
+
+                var viewModel = kendo.observable({ foo: "bar" });
+
+                viewModel.bind("change", function(e) {
+                    equal(e.field, "foo");
+                });
+
+                viewModel.set("foo", "baz");
+            });
+
+            test("setting nested fields", function() {
+                var viewModel = kendo.observable({ foo: { bar: "bar" } });
+
+                viewModel.set("foo.bar", "baz");
+
+                equal(viewModel.foo.bar, "baz");
+            });
+
+            test("nested arrays are extended", function() {
+                var viewModel = kendo.observable({ foo: [{}] });
+
+                equal(typeof viewModel.foo.bind, "function");
+            });
+
+            test("getting field raises get event", function() {
+                expect(1);
+
+                var viewModel = kendo.observable({ foo: "bar" });
+
+                viewModel.bind("get", function(e) {
+                    start();
+                    equal(e.field, "foo");
+                });
+
+                viewModel.get("foo");
+            });
+
+            test("getting nested field raises get event of parent", function() {
+                expect(1);
+
+                var viewModel = kendo.observable({ foo: { bar: "bar" } });
+
+                viewModel.bind("get", function(e) {
+                    start();
+                    equal(e.field, "foo.bar");
+                });
+
+                viewModel.foo.get("bar");
+            });
+        </script>
+    </head>
+</html>

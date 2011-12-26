@@ -1,7 +1,10 @@
 tests.push( {
-    page: "mvvm/observable.html",
-    title: "mvvm observable"
+    page: "mvvm/observableobject.html",
+    title: "mvvm observableobject"
 }, {
+    page: "mvvm/observablearray.html",
+    title: "mvvm observablearray"
+},{
     page: "mvvm/binding.html",
     title: "mvvm binding"
 }, {
