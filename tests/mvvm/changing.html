@@ -180,7 +180,7 @@
             test("tracking changes in templates", function() {
                 var dom = $('<div data-template="simple-field-template" />');
 
-                var viewModel = { foo: "foo" };
+                var viewModel = kendo.observable({ foo: "foo" });
 
                 kendo.bind(dom, viewModel);
 
@@ -192,7 +192,7 @@
             test("dependencies are reavaluated", function() {
                 var dom = $('<div data-template="if-else-template" />');
 
-                var viewModel = { foo: "foo", bar: "bar" };
+                var viewModel = kendo.observable({ foo: "foo", bar: "bar" });
 
                 kendo.bind(dom, viewModel);
 
@@ -206,7 +206,7 @@
             test("does not attach more than one change handler when monitoring for dependency changes", function() {
                 var dom = $('<div data-template="counting-template" />');
 
-                var viewModel = { foo: "foo" };
+                var viewModel = kendo.observable({ foo: "foo" });
 
                 kendo.bind(dom, viewModel);
 
@@ -222,11 +222,11 @@
             test("tracking changes when direct access and set are used", function() {
                 var dom = $('<div data-template="nested-field-template" />');
 
-                var viewModel = {
+                var viewModel = kendo.observable({
                     foo: {
                         bar: "bar"
                     }
-                };
+                });
 
                 kendo.bind(dom, viewModel);
 
@@ -238,11 +238,11 @@
             test("tracking changes when single set is used", function() {
                 var dom = $('<div data-template="nested-field-template" />');
 
-                var viewModel = {
+                var viewModel = kendo.observable({
                     foo: {
                         bar: "bar"
                     }
-                };
+                });
 
                 kendo.bind(dom, viewModel);
 
@@ -254,11 +254,11 @@
             test("tracking changes when direct access and set are used (multiple get template)", function() {
                 var dom = $('<div data-template="nested-field-template-multiple-gets" />');
 
-                var viewModel = {
+                var viewModel = kendo.observable({
                     foo: {
                         bar: "bar"
                     }
-                };
+                });
 
                 kendo.bind(dom, viewModel);
 
@@ -270,11 +270,11 @@
             test("tracking changes when single set is used (multiple get template)", function() {
                 var dom = $('<div data-template="nested-field-template-multiple-gets" />');
 
-                var viewModel = {
+                var viewModel = kendo.observable({
                     foo: {
                         bar: "bar"
                     }
-                };
+                });
 
                 kendo.bind(dom, viewModel);
 
@@ -286,13 +286,13 @@
             test("tracking changes in dependent fields", function() {
                 var dom = $('<div data-text="computed" />');
 
-                var viewModel = {
+                var viewModel = kendo.observable({
                     foo: "foo",
                     bar: "bar",
                     computed: function() {
                         return this.get("foo") + this.get("bar");
                     }
-                };
+                });
 
                 kendo.bind(dom, viewModel);
 
