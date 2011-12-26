@@ -25,16 +25,23 @@
                     <li>@Html.SuiteLink("Web", "first")</li>
                     <li>@Html.SuiteLink("DataViz")</li>
                     <li>@Html.SuiteLink("Mobile")</li>
-                    <li><a id="themebuilder" 
+                    <li><a id="themebuilder"
                            class="last @(ViewBag.Suite == "themebuilder" ? "selected" : "")"
                            href="@Url.Action("Index", "ThemeBuilder")">ThemeBuilder
                         </a>
                     </li>
                 </ul>
 
+                @if (ViewBag.suite == "mobile") {
+                    <div id="examplesThemeChooser">
+                        <label for="skinSelector">Device</label>
+                        <input id="deviceChooser" />
+                    </div>
+                } else {
                 <div id="examplesThemeChooser">
                     <label for="skinSelector">Theme</label>
                     <input id="skinSelector" class="themeChooser" />
                 </div>
+                }
             </div>
         </div>
