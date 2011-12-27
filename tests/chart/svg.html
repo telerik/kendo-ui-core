@@ -920,19 +920,19 @@
                     ok(!rect.options.clipPath);
                 });
 
-                test("sets clipPath", function() {
+                test("sets clipPath to unique Id", function() {
                     decorator.decorate(rect);
-                    equals(rect.options.clipPath, "url(#globalClip)");
+                    ok(/url\(#\w+\)/.test(rect.options.clipPath));
                 });
 
                 test("registers clip path definition", function() {
                     decorator.decorate(rect);
-                    ok(view.definitions.globalClip);
+                    ok(view.definitions[decorator.clipId]);
                 });
 
                 test("clip path is fully expanded", function() {
                     decorator.decorate(rect);
-                    var clipRect = view.definitions.globalClip.children[0];
+                    var clipRect = view.definitions[decorator.clipId].children[0];
                     same([clipRect.points[2].x, clipRect.points[2].y], [600, 400]);
                 });
 
