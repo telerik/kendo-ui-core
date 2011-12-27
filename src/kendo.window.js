@@ -155,6 +155,7 @@
         return function() {
             var that = this,
                 wrapper = that.wrapper,
+                style = wrapper[0].style,
                 options = that.options;
 
             if (options.isMaximized || options.isMinimized) {
@@ -162,8 +163,8 @@
             }
 
             that.restoreOptions = {
-                width: wrapper.width(),
-                height: wrapper.height()
+                width: style.width,
+                height: style.height
             };
 
             wrapper
