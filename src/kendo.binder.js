@@ -436,14 +436,12 @@
         source: SourceBinding,
         value: ValueBinding,
         click: ClickBinding,
-        change: ChangeBinding
+        change: ChangeBinding,
+        title:  AttributeBinding.extend({ attribute: "title" }),
+        alt:    AttributeBinding.extend({ attribute: "alt" }),
+        src:    AttributeBinding.extend({ attribute: "src" }),
+        href:   AttributeBinding.extend({ attribute: "href" })
     };
-
-    $.each("title alt src href".split(" "), function(index, attr) {
-        bindings[attr] = AttributeBinding.extend( {
-            attribute: attr
-        });
-    });
 
     function bindElement(element, object) {
         var field, key, binding;
