@@ -215,43 +215,33 @@
 
             if (field !== "this") {
                 that.observe(field);
+                that.observable.bind("get", function(e) { that.observe(e.field) });
             }
         },
 
         observe: function(field) {
             var that = this;
 
-            if (that.observers[field] === undefined) {
-                that.observers[field] = function(e) {
+            var observer = that.observers[field];
+
+            if (observer === undefined) {
+                observer = function(e) {
                     if (field.indexOf(e.field) === 0) {
-                        that.apply(e);
+                        if (e.action) {
+                            that[e.action].call(that, e.index, e.items);
+                        } else {
+                            that.bind();
+                        }
                     }
                 }
-                that.observable.bind(CHANGE, that.observers[field]);
-            }
-        },
 
-        apply: function(e) {
-            var that = this, access;
-
-            access = function(e) {
-                that.observe(e.field);
-            }
-
-            if (that.field !== "this") {
-                that.observable.bind("get", access);
-
-                that.bind(e);
-
-                that.observable.unbind("get", access);
-
-            } else {
-                that.bind(e);
+                that.observable.bind(CHANGE, observer);
+                that.observers[field] = observer;
             }
         },
 
         value: function() {
-            var result;
+            var that = this, result;
 
             if (this.field === "this") {
                 result = this.observable;
@@ -326,6 +316,7 @@
                 });
             }
         },
+
         bind: function() {
             var that = this, element = this.element;
 
@@ -345,16 +336,12 @@
     });
 
     var SourceBinding = Binding.extend( {
-        bind: function(e) {
+
+        add: function(index, items) {
             var element = this.element,
                 observable = this.observable,
                 template = kendo.template(templateFor(element)),
-                child,
-                children,
-                idx = 0,
-                length;
-
-            source = this.value();
+                source = this.value();
 
             if (element.nodeName.toLowerCase() === "table") {
                 if (!element.tBodies[0]) {
@@ -363,29 +350,60 @@
                 element = element.tBodies[0];
             }
 
-            if (e) {
-                if (e.action === "add") {
-                    if (element.children.length < 1) {
-                        $(element).html(kendo.render(template, source));
-                    } else {
-                        $(element.children[e.index - 1])
-                        .after(kendo.render(template, e.items));
-                    }
-                } else if (e.action === "remove") {
-                    children = $.makeArray(element.children).splice(e.index, e.items.length);
-
-                    for (length = children.length; idx < length; idx ++) {
-                        element.removeChild(children[idx]);
-                    }
-                }
-            } else {
+            if (element.children.length < 1) {
                 $(element).html(kendo.render(template, source));
+            } else {
+                $(element.children[index - 1])
+                .after(kendo.render(template, items));
+            }
+        },
 
-                for (element = element.firstChild; element; element = element.nextSibling) {
-                    if (element.nodeType === 1) {
-                        bindElement(element, source[idx]);
-                        $.data(element, "value", source[idx++]);
-                    }
+        remove: function(index, items) {
+            var element = this.element,
+                observable = this.observable,
+                template = kendo.template(templateFor(element)),
+                children,
+                idx = 0,
+                length,
+                source = this.value();
+
+            if (element.nodeName.toLowerCase() === "table") {
+                if (!element.tBodies[0]) {
+                    element.appendChild(document.createElement("tbody"))
+                }
+                element = element.tBodies[0];
+            }
+
+            children = $.makeArray(element.children).splice(index, items.length);
+
+            for (length = children.length; idx < length; idx ++) {
+                element.removeChild(children[idx]);
+            }
+        },
+
+        bind: function() {
+            var element = this.element,
+                observable = this.observable,
+                template = kendo.template(templateFor(element)),
+                child,
+                children,
+                idx = 0,
+                length,
+                source = this.value();
+
+            if (element.nodeName.toLowerCase() === "table") {
+                if (!element.tBodies[0]) {
+                    element.appendChild(document.createElement("tbody"))
+                }
+                element = element.tBodies[0];
+            }
+
+            $(element).html(kendo.render(template, source));
+
+            for (element = element.firstChild; element; element = element.nextSibling) {
+                if (element.nodeType === 1) {
+                    bindElement(element, source[idx]);
+                    $.data(element, "value", source[idx++]);
                 }
             }
         }
@@ -399,7 +417,7 @@
             that.field = field;
         },
 
-        apply: function() {
+        bind: function() {
             var that = this,
                 callback = get(this.observable, this.field);
 
@@ -436,7 +454,7 @@
             if (field) {
                 binding = kendo.bindings[key];
                 binding = new binding(element, object, field);
-                binding.apply();
+                binding.bind();
             }
         }
 
