@@ -93,6 +93,7 @@
                 that[idx] = member;
             }
         },
+
         push: function() {
             var index = this.length,
                 items = arguments,
@@ -108,6 +109,8 @@
 
             return result;
         },
+
+        slice: slice,
 
         splice: function(index, howMany, item) {
             var result = splice.apply(this, arguments);
@@ -476,24 +479,43 @@
         "ol": listBindings
     };
 
+    var widgetBindings = {};
+
     function bindElement(element, object) {
         var field, key, binding;
 
         var elementBindings = bindings[element.nodeName.toLowerCase()] || contentBindings;
-        for (key in elementBindings) {
-            field = element.getAttribute("data-" + key);
 
-            if (field) {
-                binding = elementBindings[key];
-                binding = new binding(element, object, field);
-                binding.bind();
+        var role = element.getAttribute("data-role");
+
+        if (role) {
+            var widget = widgetBindings[role];
+            var options = {};
+
+            var dataSource = element.getAttribute("data-source");
+            if (dataSource) {
+                options.dataSource = get(object, dataSource, true);
             }
-        }
 
-        if (!element.getAttribute("data-source")) {
-            for (element = element.firstChild; element; element = element.nextSibling) {
-                if (element.nodeType === 1) {
-                    bindElement(element, object);
+            console.log(options);
+
+            $(element)["kendo" + widget.fn.options.name](options);
+        } else {
+            for (key in elementBindings) {
+                field = element.getAttribute("data-" + key);
+
+                if (field) {
+                    binding = elementBindings[key];
+                    binding = new binding(element, object, field);
+                    binding.bind();
+                }
+            }
+
+            if (!element.getAttribute("data-source")) {
+                for (element = element.firstChild; element; element = element.nextSibling) {
+                    if (element.nodeType === 1) {
+                        bindElement(element, object);
+                    }
                 }
             }
         }
@@ -632,6 +654,7 @@
     data.ModelViewBinder = ModelViewBinder;
 
     kendo.bindings = bindings;
+    kendo.widgetBindings = widgetBindings;
 
     kendo.ObservableObject = ObservableObject;
     kendo.ObservableArray = ObservableArray;
