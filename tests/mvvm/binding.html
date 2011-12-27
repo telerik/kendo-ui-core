@@ -101,7 +101,7 @@
             asyncTest("change binding", function() {
                 expect(1);
 
-                var dom = $('<span data-change="foo"/>');
+                var dom = $('<input data-change="foo"/>');
 
                 kendo.bind(dom, {
                     foo: function() {

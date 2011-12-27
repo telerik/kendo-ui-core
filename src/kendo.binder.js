@@ -146,39 +146,6 @@
         }
     });
 
-    var innerText = (function() {
-        var a = document.createElement("a");
-
-        if (a.textContent !== undefined) {
-            return "textContent";
-        }
-
-        return "innerText";
-    })();
-
-    var templates = {
-        select: "<option>${data}</option>",
-        table: "<tr><td>${data}</td></tr>",
-        ul: "<li>${data}</li>",
-        ol: "<li>${data}</li>"
-    };
-
-    function templateFor(element) {
-        var templateId = element.getAttribute("data-template"),
-            template = templates[element.nodeName.toLowerCase()] || "${data}",
-            templateElement;
-
-        if (templateId) {
-            templateElement = document.getElementById(templateId);
-
-            if (templateElement) {
-                template = $(templateElement).html();
-            }
-        }
-
-        return template;
-    }
-
     function set(object, field, value) {
         return kendo.setter(field)(object, value);
     }
@@ -225,16 +192,7 @@
             var observer = that.observers[field];
 
             if (observer === undefined) {
-                observer = function(e) {
-                    if (field.indexOf(e.field) === 0) {
-                        if (e.action) {
-                            that[e.action].call(that, e.index, e.items);
-                        } else {
-                            that.bind();
-                        }
-                    }
-                }
-
+                var observer = that.createObserver(field);
                 that.observable.bind(CHANGE, observer);
                 that.observers[field] = observer;
             }
@@ -254,6 +212,19 @@
             }
 
             return result;
+        },
+
+        createObserver: function(field) {
+            var that = this;
+            return function(e) {
+                if (field.indexOf(e.field) === 0) {
+                    if (e.action) {
+                        that[e.action].call(that, e.index, e.items);
+                    } else {
+                        that.bind();
+                    }
+                }
+            };
         }
     });
 
@@ -276,9 +247,27 @@
     });
 
     var TemplateBinding = Binding.extend({
+        defaultTemplate: "#:data#",
+
+        template: function() {
+            var templateId = this.element.getAttribute("data-template"),
+                template = this.defaultTemplate,
+                templateElement;
+
+            if (templateId) {
+                templateElement = document.getElementById(templateId);
+
+                if (templateElement) {
+                    template = $(templateElement).html();
+                }
+            }
+
+            return template;
+        },
+
         bind: function() {
             if (!this.element.getAttribute("data-source")) {
-                var template = kendo.template(templateFor(this.element));
+                var template = kendo.template(this.template());
 
                 $(this.element).html(template(this.observable));
             }
@@ -306,54 +295,54 @@
 
             Binding.fn.init.apply(this, arguments);
 
-            if (that.element.nodeName.toLowerCase() === "select") {
-                $(that.element).change(function() {
-                    that.observable.set(that.field, $.data(this.options[this.selectedIndex], "value"), this);
-                });
-            } else {
-                $(that.element).change(function() {
-                    that.observable.set(that.field, this.value, this);
-                });
-            }
+            $(that.element).change(function() {
+                that.observable.set(that.field, this.value, this);
+            });
         },
 
         bind: function() {
             var that = this, element = this.element;
-
-            if (element.nodeName.toLowerCase() === "select") {
-                var value = this.value();
-
-                $(element)
-                .find("option").filter(function() {
-                    return $.data(this, "value") === value;
-                })
-                .attr("selected", "selected");
-            } else {
-                $(element)
-                    .val(this.value())
-            }
+            $(element).val(this.value())
         }
     });
 
-    var SourceBinding = Binding.extend( {
+    var SelectValueBinding = Binding.extend( {
+        init: function() {
+            var that = this;
+
+            Binding.fn.init.apply(this, arguments);
+
+            $(that.element).change(function() {
+                that.observable.set(that.field, $.data(this.options[this.selectedIndex], "value"), this);
+            });
+        },
+
+        bind: function() {
+            var that = this, element = this.element;
+            var value = this.value();
+
+            $(element)
+                .find("option").filter(function() { return $.data(this, "value") === value; })
+                .attr("selected", "selected");
+        }
+    });
+
+    var SourceBinding = TemplateBinding.extend( {
+        container: function() {
+            return this.element;
+        },
 
         add: function(index, items) {
             var element = this.element,
                 observable = this.observable,
-                template = kendo.template(templateFor(element)),
+                template = kendo.template(this.template()),
+                container = this.container(),
                 source = this.value();
 
-            if (element.nodeName.toLowerCase() === "table") {
-                if (!element.tBodies[0]) {
-                    element.appendChild(document.createElement("tbody"))
-                }
-                element = element.tBodies[0];
-            }
-
-            if (element.children.length < 1) {
-                $(element).html(kendo.render(template, source));
+            if (container.children.length < 1) {
+                $(container).html(kendo.render(template, source));
             } else {
-                $(element.children[index - 1])
+                $(container.children[index - 1])
                 .after(kendo.render(template, items));
             }
         },
@@ -361,51 +350,50 @@
         remove: function(index, items) {
             var element = this.element,
                 observable = this.observable,
-                template = kendo.template(templateFor(element)),
+                template = kendo.template(this.template()),
                 children,
                 idx = 0,
                 length,
+                container = this.container(),
                 source = this.value();
 
-            if (element.nodeName.toLowerCase() === "table") {
-                if (!element.tBodies[0]) {
-                    element.appendChild(document.createElement("tbody"))
-                }
-                element = element.tBodies[0];
-            }
-
-            children = $.makeArray(element.children).splice(index, items.length);
+            children = $.makeArray(container.children).splice(index, items.length);
 
             for (length = children.length; idx < length; idx ++) {
-                element.removeChild(children[idx]);
+                container.removeChild(children[idx]);
             }
         },
 
         bind: function() {
             var element = this.element,
                 observable = this.observable,
-                template = kendo.template(templateFor(element)),
+                template = kendo.template(this.template()),
                 child,
                 children,
                 idx = 0,
                 length,
+                container = this.container(),
                 source = this.value();
 
-            if (element.nodeName.toLowerCase() === "table") {
-                if (!element.tBodies[0]) {
-                    element.appendChild(document.createElement("tbody"))
-                }
-                element = element.tBodies[0];
-            }
+            $(container).html(kendo.render(template, source));
 
-            $(element).html(kendo.render(template, source));
-
-            for (element = element.firstChild; element; element = element.nextSibling) {
-                if (element.nodeType === 1) {
-                    bindElement(element, source[idx]);
-                    $.data(element, "value", source[idx++]);
+            for (container = container.firstChild; container; container = container.nextSibling) {
+                if (container.nodeType === 1) {
+                    bindElement(container, source[idx]);
+                    $.data(container, "value", source[idx++]);
                 }
             }
+        }
+    });
+
+    var TableSourceBinding = SourceBinding.extend({
+        defaultTemplate:  "<tr><td>${data}</td></tr>",
+        container: function() {
+            var element = this.element;
+            if (!element.tBodies[0]) {
+                element.appendChild(document.createElement("tbody"))
+            }
+            return element.tBodies[0];
         }
     });
 
@@ -430,29 +418,73 @@
         }
     });
 
-    var bindings = {
+    var commonBindings = {
+        title: AttributeBinding.extend({ attribute: "title" }),
+        style: StyleBinding,
+        click: EventBinding.extend({ event: "click", preventDefault: true })
+    }
+
+    var contentBindings = $.extend({}, commonBindings, {
         text: TextBinding,
         html: HtmlBinding,
         template: TemplateBinding,
-        style: StyleBinding,
-        source: SourceBinding,
+        source: SourceBinding
+    });
+
+    var inputBindings = $.extend({}, commonBindings, {
         value: ValueBinding,
-        click: EventBinding.extend({ event: "click", preventDefault: true }),
-        change: EventBinding.extend({ event: "change" }),
-        title:  AttributeBinding.extend({ attribute: "title" }),
+        change: EventBinding.extend({ event: "change" })
+    });
+
+    var listBindings = $.extend({}, commonBindings, {
+        source: SourceBinding.extend({defaultTemplate: "<li>${data}</li>" })
+    });
+
+    var selectBindings = $.extend({}, commonBindings, {
+        source: SourceBinding.extend({defaultTemplate: "<option>${data}</option>" }),
+        value: SelectValueBinding,
+        change: EventBinding.extend({ event: "change" })
+    });
+
+    var optionBindings = {
+        text: TextBinding,
+        value: ValueBinding
+    };
+
+    var tableBindings = $.extend({}, commonBindings, {
+        source: TableSourceBinding
+    });
+
+    var imgBindings = $.extend({}, commonBindings, {
         alt:    AttributeBinding.extend({ attribute: "alt" }),
         src:    AttributeBinding.extend({ attribute: "src" }),
+    });
+
+    var linkBindings = $.extend({}, commonBindings, {
         href:   AttributeBinding.extend({ attribute: "href" })
+    });
+
+    var bindings = {
+        "img": imgBindings,
+        "a": linkBindings,
+        "input": inputBindings,
+        "textarea": inputBindings,
+        "select": selectBindings,
+        "option": optionBindings,
+        "table": tableBindings,
+        "ul": listBindings,
+        "ol": listBindings
     };
 
     function bindElement(element, object) {
         var field, key, binding;
 
-        for (key in kendo.bindings) {
+        var elementBindings = bindings[element.nodeName.toLowerCase()] || contentBindings;
+        for (key in elementBindings) {
             field = element.getAttribute("data-" + key);
 
             if (field) {
-                binding = kendo.bindings[key];
+                binding = elementBindings[key];
                 binding = new binding(element, object, field);
                 binding.bind();
             }
