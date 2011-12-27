@@ -5530,7 +5530,6 @@
         DEFAULT_WIDTH = Chart.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = Chart.DEFAULT_HEIGHT,
         DEFAULT_FONT = Chart.DEFAULT_FONT,
-        GLOBAL_CLIP = "globalClip",
         NONE = "none",
         RADIAL = "radial",
         SQUARE = "square",
@@ -6146,31 +6145,33 @@
     var SVGClipAnimationDecorator = Class.extend({
         init: function(view) {
             this.view = view;
+            this.clipId = uniqueId();
         },
 
         decorate: function(element) {
             var decorator = this,
                 view = decorator.view,
+                clipId = decorator.clipId,
                 options = view.options,
                 animation = element.options.animation,
                 definitions = view.definitions,
-                clipPath = definitions[GLOBAL_CLIP],
+                clipPath = definitions[clipId],
                 clipRect;
 
             if (animation && animation.type === CLIP && options.transitions) {
                 if (!clipPath) {
-                    clipPath = new SVGClipPath({ id: GLOBAL_CLIP });
+                    clipPath = new SVGClipPath({ id: clipId });
                     clipRect = view.createRect(
                         new Box2D(0, 0, options.width, options.height), { id: uniqueId() });
                     clipPath.children.push(clipRect);
-                    definitions[GLOBAL_CLIP] = clipPath;
+                    definitions[clipId] = clipPath;
 
                     view.animations.push(
                         new ExpandAnimation(clipRect, { size: options.width })
                     );
                 }
 
-                element.options.clipPath = "url(#" + GLOBAL_CLIP + ")";
+                element.options.clipPath = "url(#" + clipId + ")";
             }
 
             return element;
