@@ -241,12 +241,12 @@
             if (that.field !== "this") {
                 that.observable.bind("get", access);
 
-                that.bind(that.element, that.observable, that.field, e);
+                that.bind(e);
 
                 that.observable.unbind("get", access);
 
             } else {
-                that.bind(that.element, that.observable, that.field, e);
+                that.bind(e);
             }
         },
 
@@ -344,19 +344,17 @@
         }
     });
 
-    var bindings = {
-        text: TextBinding,
-        html: HtmlBinding,
-        template: TemplateBinding,
-        style: StyleBinding,
-        source: function(element, object, field, e) {
-            var template = kendo.template(templateFor(element)),
+    var SourceBinding = Binding.extend( {
+        bind: function(e) {
+            var element = this.element,
+                observable = this.observable,
+                template = kendo.template(templateFor(element)),
                 child,
                 children,
                 idx = 0,
                 length;
 
-            object = get(object, field);
+            source = this.value();
 
             if (element.nodeName.toLowerCase() === "table") {
                 if (!element.tBodies[0]) {
@@ -368,10 +366,10 @@
             if (e) {
                 if (e.action === "add") {
                     if (element.children.length < 1) {
-                        $(element).html(kendo.render(template, object));
+                        $(element).html(kendo.render(template, source));
                     } else {
                         $(element.children[e.index - 1])
-                              .after(kendo.render(template, e.items));
+                        .after(kendo.render(template, e.items));
                     }
                 } else if (e.action === "remove") {
                     children = $.makeArray(element.children).splice(e.index, e.items.length);
@@ -381,27 +379,64 @@
                     }
                 }
             } else {
-                $(element).html(kendo.render(template, object));
+                $(element).html(kendo.render(template, source));
 
                 for (element = element.firstChild; element; element = element.nextSibling) {
                     if (element.nodeType === 1) {
-                        bindElement(element, object[idx]);
-                        $.data(element, "value", object[idx++]);
+                        bindElement(element, source[idx]);
+                        $.data(element, "value", source[idx++]);
                     }
                 }
             }
+        }
+    });
+
+    var ClickBinding = kendo.Class.extend({
+        init: function(element, object, field) {
+            var that = this;
+            that.element = element;
+            that.observable = object;
+            that.field = field;
         },
 
-        value: ValueBinding,
-        click: function(element, object, field) {
-            var callback = get(object, field);
+        apply: function() {
+            var that = this,
+                callback = get(this.observable, this.field);
 
-            $(element).click(function(e) {
+            $(this.element).click(function(e) {
                 e.preventDefault();
-
-                callback.call(object, e);
+                callback.call(that.observable, e);
             });
         }
+    });
+
+    var ChangeBinding = kendo.Class.extend({
+        init: function(element, object, field) {
+            var that = this;
+            that.element = element;
+            that.observable = object;
+            that.field = field;
+        },
+
+        apply: function() {
+            var that = this,
+                callback = get(this.observable, this.field);
+
+            $(this.element).change(function(e) {
+                callback.call(that.observable, e);
+            });
+        }
+    });
+
+    var bindings = {
+        text: TextBinding,
+        html: HtmlBinding,
+        template: TemplateBinding,
+        style: StyleBinding,
+        source: SourceBinding,
+        value: ValueBinding,
+        click: ClickBinding,
+        change: ChangeBinding
     };
 
     $.each("title alt src href".split(" "), function(index, attr) {
@@ -409,13 +444,6 @@
             attribute: attr
         });
     });
-
-    $.each("change".split(" "), function(index, eventName) {
-        bindings[eventName] = function(element, object, field) {
-            $(element).bind(eventName, $.proxy(get(object, field), object));
-        }
-    });
-
 
     function bindElement(element, object) {
         var field, key, binding;
@@ -425,13 +453,7 @@
 
             if (field) {
                 binding = kendo.bindings[key];
-
-                if (/text|html|title|alt|src|href|template|style|value/.test(key)) {
-                    binding = new binding(element, object, field);
-                } else {
-                    binding = new Binding(element, object, field, binding);
-                }
-
+                binding = new binding(element, object, field);
                 binding.apply();
             }
         }
