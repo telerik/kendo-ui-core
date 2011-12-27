@@ -155,7 +155,8 @@
 
         $("#Menu1").kendoMenu({ animation: false, select: Select, open: Open, close: Close, hoverDelay: 0 });
 
-        var menu;
+        var menu,
+            CLICK = kendo.support.touch ? "touchend" : "click";
 
         module("Menu / ClientSideAPI", {
             setup: function () {
@@ -197,7 +198,7 @@
 
             isSelectRaised = false;
 
-            item.find('> .k-link').trigger('click');
+            item.find('> .k-link').trigger(CLICK);
 
             ok(isSelectRaised);
         });
@@ -210,7 +211,7 @@
             var e = { stopPropagation: function () {}, preventDefault: function () {} };
 
             setTimeout(function () {
-                item.find('.k-item > .k-link').trigger('click');
+                item.find('.k-item > .k-link').trigger(CLICK);
 
                 setTimeout(function () {
                     ok(item.find('.k-item:visible > .k-link').length == 0);
