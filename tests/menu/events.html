@@ -142,7 +142,8 @@
 
         $("#Menu2").kendoMenu({ animation: false, select: onSelect });
 
-        var menu;
+        var menu,
+            CLICK = kendo.support.touch ? "touchend" : "click";
 
         module("Menu / Client Events", {
             setup: function () {
@@ -158,7 +159,7 @@
                 triggerCount++;
             });
 
-            item.trigger("click");
+            item.trigger(CLICK);
 
             equals(triggerCount, 1);
         });
