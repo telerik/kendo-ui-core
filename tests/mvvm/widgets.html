@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.bind widgets tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.bind Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+        <script>
+            QUnit.config.testTimeout = 100;
+
+			var FooWidget = kendo.ui.Widget.extend({
+				init: function(element, options) {
+					kendo.ui.Widget.fn.init.call(this, element, options);
+					options = this.options;
+					this.dataSource = kendo.data.DataSource.create(options.dataSource);
+					this.dataSource.read();
+				},
+
+				options: {
+					name: "Foo"
+				}
+			});
+
+			kendo.ui.plugin(FooWidget);
+
+			kendo.widgetBindings.foo = FooWidget;
+
+            test("initializes foo widget based on data-role attribute", function() {
+                var dom = $('<span id="foo" data-role="foo" />');
+                kendo.bind(dom, { foo: "foo" });
+				ok(dom.data("kendoFoo") instanceof FooWidget, "Widget not initialized");
+            });
+
+            test("passes datasource to initialized widget", function() {
+                var dom = $('<span id="foo" data-role="foo" data-source="items" />');
+				var viewModel = kendo.observable({
+					foo: "foo", items: []
+				})
+
+                kendo.bind(dom, viewModel);
+
+				equal(dom.data("kendoFoo").dataSource.data(), viewModel.items);
+            });
+
+            test("keeps model in sync with widget's datasource", function() {
+                var dom = $('<span id="foo" data-role="foo" data-source="items" />');
+				var viewModel = kendo.observable({
+					foo: "foo", items: []
+				})
+
+                kendo.bind(dom, viewModel);
+
+				equal(dom.data("kendoFoo").dataSource.data(), viewModel.items);
+            });
+		</script>
+
+    </body>
+</html>

@@ -1857,7 +1857,7 @@
 
     /** @ignore */
     DataSource.create = function(options) {
-        options = isArray(options) ? { data: options } : options;
+        options = options && options.push ? { data: options } : options;
 
         var dataSource = options || {},
             data = dataSource.data,
