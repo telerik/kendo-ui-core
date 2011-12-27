@@ -12,6 +12,7 @@
         isArray = $.isArray,
         proxy = $.proxy,
         isFunction = $.isFunction,
+        isEmptyObject = $.isEmptyObject,
         math = Math,
         REQUESTSTART = "requestStart",
         ERROR = "error",
@@ -991,7 +992,7 @@
                 }
 
                 that.groupable = new Groupable(wrapper, {
-                    filter: "th:not(.k-group-cell)[" + kendo.attr("field") + "]",
+                    filter: "th:not(.k-group-cell)[" + kendo.attr("field") + "][" + kendo.attr("groupable") + "!=false]",
                     groupContainer: "div.k-grouping-header",
                     dataSource: that.dataSource
                 });
@@ -1184,6 +1185,7 @@
                             dataSource.page(dataSource.page() - 1);
                             handled = true;
                         } else if (that.options.editable) {
+                            current = current ? current : table.find(FIRST_CELL_SELECTOR);
                             if (keys.ENTER == key || keys.F12 == key) {
                                 that._handleEditing(current);
                                 handled = true;
@@ -1491,8 +1493,9 @@
             // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
             columns = columns.length ? columns : map(table.find("th"), function(th, idx) {
                 var th = $(th),
-                    sortable = th.attr(kendo.attr("sortable"))
-                    filterable = th.attr(kendo.attr("filterable"))
+                    sortable = th.attr(kendo.attr("sortable")),
+                    filterable = th.attr(kendo.attr("filterable")),
+                    groupable = th.attr(kendo.attr("groupable")),
                     field = th.attr(kendo.attr("field"));
 
                 if (!field) {
@@ -1503,6 +1506,7 @@
                     field: field,
                     sortable: sortable !== "false",
                     filterable: filterable !== "false",
+                    groupable: groupable !== "false",
                     template: th.attr(kendo.attr("template")),
                     width: cols.eq(idx).css("width")
                 };
@@ -1789,8 +1793,17 @@
                     if (!th.command) {
                         html += "<th " + kendo.attr("field") + "='" + th.field + "' ";
                         if (th.title) {
-                            html += kendo.attr("title") + "='" + th.title + "'";
+                            html += kendo.attr("title") + "='" + th.title + "' ";
                         }
+
+                        if (th.groupable !== undefined) {
+                            html += kendo.attr("groupable") + "='" + th.groupable + "' ";
+                        }
+
+                        if (th.aggregates) {
+                            html += kendo.attr("aggregates") + "='" + th.aggregates + "'";
+                        }
+
                         html += ">" + (th.title || th.field || "") + "</th>";
                     } else {
                         html += "<th>" + (th.title || "") + "</th>";
