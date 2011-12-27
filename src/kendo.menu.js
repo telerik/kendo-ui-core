@@ -308,12 +308,39 @@
          * @param {Selector} element DOM element
          * @param {Object} options Configuration options.
          * @option {Object} [animation] A collection of <b>Animation</b> objects, used to change default animations. A value of false will disable all animations in the widget.
+         * <p>Available animations for the <b>Menu</b> are listed below.  Each animation has a reverse options which is used for the <b>close</b> effect by default, but can be over-ridden
+         * by setting the <b>close</b> animation.  Each animation also has a direction which can be set off the animation (i.e. <b>slideIn:Down</b>).</p>
+         * <ul>
+         *     <li><b>slideIn</b></li>
+         *     <li><b>fadeIn</b></li>
+         *     <li><b>expand</b></li>
+         * </ul>
+         * _example
+         *  $("#menu").kendoMenu({
+         *      animation: { open: { effects: "fadeIn" } }
+         *  });
          * @option {Animation} [animation.open] The animation that will be used when opening sub menus.
          * @option {Animation} [animation.close] The animation that will be used when closing sub menus.
          * @option {String} [orientation] <"horizontal"> Root menu orientation. Could be horizontal or vertical.
-         * @option {Boolean} [openOnClick] <false> Specifies that the root sub menus will be opened on item click.
+         * _example
+         *  $("#menu").kendoMenu({
+         *      orientation: "vertical"
+         *  });
          * @option {Boolean} [closeOnClick] <true> Specifies that sub menus should close after item selection (provided they won't navigate).
+         * _example
+         *  $("#menu").kendoMenu({
+         *      closeOnClick: false
+         *  });
+         * @option {Boolean} [openOnClick] <false> Specifies that the root sub menus will be opened on item click.
+         * _example
+         *  $("#menu").kendoMenu({
+         *      openOnClick: true
+         *  });
          * @option {Number} [hoverDelay] <100> Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving.
+         * _example
+         *  $("#menu").kendoMenu({
+         *      hoverDelay: 200
+         *  });
          * @option {String} [direction] <"default"> Specifies Menu opening direction. Can be "top", "bottom", "left", "right".
          * You can also specify different direction for root and sub menu items, separating them with space. The example below will initialize the root menu to open upwards and
          * its sub menus to the left.
@@ -372,6 +399,19 @@
                  * @event
                  * @param {Event} e
                  * @param {Element} e.item The opened item
+                 * @example
+                 *  $("#menu").kendoMenu({
+                 *      open: function(e) {
+                 *          // handle event
+                 *  });
+                 * @exampleTitle To set after initialization
+                 * @example
+                 *  // get a reference to the menu widget
+                 *  var menu = $("#menu").data("kendoMenu");
+                 *  // bind to the open event
+                 *  menu.bind("open", function(e) {
+                 *      // handle event
+                 *  });
                  */
                 OPEN,
                 /**
@@ -380,6 +420,19 @@
                  * @event
                  * @param {Event} e
                  * @param {Element} e.item The closed item
+                 * @example
+                 *  $("#menu").kendoMenu({
+                 *      close: function(e) {
+                 *          // handle event
+                 *  });
+                 * @exampleTitle To set after initialization
+                 * @example
+                 *  // get a reference to the menu widget
+                 *  var menu = $("#menu").data("kendoMenu");
+                 *  // bind to the close event
+                 *  menu.bind("close", function(e) {
+                 *      // handle event
+                 *  });
                  */
                 CLOSE,
                 /**
@@ -388,6 +441,19 @@
                  * @event
                  * @param {Event} e
                  * @param {Element} e.item The selected item
+                 * @example
+                 *  $("#menu").kendoMenu({
+                 *      select: function(e) {
+                 *          // handle event
+                 *  });
+                 * @exampleTitle To set after initialization
+                 * @example
+                 *  // get a reference to the menu widget
+                 *  var menu = $("#menu").data("kendoMenu");
+                 *  // bind to the select event
+                 *  menu.bind("select", function(e) {
+                 *      // handle event
+                 *  });
                  */
                 SELECT
             ], that.options);
@@ -412,8 +478,14 @@
 
         /**
          * Enables/disables a Menu item
+         * <p>This can optionally be accomplished on initialization by setting the <b>disabled="disabled"</b> on the desired menu item html element.</p>
          * @param {Selector} element Target element
          * @param {Boolean} enable Desired state
+         * @example
+         * // get a reference to the menu widget
+         * var menu = $("#menu").data("kendoMenu");
+         * // disable the li menu item with the id "secondItem"
+         * menu.enable("#secondItem", false);
          */
         enable: function (element, enable) {
             this._toggleDisabled(element, enable !== false);
@@ -432,6 +504,9 @@
          * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
          * @param {Item} referenceItem A reference item to append the new item in
          * @example
+         * // get a reference to the menu widget
+         * var menu = $("#menu").data("kendoMenu");
+         * //
          * menu.append(
          *     [{
          *         text: "Item 1",
@@ -475,6 +550,9 @@
          * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
          * @param {Selector} referenceItem A reference item to insert the new item before
          * @example
+         * // get a reference to the menu widget
+         * var menu = $("#menu").data("kendoMenu");
+         * //
          * menu.insertBefore(
          *     [{
          *         text: "Item 1",
@@ -517,6 +595,9 @@
          * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
          * @param {Selector} referenceItem A reference item to insert the new item after
          * @example
+         * // get a reference to the menu widget
+         * var menu = $("#menu").data("kendoMenu");
+         * //
          * menu.insertAfter(
          *     [{
          *         text: "Item 1",
@@ -594,6 +675,9 @@
          * Removes the specified Menu item/s from the Menu
          * @param {Selector} element Target item selector.
          * @example
+         * // get a reference to the menu widget
+         * var menu = $("#menu").data("kendoMenu");
+         * // remove the item with the id "Item1"
          * menu.remove("#Item1");
          */
         remove: function (element) {
@@ -624,6 +708,9 @@
          * Opens the sub menu of the specified Menu item/s
          * @param {Selector} element Target item selector.
          * @example
+         * // get a reference to the menu widget
+         * var menu = $("#menu").data("kendoMenu");
+         * // open the sub menu of "Item1"
          * menu.open("#Item1");
          */
         open: function (element) {
@@ -686,6 +773,9 @@
          * Closes the sub menu of the specified Menu item/s
          * @param {Selector} element Target item selector.
          * @example
+         * // get a reference to the menu widget
+         * var menu = $("#menu").data("kendoMenu");
+         * // close the sub menu of "Item1"
          * menu.close("#Item1");
          */
         close: function (element) {
