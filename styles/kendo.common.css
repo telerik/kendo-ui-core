@@ -38,6 +38,7 @@
 .k-editor,
 .k-tooltip,
 .k-state-hover,
+.k-state-focused,
 .k-state-selected
 {
     background-position: 0 -258px;
@@ -2876,26 +2877,16 @@ span.k-tooltip
 }
 
 .k-splitbar-horizontal .k-resize-handle { background-position: -101px -6px; }
-/*.k-splitbar-horizontal-hover .k-resize-handle { background-position: -117px -6px; }*/
 .k-splitbar-horizontal .k-collapse-prev,
 .k-splitbar-horizontal .k-expand-next { background-position: -6px -174px; }
-/*.k-splitbar-horizontal-hover .k-collapse-prev,
-.k-splitbar-horizontal-hover .k-expand-next { background-position: -22px -174px; }*/
 .k-splitbar-horizontal .k-collapse-next,
 .k-splitbar-horizontal .k-expand-prev { background-position: -5px -142px; }
-/*.k-splitbar-horizontal-hover .k-collapse-next,
-.k-splitbar-horizontal-hover .k-expand-prev { background-position: -21px -142px; }*/
 
 .k-splitbar-vertical .k-resize-handle { background-position: -38px -309px; }
-/*.k-splitbar-vertical-hover .k-resize-handle { background-position: -70px -309px; }*/
 .k-splitbar-vertical .k-collapse-prev,
 .k-splitbar-vertical .k-expand-next { background-position: 2px -134px; }
-/*.k-splitbar-vertical-hover .k-collapse-prev,
-.k-splitbar-vertical-hover .k-expand-next { background-position: -14px -134px; }*/
 .k-splitbar-vertical .k-collapse-next,
 .k-splitbar-vertical .k-expand-prev { background-position: 2px -165px; }
-/*.k-splitbar-vertical-hover .k-collapse-next,
-.k-splitbar-vertical-hover .k-expand-prev { background-position: -14px -165px; }*/
 
 /* Upload */
 
