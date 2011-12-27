@@ -201,31 +201,154 @@
 
     var cssRegExp = /([^:]+):\s*\${([^}]*)};?/g;
 
-    var bindings = {
-        text: function(element, object, field) {
-            element[innerText] = get(object, field, true);
-        },
-        html: function(element, object, field) {
-            element.innerHTML = get(object, field, true);
-        },
-        template: function(element, object, field) {
-            if (!element.getAttribute("data-source")) {
-                var template = kendo.template(templateFor(element));
+    var Binding = kendo.Class.extend( {
+        init: function(element, object, field, binding) {
+            var that = this;
 
-                $(element).html(template(object));
+            that.observers = {};
+            that.element = element;
+            that.observable = object;
+            that.field = field;
+
+            if (binding)
+                that.bind = binding;
+
+            if (field !== "this") {
+                that.observe(field);
             }
         },
-        style: function(element, object, style) {
-            element.style.cssText = style.replace(cssRegExp, function(match, css, field) {
-                object.bind("change", function(e) {
-                    if (e.field === field && e.initiator !== element) {
-                        $(element).css(css, get(object, field));
+
+        observe: function(field) {
+            var that = this;
+
+            if (that.observers[field] === undefined) {
+                that.observers[field] = function(e) {
+                    if (field.indexOf(e.field) === 0) {
+                        that.apply(e);
+                    }
+                }
+                that.observable.bind(CHANGE, that.observers[field]);
+            }
+        },
+
+        apply: function(e) {
+            var that = this, access;
+
+            access = function(e) {
+                that.observe(e.field);
+            }
+
+            if (that.field !== "this") {
+                that.observable.bind("get", access);
+
+                that.bind(that.element, that.observable, that.field, e);
+
+                that.observable.unbind("get", access);
+
+            } else {
+                that.bind(that.element, that.observable, that.field, e);
+            }
+        },
+
+        value: function() {
+            var result;
+
+            if (this.field === "this") {
+                result = this.observable;
+            } else {
+                result = kendo.getter(this.field)(this.observable);
+
+                if (typeof result === "function") {
+                    result = result.call(this.observable);
+                }
+            }
+
+            return result;
+        }
+    });
+
+    var TextBinding = Binding.extend( {
+        bind: function() {
+            $(this.element).text(this.value());
+        }
+    });
+
+    var HtmlBinding = Binding.extend( {
+        bind: function() {
+            $(this.element).html(this.value());
+        }
+    });
+
+    var AttributeBinding = Binding.extend({
+        bind: function() {
+            $(this.element).attr(this.attribute, this.value());
+        }
+    });
+
+    var TemplateBinding = Binding.extend({
+        bind: function() {
+            if (!this.element.getAttribute("data-source")) {
+                var template = kendo.template(templateFor(this.element));
+
+                $(this.element).html(template(this.observable));
+            }
+        }
+    });
+
+    var StyleBinding = Binding.extend( {
+        bind: function() {
+            var that = this;
+            this.element.style.cssText = this.field.replace(cssRegExp, function(match, css, field) {
+                that.observable.bind("change", function(e) {
+                    if (e.field === field && e.initiator !== that.element) {
+                        $(that.element).css(css, get(that.observable, field));
                     }
                 });
 
-                return css + ":" + get(object, field) + ";";
+                return css + ":" + get(that.observable, field) + ";";
             });
+        }
+    });
+
+    var ValueBinding = Binding.extend( {
+        init: function() {
+            var that = this;
+
+            Binding.fn.init.apply(this, arguments);
+
+            if (that.element.nodeName.toLowerCase() === "select") {
+                $(that.element).change(function() {
+                    that.observable.set(that.field, $.data(this.options[this.selectedIndex], "value"), this);
+                });
+            } else {
+                $(that.element).change(function() {
+                    that.observable.set(that.field, this.value, this);
+                });
+            }
         },
+        bind: function() {
+            var that = this, element = this.element;
+
+            if (element.nodeName.toLowerCase() === "select") {
+                var value = this.value();
+
+                $(element)
+                .find("option").filter(function() {
+                    return $.data(this, "value") === value;
+                })
+                .attr("selected", "selected");
+            } else {
+                $(element)
+                    .val(this.value())
+            }
+        }
+    });
+
+    var bindings = {
+        text: TextBinding,
+        html: HtmlBinding,
+        template: TemplateBinding,
+        style: StyleBinding,
         source: function(element, object, field, e) {
             var template = kendo.template(templateFor(element)),
                 child,
@@ -269,26 +392,7 @@
             }
         },
 
-        value: function(element, object, field) {
-            if (element.nodeName.toLowerCase() === "select") {
-                var value = get(object, field, true);
-
-                $(element)
-                .change(function() {
-                    object.set(field, $.data(this.options[this.selectedIndex], "value"), this);
-                })
-                .find("option").filter(function() {
-                    return $.data(this, "value") === value;
-                })
-                .attr("selected", "selected");
-            } else {
-                $(element)
-                    .val(get(object, field))
-                    .change(function() {
-                        object.set(field, this.value, this);
-                    });
-            }
-        },
+        value: ValueBinding,
         click: function(element, object, field) {
             var callback = get(object, field);
 
@@ -301,9 +405,9 @@
     };
 
     $.each("title alt src href".split(" "), function(index, attr) {
-        bindings[attr] = function(element, object, field) {
-            element.setAttribute(attr, get(object, field));
-        }
+        bindings[attr] = AttributeBinding.extend( {
+            attribute: attr
+        });
     });
 
     $.each("change".split(" "), function(index, eventName) {
@@ -312,55 +416,6 @@
         }
     });
 
-    var Binding = kendo.Class.extend( {
-        init: function(element, object, field, binding) {
-            var that = this;
-
-            that.observers = {};
-            that.element = element;
-            that.observable = object;
-            that.field = field;
-            that.bind = binding;
-
-            if (field !== "this") {
-                that.observe(field);
-            }
-
-            that.apply();
-        },
-
-        observe: function(field) {
-            var that = this;
-
-            if (that.observers[field] === undefined) {
-                that.observers[field] = function(e) {
-                    if (field.indexOf(e.field) === 0) {
-                        that.apply(e);
-                    }
-                }
-                that.observable.bind(CHANGE, that.observers[field]);
-            }
-        },
-
-        apply: function(e) {
-            var that = this, access;
-
-            access = function(e) {
-                that.observe(e.field);
-            }
-
-            if (that.field !== "this") {
-                that.observable.bind("get", access);
-
-                that.bind(that.element, that.observable, that.field, e);
-
-                that.observable.unbind("get", access);
-
-            } else {
-                that.bind(that.element, that.observable, that.field, e);
-            }
-        }
-    });
 
     function bindElement(element, object) {
         var field, key, binding;
@@ -369,9 +424,15 @@
             field = element.getAttribute("data-" + key);
 
             if (field) {
-                binding = $.proxy(kendo.bindings[key], object);
+                binding = kendo.bindings[key];
 
-                new Binding(element, object, field, binding);
+                if (/text|html|title|alt|src|href|template|style|value/.test(key)) {
+                    binding = new binding(element, object, field);
+                } else {
+                    binding = new Binding(element, object, field, binding);
+                }
+
+                binding.apply();
             }
         }
 

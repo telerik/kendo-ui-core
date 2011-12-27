@@ -22,10 +22,10 @@
 
             module("mvvm observing", {
                 setup: function() {
-                    valueBinding = kendo.bindings.value;
+                    valueBinding = kendo.bindings.value.prototype.bind;
                 },
                 teardown: function() {
-                    kendo.bindings.value = valueBinding;
+                    kendo.bindings.value.prototype.bind = valueBinding;
                 }
             });
 
@@ -74,7 +74,7 @@
                 equal(dom.find("option").last().text(), "baz");
             });
 
-            test("change event notifies value liseteners", function() {
+            test("change event notifies value listeners", function() {
                 var viewModel = kendo.observable( {
                     foo: ["foo", "bar", "baz"],
                     bar: "bar"
@@ -89,17 +89,31 @@
                 equal(dom.find("span").text(), "foo");
             });
 
-            test("change event does not update the value", function() {
+            test("changing the value updates the view model", function() {
+                var dom = $('<input data-value="foo" />');
+
+                var viewModel = kendo.observable( { foo: "foo" });
+
+                kendo.bind(dom, viewModel);
+
+                dom.val("bar");
+                dom.trigger("change");
+
+                equal(viewModel.foo, "bar");
+            });
+
+            test("change event does not update the value again", function() {
                 var viewModel = kendo.observable( {
                     foo: ["foo", "bar", "baz"],
                     bar: "bar"
                 });
 
-                stub(kendo.bindings, {
-                    value: function() {
-                        valueBinding.apply(kendo.bindings, arguments);
-                    }
-                });
+                var calls = 0;
+
+                kendo.bindings.value.prototype.bind = function() {
+                    calls++;
+                    return valueBinding.apply(this, arguments);
+                };
 
                 var dom = $('<select data-source="foo" data-value="bar"/>');
 
@@ -108,7 +122,32 @@
                 dom.find("select").val("foo");
                 dom.trigger("change");
 
-                equal(kendo.bindings.calls("value"), 1);
+                equal(calls, 1);
+            });
+
+            test("value binding calls set once during select change", function() {
+                var viewModel = kendo.observable( {
+                    foo: ["foo", "bar", "baz"],
+                    bar: "bar"
+                });
+
+                var calls = 0;
+
+                var dom = $('<select data-source="foo" data-value="bar"/>');
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("bar", "foo");
+
+                viewModel.set = function() {
+                    calls++;
+                    kendo.ObservableObject.fn.set.apply(this, arguments);
+                };
+
+                dom.find("select").val("bar");
+                dom.trigger("change");
+
+                equal(calls, 1);
             });
 
             test("tracking changes of observable items in array", function() {

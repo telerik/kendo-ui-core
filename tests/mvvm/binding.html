@@ -141,18 +141,6 @@
                 equal(dom.find("option").last().text(), "2");
             });
 
-            test("binding which adds nodes to the dom tree", function() {
-                var dom = $('<div><select data-source="foo"/><span data-text="bar"/></div>');
-
-                kendo.bind(dom, {
-                    foo: [1, 2],
-                    bar: "bar"
-                });
-
-                equal(dom.find("option").length, 2);
-                equal(dom.find("span").text(), "bar");
-            });
-
             test("select binding with template", function() {
                 var dom = $('<select data-source="foo" data-template="select-template" />');
 
@@ -184,22 +172,6 @@
                 equal(dom.find("option").eq(2).text(), "3");
                 equal(dom.find("option").eq(3).text(), "4");
                 equal(dom.find("option")[0], option);
-            });
-
-            test("pushing items to empty array creates new option elements", function() {
-                var dom = $('<select data-source="foo"/>');
-
-                var viewModel = kendo.observable( {
-                    foo: []
-                });
-
-                kendo.bind(dom, viewModel);
-
-                viewModel.foo.push(3, 4);
-
-                equal(dom.find("option").length, viewModel.foo.length);
-                equal(dom.find("option").eq(0).text(), "3");
-                equal(dom.find("option").eq(1).text(), "4");
             });
 
             test("splicing items from array removes option elements without destroying the existing ones", function() {
