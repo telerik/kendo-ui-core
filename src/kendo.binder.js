@@ -391,7 +391,7 @@
         }
     });
 
-    var ClickBinding = kendo.Class.extend({
+    var EventBinding = kendo.Class.extend({
         init: function(element, object, field) {
             var that = this;
             that.element = element;
@@ -403,26 +403,10 @@
             var that = this,
                 callback = get(this.observable, this.field);
 
-            $(this.element).click(function(e) {
-                e.preventDefault();
-                callback.call(that.observable, e);
-            });
-        }
-    });
-
-    var ChangeBinding = kendo.Class.extend({
-        init: function(element, object, field) {
-            var that = this;
-            that.element = element;
-            that.observable = object;
-            that.field = field;
-        },
-
-        apply: function() {
-            var that = this,
-                callback = get(this.observable, this.field);
-
-            $(this.element).change(function(e) {
+            $(this.element).bind(this.event, function(e) {
+                if (that.preventDefault) {
+                    e.preventDefault();
+                }
                 callback.call(that.observable, e);
             });
         }
@@ -435,8 +419,8 @@
         style: StyleBinding,
         source: SourceBinding,
         value: ValueBinding,
-        click: ClickBinding,
-        change: ChangeBinding,
+        click: EventBinding.extend({ event: "click", preventDefault: true }),
+        change: EventBinding.extend({ event: "change" }),
         title:  AttributeBinding.extend({ attribute: "title" }),
         alt:    AttributeBinding.extend({ attribute: "alt" }),
         src:    AttributeBinding.extend({ attribute: "src" }),
