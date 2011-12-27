@@ -992,7 +992,7 @@
                 }
 
                 that.groupable = new Groupable(wrapper, {
-                    filter: "th:not(.k-group-cell)[" + kendo.attr("field") + "]",
+                    filter: "th:not(.k-group-cell)[" + kendo.attr("field") + "][" + kendo.attr("groupable") + "!=false]",
                     groupContainer: "div.k-grouping-header",
                     dataSource: that.dataSource
                 });
@@ -1539,6 +1539,7 @@
                     sortable = th.attr(kendo.attr("sortable")),
                     filterable = th.attr(kendo.attr("filterable")),
                     type = th.attr(kendo.attr("type")),
+                    groupable = th.attr(kendo.attr("groupable")),
                     field = th.attr(kendo.attr("field"));
 
                 if (!field) {
@@ -1550,6 +1551,7 @@
                     type: type,
                     sortable: sortable !== "false",
                     filterable: filterable !== "false",
+                    groupable: groupable !== "false",
                     template: th.attr(kendo.attr("template")),
                     width: cols.eq(idx).css("width")
                 };
@@ -1921,7 +1923,11 @@
                     if (!th.command) {
                         html += "<th " + kendo.attr("field") + "='" + th.field + "' ";
                         if (th.title) {
-                            html += kendo.attr("title") + "='" + th.title + "'";
+                            html += kendo.attr("title") + "='" + th.title + "' ";
+                        }
+
+                        if (th.groupable !== undefined) {
+                            html += kendo.attr("groupable") + "='" + th.groupable + "' ";
                         }
 
                         if (th.aggregates) {

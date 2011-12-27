@@ -114,6 +114,33 @@
                 equal(grid.table.find("tr:nth(1)>td").text(), "bar bar");
             });
 
+            test("column initialization - groupable", function() {
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo", groupable: true }] });
+
+                equal(grid.columns[0].field, "foo");
+                ok(grid.columns[0].groupable);
+            });
+
+            test("column initialization - groupable disabled", function() {
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo", groupable: false}] });
+
+                equal(grid.columns[0].field, "foo");
+                ok(!grid.columns[0].groupable);
+            });
+
+            test("column initialization - groupable attr is set for th", function() {
+                var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo", groupable: false}] });
+
+                ok(grid.thead.find("th:first").attr(kendo.attr("groupable")) === "false");
+            });
+
+            test("column initialization - data-kendo-groupable", function() {
+                var grid = new Grid($('<table><th data-kendo-field="foo" data-kendo-groupable="true"></th></table>')[0], { dataSource: [] });
+
+                equal(grid.columns[0].field, "foo");
+                ok(grid.columns[0].groupable);
+            });
+
             test("tbody is created if not present", function() {
                 var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo", template: "item.foo" }] });
                 equal(grid.tbody.length, 1);
