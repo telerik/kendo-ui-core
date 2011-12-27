@@ -24,7 +24,7 @@
 
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
-            }
+            };
 
             $.fn.selectedText = function() {
                 var that = this[0];
@@ -34,7 +34,7 @@
                 } else {
                     return that.value.substring(that.selectionStart, that.selectionEnd);
                 }
-            },
+            };
 
             $.fn.type = function(value) {
                 return this.val(value).each(function() {
@@ -44,7 +44,7 @@
                         textRange.select();
                     }
                 });
-            }
+            };
 
             module("kendo.ui.AutoComplete suggestion", {
                 setup: function() {
@@ -55,7 +55,7 @@
                 }
             });
 
-            test("pressing enter calls _blur", function() {
+            asyncTest("pressing enter calls _blur", function() {
                 var blurWasCalled, autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"],
                     suggest: true
@@ -67,10 +67,13 @@
 
                 autocomplete.current = autocomplete.ul.children().first();
                 input.press(kendo.keys.ENTER);
-                ok(blurWasCalled);
+                setTimeout(function () {
+                    ok(blurWasCalled);
+                    start();
+                }, 0);
             });
 
-            test("pressing enter calls _blur when no item is selected", function() {
+            asyncTest("pressing enter calls _blur when no item is selected", function() {
                 var blurWasCalled, autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"],
                     suggest: true
@@ -81,10 +84,13 @@
                 };
 
                 input.press(kendo.keys.ENTER);
-                ok(blurWasCalled);
+                setTimeout(function () {
+                    ok(blurWasCalled);
+                    start();
+                }, 0);
             });
 
-            test("pressing tab calls _blur", function() {
+            asyncTest("pressing tab calls _blur", function() {
                 var blurWasCalled, autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"],
                     suggest: true
@@ -96,7 +102,10 @@
 
                 autocomplete.current = autocomplete.ul.children().first();
                 input.press(kendo.keys.TAB);
-                ok(blurWasCalled);
+                setTimeout(function () {
+                    ok(blurWasCalled);
+                    start();
+                }, 0);
             });
 
             test("current popup item completes the value of the input if suggest is enabled", function() {
@@ -133,7 +142,7 @@
                 equal(input.selectedText(), "ar");
             });
 
-            test("separator", function() {
+            asyncTest("separator", function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"],
                     separator: ", "
@@ -144,7 +153,10 @@
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.ENTER);
 
-                equal(input.val(), "baz, ");
+                setTimeout(function () {
+                    equal(input.val(), "baz, ");
+                    start();
+                }, 0);
             });
 
             test("separator and suggestion", function() {
