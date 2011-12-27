@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Basic usage</title>
+      
+        <link href="../../../../deploy/kendoui.web-dataviz.commercial/styles/kendo.common.min.css" rel="stylesheet"/>
+        <link href="../../../../deploy/kendoui.web-dataviz.commercial/styles/kendo.blueopal.min.css" rel="stylesheet"/>
+        <script src="../../../../deploy/kendoui.web-dataviz.commercial/js/jquery.min.js"></script>
+        <script src="../../../../deploy/kendoui.web-dataviz.commercial/js/kendo.all.min.js"></script>
+    </head>
+
+    <body>
+        
+        <div id="myform">
+        <p id="info">blank</p>
+        <input type="text" name="foo[]" required />
+        <button id="save" type="button">Save</button>
+
+    </div>
+    <script>
+            $(document).ready(function () {
+                var validatable = $("#myform").kendoValidator().data("kendoValidator");
+                $("#save").click(function () {
+                        if (validatable.validate()) {
+                        save();
+                    }
+                });
+     });
+
+     window.onerror = function () {
+         document.getElementById("info").innerHTML = "error present";
+     }
+    </script>
+
+            <style scoped="scoped">
+                label {
+                    float: left;
+                    line-height: 22px;
+                    padding: 0 5px 10px 0;
+                }
+
+                .k-autocomplete
+                {
+                    vertical-align: middle;
+                }
+
+                .hint {
+                    line-height: 22px;
+                    color: #aaa;
+                    font-style: italic;
+                }
+
+                #example .code-sample
+                {
+                    margin-top: -50px;
+                    width: 300px;
+                    float: right;
+                }
+          </style>
+        
+    </body>
+</html>
