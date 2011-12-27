@@ -22,10 +22,10 @@
 
             module("mvvm observing", {
                 setup: function() {
-                    valueBinding = kendo.bindings.value.prototype.bind;
+                    valueBinding = kendo.bindings.select.value.prototype.bind;
                 },
                 teardown: function() {
-                    kendo.bindings.value.prototype.bind = valueBinding;
+                    kendo.bindings.select.value.prototype.bind = valueBinding;
                 }
             });
 
@@ -110,7 +110,7 @@
 
                 var calls = 0;
 
-                kendo.bindings.value.prototype.bind = function() {
+                kendo.bindings.select.value.prototype.bind = function() {
                     calls++;
                     return valueBinding.apply(this, arguments);
                 };
