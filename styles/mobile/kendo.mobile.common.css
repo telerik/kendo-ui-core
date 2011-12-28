@@ -143,6 +143,7 @@ body {
 .km-button,
 .km-radiogroup,
 .km-tabstrip {
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0));
   background-origin: border-box;
   position: relative;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -159,13 +160,12 @@ body {
   border: 1px solid #394d68;
   border-color: #2f3740 #394d68 #375073;
   background-color: #7185a2;
-  background-image: linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0));
   text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
   text-decoration: none;
-  border-color: #2f3740 #394d68 #375073;
-  border-color: #2f3740 #394d68 #375073;
-  border-color: #2f3740 #394d68 #375073;
-  border-color: #2f3740 #394d68 #375073;
+  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0)));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0));
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0));
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0));
 }
 .km-ios .km-button {
   border-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.3);
@@ -614,6 +614,7 @@ body {
   background-image: -o-linear-gradient(top, #ffffff, rgba(210, 210, 210, 0));
 }
 .km-badge, .km-detail {
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
   color: #FFF;
   text-decoration: none;
   display: inline-block;
@@ -635,13 +636,12 @@ body {
   border-radius: 1.2em;
   background-color: #bc0404;
   background-clip: padding-box;
-  background-image: linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
   box-shadow: 0 3px 3px #000000;
   -webkit-box-shadow: 0 3px 3px #000000;
-  background-color: #bc0404;
-  background-color: #bc0404;
-  background-color: #bc0404;
-  background-color: #bc0404;
+  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(1, rgba(255, 255, 255, 0)));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
 }
 .km-detail {
   position: relative;
@@ -1299,6 +1299,7 @@ input[type=radio], input[type=checkbox] {
   border-radius: 5px;
 }
 .km-slider-handle {
+  background: linear-gradient(top, #cccccc, #ffffff);
   top: 0;
   left: 0;
   width: 1.25em;
@@ -1311,11 +1312,10 @@ input[type=radio], input[type=checkbox] {
   border: 1px solid #eee;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-  background: linear-gradient(top, #cccccc, #ffffff);
-  border: 1px solid #eee;
-  border: 1px solid #eee;
-  border: 1px solid #eee;
-  border: 1px solid #eee;
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #cccccc), color-stop(1, #ffffff));
+  background: -moz-linear-gradient(top, #cccccc, #ffffff);
+  background: -ms-linear-gradient(top, #cccccc, #ffffff);
+  background: -o-linear-gradient(top, #cccccc, #ffffff);
 }
 .km-slider-wrapper {
   -moz-border-radius: 5px;
@@ -1343,10 +1343,10 @@ input[type=radio], input[type=checkbox] {
   border-radius: 6px;
 }
 .km-android .km-slider-handle {
+  background: linear-gradient(top, #f2f2f2, #d0d0d0 20%, #8d8d8d 80%, #d1d1d1);
   width: .86em;
   height: 1.7em;
   border-color: #3c3d3c;
-  background: linear-gradient(top, #f2f2f2, #d0d0d0 20%, #8d8d8d 80%, #d1d1d1);
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -1432,6 +1432,7 @@ input[type=radio], input[type=checkbox] {
   -webkit-box-shadow: 3px 3px 5px #111111;
 }
 .km-ios .km-dialog-title {
+  background: linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
   position: static;
   float: none;
   height: 2.6em;
@@ -1442,11 +1443,10 @@ input[type=radio], input[type=checkbox] {
   -moz-border-radius: 1em;
   -webkit-border-radius: 1em;
   border-radius: 1em;
-  background: linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
-  -webkit-border-radius: 1em;
-  -webkit-border-radius: 1em;
-  -webkit-border-radius: 1em;
-  -webkit-border-radius: 1em;
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.3)), color-stop(0.6, rgba(255, 255, 255, 0)));
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
+  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
+  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
 }
 .km-dialog:before {
   content: "\a0";
@@ -1465,6 +1465,7 @@ input[type=radio], input[type=checkbox] {
   text-shadow: 0 -1px #333333;
 }
 .km-dialog .km-button {
+  background: linear-gradient(center top, #adb0bf, #6a718b 50%, #434e6c 50%, #59637e);
   display: block;
   margin: .4em;
   font-size: 1.3em;
@@ -1476,12 +1477,11 @@ input[type=radio], input[type=checkbox] {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  background: linear-gradient(center top, #adb0bf, #6a718b 50%, #434e6c 50%, #59637e);
   border: 1px solid #000;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
-  user-select: none;
-  user-select: none;
-  user-select: none;
-  user-select: none;
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #adb0bf), color-stop(0.5, #6a718b), color-stop(0.5, #434e6c), color-stop(1, #59637e));
+  background: -moz-linear-gradient(center top, #adb0bf, #6a718b 50%, #434e6c 50%, #59637e);
+  background: -ms-linear-gradient(center top, #adb0bf, #6a718b 50%, #434e6c 50%, #59637e);
+  background: -o-linear-gradient(center top, #adb0bf, #6a718b 50%, #434e6c 50%, #59637e);
 }

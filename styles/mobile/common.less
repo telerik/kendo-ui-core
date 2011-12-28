@@ -157,6 +157,7 @@ body
 .km-radiogroup,
 .km-tabstrip
 {
+    background-image: linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.45) 6%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.15) 50%, rgba(100,100,100,0));
     background-origin: border-box;
     position: relative;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -171,7 +172,6 @@ body
     border: 1px solid #394d68;
     border-color: #2f3740 #394d68 #375073;
     background-color: #7185a2;
-    background-image: linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.45) 6%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.15) 50%, rgba(100,100,100,0));
     text-shadow: 0 -1px rgba(0,0,0,.3);
     text-decoration: none;
 }
@@ -651,6 +651,7 @@ body
 .km-badge,
 .km-detail
 {
+    background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     color: #FFF;
     text-decoration: none;
     display: inline-block;
@@ -670,7 +671,6 @@ body
     .border-radius(1.2em);
     background-color: #bc0404;
     background-clip: padding-box;
-    background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     .box-shadow(0 3px 3px #000);
 }
 
@@ -1505,6 +1505,7 @@ input[type=checkbox]
 
 .km-slider-handle
 {
+    background: linear-gradient(top, #ccc, #fff);
     top: 0;
     left: 0;
     width: 1.25em;
@@ -1514,7 +1515,6 @@ input[type=checkbox]
     .border-radius(1em);
     border: 1px solid #eee;
     .box-shadow(0 1px 1px rgba(0,0,0,.5));
-    background: linear-gradient(top, #ccc, #fff);
 }
 
 .km-slider-wrapper
@@ -1547,10 +1547,10 @@ input[type=checkbox]
 
 .km-android .km-slider-handle
 {
+    background: linear-gradient(top, #f2f2f2, #d0d0d0 20%, #8d8d8d 80%, #d1d1d1);
     width: .86em;
     height: 1.7em;
     border-color: #3c3d3c;
-    background: linear-gradient(top, #f2f2f2, #d0d0d0 20%, #8d8d8d 80%, #d1d1d1);
     .border-radius(5px);
     .box-shadow(0 0 10px rgba(0,0,0,.5));
 }
@@ -1559,7 +1559,6 @@ input[type=checkbox]
 {
     background: linear-gradient(top, #9b9c9b, #5b5e5b 80%, #6f716f) 12em 0 no-repeat,
                 linear-gradient(top, #ffd300, #ffb700 80%, #ffc600) 0 0 no-repeat;
-
 }
 
 /* Scroller */
@@ -1652,6 +1651,7 @@ input[type=checkbox]
 
 .km-ios .km-dialog-title
 {
+    background: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0) 60%);
     position: static;
     float: none;
     height: 2.6em;
@@ -1660,7 +1660,6 @@ input[type=checkbox]
     line-height: 3em;
     text-shadow: 0 -1px #333;
     .border-radius(1em);
-    background: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0) 60%);
 }
 
 .km-dialog:before
@@ -1685,6 +1684,7 @@ input[type=checkbox]
 
 .km-dialog .km-button
 {
+    background: linear-gradient(center top , #ADB0BF, #6A718B 50%, #434E6C 50%, #59637E);
     display: block;
     margin: .4em;
     font-size: 1.3em;
@@ -1692,7 +1692,6 @@ input[type=checkbox]
     padding: .44em;
     .user-select(none);
     .border-radius(4px);
-    background: linear-gradient(center top , #ADB0BF, #6A718B 50%, #434E6C 50%, #59637E);
     border: 1px solid #000;
     .box-shadow(0 1px 0 rgba(255,255,255,.2));
 }
