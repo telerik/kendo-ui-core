@@ -434,6 +434,7 @@
 
         _attachOrientationChange: function() {
             var that = this, element = that.element;
+            element.parent().addClass("km-root");
             element.addClass("km-" + (!os ? "ios" : os.name) + " " + getOrientationClass());
 
             $(document).bind("orientationchange", function(e) {

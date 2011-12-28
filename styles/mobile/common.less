@@ -1,13 +1,8 @@
 @import "mixins.less";
 
-* {
-    margin: 0;
-    padding: 0;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-html, body
+.km-root,
+.km-vertical,
+.km-horizontal
 {
     width: 100%;
     height: 100%;
@@ -16,14 +11,23 @@ html, body
     //-webkit-text-size-adjust: none; // Disables zoom on Desktop too.
 }
 
-body
+.km-vertical,
+.km-horizontal
 {
     display: table\9;
     background: #000;
 }
 
-.km-ios body,
-.km-meego body
+.km-root *
+{
+    margin: 0;
+    padding: 0;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.km-ios,
+.km-meego
 {
     .transform(translatez(0));
     background: #fff;

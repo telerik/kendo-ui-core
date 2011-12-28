@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
-        <h1 id="qunit-header">kendo.ui.MobileButton Tests</h1>
+        <h1 id="qunit-header">kendo.mobile.ui.Button Tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -26,8 +26,8 @@
                 MOUSEUP = kendo.support.mouseup;
 
             function click(dom) {
-                dom.trigger(MOUSEDOWN)
-                dom.trigger(MOUSEUP)
+                dom.trigger(MOUSEDOWN);
+                dom.trigger(MOUSEUP);
             }
 
             module("mobile button", {
