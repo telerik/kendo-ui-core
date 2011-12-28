@@ -133,8 +133,9 @@ body {
   color: #fff;
   font-size: 1.5em;
   line-height: 1.5em;
+  line-height: 2.2rem;
   font-weight: bold;
-  text-shadow: 0 -1pt #777777;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
   float: left;
   width: 100%;
 }
@@ -169,14 +170,13 @@ body {
 }
 .km-ios .km-button {
   border-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.3);
-  background: linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0) 98%, rgba(70, 70, 70, 0.5)), linear-gradient(top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
-  background-color: #496b9a;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0) 98%, rgba(70, 70, 70, 0.5)), linear-gradient(top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0)) #496b9a;
   box-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
   -webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(0, 0, 0, 0.3)), color-stop(0.05, rgba(0, 0, 0, 0)), color-stop(0.98, rgba(0, 0, 0, 0)), color-stop(1, rgba(70, 70, 70, 0.5))), -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.35)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(0.5, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0)));
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0) 98%, rgba(70, 70, 70, 0.5)), -moz-linear-gradient(top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
-  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0) 98%, rgba(70, 70, 70, 0.5)), -ms-linear-gradient(top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
-  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0) 98%, rgba(70, 70, 70, 0.5)), -o-linear-gradient(top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(0, 0, 0, 0.3)), color-stop(0.05, rgba(0, 0, 0, 0)), color-stop(0.98, rgba(0, 0, 0, 0)), color-stop(1, rgba(70, 70, 70, 0.5))), -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.35)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(0.5, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0))) #496b9a;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0) 98%, rgba(70, 70, 70, 0.5)), -moz-linear-gradient(top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0)) #496b9a;
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0) 98%, rgba(70, 70, 70, 0.5)), -ms-linear-gradient(top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0)) #496b9a;
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0) 98%, rgba(70, 70, 70, 0.5)), -o-linear-gradient(top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0)) #496b9a;
 }
 .km-ios .km-button:active {
   background-color: #263e6c;
@@ -203,8 +203,8 @@ body {
 .km-ios .km-back:before {
   margin-bottom: 2px;
   content: "\a0";
-  background: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 90%, rgba(70, 70, 70, 0.5)), linear-gradient(left top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
   background-color: inherit;
+  background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 90%, rgba(70, 70, 70, 0.5)), linear-gradient(left top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
   -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000000), color-stop(0.5, #000000), color-stop(0.5, transparent), to(transparent));
   border-left: solid 1px rgba(0, 0, 0, 0.5);
   border-bottom: solid 1px #aaa;
@@ -216,7 +216,7 @@ body {
   position: absolute;
   overflow: hidden;
   left: -0.76em;
-  left: -0.68 rem;
+  left: -.68rem;
   top: 0.32em;
   top: 0.3rem;
   -webkit-transform: rotate(45deg);
@@ -230,14 +230,14 @@ body {
   -moz-border-radius: 0.2em 0 0.2em 0.4em;
   -webkit-border-radius: 0.2em 0 0.2em 0.4em;
   border-radius: 0.2em 0 0.2em 0.4em;
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(0, 0, 0, 0)), color-stop(0.9, rgba(0, 0, 0, 0)), color-stop(1, rgba(70, 70, 70, 0.5))), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0, rgba(255, 255, 255, 0.35)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(0.5, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0)));
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 90%, rgba(70, 70, 70, 0.5)), -moz-linear-gradient(left top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
-  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 90%, rgba(70, 70, 70, 0.5)), -ms-linear-gradient(left top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
-  background: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 90%, rgba(70, 70, 70, 0.5)), -o-linear-gradient(left top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
+  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(0, 0, 0, 0)), color-stop(0.9, rgba(0, 0, 0, 0)), color-stop(1, rgba(70, 70, 70, 0.5))), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0, rgba(255, 255, 255, 0.35)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(0.5, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0)));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 90%, rgba(70, 70, 70, 0.5)), -moz-linear-gradient(left top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
+  background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 90%, rgba(70, 70, 70, 0.5)), -ms-linear-gradient(left top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 90%, rgba(70, 70, 70, 0.5)), -o-linear-gradient(left top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
 }
 .km-ios :-moz-first-node.km-back:before {
   border-radius: 0 1rem 0 0.4rem;
-  left: -0.56 rem;
+  left: -.56rem;
   top: 0.28rem;
   width: 1.36rem;
   height: 1.36rem;
@@ -272,12 +272,11 @@ body {
   margin: 0 1px 1px -5em;
   height: 100%;
   width: 200%;
-  background: linear-gradient(top, #dbdbdb, #eeeeee 50%, #fafafa 50%, #ffffff) 6em 0 no-repeat, linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat;
-  background-color: #3074e7;
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #dbdbdb), color-stop(0.5, #eeeeee), color-stop(0.5, #fafafa), color-stop(1, #ffffff)) 6em 0 no-repeat, -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(0.5, rgba(255, 255, 255, 0.18)), color-stop(1, rgba(255, 255, 255, 0.35))) 0 0 no-repeat;
-  background: -moz-linear-gradient(top, #dbdbdb, #eeeeee 50%, #fafafa 50%, #ffffff) 6em 0 no-repeat, -moz-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat;
-  background: -ms-linear-gradient(top, #dbdbdb, #eeeeee 50%, #fafafa 50%, #ffffff) 6em 0 no-repeat, -ms-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat;
-  background: -o-linear-gradient(top, #dbdbdb, #eeeeee 50%, #fafafa 50%, #ffffff) 6em 0 no-repeat, -o-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat;
+  background: linear-gradient(top, #dbdbdb, #eeeeee 50%, #fafafa 50%, #ffffff) 6em 0 no-repeat, linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat #3074e7;
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #dbdbdb), color-stop(0.5, #eeeeee), color-stop(0.5, #fafafa), color-stop(1, #ffffff)) 6em 0 no-repeat, -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(0.5, rgba(255, 255, 255, 0.18)), color-stop(1, rgba(255, 255, 255, 0.35))) 0 0 no-repeat #3074e7;
+  background: -moz-linear-gradient(top, #dbdbdb, #eeeeee 50%, #fafafa 50%, #ffffff) 6em 0 no-repeat, -moz-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat #3074e7;
+  background: -ms-linear-gradient(top, #dbdbdb, #eeeeee 50%, #fafafa 50%, #ffffff) 6em 0 no-repeat, -ms-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat #3074e7;
+  background: -o-linear-gradient(top, #dbdbdb, #eeeeee 50%, #fafafa 50%, #ffffff) 6em 0 no-repeat, -o-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat #3074e7;
 }
 .km-switch-container {
   top: 0;
@@ -666,7 +665,7 @@ body {
 }
 .km-detaildisclose:after {
   margin-left: -0.2em;
-  margin-left: -0.2 rem;
+  margin-left: -.2rem;
   border: .2em solid #FFF;
   border-width: .24rem .24rem 0 0;
   -webkit-transform: rotate(45deg);
@@ -695,11 +694,11 @@ body {
   height: .2rem;
   background: #FFF;
   margin-left: -0.18em;
-  margin-left: -0.28 rem;
+  margin-left: -.28rem;
 }
 .km-rowdelete:after {
   margin-left: -0.28em;
-  margin-left: -0.38 rem;
+  margin-left: -.38rem;
 }
 .km-rowinsert:after, .km-contactadd:after {
   width: .1em;
@@ -707,7 +706,7 @@ body {
   width: .2rem;
   height: .7rem;
   margin-left: -0.34em;
-  margin-left: -0.44 rem;
+  margin-left: -.44rem;
 }
 .km-android .km-button .km-badge {
   border-color: #fb9d09;
@@ -874,10 +873,10 @@ body {
   margin-bottom: .5rem;
 }
 .km-toolbar .km-button, .km-navbar .km-button {
-  margin-top: .6em;
-  margin-top: .6rem;
-  margin-bottom: .6em;
-  margin-bottom: .6rem;
+  margin-top: .3em;
+  margin-top: .5rem;
+  margin-bottom: .3em;
+  margin-bottom: .5rem;
 }
 .km-android .km-toolbar .km-button, .km-android .km-navbar .km-button {
   margin-top: .4em;
