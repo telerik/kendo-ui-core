@@ -145,8 +145,9 @@ body
     color: #fff;
     font-size: 1.5em;
     line-height: 1.5em;
+    line-height: 2.2rem;
     font-weight: bold;
-    text-shadow: 0 -1pt #777;
+    text-shadow: 0 -1px rgba(0,0,0,.3);
     float: left;
     width: 100%;
 }
@@ -180,8 +181,7 @@ body
 {
     border-color: rgba(0,0,0,.5) rgba(0,0,0,.3) rgba(0,0,0,.3);
     background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
-                linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
-    background-color: #496b9a;
+                linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0)) #496b9a;
     .box-shadow(0 1px 1px rgba(255,255,255,.5));
 }
 
@@ -224,9 +224,9 @@ body
 {
     margin-bottom: 2px;
     content: "\a0";
-    background: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 90%, rgba(70,70,70,.5)),
-                linear-gradient(left top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
     background-color: inherit;
+    background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 90%, rgba(70,70,70,.5)),
+                      linear-gradient(left top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
     -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000000), color-stop(0.50,#000000), color-stop(0.50, transparent), to(transparent));
     border-left: solid 1px rgba(0,0,0,.5);
     border-bottom: solid 1px #aaa;
@@ -238,7 +238,7 @@ body
     position: absolute;
     overflow: hidden;
     left: -.76em;
-    left: -.68rem;
+    left: ~"-.68rem";
     top: 0.32em;
     top: 0.3rem;
     .transform(rotate(45deg));
@@ -249,7 +249,7 @@ body
 .km-ios :-moz-first-node.km-back:before
 {
     border-radius: 0 1rem 0 0.4rem;
-    left: -0.56rem;
+    left: ~"-.56rem";
     top: 0.28rem;
     width: 1.36rem;
     height: 1.36rem;
@@ -298,8 +298,7 @@ body
     width: 200%;
     background:
         linear-gradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%, rgb(250, 250, 250) 50%, rgb(255, 255, 255)) 6em 0 no-repeat,
-        linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat;
-    background-color: #3074e7;
+        linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat #3074e7;
 }
 
 .km-switch-container
@@ -702,7 +701,7 @@ body
 .km-detaildisclose:after
 {
     margin-left: -.2em;
-    margin-left: -.2rem;
+    margin-left: ~"-.2rem";
     border: .2em solid #FFF;
     border-width: .24rem .24rem 0 0;
     .transform(rotate(45deg));
@@ -731,13 +730,13 @@ body
     height: .2rem;
     background: #FFF;
     margin-left: -.18em;
-    margin-left: -.28rem;
+    margin-left: ~"-.28rem";
 }
 
 .km-rowdelete:after
 {
     margin-left: -.28em;
-    margin-left: -.38rem;
+    margin-left: ~"-.38rem";
 }
 
 .km-rowinsert:after,
@@ -748,7 +747,7 @@ body
     width: .2rem;
     height: .7rem;
     margin-left: -.34em;
-    margin-left: -.44rem;
+    margin-left: ~"-.44rem";
 }
 
 .km-android .km-button .km-badge
@@ -926,10 +925,10 @@ body
 .km-toolbar .km-button,
 .km-navbar .km-button
 {
-    margin-top: .6em;
-    margin-top: .6rem;
-    margin-bottom: .6em;
-    margin-bottom: .6rem;
+    margin-top: .3em;
+    margin-top: .5rem;
+    margin-bottom: .3em;
+    margin-bottom: .5rem;
 }
 
 .km-android .km-toolbar .km-button,
