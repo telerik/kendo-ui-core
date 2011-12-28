@@ -1137,6 +1137,13 @@
                     return id(record);
                 };
             }
+
+            if (options.data.bind) {
+                options.data.bind(CHANGE, function(e) {
+                   that.trigger(CHANGE, e);
+                });
+            }
+
             that.bind([ /**
                          * Fires when an error occurs during data retrieval.
                          * @name kendo.data.DataSource#error
