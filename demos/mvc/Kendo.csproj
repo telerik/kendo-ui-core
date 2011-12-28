@@ -97,7 +97,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Data\dataviz.nav.json" />
+    <None Include="App_Data\mobile.nav.json" />
     <None Include="App_Data\web.nav.json" />
+    <Content Include="content\dataviz\js\kendo.examples.nav.js" />
+    <Content Include="content\dataviz\overview\bar.png" />
+    <Content Include="content\dataviz\overview\line.png" />
+    <Content Include="content\dataviz\overview\overlay.png" />
+    <Content Include="content\dataviz\overview\pie.png" />
+    <Content Include="content\dataviz\overview\scatter.png" />
     <Content Include="content\shared\js\console.js" />
     <Content Include="content\shared\js\examples.js" />
     <Content Include="content\shared\js\people.js" />
@@ -394,12 +401,22 @@
     <Content Include="content\web\tabstrip\ajax\ajaxContent3.html" />
     <Content Include="content\web\tabstrip\ajax\ajaxContent4.html" />
     <Content Include="content\web\tabstrip\ajax\ajaxContent5.html" />
+    <Content Include="Views\mobile\button\events.cshtml" />
+    <Content Include="Views\mobile\button\index.cshtml" />
+    <Content Include="Views\mobile\navbar\index.cshtml" />
+    <Content Include="Views\mobile\navbar\layout.cshtml" />
+    <Content Include="Views\mobile\overview\index.cshtml" />
+    <Content Include="Views\mobile\tabstrip\index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Content Include="Views\home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="content\dataviz\js\price-performance.json" />
+    <None Include="content\dataviz\js\spain-electricity.json" />
     <None Include="content\web\16x16\Thumbs.db" />
     <None Include="content\web\24x24\Thumbs.db" />
     <None Include="content\web\32x32\Thumbs.db" />
