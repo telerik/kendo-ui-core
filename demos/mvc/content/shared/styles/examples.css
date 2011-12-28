@@ -689,6 +689,7 @@ a.bigButton
     text-align: left;
     min-height: 260px;
     position: relative;
+    width: auto;
 }
 
 #exampleTitle
