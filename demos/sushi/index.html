@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Kendo Sushi</title>
-        <link rel="stylesheet" href="css/kendo.mobile.css" />
+        <link rel="stylesheet" href="css/kendo.mobile.common.css" />
         <link rel="stylesheet" href="css/style.css" />
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
@@ -215,7 +215,7 @@
                 if (viewID === "details") {
                     ds.fetch(function() {
                         item = ds.get(e.params.id).data;
-                        view.content.data("kendoScroller").scrollElement.html(itemDetailsTemplate(item));
+                        view.content.data("kendoMobileScroller").scrollElement.html(itemDetailsTemplate(item));
                         kendo.mobile.enhance(view.content);
 
                         view.content.find("#add-to-cart").data("kendoMobileButton").bind("click", function(e) {
@@ -225,7 +225,7 @@
                         });
                     });
                 } else if (viewID === "index" || viewID === "menu") {
-                    view.content.find(".item-list").data("kendoMobileListView").refresh();
+                    view.content.find(".item-list").data("kendoMobileListView")._refresh();
                 }
             });
         </script>

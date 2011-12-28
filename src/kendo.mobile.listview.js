@@ -3,7 +3,7 @@
         ui = kendo.mobile.ui,
         support = kendo.support,
         DataSource = kendo.data.DataSource,
-        MobileWidget = ui.MobileWidget,
+        Widget = ui.Widget,
         ITEM_SELECTOR = ".km-list > li",
         proxy = $.proxy,
         GROUP_TEMPLATE = kendo.template("<li>#= this.headerTemplate(data) #<ul>#= kendo.render(this.template, data.items)#</ul></li>"),
@@ -27,21 +27,21 @@
     }
 
     /**
-    * @name kendo.ui.MobileListView.Description
-    * @section The Kendo MobileListView widget is used to display flat or grouped list of items.
+    * @name kendo.mobile.ui.ListView.Description
+    * @section The Kendo Mobile ListView widget is used to display flat or grouped list of items.
     * <p>It can be either used in unbound mode by enhancing an HTML <code>ul</code> element, or bound to a kendo.data.DataSource instance.</p>
     *
     * <h3>Getting Started</h3>
-    * <p>The Kendo MobileApplication automatically initializes the MobileListView for every <code>ul</code> element with <code>role</code> data attribute set to <code>listview</code> present in the views' markup.
-    * Alternatively, it can be initialized using a jQuery selector. The MobileListView element can contain one or more <code>li</code> elements.</p>
-    * @exampleTitle Initialize Kendo MobileListView using a role data attribute.
+    * <p>The Kendo Mobile Application automatically initializes the Mobile ListView for every <code>ul</code> element with <code>role</code> data attribute set to <code>listview</code> present in the views' markup.
+    * Alternatively, it can be initialized using a jQuery selector. The Mobile ListView element can contain one or more <code>li</code> elements.</p>
+    * @exampleTitle Initialize mobile ListView using a role data attribute.
     * @example
     * <ul data-role="listview">
     *   <li>Foo</li>
     *   <li>Bar</li>
     * </ul>
     *
-    * @exampleTitle Initialize Kendo MobileListView using a jQuery selector.
+    * @exampleTitle Initialize mobile ListView using a jQuery selector.
     * @example
     * <ul id="listView"></ul>
     * <script>
@@ -50,10 +50,10 @@
     *
     * @section
     * <h3>Inset MobileListView</h3>
-    * <p>In iOS, the MobileListView appearance can be changed to <strong>inset</strong>, to achieve an effect similar to iOS grouped table views, where the list items are padded from the container, and have rounded corners.
-    * This can be accomplished by setting the <code>style</code> data attribute to <code>inset</code>. <strong>Note:</strong> This setting won't affect the appearance of the MobileListView on Android devices.</p>
+    * <p>In iOS, the mobile ListView appearance can be changed to <strong>inset</strong>, to achieve an effect similar to iOS grouped table views, where the list items are padded from the container, and have rounded corners.
+    * This can be accomplished by setting the <code>style</code> data attribute to <code>inset</code>. <strong>Note:</strong> This setting won't affect the appearance of the mobile ListView on Android devices.</p>
     *
-    * @exampleTitle Create Inset MobileListView
+    * @exampleTitle Create Inset mobile ListView
     * @example
     * <ul data-role="listview" data-style="inset">
     *   <li>Foo</li>
@@ -61,9 +61,9 @@
     * </ul>
     *
     * @section
-    * <h3>Grouped MobileListView</h3>
+    * <h3>Grouped mobile ListView</h3>
     * <p>The MobileListView can display items in groups, with optional headers. This can be achieved by nesting unordered list in items, and setting the <code>type</code> data attribute to <code>group</code>.</p>
-    * @exampleTitle Create grouped MobileListView
+    * @exampleTitle Create grouped mobile ListView
     * @example
     * <ul data-role="listview" data-type="group">
     *     <li>
@@ -86,12 +86,12 @@
     * <h3>Binding to Data</h3>
     *
     * <p>
-    * The MobileListView can be bound to both local JavaScript arrays and remote data via the
+    * The mobile ListView can be bound to both local JavaScript arrays and remote data via the
     * Kendo DataSource component. Local JavaScript arrays are appropriate for limited value
     * options, while remote data binding is better for larger data sets.
     * </p>
     *
-    * @exampleTitle Bind MobileListView to a local data source.
+    * @exampleTitle Bind mobile ListView to a local data source.
     * @example
     * $(document).ready(function() {
     *     $("#listview").kendoMobileListView({
@@ -119,10 +119,10 @@
     *     });
     * </script>
     */
-    var MobileListView = MobileWidget.extend(/** @lends kendo.ui.MobileListView.prototype */{
+    var ListView = Widget.extend(/** @lends kendo.mobile.ui.ListView.prototype */{
         /**
         * @constructs
-        * @extends kendo.ui.MobileWidget
+        * @extends kendo.mobile.ui.Widget
         * @param {DomElement} element DOM element.
         * @param {Object} options Configuration options.
         * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the MobileListView will be bound to.
@@ -134,7 +134,7 @@
         init: function(element, options) {
             var that = this;
 
-            MobileWidget.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             options = that.options;
 
@@ -198,7 +198,7 @@
         },
 
         options: {
-            name: "MobileListView",
+            name: "ListView",
             selector: kendo.roleSelector("listview"),
             type: "flat",
             template: "${data}",
@@ -300,5 +300,5 @@
         }
     });
 
-    ui.plugin(MobileListView);
+    ui.plugin(ListView);
 })(jQuery);
