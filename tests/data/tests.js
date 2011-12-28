@@ -32,6 +32,10 @@ tests.push(
         title: "datasource.range"
     },
     {
+        page: "data/datasource/observable-array.html",
+        title: "datasource.observableArray"
+    },
+    {
         page: "data/query.html",
         title: "query"
     },
