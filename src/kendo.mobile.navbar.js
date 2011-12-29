@@ -41,6 +41,22 @@
     *
     * <div data-role="view" data-layout="foo" data-title="bar"> ... </div>
     * <div data-role="view" data-layout="foo" data-title="baz"> ... </div>
+    *
+    * <h3>Customizing mobile NavBar appearance</h3>
+    * Kendo Mobile NavBar color can be customized by simply setting its background-color (either inline or by using a CSS selector with specificity of 20+.
+    * @exampleTitle Initialize a green Kendo mobile NavBar
+    * @example
+    * <div data-role="navbar" style="background-color: green">My View Title</div>
+    *
+    * @section
+    * You can target platforms separately with their respective root classes.
+    * @exampleTitle Initialize a green Kendo mobile NavBar in iOS and a red one in Android
+    * @example
+    * <style>
+    *     .km-ios .checkout { background-color: green; }
+    *     .km-android .checkout { background-color: red; }
+    * </style>
+    * <div data-role="navbar" class="checkout">My View Title</div>
     */
     var ui = window.kendo.mobile.ui,
         roleSelector = kendo.roleSelector,
