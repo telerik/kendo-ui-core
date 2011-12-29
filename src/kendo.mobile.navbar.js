@@ -42,7 +42,7 @@
     * <div data-role="view" data-layout="foo" data-title="bar"> ... </div>
     * <div data-role="view" data-layout="foo" data-title="baz"> ... </div>
     *
-    * <h3>Customizing mobile NavBar appearance</h3>
+    * @section <h3>Customizing mobile NavBar appearance</h3>
     * Kendo Mobile NavBar color can be customized by simply setting its background-color (either inline or by using a CSS selector with specificity of 20+.
     * @exampleTitle Initialize a green Kendo mobile NavBar
     * @example
