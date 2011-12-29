@@ -49,7 +49,7 @@
     * </script>
     *
     * @section
-    * <h3>Inset MobileListView</h3>
+    * <h3>Inset mobile ListView</h3>
     * <p>In iOS, the mobile ListView appearance can be changed to <strong>inset</strong>, to achieve an effect similar to iOS grouped table views, where the list items are padded from the container, and have rounded corners.
     * This can be accomplished by setting the <code>style</code> data attribute to <code>inset</code>. <strong>Note:</strong> This setting won't affect the appearance of the mobile ListView on Android devices.</p>
     *
@@ -62,7 +62,7 @@
     *
     * @section
     * <h3>Grouped mobile ListView</h3>
-    * <p>The MobileListView can display items in groups, with optional headers. This can be achieved by nesting unordered list in items, and setting the <code>type</code> data attribute to <code>group</code>.</p>
+    * <p>The mobile ListView can display items in groups, with optional headers. This can be achieved by nesting unordered list in items, and setting the <code>type</code> data attribute to <code>group</code>.</p>
     * @exampleTitle Create grouped mobile ListView
     * @example
     * <ul data-role="listview" data-type="group">
@@ -102,7 +102,7 @@
     * @section
     * <h3>Customizing Item Templates</h3>
     * <p>
-    *     MobileListView leverages Kendo UI high-performance Templates to give you complete control
+    *     The mobile ListView leverages Kendo UI high-performance Templates to give you complete control
     *     over item rendering. For a complete overview of Kendo UI Template capabilities and syntax,
     *     please review the <a href="../templates/index.html" title="Kendo UI Template">Kendo UI Template</a> demos and documentation.
     * </p>
@@ -125,7 +125,7 @@
         * @extends kendo.mobile.ui.Widget
         * @param {DomElement} element DOM element.
         * @param {Object} options Configuration options.
-        * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the MobileListView will be bound to.
+        * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the mobile ListView will be bound to.
         * @option {String} [type] The type of the control. Can be either <code>flat</code> (default) or <code>group</code>. Determined automatically in databound mode.
         * @option {String} [style] The style of the control. Can be either empty string(""), or <code>inset</code>.
         * @option {String} [template] <${data}> The item template.
@@ -153,7 +153,7 @@
             that.bind([
             /**
              * Fires when item is clicked
-             * @name kendo.ui.MobileListView#click
+             * @name kendo.mobile.ui.ListView#click
              * @event
              * @param {Event} e
              * @param {jQueryObject} e.item The selected list item
