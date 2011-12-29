@@ -10,6 +10,7 @@
         MOUSEUP = support.mouseup,
         CLICK = "click",
         proxy = $.proxy;
+
     /**
     * @name kendo.mobile.ui.Button.Description
     * @section The Button widget navigates between mobile Application views when pressed.
@@ -44,7 +45,6 @@
     * </style>
     * <a href="#foo" data-role="button" class="checkout">Foo</a>
     */
-
     var Button = Widget.extend(/** @lends kendo.mobile.ui.Button.prototype */{
         /**
         * @constructs
@@ -113,13 +113,31 @@
         }
     });
 
-    var BackButton = Button.extend({
+    /**
+    * @name kendo.mobile.ui.BackButton.Description
+    * @section The BackButton widget navigates to the previous mobile View when pressed.
+    *
+    * @exampleTitle Initialize Kendo mobile BackButton based on role data attribute.
+    * @example
+    * <a data-role="back-button">Foo</a>
+    *
+    * @exampleTitle Initialize Kendo mobile BackButton using a jQuery selector
+    * @example
+    * var button = $("#button").kendoMobileBackButton();
+    */
+    var BackButton = Button.extend(/** @lends kendo.mobile.ui.BackButton.prototype */{
         options: {
             name: "BackButton",
             style: "back",
             selector: kendo.roleSelector("back-button"),
         },
 
+        /**
+        * @constructs
+        * @extends kendo.mobile.ui.Button
+        * @param {DomElement} element DOM element.
+        * @param {Object} options Configuration options.
+        */
         init: function(element, options) {
             Button.fn.init.call(this, element, options);
             this.element.attr("href", ":back");
