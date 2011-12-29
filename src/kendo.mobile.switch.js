@@ -13,7 +13,7 @@
     * @example
     * <input type="checkbox" data-role="switch" />
     *
-    * @exampleTitle Initialize mobileSwitch using a jQuery selector
+    * @exampleTitle Initialize mobile Switch using a jQuery selector
     * @example
     * <input type="checkbox" id="switch" />
     * <script>
@@ -106,7 +106,7 @@
             that.bind([
                 /**
                 * Fires when the state of the widget changes
-                * @name kendo.ui.MobileSwitch#change
+                * @name kendo.mobile.ui.Switch#change
                 * @event
                 * @param {Event} e
                 * @param {Object} e.checked The checked state of the widget.
