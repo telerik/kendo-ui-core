@@ -57,8 +57,28 @@
             <input  id="shared2" />
             <input  id="shared3" />
         </fieldset>
+        <fieldset>
+            <legend>DropDownList - Remote json</legend>
+            <input  id="jsonddl" />
+        </fieldset>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
+
+var jsonDS = new kendo.data.DataSource({
+value: 2,
+                    transport: {
+                        read: {
+                            url: "ddl.json",
+                            dataType: "json"
+                        }
+                    }
+                });
+
+                $("#jsonddl").kendoDropDownList({
+                    dataSource: jsonDS
+                });
+
+
                  var remoteDataSource = new kendo.data.DataSource({
                     transport: {
                         read: {
