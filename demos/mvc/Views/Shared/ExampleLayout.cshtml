@@ -70,7 +70,7 @@
 
     document.title = "@ViewBag.Title";
 
-    if (kendo.mobile) {
+    if (kendo.mobile.Application) {
         window.kendoMobileApplication = new kendo.mobile.Application($("#mobile-application-container"));
         applyCurrentMobileOS();
     }
