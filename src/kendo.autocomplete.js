@@ -202,6 +202,12 @@
 	* $("#autoComplete").kendoAutoComplete({
 	*     height: 500
 	* });
+    * @option {String} [separator] <""> Sets the separator for completion. Empty by default, allowing for only one completion.
+    * _example
+    * // set completion separator to ,
+    * $("#autoComplete").kendoAutoComplete({
+    *     separator: ", "
+    * });
         */
         init: function (element, options) {
             var that = this;
