@@ -102,14 +102,88 @@
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options
          * @option {Number} [value] <null> Specifies the value of the NumericTextBox widget.
-         * @option {Number} [min] <null> Specifies the smallest value, which user can enter.
-         * @option {Number} [max] <null> Specifies the biggest value, which user can enter.
-         * @option {Number} [decimals] <null> Specifies the number precision. If not set precision defined by current culture is used.
+	 * _example
+	 *  // specify in the HTML
+	 * &lt;input id="numeric" value="10" type="number" min="-100" max="100" step="10"/&gt;
+	 * <br />
+	 * // specify on widget initialization
+	 * $("#numeric").kendoNumericTextBox({
+	 *     min: 0,
+	 *     max: 100,
+	 *     value: 50
+	 * });
+         * @option {Number} [min] <null> Specifies the smallest value the user can enter.
+	 * _example
+	 *  // specify in the HTML
+	 * &lt;input id="numeric" value="10" type="number" min="-100" max="100" step="10"/&gt;
+	 * <br />
+	 * // specify on widget initialization
+	 * $("#numeric").kendoNumericTextBox({
+	 *     min: 0,
+	 *     max: 100,
+	 *     value: 50
+	 * });
+	 * @option {Number} [max] <null> Specifies the largest value the user can enter.
+	 * _example
+	 *  // specify in the HTML
+	 * &lt;input id="numeric" value="10" type="number" min="-100" max="100" step="10"/&gt;
+	 * <br />
+	 * // specify on widget initialization
+	 * $("#numeric").kendoNumericTextBox({
+	 *     min: 0,
+	 *     max: 100,
+	 *     value: 50
+	 * });
+	 * @option {Number} [decimals] <null> Specifies the number precision. If not set precision defined by current culture is used.
+	 * _example
+	 *  // specify in the HTML
+	 * &lt;input id="numeric" value="10" type="number" min="0" max="1" step=".1" decimals="1"/&gt;
+	 * <br />
+	 * // specify on widget initialization
+	 * $("#numeric").kendoNumericTextBox({
+	 *     min: 0,
+	 *     max: 1,
+	 *     step: .1,
+	 *     decimals: 1
+	 * });
          * @option {String} [format] <n> Specifies the format of the number. Any valid number format is allowed.
-         * @option {String} [placeholder] <Enter value> Specifies the text displayed when the input is empty.
-         * @option {String} [upArrowText] <Increase value> Specifies the title of the up arrow.
-         * @option {String} [downArrowText] <Decrease value> Specifies the title of the down arrow.
-         */
+         * _example
+	 * $("#numeric").kendoNumericTextBox({
+	 *    format: "p0", // format as percentage with % sign
+         *    min: 0,
+         *    max: 1,
+         *    step: 0.01	
+         * }); 
+	 * @option {String} [placeholder] <Enter value> Specifies the text displayed when the input is empty.
+	 * _example
+	 * // specify on widget initialization
+	 * $("#numeric").kendoNumericTextBox({
+	 *     min: 0,
+	 *     max: 100,
+	 *     value: 50,
+	 *     placeHolder: "Select A Value"
+	 * });
+         * @option {String} [upArrowText] <Increase value> Specifies the text of the tooltip on the up arrow.
+         * _example
+	 * // specify on widget initialization
+	 * $("#numeric").kendoNumericTextBox({
+	 *     min: 0,
+	 *     max: 100,
+	 *     value: 50,
+	 *     upArrowText: "More",
+	 *     downArrowText: "Less"
+	 * });
+	 * @option {String} [downArrowText] <Decrease value> Specifies the text of the tooltip on the down arrow.
+         * _example
+	 * // specify on widget initialization
+	 * $("#numeric").kendoNumericTextBox({
+	 *     min: 0,
+	 *     max: 100,
+	 *     value: 50,
+	 *     upArrowText: "More",
+	 *     downArrowText: "Less"
+	 * });
+	 */
          init: function(element, options) {
              var that = this,
              isStep = options && options[step] !== undefined,
@@ -141,6 +215,20 @@
              * @name kendo.ui.NumericTextBox#change
              * @event
              * @param {Event} e
+	     * @example
+	     * $("#numeric").kendoNumericTextBox({
+	     *     change: function(e) {
+	     *         // handle event
+	     *     });
+	     * });
+	     * @exampleTitle To set after initialization
+	     * @example
+	     * // get a reference to the numeric textbox widget
+	     * var numeric = $("#numeric").data("kendoNumericTextBox");
+	     * // bind to the change event
+	     * numeric.bind("change", function(e) {
+	     *     // handle event
+	     * });
              */
              that.bind(CHANGE, options);
 
