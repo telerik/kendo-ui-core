@@ -13,8 +13,8 @@
                     <span class="k-widget k-tooltip-validation k-invalid-msg" data-for="search"><span class="k-icon k-warning"></span></span>
                 </li>
                 <li>
-                <label for="amount">Amount</label>
-                    <input name="Amount" type="number" min="1" max="10" value="1" class="k-textbox" required class="k-input"  />
+                    <label for="amount">Amount</label>
+                    <input id="amount" name="Amount" type="number" min="1" max="10" value="1" class="k-textbox k-input" required />
                     <span class="k-widget k-tooltip-validation k-invalid-msg" data-for="amount"><span class="k-icon k-warning"></span></span>
                 </li>
                 <li>
@@ -39,11 +39,11 @@
         </div>
 
             <style scoped>
-                
+
                 .k-textbox {
                     width: 11.8em;
                 }
-                
+
                 #tickets {
                     width: 510px;
                     height: 323px;
