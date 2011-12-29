@@ -53,7 +53,7 @@
     -webkit-transform: translatez(0);
 }
 
-:-moz-any(.km-view,body)
+:-moz-any(.km-view,.km-vertical,.km-horizontal)
 {
     overflow: hidden;
     position: static;
@@ -1305,7 +1305,8 @@
 
 .km-android .km-list,
 .km-android .km-content,
-.km-android body
+.km-android .km-vertical,
+.km-android .km-horizontal
 {
     color: #fff;
     background: #000;

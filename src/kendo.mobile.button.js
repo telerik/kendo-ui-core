@@ -29,7 +29,20 @@
     * @section
     *
     * <h3>Customizing mobile Button appearance</h3>
-    * // TODO
+    * Every Kendo Mobile Button color can be customized by simply setting its background-color (either inline or by using a CSS selector with specificity of 20+.
+    * @exampleTitle Initialize a green Kendo mobile Button
+    * @example
+    * <a href="#foo" data-role="button" style="background-color: green">Foo</a>
+    *
+    * @section
+    * You can target platforms separately with their respective root classes.
+    * @exampleTitle Initialize a green Kendo mobile Button in iOS and a red one in Android
+    * @example
+    * <style>
+    *     .km-ios .checkout { background-color: green; }
+    *     .km-android .checkout { background-color: red; }
+    * </style>
+    * <a href="#foo" data-role="button" class="checkout">Foo</a>
     */
 
     var Button = Widget.extend(/** @lends kendo.mobile.ui.Button.prototype */{

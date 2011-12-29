@@ -23,6 +23,10 @@
                 {
                     "text": "Events",
                     "url": "button/events.html"
+                },
+                {
+                    "text": "Customizing Appearance",
+                    "url": "button/appearance.html"
                 }
             ]
         },
@@ -38,6 +42,10 @@
                 {
                     "text": "Navbar in a layout",
                     "url": "navbar/layout.html"
+                },
+                {
+                    "text": "Customizing Appearance",
+                    "url": "navbar/appearance.html"
                 }
             ]
         },
