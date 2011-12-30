@@ -280,6 +280,22 @@
                 equal(result.length, 3);
             });
 
+            test("filter contains with apostrophe", function() {
+                var data = [{ name: "f'oo" } ];
+
+                var result = new Query(data).filter({field: "name", value: "'", operator: "contains"}).toArray();
+
+                equal(result.length, 1);
+            });
+
+            test("filter with slash", function() {
+                var data = [{ name: "f\\oo" } ];
+
+                var result = new Query(data).filter({field: "name", value: "\\", operator: "contains"}).toArray();
+
+                equal(result.length, 1);
+            });
+
             test("filter with apostrophe", function() {
                 var data = [{ name: "f'oo" } ];
 
