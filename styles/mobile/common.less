@@ -1,5 +1,7 @@
 @import "mixins.less";
 
+/* Common Platform CSS */
+
 .km-root,
 .km-vertical,
 .km-horizontal
@@ -26,13 +28,6 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-.km-ios,
-.km-meego
-{
-    .transform(translatez(0));
-    background: #fff;
-}
-
 .km-view
 {
     top: 0;
@@ -44,13 +39,6 @@
     display: table\9;
     .box-orient(vertical);
     vertical-align: top;
-}
-
-.km-ios .km-view,
-.km-meego .km-view
-{
-    overflow: hidden;
-    -webkit-transform: translatez(0);
 }
 
 :-moz-any(.km-view,.km-vertical,.km-horizontal)
@@ -123,37 +111,9 @@
   .km-header, .km-footer { height: 1px; }
 }
 
-.km-android .km-view,
-.km-meego .km-view
-{
-    .box-direction(reverse);
-}
-
-.km-android .km-view > *,
-.km-meego .km-view > *
-{
-    .box-direction(normal);
-}
-
 .km-view-title
 {
     display: none;
-}
-
-.km-ios .km-view-title,
-.km-ios .km-dialog-title
-{
-    position: relative;
-    display: block;
-    text-align: center;
-    color: #fff;
-    font-size: 1.5em;
-    line-height: 1.5em;
-    line-height: 2.2rem;
-    font-weight: bold;
-    text-shadow: 0 -1px rgba(0,0,0,.3);
-    float: left;
-    width: 100%;
 }
 
 .km-toolbar,
@@ -162,42 +122,17 @@
 .km-radiogroup,
 .km-tabstrip
 {
-    background-image: linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.45) 6%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.15) 50%, rgba(100,100,100,0));
     background-origin: border-box;
     position: relative;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     display: inline-block;
     padding: .4em .7em;
     padding: .4rem .7rem;
     margin: .1em;
     margin: .1rem;
-    color: #FFF;
     overflow: visible;
     .border-radius(5pt);
-    border: 1px solid #394d68;
-    border-color: #2f3740 #394d68 #375073;
-    background-color: #7185a2;
     text-shadow: 0 -1px rgba(0,0,0,.3);
     text-decoration: none;
-}
-
-.km-ios .km-button
-{
-    border-color: rgba(0,0,0,.5) rgba(0,0,0,.3) rgba(0,0,0,.3);
-    background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
-                linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0)) #496b9a;
-    .box-shadow(0 1px 1px rgba(255,255,255,.5));
-}
-
-.km-ios .km-button:active
-{
-    background-color: #263e6c;
-}
-
-.km-ios li.km-state-active
-{
-    border: 0;
-    color: white;
 }
 
 .km-button
@@ -206,63 +141,9 @@
     outline: 0;
 }
 
-.km-ios,
-.km-ios .km-button
-{
-    font: bold .9em HelveticaNeue, sans-serif;
-    font-size: .9rem;
-}
-
-.km-ios .km-back
-{
-    margin-left: 11px;
-}
-
-.km-ios .km-back .km-text
-{
-    position: relative;
-    z-index: 1;
-}
-
-.km-ios .km-back:before
-{
-    margin-bottom: 2px;
-    content: "\a0";
-    background-color: inherit;
-    background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 90%, rgba(70,70,70,.5)),
-                      linear-gradient(left top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
-    -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000000), color-stop(0.50,#000000), color-stop(0.50, transparent), to(transparent));
-    border-left: solid 1px rgba(0,0,0,.5);
-    border-bottom: solid 1px #aaa;
-    width: 1.6em;
-    height: 1.6em;
-    width: 1.5rem;
-    height: 1.5rem;
-    display: block;
-    position: absolute;
-    overflow: hidden;
-    left: -.76em;
-    left: ~"-.68rem";
-    top: 0.32em;
-    top: 0.3rem;
-    .transform(rotate(45deg));
-    .box-sizing(border-box);
-    .border-radius(.2em 0 .2em .4em);
-}
-
-.km-ios :-moz-first-node.km-back:before
-{
-    border-radius: 0 1rem 0 0.4rem;
-    left: ~"-.56rem";
-    top: 0.28rem;
-    width: 1.36rem;
-    height: 1.36rem;
-}
-
 .km-switch,
 .km-checkbox
 {
-    font-family: HelveticaNeue, Arial, sans-serif;
     font-size: 1em;
     font-size: 1rem;
     display: inline-block;
@@ -275,12 +156,6 @@
     padding: 1px;
     position: relative;
     overflow: hidden;
-}
-
-.km-ios .km-switch,
-.km-meego .km-switch
-{
-    -webkit-transform: translatez(0);
 }
 
 .km-switch-wrapper,
@@ -300,9 +175,6 @@
     margin: 0 1px 1px -5em;
     height: 100%;
     width: 200%;
-    background:
-        linear-gradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%, rgb(250, 250, 250) 50%, rgb(255, 255, 255)) 6em 0 no-repeat,
-        linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat #3074e7;
 }
 
 .km-switch-container
@@ -315,14 +187,12 @@
     width: 100%;
     overflow: hidden;
     background: transparent;
-    border: 1px solid #999;
     .border-radius(4px);
     .box-sizing(border-box);
     .box-shadow(inset 0 2px 2px 0 rgba(0,0,0,.3));
 }
 
-.km-checkbox,
-.km-android .km-listview .km-switch
+.km-checkbox
 {
     width: 1.8em;
     height: 1.8em;
@@ -330,59 +200,12 @@
     height: 1.8rem;
 }
 
-.km-checkbox-checked:after,
-.km-android .km-listview .km-switch-handle
+.km-checkbox-checked:after
 {
     content: "\a0";
     display: block;
     width: 100%;
     height: 100%;
-}
-
-.km-ios .km-checkbox
-{
-    border: 3px solid #e5e5e5;
-    background-color: #fff;
-    .border-radius(15px);
-    .transition(~"all 100ms ease-out");
-}
-
-.km-ios .km-checkbox-checked
-{
-    border-color: #fff;
-    background-color: #BB0000;
-    background-image: linear-gradient(top, rgba(241, 150, 155, 1), rgba(230, 70, 78, .5) 50%, rgba(222, 11, 21, .5) 50%, rgba(183, 0, 0, 0));
-    .box-shadow(0 2px 3px #333);
-}
-
-.km-android .km-checkbox,
-.km-android .km-listview .km-switch
-{
-    padding: 0;
-    border: 1px solid #000;
-    background-color: rgb(54, 54, 54);
-    background-image: linear-gradient(top, rgb(54, 54, 54), rgb(43, 43, 43));
-    .border-radius(2px);
-    .box-sizing(border-box);
-    .box-shadow(0 0 1px 1px #808080);
-}
-
-.km-ios .km-checkbox-checked:after
-{
-    background: transparent url("images/ios-sprite.png") 2px -117px no-repeat;
-}
-
-.km-android .km-checkbox-checked:after,
-.km-android .km-listview .km-switch-on
-{
-    background: transparent url("images/android-sprite.png") 0 8% no-repeat;
-    background-size: 100% auto;
-}
-
-.km-android .km-listview .km-switch-handle:after,
-.km-android .km-listview .km-switch-handle:before
-{
-    display: none;
 }
 
 .km-switch-handle
@@ -395,8 +218,6 @@
     height: 1.75rem;
     display: inline-block;
     margin: -1px 0 0 -1px;
-    border: 1px solid #969696;
-    background: linear-gradient(top, rgb(255, 255, 255), rgb(215, 215, 215) 5%, rgb(255, 255, 255));
     .border-radius(5px);
     .box-shadow(0 0 3px 0 rgba(0,0,0,.5));
 }
@@ -419,246 +240,21 @@
 .km-switch-label-off
 {
     left: 3em;
-    color: #7f7f7f;
     position: absolute;
 }
 
 .km-switch-label-on
 {
     left: -2.8em;
-    color: #fff;
     position: absolute;
     text-shadow: 0 -1px 0 rgba(0,0,0,.5);
-}
-
-.km-android .km-switch
-{
-    width: 3em;
-    width: 3rem;
-    height: 2em;
-    height: 2rem;
-    border: 1px solid transparent;
-}
-
-.km-android .km-switch-handle
-{
-    position: relative;
-    background: none;
-    border: none;
-    .box-shadow(none);
-    line-height: 1.1em;
-    line-height: 1.1rem;
-    text-align: center;
-    font-size: 1.1em;
-    font-size: 1.1rem;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    .transform(~"translate(0,0) !important");
-    .transition(~"none !important");
-}
-
-.km-android .km-switch-handle:after
-{
-    height: 1.1em;
-    text-transform: uppercase;
-    width: 100%;
-    left: 0;
-    font-weight: normal;
-    color: #000;
-    .box-sizing(border-box);
-}
-
-.km-android .km-switch-on:after
-{
-    content: "on";
-}
-
-.km-android .km-switch-off:after
-{
-    content: "off";
-}
-
-.km-android .km-switch-wrapper
-{
-    display: none;
-}
-
-.km-android .km-switch-container
-{
-    position: relative;
-    border: none;
-    background: none;
-    .border-radius(0);
-    .box-shadow(none);
-}
-
-.km-android .km-switch-handle:before
-{
-    content: "\a0";
-    padding: 0;
-    left: 0;
-    height: 5px;
-    position: relative;
-    width: 80%;
-    margin: 1.5em auto;
-    .border-radius(3px);
-    .box-shadow(inset 1px 1px 1px #999);
-    background: #bbb;
-}
-
-.km-android .km-switch-on:before
-{
-    background: #87DE13;
-}
-
-.km-meego .km-switch
-{
-    width: 4em;
-    width: 4rem;
-    padding: 0;
-}
-
-.km-meego .km-switch,
-.km-meego .km-switch-wrapper,
-.km-meego .km-switch-container
-{
-    .border-radius(12px);
-}
-
-.km-meego .km-switch-container
-{
-    border: 0;
-    .box-shadow(0 0 2px 0 #999 inset);
-}
-
-.km-meego .km-switch-background
-{
-    margin-left: -3em;
-    background: linear-gradient(top, rgba(0,0,0,0), rgba(255,255,222,.2) 10%, rgba(0,0,0,0)),
-                linear-gradient(left, rgb(25, 133, 222), rgb(25, 133, 222) 45%, rgb(210, 210, 210) 55%, rgb(210, 210, 210));
-}
-
-.km-meego .km-switch:active .km-switch-handle
-{
-    background: #d9d9d9;
-}
-
-.km-meego .km-switch-handle:after,
-.km-meego .km-switch-handle:before
-{
-    display: none;
-}
-
-.km-meego .km-switch-handle
-{
-    width: 100%;
-    height: 100%;
-    background: #d2d2d2;
-    .border-radius(10px);
-    margin: 0.18em 0.2em;
-    width: 1.4em;
-    height: 1.4em;
-    width: 1.4rem;
-    height: 1.4rem;
-    background: #fff;
-    border-color: #fff;
-    .box-sizing(border-box);
-    .box-shadow(0 2px 3px 0 #aaa);
-}
-
-.km-meego .km-switch-on .km-switch-handle
-{
-    .box-shadow(0 2px 3px 0 #4c7698);
-}
-
-.km-android,
-.km-android .km-button,
-.km-android .km-switch
-{
-    font: normal 1em DroidSans, Helvetica, sans-serif;
-    font-size: 1rem;
-}
-
-.km-android .km-button,
-.km-android .km-switch
-{
-    padding: .2em .4em;
-    padding: .2rem .4rem;
-    margin: .1em;
-    margin: .1rem;
-    .border-radius(.15em);
-    line-height: 2em;
-    line-height: 2rem;
-    .box-shadow(0 1px 2px #373737);
-    /*-webkit-mask-image: ~"url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><rect fill=%22black%22 x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%222%22/></svg>')";*/
-}
-
-.km-android .km-tabstrip .km-button
-{
-    height: auto;
-    .box-shadow(none);
-}
-
-.km-android .km-toolbar,
-.km-android .km-button,
-.km-android .km-switch,
-.km-android .km-radiogroup,
-.km-android .km-tabstrip
-{
-    color: #000;
-    text-shadow: none;
-    border-color: #e7e7e7;
-    background-color: #dedede;
-
-    background-image: linear-gradient(top, rgb(230, 230, 230), rgb(205, 205, 205));
-}
-
-.km-android .km-button:not([disabled]):active,
-.km-android .km-switch:not([disabled]):active,
-.km-android .km-radiogroup .km-state-active
-{
-    border-color: #feb84b #fb9d09 #f29c0a;
-    background-color: #fe9d08;
-    background-image: linear-gradient(top, rgb(254, 157, 8), rgb(254, 161, 10) 50%, rgb(254, 164, 11));
-}
-
-.km-blackberry,
-.km-blackberry .km-button,
-.km-meego,
-.km-meego .km-button
-{
-    font: normal 1em Arial, Helvetica, sans-serif;
-}
-
-.km-blackberry .km-toolbar,
-.km-blackberry .km-button,
-.km-blackberry .km-radiogroup,
-.km-blackberry .km-tabstrip,
-.km-meego .km-toolbar,
-.km-meego .km-button,
-.km-meego .km-radiogroup,
-.km-meego .km-tabstrip
-{
-    font: normal 1em Arial, Helvetica, sans-serif;
-    color: #333;
-    text-shadow: none;
-    border-color: #fff;
-    background-color: #d3d7d7;
-    -webkit-box-shadow: none;
-
-    background-image: linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
 }
 
 .km-badge,
 .km-detail
 {
-    background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
-    color: #FFF;
     text-decoration: none;
     display: inline-block;
-    border: .3em solid #FFF;
     font-size: .7em;
     line-height: 1.6em;
     vertical-align: middle;
@@ -672,9 +268,7 @@
     height: 1.6em;
     text-shadow: none;
     .border-radius(1.2em);
-    background-color: #bc0404;
     background-clip: padding-box;
-    .box-shadow(0 3px 3px #000);
 }
 
 .km-detail
@@ -684,10 +278,6 @@
     right: 0;
     top: 0;
     line-height: 1.4em;
-    border: .2em solid #FFF;
-    border-width: .15rem;
-    .box-shadow(0 1px 3px rgba(0,0,0,.5));
-    background-color: #1F6DD8;
 }
 
 .km-detail:after,
@@ -711,16 +301,6 @@
     .transform(rotate(45deg));
 }
 .km-detaildisclose:before { display: none; }
-
-.km-rowinsert
-{
-    background-color: #24870D;
-}
-
-.km-rowdelete
-{
-    background-color: #B01B1A;
-}
 
 .km-rowdelete:after,
 .km-rowinsert:after,
@@ -754,14 +334,6 @@
     margin-left: ~"-.44rem";
 }
 
-.km-android .km-button .km-badge
-{
-    border-color: #fb9d09;
-    background-color: #000;
-    .border-radius(.4em);
-    background-image: none;
-}
-
 .km-button::-moz-focus-inner
 {
     padding: 0;
@@ -775,23 +347,7 @@
     top: -1em;
 }
 
-.km-blackberry .km-badge
-{
-    -webkit-box-shadow: none;
-}
-
-.km-blackberry .km-button:not([disabled]):active,
-.km-blackberry .km-radiogroup .km-state-active,
-.km-meego .km-button:active .km-button:not([disabled]):active,
-.km-meego .km-radiogroup .km-state-active
-{
-    color: #FFF;
-    border-color: #3f9fe5;
-    background-color: #1b6ec0;
-    background-image: linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
-}
-
-.km-radiogroup,
+.km-ios .km-radiogroup,
 .km-android .km-radiogroup,
 .km-meego .km-radiogroup,
 .km-blackberry .km-radiogroup
@@ -832,11 +388,6 @@
 {
     font-size: 1.3em;
     font-weight: bold;
-    color: #929292;
-    text-shadow: 0 1px #fff;
-    border-color: #B4B8BA #9FA3A4 #9FA3A4;
-    background-image: linear-gradient(top, rgb(251,251,251), rgb(225,225,225) 50%, rgb(200,200,200));
-    .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
 }
 
 .km-ios .km-state-disabled .km-button,
@@ -846,22 +397,6 @@
 {
     color: #aaa;
     text-shadow: none;
-}
-
-.km-ios .km-radiogroup .km-state-active
-{
-    color: #fff;
-    text-shadow: none;
-    border-color: rgba(0,0,0,.4) rgba(0,0,0,.4) rgba(0,0,0,.1);
-    background-color: #3D7EEB;
-    background-image: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 50%, rgba(255,255,255,.05) 50%, rgba(255,255,255,.25));
-    .box-shadow(inset -1px 0 2px rgba(0,0,0,.6));
-}
-
-.km-blackberry .km-radiogroup,
-.km-meego .km-radiogroup
-{
-    font-size: 1em;
 }
 
 .km-tabstrip,
@@ -906,13 +441,6 @@
     border-width: 0 0 1px 0;
 }
 
-.km-android .km-toolbar,
-.km-android .km-navbar
-{
-    padding: 0 .3em;
-    border-width: 0;
-}
-
 :-moz-any(.km-toolbar,.km-navbar)
 {
     overflow: visible;
@@ -935,55 +463,6 @@
     margin-bottom: .5rem;
 }
 
-.km-android .km-toolbar .km-button,
-.km-android .km-navbar .km-button
-{
-    margin-top: .4em;
-    margin-top: .4rem;
-    margin-bottom: .4em;
-    margin-bottom: .4rem;
-}
-
-.km-blackberry .km-toolbar,
-.km-meego .km-toolbar,
-.km-blackberry .km-navbar,
-.km-meego .km-navbar,
-{
-    background-color: #181E17;
-    background-image: linear-gradient(top, rgba(43, 49, 45, 1), rgba(24, 30, 23, 0) 100%);
-}
-
-.km-android .km-toolbar,
-.km-android .km-navbar
-{
-    background-color: #9b9b9b;
-    background-image: linear-gradient(top, rgb(155, 155, 155), rgb(131, 131, 131));
-}
-
-.km-ios .km-tabstrip
-{
-    padding: .2em 0;
-    background-color: #222;
-    background-image: linear-gradient(top, rgba(46, 46, 46, 0.8), rgba(21, 21, 21, 0.5) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8));
-}
-
-.km-android .km-tabstrip
-{
-    display: table;
-    padding: 0;
-    background-color: #222;
-    border-bottom: 2pt solid #7a7a7a;
-    background-image: linear-gradient(top, rgb(39, 39, 39), rgb(14, 12, 15));
-}
-
-.km-blackberry .km-tabstrip,
-.km-meego .km-tabstrip
-{
-    padding: .2em;
-    background-color: #333;
-    background-image: linear-gradient(top, rgba(188, 188, 188, 0.8), rgba(51, 51, 51, 0) 50%);
-}
-
 .km-tabstrip .km-button
 {
     font: bold 1em Helvetica, sans-serif;
@@ -996,84 +475,10 @@
     text-align: center;
 }
 
-.km-ios .km-tabstrip .km-button
-{
-    .border-radius(5pt);
-    font-size: .6em;
-    padding: .1em .6em;
-    min-width: 6em;
-    margin: 0 2%;
-    text-shadow: none;
-}
-
 .km-tabstrip .km-badge
 {
     font-size: .8em;
     font-weight: normal;
-}
-
-.km-ios .km-tabstrip .km-badge
-{
-    font-size: 1.1em;
-}
-
-.km-android .km-tabstrip .km-button
-{
-    display: table-cell;
-    font-size: .8em;
-    padding: .5em .4em .3em;
-    .border-radius(0);
-    border-right: 1pt solid #444;
-    border-left: 1pt solid #000;
-    min-width: 5em;
-}
-
-.km-android .km-tabstrip .km-badge,
-.km-blackberry .km-tabstrip .km-badge,
-.km-meego .km-tabstrip .km-badge
-{
-    top: auto;
-    bottom: -10px;
-}
-
-.km-blackberry .km-tabstrip .km-button,
-.km-meego .km-tabstrip .km-button
-{
-    .border-radius(5pt);
-    padding: .1em;
-    margin: 0 1%;
-}
-
-.km-ios .km-tabstrip .km-button:active,
-.km-ios .km-tabstrip .km-state-active
-{
-    color: #FFF;
-    background: rgba(100, 100, 100, 0.5);
-}
-
-.km-android .km-tabstrip .km-button:active,
-.km-android .km-tabstrip .km-state-active
-{
-    color: #FFF;
-    border-color: transparent #444 transparent #000;
-    background: rgb(154, 154, 154);
-    background-image: linear-gradient(top, rgb(154, 154, 154), rgb(126, 126, 126));
-}
-
-.km-android .km-tabstrip .km-text
-{
-    position: relative;
-}
-
-.km-android .km-badge
-{
-    right: -2.2em;
-}
-
-.km-blackberry .km-tabstrip .km-text,
-.km-meego .km-tabstrip .km-text
-{
-    display: none;
 }
 
 .km-tabstrip .km-button:first-child
@@ -1084,11 +489,6 @@
 .km-tabstrip .km-button:last-child
 {
     border-right: 0;
-}
-
-.km-list
-{
-    background: #fff;
 }
 
 .km-list,
@@ -1117,11 +517,6 @@
     float: right;
 }
 
-.km-android .km-listview .km-switch
-{
-    margin-top: .45em
-}
-
 .km-listview .km-list
 {
     margin-top: 2px;
@@ -1140,12 +535,6 @@
     text-shadow: none;
 }
 
-.km-ios .km-list > li,
-.km-meego .km-list > li
-{
-    -webkit-transform: translatez(0);
-}
-
 .km-listgroup > li,
 .km-listgroupinset > li
 {
@@ -1161,155 +550,14 @@
     line-height: 1.65em;
 }
 
-.km-ios .km-listinset,
-.km-ios .km-listgroupinset .km-list
-{
-    border: 1px solid #999;
-    .border-radius(10px);
-    .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
-}
-
-.km-ios .km-listinset > li:first-child,
-.km-ios .km-listgroupinset .km-list > li:first-child
-{
-    .box-shadow(inset 0 1px 0 0 rgba(200,200,200,.4));
-}
-
-.km-ios .km-listview .km-list
-{
-    border-top: 1px solid #78858e;
-}
-
-.km-ios .km-list > li
-{
-    border-bottom: 1px solid #E9E9E9;
-}
-
-.km-ios .km-list > li,
-.km-ios .km-list a:not(.km-button)
-{
-    color: #000;
-}
-
 .km-list > li:last-child
 {
     border-bottom: 0;
 }
 
-.km-ios .km-listview .km-list
-{
-    border-top: 1px solid #78858e;
-}
-
-.km-ios .km-listgroup > li,
-.km-ios .km-listgroupinset > li
-{
-    color: #FFF;
-    text-shadow: 0 1px 1px rgba(100,100,100,.8);
-    border-top: 1px solid rgba(255,255,255,.5);
-    background-color: #8d9daa;
-    .box-shadow(0 -1px 0 #78858e);
-}
-
-.km-ios .km-listgroupinset > li
-{
-    color: #373e50;
-    padding: 0;
-    background: none;
-    border: none;
-    .box-shadow(none);
-    text-shadow: 0 1px 1px rgba(255,255,255,.8);
-}
-
-.km-ios .km-list > li
-{
-    display: block;
-    vertical-align: middle;
-    line-height: 1.6em;
-    font-size: 1.2em;
-    font-weight: bold;
-    overflow: hidden;
-}
-
-.km-android .km-listinset,
-.km-android .km-listgroupinset
-{
-    margin: 0;
-}
-
-.km-android .km-listinset > li,
-.km-android .km-listgroupinset > li
-{
-    margin-top: 0;
-}
-
-.km-android .km-listview .km-list
-{
-    border-top: 1px solid #333;
-}
-
-.km-android .km-list > li
-{
-    color: #fff;
-    font-size: 1.3em;
-    font-weight: normal;
-    line-height: 2em;
-    border-bottom: 1px solid #404040;
-}
-
-.km-android .km-list > li,
-.km-android .km-list a:not(.km-button)
-{
-    color: #fff;
-}
-
-.km-android .km-list > li:last-child
-{
-    border-bottom: 0;
-}
-
-.km-android .km-listgroup > li,
-.km-android .km-listgroupinset > li
-{
-    color: #bebebe;
-    background: #191919;
-    padding-top: .2em;
-    line-height: inherit;
-}
-
 .km-default-content
 {
     padding: 1em;
-}
-
-.km-list,
-.km-content
-{
-    background: #fff;
-}
-
-.km-ios .km-insetcontent
-{
-    background: #c4ccd5 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAABCAYAAAASC7TOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABRJREFUeNpi/P//PwMW4AAiAAIMAFIpAz/zYoI+AAAAAElFTkSuQmCC);
-}
-
-.km-android .km-list
-{
-    color: #fff;
-}
-
-.km-android .km-list .km-item
-{
-    height: 56px;
-}
-
-.km-android .km-list,
-.km-android .km-content,
-.km-android .km-vertical,
-.km-android .km-horizontal
-{
-    color: #fff;
-    background: #000;
 }
 
 input[type=radio],
@@ -1339,26 +587,6 @@ input[type=checkbox]
     margin-top: -18px;
 }
 
-.km-android .km-item label:before
-{
-    border: 1px solid #000;
-    background-color: rgb(54, 54, 54);
-    background-image: linear-gradient(top, rgb(54, 54, 54), rgb(43, 43, 43));
-    .border-radius(2px);
-    .box-sizing(border-box);
-    .box-shadow(0 0 1px 2px #808080);
-}
-
-.km-ios label.km-item-checked:after
-{
-    background: transparent url("images/ios-sprite.png") 0 -10px no-repeat;
-}
-
-.km-android label.km-item-checked:after
-{
-    background: transparent url("images/android-sprite.png") 0 -36px no-repeat;
-}
-
 .km-tabstrip .km-button .km-icon
 {
     display: block;
@@ -1367,113 +595,12 @@ input[type=checkbox]
     width: 2.5rem;
     height: 2.5rem;
     background-size: auto 100%;
-}
-
-.km-android .km-tabstrip .km-icon
-{
-    width: 2.2rem;
-    height: 2.2rem;
-}
-
-.km-tabstrip .km-button .km-icon
-{
     margin: 0 auto;
-}
-
-.km-android .km-tabstrip .km-button .km-icon
-{
-    opacity: 0.5;
-    background: transparent url('images/atabimg.png') no-repeat .1em 50%;
-    background-size: cover;
-}
-
-.km-ios .km-tabstrip .km-button .km-icon
-{
-    opacity: 1;
-    background: transparent url('images/itabimg1.png') no-repeat 3px 50%;
-    background-size: cover;
-}
-
-.km-blackberry .km-tabstrip .km-button .km-icon,
-.km-meego .km-tabstrip .km-button .km-icon
-{
-    opacity: 0.5;
-    background: transparent url('images/atabimg.png') no-repeat .5em 50%;
-    background-size: auto 100%;
 }
 
 .km-tabstrip .km-button.km-state-active .km-icon
 {
     opacity: 1;
-}
-
-.km-ios .km-tabstrip .km-state-active .km-icon
-{
-    background-image: url('images/itabimg.png');
-}
-
-.km-android .km-tabstrip .km-button:nth-child(1) .km-icon
-{
-    background-position: -1% 50%;
-}
-
-.km-android .km-tabstrip .km-button:nth-child(2) .km-icon
-{
-    background-position: 33% 50%;
-}
-
-.km-android .km-tabstrip .km-button:nth-child(3) .km-icon
-{
-    background-position: 67% 50%;
-}
-
-.km-android .km-tabstrip .km-button:nth-child(4) .km-icon
-{
-    background-position: 101% 50%;
-}
-
-.km-ios .km-tabstrip .km-button:nth-child(1) .km-icon
-{
-    background-position: -1.5% 50%;
-}
-
-.km-ios .km-tabstrip .km-button:nth-child(2) .km-icon
-{
-    background-position: 34% 50%;
-}
-
-.km-ios .km-tabstrip .km-button:nth-child(3) .km-icon
-{
-    background-position: 69% 50%;
-}
-
-.km-ios .km-tabstrip .km-button:nth-child(4) .km-icon
-{
-    background-position: 103.5% 50%;
-}
-
-.km-blackberry .km-tabstrip .km-button:nth-child(1) .km-icon,
-.km-meego .km-tabstrip .km-button:nth-child(1) .km-icon
-{
-    background-position: -1% 50%;
-}
-
-.km-blackberry .km-tabstrip .km-button:nth-child(2) .km-icon,
-.km-meego .km-tabstrip .km-button:nth-child(2) .km-icon
-{
-    background-position: 33.5% 50%;
-}
-
-.km-blackberry .km-tabstrip .km-button:nth-child(3) .km-icon,
-.km-meego .km-tabstrip .km-button:nth-child(3) .km-icon
-{
-    background-position: 67% 50%;
-}
-
-.km-blackberry .km-tabstrip .km-button:nth-child(4) .km-icon,
-.km-meego .km-tabstrip .km-button:nth-child(4) .km-icon
-{
-    background-position: 100.5% 50%;
 }
 
 /* Slider */
@@ -1487,12 +614,6 @@ input[type=checkbox]
     position: relative;
     padding: .5em .7em;
     display: inline-block;
-}
-
-.km-ios .km-slider,
-.km-meego .km-slider
-{
-    -webkit-transform: translatez(0);
 }
 
 .km-slider-container
@@ -1509,7 +630,6 @@ input[type=checkbox]
 
 .km-slider-handle
 {
-    background: linear-gradient(top, #ccc, #fff);
     top: 0;
     left: 0;
     width: 1.25em;
@@ -1517,7 +637,6 @@ input[type=checkbox]
     display: block;
     position: absolute;
     .border-radius(1em);
-    border: 1px solid #eee;
     .box-shadow(0 1px 1px rgba(0,0,0,.5));
 }
 
@@ -1530,39 +649,6 @@ input[type=checkbox]
 {
     width: 24em;
     margin-left: -12em;
-    background: linear-gradient(top, rgba(0,0,0,.5), rgba(0,0,0,0) 15%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4)) 0 0 no-repeat,
-                linear-gradient(top, rgb(219,219,219), rgb(255,255,255)) 12em 0 no-repeat,
-                linear-gradient(top, rgb(42,93,178), rgb(109,169,247)) 0 0 no-repeat;
-}
-
-.km-android .km-slider
-{
-    margin: 1.5em;
-    height: 1.2em;
-    line-height: 1.2em;
-    padding: .36em;
-}
-
-.km-android .km-slider-wrapper,
-.km-android .km-slider-container
-{
-    .border-radius(6px);
-}
-
-.km-android .km-slider-handle
-{
-    background: linear-gradient(top, #f2f2f2, #d0d0d0 20%, #8d8d8d 80%, #d1d1d1);
-    width: .86em;
-    height: 1.7em;
-    border-color: #3c3d3c;
-    .border-radius(5px);
-    .box-shadow(0 0 10px rgba(0,0,0,.5));
-}
-
-.km-android .km-slider-background
-{
-    background: linear-gradient(top, #9b9c9b, #5b5e5b 80%, #6f716f) 12em 0 no-repeat,
-                linear-gradient(top, #ffd300, #ffb700 80%, #ffc600) 0 0 no-repeat;
 }
 
 /* Scroller */
@@ -1609,12 +695,6 @@ input[type=checkbox]
     user-select: none;
 }
 
-.km-ios .km-scroll-container,
-.km-meego .km-scroll-container
-{
-    -webkit-transform: translatez(0);
-}
-
 /* Navbar */
 
 .km-leftitem,
@@ -1642,27 +722,20 @@ input[type=checkbox]
 .km-dialog
 {
     position: absolute;
-    left: 420px;
-    top: 240px;
     min-width: 19em;
     max-width: 25em;
     overflow: hidden;
     .border-radius(1em);
-    background: rgba(10,25,65,.8);
-    border: 2px solid rgba(255,255,255,.8);
-    .box-shadow(3px 3px 5px #111);
 }
 
-.km-ios .km-dialog-title
+.km-dialog-title
 {
-    background: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0) 60%);
     position: static;
     float: none;
     height: 2.6em;
     margin-top: -2.6em;
     font-size: 1.22em;
     line-height: 3em;
-    text-shadow: 0 -1px #333;
     .border-radius(1em);
 }
 
@@ -1674,21 +747,17 @@ input[type=checkbox]
     width: 100%;
     height: 3em;
     opacity: .2;
-    background: ~"url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><defs><clipPath id=%22clip%22><rect x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%2210%22 ry=%2210%22/></clipPath></defs><ellipse fill=%22white%22 cx=%2250%%22 cy=%220%22 rx=%2280%%22 ry=%2260%%22 clip-path=%22url(%23clip)%22/></svg>')";
 }
 
-.km-ios .km-dialog-content
+.km-dialog-content
 {
-    color: #fff;
     font-weight: normal;
     min-height: 2em;
     text-align: center;
-    text-shadow: 0 -1px #333;
 }
 
 .km-dialog .km-button
 {
-    background: linear-gradient(center top , #ADB0BF, #6A718B 50%, #434E6C 50%, #59637E);
     display: block;
     margin: .4em;
     font-size: 1.3em;
@@ -1696,6 +765,4 @@ input[type=checkbox]
     padding: .44em;
     .user-select(none);
     .border-radius(4px);
-    border: 1px solid #000;
-    .box-shadow(0 1px 0 rgba(255,255,255,.2));
 }
