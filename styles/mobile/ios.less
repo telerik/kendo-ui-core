@@ -1,0 +1,433 @@
+@import "common.less";
+
+/* Platform specific iOS CSS */
+
+.km-ios
+{
+    .transform(translatez(0));
+    background: #fff;
+}
+
+.km-ios .km-view
+{
+    overflow: hidden;
+    -webkit-transform: translatez(0);
+}
+
+.km-ios .km-view-title,
+.km-ios .km-dialog-title
+{
+    position: relative;
+    display: block;
+    text-align: center;
+    color: #fff;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    line-height: 2.2rem;
+    font-weight: bold;
+    text-shadow: 0 -1px rgba(0,0,0,.3);
+    float: left;
+    width: 100%;
+}
+
+.km-ios .km-toolbar,
+.km-ios .km-navbar,
+.km-ios .km-button,
+.km-ios .km-radiogroup,
+.km-ios .km-tabstrip
+{
+    background-image: linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.45) 6%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.15) 50%, rgba(100,100,100,0));
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    color: #FFF;
+    overflow: visible;
+    .border-radius(5pt);
+    border: 1px solid #394d68;
+    border-color: #2f3740 #394d68 #375073;
+    background-color: #7185a2;
+    text-shadow: 0 -1px rgba(0,0,0,.3);
+    text-decoration: none;
+    border: 1px solid #394d68;
+    border-color: #2f3740 #394d68 #375073;
+    background-color: #7185a2;
+}
+
+.km-ios .km-button
+{
+    border-color: rgba(0,0,0,.5) rgba(0,0,0,.3) rgba(0,0,0,.3);
+    background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
+                linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0)) #496b9a;
+    .box-shadow(0 1px 1px rgba(255,255,255,.5));
+}
+
+.km-ios .km-button:active
+{
+    background-color: #263e6c;
+}
+
+.km-ios li.km-state-active
+{
+    border: 0;
+    color: white;
+}
+
+.km-ios,
+.km-ios .km-button
+{
+    font: bold .9em HelveticaNeue, sans-serif;
+    font-size: .9rem;
+}
+
+.km-ios .km-back
+{
+    margin-left: 11px;
+}
+
+.km-ios .km-back .km-text
+{
+    position: relative;
+    z-index: 1;
+}
+
+.km-ios .km-back:before
+{
+    margin-bottom: 2px;
+    content: "\a0";
+    background-color: inherit;
+    background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 90%, rgba(70,70,70,.5)),
+                      linear-gradient(left top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
+    -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000000), color-stop(0.50,#000000), color-stop(0.50, transparent), to(transparent));
+    border-left: solid 1px rgba(0,0,0,.5);
+    border-bottom: solid 1px #aaa;
+    width: 1.6em;
+    height: 1.6em;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    left: -.76em;
+    left: ~"-.68rem";
+    top: 0.32em;
+    top: 0.3rem;
+    .transform(rotate(45deg));
+    .box-sizing(border-box);
+    .border-radius(.2em 0 .2em .4em);
+}
+
+.km-ios :-moz-first-node.km-back:before
+{
+    border-radius: 0 1rem 0 0.4rem;
+    left: ~"-.56rem";
+    top: 0.28rem;
+    width: 1.36rem;
+    height: 1.36rem;
+}
+
+.km-ios .km-switch
+{
+    font-family: HelveticaNeue, Arial, sans-serif;
+    -webkit-transform: translatez(0);
+}
+
+.km-ios .km-switch-background,
+.km-ios .km-slider-background
+{
+    background:
+        linear-gradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%, rgb(250, 250, 250) 50%, rgb(255, 255, 255)) 6em 0 no-repeat,
+        linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat #3074e7;
+}
+
+.km-ios .km-switch-container
+{
+    border: 1px solid #999;
+}
+
+.km-ios .km-checkbox
+{
+    border: 3px solid #e5e5e5;
+    background-color: #fff;
+    .border-radius(15px);
+    .transition(~"all 100ms ease-out");
+}
+
+.km-ios .km-checkbox-checked
+{
+    border-color: #fff;
+    background-color: #BB0000;
+    background-image: linear-gradient(top, rgba(241, 150, 155, 1), rgba(230, 70, 78, .5) 50%, rgba(222, 11, 21, .5) 50%, rgba(183, 0, 0, 0));
+    .box-shadow(0 2px 3px #333);
+}
+
+.km-ios .km-checkbox-checked:after
+{
+    background: transparent url("images/ios-sprite.png") 2px -117px no-repeat;
+}
+
+.km-ios .km-switch-handle
+{
+    border: 1px solid #969696;
+    background: linear-gradient(top, rgb(255, 255, 255), rgb(215, 215, 215) 5%, rgb(255, 255, 255));
+}
+
+.km-ios .km-switch-label-off
+{
+    color: #7f7f7f;
+}
+
+.km-ios .km-switch-label-on
+{
+    color: #fff;
+}
+
+.km-ios .km-badge,
+.km-ios .km-detail
+{
+    background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
+    color: #FFF;
+    border: .3em solid #FFF;
+    background-color: #bc0404;
+    .box-shadow(0 3px 3px #000);
+}
+
+.km-ios .km-detail
+{
+    border: .2em solid #FFF;
+    border-width: .15rem;
+    .box-shadow(0 1px 3px rgba(0,0,0,.5));
+    background-color: #1F6DD8;
+}
+
+.km-ios .km-rowinsert
+{
+    background-color: #24870D;
+}
+
+.km-ios .km-rowdelete
+{
+    background-color: #B01B1A;
+}
+
+.km-ios .km-radiogroup .km-button
+{
+    color: #929292;
+    text-shadow: 0 1px #fff;
+    border-color: #B4B8BA #9FA3A4 #9FA3A4;
+    background-image: linear-gradient(top, rgb(251,251,251), rgb(225,225,225) 50%, rgb(200,200,200));
+    .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
+}
+
+.km-ios .km-radiogroup .km-state-active
+{
+    color: #fff;
+    text-shadow: none;
+    border-color: rgba(0,0,0,.4) rgba(0,0,0,.4) rgba(0,0,0,.1);
+    background-color: #3D7EEB;
+    background-image: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 50%, rgba(255,255,255,.05) 50%, rgba(255,255,255,.25));
+    .box-shadow(inset -1px 0 2px rgba(0,0,0,.6));
+}
+
+.km-ios .km-tabstrip
+{
+    padding: .2em 0;
+    background-color: #222;
+    background-image: linear-gradient(top, rgba(46, 46, 46, 0.8), rgba(21, 21, 21, 0.5) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8));
+}
+
+.km-ios .km-tabstrip .km-button
+{
+    .border-radius(5pt);
+    font-size: .6em;
+    padding: .1em .6em;
+    min-width: 6em;
+    margin: 0 2%;
+    text-shadow: none;
+}
+
+.km-ios .km-tabstrip .km-badge
+{
+    font-size: 1.1em;
+}
+
+.km-ios .km-tabstrip .km-button:active,
+.km-ios .km-tabstrip .km-state-active
+{
+    color: #FFF;
+    background: rgba(100, 100, 100, 0.5);
+}
+
+.km-ios .km-list
+{
+    background: #fff;
+}
+
+.km-ios .km-slider,
+.km-ios .km-list > li,
+.km-ios .km-scroll-container
+{
+    -webkit-transform: translatez(0);
+}
+
+.km-ios .km-listinset,
+.km-ios .km-listgroupinset .km-list
+{
+    border: 1px solid #999;
+    .border-radius(10px);
+    .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
+}
+
+.km-ios .km-listinset > li:first-child,
+.km-ios .km-listgroupinset .km-list > li:first-child
+{
+    .box-shadow(inset 0 1px 0 0 rgba(200,200,200,.4));
+}
+
+.km-ios .km-listview .km-list
+{
+    border-top: 1px solid #78858e;
+}
+
+.km-ios .km-list > li
+{
+    border-bottom: 1px solid #E9E9E9;
+}
+
+.km-ios .km-list > li,
+.km-ios .km-list a:not(.km-button)
+{
+    color: #000;
+}
+
+.km-ios .km-listview .km-list
+{
+    border-top: 1px solid #78858e;
+}
+
+.km-ios .km-listgroup > li,
+.km-ios .km-listgroupinset > li
+{
+    color: #FFF;
+    text-shadow: 0 1px 1px rgba(100,100,100,.8);
+    border-top: 1px solid rgba(255,255,255,.5);
+    background-color: #8d9daa;
+    .box-shadow(0 -1px 0 #78858e);
+}
+
+.km-ios .km-listgroupinset > li
+{
+    color: #373e50;
+    padding: 0;
+    background: none;
+    border: none;
+    .box-shadow(none);
+    text-shadow: 0 1px 1px rgba(255,255,255,.8);
+}
+
+.km-ios .km-list > li
+{
+    display: block;
+    vertical-align: middle;
+    line-height: 1.6em;
+    font-size: 1.2em;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.km-ios .km-list,
+.km-ios .km-content
+{
+    background: #fff;
+}
+
+.km-ios .km-insetcontent
+{
+    background: #c4ccd5 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAABCAYAAAASC7TOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABRJREFUeNpi/P//PwMW4AAiAAIMAFIpAz/zYoI+AAAAAElFTkSuQmCC);
+}
+
+.km-ios label.km-item-checked:after
+{
+    background: transparent url("images/ios-sprite.png") 0 -10px no-repeat;
+}
+
+.km-ios .km-tabstrip .km-button .km-icon
+{
+    opacity: 1;
+    background: transparent url('images/itabimg1.png') no-repeat 3px 50%;
+    background-size: cover;
+}
+
+.km-ios .km-tabstrip .km-state-active .km-icon
+{
+    background-image: url('images/itabimg.png');
+}
+
+.km-ios .km-tabstrip .km-button:nth-child(1) .km-icon
+{
+    background-position: -1.5% 50%;
+}
+
+.km-ios .km-tabstrip .km-button:nth-child(2) .km-icon
+{
+    background-position: 34% 50%;
+}
+
+.km-ios .km-tabstrip .km-button:nth-child(3) .km-icon
+{
+    background-position: 69% 50%;
+}
+
+.km-ios .km-tabstrip .km-button:nth-child(4) .km-icon
+{
+    background-position: 103.5% 50%;
+}
+
+/* Slider */
+
+.km-ios .km-slider-handle
+{
+    background: linear-gradient(top, #ccc, #fff);
+    border: 1px solid #eee;
+}
+
+.km-ios .km-slider-background
+{
+    background: linear-gradient(top, rgba(0,0,0,.5), rgba(0,0,0,0) 15%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4)) 0 0 no-repeat,
+                linear-gradient(top, rgb(219,219,219), rgb(255,255,255)) 12em 0 no-repeat,
+                linear-gradient(top, rgb(42,93,178), rgb(109,169,247)) 0 0 no-repeat;
+}
+
+/* Dialog */
+
+.km-ios .km-dialog
+{
+    background: rgba(10,25,65,.8);
+    border: 2px solid rgba(255,255,255,.8);
+    .box-shadow(3px 3px 5px #111);
+}
+
+.km-ios .km-dialog-title
+{
+    background: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0) 60%);
+    text-shadow: 0 -1px #333;
+}
+
+.km-ios .km-dialog:before
+{
+    background: ~"url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><defs><clipPath id=%22clip%22><rect x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%2210%22 ry=%2210%22/></clipPath></defs><ellipse fill=%22white%22 cx=%2250%%22 cy=%220%22 rx=%2280%%22 ry=%2260%%22 clip-path=%22url(%23clip)%22/></svg>')";
+}
+
+.km-ios .km-dialog-content
+{
+    color: #fff;
+    text-shadow: 0 -1px #333;
+}
+
+.km-ios .km-dialog .km-button
+{
+    display: block;
+    margin: .4em;
+    font-size: 1.3em;
+    text-align: center;
+    padding: .44em;
+    .user-select(none);
+    .border-radius(4px);
+}
