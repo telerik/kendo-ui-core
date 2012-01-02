@@ -739,19 +739,19 @@
          * // Get or sets the value of the slider
          * slider.value();
          */
-        value: function (val) {
+        value: function (value) {
             var that = this,
                 options = that.options;
 
-            val = round(val);
-            if (isNaN(val)) {
+            value = round(value);
+            if (isNaN(value)) {
                 return options.value;
             }
 
-            if (val >= options.min && val <= options.max) {
-                if (options.value != val) {
-                    that.element.attr("value", formatValue(val));
-                    options.value = val;
+            if (value >= options.min && value <= options.max) {
+                if (options.value != value) {
+                    that.element.attr("value", formatValue(value));
+                    options.value = value;
                     that.refresh();
                 }
             }
