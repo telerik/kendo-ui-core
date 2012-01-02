@@ -13,7 +13,7 @@ function generateThemes(themesFolder, outputFolder) {
 
     themes.forEach(function(theme) {
         var skinTemplate = fs.readFileSync(theme, "utf8"),
-            themeName = /\/([^\/]+)\.less/i.exec(theme)[1];
+            themeName = /[\/\\]([^\/]+)\.less/i.exec(theme)[1];
 
         var parser = new(less.Parser)({
             paths: [ themesFolder ] // Specify search paths for @import directives
