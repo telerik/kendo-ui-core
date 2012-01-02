@@ -191,6 +191,7 @@
          *     }
          * });
          * @option {Object} [title] The chart title configuration options.
+         * @option {String} [title.background] <"white"> The background color of the title.
          * @option {String} [title.text] The title of the chart.
          * @option {String} [title.font] <"16px Arial,Helvetica,sans-serif"> The font of the title.
          * @option {String} [title.position] <"top"> The positions of the title.
@@ -301,6 +302,7 @@
          *    </dl>
          * </div>
          * @option {Object} [legend] The chart legend configuration options.
+         * @option {String} [legend.background] <"white"> The background color of the legend.
          * @option {String} [legend.font] <12px Arial,Helvetica,sans-serif> The font style of the legend.
          * @option {String} [legend.position] <right> The positions of the legend.
          * <div class="details-list">
