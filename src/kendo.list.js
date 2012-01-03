@@ -303,7 +303,7 @@
             if (value === undefined) {
                 if (isSelect) {
                     selectedIndex = element.selectedIndex;
-                    option = selectedIndex > 0 ? element.options[selectedIndex] : null;
+                    option = selectedIndex > -1 ? element.options[selectedIndex] : null;
                     value = option ? (option.value || option.text) : "";
                 } else {
                     value = element.value;
