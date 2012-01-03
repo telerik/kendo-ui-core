@@ -100,7 +100,10 @@
                           .children("span");
 
             if (style) {
-                element.addClass("km-" + style);
+                var styles = style.split(" ");
+                $.each(styles, function () {
+                    element.addClass("km-" + this);
+                });
             }
 
             if (!span[0]) {
@@ -129,7 +132,7 @@
         options: {
             name: "BackButton",
             style: "back",
-            selector: kendo.roleSelector("back-button"),
+            selector: kendo.roleSelector("back-button")
         },
 
         /**
@@ -144,6 +147,36 @@
         }
     });
 
+    /**
+    * @name kendo.mobile.ui.DetailButton.Description
+    * @section The DetailButton widget navigates to a detail mobile View when pressed.
+    *
+    * @exampleTitle Initialize Kendo mobile DetailButton based on role data attribute.
+    * @example
+    * <a data-role="detail-button">Foo</a>
+    *
+    * @exampleTitle Initialize Kendo mobile DetailButton using a jQuery selector
+    * @example
+    * var button = $("#button").kendoMobileDetailButton();
+    */
+    var DetailButton = Button.extend(/** @lends kendo.mobile.ui.DetailButton.prototype */{
+        options: {
+            name: "DetailButton",
+            selector: kendo.roleSelector("detail-button")
+        },
+
+        /**
+        * @constructs
+        * @extends kendo.mobile.ui.Button
+        * @param {DomElement} element DOM element.
+        * @param {Object} options Configuration options.
+        */
+        init: function(element, options) {
+            Button.fn.init.call(this, element, extend(options, { style: options.style + " detail" }));
+        }
+    });
+
     ui.plugin(Button);
     ui.plugin(BackButton);
+    ui.plugin(DetailButton);
 })(jQuery);
