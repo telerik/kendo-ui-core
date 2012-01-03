@@ -290,13 +290,14 @@
         _accessor: function(value, idx) {
             var element = this.element,
                 isSelect = element.is(SELECT),
-                option;
+                option, selectedIndex;
 
             element = element[0];
 
             if (value === undefined) {
                 if (isSelect) {
-                    option = element.options[element.selectedIndex];
+                    selectedIndex = element.selectedIndex;
+                    option = selectedIndex > 0 ? element.options[selectedIndex] : null;
                     value = option ? (option.value || option.text) : "";
                 } else {
                     value = element.value;
