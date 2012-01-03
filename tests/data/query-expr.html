@@ -367,7 +367,7 @@
                 equal(compile({
                     logic: "and",
                     filters: [ { field: "foo", value: "'", operator: "contains" } ]
-                }), "(d.foo.toLowerCase().indexOf('\'') >= 0)");
+                }), "(d.foo.toLowerCase().indexOf('\\'') >= 0)");
             });
 
             test("using function as field", function() {
