@@ -76,6 +76,32 @@
                 application.navigate("page2.html");
             });
 
+            asyncTest("loads multiple remote views in document", 4, function() {
+
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<body><div data-role="view" id="page2">Page 2</div><div data-role="view" id="page3">Page 3</div></body>'
+                });
+
+                setup('<div data-role="view" id="page1">Page 1</div>');
+
+                application.bind("viewShow", function() {
+                    start();
+                    ok(!$("#page1").is(":visible"), "First page is hidden");
+                    ok($("#page2").is(":visible"), "Second page is present");
+                    equal($("#qunit-fixture").has("#page3").length, 1, "Secondary view is inserted in the application DOM element");
+
+                    application.unbind("viewShow");
+                    application.bind("viewShow", function(){
+                        ok($("#page3").is(":visible"), "Third page is present");
+                    });
+                    application.navigate("#page3");
+                });
+
+                application.navigate("page2.html");
+
+            });
+
             asyncTest("reuses an already loaded remote page", function() {
                 setup('<div data-role="view" id="page1">Page 1</div>');
 

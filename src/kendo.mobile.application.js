@@ -25,13 +25,13 @@
         return string.replace(/(\S+)/g, "[" + attr("role") + "*=$1],")
     }
 
-    function extractView(html) {
+    function extractViews(html) {
         if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
             html = RegExp.$1;
         }
 
         div[0].innerHTML = html;
-        return div.find(roleSelector("view")).first();
+        return div.find(roleSelector("view"));
     }
 
     function hideBar(element) {
@@ -394,13 +394,13 @@
         },
 
         _createRemoteView: function(url, html) {
-            var that = this, element;
-
-            element = extractView(html);
+            var that = this,
+                views = extractViews(html).hide(),
+                element = views.first();
 
             element.hide().attr(attr("url"), url);
 
-            that.element.append(element);
+            that.element.append(views);
 
             return that._createView(element);
         },
