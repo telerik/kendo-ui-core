@@ -242,6 +242,15 @@
 
                 firstWindow.open();
             });
+
+            test("toFront() moves modal overlay above other windows", function() {
+                var firstWindow = createWindow(),
+                    secondWindow = createWindow({
+                        modal: true
+                    });
+
+                ok(parseInt(firstWindow.wrapper.css("zIndex")) < parseInt($(".k-overlay").css("zIndex")));
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
