@@ -1,0 +1,12 @@
+@{
+    Layout = "~/Views/Shared/_MobileLayout.cshtml";
+}
+@RenderBody()
+
+@RenderSection("ExampleFooter", required:false)
+
+<script>
+    document.title = "@ViewBag.Title";
+
+    window.kendoMobileApplication = new kendo.mobile.Application();
+</script>

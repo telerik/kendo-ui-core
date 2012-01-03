@@ -1,6 +1,17 @@
 {
     "Mobile Framework": [
         {
+            "text": "Overview",
+            "name": "overview",
+            "spriteCssClass": "dataSourceIcon",
+            "items": [
+                {
+                    "text": "Overview",
+                    "url": "overview/index.html"
+                }
+            ]
+        },
+        {
             "text": "Application",
             "name": "application",
             "spriteCssClass": "dataSourceIcon",
