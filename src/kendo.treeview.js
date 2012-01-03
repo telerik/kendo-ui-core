@@ -3,72 +3,87 @@
      * @name kendo.ui.TreeView.Description
      *
      * @section
-     * <p>The TreeView widget displays hierarchical data in a traditional tree structure,
-     * with support for interactive drag-and-drop reordering operations.
-     * A TreeView can be defined statically using HTML lists,
-     * or it can be dynamically bound to hierarchical data.</p>
-     *
+     * <p>
+     *  The <b>TreeView</b> displays hierarchical data in a traditional tree
+     *  structure, with support for interactive drag-and-drop reordering
+     *  operations. It can be defined statically using HTML lists or it can
+     *  be data-bound (dynamically) to hierarchical data.
+     * </p>
      * <h3>Getting Started</h3>
-     *
-     * <p>There are two primary ways to create a TreeView:</p>
-     *
+     * <p>A <b>TreeView</b> can be created in two ways:</p>
      * <ol>
-     *     <li>Define a hierarchical list with static HTML</li>
-     *     <li>Use dynamic data binding</li>
+     *  <li>Define a hierarchical list with static HTML</li>
+     *  <li>Use dynamic data binding</li>
      * </ol>
-     *
-     * <p>Static HTML definition is appropriate for small hierarchies and for data that does not change frequently.
-     * Data binding should be used for larger data sets and for data that changes frequently.</p>
-     *
-     * <h3>Creating a treeview from HTML</h3>
+     * <p>
+     *  Static HTML definition is appropriate for small hierarchies and for
+     *  data that does not change frequently. Databinding should be used for
+     *  larger data sets and for data that changes frequently.
+     * </p>
+     * <h3>Creating a TreeView from HTML</h3>
      * @exampleTitle Create a hierarchical HTML list
      * @example
-     * <ul id="treeview">
-     *     <li>Item 1
-     *         <ul>
-     *             <li>Item 1.1</li>
-     *             <li>Item 1.2</li>
-     *         </ul>
-     *     </li>
-     *     <li>Item 2</li>
+     * <ul id="treeView">
+     *  <li>Item 1
+     *   <ul>
+     *    <li>Item 1.1</li>
+     *    <li>Item 1.2</li>
+     *   </ul>
+     *  </li>
+     *  <li>Item 2</li>
      * </ul>
      *
      * @exampleTitle Initialize the TreeView using a jQuery selector
-     * @example var treeview = $("#treeview").kendoTreeView();
+     * @example
+     * $(document).ready(function() {
+     *  $("#treeView").kendoTreeView();
+     * });
      *
-     * @section <h3>Creating a TreeView with data binding (local data source)</h3>
+     * @section
+     * <h3>Creating a TreeView with Data Binding to a Local Data Source</h3>
      *
      * @exampleTitle Create a hierarchical HTML list
      * @example
-     * <div id="treeview"></div>
+     * <div id="treeView"></div>
      *
      * @exampleTitle Initialize and bind the TreeView
      * @example
-     * $("#treeview").kendoTreeView({
-     *     dataSource: [
-     *         { text: "Item 1", items: [
-     *             { text: "Item 1.1" },
-     *             { text: "Item 1.2" }
-     *         ]},
-     *         { text: "Item 2" }
+     * $(document).ready(function() {
+     *  $("#treeView").kendoTreeView({
+     *   dataSource: [
+     *    {
+     *     text: "Item 1",
+     *     items: [
+     *      { text: "Item 1.1" },
+     *      { text: "Item 1.2" }
      *     ]
+     *    },
+     *    { text: "Item 2" }
+     *   ]
+     *  })
      * });
      *
-     * @section <h3>Configuring TreeView behavior</h3>
-     * <p> A number of TreeView behaviors can be easily controlled by simple configuration properties,
-     * such as animation behaviors and drag-and-drop behaviors.
-     * Refer to the demo Configuration tab for more API details.</p>
+     * @section
+     * <h3>Configuring TreeView Behavior</h3>
+     * <p>
+     *  A number of <b>TreeView</b> behaviors can be easily controlled by
+     *  simple configuration properties, such as animation behaviors and
+     *  drag-and-drop behaviors.
+     * </p>
      *
-     * @exampleTitle Enabling TreeView node drag-and-drop
+     * @exampleTitle Enabling TreeView Node Drag-and-Drop
      * @example
-     * $("#treeview").kendoTreeView({
-     *     dragAndDrop: true
+     * $("#treeView").kendoTreeView({
+     *  dragAndDrop: true
      * });
      *
-     * @section When drag-and-drop is enabled, TreeView nodes can be dragged and dropped between all levels,
-     * with useful tooltips helping indicate where the node will be dropped.
-     *
-     * @section <h3>Accessing an Existing TreeView</h3>
+     * @section
+     * <p>
+     *  When drag-and-drop is enabled, the nodes of a <b>TreeView</b> can be
+     *  dragged and dropped between all levels, with useful tooltips helping
+     *  indicate where the node will be dropped.
+     * </p>
+     * <h3>Accessing an Existing TreeView</h3>
      * <p>
      *  You can reference an existing <b>TreeView</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
@@ -218,9 +233,18 @@
          * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Array} [dataSource] The data that the TreeView will be bound to.
-         * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the widget.
-         * @option {Boolean} [dragAndDrop] <false> Controls whether the treeview nodes can be dragged and rearranged.
+         * @option {Array} [dataSource]
+         * The data that the <b>TreeView</b> will be bound to.
+         *
+         * @option {Object} [animation]
+         * A collection of visual animations used when items are expanded or
+         * collapsed through user interaction. Setting this option to
+         * <b>false</b> will disable all animations.
+         *
+         * @option {Boolean} [dragAndDrop] <false>
+         * Disables (<b>false</b>) or enables (<b>true</b>) drag-and-drop
+         * on the nodes of a <b>TreeView</b>.
+         *
          * @option {Animation} [animation.expand] The animation that will be used when expanding items.
          * @option {Animation} [animation.collapse] The animation that will be used when collapsing items.
          */

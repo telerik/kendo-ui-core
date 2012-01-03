@@ -15,34 +15,37 @@
      *
      * @exampleTitle Creating a NumericTextBox from existing INPUT element
      * @example
-     * <!-- HTML -->
-     * <input id="textbox" />
+     * <input id="textBox" />
      *
      * @exampleTitle NumericTextBox initialization
      * @example
-     *   $(document).ready(function(){
-     *      $("#textbox").kendoNumericTextBox();
-     *   });
+     * $(document).ready(function(){
+     *  $("#textBox").kendoNumericTextBox();
+     * });
+     *
      * @section
-     *  <p>
-     *      When a NumericTextBox is initialized, it will automatically wraps the input element with SPAN
-     *      element and will render spin buttons.
-     *  </p>
-     *  <h3>Configuring NumericTextBox behaviors</h3>
-     *  <p>
-     *      NumericTextBox provides configuration options that can be easily set during initialization.
-     *      Among the properties that can be controlled:
-     *  </p>
-     *  <ul>
-     *      <li>Value of the NumericTextBox</li>
-     *      <li>Min/Max values</li>
-     *      <li>Increment step</li>
-     *      <li>Precision of the number</li>
-     *      <li>Number format. Any valid number format is allowed.</li>
-     *  </ul>
-     *  <p>
-     *      To see a full list of available properties and values, review the Slider Configuration API documentation tab.
-     *  </p>
+     * <p>
+     *  When a <b>NumericTextBox</b> is initialized, it will automatically
+     *  wraps the input element with span element and will render spin
+     *  buttons.
+     * </p>
+     * <h3>Configuring NumericTextBox behaviors</h3>
+     * <p>
+     *  The <b>NumericTextBox</b> provides configuration options that can be
+     *  easily set during initialization. Among the properties that can be
+     *  controlled:
+     * </p>
+     * <ul>
+     *  <li>Value of the <b>NumericTextBox</b></li>
+     *  <li>Minimum and/or maximum values</li>
+     *  <li>Increment step</li>
+     *  <li>Precision of the number</li>
+     *  <li>Number format (any valid number format is allowed)</li>
+     * </ul>
+     * <p>
+     *  To see a full list of available properties and values, review the
+     *  Slider Configuration API documentation tab.
+     * </p>
      * @exampleTitle Customizing NumericTextBox defaults
      * @example
      *  $("#textbox").kendoNumericTextBox({
@@ -67,7 +70,8 @@
      *      value: 0.15 // 15 %
      *  });
      *
-     * @section <h3>Accessing an Existing NumericTextBox</h3>
+     * @section
+     * <h3>Accessing an Existing NumericTextBox</h3>
      * <p>
      *  You can reference an existing <b>NumericTextBox</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.

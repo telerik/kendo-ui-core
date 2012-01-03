@@ -141,7 +141,8 @@
      *      tabstrip.select(tabstrip.tabGroup.children("li:first"));
      *  });
      *
-     * @section <h3>Accessing an Existing TabStrip</h3>
+     * @section
+     * <h3>Accessing an Existing TabStrip</h3>
      * <p>
      *  You can reference an existing <b>TabStrip</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.

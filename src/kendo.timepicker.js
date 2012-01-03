@@ -61,7 +61,8 @@
      *      interval: 15 //in minutes
      *  });
      *
-     * @section <h3>Accessing an Existing TimePicker</h3>
+     * @section
+     * <h3>Accessing an Existing TimePicker</h3>
      * <p>
      *  You can reference an existing <b>TimePicker</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.

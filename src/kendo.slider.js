@@ -27,26 +27,30 @@
      *  </li>
      * </ol>
      * <h4>Slider</h4>
-     * @exampleTitle Create simple HTML input element
+     * @exampleTitle Create an input element
      * @example
-     *  <input id="slider" />
+     * <input id="slider" />
      * @exampleTitle Initialize the Slider using a jQuery selector
      * @example
+     * $(document).ready(function() {
      *  $("#slider").kendoSlider();
+     * });
      *
      * @section
-     *  <h4>RangeSlider</h4>
-     * @exampleTitle Create two simple HTML input elements in a div
+     * <h4>RangeSlider</h4>
+     * @exampleTitle Create two HTML input elements in a div
      * @example
-     *  <div id="rangeSlider">
-     *      <input />
-     *      <input />
-     *  </div>
+     * <div id="rangeSlider">
+     *  <input />
+     *  <input />
+     * </div>
      *
      * @exampleTitle Initialize the <b>RangeSlider</b> using a jQuery
      * selector targeting the div
      * @example
-     * $("#rangeSlider").kendoRangeSlider();
+     * $(document).ready(function() {
+     *  $("#rangeSlider").kendoRangeSlider();
+     * });
      *
      * @section
      * <p>
@@ -62,22 +66,23 @@
      *  be configured via simple properties, including:
      * </p>
      * <ul>
-     *  <li>Min/Max values</li>
+     *  <li>Minimum and/or maximum values</li>
      *  <li>Orientation (horizontal or vertical)</li>
-     *  <li>Small/Large step</li>
+     *  <li>Small or large step</li>
      *  <li>Tooltip format/placement</li>
      * </ul>
      * @exampleTitle Customizing Slider default settings
      * @example
-     *  $("#slider").kendoSlider({
-     *      min:10,
-     *      max:50,
-     *      orientation: "vertical",
-     *      smallStep: 1,
-     *      largeStep: 10
-     *  });
+     * $("#slider").kendoSlider({
+     *  min: 10,
+     *  max: 50,
+     *  orientation: "vertical",
+     *  smallStep: 1,
+     *  largeStep: 10
+     * });
      *
-     * @section <h3>Accessing an Existing Slider</h3>
+     * @section
+     * <h3>Accessing an Existing Slider</h3>
      * <p>
      *  You can reference an existing <b>Slider</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
@@ -166,11 +171,14 @@
 
             that.bind([
                 /**
-                 * Fires when the slider value changes as a result of selecting a new value with the drag handle, buttons or keyboard.
+                 * Fires when the slider value changes as a result of
+                 * selecting a new value with the drag handle, buttons or
+                 * keyboard.
                  * @name kendo.ui.Slider#change
                  * @event
                  * @param {Event} e
-                 * @param {Number} e.value Represents the updated value of the slider.
+                 * @param {Number} e.value Represents the updated value of
+                 * the slider.
                  */
 
                 /**
@@ -532,51 +540,78 @@
          * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Boolean} [enabled] <true> Can be used to enable/disable the slider.
-         * @option {Number} [min] <0> The minimum value of the slider.
-         * @option {Number} [max] <10> The maximum value of the slider.
-         * @option {Boolean} [showButtons] <true> Can be used to show or hide the slider increase and decrease buttons. The buttons are used to increase or decrease the value. They are not available in the RangeSlider.
-         * @option {Object} [tooltip] Confituration of the slider tooltip.
-         * @option {Boolean} [tooltip.enabled] <true> Can be used to enable/disable the tooltip.
-         * @option {String} [tooltip.format] <"{0}"> Can be used to formatting of the text of the tooltip. Note that the applied format will also influence the appearance of the slider tick labels.
-         * @option {Number} [value] <0> The value of the slider.
-         * @option {String} [orientation] <"horizontal"> The orientation of the slider. Available options are "horizontal" and "vertical".
-         * @option {String} [tickPlacement] <"both"> the location of the tick marks in the widget. Available options are:
-         *     <dl>
-         *         <dt>
-         *              "topLeft"
-         *         </dt>
-         *         <dd>
-         *              Tick marks are located on the top of the horizontal widget or on the left of the vertical widget.
-         *         </dd>
-         *         <dt>
-         *              "bottomRight"
-         *         </dt>
-         *         <dd>
-         *              Tick marks are located on the bottom of the horizontal widget or on the right side of the vertical widget.
-         *         </dd>
-         *         <dt>
-         *              "both"
-         *         </dt>
-         *         <dd>
-         *              Tick marks are located on both sides of the widget.
-         *         </dd>
-         *     </dl>
-         * @option {Number} [smallStep] <1> The small step of the slider. The Value will be changed with SmallStep when the end user:
-         *     <ul>
-         *         <li>
-         *             clicks on the Slider buttons
-         *         </li>
-         *         <li>
-         *             presses the arrow keys (the drag handle must be focused)
-         *         </li>
-         *         <li>
-         *             drag the drag handle
-         *         </li>
-         *     </ul>
-         * @option {Number} [largeStep] <5> The delta with which the value will change when the user presses the Page Up or Page Down key (the drag handle must be focused). Note that the allied largeStep will also set large tick for every large step.
-         * @option {String} [increaseButtonTitle] <"Increase"> The title of the increase button of the slider.
-         * @option {String} [decreaseButtonTitle] <"Decrease"> The title of the decrease button of the slider.
+         *
+         * @option {Boolean} [enabled] <true>
+         * Disables (<b>false</b>) or enables (<b>true</b>) the
+         * <b>Slider</b>. This option can be specified when initializing the
+         * <b>Slider</b>.
+         *
+         * @option {Number} [min] <0>
+         * The minimum value of the <b>Slider</b>.
+         *
+         * @option {Number} [max] <10>
+         * The maximum value of the <b>Slider</b>.
+         *
+         * @option {Boolean} [showButtons] <true>
+         * Can be used to show (<b>true</b>) or hide (<b>false</b>) the
+         * increase and decrease buttons of a <b>Slider</b>.
+         *
+         * @option {Object} [tooltip]
+         * Configuration of the <b>Slider</b> tooltip.
+         *
+         * @option {Boolean} [tooltip.enabled] <true>
+         * Disables (<b>false</b>) or enables (<b>true</b>) the tooltip of
+         * the <b>Slider</b>.
+         *
+         * @option {String} [tooltip.format] <"{0}">
+         * Format string for the text of the tooltip. Note: The applied
+         * format will also influence the appearance of the <b>Slider</b>
+         * tick labels.
+         *
+         * @option {Number} [value] <0>
+         * The underlying value of the <b>Slider</b>.
+         *
+         * @option {String} [orientation] <"horizontal">
+         * The orientation of the slider. Available options are
+         * <b>"horizontal"</b> and <b>"vertical"</b>.
+         *
+         * @option {String} [tickPlacement] <"both">
+         * Denotes the location of the tick marks in the <b>Slider</b>.
+         * Available options are:
+         * <ul>
+         *  <li>
+         *   <b>"topLeft"</b> - Tick marks are located on the top of the
+         *   horizontal widget or on the left of the vertical widget.
+         *  </li>
+         *  <li>
+         *   <b>"bottomRight"</b> - Tick marks are located on the bottom of
+         *   the horizontal widget or on the right side of the vertical
+         *   widget.
+         *  </li>
+         *  <li>
+         *   <b>"both"</b> - Tick marks are located on both sides of the
+         *   widget.
+         *  </li>
+         * </ul>
+         *
+         * @option {Number} [smallStep] <1>
+         * The small step value of the <b>Slider</b>. The underlying value
+         * will be changed when the end user (1) clicks on the increase or
+         * decrease buttons of the <b>Slider</b>, (2) presses the arrow keys
+         * (the drag handle must be focused), or (3) drags the drag handle.
+         *
+         * @option {Number} [largeStep] <5>
+         * The delta with which the value will change when the user presses
+         * the Page Up or Page Down key (the drag handle must be focused).
+         * Note that the allied largeStep will also set large tick for every
+         * large step.
+         *
+         * @option {String} [increaseButtonTitle] <"Increase">
+         * The title of the increase button of the <b>Slider</b>.
+         *
+         * @option {String} [decreaseButtonTitle] <"Decrease">
+         * The title of the decrease button of the <b>Slider</b>.
+         *
          */
         init: function(element, options) {
             var that = this,

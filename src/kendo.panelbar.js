@@ -192,7 +192,8 @@
      *  panelBar.element.children("li:last")
      * );
      *
-     * @section <h3>Accessing an Existing PanelBar</h3>
+     * @section
+     * <h3>Accessing an Existing PanelBar</h3>
      * <p>
      *  You can reference an existing <b>PanelBar</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.

@@ -3,28 +3,32 @@
      * @name kendo.ui.Splitter.Description
      *
      * @section
-     *   <p>
-     *       The Splitter widget provides an easy way to create a dynamic layout of resizable and
-     *       collapsible panes. The widget converts the children of an HTML element in to the interactive
-     *       layout, adding resize and collapse handles based on configuration. Splitters can be mixed
-     *       in both vertical and horizontal orientations to build complex layouts.
-     *   </p>
-     *   <h3>Getting Started</h3>
+     * <p>
+     *  The <b>Splitter</b> provides an easy way to create a dynamic layout
+     *  of resizable and collapsible panes. It converts the children of an
+     *  HTML element in to the interactive layout, adding resize and collapse
+     *  handles based on configuration. A <b>Splitter</b> can be mixed in a
+     *  vertical or horizontal orientation to build complex layouts.
+     * </p>
+     * <h3>Getting Started</h3>
      *
      * @exampleTitle Create a root HTML div element with children that will become panes
      * @example
      * <div id="splitter">
-     *    <div>
-     *        Area 1
-     *    </div>
-     *    <div>
-     *        Area 2
-     *    </div>
+     *  <div>
+     *   Area 1
+     *  </div>
+     *  <div>
+     *   Area 2
+     *  </div>
      * </div>
      *
      * @exampleTitle Initialize the Splitter using a jQuery selector
      * @example
-     *   $("#splitter").kendoSplitter();
+     * $(document).ready(function() {
+     *  $("#splitter").kendoSplitter();
+     * });
+     *
      * @section
      *   <p>
      *       When the Splitter is initialized, a vertical split bar will be placed between the two
@@ -114,7 +118,8 @@
      *       });
      *   });
      *
-     * @section <h3>Accessing an Existing Splitter</h3>
+     * @section
+     * <h3>Accessing an Existing Splitter</h3>
      * <p>
      *  You can reference an existing <b>Splitter</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.

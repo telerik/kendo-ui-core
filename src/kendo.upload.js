@@ -58,7 +58,8 @@
      * </h3>
      * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx">Upload Modes</a>
      *
-     * @section <h3>Accessing an Existing Upload</h3>
+     * @section
+     * <h3>Accessing an Existing Upload</h3>
      * <p>
      *  You can reference an existing <b>Upload</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.

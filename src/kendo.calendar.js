@@ -3,99 +3,115 @@
      * @name kendo.ui.Calendar.Description
      *
      * @section
-     *   <p>
-     *       The Calendar widget renders a graphical calendar that supports navigation and selection.
-     *       It supports custom templates for "month" view, configurable options for min and max date,
-     *       start view and the depth of the navigation.
-     *   </p>
+     * <p>
+     *  The <b>Calendar</b> renders a graphical calendar that supports
+     *  navigation and selection. It supports custom templates for its
+     *  "month" view, configurable options for a minimum and maximum date,
+     *  start view and the depth of the navigation.
+     * </p>
+     * <h3>Getting Started</h3>
      *
-     *   <h3>Getting Started</h3>
-     *
-     * @exampleTitle Creating a Calendar from existing DIV element
+     * @exampleTitle Create a div element
      * @example
-     * <!-- HTML -->
      * <div id="calendar"></div>
      *
-     * @exampleTitle Calendar initialization
+     * @exampleTitle Initialize the Calendar via a jQuery ID selector
      * @example
-     *   $(document).ready(function(){
-     *      $("#calendar").kendoCalendar();
-     *   });
+     * $(document).ready(function(){
+     *  $("#calendar").kendoCalendar();
+     * });
+     *
      * @section
-     *  <p>
-     *      When a Calendar is initialized, it will automatically be displayed near the
-     *      location of the used HTML element.
-     *  </p>
-     *  <h3>Configuring Calendar behaviors</h3>
-     *  <p>
-     *      Calendar provides many configuration options that can be easily set during initialization.
-     *      Among the properties that can be controlled:
-     *  </p>
-     *  <ul>
-     *      <li>Selected date</li>
-     *      <li>Minimum/Maximum date</li>
-     *      <li>Start view</li>
-     *      <li>Define the navigation depth (last view to which end user can navigate)</li>
-     *      <li>Day template</li>
-     *      <li>Footer template</li>
-     *  </ul>
-     * @exampleTitle Create Calendar with selected date and defined min and max date
-     * @example
-     *  $("#calendar").kendoCalendar({
-     *      value: new Date(),
-     *      min: new Date(1950, 0, 1),
-     *      max: new Date(2049, 11, 31)
-     *  });
      * <p>
-     *   Calendar will not navigate to dates less than min and bigger than max date.
+     *  When a <b>Calendar</b> is initialized, it will automatically be
+     *  displayed near the location of the used HTML element.
+     * </p>
+     * <h3>Configuring Calendar Behaviors</h3>
+     * <p>
+     *  The <b>Calendar</b> provides many configuration options that can be
+     *  easily set during initialization. Among the properties that can be
+     *  controlled:
+     * </p>
+     * <ul>
+     *  <li>Selected date</li>
+     *  <li>Minimum and/or maximum date</li>
+     *  <li>Start view</li>
+     *  <li>
+     *   Define the navigation depth (last view to which end user can
+     *   navigate)
+     *  </li>
+     *  <li>Day template</li>
+     *  <li>Footer template</li>
+     * </ul>
+     *
+     * @exampleTitle Create Calendar with selected date and a defined minimum
+     * and maximum date
+     * @example
+     * $("#calendar").kendoCalendar({
+     *  value: new Date(),
+     *  min: new Date(1950, 0, 1),
+     *  max: new Date(2049, 11, 31)
+     * });
+     *
+     * @section
+     * <p>
+     *  The <b>Calendar</b> will not navigate before than the minimum
+     *  date specified. It will also not navigate ahead the maximum date
+     *  specified.
      * </p>
      * @section
      * <h3>Define start view and navigation depth</h3>
      * <p>
-     *    The first rendered view can be defined with "start" option. Navigation depth
-     *    can be controlled with "depth" option. Predefined views are:
-     *    <ul>
-     *       <li>"month" - shows the days from the month</li>
-     *       <li>"year" - shows the months of the year</li>
-     *       <li>"decade" - shows the years from the decade</li>
-     *       <li>"century" - shows the decades from the century</li>
-     *    </ul>
+     *  The first rendered view can be defined with "start" option.
+     *  Navigation depth can be controlled with "depth" option. Predefined
+     *  views are:
+     *  <ul>
+     *   <li>"month" - shows the days from the month</li>
+     *   <li>"year" - shows the months of the year</li>
+     *   <li>"decade" - shows the years from the decade</li>
+     *   <li>"century" - shows the decades from the century</li>
+     *  </ul>
      * </p>
      *
-     * @exampleTitle Create Calendar, which allows to select month
+     * @exampleTitle Create a Calendar, which allows a user to select a month
      * @example
-     *  $("#calendar").kendoCalendar({
-     *      start: "year",
-     *      depth: "year"
-     *  });
+     * $("#calendar").kendoCalendar({
+     *  start: "year",
+     *  depth: "year"
+     * });
      *
-     *  @section
+     * @section
      * <h3>Customize day template</h3>
      * <p>
-     *   Calendar allows to customize content of the rendered day in the "month" view.
+     *  The <b>Calendar</b> allows to customize content of the rendered day
+     *  in the "month" view.
+     * </p>
      *
-     * @exampleTitle Create Calendar with custom template
+     * @exampleTitle Create a Calendar with custom template
      * @example
-     *  $("#calendar").kendoCalendar({
-     *      month: {
-     *         content: '<div class="custom"><#=data.value#></div>'
-     *      }
-     *  });
-     *  @section
-     *  <p>
-     *     This templates wraps the "value" in a div HTML element. Here is an example of the object
-     *     passed to the template function:
-     *  </p>
+     * $("#calendar").kendoCalendar({
+     *  month: {
+     *   content: '<div class="custom"><#=data.value#></div>'
+     *  }
+     * });
+     *
+     * @section
+     * <p>
+     *  This templates wraps the "value" in a div HTML element. Here is an
+     *  example of the object passed to the template function:
+     * </p>
+     *
      * @exampleTitle Structure of the data object passed to the template
      * @example
-     *  data = {
-     *    date: date, // Date object corresponding to the current cell
-     *    title: kendo.toString(date, "D"),
-     *    value: date.getDate(),
-     *    dateString: "2011/0/1" //formatted date using yyyy/MM/dd format and month is zero based
-     *  };
+     * data = {
+     *  date: date, // Date object corresponding to the current cell
+     *  title: kendo.toString(date, "D"),
+     *  value: date.getDate(),
+     *  dateString: "2011/0/1" // formatted date using yyyy/MM/dd format and month is zero-based
+     * };
      *
-     * @section <h3>Accessing an Existing Calendar</h3>
+     * @section
+     * <h3>Accessing an Existing Calendar</h3>
      * <p>
      *  You can reference an existing <b>Calendar</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.

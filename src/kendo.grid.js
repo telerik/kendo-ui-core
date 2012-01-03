@@ -353,7 +353,8 @@
      *       });
      *   });
      *
-     * @section <h3>Accessing an Existing Grid</h3>
+     * @section
+     * <h3>Accessing an Existing Grid</h3>
      * <p>
      *  You can reference an existing <b>Grid</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
