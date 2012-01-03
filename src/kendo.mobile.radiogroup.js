@@ -1,7 +1,8 @@
 (function($, undefined) {
     var kendo = window.kendo,
-        ui = kendo.ui,
+        roleSelector = kendo.roleSelector,
         mobile = kendo.mobile,
+        ui = mobile.ui,
         support = kendo.support,
         touch = support.touch,
         os = support.mobileOS,
@@ -11,7 +12,7 @@
         extend = $.extend,
         proxy = $.proxy;
 
-    var MobileRadioGroup = ui.MobileWidget.extend({
+    var RadioGroup = ui.Widget.extend({
         init: function (element, options) {
             var that = this;
             element = $(element);
@@ -21,9 +22,8 @@
                 element = element.add(element.siblings(selector)).add(element.siblings("label:has(" + selector + ")")).wrapAll("<div />").parent();
             }
 
-            ui.MobileWidget.fn.init.call(that, element, options);
+            ui.Widget.fn.init.call(that, element, options);
 
-            element = that.element;
             options = that.options;
 
             that._toggleProxy = proxy(that._toggle, that);
@@ -39,7 +39,8 @@
         },
 
         options: {
-            name: "MobileRadioGroup",
+            name: "RadioGroup",
+            selector: roleSelector("radiogroup"),
             enable: true
         },
 
@@ -149,5 +150,5 @@
 
     });
 
-    ui.plugin(MobileRadioGroup);
+    ui.plugin(RadioGroup);
 })(jQuery);
