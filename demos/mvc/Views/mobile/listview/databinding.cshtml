@@ -1,0 +1,46 @@
+<div data-role="layout" data-id="listview-layout">
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a href="#flat">Flat listview</a>
+            <a href="#grouped">Grouped listview</a>
+        </div>
+    </footer>
+</div>
+
+<div data-role="view" id="flat" data-layout="listview-layout">
+    <ul id="flat-listview"></ul>
+</div>
+
+<div data-role="view" id="grouped" data-layout="listview-layout">
+    <ul id="grouped-listview"></ul>
+</div>
+
+<script>
+    var groupedData = [
+        {name: "Sashimi Salad", letter: "S" },
+        {name: "Seaweed Salad", letter: "S" },
+        {name: "Edamame", letter: "E" },
+        {name: "Maguro", letter: "M" },
+        {name: "Tekka Maki", letter: "T" },
+        {name: "Tori Katsu", letter: "T" }
+    ]
+
+    var flatData = [ "Sashimi Salad", "Seaweed Salad", "Edamame", "Maguro", "Tekka Maki" ];
+
+    $(function() {
+
+        kendoMobileApplication.bind("viewInit", function(e) {
+            var viewId = e.view.element.attr("id");
+
+            if (viewId === "flat") {
+                $("#flat-listview").kendoMobileListView({ dataSource: flatData });
+            } else if (viewId === "grouped") {
+                $("#grouped-listview").kendoMobileListView({
+                    dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter" }),
+                    template: "${name}",
+                });
+            }
+        });
+
+    });
+</script>
