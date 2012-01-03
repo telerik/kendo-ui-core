@@ -1,3 +1,13 @@
+@using System.Text.RegularExpressions;
 @{
-    Layout = "~/Views/Shared/ExampleLayout.cshtml";
+    var mobile = Regex.IsMatch(Request.UserAgent, "(android|iphone|ipad|ipod)", RegexOptions.IgnoreCase) || Request.QueryString["mobile"] == "true";
+    
+    if (ViewContext.Controller.ViewBag.suite == "mobile" && mobile)
+    {
+        Layout = "~/Views/Shared/MobileExampleLayout.cshtml";
+    } 
+    else 
+    {
+        Layout = "~/Views/Shared/ExampleLayout.cshtml";
+    }
 }
