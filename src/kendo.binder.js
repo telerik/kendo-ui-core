@@ -1,6 +1,8 @@
 (function ($, undefined) {
     var kendo = window.kendo,
         Observable = kendo.Observable,
+        ObservableObject = kendo.data.ObservableObject,
+        ObservableArray = kendo.data.ObservableArray,
         data = kendo.data,
         Model = data.Model,
         push = [].push,
@@ -11,144 +13,6 @@
         GET = "get",
         CHANGE = "change";
 
-    var ObservableObject = Observable.extend({
-        init: function(value) {
-            var that = this,
-                member,
-                field,
-                type;
-
-            Observable.fn.init.call(this);
-
-            for (field in value) {
-                member = value[field];
-                type = toString.call(member);
-
-                if (type === "[object Object]") {
-                    member = new ObservableObject(member);
-
-                    (function(field) {
-                        member.bind(GET, function(e) {
-                            e.field = field + "." + e.field;
-                            that.trigger(GET, e);
-                        });
-
-                        member.bind(CHANGE, function(e) {
-                            e.field = field + "." + e.field;
-                            that.trigger(CHANGE, e);
-                        });
-                    })(field);
-                } else if (type === "[object Array]") {
-                    member = new ObservableArray(member);
-
-                    (function(field) {
-                        member.bind(CHANGE, function(e) {
-                            e.field = field;
-                            that.trigger(CHANGE, e);
-                        });
-                    })(field);
-                }
-
-                that[field] = member;
-            }
-        },
-
-        get: function(field) {
-            this.trigger(GET, { field: field });
-
-            return get(this, field);
-        },
-
-        set: function(field, value, initiator) {
-            var current = this[field];
-
-            if (current != value) {
-                set(this, field, value);
-
-                this.trigger(CHANGE, {
-                    field: field,
-                    initiator: initiator
-                });
-            }
-        }
-    });
-
-    var ObservableArray = Observable.extend({
-        init: function(array) {
-            var that = this,
-                member,
-                idx;
-
-            Observable.fn.init.call(that);
-
-            that.length = array.length;
-
-            for (idx = 0; idx < that.length; idx++) {
-                member = array[idx];
-
-                if ($.isPlainObject(member)) {
-                    member = new ObservableObject(member);
-                }
-
-                that[idx] = member;
-            }
-        },
-
-        push: function() {
-            var index = this.length,
-                items = arguments,
-                result;
-
-            result = push.apply(this, items);
-
-            this.trigger(CHANGE, {
-                action: "add",
-                index: index,
-                items: items
-            });
-
-            return result;
-        },
-
-        slice: slice,
-
-        splice: function(index, howMany, item) {
-            var result = splice.apply(this, arguments);
-
-            if (result.length) {
-                this.trigger(CHANGE, {
-                    action: "remove",
-                    index: index,
-                    items: result
-                });
-            }
-
-            if (item) {
-                this.trigger(CHANGE, {
-                    action: "add",
-                    index: index,
-                    items: slice.call(arguments, 2)
-                });
-            }
-            return result;
-        },
-
-        unshift: function() {
-            var index = this.length,
-                items = arguments,
-                result;
-
-            result = unshift.apply(this, items);
-
-            this.trigger(CHANGE, {
-                action: "add",
-                index: 0,
-                items: items
-            });
-
-            return result;
-        }
-    });
 
     function set(object, field, value) {
         return kendo.setter(field)(object, value);
@@ -656,9 +520,6 @@
 
     kendo.bindings = bindings;
     kendo.widgetBindings = widgetBindings;
-
-    kendo.ObservableObject = ObservableObject;
-    kendo.ObservableArray = ObservableArray;
 
     kendo.bind = function(dom, object) {
         bind(dom, kendo.observable(object));

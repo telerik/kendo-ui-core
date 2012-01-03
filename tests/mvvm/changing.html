@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -141,7 +142,7 @@
 
                 viewModel.set = function() {
                     calls++;
-                    kendo.ObservableObject.fn.set.apply(this, arguments);
+                    kendo.data.ObservableObject.fn.set.apply(this, arguments);
                 };
 
                 dom.find("select").val("bar");

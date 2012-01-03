@@ -23,7 +23,7 @@
             });
 
             test("triggers change when observable array changes", 1, function() {
-                var data = new kendo.ObservableArray([1, 2, 3]);
+                var data = new kendo.data.ObservableArray([1, 2, 3]);
                 var dataSource = kendo.data.DataSource.create(data);
 
                 dataSource.bind("change", function(){
@@ -34,7 +34,7 @@
             });
 
             test("passes added items in the event parameter", 1, function() {
-                var data = new kendo.ObservableArray([1, 2, 3]);
+                var data = new kendo.data.ObservableArray([1, 2, 3]);
                 var dataSource = kendo.data.DataSource.create(data);
 
                 dataSource.bind("change", function(e){
