@@ -42,6 +42,25 @@
             ]
         },
         {
+            "text": "ListView",
+            "name": "listview",
+            "spriteCssClass": "dataSourceIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "listview/index.html"
+                },
+                {
+                    "text": "Data Binding",
+                    "url": "listview/databinding.html"
+                },
+                {
+                    "text": "Grouping",
+                    "url": "listview/grouping.html"
+                }
+            ]
+        },
+        {
             "text": "NavBar",
             "name": "navbar",
             "spriteCssClass": "dataSourceIcon",
