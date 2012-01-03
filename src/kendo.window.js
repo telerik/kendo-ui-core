@@ -137,6 +137,7 @@
         DRAGEND = "dragend",
         ERROR = "error",
         OVERFLOW = "overflow",
+        ZINDEX = "zIndex",
         MINIMIZE_MAXIMIZE = ".k-window-actions .k-minimize,.k-window-actions .k-maximize",
         isLocalUrl = kendo.isLocalUrl;
 
@@ -417,15 +418,17 @@
         _overlay: function (visible) {
             var overlay = $("body > .k-overlay"),
                 doc = $(document),
-                wrapper = this.wrapper[0];
+                wrapper = this.wrapper;
 
             if (overlay.length == 0) {
                 overlay = $("<div class='k-overlay' />")
                     .toggle(visible)
-                    .insertBefore(wrapper);
+                    .insertBefore(wrapper[0]);
             } else {
-                overlay.insertBefore(wrapper).toggle(visible);
+                overlay.insertBefore(wrapper[0]).toggle(visible);
             }
+
+            overlay.css(ZINDEX, parseInt(wrapper.css(ZINDEX)) - 1);
 
             return overlay;
         },
@@ -625,12 +628,12 @@
             var that = this,
                 wrapper = that.wrapper,
                 currentWindow = wrapper[0],
-                zIndex = +wrapper.css("zIndex");
+                zIndex = +wrapper.css(ZINDEX);
 
             $(KWINDOW).each(function(i, element) {
                 var windowObject = $(element),
-                    zIndexNew = windowObject.css("zIndex"),
-                    contentElement = windowObject.find(".k-window-content");
+                    zIndexNew = windowObject.css(ZINDEX),
+                    contentElement = windowObject.find(KWINDOWCONTENT);
 
                 if (!isNaN(zIndexNew)) {
                     zIndex = Math.max(+zIndexNew, zIndex);
@@ -643,7 +646,7 @@
                 }
             });
 
-            wrapper.css("zIndex", zIndex + 2)
+            wrapper.css(ZINDEX, zIndex + 2)
             that.element.find("> .k-overlay").remove();
 
             return that;
@@ -725,7 +728,7 @@
                     height: "",
                     minHeight: 0
                 })
-                .find(".k-window-content").hide();
+                .find(KWINDOWCONTENT).hide();
 
             this.options.isMinimized = true;
         }),
