@@ -2028,9 +2028,11 @@
                     field;
 
                 for (field in schema) {
-                    that.columns.push({
-                        field: field
-                    });
+                    if (field !== "_events" && schema.hasOwnProperty(field)) {
+                        that.columns.push({
+                            field: field
+                        });
+                    }
                 }
 
                 that._thead();

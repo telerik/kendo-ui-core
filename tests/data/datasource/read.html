@@ -369,7 +369,7 @@
                     });
                 dataSource.read();
 
-                data[0] = 6;
+                dataSource.data()[0] = 6;
                 equal(dataSource.data()[0], 6);
                 equal(dataSource._pristine[0], 1);
             });

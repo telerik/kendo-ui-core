@@ -58,7 +58,9 @@
                     });
 
                 dataSource.read();
-                ok(dataSource.data() === data);
+                ok(dataSource.data().length, 2);
+                ok(dataSource.data()[0], 1);
+                ok(dataSource.data()[1], 2);
             });
 
             test("model is created during dataSource initialization from field definition", function() {
@@ -157,7 +159,9 @@
                     dataSource = DataSource.create(data);
 
                 dataSource.read();
-                ok(dataSource.data() === data);
+                ok(dataSource.data().length, 2);
+                ok(dataSource.data()[0], 1);
+                ok(dataSource.data()[1], 2);
             });
 
             test("XmlDataReader is initialized when the type of the schema is xml", function() {
