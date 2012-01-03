@@ -1,19 +1,32 @@
+/**
+ * @fileOverview Provides a Slider implementation which can be used to
+ * display a rich input for selecting values or ranges of values.
+ */
+
 (function ($, undefined) {
     /**
      * @name kendo.ui.Slider.Description
+     *
      * @section
-     *  <p>
-     *      The Slider widget provides a rich input for selecting values or ranges of values.
-     *      Unlike the plain HTML5 range input, the Slider presents a consistent experience across
-     *      all browsers and has a rich API and event model.
-     *  </p>
-     *  <h3>Getting Started</h3>
-     *  There are two basic types of Sliders:
-     *  <ol>
-     *      <li><strong>Slider</strong>, which presents one thumb and two opposing buttons for selecting a single value</li>
-     *      <li><strong>RangeSlider</strong>, which present two thumbs for defining a range of values</li>
-     *  </ol>
-     *  <h4>Slider</h4>
+     * <p>
+     *  The <b>Slider</b> provides a rich input for selecting values or
+     *  ranges of values. Unlike the HTML5 range input, the <b>Slider</b>
+     *  presents a consistent experience across browsers and features a rich
+     *  API and event model.
+     * </p>
+     * <h3>Getting Started</h3>
+     * <p>There are two types of <b>Slider</b>:</p>
+     * <ol>
+     *  <li>
+     *   <strong>Slider</strong>, which presents one thumb and two
+     *   opposing buttons for selecting a single value
+     *  </li>
+     *  <li>
+     *   <strong>RangeSlider</strong>, which present two thumbs for defining
+     *   a range of values
+     *  </li>
+     * </ol>
+     * <h4>Slider</h4>
      * @exampleTitle Create simple HTML input element
      * @example
      *  <input id="slider" />
@@ -30,28 +43,30 @@
      *      <input />
      *  </div>
      *
-     * @exampleTitle Initialize the RangeSlider using a jQuery selector targeting the div
+     * @exampleTitle Initialize the <b>RangeSlider</b> using a jQuery
+     * selector targeting the div
      * @example
-     *  $("#rangeSlider").kendoRangeSlider();
+     * $("#rangeSlider").kendoRangeSlider();
      *
      * @section
-     *  <p>
-     *      The RangeSlider requires two inputs to capture both ends of the value range. This
-     *      benefits scenarios where JavaScript is disabled, in which case users will be presented
-     *      with two inputs, still allowing them to input a valid range.
-     *  </p>
+     * <p>
+     *  The <b>RangeSlider</b> requires two inputs to capture both ends of
+     *  the value range. This benefits scenarios where JavaScript is
+     *  disabled, in which case users will be presented with two inputs,
+     *  still allowing them to input a valid range.
+     * </p>
      *
-     *  <h3>Customizing Slider Behavior</h3>
-     *  Many facets of the Slider and RangeSlider behavior can be configured via simple properties, including:
-     *  <ul>
-     *      <li>Min/Max values</li>
-     *      <li>Orientation (horizontal or vertical)</li>
-     *      <li>Small/Large step</li>
-     *      <li>Tooltip format/placement</li>
-     *  </ul>
-     *  <p>
-     *      To see a full list of available properties and values, review the Slider Configuration API documentation tab.
-     *  </p>
+     * <h3>Customizing Slider Behavior</h3>
+     * <p>
+     *  Many facets of the <b>Slider</b> and <b>RangeSlider</b> behavior can
+     *  be configured via simple properties, including:
+     * </p>
+     * <ul>
+     *  <li>Min/Max values</li>
+     *  <li>Orientation (horizontal or vertical)</li>
+     *  <li>Small/Large step</li>
+     *  <li>Tooltip format/placement</li>
+     * </ul>
      * @exampleTitle Customizing Slider default settings
      * @example
      *  $("#slider").kendoSlider({
@@ -61,6 +76,18 @@
      *      smallStep: 1,
      *      largeStep: 10
      *  });
+     *
+     * @section <h3>Accessing an Existing Slider</h3>
+     * <p>
+     *  You can reference an existing <b>Slider</b> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
+     *  Once a reference has been established, you can use the API to control
+     *  its behavior.
+     * </p>
+     *
+     * @exampleTitle Accessing an existing Slider instance
+     * @example
+     * var slider = $("#slider").data("kendoSlider");
      *
      */
     var kendo = window.kendo,

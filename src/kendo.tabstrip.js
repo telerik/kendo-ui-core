@@ -140,6 +140,19 @@
      *      var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
      *      tabstrip.select(tabstrip.tabGroup.children("li:first"));
      *  });
+     *
+     * @section <h3>Accessing an Existing TabStrip</h3>
+     * <p>
+     *  You can reference an existing <b>TabStrip</b> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
+     *  Once a reference has been established, you can use the API to control
+     *  its behavior.
+     * </p>
+     *
+     * @exampleTitle Accessing an existing TabStrip instance
+     * @example
+     * var tabStrip = $("#tabStrip").data("kendoTabStrip");
+     *
      */
     var kendo = window.kendo,
         ui = kendo.ui,

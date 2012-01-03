@@ -1,119 +1,132 @@
 (function($, undefined) {
     /**
-    * @name kendo.ui.Splitter.Description
-    *
-    * @section
-    *   <p>
-    *       The Splitter widget provides an easy way to create a dynamic layout of resizable and
-    *       collapsible panes. The widget converts the children of an HTML element in to the interactive
-    *       layout, adding resize and collapse handles based on configuration. Splitters can be mixed
-    *       in both vertical and horizontal orientations to build complex layouts.
-    *   </p>
-    *   <h3>Getting Started</h3>
-    *
-    * @exampleTitle Create a root HTML div element with children that will become panes
-    * @example
-    * <div id="splitter">
-    *    <div>
-    *        Area 1
-    *    </div>
-    *    <div>
-    *        Area 2
-    *    </div>
-    * </div>
-    *
-    * @exampleTitle Initialize the Splitter using a jQuery selector
-    * @example
-    *   $("#splitter").kendoSplitter();
-    * @section
-    *   <p>
-    *       When the Splitter is initialized, a vertical split bar will be placed between the two
-    *       HTML divs. This bar can be moved by a user left and right to adjust the size on the panes.
-    *   </p>
-    *   <h3>Configuring Splitter Behavior</h3>
-    *   <p>
-    *       Splitter provides many configuration options that can be easily set during initialization.
-    *       Among the properties that can be controlled:
-    *   </p>
-    *   <ul>
-    *       <li>Min/Max pane size</li>
-    *       <li>Resizable and Collapsible pane behaviors</li>
-    *       <li>Orientation of the splitter</li>
-    *   </ul>
-    *   <p>
-    *       Pane properties are set for each individual pane in a Splitter,
-    *       whereas Splitter properties apply to the entire widget.
-    *   </p>
-    * @exampleTitle Setting Splitter and Pane properties
-    * @example
-    *   $("#splitter").kendoSplitter({
-    *       panes: [{
-    *           min: "100px",
-    *           max: "300px",
-    *           collapsible: true
-    *       },
-    *       {
-    *           collapsible: true
-    *       }],
-    *       orientation: "vertical"
-    *   });
-    * @section
-    *   <h3>Nested Splitter Layouts</h3>
-    *   <p>
-    *       To achieve complex layouts, it may be necessary to nest Splitters in different orientations.
-    *       Splitter fully supports nested configurations. All that is required is proper HTML
-    *       configuration and multiple Kendo Splitter initializations.
-    *   </p>
-    * @exampleTitle Creating nested Splitter layout
-    * @example
-    *   <!-- Define nested HTML layout with divs -->
-    *   <div id="horizontalSplitter">
-    *       <div><p>Left Side Pane Content</p></div>
-    *       <div>
-    *           <div id="verticalSplitter">
-    *               <div><p>Right Side, Top Pane Content</p></div>
-    *               <div><p>Right Side, Bottom Pane Content</p></div>
-    *           </div>
-    *       </div>
-    *   </div>
-    * @exampleTitle
-    * @example
-    *   // Initialize both Splitters with the proper orientation
-    *   $(document).ready(function() {
-    *       $("horizontalSplitter").kendoSplitter();
-    *       $("verticalSplitter").kendoSplitter({ orientation: "vertical" });
-    *   });
-    *
-    * @section
-    *   <h3>Loading Content with Ajax</h3>
-    *   <p>
-    *       While any valid technique for loading Ajax content can be used, Splitter provides built-in
-    *       support for asynchronously loading content from URLs. These URLs should return HTML fragments
-    *       that can be loaded in a Splitter pane. If you want to load a whole page in an IFRAME,
-    *       you can do so by specifying the complete URL (e.g. http://kendoui.com/)
-    *       Ajax content loading must be configured for each Pane that should use it.
-    *   </p>
-    * @exampleTitle Loading Splitter content asynchronously
-    * @example
-    *   <!-- Define the Splitter HTML -->
-    *   <div id="splitter">
-    *       <div>Area 1 with Static Content</div>
-    *       <div></div>
-    *       <div></div>
-    *   </div>
-    * @exampleTitle
-    * @example
-    *   // Initialize the Splitter and configure async loading for one pane, and an iframe for a thrid pane
-    *   $(document).ready(function() {
-    *       $("#splitter").kendoSplitter({
-    *           panes: [
-    *               {},
-    *               { contentUrl: "html-content-snippet.html" },
-    *               { contentUrl: "http://kendoui.com" }
-    *           ]
-    *       });
-    *   });
-    */
+     * @name kendo.ui.Splitter.Description
+     *
+     * @section
+     *   <p>
+     *       The Splitter widget provides an easy way to create a dynamic layout of resizable and
+     *       collapsible panes. The widget converts the children of an HTML element in to the interactive
+     *       layout, adding resize and collapse handles based on configuration. Splitters can be mixed
+     *       in both vertical and horizontal orientations to build complex layouts.
+     *   </p>
+     *   <h3>Getting Started</h3>
+     *
+     * @exampleTitle Create a root HTML div element with children that will become panes
+     * @example
+     * <div id="splitter">
+     *    <div>
+     *        Area 1
+     *    </div>
+     *    <div>
+     *        Area 2
+     *    </div>
+     * </div>
+     *
+     * @exampleTitle Initialize the Splitter using a jQuery selector
+     * @example
+     *   $("#splitter").kendoSplitter();
+     * @section
+     *   <p>
+     *       When the Splitter is initialized, a vertical split bar will be placed between the two
+     *       HTML divs. This bar can be moved by a user left and right to adjust the size on the panes.
+     *   </p>
+     *   <h3>Configuring Splitter Behavior</h3>
+     *   <p>
+     *       Splitter provides many configuration options that can be easily set during initialization.
+     *       Among the properties that can be controlled:
+     *   </p>
+     *   <ul>
+     *       <li>Min/Max pane size</li>
+     *       <li>Resizable and Collapsible pane behaviors</li>
+     *       <li>Orientation of the splitter</li>
+     *   </ul>
+     *   <p>
+     *       Pane properties are set for each individual pane in a Splitter,
+     *       whereas Splitter properties apply to the entire widget.
+     *   </p>
+     * @exampleTitle Setting Splitter and Pane properties
+     * @example
+     *   $("#splitter").kendoSplitter({
+     *       panes: [{
+     *           min: "100px",
+     *           max: "300px",
+     *           collapsible: true
+     *       },
+     *       {
+     *           collapsible: true
+     *       }],
+     *       orientation: "vertical"
+     *   });
+     * @section
+     *   <h3>Nested Splitter Layouts</h3>
+     *   <p>
+     *       To achieve complex layouts, it may be necessary to nest Splitters in different orientations.
+     *       Splitter fully supports nested configurations. All that is required is proper HTML
+     *       configuration and multiple Kendo Splitter initializations.
+     *   </p>
+     * @exampleTitle Creating nested Splitter layout
+     * @example
+     *   <!-- Define nested HTML layout with divs -->
+     *   <div id="horizontalSplitter">
+     *       <div><p>Left Side Pane Content</p></div>
+     *       <div>
+     *           <div id="verticalSplitter">
+     *               <div><p>Right Side, Top Pane Content</p></div>
+     *               <div><p>Right Side, Bottom Pane Content</p></div>
+     *           </div>
+     *       </div>
+     *   </div>
+     * @exampleTitle
+     * @example
+     *   // Initialize both Splitters with the proper orientation
+     *   $(document).ready(function() {
+     *       $("horizontalSplitter").kendoSplitter();
+     *       $("verticalSplitter").kendoSplitter({ orientation: "vertical" });
+     *   });
+     *
+     * @section
+     *   <h3>Loading Content with Ajax</h3>
+     *   <p>
+     *       While any valid technique for loading Ajax content can be used, Splitter provides built-in
+     *       support for asynchronously loading content from URLs. These URLs should return HTML fragments
+     *       that can be loaded in a Splitter pane. If you want to load a whole page in an IFRAME,
+     *       you can do so by specifying the complete URL (e.g. http://kendoui.com/)
+     *       Ajax content loading must be configured for each Pane that should use it.
+     *   </p>
+     * @exampleTitle Loading Splitter content asynchronously
+     * @example
+     *   <!-- Define the Splitter HTML -->
+     *   <div id="splitter">
+     *       <div>Area 1 with Static Content</div>
+     *       <div></div>
+     *       <div></div>
+     *   </div>
+     * @exampleTitle
+     * @example
+     *   // Initialize the Splitter and configure async loading for one pane, and an iframe for a thrid pane
+     *   $(document).ready(function() {
+     *       $("#splitter").kendoSplitter({
+     *           panes: [
+     *               {},
+     *               { contentUrl: "html-content-snippet.html" },
+     *               { contentUrl: "http://kendoui.com" }
+     *           ]
+     *       });
+     *   });
+     *
+     * @section <h3>Accessing an Existing Splitter</h3>
+     * <p>
+     *  You can reference an existing <b>Splitter</b> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
+     *  Once a reference has been established, you can use the API to control
+     *  its behavior.
+     * </p>
+     *
+     * @exampleTitle Accessing an existing Splitter instance
+     * @example
+     * var splitter = $("#splitter").data("kendoSplitter");
+     *
+     */
     var kendo = window.kendo,
         ui = kendo.ui,
         extend = $.extend,

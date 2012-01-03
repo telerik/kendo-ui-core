@@ -57,6 +57,19 @@
      * See also
      * </h3>
      * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx">Upload Modes</a>
+     *
+     * @section <h3>Accessing an Existing Upload</h3>
+     * <p>
+     *  You can reference an existing <b>Upload</b> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
+     *  Once a reference has been established, you can use the API to control
+     *  its behavior. 
+     * </p>
+     *
+     * @exampleTitle Accessing an existing Upload instance
+     * @example
+     * var upload = $("#upload").data("kendoUpload");
+     *
      */
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,

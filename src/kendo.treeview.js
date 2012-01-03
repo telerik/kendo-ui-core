@@ -67,6 +67,19 @@
      *
      * @section When drag-and-drop is enabled, TreeView nodes can be dragged and dropped between all levels,
      * with useful tooltips helping indicate where the node will be dropped.
+     *
+     * @section <h3>Accessing an Existing TreeView</h3>
+     * <p>
+     *  You can reference an existing <b>TreeView</b> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
+     *  Once a reference has been established, you can use the API to control
+     *  its behavior. 
+     * </p>
+     *
+     * @exampleTitle Accessing an existing TreeView instance
+     * @example
+     * var treeView = $("#treeView").data("kendoTreeView");
+     *
      */
     var kendo = window.kendo,
         ui = kendo.ui,

@@ -352,6 +352,19 @@
      *          }
      *       });
      *   });
+     *
+     * @section <h3>Accessing an Existing Grid</h3>
+     * <p>
+     *  You can reference an existing <b>Grid</b> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
+     *  Once a reference has been established, you can use the API to control
+     *  its behavior. 
+     * </p>
+     *
+     * @exampleTitle Accessing an existing Grid instance
+     * @example
+     * var grid = $("#grid").data("kendoGrid");
+     *
      */
     var Grid = Widget.extend(/** @lends kendo.ui.Grid.prototype */ {
         /**

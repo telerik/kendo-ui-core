@@ -1,73 +1,85 @@
 (function($, undefined) {
     /**
-    * @name kendo.ui.NumericTextBox.Description
-    *
-    * @section
-    * <p>
-    *    The NumericTextBox widget can convert an INPUT element into a numeric, percentage or currency textbox.
-    *    The type is defined depending on the specified format. The widget renders spin buttons and with their help you can
-    *    increment/decrement the value with a predefined step. The NumericTextBox widget accepts only numeric entries.
-    *    The widget uses <em>kendo.culture.current</em> culture in order to determine number precision and other culture
-    *    specific properties.
-    * </p>
-    *
-    * <h3>Getting Started</h3>
-    *
-    * @exampleTitle Creating a NumericTextBox from existing INPUT element
-    * @example
-    * <!-- HTML -->
-    * <input id="textbox" />
-    *
-    * @exampleTitle NumericTextBox initialization
-    * @example
-    *   $(document).ready(function(){
-    *      $("#textbox").kendoNumericTextBox();
-    *   });
-    * @section
-    *  <p>
-    *      When a NumericTextBox is initialized, it will automatically wraps the input element with SPAN
-    *      element and will render spin buttons.
-    *  </p>
-    *  <h3>Configuring NumericTextBox behaviors</h3>
-    *  <p>
-    *      NumericTextBox provides configuration options that can be easily set during initialization.
-    *      Among the properties that can be controlled:
-    *  </p>
-    *  <ul>
-    *      <li>Value of the NumericTextBox</li>
-    *      <li>Min/Max values</li>
-    *      <li>Increment step</li>
-    *      <li>Precision of the number</li>
-    *      <li>Number format. Any valid number format is allowed.</li>
-    *  </ul>
-    *  <p>
-    *      To see a full list of available properties and values, review the Slider Configuration API documentation tab.
-    *  </p>
-    * @exampleTitle Customizing NumericTextBox defaults
-    * @example
-    *  $("#textbox").kendoNumericTextBox({
-    *      value: 10,
-    *      min: -10,
-    *      max: 100,
-    *      step: 0.75,
-    *      format: "n",
-    *      decimals: 3
-    *  });
-    * @section
-    * @exampleTitle Create Currency NumericTextBox widget
-    * @example
-    *  $("#textbox").kendoNumericTextBox({
-    *      format: "c2" //Define currency type and 2 digits precision
-    *  });
-    * @section
-    * @exampleTitle Create Percentage NumericTextBox widget
-    * @example
-    *  $("#textbox").kendoNumericTextBox({
-    *      format: "p",
-    *      value: 0.15 // 15 %
-    *  });
-    */
-
+     * @name kendo.ui.NumericTextBox.Description
+     *
+     * @section
+     * <p>
+     *    The NumericTextBox widget can convert an INPUT element into a numeric, percentage or currency textbox.
+     *    The type is defined depending on the specified format. The widget renders spin buttons and with their help you can
+     *    increment/decrement the value with a predefined step. The NumericTextBox widget accepts only numeric entries.
+     *    The widget uses <em>kendo.culture.current</em> culture in order to determine number precision and other culture
+     *    specific properties.
+     * </p>
+     *
+     * <h3>Getting Started</h3>
+     *
+     * @exampleTitle Creating a NumericTextBox from existing INPUT element
+     * @example
+     * <!-- HTML -->
+     * <input id="textbox" />
+     *
+     * @exampleTitle NumericTextBox initialization
+     * @example
+     *   $(document).ready(function(){
+     *      $("#textbox").kendoNumericTextBox();
+     *   });
+     * @section
+     *  <p>
+     *      When a NumericTextBox is initialized, it will automatically wraps the input element with SPAN
+     *      element and will render spin buttons.
+     *  </p>
+     *  <h3>Configuring NumericTextBox behaviors</h3>
+     *  <p>
+     *      NumericTextBox provides configuration options that can be easily set during initialization.
+     *      Among the properties that can be controlled:
+     *  </p>
+     *  <ul>
+     *      <li>Value of the NumericTextBox</li>
+     *      <li>Min/Max values</li>
+     *      <li>Increment step</li>
+     *      <li>Precision of the number</li>
+     *      <li>Number format. Any valid number format is allowed.</li>
+     *  </ul>
+     *  <p>
+     *      To see a full list of available properties and values, review the Slider Configuration API documentation tab.
+     *  </p>
+     * @exampleTitle Customizing NumericTextBox defaults
+     * @example
+     *  $("#textbox").kendoNumericTextBox({
+     *      value: 10,
+     *      min: -10,
+     *      max: 100,
+     *      step: 0.75,
+     *      format: "n",
+     *      decimals: 3
+     *  });
+     * @section
+     * @exampleTitle Create Currency NumericTextBox widget
+     * @example
+     *  $("#textbox").kendoNumericTextBox({
+     *      format: "c2" //Define currency type and 2 digits precision
+     *  });
+     * @section
+     * @exampleTitle Create Percentage NumericTextBox widget
+     * @example
+     *  $("#textbox").kendoNumericTextBox({
+     *      format: "p",
+     *      value: 0.15 // 15 %
+     *  });
+     *
+     * @section <h3>Accessing an Existing NumericTextBox</h3>
+     * <p>
+     *  You can reference an existing <b>NumericTextBox</b> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
+     *  Once a reference has been established, you can use the API to control
+     *  its behavior.
+     * </p>
+     *
+     * @exampleTitle Accessing an existing NumericTextBox instance
+     * @example
+     * var numericTextBox = $("#numericTextBox").data("kendoNumericTextBox");
+     *
+     */
     var kendo = window.kendo,
         keys = kendo.keys,
         ui = kendo.ui,
