@@ -147,8 +147,6 @@
         kendo = window.kendo,
         Observable = kendo.Observable,
         Class = kendo.Class,
-        Model = kendo.data.Model,
-        ModelSet = kendo.data.ModelSet,
         STRING = "string",
         CREATE = "create",
         READ = "read",
@@ -1051,7 +1049,7 @@
             }
 
             if (isPlainObject(that.model)) {
-                that.model = model = Model.define(that.model);
+                that.model = model = kendo.data.Model.define(that.model);
 
                 var dataFunction = that.data,
                     getters = {};
@@ -1301,8 +1299,8 @@
 
             id = model.id;
 
-            if (Model && !isEmptyObject(model)) {
-                that._set = new ModelSet({
+            if (kendo.data.Model && !isEmptyObject(model)) {
+                that._set = new kendo.data.ModelSet({
                     model: model,
                     data: that._data,
                     reader: that.reader,
@@ -2075,7 +2073,7 @@
             }
         }
 
-        if (Model && fields && (!dataSource.schema || !dataSource.schema.model)) {
+        if (kendo.data.Model && fields && (!dataSource.schema || !dataSource.schema.model)) {
             for (idx = 0, length = fields.length; idx < length; idx++) {
                 field = fields[idx];
                 model[field.field] = field;

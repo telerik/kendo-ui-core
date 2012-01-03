@@ -11,6 +11,7 @@
         ERROR = "error",
         MODELCHANGE = "modelChange",
         Observable = kendo.Observable,
+        ObservableObject = kendo.data.ObservableObject,
         dateRegExp = /^\/Date\((.*?)\)\/$/;
 
     function equal(x, y) {
@@ -80,11 +81,11 @@
         "default": ""
     }
 
-    var Model = Observable.extend({
+    var Model = ObservableObject.extend({
         init: function(data) {
             var that = this;
 
-            Observable.fn.init.call(that);
+            ObservableObject.fn.init.call(that);
 
             that._accessors = {};
 
