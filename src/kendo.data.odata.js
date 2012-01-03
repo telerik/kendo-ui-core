@@ -41,6 +41,7 @@
                     type = $.type(value);
                     if (type === "string") {
                         format = "'{1}'";
+                        value = value.replace(/'/g, "''");
                     } else if (type === "date") {
                         format = "datetime'{1:yyyy-MM-ddTHH:mm:ss}'";
                     } else {
