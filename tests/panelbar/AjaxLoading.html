@@ -58,7 +58,7 @@
             var item = getRootItem(0);
 
             panelbar.bind("contentLoad", function() {
-                equal(item.parent().find(".k-content").css("display"), "block");
+                equal($(arguments[0].contentElement).css("display"), "block");
                 panelbar.unbind("contentLoad");
                 start();
             });
@@ -78,7 +78,7 @@
             var item = getRootItem(1);
 
             panelbar.bind("contentLoad", function() {
-                ok(item.find(".k-icon").hasClass("k-arrow-up"));
+                ok($(arguments[0].item).find(".k-icon").hasClass("k-arrow-up"));
                 panelbar.unbind("contentLoad");
                 start();
             });
