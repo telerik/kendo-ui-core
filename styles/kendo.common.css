@@ -1731,7 +1731,7 @@ body .k-datetimepicker .k-select
 .k-list .k-item
 {
     padding: 1px 5px 1px 5px;
-    line-height: 22px;
+    line-height: 1.8em;
 }
 
 .k-list .k-state-hover,
