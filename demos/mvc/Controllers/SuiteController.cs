@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using Kendo.Models;
 using IOFile = System.IO.File;
 
@@ -10,8 +9,6 @@ namespace Kendo.Controllers
 {
     public class SuiteController : BaseController
     {
-        private static readonly JavaScriptSerializer Serializer = new JavaScriptSerializer();
-
         //
         // GET: /Web/
         public ActionResult Index(string suite, string section, string example)
@@ -42,18 +39,15 @@ namespace Kendo.Controllers
 
         public ActionResult SectionIndex(string suite, string section)
         {
-            return RedirectPermanent(Url.Action("Index", new { suite = suite, section = section, example = "index" }));
-        }
+            var isMobileDevice = Regex.IsMatch(Request.UserAgent, "(android|iphone|ipad|ipod)", RegexOptions.IgnoreCase);
+            var redirect = RedirectPermanent(Url.Action("Index", new { suite = suite, section = section, example = "index" }));
 
-        protected void LoadNavigation(string suite)
-        {
-            var navigationJson = IOFile.ReadAllText(
-                Server.MapPath(
-                    string.Format("~/App_Data/{0}.nav.json", suite)
-                )
-            );
+            if (suite == "mobile" && isMobileDevice)
+            {
+                redirect = RedirectPermanent(Url.RouteUrl("MobileDeviceIndex"));
+            }
 
-            ViewBag.Navigation = Serializer.Deserialize<IDictionary<string, NavigationWidget[]>>(navigationJson);
+            return redirect;
         }
 
         protected void FindCurrentExample()

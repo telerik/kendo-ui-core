@@ -4,12 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using Kendo.Models;
 using IOFile = System.IO.File;
 
 namespace Kendo.Controllers
 {
     public abstract class BaseController : Controller
     {
+        private static readonly JavaScriptSerializer Serializer = new JavaScriptSerializer();
+
         protected static readonly IDictionary<String, String> MimeTypes =
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                 { ".js", "application/x-javascript" },
@@ -43,6 +47,17 @@ namespace Kendo.Controllers
             }
 
             return File(IOFile.ReadAllBytes(path), mimeType);
+        }
+
+        protected void LoadNavigation(string suite)
+        {
+            var navigationJson = IOFile.ReadAllText(
+                Server.MapPath(
+                    string.Format("~/App_Data/{0}.nav.json", suite)
+                )
+            );
+
+            ViewBag.Navigation = Serializer.Deserialize<IDictionary<string, NavigationWidget[]>>(navigationJson);
         }
     }
 }
