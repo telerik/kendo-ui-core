@@ -85,29 +85,28 @@
         init: function(data) {
             var that = this;
 
-            ObservableObject.fn.init.call(that);
+            data = $.extend({}, that.defaultItem, data);
+
+            ObservableObject.fn.init.call(that, data);
+
+            that.uid = kendo.guid();
 
             that._accessors = {};
+            that._changes = {};
 
             that._modified = false;
 
-            that.data = data && !$.isEmptyObject(data) ? data : extend(true, {}, that.defaultItem);
-            that.pristine = extend(true, {}, that.data);
+            that.pristine = extend(true, {}, data);
 
-            if (that.id() === undefined || that.id() === that.defaultId) {
-                that._isNew = true;
-                that.data["__id"] = kendo.guid();
-            }
+            that.id = that.get(that.idField);
         },
+
+        idField: "id",
 
         _accessor: function(field) {
             var accessors = this._accessors;
 
             return accessors[field] = accessors[field] || accessor(field);
-        },
-
-        get: function(field) {
-            return this._accessor(field).get(this.data);
         },
 
         _parse: function(field, value) {
@@ -152,8 +151,10 @@
 
                 value = that._parse(field, values[field]);
 
-                if (!equal(value, accessor.get(that.data))) {
-                    accessor.set(that.data, value);
+                if (!equal(value, accessor.get(that))) {
+                    accessor.set(that, value);
+                    that._changes[field] = value;
+
                     that._modified = modified = true;
                 }
             }
@@ -186,41 +187,26 @@
         },
 
         isNew: function() {
-            return this._isNew === true;
+            return this.id === this._defaultId;
         },
 
         changes: function() {
-            var modified = null,
-                field,
-                that = this,
-                data = that.data,
-                pristine = that.pristine;
-
-            for (field in data) {
-                if (field !== "__id" && (that.isNew() || !equal(pristine[field], data[field]))) {
-                    modified = modified || {};
-                    modified[field] = data[field];
-                }
+            if ($.isEmptyObject(this._changes)) {
+                return null;
             }
-
-            return modified;
+            return this._changes;
         }
     });
 
     Model.define = function(options) {
         var model,
             proto = extend({}, { defaultItem: {} }, options),
-            id = proto.id || "id",
-            defaultId,
-            set,
-            get;
+            id = proto.id || "id";
 
-        if ($.isFunction(id)) {
-            get = id;
-            set = id;
-        } else {
-            get = getter(id);
-            set = setter(id);
+        proto.idField = id;
+
+        if (proto.id) {
+            delete proto.id;
         }
 
         for (var name in proto.fields) {
@@ -235,7 +221,7 @@
             }
 
             if (options.id === name) {
-                defaultId = proto._defaultId = value;
+                proto._defaultId = value;
             }
 
             proto.defaultItem[name] = value;
@@ -243,25 +229,11 @@
             field.parse = field.parse || parsers[type];
         }
 
-        id = function(data, value) {
-            var result;
-            if (value === undefined) {
-                result = get(data);
-                return result !== undefined && result !== null && result !== defaultId ? result : data["__id"];
-            } else {
-                set(data, value);
-            }
-        }
-
-        proto.id = function(value) {
-            return id(this.data, value);
-        }
-
         model = Model.extend(proto);
-        model.id = id;
 
         if (proto.fields) {
             model.fields = proto.fields;
+            model.idField = proto.idField;
         }
 
         return model;
@@ -273,7 +245,14 @@
 
             that.options = options = extend({}, that.options, options);
             that._reader = options.reader;
-            that._data = options.data || [];
+            var data = options.data || [];
+
+            that._data = new kendo.data.ObservableArray([]);
+
+            for (var i = 0; i < data.length; i++) {
+                that._data.push(new options.model(data[i]));
+            }
+
             that._destroyed = [];
             that._transport = options.transport;
             that._models = {};
@@ -296,7 +275,7 @@
             }
             var that = this,
                 model = that.options.model,
-                id = model.id(dataItem);
+                id = dataItem.id;
 
             return that._idMap[id];
         },
@@ -311,7 +290,7 @@
             that._idMap = {};
 
             for (idx = 0, length = data.length; idx < length; idx++) {
-                that._idMap[model.id(data[idx])] = idx;
+                that._idMap[data[idx].id] = idx;
             }
         },
 
@@ -320,7 +299,6 @@
 
             if (data) {
                 that._data = data;
-                that._models = {};
                 that._destroyed = [];
                 that._map();
             }
@@ -329,17 +307,12 @@
         get: function(id) {
             var that = this,
                 data,
-                model = that._models[id];
+                model = that._data[that._idMap[id]];
 
-            if (!model) {
-                data = that._data[that._idMap[id]];
-
-                if (data) {
-                    model = that._models[id] = new that.options.model(data);
-                    model.bind(CHANGE, function () {
-                        that.trigger(MODELCHANGE, model);
-                    });
-                }
+            if (model) {
+                model.bind(CHANGE, function () {
+                    that.trigger(MODELCHANGE, model);
+                });
             }
 
             return model;

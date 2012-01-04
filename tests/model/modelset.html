@@ -44,7 +44,7 @@
                 setup( { data: [ { id: 1} ] });
 
                 var model = modelSet.get("1");
-                equal(model.id(), 1);
+                equal(model.id, 1);
             });
 
             test("get returns the same model instance", function() {

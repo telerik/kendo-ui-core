@@ -106,22 +106,6 @@
                 ok(!m._modified);
             });
 
-            test("model is not _modified if the same array value is set", function() {
-                var m = new Model({
-                    foo: {
-                        bar: ["bar"]
-                    }
-                });
-
-                m.set({
-                    foo: {
-                        bar: ["bar"]
-                    }
-                });
-
-                ok(!m._modified);
-            });
-
             test("change is raised if the model is modifed after set", function() {
                 var changeWasCalled = false, m = new Model().bind("change", function() {
                     changeWasCalled = true;

@@ -192,10 +192,12 @@
     }
 
     var ObservableArray = Observable.extend({
-        init: function(array) {
+        init: function(array, type) {
             var that = this,
                 member,
                 idx;
+
+            type = type || ObservableObject;
 
             Observable.fn.init.call(that);
 
@@ -205,7 +207,7 @@
                 member = array[idx];
 
                 if ($.isPlainObject(member)) {
-                    member = new ObservableObject(member);
+                    member = new type(member);
                 }
 
                 that[idx] = member;
@@ -1327,11 +1329,6 @@
                 };
             }
 
-            if (options.data.bind) {
-                options.data.bind(CHANGE, function(e) {
-                   that.trigger(CHANGE, e);
-                });
-            }
 
             that.bind([ /**
                          * Fires when an error occurs during data retrieval.
@@ -1491,7 +1488,12 @@
                 data = that.reader.data(data);
             }
 
-            that._data = data;
+            // <ugly>
+            that._data = data = new ObservableArray(data, that.reader.model);
+
+            data.bind(CHANGE, function(e) {
+                that.trigger(CHANGE, e);
+            });
 
             if (that._set) {
                 that._set.data(data);
@@ -1505,6 +1507,8 @@
 
             that._dequeueRequest();
             that._process(data);
+
+            // </ugly>
         },
 
         _process: function (data) {

@@ -296,7 +296,9 @@
                 var result = reader.parse('<root><foo id="bar" /><foo id="baz" /></root>');
                 var data = reader.data(result);
 
-                equal(reader.model.id(data[0]), "bar");
+                var model = new reader.model(data[0]);
+
+                equal(model.id, "bar");
             });
 
             test("model fields as object is parsed", function() {
