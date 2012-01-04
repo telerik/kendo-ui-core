@@ -23,7 +23,7 @@
                     var dataSource = new kendo.data.DataSource({
                         transport: {
                             // specify the XML file to read. The same as read: { url: "books.xml" }
-                            read: "books.xml"
+                            read: "../../content/web/datasource/books.xml"
                         },
                         schema: {
                             // specify the the schema is XML
@@ -41,7 +41,7 @@
                                     // the "url" field is mapped to the text of the "url" XML element
                                     url: "url/text()",
                                     // the "cover" field is mapped to the "id" attribute of the "book" XML element
-                                    cover: "@cover"
+                                    cover: "@@cover"
                                 }
                             }
                         },
@@ -109,7 +109,7 @@
 &lt;/book&gt;</code></pre>
                 </div>
 
-                <a href="books.xml">see the full XML</a>
+                <a href="../../content/web/datasource/books.xml">see the full XML</a>
                 <p>
                     <strong>Note:</strong>
                     Security restrictions in Chrome prevent this
