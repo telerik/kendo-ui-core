@@ -117,6 +117,8 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Select = ui.Select,
+        touch = kendo.support.touch,
+        CLICK = touch ? "touchend" : "click",
         ATTRIBUTE = "disabled",
         CHANGE = "change",
         SELECT = "select",
@@ -257,16 +259,14 @@
                             that._inputWrapper.addClass(FOCUSED);
                             clearTimeout(that._bluring);
                         },
-                        click: function() {
-                            that.toggle();
-                        },
                         focusout: function(e) {
                             that._bluring = setTimeout(function() {
                                 that._blur();
                                 that._inputWrapper.removeClass(FOCUSED);
                             }, 100);
                         }
-                    });
+                    })
+                    .bind(CLICK, function() { that.toggle() });
             }
         },
 
