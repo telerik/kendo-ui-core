@@ -240,13 +240,85 @@
          * A collection of visual animations used when items are expanded or
          * collapsed through user interaction. Setting this option to
          * <b>false</b> will disable all animations.
+           * _example
+           * $("#treeView").kendoTreeView({
+           *  animation: {
+           *   expand: {
+           *    duration: 200,
+           *    hide: true,
+           *    show: false
+           *   }
+           *   collapse: {
+           *    duration: 200,
+           *    effects: "expandVertical",
+           *    show: true
+           *   }
+           *  }
+           * });
+         *
+         * @option {Animation} [animation.expand]
+         * The animation that will be used when expanding items.
+         *
+         * @option {Number} [animation.expand.duration] <200> The number of
+         * milliseconds used for the animation when a node is expanded.
+           * _example
+           * $("#treeView").kendoTreeView({
+           *  animation: {
+           *   expand: {
+           *    duration: 1000
+           *   }
+           *  }
+           * });
+         *
+         * @option {String} [animation.expand.effects] <"expandVertical">
+         * A whitespace-delimited string of animation effects that are
+         * utilized when a <b>TreeView</b> node is expanded. Options include
+         * <b>"expandVertical"</b> and <b>"fadeIn"</b>.
+           * _example
+           * // expand and fade-in simultaneously over 5000 milliseconds
+           * $("#treeView").kendoTreeView({
+           *  animation: {
+           *   expand: {
+           *    duration: 5000,
+           *    effects: "expandVertical fadeIn"
+           *   }
+           *  }
+           * });
+         *
+         * @option {Boolean} [animation.expand.show] <true>
          *
          * @option {Boolean} [dragAndDrop] <false>
          * Disables (<b>false</b>) or enables (<b>true</b>) drag-and-drop
          * on the nodes of a <b>TreeView</b>.
          *
-         * @option {Animation} [animation.expand] The animation that will be used when expanding items.
          * @option {Animation} [animation.collapse] The animation that will be used when collapsing items.
+         * @option {Number} [animation.collapse.duration] <200> The number of
+         * milliseconds used for the animation when a node is expanded.
+           * _example
+           * $("#treeView").kendoTreeView({
+           *  animation: {
+           *   collapse: {
+           *    duration: 1000
+           *   }
+           *  }
+           * });
+         *
+         * @option {String} [animation.collapse.effects]
+         * A whitespace-delimited string of animation effects that are
+         * utilized when a <b>TreeView</b> node is collapsed. Options include
+         * <b>"fadeOut"</b>.
+           * _example
+           * // collapse and fade-out over 5000 milliseconds
+           * $("#treeView").kendoTreeView({
+           *  animation: {
+           *   collapse: {
+           *    duration: 5000,
+           *    effects: "fadeOut"
+           *   }
+           *  }
+           * });
+         *
+         *
          */
         init: function (element, options) {
             var that = this,
