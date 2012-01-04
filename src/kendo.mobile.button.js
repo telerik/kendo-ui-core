@@ -179,7 +179,6 @@
         * @param {Object} options Configuration options.
         */
         init: function(element, options) {
-            debugger;
             Button.fn.init.call(this, element, options);
         },
 
