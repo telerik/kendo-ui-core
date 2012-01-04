@@ -5,9 +5,13 @@
      * @section
      * <p>
      *  The <b>TreeView</b> displays hierarchical data in a traditional tree
-     *  structure, with support for interactive drag-and-drop reordering
-     *  operations. It can be defined statically using HTML lists or it can
-     *  be data-bound (dynamically) to hierarchical data.
+     *  structure. It supports user interaction through the mouse or touch to
+     *  perform re-ordering operations via drag-and-drop.
+     * </p>
+     * <p>
+     *  A <b>TreeView</b> can be created by leveraging HTML lists. However,
+     *  it does not support binding to a remote data source at this point in
+     *  time.
      * </p>
      * <h3>Getting Started</h3>
      * <p>A <b>TreeView</b> can be created in two ways:</p>
@@ -64,6 +68,10 @@
      * });
      *
      * @section
+     * <p>
+     *  <b>Note:</b> Currently, the <b>TreeView</b> does not support binding
+     *  to a remote data source.
+     * </p>
      * <h3>Configuring TreeView Behavior</h3>
      * <p>
      *  A number of <b>TreeView</b> behaviors can be easily controlled by
