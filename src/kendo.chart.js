@@ -1479,7 +1479,7 @@
                     slotY = isVertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.getAxisLineBox();
                     return view.createRect(
                             new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
-                            { fill: item.color, opacity: item.opacity, zIndex: -1 });
+                            { fill: item.color, fillOpacity: item.opacity, zIndex: -1 });
                 });
             }
 
@@ -2458,7 +2458,7 @@
                     point.reflow(pointSlot);
                 }
 
-                if(!categorySlots[categoryIx]) {
+                if (!categorySlots[categoryIx]) {
                     categorySlots[categoryIx] = isVertical ? slotX : slotY;
                 }
             });
@@ -3975,18 +3975,15 @@
         },
 
         addToLegend: function(series) {
-            var plotArea = this,
-                count = series.length,
+            var count = series.length,
                 data = [],
-                item,
                 i;
 
             for (i = 0; i < count; i++) {
-                item = { name: series[i].name || "", color: series[i].color };
-                data.push(item);
+                data.push({ name: series[i].name || "", color: series[i].color });
             }
 
-            append(plotArea.options.legend.items, data);
+            append(this.options.legend.items, data);
         },
 
         createBarChart: function(series) {
@@ -4131,7 +4128,7 @@
         reflow: function(targetBox) {
             var plotArea = this,
                 options = plotArea.options.plotArea,
-                margin = getSpacing(options.margin)
+                margin = getSpacing(options.margin);
 
             plotArea.box = targetBox.clone();
 
@@ -4216,48 +4213,48 @@
                     };
                 };
 
-                if (options.majorGridLines.visible) {
-                    gridLines = map(majorTicks, function(pos) {
-                                    return gridLine(pos, options.majorGridLines);
-                                });
-                }
+            if (options.majorGridLines.visible) {
+                gridLines = map(majorTicks, function(pos) {
+                                return gridLine(pos, options.majorGridLines);
+                            });
+            }
 
-                if (options.minorGridLines.visible) {
-                    gridLines = gridLines.concat(
-                        map(axis.getMinorTickPositions(), function(pos) {
-                            if (options.majorGridLines.visible) {
-                                if (!inArray(pos, majorTicks)) {
-                                    return gridLine(pos, options.minorGridLines);
-                                }
-                            } else {
+            if (options.minorGridLines.visible) {
+                gridLines = gridLines.concat(
+                    map(axis.getMinorTickPositions(), function(pos) {
+                        if (options.majorGridLines.visible) {
+                            if (!inArray(pos, majorTicks)) {
                                 return gridLine(pos, options.minorGridLines);
                             }
+                        } else {
+                            return gridLine(pos, options.minorGridLines);
                         }
-                    ));
+                    }
+                ));
+            }
+
+            return map(gridLines, function(line) {
+                var gridLineOptions = {
+                        strokeWidth: line.options.width,
+                        stroke: line.options.color,
+                        dashType: line.options.dashType
+                    },
+                    linePos = round(line.pos);
+
+                if (secAxisPos === linePos) {
+                    return null;
                 }
 
-                return map(gridLines, function(line) {
-                    var gridLineOptions = {
-                            strokeWidth: line.options.width,
-                            stroke: line.options.color,
-                            dashType: line.options.dashType
-                        },
-                        linePos = round(line.pos);
-
-                    if (secAxisPos === linePos) {
-                        return null;
-                    }
-
-                    if (isVertical) {
-                        return view.createLine(
-                            lineStart, linePos, lineEnd, linePos,
-                            gridLineOptions);
-                    } else {
-                        return view.createLine(
-                            linePos, lineStart, linePos, lineEnd,
-                            gridLineOptions);
-                    }
-                });
+                if (isVertical) {
+                    return view.createLine(
+                        lineStart, linePos, lineEnd, linePos,
+                        gridLineOptions);
+                } else {
+                    return view.createLine(
+                        linePos, lineStart, linePos, lineEnd,
+                        gridLineOptions);
+                }
+            });
         },
 
         getViewElements: function(view) {
@@ -4304,12 +4301,13 @@
         },
 
         renderContent: function() {
-            var output = "",
-                element = this,
+            var element = this,
+                output = "",
                 sortedChildren = element.sortChildren(),
-                childrenCount = sortedChildren.length;
+                childrenCount = sortedChildren.length,
+                i;
 
-            for (var i = 0; i < childrenCount; i++) {
+            for (i = 0; i < childrenCount; i++) {
                 output += sortedChildren[i].render();
             }
 
@@ -4318,9 +4316,10 @@
 
         sortChildren: function() {
             var element = this,
-                children = element.children;
+                children = element.children,
+                i;
 
-            for (var i = 0, length = children.length; i < length; i++) {
+            for (i = 0, length = children.length; i < length; i++) {
                 children[i]._childIndex = i;
             }
 
@@ -4966,15 +4965,15 @@
             return s;
         }
 
-        var a = math.min(r.x1, s.x1);
-        var b = math.max(r.x1, s.x1);
-        var c = math.min(r.x2, s.x2);
-        var d = math.max(r.x2, s.x2);
-
-        var e = math.min(r.y1, s.y1);
-        var f = math.max(r.y1, s.y1);
-        var g = math.min(r.y2, s.y2);
-        var h = math.max(r.y2, s.y2);
+        var a = math.min(r.x1, s.x1),
+            b = math.max(r.x1, s.x1),
+            c = math.min(r.x2, s.x2),
+            d = math.max(r.x2, s.x2),
+            e = math.min(r.y1, s.y1),
+            f = math.max(r.y1, s.y1),
+            g = math.min(r.y2, s.y2),
+            h = math.max(r.y2, s.y2),
+            result = [];
 
         // X = intersection, 0-7 = possible difference areas
         // h +-+-+-+
@@ -4985,8 +4984,6 @@
         // . |0|1|2|
         // e +-+-+-+
         // . a b c d
-
-        var result = [];
 
         // we'll always have rectangles 1, 3, 4 and 6
         result[0] = new Box2D(b, e, c, f);
@@ -5021,9 +5018,11 @@
 
     function sparseArrayLimits(arr) {
         var min = MAX_VALUE,
-            max = MIN_VALUE;
-        for (var i = 0, length = arr.length; i < length; i++) {
-            var n = arr[i];
+            max = MIN_VALUE,
+            i,
+            n;
+        for (i = 0, length = arr.length; i < length; i++) {
+            n = arr[i];
             if (defined(n)) {
                 min = math.min(min, n);
                 max = math.max(max, n);
@@ -5429,15 +5428,15 @@
                 p = 0.5;
             }
 
-            if (a < Math.abs(diff)) {
+            if (a < math.abs(diff)) {
                 a=diff;
                 s = p / 4;
             } else {
-                s = p / (2 * Math.PI) * Math.asin(diff / a);
+                s = p / (2 * math.PI) * math.asin(diff / a);
             }
 
-            return a * Math.pow(2,-10 * n) *
-                   Math.sin((n * 1 - s) * (1.1 * Math.PI) / p) +
+            return a * math.pow(2,-10 * n) *
+                   math.sin((n * 1 - s) * (1.1 * math.PI) / p) +
                    diff + first;
         }
     });
