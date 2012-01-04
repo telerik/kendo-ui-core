@@ -832,27 +832,6 @@
             return this;
         },
 
-        /**
-         *
-         * Disables an item(s) of the <b>PanelBar</b>.
-         *
-           * @example
-           * // access an existing PanelBar instance
-           * var panelBar = $("#panelBar").data("kendoPanelBar");
-           * // disable the item of the PanelBar with ID, "item1"
-           * panelBar.disable($("#item1"));
-           * // disable the currently selected item of the PanelBar
-           * var item = panelBar.select();
-           * panelBar.disable(item);
-           * // disable all list items that start with ID, "item"
-           * panelBar.disable($('[id^="item"]'));
-         *
-         * @param {String | Selector} element
-         * The <b>PanelBar</b> item(s) to be disabled, expressed as a string
-         * containing a selector expression or represented by a
-         * <a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.
-         *
-         */
         disable: function (element) {
             this._toggleDisabled(element, false);
 
