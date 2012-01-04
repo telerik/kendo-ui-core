@@ -31,7 +31,7 @@ function buildDebug() {
     if (osName == "Linux" || osName == "Darwin") {
         buildExe = spawn("xbuild", [ PROJECT ]);
     } else {
-        buildExe = spawn("msbuild", [ PROJECT ]);
+        buildExe = spawn("/cygdrive/c/Windows/Microsoft.NET/Framework64/v4.0.30319/msbuild.exe", [ PROJECT ]);
     }
 
     buildExe.stderr.on('data', function (data) {
