@@ -21,6 +21,7 @@
         NONE = "none",
         AUTO = "auto",
         SCALE = "scale",
+        WIDTH = "width",
         HEIGHT = "height",
         HIDDEN = "hidden",
         ORIGIN = "origin",
@@ -656,7 +657,7 @@
                     offset = options.offset, margin,
                     extender = {}, reverse = options.reverse;
 
-                !reverse && !origin && origin !== 0 && element.data(ORIGIN, parseInt(element.css("margin-left"), 10));
+                !reverse && !origin && origin !== 0 && element.data(ORIGIN, parseInt(element.css("margin-" + options.axis), 10));
 
                 margin = (element.data(ORIGIN) || 0);
                 extender["margin-" + options.axis] = !reverse ? margin + offset : margin;
@@ -698,28 +699,31 @@
                 return extend(extender, options.properties);
             }
         },
-        expandVertical: {
+        expand: {
             keep: [ OVERFLOW ],
             css: { overflow: HIDDEN },
             restore: [ OVERFLOW ],
             setup: function(element, options) {
                 var reverse = options.reverse,
-                    setHeight = element[0].style.height,
-                    oldHeight = element.data(HEIGHT),
-                    fixedHeight = parseInteger(oldHeight || setHeight),
-                    height = fixedHeight || round(element.css({ height: AUTO }).height());
+                    property = (options.direction ? options.direction == "vertical" : true) ? HEIGHT : WIDTH,
+                    setLength = element[0].style[property],
+                    oldLength = element.data(property),
+                    length = parseInteger(oldLength || setLength) || round(element.css(property, AUTO )[property]()),
+                    completion = {};
 
-                element.css(HEIGHT, reverse ? height : 0).css(HEIGHT);
-                if (oldHeight === undefined) {
-                    element.data(HEIGHT, setHeight);
+                completion[property] = (reverse ? 0 : length) + PX;
+                element.css(property, reverse ? length : 0).css(property);
+                if (oldLength === undefined) {
+                    element.data(property, setLength);
                 }
 
-                return extend({ height: (reverse ? 0 : height) + PX }, options.properties);
+                return extend(completion, options.properties);
             },
-            teardown: function(element) {
-                var height = element.data(HEIGHT);
-                if (height == AUTO || height === BLANK) {
-                    setTimeout(function() { element.css(HEIGHT, AUTO).css(HEIGHT); }, 0); // jQuery animate complete callback in IE is called before the last animation step!
+            teardown: function(element, options) {
+                var property = (options.direction ? options.direction == "vertical" : true) ? HEIGHT : WIDTH,
+                    length = element.data(property);
+                if (length == AUTO || length === BLANK) {
+                    setTimeout(function() { element.css(property, AUTO).css(property); }, 0); // jQuery animate complete callback in IE is called before the last animation step!
                 }
             }
         },
@@ -729,4 +733,7 @@
             }
         }
     });
+
+    kendo.fx.expandVertical = kendo.fx.expand; // expandVertical is deprecated.
+
 })(jQuery);

@@ -81,7 +81,7 @@
                     original.find(".k-state-active").removeClass("k-state-active");
 
                     var getEffects = function () {
-                        return (($("#expand")[0].checked ? "expandVertical " : "") + ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
+                        return (($("#expand")[0].checked ? "expand:vertical " : "") + ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
                     };
 
                     var initTabStrip = function () {

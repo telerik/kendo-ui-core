@@ -368,12 +368,12 @@
                 });
             });
 
-            asyncTest("expandVertical expands the element from 0 to its height", function() {
+            asyncTest("expand:vertical expands the element from 0 to its height", function() {
                 span.css({ position: "absolute", display: "block", height: 100 });
                 var initialHeight = 100;
 
                 span.kendoAnimate({
-                    effects: "expandVertical",
+                    effects: "expand:vertical",
                     duration: 20,
                     init: function () {
                         initialHeight = span.height();
@@ -386,6 +386,23 @@
                 });
             });
 
+            asyncTest("expand:horizontal expands the element from 0 to its width", function() {
+                span.css({ position: "absolute", display: "block", width: 100, height: 100 });
+                var initialWidth = 100;
+
+                span.kendoAnimate({
+                    effects: "expand:horizontal",
+                    duration: 20,
+                    init: function () {
+                        initialWidth = span.width();
+                    },
+                    complete: function () {
+                        ok(initialWidth == 0);
+                        ok(span.width() == 100);
+                        start();
+                    }
+                });
+            });
        </script>
     </body>
 </html>

@@ -344,7 +344,7 @@
             dataSource: {},
             animation: {
                 expand: {
-                    effects: "expandVertical",
+                    effects: "expand:vertical",
                     duration: 200,
                     show: true
                 },
