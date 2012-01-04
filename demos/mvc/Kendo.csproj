@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\MobileDeviceController.cs" />
     <Compile Include="Controllers\ThemeBuilderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StaticController.cs" />
@@ -409,8 +410,8 @@
     <Content Include="Views\mobile\tabstrip\index.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Views\Shared\_MobileLayout.cshtml" />
-    <Content Include="Views\Shared\MobileExampleLayout.cshtml" />
+    <Content Include="Views\MobileDevice\Index.cshtml" />
+    <Content Include="Views\Shared\NoLayout.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

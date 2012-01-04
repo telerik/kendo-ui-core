@@ -18,7 +18,7 @@ namespace Kendo.Extensions
                 string.Format("<a id='{0}' class='{1}' href='{2}'>{3}</a>",
                     suite,
                     cssClass + selectedClass,
-                    Url.RouteUrl("Suite", new { suite = suite, section = "overview", example = "index" }),
+                    Url.Content("~/" + suite),
                     title
                 )
             );

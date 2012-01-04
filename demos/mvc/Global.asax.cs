@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -18,10 +17,22 @@ namespace Kendo
             var suiteConstraint = new { suite = "(web|dataviz|mobile)" };
 
             routes.MapRoute(
+                "MobileDeviceIndex",
+                "m",
+                new { controller = "MobileDevice", action = "Index" }
+            );
+
+            routes.MapRoute(
+                "MobileDeviceExample",
+                "m/{section}/{example}.html",
+                new { controller = "MobileDevice", action = "Example" }
+            );
+
+           routes.MapRoute(
                 "Source",
                 "{suite}/{section}/{example}.src.html",
                 new { controller = "Source", action = "Index" },
-                suiteConstraint 
+                suiteConstraint
             );
 
             routes.MapRoute(
