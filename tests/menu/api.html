@@ -153,7 +153,7 @@
 
 <script type="text/javascript">
 
-        $("#Menu1").kendoMenu({ animation: false, select: Select, open: Open, close: Close });
+        $("#Menu1").kendoMenu({ animation: false, select: Select, open: Open, close: Close, hoverDelay: 0 });
 
         var menu;
 
@@ -161,18 +161,6 @@
             setup: function () {
                 menu = getMenu();
             }
-        });
-
-        test('click method should call preventDefault method', function() {
-            var item = getRootItem(3);
-            var isCalled = false;
-            menu.options.openOnClick = true;
-
-            var e = { currentTarget: item, preventDefault: function () { isCalled = true; }, stopPropagation: function () { } };
-
-            menu._click(e, item);
-
-            ok(isCalled);
         });
 
         test('click method should set handled flag and select event is only fired once', function() {
@@ -191,7 +179,7 @@
         test('hovering root item opens it and raises open event', function() {
             var item = getRootItem(1);
 
-            menu._mouseenter({}, $("li:first", item)[0]);
+            menu._mouseenter({ currentTarget: item[0] });
 
             ok(isOpenRaised);
         });
@@ -199,7 +187,7 @@
         test('leaving root item closes it and raises close event', function() {
             var item = getRootItem(1);
 
-            menu._mouseleave({}, $("li:first", item)[0]);
+            menu._mouseleave({ currentTarget: item[0] });
 
             ok(isCloseRaised);
         });
@@ -214,7 +202,24 @@
             ok(isSelectRaised);
         });
 
-        test('open should not open item is disabled', function() {
+        asyncTest('clicking on sub item should close the menu', function() {
+            var item = getRootItem(1);
+
+            menu._mouseenter({currentTarget: item[0]});
+
+            var e = { stopPropagation: function () {}, preventDefault: function () {} };
+
+            setTimeout(function () {
+                item.find('.k-item > .k-link').trigger('click');
+
+                setTimeout(function () {
+                    ok(item.find('.k-item:visible > .k-link').length == 0);
+                    start();
+                }, 1)
+            }, 1);
+        });
+
+        test('open should not open item if disabled', function() {
             var item = getRootItem(3);
 
             menu.open(item);
