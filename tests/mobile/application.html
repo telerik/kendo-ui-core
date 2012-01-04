@@ -44,9 +44,9 @@
                 }
             });
 
-            function setup(html) {
+            function setup(html, options) {
                 $("#qunit-fixture").html(html);
-                application = new kendo.mobile.Application($("#qunit-fixture"));
+                application = new kendo.mobile.Application($("#qunit-fixture"), options);
             }
 
             test("switches to local view", function() {
@@ -318,6 +318,14 @@
 
                 equal(application.element.find(".km-header").text(), "custom header", "Custom header is present");
                 equal(application.element.find(".km-footer").text(), "custom footer", "Custom footer is present");
+            });
+
+            test("applied default layout if passed", function() {
+            setup('<div data-role="view" id="page1">Page 1</div> \
+                    <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
+                    ', { layout: "foo" });
+
+                equal(application.element.find(".km-footer").text(), "footer", "Layout footer is present");
             });
 
             test("Applies view title attribute contents to layout view title", function() {
