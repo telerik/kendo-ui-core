@@ -280,7 +280,8 @@
         </if>
 
         {!
-            var ownOptions = data.comment.getTag("option")
+            var ownOptions = data.comment.getTag("option"),
+                exampleTitleRe = /^[\r\n]?_exampleTitle(.*)/i,
                 exampleRe = /[\r\n]?_example(([\r\n]|.)*)/i;
 
             if (defined(ownOptions) && ownOptions.length) {
@@ -294,12 +295,40 @@
                     ownOptions[idx].desc = ownOptions[idx].desc.replace(/^(\[[^\]]*\])?\s*(\<[^\>]*\>)?/i, "");
                     ownOptions[idx].isOptional = true;
 
-                    var example = exampleRe.exec(ownOptions[idx].desc);
+                    // extract examples and example titles from option descriptions
+                    var description = ownOptions[idx].desc,
+                        examples = [],
+                        exampleTitles = [];
 
-                    if (example) {
-                        ownOptions[idx].example = [example[1].trim()];
-                        ownOptions[idx].desc = ownOptions[idx].desc.replace(exampleRe, "");
+                    function extractExamples(content) {
+                        var allExamples = exampleRe.exec(content);
+
+                        if (allExamples) {
+                            exampleTitle = exampleTitleRe.exec(allExamples);
+
+                            if (exampleTitle) {
+                                exampleTitle = exampleTitle[1];
+                                allExamples = exampleRe.exec(allExamples[0].replace(exampleTitleRe, "").trim());
+                            } else {
+                                exampleTitle = "Example";
+                            }
+
+                            exampleTitles.push(exampleTitle);
+
+                            if (exampleRe.test(allExamples[1])) {
+                                examples.push(allExamples[1].substring(0, allExamples[1].indexOf("_example")).trim());
+                                extractExamples(allExamples[1]);
+                            } else {
+                                examples.push(allExamples[1].trim());
+                            }
+                        }
                     }
+
+                    extractExamples(description);
+
+                    ownOptions[idx].desc = description.replace(exampleRe, "");
+                    ownOptions[idx].example = examples;
+                    ownOptions[idx].exampleTitle = exampleTitles;
                 });
 
                 ownOptions.sort(makeSortby("name"));
@@ -509,7 +538,7 @@
             '<div class="desc"><%= desc %></div>' +
             '<% for (var exampleIdx = 0; typeof example != "undefined" && exampleIdx < example.length; exampleIdx++) { %>' +
                 '<div class="code-sample">' +
-                    '<h4 class="code-title">Example</h4>' +
+                    '<h4 class="code-title"><%= exampleTitle[exampleIdx] %></h4>' +
                     '<pre class="code prettyprint lang-js"><code><%= example[exampleIdx] %></code></pre>' +
                 '</div>' +
             '<% } %>' +
