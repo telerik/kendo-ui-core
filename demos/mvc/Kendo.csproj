@@ -120,6 +120,7 @@
     <Content Include="content\shared\styles\demos-web.png" />
     <Content Include="content\shared\styles\examples-offline.css" />
     <Content Include="content\shared\styles\examples.css" />
+    <Content Include="content\shared\styles\favicon.ico" />
     <Content Include="content\shared\styles\flowers.png" />
     <Content Include="content\shared\styles\html5icons.png" />
     <Content Include="content\shared\styles\kendo-logo-big.png" />
