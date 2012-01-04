@@ -23,25 +23,43 @@
             });
 
             test("triggers change when observable array changes", 1, function() {
-                var data = new kendo.data.ObservableArray([1, 2, 3]);
-                var dataSource = kendo.data.DataSource.create(data);
+                var dataSource = kendo.data.DataSource.create([1,2,3]);
+
+                dataSource.read();
 
                 dataSource.bind("change", function(){
                     ok("change is triggered");
                 });
 
-                data.push(4);
+                dataSource.data().push(4);
             });
 
             test("passes added items in the event parameter", 1, function() {
-                var data = new kendo.data.ObservableArray([1, 2, 3]);
-                var dataSource = kendo.data.DataSource.create(data);
+                var dataSource = kendo.data.DataSource.create([1,2,3]);
+
+                dataSource.read();
 
                 dataSource.bind("change", function(e){
                     equal(e.items[0], 4);
                 });
 
-                data.push(4);
+                dataSource.data().push(4);
+            });
+
+            test("creates observale array which contains model instances if model is specified", 1, function() {
+
+                var dataSource = new kendo.data.DataSource( {
+                    data: [{ id: 1}],
+                    schema: {
+                        model: {
+                            id: "id"
+                        }
+                    }
+                });
+
+                dataSource.read();
+
+                ok(dataSource.data()[0] instanceof kendo.data.Model);
             });
         </script>
     </body>
