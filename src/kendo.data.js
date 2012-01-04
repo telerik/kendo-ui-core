@@ -164,7 +164,8 @@
         identity = function(o) { return o; },
         getter = kendo.getter,
         stringify = kendo.stringify,
-        math = Math;
+        math = Math,
+        quoteRegExp = /(?=['\\])/g;
 
     var Comparer = {
         selector: function(field) {
@@ -218,18 +219,21 @@
         }
 
         return result;
-    }
+    };
 
     var operators = (function(){
-        var dateRegExp = /^\/Date\((.*?)\)\/$/,
-            quoteRegExp = /'/g;
+        var dateRegExp = /^\/Date\((.*?)\)\/$/;
+
+        function quote(value) {
+            return value.replace(quoteRegExp, "\\");
+        }
 
         function operator(op, a, b, ignore) {
             var date;
 
             if (b != undefined) {
                 if (typeof b === STRING) {
-                    b = b.replace(quoteRegExp, "\\'");
+                    b = quote(b);
                     date = dateRegExp.exec(b);
                     if (date) {
                         b = new Date(+date[1]);
@@ -277,6 +281,11 @@
                         b = b.toLowerCase();
                     }
                 }
+
+                if (b) {
+                    b = quote(b);
+                }
+
                 return a + ".lastIndexOf('" + b + "', 0) == 0";
             },
             endswith: function(a, b, ignore) {
@@ -286,6 +295,11 @@
                         b = b.toLowerCase();
                     }
                 }
+
+                if (b) {
+                    b = quote(b);
+                }
+
                 return a + ".lastIndexOf('" + b + "') == " + a + ".length - " + (b || "").length;
             },
             contains: function(a, b, ignore) {
@@ -295,6 +309,11 @@
                         b = b.toLowerCase();
                     }
                 }
+
+                if (b) {
+                    b = quote(b);
+                }
+
                 return a + ".indexOf('" + b + "') >= 0"
             }
         };
@@ -359,7 +378,7 @@
         }
 
         return  { expression: "(" + expressions.join(logic[expression.logic]) + ")", fields: fieldFunctions, operators: operatorFunctions };
-    }
+    };
 
     function normalizeSort(field, dir) {
         if (field) {
@@ -398,7 +417,7 @@
         isgreaterthanorequalto: "gte",
         greaterthanequal: "gte",
         ge: "gte"
-    }
+    };
 
     function normalizeOperator(expression) {
         var idx,
