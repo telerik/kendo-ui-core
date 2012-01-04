@@ -532,7 +532,7 @@
             });
         },
 
-        toggle: function (element, enable) {
+        _toggleDisabled: function (element, enable) {
             $(element)
                 .toggleClass(defaultState, enable)
                 .toggleClass(DISABLEDCLASS.substr(1), !enable);
@@ -573,15 +573,11 @@
          * @param {Boolean} enable Desired state
          */
         enable: function (element, state) {
-            this.toggle(element, state !== false);
+            this._toggleDisabled(element, state !== false);
         },
 
-        /**
-         * Disables PanelBar item/s
-         * @param {Selector} element Target element
-         */
         disable: function (element) {
-            this.toggle(element, false);
+            this._toggleDisabled(element, false);
         },
 
         /**

@@ -406,10 +406,6 @@
             this._toggleDisabled(element, state !== false);
         },
 
-        /**
-         * Disables TabStrip tab/s
-         * @param {Selector} element Target tab element
-         */
         disable: function (element) {
             this._toggleDisabled(element, false);
         },

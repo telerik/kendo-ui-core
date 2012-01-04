@@ -394,10 +394,6 @@
             this._toggleDisabled(element, enable !== false);
         },
 
-        /**
-         * Disables a Menu item
-         * @param {Selector} element Target element
-         */
         disable: function (element) {
             this._toggleDisabled(element, false);
         },
