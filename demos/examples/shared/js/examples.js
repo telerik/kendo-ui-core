@@ -53,7 +53,7 @@
         function navigationSection(dataSource) {
             return $("<ul class='nav' />")
                 .kendoPanelBar({
-                    animation: { open: { effects: 'fadeIn expand:vertical' } },
+                    animation: { expand: { effects: 'fadeIn expand:vertical' } },
                     expandMode: "single",
                     dataSource: dataSource
                 });

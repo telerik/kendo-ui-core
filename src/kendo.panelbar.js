@@ -83,14 +83,14 @@
      *  <p>
      *      By default, the PanelBar uses a slide animation to expand and reveal sub-items as
      *      the mouse hovers. Animations can be easily customized using configuration properties,
-     *      changing the open and close animation style. A PanelBar can also be configured to
-     *      only allow one panel to remain open at a time.
+     *      changing the expand and collapse animation style. A PanelBar can also be configured to
+     *      only allow one panel to remain expanded at a time.
      *  </p>
      * @exampleTitle Changing PanelBar animation and expandMode behavior
      * @example
      *  $("#panelbar").kendoPanelBar({
      *      animation: {
-     *          open : {effects: fadeIn}
+     *          expand : {effects: fadeIn}
      *      },
      *      expandMode: "single"
      *  });
@@ -333,8 +333,8 @@
          * @param {Selector} element DOM element
          * @param {Object} options Configuration options.
          * @option {Object} [animation] A collection of <b>Animation</b> objects, used to change default animations. A value of false will disable all animations in the widget.
-         * @option {Animation} [animation.open] The animation that will be used when expanding items.
-         * @option {Animation} [animation.close] The animation that will be used when collapsing items.
+         * @option {Animation} [animation.expand] The animation that will be used when expanding items.
+         * @option {Animation} [animation.collapse] The animation that will be used when collapsing items.
          * @option {String} [expandMode] <multiple> Specifies if PanelBar should collapse the already expanded item when expanding next item (mode: "single").
          */
         init: function(element, options) {
@@ -361,7 +361,7 @@
             that._updateClasses();
 
             if (options.animation === false) {
-                options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
+                options.animation = { expand: { show: true, effects: {} }, collapse: { hide:true, effects: {} } };
             }
 
             element
@@ -430,12 +430,12 @@
         options: {
             name: "PanelBar",
             animation: {
-                open: {
+                expand: {
                     effects: "expand:vertical",
                     duration: 200,
                     show: true
                 },
-                close: { // if close animation effects are defined, they will be used instead of open.reverse
+                collapse: { // if collapse animation effects are defined, they will be used instead of expand.reverse
                     duration: 200,
                     show: false,
                     hide: true
@@ -471,7 +471,7 @@
 
                     if (!useAnimation) {
                         animBackup = that.options.animation;
-                        that.options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
+                        that.options.animation = { expand: { show: true, effects: {} }, collapse: { hide:true, effects: {} } };
                     }
 
                     that._toggleItem(item, false, null);
@@ -504,7 +504,7 @@
 
                     if (!useAnimation) {
                         animBackup = that.options.animation;
-                        that.options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
+                        that.options.animation = { expand: { show: true, effects: {} }, collapse: { hide:true, effects: {} } };
                     }
 
                     that._toggleItem(item, true, null);
@@ -937,8 +937,8 @@
 
         _toggleGroup: function (element, visibility) {
             var that = this,
-                hasCloseAnimation = "effects" in that.options.animation.close,
-                closeAnimation = extend({}, that.options.animation.open);
+                hasCloseAnimation = "effects" in that.options.animation.collapse,
+                closeAnimation = extend({}, that.options.animation.expand);
 
             if (element.is(VISIBLE) != visibility) {
                 return;
@@ -960,10 +960,10 @@
             element
                 .kendoStop(true, true)
                 .kendoAnimate(extend( hasCloseAnimation && visibility ?
-                                          that.options.animation.close :
+                                          that.options.animation.collapse :
                                           !hasCloseAnimation && visibility ?
                                                extend(closeAnimation, { show: false, hide: true }) :
-                                               that.options.animation.open, {
+                                               that.options.animation.expand, {
                                                    reverse: !hasCloseAnimation && visibility
                                                }));
         },
