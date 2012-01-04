@@ -5,8 +5,16 @@
 
 @RenderSection("ExampleFooter", required:false)
 
+<div data-id="examples" data-role="layout">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-align="left" data-role="back-button">Back</a>
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+</div>
+
 <script>
     document.title = "@ViewBag.Title";
-
     window.kendoMobileApplication = new kendo.mobile.Application();
 </script>
