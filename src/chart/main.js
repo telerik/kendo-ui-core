@@ -1469,12 +1469,16 @@
                 result = [],
                 plotArea = axis.parent,
                 slotX,
-                slotY;
+                slotY,
+                from,
+                to;
 
             if (plotBands.length) {
                 result = map(plotBands, function(item) {
-                    item.from = item.from || MIN_VALUE;
-                    item.to = item.to || MAX_VALUE;
+                    from = defined(item.from) ? item.from : MIN_VALUE;
+                    to = defined(item.to) ? item.to : MAX_VALUE;
+                    item.from = math.min(from, to);
+                    item.to = math.max(from, to);
                     slotX = isVertical ? plotArea.axisX.getAxisLineBox()  : plotArea.axisX.getSlot(item.from, item.to);
                     slotY = isVertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.getAxisLineBox();
                     return view.createRect(
@@ -2061,7 +2065,7 @@
                 p2 = p1 + step,
                 length = to - from;
 
-            if (length > 0) {
+            if (length > 0 || (from == to && childrenCount == from)) {
                 p2 = p1 + (length * step);
             }
 
