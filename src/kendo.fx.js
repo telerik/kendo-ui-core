@@ -487,6 +487,8 @@
                                             height: element.height()
                                         });
 
+                                element.data(WIDTH, element[0].style.width);
+                                element.data(HEIGHT, element[0].style.height);
                                 var originalScale = element.data(SCALE);
 
                                 params = currentValue.match(cssParamsRegExp);
@@ -589,8 +591,7 @@
         fadeOut: {
             css: {
                 opacity: function() {
-                    var element = $(this);
-                    return element.data("reverse") && !this.style.opacity ? 0 : undefined;
+                    return $(this).data("reverse") && !this.style.opacity ? 0 : undefined;
                 }
             },
             setup: function(element, options) {
@@ -600,8 +601,7 @@
         fadeIn: {
             css: {
                 opacity: function() {
-                    var element = $(this);
-                    return !element.data("reverse") && !this.style.opacity ? 0 : undefined;
+                    return !$(this).data("reverse") && !this.style.opacity ? 0 : undefined;
                 }
             },
             setup: function(element, options) {
@@ -611,19 +611,23 @@
         zoomIn: {
             css: {
                 transform: function() {
-                    var element = $(this);
-                    return !element.data("reverse") && transitions ? "scale(.01)" : undefined;
+                    return !$(this).data("reverse") && transitions ? "scale(.01)" : undefined;
                 }
             },
             setup: function(element, options) {
                 return extend({ scale: options.reverse ? .01 : 1 }, options.properties)
+            },
+            teardown: function(element) {
+                if (element.data(SCALE)) { // Remove IE "zoom"
+                    setTimeout(function() { element.css(HEIGHT, AUTO).css(HEIGHT); }, 0);
+                    element.removeData(SCALE);
+                }
             }
         },
         zoomOut: {
             css: {
                 transform: function() {
-                    var element = $(this);
-                    return element.data("reverse") && transitions ? "scale(.01)" : undefined;
+                    return $(this).data("reverse") && transitions ? "scale(.01)" : undefined;
                 }
             },
             setup: function(element, options) {
