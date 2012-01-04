@@ -225,9 +225,7 @@
             if (!currentTransition) return;
 
             element.css(currentTransition.setup);
-
-            // Test if removing the timeout will improve the performance without glitches.
-//            setTimeout(function() {
+            element.css(TRANSITION);
             element.data(ABORT_ID, setTimeout(function() {
 
                 removeTransitionStyles(element);
@@ -237,8 +235,6 @@
             }, currentTransition.duration));
 
             element.css(currentTransition.CSS);
-            element.css(TRANSITION);
-//            }, 0);
         }
 
         extend(kendo.fx, {
