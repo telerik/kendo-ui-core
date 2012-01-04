@@ -110,8 +110,7 @@
 .km-android .km-switch-background,
 .km-android .km-slider-background
 {
-    margin: 0 !important;
-    background: transparent;
+    display: none;
 }
 
 .km-android .km-switch
@@ -124,24 +123,45 @@
 .km-android .km-switch-container
 {
     overflow: hidden;
-    border: none;
+    border: 0;
     width: 10rem;
     .border-radius(0);
     background: #232323;
-    margin-left: -.5em;
-    .transform(skew(30deg));
+    margin-left: -1em;
 }
 
-.km-android .km-switch-handle
+.km-android .km-switch-handle,
+.km-android .km-switch-handle:after
 {
     margin: 0;
-    border: none;
-    height: 100%;
-    width: 4em;
-    width: 4rem;
-    margin-right: -1em;
+    margin-right: 0;
     .border-radius(0);
     background: rgba(255,255,255,.3);
+    border-left: 1em solid #232323;
+    border-right: 1.4em solid transparent;
+    border-top: 2em solid transparent;
+    height: 0;
+    width: 0;
+    .box-shadow(none);
+    .box-sizing(border-box);
+}
+
+.km-android .km-switch-handle:before
+{
+    content: "\a0";
+    display: block;
+    position: absolute;
+    left: 1.4em;
+    left: 1.4rem;
+    top: -2em;
+    top: -2rem;
+    background-color: inherit;
+    border-top: 0;
+    border-left: 1.4em solid transparent;
+    border-right: 1em solid #232323;
+    border-bottom: 2em solid transparent;
+    height: 0;
+    width: 0;
 }
 
 .km-android .km-switch-off
@@ -154,13 +174,15 @@
 {
     font-size: .9em;
     left: 0;
-    width: 100%;
+    top: -2em;
+    top: -2rem;
+    width: 2.4rem;
+    width: 2.4rem;
     line-height: 1.6em;
     line-height: 1.6rem;
     text-align: center;
     text-shadow: none;
     position: absolute;
-    .transform(skew(-30deg));
 }
 
 .km-android .km-switch-off .km-switch-label-on,
@@ -191,7 +213,7 @@
     .box-shadow(0 3px 3px #000);
 }
 
-.km-android .km-list .km-button
+.km-android .km-detail
 {
     border: none;
     .box-shadow(none);
@@ -289,11 +311,10 @@
 }
 
 .km-android .km-switch,
-.km-android .km-tabstrip,
 .km-android .km-list > li,
 .km-android .km-switch-handle,
-.km-android .km-scroll-container,
-.km-android .km-switch-background
+.km-android .km-switch-wrapper,
+.km-android .km-scroll-container
 {
     -webkit-transform: translatez(0);
 }

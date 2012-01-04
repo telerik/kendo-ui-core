@@ -90,14 +90,9 @@
             }
         },
 
-        _wrap: function() {
-            var that = this,
-                style = that.options.style,
-                element = that.element,
-                span;
-
-            span = element.addClass("km-button")
-                          .children("span");
+        _style: function () {
+            var style = this.options.style,
+                element = this.element;
 
             if (style) {
                 var styles = style.split(" ");
@@ -105,6 +100,17 @@
                     element.addClass("km-" + this);
                 });
             }
+        },
+
+        _wrap: function() {
+            var that = this,
+                element = that.element,
+                span;
+
+            span = element.addClass("km-button")
+                          .children("span");
+
+            that._style();
 
             if (!span[0]) {
                 span = element.wrapInner("<span/>").children("span");
@@ -162,6 +168,7 @@
     var DetailButton = Button.extend(/** @lends kendo.mobile.ui.DetailButton.prototype */{
         options: {
             name: "DetailButton",
+            style: "",
             selector: kendo.roleSelector("detail-button")
         },
 
@@ -172,8 +179,22 @@
         * @param {Object} options Configuration options.
         */
         init: function(element, options) {
-            Button.fn.init.call(this, element, extend(options, { style: options.style + " detail" }));
+            debugger;
+            Button.fn.init.call(this, element, options);
+        },
+
+        _style: function () {
+            var style = this.options.style + " detail",
+                element = this.element;
+
+            if (style) {
+                var styles = style.split(" ");
+                $.each(styles, function () {
+                    element.addClass("km-" + this);
+                });
+            }
         }
+
     });
 
     ui.plugin(Button);
