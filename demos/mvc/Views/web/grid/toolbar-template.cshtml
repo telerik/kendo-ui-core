@@ -1,0 +1,72 @@
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <script type="text/x-kendo-template" id="template">
+                <div class="toolbar">
+                    <label class="category-label" for="category">Show products by category:</label>
+                    <input type="search" id="category" style="width: 230px"></input>
+                </div>
+            </script>
+            <script>
+                $(document).ready(function() {
+                    var grid = $("#grid").kendoGrid({
+                        dataSource: {
+                            type: "odata",
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Products"
+                            },
+                            pageSize: 15,
+                            serverPaging: true,
+                            serverSorting: true,
+                            serverFiltering: true
+                        },
+                        toolbar: kendo.template($("#template").html()),
+                        height: 450,
+                        sortable: true,
+                        pageable: true,
+                        columns: [ "ProductID", "ProductName", "UnitPrice", "QuantityPerUnit" ]
+                    });
+                    var dropDown = grid.find("#category").kendoDropDownList({
+                        dataTextField: "CategoryName",
+                        dataValueField: "CategoryID",
+                        autoBind: false,
+                        optionLabel: "All",
+                        dataSource: {
+                            type: "odata",
+                            severFiltering: true,
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Categories"
+                            }
+                        },
+                        change: function() {
+                            var value = this.value();
+                            if (value) {
+                                grid.data("kendoGrid").dataSource.filter({ field: "CategoryID", operator: "eq", value: parseInt(value) });
+                            } else {
+                                grid.data("kendoGrid").dataSource.filter({});
+                            }
+                        }
+                    });
+                });
+
+            </script>
+            <style scoped="scoped">
+                #grid .k-toolbar
+                {
+                    min-height: 27px;
+                }
+                .category-label
+                {
+                    vertical-align: middle;
+                    padding-right: .5em;
+                }
+                #category
+                {
+                    vertical-align: middle;
+                }
+                .toolbar {
+                    float: right;
+                    margin-right: .8em;
+                }
+            </style>
+        </div>

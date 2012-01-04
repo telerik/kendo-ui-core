@@ -1,0 +1,50 @@
+
+        <div id="example" class="k-content">
+            <input id="numerictextbox" />
+
+            <script>
+                $(document).ready(function() {
+                    $("#numerictextbox").kendoNumericTextBox();
+
+                    var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+                    var setValue = function () {
+                        numerictextbox.value($("#value").val());
+                    };
+
+                    $("#enable").click(function() {
+                        numerictextbox.enable();
+                    });
+
+                    $("#disable").click(function() {
+                        numerictextbox.enable(false);
+                    });
+
+                    $("#value").kendoNumericTextBox({
+                        change: setValue
+                    });
+
+                    $("#set").click(setValue);
+
+                    $("#get").click(function() {
+                        alert(numerictextbox.value());
+                    });
+                });
+           </script>
+            <div class="configuration" style="width: 210px">
+                <span class="configHead">Configuration</span>
+                <span class="configTitle">API Functions</span>
+                <ul class="options">
+                    <li>
+                       <button id="get" class="k-button">Get value</button>
+                   </li>
+                   <li>
+                       <input id="value" value="10" style="float:none" />
+                       <button id="set" class="k-button">Set value</button>
+                   </li>
+                    <li>
+                        <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
+                    </li>
+                </ul>
+           </div>
+        </div>

@@ -1,0 +1,34 @@
+
+        <div id="example" class="k-content">
+            <input id="input"/>
+
+            <script>
+                $(document).ready(function() {
+                    function onOpen() {
+                        kendoConsole.log("event: open");
+                    };
+
+                    function onClose() {
+                        kendoConsole.log("event: close");
+                    };
+
+                    function onChange() {
+                        kendoConsole.log("event: change");
+                    };
+
+                    var data = [
+                        {text: "Item1", value:"1"},
+                        {text: "Item2", value:"2"},
+                        {text: "Item3", value:"3"}
+                    ];
+
+                    $("#input").kendoDropDownList({
+                        dataSource: data,
+                        change: onChange,
+                        close: onClose,
+                        open: onOpen
+                    });
+                });
+            </script>
+        </div>
+        <div class="console"></div>

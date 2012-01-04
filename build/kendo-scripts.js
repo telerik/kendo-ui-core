@@ -4,8 +4,7 @@ var fs = require("fs"),
     kendoBuild = require("./kendo-build.js");
 
 // Configuration ==============================================================
-var SCRIPTS = "src/",
-    EXAMPLES_SCRIPTS = "demos/examples/shared/js/";
+var SCRIPTS = "src/";
 
 var multipartScripts = [{
     output:   SCRIPTS + "kendo.chart.js",
@@ -13,13 +12,7 @@ var multipartScripts = [{
               SCRIPTS + "chart/svg.js",
               SCRIPTS + "chart/vml.js",
               SCRIPTS + "chart/themes.js"]
-    }, {
-    output:   EXAMPLES_SCRIPTS + "kendo.examples.js",
-    inputs: [ EXAMPLES_SCRIPTS + "examples.js",
-              EXAMPLES_SCRIPTS + "console.js",
-              EXAMPLES_SCRIPTS + "people.js",
-              EXAMPLES_SCRIPTS + "prettify.js"
-    ]}
+    }
 ];
 
 var allScripts = [

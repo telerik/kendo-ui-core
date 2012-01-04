@@ -1,0 +1,166 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta content="width=device-width" name="viewport">
+        <meta charset="utf-8">
+        <title>KendoUI Demos</title>
+        <script>var _gaq=[['_setAccount','UA-23480938-1'],['_setDomainName','.kendoui.com'],['_setAllowHash',!1],['_trackPageview'],['_trackPageLoadTime']];(function(d,s){var g=d.createElement(s),e=d.getElementsByTagName(s)[0];g.src="//www.google-analytics.com/ga.js";e.parentNode.insertBefore(g,e);}(document,"script"))</script>
+        <link rel="shortcut icon" href="@Url.Content("~/content/shared/styles/favicon.ico")"/>
+        <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
+    </head>
+    <body class="overview">
+        <div id="exceptFooterWrap">
+        <div id="exceptFooter">
+            <div id="header">
+                <div id="navi-back">
+                    <div class="centerWrap">
+                        <div id="navi-top">
+                            <ul>
+                                <li><a title="" href="http://www.kendoui.com/blogs">Blogs</a></li>
+                                <li><a title="" href="http://www.kendoui.com/forums">Forums</a></li>
+                                <li><a title="" href="http://www.kendoui.com/get-help">Support &amp; Resources</a></li>
+                                <li><a title="" href="http://www.kendoui.com/roadmap.aspx">Roadmap</a></li>
+                                <li><a title="" href="http://www.kendoui.com/about">About</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="centerWrap">
+                    <h1><a id="logo" href="http://www.kendoui.com">Kendo</a></h1>
+                    <div id="navi">
+                        <ul>
+                            <li style="margin-left: 0;"><a accesskey="1" title="Link to home page" href="http://www.kendoui.com/web">Web</a></li>
+                            <li><a href="http://www.kendoui.com/dataviz">DataViz</a></li>
+                            <li><a href="http://www.kendoui.com/mobile">Mobile</a></li>
+                            <li class="active">
+                                <a href="http://demos.kendoui.com">Demos</a>
+                                <em class="shadow"></em>
+                                <em></em>
+                            </li>
+                            <li><a id="download" onclick="_gaq.push(['_trackPageview','/download-button']);" href="http://www.kendoui.com/get-kendo-ui">Get Kendo UI</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="flowerWrap">
+                <div class="flowers">
+                    <div class="centerWrap">
+                        <div class="learnBlock">
+                            <h1>See Kendo UI in action</h1>
+                            Explore the dozens of examples to learn key features and techniques.<br>
+                            Review the sample code, relevant CSS styles, methods and events. <br>
+                            Switch themes to alter the look-and-feel.<br />
+                            <a class="bigButton" href="web/">Launch Demos</a>
+                        </div>
+                        <img src="@Url.Content("~/content/shared/styles/overview.png")" alt="Kendo UI Overview" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="navmainWrap" class="floatWrap centerWrap">
+                <div id="main">
+                    <div id="exampleWrap">
+                        <div id="example" class="k-content">
+                            <ul class="itemsOutline">
+                                <li class="web-box">
+                                    <h2><a href="web/"><strong>Kendo UI</strong> Web Widgets &amp; Framework</a></h2>
+                                    Learn how to use each of the Kendo UI widgets, including quick API reference
+                                    <a href="web/">Web demos &raquo;</a>
+                                </li>
+                                <li class="dataviz-box">
+                                    <h2><a href="dataviz/"><strong>Kendo UI</strong> DataViz Widgets</a></h2>
+                                    Render high-quality data visualizations in the browser using SVG &amp; VML.
+                                    <a href="dataviz/">DataViz demos &raquo;</a>
+                                </li>
+                                <li class="mobile-box">
+                                    <h2><a href="mobile/"><strong>Kendo UI</strong> Mobile Widgets</a></h2>
+                                    Native UI widgets for building HTML5- powered apps and sites for modern mobile devices.
+                                    <a href="mobile/">Mobile Demos &raquo;</a>
+                                </li>
+                            </ul>
+
+                            <div class="floatWrap feature themebuilder-box">
+                                <a href="themebuilder/" class="launch-image">
+                                    <img src="@Url.Content("~/content/shared/styles/themebuilder.png")" alt="ThemeBuilder" />                                    
+                                </a>
+                                <h2>ThemeBuilder</h2>
+                                <p>The ThemeBuilder is a powerful visual tool for quickly customizing the look-and-feel of Kendo UI widgets. Using a simple
+                                point-and-click configuration wizard, anyone can transform Kendo UI CSS to precisely match their site stylesheet. The ThemeBuilder
+                                can also be used to directly modify the styles of Kendo UI widgets as they exist in your sites and apps with an easy to use
+                                a bookmarklet.</p>
+                                <a href="themebuilder/" class="launch-button">Try it now!</a>
+                            </div>
+
+                            <div class="floatWrap feature aeroviewr-box">
+                                <a href="http://www.kendoui.com/aeroviewr/" class="launch-image">
+                                    <img src="@Url.Content("~/content/shared/styles/aeroviewr.png")" alt="AeroViewr" />
+                                </a>
+                                <h2>Aeroviewr</h2>
+                                <p>This rich HTML5 integration demo shows Kendo UI in action to interact with Flickr photo streams. The demo features several Kendo UI
+                                controls, Kendo UI DataSource, and other Kendo UI framework elements. Check it out online and in mobile browsers to see how Kendo UI helps
+                                create universally accessible apps.</p>
+                                <a href="http://www.kendoui.com/aeroviewr/" class="launch-button">Launch</a>
+                            </div>
+
+                            <div style="text-align:center;">
+                                <div class="overview-box mobile-info">
+                                    <h2>Mobile Device Compatibility</h2>
+                                    <p>Kendo UI is built to work seamlessly across desktop browsers and mobile touchscreen devices. Kendo UI offers full support for touch
+                                    interactions and is tested against the following mobile platform browsers:</p>
+                                    <ul>
+                                        <li>Android 2.0+</li>
+                                        <li>iOS 3.0+</li>
+                                        <li>BlackBerry OS 6.0+</li>
+                                        <li>webOS 2.2+</li>
+                                    </ul>
+                                </div>
+
+                                <div class="overview-box browser-info">
+                                    <h2>Supported browsers</h2>
+                                    <ul>
+                                        <li>Internet Explorer 7+</li>
+                                        <li>Firefox 3+</li>
+                                        <li>Safari 4+</li>
+                                        <li>Chrome</li>
+                                        <li>Opera 10+</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div id="footer">
+        <div class="floatWrap centerWrap">
+            <ul>
+                <li><a href="http://www.kendoui.com">Home</a></li>
+                <li><a href="http://www.kendoui.com/web">Web</a></li>
+                <li><a href="http://www.kendoui.com/dataviz">DataViz</a></li>
+                <li><a href="http://www.kendoui.com/mobile">Mobile</a></li>
+                <li><a href="http://demos.kendoui.com/">Demos</a></li>
+                <li><a href="http://www.kendoui.com/blogs">Blogs</a></li>
+                <li><a href="http://www.kendoui.com/forums">Forums</a></li>
+                <li><a href="http://www.kendoui.com/get-help">Support &amp; Resources</a></li>
+                <li><a href="http://www.kendoui.com/roadmap.aspx">Roadmap</a></li>
+                <li><a href="http://www.kendoui.com/about">About</a></li>
+                <li><a href="http://www.kendoui.com/get-kendo-ui">Get Kendo UI</a></li>
+                <li><a href="http://twitter.com/#!/KendoUI" class="icon tw" title="Follow us on Twitter">Follow us on Twitter</a></li>
+                <li><a href="http://www.facebook.com/KendoUI" class="icon fb" title="Become a fan on Facebook">Become a fan on Facebook</a></li>
+                <li><a href="https://plus.google.com/117798269023828336983/posts" class="icon gplus" title="Follow us on Google+">Follow us on Google+</a></li>
+                <li><a href="http://www.kendoui.com/blogs/blogs.rss" class="icon rss" title="Subscribe to our RSS feed">Subscribe to our RSS feed</a></li>
+            </ul>
+            <p id="telerik"><a href="http://www.telerik.com/">Kendo UI is powered by Telerik</a></p>
+            <p id="copy">Copyright &copy; @(DateTime.Now.Year) Telerik Inc. All rights reserved.</p>
+        </div>
+        </div>
+    </body>
+</html>

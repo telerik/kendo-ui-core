@@ -11,7 +11,7 @@
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/layout.less">
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/android4.less">
 
     <script src="../../../styles/mobile/less.js"></script>
     <script src="../../../src/jquery.js"></script>
@@ -30,41 +30,41 @@
     <script src="../../../src/kendo.mobile.application.js"></script>
 
     <style type="text/css">
-        .km-ios .pink
+        .km-root .pink
         {
             background-color: #f9f;
         }
 
-        .km-ios .pink:active,
-        .km-ios .pink .km-state-active
+        .km-root .pink:active,
+        .km-root .pink .km-state-active
         {
             background-color: #c6c;
         }
 
-        .km-ios .green
+        .km-root .green
         {
             background-color: #3c3;
         }
 
-        .km-ios .green:active,
-        .km-ios .green .km-state-active
+        .km-root .green:active,
+        .km-root .green .km-state-active
         {
             background-color: #090;
         }
 
-        .km-ios .fuchsia
+        .km-root .fuchsia
         {
             background-color: fuchsia;
         }
 
-        .km-ios .fuchsia:active,
-        .km-ios .fuchsia .km-state-active
+        .km-root .fuchsia:active,
+        .km-root .fuchsia .km-state-active
         {
             background-color: #c0c;
         }
 
-        .km-ios .km-radiogroup,
-        .km-ios .km-radiogroup:active
+        .km-root .km-radiogroup,
+        .km-root .km-radiogroup:active
         {
             background-color: transparent;
         }
@@ -131,8 +131,8 @@
             <div class="sliderValue">0</div>
             <span class="km-slider" style="float: right; clear: both;"></span>
             <ul data-role="listview" data-style="inset">
-                <li>Albania<a href="#" class="km-detail km-contactadd"></a></li>
-                <li>Australia<a href="#" class="km-detail km-detaildisclose"></a></li>
+                <li>Albania<a href="#" data-role="button" data-style="contactadd"></a></li>
+                <li>Australia<a href="#" data-role="button" data-style="detaildisclose"></a></li>
             </ul>
             <ul data-role="listview" data-type="group">
                 <li>A
@@ -143,8 +143,8 @@
                 </li>
                 <li>B
                     <ul>
-                        <li>Bangladesh<a href="#" class="km-detail km-rowinsert"></a></li>
-                        <li>Bulgaria<a href="#" class="km-detail km-rowdelete"></a></li>
+                        <li>Bangladesh<a href="#" data-role="button" data-style="rowinsert"></a></li>
+                        <li>Bulgaria<a href="#" data-role="button" data-style="rowdelete"></a></li>
                     </ul>
                 </li>
             </ul>

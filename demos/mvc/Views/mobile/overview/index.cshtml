@@ -1,0 +1,25 @@
+<div data-role="view">
+@foreach (string category in ViewBag.Navigation.Keys)
+{
+    if (ViewBag.Navigation.Keys.Count > 1)
+    {
+        <h3>@category</h3>
+    }
+    <ul data-role="listview" data-type="group" data-style="inset">
+    @foreach (NavigationWidget widget in ViewBag.Navigation[category])
+    {
+        <li> @widget.Text
+            <ul>
+                @foreach (NavigationExample example in widget.Items)
+                {
+                    <li>
+                        <a data-role="listview-link" class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")"
+                            href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+    </ul>
+}
+</div>

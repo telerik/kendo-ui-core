@@ -1,8 +1,8 @@
 (function($, undefined) {
     var kendo = window.kendo,
-        ui = kendo.ui,
-        MobileWidget = ui.MobileWidget,
         mobile = kendo.mobile,
+        ui = mobile.ui,
+        Widget = ui.Widget,
         support = kendo.support,
         touch = support.touch,
         os = support.mobileOS,
@@ -10,39 +10,52 @@
         MOUSEUP = support.mouseup,
         CLICK = "click",
         proxy = $.proxy;
+
     /**
-    * @name kendo.ui.MobileButton.Description
-    * @section The MobileButton widget navigates between mobile Application views when pressed.
+    * @name kendo.mobile.ui.Button.Description
+    * @section The Button widget navigates between mobile Application views when pressed.
     *
     * <h3>Getting Started</h3>
-    * The Kendo MobileApplication will automatically initialize a MobileButton for every element with <code>role</code> data attribute set to <code>button</code> present in the views/layouts markup.
+    * The Kendo mobile Application will automatically initialize a mobile Button for every element with <code>role</code> data attribute set to <code>button</code> present in the views/layouts markup.
     * Alternatively, it can be initialized using a jQuery selector. The button element may be either <code>A</code> or <code>BUTTON</code> element.
     *
-    * @exampleTitle Initialize Kendo MobileButton based on role data attribute.
+    * @exampleTitle Initialize Kendo mobile Button based on role data attribute.
     * @example
     * <a href="#foo" data-role="button">Foo</a>
     *
-    * @exampleTitle Initialize Kendo MobileButton using a jQuery selector
+    * @exampleTitle Initialize Kendo mobile Button using a jQuery selector
     * @example
     * var button = $("#button").kendoMobileButton();
     *
     * @section
     *
-    * <h3>Customizing MobileButton appearance</h3>
-    * // TODO
+    * <h3>Customizing mobile Button appearance</h3>
+    * Every Kendo Mobile Button color can be customized by simply setting its background-color (either inline or by using a CSS selector with specificity of 20+.
+    * @exampleTitle Initialize a green Kendo mobile Button
+    * @example
+    * <a href="#foo" data-role="button" style="background-color: green">Foo</a>
+    *
+    * @section
+    * You can target platforms separately with their respective root classes.
+    * @exampleTitle Initialize a green Kendo mobile Button in iOS and a red one in Android
+    * @example
+    * <style>
+    *     .km-ios .checkout { background-color: green; }
+    *     .km-android .checkout { background-color: red; }
+    * </style>
+    * <a href="#foo" data-role="button" class="checkout">Foo</a>
     */
-
-    var MobileButton = MobileWidget.extend(/** @lends kendo.ui.MobileButton.prototype */{
+    var Button = Widget.extend(/** @lends kendo.mobile.ui.Button.prototype */{
         /**
         * @constructs
-        * @extends kendo.ui.MobileWidget
+        * @extends kendo.mobile.ui.Widget
         * @param {DomElement} element DOM element.
         * @param {Object} options Configuration options.
         */
         init: function(element, options) {
             var that = this;
 
-            MobileWidget.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             options = that.options;
 
@@ -55,19 +68,20 @@
             that.bind([
                 /**
                  * Fires when button is clicked
-                 * @name kendo.ui.MobileButton#click
+                 * @name kendo.mobile.ui.Button#click
                  * @event
                  * @param {Event} e
                  * @param {jQueryObject} e.target The clicked DOM element
                  */
-              CLICK
+                 CLICK
             ], options);
         },
 
         options: {
-            name: "MobileButton",
+            name: "Button",
             style: "",
-            selector: kendo.roleSelector("button")
+            selector: kendo.roleSelector("button"),
+            enable: true
         },
 
         _release: function(e) {
@@ -86,7 +100,10 @@
                           .children("span");
 
             if (style) {
-                element.addClass("km-" + style);
+                var styles = style.split(" ");
+                $.each(styles, function () {
+                    element.addClass("km-" + this);
+                });
             }
 
             if (!span[0]) {
@@ -99,19 +116,67 @@
         }
     });
 
-    var BackButton = MobileButton.extend({
+    /**
+    * @name kendo.mobile.ui.BackButton.Description
+    * @section The BackButton widget navigates to the previous mobile View when pressed.
+    *
+    * @exampleTitle Initialize Kendo mobile BackButton based on role data attribute.
+    * @example
+    * <a data-role="back-button">Foo</a>
+    *
+    * @exampleTitle Initialize Kendo mobile BackButton using a jQuery selector
+    * @example
+    * var button = $("#button").kendoMobileBackButton();
+    */
+    var BackButton = Button.extend(/** @lends kendo.mobile.ui.BackButton.prototype */{
         options: {
-            name: "MobileBackButton",
+            name: "BackButton",
             style: "back",
-            selector: kendo.roleSelector("back-button"),
+            selector: kendo.roleSelector("back-button")
         },
 
+        /**
+        * @constructs
+        * @extends kendo.mobile.ui.Button
+        * @param {DomElement} element DOM element.
+        * @param {Object} options Configuration options.
+        */
         init: function(element, options) {
-            MobileButton.fn.init.call(this, element, options);
+            Button.fn.init.call(this, element, options);
             this.element.attr("href", ":back");
         }
     });
 
-    ui.plugin(MobileButton);
+    /**
+    * @name kendo.mobile.ui.DetailButton.Description
+    * @section The DetailButton widget navigates to a detail mobile View when pressed.
+    *
+    * @exampleTitle Initialize Kendo mobile DetailButton based on role data attribute.
+    * @example
+    * <a data-role="detail-button">Foo</a>
+    *
+    * @exampleTitle Initialize Kendo mobile DetailButton using a jQuery selector
+    * @example
+    * var button = $("#button").kendoMobileDetailButton();
+    */
+    var DetailButton = Button.extend(/** @lends kendo.mobile.ui.DetailButton.prototype */{
+        options: {
+            name: "DetailButton",
+            selector: kendo.roleSelector("detail-button")
+        },
+
+        /**
+        * @constructs
+        * @extends kendo.mobile.ui.Button
+        * @param {DomElement} element DOM element.
+        * @param {Object} options Configuration options.
+        */
+        init: function(element, options) {
+            Button.fn.init.call(this, element, extend(options, { style: options.style + " detail" }));
+        }
+    });
+
+    ui.plugin(Button);
     ui.plugin(BackButton);
+    ui.plugin(DetailButton);
 })(jQuery);

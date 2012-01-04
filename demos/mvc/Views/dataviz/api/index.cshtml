@@ -1,0 +1,102 @@
+
+        <div id="example" class="k-content absConf">
+            <div class="configuration" style="width:170px;">
+                <span class="configHead">Configuration</span>
+                <span class="configTitle">API Functions</span>
+                <ul class="options">
+                    <li>
+                        <input id="typeColumn" name="seriesType"
+                                type="radio" value="column" checked="checked" autocomplete="off" />
+                        <label for="typeColumn">Columns</label>
+                    </li>
+                    <li>
+                        <input id="typeBar" name="seriesType"
+                                type="radio" value="bar" autocomplete="off" />
+                        <label for="typeBar">Bars</label>
+                    </li>
+                    <li>
+                        <input id="typeLine" name="seriesType"
+                                type="radio" value="line" autocomplete="off" />
+                        <label for="typeLine">Lines</label>
+                    </li>
+                    <li>
+                        <input id="stack" type="checkbox" autocomplete="off" checked="checked" />
+                        <label for="stack">Stacked</label>
+                    </li>
+                </ul>
+                <p>
+                    <strong>refresh()</strong> will be called on each configuration change
+                </p>
+            </div>
+            <div class="chart-wrapper">
+                <div id="chart"></div>
+            </div>
+            <script>
+                function createChart() {
+                    $("#chart").kendoChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        title: {
+                            text: "Internet Users"
+                        },
+                        legend: {
+                            position: "bottom"
+                        },
+                        seriesDefaults: {
+                            type: "column",
+                            stack: true
+                        },
+                        series: [{
+                            name: "United States",
+                            data: [67.96, 68.93, 75, 74, 78],
+
+                            // Line chart marker type
+                            markers: { type: "square" }
+                        }, {
+                            name: "World",
+                            data: [15.7, 16.7, 20, 23.5, 26.6]
+                        }],
+                        valueAxis: {
+                            labels: {
+                                format: "{0}%"
+                            }
+                        },
+                        categoryAxis: {
+                            categories: [2005, 2006, 2007, 2008, 2009]
+                        },
+                        tooltip: {
+                            visible: true,
+                            format: "{0}%"
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        createChart();
+
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                    }, 400);
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        createChart();
+                    });
+
+                    $(".configuration").live("change", refresh);
+                });
+
+                function refresh() {
+                    var chart = $("#chart").data("kendoChart"),
+                        series = chart.options.series,
+                        type = $("input[name=seriesType]:checked").val(),
+                        stack = $("#stack").prop("checked");
+
+                    for (var i = 0, length = series.length; i < length; i++) {
+                        series[i].stack = stack;
+                        series[i].type = type;
+                    };
+
+                    chart.refresh();
+                }
+            </script>
+        </div>

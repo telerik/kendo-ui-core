@@ -1,0 +1,102 @@
+@import "common.less";
+
+/* Platform specific BlackBerry CSS */
+
+.km-blackberry,
+.km-blackberry .km-button
+{
+    font: normal 1em Arial, Helvetica, sans-serif;
+}
+
+.km-blackberry .km-toolbar,
+.km-blackberry .km-button,
+.km-blackberry .km-radiogroup,
+.km-blackberry .km-tabstrip
+{
+    font: normal 1em Arial, Helvetica, sans-serif;
+    color: #333;
+    text-shadow: none;
+    border-color: #fff;
+    background-color: #d3d7d7;
+    -webkit-box-shadow: none;
+    background-image: linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
+}
+
+.km-blackberry .km-badge
+{
+    -webkit-box-shadow: none;
+}
+
+.km-blackberry .km-button:not([disabled]):active,
+.km-blackberry .km-radiogroup .km-state-active
+{
+    color: #FFF;
+    border-color: #3f9fe5;
+    background-color: #1b6ec0;
+    background-image: linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
+}
+
+.km-blackberry .km-radiogroup
+{
+    font-size: 1em;
+}
+
+.km-blackberry .km-toolbar,
+.km-blackberry .km-navbar
+{
+    background-color: #181E17;
+    background-image: linear-gradient(top, rgba(43, 49, 45, 1), rgba(24, 30, 23, 0) 100%);
+}
+
+.km-blackberry .km-tabstrip
+{
+    padding: .2em;
+    background-color: #333;
+    background-image: linear-gradient(top, rgba(188, 188, 188, 0.8), rgba(51, 51, 51, 0) 50%);
+}
+
+.km-blackberry .km-tabstrip .km-badge
+{
+    top: auto;
+    bottom: -10px;
+}
+
+.km-blackberry .km-tabstrip .km-button
+{
+    .border-radius(5pt);
+    padding: .1em;
+    margin: 0 1%;
+}
+
+.km-blackberry .km-tabstrip .km-text
+{
+    display: none;
+}
+
+.km-blackberry .km-tabstrip .km-button .km-icon
+{
+    opacity: 0.5;
+    background: transparent url('images/atabimg.png') no-repeat .5em 50%;
+    background-size: auto 100%;
+}
+
+.km-blackberry .km-tabstrip .km-button:nth-child(1) .km-icon
+{
+    background-position: -1% 50%;
+}
+
+.km-blackberry .km-tabstrip .km-button:nth-child(2) .km-icon
+{
+    background-position: 33.5% 50%;
+}
+
+.km-blackberry .km-tabstrip .km-button:nth-child(3) .km-icon
+{
+    background-position: 67% 50%;
+}
+
+.km-blackberry .km-tabstrip .km-button:nth-child(4) .km-icon
+{
+    background-position: 100.5% 50%;
+}
+

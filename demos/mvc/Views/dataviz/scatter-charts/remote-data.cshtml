@@ -1,0 +1,73 @@
+
+        <div id="example" class="k-content absConf">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    <strong>Note:</strong>
+                    Security restrictions in Chrome prevent this
+                    example from working when the page is
+                    loaded from the file system (via file:// protocol).
+                </p>
+            </div>
+            <div class="chart-wrapper">
+                <div id="chart"></div>
+            </div>
+            <script>
+                function createChart() {
+                    $("#chart").kendoChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "../js/price-performance.json",
+                                    dataType: "json"
+                                }
+                            },
+                            sort: {
+                                field: "year",
+                                dir: "asc"
+                            }
+                        },
+                        legend: {
+                            visible: false
+                        },
+                        seriesDefaults: {
+                            type: "scatter"
+                        },
+                        series: [{
+                            xField: "price",
+                            yField: "performance"
+                        }],
+                        xAxis: {
+                            max: 1000,
+                            labels: {
+                                format: "${0}"
+                            }
+                        },
+                        yAxis: {
+                            min: 80,
+                            labels: {
+                                format: "{0}%"
+                            }
+                        },
+                        tooltip: {
+                            visible: true,
+                            template: "#= '<b>$' + value.x + ' / ' + dataItem.family + ' ' + dataItem.model + ': ' + value.y + '%</b>' #"
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        createChart();
+
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                    }, 400);
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        createChart();
+                    });
+                });
+            </script>
+        </div>

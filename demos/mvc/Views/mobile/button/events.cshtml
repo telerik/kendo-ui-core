@@ -1,0 +1,10 @@
+<div data-role="view" id="home">
+    <a id="mobile-button" style="margin: 1rem;">Click me!</a>
+    <div class="console"></div>
+</div>
+
+<script>
+    $("#mobile-button").kendoMobileButton().data("kendoMobileButton").bind("click", function() {
+        kendoConsole.log("button was clicked!");
+    });
+</script>

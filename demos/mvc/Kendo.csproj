@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9CC59141-B498-4364-9422-D8429D4BE4FD}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kendo</RootNamespace>
+    <AssemblyName>Kendo</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Fizzler.Systems.HtmlAgilityPack, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Fizzler.Systems.HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.3.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\MobileDeviceController.cs" />
+    <Compile Include="Controllers\ThemeBuilderController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StaticController.cs" />
+    <Compile Include="Controllers\SourceController.cs" />
+    <Compile Include="Controllers\SuiteController.cs" />
+    <Compile Include="Extensions\UrlExtensions.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NavigationExample.cs" />
+    <Compile Include="Models\NavigationWidget.cs" />
+    <Compile Include="Models\ScriptGroups.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Data\dataviz.nav.json" />
+    <None Include="App_Data\mobile.nav.json" />
+    <None Include="App_Data\web.nav.json" />
+    <Content Include="content\dataviz\js\kendo.examples.nav.js" />
+    <Content Include="content\dataviz\overview\bar.png" />
+    <Content Include="content\dataviz\overview\line.png" />
+    <Content Include="content\dataviz\overview\overlay.png" />
+    <Content Include="content\dataviz\overview\pie.png" />
+    <Content Include="content\dataviz\overview\scatter.png" />
+    <Content Include="content\shared\js\console.js" />
+    <Content Include="content\shared\js\examples.js" />
+    <Content Include="content\shared\js\people.js" />
+    <Content Include="content\shared\js\prettify.js" />
+    <Content Include="content\shared\styles\aeroviewr.png" />
+    <Content Include="content\shared\styles\bg-glossy.png" />
+    <Content Include="content\shared\styles\browsers.png" />
+    <Content Include="content\shared\styles\chart-wrapper.png" />
+    <Content Include="content\shared\styles\collage.png" />
+    <Content Include="content\shared\styles\demos-dataviz.png" />
+    <Content Include="content\shared\styles\demos-mobile.png" />
+    <Content Include="content\shared\styles\demos-web.png" />
+    <Content Include="content\shared\styles\examples-offline.css" />
+    <Content Include="content\shared\styles\examples.css" />
+    <Content Include="content\shared\styles\favicon.ico" />
+    <Content Include="content\shared\styles\flowers.png" />
+    <Content Include="content\shared\styles\html5icons.png" />
+    <Content Include="content\shared\styles\kendo-logo-big.png" />
+    <Content Include="content\shared\styles\kendo-logo.png" />
+    <Content Include="content\shared\styles\launch-themebuilder.png" />
+    <Content Include="content\shared\styles\Menu\thumbSprite.png" />
+    <Content Include="content\shared\styles\overview.png" />
+    <Content Include="content\shared\styles\platforms.png" />
+    <Content Include="content\shared\styles\sprite.png" />
+    <Content Include="content\shared\styles\suite.css" />
+    <Content Include="content\shared\styles\themebuilder.png" />
+    <Content Include="content\shared\styles\world-map.png" />
+    <Content Include="content\web\16x16\Chart.png" />
+    <Content Include="content\web\16x16\ComboBox.png" />
+    <Content Include="content\web\16x16\Grid.png" />
+    <Content Include="content\web\16x16\Menu.png" />
+    <Content Include="content\web\16x16\PanelBar.png" />
+    <Content Include="content\web\16x16\Slider.png" />
+    <Content Include="content\web\16x16\Splitter.png" />
+    <Content Include="content\web\16x16\TabStrip.png" />
+    <Content Include="content\web\16x16\TreeView.png" />
+    <Content Include="content\web\16x16\Upload.png" />
+    <Content Include="content\web\24x24\Chart.png" />
+    <Content Include="content\web\24x24\ComboBox.png" />
+    <Content Include="content\web\24x24\Grid.png" />
+    <Content Include="content\web\24x24\Menu.png" />
+    <Content Include="content\web\24x24\PanelBar.png" />
+    <Content Include="content\web\24x24\Slider.png" />
+    <Content Include="content\web\24x24\Splitter.png" />
+    <Content Include="content\web\24x24\TabStrip.png" />
+    <Content Include="content\web\24x24\TreeView.png" />
+    <Content Include="content\web\24x24\Upload.png" />
+    <Content Include="content\web\32x32\Chart.png" />
+    <Content Include="content\web\32x32\ComboBox.png" />
+    <Content Include="content\web\32x32\Grid.png" />
+    <Content Include="content\web\32x32\Menu.png" />
+    <Content Include="content\web\32x32\PanelBar.png" />
+    <Content Include="content\web\32x32\Slider.png" />
+    <Content Include="content\web\32x32\Splitter.png" />
+    <Content Include="content\web\32x32\TabStrip.png" />
+    <Content Include="content\web\32x32\TreeView.png" />
+    <Content Include="content\web\32x32\Upload.png" />
+    <Content Include="content\web\48x48\Chart.png" />
+    <Content Include="content\web\48x48\ComboBox.png" />
+    <Content Include="content\web\48x48\Grid.png" />
+    <Content Include="content\web\48x48\Menu.png" />
+    <Content Include="content\web\48x48\PanelBar.png" />
+    <Content Include="content\web\48x48\Slider.png" />
+    <Content Include="content\web\48x48\Splitter.png" />
+    <Content Include="content\web\48x48\TabStrip.png" />
+    <Content Include="content\web\48x48\TreeView.png" />
+    <Content Include="content\web\48x48\Upload.png" />
+    <Content Include="content\web\Ajax\Editor.png" />
+    <Content Include="content\web\Ajax\Grid.png" />
+    <Content Include="content\web\Ajax\Scheduler.png" />
+    <Content Include="content\web\autocomplete\shipping.png" />
+    <Content Include="content\web\calendar\cake.png" />
+    <Content Include="content\web\calendar\calendar.png" />
+    <Content Include="content\web\calendar\cocktail.png" />
+    <Content Include="content\web\calendar\exhibition.png" />
+    <Content Include="content\web\calendar\party.png" />
+    <Content Include="content\web\calendar\specialDays.png" />
+    <Content Include="content\web\combobox\tShirt.png" />
+    <Content Include="content\web\contacts.gif" />
+    <Content Include="content\web\contactsItems.gif" />
+    <Content Include="content\web\datasource\remote-data\twitter-icon.png" />
+    <Content Include="content\web\datasource\xml-data\bulletproof-web-design.png" />
+    <Content Include="content\web\datasource\xml-data\eloquent-javascript.png" />
+    <Content Include="content\web\datasource\xml-data\handcrafted-css.png" />
+    <Content Include="content\web\datasource\xml-data\high-performance-javascript.png" />
+    <Content Include="content\web\datasource\xml-data\javascript-patterns.png" />
+    <Content Include="content\web\datasource\xml-data\javascript-the-good-parts.png" />
+    <Content Include="content\web\datasource\xml-data\responsive-web-design.png" />
+    <Content Include="content\web\datasource\xml-data\secrets-of-the-javascript-ninja.png" />
+    <Content Include="content\web\datasource\xml-data\stunning-css3.png" />
+    <Content Include="content\web\datepicker\mailSettings.png" />
+    <Content Include="content\web\delete.png" />
+    <Content Include="content\web\dragdrop\drag-clue.png" />
+    <Content Include="content\web\dragdrop\draggable.png" />
+    <Content Include="content\web\dropdownlist\cap.png" />
+    <Content Include="content\web\edit.png" />
+    <Content Include="content\web\favicon.png" />
+    <Content Include="content\web\folder.png" />
+    <Content Include="content\web\foldersList.gif" />
+    <Content Include="content\web\globalization\cultures\kendo.culture.bg-BG.js" />
+    <Content Include="content\web\globalization\cultures\kendo.culture.de-DE.js" />
+    <Content Include="content\web\globalization\cultures\kendo.culture.en-GB.js" />
+    <Content Include="content\web\globalization\cultures\kendo.culture.en-US.js" />
+    <Content Include="content\web\globalization\cultures\kendo.culture.fr-FR.js" />
+    <Content Include="content\web\grid\clientsDb.png" />
+    <Content Include="content\web\integration\jquery.tmpl.js" />
+    <Content Include="content\web\integration\knockout-1.2.1.js" />
+    <Content Include="content\web\mail.gif" />
+    <Content Include="content\web\mailDeletedItems.gif" />
+    <Content Include="content\web\mailfolder.gif" />
+    <Content Include="content\web\mailInbox.gif" />
+    <Content Include="content\web\mailItems.gif" />
+    <Content Include="content\web\mailOutbox.gif" />
+    <Content Include="content\web\mailPersonalFolders.gif" />
+    <Content Include="content\web\mailSearch.gif" />
+    <Content Include="content\web\mailSent.gif" />
+    <Content Include="content\web\menu\header.jpg" />
+    <Content Include="content\web\menu\map.png" />
+    <Content Include="content\web\Mvc\Grid.png" />
+    <Content Include="content\web\Mvc\Menu.png" />
+    <Content Include="content\web\Mvc\PanelBar.png" />
+    <Content Include="content\web\Mvc\TabStrip.png" />
+    <Content Include="content\web\notes.gif" />
+    <Content Include="content\web\notesItems.gif" />
+    <Content Include="content\web\orm-comparison.png" />
+    <Content Include="content\web\page_white_text.png" />
+    <Content Include="content\web\panelbar\andrew.jpg" />
+    <Content Include="content\web\panelbar\nancy.jpg" />
+    <Content Include="content\web\panelbar\orgFoot.png" />
+    <Content Include="content\web\panelbar\orgHead.png" />
+    <Content Include="content\web\panelbar\robert.jpg" />
+    <Content Include="content\web\slider\climateController.png" />
+    <Content Include="content\web\slider\eqBack.png" />
+    <Content Include="content\web\Sl\Chart.gif" />
+    <Content Include="content\web\Sl\Docking.gif" />
+    <Content Include="content\web\Sl\GridView.gif" />
+    <Content Include="content\web\Sl\Scheduler.gif" />
+    <Content Include="content\web\Suites\ajax.png" />
+    <Content Include="content\web\Suites\mvc.png" />
+    <Content Include="content\web\Suites\orm.png" />
+    <Content Include="content\web\Suites\rep.png" />
+    <Content Include="content\web\Suites\sitefinity.png" />
+    <Content Include="content\web\Suites\sl.png" />
+    <Content Include="content\web\Suites\test.png" />
+    <Content Include="content\web\Suites\win.png" />
+    <Content Include="content\web\Suites\wpf.png" />
+    <Content Include="content\web\tabstrip\forecast.png" />
+    <Content Include="content\web\tabstrip\weather.png" />
+    <Content Include="content\web\tasks.gif" />
+    <Content Include="content\web\tasksItems.gif" />
+    <Content Include="content\web\validator\ticketsOnline.png" />
+    <Content Include="content\web\wave.png" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\SourceLayout.cshtml" />
+    <Content Include="Views\Shared\ExampleLayout.cshtml" />
+    <Content Include="Views\ThemeBuilder\Index.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\web\autocomplete\api.cshtml" />
+    <Content Include="Views\web\autocomplete\events.cshtml" />
+    <Content Include="Views\web\autocomplete\index.cshtml" />
+    <Content Include="Views\web\autocomplete\remotedatasource.cshtml" />
+    <Content Include="Views\web\autocomplete\template.cshtml" />
+    <Content Include="Views\web\calendar\api.cshtml" />
+    <Content Include="Views\web\calendar\events.cshtml" />
+    <Content Include="Views\web\calendar\index.cshtml" />
+    <Content Include="Views\web\calendar\template.cshtml" />
+    <Content Include="Views\web\combobox\api.cshtml" />
+    <Content Include="Views\web\combobox\events.cshtml" />
+    <Content Include="Views\web\combobox\index.cshtml" />
+    <Content Include="Views\web\combobox\remotedatasource.cshtml" />
+    <Content Include="Views\web\combobox\template.cshtml" />
+    <Content Include="Views\web\datasource\index.cshtml" />
+    <Content Include="Views\web\datasource\local-operations.cshtml" />
+    <Content Include="Views\web\datasource\remote-data.cshtml" />
+    <Content Include="Views\web\datasource\remote-operations.cshtml" />
+    <Content Include="Views\web\datasource\xml-data.cshtml" />
+    <Content Include="Views\web\datepicker\api.cshtml" />
+    <Content Include="Views\web\datepicker\events.cshtml" />
+    <Content Include="Views\web\datepicker\index.cshtml" />
+    <Content Include="Views\web\datepicker\rangeselection.cshtml" />
+    <Content Include="Views\web\datepicker\template.cshtml" />
+    <Content Include="Views\web\dragdrop\events.cshtml" />
+    <Content Include="Views\web\dragdrop\index.cshtml" />
+    <Content Include="Views\web\dropdownlist\api.cshtml" />
+    <Content Include="Views\web\dropdownlist\events.cshtml" />
+    <Content Include="Views\web\dropdownlist\index.cshtml" />
+    <Content Include="Views\web\dropdownlist\remotedatasource.cshtml" />
+    <Content Include="Views\web\dropdownlist\template.cshtml" />
+    <Content Include="Views\web\globalization\index.cshtml" />
+    <Content Include="Views\web\grid\api.cshtml" />
+    <Content Include="Views\web\grid\detailtemplate.cshtml" />
+    <Content Include="Views\web\grid\editing.cshtml" />
+    <Content Include="Views\web\grid\events.cshtml" />
+    <Content Include="Views\web\grid\from-table.cshtml" />
+    <Content Include="Views\web\grid\hierarchy.cshtml" />
+    <Content Include="Views\web\grid\index.cshtml" />
+    <Content Include="Views\web\grid\local-data.cshtml" />
+    <Content Include="Views\web\grid\remote-data.cshtml" />
+    <Content Include="Views\web\grid\rowtemplate.cshtml" />
+    <Content Include="Views\web\grid\selection.cshtml" />
+    <Content Include="Views\web\grid\sorting.cshtml" />
+    <Content Include="Views\web\grid\toolbar-template.cshtml" />
+    <Content Include="Views\web\grid\virtualization-local-data.cshtml" />
+    <Content Include="Views\web\grid\virtualization-remote-data.cshtml" />
+    <Content Include="Views\web\integration\index.cshtml" />
+    <Content Include="Views\web\integration\jquery-templates.cshtml" />
+    <Content Include="Views\web\menu\animation.cshtml" />
+    <Content Include="Views\web\menu\api.cshtml" />
+    <Content Include="Views\web\menu\events.cshtml" />
+    <Content Include="Views\web\menu\index.cshtml" />
+    <Content Include="Views\web\numerictextbox\api.cshtml" />
+    <Content Include="Views\web\numerictextbox\events.cshtml" />
+    <Content Include="Views\web\numerictextbox\index.cshtml" />
+    <Content Include="Views\web\overview\index.cshtml" />
+    <Content Include="Views\web\panelbar\ajax.cshtml" />
+    <Content Include="Views\web\panelbar\animation.cshtml" />
+    <Content Include="Views\web\panelbar\api.cshtml" />
+    <Content Include="Views\web\panelbar\events.cshtml" />
+    <Content Include="Views\web\panelbar\index.cshtml" />
+    <Content Include="content\web\panelbar\ajax\ajaxContent1.html" />
+    <Content Include="content\web\panelbar\ajax\ajaxContent2.html" />
+    <Content Include="content\web\panelbar\ajax\ajaxContent3.html" />
+    <Content Include="content\web\panelbar\ajax\ajaxContent4.html" />
+    <Content Include="content\web\panelbar\ajax\ajaxContent5.html" />
+    <Content Include="Views\web\slider\api.cshtml" />
+    <Content Include="Views\web\slider\events.cshtml" />
+    <Content Include="Views\web\slider\index.cshtml" />
+    <Content Include="Views\web\splitter\ajax.cshtml" />
+    <Content Include="Views\web\splitter\api.cshtml" />
+    <Content Include="Views\web\splitter\events.cshtml" />
+    <Content Include="Views\web\splitter\index.cshtml" />
+    <Content Include="content\web\splitter\ajax\ajaxContent1.html" />
+    <Content Include="content\web\splitter\ajax\ajaxContent2.html" />
+    <Content Include="Views\web\tabstrip\ajax.cshtml" />
+    <Content Include="Views\web\tabstrip\animation.cshtml" />
+    <Content Include="Views\web\tabstrip\api.cshtml" />
+    <Content Include="Views\web\tabstrip\events.cshtml" />
+    <Content Include="Views\web\tabstrip\index.cshtml" />
+    <Content Include="Views\web\templates\expressions.cshtml" />
+    <Content Include="Views\web\templates\index.cshtml" />
+    <Content Include="Views\web\treeview\api.cshtml" />
+    <Content Include="Views\web\treeview\dragdrop.cshtml" />
+    <Content Include="Views\web\treeview\events.cshtml" />
+    <Content Include="Views\web\treeview\index.cshtml" />
+    <Content Include="Views\web\timepicker\api.cshtml" />
+    <Content Include="Views\web\timepicker\events.cshtml" />
+    <Content Include="Views\web\timepicker\index.cshtml" />
+    <Content Include="Views\web\timepicker\rangeselection.cshtml" />
+    <Content Include="Views\web\upload\api.cshtml" />
+    <Content Include="Views\web\upload\async.cshtml" />
+    <Content Include="Views\web\upload\blank.cshtml" />
+    <Content Include="Views\web\upload\events.cshtml" />
+    <Content Include="Views\web\upload\index.cshtml" />
+    <Content Include="Views\web\validator\index.cshtml" />
+    <Content Include="Views\web\window\actions.cshtml" />
+    <Content Include="Views\web\window\ajax.cshtml" />
+    <Content Include="Views\web\window\api.cshtml" />
+    <Content Include="Views\web\window\events.cshtml" />
+    <Content Include="Views\web\window\index.cshtml" />
+    <Content Include="content\web\window\ajax\ajaxContent.html" />
+    <Content Include="Views\dataviz\api\events.cshtml" />
+    <Content Include="Views\dataviz\api\index.cshtml" />
+    <Content Include="Views\dataviz\bar-charts\column.cshtml" />
+    <Content Include="Views\dataviz\bar-charts\index.cshtml" />
+    <Content Include="Views\dataviz\bar-charts\local-data.cshtml" />
+    <Content Include="Views\dataviz\bar-charts\remote-data.cshtml" />
+    <Content Include="Views\dataviz\bar-charts\stacked-bar.cshtml" />
+    <Content Include="Views\dataviz\line-chart\index.cshtml" />
+    <Content Include="Views\dataviz\line-chart\local-data.cshtml" />
+    <Content Include="Views\dataviz\line-chart\remote-data.cshtml" />
+    <Content Include="Views\dataviz\overview\high-performance.cshtml" />
+    <Content Include="Views\dataviz\overview\index.cshtml" />
+    <Content Include="Views\dataviz\pie-chart\index.cshtml" />
+    <Content Include="Views\dataviz\pie-chart\local-data.cshtml" />
+    <Content Include="Views\dataviz\pie-chart\pie-labels.cshtml" />
+    <Content Include="Views\dataviz\pie-chart\remote-data.cshtml" />
+    <Content Include="Views\dataviz\scatter-charts\index.cshtml" />
+    <Content Include="Views\dataviz\scatter-charts\local-data.cshtml" />
+    <Content Include="Views\dataviz\scatter-charts\remote-data.cshtml" />
+    <Content Include="Views\dataviz\scatter-charts\scatter-line.cshtml" />
+    <Content Include="content\web\tabstrip\ajax\ajaxContent1.html" />
+    <Content Include="content\web\tabstrip\ajax\ajaxContent2.html" />
+    <Content Include="content\web\tabstrip\ajax\ajaxContent3.html" />
+    <Content Include="content\web\tabstrip\ajax\ajaxContent4.html" />
+    <Content Include="content\web\tabstrip\ajax\ajaxContent5.html" />
+    <Content Include="Views\mobile\button\events.cshtml" />
+    <Content Include="Views\mobile\button\index.cshtml" />
+    <Content Include="Views\mobile\navbar\index.cshtml" />
+    <Content Include="Views\mobile\navbar\layout.cshtml" />
+    <Content Include="Views\mobile\overview\index.cshtml" />
+    <Content Include="Views\mobile\tabstrip\index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\MobileDevice\Index.cshtml" />
+    <Content Include="Views\Shared\NoLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="content\dataviz\js\price-performance.json" />
+    <None Include="content\dataviz\js\spain-electricity.json" />
+    <None Include="content\web\16x16\Thumbs.db" />
+    <None Include="content\web\24x24\Thumbs.db" />
+    <None Include="content\web\32x32\Thumbs.db" />
+    <None Include="content\web\48x48\Thumbs.db" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>40083</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
