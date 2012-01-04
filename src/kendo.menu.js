@@ -27,6 +27,23 @@
      * @example
      * var menu = $("#menu").kendoMenu();
      *
+     * @exampleTitle Initialize Kendo Menu using JSON data object
+     * @example
+     * $("#menu").kendoMenu({
+     *     dataSource: [
+     *         {
+     *             text: "Menu Item 1",
+     *             items: [
+     *                 { text: "Sub Menu Item 1" },
+     *                 { text: "Sub Menu Item 2" }
+     *             ]
+     *         },
+     *         {
+     *             text: "Menu Item 2"
+     *         }
+     *     ]
+     * });
+     *
      * @section
      *  <h3>Customizing Menu Animations</h3>
      *  <p>
@@ -276,7 +293,7 @@
          * @option {Object} [animation] A collection of <b>Animation</b> objects, used to change default animations. A value of false will disable all animations in the widget.
          * @option {Animation} [animation.open] The animation that will be used when opening sub menus.
          * @option {Animation} [animation.close] The animation that will be used when closing sub menus.
-         * @option {String} [orientation] <"horizontal"> Root menu orientation.
+         * @option {String} [orientation] <"horizontal"> Root menu orientation. Could be horizontal or vertical.
          * @option {Boolean} [openOnClick] <false> Specifies that the root sub menus will be opened on item click.
          * @option {Boolean} [closeOnClick] <true> Specifies that sub menus should close after item selection (provided they won't navigate).
          * @option {Number} [hoverDelay] <100> Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving.

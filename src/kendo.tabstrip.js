@@ -10,7 +10,8 @@
      *  </p>
      *  <h3>Getting Started</h3>
      *
-     * @exampleTitle In a HTML div, create an HTML unordered list for tabs, HTML divs for content
+     * @exampleTitle In a HTML div, create an HTML unordered list for tabs, HTML divs for content, If you don't
+     * have content, you can init the TabStrip from an UL element.
      * @example
      *  <div id="tabstrip">
      *      <ul>
@@ -21,9 +22,25 @@
      *      <div>Second Tab Content</div>
      *  </div>
      *
-     * @exampleTitle Initialize the TabStrip using a jQuery selector to target the outer div
+     * @exampleTitle Initialize the TabStrip using a jQuery selector to target the outer DIV or UL
      * @example
      * var tabStrip = $("#tabstrip").kendoTabStrip();
+     *
+     * @exampleTitle Initialize the TabStrip using JSON data object
+     * @example
+     * $("#tabstrip").kendoTabStrip({
+     *     dataSource: [
+     *         {
+     *             text: "Tab 1",
+     *             content: "Tab 1 Content"
+     *         },
+     *         {
+     *             text: "Tab 2",
+     *             content: "Tab 2 Content"
+     *         }
+     *     ]
+     * });
+     *
      * @section
      *  <p>
      *      Tabs do not have to have content. If a tab should have no content, it is safe to omit the HTML div.
