@@ -416,6 +416,10 @@ var categories = {
                     url: "window/ajax.html"
                 },
                 {
+                    text: "Animation effects",
+                    url: "window/animation.html"
+                },
+                {
                     text: "Events",
                     url: "window/events.html"
                 },

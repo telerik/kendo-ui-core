@@ -579,6 +579,7 @@
             var that = this,
                 wrapper = that.wrapper,
                 options = that.options,
+                showOptions = options.animation.open,
                 hideOptions = options.animation.close,
                 modalWindows,
                 shouldHideOverlay, overlay;
@@ -604,8 +605,10 @@
                     windowObject(modalWindows.eq(modalWindows.length - 2))._overlay(true);
                 }
 
+                console.log(hideOptions.effects, showOptions.effects);
                 wrapper.kendoStop().kendoAnimate({
-                    effects: hideOptions.effects,
+                    effects: hideOptions.effects || showOptions.effects,
+                    reverse: hideOptions.reverse === true,
                     duration: hideOptions.duration,
                     complete: function() {
                         wrapper.hide();
