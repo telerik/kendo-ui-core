@@ -186,6 +186,7 @@
     <Content Include="content\web\combobox\tShirt.png" />
     <Content Include="content\web\contacts.gif" />
     <Content Include="content\web\contactsItems.gif" />
+    <Content Include="content\web\datasource\books.xml" />
     <Content Include="content\web\datasource\remote-data\twitter-icon.png" />
     <Content Include="content\web\datasource\xml-data\bulletproof-web-design.png" />
     <Content Include="content\web\datasource\xml-data\eloquent-javascript.png" />
@@ -259,7 +260,9 @@
     <Content Include="content\web\validator\ticketsOnline.png" />
     <Content Include="content\web\wave.png" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -413,6 +416,8 @@
     </Content>
     <Content Include="Views\MobileDevice\Index.cshtml" />
     <Content Include="Views\Shared\NoLayout.cshtml" />
+    <None Include="content\web\datasource\internet-users.json" />
+    <None Include="content\web\datasource\top250movies.json" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
