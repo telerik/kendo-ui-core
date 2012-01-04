@@ -467,11 +467,12 @@
          * panelBar.expand("#Item1");
          */
         expand: function (element, useAnimation) {
+            element = $(element);
             var that = this,
                 animBackup = {};
             useAnimation = useAnimation !== false;
 
-            $(element).each(function (index, item) {
+            element.each(function (index, item) {
                 item = $(item);
                 var groups = item.find(GROUPS).add(item.find(CONTENTS));
 
