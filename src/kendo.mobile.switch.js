@@ -185,12 +185,14 @@
         _position: function(position, margin) {
             var that = this;
             that.handle.css(TRANSFORMSTYLE, "translatex(" + position + "px)");
-            that.background.css(MARGINLEFT, margin);
+            if (that._visibleBack)
+                that.background.css(MARGINLEFT, margin);
         },
 
         _start: function(e) {
             var that = this;
 
+            that._visibleBack = that.background.is(":visible");
             that._initial = that._location(e);
 
             DOCUMENT
