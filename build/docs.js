@@ -6,7 +6,7 @@ var fs = require("fs"),
 function build() {
     var jsdoctoolkit = require("./node-jsdoc-toolkit/app/nodemodule").jsdoctoolkit;
 
-    console.log("building documentation...");
+    console.log("Building documentation");
 
     var params = [
         // output directory
