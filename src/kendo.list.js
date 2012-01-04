@@ -156,10 +156,12 @@
                 list = that.list,
                 options = that.options,
                 wrapper = that.wrapper,
-                computedWidth = window.getComputedStyle ?
-                                    parseFloat(window.getComputedStyle(wrapper[0], null).getPropertyValue("width")) :
-                                    wrapper.outerWidth(),
+                computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0,
+                computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth(),
                 width;
+
+            if (computedStyle && ($.browser.mozilla || $.browser.msie)) // getComputedStyle returns different box in FF and IE.
+                computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
 
             that.popup = new ui.Popup(list, {
                 anchor: wrapper,
