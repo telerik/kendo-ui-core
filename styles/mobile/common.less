@@ -251,7 +251,7 @@
 }
 
 .km-badge,
-.km-list .km-button
+.km-detail
 {
     text-decoration: none;
     display: inline-block;
@@ -278,7 +278,7 @@
     background-clip: padding-box;
 }
 
-.km-list .km-button
+.km-detail
 {
     position: relative;
     float: right;
@@ -288,8 +288,8 @@
     line-height: .8rem;
 }
 
-.km-list .km-button:after,
-.km-list .km-button:before
+.km-detail:after,
+.km-detail:before
 {
     width: .3em;
     height: .3em;
@@ -300,7 +300,7 @@
     vertical-align: middle;
 }
 
-.km-list .km-detaildisclose:after
+.km-detaildisclose:after
 {
     margin-left: -.2em;
     margin-left: ~"-.2rem";
@@ -308,13 +308,13 @@
     border-width: .24rem .24rem 0 0;
     .transform(rotate(45deg));
 }
-.km-list .km-detaildisclose:before { display: none; }
+.km-detaildisclose:before { display: none; }
 
-.km-list .km-rowdelete:after,
-.km-list .km-rowinsert:after,
-.km-list .km-rowinsert:before,
-.km-list .km-contactadd:after,
-.km-list .km-contactadd:before
+.km-rowdelete:after,
+.km-rowinsert:after,
+.km-rowinsert:before,
+.km-contactadd:after,
+.km-contactadd:before
 {
     width: .6em;
     height: .1em;
@@ -325,14 +325,14 @@
     margin-left: ~"-.28rem";
 }
 
-.km-list .km-rowdelete:after
+.km-rowdelete:after
 {
     margin-left: -.28em;
     margin-left: ~"-.38rem";
 }
 
-.km-list .km-rowinsert:after,
-.km-list .km-contactadd:after
+.km-rowinsert:after,
+.km-contactadd:after
 {
     width: .1em;
     height: .6em;

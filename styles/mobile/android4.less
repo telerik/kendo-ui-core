@@ -139,7 +139,7 @@
     background: rgba(255,255,255,.3);
     border-left: 1em solid #232323;
     border-right: 1.4em solid transparent;
-    border-top: 2em solid transparent;
+    border-bottom: 2em solid transparent;
     height: 0;
     width: 0;
     .box-shadow(none);
@@ -153,13 +153,11 @@
     position: absolute;
     left: 1.4em;
     left: 1.4rem;
-    top: -2em;
-    top: -2rem;
     background-color: inherit;
-    border-top: 0;
+    border-bottom: 0;
     border-left: 1.4em solid transparent;
     border-right: 1em solid #232323;
-    border-bottom: 2em solid transparent;
+    border-top: 2em solid transparent;
     height: 0;
     width: 0;
 }
@@ -174,10 +172,8 @@
 {
     font-size: .9em;
     left: 0;
-    top: -2em;
-    top: -2rem;
-    width: 2.4rem;
-    width: 2.4rem;
+    width: 2.6rem;
+    width: 2.6rem;
     line-height: 1.6em;
     line-height: 1.6rem;
     text-align: center;
@@ -198,7 +194,7 @@
 }
 
 .km-android .km-badge,
-.km-android .km-list .km-button
+.km-android .km-detail
 {
     background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     color: #FFF;
@@ -220,12 +216,12 @@
     background: transparent;
 }
 
-.km-android .km-list .km-rowinsert
+.km-android .km-rowinsert
 {
     background-color: #24870D;
 }
 
-.km-android .km-list .km-rowdelete
+.km-android .km-rowdelete
 {
     background-color: #B01B1A;
 }
