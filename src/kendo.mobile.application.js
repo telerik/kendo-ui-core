@@ -153,11 +153,14 @@
      *
      * @section
      * <p>Due to the OS UI design conventions, The header and footer switch positions when an Android device is detected, as usually the footer hosts a MobileTabstrip widget, which is located at the bottom of the screen on iOS, and at the top of the screen in Android applications.  </p>
+     *
      * @section
      * <h3>Layout</h3>
      * <p>A mobile layout is used to share headers and footers between multiple views. A layout contains header and/or footer element, which are applied to any view that uses it.
      * A view is defined by setting an element <code>role</code> data attribute to <code>layout</code>. A view is associated with a layout by setting its <code>layout</code> data attribute value
      * to the value of the layout's <code>id</code> data attribute.</p>
+     *
+     * <p>An Application default layout can be set, by passing the layout id in the options parameter of the constructor.</p>
      *
      * @exampleTitle Views with Layout
      * @example
@@ -168,6 +171,17 @@
      *   <div data-role="header">Header</div>
      *   <div data-role="footer">Footer</div>
      * </div>
+     *
+     * @exampleTitle Default Application layout
+     * <div data-role="view">Bar</div>
+     *
+     * <div data-role="layout" data-id="foo">
+     *   <div data-role="header">Header</div>
+     * </div>
+     *
+     * <script>
+     *      new kendo.mobile.Application($(document.body), { layout: "foo" });
+     * </script>
      *
      * @section
      *
@@ -237,18 +251,28 @@
      */
     var Application = kendo.Observable.extend(/** @lends kendo.mobile.Application.prototype */{
         /**
-        * @constructs
-        * @extends kendo.Observable
-        * @param {DomElement} element DOM element.
-        * @param {Object} options Configuration options.
-        */
+         * @constructs
+         * @extends kendo.Observable
+         * @param {DomElement} element DOM element.
+         * @param {Object} options Configuration options.
+         * @option {String} [layout] <> The id of the default application layout.
+         * _example
+         * <div data-role="view">Bar</div>
+         *
+         * <div data-role="layout" data-id="foo">
+         *   <div data-role="header">Header</div>
+         * </div>
+         *
+         * <script>
+         *      new kendo.mobile.Application($(document.body), { layout: "foo" });
+         * </script>
+         */
         init: function(element, options) {
             var that = this;
 
             that.options = options || {};
             kendo.Observable.fn.init.call(that, that.options);
             that.element = element ? $(element) : $(document.body);
-
 
             that.bind([
             /**
@@ -377,8 +401,9 @@
 
         _createView: function(element) {
             var that = this,
-                layout;
-            if (layout = element.data("layout")) {
+                layout  = element.data("layout") || that.options.layout;
+
+            if (layout) {
                 layout = that.layouts[layout];
             }
 
