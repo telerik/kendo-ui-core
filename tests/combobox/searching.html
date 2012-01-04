@@ -23,15 +23,16 @@
 
             var ComboBox = kendo.ui.ComboBox,
                 data = [{text: "Foo", value: 1}, {text:"Bar", value:2}, {text:"Baz", value:3}],
+                CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
             $.fn.press = function(key) {
                 return this.trigger({ type: "keypress", keyCode: key } );
-            }
+            };
 
             $.fn.pressKeyDown = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
-            }
+            };
 
 
             module("kendo.ui.ComboBox searching", {
@@ -247,7 +248,7 @@
                 combobox.open();
                 combobox.text("b");
                 combobox.search("b");
-                combobox.ul.children().eq(1).click();
+                combobox.ul.children().eq(1).trigger(CLICK);
 
                 setTimeout(function() {
                     combobox.open();
@@ -411,7 +412,7 @@
                 }, 500);
             });
 
-            asyncTest("no filter should focus first item", function() {
+            asyncTest("failed filter should not focus first item", function() {
                 var combobox = new ComboBox(input, {
                     dataSource: data
                 });

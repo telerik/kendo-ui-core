@@ -203,7 +203,10 @@
                     },
                     blur: function () {
                         that._bluring = setTimeout(function () {
-                            that._blur();
+                            if (kendo.support.touch)
+                                that._change();
+                            else
+                                that._blur();
                             that.wrapper.removeClass(FOCUSED);
                         }, 100);
                     }

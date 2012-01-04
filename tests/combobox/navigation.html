@@ -24,6 +24,7 @@
                 data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
                 SELECTED = "k-state-selected",
                 keys = kendo.keys,
+                CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
             QUnit.config.testTimeout = 800;
@@ -31,7 +32,7 @@
 
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
-            }
+            };
 
             module("kendo.ui.ComboBox selection", {
                 setup: function() {
@@ -87,7 +88,7 @@
                     start();
                 });
 
-                combobox._arrow.click();
+                combobox._arrow.trigger(CLICK);
             });
 
             asyncTest("empty input should clear focused item", function() {
@@ -120,7 +121,7 @@
             asyncTest("click first li should update text and value", function() {
                 var combobox = input.kendoComboBox(data).data("kendoComboBox");
                 combobox.open();
-                combobox.ul.children().eq(1).click();
+                combobox.ul.children().eq(1).trigger(CLICK);
 
                 setTimeout(function() {
                     equal(combobox.text(), data[1].text);
@@ -161,7 +162,7 @@
                 });
 
                 combobox.popup.open();
-                combobox.ul.children().eq(1).click();
+                combobox.ul.children().eq(1).trigger(CLICK);
             });
 
             test("select should select li by index", function() {
@@ -180,7 +181,7 @@
                 combobox.dataSource.read();
                 combobox.select(1);
 
-                combobox._arrow.click();
+                combobox._arrow.trigger(CLICK);
 
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
             });
@@ -192,7 +193,7 @@
                 combobox.select(1);
                 combobox.select(0);
 
-                combobox._arrow.click();
+                combobox._arrow.trigger(CLICK);
 
                 equal(combobox.ul.children("." + SELECTED).length, 1);
             });

@@ -20,6 +20,7 @@
         <ol id="qunit-tests"></ol>
         <script>
             var AutoComplete = kendo.ui.AutoComplete,
+                CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
             $.fn.press = function(key) {
@@ -106,7 +107,7 @@
                 ok(!changeWasCalled);
             });
 
-            test("clicking an item raises the change event", function() {
+            asyncTest("clicking an item raises the change event", function() {
                 var changeWasCalled = false, autocomplete = new AutoComplete(input, {
                     dataSource: ["foo"],
                     change: function() {
@@ -117,13 +118,17 @@
                 input.focus().val("f");
                 autocomplete.search();
                 input.blur();
-                autocomplete.ul.children().first().click();
-                ok(changeWasCalled);
+                autocomplete.ul.children().first().trigger(CLICK);
+
+                setTimeout(function () {
+                    ok(changeWasCalled);
+                    start();
+                }, 0);
             });
 
-            test("clicking an item raises the change event of the dom element", function() {
+            asyncTest("clicking an item raises the change event of the dom element", function() {
                 var changeWasCalled = false, autocomplete = new AutoComplete(input, {
-                    dataSource: ["foo"],
+                    dataSource: ["foo"]
                 });
 
                 input.focus().val("f");
@@ -132,8 +137,12 @@
                 input.change(function() {
                     changeWasCalled = true;
                 });
-                autocomplete.ul.children().first().click();
-                ok(changeWasCalled);
+                autocomplete.ul.children().first().trigger(CLICK);
+
+                setTimeout(function () {
+                    ok(changeWasCalled);
+                    start();
+                }, 0);
             });
 
             asyncTest("open event when open popup on search", function() {
