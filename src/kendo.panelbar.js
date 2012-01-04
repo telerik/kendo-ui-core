@@ -453,9 +453,7 @@
                     show: true
                 },
                 collapse: { // if collapse animation effects are defined, they will be used instead of expand.reverse
-                    duration: 200,
-                    show: false,
-                    hide: true
+                    duration: 200
                 }
             },
             expandMode: "multiple"
@@ -954,8 +952,10 @@
 
         _toggleGroup: function (element, visibility) {
             var that = this,
-                hasCloseAnimation = "effects" in that.options.animation.collapse,
-                closeAnimation = extend({}, that.options.animation.expand);
+                animationSettings = that.options.animation,
+                animation = animationSettings.expand,
+                collapse = extend({}, animationSettings.collapse),
+                hasCollapseAnimation = collapse && "effects" in collapse;
 
             if (element.is(VISIBLE) != visibility) {
                 return;
@@ -974,15 +974,14 @@
                     .toggleClass("k-arrow-down", visibility)
                     .toggleClass("k-panelbar-expand", visibility);
 
+            if (visibility) {
+                animation = extend( hasCollapseAnimation ? collapse
+                                    : extend({ reverse: true }, animation), { show: false, hide: true });
+            }
+
             element
                 .kendoStop(true, true)
-                .kendoAnimate(extend( hasCloseAnimation && visibility ?
-                                          that.options.animation.collapse :
-                                          !hasCloseAnimation && visibility ?
-                                               extend(closeAnimation, { show: false, hide: true }) :
-                                               that.options.animation.expand, {
-                                                   reverse: !hasCloseAnimation && visibility
-                                               }));
+                .kendoAnimate( animation );
         },
 
         _collapseAllExpanded: function (item) {

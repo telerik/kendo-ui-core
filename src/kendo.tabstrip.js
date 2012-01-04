@@ -370,9 +370,7 @@
                     show: true
                 },
                 close: { // if close animation effects are defined, they will be used instead of open.reverse
-                    duration: 200,
-                    show: false,
-                    hide: true
+                    duration: 200
                 }
             },
             collapsible: false
@@ -722,15 +720,17 @@
 
         deactivateTab: function (item) {
             var that = this,
-                closeAnimation = that.options.animation.close,
-                openAnimation = that.options.animation.open;
+                animationSettings = that.options.animation,
+                animation = animationSettings.open,
+                close = extend({}, animationSettings.close),
+                hasCloseAnimation = close && "effects" in close;
 
-            closeAnimation = closeAnimation && "effects" in closeAnimation ? closeAnimation :
-                                   extend( extend({ reverse: true }, openAnimation), { show: false, hide: true });
+            close = extend( hasCloseAnimation ? close : extend({ reverse: true }, animation), { show: false, hide: true });
 
-            if (kendo.size(openAnimation.effects)) {
-                item.kendoAddClass(DEFAULTSTATE, { duration: openAnimation.duration });
-                item.kendoRemoveClass(ACTIVESTATE, { duration: openAnimation.duration });
+
+            if (kendo.size(animation.effects)) {
+                item.kendoAddClass(DEFAULTSTATE, { duration: animation.duration });
+                item.kendoRemoveClass(ACTIVESTATE, { duration: animation.duration });
             } else {
                 item.addClass(DEFAULTSTATE);
                 item.removeClass(ACTIVESTATE);
@@ -739,24 +739,26 @@
             that.contentElements
                     .filter("." + ACTIVESTATE)
                     .kendoStop(true, true)
-                    .kendoAnimate( closeAnimation )
+                    .kendoAnimate( close )
                     .removeClass(ACTIVESTATE);
         },
 
         activateTab: function (item) {
             var that = this,
-                openAnimation = that.options.animation.open,
-                closeAnimation = that.options.animation.close,
+                animationSettings = that.options.animation,
+                animation = animationSettings.open,
+                close = extend({}, animationSettings.close),
+                hasCloseAnimation = close && "effects" in close,
                 neighbours = item.parent().children(),
                 oldTab = neighbours.filter("." + ACTIVESTATE),
                 itemIndex = neighbours.index(item);
 
-            closeAnimation = closeAnimation && "effects" in closeAnimation ? closeAnimation : extend( extend({ reverse: true }, openAnimation), { show: false, hide: true });
+            close = extend( hasCloseAnimation ? close : extend({ reverse: true }, animation), { show: false, hide: true });
 
             // deactivate previously active tab
-            if (kendo.size(openAnimation.effects)) {
-                oldTab.kendoRemoveClass(ACTIVESTATE, { duration: closeAnimation.duration });
-                item.kendoRemoveClass(HOVERSTATE, { duration: closeAnimation.duration });
+            if (kendo.size(animation.effects)) {
+                oldTab.kendoRemoveClass(ACTIVESTATE, { duration: close.duration });
+                item.kendoRemoveClass(HOVERSTATE, { duration: close.duration });
             } else {
                 oldTab.removeClass(ACTIVESTATE);
                 item.removeClass(HOVERSTATE);
@@ -778,7 +780,7 @@
                 visibleContentElements
                     .removeClass( ACTIVESTATE )
                     .kendoStop(true, true)
-                    .kendoAnimate( closeAnimation );
+                    .kendoAnimate( close );
                 return false;
             }
 
@@ -788,9 +790,9 @@
                     item.addClass(TABONTOP) // change these directly to bring the tab on top.
                         .css("z-index");
 
-                    if (kendo.size(openAnimation.effects)) {
-                        oldTab.kendoAddClass(DEFAULTSTATE, { duration: openAnimation.duration });
-                        item.kendoAddClass(ACTIVESTATE, { duration: openAnimation.duration });
+                    if (kendo.size(animation.effects)) {
+                        oldTab.kendoAddClass(DEFAULTSTATE, { duration: animation.duration });
+                        item.kendoAddClass(ACTIVESTATE, { duration: animation.duration });
                     } else {
                         oldTab.addClass(DEFAULTSTATE);
                         item.addClass(ACTIVESTATE);
@@ -799,7 +801,7 @@
                     content
                         .addClass(ACTIVESTATE)
                         .kendoStop(true, true)
-                        .kendoAnimate( openAnimation );
+                        .kendoAnimate( animation );
                 },
                 showContent = function() {
                     if (!isAjaxContent) {
@@ -818,7 +820,7 @@
                     .kendoStop(true, true)
                     .kendoAnimate(extend( {
                         complete: showContent
-                   }, closeAnimation ));
+                   }, close ));
             } else {
                 showContent();
             }

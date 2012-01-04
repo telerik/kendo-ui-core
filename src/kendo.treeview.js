@@ -349,9 +349,7 @@
                     show: true
                 },
                 collapse: {
-                    duration: 100,
-                    show: false,
-                    hide: true
+                    duration: 100
                 }
             }
         },
@@ -585,15 +583,15 @@
                 isExpanding = !contents.is(VISIBLE),
                 animationSettings = that.options.animation || {},
                 animation = animationSettings.expand,
-                collapse = animationSettings.collapse,
-                hasCollapseAnimation = collapse && 'effects' in collapse;
+                collapse = extend({}, animationSettings.collapse),
+                hasCollapseAnimation = collapse && "effects" in collapse;
 
             if (contents.data("animating"))
                 return;
 
             if (!isExpanding) {
-                animation = hasCollapseAnimation ? collapse
-                                    : extend({ reverse: true }, animation, { show: false, hide: true });
+                animation = extend( hasCollapseAnimation ? collapse
+                                    : extend({ reverse: true }, animation), { show: false, hide: true });
             }
 
             if (contents.children().length > 0) {

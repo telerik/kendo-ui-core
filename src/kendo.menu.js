@@ -376,9 +376,7 @@
                     show: true
                 },
                 close: { // if close animation effects are defined, they will be used instead of open.reverse
-                    duration: 100,
-                    show: false,
-                    hide: true
+                    duration: 100
                 }
             },
             orientation: "horizontal",
