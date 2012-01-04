@@ -392,10 +392,14 @@
          */
         enable: function (element, enable) {
             this._toggleDisabled(element, enable !== false);
+
+            return this;
         },
 
         disable: function (element) {
             this._toggleDisabled(element, false);
+
+            return this;
         },
 
         /**
@@ -437,6 +441,8 @@
 
             updateArrow(referenceItem);
             updateFirstLast(inserted.group.find(".k-first, .k-last"));
+
+            return this;
         },
 
         /**
@@ -477,6 +483,8 @@
             });
 
             updateFirstLast(referenceItem);
+
+            return this;
         },
 
         /**
@@ -517,6 +525,8 @@
             });
 
             updateFirstLast(referenceItem);
+
+            return this;
         },
 
         _insert: function (item, referenceItem, parent) {
@@ -581,6 +591,8 @@
                 updateArrow(parent);
                 updateFirstLast(parent);
             }
+
+            return that;
         },
 
         /**
@@ -626,6 +638,8 @@
 
                 }, that.options.hoverDelay));
             });
+
+            return that;
         },
 
         /**
@@ -653,6 +667,8 @@
                     }
                 }, that.options.hoverDelay));
             });
+
+            return that;
         },
 
         _toggleDisabled: function (element, enable) {

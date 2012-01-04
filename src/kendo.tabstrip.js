@@ -395,6 +395,8 @@
                     that.activateTab(item);
                 }
             });
+
+            return that;
         },
 
         /**
@@ -404,10 +406,14 @@
          */
         enable: function (element, state) {
             this._toggleDisabled(element, state !== false);
+
+            return this;
         },
 
         disable: function (element) {
             this._toggleDisabled(element, false);
+
+            return this;
         },
 
 
@@ -426,6 +432,8 @@
                     that.ajaxRequest(item, $(that.contentElement(item.index())), null, contentUrl);
                 }
             });
+
+            return that;
         },
 
         /**
@@ -466,6 +474,8 @@
 
             updateFirstLast(that.tabGroup);
             that._updateContentElements();
+
+            return that;
         },
 
         /**
@@ -499,7 +509,7 @@
          */
         insertBefore: function (tab, referenceTab) {
             var that = this,
-                inserted = this._create(tab),
+                inserted = that._create(tab),
                 referenceContent = $(that.contentElement(referenceTab.index()));
 
             each(inserted.tabs, function (idx) {
@@ -509,6 +519,8 @@
 
             updateFirstLast(that.tabGroup);
             that._updateContentElements();
+
+            return that;
         },
 
         /**
@@ -542,7 +554,7 @@
          */
         insertAfter: function (tab, referenceTab) {
             var that = this,
-                inserted = this._create(tab),
+                inserted = that._create(tab),
                 referenceContent = $(that.contentElement(referenceTab.index()));
 
             each(inserted.tabs, function (idx) {
@@ -552,6 +564,8 @@
 
             updateFirstLast(that.tabGroup);
             that._updateContentElements();
+
+            return that;
         },
 
         /**
@@ -570,6 +584,8 @@
             element.remove();
 
             that._updateContentElements();
+
+            return that;
         },
 
         _create: function (tab) {

@@ -23,15 +23,25 @@
         }
     </style>
     <link type="text/css" href="../styles/kendo.common.css" rel="stylesheet"/>
-    <link type="text/css" href="../styles/kendo.vista.css" rel="stylesheet"/>
+    <link type="text/css" href="../styles/kendo.blueopal.css" rel="stylesheet"/>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#PanelBar1").kendoPanelBar();
+            panel1 = $("#PanelBar1").kendoPanelBar().data("kendoPanelBar");
             $("#PanelBar2").kendoPanelBar({ animation: { expand: { effects: { fadeIn: {}, "expand:vertical": {} } } } });
             $("#PanelBar3").kendoPanelBar({ animation: { expand: { effects: { fadeIn: {}, "expand:vertical": {} } } }, expandMode: 0 });
             $("#PanelBar4").kendoPanelBar({ contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html' ] });
             $("#Panel1").kendoPanelBar().css({ width: '300px', 'float': 'left', clear: 'both' });
+
+            var item = $("#PanelBar1 li:first").eq(0);
+            panel1.expand(item).select(item);
+
+            panel1.append(
+            	{ text: "kendo", content: "howdy!" },
+                panel1.select()
+            );
+
         });
+
     </script>
 </head>
 <body>

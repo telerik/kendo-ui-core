@@ -479,7 +479,7 @@
                 if (!item.hasClass(DISABLEDCLASS) && groups.length > 0) {
 
                     if (that.options.expandMode == SINGLE && that._collapseAllExpanded(item)) {
-                        return;
+                        return that;
                     }
 
                     element.find(HIGHLIGHTEDCLASS).removeClass(HIGHLIGHTEDCLASS.substr(1));
@@ -497,6 +497,8 @@
                     }
                 }
             });
+
+            return that;
         },
 
         /**
@@ -531,6 +533,8 @@
                 }
 
             });
+
+            return that;
         },
 
         _toggleDisabled: function (element, enable) {
@@ -557,7 +561,7 @@
                 var link = item.children("." + LINK);
 
                 if (item.is(DISABLEDCLASS)) {
-                    return;
+                    return that;
                 }
 
                 $(SELECTEDCLASS, that.element).removeClass(SELECTEDCLASS.substr(1));
@@ -566,6 +570,8 @@
                 link.addClass(SELECTEDCLASS.substr(1));
                 link.parentsUntil(that.element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
             });
+
+            return that;
         },
 
         /**
@@ -575,10 +581,14 @@
          */
         enable: function (element, state) {
             this._toggleDisabled(element, state !== false);
+
+            return this;
         },
 
         disable: function (element) {
             this._toggleDisabled(element, false);
+
+            return this;
         },
 
         /**
@@ -634,6 +644,8 @@
             updateArrow(referenceItem);
             updateFirstLast(inserted.group.find(".k-first, .k-last"));
             inserted.group.height("auto");
+
+            return this;
         },
 
         /**
@@ -688,6 +700,8 @@
 
             updateFirstLast(referenceItem);
             inserted.group.height("auto");
+
+            return this;
         },
 
         /**
@@ -742,6 +756,8 @@
 
             updateFirstLast(referenceItem);
             inserted.group.height("auto");
+
+            return this;
         },
 
         /**
@@ -769,6 +785,8 @@
                 updateArrow(parent);
                 updateFirstLast(parent);
             }
+
+            return that;
         },
 
         /**
@@ -783,6 +801,8 @@
 
                 that._ajaxRequest(item, item.children("." + CONTENT), !item.is(VISIBLE));
             });
+
+            return that;
         },
 
         _insert: function (item, referenceItem, parent) {
