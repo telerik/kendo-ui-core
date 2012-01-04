@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.common.css" })" rel="stylesheet" />
+    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.default.css" })" rel="stylesheet" />
+    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "mobile/kendo.mobile.common.css" })" rel="stylesheet" />
+    <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
+    @foreach (var scriptName in ViewBag.scripts)
+    {
+        <script src="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "js", file = scriptName })"></script>
+    }
+    <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
+    <script src="@Url.Content("~/content/shared/js/console.js")"></script>
+    <script src="@Url.Content("~/content/shared/js/prettify.js")"></script>
+</head>
+<body>
+    @Html.Partial("Header")
+
+    <div id="navmainWrap" class="floatWrap centerWrap hasNavigation">
+        <div id="navWrap">
+            @foreach (string category in ViewBag.Navigation.Keys)
+            {
+                if (ViewBag.Navigation.Keys.Count > 1)
+                {
+                    <h3>@category</h3>
+                }
+                <ul class="nav">
+                @foreach (NavigationWidget widget in ViewBag.Navigation[category])
+                {
+                    <li class="@(ViewBag.Section == widget.Name ? "k-state-active k-state-highlighted" : "")">
+                        <span class="k-link k-header">
+                            <span class="k-sprite @widget.SpriteCssClass"></span>
+                            @widget.Text
+                        </span>
+                        <ul>
+                            @foreach (NavigationExample example in widget.Items)
+                            {
+                                <li>
+                                    <a class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")"
+                                        href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+                </ul>
+            }
+        </div>
+        @RenderBody()
+    </div>
+
+    @Html.Partial("Footer")
+
+    <script>
+        $(".nav").kendoPanelBar({
+            animation: { open: { effects: 'fadeIn expandVertical' } },
+            expandMode: "single"
+        });
+
+        initializeThemeChooser();
+        initializeMobileOSChooser();
+    </script>
+</body>
+</html>

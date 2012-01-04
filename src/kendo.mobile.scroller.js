@@ -1,6 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
-        ui = kendo.ui,
+        ui = kendo.mobile.ui,
         support = kendo.support,
         proxy = $.proxy,
         Widget = ui.Widget,
@@ -354,7 +354,7 @@
            .bind(support.mousedown, wait);
     }
 
-    var Scroller = kendo.ui.MobileWidget.extend({
+    var Scroller = Widget.extend({
         init: function(element, options) {
             var that = this, scrollElement,
                 transform = {x: 0, y: 0};
@@ -414,5 +414,5 @@
         }
     });
 
-    kendo.ui.plugin(Scroller);
+    ui.plugin(Scroller);
 })(jQuery);

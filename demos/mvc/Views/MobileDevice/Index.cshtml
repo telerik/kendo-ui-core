@@ -1,0 +1,55 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.common.css" })" rel="stylesheet" />
+    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.default.css" })" rel="stylesheet" />
+    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "mobile/kendo.mobile.common.css" })" rel="stylesheet" />
+    @foreach (var scriptName in Kendo.Models.ScriptGroups.Mobile)
+    {
+        <script src="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "js", file = scriptName })"></script>
+    }
+    <script src="@Url.Content("~/content/shared/js/console.js")"></script>
+</head>
+<body>
+    <div data-role="view">
+    @foreach (string category in ViewBag.Navigation.Keys)
+    {
+        <ul data-role="listview" data-type="group" data-style="inset">
+        @foreach (NavigationWidget widget in ViewBag.Navigation[category])
+        {
+            <li> @widget.Text
+                <ul>
+                    @foreach (NavigationExample example in widget.Items)
+                    {
+                        <li>
+                            <a data-role="listview-link"
+                               href="@Url.Content("~/m/" + example.Url)">@example.Text</a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+        </ul>
+    }
+    </div>
+
+    <div data-id="examples" data-role="layout">
+        <header data-role="header">
+            <div data-role="navbar">
+                <a data-align="left" data-role="back-button">Back</a>
+                <span data-role="view-title"></span>
+            </div>
+        </header>
+    </div>
+
+    <script>
+        document.title = "@ViewBag.Title";
+        window.kendoMobileApplication = new kendo.mobile.Application();
+    </script>
+</body>
+</html>

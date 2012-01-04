@@ -1,0 +1,59 @@
+        <div id="example" class="k-content">
+            <table id="netflixTable">
+                <thead>
+                    <tr>
+                        <th>
+                            Cover
+                        </th>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Rating
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+                </tbody>
+            </table>
+           <script id="rowTemplate" type="text/x-kendo-tmpl">
+                <tr>
+                    <td>
+                        <img src="${ BoxArt.SmallUrl }" alt="${ Name }" />
+                    </td>
+                    <td>
+                        ${ Name }
+                    </td>
+                    <td>
+                        ${ AverageRating }
+                    </td>
+                </tr>
+            </script>
+            <script>
+                $(document).ready(function() {
+                    $("#netflixTable").kendoGrid({
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            filter: [{
+                                field: "Name",
+                                operator: "contains",
+                                value: "Star Wars"
+                                },{
+                                field: "BoxArt.SmallUrl",
+                                operator: "neq",
+                                value: null
+                            }],
+                            transport: {
+                                read: "http://odata.netflix.com/Catalog/Titles"
+                            }
+                        },
+                        rowTemplate: kendo.template($("#rowTemplate").html()),
+                        height: 200
+                    });
+                });
+            </script>
+        </div>

@@ -1,0 +1,83 @@
+@{
+    // WebKit's back button caches ajax responses so we are not relying on IsAjaxRequest
+
+    if (!Request.Params.AllKeys.Contains("partial")) 
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<div id="main">
+    <h1 id="exampleTitle" class="k-content">
+        <span class="exampleIcon @ViewBag.CurrentWidget.SpriteCssClass"></span>
+        @ViewBag.CurrentExample.Text
+    </h1>
+    <div id="exampleWrap">
+        <script>preventFOUC()</script>
+        <div id="example" class="k-content">
+        @if (ViewBag.suite == "mobile") {
+            <div id="mobile-application-container">
+            @RenderBody()
+            </div>
+            @RenderSection("ExampleFooter", false)
+        } else {
+            @RenderBody()
+        }
+        </div>
+    </div>
+
+    @if (ViewBag.ShowCodeStrip == true)
+    {
+    <div id="codeStrip">
+        <ul>
+            <li class="k-state-active">Description</li>
+            <li>View Code</li>
+
+            @if (ViewBag.ConfigurationDocPath != null)
+            {
+                <li>Configuration</li>
+            }
+
+            @if (ViewBag.MethodsDocPath != null)
+            {
+                <li>Methods</li>
+            }
+
+            @if (ViewBag.EventsDocPath != null)
+            {
+                <li>Events</li>
+            }
+        </ul>
+        <div class="description">
+            @Html.Raw(ViewBag.Description)
+            @RenderSection("Description", false)
+        </div>
+    </div>
+    }
+</div>
+
+<script>
+    $("#codeStrip").kendoTabStrip({
+        contentUrls: [null,
+        "@Url.RouteUrl("Source", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })",
+        "@Url.ContentOrEmpty((string) ViewBag.ConfigurationDocPath)",
+        "@Url.ContentOrEmpty((string) ViewBag.MethodsDocPath)",
+        "@Url.ContentOrEmpty((string) ViewBag.EventsDocPath)"
+        ],
+        contentLoad: function() {
+            prettyPrint();
+        }
+    });
+
+    setTimeout(function(){ prettyPrint(); }, 100);
+
+    document.title = "@ViewBag.Title";
+
+    @if (ViewBag.suite == "mobile") 
+    {
+        <text>
+            window.kendoMobileApplication = new kendo.mobile.Application($("#mobile-application-container"));
+            applyCurrentMobileOS();
+        </text>
+    }
+</script>

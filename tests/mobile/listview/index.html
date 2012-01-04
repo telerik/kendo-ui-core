@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
     </head>
     <body>
-        <h1 id="qunit-header">kendo.ui.MobileListView Tests</h1>
+        <h1 id="qunit-header">kendo.mobile.ui.ListView Tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -22,7 +22,7 @@
         <ul id="log"></ul>
 
         <script>
-            var ListView = kendo.ui.MobileListView;
+            var ListView = kendo.mobile.ui.ListView;
 
             module("mobile listview", {
                 setup: function() {
@@ -33,8 +33,8 @@
                 }
             });
 
-            test("name is MobileListView", function() {
-                equal(ListView.fn.options.name, "MobileListView", "Name is properly set");
+            test("name is ListView", function() {
+                equal(ListView.fn.options.name, "ListView", "Name is properly set");
             });
 
             test("applies css classes", function() {

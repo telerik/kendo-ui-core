@@ -1,0 +1,37 @@
+
+        <div id="example" class="k-content">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    The Upload is able to upload files out-of-band using the
+                    HTML5 File API with fallback for legacy browsers.
+                </p>
+                <p>
+                    You need to configure save action that will receive
+                    the uploaded files.
+                    An optional remove action is also available.
+                </p>
+                <p>
+                    <strong>Note:</strong>
+                    Security restrictions in Chrome prevent this
+                    example from working when the page is
+                    loaded from the file system (via file:// protocol).
+                </p>
+            </div>
+
+            <div style="width:60%">
+                <input name="files" id="files" type="file" />
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#files").kendoUpload({
+                        async: {
+                            saveUrl: "blank.html",
+                            removeUrl: "blank.html",
+                            autoUpload: true
+                        }
+                    });
+                });
+            </script>
+        </div>

@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
-        <h1 id="qunit-header">kendo.ui.MobileTabstrip Tests</h1>
+        <h1 id="qunit-header">kendo.mobile.ui.Tabstrip Tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -23,7 +23,7 @@
         <ul id="log"></ul>
 
         <script>
-            var Tabstrip = kendo.ui.MobileTabstrip,
+            var Tabstrip = kendo.mobile.ui.Tabstrip,
                 MOUSEDOWN = kendo.support.mousedown,
                 MOUSEUP = kendo.support.mouseup,
                 dom,
@@ -53,8 +53,8 @@
                 }
             });
 
-            test("name is MobileTabstrip", function() {
-                equal(Tabstrip.fn.options.name, "MobileTabstrip", "Name is properly set");
+            test("name is Tabstrip", function() {
+                equal(Tabstrip.fn.options.name, "Tabstrip", "Name is properly set");
             });
 
             test("creates html structure", function() {

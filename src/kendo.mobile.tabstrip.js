@@ -1,32 +1,32 @@
 (function($, undefined) {
     /**
-    * @name kendo.ui.MobileTabstrip.Description
-    * @section The MobileTabstrip widget is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons.
-    * The looks of the MobileTabstrip vary depending on the user mobile device and operating system.
+    * @name kendo.mobile.ui.Tabstrip.Description
+    * @section The mobile Tabstrip widget is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons.
+    * The looks of the mobile Tabstrip vary depending on the user mobile device and operating system.
     *
     * <h3>Getting Started</h3>
-    * The Kendo MobileApplication will automatically initialize the MobileTabstrip for every element with <code>role</code> data attribute set to <code>tabstrip</code> present in the views/layouts markup.
+    * The Kendo mobile Application will automatically initialize the mobile Tabstrip for every element with <code>role</code> data attribute set to <code>tabstrip</code> present in the views/layouts markup.
     * Alternatively, it can be initialized using a jQuery selector. The tabstrip element should contain several <code>a</code> elements.
     *
-    * <h3>Kendo MobileApplication integration</h3>
-    * If a Kendo MobileApplication is initialized, the tabs of the tabstrip will automatically navigate within the application's views.
+    * <h3>Kendo mobile Application integration</h3>
+    * If a Kendo mobile Application is initialized, the tabs of the tabstrip will automatically navigate within the application's views.
     * When the application navigates between views, it updates the tabstrip's currently selected tab, based on the current view URL.
     *
-    * @exampleTitle Initialize Kendo MobileTabstrip based on role data attribute.
+    * @exampleTitle Initialize Kendo mobile Tabstrip based on role data attribute.
     * @example
     * <div data-role="tabstrip">
     *   <a href="#index">Home</a>
     *   <a href="#featured">Featured</a>
     * </div>
     *
-    * @exampleTitle Initialize Kendo MobileTabstrip using a jQuery selector
+    * @exampleTitle Initialize Kendo mobile Tabstrip using a jQuery selector
     * @example
     * var tabstrip = $("#tabstrip").kendoMobileTabStrip();
     *
     * @section
     * <h3>Tab icons</h3>
     * A tab icon can be set in two ways - either by adding an <code>img</code> element inside the <code>a</code> element, or by setting an <code>icon</code> data attribute to the <code>a</code> element.
-    * Kendo MobileTabstrip comes out of the box with several ready to use icons:
+    * Kendo mobile Tabstrip comes out of the box with several ready to use icons:
     *
     * <ul>
     *   <li>TODO</li>
@@ -44,8 +44,8 @@
     * </div>
     */
     var kendo = window.kendo,
-        ui = kendo.ui,
-        MobileWidget = ui.MobileWidget,
+        ui = kendo.mobile.ui,
+        Widget = ui.Widget,
         mobile = kendo.mobile,
         support = kendo.support,
         touch = support.touch,
@@ -54,10 +54,10 @@
         SELECT = "select",
         proxy = $.proxy;
 
-    var MobileTabstrip = MobileWidget.extend(/** @lends kendo.ui.MobileTabstrip.prototype */{
+    var Tabstrip = Widget.extend(/** @lends kendo.mobile.ui.Tabstrip.prototype */{
         /**
         * @constructs
-        * @extends kendo.ui.MobileWidget
+        * @extends kendo.ui.Widget
         * @param {DomElement} element DOM element.
         * @param {Object} options Configuration options.
         * @option {Number} [selectedIndex] <0> The index of the initially selected tab.
@@ -65,14 +65,14 @@
         init: function(element, options) {
             var that = this;
 
-            MobileWidget.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element, options);
 
             options = that.options;
 
             that.bind([
             /**
              * Fires when tab is selected.
-             * @name kendo.ui.MobileTabstrip#select
+             * @name kendo.mobile.ui.Tabstrip#select
              * @event
              * @param {Event} e
              * @param {jQueryObject} e.item The selected tab
@@ -91,7 +91,7 @@
         },
 
         /**
-        * Set the MobileTabstrip active item to the tab with the specified url.
+        * Set the mobile Tabstrip active item to the tab with the specified url.
         * @param {String} url The url of the tab.
         *
         * @example
@@ -158,12 +158,12 @@
         },
 
         options: {
-            name: "MobileTabstrip",
+            name: "Tabstrip",
             selector: kendo.roleSelector("tabstrip"),
             selectedIndex: 0,
             enable: true
         }
     });
 
-    ui.plugin(MobileTabstrip);
+    ui.plugin(Tabstrip);
 })(jQuery);
