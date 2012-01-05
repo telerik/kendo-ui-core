@@ -72,7 +72,9 @@ function buildStaging(outputRoot) {
 
     buildPrerequisites();
 
+    kendoBuild.rmdirSyncRecursive(outputRoot);
     copyDir(PROJECT_ROOT, outputRoot);
+
     buildProject(path.join(outputRoot, PROJECT), RELEASE);
 
     mkdir(contentDest);
