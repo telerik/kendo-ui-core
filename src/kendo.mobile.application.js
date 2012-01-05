@@ -160,7 +160,7 @@
      * A view is defined by setting an element <code>role</code> data attribute to <code>layout</code>. A view is associated with a layout by setting its <code>layout</code> data attribute value
      * to the value of the layout's <code>id</code> data attribute.</p>
      *
-     * <p>An Application default layout can be set, by passing the layout id in the options parameter of the constructor.</p>
+     * <p>An Application default layout can be set, by passing the layout id in the options parameter of the constructor. A mobile View can remove the default layout by setting its<code>layout</code> data attribute to empty string ("").</p>
      *
      * @exampleTitle Views with Layout
      * @example
@@ -401,7 +401,7 @@
 
         _createView: function(element) {
             var that = this,
-                layout  = element.data("layout") || that.options.layout;
+                layout = that._dataOrDefault(element, "layout");
 
             if (layout) {
                 layout = that.layouts[layout];
@@ -480,6 +480,10 @@
             if (icon) {
                 $("head").prepend(iconMeta({icon: icon}));
             }
+        },
+
+        _dataOrDefault: function(element, option) {
+            return typeof element.data(option) !== "undefined" ? element.data(option) : this.options[option];
         }
     });
 

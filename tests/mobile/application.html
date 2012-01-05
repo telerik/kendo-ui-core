@@ -328,6 +328,15 @@
                 equal(application.element.find(".km-footer").text(), "footer", "Layout footer is present");
             });
 
+            test("overrides default layout if none specified", function() {
+            setup('<div data-role="view" id="page1" data-layout="">Page 1</div> \
+                    <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
+                    ', { layout: "foo" });
+
+                console.log(application.element);
+                equal(application.element.find(".km-footer").text(), "", "Layout footer is present");
+            });
+
             test("Applies view title attribute contents to layout view title", function() {
                 setup('<div data-layout="foo" data-role="view" data-title="foo" id="page1">Page 1</div> \
                        <div data-role="layout" data-id="foo"><div data-role="header"><div data-role="navbar"><span id="view-title" data-role="view-title"></span></div></div></div> \
