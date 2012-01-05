@@ -82,13 +82,13 @@
      *  You can reference an existing <b>DatePicker</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
      *  Once a reference has been established, you can use the API to control
-     *  its behavior. 
+     *  its behavior.
      * </p>
      *
      * @exampleTitle Accessing an existing DatePicker instance
      * @example
      * var datePicker = $("#datePicker").data("kendoDatePicker");
-     *     
+     *
      */
     var kendo = window.kendo,
     ui = kendo.ui,
@@ -374,72 +374,72 @@
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {Date} [value] <null> Specifies the selected date.
-	 * _example
-	 * // set the selected value to January 1st, 2011
-	 * $("#datePicker").kendoDatePicker({
-	 *  value: new Date(2011, 0, 1)
-	 * });
-	 * //
-	 * // To set after initialization, use API value method
-	 * //
-	 * // get a reference to the datePicker widget
-	 * var datePicker = $("#datePicker").data("kendoDatePicker");
-	 * // set the selected date on the datePicker to January 1st, 2011
-	 * datePicker.value(new Date(2011, 0, 1));
+         * _example
+         * // set the selected value to January 1st, 2011
+         * $("#datePicker").kendoDatePicker({
+         *  value: new Date(2011, 0, 1)
+         * });
+         * //
+         * // To set after initialization, use API value method
+         * //
+         * // get a reference to the datePicker widget
+         * var datePicker = $("#datePicker").data("kendoDatePicker");
+         * // set the selected date on the datePicker to January 1st, 2011
+         * datePicker.value(new Date(2011, 0, 1));
      * @option {Date} [min] <Date(1900, 0, 1)> Specifies the minimum date that the calendar can show.
      * _example
-	 * // set the min date to Jan 1st, 2011
-	 * $("#datePicker").kendoDatePicker({
-	 *  min = new Date(2011, 0, 1)
-	 * });
-	 * //
-	 * // To set after initialization, use the API min method
-	 * //
-	 * // get a reference to the datePicker widget
-	 * var datePicker = $("#datePicker").data("kendoDatePicker");
-	 * // set the min date to Jan 1st, 2011
-	 * datePicker.min(new Date(2011, 0, 1));
-	 * @option {Date} [max] <Date(2099, 11, 31)> Specifies the maximum date, which the calendar can show.
+         * // set the min date to Jan 1st, 2011
+         * $("#datePicker").kendoDatePicker({
+         *  min = new Date(2011, 0, 1)
+         * });
+         * //
+         * // To set after initialization, use the API min method
+         * //
+         * // get a reference to the datePicker widget
+         * var datePicker = $("#datePicker").data("kendoDatePicker");
+         * // set the min date to Jan 1st, 2011
+         * datePicker.min(new Date(2011, 0, 1));
+         * @option {Date} [max] <Date(2099, 11, 31)> Specifies the maximum date, which the calendar can show.
          * _example
-	 * $("#datePicker").kendoDatePicker({
-	 *  max = new Date(2013, 0, 1) // sets max date to Jan 1st, 2013
-	 * });
-	 * //
-	 * // To set after initialization, use the API max method
-	 * //
-	 * var datePicker = $("#datePicker").data("kendoDatePicker");
-	 * // set the max date to Jan 1st, 2013
-	 * datePicker.max(new Date(2013,0, 1));
-	 * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to parse value set with value() method.
+         * $("#datePicker").kendoDatePicker({
+         *  max = new Date(2013, 0, 1) // sets max date to Jan 1st, 2013
+         * });
+         * //
+         * // To set after initialization, use the API max method
+         * //
+         * var datePicker = $("#datePicker").data("kendoDatePicker");
+         * // set the max date to Jan 1st, 2013
+         * datePicker.max(new Date(2013,0, 1));
+         * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to parse value set with value() method.
      * _example
-	 * $("#datePicker").kendoDatePicker({
-	 *  format: "yyyy/MM/dd"
-	 * });
-	 * @option {String} [start] <month> Specifies the start view.
-	 * The following settings are available for the <b>start</b> value:
-	 * <ul>
-	 * <li><b>"month"</b> - shows the days from the month</li>
-	 * <li><b>"year"</b> - shows the months of the year</li>
-	 * <li><b>"decade"</b> - shows the years from the decade</li>
-	 * <li><b>"century"</b> - shows the decades from the century</li>
-	 * </ul>
+         * $("#datePicker").kendoDatePicker({
+         *  format: "yyyy/MM/dd"
+         * });
+         * @option {String} [start] <month> Specifies the start view.
+         * The following settings are available for the <b>start</b> value:
+         * <ul>
+         * <li><b>"month"</b> - shows the days from the month</li>
+         * <li><b>"year"</b> - shows the months of the year</li>
+         * <li><b>"decade"</b> - shows the years from the decade</li>
+         * <li><b>"century"</b> - shows the decades from the century</li>
+         * </ul>
      * _example
-	 * $("#datePicker").kendoDatePicker({
-	 *  start: "decade" // the datePicker will start with a decade display
-	 * });
-	 * @option {String} [depth] Specifies the navigation depth. The following
+         * $("#datePicker").kendoDatePicker({
+         *  start: "decade" // the datePicker will start with a decade display
+         * });
+         * @option {String} [depth] Specifies the navigation depth. The following
      * settings are available for the <b>depth</b> value:
-	 * <ul>
-	 * <li><b>"month"</b> - shows the days from the month</li>
-	 * <li><b>"year"</b> - shows the months of the year</li>
-	 * <li><b>"decade"</b> - shows the years from the decade</li>
-	 * <li><b>"century"</b> - shows the decades from the century</li>
-	 * </ul>
-	 * _example
-	 * $("#datePicker").kendoDatePicker({
-	 *     start: "decade",
-    	 *     depth: "year" // the datePicker will only go to the year level
-	 * });
+         * <ul>
+         * <li><b>"month"</b> - shows the days from the month</li>
+         * <li><b>"year"</b> - shows the months of the year</li>
+         * <li><b>"decade"</b> - shows the years from the decade</li>
+         * <li><b>"century"</b> - shows the decades from the century</li>
+         * </ul>
+         * _example
+         * $("#datePicker").kendoDatePicker({
+         *     start: "decade",
+         *     depth: "year" // the datePicker will only go to the year level
+         * });
          * @option {Function} [footer] <> Template to be used for rendering the footer of the calendar.
          * _example
          *  // DatePicker initialization
@@ -542,58 +542,58 @@
             * @name kendo.ui.DatePicker#change
             * @event
             * @param {Event} e
-	    * @example		
-	    * $("#datePicker").kendoDatePicker({
-	    *     change: function(e) {
-	    *         // handle event
-	    * });
-	    * @exampleTitle To set after initialization
-	    * @example
-	    * // get a reference to the datePicker widget
-	    * var datePicker = $("#datePicker").data("kendoDatePicker");
-	    * // bind to the change event
-	    * datePicker.bind("change", function(e) {
-	    *     // handle event
-	    * });
+            * @example
+            * $("#datePicker").kendoDatePicker({
+            *     change: function(e) {
+            *         // handle event
+            * });
+            * @exampleTitle To set after initialization
+            * @example
+            * // get a reference to the datePicker widget
+            * var datePicker = $("#datePicker").data("kendoDatePicker");
+            * // bind to the change event
+            * datePicker.bind("change", function(e) {
+            *     // handle event
+            * });
             */
             /**
             * Fires when the calendar is opened
             * @name kendo.ui.DatePicker#open
             * @event
             * @param {Event} e
-            * @example		
-	    * $("#datePicker").kendoDatePicker({
-	    *     open: function(e) {
-	    *         // handle event
-	    * });
-	    * @exampleTitle To set after initialization
-	    * @example
-	    * // get a reference to the datePicker widget
-	    * var datePicker = $("#datePicker").data("kendoDatePicker");
-	    * // bind to the open event
-	    * datePicker.bind("open", function(e) {
-	    *     // handle event
-	    * });
-	    */
+            * @example
+            * $("#datePicker").kendoDatePicker({
+            *     open: function(e) {
+            *         // handle event
+            * });
+            * @exampleTitle To set after initialization
+            * @example
+            * // get a reference to the datePicker widget
+            * var datePicker = $("#datePicker").data("kendoDatePicker");
+            * // bind to the open event
+            * datePicker.bind("open", function(e) {
+            *     // handle event
+            * });
+            */
             /**
             * Fires when the calendar is closed
             * @name kendo.ui.DatePicker#close
             * @event
             * @param {Event} e
-            * @example		
-	    * $("#datePicker").kendoDatePicker({
-	    *     close: function(e) {
-	    *         // handle event
-	    * });
-	    * @exampleTitle To set after initialization
-	    * @example
-	    * // get a reference to the datePicker widget
-	    * var datePicker = $("#datePicker").data("kendoDatePicker");
-	    * // bind to the close event
-	    * datePicker.bind("close", function(e) {
-	    *     // handle event
-	    * });
-	    */
+            * @example
+            * $("#datePicker").kendoDatePicker({
+            *     close: function(e) {
+            *         // handle event
+            * });
+            * @exampleTitle To set after initialization
+            * @example
+            * // get a reference to the datePicker widget
+            * var datePicker = $("#datePicker").data("kendoDatePicker");
+            * // bind to the close event
+            * datePicker.bind("close", function(e) {
+            *     // handle event
+            * });
+            */
             that.bind(CHANGE, options);
 
             that.enable(!element.is('[disabled]'));
@@ -840,7 +840,7 @@
                 element = that.element,
                 wrapper;
 
-            wrapper = element.parents(".k-datePicker");
+            wrapper = element.parents(".k-datepicker");
 
             if (!wrapper[0]) {
                 wrapper = element.wrap(SPAN).parent().addClass("k-picker-wrap k-state-default");
@@ -853,7 +853,7 @@
                 height: "auto"
             });
 
-            that.wrapper = wrapper.addClass("k-widget k-datePicker k-header");
+            that.wrapper = wrapper.addClass("k-widget k-datepicker k-header");
             that._inputWrapper = $(wrapper[0].firstChild);
         }
     });
