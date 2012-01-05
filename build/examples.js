@@ -61,7 +61,7 @@ function buildDebug() {
     buildPrerequisites();
 
     console.log("Building examples application");
-    buildProject();
+    buildProject(path.join(PROJECT_ROOT, PROJECT));
 }
 
 function buildStaging(outputRoot) {
