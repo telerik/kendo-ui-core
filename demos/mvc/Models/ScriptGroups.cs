@@ -80,6 +80,7 @@ namespace Kendo.Models
             "kendo.mobile.view.js"
 #else
             "jquery.min.js",
+            "kendo.all.min.js",
             "kendo.mobile.min.js"
 #endif
             };
