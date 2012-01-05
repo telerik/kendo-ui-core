@@ -75,7 +75,7 @@
     <Compile Include="Controllers\MobileDeviceController.cs" />
     <Compile Include="Controllers\ThemeBuilderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\StaticController.cs" />
+    <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\SourceController.cs" />
     <Compile Include="Controllers\SuiteController.cs" />
     <Compile Include="Extensions\UrlExtensions.cs" />
@@ -83,6 +83,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\StyleGroups.cs" />
     <Compile Include="Models\NavigationExample.cs" />
     <Compile Include="Models\NavigationWidget.cs" />
     <Compile Include="Models\ScriptGroups.cs" />
@@ -254,12 +255,6 @@
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />

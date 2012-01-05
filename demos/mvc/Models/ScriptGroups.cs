@@ -8,6 +8,7 @@ namespace Kendo.Models
     {
         public static readonly IList<string> All = new string[]
         {
+#if DEBUG
             "jquery.js",
             "kendo.core.js",
             "kendo.fx.js",
@@ -44,10 +45,15 @@ namespace Kendo.Models
             "kendo.treeview.js",
             "kendo.upload.js",
             "kendo.window.js"
+#else
+            "jquery.min.js",
+            "kendo.all.min.js"
+#endif
         };
 
         public static readonly IList<string> Mobile = new string[]
         {
+#if DEBUG
             "jquery.js",
             "kendo.core.js",
             "kendo.fx.js",
@@ -72,6 +78,10 @@ namespace Kendo.Models
             "kendo.mobile.switch.js",
             "kendo.mobile.tabstrip.js",
             "kendo.mobile.view.js"
-        };
+#else
+            "jquery.min.js",
+            "kendo.mobile.min.js"
+#endif
+            };
     }
 }

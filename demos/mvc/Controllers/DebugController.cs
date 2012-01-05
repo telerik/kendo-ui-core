@@ -5,15 +5,15 @@ using System.Web.Mvc;
 
 namespace Kendo.Controllers
 {
-    public class StaticController : BaseController
+    public class DebugController : BaseController
     {
         //
         // GET: /src/(js|styles)/file
 
-        public ActionResult Resource(string assetGroup, string assetType, string file)
+        public ActionResult Resource(string assetType, string file)
         {
             var root = Server.MapPath("~/");
-            var path = Path.Combine(root, "..", "..", AssetRoots[assetGroup + "/" + assetType], file);
+            var path = Path.Combine(root, "..", "..", AssetRoots[assetType], file);
 
             return StaticContent(path);
         }

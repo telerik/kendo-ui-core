@@ -50,11 +50,10 @@ namespace Kendo
             );
 
             routes.MapRoute(
-                "Static",
-                "{assetGroup}/{assetType}/{*file}",
-                new { controller = "Static", action = "Resource" },
-                new { assetGroup = "(src)",
-                      assetType = "(js|styles)" }
+                "Debug",
+                "src/{assetType}/{*file}",
+                new { controller = "Debug", action = "Resource" },
+                new { assetType = "(js|styles)" }
             );
 
             routes.MapRoute(
@@ -71,8 +70,8 @@ namespace Kendo
 
             routes.MapRoute(
                 "Default",
-                "{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                "{controller}/{action}",
+                new { controller = "Home", action = "Index" }
             );
         }
 

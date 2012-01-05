@@ -6,12 +6,11 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.common.css" })" rel="stylesheet" />
-    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.default.css" })" rel="stylesheet" />
-    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "mobile/kendo.mobile.common.css" })" rel="stylesheet" />
-    @foreach (var scriptName in Kendo.Models.ScriptGroups.Mobile)
-    {
-        <script src="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "js", file = scriptName })"></script>
+    @foreach (string styleName in Kendo.Models.StyleGroups.All) {
+    <link href="@Url.Style(styleName)" rel="stylesheet" />
+    }
+    @foreach (string scriptName in Kendo.Models.ScriptGroups.Mobile) {
+    <script src="@Url.Script(scriptName)"></script>
     }
     <script src="@Url.Content("~/content/shared/js/console.js")"></script>
 </head>
