@@ -1414,8 +1414,12 @@
             var that = this;
             that._data = new ObservableArray(that._pristine, that.reader.model);
             that._data.bind(CHANGE, function(e) {
-                that.trigger(CHANGE, e);
+                that._total = that.reader.total(that._pristine);
+                that._process(that._data, e);
             });
+
+            that._total = that.reader.total(that._pristine);
+            that._process(that._data);
         },
 
         /**
@@ -1527,7 +1531,8 @@
             that._data = data = new ObservableArray(data, that.reader.model);
 
             data.bind(CHANGE, function(e) {
-                that.trigger(CHANGE, e);
+                that._total = that.reader.total(that._pristine);
+                that._process(data, e);
             });
 
             if (that._set) {
@@ -1546,7 +1551,7 @@
             // </ugly>
         },
 
-        _process: function (data) {
+        _process: function (data, e) {
             var that = this,
                 options = {},
                 result,
@@ -1586,7 +1591,7 @@
                 that._total = result.total;
             }
 
-            that.trigger(CHANGE);
+            that.trigger(CHANGE, e);
         },
 
         /**

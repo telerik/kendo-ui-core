@@ -5,8 +5,8 @@
     <script type="text/javascript" src="../../qunit-runner.js"></script>
     <script type="text/javascript" src="../../jquery.mockjax.js"></script>
     <script src="../../../src/kendo.core.js"></script>
-    <script src="../../../src/kendo.model.js"></script>
     <script src="../../../src/kendo.data.js"></script>
+    <script src="../../../src/kendo.model.js"></script>
     <link rel="stylesheet" href="../../qunit/qunit/qunit.css" type="text/css" />
 
     <body>
@@ -98,31 +98,59 @@
             });
 
             test("change is raised after new model is added to the set", function() {
-                var called = false;
+                var action;
 
                 setup();
 
-                dataSource.bind("change", function() {
-                    called = true;
+                dataSource.bind("change", function(e) {
+                    action = e.action;
                 });
 
                 dataSource.add({});
 
-                ok(called);
+               equal(action, "add");
             });
 
             test("change is raised after model is deleted from the set", function() {
-                var called = false;
+                var action;
 
                 setup();
 
-                dataSource.bind("change", function() {
-                    called = true;
+                dataSource.bind("change", function(e) {
+                    action = e.action;
                 });
 
-                dataSource.remove(1);
+                dataSource.remove(dataSource.get(1));
 
-                ok(called);
+                equal(action, "remove");
+            });
+
+            test("data is processed after model changes are reverted", 2, function() {
+                setup();
+
+                dataSource.filter({ field: "id", operator: "ge", value: 1 });
+
+                dataSource.add({ id: 3 });
+
+                dataSource.bind("change", function() {
+                    equal(dataSource.view().length, 1);
+                    equal(dataSource.view()[0].id, 1);
+                });
+
+                dataSource.cancelChanges();
+            });
+
+            test("data is processed after model is added", function() {
+                setup();
+
+                dataSource.filter({ field: "id", operator: "ge", value: 1 });
+
+                dataSource.bind("change", function() {
+                    equal(dataSource.view().length, 2);
+                    equal(dataSource.view()[1].id, 3);
+                });
+
+                dataSource.add({ id: 3 });
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
