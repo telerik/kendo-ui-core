@@ -524,6 +524,14 @@
                 positioningProperty = isHorizontal ? "left" : "top",
                 sizingDomProperty = isHorizontal ? "offsetWidth" : "offsetHeight";
 
+            if (freeSizePanesCount == 0) {
+                var lastNonCollapsedPane = panes.filter(function() {
+                    return !(($(this).data(PANE) || {}).collapsed);
+                }).last();
+
+                lastNonCollapsedPane.width(totalSize + lastNonCollapsedPane[0][sizingDomProperty]);
+            }
+
             element.children()
                 .css(alternateSizingProperty, element[alternateSizingProperty]())
                 .each(function (i, child) {
