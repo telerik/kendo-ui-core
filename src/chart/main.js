@@ -3925,6 +3925,7 @@
 
             options.legend.items = [];
             options.range = { min: 0, max: 1 };
+            options.scatterRange = { min: [0, 0], max: [1, 1] };
             plotArea.charts = [];
             for (i = 0; i < seriesLength; i++) {
                 currentSeries = series[i];
@@ -4043,7 +4044,7 @@
                 options = plotArea.options,
                 // Override the original invertAxes
                 scatterChart = new ScatterChart(plotArea, { series: series }),
-                scatterChartRange = scatterChart.valueRange() || options.range;
+                scatterChartRange = scatterChart.valueRange() || options.scatterRange;
 
             // Override the original range
             options.range = scatterChartRange;
@@ -4057,7 +4058,7 @@
                 options = plotArea.options,
                 // Override the original invertAxes
                 scatterLineChart = new ScatterLineChart(plotArea, { series: series }),
-                scatterLineChartRange = scatterLineChart.valueRange() || options.range;
+                scatterLineChartRange = scatterLineChart.valueRange() || options.scatterRange;
 
             // Override the original range
             options.range = scatterLineChartRange;
