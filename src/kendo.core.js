@@ -1668,10 +1668,12 @@
         support.mousedown = "touchstart";
         support.mouseup = "touchend";
         support.mousemove = "touchmove";
+        support.mousecancel = "touchcancel";
     } else {
         support.mousemove = "mousemove";
         support.mousedown = "mousedown";
         support.mouseup = "mouseup";
+        support.mousecancel = "mouseleave";
     }
 
     var wrapExpression = function(members) {

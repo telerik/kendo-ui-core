@@ -6,6 +6,7 @@
         support = kendo.support,
         touch = support.touch,
         os = support.mobileOS,
+        MOUSECANCEL = support.mousecancel,
         MOUSEDOWN = support.mousedown,
         MOUSEUP = support.mouseup,
         CLICK = "click",
@@ -64,6 +65,10 @@
             that._releaseProxy = proxy(that._release, that);
 
             that.element.bind(MOUSEUP, that._releaseProxy);
+
+            that.element.bind(MOUSEDOWN + " " + MOUSECANCEL + " " + MOUSEUP, function (e) {
+                $(e.target).closest(".km-button").toggleClass("km-state-active", e.type == MOUSEDOWN);
+            });
 
             that.bind([
                 /**

@@ -46,6 +46,12 @@
     .box-shadow(none);
 }
 
+.km-android .km-navbar .km-view-title
+{
+    display: none;
+}
+
+.km-android .km-navbar,
 .km-android .km-toolbar,
 .km-android .km-button,
 .km-android .km-switch,
@@ -55,22 +61,22 @@
     color: #000;
     text-shadow: none;
     border-color: #e7e7e7;
-    background-color: #dedede;
-
-    background-image: linear-gradient(top, rgb(230, 230, 230), rgb(205, 205, 205));
+    background-color: #000;
 }
 
 .km-android .km-button
 {
-    border-color: rgba(0,0,0,.5) rgba(0,0,0,.3) rgba(0,0,0,.3);
-    background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
-                linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0)) #496b9a;
-    .box-shadow(0 1px 1px rgba(255,255,255,.5));
+    .border-radius(1px);
+
+    border: 1px solid transparent;
+    border-color: rgba(255,255,255,.2) rgba(0,0,0,.1) rgba(0,0,0,.4);
+    background: #d6d6d6;
 }
 
-.km-android .km-button:active
+.km-android .km-button.km-state-active
 {
-    background-color: #263e6c;
+    background-image: linear-gradient(top, #4cbee8);
+    .box-shadow(0 0 1px 4px rgba(133,185,205,.5));
 }
 
 .km-android li.km-state-active
@@ -253,6 +259,33 @@
     border-bottom: 1px solid rgba(255,255,255,.4);
 }
 
+.km-android .km-navbar,
+.km-android .km-toolbar
+{
+    font-size: .8em;
+    font-size: .8rem;
+}
+
+.km-android .km-navbar .km-button,
+.km-android .km-toolbar .km-button
+{
+    margin: 0;
+    padding: .7em 0;
+    padding: 1rem 0;
+    border: 0;
+    .box-shadow(none);
+    background: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.km-android .km-navbar .km-button.km-state-active,
+.km-android .km-toolbar .km-button.km-state-active
+{
+    background-image: linear-gradient(top, rgba(255,255,255,.3));
+}
+
+.km-android .km-navbar .km-text,
 .km-android .km-tabstrip .km-text
 {
     position: relative;
@@ -271,6 +304,17 @@
     .box-sizing(border-box);
 }
 
+.km-android .km-navbar .km-text
+{
+    float: none;
+    border: 0;
+    border-right: 1px solid rgba(255,255,255,.4);
+    padding: 0 .7em;
+    padding: 0 .7rem;
+}
+
+.km-android .km-navbar .km-button:last-child .km-text,
+.km-android .km-toolbar .km-button:last-child .km-text,
 .km-android .km-tabstrip .km-button:last-child .km-text
 {
     border-right: 0;
@@ -303,6 +347,7 @@
     color: #FFF;
     border-bottom-width: .4em;
     padding-bottom: 0;
+    .box-shadow(none);
     border-color: transparent transparent #33b5e5 transparent;
 }
 
