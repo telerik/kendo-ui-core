@@ -47,7 +47,7 @@ function buildProject(project, configuration) {
     });
 }
 
-function buildDebug() {
+function buildPrerequisites() {
     console.log("Building themes");
     themes.build();
 
@@ -55,6 +55,10 @@ function buildDebug() {
     kendoScripts.mergeScripts(SOURCE_ROOT);
 
     docs.build();
+}
+
+function buildDebug() {
+    buildPrerequisites();
 
     console.log("Building examples application");
     buildProject();
@@ -65,6 +69,8 @@ function buildStaging(outputRoot) {
         scriptsDest = path.join(contentDest, "js"),
         stylesDest = path.join(contentDest, "styles"),
         webConfig = path.join(outputRoot, "Web.config");
+
+    buildPrerequisites();
 
     copyDir(PROJECT_ROOT, outputRoot);
     buildProject(path.join(outputRoot, PROJECT), RELEASE);
@@ -83,6 +89,12 @@ function buildStaging(outputRoot) {
     );
 }
 
+function buildProduction() {
+}
+
 if (require.main === module) {
-    buildStaging(path.join("deploy", "staging"));
+    buildDebug();
+} else {
+    exports.buildStaging = buildStaging;
+    exports.buildProduction = buildProduction;
 }
