@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5" DefaultTargets="DeployCDN">
     <Import Project="Config.proj" />
-    <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TeamBuild\Microsoft.TeamFoundation.Build.targets" />
 
     <UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>
     <UsingTask TaskName="UploadResources" AssemblyFile="MSBuildTasks\ResourceUploader.MSBuildTasks.dll" />
@@ -18,25 +17,9 @@
         <Resource Include="$(BundleRoot)\styles">
             <DestinationPath>/styles</DestinationPath>
         </Resource>
-        <Resource Include="$(ExamplesRoot)\shared\js">
-            <DestinationPath>/examples/shared/js</DestinationPath>
-        </Resource>
-        <Resource Include="$(ExamplesRoot)\shared\styles">
-            <DestinationPath>/examples/shared/styles</DestinationPath>
-        </Resource>
-        <Resource Include="$(ExamplesRoot)\web\js">
-            <DestinationPath>/examples/web/js</DestinationPath>
-        </Resource>
-        <Resource Include="$(ExamplesRoot)\dataviz\js">
-            <DestinationPath>/examples/dataviz/js</DestinationPath>
-        </Resource>
     </ItemGroup>
 
     <Target Name="DeployCDN">
-        <BuildStep TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)" Name="DeployCDNStep" Message="Deploying CDN resources">
-            <Output TaskParameter="Id" PropertyName="StepId" />
-        </BuildStep>
-
         <GenerateVersionDependentSuffix ReleaseYear="$(Year)" ReleaseQ="$(Release)" Separator=".">
             <Output TaskParameter="Suffix" PropertyName="DateSuffixDots" />
         </GenerateVersionDependentSuffix>
@@ -44,19 +27,5 @@
         <UploadResources
             SourcePath="%(Resource.Identity)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
             BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)%(Resource.DestinationPath)" Compress="True" />
-
-        <BuildStep  TeamFoundationServerUrl="$(TeamFoundationServerUrl)" BuildUri="$(BuildUri)"
-            Id="$(StepId)"
-            Status="Succeeded" />
-
-        <OnError ExecuteTargets="MarkBuildStepAsFailed" />
-    </Target>
-
-    <Target Name="MarkBuildStepAsFailed">
-        <BuildStep
-            TeamFoundationServerUrl="$(TeamFoundationServerUrl)"
-            BuildUri="$(BuildUri)"
-            Id="$(StepId)"
-            Status="Failed" />
     </Target>
 </Project>
