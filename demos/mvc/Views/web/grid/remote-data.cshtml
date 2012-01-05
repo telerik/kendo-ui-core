@@ -2,13 +2,6 @@
         <div id="example" class="k-content">
             <div id="grid"></div>
             <script>
-                var dateRegExp = /^\/Date\((.*?)\)\/$/;
-
-                function toDate(value) {
-                    var date = dateRegExp.exec(value);
-                    return new Date(parseInt(date[1]));
-                }
-
                 $(document).ready(function() {
                     $("#grid").kendoGrid({
                         dataSource: {
@@ -42,7 +35,7 @@
                             },
                             "Freight", {
                                 field: "OrderDate",
-                                template: '#= kendo.toString(toDate(OrderDate), "MM/dd/yyyy")#'
+                                format: "{0:MM/dd/yyyy}"
                             },
                             "ShipName",
                             "ShipCity"
