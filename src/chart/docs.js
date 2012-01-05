@@ -598,6 +598,111 @@
          *      }]
          *  }
          *  // ...
+         * @option {Object} [valueAxis.title] The title of the axis.
+         * @option {String} [valueAxis.title.font] <"12px Arial,Helvetica,sans-serif">
+         * The font style of the title.
+         * @option {Number|Object} [valueAxis.title.margin] <0> The margin of the title.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 0px (by default)
+         * margin: { top: 1, left: 1 }
+         * @option {Number|Object} [valueAxis.title.padding] <0> The padding of the title.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 0px (by default)
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [valueAxis.title.border] The border of the title.
+         * @option {Number} [valueAxis.title.border.width] <0> The width of the border.
+         * @option {String} [valueAxis.title.border.color] <"black"> The color of the border.
+         * @option {String} [valueAxis.title.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {Number} [valueAxis.title.rotation] <0> The rotation angle of the title.
+         * @option {String} [valueAxis.title.position] <"center"> The position of the title.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"top"</code>
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the top (work only with vertical axis).
+         *         </dd>
+         *         <dt>
+         *              <code>"bottom"</code>
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the bottom (work only with vertical axis).
+         *         </dd>
+         *         <dt>
+         *              <code>"left"</code>
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the left (work only with horizontal axis).
+         *         </dd>
+         *         <dt>
+         *              <code>"right"</code>
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the right (work only with horizontal axis).
+         *         </dd>
+         *         <dt>
+         *              <code>"center"</code>
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned in the center.
+         *         </dd>
+         *    </dl>
+         * </div>
          *
          * @option {Object} [xAxis] The scatter charts X-axis configuration options.
          * See valueAxis for detailed members list.
@@ -795,6 +900,111 @@
          *      }]
          *  }
          *  // ...
+         * @option {Object} [categoryAxis.title] The title of the axis.
+         * @option {String} [categoryAxis.title.font] <"12px Arial,Helvetica,sans-serif">
+         * The font style of the title.
+         * @option {Number|Object} [categoryAxis.title.margin] <0> The margin of the title.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 0px (by default)
+         * margin: { top: 1, left: 1 }
+         * @option {Number|Object} [categoryAxis.title.padding] <0> The padding of the title.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 0px (by default)
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [categoryAxis.title.border] The border of the title.
+         * @option {Number} [categoryAxis.title.border.width] <0> The width of the border.
+         * @option {String} [categoryAxis.title.border.color] <"black"> The color of the border.
+         * @option {String} [categoryAxis.title.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {Number} [categoryAxis.title.rotation] <0> The rotation angle of the title.
+         * @option {String} [categoryAxis.title.position] <"center"> The position of the title.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"top"</code>
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the top (work only with vertical axis).
+         *         </dd>
+         *         <dt>
+         *              <code>"bottom"</code>
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the bottom (work only with vertical axis).
+         *         </dd>
+         *         <dt>
+         *              <code>"left"</code>
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the left (work only with horizontal axis).
+         *         </dd>
+         *         <dt>
+         *              <code>"right"</code>
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the right (work only with horizontal axis).
+         *         </dd>
+         *         <dt>
+         *              <code>"center"</code>
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned in the center.
+         *         </dd>
+         *    </dl>
+         * </div>
          *
          * @option {Object} [seriesDefaults] Default values for each series.
          * @option {Boolean} [seriesDefaults.stacked] <false>
