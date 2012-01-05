@@ -20,7 +20,7 @@
      *  A <b>PanelBar</b> will utilize an HTML list to define its structure
      *  and content.
      * </p>
-     * 
+     *
      * @exampleTitle Create a list of items
      * @example
      * <ul id="panelBar">
@@ -39,7 +39,7 @@
      *  A <b>PanelBar</b> can be created by targeting the root element of a
      *  HTML list.
      * </p>
-     * 
+     *
      * @exampleTitle Initialize the PanelBar via a jQuery ID selector
      * @example
      * $(document).ready(function() {
@@ -102,7 +102,7 @@
      *   { text: "Item 2" }
      *  ]
      * });
-     * 
+     *
      * @section
      * <h3>Loading Content with AJAX</h3>
      * <p>
@@ -412,7 +412,6 @@
          * Creates a PanelBar instance.
          * @constructs
          * @extends kendo.ui.Widget
-         * @class PanelBar UI widget
          * @param {Selector} element DOM element
          * @param {Object} options Configuration options.
          *
@@ -445,6 +444,7 @@
          * The visual animation(s) that will be used when opening items.
            * _exampleTitle Defining a custom animation when opening items
            * that executes over 200 milliseconds
+           * _example
            * $("#panelBar").kendoPanelBar({
            *  animation: {
            *   open: {
