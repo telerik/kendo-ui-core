@@ -350,6 +350,18 @@
                 equal(view[0].bar, "baz");
             });
 
+            test("filter first page is shown", function() {
+                var dataSource = new DataSource({
+                    data: [{ id:1 }, { id: 2 }],
+                    pageSize: 1,
+                    page: 2
+                });
+
+                dataSource.filter( { field: "id", operator: "==", value: 2 });
+                equal(dataSource.page(), 1);
+                equal(dataSource.view()[0].id, 2);
+            });
+
             test("filter operators are normalized", function() {
                 var dataSource = new DataSource({
                     data: [{ id:1 }, { id: 2 }]

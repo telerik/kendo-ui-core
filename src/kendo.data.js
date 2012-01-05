@@ -1619,7 +1619,7 @@
                 return that._filter;
             }
 
-            that._query({ filter: val });
+            that._query({ filter: val, page: 1 });
         },
 
         /**
