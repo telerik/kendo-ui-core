@@ -26,10 +26,8 @@ namespace Kendo.Controllers
 
         protected static readonly IDictionary<String, String> AssetRoots =
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
-                { "src/js", "src" },
-                { "src/styles", "styles" },
-                { "shared/js", "demos/examples/shared/js" },
-                { "shared/styles", "demos/examples/shared/styles" }
+                { "js", "src" },
+                { "styles", "styles" }
             };
 
         public ActionResult StaticContent(string path)

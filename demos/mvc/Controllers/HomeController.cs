@@ -7,7 +7,7 @@ namespace Kendo.Controllers
     public class HomeController : Controller
     {
         //
-        // GET: /Home/
+        // GET: /
 
         public ActionResult Index()
         {

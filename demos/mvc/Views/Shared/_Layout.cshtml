@@ -2,13 +2,12 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.common.css" })" rel="stylesheet" />
-    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.default.css" })" rel="stylesheet" />
-    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "mobile/kendo.mobile.common.css" })" rel="stylesheet" />
+    @foreach (string styleName in Kendo.Models.StyleGroups.All) {
+    <link href="@Url.Style(styleName)" rel="stylesheet" />
+    }
     <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
-    @foreach (var scriptName in ViewBag.scripts)
-    {
-        <script src="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "js", file = scriptName })"></script>
+    @foreach (string scriptName in ViewBag.scripts) {
+    <script src="@Url.Script(scriptName)"></script>
     }
     <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
     <script src="@Url.Content("~/content/shared/js/console.js")"></script>
