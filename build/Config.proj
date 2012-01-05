@@ -2,10 +2,8 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
 	<PropertyGroup>
 		<!--Change for every major (quarterly) release -->
-		<Year>2011</Year>
-		<Release>3</Release>
-		<!-- Leave empty if this is a major release -->
-		<ServicePack></ServicePack>
+		<Year>2012</Year>
+		<Release>1</Release>
 
 		<!-- CDN Resources configuration -->
 		<CDNAccessKeyId>AKIAJSDTTSFPVFUMHBGA</CDNAccessKeyId>
