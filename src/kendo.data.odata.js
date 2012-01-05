@@ -1,5 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
+        extend = $.extend,
         odataFilters = {
             eq: "eq",
             neq: "ne",
@@ -10,6 +11,34 @@
             contains : "substringof",
             endswith: "endswith",
             startswith: "startswith"
+        },
+        mappers = {
+            pageSize: $.noop,
+            page: $.noop,
+            filter: function(params, filter) {
+                params.$filter = toOdataFilter(filter);
+            },
+            sort: function(params, orderby) {
+                params.$orderby = $.map(orderby, function(value) {
+                    var order = value.field.replace(/\./g, "/");
+
+                    if (value.dir === "desc") {
+                        order += " desc";
+                    }
+
+                    return order;
+                }).join(",");
+            },
+            skip: function(params, skip) {
+                if (skip) {
+                    params.$skip = skip;
+                }
+            },
+            take: function(params, take) {
+                if (take) {
+                    params.$top = take;
+                }
+            }
         };
 
     function toOdataFilter(filter) {
@@ -74,7 +103,7 @@
         return filter;
     }
 
-    $.extend(true, kendo.data, {
+    extend(true, kendo.data, {
         schemas: {
             odata: {
                 type: "json",
@@ -91,34 +120,23 @@
                     jsonp: false // to prevent jQuery from adding the jsonpCallback in the query string - we will add it ourselves
                 },
                 parameterMap: function(options) {
-                    var result = ["$format=json", "$inlinecount=allpages", "$callback=callback"],
-                        data = options || {};
+                    var params = {
+                            $format: "json",
+                            $inlinecount: "allpages",
+                            $callback: "callback"
+                        },
+                        option;
 
-                    if (data.skip) {
-                        result.push("$skip=" + data.skip);
+                    options = options || {};
+
+                    for (option in options) {
+                        if (mappers[option]) {
+                            mappers[option](params, options[option]);
+                        } else {
+                            params[option] = options[option];
+                        }
                     }
-
-                    if (data.take) {
-                        result.push("$top=" + data.take);
-                    }
-
-                    if (data.sort) {
-                        result.push("$orderby=" + $.map(data.sort, function(value) {
-                            var order = value.field.replace(/\./g, "/");
-
-                            if (value.dir === "desc") {
-                                order += " desc";
-                            }
-
-                            return order;
-                        }).join(","));
-                    }
-
-                    if (data.filter) {
-                        result.push("$filter=" + toOdataFilter(data.filter));
-                    }
-
-                    return result.join("&");
+                    return params;
                 }
             }
         }
