@@ -43,6 +43,7 @@ var bundles = [{
     hasSource: true
 }];
 
+
 var VERSION = kendoBuild.generateVersion(),
     LATEST = "latest",
     INDEX = "index.html",
@@ -52,7 +53,6 @@ var VERSION = kendoBuild.generateVersion(),
     TEMPLATES_ROOT = path.join("build", "templates"),
     SUITE_INDEX = path.join(TEMPLATES_ROOT, "suite-index.html"),
     BUNDLE_INDEX = path.join(TEMPLATES_ROOT, "bundle-index.html"),
-    EXAMPLE_TEMPLATE = path.join(TEMPLATES_ROOT, "example.html"),
     CONTENT_ROOT = "content",
     VIEWS_ROOT = "Views",
     LEGAL_ROOT = path.join("resources", "legal"),
@@ -134,7 +134,6 @@ function deployExamples(root, bundle) {
         viewsRoot = path.join(DEMOS_ROOT, VIEWS_ROOT),
         stylesPath = "../../../styles/$2.min.css",
         scriptsPath = "../../../js/$2.min.js",
-        exampleTemplate = template(readText(EXAMPLE_TEMPLATE)),
         suiteIndexTemplate = template(readText(SUITE_INDEX)),
         bundleIndexTemplate = template(readText(BUNDLE_INDEX)),
         bundleIndex = bundleIndexTemplate(bundle);
@@ -155,6 +154,7 @@ function deployExamples(root, bundle) {
 
     bundle.suites.forEach(function(suite) {
         var navigationFile = path.join(DEMOS_ROOT, "App_Data", suite + ".nav.json"),
+            exampleTemplate = template(readText(path.join(TEMPLATES_ROOT, suite + "-example.html"))),
             navigationData = readText(navigationFile),
             navigation = JSON.parse(navigationData),
             suiteDest = path.join(examplesRoot, suite),
