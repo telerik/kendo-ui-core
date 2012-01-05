@@ -275,6 +275,22 @@
                 ok(splitter.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
                 ok(!splitter.find(".k-splitbar .k-collapse-prev").length);
             });
+
+            test("collapsing the last fluid pane distributes remaining size to neighbour pane", function() {
+                var splitter = $(getSplitterHtml(2))
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [
+                                { collapsible: true, size: "50px" },
+                                { collapsible: true }
+                            ]
+                        });
+
+                splitter.data("kendoSplitter").collapse(".k-pane:last");
+
+                equal(splitter.find(".k-pane:first").width(), splitter.width() - 7);
+                equal(splitter.find(".k-splitbar:first")[0].offsetLeft, splitter.width() - 7);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
