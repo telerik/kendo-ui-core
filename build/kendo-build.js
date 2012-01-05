@@ -4,7 +4,8 @@ var fs = require("fs"),
     path = require("path"),
     parser = require("./lib/parse-js"),
     spawn = require('child_process').spawn,
-    uglify = require("./lib/process");
+    uglify = require("./lib/process"),
+    cssmin = require("./lib/cssmin").cssmin;
 
 function rmdirSyncRecursive(path) {
     if (!existsSync(path)) {
@@ -237,11 +238,30 @@ function mkdir(newDir) {
     }
 }
 
+function deployStyles(stylesRoot, outputRoot, header, compress) {
+    var filesRegex = compress ? /\.(css|png|jpg|jpeg|gif)$/i : /\.(less|css|png|jpg|jpeg|gif)$/i,
+        stylesRegex = compress ? /\.css$/ : /\.(less|css)$/ ;
+
+    mkdir(outputRoot);
+    copyDirSyncRecursive(stylesRoot, outputRoot, false, filesRegex);
+    processFilesRecursive(outputRoot, stylesRegex, function(fileName) {
+        var css = stripBOM(readText(fileName)),
+            output = compress ? cssmin(css) : css;
+
+        writeText(fileName, header + output);
+
+        if (compress) {
+            fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
+        }
+    });
+}
+
 // Exports ====================================================================
 exports.addBOM = addBOM;
 exports.copyDirSyncRecursive = copyDirSyncRecursive;
 exports.copyFileSync = copyFileSync;
 exports.copyTextFile = copyTextFile;
+exports.deployStyles = deployStyles;
 exports.generateVersion = generateVersion;
 exports.hasBOM = hasBOM;
 exports.merge = merge;
