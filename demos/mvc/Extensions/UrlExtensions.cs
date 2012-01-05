@@ -32,11 +32,11 @@ namespace Kendo.Extensions
 #if DEBUG
             return url.RouteUrl("Debug", new { assetType = assetType, file = file });
 #else
-            return string.Format("{0}/{1}/{2}",
+            return url.Content(string.Format("{0}/{1}/{2}",
                 ConfigurationManager.AppSettings["CDN_ROOT"],
                 assetType,
                 file
-            );
+            ));
 #endif
         }
     }
