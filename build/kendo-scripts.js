@@ -71,6 +71,27 @@ var deployScripts = [{
         "kendo.data.js",
         "kendo.chart.js"
     ]
+}, {
+    output: "kendo.mobile.js",
+    inputs: [
+        "kendo.core.js",
+        "kendo.model.js",
+        "kendo.fx.js",
+        "kendo.data.odata.js",
+        "kendo.data.xml.js",
+        "kendo.data.js",
+        "kendo.history.js",
+        "kendo.mobile.core.js",
+        "kendo.mobile.view.js",
+        "kendo.mobile.application.js",
+        "kendo.mobile.button.js",
+        "kendo.mobile.listview.js",
+        "kendo.mobile.navbar.js",
+        "kendo.mobile.radiogroup.js",
+        "kendo.mobile.scroller.js",
+        "kendo.mobile.switch.js",
+        "kendo.mobile.tabstrip.js"
+    ]
 }];
 
 var thirdPartyScripts = [
