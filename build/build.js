@@ -35,6 +35,12 @@ var bundles = [{
     license: "open-source",
     eula: "eula",
     hasSource: true
+}, {
+    name: "kendoui.mobile",
+    suites: ["mobile"],
+    license: "beta",
+    eula: "eula",
+    hasSource: true
 }];
 
 var VERSION = kendoBuild.generateVersion(),
