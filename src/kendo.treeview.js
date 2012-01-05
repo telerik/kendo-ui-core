@@ -79,7 +79,7 @@
      *  drag-and-drop behaviors.
      * </p>
      *
-     * @exampleTitle Enabling TreeView Node Drag-and-Drop
+     * @exampleTitle Enabling drag-and-drop for TreeView nodes
      * @example
      * $("#treeView").kendoTreeView({
      *  dragAndDrop: true
@@ -96,7 +96,7 @@
      *  You can reference an existing <b>TreeView</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
      *  Once a reference has been established, you can use the API to control
-     *  its behavior. 
+     *  its behavior.
      * </p>
      *
      * @exampleTitle Accessing an existing TreeView instance
@@ -852,9 +852,8 @@
         },
 
         /**
-         * Appends a node to a treeview group.
-         * @param {NodeData} nodeData JSON that specifies the node data, or a reference to a node in the TreeView.
-         * @param {Node} [parentNode] The node that will contain the newly appended node. If not specified, the new node will be appended to the root group of the treeview.
+         *
+         * Appends a node to a group of a <b>TreeView</b>.
          * @example
          * var treeview = $("#treeview").data("kendoTreeView");
          *
@@ -863,8 +862,17 @@
          *
          * // moves the node with id="secondNode" as a last child of the node with id="firstItem"
          * treeview.append(document.getElementById("secondNode"), document.getElementById("firstItem"));
-         * // appends several new nodes to the root of the tree
-         * treeview.append([ { text: "one" }, { text: "bar" }]);
+         *
+         *
+         * @param {NodeData} nodeData
+         * JSON that specifies the node data, or a reference to a node in the
+         * TreeView.
+         *
+         * @param {Node} [parentNode]
+         * The node that will contain the newly appended node. If not
+         * specified, the new node will be appended to the root group of the
+         * treeview.
+         *
          */
         append: function (nodeData, parentNode) {
             parentNode = parentNode || this.element;

@@ -420,6 +420,8 @@
          * A collection of visual animations used when <b>PanelBar</b> items
          * are opened or closed through user interactions. Setting this
          * option to <b>false</b> will disable all animations.
+           * _exampleTitle Defining custom animations when opening and
+           * closing items
            * _example
            * $("#panelBar").kendoPanelBar({
            *  animation: {
@@ -440,8 +442,9 @@
            * });
          *
          * @option {Object} [animation.open]
-         * The visual animation(s) that will be used when expanding items.
-           * _example
+         * The visual animation(s) that will be used when opening items.
+           * _exampleTitle Defining a custom animation when opening items
+           * that executes over 200 milliseconds
            * $("#panelBar").kendoPanelBar({
            *  animation: {
            *   open: {
@@ -455,6 +458,8 @@
          * @option {Number} [animation.open.duration] <200>
          * The number of milliseconds used for the visual animation when an
          * item is opened.
+           * _exampleTitle Defining a custom animation for opening items that
+           * executes over 1000 milliseconds
            * _example
            * $("#panelBar").kendoPanelBar({
            *  animation: {
@@ -476,14 +481,14 @@
          * @option {Object} [animation.close]
          * The visual animation(s) that will be used when <b>PanelBar</b>
          * items are closed.
+           * _exampleTitle Defining a custom animation for closing items that
+           * executes over 200 milliseconds
            * _example
            * $("#panelBar").kendoPanelBar({
            *  animation: {
            *   close: {
            *    duration: 200,
-           *    effects: "fadeOut",
-           *    hide: true,
-           *    show: false
+           *    effects: "fadeOut"
            *   }
            *  }
            * });
@@ -491,8 +496,8 @@
          * @option {Number} [animation.close.duration] <200>
          * The number of milliseconds used for the visual animation when a
          * <b>PanelBar</b> item is closed.
+           * _exampleTitle Animating all closing items for 1000 milliseconds
            * _example
-           * // animate all closing items for 1000 milliseconds
            * $("#panelBar").kendoPanelBar({
            *  animation: {
            *   close: {
@@ -505,8 +510,8 @@
          * A whitespace-delimited string of animation effects that are
          * utilized when a <b>PanelBar</b> item is closed. Options include
          * <b>"fadeOut"</b>.
+           * _exampleTitle Fading-out all closing items for 1000 milliseconds
            * _example
-           * // fade-out all closing items for 1000 milliseconds
            * $("#panelBar").kendoPanelBar({
            *  animation: {
            *   close: {
@@ -657,9 +662,9 @@
          * The <b>PanelBar</b> item(s) to be expanded, expressed as a
          * <a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.
          *
-         * @param {Boolean} useAnimation
-         * (Optional) Temporariliy enables (<b>true</b>) or disables
-         * (<b>false</b>) any visual animation(s) when expanding items.
+         * @param {Boolean} [useAnimation]
+         * Temporariliy enables (<b>true</b>) or disables (<b>false</b>) any
+         * visual animation(s) when expanding items.
          *
          */
         expand: function (element, useAnimation) {
@@ -716,9 +721,9 @@
          * containing a selector expression or represented by a
          * <a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.
          *
-         * @param {Boolean} useAnimation
-         * (Optional) Temporariliy enables (<b>true</b>) or disables
-         * (<b>false</b>) any visual animation(s) when collapsing items.
+         * @param {Boolean} [useAnimation]
+         * Temporariliy enables (<b>true</b>) or disables (<b>false</b>) any
+         * visual animation(s) when collapsing items.
          *
          */
         collapse: function (element, useAnimation) {
