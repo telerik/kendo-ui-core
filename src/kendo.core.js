@@ -1355,20 +1355,33 @@
         function detectOS(ua) {
             var os = false, match = [],
                 agentRxs = {
+                    fire: /(Silk)\/(\d+)\.(\d+(\.\d+)?)/,
                     android: /(Android)\s+(\d+)\.(\d+(\.\d+)?)/,
                     iphone: /(iPhone|iPod).*OS\s+(\d+)[\._]([\d\._]+)/,
                     ipad: /(iPad).*OS\s+(\d+)[\._]([\d_]+)/,
                     meego: /(MeeGo).+NokiaBrowser\/(\d+)\.([\d\._]+)/,
                     webos: /(webOS)\/(\d+)\.(\d+(\.\d+)?)/,
                     blackberry: /(BlackBerry|PlayBook).*?Version\/(\d+)\.(\d+(\.\d+)?)/
+                },
+                osRxs = {
+                    ios: /^i(phone|pad|pod)$/i,
+                    android: /^android|fire$/i
+                },
+                testOs = function (agent) {
+                    for (var os in osRxs) {
+                        if (osRxs.hasOwnProperty(os) && osRxs[os].test(agent))
+                            return os;
+                    }
+                    return agent;
                 };
+
             for (var agent in agentRxs) {
                 if (agentRxs.hasOwnProperty(agent)) {
                     match = ua.match(agentRxs[agent]);
                     if (match) {
                         os = {};
                         os.device = agent;
-                        os.name = /^i(phone|pad|pod)$/i.test(agent) ? "ios" : agent;
+                        os.name = testOs(agent);
                         os[os.name] = true;
                         os.majorVersion = match[2];
                         os.minorVersion = match[3].replace("_", ".");
