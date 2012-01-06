@@ -483,7 +483,7 @@
         },
 
         _dataOrDefault: function(element, option) {
-            return typeof element.data(option) !== "undefined" ? element.data(option) : this.options[option];
+            return typeof element.data(kendo.ns + option) !== "undefined" ? element.data(option) : this.options[option];
         }
     });
 
