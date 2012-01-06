@@ -16,15 +16,22 @@ function publish(symbolSet) {
         c.methods = c.getMethods(); // 2
 
         allSections.forEach(function(section) {
-            var template = new JSDOC.JsPlate(templatesDir + section + ".tmpl");
+            var template = new JSDOC.JsPlate(templatesDir + section + ".tmpl"),
+                html = template.process(c);
 
-            IO.saveFile(
-                outDir,
-                c.alias.toLowerCase() + "." + section + ".html",
-                template.process(c)
-            );
+            if (hasValue(html)) {
+                IO.saveFile(
+                    outDir,
+                    c.alias.toLowerCase() + "." + section + ".html",
+                    html
+                );
+            }
         });
     });
+}
+
+function hasValue(text) {
+    return text.replace(/^\s*|\s*$/g, '').length > 0;
 }
 
 function isaClass($) {
