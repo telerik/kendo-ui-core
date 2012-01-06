@@ -867,13 +867,13 @@
             that.element.addClass("k-widget k-reset k-header k-panelbar");
 
             var items = that.element
-                            .find("ul")
+                            .find("li > ul")
                             .addClass("k-group")
                             .end()
                             .find("li:not(" + ACTIVECLASS + ") > ul")
                             .css({ display: "none" })
                             .end()
-                            .find("li");
+                            .find("> li,.k-group > li");
 
             items.each(function () {
                 updateItemClasses(this, that.element);
