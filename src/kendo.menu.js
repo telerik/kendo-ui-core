@@ -331,11 +331,16 @@
          * @option {Object} [animation] A collection of <b>Animation</b> objects, used to change default animations. A value of false will disable all animations in the widget.
          * <p>Available animations for the <b>Menu</b> are listed below.  Each animation has a reverse options which is used for the <b>close</b> effect by default, but can be over-ridden
          * by setting the <b>close</b> animation.  Each animation also has a direction which can be set off the animation (i.e. <b>slideIn:Down</b>).</p>
-         * <ul>
-         *     <li><b>slideIn</b></li>
-         *     <li><b>fadeIn</b></li>
-         *     <li><b>expand</b></li>
-         * </ul>
+         * <div class="details-list">
+	 * <dl>
+         *     <dt><b>slideIn</b></dt>
+         *     <dd>Menu content slides in from the top</dd>
+	 *     <dt><b>fadeIn</b></dt>
+	 *     <dd>Menu content fades in</dd>
+         *     <dt><b>expand</b></dt>
+	 *     <dd>Menu content expands from the top down. Similar to slideIn.</dd>
+         * </dl>
+	 * </div>
          * _example
          *  $("#menu").kendoMenu({
          *      animation: { open: { effects: "fadeIn" } }
@@ -424,6 +429,7 @@
                  *  $("#menu").kendoMenu({
                  *      open: function(e) {
                  *          // handle event
+		 *      }
                  *  });
                  * @exampleTitle To set after initialization
                  * @example
@@ -445,7 +451,8 @@
                  *  $("#menu").kendoMenu({
                  *      close: function(e) {
                  *          // handle event
-                 *  });
+                 *      }
+		 *  });
                  * @exampleTitle To set after initialization
                  * @example
                  *  // get a reference to the menu widget
@@ -466,7 +473,8 @@
                  *  $("#menu").kendoMenu({
                  *      select: function(e) {
                  *          // handle event
-                 *  });
+                 *      }
+	  	 *  });
                  * @exampleTitle To set after initialization
                  * @example
                  *  // get a reference to the menu widget
