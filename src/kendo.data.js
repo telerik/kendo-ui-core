@@ -1363,7 +1363,13 @@
          * @returns {Object} Model instance if found
          */
         get: function(id) {
-            return this._set.get(id);
+            var idx, length, data = this._data;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].id == id) {
+                    return data[idx];
+                }
+            }
         },
 
         /**
@@ -1379,7 +1385,7 @@
          * @returns {Object} The Model instance which has been added
          */
         add: function(model) {
-            return this._set.add(model);
+            return this.insert(this._data.length, model);
         },
 
         /**
@@ -1389,7 +1395,16 @@
          * @returns {Object} The Model instance which has been inserted
          */
         insert: function(index, model) {
-            return this._set.insert(index, model);
+            if (!model) {
+                model = index;
+                index = 0;
+            }
+
+            model = model instanceof kendo.data.Model ? model : new this.reader.model(model);
+
+            this._data.splice(index, 0, model);
+
+            return model;
         },
 
         /**
@@ -1459,7 +1474,15 @@
          * @param {Object} model Model instance to be removed
          */
         remove: function(model) {
-            this._set.remove(model);
+            var idx, length, data = this._data;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].id == model.id) {
+                    model = data[idx];
+                    data.splice(idx, 1);
+                    return model;
+                }
+            }
         },
 
         error: function() {
