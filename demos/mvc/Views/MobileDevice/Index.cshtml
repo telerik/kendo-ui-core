@@ -15,7 +15,7 @@
     <script src="@Url.Content("~/content/shared/js/console.js")"></script>
 </head>
 <body>
-    <div data-role="view">
+    <div data-role="view" data-title="Kendo Mobile &ndash; Overview" id="index">
     @foreach (string category in ViewBag.Navigation.Keys)
     {
         <ul data-role="listview" data-type="group" data-style="inset">
@@ -40,15 +40,25 @@
     <div data-id="examples" data-role="layout">
         <header data-role="header">
             <div data-role="navbar">
-                <a data-align="left" data-role="back-button">Back</a>
+                <a class="nav-button" data-align="left" data-role="back-button">Back</a>
+                <a data-align="left" data-role="button">Test</a>
                 <span data-role="view-title"></span>
+                <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
             </div>
         </header>
     </div>
 
     <script>
         document.title = "@ViewBag.Title";
-        window.kendoMobileApplication = new kendo.mobile.Application();
+        window.kendoMobileApplication = new kendo.mobile.Application($(document.body), {
+            layout: "examples",
+            transition: "slide",
+            viewShow: function(e) {
+                var viewID = e.view.element.attr("id");
+                e.view.element.find(".nav-button").toggle(viewID != "index");
+            }
+        });
+
     </script>
 </body>
 </html>
