@@ -83,20 +83,8 @@ var suiteScripts = {
     ]
 };
 
-var allScripts = [],
-    deployCache = { },
+var deployCache = { },
     mergeCache = { };
-
-for (var suite in suiteScripts) {
-    allScripts = allScripts.concat(
-        suiteScripts[suite].filter(function(script) {
-            return allScripts.indexOf(script) === -1;
-        })
-    );
-}
-
-suiteScripts.all = allScripts;
-
 
 // Implementation =============================================================
 function buildSuiteScripts(suite, outputRoot, header, compress) {
@@ -120,6 +108,21 @@ function buildSuiteScripts(suite, outputRoot, header, compress) {
 
     console.log("\t" + scriptOutName(suiteScript, compress));
     mergeMultipartScript(scripts, suiteScript, outputRoot, header, compress);
+}
+
+function buildCombinedScript(name, suites, outputRoot, header, compress) {
+    var scripts = [],
+        combinedScript = "kendo." + name + ".js";
+
+    suites.forEach(function(suite) {
+        scripts = scripts.concat(
+            suiteScripts[suite].filter(function(script) {
+                return scripts.indexOf(script) === -1;
+            })
+        );
+    });
+
+    mergeMultipartScript(scripts, combinedScript, outputRoot, header, compress);
 }
 
 function buildCultures(outputRoot, header, compress) {
@@ -189,6 +192,7 @@ function scriptOutName(scriptName, compress) {
 if (require.main !== module) {
     exports.mergeScripts = mergeScripts;
     exports.buildSuiteScripts = buildSuiteScripts;
+    exports.buildCombinedScript = buildCombinedScript;
 } else {
     console.log("merging multipart scripts...");
     mergeScripts();

@@ -37,19 +37,16 @@ var bundles = [{
 }, {
     name: "kendoui.web",
     suites: ["web"],
-    combinedScript: "all",
     licenses: productionLicenses,
     eula: "eula",
 }, {
     name: "kendoui.dataviz",
     suites: ["dataviz"],
-    combinedScript: "all",
     licenses: productionLicenses,
     eula: "eula"
 }, {
     name: "kendoui.mobile",
     suites: ["mobile"],
-    combinedScript: "all",
     licenses: betaLicenses,
     eula: "eula"
 }];
@@ -108,10 +105,20 @@ function deployScripts(root, bundle, license, hasSource) {
     }
 
     bundle.suites.forEach(function(suite) {
-        kendoScripts.buildSuiteScripts(suite, scriptsDest, license, true);
+        var buildSuitScripts = function(dest, compress) {
+            kendoScripts.buildSuiteScripts(suite, dest, license, compress);
+
+            if (bundle.combinedScript) {
+                kendoScripts.buildCombinedScript(
+                    bundle.combinedScript, bundle.suites,
+                    dest, license, compress);
+            }
+        };
+
+        buildSuitScripts(scriptsDest, true);
 
         if (hasSource) {
-            kendoScripts.buildSuiteScripts(suite, sourceDest, license, false);
+            buildSuitScripts(sourceDest, false);
         }
     });
 }
