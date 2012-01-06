@@ -32,12 +32,22 @@ namespace Kendo.Extensions
 #if DEBUG
             return url.RouteUrl("Debug", new { assetType = assetType, file = file });
 #else
+            if (IsAbsoluteUrl(file)) {
+                return file;
+            }
+
             return url.Content(string.Format("{0}/{1}/{2}",
                 ConfigurationManager.AppSettings["CDN_ROOT"],
                 assetType,
                 file
             ));
 #endif
+        }
+
+        private static bool IsAbsoluteUrl(string url)
+        {
+            Uri result;
+            return Uri.TryCreate(url, UriKind.Absolute, out result);
         }
     }
 }
