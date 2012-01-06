@@ -80,7 +80,7 @@ function buildStaging(outputRoot) {
     mkdir(contentDest);
 
     mkdir(scriptsDest);
-    kendoScripts.deployScripts(SOURCE_ROOT, scriptsDest, "", true);
+    kendoScripts.buildBundleScripts(SOURCE_ROOT, scriptsDest, "", true);
 
     mkdir(stylesDest);
     kendoBuild.deployStyles(STYLES_ROOT, stylesDest, "", true);
