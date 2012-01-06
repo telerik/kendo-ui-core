@@ -60,9 +60,7 @@
     ViewSwitcher = Class.extend({
         init: function(previous, view) {
             var that = this,
-                callback = function() {
-                    previous.element.hide();
-                },
+                callback = function() { previous.element.hide(); },
                 animationType;
 
             that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(kendo.history.url().params);
