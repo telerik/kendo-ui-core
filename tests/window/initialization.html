@@ -202,6 +202,16 @@
 
                 equal(iframe.length, 0);
             });
+
+            test("creating window with minHeight constrains larger content with inner minHeight", function() {
+                var dialog = createWindow({
+                        minHeight: 200
+                    });
+
+                console.log(dialog.element);
+
+                equal(parseInt(dialog.element.css("minHeight")), 200);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
