@@ -139,8 +139,8 @@
             messages: {
                 required: "{0} is required",
                 pattern: "{0} is not valid",
-                min: "{0} should be greater than {1}",
-                max: "{0} should be smaller than {1}",
+                min: "{0} should be greater than or equal to {1}",
+                max: "{0} should be smaller than or equal to {1}",
                 step: "{0} is not valid",
                 email: "{0} is not valid email",
                 url: "{0} is not valid URL",
@@ -149,10 +149,8 @@
             rules: {
                 required: function(input) {
                     var checkbox = input.filter("[type=checkbox]").length && input.attr("checked") !== "checked";
-                    if (hasAttribute(input, "required") && (input.val() === "" || checkbox)) {
-                        return false;
-                    }
-                    return true;
+                    return !(hasAttribute(input, "required") && (input.val() === "" || checkbox));
+
                 },
                 pattern: function(input) {
                     if (input.filter("[type=text],[type=email],[type=url],[type=tel],[type=search]").filter("[pattern]").length && input.val() !== "") {
@@ -260,7 +258,6 @@
         _validateInput: function(input) {
             var that = this,
                 template = that._errorTemplate,
-                customMessages = that.options.messages,
                 result = that._checkValidity(input),
                 valid = result.valid,
                 className = "." + INVALIDMSG,
