@@ -235,7 +235,7 @@
 	     * $("#numeric").kendoNumericTextBox({
 	     *     change: function(e) {
 	     *         // handle event
-	     *     });
+	     *     }
 	     * });
 	     * @exampleTitle To set after initialization
 	     * @example
@@ -292,6 +292,7 @@
         * Enable/Disable the numerictextbox widget.
         * @param {Boolean} enable The argument, which defines whether to enable/disable tha numerictextbox.
         * @example
+	* // get a reference to the numeric textbox
         * var textbox = $("#textbox").data("kendoNumericTextBox");
         *
         * // disables the numerictextbox
@@ -344,9 +345,10 @@
 
         /**
         * Gets/Sets the value of the numerictextbox.
-        * @param {Number|String} value The value to set.
+        * @param {Number | String} value The value to set.
         * @returns {Number} The value of the numerictextbox.
         * @example
+	* // get a referene to the numeric textbox
         * var numerictextbox = $("#textbox").data("kendoNumericTextBox");
         *
         * // get the value of the numerictextbox.
