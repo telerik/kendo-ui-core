@@ -176,9 +176,8 @@
 	  * $("#calendar").kendoCalendar({
           *     value: new Date(2012, 0, 1)
 	  * });
-	  * // 
-	  * // To set after initialization, use the API method
-	  * //
+	  * _exampleTitle To set after initialization
+	  * _example
 	  * // get a reference to the Kendo UI calendar widget
 	  * var calendar = $("#calendar").data("kendoCalendar");
 	  * // set the selected date on the calendar to Jan 1st, 2012
@@ -189,9 +188,8 @@
 	  * $("#calendar").kendoCalendar({
 	  *     min = new Date(2011, 0, 1)
 	  * });
-	  * //
-	  * // To set after initialization, use the API method
-	  * // 
+	  * _exampleTitle To set after initialization
+	  * _example
 	  * // get a reference to the Kendo UI calendar widget
 	  * var calendar = $("#calendar").data("kendoCalendar");
 	  * // set the min date to Jan 1st, 2011
@@ -201,9 +199,8 @@
 	  * $("#calendar").kendoCalendar({
 	  *     max = new Date(2013, 0, 1);
 	  * });
-	  * //
-	  * // To set after initialization, use the API method
-	  * //
+	  * _exampleTitle To set after initialization
+	  * _example
 	  * // get a reference to the Kendo UI calendar widget
 	  * var calendar = $("#calendar").data("kendoCalendar");
 	  * // set the max date to Jan 1st, 2013
@@ -213,6 +210,11 @@
 	  * // change the footer text from the default current date
 	  * $("#calendar").kendoCalendar({
 	  *     footer = "My Custom Footer"
+	  * });
+	  * _exampleTitle Hide the footer
+	  * _example
+	  * $("#calendar").kendoCalendar({
+	  *     footer = false;
 	  * });
           * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to parse value set with value() method.
 	  * _example
@@ -229,35 +231,35 @@
 	  * $("#calendar").kendoCalendar({
 	  *     depth: "year"
 	  * });
-        * @option {Function} [footer] <> Template to be used for rendering the footer. If false, the footer will not be rendered.
-         * _example
-         *
-         *  //calendar intialization
-         *  &lt;script&gt;
-         *      $("#calendar").kendoCalendar({
-         *          footer: kendo.template("Today - #=kendo.toString(data, 'd') #")
-         *      });
-         *  &lt;/script&gt;
-         * @option {Object} [month] <> Templates for the cells rendered in the "month" view.
-         * @option {Function} [month.content] <> Template to be used for rendering the cells in the "month" view, which are in range.
-         * _example
-         *  //template
-         *  &lt;script id="cellTemplate" type="text/x-kendo-tmpl"&gt;
-         *      &lt;div class="${ data.value < 10 ? exhibition : party }"&gt;
-         *      &lt;/div&gt;
-         *      ${ data.value }
-         *  &lt;/script&gt;
-         *
-         *  //calendar intialization
-         *  &lt;script&gt;
-         *      $("#calendar").kendoCalendar({
-         *          month: {
-         *             content:  kendo.template($("#cellTemplate").html()),
-         *          }
-         *      });
-         *  &lt;/script&gt;
-         * @option {Function} [month.empty] <> Template to be used for rendering the cells in the "month" view, which are not in the min/max range.
-         */
+          * @option {Function} [footer] <> Template to be used for rendering the footer. If false, the footer will not be rendered.
+          * _example
+          *
+          *  //calendar intialization
+          *  &lt;script&gt;
+          *      $("#calendar").kendoCalendar({
+          *          footer: kendo.template("Today - #=kendo.toString(data, 'd') #")
+          *      });
+          *  &lt;/script&gt;
+          * @option {Object} [month] <> Templates for the cells rendered in the "month" view.
+          * @option {Function} [month.content] <> Template to be used for rendering the cells in the "month" view, which are in range.
+          * _example
+          *  //template
+          *  &lt;script id="cellTemplate" type="text/x-kendo-tmpl"&gt;
+          *      &lt;div class="${ data.value < 10 ? exhibition : party }"&gt;
+          *      &lt;/div&gt;
+          *      ${ data.value }
+          *  &lt;/script&gt;
+          *
+          *  //calendar intialization
+          *  &lt;script&gt;
+          *      $("#calendar").kendoCalendar({
+          *          month: {
+          *             content:  kendo.template($("#cellTemplate").html()),
+          *          }
+          *      });
+          *  &lt;/script&gt;
+          * @option {Function} [month.empty] <> Template to be used for rendering the cells in the "month" view, which are not in the min/max range.
+          */
         init: function(element, options) {
             var that = this, value;
 
@@ -291,6 +293,7 @@
 		*         // handle event
 		*     });
 		* });
+		* @exampleTitle To set after initialization
 		* @example
 		* // get a reference to the Kendo UI calendar widget
 		* var calendar = $("#calendar").data("kendoCalendar");
@@ -310,6 +313,7 @@
 		*          // handle event 
 		*     }
 		* });
+		* @exampleTitle To set after initialization
 		* @example
 		* // get a reference to the Kendo UI calendar widget
 		* var calendar = $("#calendar").data("kendoCalendar");
@@ -357,6 +361,7 @@
         * @param {Date|String} value The min date to set.
         * @returns {Date} The min value of the calendar.
         * @example
+	* // get a reference to the calendar widget
         * var calendar = $("#calendar").data("kendoCalendar");
         *
         * // get the min value of the calendar.
@@ -371,9 +376,10 @@
 
         /**
         * Gets/Sets the max value of the calendar.
-        * @param {Date|String} value The max date to set.
+        * @param {Date | String} value The max date to set.
         * @returns {Date} The max value of the calendar.
         * @example
+	* // get a reference to the calendar widget
         * var calendar = $("#calendar").data("kendoCalendar");
         *
         * // get the max value of the calendar.
@@ -389,7 +395,10 @@
         /**
         * Navigates to the past
         * @example
-        * calendar.navigateToPast();
+	* // get a reference to the calendar widget
+	* var calendar = $("#calendar").data("kendoCalendar");
+	* // navigate to past
+	* calendar.navigateToPast();
         */
         navigateToPast: function() {
             this._navigate(PREVARROW, -1);
@@ -398,7 +407,10 @@
         /**
         * Navigates to the future
         * @example
-        * calendar.navigateToFuture();
+	* // get a reference to the calendar widget
+	* var calendar = $("#calendar").data("kendoCalendar");
+        * // navigate to future
+	* calendar.navigateToFuture();
         */
         navigateToFuture: function() {
             this._navigate(NEXTARROW, 1);
@@ -407,7 +419,10 @@
         /**
         * Navigates to the upper view
         * @example
-        * calendar.navigateUp();
+ 	* // get a reference to the calendar widget
+	* var calendar = $("#calendar").data("kendoCalendar");       
+	* // navigate up
+	* calendar.navigateUp();
         */
         navigateUp: function() {
             var that = this,
@@ -424,7 +439,10 @@
         * Navigates to the lower view
         * @param {Date} value Desired date
         * @example
-        * calendar.navigateDown(value);
+	* // get a reference to the calendar widget
+	* var calendar = $("#calendar").data("kendoCalendar");
+        * // navigate down
+	* calendar.navigateDown(value);
         */
         navigateDown: function(value) {
             var that = this,
@@ -451,7 +469,10 @@
         * @param {Date} value Desired date
         * @param {String} view Desired view
         * @example
-        * calendar.navigate(value, view);
+	* // get a reference to the calendar widget
+	* var calendar = $("#calendar").data("kendoCalendar");
+        * // navigate to the desired date
+	* calendar.navigate(value, view);
         */
         navigate: function(value, view) {
             view = isNaN(view) ? views[view] : view;
@@ -523,6 +544,7 @@
         * @param {Date|String} value The date to set.
         * @returns {Date} The value of the calendar.
         * @example
+	* // get a reference to the calendar widget
         * var calendar = $("#calendar").data("kendoCalendar");
         *
         * // get the value of the calendar.
