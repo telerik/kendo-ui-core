@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5" DefaultTargets="DeployCDN">
-    <Import Project="Config.proj" />
-
-    <UsingTask TaskName="Telerik.MSBuildTasks.GenerateVersionDependentSuffix" AssemblyFile="MSBuildTasks\Telerik.MSBuildTasks.dll"/>
     <UsingTask TaskName="UploadResources" AssemblyFile="MSBuildTasks\ResourceUploader.MSBuildTasks.dll" />
 
     <PropertyGroup>
-        <BundleRoot>$(ResourcesRoot)\kendoui.web-dataviz.open-source</BundleRoot>
-        <ExamplesRoot>$(ResourcesRoot)\online-examples</ExamplesRoot>
+        <!-- Required parameters: BundleRoot, Version -->
+        <CDNAccessKeyId>AKIAJSDTTSFPVFUMHBGA</CDNAccessKeyId>
+        <CDNSecretAccessKey>z06mYV37Z4ob6qpytAIEBQZtuej/dVoWniGn1kHf</CDNSecretAccessKey>
+        <!-- <CDNBucketName>kendo-static</CDNBucketName> -->
+        <CDNBucketName>testtelerik</CDNBucketName>
+        <CDNRoot>http://cdn.kendostatic.com/</CDNRoot>
     </PropertyGroup>
 
     <ItemGroup>
@@ -20,12 +21,8 @@
     </ItemGroup>
 
     <Target Name="DeployCDN">
-        <GenerateVersionDependentSuffix ReleaseYear="$(Year)" ReleaseQ="$(Release)" Separator=".">
-            <Output TaskParameter="Suffix" PropertyName="DateSuffixDots" />
-        </GenerateVersionDependentSuffix>
-
         <UploadResources
             SourcePath="%(Resource.Identity)" AccessKeyID="$(CDNAccessKeyId)" SecretAccessKey="$(CDNSecretAccessKey)"
-            BucketName="$(CDNBucketName)" DestinationPath="$(DateSuffixDots)%(Resource.DestinationPath)" Compress="True" />
+            BucketName="$(CDNBucketName)" DestinationPath="$(Version)%(Resource.DestinationPath)" Compress="True" />
     </Target>
 </Project>
