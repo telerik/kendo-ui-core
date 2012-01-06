@@ -333,7 +333,6 @@
                     <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
                     ', { layout: "foo" });
 
-                console.log(application.element);
                 equal(application.element.find(".km-footer").text(), "", "Layout footer is present");
             });
 
