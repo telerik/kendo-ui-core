@@ -181,70 +181,70 @@
         * @param {DomElement} element DOM element
         * @param {Object} options Configuration options.
         * @option {Object | kendo.data.DataSource } [dataSource] The set of data that the AutoComplete will be bound to.
-    *  Either a local JavaScript object, or an instance of the Kendo UI DataSource.
-        * _example
-    * var items = [ { Name: "Item 1" }, { Name: "Item 2"} ];
-    * $("#autoComplete").kendoAutoComplete({ dataSource: items });
-    * //
-    * // or
-    * //
-    * $("#autocomplete").kendoAutoComplete({
+        *  Either a local JavaScript object, or an instance of the Kendo UI DataSource.
+        * _exampleTitle Bind to local array
+	* _example
+        * var items = [ { Name: "Item 1" }, { Name: "Item 2"} ];
+        * $("#autoComplete").kendoAutoComplete({ dataSource: items });
+        * _exampleTitle Bind to a remote URL
+	* _example
+    	* $("#autocomplete").kendoAutoComplete({
         *     dataSource: new kendo.data.DataSource({
         *         transport: {
         *             read: "Items/GetData" // url to server method which returns data
         *         }
         *     });
         * });
-    * @option {Boolean} [enable] <true> Controls whether the AutoComplete should be initially enabled.
-    * _example
-    * // disable the autocomplete when it is created (enabled by default)
-    * $("#autoComplete").kendoAutoComplete({
-    *     enable: false
-    * });
+        * @option {Boolean} [enable] <true> Controls whether the AutoComplete should be initially enabled.
+        * _example
+        * // disable the autocomplete when it is created (enabled by default)
+        * $("#autoComplete").kendoAutoComplete({
+        *     enable: false
+        * });
         * @option {Boolean} [suggest] <false> Controls whether the AutoComplete should automatically auto-type the rest of text.
-    * _example
-    * // turn on auto-typing (off by default)
-    * $("#autoComplete").kendoAutoComplete({
-    *     suggest: true
-    * });
-    * @option {Number} [delay] <200> Specifies the delay in ms after which the AutoComplete will start filtering the dataSource.
-    * _example
-    * // set the delay to 500 milliseconds
-    * $("#autoComplete").kendoAutoComplete({
-    *     delay: 500
-    * });
-    * @option {Number} [minLength] <1> Specifies the minimum number of characters that should be typed before the AutoComplete queries
-    * the dataSource.
-    * _example
-    * // wait until the user types 3 characters before querying the server
-    * $("#autoComplete").kendoAutoComplete({
-    *     minLength: 3
-    * });
-    * @option {String} [dataTextField] <null> Sets the field of the data item that provides the text content of the list items.
-    * _example
-    * var items = [ { ID: 1, Name: "Item 1" }, { ID: 2, Name: "Item 2"} ];
-    * $("#autoComplete").kendoAutoComplete({
-    *     dataSource: items,
-    *     dataTextField: "Name"
-    * });
-    * @option {String} [filter] <"startswith"> Defines the type of filtration. This value is handled by the remote data source.
-    * _example
-    * // send a filter value of 'contains' to the server
-    * $("#autoComplete").kendoAutoComplete({
-    *     filter: 'contains'
-    * });
-    * @option {Number} [height] <200> Sets the height of the drop-down list in pixels.
-    * _example
-    * // set the height of the drop-down list that appears when the autocomplete is activated to 500px
-    * $("#autoComplete").kendoAutoComplete({
-    *     height: 500
-    * });
-    * @option {String} [separator] <""> Sets the separator for completion. Empty by default, allowing for only one completion.
-    * _example
-    * // set completion separator to ,
-    * $("#autoComplete").kendoAutoComplete({
-    *     separator: ", "
-    * });
+        * _example
+        * // turn on auto-typing (off by default)
+        * $("#autoComplete").kendoAutoComplete({
+        *     suggest: true
+        * });
+        * @option {Number} [delay] <200> Specifies the delay in ms after which the AutoComplete will start filtering the dataSource.
+        * _example
+        * // set the delay to 500 milliseconds
+        * $("#autoComplete").kendoAutoComplete({
+        *     delay: 500
+        * });
+        * @option {Number} [minLength] <1> Specifies the minimum number of characters that should be typed before the AutoComplete queries
+        * the dataSource.
+        * _example
+        * // wait until the user types 3 characters before querying the server
+        * $("#autoComplete").kendoAutoComplete({
+   	*     minLength: 3
+    	* });
+    	* @option {String} [dataTextField] <null> Sets the field of the data item that provides the text content of the list items.
+    	* _example
+    	* var items = [ { ID: 1, Name: "Item 1" }, { ID: 2, Name: "Item 2"} ];
+    	* $("#autoComplete").kendoAutoComplete({
+    	*     dataSource: items,
+        *     dataTextField: "Name"
+        * });
+        * @option {String} [filter] <"startswith"> Defines the type of filtration. This value is handled by the remote data source.
+        * _example
+        * // send a filter value of 'contains' to the server
+        * $("#autoComplete").kendoAutoComplete({
+        *     filter: 'contains'
+        * });
+        * @option {Number} [height] <200> Sets the height of the drop-down list in pixels.
+        * _example
+        * // set the height of the drop-down list that appears when the autocomplete is activated to 500px
+        * $("#autoComplete").kendoAutoComplete({
+        *     height: 500
+        * });
+        * @option {String} [separator] <""> Sets the separator for completion. Empty by default, allowing for only one completion.
+        * _example
+        * // set completion separator to ,
+        * $("#autoComplete").kendoAutoComplete({
+        *     separator: ", "
+        * });
         * @option {Function} [template] Template to be used for rendering the items in the list.
         * _example
         *  //template
@@ -318,51 +318,54 @@
             * @name kendo.ui.AutoComplete#open
             * @event
             * @param {Event} e
-        * @example
-        * $("#autoComplete").kendoAutoComplete({
-        *     open: function(e) {
-        *         // handle event
-        *     }
-        * });
-        * @example
-        * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
-        * autoComplete.bind("open", function(e) {
-        *     // handle event
-        * });
-        */
-        /**
-        * Fires when the drop-down list is closed
+       	    * @example
+            * $("#autoComplete").kendoAutoComplete({
+            *     open: function(e) {
+            *         // handle event
+            *     }
+            * });
+            * @exampleTitle To set after initialization
+            * @example
+	    * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
+            * autoComplete.bind("open", function(e) {
+            *     // handle event
+            * });
+            */
+            /**
+            * Fires when the drop-down list is closed
             * @name kendo.ui.AutoComplete#close
             * @event
             * @param {Event} e
-        * @example
-        * $("#autoComplete").kendoAutoComplete({
-        *     close: function(e) {
-        *         // handle event
-        *     }
-        * });
-        * @example
-        * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
-        * autoComplete.bind("close", function(e) {
-        *     // handle event
-        * });
-        */
-        /**
+            * @example
+            * $("#autoComplete").kendoAutoComplete({
+            *     close: function(e) {
+            *         // handle event
+            *     }
+            * });
+	    * @exampleTitle To set after initialization
+            * @example
+	    * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
+            * autoComplete.bind("close", function(e) {
+            *     // handle event
+            * });
+            */
+            /**
             * Fires when the value has been changed.
             * @name kendo.ui.AutoComplete#change
             * @event
             * @param {Event} e
-        * @example
-        * $("#autoComplete").kendoAutoComplete({
-        *     change: function(e) {
-        *         // handle event
-        *     }
-        * });
-        * @example
-        * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
-        * $("#autoComplete").data("kendoAutoComplete").bind("change", function(e) {
-        *     // handle event
-        * });
+	    * @example
+            * $("#autoComplete").kendoAutoComplete({
+            *     change: function(e) {
+            *         // handle event
+            *     }
+            * });
+	    * @exampleTitle To set after initialization
+            * @example
+            * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
+            * $("#autoComplete").data("kendoAutoComplete").bind("change", function(e) {
+            *     // handle event
+            * });
             */
                 CHANGE
             ], that.options);
@@ -408,6 +411,7 @@
         * Enable/Disable the autocomplete widget.
         * @param {Boolean} enable The argument, which defines whether to enable/disable the autocomplete.
         * @example
+	* // get a reference to the autocomplete widget
         * var autocomplete = $("autocomplete").data("kendoAutoComplete");
         *
         * // disables the autocomplete
@@ -442,6 +446,9 @@
         /**
         * Closes the drop-down list.
         * @example
+	* // get a reference to the autocomplete widget
+        * var autocomplete = $("autocomplete").data("kendoAutoComplete");
+	*
         * autocomplete.close();
         */
         close: function () {
@@ -472,9 +479,10 @@
 
         /**
         * Selects drop-down list item and sets the text of the autocomplete.
-        * @param {jQueryObject} li The LI element.
+        * @param {jQuery Object} li The LI element.
         * @example
-        * var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+        * // get a reference to the autocomplete widget
+        * var autocomplete = $("autocomplete").data("kendoAutoComplete");
         *
         * // selects by jQuery object
         * autocomplete.select(autocomplete.ul.children().eq(0));
@@ -509,7 +517,8 @@
         * Filters dataSource using the provided parameter and rebinds drop-down list.
         * @param {string} word The filter value.
         * @example
-        * var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+        * // get a reference to the autocomplete widget
+        * var autocomplete = $("autocomplete").data("kendoAutoComplete");
         *
         * // Searches for item which has "Inception" in the name.
         * autocomplete.search("Inception");
@@ -541,18 +550,19 @@
             }
         },
 
-    /**
-    * Forces a suggestion onto the text of the AutoComplete.
-    * @param {string} value Characters to force a suggestion.
-    * @example
-    * // note that this suggest is not the same as the configuration method
-    * // suggest which enables/disables auto suggesting for the AutoComplete
-    * //
-    * // get a referenence to the Kendo UI AutoComplete
-    * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
-    * // force a suggestion to the item with the name "Inception"
-    * autoComplete.suggest("Incep");
-    */
+        /**
+        * Forces a suggestion onto the text of the AutoComplete.
+        * @param {string} value Characters to force a suggestion.
+        * @example
+        * // note that this suggest is not the same as the configuration method
+        * // suggest which enables/disables auto suggesting for the AutoComplete
+        * //
+        * // get a referenence to the Kendo UI AutoComplete
+        * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
+        *
+        * // force a suggestion to the item with the name "Inception"
+        * autoComplete.suggest("Incep");
+        */
         suggest: function (word) {
             var that = this,
                 element = that.element[0],
@@ -601,7 +611,8 @@
         * @param {String} value The value to set.
         * @returns {String} The value of the autocomplete.
         * @example
-        * var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+        * // get a reference to the autocomplete widget
+        * var autocomplete = $("autocomplete").data("kendoAutoComplete");
         *
         * // get the text of the autocomplete.
         * var value = autocomplete.value();
