@@ -263,7 +263,7 @@
                 $.each(["minWidth","minHeight","maxWidth","maxHeight"], function(_, prop) {
                     var value = options[prop];
                     if (value && value != Infinity) {
-                        wrapper.css(prop, value);
+                        element.css(prop, value);
                     }
                 });
 
@@ -409,7 +409,7 @@
             modal: false,
             resizable: true,
             draggable: true,
-            minWidth: 50,
+            minWidth: 90,
             minHeight: 50,
             maxWidth: Infinity,
             maxHeight: Infinity,
@@ -727,13 +727,12 @@
          * @function
          */
         minimize: sizingAction("minimize", function() {
-            this.wrapper.css({
-                    height: "",
-                    minHeight: 0
-                })
-                .find(KWINDOWCONTENT).hide();
+            var that = this;
 
-            this.options.isMinimized = true;
+            that.wrapper.css("height", "");
+            that.element.hide();
+
+            that.options.isMinimized = true;
         }),
 
         _onDocumentResize: function () {
