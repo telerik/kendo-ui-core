@@ -693,10 +693,10 @@
             that.element.addClass("k-widget k-reset k-header " + MENU).addClass(MENU + "-" + that.options.orientation);
 
             var items = that.element
-                            .find("ul")
+                            .find("li > ul")
                             .addClass("k-group")
                             .end()
-                            .find("li")
+                            .find("> li,.k-group > li")
                             .addClass("k-item");
 
             items.each(function () {
