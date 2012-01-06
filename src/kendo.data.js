@@ -1411,7 +1411,11 @@
          * Cancel the changes made to the DataSource after the last sync.
          */
         cancelChanges : function() {
-            this._set.cancelChanges();
+            var that = this;
+            that._data = new ObservableArray(that._pristine, that.reader.model);
+            that._data.bind(CHANGE, function(e) {
+                that.trigger(CHANGE, e);
+            });
         },
 
         /**
@@ -1431,8 +1435,16 @@
             });
         },
 
-        indexOf: function(dataItem) {
-            return this._set.indexOf(dataItem);
+        indexOf: function(model) {
+            var idx, length, data = this._data;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].id == model.id) {
+                    return idx;
+                }
+            }
+
+            return -1;
         },
 
         _params: function(data) {
