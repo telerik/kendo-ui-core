@@ -196,7 +196,9 @@
      * @section
      *
      * <h3>View Transitions</h3>
-     * <p>View transitions can be customized by setting <code>transition</code> data attribute to the view DOM element. The following transitions are supported:</p>
+     * <p>View transitions can be customized by setting <code>transition</code> data attribute to the view DOM element.
+     * A default view transition may be specified using the <code>transition</code> parameter in the options parameter of the application constructor.
+     * The following transitions are supported:</p>
      *
      * <h4>slide</h4>
      * <p> The default iOS view transition. Previous view contents slide to the left, with new view contents sliding in their place. Headers and footers (if present) use the fade transition.  </p>
@@ -266,6 +268,11 @@
          * <script>
          *      new kendo.mobile.Application($(document.body), { layout: "foo" });
          * </script>
+         * @option {String} [transition] <> The default view transition type.
+         * _example
+         * <script>
+         *      new kendo.mobile.Application($(document.body), { transition: "slide" });
+         * </script>
          */
         init: function(element, options) {
             var that = this;
@@ -325,7 +332,7 @@
 
                 that.trigger("viewHide", { view: that.view });
 
-                ViewSwitcher.replace(that.view, view);
+                new ViewSwitcher(that).replace(that.view, view);
                 that._setCurrentView(view);
             });
         },
@@ -401,7 +408,7 @@
 
         _createView: function(element) {
             var that = this,
-                layout = that._dataOrDefault(element, "layout");
+                layout = that.dataOrDefault(element, "layout");
 
             if (layout) {
                 layout = that.layouts[layout];
@@ -482,7 +489,7 @@
             }
         },
 
-        _dataOrDefault: function(element, option) {
+        dataOrDefault: function(element, option) {
             return typeof element.data(kendo.ns + option) !== "undefined" ? element.data(option) : this.options[option];
         }
     });

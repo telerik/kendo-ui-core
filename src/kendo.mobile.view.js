@@ -58,14 +58,18 @@
     });
 
     ViewSwitcher = Class.extend({
-        init: function(previous, view) {
+        init: function (application) {
+            this.application = application;
+        },
+
+        replace: function(previous, view) {
             var that = this,
                 callback = function() { previous.element.hide(); },
                 animationType;
 
             that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(kendo.history.url().params);
 
-            animationType = (that.back ? previous : view).element.data(kendo.ns +"transition");
+            animationType = that.application.dataOrDefault((that.back ? previous : view).element, "transition");
 
             that.parallax = animationType === "slide";
 
@@ -118,11 +122,6 @@
             }
         }
     });
-
-
-    ViewSwitcher.replace = function(previous, view) {
-        new ViewSwitcher(previous, view);
-    };
 
     Layout = Class.extend({
         init: function(element) {
