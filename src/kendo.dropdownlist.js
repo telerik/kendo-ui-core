@@ -152,7 +152,8 @@
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {kendo.data.DataSource | Object} [dataSource] Instance of DataSource or the data that the DropDownList will be bound to.
-         * _example
+         * _exampleTitle Bind to a local array
+	 * _example
 	 * // bind to local data
 	 * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
 	 * $("#dropdownlist").kendoDropDownList({
@@ -160,9 +161,8 @@
 	 *     dataTextField: "Title",
 	 *     dataValueField: "Id"
 	 * });    
-	 * //
-	 * // or
-	 * //
+	 * _exampleTitle Bind to a remote URL
+	 * _example
 	 * $("#dropdownlist").kendoDropDownList({
 	 *     dataSource: {
 	 *         transport: {
@@ -177,9 +177,8 @@
 	 * $("#dropdownlist").kendoDropDownList({
 	 *     enabled: false // dropdown list will not be enabled
 	 * });
-	 * //
-	 * // To set after initialization, use the enable API method
-	 * //
+	 * _exampleTitle To set after initialization
+	 * _example	 
 	 * // get a reference to the dropdown list
 	 * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 	 * // disable the dropdown
@@ -195,6 +194,10 @@
 	 *     autoBind: false
 	 * });
 	 * @option {Number} [delay] <500> Specifies the delay in ms before the search text typed by the end user is cleared.
+	 * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     delay: 1000 // wait 1 second before clearing the user input
+	 * });
 	 * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
 	 * _example
 	 * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
@@ -389,6 +392,9 @@
         * @name kendo.ui.DropDownList#close
         * @function
         * @example
+	* // get a reference to the dropdown widget
+	* var dropdownList = $("#dropdownList").data("kendoDropDownList");
+	* // close the dropdown
         * dropdownlist.close();
         */
 
@@ -397,7 +403,7 @@
         * @param {Boolean} enable Desired state
 	* @example
 	* // get a reference to the dropdown list
-	* var dropdownlist = $("#dropdownlist").kendoDropDownList({
+	* var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 	* // disable the dropdown list
 	* dropdownlist.enable(false);    
         */
@@ -447,6 +453,9 @@
         /**
         * Opens the drop-down list.
         * @example
+	* // get a reference to the dropdown list
+	* var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+	* // open the drop down
         * dropdownlist.open();
         */
         open: function() {
@@ -468,6 +477,7 @@
         * Toggles the drop-down list between opened and closed state.
         * @param {Boolean} toggle Defines the whether to open/close the drop-down list.
         * @example
+	* // get a reference to the dropdown list
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
         * // toggles the open state of the drop-down list.
@@ -510,6 +520,7 @@
         * Selects item, which starts with the provided parameter.
         * @param {string} word The search value.
         * @example
+	* // get a reference to the dropdown list
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
         * // Selects item which starts with "In".
@@ -533,6 +544,7 @@
         * Selects drop-down list item and sets the value and the text of the dropdownlist.
         * @param {jQueryObject | Number | Function} li LI element or index of the item or predicate function, which defines the item that should be selected.
         * @example
+	* // get a reference to the dropdown list
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
         * // selects by jQuery object
@@ -580,6 +592,7 @@
         * @param {String} text The text to set.
         * @returns {String} The text of the dropdownlist.
         * @example
+	* // get a reference to the dropdown list
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
         * // get the text of the dropdownlist.
@@ -600,6 +613,7 @@
         * @param {String} value The value to set.
         * @returns {String} The value of the dropdownlist.
         * @example
+	* // get a reference to the dropdown list
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
         * // get the value of the dropdownlist.
