@@ -25,6 +25,15 @@
         return string.replace(/(\S+)/g, "[" + attr("role") + "*=$1],")
     }
 
+    function extractScripts(html) {
+        if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
+            html = RegExp.$1;
+        }
+
+        div[0].innerHTML = html;
+        return div.find("script");
+    }
+
     function extractViews(html) {
         if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
             html = RegExp.$1;
@@ -428,13 +437,17 @@
         _createRemoteView: function(url, html) {
             var that = this,
                 views = extractViews(html).hide(),
-                element = views.first();
+                scripts = extractScripts(html),
+                element = views.first(),
+                view;
 
             element.hide().attr(attr("url"), url);
 
             that.element.append(views);
 
-            return that._createView(element);
+            view = that._createView(element);
+            that.element.append(scripts)
+            return view;
         },
 
         _findView: function(url, callback) {
