@@ -374,7 +374,8 @@
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {kendo.data.DataSource | Object} [dataSource] Instance of DataSource or Object with DataSource configuration.
-         * _example
+         * _exampleTitle Bind to a DataSource instance
+	 * _example
          * var sharedDataSource = new kendo.data.DataSource({
          *      data: [{title: "Star Wars: A New Hope", year: 1977}, {title: "Star Wars: The Empire Strikes Back", year: 1980}],
          *      pageSize: 1
@@ -383,9 +384,8 @@
          * $("#grid").kendoGrid({
          *      dataSource: sharedDataSource
          *  });
-         *  //
-         *  // or
-         *  //
+         * _exampleTitle Bind to a local array
+	 * _example
          *  $("#grid").kendoGrid({
          *      dataSource: {
          *          data: [{title: "Star Wars: A New Hope", year: 1977}, {title: "Star Wars: The Empire Strikes Back", year: 1980}],
@@ -408,6 +408,7 @@
          *         allowUnsort: true
          * });
          * @option {String} [sortable.mode] <"single"> Defines sorting mode. Possible values:
+	 * <div class="details-list">
          *    <dl>
          *         <dt>
          *              <b>"single"</b>
@@ -422,7 +423,7 @@
          *              Defines that multiple columns can be sorted at a time.
          *         </dd>
          *    </dl>
-         *
+         * </div>
          * @option {Boolean} [sortable.allowUnsort] <false>  Defines whether column can have unsorted state.
          * @option {Array} [columns] A collection of column objects or collection of strings that represents the name of the fields.
          * _example
@@ -557,12 +558,12 @@
          *          { name: "save", text: "Save This Record" },
          *          { name: "cancel", template: "&lt;img src="icons/cancel.png' rel='cancel' /&gt;" }
          *      ],
-             *      editable: {
+         *      editable: {
          *          update: "true", // puts the row in edit mode when it is clicked
          *          destroy: "false", // does not remove the row when it is deleted, but marks it for deletion
          *          confirmation: "Are you sure you want to remove this item?"
          *      }
-             *   });
+         *  });
          * @option {Boolean} [editable.update] Indicates whether item should be switched to edit mode on click.
          * @option {Boolean} [editable.destroy] Indicates whether item should be deleted when click on delete button.
          * @option {Boolean} [editable.confirmation] Defines the text that will be used in confirmation box when delete an item.
@@ -624,7 +625,8 @@
          *      navigatable: true
          *  });
          * @option {String} [selectable] <undefined> Indicates whether selection is enabled/disabled. Possible values:
-         *    <dl>
+         * <div class="details-list">
+	 *    <dl>
          *         <dt>
          *              <b>"row"</b>
          *         </dt>
@@ -650,7 +652,8 @@
          *              Multiple cell selection.
          *         </dd>
          *    </dl>
-         * @option {Boolean} [autoBind] <true> Indicates whether the grid will call read on the DataSource initially.
+         * </div>
+	 * @option {Boolean} [autoBind] <true> Indicates whether the grid will call read on the DataSource initially.
          * _example
          *  $("#grid").kendoGrid({
          *      dataSource: sharedDataSource,
@@ -667,7 +670,8 @@
          *      autoBind: true // the grid will not be populated with data until read() is called on the sharedDataSource
          *  });
          * @option {Boolean | Object} [scrollable] <true> Enable/disable grid scrolling. Possible values:
-         *    <dl>
+         * <div class="details-list">
+	 *    <dl>
          *         <dt>
          *              <b>true</b>
          *         </dt>
@@ -693,7 +697,8 @@
          *              Enables grid vertical scrolling with data virtualization.
          *         </dd>
          *    </dl>
-         * _example
+         * </div>
+	 * _example
          *  $("#grid").kendoGrid({
          *      scrollable: {
          *          virtual: true //false
@@ -756,6 +761,7 @@
                  *  $("#grid").kendoGrid({
                  *      change: function(e) {
                  *          // handle event
+		 *      }
                  *  });
                  *  @exampleTitle To set after initialization
                  *  @example
@@ -776,6 +782,7 @@
                  *  $("#grid").kendoGrid({
                  *      dataBound: function(e) {
                  *          // handle event
+		 *      }
                  *  });
                  *  @exampleTitle To set after initialization
                  *  @example
@@ -798,6 +805,7 @@
                  *  $("#grid").kendoGrid({
                  *      detailExpand: function(e) {
                  *          // handle event
+		 *      }
                  *  });
                  *  @exampleTitle To set after initialization
                  *  @example
@@ -820,6 +828,7 @@
                  *  $("#grid").kendoGrid({
                  *      detailCollapse: function(e) {
                  *          // handle event
+	         *      }
                  *  });
                  * @exampleTitle To set after initialization
                  * @example
@@ -897,7 +906,7 @@
                  *  // bind to the save event
                  *  grid.bind("save", function(e) {
                  *      // handle event
-                     *  }
+                 *  }
                  */
                 SAVE,
                 /**
@@ -919,7 +928,7 @@
                  *  // bind to the remove event
                  *  grid.bind("remove", function(e) {
                  *      // handle event
-                     *  }
+                 *  }
                  */
                 REMOVE,
                 /**
@@ -985,7 +994,7 @@
 
         /**
          * Returns the index of the cell in the grid item skipping group and hierarchy cells.
-         * @param {Selector | DOMElement} cell Target cell.
+         * @param {Selector | DOM Element} cell Target cell.
          * @example
          *  // get a reference to the grid widget
          *  var grid = $("#grid").data("kendoGrid");
@@ -1142,7 +1151,7 @@
 
         /**
          * Removes the specified row from the grid. The removeRow method triggers remove event.
-         * @param {Selector | DOMElement} row Row to be removed.
+         * @param {Selector | DOM Element} row Row to be removed.
          * @example
          * // get a reference to the grid widget
          * var grid = $("#grid").data("kendoGrid");
@@ -1369,7 +1378,7 @@
 
         /**
          * Selects the specified Grid rows/cells. If called without arguments - returns the selected rows/cells.
-         * @param {Selector|Array} items Items to select.
+         * @param {Selector | Array} items Items to select.
          * @example
          * // get a reference to the grid widget
          * var grid = $("#grid").data("kendoGrid");
@@ -2032,7 +2041,7 @@
 
         /**
          * Returns the data item to which a given table row (tr DOM element) is bound.
-         * @param {Selector|DOMElement} tr Target row.
+         * @param {Selector | DOM Element} tr Target row.
          * @example
          * // get a reference to the grid widget
          * var grid = $("#grid").data("kendoGrid");
@@ -2045,7 +2054,7 @@
 
         /**
          * Expands specified master row.
-         * @param {Selector|DOMElement} row Target master row to expand.
+         * @param {Selector | DOM Element} row Target master row to expand.
          * @example
          * // get a reference to the grid widget
          * var grid = $("#grid").data("kendoGrid");
@@ -2058,7 +2067,7 @@
 
         /**
          * Collapses specified master row.
-         * @param {Selector|DOMElement} row Target master row to collapse.
+         * @param {Selector | DOM Element} row Target master row to collapse.
          * @example
          * // get a reference to the grid widget
          * var grid = $("#grid").data("kendoGrid");
@@ -2237,7 +2246,7 @@
 
         /**
          * Collapses specified group.
-         * @param {Selector|DOMElement} group Target group item to collapse.
+         * @param {Selector | DOM Element} group Target group item to collapse.
          * @example
          * // get a reference to the grid widget
          * var grid = $("#grid").data("kendoGrid");
@@ -2255,7 +2264,7 @@
 
         /**
          * Expands specified group.
-         * @param {Selector|DOMElement} group Target group item to expand.
+         * @param {Selector | DOM Element} group Target group item to expand.
          * @example
          * // get a reference to the grid widget
          * var grid = $("#grid").data("kendoGrid");
