@@ -422,14 +422,13 @@
                 wrapper = this.wrapper;
 
             if (overlay.length == 0) {
-                overlay = $("<div class='k-overlay' />")
-                    .toggle(visible)
-                    .insertBefore(wrapper[0]);
-            } else {
-                overlay.insertBefore(wrapper[0]).toggle(visible);
+                overlay = $("<div class='k-overlay' />");
             }
 
-            overlay.css(ZINDEX, parseInt(wrapper.css(ZINDEX)) - 1);
+            overlay
+                .insertBefore(wrapper[0])
+                .toggle(visible)
+                .css(ZINDEX, parseInt(wrapper.css(ZINDEX)) - 1);
 
             return overlay;
         },
@@ -533,6 +532,8 @@
                 initialOverflow = contentElement.css(OVERFLOW);
 
             if (!that.trigger(OPEN)) {
+                that.toFront();
+
                 if (that.options.modal) {
                     var overlay = that._overlay(false);
 
@@ -558,8 +559,6 @@
                         }
                     });
                 }
-
-                that.toFront();
             }
 
             if (that.options.isMaximized) {

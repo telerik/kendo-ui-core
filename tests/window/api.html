@@ -231,13 +231,33 @@
             test("open() calls toFront()", function() {
                 expect(1);
 
-                var firstWindow = createWindow(),
-                    secondWindow = createWindow();
+                var firstWindow = createWindow();
 
                 firstWindow.close();
 
                 firstWindow.toFront = function() {
                     ok(true);
+                };
+
+                firstWindow.open();
+            });
+
+            test("open() calls toFront() before _overlay()", function() {
+                expect(1);
+
+                var firstWindow = createWindow({
+                        visible: false,
+                        modal: true
+                    }),
+                    called = false;
+
+                firstWindow.toFront = function() {
+                    called = true;
+                };
+
+                firstWindow._overlay = function() {
+                    ok(called);
+                    return $();
                 };
 
                 firstWindow.open();
