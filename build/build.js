@@ -16,33 +16,47 @@ var fs = require("fs"),
     writeText = kendoBuild.writeText,
     zip = kendoBuild.zip;
 
+var productionLicenses = [
+    {name: "commercial", source: true},
+    {name: "trial", source: false},
+    {name: "open-source", source: true}
+]
+
+var betaLicenses = [
+    {name: "beta", source: true}
+]
+
+
 // Configuration ==============================================================
 var bundles = [{
-    name: "kendoui.web-dataviz",
-    suites: ["web", "dataviz"],
-    license: "commercial",
+    name: "kendoui.complete",
+    suites: ["web", "dataviz", "mobile"],
+    combinedScript: "all",
+    licenses: productionLicenses,
     eula: "eula",
-    hasSource: true
 }, {
-    name: "kendoui.web-dataviz",
-    suites: ["web", "dataviz"],
-    license: "trial",
+    name: "kendoui.web",
+    suites: ["web"],
+    combinedScript: "all",
+    licenses: productionLicenses,
     eula: "eula",
-    hasSource: false
 }, {
-    name: "kendoui.web-dataviz",
-    suites: ["web", "dataviz"],
-    license: "open-source",
-    eula: "eula",
-    hasSource: true
+    name: "kendoui.dataviz",
+    suites: ["dataviz"],
+    combinedScript: "all",
+    licenses: productionLicenses,
+    eula: "eula"
 }, {
     name: "kendoui.mobile",
     suites: ["mobile"],
-    license: "beta",
-    eula: "eula",
-    hasSource: true
+    combinedScript: "all",
+    licenses: betaLicenses,
+    eula: "eula"
 }];
 
+var thirdPartyScripts = [
+    "jquery.min.js"
+];
 
 var VERSION = kendoBuild.generateVersion(),
     LATEST = "latest",
@@ -56,7 +70,6 @@ var VERSION = kendoBuild.generateVersion(),
     CONTENT_ROOT = "content",
     VIEWS_ROOT = "Views",
     LEGAL_ROOT = path.join("resources", "legal"),
-    SRC_LICENSE = "src-license.txt",
     THIRD_PARTY_ROOT = "third-party",
     DROP_LOCATION = "release",
     DEPLOY_ROOT = "deploy",
@@ -69,8 +82,11 @@ var VERSION = kendoBuild.generateVersion(),
     DEPLOY_ONLINEEXAMPLES = "online-examples",
     ONLINE_EXAMPLES_PACKAGE = "kendoui-online-examples.zip";
 
+    var startDate = new Date(),
+        licenseTemplate = template(readText(path.join(LEGAL_ROOT,  "src-license.txt"))),
+        SRC_LICENSE = licenseTemplate({ version: VERSION, year: startDate.getFullYear() });
+
 // Implementation ==============================================================
-var startDate = new Date();
 
 function initWorkspace() {
     kendoBuild.rmdirSyncRecursive(DEPLOY_ROOT);
@@ -79,19 +95,25 @@ function initWorkspace() {
     mkdir(DROP_LOCATION);
 }
 
-function deployScripts(root, license, copySource) {
+function deployScripts(root, bundle, license, hasSource) {
     var scriptsDest = path.join(root, DEPLOY_SCRIPTS),
         sourceRoot = path.join(root, DEPLOY_SOURCE),
         sourceDest = path.join(sourceRoot, DEPLOY_SCRIPTS);
 
     mkdir(scriptsDest);
-    kendoScripts.deployScripts(SCRIPTS_ROOT, scriptsDest, license, true);
 
-    if (copySource) {
+    if (hasSource) {
         mkdir(sourceRoot);
         mkdir(sourceDest);
-        kendoScripts.deployScripts(SCRIPTS_ROOT, sourceDest, license, false);
     }
+
+    bundle.suites.forEach(function(suite) {
+        kendoScripts.buildSuiteScripts(suite, scriptsDest, license, true);
+
+        if (hasSource) {
+            kendoScripts.buildSuiteScripts(suite, sourceDest, license, false);
+        }
+    });
 }
 
 function deployStyles(root, license, copySource) {
@@ -132,16 +154,9 @@ function deployLicenses(root, bundle) {
 function deployExamples(root, bundle) {
     var examplesRoot = path.join(root, DEPLOY_EXAMPLES),
         viewsRoot = path.join(DEMOS_ROOT, VIEWS_ROOT),
-        stylesPath = "../../../styles/$2.min.css",
-        scriptsPath = "../../../js/$2.min.js",
         suiteIndexTemplate = template(readText(SUITE_INDEX)),
         bundleIndexTemplate = template(readText(BUNDLE_INDEX)),
         bundleIndex = bundleIndexTemplate(bundle);
-
-    if (bundle.hasSource) {
-        stylesPath = "../../../source/styles/$2.css";
-        scriptsPath = "../../../source/js/$2.js";
-    }
 
     kendoBuild.mkdir(examplesRoot);
 
@@ -183,37 +198,50 @@ function deployExamples(root, bundle) {
     });
 }
 
+function deployThirdPartyScripts(outputRoot) {
+    thirdPartyScripts.forEach(function(scriptName) {
+        kendoBuild.copyFileSync(
+            path.join(SCRIPTS_ROOT, scriptName),
+            path.join(outputRoot, DEPLOY_SCRIPTS, scriptName)
+        );
+    });
+}
+
 function buildBundle(bundle, success) {
     var name = bundle.name,
-        license = bundle.license,
-        deployName = name + "." + VERSION + "." + license,
-        root = path.join(DEPLOY_ROOT, name + "." + license),
-        srcLicenseTemplate = readText(path.join(LEGAL_ROOT, SRC_LICENSE)),
-        srcLicense = template(srcLicenseTemplate)({ version: VERSION, year: startDate.getFullYear() }),
-        packageName = path.join(DROP_LOCATION, deployName + ".zip"),
-        packageNameLatest = packageName.replace(VERSION, LATEST);
+        zips = 0;
 
-    console.log("Building " + deployName);
-    mkdir(root);
+    bundle.licenses.forEach(function(license) {
+        var licenseName = license.name,
+            hasSource = license.source,
+            deployName = name + "." + VERSION + "." + licenseName,
+            root = path.join(DEPLOY_ROOT, name + "." + licenseName),
+            packageName = path.join(DROP_LOCATION, deployName + ".zip"),
+            packageNameLatest = packageName.replace(VERSION, LATEST);
 
-    console.log("Deploying scripts");
-    deployScripts(root, srcLicense, bundle.hasSource);
+        console.log("Building " + deployName);
+        mkdir(root);
 
-    console.log("Deploying styles");
-    deployStyles(root, srcLicense, bundle.hasSource);
+        console.log("Deploying scripts");
+        deployScripts(root, bundle, SRC_LICENSE, hasSource);
+        deployThirdPartyScripts(root);
 
-    console.log("Deploying licenses");
-    deployLicenses(root, bundle);
+        console.log("Deploying styles");
+        deployStyles(root, SRC_LICENSE, hasSource);
 
-    console.log("Deploying examples");
-    deployExamples(root, bundle);
+        console.log("Deploying licenses");
+        deployLicenses(root, bundle);
 
-    zip(packageName, root, function() {
-        kendoBuild.copyFileSync(packageName, packageNameLatest);
+        console.log("Deploying examples");
+        deployExamples(root, bundle);
 
-        if (success) {
-            success();
-        }
+        zip(packageName, root, function() {
+            kendoBuild.copyFileSync(packageName, packageNameLatest);
+
+            if (success && ++zips === bundle.licenses.length) {
+                success();
+            }
+        });
     });
 }
 
@@ -225,16 +253,10 @@ function buildAllBundles(success, bundleIx) {
             buildAllBundles(success, ++bundleIx);
         });
     } else {
-        success();
+        if (success) {
+            success();
+        }
     }
-}
-
-function buildOnlineExamples(success) {
-    var onlineExamplesRoot = path.join(DEPLOY_ROOT, DEPLOY_ONLINEEXAMPLES),
-        packageName = path.join(DROP_LOCATION, ONLINE_EXAMPLES_PACKAGE);
-
-    // XBuild
-    // zip(packageName, onlineExamplesRoot, success);
 }
 
 console.log("Build starting at " + startDate);
@@ -246,10 +268,5 @@ kendoScripts.mergeScripts();
 console.log("Building themes");
 themes.build();
 
-buildAllBundles(function() {
-    console.log("Building online examples");
-    buildOnlineExamples(function() {
-        console.log("Time elapsed: " + ((new Date() - startDate) / 1000) + " seconds");
-    });
-});
+buildAllBundles();
 
