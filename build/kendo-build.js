@@ -256,6 +256,16 @@ function deployStyles(stylesRoot, outputRoot, header, compress) {
     });
 }
 
+function grep(files, condition) {
+    var result = [];
+    files.forEach(function(file) {
+        if (condition(file)) {
+            result.push(file);
+        }
+    });
+    return result;
+}
+
 // Exports ====================================================================
 exports.addBOM = addBOM;
 exports.copyDirSyncRecursive = copyDirSyncRecursive;
@@ -263,6 +273,7 @@ exports.copyFileSync = copyFileSync;
 exports.copyTextFile = copyTextFile;
 exports.deployStyles = deployStyles;
 exports.generateVersion = generateVersion;
+exports.grep = grep;
 exports.hasBOM = hasBOM;
 exports.merge = merge;
 exports.minifyJs = minifyJs;
