@@ -99,6 +99,7 @@
             that.width = width = that.wrapper.outerWidth();
             that.snapPart = width - handleWidth;
             that.constrain = width - that.halfWidth;
+            that._visibleBack = true;
 
             that._moveProxy = proxy(that._move, that);
             that._stopProxy = proxy(that._stop, that);
