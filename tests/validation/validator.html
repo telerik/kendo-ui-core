@@ -658,7 +658,7 @@
 
                 validator.validate();
 
-                equal(validator.errors()[0], "Foo should be greater than 2");
+                equal(validator.errors()[0], "Foo should be greater than or equal to 2");
             });
 
             test("message for max is applied with max attribute value", function() {
@@ -667,7 +667,7 @@
 
                 validator.validate();
 
-                equal(validator.errors()[0], "Foo should be smaller than 2");
+                equal(validator.errors()[0], "Foo should be smaller than or equal to 2");
             });
 
             test("message as function", function() {
