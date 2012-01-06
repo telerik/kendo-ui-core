@@ -30,7 +30,7 @@
             $("#PanelBar2").kendoPanelBar({ animation: { expand: { effects: { fadeIn: {}, "expand:vertical": {} } } } });
             $("#PanelBar3").kendoPanelBar({ animation: { expand: { effects: { fadeIn: {}, "expand:vertical": {} } } }, expandMode: 0 });
             $("#PanelBar4").kendoPanelBar({ contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html' ] });
-            $("#Panel1").kendoPanelBar().css({ width: '300px', 'float': 'left', clear: 'both' });
+            $("#Panel").kendoPanelBar().css({ width: '300px', 'float': 'left' });
 
             var item = $("#PanelBar1 li:first").eq(0);
             panel1.expand(item).select(item);
@@ -369,23 +369,25 @@
         </li>
     </ul>
 <br />
-    <ul id="Panel1">
+    <ul id="Panel">
         <li class="k-state-active">
             <img src="Icons/Suites/mvc.png" alt="image">ASP.NET MVC
-            <ul>
-                <li>
-                    <img src="Icons/Mvc/Grid.png" alt="image">Grid
-                </li>
-                <li>
-                    <img src="Icons/Mvc/Menu.png" alt="image">Menu
-                </li>
-                <li>
-                    <img src="Icons/Mvc/PanelBar.png" alt="image">PanelBar
-                </li>
-                <li>
-                    <img src="Icons/Mvc/TabStrip.png" alt="image">TabStrip
-                </li>
-            </ul>
+            <div>
+                <ul>
+                    <li>
+                        <img src="Icons/Mvc/Grid.png" alt="image">Grid
+                    </li>
+                    <li>
+                        <img src="Icons/Mvc/Menu.png" alt="image">Menu
+                    </li>
+                    <li>
+                        <img src="Icons/Mvc/PanelBar.png" alt="image">PanelBar
+                    </li>
+                    <li>
+                        <img src="Icons/Mvc/TabStrip.png" alt="image">TabStrip
+                    </li>
+                </ul>
+            </div>
         </li>
         <li>
             <img src="Icons/Suites/sl.png" alt="image">Silverlight
