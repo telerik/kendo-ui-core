@@ -419,55 +419,55 @@
          * A collection of visual animations used when <b>PanelBar</b> items
          * are opened or closed through user interactions. Setting this
          * option to <b>false</b> will disable all animations.
-           * _exampleTitle Defining custom animations when opening and
-           * closing items
-           * _example
-           * $("#panelBar").kendoPanelBar({
-           *  animation: {
-           *   // fade-out closing items over 1000 milliseconds
-           *   close: {
-           *    duration: 1000,
-           *    effects: "fadeOut"
-           *    hide: true,
-           *    show: false
-           *   }
-           *   // fade-in and expand opening items over 500 milliseconds
-           *   open: {
-           *    duration: 500,
-           *    effects: "expandVertical fadeIn",
-           *    show: true
-           *   }
-           *  }
-           * });
+         * _exampleTitle Defining custom animations when opening and
+         * closing items
+         * _example
+         * $("#panelBar").kendoPanelBar({
+         *     animation: {
+         *         // fade-out closing items over 1000 milliseconds
+         *         close: {
+         *             duration: 1000,
+         *             effects: "fadeOut"
+         *             hide: true,
+         *             show: false
+         *         },
+         *        // fade-in and expand opening items over 500 milliseconds
+         *        open: {
+         *            duration: 500,
+         *            effects: "expandVertical fadeIn",
+         *            show: true
+         *        }
+         *    }
+         * });
          *
          * @option {Object} [animation.open]
          * The visual animation(s) that will be used when opening items.
-           * _exampleTitle Defining a custom animation when opening items
-           * that executes over 200 milliseconds
-           * _example
-           * $("#panelBar").kendoPanelBar({
-           *  animation: {
-           *   open: {
-           *    duration: 200,
-           *    effects: "expandVertical",
-           *    show: true
-           *   }
-           *  }
-           * });
+         * _exampleTitle Defining a custom animation when opening items
+         * that executes over 200 milliseconds
+         * _example
+         * $("#panelBar").kendoPanelBar({
+         *     animation: {
+         *         open: {
+         *             duration: 200,
+         *             effects: "expandVertical",
+         *             show: true
+         *         }
+         *     }
+         * });
          *
          * @option {Number} [animation.open.duration] <200>
          * The number of milliseconds used for the visual animation when an
          * item is opened.
-           * _exampleTitle Defining a custom animation for opening items that
-           * executes over 1000 milliseconds
-           * _example
-           * $("#panelBar").kendoPanelBar({
-           *  animation: {
-           *   open: {
-           *    duration: 1000
-           *   }
-           *  }
-           * });
+         * _exampleTitle Defining a custom animation for opening items that
+         * executes over 1000 milliseconds
+         * _example
+         * $("#panelBar").kendoPanelBar({
+         *  animation: {
+         *       open: {
+         *           duration: 1000
+         *       }
+         *    }
+         * });
          *
          * @option {String} [animation.open.effects] <"expandVertical">
          * A whitespace-delimited string of animation effects that are used
@@ -481,45 +481,45 @@
          * @option {Object} [animation.close]
          * The visual animation(s) that will be used when <b>PanelBar</b>
          * items are closed.
-           * _exampleTitle Defining a custom animation for closing items that
-           * executes over 200 milliseconds
-           * _example
-           * $("#panelBar").kendoPanelBar({
-           *  animation: {
-           *   close: {
-           *    duration: 200,
-           *    effects: "fadeOut"
-           *   }
-           *  }
-           * });
+         * _exampleTitle Defining a custom animation for closing items that
+         * executes over 200 milliseconds
+         * _example
+         * $("#panelBar").kendoPanelBar({
+         *  animation: {
+         *      close: {
+         *          duration: 200,
+         *          effects: "fadeOut"
+         *      }
+         *   }
+         * });
          *
          * @option {Number} [animation.close.duration] <200>
          * The number of milliseconds used for the visual animation when a
          * <b>PanelBar</b> item is closed.
-           * _exampleTitle Animating all closing items for 1000 milliseconds
-           * _example
-           * $("#panelBar").kendoPanelBar({
-           *  animation: {
-           *   close: {
-           *    duration: 1000
-           *   }
-           *  }
-           * });
+         * _exampleTitle Animating all closing items for 1000 milliseconds
+         * _example
+         * $("#panelBar").kendoPanelBar({
+         *  animation: {
+         *      close: {
+         *          duration: 1000
+         *      }
+         *   }
+         * });
          *
          * @option {String} [animation.close.effects]
          * A whitespace-delimited string of animation effects that are
          * utilized when a <b>PanelBar</b> item is closed. Options include
          * <b>"fadeOut"</b>.
-           * _exampleTitle Fading-out all closing items for 1000 milliseconds
-           * _example
-           * $("#panelBar").kendoPanelBar({
-           *  animation: {
-           *   close: {
-           *    duration: 1000,
-           *    effects: "fadeOut"
-           *   }
-           *  }
-           * });
+         * _exampleTitle Fading-out all closing items for 1000 milliseconds
+         * _example
+         * $("#panelBar").kendoPanelBar({
+         *     animation: {
+         *         close: {
+         *         duration: 1000,
+         *         effects: "fadeOut"
+         *     }
+         *   }
+         * });
          *
          * @option {Boolean} [animation.close.hide] <true>
          *
@@ -527,17 +527,19 @@
          *
          * @option {String} [expandMode] <"multiple">
          * Specifies how the <b>PanelBar</b> items are displayed when opened
-         * and closed. A value of <b>"single"</b> will configure the
-         * <b>PanelBar</b> to display only one item at a time; when an item
-         * is opened, the <b>PanelBar</b> will close the most recently
-         * opened item. A value of <b>"multiple"</b> will configure the
-         * <b>PanelBar</b> to display multiple items at a time; opening an
-         * item has no visual impact on any other items in the
-         * <b>PanelBar</b>.
-           * _example
-           * $("#panelBar").kendoPanelBar({
-           *  expandMode: "single"
-           * });
+         * and closed. The following values are available: 
+	 * <div class="details-list">
+         *     <dl>
+	 *         <dt><b>single</b></dt>
+	 *         <dd>Display's one item at a time when an item is opened.</dd>
+	 *         <dt><b>multiple</b></dt>
+	 *         <dd>Will display multiple values at one time. Opening an item has no visual impact on any other items in the <b>PanelBar</b></dd>
+	 *     </dl>
+	 * </div> 
+         * _example
+         * $("#panelBar").kendoPanelBar({
+         *     expandMode: "single"
+         * });
          */
         init: function(element, options) {
             element = $(element);
@@ -578,6 +580,20 @@
                  * @event
                  * @param {Event} e
                  * @param {Element} e.item The expanding item
+		 * @example
+		 * $("#panelBar").kendoPanelBar({
+		 *     expand: function(e) {
+	  	 *         // handle event
+		 *     }
+		 * });
+		 * @exampleTitle To set after intialization
+		 * @example
+	         * // get a reference to the panel bar
+		 * var panelBar = $("#panelBar").data("kendoPanelBar");
+		 * // bind the expand event
+		 * panelBar.bind("expand", function(e) {
+		 *     // handle event
+		 * });
                  */
                 EXPAND,
                 /**
@@ -586,6 +602,20 @@
                  * @event
                  * @param {Event} e
                  * @param {Element} e.item The collapsing item
+		 * @example
+		 * $("#panelBar").kendoPanelBar({
+		 *     collapse: function(e) {
+	  	 *         // handle event
+		 *     }
+		 * });
+		 * @exampleTitle To set after intialization
+		 * @example
+	         * // get a reference to the panel bar
+		 * var panelBar = $("#panelBar").data("kendoPanelBar");
+		 * // bind the collapse event
+		 * panelBar.bind("collapse", function(e) {
+		 *     // handle event
+		 * });
                  */
                 COLLAPSE,
                 /**
@@ -594,6 +624,20 @@
                  * @event
                  * @param {Event} e
                  * @param {Element} e.item The selected item
+		 * @example
+		 * $("#panelBar").kendoPanelBar({
+		 *     select: function(e) {
+	  	 *         // handle event
+		 *     }
+		 * });
+		 * @exampleTitle To set after intialization
+		 * @example
+	         * // get a reference to the panel bar
+		 * var panelBar = $("#panelBar").data("kendoPanelBar");
+		 * // bind the select event
+		 * panelBar.bind("select", function(e) {
+		 *     // handle event
+		 * });
                  */
                 SELECT,
                 /**
@@ -603,6 +647,20 @@
                  * @param {Event} e
                  * @param {jqXHR} e.xhr The jqXHR object used to load the content
                  * @param {String} e.status The returned status.
+		 * @example
+		 * $("#panelBar").kendoPanelBar({
+		 *     error: function(e) {
+	  	 *         // handle event
+		 *     }
+		 * });
+		 * @exampleTitle To set after intialization
+		 * @example
+	         * // get a reference to the panel bar
+		 * var panelBar = $("#panelBar").data("kendoPanelBar");
+		 * // bind the error ajax event
+		 * panelBar.bind("error", function(e) {
+		 *     // handle event
+		 * });
                  */
                 ERROR,
                 /**
@@ -612,6 +670,21 @@
                  * @param {Event} e
                  * @param {Element} e.item The selected item
                  * @param {Element} e.contentElement The loaded content element
+		 * @example
+		 * $("#panelBar").kendoPanelBar({
+		 *     contentLoad: function(e) {
+	  	 *         // handle event
+		 *     }
+		 * });
+		 * @exampleTitle To set after intialization
+		 * @example
+	         * // get a reference to the panel bar
+		 * var panelBar = $("#panelBar").data("kendoPanelBar");
+		 * // bind the contentLoad event
+		 * panelBar.bind("contentLoad", function(e) {
+		 *     // handle event
+		 * });
+
                  */
                 CONTENTLOAD
             ], that.options);
@@ -648,15 +721,15 @@
          *
          * Expands the specified item(s) of a <b>PanelBar</b>.
          *
-           * @example
-           * // access an existing PanelBar instance
-           * var panelBar = $("#panelBar").data("kendoPanelBar");
-           * // expand the element with ID, "item1"
-           * panelBar.expand($("#item1"));
-           * // expand the element with ID, "item2" without visual animations
-           * panelBar.expand($("#item2"), false);
-           * // expand all list items that start with ID, "item"
-           * panelBar.expand($('[id^="item"]'));
+         * @example
+         * // access an existing PanelBar instance
+         * var panelBar = $("#panelBar").data("kendoPanelBar");
+         * // expand the element with ID, "item1"
+         * panelBar.expand($("#item1"));
+         * // expand the element with ID, "item2" without visual animations
+         * panelBar.expand($("#item2"), false);
+         * // expand all list items that start with ID, "item"
+         * panelBar.expand($('[id^="item"]'));
          *
          * @param {Selector} element
          * The <b>PanelBar</b> item(s) to be expanded, expressed as a
@@ -706,15 +779,15 @@
          *
          * Collapses the specified item(s) of a <b>PanelBar</b>.
          *
-           * @example
-           * // access an existing PanelBar instance
-           * var panelBar = $("#panelBar").data("kendoPanelBar");
-           * // collapse the element with ID, "item1"
-           * panelBar.collapse($("#item1"));
-           * // collapse the element with ID, "item2" without visual animations
-           * panelBar.collapse($("#item2"), false);
-           * // collapse all list items that start with ID, "item"
-           * panelBar.collapse($('[id^="item"]'));
+         * @example
+         * // access an existing PanelBar instance
+         * var panelBar = $("#panelBar").data("kendoPanelBar");
+         * // collapse the element with ID, "item1"
+         * panelBar.collapse($("#item1"));
+         * // collapse the element with ID, "item2" without visual animations
+         * panelBar.collapse($("#item2"), false);
+         * // collapse all list items that start with ID, "item"
+         * panelBar.collapse($('[id^="item"]'));
          *
          * @param {Selector} element
          * The <b>PanelBar</b> item(s) to be collapsed, expressed as a string
@@ -772,11 +845,11 @@
          * containing a selector expression or represented by a
          * <a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.
          *
-           * @example
-           * // access an existing PanelBar instance
-           * var panelBar = $("#panelBar").data("kendoPanelBar");
-           * // select the item with ID, "item1"
-           * panelBar.select("#item1");
+         * @example
+         * // access an existing PanelBar instance
+         * var panelBar = $("#panelBar").data("kendoPanelBar");
+         * // select the item with ID, "item1"
+         * panelBar.select("#item1");
          *
          */
         select: function (element) {
@@ -809,16 +882,16 @@
          * Enables (<b>true</b>) or disables (<b>false</b>) the specified
          * item(s) of the <b>PanelBar</b>.
          *
-           * @example
-           * // access an existing PanelBar instance
-           * var panelBar = $("#panelBar").data("kendoPanelBar");
-           * // enable the item of the PanelBar with ID, "item1"
-           * panelBar.enable($("#item1"), true);
-           * // disable the currently selected item of the PanelBar
-           * var item = panelBar.select();
-           * panelBar.enable(item, false);
-           * // disable all list items that start with ID, "item"
-           * panelBar.enable($('[id^="item"]'), false);
+         * @example
+         * // access an existing PanelBar instance
+         * var panelBar = $("#panelBar").data("kendoPanelBar");
+         * // enable the item of the PanelBar with ID, "item1"
+         * panelBar.enable($("#item1"), true);
+         * // disable the currently selected item of the PanelBar
+         * var item = panelBar.select();
+         * panelBar.enable(item, false);
+         * // disable all list items that start with ID, "item"
+         * panelBar.enable($('[id^="item"]'), false);
          *
          * @param {String | Selector} element
          * The <b>PanelBar</b> item(s) to be enabled (<b>true</b>) or
@@ -847,44 +920,44 @@
          *
          * Appends a PanelBar item in the specified referenceItem
          *
-           * @example
-           * var panelBar = $("#panelBar").data("kendoPanelBar");
-           * panelBar.append(
-           *  [
-           *   {
-           *    text: "Item 1",
-           *    // link URL if navigation is needed, optional
-           *    url: "http://www.kendoui.com/"
-           *   },
-           *   {
-           *    text: "Item 2",
-           *    // content within an item
-           *    content: "text"
-           *   },
-           *   {
-           *    text: "Item 3",
-           *    // content URL to load within an item
-           *    contentUrl: "partialContent.html"
-           *   },
-           *   {
-           *    text: "Item 4",
-           *    // item image URL, optional
-           *    imageUrl: "http://www.kendoui.com/test.jpg",
-           *    // sub-item collection
-           *    items:
-           *    [
-           *     { text: "Sub Item 1" },
-           *     { text: "Sub Item 2" }
-           *    ]
-           *   },
-           *   {
-           *    text: "Item 5",
-           *    // item image sprite CSS class, optional
-           *    spriteCssClass: "imageClass3"
-           *   }
-           *  ],
-           *  referenceItem
-           * );
+         * @example
+         * var panelBar = $("#panelBar").data("kendoPanelBar");
+         * panelBar.append(
+         *  [
+         *   {
+         *    text: "Item 1",
+         *    // link URL if navigation is needed, optional
+         *    url: "http://www.kendoui.com/"
+         *   },
+         *   {
+         *    text: "Item 2",
+         *    // content within an item
+         *    content: "text"
+         *   },
+         *   {
+         *    text: "Item 3",
+         *    // content URL to load within an item
+         *    contentUrl: "partialContent.html"
+         *   },
+         *   {
+         *    text: "Item 4",
+         *    // item image URL, optional
+         *    imageUrl: "http://www.kendoui.com/test.jpg",
+         *    // sub-item collection
+         *    items:
+         *    [
+         *     { text: "Sub Item 1" },
+         *     { text: "Sub Item 2" }
+         *    ]
+         *   },
+         *   {
+         *    text: "Item 5",
+         *    // item image sprite CSS class, optional
+         *    spriteCssClass: "imageClass3"
+         *   }
+         *  ],
+         *  referenceItem
+         * );
          *
          * @param {Selector} item
          * Target item, specified as the JSON representation of an object.
@@ -1033,6 +1106,9 @@
          * Removes the specified PanelBar item/s
          * @param {Selector} element Target item selector.
          * @example
+	 * // get a reference to the panel bar
+	 * var panelBar = $("#panelBar").data("kendoPanelBar");
+	 * // remove Item 1
          * panelBar.remove("#Item1");
          */
         remove: function (element) {
@@ -1061,6 +1137,11 @@
         /**
          * Reloads a PanelBar content from ajax request
          * @param {Selector} element Target element
+	 * @example
+	 * // get a reference to the panel bar
+	 * var panelBar = $("#panelBar").data("kendoPanelBar");
+	 * // reload the panel basr
+	 * panelBar.reload(); 
          */
         reload: function (element) {
             var that = this;
