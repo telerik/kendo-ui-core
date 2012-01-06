@@ -46,7 +46,7 @@ namespace Kendo.Models
             "kendo.upload.js",
             "kendo.window.js"
 #else
-            "jquery.min.js",
+            "http://code.jquery.com/jquery-1.7.1.min.js",
             "kendo.all.min.js"
 #endif
         };
@@ -79,9 +79,8 @@ namespace Kendo.Models
             "kendo.mobile.tabstrip.js",
             "kendo.mobile.view.js"
 #else
-            "jquery.min.js",
-            "kendo.all.min.js",
-            "kendo.mobile.min.js"
+            "http://code.jquery.com/jquery-1.7.1.min.js",
+            "kendo.all.min.js"
 #endif
             };
     }
