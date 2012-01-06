@@ -912,12 +912,18 @@
 	 * });
          * @option {Boolean} [serverPaging] <false> Determines if paging of the data should be handled on the server.  
 	 * <p><b>serverPaging</b> must be used in conjunction with the <b>pageSize</b> configuration setting. The following options to the server as part of the query string by default: 
-	 * <ul>
-	 * <li><b>take</b>: contains the number of records to retreive</li>
-	 * <li><b>skip</b>: how many records from the front of the dataset to begin reading</li>
-	 * <li><b>page</b>: the index of the current page of data</li>
-	 * <li><b>pageSize</b>: the number of records per page</li>
-	 * </ul></p>
+	 * <div class="details-list">
+	 *     <dl>
+	 *         <dt><b>take</b></dt>
+	 *         <dd>contains the number of records to retreive</dd>
+	 *         <dt><b>skip</b></dt>
+	 *         <dd>how many records from the front of the dataset to begin reading</dd>
+	 *         <dt><b>page</b></dt>
+	 *         <dd>the index of the current page of data</dd>
+	 *         <dt><b>pageSize</b></dt>
+	 *         <dd>the number of records per page</dd>
+	 *    </dl>
+	 * </div>
 	 * <p>It is possible to modify these parameters by using the <b>parameterMap</b> function found on the <b>transport</b> object (see <b>transport</b> in Configuration).</p>
          * _example
 	 * var dataSource = new kendo.data.DataSource({
@@ -966,17 +972,28 @@
 	 * <li>filter[filters][0][value]: 10248</li>
 	 * </ul>
 	 * <p>Possible values for <b>operator</b> include:</p>
-	 * <ul>
-         * <li><strong>Equal To</strong>: "eq", "==", "isequalto", "equals", "equalto", "equal"</li>
-         * <li><strong>Not Equal To</strong>: "neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "ne"</li>
-         * <li><strong>Less Then</strong>: "lt", "<", "islessthan", "lessthan", "less"</li>
-         * <li><strong>Less Then or Equal To</strong>: "lte", "<=", "islessthanorequalto", "lessthanequal", "le"</li>
-         * <li><strong>Greater Then</strong>: "gt", ">", "isgreaterthan", "greaterthan", "greater"</li>
-         * <li><strong>Greater Then or Equal To</strong>: "gte", ">=", "isgreaterthanorequalto", "greaterthanequal", "ge"</li>
-         * <li><strong>Starts With</strong>: "startswith"</li>
-         * <li><strong>Ends With</strong>: "endswith"</li>
-         * <li><strong>Contains</strong>: "contains", "substringof"</li>
-         * </ul>
+	 * <div class="details-list">
+	 *     <dl>
+         *         <dt><b>Equal To</b></dt>
+	 *         <dd>"eq", "==", "isequalto", "equals", "equalto", "equal"</dd>
+         *         <dt><b>Not Equal To</b></dt>
+	 *         <dd>"neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "ne"</dd>
+         *         <dt><b>Less Then</b></dt>
+	 *         <dd>"lt", "<", "islessthan", "lessthan", "less"</dd>
+         *         <dt><b>Less Then or Equal To</b></dt>
+	 *         <dd> "lte", "<=", "islessthanorequalto", "lessthanequal", "le"</dd>
+         *         <dt><b>Greater Then</b></dt>
+	 *         <dd> "gt", ">", "isgreaterthan", "greaterthan", "greater"</dd>
+         *         <dt><b>Greater Then or Equal To</b></dt>
+	 *         <dd>"gte", ">=", "isgreaterthanorequalto", "greaterthanequal", "ge"</dd>
+         *         <dt><b>Starts With</b></dt>
+	 *         <dd>"startswith"</dd>
+         *         <dt><b>Ends With</b></dt>
+	 *         <dd>"endswith"</dd>
+         *         <dt><b>Contains</b></dt>
+	 *         <dd>"contains", "substringof"</dd>
+         *     </dl>
+	 * </div>
 	 * <p>It is possible to modify these parameters by using the <b>parameterMap</b> function found on the <b>transport</b> object (see <b>transport</b> in Configuration).</p>
 	 * _example
 	 * var dataSource = new kendo.data.DataSource({
@@ -1005,7 +1022,7 @@
 	 * var dataSource = new kendo.data.DataSource({
 	 *     page: 2 // displays the second page of data in the bound widget
 	 * });
-         * @option {Array|Object} [sort] <undefined> Sets initial sort order
+         * @option {Array | Object} [sort] <undefined> Sets initial sort order
          * _example
          * // sorts data ascending by orderId field
          * sort: { field: "orderId", dir: "asc" }
@@ -1754,7 +1771,7 @@
 
         /**
          * Get current sort descriptors or sorts the data.
-         * @param {Object|Array} [val] <undefined> Sort options to be applied to the data
+         * @param {Object | Array} [val] <undefined> Sort options to be applied to the data
          * @example
          * dataSource.sort({ field: "orderId", dir: "desc" });
          * dataSource.sort([
@@ -1778,17 +1795,28 @@
          * Get current filters or filter the data.
          *<p>
          * <i>Supported filter operators/aliases are</i>:
-         * <ul>
-         * <li><strong>Equal To</strong>: "eq", "==", "isequalto", "equals", "equalto", "equal"</li>
-         * <li><strong>Not Equal To</strong>: "neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "ne"</li>
-         * <li><strong>Less Then</strong>: "lt", "<", "islessthan", "lessthan", "less"</li>
-         * <li><strong>Less Then or Equal To</strong>: "lte", "<=", "islessthanorequalto", "lessthanequal", "le"</li>
-         * <li><strong>Greater Then</strong>: "gt", ">", "isgreaterthan", "greaterthan", "greater"</li>
-         * <li><strong>Greater Then or Equal To</strong>: "gte", ">=", "isgreaterthanorequalto", "greaterthanequal", "ge"</li>
-         * <li><strong>Starts With</strong>: "startswith"</li>
-         * <li><strong>Ends With</strong>: "endswith"</li>
-         * <li><strong>Contains</strong>: "contains", "substringof"</li>
-         * </ul>
+         * <div class="details-list">
+	 *     <dl>
+         *         <dt><b>Equal To</b></dt>
+	 *         <dd>"eq", "==", "isequalto", "equals", "equalto", "equal"</dd>
+         *         <dt><b>Not Equal To</b></dt>
+	 *         <dd>"neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "ne"</dd>
+         *         <dt><b>Less Then</b></dt>
+	 *         <dd>"lt", "<", "islessthan", "lessthan", "less"</dd>
+         *         <dt><b>Less Then or Equal To</b></dt>
+	 *         <dd> "lte", "<=", "islessthanorequalto", "lessthanequal", "le"</dd>
+         *         <dt><b>Greater Then</b></dt>
+	 *         <dd> "gt", ">", "isgreaterthan", "greaterthan", "greater"</dd>
+         *         <dt><b>Greater Then or Equal To</b></dt>
+	 *         <dd>"gte", ">=", "isgreaterthanorequalto", "greaterthanequal", "ge"</dd>
+         *         <dt><b>Starts With</b></dt>
+	 *         <dd>"startswith"</dd>
+         *         <dt><b>Ends With</b></dt>
+	 *         <dd>"endswith"</dd>
+         *         <dt><b>Contains</b></dt>
+	 *         <dd>"contains", "substringof"</dd>
+         *     </dl>
+	 * </div>
          * </p>
          * @param {Object|Array} [val] <undefined> Filter(s) to be applied to the data.
          * @example
