@@ -59,10 +59,25 @@
 <script>
     $("#codeStrip").kendoTabStrip({
         contentUrls: [null,
-        "@Url.RouteUrl("Source", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })",
-        "@Url.ContentOrEmpty((string) ViewBag.ConfigurationDocPath)",
-        "@Url.ContentOrEmpty((string) ViewBag.MethodsDocPath)",
-        "@Url.ContentOrEmpty((string) ViewBag.EventsDocPath)"
+            "@Url.RouteUrl("Source", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })"
+            @if (ViewBag.ConfigurationDocPath != null)
+            {
+                <text>
+                ,"@Url.ContentOrEmpty((string) ViewBag.ConfigurationDocPath)"
+                </text>
+            }
+            @if (ViewBag.MethodsDocPath != null)
+            {
+                <text>
+                ,"@Url.ContentOrEmpty((string) ViewBag.MethodsDocPath)"
+                </text>
+            }
+            @if (ViewBag.EventsDocPath != null)
+            {
+                <text>
+                ,"@Url.ContentOrEmpty((string) ViewBag.EventsDocPath)"
+                </text>
+            }
         ],
         contentLoad: function() {
             prettyPrint();
