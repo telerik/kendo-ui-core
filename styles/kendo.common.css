@@ -741,6 +741,7 @@ div.k-window-content
     border-width: 0 1px 0 0;
     vertical-align: top;
     zoom: 1;
+    box-sizing: content-box;
 }
 
 .k-menu:after /* add a clear fix to expand content */
@@ -819,11 +820,16 @@ div.k-window-content
     right: 2px;
 }
 
+.k-menu .k-animation-container
+{
+    border: 0;
+}
+
 .k-menu .k-animation-container,
 .k-menu .k-group
 {
     position: absolute;
-    left: -1px;
+    left: 0;
 }
 
 .k-menu .k-animation-container .k-animation-container,
@@ -831,14 +837,22 @@ div.k-window-content
 .k-menu-vertical .k-animation-container,
 .k-menu-vertical .k-group
 {
-    top: -1px;
-    left: 100%;
+    top: 0;
+    left: 0;
 }
 
 .k-menu .k-animation-container .k-group
 {
     top: auto;
     left: auto;
+    margin-top: -1px;
+    margin-left: -1px;
+}
+
+.k-menu .k-animation-container
+{
+    padding-left: 1px;
+    padding-top: 1px;
 }
 
 .k-menu .k-separator

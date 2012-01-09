@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="../src/jquery.js"></script>
+    <script type="text/javascript" src="../src/kendo.core.js"></script>
+    <script type="text/javascript" src="../src/kendo.fx.js"></script>
+    <script type="text/javascript" src="../src/kendo.popup.js"></script>
+    <script type="text/javascript" src="../src/kendo.menu.js"></script>
+    <link type="text/css" href="../styles/kendo.common.css" rel="stylesheet"/>
+    <link type="text/css" href="../styles/kendo.blueopal.css" rel="stylesheet"/>
+    <style type="text/css">
+        html {
+            font: 12px Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <ul id="menu">
+        <li>Test 1
+            <ul>
+                <li>Sub Item 1
+                    <ul>
+                        <li>Sub Sub Item 1</li>
+                        <li>Sub Sub Item 2</li>
+                    </ul>
+                </li>
+                <li>Sub Item 2</li>
+            </ul>
+        </li>
+        <li>Test 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+            </ul>
+        </li>
+    </ul>
+
+    <ul id="menu2">
+        <li>Test 1
+            <ul>
+                <li>Sub Item 1
+                    <ul>
+                        <li>Sub Sub Item 1</li>
+                        <li>Sub Sub Item 2</li>
+                    </ul>
+                </li>
+                <li>Sub Item 2</li>
+            </ul>
+        </li>
+        <li>Test 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+            </ul>
+        </li>
+    </ul>
+    <ul id="menu3">
+        <li>Test 1
+            <ul>
+                <li>Sub Item 1
+                    <ul>
+                        <li>Sub Sub Item 1</li>
+                        <li>Sub Sub Item 2</li>
+                    </ul>
+                </li>
+                <li>Sub Item 2</li>
+            </ul>
+        </li>
+        <li>Test 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+            </ul>
+        </li>
+    </ul>
+
+    <ul id="menu4">
+        <li>Test 1
+            <ul>
+                <li>Sub Item 1
+                    <ul>
+                        <li>Sub Sub Item 1</li>
+                        <li>Sub Sub Item 2</li>
+                    </ul>
+                </li>
+                <li>Sub Item 2</li>
+            </ul>
+        </li>
+        <li>Test 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        $(function () {
+            $("#menu")
+                .css({
+                    width: 200,
+                    margin: "auto"
+                })
+                .kendoMenu({
+                    orientation: "vertical"
+                });
+            $("#menu2").kendoMenu();
+            $("#menu3")
+                .css({
+                    width: 200,
+                    margin: "auto"
+                })
+                .kendoMenu({
+                    orientation: "vertical",
+                    direction: "left"
+                });
+            $("#menu4").kendoMenu({
+                direction: "top"
+            });
+        });
+    </script>
+</body>
+</html>

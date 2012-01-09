@@ -60,6 +60,12 @@
             vertical: true,
             modifier: -1
         },
+        top: {
+            reverse: "bottom"
+        },
+        bottom: {
+            reverse: "top"
+        },
         "in": {
             reverse: "out",
             modifier: -1
