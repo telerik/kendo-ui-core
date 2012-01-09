@@ -1,17 +1,13 @@
-<div data-role="layout" data-id="listview-layout">
-    <footer data-role="footer">
-        <div data-role="tabstrip">
-            <a href="#flat">Flat listview</a>
-            <a href="#grouped">Grouped listview</a>
-        </div>
-    </footer>
-</div>
+<div data-role="view" id="flat" data-init="mobileListViewDataBindInitFlat">
 
-<div data-role="view" id="flat" data-layout="listview-layout">
+    Flat listview | <a data-role="button" href="#grouped">Grouped listview</a>
+
     <ul id="flat-listview"></ul>
 </div>
 
-<div data-role="view" id="grouped" data-layout="listview-layout">
+<div data-role="view" id="grouped" data-init="mobileListViewDataBindInitGrouped" data-transition="">
+    <a href="#flat" data-role="button">Flat listview</a> | Grouped listview
+
     <ul id="grouped-listview"></ul>
 </div>
 
@@ -27,20 +23,14 @@
 
     var flatData = [ "Sashimi Salad", "Seaweed Salad", "Edamame", "Maguro", "Tekka Maki" ];
 
-    $(function() {
+    function mobileListViewDataBindInitFlat() {
+        $("#flat-listview").kendoMobileListView({ dataSource: flatData });
+    }
 
-        kendoMobileApplication.bind("viewInit", function(e) {
-            var viewId = e.view.element.attr("id");
-
-            if (viewId === "flat") {
-                $("#flat-listview").kendoMobileListView({ dataSource: flatData });
-            } else if (viewId === "grouped") {
-                $("#grouped-listview").kendoMobileListView({
-                    dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter" }),
-                    template: "${name}",
-                });
-            }
+    function mobileListViewDataBindInitGrouped() {
+        $("#grouped-listview").kendoMobileListView({
+            dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter" }),
+            template: "${name}",
         });
-
-    });
+    }
 </script>
