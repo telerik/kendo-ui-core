@@ -67,6 +67,16 @@
                          ["Foo", "Bar"]);
                 });
 
+                test("labels can be hidden", function() {
+                    createCategoryAxis({
+                        labels: {
+                            visible: false
+                        }
+                    });
+
+                    equals(categoryAxis.labels.length, 0);
+                });
+
                 test("labels have set template", 1, function() {
                     createCategoryAxis({
                         labels: {
@@ -322,7 +332,19 @@
                     same([slot.x1, slot.x2], [0, chartBox.width() / 2]);
                 });
 
+                test("positions slot for first w/o labels", function() {
+                    createCategoryAxis({ labels: { visible: false } });
+                    var slot = categoryAxis.getSlot(0);
+                    same([slot.x1, slot.x2], [0, chartBox.width() / 2]);
+                });
+
                 test("positions slot for second category", function() {
+                    var slot = categoryAxis.getSlot(1);
+                    same([slot.x1, slot.x2], [chartBox.width() / 2, chartBox.width()]);
+                });
+
+                test("positions slot for second category w/o labels", function() {
+                    createCategoryAxis({ labels: { visible: false } });
                     var slot = categoryAxis.getSlot(1);
                     same([slot.x1, slot.x2], [chartBox.width() / 2, chartBox.width()]);
                 });
