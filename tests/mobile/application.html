@@ -344,6 +344,14 @@
                 equal(application.element.find("#view-title").text(), "foo", "view title applies view title attribute");
             });
 
+            test("Runs attached view event handlers", 1, function() {
+                window.foo = function() {
+                    ok(true, "view init event handler is called");
+                }
+
+                setup('<div data-init="foo" data-role="view">View</div>');
+            });
+
             test("passes url params to the view show event", function() {
                 setup('<div data-role="view" id="page1">Page 1</div><div id="page2" data-role="view"></div>');
                 application.bind("viewShow", function(e) {
