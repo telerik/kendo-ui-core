@@ -25,22 +25,12 @@
         return string.replace(/(\S+)/g, "[" + attr("role") + "*=$1],")
     }
 
-    function extractScripts(html) {
+    function toDom(html) {
         if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
             html = RegExp.$1;
         }
-
         div[0].innerHTML = html;
-        return div.find("script");
-    }
-
-    function extractViews(html) {
-        if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
-            html = RegExp.$1;
-        }
-
-        div[0].innerHTML = html;
-        return div.find(roleSelector("view"));
+        return div;
     }
 
     function hideBar(element) {
@@ -328,7 +318,7 @@
                 that._attachOrientationChange();
                 that._attachMeta();
                 that._setupAppLinks();
-                that._setupLayouts();
+                that._setupLayouts(that.element);
                 that._startHistory();
             });
         },
@@ -357,10 +347,10 @@
                 .delegate(linkRolesSelector + buttonRolesSelector, "click", appLinkClick);
         },
 
-        _setupLayouts: function () {
+        _setupLayouts: function(element) {
             var that = this;
             that.layouts = {};
-            that.element.find(kendo.roleSelector("layout")).each(function() {
+            element.find(kendo.roleSelector("layout")).each(function() {
                 var layout = $(this);
                 that.layouts[layout.data("id")] = new Layout(layout);
             });
@@ -432,13 +422,17 @@
 
         _createRemoteView: function(url, html) {
             var that = this,
-                views = extractViews(html).hide(),
-                scripts = extractScripts(html),
+                dom = $(toDom(html)),
+                views = dom.find(roleSelector("view")).hide(),
+                layouts = dom.find(roleSelector("layout")),
+                scripts = dom.find("script"),
                 element = views.first(),
                 view;
 
             element.hide().attr(attr("url"), url);
 
+            that._setupLayouts(dom);
+            that.element.append(layouts);
             that.element.append(scripts);
             that.element.append(views);
 
