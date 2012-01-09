@@ -597,10 +597,10 @@
                  * };
                  *
                  * // attach expand event handler via bind()
-                 * panelBar.data("kendoPanelBar").bind("expand", onExpand);
+                 * $("#panelBar").data("kendoPanelBar").bind("expand", onExpand);
                  *
                  * // detach expand event handler via unbind()
-                 * panelBar.data("kendoPanelBar").unbind("expand", onExpand);
+                 * $("#panelBar").data("kendoPanelBar").unbind("expand", onExpand);
                  *
                  */
                 EXPAND,
@@ -642,10 +642,10 @@
                  * };
                  *
                  * // attach collapse event handler via bind()
-                 * panelBar.data("kendoPanelBar").bind("collapse", onCollapse);
+                 * $("#panelBar").data("kendoPanelBar").bind("collapse", onCollapse);
                  *
                  * // detach collapse event handler via unbind()
-                 * panelBar.data("kendoPanelBar").unbind("collapse", onCollapse);
+                 * $("#panelBar").data("kendoPanelBar").unbind("collapse", onCollapse);
                  *
                  */
                 COLLAPSE,
@@ -687,10 +687,10 @@
                  * };
                  *
                  * // attach select event handler via bind()
-                 * panelBar.data("kendoPanelBar").bind("select", onSelect);
+                 * $("#panelBar").data("kendoPanelBar").bind("select", onSelect);
                  *
                  * // detach select event handler via unbind()
-                 * panelBar.data("kendoPanelBar").unbind("select", onSelect);
+                 * $("#panelBar").data("kendoPanelBar").unbind("select", onSelect);
                  *
                  */
                 SELECT,
