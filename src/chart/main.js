@@ -4322,6 +4322,7 @@
         sortChildren: function() {
             var element = this,
                 children = element.children,
+                length,
                 i;
 
             for (i = 0, length = children.length; i < length; i++) {
