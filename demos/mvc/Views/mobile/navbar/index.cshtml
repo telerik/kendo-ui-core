@@ -1,19 +1,14 @@
-<div data-role="view" id="home-home">
-    <div data-role="header">
+<div data-role="view" data-title="NavBar - Overview">
+    <header data-role="header">
         <div data-role="navbar">
-            <span data-role="title">Hello World</span>
-            <a data-align="right" data-role="button" href="#about">About</a>
+            <a class="nav-button" data-align="left" data-role="back-button">Back</a>
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button">About</a>
+            <a data-align="right" data-role="button">Settings</a>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
         </div>
-    </div>
+    </header>
+
     Hello
 </div>
 
-<div data-role="view" id="about" data-transition="slide">
-    <div data-role="header">
-        <div data-role="navbar">
-            <a data-align="left" data-role="back-button" href="#home-home">Back</a>
-            <span data-role="title">About</span>
-        </div>
-    </div>
-    About
-</div>
