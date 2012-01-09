@@ -366,6 +366,8 @@
                  * @param {HTMLElement} e.pane
                  * The pane whose content has been loaded.
                  *
+                 * @exampleTitle Attach contentLoad event handler during
+                 * initialization; detach via unbind()
                  * @example
                  * // event handler for contentLoad
                  * var onContentLoad = function(e) {
@@ -380,7 +382,8 @@
                  * // detach contentLoad event handler via unbind()
                  * splitter.data("kendoSplitter").unbind("contentLoad", onContentLoad);
 		         *
-                 * @exampleTitle To set after initialization
+                 * @exampleTitle Attach contentLoad event handler via bind();
+                 * detach via unbind()
                  * @example
                  * // event handler for contentLoad
                  * var onContentLoad = function(e) {
@@ -404,7 +407,8 @@
                  * @event
                  * @param {Event} e
                  *
-                 * @exampleTitle 
+                 * @exampleTitle Attach resize event handler during
+                 * initialization; detach via unbind()
                  * @example
                  * // event handler for resize
                  * var onResize = function(e) {
@@ -419,7 +423,8 @@
                  * // detach resize event handler via unbind()
                  * splitter.data("kendoSplitter").unbind("resize", onResize);
 
-                 * @exampleTitle To set after initialization
+                 * @exampleTitle Attach resize event handler via bind();
+                 * detach via unbind()
                  * @example
                  * // event handler for resize
                  * var onResize = function(e) {
@@ -441,25 +446,32 @@
                  *
                  * @name kendo.ui.Splitter#layoutChange
                  * @event
+                 *
+                 * @exampleTitle Attach layoutChange event handler during
+                 * initialization; detach via unbind()
 	             * @example
-        		 * $("#splitter").kendoSplitter({
-        		 *    layoutChange: function(e) {
-        		 *        // handle event
-        		 *    }
-        		 * });
-        		 * @exampleTitle To set after initialization
-        		 * @example
-        		 * // event handler for resize
-                 * var layoutChange = function(e) {
+                 * // event handler for resize
+                 * var onLayoutChange = function(e) {
                  *  // ...
                  * };
                  *
-                 * // attach resize event handler via bind()
-                 * var splitter = $("#splitter").data("kendoSplitter");
-                 * splitter.bind("layoutChange", layoutChange);
+        		 * $("#splitter").kendoSplitter({
+        		 *    layoutChange: onLayoutChange
+        		 * });
                  *
-                 * // detach resize event handler via unbind()
-                 * splitter.unbind("layoutChange", layoutChange);
+        		 * @exampleTitle Attach layoutChange event handler via bind();
+                 * detach via unbind()
+        		 * @example
+        		 * // event handler for layoutChange
+                 * var onLayoutChange = function(e) {
+                 *  // ...
+                 * };
+                 *
+                 * // attach layoutChange event handler via bind()
+                 * $("#splitter").bind("layoutChange", onLayoutChange);
+                 *
+                 * // detach layoutChange event handler via unbind()
+                 * $("#splitter").unbind("layoutChange", onLayoutChange);
                  *
                  */
                 LAYOUTCHANGE
