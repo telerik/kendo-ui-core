@@ -1364,6 +1364,7 @@
 
         options: {
             labels: {
+                visible: true,
                 rotation: 0
             },
             line: {
@@ -1620,34 +1621,37 @@
             Axis.fn.init.call(axis, defaultOptions);
             options = axis.options;
 
-            var majorDivisions = axis.getDivisions(options.majorUnit),
-                currentValue = options.min,
-                isVertical = options.orientation === VERTICAL,
+            var isVertical = options.orientation === VERTICAL,
                 align = isVertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex
                 }),
-                labelText,
                 titleOptions = deepExtend({}, {
                     rotation: isVertical ? -90 : 0,
                     text: "",
                     zIndex: 1
                 }, options.title),
-                label,
                 title;
 
             axis.labels = [];
-            for (i = 0; i < majorDivisions; i++) {
-                if (labelOptions.template) {
-                    labelTemplate = baseTemplate(labelOptions.template);
-                    labelText = labelTemplate({ value: currentValue });
+            if (labelOptions.visible) {
+                var majorDivisions = axis.getDivisions(options.majorUnit),
+                    currentValue = options.min,
+                    labelText,
+                    label;
+
+                for (i = 0; i < majorDivisions; i++) {
+                    if (labelOptions.template) {
+                        labelTemplate = baseTemplate(labelOptions.template);
+                        labelText = labelTemplate({ value: currentValue });
+                    }
+
+                    label = new TextBox(labelText || currentValue, labelOptions);
+                    axis.append(label);
+                    axis.labels.push(label);
+
+                    currentValue = round(currentValue + options.majorUnit, DEFAULT_PRECISION);
                 }
-
-                label = new TextBox(labelText || currentValue, labelOptions);
-                axis.append(label);
-                axis.labels.push(label);
-
-                currentValue = round(currentValue + options.majorUnit, DEFAULT_PRECISION);
             }
 
             if (options.title) {
