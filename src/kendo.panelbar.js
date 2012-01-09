@@ -588,6 +588,20 @@
                  * // detach expand event handler via unbind()
                  * panelBar.data("kendoPanelBar").unbind("expand", onExpand);
                  *
+                 * @exampleTitle Attach expand event handler via bind();
+                 * detach via unbind()
+                 * @example
+                 * // event handler for expand
+                 * var onExpand = function(e) {
+                 *  // access the loaded pane via e.item (HTMLElement)
+                 * };
+                 *
+                 * // attach expand event handler via bind()
+                 * panelBar.data("kendoPanelBar").bind("expand", onExpand);
+                 *
+                 * // detach expand event handler via unbind()
+                 * panelBar.data("kendoPanelBar").unbind("expand", onExpand);
+                 *
                  */
                 EXPAND,
 
@@ -615,6 +629,20 @@
                  * var panelBar = $("#panelBar").kendoPanelBar({
                  *  collapse: onCollapse
                  * });
+                 *
+                 * // detach collapse event handler via unbind()
+                 * panelBar.data("kendoPanelBar").unbind("collapse", onCollapse);
+                 *
+                 * @exampleTitle Attach collapse event handler via bind();
+                 * detach via unbind()
+                 * @example
+                 * // event handler for collapse
+                 * var onCollapse = function(e) {
+                 *  // access the loaded item via e.item (HTMLElement)
+                 * };
+                 *
+                 * // attach collapse event handler via bind()
+                 * panelBar.data("kendoPanelBar").bind("collapse", onCollapse);
                  *
                  * // detach collapse event handler via unbind()
                  * panelBar.data("kendoPanelBar").unbind("collapse", onCollapse);
