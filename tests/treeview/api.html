@@ -306,6 +306,24 @@
                 equals(treeview.find(".k-group").children().length, 2);
             });
 
+            test("insertAfter(nodeData, element) inserts new node after element", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", expanded: true },
+                            { text: "baz", expanded: true }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView"),
+                    rootItem = treeview.find(".k-item:first"),
+                    rootGroup = treeview.find(".k-group");
+
+                var insertedNode = treeviewObject.insertAfter({ text: "bar" }, rootItem);
+
+                equals(rootGroup.find("> .k-item").length, 3);
+                equals(rootGroup.find("> .k-item:contains('bar')").index(), 1);
+                equals(insertedNode[0], rootGroup.find("> .k-item")[1]);
+            });
+
             test("insertBefore(nodeData, element) inserts new node before element", function() {
                 var treeview = createTreeView({
                         dataSource: [
