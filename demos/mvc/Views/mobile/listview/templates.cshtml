@@ -1,0 +1,26 @@
+<div data-role="view" id="flat" data-init="mobileListViewTemplatesInit">
+    <ul id="custom-listview"></ul>
+</div>
+
+<script type="text/x-kendo-template" id="customListViewTemplate">
+    <strong style="color: gray">${name}</strong> ---- <a data-role="button" class="details-link">Order</a>
+</script>
+
+<script>
+    var groupedData = [
+        {name: "Sashimi Salad", letter: "S" },
+        {name: "Seaweed Salad", letter: "S" },
+        {name: "Edamame", letter: "E" },
+        {name: "Maguro", letter: "M" },
+        {name: "Tekka Maki", letter: "T" },
+        {name: "Tori Katsu", letter: "T" }
+    ]
+
+    function mobileListViewTemplatesInit() {
+        $("#custom-listview").kendoMobileListView({
+            dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter" }),
+            template: $("#customListViewTemplate").html(),
+            headerTemplate: "Letter ${value}"
+        });
+    }
+</script>

@@ -42,7 +42,12 @@
                 {
                     "text": "Data Binding",
                     "url": "listview/databinding.html"
+                },
+                {
+                    "text": "Custom Templates",
+                    "url": "listview/templates.html"
                 }
+
             ]
         },
         {
