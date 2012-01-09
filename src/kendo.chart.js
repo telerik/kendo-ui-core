@@ -1360,6 +1360,9 @@
             var axis = this;
 
             ChartElement.fn.init.call(axis, options);
+
+            axis.createLabels();
+            axis.createTitle();
         },
 
         options: {
@@ -1674,9 +1677,6 @@
                 i;
 
             Axis.fn.init.call(axis, defaultOptions);
-
-            axis.createLabels();
-            axis.createTitle();
         },
 
         options: {
@@ -1958,41 +1958,6 @@
     });
 
     var CategoryAxis = Axis.extend({
-        init: function(options) {
-            var axis = this;
-            Axis.fn.init.call(axis, options);
-
-            var options = axis.options,
-                isVertical = options.orientation === VERTICAL,
-                align = isVertical ? RIGHT : CENTER,
-                labelOptions = deepExtend({ }, options.labels,
-                    { align: align, zIndex: options.zIndex }
-                ),
-                labelTemplate,
-                count = options.categories.length,
-                content,
-                i,
-                label;
-
-            axis.labels = [];
-            if (labelOptions.visible) {
-                for (i = 0; i < count; i++) {
-                    content = defined(options.categories[i]) ? options.categories[i] : "";
-
-                    if (labelOptions.template) {
-                        labelTemplate = baseTemplate(labelOptions.template);
-                        content = labelTemplate({ value: content });
-                    }
-
-                    label = new TextBox(content, labelOptions);
-                    axis.append(label);
-                    axis.labels.push(label);
-                }
-            }
-
-            axis.createTitle();
-        },
-
         options: {
             categories: [],
             orientation: HORIZONTAL,
@@ -2102,6 +2067,15 @@
                 options = axis.options;
 
             return axis.getSlot(0).wrap(axis.getSlot(options.categories.length - 1));
+        },
+
+        getLabelsCount: function() {
+            return this.options.categories.length;
+        },
+
+        getLabelText: function(index) {
+            var options = this.options;
+            return defined(options.categories[index]) ? options.categories[index] : "";
         }
     });
 
