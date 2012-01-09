@@ -1458,6 +1458,8 @@
         right: { reverse: "left" },
         down: { reverse: "up" },
         up: { reverse: "down" },
+        top: { reverse: "bottom" },
+        bottom: { reverse: "top" },
         "in": { reverse: "out" },
         out: { reverse: "in" }
     };

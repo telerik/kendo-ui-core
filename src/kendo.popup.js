@@ -308,7 +308,8 @@
 
             if (options.appendTo === Popup.fn.options.appendTo) {
                 wrapper.css(that._align(origins, positions));
-                aligned = true;
+            } else {
+                wrapper.css(that._align(origins, positions, true));
             }
 
             var pos = getOffset(wrapper, POSITION),
@@ -361,7 +362,7 @@
             return (location.left != flipPos.left || location.top != flipPos.top);
         },
 
-        _align: function(origin, position) {
+        _align: function(origin, position, isPosition) {
             var that = this,
                 element = that.wrapper,
                 anchor = $(that.options.anchor),
@@ -369,16 +370,22 @@
                 horizontalOrigin = origin[1],
                 verticalPosition = position[0],
                 horizontalPosition = position[1],
-                anchorOffset = getOffset(anchor),
+                anchorOffset = isPosition ? { top: 0, left: 0 } : getOffset(anchor),
                 width = element.outerWidth(),
                 height = element.outerHeight(),
                 anchorWidth = anchor.outerWidth(),
                 anchorHeight = anchor.outerHeight(),
                 top = anchorOffset.top,
                 left = anchorOffset.left,
-                round = Math.round;
+                round = Math.round,
+                verticalFlip = verticalOrigin !== verticalPosition,
+                horizontalflip = horizontalOrigin !== horizontalPosition;
 
-            if (verticalOrigin === BOTTOM) {
+            if (verticalOrigin === TOP && isPosition && verticalFlip) {
+                top -= height;
+            }
+
+            if (verticalOrigin === BOTTOM && !isPosition) {
                 top += anchorHeight;
             }
 
@@ -386,7 +393,11 @@
                 top += round(anchorHeight / 2);
             }
 
-            if (verticalPosition === BOTTOM) {
+            if (verticalPosition === TOP && isPosition && verticalFlip) {
+                top += anchorHeight;
+            }
+
+            if (verticalPosition === BOTTOM && !isPosition) {
                 top -= height;
             }
 
@@ -394,7 +405,11 @@
                 top -= round(height / 2);
             }
 
-            if (horizontalOrigin === RIGHT) {
+            if (horizontalOrigin === LEFT && isPosition && horizontalflip) {
+                left -= width;
+            }
+
+            if (horizontalOrigin === RIGHT && !isPosition) {
                 left += anchorWidth;
             }
 
@@ -402,7 +417,11 @@
                 left += round(anchorWidth / 2);
             }
 
-            if (horizontalPosition === RIGHT) {
+            if (horizontalPosition === LEFT && isPosition && horizontalflip) {
+                left += anchorWidth;
+            }
+
+            if (horizontalPosition === RIGHT && !isPosition) {
                 left -= width;
             }
 
