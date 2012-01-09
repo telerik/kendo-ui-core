@@ -42,7 +42,6 @@
         <header data-role="header">
             <div data-role="navbar">
                 <a class="nav-button" data-align="left" data-role="back-button">Back</a>
-                <a data-align="left" data-role="button">Test</a>
                 <span data-role="view-title"></span>
                 <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
             </div>
@@ -62,7 +61,8 @@
             },
             viewShow: function(e) {
                 var viewID = e.view.element.attr("id");
-                e.view.element.find(".nav-button").toggle(viewID != "index");
+                console.log(e.view.element.find(".nav-button"));
+                e.view.element.find(".nav-button").css({visibility: viewID != "index" ? "visible" : "hidden"});
             }
         });
     </script>
