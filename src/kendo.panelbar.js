@@ -577,7 +577,7 @@
                  * @example
                  * // event handler for expand
                  * var onExpand = function(e) {
-                 *  // access the loaded pane via e.item (HTMLElement)
+                 *  // access the expanded item via e.item (HTMLElement)
                  * };
                  *
                  * // attach expand event handler during initialization
@@ -593,7 +593,7 @@
                  * @example
                  * // event handler for expand
                  * var onExpand = function(e) {
-                 *  // access the loaded pane via e.item (HTMLElement)
+                 *  // access the expanded item via e.item (HTMLElement)
                  * };
                  *
                  * // attach expand event handler via bind()
@@ -622,7 +622,7 @@
                  * @example
                  * // event handler for collapse
                  * var onCollapse = function(e) {
-                 *  // access the loaded item via e.item (HTMLElement)
+                 *  // access the collapsed item via e.item (HTMLElement)
                  * };
                  *
                  * // attach collapse event handler during initialization
@@ -638,7 +638,7 @@
                  * @example
                  * // event handler for collapse
                  * var onCollapse = function(e) {
-                 *  // access the loaded item via e.item (HTMLElement)
+                 *  // access the collapsed item via e.item (HTMLElement)
                  * };
                  *
                  * // attach collapse event handler via bind()
@@ -649,28 +649,52 @@
                  *
                  */
                 COLLAPSE,
+
                 /**
-                 * Fires before an item is selected.
+                 *
+                 * Triggered when an item of a PanelBar is selected.
+                 *
                  * @name kendo.ui.PanelBar#select
                  * @event
+                 *
                  * @param {Event} e
-                 * @param {Element} e.item The selected item
-        		 * @example
-        		 * $("#panelBar").kendoPanelBar({
-        		 *     select: function(e) {
-        	  	 *         // handle event
-        		 *     }
-        		 * });
-        		 * @exampleTitle To set after intialization
-        		 * @example
-    	         * // get a reference to the panel bar
-        		 * var panelBar = $("#panelBar").data("kendoPanelBar");
-        		 * // bind the select event
-        		 * panelBar.bind("select", function(e) {
-        		 *     // handle event
-        		 * });
+                 *
+                 * @param {Element} e.item
+                 * The selected item of the PanelBar.
+                 *
+                 * @exampleTitle Attach select event handler during
+                 * initialization; detach via unbind()
+                 * @example
+                 * // event handler for select
+                 * var onSelect = function(e) {
+                 *  // access the selected item via e.item (HTMLElement)
+                 * };
+                 *
+                 * // attach select event handler during initialization
+                 * var panelBar = $("#panelBar").kendoPanelBar({
+                 *  select: onSelect
+                 * });
+                 *
+                 * // detach select event handler via unbind()
+                 * panelBar.data("kendoPanelBar").unbind("select", onSelect);
+                 *
+                 * @exampleTitle Attach select event handler via bind();
+                 * detach via unbind()
+                 * @example
+                 * // event handler for select
+                 * var onSelect = function(e) {
+                 *  // access the selected item via e.item (HTMLElement)
+                 * };
+                 *
+                 * // attach select event handler via bind()
+                 * panelBar.data("kendoPanelBar").bind("select", onSelect);
+                 *
+                 * // detach select event handler via unbind()
+                 * panelBar.data("kendoPanelBar").unbind("select", onSelect);
+                 *
                  */
                 SELECT,
+
                 /**
                  * Fires when AJAX request results in an error.
                  * @name kendo.ui.PanelBar#error
@@ -825,7 +849,7 @@
          * <a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.
          *
          * @param {Boolean} [useAnimation]
-         * Temporariliy enables (<b>true</b>) or disables (<b>false</b>) any
+         * Temporarily enables (<b>true</b>) or disables (<b>false</b>) any
          * visual animation(s) when collapsing items.
          *
          */
