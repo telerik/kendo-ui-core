@@ -1,7 +1,7 @@
 @{
     // WebKit's back button caches ajax responses so we are not relying on IsAjaxRequest
 
-    if (!Request.Params.AllKeys.Contains("partial")) 
+    if (!Request.Params.AllKeys.Contains("partial"))
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
@@ -73,11 +73,22 @@
 
     document.title = "@ViewBag.Title";
 
-    @if (ViewBag.suite == "mobile") 
+    @if (ViewBag.suite == "mobile")
     {
         <text>
-            window.kendoMobileApplication = new kendo.mobile.Application($("#mobile-application-container"));
-            applyCurrentMobileOS();
+        window.kendoMobileApplication = new kendo.mobile.Application(
+        $("#mobile-application-container"),
+        {
+            viewInit: function(e) {
+                if (typeof kendoDemoViewInit != "undefined") {
+                    kendoDemoViewInit(e);
+                }
+            }
+        });
+
+        applyCurrentMobileOS();
         </text>
     }
 </script>
+
+@RenderSection("DemoScripts", required: false)

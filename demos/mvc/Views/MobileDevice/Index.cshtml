@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
     @foreach (string styleName in Kendo.Models.StyleGroups.All) {
     <link href="@Url.Style(styleName)" rel="stylesheet" />
     }
@@ -53,12 +54,17 @@
         window.kendoMobileApplication = new kendo.mobile.Application($(document.body), {
             layout: "examples",
             transition: "slide",
+            scriptsAppend: function(e) {
+                console.log("scripts append invoke");
+                if (typeof kendoDemoViewInit != "undefined") {
+                    kendoDemoViewInit(e);
+                }
+            },
             viewShow: function(e) {
                 var viewID = e.view.element.attr("id");
                 e.view.element.find(".nav-button").toggle(viewID != "index");
             }
         });
-
     </script>
 </body>
 </html>
