@@ -599,6 +599,12 @@
          *  }
          *  // ...
          *
+         * @option {Object} [xAxis] The scatter charts X-axis configuration options.
+         * See valueAxis for detailed members list.
+         *
+         * @option {Object} [yAxis] The scatter charts Y-axis configuration options.
+         * See valueAxis for detailed members list.
+         *
          * @option {Object} [categoryAxis] The category axis configuration options.
          * @option {Array} [categoryAxis.categories] Array of category names.
          * @option {String} [categoryAxis.field] The data field containing the category name.
