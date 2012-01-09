@@ -4,7 +4,9 @@
 </div>
 
 <script>
-    $("#mobile-button").data("kendoMobileButton").bind("click", function() {
-        kendoConsole.log("button was clicked!");
-    });
+    function kendoDemoViewInit() {
+        $("#mobile-button").data("kendoMobileButton").bind("click", function() {
+            kendoConsole.log("button was clicked!");
+        });
+    }
 </script>
