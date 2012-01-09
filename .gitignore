@@ -36,3 +36,5 @@ themebuilder/src/styles/kendo.black.css
 themebuilder/src/styles/Black/
 themebuilder/src/styles/textures/
 demos/mvc/bin/Kendo.*
+download-builder/service/Download/Download/App_Data/
+download-builder/service/Download/Download/bin/
