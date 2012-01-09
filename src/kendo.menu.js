@@ -652,7 +652,7 @@
                         var root = li.parent().hasClass(MENU),
                             parentHorizontal = root && horizontal,
                             directions = parseDirection(direction, root),
-                            openAnimation = extend( { effects: "slideIn:" + getEffectDirection(direction, root) }, that.options.animation.open);
+                            openEffects = "slideIn:" + getEffectDirection(direction, root);
 
                         if (!popup) {
                             popup = ul.kendoPopup({
@@ -662,15 +662,15 @@
                                 anchor: li,
                                 appendTo: li,
                                 animation: {
-                                    open: openAnimation,
+                                    open: extend( { effects: openEffects }, that.options.animation.open),
                                     close: that.options.animation.close
                                 }
                             }).data(KENDOPOPUP);
                         } else {
                             popup = ul.data(KENDOPOPUP);
-                            popup.origin = directions.origin;
-                            popup.position = directions.position;
-                            popup.animation.open = openAnimation;
+                            popup.options.origin = directions.origin;
+                            popup.options.position = directions.position;
+                            popup.options.animation.open.effects = openEffects;
                         }
 
                         popup.open();
