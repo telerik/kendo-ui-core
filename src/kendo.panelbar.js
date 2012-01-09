@@ -561,47 +561,64 @@
 
             that.bind([
                 /**
-                 * Fires before an item is expanded.
+                 *
+                 * Triggered when an item of a PanelBar is expanded.
+                 *
                  * @name kendo.ui.PanelBar#expand
                  * @event
+                 *
                  * @param {Event} e
-                 * @param {Element} e.item The expanding item
-        		 * @example
-        		 * $("#panelBar").kendoPanelBar({
-        		 *     expand: function(e) {
-        	  	 *         // handle event
-        		 *     }
-        		 * });
-        		 * @exampleTitle To set after intialization
-        		 * @example
-        	     * // get a reference to the panel bar
-        		 * var panelBar = $("#panelBar").data("kendoPanelBar");
-        		 * // bind the expand event
-        		 * panelBar.bind("expand", function(e) {
-        		 *     // handle event
-        		 * });
+                 *
+                 * @param {Element} e.item
+                 * The expanding item of the PanelBar.
+                 *
+        		 * @exampleTitle Attach expand event handler during
+                 * initialization; detach via unbind()
+                 * @example
+                 * // event handler for expand
+                 * var onExpand = function(e) {
+                 *  // access the loaded pane via e.item (HTMLElement)
+                 * };
+                 *
+                 * // attach expand event handler during initialization
+                 * var panelBar = $("#panelBar").kendoPanelBar({
+                 *  expand: onExpand
+                 * });
+                 *
+                 * // detach expand event handler via unbind()
+                 * panelBar.data("kendoPanelBar").unbind("expand", onExpand);
+                 *
                  */
                 EXPAND,
+
                 /**
-                 * Fires before an item is collapsed.
+                 *
+                 * Triggered when an item of a PanelBar is collapsed.
+                 *
                  * @name kendo.ui.PanelBar#collapse
                  * @event
+                 *
                  * @param {Event} e
-                 * @param {Element} e.item The collapsing item
-        		 * @example
-        		 * $("#panelBar").kendoPanelBar({
-        		 *     collapse: function(e) {
-        	  	 *         // handle event
-        		 *     }
-        		 * });
-        		 * @exampleTitle To set after intialization
-        		 * @example
-       	         * // get a reference to the panel bar
-        		 * var panelBar = $("#panelBar").data("kendoPanelBar");
-        		 * // bind the collapse event
-        		 * panelBar.bind("collapse", function(e) {
-        		 *     // handle event
-        		 * });
+                 *
+                 * @param {Element} e.item
+                 * The collapsing item of the PanelBar.
+                 *
+                 * @exampleTitle Attach collapse event handler during
+                 * initialization; detach via unbind()
+                 * @example
+                 * // event handler for collapse
+                 * var onCollapse = function(e) {
+                 *  // access the loaded item via e.item (HTMLElement)
+                 * };
+                 *
+                 * // attach collapse event handler during initialization
+                 * var panelBar = $("#panelBar").kendoPanelBar({
+                 *  collapse: onCollapse
+                 * });
+                 *
+                 * // detach collapse event handler via unbind()
+                 * panelBar.data("kendoPanelBar").unbind("collapse", onCollapse);
+                 *
                  */
                 COLLAPSE,
                 /**
