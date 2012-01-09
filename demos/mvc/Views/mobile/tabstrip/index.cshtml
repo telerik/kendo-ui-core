@@ -1,13 +1,31 @@
-<div data-role="view" data-title="TabStrip - Basic Usage">
+<div data-role="view" id="tabstrip-home" data-title="TabStrip - Basic Usage" data-layout="mobile-tabstrip">
+    <p>Home</p>
+</div>
+
+<div data-role="view" id="tabstrip-about" data-title="TabStrip - Basic Usage" data-layout="mobile-tabstrip">
+    <p>About</p>
+</div>
+
+<div data-role="view" id="tabstrip-settings" data-title="TabStrip - Basic Usage" data-layout="mobile-tabstrip">
+    <p>Settings</p>
+</div>
+
+<div data-role="layout" data-id="mobile-tabstrip">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a class="nav-button" data-align="left" data-role="back-button">Back</a>
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
 
     <p>TabStrip</p>
 
     <div data-role="footer">
         <div data-role="tabstrip">
-            <a>Home</a>
-            <a>About</a>
-            <a>Settings</a>
+            <a href="#tabstrip-home">Home</a>
+            <a href="#tabstrip-about">About</a>
+            <a href="#tabstrip-settings">Settings</a>
         </div>
     </div>
 </div>
-
