@@ -16,6 +16,7 @@
     var View = Class.extend({
         init: function(element, options) {
             var that = this,
+                initCallback = element.data(kendo.ns + "init"),
                 contentSelector = roleSelector("content");
 
             that.layout = options.layout;
@@ -37,6 +38,12 @@
                 that.layout.setup(that);
             } else {
                 that.element.prepend(that.header).append(that.footer);
+            }
+
+            kendo.mobile.enhance(element);
+
+            if (initCallback) {
+                window[initCallback].call(this);
             }
         },
 
