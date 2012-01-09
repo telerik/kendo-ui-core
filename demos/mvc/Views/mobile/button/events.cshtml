@@ -1,10 +1,10 @@
-<div data-role="view">
+<div data-role="view" data-init="mobileButtonEventsInit">
     <a id="mobile-button" data-role="button" style="margin: 1rem;">Click me!</a>
     <div class="console"></div>
 </div>
 
 <script>
-    function kendoDemoViewInit() {
+    function mobileButtonEventsInit() {
         $("#mobile-button").data("kendoMobileButton").bind("click", function() {
             kendoConsole.log("button was clicked!");
         });
