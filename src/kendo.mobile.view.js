@@ -162,12 +162,16 @@
                 that.header.detach();
                 view.element.find(roleSelector("header")).remove();
                 view.element.prepend(that.header);
+            } else {
+                view.element.prepend(view.footer);
             }
 
             if (view.footer === that.footer) {
                 that.footer.detach();
                 view.element.find(roleSelector("footer")).remove();
                 view.element.append(that.footer);
+            } else {
+                view.element.append(view.footer);
             }
         }
     });
