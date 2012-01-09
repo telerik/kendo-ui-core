@@ -1360,6 +1360,9 @@
             var axis = this;
 
             ChartElement.fn.init.call(axis, options);
+
+            axis.createLabels();
+            axis.createTitle();
         },
 
         options: {
@@ -1382,6 +1385,61 @@
                 color: BLACK
             },
             margin: 5
+        },
+
+        createLabels: function() {
+            var axis = this,
+                options = axis.options,
+                isVertical = options.orientation === VERTICAL,
+                align = isVertical ? RIGHT : CENTER,
+                labelOptions = deepExtend({ }, options.labels, {
+                    align: align, zIndex: options.zIndex
+                });
+
+            axis.labels = [];
+            if (labelOptions.visible) {
+                var labelsCount = axis.getLabelsCount(),
+                    labelText,
+                    label,
+                    i;
+
+                for (i = 0; i < labelsCount; i++) {
+                    labelText = axis.getLabelText(i);
+
+                    if (labelOptions.template) {
+                        labelTemplate = baseTemplate(labelOptions.template);
+                        labelText = labelTemplate({ value: labelText });
+                    }
+
+                    label = new TextBox(labelText, labelOptions);
+                    axis.append(label);
+                    axis.labels.push(label);
+                }
+            }
+        },
+
+        getLabelsCount: function() {
+        },
+
+        getLabelText: function(index) {
+        },
+
+        createTitle: function() {
+            var axis = this,
+                options = axis.options,
+                isVertical = options.orientation === VERTICAL,
+                titleOptions = deepExtend({
+                    rotation: isVertical ? -90 : 0,
+                    text: "",
+                    zIndex: 1
+                }, options.title),
+                title;
+
+            if (options.title) {
+                title = new TextBox(titleOptions.text, titleOptions);
+                axis.append(title);
+                axis.title = title;
+            }
         },
 
         renderTicks: function(view) {
@@ -1619,46 +1677,6 @@
                 i;
 
             Axis.fn.init.call(axis, defaultOptions);
-            options = axis.options;
-
-            var isVertical = options.orientation === VERTICAL,
-                align = isVertical ? RIGHT : CENTER,
-                labelOptions = deepExtend({ }, options.labels, {
-                    align: align, zIndex: options.zIndex
-                }),
-                titleOptions = deepExtend({}, {
-                    rotation: isVertical ? -90 : 0,
-                    text: "",
-                    zIndex: 1
-                }, options.title),
-                title;
-
-            axis.labels = [];
-            if (labelOptions.visible) {
-                var majorDivisions = axis.getDivisions(options.majorUnit),
-                    currentValue = options.min,
-                    labelText,
-                    label;
-
-                for (i = 0; i < majorDivisions; i++) {
-                    if (labelOptions.template) {
-                        labelTemplate = baseTemplate(labelOptions.template);
-                        labelText = labelTemplate({ value: currentValue });
-                    }
-
-                    label = new TextBox(labelText || currentValue, labelOptions);
-                    axis.append(label);
-                    axis.labels.push(label);
-
-                    currentValue = round(currentValue + options.majorUnit, DEFAULT_PRECISION);
-                }
-            }
-
-            if (options.title) {
-                title = new TextBox(titleOptions.text, titleOptions);
-                axis.append(title);
-                axis.title = title;
-            }
         },
 
         options: {
@@ -1927,55 +1945,19 @@
             slotBox[valueAxis + 2] = p2;
 
             return slotBox;
+        },
+
+        getLabelsCount: function() {
+            return this.getDivisions(this.options.majorUnit);
+        },
+
+        getLabelText: function(index) {
+            var options = this.options;
+            return round(options.min + (index * options.majorUnit), DEFAULT_PRECISION);
         }
     });
 
     var CategoryAxis = Axis.extend({
-        init: function(options) {
-            var axis = this;
-            Axis.fn.init.call(axis, options);
-
-            var options = axis.options,
-                isVertical = options.orientation === VERTICAL,
-                align = isVertical ? RIGHT : CENTER,
-                labelOptions = deepExtend({ }, options.labels,
-                    { align: align, zIndex: options.zIndex }
-                ),
-                labelTemplate,
-                count = options.categories.length,
-                content,
-                i,
-                titleOptions = deepExtend({}, {
-                    rotation: isVertical ? -90 : 0,
-                    text: "",
-                    zIndex: 1
-                }, options.title),
-                label,
-                title;
-
-            axis.labels = [];
-            if (labelOptions.visible) {
-                for (i = 0; i < count; i++) {
-                    content = defined(options.categories[i]) ? options.categories[i] : "";
-
-                    if (labelOptions.template) {
-                        labelTemplate = baseTemplate(labelOptions.template);
-                        content = labelTemplate({ value: content });
-                    }
-
-                    label = new TextBox(content, labelOptions);
-                    axis.append(label);
-                    axis.labels.push(label);
-                }
-            }
-
-            if (options.title) {
-                title = new TextBox(titleOptions.text, titleOptions);
-                axis.append(title);
-                axis.title = title;
-            }
-        },
-
         options: {
             categories: [],
             orientation: HORIZONTAL,
@@ -2085,6 +2067,15 @@
                 options = axis.options;
 
             return axis.getSlot(0).wrap(axis.getSlot(options.categories.length - 1));
+        },
+
+        getLabelsCount: function() {
+            return this.options.categories.length;
+        },
+
+        getLabelText: function(index) {
+            var options = this.options;
+            return defined(options.categories[index]) ? options.categories[index] : "";
         }
     });
 
