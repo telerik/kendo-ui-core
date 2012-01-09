@@ -26,24 +26,27 @@
      * });
      *
      * @section
-     *   <p>
-     *       When the <b>Splitter</b> is initialized, a vertical split bar will be placed between the two
-     *       HTML divs. This bar can be moved by a user left and right to adjust the size on the panes.
-     *   </p>
-     *   <h3>Configuring Splitter Behavior</h3>
-     *   <p>
-     *       The <b>Splitter</b> provides many configuration options that can be easily set during initialization.
-     *       Among the properties that can be controlled:
-     *   </p>
-     *   <ul>
-     *       <li>Min/Max pane size</li>
-     *       <li>Resizable and Collapsible pane behaviors</li>
-     *       <li>Orientation of the splitter</li>
-     *   </ul>
-     *   <p>
-     *       Pane properties are set for each individual pane in a Splitter,
-     *       whereas Splitter properties apply to the entire widget.
-     *   </p>
+     * <p>
+     *  When the <b>Splitter</b> is initialized, a vertical split bar will be
+     *  placed between the two HTML divs. This bar can be moved by a user
+     *  left and right to adjust the size on the panes.
+     * </p>
+     * <h3>Configuring Splitter Behavior</h3>
+     * <p>
+     *  The <b>Splitter</b> provides many configuration options that can be
+     *  easily set during initialization. Among the properties that can be
+     *  controlled:
+     * </p>
+     * <ul>
+     *  <li>Min/Max pane size</li>
+     *  <li>Resizable and Collapsible pane behaviors</li>
+     *  <li>Orientation of the splitter</li>
+     * </ul>
+     * <p>
+     *  Pane properties are set for each individual pane in a Splitter,
+     *  whereas Splitter properties apply to the entire widget.
+     * </p>
+     *
      * @exampleTitle Setting Splitter and Pane properties
      * @example
      * $("#splitter").kendoSplitter({
@@ -58,41 +61,46 @@
      * });
      *
      * @section
-     *   <h3>Nested Splitter Layouts</h3>
-     *   <p>
-     *       To achieve complex layouts, it may be necessary to nest Splitters in different orientations.
-     *       Splitter fully supports nested configurations. All that is required is proper HTML
-     *       configuration and multiple Kendo Splitter initializations.
-     *   </p>
+     * <h3>Nested Splitter Layouts</h3>
+     * <p>
+     *  To achieve complex layouts, it may be necessary to nest Splitters in
+     *  different orientations. The Splitter supports nested configurations.
+     *  All that is required is proper HTML configuration and multiple
+     *  Splitter initializations.
+     * </p>
+     *
      * @exampleTitle Creating nested Splitter layout
      * @example
-     *   <!-- Define nested HTML layout with divs -->
-     *   <div id="horizontalSplitter">
-     *       <div><p>Left Side Pane Content</p></div>
-     *       <div>
-     *           <div id="verticalSplitter">
-     *               <div><p>Right Side, Top Pane Content</p></div>
-     *               <div><p>Right Side, Bottom Pane Content</p></div>
-     *           </div>
-     *       </div>
+     * <!-- Define nested HTML layout with divs -->
+     * <div id="horizontalSplitter">
+     *  <div><p>Left Side Pane Content</p></div>
+     *  <div>
+     *   <div id="verticalSplitter">
+     *    <div><p>Right Side, Top Pane Content</p></div>
+     *    <div><p>Right Side, Bottom Pane Content</p></div>
      *   </div>
-     * @exampleTitle
+     *  </div>
+     * </div>
+     *
+     * @exampleTitle Initialize two Splitters with the differing orientation
      * @example
-     *   // Initialize both Splitters with the proper orientation
-     *   $(document).ready(function() {
-     *       $("horizontalSplitter").kendoSplitter();
-     *       $("verticalSplitter").kendoSplitter({ orientation: "vertical" });
-     *   });
+     * $(document).ready(function() {
+     *  $("horizontalSplitter").kendoSplitter();
+     *  $("verticalSplitter").kendoSplitter({ orientation: "vertical" });
+     * });
      *
      * @section
-     *   <h3>Loading Content with Ajax</h3>
-     *   <p>
-     *       While any valid technique for loading Ajax content can be used, Splitter provides built-in
-     *       support for asynchronously loading content from URLs. These URLs should return HTML fragments
-     *       that can be loaded in a Splitter pane. If you want to load a whole page in an IFRAME,
-     *       you can do so by specifying the complete URL (e.g. http://kendoui.com/)
-     *       Ajax content loading must be configured for each Pane that should use it.
-     *   </p>
+     * <h3>Loading Content with AJAX</h3>
+     * <p>
+     *  While any valid technique for loading Ajax content can be used,
+     *  Splitter provides built-in support for asynchronously loading content
+     *  from URLs. These URLs should return HTML fragments that can be loaded
+     *  in a Splitter pane. If you want to load a whole page in an IFRAME,
+     *  you can do so by specifying the complete URL
+     *  (e.g. http://kendoui.com/) AJAX content loading must be configured
+     *  for each Pane that should use it.
+     * </p>
+     *
      * @exampleTitle Loading Splitter content asynchronously
      * @example
      *   <!-- Define the Splitter HTML -->
@@ -257,11 +265,47 @@
 
             that.bind([
                 /**
-                 * Fires before a pane is expanded.
+                 *
+                 * Triggered when a pane of a Splitter is expanded.
+                 *
                  * @name kendo.ui.Splitter#expand
                  * @event
+                 *
                  * @param {Event} e
-                 * @param {Element} e.pane The expanding pane
+                 *
+                 * @param {Element} e.pane
+                 * The expanding pane of the Splitter.
+                 *
+                 * @exampleTitle Attach expand event handler during
+                 * initialization; detach via unbind()
+                 * @example
+                 * // event handler for expand
+                 * var onExpand = function(e) {
+                 *  // access the expanded item via e.pane (HTMLElement)
+                 * };
+                 *
+                 * // attach expand event handler during initialization
+                 * var splitter = $("#splitter").kendoSplitter({
+                 *  expand: onExpand
+                 * });
+                 *
+                 * // detach expand event handler via unbind()
+                 * splitter.data("kendoSplitter").unbind("expand", onExpand);
+                 *
+                 * @exampleTitle Attach expand event handler via bind();
+                 * detach via unbind()
+                 * @example
+                 * // event handler for expand
+                 * var onExpand = function(e) {
+                 *  // access the expanded item via e.pane (HTMLElement)
+                 * };
+                 *
+                 * // attach expand event handler via bind()
+                 * splitter.data("kendoSplitter").bind("expand", onExpand);
+                 *
+                 * // detach expand event handler via unbind()
+                 * splitter.data("kendoSplitter").unbind("expand", onExpand);
+                 *
                  */
                 EXPAND,
                 /**
