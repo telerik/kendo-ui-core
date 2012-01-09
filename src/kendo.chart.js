@@ -1384,6 +1384,43 @@
             margin: 5
         },
 
+        createLabels: function() {
+            var axis = this,
+                options = axis.options,
+                isVertical = options.orientation === VERTICAL,
+                align = isVertical ? RIGHT : CENTER,
+                labelOptions = deepExtend({ }, options.labels, {
+                    align: align, zIndex: options.zIndex
+                });
+
+            axis.labels = [];
+            if (labelOptions.visible) {
+                var labelsCount = axis.getLabelsCount(),
+                    labelText,
+                    label,
+                    i;
+
+                for (i = 0; i < labelsCount; i++) {
+                    labelText = axis.getLabelText(i);
+
+                    if (labelOptions.template) {
+                        labelTemplate = baseTemplate(labelOptions.template);
+                        labelText = labelTemplate({ value: labelText });
+                    }
+
+                    label = new TextBox(labelText, labelOptions);
+                    axis.append(label);
+                    axis.labels.push(label);
+                }
+            }
+        },
+
+        getLabelsCount: function() {
+        },
+
+        getLabelText: function(index) {
+        },
+
         createTitle: function() {
             var axis = this,
                 options = axis.options,
@@ -1637,35 +1674,8 @@
                 i;
 
             Axis.fn.init.call(axis, defaultOptions);
-            options = axis.options;
 
-            var isVertical = options.orientation === VERTICAL,
-                align = isVertical ? RIGHT : CENTER,
-                labelOptions = deepExtend({ }, options.labels, {
-                    align: align, zIndex: options.zIndex
-                });
-
-            axis.labels = [];
-            if (labelOptions.visible) {
-                var majorDivisions = axis.getDivisions(options.majorUnit),
-                    currentValue = options.min,
-                    labelText,
-                    label;
-
-                for (i = 0; i < majorDivisions; i++) {
-                    if (labelOptions.template) {
-                        labelTemplate = baseTemplate(labelOptions.template);
-                        labelText = labelTemplate({ value: currentValue });
-                    }
-
-                    label = new TextBox(labelText || currentValue, labelOptions);
-                    axis.append(label);
-                    axis.labels.push(label);
-
-                    currentValue = round(currentValue + options.majorUnit, DEFAULT_PRECISION);
-                }
-            }
-
+            axis.createLabels();
             axis.createTitle();
         },
 
@@ -1935,6 +1945,15 @@
             slotBox[valueAxis + 2] = p2;
 
             return slotBox;
+        },
+
+        getLabelsCount: function() {
+            return this.getDivisions(this.options.majorUnit);
+        },
+
+        getLabelText: function(index) {
+            var options = this.options;
+            return round(options.min + (index * options.majorUnit), DEFAULT_PRECISION);
         }
     });
 
