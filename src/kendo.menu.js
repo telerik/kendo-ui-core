@@ -314,6 +314,13 @@
          * @option {Boolean} [openOnClick] <false> Specifies that the root sub menus will be opened on item click.
          * @option {Boolean} [closeOnClick] <true> Specifies that sub menus should close after item selection (provided they won't navigate).
          * @option {Number} [hoverDelay] <100> Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving.
+         * @option {String} [direction] <"default"> Specifies Menu opening direction. Can be "top", "bottom", "left", "right".
+         * You can also specify different direction for root and sub menu items, separating them with space. Below example will initialize the root menu to open upwards and
+         * its sub menus to the left.
+         * _example
+         * $("#menu").kendoMenu({
+         *     direction: "top left"
+         * });
          */
         init: function(element, options) {
             element = $(element);
