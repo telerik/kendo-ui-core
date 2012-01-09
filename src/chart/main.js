@@ -1954,17 +1954,19 @@
                 title;
 
             axis.labels = [];
-            for (i = 0; i < count; i++) {
-                content = defined(options.categories[i]) ? options.categories[i] : "";
+            if (labelOptions.visible) {
+                for (i = 0; i < count; i++) {
+                    content = defined(options.categories[i]) ? options.categories[i] : "";
 
-                if (labelOptions.template) {
-                    labelTemplate = baseTemplate(labelOptions.template);
-                    content = labelTemplate({ value: content });
+                    if (labelOptions.template) {
+                        labelTemplate = baseTemplate(labelOptions.template);
+                        content = labelTemplate({ value: content });
+                    }
+
+                    label = new TextBox(content, labelOptions);
+                    axis.append(label);
+                    axis.labels.push(label);
                 }
-
-                label = new TextBox(content, labelOptions);
-                axis.append(label);
-                axis.labels.push(label);
             }
 
             if (options.title) {
@@ -2058,7 +2060,7 @@
             var axis = this,
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
-                childrenCount = math.max(1, axis.labels.length),
+                childrenCount = math.max(1, options.categories.length),
                 from = math.max(0, from),
                 to = math.min(childrenCount, to),
                 box = axis.box,
