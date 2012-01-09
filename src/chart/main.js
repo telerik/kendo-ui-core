@@ -1384,6 +1384,24 @@
             margin: 5
         },
 
+        createTitle: function() {
+            var axis = this,
+                options = axis.options,
+                isVertical = options.orientation === VERTICAL,
+                titleOptions = deepExtend({
+                    rotation: isVertical ? -90 : 0,
+                    text: "",
+                    zIndex: 1
+                }, options.title),
+                title;
+
+            if (options.title) {
+                title = new TextBox(titleOptions.text, titleOptions);
+                axis.append(title);
+                axis.title = title;
+            }
+        },
+
         renderTicks: function(view) {
             var axis = this,
                 options = axis.options,
@@ -1625,13 +1643,7 @@
                 align = isVertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex
-                }),
-                titleOptions = deepExtend({}, {
-                    rotation: isVertical ? -90 : 0,
-                    text: "",
-                    zIndex: 1
-                }, options.title),
-                title;
+                });
 
             axis.labels = [];
             if (labelOptions.visible) {
@@ -1654,11 +1666,7 @@
                 }
             }
 
-            if (options.title) {
-                title = new TextBox(titleOptions.text, titleOptions);
-                axis.append(title);
-                axis.title = title;
-            }
+            axis.createTitle();
         },
 
         options: {
@@ -1945,13 +1953,7 @@
                 count = options.categories.length,
                 content,
                 i,
-                titleOptions = deepExtend({}, {
-                    rotation: isVertical ? -90 : 0,
-                    text: "",
-                    zIndex: 1
-                }, options.title),
-                label,
-                title;
+                label;
 
             axis.labels = [];
             if (labelOptions.visible) {
@@ -1969,11 +1971,7 @@
                 }
             }
 
-            if (options.title) {
-                title = new TextBox(titleOptions.text, titleOptions);
-                axis.append(title);
-                axis.title = title;
-            }
+            axis.createTitle();
         },
 
         options: {
