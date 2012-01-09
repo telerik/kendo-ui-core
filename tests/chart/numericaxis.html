@@ -329,6 +329,11 @@
                     setup: moduleSetup
                 });
 
+                test("labels can be hidden", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, { labels: { visible: false } });
+                    equals(numericAxis.labels.length, 0);
+                });
+
                 test("labels have rotation angle", 1, function() {
                     numericAxis = new Chart.NumericAxis(0, 1, { labels: { rotation: 42.5 } });
                     numericAxis.reflow(chartBox);
