@@ -74,23 +74,6 @@
      * @exampleTitle Initialize Kendo PanelBar using JSON data object
      * @example
      * $("#panelbar").kendoPanelBar({
-     *     dataSource: [
-     *         {
-     *             text: "Item 1",
-     *             items: [
-     *                 { text: "Sub Item 1" },
-     *                 { text: "Sub Item 2" }
-     *             ]
-     *         },
-     *         {
-     *             text: "Item 2"
-     *         }
-     *     ]
-     * });
-     *
-     * @exampleTitle Initialize Kendo PanelBar using JSON data object
-     * @example
-     * $("#panelbar").kendoPanelBar({
      *  dataSource: [
      *   {
      *    text: "Item 1",
@@ -528,17 +511,20 @@
          * @option {String} [expandMode] <"multiple">
          * Specifies how the <b>PanelBar</b> items are displayed when opened
          * and closed. The following values are available: 
-	 * <div class="details-list">
-         *     <dl>
-	 *         <dt><b>single</b></dt>
-	 *         <dd>Display's one item at a time when an item is opened.</dd>
-	 *         <dt><b>multiple</b></dt>
-	 *         <dd>Will display multiple values at one time. Opening an item has no visual impact on any other items in the <b>PanelBar</b></dd>
-	 *     </dl>
-	 * </div> 
+    	 * <div class="details-list">
+         *  <dl>
+    	 *   <dt><b>single</b></dt>
+    	 *   <dd>Display's one item at a time when an item is opened.</dd>
+    	 *   <dt><b>multiple</b></dt>
+    	 *   <dd>
+         *    Will display multiple values at one time. Opening an item has
+         *    no visual impact on any other items in the <b>PanelBar</b>
+         *   </dd>
+    	 *  </dl>
+    	 * </div> 
          * _example
          * $("#panelBar").kendoPanelBar({
-         *     expandMode: "single"
+         *  expandMode: "single"
          * });
          */
         init: function(element, options) {
@@ -580,20 +566,20 @@
                  * @event
                  * @param {Event} e
                  * @param {Element} e.item The expanding item
-		 * @example
-		 * $("#panelBar").kendoPanelBar({
-		 *     expand: function(e) {
-	  	 *         // handle event
-		 *     }
-		 * });
-		 * @exampleTitle To set after intialization
-		 * @example
-	         * // get a reference to the panel bar
-		 * var panelBar = $("#panelBar").data("kendoPanelBar");
-		 * // bind the expand event
-		 * panelBar.bind("expand", function(e) {
-		 *     // handle event
-		 * });
+        		 * @example
+        		 * $("#panelBar").kendoPanelBar({
+        		 *     expand: function(e) {
+        	  	 *         // handle event
+        		 *     }
+        		 * });
+        		 * @exampleTitle To set after intialization
+        		 * @example
+        	     * // get a reference to the panel bar
+        		 * var panelBar = $("#panelBar").data("kendoPanelBar");
+        		 * // bind the expand event
+        		 * panelBar.bind("expand", function(e) {
+        		 *     // handle event
+        		 * });
                  */
                 EXPAND,
                 /**
@@ -602,20 +588,20 @@
                  * @event
                  * @param {Event} e
                  * @param {Element} e.item The collapsing item
-		 * @example
-		 * $("#panelBar").kendoPanelBar({
-		 *     collapse: function(e) {
-	  	 *         // handle event
-		 *     }
-		 * });
-		 * @exampleTitle To set after intialization
-		 * @example
-	         * // get a reference to the panel bar
-		 * var panelBar = $("#panelBar").data("kendoPanelBar");
-		 * // bind the collapse event
-		 * panelBar.bind("collapse", function(e) {
-		 *     // handle event
-		 * });
+        		 * @example
+        		 * $("#panelBar").kendoPanelBar({
+        		 *     collapse: function(e) {
+        	  	 *         // handle event
+        		 *     }
+        		 * });
+        		 * @exampleTitle To set after intialization
+        		 * @example
+       	         * // get a reference to the panel bar
+        		 * var panelBar = $("#panelBar").data("kendoPanelBar");
+        		 * // bind the collapse event
+        		 * panelBar.bind("collapse", function(e) {
+        		 *     // handle event
+        		 * });
                  */
                 COLLAPSE,
                 /**
@@ -624,20 +610,20 @@
                  * @event
                  * @param {Event} e
                  * @param {Element} e.item The selected item
-		 * @example
-		 * $("#panelBar").kendoPanelBar({
-		 *     select: function(e) {
-	  	 *         // handle event
-		 *     }
-		 * });
-		 * @exampleTitle To set after intialization
-		 * @example
-	         * // get a reference to the panel bar
-		 * var panelBar = $("#panelBar").data("kendoPanelBar");
-		 * // bind the select event
-		 * panelBar.bind("select", function(e) {
-		 *     // handle event
-		 * });
+        		 * @example
+        		 * $("#panelBar").kendoPanelBar({
+        		 *     select: function(e) {
+        	  	 *         // handle event
+        		 *     }
+        		 * });
+        		 * @exampleTitle To set after intialization
+        		 * @example
+    	         * // get a reference to the panel bar
+        		 * var panelBar = $("#panelBar").data("kendoPanelBar");
+        		 * // bind the select event
+        		 * panelBar.bind("select", function(e) {
+        		 *     // handle event
+        		 * });
                  */
                 SELECT,
                 /**
@@ -647,20 +633,20 @@
                  * @param {Event} e
                  * @param {jqXHR} e.xhr The jqXHR object used to load the content
                  * @param {String} e.status The returned status.
-		 * @example
-		 * $("#panelBar").kendoPanelBar({
-		 *     error: function(e) {
-	  	 *         // handle event
-		 *     }
-		 * });
-		 * @exampleTitle To set after intialization
-		 * @example
-	         * // get a reference to the panel bar
-		 * var panelBar = $("#panelBar").data("kendoPanelBar");
-		 * // bind the error ajax event
-		 * panelBar.bind("error", function(e) {
-		 *     // handle event
-		 * });
+        		 * @example
+        		 * $("#panelBar").kendoPanelBar({
+        		 *     error: function(e) {
+        	  	 *         // handle event
+        		 *     }
+        		 * });
+        		 * @exampleTitle To set after intialization
+        		 * @example
+    	         * // get a reference to the panel bar
+        		 * var panelBar = $("#panelBar").data("kendoPanelBar");
+        		 * // bind the error ajax event
+        		 * panelBar.bind("error", function(e) {
+        		 *     // handle event
+        		 * });
                  */
                 ERROR,
                 /**
@@ -670,21 +656,20 @@
                  * @param {Event} e
                  * @param {Element} e.item The selected item
                  * @param {Element} e.contentElement The loaded content element
-		 * @example
-		 * $("#panelBar").kendoPanelBar({
-		 *     contentLoad: function(e) {
-	  	 *         // handle event
-		 *     }
-		 * });
-		 * @exampleTitle To set after intialization
-		 * @example
-	         * // get a reference to the panel bar
-		 * var panelBar = $("#panelBar").data("kendoPanelBar");
-		 * // bind the contentLoad event
-		 * panelBar.bind("contentLoad", function(e) {
-		 *     // handle event
-		 * });
-
+        		 * @example
+        		 * $("#panelBar").kendoPanelBar({
+        		 *     contentLoad: function(e) {
+        	  	 *         // handle event
+        		 *     }
+        		 * });
+        		 * @exampleTitle To set after intialization
+        		 * @example
+    	         * // get a reference to the panel bar
+        		 * var panelBar = $("#panelBar").data("kendoPanelBar");
+        		 * // bind the contentLoad event
+        		 * panelBar.bind("contentLoad", function(e) {
+        		 *     // handle event
+        		 * });
                  */
                 CONTENTLOAD
             ], that.options);
@@ -1135,13 +1120,13 @@
         },
 
         /**
-         * Reloads a PanelBar content from ajax request
+         * Reloads the content of a <b>PanelBar</b> from an AJAX request.
          * @param {Selector} element Target element
-	 * @example
-	 * // get a reference to the panel bar
-	 * var panelBar = $("#panelBar").data("kendoPanelBar");
-	 * // reload the panel basr
-	 * panelBar.reload(); 
+    	 * @example
+    	 * // get a reference to the panel bar
+    	 * var panelBar = $("#panelBar").data("kendoPanelBar");
+    	 * // reload the panel basr
+    	 * panelBar.reload(); 
          */
         reload: function (element) {
             var that = this;
