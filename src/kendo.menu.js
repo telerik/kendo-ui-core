@@ -206,11 +206,28 @@
             }
         };
 
-    function getEffectOptions(item) {
-        var parent = item.parent();
-        return {
-            effects: parent.hasClass(MENU) ? parent.hasClass(MENU + "-vertical") ? SLIDEINRIGHT : "slideIn:down" : SLIDEINRIGHT
-        };
+    function getEffectDirection(direction, root) {
+        direction = direction.split(" ")[!root+0] || direction;
+        return direction.replace("top", "up").replace("bottom", "down");
+    }
+
+    function parseDirection(direction, root) {
+        direction = direction.split(" ")[!root+0] || direction;
+        var output = { origin: [ "bottom", "left" ], position: [ "top", "left" ] },
+            horizontal = /left|right/.test(direction);
+
+        if (horizontal) {
+            output.origin = [ "top", direction ];
+            output.position[1] = kendo.directions[direction].reverse;
+        } else {
+            output.origin[0] = direction;
+            output.position[0] = kendo.directions[direction].reverse;
+        }
+
+        output.origin = output.origin.join(" ");
+        output.position = output.position.join(" ");
+
+        return output;
     }
 
     function contains(parent, child) {
@@ -380,6 +397,7 @@
                 }
             },
             orientation: "horizontal",
+            direction: "default",
             openOnClick: false,
             closeOnClick: true,
             hoverDelay: 100
@@ -602,7 +620,14 @@
          * menu.open("#Item1");
          */
         open: function (element) {
-            var that = this;
+            var that = this,
+                options = that.options,
+                horizontal = options.orientation == "horizontal",
+                direction = options.direction;
+
+            if (/^(top|bottom|default)$/.test(direction)) {
+                direction = horizontal ? (direction + " right").replace("default", "bottom") : "right";
+            }
 
             $(element).each(function () {
                 var li = $(this);
@@ -617,20 +642,28 @@
                         li.css(ZINDEX, that.nextItemZIndex ++);
 
                         popup = ul.data(KENDOPOPUP);
-                        var parentHorizontal = li.parent().hasClass(MENU + "-horizontal");
+                        var root = li.parent().hasClass(MENU),
+                            parentHorizontal = root && horizontal,
+                            directions = parseDirection(direction, root),
+                            openAnimation = extend( { effects: "slideIn:" + getEffectDirection(direction, root) }, that.options.animation.open);
 
                         if (!popup) {
                             popup = ul.kendoPopup({
-                                origin: parentHorizontal ? "bottom left" : "top right",
-                                position: "top left",
+                                origin: directions.origin,
+                                position: directions.position,
                                 collision: parentHorizontal ? "fit" : "fit flip",
                                 anchor: li,
                                 appendTo: li,
                                 animation: {
-                                    open: extend( getEffectOptions(li), that.options.animation.open),
+                                    open: openAnimation,
                                     close: that.options.animation.close
                                 }
                             }).data(KENDOPOPUP);
+                        } else {
+                            popup = ul.data(KENDOPOPUP);
+                            popup.origin = directions.origin;
+                            popup.position = directions.position;
+                            popup.animation.open = openAnimation;
                         }
 
                         popup.open();
