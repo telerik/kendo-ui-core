@@ -54,14 +54,12 @@
             layout: "examples",
             transition: "slide",
             scriptsAppend: function(e) {
-                console.log("scripts append invoke");
                 if (typeof kendoDemoViewInit != "undefined") {
                     kendoDemoViewInit(e);
                 }
             },
             viewShow: function(e) {
                 var viewID = e.view.element.attr("id");
-                console.log(e.view.element.find(".nav-button"));
                 e.view.element.find(".nav-button").css({visibility: viewID != "index" ? "visible" : "hidden"});
             }
         });
