@@ -84,7 +84,11 @@ function outputDescription(description) {
 
             case "section":
             default:
-                output += (/<[^>]+>/g.test(tag.desc) ? tag.desc : "<p>" + tag.desc + "</p>");
+                if (/<[^>]+>/g.test(tag.desc)) {
+                    output += tag.desc;
+                } else if (tag.desc.indexOf("kendo.") !== 0) {
+                    output += "<p>" + tag.desc + "</p>";
+                }
             break;
         }
     }
