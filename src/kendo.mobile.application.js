@@ -18,6 +18,7 @@
         ViewSwitcher = mobile.ViewSwitcher,
         Layout = mobile.Layout,
         VIEW_INIT = "viewInit",
+        SCRIPTS_APPEND = "scriptsAppend",
         VIEW_SHOW = "viewShow",
         roleSelector = kendo.roleSelector;
 
@@ -300,6 +301,14 @@
              */
               VIEW_INIT,
             /**
+             * Fires after remote view content and scripts are appended to the DOM.
+             * @name kendo.mobile.Application#scriptsAppend
+             * @event
+             * @param {Event} e
+             * @param {kendo.mobile.View} e.view The displayed view.
+             */
+              SCRIPTS_APPEND,
+            /**
              * Fires when a view is displayed.
              * @name kendo.mobile.Application#viewShow
              * @event
@@ -446,7 +455,8 @@
             that.element.append(views);
 
             view = that._createView(element);
-            that.element.append(scripts)
+            that.element.append(scripts);
+            that.trigger(SCRIPTS_APPEND, {view: view});
             return view;
         },
 
