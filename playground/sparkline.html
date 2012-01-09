@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.chart.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var baseOptions = {
+                title: {
+                },
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    type: "line",
+                    line: {
+                        width: 1,
+                        markers: {
+                            size: 2
+                        }
+                    }
+                },
+                axisDefaults: {
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                categoryAxis: {
+                    labels: {
+                        rotation: 90,
+                        visible: false
+                    }
+                },
+                valueAxis: {
+                    labels: {
+                        visible: false
+                    }
+                }
+            };
+
+            $(document).ready(function() {
+                $(".chart1").kendoChart(
+                    $.extend(true, {}, baseOptions, {
+                        series: [{
+                            name: "Ideal",
+                            data: [3, 2, 1]
+                        },{
+                            name: "Actual",
+                            data: [3, 2.5, 2]
+                        }],
+                        valueAxis: {
+                            majorUnit: 1
+                        }
+                    })
+                );
+
+                $(".chart2").kendoChart($.extend(true, {}, baseOptions, {
+                    series: [{
+                        name: "Ideal",
+                        data: [300, 200, 100]
+                    },{
+                        name: "Actual",
+                        data: [300, 250, 200]
+                    }],
+                    categoryAxis: {
+                        categories: ["Now", "Then", "Later"]
+                    }
+                }));
+            });
+        </script>
+
+        <div class="chart1" style="width: 120px; height: 75px; float: left;">
+        </div>
+
+        <div class="chart2" style="width: 120px; height: 75px; margin-left: 150px;">
+        </div>
+
+        <div class="chart2" style="width: 120px; height: 75px; float: left;">
+        </div>
+    </body>
+</html>
+
