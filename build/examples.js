@@ -23,28 +23,10 @@ var SOURCE_ROOT = "src",
 
 // Implementation ==============================================================
 function buildProject(project, configuration) {
-    var buildExe,
-        osName = os.type(),
-        configuration = configuration || DEBUG,
+    var configuration = configuration || DEBUG,
         params = [ "/t:Clean;Build", "/p:Configuration=" + configuration, project ];
 
-    if (osName == "Linux" || osName == "Darwin") {
-        buildExe = spawn("xbuild", params);
-    } else {
-        buildExe = spawn("/cygdrive/c/Windows/Microsoft.NET/Framework64/v4.0.30319/msbuild.exe", params);
-    }
-
-    buildExe.stderr.on('data', function (data) {
-        sys.print('stderr: ' + data);
-    });
-
-    buildExe.on('exit', function (code) {
-        if (code !== 0) {
-            console.log("Build error: " + code);
-        } else {
-            console.log("Success.");
-        }
-    });
+    kendoBuild.msBuild(project, params);
 }
 
 function buildPrerequisites() {
