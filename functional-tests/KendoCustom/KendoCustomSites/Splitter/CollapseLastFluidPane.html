@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Basic usage</title>
+      
+        <link href="../../../../deploy/kendoui.complete.commercial/styles/kendo.common.min.css" rel="stylesheet"/>
+        <link href="../../../../deploy/kendoui.complete.commercial/styles/kendo.blueopal.min.css" rel="stylesheet"/>
+        <script src="../../../../deploy/kendoui.complete.commercial/js/jquery.min.js"></script>
+        <script src="../../../../deploy/kendoui.complete.commercial/js/kendo.all.min.js"></script>
+
+    </head>
+
+    <body>
+
+     
+            <div id="splitter">
+                <div>
+                1
+                </div>
+
+                <div>
+                2
+                </div>
+            </div>
+
+
+    <script>
+       
+        $(document).ready(function () {
+
+            var splitter = $("#splitter").kendoSplitter({
+                panes: [
+                { collapsible: true, size: "100px" },
+                { collapsible: true }
+                ]
+            });
+
+
+        });
+
+    </script>                
+    
+    </body>
+</html>
