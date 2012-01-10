@@ -2,13 +2,13 @@
 var path = require("path"),
     config = require("build/config"),
     docs = require("build/docs"),
+    bundles = require("build/bundles"),
     kendoBuild = require("build/kendo-build"),
     copyDir = kendoBuild.copyDirSyncRecursive,
     mkdir = kendoBuild.mkdir,
     zip = kendoBuild.zip,
     kendoScripts = require("build/kendo-scripts"),
-    themes = require("build/themes"),
-    examples = require("build/examples");
+    themes = require("build/themes");
 
 // Configuration ==============================================================
 var CDN_ROOT = "http://cdn.kendostatic.com/",
@@ -90,6 +90,11 @@ namespace("demos", function() {
 desc("Default task");
 task("default", ["clean", "demos:debug"], function() {
 });
+
+desc("Build bundles");
+task("bundles", ["clean", "themes", "merge-scripts"], function() {
+    bundles.buildAllBundles(complete);
+}, true);
 
 // Helpers ====================================================================
 function deployDemos(outputPath, cdnRoot, onSuccess) {
