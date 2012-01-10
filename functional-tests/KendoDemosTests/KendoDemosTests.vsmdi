@@ -3,14 +3,14 @@
   <TestList name="Menu" id="12f6555a-1249-463d-af7b-3fd1fe799939" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
     <TestLinks>
       <TestLink id="ae40b38e-ceab-4483-9c78-9dd0b4ba89fc" name="MenuEvents" storage="uiwidgets\menu\events\menuevents.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="bd48866d-9675-4d9b-b4c7-beb25c61629d" name="NotClosedOnClick" storage="uiwidgets\menu\basicusage\notclosedonclick.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="c5579771-d30c-4147-9b72-fbac1b2912d2" name="AssertMenuOpenedOnHover" storage="uiwidgets\menu\events\assertmenuopenedonhover.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="8e745bff-cf97-4e91-bf74-1b898a169892" name="Remove" storage="uiwidgets\menu\api\remove.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="e030defd-3463-4e18-80ff-8a8460999714" name="DisableEnable" storage="uiwidgets\menu\api\disableenable.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="071dc329-c46f-4cc2-b443-47d48192af77" name="Append" storage="uiwidgets\menu\api\append.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="ed9bef03-09c4-4e66-9a48-17bf224eb2f8" name="Before" storage="uiwidgets\menu\api\before.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="69b9d95b-97f1-44f4-afe2-ab90a9dc4653" name="After" storage="uiwidgets\menu\api\after.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="d6c744bc-3f9e-4c0f-b3cd-494c7b0b21af" name="OpenClose" storage="uiwidgets\menu\basicusage\openclose.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="e030defd-3463-4e18-80ff-8a8460999714" name="DisableEnable" storage="uiwidgets\menu\api\disableenable.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="bd48866d-9675-4d9b-b4c7-beb25c61629d" name="NotClosedOnClick" storage="uiwidgets\menu\basicusage\notclosedonclick.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
     </TestLinks>
   </TestList>
   <TestList name="Window" id="1f98a53c-211f-4a2a-ad34-a612e529146c" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
@@ -44,20 +44,35 @@
   <TestList name="Grid" id="54360864-1fa8-42b9-8d23-d14f03ed02ab" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
     <TestLinks>
       <TestLink id="8a287048-0563-41ee-bb17-75f9e5be51ae" name="SortByFirstName" storage="uiwidgets\grid\basicusage\sortbyfirstname.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="9f334d69-248b-4db0-b55c-cdcd7b51fbad" name="GroupThenSort" storage="uiwidgets\grid\basicusage\groupthensort.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="d2a268d8-8e78-46db-9cb3-2d0ab1cf3930" name="PageGridExpandNode" storage="uiwidgets\grid\hierarchy\pagegridexpandnode.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="7c3436fc-f5b3-4d43-ad14-6ece174c8b5a" name="SelectRowSingle" storage="uiwidgets\grid\selection\selectrowsingle.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="7aa6b795-bb3f-402c-ae69-8ac9fc912216" name="PageFilter" storage="uiwidgets\grid\bindtoremotedata\pagefilter.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="d84545ae-0034-4e8d-9a1e-2059c04ffc84" name="PageInHierarchyGrid" storage="uiwidgets\grid\hierarchy\pageinhierarchygrid.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="e600d7c4-1f22-4b3f-b7e0-87ccb518cf25" name="CollapseExpandGroup" storage="uiwidgets\grid\api\collapseexpandgroup.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="47d86c0d-d6ef-445b-9215-5bacc00eb0ba" name="CollapseExpandGridNode" storage="uiwidgets\grid\hierarchy\collapseexpandgridnode.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="1aad7b99-d58e-4674-b245-5264ec6aea54" name="AssertDefaultFilteringOption" storage="uiwidgets\grid\bindtolocaldata\assertdefaultfilteringoption.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="186148c5-2d83-494c-882c-49f78960c22f" name="SortGridCollapseNode" storage="uiwidgets\grid\hierarchy\sortgridcollapsenode.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="5dcd346f-25f3-4ee5-9481-7a377708ccc6" name="FilterCityIs" storage="uiwidgets\grid\bindtoremotedata\filtercityis.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="959705a5-01ca-4276-9c5c-52e8199cfb2e" name="EditLoseFocusCancel" storage="uiwidgets\grid\editing\editlosefocuscancel.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="34dcf0a0-deb4-4a70-b871-0662107acdad" name="GroupByAge" storage="uiwidgets\grid\basicusage\groupbyage.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="ab4b966e-8b6e-4547-9dfb-c470975fb4c1" name="FilterFirstNameIsEqualTo" storage="uiwidgets\grid\bindtolocaldata\filterfirstnameisequalto.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="2cdaeb3e-5697-418e-9b65-93cda36bf91e" name="EditSave" storage="uiwidgets\grid\editing\editsave.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="586a0e77-6817-4212-a7c4-68da2fb85183" name="AgeNotEqualTo" storage="uiwidgets\grid\bindtolocaldata\agenotequalto.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="b825efa7-b006-4d94-be05-ab0bd90f68c6" name="AddRecordCancel" storage="uiwidgets\grid\editing\addrecordcancel.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="6332562b-81d8-465b-8b62-f7c2cd0558c3" name="FilterFreightLessThan" storage="uiwidgets\grid\bindtoremotedata\filterfreightlessthan.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="408aa092-c428-4374-ad41-76b0243fa217" name="GridEvents" storage="uiwidgets\grid\events\gridevents.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="a2670fe9-91cd-41b6-a077-d84088d3a56b" name="DeleteRecord" storage="uiwidgets\grid\editing\deleterecord.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="5556a768-9a28-4c39-bc95-597397e5ac75" name="FilterBirthDateGreaterThanOrEqualTo" storage="uiwidgets\grid\bindtolocaldata\filterbirthdategreaterthanorequalto.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="9cb5d3ab-f751-4176-a5e7-5c12ffe34e0f" name="ClearSelectedRow" storage="uiwidgets\grid\api\clearselectedrow.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="f184af68-1055-46ac-ab12-9b3801b746c4" name="SortInHierarchyGrid" storage="uiwidgets\grid\hierarchy\sortinhierarchygrid.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="80c9c1d7-f393-4d16-8fe7-82fcc33fae0f" name="SelectMultipleCells" storage="uiwidgets\grid\selection\selectmultiplecells.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="34dcf0a0-deb4-4a70-b871-0662107acdad" name="GroupByAge" storage="uiwidgets\grid\basicusage\groupbyage.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="0eda0f54-f50b-4bbe-8393-c18d3039af80" name="ExpandManyChangeDetailTabs" storage="uiwidgets\grid\details\expandmanychangedetailtabs.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="186148c5-2d83-494c-882c-49f78960c22f" name="SortGridCollapseNode" storage="uiwidgets\grid\hierarchy\sortgridcollapsenode.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="36b975e2-e009-4abd-b0cb-686e7359e2b8" name="PageMainGridPageDetails" storage="uiwidgets\grid\details\pagemaingridpagedetails.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="6f7f5cea-d31d-49be-8004-eb73b00bf485" name="ChangeTabCollapseExpand" storage="uiwidgets\grid\details\changetabcollapseexpand.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="f22daa22-474e-4866-8d88-3703c1787979" name="AddNewRecordPageBack" storage="uiwidgets\grid\editing\addnewrecordpageback.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="80c9c1d7-f393-4d16-8fe7-82fcc33fae0f" name="SelectMultipleCells" storage="uiwidgets\grid\selection\selectmultiplecells.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="e5d311f3-ba6b-4276-8d3f-88f6b1dac86d" name="AddRecordLoseFocusSave" storage="uiwidgets\grid\editing\addrecordlosefocussave.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="d7ce6a32-84e7-4b0c-bde4-ecb8b55db733" name="ToolbarTemplate" storage="uiwidgets\grid\toolbartemplate\toolbartemplate.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="0eda0f54-f50b-4bbe-8393-c18d3039af80" name="ExpandManyChangeDetailTabs" storage="uiwidgets\grid\details\expandmanychangedetailtabs.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="36b975e2-e009-4abd-b0cb-686e7359e2b8" name="PageMainGridPageDetails" storage="uiwidgets\grid\details\pagemaingridpagedetails.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="47d86c0d-d6ef-445b-9215-5bacc00eb0ba" name="CollapseExpandGridNode" storage="uiwidgets\grid\hierarchy\collapseexpandgridnode.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="e600d7c4-1f22-4b3f-b7e0-87ccb518cf25" name="CollapseExpandGroup" storage="uiwidgets\grid\api\collapseexpandgroup.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="7f12a24b-6c99-4d5f-977f-1e3058e763c6" name="SelectMultipleRows" storage="uiwidgets\grid\selection\selectmultiplerows.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
     </TestLinks>
   </TestList>
@@ -77,9 +92,11 @@
   </TestList>
   <TestList name="Calendar" id="687c3b2c-52c3-40fe-a894-b08e780e72cb" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
     <TestLinks>
+      <TestLink id="73c6078a-96d0-4eef-bdcf-4faa959fa66b" name="CalendarAPISetValue" storage="uiwidgets\calendar\calendarapisetvalue.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="722f26f9-f033-4f0b-a82c-c7d575eed7d3" name="CalendarEvents" storage="uiwidgets\calendar\calendarevents.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="b43f36fe-5022-4f44-aac8-fd4794549881" name="CalendarAPINavigate" storage="uiwidgets\calendar\calendarapinavigate.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="73c6078a-96d0-4eef-bdcf-4faa959fa66b" name="CalendarAPISetValue" storage="uiwidgets\calendar\calendarapisetvalue.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="de3e52ea-7b7c-4193-84b3-6bd2d3f1b50e" name="BackMonthArrow" storage="uiwidgets\calendar\backmontharrow.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="03a81e33-6a7a-4dc9-8350-808d37a36fd8" name="ForwardYearArrow" storage="uiwidgets\calendar\forwardyeararrow.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
     </TestLinks>
   </TestList>
   <TestList name="Splitter" id="6e7a4e83-ce26-4f33-b22f-4f0bd54f3ecc" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
@@ -102,13 +119,12 @@
   </TestList>
   <TestList name="NumericTextBox" id="86f62202-74fb-4843-9721-c3e0cb627453" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
     <TestLinks>
-      <TestLink id="d1a5869b-5ca8-473e-87e1-79527ca0b8c0" name="SetNumericValue" storage="uiwidgets\numerictextbox\setnumericvalue.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="11545de4-3551-4157-9d8d-268729740630" name="NumericGlobalization" storage="uiwidgets\numerictextbox\numericglobalization.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="13aded7e-ac62-4568-b8ae-4a9f1131ec22" name="SetBlankValue" storage="uiwidgets\numerictextbox\setblankvalue.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="a7496724-913f-46e0-bad1-2bcd930a0721" name="SetPercentage" storage="uiwidgets\numerictextbox\setpercentage.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="e7bbfdf4-a545-487e-b5d2-d00bd33cc397" name="NumericAPI" storage="uiwidgets\numerictextbox\numericapi.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="f57b0db8-852b-4f0b-9530-17b708e87cb8" name="SetCurrency" storage="uiwidgets\numerictextbox\setcurrency.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="73ba1dc3-6150-4506-bb5b-68958902779e" name="NumericEvents" storage="uiwidgets\numerictextbox\numericevents.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="a7496724-913f-46e0-bad1-2bcd930a0721" name="SetPercentage" storage="uiwidgets\numerictextbox\setpercentage.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="f57b0db8-852b-4f0b-9530-17b708e87cb8" name="SetCurrency" storage="uiwidgets\numerictextbox\setcurrency.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="d1a5869b-5ca8-473e-87e1-79527ca0b8c0" name="SetNumericValue" storage="uiwidgets\numerictextbox\setnumericvalue.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="13aded7e-ac62-4568-b8ae-4a9f1131ec22" name="SetBlankValue" storage="uiwidgets\numerictextbox\setblankvalue.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="e7bbfdf4-a545-487e-b5d2-d00bd33cc397" name="NumericAPI" storage="uiwidgets\numerictextbox\numericapi.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
     </TestLinks>
   </TestList>
   <TestList name="ComboBox" id="881829c8-7e7b-4053-a473-efd13f75464d" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
@@ -129,7 +145,9 @@
       <TestLink id="3939c9f9-36fa-4827-8118-d467dfcc8a20" name="EnableDisable" storage="uiwidgets\combobox\api\enabledisable.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
     </TestLinks>
   </TestList>
-  <TestList name="Lists of Tests" id="8c43106b-9dc1-4907-a29f-aa66a61bf5b6" />
+  <TestList name="Lists of Tests" id="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <RunConfiguration id="9d528788-8a70-47da-8f48-c89a032338dd" name="TestSettings1" storage="testsettings1.testsettings" type="Microsoft.VisualStudio.TestTools.Common.TestRunConfiguration, Microsoft.VisualStudio.QualityTools.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestList>
   <TestList name="Framework" id="9bae9a5b-fe55-48c0-8567-97300197bddc" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
     <TestLinks>
       <TestLink id="f2e1d0bf-4e36-4faf-9183-f1dedba997d2" name="ValidateMovieCombo" storage="framework\validation\validatemoviecombo.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
@@ -175,13 +193,11 @@
   </TestList>
   <TestList name="AutoComplete" id="eff65134-6519-4ee8-9059-1575dec63a05" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
     <TestLinks>
-      <TestLink id="43abc079-fd74-4749-9db8-722bdd14bbfb" name="FillValueKeyboard" storage="uiwidgets\autocomplete\api\fillvaluekeyboard.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="dabba713-5207-4010-94e3-998dd1762f8d" name="SetValue" storage="uiwidgets\autocomplete\api\setvalue.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="2354451f-2124-4f05-a7c6-d9ba3f5ce3f4" name="SelectOption" storage="uiwidgets\autocomplete\basicusage\selectoption.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="e6cce333-0220-4f08-b755-61c063c11ea0" name="SetTwoValuesRevertToBlank" storage="uiwidgets\autocomplete\basicusage\settwovaluesreverttoblank.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="3089b474-ce3d-4592-a140-be4c83154723" name="FindStartingWith" storage="uiwidgets\autocomplete\api\findstartingwith.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="f223b292-ffc4-4544-be93-650bd2eeec97" name="AutoCompleteEvents" storage="uiwidgets\autocomplete\events\autocompleteevents.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="309c71b2-2ecd-4e21-8496-3b436405b0a2" name="SelectOptionKeyboard" storage="uiwidgets\autocomplete\basicusage\selectoptionkeyboard.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="e6cce333-0220-4f08-b755-61c063c11ea0" name="SetTwoValuesRevertToBlank" storage="uiwidgets\autocomplete\basicusage\settwovaluesreverttoblank.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
-      <TestLink id="2354451f-2124-4f05-a7c6-d9ba3f5ce3f4" name="SelectOption" storage="uiwidgets\autocomplete\basicusage\selectoption.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="dabba713-5207-4010-94e3-998dd1762f8d" name="SetValue" storage="uiwidgets\autocomplete\api\setvalue.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
     </TestLinks>
   </TestList>
   <TestList name="TreeView" id="f69c0733-9d0e-43d9-a305-a0cd8cb56b20" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
@@ -189,6 +205,7 @@
       <TestLink id="2741317f-b6db-4843-9624-33806392caae" name="CollapseAllNodes" storage="uiwidgets\treeview\api\collapseallnodes.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="ec2b57b9-ea83-49b1-acab-33df532163b1" name="AppendNode" storage="uiwidgets\treeview\api\appendnode.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="f9a6f81b-8d7d-4839-bf40-aee658fe72b8" name="ExpandAllNodes" storage="uiwidgets\treeview\api\expandallnodes.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
+      <TestLink id="8ce3f6fe-2665-4f84-8309-d2df203339b3" name="DragAndDropInTree" storage="uiwidgets\treeview\draganddrop\draganddropintree.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="b760029f-7849-4078-87fe-218b85376dca" name="ExpandCollapseSelect" storage="uiwidgets\treeview\events\expandcollapseselect.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="a955c3d9-4e0b-4492-9f45-320702d73823" name="DragAndDropInvalid" storage="uiwidgets\treeview\events\draganddropinvalid.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />
       <TestLink id="7547b457-b338-4c1a-90f7-20dee4ffc6c1" name="DragAndDropValid" storage="uiwidgets\treeview\events\draganddropvalid.tstest" type="ArtOfTest.WebAiiVSIP.WebAiiTest, ArtOfTest.WebAiiVSIP,   PublicKeyToken=14176981d1873d86" />

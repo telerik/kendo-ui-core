@@ -49,6 +49,10 @@
     <Reference Include="ArtOfTest.WebAii.Design" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="Telerik.TestingFramework.Controls.KendoUI, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=528163f3e645de45, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.WebAii.Controls.Html" />
     <Reference Include="Telerik.WebAii.Controls.Xaml" />
     <Reference Include="Telerik.WebAii.Controls.Xaml.Wpf" />
@@ -117,11 +121,23 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Settings.aiis" />
+    <None Include="ThemeBuilder\ChangeTextColor.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ThemeBuilder\GetCss.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ThemeBuilder\OpenCloseThemeBuilder.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\AutoComplete\API\FindStartingWith.tstest" />
     <None Include="UIWidgets\AutoComplete\API\SetValue.tstest" />
     <None Include="UIWidgets\AutoComplete\BasicUsage\SelectOption.tstest" />
     <None Include="UIWidgets\AutoComplete\BasicUsage\SetTwoValuesRevertToBlank.tstest" />
     <None Include="UIWidgets\AutoComplete\Events\AutoCompleteEvents.tstest" />
+    <None Include="UIWidgets\Calendar\BackMonthArrow.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\Calendar\CalendarAPINavigate.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -129,6 +145,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="UIWidgets\Calendar\CalendarEvents.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Calendar\ForwardYearArrow.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="UIWidgets\Chart\BasicUsage.tstest" />
@@ -194,8 +213,14 @@
     <None Include="UIWidgets\Grid\API\ClearSelectedRow.tstest" />
     <None Include="UIWidgets\Grid\API\CollapseExpandGroup.tstest" />
     <None Include="UIWidgets\Grid\BasicUsage\GroupByAge.tstest" />
+    <None Include="UIWidgets\Grid\BasicUsage\GroupThenSort.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\Grid\BasicUsage\SortByFirstName.tstest" />
     <None Include="UIWidgets\Grid\BindToLocalData\AgeNotEqualTo.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\BindToLocalData\AssertDefaultFilteringOption.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="UIWidgets\Grid\BindToLocalData\FilterBirthDateGreaterThanOrEqualTo.tstest" />
@@ -204,6 +229,9 @@
     </None>
     <None Include="UIWidgets\Grid\BindToRemoteData\FilterCityIs.tstest" />
     <None Include="UIWidgets\Grid\BindToRemoteData\FilterFreightLessThan.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\BindToRemoteData\PageFilter.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="UIWidgets\Grid\Details\ChangeTabCollapseExpand.tstest">
@@ -337,6 +365,9 @@
     <None Include="UIWidgets\TreeView\API\ExpandAllNodes.tstest" />
     <None Include="UIWidgets\TreeView\API\Remove.tstest" />
     <None Include="UIWidgets\TreeView\DragAndDrop\DragAndDropBetweenTrees.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\TreeView\DragAndDrop\DragAndDropInTree.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="UIWidgets\TreeView\Events\DragAndDropInvalid.tstest" />
@@ -889,6 +920,35 @@
     </None>
     <None Include="UIWidgets\Grid\ToolbarTemplate\ToolbarTemplate.resx">
       <DependentUpon>ToolbarTemplate.tstest</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ThemeBuilder\ChangeTextColor.resx">
+      <DependentUpon>ChangeTextColor.tstest</DependentUpon>
+    </None>
+    <None Include="ThemeBuilder\GetCss.resx">
+      <DependentUpon>GetCss.tstest</DependentUpon>
+    </None>
+    <None Include="ThemeBuilder\OpenCloseThemeBuilder.resx">
+      <DependentUpon>OpenCloseThemeBuilder.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Calendar\BackMonthArrow.resx">
+      <DependentUpon>BackMonthArrow.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Calendar\ForwardYearArrow.resx">
+      <DependentUpon>ForwardYearArrow.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\BasicUsage\GroupThenSort.resx">
+      <DependentUpon>GroupThenSort.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\BindToLocalData\AssertDefaultFilteringOption.resx">
+      <DependentUpon>AssertDefaultFilteringOption.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\Grid\BindToRemoteData\PageFilter.resx">
+      <DependentUpon>PageFilter.tstest</DependentUpon>
+    </None>
+    <None Include="UIWidgets\TreeView\DragAndDrop\DragAndDropInTree.resx">
+      <DependentUpon>DragAndDropInTree.tstest</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
