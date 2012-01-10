@@ -3,7 +3,6 @@ var fs = require("fs"),
     sys = require("sys"),
     path = require("path"),
     themes = require("./themes"),
-    config = require("./config"),
     kendoBuild = require("./kendo-build"),
     kendoScripts = require("./kendo-scripts"),
     copyDir = kendoBuild.copyDirSyncRecursive,
@@ -53,8 +52,7 @@ var thirdPartyScripts = [
     "jquery.min.js"
 ];
 
-var VERSION = config.version,
-    LATEST = "latest",
+var LATEST = "latest",
     INDEX = "index.html",
     SCRIPTS_ROOT = "src",
     STYLES_ROOT = "styles",
@@ -78,8 +76,7 @@ var VERSION = config.version,
     ONLINE_EXAMPLES_PACKAGE = "kendoui-online-examples.zip";
 
     var startDate = new Date(),
-        licenseTemplate = template(readText(path.join(LEGAL_ROOT,  "src-license.txt"))),
-        SRC_LICENSE = licenseTemplate({ version: VERSION, year: startDate.getFullYear() });
+        licenseTemplate = template(readText(path.join(LEGAL_ROOT,  "src-license.txt")));
 
 // Implementation ==============================================================
 function clean() {
@@ -211,27 +208,28 @@ function deployThirdPartyScripts(outputRoot) {
     });
 }
 
-function buildBundle(bundle, success) {
+function buildBundle(bundle, version, success) {
     var name = bundle.name,
         zips = 0;
 
     bundle.licenses.forEach(function(license) {
         var licenseName = license.name,
             hasSource = license.source,
-            deployName = name + "." + VERSION + "." + licenseName,
+            deployName = name + "." + version + "." + licenseName,
             root = path.join(DEPLOY_ROOT, name + "." + licenseName),
             packageName = path.join(DROP_LOCATION, deployName + ".zip"),
-            packageNameLatest = packageName.replace(VERSION, LATEST);
+            srcLicense = licenseTemplate({ version: version, year: startDate.getFullYear() });
+            packageNameLatest = packageName.replace(version, LATEST);
 
         console.log("Building " + deployName);
         mkdir(root);
 
         console.log("Deploying scripts");
-        deployScripts(root, bundle, SRC_LICENSE, hasSource);
+        deployScripts(root, bundle, srcLicense, hasSource);
         deployThirdPartyScripts(root);
 
         console.log("Deploying styles");
-        deployStyles(root, SRC_LICENSE, hasSource);
+        deployStyles(root, srcLicense, hasSource);
 
         console.log("Deploying licenses");
         deployLicenses(root, bundle);
@@ -249,12 +247,12 @@ function buildBundle(bundle, success) {
     });
 }
 
-function buildAllBundles(success, bundleIx) {
+function buildAllBundles(version, success, bundleIx) {
     bundleIx = bundleIx || 0;
 
     if (bundleIx < bundles.length) {
-        buildBundle(bundles[bundleIx], function() {
-            buildAllBundles(success, ++bundleIx);
+        buildBundle(bundles[bundleIx], version, function() {
+            buildAllBundles(version, success, ++bundleIx);
         });
     } else {
         if (success) {
