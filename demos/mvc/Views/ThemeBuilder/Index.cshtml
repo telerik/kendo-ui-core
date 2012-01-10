@@ -3,21 +3,21 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.common.css" })" rel="stylesheet" />
-    <link href="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "styles", file = "kendo.default.css" })" rel="stylesheet" />
+    <link href="@Url.RouteUrl("Debug", new { assetType = "styles", file = "kendo.common.css" })" rel="stylesheet" />
+    <link href="@Url.RouteUrl("Debug", new { assetType = "styles", file = "kendo.default.css" })" rel="stylesheet" />
     <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
     @foreach (var scriptName in Kendo.Models.ScriptGroups.All)
     {
-    <script src="@Url.RouteUrl("Static", new { assetGroup = "src", assetType = "js", file = scriptName })"></script>
+    <script src="@Url.RouteUrl("Debug", new { assetType = "js", file = scriptName })"></script>
     }
+    <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
 </head>
 <body>
     @Html.Partial("Header")
 
-    <div class="floatWrap centerWrap">
-        <h1 class="k-content">
-            ThemeBuilder
-        </h1>
+    <div id="example" class="k-content floatWrap centerWrap">
+        <h1>ThemeBuilder</h1>
+
         <div id="instructions-box">
             <h3>Instructions</h3>
             <ol id="instructions-list">
@@ -28,6 +28,8 @@
         </div>
 
         <script>
+            $(".themeChooser").themeChooser({ largeIcons: false });
+
             $("#bookmarklet").attr("href", ("javascript:(function(){" +
                     "var ktb=window.kendoThemeBuilder,s,d=document;" +
                     "if(typeof ktb!='undefined'){" +
@@ -208,7 +210,7 @@
             $(document).ready(function() {
                 var transport = {
                     read: {
-                        url: "../web/datasource/internet-users.json",
+                        url: "../content/web/datasource/internet-users.json",
                         dataType: "json"
                     }
                 };
