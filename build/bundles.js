@@ -265,6 +265,7 @@ function buildAllBundles(success, bundleIx) {
 }
 
 // Exports =====================================================================
-exports.clean = clean;
 exports.buildBundle = buildBundle;
 exports.buildAllBundles = buildAllBundles;
+exports.bundles = bundles;
+exports.clean = clean;
