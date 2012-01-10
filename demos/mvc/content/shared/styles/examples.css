@@ -1788,9 +1788,9 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 
 #mobile-application-container {
     position: relative;
-    height: 260px;
+    height: 460px;
     overflow: hidden;
-    width: 300px;
+    width: 320px;
     border: 5px solid buttonface;
 }
 
