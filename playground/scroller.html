@@ -11,18 +11,12 @@
 
     <link rel="stylesheet/less" type="text/css" href="mobile/tokendo/layout.less">
     <link rel="stylesheet" href="mobile/tokendo/scroll-container.css" />
-
     <script src="mobile/examples/less.js"></script>
     <script src="../src/jquery.js"></script>
     <script src="../src/kendo.core.js"></script>
     <script src="../src/kendo.fx.js"></script>
     <script src="../src/kendo.mobile.core.js"></script>
-    <script src="../src/kendo.scroller.js"></script>
-    <script src="../src/kendo.mobile.button.js"></script>
-    <script src="../src/kendo.mobile.switch.js"></script>
-    <script src="../src/kendo.mobile.radiogroup.js"></script>
-    <script src="../src/kendo.mobile.application.js"></script>
-    <script src="../src/kendo.mobile.view.js"></script>
+    <script src="../src/kendo.mobile.scroller.js"></script>
 
     <style type="text/css">
         .k-content
@@ -129,13 +123,8 @@
         </button>
     </div>
     <script>
-        function onClick() {
-            console.log("clickings");
-        }
-
         $(document).ready(function () {
-            var button = $(".k-list button").kendoMobileButton({ click: onClick });
-            $(".k-contentIn").data("kendoScroller").bind("scroll", function(e) { console.log(e.x, e.y) });
+            $(".k-contentIn").kendoMobileScroller().data("kendoMobileScroller").bind("scroll", function(e) { console.log(e.x, e.y) });
         });
     </script>
 </body>

@@ -11,6 +11,8 @@
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/common.less">
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/ios.less">
     <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/android4.less">
 
     <script src="../../../styles/mobile/less.js"></script>
@@ -110,7 +112,7 @@
         }
     </style>
 </head>
-<body class="km-android">
+<body>
     <article data-role="view">
         <header data-role="header">
             <div data-role="navbar">
@@ -235,9 +237,9 @@
                     if ($.browser.mozilla)
                         color = this.element.css("background-color");
 
-                    $(".km-navbar, .km-switch-background, .km-badge, .km-tabstrip").css("background-color", color); // .km-ios .km-listgroup > li,
+                    $(".km-navbar, .km-ios .km-switch-background, .km-ios .km-listgroup > li, .km-badge, .km-tabstrip").css("background-color", color); // .km-ios .km-listgroup > li,
                     $(".km-insetcontent").css("background-color", color.replace(")", ",.3)").replace("rgb(", "rgba("));
-                    $(".km-radiogroup, .km-content [data-role=button], .km-switch, .km-touch-scrollbar").removeClass("pink green fuchsia").addClass(this.element[0].className.match(/pink|green|fuchsia|/)[0]);
+                    $(".km-radiogroup, .km-content [data-role=button], .km-android .km-switch, .km-touch-scrollbar").removeClass("pink green fuchsia").addClass(this.element[0].className.match(/pink|green|fuchsia|/)[0]);
                 });
             });
         });

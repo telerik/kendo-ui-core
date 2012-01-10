@@ -1,4 +1,4 @@
-@import "common.less";
+@import "mixins.less";
 
 /* Platform specific iOS CSS */
 
@@ -22,8 +22,9 @@
     text-align: center;
     color: #fff;
     font-size: 1.5em;
+    font-size: 1.4rem;
     line-height: 1.5em;
-    line-height: 2.2rem;
+    line-height: 1.9rem;
     font-weight: bold;
     text-shadow: 0 -1px rgba(0,0,0,.3);
     float: left;
@@ -180,29 +181,38 @@
 }
 
 .km-ios .km-badge,
-.km-ios .km-list .km-button
+.km-ios .km-detail
 {
     background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     color: #FFF;
     border: .3em solid #FFF;
+    font-size: .72em;
+    font-size: .82rem;
+    line-height: 1.6em;
+    line-height: 1rem;
+    padding: 0;
     background-color: #bc0404;
     .box-shadow(0 3px 3px #000);
+    .border-radius(2em);
+    background-clip: padding-box;
 }
 
-.km-ios .km-list .km-button
+.km-ios .km-detail
 {
+    line-height: 1.4em;
+    line-height: .8rem;
     border: .2em solid #FFF;
     border-width: .15rem;
     .box-shadow(0 1px 3px rgba(0,0,0,.5));
     background-color: #1F6DD8;
 }
 
-.km-ios .km-list .km-rowinsert
+.km-ios .km-rowinsert
 {
     background-color: #24870D;
 }
 
-.km-ios .km-list .km-rowdelete
+.km-ios .km-rowdelete
 {
     background-color: #B01B1A;
 }
@@ -226,6 +236,20 @@
     .box-shadow(inset -1px 0 2px rgba(0,0,0,.6));
 }
 
+.km-ios .km-navbar,
+.km-ios .km-toolbar
+{
+    overflow: hidden;
+}
+
+.km-ios .km-navbar,
+.km-ios .km-toolbar,
+.km-ios .km-tabstrip
+{
+    border: 0;
+    .border-radius(0);
+}
+
 .km-ios .km-tabstrip
 {
     padding: .2em 0;
@@ -236,6 +260,9 @@
 .km-ios .km-tabstrip .km-button
 {
     .border-radius(5pt);
+    .box-shadow(none);
+    background: transparent;
+    border: 0;
     font-size: .6em;
     padding: .1em .6em;
     min-width: 6em;
