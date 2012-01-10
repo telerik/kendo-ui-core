@@ -1,3 +1,4 @@
+/* Common Platform CSS */
 .km-root, .km-vertical, .km-horizontal {
   width: 100%;
   height: 100%;
@@ -13,14 +14,6 @@
   padding: 0;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-.km-ios, .km-meego {
-  -webkit-transform: translatez(0);
-  -moz-transform: translatez(0);
-  -ms-transform: translatez(0);
-  -o-transform: translatez(0);
-  transform: translatez(0);
-  background: #fff;
 }
 .km-view {
   top: 0;
@@ -38,10 +31,6 @@
   -ms-box-orient: vertical;
   box-orient: vertical;
   vertical-align: top;
-}
-.km-ios .km-view, .km-meego .km-view {
-  overflow: hidden;
-  -webkit-transform: translatez(0);
 }
 :-moz-any(.km-view,.km-vertical,.km-horizontal) {
   overflow: hidden;
@@ -111,20 +100,561 @@
     height: 1px;
   }
 }
-.km-android .km-view, .km-meego .km-view {
-  -moz-box-direction: reverse;
-  -webkit-box-direction: reverse;
-  -ms-box-direction: reverse;
-  box-direction: reverse;
-}
-.km-android .km-view > *, .km-meego .km-view > * {
-  -moz-box-direction: normal;
-  -webkit-box-direction: normal;
-  -ms-box-direction: normal;
-  box-direction: normal;
-}
 .km-view-title {
   display: none;
+}
+.km-toolbar,
+.km-navbar,
+.km-button,
+.km-radiogroup,
+.km-tabstrip {
+  background-origin: border-box;
+  position: relative;
+  display: inline-block;
+  padding: .4em .7em;
+  padding: .4rem .7rem;
+  margin: .1em;
+  margin: .1rem;
+  overflow: visible;
+  -moz-border-radius: 5pt;
+  -webkit-border-radius: 5pt;
+  border-radius: 5pt;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+}
+.km-button {
+  cursor: pointer;
+  outline: 0;
+}
+.km-switch, .km-checkbox {
+  font-size: 1em;
+  font-size: 1rem;
+  display: inline-block;
+  width: 6em;
+  width: 6rem;
+  height: 1.75em;
+  height: 1.75rem;
+  line-height: 1.9em;
+  line-height: 1.9rem;
+  padding: 1px;
+  position: relative;
+  overflow: hidden;
+}
+.km-switch-wrapper, .km-slider-wrapper {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 3px;
+}
+.km-switch-background, .km-slider-background {
+  display: block;
+  margin: 0 1px 1px -5em;
+  height: 100%;
+  width: 200%;
+}
+.km-switch-container {
+  top: 0;
+  left: 0;
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  box-shadow: inset 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+.km-checkbox {
+  width: 1.8em;
+  height: 1.8em;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+.km-checkbox-checked:after {
+  content: "\a0";
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.km-switch-handle {
+  top: 0;
+  left: 0;
+  width: 2em;
+  width: 2rem;
+  height: 1.75em;
+  height: 1.75rem;
+  display: inline-block;
+  margin: -1px 0 0 -1px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+}
+/*.km-switch-handle:after,
+.km-switch-handle:before
+{
+    font-size: 1em;
+    font-size: 1rem;
+    font-weight: bold;
+    display: inline-block;
+    height: 100%;
+    width: 4em;
+    width: 4rem;
+    text-transform: uppercase;
+    text-align: center;
+    position: absolute;
+}*/
+.km-switch-label-off {
+  left: 3em;
+  position: absolute;
+}
+.km-switch-label-on {
+  left: -2.8em;
+  position: absolute;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+.km-badge, .km-detail {
+  text-decoration: none;
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  top: -1em;
+  top: -0.6 rem;
+  right: -0.8em;
+  right: -0.4 rem;
+  width: 1.6em;
+  height: 1.6em;
+  width: 1rem;
+  height: 1rem;
+  text-shadow: none;
+}
+.km-detail {
+  position: relative;
+  float: right;
+  right: 0;
+  top: 0;
+  width: 1.7em;
+  height: 1.7em;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.km-detail:after, .km-detail:before {
+  width: .3em;
+  height: .3em;
+  width: .4rem;
+  height: .4rem;
+  content: "\a0";
+  display: inline-block;
+  vertical-align: middle;
+}
+.km-detaildisclose:after {
+  margin-left: -0.2em;
+  margin-left: -.2rem;
+  border: .2em solid #FFF;
+  border-width: .24rem .24rem 0 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.km-detaildisclose:before {
+  display: none;
+}
+.km-rowdelete:after,
+.km-rowinsert:after,
+.km-rowinsert:before,
+.km-contactadd:after,
+.km-contactadd:before {
+  width: .6em;
+  height: .1em;
+  width: .7rem;
+  height: .2rem;
+  background: #FFF;
+  margin-left: -0.18em;
+  margin-left: -.28rem;
+}
+.km-rowdelete:after {
+  margin-left: -0.28em;
+  margin-left: -.38rem;
+}
+.km-rowinsert:after, .km-contactadd:after {
+  width: .1em;
+  height: .6em;
+  width: .2rem;
+  height: .7rem;
+  margin-left: -0.34em;
+  margin-left: -.44rem;
+}
+.km-button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+.km-badge:-moz-first-node, :-moz-first-node ~ .km-badge {
+  right: -0.5em;
+  top: -1em;
+}
+.km-root .km-radiogroup {
+  padding: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  border-color: transparent;
+  background: none;
+  white-space: nowrap;
+  display: table;
+}
+.km-radiogroup > .km-button {
+  display: table-cell;
+}
+.km-radiogroup .km-button {
+  margin: 0;
+  border-width: 1px 0 1px 1px;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.km-radiogroup .km-button:first-child {
+  -moz-border-radius: 5pt 0 0 5pt;
+  -webkit-border-radius: 5pt 0 0 5pt;
+  border-radius: 5pt 0 0 5pt;
+}
+.km-radiogroup .km-button:last-child {
+  border-right-width: 1px;
+  -moz-border-radius: 0 5pt 5pt 0;
+  -webkit-border-radius: 0 5pt 5pt 0;
+  border-radius: 0 5pt 5pt 0;
+}
+.km-ios .km-radiogroup .km-button {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+.km-ios .km-state-disabled .km-button,
+.km-android .km-state-disabled .km-button,
+.km-blackberry .km-state-disabled .km-button,
+.km-meego .km-state-disabled .km-button {
+  color: #aaa;
+  text-shadow: none;
+}
+.km-tabstrip, .km-toolbar, .km-navbar {
+  display: block;
+  padding: .8em;
+  margin: 0;
+  width: 100%;
+  border-width: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.km-tabstrip {
+  text-align: center;
+  word-spacing: -1em;
+}
+.km-tabstrip .km-button {
+  word-spacing: normal;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .km-tabstrip {
+    display: table;
+    word-spacing: normal;
+    width: 100%;
+  }
+  .km-radiogroup > .km-button {
+    display: inline-block;
+  }
+}
+.km-toolbar, .km-navbar {
+  padding: 0 .5em;
+  -moz-box-flex: 1;
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  border-width: 0 0 1px 0;
+}
+.km-root div:-moz-any(.km-toolbar,.km-navbar) {
+  overflow: visible;
+}
+.km-navbar .km-view-title {
+  margin-top: .3em;
+  margin-top: .5rem;
+  margin-bottom: .3em;
+  margin-bottom: .5rem;
+}
+.km-toolbar .km-button, .km-navbar .km-button {
+  margin-top: .3em;
+  margin-top: .5rem;
+  margin-bottom: .3em;
+  margin-bottom: .5rem;
+}
+.km-tabstrip .km-button {
+  font: bold 1em Helvetica, sans-serif;
+  color: #a8a8a8;
+  padding: .4em .8em;
+  border-width: 0;
+  border-color: transparent;
+  background: none;
+  margin: 0;
+  text-align: center;
+}
+.km-tabstrip .km-badge {
+  font-size: .8em;
+  font-weight: normal;
+}
+.km-tabstrip .km-button:first-child {
+  border-left: 0;
+}
+.km-tabstrip .km-button:last-child {
+  border-right: 0;
+}
+.km-list, .km-listview {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.km-listinset, .km-listgroupinset {
+  margin: 1em;
+}
+.km-listinset, .km-listgroupinset .km-list {
+  overflow: hidden;
+}
+.km-listview .km-switch {
+  margin-top: 0;
+  float: right;
+}
+.km-listview .km-list {
+  margin-top: 2px;
+  text-indent: 0;
+}
+.km-list > li {
+  margin: 0;
+  display: block;
+  position: relative;
+  list-style-type: none;
+  vertical-align: middle;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: .6em .6em .6em .8em;
+  text-shadow: none;
+}
+.km-listgroup > li, .km-listgroupinset > li {
+  display: block;
+  font-weight: bold;
+  padding: .2em 0 0;
+  text-indent: .8em;
+}
+.km-listgroupinset > li {
+  margin-top: 1em;
+  line-height: 1.65em;
+}
+.km-list > li:last-child {
+  border-bottom: 0;
+}
+.km-default-content {
+  padding: 1em;
+}
+.km-root input[type=radio], .km-root input[type=checkbox] {
+  display: none;
+}
+.km-list input[type=radio], .km-list input[type=checkbox] {
+  width: 36px;
+  height: 36px;
+  margin-left: .4em;
+}
+.km-item label:before, .km-item label.km-item-checked:after {
+  position: absolute;
+  content: " ";
+  display: block;
+  top: 50%;
+  left: .6em;
+  width: 36px;
+  height: 36px;
+  margin-top: -18px;
+}
+.km-tabstrip .km-button .km-icon {
+  display: block;
+  width: 4em;
+  height: 4em;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-size: auto 100%;
+  margin: 0 auto;
+}
+.km-tabstrip .km-button.km-state-active .km-icon {
+  opacity: 1;
+}
+/* Slider */
+.km-slider {
+  margin: 1em;
+  width: 10em;
+  height: .6em;
+  line-height: .6em;
+  position: relative;
+  padding: .5em .7em;
+  display: inline-block;
+}
+.km-slider-container {
+  top: 0;
+  left: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+.km-slider-handle {
+  top: 0;
+  left: 0;
+  width: 1.25em;
+  height: 1.25em;
+  display: block;
+  position: absolute;
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+.km-slider-wrapper {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+.km-slider-background {
+  width: 24em;
+  margin-left: -12em;
+}
+/* Scroller */
+.km-touch-scrollbar {
+  position: absolute;
+  visibility: hidden;
+  z-index: 200000;
+  height: .3em;
+  width: .3em;
+  background-color: #333;
+  -moz-transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  -o-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transition: opacity 0.3s linear;
+  -moz-transition: opacity 0.3s linear;
+  -o-transition: opacity 0.3s linear;
+  opacity: 0;
+  -moz-border-radius: .4em;
+  -webkit-border-radius: .4em;
+  border-radius: .4em;
+}
+.km-vertical-scrollbar {
+  height: 100%;
+  right: 1px;
+  top: 0;
+}
+.km-horizontal-scrollbar {
+  width: 100%;
+  left: 0;
+  bottom: 1px;
+}
+.km-scroll-container {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* Navbar */
+.km-leftitem, .km-rightitem {
+  z-index: 1;
+  position: relative;
+  float: right;
+}
+.km-leftitem {
+  float: left;
+}
+.km-root .km-leftitem ~ .km-view-title, .km-root .km-rightitem ~ .km-view-title {
+  position: absolute;
+  left: 0;
+}
+/* Dialog */
+.km-dialog {
+  position: absolute;
+  min-width: 19em;
+  max-width: 25em;
+  overflow: hidden;
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+}
+.km-dialog-title {
+  position: static;
+  float: none;
+  height: 2.6em;
+  margin-top: -2.6em;
+  font-size: 1.22em;
+  line-height: 3em;
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+}
+.km-dialog:before {
+  content: "\a0";
+  display: block;
+  overflow: visible;
+  width: 100%;
+  height: 3em;
+  opacity: .2;
+}
+.km-dialog-content {
+  font-weight: normal;
+  min-height: 2em;
+  text-align: center;
+}
+.km-dialog .km-button {
+  display: block;
+  margin: .4em;
+  font-size: 1.3em;
+  text-align: center;
+  padding: .44em;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* Platform specific iOS CSS */
+.km-ios {
+  -webkit-transform: translatez(0);
+  -moz-transform: translatez(0);
+  -ms-transform: translatez(0);
+  -o-transform: translatez(0);
+  transform: translatez(0);
+  background: #fff;
+}
+.km-ios .km-view {
+  overflow: hidden;
+  -webkit-transform: translatez(0);
 }
 .km-ios .km-view-title, .km-ios .km-dialog-title {
   position: relative;
@@ -132,27 +662,21 @@
   text-align: center;
   color: #fff;
   font-size: 1.5em;
+  font-size: 1.4rem;
   line-height: 1.5em;
-  line-height: 2.2rem;
+  line-height: 1.9rem;
   font-weight: bold;
   text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
   float: left;
   width: 100%;
 }
-.km-toolbar,
-.km-navbar,
-.km-button,
-.km-radiogroup,
-.km-tabstrip {
+.km-ios .km-toolbar,
+.km-ios .km-navbar,
+.km-ios .km-button,
+.km-ios .km-radiogroup,
+.km-ios .km-tabstrip {
   background-image: linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0));
-  background-origin: border-box;
-  position: relative;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  display: inline-block;
-  padding: .4em .7em;
-  padding: .4rem .7rem;
-  margin: .1em;
-  margin: .1rem;
   color: #FFF;
   overflow: visible;
   -moz-border-radius: 5pt;
@@ -163,6 +687,9 @@
   background-color: #7185a2;
   text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
   text-decoration: none;
+  border: 1px solid #394d68;
+  border-color: #2f3740 #394d68 #375073;
+  background-color: #7185a2;
   background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0)));
   background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0));
   background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0));
@@ -184,10 +711,6 @@
 .km-ios li.km-state-active {
   border: 0;
   color: white;
-}
-.km-button {
-  cursor: pointer;
-  outline: 0;
 }
 .km-ios, .km-ios .km-button {
   font: bold 0.9em HelveticaNeue, sans-serif;
@@ -242,72 +765,19 @@
   width: 1.36rem;
   height: 1.36rem;
 }
-.km-switch, .km-checkbox {
+.km-ios .km-switch {
   font-family: HelveticaNeue, Arial, sans-serif;
-  font-size: 1em;
-  font-size: 1rem;
-  display: inline-block;
-  width: 6em;
-  width: 6rem;
-  height: 1.75em;
-  height: 1.75rem;
-  line-height: 1.9em;
-  line-height: 1.9rem;
-  padding: 1px;
-  position: relative;
-  overflow: hidden;
-}
-.km-ios .km-switch, .km-meego .km-switch {
   -webkit-transform: translatez(0);
 }
-.km-switch-wrapper, .km-slider-wrapper {
-  display: block;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 3px;
-}
-.km-switch-background, .km-slider-background {
-  display: block;
-  margin: 0 1px 1px -5em;
-  height: 100%;
-  width: 200%;
+.km-ios .km-switch-background, .km-ios .km-slider-background {
   background: linear-gradient(top, #dbdbdb, #eeeeee 50%, #fafafa 50%, #ffffff) 6em 0 no-repeat, linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat #3074e7;
   background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #dbdbdb), color-stop(0.5, #eeeeee), color-stop(0.5, #fafafa), color-stop(1, #ffffff)) 6em 0 no-repeat, -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(0.5, rgba(255, 255, 255, 0.18)), color-stop(1, rgba(255, 255, 255, 0.35))) 0 0 no-repeat #3074e7;
   background: -moz-linear-gradient(top, #dbdbdb, #eeeeee 50%, #fafafa 50%, #ffffff) 6em 0 no-repeat, -moz-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat #3074e7;
   background: -ms-linear-gradient(top, #dbdbdb, #eeeeee 50%, #fafafa 50%, #ffffff) 6em 0 no-repeat, -ms-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat #3074e7;
   background: -o-linear-gradient(top, #dbdbdb, #eeeeee 50%, #fafafa 50%, #ffffff) 6em 0 no-repeat, -o-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat #3074e7;
 }
-.km-switch-container {
-  top: 0;
-  left: 0;
-  position: absolute;
-  display: block;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  background: transparent;
+.km-ios .km-switch-container {
   border: 1px solid #999;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  box-shadow: inset 0 2px 2px 0 rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: inset 0 2px 2px 0 rgba(0, 0, 0, 0.3);
-}
-.km-checkbox, .km-android .km-listview .km-switch {
-  width: 1.8em;
-  height: 1.8em;
-  width: 1.8rem;
-  height: 1.8rem;
-}
-.km-checkbox-checked:after, .km-android .km-listview .km-switch-handle {
-  content: "\a0";
-  display: block;
-  width: 100%;
-  height: 100%;
 }
 .km-ios .km-checkbox {
   border: 3px solid #e5e5e5;
@@ -332,453 +802,60 @@
   background-image: -ms-linear-gradient(top, #f1969b, rgba(230, 70, 78, 0.5) 50%, rgba(222, 11, 21, 0.5) 50%, rgba(183, 0, 0, 0));
   background-image: -o-linear-gradient(top, #f1969b, rgba(230, 70, 78, 0.5) 50%, rgba(222, 11, 21, 0.5) 50%, rgba(183, 0, 0, 0));
 }
-.km-android .km-checkbox, .km-android .km-listview .km-switch {
-  padding: 0;
-  border: 1px solid #000;
-  background-color: #363636;
-  background-image: linear-gradient(top, #363636, #2b2b2b);
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  box-shadow: 0 0 1px 1px #808080;
-  -webkit-box-shadow: 0 0 1px 1px #808080;
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #363636), color-stop(1, #2b2b2b));
-  background-image: -moz-linear-gradient(top, #363636, #2b2b2b);
-  background-image: -ms-linear-gradient(top, #363636, #2b2b2b);
-  background-image: -o-linear-gradient(top, #363636, #2b2b2b);
-}
 .km-ios .km-checkbox-checked:after {
   background: transparent url("images/ios-sprite.png") 2px -117px no-repeat;
 }
-.km-android .km-checkbox-checked:after, .km-android .km-listview .km-switch-on {
-  background: transparent url("images/android-sprite.png") 0 8% no-repeat;
-  background-size: 100% auto;
-}
-.km-android .km-listview .km-switch-handle:after, .km-android .km-listview .km-switch-handle:before {
-  display: none;
-}
-.km-switch-handle {
-  top: 0;
-  left: 0;
-  width: 2em;
-  width: 2rem;
-  height: 1.75em;
-  height: 1.75rem;
-  display: inline-block;
-  margin: -1px 0 0 -1px;
+.km-ios .km-switch-handle {
   border: 1px solid #969696;
   background: linear-gradient(top, #ffffff, #d7d7d7 5%, #ffffff);
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
   background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #ffffff), color-stop(0.05, #d7d7d7), color-stop(1, #ffffff));
   background: -moz-linear-gradient(top, #ffffff, #d7d7d7 5%, #ffffff);
   background: -ms-linear-gradient(top, #ffffff, #d7d7d7 5%, #ffffff);
   background: -o-linear-gradient(top, #ffffff, #d7d7d7 5%, #ffffff);
 }
-.km-switch-handle:after, .km-switch-handle:before {
-  font-size: 1em;
-  font-size: 1rem;
-  font-weight: bold;
-  display: inline-block;
-  height: 100%;
-  width: 4em;
-  width: 4rem;
-  text-transform: uppercase;
-  text-align: center;
-  position: absolute;
-}
-.km-switch-label-off {
-  left: 3em;
+.km-ios .km-switch-label-off {
   color: #7f7f7f;
-  position: absolute;
 }
-.km-switch-label-on {
-  left: -2.8em;
+.km-ios .km-switch-label-on {
   color: #fff;
-  position: absolute;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
 }
-.km-android .km-switch {
-  width: 3em;
-  width: 3rem;
-  height: 2em;
-  height: 2rem;
-  border: 1px solid transparent;
-}
-.km-android .km-switch-handle {
-  position: relative;
-  background: none;
-  border: none;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  line-height: 1.1em;
-  line-height: 1.1rem;
-  text-align: center;
-  font-size: 1.1em;
-  font-size: 1.1rem;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  -webkit-transform: translate(0,0) !important;
-  -moz-transform: translate(0,0) !important;
-  -ms-transform: translate(0,0) !important;
-  -o-transform: translate(0,0) !important;
-  transform: translate(0,0) !important;
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -ms-transition: none !important;
-  -o-transition: none !important;
-  transition: none !important;
-}
-.km-android .km-switch-handle:after {
-  height: 1.1em;
-  text-transform: uppercase;
-  width: 100%;
-  left: 0;
-  font-weight: normal;
-  color: #000;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.km-android .km-switch-on:after {
-  content: "on";
-}
-.km-android .km-switch-off:after {
-  content: "off";
-}
-.km-android .km-switch-wrapper {
-  display: none;
-}
-.km-android .km-switch-container {
-  position: relative;
-  border: none;
-  background: none;
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-}
-.km-android .km-switch-handle:before {
-  content: "\a0";
-  padding: 0;
-  left: 0;
-  height: 5px;
-  position: relative;
-  width: 80%;
-  margin: 1.5em auto;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  box-shadow: inset 1px 1px 1px #999999;
-  -webkit-box-shadow: inset 1px 1px 1px #999999;
-  background: #bbb;
-}
-.km-android .km-switch-on:before {
-  background: #87DE13;
-}
-.km-meego .km-switch {
-  width: 4em;
-  width: 4rem;
-  padding: 0;
-}
-.km-meego .km-switch, .km-meego .km-switch-wrapper, .km-meego .km-switch-container {
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
-}
-.km-meego .km-switch-container {
-  border: 0;
-  box-shadow: 0 0 2px 0 #999999 inset;
-  -webkit-box-shadow: 0 0 2px 0 #999999 inset;
-}
-.km-meego .km-switch-background {
-  margin-left: -3em;
-  background: linear-gradient(top, rgba(0, 0, 0, 0), rgba(255, 255, 222, 0.2) 10%, rgba(0, 0, 0, 0)), linear-gradient(left, #1985de, #1985de 45%, #d2d2d2 55%, #d2d2d2);
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(0, 0, 0, 0)), color-stop(0.1, rgba(255, 255, 222, 0.2)), color-stop(1, rgba(0, 0, 0, 0))), -webkit-gradient(linear, 0 50%, 100% 50%, color-stop(0, #1985de), color-stop(0.45, #1985de), color-stop(0.55, #d2d2d2), color-stop(1, #d2d2d2));
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(255, 255, 222, 0.2) 10%, rgba(0, 0, 0, 0)), -moz-linear-gradient(left, #1985de, #1985de 45%, #d2d2d2 55%, #d2d2d2);
-  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(255, 255, 222, 0.2) 10%, rgba(0, 0, 0, 0)), -ms-linear-gradient(left, #1985de, #1985de 45%, #d2d2d2 55%, #d2d2d2);
-  background: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(255, 255, 222, 0.2) 10%, rgba(0, 0, 0, 0)), -o-linear-gradient(left, #1985de, #1985de 45%, #d2d2d2 55%, #d2d2d2);
-}
-.km-meego .km-switch:active .km-switch-handle {
-  background: #d9d9d9;
-}
-.km-meego .km-switch-handle:after, .km-meego .km-switch-handle:before {
-  display: none;
-}
-.km-meego .km-switch-handle {
-  width: 100%;
-  height: 100%;
-  background: #d2d2d2;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  margin: 0.18em 0.2em;
-  width: 1.4em;
-  height: 1.4em;
-  width: 1.4rem;
-  height: 1.4rem;
-  background: #fff;
-  border-color: #fff;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  box-shadow: 0 2px 3px 0 #aaaaaa;
-  -webkit-box-shadow: 0 2px 3px 0 #aaaaaa;
-}
-.km-meego .km-switch-on .km-switch-handle {
-  box-shadow: 0 2px 3px 0 #4c7698;
-  -webkit-box-shadow: 0 2px 3px 0 #4c7698;
-}
-.km-android, .km-android .km-button, .km-android .km-switch {
-  font: normal 1em DroidSans, Helvetica, sans-serif;
-  font-size: 1rem;
-}
-.km-android .km-button, .km-android .km-switch {
-  padding: .2em .4em;
-  padding: .2rem .4rem;
-  margin: .1em;
-  margin: .1rem;
-  -moz-border-radius: 0.15em;
-  -webkit-border-radius: 0.15em;
-  border-radius: 0.15em;
-  line-height: 2em;
-  line-height: 2rem;
-  box-shadow: 0 1px 2px #373737;
-  -webkit-box-shadow: 0 1px 2px #373737;
-  /*-webkit-mask-image: ~"url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><rect fill=%22black%22 x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%222%22/></svg>')";*/
-
-}
-.km-android .km-tabstrip .km-button {
-  height: auto;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-}
-.km-android .km-toolbar,
-.km-android .km-button,
-.km-android .km-switch,
-.km-android .km-radiogroup,
-.km-android .km-tabstrip {
-  color: #000;
-  text-shadow: none;
-  border-color: #e7e7e7;
-  background-color: #dedede;
-  background-image: linear-gradient(top, #e6e6e6, #cdcdcd);
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #e6e6e6), color-stop(1, #cdcdcd));
-  background-image: -moz-linear-gradient(top, #e6e6e6, #cdcdcd);
-  background-image: -ms-linear-gradient(top, #e6e6e6, #cdcdcd);
-  background-image: -o-linear-gradient(top, #e6e6e6, #cdcdcd);
-}
-.km-android .km-button:not([disabled]):active, .km-android .km-switch:not([disabled]):active, .km-android .km-radiogroup .km-state-active {
-  border-color: #feb84b #fb9d09 #f29c0a;
-  background-color: #fe9d08;
-  background-image: linear-gradient(top, #fe9d08, #fea10a 50%, #fea40b);
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #fe9d08), color-stop(0.5, #fea10a), color-stop(1, #fea40b));
-  background-image: -moz-linear-gradient(top, #fe9d08, #fea10a 50%, #fea40b);
-  background-image: -ms-linear-gradient(top, #fe9d08, #fea10a 50%, #fea40b);
-  background-image: -o-linear-gradient(top, #fe9d08, #fea10a 50%, #fea40b);
-}
-.km-blackberry,
-.km-blackberry .km-button,
-.km-meego,
-.km-meego .km-button {
-  font: normal 1em Arial, Helvetica, sans-serif;
-}
-.km-blackberry .km-toolbar,
-.km-blackberry .km-button,
-.km-blackberry .km-radiogroup,
-.km-blackberry .km-tabstrip,
-.km-meego .km-toolbar,
-.km-meego .km-button,
-.km-meego .km-radiogroup,
-.km-meego .km-tabstrip {
-  font: normal 1em Arial, Helvetica, sans-serif;
-  color: #333;
-  text-shadow: none;
-  border-color: #fff;
-  background-color: #d3d7d7;
-  -webkit-box-shadow: none;
-  background-image: linear-gradient(top, #ffffff, rgba(210, 210, 210, 0));
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #ffffff), color-stop(1, rgba(210, 210, 210, 0)));
-  background-image: -moz-linear-gradient(top, #ffffff, rgba(210, 210, 210, 0));
-  background-image: -ms-linear-gradient(top, #ffffff, rgba(210, 210, 210, 0));
-  background-image: -o-linear-gradient(top, #ffffff, rgba(210, 210, 210, 0));
-}
-.km-badge, .km-detail {
+.km-ios .km-badge, .km-ios .km-detail {
   background-image: linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
   color: #FFF;
-  text-decoration: none;
-  display: inline-block;
   border: .3em solid #FFF;
-  font-size: .7em;
+  font-size: .72em;
+  font-size: .82rem;
   line-height: 1.6em;
-  vertical-align: middle;
-  overflow: hidden;
-  text-align: center;
-  position: absolute;
-  z-index: 1;
-  top: -1em;
-  right: -0.8em;
-  width: 1.6em;
-  height: 1.6em;
-  text-shadow: none;
-  -moz-border-radius: 1.2em;
-  -webkit-border-radius: 1.2em;
-  border-radius: 1.2em;
+  line-height: 1rem;
+  padding: 0;
   background-color: #bc0404;
-  background-clip: padding-box;
   box-shadow: 0 3px 3px #000000;
   -webkit-box-shadow: 0 3px 3px #000000;
+  -moz-border-radius: 2em;
+  -webkit-border-radius: 2em;
+  border-radius: 2em;
+  background-clip: padding-box;
   background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(1, rgba(255, 255, 255, 0)));
   background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
   background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
   background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
 }
-.km-detail {
-  position: relative;
-  float: right;
-  right: 0;
-  top: 0;
+.km-ios .km-detail {
   line-height: 1.4em;
+  line-height: .8rem;
   border: .2em solid #FFF;
   border-width: .15rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   background-color: #1F6DD8;
 }
-.km-detail:after, .km-detail:before {
-  width: .3em;
-  height: .3em;
-  width: .4rem;
-  height: .4rem;
-  content: "\a0";
-  display: inline-block;
-  vertical-align: middle;
-}
-.km-detaildisclose:after {
-  margin-left: -0.2em;
-  margin-left: -.2rem;
-  border: .2em solid #FFF;
-  border-width: .24rem .24rem 0 0;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-.km-detaildisclose:before {
-  display: none;
-}
-.km-rowinsert {
+.km-ios .km-rowinsert {
   background-color: #24870D;
 }
-.km-rowdelete {
+.km-ios .km-rowdelete {
   background-color: #B01B1A;
 }
-.km-rowdelete:after,
-.km-rowinsert:after,
-.km-rowinsert:before,
-.km-contactadd:after,
-.km-contactadd:before {
-  width: .6em;
-  height: .1em;
-  width: .7rem;
-  height: .2rem;
-  background: #FFF;
-  margin-left: -0.18em;
-  margin-left: -.28rem;
-}
-.km-rowdelete:after {
-  margin-left: -0.28em;
-  margin-left: -.38rem;
-}
-.km-rowinsert:after, .km-contactadd:after {
-  width: .1em;
-  height: .6em;
-  width: .2rem;
-  height: .7rem;
-  margin-left: -0.34em;
-  margin-left: -.44rem;
-}
-.km-android .km-button .km-badge {
-  border-color: #fb9d09;
-  background-color: #000;
-  -moz-border-radius: 0.4em;
-  -webkit-border-radius: 0.4em;
-  border-radius: 0.4em;
-  background-image: none;
-}
-.km-button::-moz-focus-inner {
-  padding: 0;
-  border: 0;
-}
-.km-badge:-moz-first-node, :-moz-first-node ~ .km-badge {
-  right: -0.5em;
-  top: -1em;
-}
-.km-blackberry .km-badge {
-  -webkit-box-shadow: none;
-}
-.km-blackberry .km-button:not([disabled]):active,
-.km-blackberry .km-radiogroup .km-state-active,
-.km-meego .km-button:active .km-button:not([disabled]):active,
-.km-meego .km-radiogroup .km-state-active {
-  color: #FFF;
-  border-color: #3f9fe5;
-  background-color: #1b6ec0;
-  background-image: linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.3)), color-stop(1, rgba(210, 210, 210, 0)));
-  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
-  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
-  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
-}
-.km-radiogroup,
-.km-android .km-radiogroup,
-.km-meego .km-radiogroup,
-.km-blackberry .km-radiogroup {
-  padding: 0;
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  border-color: transparent;
-  background: none;
-  white-space: nowrap;
-  display: table;
-}
-.km-radiogroup > .km-button {
-  display: table-cell;
-}
-.km-radiogroup .km-button {
-  margin: 0;
-  border-width: 1px 0 1px 1px;
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-}
-.km-radiogroup .km-button:first-child {
-  -moz-border-radius: 5pt 0 0 5pt;
-  -webkit-border-radius: 5pt 0 0 5pt;
-  border-radius: 5pt 0 0 5pt;
-}
-.km-radiogroup .km-button:last-child {
-  border-right-width: 1px;
-  -moz-border-radius: 0 5pt 5pt 0;
-  -webkit-border-radius: 0 5pt 5pt 0;
-  border-radius: 0 5pt 5pt 0;
-}
 .km-ios .km-radiogroup .km-button {
-  font-size: 1.3em;
-  font-weight: bold;
   color: #929292;
   text-shadow: 0 1px #fff;
   border-color: #B4B8BA #9FA3A4 #9FA3A4;
@@ -789,13 +866,6 @@
   background-image: -moz-linear-gradient(top, #fbfbfb, #e1e1e1 50%, #c8c8c8);
   background-image: -ms-linear-gradient(top, #fbfbfb, #e1e1e1 50%, #c8c8c8);
   background-image: -o-linear-gradient(top, #fbfbfb, #e1e1e1 50%, #c8c8c8);
-}
-.km-ios .km-state-disabled .km-button,
-.km-android .km-state-disabled .km-button,
-.km-blackberry .km-state-disabled .km-button,
-.km-meego .km-state-disabled .km-button {
-  color: #aaa;
-  text-shadow: none;
 }
 .km-ios .km-radiogroup .km-state-active {
   color: #fff;
@@ -810,98 +880,14 @@
   background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.25));
   background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.25));
 }
-.km-blackberry .km-radiogroup, .km-meego .km-radiogroup {
-  font-size: 1em;
-}
-.km-tabstrip, .km-toolbar, .km-navbar {
-  display: block;
-  padding: .8em;
-  margin: 0;
-  width: 100%;
-  border-width: 0;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-}
-.km-tabstrip {
-  text-align: center;
-  word-spacing: -1em;
-}
-.km-tabstrip .km-button {
-  word-spacing: normal;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  .km-tabstrip {
-    display: table;
-    word-spacing: normal;
-    width: 100%;
-  }
-  .km-radiogroup > .km-button {
-    display: inline-block;
-  }
-}
-.km-toolbar, .km-navbar {
-  padding: 0 .5em;
-  -moz-box-flex: 1;
-  -webkit-box-flex: 1;
-  -ms-box-flex: 1;
-  box-flex: 1;
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  position: relative;
+.km-ios .km-navbar, .km-ios .km-toolbar {
   overflow: hidden;
-  display: block;
-  border-width: 0 0 1px 0;
 }
-.km-android .km-toolbar, .km-android .km-navbar {
-  padding: 0 .3em;
-  border-width: 0;
-}
-:-moz-any(.km-toolbar,.km-navbar) {
-  overflow: visible;
-}
-.km-navbar .km-view-title {
-  margin-top: .3em;
-  margin-top: .5rem;
-  margin-bottom: .3em;
-  margin-bottom: .5rem;
-}
-.km-toolbar .km-button, .km-navbar .km-button {
-  margin-top: .3em;
-  margin-top: .5rem;
-  margin-bottom: .3em;
-  margin-bottom: .5rem;
-}
-.km-android .km-toolbar .km-button, .km-android .km-navbar .km-button {
-  margin-top: .4em;
-  margin-top: .4rem;
-  margin-bottom: .4em;
-  margin-bottom: .4rem;
-}
-.km-blackberry .km-toolbar,
-.km-meego .km-toolbar,
-.km-blackberry .km-navbar,
-.km-meego .km-navbar {
-  background-color: #181E17;
-  background-image: linear-gradient(top, #2b312d, rgba(24, 30, 23, 0) 100%);
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #2b312d), color-stop(1, rgba(24, 30, 23, 0)));
-  background-image: -moz-linear-gradient(top, #2b312d, rgba(24, 30, 23, 0) 100%);
-  background-image: -ms-linear-gradient(top, #2b312d, rgba(24, 30, 23, 0) 100%);
-  background-image: -o-linear-gradient(top, #2b312d, rgba(24, 30, 23, 0) 100%);
-}
-.km-android .km-toolbar, .km-android .km-navbar {
-  background-color: #9b9b9b;
-  background-image: linear-gradient(top, #9b9b9b, #838383);
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #9b9b9b), color-stop(1, #838383));
-  background-image: -moz-linear-gradient(top, #9b9b9b, #838383);
-  background-image: -ms-linear-gradient(top, #9b9b9b, #838383);
-  background-image: -o-linear-gradient(top, #9b9b9b, #838383);
+.km-ios .km-navbar, .km-ios .km-toolbar, .km-ios .km-tabstrip {
+  border: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
 }
 .km-ios .km-tabstrip {
   padding: .2em 0;
@@ -912,153 +898,32 @@
   background-image: -ms-linear-gradient(top, rgba(46, 46, 46, 0.8), rgba(21, 21, 21, 0.5) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8));
   background-image: -o-linear-gradient(top, rgba(46, 46, 46, 0.8), rgba(21, 21, 21, 0.5) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8));
 }
-.km-android .km-tabstrip {
-  display: table;
-  padding: 0;
-  background-color: #222;
-  border-bottom: 2pt solid #7a7a7a;
-  background-image: linear-gradient(top, #272727, #0e0c0f);
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #272727), color-stop(1, #0e0c0f));
-  background-image: -moz-linear-gradient(top, #272727, #0e0c0f);
-  background-image: -ms-linear-gradient(top, #272727, #0e0c0f);
-  background-image: -o-linear-gradient(top, #272727, #0e0c0f);
-}
-.km-blackberry .km-tabstrip, .km-meego .km-tabstrip {
-  padding: .2em;
-  background-color: #333;
-  background-image: linear-gradient(top, rgba(188, 188, 188, 0.8), rgba(51, 51, 51, 0) 50%);
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(188, 188, 188, 0.8)), color-stop(0.5, rgba(51, 51, 51, 0)));
-  background-image: -moz-linear-gradient(top, rgba(188, 188, 188, 0.8), rgba(51, 51, 51, 0) 50%);
-  background-image: -ms-linear-gradient(top, rgba(188, 188, 188, 0.8), rgba(51, 51, 51, 0) 50%);
-  background-image: -o-linear-gradient(top, rgba(188, 188, 188, 0.8), rgba(51, 51, 51, 0) 50%);
-}
-.km-tabstrip .km-button {
-  font: bold 1em Helvetica, sans-serif;
-  color: #a8a8a8;
-  padding: .4em .8em;
-  border-width: 0;
-  border-color: transparent;
-  background: none;
-  margin: 0;
-  text-align: center;
-}
 .km-ios .km-tabstrip .km-button {
   -moz-border-radius: 5pt;
   -webkit-border-radius: 5pt;
   border-radius: 5pt;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  background: transparent;
+  border: 0;
   font-size: .6em;
   padding: .1em .6em;
   min-width: 6em;
   margin: 0 2%;
   text-shadow: none;
 }
-.km-tabstrip .km-badge {
-  font-size: .8em;
-  font-weight: normal;
-}
 .km-ios .km-tabstrip .km-badge {
   font-size: 1.1em;
-}
-.km-android .km-tabstrip .km-button {
-  display: table-cell;
-  font-size: .8em;
-  padding: .5em .4em .3em;
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  border-right: 1pt solid #444;
-  border-left: 1pt solid #000;
-  min-width: 5em;
-}
-.km-android .km-tabstrip .km-badge, .km-blackberry .km-tabstrip .km-badge, .km-meego .km-tabstrip .km-badge {
-  top: auto;
-  bottom: -10px;
-}
-.km-blackberry .km-tabstrip .km-button, .km-meego .km-tabstrip .km-button {
-  -moz-border-radius: 5pt;
-  -webkit-border-radius: 5pt;
-  border-radius: 5pt;
-  padding: .1em;
-  margin: 0 1%;
 }
 .km-ios .km-tabstrip .km-button:active, .km-ios .km-tabstrip .km-state-active {
   color: #FFF;
   background: rgba(100, 100, 100, 0.5);
 }
-.km-android .km-tabstrip .km-button:active, .km-android .km-tabstrip .km-state-active {
-  color: #FFF;
-  border-color: transparent #444 transparent #000;
-  background: #9a9a9a;
-  background-image: linear-gradient(top, #9a9a9a, #7e7e7e);
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #9a9a9a), color-stop(1, #7e7e7e));
-  background-image: -moz-linear-gradient(top, #9a9a9a, #7e7e7e);
-  background-image: -ms-linear-gradient(top, #9a9a9a, #7e7e7e);
-  background-image: -o-linear-gradient(top, #9a9a9a, #7e7e7e);
-}
-.km-android .km-tabstrip .km-text {
-  position: relative;
-}
-.km-android .km-badge {
-  right: -2.2em;
-}
-.km-blackberry .km-tabstrip .km-text, .km-meego .km-tabstrip .km-text {
-  display: none;
-}
-.km-tabstrip .km-button:first-child {
-  border-left: 0;
-}
-.km-tabstrip .km-button:last-child {
-  border-right: 0;
-}
-.km-list {
+.km-ios .km-list {
   background: #fff;
 }
-.km-list, .km-listview {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
-.km-listinset, .km-listgroupinset {
-  margin: 1em;
-}
-.km-listinset, .km-listgroupinset .km-list {
-  overflow: hidden;
-}
-.km-listview .km-switch {
-  margin-top: 0;
-  float: right;
-}
-.km-android .km-listview .km-switch {
-  margin-top: 0.45em;
-}
-.km-listview .km-list {
-  margin-top: 2px;
-  text-indent: 0;
-}
-.km-list > li {
-  margin: 0;
-  display: block;
-  position: relative;
-  list-style-type: none;
-  vertical-align: middle;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: .6em .6em .6em .8em;
-  text-shadow: none;
-}
-.km-ios .km-list > li, .km-meego .km-list > li {
+.km-ios .km-slider, .km-ios .km-list > li, .km-ios .km-scroll-container {
   -webkit-transform: translatez(0);
-}
-.km-listgroup > li, .km-listgroupinset > li {
-  display: block;
-  font-weight: bold;
-  padding: .2em 0 0;
-  text-indent: .8em;
-}
-.km-listgroupinset > li {
-  margin-top: 1em;
-  line-height: 1.65em;
 }
 .km-ios .km-listinset, .km-ios .km-listgroupinset .km-list {
   border: 1px solid #999;
@@ -1080,9 +945,6 @@
 }
 .km-ios .km-list > li, .km-ios .km-list a:not(.km-button) {
   color: #000;
-}
-.km-list > li:last-child {
-  border-bottom: 0;
 }
 .km-ios .km-listview .km-list {
   border-top: 1px solid #78858e;
@@ -1112,8 +974,415 @@
   font-weight: bold;
   overflow: hidden;
 }
+.km-ios .km-list, .km-ios .km-content {
+  background: #fff;
+}
+.km-ios .km-insetcontent {
+  background: #c4ccd5 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAABCAYAAAASC7TOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABRJREFUeNpi/P//PwMW4AAiAAIMAFIpAz/zYoI+AAAAAElFTkSuQmCC);
+}
+.km-ios label.km-item-checked:after {
+  background: transparent url("images/ios-sprite.png") 0 -10px no-repeat;
+}
+.km-ios .km-tabstrip .km-button .km-icon {
+  opacity: 1;
+  background: transparent url('images/itabimg1.png') no-repeat 3px 50%;
+  background-size: cover;
+}
+.km-ios .km-tabstrip .km-state-active .km-icon {
+  background-image: url('images/itabimg.png');
+}
+.km-ios .km-tabstrip .km-button:nth-child(1) .km-icon {
+  background-position: -1.5% 50%;
+}
+.km-ios .km-tabstrip .km-button:nth-child(2) .km-icon {
+  background-position: 34% 50%;
+}
+.km-ios .km-tabstrip .km-button:nth-child(3) .km-icon {
+  background-position: 69% 50%;
+}
+.km-ios .km-tabstrip .km-button:nth-child(4) .km-icon {
+  background-position: 103.5% 50%;
+}
+/* Slider */
+.km-ios .km-slider-handle {
+  background: linear-gradient(top, #cccccc, #ffffff);
+  border: 1px solid #eee;
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #cccccc), color-stop(1, #ffffff));
+  background: -moz-linear-gradient(top, #cccccc, #ffffff);
+  background: -ms-linear-gradient(top, #cccccc, #ffffff);
+  background: -o-linear-gradient(top, #cccccc, #ffffff);
+}
+.km-ios .km-slider-background {
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0.4)) 0 0 no-repeat, linear-gradient(top, #dbdbdb, #ffffff) 12em 0 no-repeat, linear-gradient(top, #2a5db2, #6da9f7) 0 0 no-repeat;
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(0, 0, 0, 0.5)), color-stop(0.15, rgba(0, 0, 0, 0)), color-stop(0.9, rgba(0, 0, 0, 0)), color-stop(1, rgba(0, 0, 0, 0.4))) 0 0 no-repeat, -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #dbdbdb), color-stop(1, #ffffff)) 12em 0 no-repeat, -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #2a5db2), color-stop(1, #6da9f7)) 0 0 no-repeat;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0.4)) 0 0 no-repeat, -moz-linear-gradient(top, #dbdbdb, #ffffff) 12em 0 no-repeat, -moz-linear-gradient(top, #2a5db2, #6da9f7) 0 0 no-repeat;
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0.4)) 0 0 no-repeat, -ms-linear-gradient(top, #dbdbdb, #ffffff) 12em 0 no-repeat, -ms-linear-gradient(top, #2a5db2, #6da9f7) 0 0 no-repeat;
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0.4)) 0 0 no-repeat, -o-linear-gradient(top, #dbdbdb, #ffffff) 12em 0 no-repeat, -o-linear-gradient(top, #2a5db2, #6da9f7) 0 0 no-repeat;
+}
+/* Dialog */
+.km-ios .km-dialog {
+  background: rgba(10, 25, 65, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 3px 3px 5px #111111;
+  -webkit-box-shadow: 3px 3px 5px #111111;
+}
+.km-ios .km-dialog-title {
+  background: linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
+  text-shadow: 0 -1px #333333;
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.3)), color-stop(0.6, rgba(255, 255, 255, 0)));
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
+  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
+  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
+}
+.km-ios .km-dialog:before {
+  background: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><defs><clipPath id=%22clip%22><rect x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%2210%22 ry=%2210%22/></clipPath></defs><ellipse fill=%22white%22 cx=%2250%%22 cy=%220%22 rx=%2280%%22 ry=%2260%%22 clip-path=%22url(%23clip)%22/></svg>');
+}
+.km-ios .km-dialog-content {
+  color: #fff;
+  text-shadow: 0 -1px #333333;
+}
+.km-ios .km-dialog .km-button {
+  display: block;
+  margin: .4em;
+  font-size: 1.3em;
+  text-align: center;
+  padding: .44em;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* Platform specific Android 4 CSS */
+.km-android {
+  -webkit-transform: translatez(0);
+  -moz-transform: translatez(0);
+  -ms-transform: translatez(0);
+  -o-transform: translatez(0);
+  transform: translatez(0);
+  background: #fff;
+}
+.km-android .km-view {
+  -moz-box-direction: reverse;
+  -webkit-box-direction: reverse;
+  -ms-box-direction: reverse;
+  box-direction: reverse;
+}
+.km-android .km-view > * {
+  -moz-box-direction: normal;
+  -webkit-box-direction: normal;
+  -ms-box-direction: normal;
+  box-direction: normal;
+}
+.km-android .km-view {
+  overflow: hidden;
+  -webkit-transform: translatez(0);
+}
+.km-android .km-view-title, .km-android .km-dialog-title {
+  position: relative;
+  display: block;
+  text-align: center;
+  color: #fff;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  line-height: 2.2rem;
+  font-weight: bold;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+  float: left;
+  width: 100%;
+}
+.km-android .km-tabstrip .km-button {
+  height: auto;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+.km-android .km-navbar .km-view-title {
+  display: none;
+}
+.km-android .km-navbar,
+.km-android .km-toolbar,
+.km-android .km-button,
+.km-android .km-switch,
+.km-android .km-radiogroup,
+.km-android .km-tabstrip {
+  color: #000;
+  text-shadow: none;
+  border-color: #e7e7e7;
+  background-color: #000;
+}
+.km-android .km-button {
+  -moz-border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-radius: 1px;
+  border: 1px solid transparent;
+  border-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.4);
+  background: #d6d6d6;
+}
+.km-android .km-button.km-state-active {
+  background: #4cbee8;
+  overflow: visible;
+}
+.km-android .km-button .km-text {
+  position: relative;
+  z-index: 1;
+}
+.km-android .km-button.km-state-active:after {
+  content: "\a0";
+  display: block;
+  top: -4px;
+  left: -4px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border: 4px solid transparent;
+  background: inherit;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  opacity: .5;
+}
+.km-android li.km-state-active {
+  border: 0;
+  color: white;
+}
+.km-android, .km-android .km-button {
+  font-weight: bold;
+  font-size: .9em;
+  font-size: .9rem;
+  font-family: Roboto, HelveticaNeue, sans-serif;
+}
+.km-android .km-back:before {
+  display: none;
+}
+.km-android :-moz-first-node.km-back:before {
+  border-radius: 0 1rem 0 0.4rem;
+  left: -.56rem;
+  top: 0.28rem;
+  width: 1.36rem;
+  height: 1.36rem;
+}
+.km-android .km-switch {
+  font-family: HelveticaNeue, Arial, sans-serif;
+}
+.km-android .km-switch-background, .km-android .km-slider-background {
+  display: none;
+}
+.km-android .km-switch {
+  background: transparent;
+  height: 1.4em;
+  height: 1.4rem;
+}
+.km-android .km-switch-container {
+  overflow: hidden;
+  border: 0;
+  width: 10rem;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background: #232323;
+  margin-left: -1em;
+}
+.km-android .km-switch-handle, .km-android .km-switch-handle:after {
+  margin: 0;
+  margin-right: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-left: 1em solid #232323;
+  border-right: 1.4em solid transparent;
+  border-bottom: 2em solid transparent;
+  height: 0;
+  width: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.km-android .km-switch-handle:before {
+  content: "\a0";
+  display: block;
+  position: absolute;
+  left: 1.4em;
+  left: 1.4rem;
+  background-color: inherit;
+  border-bottom: 0;
+  border-left: 1.4em solid transparent;
+  border-right: 1em solid #232323;
+  border-top: 2em solid transparent;
+  height: 0;
+  width: 0;
+}
+.km-android .km-switch-off {
+  color: #bbb;
+}
+.km-android .km-switch-label-on, .km-android .km-switch-label-off {
+  font-size: .9em;
+  left: 0;
+  width: 2.6rem;
+  width: 2.6rem;
+  line-height: 1.6em;
+  line-height: 1.6rem;
+  text-align: center;
+  text-shadow: none;
+  position: absolute;
+}
+.km-android .km-switch-off .km-switch-label-on, .km-android .km-switch-on .km-switch-label-off {
+  display: none;
+}
+.km-android .km-switch-on {
+  color: #fff;
+  background: rgba(51, 181, 229, 0.8);
+}
+.km-android .km-badge, .km-android .km-detail {
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
+  color: #FFF;
+  border: .3em solid #FFF;
+  background-color: #bc0404;
+  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(1, rgba(255, 255, 255, 0)));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0));
+}
+.km-android .km-badge {
+  background: #33b5e5;
+  border: 0;
+  box-shadow: 0 3px 3px #000000;
+  -webkit-box-shadow: 0 3px 3px #000000;
+}
+.km-android .km-detail {
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  background: transparent;
+}
+.km-android .km-rowinsert {
+  background-color: #24870D;
+}
+.km-android .km-rowdelete {
+  background-color: #B01B1A;
+}
+.km-android .km-radiogroup .km-button {
+  color: #929292;
+  text-shadow: 0 1px #fff;
+  border-color: #B4B8BA #9FA3A4 #9FA3A4;
+  background-image: linear-gradient(top, #fbfbfb, #e1e1e1 50%, #c8c8c8);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.4);
+  -webkit-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.4);
+  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #fbfbfb), color-stop(0.5, #e1e1e1), color-stop(1, #c8c8c8));
+  background-image: -moz-linear-gradient(top, #fbfbfb, #e1e1e1 50%, #c8c8c8);
+  background-image: -ms-linear-gradient(top, #fbfbfb, #e1e1e1 50%, #c8c8c8);
+  background-image: -o-linear-gradient(top, #fbfbfb, #e1e1e1 50%, #c8c8c8);
+}
+.km-android .km-radiogroup .km-state-active {
+  color: #fff;
+  text-shadow: none;
+  border-color: rgba(0, 0, 0, 0.4) rgba(0, 0, 0, 0.4) rgba(0, 0, 0, 0.1);
+  background-color: #3D7EEB;
+  background-image: linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.25));
+  box-shadow: inset -1px 0 2px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: inset -1px 0 2px rgba(0, 0, 0, 0.6);
+  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(0, 0, 0, 0.3)), color-stop(0.5, rgba(0, 0, 0, 0)), color-stop(0.5, rgba(255, 255, 255, 0.05)), color-stop(1, rgba(255, 255, 255, 0.25)));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.25));
+  background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.25));
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.25));
+}
+.km-android .km-tabstrip {
+  display: table;
+  padding: 0;
+  background: #33b5e5;
+  background-clip: padding-box;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+.km-android .km-navbar, .km-android .km-toolbar {
+  font-size: .8em;
+  font-size: .8rem;
+}
+.km-android .km-navbar .km-button, .km-android .km-toolbar .km-button {
+  margin: 0;
+  padding: .7em 0;
+  padding: 1rem 0;
+  border: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  background: none;
+  color: #fff;
+  text-transform: uppercase;
+}
+.km-android .km-navbar .km-text, .km-android .km-tabstrip .km-text {
+  position: relative;
+  float: left;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 2.5em;
+  height: 2.5rem;
+  margin-top: -2.5em;
+  margin-top: -2.5 rem;
+  border: 1em solid transparent;
+  border-right: 1px solid #444;
+  border-left: 0;
+  text-indent: -9999px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.km-android .km-navbar .km-text {
+  float: none;
+  border: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 0 .7em;
+  padding: 0 .7rem;
+}
+.km-android .km-navbar .km-button:last-child .km-text, .km-android .km-toolbar .km-button:last-child .km-text, .km-android .km-tabstrip .km-button:last-child .km-text {
+  border-right: 0;
+}
+.km-android .km-tabstrip .km-button {
+  background: #000;
+  display: table-cell;
+  font-size: .8em;
+  padding: .5em 0 .4em 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 0;
+  background-clip: padding-box;
+  min-width: 5em;
+}
+.km-android .km-tabstrip .km-badge {
+  text-indent: 0;
+  top: auto;
+  bottom: -2.5em;
+  right: 0;
+}
+.km-android .km-tabstrip .km-button:active, .km-android .km-tabstrip .km-state-active {
+  color: #FFF;
+  padding-bottom: 0;
+  border-bottom-width: .4em;
+  padding-bottom: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  border-color: transparent;
+}
+.km-android .km-navbar .km-state-active:after, .km-android .km-toolbar .km-state-active:after, .km-android .km-tabstrip .km-state-active:after {
+  display: none;
+}
+.km-android .km-switch,
+.km-android .km-list > li,
+.km-android .km-switch-handle,
+.km-android .km-switch-wrapper,
+.km-android .km-scroll-container {
+  -webkit-transform: translatez(0);
+}
 .km-android .km-listinset, .km-android .km-listgroupinset {
   margin: 0;
+}
+.km-android .km-listview {
+  margin: 0 1em;
 }
 .km-android .km-listinset > li, .km-android .km-listgroupinset > li {
   margin-top: 0;
@@ -1136,18 +1405,9 @@
 }
 .km-android .km-listgroup > li, .km-android .km-listgroupinset > li {
   color: #bebebe;
-  background: #191919;
+  background: transparent;
   padding-top: .2em;
   line-height: inherit;
-}
-.km-default-content {
-  padding: 1em;
-}
-.km-list, .km-content {
-  background: #fff;
-}
-.km-ios .km-insetcontent {
-  background: #c4ccd5 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAABCAYAAAASC7TOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABRJREFUeNpi/P//PwMW4AAiAAIMAFIpAz/zYoI+AAAAAElFTkSuQmCC);
 }
 .km-android .km-list {
   color: #fff;
@@ -1155,30 +1415,9 @@
 .km-android .km-list .km-item {
   height: 56px;
 }
-.km-android .km-list,
-.km-android .km-content,
-.km-android .km-vertical,
-.km-android .km-horizontal {
+.km-android .km-content, .km-android .km-vertical, .km-android .km-horizontal {
   color: #fff;
   background: #000;
-}
-input[type=radio], input[type=checkbox] {
-  display: none;
-}
-.km-list input[type=radio], .km-list input[type=checkbox] {
-  width: 36px;
-  height: 36px;
-  margin-left: .4em;
-}
-.km-item label:before, .km-item label.km-item-checked:after {
-  position: absolute;
-  content: " ";
-  display: block;
-  top: 50%;
-  left: .6em;
-  width: 36px;
-  height: 36px;
-  margin-top: -18px;
 }
 .km-android .km-item label:before {
   border: 1px solid #000;
@@ -1197,277 +1436,88 @@ input[type=radio], input[type=checkbox] {
   background-image: -ms-linear-gradient(top, #363636, #2b2b2b);
   background-image: -o-linear-gradient(top, #363636, #2b2b2b);
 }
-.km-ios label.km-item-checked:after {
-  background: transparent url("images/ios-sprite.png") 0 -10px no-repeat;
-}
 .km-android label.km-item-checked:after {
   background: transparent url("images/android-sprite.png") 0 -36px no-repeat;
 }
-.km-tabstrip .km-button .km-icon {
-  display: block;
-  width: 4em;
-  height: 4em;
-  width: 2.5rem;
-  height: 2.5rem;
-  background-size: auto 100%;
+.km-android .km-content {
+  background: #000000 linear-gradient(top, #000000, rgba(70, 70, 70, 0.5));
+  background: #000000 -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #000000), color-stop(1, rgba(70, 70, 70, 0.5)));
+  background: #000000 -moz-linear-gradient(top, #000000, rgba(70, 70, 70, 0.5));
+  background: #000000 -ms-linear-gradient(top, #000000, rgba(70, 70, 70, 0.5));
+  background: #000000 -o-linear-gradient(top, #000000, rgba(70, 70, 70, 0.5));
 }
 .km-android .km-tabstrip .km-icon {
-  width: 2.2rem;
-  height: 2.2rem;
-}
-.km-tabstrip .km-button .km-icon {
-  margin: 0 auto;
+  position: relative;
+  left: 50%;
+  margin-left: -2em;
+  margin-left: -1.25 rem;
 }
 .km-android .km-tabstrip .km-button .km-icon {
-  opacity: 0.5;
-  background: transparent url('images/atabimg.png') no-repeat 0.1em 50%;
-  background-size: cover;
-}
-.km-ios .km-tabstrip .km-button .km-icon {
   opacity: 1;
   background: transparent url('images/itabimg1.png') no-repeat 3px 50%;
   background-size: cover;
 }
-.km-blackberry .km-tabstrip .km-button .km-icon, .km-meego .km-tabstrip .km-button .km-icon {
-  opacity: 0.5;
-  background: transparent url('images/atabimg.png') no-repeat 0.5em 50%;
-  background-size: auto 100%;
-}
-.km-tabstrip .km-button.km-state-active .km-icon {
-  opacity: 1;
-}
-.km-ios .km-tabstrip .km-state-active .km-icon {
+.km-android .km-tabstrip .km-state-active .km-icon {
   background-image: url('images/itabimg.png');
 }
 .km-android .km-tabstrip .km-button:nth-child(1) .km-icon {
-  background-position: -1% 50%;
-}
-.km-android .km-tabstrip .km-button:nth-child(2) .km-icon {
-  background-position: 33% 50%;
-}
-.km-android .km-tabstrip .km-button:nth-child(3) .km-icon {
-  background-position: 67% 50%;
-}
-.km-android .km-tabstrip .km-button:nth-child(4) .km-icon {
-  background-position: 101% 50%;
-}
-.km-ios .km-tabstrip .km-button:nth-child(1) .km-icon {
   background-position: -1.5% 50%;
 }
-.km-ios .km-tabstrip .km-button:nth-child(2) .km-icon {
+.km-android .km-tabstrip .km-button:nth-child(2) .km-icon {
   background-position: 34% 50%;
 }
-.km-ios .km-tabstrip .km-button:nth-child(3) .km-icon {
+.km-android .km-tabstrip .km-button:nth-child(3) .km-icon {
   background-position: 69% 50%;
 }
-.km-ios .km-tabstrip .km-button:nth-child(4) .km-icon {
+.km-android .km-tabstrip .km-button:nth-child(4) .km-icon {
   background-position: 103.5% 50%;
 }
-.km-blackberry .km-tabstrip .km-button:nth-child(1) .km-icon, .km-meego .km-tabstrip .km-button:nth-child(1) .km-icon {
-  background-position: -1% 50%;
-}
-.km-blackberry .km-tabstrip .km-button:nth-child(2) .km-icon, .km-meego .km-tabstrip .km-button:nth-child(2) .km-icon {
-  background-position: 33.5% 50%;
-}
-.km-blackberry .km-tabstrip .km-button:nth-child(3) .km-icon, .km-meego .km-tabstrip .km-button:nth-child(3) .km-icon {
-  background-position: 67% 50%;
-}
-.km-blackberry .km-tabstrip .km-button:nth-child(4) .km-icon, .km-meego .km-tabstrip .km-button:nth-child(4) .km-icon {
-  background-position: 100.5% 50%;
-}
 /* Slider */
-.km-slider {
-  margin: 1em;
-  width: 10em;
-  height: .6em;
-  line-height: .6em;
-  position: relative;
-  padding: .5em .7em;
-  display: inline-block;
-}
-.km-ios .km-slider, .km-meego .km-slider {
-  -webkit-transform: translatez(0);
-}
-.km-slider-container {
-  top: 0;
-  left: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: absolute;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-}
-.km-slider-handle {
+.km-android .km-slider-handle {
   background: linear-gradient(top, #cccccc, #ffffff);
-  top: 0;
-  left: 0;
-  width: 1.25em;
-  height: 1.25em;
-  display: block;
-  position: absolute;
-  -moz-border-radius: 1em;
-  -webkit-border-radius: 1em;
-  border-radius: 1em;
   border: 1px solid #eee;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
   background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #cccccc), color-stop(1, #ffffff));
   background: -moz-linear-gradient(top, #cccccc, #ffffff);
   background: -ms-linear-gradient(top, #cccccc, #ffffff);
   background: -o-linear-gradient(top, #cccccc, #ffffff);
 }
-.km-slider-wrapper {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-}
-.km-slider-background {
-  width: 24em;
-  margin-left: -12em;
+.km-android .km-slider-background {
   background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0.4)) 0 0 no-repeat, linear-gradient(top, #dbdbdb, #ffffff) 12em 0 no-repeat, linear-gradient(top, #2a5db2, #6da9f7) 0 0 no-repeat;
   background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(0, 0, 0, 0.5)), color-stop(0.15, rgba(0, 0, 0, 0)), color-stop(0.9, rgba(0, 0, 0, 0)), color-stop(1, rgba(0, 0, 0, 0.4))) 0 0 no-repeat, -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #dbdbdb), color-stop(1, #ffffff)) 12em 0 no-repeat, -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #2a5db2), color-stop(1, #6da9f7)) 0 0 no-repeat;
   background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0.4)) 0 0 no-repeat, -moz-linear-gradient(top, #dbdbdb, #ffffff) 12em 0 no-repeat, -moz-linear-gradient(top, #2a5db2, #6da9f7) 0 0 no-repeat;
   background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0.4)) 0 0 no-repeat, -ms-linear-gradient(top, #dbdbdb, #ffffff) 12em 0 no-repeat, -ms-linear-gradient(top, #2a5db2, #6da9f7) 0 0 no-repeat;
   background: -o-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0.4)) 0 0 no-repeat, -o-linear-gradient(top, #dbdbdb, #ffffff) 12em 0 no-repeat, -o-linear-gradient(top, #2a5db2, #6da9f7) 0 0 no-repeat;
 }
-.km-android .km-slider {
-  margin: 1.5em;
-  height: 1.2em;
-  line-height: 1.2em;
-  padding: .36em;
-}
-.km-android .km-slider-wrapper, .km-android .km-slider-container {
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
-}
-.km-android .km-slider-handle {
-  background: linear-gradient(top, #f2f2f2, #d0d0d0 20%, #8d8d8d 80%, #d1d1d1);
-  width: .86em;
-  height: 1.7em;
-  border-color: #3c3d3c;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #f2f2f2), color-stop(0.2, #d0d0d0), color-stop(0.8, #8d8d8d), color-stop(1, #d1d1d1));
-  background: -moz-linear-gradient(top, #f2f2f2, #d0d0d0 20%, #8d8d8d 80%, #d1d1d1);
-  background: -ms-linear-gradient(top, #f2f2f2, #d0d0d0 20%, #8d8d8d 80%, #d1d1d1);
-  background: -o-linear-gradient(top, #f2f2f2, #d0d0d0 20%, #8d8d8d 80%, #d1d1d1);
-}
-.km-android .km-slider-background {
-  background: linear-gradient(top, #9b9c9b, #5b5e5b 80%, #6f716f) 12em 0 no-repeat, linear-gradient(top, #ffd300, #ffb700 80%, #ffc600) 0 0 no-repeat;
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #9b9c9b), color-stop(0.8, #5b5e5b), color-stop(1, #6f716f)) 12em 0 no-repeat, -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #ffd300), color-stop(0.8, #ffb700), color-stop(1, #ffc600)) 0 0 no-repeat;
-  background: -moz-linear-gradient(top, #9b9c9b, #5b5e5b 80%, #6f716f) 12em 0 no-repeat, -moz-linear-gradient(top, #ffd300, #ffb700 80%, #ffc600) 0 0 no-repeat;
-  background: -ms-linear-gradient(top, #9b9c9b, #5b5e5b 80%, #6f716f) 12em 0 no-repeat, -ms-linear-gradient(top, #ffd300, #ffb700 80%, #ffc600) 0 0 no-repeat;
-  background: -o-linear-gradient(top, #9b9c9b, #5b5e5b 80%, #6f716f) 12em 0 no-repeat, -o-linear-gradient(top, #ffd300, #ffb700 80%, #ffc600) 0 0 no-repeat;
-}
 /* Scroller */
-.km-touch-scrollbar {
-  position: absolute;
-  visibility: hidden;
-  z-index: 200000;
-  height: .3em;
-  width: .3em;
-  background-color: #333;
-  -moz-transform-origin: 0 0;
-  -webkit-transform-origin: 0 0;
-  -o-transform-origin: 0 0;
-  transform-origin: 0 0;
-  -webkit-transition: opacity 0.3s linear;
-  -moz-transition: opacity 0.3s linear;
-  -o-transition: opacity 0.3s linear;
-  opacity: 0;
-  -moz-border-radius: .4em;
-  -webkit-border-radius: .4em;
-  border-radius: .4em;
-}
-.km-vertical-scrollbar {
-  height: 100%;
-  right: 1px;
-  top: 0;
-}
-.km-horizontal-scrollbar {
-  width: 100%;
-  left: 0;
-  bottom: 1px;
-}
-.km-scroll-container {
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.km-ios .km-scroll-container, .km-meego .km-scroll-container {
-  -webkit-transform: translatez(0);
-}
-/* Navbar */
-.km-leftitem, .km-rightitem {
-  z-index: 1;
-  position: relative;
-  float: right;
-}
-.km-leftitem {
-  float: left;
-}
-.km-leftitem ~ .km-view-title, .km-rightitem ~ .km-view-title {
-  position: absolute;
-  left: 0;
+.km-android .km-touch-scrollbar {
+  background-color: #33b5e5;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
 }
 /* Dialog */
-.km-dialog {
-  position: absolute;
-  left: 420px;
-  top: 240px;
-  min-width: 19em;
-  max-width: 25em;
-  overflow: hidden;
-  -moz-border-radius: 1em;
-  -webkit-border-radius: 1em;
-  border-radius: 1em;
+.km-android .km-dialog {
   background: rgba(10, 25, 65, 0.8);
   border: 2px solid rgba(255, 255, 255, 0.8);
   box-shadow: 3px 3px 5px #111111;
   -webkit-box-shadow: 3px 3px 5px #111111;
 }
-.km-ios .km-dialog-title {
+.km-android .km-dialog-title {
   background: linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
-  position: static;
-  float: none;
-  height: 2.6em;
-  margin-top: -2.6em;
-  font-size: 1.22em;
-  line-height: 3em;
   text-shadow: 0 -1px #333333;
-  -moz-border-radius: 1em;
-  -webkit-border-radius: 1em;
-  border-radius: 1em;
   background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.3)), color-stop(0.6, rgba(255, 255, 255, 0)));
   background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
   background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
   background: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
 }
-.km-dialog:before {
-  content: "\a0";
-  display: block;
-  overflow: visible;
-  width: 100%;
-  height: 3em;
-  opacity: .2;
+.km-android .km-dialog:before {
   background: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22><defs><clipPath id=%22clip%22><rect x=%220%22 y=%220%22 width=%22100%%22 height=%22100%%22 rx=%2210%22 ry=%2210%22/></clipPath></defs><ellipse fill=%22white%22 cx=%2250%%22 cy=%220%22 rx=%2280%%22 ry=%2260%%22 clip-path=%22url(%23clip)%22/></svg>');
 }
-.km-ios .km-dialog-content {
+.km-android .km-dialog-content {
   color: #fff;
-  font-weight: normal;
-  min-height: 2em;
-  text-align: center;
   text-shadow: 0 -1px #333333;
 }
-.km-dialog .km-button {
-  background: linear-gradient(center top, #adb0bf, #6a718b 50%, #434e6c 50%, #59637e);
+.km-android .km-dialog .km-button {
   display: block;
   margin: .4em;
   font-size: 1.3em;
@@ -1479,11 +1529,4 @@ input[type=radio], input[type=checkbox] {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  border: 1px solid #000;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
-  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #adb0bf), color-stop(0.5, #6a718b), color-stop(0.5, #434e6c), color-stop(1, #59637e));
-  background: -moz-linear-gradient(center top, #adb0bf, #6a718b 50%, #434e6c 50%, #59637e);
-  background: -ms-linear-gradient(center top, #adb0bf, #6a718b 50%, #434e6c 50%, #59637e);
-  background: -o-linear-gradient(center top, #adb0bf, #6a718b 50%, #434e6c 50%, #59637e);
 }

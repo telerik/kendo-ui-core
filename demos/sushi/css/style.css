@@ -240,33 +240,11 @@ html
 }
 
 .km-ios .red-button {
-  border-color: #B11C1A #B11C1A #910000;
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(50,50,50,0.5)), color-stop(0.05, rgba(0,0,0,0)), color-stop(0.98, rgba(0,0,0,0)), color-stop(1, rgba(64,94,135,0.5))),
-                    -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0,#D98487), color-stop(0.5,#D4595C), color-stop(0.5,#B11C1A), color-stop(1,#B31B1D));
-  background-image: -moz-linear-gradient(top, rgba(50,50,50,0.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,0.5)),
-                    -moz-linear-gradient(top,#D98487,#D4595C 50%,#B11C1A 50%,#B31B1D);
-  background-image: -ms-linear-gradient(top, rgba(50,50,50,0.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,0.5)),
-                    -ms-linear-gradient(top,#D98487,#D4595C 50%,#B11C1A 50%,#B31B1D);
-  background-image: -o-linear-gradient(top, rgba(50,50,50,0.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,0.5)),
-                    -o-linear-gradient(top,#D98487,#D4595C 50%,#B11C1A 50%,#B31B1D);
-  background-image: linear-gradient(top, rgba(50,50,50,0.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,0.5)),
-                    linear-gradient(top,#D98487,#D4595C 50%,#B11C1A 50%,#B31B1D);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.4);
-  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.4);
+    background-color: #B11C1A;
 }
 
 .km-ios .red-button:active {
-  border-color: #910000 #910000 #710000;
-  background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(50,50,50,0.5)), color-stop(0.05, rgba(0,0,0,0)), color-stop(0.98, rgba(0,0,0,0)), color-stop(1, rgba(64,94,135,0.5))),
-                    -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0,#B96467), color-stop(0.5,#B4393C), color-stop(0.5,#910000), color-stop(1,#B31B1D));
-  background-image: -moz-linear-gradient(top, rgba(50,50,50,0.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,0.5)),
-                    -moz-linear-gradient(top,#B96467,#B4393C 50%,#910000 50%,#B31B1D);
-  background-image: -ms-linear-gradient(top, rgba(50,50,50,0.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,0.5)),
-                    -ms-linear-gradient(top,#D98487,#D4595C 50%,#B11C1A 50%,#B31B1D);
-  background-image: -o-linear-gradient(top, rgba(50,50,50,0.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,0.5)),
-                    -o-linear-gradient(top,#D98487,#D4595C 50%,#B11C1A 50%,#B31B1D);
-  background-image: linear-gradient(top, rgba(50,50,50,0.5), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(64,94,135,0.5)),
-                    linear-gradient(top,#D98487,#D4595C 50%,#B11C1A 50%,#B31B1D);
+    background-color: #910000;
 }
 
 #done-icon, #empty-icon {
