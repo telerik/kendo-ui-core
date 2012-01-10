@@ -40,11 +40,11 @@
                     "url": "listview/index.html"
                 },
                 {
-                    "text": "Data Binding",
+                    "text": "Data binding",
                     "url": "listview/databinding.html"
                 },
                 {
-                    "text": "Custom Templates",
+                    "text": "Custom templates",
                     "url": "listview/templates.html"
                 }
 
@@ -60,7 +60,7 @@
                     "url": "navbar/index.html"
                 },
                 {
-                    "text": "Customizing Appearance",
+                    "text": "Customizing appearance",
                     "url": "navbar/appearance.html"
                 }
             ]
