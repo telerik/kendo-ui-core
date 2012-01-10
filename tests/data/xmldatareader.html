@@ -377,6 +377,23 @@
                 equal(reader.model.fields["bar"].type, "string");
                 equal(typeof reader.model.fields["bar"].field, "function");
             });
+
+            test("returns empty data if source is empty", function() {
+                var reader = new XmlDataReader({
+                    model: {
+                        fields: {
+                            bar: { field: "bar/text()" },
+                            baz: { field: "baz/text()" }
+                        }
+                    },
+                    data: "/root/foo"
+                });
+
+                var result = reader.parse('<root></root>');
+                result = reader.data(result);
+
+                equal(result.length, 0);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

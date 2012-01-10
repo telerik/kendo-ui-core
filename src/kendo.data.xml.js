@@ -49,11 +49,13 @@
 
                     if (that.model && model.fields) {
                         return map(result, function(value) {
-                            record = {};
-                            for (field in model.fields) {
-                                record[field] = model.fields[field].field(value);
+                            if (value) {
+                                record = {};
+                                for (field in model.fields) {
+                                    record[field] = model.fields[field].field(value);
+                                }
+                                return record;
                             }
-                            return record;
                         });
                     }
 
