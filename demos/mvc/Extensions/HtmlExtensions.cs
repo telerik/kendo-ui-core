@@ -15,9 +15,9 @@ namespace Kendo.Extensions
             var selectedClass = viewBag.Suite == suite ? " selected" : "";
 
             return html.Raw(
-                string.Format("<a id='{0}' class='{1}' href='{2}'>{3}</a>",
+                string.Format("<a id=\"{0}\" class=\"{1}\" href=\"{2}\">{3}</a>",
                     suite,
-                    cssClass + selectedClass,
+                    (cssClass + selectedClass).Trim(),
                     Url.Content("~/" + suite),
                     title
                 )
