@@ -255,10 +255,6 @@
 {
     text-decoration: none;
     display: inline-block;
-    font-size: .7em;
-    font-size: .7rem;
-    line-height: 1.6em;
-    line-height: 1rem;
     vertical-align: middle;
     overflow: hidden;
     text-align: center;
@@ -272,10 +268,7 @@
     height: 1.6em;
     width: 1rem;
     height: 1rem;
-    padding: 0;
     text-shadow: none;
-    .border-radius(1.2em);
-    background-clip: padding-box;
 }
 
 .km-detail
@@ -284,8 +277,10 @@
     float: right;
     right: 0;
     top: 0;
-    line-height: 1.4em;
-    line-height: .8rem;
+    width: 1.7em;
+    height: 1.7em;
+    width: 1.1rem;
+    height: 1.1rem;
 }
 
 .km-detail:after,
@@ -355,10 +350,7 @@
     top: -1em;
 }
 
-.km-ios .km-radiogroup,
-.km-android .km-radiogroup,
-.km-meego .km-radiogroup,
-.km-blackberry .km-radiogroup
+.km-root .km-radiogroup
 {
     padding: 0;
     .border-radius(0);
@@ -442,14 +434,13 @@
 {
     padding: 0 .5em;
     .box-flex(1);
-    .border-radius(0);
     position: relative;
     overflow: hidden;
     display: block;
     border-width: 0 0 1px 0;
 }
 
-:-moz-any(.km-toolbar,.km-navbar)
+.km-root div:-moz-any(.km-toolbar,.km-navbar)
 {
     overflow: visible;
 }
@@ -718,8 +709,8 @@
     float: left;
 }
 
-.km-leftitem ~ .km-view-title,
-.km-rightitem ~ .km-view-title
+.km-root .km-leftitem ~ .km-view-title,
+.km-root .km-rightitem ~ .km-view-title
 {
     position: absolute;
     left: 0;

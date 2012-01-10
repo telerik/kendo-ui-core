@@ -4,59 +4,118 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.draganddrop.js"></script>
-        <style>
-            .draggable
-            {
-                border: 1px solid red;
-                background: blue;
-                width: 100px;
-                height: 100px;
-            }
-            .dropTarget
-            {
-                border: 1px solid red;
-                background: red;
-                width: 100px;
-                height: 100px;
-            }
-        </style>
     </head>
     <body>
-        <div class="draggable first"><span>drag me</span><span>(group = 1)</span></div>
-        <div class="dropTarget first">drop here #1 (group = 1)</div>
-        <div class="dropTarget first">drop here #2 (group = 1)</div>
-        <script>
-            $(document).ready(function() {
-                $(".draggable.first").kendoDraggable( {
-                    group: 1,
-                    filter: "span:first",
-                    hint: function() {
-                        return $(".draggable span:first").clone().css("background", "red").css("white-space", "nowrap");
-                    },
-                    drag: function() {
-                       // console.log("drag");
-                    },
-                    dragstart: function() {
-                        console.log("dragstart");
-                    },
-                    dragend: function() {
-                        console.log("dragend");
-                    }
-                });
+    <div id="draggable"></div>
+    <div id="droptarget">Start dragging.</div>
 
-                $(".dropTarget.first").kendoDropTarget( {
-                    group: 1,
-                    dragenter: function() {
-                        console.log("dragenter");
-                    },
-                    dragleave: function() {
-                        console.log("dragleave");
-                    },
-                    drop: function() {
-                        console.log("drop");
-                    }
-                });
+    <script>
+        function draggableOnDragStart(e) {
+            $("#draggable").addClass("hollow");
+
+            $("#droptarget").text("(Drop here)");
+        }
+
+        function droptargetOnDragEnter(e) {
+            $("#droptarget").text("Now you can drop it.");
+        }
+
+        function droptargetOnDragLeave(e) {
+            $("#droptarget").text("(Drop here)");
+        }
+
+        function droptargetOnDrop(e) {
+            $("#droptarget").text("You did great!");
+            $("#draggable").removeClass("hollow");
+        }
+
+        function draggableOnDragEnd(e) {
+            var draggable = $("#draggable");
+
+            if (!draggable.data("kendoDraggable").dropped) {
+                // drag ended outside of any droptarget
+                $("#droptarget").text("Try again!");
+            }
+
+            draggable.removeClass("hollow");
+        }
+
+        $(document).ready(function() {
+            $("#draggable").kendoDraggable({
+                hint: function() {
+                    return $("#draggable").clone();
+                },
+                dragstart: draggableOnDragStart,
+                dragend: draggableOnDragEnd
             });
-        </script>
+
+            $("#droptarget").kendoDropTarget({
+                dragenter: droptargetOnDragEnter,
+                dragleave: droptargetOnDragLeave,
+                drop: droptargetOnDrop
+            });
+        });
+    </script>
+
+    <style scoped>
+        #draggable
+        {
+            cursor: pointer;
+            position: absolute;
+            top: 80px;
+            left: 30px;
+            border: 1px solid #ff8000;
+            width: 78px;
+            height: 78px;
+            border-radius: 37px;
+            box-shadow: 2px 0 10px #9d9d9d;
+            background: #ffcc00 url(../../content/web/dragdrop/draggable.png) 50% 50% no-repeat;
+            background: url(../../content/web/dragdrop/draggable.png) 50% 50% no-repeat, -moz-linear-gradient(top, #ffcc00 0%, #ff8000 100%);
+            background: url(../../content/web/dragdrop/draggable.png) 50% 50% no-repeat, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffcc00), color-stop(100%,#ff8000));
+            background: url(../../content/web/dragdrop/draggable.png) 50% 50% no-repeat, -webkit-linear-gradient(top, #ffcc00 0%,#ff8000 100%);
+            background: url(../../content/web/dragdrop/draggable.png) 50% 50% no-repeat, -o-linear-gradient(top, #ffcc00 0%,#ff8000 100%);
+            background: url(../../content/web/dragdrop/draggable.png) 50% 50% no-repeat, -ms-linear-gradient(top, #ffcc00 0%,#ff8000 100%);
+            background: url(../../content/web/dragdrop/draggable.png) 50% 50% no-repeat, linear-gradient(top, #ffcc00 0%,#ff8000 100%);
+        }
+
+        #draggable.hollow
+        {
+            cursor: default;
+            background: #ececec;
+            border-color: #cbcbcb;
+        }
+
+        #droptarget
+        {
+            border: 1px solid #959595;
+            height: 198px;
+            font-size: 36px;
+            border-radius: 37px;
+            text-align: center;
+            line-height: 198px;
+            color: #a1a1a1;
+            text-shadow: 0 1px 1px #fff;
+            margin: 0 0 30px 250px;
+            cursor: default;
+
+            background: #dddddd;
+            background: -moz-linear-gradient(top, #dddddd 0%, #c1c1c1 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(100%,#c1c1c1));
+            background: -webkit-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+            background: -o-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+            background: -ms-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+            background: linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+        }
+
+        #example
+        {
+            background: url(../../content/web/dragdrop/drag-clue.png) no-repeat 140px 102px;
+        }
+
+        #exampleTitle
+        {
+            color: #000;
+        }
+    </style>
     </body>
 </html>
