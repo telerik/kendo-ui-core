@@ -1416,29 +1416,86 @@
                 }
             }
 
-            if (that.options.batch) {
-                if (created.length) {
-                    that.transport.create({ data: { models: toJSON(created) } });
-                }
-                if (updated.length) {
-                    that.transport.update({ data: { models: toJSON(updated) } });
-                }
-                if (destroyed.length) {
-                    that.transport.destroy({ data: { models: toJSON(destroyed) } });
-                }
+            var promises = that._send("create", created);
+
+            promises.push.apply(promises ,that._send("update", updated));
+            promises.push.apply(promises ,that._send("destroy", destroyed));
+
+            $.when.apply(null, promises)
+                .then(function() {
+                    var idx,
+                        length;
+
+                    for (idx = 0, length = arguments.length; idx < length; idx++){
+                        that._accept(arguments[idx]);
+                    }
+
+                });
+
+        },
+
+        _accept: function(result) {
+            var that = this,
+                models = result.models,
+                response = result.response || {},
+                idx = 0,
+                length;
+
+            response = that.reader.data(that.reader.parse(response));
+
+            if (!$.isArray(response)) {
+                response = [response];
+            }
+
+            if (result.type === "destroy") {
+                that._destroyed = [];
             } else {
-                for (idx = 0, length = created.length; idx < length; idx++) {
-                    that.transport.create({ data: created[idx].toJSON() });
-                }
-
-                for (idx = 0, length = updated.length; idx < length; idx++) {
-                    that.transport.update({ data: updated[idx].toJSON() });
-                }
-
-                for (idx = 0, length = destroyed.length; idx < length; idx++) {
-                    that.transport.destroy({ data: destroyed[idx].toJSON() });
+                for (idx = 0, length = models.length; idx < length; idx++) {
+                    models[idx].accept(response[idx]);
                 }
             }
+        },
+
+        _promise: function(data, models, type) {
+            var that = this,
+                transport = that.transport;
+
+            return $.Deferred(function(deferred) {
+                transport[type].call(transport, extend({
+                        success: function(response) {
+                            deferred.resolve({
+                                response: response,
+                                models: models,
+                                type: type
+                            });
+                        },
+                        error: function(response) {
+                            deferred.reject(response);
+                            that.trigger(ERROR, response);
+                        }
+                    }, data)
+                );
+            }).promise();
+        },
+
+        _send: function(method, data) {
+            var that = this,
+                idx,
+                length,
+                promises = [],
+                transport = that.transport;
+
+            if (that.options.batch) {
+                if (data.length) {
+                    promises.push(that._promise( { data: { models: toJSON(data) } }, data , method));
+                }
+            } else {
+                for (idx = 0, length = data.length; idx < length; idx++) {
+                    promises.push(that._promise( { data: data[idx].toJSON() }, [ data[idx] ], method));
+                }
+            }
+
+            return promises;
         },
 
         /**

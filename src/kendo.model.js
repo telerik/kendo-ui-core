@@ -92,11 +92,8 @@
             that.uid = kendo.guid();
 
             that._accessors = {};
-            that._changes = {};
 
             that._modified = false;
-
-            that.pristine = extend(true, {}, data);
 
             that.id = that.get(that.idField);
         },
@@ -161,7 +158,6 @@
 
                 if (!equal(value, accessor.get(that))) {
                     accessor.set(that, value);
-                    that._changes[field] = value;
 
                     that._modified = modified = true;
                 }
@@ -172,22 +168,13 @@
             }
         },
 
-        reset: function() {
+        accept: function(data) {
             var that = this;
 
-            extend(that.data, that.pristine);
+            extend(that, data);
+
+            that.id = that.get(that.idField);
             that._modified = false;
-        },
-
-        _accept: function(data) {
-            var that = this;
-
-            that._isNew = false;
-            that._modified = false;
-
-            extend(that.data, data);
-
-            that.pristine = extend(true, {}, that.data);
         },
 
         hasChanges: function() {
@@ -196,13 +183,6 @@
 
         isNew: function() {
             return this.id === this._defaultId;
-        },
-
-        changes: function() {
-            if ($.isEmptyObject(this._changes)) {
-                return null;
-            }
-            return this._changes;
         }
     });
 
