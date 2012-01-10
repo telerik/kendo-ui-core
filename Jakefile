@@ -116,12 +116,12 @@ task("default", ["clean", "demos:debug"], function() {
 
 desc("Build bundles");
 task("bundles", ["clean", "themes", "merge-scripts"], function() {
-    bundles.buildAllBundles(complete);
+    bundles.buildAllBundles(version(), complete);
 }, true);
 
 desc("Deploy scripts to CDN");
 task("cdn", ["clean", "themes", "merge-scripts"], function() {
-    bundles.buildBundle(CDN_BUNDLE, function() {
+    bundles.buildBundle(CDN_BUNDLE, version(), function() {
         kendoBuild.msBuild(CDN_PROJECT, ["/p:Version=" + version(), "/p:BundleRoot=" + CDN_BUNDLE_PATH]);
     });
 }, true);
