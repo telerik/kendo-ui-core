@@ -277,6 +277,7 @@
             var that = this;
 
             that.options = options || {};
+            that.layouts = {};
             kendo.Observable.fn.init.call(that, that.options);
             that.element = element ? $(element) : $(document.body);
 
@@ -349,7 +350,6 @@
 
         _setupLayouts: function(element) {
             var that = this;
-            that.layouts = {};
             element.find(kendo.roleSelector("layout")).each(function() {
                 var layout = $(this);
                 that.layouts[layout.data("id")] = new Layout(layout);
