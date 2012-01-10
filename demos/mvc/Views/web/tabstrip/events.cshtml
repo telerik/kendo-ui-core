@@ -47,21 +47,21 @@
             $(document).ready(function() {
                 function onSelect(e) {
                     kendoConsole.log("Selected: " + $(e.item).find("> .k-link").text());
-                };
+                }
 
                 function onContentLoad(e) {
                     kendoConsole.log("Content loaded in <b>"+ $(e.item).find("> .k-link").text() + "</b> and starts with <b>" + $(e.contentElement).text().substr(0, 20) + "...</b>");
-                };
+                }
 
                 function onError(e) {
                     kendoConsole.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
-                };
+                }
 
                 $("#tabstrip").kendoTabStrip({
                     select: onSelect,
                     contentLoad: onContentLoad,
                     error: onError,
-                    contentUrls: [ , , , , , "ajax/ajaxContent1.html", "error.html" ]
+                    contentUrls: [ , , , , , "../../content/web/tabstrip/ajax/ajaxContent1.html", "error.html" ]
                 });
             });
         </script>
