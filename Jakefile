@@ -2,7 +2,6 @@
 var path = require("path"),
     fs = require("fs"),
     jsdoctoolkit = require("build/node-jsdoc-toolkit/app/nodemodule").jsdoctoolkit,
-    config = require("build/config"),
     bundles = require("build/bundles"),
     kendoBuild = require("build/kendo-build"),
     copyDir = kendoBuild.copyDirSyncRecursive,
@@ -110,7 +109,7 @@ namespace("demos", function() {
     }, true);
 });
 
-desc("Default task");
+desc("Build debug demos site");
 task("default", ["clean", "demos:debug"], function() {
 });
 
@@ -146,6 +145,6 @@ function deployDemos(outputPath, cdnRoot, onSuccess) {
 }
 
 function version() {
-    var v = JSON.parse(kendoBuild.readText("VERSION.json"));
+    var v = JSON.parse(kendoBuild.readText("VERSION"));
     return kendoBuild.buildVersion(v.year, v.release);
 }
