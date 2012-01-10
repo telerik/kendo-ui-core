@@ -62,8 +62,8 @@
     background: #d9d9d9;
 }
 
-.km-meego .km-switch-handle:after,
-.km-meego .km-switch-handle:before
+.km-meego .km-switch-label-on,
+.km-meego .km-switch-label-off
 {
     display: none;
 }
@@ -163,34 +163,14 @@
 {
     -webkit-transform: translatez(0);
 }
-{
-    -webkit-transform: translatez(0);
-}
 
 .km-meego .km-tabstrip .km-button .km-icon
 {
-    opacity: 0.5;
-    background: transparent url('images/atabimg.png') no-repeat .5em 50%;
-    background-size: auto 100%;
+    margin: .3em auto;
+    background: #444 linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,0));
 }
 
-.km-meego .km-tabstrip .km-button:nth-child(1) .km-icon
+.km-meego .km-tabstrip .km-state-active .km-icon
 {
-    background-position: -1% 50%;
+    background: linear-gradient(top, #bCe4ff 0, #3F99D2 50%, #53BFE5 100%);
 }
-
-.km-meego .km-tabstrip .km-button:nth-child(2) .km-icon
-{
-    background-position: 33.5% 50%;
-}
-
-.km-meego .km-tabstrip .km-button:nth-child(3) .km-icon
-{
-    background-position: 67% 50%;
-}
-
-.km-meego .km-tabstrip .km-button:nth-child(4) .km-icon
-{
-    background-position: 100.5% 50%;
-}
-
