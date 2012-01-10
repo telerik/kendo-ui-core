@@ -67,6 +67,21 @@
                 equal(result.$callback, "callback");
             });
 
+            test("parameterMap does not add $callback when dataType is not jsonp", function() {
+                var dataSource = new DataSource({
+                    type: "odata",
+                    transport: {
+                        read: {
+                            url: "foo",
+                            dataType: "json"
+                        }
+                    }
+                });
+
+                var result = dataSource.transport.parameterMap(null, "read");
+                ok(!result.hasOwnProperty("$callback"), "Callback is not set");
+            });
+
             test("parameterMap adds $skip when skip is specified", function() {
                 var result = parameterMap({ skip: 1 });
                 equal(result.$skip, 1);
