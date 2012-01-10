@@ -12,78 +12,82 @@
         <span class="exampleIcon @ViewBag.CurrentWidget.SpriteCssClass"></span>
         @ViewBag.CurrentExample.Text
     </h1>
+
     <div id="exampleWrap">
         <script>preventFOUC()</script>
-        <div id="example" class="k-content">
+
         @if (ViewBag.suite == "mobile") {
+        <div id="example" class="k-content">
             <div id="mobile-application-container">
-            @RenderBody()
+                @RenderBody()
             </div>
             @RenderSection("ExampleFooter", false)
+        </div>
         } else {
             @RenderBody()
         }
-        </div>
     </div>
 
     @if (ViewBag.ShowCodeStrip == true)
     {
-    <div id="codeStrip">
-        <ul>
-            <li class="k-state-active">Description</li>
-            <li>View Code</li>
+        <div id="codeStrip">
+            <ul>
+                <li class="k-state-active">Description</li>
+                <li>View Code</li>
 
-            @if (ViewBag.ConfigurationDocPath != null)
-            {
-                <li>Configuration</li>
-            }
+                @if (ViewBag.ConfigurationDocPath != null)
+                {
+                    <li>Configuration</li>
+                }
 
-            @if (ViewBag.MethodsDocPath != null)
-            {
-                <li>Methods</li>
-            }
+                @if (ViewBag.MethodsDocPath != null)
+                {
+                    <li>Methods</li>
+                }
 
-            @if (ViewBag.EventsDocPath != null)
-            {
-                <li>Events</li>
-            }
-        </ul>
-        <div class="description">
-            @Html.Raw(ViewBag.Description)
-            @RenderSection("Description", false)
+                @if (ViewBag.EventsDocPath != null)
+                {
+                    <li>Events</li>
+                }
+            </ul>
+            <div class="description">
+                @Html.Raw(ViewBag.Description)
+                @RenderSection("Description", false)
+            </div>
         </div>
-    </div>
+
+        <script>
+            $("#codeStrip").kendoTabStrip({
+                contentUrls: [null,
+                    "@Url.RouteUrl("Source", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })"
+                    @if (ViewBag.ConfigurationDocPath != null)
+                    {
+                        <text>
+                        ,"@Url.ContentOrEmpty((string) ViewBag.ConfigurationDocPath)"
+                        </text>
+                    }
+                    @if (ViewBag.MethodsDocPath != null)
+                    {
+                        <text>
+                        ,"@Url.ContentOrEmpty((string) ViewBag.MethodsDocPath)"
+                        </text>
+                    }
+                    @if (ViewBag.EventsDocPath != null)
+                    {
+                        <text>
+                        ,"@Url.ContentOrEmpty((string) ViewBag.EventsDocPath)"
+                        </text>
+                    }
+                ],
+                contentLoad: function() {
+                    prettyPrint();
+                }
+            });
+        </script>
     }
 </div>
 
 <script>
-    $("#codeStrip").kendoTabStrip({
-        contentUrls: [null,
-            "@Url.RouteUrl("Source", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })"
-            @if (ViewBag.ConfigurationDocPath != null)
-            {
-                <text>
-                ,"@Url.ContentOrEmpty((string) ViewBag.ConfigurationDocPath)"
-                </text>
-            }
-            @if (ViewBag.MethodsDocPath != null)
-            {
-                <text>
-                ,"@Url.ContentOrEmpty((string) ViewBag.MethodsDocPath)"
-                </text>
-            }
-            @if (ViewBag.EventsDocPath != null)
-            {
-                <text>
-                ,"@Url.ContentOrEmpty((string) ViewBag.EventsDocPath)"
-                </text>
-            }
-        ],
-        contentLoad: function() {
-            prettyPrint();
-        }
-    });
-
     setTimeout(function(){ prettyPrint(); }, 100);
 
     document.title = "@ViewBag.Title";
@@ -93,11 +97,9 @@
         <text>
             kendo.history.stop();
 
-            window.kendoMobileApplication = new kendo.mobile.Application( $("#mobile-application-container"));
-            $(function() {
-                applyCurrentMobileOS();
-            })
+            window.kendoMobileApplication = new kendo.mobile.Application($("#mobile-application-container"));
 
+            applyCurrentMobileOS("#mobile-application-container");
         </text>
     }
 </script>

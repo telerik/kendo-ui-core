@@ -57,8 +57,11 @@
             expandMode: "single"
         });
 
-        initializeThemeChooser();
-        initializeMobileOSChooser();
+        $(".themeChooser").themeChooser();
+
+        $("#deviceChooser").mobileOsChooser({
+            container: "#mobile-application-container"
+        });
     </script>
 </body>
 </html>
