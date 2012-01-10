@@ -272,6 +272,10 @@ function msBuild(project, params, onSuccess, onError) {
         sys.print('stderr: ' + data);
     });
 
+    build.stdout.on('data', function (data) {
+        sys.print(data);
+    });
+
     build.on('exit', function (code) {
         if (code !== 0) {
             console.log("Build error: " + code);
@@ -298,6 +302,7 @@ exports.hasBOM = hasBOM;
 exports.merge = merge;
 exports.minifyJs = minifyJs;
 exports.mkdir = mkdir;
+exports.msBuild = msBuild;
 exports.processFilesRecursive = processFilesRecursive;
 exports.readText = readText;
 exports.rmdirSyncRecursive = rmdirSyncRecursive;
