@@ -337,6 +337,7 @@
 
                 equal(transport.calls("destroy"), 1);
             });
+
             test("sync passes array of destroyed models to transport when batch is true", function() {
                 var transport = stub({}, "destroy");
 
@@ -353,6 +354,7 @@
                 equal(models[0].id, 1);
                 equal(models[1].id, 2);
             });
+
             test("error event is triggers if sync request fails", function() {
                 var transport = stub({},  {
                     create: function(options) {

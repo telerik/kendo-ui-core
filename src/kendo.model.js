@@ -101,6 +101,14 @@
             that.id = that.get(that.idField);
         },
 
+        toJSON: function() {
+            var result = ObservableObject.fn.toJSON.call(this);
+
+            delete result.uid;
+
+            return result;
+        },
+
         idField: "id",
 
         _accessor: function(field) {

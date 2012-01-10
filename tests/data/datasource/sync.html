@@ -16,24 +16,15 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var DataSource = kendo.data.DataSource,
-                dataSource,
-                MyModel = kendo.data.Model.define( { id: "id" } );
+            var Model = kendo.data.Model, DataSource = kendo.data.DataSource, dataSource;
 
-            function setup(transport, data, options) {
-                options = $.extend(true, {
-                    batch: true,
+            function setup(options) {
+                dataSource = new DataSource($.extend({
+                    data: [{ id: 1, foo: "foo" }],
                     schema: {
-                        model: kendo.data.Model.define()
-                    },
-                    transport: $.extend({
-                        read: function(options) {
-                           options.success(data || [{ id: 1, foo: "foo" }]);
-                        }
-                    }, transport)
-                }, options);
-
-                dataSource = new DataSource(options);
+                        model: Model
+                    }
+                }, options));
 
                 dataSource.read();
             }
@@ -43,91 +34,23 @@
                 setup: setup
             });
 
-            test("datasource propagates sendAllFields to modelset", function() {
-                setup({}, null, { sendAllFields: true });
-
-                ok(dataSource._set.options.sendAllFields, true);
-            });
-
-            test("datasource propagates batch to modelset", function() {
-                setup({}, null, { batch: true });
-
-                ok(dataSource._set.options.batch, true);
-            });
-
-            test("datasource propagates reader to modelset", function() {
-                setup({}, null, { batch: true });
-
-                ok(dataSource._set.options.reader, dataSource.reader);
-            });
-
-            test("datasource propagates transport to modelset", function() {
-                setup({}, null, { batch: true });
-
-                ok(dataSource._set.options.transport, dataSource.transport);
-            });
-
-            test("datasource updates the modelset data after read", function() {
-                var set = stub(dataSource._set, "data");
-
-                dataSource.read();
-
-                equal(set.calls("data"), 1);
-            });
-
-            test("change is raised after sync", function() {
-                var transport = stub({}, { update: function(options) {
-                            options.success();
-                        }
-                    }),
-                    called = false;
-
-                setup(transport, [ { id: 1 }, { id: 2 }] );
-
-                dataSource.bind("change", function() {
-                    called = true;
-                });
-
-                var model1 = dataSource.get(1);
-
-                model1.set( { foo: "foo" } );
-
-                dataSource.sync();
-
-                ok(called);
-            });
-
-            test("change is raised after new model is added to the set", function() {
-                var action;
-
-                setup();
-
+            test("change is raised after new model is added to the set", 1, function() {
                 dataSource.bind("change", function(e) {
-                    action = e.action;
+                    equal(e.action, "add");
                 });
 
                 dataSource.add({});
-
-               equal(action, "add");
             });
 
-            test("change is raised after model is deleted from the set", function() {
-                var action;
-
-                setup();
-
+            test("change is raised after model is deleted from the set", 1, function() {
                 dataSource.bind("change", function(e) {
-                    action = e.action;
+                    equal(e.action, "remove");
                 });
 
                 dataSource.remove(dataSource.get(1));
-
-                equal(action, "remove");
             });
 
             test("data is processed after model changes are reverted", 2, function() {
-                setup();
-
                 dataSource.filter({ field: "id", operator: "ge", value: 1 });
 
                 dataSource.add({ id: 3 });
@@ -141,8 +64,6 @@
             });
 
             test("data is processed after model is added", function() {
-                setup();
-
                 dataSource.filter({ field: "id", operator: "ge", value: 1 });
 
                 dataSource.bind("change", function() {
@@ -151,6 +72,308 @@
                 });
 
                 dataSource.add({ id: 3 });
+            });
+
+            test("add syncs when autoSync is true", function() {
+                setup({ autoSync: true });
+
+                stub(dataSource, "sync");
+
+                dataSource.add({ foo: "bar" });
+
+                equal(dataSource.calls("sync"), 1);
+            });
+
+            test("remove syncs when autoSync is true", function() {
+                setup({ autoSync: true });
+                stub(dataSource, "sync");
+                dataSource.remove(dataSource.get(1));
+
+                equal(dataSource.calls("sync"), 1);
+            });
+
+            test("add does not sync when autoSync is false", function() {
+                stub(dataSource, "sync");
+                dataSource.add({ foo: "bar" });
+
+                equal(dataSource.calls("sync"), 0);
+            });
+
+            test("remove does not sync when autoSync is false", function() {
+                stub(dataSource, "sync");
+
+                dataSource.remove(dataSource.get(1));
+
+                equal(dataSource.calls("sync"), 0);
+            });
+
+            test("sync calls the create method of the transport", function() {
+                stub(dataSource.transport, "create");
+
+                dataSource.add(new Model( { foo: "bar" }));
+                dataSource.sync();
+
+                equal(dataSource.transport.calls("create"), 1);
+            });
+
+            test("sync does not call the create method of the transport if there are no new models", function() {
+                stub(dataSource.transport, "create");
+
+                dataSource.sync();
+
+                equal(dataSource.transport.calls("create"), 0);
+            });
+
+            test("sync sends the data of the created model to the create method of the transport", function() {
+                stub(dataSource.transport, "create");
+
+                dataSource.add(new Model( { foo: "bar" }));
+                dataSource.sync();
+
+                equal(dataSource.transport.args("create")[0].data.foo, "bar");
+            });
+
+            test("sync sends the data of all created models to the create method of the transport", function() {
+                stub(dataSource.transport, "create");
+
+                dataSource.add(new Model( { foo: "bar" }));
+                dataSource.add(new Model( { foo: "baz" }));
+                dataSource.sync();
+
+                equal(dataSource.transport.calls("create"), 2);
+                equal(dataSource.transport.args("create", 0)[0].data.foo, "bar");
+                equal(dataSource.transport.args("create", 1)[0].data.foo, "baz");
+            });
+
+            test("sync calls the update method of the transport if there are updated models", function() {
+                stub(dataSource.transport, "update");
+
+                var model = dataSource.get(1);
+
+                model.set({ foo: "bar" });
+                dataSource.sync();
+
+                equal(dataSource.transport.calls("update"), 1);
+            });
+
+            test("sync does not call the update method of the transport if there are no updated models", function() {
+                stub(dataSource.transport, "update");
+
+                dataSource.sync();
+
+                equal(dataSource.transport.calls("update"), 0);
+            });
+
+            test("sync sends all updated models to the create method of the transport", function() {
+                setup({ data: [ { id:1 }, { id: 2}] });
+
+                stub(dataSource.transport, "update");
+
+                var model = dataSource.get(1);
+                model.set({ foo: "bar" });
+                model = dataSource.get(2);
+                model.set({ foo: "baz" });
+                dataSource.sync();
+
+                equal(dataSource.transport.calls("update"), 2);
+                equal(dataSource.transport.args("update", 0)[0].data.foo, "bar");
+                equal(dataSource.transport.args("update", 0)[0].data.id, 1);
+                equal(dataSource.transport.args("update", 1)[0].data.id, 2);
+                equal(dataSource.transport.args("update", 1)[0].data.foo, "baz");
+            });
+
+            test("sync calls the destroy method of the transport if there are destroyed models", function() {
+                stub(dataSource.transport, "destroy");
+
+                var model = dataSource.get(1);
+                dataSource.remove(model);
+                dataSource.sync();
+
+                equal(dataSource.transport.calls("destroy"), 1);
+            });
+
+            test("sync does not call the destroy method of the transport if a new model is destroyed", function() {
+                stub(dataSource.transport, "destroy");
+
+                var model = new Model();
+                dataSource.add(model);
+                dataSource.remove(model);
+                dataSource.sync();
+
+                equal(dataSource.transport.calls("destroy"), 0);
+            });
+
+            test("sync sends all destroyed models to the destroy method of the transport", function() {
+                setup({ data: [ { id:1 }, { id: 2}] });
+                stub(dataSource.transport, "destroy");
+
+                var model = dataSource.get(1);
+                dataSource.remove(model);
+                model = dataSource.get(2);
+                dataSource.remove(model);
+                dataSource.sync();
+
+                equal(dataSource.transport.calls("destroy"), 2);
+                equal(dataSource.transport.args("destroy", 0)[0].data.id, 1);
+                equal(dataSource.transport.args("destroy", 1)[0].data.id, 2);
+            });
+
+            test("sync does not send the automatically generated id of new models", function() {
+                stub(dataSource.transport, "create");
+
+                var model = new Model();
+                model.set( { foo: "bar" });
+                dataSource.add(model);
+                dataSource.sync();
+
+                equal(dataSource.transport.args("create", 0)[0].data.uid, undefined);
+            });
+
+            test("sync does not send the automatically generated id of updated models", function() {
+                stub(dataSource.transport, "update");
+
+                dataSource.get(1).set("foo", "bar");
+                dataSource.sync();
+
+                equal(dataSource.transport.args("update", 0)[0].data.uid, undefined);
+            });
+
+            test("sync does not send the automatically generated id of destroyed models", function() {
+                stub(dataSource.transport, "destroy");
+
+                dataSource.remove(dataSource.get(1));
+                dataSource.sync();
+
+                equal(dataSource.transport.args("destroy", 0)[0].data.uid, undefined);
+            });
+
+            test("sync calls the create method of the transport only once when batch is true", function() {
+                setup({ batch: true });
+
+                stub(dataSource.transport, "create");
+
+                dataSource.add(new Model());
+                dataSource.add(new Model());
+                dataSource.sync();
+
+                equal(dataSource.transport.calls("create"), 1);
+            });
+
+            test("sync passes array of created models to transport when batch is true", function() {
+                setup({ batch: true });
+
+                stub(dataSource.transport, "create");
+
+                dataSource.add(new Model({foo: "foo"}));
+                dataSource.add(new Model({foo: "bar"}));
+                dataSource.sync();
+
+                var models = dataSource.transport.args("create")[0].data.models;
+
+                ok($.isArray(models));
+                equal(models.length, 2);
+                equal(models[0].foo, "foo");
+                equal(models[1].foo, "bar");
+            });
+
+            test("sync does not send the uid of new models when batch is true", function() {
+                setup({ batch: true });
+
+                stub(dataSource.transport, "create");
+
+                dataSource.add(new Model({foo: "bar"}));
+                dataSource.sync();
+
+                var models = dataSource.transport.args("create")[0].data.models;
+
+                equal(models[0].uid, undefined);
+            });
+
+            test("sync calls the update method of the transport only once when batch is true", function() {
+                setup({ batch: true, data: [ { id: 1 }, { id: 2 }] });
+
+                stub(dataSource.transport, "update");
+
+                var model = dataSource.get(1);
+                model.set({ foo: "foo" });
+                model = dataSource.get(2);
+                model.set({ foo: "bar" });
+                dataSource.sync();
+
+                equal(dataSource.transport.calls("update"), 1);
+            });
+
+            test("sync passes array of updated models to transport when batch is true", function() {
+                setup({ batch: true, data: [ { id: 1 }, { id: 2 }] });
+
+                stub(dataSource.transport, "update");
+
+                var model = dataSource.get(1);
+                model.set({ foo: "foo" });
+                model = dataSource.get(2);
+                model.set({ foo: "bar" });
+                dataSource.sync();
+
+                var models = dataSource.transport.args("update")[0].data.models;
+                ok($.isArray(models));
+                equal(models.length, 2);
+                equal(models[0].foo, "foo");
+                equal(models[1].foo, "bar");
+            });
+
+            test("sync does not send the uid of updated models when batch is true", function() {
+                setup({ batch: true });
+
+                stub(dataSource.transport, "update");
+
+                dataSource.get(1).set("foo", "bar");
+                dataSource.sync();
+
+                var models = dataSource.transport.args("update")[0].data.models;
+
+                equal(models[0].uid, undefined);
+            });
+
+            test("sync calls the destroy method of the transport only once when batch is true", function() {
+                setup({ batch: true, data: [ { id: 1 }, { id: 2 }] });
+
+                stub(dataSource.transport, "destroy");
+
+                dataSource.remove(dataSource.get(1));
+                dataSource.remove(dataSource.get(2));
+                dataSource.sync();
+
+                equal(dataSource.transport.calls("destroy"), 1);
+            });
+
+            test("sync passes array of destroyed models to transport when batch is true", function() {
+                setup({ batch: true, data: [ { id: 1 }, { id: 2 }] });
+
+                stub(dataSource.transport, "destroy");
+
+                dataSource.remove(dataSource.get(1));
+                dataSource.remove(dataSource.get(2));
+                dataSource.sync();
+
+
+                var models = dataSource.transport.args("destroy")[0].data.models;
+                ok($.isArray(models));
+                equal(models.length, 2);
+                equal(models[0].id, 1);
+                equal(models[1].id, 2);
+            });
+
+            test("sync does not send the uid of destroyed models when batch is true", function() {
+                setup({ batch: true });
+
+                stub(dataSource.transport, "destroy");
+
+                dataSource.remove(dataSource.get(1));
+                dataSource.sync();
+
+                var models = dataSource.transport.args("destroy")[0].data.models;
+
+                equal(models[0].uid, undefined);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

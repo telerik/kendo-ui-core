@@ -232,6 +232,7 @@
 
         slice: slice,
 
+
         splice: function(index, howMany, item) {
             var result = splice.apply(this, arguments);
 
@@ -309,6 +310,18 @@
 
                 that[field] = member;
             }
+        },
+
+        toJSON: function() {
+            var result = {}, field;
+
+            for (field in this) {
+                if (field.charAt(0) !== "_") {
+                    result[field] = this[field];
+                }
+            }
+
+            return result;
         },
 
         get: function(field) {
@@ -840,6 +853,16 @@
         }
     };
 
+    function toJSON(array) {
+        var idx, length = array.length, result = new Array(length);
+
+        for (idx = 0; idx < length; idx++) {
+            result[idx] = array[idx].toJSON();
+        }
+
+        return result;
+    }
+
     function process(data, options) {
         var query = new Query(data),
             options = options || {},
@@ -1270,6 +1293,7 @@
                 _ranges: [],
                 _view: [],
                 _pristine: [],
+                _destroyed: [],
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
                 _sort: normalizeSort(options.sort),
@@ -1376,7 +1400,45 @@
          * Synchronizes changes through the transport.
          */
         sync: function() {
-            this._set.sync();
+            var that = this,
+                idx,
+                length,
+                created = [],
+                updated = [],
+                destroyed = that._destroyed,
+                data = that._data;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].isNew()) {
+                    created.push(data[idx]);
+                } else if (data[idx].hasChanges()) {
+                    updated.push(data[idx]);
+                }
+            }
+
+            if (that.options.batch) {
+                if (created.length) {
+                    that.transport.create({ data: { models: toJSON(created) } });
+                }
+                if (updated.length) {
+                    that.transport.update({ data: { models: toJSON(updated) } });
+                }
+                if (destroyed.length) {
+                    that.transport.destroy({ data: { models: toJSON(destroyed) } });
+                }
+            } else {
+                for (idx = 0, length = created.length; idx < length; idx++) {
+                    that.transport.create({ data: created[idx].toJSON() });
+                }
+
+                for (idx = 0, length = updated.length; idx < length; idx++) {
+                    that.transport.update({ data: updated[idx].toJSON() });
+                }
+
+                for (idx = 0, length = destroyed.length; idx < length; idx++) {
+                    that.transport.destroy({ data: destroyed[idx].toJSON() });
+                }
+            }
         },
 
         /**
@@ -1412,14 +1474,9 @@
          */
         cancelChanges : function() {
             var that = this;
-            that._data = new ObservableArray(that._pristine, that.reader.model);
-            that._data.bind(CHANGE, function(e) {
-                that._total = that.reader.total(that._pristine);
-                that._process(that._data, e);
-            });
 
-            that._total = that.reader.total(that._pristine);
-            that._process(that._data);
+            that._data = that._observe(that._pristine);
+            that._change();
         },
 
         /**
@@ -1527,13 +1584,7 @@
                 data = that.reader.data(data);
             }
 
-            // <ugly>
-            that._data = data = new ObservableArray(data, that.reader.model);
-
-            data.bind(CHANGE, function(e) {
-                that._total = that.reader.total(that._pristine);
-                that._process(data, e);
-            });
+            that._data = that._observe(data);
 
             if (that._set) {
                 that._set.data(data);
@@ -1547,8 +1598,33 @@
 
             that._dequeueRequest();
             that._process(data);
+        },
 
-            // </ugly>
+        _observe: function(data) {
+            var that = this;
+
+            data = new ObservableArray(data, that.reader.model);
+
+            return data.bind(CHANGE, proxy(that._change, that));
+        },
+
+        _change: function(e) {
+            var that = this, idx, length, action = e ? e.action : "";
+
+            if (action === "remove") {
+                for (idx = 0, length = e.items.length; idx < length; idx++) {
+                    if (!e.items[idx].isNew()) {
+                        that._destroyed.push(e.items[idx]);
+                    }
+                }
+            }
+
+            if (that.options.autoSync && (action === "add" || action === "remove")) {
+                that.sync();
+            } else {
+                that._total = that.reader.total(that._pristine);
+                that._process(that._data, e);
+            }
         },
 
         _process: function (data, e) {
