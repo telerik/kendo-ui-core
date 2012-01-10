@@ -377,34 +377,28 @@
 
 .km-ios .km-tabstrip .km-button .km-icon
 {
-    opacity: 1;
-    background: transparent url('images/itabimg1.png') no-repeat 3px 50%;
-    background-size: cover;
+    margin: .3em auto;
+    background: rgba(255,255,255,.3) linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,0));
 }
 
-.km-ios .km-tabstrip .km-state-active .km-icon
+.km-ios .km-tabstrip .km-state-active.km-featured .km-icon
 {
-    background-image: url('images/itabimg.png');
+    background: linear-gradient(top, #bCe4ff 0, #3F99D2 50%, #53BFE5 100%);
 }
 
-.km-ios .km-tabstrip .km-button:nth-child(1) .km-icon
+.km-ios .km-tabstrip .km-state-active.km-toprated .km-icon
 {
-    background-position: -1.5% 50%;
+    background: linear-gradient(top, #e4ffbC 0, #99D23F 50%, #BFE553 100%);
 }
 
-.km-ios .km-tabstrip .km-button:nth-child(2) .km-icon
+.km-ios .km-tabstrip .km-state-active.km-mostviewed .km-icon
 {
-    background-position: 34% 50%;
+    background: linear-gradient(top, #ffbCe4 0, #D23F99 50%, #E553BF 100%);
 }
 
-.km-ios .km-tabstrip .km-button:nth-child(3) .km-icon
+.km-ios .km-tabstrip .km-state-active.km-bookmarks .km-icon
 {
-    background-position: 69% 50%;
-}
-
-.km-ios .km-tabstrip .km-button:nth-child(4) .km-icon
-{
-    background-position: 103.5% 50%;
+    background: linear-gradient(top, #e4bCff 0, #993FD2 50%, #BF53E5 100%);
 }
 
 /* Slider */
