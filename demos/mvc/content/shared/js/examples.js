@@ -230,6 +230,9 @@
         return head.innerHTML.match(/href=\W(.*)examples(\.min)?\.css/i)[1];
     }
 
+    var mobileContainerSelector = "#mobile-application-container";
+    var mobileClasses = "km-ios km-android";
+
     function applyCurrentMobileOS() {
         try {
             if (sessionStorage && sessionStorage.length) {
@@ -237,7 +240,7 @@
             }
         } catch(err) {}
 
-        $("#exampleWrap").addClass("km-" + kendoMobileOS);
+        $(mobileContainerSelector).removeClass(mobileClasses).addClass("km-" + kendoMobileOS);
     }
 
     function initializeMobileOSChooser() {
@@ -255,7 +258,7 @@
                 dataSource: oses,
                 change: function (argument) {
                     var value = this.value();
-                    $("#exampleWrap").attr("class", "").addClass("km-" + value);
+                    $(mobileContainerSelector).removeClass(mobileClasses).addClass("km-" + value);
                     try {
                         sessionStorage.setItem("kendoMobileOS", value);
                     } catch(err) {}
