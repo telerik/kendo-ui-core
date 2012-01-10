@@ -99,15 +99,17 @@ function merge(files) {
     return result.replace("\ufeff", "");
 }
 
-function generateVersion() {
+function buildVersion(year, release) {
     var date = new Date(),
+        currentYear = date.getFullYear(),
+        month = date.getMonth() + 1,
         day = date.getDate();
 
-    if (day < 10) {
-        day = "0" + day;
+    if (currentYear > year) {
+        month += (currentYear - year) * 12;
     }
 
-    return date.getFullYear() + ".3." + (date.getMonth() + 1) + "" + day;
+    return year + "." + release + "." + (month * 100 + day);
 }
 
 function template(template) {
@@ -256,13 +258,42 @@ function deployStyles(stylesRoot, outputRoot, header, compress) {
     });
 }
 
+function msBuild(project, params, onSuccess, onError) {
+    var build,
+        osName = os.type();
+
+    if (osName == "Linux" || osName == "Darwin") {
+        build = spawn("xbuild", params);
+    } else {
+        build = spawn("/cygdrive/c/Windows/Microsoft.NET/Framework64/v4.0.30319/msbuild.exe", params);
+    }
+
+    build.stderr.on('data', function (data) {
+        sys.print('stderr: ' + data);
+    });
+
+    build.on('exit', function (code) {
+        if (code !== 0) {
+            console.log("Build error: " + code);
+            if (onError) {
+                onError(code);
+            }
+        } else {
+            console.log("Success.");
+            if (onSuccess) {
+                onSuccess();
+            }
+        }
+    });
+}
+
 // Exports ====================================================================
 exports.addBOM = addBOM;
 exports.copyDirSyncRecursive = copyDirSyncRecursive;
 exports.copyFileSync = copyFileSync;
 exports.copyTextFile = copyTextFile;
 exports.deployStyles = deployStyles;
-exports.generateVersion = generateVersion;
+exports.buildVersion = buildVersion;
 exports.hasBOM = hasBOM;
 exports.merge = merge;
 exports.minifyJs = minifyJs;
