@@ -84,6 +84,7 @@
 
                 viewModel.bind("get", function(e) {
                     start();
+
                     equal(e.field, "foo");
                 });
 
@@ -101,6 +102,18 @@
                 });
 
                 viewModel.foo.get("bar");
+            });
+
+            test("toJSON skips private fields", function() {
+                var observable = kendo.observable({});
+
+                equal(typeof observable.toJSON()._events, "undefined");
+            });
+
+            test("toJSON serializes public fields", function() {
+                var observable = kendo.observable({ foo: "bar" });
+
+                equal(observable.toJSON().foo, "bar");
             });
         </script>
     </head>
