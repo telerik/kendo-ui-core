@@ -39,6 +39,11 @@
                     params.$top = take;
                 }
             }
+        },
+        defaultDataType = {
+            read: {
+                dataType: "jsonp"
+            }
         };
 
     function toOdataFilter(filter) {
@@ -119,15 +124,21 @@
                     jsonpCallback: "callback", //required by OData
                     jsonp: false // to prevent jQuery from adding the jsonpCallback in the query string - we will add it ourselves
                 },
-                parameterMap: function(options) {
+                parameterMap: function(options, type) {
+                    type = type || "read";
+
                     var params = {
                             $format: "json",
-                            $inlinecount: "allpages",
-                            $callback: "callback"
+                            $inlinecount: "allpages"
                         },
-                        option;
+                        option,
+                        dataType = (this.options || defaultDataType)[type].dataType;
 
                     options = options || {};
+
+                    if (dataType.toLowerCase() == "jsonp") {
+                        params.$callback = "callback";
+                    }
 
                     for (option in options) {
                         if (mappers[option]) {
