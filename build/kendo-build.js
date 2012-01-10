@@ -219,6 +219,10 @@ function zip(name, filesPath, success) {
         sys.print('stderr: ' + data);
     });
 
+    archive.stdout.on('data', function (data) {
+        sys.print(data);
+    });
+
     archive.on('exit', function (code) {
         if (code !== 0) {
             console.log("zip error: " + code);
@@ -260,12 +264,16 @@ function deployStyles(stylesRoot, outputRoot, header, compress) {
 
 function msBuild(project, params, onSuccess, onError) {
     var build,
-        osName = os.type();
+        osName = os.type(),
+        buildParams = params.concat([project]);
 
     if (osName == "Linux" || osName == "Darwin") {
-        build = spawn("xbuild", params);
+        build = spawn("xbuild", buildParams);
     } else {
-        build = spawn("/cygdrive/c/Windows/Microsoft.NET/Framework64/v4.0.30319/msbuild.exe", params);
+        build = spawn(
+            "/cygdrive/c/Windows/Microsoft.NET/Framework64/v4.0.30319/msbuild.exe",
+            buildParams
+        );
     }
 
     build.stderr.on('data', function (data) {
