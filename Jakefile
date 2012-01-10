@@ -23,6 +23,11 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     DEMOS_STAGING_CONTENT_PATH = path.join(DEMOS_STAGING_PATH, "content", "cdn"),
     RELEASE_PATH = "release";
 
+// Configuration ===============================================================
+var CDN_PROJECT = path.join("build", "cdn.proj"),
+    CDN_BUNDLE = bundles.bundles.filter(function(bundle) { return bundle.name === "kendoui.complete" })[0],
+    CDN_BUNDLE_PATH = path.join("..", DEPLOY_PATH, "kendoui.complete.commercial");
+
 // Tasks ======================================================================
 desc("Clean deploy working directory");
 task("clean", function() {
@@ -94,6 +99,13 @@ task("default", ["clean", "demos:debug"], function() {
 desc("Build bundles");
 task("bundles", ["clean", "themes", "merge-scripts"], function() {
     bundles.buildAllBundles(complete);
+}, true);
+
+desc("Deploy scripts to CDN");
+task("cdn", ["clean", "themes", "merge-scripts"], function() {
+    bundles.buildBundle(CDN_BUNDLE, function() {
+        kendoBuild.msBuild(CDN_PROJECT, ["/p:Version=" + version(), "/p:BundleRoot=" + CDN_BUNDLE_PATH]);
+    });
 }, true);
 
 // Helpers ====================================================================
