@@ -1,7 +1,8 @@
 // Imports ====================================================================
 var path = require("path"),
+    fs = require("fs"),
+    jsdoctoolkit = require("build/node-jsdoc-toolkit/app/nodemodule").jsdoctoolkit,
     config = require("build/config"),
-    docs = require("build/docs"),
     bundles = require("build/bundles"),
     kendoBuild = require("build/kendo-build"),
     copyDir = kendoBuild.copyDirSyncRecursive,
@@ -49,7 +50,24 @@ task("merge-scripts", function() {
 
 desc("Build documentation");
 task("docs", function() {
-    docs.build();
+    var params = [
+        // output directory
+        "-d=demos/mvc/content/docs",
+        // template
+        "-t=build/node-jsdoc-toolkit/template",
+        // constants
+        "-D=\"copyright:" + new Date().getFullYear() + "\"",
+        "-D=\"title:Kendo UI Documentation\""
+    ];
+
+    var sourceFiles = fs.readdirSync(SOURCE_PATH).filter(function(file) { return file.indexOf(".js") > -1 && file.indexOf("jquery") === -1 } );
+    for (var i = 0; i < sourceFiles.length; i++) {
+        params.push(path.join(SOURCE_PATH, sourceFiles[i]));
+    }
+
+    params.push("src/chart/docs.js");
+
+    jsdoctoolkit.run(params);
 });
 
 namespace("demos", function() {
