@@ -205,32 +205,48 @@ function minifyJs(source) {
     return uglify.gen_code(ast);
 }
 
-function zip(name, filesPath, success) {
+function zip(name, filesPath, onSuccess) {
     var archive,
         osName = os.type();
 
+    var success = function() {
+        console.log("Package created: " + name);
+
+        if (onSuccess) {
+            onSuccess();
+        }
+    };
+
     if (osName == "Linux" || osName == "Darwin") {
-        archive = spawn("7z", [ "a", "-tzip", path.resolve(name), '*' ], { cwd: path.resolve(filesPath) });
+        archive = spawnSilent("7z", [ "a", "-tzip", path.resolve(name), '*' ], { cwd: path.resolve(filesPath) }, success);
     } else {
-        archive = spawn("./build/lib/7z/7z", [ "a", "-tzip", name, path.join(filesPath, '*') ]);
+        archive = spawnSilent("./build/lib/7z/7z", [ "a", "-tzip", name, path.join(filesPath, '*') ], {}, success);
     }
+}
 
-    archive.stderr.on('data', function (data) {
-        sys.print('stderr: ' + data);
-    });
+function spawnSilent(name, params, options, onSuccess, onError) {
+    var proc,
+        output = "";
 
-    archive.stdout.on('data', function (data) {
-        sys.print(data);
-    });
+    proc = spawn(name, params, options);
 
-    archive.on('exit', function (code) {
-        if (code !== 0) {
-            console.log("zip error: " + code);
+    var logger = function(data) {
+        output += data;
+    };
+
+    proc.stderr.on('data', logger);
+    proc.stdout.on('data', logger);
+
+    proc.on('exit', function (code) {
+        if (code === 0) {
+            if (onSuccess) {
+                onSuccess();
+            }
         } else {
-            console.log("Package created: " + name);
-
-            if (success) {
-                success();
+            sys.print(name + " ", params.join(" "));
+            sys.print(output);
+            if (onError) {
+                onError();
             }
         }
     });
@@ -267,36 +283,24 @@ function msBuild(project, params, onSuccess, onError) {
         osName = os.type(),
         buildParams = params.concat([project]);
 
+    var success = function() {
+        console.log("Success.");
+        if (onSuccess) {
+            onSuccess();
+        }
+    };
+
     if (osName == "Linux" || osName == "Darwin") {
-        build = spawn("xbuild", buildParams);
+        build = spawnSilent("xbuild", buildParams, {}, success, onError);
     } else {
-        build = spawn(
+        build = spawnSilent(
             "/cygdrive/c/Windows/Microsoft.NET/Framework64/v4.0.30319/msbuild.exe",
-            buildParams
+            buildParams,
+            {},
+            success,
+            onError
         );
     }
-
-    build.stderr.on('data', function (data) {
-        sys.print('stderr: ' + data);
-    });
-
-    build.stdout.on('data', function (data) {
-        sys.print(data);
-    });
-
-    build.on('exit', function (code) {
-        if (code !== 0) {
-            console.log("Build error: " + code);
-            if (onError) {
-                onError(code);
-            }
-        } else {
-            console.log("Success.");
-            if (onSuccess) {
-                onSuccess();
-            }
-        }
-    });
 }
 
 function grep(items, condition) {
