@@ -1,25 +1,45 @@
-<div data-role="view">
-@foreach (string category in ViewBag.Navigation.Keys)
-{
-    if (ViewBag.Navigation.Keys.Count > 1)
-    {
-        <h3>@category</h3>
-    }
-    <ul data-role="listview" data-type="group" data-style="inset">
-    @foreach (NavigationWidget widget in ViewBag.Navigation[category])
-    {
-        <li> @widget.Text
+<div data-role="view" data-title="Overview">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a class="nav-button" data-align="left" data-role="back-button">Back</a>
+            <span data-role="view-title">Overview</span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
+
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Hello
             <ul>
-                @foreach (NavigationExample example in widget.Items)
-                {
-                    <li>
-                        <a data-role="listview-link" class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")"
-                            href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
-                    </li>
-                }
+                <li>Ohai!</li>
+                <li>Ohai!</li>
+                <li>Ohai!</li>
             </ul>
         </li>
-    }
+
+        <li>
+            Hello
+            <ul>
+                <li>Carrier <input type="checkbox" data-role="switch"></li>
+                <li>Airplane mode <input type="checkbox" data-role="switch" checked></li>
+                <li>Ohai!<button type="button" data-role="detail-button" data-style="details">More...</button></li>
+            </ul>
+        </li>
+        <li>
+            <ul>
+                <li>Sounds</li>
+                <li>Brightness</li>
+                <li>Wallpaper</li>
+            </ul>
+        </li>
     </ul>
-}
+
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a>Home</a>
+            <a>Explore</a>
+            <a>About</a>
+            <a>Settings</a>
+        </div>
+    </footer>
 </div>
