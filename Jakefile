@@ -21,6 +21,7 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     DEMOS_LIVE_PACKAGE = path.join(DEPLOY_PATH, "online-examples.zip"),
     DEMOS_STAGING_PATH = path.join(DEPLOY_PATH, "staging"),
     DEMOS_STAGING_CONTENT_PATH = path.join(DEMOS_STAGING_PATH, "content", "cdn"),
+    DOCS_DEPLOY_PATH = path.join(DEMOS_PATH, "content", "docs"),
     RELEASE_PATH = "release";
 
 // Configuration ===============================================================
@@ -49,6 +50,54 @@ task("merge-scripts", function() {
 
 desc("Build documentation");
 task("docs", function() {
+    var mappings = {
+            "slider": ["slider", "rangeslider"],
+            "dragdrop": ["draggable", "droptarget"]
+        },
+        sections = ["description", "configuration", "methods", "events"];
+
+    function combine() {
+        var files = fs.readdirSync(DOCS_DEPLOY_PATH);
+        for (var key in mappings) {
+            var mapping = mappings[key],
+            filesToMerge = kendoBuild.grep(files, function(fileName) {
+                var flag = false;
+                for (var i = 0, length = mapping.length; i < length; i++) {
+                    if (fileName.indexOf(mapping[i]) > -1) {
+                        flag = true;
+                        break;
+                    }
+                }
+                return flag;
+            });
+
+            sections.forEach(function(sectionName) {
+                var cache = "";
+                kendoBuild.grep(filesToMerge, function(fileName) {
+                    return fileName.indexOf(sectionName) > -1;
+                }).forEach(function(fileToMerge) {
+                    var text = kendoBuild.readText(DOCS_DEPLOY_PATH + "/" + fileToMerge);
+
+                    if (sectionName != "description" && text.length > 10) {
+                        text = wrap(text, fileToMerge);
+                    }
+                    cache += text;
+                });
+
+                if (cache.length > 15) {
+                    kendoBuild.writeText(DOCS_DEPLOY_PATH + "/kendo.ui." + key + "." + sectionName + ".html", cache);
+                }
+            });
+        }
+    }
+
+    function wrap(text, fileToMerge) {
+        fileToMerge = fileToMerge.split(".");
+        fileToMerge = fileToMerge[fileToMerge.length - 3];
+
+        return '<div class="detailHandle detailHandleExpanded"> <div class="detailExpanded"></div>' + fileToMerge + '</div><div style="display: block;" class="detailBody">' + text + "</div>";
+    }
+
     var params = [
         // output directory
         "-d=demos/mvc/content/docs",
@@ -67,6 +116,8 @@ task("docs", function() {
     params.push("src/chart/docs.js");
 
     jsdoctoolkit.run(params);
+
+    combine();
 });
 
 namespace("demos", function() {
