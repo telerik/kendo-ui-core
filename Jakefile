@@ -121,8 +121,24 @@ task("docs", function() {
 });
 
 namespace("demos", function() {
+    desc("Build less.js for demo site");
+    task("less-js", function() {
+        var lessPath = path.join("build", "less-js");
+        var distPath = path.join(lessPath, "dist");
+
+        kendoBuild.spawnSilent("make", [ "less" ], { cwd: path.resolve(lessPath) }, function() {
+            kendoBuild.processFilesRecursive(distPath, /.*/, function(fileName) {
+                kendoBuild.copyFileSync(fileName, path.join(DEMOS_PATH, "content", "shared", "js", "less.js"));
+            });
+
+            kendoBuild.rmdirSyncRecursive(distPath);
+
+            complete();
+        });
+    }, true);
+
     desc("Build debug demos site");
-    task("debug", ["themes", "merge-scripts", "docs"], function () {
+    task("debug", ["demos:less-js", "themes", "merge-scripts", "docs"], function () {
         kendoBuild.msBuild(
             path.join(DEMOS_PATH, DEMOS_PROJECT),
             [ "/t:Clean;Build", "/p:Configuration=Debug" ],

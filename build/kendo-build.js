@@ -326,6 +326,7 @@ exports.merge = merge;
 exports.minifyJs = minifyJs;
 exports.mkdir = mkdir;
 exports.msBuild = msBuild;
+exports.spawnSilent = spawnSilent;
 exports.processFilesRecursive = processFilesRecursive;
 exports.readText = readText;
 exports.rmdirSyncRecursive = rmdirSyncRecursive;
