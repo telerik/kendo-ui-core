@@ -36,5 +36,6 @@ themebuilder/src/styles/kendo.black.css
 themebuilder/src/styles/Black/
 themebuilder/src/styles/textures/
 demos/mvc/bin/Kendo.*
+demos/mvc/content/shared/js/less.js
 download-builder/service/Download/Download/App_Data/
 download-builder/service/Download/Download/bin/
