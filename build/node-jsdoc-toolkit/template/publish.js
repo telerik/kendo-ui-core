@@ -31,7 +31,7 @@ function publish(symbolSet) {
 }
 
 function hasValue(text) {
-    return text.replace(/^\s*|\s*$/g, '').length > 0;
+    return text.replace(/^\s*|\s*$/g, '').replace("<!-- help-data -->", "").length > 0;
 }
 
 function isaClass($) {
