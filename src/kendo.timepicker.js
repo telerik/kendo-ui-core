@@ -577,10 +577,13 @@
 
         _clearBlurTimeout: function() {
             var that = this;
-            setTimeout(function() {
-                clearTimeout(that._bluring);
-                that.element.focus();
-            });
+
+            if (!touch) {
+                setTimeout(function() {
+                    clearTimeout(that._bluring);
+                    that.element.focus();
+                });
+            }
         },
 
         _click: function() {
