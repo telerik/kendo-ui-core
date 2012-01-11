@@ -316,12 +316,18 @@
     height: 2.5em;
     height: 2.5rem;
     margin-top: -2.5em;
-    margin-top: -2.5rem;
+    margin-top: ~"-2.5rem";
     border: 1em solid transparent;
     border-right: 1px solid #444;
     border-left: 0;
     text-indent: -9999px;
     .box-sizing(border-box);
+}
+
+.km-android .km-tabstrip .km-text
+{
+    margin-top: -2.2em;
+    margin-top: ~"-2.2rem";
 }
 
 .km-android .km-navbar .km-text
@@ -481,9 +487,9 @@
 .km-android .km-tabstrip .km-icon
 {
     position: relative;
-    left: 50%;
+    left: 0;
     margin-left: -2em;
-    margin-left: -1.25rem;
+    margin-left: ~"-1.25rem";
 }
 
 .km-android .km-tabstrip .km-button .km-icon
