@@ -28,8 +28,10 @@ namespace Kendo.Controllers
 
             if (suite == "mobile") {
                 ViewBag.scripts = Kendo.Models.ScriptGroups.Mobile;
+                ViewBag.styles = Kendo.Models.StyleGroups.Mobile;
             } else {
                 ViewBag.scripts = Kendo.Models.ScriptGroups.All;
+                ViewBag.styles = Kendo.Models.StyleGroups.All;
             }
 
             return View(
