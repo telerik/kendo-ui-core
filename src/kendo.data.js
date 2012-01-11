@@ -1430,6 +1430,7 @@
                         that._accept(arguments[idx]);
                     }
 
+                    that._change();
                 });
 
         },
