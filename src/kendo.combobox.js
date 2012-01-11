@@ -640,10 +640,18 @@
             var that = this,
                 element = that.input[0],
                 value = that.text(),
-                caret = List.caret(element);
+                caret = List.caret(element),
+                idx;
 
+            if (!value) {
+                return;
+            }
 
             if (typeof word !== "string") {
+                //var idx = word.index();
+                //var dataItem = that.dataSource.view()[idx];
+                //word = that._text(dataItem);
+
                 word = word ? word.text() : "";
             }
 
@@ -651,13 +659,23 @@
                 caret = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
             }
 
-            if (!word) {
-                word = value.substring(0, caret);
+            if (word) {
+                idx = word.toLowerCase().indexOf(value.toLowerCase());
+                if (idx > -1) {
+                    value += word.substring(idx + value.length);
+                }
+            } else {
+                value = value.substring(0, caret);
             }
 
-            if (word !== value) {
-                that.text(word);
-                List.selectText(element, caret, word.length);
+            if (value.length !== caret || !word) {
+
+                if (value.toLowerCase() === word.toLowerCase()) {
+                    value = word;
+                }
+
+                that.text(value);
+                List.selectText(element, caret, value.length);
             }
         },
 
