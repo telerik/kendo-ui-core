@@ -21,6 +21,11 @@ namespace Kendo.Controllers
             ViewBag.ConfigurationDocPath = DocPath(suite, section, "configuration");
             ViewBag.MethodsDocPath = DocPath(suite, section, "methods");
             ViewBag.EventsDocPath = DocPath(suite, section, "events");
+#if DEBUG
+            ViewBag.Debug = true;
+#else
+            ViewBag.Debug = false;
+#endif
 
             LoadNavigation(suite);
 
