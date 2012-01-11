@@ -10,8 +10,7 @@ namespace Kendo.Models
         {
 #if DEBUG
             "kendo.common.css",
-            "kendo.default.css",
-            "mobile/kendo.mobile.common.css"
+            "kendo.default.less"
 #else
             "kendo.common.min.css",
             "kendo.default.min.css",

@@ -89,7 +89,8 @@
                 commonLink = kendoLinks.filter("[href*='kendo.common']"),
                 skinLink = kendoLinks.filter(":not([href*='kendo.common'])"),
                 currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
-                url = currentFolder + commonLink.attr("href").replace(skinRegex, "kendo." + skinName + "$1.css"),
+                extension = skinLink.attr("rel") === "stylesheet" ? ".css" : ".less",
+                url = currentFolder + commonLink.attr("href").replace(skinRegex, "kendo." + skinName + "$1" + extension),
                 exampleElement = $("#example");
 
             function replaceTheme() {
@@ -104,6 +105,12 @@
 
                 newLink.insertBefore(skinLink[0]);
                 skinLink.remove();
+
+                if (extension === ".less") {
+                    $("head style[id^='less']").remove();
+                    less.sheets = [newLink[0]];
+                    less.refresh(true);
+                }
 
                 if (exampleElement.length) {
                     exampleElement[0].style.cssText = exampleElement[0].style.cssText;

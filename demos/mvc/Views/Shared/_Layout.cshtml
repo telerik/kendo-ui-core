@@ -3,8 +3,11 @@
 <head>
     <title>@ViewBag.Title</title>
     @foreach (string styleName in Kendo.Models.StyleGroups.All) {
-    <link href="@Url.Style(styleName)" rel="stylesheet" />
+    <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
     }
+    @{ #if DEBUG }
+    <script src="@Url.Content("~/content/shared/js/less.js")"></script>
+    @{ #endif }
     <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
     @foreach (string scriptName in ViewBag.scripts) {
     <script src="@Url.Script(scriptName)"></script>
