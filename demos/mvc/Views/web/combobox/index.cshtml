@@ -5,7 +5,7 @@
 			<img id="tshirt" src="../../content/web/combobox/tShirt.png" />
             <div id="options">
 			<h3>T-shirt Fabric</h3>
-            <input id="input" value="1"/>
+            <input id="input"/>
 
             <h3>T-shirt Size</h3>
             <select id="select">
@@ -54,16 +54,21 @@
             <script>
                 $(document).ready(function() {
                     // create ComboBox from input HTML element
-                    $("#input").kendoComboBox([
-                        { text: "Cotton", value: "1" },
-                        { text: "Polyester", value: "2" },
-                        { text: "Cotton/Polyester", value: "3" },
-						{ text: "Rib Knit", value: "4" }
-                    ]);
+                    $("#input").kendoComboBox({
+                        dataSource: [
+                            { text: "Cotton", value: "1" },
+                            { text: "Polyester", value: "2" },
+                            { text: "Cotton/Polyester", value: "3" },
+                            { text: "Rib Knit", value: "4" }
+                        ],
+                        filter: "contains",
+                        suggest: true,
+                        index: 3
+                    });
 
                     // create ComboBox from select HTML element
                     $("#select").kendoComboBox();
-					
+
 					var input = $("#input").data("kendoComboBox");
 					var select = $("#select").data("kendoComboBox");
 
