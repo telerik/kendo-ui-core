@@ -4,6 +4,7 @@
             "name": "overview",
             "spriteCssClass": "overviewIcon",
             "expanded": true,
+            "onlineOnly": true,
             "items": [
                 {
                     "text": "First look",
