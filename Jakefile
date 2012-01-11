@@ -7,8 +7,7 @@ var path = require("path"),
     copyDir = kendoBuild.copyDirSyncRecursive,
     mkdir = kendoBuild.mkdir,
     zip = kendoBuild.zip,
-    kendoScripts = require("build/kendo-scripts"),
-    themes = require("build/themes");
+    kendoScripts = require("build/kendo-scripts");
 
 // Configuration ==============================================================
 var CDN_ROOT = "http://cdn.kendostatic.com/",
@@ -36,11 +35,6 @@ task("clean", function() {
 
     mkdir(DEPLOY_PATH);
     mkdir(RELEASE_PATH);
-});
-
-desc("Build themes from LESS source");
-task("themes", function() {
-    themes.build();
 });
 
 desc("Merge multi-part source scripts");
@@ -138,7 +132,7 @@ namespace("demos", function() {
     }, true);
 
     desc("Build debug demos site");
-    task("debug", ["demos:less-js", "themes", "merge-scripts", "docs"], function () {
+    task("debug", ["demos:less-js", "merge-scripts", "docs"], function () {
         kendoBuild.msBuild(
             path.join(DEMOS_PATH, DEMOS_PROJECT),
             [ "/t:Clean;Build", "/p:Configuration=Debug" ],
@@ -147,7 +141,7 @@ namespace("demos", function() {
     }, true);
 
     desc("Build staging demos site");
-    task("staging", ["themes", "merge-scripts", "docs"], function () {
+    task("staging", ["merge-scripts", "docs"], function () {
         var scriptsDest = path.join(DEMOS_STAGING_CONTENT_PATH, "js"),
             stylesDest = path.join(DEMOS_STAGING_CONTENT_PATH, "styles");
 
@@ -161,12 +155,14 @@ namespace("demos", function() {
             );
 
             mkdir(stylesDest);
-            kendoBuild.deployStyles(STYLES_PATH, stylesDest, "", true);
+            kendoBuild.deployStyles(STYLES_PATH, stylesDest, "", true, function() {
+                complete();
+            });
         });
     }, true);
 
     desc("Build demos site for live deployment");
-    task("production", ["themes", "merge-scripts", "docs"], function () {
+    task("production", ["merge-scripts", "docs"], function () {
         deployDemos(DEMOS_LIVE_PATH, CDN_ROOT + version(), complete);
     }, true);
 
@@ -181,12 +177,12 @@ task("default", ["clean", "demos:debug"], function() {
 });
 
 desc("Build bundles");
-task("bundles", ["clean", "themes", "merge-scripts"], function() {
+task("bundles", ["clean", "merge-scripts"], function() {
     bundles.buildAllBundles(version(), complete);
 }, true);
 
 desc("Deploy scripts to CDN");
-task("cdn", ["clean", "themes", "merge-scripts"], function() {
+task("cdn", ["clean", "merge-scripts"], function() {
     bundles.buildBundle(CDN_BUNDLE, version(), function() {
         kendoBuild.msBuild(CDN_PROJECT, ["/p:Version=" + version(), "/p:BundleRoot=" + CDN_BUNDLE_PATH]);
     });
