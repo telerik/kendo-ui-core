@@ -1,0 +1,12 @@
+<div data-role="view" data-init="mobileSwitchEventsInit">
+    <input id="mobile-switch" data-role="switch" />
+    <div class="console"></div>
+</div>
+
+<script>
+    function mobileSwitchEventsInit() {
+        $("#mobile-switch").data("kendoMobileSwitch").bind("change", function() {
+            kendoConsole.log("switch value  was changed!");
+        });
+    }
+</script>
