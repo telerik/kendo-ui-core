@@ -203,19 +203,9 @@
         }
     };
 
-    initialRelativePath = getInitialStylePath();
-    kendoSkin = "default";
-    kendoMobileOS = "ios";
-
-    try {
-        if (sessionStorage && sessionStorage.length) {
-            kendoSkin = sessionStorage.getItem("kendoSkin");
-
-            if (kendoSkin) {
-                Application.changeTheme(kendoSkin);
-            }
-        }
-    } catch(err) {}
+    var initialRelativePath = getInitialStylePath(),
+        kendoSkin = "default",
+        kendoMobileOS = "ios";
 
     $(Application.init);
 
@@ -225,6 +215,18 @@
     }
 
     var mobileClasses = "km-ios km-android";
+
+    function applyCurrentTheme() {
+        try {
+            if (sessionStorage && sessionStorage.length) {
+                kendoSkin = sessionStorage.getItem("kendoSkin");
+
+                if (kendoSkin) {
+                    Application.changeTheme(kendoSkin);
+                }
+            }
+        } catch(err) {}
+    }
 
     function applyCurrentMobileOS(container) {
         try {
@@ -310,6 +312,7 @@
     extend(window, {
         Application: Application,
         applyCurrentMobileOS: applyCurrentMobileOS,
+        applyCurrentTheme: applyCurrentTheme,
         preventFOUC: function() {
             $("#exampleWrap").css("visibility", "hidden");
         }
