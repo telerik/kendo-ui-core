@@ -66,6 +66,21 @@
             ]
         },
         {
+            "text": "Switch",
+            "name": "Switch",
+            "spriteCssClass": "dataSourceIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "switch/index.html"
+                },
+                {
+                    "text": "Events",
+                    "url": "switch/events.html"
+                }
+            ]
+        },
+        {
             "text": "Tabstrip",
             "name": "tabstrip",
             "spriteCssClass": "dataSourceIcon",
