@@ -181,9 +181,13 @@ function deployExamples(root, bundle) {
 
         for (var category in navigation) {
             for (var widgetIx = 0, widgets = navigation[category]; widgetIx < widgets.length; widgetIx++) {
+                if (widgets[widgetIx].onlineOnly) {
+                    continue;
+                }
+
                 for (var exampleIx = 0, examples = widgets[widgetIx].items; exampleIx < examples.length; exampleIx++) {
                     var example = examples[exampleIx],
-                    viewName = example.url.replace("html", "cshtml"),
+                    viewName = example.url.replace(".html", ".cshtml"),
                     fileName = path.join(viewsRoot, suite, viewName),
                     outputName = path.join(suiteDest, example.url),
                     exampleBody = readText(fileName);
