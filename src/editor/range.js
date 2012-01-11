@@ -1,5 +1,13 @@
 (function($) {
 
+    // Imports ================================================================
+    var doc = document,
+        kendo = window.kendo,
+        Class = kendo.Class,
+        Widget = kendo.ui.Widget,
+        extend = $.extend;
+
+
 var START_TO_START = 0,
     START_TO_END = 1,
     END_TO_END = 2,
@@ -57,21 +65,20 @@ function selectRange(range) {
     selection.addRange(range);
 }
 
-function W3CRange(doc) {
-    $.extend(this, {
-        ownerDocument: doc, /* not part of the spec; used when cloning ranges, traversing the dom and creating fragments */
-        startContainer: doc,
-        endContainer: doc,
-        commonAncestorContainer: doc,
-        startOffset: 0,
-        endOffset: 0,
-        collapsed: true
-    });
-};
+var W3CRange = Class.extend({
+    init: function(doc) {
+        $.extend(this, {
+            ownerDocument: doc, /* not part of the spec; used when cloning ranges, traversing the dom and creating fragments */
+            startContainer: doc,
+            endContainer: doc,
+            commonAncestorContainer: doc,
+            startOffset: 0,
+            endOffset: 0,
+            collapsed: true
+        });
+    },
 
-W3CRange.prototype = {
     // Positioning Methods
-
     setStart: function (node, offset) {
         this.startContainer = node;
         this.startOffset = offset;
@@ -211,7 +218,8 @@ W3CRange.prototype = {
         return [startNodeName == "#text" ? this.startContainer.nodeValue : startNodeName, '(', this.startOffset, ') : ',
                 endNodeName == "#text" ? this.endContainer.nodeValue : endNodeName, '(', this.endOffset, ')'].join('');
     }
-}
+});
+
 /* can be used in Range.compareBoundaryPoints if we need it one day */
 function compareBoundaries(start, end, startOffset, endOffset) {
     if (start == end)
@@ -297,30 +305,29 @@ function createRange(document) {
     return document.createRange();
 }
 
+var RangeIterator = Class.extend({
+    init: function(range) {
+        $.extend(this, {
+            range: range,
+            _current: null,
+            _next: null,
+            _end: null
+        });
 
-function RangeIterator(range) {
-    $.extend(this, {
-        range: range,
-        _current: null,
-        _next: null,
-        _end: null
-    });
+        if (range.collapsed)
+            return;
 
-    if (range.collapsed)
-        return;
+        var root = range.commonAncestorContainer;
 
-    var root = range.commonAncestorContainer;
+        this._next = range.startContainer == root && !isDataNode(range.startContainer) ?
+        range.startContainer.childNodes[range.startOffset] :
+        findClosestAncestor(root, range.startContainer);
 
-    this._next = range.startContainer == root && !isDataNode(range.startContainer) ?
-    range.startContainer.childNodes[range.startOffset] :
-    findClosestAncestor(root, range.startContainer);
+        this._end = range.endContainer == root && !isDataNode(range.endContainer) ?
+        range.endContainer.childNodes[range.endOffset] :
+        findClosestAncestor(root, range.endContainer).nextSibling;
+    },
 
-    this._end = range.endContainer == root && !isDataNode(range.endContainer) ?
-    range.endContainer.childNodes[range.endOffset] :
-    findClosestAncestor(root, range.endContainer).nextSibling;
-}
-
-RangeIterator.prototype = {
     hasNext: function () {
         return !!this._next;
     },
@@ -412,14 +419,14 @@ RangeIterator.prototype = {
 
         return new RangeIterator(subRange);
     }
-};
+});
 
-function W3CSelection(doc) {
-    this.ownerDocument = doc;
-    this.rangeCount = 1;
-};
+var W3CSelection = Class.extend({
+    init: function(doc) {
+        this.ownerDocument = doc;
+        this.rangeCount = 1;
+    },
 
-W3CSelection.prototype = {
     addRange: function (range) {
         var textRange = this.ownerDocument.body.createTextRange();
 
@@ -489,7 +496,7 @@ W3CSelection.prototype = {
         }
         return range;
     }
-}
+});
 
 function adoptContainer(textRange, range, start) {
     // find anchor node and offset
@@ -549,27 +556,29 @@ function adoptEndPoint(textRange, range, start) {
         range[start ? 'setStartBefore' : 'setEndBefore'](target);
 }
 
- function RangeEnumerator(range) {
-    this.enumerate = function () {
-        var nodes = [];
+var RangeEnumerator = Class.extend({
+    init: function() {
+        this.enumerate = function () {
+            var nodes = [];
 
-        function visit(node) {
-            if (dom.is(node, 'img') || (node.nodeType == 3 && !dom.isWhitespace(node))) {
-                nodes.push(node);
-            } else {
-                node = node.firstChild;
-                while (node) {
-                    visit(node);
-                    node = node.nextSibling;
+            function visit(node) {
+                if (dom.is(node, 'img') || (node.nodeType == 3 && !dom.isWhitespace(node))) {
+                    nodes.push(node);
+                } else {
+                    node = node.firstChild;
+                    while (node) {
+                        visit(node);
+                        node = node.nextSibling;
+                    }
                 }
             }
+
+            new RangeIterator(range).traverse(visit);
+
+            return nodes;
         }
-
-        new RangeIterator(range).traverse(visit);
-
-        return nodes;
     }
-}
+});
 
 function textNodes(range) {
     return new RangeEnumerator(range).enumerate();
@@ -597,6 +606,10 @@ function getMarkers(range) {
 
     return markers;
 }
+
+var RestorePoint = Class.extend({
+
+});
 
 function RestorePoint(range) {
     var rootNode = documentFromRange(range);
@@ -909,5 +922,12 @@ var RangeUtils = {
         return startOffset != 0 && endOffset != 0;
     }
 };
+
+extend(kendo.ui.Editor, {
+    W3CRange: W3CRange,
+    RangeIterator: RangeIterator,
+    W3CSelection: W3CSelection,
+    RangeEnumerator: RangeEnumerator
+});
 
 })(jQuery);

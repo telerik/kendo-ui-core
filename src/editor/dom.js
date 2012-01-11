@@ -1,8 +1,12 @@
 (function($) {
 
-var $t = $.telerik;
-
-$t.scripts.push("telerik.editor.js");
+    // Imports ================================================================
+    var doc = document,
+        kendo = window.kendo,
+        Class = kendo.Class,
+        Widget = kendo.ui.Widget,
+        map = $.map,
+        extend = $.extend;
 
 function makeMap(items) {
     var obj = {};
@@ -112,7 +116,7 @@ border-right-style,border-right-width,border-right-color,\
 font-family,font-size,font-style,font-variant,font-weight,line-height'
 ).split(',');
 
-var dom = {
+var Dom = Class.extend({
     blockParentOrBody: function(node) {
         return dom.parentOfType(node, blockElements) || node.ownerDocument.body;
     },
@@ -122,7 +126,7 @@ var dom = {
 
         if (!matches) return color;
 
-        return '#' + $.map(matches.slice(1), function (x) {
+        return '#' + map(matches.slice(1), function (x) {
             return x = parseInt(x).toString(16), x.length > 1 ? x : '0' + x;
         }).join('');
     },
@@ -280,13 +284,13 @@ var dom = {
     },
 
     attr: function (element, attributes) {
-        attributes = $.extend({}, attributes);
+        attributes = extend({}, attributes);
 
         if (attributes && 'style' in attributes) {
             dom.style(element, attributes.style);
             delete attributes.style;
         }
-        return $.extend(element, attributes);
+        return extend(element, attributes);
     },
 
     style: function (node, value) {
@@ -312,7 +316,7 @@ var dom = {
                 
         var $span = $(span);
                 
-        var style = $.map(cssAttributes, function(value) {
+        var style = map(cssAttributes, function(value) {
             if ($.browser.msie && value == 'line-height' && $span.css(value) == "1px")
                 return 'line-height:1.5';
             else
@@ -362,6 +366,12 @@ var dom = {
         }
         return output;
     }
-}
+});
+
+// exports
+
+extend(kendo.ui.Editor, {
+    Dom: Dom
+});
 
 })(jQuery);

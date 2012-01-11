@@ -11,7 +11,8 @@
         map = $.map,
         proxy = $.proxy,
         getter = kendo.getter,
-        extend = $.extend;
+        extend = $.extend,
+        deepExtend = kendo.deepExtend;
 
     // static functions =======================================================
 
@@ -226,7 +227,8 @@
                 self.update();
             });
 
-            $.extend(this, options);
+            Widget.fn.init.call(self, element);
+            self.options = deepExtend({}, self.options, options);
 
             $t.bind(this, {
                 load: this.onLoad,
@@ -369,6 +371,79 @@
                         } 
                     } catch (e) { }
                 });
+        },
+
+        options: {
+            localization: localization,
+            formats: formats,
+            encoded: true,
+            stylesheets: [],
+            dialogOptions: {
+                modal: true, resizable: false, draggable: true,
+                effects: {list:[{name:'toggle'}]}
+            },
+            fontName: [
+                { Text: localization.fontNameInherit,  Value: 'inherit' },
+                { Text: 'Arial', Value: "Arial,Helvetica,sans-serif" },
+                { Text: 'Courier New', Value: "'Courier New',Courier,monospace" },
+                { Text: 'Georgia', Value: "Georgia,serif" },
+                { Text: 'Impact', Value: "Impact,Charcoal,sans-serif" },
+                { Text: 'Lucida Console', Value: "'Lucida Console',Monaco,monospace" },
+                { Text: 'Tahoma', Value: "Tahoma,Geneva,sans-serif" },
+                { Text: 'Times New Roman', Value: "'Times New Roman',Times,serif" },
+                { Text: 'Trebuchet MS', Value: "'Trebuchet MS',Helvetica,sans-serif" },
+                { Text: 'Verdana', Value: "Verdana,Geneva,sans-serif" }
+            ],
+            fontSize: [
+                { Text: localization.fontSizeInherit,  Value: 'inherit' },
+                { Text: '1 (8pt)',  Value: 'xx-small' },
+                { Text: '2 (10pt)', Value: 'x-small' },
+                { Text: '3 (12pt)', Value: 'small' },
+                { Text: '4 (14pt)', Value: 'medium' },
+                { Text: '5 (18pt)', Value: 'large' },
+                { Text: '6 (24pt)', Value: 'x-large' },
+                { Text: '7 (36pt)', Value: 'xx-large' }
+            ],
+            formatBlock: [
+                { Text: 'Paragraph', Value: 'p' },
+                { Text: 'Quotation', Value: 'blockquote' },
+                { Text: 'Heading 1', Value: 'h1' },
+                { Text: 'Heading 2', Value: 'h2' },
+                { Text: 'Heading 3', Value: 'h3' },
+                { Text: 'Heading 4', Value: 'h4' },
+                { Text: 'Heading 5', Value: 'h5' },
+                { Text: 'Heading 6', Value: 'h6' }
+            ],
+            tools: {
+                bold: new InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold}),
+                italic: new InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic}),
+                underline: new InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline}),
+                strikethrough: new InlineFormatTool({format: formats.strikethrough}),
+                superscript: new InlineFormatTool({format: formats.superscript }),
+                subscript: new InlineFormatTool({format: formats.subscript }),
+                undo: { key: 'Z', ctrl: true },
+                redo: { key: 'Y', ctrl: true },
+                insertLineBreak: new Tool({ key: 13, shift: true, command: NewLineCommand }),
+                insertParagraph: new Tool({ key: 13, command: ParagraphCommand }),
+                justifyCenter: new BlockFormatTool({format: formats.justifyCenter}),
+                justifyLeft: new BlockFormatTool({format: formats.justifyLeft}),
+                justifyRight: new BlockFormatTool({format: formats.justifyRight}),
+                justifyFull: new BlockFormatTool({format: formats.justifyFull}),
+                insertUnorderedList: new ListTool({tag:'ul'}),
+                insertOrderedList: new ListTool({tag:'ol'}),
+                createLink: new Tool({ key: 'K', ctrl: true, command: LinkCommand}),
+                unlink: new UnlinkTool({ key: 'K', ctrl: true, shift: true}),
+                insertImage: new Tool({ command: ImageCommand }),
+                indent: new Tool({ command: IndentCommand }),
+                outdent: new OutdentTool(),
+                insertHtml: new InsertHtmlTool(),
+                style: new StyleTool(),
+                fontName: new FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName'}),
+                fontSize: new FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize'}),
+                formatBlock: new FormatBlockTool(),
+                foreColor: new ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor'}),
+                backColor: new ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor'})
+            }
         },
 
         value: function (html) {
@@ -618,46 +693,42 @@
                 return format[i];
     }
 
-    function Tool(options) {
-        $.extend(this, options);
-
-        this.init = function($ui, options) {
+    var Tool = Class.extend({
+        init: function($ui, options) {
             $ui.attr({ unselectable: 'on', title: options.title });
-        }
+        },
 
-        this.command = function (commandArguments) {
+        command: function (commandArguments) {
             return new options.command(commandArguments);
-        }
+        },
 
-        this.update = function() {
-        }
+        updat: function() {
+        },
 
-        this.willDelayExecution = function() {
+        willDelayExecution: function() {
             return false;
+        },
+
+        exec: function (editor, name, value) {
+            editor.exec(name, { value: value });
         }
-    }
+    });
 
-    Tool.exec = function (editor, name, value) {
-        editor.exec(name, { value: value });
-    }
-
-    function FormatTool(options) {
-        Tool.call(this, options);
-
-        this.command = function (commandArguments) {
+    var FormatTool = Tool.extend({
+        command: function (commandArguments) {
             return new FormatCommand($.extend(commandArguments, {
                     formatter: options.formatter
                 }));
-        }
+        },
 
-        this.update = function($ui, nodes, pendingFormats) {
+        update: function($ui, nodes, pendingFormats) {
             var isPending = pendingFormats.isPending(this.name),
                 isFormatted = options.finder.isFormatted(nodes),
                 isActive = isPending ? !isFormatted : isFormatted;
 
             $ui.toggleClass('t-state-active', isActive);
         }
-    }
+    });
 
     var emptyFinder = function () { return { isFormatted: function () { return false } } };
 
@@ -696,78 +767,5 @@
         overwriteFile: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?',
         directoryNotFound: 'A directory with this name was not found.'
     };
-
-    $.fn.tEditor.defaults = {
-        localization: localization,
-        formats: formats,
-        encoded: true,
-        stylesheets: [],
-        dialogOptions: {
-            modal: true, resizable: false, draggable: true,
-            effects: {list:[{name:'toggle'}]}
-        },
-        fontName: [
-            { Text: localization.fontNameInherit,  Value: 'inherit' },
-            { Text: 'Arial', Value: "Arial,Helvetica,sans-serif" },
-            { Text: 'Courier New', Value: "'Courier New',Courier,monospace" },
-            { Text: 'Georgia', Value: "Georgia,serif" },
-            { Text: 'Impact', Value: "Impact,Charcoal,sans-serif" },
-            { Text: 'Lucida Console', Value: "'Lucida Console',Monaco,monospace" },
-            { Text: 'Tahoma', Value: "Tahoma,Geneva,sans-serif" },
-            { Text: 'Times New Roman', Value: "'Times New Roman',Times,serif" },
-            { Text: 'Trebuchet MS', Value: "'Trebuchet MS',Helvetica,sans-serif" },
-            { Text: 'Verdana', Value: "Verdana,Geneva,sans-serif" }
-        ],
-        fontSize: [
-            { Text: localization.fontSizeInherit,  Value: 'inherit' },
-            { Text: '1 (8pt)',  Value: 'xx-small' },
-            { Text: '2 (10pt)', Value: 'x-small' },
-            { Text: '3 (12pt)', Value: 'small' },
-            { Text: '4 (14pt)', Value: 'medium' },
-            { Text: '5 (18pt)', Value: 'large' },
-            { Text: '6 (24pt)', Value: 'x-large' },
-            { Text: '7 (36pt)', Value: 'xx-large' }
-        ],
-        formatBlock: [
-            { Text: 'Paragraph', Value: 'p' },
-            { Text: 'Quotation', Value: 'blockquote' },
-            { Text: 'Heading 1', Value: 'h1' },
-            { Text: 'Heading 2', Value: 'h2' },
-            { Text: 'Heading 3', Value: 'h3' },
-            { Text: 'Heading 4', Value: 'h4' },
-            { Text: 'Heading 5', Value: 'h5' },
-            { Text: 'Heading 6', Value: 'h6' }
-        ],
-        tools: {
-            bold: new InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold}),
-            italic: new InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic}),
-            underline: new InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline}),
-            strikethrough: new InlineFormatTool({format: formats.strikethrough}),
-            superscript: new InlineFormatTool({format: formats.superscript }),
-            subscript: new InlineFormatTool({format: formats.subscript }),
-            undo: { key: 'Z', ctrl: true },
-            redo: { key: 'Y', ctrl: true },
-            insertLineBreak: new Tool({ key: 13, shift: true, command: NewLineCommand }),
-            insertParagraph: new Tool({ key: 13, command: ParagraphCommand }),
-            justifyCenter: new BlockFormatTool({format: formats.justifyCenter}),
-            justifyLeft: new BlockFormatTool({format: formats.justifyLeft}),
-            justifyRight: new BlockFormatTool({format: formats.justifyRight}),
-            justifyFull: new BlockFormatTool({format: formats.justifyFull}),
-            insertUnorderedList: new ListTool({tag:'ul'}),
-            insertOrderedList: new ListTool({tag:'ol'}),
-            createLink: new Tool({ key: 'K', ctrl: true, command: LinkCommand}),
-            unlink: new UnlinkTool({ key: 'K', ctrl: true, shift: true}),
-            insertImage: new Tool({ command: ImageCommand }),
-            indent: new Tool({ command: IndentCommand }),
-            outdent: new OutdentTool(),
-            insertHtml: new InsertHtmlTool(),
-            style: new StyleTool(),
-            fontName: new FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName'}),
-            fontSize: new FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize'}),
-            formatBlock: new FormatBlockTool(),
-            foreColor: new ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor'}),
-            backColor: new ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor'})
-        }
-    }
 
 })(jQuery);

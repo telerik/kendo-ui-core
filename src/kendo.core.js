@@ -1588,6 +1588,42 @@
         return element.parent();
     }
 
+    function deepExtend(destination) {
+        var i = 1,
+            length = arguments.length;
+
+        for (i = 1; i < length; i++) {
+            deepExtendOne(destination, arguments[i]);
+        }
+
+        return destination;
+    }
+
+    function deepExtendOne(destination, source) {
+        var property,
+            propValue,
+            propType,
+            destProp;
+
+        for (property in source) {
+            propValue = source[property];
+            propType = typeof propValue;
+            if (propType === OBJECT && propValue !== null && propValue.constructor !== Array) {
+                destProp = destination[property];
+                if (typeof (destProp) === OBJECT) {
+                    destination[property] = destProp || {};
+                } else {
+                    destination[property] = {};
+                }
+                deepExtendOne(destination[property], propValue);
+            } else if (propType !== undefined) {
+                destination[property] = propValue;
+            }
+        }
+
+        return destination;
+    }
+
     /**
      * Contains results from feature detection.
      * @name kendo.support
@@ -2101,6 +2137,7 @@
             return "data-" + kendo.ns + value;
         },
         wrap: wrap,
+        deepExtend: deepExtend,
         size: size,
         isNodeEmpty: isNodeEmpty,
         getOffset: getOffset,

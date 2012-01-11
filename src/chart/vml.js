@@ -14,7 +14,7 @@
         ExpandAnimation = Chart.ExpandAnimation,
         ViewBase = Chart.ViewBase,
         ViewElement = Chart.ViewElement,
-        deepExtend = Chart.deepExtend,
+        deepExtend = kendo.deepExtend,
         template = Chart.template,
         uniqueId = Chart.uniqueId,
         rotatePoint = Chart.rotatePoint,
