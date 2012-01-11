@@ -154,7 +154,7 @@
         * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
         */
         init: function(element, options) {
-            var that = this;
+            var that = this, wrapper;
 
             options = $.isArray(options) ? { dataSource: options } : options;
 
@@ -201,24 +201,25 @@
                 CHANGE
             ], options);
 
+            wrapper = that._inputWrapper;
+
             that.input.bind({
                 keydown: proxy(that._keydown, that),
                 focus: function() {
-                    that._inputWrapper.addClass(FOCUSED);
+                    wrapper.addClass(FOCUSED);
                 },
                 blur: function() {
-                    that._bluring = setTimeout(function() {
-                        clearTimeout(that._typing);
-
-                        that.text(that.text());
-                        if (!touch) { // Blur is fired prematurely on mobile and causes closure. TODO: Find a better way to do this.
+                    if (!touch) {
+                        that._bluring = setTimeout(function() {
+                            wrapper.removeClass(FOCUSED);
+                            clearTimeout(that._typing);
+                            that.text(that.text());
                             that._blur();
-                        } else {
-                            that._change();
-                        }
-
-                        that._inputWrapper.removeClass(FOCUSED);
-                    }, 100);
+                        }, 100);
+                    } else {
+                        that._change();
+                        wrapper.removeClass(FOCUSED);
+                    }
                 }
             });
 
@@ -680,6 +681,7 @@
                 var value = that.text();
                 if (that._prev !== value) {
                     that._prev = value;
+                    console.log(value);
                     that.search(value);
                 }
             }, that.options.delay);
