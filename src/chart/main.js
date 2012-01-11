@@ -14,7 +14,8 @@
         math = Math,
         proxy = $.proxy,
         getter = kendo.getter,
-        extend = $.extend;
+        extend = $.extend,
+        deepExtend = kendo.deepExtend;
 
     var template = function(definition) {
         return baseTemplate(definition, { useWithBlock: false, paramName: "d" });
@@ -5740,42 +5741,6 @@
 
     function last(array) {
         return array[array.length - 1];
-    }
-
-    function deepExtend(destination) {
-        var i = 1,
-            length = arguments.length;
-
-        for (i = 1; i < length; i++) {
-            deepExtendOne(destination, arguments[i]);
-        }
-
-        return destination;
-    }
-
-    function deepExtendOne(destination, source) {
-        var property,
-            propValue,
-            propType,
-            destProp;
-
-        for (property in source) {
-            propValue = source[property];
-            propType = typeof propValue;
-            if (propType === OBJECT && propValue !== null && propValue.constructor !== Array) {
-                destProp = destination[property];
-                if (typeof (destProp) === OBJECT) {
-                    destination[property] = destProp || {};
-                } else {
-                    destination[property] = {};
-                }
-                deepExtendOne(destination[property], propValue);
-            } else if (propType !== UNDEFINED) {
-                destination[property] = propValue;
-            }
-        }
-
-        return destination;
     }
 
     function intersection(a1, a2, b1, b2) {

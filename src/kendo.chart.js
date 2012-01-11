@@ -14,7 +14,8 @@
         math = Math,
         proxy = $.proxy,
         getter = kendo.getter,
-        extend = $.extend;
+        extend = $.extend,
+        deepExtend = kendo.deepExtend;
 
     var template = function(definition) {
         return baseTemplate(definition, { useWithBlock: false, paramName: "d" });
@@ -5742,42 +5743,6 @@
         return array[array.length - 1];
     }
 
-    function deepExtend(destination) {
-        var i = 1,
-            length = arguments.length;
-
-        for (i = 1; i < length; i++) {
-            deepExtendOne(destination, arguments[i]);
-        }
-
-        return destination;
-    }
-
-    function deepExtendOne(destination, source) {
-        var property,
-            propValue,
-            propType,
-            destProp;
-
-        for (property in source) {
-            propValue = source[property];
-            propType = typeof propValue;
-            if (propType === OBJECT && propValue !== null && propValue.constructor !== Array) {
-                destProp = destination[property];
-                if (typeof (destProp) === OBJECT) {
-                    destination[property] = destProp || {};
-                } else {
-                    destination[property] = {};
-                }
-                deepExtendOne(destination[property], propValue);
-            } else if (propType !== UNDEFINED) {
-                destination[property] = propValue;
-            }
-        }
-
-        return destination;
-    }
-
     function intersection(a1, a2, b1, b2) {
         var result,
             ua_t = (b2.x - b1.x) * (a1.y - b1.y) - (b2.y - b1.y) * (a1.x - b1.x),
@@ -6636,7 +6601,7 @@
         ExpandAnimation = Chart.ExpandAnimation,
         ViewBase = Chart.ViewBase,
         ViewElement = Chart.ViewElement,
-        deepExtend = Chart.deepExtend,
+        deepExtend = kendo.deepExtend,
         defined = Chart.defined,
         template = Chart.template,
         uniqueId = Chart.uniqueId,
@@ -7417,7 +7382,7 @@
         ExpandAnimation = Chart.ExpandAnimation,
         ViewBase = Chart.ViewBase,
         ViewElement = Chart.ViewElement,
-        deepExtend = Chart.deepExtend,
+        deepExtend = kendo.deepExtend,
         template = Chart.template,
         uniqueId = Chart.uniqueId,
         rotatePoint = Chart.rotatePoint,
@@ -8198,7 +8163,7 @@
     // Imports ================================================================
     var kendo = window.kendo,
         Chart = kendo.ui.Chart,
-        deepExtend = Chart.deepExtend;
+        deepExtend = kendo.deepExtend;
 
     // Constants ==============================================================
     var BLACK = "#000",
