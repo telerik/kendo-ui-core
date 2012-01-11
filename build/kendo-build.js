@@ -291,6 +291,16 @@ function msBuild(project, params, onSuccess, onError) {
     });
 }
 
+function grep(items, condition) {
+    var result = [];
+    items.forEach(function(item) {
+        if (condition(item)) {
+            result.push(item);
+        }
+    });
+    return result;
+}
+
 // Exports ====================================================================
 exports.addBOM = addBOM;
 exports.copyDirSyncRecursive = copyDirSyncRecursive;
@@ -298,6 +308,7 @@ exports.copyFileSync = copyFileSync;
 exports.copyTextFile = copyTextFile;
 exports.deployStyles = deployStyles;
 exports.buildVersion = buildVersion;
+exports.grep = grep;
 exports.hasBOM = hasBOM;
 exports.merge = merge;
 exports.minifyJs = minifyJs;
