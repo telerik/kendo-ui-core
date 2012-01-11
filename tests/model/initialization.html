@@ -338,6 +338,13 @@
 
                 ok(MyModel.fields.foo.parse());
             });
+
+            test("toJSON skips the id if id field is not default", function() {
+                var MyModel = Model.define({ id: "foo" }),
+                    model = new MyModel({ foo: 1 });
+
+               equal(typeof model.toJSON().id, "undefined");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

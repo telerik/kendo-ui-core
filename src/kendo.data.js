@@ -312,11 +312,15 @@
             }
         },
 
+        shouldSerialize: function(field) {
+            return this.hasOwnProperty(field) && field !== "_events";
+        },
+
         toJSON: function() {
             var result = {}, field;
 
             for (field in this) {
-                if (field.charAt(0) !== "_") {
+                if (this.shouldSerialize(field)) {
                     result[field] = this[field];
                 }
             }
@@ -1374,6 +1378,15 @@
             }
         },
 
+        getByUid: function(id) {
+            var idx, length, data = this._data;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].uid == id) {
+                    return data[idx];
+                }
+            }
+        },
         /**
          * Synchronizes changes through the transport.
          */
@@ -1623,13 +1636,13 @@
             that._data = that._observe(data);
 
             var start = that._skip || 0,
-                end = start + data.length;
+                end = start + that._data.length;
 
-            that._ranges.push({ start: start, end: end, data: data });
+            that._ranges.push({ start: start, end: end, data: that._data });
             that._ranges.sort( function(x, y) { return x.start - y.start; } );
 
             that._dequeueRequest();
-            that._process(data);
+            that._process(that._data);
         },
 
         _observe: function(data) {
@@ -2224,7 +2237,9 @@
         if (kendo.data.Model && fields && (!dataSource.schema || !dataSource.schema.model)) {
             for (idx = 0, length = fields.length; idx < length; idx++) {
                 field = fields[idx];
-                model[field.field] = field;
+                if (field.type) {
+                    model[field.field] = field;
+                }
             }
 
             if (!isEmptyObject(model)) {

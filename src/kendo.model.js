@@ -98,12 +98,11 @@
             that.id = that.get(that.idField);
         },
 
-        toJSON: function() {
-            var result = ObservableObject.fn.toJSON.call(this);
-
-            delete result.uid;
-
-            return result;
+        shouldSerialize: function(field) {
+            return ObservableObject.fn.shouldSerialize.call(this, field)
+                && field !== "uid"
+                && !(this.idField !== "id" && field === "id")
+                && field !== "_modified" && field !== "_accessors";
         },
 
         idField: "id",

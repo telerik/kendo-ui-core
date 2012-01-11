@@ -115,6 +115,12 @@
 
                 equal(observable.toJSON().foo, "bar");
             });
+
+            test("toJSON skips functions", function() {
+                var observable = new (kendo.data.ObservableObject.extend({ foo: "bar", baz: function(){} }));
+
+                equal(typeof observable.toJSON().baz, "undefined");
+            });
         </script>
     </head>
 </html>
