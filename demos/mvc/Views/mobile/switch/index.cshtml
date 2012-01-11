@@ -1,0 +1,37 @@
+<div data-role="view" id="home" data-title="Mobile Switch &ndash; Basic Usage">
+    <h2>Push Notifications</h2>
+    <ul class="km-list km-listinset">
+        <li>
+            <div style="float:left;margin:1rem"><h3>Email</h3></div>
+            <div style="float:right;margin:1rem">
+                <input data-role="switch" id="email-switch" checked="checked" />
+            </div>
+        </li>
+        <li>
+            <div style="float:left;margin:1rem"><h3>Wink</h3></div>
+            <div style="float:right;margin:1rem">
+                <input id="wink-switch" />
+            </div>
+        </li>
+    </ul>
+
+    <h2>Subscription</h2>
+    <ul class="km-list km-listinset">
+        <li>
+            <div style="float:left;margin:1rem"><h3>Subscribe</h3></div>
+            <div style="float:right;margin:1rem">
+                <input id="subscription-switch" />
+            </div>
+        </li>
+    </ul>
+</div>
+
+<script>
+    $("#wink-switch").kendoMobileSwitch();
+
+    $("#subscription-switch").kendoMobileSwitch({
+        checked: true,
+        onLabel: "YES",
+        offLabel: "NO"
+    });
+</script>

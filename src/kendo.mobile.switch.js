@@ -144,11 +144,11 @@
         * Toggle the checked state of the widget.
         * @param {Boolean} check The checked state
         * @example
-        * &lt;input data-role="switch" id="foo" /&gt;
+        * <input data-role="switch" id="foo" />;
         *
-        * &lt;script&gt;
+        * <script>;
         *   $("#foo").data("kendoMobileSwitch").toggle(true);
-        * &lt;/script&gt;
+        * </script>;
         */
         toggle: function(check) {
             var that = this,
