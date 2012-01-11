@@ -5,7 +5,8 @@ var fs = require("fs"),
     parser = require("./lib/parse-js"),
     spawn = require('child_process').spawn,
     uglify = require("./lib/process"),
-    cssmin = require("./lib/cssmin").cssmin;
+    cssmin = require("./lib/cssmin").cssmin,
+    themes = require("build/themes");
 
 function rmdirSyncRecursive(path) {
     if (!existsSync(path)) {
@@ -260,20 +261,26 @@ function mkdir(newDir) {
     }
 }
 
-function deployStyles(stylesRoot, outputRoot, header, compress) {
+function deployStyles(stylesRoot, outputRoot, header, compress, success) {
     var filesRegex = compress ? /\.(css|png|jpg|jpeg|gif)$/i : /\.(less|css|png|jpg|jpeg|gif)$/i,
         stylesRegex = compress ? /\.css$/ : /\.(less|css)$/ ;
 
     mkdir(outputRoot);
     copyDirSyncRecursive(stylesRoot, outputRoot, false, filesRegex);
-    processFilesRecursive(outputRoot, stylesRegex, function(fileName) {
-        var css = stripBOM(readText(fileName)),
-            output = compress ? cssmin(css) : css;
+    themes.buildThemes(stylesRoot, outputRoot, function() {
+        processFilesRecursive(outputRoot, stylesRegex, function(fileName) {
+            var css = stripBOM(readText(fileName)),
+                output = compress ? cssmin(css) : css;
 
-        writeText(fileName, header + output);
+            writeText(fileName, header + output);
 
-        if (compress) {
-            fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
+            if (compress) {
+                fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
+            }
+        });
+
+        if (success) {
+            success();
         }
     });
 }
@@ -284,7 +291,7 @@ function msBuild(project, params, onSuccess, onError) {
         buildParams = params.concat([project]);
 
     var success = function() {
-        console.log("Success.");
+        console.log("Built MSBuild project", project);
         if (onSuccess) {
             onSuccess();
         }

@@ -2,14 +2,15 @@ var less = require("./less-js/lib/less"),
     fs = require("fs"),
     path = require("path");
 
-function generateThemes(themesFolder, outputFolder) {
+function buildThemes(themesFolder, outputFolder, success) {
     var themes = fs.readdirSync(themesFolder)
                     .filter(function(file) {
                         return file != "template.less" && /\.less$/i.test(file);
                     })
                     .map(function(file) {
                         return path.join(themesFolder, file);
-                    });
+                    }),
+        themesRemaining = themes.length;
 
     themes.forEach(function(theme) {
         var skinTemplate = fs.readFileSync(theme, "utf8"),
@@ -23,20 +24,15 @@ function generateThemes(themesFolder, outputFolder) {
             if (e) {
                 console.log("ERROR: `" + theme + "` theme generation failed: " + e.message);
             } else {
-                fs.writeFileSync(path.join(outputFolder, "kendo." + themeName + ".css"), tree.toCSS(/* { compress: true } */), "utf8");
+                fs.writeFileSync(path.join(outputFolder, themeName + ".css"), tree.toCSS(/* { compress: true } */), "utf8");
+                console.log("Built theme", themeName);
 
-                console.log("theme `" + themeName + "` generated successfully.");
+                if (success && --themesRemaining === 0) {
+                    success();
+                }
             }
         });
     });
 }
 
-function build(outputFolder) {
-    generateThemes("styles", outputFolder || "styles");
-}
-
-if (require.main === module) {
-    build();
-} else {
-    exports.build = build;
-}
+exports.buildThemes = buildThemes;
