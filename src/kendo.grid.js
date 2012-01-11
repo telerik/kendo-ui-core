@@ -2013,7 +2013,7 @@
         },
 
         _autoColumns: function(schema) {
-            if (schema) {
+            if (schema && schema.toJSON) {
                 var that = this,
                     field;
 

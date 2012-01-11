@@ -18,6 +18,7 @@
             validation = field.validation,
             ruleName,
             DATATYPE = kendo.attr("type"),
+            VALUE = kendo.attr("value"),
             rule,
             attr = {
                 name: options.field
@@ -38,6 +39,8 @@
         if (inArray(type, specialRules) >= 0) {
             attr[DATATYPE] = type;
         }
+
+        attr[VALUE] = options.field;
 
         return attr;
     }
@@ -105,7 +108,7 @@
         },
 
         end: function() {
-            return this.binder.bindModel();
+            return this.validatable.validate();
         },
 
         distroy: function() {
@@ -152,7 +155,8 @@
             }
 
             settings[CHANGE] = $.proxy(that._binderChange, that);
-            that.binder = new Binder(container, that.options.model, settings);
+            kendo.bind(container, that.options.model);
+            //that.binder = new Binder(container, that.options.model, settings);
 
             that.validatable = container.kendoValidator({
                 errorTemplate: '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
