@@ -101,6 +101,7 @@
     <Content Include="content\dataviz\overview\scatter.png" />
     <Content Include="content\shared\js\console.js" />
     <Content Include="content\shared\js\examples.js" />
+    <Content Include="content\shared\js\less.js" />
     <Content Include="content\shared\js\people.js" />
     <Content Include="content\shared\js\prettify.js" />
     <Content Include="content\shared\styles\aeroviewr.png" />

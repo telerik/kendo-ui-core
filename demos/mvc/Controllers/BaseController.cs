@@ -19,6 +19,7 @@ namespace Kendo.Controllers
                 { ".js", "application/x-javascript" },
                 { ".json", "application/json" },
                 { ".css", "text/css" },
+                { ".less", "text/css" },
                 { ".jpg", "image/jpg" },
                 { ".gif", "image/gif" },
                 { ".png", "image/png" }
