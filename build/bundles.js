@@ -186,13 +186,18 @@ function deployExamples(root, bundle) {
                     viewName = example.url.replace("html", "cshtml"),
                     fileName = path.join(viewsRoot, suite, viewName),
                     outputName = path.join(suiteDest, example.url),
-                    params = {
-                        body: readText(fileName),
-                        title: example.text
-                    };
+                    exampleBody = readText(fileName);
+
+                    exampleBody = exampleBody
+                        .replace(/@section \w+ {(.|\n|\r)+}/gi, "")
+                        .replace(/@{(.|\n|\r)+}/gi)
+                        .replace(/@@/gi, "");
 
                     kendoBuild.mkdir(path.dirname(outputName));
-                    writeText(outputName, exampleTemplate(params));
+                    writeText(outputName, exampleTemplate({
+                        body: exampleBody,
+                        title: example.text
+                    }));
                 }
             }
         }
