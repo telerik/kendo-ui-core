@@ -1325,28 +1325,6 @@
 
             id = model.id;
 
-            if (kendo.data.Model && !isEmptyObject(model)) {
-                that._set = new kendo.data.ModelSet({
-                    model: model,
-                    data: that._data,
-                    reader: that.reader,
-                    batch: options.batch,
-                    sendAllFields: options.sendAllFields,
-                    transport: that.transport,
-                    change: function() {
-                        var data = that.data();
-                        that._total = that.reader.total(data);
-                        that._process(data);
-                    },
-                    modelChange: function(model) {
-                        that.trigger(MODELCHANGE, model);
-                    },
-                    error: function(response) {
-                        that.trigger(ERROR, response);
-                    }
-                });
-            }
-
             if (id) {
                 that.id = function(record) {
                     return id(record);
@@ -1366,7 +1344,7 @@
                          * @event
                          */
                         CHANGE,
-                        CREATE, DESTROY, UPDATE, REQUESTSTART, MODELCHANGE], options);
+                        CREATE, DESTROY, UPDATE, REQUESTSTART], options);
         },
 
         options: {
@@ -1644,10 +1622,6 @@
 
             that._data = that._observe(data);
 
-            if (that._set) {
-                that._set.data(data);
-            }
-
             var start = that._skip || 0,
                 end = start + data.length;
 
@@ -1745,10 +1719,6 @@
             var that = this;
             if (value !== undefined) {
                 that._data = value;
-
-                if (that._set) {
-                    that._set.data(value);
-                }
 
                 that._process(value);
             } else {

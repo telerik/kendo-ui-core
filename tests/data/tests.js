@@ -50,29 +50,5 @@ tests.push(
     {
         page: "data/inmemorycache.html",
         title: "in-memory cache"
-    },
-    {
-        page: "data/binder/mapping.html",
-        title: "binder mapping"
-    },
-    {
-        page: "data/binder/initialization.html",
-        title: "binder initialization"
-    },
-    {
-        page: "data/binder/textbox.html",
-        title: "binder textbox binding"
-    },
-    {
-        page: "data/binder/checkbox.html",
-        title: "binder checkbox binding"
-    },
-    {
-        page: "data/binder/textarea.html",
-        title: "binder textarea binding"
-    },
-    {
-        page: "data/binder/select.html",
-        title: "binder select binding"
     }
 );
