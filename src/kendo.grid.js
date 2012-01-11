@@ -266,7 +266,7 @@
      *   <thead>
      *       <tr>
      *           <th data-field="title">Title</th>
-     *           <th datao-field="year">Year</th>
+     *           <th data-field="year">Year</th>
      *       </tr>
      *   </thead>
      *   <tbody>
@@ -352,6 +352,20 @@
      *          }
      *       });
      *   });
+     *
+     * @section
+     * <h3>Accessing an Existing Grid</h3>
+     * <p>
+     *  You can reference an existing <b>Grid</b> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
+     *  Once a reference has been established, you can use the API to control
+     *  its behavior. 
+     * </p>
+     *
+     * @exampleTitle Accessing an existing Grid instance
+     * @example
+     * var grid = $("#grid").data("kendoGrid");
+     *
      */
     var Grid = Widget.extend(/** @lends kendo.ui.Grid.prototype */ {
         /**
@@ -359,8 +373,9 @@
          * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or Object with DataSource configuration.
-         * _example
+         * @option {kendo.data.DataSource | Object} [dataSource] Instance of DataSource or Object with DataSource configuration.
+         * _exampleTitle Bind to a DataSource instance
+	 * _example
          * var sharedDataSource = new kendo.data.DataSource({
          *      data: [{title: "Star Wars: A New Hope", year: 1977}, {title: "Star Wars: The Empire Strikes Back", year: 1980}],
          *      pageSize: 1
@@ -369,9 +384,8 @@
          * $("#grid").kendoGrid({
          *      dataSource: sharedDataSource
          *  });
-         *
-         *  //or
-         *
+         * _exampleTitle Bind to a local array
+	 * _example
          *  $("#grid").kendoGrid({
          *      dataSource: {
          *          data: [{title: "Star Wars: A New Hope", year: 1977}, {title: "Star Wars: The Empire Strikes Back", year: 1980}],
@@ -379,30 +393,55 @@
          *      }
          *  });
          * @option {Function} [detailTemplate] Template to be used for rendering the detail rows in the grid.
+         * See the <a href="http://demos.kendoui.com/web/grid/detailtemplate.html"><b>Detail Template</b></a> example.
          * @option {Object} [sortable] Defines whether grid columns are sortable.
+         * _example
+         * $("#grid").kendoGrid({
+         *     sortable: true
+         * });
+         * //
+         * // or
+         * //
+         * $("#grid").kendoGrid({
+         *     sortable: {
+         *         mode: "multiple", // enables multi-column sorting
+         *         allowUnsort: true
+         * });
          * @option {String} [sortable.mode] <"single"> Defines sorting mode. Possible values:
+	 * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "single"
+         *              <b>"single"</b>
          *         </dt>
          *         <dd>
          *             Defines that only once column can be sorted at a time.
          *         </dd>
          *         <dt>
-         *              "multiple"
+         *              <b>"multiple"</b>
          *         </dt>
          *         <dd>
          *              Defines that multiple columns can be sorted at a time.
          *         </dd>
          *    </dl>
-         *
+         * </div>
          * @option {Boolean} [sortable.allowUnsort] <false>  Defines whether column can have unsorted state.
          * @option {Array} [columns] A collection of column objects or collection of strings that represents the name of the fields.
-         * @option {String} [columns.field] The field that will displayed in the column.
-         * @option {String} [columns.title] The title that will displayed in the column header.
+         * _example
+         * var sharedDataSource = new kendo.data.DataSource({
+         *      data: [{title: "Star Wars: A New Hope", year: 1977}, {title: "Star Wars: The Empire Strikes Back", year: 1980}],
+         *      pageSize: 1
+         * });
+         * $("#grid").kendoGrid({
+         *     dataSource: sharedDataSource,
+         *     columns: [ { title: "Action", command: "destroy" }, // creates a column with delete buttons
+         *                { title: "Title", field: "title", width: 200, template: "&lt;h1 id='title'&gt;${ title }&lt;/div&gt;" },
+         *                { title: "Year", field: "year", filterable: false, sortable: true, format: "{0:dd/MMMM/yyyy}" } ];
+         * });
+         * @option {String} [columns.field] The field from the datasource that will be displayed in the column.
+         * @option {String} [columns.title] The text that will be displayed in the column header.
          * @option {String} [columns.format] The format that will be applied on the column cells.
          * _example
-         *  $(".k-grid").kendoGrid({
+         *  $("#grid").kendoGrid({
          *      dataSource: {
          *          data: createRandomData(50),
          *          pageSize: 10
@@ -452,7 +491,7 @@
          * @option {String} [columns.command] Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".
          * @option {String} [columns.template] The template for column's cells.
          * _example
-         *  $(".k-grid").kendoGrid({
+         *  $("#grid").kendoGrid({
          *      dataSource: {
          *          data: createRandomData(50),
          *          pageSize: 10
@@ -471,7 +510,7 @@
          * @option {Array} [toolbar] This is a list of commands for which the corresponding buttons will be rendered.
          * The supported built-in commands are: "create", "cancel", "save", "destroy".
          * _example
-         *  $(".k-grid").kendoGrid({
+         *  $("#grid").kendoGrid({
          *      dataSource: {
          *          data: createRandomData(50),
          *          pageSize: 10
@@ -486,7 +525,11 @@
          *              template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
          *         }
          *      ]
-         *      toolbar: ["create", "save", "cancel"],
+         *      toolbar: [
+         *          "create",
+         *          { name: "save", text: "Save This Record" },
+         *          { name: "cancel", template: '&lt;img src="icons/cancel.png' rel='cancel' /&gt;" }
+         *      ],
          *      editable: true
          *   });
          * @option {String} [toolbar.name] The name of the command. One of the predefined or a custom.
@@ -494,68 +537,168 @@
          * @option {String} [toolbar.template] The template for the command button.
          *
          * @option {Object} [editable] Indicates whether editing is enabled/disabled.
+         * _example
+         *  $("#grid").kendoGrid({
+         *      dataSource: {
+         *          data: createRandomData(50),
+         *          pageSize: 10
+         *      },
+         *      columns: [
+         *          {
+         *              field: "Name"
+         *          },
+         *          {
+         *              field: "BirthDate",
+         *              title: "Birth Date",
+         *              template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
+         *         }
+         *      ]
+         *      toolbar: [
+         *          "create",
+         *          { name: "save", text: "Save This Record" },
+         *          { name: "cancel", template: "&lt;img src="icons/cancel.png' rel='cancel' /&gt;" }
+         *      ],
+         *      editable: {
+         *          update: "true", // puts the row in edit mode when it is clicked
+         *          destroy: "false", // does not remove the row when it is deleted, but marks it for deletion
+         *          confirmation: "Are you sure you want to remove this item?"
+         *      }
+         *  });
          * @option {Boolean} [editable.update] Indicates whether item should be switched to edit mode on click.
          * @option {Boolean} [editable.destroy] Indicates whether item should be deleted when click on delete button.
          * @option {Boolean} [editable.confirmation] Defines the text that will be used in confirmation box when delete an item.
          * @option {Boolean} [pageable] <false> Indicates whether paging is enabled/disabled.
+         * _example
+         *  $("#grid").kendoGrid({
+         *      dataSource: {
+         *          data: createRandomData(50),
+         *          pageSize: 10
+         *      },
+         *      columns: [
+         *          {
+         *              field: "Name"
+         *          },
+         *          {
+         *              field: "BirthDate",
+         *              title: "Birth Date",
+         *              template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
+         *         }
+         *      ],
+         *      pageable: true
+         *  });
          * @option {Boolean} [groupable] <false> Indicates whether grouping is enabled/disabled.
+         * _example
+         *  $("#grid").kendoGrid({
+         *      dataSource: {
+         *          data: createRandomData(50),
+         *          pageSize: 10
+         *      },
+         *      columns: [
+         *          {
+         *              field: "Name"
+         *          },
+         *          {
+         *              field: "BirthDate",
+         *              title: "Birth Date",
+         *              template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
+         *         }
+         *      ],
+         *      groupable: true
+         *  });
          * @option {Boolean} [navigatable] <false> Indicates whether keyboard navigation is enabled/disabled.
+         * _example
+         *  $("#grid").kendoGrid({
+         *      dataSource: {
+         *          data: createRandomData(50),
+         *          pageSize: 10
+         *      },
+         *      columns: [
+         *          {
+         *              field: "Name"
+         *          },
+         *          {
+         *              field: "BirthDate",
+         *              title: "Birth Date",
+         *              template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
+         *         }
+         *      ],
+         *      navigatable: true
+         *  });
          * @option {String} [selectable] <undefined> Indicates whether selection is enabled/disabled. Possible values:
-         *    <dl>
+         * <div class="details-list">
+	 *    <dl>
          *         <dt>
-         *              "row"
+         *              <b>"row"</b>
          *         </dt>
          *         <dd>
          *              Single row selection.
          *         </dd>
          *         <dt>
-         *              "cell"
+         *              <b>"cell"</b>
          *         </dt>
          *         <dd>
          *              Single cell selection.
          *         </dd>
          *         <dt>
-         *              "multiple, row"
+         *              <b>"multiple, row"</b>
          *         </dt>
          *         <dd>
          *              Multiple row selection.
          *         </dd>
          *         <dt>
-         *              "multiple, cell"
+         *              <b>"multiple, cell"</b>
          *         </dt>
          *         <dd>
          *              Multiple cell selection.
          *         </dd>
          *    </dl>
-         * @option {Boolean} [autoBind] <false> Indicates whether the grid will call query on DataSource initially.
-         * @option {Boolean|Object} [scrollable] <true> Enable/disable grid scrolling. Possible values:
-         *    <dl>
+         * </div>
+	 * @option {Boolean} [autoBind] <true> Indicates whether the grid will call read on the DataSource initially.
+         * _example
+         *  $("#grid").kendoGrid({
+         *      dataSource: sharedDataSource,
+         *      columns: [
+         *          {
+         *              field: "Name"
+         *          },
+         *          {
+         *              field: "BirthDate",
+         *              title: "Birth Date",
+         *              template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
+         *         }
+         *      ],
+         *      autoBind: true // the grid will not be populated with data until read() is called on the sharedDataSource
+         *  });
+         * @option {Boolean | Object} [scrollable] <true> Enable/disable grid scrolling. Possible values:
+         * <div class="details-list">
+	 *    <dl>
          *         <dt>
-         *              true
+         *              <b>true</b>
          *         </dt>
          *         <dd>
          *              Enables grid vertical scrolling
          *         </dd>
          *         <dt>
-         *              false
+         *              <b>false</b>
          *         </dt>
          *         <dd>
          *              Disables grid vertical scrolling
          *         </dd>
          *         <dt>
-         *              { virtual: false }
+         *              <b>{ virtual: false }</b>
          *         </dt>
          *         <dd>
          *              Enables grid vertical scrolling without data virtualization. Same as first option.
          *         </dd>
          *         <dt>
-         *              { virtual: true }
+         *              <b>{ virtual: true }</b>
          *         </dt>
          *         <dd>
          *              Enables grid vertical scrolling with data virtualization.
          *         </dd>
          *    </dl>
-         * _example
+         * </div>
+	 * _example
          *  $("#grid").kendoGrid({
          *      scrollable: {
          *          virtual: true //false
@@ -614,6 +757,20 @@
                  * @name kendo.ui.Grid#change
                  * @event
                  * @param {Event} e
+                 * @example
+                 *  $("#grid").kendoGrid({
+                 *      change: function(e) {
+                 *          // handle event
+		 *      }
+                 *  });
+                 *  @exampleTitle To set after initialization
+                 *  @example
+                 *  // get a reference to the grid
+                 *  var grid = $("#grid").data("kendoGrid");
+                 *  // bind to the change event
+                 *  grid.bind("change", function(e) {
+                 *      // handle event
+                 *  }
                  */
                 CHANGE,
                 /**
@@ -621,6 +778,20 @@
                  * @name kendo.ui.Grid#dataBound
                  * @event
                  * @param {Event} e
+                 * @example
+                 *  $("#grid").kendoGrid({
+                 *      dataBound: function(e) {
+                 *          // handle event
+		 *      }
+                 *  });
+                 *  @exampleTitle To set after initialization
+                 *  @example
+                 *  // get a reference to the grid
+                 *  var grid = $("#grid").data("kendoGrid");
+                 *  // bind to the dataBound event
+                 *  grid.bind("dataBound", function(e) {
+                 *      // handle event
+                 *  }
                  */
                 DATABOUND,
                 /**
@@ -630,6 +801,20 @@
                  * @param {Event} e
                  * @param {Object} e.masterRow The jQuery element representing master row.
                  * @param {Object} e.detailRow The jQuery element representing detail row.
+                 * @example
+                 *  $("#grid").kendoGrid({
+                 *      detailExpand: function(e) {
+                 *          // handle event
+		 *      }
+                 *  });
+                 *  @exampleTitle To set after initialization
+                 *  @example
+                 *  // get a reference to the grid
+                 *  var grid = $("#grid").data("kendoGrid");
+                 *  // bind to the detailExpand event
+                 *  grid.bind("detailExpand", function(e) {
+                 *      // handle event
+                 *  }
                  */
                 DETAILEXPAND,
                 /**
@@ -639,6 +824,20 @@
                  * @param {Event} e
                  * @param {Object} e.masterRow The jQuery element representing master row.
                  * @param {Object} e.detailRow The jQuery element representing detail row.
+                 * @example
+                 *  $("#grid").kendoGrid({
+                 *      detailCollapse: function(e) {
+                 *          // handle event
+	         *      }
+                 *  });
+                 * @exampleTitle To set after initialization
+                 * @example
+                 *  // get a reference to the grid
+                 *  var grid = $("#grid").data("kendoGrid");
+                 *  // bind to the detailCollapse event
+                 *  grid.bind("detailCollapse", function(e) {
+                 *      // handle event
+                 *  }
                  */
                 DETAILCOLLAPSE,
                 /**
@@ -650,6 +849,19 @@
                  * @param {Object} e.detailRow The jQuery element representing detail row.
                  * @param {Object} e.detailCell The jQuery element representing detail cell.
                  * @param {Object} e.data The data for the master row.
+                 * @example
+                 *  $("#grid").kendoGrid({
+                 *      detailInit: function(e) {
+                 *          // handle event
+                 *  });
+                 * @exampleTitle To set after initialization
+                 * @example
+                 *  // get a reference to the grid
+                 *  var grid = $("#grid").data("kendoGrid");
+                 *  // bind to the detailInit event
+                 *  grid.bind("detailInit", function(e) {
+                 *      // handle event
+                 *  }
                  */
                 DETAILINIT,
                 /**
@@ -659,6 +871,19 @@
                  * @param {Event} e
                  * @param {Object} e.container The jQuery element to be edited.
                  * @param {Object} e.model The model to be edited.
+                 * @example
+                 *  $("#grid").kendoGrid({
+                 *      edit: function(e) {
+                 *          // handle event
+                 *  });
+                 * @exampleTitle To set after initialization
+                 * @example
+                 *  // get a reference to the grid
+                 *  var grid = $("#grid").data("kendoGrid");
+                 *  // bind to the edit event
+                 *  grid.bind("edit", function(e) {
+                 *      // handle event
+                 *  }
                  */
                 EDIT,
                 /**
@@ -669,6 +894,19 @@
                  * @param {Object} e.values The values entered by the user.
                  * @param {Object} e.container The jQuery element which is in edit mode.
                  * @param {Object} e.model The edited model.
+                 * @example
+                 *  $("#grid").kendoGrid({
+                 *      save: function(e) {
+                 *          // handle event
+                 *  });
+                 * @exampleTitle To set after initialization
+                 * @example
+                 *  // get a reference to the grid
+                 *  var grid = $("#grid").data("kendoGrid");
+                 *  // bind to the save event
+                 *  grid.bind("save", function(e) {
+                 *      // handle event
+                 *  }
                  */
                 SAVE,
                 /**
@@ -678,6 +916,19 @@
                  * @param {Event} e
                  * @param {Object} e.row The row element to be deleted.
                  * @param {Object} e.model The model which to be deleted.
+                 * @example
+                 *  $("#grid").kendoGrid({
+                 *      remove: function(e) {
+                 *          // handle event
+                 *  });
+                 *  @exampleTitle To set after initialization
+                 *  @example
+                 *  // get a reference to the grid
+                 *  var grid = $("#grid").data("kendoGrid");
+                 *  // bind to the remove event
+                 *  grid.bind("remove", function(e) {
+                 *      // handle event
+                 *  }
                  */
                 REMOVE,
                 /**
@@ -685,6 +936,19 @@
                  * @name kendo.ui.Grid#saveChanges
                  * @event
                  * @param {Event} e
+                 * @example
+                 *  $("#grid").kendoGrid({
+                 *      saveChanges: function(e) {
+                 *          // handle event
+                 *  });
+                 *  @exampleTitle To set after initialization
+                 *  @example
+                 *  // get a reference to the grid
+                 *  var grid = $("#grid").data("kendoGrid");
+                 *  // bind to the saveChanges event
+                 *  grid.bind("saveChanges", function(e) {
+                 *      // handle event
+                 *  }
                  */
                 SAVECHANGES
             ], that.options);
@@ -730,7 +994,12 @@
 
         /**
          * Returns the index of the cell in the grid item skipping group and hierarchy cells.
-         * @param {Selector|DOMElement} cell Target cell.
+         * @param {Selector | DOM Element} cell Target cell.
+         * @example
+         *  // get a reference to the grid widget
+         *  var grid = $("#grid").data("kendoGrid");
+         *  // get the index of the row
+         *  // TODO: add specific function call here
          */
         cellIndex: function(td) {
             return $(td).parent().find('td:not(.k-group-cell,.k-hierarchy-cell)').index(td);
@@ -802,6 +1071,8 @@
          * Puts the specified table cell in edit mode. It requires a jQuery object representing the cell. The editCell method triggers edit event.
          * @param {Selector} cell Cell to be edited.
          * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
          * // edit first table cell
          * grid.editCell(grid.tbody.find(">tr>td:first"));
          */
@@ -843,6 +1114,9 @@
         /**
          * Closes current edited cell.
          * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
+         * // close the cell being edited
          * grid.closeCell();
          */
         closeCell: function() {
@@ -877,11 +1151,12 @@
 
         /**
          * Removes the specified row from the grid. The removeRow method triggers remove event.
-         * @param {Selector|DOMElement} row Row to be removed.
+         * @param {Selector | DOM Element} row Row to be removed.
          * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
          * // remove first table row
          * grid.removeRow(grid.tbody.find(">tr:first"));
-         *
          */
         removeRow: function(row) {
             var that = this,
@@ -913,6 +1188,8 @@
         /**
          * Cancels any pending changes during. Deleted rows are restored. Inserted rows are removed. Updated rows are restored to their original values.
          * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
          * grid.cancelChanges();
          */
         cancelChanges: function() {
@@ -922,6 +1199,8 @@
         /**
          * Calls DataSource sync to submit any pending changes if state is valid. The saveChanges method triggers saveChanges event.
          * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
          * grid.saveChanges();
          */
         saveChanges: function() {
@@ -935,6 +1214,8 @@
         /**
          * Adds a new empty table row in edit mode. The addRow method triggers edit event.
          * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
          * grid.addRow();
          */
         addRow: function() {
@@ -1083,6 +1364,11 @@
 
         /**
          * Clears currently selected items.
+         * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
+         * // clear the selection of items in the grid
+         * grid.clearSelection();
          */
         clearSelection: function() {
             var that = this;
@@ -1092,8 +1378,10 @@
 
         /**
          * Selects the specified Grid rows/cells. If called without arguments - returns the selected rows/cells.
-         * @param {Selector|Array} items Items to select.
+         * @param {Selector | Array} items Items to select.
          * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
          * // selects first grid item
          * grid.select(grid.tbody.find(">tr:first"));
          */
@@ -1753,8 +2041,10 @@
 
         /**
          * Returns the data item to which a given table row (tr DOM element) is bound.
-         * @param {Selector|DOMElement} tr Target row.
+         * @param {Selector | DOM Element} tr Target row.
          * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
          * // returns the data item for first row
          * grid.dataItem(grid.tbody.find(">tr:first"));
          */
@@ -1764,8 +2054,10 @@
 
         /**
          * Expands specified master row.
-         * @param {Selector|DOMElement} row Target master row to expand.
+         * @param {Selector | DOM Element} row Target master row to expand.
          * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
          * // expands first master row
          * grid.expandRow(grid.tbody.find(">tr.k-master-row:first"));
          */
@@ -1775,8 +2067,10 @@
 
         /**
          * Collapses specified master row.
-         * @param {Selector|DOMElement} row Target master row to collapse.
+         * @param {Selector | DOM Element} row Target master row to collapse.
          * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
          * // collapses first master row
          * grid.collapseRow(grid.tbody.find(">tr.k-master-row:first"));
          */
@@ -1952,8 +2246,10 @@
 
         /**
          * Collapses specified group.
-         * @param {Selector|DOMElement} group Target group item to collapse.
+         * @param {Selector | DOM Element} group Target group item to collapse.
          * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
          * // collapses first group item
          * grid.collapseGroup(grid.tbody.find(">tr.k-grouping-row:first"));
          */
@@ -1968,8 +2264,10 @@
 
         /**
          * Expands specified group.
-         * @param {Selector|DOMElement} group Target group item to expand.
+         * @param {Selector | DOM Element} group Target group item to expand.
          * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
          * // expands first group item
          * grid.expandGroup(grid.tbody.find(">tr.k-grouping-row:first"));
          */
@@ -2027,8 +2325,8 @@
         /**
          * Reloads the data and repaints the grid.
          * @example
+         * // get a reference to the grid widget
          * var grid = $("#grid").data("kendoGrid");
-         *
          * // refreshes the grid
          * grid.refresh();
          */

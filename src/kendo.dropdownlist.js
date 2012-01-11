@@ -1,119 +1,133 @@
 (function($, undefined) {
     /**
-    * @name kendo.ui.DropDownList.Description
-    *
-    * @section
-    *   <p>
-    *       The DropDownList widget displays a list of values and allows the selection of a single value from the list.
-    *       It is a richer version of the standard HTML select, providing support for local and remote data binding, item templates,
-    *       and configurable options for controlling the list behavior.
-    *   </p>
-    *   If you want to allow user input, use the <a href="../combobox/index.html" title="Kendo UI ComboBox">Kendo UI ComboBox</a>.
-    *
-    *   <h3>Getting Started</h3>
-    *   There are two basic ways to create a DropDownList:
-    *   <ol>
-    *       <li>From a basic HTML input element, using data binding to define the list items</li>
-    *       <li>From a HTML select element, using HTML to define the list items</li>
-    *   </ol>
-    *   Regardless of the initialization technique, the resulting Kendo UI DropDownList will look and function identically.
-    *
-    * @exampleTitle Creating a dropdownlist from existing input HTML element
-    * @example
-    * <!-- HTML -->
-    * <input id="dropdownlist" />
-    *
-    * @exampleTitle DropDownList initialization
-    * @example
-    *   $(document).ready(function(){
-    *      $("#dropdownlist").kendoDropDownList([{text: "Item1", value: "1"}, {text: "Item2", value: "2"}]);
-    *   });
-    *
-    * @exampleTitle Creating a dropdownlist from existing select HTML element
-    * @example
-    * <!-- HTML -->
-    * <select id="dropdownlist">
-    *     <option>Item 1</option>
-    *     <option>Item 2</option>
-    *     <option>Item 3</option>
-    * </select>
-    *
-    * @exampleTitle DropDownList initialization
-    * @example
-    *   $(document).ready(function(){
-    *       $("#dropdownlist").kendoDropDownList();
-    *   });
-    *
-    * @section
-    *   <h3>Binding to Data</h3>
-    *   <p>
-    *       The DropDownList can be bound to both local JavaScript Arrays and remote data via the
-    *       Kendo DataSource component. Local JavaScript Arrays are appropriate for limited value
-    *       options, while remote data binding is better for larger data sets. With remote binding,
-    *       options will be loaded on-demand, similar to AutoComplete.
-    *   </p>
-    * @exampleTitle Binding to a remote OData service
-    * @example
-    *   $(document).ready(function() {
-    *       $("#titles").kendoDropDownList({
-    *           index: 0,
-    *           dataTextField: "Name",
-    *           dataValueField: "Id",
-    *           filter: "contains",
-    *           dataSource: {
-    *               type: "odata",
-    *               severFiltering: true,
-    *               serverPaging: true,
-    *               pageSize: 20,
-    *               transport: {
-    *                   read: "http://odata.netflix.com/Catalog/Titles"
-    *               }
-    *           }
-    *       });
-    *   });
-    *
-    * @section
-    *   <h3>Customizing Item Templates</h3>
-    *   <p>
-    *       DropDownList leverages Kendo UI high-performance Templates to give you complete control
-    *       over item rendering. For a complete overview of Kendo UI Template capabilities and syntax,
-    *       please review the <a href="../templates/index.html" title="Kendo UI Template">Kendo UI Template</a> demos and documentation.
-    *   </p>
-    * @exampleTitle Basic item template customization
-    * @example
-    *   <!-- HTML -->
-    *   <input id="titles"/>
-    *
-    *   <!-- Template -->
-    *   <script id="scriptTemplate" type="text/x-kendo-template">
-    *       # if (data.BoxArt.SmallUrl) { #
-    *           <img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
-    *       # } else { #
-    *           <img alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
-    *       # } #
-    *   </script>
-    *
-    *   <!-- DropDownList initialization -->
-    *   <script type="text/javascript">
-    *       $(document).ready(function() {
-    *           $("#titles").kendoDropDownList({
-    *               autoBind: false,
-    *               dataTextField: "Name",
-    *               dataValueField: "Id",
-    *               template: $("#scriptTemplate").html(),
-    *               dataSource: {
-    *                   type: "odata",
-    *                   severFiltering: true,
-    *                   serverPaging: true,
-    *                   pageSize: 20,
-    *                   transport: {
-    *                       read: "http://odata.netflix.com/Catalog/Titles"
-    *                   }
-    *               }
-    *           });
-    *       });
-    *   </script>
-    */
+     * @name kendo.ui.DropDownList.Description
+     *
+     * @section
+     *   <p>
+     *       The DropDownList widget displays a list of values and allows the selection of a single value from the list.
+     *       It is a richer version of the standard HTML select, providing support for local and remote data binding, item templates,
+     *       and configurable options for controlling the list behavior.
+     *   </p>
+     *   If you want to allow user input, use the <a href="../combobox/index.html" title="Kendo UI ComboBox">Kendo UI ComboBox</a>.
+     *
+     *   <h3>Getting Started</h3>
+     *   There are two basic ways to create a DropDownList:
+     *   <ol>
+     *       <li>From a basic HTML input element, using data binding to define the list items</li>
+     *       <li>From a HTML select element, using HTML to define the list items</li>
+     *   </ol>
+     *   Regardless of the initialization technique, the resulting Kendo UI DropDownList will look and function identically.
+     *
+     * @exampleTitle Creating a dropdownlist from existing input HTML element
+     * @example
+     * <!-- HTML -->
+     * <input id="dropdownlist" />
+     *
+     * @exampleTitle DropDownList initialization
+     * @example
+     *   $(document).ready(function(){
+     *      $("#dropdownlist").kendoDropDownList([{text: "Item1", value: "1"}, {text: "Item2", value: "2"}]);
+     *   });
+     *
+     * @exampleTitle Creating a dropdownlist from existing select HTML element
+     * @example
+     * <!-- HTML -->
+     * <select id="dropdownlist">
+     *     <option>Item 1</option>
+     *     <option>Item 2</option>
+     *     <option>Item 3</option>
+     * </select>
+     *
+     * @exampleTitle DropDownList initialization
+     * @example
+     *   $(document).ready(function(){
+     *       $("#dropdownlist").kendoDropDownList();
+     *   });
+     *
+     * @section
+     *   <h3>Binding to Data</h3>
+     *   <p>
+     *       The DropDownList can be bound to both local JavaScript Arrays and remote data via the
+     *       Kendo DataSource component. Local JavaScript Arrays are appropriate for limited value
+     *       options, while remote data binding is better for larger data sets. With remote binding,
+     *       options will be loaded on-demand, similar to AutoComplete.
+     *   </p>
+     * @exampleTitle Binding to a remote OData service
+     * @example
+     *   $(document).ready(function() {
+     *       $("#titles").kendoDropDownList({
+     *           index: 0,
+     *           dataTextField: "Name",
+     *           dataValueField: "Id",
+     *           filter: "contains",
+     *           dataSource: {
+     *               type: "odata",
+     *               severFiltering: true,
+     *               serverPaging: true,
+     *               pageSize: 20,
+     *               transport: {
+     *                   read: "http://odata.netflix.com/Catalog/Titles"
+     *               }
+     *           }
+     *       });
+     *   });
+     *
+     * @section
+     *   <h3>Customizing Item Templates</h3>
+     *   <p>
+     *       DropDownList leverages Kendo UI high-performance Templates to give you complete control
+     *       over item rendering. For a complete overview of Kendo UI Template capabilities and syntax,
+     *       please review the <a href="../templates/index.html" title="Kendo UI Template">Kendo UI Template</a> demos and documentation.
+     *   </p>
+     * @exampleTitle Basic item template customization
+     * @example
+     *   <!-- HTML -->
+     *   <input id="titles"/>
+     *
+     *   <!-- Template -->
+     *   <script id="scriptTemplate" type="text/x-kendo-template">
+     *       # if (data.BoxArt.SmallUrl) { #
+     *           <img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
+     *       # } else { #
+     *           <img alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
+     *       # } #
+     *   </script>
+     *
+     *   <!-- DropDownList initialization -->
+     *   <script type="text/javascript">
+     *       $(document).ready(function() {
+     *           $("#titles").kendoDropDownList({
+     *               autoBind: false,
+     *               dataTextField: "Name",
+     *               dataValueField: "Id",
+     *               template: $("#scriptTemplate").html(),
+     *               dataSource: {
+     *                   type: "odata",
+     *                   severFiltering: true,
+     *                   serverPaging: true,
+     *                   pageSize: 20,
+     *                   transport: {
+     *                       read: "http://odata.netflix.com/Catalog/Titles"
+     *                   }
+     *               }
+     *           });
+     *       });
+     *   </script>
+     *
+     * @section
+     * <h3>Accessing an Existing DropDownList</h3>
+     * <p>
+     *  You can reference an existing <b>DropDownList</b> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
+     *  Once a reference has been established, you can use the API to control
+     *  its behavior. 
+     * </p>
+     *
+     * @exampleTitle Accessing an existing DropDownList instance
+     * @example
+     * var dropDownList = $("#dropDownList").data("kendoDropDownList");
+     *
+     */
     var kendo = window.kendo,
         ui = kendo.ui,
         Select = ui.Select,
@@ -137,15 +151,131 @@
          * @extends kendo.ui.Select
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the DropDownList will be bound to.
-         * @option {Boolean} [enable] <true> Controls whether the DropDownList should be initially enabled.
-         * @option {Number} [index] <0> Defines the initial selected item.
+         * @option {kendo.data.DataSource | Object} [dataSource] Instance of DataSource or the data that the DropDownList will be bound to.
+         * _exampleTitle Bind to a local array
+	 * _example
+	 * // bind to local data
+	 * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     dataSource: items,
+	 *     dataTextField: "Title",
+	 *     dataValueField: "Id"
+	 * });    
+	 * _exampleTitle Bind to a remote URL
+	 * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     dataSource: {
+	 *         transport: {
+	 *             read: "titles.json"
+	 *         }
+	 *     },
+	 *     dataTextField: "Title",
+	 *     dataValueField: "Id"
+	 * });
+	 * @option {Boolean} [enable] <true> Controls whether the DropDownList should be initially enabled.
+         * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     enabled: false // dropdown list will not be enabled
+	 * });
+	 * _exampleTitle To set after initialization
+	 * _example	 
+	 * // get a reference to the dropdown list
+	 * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+	 * // disable the dropdown
+	 * dropdownlist.enable(false);
+	 * @option {Number} [index] <0> Defines the initial selected item.
+	 * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     index: 1 // selects the second item in the dropdown list
+	 * });
          * @option {Boolean} [autoBind] <true> Controls whether to bind the widget on initialization.
-         * @option {Number} [delay] <500> Specifies the delay in ms before the search text typed by the end user is cleared.
-         * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
+         * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     autoBind: false
+	 * });
+	 * @option {Number} [delay] <500> Specifies the delay in ms before the search text typed by the end user is cleared.
+	 * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     delay: 1000 // wait 1 second before clearing the user input
+	 * });
+	 * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
+	 * _example
+	 * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     dataSource: items,
+	 *     dataTextField: "Title",
+	 *     dataValueField: "Id"
+	 * }); 
          * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
-         * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
+         * _example
+	 * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     dataSource: items,
+	 *     dataTextField: "Title",
+	 *     dataValueField: "Id"
+	 * });
+	 * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
+	 * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     height: 400
+	 * });
          * @option {String} [optionLabel] Define the text of the default empty item.
+         * _example
+	 * $("#dropdownlist").kendoDropDownList({
+	 *     optionLabel: "Select An Option"
+	 * });
+	 * @option {Function} [template] Template to be used for rendering the items in the list.
+         * _example
+         *  //template
+         * &lt;script id="template" type="text/x-kendo-tmpl"&gt;
+         *       # if (data.BoxArt.SmallUrl) { #
+         *           &lt;img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" /&gt;Title:${ data.Name }, Year: ${ data.Name }
+         *       # } else { #
+         *           &lt;img alt="${ data.Name }" /&gt;Title:${ data.Name }, Year: ${ data.Name }
+         *       # } #
+         *  &lt;/script&gt;
+         *
+         *  //dropdownlist initialization
+         *  &lt;script&gt;
+         *      $("#dropdownlist").kendoDropDownList({
+         *          dataSource: dataSource,
+         *          dataTextField: "Name",
+         *          dataValueField: "Id",
+         *          template: kendo.template($("#template").html())
+         *      });
+         *  &lt;/script&gt;
+         * @option {Object} [animation] <> Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
+         * @option {Function} [animation.open] <> Animation to be used for opening of the popup.
+         * _example
+         *  //dropdownlist initialization
+         *  &lt;script&gt;
+         *      $("#dropdownlist").kendoDropDownList({
+         *          dataSource: dataSource,
+         *          animation: {
+         *             open: {
+         *                 effects: "fadeIn",
+         *                 duration: 300,
+         *                 show: true
+         *             }
+         *          }
+         *      });
+         *  &lt;/script&gt;
+         * @option {Function} [animation.close] <> Animation to be used for closing of the popup.
+         * _example
+         *  //dropdownlist initialization
+         *  &lt;script&gt;
+         *      $("#dropdownlist").kendoDropDownList({
+         *          dataSource: dataSource,
+         *          animation: {
+         *             close: {
+         *                 effects: "fadeOut",
+         *                 duration: 300,
+         *                 hide: true
+         *                 show: false
+         *             }
+         *          }
+         *      });
+         *  &lt;/script&gt;
          */
         init: function(element, options) {
             var that = this,
@@ -181,19 +311,61 @@
                 * @name kendo.ui.DropDownList#open
                 * @event
                 * @param {Event} e
+		* @example
+		* $("#dropdownlist").kendoDropDownList({
+		*     open: function(e) {
+		*         // handle event
+	 	*     }
+		* });
+		* @exampleTitle To set after initialization
+		* @example
+		* // get a reference to the dropdown list
+		* var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+		* // bind to the open event
+		* dropdownlist.bind("open", function(e) {
+		*     // handle event
+		* });
                 */
                 /**
                 * Fires when the drop-down list is closed
                 * @name kendo.ui.DropDownList#close
                 * @event
                 * @param {Event} e
-                */
+                * @example
+		* $("#dropdownlist").kendoDropDownList({
+		*     close: function(e) {
+		*         // handle event
+	 	*     }
+		* });
+		* @exampleTitle To set after initialization
+		* @example
+		* // get a reference to the dropdown list
+		* var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+		* // bind to the close event
+		* dropdownlist.bind("close", function(e) {
+		*     // handle event
+		* });
+		*/
                 /**
                 * Fires when the value has been changed.
                 * @name kendo.ui.DropDownList#change
                 * @event
                 * @param {Event} e
-                */
+                * @example
+		* $("#dropdownlist").kendoDropDownList({
+		*     change: function(e) {
+		*         // handle event
+	 	*     }
+		* });
+		* @exampleTitle To set after initialization
+		* @example
+		* // get a reference to the dropdown list
+		* var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+		* // bind to the change event
+		* dropdownlist.bind("change", function(e) {
+		*     // handle event
+		* });
+		*/
                 CHANGE
             ], options);
 
@@ -220,12 +392,20 @@
         * @name kendo.ui.DropDownList#close
         * @function
         * @example
+	* // get a reference to the dropdown widget
+	* var dropdownList = $("#dropdownList").data("kendoDropDownList");
+	* // close the dropdown
         * dropdownlist.close();
         */
 
         /**
         * Enables/disables the dropdownlist widget
         * @param {Boolean} enable Desired state
+	* @example
+	* // get a reference to the dropdown list
+	* var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+	* // disable the dropdown list
+	* dropdownlist.enable(false);    
         */
         enable: function(enable) {
             var that = this,
@@ -273,6 +453,9 @@
         /**
         * Opens the drop-down list.
         * @example
+	* // get a reference to the dropdown list
+	* var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+	* // open the drop down
         * dropdownlist.open();
         */
         open: function() {
@@ -294,6 +477,7 @@
         * Toggles the drop-down list between opened and closed state.
         * @param {Boolean} toggle Defines the whether to open/close the drop-down list.
         * @example
+	* // get a reference to the dropdown list
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
         * // toggles the open state of the drop-down list.
@@ -336,6 +520,7 @@
         * Selects item, which starts with the provided parameter.
         * @param {string} word The search value.
         * @example
+	* // get a reference to the dropdown list
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
         * // Selects item which starts with "In".
@@ -359,6 +544,7 @@
         * Selects drop-down list item and sets the value and the text of the dropdownlist.
         * @param {jQueryObject | Number | Function} li LI element or index of the item or predicate function, which defines the item that should be selected.
         * @example
+	* // get a reference to the dropdown list
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
         * // selects by jQuery object
@@ -406,6 +592,7 @@
         * @param {String} text The text to set.
         * @returns {String} The text of the dropdownlist.
         * @example
+	* // get a reference to the dropdown list
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
         * // get the text of the dropdownlist.
@@ -426,6 +613,7 @@
         * @param {String} value The value to set.
         * @returns {String} The value of the dropdownlist.
         * @example
+	* // get a reference to the dropdown list
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
         * // get the value of the dropdownlist.

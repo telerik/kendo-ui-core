@@ -1,68 +1,80 @@
 (function($, undefined) {
     /**
-    * @name kendo.ui.TimePicker.Description
-    *
-    * @section
-    *   <p>
-    *       The TimePicker widget allows the end user to select a value from a list of predefined values or to type a new value.
-    *       It supports configurable options for the format, min and max time and the interval between predefined values in the list.
-    *   </p>
-    *
-    *   <h3>Getting Started</h3>
-    *
-    * @exampleTitle Creating a TimePicker from existing INPUT element
-    * @example
-    * <!-- HTML -->
-    * <input id="timepicker"/>
-    *
-    * @exampleTitle TimePicker initialization
-    * @example
-    *   $(document).ready(function(){
-    *      $("#timepicker").kendoTimePicker();
-    *   });
-    * @section
-    *  <p>
-    *      When a TimePicker is initialized, it will automatically be displayed near the
-    *      location of the used HTML element.
-    *  </p>
-    *  <h3>Configuring TimePicker behaviors</h3>
-    *  <p>
-    *      TimePicker provides configuration options that can be easily set during initialization.
-    *      Among the properties that can be controlled:
-    *  </p>
-    *  <ul>
-    *      <li>Selected time</li>
-    *      <li>Minimum/Maximum time</li>
-    *      <li>Define format</li>
-    *      <li>Define interval between predefined values in the list</li>
-    *  </ul>
-    * @exampleTitle Create TimePicker with selected time and defined min and max time
-    * @example
-    *  $("#timepicker").kendoTimePicker({
-    *      value: new Date(2000, 10, 10, 10, 0, 0),
-    *      min: new Date(1950, 0, 1, 8, 0, 0),
-    *      max: new Date(2049, 11, 31, 18, 0, 0)
-    *  });
-    *  @section
-    * <p>
-    *   TimePicker will set the value only if the entered time is valid and if it is in the defined range
-    * </p>
-    * @section
-    *
-    * @exampleTitle Define time format
-    * @example
-    *  $("#timepicker").kendoTimePicker({
-    *      format: "hh:mm:ss tt"
-    *  });
-    *
-    * @exampleTitle Define the interval between values in the list
-    * @example
-    *  $("#timepicker").kendoTimePicker({
-    *      interval: 15 //in minutes
-    *  });
-    *
-    */
-
+     * @name kendo.ui.TimePicker.Description
+     *
+     * @section
+     *   <p>
+     *       The TimePicker widget allows the end user to select a value from a list of predefined values or to type a new value.
+     *       It supports configurable options for the format, min and max time and the interval between predefined values in the list.
+     *   </p>
+     *
+     *   <h3>Getting Started</h3>
+     *
+     * @exampleTitle Creating a TimePicker from existing INPUT element
+     * @example
+     * <!-- HTML -->
+     * <input id="timepicker"/>
+     *
+     * @exampleTitle TimePicker initialization
+     * @example
+     *   $(document).ready(function(){
+     *      $("#timepicker").kendoTimePicker();
+     *   });
+     * @section
+     *  <p>
+     *      When a TimePicker is initialized, it will automatically be displayed near the
+     *      location of the used HTML element.
+     *  </p>
+     *  <h3>Configuring TimePicker behaviors</h3>
+     *  <p>
+     *      TimePicker provides configuration options that can be easily set during initialization.
+     *      Among the properties that can be controlled:
+     *  </p>
+     *  <ul>
+     *      <li>Selected time</li>
+     *      <li>Minimum/Maximum time</li>
+     *      <li>Define format</li>
+     *      <li>Define interval between predefined values in the list</li>
+     *  </ul>
+     * @exampleTitle Create TimePicker with selected time and defined min and max time
+     * @example
+     *  $("#timepicker").kendoTimePicker({
+     *      value: new Date(2000, 10, 10, 10, 0, 0),
+     *      min: new Date(1950, 0, 1, 8, 0, 0),
+     *      max: new Date(2049, 11, 31, 18, 0, 0)
+     *  });
+     *  @section
+     * <p>
+     *   TimePicker will set the value only if the entered time is valid and if it is in the defined range
+     * </p>
+     * @section
+     *
+     * @exampleTitle Define time format
+     * @example
+     *  $("#timepicker").kendoTimePicker({
+     *      format: "hh:mm:ss tt"
+     *  });
+     *
+     * @exampleTitle Define the interval between values in the list
+     * @example
+     *  $("#timepicker").kendoTimePicker({
+     *      interval: 15 //in minutes
+     *  });
+     *
+     * @section
+     * <h3>Accessing an Existing TimePicker</h3>
+     * <p>
+     *  You can reference an existing <b>TimePicker</b> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
+     *  Once a reference has been established, you can use the API to control
+     *  its behavior.
+     * </p>
+     *
+     * @exampleTitle Accessing an existing TimePicker instance
+     * @example
+     * var timePicker = $("#timePicker").data("kendoTimePicker");
+     *
+     */
     var kendo = window.kendo,
         touch = kendo.support.touch,
         keys = kendo.keys,
@@ -367,6 +379,36 @@
          * @option {Date} [max] <00:00> Specifies the end value in the popup list.
          * @option {String} [format] <h:mm tt> Specifies the format, which is used to parse value set with value() method.
          * @option {Number} [interval] <30> Specifies the interval, between values in the popup list, in minutes.
+         * @option {Object} [animation] <> Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
+         * @option {Function} [animation.open] <> Animation to be used for opening of the popup.
+         * _example
+         *  //timepicker initialization
+         *  &lt;script&gt;
+         *      $("#timepicker").kendoTimePicker({
+         *          animation: {
+         *             open: {
+         *                 effects: "fadeIn",
+         *                 duration: 300,
+         *                 show: true
+         *             }
+         *          }
+         *      });
+         *  &lt;/script&gt;
+         * @option {Function} [animation.close] <> Animation to be used for closing of the popup.
+         * _example
+         *  //timepicker initialization
+         *  &lt;script&gt;
+         *      $("#timepicker").kendoTimePicker({
+         *          animation: {
+         *             close: {
+         *                 effects: "fadeOut",
+         *                 duration: 300,
+         *                 hide: true
+         *                 show: false
+         *             }
+         *          }
+         *      });
+         *  &lt;/script&gt;
          */
         init: function(element, options) {
             var that = this;
