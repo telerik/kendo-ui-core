@@ -60,7 +60,7 @@
                 stubTransport("update");
 
                 var model = dataSource.get(1);
-                model.set({ foo: "bar" });
+                model.set("foo", "bar");
                 dataSource.sync();
 
                 equal(model.get("foo"), "bar");
@@ -70,7 +70,7 @@
                 stubTransport("update");
 
                 var model = dataSource.get(1);
-                model.set({ foo: "bar" });
+                model.set("foo", "bar");
                 dataSource.sync();
 
                 equal(dataSource.data()[0].foo, "bar");
@@ -91,7 +91,7 @@
                 stubTransport("update", { id: 1, foo: "bar" } );
 
                 var model = dataSource.get(1);
-                model.set( { foo: "bar" } );
+                model.set("foo", "bar");
                 dataSource.sync();
 
                 equal(model.id, 1);
@@ -113,7 +113,7 @@
                 stubTransport("update", { id: 1 } );
 
                 var model = dataSource.get(1);
-                model.set( { foo: "bar" } );
+                model.set("foo", "bar");
                 dataSource.sync();
 
                 equal(model.id, 1);
@@ -128,18 +128,18 @@
                 dataSource.sync();
 
                 equal(model.get("foo"), "foo");
-                equal(model.hasChanges(), false);
+                equal(model.dirty, false);
             });
 
             test("sync updates the state of updated model when response is empty", function() {
                 stubTransport("update", null );
 
                 var model = dataSource.get(1);
-                model.set( { foo: "bar" } );
+                model.set("foo", "bar");
                 dataSource.sync();
 
                 equal(model.get("foo"), "bar");
-                equal(model.hasChanges(), false);
+                equal(model.dirty, false);
             });
 
             test("sync updates all created models with server response", function() {
@@ -167,11 +167,11 @@
 
                 var model1 = dataSource.get(1);
 
-                model1.set( { foo: "bar" } );
+                model1.set("foo", "bar" );
 
                 var model2 = dataSource.get(2);
 
-                model2.set( { foo: "baz" } );
+                model2.set("foo", "baz");
 
                 dataSource.sync();
 
@@ -194,7 +194,7 @@
                 equal(model1.id, 1);
                 equal(model1.get("foo"), "bar");
                 equal(model2.isNew(), false);
-                equal(model2.hasChanges(), false);
+                equal(model2.dirty, false);
             });
 
             test("sync updates all created models with server response when batch is true", function() {
@@ -222,11 +222,11 @@
 
                 var model1 = dataSource.get(1);
 
-                model1.set( { foo: "baz" } );
+                model1.set("foo", "baz");
 
                 var model2 = dataSource.get(2);
 
-                model2.set( { foo: "bar" } );
+                model2.set("foo", "bar");
                 dataSource.sync();
 
                 equal(model1.get("foo"), "baz");
@@ -250,7 +250,7 @@
                 dataSource.add(model);
                 dataSource.sync();
 
-                equal(model.hasChanges(), false);
+                equal(model.dirty, false);
             });
 
             test("updated model has no changes after sync", function() {
@@ -258,11 +258,11 @@
 
                 var model1 = dataSource.get(1);
 
-                model1.set( { foo: "foo" } );
+                model1.set("foo", "foo");
 
                 dataSource.sync();
 
-                equal(model1.hasChanges(), false);
+                equal(model1.dirty, false);
             });
 
             test("sync clears destroyed models", function() {
@@ -361,6 +361,17 @@
                 dataSource.sync();
 
                 equal(dataSource.get(3).get("id"), 3);
+            });
+
+            test("cancelChanges does not remove the added models after sync", function() {
+                stubTransport("create", [{ id: 3, foo: "moo" }]);
+
+                dataSource.add({});
+                dataSource.sync();
+
+                dataSource.cancelChanges();
+
+                ok(dataSource.get(3));
             });
 
         </script>
