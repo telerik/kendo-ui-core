@@ -13,8 +13,10 @@ var fs = require("fs"),
     writeText = kendoBuild.writeText,
     zip = kendoBuild.zip;
 
+var commercialLicense = {name: "commercial", source: true};
+
 var productionLicenses = [
-    {name: "commercial", source: true},
+    commercialLicense,
     {name: "trial", source: false},
     {name: "open-source", source: true}
 ]
@@ -25,6 +27,14 @@ var betaLicenses = [
 
 
 // Configuration ==============================================================
+var cdnBundle = {
+    name: "kendoui.cdn",
+    suites: ["web", "dataviz", "mobile"],
+    combinedScript: "all",
+    licenses: [commercialLicense],
+    eula: "eula",
+};
+
 var bundles = [{
     name: "kendoui.complete",
     suites: ["web", "dataviz", "mobile"],
@@ -278,5 +288,5 @@ function buildAllBundles(version, success, bundleIx) {
 // Exports =====================================================================
 exports.buildBundle = buildBundle;
 exports.buildAllBundles = buildAllBundles;
-exports.bundles = bundles;
+exports.cdnBundle = cdnBundle;
 exports.clean = clean;

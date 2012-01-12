@@ -13,6 +13,7 @@ var path = require("path"),
 var CDN_ROOT = "http://cdn.kendostatic.com/",
     SOURCE_PATH = "src",
     STYLES_PATH = "styles",
+    SCRIPTS_PATH = "js",
     DEPLOY_PATH = "deploy",
     DEMOS_PATH = path.join("demos", "mvc"),
     DEMOS_PROJECT = "Kendo.csproj",
@@ -21,12 +22,13 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     DEMOS_STAGING_PATH = path.join(DEPLOY_PATH, "staging"),
     DEMOS_STAGING_CONTENT_PATH = path.join(DEMOS_STAGING_PATH, "content", "cdn"),
     DOCS_DEPLOY_PATH = path.join(DEMOS_PATH, "content", "docs"),
-    RELEASE_PATH = "release";
+    RELEASE_PATH = "release",
+    SUITES = ["web", "mobile", "dataviz"];
 
-// Configuration ===============================================================
+// CDN Configuration ===========================================================
 var CDN_PROJECT = path.join("build", "cdn.proj"),
-    CDN_BUNDLE = bundles.bundles.filter(function(bundle) { return bundle.name === "kendoui.complete" })[0],
-    CDN_BUNDLE_PATH = path.join("..", DEPLOY_PATH, "kendoui.complete.commercial");
+    CDN_BUNDLE = bundles.cdnBundle,
+    CDN_BUNDLE_PATH = path.join(DEPLOY_PATH, "kendoui.cdn.commercial");
 
 // Tasks ======================================================================
 desc("Clean deploy working directory");
@@ -148,14 +150,16 @@ namespace("demos", function() {
         deployDemos(DEMOS_STAGING_PATH, "~/content/cdn", function() {
             mkdir(DEMOS_STAGING_CONTENT_PATH);
 
-            mkdir(scriptsDest);
-            kendoScripts.buildCombinedScript(
-                "all", ["web", "mobile", "dataviz"],
-                scriptsDest, "", true
-            );
+            kendoBuild.rmdirSyncRecursive(CDN_BUNDLE_PATH);
+            bundles.buildBundle(CDN_BUNDLE, version(), function() {
+                copyDir(path.join(CDN_BUNDLE_PATH, STYLES_PATH),
+                        path.join(DEMOS_STAGING_CONTENT_PATH, STYLES_PATH)
+                );
 
-            mkdir(stylesDest);
-            kendoBuild.deployStyles(STYLES_PATH, stylesDest, "", true);
+                copyDir(path.join(CDN_BUNDLE_PATH, SCRIPTS_PATH),
+                        path.join(DEMOS_STAGING_CONTENT_PATH, SCRIPTS_PATH)
+                );
+            });
         });
     });
 
@@ -182,7 +186,7 @@ task("bundles", ["clean", "merge-scripts"], function() {
 desc("Deploy scripts to CDN");
 task("cdn", ["clean", "merge-scripts"], function() {
     bundles.buildBundle(CDN_BUNDLE, version(), function() {
-        kendoBuild.msBuild(CDN_PROJECT, ["/p:Version=" + version(), "/p:BundleRoot=" + CDN_BUNDLE_PATH]);
+        kendoBuild.msBuild(CDN_PROJECT, ["/p:Version=" + version(), "/p:BundleRoot=" + path.join("..", CDN_BUNDLE_PATH)]);
     });
 }, true);
 

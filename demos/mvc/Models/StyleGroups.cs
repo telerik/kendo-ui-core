@@ -24,9 +24,9 @@ namespace Kendo.Models
             "web/kendo.default.less",
             "mobile/kendo.mobile.all.less"
 #else
-            "web/kendo.common.min.css",
-            "web/kendo.default.min.css",
-            "mobile/kendo.mobile.all.min.css"
+            "kendo.common.min.css",
+            "kendo.default.min.css",
+            "kendo.mobile.all.min.css"
 #endif
         };
     }
