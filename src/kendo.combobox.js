@@ -438,9 +438,10 @@
                 element = that.input[0],
                 value = that.text(),
                 caret = List.caret(element),
+                key = that._last,
                 idx;
 
-            if (!value) {
+            if (!value || key == keys.BACKSPACE || key == keys.DELETE) {
                 return;
             }
 
@@ -681,10 +682,7 @@
             var that = this,
                 key = e.keyCode;
 
-
-            if (that.options.suggest && (key == keys.BACKSPACE || key == keys.DELETE)) {
-                return;
-            }
+            that._last = key;
 
             if (key == kendo.keys.TAB) {
                 that.text(that.input.val());

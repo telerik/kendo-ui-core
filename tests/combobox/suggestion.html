@@ -103,6 +103,26 @@
                 equal(combobox.text(), "");
             });
 
+            test("suggest(text) does not suggest on backspace", function() {
+                var combobox = input.val("f").kendoComboBox({
+                    dataSource: data
+                }).data("kendoComboBox");
+
+                combobox._last = kendo.keys.BACKSPACE; //backspace is clicked
+                combobox.suggest("Foo");
+                equal(combobox.text(), "f");
+            });
+
+            test("suggest(text) does not suggest on delete", function() {
+                var combobox = input.val("f").kendoComboBox({
+                    dataSource: data
+                }).data("kendoComboBox");
+
+                combobox._last = kendo.keys.DELETE; //delete is clicked
+                combobox.suggest("Foo");
+                equal(combobox.text(), "f");
+            });
+
             asyncTest("suggest() should suggest correctly", function() {
                 var combobox = input.kendoComboBox({
                     dataSource: [{text:"Cotton"}, {text: "Cotton/Polyester"}],
