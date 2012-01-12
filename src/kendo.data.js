@@ -622,7 +622,7 @@
     }
 
     function groupValueComparer(a, b) {
-        if (a.getTime && b.getTime) {
+        if (a && a.getTime && b && b.getTime) {
             return a.getTime() === b.getTime();
         }
         return a === b;
