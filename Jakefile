@@ -47,24 +47,26 @@ task("merge-scripts", function() {
 desc("Build documentation");
 task("docs", function() {
     var mappings = {
-            "slider": ["slider", "rangeslider"],
-            "dragdrop": ["draggable", "droptarget"]
+            "ui.slider": ["ui.slider", "ui.rangeslider"],
+            "mobile.ui.button": ["mobile.ui.button", "mobile.ui.backbutton", "mobile.ui.detailbutton"],
+            "ui.dragdrop": ["ui.draggable", "ui.droptarget"]
         },
         sections = ["description", "configuration", "methods", "events"];
 
     function combine() {
-        var files = fs.readdirSync(DOCS_DEPLOY_PATH);
+        var files = fs.readdirSync(DOCS_DEPLOY_PATH),
+            filesToMerge;
         for (var key in mappings) {
-            var mapping = mappings[key],
-            filesToMerge = kendoBuild.grep(files, function(fileName) {
-                var flag = false;
-                for (var i = 0, length = mapping.length; i < length; i++) {
-                    if (fileName.indexOf(mapping[i]) > -1) {
-                        flag = true;
-                        break;
+            var mapping = mappings[key];
+            filesToMerge = [];
+
+            sections.forEach(function(section) {
+                mapping.forEach(function(source) {
+                    var fileName = "kendo." + source + "." + section + ".html";
+                    if (files.indexOf(fileName) > -1) {
+                        filesToMerge.push(fileName);
                     }
-                }
-                return flag;
+                });
             });
 
             sections.forEach(function(sectionName) {
@@ -74,15 +76,13 @@ task("docs", function() {
                 }).forEach(function(fileToMerge) {
                     var text = kendoBuild.readText(DOCS_DEPLOY_PATH + "/" + fileToMerge);
 
-                    if (sectionName != "description" && text.length > 10) {
+                    if (sectionName != "description") {
                         text = wrap(text, fileToMerge);
                     }
                     cache += text;
                 });
 
-                if (cache.length > 15) {
-                    kendoBuild.writeText(DOCS_DEPLOY_PATH + "/kendo.ui." + key + "." + sectionName + ".html", cache);
-                }
+                kendoBuild.writeText(path.join(DOCS_DEPLOY_PATH, "kendo." + key + "." + sectionName + ".html"), cache);
             });
         }
     }
