@@ -1990,6 +1990,7 @@
         fx: fx,
         data: {},
         keys: {
+            DELETE: 46,
             BACKSPACE: 8,
             TAB: 9,
             ENTER: 13,
