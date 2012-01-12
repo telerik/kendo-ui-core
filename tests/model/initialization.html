@@ -164,7 +164,7 @@
 
                 var model = new MyModel();
 
-                equal(model.defaultItem["foo"], "");
+                equal(model.defaults["foo"], "");
                 equal(model.get("foo"), "");
             });
 
@@ -179,7 +179,7 @@
 
                 var model = new MyModel();
 
-                equal(model.defaultItem["bar"], "");
+                equal(model.defaults["bar"], "");
                 equal(model.get("bar"), "");
             });
 
@@ -214,7 +214,7 @@
 
                 var model = new MyModel();
 
-                ok(model.defaultItem["foo"] === 0);
+                ok(model.defaults["foo"] === 0);
                 ok(model.get("foo") === 0);
             });
 
@@ -229,7 +229,7 @@
 
                 var model = new MyModel();
 
-                ok(model.defaultItem["foo"].getDate() === new Date().getDate());
+                ok(model.defaults["foo"].getDate() === new Date().getDate());
                 ok(model.get("foo").getDate() === new Date().getDate());
             });
 
@@ -244,7 +244,7 @@
 
                 var model = new MyModel();
 
-                ok(model.defaultItem["foo"].getDate() === new Date().getDate());
+                ok(model.defaults["foo"].getDate() === new Date().getDate());
                 ok(model.get("foo").getDate() === new Date().getDate());
             });
 
@@ -259,7 +259,7 @@
 
                 var model = new MyModel();
 
-                ok(model.defaultItem["foo"] === false);
+                ok(model.defaults["foo"] === false);
                 ok(model.get("foo") === false);
             });
 
@@ -275,7 +275,7 @@
 
                 var model = new MyModel();
 
-                equal(model.defaultItem["foo"], "foo");
+                equal(model.defaults["foo"], "foo");
                 equal(model.get("foo"), "foo");
             });
 
@@ -291,7 +291,7 @@
 
                 var model = new MyModel();
 
-                ok(model.defaultItem["foo"] === 0);
+                ok(model.defaults["foo"] === 0);
                 ok(model.get("foo") === 0);
             });
 

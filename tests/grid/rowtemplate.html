@@ -121,7 +121,7 @@
                     }
                 });
 
-                ok(grid.tbody.find("tr").attr("data-kendo-id"));
+                ok(grid.tbody.find("tr").attr("data-kendo-uid"));
             });
 
             test("data-kendo-id attribute is rendered for each row when model id is string and a column has a function template", function() {
@@ -142,7 +142,7 @@
                     }]
                 });
 
-                ok(grid.tbody.find("tr").attr("data-kendo-id"));
+                ok(grid.tbody.find("tr").attr("data-kendo-uid"));
             });
 
             test("data-kendo-id attribute is not rendered if model is not set", function() {
@@ -158,7 +158,7 @@
                     }]
                 });
 
-                ok(grid.rowTemplate.toString().indexOf("data-kendo-id") === -1);
+                ok(grid.rowTemplate.toString().indexOf("data-kendo-uid") === -1);
             });
 
             </script>

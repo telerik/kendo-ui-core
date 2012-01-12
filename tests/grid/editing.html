@@ -349,14 +349,13 @@
                 ok(validate.calls("validate"));
             });
 
-            test("cell does not leaves edit mode if validation fails when another editable cell is clicked", function() {
+            test("cell does not leave edit mode if validation fails when another editable cell is clicked", function() {
                 setup({
                     dataSource: new DataSource({
                         schema: {
                             model: {
                                 id: "foo",
                                 fields: {
-                                    name: "name",
                                     foo: {
                                         field: "foo",
                                         validation: {
@@ -364,7 +363,8 @@
                                                 return false;
                                             }
                                         }
-                                    }
+                                    },
+                                    name: "name"
                                 }
                             }
                         },

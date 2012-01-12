@@ -86,7 +86,7 @@
             var that = this;
             return function(e) {
                 if (field.indexOf(e.field) === 0) {
-                    if (e.action) {
+                    if (e.action && e.action in that) {
                         that[e.action].call(that, e.index, e.items);
                     } else {
                         that.bind();
