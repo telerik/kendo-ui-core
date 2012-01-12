@@ -269,13 +269,15 @@ function deployStyles(stylesRoot, outputRoot, header, compress) {
     copyDirSyncRecursive(stylesRoot, outputRoot, true, filesRegex);
     themes.buildThemes(stylesRoot, outputRoot);
     processFilesRecursive(outputRoot, stylesRegex, function(fileName) {
-        var css = stripBOM(readText(fileName)),
-            output = compress ? cssmin(css) : css;
+        if (fileName.indexOf(".min.") === -1) {
+            var css = stripBOM(readText(fileName)),
+                output = compress ? cssmin(css) : css;
 
-        writeText(fileName, header + output);
+            writeText(fileName, header + output);
 
-        if (compress) {
-            fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
+            if (compress) {
+                fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
+            }
         }
     });
 }
