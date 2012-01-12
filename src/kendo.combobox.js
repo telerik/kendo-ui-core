@@ -534,14 +534,14 @@
 
         refresh: function() {
             var that = this,
-                ul = that.ul,
+                ul = that.ul[0],
                 options = that.options,
                 suggest = options.suggest,
                 height = options.height,
                 data = that._data(),
                 length = data.length;
 
-            ul[0].innerHTML = kendo.render(that.template, data);
+            ul.innerHTML = kendo.render(that.template, data);
             that._height(length);
 
             if (that.element.is(SELECT)) {
@@ -550,7 +550,7 @@
 
             if (length) {
                 if (suggest || options.highlightFirst) {
-                    that.current($(that.ul[0].firstChild));
+                    that.current($(ul.firstChild));
                 }
 
                 if (suggest) {
@@ -645,7 +645,8 @@
                 key = that._last,
                 idx;
 
-            if (!value || key == keys.BACKSPACE || key == keys.DELETE) {
+            if (key == keys.BACKSPACE || key == keys.DELETE) {
+                that._last = undefined;
                 return;
             }
 
