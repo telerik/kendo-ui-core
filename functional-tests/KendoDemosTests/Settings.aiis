@@ -68,5 +68,7 @@
     <Item Type="System.String">C:\work\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</Item>
   </ProjectReferences>
   <ExcludedFiles />
-  <DisabledTranslators />
+  <DisabledTranslators>
+    <Item Type="System.String">KendoInput for KendoUI Translators</Item>
+  </DisabledTranslators>
 </ProjectSettings>
