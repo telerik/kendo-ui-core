@@ -155,11 +155,9 @@ namespace("demos", function() {
             );
 
             mkdir(stylesDest);
-            kendoBuild.deployStyles(STYLES_PATH, stylesDest, "", true, function() {
-                complete();
-            });
+            kendoBuild.deployStyles(STYLES_PATH, stylesDest, "", true);
         });
-    }, true);
+    });
 
     desc("Build demos site for live deployment");
     task("production", ["merge-scripts", "docs"], function () {

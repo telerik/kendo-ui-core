@@ -261,26 +261,21 @@ function mkdir(newDir) {
     }
 }
 
-function deployStyles(stylesRoot, outputRoot, header, compress, success) {
+function deployStyles(stylesRoot, outputRoot, header, compress) {
     var filesRegex = compress ? /\.(css|png|jpg|jpeg|gif)$/i : /\.(less|css|png|jpg|jpeg|gif)$/i,
         stylesRegex = compress ? /\.css$/ : /\.(less|css)$/ ;
 
     mkdir(outputRoot);
     copyDirSyncRecursive(stylesRoot, outputRoot, false, filesRegex);
-    themes.buildThemes(stylesRoot, outputRoot, function() {
-        processFilesRecursive(outputRoot, stylesRegex, function(fileName) {
-            var css = stripBOM(readText(fileName)),
-                output = compress ? cssmin(css) : css;
+    themes.buildThemes(stylesRoot, outputRoot);
+    processFilesRecursive(outputRoot, stylesRegex, function(fileName) {
+        var css = stripBOM(readText(fileName)),
+            output = compress ? cssmin(css) : css;
 
-            writeText(fileName, header + output);
+        writeText(fileName, header + output);
 
-            if (compress) {
-                fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
-            }
-        });
-
-        if (success) {
-            success();
+        if (compress) {
+            fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
         }
     });
 }
