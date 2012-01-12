@@ -4,9 +4,17 @@
             name: "Framework",
             description: "Shared components providing behaviors, data access and other services"
         },
-        widgets: {
-            name: "Widgets",
-            description: "Building blocks of the Kendo UI Framework"
+        web: {
+            name: "Web",
+            description: "Desktop UI Widgets for mobile-ready Web Sites and Applications"
+        },
+        dataviz: {
+            name: "DataViz",
+            description: "Data Visualization Widgets"
+        },
+        mobile: {
+            name: "Mobile",
+            description: "Framework for Mobile Applications"
         }
     };
 
@@ -145,11 +153,11 @@
             hidden: true
         },
 
-        // Widgets ----------------------------------------------------
+        // Web Widgets ----------------------------------------------------
         {
             id: "autocomplete",
             name: "AutoComplete",
-            category: categories.widgets,
+            category: categories.web,
             description: "The AutoComplete widget provides suggestions depending on the typed text." +
                          "It also allows multiple value entries.",
             source: "kendo.autocomplete.min.js",
@@ -157,42 +165,35 @@
         }, {
             id: "calendar",
             name: "Calendar",
-            category: categories.widgets,
+            category: categories.web,
             description: "The Calendar widget renders a graphical calendar that supports navigation and selection.",
             source: "kendo.calendar.min.js",
             depends: [ "core" ]
         }, {
-            id: "chart",
-            name: "Chart",
-            category: categories.widgets,
-            description: "The Chart widget uses modern browser technologies to render high-quality data visualizations in the browser.",
-            source: "kendo.chart.min.js",
-            depends: [ "data" ]
-        }, {
             id: "combobox",
             name: "ComboBox",
-            category: categories.widgets,
+            category: categories.web,
             description: "The ComboBox widget allows the selection from pre-defined values or entering a new value.",
             source: "kendo.combobox.min.js",
             depends: [ "list" ]
         }, {
             id: "datepicker",
             name: "DatePicker",
-            category: categories.widgets,
+            category: categories.web,
             description: "The DatePicker widget allows the user to select a date from a calendar or by direct input.",
             source: "kendo.datepicker.min.js",
             depends: [ "calendar", "popup" ]
         }, {
             id: "dropdownlist",
             name: "DropDownList",
-            category: categories.widgets,
+            category: categories.web,
             description: "The DropDownList widget displays a list of values and allows the selection of a single value from the list.",
             source: "kendo.dropdownlist.min.js",
             depends: [ "list" ]
         }, {
             id: "grid",
             name: "Grid",
-            category: categories.widgets,
+            category: categories.web,
             description: "The Grid widget displays tabular data and offers rich support for interacting with data," +
                          "including paging, sorting, grouping, and selection.",
             source: "kendo.grid.min.js",
@@ -231,56 +232,56 @@
         }, {
             id: "menu",
             name: "Menu",
-            category: categories.widgets,
+            category: categories.web,
             description: "The Menu widget displays hierarchical data as a multi-level menu.",
             source: "kendo.menu.min.js",
             depends: [ "popup" ]
         }, {
             id: "numerictextbox",
             name: "NumericTextBox",
-            category: categories.widgets,
+            category: categories.web,
             description: "The NumericTextBox widget can format and display numeric, percentage or currency textbox.",
             source: "kendo.numerictextbox.min.js",
             depends: [ "core" ]
         }, {
             id: "panelbar",
             name: "PanelBar",
-            category: categories.widgets,
+            category: categories.web,
             description: "The PanelBar widget displays hierarchical data as a multi-level expandable panel bar.",
             source: "kendo.panelbar.min.js",
             depends: [ "core" ]
         }, {
             id: "slider",
             name: "Slider",
-            category: categories.widgets,
+            category: categories.web,
             description: "The Slider widget provides a rich input for selecting values or ranges of values.",
             source: "kendo.slider.min.js",
             depends: [ "draganddrop" ]
         }, {
             id: "splitter",
             name: "Splitter",
-            category: categories.widgets,
+            category: categories.web,
             description: "The Splitter widget provides an easy way to create a dynamic layout of resizable and collapsible panes.",
             source: "kendo.splitter.min.js",
             depends: [ "resizable" ]
         }, {
             id: "tabstrip",
             name: "TabStrip",
-            category: categories.widgets,
+            category: categories.web,
             description: "The TabStrip widget displays a collection of tabs with associated tab content.",
             source: "kendo.tabstrip.min.js",
             depends: [ "core" ]
         }, {
             id: "timepicker",
             name: "TimePicker",
-            category: categories.widgets,
+            category: categories.web,
             description: "The TimePicker widget allows the end user to select a value from a list of predefined values or to type a new value.",
             source: "kendo.timepicker.min.js",
             depends: [ "popup" ]
         }, {
             id: "treeview",
             name: "TreeView",
-            category: categories.widgets,
+            category: categories.web,
             description: "The TreeView widget displays hierarchical data in a traditional tree structure," +
                          "with support for interactive drag-and-drop operations.",
             source: "kendo.treeview.min.js",
@@ -288,7 +289,7 @@
         }, {
             id: "upload",
             name: "Upload",
-            category: categories.widgets,
+            category: categories.web,
             description: "The Upload widget uses progressive enhancement to deliver the best possible " +
                          "uploading experience to users.",
             source: "kendo.upload.min.js",
@@ -296,17 +297,24 @@
         }, {
             id: "validator",
             name: "Validator",
-            category: categories.widgets,
+            category: categories.web,
             description: "The Validator offers an easy way to do a client-side form validation.",
             source: "kendo.validator.min.js",
             depends: [ "core" ]
         }, {
             id: "window",
             name: "Window",
-            category: categories.widgets,
+            category: categories.web,
             description: "The Window widget displays content in a modal or non-modal HTML window.",
             source: "kendo.window.min.js",
             depends: [ "draganddrop" ]
+        }, {
+            id: "chart",
+            name: "Chart",
+            category: categories.dataviz,
+            description: "The Chart widget uses modern browser technologies to render high-quality data visualizations in the browser.",
+            source: "kendo.chart.min.js",
+            depends: [ "data" ]
         }
     ];
 
