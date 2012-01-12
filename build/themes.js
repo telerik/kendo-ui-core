@@ -5,7 +5,7 @@ var less = require("./less-js/lib/less"),
 function buildThemes(themesFolder, outputFolder) {
     var themes = fs.readdirSync(themesFolder)
                     .filter(function(file) {
-                        return file != "template.less" && /\.less$/i.test(file);
+                        return /^kendo\..+\.less$/i.test(file);
                     })
                     .map(function(file) {
                         return path.join(themesFolder, file);
@@ -13,7 +13,7 @@ function buildThemes(themesFolder, outputFolder) {
 
     themes.forEach(function(theme) {
         var skinTemplate = fs.readFileSync(theme, "utf8"),
-            themeName = /\/([^\/]+)\.less/i.exec(theme)[1];
+            themeName = path.basename(theme, ".less");
 
         var parser = new(less.Parser)({
             paths: [ themesFolder ] // Specify search paths for @import directives
