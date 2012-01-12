@@ -2,14 +2,7 @@
     var kendo = window.kendo,
         extend = $.extend,
         type = $.type,
-        getter = kendo.getter,
-        setter = kendo.setter,
-        accessor = kendo.accessor,
-        each = $.each,
         isPlainObject = $.isPlainObject,
-        CHANGE = "change",
-        ERROR = "error",
-        MODELCHANGE = "modelChange",
         Observable = kendo.Observable,
         ObservableObject = kendo.data.ObservableObject,
         dateRegExp = /^\/Date\((.*?)\)\/$/;
@@ -91,9 +84,7 @@
 
             that.uid = kendo.guid();
 
-            that._accessors = {};
-
-            that._modified = false;
+            that.dirty = false;
 
             that.id = that.get(that.idField);
         },
@@ -102,16 +93,10 @@
             return ObservableObject.fn.shouldSerialize.call(this, field)
                 && field !== "uid"
                 && !(this.idField !== "id" && field === "id")
-                && field !== "_modified" && field !== "_accessors";
+                && field !== "dirty" && field !== "_accessors";
         },
 
         idField: "id",
-
-        _accessor: function(field) {
-            var accessors = this._accessors;
-
-            return accessors[field] = accessors[field] || accessor(field);
-        },
 
         _parse: function(field, value) {
             var that = this,
@@ -133,37 +118,16 @@
             return field ? field.editable !== false : true;
         },
 
-        set: function(fields, value) {
-            var that = this,
-                field,
-                values = {},
-                modified = false,
-                accessor;
+        set: function(field, value) {
+            var that = this;
 
-            if (typeof fields === "string") {
-                values[fields] = value;
-            } else {
-                values = fields;
-            }
+            if (that.editable(field)) {
+                value = that._parse(field, value);
 
-            for (field in values) {
-                if(!that.editable(field)) {
-                    continue;
+                if (!equal(value, that.get(field))) {
+                    ObservableObject.fn.set.call(that, field, value);
+                    that.dirty = true;
                 }
-
-                accessor = that._accessor(field);
-
-                value = that._parse(field, values[field]);
-
-                if (!equal(value, accessor.get(that))) {
-                    accessor.set(that, value);
-
-                    that._modified = modified = true;
-                }
-            }
-
-            if (modified) {
-                that.trigger(CHANGE);
             }
         },
 
@@ -173,11 +137,7 @@
             extend(that, data);
 
             that.id = that.get(that.idField);
-            that._modified = false;
-        },
-
-        hasChanges: function() {
-            return this._modified;
+            that.dirty = false;
         },
 
         isNew: function() {

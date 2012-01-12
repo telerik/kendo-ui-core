@@ -47,63 +47,51 @@
                 equal(m.get("foo.bar"), "baz");
             });
 
-            test("set accepts hash", function() {
+            test("model is dirty after set", function() {
                 var m = new Model();
 
-                m.set({ foo: "foo", bar: "bar" });
+                m.set("foo", "foo");
 
-                equal(m.get("foo"), "foo");
-                equal(m.get("bar"), "bar");
+                ok(m.dirty);
             });
 
-            test("model is _modified after set", function() {
-                var m = new Model();
-
-                m.set({ foo: "foo"});
-                ok(m._modified);
-            });
-
-            test("model is not _modified if the same string value is set", function() {
+            test("model is not dirty if the same string value is set", function() {
                 var m = new Model({
                     foo: "foo"
                 });
 
-                m.set({ foo: "foo"});
-                ok(!m._modified);
+                m.set("foo", "foo");
+                ok(!m.dirty);
             });
 
-            test("model is not _modified if the same numeric value is set", function() {
+            test("model is not dirty if the same numeric value is set", function() {
                 var m = new Model({
                     foo: 1
                 });
 
-                m.set({ foo: 1 });
-                ok(!m._modified);
+                m.set("foo", 1);
+                ok(!m.dirty);
             });
 
-            test("model is not _modified if the same date value is set", function() {
+            test("model is not dirty if the same date value is set", function() {
                 var m = new Model({
                     foo: new Date(2011, 1, 1)
                 });
 
-                m.set({ foo: new Date(2011, 1, 1) });
-                ok(!m._modified);
+                m.set("foo", new Date(2011, 1, 1));
+                ok(!m.dirty);
             });
 
-            test("model is not _modified if the same object value is set", function() {
+            test("model is not dirty if the same object value is set", function() {
                 var m = new Model({
                     foo: {
                         bar: "bar"
                     }
                 });
 
-                m.set({
-                    foo: {
-                        bar: "bar"
-                    }
-                });
+                m.set("foo",  { bar: "bar" });
 
-                ok(!m._modified);
+                ok(!m.dirty);
             });
 
             test("change is raised if the model is modifed after set", function() {
@@ -323,7 +311,7 @@
 
                 m.set("bar", "baz");
                 equal(m.get("bar"), "foo");
-                ok(!m._modified);
+                ok(!m.dirty);
             });
 
             test("editable returns false for field marked as editable=false", function() {
@@ -351,7 +339,20 @@
 
                 m.set("bar", "bar");
 
-                ok(!m._modified);
+                ok(!m.dirty);
+            });
+
+            test("setting a field raises set event", function() {
+                expect(2);
+
+                var model = new Model({ foo: "bar" });
+
+                model.bind("set", function(e) {
+                    equal(e.field, "foo");
+                    equal(e.value, "foo");
+                });
+
+                model.set("foo", "foo");
             });
 
         </script>

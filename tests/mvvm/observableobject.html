@@ -91,6 +91,32 @@
                 viewModel.get("foo");
             });
 
+            test("setting a field raises set event", function() {
+                expect(2);
+
+                var viewModel = kendo.observable({ foo: "bar" });
+
+                viewModel.bind("set", function(e) {
+                    equal(e.field, "foo");
+                    equal(e.value, "foo");
+                });
+
+                viewModel.set("foo", "foo");
+            });
+
+            test("cancelling the set event prevents setting the field value", function() {
+                expect(1);
+
+                var viewModel = kendo.observable({ foo: "bar" });
+
+                viewModel.bind("set", function(e) {
+                    e.preventDefault();
+                });
+
+                viewModel.set("foo", "foo");
+                equal(viewModel.foo, "bar");
+            });
+
             test("getting nested field raises get event of parent", function() {
                 expect(1);
 
@@ -104,23 +130,20 @@
                 viewModel.foo.get("bar");
             });
 
-            test("toJSON skips private fields", function() {
-                var observable = kendo.observable({});
+            test("toJSON serializes only public fields", function() {
+                var observable = kendo.observable({ foo: "bar", baz: function(){} });
+                var json = observable.toJSON();
+                var fields = [];
 
-                equal(typeof observable.toJSON()._events, "undefined");
+                for (var field in json) {
+                    fields.push(field);
+                }
+
+                equal(fields.length, 1);
+                equal(fields[0], "foo");
+                equal(json.foo, "bar");
             });
 
-            test("toJSON serializes public fields", function() {
-                var observable = kendo.observable({ foo: "bar" });
-
-                equal(observable.toJSON().foo, "bar");
-            });
-
-            test("toJSON skips functions", function() {
-                var observable = new (kendo.data.ObservableObject.extend({ foo: "bar", baz: function(){} }));
-
-                equal(typeof observable.toJSON().baz, "undefined");
-            });
         </script>
     </head>
 </html>
