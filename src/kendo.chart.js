@@ -22,6 +22,7 @@
     var ABOVE = "above",
         DEFAULT_FONT = "12px sans-serif",
         ANIMATION_STEP = 10,
+        AREA = "area",
         BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
         BAR_BORDER_BRIGHTNESS = 0.8,
@@ -157,10 +158,7 @@
                 line: {
                     width: 4
                 },
-                labels: {},
-                area: {
-                    opacity: 0.2
-                }
+                labels: {}
             },
             series: [],
             tooltip: {
@@ -331,7 +329,7 @@
                 seriesPoint;
 
             if (chart._plotArea.box.containsPoint(coords.x, coords.y)) {
-                if (point && point.series.type === LINE) {
+                if (point && (point.series.type === LINE || point.series.type === AREA)) {
                     owner = point.owner;
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
@@ -3041,8 +3039,6 @@
                 isVertical = chart.options.isVertical,
                 lines = LineChart.fn.splitSegments.call(chart, view),
                 originalLines = deepExtend({}, lines),
-                areas = [],
-                i,
                 axis = isVertical ? plotArea.axisX : plotArea.axisY,
                 axisLineBox = axis.getAxisLineBox(),
                 end = isVertical ? axisLineBox.y1 : axisLineBox.x1,
@@ -3050,26 +3046,33 @@
                 linesCount = lines.length,
                 seriesIx = 0,
                 linePoints,
-                missingValues;
+                firstPoint,
+                lastPoint,
+                lineOptions,
+                i;
 
             for (i = 0; i < linesCount; i++) {
                 line = lines[i];
                 linePoints = lines[i].points;
-                seriesIx = line.options.seriesIx;
+                lineOptions = line.options;
+                seriesIx = lineOptions.seriesIx;
 
-                if (line.options.stack && seriesIx != 0) {
+                if (lineOptions.stack && seriesIx != 0) {
                     if (seriesIx > 0) {
                         originalLinePoints = originalLines[i - 1].points.reverse();
                         lines[i].points = linePoints.concat(originalLinePoints);
                     }
                 } else {
                     if (linePoints.length > 1) {
+                        firstPoint = linePoints[0];
+                        lastPoint = last(linePoints);
+
                         if (isVertical) {
-                            linePoints.unshift(new Point2D(linePoints[0].x, end));
-                            linePoints.push(new Point2D(last(linePoints).x, end));
+                            linePoints.unshift(new Point2D(firstPoint.x, end));
+                            linePoints.push(new Point2D(lastPoint.x, end));
                         } else {
-                            linePoints.unshift(new Point2D(end, linePoints[0].y));
-                            linePoints.push(new Point2D(end, last(linePoints).y));
+                            linePoints.unshift(new Point2D(end, firstPoint.y));
+                            linePoints.push(new Point2D(end, lastPoint.y));
                         }
                     }
                 }
@@ -4009,7 +4012,7 @@
                     scatterSeries.push(currentSeries);
                 } else if (currentSeries.type === "scatterLine") {
                     scatterLineSeries.push(currentSeries);
-                } else if (currentSeries.type === "area") {
+                } else if (currentSeries.type === AREA) {
                     areaSeries.push(currentSeries);
                 }
             }
@@ -7159,6 +7162,13 @@
                 markers: {
                     background: "#3d3d3d"
                 }
+            },
+            area: {
+                opacity: 0.4,
+                markers: {
+                    visible: false,
+                    size: 6
+                }
             }
         },
         chartArea: {
@@ -7205,6 +7215,13 @@
                 color: BLACK,
                 background: WHITE,
                 opacity: 0.5
+            },
+            area: {
+                opacity: 0.4,
+                markers: {
+                    visible: false,
+                    size: 6
+                }
             }
         },
         seriesColors: ["#ff6800", "#a0a700", "#ff8d00", "#678900", "#ffb53c", "#396000"],
@@ -7248,6 +7265,13 @@
                 color: BLACK,
                 background: WHITE,
                 opacity: 0.5
+            },
+            area: {
+                opacity: 0.4,
+                markers: {
+                    visible: false,
+                    size: 6
+                }
             }
         },
         seriesColors: ["#0069a5", "#0098ee", "#7bd2f6", "#ffb800", "#ff8517", "#e34a00"],
@@ -7296,6 +7320,13 @@
                 connectors: {
                     color: "#A6B1C0"
                 }
+            },
+            area: {
+                opacity: 0.4,
+                markers: {
+                    visible: false,
+                    size: 6
+                }
             }
         },
         chartArea: {
@@ -7340,6 +7371,13 @@
         seriesDefaults: {
             labels: {
                 color: "#000000"
+            },
+            area: {
+                opacity: 0.4,
+                markers: {
+                    visible: false,
+                    size: 6
+                }
             }
         },
         seriesColors: ["#25a0da", "#309b46", "#8ebc00", "#ff6900", "#e61e26", "#d8e404", "#16aba9", "#7e51a1", "#313131", "#ed1691"],
