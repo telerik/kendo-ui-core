@@ -86,6 +86,13 @@
                 markers: {
                     background: "#3d3d3d"
                 }
+            },
+            area: {
+                opacity: 0.4,
+                markers: {
+                    visible: false,
+                    size: 6
+                }
             }
         },
         chartArea: {
@@ -132,6 +139,13 @@
                 color: BLACK,
                 background: WHITE,
                 opacity: 0.5
+            },
+            area: {
+                opacity: 0.4,
+                markers: {
+                    visible: false,
+                    size: 6
+                }
             }
         },
         seriesColors: ["#ff6800", "#a0a700", "#ff8d00", "#678900", "#ffb53c", "#396000"],
@@ -175,6 +189,13 @@
                 color: BLACK,
                 background: WHITE,
                 opacity: 0.5
+            },
+            area: {
+                opacity: 0.4,
+                markers: {
+                    visible: false,
+                    size: 6
+                }
             }
         },
         seriesColors: ["#0069a5", "#0098ee", "#7bd2f6", "#ffb800", "#ff8517", "#e34a00"],
@@ -223,6 +244,13 @@
                 connectors: {
                     color: "#A6B1C0"
                 }
+            },
+            area: {
+                opacity: 0.4,
+                markers: {
+                    visible: false,
+                    size: 6
+                }
             }
         },
         chartArea: {
@@ -267,6 +295,13 @@
         seriesDefaults: {
             labels: {
                 color: "#000000"
+            },
+            area: {
+                opacity: 0.4,
+                markers: {
+                    visible: false,
+                    size: 6
+                }
             }
         },
         seriesColors: ["#25a0da", "#309b46", "#8ebc00", "#ff6900", "#e61e26", "#d8e404", "#16aba9", "#7e51a1", "#313131", "#ed1691"],
