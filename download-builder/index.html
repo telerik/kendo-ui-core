@@ -16,23 +16,25 @@
         </div>
 
         <script id="categoryTemplate" type="text/x-kendo-tmpl">
-            <h2>#= category.name #</h2>
-            <div>#= category.description #</div>
-            <ul class="category" data-id="#= id #">
-                #= renderComponents(category) #
-            </ul>
+            <div class="main-category">
+                <h2 class="component-name">#= category.name #</h2>
+                <div class="category-description">#= category.description #</div>
+                <ul class="category" data-id="#= id #">
+                    #= renderComponents(category) #
+                </ul>
+            </div>
         </script>
 
         <script id="componentTemplate" type="text/x-kendo-tmpl">
             <li class="component" data-id="#= id #">
                 <span class="checkbox"></span>
                 <span class="name">#= name #</span>
+                <span class="description">#= data.description || "" #</span>
                 # if (data.features) { #
                     <ul class="features">
                         #= renderFeatures(data) #
                     </ul>
                 # } #
-                <span class="description">#= data.description || "" #</span>
             </li>
         </script>
 
@@ -45,11 +47,18 @@
         </script>
 
         <script id="infoTemplate" type="text/x-kendo-tmpl">
+            <span class="button icon-button">
+                <a href="#= getUrl #" onclick="logDownload('#= getUrl #');">
+                    <span class="icon-download"></span>
+                    Download
+                </a>
+            </span>
             <dl>
-                <dt>Combined script size:</dt>
-                <dd>#= formatBytes(size) # (#= formatBytes(compressedSize) # compressed)</dd>
+                <dt>kendo.custom.min.js, #= formatBytes(size) #</dt>
+                <dd> (#= formatBytes(compressedSize) # compressed)</dd>
             </dl>
-            <a href="#= getUrl #">Download</a>
+            </script>
+
         </script>
 
         <script id="scriptTemplate" type="text/x-kendo-tmpl">&lt;script type="text/javascript" src="#= data #"&gt;&lt;script&gt;</script>
