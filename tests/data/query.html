@@ -798,6 +798,20 @@
                 equal(result[1].items.length, 2);
             });
 
+            test("groupby groups data by date", function() {
+                var data = [ {field: new Date(2011, 1, 1)} , {field: new Date(2011, 2, 2) } , {field: new Date(2011, 1, 1) } ];
+
+                var result = new Query(data).groupBy( {
+                    field: "field"
+                }).toArray();
+
+                equal(result.length, 2);
+                equal(result[0].items.length, 2);
+                equal(result[0].value.getTime(), new Date(2011, 1, 1).getTime());
+                equal(result[1].items.length, 1);
+                equal(result[1].value.getTime(), new Date(2011, 2, 2).getTime());
+            });
+
             test("groupby returns ungroup collection if no descriptors are provided", function() {
                 var data = [ {field: 100} , {field: 100} , {field: 1} ];
 
