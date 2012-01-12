@@ -445,12 +445,16 @@
                 return;
             }
 
-            if (typeof word !== "string") {
-                //var idx = word.index();
-                //var dataItem = that.dataSource.view()[idx];
-                //word = that._text(dataItem);
+            word = word || "";
 
-                word = word ? word.text() : "";
+            if (typeof word !== "string") {
+                idx = word.index();
+
+                if (idx > -1) {
+                    word = that._text(that.dataSource.view()[idx]);
+                } else {
+                    word = "";
+                }
             }
 
             if (caret <= 0) {

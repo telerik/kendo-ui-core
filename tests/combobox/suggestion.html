@@ -123,6 +123,17 @@
                 equal(combobox.text(), "f");
             });
 
+            test("suggest(text) should use dataItem.text instead of li.text()", function() {
+                var data = [{text: "Item1", value: "1"}, {text: "Item2", value: "2"}],
+                    combobox = input.val("i").kendoComboBox({
+                        dataSource: data,
+                        template: "<span>List:</span>#=data.text#"
+                    }).data("kendoComboBox");
+
+                combobox.suggest(combobox.ul.children(":first"));
+                equal(combobox.text(), "Item1");
+            });
+
             asyncTest("suggest() should suggest correctly", function() {
                 var combobox = input.kendoComboBox({
                     dataSource: [{text:"Cotton"}, {text: "Cotton/Polyester"}],
