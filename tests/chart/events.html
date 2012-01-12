@@ -17,9 +17,9 @@
 
             (function() {
                 var chart,
-                plotArea,
-                marker,
-                bar;
+                    plotArea,
+                    marker,
+                    bar;
 
                 function createChart(options) {
                     $("#container").kendoChart(options);
@@ -54,13 +54,13 @@
                 }
 
                 function lineClick(seriesClickHandler, x, y) {
-                    var createLine = Chart.LineChart.fn.createLine,
+                    var createSegment = Chart.LineChart.fn.createSegment,
                         id;
 
-                    stubMethod(Chart.LineChart, "createLine",
+                    stubMethod(Chart.LineChart, "createSegment",
                         function(lineId) {
                             id = lineId;
-                            return createLine.apply(this, arguments);
+                            return createSegment.apply(this, arguments);
                         },
                         function() {
                             createLineChart({
