@@ -34,10 +34,9 @@
 
             that.title = element.data(kendo.ns + "title");
 
+            that.element.prepend(that.header).append(that.footer);
             if (that.layout) {
                 that.layout.setup(that);
-            } else {
-                that.element.prepend(that.header).append(that.footer);
             }
 
             kendo.mobile.enhance(element);
@@ -162,16 +161,12 @@
                 that.header.detach();
                 view.element.find(roleSelector("header")).remove();
                 view.element.prepend(that.header);
-            } else {
-                view.element.prepend(view.footer);
             }
 
             if (view.footer === that.footer) {
                 that.footer.detach();
                 view.element.find(roleSelector("footer")).remove();
                 view.element.append(that.footer);
-            } else {
-                view.element.append(view.footer);
             }
         }
     });
