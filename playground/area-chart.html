@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.chart.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#container").kendoChart({
+                    theme: "silver",
+                    title: {
+                        text: "Teh chart",
+                        position: "top"
+                    },
+                    seriesDefaults: {
+                        labels: {
+                            visible: false,
+                            position: "insideEnd"
+                        },
+                        overlay: null,
+                        stack: false,
+                        type: "line"
+                    },
+                    series: [{
+                        name: "1",
+                        data: [1, null, 3, 3]
+                    }]
+                });
+            });
+        </script>
+
+        <div id="container" style="width: 600px; height: 400px; float: left; margin-left: 100px;">
+        </div>
+
+        <div class="configurator" style="margin-top: 30px; clear: both;">
+            <div>
+                <input id="horizontal" name="orientation"
+                        type="radio" autocomplete="off" />
+                <label for="horizontal">horizontal</label>
+
+                <input id="vertical" name="orientation"
+                       type="radio" checked="checked" autocomplete="off" />
+                <label for="vertical">vertical</label>
+
+                <input id="stack" type="checkbox" autocomplete="off" />
+                <label for="stack">Stacked</label>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $(".configurator input").change(function() {
+                var chart = $("#container").data("kendoChart"),
+                    series = chart.options.series,
+                    orientation = $("#horizontal").prop("checked") ? "horizontal" : "vertical",
+                    stack = $("#stack").prop("checked");
+
+                for (var i = 0, length = chart.options.series.length; i < length; i++) {
+                    series[i].stack = stack;
+                };
+
+                chart.options.categoryAxis.orientation = orientation;
+
+                chart.refresh();
+            });
+        </script>
+
+    </body>
+</html>
+

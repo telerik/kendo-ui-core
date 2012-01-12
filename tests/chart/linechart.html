@@ -596,7 +596,8 @@
                                 type: "triangle",
                                 border: {
                                     width: BORDER
-                                }
+                                },
+                                opacity: 0.2
                             },
                             labels: {
                                 visible: false,
@@ -631,8 +632,8 @@
                     equal(linePoint.options.markers.border.color, "#f00");
                 });
 
-                test("applies series opacity color to point markers", function() {
-                    equal(linePoint.options.markers.opacity, 0.5);
+                test("applies opacity to point markers", function() {
+                    equal(linePoint.options.markers.opacity, 0.2);
                 });
 
                 test("applies size to point markers", function() {
