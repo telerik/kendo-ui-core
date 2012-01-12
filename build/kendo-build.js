@@ -266,7 +266,7 @@ function deployStyles(stylesRoot, outputRoot, header, compress) {
         stylesRegex = compress ? /\.css$/ : /\.(less|css)$/ ;
 
     mkdir(outputRoot);
-    copyDirSyncRecursive(stylesRoot, outputRoot, false, filesRegex);
+    copyDirSyncRecursive(stylesRoot, outputRoot, true, filesRegex);
     themes.buildThemes(stylesRoot, outputRoot);
     processFilesRecursive(outputRoot, stylesRegex, function(fileName) {
         var css = stripBOM(readText(fileName)),

@@ -5,7 +5,7 @@ var less = require("./less-js/lib/less"),
 function buildThemes(themesFolder, outputFolder) {
     var themes = fs.readdirSync(themesFolder)
                     .filter(function(file) {
-                        return file != "template.less" && /\.less$/i.test(file);
+                        return /^kendo\..+\.less$/i.test(file);
                     })
                     .map(function(file) {
                         return path.join(themesFolder, file);

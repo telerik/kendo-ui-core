@@ -117,21 +117,26 @@ function deployScripts(root, bundle, license, hasSource) {
     });
 }
 
-function deployStyles(root, license, copySource) {
+function deployStyles(root, bundle, license, copySource) {
     var stylesDest = path.join(root, DEPLOY_STYLES),
         sourceRoot = path.join(root, DEPLOY_SOURCE),
         sourceDest = path.join(sourceRoot, DEPLOY_STYLES);
 
-    kendoBuild.deployStyles(STYLES_ROOT, stylesDest, license, true);
-    kendoBuild.rmdirSyncRecursive(path.join(stylesDest, "mobile"));
-
     if (copySource) {
         mkdir(sourceRoot);
         mkdir(sourceDest);
-
-        kendoBuild.deployStyles(STYLES_ROOT, sourceDest, license, false);
-        kendoBuild.rmdirSyncRecursive(path.join(sourceDest, "mobile"));
     }
+
+    bundle.suites.forEach(function(suite) {
+        var suiteStyles = path.join(STYLES_ROOT, suite);
+        if (path.existsSync(suiteStyles)) {
+            kendoBuild.deployStyles(suiteStyles, stylesDest, license, true);
+
+            if (copySource) {
+                kendoBuild.deployStyles(suiteStyles, sourceDest, license, false);
+            }
+        }
+    });
 }
 
 function deployLicenses(root, bundle) {
@@ -238,7 +243,7 @@ function buildBundle(bundle, version, success) {
         deployThirdPartyScripts(root);
 
         console.log("Deploying styles");
-        deployStyles(root, srcLicense, hasSource);
+        deployStyles(root, bundle, srcLicense, hasSource);
 
         console.log("Deploying licenses");
         deployLicenses(root, bundle);
