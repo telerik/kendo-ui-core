@@ -1632,7 +1632,12 @@
                 that._destroyed = [];
             } else {
                 for (idx = 0, length = models.length; idx < length; idx++) {
+
                     models[idx].accept(response[idx]);
+
+                    if (result.type === "create") {
+                        that._pristine.push(models[idx]);
+                    }
                 }
             }
         },
@@ -1713,7 +1718,7 @@
         cancelChanges : function() {
             var that = this;
 
-            that._data = that._observe(that._pristine);
+            that._data = that._observe(that.reader.data(that._pristine));
             that._change();
         },
 
