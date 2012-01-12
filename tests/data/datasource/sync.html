@@ -150,7 +150,7 @@
 
                 var model = dataSource.get(1);
 
-                model.set({ foo: "bar" });
+                model.set("foo", "bar");
                 dataSource.sync();
 
                 equal(dataSource.transport.calls("update"), 1);
@@ -170,9 +170,9 @@
                 stub(dataSource.transport, "update");
 
                 var model = dataSource.get(1);
-                model.set({ foo: "bar" });
+                model.set("foo", "bar");
                 model = dataSource.get(2);
-                model.set({ foo: "baz" });
+                model.set("foo", "baz");
                 dataSource.sync();
 
                 equal(dataSource.transport.calls("update"), 2);
@@ -222,7 +222,7 @@
                 stub(dataSource.transport, "create");
 
                 var model = new Model();
-                model.set( { foo: "bar" });
+                model.set("foo", "bar");
                 dataSource.add(model);
                 dataSource.sync();
 
@@ -295,9 +295,9 @@
                 stub(dataSource.transport, "update");
 
                 var model = dataSource.get(1);
-                model.set({ foo: "foo" });
+                model.set("foo", "foo");
                 model = dataSource.get(2);
-                model.set({ foo: "bar" });
+                model.set("foo", "bar");
                 dataSource.sync();
 
                 equal(dataSource.transport.calls("update"), 1);
@@ -309,9 +309,9 @@
                 stub(dataSource.transport, "update");
 
                 var model = dataSource.get(1);
-                model.set({ foo: "foo" });
+                model.set("foo", "foo");
                 model = dataSource.get(2);
-                model.set({ foo: "bar" });
+                model.set("foo", "bar");
                 dataSource.sync();
 
                 var models = dataSource.transport.args("update")[0].data.models;

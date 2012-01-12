@@ -313,7 +313,7 @@
         },
 
         shouldSerialize: function(field) {
-            return this.hasOwnProperty(field) && field !== "_events";
+            return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== "function";
         },
 
         toJSON: function() {
@@ -338,12 +338,14 @@
             var current = this[field];
 
             if (current != value) {
-                set(this, field, value);
+                if (!this.trigger("set", { field: field, value: value })) {
+                    set(this, field, value);
 
-                this.trigger(CHANGE, {
-                    field: field,
-                    initiator: initiator
-                });
+                    this.trigger(CHANGE, {
+                        field: field,
+                        initiator: initiator
+                    });
+                }
             }
         }
     });
@@ -1402,7 +1404,7 @@
             for (idx = 0, length = data.length; idx < length; idx++) {
                 if (data[idx].isNew()) {
                     created.push(data[idx]);
-                } else if (data[idx].hasChanges()) {
+                } else if (data[idx].dirty) {
                     updated.push(data[idx]);
                 }
             }
