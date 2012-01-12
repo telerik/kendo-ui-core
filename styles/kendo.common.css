@@ -3375,10 +3375,10 @@ div.k-chart
 *+html .k-dropdown,
 *+html .k-selectbox,
 *+html .k-picker-wrap .k-select,
-*+html .k-dropdown-wrap .k-select
+*+html .k-dropdown-wrap .k-select,
 
 *+html .k-numerictextbox,
-*+html .k-numeric-wrap
+*+html .k-numeric-wrap,
 
 *+html .k-timepicker,
 *+html .k-datepicker,
