@@ -13,8 +13,10 @@ var fs = require("fs"),
     writeText = kendoBuild.writeText,
     zip = kendoBuild.zip;
 
+var commercialLicense = {name: "commercial", source: true};
+
 var productionLicenses = [
-    {name: "commercial", source: true},
+    commercialLicense,
     {name: "trial", source: false},
     {name: "open-source", source: true}
 ]
@@ -25,6 +27,14 @@ var betaLicenses = [
 
 
 // Configuration ==============================================================
+var cdnBundle = {
+    name: "kendoui.cdn",
+    suites: ["web", "dataviz", "mobile"],
+    combinedScript: "all",
+    licenses: [commercialLicense],
+    eula: "eula",
+};
+
 var bundles = [{
     name: "kendoui.complete",
     suites: ["web", "dataviz", "mobile"],
@@ -117,21 +127,26 @@ function deployScripts(root, bundle, license, hasSource) {
     });
 }
 
-function deployStyles(root, license, copySource) {
+function deployStyles(root, bundle, license, copySource) {
     var stylesDest = path.join(root, DEPLOY_STYLES),
         sourceRoot = path.join(root, DEPLOY_SOURCE),
         sourceDest = path.join(sourceRoot, DEPLOY_STYLES);
 
-    kendoBuild.deployStyles(STYLES_ROOT, stylesDest, license, true);
-    kendoBuild.rmdirSyncRecursive(path.join(stylesDest, "mobile"));
-
     if (copySource) {
         mkdir(sourceRoot);
         mkdir(sourceDest);
-
-        kendoBuild.deployStyles(STYLES_ROOT, sourceDest, license, false);
-        kendoBuild.rmdirSyncRecursive(path.join(sourceDest, "mobile"));
     }
+
+    bundle.suites.forEach(function(suite) {
+        var suiteStyles = path.join(STYLES_ROOT, suite);
+        if (path.existsSync(suiteStyles)) {
+            kendoBuild.deployStyles(suiteStyles, stylesDest, license, true);
+
+            if (copySource) {
+                kendoBuild.deployStyles(suiteStyles, sourceDest, license, false);
+            }
+        }
+    });
 }
 
 function deployLicenses(root, bundle) {
@@ -238,7 +253,7 @@ function buildBundle(bundle, version, success) {
         deployThirdPartyScripts(root);
 
         console.log("Deploying styles");
-        deployStyles(root, srcLicense, hasSource);
+        deployStyles(root, bundle, srcLicense, hasSource);
 
         console.log("Deploying licenses");
         deployLicenses(root, bundle);
@@ -273,5 +288,5 @@ function buildAllBundles(version, success, bundleIx) {
 // Exports =====================================================================
 exports.buildBundle = buildBundle;
 exports.buildAllBundles = buildAllBundles;
-exports.bundles = bundles;
+exports.cdnBundle = cdnBundle;
 exports.clean = clean;

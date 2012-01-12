@@ -9,8 +9,8 @@ namespace Kendo.Models
         public static readonly IList<string> All = new string[]
         {
 #if DEBUG
-            "kendo.common.css",
-            "kendo.default.less"
+            "web/kendo.common.css",
+            "web/kendo.default.less"
 #else
             "kendo.common.min.css",
             "kendo.default.min.css",
@@ -20,18 +20,13 @@ namespace Kendo.Models
         public static readonly IList<string> Mobile = new string[]
         {
 #if DEBUG
-            "kendo.common.css",
-            "kendo.default.less",
-            "mobile/common.less",
-            "mobile/android4.less",
-            "mobile/blackberry.less",
-            "mobile/icons.less",
-            "mobile/ios.less",
-            "mobile/meego.less"
+            "web/kendo.common.css",
+            "web/kendo.default.less",
+            "mobile/kendo.mobile.all.less"
 #else
             "kendo.common.min.css",
             "kendo.default.min.css",
-            "mobile/kendo.mobile.common.min.css"
+            "kendo.mobile.all.min.css"
 #endif
         };
     }
