@@ -1,28 +1,193 @@
+h2 {
+    font-size: 23px;
+    line-height: 32px;
+    margin: 0 0 9px;
+    font-weight: normal;
+    position: relative;
+    z-index: 2;
+}
+#configurator
+{
+    width: 940px;
+    padding: 41px 0 40px 0;
+    margin: 0 auto;
+    clear: both;
+    position: relative;
+    z-index: 4;
+    overflow: visible;
+}
+.main-category 
+{
+    overflow: hidden;
+    clear: both;
+}
+
+h2.component-name
+{
+    border-top: 1px solid #E6E6E6;
+    float: left;
+    width: 240px;
+    font-size: 20px;
+    position: relative;
+    z-index: 1;
+    padding: 7px 0 0 0;
+}
+.category-description 
+{
+    float: left;
+    clear: both;
+    width: 225px;
+}
+.category 
+{
+    padding: 0;
+    margin-top: -49px;
+    margin-bottom: 30px;
+    width: 700px;
+    float: right;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    border-bottom: 1px solid #e6e6e6;
+}
+.features
+{
+    padding: 0;
+    margin: 0 0 -1px;
+    border-bottom: 1px solid #e6e6e6;
+    width: 700px;
+    float: left;
+}
+.component,
+.feature
+{
+    border-top: 1px solid #e6e6e6;
+    list-style: none;
+    padding: 0 19px 0 0;
+    overflow: hidden;
+
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all  0.4s ease;
+
+    position: relative;
+}
+.feature 
+{
+    padding: 0 19px 0 27px;
+    background-color: #fff;
+}
+.name
+{
+    width: 106px;
+    float: left;
+    cursor: default;
+    padding: 10px 0 10px 40px;
+    margin-left: -12px;
+
+}
+.description 
+{
+    float: left;
+    width: 500px;
+    padding: 10px 0;
+}
+.feature .description 
+{
+    width: 470px;
+}
+/* Checkbox */
 .checkbox {
     background: url(../images/checkboxes.gif) no-repeat 0 -13px;
     width: 13px;
     height: 13px;
+    padding-left: 0;
     border: none;
-    display: inline-block;
+    float: left;
     overflow: hidden;
+    position: relative;
+    top: 12px;
+    left: 20px;
+}
+.disabledcheckbox 
+{
+    background: url(../images/checkboxes.gif) no-repeat 0 0;
+    width: 13px;
+    height: 13px;
+    padding-left: 0;
+    border: none;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    top: 12px;
+    left: 20px;
 }
 
 .checkbox:hover {
     background-position: 0 -26px;
 }
 
+.component-implicit > .checkbox,
 .implicit {
     background-position: 0 -52px;
 }
 
+.component-implicit > .checkbox:hover,
 .implicit:hover {
     background-position: 0 -65px;
 }
 
+.component-explicit > .checkbox,
 .explicit {
     background-position: 0 -91px;
 }
 
+.component-explicit > .checkbox:hover,
 .explicit:hover {
     background-position: 0 -104px;
+}
+/* end of Checkbox */
+
+/* Component */
+.component-implicit 
+{
+    background-color: #fdf3f0;
+}
+.component-explicit 
+{
+    background-color: #fbe8e3;
+}
+/* end of Component */
+#infoPanel 
+{
+    clear: both;
+    width: 700px;
+    float: right;
+    overflow: hidden;
+    padding: 0 0 20px 0;
+}
+#infoPanel dl
+{
+    float: left;
+    padding: 0 0 0 10px;
+}
+#infoPanel dt 
+{
+    color: #333;
+}
+#infoPanel dd 
+{
+    color: #808080;
+}
+
+.cdn-scripts
+{
+    clear: both;
+    width: 700px;
+    float: right;
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-top: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;
 }
