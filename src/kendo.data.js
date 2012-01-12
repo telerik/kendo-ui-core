@@ -594,7 +594,7 @@
             for(idx = 0, len = sorted.length; idx < len; idx++) {
                 item = sorted[idx];
                 currentValue = accessor.get(item, field);
-                if(groupValue !== currentValue) {
+                if(!groupValueComparer(groupValue, currentValue)) {
                     groupValue = currentValue;
                     group = {
                         field: field,
@@ -620,6 +620,14 @@
             return result;
         }
     }
+
+    function groupValueComparer(a, b) {
+        if (a.getTime && b.getTime) {
+            return a.getTime() === b.getTime();
+        }
+        return a === b;
+    }
+
     function calculateAggregate(accumulator, aggregates, item, index, length) {
             aggregates = aggregates || [];
             var idx,
