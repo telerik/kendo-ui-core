@@ -93,14 +93,14 @@
                 equal(combobox.input.val(), "b");
             });
 
-            test("suggest(text) should not add text if input is empty", function() {
+            test("suggest(text) should add text if input is empty", function() {
                 var combobox = input.kendoComboBox({
                     dataSource: data
                 }).data("kendoComboBox");
 
                 combobox.suggest("Foo");
 
-                equal(combobox.text(), "");
+                equal(combobox.text(), "Foo");
             });
 
             test("suggest(text) does not suggest on backspace", function() {
