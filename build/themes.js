@@ -2,15 +2,14 @@ var less = require("./less-js/lib/less"),
     fs = require("fs"),
     path = require("path");
 
-function buildThemes(themesFolder, outputFolder, success) {
+function buildThemes(themesFolder, outputFolder) {
     var themes = fs.readdirSync(themesFolder)
                     .filter(function(file) {
                         return file != "template.less" && /\.less$/i.test(file);
                     })
                     .map(function(file) {
                         return path.join(themesFolder, file);
-                    }),
-        themesRemaining = themes.length;
+                    });
 
     themes.forEach(function(theme) {
         var skinTemplate = fs.readFileSync(theme, "utf8"),
@@ -26,10 +25,6 @@ function buildThemes(themesFolder, outputFolder, success) {
             } else {
                 fs.writeFileSync(path.join(outputFolder, themeName + ".css"), tree.toCSS(/* { compress: true } */), "utf8");
                 console.log("Built theme", themeName);
-
-                if (success && --themesRemaining === 0) {
-                    success();
-                }
             }
         });
     });

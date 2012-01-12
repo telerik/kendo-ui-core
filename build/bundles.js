@@ -117,26 +117,19 @@ function deployScripts(root, bundle, license, hasSource) {
     });
 }
 
-function deployStyles(root, license, copySource, success) {
+function deployStyles(root, license, copySource) {
     var stylesDest = path.join(root, DEPLOY_STYLES),
         sourceRoot = path.join(root, DEPLOY_SOURCE),
-        sourceDest = path.join(sourceRoot, DEPLOY_STYLES),
-        stylesRemaining = copySource ? 2 : 1;
+        sourceDest = path.join(sourceRoot, DEPLOY_STYLES);
 
-    var pollSuccess = function() {
-        if(success && --stylesRemaining === 0) {
-            success();
-        }
-    };
-
-    kendoBuild.deployStyles(STYLES_ROOT, stylesDest, license, true, pollSuccess);
+    kendoBuild.deployStyles(STYLES_ROOT, stylesDest, license, true);
     kendoBuild.rmdirSyncRecursive(path.join(stylesDest, "mobile"));
 
     if (copySource) {
         mkdir(sourceRoot);
         mkdir(sourceDest);
 
-        kendoBuild.deployStyles(STYLES_ROOT, sourceDest, license, false, pollSuccess);
+        kendoBuild.deployStyles(STYLES_ROOT, sourceDest, license, false);
         kendoBuild.rmdirSyncRecursive(path.join(sourceDest, "mobile"));
     }
 }
@@ -226,14 +219,7 @@ function deployThirdPartyScripts(outputRoot) {
 
 function buildBundle(bundle, version, success) {
     var name = bundle.name,
-        zips = 0,
-        stylesDeployed = false;
-
-    var pollSuccess = function() {
-        if (success && zips === bundle.licenses.length && stylesDeployed) {
-            success();
-        }
-    };
+        zips = 0;
 
     bundle.licenses.forEach(function(license) {
         var licenseName = license.name,
@@ -252,10 +238,7 @@ function buildBundle(bundle, version, success) {
         deployThirdPartyScripts(root);
 
         console.log("Deploying styles");
-        deployStyles(root, srcLicense, hasSource, function() {
-            stylesDeployed = true;
-            pollSuccess();
-        });
+        deployStyles(root, srcLicense, hasSource);
 
         console.log("Deploying licenses");
         deployLicenses(root, bundle);
@@ -266,8 +249,9 @@ function buildBundle(bundle, version, success) {
         zip(packageName, root, function() {
             kendoBuild.copyFileSync(packageName, packageNameLatest);
 
-            zips++;
-            pollSuccess();
+            if (success && ++zips === bundle.licenses.length) {
+                success();
+            }
         });
     });
 }
