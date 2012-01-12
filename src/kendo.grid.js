@@ -737,7 +737,7 @@
         },
 
         _modelForContainer: function(container) {
-            var id = (container.is("tr") ? container : container.closest("tr")).attr(kendo.attr("id"));
+            var id = (container.is("tr") ? container : container.closest("tr")).attr(kendo.attr("uid"));
 
             return this.dataSource.getByUid(id);
         },
@@ -848,7 +848,7 @@
         closeCell: function() {
             var that = this,
                 cell = that._editContainer.removeClass("k-edit-cell"),
-                id = cell.closest("tr").attr(kendo.attr("id")),
+                id = cell.closest("tr").attr(kendo.attr("uid")),
                 column = that.columns[that.cellIndex(cell)],
                 model = that.dataSource.getByUid(id);
 
@@ -856,8 +856,9 @@
 
             that._displayCell(cell, column, model);
 
-            if (column.field in (model.changes() || {})) {
+            if (cell.hasClass("k-dirty-cell")) {
                 $('<span class="k-dirty"/>').prependTo(cell);
+                cell.removeClass("k-dirty-cell");
             }
             that._distroyEditable();
         },
@@ -945,7 +946,7 @@
                 var index = dataSource.indexOf((dataSource.view() || [])[0]) || 0,
                     model = dataSource.insert(index, {}),
                     id = model.uid,
-                    cell = that.table.find("tr[" + kendo.attr("id") + "=" + id + "] > td:not(.k-group-cell,.k-hierarchy-cell)").first();
+                    cell = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "] > td:not(.k-group-cell,.k-hierarchy-cell)").first();
 
                 if (cell.length) {
                     that.editCell(cell);
@@ -1422,8 +1423,7 @@
             that.dataSource = DataSource.create(dataSource)
                                 .bind(CHANGE, proxy(that.refresh, that))
                                 .bind(REQUESTSTART, proxy(that._requestStart, that))
-                                .bind(ERROR, proxy(that._error, that))
-                                .bind(MODELCHANGE, proxy(that._modelChange, that));
+                                .bind(ERROR, proxy(that._error, that));
         },
 
         _error: function() {
@@ -1434,24 +1434,29 @@
             this._progress(true);
         },
 
-        _modelChange: function(model) {
+        _modelChange: function(e) {
             var that = this,
-                row = that.tbody.find("tr[" + kendo.attr("id") + "=" + model.uid +"]"),
-                changes = model.changes() || {},
+                model = e.items[0],
+                row = that.tbody.find("tr[" + kendo.attr("uid") + "=" + model.uid +"]"),
                 cell,
                 column,
                 isAlt = row.hasClass("k-alt");
 
             if (row.has(".k-edit-cell")) {
-                row.find(">td:not(.k-group-cell,.k-hierarchy-cell,.k-edit-cell)").each(function() {
+                row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
                     cell = $(this);
                     column = that.columns[that.cellIndex(cell)];
 
-                    if (column.field in changes) {
-                        that._displayCell(cell, column, model);
-                        $('<span class="k-dirty"/>').prependTo(cell);
+                    if (column.field === e.field) {
+                        if (!cell.hasClass("k-edit-cell")) {
+                            that._displayCell(cell, column, model);
+                            $('<span class="k-dirty"/>').prependTo(cell);
+                        } else {
+                            cell.addClass("k-dirty-cell");
+                        }
                     }
                 });
+
             } else {
                 row.replaceWith($((isAlt ? that.altRowTemplate : that.rowTemplate)(model)));
             }
@@ -1625,7 +1630,7 @@
                 }
 
                 if (model) {
-                    rowTemplate += ' ' + kendo.attr("id") + '="#=uid#"';
+                    rowTemplate += ' ' + kendo.attr("uid") + '="#=uid#"';
                 }
 
                 rowTemplate += ">";
@@ -2169,7 +2174,7 @@
          * // refreshes the grid
          * grid.refresh();
          */
-        refresh: function() {
+        refresh: function(e) {
             var that = this,
                 length,
                 idx,
@@ -2179,6 +2184,11 @@
                 placeholder,
                 groups = (that.dataSource.group() || []).length,
                 colspan = groups + that.columns.length;
+
+            if (e && e.action === "itemchange") {
+                that._modelChange(e);
+                return;
+            }
 
             that._distroyEditable();
 

@@ -45,7 +45,7 @@
             }
 
             test("kendoEditable is attached to the target element", function() {
-                var element = div.kendoEditable();
+                var element = div.kendoEditable( { model: defaultModel });
 
                 ok(element.data("kendoEditable") instanceof Editable);
             });
@@ -63,7 +63,7 @@
             });
 
             test("no inputs are rendered when no fields are specifed", function() {
-                var editable = setup({ });
+                var editable = setup({ model: defaultModel });
 
                 ok(!editable.element.find(":input").length);
             });

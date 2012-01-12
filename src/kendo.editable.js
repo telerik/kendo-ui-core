@@ -100,9 +100,13 @@
             }
         },
 
-        _binderChange: function(e) {
-            var that = this;
-            if (!that.validatable.validate() || that.trigger(CHANGE, { values: e.values })) {
+        _validate: function(e) {
+            var that = this,
+                values = {};
+
+            values[e.field] = e.value;
+
+            if (!that.validatable.validate() || that.trigger(CHANGE, { values: values })) {
                 e.preventDefault();
             }
         },
@@ -123,8 +127,7 @@
                 fields = that.options.fields || [],
                 container = that.element.empty(),
                 model = that.options.model || {},
-                rules = {},
-                settings = {};
+                rules = {};
 
             if (!$.isArray(fields)) {
                 fields = [fields];
@@ -144,19 +147,12 @@
                     }
                 }
 
-                if (isObject && field.format && type == "date") {
-                    settings[fieldName] = {
-                        format: function(value) { return kendo.format(field.format, value); },
-                        parse: function(value) { return kendo.parseDate(value, field.format); }
-                    };
-                }
-
                 that.editor(field, modelField);
             }
 
-            settings[CHANGE] = $.proxy(that._binderChange, that);
             kendo.bind(container, that.options.model);
-            //that.binder = new Binder(container, that.options.model, settings);
+
+            that.options.model.bind("set", $.proxy(that._validate, that));
 
             that.validatable = container.kendoValidator({
                 errorTemplate: '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +

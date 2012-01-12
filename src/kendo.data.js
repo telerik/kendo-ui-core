@@ -154,7 +154,6 @@
         DESTROY = "destroy",
         CHANGE = "change",
         GET = "get",
-        MODELCHANGE = "modelChange",
         MULTIPLE = "multiple",
         SINGLE = "single",
         ERROR = "error",
@@ -169,6 +168,7 @@
         slice = [].slice,
         unshift = [].unshift,
         toString = {}.toString,
+        dateRegExp = /^\/Date\((.*?)\)\/$/,
         quoteRegExp = /(?=['\\])/g;
 
     function set(object, field, value) {
@@ -208,6 +208,10 @@
 
                 if ($.isPlainObject(member)) {
                     member = new type(member);
+
+                    member.bind(CHANGE, function(e) {
+                        that.trigger(CHANGE, { field: e.field, items: [this], action: "itemchange" });
+                    });
                 }
 
                 that[idx] = member;
@@ -270,6 +274,7 @@
             return result;
         }
     });
+
     var ObservableObject = Observable.extend({
         init: function(value) {
             var that = this,
@@ -302,8 +307,7 @@
 
                     (function(field) {
                         member.bind(CHANGE, function(e) {
-                            e.field = field;
-                            that.trigger(CHANGE, e);
+                            that.trigger(CHANGE, { field: field, index: e.index, items: e.items, action: e.action});
                         });
                     })(field);
                 }
@@ -349,6 +353,190 @@
             }
         }
     });
+
+    function equal(x, y) {
+        if (x === y) {
+            return true;
+        }
+
+        var xtype = $.type(x), ytype = $.type(y), field;
+
+        if (xtype !== ytype) {
+            return false;
+        }
+
+        if (xtype === "date") {
+            return x.getTime() === y.getTime();
+        }
+
+        if (xtype !== "object" && xtype !== "array") {
+            return false;
+        }
+
+        for (field in x) {
+            if (!equal(x[field], y[field])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    var parsers = {
+        "number": function(value) {
+            return kendo.parseFloat(value);
+        },
+
+        "date": function(value) {
+            if (typeof value === "string") {
+                var date = dateRegExp.exec(value);
+                if (date) {
+                    return new Date(parseInt(date[1]));
+                }
+            }
+            return kendo.parseDate(value);
+        },
+
+        "boolean": function(value) {
+            if (typeof value === "string") {
+                return value.toLowerCase() === "true";
+            }
+            return !!value;
+        },
+
+        "string": function(value) {
+            return value + "";
+        },
+
+        "default": function(value) {
+            return value;
+        }
+    };
+
+    var defaultValues = {
+        "string": "",
+        "number": 0,
+        "date": new Date(),
+        "boolean": false,
+        "default": ""
+    }
+
+    var Model = ObservableObject.extend({
+        init: function(data) {
+            var that = this;
+
+            if (!data || $.isEmptyObject(data)) {
+                data = $.extend({}, that.defaults, data);
+            }
+
+            ObservableObject.fn.init.call(that, data);
+
+            that.uid = kendo.guid();
+
+            that.dirty = false;
+
+            that.id = that.get(that.idField);
+        },
+
+        shouldSerialize: function(field) {
+            return ObservableObject.fn.shouldSerialize.call(this, field)
+                && field !== "uid"
+                && !(this.idField !== "id" && field === "id")
+                && field !== "dirty" && field !== "_accessors";
+        },
+
+        idField: "id",
+
+        _parse: function(field, value) {
+            var that = this,
+                parse;
+
+            field = (that.fields || {})[field];
+            if (field) {
+                parse = field.parse;
+                if (!parse && field.type) {
+                    parse = parsers[field.type.toLowerCase()];
+                }
+            }
+
+            return parse ? parse(value) : value;
+        },
+
+        editable: function(field) {
+            field = (this.fields || {})[field];
+            return field ? field.editable !== false : true;
+        },
+
+        set: function(field, value) {
+            var that = this;
+
+            if (that.editable(field)) {
+                value = that._parse(field, value);
+
+                if (!equal(value, that.get(field))) {
+                    ObservableObject.fn.set.call(that, field, value);
+                    that.dirty = true;
+                }
+            }
+        },
+
+        accept: function(data) {
+            var that = this;
+
+            extend(that, data);
+
+            that.id = that.get(that.idField);
+            that.dirty = false;
+        },
+
+        isNew: function() {
+            return this.id === this._defaultId;
+        }
+    });
+
+    Model.define = function(options) {
+        var model,
+            proto = extend({}, { defaults: {} }, options),
+            id = proto.id || "id";
+
+        proto.idField = id;
+
+        if (proto.id) {
+            delete proto.id;
+        }
+
+        proto.defaults[id] = proto._defaultId = "";
+
+        for (var name in proto.fields) {
+            var field = proto.fields[name],
+                type = field.type || "default",
+                value = null;
+
+            name = field.field || name;
+
+            if (!field.nullable) {
+                value = proto.defaults[name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
+            }
+
+            if (options.id === name) {
+                proto._defaultId = value;
+            }
+
+            proto.defaults[name] = value;
+
+            field.parse = field.parse || parsers[type];
+        }
+
+        model = Model.extend(proto);
+
+        if (proto.fields) {
+            model.fields = proto.fields;
+            model.idField = proto.idField;
+        }
+
+        return model;
+    }
+
     var Comparer = {
         selector: function(field) {
             return isFunction(field) ? field : getter(field);
@@ -404,7 +592,6 @@
     };
 
     var operators = (function(){
-        var dateRegExp = /^\/Date\((.*?)\)\/$/;
 
         function quote(value) {
             return value.replace(quoteRegExp, "\\");
@@ -1650,7 +1837,7 @@
         _observe: function(data) {
             var that = this;
 
-            data = new ObservableArray(data, that.reader.model);
+            data = data instanceof ObservableArray ? data : new ObservableArray(data, that.reader.model);
 
             return data.bind(CHANGE, proxy(that._change, that));
         },
@@ -2321,6 +2508,7 @@
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
         Cache: Cache,
-        DataReader: DataReader
+        DataReader: DataReader,
+        Model: Model
     });
 })(jQuery);
