@@ -10,6 +10,11 @@ namespace Kendo.Controllers
         // GET: /m
         public ActionResult Index()
         {
+#if DEBUG
+            ViewBag.Debug = true;
+#else
+            ViewBag.Debug = false;
+#endif
             LoadNavigation("mobile");
             return View();
         }
