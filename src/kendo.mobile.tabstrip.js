@@ -29,13 +29,44 @@
     * Kendo mobile Tabstrip comes out of the box with several ready to use icons:
     *
     * <ul>
-    *   <li>TODO</li>
+    *   <li>km-featured</li>
+    *   <li>km-toprated</li>,
+    *   <li>km-favorites</li>
+    *   <li>km-mostviewed</li>
+    *   <li>km-bookmarks</li>
+    *   <li>km-contacts</li>
+    *   <li>km-downloads</li>
+    *   <li>km-more</li>
+    *   <li>km-mostrecent</li>
+    *   <li>km-recents</li>
+    *   <li>km-history</li>
+    *   <li>km-add</li>,
+    *   <li>km-contactadd</li>
+    *   <li>km-detaildisclosure</li>
+    *   <li>km-info</li>
+    *   <li>km-action</li>
+    *   <li>km-camera</li>
+    *   <li>km-compose</li>
+    *   <li>km-search</li>
+    *   <li>km-trash</li>
+    *   <li>km-organize</li>
+    *   <li>km-reply</li>
+    *   <li>km-stop</li>
+    *   <li>km-refresh</li>
+    *   <li>km-play</li>
+    *   <li>km-fastforward</li>
+    *   <li>km-pause</li>
+    *   <li>km-rewind</li>
+    *   <li>km-settings</li>
+    *   <li>km-globe</li>
+    *   <li>km-home</li>
+    *   <li>km-cart</li>
     * </ul>
     *
-    * Additional icons may be added by defining the respective CSS tab class. If the <code>icon</code> data attribute is set to <code>custom</code>, the tab will receive <code>km-tab-icon-custom</code> CSS class.
+    * Additional icons may be added by defining the respective CSS tab class. If the <code>icon</code> data attribute is set to <code>custom</code>, the tab will receive <code>km-custom</code> CSS class.
     * @exampleTitle Define custom tabstrip icon.
     * @example
-    * .km-tab-icon-custom {
+    * .km-custom {
     *   background-image: ...
     * }
     *
@@ -152,7 +183,7 @@
             } else {
                 button.prepend(iconSpan);
                 if (icon) {
-                    iconSpan.addClass("km-tab-icon-" + icon);
+                    iconSpan.addClass("km-" + icon);
                 }
             }
         },
