@@ -145,6 +145,7 @@
         List = ui.List,
         Select = ui.Select,
         touch = kendo.support.touch,
+        keys = kendo.keys,
         CLICK = touch ? "touchend" : "click",
         ATTRIBUTE = "disabled",
         CHANGE = "change",
@@ -881,15 +882,20 @@
         },
 
         _keydown: function(e) {
-            var that = this;
+            var that = this,
+                key = e.keyCode;
 
-            if (kendo.keys.TAB === e.keyCode) {
+
+            if (that.options.suggest && (key == keys.BACKSPACE || key == keys.DELETE)) {
+                return;
+            }
+
+            if (key == kendo.keys.TAB) {
                 that.text(that.input.val());
 
                 if (that._state === STATE_FILTER && that._selected) {
                     that._state = STATE_ACCEPT;
                 }
-
             } else if (!that._move(e)) {
                that._search();
             }
@@ -903,7 +909,6 @@
                 var value = that.text();
                 if (that._prev !== value) {
                     that._prev = value;
-                    console.log(value);
                     that.search(value);
                 }
             }, that.options.delay);
