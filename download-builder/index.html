@@ -60,14 +60,12 @@
 
         </script>
 
-        <script id="scriptTemplate" type="text/x-kendo-tmpl">&lt;script type="text/javascript" src="#= CDN_URL + data #"&gt;&lt;script&gt;</script>
+        <script id="scriptTemplate" type="text/x-kendo-tmpl">&lt;script type="text/javascript" src="http://cdn.kendostatic.com/#= VERSION #/js/#= data #"&gt;&lt;script&gt;</script>
 
         <script type="text/javascript">
             var INFO_SERVICE = "http://tsonev/mono-kendo-download-service/info.ashx",
                 GET_SERVICE = "http://tsonev/mono-kendo-download-service/get.ashx",
                 VERSION = "current", // yyyy.q.ddd
-                CONFIGURATION_URL = "config/kendo-config." + VERSION + ".json",
-                CDN_URL = "http://cdn.kendostatic.com/" + VERSION + "/js/",
                 LICENSES = ["framework", "web", "dataviz", "mobile"];
 
             var categories,
@@ -80,21 +78,29 @@
                 scriptTemplate,
                 showAdvanced = false;
 
-            $(document).ready(function() {
-                $.getJSON(CONFIGURATION_URL, function(data) {
-                    categories = data.categories;
-                    components = data.components;
-                    init();
-                });
-            });
-
-            function init(config) {
-                resolver = new ScriptResolver(components);
+            $(function() {
                 categoryTemplate = template("categoryTemplate");
                 componentTemplate = template("componentTemplate");
                 featureTemplate = template("featureTemplate");
                 infoTemplate = template("infoTemplate");
                 scriptTemplate = template("scriptTemplate");
+
+                load();
+            });
+
+            function load() {
+                $.getJSON("config/kendo-config." + VERSION + ".json", function(data) {
+                    categories = data.categories;
+                    components = data.components;
+
+                    resolver = new ScriptResolver(components);
+
+                    render();
+                });
+            }
+
+            function render() {
+                $("#configurator").empty();
 
                 renderCategories();
 
