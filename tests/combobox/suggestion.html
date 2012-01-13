@@ -53,7 +53,7 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
-                    input.add($("ul")).remove();
+                    $(".k-combobox").add($("ul")).remove();
                 }
             });
 
@@ -91,6 +91,79 @@
                 equal(combobox.input.selectedText(), "ar");
                 combobox.suggest("");
                 equal(combobox.input.val(), "b");
+            });
+
+            test("suggest(text) should add text if input is empty", function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: data
+                }).data("kendoComboBox");
+
+                combobox.suggest("Foo");
+
+                equal(combobox.text(), "Foo");
+            });
+
+            test("suggest(text) does not suggest on backspace", function() {
+                var combobox = input.val("f").kendoComboBox({
+                    dataSource: data
+                }).data("kendoComboBox");
+
+                combobox._last = kendo.keys.BACKSPACE; //backspace is clicked
+                combobox.suggest("Foo");
+                equal(combobox.text(), "f");
+            });
+
+            test("suggest(text) does not suggest on delete", function() {
+                var combobox = input.val("f").kendoComboBox({
+                    dataSource: data
+                }).data("kendoComboBox");
+
+                combobox._last = kendo.keys.DELETE; //delete is clicked
+                combobox.suggest("Foo");
+                equal(combobox.text(), "f");
+            });
+
+            test("suggest(text) should use dataItem.text instead of li.text()", function() {
+                var data = [{text: "Item1", value: "1"}, {text: "Item2", value: "2"}],
+                    combobox = input.val("i").kendoComboBox({
+                        dataSource: data,
+                        template: "<span>List:</span>#=data.text#"
+                    }).data("kendoComboBox");
+
+                combobox.suggest(combobox.ul.children(":first"));
+                equal(combobox.text(), "Item1");
+            });
+
+            asyncTest("suggest() should suggest correctly", function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: [{text:"Cotton"}, {text: "Cotton/Polyester"}],
+                    suggest: true
+                }).data("kendoComboBox");
+
+                combobox.input.type("Co");
+                combobox.suggest("Cotton");
+
+                setTimeout(function() {
+                    start();
+
+                    equal(combobox.text(), "Cotton");
+                    equal(combobox.input.selectedText(), "tton");
+                }, 200);
+            });
+
+            asyncTest("suggest(text) should only append the rest of the text (filter:contains)", function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: data,
+                    filter: "contains",
+                    suggest: true
+                }).data("kendoComboBox");
+
+                combobox.input.val("o").keydown();
+
+                setTimeout(function() {
+                    start();
+                    equal(combobox.text(), "oo");
+                }, 300);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

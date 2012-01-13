@@ -97,6 +97,7 @@
     var kendo = window.kendo,
         touch = kendo.support.touch,
         ui = kendo.ui,
+        keys = kendo.keys,
         DataSource = kendo.data.DataSource,
         List = ui.List,
         CHANGE = "change",
@@ -112,7 +113,7 @@
         proxy = $.proxy;
 
     function indexOfWordAtCaret(caret, text, separator) {
-        return text.substring(0, caret).split(separator).length - 1;
+        return separator ? text.substring(0, caret).split(separator).length - 1 : 0;
     }
 
     function wordAtCaret(caret, text, separator) {
@@ -124,7 +125,7 @@
 
         words.splice(indexOfWordAtCaret(caret, text, separator), 1, word);
 
-        if (words[words.length - 1] !== "") {
+        if (separator && words[words.length - 1] !== "") {
             words.push("");
         }
 
@@ -143,12 +144,12 @@
         * @extends kendo.ui.List
         * @param {DomElement} element DOM element
         * @param {Object} options Configuration options.
-        * @option {Object | kendo.data.DataSource } [dataSource] The set of data that the AutoComplete will be bound to.  
+        * @option {Object | kendo.data.DataSource } [dataSource] The set of data that the AutoComplete will be bound to.
 	*  Either a local JavaScript object, or an instance of the Kendo UI DataSource.
-        * _example 
+        * _example
 	* var items = [ { Name: "Item 1" }, { Name: "Item 2"} ];
-	* $("#autoComplete").kendoAutoComplete({ dataSource: items });        
- 	* //	  
+	* $("#autoComplete").kendoAutoComplete({ dataSource: items });
+ 	* //
 	* // or
  	* //
 	* $("#autocomplete").kendoAutoComplete({
@@ -163,7 +164,7 @@
 	* // disable the autocomplete when it is created (enabled by default)
 	* $("#autoComplete").kendoAutoComplete({
 	*     enable: false
-	* });	
+	* });
         * @option {Boolean} [suggest] <false> Controls whether the AutoComplete should automatically auto-type the rest of text.
 	* _example
 	* // turn on auto-typing (off by default)
@@ -186,9 +187,9 @@
 	* @option {String} [dataTextField] <null> Sets the field of the data item that provides the text content of the list items.
 	* _example
 	* var items = [ { ID: 1, Name: "Item 1" }, { ID: 2, Name: "Item 2"} ];
-	* $("#autoComplete").kendoAutoComplete({ 
+	* $("#autoComplete").kendoAutoComplete({
 	*     dataSource: items,
-	*     dataTextField: "Name" 
+	*     dataTextField: "Name"
 	* });
 	* @option {String} [filter] <"startswith"> Defines the type of filtration. This value is handled by the remote data source.
 	* _example
@@ -271,7 +272,7 @@
 	    *     }
 	    * });
 	    * @example
-	    * var autoComplete = $("#autoComplete").data("kendoAutoComplete"); 
+	    * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
 	    * $("#autoComplete").data("kendoAutoComplete").bind("change", function(e) {
 	    *     // handle event
 	    * });
@@ -365,6 +366,8 @@
         refresh: function () {
             var that = this,
             ul = that.ul[0],
+            options = that.options,
+            suggest = options.suggest,
             data = that.dataSource.view(),
             length = data.length;
 
@@ -372,8 +375,14 @@
 
             that._height(length);
 
-            if (length && that.options.highlightFirst) {
-                that.current($(ul.firstChild));
+            if (length) {
+                if (suggest || options.highlightFirst) {
+                    that.current($(ul.firstChild));
+                }
+
+                if (suggest) {
+                    that.suggest(that._current);
+                }
             }
 
             if (that._open) {
@@ -467,45 +476,61 @@
 	*/
         suggest: function (word) {
             var that = this,
-                element = that.element[0],
-                separator = that.options.separator,
+                key = that._last,
                 value = that.value(),
-                selectionEnd,
-                textRange,
-                caret = caretPosition(element);
+                element = that.element[0],
+                caret = caretPosition(element),
+                separator = that.options.separator,
+                words = value.split(separator),
+                wordIndex = indexOfWordAtCaret(caret, value, separator),
+                selectionEnd = caret,
+                idx;
+
+            if (key == keys.BACKSPACE || key == keys.DELETE) {
+                that._last = undefined;
+                return;
+            }
 
 
             if (typeof word !== "string") {
-                word = word ? word.text() : "";
+                idx = word.index();
+
+                if (idx > -1) {
+                    word = that._text(that.dataSource.view()[idx]);
+                } else {
+                    word = "";
+                }
             }
 
             if (caret <= 0) {
                 caret = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
             }
 
-            if (!word) {
-                word = value.substring(0, caret);
+            idx = value.substring(0, caret).lastIndexOf(separator);
+            idx = idx > -1 ? caret - (idx + separator.length) : caret;
+            value = words[wordIndex].substring(0, idx);
 
-                if (separator) {
-                    word = word.split(separator).pop();
-                }
-            }
+            if (word) {
+                idx = word.toLowerCase().indexOf(value.toLowerCase());
+                if (idx > -1) {
+                    word = word.substring(idx + value.length);
 
-            if (separator) {
-                word = replaceWordAtCaret(caret, value, word, separator);
-            }
+                    selectionEnd = caret + word.length;
 
-            if (word !== value) {
-                that.value(word);
-
-                selectionEnd = word.length;
-
-                if (separator) {
-                    selectionEnd = caret + word.substring(caret).indexOf(separator);
+                    value += word;
                 }
 
-                selectText(element, caret, selectionEnd);
+                if (separator && words[words.length - 1] !== "") {
+                    words.push("");
+                }
+
             }
+
+            words[wordIndex] = value;
+
+            that.value(words.join(separator || ""));
+
+            selectText(element, caret, selectionEnd);
         },
 
         /**
@@ -557,9 +582,10 @@
             var that = this,
                 ul = that.ul[0],
                 key = e.keyCode,
-                keys = kendo.keys,
                 current = that._current,
                 visible = that.popup.visible();
+
+            that._last = key;
 
             if (key === keys.DOWN) {
                 if (visible) {

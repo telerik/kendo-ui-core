@@ -119,6 +119,7 @@
         List = ui.List,
         Select = ui.Select,
         touch = kendo.support.touch,
+        keys = kendo.keys,
         CLICK = touch ? "touchend" : "click",
         ATTRIBUTE = "disabled",
         CHANGE = "change",
@@ -154,7 +155,7 @@
         * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
         */
         init: function(element, options) {
-            var that = this;
+            var that = this, wrapper;
 
             options = $.isArray(options) ? { dataSource: options } : options;
 
@@ -201,24 +202,25 @@
                 CHANGE
             ], options);
 
+            wrapper = that._inputWrapper;
+
             that.input.bind({
                 keydown: proxy(that._keydown, that),
                 focus: function() {
-                    that._inputWrapper.addClass(FOCUSED);
+                    wrapper.addClass(FOCUSED);
                 },
                 blur: function() {
-                    that._bluring = setTimeout(function() {
-                        clearTimeout(that._typing);
-
-                        that.text(that.text());
-                        if (!touch) { // Blur is fired prematurely on mobile and causes closure. TODO: Find a better way to do this.
+                    if (!touch) {
+                        that._bluring = setTimeout(function() {
+                            wrapper.removeClass(FOCUSED);
+                            clearTimeout(that._typing);
+                            that.text(that.text());
                             that._blur();
-                        } else {
-                            that._change();
-                        }
-
-                        that._inputWrapper.removeClass(FOCUSED);
-                    }, 100);
+                        }, 100);
+                    } else {
+                        that._change();
+                        wrapper.removeClass(FOCUSED);
+                    }
                 }
             });
 
@@ -328,14 +330,14 @@
 
         refresh: function() {
             var that = this,
-                ul = that.ul,
+                ul = that.ul[0],
                 options = that.options,
                 suggest = options.suggest,
                 height = options.height,
                 data = that._data(),
                 length = data.length;
 
-            ul[0].innerHTML = kendo.render(that.template, data);
+            ul.innerHTML = kendo.render(that.template, data);
             that._height(length);
 
             if (that.element.is(SELECT)) {
@@ -344,7 +346,7 @@
 
             if (length) {
                 if (suggest || options.highlightFirst) {
-                    that.current($(that.ul[0].firstChild));
+                    that.current($(ul.firstChild));
                 }
 
                 if (suggest) {
@@ -435,24 +437,46 @@
             var that = this,
                 element = that.input[0],
                 value = that.text(),
-                caret = List.caret(element);
+                caret = List.caret(element),
+                key = that._last,
+                idx;
 
+            if (key == keys.BACKSPACE || key == keys.DELETE) {
+                that._last = undefined;
+                return;
+            }
 
             if (typeof word !== "string") {
-                word = word ? word.text() : "";
+                idx = word.index();
+
+                if (idx > -1) {
+                    word = that._text(that.dataSource.view()[idx]);
+                } else {
+                    word = "";
+                }
             }
 
             if (caret <= 0) {
                 caret = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
             }
 
-            if (!word) {
-                word = value.substring(0, caret);
+            if (word) {
+                idx = word.toLowerCase().indexOf(value.toLowerCase());
+                if (idx > -1) {
+                    value += word.substring(idx + value.length);
+                }
+            } else {
+                value = value.substring(0, caret);
             }
 
-            if (word !== value) {
-                that.text(word);
-                List.selectText(element, caret, word.length);
+            if (value.length !== caret || !word) {
+
+                if (value.toLowerCase() === word.toLowerCase()) {
+                    value = word;
+                }
+
+                that.text(value);
+                List.selectText(element, caret, value.length);
             }
         },
 
@@ -658,15 +682,17 @@
         },
 
         _keydown: function(e) {
-            var that = this;
+            var that = this,
+                key = e.keyCode;
 
-            if (kendo.keys.TAB === e.keyCode) {
+            that._last = key;
+
+            if (key == kendo.keys.TAB) {
                 that.text(that.input.val());
 
                 if (that._state === STATE_FILTER && that._selected) {
                     that._state = STATE_ACCEPT;
                 }
-
             } else if (!that._move(e)) {
                that._search();
             }
