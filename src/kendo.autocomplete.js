@@ -599,10 +599,9 @@
                 caret = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
             }
 
-            //new implementation
-            var separatorIndex = value.substring(0, caret).lastIndexOf(separator);
-
-            value = words[wordIndex].substring(0, separatorIndex == -1 ? caret : caret - (separatorIndex + separator.length));
+            idx = value.substring(0, caret).lastIndexOf(separator);
+            idx = idx > -1 ? caret - (idx + separator.length) : caret;
+            value = words[wordIndex].substring(0, idx);
 
             if (word) {
                 idx = word.toLowerCase().indexOf(value.toLowerCase());
@@ -620,7 +619,7 @@
 
             }
 
-            words.splice(wordIndex, 1, value);
+            words[wordIndex] = value;
 
             that.value(words.join(separator || ""));
 
