@@ -406,6 +406,10 @@
     <Content Include="Views\Shared\NoLayout.cshtml" />
     <None Include="content\web\datasource\internet-users.json" />
     <None Include="content\web\datasource\top250movies.json" />
+    <Content Include="Views\mobile\button\appearance.cshtml" />
+    <Content Include="Views\mobile\listview\databinding.cshtml" />
+    <Content Include="Views\mobile\listview\index.cshtml" />
+    <Content Include="Views\mobile\listview\templates.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
