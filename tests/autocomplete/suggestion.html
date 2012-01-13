@@ -230,7 +230,7 @@
             test("suggestion should use dataItem.text instead of li.text()", function() {
                 var autocomplete = new AutoComplete(input, {
                         dataSource: ["foo", "bar"],
-                        template: "<span>List:</span>#=data#"
+                        template: "#=data#<span>List:</span>#=data#"
                     });
 
                 input.val("f");

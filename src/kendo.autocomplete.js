@@ -493,8 +493,13 @@
 
 
             if (typeof word !== "string") {
-                //get dataItem instead of li.text()
-                word = word ? word.text() : "";
+                idx = word.index();
+
+                if (idx > -1) {
+                    word = that._text(that.dataSource.view()[idx]);
+                } else {
+                    word = "";
+                }
             }
 
             if (caret <= 0) {
