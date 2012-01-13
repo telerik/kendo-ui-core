@@ -67,7 +67,8 @@
             var INFO_SERVICE = "http://tsonev/mono-kendo-download/info.ashx",
                 GET_SERVICE = "http://tsonev/mono-kendo-download/get.ashx",
                 VERSION = "$VERSION",
-                CDN_URL = "http://cdn.kendostatic.com/" + VERSION + "/js/";
+                CDN_URL = "http://cdn.kendostatic.com/" + VERSION + "/js/",
+                LICENSES = ["framework", "web", "dataviz", "mobile"];
 
             var resolver,
                 categoryTemplate,
@@ -118,10 +119,12 @@
 
             function renderCategories() {
                 for (var categoryId in kendoCategories) {
-                    $("#configurator").append(categoryTemplate({
-                        category: kendoCategories[categoryId],
-                        id: categoryId
-                    }));
+                    if (LICENSES.indexOf(categoryId) !== -1) {
+                        $("#configurator").append(categoryTemplate({
+                            category: kendoCategories[categoryId],
+                            id: categoryId
+                        }));
+                    }
                 }
             }
 
