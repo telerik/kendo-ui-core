@@ -23,6 +23,9 @@
 
             this._create();
         },
+        options: {
+            name: "Pincer"
+        },
 
         _create: function () {
             if (kendo.support.touch) {
@@ -106,6 +109,6 @@
         }
     });
 
-    kendo.ui.plugin("Pincer", Pincer);
+    kendo.ui.plugin(Pincer);
 
 })(jQuery, window);
