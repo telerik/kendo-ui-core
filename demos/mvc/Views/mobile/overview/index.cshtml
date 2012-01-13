@@ -1,35 +1,30 @@
-<div data-role="view" data-title="Overview">
+<div data-role="view" data-title="Settings">
     <header data-role="header">
         <div data-role="navbar">
-            <a class="nav-button" data-align="left" data-role="back-button">Back</a>
-            <span data-role="view-title">Overview</span>
+            <!--a class="nav-button" data-align="left" data-role="back-button">Back</a-->
+            <span data-role="view-title">Settings</span>
             <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
         </div>
     </header>
 
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
-            Hello
+            General Settings
             <ul>
-                <li>Ohai!</li>
-                <li>Ohai!</li>
-                <li>Ohai!</li>
+                <li>About <button type="button" data-role="detail-button" data-style="details">More...</button></li>
+                <li>Airplane mode <input type="checkbox" data-role="switch"></li>
+                <li>BlueTooth <input type="checkbox" data-role="switch" checked></li>
+                <li>Notifications <input type="checkbox" data-role="switch"></li>
+                <li>Local Services <input type="checkbox" data-role="switch" checked></li>
             </ul>
         </li>
 
         <li>
-            Hello
+            Other Settings
             <ul>
-                <li>Carrier <input type="checkbox" data-role="switch"></li>
-                <li>Airplane mode <input type="checkbox" data-role="switch" checked></li>
-                <li>Ohai!<button type="button" data-role="detail-button" data-style="details"></button></li>
-            </ul>
-        </li>
-        <li>
-            <ul>
-                <li>Sounds</li>
-                <li>Brightness</li>
-                <li>Wallpaper</li>
+                <li>Wi-Fi <button type="button" data-role="detail-button" data-style="details">More...</button></li>
+                <li>Sounds <button type="button" data-role="detail-button" data-style="details">More...</button></li>
+                <li>Battery <button type="button" data-role="detail-button" data-style="details">More...</button></li>
             </ul>
         </li>
     </ul>
