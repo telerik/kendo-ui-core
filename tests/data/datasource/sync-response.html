@@ -374,6 +374,28 @@
                 ok(dataSource.get(3));
             });
 
+            test("cancelChanges does not revert the updated models after sync", function() {
+                stubTransport("update", [{ id: 2, foo: "moo" }]);
+
+                dataSource.get(2).set("foo", "moo");
+                dataSource.sync();
+
+                dataSource.cancelChanges();
+
+                equal(dataSource.get(2).foo, "moo");
+            });
+
+            test("cancelChanges does not revert the deleted models after sync", function() {
+                stubTransport("destroy", [{ id: 2, foo: "moo" }]);
+
+                dataSource.remove(dataSource.get(2));
+                dataSource.sync();
+
+                dataSource.cancelChanges();
+
+                ok(!dataSource.get(2));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
