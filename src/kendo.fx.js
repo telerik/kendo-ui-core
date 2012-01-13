@@ -640,19 +640,16 @@
             setup: function(element, options) {
                 var direction = kendo.directions[options.direction],
                     extender = {}, offset, reverse = options.reverse,
+                    property = transitions && options.transition !== false ? direction.transition : direction.property,
                     divisor = options.divisor || 1;
 
                 if (!reverse) {
                     var origin = element.data(ORIGIN);
                     offset = (direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()) / divisor);
-                    !origin && origin !== 0  && element.data(ORIGIN, animationProperty(element, direction.transition));
+                    !origin && origin !== 0  && element.data(ORIGIN, parseFloat(animationProperty(element, property)));
                 }
 
-                if (transitions && options.transition !== false) {
-                    extender[direction.transition] = reverse ? (element.data(ORIGIN) || 0) : offset + PX;
-                } else {
-                    extender[direction.property] = reverse ? (element.data(ORIGIN) || 0) : offset + PX;
-                }
+                extender[property] = reverse ? (element.data(ORIGIN) || 0) : (element.data(ORIGIN) || 0) + offset + PX;
 
                 return extend(extender, options.properties);
             }

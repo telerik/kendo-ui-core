@@ -325,9 +325,9 @@
 
             var scroller = $('<div class="thumb-list">')
                                 .appendTo("#footer")
-                                .kendoScroller(scrollerOptions);
+                                .kendoMobileScroller(scrollerOptions);
 
-            that.thumbList = scroller.data('kendoScroller').scrollElement;
+            that.thumbList = scroller.data('kendoMobileScroller').scrollElement;
 
             that.mostPopular();
             that.initMainPictures();

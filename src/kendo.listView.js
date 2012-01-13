@@ -1,11 +1,10 @@
 (function($, undefined) {
     var kendo = window.kendo,
         CHANGE = "change",
-        DATABOUND = "dataBound"
+        DATABOUND = "dataBound",
         Widget = kendo.ui.Widget,
         keys = kendo.keys,
         FOCUSSELECTOR =  "> li",
-        CHANGE = "change",
         FOCUSED = "k-state-focused",
         FOCUSABLE = "k-focusable",
         DataSource = kendo.data.DataSource;
@@ -126,7 +125,6 @@
 
             element.addClass(FOCUSABLE)
                   .delegate("." + FOCUSABLE + FOCUSSELECTOR, "mousedown", function(e) {
-                      debugger;
                       that.current($(e.currentTarget));
                   });
        },
