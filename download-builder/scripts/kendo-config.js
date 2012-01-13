@@ -308,7 +308,10 @@
             description: "The Window widget displays content in a modal or non-modal HTML window.",
             source: "kendo.window.min.js",
             depends: [ "draganddrop" ]
-        }, {
+        },
+
+        // DataViz --------------------------------------------------------
+        {
             id: "chart",
             name: "Chart",
             category: categories.dataviz,
