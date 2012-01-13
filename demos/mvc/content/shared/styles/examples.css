@@ -664,6 +664,13 @@ a.bigButton
 .timepickerIcon { background-position: -50px -470px; }
 .validatorIcon { background-position: -50px -500px; }
 .globalizationIcon { background-position: -50px -530px; }
+.mobileAppIcon { background-position: -100px -200px; }
+.mobileButtonIcon { background-position: -100px -230px; }
+.mobileHistoryIcon { background-position: -100px -260px; }
+.mobileListViewIcon { background-position: -100px -290px; }
+.mobileNavBarIcon { background-position: -100px -320px; }
+.mobileSwitchIcon { background-position: -100px -350px; }
+.mobileTabStripIcon { background-position: -100px -380px; }
 
 /*example content*/
 

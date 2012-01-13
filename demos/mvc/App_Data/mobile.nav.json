@@ -3,7 +3,7 @@
         {
             "text": "Overview",
             "name": "overview",
-            "spriteCssClass": "dataSourceIcon",
+            "spriteCssClass": "overviewIcon",
             "items": [
                 {
                     "text": "Overview",
@@ -14,7 +14,7 @@
         {
             "text": "Button",
             "name": "button",
-            "spriteCssClass": "dataSourceIcon",
+            "spriteCssClass": "mobileButtonIcon",
             "items": [
                 {
                     "text": "Basic usage",
@@ -33,7 +33,7 @@
         {
             "text": "ListView",
             "name": "listview",
-            "spriteCssClass": "dataSourceIcon",
+            "spriteCssClass": "mobileListViewIcon",
             "items": [
                 {
                     "text": "Basic usage",
@@ -53,7 +53,7 @@
         {
             "text": "NavBar",
             "name": "navbar",
-            "spriteCssClass": "dataSourceIcon",
+            "spriteCssClass": "mobileNavBarIcon",
             "items": [
                 {
                     "text": "Basic usage",
@@ -68,7 +68,7 @@
         {
             "text": "Switch",
             "name": "Switch",
-            "spriteCssClass": "dataSourceIcon",
+            "spriteCssClass": "mobileSwitchIcon",
             "items": [
                 {
                     "text": "Basic usage",
@@ -83,7 +83,7 @@
         {
             "text": "Tabstrip",
             "name": "tabstrip",
-            "spriteCssClass": "dataSourceIcon",
+            "spriteCssClass": "mobileTabStripIcon",
             "items": [
                 {
                     "text": "Basic usage",
