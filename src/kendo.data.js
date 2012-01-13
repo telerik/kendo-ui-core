@@ -1106,6 +1106,7 @@
                 _data: [],
                 _ranges: [],
                 _view: [],
+                _pristine: [],
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
                 _sort: normalizeSort(options.sort),
