@@ -94,7 +94,7 @@
             element = that.element.data(kendo.attr("role"), "switch");
             element[0].type = "checkbox";
 
-            handleWidth = that.handle.outerWidth(true);
+            handleWidth = that.handle.outerWidth();
             that.halfWidth = handleWidth / 2;
             that.width = width = that.wrapper.outerWidth();
             that.snapPart = width - handleWidth;
