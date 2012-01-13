@@ -117,9 +117,46 @@
                 input.type("b");
                 autocomplete.search();
 
-                input.press(kendo.keys.DOWN);
                 equal(input.val(), "baz");
+                equal(input.selectedText(), "az");
             });
+
+            test("current highlighted item completes the value of the input if suggest is enabled", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["baz", "bar"],
+                    suggest: true
+                });
+
+                input.type("b");
+                autocomplete.search();
+                input.press(kendo.keys.DOWN);
+
+                equal(input.val(), "bar");
+                equal(input.selectedText(), "ar");
+            });
+
+            test("suggestion does not suggest on backspace", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["baz", "bar"]
+                });
+
+                input.type("b");
+                autocomplete._last = kendo.keys.BACKSPACE; //backspace is clicked
+                autocomplete.suggest("baz");
+                equal(input.val(), "b");
+            });
+
+            test("suggestion does not suggest on delete", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["baz", "bar"]
+                });
+
+                input.type("b");
+                autocomplete._last = kendo.keys.DELETE; //delete is clicked
+                autocomplete.suggest("baz");
+                equal(input.val(), "b");
+            });
+
 
             test("suggestion selects the remainder of the word", function() {
                 var autocomplete = new AutoComplete(input, {
@@ -157,6 +194,50 @@
                     equal(input.val(), "baz, ");
                     start();
                 }, 0);
+            });
+
+            asyncTest("suggestion should suggest correctly", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["Cotton", "bar"]
+                });
+
+                input.type("Co");
+                autocomplete.suggest("Cotton");
+
+                setTimeout(function() {
+                    start();
+
+                    equal(input.val(), "Cotton");
+                    equal(input.selectedText(), "tton");
+                }, 200);
+            });
+
+            asyncTest("suggestion should only append the rest of the text (filter:contains)", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["foo", "bar"],
+                    filter: "contains",
+                    suggest: true
+                });
+
+                input.val("o").keydown();
+
+                setTimeout(function() {
+                    start();
+                    equal(input.val(), "oo");
+                }, 300);
+            });
+
+            test("suggestion should use dataItem.text instead of li.text()", function() {
+                var autocomplete = new AutoComplete(input, {
+                        dataSource: ["foo", "bar"],
+                        template: "<span>List:</span>#=data#"
+                    });
+
+                input.val("f");
+                autocomplete.search();
+
+                autocomplete.suggest(autocomplete.ul.children(":first"));
+                equal(input.val(), "foo");
             });
 
             test("separator and suggestion", function() {

@@ -68,6 +68,8 @@
                     //create AutoComplete UI component
                     $("#input").kendoAutoComplete({
                         dataSource: data,
+                        filter: "contains",
+                        suggest: true,
                         separator: ", "
                     });
                 });
@@ -79,7 +81,7 @@
                     padding: 0 5px 5px 0;
 					color: #36558e;
                 }
-				
+
 				#shipping {
 					width: 482px;
 					height: 152px;
