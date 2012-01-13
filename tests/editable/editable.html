@@ -6,10 +6,10 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.model.js"></script>
-        <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.model.js"></script>
         <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.datepicker.js" ></script>
         <script src="../../src/kendo.numerictextbox.js" ></script>
@@ -45,7 +45,7 @@
             }
 
             test("kendoEditable is attached to the target element", function() {
-                var element = div.kendoEditable();
+                var element = div.kendoEditable( { model: defaultModel });
 
                 ok(element.data("kendoEditable") instanceof Editable);
             });
@@ -63,7 +63,7 @@
             });
 
             test("no inputs are rendered when no fields are specifed", function() {
-                var editable = setup({ });
+                var editable = setup({ model: defaultModel });
 
                 ok(!editable.element.find(":input").length);
             });

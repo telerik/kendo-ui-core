@@ -6,6 +6,7 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.model.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -34,7 +35,7 @@
                 var MyModel = Model.define(),
                     model = new MyModel({ foo: "bar"});
 
-                equal(model.data.foo, "bar");
+                equal(model.foo, "bar");
             });
 
             test("define assigns the fields", function() {
@@ -65,7 +66,9 @@
                 var MyModel = Model.define({
                     id: "id"
                 });
+
                 var model = new MyModel( { id: 1 } );
+
                 ok(!model.isNew());
             });
 
@@ -75,21 +78,6 @@
                 });
                 var model = new MyModel();
                 ok(model.isNew());
-            });
-
-            test("id function does not return default value for the id field", function() {
-                var MyModel = Model.define({
-                    id: "id",
-                    fields: {
-                        id: {
-                            field: "id",
-                            defaultValue: 0
-                        }
-                    }
-                });
-
-                var model = new MyModel();
-                ok(model.id() !== 0);
             });
 
             test("isNew returns true if no key is defined", function() {
@@ -104,43 +92,14 @@
                     id: "foo"
                 });
                 var model = new MyModel({ foo: 1 });
-                equal(model.id(), 1);
+                equal(model.id, 1);
             });
 
             test("id is implicitly set if not set in metadata", function() {
                 var MyModel = Model.define();
                 var model = new MyModel({ id: 1 });
 
-                equal(model.id(), 1);
-            });
-
-            test("id can be a function", function() {
-                var MyModel = Model.define({ id: function(data) { return data["foo"]; } });
-                var model = new MyModel({ foo: 1 });
-
-                equal(model.id(), 1);
-            });
-
-            test("id is generated if no value is provided", function(){
-                var MyModel = Model.define({
-                    id: "foo"
-                });
-                var model = new MyModel();
-                ok(model.id());
-            });
-
-            test("id is generated if no value is provided and no metadata", function(){
-                var MyModel = Model.define();
-                var model = new MyModel();
-                ok(model.id());
-            });
-
-            test("identifier returns id value for a record", function() {
-                var MyModel = Model.define({id: "foo"}),
-                    data = {foo: 1},
-                    id;
-                id = MyModel.id(data);
-                equal(id, 1);
+                equal(model.id, 1);
             });
 
             test("define assigns field validation rules", function() {
@@ -205,7 +164,7 @@
 
                 var model = new MyModel();
 
-                equal(model.defaultItem["foo"], "");
+                equal(model.defaults["foo"], "");
                 equal(model.get("foo"), "");
             });
 
@@ -220,7 +179,7 @@
 
                 var model = new MyModel();
 
-                equal(model.defaultItem["bar"], "");
+                equal(model.defaults["bar"], "");
                 equal(model.get("bar"), "");
             });
 
@@ -231,7 +190,6 @@
                 model.set("foo", "foo");
 
                 equal(model.get("foo"), "foo");
-                equal(data.foo, "foo");
             });
 
             test("model data is synchronized with original data as empty object", function() {
@@ -241,8 +199,8 @@
                 model.set("foo", "foo");
 
                 equal(model.get("foo"), "foo");
-                equal(model.data.foo, "foo");
-                equal(model.data.bar, "");
+                equal(model.foo, "foo");
+                equal(model.bar, "");
             });
 
             test("zero is set as default value for numeric field", function() {
@@ -256,7 +214,7 @@
 
                 var model = new MyModel();
 
-                ok(model.defaultItem["foo"] === 0);
+                ok(model.defaults["foo"] === 0);
                 ok(model.get("foo") === 0);
             });
 
@@ -271,7 +229,7 @@
 
                 var model = new MyModel();
 
-                ok(model.defaultItem["foo"].getDate() === new Date().getDate());
+                ok(model.defaults["foo"].getDate() === new Date().getDate());
                 ok(model.get("foo").getDate() === new Date().getDate());
             });
 
@@ -286,7 +244,7 @@
 
                 var model = new MyModel();
 
-                ok(model.defaultItem["foo"].getDate() === new Date().getDate());
+                ok(model.defaults["foo"].getDate() === new Date().getDate());
                 ok(model.get("foo").getDate() === new Date().getDate());
             });
 
@@ -301,7 +259,7 @@
 
                 var model = new MyModel();
 
-                ok(model.defaultItem["foo"] === false);
+                ok(model.defaults["foo"] === false);
                 ok(model.get("foo") === false);
             });
 
@@ -317,7 +275,7 @@
 
                 var model = new MyModel();
 
-                equal(model.defaultItem["foo"], "foo");
+                equal(model.defaults["foo"], "foo");
                 equal(model.get("foo"), "foo");
             });
 
@@ -333,7 +291,7 @@
 
                 var model = new MyModel();
 
-                ok(model.defaultItem["foo"] === 0);
+                ok(model.defaults["foo"] === 0);
                 ok(model.get("foo") === 0);
             });
 
@@ -352,23 +310,6 @@
 
                 ok(model.isNew());
             });
-
-            test("isNew and id as function", function() {
-                var MyModel = Model.define({
-                    id: function() {},
-                    fields: {
-                        foo: {
-                            field: "foo",
-                            defaultValue: 0
-                        }
-                    }
-                });
-
-                var model = new MyModel();
-
-                ok(model.isNew());
-            });
-
 
             test("type convert is assign to the field definition", function() {
                 var MyModel = Model.define({
@@ -396,6 +337,13 @@
                 });
 
                 ok(MyModel.fields.foo.parse());
+            });
+
+            test("toJSON skips the id if id field is not default", function() {
+                var MyModel = Model.define({ id: "foo" }),
+                    model = new MyModel({ foo: 1 });
+
+               equal(typeof model.toJSON().id, "undefined");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

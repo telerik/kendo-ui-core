@@ -6,8 +6,8 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.model.js"></script>
         <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.model.js"></script>
         <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.groupable.js"></script>
@@ -38,8 +38,8 @@
                             model: {
                                 id: "foo",
                                 fields: {
-                                    name: "name",
-                                    foo: "foo"
+                                    foo: "foo",
+                                    name: "name"
                                 }
                             }
                         },
@@ -310,8 +310,8 @@
                             model: {
                                 id: "foo",
                                 fields: {
-                                    name: "name",
-                                    foo: { field: "foo", editable: false }
+                                    foo: { field: "foo", editable: false },
+                                    name: "name"
                                 }
                             }
                         },
@@ -349,14 +349,13 @@
                 ok(validate.calls("validate"));
             });
 
-            test("cell does not leaves edit mode if validation fails when another editable cell is clicked", function() {
+            test("cell does not leave edit mode if validation fails when another editable cell is clicked", function() {
                 setup({
                     dataSource: new DataSource({
                         schema: {
                             model: {
                                 id: "foo",
                                 fields: {
-                                    name: "name",
                                     foo: {
                                         field: "foo",
                                         validation: {
@@ -364,7 +363,8 @@
                                                 return false;
                                             }
                                         }
-                                    }
+                                    },
+                                    name: "name"
                                 }
                             }
                         },

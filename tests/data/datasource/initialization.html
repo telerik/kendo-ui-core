@@ -6,9 +6,9 @@
         <script type="text/javascript" src="../../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../../qunit-runner.js"></script>
         <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.model.js"></script>
         <script src="../../../src/kendo.data.xml.js"></script>
-        <script src="../../../src/kendo.data.js"></script>
         <link rel="stylesheet" href="../../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -58,7 +58,9 @@
                     });
 
                 dataSource.read();
-                ok(dataSource.data() === data);
+                ok(dataSource.data().length, 2);
+                ok(dataSource.data()[0], 1);
+                ok(dataSource.data()[1], 2);
             });
 
             test("model is created during dataSource initialization from field definition", function() {
@@ -157,7 +159,9 @@
                     dataSource = DataSource.create(data);
 
                 dataSource.read();
-                ok(dataSource.data() === data);
+                ok(dataSource.data().length, 2);
+                ok(dataSource.data()[0], 1);
+                ok(dataSource.data()[1], 2);
             });
 
             test("XmlDataReader is initialized when the type of the schema is xml", function() {
@@ -221,24 +225,6 @@
                 equal(dataSource._sort[0].field, "foo");
                 equal(dataSource._sort[0].dir, "asc");
             });
-
-            test("changing value in model triggers modelChange of the datasource", function() {
-                var model,
-                    dataSource = new DataSource({
-                        schema: {
-                            model: Model.define()
-                        },
-                        data: [ { id: 1, foo: "bar"}, { id: 2, foo: "baz"}],
-                        modelChange: function() { model = arguments[0]; }
-                    });
-
-                dataSource.read();
-                dataSource.get(1).set("foo", "boo");
-
-                ok(model);
-                equal(model.get("foo"), "boo");
-            });
-
             </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -21,51 +21,51 @@
         <script>
             QUnit.config.testTimeout = 100;
 
-			var FooWidget = kendo.ui.Widget.extend({
-				init: function(element, options) {
-					kendo.ui.Widget.fn.init.call(this, element, options);
-					options = this.options;
-					this.dataSource = kendo.data.DataSource.create(options.dataSource);
-					this.dataSource.read();
-				},
+            var FooWidget = kendo.ui.Widget.extend({
+                init: function(element, options) {
+                    kendo.ui.Widget.fn.init.call(this, element, options);
+                    options = this.options;
+                    this.dataSource = kendo.data.DataSource.create(options.dataSource);
+                    this.dataSource.read();
+                },
 
-				options: {
-					name: "Foo"
-				}
-			});
+                options: {
+                    name: "Foo"
+                }
+            });
 
-			kendo.ui.plugin(FooWidget);
+            kendo.ui.plugin(FooWidget);
 
-			kendo.widgetBindings.foo = FooWidget;
+            kendo.widgetBindings.foo = FooWidget;
 
             test("initializes foo widget based on data-role attribute", function() {
                 var dom = $('<span id="foo" data-role="foo" />');
                 kendo.bind(dom, { foo: "foo" });
-				ok(dom.data("kendoFoo") instanceof FooWidget, "Widget not initialized");
+                ok(dom.data("kendoFoo") instanceof FooWidget, "Widget not initialized");
             });
 
             test("passes datasource to initialized widget", function() {
                 var dom = $('<span id="foo" data-role="foo" data-source="items" />');
-				var viewModel = kendo.observable({
-					foo: "foo", items: []
-				})
+                var viewModel = kendo.observable({
+                    foo: "foo", items: []
+                })
 
                 kendo.bind(dom, viewModel);
 
-				equal(dom.data("kendoFoo").dataSource.data(), viewModel.items);
+                equal(dom.data("kendoFoo").dataSource.data(), viewModel.items);
             });
 
             test("keeps model in sync with widget's datasource", function() {
                 var dom = $('<span id="foo" data-role="foo" data-source="items" />');
-				var viewModel = kendo.observable({
-					foo: "foo", items: []
-				})
+                var viewModel = kendo.observable({
+                    foo: "foo", items: []
+                })
 
                 kendo.bind(dom, viewModel);
 
-				equal(dom.data("kendoFoo").dataSource.data(), viewModel.items);
+                equal(dom.data("kendoFoo").dataSource.data(), viewModel.items);
             });
-		</script>
+        </script>
 
     </body>
 </html>

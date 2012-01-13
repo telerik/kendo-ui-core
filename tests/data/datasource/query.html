@@ -97,6 +97,7 @@
                 var dataSource = new DataSource({
                     data: [1,2,3]
                 });
+
                 dataSource.read();
                 dataSource.query({ pageSize: 1, page: 2 });
 
@@ -169,8 +170,11 @@
                 dataSource.query( { page: 2, pageSize: 1, sort: { field: "age", dir: "desc" } } );
                 var view = dataSource.data();
 
-                ok(view === data);
+                equal(view.length, 2);
+                equal(view[0].age, 1);
+                equal(view[1].age, 2);
             });
+
             test("data is not sorted if serverSorting = true", function() {
                 var transport = new RemoteTransport({
                         read: "foo"
@@ -406,19 +410,6 @@
                 stop(1);
             });
 
-            test("filter does not modify the original data", function() {
-                var data = [{age: 1}, {age: 2}];
-
-                var dataSource = new DataSource({
-                    data: data
-                });
-                dataSource.read();
-                dataSource.query( { filter: { field: "age", operator: "==", value: 2 } } );
-                var view = dataSource.data();
-
-                ok(view === data);
-            });
-
             test("paging is after filtering", function() {
                 var dataSource = new DataSource({
                     data: [{age: 1}, {age: 2}, {age: 3}]
@@ -519,19 +510,6 @@
 
                 dataSource.query( { group: [{ field: "age" }] });
                 stop(1);
-            });
-
-            test("group does not modify the original data", function() {
-                var data = [{age: 1}, {age: 1}, {age: 3}];
-
-                var dataSource = new DataSource({
-                    data: data
-                });
-                dataSource.read();
-                dataSource.query( { group: [{ field: "age" }] });
-                var view = dataSource.data();
-
-                ok(view === data);
             });
 
             test("group with paging", function() {
