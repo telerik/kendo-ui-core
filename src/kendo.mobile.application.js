@@ -172,6 +172,7 @@
      * </div>
      *
      * @exampleTitle Default Application layout
+     * @example
      * <div data-role="view">Bar</div>
      *
      * <div data-role="layout" data-id="foo">
