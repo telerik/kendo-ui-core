@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
@@ -9,6 +10,12 @@ namespace Kendo.Controllers
 {
     public class SuiteController : BaseController
     {
+        protected static readonly IDictionary<String, String> Docs =
+            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
+                { "mobile.application", "mobile.application" },
+                { "web.datasource", "data.datasource" },
+                { "web.templates", "template" }
+            };
         //
         // GET: /Web/
         public ActionResult Index(string suite, string section, string example)
@@ -92,17 +99,22 @@ namespace Kendo.Controllers
         private string DocPath(string suite, string section, string topic)
         {
             var component = section;
+            var docKey = String.Format("{0}.{1}", suite, section);
 
-            switch(suite) {
-                case "dataviz":
-                    component = "ui.chart";
-                    break;
-                case "mobile":
-                    component = "mobile.ui." + component;
-                    break;
-                case "web":
-                    component = "ui." + component;
-                    break;
+            if(Docs.ContainsKey(docKey)) {
+               component = Docs[docKey];
+            } else {
+                switch(suite) {
+                    case "dataviz":
+                        component = "ui.chart";
+                        break;
+                    case "mobile":
+                        component = "mobile.ui." + component;
+                        break;
+                    case "web":
+                        component = "ui." + component;
+                        break;
+                }
             }
 
             var path = string.Format(
