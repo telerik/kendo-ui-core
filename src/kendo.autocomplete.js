@@ -134,6 +134,7 @@
     var kendo = window.kendo,
         touch = kendo.support.touch,
         ui = kendo.ui,
+        keys = kendo.keys,
         DataSource = kendo.data.DataSource,
         List = ui.List,
         CHANGE = "change",
@@ -149,7 +150,7 @@
         proxy = $.proxy;
 
     function indexOfWordAtCaret(caret, text, separator) {
-        return text.substring(0, caret).split(separator).length - 1;
+        return separator ? text.substring(0, caret).split(separator).length - 1 : 0;
     }
 
     function wordAtCaret(caret, text, separator) {
@@ -161,7 +162,7 @@
 
         words.splice(indexOfWordAtCaret(caret, text, separator), 1, word);
 
-        if (words[words.length - 1] !== "") {
+        if (separator && words[words.length - 1] !== "") {
             words.push("");
         }
 
@@ -460,6 +461,8 @@
         refresh: function () {
             var that = this,
             ul = that.ul[0],
+            options = that.options,
+            suggest = options.suggest,
             data = that.dataSource.view(),
             length = data.length;
 
@@ -467,8 +470,14 @@
 
             that._height(length);
 
-            if (length && that.options.highlightFirst) {
-                that.current($(ul.firstChild));
+            if (length) {
+                if (suggest || options.highlightFirst) {
+                    that.current($(ul.firstChild));
+                }
+
+                if (suggest) {
+                    that.suggest(that._current);
+                }
             }
 
             if (that._open) {
@@ -565,15 +574,24 @@
         */
         suggest: function (word) {
             var that = this,
-                element = that.element[0],
-                separator = that.options.separator,
+                key = that._last,
                 value = that.value(),
-                selectionEnd,
-                textRange,
-                caret = caretPosition(element);
+                element = that.element[0],
+                caret = caretPosition(element),
+                separator = that.options.separator,
+                words = value.split(separator),
+                wordIndex = indexOfWordAtCaret(caret, value, separator),
+                selectionEnd = caret,
+                idx;
+
+            if (key == keys.BACKSPACE || key == keys.DELETE) {
+                that._last = undefined;
+                return;
+            }
 
 
             if (typeof word !== "string") {
+                //get dataItem instead of li.text()
                 word = word ? word.text() : "";
             }
 
@@ -581,29 +599,32 @@
                 caret = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
             }
 
-            if (!word) {
-                word = value.substring(0, caret);
+            //new implementation
+            var separatorIndex = value.substring(0, caret).lastIndexOf(separator);
 
-                if (separator) {
-                    word = word.split(separator).pop();
-                }
-            }
+            value = words[wordIndex].substring(0, separatorIndex == -1 ? caret : caret - (separatorIndex + separator.length));
 
-            if (separator) {
-                word = replaceWordAtCaret(caret, value, word, separator);
-            }
+            if (word) {
+                idx = word.toLowerCase().indexOf(value.toLowerCase());
+                if (idx > -1) {
+                    word = word.substring(idx + value.length);
 
-            if (word !== value) {
-                that.value(word);
+                    selectionEnd = caret + word.length;
 
-                selectionEnd = word.length;
-
-                if (separator) {
-                    selectionEnd = caret + word.substring(caret).indexOf(separator);
+                    value += word;
                 }
 
-                selectText(element, caret, selectionEnd);
+                if (separator && words[words.length - 1] !== "") {
+                    words.push("");
+                }
+
             }
+
+            words.splice(wordIndex, 1, value);
+
+            that.value(words.join(separator || ""));
+
+            selectText(element, caret, selectionEnd);
         },
 
         /**
@@ -656,9 +677,10 @@
             var that = this,
                 ul = that.ul[0],
                 key = e.keyCode,
-                keys = kendo.keys,
                 current = that._current,
                 visible = that.popup.visible();
+
+            that._last = key;
 
             if (key === keys.DOWN) {
                 if (visible) {
