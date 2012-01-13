@@ -178,7 +178,7 @@
 
             function removeItemFromList(e) {
                 if (e.buttonName === "remove") {
-                    cartDataSource.remove(e.dataItem.id);
+                    cartDataSource.remove(e.dataItem);
                     $(".km-scroll-container:visible").css(kendo.support.transitions.css + "transform", "none");
                     e.preventDefault();
                 }
@@ -191,17 +191,24 @@
 
                 if (id === "index") {
                     $("#featured")
-                        .kendoMobileListView({dataSource: featured, template: $("#menuTemplate").text()})
-                        .data("kendoMobileListView").bind("click", addToCartFromList);
+                        .kendoMobileListView({
+                            dataSource: featured,
+                            click: addToCartFromList,
+                            template: $("#menuTemplate").text()
+                        });
                 } else if (id === "menu") {
                     $("#menuList")
-                        .kendoMobileListView({dataSource: ds, template: $("#menuTemplate").text()})
-                        .data("kendoMobileListView").bind("click", addToCartFromList);
+                    .kendoMobileListView({
+                        dataSource: ds,
+                        click: addToCartFromList,
+                        template: $("#menuTemplate").text()
+                    });
                 } else if (id === "cart") {
                     $("#cartList").kendoMobileListView({
                         dataSource: cartDataSource,
+                        click: removeItemFromList,
                         template: $("#cartItemTemplate").text()
-                    }).data("kendoMobileListView").bind("click", removeItemFromList);
+                    });
 
                     $("#checkout").data("kendoMobileButton").bind("click", function() {
                         setTimeout(function () { cartDataSource.data([]) }, 400);
@@ -214,7 +221,7 @@
 
                 if (viewID === "details") {
                     ds.fetch(function() {
-                        item = ds.get(e.params.id).data;
+                        item = ds.get(e.params.id);
                         view.content.data("kendoMobileScroller").scrollElement.html(itemDetailsTemplate(item));
                         kendo.mobile.enhance(view.content);
 

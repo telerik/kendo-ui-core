@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -83,10 +84,37 @@
 
                 viewModel.bind("get", function(e) {
                     start();
+
                     equal(e.field, "foo");
                 });
 
                 viewModel.get("foo");
+            });
+
+            test("setting a field raises set event", function() {
+                expect(2);
+
+                var viewModel = kendo.observable({ foo: "bar" });
+
+                viewModel.bind("set", function(e) {
+                    equal(e.field, "foo");
+                    equal(e.value, "foo");
+                });
+
+                viewModel.set("foo", "foo");
+            });
+
+            test("cancelling the set event prevents setting the field value", function() {
+                expect(1);
+
+                var viewModel = kendo.observable({ foo: "bar" });
+
+                viewModel.bind("set", function(e) {
+                    e.preventDefault();
+                });
+
+                viewModel.set("foo", "foo");
+                equal(viewModel.foo, "bar");
             });
 
             test("getting nested field raises get event of parent", function() {
@@ -101,6 +129,21 @@
 
                 viewModel.foo.get("bar");
             });
+
+            test("toJSON serializes only public fields", function() {
+                var observable = kendo.observable({ foo: "bar", baz: function(){} });
+                var json = observable.toJSON();
+                var fields = [];
+
+                for (var field in json) {
+                    fields.push(field);
+                }
+
+                equal(fields.length, 1);
+                equal(fields[0], "foo");
+                equal(json.foo, "bar");
+            });
+
         </script>
     </head>
 </html>

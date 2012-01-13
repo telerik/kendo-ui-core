@@ -16,7 +16,6 @@
 
             if (model) {
                 if (isPlainObject(model)) {
-                    model.id = that.getter(model.id);
                     if (model.fields) {
                         each(model.fields, function(field, value) {
                             if (isPlainObject(value) && value.field) {
@@ -27,6 +26,12 @@
                             model.fields[field] = value;
                         });
                     }
+                    var id = model.id;
+                    var idField = {};
+
+                    idField[that.xpathToMember(id, true)] = { field : that.getter(id) };
+                    model.fields = extend(model.fields, idField);
+                    model.id = that.xpathToMember(id);
                     model = kendo.data.Model.define(model);
                 }
 
@@ -44,6 +49,7 @@
                 data = that.xpathToMember(data);
                 that.data = function(value) {
                     var record, field, result = that.evaluate(value, data),
+                        idField,
                         modelInstance;
 
                     result = isArray(result) ? result : [result];
@@ -159,7 +165,7 @@
             return result;
         },
 
-        xpathToMember: function(member) {
+        xpathToMember: function(member, raw) {
             if (!member) {
                 return "";
             }
@@ -169,12 +175,12 @@
 
             if (member.indexOf("@") >= 0) {
                 // replace @attribute with '["@attribute"]'
-                return member.replace(/\.?(@.*)/, '["$1"]');
+                return member.replace(/\.?(@.*)/, raw? '$1':'["$1"]');
             }
 
             if (member.indexOf("text()") >= 0) {
                 // replace ".text()" with '["#text"]'
-                return member.replace(/(\.?text\(\))/, '["#text"]');
+                return member.replace(/(\.?text\(\))/, raw? '#text':'["#text"]');
             }
 
             return member;

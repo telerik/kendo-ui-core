@@ -6,6 +6,7 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.model.js"></script>
         <script src="../../src/kendo.data.xml.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
@@ -295,7 +296,9 @@
                 var result = reader.parse('<root><foo id="bar" /><foo id="baz" /></root>');
                 var data = reader.data(result);
 
-                equal(reader.model.id(data[0]), "bar");
+                var model = new reader.model(data[0]);
+
+                equal(model.id, "bar");
             });
 
             test("model fields as object is parsed", function() {

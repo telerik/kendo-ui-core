@@ -147,15 +147,13 @@
         kendo = window.kendo,
         Observable = kendo.Observable,
         Class = kendo.Class,
-        Model = kendo.data.Model,
-        ModelSet = kendo.data.ModelSet,
         STRING = "string",
         CREATE = "create",
         READ = "read",
         UPDATE = "update",
         DESTROY = "destroy",
         CHANGE = "change",
-        MODELCHANGE = "modelChange",
+        GET = "get",
         MULTIPLE = "multiple",
         SINGLE = "single",
         ERROR = "error",
@@ -165,7 +163,379 @@
         getter = kendo.getter,
         stringify = kendo.stringify,
         math = Math,
+        push = [].push,
+        splice = [].splice,
+        slice = [].slice,
+        unshift = [].unshift,
+        toString = {}.toString,
+        dateRegExp = /^\/Date\((.*?)\)\/$/,
         quoteRegExp = /(?=['\\])/g;
+
+    function set(object, field, value) {
+        return kendo.setter(field)(object, value);
+    }
+
+    function get(object, field, call) {
+        var result;
+
+        if (field === "this") {
+            result = object;
+        } else {
+            result = kendo.getter(field)(object);
+
+            if (call && typeof result === "function") {
+                result = result.call(object);
+            }
+        }
+
+        return result;
+    }
+
+    var ObservableArray = Observable.extend({
+        init: function(array, type) {
+            var that = this,
+                member,
+                idx;
+
+            type = type || ObservableObject;
+
+            Observable.fn.init.call(that);
+
+            that.length = array.length;
+
+            for (idx = 0; idx < that.length; idx++) {
+                member = array[idx];
+
+                if ($.isPlainObject(member)) {
+                    member = new type(member);
+
+                    member.bind(CHANGE, function(e) {
+                        that.trigger(CHANGE, { field: e.field, items: [this], action: "itemchange" });
+                    });
+                }
+
+                that[idx] = member;
+            }
+        },
+
+        push: function() {
+            var index = this.length,
+                items = arguments,
+                result;
+
+            result = push.apply(this, items);
+
+            this.trigger(CHANGE, {
+                action: "add",
+                index: index,
+                items: items
+            });
+
+            return result;
+        },
+
+        slice: slice,
+
+
+        splice: function(index, howMany, item) {
+            var result = splice.apply(this, arguments);
+
+            if (result.length) {
+                this.trigger(CHANGE, {
+                    action: "remove",
+                    index: index,
+                    items: result
+                });
+            }
+
+            if (item) {
+                this.trigger(CHANGE, {
+                    action: "add",
+                    index: index,
+                    items: slice.call(arguments, 2)
+                });
+            }
+            return result;
+        },
+
+        unshift: function() {
+            var index = this.length,
+                items = arguments,
+                result;
+
+            result = unshift.apply(this, items);
+
+            this.trigger(CHANGE, {
+                action: "add",
+                index: 0,
+                items: items
+            });
+
+            return result;
+        }
+    });
+
+    var ObservableObject = Observable.extend({
+        init: function(value) {
+            var that = this,
+                member,
+                field,
+                type;
+
+            Observable.fn.init.call(this);
+
+            for (field in value) {
+                member = value[field];
+                type = toString.call(member);
+
+                if (type === "[object Object]") {
+                    member = new ObservableObject(member);
+
+                    (function(field) {
+                        member.bind(GET, function(e) {
+                            e.field = field + "." + e.field;
+                            that.trigger(GET, e);
+                        });
+
+                        member.bind(CHANGE, function(e) {
+                            e.field = field + "." + e.field;
+                            that.trigger(CHANGE, e);
+                        });
+                    })(field);
+                } else if (type === "[object Array]") {
+                    member = new ObservableArray(member);
+
+                    (function(field) {
+                        member.bind(CHANGE, function(e) {
+                            that.trigger(CHANGE, { field: field, index: e.index, items: e.items, action: e.action});
+                        });
+                    })(field);
+                }
+
+                that[field] = member;
+            }
+        },
+
+        shouldSerialize: function(field) {
+            return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== "function";
+        },
+
+        toJSON: function() {
+            var result = {}, field;
+
+            for (field in this) {
+                if (this.shouldSerialize(field)) {
+                    result[field] = this[field];
+                }
+            }
+
+            return result;
+        },
+
+        get: function(field) {
+            this.trigger(GET, { field: field });
+
+            return get(this, field);
+        },
+
+        set: function(field, value, initiator) {
+            var current = this[field];
+
+            if (current != value) {
+                if (!this.trigger("set", { field: field, value: value })) {
+                    set(this, field, value);
+
+                    this.trigger(CHANGE, {
+                        field: field,
+                        initiator: initiator
+                    });
+                }
+            }
+        }
+    });
+
+    function equal(x, y) {
+        if (x === y) {
+            return true;
+        }
+
+        var xtype = $.type(x), ytype = $.type(y), field;
+
+        if (xtype !== ytype) {
+            return false;
+        }
+
+        if (xtype === "date") {
+            return x.getTime() === y.getTime();
+        }
+
+        if (xtype !== "object" && xtype !== "array") {
+            return false;
+        }
+
+        for (field in x) {
+            if (!equal(x[field], y[field])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    var parsers = {
+        "number": function(value) {
+            return kendo.parseFloat(value);
+        },
+
+        "date": function(value) {
+            if (typeof value === "string") {
+                var date = dateRegExp.exec(value);
+                if (date) {
+                    return new Date(parseInt(date[1]));
+                }
+            }
+            return kendo.parseDate(value);
+        },
+
+        "boolean": function(value) {
+            if (typeof value === "string") {
+                return value.toLowerCase() === "true";
+            }
+            return !!value;
+        },
+
+        "string": function(value) {
+            return value + "";
+        },
+
+        "default": function(value) {
+            return value;
+        }
+    };
+
+    var defaultValues = {
+        "string": "",
+        "number": 0,
+        "date": new Date(),
+        "boolean": false,
+        "default": ""
+    }
+
+    var Model = ObservableObject.extend({
+        init: function(data) {
+            var that = this;
+
+            if (!data || $.isEmptyObject(data)) {
+                data = $.extend({}, that.defaults, data);
+            }
+
+            ObservableObject.fn.init.call(that, data);
+
+            that.uid = kendo.guid();
+
+            that.dirty = false;
+
+            that.id = that.get(that.idField);
+        },
+
+        shouldSerialize: function(field) {
+            return ObservableObject.fn.shouldSerialize.call(this, field)
+                && field !== "uid"
+                && !(this.idField !== "id" && field === "id")
+                && field !== "dirty" && field !== "_accessors";
+        },
+
+        idField: "id",
+
+        _parse: function(field, value) {
+            var that = this,
+                parse;
+
+            field = (that.fields || {})[field];
+            if (field) {
+                parse = field.parse;
+                if (!parse && field.type) {
+                    parse = parsers[field.type.toLowerCase()];
+                }
+            }
+
+            return parse ? parse(value) : value;
+        },
+
+        editable: function(field) {
+            field = (this.fields || {})[field];
+            return field ? field.editable !== false : true;
+        },
+
+        set: function(field, value) {
+            var that = this;
+
+            if (that.editable(field)) {
+                value = that._parse(field, value);
+
+                if (!equal(value, that.get(field))) {
+                    ObservableObject.fn.set.call(that, field, value);
+                    that.dirty = true;
+                }
+            }
+        },
+
+        accept: function(data) {
+            var that = this;
+
+            extend(that, data);
+
+            that.id = that.get(that.idField);
+            that.dirty = false;
+        },
+
+        isNew: function() {
+            return this.id === this._defaultId;
+        }
+    });
+
+    Model.define = function(options) {
+        var model,
+            proto = extend({}, { defaults: {} }, options),
+            id = proto.id || "id";
+
+        proto.idField = id;
+
+        if (proto.id) {
+            delete proto.id;
+        }
+
+        proto.defaults[id] = proto._defaultId = "";
+
+        for (var name in proto.fields) {
+            var field = proto.fields[name],
+                type = field.type || "default",
+                value = null;
+
+            name = field.field || name;
+
+            if (!field.nullable) {
+                value = proto.defaults[name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
+            }
+
+            if (options.id === name) {
+                proto._defaultId = value;
+            }
+
+            proto.defaults[name] = value;
+
+            field.parse = field.parse || parsers[type];
+        }
+
+        model = Model.extend(proto);
+
+        if (proto.fields) {
+            model.fields = proto.fields;
+            model.idField = proto.idField;
+        }
+
+        return model;
+    }
 
     var Comparer = {
         selector: function(field) {
@@ -222,7 +592,6 @@
     };
 
     var operators = (function(){
-        var dateRegExp = /^\/Date\((.*?)\)\/$/;
 
         function quote(value) {
             return value.replace(quoteRegExp, "\\");
@@ -677,6 +1046,16 @@
         }
     };
 
+    function toJSON(array) {
+        var idx, length = array.length, result = new Array(length);
+
+        for (idx = 0; idx < length; idx++) {
+            result[idx] = array[idx].toJSON();
+        }
+
+        return result;
+    }
+
     function process(data, options) {
         var query = new Query(data),
             options = options || {},
@@ -888,7 +1267,7 @@
             }
 
             if (isPlainObject(that.model)) {
-                that.model = model = Model.define(that.model);
+                that.model = model = kendo.data.Model.define(that.model);
 
                 var dataFunction = that.data,
                     getters = {};
@@ -1107,6 +1486,7 @@
                 _ranges: [],
                 _view: [],
                 _pristine: [],
+                _destroyed: [],
                 _pageSize: options.pageSize,
                 _page: options.page  || (options.pageSize ? 1 : undefined),
                 _sort: normalizeSort(options.sort),
@@ -1138,39 +1518,12 @@
 
             id = model.id;
 
-            if (Model && !isEmptyObject(model)) {
-                that._set = new ModelSet({
-                    model: model,
-                    data: that._data,
-                    reader: that.reader,
-                    batch: options.batch,
-                    sendAllFields: options.sendAllFields,
-                    transport: that.transport,
-                    change: function() {
-                        var data = that.data();
-                        that._total = that.reader.total(data);
-                        that._process(data);
-                    },
-                    modelChange: function(model) {
-                        that.trigger(MODELCHANGE, model);
-                    },
-                    error: function(response) {
-                        that.trigger(ERROR, response);
-                    }
-                });
-            }
-
             if (id) {
                 that.id = function(record) {
                     return id(record);
                 };
             }
 
-            if (options.data.bind) {
-                options.data.bind(CHANGE, function(e) {
-                   that.trigger(CHANGE, e);
-                });
-            }
 
             that.bind([ /**
                          * Fires when an error occurs during data retrieval.
@@ -1184,7 +1537,7 @@
                          * @event
                          */
                         CHANGE,
-                        CREATE, DESTROY, UPDATE, REQUESTSTART, MODELCHANGE], options);
+                        CREATE, DESTROY, UPDATE, REQUESTSTART], options);
         },
 
         options: {
@@ -1205,14 +1558,151 @@
          * @returns {Object} Model instance if found
          */
         get: function(id) {
-            return this._set.get(id);
+            var idx, length, data = this._data;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].id == id) {
+                    return data[idx];
+                }
+            }
         },
 
+        getByUid: function(id) {
+            var idx, length, data = this._data;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].uid == id) {
+                    return data[idx];
+                }
+            }
+        },
         /**
          * Synchronizes changes through the transport.
          */
         sync: function() {
-            this._set.sync();
+            var that = this,
+                idx,
+                length,
+                created = [],
+                updated = [],
+                destroyed = that._destroyed,
+                data = that._data;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].isNew()) {
+                    created.push(data[idx]);
+                } else if (data[idx].dirty) {
+                    updated.push(data[idx]);
+                }
+            }
+
+            var promises = that._send("create", created);
+
+            promises.push.apply(promises ,that._send("update", updated));
+            promises.push.apply(promises ,that._send("destroy", destroyed));
+
+            $.when.apply(null, promises)
+                .then(function() {
+                    var idx,
+                        length;
+
+                    for (idx = 0, length = arguments.length; idx < length; idx++){
+                        that._accept(arguments[idx]);
+                    }
+
+                    that._change();
+                });
+
+        },
+
+        _accept: function(result) {
+            var that = this,
+                models = result.models,
+                response = result.response || {},
+                idx = 0,
+                pristine = that.reader.data(that._pristine),
+                type = result.type,
+                length;
+
+            response = that.reader.data(that.reader.parse(response));
+
+            if (!$.isArray(response)) {
+                response = [response];
+            }
+
+            if (type === "destroy") {
+                that._destroyed = [];
+            }
+
+            for (idx = 0, length = models.length; idx < length; idx++) {
+                if (type !== "destroy") {
+                    models[idx].accept(response[idx]);
+
+                    if (type === "create") {
+                        pristine.push(models[idx]);
+                    } else if (type === "update") {
+                        extend(pristine[that._pristineIndex(models[idx])], response[idx]);
+                    }
+                } else {
+                    pristine.splice(that._pristineIndex(models[idx]), 1);
+                }
+            }
+        },
+
+        _pristineIndex: function(model) {
+            var that = this,
+                idx,
+                length,
+                pristine = that.reader.data(that._pristine);
+
+            for (idx = 0, length = pristine.length; idx < length; idx++) {
+                if (pristine[idx][model.idField] === model.id) {
+                   return idx;
+                }
+            }
+            return -1;
+        },
+
+        _promise: function(data, models, type) {
+            var that = this,
+                transport = that.transport;
+
+            return $.Deferred(function(deferred) {
+                transport[type].call(transport, extend({
+                        success: function(response) {
+                            deferred.resolve({
+                                response: response,
+                                models: models,
+                                type: type
+                            });
+                        },
+                        error: function(response) {
+                            deferred.reject(response);
+                            that.trigger(ERROR, response);
+                        }
+                    }, data)
+                );
+            }).promise();
+        },
+
+        _send: function(method, data) {
+            var that = this,
+                idx,
+                length,
+                promises = [],
+                transport = that.transport;
+
+            if (that.options.batch) {
+                if (data.length) {
+                    promises.push(that._promise( { data: { models: toJSON(data) } }, data , method));
+                }
+            } else {
+                for (idx = 0, length = data.length; idx < length; idx++) {
+                    promises.push(that._promise( { data: data[idx].toJSON() }, [ data[idx] ], method));
+                }
+            }
+
+            return promises;
         },
 
         /**
@@ -1221,7 +1711,7 @@
          * @returns {Object} The Model instance which has been added
          */
         add: function(model) {
-            return this._set.add(model);
+            return this.insert(this._data.length, model);
         },
 
         /**
@@ -1231,14 +1721,26 @@
          * @returns {Object} The Model instance which has been inserted
          */
         insert: function(index, model) {
-            return this._set.insert(index, model);
+            if (!model) {
+                model = index;
+                index = 0;
+            }
+
+            model = model instanceof kendo.data.Model ? model : new this.reader.model(model);
+
+            this._data.splice(index, 0, model);
+
+            return model;
         },
 
         /**
          * Cancel the changes made to the DataSource after the last sync.
          */
         cancelChanges : function() {
-            this._set.cancelChanges();
+            var that = this;
+
+            that._data = that._observe(that.reader.data(that._pristine));
+            that._change();
         },
 
         /**
@@ -1258,8 +1760,16 @@
             });
         },
 
-        indexOf: function(dataItem) {
-            return this._set.indexOf(dataItem);
+        indexOf: function(model) {
+            var idx, length, data = this._data;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].id == model.id) {
+                    return idx;
+                }
+            }
+
+            return -1;
         },
 
         _params: function(data) {
@@ -1301,7 +1811,15 @@
          * @param {Object} model Model instance to be removed
          */
         remove: function(model) {
-            this._set.remove(model);
+            var idx, length, data = this._data;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].id == model.id) {
+                    model = data[idx];
+                    data.splice(idx, 1);
+                    return model;
+                }
+            }
         },
 
         error: function() {
@@ -1330,23 +1848,46 @@
                 data = that.reader.data(data);
             }
 
-            that._data = data;
-
-            if (that._set) {
-                that._set.data(data);
-            }
+            that._data = that._observe(data);
 
             var start = that._skip || 0,
-                end = start + data.length;
+                end = start + that._data.length;
 
-            that._ranges.push({ start: start, end: end, data: data });
+            that._ranges.push({ start: start, end: end, data: that._data });
             that._ranges.sort( function(x, y) { return x.start - y.start; } );
 
             that._dequeueRequest();
-            that._process(data);
+            that._process(that._data);
         },
 
-        _process: function (data) {
+        _observe: function(data) {
+            var that = this;
+
+            data = data instanceof ObservableArray ? data : new ObservableArray(data, that.reader.model);
+
+            return data.bind(CHANGE, proxy(that._change, that));
+        },
+
+        _change: function(e) {
+            var that = this, idx, length, action = e ? e.action : "";
+
+            if (action === "remove") {
+                for (idx = 0, length = e.items.length; idx < length; idx++) {
+                    if (!e.items[idx].isNew()) {
+                        that._destroyed.push(e.items[idx]);
+                    }
+                }
+            }
+
+            if (that.options.autoSync && (action === "add" || action === "remove")) {
+                that.sync();
+            } else {
+                that._total = that.reader.total(that._pristine);
+                that._process(that._data, e);
+            }
+        },
+
+        _process: function (data, e) {
             var that = this,
                 options = {},
                 result,
@@ -1386,7 +1927,7 @@
                 that._total = result.total;
             }
 
-            that.trigger(CHANGE);
+            that.trigger(CHANGE, e);
         },
 
         /**
@@ -1406,10 +1947,6 @@
             var that = this;
             if (value !== undefined) {
                 that._data = value;
-
-                if (that._set) {
-                    that._set.data(value);
-                }
 
                 that._process(value);
             } else {
@@ -1912,10 +2449,12 @@
             }
         }
 
-        if (Model && fields && (!dataSource.schema || !dataSource.schema.model)) {
+        if (kendo.data.Model && fields && (!dataSource.schema || !dataSource.schema.model)) {
             for (idx = 0, length = fields.length; idx < length; idx++) {
                 field = fields[idx];
-                model[field.field] = field;
+                if (field.type) {
+                    model[field.field] = field;
+                }
             }
 
             if (!isEmptyObject(model)) {
@@ -1990,9 +2529,12 @@
         },
         Query: Query,
         DataSource: DataSource,
+        ObservableObject: ObservableObject,
+        ObservableArray: ObservableArray,
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
         Cache: Cache,
-        DataReader: DataReader
+        DataReader: DataReader,
+        Model: Model
     });
 })(jQuery);

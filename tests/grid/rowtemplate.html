@@ -6,8 +6,8 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.model.js"></script>
         <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.model.js"></script>
         <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
@@ -20,6 +20,7 @@
         <ol id="qunit-tests"></ol>
         <script>
             kendo.ns = "kendo-";
+
             var Grid = kendo.ui.Grid,
                 table,
                 DataSource = kendo.data.DataSource;
@@ -120,26 +121,7 @@
                     }
                 });
 
-                equal(grid.tbody.find("tr").attr("data-kendo-id"), "bar");
-            });
-
-            test("data-kendo-id attribute is rendered for each row when model id is function", function() {
-                var grid = new Grid($("<div/>"), {
-                    dataSource: {
-                        schema: {
-                            model: {
-                                id: function(data) {
-                                    return data.foo;
-                                }
-                            }
-                        },
-                        data: [ {
-                            foo: "bar"
-                        }]
-                    }
-                });
-
-                equal(grid.tbody.find("tr").attr("data-kendo-id"), "bar");
+                ok(grid.tbody.find("tr").attr("data-kendo-uid"));
             });
 
             test("data-kendo-id attribute is rendered for each row when model id is string and a column has a function template", function() {
@@ -160,7 +142,7 @@
                     }]
                 });
 
-                equal(grid.tbody.find("tr").attr("data-kendo-id"), "bar");
+                ok(grid.tbody.find("tr").attr("data-kendo-uid"));
             });
 
             test("data-kendo-id attribute is not rendered if model is not set", function() {
@@ -176,7 +158,7 @@
                     }]
                 });
 
-                ok(grid.rowTemplate.toString().indexOf("data-kendo-id") === -1);
+                ok(grid.rowTemplate.toString().indexOf("data-kendo-uid") === -1);
             });
 
             </script>

@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -165,6 +166,17 @@
                 ok(viewModel.foo[0].bind);
             });
 
+            test("change event is raised when child an item changes", 3, function() {
+                var viewModel = kendo.observable({ foo: [ {} ] });
+
+                viewModel.foo.bind("change", function(e) {
+                    equal(e.items[0], viewModel.foo[0]);
+                    equal(e.action, "itemchange");
+                    equal(e.field, "bar");
+                });
+
+                viewModel.foo[0].set("bar", "baz");
+            });
         </script>
     </head>
 </html>

@@ -296,7 +296,7 @@
      *  @exampleTitle Initialize the Kendo Grid and configure columns & data binding
      *  @example
      *    $(document).ready(function(){
-     *       $("#grid").kendoGrid({modelSet.get(1)
+     *       $("#grid").kendoGrid({
      *           columns:[
      *               {
      *                   field: "FirstName",
@@ -737,9 +737,9 @@
         },
 
         _modelForContainer: function(container) {
-            var id = (container.is("tr") ? container : container.closest("tr")).attr(kendo.attr("id"));
+            var id = (container.is("tr") ? container : container.closest("tr")).attr(kendo.attr("uid"));
 
-            return this.dataSource.get(id);
+            return this.dataSource.getByUid(id);
         },
 
         _editable: function() {
@@ -848,16 +848,17 @@
         closeCell: function() {
             var that = this,
                 cell = that._editContainer.removeClass("k-edit-cell"),
-                id = cell.closest("tr").attr(kendo.attr("id")),
+                id = cell.closest("tr").attr(kendo.attr("uid")),
                 column = that.columns[that.cellIndex(cell)],
-                model = that.dataSource.get(id);
+                model = that.dataSource.getByUid(id);
 
             cell.parent().removeClass("k-grid-edit-row");
 
-            that._displayCell(cell, column, model.data);
+            that._displayCell(cell, column, model);
 
-            if (column.field in (model.changes() || {})) {
+            if (cell.hasClass("k-dirty-cell")) {
                 $('<span class="k-dirty"/>').prependTo(cell);
+                cell.removeClass("k-dirty-cell");
             }
             that._distroyEditable();
         },
@@ -944,8 +945,8 @@
             if ((that.editable && that.editable.end()) || !that.editable) {
                 var index = dataSource.indexOf((dataSource.view() || [])[0]) || 0,
                     model = dataSource.insert(index, {}),
-                    id = model.id(),
-                    cell = that.table.find("tr[" + kendo.attr("id") + "=" + id + "] > td:not(.k-group-cell,.k-hierarchy-cell)").first();
+                    id = model.uid,
+                    cell = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "] > td:not(.k-group-cell,.k-hierarchy-cell)").first();
 
                 if (cell.length) {
                     that.editCell(cell);
@@ -1422,8 +1423,7 @@
             that.dataSource = DataSource.create(dataSource)
                                 .bind(CHANGE, proxy(that.refresh, that))
                                 .bind(REQUESTSTART, proxy(that._requestStart, that))
-                                .bind(ERROR, proxy(that._error, that))
-                                .bind(MODELCHANGE, proxy(that._modelChange, that));
+                                .bind(ERROR, proxy(that._error, that));
         },
 
         _error: function() {
@@ -1434,26 +1434,31 @@
             this._progress(true);
         },
 
-        _modelChange: function(model) {
+        _modelChange: function(e) {
             var that = this,
-                row = that.tbody.find("tr[" + kendo.attr("id") + "=" + model.id() +"]"),
-                changes = model.changes() || {},
+                model = e.items[0],
+                row = that.tbody.find("tr[" + kendo.attr("uid") + "=" + model.uid +"]"),
                 cell,
                 column,
                 isAlt = row.hasClass("k-alt");
 
             if (row.has(".k-edit-cell")) {
-                row.find(">td:not(.k-group-cell,.k-hierarchy-cell,.k-edit-cell)").each(function() {
+                row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
                     cell = $(this);
                     column = that.columns[that.cellIndex(cell)];
 
-                    if (column.field in changes) {
-                        that._displayCell(cell, column, model.data);
-                        $('<span class="k-dirty"/>').prependTo(cell);
+                    if (column.field === e.field) {
+                        if (!cell.hasClass("k-edit-cell")) {
+                            that._displayCell(cell, column, model);
+                            $('<span class="k-dirty"/>').prependTo(cell);
+                        } else {
+                            cell.addClass("k-dirty-cell");
+                        }
                     }
                 });
+
             } else {
-                row.replaceWith($((isAlt ? that.altRowTemplate : that.rowTemplate)(model.data)));
+                row.replaceWith($((isAlt ? that.altRowTemplate : that.rowTemplate)(model)));
             }
         },
 
@@ -1625,18 +1630,7 @@
                 }
 
                 if (model) {
-                    id = model.id;
-                    if (id) {
-                        // render the id as data-id attribute
-                        type = typeof id;
-
-                        rowTemplate += ' ' + kendo.attr("id") + '="#=';
-                        state.storage["tmpl" + state.count] = type === FUNCTION ? id : that.dataSource.reader.model.id;
-                        rowTemplate += 'this.tmpl' + state.count + "(" + paramName + ")";
-                        state.count++;
-
-                        rowTemplate += '#"';
-                    }
+                    rowTemplate += ' ' + kendo.attr("uid") + '="#=uid#"';
                 }
 
                 rowTemplate += ">";
@@ -2022,15 +2016,16 @@
 
             table.prepend(colgroup);
         },
+
         _autoColumns: function(schema) {
-            if (schema) {
+            if (schema && schema.toJSON) {
                 var that = this,
                     field;
 
+                schema = schema.toJSON();
+
                 for (field in schema) {
-                    that.columns.push({
-                        field: field
-                    });
+                    that.columns.push({ field: field });
                 }
 
                 that._thead();
@@ -2179,7 +2174,7 @@
          * // refreshes the grid
          * grid.refresh();
          */
-        refresh: function() {
+        refresh: function(e) {
             var that = this,
                 length,
                 idx,
@@ -2189,6 +2184,11 @@
                 placeholder,
                 groups = (that.dataSource.group() || []).length,
                 colspan = groups + that.columns.length;
+
+            if (e && e.action === "itemchange") {
+                that._modelChange(e);
+                return;
+            }
 
             that._distroyEditable();
 
