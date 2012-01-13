@@ -1,4 +1,4 @@
-<div data-role="view" id="home" data-title="Mobile Switch &ndash; Basic Usage">
+<div data-role="view" id="home" data-init="mobileSwitchInit" data-title="Mobile Switch &ndash; Basic Usage">
     <h2>Push Notifications</h2>
     <ul class="km-list km-listinset">
         <li>
@@ -27,11 +27,13 @@
 </div>
 
 <script>
-    $("#wink-switch").kendoMobileSwitch();
+    function mobileSwitchInit() {
+        $("#wink-switch").kendoMobileSwitch();
 
-    $("#subscription-switch").kendoMobileSwitch({
-        checked: true,
-        onLabel: "YES",
-        offLabel: "NO"
-    });
+        $("#subscription-switch").kendoMobileSwitch({
+            checked: true,
+            onLabel: "YES",
+            offLabel: "NO"
+        });
+    }
 </script>
