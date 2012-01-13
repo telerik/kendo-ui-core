@@ -229,16 +229,12 @@
                 template = that.options.template,
                 headerTemplate = that.options.headerTemplate,
                 model = that.dataSource.options.schema.model,
-                modelID = model && model.id,
                 dataIDAttribute = "",
                 templateProxy = {},
                 groupTemplateProxy = {};
 
-            if (typeof modelID === "string") {
-                dataIDAttribute = ' data-id="${' + modelID + '}"';
-            } else if (typeof modelID === FUNCTION) {
-                templateProxy.modelID = modelID;
-                dataIDAttribute = ' data-id="${this.modelID(data)}"';
+            if (model) {
+                dataIDAttribute = ' data-uid="#=uid#"';
             }
 
             if (typeof template === FUNCTION) {
@@ -265,10 +261,10 @@
                 target = $(e.target),
                 button = target.closest("[" + kendo.attr("name") + "]", item),
                 buttonName = button.data(kendo.ns + "name"),
-                id = item.data("id");
+                id = item.attr(kendo.attr("uid"));
 
             if (id) {
-                dataItem = that.dataSource.get(id).data;
+                dataItem = that.dataSource.getByUid(id);
             }
 
             if (that.trigger(CLICK, {target: target, item: item, dataItem: dataItem, buttonName: buttonName, button: button.data("kendoMobileButton")})) {
