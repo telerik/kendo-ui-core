@@ -1360,7 +1360,10 @@
                 if(options.toolbar) {
                     height -= $(".k-grid-toolbar").outerHeight();
                 }
-                that.content.height(height);
+
+                if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
+                    that.content.height(height);
+                }
 
                 var scrollables = header.find(">.k-grid-header-wrap"); // add footer when implemented
 
