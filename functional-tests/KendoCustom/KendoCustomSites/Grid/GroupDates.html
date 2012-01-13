@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Grid virtualization using local data</title>
+        <link href="../../../../styles/web/kendo.common.css" rel="stylesheet"/>
+        <link href="../../../../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <script src="../../../../live/js-deploy/jquery.min.js"></script>
+        <script src="../../../../live/js-deploy/kendo.all.js"></script>
+        <script src="../../../../demos/mvc/content/shared/js/people.js"></script>
+    </head>
+    <body>
+        
+            <div id="grid"></div>
+
+            <script>
+                var data = [
+    {
+        ProductID: 1,
+        ProductName: "ProductName 1",
+        OrderDate: new Date(2011, 1, 1)
+    },
+    {
+        ProductID: 2,
+        ProductName: "ProductName 2",
+        OrderDate: new Date(2011, 1, 2)
+    },
+    {
+        ProductID: 3,
+        ProductName: "ProductName 3",
+        OrderDate: new Date(2011, 1, 1)
+    }];
+
+                $("#grid").kendoGrid({
+                    dataSource: {
+                        data: data,
+                        batch: true,
+                        pageSize: 30,
+                        schema: {
+                            model: {
+                                id: "ProductID",
+                                fields: {
+                                    ProductID: { editable: false, nullable: true },
+                                    ProductName: { validation: { required: true} },
+                                    OrderDate: { type: "date" }
+                                }
+                            }
+                        }
+                    },
+                    editable: true,
+                    groupable: true,
+                    toolbar: ["create", "save", "cancel"],
+                    columns: [
+        "ProductName",
+        { field: "OrderDate", format: "{0:dd.MM.yyyy}" }
+    ]
+                });
+            </script>
+        </div>
+    </body>
+</html>
