@@ -394,6 +394,22 @@
                 ok(!wrap.hasClass("k-state-hover"));
             });
 
+            asyncTest("list.mousedown should focus input", function() {
+                var data = [{text: 1, value: 1}, {text:2, value:2}],
+                    combobox = new ComboBox(input, {
+                         dataSource: data
+                    });
+
+                combobox.open();
+                combobox.list.mousedown();
+
+                setTimeout(function() {
+                    start();
+                    equal(document.activeElement.nodeName, "INPUT");
+                }, 200);
+
+            });
+
             asyncTest("form reset support", function() {
                 input.attr("value", "123");
 

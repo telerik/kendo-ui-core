@@ -8,9 +8,10 @@
         ui = kendo.ui,
         Widget = ui.Widget,
         keys = kendo.keys,
+        touch = kendo.support.touch,
         ID = "id",
         LI = "li",
-        CLICK = kendo.support.touch ? "touchend" : "click",
+        CLICK = touch ? "touchend" : "click",
         CHANGE = "change",
         CHARACTER = "character",
         FOCUSED = "k-state-focused",
@@ -38,17 +39,15 @@
 
             that.ul = $('<ul class="k-list k-reset"/>')
                         .css({ overflow: "auto" })
-                        .mousedown(function() {
-                            setTimeout(function() {
-                                clearTimeout(that._bluring);
-                            }, 0);
-                        })
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
 
-            that.list = $("<div class='k-list-container'/>").append(that.ul);
-
-            that.list.delegate(LI, CLICK, proxy(that._click, that));
+            that.list = $("<div class='k-list-container'/>")
+                        .append(that.ul)
+                        .mousedown(function() {
+                            that._clearBlurTimeout();
+                        })
+                        .delegate(LI, CLICK, proxy(that._click, that));
 
             id = that.element.attr(ID);
             if (id) {
@@ -104,6 +103,15 @@
 
             that._change();
             that.close();
+        },
+
+        _clearBlurTimeout: function() {
+            var that = this;
+
+            setTimeout(function() {
+                clearTimeout(that._bluring);
+                that._focused.focus();
+            });
         },
 
         _change: function() {
