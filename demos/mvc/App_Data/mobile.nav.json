@@ -12,6 +12,17 @@
             ]
         },
         {
+            "text": "Application",
+            "name": "application",
+            "spriteCssClass": "dataSourceIcon",
+            "items": [
+                {
+                    "text": "Overview",
+                    "url": "application/index.html"
+                }
+            ]
+        },
+        {
             "text": "Button",
             "name": "button",
             "spriteCssClass": "mobileButtonIcon",
