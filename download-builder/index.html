@@ -5,7 +5,6 @@
         <script src="//code.jquery.com/jquery-1.7.1.min.js"></script>
         <script src="//cdn.kendostatic.com/2011.3.1007/js/kendo.core.min.js"></script>
         <script src="scripts/script-resolver.js"></script>
-        <script src="scripts/kendo-config.js"></script>
         <link href="styles/configurator.css" rel="stylesheet"/>
     </head>
     <body>
@@ -16,23 +15,25 @@
         </div>
 
         <script id="categoryTemplate" type="text/x-kendo-tmpl">
-            <h2>#= category.name #</h2>
-            <div>#= category.description #</div>
-            <ul class="category" data-id="#= id #">
-                #= renderComponents(category) #
-            </ul>
+            <div class="main-category">
+                <h2 class="component-name">#= category.name #</h2>
+                <div class="category-description">#= category.description #</div>
+                <ul class="category" data-id="#= id #">
+                    #= renderComponents(category.name.toLowerCase()) #
+                </ul>
+            </div>
         </script>
 
         <script id="componentTemplate" type="text/x-kendo-tmpl">
             <li class="component" data-id="#= id #">
                 <span class="checkbox"></span>
                 <span class="name">#= name #</span>
+                <span class="description">#= data.description || "" #</span>
                 # if (data.features) { #
                     <ul class="features">
                         #= renderFeatures(data) #
                     </ul>
                 # } #
-                <span class="description">#= data.description || "" #</span>
             </li>
         </script>
 
@@ -45,22 +46,33 @@
         </script>
 
         <script id="infoTemplate" type="text/x-kendo-tmpl">
+            <span class="button icon-button">
+                <a href="#= getUrl #" onclick="logDownload('#= getUrl #');">
+                    <span class="icon-download"></span>
+                    Download
+                </a>
+            </span>
             <dl>
-                <dt>Combined script size:</dt>
-                <dd>#= formatBytes(size) # (#= formatBytes(compressedSize) # compressed)</dd>
+                <dt>kendo.custom.min.js, #= formatBytes(size) #</dt>
+                <dd> (#= formatBytes(compressedSize) # compressed)</dd>
             </dl>
-            <a href="#= getUrl #">Download</a>
+            </script>
+
         </script>
 
-        <script id="scriptTemplate" type="text/x-kendo-tmpl">&lt;script type="text/javascript" src="#= data #"&gt;&lt;script&gt;</script>
+        <script id="scriptTemplate" type="text/x-kendo-tmpl">&lt;script type="text/javascript" src="#= CDN_URL + data #"&gt;&lt;script&gt;</script>
 
         <script type="text/javascript">
-            var INFO_SERVICE = "http://tsonev/mono-kendo-download/info.ashx",
-                GET_SERVICE = "http://tsonev/mono-kendo-download/get.ashx",
-                VERSION = "latest",
-                CDN_URL = "http://cdn.kendostatic.com/" + VERSION + "/js/";
+            var INFO_SERVICE = "http://tsonev/mono-kendo-download-service/info.ashx",
+                GET_SERVICE = "http://tsonev/mono-kendo-download-service/get.ashx",
+                VERSION = "current", // yyyy.q.ddd
+                CONFIGURATION_URL = "config/kendo-config." + VERSION + ".json",
+                CDN_URL = "http://cdn.kendostatic.com/" + VERSION + "/js/",
+                LICENSES = ["framework", "web", "dataviz", "mobile"];
 
-            var resolver,
+            var categories,
+                components,
+                resolver,
                 categoryTemplate,
                 componentTemplate,
                 featureTemplate,
@@ -69,7 +81,15 @@
                 showAdvanced = false;
 
             $(document).ready(function() {
-                resolver = new ScriptResolver(kendoConfig);
+                $.getJSON(CONFIGURATION_URL, function(data) {
+                    categories = data.categories;
+                    components = data.components;
+                    init();
+                });
+            });
+
+            function init(config) {
+                resolver = new ScriptResolver(components);
                 categoryTemplate = template("categoryTemplate");
                 componentTemplate = template("componentTemplate");
                 featureTemplate = template("featureTemplate");
@@ -105,27 +125,29 @@
                     updateDependencies();
                     updateInfo();
                 });
-            });
+            }
 
             function renderCategories() {
-                for (var categoryId in kendoCategories) {
-                    $("#configurator").append(categoryTemplate({
-                        category: kendoCategories[categoryId],
-                        id: categoryId
-                    }));
+                for (var categoryId in categories) {
+                    if (LICENSES.indexOf(categoryId) !== -1) {
+                        $("#configurator").append(categoryTemplate({
+                            category: categories[categoryId],
+                            id: categoryId
+                        }));
+                    }
                 }
             }
 
-            function renderComponents(category) {
+            function renderComponents(categoryName) {
                 var result = "",
                     visible;
-                $.each(kendoConfig, function(i, component) {
+                $.each(components, function(i, component) {
                     visible = !component.hidden &&
                         (!component.advanced ||
                             (showAdvanced && component.advanced)
                         );
 
-                    if (visible && component.category === category) {
+                    if (visible && component.category === categoryName) {
                         result += componentTemplate(component);
                     }
                 });
