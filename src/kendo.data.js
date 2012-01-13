@@ -1620,6 +1620,8 @@
                 models = result.models,
                 response = result.response || {},
                 idx = 0,
+                pristine = that.reader.data(that._pristine),
+                type = result.type,
                 length;
 
             response = that.reader.data(that.reader.parse(response));
@@ -1628,18 +1630,37 @@
                 response = [response];
             }
 
-            if (result.type === "destroy") {
+            if (type === "destroy") {
                 that._destroyed = [];
-            } else {
-                for (idx = 0, length = models.length; idx < length; idx++) {
+            }
 
+            for (idx = 0, length = models.length; idx < length; idx++) {
+                if (type !== "destroy") {
                     models[idx].accept(response[idx]);
 
-                    if (result.type === "create") {
-                        that._pristine.push(models[idx]);
+                    if (type === "create") {
+                        pristine.push(models[idx]);
+                    } else if (type === "update") {
+                        extend(pristine[that._pristineIndex(models[idx])], response[idx]);
                     }
+                } else {
+                    pristine.splice(that._pristineIndex(models[idx]), 1);
                 }
             }
+        },
+
+        _pristineIndex: function(model) {
+            var that = this,
+                idx,
+                length,
+                pristine = that.reader.data(that._pristine);
+
+            for (idx = 0, length = pristine.length; idx < length; idx++) {
+                if (pristine[idx][model.idField] === model.id) {
+                   return idx;
+                }
+            }
+            return -1;
         },
 
         _promise: function(data, models, type) {
