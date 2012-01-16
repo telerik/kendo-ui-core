@@ -498,18 +498,14 @@
         */
         enable: function(enable) {
             var that = this,
-                arrow = that._arrow,
                 element = that.element,
-                wrapper = that._inputWrapper;
-
-            arrow.unbind(CLICK)
-                 .unbind(MOUSEDOWN);
+                arrow = that._arrow.unbind(CLICK).unbind(MOUSEDOWN),
+                wrapper = that._inputWrapper.unbind(HOVEREVENTS);
 
             if (enable === false) {
                 wrapper
                     .removeClass(DEFAULT)
                     .addClass(STATEDISABLED)
-                    .unbind(HOVEREVENTS);
 
                 element.attr(DISABLED, DISABLED);
             } else {
