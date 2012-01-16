@@ -45,6 +45,58 @@
     *     .km-android .checkout { background-color: red; }
     * </style>
     * <a href="#foo" data-role="button" class="checkout">Foo</a>
+    *
+    * @section
+    * <h3>Button icons</h3>
+    * A button icon can be set in two ways - either by adding an <code>img</code> element inside the <code>a</code> element, or by setting an <code>icon</code> data attribute to the <code>a</code> element.
+    * Kendo mobile comes out of the box with several ready to use icons:
+    *
+    * <ul>
+    *   <li>featured</li>
+    *   <li>toprated</li>,
+    *   <li>favorites</li>
+    *   <li>mostviewed</li>
+    *   <li>bookmarks</li>
+    *   <li>contacts</li>
+    *   <li>downloads</li>
+    *   <li>more</li>
+    *   <li>mostrecent</li>
+    *   <li>recents</li>
+    *   <li>history</li>
+    *   <li>add</li>,
+    *   <li>contactadd</li>
+    *   <li>detaildisclosure</li>
+    *   <li>info</li>
+    *   <li>action</li>
+    *   <li>camera</li>
+    *   <li>compose</li>
+    *   <li>search</li>
+    *   <li>trash</li>
+    *   <li>organize</li>
+    *   <li>reply</li>
+    *   <li>stop</li>
+    *   <li>refresh</li>
+    *   <li>play</li>
+    *   <li>fastforward</li>
+    *   <li>pause</li>
+    *   <li>rewind</li>
+    *   <li>settings</li>
+    *   <li>globe</li>
+    *   <li>home</li>
+    *   <li>cart</li>
+    *   <li>about</li>
+    * </ul>
+    *
+    * Additional icons may be added by defining the respective CSS class. If the <code>icon</code> data attribute is set to <code>custom</code>, the tab will receive <code>km-custom</code> CSS class.
+    * @exampleTitle Define custom button icon.
+    * @example
+    * .km-custom {
+    *   background-image: ...
+    * }
+    *
+    * <div data-role="button">
+    *   <a href="#index" data-icon="custom">Home</a>
+    * </div>
     */
     var Button = Widget.extend(/** @lends kendo.mobile.ui.Button.prototype */{
         /**
@@ -110,6 +162,8 @@
         _wrap: function() {
             var that = this,
                 element = that.element,
+                icon = element.data(kendo.ns + "icon"),
+                iconSpan = $('<span class="km-icon"/>'),
                 span;
 
             span = element.addClass("km-button")
@@ -121,9 +175,14 @@
                 span = element.wrapInner("<span/>").children("span");
             }
 
-            span.addClass("km-text")
-                .find("img")
-                .addClass("km-image");
+            var image = span.addClass("km-text")
+                            .find("img")
+                            .addClass("km-image");
+
+            if (!image[0] && icon) {
+                element.prepend(iconSpan);
+                iconSpan.addClass("km-" + icon);
+            }
         }
     });
 
