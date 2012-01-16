@@ -31,6 +31,9 @@
                     kendo.Observable.fn.init.call(that);
 
                     element.bind("mousedown", $.proxy(that.mouseDown, that));
+                    element.bind("touchstart", $.proxy(that.touchStart, that));
+                    element.bind("touchmove", $.proxy(that.touchMove, that));
+                    element.bind("touchend", $.proxy(that.touchEnd, that));
                     element.bind("mousemove", $.proxy(that.mouseMove, that));
                     element.bind("mouseup mouseleave", $.proxy(that.mouseUp, that));
 
@@ -39,10 +42,58 @@
                     ], that.options);
                 },
 
+                touchStart: function(e) {
+                    var that = this;
+
+                    if (!that.pressed) {
+                        var originalEvent = e.originalEvent;
+                            touch = originalEvent.touches[0];
+
+                        that.pressed = true;
+                        that.touchID = touch.identifier;
+                        that.trigger("start", that.perAxis("_location", touch));
+                    }
+                },
+
+                touchMove: function(e) {
+                    var that = this;
+
+                    if (!that.pressed) {
+                        return;
+                    }
+
+                    that.withTouchEvent(e, function(touch) {
+                        that.trigger("move", that.perAxis("_axisMove", touch));
+                    });
+                },
+
+                touchEnd: function(e) {
+                    var that = this;
+
+                    that.withTouchEvent(e, function(touch) {
+                        that.mouseUp(touch);
+                    });
+                },
+
+                withTouchEvent: function(e, callback) {
+                    var that = this,
+                        touches = e.originalEvent.changedTouches,
+                        idx = touches.length;
+
+                    while (idx) {
+                        idx --;
+                        if (touches[idx].identifier === that.touchID) {
+                            return callback(touches[idx]);
+                        }
+                    }
+                },
+
                 mouseDown: function(e) {
                     var that = this;
-                    that.pressed = true;
-                    that.trigger("start", that.perAxis("_location", e));
+                    if (!that.pressed) {
+                        that.pressed = true;
+                        that.trigger("start", that.perAxis("_location", e));
+                    }
                 },
 
                 mouseMove: function(e) {
@@ -51,13 +102,14 @@
                         return;
                     }
 
-                    that.trigger("move", that.perAxis("_axisMouseMove", e));
+                    that.trigger("move", that.perAxis("_axisMove", e));
                 },
 
                 mouseUp: function(e) {
                     var that = this,
                         velocity,
                         coordinates;
+
                     if (that.pressed) {
                         that.pressed = false;
                         velocity = that.perAxis("_endVelocity", e);
@@ -79,7 +131,7 @@
                     };
                 },
 
-                _axisMouseMove: function(data, location) {
+                _axisMove: function(data, location) {
                     var delta = location - data.location,
                         direction = delta > 0;
 
@@ -132,17 +184,19 @@
         <script>
             var x = 0;
             var element = $("#inner");
+
             var swipe = new kendo.mobile.Swipe($("#scrollview"), {
                     start: function(e) {
                         // console.log("start: " + e.x);
                     },
+
                     move: function(e) {
                         x += e.x;
                         element[0].style["webkitTransform"] = "translate3d(" + x + "px,0,0)";
-                        // console.log("move:" + e.x);
                     },
+
                     end: function(e) {
-                        console.log("end:", e);
+
                     }
             })
         </script>
