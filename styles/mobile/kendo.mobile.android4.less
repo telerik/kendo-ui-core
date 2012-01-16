@@ -5,7 +5,6 @@
 
 .km-android
 {
-    .transform(translatez(0));
     background: #000;
 }
 
@@ -22,7 +21,6 @@
 .km-android .km-view
 {
     overflow: hidden;
-    -webkit-transform: translatez(0);
 }
 
 .km-android .km-view-title,
@@ -158,20 +156,25 @@
     margin-left: -1em;
 }
 
-.km-android .km-switch-handle,
-.km-android .km-switch-handle:after
+.km-android .km-switch-handle
 {
+    width: 0;
     margin: 0;
+    height: 0;
     margin-right: 0;
     .border-radius(0);
-    background: rgba(255,255,255,.3);
-    border-left: 1em solid #232323;
-    border-right: 1.4em solid transparent;
-    border-bottom: 2em solid transparent;
-    height: 0;
-    width: 0;
     .box-shadow(none);
     .box-sizing(border-box);
+    border-left: 1em solid #232323;
+    background: rgba(255,255,255,.3);
+    border-right: 1.4em solid transparent;
+    border-bottom: 2em solid transparent;
+    border-width: 0 1.4rem 2rem 1rem;
+}
+
+:-moz-any(.km-android) .km-switch-handle
+{
+    border-right-width: 1.44rem;
 }
 
 .km-android .km-switch-handle:before
@@ -186,6 +189,7 @@
     border-left: 1.4em solid transparent;
     border-right: 1em solid #232323;
     border-top: 2em solid transparent;
+    border-width: 2rem 1rem 0 1.4rem;
     height: 0;
     width: 0;
 }
@@ -485,6 +489,18 @@
 .km-android .km-content
 {
     background: #000 linear-gradient(top, rgba(0,0,0,1), rgba(70,70,70,.5));
+}
+
+.km-android .km-button .km-icon
+{
+    background: linear-gradient(top, rgba(0,0,0,.7), rgba(0,0,0,.9));
+}
+
+.km-android .km-navbar .km-icon
+{
+    margin-left: .5em;
+    margin-right: -.3em;
+    background: linear-gradient(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
 }
 
 .km-android .km-tabstrip .km-icon
