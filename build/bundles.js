@@ -242,7 +242,7 @@ function buildBundle(bundle, version, success) {
             deployName = name + "." + version + "." + licenseName,
             root = path.join(DEPLOY_ROOT, name + "." + licenseName),
             packageName = path.join(DROP_LOCATION, deployName + ".zip"),
-            srcLicense = licenseTemplate({ version: version, year: startDate.getFullYear() });
+            srcLicense = licenseTemplate({ version: version, year: startDate.getFullYear() }),
             packageNameLatest = packageName.replace(version, LATEST);
 
         console.log("Building " + deployName);
