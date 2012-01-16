@@ -5,8 +5,8 @@
         kendo = window.kendo,
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
-        extend = $.extend;
-
+        extend = $.extend,
+        dom = kendo.Editor.Dom;
 
 var START_TO_START = 0,
     START_TO_END = 1,
@@ -608,17 +608,21 @@ function getMarkers(range) {
 }
 
 var RestorePoint = Class.extend({
+    init: function(range) {
+        this.rootNode = documentFromRange(range);
+        this.body = this.rootNode.body;
+        this.html = this.body.innerHTML;
+        this.range = range;
 
-});
+        this.startContainer = nodeToPath(range.startContainer);
+        this.endContainer = nodeToPath(range.endContainer);
+        this.startOffset = offset(range.startContainer, range.startOffset);
+        this.endOffset = offset(range.endContainer, range.endOffset);
 
-function RestorePoint(range) {
-    var rootNode = documentFromRange(range);
+        range[start ? 'setStart' : 'setEnd'](node, offset);
+    },
 
-    this.body = rootNode.body;
-
-    this.html = this.body.innerHTML;
-        
-    function index(node) {
+    index: function(node) {
         var result = 0, lastType = node.nodeType;
 
         while (node = node.previousSibling) {
@@ -631,29 +635,31 @@ function RestorePoint(range) {
         }
             
         return result;
-    }
+    },
 
-    function offset(node, value) {
+    offset: function(node, value) {
         if (node.nodeType == 3) {
             while ((node = node.previousSibling) && node.nodeType == 3)
                 value += node.nodeValue.length;
         }
         return value;
-    }
+    },
 
-    function nodeToPath(node) {
+    nodeToPath: function(node) {
         var path = [];
             
-        while (node != rootNode) {
+        while (node != this.rootNode) {
             path.push(index(node));
             node = node.parentNode;
         }
 
         return path;
-    }
+    },
 
-    function toRangePoint(range, start, path, denormalizedOffset) {
-        var node = rootNode, length = path.length, offset = denormalizedOffset;
+    toRangePoint: function(range, start, path, denormalizedOffset) {
+        var node = this.rootNode,
+            length = path.length,
+            offset = denormalizedOffset;
 
         while (length--)
             node = node.childNodes[path[length]];
@@ -663,37 +669,37 @@ function RestorePoint(range) {
             node = node.nextSibling;
         }
 
-        range[start ? 'setStart' : 'setEnd'](node, offset);
-    }
+    },
 
-    this.startContainer = nodeToPath(range.startContainer);
-    this.endContainer = nodeToPath(range.endContainer);
-    this.startOffset = offset(range.startContainer, range.startOffset);
-    this.endOffset = offset(range.endContainer, range.endOffset);
-
-    this.toRange = function () {
-        var result = range.cloneRange();
+    toRange: function () {
+        var result = this.range.cloneRange();
 
         toRangePoint(result, true, this.startContainer, this.startOffset);
         toRangePoint(result, false, this.endContainer, this.endOffset);
 
         return result;
     }
-}
 
-function Marker() {
-    var caret;
+});
 
-    this.addCaret = function (range) {
+var Marker = Class.extend({
+    init: function() {
+        
+    },
+
+    addCaret: function (range) {
+        var caret = this.caret;
+
         caret = dom.create(documentFromRange(range), 'span', { className: 't-marker' });
         range.insertNode(caret);
         range.selectNode(caret);
         return caret;
-    }
+    },
 
-    this.removeCaret = function (range) {
-        var previous = caret.previousSibling;
-        var startOffset = 0;
+    removeCaret: function (range) {
+        var caret = this.caret,
+            previous = caret.previousSibling;
+            startOffset = 0;
             
         if (previous)
             startOffset = isDataNode(previous) ? previous.nodeValue.length : findNodeIndex(previous);
@@ -721,9 +727,9 @@ function Marker() {
             range.selectNodeContents(container);
         }
         range.collapse(true);
-    }
+    },
 
-    this.add = function (range, expand) {
+    add: function (range, expand) {
         if (expand && range.collapsed) {
             this.addCaret(range);
             range = RangeUtils.expand(range);
@@ -746,10 +752,11 @@ function Marker() {
         normalize(range.commonAncestorContainer);
 
         return range;
-    }
+    },
 
-    this.remove = function (range) {
-        var start = this.start, end = this.end;
+    remove: function (range) {
+        var start = this.start,
+            end = this.end;
 
         normalize(range.commonAncestorContainer);
 
@@ -834,14 +841,19 @@ function Marker() {
             else
                 range.setEndAfter(end);
         }
-        if (caret)
+        if (this.caret)
             this.removeCaret(range);
     }
-}
+
+});
 
 var boundary = /[\u0009-\u000d]|\u0020|\u00a0|\ufeff|\.|,|;|:|!|\(|\)|\?/;
 
-var RangeUtils = {
+var RangeUtils = Class.extend({
+    init: function() {
+
+    },
+
     nodes: function(range) {
         var nodes = textNodes(range);
         if (!nodes.length) {
@@ -921,13 +933,16 @@ var RangeUtils = {
 
         return startOffset != 0 && endOffset != 0;
     }
-};
+});
 
 extend(kendo.ui.Editor, {
     W3CRange: W3CRange,
     RangeIterator: RangeIterator,
     W3CSelection: W3CSelection,
-    RangeEnumerator: RangeEnumerator
+    RangeEnumerator: RangeEnumerator,
+    RestorePoint: RestorePoint,
+    Marker: Marker,
+    RangeUtils: RangeUtils
 });
 
 })(jQuery);
