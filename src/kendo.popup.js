@@ -49,8 +49,10 @@
             that.element.hide()
                 .addClass("k-popup k-group k-reset")
                 .css({ position : ABSOLUTE })
-                .appendTo($(options.appendTo));
-
+                .appendTo($(options.appendTo))
+                .bind("mouseenter mouseleave", function(e) {
+                    that._hovered = e.type === "mouseenter";
+                });
 
             that.wrapper = $();
 
@@ -103,7 +105,9 @@
 
             if (!touch) { //  On mobile device this closes the popup if keyboard is shown :)
                 $(window).bind("resize scroll", function() {
-                    that.close();
+                    if (!that._hovered) {
+                        that.close();
+                    }
                 });
             }
 
