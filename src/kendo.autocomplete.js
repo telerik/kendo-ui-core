@@ -394,7 +394,7 @@
                     }
                 });
 
-            that.enable(!element.is('[disabled]'));
+            that._enable();
 
             that._popup();
         },
@@ -570,7 +570,7 @@
         * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
         *
         * // force a suggestion to the item with the name "Inception"
-        * autoComplete.suggest("Incep");
+        * autoComplete.suggest("Inception");
         */
         suggest: function (word) {
             var that = this,

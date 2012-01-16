@@ -637,6 +637,18 @@
             }
         },
 
+        /**
+        * Forces a suggestion onto the text of the ComboBox.
+        * @param {string} value Characters to force a suggestion.
+        * @example
+        * // note that this suggest is not the same as the configuration method
+        * // suggest which enables/disables auto suggesting for the ComboBox
+        * //
+        * // get a referenence to the Kendo UI ComboBox
+        * var combobox = $("#combobox").data("kendoComboBox");
+        * // force a suggestion to the item with the name "Inception"
+        * combobox.suggest("Inception");
+        */
         suggest: function(word) {
             var that = this,
                 element = that.input[0],

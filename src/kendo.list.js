@@ -132,6 +132,17 @@
             this._accept($(e.currentTarget));
         },
 
+        _enable: function() {
+            var that = this,
+                options = that.options;
+
+            if (that.element.prop("disabled")) {
+                options.enable = false;
+            }
+
+            that.enable(options.enable);
+        },
+
         _focus: function(li) {
             var that = this;
 
@@ -371,17 +382,6 @@
             that.dataSource = kendo.data.DataSource.create(dataSource)
                                    .bind(CHANGE, proxy(that.refresh, that))
                                    .bind("requestStart", proxy(that._showBusy, that));
-        },
-
-        _enable: function() {
-            var that = this,
-                options = that.options;
-
-            if (that.element.prop("disabled")) {
-                options.enable = false;
-            }
-
-            that.enable(options.enable);
         },
 
         _index: function(value) {
