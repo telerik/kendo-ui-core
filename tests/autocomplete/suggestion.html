@@ -308,6 +308,19 @@
                 equal(input.val(), "foo, b, ");
             });
 
+            test("suggest with null does not throw exception", function() {
+                var autocomplete = new AutoComplete(input, {
+                    suggest: true
+                });
+
+                try {
+                    autocomplete.suggest(null);
+                    ok(true);
+                } catch(e) {
+                    ok(false);
+                }
+            });
+
             test("search should filter items using filter property", function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["foo", "bar", "bafoo"],

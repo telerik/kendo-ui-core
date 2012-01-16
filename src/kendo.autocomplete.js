@@ -589,6 +589,7 @@
                 return;
             }
 
+            word = word || "";
 
             if (typeof word !== "string") {
                 idx = word.index();
