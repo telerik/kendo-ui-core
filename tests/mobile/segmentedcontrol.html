@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.mobile.ui.SegmentedControl Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="../../src/kendo.mobile.segmentedcontrol.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.SegmentedControl Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+
+            var SegmentedControl = kendo.mobile.ui.SegmentedControl,
+                MOUSEDOWN = kendo.support.mousedown,
+                MOUSEUP = kendo.support.mouseup,
+                dom;
+
+            QUnit.config.reorder = false;
+
+            var mouseDownEvent;
+            if (kendo.support.touch) {
+                mouseDownEvent = new $.Event(null, {type: MOUSEDOWN, changedTouches: [{identifier: 1, pageX: 100, pageY: 100}] });
+            } else {
+                mouseDownEvent = MOUSEDOWN;
+            }
+
+            module("segmentedcontrol", {
+                setup: function() {
+
+                }
+            });
+
+
+        </script>
+    </body>
+</html>
