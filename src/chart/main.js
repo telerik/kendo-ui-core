@@ -46,6 +46,7 @@
         GLASS = "glass",
         HEIGHT = "height",
         HORIZONTAL = "horizontal",
+        ID_PREFIX = "k",
         INITIAL_ANIMATION_DURATION = 600,
         INSIDE_BASE = "insideBase",
         INSIDE_END = "insideEnd",
@@ -5180,19 +5181,19 @@
         slots[index] = (slots[index] || 0) + value;
     }
 
-    function uniqueId() {
-        var id = "k", i;
-
-        for (i = 0; i < 16; i++) {
-            id += (math.random() * 16 | 0).toString(16);
-        }
-
-        return id;
-    }
-
     function defined(value) {
         return typeof value !== UNDEFINED;
     }
+
+    var uniqueId = (function() {
+        // Implements 32-bit Linear feedback shift register
+        var lfsr = 1;
+
+        return function() {
+            lfsr = ((lfsr >>> 1) ^ (-(lfsr & 1) & 0xD0000001)) >>> 0;
+            return ID_PREFIX + lfsr.toString(16);
+        };
+    })();
 
     var Color = function(value) {
         var color = this,
