@@ -4748,7 +4748,9 @@
                 element = highlight.element;
 
             if (element) {
-                element.parentNode.removeChild(element);
+                if (element.parentNode) {
+                    element.parentNode.removeChild(element);
+                }
 
                 delete highlight.element;
                 highlight.visible = false;
