@@ -13,27 +13,6 @@
         GET = "get",
         CHANGE = "change";
 
-
-    function set(object, field, value) {
-        return kendo.setter(field)(object, value);
-    }
-
-    function get(object, field, call) {
-        var result;
-
-        if (field === "this") {
-            result = object;
-        } else {
-            result = kendo.getter(field)(object);
-
-            if (call && typeof result === "function") {
-                result = result.call(object);
-            }
-        }
-
-        return result;
-    }
-
     var cssRegExp = /([^:]+):\s*\${([^}]*)};?/g;
 
     var Binding = kendo.Class.extend( {
@@ -67,19 +46,15 @@
         },
 
         value: function() {
-            var that = this, result;
+            return this.observable.get(this.field);
+        },
 
-            if (this.field === "this") {
-                result = this.observable;
-            } else {
-                result = kendo.getter(this.field)(this.observable);
-
-                if (typeof result === "function") {
-                    result = result.call(this.observable);
+        destroy: function() {
+            if (this.field !== "this") {
+                for (var key in this.observers) {
+                    this.observable.unbind("change", this.observers[key]);
                 }
             }
-
-            return result;
         },
 
         createObserver: function(field) {
@@ -180,9 +155,17 @@
 
             Binding.fn.init.apply(this, arguments);
 
-            $(that.element).change(function() {
+            this._change = function() {
                 that.observable.set(that.field, $.data(this.options[this.selectedIndex], "value"), this);
-            });
+            };
+
+            $(that.element).change(this._change);
+        },
+
+        destroy: function() {
+            Binding.fn.destroy.call(this);
+
+            $(this.element).unbind("change", this._change);
         },
 
         bind: function() {
@@ -275,7 +258,7 @@
 
         bind: function() {
             var that = this,
-                callback = get(this.observable, this.field);
+                callback = this.observable.get(this.field);
 
             $(this.element).bind(this.event, function(e) {
                 if (that.preventDefault) {
@@ -362,10 +345,10 @@
                 options.dataSource = get(object, dataSource, true);
             }
 
-            console.log(options);
-
             $(element)["kendo" + widget.fn.options.name](options);
         } else {
+            var bound= [];
+
             for (key in elementBindings) {
                 field = element.getAttribute("data-" + key);
 
@@ -373,7 +356,13 @@
                     binding = elementBindings[key];
                     binding = new binding(element, object, field);
                     binding.bind();
+
+                    bound.push(binding);
                 }
+            }
+
+            if (bound.length) {
+                $.data(element, "bindings", bound);
             }
 
             if (!element.getAttribute("data-source")) {
