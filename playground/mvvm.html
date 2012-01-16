@@ -2,14 +2,21 @@
 <html>
     <head>
         <title>MVVM</title>
+
+
+        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
-        <script src="../src/kendo.binder.js"></script>
-        <script src="../src/kendo.model.js"></script>
         <script src="../src/kendo.data.js"></script>
-        <script src="../src/kendo.grid.js"></script>
-        <link rel="stylesheet" href="../styles/kendo.common.css"/>
-        <link rel="stylesheet" href="../styles/kendo.default.css"/>
+        <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
+
         <style>
             table, td, th {
                 border: 1px solid black;
@@ -19,39 +26,20 @@
     </head>
     <body>
         <form>
-            <div data-template="div-template"></div>
-
-            <fieldset>
-                <legend>&lt;select multiple&gt;</legend>
-                <select style="width: 200px"
-                    data-value="selectedProduct"
-                    data-template="option-tmpl"
-                    data-source="products">
-                </select>
-
-                <script type="text/x-kendo-tmpl" id="option-tmpl">
-                    <option value="${id}">${name}</option>
-                </script>
-                <script type="text/x-kendo-tmpl" id="div-template">
-                    # if (get("selectedProduct")) {
-                    #
-                        Selected product is #= get("selectedProduct.name") #
-                    # } else { #
-                        No selected product
-                    # } #
-                </script>
-            </fieldset>
+            <button data-click="addProduct">Add one product</button>
+            <select data-source="products" data-value="selectedProduct"></select>
+            Selected product <span data-text="selectedProduct.name" ></span>
         </form>
 
         <script>
             var viewModel = kendo.observable({
-                products: [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" } ],
+                products: [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" }, { id:3, name: "Beer" }],
                 selectedProduct: null,
                 selectFirst: function() {
                     this.set("selectedProduct", this.products[0]);
                 },
                 addProduct: function() {
-                    this.products.push({ id: 3, name: "Coffee" });
+                    this.products.push({ id: this.products.length + 1, name: "Product " + (this.products.length + 1) });
                 },
                 removeProduct: function(e) {
                     this.products.splice(this.products.length-1, 1);
@@ -59,6 +47,28 @@
             });
 
             kendo.bind($("form"), viewModel);
+
+            $("select").kendoDropDownList({ dataTextField: "name", dataValueField: "id" });
+
+            var ddl = $("select").data("kendoDropDownList");
+
+            ddl.dataSource.data(viewModel.products);
+
+            var bindings = $("select").data("bindings");
+
+            $(bindings).each(function() {
+                this.destroy();
+            });
+
+            ddl.bind("change", function() {
+                var value = this.value();
+                var product = $.grep(viewModel.products, function(p) {
+                    return p.id == value;
+                })[0];
+
+                viewModel.set("selectedProduct", product);
+            });
+
         </script>
     </body>
 </html>

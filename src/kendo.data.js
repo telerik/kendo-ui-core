@@ -181,7 +181,7 @@
         if (field === "this") {
             result = object;
         } else {
-            result = kendo.getter(field)(object);
+            result = kendo.getter(field, true)(object);
 
             if (call && typeof result === "function") {
                 result = result.call(object);
@@ -1946,9 +1946,9 @@
         data: function(value) {
             var that = this;
             if (value !== undefined) {
-                that._data = value;
+                that._data = this._observe(value);
 
-                that._process(value);
+                that._process(that._data);
             } else {
                 return that._data;
             }
