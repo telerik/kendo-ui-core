@@ -4799,7 +4799,8 @@
             var tooltip = this;
 
             tooltip.point = point;
-            setTimeout(proxy(tooltip._show, tooltip), TOOLTIP_SHOW_DELAY);
+            tooltip.showTimeout =
+                setTimeout(proxy(tooltip._show, tooltip), TOOLTIP_SHOW_DELAY);
         },
 
         _show: function() {
@@ -4865,6 +4866,8 @@
 
         hide: function() {
             var tooltip = this;
+
+            clearTimeout(tooltip.showTimeout);
 
             if (tooltip.visible) {
                 tooltip.element.fadeOut();
