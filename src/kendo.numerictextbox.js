@@ -198,14 +198,10 @@
         */
         enable: function(enable) {
             var that = this,
-                text = that._text,
-                element = that.element,
-                wrapper = that._inputWrapper,
-                upArrow = that._upArrow,
-                downArrow = that._downArrow;
-
-            upArrow.unbind(MOUSEDOWN);
-            downArrow.unbind(MOUSEDOWN);
+                text = that._text.add(that.element),
+                wrapper = that._inputWrapper.unbind(HOVEREVENTS),
+                upArrow = that._upArrow.unbind(MOUSEDOWN),
+                downArrow = that._downArrow.unbind(MOUSEDOWN);
 
             that._toggleText(true);
 
@@ -213,16 +209,15 @@
                 wrapper
                     .removeClass(DEFAULT)
                     .addClass(STATEDISABLED)
-                    .unbind(HOVEREVENTS);
 
-                text.add(element).attr(DISABLED, DISABLED);
+                text.attr(DISABLED, DISABLED);
             } else {
                 wrapper
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .bind(HOVEREVENTS, that._toggleHover);
 
-                text.add(element).removeAttr(DISABLED);
+                text.removeAttr(DISABLED);
 
                 upArrow.bind(MOUSEDOWN, function(e) {
                     e.preventDefault();

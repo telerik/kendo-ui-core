@@ -448,18 +448,14 @@
         */
         enable: function(enable) {
             var that = this,
-                icon = that._icon,
-                wrapper = that._inputWrapper,
+                icon = that._icon.unbind(CLICK).unbind(MOUSEDOWN),
+                wrapper = that._inputWrapper.unbind(HOVEREVENTS),
                 element = that.element;
-
-            icon.unbind(CLICK)
-                .unbind(MOUSEDOWN);
 
             if (enable === false) {
                 wrapper
                     .removeClass(DEFAULT)
-                    .addClass(STATEDISABLED)
-                    .unbind(HOVEREVENTS);
+                    .addClass(STATEDISABLED);
 
                 element.attr(DISABLED, DISABLED);
             } else {
