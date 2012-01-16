@@ -173,12 +173,14 @@
          * @option {Integer} [distance] <5> The required distance that the mouse should travel in order to initiate a drag.
          * @option {Selector} [filter] Selects child elements that are draggable if a widget is attached to a container.
          * @option {String} [group] <"default"> Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.
-         * @option {Function|jQueryObject} [hint] Provides a way for customization of the drag indicator.
+         * @option {Function|jQueryObject} [hint] Provides a way for customization of the drag indicator. If a function is supplied, it receives one argument - the draggable element's jQuery object.
          * _example
          *  //hint as a function
          *  $("#draggable").kendoDraggable({
-         *      hint: function() {
+         *      hint: function(element) {
          *          return $("#draggable").clone();
+         *          // same as
+         *          //  return element.clone();
          *      }
          *  });
          *
