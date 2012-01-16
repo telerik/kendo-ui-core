@@ -111,6 +111,22 @@
             background: #000;
             border-color: #555;
         }
+
+        .km-ios .km-tabstrip .km-state-active .km-toprated,
+        .km-ios .km-tabstrip .km-state-active .km-favorites
+        {
+            background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #E4FFBC), color-stop(0.5, #99D23F), color-stop(1, #BFE553));
+        }
+
+        .km-ios .km-tabstrip .km-state-active .km-mostviewed
+        {
+            background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #FFBCE4), color-stop(0.5, #D23F99), color-stop(1, #E553BF));
+        }
+
+        .km-ios .km-tabstrip .km-state-active .km-bookmarks
+        {
+            background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #E4BCFF), color-stop(0.5, #993FD2), color-stop(1, #BF53E5));
+        }
     </style>
 </head>
 <body>
@@ -119,16 +135,16 @@
             <div data-role="navbar">
                 <a data-role="back-button" data-align="left" class="pink">Pink</a>
                 <span data-role="view-title">Layout</span>
-                <a data-role="button" data-align="right" class="pink">Pink</a>
-                <a data-role="button" data-align="right" class="green">Green</a>
-                <a data-role="button" data-align="right" class="fuchsia">Fuchsia</a>
+                <a data-role="button" data-align="right" class="pink"><span class="km-icon km-toprated"></span>Pink</a>
+                <a data-role="button" data-align="right" class="green"><span class="km-icon km-search"></span>Green</a>
+                <a data-role="button" data-align="right" class="fuchsia"><span class="km-icon km-about"></span>Fuchsia</a>
                 <!--<a data-role="button" data-align="right">HAbout</a>-->
             </div>
         </header>
 
         <content data-role="content">
             <div style="padding: 10px 0; text-align: center;">
-                <a href="#" data-role="button">Pink</a>
+                <a data-role="button"><span class="km-icon km-favorites"></span>Pink</a>
             </div>
             <!--<div style="padding: 10px 0; text-align: center; background: #fff !important;">-->
                 <!--<a href="#" data-role="button">Pink</a>-->
@@ -190,10 +206,10 @@
         </content>
         <footer data-role="footer">
             <div data-role="tabstrip">
-                <a href="#" data-icon="featured">Featured</a>
-                <a href="#" data-icon="favorites">Top Rated<span class="km-badge">3</span></a>
-                <a href="#" data-icon="mostviewed">Most Viewed</a>
-                <a href="#" data-icon="bookmarks">Favorites</a>
+                <a data-icon="featured">Featured</a>
+                <a data-icon="favorites">Top Rated<span class="km-badge">3</span></a>
+                <a data-icon="mostviewed">Most Viewed</a>
+                <a data-icon="bookmarks">Favorites</a>
             </div>
         </footer>
     </article>
