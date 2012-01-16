@@ -230,19 +230,15 @@
         enable: function(enable) {
             var that = this,
                 element = that.element,
-                wrapper = that.wrapper,
-                dropDownWrapper = that._inputWrapper;
+                wrapper = that.wrapper.unbind(),
+                dropDownWrapper = that._inputWrapper.unbind(HOVEREVENTS);
 
             if (enable === false) {
                 element.attr(ATTRIBUTE, ATTRIBUTE);
 
-                wrapper.unbind();
-
                 dropDownWrapper
                     .removeClass(DEFAULT)
-                    .addClass(DISABLED)
-                    .unbind(HOVEREVENTS)
-
+                    .addClass(DISABLED);
             } else {
                 element.removeAttr(ATTRIBUTE, ATTRIBUTE);
 
@@ -253,6 +249,7 @@
 
                 wrapper
                     .bind({
+                        click: function() { that.toggle() },
                         keydown: proxy(that._keydown, that),
                         keypress: proxy(that._keypress, that),
                         focusin: function() {
@@ -265,8 +262,7 @@
                                 that._inputWrapper.removeClass(FOCUSED);
                             }, 100);
                         }
-                    })
-                    .bind(CLICK, function() { that.toggle() });
+                    });
             }
         },
 

@@ -279,26 +279,23 @@
         */
         enable: function(enable) {
             var that = this,
-                input = that.input,
-                element = that.element,
-                wrapper = that._inputWrapper,
-                arrow = that._arrow.parent();
+                input = that.input.add(that.element),
+                wrapper = that._inputWrapper.unbind(HOVEREVENTS),
+                arrow = that._arrow.unbind(CLICK);
 
             if (enable === false) {
                 wrapper
                     .removeClass(DEFAULT)
-                    .addClass(DISABLED)
-                    .unbind(HOVEREVENTS);
+                    .addClass(DISABLED);
 
-                input.add(element).attr(ATTRIBUTE, ATTRIBUTE);
-                arrow.unbind(CLICK);
+                input.attr(ATTRIBUTE, ATTRIBUTE);
             } else {
                 wrapper
                     .removeClass(DISABLED)
                     .addClass(DEFAULT)
                     .bind(HOVEREVENTS, that._toggleHover);
 
-                input.add(element).removeAttr(ATTRIBUTE);
+                input.removeAttr(ATTRIBUTE);
                 arrow.bind(CLICK, function() { that.toggle() });
             }
         },
