@@ -59,6 +59,23 @@
                 ok(!closed);
             });
 
+            test("window.scroll does not close popup when focused", function() {
+                expect(1);
+                var popup = new Popup(div, {
+                    close: function() {
+                        ok(false);
+                    }
+                });
+
+                popup.open();
+                div.mouseenter();
+
+                $(window).scroll();
+
+                ok(popup.visible());
+            });
+
+
             test("popup appends element to body", function() {
                 div.kendoPopup();
 
