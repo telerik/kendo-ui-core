@@ -20,6 +20,14 @@
             module("initialization", {
                 setup: function() {
                     $.mockjax({
+                        url: "echo",
+                        responseTime: 0,
+                        response: function(request) {
+                            this.contentType = "text/json";
+                            this.responseText = request.data;
+                        }
+                    });
+                    $.mockjax({
                         url: /foo|telerik\.com/i,
                         responseText: "foo bar baz",
                     });
@@ -110,12 +118,12 @@
 
                 dialog2.destroy();
 
-                equals($(".k-overlay").length, 1);
+                equal($(".k-overlay").length, 1);
                 ok($(".k-overlay").is(":visible"));
 
                 dialog1.destroy();
 
-                equals($(".k-overlay").length, 0);
+                equal($(".k-overlay").length, 0);
             });
 
             test("creating a modal window after closing another shows overlay", function() {
@@ -139,9 +147,9 @@
                     }),
                     iframe = dialog.element.find("iframe");
 
-                equals(iframe.length, 1);
-                equals(iframe.attr("title"), "title");
-                equals(iframe.attr("src"), "http://www.telerik.com/");
+                equal(iframe.length, 1);
+                equal(iframe.attr("title"), "title");
+                equal(iframe.attr("src"), "http://www.telerik.com/");
             });
 
             test("creating a window with a `content` on the same server does not create iframe", function() {
@@ -149,13 +157,13 @@
                     content: "foo"
                 });
 
-                equals(dialog.element.find("iframe").length, 0);
+                equal(dialog.element.find("iframe").length, 0);
             });
 
             test("creating a window without a `content` does not create iframe", function() {
                 var dialog = createWindow();
 
-                equals(dialog.element.find("iframe").length, 0);
+                equal(dialog.element.find("iframe").length, 0);
             });
 
             test("creating a modal adds overlay and places it before the window markup", function() {
@@ -174,7 +182,7 @@
                         modal: true
                     });
 
-                equals($(".k-overlay").length, 1);
+                equal($(".k-overlay").length, 1);
 
                 ok(!dialog.wrapper.prev("div").is(".k-overlay"));
                 ok(overlappingDialog.wrapper.prev("div").is(".k-overlay"));
@@ -193,7 +201,7 @@
                     iframe = dialog.element.find("iframe");
 
                 ok(iframe.length, 1);
-                equals(iframe.attr("src"), "foo");
+                equal(iframe.attr("src"), "foo");
             });
 
             test("specifying iframe=false does not create iframe for remote URL", function() {
@@ -208,9 +216,38 @@
                         minHeight: 200
                     });
 
-                console.log(dialog.element);
-
                 equal(parseInt(dialog.element.css("minHeight")), 200);
+            });
+
+            test("specifying content template", function() {
+                var dialog = createWindow({
+                        content: {
+                            template: "foo #= 1 + 1 #"
+                        }
+                    });
+
+                equal(dialog.element.text(), "foo 2");
+            });
+
+            test("content template is used when fetching jsonp data", function() {
+                stop(1);
+
+                var dialog = createWindow({
+                    content: {
+                        url: "echo",
+                        dataType: "json",
+                        data: {
+                            foo: "bar"
+                        },
+
+                        template: "templated #= foo #",
+
+                        complete: function() {
+                            start();
+                            equal(dialog.element.text(), "templated bar");
+                        }
+                    }
+                });
             });
         </script>
 
