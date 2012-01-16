@@ -3,27 +3,147 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Scrollview</title>
         <script src="../src/jquery.min.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.mobile.core.js"></script>
         <script src="../demos/mvc/content/shared/js/console.js"></script>
         <link rel="stylesheet" href="../demos/mvc/content/shared/styles/console.css" />
+        <style type="text/css" media="screen">
+            #scrollview {
+                background: #EBEBEB;
+                width: 300px;
+                height: 300px;
+                margin: 20px;
+                overflow: hidden;
+            }
+            #inner {
+                width: 600px;
+            }
+        </style>
+        <script>
+            var Swipe = kendo.Observable.extend({
+                init: function(element, options) {
+                    var that = this;
+                    that.options = options || {};
+                    that.x = {};
+                    that.y = {};
+                    element = that.element = $(element);
+
+                    kendo.Observable.fn.init.call(that);
+
+                    element.bind("mousedown", $.proxy(that.mouseDown, that));
+                    element.bind("mousemove", $.proxy(that.mouseMove, that));
+                    element.bind("mouseup mouseleave", $.proxy(that.mouseUp, that));
+
+                    that.bind([
+                        "start", "move", "end"
+                    ], that.options);
+                },
+
+                mouseDown: function(e) {
+                    var that = this;
+                    that.pressed = true;
+                    that.trigger("start", that.perAxis("_location", e));
+                },
+
+                mouseMove: function(e) {
+                    var that = this;
+                    if (!that.pressed) {
+                        return;
+                    }
+
+                    that.trigger("move", that.perAxis("_axisMouseMove", e));
+                },
+
+                mouseUp: function(e) {
+                    var that = this,
+                        velocity,
+                        coordinates;
+                    if (that.pressed) {
+                        that.pressed = false;
+                        velocity = that.perAxis("_endVelocity", e);
+                        coordinates = that.perAxis("_location", e);
+                        that.trigger("end", {
+                            x: coordinates.x,
+                            y: coordinates.y,
+                            xVelocity: velocity.x,
+                            yVelocity: velocity.y
+                        });
+                    }
+                },
+
+                perAxis: function(method, event) {
+                    var that = this;
+                    return {
+                        x: that[method].call(that, that.x, event.pageX),
+                        y: that[method].call(that, that.y, event.pageY)
+                    };
+                },
+
+                _axisMouseMove: function(data, location) {
+                    var delta = location - data.location,
+                        direction = delta > 0;
+
+                    if (data.direction != direction) {
+                        data.direction = direction;
+                        data.startTime = +new Date();
+                        data.startLocation = data.location;
+                    }
+
+                    data.location = location;
+
+                    return delta;
+                },
+
+                _endVelocity: function(data, location) {
+                    var timePassed = (+new Date()) - data.startTime,
+                        velocity = (location - data.startLocation) / timePassed;
+
+                    delete data.direction;
+                    return velocity;
+                },
+
+                _location: function(data, location) {
+                    data.location = location;
+                    return data.location;
+                }
+            });
+
+            kendo.mobile.Swipe = Swipe;
+        </script>
     </head>
     <body>
+
+        <div id="scrollview">
+            <div id="inner">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mollis tincidunt lacus varius luctus. In nisi augue, euismod vitae tempus nec, consequat sed dui. Praesent auctor, nisl id fermentum venenatis, ante erat dictum nibh, quis blandit odio nunc suscipit libero. Aliquam nec sapien ligula. Integer volutpat nisi non magna suscipit eu sagittis metus placerat. Integer rutrum condimentum lectus, eget blandit lectus sollicitudin non. Quisque ornare nisi nec ante molestie condimentum.
+
+                Cras vel lorem non nisi lacinia euismod. Suspendisse cursus quam et tortor scelerisque posuere. Proin vel interdum massa. Ut tempor nisl ut dui imperdiet in ornare orci imperdiet. Integer suscipit tellus tincidunt urna pulvinar ornare. Maecenas sed odio at lectus commodo faucibus. Nam non nulla vel purus sagittis mollis. Maecenas hendrerit ipsum in ligula molestie rutrum eu ut ipsum. Etiam iaculis luctus nisi, fringilla pulvinar dui bibendum ac. Etiam aliquam, nisi eget posuere pretium, nisl velit gravida eros, eu sagittis turpis lorem ac purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer facilisis tristique sodales.
+
+                Integer quis interdum turpis. Duis velit lectus, posuere vitae feugiat quis, ullamcorper et augue. Proin mauris leo, cursus tempor auctor a, tincidunt vel lacus. Integer ac risus nisl, eu eleifend sem. Suspendisse porta purus vitae est convallis vel vulputate lorem tempor. Praesent quam ligula, lobortis consequat semper nec, mattis eu odio. Ut nec magna tortor, feugiat tincidunt nisi. Sed justo urna, elementum et dapibus eget, tempus ac risus. Nullam mauris ante, fringilla id condimentum non, vehicula ac ligula. Donec dolor urna, fringilla sed posuere ut, malesuada sed sapien. In porta velit a elit cursus facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean suscipit mattis faucibus. Proin vehicula commodo elementum.
+
+                Praesent fermentum velit vitae urna rhoncus commodo. Sed viverra nibh arcu, nec laoreet ligula. Morbi interdum aliquet euismod. Vestibulum ac velit tortor. Suspendisse sollicitudin posuere lorem nec porttitor. Vivamus at nulla vitae lorem semper malesuada id eget quam. Praesent eget eros in nibh sodales dignissim.
+
+                Donec massa magna, elementum placerat tincidunt id, egestas et lorem. Curabitur in vestibulum nulla. Maecenas nec justo eros. Integer vel malesuada purus. Phasellus vel arcu id elit fermentum molestie. Sed pharetra fermentum ipsum eu vulputate. Curabitur cursus, ligula ut vehicula pharetra, mauris lorem suscipit tellus, in adipiscing arcu risus commodo tellus.
+            </div>
+        </div>
 
         <div class="console"></div>
 
         <script>
-            var swipe = kendo.mobile.Swipe.observe($(document.body), {
-                x: {
+            var x = 0;
+            var element = $("#inner");
+            var swipe = new kendo.mobile.Swipe($("#scrollview"), {
                     start: function(e) {
-                        // e.point;
+                        // console.log("start: " + e.x);
                     },
                     move: function(e) {
-                        // e.point;
+                        x += e.x;
+                        element[0].style["webkitTransform"] = "translate3d(" + x + "px,0,0)";
+                        // console.log("move:" + e.x);
                     },
                     end: function(e) {
-                        // e.point;
-                        // e.velocity;
+                        console.log("end:", e);
                     }
-                }
             })
         </script>
     </body>
