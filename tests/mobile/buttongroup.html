@@ -138,11 +138,14 @@
 
             asyncTest("Raise change event", function() {
                 var segmented = new ButtonGroup(dom, {
-                    change: function() {
+                    select: function() {
                         ok(true);
+                        equal(this.selectedIndex, 1);
                         start();
                     }
                 });
+
+                equal(this.selectedIndex, undefined);
 
                 segmented._mousedown({
                     currentTarget: dom.find("li:last")[0]

@@ -1,15 +1,11 @@
 (function($, undefined) {
     var kendo = window.kendo,
-        mobile = kendo.mobile,
-        ui = mobile.ui,
+        ui = kendo.mobile.ui,
         Widget = ui.Widget,
-        support = kendo.support,
-        touch = support.touch,
-        os = support.mobileOS,
         ACTIVE = "km-state-active",
-        CHANGE = "change",
+        SELECT = "select",
         SELECTOR = "li:not(." + ACTIVE +")",
-        MOUSEDOWN = touch ? "touchstart" : "mousedown";
+        MOUSEDOWN = kendo.support.touch ? "touchstart" : "mousedown";
 
     var ButtonGroup = Widget.extend({
         init: function(element, options) {
@@ -24,11 +20,11 @@
             that.bind([
                 /**
                 * Fires when different button is selected
-                * @name kendo.mobile.ui.ButtonGroup#change
+                * @name kendo.mobile.ui.ButtonGroup#select
                 * @event
                 * @param {Event} e
                 *
-                * @exampleTitle Handle change event
+                * @exampleTitle Handle select event
                 * @example
                 * <ul id="buttongroup" data-role="buttongroup" />
                 *   <li>Option1</li>
@@ -36,12 +32,12 @@
                 * </ul>
                 *
                 * <script>
-                *  $("#buttongroup").data("kendoMobileButtonGroup").bind("change", function(e) {
-                *      //handle change event
+                *  $("#buttongroup").data("kendoMobileButtonGroup").bind("select", function(e) {
+                *      //handle select event
                 *  }
                 * </script>
                 */
-                CHANGE
+                SELECT
             ], that.options);
 
             that.select(that.options.index);
@@ -58,23 +54,27 @@
 
         select: function (li) {
             var that = this,
-                current = that._current;
-
-            if (li === undefined) {
-                return;
-            }
-
-            if (typeof li === "number") {
-                li = that.element.children().eq(li);
-            } else if (li && li.nodeType) {
-                li = $(li);
-            }
+                current = that._current,
+                index = -1;
 
             if (current) {
-                current.removeClass(ACTIVE);
+                current.removeClass(ACTIVE)
             }
 
-            that._current = li.addClass(ACTIVE);
+            if (li !== undefined) {
+                if (typeof li === "number") {
+                    index = li;
+                    li = that.element.children().eq(li);
+                } else if (li && li.nodeType) {
+                    li = $(li);
+                    index = li.index();
+                }
+
+                li.addClass(ACTIVE);
+            }
+
+            that._current = li;
+            that.selectedIndex = index;
         },
 
         _button: function() {
@@ -97,7 +97,7 @@
         _mousedown: function(e) {
             var that = this;
             that.select(e.currentTarget);
-            that.trigger(CHANGE);
+            that.trigger(SELECT);
         }
     });
 
