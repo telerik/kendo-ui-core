@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.mobile.ui.ButtonGroup Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="../../src/kendo.mobile.buttongroup.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.ButtonGroup Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+
+            var ButtonGroup = kendo.mobile.ui.ButtonGroup,
+                MOUSEDOWN = kendo.support.mousedown,
+                MOUSEUP = kendo.support.mouseup,
+                dom;
+
+            QUnit.config.reorder = false;
+
+            var mouseDownEvent;
+            if (kendo.support.touch) {
+                mouseDownEvent = new $.Event(null, {type: MOUSEDOWN, changedTouches: [{identifier: 1, pageX: 100, pageY: 100}] });
+            } else {
+                mouseDownEvent = MOUSEDOWN;
+            }
+
+            module("buttongroup", {
+                setup: function() {
+                    dom = $("<ul><li>Text1</li><li>Text2</li></ul>");
+                }
+            });
+
+            test("Add css class to the ul element", function() {
+                new ButtonGroup(dom);
+
+                ok(dom.hasClass("km-radiogroup"));
+            });
+
+            test("Add class to the li element", function() {
+                new ButtonGroup(dom);
+
+                equal(dom.find("li.km-button").length, 2);
+            });
+
+            test("Wrap li content with span element", function() {
+                new ButtonGroup(dom);
+
+                var spans = dom.find("span.km-text");
+
+                equal(spans.length, 2);
+                equal(spans.eq(0).text(), "Text1");
+                equal(spans.eq(1).text(), "Text2");
+            });
+
+            test("Wrap image in span if it exists", function() {
+                dom.find("li:first").append("<img />");
+                new ButtonGroup(dom);
+
+                equal(dom.find("img.km-image").length, 1);
+            });
+
+            test("Rendering does not expand child nodes of UL", function() {
+                new ButtonGroup(dom);
+
+                equal(dom[0].childNodes.length, 2);
+            });
+
+            test("Add icon if no image and data attribute", function() {
+                dom.find("li:first").attr("data-icon", "test");
+
+                new ButtonGroup(dom);
+
+                equal(dom.find(".km-icon").length, 1);
+                ok(dom.find(".km-icon").hasClass("km-test"));
+            });
+
+            test("Select li on init", function() {
+                var segmented = new ButtonGroup(dom, {
+                    index: 0
+                });
+
+                ok(dom.children("li:first").hasClass("km-state-active"));
+            });
+
+            test("Select li as jQuery object", function() {
+                var segmented = new ButtonGroup(dom);
+
+                segmented.select(dom.children("li:first"));
+
+                var current = dom.find(".km-state-active");
+
+                equal(current.length, 1);
+                ok(current.hasClass("km-state-active"));
+
+            });
+
+            test("Select by index", function() {
+                var segmented = new ButtonGroup(dom);
+
+                segmented.select(0);
+
+                ok(dom.children("li:first").hasClass("km-state-active"));
+            });
+
+            test("Only one li is selected", function() {
+                var segmented = new ButtonGroup(dom);
+
+                segmented.select(0);
+                segmented.select(1);
+
+                var current = dom.find(".km-state-active");
+
+                equal(current.length, 1);
+                equal(current.index(), 1);
+                ok(current.hasClass("km-state-active"));
+            });
+
+            test("Click button should select it", function() {
+                var segmented = new ButtonGroup(dom);
+
+                segmented._mousedown({
+                    currentTarget: dom.find("li:last")[0]
+                });
+
+                equal(dom.children("li.km-state-active").index(), 1);
+            });
+
+            asyncTest("Raise change event", function() {
+                var segmented = new ButtonGroup(dom, {
+                    change: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                segmented._mousedown({
+                    currentTarget: dom.find("li:last")[0]
+                });
+            });
+        </script>
+    </body>
+</html>
