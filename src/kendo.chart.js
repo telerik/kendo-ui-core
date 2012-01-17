@@ -157,10 +157,7 @@
                 line: {
                     width: 4
                 },
-                labels: {},
-                area: {
-                    opacity: 0.2
-                }
+                labels: {}
             },
             series: [],
             tooltip: {
@@ -1745,12 +1742,12 @@
                 if (isVertical) {
                     childElements.push(view.createLine(
                         axis.box.x2, tickPositions[0],
-                        axis.box.x2, last(tickPositions),
+                        axis.box.x2, tickPositions[tickPositions.length - 1],
                         lineOptions));
                 } else {
                     childElements.push(view.createLine(
                         tickPositions[0], axis.box.y1,
-                        last(tickPositions), axis.box.y1,
+                        tickPositions[tickPositions.length - 1], axis.box.y1,
                         lineOptions));
                 }
 
@@ -1889,7 +1886,7 @@
 
             if (children.length > 1) {
                 startMargin = children[0].box[labelSize]() / 2;
-                endMargin = last(children).box[labelSize]() / 2;
+                endMargin = children[children.length - 1].box[labelSize]() / 2;
             }
 
             if (isVertical) {
@@ -2863,7 +2860,7 @@
     });
 
     var LineChartMixin = {
-        splitSegments: function(view) {
+        createLines: function(view) {
             var chart = this,
                 options = chart.options,
                 series = options.series,
@@ -2891,7 +2888,8 @@
                     } else if (currentSeries.missingValues !== INTERPOLATE) {
                         if (linePoints.length > 1) {
                             lines.push(
-                                chart.createSegment(uniqueId(), view, linePoints, currentSeries, seriesIx));
+                                chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx)
+                            );
                         }
                         linePoints = [];
                     }
@@ -2899,14 +2897,14 @@
 
                 if (linePoints.length > 1) {
                     lines.push(
-                        chart.createSegment(uniqueId(), view, linePoints, currentSeries, seriesIx));
+                        chart.createLine(uniqueId(), view, linePoints, currentSeries, seriesIx));
                 }
             }
 
             return lines;
         },
 
-        createSegment: function(lineId, view, points, series, seriesIx) {
+        createLine: function(lineId, view, points, series, seriesIx) {
             this.registerId(lineId, { seriesIx: seriesIx });
             return view.createPolyline(points, false, {
                 id: lineId,
@@ -2981,13 +2979,14 @@
                     markers: {
                         border: {
                             color: series.color
-                        }
+                        },
+                        opacity: series.opacity
                     }
                 }, series)
             );
 
             if (isStacked) {
-                stackPoint = last(categoryPoints);
+                stackPoint = categoryPoints[categoryPoints.length - 1];
                 if (stackPoint) {
                     plotValue = stackPoint.plotValue;
                 }
@@ -3025,7 +3024,7 @@
                         type: CLIP
                     }
                 }),
-                lines = chart.splitSegments(view);
+                lines = chart.createLines(view);
 
 
             group.children = lines.concat(elements);
@@ -3033,66 +3032,6 @@
         }
     });
     deepExtend(LineChart.fn, LineChartMixin);
-
-    var AreaChart = LineChart.extend({
-        splitSegments: function(view) {
-            var chart = this,
-                plotArea = chart.plotArea,
-                isVertical = chart.options.isVertical,
-                lines = LineChart.fn.splitSegments.call(chart, view),
-                originalLines = deepExtend({}, lines),
-                areas = [],
-                i,
-                axis = isVertical ? plotArea.axisX : plotArea.axisY,
-                axisLineBox = axis.getAxisLineBox(),
-                end = isVertical ? axisLineBox.y1 : axisLineBox.x1,
-                originalLinePoints,
-                linesCount = lines.length,
-                seriesIx = 0,
-                linePoints,
-                missingValues;
-
-            for (i = 0; i < linesCount; i++) {
-                line = lines[i];
-                linePoints = lines[i].points;
-                seriesIx = line.options.seriesIx;
-
-                if (line.options.stack && seriesIx != 0) {
-                    if (seriesIx > 0) {
-                        originalLinePoints = originalLines[i - 1].points.reverse();
-                        lines[i].points = linePoints.concat(originalLinePoints);
-                    }
-                } else {
-                    if (linePoints.length > 1) {
-                        if (isVertical) {
-                            linePoints.unshift(new Point2D(linePoints[0].x, end));
-                            linePoints.push(new Point2D(last(linePoints).x, end));
-                        } else {
-                            linePoints.unshift(new Point2D(end, linePoints[0].y));
-                            linePoints.push(new Point2D(end, last(linePoints).y));
-                        }
-                    }
-                }
-            }
-
-            return lines;
-        },
-
-        createSegment: function(lineId, view, points, series, seriesIx) {
-            this.registerId(lineId, { seriesIx: seriesIx });
-            return view.createPolyline(points, true, {
-                id: lineId,
-                stroke: series.color,
-                strokeWidth: series.width,
-                strokeOpacity: series.opacity,
-                fillOpacity: series.opacity,
-                dashType: series.dashType,
-                fill: series.color,
-                seriesIx: seriesIx,
-                stack: series.stack
-            });
-        }
-    });
 
     var ScatterChart = ChartElement.extend({
         init: function(plotArea, options) {
@@ -3175,14 +3114,13 @@
         },
 
         createPoint: function(value, series, seriesIx) {
-            var chart = this,
-                point;
+            var chart = this;
 
             if (!defined(value.x) || !defined(value.y)) {
                 return null;
             }
 
-            point = new LinePoint(value,
+            var point = new LinePoint(value,
                 deepExtend({
                     markers: {
                         border: {
@@ -3282,7 +3220,7 @@
                         type: CLIP
                     }
                 }),
-                lines = chart.splitSegments(view);
+                lines = chart.createLines(view);
 
             group.children = lines.concat(elements);
             return [group];
@@ -3395,11 +3333,11 @@
             if (label) {
                 labelHeight = label.box.height();
                 labelWidth = label.box.width();
-                if (labelsOptions.position == CENTER) {
+                if (labelsOptions.position == "center") {
                     sector.r = math.abs((sector.r - labelHeight) / 2) + labelHeight;
                     lp = sector.point(angle);
                     label.reflow(new Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
-                } else if (labelsOptions.position == INSIDE_END) {
+                } else if (labelsOptions.position == "insideEnd") {
                     sector.r = sector.r - labelHeight / 2;
                     lp = sector.point(angle);
                     label.reflow(new Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
@@ -3989,7 +3927,6 @@
                 lineSeries = [],
                 scatterSeries = [],
                 scatterLineSeries = [],
-                areaSeries = [],
                 i;
 
             options.legend.items = [];
@@ -4009,8 +3946,6 @@
                     scatterSeries.push(currentSeries);
                 } else if (currentSeries.type === "scatterLine") {
                     scatterLineSeries.push(currentSeries);
-                } else if (currentSeries.type === "area") {
-                    areaSeries.push(currentSeries);
                 }
             }
 
@@ -4024,10 +3959,6 @@
 
             if (pieSeries.length > 0) {
                 plotArea.createPieChart(pieSeries);
-            }
-
-            if (areaSeries.length > 0) {
-                plotArea.createAreaChart(areaSeries);
             }
 
             if (scatterSeries.length > 0 || scatterLineSeries.length > 0) {
@@ -4072,7 +4003,7 @@
                 firstSeries = series[0],
                 invertAxes = options.invertAxes = firstSeries.type === BAR,
                 categories = options.categoryAxis.categories,
-                areaChart = new BarChart(plotArea, {
+                barChart = new BarChart(plotArea, {
                     series: series,
                     isVertical: !invertAxes,
                     isStacked: firstSeries.stack,
@@ -4082,8 +4013,8 @@
                 categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
 
             append(categories, new Array(categoriesToAdd));
-            options.range = areaChart.valueRange() || options.range;
-            plotArea.charts.push(areaChart);
+            options.range = barChart.valueRange() || options.range;
+            plotArea.charts.push(barChart);
 
             plotArea.addToLegend(series);
         },
@@ -4097,32 +4028,6 @@
                 // Override the original invertAxes
                 invertAxes = options.invertAxes = categoryAxis.orientation === VERTICAL,
                 lineChart = new LineChart(plotArea, {
-                    // TODO: Rename isVertical to invertAxes, flip logic
-                    isVertical: !invertAxes,
-                    isStacked: firstSeries.stack,
-                    series: series
-                }),
-                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length),
-                lineChartRange = lineChart.valueRange() || options.range;
-
-            append(categories, new Array(categoriesToAdd));
-            // Override the original range
-            options.range.min = math.min(options.range.min, lineChartRange.min);
-            options.range.max = math.max(options.range.max, lineChartRange.max);
-            plotArea.charts.push(lineChart);
-
-            plotArea.addToLegend(series);
-        },
-
-        createAreaChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                firstSeries = series[0],
-                categoryAxis = options.categoryAxis,
-                categories = categoryAxis.categories,
-                // Override the original invertAxes
-                invertAxes = options.invertAxes = categoryAxis.orientation === VERTICAL,
-                lineChart = new AreaChart(plotArea, {
                     // TODO: Rename isVertical to invertAxes, flip logic
                     isVertical: !invertAxes,
                     isStacked: firstSeries.stack,
@@ -5163,10 +5068,6 @@
         return $.inArray(value, array) != -1;
     }
 
-    function last(array) {
-        return array[array.length - 1];
-    }
-
     function deepExtend(destination) {
         var i = 1,
             length = arguments.length;
@@ -5242,7 +5143,6 @@
         delete baseSeriesDefaults.column;
         delete baseSeriesDefaults.line;
         delete baseSeriesDefaults.pie;
-        delete baseSeriesDefaults.area;
         delete baseSeriesDefaults.scatter;
         delete baseSeriesDefaults.scatterLine;
 
