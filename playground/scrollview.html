@@ -17,7 +17,7 @@
                 overflow: hidden;
             }
             #inner {
-                width: 1600px;
+                white-space: nowrap;
             }
         </style>
         <script>
@@ -237,34 +237,60 @@
 
             kendo.mobile.Swipe = Swipe;
 
+            var ContainerDraggable = kendo.Class.extend({
+                init: function(element, swipe, moveable) {
+                    var that = this,
+                        parent = element.parent(),
+                        maxX = 0,
+                        maxY = 0,
+                        minY = - (parent[0].scrollHeight - parent.height()),
+                        minX = - (parent[0].scrollWidth - parent.width());
 
-            $(function(){
+                    swipe.bind("move", function(e) {
+                        var x = e.x;
+                        var y = e.y;
+
+                        if (moveable.x + x > maxX || moveable.x < minX) { x *= 0.5; }
+                        if (moveable.y + y > maxY || moveable.y < minY) { y *= 0.5; }
+                        moveable.moveBy(x, 0);
+                    });
+                }
+            });
+
+            $(window).bind("load", function(){
+
+                function within(min, value, max) {
+                    return Math.max(min, Math.min(max, value));
+                }
+
                 var moveable = new Moveable($("#inner"));
+
+                console.log($("#scrollview")[0].scrollWidth);
+                var minX = - Math.floor($("#scrollview")[0].scrollWidth / 300) * 300;
+                console.log(minX);
 
                 var swipe = new kendo.mobile.Swipe($("#scrollview"), {
                         start: function(e) {
                             moveable.stop();
                         },
 
-                        move: function(e) {
-                            moveable.moveBy(e.x, 0);
-                        },
-
                         end: function(e) {
                             var velocity = e.xVelocity,
                                 duration= 200,
                                 snap,
-                                ease = Ease.linearTween;
+                                ease = Ease.easeOutExpo;
 
-                            console.log(velocity);
-                            if (velocity > 1) {
+                            if (velocity > 0.6) {
                                 snap = Math.ceil(moveable.x / 300) * 300;
-                                duration = 100;
-                            } else  {
+                            } else if(velocity < -0.6)  {
+                                snap = Math.floor(moveable.x / 300) * 300;
+                            } else {
                                 snap = Math.round(moveable.x / 300) * 300;
                             }
 
-                            if (velocity > 2) {
+                            snap = within(minX, snap, 0);
+
+                            if (Math.abs(velocity) > 1.6) {
                                 ease = Ease.easeOutBack;
                             };
 
@@ -276,6 +302,8 @@
                             });
                         }
                 });
+
+                var draggable = new ContainerDraggable($("#inner"), swipe, moveable);
             });
         </script>
     </head>
@@ -290,6 +318,9 @@
                 <img src="http://farm8.staticflickr.com/7002/6640623175_3e82b14c99_s.jpg">
                 <img src="http://farm8.staticflickr.com/7146/6524806833_53e1237cf9_s.jpg">
                 <img src="http://farm8.staticflickr.com/7167/6584748701_8323e10194_s.jpg">
+                <img src="http://farm8.staticflickr.com/7146/6524806833_53e1237cf9_s.jpg">
+                <img src="http://farm8.staticflickr.com/7167/6584748701_8323e10194_s.jpg">
+                <img src="http://farm8.staticflickr.com/7002/6640623175_3e82b14c99_s.jpg">
             </div>
         </div>
     </body>
