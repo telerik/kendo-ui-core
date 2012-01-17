@@ -75,6 +75,7 @@ namespace Kendo.Models
             "kendo.mobile.listview.js",
             "kendo.mobile.navbar.js",
             "kendo.mobile.scroller.js",
+            "kendo.mobile.segmentedcontrol.js",
             "kendo.mobile.switch.js",
             "kendo.mobile.tabstrip.js",
             "kendo.mobile.view.js"
