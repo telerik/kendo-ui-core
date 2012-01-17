@@ -64,6 +64,18 @@
     -moz-box-orient: vertical;
 }
 
+.km-content :-moz-any(p, h1, h2, h3, h4, h5, h6)
+{
+    margin: auto 1em;
+    margin: auto 1rem;
+}
+
+.km-content :-webkit-any(p, h1, h2, h3, h4, h5, h6)
+{
+    margin: auto 1em;
+    margin: auto 1rem;
+}
+
 .km-header,
 .km-footer
 {
@@ -278,7 +290,7 @@
     vertical-align: middle;
 }
 
-.km-details:after
+.km-detaildisclose:after
 {
     margin-left: -.2em;
     margin-left: ~"-.2rem";
@@ -287,7 +299,7 @@
     .transform(rotate(45deg));
 }
 
-.km-details:before { display: none; }
+.km-detaildisclose:before { display: none; }
 
 .km-rowdelete:after,
 .km-rowinsert:after,
