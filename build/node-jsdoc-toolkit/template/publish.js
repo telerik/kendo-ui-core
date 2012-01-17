@@ -19,6 +19,10 @@ function publish(symbolSet) {
             var template = new JSDOC.JsPlate(templatesDir + section + ".tmpl"),
                 html = template.process(c);
 
+            if (sitefinity) {
+                html = html.replace("detailHandle", "detailHandle detailHandleExpanded");
+            }
+
             if (hasValue(html)) {
                 IO.saveFile(
                     outDir,
@@ -91,6 +95,10 @@ function outputDescription(description) {
                 }
             break;
         }
+    }
+
+    if (sitefinity) {
+        output = output.replace("index.html", "overview.aspx");
     }
 
     return output;
